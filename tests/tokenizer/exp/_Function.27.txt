@@ -6,40 +6,6 @@ Label : CODE
     function
     Label : NAME
       a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $d
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          1
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                2
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    3
-            Label : ARGUMENT
-              1
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -48,3 +14,37 @@ Label : CODE
           void
           Label : ARGUMENT
             $b
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $d
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $c
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              =>
+              Label : VALUE
+                array
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    3
+              Label : KEY
+                2
+            Label : ARGUMENT
+              1
+        Label : LEFT
+          $b

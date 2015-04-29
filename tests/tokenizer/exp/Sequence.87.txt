@@ -29,24 +29,6 @@ Label : CODE
     Label : SOURCE
       $a
   Label : ELEMENT
-    for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        $a
-      Label : ELEMENT
-        $b
-    Label : INIT
-      $i
-    Label : FINAL
-      ++
-      Label : POSTPLUSPLUS
-        $i
-    Label : INCREMENT
-      --
-      Label : POSTPLUSPLUS
-        $i
-  Label : ELEMENT
     switch
     Label : NAME
       $a
@@ -82,14 +64,32 @@ Label : CODE
           'a'
   Label : ELEMENT
     while
+    Label : CONDITION
+      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         $a
       Label : ELEMENT
         $b
-    Label : CONDITION
-      $a
+  Label : ELEMENT
+    for
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $a
+      Label : ELEMENT
+        $b
+    Label : INIT
+      $i
+    Label : FINAL
+      ++
+      Label : POSTPLUSPLUS
+        $i
+    Label : INCREMENT
+      --
+      Label : POSTPLUSPLUS
+        $i
   Label : ELEMENT
     return
     Label : RETURN
@@ -104,6 +104,8 @@ Label : CODE
           (
           Label : CODE
             <
+            Label : RIGHT
+              $d
             Label : LEFT
               C
               Label : ARGUMENTS
@@ -126,14 +128,10 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-            Label : RIGHT
-              $d
       Label : ELSE
         G
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       (int)
       Label : CAST
@@ -146,3 +144,5 @@ Label : CODE
             void
             Label : ARGUMENT
               void
+    Label : LEFT
+      $a

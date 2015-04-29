@@ -18,8 +18,6 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          'C'
         Label : CODE
           ;
           Label : ELEMENT
@@ -29,21 +27,19 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                =
-                Label : RIGHT
-                  ->
-                  Label : OBJECT
-                    $d
-                  Label : METHOD
-                    E
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        $e
-                Label : LEFT
-                  $c
+              =
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $d
+                Label : METHOD
+                  E
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $e
+              Label : LEFT
+                $c
             Label : THEN
               void
           Label : ELEMENT
@@ -60,6 +56,8 @@ Label : CODE
                     void
             Label : CASES
               void
+        Label : CASE
+          'C'
       Label : ELEMENT
         default
         Label : CODE

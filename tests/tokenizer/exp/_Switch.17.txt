@@ -19,33 +19,21 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                $a
+              $a
             Label : THEN
               ;
               Label : ELEMENT
                 foreach
-                Label : VALUE
-                  =>
-                  Label : KEY
-                    $b
-                  Label : VALUE
-                    $c
-                Label : SOURCE
-                  $a
                 Label : BLOCK
                   ;
                   Label : ELEMENT
                     if
                     Label : CONDITION
-                      (
-                      Label : CODE
-                        =
-                        Label : RIGHT
-                          $e
-                        Label : LEFT
-                          $d
+                      =
+                      Label : RIGHT
+                        $e
+                      Label : LEFT
+                        $d
                     Label : THEN
                       ;
                       Label : ELEMENT
@@ -54,6 +42,14 @@ Label : CODE
                           4
                         Label : LEFT
                           $f
+                Label : VALUE
+                  =>
+                  Label : VALUE
+                    $c
+                  Label : KEY
+                    $b
+                Label : SOURCE
+                  $a
               Label : ELEMENT
                 =
                 Label : RIGHT

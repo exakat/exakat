@@ -5,10 +5,10 @@ Label : CODE
     if
     Label : CONDITION
       >
-      Label : LEFT
-        $a
       Label : RIGHT
         a
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -17,10 +17,10 @@ Label : CODE
       elseif
       Label : CONDITION
         >
-        Label : LEFT
-          $a
         Label : RIGHT
           a
+        Label : LEFT
+          $a
       Label : THEN
         ;
         Label : ELEMENT
@@ -35,10 +35,10 @@ Label : CODE
     if
     Label : CONDITION
       >
-      Label : LEFT
-        $a
       Label : RIGHT
         a
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -49,10 +49,10 @@ Label : CODE
         if
         Label : CONDITION
           >
-          Label : LEFT
-            $a
           Label : RIGHT
             a
+          Label : LEFT
+            $a
         Label : THEN
           ;
           Label : ELEMENT
@@ -67,10 +67,10 @@ Label : CODE
     if
     Label : CONDITION
       >
-      Label : LEFT
-        $a
       Label : RIGHT
         a
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT

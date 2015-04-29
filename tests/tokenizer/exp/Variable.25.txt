@@ -17,37 +17,35 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            AND
+          AND
+          Label : RIGHT
+            !==
             Label : RIGHT
-              !==
-              Label : RIGHT
-                E
-              Label : LEFT
-                C
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    "
-                    Label : CONTAIN
-                      Concatenation
-                      Label : CONCAT
-                        $c
-                      Label : CONCAT
-                        D
-                  Label : ARGUMENT
-                    $b
+              E
             Label : LEFT
-              ==
-              Label : RIGHT
-                0
-              Label : LEFT
-                B
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $a
+              C
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  "
+                  Label : CONTAIN
+                    Concatenation
+                    Label : CONCAT
+                      $c
+                    Label : CONCAT
+                      D
+                Label : ARGUMENT
+                  $b
+          Label : LEFT
+            ==
+            Label : RIGHT
+              0
+            Label : LEFT
+              B
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $a
         Label : THEN
           ;
           Label : ELEMENT

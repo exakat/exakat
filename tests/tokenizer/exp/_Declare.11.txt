@@ -8,13 +8,13 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           $a
+        Label : LEFT
+          $b
     Label : TICKS
       =
-      Label : LEFT
-        ticks
       Label : RIGHT
         1
+      Label : LEFT
+        ticks

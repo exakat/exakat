@@ -10,17 +10,17 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          instanceof
-          Label : VARIABLE
-            $b
-          Label : CLASS
-            \
-            Label : SUBNAME
-              C
         Label : CODE
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $c
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              C
+          Label : VARIABLE
+            $b

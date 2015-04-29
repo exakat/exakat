@@ -5,51 +5,105 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
-        use
-        Label : USE
-          one_identifier
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            absolute_path
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path
-          Label : SUBNAME
-            complex
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
+        try
+        Label : CODE
+          void
+        Label : CATCH
+          catch
+          Label : CLASS
+            a4
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
+            a3
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
+            a2
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
+            one_identifier3
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
+            \
+            Label : SUBNAME
+              a1
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
+            a1
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
             path2
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
+            path
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
+            absolute_path
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
+          Label : CLASS
+            one_identifier
+          Label : CODE
+            void
+          Label : VARIABLE
+            $e
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path32
           Label : SUBNAME
             complex
           Label : SUBNAME
             absolute
-      Label : ELEMENT
-        use
-        Label : USE
-          as
-          Label : SUBNAME
-            one_identifier3
           Label : AS
-            a1
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            absolute_path3
-          Label : AS
-            a2
+            a4
       Label : ELEMENT
         use
         Label : USE
@@ -65,133 +119,57 @@ Label : CODE
         Label : USE
           \
           Label : SUBNAME
-            path32
+            absolute_path3
+          Label : AS
+            a2
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : SUBNAME
+            one_identifier3
+          Label : AS
+            a1
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path2
           Label : SUBNAME
             complex
           Label : SUBNAME
             absolute
-          Label : AS
-            a4
       Label : ELEMENT
-        try
-        Label : CODE
-          {
-          Label : ELEMENT
-            void
-        Label : CATCH
-          catch
-          Label : CLASS
-            a4
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
-            a3
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
-            a2
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
-            one_identifier3
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
-            \
-            Label : SUBNAME
-              a1
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
-            a1
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
-            path2
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
+        use
+        Label : USE
+          \
+          Label : SUBNAME
             path
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
+          Label : SUBNAME
+            complex
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
             absolute_path
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
-        Label : CATCH
-          catch
-          Label : CLASS
-            one_identifier
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
-          Label : VARIABLE
-            $e
+      Label : ELEMENT
+        use
+        Label : USE
+          one_identifier
     Label : NAMESPACE
       x
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         class
         Label : NAME
           path2
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -207,13 +185,13 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         class
         Label : NAME
           path
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -225,25 +203,13 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         class
         Label : NAME
-          one_identifier
+          a1
         Label : BLOCK
-          {
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-      Label : ELEMENT
-        class
-        Label : NAME
-          absolute_path
-        Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -255,7 +221,7 @@ Label : CODE
         Label : NAME
           one_identifier3
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -265,9 +231,21 @@ Label : CODE
       Label : ELEMENT
         class
         Label : NAME
-          a1
+          absolute_path
         Label : BLOCK
-          {
+          ;
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+      Label : ELEMENT
+        class
+        Label : NAME
+          one_identifier
+        Label : BLOCK
+          ;
           Label : ELEMENT
             const
             Label : NAME

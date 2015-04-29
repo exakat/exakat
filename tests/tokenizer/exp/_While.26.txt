@@ -41,17 +41,15 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ->
-            Label : OBJECT
-              $a
-            Label : METHOD
-              C
-              Label : ARGUMENTS
+          ->
+          Label : OBJECT
+            $a
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 void
-                Label : ARGUMENT
-                  void
         Label : THEN
           ;
           Label : ELEMENT

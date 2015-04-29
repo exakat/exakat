@@ -10,6 +10,8 @@ Label : CODE
         Label : CODE
           'E'
   Label : ELEMENT
+    void
+  Label : ELEMENT
     include
     Label : ARGUMENTS
       void
@@ -17,6 +19,8 @@ Label : CODE
         (
         Label : CODE
           'D'
+  Label : ELEMENT
+    void
   Label : ELEMENT
     B
     Label : ARGUMENTS

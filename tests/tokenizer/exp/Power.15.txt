@@ -4,20 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     **
-    Label : RIGHT
-      ::
-      Label : METHOD
-        x2
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            12
-      Label : CLASS
-        a2
     Label : LEFT
       2
-  Label : ELEMENT
-    **
     Label : RIGHT
       ::
       Label : METHOD
@@ -28,20 +16,8 @@ Label : CODE
             12
       Label : CLASS
         a2
-    Label : LEFT
-      ::
-      Label : METHOD
-        x
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            1
-      Label : CLASS
-        a
   Label : ELEMENT
     **
-    Label : RIGHT
-      1
     Label : LEFT
       ::
       Label : METHOD
@@ -52,3 +28,27 @@ Label : CODE
             1
       Label : CLASS
         a
+    Label : RIGHT
+      ::
+      Label : METHOD
+        x2
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            12
+      Label : CLASS
+        a2
+  Label : ELEMENT
+    **
+    Label : LEFT
+      ::
+      Label : METHOD
+        x
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            1
+      Label : CLASS
+        a
+    Label : RIGHT
+      1

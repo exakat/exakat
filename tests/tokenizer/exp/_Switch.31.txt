@@ -10,6 +10,12 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
         Label : CASE
           ?
           Label : CONDITION
@@ -22,9 +28,3 @@ Label : CODE
             -4
           Label : ELSE
             C
-        Label : CODE
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void

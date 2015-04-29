@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $e
     Label : VALUE
       =>
       Label : KEY
@@ -18,8 +12,24 @@ Label : CODE
         $d
     Label : SOURCE
       $b
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $e
   Label : ELEMENT
     OR
+    Label : LEFT
+      E
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            'G'
+          Label : CONCAT
+            F
     Label : RIGHT
       @
       Label : AT
@@ -34,16 +44,6 @@ Label : CODE
               'J'
             Label : CONCAT
               I
-    Label : LEFT
-      E
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'G'
-          Label : CONCAT
-            F
   Label : ELEMENT
     ->
     Label : OBJECT

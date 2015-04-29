@@ -10,20 +10,16 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          '2'
         Label : CODE
           ;
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                ==
-                Label : RIGHT
-                  0
-                Label : LEFT
-                  $e
+              ==
+              Label : RIGHT
+                0
+              Label : LEFT
+                $e
             Label : THEN
               ;
               Label : ELEMENT
@@ -34,10 +30,10 @@ Label : CODE
             break
             Label : LEVEL
               void
+        Label : CASE
+          '2'
       Label : ELEMENT
         case
-        Label : CASE
-          '1'
         Label : CODE
           ;
           Label : ELEMENT
@@ -54,3 +50,5 @@ Label : CODE
                 $c
             Label : LEFT
               $b
+        Label : CASE
+          '1'

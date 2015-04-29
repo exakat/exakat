@@ -10,8 +10,6 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -42,21 +40,23 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $c
+        Label : CASE
+          'b'
       Label : ELEMENT
         case
-        Label : CASE
-          'j'
         Label : CODE
           ;
           Label : ELEMENT
             break
             Label : LEVEL
               1
+        Label : CASE
+          'j'
       Label : ELEMENT
         case
-        Label : CASE
-          'i'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
+        Label : CASE
+          'i'

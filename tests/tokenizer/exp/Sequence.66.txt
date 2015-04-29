@@ -18,6 +18,8 @@ Label : CODE
             Label : ARGUMENT
               'I'
       Label : ELEMENT
+        void
+      Label : ELEMENT
         E
       Label : ELEMENT
         ::

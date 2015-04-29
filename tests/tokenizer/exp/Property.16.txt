@@ -4,14 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      foo
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         public
-        Label : PUBLIC
-          public
         Label : VALUE
           <<<'EOT'
 
@@ -22,3 +18,7 @@ Label : CODE
 
         Label : DEFINE
           $bar
+        Label : PUBLIC
+          public
+    Label : NAME
+      foo

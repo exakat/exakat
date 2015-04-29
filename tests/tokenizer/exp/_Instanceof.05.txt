@@ -4,13 +4,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        instanceof
-        Label : CLASS
-          static
-        Label : VARIABLE
-          $a
+      instanceof
+      Label : CLASS
+        static
+      Label : VARIABLE
+        $a
     Label : THEN
       ;
       Label : ELEMENT

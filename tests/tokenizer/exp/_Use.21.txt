@@ -7,21 +7,11 @@ Label : CODE
     Label : NAME
       B
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         use
         Label : BLOCK
-          {
-          Label : ELEMENT
-            insteadof
-            Label : RIGHT
-              F
-            Label : LEFT
-              ::
-              Label : CLASS
-                G
-              Label : CONSTANT
-                I
+          ;
           Label : ELEMENT
             insteadof
             Label : RIGHT
@@ -32,6 +22,16 @@ Label : CODE
                 F
               Label : CONSTANT
                 L
+          Label : ELEMENT
+            insteadof
+            Label : RIGHT
+              F
+            Label : LEFT
+              ::
+              Label : CLASS
+                G
+              Label : CONSTANT
+                I
         Label : USE
           G
         Label : USE

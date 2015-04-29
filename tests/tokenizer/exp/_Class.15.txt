@@ -10,10 +10,10 @@ Label : CODE
       ;
       Label : ELEMENT
         const
-        Label : VALUE
-          6
         Label : NAME
           e
+        Label : VALUE
+          6
       Label : ELEMENT
         var
         Label : VALUE
@@ -24,10 +24,10 @@ Label : CODE
           var
       Label : ELEMENT
         const
-        Label : VALUE
-          4
         Label : NAME
           c
+        Label : VALUE
+          4
       Label : ELEMENT
         var
         Label : VALUE
@@ -38,10 +38,10 @@ Label : CODE
           var
       Label : ELEMENT
         const
-        Label : VALUE
-          2
         Label : NAME
           b
+        Label : VALUE
+          2
       Label : ELEMENT
         var
         Label : VALUE

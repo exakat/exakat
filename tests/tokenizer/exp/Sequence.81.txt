@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      a
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -14,14 +12,14 @@ Label : CODE
           b
         Label : VARIABLE
           $c
+    Label : NAME
+      a
     Label : BLOCK
       ;
       Label : ELEMENT
         if
         Label : CONDITION
           ==
-          Label : LEFT
-            false
           Label : RIGHT
             ::
             Label : CLASS
@@ -32,6 +30,8 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $f
+          Label : LEFT
+            false
         Label : THEN
           ;
           Label : ELEMENT

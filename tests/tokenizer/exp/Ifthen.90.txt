@@ -6,40 +6,40 @@ Label : CODE
     if
     Label : CONDITION
       &&
-      Label : LEFT
-        (
-        Label : CODE
-          ||
-          Label : LEFT
-            ||
-            Label : LEFT
-              ==
-              Label : LEFT
-                $a
-              Label : RIGHT
-                'B'
-            Label : RIGHT
-              ==
-              Label : LEFT
-                $a
-              Label : RIGHT
-                'C'
-          Label : RIGHT
-            ==
-            Label : LEFT
-              $a
-            Label : RIGHT
-              'D'
       Label : RIGHT
         ==
+        Label : RIGHT
+          'F'
         Label : LEFT
           [
           Label : VARIABLE
             $b
           Label : INDEX
             E
-        Label : RIGHT
-          'F'
+      Label : LEFT
+        (
+        Label : CODE
+          ||
+          Label : RIGHT
+            ==
+            Label : RIGHT
+              'D'
+            Label : LEFT
+              $a
+          Label : LEFT
+            ||
+            Label : RIGHT
+              ==
+              Label : RIGHT
+                'C'
+              Label : LEFT
+                $a
+            Label : LEFT
+              ==
+              Label : RIGHT
+                'B'
+              Label : LEFT
+                $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -50,26 +50,10 @@ Label : CODE
           ;
           Label : ELEMENT
             while
-            Label : BLOCK
-              Block with While
-              Label : ELEMENT
-                =
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $h
-                Label : RIGHT
-                  [
-                  Label : VARIABLE
-                    $g
-                  Label : INDEX
-                    T
             Label : CONDITION
               (
               Label : CODE
                 =
-                Label : LEFT
-                  $g
                 Label : RIGHT
                   @
                   Label : AT
@@ -80,6 +64,22 @@ Label : CODE
                         $b
                       Label : ARGUMENT
                         $c
+                Label : LEFT
+                  $g
+            Label : BLOCK
+              Block with While
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  [
+                  Label : VARIABLE
+                    $g
+                  Label : INDEX
+                    T
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $h
         Label : ELSE
           Block with else
           Label : ELEMENT
@@ -98,8 +98,6 @@ Label : CODE
               'U'
       Label : ELEMENT
         =
-        Label : LEFT
-          $c
         Label : RIGHT
           @
           Label : AT
@@ -166,24 +164,26 @@ Label : CODE
                 $b
               Label : ARGUMENT
                 $d
+        Label : LEFT
+          $c
     Label : ELSE
       Block with else
       Label : ELEMENT
         if
         Label : CONDITION
           &&
-          Label : LEFT
-            ==
-            Label : LEFT
-              $a
-            Label : RIGHT
-              'X'
           Label : RIGHT
             !=
-            Label : LEFT
-              $i
             Label : RIGHT
               'Y'
+            Label : LEFT
+              $i
+          Label : LEFT
+            ==
+            Label : RIGHT
+              'X'
+            Label : LEFT
+              $a
         Label : THEN
           ;
           Label : ELEMENT
@@ -194,26 +194,10 @@ Label : CODE
               ;
               Label : ELEMENT
                 while
-                Label : BLOCK
-                  Block with While
-                  Label : ELEMENT
-                    =
-                    Label : LEFT
-                      [
-                      Label : VARIABLE
-                        $h
-                    Label : RIGHT
-                      [
-                      Label : VARIABLE
-                        $g
-                      Label : INDEX
-                        T
                 Label : CONDITION
                   (
                   Label : CODE
                     =
-                    Label : LEFT
-                      $g
                     Label : RIGHT
                       @
                       Label : AT
@@ -224,6 +208,22 @@ Label : CODE
                             $b
                           Label : ARGUMENT
                             $c
+                    Label : LEFT
+                      $g
+                Label : BLOCK
+                  Block with While
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      [
+                      Label : VARIABLE
+                        $g
+                      Label : INDEX
+                        T
+                    Label : LEFT
+                      [
+                      Label : VARIABLE
+                        $h
             Label : ELSE
               Block with else
               Label : ELEMENT
@@ -242,18 +242,16 @@ Label : CODE
                   'U'
           Label : ELEMENT
             =
+            Label : RIGHT
+              [
+              Label : VARIABLE
+                $j
+              Label : INDEX
+                $i
             Label : LEFT
               $m
-            Label : RIGHT
-              AF
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $m
           Label : ELEMENT
             =
-            Label : LEFT
-              $c
             Label : RIGHT
               @
               Label : AT
@@ -314,34 +312,34 @@ Label : CODE
                     $b
                   Label : ARGUMENT
                     $d
+            Label : LEFT
+              $c
           Label : ELEMENT
             =
+            Label : RIGHT
+              AF
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $m
             Label : LEFT
               $m
-            Label : RIGHT
-              [
-              Label : VARIABLE
-                $j
-              Label : INDEX
-                $i
           Label : ELEMENT
             =
-            Label : LEFT
-              $l
             Label : RIGHT
               ?
               Label : CONDITION
                 (
                 Label : CODE
                   ==
+                  Label : RIGHT
+                    'AC'
                   Label : LEFT
                     [
                     Label : VARIABLE
                       $k
                     Label : INDEX
                       $i
-                  Label : RIGHT
-                    'AC'
               Label : THEN
                 [
                 Label : VARIABLE
@@ -354,10 +352,14 @@ Label : CODE
                   $b
                 Label : INDEX
                   AE
+            Label : LEFT
+              $l
           Label : ELEMENT
             if
             Label : CONDITION
               ==
+              Label : RIGHT
+                'Y'
               Label : LEFT
                 [
                 Label : VARIABLE
@@ -368,12 +370,12 @@ Label : CODE
                     Concatenation
                     Label : CONCAT
                       $i
-              Label : RIGHT
-                'Y'
             Label : THEN
               ;
               Label : ELEMENT
                 =
+                Label : RIGHT
+                  'AB'
                 Label : LEFT
                   [
                   Label : VARIABLE
@@ -384,10 +386,10 @@ Label : CODE
                       Concatenation
                       Label : CONCAT
                         $i
-                Label : RIGHT
-                  'AB'
               Label : ELEMENT
                 =
+                Label : RIGHT
+                  $i
                 Label : LEFT
                   [
                   Label : VARIABLE
@@ -398,8 +400,6 @@ Label : CODE
                       Concatenation
                       Label : CONCAT
                         $i
-                Label : RIGHT
-                  $i
           Label : ELEMENT
             require
             Label : ARGUMENTS

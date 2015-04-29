@@ -4,6 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     &&
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $d
+      Label : METHOD
+        K
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'L'
     Label : LEFT
       ::
       Label : CLASS
@@ -22,16 +32,6 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $d
-      Label : METHOD
-        K
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'L'
   Label : ELEMENT
     ->
     Label : OBJECT

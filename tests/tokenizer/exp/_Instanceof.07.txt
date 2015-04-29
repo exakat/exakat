@@ -31,27 +31,25 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          ;
+          Block with Sequence For Case
           Label : ELEMENT
-            return
-            Label : RETURN
-              void
+            Void
         Label : CASE
           instanceof
           Label : CLASS
             \
             Label : SUBNAME
-              W
+              R
             Label : SUBNAME
-              V
+              Q
             Label : SUBNAME
-              U
+              P
             Label : SUBNAME
-              T
+              O
             Label : SUBNAME
-              S
+              N
           Label : VARIABLE
-            $h
+            $g
       Label : ELEMENT
         case
         Label : CODE
@@ -75,25 +73,27 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          Block with Sequence For Case
+          ;
           Label : ELEMENT
-            Void
+            return
+            Label : RETURN
+              void
         Label : CASE
           instanceof
           Label : CLASS
             \
             Label : SUBNAME
-              R
+              W
             Label : SUBNAME
-              Q
+              V
             Label : SUBNAME
-              P
+              U
             Label : SUBNAME
-              O
+              T
             Label : SUBNAME
-              N
+              S
           Label : VARIABLE
-            $g
+            $h
       Label : ELEMENT
         case
         Label : CODE

@@ -4,57 +4,57 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $f
     Label : RIGHT
       +
+      Label : LEFT
+        4
       Label : RIGHT
         `
         Label : CONTAIN
           Concatenation
           Label : CONCAT
             $g
-      Label : LEFT
-        4
-    Label : LEFT
-      $f
   Label : ELEMENT
     =
+    Label : LEFT
+      $d
     Label : RIGHT
       +
-      Label : RIGHT
-        3
       Label : LEFT
         `
         Label : CONTAIN
           Concatenation
           Label : CONCAT
             $e
-    Label : LEFT
-      $d
+      Label : RIGHT
+        3
   Label : ELEMENT
     =
+    Label : LEFT
+      $c
     Label : RIGHT
       +
+      Label : LEFT
+        2
       Label : RIGHT
         "
         Label : CONTAIN
           Concatenation
           Label : CONCAT
             $d
-      Label : LEFT
-        2
-    Label : LEFT
-      $c
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       +
-      Label : RIGHT
-        1
       Label : LEFT
         "
         Label : CONTAIN
           Concatenation
           Label : CONCAT
             $b
-    Label : LEFT
-      $a
+      Label : RIGHT
+        1

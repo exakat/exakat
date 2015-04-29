@@ -3,11 +3,11 @@
 Label : CODE
   ;
   Label : ELEMENT
+    __HALT_COMPILER
+  Label : ELEMENT
      
 
 ?>
-  Label : ELEMENT
-    __HALT_COMPILER
   Label : ELEMENT
     =
     Label : RIGHT

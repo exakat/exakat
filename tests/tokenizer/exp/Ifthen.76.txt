@@ -4,22 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      B
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
+    Label : NAME
+      B
     Label : BLOCK
       ;
       Label : ELEMENT
         if
         Label : CONDITION
           ||
-          Label : LEFT
-            !
-            Label : NOT
-              $b
           Label : RIGHT
             !
             Label : NOT
@@ -28,6 +24,10 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $c
+          Label : LEFT
+            !
+            Label : NOT
+              $b
         Label : THEN
           ;
           Label : ELEMENT

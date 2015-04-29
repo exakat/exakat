@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       clone
       Label : CLONE
         (
         Label : CODE
           ::
-          Label : CLASS
-            y
           Label : PROPERTY
             $C
+          Label : CLASS
+            y
+    Label : LEFT
+      $x

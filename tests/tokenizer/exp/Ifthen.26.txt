@@ -14,7 +14,7 @@ Label : CODE
       ;
       Label : ELEMENT
         while
-        Label : BLOCK
-          void
         Label : CONDITION
           $x
+        Label : BLOCK
+          void

@@ -11,29 +11,27 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ||
+          ||
+          Label : RIGHT
+            empty
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $e
+          Label : LEFT
+            !=
             Label : RIGHT
-              empty
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $e
+              'd'
             Label : LEFT
-              !=
-              Label : RIGHT
-                'd'
-              Label : LEFT
-                substr
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    7
-                  Label : ARGUMENT
-                    6
-                  Label : ARGUMENT
-                    $c
+              substr
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  7
+                Label : ARGUMENT
+                  6
+                Label : ARGUMENT
+                  $c
         Label : THEN
           ;
           Label : ELEMENT
@@ -55,37 +53,35 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        &&
+      &&
+      Label : RIGHT
+        !=
         Label : RIGHT
-          !=
-          Label : RIGHT
-            5
-          Label : LEFT
-            substr
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                4
-              Label : ARGUMENT
-                3
-              Label : ARGUMENT
-                $b
+          5
         Label : LEFT
-          !=
-          Label : RIGHT
-            2
-          Label : LEFT
-            substr
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                $a
+          substr
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              4
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              $b
+      Label : LEFT
+        !=
+        Label : RIGHT
+          2
+        Label : LEFT
+          substr
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              $a
     Label : THEN
       ;
       Label : ELEMENT

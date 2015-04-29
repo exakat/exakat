@@ -4,32 +4,30 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      f
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         static
         Label : VALUE
           Void
-        Label : PROTECTED
-          protected
         Label : DEFINE
           $g
         Label : STATIC
           static
+        Label : PROTECTED
+          protected
+    Label : NAME
+      f
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          defined
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'A'
+      !
+      Label : NOT
+        defined
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'A'
     Label : THEN
       ;
       Label : ELEMENT

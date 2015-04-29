@@ -6,7 +6,7 @@ Label : CODE
     declare
     Label : TICKS
       =
-      Label : LEFT
-        encoding
       Label : RIGHT
         'ISO-8859-1'
+      Label : LEFT
+        encoding

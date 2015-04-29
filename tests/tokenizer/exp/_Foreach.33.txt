@@ -3,34 +3,24 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
-    Label : SOURCE
-      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ||
+          ||
+          Label : RIGHT
+            ==
             Label : RIGHT
-              ==
-              Label : RIGHT
-                'C'
-              Label : LEFT
-                $g
+              'C'
             Label : LEFT
-              ==
-              Label : RIGHT
-                'B'
-              Label : LEFT
-                $f
+              $g
+          Label : LEFT
+            ==
+            Label : RIGHT
+              'B'
+            Label : LEFT
+              $f
         Label : THEN
           ;
           Label : ELEMENT
@@ -40,22 +30,28 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            !
-            Label : NOT
-              isset
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $d
-                  Label : INDEX
-                    $e
+          !
+          Label : NOT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $d
+                Label : INDEX
+                  $e
         Label : THEN
           ;
           Label : ELEMENT
             continue
             Label : LEVEL
               void
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
+    Label : SOURCE
+      $a

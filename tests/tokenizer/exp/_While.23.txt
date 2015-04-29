@@ -4,13 +4,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        a
-        Label : ARGUMENTS
+      a
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           void
-          Label : ARGUMENT
-            void
     Label : THEN
       ;
       Label : ELEMENT
@@ -29,6 +27,8 @@ Label : CODE
             'm'
       Label : ELEMENT
         	
+      Label : ELEMENT
+        void
       Label : ELEMENT
         while
         Label : CONDITION
@@ -84,6 +84,4 @@ Label : CODE
       Label : ELEMENT
         	
     Label : ELSE
-      Block with else
-      Label : ELEMENT
-        void
+      void

@@ -8,7 +8,7 @@ Label : CODE
       void
     Label : TICKS
       =
-      Label : LEFT
-        ticks
       Label : RIGHT
         1
+      Label : LEFT
+        ticks

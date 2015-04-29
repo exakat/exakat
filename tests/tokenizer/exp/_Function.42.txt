@@ -4,20 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : USE
-      void
-      Label : ARGUMENT
-        $d
     Label : NAME
       
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $c
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -30,3 +18,15 @@ Label : CODE
             void
             Label : ARGUMENT
               $g
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $c
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
+    Label : USE
+      void
+      Label : ARGUMENT
+        $d

@@ -9,18 +9,14 @@ Label : CODE
   Label : ELEMENT
     try
     Label : CODE
-      {
-      Label : ELEMENT
-        void
+      void
     Label : CATCH
       catch
       Label : CODE
-        {
-        Label : ELEMENT
-          void
-      Label : CLASS
-        Exception
+        void
       Label : VARIABLE
         $e
+      Label : CLASS
+        Exception
   Label : ELEMENT
     __halt_compiler

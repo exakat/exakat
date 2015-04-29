@@ -70,8 +70,6 @@ Label : ELEMENT
             Label : ELEMENT
               V
             Label : ELEMENT
-              AA
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 void
@@ -80,33 +78,33 @@ Label : ELEMENT
             Label : ELEMENT
               AB
             Label : ELEMENT
+              AA
+            Label : ELEMENT
               =
-              Label : LEFT
-                $g
               Label : RIGHT
                 ?
                 Label : CONDITION
                   (
                   Label : CODE
                     ===
-                    Label : LEFT
-                      $a
                     Label : RIGHT
                       Concatenation
                       Label : CONCAT
                         $e
                       Label : CONCAT
                         $b
+                    Label : LEFT
+                      $a
                 Label : THEN
                   'M'
                 Label : ELSE
                   'N'
+              Label : LEFT
+                $g
             Label : ELEMENT
               I
             Label : ELEMENT
               =
-              Label : LEFT
-                $f
               Label : RIGHT
                 [
                 Label : VARIABLE
@@ -125,20 +123,22 @@ Label : ELEMENT
                     'K'
                 Label : INDEX
                   $b
+              Label : LEFT
+                $f
             Label : ELEMENT
               I
           Label : INIT
             =
-            Label : LEFT
-              $e
             Label : RIGHT
               2
-          Label : FINAL
-            <
             Label : LEFT
               $e
+          Label : FINAL
+            <
             Label : RIGHT
               3
+            Label : LEFT
+              $e
           Label : INCREMENT
             ++
             Label : POSTPLUSPLUS
@@ -147,38 +147,38 @@ Label : ELEMENT
           H
         Label : ELEMENT
           =
-          Label : LEFT
-            $c
           Label : RIGHT
             +
-            Label : LEFT
-              (
-              Label : CODE
-                +
-                Label : LEFT
-                  $b
-                Label : RIGHT
-                  4
             Label : RIGHT
               [
               Label : VARIABLE
                 $d
               Label : INDEX
                 'G'
+            Label : LEFT
+              (
+              Label : CODE
+                +
+                Label : RIGHT
+                  4
+                Label : LEFT
+                  $b
+          Label : LEFT
+            $c
         Label : ELEMENT
           F
       Label : INIT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           2
-      Label : FINAL
-        <
         Label : LEFT
           $b
+      Label : FINAL
+        <
         Label : RIGHT
           3
+        Label : LEFT
+          $b
       Label : INCREMENT
         ++
         Label : POSTPLUSPLUS
@@ -187,8 +187,6 @@ Label : ELEMENT
       B
     Label : ELEMENT
       =
-      Label : LEFT
-        $a
       Label : RIGHT
         Concatenation
         Label : CONCAT
@@ -207,5 +205,7 @@ Label : ELEMENT
               1
             Label : ARGUMENT
               0
+      Label : LEFT
+        $a
 Label : ELEMENT
   B

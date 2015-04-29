@@ -6,6 +6,8 @@ Label : CODE
     if
     Label : CONDITION
       ===
+      Label : RIGHT
+        'c'
       Label : LEFT
         ->
         Label : OBJECT
@@ -16,8 +18,6 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-      Label : RIGHT
-        'c'
     Label : THEN
       ;
       Label : ELEMENT

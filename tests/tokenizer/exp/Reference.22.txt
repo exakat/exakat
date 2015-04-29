@@ -5,31 +5,29 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ===
-        Label : RIGHT
-          FALSE
-        Label : LEFT
-          (
-          Label : CODE
-            &
-            Label : RIGHT
-              ->
-              Label : OBJECT
-                $y
-              Label : METHOD
-                z
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    void
-            Label : LEFT
-              x
+      ===
+      Label : RIGHT
+        FALSE
+      Label : LEFT
+        (
+        Label : CODE
+          &
+          Label : RIGHT
+            ->
+            Label : OBJECT
+              $y
+            Label : METHOD
+              z
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
+          Label : LEFT
+            x
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
     Label : THEN
       ;
       Label : ELEMENT

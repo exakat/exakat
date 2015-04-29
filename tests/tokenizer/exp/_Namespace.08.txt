@@ -12,18 +12,18 @@ Label : CODE
           void
           Label : ARGUMENT
             ::
-            Label : METHOD
-              start
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
             Label : CLASS
               \
               Label : SUBNAME
                 Connection
               Label : SUBNAME
                 MyProject
+            Label : METHOD
+              start
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
       Label : ELEMENT
         =
         Label : RIGHT
@@ -47,29 +47,19 @@ Label : CODE
     Label : NAMESPACE
       Global
   Label : ELEMENT
-    declare
-    Label : TICKS
-      void
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          ticks
-  Label : ELEMENT
     namespace
     Label : BLOCK
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
         Label : NAME
           connect
         Label : BLOCK
           void
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
       Label : ELEMENT
         class
         Label : NAME
@@ -78,9 +68,17 @@ Label : CODE
           void
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           CONNECT_OK
+        Label : VALUE
+          1
     Label : NAMESPACE
       MyProject
+  Label : ELEMENT
+    declare
+    Label : TICKS
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        ticks

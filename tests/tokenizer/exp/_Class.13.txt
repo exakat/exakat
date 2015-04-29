@@ -10,10 +10,10 @@ Label : CODE
       ;
       Label : ELEMENT
         const
-        Label : VALUE
-          2
         Label : NAME
           b
+        Label : VALUE
+          2
       Label : ELEMENT
         var
         Label : VALUE

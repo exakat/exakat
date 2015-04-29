@@ -5,10 +5,10 @@ Label : CODE
     if
     Label : CONDITION
       ==
-      Label : LEFT
-        $target
       Label : RIGHT
         1
+      Label : LEFT
+        $target
     Label : THEN
       void
     Label : ELSE

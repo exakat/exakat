@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       strtolower
       Label : ARGUMENTS
@@ -20,5 +22,3 @@ Label : CODE
                 x
             Label : CONCAT
                sf 
-    Label : LEFT
-      $x

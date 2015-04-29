@@ -4,19 +4,21 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $d
-            Label : INDEX
-              'I'
+      isset
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            'I'
     Label : THEN
       ;
+      Label : ELEMENT
+        void
+      Label : ELEMENT
+        void
       Label : ELEMENT
         echo
         Label : ARGUMENTS

@@ -6,15 +6,15 @@ Label : CODE
     function
     Label : NAME
       x
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
     Label : BLOCK
       ;
       Label : ELEMENT
         return
         Label : RETURN
           1
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a

@@ -9,12 +9,8 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $a
+      $a
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void
   Label : ELEMENT
     __halt_compiler

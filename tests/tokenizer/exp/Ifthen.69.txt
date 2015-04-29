@@ -6,14 +6,14 @@ Label : CODE
     if
     Label : CONDITION
       ==
+      Label : RIGHT
+        'C'
       Label : LEFT
         ->
         Label : OBJECT
           $a
         Label : PROPERTY
           B
-      Label : RIGHT
-        'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -64,14 +64,14 @@ Label : CODE
       elseif
       Label : CONDITION
         ==
+        Label : RIGHT
+          'L'
         Label : LEFT
           ->
           Label : OBJECT
             $e
           Label : PROPERTY
             K
-        Label : RIGHT
-          'L'
       Label : THEN
         ;
         Label : ELEMENT

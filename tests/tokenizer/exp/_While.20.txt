@@ -28,16 +28,16 @@ Label : CODE
               Block with For
               Label : ELEMENT
                 void
-            Label : FINAL
-              <
-              Label : RIGHT
-                2
-              Label : LEFT
-                $i
             Label : INIT
               =
               Label : RIGHT
                 1
+              Label : LEFT
+                $i
+            Label : FINAL
+              <
+              Label : RIGHT
+                2
               Label : LEFT
                 $i
             Label : INCREMENT

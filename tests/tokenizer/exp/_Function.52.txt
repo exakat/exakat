@@ -6,10 +6,6 @@ Label : CODE
     function
     Label : NAME
       B
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -30,12 +26,6 @@ Label : CODE
         void
       Label : ELEMENT
         =
-        Label : LEFT
-          ::
-          Label : PROPERTY
-            $a
-          Label : CLASS
-            static
         Label : RIGHT
           new
           Label : NEW
@@ -44,3 +34,13 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+        Label : LEFT
+          ::
+          Label : PROPERTY
+            $a
+          Label : CLASS
+            static
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void

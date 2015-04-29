@@ -10,10 +10,6 @@ Label : CODE
         function
         Label : NAME
           G
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -26,6 +22,10 @@ Label : CODE
                   $a
                 Label : ARGUMENT
                   'I'
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
       Label : ELEMENT
         use
         Label : USE

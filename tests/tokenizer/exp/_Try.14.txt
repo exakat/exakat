@@ -32,8 +32,6 @@ Label : CODE
             'Q'
       Label : ELEMENT
         =
-        Label : LEFT
-          $n
         Label : RIGHT
           ->
           Label : OBJECT
@@ -46,10 +44,10 @@ Label : CODE
                 $p
               Label : ARGUMENT
                 'P'
+        Label : LEFT
+          $n
       Label : ELEMENT
         =
-        Label : LEFT
-          $j
         Label : RIGHT
           new
           Label : NEW
@@ -62,36 +60,36 @@ Label : CODE
                   $k
                 Label : CLASS
                   K
+        Label : LEFT
+          $j
       Label : ELEMENT
         =
-        Label : LEFT
-          $f
         Label : RIGHT
           array
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
               =>
-              Label : KEY
-                'I'
               Label : VALUE
                 $i
+              Label : KEY
+                'I'
             Label : ARGUMENT
               =>
-              Label : KEY
-                'H'
               Label : VALUE
                 $h
+              Label : KEY
+                'H'
             Label : ARGUMENT
               =>
-              Label : KEY
-                'G'
               Label : VALUE
                 $g
+              Label : KEY
+                'G'
+        Label : LEFT
+          $f
       Label : ELEMENT
         =
-        Label : LEFT
-          $d
         Label : RIGHT
           new
           Label : NEW
@@ -100,12 +98,10 @@ Label : CODE
               void
               Label : ARGUMENT
                 $e
+        Label : LEFT
+          $d
     Label : CATCH
       catch
-      Label : VARIABLE
-        $y
-      Label : CLASS
-        AF
       Label : CODE
         ;
         Label : ELEMENT
@@ -118,12 +114,12 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'AH'
+      Label : VARIABLE
+        $y
+      Label : CLASS
+        AF
     Label : CATCH
       catch
-      Label : VARIABLE
-        $w
-      Label : CLASS
-        AC
       Label : CODE
         ;
         Label : ELEMENT
@@ -144,12 +140,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
+      Label : VARIABLE
+        $w
+      Label : CLASS
+        AC
     Label : CATCH
       catch
-      Label : VARIABLE
-        $u
-      Label : CLASS
-        Z
       Label : CODE
         ;
         Label : ELEMENT
@@ -170,12 +166,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
+      Label : VARIABLE
+        $u
+      Label : CLASS
+        Z
     Label : CATCH
       catch
-      Label : VARIABLE
-        $s
-      Label : CLASS
-        U
       Label : CODE
         ;
         Label : ELEMENT
@@ -200,12 +196,12 @@ Label : CODE
                       'Y'
                   Label : CONCAT
                     'W'
+      Label : VARIABLE
+        $s
+      Label : CLASS
+        U
     Label : CATCH
       catch
-      Label : VARIABLE
-        $r
-      Label : CLASS
-        R
       Label : CODE
         ;
         Label : ELEMENT
@@ -218,20 +214,22 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'T'
+      Label : VARIABLE
+        $r
+      Label : CLASS
+        R
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          C
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              $b
+      !
+      Label : NOT
+        C
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $b
     Label : THEN
       ;
       Label : ELEMENT
@@ -246,7 +244,7 @@ Label : CODE
                 'E'
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       'B'
+    Label : LEFT
+      $a

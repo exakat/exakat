@@ -20,14 +20,14 @@ Label : CODE
             void
     Label : CATCH
       catch
-      Label : CODE
-        void
-      Label : VARIABLE
-        $b
       Label : CLASS
         \
         Label : SUBNAME
           D
+      Label : CODE
+        void
+      Label : VARIABLE
+        $b
   Label : ELEMENT
     =
     Label : RIGHT

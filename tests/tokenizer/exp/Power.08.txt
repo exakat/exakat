@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     **
-    Label : RIGHT
-      34
     Label : LEFT
       '2'
+    Label : RIGHT
+      34

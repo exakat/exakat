@@ -41,6 +41,8 @@ Label : CODE
       void
       Label : ARGUMENT
         ::
+        Label : CLASS
+          H
         Label : METHOD
           I
           Label : ARGUMENTS
@@ -57,7 +59,5 @@ Label : CODE
                 $d
               Label : INDEX
                 'J'
-        Label : CLASS
-          H
   Label : ELEMENT
     F

@@ -6,8 +6,6 @@ Label : CODE
     class
     Label : NAME
       x
-    Label : EXTENDS
-      y
     Label : IMPLEMENTS
       z
     Label : BLOCK
@@ -16,9 +14,11 @@ Label : CODE
         function
         Label : NAME
           a
+        Label : BLOCK
+          void
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : BLOCK
-          void
+    Label : EXTENDS
+      y

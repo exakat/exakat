@@ -16,17 +16,7 @@ Label : CODE
         Label : THEN
           ;
           Label : ELEMENT
-            C
-          Label : ELEMENT
-            print
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                t
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'd'
+            D
           Label : ELEMENT
             print
             Label : ARGUMENTS
@@ -42,9 +32,19 @@ Label : CODE
                     Label : ARGUMENT
                       'e'
           Label : ELEMENT
-            D
-          Label : ELEMENT
             F
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                t
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'd'
+          Label : ELEMENT
+            C
           Label : ELEMENT
             print
             Label : ARGUMENTS

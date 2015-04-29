@@ -4,16 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $c
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $e
     Label : LEFT
       @
       Label : AT
@@ -24,3 +14,13 @@ Label : CODE
             $b
           Label : ARGUMENT
             $a
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $c
+      Label : METHOD
+        d
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e

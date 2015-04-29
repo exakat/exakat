@@ -19,23 +19,23 @@ Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : LEFT
-              $c
             Label : RIGHT
               $d
+            Label : LEFT
+              $c
         Label : ELSE
           Block with else
           Label : ELEMENT
             =
-            Label : LEFT
-              $b
             Label : RIGHT
               3
+            Label : LEFT
+              $b
     Label : ELSE
       Block with else
       Label : ELEMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           2
+        Label : LEFT
+          $a

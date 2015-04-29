@@ -10,8 +10,6 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           preg_replace
           Label : ARGUMENTS
@@ -30,6 +28,8 @@ Label : CODE
                   $y
                 Label : CONCAT
                   /
+        Label : LEFT
+          $a
   Label : ELEMENT
     if
     Label : CONDITION
@@ -38,8 +38,6 @@ Label : CODE
       ;
       Label : ELEMENT
         .=
-        Label : LEFT
-          $c
         Label : RIGHT
           "
           Label : CONTAIN
@@ -50,15 +48,17 @@ Label : CODE
               $e
             Label : CONCAT
               \n
+        Label : LEFT
+          $c
     Label : ELSE
       Block with else
       Label : ELEMENT
         .=
-        Label : LEFT
-          $f
         Label : RIGHT
           "
           Label : CONTAIN
             Concatenation
             Label : CONCAT
               $g
+        Label : LEFT
+          $f

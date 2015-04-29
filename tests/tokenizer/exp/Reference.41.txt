@@ -10,38 +10,18 @@ Label : CODE
         (
         Label : CODE
           &
+          Label : RIGHT
+            $c
           Label : LEFT
             ::
-            Label : METHOD
-              b
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
             Label : CLASS
               $a
-          Label : RIGHT
-            $c
-  Label : ELEMENT
-    return
-    Label : RETURN
-      (bool)
-      Label : CAST
-        (
-        Label : CODE
-          &
-          Label : LEFT
-            ::
             Label : METHOD
               b
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
-            Label : CLASS
-              a
-          Label : RIGHT
-            $c
   Label : ELEMENT
     return
     Label : RETURN
@@ -50,6 +30,28 @@ Label : CODE
         (
         Label : CODE
           &
+          Label : RIGHT
+            $c
+          Label : LEFT
+            ::
+            Label : CLASS
+              a
+            Label : METHOD
+              b
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+  Label : ELEMENT
+    return
+    Label : RETURN
+      (bool)
+      Label : CAST
+        (
+        Label : CODE
+          &
+          Label : RIGHT
+            $c
           Label : LEFT
             ->
             Label : OBJECT
@@ -60,5 +62,3 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-          Label : RIGHT
-            $c

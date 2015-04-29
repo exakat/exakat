@@ -5,24 +5,22 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ->
-        Label : OBJECT
-          $x
-        Label : METHOD
-          b
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              'c'
+      ->
+      Label : OBJECT
+        $x
+      Label : METHOD
+        b
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            'c'
     Label : THEN
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           1
+        Label : LEFT
+          $a

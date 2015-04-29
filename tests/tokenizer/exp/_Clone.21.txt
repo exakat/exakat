@@ -6,16 +6,6 @@ Label : CODE
     if
     Label : CONDITION
       &&
-      Label : LEFT
-        instanceof
-        Label : CLASS
-          \
-          Label : SUBNAME
-            C
-          Label : SUBNAME
-            B
-        Label : VARIABLE
-          $a
       Label : RIGHT
         ->
         Label : OBJECT
@@ -26,6 +16,16 @@ Label : CODE
             void
             Label : ARGUMENT
               void
+      Label : LEFT
+        instanceof
+        Label : VARIABLE
+          $a
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
     Label : THEN
       ;
       Label : ELEMENT
@@ -44,8 +44,6 @@ Label : CODE
           $h
       Label : ELEMENT
         =
-        Label : LEFT
-          $c
         Label : RIGHT
           clone
           Label : CLONE
@@ -62,3 +60,5 @@ Label : CODE
                   $e
                 Label : PROPERTY
                   E
+        Label : LEFT
+          $c

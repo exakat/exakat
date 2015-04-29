@@ -15,7 +15,11 @@ Label : CODE
       Label : ELEMENT
         try
         Label : CODE
-          {
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              $result
           Label : ELEMENT
             =
             Label : RIGHT
@@ -26,14 +30,10 @@ Label : CODE
                   $resource
             Label : LEFT
               $result
-          Label : ELEMENT
-            return
-            Label : RETURN
-              $result
         Label : CATCH
           finally
           Label : CODE
-            {
+            ;
             Label : ELEMENT
               releaseResource
               Label : ARGUMENTS

@@ -27,18 +27,6 @@ Label : CODE
       Label : INDEX
         'baz'
   Label : ELEMENT
-    ->
-    Label : OBJECT
-      $foo
-    Label : METHOD
-      [
-      Label : ARGUMENTS
-        void
-      Label : VARIABLE
-        $bar
-      Label : INDEX
-        'baz'
-  Label : ELEMENT
     ::
     Label : CLASS
       Foo
@@ -58,14 +46,26 @@ Label : CODE
         void
     Label : VARIABLE
       ::
-      Label : PROPERTY
-        $bar
       Label : CLASS
         Foo
+      Label : PROPERTY
+        $bar
     Label : INDEX
       'baz'
     Label : NAME
       [
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $foo
+    Label : METHOD
+      [
+      Label : ARGUMENTS
+        void
+      Label : VARIABLE
+        $bar
+      Label : INDEX
+        'baz'
   Label : ELEMENT
     ->
     Label : OBJECT

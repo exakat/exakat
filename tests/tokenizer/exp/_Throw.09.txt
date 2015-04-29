@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     try
     Label : CODE
-      {
+      ;
       Label : ELEMENT
         ->
         Label : OBJECT

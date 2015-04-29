@@ -5,13 +5,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        =
-        Label : RIGHT
-          $b
-        Label : LEFT
-          $a
+      =
+      Label : RIGHT
+        $b
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT

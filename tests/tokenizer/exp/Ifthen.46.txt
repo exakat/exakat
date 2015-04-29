@@ -9,14 +9,12 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $e
         Label : RIGHT
           1
+        Label : LEFT
+          $e
       Label : ELEMENT
         [
-        Label : NAME
-          [
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -29,6 +27,8 @@ Label : CODE
             c
         Label : INDEX
           d
+        Label : NAME
+          [
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

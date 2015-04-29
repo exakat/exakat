@@ -8,10 +8,10 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $c
         Label : RIGHT
           3
+        Label : LEFT
+          $c
     Label : VALUE
       $b
     Label : SOURCE
@@ -24,20 +24,20 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $x
         Label : RIGHT
           2
+        Label : LEFT
+          $x
   Label : ELEMENT
     foreach
     Label : BLOCK
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $c
         Label : RIGHT
           2
+        Label : LEFT
+          $c
     Label : VALUE
       $b
     Label : SOURCE
@@ -50,7 +50,7 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $x
         Label : RIGHT
           1
+        Label : LEFT
+          $x

@@ -8,27 +8,25 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            !==
-            Label : RIGHT
-              C
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  'E'
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $c
-                  Label : METHOD
-                    D
-                    Label : ARGUMENTS
+          !==
+          Label : RIGHT
+            C
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'E'
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $c
+                Label : METHOD
+                  D
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
                       void
-                      Label : ARGUMENT
-                        void
-            Label : LEFT
-              0
+          Label : LEFT
+            0
         Label : THEN
           ;
           Label : ELEMENT

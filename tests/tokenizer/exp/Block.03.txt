@@ -5,15 +5,13 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $f
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $f
     Label : THEN
       ;
       Label : ELEMENT
@@ -29,13 +27,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        empty
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a
+      empty
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $a
     Label : THEN
       ;
       Label : ELEMENT

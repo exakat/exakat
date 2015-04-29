@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      $z
     Label : BLOCK
       switch
       Label : NAME
@@ -26,5 +28,3 @@ Label : CODE
             Block with Sequence For Default
             Label : ELEMENT
               Void
-    Label : CONDITION
-      $z

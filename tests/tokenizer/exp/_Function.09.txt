@@ -12,9 +12,9 @@ Label : CODE
         function
         Label : NAME
           __construct
+        Label : BLOCK
+          void
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : BLOCK
-          void

@@ -17,12 +17,6 @@ Label : CODE
       void
       Label : ARGUMENT
         -
-        Label : LEFT
-          +
-          Label : LEFT
-            $a
-          Label : RIGHT
-            2
         Label : RIGHT
           [
           Label : VARIABLE
@@ -33,3 +27,9 @@ Label : CODE
               void
               Label : ARGUMENT
                 'c'
+        Label : LEFT
+          +
+          Label : RIGHT
+            2
+          Label : LEFT
+            $a

@@ -14,10 +14,10 @@ Label : CODE
           ;
           Label : ELEMENT
             .=
-            Label : LEFT
-              $l
             Label : RIGHT
               'm'
+            Label : LEFT
+              $l
       Label : ELEMENT
         if
         Label : CONDITION
@@ -26,14 +26,12 @@ Label : CODE
           ;
           Label : ELEMENT
             .=
-            Label : LEFT
-              $i
             Label : RIGHT
               'j'
+            Label : LEFT
+              $i
       Label : ELEMENT
         =
-        Label : LEFT
-          $d
         Label : RIGHT
           Concatenation
           Label : CONCAT
@@ -44,18 +42,20 @@ Label : CODE
               g
           Label : CONCAT
             'e'
+        Label : LEFT
+          $d
     Label : INIT
       =
-      Label : LEFT
-        $a
       Label : RIGHT
         0
-    Label : FINAL
-      <
       Label : LEFT
         $a
+    Label : FINAL
+      <
       Label : RIGHT
         10
+      Label : LEFT
+        $a
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS

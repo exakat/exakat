@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       a
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         var
         Label : VALUE

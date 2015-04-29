@@ -8,14 +8,14 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
         Label : NAME
           connect
         Label : BLOCK
           void
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
       Label : ELEMENT
         class
         Label : NAME
@@ -24,10 +24,10 @@ Label : CODE
           void
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           CONNECT_OK
+        Label : VALUE
+          1
     Label : NAMESPACE
       AnotherProject
   Label : ELEMENT
@@ -36,14 +36,14 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
         Label : NAME
           connect
         Label : BLOCK
           void
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
       Label : ELEMENT
         class
         Label : NAME
@@ -52,9 +52,9 @@ Label : CODE
           void
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           CONNECT_OK
+        Label : VALUE
+          1
     Label : NAMESPACE
       MyProject

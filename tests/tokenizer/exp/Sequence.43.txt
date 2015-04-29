@@ -6,16 +6,6 @@ Label : CODE
     if
     Label : CONDITION
       &&
-      Label : LEFT
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'b'
       Label : RIGHT
         is_array
         Label : ARGUMENTS
@@ -26,6 +16,16 @@ Label : CODE
               $c
             Label : INDEX
               'd'
+      Label : LEFT
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'b'
     Label : THEN
       ;
       Label : ELEMENT
@@ -34,22 +34,22 @@ Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : LEFT
-              $j
             Label : RIGHT
               2
+            Label : LEFT
+              $j
           Label : ELEMENT
             =
-            Label : LEFT
-              $i
             Label : RIGHT
               1
+            Label : LEFT
+              $i
         Label : VALUE
           =>
-          Label : KEY
-            $g
           Label : VALUE
             $h
+          Label : KEY
+            $g
         Label : SOURCE
           [
           Label : VARIABLE
@@ -58,15 +58,15 @@ Label : CODE
             'f'
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $k
-      Label : INDEX
-        'l'
     Label : RIGHT
       [
       Label : VARIABLE
         $m
       Label : INDEX
         'n'
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $k
+      Label : INDEX
+        'l'

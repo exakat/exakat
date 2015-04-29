@@ -22,18 +22,18 @@ Label : CODE
             $x
           Label : INDEX
             ->
-            Label : PROPERTY
-              p
             Label : OBJECT
               ->
+              Label : OBJECT
+                $c
               Label : METHOD
                 m
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
-              Label : OBJECT
-                $c
+            Label : PROPERTY
+              p
   Label : ELEMENT
     Concatenation
     Label : CONCAT

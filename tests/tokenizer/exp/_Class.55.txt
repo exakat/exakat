@@ -10,13 +10,13 @@ Label : CODE
       ;
       Label : ELEMENT
         var
+        Label : DEFINE
+          $x
         Label : VALUE
           array
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
-        Label : DEFINE
-          $x
         Label : VAR
           var

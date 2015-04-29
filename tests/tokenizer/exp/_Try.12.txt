@@ -8,17 +8,15 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $e
-              Label : INDEX
-                'r'
-            Label : RIGHT
-              't'
+          ==
+          Label : RIGHT
+            't'
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              'r'
         Label : THEN
           ;
           Label : ELEMENT
@@ -41,18 +39,12 @@ Label : CODE
                       'h'
     Label : CATCH
       catch
-      Label : VARIABLE
-        $e
-      Label : CLASS
-        ACL_RoleNoExist
       Label : CODE
         ;
         Label : ELEMENT
           if
           Label : CONDITION
-            (
-            Label : CODE
-              $x
+            $x
           Label : THEN
             ;
             Label : ELEMENT
@@ -93,30 +85,32 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         'g'
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        ACL_RoleNoExist
     Label : CATCH
       catch
+      Label : CODE
+        void
       Label : VARIABLE
         $e
       Label : CLASS
         Ugmanager_GroupNoExist
-      Label : CODE
-        void
     Label : CATCH
       catch
+      Label : CODE
+        void
       Label : VARIABLE
         $e
       Label : CLASS
         Router_ArgNoExist
-      Label : CODE
-        void
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          $b
+      !
+      Label : NOT
+        $b
     Label : THEN
       ;
       Label : ELEMENT

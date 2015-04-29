@@ -5,21 +5,19 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        =
-        Label : RIGHT
-          fopen
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'r+b'
-            Label : ARGUMENT
-              '/tmp/test'
-        Label : LEFT
-          !
-          Label : NOT
-            $handle
+      =
+      Label : LEFT
+        !
+        Label : NOT
+          $handle
+      Label : RIGHT
+        fopen
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'r+b'
+          Label : ARGUMENT
+            '/tmp/test'
     Label : THEN
       ;
       Label : ELEMENT

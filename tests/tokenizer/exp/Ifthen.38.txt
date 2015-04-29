@@ -6,10 +6,10 @@ Label : CODE
     if
     Label : CONDITION
       ==
-      Label : LEFT
-        $a
       Label : RIGHT
         'b'
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT

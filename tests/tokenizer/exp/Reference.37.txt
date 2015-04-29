@@ -43,13 +43,23 @@ Label : CODE
     Label : NAME
       a
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
-        const
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
-          B
-        Label : VALUE
-          1
+          e
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              1
+        Label : STATIC
+          static
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -65,21 +75,11 @@ Label : CODE
             Label : RETURN
               1
       Label : ELEMENT
-        function
-        Label : STATIC
-          static
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
+        const
         Label : NAME
-          e
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              1
+          B
+        Label : VALUE
+          1
   Label : ELEMENT
     =
     Label : RIGHT

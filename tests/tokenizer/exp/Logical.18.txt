@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     and
-    Label : RIGHT
-      5
     Label : LEFT
       xor
-      Label : RIGHT
-        4
       Label : LEFT
         or
-        Label : RIGHT
-          3
         Label : LEFT
           and
-          Label : RIGHT
-            2
           Label : LEFT
             1
+          Label : RIGHT
+            2
+        Label : RIGHT
+          3
+      Label : RIGHT
+        4
+    Label : RIGHT
+      5

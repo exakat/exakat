@@ -14,34 +14,34 @@ Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : LEFT
-              $i
             Label : RIGHT
               (int)
               Label : CAST
                 (
                 Label : CODE
                   /
-                  Label : LEFT
-                    *
-                    Label : LEFT
-                      2
-                    Label : RIGHT
-                      $j
                   Label : RIGHT
                     $k
+                  Label : LEFT
+                    *
+                    Label : RIGHT
+                      $j
+                    Label : LEFT
+                      2
+            Label : LEFT
+              $i
         Label : INIT
           =
-          Label : LEFT
-            $e
           Label : RIGHT
             1
+          Label : LEFT
+            $e
         Label : FINAL
           <=
-          Label : LEFT
-            $f
           Label : RIGHT
             $g
+          Label : LEFT
+            $f
         Label : INCREMENT
           ++
           Label : POSTPLUSPLUS
@@ -50,16 +50,16 @@ Label : CODE
         A
     Label : INIT
       =
-      Label : LEFT
-        $a
       Label : RIGHT
         0
+      Label : LEFT
+        $a
     Label : FINAL
       <=
-      Label : LEFT
-        $b
       Label : RIGHT
         $c
+      Label : LEFT
+        $b
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS

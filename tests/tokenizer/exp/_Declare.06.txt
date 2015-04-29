@@ -8,13 +8,13 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         =
-        Label : LEFT
-          tIcks
         Label : RIGHT
           2
+        Label : LEFT
+          tIcks
       Label : ARGUMENT
         =
-        Label : LEFT
-          encODing
         Label : RIGHT
           'ISO-8859-1'
+        Label : LEFT
+          encODing

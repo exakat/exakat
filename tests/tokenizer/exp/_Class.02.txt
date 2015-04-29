@@ -6,7 +6,7 @@ Label : CODE
     class
     Label : NAME
       x
-    Label : EXTENDS
-      y
     Label : BLOCK
       void
+    Label : EXTENDS
+      y

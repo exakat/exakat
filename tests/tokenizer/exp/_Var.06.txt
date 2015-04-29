@@ -7,21 +7,13 @@ Label : CODE
     Label : NAME
       a
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         var
         Label : VALUE
-          1
+          '23'
         Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          -2
-        Label : DEFINE
-          $c
+          $e
         Label : VAR
           var
       Label : ELEMENT
@@ -39,8 +31,16 @@ Label : CODE
       Label : ELEMENT
         var
         Label : VALUE
-          '23'
+          -2
         Label : DEFINE
-          $e
+          $c
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          1
+        Label : DEFINE
+          $b
         Label : VAR
           var

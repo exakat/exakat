@@ -7,17 +7,17 @@ Label : CODE
     Label : NAME
       C
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         static
         Label : STATIC
           static
-        Label : PUBLIC
-          public
         Label : VALUE
           'f'
         Label : DEFINE
-          $y
+          $y4
+        Label : PROTECTED
+          protected
       Label : ELEMENT
         static
         Label : STATIC
@@ -32,9 +32,9 @@ Label : CODE
         static
         Label : STATIC
           static
-        Label : PROTECTED
-          protected
         Label : VALUE
           'f'
         Label : DEFINE
-          $y4
+          $y
+        Label : PUBLIC
+          public

@@ -4,17 +4,13 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          B
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        B
     Label : THEN
       ;
-      Label : ELEMENT
-        void
       Label : ELEMENT
         D
       Label : ELEMENT

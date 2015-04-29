@@ -5,15 +5,13 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        include_once
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            (
-            Label : CODE
-              'a.php'
+      include_once
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          (
+          Label : CODE
+            'a.php'
     Label : THEN
       ;
       Label : ELEMENT

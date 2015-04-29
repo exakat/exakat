@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
     Label : VALUE
       $z
     Label : SOURCE
@@ -12,12 +18,6 @@ Label : CODE
         $y
       Label : LEFT
         $x
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
   Label : ELEMENT
     =
     Label : RIGHT

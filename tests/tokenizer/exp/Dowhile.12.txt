@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      FALSE
     Label : BLOCK
       if
       Label : CONDITION
@@ -22,14 +24,14 @@ Label : CODE
               $x
             Label : INDEX
               +
-              Label : LEFT
-                1
               Label : RIGHT
                 *
-                Label : LEFT
-                  2
                 Label : RIGHT
                   4
+                Label : LEFT
+                  2
+              Label : LEFT
+                1
           Label : METHOD
             f
             Label : ARGUMENTS
@@ -46,5 +48,3 @@ Label : CODE
           break
           Label : LEVEL
             void
-    Label : CONDITION
-      FALSE

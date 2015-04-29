@@ -5,29 +5,27 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        &&
-        Label : RIGHT
-          ==
-          Label : RIGHT
-            1
-          Label : LEFT
+      &&
+      Label : LEFT
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
             [
             Label : VARIABLE
               $_REQUEST
             Label : INDEX
               'opt'
+      Label : RIGHT
+        ==
         Label : LEFT
-          isset
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $_REQUEST
-              Label : INDEX
-                'opt'
+          [
+          Label : VARIABLE
+            $_REQUEST
+          Label : INDEX
+            'opt'
+        Label : RIGHT
+          1
     Label : THEN
       ;
       Label : ELEMENT

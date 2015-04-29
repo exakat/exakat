@@ -6,26 +6,26 @@ Label : CODE
     class
     Label : NAME
       H
-    Label : EXTENDS
-      I
     Label : BLOCK
       ;
       Label : ELEMENT
         use
         Label : USE
           J
+    Label : EXTENDS
+      I
   Label : ELEMENT
     class
     Label : NAME
       E
-    Label : EXTENDS
-      F
     Label : BLOCK
       ;
       Label : ELEMENT
         use
         Label : USE
           G
+    Label : EXTENDS
+      F
   Label : ELEMENT
     trait
     Label : NAME
@@ -36,19 +36,19 @@ Label : CODE
         function
         Label : NAME
           D
+        Label : BLOCK
+          void
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : BLOCK
-          void
       Label : ELEMENT
         function
         Label : NAME
           C
+        Label : BLOCK
+          void
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : BLOCK
-          void

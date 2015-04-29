@@ -12,7 +12,7 @@ Label : CODE
         Label : CODE
           ;
           Label : ELEMENT
-            {
+            ;
             Label : ELEMENT
               ++
               Label : POSTPLUSPLUS
@@ -23,12 +23,10 @@ Label : CODE
               $b
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           ;
           Label : ELEMENT
-            {
+            ;
             Label : ELEMENT
               ++
               Label : POSTPLUSPLUS
@@ -37,14 +35,14 @@ Label : CODE
             break
             Label : LEVEL
               void
+        Label : CASE
+          'b'
       Label : ELEMENT
         case
-        Label : CASE
-          'a'
         Label : CODE
           ;
           Label : ELEMENT
-            {
+            ;
             Label : ELEMENT
               ++
               Label : POSTPLUSPLUS
@@ -53,3 +51,5 @@ Label : CODE
             break
             Label : LEVEL
               void
+        Label : CASE
+          'a'

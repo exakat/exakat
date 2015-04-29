@@ -6,27 +6,27 @@ Label : CODE
     function
     Label : NAME
       a
+    Label : BLOCK
+      void
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         &
         Label : VARIABLE
           =
-          Label : LEFT
-            $b
           Label : RIGHT
             null
+          Label : LEFT
+            $b
         Label : CLASS
           StdClass
       Label : ARGUMENT
         &
         Label : VARIABLE
           =
-          Label : LEFT
-            $x
           Label : RIGHT
             null
+          Label : LEFT
+            $x
         Label : CLASS
           StdClass
-    Label : BLOCK
-      void

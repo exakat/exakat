@@ -4,16 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $a
+    Label : VALUE
+      $b
+    Label : SOURCE
+      $a
   Label : ELEMENT
     ;
     Label : ELEMENT

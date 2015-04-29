@@ -6,20 +6,20 @@ Label : CODE
     if
     Label : CONDITION
       ==
-      Label : LEFT
-        $l
       Label : RIGHT
         3
+      Label : LEFT
+        $l
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
           =
-          Label : LEFT
-            $b
           Label : RIGHT
             1
+          Label : LEFT
+            $b
         Label : THEN
           ;
           Label : ELEMENT
@@ -30,10 +30,10 @@ Label : CODE
           elseif
           Label : CONDITION
             =
-            Label : LEFT
-              $b
             Label : RIGHT
               2
+            Label : LEFT
+              $b
           Label : THEN
             ;
             Label : ELEMENT
@@ -50,10 +50,10 @@ Label : CODE
     if
     Label : CONDITION
       ==
-      Label : LEFT
-        $l
       Label : RIGHT
         1
+      Label : LEFT
+        $l
     Label : THEN
       void
     Label : ELSE
@@ -66,10 +66,10 @@ Label : CODE
     if
     Label : CONDITION
       ==
-      Label : LEFT
-        $l
       Label : RIGHT
         2
+      Label : LEFT
+        $l
     Label : THEN
       void
     Label : ELSE

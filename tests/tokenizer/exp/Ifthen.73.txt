@@ -81,8 +81,6 @@ Label : ELEMENT
           if
           Label : CONDITION
             &&
-            Label : LEFT
-              $f
             Label : RIGHT
               ->
               Label : OBJECT
@@ -93,6 +91,8 @@ Label : ELEMENT
                   void
                   Label : ARGUMENT
                     void
+            Label : LEFT
+              $f
           Label : THEN
             ;
             Label : ELEMENT
@@ -145,10 +145,10 @@ Label : ELEMENT
                       void
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'AK'
                         Label : VALUE
                           'AL'
+                        Label : KEY
+                          'AK'
                   Label : ARGUMENT
                     'AJ'
         Label : ELEMENT

@@ -6,6 +6,12 @@ Label : CODE
     function
     Label : NAME
       x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          1
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -14,9 +20,3 @@ Label : CODE
           $a
         Label : CLASS
           Stdclass
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          1

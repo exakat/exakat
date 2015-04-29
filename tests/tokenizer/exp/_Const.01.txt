@@ -7,25 +7,33 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
-        private
-        Label : VALUE
-          'b'
-        Label : DEFINE
-          $a
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        static
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          f
+        Label : BLOCK
+          void
         Label : STATIC
           static
-        Label : PROTECTED
-          protected
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        const
+        Label : NAME
+          C
         Label : VALUE
-          Void
-        Label : DEFINE
-          $E
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          D
+        Label : VALUE
+          '2'
       Label : ELEMENT
         const
         Label : NAME
@@ -37,30 +45,20 @@ Label : CODE
           Label : CONSTANT
             G
       Label : ELEMENT
-        const
-        Label : NAME
-          D
-        Label : VALUE
-          '2'
-      Label : ELEMENT
-        const
-        Label : NAME
-          C
-        Label : VALUE
-          1
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          f
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+        static
         Label : STATIC
           static
-        Label : PUBLIC
-          public
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $E
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        private
+        Label : VALUE
+          'b'
+        Label : DEFINE
+          $a
+        Label : PRIVATE
+          private

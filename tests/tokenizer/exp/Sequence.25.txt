@@ -4,19 +4,23 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $z
     Label : RIGHT
       3
+    Label : LEFT
+      $z
   Label : ELEMENT
     =
-    Label : LEFT
-      $y
     Label : RIGHT
       2
+    Label : LEFT
+      $y
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    void
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       1
+    Label : LEFT
+      $x

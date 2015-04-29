@@ -3,10 +3,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : VALUE
       $d
     Label : SOURCE
@@ -23,3 +19,5 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+    Label : BLOCK
+      void

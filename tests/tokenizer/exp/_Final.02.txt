@@ -7,8 +7,6 @@ Label : CODE
     Label : NAME
       y
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void
     Label : FINAL
       final

@@ -5,17 +5,17 @@ Label : CODE
     function
     Label : NAME
       
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
     Label : BLOCK
       ;
       Label : ELEMENT
         static
+        Label : DEFINE
+          $b
         Label : VALUE
           NULL
         Label : STATIC
           static
-        Label : DEFINE
-          $b
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a

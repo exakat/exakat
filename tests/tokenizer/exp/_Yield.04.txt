@@ -20,6 +20,16 @@ Label : CODE
             yield
             Label : YIELD
               =>
+              Label : VALUE
+                ->
+                Label : OBJECT
+                  $j
+                Label : METHOD
+                  k
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
               Label : KEY
                 Concatenation
                 Label : CONCAT
@@ -34,32 +44,22 @@ Label : CODE
                         void
                 Label : CONCAT
                   "g"
-              Label : VALUE
-                ->
-                Label : OBJECT
-                  $j
-                Label : METHOD
-                  k
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      void
-        Label : FINAL
-          ->
-          Label : OBJECT
-            $c
-          Label : METHOD
-            d
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
         Label : INIT
           ->
           Label : OBJECT
             $a
           Label : METHOD
             b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : FINAL
+          ->
+          Label : OBJECT
+            $c
+          Label : METHOD
+            d
             Label : ARGUMENTS
               void
               Label : ARGUMENT

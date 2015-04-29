@@ -11,18 +11,18 @@ Label : ELEMENT
         ->
         Label : OBJECT
           ::
-          Label : METHOD
-            Y
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
           Label : CLASS
             \
             Label : SUBNAME
               X
             Label : SUBNAME
               W
+          Label : METHOD
+            Y
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
         Label : METHOD
           Z
           Label : ARGUMENTS
@@ -88,15 +88,13 @@ Label : ELEMENT
     Label : ELEMENT
       if
       Label : CONDITION
-        (
-        Label : CODE
-          !
-          Label : NOT
-            G
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $b
+        !
+        Label : NOT
+          G
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $b
       Label : THEN
         ;
         Label : ELEMENT
@@ -112,13 +110,11 @@ Label : ELEMENT
       Label : ELSE
         elseif
         Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              'J'
-            Label : LEFT
-              $d
+          ==
+          Label : RIGHT
+            'J'
+          Label : LEFT
+            $d
         Label : THEN
           J
         Label : ELSE

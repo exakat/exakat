@@ -14,16 +14,16 @@ Label : CODE
           =>
           Label : KEY
             ::
-            Label : CLASS
-              Q
             Label : PROPERTY
               $r
+            Label : CLASS
+              Q
           Label : VALUE
             ::
-            Label : CLASS
-              S
             Label : PROPERTY
               $t
+            Label : CLASS
+              S
         Label : ARGUMENT
           =>
           Label : KEY

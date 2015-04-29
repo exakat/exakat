@@ -5,25 +5,13 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         class
         Label : NAME
-          one_identifier
+          a1
         Label : BLOCK
-          {
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-      Label : ELEMENT
-        class
-        Label : NAME
-          absolute_path
-        Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -35,7 +23,7 @@ Label : CODE
         Label : NAME
           one_identifier3
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -45,9 +33,21 @@ Label : CODE
       Label : ELEMENT
         class
         Label : NAME
-          a1
+          absolute_path
         Label : BLOCK
-          {
+          ;
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+      Label : ELEMENT
+        class
+        Label : NAME
+          one_identifier
+        Label : BLOCK
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -59,13 +59,13 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         class
         Label : NAME
           path
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -77,13 +77,13 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         class
         Label : NAME
           path2
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             const
             Label : NAME
@@ -99,73 +99,7 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
-      Label : ELEMENT
-        use
-        Label : USE
-          one_identifier
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            absolute_path
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path
-          Label : SUBNAME
-            complex
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path2
-          Label : SUBNAME
-            complex
-          Label : SUBNAME
-            absolute
-      Label : ELEMENT
-        use
-        Label : USE
-          as
-          Label : SUBNAME
-            one_identifier3
-          Label : AS
-            a1
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            absolute_path3
-          Label : AS
-            a2
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path3
-          Label : SUBNAME
-            complex
-          Label : AS
-            a3
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path32
-          Label : SUBNAME
-            complex
-          Label : SUBNAME
-            absolute
-          Label : AS
-            a4
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -235,8 +169,72 @@ Label : CODE
         Label : NAME
           y
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path32
+          Label : SUBNAME
+            complex
+          Label : SUBNAME
+            absolute
+          Label : AS
+            a4
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path3
+          Label : SUBNAME
+            complex
+          Label : AS
+            a3
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            absolute_path3
+          Label : AS
+            a2
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : SUBNAME
+            one_identifier3
+          Label : AS
+            a1
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path2
+          Label : SUBNAME
+            complex
+          Label : SUBNAME
+            absolute
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path
+          Label : SUBNAME
+            complex
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            absolute_path
+      Label : ELEMENT
+        use
+        Label : USE
+          one_identifier
     Label : NAMESPACE
       x

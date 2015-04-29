@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ::
       Label : METHOD
@@ -14,12 +16,12 @@ Label : CODE
             !
             Label : NOT
               instanceof
+              Label : VARIABLE
+                $d
               Label : CLASS
                 \
                 Label : SUBNAME
                   E
-              Label : VARIABLE
-                $d
           Label : ARGUMENT
             null
           Label : ARGUMENT
@@ -28,5 +30,3 @@ Label : CODE
         \
         Label : SUBNAME
           b
-    Label : LEFT
-      $a

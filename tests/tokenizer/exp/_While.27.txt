@@ -37,10 +37,10 @@ Label : ELEMENT
                       void
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'F'
                         Label : VALUE
                           $a
+                        Label : KEY
+                          'F'
                   Label : ARGUMENT
                     'E'
 Label : ELEMENT

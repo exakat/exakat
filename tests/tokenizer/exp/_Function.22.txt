@@ -6,19 +6,19 @@ Label : CODE
     function
     Label : NAME
       a
+    Label : BLOCK
+      void
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         =
-        Label : LEFT
-          $y
         Label : RIGHT
           true
+        Label : LEFT
+          $y
       Label : ARGUMENT
         =
-        Label : LEFT
-          $x
         Label : RIGHT
           null
-    Label : BLOCK
-      void
+        Label : LEFT
+          $x

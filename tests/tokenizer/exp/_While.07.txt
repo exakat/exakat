@@ -3,38 +3,32 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        -
-        Label : RIGHT
-          [
-          Label : VARIABLE
-            $r
-          Label : INDEX
-            $s
-        Label : LEFT
-          +
-          Label : RIGHT
-            !
-            Label : NOT
-              3
-          Label : LEFT
-            +
-            Label : RIGHT
-              2
-            Label : LEFT
-              1
-    Label : THEN
-      {
-      Label : ELEMENT
-        void
-  Label : ELEMENT
     while
     Label : CONDITION
       1
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      -
+      Label : RIGHT
+        [
+        Label : VARIABLE
+          $r
+        Label : INDEX
+          $s
+      Label : LEFT
+        +
+        Label : RIGHT
+          !
+          Label : NOT
+            3
+        Label : LEFT
+          +
+          Label : RIGHT
+            2
+          Label : LEFT
+            1
+    Label : THEN
+      void

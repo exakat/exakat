@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -15,11 +15,9 @@ Label : CODE
           Label : ARGUMENT
             void
         Label : NAME
-          a
+          c
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
         Label : STATIC
           static
       Label : ELEMENT
@@ -31,9 +29,7 @@ Label : CODE
         Label : NAME
           b
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
         Label : STATIC
           static
       Label : ELEMENT
@@ -43,10 +39,8 @@ Label : CODE
           Label : ARGUMENT
             void
         Label : NAME
-          c
+          a
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
         Label : STATIC
           static

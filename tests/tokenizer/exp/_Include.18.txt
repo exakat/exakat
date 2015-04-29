@@ -38,7 +38,7 @@ Label : CODE
                   E
     Label : LEFT
       ::
-      Label : PROPERTY
-        $a
       Label : CLASS
         B
+      Label : PROPERTY
+        $a

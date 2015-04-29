@@ -9,9 +9,15 @@ Label : CODE
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'v'
+      Label : ELEMENT
         case
-        Label : CASE
-          'm'
         Label : CODE
           ;
           Label : ELEMENT
@@ -21,17 +27,15 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                ::
-                Label : METHOD
-                  q
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'r'
-                Label : CLASS
-                  P
+              ::
+              Label : CLASS
+                P
+              Label : METHOD
+                q
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'r'
             Label : THEN
               ;
               Label : ELEMENT
@@ -46,18 +50,10 @@ Label : CODE
               'o'
             Label : LEFT
               $n
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'v'
+        Label : CASE
+          'm'
       Label : ELEMENT
         case
-        Label : CASE
-          'd'
         Label : CODE
           ;
           Label : ELEMENT
@@ -67,17 +63,15 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                ::
-                Label : METHOD
-                  h
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'i'
-                Label : CLASS
-                  G
+              ::
+              Label : CLASS
+                G
+              Label : METHOD
+                h
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'i'
             Label : THEN
               ;
               Label : ELEMENT
@@ -92,13 +86,15 @@ Label : CODE
               'f'
             Label : LEFT
               $e
+        Label : CASE
+          'd'
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           ;
           Label : ELEMENT
             return
             Label : RETURN
               'c'
+        Label : CASE
+          'b'

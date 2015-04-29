@@ -5,23 +5,19 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'a'
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'b'
+      ==
+      Label : RIGHT
+        'a'
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $c
+        Label : INDEX
+          'b'
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -43,24 +39,14 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $d
+          $s
         Label : THEN
-          {
-          Label : ELEMENT
-            void
+          void
+        Label : ELSE
+          void
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $s
+          $d
         Label : THEN
-          {
-          Label : ELEMENT
-            void
-        Label : ELSE
-          {
-          Label : ELEMENT
-            void
+          void

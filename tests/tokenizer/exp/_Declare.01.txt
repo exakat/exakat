@@ -6,7 +6,7 @@ Label : CODE
     declare
     Label : TICKS
       =
-      Label : LEFT
-        ticks
       Label : RIGHT
         2
+      Label : LEFT
+        ticks

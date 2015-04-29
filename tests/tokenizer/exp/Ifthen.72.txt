@@ -37,10 +37,10 @@ Label : ELEMENT
                           void
                           Label : ARGUMENT
                             =>
-                            Label : KEY
-                              'K'
                             Label : VALUE
                               'L'
+                            Label : KEY
+                              'K'
                       Label : ARGUMENT
                         I
                         Label : ARGUMENTS

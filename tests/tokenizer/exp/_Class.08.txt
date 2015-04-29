@@ -6,11 +6,11 @@ Label : CODE
     class
     Label : NAME
       x
+    Label : BLOCK
+      void
     Label : IMPLEMENTS
       c
     Label : IMPLEMENTS
       b
     Label : IMPLEMENTS
       a
-    Label : BLOCK
-      void

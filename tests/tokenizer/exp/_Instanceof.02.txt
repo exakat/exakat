@@ -5,49 +5,47 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          (
-          Label : CODE
-            ||
-            Label : RIGHT
-              instanceof
-              Label : CLASS
-                ArrayAccess
-              Label : VARIABLE
+      !
+      Label : NOT
+        (
+        Label : CODE
+          ||
+          Label : RIGHT
+            instanceof
+            Label : CLASS
+              ArrayAccess
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                [
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : PROPERTY
+                    f
+                Label : INDEX
+                  $g
+              Label : PROPERTY
+                h
+          Label : LEFT
+            is_array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 ->
                 Label : OBJECT
                   [
                   Label : VARIABLE
                     ->
                     Label : OBJECT
-                      $e
+                      $a
                     Label : PROPERTY
-                      f
+                      b
                   Label : INDEX
-                    $g
+                    $c
                 Label : PROPERTY
-                  h
-            Label : LEFT
-              is_array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    [
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $a
-                      Label : PROPERTY
-                        b
-                    Label : INDEX
-                      $c
-                  Label : PROPERTY
-                    d
+                  d
     Label : THEN
       ;
       Label : ELEMENT

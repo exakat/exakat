@@ -17,17 +17,15 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $this
-            Label : INDEX
-              'F'
+      isset
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $this
+          Label : INDEX
+            'F'
     Label : THEN
       ;
       Label : ELEMENT

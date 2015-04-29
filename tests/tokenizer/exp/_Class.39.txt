@@ -42,10 +42,10 @@ Label : CODE
           public
       Label : ELEMENT
         const
-        Label : VALUE
-          3
         Label : NAME
           b
+        Label : VALUE
+          3
       Label : ELEMENT
         ppp
         Label : VALUE

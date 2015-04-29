@@ -6,7 +6,7 @@ Label : CODE
     ++
     Label : POSTPLUSPLUS
       ::
-      Label : CLASS
-        a
       Label : PROPERTY
         $b
+      Label : CLASS
+        a

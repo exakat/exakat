@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -14,8 +12,6 @@ Label : CODE
           void
         Label : ARGUMENT
           =>
-          Label : KEY
-            'Z'
           Label : VALUE
             ?
             Label : CONDITION
@@ -50,10 +46,10 @@ Label : CODE
                 $e
               Label : INDEX
                 'AF'
+          Label : KEY
+            'Z'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'S'
           Label : VALUE
             T
             Label : ARGUMENTS
@@ -74,10 +70,10 @@ Label : CODE
                         Y
                     Label : ARGUMENT
                       'W'
+          Label : KEY
+            'S'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'M'
           Label : VALUE
             ::
             Label : CLASS
@@ -94,10 +90,10 @@ Label : CODE
                     R
                 Label : ARGUMENT
                   'P'
+          Label : KEY
+            'M'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'I'
           Label : VALUE
             ?
             Label : CONDITION
@@ -114,10 +110,10 @@ Label : CODE
               K
             Label : ELSE
               L
+          Label : KEY
+            'I'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'B'
           Label : VALUE
             ::
             Label : CLASS
@@ -136,3 +132,7 @@ Label : CODE
                     G
                 Label : ARGUMENT
                   'E'
+          Label : KEY
+            'B'
+    Label : LEFT
+      $a

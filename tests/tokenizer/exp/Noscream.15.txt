@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       @
       Label : AT
@@ -16,5 +18,3 @@ Label : CODE
               $d
         Label : CLASS
           B
-    Label : LEFT
-      $a

@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     +
-    Label : RIGHT
-      --
-      Label : PREPLUSPLUS
-        $y
     Label : LEFT
       ++
       Label : POSTPLUSPLUS
         $x
+    Label : RIGHT
+      --
+      Label : PREPLUSPLUS
+        $y
   Label : ELEMENT
     +
-    Label : RIGHT
-      ++
-      Label : POSTPLUSPLUS
-        $y
     Label : LEFT
       --
       Label : PREPLUSPLUS
         $x
+    Label : RIGHT
+      ++
+      Label : POSTPLUSPLUS
+        $y

@@ -10,8 +10,6 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          1
         Label : CODE
           ;
           Label : ELEMENT
@@ -26,3 +24,5 @@ Label : CODE
               1
             Label : LEFT
               $x
+        Label : CASE
+          1

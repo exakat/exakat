@@ -6,16 +6,6 @@ Label : CODE
     if
     Label : CONDITION
       ||
-      Label : LEFT
-        empty
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'b'
       Label : RIGHT
         !
         Label : NOT
@@ -38,15 +28,25 @@ Label : CODE
                 $c
               Label : INDEX
                 'd'
+      Label : LEFT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'b'
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : RIGHT
+          'j'
         Label : LEFT
           [
           Label : VARIABLE
             $h
           Label : INDEX
             'i'
-        Label : RIGHT
-          'j'

@@ -10,16 +10,6 @@ Label : CODE
         if
         Label : CONDITION
           &&
-          Label : LEFT
-            &&
-            Label : LEFT
-              $r
-            Label : RIGHT
-              empty
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $s
           Label : RIGHT
             !
             Label : NOT
@@ -28,20 +18,28 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $t
+          Label : LEFT
+            &&
+            Label : RIGHT
+              empty
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $s
+            Label : LEFT
+              $r
         Label : THEN
           ;
           Label : ELEMENT
             =
-            Label : LEFT
-              $u
             Label : RIGHT
               I
+            Label : LEFT
+              $u
       Label : ELEMENT
         if
         Label : CONDITION
           &&
-          Label : LEFT
-            $n
           Label : RIGHT
             !
             Label : NOT
@@ -50,38 +48,40 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $o
+          Label : LEFT
+            $n
         Label : THEN
           ;
           Label : ELEMENT
             .=
-            Label : LEFT
-              $p
             Label : RIGHT
               Concatenation
               Label : CONCAT
                 'H'
               Label : CONCAT
                 $q
+            Label : LEFT
+              $p
       Label : ELEMENT
         if
         Label : CONDITION
           &&
-          Label : LEFT
-            &&
-            Label : LEFT
-              $k
-            Label : RIGHT
-              empty
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $l
           Label : RIGHT
             empty
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $m
+          Label : LEFT
+            &&
+            Label : RIGHT
+              empty
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $l
+            Label : LEFT
+              $k
         Label : THEN
           ;
           Label : ELEMENT
@@ -122,30 +122,30 @@ Label : CODE
               void
           Label : ELEMENT
             =
-            Label : LEFT
-              $j
             Label : RIGHT
               G
+            Label : LEFT
+              $j
           Label : ELEMENT
             =
-            Label : LEFT
-              $h
             Label : RIGHT
               [
               Label : VARIABLE
                 $i
               Label : INDEX
                 0
+            Label : LEFT
+              $h
       Label : ELEMENT
         =
-        Label : LEFT
-          $c
         Label : RIGHT
           B
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $d
+        Label : LEFT
+          $c
     Label : VALUE
       $b
     Label : SOURCE
@@ -164,21 +164,21 @@ Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : RIGHT
+          $z
         Label : LEFT
           ->
           Label : OBJECT
             $y
           Label : PROPERTY
             K
-        Label : RIGHT
-          $z
   Label : ELEMENT
     =
+    Label : RIGHT
+      $w
     Label : LEFT
       ->
       Label : OBJECT
         $v
       Label : PROPERTY
         J
-    Label : RIGHT
-      $w

@@ -7,13 +7,11 @@ Label : CODE
     Label : NAME
       B
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         use
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
         Label : USE
           G
         Label : USE

@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     /
-    Label : LEFT
-      2
     Label : RIGHT
       8
+    Label : LEFT
+      2

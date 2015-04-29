@@ -32,10 +32,10 @@ Label : CODE
               D
             Label : SUBNAME
               C
-          Label : VARIABLE
-            $c
           Label : CODE
             void
+          Label : VARIABLE
+            $c
   Label : ELEMENT
     if
     Label : CONDITION

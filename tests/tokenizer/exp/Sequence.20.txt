@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $f
     Label : RIGHT
       <<<EOF
 
@@ -26,6 +24,8 @@ Label : CODE
         Label : CONCAT
           
 
+    Label : LEFT
+      $f
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -40,17 +40,17 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $e
         Label : RIGHT
           1
+        Label : LEFT
+          $e
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       [
       Label : VARIABLE
         $b
       Label : INDEX
         'c'
+    Label : LEFT
+      $a

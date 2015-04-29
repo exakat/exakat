@@ -30,23 +30,23 @@ Label : CODE
                 Arguments
                 Label : ARGUMENT
                   =>
-                  Label : KEY
-                    'F'
                   Label : VALUE
                     Concatenation
                     Label : CONCAT
                       'H'
                     Label : CONCAT
                       G
+                  Label : KEY
+                    'F'
                 Label : ARGUMENT
                   =>
-                  Label : KEY
-                    'C'
                   Label : VALUE
                     Concatenation
                     Label : CONCAT
                       'E'
                     Label : CONCAT
                       D
+                  Label : KEY
+                    'C'
     Label : LEFT
       $a

@@ -7,35 +7,7 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
-      Label : ELEMENT
-        const
-        Label : NAME
-          A1
-        Label : VALUE
-          1
-      Label : ELEMENT
-        const
-        Label : NAME
-          A2
-        Label : VALUE
-          1
-      Label : ELEMENT
-        const
-        Label : NAME
-          B2
-        Label : VALUE
-          '2'
-      Label : ELEMENT
-        const
-        Label : NAME
-          C3
-        Label : VALUE
-          ::
-          Label : CLASS
-            D
-          Label : CONSTANT
-            E
+      ;
       Label : ELEMENT
         const
         Label : NAME
@@ -54,6 +26,16 @@ Label : CODE
           F4
         Label : VALUE
           4
+      Label : ELEMENT
+        const
+        Label : NAME
+          C3
+        Label : VALUE
+          ::
+          Label : CLASS
+            D
+          Label : CONSTANT
+            E
       Label : ELEMENT
         const
         Label : NAME
@@ -103,18 +85,6 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
-          A6
-        Label : VALUE
-          1
-      Label : ELEMENT
-        const
-        Label : NAME
-          B6
-        Label : VALUE
-          '2'
-      Label : ELEMENT
-        const
-        Label : NAME
           C6
         Label : VALUE
           ::
@@ -131,6 +101,24 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
+          A6
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          B6
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          A5
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
           G6
         Label : VALUE
           5
@@ -143,9 +131,15 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
-          A5
+          F5
         Label : VALUE
-          1
+          4
+      Label : ELEMENT
+        const
+        Label : NAME
+          G5
+        Label : VALUE
+          5
       Label : ELEMENT
         const
         Label : NAME
@@ -165,24 +159,6 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
-          F5
-        Label : VALUE
-          4
-      Label : ELEMENT
-        const
-        Label : NAME
-          G5
-        Label : VALUE
-          5
-      Label : ELEMENT
-        const
-        Label : NAME
-          A4
-        Label : VALUE
-          1
-      Label : ELEMENT
-        const
-        Label : NAME
           B4
         Label : VALUE
           '2'
@@ -196,3 +172,27 @@ Label : CODE
             D
           Label : CONSTANT
             E
+      Label : ELEMENT
+        const
+        Label : NAME
+          A4
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          B2
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          A2
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          A1
+        Label : VALUE
+          1

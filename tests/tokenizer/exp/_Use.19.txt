@@ -5,63 +5,17 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
-        use
-        Label : CONST
-          \
-          Label : SUBNAME
-            c
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
-      Label : ELEMENT
-        use
-        Label : FUNCTION
-          \
-          Label : SUBNAME
-            f
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
-      Label : ELEMENT
-        use
-        Label : CONST
-          \
-          Label : SUBNAME
-            FOO3
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
-        Label : CONST
-          \
-          Label : SUBNAME
-            FOO2
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
-      Label : ELEMENT
-        use
-        Label : FUNCTION
-          \
-          Label : SUBNAME
-            FOO3
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
-        Label : FUNCTION
-          \
-          Label : SUBNAME
-            FOO2
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              "\n"
+            Label : CONCAT
+              FOO
       Label : ELEMENT
         use
         Label : CONST
@@ -97,16 +51,6 @@ Label : CODE
           Label : ARGUMENT
             void
       Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              "\n"
-            Label : CONCAT
-              FOO
-      Label : ELEMENT
         use
         Label : CONST
           \
@@ -140,18 +84,68 @@ Label : CODE
             Name
           Label : AS
             a2
+      Label : ELEMENT
+        use
+        Label : FUNCTION
+          \
+          Label : SUBNAME
+            FOO3
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+        Label : FUNCTION
+          \
+          Label : SUBNAME
+            FOO2
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+      Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO3
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO2
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+      Label : ELEMENT
+        use
+        Label : FUNCTION
+          \
+          Label : SUBNAME
+            f
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+      Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : SUBNAME
+            c
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
     Label : NAMESPACE
       Global
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
-      Label : ELEMENT
-        const
-        Label : NAME
-          FOO
-        Label : VALUE
-          42
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -172,6 +166,12 @@ Label : CODE
                   "\n"
                 Label : CONCAT
                   __FUNCTION__
+      Label : ELEMENT
+        const
+        Label : NAME
+          FOO
+        Label : VALUE
+          42
     Label : NAMESPACE
       \
       Label : SUBNAME

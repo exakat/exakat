@@ -38,6 +38,20 @@ Label : CODE
       Label : ELEMENT
         K
       Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            J
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+      Label : ELEMENT
+        S
+      Label : ELEMENT
+        N
+      Label : ELEMENT
         K
       Label : ELEMENT
         echo
@@ -58,20 +72,6 @@ Label : CODE
                 Label : INDEX
                   'R'
       Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            J
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
-      Label : ELEMENT
-        S
-      Label : ELEMENT
-        N
-      Label : ELEMENT
         foreach
         Label : BLOCK
           ;
@@ -79,6 +79,8 @@ Label : CODE
             if
             Label : CONDITION
               >
+              Label : RIGHT
+                0
               Label : LEFT
                 [
                 Label : VARIABLE
@@ -93,8 +95,6 @@ Label : CODE
                     $e
                   Label : PROPERTY
                     E
-              Label : RIGHT
-                0
             Label : THEN
               ;
               Label : ELEMENT
@@ -133,9 +133,9 @@ Label : CODE
         B
     Label : VALUE
       =>
-      Label : KEY
-        $b
       Label : VALUE
         $c
+      Label : KEY
+        $b
     Label : SOURCE
       $a

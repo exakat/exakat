@@ -4,17 +4,27 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'b'
-        Label : LEFT
-          $a
+      ==
+      Label : RIGHT
+        'b'
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT
         foreach
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $h
+                Label : PROPERTY
+                  i
         Label : VALUE
           $g
         Label : SOURCE
@@ -31,15 +41,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 'f'
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $h
-                Label : PROPERTY
-                  i

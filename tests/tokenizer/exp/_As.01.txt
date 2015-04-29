@@ -6,7 +6,7 @@ Label : CODE
     Label : NAME
       B
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         use
         Label : BLOCK

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      $z
     Label : BLOCK
       for
       Label : BLOCK
@@ -14,19 +16,17 @@ Label : CODE
             $c
       Label : INIT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           0
-      Label : FINAL
-        <
         Label : LEFT
           $a
+      Label : FINAL
+        <
         Label : RIGHT
           10
+        Label : LEFT
+          $a
       Label : INCREMENT
         ++
         Label : POSTPLUSPLUS
           $a
-    Label : CONDITION
-      $z

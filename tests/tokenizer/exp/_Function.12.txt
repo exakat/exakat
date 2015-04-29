@@ -6,13 +6,13 @@ Label : CODE
     function
     Label : NAME
       x
+    Label : BLOCK
+      void
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         =
-        Label : LEFT
-          $y
         Label : RIGHT
           2
-    Label : BLOCK
-      void
+        Label : LEFT
+          $y

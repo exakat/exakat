@@ -37,6 +37,8 @@ Label : CODE
           ;
           Label : ELEMENT
             =
+            Label : RIGHT
+              $af
             Label : LEFT
               [
               Label : VARIABLE
@@ -45,8 +47,6 @@ Label : CODE
                   $ae
                 Label : INDEX
                   'R'
-            Label : RIGHT
-              $af
           Label : ELEMENT
             foreach
             Label : BLOCK
@@ -57,6 +57,10 @@ Label : CODE
                   ;
                   Label : ELEMENT
                     =
+                    Label : RIGHT
+                      (string)
+                      Label : CAST
+                        $ad
                     Label : LEFT
                       [
                       Label : VARIABLE
@@ -77,16 +81,12 @@ Label : CODE
                               'Q'
                         Label : CONCAT
                           $aa
-                    Label : RIGHT
-                      (string)
-                      Label : CAST
-                        $ad
                 Label : VALUE
                   =>
-                  Label : KEY
-                    $x
                   Label : VALUE
                     $y
+                  Label : KEY
+                    $x
                 Label : SOURCE
                   ->
                   Label : OBJECT
@@ -99,28 +99,16 @@ Label : CODE
                         $w
             Label : VALUE
               =>
-              Label : KEY
-                $t
               Label : VALUE
                 $u
+              Label : KEY
+                $t
             Label : SOURCE
               $s
           Label : ELEMENT
             =
-            Label : LEFT
-              $p
             Label : RIGHT
               +
-              Label : LEFT
-                array
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'L'
-                    Label : VALUE
-                      NULL
               Label : RIGHT
                 ->
                 Label : OBJECT
@@ -131,20 +119,30 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       N
+              Label : LEFT
+                array
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    =>
+                    Label : VALUE
+                      NULL
+                    Label : KEY
+                      'L'
+            Label : LEFT
+              $p
           Label : ELEMENT
             =
-            Label : LEFT
-              $r
             Label : RIGHT
               array
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
+            Label : LEFT
+              $r
           Label : ELEMENT
             =
-            Label : LEFT
-              $m
             Label : RIGHT
               [
               Label : VARIABLE
@@ -159,26 +157,26 @@ Label : CODE
                   K
               Label : INDEX
                 $o
+            Label : LEFT
+              $m
         Label : INIT
           =
-          Label : LEFT
-            $i
           Label : RIGHT
             1
+          Label : LEFT
+            $i
         Label : FINAL
           <
-          Label : LEFT
-            $j
           Label : RIGHT
             $k
+          Label : LEFT
+            $j
         Label : INCREMENT
           ++
           Label : POSTPLUSPLUS
             $l
       Label : ELEMENT
         =
-        Label : LEFT
-          $f
         Label : RIGHT
           F
           Label : ARGUMENTS
@@ -199,14 +197,12 @@ Label : CODE
                     I
             Label : ARGUMENT
               $g
+        Label : LEFT
+          $f
       Label : ELEMENT
         if
         Label : CONDITION
           =
-          Label : LEFT
-            !
-            Label : NOT
-              $a
           Label : RIGHT
             ->
             Label : OBJECT
@@ -217,16 +213,14 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $c
+          Label : LEFT
+            !
+            Label : NOT
+              $a
         Label : THEN
           ;
           Label : ELEMENT
             =
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $d
-              Label : INDEX
-                'C'
             Label : RIGHT
               (string)
               Label : CAST
@@ -239,6 +233,12 @@ Label : CODE
                     D
                 Label : PROPERTY
                   E
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                'C'
     Label : ELSE
       Block with else
       Label : ELEMENT

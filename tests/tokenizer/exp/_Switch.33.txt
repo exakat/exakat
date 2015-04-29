@@ -10,8 +10,6 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -47,18 +45,18 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                !
-                Label : NOT
-                  ->
-                  Label : OBJECT
-                    $c
-                  Label : PROPERTY
-                    d
+              !
+              Label : NOT
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  d
             Label : THEN
               ;
               Label : ELEMENT
                 exit
                 Label : ARGUMENTS
                   void
+        Label : CASE
+          'b'

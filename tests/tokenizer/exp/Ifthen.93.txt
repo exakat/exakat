@@ -6,20 +6,20 @@ Label : CODE
     if
     Label : CONDITION
       ==
-      Label : LEFT
-        $a
       Label : RIGHT
         1
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
           ==
-          Label : LEFT
-            $a
           Label : RIGHT
             2
+          Label : LEFT
+            $a
         Label : THEN
           ;
           Label : ELEMENT
@@ -46,7 +46,7 @@ Label : CODE
               false
       Label : ELEMENT
         =
-        Label : LEFT
-          $newHash
         Label : RIGHT
           ''
+        Label : LEFT
+          $newHash

@@ -25,17 +25,7 @@ Label : CODE
     Label : NAME
       C
     Label : BLOCK
-      {
-      Label : ELEMENT
-        static
-        Label : STATIC
-          static
-        Label : PUBLIC
-          public
-        Label : VALUE
-          'f'
-        Label : DEFINE
-          $y
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -50,6 +40,16 @@ Label : CODE
             return
             Label : RETURN
               'b'
+      Label : ELEMENT
+        static
+        Label : STATIC
+          static
+        Label : VALUE
+          'f'
+        Label : DEFINE
+          $y
+        Label : PUBLIC
+          public
   Label : ELEMENT
     =
     Label : RIGHT

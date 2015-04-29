@@ -6,13 +6,13 @@ Label : CODE
     function
     Label : NAME
       aasdfasf
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $b
     Label : BLOCK
       ;
       Label : ELEMENT
         return
         Label : RETURN
           1
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $b

@@ -4,11 +4,9 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          $a
+      !
+      Label : NOT
+        $a
     Label : THEN
       ;
       Label : ELEMENT

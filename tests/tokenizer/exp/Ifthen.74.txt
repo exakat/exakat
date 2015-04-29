@@ -39,20 +39,18 @@ Label : ELEMENT
       if
       Label : CONDITION
         ==
+        Label : RIGHT
+          'E'
         Label : LEFT
           C
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'D'
-        Label : RIGHT
-          'E'
       Label : THEN
         ;
         Label : ELEMENT
           M
-        Label : ELEMENT
-          I
         Label : ELEMENT
           if
           Label : CONDITION
@@ -81,6 +79,8 @@ Label : ELEMENT
                         $b
                       Label : INDEX
                         'M'
+        Label : ELEMENT
+          I
         Label : ELEMENT
           G
           Label : ARGUMENTS

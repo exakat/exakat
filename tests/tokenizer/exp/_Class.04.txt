@@ -6,7 +6,7 @@ Label : CODE
     class
     Label : NAME
       x
-    Label : IMPLEMENTS
-      z
     Label : BLOCK
       void
+    Label : IMPLEMENTS
+      z

@@ -20,9 +20,9 @@ Label : CODE
           $a
     Label : CATCH
       catch
+      Label : CODE
+        void
       Label : VARIABLE
         $e
       Label : CLASS
         Exception
-      Label : CODE
-        void

@@ -5,21 +5,19 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                B
-            Label : INDEX
-              'C'
+      isset
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              B
+          Label : INDEX
+            'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -40,10 +38,10 @@ Label : CODE
                 void
               Label : ARGUMENT
                 =>
-                Label : KEY
-                  'Q'
                 Label : VALUE
                   'R'
+                Label : KEY
+                  'Q'
           Label : LEFT
             $b
       Label : ELEMENT

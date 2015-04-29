@@ -4,16 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     &&
-    Label : RIGHT
-      f
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $g
-          Label : INDEX
-            'h'
     Label : LEFT
       ->
       Label : OBJECT
@@ -40,3 +30,13 @@ Label : CODE
               $d
             Label : INDEX
               'e'
+    Label : RIGHT
+      f
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $g
+          Label : INDEX
+            'h'

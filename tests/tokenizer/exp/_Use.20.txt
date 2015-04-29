@@ -11,7 +11,7 @@ Label : CODE
         Label : NAME
           F
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             use
             Label : BLOCK

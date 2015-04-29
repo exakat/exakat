@@ -6,6 +6,8 @@ Label : CODE
     function
     Label : NAME
       b
+    Label : BLOCK
+      void
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -26,5 +28,3 @@ Label : CODE
           $a
         Label : CLASS
           CLASSE
-    Label : BLOCK
-      void

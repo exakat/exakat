@@ -20,16 +20,16 @@ Label : CODE
             yield
             Label : YIELD
               =>
-              Label : KEY
-                $k
               Label : VALUE
                 $v
+              Label : KEY
+                $k
         Label : VALUE
           =>
-          Label : KEY
-            $k
           Label : VALUE
             $v
+          Label : KEY
+            $k
         Label : SOURCE
           $y
       Label : ELEMENT
@@ -40,16 +40,16 @@ Label : CODE
             Arguments
             Label : ARGUMENT
               =>
-              Label : KEY
-                3
               Label : VALUE
                 4
+              Label : KEY
+                3
             Label : ARGUMENT
               =>
-              Label : KEY
-                1
               Label : VALUE
                 2
+              Label : KEY
+                1
         Label : LEFT
           $y
   Label : ELEMENT
@@ -74,10 +74,10 @@ Label : CODE
                 \n
     Label : VALUE
       =>
-      Label : KEY
-        $k
       Label : VALUE
         $v
+      Label : KEY
+        $k
     Label : SOURCE
       x
       Label : ARGUMENTS

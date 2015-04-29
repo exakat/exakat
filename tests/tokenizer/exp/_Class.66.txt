@@ -42,8 +42,6 @@ Label : CODE
     class
     Label : NAME
       A2
-    Label : EXTENDS
-      B
     Label : IMPLEMENTS
       E
     Label : IMPLEMENTS
@@ -52,15 +50,17 @@ Label : CODE
       C
     Label : BLOCK
       void
+    Label : EXTENDS
+      B
   Label : ELEMENT
     class
     Label : NAME
       A1
-    Label : EXTENDS
-      B
     Label : IMPLEMENTS
       D
     Label : IMPLEMENTS
       C
     Label : BLOCK
       void
+    Label : EXTENDS
+      B

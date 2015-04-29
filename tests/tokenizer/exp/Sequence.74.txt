@@ -4,6 +4,26 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      M
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          N
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              P
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'Q'
+            Label : ARGUMENT
+              'O'
     Label : LEFT
       @
       Label : AT
@@ -40,26 +60,6 @@ Label : CODE
               $a
             Label : INDEX
               'H'
-    Label : RIGHT
-      M
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          N
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              P
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $f
-                  Label : INDEX
-                    'Q'
-            Label : ARGUMENT
-              'O'
   Label : ELEMENT
     if
     Label : CONDITION

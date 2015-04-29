@@ -7,23 +7,7 @@ Label : CODE
     Label : NAME
       B
     Label : BLOCK
-      {
-      Label : ELEMENT
-        ppp
-        Label : PROTECTED
-          protected
-        Label : VALUE
-          void
-        Label : DEFINE
-          $a
-      Label : ELEMENT
-        ppp
-        Label : PROTECTED
-          protected
-        Label : VALUE
-          void
-        Label : DEFINE
-          $b
+      Sequence
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -38,3 +22,19 @@ Label : CODE
             return
             Label : RETURN
               $c
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          void
+        Label : DEFINE
+          $b
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          void
+        Label : DEFINE
+          $a
+        Label : PROTECTED
+          protected

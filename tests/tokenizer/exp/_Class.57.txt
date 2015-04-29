@@ -6,9 +6,9 @@ Label : CODE
     class
     Label : NAME
       A
+    Label : BLOCK
+      void
     Label : EXTENDS
       \
       Label : SUBNAME
         B
-    Label : BLOCK
-      void

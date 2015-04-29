@@ -10,10 +10,6 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          @
-          Label : AT
-            B
         Label : CODE
           ;
           Label : ELEMENT
@@ -48,3 +44,7 @@ Label : CODE
                 $this
               Label : PROPERTY
                 C
+        Label : CASE
+          @
+          Label : AT
+            B

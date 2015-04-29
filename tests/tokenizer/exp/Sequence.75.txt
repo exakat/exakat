@@ -8,18 +8,6 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        G
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            I
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'J'
-      Label : ELEMENT
         D
       Label : ELEMENT
         echo
@@ -31,6 +19,20 @@ Label : CODE
               void
               Label : ARGUMENT
                 'G'
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            I
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'J'
+      Label : ELEMENT
+        G
+      Label : ELEMENT
+        void
       Label : ELEMENT
         echo
         Label : ARGUMENTS

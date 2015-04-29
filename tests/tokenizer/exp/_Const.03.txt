@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         const
         Label : NAME

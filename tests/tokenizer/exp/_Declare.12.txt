@@ -10,13 +10,13 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         =
-        Label : LEFT
-          encoding
         Label : RIGHT
           'ISO-8859-1'
+        Label : LEFT
+          encoding
       Label : ARGUMENT
         =
-        Label : LEFT
-          ticks
         Label : RIGHT
           2
+        Label : LEFT
+          ticks

@@ -6,12 +6,6 @@ Label : CODE
     class
     Label : NAME
       A
-    Label : EXTENDS
-      \
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        E
     Label : IMPLEMENTS
       \
       Label : SUBNAME
@@ -20,3 +14,9 @@ Label : CODE
         B
     Label : BLOCK
       void
+    Label : EXTENDS
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        E

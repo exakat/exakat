@@ -6,9 +6,9 @@ Label : CODE
     =
     Label : RIGHT
       ::
-      Label : PROPERTY
-        $_forms
       Label : CLASS
         self
+      Label : PROPERTY
+        $_forms
     Label : LEFT
       $forms

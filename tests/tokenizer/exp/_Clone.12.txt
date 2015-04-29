@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       clone
       Label : CLONE
@@ -20,3 +18,5 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+    Label : LEFT
+      $x

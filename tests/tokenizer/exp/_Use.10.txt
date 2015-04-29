@@ -2,7 +2,7 @@
 Label : CODE
   ;
   Label : ELEMENT
-    {
+    ;
     Label : ELEMENT
       ++
       Label : POSTPLUSPLUS
@@ -12,7 +12,7 @@ Label : CODE
     Label : NAME
       B
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         use
         Label : BLOCK

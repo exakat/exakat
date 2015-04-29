@@ -3,7 +3,7 @@
 Label : CODE
   ;
   Label : ELEMENT
-    {
+    ;
     Label : ELEMENT
       ++
       Label : POSTPLUSPLUS

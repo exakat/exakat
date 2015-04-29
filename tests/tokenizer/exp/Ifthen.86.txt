@@ -39,22 +39,22 @@ Label : ELEMENT
                       Arguments
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'R'
                         Label : VALUE
                           'S'
+                        Label : KEY
+                          'R'
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'P'
                         Label : VALUE
                           'Q'
+                        Label : KEY
+                          'P'
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'N'
                         Label : VALUE
                           'O'
+                        Label : KEY
+                          'N'
                   Label : ARGUMENT
                     ::
                     Label : CLASS

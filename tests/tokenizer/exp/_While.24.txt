@@ -5,25 +5,23 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !=
-        Label : RIGHT
-          strlen
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $h
-              Label : PROPERTY
-                i
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            g
+      !=
+      Label : RIGHT
+        strlen
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $h
+            Label : PROPERTY
+              i
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $f
+        Label : PROPERTY
+          g
     Label : THEN
       ;
       Label : ELEMENT

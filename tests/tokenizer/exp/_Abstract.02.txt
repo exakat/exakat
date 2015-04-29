@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -15,7 +15,7 @@ Label : CODE
           Label : ARGUMENT
             void
         Label : NAME
-          a
+          c
         Label : ABSTRACT
           abstract
       Label : ELEMENT
@@ -35,7 +35,7 @@ Label : CODE
           Label : ARGUMENT
             void
         Label : NAME
-          c
+          a
         Label : ABSTRACT
           abstract
     Label : ABSTRACT

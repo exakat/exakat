@@ -36,8 +36,6 @@ Label : CODE
         new
         Label : NEW
           $a
-          Label : NAME
-            $a
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
@@ -48,3 +46,5 @@ Label : CODE
                   $c
             Label : ARGUMENT
               $b
+          Label : NAME
+            $a

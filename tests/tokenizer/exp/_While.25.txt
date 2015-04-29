@@ -47,21 +47,19 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'd'
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            -
-            Label : RIGHT
-              c
-            Label : LEFT
-              $b
+      ==
+      Label : RIGHT
+        'd'
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          -
+          Label : RIGHT
+            c
+          Label : LEFT
+            $b
     Label : THEN
       ;
       Label : ELEMENT

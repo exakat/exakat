@@ -26,10 +26,10 @@ Label : CODE
         if
         Label : CONDITION
           ==
-          Label : LEFT
-            $d
           Label : RIGHT
             1
+          Label : LEFT
+            $d
         Label : THEN
           ;
           Label : ELEMENT
@@ -48,10 +48,10 @@ Label : CODE
             if
             Label : CONDITION
               ==
-              Label : LEFT
-                $h
               Label : RIGHT
                 2
+              Label : LEFT
+                $h
             Label : THEN
               ;
               Label : ELEMENT

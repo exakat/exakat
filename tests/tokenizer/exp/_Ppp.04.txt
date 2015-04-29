@@ -6,7 +6,7 @@ Label : CODE
     Label : NAME
       x3
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -16,19 +16,17 @@ Label : CODE
         Label : NAME
           __clone
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : PROTECTED
-          protected
+          void
         Label : FINAL
           final
+        Label : PROTECTED
+          protected
   Label : ELEMENT
     class
     Label : NAME
       x2
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -38,19 +36,17 @@ Label : CODE
         Label : NAME
           __clone
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : PUBLIC
-          public
+          void
         Label : FINAL
           final
+        Label : PUBLIC
+          public
   Label : ELEMENT
     class
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -60,10 +56,8 @@ Label : CODE
         Label : NAME
           __clone
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : PRIVATE
-          private
+          void
         Label : FINAL
           final
+        Label : PRIVATE
+          private

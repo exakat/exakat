@@ -3,26 +3,14 @@ Label : CODE
   ;
   Label : ELEMENT
     ||
-    Label : RIGHT
-      ==
-      Label : RIGHT
-        'G'
-      Label : LEFT
-        {
-        Label : VARIABLE
-          ::
-          Label : CLASS
-            c
-          Label : PROPERTY
-            $E
-        Label : INDEX
-          ->
-          Label : OBJECT
-            $d
-          Label : PROPERTY
-            F
     Label : LEFT
       ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B
       Label : RIGHT
         C
         Label : ARGUMENTS
@@ -33,9 +21,21 @@ Label : CODE
               $b
             Label : PROPERTY
               D
+    Label : RIGHT
+      ==
       Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          B
+        {
+        Label : VARIABLE
+          ::
+          Label : PROPERTY
+            $E
+          Label : CLASS
+            c
+        Label : INDEX
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            F
+      Label : RIGHT
+        'G'

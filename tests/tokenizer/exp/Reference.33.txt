@@ -4,18 +4,14 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        &
-        Label : RIGHT
-          $c
-        Label : LEFT
-          ::
-          Label : CLASS
-            A
-          Label : CONSTANT
-            B
+      &
+      Label : RIGHT
+        $c
+      Label : LEFT
+        ::
+        Label : CLASS
+          A
+        Label : CONSTANT
+          B
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void

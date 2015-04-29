@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       clone
       Label : CLONE
@@ -14,3 +12,5 @@ Label : CODE
           $y
         Label : INDEX
           0
+    Label : LEFT
+      $x

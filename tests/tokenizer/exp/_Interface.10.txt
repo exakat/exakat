@@ -6,26 +6,26 @@ Label : CODE
     interface
     Label : NAME
       true
-    Label : EXTENDS
-      i
     Label : BLOCK
       void
+    Label : EXTENDS
+      i
   Label : ELEMENT
     interface
     Label : NAME
       int
-    Label : EXTENDS
-      i
     Label : BLOCK
       void
+    Label : EXTENDS
+      i
   Label : ELEMENT
     interface
     Label : NAME
       null
-    Label : EXTENDS
-      i
     Label : BLOCK
       void
+    Label : EXTENDS
+      i
   Label : ELEMENT
     interface
     Label : NAME

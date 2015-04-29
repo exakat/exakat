@@ -4,6 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          true
+        Label : LEFT
+          $b
     Label : NAME
       a
     Label : BLOCK
@@ -32,11 +40,3 @@ Label : CODE
               Label : CONCAT
                 D
 
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          true
-        Label : LEFT
-          $b

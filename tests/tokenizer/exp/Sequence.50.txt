@@ -8,16 +8,16 @@ Label : CODE
       $a
   Label : ELEMENT
     =
-    Label : LEFT
-      $b
     Label : RIGHT
       2
+    Label : LEFT
+      $b
   Label : ELEMENT
     =
-    Label : LEFT
-      $c
     Label : RIGHT
       3
+    Label : LEFT
+      $c
   Label : ELEMENT
     try
     Label : CODE
@@ -30,14 +30,14 @@ Label : CODE
       catch
       Label : CLASS
         Exception
-      Label : VARIABLE
-        $e
       Label : CODE
         ;
         Label : ELEMENT
           continue
           Label : LEVEL
             void
+      Label : VARIABLE
+        $e
   Label : ELEMENT
     if
     Label : CONDITION

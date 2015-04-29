@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -15,11 +15,107 @@ Label : CODE
           Label : ARGUMENT
             void
         Label : NAME
-          a
+          c6
         Label : BLOCK
-          {
-          Label : ELEMENT
+          void
+        Label : STATIC
+          static
+        Label : FINAL
+          final
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
             void
+        Label : NAME
+          c5
+        Label : BLOCK
+          void
+        Label : STATIC
+          static
+        Label : FINAL
+          final
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          c4
+        Label : BLOCK
+          void
+        Label : STATIC
+          static
+        Label : FINAL
+          final
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          c3
+        Label : BLOCK
+          void
+        Label : STATIC
+          static
+        Label : FINAL
+          final
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          c2
+        Label : BLOCK
+          void
+        Label : STATIC
+          static
+        Label : FINAL
+          final
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          c1
+        Label : BLOCK
+          void
+        Label : STATIC
+          static
+        Label : FINAL
+          final
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          c
+        Label : BLOCK
+          void
+        Label : STATIC
+          static
         Label : FINAL
           final
       Label : ELEMENT
@@ -31,13 +127,11 @@ Label : CODE
         Label : NAME
           b
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
+        Label : FINAL
+          final
         Label : PUBLIC
           public
-        Label : FINAL
-          final
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -45,121 +139,9 @@ Label : CODE
           Label : ARGUMENT
             void
         Label : NAME
-          c
+          a
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : STATIC
-          static
-        Label : FINAL
-          final
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
           void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          c1
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-        Label : FINAL
-          final
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          c2
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-        Label : FINAL
-          final
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          c3
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-        Label : FINAL
-          final
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          c4
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-        Label : FINAL
-          final
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          c5
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-        Label : FINAL
-          final
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          c6
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
         Label : FINAL
           final
     Label : ABSTRACT

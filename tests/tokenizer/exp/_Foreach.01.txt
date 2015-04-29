@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : BLOCK
+      void
     Label : VALUE
       $y
     Label : SOURCE
       $x
-    Label : BLOCK
-      void

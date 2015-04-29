@@ -23,9 +23,9 @@ Label : CODE
               $e
         Label : VALUE
           =>
-          Label : KEY
-            $c
           Label : VALUE
             $d
+          Label : KEY
+            $c
         Label : SOURCE
           $b

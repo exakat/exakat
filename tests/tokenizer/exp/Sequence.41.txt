@@ -10,8 +10,6 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           c
           Label : ARGUMENTS
@@ -20,6 +18,8 @@ Label : CODE
               $e
             Label : ARGUMENT
               'd'
+        Label : LEFT
+          $b
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -42,8 +42,6 @@ Label : CODE
             void
             Label : ARGUMENT
               =>
-              Label : KEY
-                'g'
               Label : VALUE
                 Concatenation
                 Label : CONCAT
@@ -52,5 +50,7 @@ Label : CODE
                   "i"
                 Label : CONCAT
                   H
+              Label : KEY
+                'g'
         Label : ARGUMENT
           $f

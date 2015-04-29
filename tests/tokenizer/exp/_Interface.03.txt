@@ -6,8 +6,6 @@ Label : CODE
     interface
     Label : NAME
       a
-    Label : EXTENDS
-      b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -18,3 +16,5 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+    Label : EXTENDS
+      b

@@ -4,25 +4,25 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        &&
-        Label : RIGHT
-          $d
-        Label : LEFT
-          instanceof
-          Label : CLASS
-            \
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              B
-          Label : VARIABLE
-            $a
+      &&
+      Label : LEFT
+        instanceof
+        Label : VARIABLE
+          $a
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
+      Label : RIGHT
+        $d
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $e
         Label : RIGHT
           ->
           Label : OBJECT
@@ -33,5 +33,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-        Label : LEFT
-          $e
