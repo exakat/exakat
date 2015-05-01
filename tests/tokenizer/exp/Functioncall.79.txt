@@ -1,0 +1,47 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    eval
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $a
+  Label : ELEMENT
+    $b
+    Label : NAME
+      $b
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        0
+  Label : ELEMENT
+    C
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $
+          Label : NAME
+            $a
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'B'
+  Label : ELEMENT
+    eval
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $
+          Label : NAME
+            $a
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'B'

@@ -1,0 +1,51 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    strtolower
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $
+          Label : NAME
+            $e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'G'
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $
+          Label : NAME
+            $e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'F'
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $
+          Label : NAME
+            $e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'E'
+  Label : ELEMENT
+    eval
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $
+          Label : NAME
+            $e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'E'
