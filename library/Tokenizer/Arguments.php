@@ -46,7 +46,7 @@ class Arguments extends TokenAuto {
                                   -1 => array('atom'    => 'yes'),
                                    0 => array('token'   => Arguments::$operators,
                                               'atom'    => 'none',
-                                              'check_for_arguments' => $arguments),
+                                              'checkForArguments' => $arguments),
                                    1 => array('atom'    => 'yes'),
                                    2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET'),
                                                                        Logical::$operators, Comparison::$operators,

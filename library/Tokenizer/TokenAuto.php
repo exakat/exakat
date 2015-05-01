@@ -2905,16 +2905,16 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             unset($conditions['check_for_string']);
         }
 
-        if (isset($conditions['check_for_arguments'])) {
-            if (is_array($conditions['check_for_arguments'])) {
-                $classes = "'".implode("', '", $conditions['check_for_arguments'])."'";
+        if (isset($conditions['checkForArguments'])) {
+            if (is_array($conditions['checkForArguments'])) {
+                $classes = "'".implode("', '", $conditions['checkForArguments'])."'";
             } else {
-                $classes = "'".$conditions['check_for_arguments']."'";
+                $classes = "'".$conditions['checkForArguments']."'";
             }
 
             $finalTokens = array_merge( Token::$alternativeEnding,
                                         array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG',
-                                              'T_OPEN_CURLY', 'T_INLINE_HTML', 'T_CLOSE_BRACKET'));
+                                              'T_OPEN_CURLY', 'T_INLINE_HTML', 'T_CLOSE_BRACKET', 'T_ELSEIF'));
             $finalTokens = "'".implode("', '", $finalTokens)."'";
             $queryConditions[] = <<<GREMLIN
 filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
@@ -2922,7 +2922,7 @@ filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.toke
 .filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }
 GREMLIN;
 
-            unset($conditions['check_for_arguments']);
+            unset($conditions['checkForArguments']);
         }
 
         if (isset($conditions['check_for_namelist'])) {
