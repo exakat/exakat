@@ -219,6 +219,7 @@ foreach($tokens as $t) {
             case T_OPEN_TAG_WITH_ECHO : 
             case T_CALLABLE : 
             case T_UNSET : 
+            case T_EVAL : 
 
             case T_DOLLAR_OPEN_CURLY_BRACES : 
 
