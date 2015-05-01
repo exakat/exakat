@@ -455,15 +455,39 @@ class Load implements Tasks {
                           is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
 
-                          $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                    ->setProperty('code', 'void')
-                                                    ->setProperty('fullcode', ' ')
-                                                    ->setProperty('line', $line)
-                                                    ->setProperty('atom', 'Void')
-                                                    ->setProperty('modifiedBy', 'bin/load26')
-                                                    ->save();
-                          $to_index = false;
+                          if ($previous->getProperty('token') == 'T_VOID') {
+                            print "Previous is VOID\n";
+                                $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                                    ->setProperty('code', ';')
+                                                                    ->setProperty('fullcode', ';')
+                                                                    ->setProperty('line', $line)
+                                                                    ->setProperty('atom', 'Sequence')
+                                                                    ->setProperty('modifiedBy', 'bin/load24a')
+                                                                    ->setProperty('root', 'true')
+                                                                    ->save();
+                                $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
+                                $void = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('rank', 0)
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('atom', 'Void')
+                                                        ->setProperty('modifiedBy', 'bin/load24')
+                                                        ->save();
+                                $T[$Tid]->relateTo($void, 'ELEMENT')->save();
+
+                                $to_index = false;
+                          } else {  
+                              $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('atom', 'Void')
+                                                        ->setProperty('modifiedBy', 'bin/load24')
+                                                        ->save();
+                              $to_index = false;
+                          }
 
                           // Just skip those two. 
                         $id++;
@@ -859,7 +883,7 @@ class Load implements Tasks {
                                                         ->save();
                         $to_index = false;
                 } elseif ($token == ':' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])
-                          && in_array($this->php->getTokenname($tokens[$id + 1][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
+                          && in_array($this->php->getTokenname($tokens[$id + 1][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_ENDSWITCH'))) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                   ->setProperty('code', $token)
                                                   ->setProperty('line', $line)
