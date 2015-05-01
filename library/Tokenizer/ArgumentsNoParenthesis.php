@@ -33,7 +33,7 @@ class ArgumentsNoParenthesis extends Arguments {
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
                                                'token'      => array('T_REQUIRE', 'T_REQUIRE_ONCE', 'T_INCLUDE_ONCE', 'T_INCLUDE',
-                                                                     'T_PRINT',   'T_EXIT', 'T_ECHO') ),
+                                                                     'T_PRINT', 'T_EXIT', 'T_ECHO') ),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Arguments'),
                                     2 => array('token'      => array_merge(self::$alternativeEnding,

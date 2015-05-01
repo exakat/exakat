@@ -2951,7 +2951,7 @@ GREMLIN;
             
             $finalTokens = array_merge(Token::$alternativeEnding,
                            array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_CLOSE_CURLY', 'T_DOUBLE_ARROW', 'T_COMMA',
-                                 'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION',
+                                 'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_VOID',
                                  'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND', 'T_OR',
                                  'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                  'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',

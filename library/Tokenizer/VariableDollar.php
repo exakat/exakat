@@ -38,7 +38,8 @@ class VariableDollar extends TokenAuto {
         
         $this->actions = array( 'transform'  => array(1 => 'NAME'),
                                 'atom'       => 'Variable',
-                                'cleanIndex' => true);
+                                'cleanIndex' => true,
+                                'keepIndexed' => true);
         $this->checkAuto();
 
         // global $$x->c
@@ -56,9 +57,9 @@ class VariableDollar extends TokenAuto {
 
         // ${x}
         $this->conditions = array(0 => array('token' => VariableDollar::$operators,
-                                             'atom' => 'none'),
+                                             'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_CURLY'),
-                                  2 => array('atom' => 'yes'),
+                                  2 => array('atom'  => 'yes'),
                                   3 => array('token' => 'T_CLOSE_CURLY'),
         );
         

@@ -46,14 +46,15 @@ class Concatenation extends TokenAuto {
                                                                             'T_ELSE', 'T_YIELD'))),
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => 'T_DOT',
-                                              'check_for_concatenation' => $operands),
+                                              'check_for_concatenation' => $operands
+                                              ),
                                    1 => array('atom'  => $operands),
                                    2 => array('token' => array_merge(Comparison::$operators, Logical::$operators,
                                                           Power::$operators, Addition::$operators, Multiplication::$operators,
                                                           Token::$alternativeEnding,
                                                           array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 'T_CLOSE_TAG',
                                                                 'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 'T_QUESTION',
-                                                                'T_COMMA', 'T_DOUBLE_ARROW', 'T_ELSEIF', 'T_INLINE_HTML'))),
+                                                                'T_COMMA', 'T_DOUBLE_ARROW', 'T_ELSEIF', 'T_INLINE_HTML', 'T_VOID'))),
         );
         
         $this->actions = array('to_concatenation' => true,
