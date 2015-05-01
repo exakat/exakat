@@ -134,7 +134,7 @@ class Phploc implements Tasks {
                         'code'     => 0,
                         'files'    => 1);
         
-        $res = shell_exec('php -l '.$filename.' 2>&1');
+        $res = shell_exec('php -l '.escapeshellarg($filename).' 2>&1');
         if (strpos($res, 'No syntax errors detected in ') === false) {
             display( "$filename can't compile\n");
             $return['files'] = 0;
