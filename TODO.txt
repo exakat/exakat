@@ -1,8 +1,8 @@
 Support updates in VCS (just change those files, not reload all the application, serve évolutions, not status)
 
-Make analyzer concurrent proof
+Make analyzer concurrent proof (Stop running several projects, but accept several analyzes)
 
-Make loader run simultaneous scripts
+Make loader run simultaneous scripts 
 
 Make tokenizer with 2 stages : low stage, with simple expressions, and upper stage, with more complexe structures.
 Find a way to reduce the number of stored objects and link in the loader
@@ -381,8 +381,6 @@ Make a tree of that
 Check speed for one file processing
 
 Loop optimisation : anything in the loop that may be done outside? 
-
-Spot methods that do not use $this (<- static ? )
 
 SPot : files direct access protection (defined('_JEXEC') or die('Restricted access') }
 Spot useless of them
@@ -1080,7 +1078,6 @@ Avoid using shell_exec in tasks (use the other tasks!)
 print_r as argument needs 2nd argument 
                 die(print_r(array_keys(static::$fp_rels))."\nNO $label\n");
 
-
 Retirer les print dans Tasks (et dans le reste du code)
 Gérer les interruptions de processus au niveau de project
 Revoir Project pour le configurer
@@ -1184,3 +1181,33 @@ Check that analyze has a project (compulsory option)
 Restore log2csv exports
 
 Separate Ppp (public, Private or property or var) from definitions for properties.
+
+Doctor won't find PHP on the first try.
+
+Refine build_root to avoid associations { and : 
+
+Nested alternative (difficult to read)
+
+Check for and the last one (tbd)
+
+relatedAtom and dowhile => association
+
+Clone doesn't need parenthesis !! 
+Finish pageone (export in JSON)
+
+Faire une tache de tests du Tokenizer seul pour vérifier plus de projets rapidement
+Exporter stats avant/apres tokenizer dans datastore (et non plus dans log)
+
+Mix of alternative / normal PHP (alternative for template?)
+
+Access to $_POST must be done with isset first
+
+String that are assigned then checked must be a constant
+Spot mixed alternative/normal PHP syntax
+
+if ($str=='') // uh-oh! What if FALSE or the integer 0 is passed as an argument? 
+
+Simplify the class block for faster moving inside the structure (METHOD, CONSTANT, PROPERTY, no more BLOCK)
+Create a 'global' class to hold the const ?
+
+support de call_method()
