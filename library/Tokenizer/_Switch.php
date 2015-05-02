@@ -60,7 +60,7 @@ class _Switch extends TokenAuto {
                                   2 => array('atom'     => 'yes'),
                                   3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token'    => 'T_COLON',
-                                             'property' => array('relatedAtom' => 'Switch')),
+                                             'property' => array('association' => 'Switch')),
                                   5 => array('atom'     => array('SequenceCaseDefault', 'Void')),
                                   6 => array('token'    => 'T_ENDSWITCH'),
         );

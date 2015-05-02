@@ -30,7 +30,7 @@ class IfthenElse extends TokenAuto {
         // @doc else : endif (empty )
         $this->conditions = array( 0 => array('token' => 'T_ELSE'),
                                    1 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Ifthen')),
+                                              'property' => array('association' => 'Ifthen')),
                                    2 => array('token' => 'T_ENDIF'),
         );
         

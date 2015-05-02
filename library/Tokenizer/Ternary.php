@@ -42,7 +42,7 @@ class Ternary extends TokenAuto {
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     2 => array('token'      => 'T_COLON',
-                                               'property'   => array('relatedAtom' => 'Ternary')),
+                                               'property'   => array('association' => 'Ternary')),
                                     3 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     4 => array('filterOut2' => array_merge(Token::$instructionEnding, array('T_OPEN_CURLY'))),

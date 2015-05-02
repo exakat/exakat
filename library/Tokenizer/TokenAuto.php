@@ -1277,7 +1277,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
                                                     'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
                                                     'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
                                                     'T_ELSE', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR']) || (it.getProperty('atom') != null && it.atom != 'Parenthesis')}.any() &&
-    !(it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.relatedAtom == 'Ternary' }.any())
+    !(it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.association == 'Ternary' }.any())
                                                     ) {
 
     sequence = it;
@@ -2641,7 +2641,7 @@ if (     $it.token != 'T_ELSEIF'
     && !($it.out('NEXT').next().token in list_after_token)
     && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
     && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any()) /* \$x{\$b - 2} */
-    &&  ($it.in('NEXT').has('token', 'T_COLON').has('relatedAtom','Ternary').any() == false)
+    &&  ($it.in('NEXT').has('token', 'T_COLON').has('association','Ternary').any() == false)
     ) {
 $makeSequence;
 } else {
@@ -2659,7 +2659,7 @@ $makeSequence;
     $it.setProperty('makeSequence11', !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE']));
     $it.setProperty('makeSequence12', !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any()));
     $it.setProperty('makeSequence13', !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any()));
-    $it.setProperty('makeSequence14', ($it.in('NEXT').has('token', 'T_COLON').has('relatedAtom','Ternary').any() == false));
+    $it.setProperty('makeSequence14', ($it.in('NEXT').has('token', 'T_COLON').has('association','Ternary').any() == false));
 */
 }
 

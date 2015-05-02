@@ -36,7 +36,7 @@ class _Declare extends TokenAuto {
                                   2 => array('atom'  => array('Assignation', 'Arguments')),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Declare')),
+                                              'property' => array('association' => 'Declare')),
                                   5 => array('atom'  => 'yes'),
                                   6 => array('token' => 'T_ENDDECLARE'),
         );

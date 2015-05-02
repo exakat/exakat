@@ -191,7 +191,7 @@ class Ifthen extends TokenAuto {
                                    2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Ifthen')),
+                                              'property' => array('association' => 'Ifthen')),
                                    5 => array('token' => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE')),
         );
         
@@ -229,7 +229,7 @@ class Ifthen extends TokenAuto {
                                    2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Ifthen')),
+                                              'property' => array('association' => 'Ifthen')),
                                    5 => array('atom'  => 'yes'),
                                    6 => array('token' => 'T_ENDIF'),
         );
@@ -255,11 +255,11 @@ class Ifthen extends TokenAuto {
                                    2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Ifthen')),
+                                              'property' => array('association' => 'Ifthen')),
                                    5 => array('atom'  => 'yes'),
                                    6 => array('token' => 'T_ELSE'),
                                    7 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Ifthen')),
+                                              'property' => array('association' => 'Ifthen')),
                                    8 => array('atom'  => 'yes'),
                                    9 => array('token' => array('T_ENDIF', 'T_ELSEIF')),
         );
@@ -290,7 +290,7 @@ class Ifthen extends TokenAuto {
                                    2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Ifthen')),
+                                              'property' => array('association' => 'Ifthen')),
                                    5 => array('atom'  => 'yes'),
                                    6 => array('atom'  => 'Ifthen',
                                               'token' => 'T_ELSEIF',

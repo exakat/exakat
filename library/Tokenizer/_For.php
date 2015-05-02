@@ -141,7 +141,7 @@ class _For extends TokenAuto {
                                     6 => array('atom' => 'yes'),
                                     7 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                     8 => array('token' => 'T_COLON',
-                                               'property' => array('relatedAtom' => 'For')),
+                                               'property' => array('association' => 'For')),
                                     9 => array('atom' => 'yes'),
                                    10 => array('token' => 'T_ENDFOR'),
         );
@@ -176,7 +176,7 @@ class _For extends TokenAuto {
                                    6   => array('atom'  => 'yes'),
                                    7   => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    8   => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'For')),
+                                              'property' => array('association' => 'For')),
                                    9   => array('atom'  => 'yes'),
                                    10  => array('token' => 'T_SEMICOLON',
                                                 'atom'  => 'none'),

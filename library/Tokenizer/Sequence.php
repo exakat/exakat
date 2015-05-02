@@ -88,7 +88,7 @@ class Sequence extends TokenAuto {
 
         // @note instructions separated by ;
         $this->conditions = array(-2 => array('token'      => 'T_COLON',
-                                              'property'   => array('relatedAtom' => array('Ifthen', 'Case', 'Default', 'Declare', 'For', 'Foreach'))),
+                                              'property'   => array('association' => array('Ifthen', 'Case', 'Default', 'Declare', 'For', 'Foreach'))),
                                   -1 => array('atom'       => $operands,
                                               'notToken'   => 'T_ELSEIF' ),
                                    0 => array('token'      => Sequence::$operators,
@@ -136,7 +136,7 @@ class Sequence extends TokenAuto {
         // @note this is not sufficient, but it seems to works pretty well and be enough.
         $this->conditions = array(-2 => array('token'     => 'T_COLON',
                                               'atom'      => 'none',
-                                              'property'  => array('relatedAtom' => array('For', 'Foreach', 'While', 'Default',
+                                              'property'  => array('association' => array('For', 'Foreach', 'While', 'Default',
                                                                                           'Case', 'Switch', 'If', 'Elseif', 'Else'))
                                                ),
                                   -1 => array('atom'       => $operands ),

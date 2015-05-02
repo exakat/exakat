@@ -95,7 +95,6 @@ line: toInt(csvLine.line)})
 FOREACH(ignoreMe IN CASE WHEN csvLine.atom <> "" THEN [1] ELSE [] END | SET token.atom = csvLine.atom)
 FOREACH(ignoreMe IN CASE WHEN csvLine.hidden <> "" THEN [1] ELSE [] END | SET token.hidden = (csvLine.hidden = "true"))
 FOREACH(ignoreMe IN CASE WHEN csvLine.in_quote <> "" THEN [1] ELSE [] END | SET token.in_quote = (csvLine.in_quote = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.relatedAtom <> "" THEN [1] ELSE [] END | SET token.relatedAtom = csvLine.relatedAtom)
 FOREACH(ignoreMe IN CASE WHEN csvLine.association <> "" THEN [1] ELSE [] END | SET token.association = csvLine.association)
 FOREACH(ignoreMe IN CASE WHEN csvLine.tag <> "" THEN [1] ELSE [] END | SET token.tag = csvLine.tag)
 FOREACH(ignoreMe IN CASE WHEN csvLine.filename <> "" THEN [1] ELSE [] END | SET token.filename = csvLine.filename)
@@ -174,7 +173,7 @@ CYPHER;
         // adding in_quote here, as it may not appear on the first token.
         $les_cols = array('id', 'token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 
                           'in_quote', 'modifiedBy', 'delimiter', 'noDelimiter', 'rank', 'dowhile', 
-                          'block', 'bracket', 'filename', 'tag', 'association', 'relatedAtom', 'in_for' );
+                          'block', 'bracket', 'filename', 'tag', 'association', 'in_for' );
         if (static::$file_saved == 0) {
             $les_cols2 = $les_cols;
             fputcsv($fp, $les_cols2, self::CSV_SEPARATOR);

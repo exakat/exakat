@@ -112,7 +112,7 @@ class _While extends TokenAuto {
                                   2 => array('atom'    => 'yes'),
                                   3 => array('token'   => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token'   => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'While')),
+                                              'property' => array('association' => 'While')),
                                   5 => array('atom'    => 'yes'),
                                   6 => array('token'   => 'T_ENDWHILE'),
         );

@@ -39,7 +39,7 @@ class ColonType {
                                                'T_DECLARE' => 'Declare', 
                                                ));
     private $parenthesisStack = array();
-    private $relatedAtom = array('Label');
+    private $association = array('Label');
     private $parenthesisLevel = 0;
     private $checkNext = false;
     private $tokenWithParenthesis = array('T_IF'      => 1, 
@@ -56,13 +56,13 @@ class ColonType {
             
             if (!is_string($token) || $token != ':') {
                 // dropping non-alternative if.
-                array_pop($this->relatedAtom);
+                array_pop($this->association);
             }
         }
 
         if (is_array($token)) {
             if (isset($this->waitFor['array'][$token[3]])) {
-                $this->relatedAtom[] = $this->waitFor['array'][$token[3]];
+                $this->association[] = $this->waitFor['array'][$token[3]];
                 
                 if (isset($this->tokenWithParenthesis[$token[3]])) {
                     $this->parenthesisStack[$this->parenthesisLevel] = 1;
@@ -74,7 +74,7 @@ class ColonType {
             }
         } else {
             if (isset($this->waitFor['string'][$token])) {
-                $this->relatedAtom[] = $this->waitFor['string'][$token];
+                $this->association[] = $this->waitFor['string'][$token];
             }
             
             if ($token == '(') {
@@ -91,9 +91,9 @@ class ColonType {
     }
     
     public function characterizeToken() {
-        $r = array('relatedAtom', array_pop($this->relatedAtom));
-        if (count($this->relatedAtom) == 0) {
-            $this->relatedAtom = array('Label');
+        $r = array('association', array_pop($this->association));
+        if (count($this->association) == 0) {
+            $this->association = array('Label');
         }
         
         return $r;

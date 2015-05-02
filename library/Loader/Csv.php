@@ -127,7 +127,7 @@ HEADER
         // adding in_quote here, as it may not appear on the first token.
         $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 
                           'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'rank', 'dowhile', 
-                          'block', 'bracket', 'filename', 'tag', 'association', 'relatedAtom' );
+                          'block', 'bracket', 'filename', 'tag', 'association');
         if (static::$file_saved == 0) {
             $les_cols2 = $les_cols;
             $les_cols2[4] .= ':int';
