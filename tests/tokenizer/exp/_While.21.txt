@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : CONDITION
-      $x
     Label : BLOCK
       Block with While
       Label : ELEMENT
         void
+    Label : CONDITION
+      $x

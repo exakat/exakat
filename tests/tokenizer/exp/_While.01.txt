@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : CONDITION
-      1
     Label : BLOCK
       void
+    Label : CONDITION
+      1

@@ -5,20 +5,6 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       while
-      Label : CONDITION
-        =
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $b
-          Label : METHOD
-            C
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-        Label : LEFT
-          $a
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -43,5 +29,19 @@ Label : ELEMENT
                           'F'
                   Label : ARGUMENT
                     'E'
+      Label : CONDITION
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : LEFT
+          $a
 Label : ELEMENT
   B

@@ -3057,9 +3057,9 @@ GREMLIN;
 
         if (isset($conditions['dowhile'])) {
             if ( $conditions['dowhile'] === false ) {
-                $queryConditions[] = "has('dowhile', false)";
+                $queryConditions[] = "hasNot('association', 'dowhile')";
             } else {
-                $queryConditions[] = "has('dowhile', true)";
+                $queryConditions[] = "has('association', 'dowhile')";
             }
             unset($conditions['dowhile']);
         }

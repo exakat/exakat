@@ -8,8 +8,6 @@ Label : CODE
       1
   Label : ELEMENT
     while
-    Label : CONDITION
-      1
     Label : BLOCK
       Block with While
       Label : ELEMENT
@@ -18,3 +16,5 @@ Label : CODE
           2
         Label : LEFT
           $x
+    Label : CONDITION
+      1

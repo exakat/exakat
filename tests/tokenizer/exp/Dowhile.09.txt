@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     do
-    Label : CONDITION
-      $z
     Label : BLOCK
       for
       Label : BLOCK
@@ -30,3 +28,5 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $a
+    Label : CONDITION
+      $z

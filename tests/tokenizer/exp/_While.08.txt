@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : CONDITION
-      1
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -50,6 +48,8 @@ Label : CODE
               $g
         Label : LEFT
           $f
+    Label : CONDITION
+      1
   Label : ELEMENT
     if
     Label : CONDITION

@@ -4,6 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     while
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
+        .=
+        Label : RIGHT
+          $d
+        Label : LEFT
+          $c
     Label : CONDITION
       !=
       Label : RIGHT
@@ -26,11 +34,3 @@ Label : CODE
                 $b
           Label : LEFT
             $a
-    Label : BLOCK
-      Block with While
-      Label : ELEMENT
-        .=
-        Label : RIGHT
-          $d
-        Label : LEFT
-          $c

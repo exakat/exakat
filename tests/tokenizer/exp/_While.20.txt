@@ -4,22 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $n
-    Label : NAME
-      a2
     Label : BLOCK
       ;
       Label : ELEMENT
         while
-        Label : CONDITION
-          >=
-          Label : RIGHT
-            1
-          Label : LEFT
-            $b
         Label : BLOCK
           Block with While
           Label : ELEMENT
@@ -44,3 +32,15 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $i
+        Label : CONDITION
+          >=
+          Label : RIGHT
+            1
+          Label : LEFT
+            $b
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $n
+    Label : NAME
+      a2

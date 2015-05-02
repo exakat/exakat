@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     while
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
+        void
     Label : CONDITION
       &&
       Label : RIGHT
@@ -40,10 +44,6 @@ Label : CODE
                 $f
           Label : LEFT
             $e
-    Label : BLOCK
-      Block with While
-      Label : ELEMENT
-        void
   Label : ELEMENT
     if
     Label : CONDITION

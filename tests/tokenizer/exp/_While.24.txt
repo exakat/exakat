@@ -36,6 +36,10 @@ Label : CODE
               void
   Label : ELEMENT
     while
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
+        void
     Label : CONDITION
       !==
       Label : RIGHT
@@ -50,10 +54,6 @@ Label : CODE
               void
       Label : LEFT
         false
-    Label : BLOCK
-      Block with While
-      Label : ELEMENT
-        void
   Label : ELEMENT
     =
     Label : RIGHT

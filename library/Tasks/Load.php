@@ -588,15 +588,11 @@ class Load implements Tasks {
                     $dowhiles[] = array('node' => $T[$Tid],
                                         'level' => $block_level);
                 } elseif ($token[3] == 'T_WHILE') {
-                    if (empty($dowhiles)) {
-                        $T[$Tid]->setProperty('dowhile', 'false')->save();
-                    } else {
+                    if (!empty($dowhiles)) {
                         if ($block_level == $dowhiles[count($dowhiles) - 1]['level']) {
-                            $T[$Tid]->setProperty('dowhile', 'true')->save();
+                            $T[$Tid]->setProperty('association', 'dowhile')->save();
                             array_pop($dowhiles);
-                        } else {
-                            $T[$Tid]->setProperty('dowhile', 'false')->save();
-                        }
+                        } 
                     }
                 }
 

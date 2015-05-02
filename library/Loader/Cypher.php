@@ -100,7 +100,6 @@ FOREACH(ignoreMe IN CASE WHEN csvLine.tag <> "" THEN [1] ELSE [] END | SET token
 FOREACH(ignoreMe IN CASE WHEN csvLine.filename <> "" THEN [1] ELSE [] END | SET token.filename = csvLine.filename)
 FOREACH(ignoreMe IN CASE WHEN csvLine.bracket <> "" THEN [1] ELSE [] END | SET token.bracket = (csvLine.bracket = "true"))
 FOREACH(ignoreMe IN CASE WHEN csvLine.block <> "" THEN [1] ELSE [] END | SET token.block = (csvLine.block = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.dowhile <> "" THEN [1] ELSE [] END | SET token.dowhile = (csvLine.dowhile = "true"))
 FOREACH(ignoreMe IN CASE WHEN csvLine.rank <> "" THEN [1] ELSE [] END | SET token.rank = toInt(csvLine.rank))
 FOREACH(ignoreMe IN CASE WHEN csvLine.noDelimiter <> "" THEN [1] ELSE [] END | SET token.noDelimiter = csvLine.noDelimiter)
 FOREACH(ignoreMe IN CASE WHEN csvLine.delimiter <> "" THEN [1] ELSE [] END | SET token.delimiter = csvLine.delimiter)
@@ -172,7 +171,7 @@ CYPHER;
         $fp = static::$fp_nodes;
         // adding in_quote here, as it may not appear on the first token.
         $les_cols = array('id', 'token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 
-                          'in_quote', 'modifiedBy', 'delimiter', 'noDelimiter', 'rank', 'dowhile', 
+                          'in_quote', 'modifiedBy', 'delimiter', 'noDelimiter', 'rank', 
                           'block', 'bracket', 'filename', 'tag', 'association', 'in_for' );
         if (static::$file_saved == 0) {
             $les_cols2 = $les_cols;
