@@ -1186,7 +1186,7 @@ if (a1.atom == 'Sequence') {
     toBlockSequence = a1;
     toBlockSequence.setProperty('block', true);
     toBlockSequence.setProperty('bracket', true);
-    toBlockSequence.setProperty('fullcode', '{ /*DD*/ }');
+    toBlockSequence.setProperty('fullcode', '{ /**/ }');
 
     toBlockSequence.bothE('NEXT').each{ g.removeEdge(it); }
 
