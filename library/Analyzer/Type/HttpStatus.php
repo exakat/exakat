@@ -31,10 +31,10 @@ class HttpStatus extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $ini = $this->loadIni('HttpStatus.ini');
+        $ini = $this->loadIni('HttpStatus.ini', 'code');
         
         $this->atomIs('Integer')
-             ->code(array_keys($ini['code']));
+             ->code(array_keys($ini));
         $this->prepareQuery();
     }
 }
