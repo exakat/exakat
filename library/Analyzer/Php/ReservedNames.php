@@ -28,8 +28,7 @@ use Analyzer;
 class ReservedNames extends Analyzer\Analyzer {
 
     public function analyze() {
-        $reservedNames = $this->loadIni('php_keywords.ini');
-        $reservedNames = $reservedNames['keyword'];
+        $reservedNames = $this->loadIni('php_keywords.ini', 'keyword');
 
         // functions/methods names
         $this->atomIs('Function')
@@ -74,9 +73,12 @@ class ReservedNames extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // variables
-        $variablesReservedNames = $this->makeFullNsPath($reservedNames);
+        foreach($reservedNames as &$variable) {
+            $variable = '$'.$variable;
+        }
+        unset($variable);
         $this->atomIs('Variable')
-             ->code($variablesReservedNames);
+             ->code($reservedNames);
         $this->prepareQuery();
     }
 }
