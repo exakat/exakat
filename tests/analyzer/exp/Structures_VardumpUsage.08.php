@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array("print '<pre>' . var_export($a, true) . '</pre>'", 
+$expected     = array("print '<pre>' . var_export(\$a, true) . '</pre>'", 
                       "echo print_r(\$a, 1)", 
                       "print '<pre>' . var_export(\$a, 1) . '</pre>'",
                       'print_r($a)', 

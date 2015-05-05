@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_VardumpUsage extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testStructures_VardumpUsage01()  { $this->generic_test('Structures_VardumpUsage.01'); }
     public function testStructures_VardumpUsage02()  { $this->generic_test('Structures_VardumpUsage.02'); }
@@ -18,5 +18,6 @@ class Structures_VardumpUsage extends Analyzer {
     public function testStructures_VardumpUsage06()  { $this->generic_test('Structures_VardumpUsage.06'); }
     public function testStructures_VardumpUsage07()  { $this->generic_test('Structures_VardumpUsage.07'); }
     public function testStructures_VardumpUsage08()  { $this->generic_test('Structures_VardumpUsage.08'); }
+    public function testStructures_VardumpUsage09()  { $this->generic_test('Structures_VardumpUsage.09'); }
 }
 ?>
