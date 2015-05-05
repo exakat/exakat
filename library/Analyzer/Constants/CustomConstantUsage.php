@@ -38,18 +38,19 @@ class CustomConstantUsage extends Analyzer\Analyzer {
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
-            
-            if (!empty($ini['classes'][0])) {
+
+            if (!empty($ini['constants'][0])) {
                 $constants = array_merge($constants, $ini['constants']);
             }
         }
+        $constants = $this->makeFullNsPath($constants);
 
         $this->atomIs('Identifier')
              ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
              ->fullnspathIsNot($constants);
         $this->prepareQuery();
 
-        // @note NSnamed are OK by default (mmm, no!)
+        // @note NSnamed are OK by default (may be not always!)
         $this->atomIs('Nsname')
              ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
              ->fullnspathIsNot($constants);
