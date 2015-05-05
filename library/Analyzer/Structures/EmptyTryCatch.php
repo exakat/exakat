@@ -31,7 +31,6 @@ class EmptyTryCatch extends Analyzer\Analyzer {
         $this->atomIs('Try')
              ->outIs('CATCH')
              ->outIs('CODE')
-             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
