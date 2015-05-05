@@ -2468,6 +2468,12 @@ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each{
         $fullcodeReference
     }
 
+    it.out('RIGHT').out('LEFT').has('atom', 'Variable').each{
+        it.setProperty('reference', true);
+        fullcode = it;
+        $fullcodeReference
+    }
+
     // removed from g.idx('logical')?
     g.idx('atoms').put('atom', 'Typehint', it);
     g.idx('atoms').remove('atom', 'Logical', it);
