@@ -44,7 +44,8 @@ class _Try extends TokenAuto {
                                                         4 => 'CATCH'),
                                'rank'         => array( 4 => 0),
                                'atom'         => 'Try',
-                               'keepIndexed'  => true);
+                               'keepIndexed'  => true,
+                               'makeBlock'    => 'CODE');
         $this->checkAuto();
 
         // Try () { } catch + new catch

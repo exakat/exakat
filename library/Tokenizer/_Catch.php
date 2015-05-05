@@ -51,7 +51,8 @@ class _Catch extends TokenAuto {
                                                        7 => 'DROP',
                                                        ),
                                'cleanIndex' => true,
-                               'atom'       => 'Catch');
+                               'atom'       => 'Catch',
+                               'makeBlock'  => 'CODE');
                                
         $this->checkAuto();
 

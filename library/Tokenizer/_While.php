@@ -97,11 +97,11 @@ class _While extends TokenAuto {
                                                          3 => 'DROP',
                                                          4 => 'DROP',
                                                          5 => 'BLOCK',
-                                                         6 => 'DROP'
-                                                       ),
+                                                         6 => 'DROP'),
                                'makeSequence' => 'it',
                                'atom'         => 'While',
-                               'cleanIndex'   => true);
+                               'cleanIndex'   => true,
+                               'makeBlock'    => 'BLOCK');
         $this->checkAuto();
         
         // alternative syntax While( ) : endwhile
