@@ -34,7 +34,7 @@ class FunctionUsage extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions, false);
+             ->fullnspath($functions);
         $this->prepareQuery();
     }
 }
