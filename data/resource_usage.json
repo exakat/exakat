@@ -1,5 +1,5 @@
 {
- "opendir":{"function0":["rewinddir","rewinddir","closedir"]},
+ "opendir":{"function0":["readdir","rewinddir","closedir"]},
 
  "fopen":      {"function0":["fclose", "foef", "fflush", "fgetcsv", "fgets", "fgetss", "flock", "fputcsv", "fputs", "fread", "fscanf", "fseek", "fstat", "ftell", "ftruncate", "fwrite", "rewind"]},
  "tmpfile":    {"function0":["fclose", "foef", "fflush", "fgetcsv", "fgets", "fgetss", "flock", "fputcsv", "fputs", "fread", "fscanf", "fseek", "fstat", "ftell", "ftruncate", "fwrite", "rewind"]},
