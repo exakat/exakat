@@ -185,27 +185,6 @@ INI;
     private function checkOptional(\Config $config) {
         $stats = array();
 
-        // batch-importer
-        if (!file_exists('batch-import')) {
-            $stats['batch-import']['installed'] = 'No';
-            $stats['batch-import']['optional'] = 'Yes';
-        } else {
-            if (!file_exists('./batch-import/target/batch-import-jar-with-dependencies.jar')) {
-                $stats['batch-import']['compiled'] = 'No';
-                // compile with "mvn clean compile assembly:single"
-            } else {
-                $stats['batch-import']['installed'] = 'Yes';
-                $stats['batch-import']['compiled'] = 'Yes';
-    
-                $file = file('batch-import/changelog.txt');
-                $stats['batch-import']['version'] = trim($file[0]);
-            }
-    
-            $res = explode("\n", shell_exec('mvn -v 2>&1'));
-            $stats['batch-import']['maven'] = trim($res[0]);
-            $stats['batch-import']['optional'] = 'Yes';
-        }
-        
         // check PHP 5.2
         if (!$config->php52) {
             $stats['PHP 5.2']['configured'] = 'No';
@@ -333,47 +312,6 @@ INI;
             $stats['neo4jphp']['installed'] = 'No';
         }
 
-/*
-
-        // composer
-        $res = trim(shell_exec('composer about --version'));
-        // remove colors from shell syntax
-        $res = preg_replace('/\e\[[\d;]*m/', '', $res);
-        if (preg_match('/ version ([0-9\.a-z\-]+)/', $res, $r)) {//
-            $stats['composer']['installed'] = 'Yes';
-            $stats['composer']['version'] = $r[1];
-        } else {
-            $stats['composer']['installed'] = 'No';
-        }
-*/
-
-/*
-        // phpunit
-        $res = shell_exec('phpunit --version 2>&1');
-        if (preg_match('/command not found/is', $res)) {
-            $stats['phpunit']['installed'] = 'No';
-        } elseif (preg_match('/PHPUnit\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['phpunit']['installed'] = 'Yes';
-            $stats['phpunit']['version'] = $r[1];
-            $stats['phpunit']['optional'] = 'Yes';
-        } else {
-            $stats['phpunit']['error'] = $res;
-            $stats['phpunit']['optional'] = 'Yes';
-        }
-*/
-
-/*
-        // wkhtmltopdf
-        $res = shell_exec('wkhtmltopdf --version 2>&1');
-        if (preg_match('/command not found/is', $res)) {
-            $stats['wkhtmltopdf']['installed'] = 'No';
-        } elseif (preg_match('/wkhtmltopdf\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['wkhtmltopdf']['installed'] = 'Yes';
-            $stats['wkhtmltopdf']['version'] = $r[1];
-        } else {
-            $stats['wkhtmltopdf']['error'] = $res;
-        }
-*/
         return $stats;
     }
 }
