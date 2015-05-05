@@ -27,7 +27,7 @@ use Analyzer;
 
 class SetHandlers extends Analyzer\Common\FunctionUsage {
     public function analyze() {
-        $functions = $this->loadIni('php_handlers.ini', 'functions');
+        $this->functions = $this->loadIni('php_handlers.ini', 'functions');
         parent::analyze();
     }
 }
