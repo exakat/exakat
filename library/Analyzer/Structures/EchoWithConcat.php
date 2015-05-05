@@ -47,7 +47,7 @@ class EchoWithConcat extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('String')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
@@ -60,7 +60,7 @@ class EchoWithConcat extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Heredoc')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->atomIs('Concatenation')
              ->is('heredoc', true)
              ->back('first');
@@ -89,7 +89,7 @@ class EchoWithConcat extends Analyzer\Analyzer {
              ->atomIs('Parenthesis')
              ->outIs('CODE')
              ->atomIs('String')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
@@ -104,7 +104,7 @@ class EchoWithConcat extends Analyzer\Analyzer {
              ->atomIs('Parenthesis')
              ->outIs('CODE')
              ->atomIs('Heredoc')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->atomIs('Concatenation')
              ->is('heredoc', true)
              ->back('first');

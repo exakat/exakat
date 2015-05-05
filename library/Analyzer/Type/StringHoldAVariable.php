@@ -35,7 +35,7 @@ class StringHoldAVariable extends Analyzer\Analyzer {
         // variable inside a NOWDOC
         $this->atomIs('String')
              ->is('nowdoc', true)
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->outIs('CONCAT')
              ->regex('code', '\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');
         $this->prepareQuery();
@@ -44,7 +44,7 @@ class StringHoldAVariable extends Analyzer\Analyzer {
         $this->atomIs('String')
              ->tokenIs('T_START_HEREDOC')
              ->savePropertyAs('code', 'd')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->outIs('CONCAT')
              ->regex('code', '" + d + "')
              ->inIs('CONCAT');

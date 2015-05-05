@@ -90,7 +90,8 @@ class TokenAuto extends Token {
         
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
-        $query .= ".each{\n done++; fullcode = it; fullcode.round = ".(self::$round).';
+        //; fullcode.round = ".(self::$round).
+        $query .= '.each{ done++; fullcode = it;
 '.implode(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
         
         return $query;
@@ -2689,14 +2690,14 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['to_variable_dollar']);
         }
 
-        if (isset($actions['make_quoted_string'])) {
-            $atom = $actions['make_quoted_string'];
+        if (isset($actions['makeQuotedString'])) {
+            $atom = $actions['makeQuotedString'];
             $class = "\\Tokenizer\\$atom";
             $string = new $class(Token::$client);
             $fullCodeString = $string->fullcode();
             
             $qactions[] = "
-/* make_quoted_string */
+/* makeQuotedString */
 
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
@@ -2714,7 +2715,7 @@ it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', '
     }
 }
 
-g.addEdge(it, x, 'CONTAIN');
+g.addEdge(it, x, 'CONTAINS');
 g.addEdge(it, f.out('NEXT').out('NEXT').next(), 'NEXT');
 
 g.idx('delete').put('node', 'delete', f.out('NEXT').next());
@@ -2737,7 +2738,7 @@ x.out('CONCAT').each{
 /* indexing */  g.idx('atoms').put('atom', '$atom', it);
 
 ";
-            unset($actions['make_quoted_string']);
+            unset($actions['makeQuotedString']);
         }
         
         if (isset($actions['mergeConcat'])) {

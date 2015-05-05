@@ -44,7 +44,7 @@ class EchoArguments extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('String')
-             ->hasOut('CONTAIN')
+             ->hasOut('CONTAINS')
              ->back('first');
         $this->prepareQuery();
     }

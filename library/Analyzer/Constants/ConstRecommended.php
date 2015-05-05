@@ -45,7 +45,7 @@ class ConstRecommended extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 1)
              ->atomIs(array('String', 'Float', 'Integer', 'Boolean', 'Null', 'Staticconstant'))
-             ->hasNoOut('CONTAIN')
+             ->hasNoOut('CONTAINS')
              ->back('first');
         $this->prepareQuery();
 

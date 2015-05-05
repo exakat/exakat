@@ -48,7 +48,7 @@ class NoHardcodedPath extends Analyzer\Analyzer {
              ->is('rank', 0)
              ->atomIs('String')
              ->tokenIs('T_QUOTE')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->outIs('CONCAT')
              ->is('rank', 0)
              ->tokenIs('T_ENCAPSED_AND_WHITESPACE')

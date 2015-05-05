@@ -34,7 +34,7 @@ class Heredoc extends TokenAuto {
                                              'check_for_string' => String::$allowedClasses),
                                  );
 
-        $this->actions = array( 'make_quoted_string' => 'Heredoc');
+        $this->actions = array( 'makeQuotedString' => 'Heredoc');
         $this->checkAuto();
         
         return false;
@@ -47,7 +47,7 @@ s = [];
 fullcode.out("CONCAT").sort{it.rank}._().each{ s.add(it.fullcode); };
 fullcode.setProperty('noDelimiter', s.join(""));
 
-if (fullcode.in('CONTAIN').next().code.substring(3, 4) in ["'"]) {
+if (fullcode.in('CONTAINS').next().code.substring(3, 4) in ["'"]) {
     // must get rid of ' in the nowdoc indicator
     fullcode.setProperty('fullcode', it.code + s.join("") + it.code.substring(4, it.code.size() - 2));
     fullcode.setProperty('nowdoc', true);

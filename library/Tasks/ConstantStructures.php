@@ -50,7 +50,7 @@ class ConstantStructures implements Tasks {
         }
 
         // String that are concatenations are differente
-        $query = 'g.idx("atoms")[["atom":"String"]].filter{it.out("CONTAIN").any() == false}.each{ it.setProperty("constante", true)};';
+        $query = 'g.idx("atoms")[["atom":"String"]].filter{it.out("CONTAINS").any() == false}.each{ it.setProperty("constante", true)};';
         $this->query($query);
         $this->displayTiming('String/concatenations');
 

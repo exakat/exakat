@@ -29,10 +29,9 @@ class ShouldBeSingleQuote extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('String')
              ->is('delimiter', '"')
-             ->hasNoOut('CONTAIN')
+             ->hasNoOut('CONTAINS')
              ->regexNot('code', "'")
-             ->regexNot('code', "\\\\\\\\")
-             ;
+             ->regexNot('code', "\\\\\\\\");
         $this->prepareQuery();
     }
 }

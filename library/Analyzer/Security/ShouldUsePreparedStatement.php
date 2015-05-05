@@ -68,7 +68,7 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 1)
              ->atomIs('String')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->back('first');
         $this->prepareQuery();
 
@@ -81,7 +81,7 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 1)
              ->atomIs('Heredoc')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->is('heredoc', true)
              ->back('first');
         $this->prepareQuery();
@@ -105,7 +105,7 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs('String')
-             ->outIs('CONTAIN')
+             ->outIs('CONTAINS')
              ->back('first');
         $this->prepareQuery();
     }
