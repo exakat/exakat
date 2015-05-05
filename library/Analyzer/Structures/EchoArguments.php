@@ -29,7 +29,7 @@ class EchoArguments extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_ECHO', 'T_NS_SEPARATOR'))
              ->fullnspath('\\echo')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -39,7 +39,7 @@ class EchoArguments extends Analyzer\Analyzer {
 
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_ECHO', 'T_NS_SEPARATOR'))
              ->fullnspath('\\echo')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
