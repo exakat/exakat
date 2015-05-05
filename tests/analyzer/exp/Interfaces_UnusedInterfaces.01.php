@@ -1,6 +1,8 @@
 <?php
 
-$expected     = array('interface usedInterfaceUnused',);
+$expected     = array('interface unusedInterface',
+                      'interface d extends usedInterfaceImplements2', 
+                      'interface d2 extends \\usedInterfaceFPImplements2');
 
 $expected_not = array('interface usedInterfaceFPImplements',
                       'interface usedInterfaceImplements',
