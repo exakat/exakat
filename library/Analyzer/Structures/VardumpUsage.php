@@ -65,7 +65,7 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->fullnspath(array('\\var_export', '\\print_r'))
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)
-             ->code(array('true', 1))
+             ->code(array('true', '1'))
              ->back('first');
         $this->prepareQuery();
         
