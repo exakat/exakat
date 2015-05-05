@@ -30,7 +30,7 @@ class PlusEgalOne extends Analyzer\Analyzer {
         $this->atomIs('Assignation')
              ->code(array('+=', '-='))
              ->outIs('RIGHT')
-             ->code(1)
+             ->code('1')
              ->back('first');
         $this->prepareQuery();
 
@@ -43,7 +43,7 @@ class PlusEgalOne extends Analyzer\Analyzer {
              ->atomIs('Addition')
              ->_as('B')
              ->outIs('LEFT')
-             ->code(1)
+             ->code('1')
              ->back('B')
              ->outIs('RIGHT')
              ->samePropertyAs('fullcode', 'A')
@@ -59,7 +59,7 @@ class PlusEgalOne extends Analyzer\Analyzer {
              ->atomIs('Addition')
              ->_as('B')
              ->outIs('RIGHT')
-             ->code(1)
+             ->code('1')
              ->back('B')
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'A')
