@@ -27,52 +27,50 @@ use Analyzer;
 
 class StrposCompare extends Analyzer\Analyzer {
     public function analyze() {
-        $operator = $this->loadIni('php_may_return_boolean_or_zero.ini');
-        $operator = $operator['functions'];
+        $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
+        $operator = $this->makefullNsPath($operator);
         
         // if (.. == strpos(..)) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code($operator)
+             ->fullnspath($operator)
              ->inIs('RIGHT')
              ->atomIs('Comparison')
              ->code(array('==', '!='))
              ->outIs('LEFT')
-             ->code(array('0', '', 'null', 'false'))
+             ->code(array('0', "''", '""', 'null', 'false'))
              ->back('result');
         $this->prepareQuery();
 
         // if (strpos(..) == ..) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code($operator)
+             ->fullnspath($operator)
              ->inIs('LEFT')
              ->atomIs('Comparison')
              ->code(array('==', '!='))
              ->outIs('RIGHT')
-             ->code(array('0', '', 'null', 'false'))
+             ->code(array('0', "''", '""', 'null', 'false'))
              ->back('result');
         $this->prepareQuery();
 
         // if (strpos(..)) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code($operator)
-             ->inIs('CODE')
-             ->inIs('CONDITION')
-             ->atomIs('Ifthen')
+             ->fullnspath($operator)
+             ->inIs('CONDITION') 
+             ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('result');
         $this->prepareQuery();
 
         // if ($x = strpos(..)) {}
         $this->atomIs('Functioncall')
-             ->code($operator)
+             ->fullnspath($operator)
              ->inIs('RIGHT')
-             ->atomIs('Assignation')
              ->_as('result')
-             ->inIs('CODE')
-             ->inIs('CONDITION')
-             ->atomIs('Ifthen')
+             ->atomIs('Assignation')
+             ->inIs('CONDITION') 
+             ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('result');
         $this->prepareQuery();
     }
