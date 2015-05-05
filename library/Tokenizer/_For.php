@@ -96,7 +96,8 @@ class _For extends TokenAuto {
                                                       ),
                                'atom'         => 'For',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'makeSequence' => 'it',
+                               'makeBlock'    => 'BLOCK'
                                );
         $this->checkAuto();
 
