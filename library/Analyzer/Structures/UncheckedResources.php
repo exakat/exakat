@@ -32,7 +32,9 @@ class UncheckedResources extends Analyzer\Analyzer {
         $positions = array(0,1,2);
         foreach($resourceUsage as $creation => $usage) {
             foreach($positions as $pos) {
-                if (!isset($usage->{"function$pos"})) { continue; }
+                if (!isset($usage->{"function$pos"})) { 
+                    continue; 
+                }
                 $functions = $this->makeFullNsPath((array) $usage->{"function$pos"});
 
                 //direct usage of the resource :
@@ -40,7 +42,7 @@ class UncheckedResources extends Analyzer\Analyzer {
                 $this->atomFunctionIs($creation)
                      ->inIs('ARGUMENT')
                      ->inIs('ARGUMENTS')
-                     ->fullnspath(array('\\readdir', '\\rewinddir', '\\closedir'));
+                     ->fullnspath($functions);
                 $this->prepareQuery();
 
                 // deferred usage of the resource
@@ -48,7 +50,8 @@ class UncheckedResources extends Analyzer\Analyzer {
                 $this->atomFunctionIs($creation)
                      ->inIs('RIGHT')
                      ->atomIs('Assignation')
-                     ->raw('filter{ it.in("CODE").in("CONDITION").any() == false }')
+                     // checked with a if ($resource) or while($resource)
+                     ->raw('filter{ it.in("CONDITION").any() == false }')
                      ->_as('result')
                      ->outIs('LEFT')
                      ->nextVariable('resource')
@@ -56,7 +59,7 @@ class UncheckedResources extends Analyzer\Analyzer {
                      ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\is_resource").any() == false }')
                      // checked with a !$variable
                      ->raw('filter{ it.in("NOT").any() == false }')
-                     // checked with a if ($resource) or while($resource)
+                     // checked with a if ($resource == false) or while($resource == false)
                      ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").any() == false }')
                      ->back('result');
                 $this->prepareQuery();
