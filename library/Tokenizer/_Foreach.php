@@ -95,7 +95,8 @@ class _Foreach extends TokenAuto {
                                                       ),
                                'atom'         => 'Foreach',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'makeSequence' => 'it',
+                               'makeBlock'    => 'BLOCK'
                                );
         $this->checkAuto();
 
