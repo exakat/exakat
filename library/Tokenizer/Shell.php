@@ -35,8 +35,8 @@ class Shell extends TokenAuto {
                                                'check_for_string' => String::$allowedClasses),
                                  );
         
-        $this->actions = array( 'make_quoted_string' => 'Shell',
-                                'makeSequence'       => 'it');
+        $this->actions = array( 'makeQuotedString' => 'Shell',
+                                'makeSequence'     => 'it');
         $this->checkAuto();
 
         return false;
