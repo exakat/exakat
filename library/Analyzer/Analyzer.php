@@ -659,7 +659,7 @@ GREMLIN;
     }
 
     public function code($code, $caseSensitive = false) {
-        if ($caseSensitive === false) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -683,7 +683,7 @@ GREMLIN;
     }
 
     public function codeIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive === false) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -709,7 +709,7 @@ GREMLIN;
     public function noDelimiter($code, $caseSensitive = false) {
         $this->addMethod('has("atom", "String")', $code);
 
-        if ($caseSensitive === false) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -759,7 +759,7 @@ GREMLIN;
     }
 
     public function fullnspath($code, $caseSensitive = false) {
-        if ($caseSensitive === false) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -783,7 +783,7 @@ GREMLIN;
     }
 
     public function fullnspathIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive === false) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -813,7 +813,7 @@ GREMLIN;
     }
 
     public function samePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive || $property == 'line' || $property == 'rank') {
+        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -836,7 +836,7 @@ GREMLIN;
     }
     
     public function notSamePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive || $property == 'line' || $property == 'rank') {
+        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -865,7 +865,7 @@ GREMLIN;
     }
 
     public function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
-        if ($caseSensitive === false) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -890,7 +890,7 @@ GREMLIN;
     }
     
     public function fullcode($code, $caseSensitive = false) {
-        if ($caseSensitive === false) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -914,7 +914,7 @@ GREMLIN;
     }
     
     public function fullcodeIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive === false) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
