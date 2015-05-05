@@ -30,13 +30,24 @@ class UselessParenthesis extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
-             ->outIs('CODE')
              ->atomIs('Parenthesis');
         $this->prepareQuery();
 
         // while
         $this->atomIs('While')
              ->outIs('CONDITION')
+             ->atomIs('Parenthesis');
+        $this->prepareQuery();
+
+        // dowhile
+        $this->atomIs('Dowhile')
+             ->outIs('CONDITION')
+             ->atomIs('Parenthesis');
+        $this->prepareQuery();
+
+        // switch
+        $this->atomIs('Switch')
+             ->outIs('NAME')
              ->atomIs('Parenthesis');
         $this->prepareQuery();
 
