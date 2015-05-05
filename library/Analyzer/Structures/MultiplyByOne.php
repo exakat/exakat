@@ -31,7 +31,7 @@ class MultiplyByOne extends Analyzer\Analyzer {
         $this->atomIs('Assignation')
              ->code(array('*=', '/=', '%=', '**='))
              ->outIs('RIGHT')
-             ->code(1)
+             ->code('1')
              ->back('first');
         $this->prepareQuery();
 
