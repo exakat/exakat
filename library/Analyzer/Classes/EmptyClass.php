@@ -37,7 +37,6 @@ class EmptyClass extends Analyzer\Analyzer {
              ->outIs('EXTENDS')
              ->back('first')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
@@ -45,7 +44,6 @@ class EmptyClass extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->hasNoOut('EXTENDS')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
