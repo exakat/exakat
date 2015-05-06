@@ -102,7 +102,8 @@ class _Function extends TokenAuto {
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
                                'cleanIndex'    => true,
-                               'makeSequence'  => 'it');
+                               'makeSequence'  => 'it',
+                               'makeBlock'      => 'BLOCK');
         $this->checkAuto();
 
         // lambda function ($x) use ($y)
@@ -128,7 +129,8 @@ class _Function extends TokenAuto {
                                'atom'           => 'Function',
                                'checkTypehint'  => 'Function',
                                'cleanIndex'     => true,
-                               'makeSequence'   => 'it');
+                               'makeSequence'   => 'it',
+                               'makeBlock'      => 'BLOCK');
         $this->checkAuto();
 
         return false;
