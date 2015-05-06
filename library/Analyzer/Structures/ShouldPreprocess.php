@@ -28,7 +28,7 @@ use Analyzer;
 class ShouldPreprocess extends Analyzer\Analyzer {
     public function analyze() {
         $dynamicAtoms = array('Variable', 'Property', 'Identifier', 'Magicconstant');
-        //'Functioncall',
+        //'Functioncall' : if they also have only constants.
         
         $functionList = $this->loadIni('inert_functions.ini');
         $functionList = '"' . implode('", "\\\\', $functionList['functions']). '"';
