@@ -34,7 +34,6 @@ class EmptyFunction extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->hasNoClass()
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
@@ -44,7 +43,6 @@ class EmptyFunction extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->goToClass()
 
