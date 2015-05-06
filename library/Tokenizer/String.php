@@ -50,6 +50,7 @@ class String extends TokenAuto {
 s = [];
 fullcode.out('CONCAT').sort{it.rank}._().each{ s.add(it.fullcode); }
 fullcode.setProperty('fullcode', '"' + s.join('') + '"');
+fullcode.setProperty('count', s.size());
 
 if (fullcode.code.length() > 1) {
     if (fullcode.code.substring(0, 1) in ["'", '"']) {
