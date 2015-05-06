@@ -1697,7 +1697,7 @@ fullcode = x;
             unset($actions['to_concatenation']);
         }
 
-        if (isset($actions['to_array']) && $actions['to_array']) {
+        if (isset($actions['toArray']) && $actions['toArray']) {
             $array = new _Array(Token::$client);
             $fullcodeArray = $array->fullcode();
 
@@ -1729,6 +1729,8 @@ while( current.atom == null && current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY
 
         a1 = current.out('NEXT').next();
         a2 = a1.out('NEXT').next();
+    
+        g.idx('atoms').put('atom', 'Arrayappend', current)
     } else {
         /* case of a array with index (\$s[1]) */
         g.addEdge(current, b1, 'VARIABLE');
@@ -1751,6 +1753,8 @@ while( current.atom == null && current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY
 
         a1 = current.out('NEXT').next();
         a2 = a1.out('NEXT').next();
+
+        g.idx('atoms').put('atom', 'Array', current)
     }
 }
 
@@ -1762,7 +1766,7 @@ if (current.token == 'T_OPEN_PARENTHESIS') {
 }
 
 ";
-            unset($actions['to_array']);
+            unset($actions['toArray']);
         }
 
         if (isset($actions['to_argument']) && $actions['to_argument']) {
@@ -2976,7 +2980,7 @@ GREMLIN;
             unset($conditions['check_for_concatenation']);
         }
 
-        if (isset($conditions['check_for_array'])) {
+        if (isset($conditions['checkForArray'])) {
 
             $queryConditions[] = <<<GREMLIN
 filter{ it.as('a').out('NEXT').transform{
@@ -2987,7 +2991,7 @@ filter{ it.as('a').out('NEXT').transform{
     }
 }.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY'] && it.object.atom == null}.any()}
 GREMLIN;
-            unset($conditions['check_for_array']);
+            unset($conditions['checkForArray']);
         }
 
         if (isset($conditions['code'])) {

@@ -32,31 +32,31 @@ class _Array extends TokenAuto {
     
     public function _check() {
         // $x[3] and mutlidimensional too
-        $this->conditions = array( -2 => array('notToken' => array_merge(Staticproperty::$operators, Property::$operators)),
-                                   -1 => array('atom'    => _Array::$allowedObject),
-                                    0 => array('token'   => _Array::$operators,
-                                               'check_for_array' => true),
-                                    1 => array('atom'    => 'yes',
-                                               'notAtom' => 'Sequence'),
-                                    2 => array('token'   => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
+        $this->conditions = array( -2 => array('notToken'      => array_merge(Staticproperty::$operators, Property::$operators)),
+                                   -1 => array('atom'          => _Array::$allowedObject),
+                                    0 => array('token'         => _Array::$operators,
+                                               'checkForArray' => true),
+                                    1 => array('atom'          => 'yes',
+                                               'notAtom'       => 'Sequence'),
+                                    2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                  );
         
-        $this->actions = array('to_array'     => true,
+        $this->actions = array('toArray'      => true,
                                'makeSequence' => 'b1',
                                'cleanIndex'   => true);
         $this->checkAuto();
 
         // Class::Constante[INDEX]
-        $this->conditions = array( -2 => array('token'   => 'T_DOUBLE_COLON'),
-                                   -1 => array('token'   => 'T_STRING'),
-                                    0 => array('token'   => _Array::$operators,
-                                               'check_for_array' => true),
-                                    1 => array('atom'    => 'yes',
-                                               'notAtom' => 'Sequence'),
-                                    2 => array('token'   => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
+        $this->conditions = array( -2 => array('token'         => 'T_DOUBLE_COLON'),
+                                   -1 => array('token'         => 'T_STRING'),
+                                    0 => array('token'         => _Array::$operators,
+                                               'checkForArray' => true),
+                                    1 => array('atom'          => 'yes',
+                                               'notAtom'       => 'Sequence'),
+                                    2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                  );
         
-        $this->actions = array('to_array'     => true,
+        $this->actions = array('toArray'      => true,
                                'makeSequence' => 'b1',
                                'cleanIndex'   => true);
         $this->checkAuto();

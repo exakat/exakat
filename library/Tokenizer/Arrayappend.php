@@ -29,14 +29,14 @@ class Arrayappend extends TokenAuto {
     
     public function _check() {
         // $x[] and mutlidimensional too
-        $this->conditions = array( -2 => array('notToken' => array_merge(Staticproperty::$operators, Property::$operators)),
-                                   -1 => array('atom'    => _Array::$allowedObject),
-                                    0 => array('token'   => _Array::$operators,
-                                               'check_for_array' => true),
-                                    1 => array('token'   => 'T_CLOSE_BRACKET'),
+        $this->conditions = array( -2 => array('notToken'      => array_merge(Staticproperty::$operators, Property::$operators)),
+                                   -1 => array('atom'          => _Array::$allowedObject),
+                                    0 => array('token'         => _Array::$operators,
+                                               'checkForArray' => true),
+                                    1 => array('token'         => 'T_CLOSE_BRACKET'),
                                  );
         
-        $this->actions = array('to_array'     => true,
+        $this->actions = array('toArray'      => true,
                                'makeSequence' => 'b1',
                                'cleanIndex'   => true);
         $this->checkAuto();
