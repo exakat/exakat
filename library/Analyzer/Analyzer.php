@@ -1394,14 +1394,62 @@ GREMLIN
         return $this;
     }
 
+    public function goToInterface() {
+        $this->addMethod('in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}');
+        
+        return $this;
+    }
+
+    public function notInInterface() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}.any() == false}');
+        
+        return $this;
+    }
+
     public function goToTrait() {
         $this->addMethod('in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}');
         
         return $this;
     }
 
+    public function notInTrait() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}.any() == false}');
+        
+        return $this;
+    }
+
     public function goToClassTrait() {
         $this->addMethod('in.loop(1){!(it.object.atom in ["Trait","Class"])}{it.object.atom in ["Trait", "Class"]}');
+        
+        return $this;
+    }
+
+    public function notInClassTrait() {
+        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Trait","Class"])}{it.object.atom  in ["Trait","Class"}.any() == false}');
+        
+        return $this;
+    }
+
+    public function goToClassInterface() {
+        $this->addMethod('in.loop(1){!(it.object.atom in ["Interface","Class"])}{it.object.atom in ["Interface", "Class"]}');
+        
+        return $this;
+    }
+
+    public function notInClassInterface() {
+        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Interface","Class"])}{it.object.atom  in ["Interface","Class"]}.any() == false}');
+        
+        return $this;
+    }
+
+    public function goToClassInterfaceTrait() {
+        $this->addMethod('in.loop(1){!(it.object.atom in ["Interface","Class","Trait"])}{it.object.atom in ["Interface", "Class","Trait"]}');
+        
+        return $this;
+    }
+
+    public function notInClassInterfaceTrait() {
+        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Interface", "Class", "Trait"])}{it.object.atom in ["Interface", "Class", "Trait"]}.any() == false}');
         
         return $this;
     }
