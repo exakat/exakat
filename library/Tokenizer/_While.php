@@ -85,16 +85,16 @@ class _While extends TokenAuto {
         $this->checkAuto();
         
         // alternative syntax While( ) : endwhile
-        $this->conditions = array(0 => array('token'   => _While::$operators,
-                                             'dowhile' => false),
-                                  1 => array('token'   => 'T_OPEN_PARENTHESIS',
+        $this->conditions = array(0 => array('token'     => _While::$operators,
+                                             'dowhile'   => false),
+                                  1 => array('token'     => 'T_OPEN_PARENTHESIS',
                                               'property' => array('association' => 'While')),
-                                  2 => array('atom'    => 'yes'),
-                                  3 => array('token'   => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('token'   => 'T_COLON',
+                                  2 => array('atom'      => 'yes'),
+                                  3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
+                                  4 => array('token'     => 'T_COLON',
                                               'property' => array('association' => 'While')),
-                                  5 => array('atom'    => 'yes'),
-                                  6 => array('token'   => 'T_ENDWHILE'),
+                                  5 => array('atom'      => 'yes'),
+                                  6 => array('token'     => 'T_ENDWHILE'),
         );
         
         $this->actions = array('transform'    => array(  1 => 'DROP',
@@ -102,8 +102,7 @@ class _While extends TokenAuto {
                                                          3 => 'DROP',
                                                          4 => 'DROP',
                                                          5 => 'BLOCK',
-                                                         6 => 'DROP',
-                                                        ),
+                                                         6 => 'DROP'),
                                'makeSequence' => 'it',
                                'property'     => array('alternative' => true),
                                'atom'         => 'While',

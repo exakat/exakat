@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('if ( $alternative) :  /**/  endif', 
-                      'switch ($alternative) :  /**/  endswitch',
-                      'while ($alternative) : $y++ endwhile',
-                      'for($i = 0 ; $i < 10 ; $i++) : $y++ endfor', 
-                      'foreach($a as $b) : $y++ endforeach');
+$expected     = array('if ($alternative) : ; endif', 
+                      'for($i = 0 ; $i < 10 ; $i++) : ; endfor', 
+                      'foreach($a as $b) : ; endforeach', 
+                      'while ($alternative) : ; endwhile',
+                      'switch ($alternative) :  /**/  endswitch');
 
 $expected_not = array();
 
