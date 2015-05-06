@@ -104,8 +104,8 @@ class Methods {
         return $return;
     }
 
-    public function getStochasticFunctions() {
-        $query = "SELECT name FROM methods WHERE stochastic = 'true'";
+    public function getDeterministFunctions() {
+        $query = "SELECT name FROM methods WHERE determinist = 'true'";
         $res = $this->sqlite->query($query);
         $return = array();
         
@@ -116,8 +116,8 @@ class Methods {
         return $return;
     }
 
-    public function getNonStochasticFunctions() {
-        $query = "SELECT name FROM methods WHERE stochastic != 0";
+    public function getNonDeterministFunctions() {
+        $query = "SELECT name FROM methods WHERE determinist != 0";
         $res = $this->sqlite->query($query);
         $return = array();
         
