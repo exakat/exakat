@@ -62,9 +62,9 @@ class _For extends TokenAuto {
                                                'notAtom'   => 'Sequence'),
                                     9 => array('filterOut' => Token::$instructionEnding),
         );
-        $this->actions = array('to_block_for' => true,
-                               'keepIndexed'  => true,
-                               'cleanIndex'   => true);
+        $this->actions = array('toBlockFor'  => true,
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true);
         $this->checkAuto();
     
     // @doc for(a; b; c) { code }

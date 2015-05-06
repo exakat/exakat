@@ -64,7 +64,7 @@ class Ifthen extends TokenAuto {
                                 'keepIndexed'     => true);
         $this->checkAuto();
 
-        // @doc if then { block } without else
+        // @doc if then { block }   [without else]
         $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
@@ -87,7 +87,8 @@ class Ifthen extends TokenAuto {
                                'makeSequence' => 'it',
                                'property'     => array('alternative' => false),
                                'atom'         => 'Ifthen',
-                               'cleanIndex'   => true);
+                               'cleanIndex'   => true,
+                               'makeBlock'    => 'THEN');
         $this->checkAuto();
 
         // @doc if { sequence } then else { sequence }
@@ -121,10 +122,12 @@ class Ifthen extends TokenAuto {
                                'atom'         => 'Ifthen',
                                'property'     => array('alternative' => false),
                                'makeSequence' => 'it',
-                               'cleanIndex'   => true);
+                               'cleanIndex'   => true,
+                               'makeBlock'    => "THEN','ELSE", //array('THEN', 'ELSE')
+                               );
         $this->checkAuto();
 
-        // @doc if then elseif (without else)
+        // @doc if then elseif [without else]
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
                                               'property' => array('association' => 'If')),
@@ -150,11 +153,12 @@ class Ifthen extends TokenAuto {
                                'property'     => array('alternative' => false),
                                'makeSequence' => 'it',
                                'atom'         => 'Ifthen',
-                               'cleanIndex'   => true
+                               'cleanIndex'   => true,
+                               'makeBlock'    => 'THEN'
                                );
         $this->checkAuto();
 
-        // @doc if then { block } without else (but within a else alternatif)
+        // @doc if then { block } [without else] (but within a else alternatif)
         $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
@@ -177,7 +181,8 @@ class Ifthen extends TokenAuto {
                                'makeSequence' => 'it',
                                'property'     => array('alternative' => false),
                                'atom'         => 'Ifthen',
-                               'cleanIndex'   => true);
+                               'cleanIndex'   => true,
+                               'makeBlock'    => 'THEN');
         $this->checkAuto();
 
     ////////////////////////////////////////////////////////////
@@ -319,9 +324,16 @@ class Ifthen extends TokenAuto {
         return <<<GREMLIN
 
 if (fullcode.alternative == true) {
-    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") : " + fullcode.out("THEN").next().fullcode + ' endif';
+    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") : " + fullcode.out("THEN").next().fullcode;
+    if (fullcode.out('ELSE').any()) {
+        fullcode.fullcode = fullcode.fullcode + " else : " + fullcode.out("ELSE").next().fullcode;
+    }
+    fullcode.fullcode = fullcode.fullcode + ' endif'
 } else {
     fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") " + fullcode.out("THEN").next().fullcode;
+    if (fullcode.out('ELSE').any()) {
+        fullcode.fullcode = fullcode.fullcode + " else " + fullcode.out("ELSE").next().fullcode;
+    }
 }
 
 GREMLIN;

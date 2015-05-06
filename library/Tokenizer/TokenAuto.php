@@ -882,13 +882,32 @@ if (it.out('IMPLEMENTS').out('ARGUMENT').any()) {
         }
         
         if (isset($actions['makeBlock'])) {
-            $link = $actions['makeBlock'];
-            $qactions[] = " /* makeBlock */
+            if (is_string($actions['makeBlock'])) {
+                $link = $actions['makeBlock'];
+                $qactions[] = " /* makeBlock */
 it.out('$link').each{
     it.setProperty('block', true);
-    it.setProperty('fullcode', '{ /**/ } ');
+    if (it.bracket == false) {
+        it.setProperty('fullcode', ' /**/ ');
+    } else {
+        it.setProperty('fullcode', '{ /**/ } ');
+    }
 }
             ";
+            } else {
+                foreach($actions['makeBlock'] as $link) {
+                    $qactions[] = " /* makeBlock $link */
+it.out('$link').each{
+    it.setProperty('block', true);
+    if (it.bracket == false) {
+        it.setProperty('fullcode', ' /**/ ');
+    } else {
+        it.setProperty('fullcode', '{ /**/ } ');
+    }
+}
+            ";
+                }
+            }
             unset($actions['makeBlock']);
         }
 
@@ -1223,38 +1242,30 @@ if (a1.atom == 'Sequence') {
             unset($actions['toBlock']);
         }
 
-        if (isset($actions['to_block_for']) && $actions['to_block_for']) {
+        if (isset($actions['toBlockFor']) && $actions['toBlockFor']) {
             $sequence = new Block(Token::$client);
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
-/* to_block_for */
+/* toBlockFor */
 
-x = g.addVertex(null, [code:'Block with For', fullcode:'Block with For', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:true ]);
+oc = g.addVertex(null, [code:'{', token:'T_OPEN_CURLY', virtual:true, line:it.line]);
+cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.line]);
 
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');
+sequence = g.addVertex(null, [code:';', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:true, bracket:false, virtual:true, line:it.line]);
+g.addEdge(sequence, a8, 'ELEMENT');
+a8.rank = 0;
+a8.bothE('NEXT').each{ g.removeEdge(it); }
 
-fullcode = x;
-$fullcode
+g.addEdge(a7, oc, 'NEXT');
+g.addEdge(oc, sequence, 'NEXT');
 
-a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+g.addEdge(sequence, cc, 'NEXT');
+g.addEdge(cc, a9, 'NEXT');
 
-g.addEdge(a.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('rank', 0);
-a.bothE('NEXT').each{ g.removeEdge(it); }
 
-// remove the next, if this is a ;
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-    semicolon = it;
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
             ";
-            unset($actions['to_block_for']);
+            unset($actions['toBlockFor']);
         }
 
         if (isset($actions['checkForNext'])) {
@@ -1938,7 +1949,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 oc = g.addVertex(null, [code:'{', token:'T_OPEN_CURLY', virtual:true, line:it.line]);
 cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.line]);
 
-x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:true, virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:true, bracket:false, virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
 if (a.token == 'T_COLON') {
@@ -1971,7 +1982,7 @@ x.out('ELEMENT').each{
     }
 }
 
-            ";
+";
             unset($actions['toBlockElse']);
         }
         
@@ -1984,7 +1995,7 @@ x.out('ELEMENT').each{
 oc = g.addVertex(null, [code:'{', token:'T_OPEN_CURLY', virtual:true, line:it.line]);
 cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.line]);
 
-sequence = g.addVertex(null, [code:';', fullcode:';', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:true, fullcode:' /**/ ']);
+sequence = g.addVertex(null, [code:';', fullcode:';', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:true, bracket:false, fullcode:' /**/ ']);
 
 instruction = it$offset.next();
 binstruction = instruction.in('NEXT').next();
@@ -2012,7 +2023,7 @@ g.addEdge(cc, ainstruction, 'NEXT');
 oc = g.addVertex(null, [code:'{', token:'T_OPEN_CURLY', virtual:true, line:it.line]);
 cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.line]);
 
-sequence = g.addVertex(null, [code:';', fullcode:';', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:true, fullcode:' /**/ ']);
+sequence = g.addVertex(null, [code:';', fullcode:';', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:true, bracket:false, fullcode:' /**/ ']);
 
 instruction = it$offset.next();
 binstruction = instruction.in('NEXT').next();  // before instruction
@@ -2378,37 +2389,28 @@ element2.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['makeForeachSequence']);
         }
 
-        if (isset($actions['while_to_block'])) {
+        if (isset($actions['toWhileBlock'])) {
             $qactions[] = "
-/* while_to_block */
+/* toWhileBlock */
 
-x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:true, line:it.line, fullcode:' /**/ ']);
-a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+oc = g.addVertex(null, [code:'{', token:'T_OPEN_CURLY', virtual:true, line:it.line]);
+cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.line]);
 
-g.addEdge(a.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('rank', 0);
-a.bothE('NEXT').each{ g.removeEdge(it); }
+sequence = g.addVertex(null, [code:';', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:true, bracket:false, line:it.line, fullcode:' /**/ ']);
+g.addEdge(sequence, a4, 'ELEMENT');
+a4.rank = 0;
 
-// remove the next, if this is a ;
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-    semicolon = it;
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
+a4.bothE('NEXT').each{ g.removeEdge(it); }
 
-/* Clean index */
-x.out('ELEMENT').each{
-    it.inE('INDEXED').each{
-        g.removeEdge(it);
-    }
-}
+g.addEdge(a3, oc, 'NEXT');
+g.addEdge(oc, sequence, 'NEXT');
+
+g.addEdge(sequence, cc, 'NEXT');
+g.addEdge(cc, a5, 'NEXT');
+
 
 ";
-            unset($actions['while_to_block']);
+            unset($actions['toWhileBlock']);
         }
 
         if (isset($actions['to_methodcall'])) {

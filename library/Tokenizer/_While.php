@@ -56,28 +56,8 @@ class _While extends TokenAuto {
                                    5 => array('filterOut2' => Token::$instructionEnding),
         );
         
-        $this->actions = array('while_to_block' => true,
-                               'keepIndexed'    => true
-                               );
-        $this->checkAuto();
-        
-         //  While( ) {}
-       $this->conditions = array( 0 => array('token'     => _While::$operators,
-                                             'dowhile'   => false),
-                                  1 => array('token'     => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'While')),
-                                  2 => array('atom'      => 'yes'),
-                                  3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('atom'      => array('Sequence', 'Void')),
-        );
-        
-        $this->actions = array('transform'    => array(  1 => 'DROP',
-                                                         2 => 'CONDITION',
-                                                         3 => 'DROP',
-                                                         4 => 'BLOCK',      ),
-                               'makeSequence' => 'it',
-                               'atom'         => 'While',
-                               'cleanIndex'   => true);
+        $this->actions = array('toWhileBlock' => true,
+                               'keepIndexed'  => true);
         $this->checkAuto();
         
          //  While( ) { normal code ; }
