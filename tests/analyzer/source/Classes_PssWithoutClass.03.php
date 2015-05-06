@@ -9,3 +9,6 @@ trait A {
     }
 
 }
+
+PARENT::$d;
+STATIC::$c;

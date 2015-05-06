@@ -8,4 +8,6 @@ class B {
 
 }
 
+new PARENT();
+
 ?>

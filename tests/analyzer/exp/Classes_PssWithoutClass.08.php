@@ -2,8 +2,7 @@
 
 $expected     = array();
 
-$expected_not = array('parent::D',
-                      'self::B',
+$expected_not = array('self::B',
                       'self::C');
 
 ?>
