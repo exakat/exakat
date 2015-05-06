@@ -62,6 +62,8 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->tokenIs(array('T_ECHO', 'T_PRINT'))
              ->outIs('ARGUMENTS')
              ->atomInside('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath(array('\\var_export', '\\print_r'))
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)

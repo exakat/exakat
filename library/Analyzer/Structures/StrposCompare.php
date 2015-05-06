@@ -28,12 +28,11 @@ use Analyzer;
 class StrposCompare extends Analyzer\Analyzer {
     public function analyze() {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
-        $operator = $this->makefullNsPath($operator);
         
         // if (.. == strpos(..)) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->fullnspath($operator)
+             ->code($operator)
              ->inIs('RIGHT')
              ->atomIs('Comparison')
              ->code(array('==', '!='))
@@ -45,7 +44,7 @@ class StrposCompare extends Analyzer\Analyzer {
         // if (strpos(..) == ..) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->fullnspath($operator)
+             ->code($operator)
              ->inIs('LEFT')
              ->atomIs('Comparison')
              ->code(array('==', '!='))
@@ -57,7 +56,7 @@ class StrposCompare extends Analyzer\Analyzer {
         // if (strpos(..)) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->fullnspath($operator)
+             ->code($operator)
              ->inIs('CONDITION') 
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('result');
@@ -65,7 +64,7 @@ class StrposCompare extends Analyzer\Analyzer {
 
         // if ($x = strpos(..)) {}
         $this->atomIs('Functioncall')
-             ->fullnspath($operator)
+             ->code($operator)
              ->inIs('RIGHT')
              ->_as('result')
              ->atomIs('Assignation')
