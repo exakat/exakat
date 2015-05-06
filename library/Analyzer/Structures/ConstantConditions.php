@@ -34,8 +34,8 @@ class ConstantConditions extends Analyzer\Analyzer {
     public function analyze() {
 
         $data = new \Data\Methods();
-        $nonStochatichFunctions = $data->getNonStochasticFunctions();
-
+        $nonDeterministFunctions = $data->getNonDeterministFunctions();
+        
         $this->atomIs('While')
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
@@ -46,7 +46,7 @@ class ConstantConditions extends Analyzer\Analyzer {
         $this->atomIs('While')
              ->outIs('CONDITION')
              ->atomIs(array('Variable', 'Functioncall'))
-             ->codeIsNot($nonStochatichFunctions)
+             ->code($nonDeterministFunctions)
              ->savePropertyAs('code', 'condition')
              ->back('first')
              // variables are only read
@@ -81,7 +81,7 @@ class ConstantConditions extends Analyzer\Analyzer {
 /*
     One of the variable inside the condition should be modified at some point : in the condition, or in the loop.
 
-    Function calls are kept, but they should be characterized as non-stochastic
+    Function calls are kept, but they should be characterized as non-determinist
     (calling with the same arguments may yield different result, such as random or fread)
 */
     }
