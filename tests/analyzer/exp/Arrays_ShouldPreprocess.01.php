@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('$a[1]',
-                      '$b[4]',
-                      '$d[1]',
-                      '$x->y[3]');
+$expected     = array('$d = array( )', 
+                      '$a = array( )', 
+                      '$e = array( )', 
+                      '$x->y = array( )', 
+                      '$b = array( )'
+);
 
 $expected_not = array('$e[45]',
                       '$a[2]',

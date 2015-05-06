@@ -1,11 +1,15 @@
 <?php
 
-$expected     = array('$f[1]',
-                      '$h[2]',
-                      '$g[1]',
-                      '$e[2]'
+$expected     = array('$c = array( )', 
+                      '$d = array( )', 
+                      '$f = array( )', 
+                      '$g = array( )'
                       );
 
-$expected_not = array();
+$expected_not = array('$a = array( )', 
+                      '$b = array( )', 
+                      '$e = array( )', 
+                      '$h = array( )', 
+                      );
 
 ?>
