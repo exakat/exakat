@@ -65,9 +65,9 @@ class _Foreach extends TokenAuto {
                                                                 Assignation::$operators, Addition::$operators,
                                                                 Multiplication::$operators)),
         );
-        $this->actions = array( 'toBlockForeach'   => 6,
-                                'keepIndexed'      => true,
-                                'cleanIndex'       => true);
+        $this->actions = array( 'toBlockForeach' => 6,
+                                'keepIndexed'    => true,
+                                'cleanIndex'     => true);
         $this->checkAuto();
 
     // @doc foreach($x as $y) { code }
@@ -96,8 +96,7 @@ class _Foreach extends TokenAuto {
                                'atom'         => 'Foreach',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it',
-                               'makeBlock'    => 'BLOCK'
-                               );
+                               'makeBlock'    => 'BLOCK');
         $this->checkAuto();
 
     // @doc foreach($a as $b) : code endforeach
