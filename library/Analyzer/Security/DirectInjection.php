@@ -42,29 +42,39 @@ class DirectInjection extends Analyzer\Analyzer {
              ->inIs('ARGUMENTS');
         $this->prepareQuery();
 
-        // $_GET/_POST ['index']... directly as argument of PHP functions
+        // $_GET/_POST ['index'] (one level).. directly as argument of PHP functions
         $this->atomIs('Variable')
              ->code($vars)
+             ->inIs('VARIABLE')
              ->analyzerIs('Analyzer\\Security\\SensitiveArgument')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS');
         $this->prepareQuery();
 
-        // $_GET/_POST ['index']['index2']... directly as argument of PHP functions
+        // $_GET/_POST ['index']['index2'] (2 levels and more)... directly as argument of PHP functions
         $this->atomIs('Variable')
              ->code($vars)
-             ->raw('in("VARIABLE").loop(1){true}{ it.object.atom == "Array"}')
+             ->raw('in("VARIABLE").loop(1){true}{it.object.atom == "Array"}')
              ->analyzerIs('Analyzer\\Security\\SensitiveArgument')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->inIs('ARGUMENTS')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
-        
-        // $_GET/_POST array... inside a string is useless
-        // "$_GET/_POST ['index']"... inside a string or a concatenation
+
+        // $_GET/_POST array... inside a string is useless and safe (will print Array)
+        // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs('Variable')
              ->code($vars)
              ->raw('in("VARIABLE").loop(1){true}{ it.object.atom == "Array"}')
-             ->inIs('CONCAT');
+             ->inIs('CONCAT')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+
+        $this->atomIs('Variable')
+             ->code($vars)
+             ->inIs('VARIABLE')
+             ->inIs('CONCAT')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
