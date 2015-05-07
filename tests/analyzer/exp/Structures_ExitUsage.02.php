@@ -1,8 +1,9 @@
 <?php
 
-$expected     = array("die('No access')");
-
-$expected_not = array("exit('some exit')",
+$expected     = array("exit('some exit')",
                       "die  ");
+
+$expected_not = array("die('No access')",
+                      "die('No other access')");
 
 ?>
