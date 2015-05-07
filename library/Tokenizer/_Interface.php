@@ -28,14 +28,14 @@ class _Interface extends TokenAuto {
     static public $atom = 'Interface';
 
     public function _check() {
-        // interface x {}
-        $this->conditions = array(0 => array('token' => _Interface::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
-                                  2 => array('token' => 'T_OPEN_CURLY',
+        // interface x {}   
+        $this->conditions = array(0 => array('token'    => _Interface::$operators,
+                                             'atom'     => 'none'),
+                                  1 => array('atom'     => array('Identifier', 'Boolean', 'Null')),
+                                  2 => array('token'    => 'T_OPEN_CURLY',
                                              'property' => array('association' => 'Interface')),
-                                  3 => array('atom'  => array('Sequence', 'Void')),
-                                  4 => array('token' => 'T_CLOSE_CURLY')
+                                  3 => array('atom'     => array('Sequence', 'Void')),
+                                  4 => array('token'    => 'T_CLOSE_CURLY')
         );
         
         $this->actions = array('transform'    => array( 1 => 'NAME',
@@ -72,7 +72,6 @@ class _Interface extends TokenAuto {
                                'makeSequence'      => 'it');
         $this->checkAuto();
 
-        
         return false;
     }
 
@@ -84,14 +83,6 @@ fullcode.fullcode = "interface " + fullcode.out("NAME").next().code;
 // extends
 fullcode.out("EXTENDS").each{ fullcode.fullcode = fullcode.fullcode + " extends " + it.fullcode;}
 
-/*
-fullcode.out("EXTENDS").each{
-    extend = it;
-    g.V.has('atom', 'Interface').filter{it.out('NAME').next().code == extend.code}.each{
-        g.addEdge(it , extend, 'DEFINES');
-    }
-}
-  */
 GREMLIN;
     }
 
