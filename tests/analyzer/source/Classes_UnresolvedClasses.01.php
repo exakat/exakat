@@ -9,12 +9,15 @@ namespace a {
 
 namespace b {
     class ba {        function __construct() { print __METHOD__."\n";} }
+
+    new ba(); // must be found
+    new ab(); // won't be found (lies in a)
 }
 
 namespace c {
     use a;
 
-    new ab(); // won't be found (lies in b)
+    new ab(); // won't be found (lies in a)
     new ba(); // won't be found (lies in b)
 }
 
@@ -27,7 +30,7 @@ namespace d12 {
     new f\ab(); // must not be found (d\f\ab (no alias, no imported nsname, no local definition)
     new ba(); // won't be found (lies in b)
 }
-
+/*
 namespace d1 {
     use a as e;  // import an alias for a class as a full replacement for a class 
 
@@ -57,5 +60,5 @@ namespace d {
 namespace f {
     class ab {        function __construct() { print __METHOD__."\n";} }
 }
-
+*/
 ?>

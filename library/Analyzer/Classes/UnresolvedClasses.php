@@ -32,8 +32,7 @@ class UnresolvedClasses extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        $classes = $this->loadIni('php_classes.ini');
-        $classes = $classes['classes'];
+        $classes = $this->loadIni('php_classes.ini', 'classes');
         $classes = $this->makeFullNsPath($classes);
         
         $this->atomIs('New')
@@ -44,7 +43,7 @@ class UnresolvedClasses extends Analyzer\Analyzer {
              ->fullnspathIsNot($classes);
         $this->prepareQuery();
 
-        $this->atomIs('CATCH')
+        $this->atomIs('Catch')
              ->outIs('CLASS')
              ->noClassDefinition()
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
