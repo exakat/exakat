@@ -1211,3 +1211,9 @@ Simplify the class block for faster moving inside the structure (METHOD, CONSTAN
 Create a 'global' class to hold the const ?
 
 support de call_method()
+
+Multiple declared interface
+
+static outside a class/interface is useless
+
+Prepare the database of methods (Wrong Number of Arguments, Methods).
