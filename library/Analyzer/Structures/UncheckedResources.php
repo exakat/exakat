@@ -30,18 +30,20 @@ class UncheckedResources extends Analyzer\Analyzer {
         $resourceUsage = $this->loadJson('resource_usage.json');
 
         $positions = array(0,1,2);
+        $positions = array(0);
         foreach($resourceUsage as $creation => $usage) {
             foreach($positions as $pos) {
                 if (!isset($usage->{"function$pos"})) { 
                     continue; 
                 }
                 $functions = $this->makeFullNsPath((array) $usage->{"function$pos"});
-
+                
                 //direct usage of the resource :
                 // readdir(opendir('uncheckedDir4'));
                 $this->atomFunctionIs($creation)
                      ->inIs('ARGUMENT')
                      ->inIs('ARGUMENTS')
+                     ->hasNoIn('METHOD')
                      ->fullnspath($functions);
                 $this->prepareQuery();
 
