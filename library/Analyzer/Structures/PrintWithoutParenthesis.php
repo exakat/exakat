@@ -29,7 +29,9 @@ class PrintWithoutParenthesis extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Functioncall')
              ->tokenIs('T_PRINT')
-             ->is('parenthesis', true)
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Parenthesis')
              ->back('first');
         $this->prepareQuery();
     }
