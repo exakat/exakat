@@ -51,14 +51,23 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs('Logical')
-                     ->atomInside(array('Identifier', 'Nsname', 'Variable'))
+                     ->atomInside(array('Identifier', 'Nsname'))
                      ->hasNoIn('SUBNAME')
                      ->fullnspathIsNot($constants)
                      ->back('first');
                 $this->prepareQuery();
+
+                // unwanted guests
+                $this->atomFunctionIs($function)
+                     ->outIs('ARGUMENTS')
+                     ->outIs('ARGUMENT')
+                     ->is('rank', $position)
+                     ->atomIs(array('Boolean', 'Null', 'Integer', 'Float'))
+                     ->back('first');
+                $this->prepareQuery();
             }
         }
-        
+
         $positions = range(0, count((array) $functions->alternative) - 1);
         foreach($positions as $position) {
             foreach($functions->alternative->{$position} as $function => $constants) {
@@ -72,10 +81,17 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                      ->fullnspathIsNot($constants)
                      ->back('first');
                 $this->prepareQuery();
+
+                // unwanted guests
+                $this->atomFunctionIs($function)
+                     ->outIs('ARGUMENTS')
+                     ->outIs('ARGUMENT')
+                     ->is('rank', $position)
+                     ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'Logical'))
+                     ->back('first');
+                $this->prepareQuery();
             }
         }
-
-
     }
 }
 
