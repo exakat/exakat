@@ -1,15 +1,15 @@
 <?php
 
-$expected     = array('$other->version( )',
-                      '$swift->version( )',
-                      'other::version( )',
-                      'swift::version( )',
-                      'tooMany::version(1, 2, 3, 4, 5)',
-                      '$tooMany->version(1, 2, 3, 4, 5)',
+$expected     = array('$other->ini_set( )',
+                      '$swift->ini_set( )',
+                      'other::ini_set( )',
+                      'swift::ini_set( )',
+                      'tooMany::ini_set(1, 2, 3, 4, 5)',
+                      '$tooMany->ini_set(1, 2, 3, 4, 5)',
                       );
 
-$expected_not = array('enough::version(1, 2)',
-                      '$enough->version(1, 2)',
+$expected_not = array('enough::ini_set(1, 2)',
+                      '$enough->ini_set(1, 2)',
                       );
 
 ?>

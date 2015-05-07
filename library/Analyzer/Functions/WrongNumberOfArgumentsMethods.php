@@ -34,7 +34,9 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
         $argsMins = array();
         $argsMaxs = array();
         
-        // classes are ignored at that point. No way yet to refine this.
+        // Needs to finish the list of methods and their arguments.
+        
+        // Currently, classes are not checked.
         foreach($methods as $method) {
             if ($method['args_min'] > 0) {
                 $argsMins[$method['args_min']][] = $method['name'];
@@ -47,7 +49,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
             $this->atomIs(array('Methodcall', 'Staticmethodcall'))
                  ->outIs('METHOD')
                  ->code($f)
-                 ->isLess('count', $nb)
+                 ->isLess('args_count', $nb)
                  ->back('first');
             $this->prepareQuery();
         }
@@ -56,7 +58,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
             $this->atomIs(array('Methodcall', 'Staticmethodcall'))
                  ->outIs('METHOD')
                  ->code($f)
-                 ->isMore('count', $nb)
+                 ->isMore('args_count', $nb)
                  ->back('first');
             $this->prepareQuery();
         }
