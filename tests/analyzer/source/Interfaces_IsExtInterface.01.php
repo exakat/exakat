@@ -1,7 +1,7 @@
 <?php
 
 namespace A {
-    class B implements Reflector {}
+    class B implements Reflector {} // won't find this one
     class C implements \Reflector {}
 }
 

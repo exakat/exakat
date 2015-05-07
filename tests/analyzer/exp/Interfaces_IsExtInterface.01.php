@@ -1,9 +1,10 @@
 <?php
 
 $expected     = array('\Reflector',
-                      'Reflector',
+                      'Reflector', // should find one, not two
                       '\Reflector');
 
-$expected_not = array();
+$expected_not = array('Reflector' // should find one, not two
+                     );
 
 ?>

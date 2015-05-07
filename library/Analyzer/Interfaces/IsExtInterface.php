@@ -40,14 +40,25 @@ class IsExtInterface extends Analyzer\Analyzer {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
-            if (!empty($ini['classes'][0])) {
+            if (!empty($ini['interfaces'][0])) {
                 $interfaces = array_merge($interfaces, $ini['interfaces']);
             }
         }
 
         $interfaces = $this->makeFullNsPath($interfaces);
         
-        $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
+        $this->atomIs("Class")
+             ->outIs('IMPLEMENTS', 'EXTENDS')
+             ->fullnspath($interfaces);
+        $this->prepareQuery();
+
+        $this->atomIs("Instanceof")
+             ->outIs('CLASS')
+             ->fullnspath($interfaces);
+        $this->prepareQuery();
+
+        $this->atomIs("Typehint")
+             ->outIs('CLASS')
              ->fullnspath($interfaces);
         $this->prepareQuery();
     }
