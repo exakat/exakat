@@ -63,8 +63,21 @@ class NoDirectAccess extends Analyzer\Analyzer {
         //if (defined('_ECRIRE_INC_VERSION')) return;
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
-             // find !defined and defined
-             ->atomInside('Functioncall')
+             ->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs('T_STRING')
+             ->fullnspath('\\defined')
+             ->back('first')
+             ->outIs('THEN')
+             ->atomInside('Return')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->atomIs('Not')
+             ->outIs('NOT')
+             ->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs('T_STRING')
              ->fullnspath('\\defined')
