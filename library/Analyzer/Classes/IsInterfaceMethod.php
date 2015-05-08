@@ -26,16 +26,10 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class IsInterfaceMethod extends Analyzer\Analyzer {
-
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    
     public function analyze() {
-        // locally defined interface
+        // interface defined in the local class
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs('MethodDefinition')
              ->savePropertyAs('code', 'name')
              ->goToClass()
              ->outIs('IMPLEMENTS')
@@ -48,9 +42,9 @@ class IsInterfaceMethod extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // interface defined in the parents
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs('MethodDefinition')
              ->savePropertyAs('code', 'name')
              ->goToClass()
              ->goToAllParents()
@@ -68,30 +62,42 @@ class IsInterfaceMethod extends Analyzer\Analyzer {
         $interfaces = $this->loadIni('php_interfaces_methods.ini', 'interface');
         
         foreach($interfaces as $interface => $methods) {
+//            if ($interface != 'arrayaccess') { continue; }
+            if (empty($methods)) {
+                // may be the case for Traversable : interface without methods
+                continue; 
+            }
             $methods = explode(',', $methods);
-
+            
+            // interface locally implemented
             $this->atomIs('Function')
                  ->outIs('NAME')
-                 ->analyzerIs('MethodDefinition')
                  ->code($methods)
-                 ->goToClass()
+//                 ->goToClass() but this is going to be faster as we know where we are
+                 ->inIs('NAME')
+                 ->inIs('ELEMENT')
+                 ->inIs('BLOCK')
+                 ->atomIs('Class')
                  ->outIs('IMPLEMENTS')
                  ->fullnspath('\\'.$interface)
                  ->back('first');
             $this->prepareQuery();
 
+            // interface implemented by parents
             $this->atomIs('Function')
                  ->outIs('NAME')
-                 ->analyzerIs('MethodDefinition')
                  ->code($methods)
-                 ->goToClass()
+//                 ->goToClass() but this is going to be faster as we know where we are
+                 ->inIs('NAME')
+                 ->inIs('ELEMENT')
+                 ->inIs('BLOCK')
+                 ->atomIs('Class')
                  ->goToAllParents()
                  ->outIs('IMPLEMENTS')
                  ->fullnspath('\\'.$interface)
                  ->back('first');
             $this->prepareQuery();
         }
-
     }
 }
 

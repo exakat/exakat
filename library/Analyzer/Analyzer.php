@@ -1467,7 +1467,7 @@ GREMLIN
     }
 
     public function goToAllParents() {
-        $this->addMethod('out("IMPLEMENTS", "EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
+        $this->addMethod('out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
         
         return $this;
     }
