@@ -5,7 +5,8 @@ function x() {}
 array_filter($a, 'x');
 
 array_filter($a, array('Y', 'parent::x'));
-array_filter($a, array('X', 'parent::x'));
+array_filter($a, array('NoSuchClass', 'parent::x'));
+array_filter($a, array('NoParent', 'parent::x'));
 
 array_filter($a, array($a, 'x2'));
 
@@ -15,6 +16,10 @@ class Y extends Yparent {
     function z() {
         array_filter($a, array($this, 'x'));
     }
+}
+
+class NoParent {
+    function x() { $a++;}
 }
 
 class Yparent {

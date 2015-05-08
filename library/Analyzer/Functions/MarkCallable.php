@@ -112,14 +112,20 @@ if (i > 0) {
 
     theArray.cbMethod = it.out("ARGUMENT").has("rank", 1).next().noDelimiter.toLowerCase();
     
+    // case for "parent::method";
     i = theArray.cbMethod.indexOf("::");
     theArray.i = i;
-    if (i > 0) { // case for "parent::method";
+    if (i > 0) { 
         theArray.cbMethod = theArray.cbMethod.substring(i + 2);
-        theArray.cbHere = "yes";
         
         // we assume it is only parent.
-        theArray.cbClass = g.idx("classes")[["path":theArray.cbClass]].out("EXTENDS").next().fullnspath;
+        if (g.idx("classes")[["path":theArray.cbClass]].any() == false) {
+            // No such class
+        } else if (g.idx("classes")[["path":theArray.cbClass]].out("EXTENDS").any()) {
+            theArray.cbClass = g.idx("classes")[["path":theArray.cbClass]].out("EXTENDS").next().fullnspath;
+        } else {
+            theArray.cbParentClass = theArray.cbParentClass + "\\\\parent";
+        }
     }
 }';
 
