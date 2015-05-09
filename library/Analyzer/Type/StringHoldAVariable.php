@@ -27,21 +27,22 @@ use Analyzer;
 
 class StringHoldAVariable extends Analyzer\Analyzer {
     public function analyze() {
+        // String that has a PHP variables but ' as delimiters
         $this->atomIs('String')
              ->is('delimiter', "'")
              ->regex('noDelimiter', '[^\\\\\\\\]\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');
         $this->prepareQuery();
 
         // variable inside a NOWDOC
-        $this->atomIs('String')
-             ->is('nowdoc', true)
+        $this->atomIs('Heredoc')
              ->outIs('CONTAINS')
+             ->is('nowdoc', true)
              ->outIs('CONCAT')
              ->regex('code', '\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');
         $this->prepareQuery();
 
-        // variable inside a NOWDOC
-        $this->atomIs('String')
+        // <<<NOWDOC NOWDOC (NOWDOC or HEREDOC with wrong syntax)
+        $this->atomIs('Heredoc')
              ->tokenIs('T_START_HEREDOC')
              ->savePropertyAs('code', 'd')
              ->outIs('CONTAINS')
