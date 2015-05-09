@@ -30,4 +30,10 @@ function process_gpr() {
     $x = $_REQUEST['inside_process_gpr'];
 }
 
+function _request() {
+    $x = $_GET['inside__request'];
+    $x = $_POST['inside__request'];
+    $x = $_REQUEST['inside__request'];
+}
+
 ?>
