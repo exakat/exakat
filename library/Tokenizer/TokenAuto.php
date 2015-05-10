@@ -1258,7 +1258,7 @@ g.addEdge(cc, a9, 'NEXT');
 while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try',
                                                         'Ternary', 'While', 'Assignation', 'Switch', 'Use', 'Label', 'Array',
                                                         'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode', 'Functioncall',
-                                                        'Shell' ] &&
+                                                        'Shell', 'Heredoc' ] &&
                                       it.getProperty('token') != 'T_ELSEIF'}.any() &&
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL',
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL',
