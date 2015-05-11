@@ -84,6 +84,8 @@ class Cypher {
         $query = new Query($client, $queryTemplate, array());
         $result = $query->getResultSet();
 
+        display('Created index');
+
         $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.csv" AS csvLine
@@ -102,6 +104,7 @@ CYPHER;
             die("Couldn't load nodes in the database\n");
         }
 
+        display('Loaded nodes');
 
         $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT
@@ -133,6 +136,8 @@ CYPHER;
             $this->cleanCsv(); 
             die("Couldn't load nodes attributes in the database\n");
         }
+
+        display('Loaded nodes attributes');
         
         // Load relations
         $relations = array('file'    => 'FILE',
@@ -154,7 +159,22 @@ CYPHER;
                 $this->cleanCsv(); 
                 die("Couldn't load relations for $name in the database\n");
             }
+
+            display('Loaded link '.$name);
         }
+/*
+        $queryTemplate = <<<CYPHER
+DROP INDEX ON :Token(eid)
+CYPHER;
+        try {
+            $query = new Query($client, $queryTemplate, array());
+            $result = $query->getResultSet();
+        } catch (\Exception $e) {
+            $this->cleanCsv(); 
+            die("Couldn't remove eid\n");
+        } 
+
+        display('dropped index on eid ');
 
         $queryTemplate = <<<CYPHER
 MATCH (Token {  })
@@ -168,7 +188,10 @@ CYPHER;
             die("Couldn't remove eid\n");
         } 
 
+        display('cleaned eid');
+*/
         $this->cleanCsv();
+        display('Cleaning CSV');
 
         return true;
     }
@@ -212,7 +235,7 @@ CYPHER;
                     }
                 }
                 if ($diff = array_diff(array_keys($row), $les_cols, array('id'))) {
-                    display("Some columns were not processed : ".join(", ", $diff).".\n");
+                    display('Some columns were not processed : '.join(', ', $diff).".\n");
                 }
             }
             $row['id'] = $id;
@@ -229,7 +252,7 @@ CYPHER;
                     $rowa[$col] = '';
                 }
                 if ($diff = array_diff(array_keys($rowa), $les_attr, array('id'))) {
-                    display("Some columns were not processed for attributes : ".join(", ", $diff).".\n");
+                    display('Some columns were not processed for attributes : '.join(', ', $diff).".\n");
                 }
             }
             if ($count === 0) {
