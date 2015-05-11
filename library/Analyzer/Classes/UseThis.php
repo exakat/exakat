@@ -27,7 +27,7 @@ use Analyzer;
 
 class UseThis extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("MethodDefinition");
+        return array('MethodDefinition');
     }
     
     public function analyze() {

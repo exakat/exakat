@@ -26,7 +26,7 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class McryptcreateivWithoutOption extends Analyzer\Common\FunctionDefaultValue {
-    public $phpVersion = "5.6-";
+    public $phpVersion = '5.6-';
     
     public function analyze() {
         $this->code = 'mcrypt_create_iv';

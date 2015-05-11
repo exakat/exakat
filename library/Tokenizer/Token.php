@@ -254,10 +254,8 @@ class Token {
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            echo 'Exception : ', $message, "\n";
-            
-            echo $queryTemplate, "\n";
-            die(__METHOD__);
+
+            die( 'Exception : ' . $message . "\n" .$queryTemplate . "\n" . __METHOD__);
         }
         return $query->getResultSet();
     }

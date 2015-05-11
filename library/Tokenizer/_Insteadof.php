@@ -27,7 +27,7 @@ class _Insteadof extends TokenAuto {
     static public $operators = array('T_INSTEADOF');
     static public $atom = 'Insteadof';
     
-    protected $phpVersion = "5.4+";
+    protected $phpVersion = '5.4+';
 
     public function _check() {
         $this->conditions = array( -1 => array('atom'  => 'Staticconstant'),

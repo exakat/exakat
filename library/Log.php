@@ -30,20 +30,20 @@ class Log {
         $this->name = $name;
 
         $this->log = fopen($dir.'/log/'.$this->name.'.log', 'w+');
-        $this->log($this->name." created on ".date('r'));
+        $this->log($this->name.' created on '.date('r'));
 
         $this->begin = microtime(true);
     }
 
     public function __destruct() {
-        $this->log("Duration : ".number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
-        $this->log($this->name." closed on ".date('r'));
+        $this->log('Duration : '.number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
+        $this->log($this->name.' closed on '.date('r'));
         
         if ($this->log !== null) {
             fclose($this->log);
             unset($this->log);
         } else {
-            print "Log already destroyed.";
+            print 'Log already destroyed.';
         }
     }
     

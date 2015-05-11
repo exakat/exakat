@@ -26,7 +26,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Php54NewFunctions extends Analyzer\Common\FunctionDefinition {
-    protected $phpVersion = "5.3-";
+    protected $phpVersion = '5.3-';
     
     public function analyze() {
         $this->functions = array(

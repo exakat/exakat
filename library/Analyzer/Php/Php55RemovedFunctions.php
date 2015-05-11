@@ -26,7 +26,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Php55RemovedFunctions extends Analyzer\Common\FunctionUsage {
-    protected $phpVersion = "5.5-";
+    protected $phpVersion = '5.5-';
     
     public function analyze() {
         $this->functions = array('php_logo_guid',

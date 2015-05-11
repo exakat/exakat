@@ -28,7 +28,7 @@ use Analyzer;
 class QueriesInLoop extends Analyzer\Analyzer {
     public function analyze() {
         // for() { mysql_query(); }
-        $this->atomIs(array("Foreach", "For", "While"))
+        $this->atomIs(array('Foreach', 'For', 'While'))
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->code(array('mssql_query',
@@ -51,7 +51,7 @@ class QueriesInLoop extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // for() { $pdo->query(); }
-        $this->atomIs(array("Foreach", "For", "While"))
+        $this->atomIs(array('Foreach', 'For', 'While'))
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasIn('METHOD')

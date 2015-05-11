@@ -28,7 +28,7 @@ use Analyzer;
 class IsExtInterface extends Analyzer\Analyzer {
 
     public function dependsOn() {
-        return array("Analyzer\\Interfaces\\InterfaceUsage");
+        return array('Analyzer\\Interfaces\\InterfaceUsage');
     }
     
     public function analyze() {
@@ -47,17 +47,17 @@ class IsExtInterface extends Analyzer\Analyzer {
 
         $interfaces = $this->makeFullNsPath($interfaces);
         
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('IMPLEMENTS', 'EXTENDS')
              ->fullnspath($interfaces);
         $this->prepareQuery();
 
-        $this->atomIs("Instanceof")
+        $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->fullnspath($interfaces);
         $this->prepareQuery();
 
-        $this->atomIs("Typehint")
+        $this->atomIs('Typehint')
              ->outIs('CLASS')
              ->fullnspath($interfaces);
         $this->prepareQuery();

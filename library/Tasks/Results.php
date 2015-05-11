@@ -42,7 +42,7 @@ class Results implements Tasks {
     
             $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
             if (count($r) > 0) {
-                $die .= "Did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
+                $die .= 'Did you mean : '.implode(', ', str_replace('_', '/', $r))."\n";
             }
             die($die);
         }
@@ -116,7 +116,7 @@ GREMLIN;
                 } else {
                     $text .= "+ $k\n";
                     if (is_array($r)) {
-                        $text .= "  + ".implode("\n  + ", $r)."\n";
+                        $text .= '  + '.implode("\n  + ", $r)."\n";
                     } else {
                         $text .= "+ $r\n";
                     }
@@ -198,7 +198,7 @@ GREMLIN;
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            die( "Exception : ".$message."\n" .
+            die( 'Exception : '.$message."\n" .
                   $queryTemplate."\n");
         }
         return $query->getResultSet();

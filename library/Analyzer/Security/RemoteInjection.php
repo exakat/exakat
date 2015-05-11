@@ -46,7 +46,8 @@ class RemoteInjection extends Analyzer\Analyzer {
              
              // here, spot vulnerable spots
              ->raw('filter{ it.out("ARGUMENTS").out("ARGUMENT").filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Security\\\\SensitiveArgument").any() }.any()}')
-             ->raw('transform{ first ; }');
+             ->raw('transform{ first ; }')
+             ;
         $this->prepareQuery();
     }
 }
