@@ -1190,8 +1190,6 @@ Nested alternative (difficult to read)
 
 Check for and the last one (tbd)
 
-relatedAtom and dowhile => association
-
 Clone doesn't need parenthesis !! 
 Finish pageone (export in JSON)
 
@@ -1217,3 +1215,14 @@ Multiple declared interface
 static outside a class/interface is useless
 
 Prepare the database of methods (Wrong Number of Arguments, Methods).
+
+echo "{$_COOKIE['incoming']}"; : fullcode doesn't render the brackets
+
+Make test for fullcoding.
+
+Compared to integer ? 
+    if (!file_exists(dirname($file).'/code/.git/') == 2) { 
+
+Add Callable in Unused classes
+
+echo $b ? 'D' : 'F','G';
