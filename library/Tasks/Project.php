@@ -110,7 +110,7 @@ class Project implements Tasks {
         $thread->waitForAll();
         display("waited For All\n");
 
-        shell_exec('php '.$this->executable.' load -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project);
+        shell_exec('php '.$this->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
         $this->logTime('Loading');
 
