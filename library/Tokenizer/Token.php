@@ -133,19 +133,19 @@ class Token {
         self::$client = $client;
         
         self::$instructionEnding = array_merge(Preplusplus::$operators,
-                                                Postplusplus::$operators,
-                                                Assignation::$operators,
-                                                Addition::$operators,
-                                                Multiplication::$operators,
-                                                Preplusplus::$operators,
-                                                Concatenation::$operators,
-                                                Comparison::$operators,
-                                                Bitshift::$operators,
-                                                Logical::$operators,
-                                                Property::$operators,
-                                                Staticproperty::$operators,
-                                                _Instanceof::$operators,
-                                                array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_QUESTION'));
+                                               Postplusplus::$operators,
+                                               Assignation::$operators,
+                                               Addition::$operators,
+                                               Multiplication::$operators,
+                                               Preplusplus::$operators,
+                                               Concatenation::$operators,
+                                               Comparison::$operators,
+                                               Bitshift::$operators,
+                                               Logical::$operators,
+                                               Property::$operators,
+                                               Staticproperty::$operators,
+                                               _Instanceof::$operators,
+                                               array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_QUESTION'));
     }
 
     public static function getTokenizers($version = null) {
