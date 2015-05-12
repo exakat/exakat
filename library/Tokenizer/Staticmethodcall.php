@@ -42,9 +42,10 @@ class Staticmethodcall extends TokenAuto {
                                     6 => array('token'      => 'T_CLOSE_PARENTHESIS'),
                                  );
 
-        $this->actions = array('to_specialmethodcall' => true,
-                               'makeSequence'         => 'it',
-                               'cleanIndex'           => true);
+        $this->actions = array('toSpecialmethodcall' => true,
+                               'makeSequence'        => 'it',
+                               'atom'                => 'Staticmethodcall',
+                               'cleanIndex'          => true);
         $this->checkAuto();
 
         // normal call : Class::Method();

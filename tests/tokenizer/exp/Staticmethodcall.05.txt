@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      f
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -16,8 +18,6 @@ Label : CODE
           static
         Label : PROTECTED
           protected
-    Label : NAME
-      f
   Label : ELEMENT
     if
     Label : CONDITION

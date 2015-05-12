@@ -1394,7 +1394,7 @@ g.addEdge(it, x, 'NEXT');
             unset($actions['insertGlobalNs']);
         }
         
-        if (isset($actions['to_specialmethodcall'])) {
+        if (isset($actions['toSpecialmethodcall'])) {
             $qactions[] = "
 /* to_specialmethodcall */
 
@@ -1430,7 +1430,7 @@ g.removeVertex(x);
 g.addEdge(it, suivant, 'NEXT');
 
 ";
-            unset($actions['to_specialmethodcall']);
+            unset($actions['toSpecialmethodcall']);
         }
         
         if (isset($actions['insert_ns'])) {

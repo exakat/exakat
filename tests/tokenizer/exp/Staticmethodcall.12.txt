@@ -6,12 +6,12 @@ Label : CODE
     ::
     Label : METHOD
       Concatenation
-      Label : ARGUMENTS
-        void
       Label : CONCAT
         'C'
       Label : CONCAT
         'B'
+      Label : ARGUMENTS
+        void
     Label : CLASS
       $c
   Label : ELEMENT
