@@ -51,7 +51,7 @@ if (array_search('-a', $argv) !== false) {
 }
 $end = microtime(true);
 
-$row['duration'] = ($end - $begin);
+$row['duration'] = $end - $begin;
 //Tests: 265, Assertions: 799, Failures: 77, Skipped: 7.
 
 if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+)[\.,]/is', $results, $R)) {
