@@ -23,7 +23,7 @@
 
 namespace Report\Format\Html;
 
-class TableForVersions extends \Report\Format\Ace { 
+class TableForVersions extends \Report\Format\Devoops { 
 
     public function render($output, $data) {
 

@@ -23,7 +23,7 @@
 
 namespace Report\Format\Devoops;
 
-class BreadCrumb extends \Report\Format\Ace { 
+class BreadCrumb extends \Report\Format\Devoops { 
     public function render($output, $data) {
         $text = <<<TEXT
 <div class="row">

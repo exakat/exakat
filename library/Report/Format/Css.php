@@ -29,13 +29,13 @@ class Css {
     private $cssName     = null; 
     
     public function __construct($cssName, $className) {
-        // $cssName already holds the format name as a directory : Ace/Css/<Css>.json
+        // $cssName already holds the format name as a directory : Devoops/Css/<Css>.json
         if ($cssName === null) {
             $cssName = 'Null';
             // actually, this is OK
-        } elseif (file_exists(__DIR__.'/Ace/Css/'.$cssName.'.json')) {
+        } elseif (file_exists(__DIR__.'/Devoops/Css/'.$cssName.'.json')) {
             $cssName = $cssName;
-            $json = file_get_contents(__DIR__.'/Ace/Css/'.$cssName.'.json');
+            $json = file_get_contents(__DIR__.'/Devoops/Css/'.$cssName.'.json');
             $this->css = json_decode($json);
             if ($this->css === null) {
                 print "JSON error in '$cssName.json' : ".json_last_error()."\n";
@@ -44,7 +44,7 @@ class Css {
             print "Couldn't find '$cssName.json' file.\n";
         }
 
-        $this->cssDefault = json_decode(file_get_contents(__DIR__.'/Ace/Css/default/'.$className.'.json'));
+        $this->cssDefault = json_decode(file_get_contents(__DIR__.'/Devoops/Css/default/'.$className.'.json'));
     }
     
     public function __get($name) {
