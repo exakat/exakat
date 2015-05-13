@@ -38,6 +38,18 @@ class IsRead extends Analyzer\Analyzer {
             // note : NAME is for Switch!!
         $this->prepareQuery();
 
+        // Reading inside an assignation
+        $this->atomIs('Variable')
+             ->inIs('LEFT')
+             ->atomIs('Assignation')
+             ->code('=')
+             ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
+                           'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
+                           'CASE', 'CLONE', 'FINAL', 'CLASS'))
+             ->back('first');
+            // note : NAME is for Switch!!
+        $this->prepareQuery();
+
         // $this is always read
         $this->atomIs('Variable')
              ->code('$this');
