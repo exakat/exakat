@@ -1226,3 +1226,16 @@ Compared to integer ?
 Add Callable in Unused classes
 
 echo $b ? 'D' : 'F','G';
+
+Handling PHP7 incompatibilities, such as : $foo()['bar']();
+
+no-unresolved-use
+
+Constructors returning null rather than throwing an exception (https://wiki.php.net/rfc/internal_constructor_behaviour)
+They should be checked with === null after NEW
+no-raw-exceptions
+no-curly-array
+
+has a 'third-party' folder ?
+
+Hash() shouldn't be compared with == (to avoid hash() == '0')
