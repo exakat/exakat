@@ -268,15 +268,22 @@ This may be due to configuration file, compilation error, wrong extension (inclu
             $this->addContent('Horizontal', $analyzer);
         }
 
-        $this->createLevel2('About Devoops');
+        $this->createLevel2('About This Report');
         $aboutDevoops = <<<Devoops
-				<div class="about-inner">
-					<h4 class="page-header">Open-source admin theme for you</h4>
-					<p>DevOOPS team</p>
-					<p>Homepage - <a href="http://devoops.me" target="_blank">http://devoops.me</a></p>
-					<p>Email - <a href="mailto:devoopsme@gmail.com">devoopsme@gmail.com</a></p>
-					<p>Twitter - <a href="http://twitter.com/devoopsme" target="_blank">http://twitter.com/devoopsme</a></p>
-				</div>
+            This report has been build, thanks to the following other Open Source projects. 
+            
+			<div class="about-inner">
+				<h3 class="page-header">Devoops</h4>
+				<p>By the DevOOPS team : Open-source admin theme for you.</p>
+				<p>Homepage - <a href="http://devoops.me" target="_blank">http://devoops.me</a></p>
+				<p>Email - <a href="mailto:devoopsme@gmail.com">devoopsme@gmail.com</a></p>
+				<p>Twitter - <a href="http://twitter.com/devoopsme" target="_blank">http://twitter.com/devoopsme</a></p>
+
+				<h3 class="page-header">jQuery</h4>
+				<p>By the jQuery Foundation</p>
+				<p>Homepage - <a href="http://jquery.com/" target="_blank">http://jquery.com/</a></p>
+				<p>Twitter - <a href="https://twitter.com/jQuery" target="_blank">https://twitter.com/jQuery</a></p>
+			</div>
 Devoops;
 
         $this->addContent('Text', $aboutDevoops);
