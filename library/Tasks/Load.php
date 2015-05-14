@@ -777,7 +777,7 @@ class Load implements Tasks {
                           && isset($tokens[$id + 1]) && is_string($tokens[$id + 1])
                           && $tokens[$id + 1] == ';'
                           && isset($tokens[$id + 2]) && is_array($tokens[$id + 2])
-                          && in_array($this->php->getTokenname($tokens[$id + 2][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
+                          && in_array($this->php->getTokenname($tokens[$id + 2][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_CLOSE_TAG'))) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                   ->setProperty('code', $token)
                                                   ->setProperty('line', $line)
