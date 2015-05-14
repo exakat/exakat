@@ -1208,8 +1208,6 @@ if ($str=='') // uh-oh! What if FALSE or the integer 0 is passed as an argument?
 Simplify the class block for faster moving inside the structure (METHOD, CONSTANT, PROPERTY, no more BLOCK)
 Create a 'global' class to hold the const ?
 
-support de call_method()
-
 Multiple declared interface
 
 static outside a class/interface is useless
@@ -1220,22 +1218,17 @@ echo "{$_COOKIE['incoming']}"; : fullcode doesn't render the brackets
 
 Make test for fullcoding.
 
-Compared to integer ? 
+Compared to integer ? to wrong type ? 
     if (!file_exists(dirname($file).'/code/.git/') == 2) { 
 
-Add Callable in Unused classes
+Add Analyzer\Callable in Unused classes
+support de call_method()
 
-echo $b ? 'D' : 'F','G';
-
-Handling PHP7 incompatibilities, such as : $foo()['bar']();
-
-no-unresolved-use
+Handling PHP7 incompatibilities, such as : $foo()['bar'](); Do need a directive (can't have them both. Can detect them?)
 
 Constructors returning null rather than throwing an exception (https://wiki.php.net/rfc/internal_constructor_behaviour)
 They should be checked with === null after NEW
 no-raw-exceptions
 no-curly-array
 
-has a 'third-party' folder ?
-
-Hash() shouldn't be compared with == (to avoid hash() == '0')
+project has a 'third-party' folder ?
