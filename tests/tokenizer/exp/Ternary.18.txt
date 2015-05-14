@@ -16,6 +16,12 @@ Label : CODE
             $e
       Label : ELSE
         ::
+        Label : METHOD
+          h
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $i
         Label : CLASS
           {
           Label : VARIABLE
@@ -26,11 +32,5 @@ Label : CODE
               "y"
           Label : INDEX
             2
-        Label : METHOD
-          h
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $i
     Label : LEFT
       $a

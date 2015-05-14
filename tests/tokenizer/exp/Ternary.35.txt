@@ -85,9 +85,9 @@ Label : ELEMENT
                   'J'
         Label : ELEMENT
           B
-      Label : VALUE
-        $b
       Label : SOURCE
         $a
+      Label : VALUE
+        $b
 Label : ELEMENT
   A

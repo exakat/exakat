@@ -6,26 +6,34 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        do
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            do
-            Label : BLOCK
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            ;
+            Label : ELEMENT
               ;
               Label : ELEMENT
                 do
                 Label : BLOCK
                   ;
                   Label : ELEMENT
-                    ++
-                    Label : POSTPLUSPLUS
-                      $x
+                    ;
+                    Label : ELEMENT
+                      do
+                      Label : BLOCK
+                        ;
+                        Label : ELEMENT
+                          ;
+                          Label : ELEMENT
+                            ++
+                            Label : POSTPLUSPLUS
+                              $x
+                      Label : CONDITION
+                        1
                 Label : CONDITION
-                  1
-            Label : CONDITION
-              2
-        Label : CONDITION
-          3
+                  2
+          Label : CONDITION
+            3
     Label : CONDITION
       4

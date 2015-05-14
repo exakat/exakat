@@ -7,9 +7,11 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $x
     Label : CONDITION
       <
       Label : RIGHT

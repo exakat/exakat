@@ -6,14 +6,16 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        do
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            {
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            ;
             Label : ELEMENT
-              void
-        Label : CONDITION
-          1
+              {
+              Label : ELEMENT
+                void
+          Label : CONDITION
+            1
     Label : CONDITION
       2

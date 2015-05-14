@@ -11,12 +11,6 @@ Label : ELEMENT
         ?
         Label : CONDITION
           ::
-          Label : CLASS
-            \
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              C
           Label : METHOD
             E
             Label : ARGUMENTS
@@ -27,6 +21,12 @@ Label : ELEMENT
                   $b
                 Label : INDEX
                   'F'
+          Label : CLASS
+            \
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              C
         Label : THEN
           0
         Label : ELSE
@@ -39,18 +39,18 @@ Label : ELEMENT
         void
         Label : ARGUMENT
           ::
-          Label : CLASS
-            \
-            Label : SUBNAME
-              J
-            Label : SUBNAME
-              I
           Label : METHOD
             K
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 void
+          Label : CLASS
+            \
+            Label : SUBNAME
+              J
+            Label : SUBNAME
+              I
     Label : ELEMENT
       F
 Label : ELEMENT
