@@ -6,7 +6,7 @@ Label : CODE
     return
     Label : RETURN
       "
-      Label : CONTAIN
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           a

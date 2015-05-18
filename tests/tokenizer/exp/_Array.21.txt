@@ -1,0 +1,56 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          ::
+          Label : CLASS
+            b
+          Label : CONSTANT
+            x
+        Label : INDEX
+          1
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            x
+        Label : INDEX
+          1
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          x
+        Label : INDEX
+          1
+  Label : ELEMENT
+    const
+    Label : NAME
+      x
+    Label : VALUE
+      array
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          4
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          2

@@ -33,19 +33,19 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        ::
-        Label : CLASS
-          x
-        Label : PROPERTY
+        [
+        Label : VARIABLE
           [
           Label : VARIABLE
-            [
-            Label : VARIABLE
+            ::
+            Label : CLASS
+              x
+            Label : CONSTANT
               A
-            Label : INDEX
-              2
           Label : INDEX
-            3
+            2
+        Label : INDEX
+          3
   Label : ELEMENT
     class
     Label : NAME
@@ -73,12 +73,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        ::
-        Label : CLASS
-          x
-        Label : PROPERTY
-          [
-          Label : VARIABLE
+        [
+        Label : VARIABLE
+          ::
+          Label : CLASS
+            x
+          Label : CONSTANT
             A
-          Label : INDEX
-            0
+        Label : INDEX
+          0
