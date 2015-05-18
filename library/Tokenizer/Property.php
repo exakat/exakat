@@ -32,7 +32,7 @@ class Property extends TokenAuto {
                           'Functioncall', 'Parenthesis');
 
         // $object->property{1}
-        $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+        $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOLLAR')),
                                    -1 => array('atom' => $operands),
                                     0 => array('token' => Property::$operators),
                                     1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier', 'Boolean', 'Null')),

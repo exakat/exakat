@@ -11,7 +11,7 @@ Label : CODE
         Label : VALUE
           <<<'EOT'
 
-          Label : CONTAIN
+          Label : CONTAINS
             Concatenation
             Label : CONCAT
               bar

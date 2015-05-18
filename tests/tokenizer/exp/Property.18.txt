@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      $e
     Label : LEFT
       ->
       Label : OBJECT
@@ -26,12 +28,12 @@ Label : CODE
               void
       Label : PROPERTY
         d
-    Label : RIGHT
-      $e
   Label : ELEMENT
     void
   Label : ELEMENT
     =
+    Label : RIGHT
+      $l
     Label : LEFT
       ->
       Label : OBJECT
@@ -58,5 +60,3 @@ Label : CODE
           $j
         Label : PROPERTY
           k
-    Label : RIGHT
-      $l
