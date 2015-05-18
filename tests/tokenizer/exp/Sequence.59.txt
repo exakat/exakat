@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -44,7 +48,3 @@ Label : CODE
             'e'
         Label : LEFT
           $d
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $a

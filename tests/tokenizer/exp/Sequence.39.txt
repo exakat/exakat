@@ -3,20 +3,30 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      $x2
-    Label : LEFT
-      $b
+    ;
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $a
+        Label : ELEMENT
+          void
+      Label : ELEMENT
+        void
+    Label : ELEMENT
+      void
   Label : ELEMENT
-    void
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        $x2
+      Label : LEFT
+        $b

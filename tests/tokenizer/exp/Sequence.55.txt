@@ -7,29 +7,33 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            I
-          Label : SUBNAME
-            H
-          Label : SUBNAME
-            G
-          Label : SUBNAME
-            F
-          Label : AS
-            J
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            \
+            Label : SUBNAME
+              E
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              C
       Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            \
+            Label : SUBNAME
+              I
+            Label : SUBNAME
+              H
+            Label : SUBNAME
+              G
+            Label : SUBNAME
+              F
+            Label : AS
+              J
     Label : NAMESPACE
       \
       Label : SUBNAME

@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $y
+    Label : VALUE
+      $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -12,10 +16,6 @@ Label : CODE
           3
         Label : LEFT
           $c
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $y
   Label : ELEMENT
     if
     Label : CONDITION
@@ -30,6 +30,10 @@ Label : CODE
           $x
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $y
+    Label : VALUE
+      $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -38,10 +42,6 @@ Label : CODE
           2
         Label : LEFT
           $c
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $y
   Label : ELEMENT
     if
     Label : CONDITION

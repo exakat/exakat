@@ -22,36 +22,38 @@ Label : CODE
       ;
       Label : ELEMENT
         `
-        Label : CONTAIN
+        Label : CONTAINS
           Concatenation
           Label : CONCAT
             ls -1 
           Label : CONCAT
             $g
       Label : ELEMENT
-        ->
-        Label : OBJECT
-          $c
-        Label : METHOD
-          d
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                "
-                Label : CONTAIN
-                  Concatenation
-                  Label : CONCAT
-                     
-                  Label : CONCAT
-                    $d
-              Label : CONCAT
-                ::
-                Label : CLASS
-                  self
-                Label : CONSTANT
-                  E
+        ;
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            $c
+          Label : METHOD
+            d
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  "
+                  Label : CONTAINS
+                    Concatenation
+                    Label : CONCAT
+                       
+                    Label : CONCAT
+                      $d
+                Label : CONCAT
+                  ::
+                  Label : CLASS
+                    self
+                  Label : CONSTANT
+                    E
     Label : ELSE
       ;
       Label : ELEMENT

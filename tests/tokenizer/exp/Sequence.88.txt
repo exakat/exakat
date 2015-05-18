@@ -19,8 +19,6 @@ Label : CODE
             'X'
           Label : CONCAT
             ::
-            Label : CLASS
-              D
             Label : METHOD
               E
               Label : ARGUMENTS
@@ -31,20 +29,22 @@ Label : CODE
                     Arguments
                     Label : ARGUMENT
                       =>
-                      Label : KEY
-                        'V'
                       Label : VALUE
                         'W'
+                      Label : KEY
+                        'V'
                     Label : ARGUMENT
                       =>
-                      Label : KEY
-                        'J'
                       Label : VALUE
                         2
+                      Label : KEY
+                        'J'
                 Label : ARGUMENT
                   'T'
                 Label : ARGUMENT
                   'S'
+            Label : CLASS
+              D
           Label : CONCAT
             'C'
           Label : CONCAT
@@ -69,8 +69,6 @@ Label : CODE
         'K'
       Label : ARGUMENT
         ::
-        Label : CLASS
-          D
         Label : METHOD
           E
           Label : ARGUMENTS
@@ -81,26 +79,28 @@ Label : CODE
                 Arguments
                 Label : ARGUMENT
                   =>
-                  Label : KEY
-                    'J'
                   Label : VALUE
                     1
+                  Label : KEY
+                    'J'
                 Label : ARGUMENT
                   =>
-                  Label : KEY
-                    'I'
                   Label : VALUE
                     0
+                  Label : KEY
+                    'I'
                 Label : ARGUMENT
                   =>
-                  Label : KEY
-                    'G'
                   Label : VALUE
                     'H'
+                  Label : KEY
+                    'G'
             Label : ARGUMENT
               $b
             Label : ARGUMENT
               'F'
+        Label : CLASS
+          D
       Label : ARGUMENT
         'C'
       Label : ARGUMENT

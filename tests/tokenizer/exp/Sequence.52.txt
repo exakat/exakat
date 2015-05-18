@@ -14,54 +14,33 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        K
-
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              $h
-            Label : CONCAT
-              f
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'g'
-      Label : ELEMENT
-        J
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                $h
+              Label : CONCAT
+                f
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'g'
+        Label : ELEMENT
+          J
     
-  Label : ELEMENT
-    H
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          K
 
   Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        empty
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        E
-
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-      Label : ELEMENT
-        D
-    
-    Label : ELSE
-      elseif
+    ;
+    Label : ELEMENT
+      if
       Label : CONDITION
         !
         Label : NOT
@@ -69,18 +48,53 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              $c
+              $a
       Label : THEN
         ;
         Label : ELEMENT
-          G
-
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $d
-        Label : ELEMENT
-          F
+          ;
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $b
+          Label : ELEMENT
+            D
     
+        Label : ELEMENT
+          E
+
+      Label : ELSE
+        elseif
+        Label : CONDITION
+          !
+          Label : NOT
+            empty
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $d
+            Label : ELEMENT
+              F
+    
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              G
+
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      H
+

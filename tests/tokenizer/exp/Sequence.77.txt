@@ -9,10 +9,14 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        continue
-        Label : LEVEL
-          void
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
+        ;
+        Label : ELEMENT
+          continue
+          Label : LEVEL
+            void

@@ -3,66 +3,74 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'E'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        class
-        Label : NAME
-          F
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            var
-            Label : VALUE
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-            Label : DEFINE
-              $b
-            Label : VAR
-              var
-          Label : ELEMENT
-            var
-            Label : VALUE
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-            Label : DEFINE
-              $a
-            Label : VAR
-              var
-      Label : ELEMENT
-        class
-        Label : NAME
-          G
-        Label : BLOCK
-          void
-        Label : EXTENDS
-          H
+    ;
+    Label : ELEMENT
+      require_once
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            'C'
+          Label : CONCAT
+            B
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                __FILE__
   Label : ELEMENT
-    require_once
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          'C'
-        Label : CONCAT
-          B
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        !
+        Label : NOT
+          D
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              __FILE__
+              'E'
+      Label : THEN
+        ;
+        Label : ELEMENT
+          class
+          Label : NAME
+            F
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                var
+                Label : VALUE
+                  array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+                Label : DEFINE
+                  $a
+                Label : VAR
+                  var
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                var
+                Label : VALUE
+                  array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+                Label : DEFINE
+                  $b
+                Label : VAR
+                  var
+        Label : ELEMENT
+          class
+          Label : NAME
+            G
+          Label : BLOCK
+            void
+          Label : EXTENDS
+            H

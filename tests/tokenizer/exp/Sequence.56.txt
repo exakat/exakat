@@ -3,28 +3,44 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      3
-    Label : LEFT
-      $e
+    ;
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $a
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $c
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        --
+        Label : PREPLUSPLUS
+          $d
   Label : ELEMENT
-    --
-    Label : PREPLUSPLUS
-      $d
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      3
-    Label : LEFT
-      $c
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $a
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        3
+      Label : LEFT
+        $e

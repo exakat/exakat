@@ -9,18 +9,22 @@ Label : CODE
     Label : LEFT
       $z
   Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $y
-  Label : ELEMENT
     void
   Label : ELEMENT
-    void
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        2
+      Label : LEFT
+        $y
   Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $x
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $x
+  Label : ELEMENT
+    void

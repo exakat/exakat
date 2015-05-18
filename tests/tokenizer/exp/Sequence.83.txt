@@ -14,71 +14,79 @@ Label : ELEMENT
           Label : BLOCK
             ;
             Label : ELEMENT
-              O
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $g
-            Label : ELEMENT
-              P
-            Label : ELEMENT
-              Q
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $c
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  R
+              ;
+              Label : ELEMENT
+                ;
+                Label : ELEMENT
+                  echo
                   Label : ARGUMENTS
-                    Arguments
+                    void
                     Label : ARGUMENT
-                      'U'
-                    Label : ARGUMENT
-                      T
-                    Label : ARGUMENT
-                      [
-                      Label : VARIABLE
-                        $f
-                      Label : INDEX
-                        'S'
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  R
+                      R
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          'U'
+                        Label : ARGUMENT
+                          T
+                        Label : ARGUMENT
+                          [
+                          Label : VARIABLE
+                            $f
+                          Label : INDEX
+                            'X'
+                Label : ELEMENT
+                  V
+              Label : ELEMENT
+                ;
+                Label : ELEMENT
+                  AB
+                Label : ELEMENT
+                  echo
                   Label : ARGUMENTS
-                    Arguments
+                    void
                     Label : ARGUMENT
-                      'U'
-                    Label : ARGUMENT
-                      T
-                    Label : ARGUMENT
-                      [
-                      Label : VARIABLE
-                        $f
-                      Label : INDEX
-                        'X'
+                      $c
+                Label : ELEMENT
+                  AA
             Label : ELEMENT
-              V
-            Label : ELEMENT
-              AB
-            Label : ELEMENT
-              AA
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $c
+              ;
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    R
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        'U'
+                      Label : ARGUMENT
+                        T
+                      Label : ARGUMENT
+                        [
+                        Label : VARIABLE
+                          $f
+                        Label : INDEX
+                          'S'
+              Label : ELEMENT
+                Q
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $c
+              Label : ELEMENT
+                P
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $g
+              Label : ELEMENT
+                O
             Label : ELEMENT
               =
               Label : RIGHT
@@ -102,31 +110,35 @@ Label : ELEMENT
               Label : LEFT
                 $g
             Label : ELEMENT
-              I
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                [
-                Label : VARIABLE
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
                   [
                   Label : VARIABLE
                     [
                     Label : VARIABLE
                       [
                       Label : VARIABLE
-                        $d
+                        [
+                        Label : VARIABLE
+                          $d
+                        Label : INDEX
+                          'J'
                       Label : INDEX
-                        'J'
+                        $e
                     Label : INDEX
-                      $e
+                      'K'
                   Label : INDEX
-                    'K'
-                Label : INDEX
-                  $b
-              Label : LEFT
-                $f
+                    $b
+                Label : LEFT
+                  $f
+              Label : ELEMENT
+                I
             Label : ELEMENT
-              I
+              ;
+              Label : ELEMENT
+                I
           Label : INIT
             =
             Label : RIGHT

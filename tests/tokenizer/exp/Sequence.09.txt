@@ -3,38 +3,46 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      substr
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          13
-        Label : ARGUMENT
-          8
-        Label : ARGUMENT
-          $datafile_server
-    Label : LEFT
-      $backupdir
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $unzip
-    Label : METHOD
-      ReadFile
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $datafile_server
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      new
-      Label : NEW
-        SimpleUnzip
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        new
+        Label : NEW
+          SimpleUnzip
+          Label : ARGUMENTS
             void
-    Label : LEFT
-      $unzip
+            Label : ARGUMENT
+              void
+      Label : LEFT
+        $unzip
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          substr
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              13
+            Label : ARGUMENT
+              8
+            Label : ARGUMENT
+              $datafile_server
+        Label : LEFT
+          $backupdir
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $unzip
+        Label : METHOD
+          ReadFile
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $datafile_server

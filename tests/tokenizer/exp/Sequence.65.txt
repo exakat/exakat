@@ -9,27 +9,27 @@ Label : CODE
       ;
       Label : ELEMENT
         ::
-        Label : CLASS
-          G
         Label : METHOD
           H
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'I'
+        Label : CLASS
+          G
       Label : ELEMENT
         void
       Label : ELEMENT
         E
       Label : ELEMENT
         ::
-        Label : CLASS
-          C
         Label : METHOD
           D
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'E'
+        Label : CLASS
+          C
       Label : ELEMENT
         A

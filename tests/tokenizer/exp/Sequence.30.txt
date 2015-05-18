@@ -42,7 +42,7 @@ Label : CODE
                 Concatenation
                 Label : CONCAT
                   "
-                  Label : CONTAIN
+                  Label : CONTAINS
                     Concatenation
                     Label : CONCAT
                       c

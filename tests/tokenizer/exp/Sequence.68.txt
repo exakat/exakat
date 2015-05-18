@@ -16,8 +16,6 @@ Label : CODE
             'L'
     Label : LEFT
       ::
-      Label : CLASS
-        H
       Label : METHOD
         I
         Label : ARGUMENTS
@@ -32,27 +30,33 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
+      Label : CLASS
+        H
   Label : ELEMENT
-    ->
-    Label : OBJECT
-      $b
-    Label : METHOD
-      E
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'G'
-        Label : ARGUMENT
-          F
+    ;
+    Label : ELEMENT
+      ::
+      Label : METHOD
+        C
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'D'
+          Label : ARGUMENT
+            $a
+      Label : CLASS
+        B
   Label : ELEMENT
-    ::
-    Label : CLASS
-      B
-    Label : METHOD
-      C
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'D'
-        Label : ARGUMENT
-          $a
+    ;
+    Label : ELEMENT
+      ->
+      Label : OBJECT
+        $b
+      Label : METHOD
+        E
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'G'
+          Label : ARGUMENT
+            F

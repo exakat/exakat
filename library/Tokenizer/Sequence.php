@@ -79,7 +79,7 @@ class Sequence extends TokenAuto {
                                                       -1 => 'ELEMENT'),
                                'rank'        => array( 1 => 1,
                                                       -1 => 0 ),
-                               'mergeNext'   => array('Sequence' => 'ELEMENT'),
+//                               'mergeNext'   => array('Sequence' => 'ELEMENT'),
                                'atom'        => 'Sequence',
                                'cleanIndex'  => true,
                                'keepIndexed' => true,
@@ -102,13 +102,13 @@ class Sequence extends TokenAuto {
                                                       -1 => 'ELEMENT'),
                                'rank'        => array( 1 => 1,
                                                       -1 => 0 ),
-                               'mergeNext'   => array('Sequence' => 'ELEMENT'),
+//                               'mergeNext'   => array('Sequence' => 'ELEMENT'),
                                'atom'        => 'Sequence',
                                'cleanIndex'  => true,
                                'keepIndexed' => true,
                                );
         $this->checkAuto();
-        
+
         // @note instructions separated by ; but ; is useless
         $this->conditions = array(-1 => array('atom'     => $operands,
                                               'notToken' => 'T_ELSEIF' ),
@@ -150,7 +150,7 @@ class Sequence extends TokenAuto {
                                                        -1 => 'ELEMENT'),
                                'rank'         => array( 1 => 1,
                                                        -1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'),
+//                               'mergeNext'    => array('Sequence' => 'ELEMENT'),
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'keepIndexed'  => true
@@ -172,14 +172,13 @@ class Sequence extends TokenAuto {
                                );
         $this->checkAuto();
 
-
         // @note ; without no more NEXT
         $this->conditions = array( 0 => array('atom'  => 'Sequence' ));
         
         $this->actions = array('checkForNext' => true,
                                'keepIndexed'  => true);
         $this->checkAuto();
-        
+
         return false;
     }
 
