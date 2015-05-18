@@ -26,7 +26,10 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class UsedClass extends Analyzer\Analyzer {
-
+    public function dependsOn() {
+        return array('Functions\\MarkCallable');
+    }
+    
     public function analyze() {
         // class used in a New
         $this->atomIs('Class')
@@ -92,10 +95,19 @@ class UsedClass extends Analyzer\Analyzer {
 
         // class used in a String (full string only)
         $this->atomIs('Class')
-             ->outIs('CLASS')
              ->analyzerIsNot('self')
+             ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->raw('filter{ g.idx("atoms")[["atom":"String"]].has("code", name).any()}');
+        $this->prepareQuery();
+
+        // class used in an array
+        $this->atomIs('Class')
+             ->analyzerIsNot('self')
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'name')
+             ->raw('filter{ g.idx("atoms")[["atom":"Functioncall"]].has("token", "T_ARRAY").out("ARGUMENTS").filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Functions\\\\MarkCallable").any()}.out("ARGUMENT").has("rank", 0).has("noDelimiter", name).any() }')
+             ->back('first');
         $this->prepareQuery();
     }
 }
