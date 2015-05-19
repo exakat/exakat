@@ -37,12 +37,12 @@ class FunctioncallArray extends TokenAuto {
                                                 'token' => 'T_CLOSE_PARENTHESIS'),
         );
 
-        $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'ARGUMENTS',
-                                                       3 => 'DROP'),
-                               'array_to_functioncall' => 1,
-                               'atom'         => 'Functioncall',
-                               'makeSequence' => 'it'
+        $this->actions = array('transform'           => array(1 => 'DROP',
+                                                              2 => 'ARGUMENTS',
+                                                              3 => 'DROP'),
+                               'arrayToFunctioncall' => 1,
+                               'atom'                => 'Functioncall',
+                               'makeSequence'        => 'it'
                                );
         $this->checkAuto();
 

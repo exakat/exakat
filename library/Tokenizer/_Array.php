@@ -31,7 +31,7 @@ class _Array extends TokenAuto {
                                          'Staticconstant', 'Identifier');
     
     public function _check() {
-        // $x[3] and mutlidimensional too
+        // $x[3] or $x[] and multidimensional
         $this->conditions = array( -2 => array('notToken'      => array_merge(Staticproperty::$operators, Property::$operators)),
                                    -1 => array('atom'          => _Array::$allowedObject),
                                     0 => array('token'         => _Array::$operators,
@@ -43,7 +43,9 @@ class _Array extends TokenAuto {
         
         $this->actions = array('toArray'      => true,
                                'makeSequence' => 'b1',
-                               'cleanIndex'   => true);
+                               'cleanIndex'   => true,
+//                               'atom'         => 'Array'
+                               );
         $this->checkAuto();
 
         return false;

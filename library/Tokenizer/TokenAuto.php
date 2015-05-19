@@ -1723,31 +1723,33 @@ while( current.atom == null && current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY
         a1 = current.out('NEXT').next();
         a2 = a1.out('NEXT').next();
     
-        g.idx('atoms').put('atom', 'Arrayappend', current)
-    } else {
+        g.idx('atoms').put('atom', 'Arrayappend', current);
+    } else { //a2.token == 'T_CLOSE_BRACKET'
         /* case of a array with index (\$s[1]) */
+        a3 = a2.out('NEXT').next();
         g.addEdge(current, b1, 'VARIABLE');
         g.addEdge(current, a1, 'INDEX');
+        
         current.setProperty('atom', 'Array');
         g.idx('atoms').put('atom', 'Array', current)
-    
+        
         a1.inE('INDEXED').each{ g.removeEdge(it); }
         current.inE('INDEXED').each{ g.removeEdge(it); }
         fullcode = current;
         $fullcodeArray;
 
         b1.bothE('NEXT').each{ g.removeEdge(it); }
+        current.bothE('NEXT').each{ g.removeEdge(it); }
         a1.bothE('NEXT').each{ g.removeEdge(it); }
-        a2.inE('NEXT').each{ g.removeEdge(it); }
 
         b1 = current;
-        current = a2.out('NEXT').next();
+        current = a3;
+
+        a2.bothE('NEXT').each{ g.removeEdge(it); }
         g.removeVertex(a2);
 
         a1 = current.out('NEXT').next();
         a2 = a1.out('NEXT').next();
-
-        g.idx('atoms').put('atom', 'Array', current)
     }
 }
 
@@ -2818,7 +2820,7 @@ g.idx('atoms').put('atom', 'Variable', x);
             unset($actions['variable_to_functioncall']);
         }
 
-        if (isset($actions['array_to_functioncall'])) {
+        if (isset($actions['arrayToFunctioncall'])) {
             $fullcode = $this->fullcode();
             
             $qactions[] = "
@@ -2828,7 +2830,7 @@ x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:
 g.addEdge(it, x, 'NAME');
 g.idx('atoms').put('atom', 'Array', x);
                 ";
-            unset($actions['array_to_functioncall']);
+            unset($actions['arrayToFunctioncall']);
         }
 
         if (isset($actions['cleanIndex'])) {

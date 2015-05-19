@@ -46,6 +46,7 @@ class Cypher {
     private static $fp_rels = null;
     private static $fp_nodes = null;
     private static $fp_nodes_attr = null;
+    private static $indexedId = array();
 
     private $config = null;
     
@@ -55,15 +56,11 @@ class Cypher {
         $this->config = \Config::factory();
 
         if (file_exists($this->config->projects_root.'/nodes.cypher.csv') && static::$file_saved == 0) {
-            unlink($this->config->projects_root.'/nodes.cypher.csv');
-            unlink($this->config->projects_root.'/nodes.cypher.attr.csv');
-        } 
-        if (file_exists($this->config->projects_root.'/rels.cypher.next.csv') && static::$file_saved == 0) {
-            unlink($this->config->projects_root.'/rels.cypher.next.csv');
-            unlink($this->config->projects_root.'/rels.cypher.element.csv');
-            unlink($this->config->projects_root.'/rels.cypher.file.csv');
-            unlink($this->config->projects_root.'/rels.cypher.indexed.csv');
+            $this->cleanCsv();
         }
+        
+        $node = array('inited' => true);
+        $this->node = &$node;
     }
 
     public function finalize() {
@@ -239,6 +236,9 @@ CYPHER;
                 }
             }
             $row['id'] = $id;
+            if (isset($node['index']) && ($row['code'] != 'Index for S_ARRAY') && !isset(static::$indexedId[$row['id']])) {
+                continue;
+            }
             $row['code'] = $this->escapeString($row['code']);
             fputcsv($fp, $row, self::CSV_SEPARATOR);
 
@@ -333,9 +333,9 @@ CYPHER;
         if (empty($this->id)) {
             static::$count++;
             $this->id = static::$count;
-            static::$nodes[$this->id] = $this->node;
+            static::$nodes[$this->id] = &$this->node;
         } else {
-            static::$nodes[$this->id] = $this->node;
+            static::$nodes[$this->id] = &$this->node;
         }
         
         $this->isLink = false;
@@ -348,12 +348,17 @@ CYPHER;
                                          'destination' => $destination->id, 
                                          'label' => $label
                                  );
+        
+        if (isset($this->node['index'])) { 
+            static::$indexedId[$this->id] = 1;
+        }
+
         static::$lastLink = &static::$links[$label][count(static::$links[$label]) - 1];
         $this->isLink = true;
 
         return $this;
     }
-    
+
     public function escapeString($string) {
         $x = str_replace("\\", "\\\\", $string);
         return str_replace("\"", "\\\"", $x);
