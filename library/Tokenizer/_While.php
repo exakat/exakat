@@ -78,7 +78,7 @@ class _While extends TokenAuto {
                                                          4 => 'DROP',
                                                          5 => 'BLOCK',
                                                          6 => 'DROP'),
-                               'makeSequence' => 'it',
+                               'addSemicolon' => 'it',
                                'atom'         => 'While',
                                'cleanIndex'   => true,
                                'makeBlock'    => 'BLOCK');
@@ -103,10 +103,10 @@ class _While extends TokenAuto {
                                                          4 => 'DROP',
                                                          5 => 'BLOCK',
                                                          6 => 'DROP'),
-                               'makeSequence' => 'it',
                                'property'     => array('alternative' => true),
                                'atom'         => 'While',
-                               'cleanIndex'   => true);
+                               'cleanIndex'   => true,
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

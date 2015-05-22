@@ -47,8 +47,8 @@ class _Const extends TokenAuto {
         
         $this->actions = array('to_const_assignation' => true,
                                'atom'                 => 'Const',
-                               'cleanIndex'           => true,
-                               'makeSequence'         => 'it');
+                               'cleanIndex'           => true
+                               );
         $this->checkAuto();
 
         return false;

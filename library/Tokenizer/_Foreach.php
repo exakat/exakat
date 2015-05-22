@@ -95,7 +95,7 @@ class _Foreach extends TokenAuto {
                                                       ),
                                'atom'         => 'Foreach',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'makeBlock'    => 'BLOCK');
         $this->checkAuto();
 
@@ -146,7 +146,7 @@ class _Foreach extends TokenAuto {
                                'atom'         => 'Foreach',
                                'property'     => array('alternative' => true),
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -179,8 +179,7 @@ class _Foreach extends TokenAuto {
                                                       ),
                                'atom'         => 'Foreach',
                                'property'     => array('alternative' => true),
-                               'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'cleanIndex'   => true
                                );
         $this->checkAuto();
 

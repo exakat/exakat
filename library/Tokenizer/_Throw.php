@@ -40,7 +40,7 @@ class _Throw extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'THROW'),
                                'atom'         => 'Throw',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
                                
         $this->checkAuto();
         

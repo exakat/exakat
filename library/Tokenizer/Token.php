@@ -313,6 +313,7 @@ g.idx('delete')[['node':'delete']].each{
     g.removeVertex(it);
 }
 
+/*
 // clean indexed (if no more index...)
 g.V.has('index', true).filter{it.out().count() == 0}.each{
     g.removeVertex(it);
@@ -321,7 +322,7 @@ g.V.has('index', true).filter{it.out().count() == 0}.each{
 g.V.has('index', true).filter{it.out().count() == 0}.each{
     g.removeVertex(it);
 };
-
+*/
 ", "
 //////////////////////////////////////////////////////////////////////////////////////////
 // calculating the full namespaces paths
@@ -1043,7 +1044,7 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
 "g.dropIndex('delete');",
 "// Build the classes hierarchy
 
-g.V.has('atom', 'Class')
+g.idx('atoms')[['atom':'Class']]
 .sideEffect{
     s = [];
     s.add(it.fullnspath);
@@ -1061,10 +1062,13 @@ g.V.has('atom', 'Class')
 
 );
 
+        $begin = microtime(true);
         foreach($queries as $query) {
             // @todo make this //
             Token::query($query);
         }
+        $end = microtime(true);
+        display('CleanHidden : '.number_format(1000 * ($end - $begin), 0)."ms\n");
     }
 
     static public function finishSequence() {

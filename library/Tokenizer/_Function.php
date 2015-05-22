@@ -56,7 +56,7 @@ class _Function extends TokenAuto {
                                'checkTypehint' => 'Function',
                                'makeBlock'     => 'BLOCK',
                                'cleanIndex'    => true,
-                               'makeSequence'  => 'it');
+                               'addSemicolon'  => 'it');
         $this->checkAuto();
 
         // function x(args); for interfaces or abstract
@@ -79,7 +79,7 @@ class _Function extends TokenAuto {
                                                          5 => 'DROP'),
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
-                               'makeSequence'  => 'it',
+                               'addSemicolon'  => 'it',
                                'cleanIndex'    => true);
         $this->checkAuto();
 
@@ -102,7 +102,7 @@ class _Function extends TokenAuto {
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
                                'cleanIndex'    => true,
-                               'makeSequence'  => 'it',
+                               'addSemicolon'  => 'it',
                                'makeBlock'      => 'BLOCK');
         $this->checkAuto();
 
@@ -129,7 +129,7 @@ class _Function extends TokenAuto {
                                'atom'           => 'Function',
                                'checkTypehint'  => 'Function',
                                'cleanIndex'     => true,
-                               'makeSequence'   => 'it',
+                               'addSemicolon'   => 'it',
                                'makeBlock'      => 'BLOCK');
         $this->checkAuto();
 

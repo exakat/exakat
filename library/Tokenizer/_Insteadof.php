@@ -40,7 +40,7 @@ class _Insteadof extends TokenAuto {
                                                         -1 => 'LEFT'),
                                'atom'         => 'Instanceof',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it' );
+                               'addSemicolon' => 'it' );
         $this->checkAuto();
         
         return false;

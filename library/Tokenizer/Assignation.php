@@ -77,7 +77,7 @@ class Assignation extends TokenAuto {
                                                        -1 => 'LEFT'),
                                'atom'         => 'Assignation',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         //$a & $b	= B($c);
@@ -92,7 +92,7 @@ class Assignation extends TokenAuto {
                                                        -1 => 'LEFT'),
                                'atom'         => 'Assignation',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

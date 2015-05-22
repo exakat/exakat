@@ -41,6 +41,7 @@ class Sequence extends TokenAuto {
                           'RawString', 'Namespace', 'Boolean', 'Null', 'Use', 'ArrayNS', 'Identifier', 'Trait',
                           'As', 'Power', 'Staticclass', 'Yield', 'Shell', 'Heredoc'
                            );
+        $operands = 'yes';
         
         $yieldOperator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
                                'T_DOUBLE_COLON', 'T_COLON', 'T_NEW', 'T_INSTANCEOF', 'T_RETURN',
@@ -54,129 +55,76 @@ class Sequence extends TokenAuto {
         $yieldOperator = array_merge($yieldOperator, Assignation::$operators, Addition::$operators, Multiplication::$operators,
                                       Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators,
                                       _Include::$operators, Power::$operators );
-        $nextOperator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                          'T_COMMA', 'T_INSTANCEOF', 'T_CLOSE_PARENTHESIS', 'T_CATCH',
-                                          'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_AS', 'T_COLON'),
-                                     Assignation::$operators, Logical::$operators, Comparison::$operators,
-                                     Preplusplus::$operators, Postplusplus::$operators, Ternary::$operators,
-                                     Addition::$operators, Multiplication::$operators
-                                     );
+                                      
+        $forbiddenTokens = array('T_ELSEIF', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_COMMA');
+
+        // Actual rules starting now
+
+        // @note : $x; endif
+        $this->conditions = array(-2 => array('token'    => 'T_COLON',
+                                              'property' => array('association' => array('Ifthen', 'Switch', 'While', 'Case', 'Default', 'Declare', 'For', 'Foreach'))),
+                                  -1 => array('atom'     => $operands,
+                                              'notToken' => $forbiddenTokens ),
+                                   0 => array('token'    => Sequence::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDSWITCH', 'T_ENDWHILE', 'T_CASE', 'T_ENDDECLARE', 'T_ENDFOR', 'T_ENDFOREACH')),
+        );
+        
+        $this->actions = array('toSequence'  => true,
+                               'keepIndexed' => true);
+        $this->checkAuto();
 
         // @note instructions separated by ;
         $this->conditions = array(-2 => array('filterOut2' => $yieldOperator,
-                                              'filterOut'  => array('T_IF'),
+                                              'filterOut'  => 'T_IF',
                                               'notAtom'    => 'Parenthesis'),
                                   -1 => array('atom'       => $operands,
-                                              'notToken'   => 'T_ELSEIF' ),
-                                   0 => array('token'      => Sequence::$operators,
-                                              'atom'       => 'none'),
+                                              'notToken'   => $forbiddenTokens),
+                                   0 => array('token'      => Sequence::$operators),
                                    1 => array('atom'       => $operands,
-                                              'notToken'   => 'T_ELSEIF'),
-                                   2 => array('filterOut2' => $nextOperator),
+                                              'notToken'   => $forbiddenTokens)
         );
         
-        $this->actions = array('transform'   => array( 1 => 'ELEMENT',
-                                                      -1 => 'ELEMENT'),
-                               'rank'        => array( 1 => 1,
-                                                      -1 => 0 ),
-                               'mergeNext'   => array('Sequence' => 'ELEMENT'),
-                               'atom'        => 'Sequence',
-                               'cleanIndex'  => true,
-                               'keepIndexed' => true,
-                               );
+        $this->actions = array('toSequence'  => true,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
-        // @note instructions separated by ;
-        $this->conditions = array(-2 => array('token'      => 'T_COLON',
-                                              'property'   => array('association' => array('Ifthen', 'Case', 'Default', 'Declare', 'For', 'Foreach'))),
-                                  -1 => array('atom'       => $operands,
-                                              'notToken'   => 'T_ELSEIF' ),
-                                   0 => array('token'      => Sequence::$operators,
-                                              'atom'       => 'none'),
-                                   1 => array('atom'       => $operands,
-                                              'notToken'   => 'T_ELSEIF'),
-                                   2 => array('filterOut2' => $nextOperator),
-        );
-        
-        $this->actions = array('transform'   => array( 1 => 'ELEMENT',
-                                                      -1 => 'ELEMENT'),
-                               'rank'        => array( 1 => 1,
-                                                      -1 => 0 ),
-                               'mergeNext'   => array('Sequence' => 'ELEMENT'),
-                               'atom'        => 'Sequence',
-                               'cleanIndex'  => true,
-                               'keepIndexed' => true,
-                               );
-        $this->checkAuto();
-
-        // @note instructions separated by ; but ; is useless
-        $this->conditions = array(-1 => array('atom'     => $operands,
-                                              'notToken' => 'T_ELSEIF' ),
-                                   0 => array('token'    => Sequence::$operators,
-                                              'atom'     => 'none'),
-                                   1 => array('token'    => array('T_ENDIF', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_ENDFOREACH')),
-        );
-        
-        $this->actions = array('transform'   => array( 0 => 'DROP'));
-        $this->checkAuto();
-        
-        // @note instructions separated by ; but ; is useless (special case for if/elseif
-        $this->conditions = array(-1 => array('atom'     => $operands,
-                                              'notToken' => 'T_ELSEIF' ),
-                                   0 => array('token'    => Sequence::$operators,
-                                              'atom'     => 'none'),
-                                   1 => array('token'    => array('T_ELSEIF', 'T_ELSE'),
+        // reenter a sequence in building
+        $this->conditions = array( 0 => array('token'    => Sequence::$operators,
                                               'atom'     => 'yes'),
+                                   1 => array('atom'     => $operands,
+                                              'notToken' => $forbiddenTokens)
         );
         
-        $this->actions = array('transform'   => array( 0 => 'DROP'));
+        $this->actions = array('toSequence'  => true,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
-        // @note instructions separated by ; with a special case for 'foreach' and 'for'.
-        // @note this is not sufficient, but it seems to works pretty well and be enough.
-        $this->conditions = array(-2 => array('token'     => 'T_COLON',
-                                              'atom'      => 'none',
-                                              'property'  => array('association' => array('For', 'Foreach', 'While', 'Default',
-                                                                                          'Case', 'Switch', 'If', 'Elseif', 'Else'))
-                                               ),
-                                  -1 => array('atom'       => $operands ),
-                                   0 => array('token'      => Sequence::$operators,
-                                              'atom'       => 'none'),
-                                   1 => array('atom'       => $operands),
-                                   2 => array('filterOut2' => $nextOperator),
+        // reenter a sequence in building (special case with : for alternative syntax)
+        $this->conditions = array( -2 => array('token'    => 'T_COLON',
+                                               'property' => array('association' => array('Ifthen', 'Switch', 'While', 'Case', 'Default', 'Declare', 'For', 'Foreach'))),
+                                   -1 => array('atom'     => $operands,
+                                               'notToken' => $forbiddenTokens),
+                                    0 => array('token'    => Sequence::$operators,
+                                               'atom'     => 'none'),
+                                    1 => array('atom'     => $operands,
+                                               'notToken' => $forbiddenTokens)
         );
         
-        $this->actions = array('transform'    => array( 1 => 'ELEMENT',
-                                                       -1 => 'ELEMENT'),
-                               'rank'         => array( 1 => 1,
-                                                       -1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'),
-                               'atom'         => 'Sequence',
-                               'cleanIndex'   => true,
-                               'keepIndexed'  => true
-                               );
+        $this->actions = array('toSequence'  => true,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
-    // special case for { 1; }
-        $this->conditions = array(-2 => array('token' => 'T_OPEN_CURLY'),
-                                  -1 => array('atom'  => 'yes',
-                                              'notAtom' => 'Sequence'),
-                                   0 => array('token' => Sequence::$operators),
-                                   1 => array('token' => 'T_CLOSE_CURLY'),
+        // { 2; }
+        $this->conditions = array( -2 => array('token'    => 'T_OPEN_CURLY'),
+                                   -1 => array('atom'     => $operands,
+                                               'notToken' => $forbiddenTokens ),
+                                    0 => array('token'    => Sequence::$operators,
+                                               'atom'     => 'none'),
+                                    1 => array('token'    => 'T_CLOSE_CURLY'),
         );
         
-        $this->actions = array('transform'    => array(-1 => 'ELEMENT'),
-                               'rank'         => array(-1 => 0 ),
-                               'atom'         => 'Sequence',
-                               'cleanIndex'   => true,
-                               );
-        $this->checkAuto();
-
-        // @note ; without no more NEXT
-        $this->conditions = array( 0 => array('atom'  => 'Sequence' ));
-        
-        $this->actions = array('checkForNext' => true,
-                               'keepIndexed'  => true);
+        $this->actions = array('toOneSequence'  => true);
         $this->checkAuto();
 
         return false;

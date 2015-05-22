@@ -40,7 +40,7 @@ class Noscream extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'AT'),
                                'atom'         => 'Noscream',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

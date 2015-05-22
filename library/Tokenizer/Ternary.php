@@ -55,7 +55,7 @@ class Ternary extends TokenAuto {
                                                         ),
                                'atom'         => 'Ternary',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // $a ?: $b : we keep the : as 'Then', and it will have to be interpreted as $a later. May need to build a specific processing here.
@@ -81,7 +81,7 @@ class Ternary extends TokenAuto {
                                'atom'         => 'Ternary',
                                'atom1'        => 'TernaryElse',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

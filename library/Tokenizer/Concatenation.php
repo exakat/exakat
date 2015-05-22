@@ -57,9 +57,9 @@ class Concatenation extends TokenAuto {
                                                                 'T_COMMA', 'T_DOUBLE_ARROW', 'T_ELSEIF', 'T_INLINE_HTML', 'T_VOID'))),
         );
         
-        $this->actions = array('to_concatenation' => true,
-                               'atom'             => 'Concatenation',
-                               'makeSequence'     => 'x',
+        $this->actions = array('toConcatenation' => true,
+                               'atom'            => 'Concatenation',
+                               'addSemicolon'    => 'x',
                                );
         $this->checkAuto();
 

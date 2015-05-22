@@ -50,7 +50,7 @@ class _Dowhile extends TokenAuto {
                                                         ),
                                'atom'         => 'Dowhile',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // do if() {} while() (no block...)
@@ -72,7 +72,7 @@ class _Dowhile extends TokenAuto {
                                                         ),
                                'atom'         => 'Dowhile',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // do { block } while()
@@ -98,7 +98,7 @@ class _Dowhile extends TokenAuto {
                                                         ),
                                'atom'         => 'Dowhile',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

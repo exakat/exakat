@@ -37,7 +37,7 @@ class _Yield extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'YIELD' ),
                                'cleanIndex'   => true,
                                'atom'         => 'Yield',
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
                                
         $this->checkAuto();
 

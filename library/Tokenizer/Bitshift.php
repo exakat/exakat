@@ -45,7 +45,7 @@ class Bitshift extends TokenAuto {
                                                        -1 => 'LEFT'),
                                'atom'         => 'Bitshift',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
         

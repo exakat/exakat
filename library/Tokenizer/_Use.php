@@ -36,7 +36,7 @@ class _Use extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'USE'),
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -49,7 +49,7 @@ class _Use extends TokenAuto {
         
         $this->actions = array('toUse'        => true,
                                'atom'         => 'Use',
-                               'makeSequence' => 'it' );
+                               'addSemicolon' => 'it' );
         $this->checkAuto();
 
     // use const \a\b;
@@ -63,7 +63,7 @@ class _Use extends TokenAuto {
         $this->actions = array('toUseConst'   => true,
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -77,7 +77,7 @@ class _Use extends TokenAuto {
         
         $this->actions = array('toUse'        => true,
                                'atom'         => 'Use',
-                               'makeSequence' => 'it' );
+                               'addSemicolon' => 'it' );
         $this->checkAuto();
 
     // use A { B as C; }
@@ -96,7 +96,7 @@ class _Use extends TokenAuto {
                                                       ),
                                'atom'       => 'Use',
                                'cleanIndex' => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -112,7 +112,7 @@ class _Use extends TokenAuto {
         $this->actions = array('toUseBlock' => true,
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'  );
+                               'addSemicolon' => 'it'  );
         $this->checkAuto();
         
         return false;

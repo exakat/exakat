@@ -37,7 +37,7 @@ class Phpcode extends TokenAuto {
         
         $this->actions = array('transform'     => array( 1 => 'CODE',
                                                          2 => 'DROP'),
-                               'makeSequence'  => 'it',
+                               'addSemicolon'  => 'it',
                                'atom'          => 'Phpcode',
                                'property'      => array('closing_tag' => true),
                                'cleanIndex'    => true);
@@ -56,7 +56,7 @@ class Phpcode extends TokenAuto {
                                'cleanIndex'    => true);
         $this->checkAuto();
 
-// <?php 3; ( with ; )
+// <?php 3; ( with ; ) (No closing tag)
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
@@ -84,12 +84,13 @@ class Phpcode extends TokenAuto {
         $this->actions = array('transform'     => array( 3 => 'CODE',
                                                          2 => 'DROP',
                                                          1 => 'DROP'),
+                               'addSemicolon'  => 'it',
                                'atom'          => 'Phpcode',
                                'property'      => array('closing_tag' => false),
                                'cleanIndex'    => true);
         $this->checkAuto();
 
-// <?php ? > (empty script
+// <?php ? > (empty script with closing tag)
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => 'T_CLOSE_TAG'),

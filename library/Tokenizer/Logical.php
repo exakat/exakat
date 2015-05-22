@@ -66,7 +66,7 @@ class Logical extends TokenAuto {
                                                          1 => 'RIGHT'),
                                'atom'         => 'Logical',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // boolean comparison (||, &&)
@@ -90,7 +90,7 @@ class Logical extends TokenAuto {
                                                          1 => 'RIGHT'),
                                'atom'         => 'Logical',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

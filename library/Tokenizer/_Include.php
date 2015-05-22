@@ -37,7 +37,7 @@ class _Include extends TokenAuto {
         
         $this->actions = array('transform'    => array(1 => 'ARGUMENTS',),
                                'atom'         => 'Include',
-                               'makeSequence' => 'it',
+                               'addSemicolon' => 'it',
                                'property'     => array('parenthesis' => false),);
         $this->checkAuto();
         

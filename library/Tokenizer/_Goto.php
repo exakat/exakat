@@ -36,7 +36,7 @@ class _Goto extends TokenAuto {
         $this->actions = array('transform'    => array(1 => 'LABEL'),
                                'atom'         => 'Goto',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

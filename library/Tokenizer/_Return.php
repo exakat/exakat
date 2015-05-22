@@ -48,7 +48,7 @@ class _Return extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'RETURN'),
                                'atom'         => 'Return',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

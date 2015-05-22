@@ -55,7 +55,7 @@ class Multiplication extends TokenAuto {
                                                         -1 => 'LEFT'),
                                'atom'         => 'Multiplication',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

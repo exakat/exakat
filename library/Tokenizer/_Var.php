@@ -36,7 +36,7 @@ class _Var extends TokenAuto {
         
         $this->actions = array('to_ppp'       => 1,
                                'atom'         => 'Var',
-                               'makeSequence' => 'x',
+                               'addSemicolon' => 'x',
                                'cleanIndex'   => true
                                );
         $this->checkAuto();
@@ -49,19 +49,19 @@ class _Var extends TokenAuto {
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Var',
-                               'makeSequence'       => 'x'
+                               'addSemicolon'       => 'x'
                                );
 
         $this->checkAuto();
 
     // class x { var $x, $y }
-        $this->conditions = array( 0 => array('token' => _Var::$operators),
-                                   1 => array('atom' => 'Arguments'),
+        $this->conditions = array( 0 => array('token'     => _Var::$operators),
+                                   1 => array('atom'      => 'Arguments'),
                                    2 => array('filterOut' => array('T_COMMA')),
                                  );
         
-        $this->actions = array('to_var_new'   => 'Var',
-                               'atom'         => 'Var');
+        $this->actions = array('toVarNew'   => 'Var',
+                               'atom'       => 'Var');
         $this->checkAuto();
 
         return false;

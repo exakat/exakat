@@ -45,7 +45,7 @@ class Power extends TokenAuto {
                                                         -1 => 'LEFT'),
                                'atom'         => 'Power',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

@@ -44,7 +44,7 @@ class _Instanceof extends TokenAuto {
                                                         -1 => 'VARIABLE'),
                                'atom'         => 'Instanceof',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it' );
+                               'addSemicolon' => 'it' );
         $this->checkAuto();
         
         return false;

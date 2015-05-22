@@ -80,6 +80,9 @@ class Build_root implements Tasks {
         // creating the neo4j Index
         $this->query("g.V.has('index', true).each{ g.idx('racines').put('token', it.token, it); };");
         $this->logTime('g.idx("racines")[[token:***]] indexing');
+        $this->query("g.idx('racines')[['token':'Sequence']].out('INDEXED').has('in_for', true).inE('INDEXED').each{ g.removeEdge(it); }");
+        // At least one index for sequence (might be needed during processing, even if empty initially)
+        $this->query("sequences = g.addVertex(null, [token:'T_SEMICOLON', code:'Index for Sequence', index:true]); g.idx('racines').put('token', 'Sequence', sequences);");
 
         display("Indexing racines done\n");
 

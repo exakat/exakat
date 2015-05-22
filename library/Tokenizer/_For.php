@@ -96,7 +96,7 @@ class _For extends TokenAuto {
                                                       ),
                                'atom'         => 'For',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it',
+                               'addSemicolon' => 'it',
                                'makeBlock'    => 'BLOCK'
                                );
         $this->checkAuto();
@@ -126,7 +126,7 @@ class _For extends TokenAuto {
                                                       ),
                                'atom'         => 'For',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -161,7 +161,7 @@ class _For extends TokenAuto {
                                'atom'         => 'For',
                                'property'     => array('alternative' => true),
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -199,7 +199,7 @@ class _For extends TokenAuto {
                                'atom'         => 'For',
                                'property'     => array('alternative' => true),
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 

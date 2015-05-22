@@ -37,7 +37,7 @@ class Arrayappend extends TokenAuto {
                                  );
         
         $this->actions = array('toArray'      => true,
-                               'makeSequence' => 'b1',
+                               'addSemicolon' => 'b1',
                                'cleanIndex'   => true);
         $this->checkAuto();
         

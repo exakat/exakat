@@ -64,7 +64,7 @@ class _Try extends TokenAuto {
                                   1 => array('notToken' => array('T_CATCH', 'T_FINALLY'))
                                   );
         $this->actions = array('cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

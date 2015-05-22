@@ -37,7 +37,7 @@ class _Global extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'GLOBAL'),
                                'atom'         => 'Global',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -49,7 +49,7 @@ class _Global extends TokenAuto {
         
         $this->actions = array('toGlobal'     => true,
                                'atom'         => 'Global',
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

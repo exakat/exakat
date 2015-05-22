@@ -39,7 +39,7 @@ class Staticconstant extends TokenAuto {
                                                          1 => 'CONSTANT'),
                                'atom'         => 'Staticconstant',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it' );
+                               'addSemicolon' => 'it' );
         $this->checkAuto();
 
         return false;

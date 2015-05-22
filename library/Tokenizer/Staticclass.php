@@ -39,7 +39,7 @@ class Staticclass extends TokenAuto {
                                                          1 => 'CONSTANT'),
                                'atom'         => 'Staticclass',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it' );
+                               'addSemicolon' => 'it' );
         $this->checkAuto();
 
         return false;

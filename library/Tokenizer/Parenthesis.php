@@ -49,7 +49,7 @@ class Parenthesis extends TokenAuto {
                                                         2 => 'DROP'),
                                'atom'         => 'Parenthesis',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
 // this applies to situations like print ($a * $b) + $c; where parenthesis actually belong to the following expression.
@@ -65,7 +65,7 @@ class Parenthesis extends TokenAuto {
                                                         2 => 'DROP'),
                                'atom'         => 'Parenthesis',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         
         $this->checkAuto();
         

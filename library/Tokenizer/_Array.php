@@ -32,19 +32,18 @@ class _Array extends TokenAuto {
     
     public function _check() {
         // $x[3] or $x[] and multidimensional
-        $this->conditions = array( -2 => array('notToken'      => array_merge(Staticproperty::$operators, Property::$operators)),
+        $this->conditions = array( -2 => array('notToken'      => array_merge(Staticproperty::$operators, Property::$operators,
+                                                                              _Namespace::$operators)),
                                    -1 => array('atom'          => _Array::$allowedObject),
                                     0 => array('token'         => _Array::$operators,
                                                'checkForArray' => true),
-                                    1 => array('atom'          => 'yes',
-                                               'notAtom'       => 'Sequence'),
+                                    1 => array('atom'          => 'yes'),
                                     2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                  );
         
         $this->actions = array('toArray'      => true,
-                               'makeSequence' => 'b1',
-                               'cleanIndex'   => true,
-//                               'atom'         => 'Array'
+                               'addSemicolon' => 'b1',
+                               'cleanIndex'   => true
                                );
         $this->checkAuto();
 

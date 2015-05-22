@@ -36,7 +36,7 @@ class Preplusplus extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'PREPLUSPLUS'),
                                'atom'         => 'Preplusplus',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

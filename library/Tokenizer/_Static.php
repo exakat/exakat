@@ -57,7 +57,7 @@ class _Static extends TokenAuto {
         $this->actions = array('to_ppp'       => 1,
                                'atom'         => 'Static',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'x'
+                               'addSemicolon' => 'x'
                                );
         $this->checkAuto();
 
@@ -80,7 +80,7 @@ class _Static extends TokenAuto {
         
         $this->actions = array('to_ppp_assignation' => 1,
                                'atom'               => 'Static',
-                               'makeSequence'       => 'x' );
+                               'addSemicolon'       => 'x' );
         $this->checkAuto();
 
     // class x { static public $x = 2 }
@@ -103,8 +103,8 @@ class _Static extends TokenAuto {
                                    2 => array('filterOut' => 'T_COMMA'),
                                  );
         
-        $this->actions = array('to_var_new' => 'Atom',
-                               'atom'       => 'Static');
+        $this->actions = array('toVarNew' => 'Atom',
+                               'atom'     => 'Static');
         $this->checkAuto();
 
     // class x { static private $x, $y }
@@ -153,8 +153,8 @@ class _Static extends TokenAuto {
                                    2 => array('filterOut'  => 'T_COMMA'),
                                  );
         
-        $this->actions = array('to_var_new' => 'Static',
-                               'atom'       => 'Static',
+        $this->actions = array('toVarNew' => 'Static',
+                               'atom'     => 'Static',
                                );
         $this->checkAuto();
 

@@ -43,7 +43,7 @@ class Staticmethodcall extends TokenAuto {
                                  );
 
         $this->actions = array('toSpecialmethodcall' => true,
-                               'makeSequence'        => 'it',
+                               'addSemicolon'        => 'it',
                                'atom'                => 'Staticmethodcall',
                                'cleanIndex'          => true);
         $this->checkAuto();
@@ -57,7 +57,7 @@ class Staticmethodcall extends TokenAuto {
         
         $this->actions = array('transform'    => array( -1 => 'CLASS',
                                                          1 => 'METHOD'),
-                               'makeSequence' => 'it',
+                               'addSemicolon' => 'it',
                                'atom'         => 'Staticmethodcall',
                                'cleanIndex'   => true);
         $this->checkAuto();

@@ -63,7 +63,7 @@ class Functioncall extends TokenAuto {
                                                         2 => 'ARGUMENTS',
                                                         3 => 'DROP'),
                                'atom'         => 'Functioncall',
-                               'makeSequence' => 'it',
+//                               'addSemicolon' => 'it',
                                'property'     => array('parenthesis' => true),
                                'keepIndexed'  => true,
                                );
@@ -85,7 +85,7 @@ class Functioncall extends TokenAuto {
                                                         2 => 'ARGUMENTS',
                                                         3 => 'DROP'),
                                'atom'         => 'Functioncall',
-                               'makeSequence' => 'it',
+                               'addSemicolon' => 'it',
                                'property'     => array('parenthesis' => true),
                                );
         $this->checkAuto();
@@ -103,7 +103,7 @@ class Functioncall extends TokenAuto {
         
         $this->actions = array('transform'    => array(1 => 'ARGUMENTS'),
                                'atom'         => 'Functioncall',
-                               'makeSequence' => 'it',
+                               'addSemicolon' => 'it',
                                'property'     => array('parenthesis' => false),
                                );
         $this->checkAuto();
@@ -118,7 +118,7 @@ class Functioncall extends TokenAuto {
         
         $this->actions = array('transform'    => array(1 => 'ARGUMENTS'),
                                'atom'         => 'Functioncall',
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 

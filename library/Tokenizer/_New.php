@@ -41,7 +41,7 @@ class _New extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'NEW'),
                                'atom'         => 'New',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

@@ -261,7 +261,7 @@ class Load implements Tasks {
         $nb = count($tokens);
         $Tid = -1;
         $root = 0;
-        $inQuote = false;
+        $inQuote = 0;
         $in_for = 0;
         $dowhiles = array();
         $block_level = 0;
@@ -365,7 +365,7 @@ class Load implements Tasks {
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $regexIndex['Heredoc']->relateTo($T[$Tid], 'INDEXED')->save();
-                    $inQuote = true;
+                    $inQuote++;
                     $previous = $T[$Tid];
 
                     $Tid++;
@@ -449,48 +449,55 @@ class Load implements Tasks {
                                               ->setProperty('modifiedBy', 'bin/load27b')
                                               ->save();
                     $to_index = false;
-
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
 
-                          if ($previous->getProperty('token') == 'T_VOID') {
-                            print "Previous is VOID\n";
-                                $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
-                                                                    ->setProperty('code', ';')
-                                                                    ->setProperty('fullcode', ';')
-                                                                    ->setProperty('line', $line)
-                                                                    ->setProperty('atom', 'Sequence')
-                                                                    ->setProperty('modifiedBy', 'bin/load24a')
-                                                                    ->setProperty('root', 'true')
-                                                                    ->save();
-                                $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+                            $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                                ->setProperty('code', ';')
+                                                                ->setProperty('fullcode', ';')
+                                                                ->setProperty('line', $line)
+                                                                ->setProperty('atom', 'Sequence')
+                                                                ->setProperty('modifiedBy', 'bin/load24a')
+                                                                ->setProperty('root', 'true')
+                                                                ->save();
+                            $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+                            $previous->relateTo($T[$Tid], 'NEXT')->save();
+                            $previous = $T[$Tid];
+  
+                            $void = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                                    ->setProperty('code', 'void')
+                                                    ->setProperty('rank', 0)
+                                                    ->setProperty('fullcode', ' ')
+                                                    ->setProperty('line', $line)
+                                                    ->setProperty('atom', 'Void')
+                                                    ->setProperty('modifiedBy', 'bin/load24')
+                                                    ->save();
+                            $T[$Tid]->relateTo($void, 'ELEMENT')->save();
+  
+                            $id++;
+                            continue;
+                } elseif ($token[3] == 'T_CLOSE_TAG' &&
+                          in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING'))) {
+                          $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                              ->setProperty('code', ';')
+                                                              ->setProperty('fullcode', ';')
+                                                              ->setProperty('line', $line)
+                                                              ->setProperty('modifiedBy', 'bin/load28')
+                                                              ->setProperty('root', 'true')
+                                                              ->save();
+                          $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+                          $previous->relateTo($T[$Tid], 'NEXT')->save();
+                          $previous = $T[$Tid];
 
-                                $void = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                        ->setProperty('code', 'void')
-                                                        ->setProperty('rank', 0)
-                                                        ->setProperty('fullcode', ' ')
-                                                        ->setProperty('line', $line)
-                                                        ->setProperty('atom', 'Void')
-                                                        ->setProperty('modifiedBy', 'bin/load24')
-                                                        ->save();
-                                $T[$Tid]->relateTo($void, 'ELEMENT')->save();
+                          $Tid++;
+                          $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
+                                                  ->setProperty('code', $token[1])
+                                                  ->setProperty('fullcode', $token[1])
+                                                  ->setProperty('line', $token[2])->save();
 
-                                $to_index = false;
-                          } else {  
-                              $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                        ->setProperty('code', 'void')
-                                                        ->setProperty('fullcode', ' ')
-                                                        ->setProperty('line', $line)
-                                                        ->setProperty('atom', 'Void')
-                                                        ->setProperty('modifiedBy', 'bin/load24')
-                                                        ->save();
-                              $to_index = false;
-                          }
-
-                          // Just skip those two. 
-                        $id++;
+                          $to_index = false;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
@@ -843,7 +850,9 @@ class Load implements Tasks {
                             $T[$Tid]->setProperty('association', $type)->save();
                         } 
 
-                        $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+                        if ($in_for < 1) {
+                            $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+                        }
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
                         $previous = $T[$Tid];
                 
@@ -1043,15 +1052,15 @@ class Load implements Tasks {
                 $T[$Tid]->save();
             }
 
-            if (!$inQuote && in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
-                $inQuote = true;
+            if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
+                $inQuote++;
                 if (is_array($token)) {
                     $T[$Tid]->setProperty('fullcode', $token[1])->save();
                 } else {
                     $T[$Tid]->setProperty('fullcode', $token)->save();
                 }
             } elseif ($inQuote && in_array($token_value, array('T_QUOTE_CLOSE', 'T_SHELL_QUOTE_CLOSE', 'T_END_HEREDOC'))) {
-                $inQuote = false;
+                $inQuote--;
                 $T[$Tid]->setProperty('in_quote', 'true')->save();
                 if (is_array($token)) {
                     $T[$Tid]->setProperty('fullcode', $token[1])->save();

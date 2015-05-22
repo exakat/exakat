@@ -55,7 +55,7 @@ class _Namespace extends TokenAuto {
                                                         ),
                                'atom'         => 'Namespace',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
 
         // namespace myproject ;
@@ -64,14 +64,15 @@ class _Namespace extends TokenAuto {
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
                                   2 => array('token' => 'T_SEMICOLON',
                                              'atom'  => 'none'),
-                                  3 => array('token' => array('T_CLOSE_TAG', 'T_END', 'T_SEMICOLON'),
-                                             'atom'  => 'none')
+//                                  3 => array('token' => array('T_CLOSE_TAG', 'T_END', 'T_SEMICOLON'),
+//                                             'atom'  => 'none')
         );
         
-        $this->actions = array('insert_ns_void' => true,
+        $this->actions = array('insertNsVoid' => true,
                                'atom'           => 'Namespace',
                                'cleanIndex'     => true,
-                               'makeSequence'   => 'it');
+                               'addSemicolon'   => 'it'
+                               );
         $this->checkAuto();
 
         // namespace A; <Sequence> ? >
@@ -86,7 +87,7 @@ class _Namespace extends TokenAuto {
         $this->actions = array('insert_ns'    => true,
                                'atom'         => 'Namespace',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // namespace\Another : using namespace to build a namespace

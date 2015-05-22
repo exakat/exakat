@@ -39,7 +39,7 @@ class Halt extends TokenAuto {
                                                        2 => 'DROP',
                                                        1 => 'DROP'),
                                'atom'         => 'Halt',
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -49,7 +49,7 @@ class Halt extends TokenAuto {
                                   );
         
         $this->actions = array('atom'         => 'Halt',
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

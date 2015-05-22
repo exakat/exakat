@@ -84,11 +84,11 @@ class Ifthen extends TokenAuto {
                                                        4 => 'DROP',
                                                        5 => 'THEN',
                                                        6 => 'DROP'),
-                               'makeSequence' => 'it',
                                'property'     => array('alternative' => false),
                                'atom'         => 'Ifthen',
                                'cleanIndex'   => true,
-                               'makeBlock'    => 'THEN');
+                               'makeBlock'    => 'THEN',
+                               'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
 
         // @doc if { sequence } then else { sequence }
@@ -121,7 +121,7 @@ class Ifthen extends TokenAuto {
                                                        10 => 'DROP'),
                                'atom'         => 'Ifthen',
                                'property'     => array('alternative' => false),
-                               'makeSequence' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'cleanIndex'   => true,
                                'makeBlock'    => "THEN','ELSE", //array('THEN', 'ELSE')
                                );
@@ -151,7 +151,7 @@ class Ifthen extends TokenAuto {
                                                        7 => 'ELSE'
                                                       ),
                                'property'     => array('alternative' => false),
-                               'makeSequence' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'atom'         => 'Ifthen',
                                'cleanIndex'   => true,
                                'makeBlock'    => 'THEN'
@@ -178,7 +178,7 @@ class Ifthen extends TokenAuto {
                                                        4 => 'DROP',
                                                        5 => 'THEN',
                                                        6 => 'DROP'),
-                               'makeSequence' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'property'     => array('alternative' => false),
                                'atom'         => 'Ifthen',
                                'cleanIndex'   => true,
@@ -247,7 +247,7 @@ class Ifthen extends TokenAuto {
                                                         6 => 'DROP'),
                                'property'     => array('alternative' => true),
                                'atom'         => 'Ifthen',
-                               'makeSequence' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'cleanIndex'   => true
                                );
         $this->checkAuto();
@@ -280,7 +280,7 @@ class Ifthen extends TokenAuto {
                                                         9 => 'DROP',
                                                       ),
                                'atom'         => 'Ifthen',
-                               'makeSequence' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'property'     => array('alternative' => true),
                                'cleanIndex'   => true
                                );
@@ -311,7 +311,7 @@ class Ifthen extends TokenAuto {
                                                         6 => 'ELSE',
                                                       ),
                                'atom'         => 'Ifthen',
-                               'makeSequence' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'cleanIndex'   => true,
                                'property'     => array('alternative' => true)
                                );

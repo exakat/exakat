@@ -28,7 +28,7 @@ class _Declare extends TokenAuto {
     static public $atom = 'Declare';
 
     public function _check() {
-        // declare(ticks = 2) : block endblock;
+        // declare(ticks = 2) : block enddeclare;
         $this->conditions = array(0 => array('token' => _Declare::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
@@ -49,8 +49,7 @@ class _Declare extends TokenAuto {
                                                        6 => 'DROP',
                                                        ),
                                'atom'         => 'Declare',
-                               'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'cleanIndex'   => true);
         $this->checkAuto();
 
         // declare(ticks = 2);
@@ -69,7 +68,7 @@ class _Declare extends TokenAuto {
                                                         4 => 'DROP'),
                                'atom'         => 'Declare',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // declare(ticks = 2) { block }
@@ -93,7 +92,7 @@ class _Declare extends TokenAuto {
                                                         6 => 'DROP'),
                                'atom'         => 'Declare',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 

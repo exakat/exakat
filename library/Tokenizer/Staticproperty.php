@@ -40,7 +40,7 @@ class Staticproperty extends TokenAuto {
                                                          1 => 'PROPERTY'),
                                'atom'         => 'Staticproperty',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

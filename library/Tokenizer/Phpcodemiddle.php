@@ -37,7 +37,7 @@ class Phpcodemiddle extends TokenAuto {
         );
         $this->actions = array('transform'           => array( -1 => 'DROP',
                                                                 1 => 'DROP'),
-                               'makeSequence'        => 'it'
+                               'addAlwaysSemicolon'        => 'it'
                                );
         $this->checkAuto();
         

@@ -42,7 +42,7 @@ class FunctioncallArray extends TokenAuto {
                                                               3 => 'DROP'),
                                'arrayToFunctioncall' => 1,
                                'atom'                => 'Functioncall',
-                               'makeSequence'        => 'it'
+                               'addSemicolon'        => 'it'
                                );
         $this->checkAuto();
 

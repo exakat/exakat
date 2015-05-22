@@ -56,7 +56,7 @@ class Methodcall extends TokenAuto {
                                     1 => array('atom'      => 'Functioncall')
                                  );
         
-        $this->actions = array('makeSequence'  => 'b1',
+        $this->actions = array('addSemicolon'  => 'b1',
                                'to_methodcall' => true,
                                'cleanIndex'    => true,
                                );

@@ -57,7 +57,7 @@ class Property extends TokenAuto {
                                                          1 => 'PROPERTY'),
                                'atom'         => 'Property',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // $object->{property}
@@ -77,7 +77,7 @@ class Property extends TokenAuto {
                                'atom'         => 'Property',
                                'property'     => array('bracket' => true),
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

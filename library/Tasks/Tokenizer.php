@@ -164,7 +164,8 @@ class Tokenizer implements Tasks {
             $log->log("Remaining token to process : $count (".($count - $count_prev).')');
             $log->log("Remaining files to process : $count_file (".($count_file - $count_file_prev).')');
             $log->log('Remaining regex : '.count($regex_next).' ('.(count($regex) - count($regex_next)).')');
-    
+            
+//            if ($round == 3) { die('Round '.$round);}
             if ($count > 3) {
                 display( "$round) Remains $count of $total tokens to process! \n");
             } else {
@@ -178,10 +179,9 @@ class Tokenizer implements Tasks {
         $log->log("Total regex time\t".(($regex_time) * 1000));
         $log->log("final cost : $cost");
 
-        $server_stat->collect();
+//        $server_stat->collect();
         $stats['token_out'] = $server_stat->tokens_count;
         $stats['relation_out'] = $server_stat->relations_count;
-
         \Tokenizer\Token::cleanHidden();
 
         $end_time = microtime(true);

@@ -36,7 +36,7 @@ class _Break extends TokenAuto {
         
         $this->actions = array('transform'    => array( 1 => 'LEVEL'),
                                'atom'         => 'Break',
-                               'makeSequence' => 'it',
+                               'addSemicolon' => 'it',
                                'cleanIndex'   => true);
         $this->checkAuto();
 

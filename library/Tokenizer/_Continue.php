@@ -46,7 +46,7 @@ class _Continue extends TokenAuto {
         
         $this->actions = array('transform'  => array( 1 => 'LEVEL'),
                                'atom'       => 'Continue',
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // continue(2);
@@ -61,7 +61,7 @@ class _Continue extends TokenAuto {
                                                       2 => 'LEVEL',
                                                       3 => 'DROP'),
                                'atom'       => 'Continue',
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

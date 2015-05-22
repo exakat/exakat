@@ -40,7 +40,7 @@ class _Clone extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'CLONE'),
                                'atom'         => 'Clone',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

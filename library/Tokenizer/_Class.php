@@ -81,9 +81,8 @@ class _Class extends TokenAuto {
                                                        2 => 'BLOCK',
                                                        3 => 'DROP'),
                                'atom'         => 'Class',
-                               'makeSequence' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'makeBlock'    => 'BLOCK',
-                               'makeSequenceAlways' => true,
                                'cleanIndex'   => true
                                );
         $this->checkAuto();

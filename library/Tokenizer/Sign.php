@@ -80,7 +80,7 @@ class Sign extends TokenAuto {
                                'property'     => array('scalar' => true,
                                                        'instruction' => true),
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it'
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 

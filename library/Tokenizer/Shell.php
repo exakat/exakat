@@ -36,7 +36,7 @@ class Shell extends TokenAuto {
                                  );
         
         $this->actions = array( 'makeQuotedString' => 'Shell',
-                                'makeSequence'     => 'it');
+                                'addSemicolon'     => 'it');
         $this->checkAuto();
 
         return false;

@@ -37,7 +37,7 @@ class _Ppp extends TokenAuto {
                                  );
         $this->actions = array('to_ppp'       => 1,
                                'atom'         => 'Ppp',
-                               'makeSequence' => 'x' );
+                               'addSemicolon' => 'x' );
         $this->checkAuto();
 
     // class x { static private $s }
@@ -58,7 +58,7 @@ class _Ppp extends TokenAuto {
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Ppp',
-                               'makeSequence'       => 'x'
+                               'addSemicolon'       => 'x'
                                );
 
         $this->checkAuto();
@@ -72,7 +72,7 @@ class _Ppp extends TokenAuto {
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Ppp',
-                               'makeSequence'       => 'x'
+                               'addSemicolon'       => 'x'
                                );
 
         $this->checkAuto();
@@ -112,8 +112,8 @@ class _Ppp extends TokenAuto {
                                    2 => array('filterOut'  => array('T_COMMA')),
                                  );
         
-        $this->actions = array('to_var_new' => 'Ppp',
-                               'atom'       => 'Ppp',
+        $this->actions = array('toVarNew' => 'Ppp',
+                               'atom'     => 'Ppp',
                                );
         $this->checkAuto();
 

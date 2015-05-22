@@ -47,7 +47,7 @@ class Addition extends TokenAuto {
                                                        -1 => 'LEFT'),
                                'atom'         => 'Addition',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

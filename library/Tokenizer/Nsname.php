@@ -39,7 +39,7 @@ class Nsname extends TokenAuto {
         $this->actions = array('makeNamespace' => true,
                                'atom'          => 'Nsname',
                                'keepIndexed'   => true,
-                               'makeSequence'  => 'it'
+//                               'addSemicolon'  => 'it'
                                );
         $this->checkAuto();
 
@@ -49,11 +49,11 @@ class Nsname extends TokenAuto {
                                    2 => array('atom'  => 'Identifier'),
         );
         
-        $this->actions = array('transform'     => array( 1 => 'DROP',
-                                                         2 => 'AS' ),
-                               'atom'          => 'As',
-                               'cleanIndex'    => true,
-                               'makeSequence'  => 'it'
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'AS' ),
+                               'atom'         => 'As',
+                               'cleanIndex'   => true,
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
