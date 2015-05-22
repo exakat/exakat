@@ -1,34 +1,32 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    ->
-    Label : METHOD
-      b
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          ::
-          Label : CLASS
-            D
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $f
-        Label : ARGUMENT
-          <<<EOF
+  ->
+  Label : OBJECT
+    $a
+  Label : METHOD
+    b
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        ::
+        Label : METHOD
+          e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $f
+        Label : CLASS
+          D
+      Label : ARGUMENT
+        <<<EOF
 
-          Label : CONTAIN
-            Concatenation
-            Label : CONCAT
-              A 
-            Label : CONCAT
-              $b
-            Label : CONCAT
-               C
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            A 
+          Label : CONCAT
+            $b
+          Label : CONCAT
+             C
 
-    Label : OBJECT
-      $a

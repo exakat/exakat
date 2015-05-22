@@ -1,16 +1,10 @@
 ;
 Label : ELEMENT
-  C
-Label : ELEMENT
   <?php 
   Label : CODE
     ;
     Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $a
+      B
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -18,6 +12,12 @@ Label : ELEMENT
         Label : ARGUMENT
           $b
     Label : ELEMENT
-      B
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $a
+Label : ELEMENT
+  C
 Label : ELEMENT
   A

@@ -1,30 +1,30 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
+  if
+  Label : CONDITION
+    $x
+  Label : THEN
+    ;
+    Label : ELEMENT
+      $y
+  Label : ELSE
+    elseif
     Label : CONDITION
-      $x
+      $w
     Label : THEN
       ;
       Label : ELEMENT
-        $y
+        $ww
     Label : ELSE
       elseif
       Label : CONDITION
-        $w
+        $v
       Label : THEN
         ;
         Label : ELEMENT
-          $ww
+          $vv
       Label : ELSE
-        elseif
-        Label : CONDITION
-          $v
-        Label : THEN
-          ;
-          Label : ELEMENT
-            $vv
-        Label : ELSE
+        ;
+        Label : ELEMENT
           $z

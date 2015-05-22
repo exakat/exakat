@@ -1,24 +1,22 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
+  =
+  Label : RIGHT
+    $c
+  Label : LEFT
+    [
+    Label : VARIABLE
       [
       Label : VARIABLE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          /
-          Label : LEFT
-            (int)
-            Label : CAST
-              ++
-              Label : POSTPLUSPLUS
-                $b
-          Label : RIGHT
-            1
-    Label : RIGHT
-      $c
+        $a
+      Label : INDEX
+        /
+        Label : RIGHT
+          1
+        Label : LEFT
+          (int)
+          Label : CAST
+            ++
+            Label : POSTPLUSPLUS
+              $b

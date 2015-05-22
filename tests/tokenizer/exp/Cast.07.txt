@@ -11,14 +11,6 @@ Label : CODE
       Label : PROPERTY
         h
   Label : ELEMENT
-    (real)
-    Label : CAST
-      ::
-      Label : PROPERTY
-        $y
-      Label : CLASS
-        x
-  Label : ELEMENT
     (float)
     Label : CAST
       ::
@@ -26,3 +18,11 @@ Label : CODE
         y
       Label : CONSTANT
         y
+  Label : ELEMENT
+    (real)
+    Label : CAST
+      ::
+      Label : PROPERTY
+        $y
+      Label : CLASS
+        x

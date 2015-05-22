@@ -10,8 +10,6 @@ Label : CODE
         void
         Label : ARGUMENT
           =>
-          Label : KEY
-            'e'
           Label : VALUE
             -
             Label : RIGHT
@@ -20,6 +18,8 @@ Label : CODE
               --
               Label : PREPLUSPLUS
                 $i
+          Label : KEY
+            'e'
     Label : LEFT
       $a4
   Label : ELEMENT
@@ -30,8 +30,6 @@ Label : CODE
         void
         Label : ARGUMENT
           =>
-          Label : KEY
-            'd'
           Label : VALUE
             -
             Label : RIGHT
@@ -40,6 +38,8 @@ Label : CODE
               --
               Label : POSTPLUSPLUS
                 $i
+          Label : KEY
+            'd'
     Label : LEFT
       $a3
   Label : ELEMENT
@@ -50,8 +50,6 @@ Label : CODE
         void
         Label : ARGUMENT
           =>
-          Label : KEY
-            'c'
           Label : VALUE
             -
             Label : RIGHT
@@ -60,6 +58,8 @@ Label : CODE
               ++
               Label : PREPLUSPLUS
                 $i
+          Label : KEY
+            'c'
     Label : LEFT
       $a2
   Label : ELEMENT
@@ -70,8 +70,6 @@ Label : CODE
         void
         Label : ARGUMENT
           =>
-          Label : KEY
-            'b'
           Label : VALUE
             -
             Label : RIGHT
@@ -80,5 +78,7 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $i
+          Label : KEY
+            'b'
     Label : LEFT
       $a1

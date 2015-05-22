@@ -13,12 +13,6 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
         and
         Label : RIGHT
           print
@@ -32,6 +26,12 @@ Label : CODE
           (
           Label : CODE
             "foo"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
   Label : ELEMENT
     print
     Label : ARGUMENTS

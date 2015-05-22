@@ -1,216 +1,154 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      x
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              ;
-              Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  ;
-                  Label : ELEMENT
-                    ;
-                    Label : ELEMENT
-                      ;
-                      Label : ELEMENT
-                        ;
-                        Label : ELEMENT
-                          ;
-                          Label : ELEMENT
-                            ;
-                            Label : ELEMENT
-                              ;
-                              Label : ELEMENT
-                                ;
-                                Label : ELEMENT
-                                  ;
-                                  Label : ELEMENT
-                                    ;
-                                    Label : ELEMENT
-                                      var
-                                      Label : VALUE
-                                        1
-                                      Label : DEFINE
-                                        $a
-                                      Label : VAR
-                                        var
-                                  Label : ELEMENT
-                                    ;
-                                    Label : ELEMENT
-                                      var
-                                      Label : VALUE
-                                        2
-                                      Label : DEFINE
-                                        $b
-                                      Label : VAR
-                                        var
-                                Label : ELEMENT
-                                  ;
-                                  Label : ELEMENT
-                                    var
-                                    Label : VALUE
-                                      array
-                                      Label : ARGUMENTS
-                                        Arguments
-                                        Label : ARGUMENT
-                                          2
-                                        Label : ARGUMENT
-                                          1
-                                    Label : DEFINE
-                                      $c
-                                    Label : VAR
-                                      var
-                              Label : ELEMENT
-                                ;
-                                Label : ELEMENT
-                                  var
-                                  Label : VALUE
-                                    4
-                                  Label : DEFINE
-                                    $d
-                                  Label : VAR
-                                    var
-                            Label : ELEMENT
-                              ;
-                              Label : ELEMENT
-                                var
-                                Label : VALUE
-                                  5
-                                Label : DEFINE
-                                  $e
-                                Label : VAR
-                                  var
-                          Label : ELEMENT
-                            ;
-                            Label : ELEMENT
-                              var
-                              Label : VALUE
-                                6
-                              Label : DEFINE
-                                $f
-                              Label : VAR
-                                var
-                        Label : ELEMENT
-                          ;
-                          Label : ELEMENT
-                            var
-                            Label : VALUE
-                              7
-                            Label : DEFINE
-                              $g
-                            Label : VAR
-                              var
-                      Label : ELEMENT
-                        ;
-                        Label : ELEMENT
-                          var
-                          Label : VALUE
-                            array
-                            Label : ARGUMENTS
-                              Arguments
-                              Label : ARGUMENT
-                                2
-                              Label : ARGUMENT
-                                1
-                          Label : DEFINE
-                            $h
-                          Label : VAR
-                            var
-                    Label : ELEMENT
-                      ;
-                      Label : ELEMENT
-                        var
-                        Label : VALUE
-                          1
-                        Label : DEFINE
-                          $a1
-                        Label : VAR
-                          var
-                  Label : ELEMENT
-                    ;
-                    Label : ELEMENT
-                      var
-                      Label : VALUE
-                        2
-                      Label : DEFINE
-                        $b1
-                      Label : VAR
-                        var
-                Label : ELEMENT
-                  ;
-                  Label : ELEMENT
-                    var
-                    Label : VALUE
-                      3
-                    Label : DEFINE
-                      $c1
-                    Label : VAR
-                      var
-              Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  var
-                  Label : VALUE
-                    4
-                  Label : DEFINE
-                    $d1
-                  Label : VAR
-                    var
-            Label : ELEMENT
-              ;
-              Label : ELEMENT
-                var
-                Label : VALUE
-                  array
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      2
-                    Label : ARGUMENT
-                      1
-                Label : DEFINE
-                  $e1
-                Label : VAR
-                  var
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              var
-              Label : VALUE
-                6
-              Label : DEFINE
-                $f1
-              Label : VAR
-                var
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            var
-            Label : VALUE
-              7
-            Label : DEFINE
-              $g1
-            Label : VAR
-              var
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          var
-          Label : VALUE
-            8
-          Label : DEFINE
-            $h1
-          Label : VAR
-            var
+  class
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      var
+      Label : VALUE
+        8
+      Label : DEFINE
+        $h1
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        7
+      Label : DEFINE
+        $g1
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        6
+      Label : DEFINE
+        $f1
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        array
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            1
+      Label : DEFINE
+        $e1
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        4
+      Label : DEFINE
+        $d1
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        3
+      Label : DEFINE
+        $c1
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        2
+      Label : DEFINE
+        $b1
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        1
+      Label : DEFINE
+        $a1
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        array
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            1
+      Label : DEFINE
+        $h
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        7
+      Label : DEFINE
+        $g
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        6
+      Label : DEFINE
+        $f
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        5
+      Label : DEFINE
+        $e
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        4
+      Label : DEFINE
+        $d
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        array
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            1
+      Label : DEFINE
+        $c
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        2
+      Label : DEFINE
+        $b
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        1
+      Label : DEFINE
+        $a
+      Label : VAR
+        var
+  Label : NAME
+    x

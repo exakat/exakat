@@ -1,100 +1,98 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ::
-            Label : PROPERTY
-              $r
-            Label : CLASS
-              Q
-          Label : VALUE
-            ::
-            Label : PROPERTY
-              $t
-            Label : CLASS
-              S
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ::
-            Label : METHOD
-              N
-              Label : ARGUMENTS
+  =
+  Label : RIGHT
+    array
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        void
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          ::
+          Label : PROPERTY
+            $r
+          Label : CLASS
+            Q
+        Label : VALUE
+          ::
+          Label : PROPERTY
+            $t
+          Label : CLASS
+            S
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          ::
+          Label : METHOD
+            N
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 void
-                Label : ARGUMENT
-                  void
-            Label : CLASS
-              M
-          Label : VALUE
-            ::
-            Label : METHOD
-              P
-              Label : ARGUMENTS
+          Label : CLASS
+            M
+        Label : VALUE
+          ::
+          Label : METHOD
+            P
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 void
-                Label : ARGUMENT
-                  void
-            Label : CLASS
-              O
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ::
-            Label : CLASS
-              I
-            Label : CONSTANT
-              J
-          Label : VALUE
-            ::
-            Label : CLASS
-              K
-            Label : CONSTANT
-              L
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              f
-              Label : ARGUMENTS
+          Label : CLASS
+            O
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          ::
+          Label : CLASS
+            I
+          Label : CONSTANT
+            J
+        Label : VALUE
+          ::
+          Label : CLASS
+            K
+          Label : CONSTANT
+            L
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          ->
+          Label : OBJECT
+            $e
+          Label : METHOD
+            f
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 void
-                Label : ARGUMENT
-                  void
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $g
-            Label : METHOD
-              h
-              Label : ARGUMENTS
+        Label : VALUE
+          ->
+          Label : OBJECT
+            $g
+          Label : METHOD
+            h
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 void
-                Label : ARGUMENT
-                  void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              b
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              d
-    Label : LEFT
-      $x
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
+        Label : VALUE
+          ->
+          Label : OBJECT
+            $c
+          Label : PROPERTY
+            d
+  Label : LEFT
+    $x

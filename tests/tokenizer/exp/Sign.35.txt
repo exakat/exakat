@@ -1,30 +1,28 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
+  if
+  Label : CONDITION
+    -
+    Label : RIGHT
+      $f
+    Label : LEFT
       -
       Label : RIGHT
-        $f
+        [
+        Label : VARIABLE
+          $d
+        Label : INDEX
+          'E'
       Label : LEFT
-        -
-        Label : RIGHT
-          [
-          Label : VARIABLE
-            $d
-          Label : INDEX
-            'E'
-        Label : LEFT
-          [
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              b
-          Label : INDEX
-            'c'
-    Label : THEN
-      void
+        [
+        Label : VARIABLE
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
+        Label : INDEX
+          'c'
+  Label : THEN
+    void

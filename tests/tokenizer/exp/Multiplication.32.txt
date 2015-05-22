@@ -3,6 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
+    *
+    Label : RIGHT
+      'b'
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    Concatenation
+    Label : CONCAT
+      'd'
+    Label : CONCAT
+      $c
+  Label : ELEMENT
     if
     Label : CONDITION
       2
@@ -10,6 +22,12 @@ Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : RIGHT
+          +
+          Label : RIGHT
+            4
+          Label : LEFT
+            3
         Label : LEFT
           [
           Label : VARIABLE
@@ -28,21 +46,3 @@ Label : CODE
                     void
             Label : PROPERTY
               p
-        Label : RIGHT
-          +
-          Label : LEFT
-            3
-          Label : RIGHT
-            4
-  Label : ELEMENT
-    Concatenation
-    Label : CONCAT
-      'd'
-    Label : CONCAT
-      $c
-  Label : ELEMENT
-    *
-    Label : LEFT
-      $a
-    Label : RIGHT
-      'b'

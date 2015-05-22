@@ -1,20 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    do
-    Label : BLOCK
+  do
+  Label : CONDITION
+    <
+    Label : RIGHT
+      4
+    Label : LEFT
+      $x
+  Label : BLOCK
+    ;
+    Label : ELEMENT
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $x
-    Label : CONDITION
-      <
-      Label : RIGHT
-        4
-      Label : LEFT
-        $x
+        ++
+        Label : POSTPLUSPLUS
+          $x

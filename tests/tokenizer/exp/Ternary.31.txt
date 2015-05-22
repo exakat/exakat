@@ -1,24 +1,22 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ?
-      Label : CONDITION
-        B
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $b
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              C
-      Label : THEN
-        :
-      Label : ELSE
-        D
+  return
+  Label : RETURN
+    ?
+    Label : CONDITION
+      B
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            C
+    Label : THEN
+      :
+    Label : ELSE
+      D

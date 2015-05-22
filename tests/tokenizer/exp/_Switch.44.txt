@@ -3,18 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      +
-      Label : RIGHT
-        2
-      Label : LEFT
-        1
-    Label : LEFT
-      $y
-  Label : ELEMENT
-    void
-  Label : ELEMENT
     void
   Label : ELEMENT
     switch
@@ -33,6 +21,18 @@ Label : CODE
             Label : RETURN
               FALSE
   Label : ELEMENT
+    =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        2
+      Label : LEFT
+        1
+    Label : LEFT
+      $y
+  Label : ELEMENT
+    void
+  Label : ELEMENT
     switch
     Label : NAME
       $a
@@ -40,6 +40,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          1
         Label : CODE
           ;
           Label : ELEMENT
@@ -48,5 +50,3 @@ Label : CODE
             return
             Label : RETURN
               FALSE
-        Label : CASE
-          1

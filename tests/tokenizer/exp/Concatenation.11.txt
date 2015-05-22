@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    (
-    Label : CODE
-      Concatenation
-      Label : CONCAT
-        'b'
-      Label : CONCAT
-        'a'
+  (
+  Label : CODE
+    Concatenation
+    Label : CONCAT
+      'b'
+    Label : CONCAT
+      'a'

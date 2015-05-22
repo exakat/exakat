@@ -7,16 +7,16 @@ Label : CODE
 
 ?>
   Label : ELEMENT
+    __halt_compiler
+  Label : ELEMENT
     try
     Label : CODE
       void
     Label : CATCH
       catch
-      Label : CODE
-        void
       Label : VARIABLE
         $e
+      Label : CODE
+        void
       Label : CLASS
         Exception
-  Label : ELEMENT
-    __halt_compiler

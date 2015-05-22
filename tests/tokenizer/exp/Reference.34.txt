@@ -1,50 +1,48 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
-      Label : RIGHT
-        ->
-        Label : OBJECT
-          $c
-        Label : METHOD
-          C
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                'F'
-              Label : CONCAT
-                ::
-                Label : CLASS
-                  D
-                Label : METHOD
-                  E
-                  Label : ARGUMENTS
+  if
+  Label : CONDITION
+    &&
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $c
+      Label : METHOD
+        C
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'F'
+            Label : CONCAT
+              ::
+              Label : CLASS
+                D
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
                     void
-                    Label : ARGUMENT
-                      void
-      Label : LEFT
-        &
+    Label : LEFT
+      &
+      Label : RIGHT
+        !=
         Label : RIGHT
-          !=
-          Label : RIGHT
-            null
-          Label : LEFT
-            $b
+          null
         Label : LEFT
-          ==
-          Label : RIGHT
-            'B'
-          Label : LEFT
-            $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $d
+          $b
+      Label : LEFT
+        ==
+        Label : RIGHT
+          'B'
+        Label : LEFT
+          $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $d

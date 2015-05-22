@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      x
-    Label : BLOCK
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    Sequence
+    Label : ELEMENT
       Sequence
       Label : ELEMENT
         ppp
@@ -40,27 +40,27 @@ Label : CODE
           $a2
         Label : VAR
           var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          3
-        Label : DEFINE
-          $c
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
+    Label : ELEMENT
+      ppp
+      Label : VALUE
+        3
+      Label : DEFINE
+        $c
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : VALUE
+        void
+      Label : DEFINE
+        $b
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : VALUE
+        void
+      Label : DEFINE
+        $a
+      Label : VAR
+        var

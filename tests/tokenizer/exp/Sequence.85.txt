@@ -8,85 +8,9 @@ Label : ELEMENT
       Label : BLOCK
         ;
         Label : ELEMENT
-          AC
-        Label : ELEMENT
           for
           Label : BLOCK
             ;
-            Label : ELEMENT
-              ;
-              Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      R
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          'U'
-                        Label : ARGUMENT
-                          T
-                        Label : ARGUMENT
-                          [
-                          Label : VARIABLE
-                            $f
-                          Label : INDEX
-                            'X'
-                Label : ELEMENT
-                  V
-              Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  AB
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $c
-                Label : ELEMENT
-                  AA
-            Label : ELEMENT
-              ;
-              Label : ELEMENT
-                echo
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    R
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        'U'
-                      Label : ARGUMENT
-                        T
-                      Label : ARGUMENT
-                        [
-                        Label : VARIABLE
-                          $f
-                        Label : INDEX
-                          'S'
-              Label : ELEMENT
-                Q
-              Label : ELEMENT
-                echo
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $c
-              Label : ELEMENT
-                P
-              Label : ELEMENT
-                echo
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $g
-              Label : ELEMENT
-                O
             Label : ELEMENT
               =
               Label : RIGHT
@@ -110,35 +34,97 @@ Label : ELEMENT
               Label : LEFT
                 $g
             Label : ELEMENT
-              ;
-              Label : ELEMENT
-                =
-                Label : RIGHT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  R
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'U'
+                    Label : ARGUMENT
+                      T
+                    Label : ARGUMENT
+                      [
+                      Label : VARIABLE
+                        $f
+                      Label : INDEX
+                        'S'
+            Label : ELEMENT
+              AA
+            Label : ELEMENT
+              V
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  R
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'U'
+                    Label : ARGUMENT
+                      T
+                    Label : ARGUMENT
+                      [
+                      Label : VARIABLE
+                        $f
+                      Label : INDEX
+                        'X'
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $c
+            Label : ELEMENT
+              AB
+            Label : ELEMENT
+              Q
+            Label : ELEMENT
+              P
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $c
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $g
+            Label : ELEMENT
+              O
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                [
+                Label : VARIABLE
                   [
                   Label : VARIABLE
                     [
                     Label : VARIABLE
                       [
                       Label : VARIABLE
-                        [
-                        Label : VARIABLE
-                          $d
-                        Label : INDEX
-                          'J'
+                        $d
                       Label : INDEX
-                        $e
+                        'J'
                     Label : INDEX
-                      'K'
+                      $e
                   Label : INDEX
-                    $b
-                Label : LEFT
-                  $f
-              Label : ELEMENT
-                I
+                    'K'
+                Label : INDEX
+                  $b
+              Label : LEFT
+                $f
             Label : ELEMENT
-              ;
-              Label : ELEMENT
-                I
+              I
+            Label : ELEMENT
+              I
           Label : INIT
             =
             Label : RIGHT
@@ -156,7 +142,7 @@ Label : ELEMENT
             Label : POSTPLUSPLUS
               $e
         Label : ELEMENT
-          H
+          AC
         Label : ELEMENT
           =
           Label : RIGHT
@@ -177,6 +163,8 @@ Label : ELEMENT
                   $b
           Label : LEFT
             $c
+        Label : ELEMENT
+          H
         Label : ELEMENT
           F
       Label : INIT

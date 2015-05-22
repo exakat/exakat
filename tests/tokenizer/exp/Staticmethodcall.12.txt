@@ -5,13 +5,15 @@ Label : CODE
   Label : ELEMENT
     ::
     Label : METHOD
-      Concatenation
-      Label : CONCAT
-        'C'
-      Label : CONCAT
-        'B'
+      ;
       Label : ARGUMENTS
         void
+      Label : ELEMENT
+        Concatenation
+        Label : CONCAT
+          'C'
+        Label : CONCAT
+          'B'
     Label : CLASS
       $c
   Label : ELEMENT

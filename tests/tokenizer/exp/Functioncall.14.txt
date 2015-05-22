@@ -1,20 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      isset
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $x
-    Label : THEN
-      ;
-      Label : ELEMENT
+  if
+  Label : CONDITION
+    isset
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         $x
-    Label : ELSE
-      ;
-      Label : ELEMENT
-        $y
+  Label : THEN
+    ;
+    Label : ELEMENT
+      $x
+  Label : ELSE
+    ;
+    Label : ELEMENT
+      $y

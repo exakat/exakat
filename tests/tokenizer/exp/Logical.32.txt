@@ -1,60 +1,58 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
-      Label : LEFT
-        &&
-        Label : LEFT
-          !
-          Label : NOT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                'b'
-            Label : INDEX
-              'c'
+  if
+  Label : CONDITION
+    &&
+    Label : RIGHT
+      >
+      Label : RIGHT
+        *
         Label : RIGHT
+          1
+        Label : LEFT
           [
           Label : VARIABLE
             [
             Label : VARIABLE
-              $d
+              $j
             Label : INDEX
-              'e'
+              'k'
           Label : INDEX
-            'f'
-      Label : RIGHT
-        >
-        Label : LEFT
-          -
-          Label : LEFT
-            G
-          Label : RIGHT
-            [
-            Label : VARIABLE
-              $h
-            Label : INDEX
-              'i'
+            'l'
+      Label : LEFT
+        -
         Label : RIGHT
-          *
-          Label : LEFT
+          [
+          Label : VARIABLE
+            $h
+          Label : INDEX
+            'i'
+        Label : LEFT
+          G
+    Label : LEFT
+      &&
+      Label : RIGHT
+        [
+        Label : VARIABLE
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            'e'
+        Label : INDEX
+          'f'
+      Label : LEFT
+        !
+        Label : NOT
+          [
+          Label : VARIABLE
             [
             Label : VARIABLE
-              [
-              Label : VARIABLE
-                $j
-              Label : INDEX
-                'k'
+              $a
             Label : INDEX
-              'l'
-          Label : RIGHT
-            1
-    Label : THEN
-      void
+              'b'
+          Label : INDEX
+            'c'
+  Label : THEN
+    void

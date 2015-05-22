@@ -1,15 +1,15 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $a
-    Label : METHOD
+  ->
+  Label : OBJECT
+    $a
+  Label : METHOD
+    ;
+    Label : ARGUMENTS
+      void
+    Label : ELEMENT
       Concatenation
-      Label : ARGUMENTS
-        void
       Label : CONCAT
         'd'
       Label : CONCAT

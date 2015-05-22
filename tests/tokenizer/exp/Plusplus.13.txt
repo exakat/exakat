@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      ::
-      Label : PROPERTY
-        $b
-      Label : CLASS
-        a
+  ++
+  Label : POSTPLUSPLUS
+    ::
+    Label : PROPERTY
+      $b
+    Label : CLASS
+      a

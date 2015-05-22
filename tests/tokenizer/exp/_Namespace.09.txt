@@ -1,78 +1,76 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : NAME
-          F
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            function
-            Label : NAME
-              I
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  ->
-                  Label : OBJECT
-                    $c
-                  Label : PROPERTY
-                    K
-              Label : ELEMENT
+  namespace
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      class
+      Label : NAME
+        F
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          function
+          Label : PUBLIC
+            public
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+          Label : NAME
+            I
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
                 ->
                 Label : OBJECT
-                  $b
-                Label : METHOD
-                  J
-                  Label : ARGUMENTS
+                  $c
+                Label : PROPERTY
+                  K
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                J
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
                     void
-                    Label : ARGUMENT
-                      void
-            Label : ARGUMENTS
+              Label : OBJECT
+                $b
+        Label : ELEMENT
+          function
+          Label : PUBLIC
+            public
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
               void
-              Label : ARGUMENT
-                void
-            Label : PUBLIC
-              public
-          Label : ELEMENT
-            function
-            Label : NAME
-              G
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  ->
-                  Label : OBJECT
-                    $a
-                  Label : PROPERTY
-                    H
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-            Label : PUBLIC
-              public
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
+          Label : NAME
+            G
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  H
+    Label : ELEMENT
+      use
+      Label : USE
+        \
+        Label : SUBNAME
+          E
+        Label : SUBNAME
+          D
+  Label : NAMESPACE
+    \
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B

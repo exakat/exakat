@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    @
-    Label : AT
-      `
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          mkdir -p 
-        Label : CONCAT
-          $dir
+  @
+  Label : AT
+    `
+    Label : CONTAINS
+      Concatenation
+      Label : CONCAT
+        mkdir -p 
+      Label : CONCAT
+        $dir

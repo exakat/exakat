@@ -4,6 +4,8 @@ Label : CODE
   Label : ELEMENT
     void
   Label : ELEMENT
+    void
+  Label : ELEMENT
     if
     Label : CONDITION
       3
@@ -38,25 +40,23 @@ Label : CODE
         Label : RETURN
           void
   Label : ELEMENT
-    void
-  Label : ELEMENT
-    void
-  Label : ELEMENT
     if
     Label : CONDITION
       2
     Label : THEN
       ;
       Label : ELEMENT
+        void
+      Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $a
       Label : ELEMENT
-        void
-      Label : ELEMENT
         return
         Label : RETURN
           void
+  Label : ELEMENT
+    void
   Label : ELEMENT
     if
     Label : CONDITION

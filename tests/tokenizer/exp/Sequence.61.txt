@@ -1,38 +1,36 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    for
-    Label : BLOCK
-      void
-    Label : INIT
-      =
-      Label : RIGHT
-        ?
-        Label : CONDITION
-          (
-          Label : CODE
-            $c
-        Label : THEN
-          (
-          Label : CODE
-            +
-            Label : RIGHT
-              1
-            Label : LEFT
-              $d
-        Label : ELSE
-          0
-      Label : LEFT
-        $a
-    Label : FINAL
-      <
-      Label : RIGHT
-        $f
-      Label : LEFT
-        $e
-    Label : INCREMENT
-      ++
-      Label : PREPLUSPLUS
-        $g
+  for
+  Label : BLOCK
+    void
+  Label : INIT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        (
+        Label : CODE
+          $c
+      Label : THEN
+        (
+        Label : CODE
+          +
+          Label : RIGHT
+            1
+          Label : LEFT
+            $d
+      Label : ELSE
+        0
+    Label : LEFT
+      $a
+  Label : FINAL
+    <
+    Label : RIGHT
+      $f
+    Label : LEFT
+      $e
+  Label : INCREMENT
+    ++
+    Label : PREPLUSPLUS
+      $g

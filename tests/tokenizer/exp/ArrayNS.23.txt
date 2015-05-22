@@ -1,25 +1,23 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !=
+  if
+  Label : CONDITION
+    !=
+    Label : RIGHT
+      'B'
+    Label : LEFT
+      $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
       Label : RIGHT
-        'B'
+        $c
       Label : LEFT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          $c
-        Label : LEFT
+        [
+        Label : VARIABLE
           [
           Label : VARIABLE
-            [
-            Label : VARIABLE
-              $b
-          Label : INDEX
-            C
+            $b
+        Label : INDEX
+          C

@@ -9,15 +9,17 @@ Label : CODE
       Label : ARGUMENT
         $
         Label : NAME
-          Concatenation
-          Label : CONCAT
-            'c'
-          Label : CONCAT
-            b
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                __FILE__
+          ;
+          Label : ELEMENT
+            Concatenation
+            Label : CONCAT
+              'c'
+            Label : CONCAT
+              b
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  __FILE__
   Label : ELEMENT
     =
     Label : RIGHT
@@ -28,6 +30,8 @@ Label : CODE
           void
         Label : ARGUMENT
           =>
+          Label : KEY
+            'a'
           Label : VALUE
             d
             Label : ARGUMENTS
@@ -42,7 +46,5 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       __FILE__
-          Label : KEY
-            'a'
     Label : LEFT
       $x

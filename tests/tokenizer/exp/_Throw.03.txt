@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    throw
-    Label : THROW
-      ->
-      Label : OBJECT
-        $e
-      Label : PROPERTY
-        g
+  throw
+  Label : THROW
+    ->
+    Label : OBJECT
+      $e
+    Label : PROPERTY
+      g

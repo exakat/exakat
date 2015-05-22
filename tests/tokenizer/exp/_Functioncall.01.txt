@@ -2,6 +2,20 @@
 Label : CODE
   ;
   Label : ELEMENT
+    E
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      F
+    Label : VALUE
+      =>
+      Label : VALUE
+        $d
+      Label : KEY
+        $c
+    Label : SOURCE
+      $b
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
@@ -17,19 +31,3 @@ Label : CODE
           'B'
         Label : ELSE
           'D'
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        F
-    Label : VALUE
-      =>
-      Label : VALUE
-        $d
-      Label : KEY
-        $c
-    Label : SOURCE
-      $b
-  Label : ELEMENT
-    E

@@ -1,24 +1,22 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    +
-    Label : RIGHT
-      (
-      Label : CODE
-        -
-        Label : RIGHT
-          1
-        Label : LEFT
-          1
-    Label : LEFT
+  +
+  Label : RIGHT
+    (
+    Label : CODE
       -
       Label : RIGHT
         1
       Label : LEFT
-        +
-        Label : RIGHT
-          1
-        Label : LEFT
-          1
+        1
+  Label : LEFT
+    -
+    Label : RIGHT
+      1
+    Label : LEFT
+      +
+      Label : RIGHT
+        1
+      Label : LEFT
+        1

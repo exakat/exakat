@@ -2,6 +2,24 @@
 Label : CODE
   ;
   Label : ELEMENT
+    AA
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ->
+      Label : OBJECT
+        [
+        Label : VARIABLE
+          $e
+        Label : INDEX
+          'AB'
+      Label : PROPERTY
+        AC
+    Label : THEN
+      ;
+      Label : ELEMENT
+        AD
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       Arguments
@@ -29,16 +47,16 @@ Label : CODE
                     Arguments
                     Label : ARGUMENT
                       =>
-                      Label : VALUE
-                        'W'
                       Label : KEY
                         'V'
+                      Label : VALUE
+                        'W'
                     Label : ARGUMENT
                       =>
-                      Label : VALUE
-                        2
                       Label : KEY
                         'J'
+                      Label : VALUE
+                        2
                 Label : ARGUMENT
                   'T'
                 Label : ARGUMENT
@@ -79,22 +97,22 @@ Label : CODE
                 Arguments
                 Label : ARGUMENT
                   =>
-                  Label : VALUE
-                    1
                   Label : KEY
                     'J'
+                  Label : VALUE
+                    1
                 Label : ARGUMENT
                   =>
-                  Label : VALUE
-                    0
                   Label : KEY
                     'I'
+                  Label : VALUE
+                    0
                 Label : ARGUMENT
                   =>
-                  Label : VALUE
-                    'H'
                   Label : KEY
                     'G'
+                  Label : VALUE
+                    'H'
             Label : ARGUMENT
               $b
             Label : ARGUMENT
@@ -111,21 +129,3 @@ Label : CODE
             $a
           Label : INDEX
             'B'
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ->
-      Label : OBJECT
-        [
-        Label : VARIABLE
-          $e
-        Label : INDEX
-          'AB'
-      Label : PROPERTY
-        AC
-    Label : THEN
-      ;
-      Label : ELEMENT
-        AD
-  Label : ELEMENT
-    AA

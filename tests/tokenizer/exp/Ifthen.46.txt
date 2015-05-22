@@ -1,43 +1,41 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
+  if
+  Label : CONDITION
+    $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $e
+    Label : ELEMENT
+      [
+      Label : VARIABLE
+        ->
+        Label : OBJECT
+          $b
+        Label : PROPERTY
+          c
+      Label : INDEX
+        d
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          34
+      Label : NAME
+        [
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $a
+  Label : ELSE
+    elseif
     Label : CONDITION
-      $a
+      $b
     Label : THEN
       ;
       Label : ELEMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $e
-      Label : ELEMENT
-        [
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            34
-        Label : VARIABLE
-          ->
-          Label : OBJECT
-            $b
-          Label : PROPERTY
-            c
-        Label : INDEX
-          d
-        Label : NAME
-          [
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        $b
-      Label : THEN
-        ;
-        Label : ELEMENT
-          B
+        B

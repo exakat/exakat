@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    chdir
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        __FILE__
-      Label : ARGUMENT
-        __DIR__
+  chdir
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      __FILE__
+    Label : ARGUMENT
+      __DIR__

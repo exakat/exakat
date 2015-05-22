@@ -1,17 +1,27 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      %
-      Label : RIGHT
-        7
-      Label : LEFT
-        (
-        Label : CODE
-          +
+  return
+  Label : RETURN
+    %
+    Label : RIGHT
+      7
+    Label : LEFT
+      (
+      Label : CODE
+        +
+        Label : RIGHT
+          (int)
+          Label : CAST
+            (
+            Label : CODE
+              /
+              Label : RIGHT
+                6
+              Label : LEFT
+                $f
+        Label : LEFT
+          -
           Label : RIGHT
             (int)
             Label : CAST
@@ -19,11 +29,11 @@ Label : CODE
               Label : CODE
                 /
                 Label : RIGHT
-                  6
+                  5
                 Label : LEFT
-                  $f
+                  $e
           Label : LEFT
-            -
+            +
             Label : RIGHT
               (int)
               Label : CAST
@@ -31,40 +41,28 @@ Label : CODE
                 Label : CODE
                   /
                   Label : RIGHT
-                    5
+                    4
                   Label : LEFT
-                    $e
+                    $d
             Label : LEFT
-              +
-              Label : RIGHT
-                (int)
-                Label : CAST
-                  (
-                  Label : CODE
-                    /
-                    Label : RIGHT
-                      4
-                    Label : LEFT
-                      $d
-              Label : LEFT
-                (int)
-                Label : CAST
+              (int)
+              Label : CAST
+                +
+                Label : RIGHT
+                  3
+                Label : LEFT
                   +
                   Label : RIGHT
-                    3
+                    $c
                   Label : LEFT
-                    +
-                    Label : RIGHT
-                      $c
-                    Label : LEFT
-                      (
-                      Label : CODE
-                        /
+                    (
+                    Label : CODE
+                      /
+                      Label : RIGHT
+                        2
+                      Label : LEFT
+                        *
                         Label : RIGHT
-                          2
+                          $b
                         Label : LEFT
-                          *
-                          Label : RIGHT
-                            $b
-                          Label : LEFT
-                            $a
+                          $a

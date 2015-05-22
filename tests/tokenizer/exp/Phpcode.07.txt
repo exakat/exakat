@@ -6,6 +6,8 @@ Label : CODE
     Label : POSTPLUSPLUS
       $y
   Label : ELEMENT
+    void
+  Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
       $x

@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      instanceof
-      Label : VARIABLE
-        $x
-      Label : CLASS
-        Exception
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          false
+  if
+  Label : CONDITION
+    instanceof
+    Label : VARIABLE
+      $x
+    Label : CLASS
+      Exception
+  Label : THEN
+    ;
+    Label : ELEMENT
+      return
+      Label : RETURN
+        false

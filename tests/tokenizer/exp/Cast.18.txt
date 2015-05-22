@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      (string)
-      Label : CAST
-        new
-        Label : NEW
-          StdClass
-    Label : LEFT
-      $x
+  =
+  Label : RIGHT
+    (string)
+    Label : CAST
+      new
+      Label : NEW
+        StdClass
+  Label : LEFT
+    $x

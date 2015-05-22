@@ -1,22 +1,20 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : NAME
-      a
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          1
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        Typehint
-        Label : VARIABLE
-          $b
-        Label : CLASS
-          StdClass
+  function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      Typehint
+      Label : VARIABLE
+        $b
+      Label : CLASS
+        StdClass
+  Label : NAME
+    a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      return
+      Label : RETURN
+        1

@@ -1,30 +1,28 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        >>
-        Label : RIGHT
-          $g
-        Label : LEFT
-          ::
-          Label : CLASS
-            $d
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $f
+  foreach
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      >>
+      Label : RIGHT
+        $g
+      Label : LEFT
+        ::
+        Label : CLASS
+          $d
+        Label : METHOD
+          e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $f
+  Label : VALUE
+    =>
+    Label : KEY
+      $b
     Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b
-    Label : SOURCE
-      $a
+      $c
+  Label : SOURCE
+    $a

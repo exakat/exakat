@@ -1,65 +1,63 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
+  if
+  Label : CONDITION
+    ==
+    Label : RIGHT
+      'C'
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        B
+  Label : THEN
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        $d
+      Label : THEN
+        ;
+        Label : ELEMENT
+          foreach
+          Label : VALUE
+            $f
+          Label : SOURCE
+            $e
+          Label : BLOCK
+            void
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $g
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        D
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'E'
+          Label : ARGUMENT
+            $c
+      Label : LEFT
+        $b
+  Label : ELSE
+    elseif
     Label : CONDITION
       ==
       Label : RIGHT
-        'C'
+        'G'
       Label : LEFT
         ->
         Label : OBJECT
-          $a
+          $h
         Label : PROPERTY
-          B
+          F
     Label : THEN
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
-          $g
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $d
-        Label : THEN
-          ;
-          Label : ELEMENT
-            foreach
-            Label : BLOCK
-              void
-            Label : VALUE
-              $f
-            Label : SOURCE
-              $e
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          D
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'E'
-            Label : ARGUMENT
-              $c
-        Label : LEFT
-          $b
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        ==
-        Label : RIGHT
-          'G'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $h
-          Label : PROPERTY
-            F
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $i
+          $i

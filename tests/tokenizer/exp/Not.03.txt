@@ -1,24 +1,22 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    !
-    Label : NOT
-      ->
-      Label : OBJECT
-        ::
-        Label : METHOD
-          D
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'd'
-        Label : CLASS
-          C
+  !
+  Label : NOT
+    ->
+    Label : OBJECT
+      ::
       Label : METHOD
-        e
+        D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            'f'
+            'd'
+      Label : CLASS
+        C
+    Label : METHOD
+      e
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'f'

@@ -7,11 +7,7 @@ Label : CODE
     Label : RIGHT
       >>=
       Label : RIGHT
-        >>=
-        Label : RIGHT
-          $d
-        Label : LEFT
-          $c
+        $c
       Label : LEFT
         $b
     Label : LEFT
@@ -21,7 +17,11 @@ Label : CODE
     Label : RIGHT
       >>=
       Label : RIGHT
-        $c
+        >>=
+        Label : RIGHT
+          $d
+        Label : LEFT
+          $c
       Label : LEFT
         $b
     Label : LEFT

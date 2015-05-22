@@ -1,56 +1,54 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            B
-    Label : CONDITION
-      &&
+  while
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        ->
+        Label : OBJECT
+          $this
+        Label : PROPERTY
+          B
+  Label : CONDITION
+    &&
+    Label : RIGHT
+      ===
       Label : RIGHT
-        ===
-        Label : RIGHT
-          G
-        Label : LEFT
-          D
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              {
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  E
-              Label : INDEX
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  B
-            Label : ARGUMENT
-              $a
+        G
       Label : LEFT
-        <
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            C
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            B
+        D
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            {
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                E
+            Label : INDEX
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                B
+          Label : ARGUMENT
+            $a
+    Label : LEFT
+      <
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $this
+        Label : PROPERTY
+          C
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $this
+        Label : PROPERTY
+          B

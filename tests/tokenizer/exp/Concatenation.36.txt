@@ -1,46 +1,44 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      preg_replace
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $i
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            "\\2"
-          Label : CONCAT
-            (
-            Label : CODE
-              +
-              Label : RIGHT
-                1
-              Label : LEFT
-                [
-                Label : VARIABLE
-                  $g
-                Label : INDEX
-                  'h'
-          Label : CONCAT
-            "f"
-        Label : ARGUMENT
-          "
-          Label : CONTAIN
-            Concatenation
-            Label : CONCAT
-              b
-            Label : CONCAT
+  =
+  Label : RIGHT
+    preg_replace
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $i
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          "\\2"
+        Label : CONCAT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              1
+            Label : LEFT
               [
               Label : VARIABLE
-                $c
+                $g
               Label : INDEX
-                d
-            Label : CONCAT
-              e
-    Label : LEFT
-      $a
+                'h'
+        Label : CONCAT
+          "f"
+      Label : ARGUMENT
+        "
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            b
+          Label : CONCAT
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              d
+          Label : CONCAT
+            e
+  Label : LEFT
+    $a

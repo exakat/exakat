@@ -3,166 +3,146 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      return
-      Label : RETURN
-        ?
-        Label : CONDITION
+    if
+    Label : CONDITION
+      1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+  Label : ELEMENT
+    break
+    Label : LEVEL
+      void
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+        Label : CASE
+          'b'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+        Label : CASE
+          'a'
+  Label : ELEMENT
+    while
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+    Label : CONDITION
+      $a
+  Label : ELEMENT
+    for
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+    Label : INIT
+      $i
+    Label : FINAL
+      ++
+      Label : POSTPLUSPLUS
+        $i
+    Label : INCREMENT
+      --
+      Label : POSTPLUSPLUS
+        $i
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+    Label : VALUE
+      $b
+    Label : SOURCE
+      $a
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ?
+      Label : CONDITION
+        (
+        Label : CODE
+          $c
+      Label : THEN
+        (bool)
+        Label : CAST
           (
           Label : CODE
-            $c
-        Label : THEN
-          (bool)
-          Label : CAST
-            (
-            Label : CODE
-              <
-              Label : RIGHT
-                $d
-              Label : LEFT
-                C
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      ::
-                      Label : METHOD
-                        E
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            void
-                      Label : CLASS
-                        D
+            <
+            Label : RIGHT
+              $d
+            Label : LEFT
+              C
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    ::
                     Label : METHOD
-                      F
+                      E
                       Label : ARGUMENTS
                         void
                         Label : ARGUMENT
                           void
-        Label : ELSE
-          G
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        (int)
-        Label : CAST
-          ->
-          Label : OBJECT
-            $b
-          Label : METHOD
-            B
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-      Label : LEFT
-        $a
+                    Label : CLASS
+                      D
+                  Label : METHOD
+                    F
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+      Label : ELSE
+        G
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          1
-        Label : THEN
-          ;
-          Label : ELEMENT
-            $a
-          Label : ELEMENT
-            $b
-      Label : ELEMENT
-        break
-        Label : LEVEL
-          void
-    Label : ELEMENT
-      ;
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          foreach
-          Label : SOURCE
-            $a
-          Label : VALUE
-            $b
-          Label : BLOCK
-            ;
-            Label : ELEMENT
-              $a
-            Label : ELEMENT
-              $b
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            switch
-            Label : NAME
-              $a
-            Label : CASES
-              Sequence Case Default
-              Label : ELEMENT
-                default
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    $a
-                  Label : ELEMENT
-                    $b
-              Label : ELEMENT
-                case
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    $a
-                  Label : ELEMENT
-                    $b
-                Label : CASE
-                  'b'
-              Label : ELEMENT
-                case
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    $a
-                  Label : ELEMENT
-                    $b
-                Label : CASE
-                  'a'
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              for
-              Label : BLOCK
-                ;
-                Label : ELEMENT
-                  $a
-                Label : ELEMENT
-                  $b
-              Label : INIT
-                $i
-              Label : FINAL
-                ++
-                Label : POSTPLUSPLUS
-                  $i
-              Label : INCREMENT
-                --
-                Label : POSTPLUSPLUS
-                  $i
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              while
-              Label : CONDITION
-                $a
-              Label : BLOCK
-                ;
-                Label : ELEMENT
-                  $a
-                Label : ELEMENT
-                  $b
+    =
+    Label : RIGHT
+      (int)
+      Label : CAST
+        ->
+        Label : OBJECT
+          $b
+        Label : METHOD
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+    Label : LEFT
+      $a

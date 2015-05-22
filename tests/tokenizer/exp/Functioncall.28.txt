@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        3
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        1
+  echo
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      3
+    Label : ARGUMENT
+      2
+    Label : ARGUMENT
+      1

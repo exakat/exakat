@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      instanceof
-      Label : VARIABLE
-        $y
-      Label : CLASS
-        ->
-        Label : PROPERTY
-          c
-        Label : OBJECT
-          $z
-    Label : LEFT
-      $x
+  =
+  Label : RIGHT
+    instanceof
+    Label : VARIABLE
+      $y
+    Label : CLASS
+      ->
+      Label : OBJECT
+        $z
+      Label : PROPERTY
+        c
+  Label : LEFT
+    $x

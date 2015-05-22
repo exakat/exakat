@@ -5,6 +5,52 @@ Label : ELEMENT
   Label : CODE
     ;
     Label : ELEMENT
+      =
+      Label : RIGHT
+        new
+        Label : NEW
+          E
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              new
+              Label : NEW
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        =>
+                        Label : VALUE
+                          'J'
+                        Label : KEY
+                          'I'
+                      Label : ARGUMENT
+                        =>
+                        Label : VALUE
+                          'H'
+                        Label : KEY
+                          'G'
+      Label : LEFT
+        $a
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $a
+          Label : METHOD
+            K
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'G'
+    Label : ELEMENT
       <<<C
 
       Label : CONTAINS
@@ -12,57 +58,5 @@ Label : ELEMENT
         Label : CONCAT
           D
 
-    Label : ELEMENT
-      ;
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            new
-            Label : NEW
-              E
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  new
-                  Label : NEW
-                    F
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          Arguments
-                          Label : ARGUMENT
-                            =>
-                            Label : VALUE
-                              'J'
-                            Label : KEY
-                              'I'
-                          Label : ARGUMENT
-                            =>
-                            Label : VALUE
-                              'H'
-                            Label : KEY
-                              'G'
-          Label : LEFT
-            $a
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $a
-              Label : METHOD
-                K
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'G'
 Label : ELEMENT
   B

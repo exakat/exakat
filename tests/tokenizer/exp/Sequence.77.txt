@@ -1,22 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      0
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          continue
-          Label : LEVEL
-            void
+  if
+  Label : CONDITION
+    0
+  Label : THEN
+    ;
+    Label : ELEMENT
+      continue
+      Label : LEVEL
+        void
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $a

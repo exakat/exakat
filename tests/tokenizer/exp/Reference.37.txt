@@ -5,15 +5,27 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      ::
-      Label : CLASS
+      new
+      Label : NEW
         a
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ::
       Label : METHOD
         e
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
+      Label : CLASS
+        a
     Label : LEFT
       $e
   Label : ELEMENT
@@ -46,6 +58,8 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : STATIC
+          static
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -58,8 +72,6 @@ Label : CODE
             return
             Label : RETURN
               1
-        Label : STATIC
-          static
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -76,19 +88,7 @@ Label : CODE
               1
       Label : ELEMENT
         const
-        Label : NAME
-          B
         Label : VALUE
           1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      new
-      Label : NEW
-        a
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-    Label : LEFT
-      $c
+        Label : NAME
+          B

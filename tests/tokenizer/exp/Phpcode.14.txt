@@ -6,6 +6,8 @@ Label : CODE
     Label : POSTPLUSPLUS
       $c
   Label : ELEMENT
+    void
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void

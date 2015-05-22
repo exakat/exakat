@@ -1,38 +1,36 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $a
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            &&
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      case
+      Label : CASE
+        'a'
+      Label : CODE
+        ;
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+        Label : ELEMENT
+          &&
+          Label : RIGHT
+            =
             Label : RIGHT
-              =
-              Label : RIGHT
-                'f'
-              Label : LEFT
-                $e
+              'f'
             Label : LEFT
+              $e
+          Label : LEFT
+            [
+            Label : VARIABLE
               [
               Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $b
-                Label : INDEX
-                  'c'
+                $b
               Label : INDEX
-                'd'
-        Label : CASE
-          'a'
+                'c'
+            Label : INDEX
+              'd'

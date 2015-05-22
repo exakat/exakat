@@ -3,7 +3,7 @@ Label : CODE
   ;
   Label : ELEMENT
     "
-    Label : CONTAIN
+    Label : CONTAINS
       Concatenation
       Label : CONCAT
         H: 
@@ -15,7 +15,7 @@ Label : CODE
       void
       Label : ARGUMENT
         "
-        Label : CONTAIN
+        Label : CONTAINS
           Concatenation
           Label : CONCAT
             D: 

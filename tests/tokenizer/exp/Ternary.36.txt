@@ -4,36 +4,6 @@ Label : ELEMENT
   Label : CODE
     ;
     Label : ELEMENT
-      U
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        ->
-        Label : OBJECT
-          ::
-          Label : METHOD
-            Y
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-          Label : CLASS
-            \
-            Label : SUBNAME
-              X
-            Label : SUBNAME
-              W
-        Label : METHOD
-          Z
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              null
-            Label : ARGUMENT
-              'AA'
-      Label : LEFT
-        $i
-    Label : ELEMENT
       print
       Label : ARGUMENTS
         void
@@ -76,6 +46,36 @@ Label : ELEMENT
                   Label : ELSE
                     'R'
     Label : ELEMENT
+      =
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          ::
+          Label : METHOD
+            Y
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+          Label : CLASS
+            \
+            Label : SUBNAME
+              X
+            Label : SUBNAME
+              W
+        Label : METHOD
+          Z
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              null
+            Label : ARGUMENT
+              'AA'
+      Label : LEFT
+        $i
+    Label : ELEMENT
+      U
+    Label : ELEMENT
       L
     Label : ELEMENT
       print
@@ -98,13 +98,13 @@ Label : ELEMENT
       Label : THEN
         ;
         Label : ELEMENT
-          H
-        Label : ELEMENT
           print
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $c
+        Label : ELEMENT
+          H
         Label : ELEMENT
           G
       Label : ELSE
@@ -116,11 +116,15 @@ Label : ELEMENT
           Label : LEFT
             $d
         Label : THEN
-          J
+          ;
+          Label : ELEMENT
+            J
         Label : ELSE
           ;
           Label : ELEMENT
             K
+    Label : ELEMENT
+      E
     Label : ELEMENT
       print
       Label : ARGUMENTS
@@ -137,7 +141,5 @@ Label : ELEMENT
             'D'
           Label : ELSE
             'E'
-    Label : ELEMENT
-      E
 Label : ELEMENT
   A

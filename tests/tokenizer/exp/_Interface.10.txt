@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     interface
     Label : NAME
-      true
+      int
     Label : BLOCK
       void
     Label : EXTENDS
@@ -13,7 +13,7 @@ Label : CODE
   Label : ELEMENT
     interface
     Label : NAME
-      int
+      true
     Label : BLOCK
       void
     Label : EXTENDS

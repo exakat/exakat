@@ -3,6 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    1
-  Label : ELEMENT
     2
+  Label : ELEMENT
+    1

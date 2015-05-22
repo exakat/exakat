@@ -1,40 +1,38 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $a
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            d
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'g'
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $e
-                Label : INDEX
-                  'f'
-        Label : CASE
-          ==
-          Label : RIGHT
-            'c'
-          Label : LEFT
-            substr
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                $b
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      case
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          d
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'g'
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $e
+              Label : INDEX
+                'f'
+      Label : CASE
+        ==
+        Label : RIGHT
+          'c'
+        Label : LEFT
+          substr
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              $b

@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    include
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          "literal"
+  include
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      (
+      Label : CODE
+        "literal"

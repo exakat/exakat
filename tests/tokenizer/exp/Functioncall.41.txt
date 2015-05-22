@@ -1,10 +1,8 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    eval
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        "echo 1;"
+  eval
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      "echo 1;"

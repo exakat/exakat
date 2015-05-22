@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    new
-    Label : NEW
+  new
+  Label : NEW
+    $x
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        1
+    Label : NAME
       $x
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          1
-      Label : NAME
-        $x

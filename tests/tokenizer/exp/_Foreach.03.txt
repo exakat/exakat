@@ -1,22 +1,20 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        +=
-        Label : RIGHT
-          2
-        Label : LEFT
-          $y
-    Label : VALUE
-      $y
-    Label : SOURCE
-      ->
-      Label : OBJECT
-        $x
-      Label : PROPERTY
-        b
+  foreach
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      +=
+      Label : RIGHT
+        2
+      Label : LEFT
+        $y
+  Label : VALUE
+    $y
+  Label : SOURCE
+    ->
+    Label : OBJECT
+      $x
+    Label : PROPERTY
+      b

@@ -1,15 +1,19 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $c
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        default
-        Label : CODE
+  switch
+  Label : NAME
+    $c
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      default
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b
+        Label : ELEMENT
           ;
           Label : ELEMENT
             ;
@@ -17,13 +21,17 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $d
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
-      Label : ELEMENT
-        case
-        Label : CODE
+    Label : ELEMENT
+      case
+      Label : CASE
+        'b'
+      Label : CODE
+        ;
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+        Label : ELEMENT
           ;
           Label : ELEMENT
             ;
@@ -31,15 +39,17 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $b
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-        Label : CASE
-          'b'
-      Label : ELEMENT
-        case
-        Label : CODE
+    Label : ELEMENT
+      case
+      Label : CASE
+        'a'
+      Label : CODE
+        ;
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+        Label : ELEMENT
           ;
           Label : ELEMENT
             ;
@@ -47,9 +57,3 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $a
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-        Label : CASE
-          'a'

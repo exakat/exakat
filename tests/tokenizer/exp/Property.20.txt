@@ -3,6 +3,28 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'b'
+          Label : VALUE
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'B'
+                Label : VALUE
+                  'o'
+    Label : LEFT
+      $a
+  Label : ELEMENT
     if
     Label : CONDITION
       ==
@@ -60,28 +82,6 @@ Label : CODE
               'B'
           Label : PROPERTY
             C
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'b'
-          Label : VALUE
-            array
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'B'
-                Label : VALUE
-                  'o'
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
     Label : RIGHT

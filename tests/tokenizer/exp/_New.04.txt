@@ -1,8 +1,6 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    new
-    Label : NEW
-      stdclass
+  new
+  Label : NEW
+    stdclass

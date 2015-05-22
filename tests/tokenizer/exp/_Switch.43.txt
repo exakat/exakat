@@ -1,66 +1,64 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      ->
-      Label : OBJECT
-        $a
-      Label : METHOD
-        B
-        Label : ARGUMENTS
+  switch
+  Label : NAME
+    ->
+    Label : OBJECT
+      $a
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           void
-          Label : ARGUMENT
-            void
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              =
-              Label : RIGHT
-                ->
-                Label : OBJECT
-                  $d
-                Label : METHOD
-                  E
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $e
-              Label : LEFT
-                $c
-            Label : THEN
-              void
-          Label : ELEMENT
-            switch
-            Label : NAME
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      case
+      Label : CASE
+        'C'
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            =
+            Label : RIGHT
               ->
               Label : OBJECT
-                $b
+                $d
               Label : METHOD
-                D
+                E
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
-                    void
-            Label : CASES
-              void
-        Label : CASE
-          'C'
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            Void
+                    $e
+            Label : LEFT
+              $c
+          Label : THEN
+            void
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+        Label : ELEMENT
+          switch
+          Label : NAME
+            ->
+            Label : OBJECT
+              $b
+            Label : METHOD
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+          Label : CASES
+            void
+    Label : ELEMENT
+      default
+      Label : CODE
+        Block with Sequence For Default
+        Label : ELEMENT
+          Void

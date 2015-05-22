@@ -3,24 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        empty
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        .=
-        Label : RIGHT
-          'B'
-        Label : LEFT
-          $b
-  Label : ELEMENT
     .=
     Label : RIGHT
       Concatenation
@@ -40,3 +22,21 @@ Label : CODE
         'D'
     Label : LEFT
       $c
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        .=
+        Label : RIGHT
+          'B'
+        Label : LEFT
+          $b

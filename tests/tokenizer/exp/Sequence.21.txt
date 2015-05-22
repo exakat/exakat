@@ -23,7 +23,7 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          ;
+          Block with Sequence For Case
           Label : ELEMENT
             =
             Label : RIGHT

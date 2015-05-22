@@ -1,69 +1,41 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ||
-      Label : RIGHT
-        ==
-        Label : RIGHT
-          'D'
-        Label : LEFT
-          $a
-      Label : LEFT
-        ||
-        Label : RIGHT
-          ==
-          Label : RIGHT
-            'C'
-          Label : LEFT
-            $a
-        Label : LEFT
-          ==
-          Label : RIGHT
-            'B'
-          Label : LEFT
-            $a
-    Label : THEN
-      ;
-      Label : ELEMENT
+;
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      E
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          G
+        Label : ARGUMENT
+          'F'
+Label : ELEMENT
+  void
+Label : ELEMENT
+  if
+  Label : CONDITION
+    isset
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $b
+  Label : THEN
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
         void
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          isset
+        Label : ARGUMENT
+          H
           Label : ARGUMENTS
-            void
+            Arguments
             Label : ARGUMENT
               $b
-        Label : THEN
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                H
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    $b
-                  Label : ARGUMENT
-                    'I'
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            E
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                G
-              Label : ARGUMENT
-                'F'
+            Label : ARGUMENT
+              'I'
+Label : ELEMENT
+  void
+Label : ELEMENT
+  void

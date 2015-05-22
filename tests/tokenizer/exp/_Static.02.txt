@@ -1,74 +1,74 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      a
-    Label : BLOCK
+  class
+  Label : NAME
+    a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
       Sequence
       Label : ELEMENT
         ppp
-        Label : STATIC
-          static
         Label : VALUE
           void
+        Label : STATIC
+          static
         Label : DEFINE
           $i
       Label : ELEMENT
         ppp
-        Label : STATIC
-          static
         Label : VALUE
           void
+        Label : STATIC
+          static
         Label : DEFINE
           $h
       Label : ELEMENT
         ppp
-        Label : STATIC
-          static
         Label : VALUE
           void
+        Label : STATIC
+          static
         Label : DEFINE
           $g
       Label : ELEMENT
         ppp
-        Label : STATIC
-          static
         Label : VALUE
           void
+        Label : STATIC
+          static
         Label : DEFINE
           $f
       Label : ELEMENT
         ppp
-        Label : STATIC
-          static
         Label : VALUE
           void
+        Label : STATIC
+          static
         Label : DEFINE
           $e
       Label : ELEMENT
         ppp
-        Label : STATIC
-          static
         Label : VALUE
           void
+        Label : STATIC
+          static
         Label : DEFINE
           $d
       Label : ELEMENT
         ppp
-        Label : STATIC
-          static
         Label : VALUE
           void
+        Label : STATIC
+          static
         Label : DEFINE
           $c
       Label : ELEMENT
         ppp
-        Label : STATIC
-          static
         Label : VALUE
           void
+        Label : STATIC
+          static
         Label : DEFINE
           $b

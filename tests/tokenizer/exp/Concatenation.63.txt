@@ -1,107 +1,105 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !==
-      Label : RIGHT
-        'E'
-      Label : LEFT
-        B
+  if
+  Label : CONDITION
+    !==
+    Label : RIGHT
+      'E'
+    Label : LEFT
+      B
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          D
+        Label : ARGUMENT
+          'C'
+  Label : THEN
+    ;
+    Label : ELEMENT
+      Concatenation
+      Label : CONCAT
+        'N'
+      Label : CONCAT
+        K
         Label : ARGUMENTS
-          Arguments
+          void
           Label : ARGUMENT
-            D
-          Label : ARGUMENT
-            'C'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        O
-      Label : ELEMENT
+            B
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'M'
+      Label : CONCAT
+        'J'
+      Label : CONCAT
         G
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
             'I'
           Label : ARGUMENT
-            'Q'
-      Label : ELEMENT
-        echo
+            'H'
+    Label : ELEMENT
+      S
+    Label : ELEMENT
+      T
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $a
+    Label : ELEMENT
+      G
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          'I'
+        Label : ARGUMENT
+          'Q'
+    Label : ELEMENT
+      O
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        isset
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $a
-      Label : ELEMENT
-        S
-      Label : ELEMENT
-        T
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          isset
+            $b
+      Label : THEN
+        ;
+        Label : ELEMENT
+          echo
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              $b
-        Label : THEN
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                U
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $b
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            U
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  'X'
-      Label : ELEMENT
-        V
-      Label : ELEMENT
-        Y
-      Label : ELEMENT
-        Concatenation
-        Label : CONCAT
-          'N'
-        Label : CONCAT
-          K
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              B
+              U
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  'M'
-        Label : CONCAT
-          'J'
-        Label : CONCAT
-          G
+                  $b
+    Label : ELEMENT
+      V
+    Label : ELEMENT
+      Y
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          U
           Label : ARGUMENTS
-            Arguments
+            void
             Label : ARGUMENT
-              'I'
-            Label : ARGUMENT
-              'H'
-      Label : ELEMENT
-        F
-    Label : ELSE
-      ;
-      Label : ELEMENT
-        Z
+              [
+              Label : VARIABLE
+                $c
+              Label : INDEX
+                'X'
+    Label : ELEMENT
+      F
+  Label : ELSE
+    ;
+    Label : ELEMENT
+      Z

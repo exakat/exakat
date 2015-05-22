@@ -1,57 +1,55 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          ||
+  foreach
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        ||
+        Label : RIGHT
+          ==
           Label : RIGHT
-            ==
-            Label : RIGHT
-              'C'
-            Label : LEFT
-              $g
+            'C'
           Label : LEFT
-            ==
-            Label : RIGHT
-              'B'
-            Label : LEFT
-              $f
-        Label : THEN
-          ;
-          Label : ELEMENT
-            continue
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          !
-          Label : NOT
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $d
-                Label : INDEX
-                  $e
-        Label : THEN
-          ;
-          Label : ELEMENT
-            continue
-            Label : LEVEL
-              void
+            $g
+        Label : LEFT
+          ==
+          Label : RIGHT
+            'B'
+          Label : LEFT
+            $f
+      Label : THEN
+        ;
+        Label : ELEMENT
+          continue
+          Label : LEVEL
+            void
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        !
+        Label : NOT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                $e
+      Label : THEN
+        ;
+        Label : ELEMENT
+          continue
+          Label : LEVEL
+            void
+  Label : VALUE
+    =>
     Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b
-    Label : SOURCE
-      $a
+      $c
+    Label : KEY
+      $b
+  Label : SOURCE
+    $a

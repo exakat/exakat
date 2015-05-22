@@ -1,8 +1,6 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    break
-    Label : LEVEL
-      1
+  break
+  Label : LEVEL
+    1

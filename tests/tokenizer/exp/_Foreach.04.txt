@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
+  foreach
+  Label : VALUE
+    $y
+  Label : SOURCE
+    $x
+    Label : ARGUMENTS
       void
-    Label : VALUE
-      $y
-    Label : SOURCE
+      Label : ARGUMENT
+        'a'
+    Label : NAME
       $x
-      Label : NAME
-        $x
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'a'
+  Label : BLOCK
+    void

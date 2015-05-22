@@ -1,33 +1,89 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
+  if
+  Label : CONDITION
+    ==
+    Label : RIGHT
+      'C'
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        B
+  Label : THEN
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              E
+      Label : THEN
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              F
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    I
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    [
+                    Label : VARIABLE
+                      $c
+                    Label : INDEX
+                      'G'
+                  Label : INDEX
+                    'H'
+          Label : THEN
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                J
+  Label : ELSE
+    elseif
     Label : CONDITION
       ==
       Label : RIGHT
-        'C'
+        'L'
       Label : LEFT
         ->
         Label : OBJECT
-          $a
+          $e
         Label : PROPERTY
-          B
+          K
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          D
+          M
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               ->
               Label : OBJECT
-                $b
+                $f
               Label : PROPERTY
-                E
+                N
         Label : THEN
           ;
           Label : ELEMENT
@@ -35,130 +91,72 @@ Label : CODE
             Label : CONDITION
               !
               Label : NOT
-                F
+                O
                 Label : ARGUMENTS
                   Arguments
                   Label : ARGUMENT
                     ->
                     Label : OBJECT
-                      $d
+                      $h
                     Label : PROPERTY
-                      I
+                      R
                   Label : ARGUMENT
                     [
                     Label : VARIABLE
                       [
                       Label : VARIABLE
-                        $c
+                        $g
                       Label : INDEX
-                        'G'
+                        'P'
                     Label : INDEX
-                      'H'
+                      'Q'
             Label : THEN
               ;
               Label : ELEMENT
                 return
                 Label : RETURN
-                  J
+                  S
     Label : ELSE
-      elseif
-      Label : CONDITION
-        ==
-        Label : RIGHT
-          'L'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $e
-          Label : PROPERTY
-            K
-      Label : THEN
-        ;
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            M
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $f
-                Label : PROPERTY
-                  N
-          Label : THEN
-            ;
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                !
-                Label : NOT
-                  O
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      ->
-                      Label : OBJECT
-                        $h
-                      Label : PROPERTY
-                        R
-                    Label : ARGUMENT
-                      [
-                      Label : VARIABLE
-                        [
-                        Label : VARIABLE
-                          $g
-                        Label : INDEX
-                          'P'
-                      Label : INDEX
-                        'Q'
-              Label : THEN
-                ;
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    S
-      Label : ELSE
-        ;
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            T
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $i
-                Label : PROPERTY
-                  U
-          Label : THEN
-            ;
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                V
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $k
-                    Label : PROPERTY
-                      Y
-                  Label : ARGUMENT
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          T
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $i
+              Label : PROPERTY
+                U
+        Label : THEN
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              V
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $k
+                  Label : PROPERTY
+                    Y
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
                     [
                     Label : VARIABLE
-                      [
-                      Label : VARIABLE
-                        $j
-                      Label : INDEX
-                        'W'
+                      $j
                     Label : INDEX
-                      'X'
-              Label : THEN
-                ;
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    Z
+                      'W'
+                  Label : INDEX
+                    'X'
+            Label : THEN
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  Z

@@ -1,85 +1,83 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        I
+  if
+  Label : CONDITION
+    $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $b
+    Label : ELEMENT
+      E
 
-      Label : ELEMENT
-        H
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $e
+    Label : ELEMENT
+      D
 
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $i
-      Label : ELEMENT
-        G
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $d
+    Label : ELEMENT
+      C
 
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $h
-      Label : ELEMENT
-        F
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $c
+    Label : ELEMENT
+      B
 
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $g
-      Label : ELEMENT
-        E
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $h
+    Label : ELEMENT
+      H
 
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $f
-      Label : ELEMENT
-        D
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $i
+    Label : ELEMENT
+      I
 
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $e
-      Label : ELEMENT
-        C
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $f
+    Label : ELEMENT
+      F
 
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $d
-      Label : ELEMENT
-        B
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $g
+    Label : ELEMENT
+      G
 
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $c
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-      Label : ELEMENT
-        A
+    Label : ELEMENT
+      A
 

@@ -3,12 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    :
-    Label : LABEL
-      E
-  Label : ELEMENT
-    $c
-  Label : ELEMENT
     try
     Label : CODE
       ;
@@ -20,14 +14,20 @@ Label : CODE
             void
     Label : CATCH
       catch
-      Label : CODE
-        void
       Label : VARIABLE
         $b
+      Label : CODE
+        void
       Label : CLASS
         \
         Label : SUBNAME
           D
+  Label : ELEMENT
+    :
+    Label : LABEL
+      E
+  Label : ELEMENT
+    $c
   Label : ELEMENT
     =
     Label : RIGHT

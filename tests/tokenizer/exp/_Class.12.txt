@@ -1,16 +1,14 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      x
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        const
-        Label : NAME
-          c
-        Label : VALUE
-          3
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      const
+      Label : VALUE
+        3
+      Label : NAME
+        c

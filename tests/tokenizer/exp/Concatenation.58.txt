@@ -5,15 +5,15 @@ Label : CODE
   Label : ELEMENT
     Concatenation
     Label : CONCAT
-      'd'
-    Label : CONCAT
-      $c
-  Label : ELEMENT
-    Concatenation
-    Label : CONCAT
       'b'
     Label : CONCAT
       $a
+  Label : ELEMENT
+    Concatenation
+    Label : CONCAT
+      'd'
+    Label : CONCAT
+      $c
   Label : ELEMENT
     if
     Label : CONDITION

@@ -3,20 +3,22 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        $a
-  Label : ELEMENT
     while
-    Label : BLOCK
-      Block with While
-      Label : ELEMENT
-        void
     Label : CONDITION
       <
       Label : RIGHT
         10
       Label : LEFT
         $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        void
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a

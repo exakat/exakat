@@ -3,43 +3,41 @@
 Label : CODE
   ;
   Label : ELEMENT
-    namespace
+    ::
+    Label : METHOD
+      L
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'M'
+    Label : CLASS
+      \
+      Label : SUBNAME
+        K
+      Label : SUBNAME
+        F
+  Label : ELEMENT
+    class
     Label : BLOCK
-      ;
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          L
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'M'
-        Label : CLASS
-          \
-          Label : SUBNAME
-            K
-          Label : SUBNAME
-            F
-      Label : ELEMENT
-        class
-        Label : NAME
-          D
-        Label : BLOCK
-          void
-        Label : EXTENDS
-          \
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            F
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            F
-          Label : SUBNAME
-            B
+      void
+    Label : NAME
+      D
+    Label : EXTENDS
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        F
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        F
+      Label : SUBNAME
+        B
+  Label : ELEMENT
+    namespace
     Label : NAMESPACE
       \
       Label : SUBNAME
@@ -48,3 +46,5 @@ Label : CODE
         C
       Label : SUBNAME
         B
+    Label : BLOCK
+      void

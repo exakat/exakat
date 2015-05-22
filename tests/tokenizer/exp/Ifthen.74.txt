@@ -1,7 +1,5 @@
 ;
 Label : ELEMENT
-  S
-Label : ELEMENT
   <?php 
   Label : CODE
     ;
@@ -50,8 +48,6 @@ Label : ELEMENT
       Label : THEN
         ;
         Label : ELEMENT
-          M
-        Label : ELEMENT
           if
           Label : CONDITION
             isset
@@ -80,7 +76,7 @@ Label : ELEMENT
                       Label : INDEX
                         'M'
         Label : ELEMENT
-          I
+          M
         Label : ELEMENT
           G
           Label : ARGUMENTS
@@ -90,10 +86,14 @@ Label : ELEMENT
             Label : ARGUMENT
               'H'
         Label : ELEMENT
+          I
+        Label : ELEMENT
           E
       Label : ELSE
         ;
         Label : ELEMENT
           N
+Label : ELEMENT
+  S
 Label : ELEMENT
   A

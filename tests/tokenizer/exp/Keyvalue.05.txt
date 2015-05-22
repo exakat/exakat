@@ -1,32 +1,30 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              c
-          Label : VALUE
-            $d
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ::
-            Label : CLASS
-              B
-            Label : CONSTANT
-              C
-          Label : VALUE
-            'd'
-    Label : LEFT
-      $a
+  =
+  Label : RIGHT
+    array
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          ->
+          Label : OBJECT
+            $b
+          Label : PROPERTY
+            c
+        Label : VALUE
+          $d
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          ::
+          Label : CLASS
+            B
+          Label : CONSTANT
+            C
+        Label : VALUE
+          'd'
+  Label : LEFT
+    $a

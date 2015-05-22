@@ -4,6 +4,26 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
+    Label : NAMESPACE
+      complex
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+        Label : NAME
+          path
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -13,79 +33,7 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              a4
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a1
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a3
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              path
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              path2
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              \
-              Label : SUBNAME
-                a1
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              one_identifier3
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a2
+              one_identifier
             Label : CONSTANT
               a
       Label : ELEMENT
@@ -105,7 +53,79 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              one_identifier
+              path2
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              path
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a3
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a4
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              one_identifier3
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a1
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a2
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              \
+              Label : SUBNAME
+                a1
             Label : CONSTANT
               a
       Label : ELEMENT
@@ -174,38 +194,18 @@ Label : CODE
         use
         Label : USE
           one_identifier
-    Label : NAMESPACE
-      x
   Label : ELEMENT
     namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : NAME
-          path2
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
     Label : NAMESPACE
       \
       Label : SUBNAME
         complex
       Label : SUBNAME
         absolute
-  Label : ELEMENT
-    namespace
     Label : BLOCK
       ;
       Label : ELEMENT
         class
-        Label : NAME
-          path
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -214,59 +214,59 @@ Label : CODE
               a
             Label : VALUE
               2
-    Label : NAMESPACE
-      complex
+        Label : NAME
+          path2
   Label : ELEMENT
     namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : NAME
-          a1
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-      Label : ELEMENT
-        class
-        Label : NAME
-          one_identifier3
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-      Label : ELEMENT
-        class
-        Label : NAME
-          absolute_path
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-      Label : ELEMENT
-        class
-        Label : NAME
-          one_identifier
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
     Label : NAMESPACE
       Global
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+        Label : NAME
+          one_identifier3
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+        Label : NAME
+          a1
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+        Label : NAME
+          absolute_path
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+        Label : NAME
+          one_identifier

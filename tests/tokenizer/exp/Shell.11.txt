@@ -1,42 +1,40 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      `
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          b 
-        Label : CONCAT
-          $c
-        Label : CONCAT
-           d 
-        Label : CONCAT
-          ->
-          Label : OBJECT
-            $e
-          Label : PROPERTY
-            f
-        Label : CONCAT
-           g 
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $h
-          Label : INDEX
-            1
-        Label : CONCAT
-           i 
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $j
-          Label : INDEX
-            d
-        Label : CONCAT
-           k 
+  =
+  Label : RIGHT
+    `
+    Label : CONTAINS
+      Concatenation
+      Label : CONCAT
+        b 
+      Label : CONCAT
+        $c
+      Label : CONCAT
+         d 
+      Label : CONCAT
+        ->
+        Label : OBJECT
+          $e
+        Label : PROPERTY
+          f
+      Label : CONCAT
+         g 
+      Label : CONCAT
+        [
+        Label : VARIABLE
+          $h
+        Label : INDEX
+          1
+      Label : CONCAT
+         i 
+      Label : CONCAT
+        [
+        Label : VARIABLE
+          $j
+        Label : INDEX
+          d
+      Label : CONCAT
+         k 
+  Label : LEFT
+    $a

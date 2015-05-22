@@ -28,14 +28,14 @@ Label : CODE
         =
         Label : RIGHT
           \
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
           Label : SUBNAME
             connect
           Label : SUBNAME
             MyProject
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
         Label : LEFT
           $a
       Label : ELEMENT
@@ -52,14 +52,14 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          connect
-        Label : BLOCK
-          void
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
+        Label : NAME
+          connect
+        Label : BLOCK
+          void
       Label : ELEMENT
         class
         Label : NAME
@@ -68,9 +68,9 @@ Label : CODE
           void
       Label : ELEMENT
         const
-        Label : NAME
-          CONNECT_OK
         Label : VALUE
           1
+        Label : NAME
+          CONNECT_OK
     Label : NAMESPACE
       MyProject

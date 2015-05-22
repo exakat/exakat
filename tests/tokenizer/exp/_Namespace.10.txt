@@ -7,6 +7,18 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
+        +
+        Label : RIGHT
+          2
+        Label : LEFT
+          1
+    Label : NAMESPACE
+      Global
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
         =
         Label : RIGHT
           new
@@ -20,15 +32,3 @@ Label : CODE
           $obj
     Label : NAMESPACE
       A
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        +
-        Label : RIGHT
-          2
-        Label : LEFT
-          1
-    Label : NAMESPACE
-      Global

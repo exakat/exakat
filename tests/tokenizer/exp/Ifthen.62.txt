@@ -14,36 +14,6 @@ Label : CODE
       Label : ELEMENT
         void
     Label : ELSE
-      elseif
-      Label : CONDITION
-        >
-        Label : RIGHT
-          a
-        Label : LEFT
-          $a
-      Label : THEN
-        ;
-        Label : ELEMENT
-          void
-      Label : ELSE
-        Block with else
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $b
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      >
-      Label : RIGHT
-        a
-      Label : LEFT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        void
-    Label : ELSE
       Block with else
       Label : ELEMENT
         if
@@ -63,6 +33,36 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $b
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      >
+      Label : RIGHT
+        a
+      Label : LEFT
+        $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        void
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        >
+        Label : RIGHT
+          a
+        Label : LEFT
+          $a
+      Label : THEN
+        ;
+        Label : ELEMENT
+          void
+      Label : ELSE
+        Block with else
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b
   Label : ELEMENT
     if
     Label : CONDITION

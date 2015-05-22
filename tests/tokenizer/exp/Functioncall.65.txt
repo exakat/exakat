@@ -21,10 +21,22 @@ Label : CODE
           void
           Label : ARGUMENT
             $x
-        Label : NAME
-          
         Label : BLOCK
           void
+        Label : NAME
+          
+  Label : ELEMENT
+    include
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        +
+        Label : RIGHT
+          3
+        Label : LEFT
+          (
+          Label : CODE
+            'a'
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -53,18 +65,6 @@ Label : CODE
         (
         Label : CODE
           $d
-  Label : ELEMENT
-    include
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        +
-        Label : RIGHT
-          3
-        Label : LEFT
-          (
-          Label : CODE
-            'a'
   Label : ELEMENT
     =
     Label : RIGHT

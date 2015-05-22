@@ -3,15 +3,17 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ->
-    Label : OBJECT
-      $b
-    Label : METHOD
-      N
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
+    class
+    Label : NAME
+      J
+    Label : EXTENDS
+      K
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        use
+        Label : USE
+          L
   Label : ELEMENT
     =
     Label : RIGHT
@@ -25,41 +27,15 @@ Label : CODE
     Label : LEFT
       $a
   Label : ELEMENT
-    class
-    Label : NAME
-      J
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        use
-        Label : USE
-          L
-    Label : EXTENDS
-      K
-  Label : ELEMENT
-    class
-    Label : NAME
-      B
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : NAME
-          C
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'D'
-        Label : ARGUMENTS
+    ->
+    Label : OBJECT
+      $b
+    Label : METHOD
+      N
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           void
-          Label : ARGUMENT
-            void
-        Label : PUBLIC
-          public
   Label : ELEMENT
     trait
     Label : NAME
@@ -68,6 +44,12 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : PUBLIC
+          public
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           F
         Label : BLOCK
@@ -80,17 +62,35 @@ Label : CODE
                 'I'
           Label : ELEMENT
             ::
-            Label : CLASS
-              G
             Label : METHOD
               H
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
+            Label : CLASS
+              G
+  Label : ELEMENT
+    class
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : PUBLIC
-          public
+        Label : NAME
+          C
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'D'

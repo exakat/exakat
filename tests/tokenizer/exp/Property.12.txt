@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $obj
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $obj
+  Label : PROPERTY
+    ;
+    Label : ELEMENT
       [
       Label : VARIABLE
         $extend

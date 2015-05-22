@@ -1,17 +1,15 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        *
+  print
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      *
+      Label : RIGHT
+        =
         Label : RIGHT
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $a
+          2
         Label : LEFT
-          1
+          $a
+      Label : LEFT
+        1

@@ -61,6 +61,14 @@ Label : CODE
             Label : INDEX
               'H'
   Label : ELEMENT
+    E
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        G
+      Label : ARGUMENT
+        'F'
+  Label : ELEMENT
     if
     Label : CONDITION
       !
@@ -78,11 +86,3 @@ Label : CODE
           void
           Label : ARGUMENT
             'D'
-  Label : ELEMENT
-    E
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        G
-      Label : ARGUMENT
-        'F'

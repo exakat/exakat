@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    new
-    Label : NEW
-      ::
-      Label : CLASS
-        C
-      Label : PROPERTY
-        $y
+  new
+  Label : NEW
+    ::
+    Label : PROPERTY
+      $y
+    Label : CLASS
+      C

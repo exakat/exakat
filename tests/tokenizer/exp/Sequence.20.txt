@@ -3,39 +3,35 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $j
+    =
+    Label : RIGHT
+      <<<EOF
+
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          |
+        Label : CONCAT
+          $g
+        Label : CONCAT
+          |
+        Label : CONCAT
+          $h
+        Label : CONCAT
+          |
+        Label : CONCAT
+          $i
+        Label : CONCAT
+          
+
+    Label : LEFT
+      $f
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        <<<EOF
-
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            |
-          Label : CONCAT
-            $g
-          Label : CONCAT
-            |
-          Label : CONCAT
-            $h
-          Label : CONCAT
-            |
-          Label : CONCAT
-            $i
-          Label : CONCAT
-            
-
-      Label : LEFT
-        $f
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $j
   Label : ELEMENT
     if
     Label : CONDITION

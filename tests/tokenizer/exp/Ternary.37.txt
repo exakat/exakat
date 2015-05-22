@@ -2,6 +2,32 @@
 Label : CODE
   ;
   Label : ELEMENT
+    F
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
+        Label : METHOD
+          I
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              M
+            Label : ARGUMENT
+              L
+            Label : ARGUMENT
+              K
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                'J'
+        Label : CLASS
+          H
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
@@ -35,29 +61,3 @@ Label : CODE
               'D'
             Label : ELSE
               'E'
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ::
-        Label : METHOD
-          I
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              M
-            Label : ARGUMENT
-              L
-            Label : ARGUMENT
-              K
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $d
-              Label : INDEX
-                'J'
-        Label : CLASS
-          H
-  Label : ELEMENT
-    F

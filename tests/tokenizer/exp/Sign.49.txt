@@ -3,20 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    "String"
-  Label : ELEMENT
-    MY_CONSTANT
-  Label : ELEMENT
-    <<<HEREDOC
-
-    Label : CONTAIN
-      Concatenation
-      Label : CONCAT
-        
-silly string
-
-
-  Label : ELEMENT
     -
     Label : SIGN
       (
@@ -26,6 +12,20 @@ silly string
           3
         Label : LEFT
           4
+  Label : ELEMENT
+    MY_CONSTANT
+  Label : ELEMENT
+    "String"
+  Label : ELEMENT
+    <<<HEREDOC
+
+    Label : CONTAINS
+      Concatenation
+      Label : CONCAT
+        
+silly string
+
+
   Label : ELEMENT
     \
     Label : SUBNAME

@@ -3,29 +3,21 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $e
-        Label : VALUE
-          =>
-          Label : VALUE
-            $d
-          Label : KEY
-            $c
-        Label : SOURCE
-          $b
+    f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $g
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $i
+    Label : SOURCE
+      $h
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -38,17 +30,25 @@ Label : CODE
             continue
             Label : LEVEL
               void
-    Label : VALUE
-      $i
-    Label : SOURCE
-      $h
   Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $g
-  Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        foreach
+        Label : VALUE
+          =>
+          Label : KEY
+            $c
+          Label : VALUE
+            $d
+        Label : SOURCE
+          $b
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $e

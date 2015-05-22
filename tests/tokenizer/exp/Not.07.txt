@@ -1,28 +1,26 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      =
-      Label : LEFT
-        !
-        Label : NOT
-          $handle
-      Label : RIGHT
-        fopen
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'r+b'
-          Label : ARGUMENT
-            '/tmp/test'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            1
+  if
+  Label : CONDITION
+    =
+    Label : RIGHT
+      fopen
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          'r+b'
+        Label : ARGUMENT
+          '/tmp/test'
+    Label : LEFT
+      !
+      Label : NOT
+        $handle
+  Label : THEN
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          1

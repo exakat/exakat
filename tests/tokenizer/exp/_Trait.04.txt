@@ -3,6 +3,56 @@
 Label : CODE
   ;
   Label : ELEMENT
+    ->
+    Label : OBJECT
+      $o
+    Label : METHOD
+      sayExclamationMark
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                '!'
+        Label : NAME
+          sayExclamationMark
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        use
+        Label : USE
+          World
+        Label : USE
+          Hello
+    Label : NAME
+      MyHelloWorld
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $o
+    Label : METHOD
+      sayHello
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
     =
     Label : RIGHT
       new
@@ -19,71 +69,21 @@ Label : CODE
     Label : OBJECT
       $o
     Label : METHOD
-      sayExclamationMark
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $o
-    Label : METHOD
       sayWorld
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
   Label : ELEMENT
-    ->
-    Label : OBJECT
-      $o
-    Label : METHOD
-      sayHello
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    class
-    Label : NAME
-      MyHelloWorld
+    trait
     Label : BLOCK
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          sayExclamationMark
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                '!'
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        use
-        Label : USE
-          World
-        Label : USE
-          Hello
-  Label : ELEMENT
-    trait
-    Label : NAME
-      World
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : NAME
-          sayWorld
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -92,22 +92,22 @@ Label : CODE
               void
               Label : ARGUMENT
                 'World'
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
+        Label : NAME
+          sayWorld
         Label : PUBLIC
           public
+    Label : NAME
+      World
   Label : ELEMENT
     trait
-    Label : NAME
-      Hello
     Label : BLOCK
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          sayHello
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -116,9 +116,9 @@ Label : CODE
               void
               Label : ARGUMENT
                 'Hello '
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
+        Label : NAME
+          sayHello
         Label : PUBLIC
           public
+    Label : NAME
+      Hello

@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        void
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $a
+  foreach
+  Label : VALUE
+    $b
+  Label : SOURCE
+    $a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      void

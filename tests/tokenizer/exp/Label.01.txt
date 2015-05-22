@@ -1,54 +1,52 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
+  if
+  Label : CONDITION
+    =
+    Label : RIGHT
+      $b
+    Label : LEFT
+      $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            'l'
+          Label : CONCAT
+            $k
+          Label : CONCAT
+            'j'
+    Label : ELEMENT
       =
       Label : RIGHT
-        $b
+        1
       Label : LEFT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
+        $i
+    Label : ELEMENT
+      ?
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            'd'
+          Label : LEFT
+            $c
+      Label : THEN
         =
         Label : RIGHT
-          1
+          'f'
         Label : LEFT
-          $i
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              'l'
-            Label : CONCAT
-              $k
-            Label : CONCAT
-              'j'
-      Label : ELEMENT
-        ?
-        Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              'd'
-            Label : LEFT
-              $c
-        Label : THEN
-          =
-          Label : RIGHT
-            'f'
-          Label : LEFT
-            $e
-        Label : ELSE
-          =
-          Label : RIGHT
-            'h'
-          Label : LEFT
-            $g
+          $e
+      Label : ELSE
+        =
+        Label : RIGHT
+          'h'
+        Label : LEFT
+          $g

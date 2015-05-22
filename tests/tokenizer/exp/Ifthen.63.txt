@@ -3,6 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
+    return
+    Label : RETURN
+      1
+  Label : ELEMENT
     if
     Label : CONDITION
       is_null
@@ -24,7 +28,3 @@ Label : CODE
               2
             Label : LEFT
               1
-  Label : ELEMENT
-    return
-    Label : RETURN
-      1

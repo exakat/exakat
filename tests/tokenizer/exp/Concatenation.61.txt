@@ -1,40 +1,38 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'B'
-          Label : VALUE
-            Concatenation
-            Label : CONCAT
-              'G'
-            Label : CONCAT
-              new
-              Label : NEW
-                D
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    array
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'F'
-                        Label : VALUE
-                          $b
-                  Label : ARGUMENT
-                    'E'
-            Label : CONCAT
-              'C'
-    Label : LEFT
-      $a
+  =
+  Label : RIGHT
+    array
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        =>
+        Label : VALUE
+          Concatenation
+          Label : CONCAT
+            'G'
+          Label : CONCAT
+            new
+            Label : NEW
+              D
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      =>
+                      Label : VALUE
+                        $b
+                      Label : KEY
+                        'F'
+                Label : ARGUMENT
+                  'E'
+          Label : CONCAT
+            'C'
+        Label : KEY
+          'B'
+  Label : LEFT
+    $a

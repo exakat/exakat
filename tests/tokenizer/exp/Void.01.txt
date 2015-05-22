@@ -1,80 +1,78 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      =
-      Label : RIGHT
-        B
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'C'
-          Label : ARGUMENT
-            $b
-      Label : LEFT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          &&
-          Label : RIGHT
-            !
-            Label : NOT
-              F
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  $h
-                Label : ARGUMENT
-                  G
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      H
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          'I'
-                        Label : ARGUMENT
-                          $g
-                    Label : ARGUMENT
-                      1
-                    Label : ARGUMENT
-                      $f
-          Label : LEFT
-            !
-            Label : NOT
-              D
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  $e
-                Label : ARGUMENT
-                  E
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      0
-                    Label : ARGUMENT
-                      $c
-        Label : THEN
-          ;
-          Label : ELEMENT
-            unset
+  if
+  Label : CONDITION
+    =
+    Label : RIGHT
+      B
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          'C'
+        Label : ARGUMENT
+          $b
+    Label : LEFT
+      $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      void
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        &&
+        Label : RIGHT
+          !
+          Label : NOT
+            F
             Label : ARGUMENTS
-              void
+              Arguments
               Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $i
-                Label : INDEX
-                  $j
+                $h
+              Label : ARGUMENT
+                G
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    H
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        'I'
+                      Label : ARGUMENT
+                        $g
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    $f
+        Label : LEFT
+          !
+          Label : NOT
+            D
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                E
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    $d
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    $c
+      Label : THEN
+        ;
+        Label : ELEMENT
+          unset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                $j

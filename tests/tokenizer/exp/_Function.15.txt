@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : NAME
-      aasdfasf
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          1
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $b
+  function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $b
+  Label : NAME
+    aasdfasf
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      return
+      Label : RETURN
+        1

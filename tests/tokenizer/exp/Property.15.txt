@@ -1,30 +1,28 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        in_array
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $d
-            Label : INDEX
-              $e
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $a
-              Label : PROPERTY
-                $b
-            Label : INDEX
-              $c
-    Label : THEN
-      void
+  if
+  Label : CONDITION
+    !
+    Label : NOT
+      in_array
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            $e
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              $b
+          Label : INDEX
+            $c
+  Label : THEN
+    void

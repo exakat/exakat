@@ -1,46 +1,44 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : NAME
-      B
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ->
-        Label : OBJECT
-          ::
-          Label : PROPERTY
-            $a
-          Label : CLASS
-            static
-        Label : METHOD
-          D
+  function
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        new
+        Label : NEW
+          C
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          new
-          Label : NEW
-            C
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-        Label : LEFT
-          ::
-          Label : PROPERTY
-            $a
-          Label : CLASS
-            static
-    Label : ARGUMENTS
+      Label : LEFT
+        ::
+        Label : PROPERTY
+          $a
+        Label : CLASS
+          static
+    Label : ELEMENT
+      ->
+      Label : OBJECT
+        ::
+        Label : PROPERTY
+          $a
+        Label : CLASS
+          static
+      Label : METHOD
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : ELEMENT
       void
-      Label : ARGUMENT
-        void
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      void
+  Label : NAME
+    B

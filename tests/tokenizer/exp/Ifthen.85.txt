@@ -1,29 +1,23 @@
-;
-Label : ELEMENT
-  T
-Label : ELEMENT
-  <?php 
-  Label : CODE
+<?php 
+Label : CODE
+  if
+  Label : CONDITION
+    ->
+    Label : OBJECT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'
+    Label : PROPERTY
+      C
+  Label : THEN
     ;
     Label : ELEMENT
-      if
-      Label : CONDITION
-        ->
-        Label : OBJECT
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            'B'
-        Label : PROPERTY
-          C
-      Label : THEN
-        ;
-        Label : ELEMENT
-          S
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              D
+      S
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          D

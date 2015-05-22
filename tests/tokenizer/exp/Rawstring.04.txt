@@ -1,141 +1,137 @@
 ;
 Label : ELEMENT
-  V
-Label : ELEMENT
   <?php 
   Label : CODE
-    ;
-    Label : ELEMENT
-      foreach
+    foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
       Label : VALUE
-        =>
-        Label : KEY
-          $b
+        $c
+    Label : SOURCE
+      $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        foreach
         Label : VALUE
-          $c
-      Label : SOURCE
-        $a
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          D
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ::
-              Label : METHOD
-                L
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    M
-                  Label : ARGUMENT
-                    NULL
-                  Label : ARGUMENT
-                    NULL
-                  Label : ARGUMENT
-                    $h
-                  Label : ARGUMENT
-                    $g
-              Label : CLASS
-                K
-        Label : ELEMENT
-          M
-        Label : ELEMENT
-          U
-        Label : ELEMENT
-          foreach
-          Label : VALUE
-            $j
-          Label : SOURCE
-            $i
-          Label : BLOCK
-            Block with Foreach
-            Label : ELEMENT
-              T
-            Label : ELEMENT
-              ;
-              Label : ELEMENT
-                echo
+          $j
+        Label : SOURCE
+          $i
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ::
+                Label : METHOD
+                  Q
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      T
+                    Label : ARGUMENT
+                      NULL
+                    Label : ARGUMENT
+                      NULL
+                    Label : ARGUMENT
+                      "
+                      Label : CONTAINS
+                        Concatenation
+                        Label : CONCAT
+                          $m
+                        Label : CONCAT
+                          S
+                        Label : CONCAT
+                          $n
+                    Label : ARGUMENT
+                      "
+                      Label : CONTAINS
+                        Concatenation
+                        Label : CONCAT
+                          $k
+                        Label : CONCAT
+                          R
+                        Label : CONCAT
+                          $l
+                Label : CLASS
+                  P
+          Label : ELEMENT
+            T
+          Label : ELEMENT
+            N
+      Label : ELEMENT
+        U
+      Label : ELEMENT
+        D
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              G
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'I'
+                Label : ARGUMENT
+                  'H'
+            Label : CLASS
+              F
+      Label : ELEMENT
+        I
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              L
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  M
+                Label : ARGUMENT
+                  NULL
+                Label : ARGUMENT
+                  NULL
+                Label : ARGUMENT
+                  $h
+                Label : ARGUMENT
+                  $g
+            Label : CLASS
+              K
+      Label : ELEMENT
+        M
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $e
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                array
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
-                    ::
-                    Label : METHOD
-                      Q
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          T
-                        Label : ARGUMENT
-                          NULL
-                        Label : ARGUMENT
-                          NULL
-                        Label : ARGUMENT
-                          "
-                          Label : CONTAIN
-                            Concatenation
-                            Label : CONCAT
-                              $m
-                            Label : CONCAT
-                              S
-                            Label : CONCAT
-                              $n
-                        Label : ARGUMENT
-                          "
-                          Label : CONTAIN
-                            Concatenation
-                            Label : CONCAT
-                              $k
-                            Label : CONCAT
-                              R
-                            Label : CONCAT
-                              $l
-                    Label : CLASS
-                      P
-              Label : ELEMENT
-                N
-        Label : ELEMENT
-          I
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ::
-              Label : METHOD
-                G
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'I'
-                  Label : ARGUMENT
-                    'H'
-              Label : CLASS
-                F
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $d
-          Label : RIGHT
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'D'
-                      Label : VALUE
-                        $f
+                    =>
+                    Label : KEY
+                      'D'
+                    Label : VALUE
+                      $f
+        Label : LEFT
+          $d
+Label : ELEMENT
+  V
 Label : ELEMENT
   A

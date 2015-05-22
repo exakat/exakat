@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    declare
-    Label : BLOCK
-      void
-    Label : TICKS
-      =
-      Label : RIGHT
-        1
-      Label : LEFT
-        ticks
+  declare
+  Label : BLOCK
+    void
+  Label : TICKS
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      ticks

@@ -3,9 +3,71 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      $w
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $v
+      Label : PROPERTY
+        J
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $x
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $z
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $y
+          Label : PROPERTY
+            K
+  Label : ELEMENT
     foreach
+    Label : VALUE
+      $b
+    Label : SOURCE
+      $a
     Label : BLOCK
       ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          &&
+          Label : RIGHT
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $o
+          Label : LEFT
+            $n
+        Label : THEN
+          ;
+          Label : ELEMENT
+            .=
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'H'
+              Label : CONCAT
+                $q
+            Label : LEFT
+              $p
       Label : ELEMENT
         if
         Label : CONDITION
@@ -36,32 +98,6 @@ Label : CODE
               I
             Label : LEFT
               $u
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          &&
-          Label : RIGHT
-            !
-            Label : NOT
-              empty
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $o
-          Label : LEFT
-            $n
-        Label : THEN
-          ;
-          Label : ELEMENT
-            .=
-            Label : RIGHT
-              Concatenation
-              Label : CONCAT
-                'H'
-              Label : CONCAT
-                $q
-            Label : LEFT
-              $p
       Label : ELEMENT
         if
         Label : CONDITION
@@ -146,39 +182,3 @@ Label : CODE
               $d
         Label : LEFT
           $c
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $a
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        empty
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $x
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          $z
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $y
-          Label : PROPERTY
-            K
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      $w
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $v
-      Label : PROPERTY
-        J

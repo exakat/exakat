@@ -3,6 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
+    GOTO
+    Label : LABEL
+      cleanupCookie
+  Label : ELEMENT
     switch
     Label : NAME
       $x
@@ -16,10 +20,6 @@ Label : CODE
             Void
         Label : CASE
           1
-  Label : ELEMENT
-    GOTO
-    Label : LABEL
-      cleanupCookie
   Label : ELEMENT
     :
     Label : LABEL

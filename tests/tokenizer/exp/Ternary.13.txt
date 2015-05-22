@@ -1,52 +1,50 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        $b
-      Label : THEN
-        (
-        Label : CODE
-          ?
-          Label : CONDITION
-            ==
-            Label : RIGHT
-              'd'
-            Label : LEFT
-              $c
-          Label : THEN
-            substr
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                $e
-          Label : ELSE
-            substr
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                -
-                Label : SIGN
-                  $g
-              Label : ARGUMENT
-                md5
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    microtime
-                    Label : ARGUMENTS
+  =
+  Label : RIGHT
+    ?
+    Label : CONDITION
+      $b
+    Label : THEN
+      (
+      Label : CODE
+        ?
+        Label : CONDITION
+          ==
+          Label : RIGHT
+            'd'
+          Label : LEFT
+            $c
+        Label : THEN
+          substr
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              $e
+        Label : ELSE
+          substr
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              -
+              Label : SIGN
+                $g
+            Label : ARGUMENT
+              md5
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  microtime
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
                       void
-                      Label : ARGUMENT
-                        void
-      Label : ELSE
-        'h'
-    Label : LEFT
-      $a
+    Label : ELSE
+      'h'
+  Label : LEFT
+    $a

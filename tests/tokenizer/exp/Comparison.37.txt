@@ -1,42 +1,40 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
+  if
+  Label : CONDITION
+    &&
+    Label : RIGHT
+      ==
+      Label : RIGHT
+        G
+      Label : LEFT
+        instanceof
+        Label : VARIABLE
+          $c
+        Label : CLASS
+          F
+    Label : LEFT
       &&
       Label : RIGHT
         ==
         Label : RIGHT
-          G
+          E
         Label : LEFT
           instanceof
           Label : VARIABLE
-            $c
+            $b
           Label : CLASS
-            F
+            D
       Label : LEFT
-        &&
+        ==
         Label : RIGHT
-          ==
-          Label : RIGHT
-            E
-          Label : LEFT
-            instanceof
-            Label : VARIABLE
-              $b
-            Label : CLASS
-              D
+          C
         Label : LEFT
-          ==
-          Label : RIGHT
-            C
-          Label : LEFT
-            instanceof
-            Label : VARIABLE
-              $a
-            Label : CLASS
-              B
-    Label : THEN
-      void
+          instanceof
+          Label : VARIABLE
+            $a
+          Label : CLASS
+            B
+  Label : THEN
+    void

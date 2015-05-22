@@ -1,50 +1,48 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : NAME
-          J
-        Label : IMPLEMENTS
-          L
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            function
-            Label : NAME
-              M
-            Label : BLOCK
+  namespace
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      class
+      Label : NAME
+        J
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          function
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
               void
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-        Label : EXTENDS
-          K
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            I
-          Label : SUBNAME
-            H
-          Label : SUBNAME
-            G
-          Label : SUBNAME
-            F
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        E
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
+          Label : NAME
+            M
+          Label : BLOCK
+            void
+      Label : EXTENDS
+        K
+      Label : IMPLEMENTS
+        L
+    Label : ELEMENT
+      use
+      Label : USE
+        \
+        Label : SUBNAME
+          I
+        Label : SUBNAME
+          H
+        Label : SUBNAME
+          G
+        Label : SUBNAME
+          F
+  Label : NAMESPACE
+    \
+    Label : SUBNAME
+      E
+    Label : SUBNAME
+      D
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B

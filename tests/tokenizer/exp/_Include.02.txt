@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    require
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          "literal"
+  require
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      (
+      Label : CODE
+        "literal"

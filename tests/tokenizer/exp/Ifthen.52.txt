@@ -1,15 +1,3 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ==
-      Label : RIGHT
-        1
-      Label : LEFT
-        $target
-    Label : THEN
-      void
-    Label : ELSE
-      void
+;
+Label : ELEMENT
+  void

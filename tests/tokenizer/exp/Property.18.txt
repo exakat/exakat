@@ -55,8 +55,10 @@ Label : CODE
             Label : ARGUMENT
               void
       Label : PROPERTY
-        ->
-        Label : OBJECT
-          $j
-        Label : PROPERTY
-          k
+        ;
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            $j
+          Label : PROPERTY
+            k

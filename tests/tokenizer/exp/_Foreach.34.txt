@@ -1,71 +1,69 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        J
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          ==
-          Label : RIGHT
-            D
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $f
-          Label : LEFT
-            $e
-        Label : THEN
-          ;
-          Label : ELEMENT
-            E
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $g
-          Label : ELEMENT
-            D
-        Label : ELSE
-          ;
-          Label : ELEMENT
-            I
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  H
-                Label : METHOD
-                  I
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      $i
-                    Label : ARGUMENT
-                      $h
-          Label : ELEMENT
-            F
-      Label : ELEMENT
-        B
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $d
-      Label : ELEMENT
-        A
+  foreach
+  Label : VALUE
+    =>
+    Label : KEY
+      $b
     Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b
-    Label : SOURCE
-      $a
+      $c
+  Label : SOURCE
+    $a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        ==
+        Label : RIGHT
+          D
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $f
+        Label : LEFT
+          $e
+      Label : THEN
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+        Label : ELEMENT
+          E
+        Label : ELEMENT
+          D
+      Label : ELSE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ::
+              Label : METHOD
+                I
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    $i
+                  Label : ARGUMENT
+                    $h
+              Label : CLASS
+                H
+        Label : ELEMENT
+          I
+        Label : ELEMENT
+          F
+    Label : ELEMENT
+      J
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $d
+    Label : ELEMENT
+      B
+    Label : ELEMENT
+      A

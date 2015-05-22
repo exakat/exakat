@@ -3,15 +3,19 @@
 Label : CODE
   ;
   Label : ELEMENT
-    global
-    Label : GLOBAL
-      $
-      Label : NAME
-        {
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'c'
+          Label : VALUE
+            'Yes'
+    Label : LEFT
+      $b
   Label : ELEMENT
     global
     Label : GLOBAL
@@ -29,19 +33,9 @@ Label : CODE
       Label : NAME
         $a
   Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            'Yes'
-          Label : KEY
-            'c'
-    Label : LEFT
-      $b
+    $
+    Label : NAME
+      $a
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -55,23 +49,15 @@ Label : CODE
           Label : INDEX
             'bar'
   Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            'Yes'
-          Label : KEY
-            'bar'
-    Label : LEFT
-      $foo
-  Label : ELEMENT
-    $
-    Label : NAME
-      $a
+    global
+    Label : GLOBAL
+      $
+      Label : NAME
+        {
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'c'
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -87,9 +73,33 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'bar'
+          Label : VALUE
+            'Yes'
+    Label : LEFT
+      $foo
+  Label : ELEMENT
+    =
+    Label : RIGHT
       'a'
     Label : LEFT
       $Yes
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $
+      Label : NAME
+        ->
+        Label : OBJECT
+          $foo
+        Label : PROPERTY
+          bar
   Label : ELEMENT
     =
     Label : RIGHT
@@ -114,16 +124,6 @@ Label : CODE
         $foo
     Label : PROPERTY
       bar
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $
-      Label : NAME
-        ->
-        Label : OBJECT
-          $foo
-        Label : PROPERTY
-          bar
   Label : ELEMENT
     =
     Label : RIGHT

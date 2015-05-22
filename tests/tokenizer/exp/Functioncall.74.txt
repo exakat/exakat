@@ -1,19 +1,17 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        defined
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'A'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        exit
-        Label : ARGUMENTS
-          void
+  if
+  Label : CONDITION
+    !
+    Label : NOT
+      defined
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'A'
+  Label : THEN
+    ;
+    Label : ELEMENT
+      exit
+      Label : ARGUMENTS
+        void

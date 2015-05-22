@@ -5,14 +5,6 @@ Label : CODE
   Label : ELEMENT
     ;
     Label : ELEMENT
-      =
-      Label : RIGHT
-        ++
-        Label : POSTPLUSPLUS
-          $e
-      Label : LEFT
-        $d
-    Label : ELEMENT
       +=
       Label : RIGHT
         ++
@@ -24,13 +16,29 @@ Label : CODE
           $f
         Label : INDEX
           2
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : THEN
-      ;
-      Label : ELEMENT
+    Label : ELEMENT
+      =
+      Label : RIGHT
         ++
         Label : POSTPLUSPLUS
-          $a
+          $e
+      Label : LEFT
+        $d
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              1
+            Label : THEN
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $a

@@ -1,54 +1,52 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              Concatenation
-              Label : CONCAT
-                '2'
-              Label : CONCAT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  1
-      Label : THEN
-        [
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $e
-            Label : INDEX
-              Concatenation
-              Label : CONCAT
-                '4'
-              Label : CONCAT
-                [
-                Label : VARIABLE
-                  $f
-                Label : INDEX
-                  3
-        Label : NAME
+  =
+  Label : RIGHT
+    ?
+    Label : CONDITION
+      isset
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           [
-        Label : VARIABLE
-          $d
-        Label : INDEX
-          0
-      Label : ELSE
-        '5'
-    Label : LEFT
-      $a
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            Concatenation
+            Label : CONCAT
+              '2'
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $c
+              Label : INDEX
+                1
+    Label : THEN
+      [
+      Label : VARIABLE
+        $d
+      Label : INDEX
+        0
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $e
+          Label : INDEX
+            Concatenation
+            Label : CONCAT
+              '4'
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                3
+      Label : NAME
+        [
+    Label : ELSE
+      '5'
+  Label : LEFT
+    $a

@@ -13,12 +13,6 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
         (
         Label : CODE
           &
@@ -38,6 +32,12 @@ Label : CODE
                     $c
               Label : LEFT
                 $a
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
   Label : ELEMENT
     print
     Label : ARGUMENTS

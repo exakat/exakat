@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          $c
-        Label : LEFT
-          $b
+  if
+  Label : CONDITION
+    $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        $c
+      Label : LEFT
+        $b
+    Label : ELEMENT
+      void

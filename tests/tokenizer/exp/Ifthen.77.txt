@@ -5,6 +5,16 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
+      $d
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $e
+  Label : ELEMENT
+    if
+    Label : CONDITION
       ->
       Label : OBJECT
         $a
@@ -26,23 +36,13 @@ Label : CODE
               $b
         Label : CATCH
           catch
+          Label : VARIABLE
+            $c
+          Label : CODE
+            void
           Label : CLASS
             \
             Label : SUBNAME
               D
             Label : SUBNAME
               C
-          Label : CODE
-            void
-          Label : VARIABLE
-            $c
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $d
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $e

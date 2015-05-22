@@ -4,14 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $number
     Label : VALUE
       $number
     Label : SOURCE
@@ -22,6 +14,14 @@ Label : CODE
           1000000
         Label : ARGUMENT
           0
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $number
   Label : ELEMENT
     function
     Label : ARGUMENTS
@@ -47,33 +47,29 @@ Label : CODE
           Label : ELEMENT
             yield
             Label : YIELD
-              ;
-              Label : ELEMENT
-                ?
-                Label : CONDITION
-                  ->
-                  Label : OBJECT
-                    $i
-                  Label : PROPERTY
-                    y
-                Label : THEN
-                  'd'
-                Label : ELSE
-                  +
-                  Label : RIGHT
-                    2
-                  Label : LEFT
-                    2
+              ?
+              Label : CONDITION
+                ->
+                Label : OBJECT
+                  $i
+                Label : PROPERTY
+                  y
+              Label : THEN
+                'd'
+              Label : ELSE
+                +
+                Label : RIGHT
+                  2
+                Label : LEFT
+                  2
           Label : ELEMENT
             yield
             Label : YIELD
-              ;
-              Label : ELEMENT
-                [
-                Label : VARIABLE
-                  $i
-                Label : INDEX
-                  1
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                1
         Label : INIT
           =
           Label : RIGHT

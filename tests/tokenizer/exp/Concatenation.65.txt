@@ -2,6 +2,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    A
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $a
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
@@ -11,9 +17,3 @@ Label : CODE
           PHP_EOL
         Label : CONCAT
           $line_content
-  Label : ELEMENT
-    A
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $a

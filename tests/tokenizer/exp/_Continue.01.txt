@@ -15,7 +15,7 @@ Label : CODE
       Label : ELEMENT
         continue
         Label : LEVEL
-          23
+          1
   Label : ELEMENT
     if
     Label : CONDITION
@@ -29,7 +29,7 @@ Label : CODE
       Label : ELEMENT
         continue
         Label : LEVEL
-          1
+          23
   Label : ELEMENT
     if
     Label : CONDITION

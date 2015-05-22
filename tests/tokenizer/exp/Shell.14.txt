@@ -3,17 +3,17 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $f
-  Label : ELEMENT
     `
-    Label : CONTAIN
+    Label : CONTAINS
       Concatenation
       Label : CONCAT
         cat /tmp/d.init > 
       Label : CONCAT
         $e
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $f
   Label : ELEMENT
     @
     Label : AT

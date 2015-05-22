@@ -4,18 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $i
     Label : CONDITION
       <=
       Label : RIGHT
         10
       Label : LEFT
         $i
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $i
   Label : ELEMENT
     =
     Label : RIGHT

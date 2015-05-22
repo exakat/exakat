@@ -3,21 +3,17 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $a
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $c
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $c
-    Label : ELEMENT
-      b
+    b
 
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a

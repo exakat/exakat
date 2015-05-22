@@ -1,52 +1,50 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ||
-      Label : RIGHT
-        !
-        Label : NOT
-          in_array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              array
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  'g'
-                Label : ARGUMENT
-                  'f'
-                Label : ARGUMENT
-                  'e'
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'd'
-      Label : LEFT
-        empty
+  if
+  Label : CONDITION
+    ||
+    Label : RIGHT
+      !
+      Label : NOT
+        in_array
         Label : ARGUMENTS
-          void
+          Arguments
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'g'
+              Label : ARGUMENT
+                'f'
+              Label : ARGUMENT
+                'e'
           Label : ARGUMENT
             [
             Label : VARIABLE
-              $a
+              $c
             Label : INDEX
-              'b'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          'j'
-        Label : LEFT
+              'd'
+    Label : LEFT
+      empty
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           [
           Label : VARIABLE
-            $h
+            $a
           Label : INDEX
-            'i'
+            'b'
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        'j'
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $h
+        Label : INDEX
+          'i'

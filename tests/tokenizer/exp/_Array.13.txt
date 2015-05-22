@@ -18,12 +18,6 @@ Label : CODE
           1
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -36,3 +30,9 @@ Label : CODE
               4
             Label : ARGUMENT
               1
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      x

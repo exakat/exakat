@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    !==
+  !==
+  Label : RIGHT
+    +=
     Label : RIGHT
-      +=
-      Label : RIGHT
-        4
-      Label : LEFT
-        [
-        Label : VARIABLE
-          $y
-        Label : INDEX
-          3
+      4
     Label : LEFT
-      $x
+      [
+      Label : VARIABLE
+        $y
+      Label : INDEX
+        3
+  Label : LEFT
+    $x

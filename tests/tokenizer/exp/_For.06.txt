@@ -1,20 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $j
-    Label : FINAL
-      void
-    Label : INIT
-      void
-    Label : INCREMENT
+  for
+  Label : BLOCK
+    ;
+    Label : ELEMENT
       ++
       Label : POSTPLUSPLUS
-        $i
+        $j
+  Label : INIT
+    void
+  Label : FINAL
+    void
+  Label : INCREMENT
+    ++
+    Label : POSTPLUSPLUS
+      $i

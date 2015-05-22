@@ -9,10 +9,10 @@ Label : CODE
   Label : ELEMENT
     void
   Label : ELEMENT
-    void
-  Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       'b'
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    void

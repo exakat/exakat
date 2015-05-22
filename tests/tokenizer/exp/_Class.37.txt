@@ -1,27 +1,35 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      x
-    Label : BLOCK
-      ;
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      ppp
+      Label : VALUE
+        void
+      Label : DEFINE
+        $e
+      Label : PROTECTED
+        protected
+    Label : ELEMENT
+      ppp
+      Label : VALUE
+        2
+      Label : DEFINE
+        $f
+      Label : PROTECTED
+        protected
+    Label : ELEMENT
+      Sequence
       Label : ELEMENT
         ppp
         Label : VALUE
-          void
+          3
         Label : DEFINE
-          $e
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          2
-        Label : DEFINE
-          $f
+          $g
         Label : PROTECTED
           protected
       Label : ELEMENT
@@ -32,20 +40,14 @@ Label : CODE
           $h
         Label : PROTECTED
           protected
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          3
-        Label : DEFINE
-          $g
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
-        const
-        Label : NAME
-          b
-        Label : VALUE
-          3
+    Label : ELEMENT
+      const
+      Label : VALUE
+        3
+      Label : NAME
+        b
+    Label : ELEMENT
+      Sequence
       Label : ELEMENT
         ppp
         Label : VALUE
@@ -62,19 +64,19 @@ Label : CODE
           $c
         Label : PROTECTED
           protected
-      Label : ELEMENT
+    Label : ELEMENT
+      protected
+      Label : VALUE
+        1
+      Label : DEFINE
+        $b
+      Label : PROTECTED
         protected
-        Label : VALUE
-          1
-        Label : DEFINE
-          $b
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
+    Label : ELEMENT
+      protected
+      Label : VALUE
+        Void
+      Label : DEFINE
+        $a
+      Label : PROTECTED
         protected
-        Label : VALUE
-          Void
-        Label : DEFINE
-          $a
-        Label : PROTECTED
-          protected

@@ -1,46 +1,44 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      B
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        use
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            insteadof
-            Label : RIGHT
-              G
-            Label : LEFT
-              ::
-              Label : CLASS
-                F
-              Label : CONSTANT
-                L
-          Label : ELEMENT
-            insteadof
-            Label : RIGHT
+  class
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      use
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          insteadof
+          Label : RIGHT
+            G
+          Label : LEFT
+            ::
+            Label : CLASS
               F
-            Label : LEFT
-              ::
-              Label : CLASS
-                G
-              Label : CONSTANT
-                I
-        Label : USE
-          G
-        Label : USE
-          F
-    Label : EXTENDS
-      \
-      Label : SUBNAME
-        E
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
+            Label : CONSTANT
+              L
+        Label : ELEMENT
+          insteadof
+          Label : RIGHT
+            F
+          Label : LEFT
+            ::
+            Label : CLASS
+              G
+            Label : CONSTANT
+              I
+      Label : USE
+        G
+      Label : USE
+        F
+  Label : NAME
+    B
+  Label : EXTENDS
+    \
+    Label : SUBNAME
+      E
+    Label : SUBNAME
+      D
+    Label : SUBNAME
+      C

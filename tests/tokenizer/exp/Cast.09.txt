@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      (int)
-      Label : CAST
-        1
-    Label : LEFT
-      $x
+  =
+  Label : RIGHT
+    (int)
+    Label : CAST
+      1
+  Label : LEFT
+    $x

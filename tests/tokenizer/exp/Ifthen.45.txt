@@ -1,19 +1,19 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
+  if
+  Label : CONDITION
+    1
+  Label : THEN
+    A
+  Label : ELSE
+    elseif
     Label : CONDITION
-      1
+      2
     Label : THEN
-      A
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        2
-      Label : THEN
+      ;
+      Label : ELEMENT
         B
-      Label : ELSE
-        ;
-        Label : ELEMENT
-          C
+    Label : ELSE
+      ;
+      Label : ELEMENT
+        C

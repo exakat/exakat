@@ -3,6 +3,34 @@
 Label : CODE
   ;
   Label : ELEMENT
+    class
+    Label : NAME
+      TheWorldIsNotEnough
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          sayHello
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'Hello Universe!'
+      Label : ELEMENT
+        use
+        Label : USE
+          HelloWorld
+  Label : ELEMENT
     ->
     Label : OBJECT
       $o
@@ -25,34 +53,6 @@ Label : CODE
     Label : LEFT
       $o
   Label : ELEMENT
-    class
-    Label : NAME
-      TheWorldIsNotEnough
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : NAME
-          sayHello
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'Hello Universe!'
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        use
-        Label : USE
-          HelloWorld
-  Label : ELEMENT
     trait
     Label : NAME
       HelloWorld
@@ -60,6 +60,12 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : PUBLIC
+          public
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           sayHello
         Label : BLOCK
@@ -70,9 +76,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 'Hello World!'
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : PUBLIC
-          public

@@ -3,18 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    use
-    Label : USE
-      \
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
-  Label : ELEMENT
-    E
-  Label : ELEMENT
     if
     Label : CONDITION
       isset
@@ -46,3 +34,15 @@ Label : CODE
                     'F'
             Label : CONCAT
               'G'
+  Label : ELEMENT
+    E
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B

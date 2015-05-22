@@ -6,157 +6,7 @@ Label : CODE
     =
     Label : RIGHT
       "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B
-              Label : CONCAT
-                $c
-        Label : CONCAT
-          C
-    Label : LEFT
-      $a2
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B
-              Label : CONCAT
-                $c
-        Label : CONCAT
-          C
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b1
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B1
-              Label : CONCAT
-                $c1
-        Label : CONCAT
-          C1
-    Label : LEFT
-      $a2
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B
-              Label : CONCAT
-                $c
-        Label : CONCAT
-          C
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b1
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B1
-              Label : CONCAT
-                $c1
-        Label : CONCAT
-          C1
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b2
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B2
-              Label : CONCAT
-                $c2
-        Label : CONCAT
-          C2
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b3
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B3
-              Label : CONCAT
-                $c3
-        Label : CONCAT
-          C3
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b4
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B4
-              Label : CONCAT
-                $c4
-        Label : CONCAT
-          C4
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b5
-          Label : INDEX
-            "
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                B5
-              Label : CONCAT
-                $c5
-        Label : CONCAT
-          C5
-    Label : LEFT
-      $a2
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           [
@@ -166,7 +16,7 @@ Label : CODE
             +
             Label : RIGHT
               "
-              Label : CONTAIN
+              Label : CONTAINS
                 Concatenation
                 Label : CONCAT
                   B
@@ -194,7 +44,157 @@ Label : CODE
     =
     Label : RIGHT
       "
-      Label : CONTAIN
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B
+              Label : CONCAT
+                $c
+        Label : CONCAT
+          C
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b1
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B1
+              Label : CONCAT
+                $c1
+        Label : CONCAT
+          C1
+    Label : LEFT
+      $a2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B
+              Label : CONCAT
+                $c
+        Label : CONCAT
+          C
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b1
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B1
+              Label : CONCAT
+                $c1
+        Label : CONCAT
+          C1
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b2
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B2
+              Label : CONCAT
+                $c2
+        Label : CONCAT
+          C2
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b3
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B3
+              Label : CONCAT
+                $c3
+        Label : CONCAT
+          C3
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b4
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B4
+              Label : CONCAT
+                $c4
+        Label : CONCAT
+          C4
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b5
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B5
+              Label : CONCAT
+                $c5
+        Label : CONCAT
+          C5
+    Label : LEFT
+      $a2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B
+              Label : CONCAT
+                $c
+        Label : CONCAT
+          C
+    Label : LEFT
+      $a2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           [
@@ -210,7 +210,7 @@ Label : CODE
     =
     Label : RIGHT
       "
-      Label : CONTAIN
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           [

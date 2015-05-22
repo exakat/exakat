@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ::
-      Label : CLASS
-        y
-      Label : PROPERTY
-        $c
-    Label : LEFT
-      $x
+  =
+  Label : RIGHT
+    ::
+    Label : PROPERTY
+      $c
+    Label : CLASS
+      y
+  Label : LEFT
+    $x

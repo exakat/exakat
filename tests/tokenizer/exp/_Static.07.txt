@@ -14,17 +14,17 @@ Label : CODE
       ;
       Label : ELEMENT
         static
-        Label : STATIC
-          static
         Label : VALUE
           Void
+        Label : STATIC
+          static
         Label : DEFINE
           $z
   Label : ELEMENT
     static
-    Label : STATIC
-      static
     Label : VALUE
       Void
+    Label : STATIC
+      static
     Label : DEFINE
       $x

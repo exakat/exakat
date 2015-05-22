@@ -1,8 +1,6 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    !
-    Label : NOT
-      1
+  !
+  Label : NOT
+    1

@@ -1,10 +1,8 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    f
-    Label : ARGUMENTS
+  f
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
       void
-      Label : ARGUMENT
-        void

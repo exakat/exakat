@@ -1,42 +1,42 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      a
-    Label : BLOCK
+  class
+  Label : NAME
+    a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
       Sequence
       Label : ELEMENT
         ppp
-        Label : VALUE
-          void
         Label : DEFINE
           $e
+        Label : VALUE
+          void
         Label : VAR
           var
       Label : ELEMENT
         ppp
-        Label : VALUE
-          void
         Label : DEFINE
           $d
+        Label : VALUE
+          void
         Label : VAR
           var
       Label : ELEMENT
         ppp
-        Label : VALUE
-          void
         Label : DEFINE
           $c
+        Label : VALUE
+          void
         Label : VAR
           var
       Label : ELEMENT
         ppp
-        Label : VALUE
-          void
         Label : DEFINE
           $b
+        Label : VALUE
+          void
         Label : VAR
           var

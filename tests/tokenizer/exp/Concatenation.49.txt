@@ -1,20 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        'D'
-      Label : CONCAT
-        \
-        Label : SUBNAME
-          C
-      Label : CONCAT
-        __DIR__
-      Label : CONCAT
-        'A'
-    Label : LEFT
-      $x
+  =
+  Label : RIGHT
+    Concatenation
+    Label : CONCAT
+      'D'
+    Label : CONCAT
+      \
+      Label : SUBNAME
+        C
+    Label : CONCAT
+      __DIR__
+    Label : CONCAT
+      'A'
+  Label : LEFT
+    $x

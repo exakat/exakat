@@ -11,12 +11,12 @@ Label : CODE
           $a
   Label : ELEMENT
     $b
-    Label : NAME
-      $b
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         0
+    Label : NAME
+      $b
   Label : ELEMENT
     C
     Label : ARGUMENTS
@@ -25,12 +25,12 @@ Label : CODE
         (
         Label : CODE
           $
-          Label : NAME
-            $a
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'B'
+          Label : NAME
+            $a
   Label : ELEMENT
     eval
     Label : ARGUMENTS
@@ -39,9 +39,9 @@ Label : CODE
         (
         Label : CODE
           $
-          Label : NAME
-            $a
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'B'
+          Label : NAME
+            $a

@@ -1,36 +1,34 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
+  =
+  Label : RIGHT
+    +
     Label : RIGHT
-      +
-      Label : RIGHT
-        (int)
-        Label : CAST
-          (
-          Label : CODE
-            /
-            Label : RIGHT
-              $e
-            Label : LEFT
-              $d
-      Label : LEFT
+      (int)
+      Label : CAST
         (
         Label : CODE
-          (int)
-          Label : CAST
-            <<
-            Label : RIGHT
-              1
-            Label : LEFT
-              (
-              Label : CODE
-                /
-                Label : RIGHT
-                  $c
-                Label : LEFT
-                  $b
+          /
+          Label : RIGHT
+            $e
+          Label : LEFT
+            $d
     Label : LEFT
-      $a
+      (
+      Label : CODE
+        (int)
+        Label : CAST
+          <<
+          Label : RIGHT
+            1
+          Label : LEFT
+            (
+            Label : CODE
+              /
+              Label : RIGHT
+                $c
+              Label : LEFT
+                $b
+  Label : LEFT
+    $a

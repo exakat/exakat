@@ -2,68 +2,64 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    ;
-    Label : ELEMENT
-      foreach
-      Label : BLOCK
-        Block with Foreach
-        Label : ELEMENT
-          L
-        Label : ELEMENT
+    foreach
+    Label : VALUE
+      $b
+    Label : SOURCE
+      $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          !
+          Label : NOT
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'D'
+        Label : THEN
           ;
           Label : ELEMENT
-            if
-            Label : CONDITION
-              !
-              Label : NOT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  'D'
-            Label : THEN
-              ;
-              Label : ELEMENT
-                echo
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                E
                 Label : ARGUMENTS
-                  void
+                  Arguments
                   Label : ARGUMENT
-                    E
+                    array
                     Label : ARGUMENTS
-                      Arguments
+                      void
                       Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            =>
-                            Label : VALUE
-                              'L'
-                            Label : KEY
-                              'K'
+                        =>
+                        Label : KEY
+                          'K'
+                        Label : VALUE
+                          'L'
+                  Label : ARGUMENT
+                    I
+                    Label : ARGUMENTS
+                      void
                       Label : ARGUMENT
-                        I
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            'J'
-                      Label : ARGUMENT
-                        Concatenation
-                        Label : CONCAT
-                          'H'
-                        Label : CONCAT
-                          [
-                          Label : VARIABLE
-                            $d
-                          Label : INDEX
-                            'G'
-                        Label : CONCAT
-                          'F'
-          Label : ELEMENT
-            B
-      Label : VALUE
-        $b
-      Label : SOURCE
-        $a
+                        'J'
+                  Label : ARGUMENT
+                    Concatenation
+                    Label : CONCAT
+                      'H'
+                    Label : CONCAT
+                      [
+                      Label : VARIABLE
+                        $d
+                      Label : INDEX
+                        'G'
+                    Label : CONCAT
+                      'F'
+      Label : ELEMENT
+        L
+      Label : ELEMENT
+        B
 Label : ELEMENT
   A

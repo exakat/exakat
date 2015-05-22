@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      a
-    Label : BLOCK
+  class
+  Label : BLOCK
+    ;
+    Label : ELEMENT
       Sequence
       Label : ELEMENT
         ppp
@@ -72,3 +70,5 @@ Label : CODE
           $b
         Label : VAR
           var
+  Label : NAME
+    a

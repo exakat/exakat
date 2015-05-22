@@ -1,21 +1,19 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ?
-      Label : CONDITION
-        a
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-      Label : THEN
-        (
-        Label : CODE
-          clone
-          Label : CLONE
-            $c
-      Label : ELSE
-        $d
+  return
+  Label : RETURN
+    ?
+    Label : CONDITION
+      a
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $b
+    Label : THEN
+      (
+      Label : CODE
+        clone
+        Label : CLONE
+          $c
+    Label : ELSE
+      $d

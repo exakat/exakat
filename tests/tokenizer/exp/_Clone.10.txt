@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      clone
-      Label : CLONE
-        (
-        Label : CODE
-          ->
-          Label : OBJECT
-            $y
-          Label : PROPERTY
-            z
-    Label : LEFT
-      $x
+  =
+  Label : RIGHT
+    clone
+    Label : CLONE
+      (
+      Label : CODE
+        ->
+        Label : OBJECT
+          $y
+        Label : PROPERTY
+          z
+  Label : LEFT
+    $x

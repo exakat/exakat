@@ -5,17 +5,17 @@ Label : CODE
     if
     Label : CONDITION
       instanceof
-      Label : CLASS
-        static
       Label : VARIABLE
         $a
+      Label : CLASS
+        static
     Label : THEN
       ;
       Label : ELEMENT
         void
   Label : ELEMENT
     instanceof
-    Label : CLASS
-      static
     Label : VARIABLE
       $a
+    Label : CLASS
+      static

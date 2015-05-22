@@ -1,76 +1,74 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $a
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              $a
-            Label : THEN
-              ;
-              Label : ELEMENT
-                foreach
-                Label : BLOCK
-                  ;
-                  Label : ELEMENT
-                    if
-                    Label : CONDITION
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      default
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              foreach
+              Label : VALUE
+                =>
+                Label : KEY
+                  $b
+                Label : VALUE
+                  $c
+              Label : SOURCE
+                $a
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    =
+                    Label : RIGHT
+                      $e
+                    Label : LEFT
+                      $d
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
                       =
                       Label : RIGHT
-                        $e
+                        4
                       Label : LEFT
-                        $d
-                    Label : THEN
-                      ;
-                      Label : ELEMENT
-                        =
-                        Label : RIGHT
-                          4
-                        Label : LEFT
-                          $f
-                Label : VALUE
-                  =>
-                  Label : VALUE
-                    $c
-                  Label : KEY
-                    $b
-                Label : SOURCE
-                  $a
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  2
-                Label : LEFT
-                  $j
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $h
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              3
-            Label : LEFT
-              $i
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $g
+                        $f
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                2
+              Label : LEFT
+                $j
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $h
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $i
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $g

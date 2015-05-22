@@ -1,138 +1,136 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            ?
-            Label : CONDITION
-              AA
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $c
-                  Label : INDEX
-                    'AB'
-            Label : THEN
-              AC
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  AD
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      [
-                      Label : VARIABLE
-                        $d
-                      Label : INDEX
-                        'AE'
-                Label : ARGUMENT
-                  0
-            Label : ELSE
-              [
-              Label : VARIABLE
-                $e
-              Label : INDEX
-                'AF'
-          Label : KEY
-            'Z'
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            T
+  =
+  Label : RIGHT
+    array
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        void
+      Label : ARGUMENT
+        =>
+        Label : VALUE
+          ?
+          Label : CONDITION
+            AA
             Label : ARGUMENTS
               void
               Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $c
+                Label : INDEX
+                  'AB'
+          Label : THEN
+            AC
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                AD
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $d
+                    Label : INDEX
+                      'AE'
+              Label : ARGUMENT
+                0
+          Label : ELSE
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              'AF'
+        Label : KEY
+          'Z'
+      Label : ARGUMENT
+        =>
+        Label : VALUE
+          T
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ::
+              Label : METHOD
+                V
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      X
+                    Label : CONSTANT
+                      Y
+                  Label : ARGUMENT
+                    'W'
+              Label : CLASS
+                U
+        Label : KEY
+          'S'
+      Label : ARGUMENT
+        =>
+        Label : VALUE
+          ::
+          Label : METHOD
+            O
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
                 ::
-                Label : METHOD
-                  V
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        X
-                      Label : CONSTANT
-                        Y
-                    Label : ARGUMENT
-                      'W'
                 Label : CLASS
-                  U
-          Label : KEY
-            'S'
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            ::
-            Label : METHOD
-              O
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    Q
-                  Label : CONSTANT
-                    R
-                Label : ARGUMENT
-                  'P'
-            Label : CLASS
-              N
-          Label : KEY
-            'M'
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            ?
-            Label : CONDITION
-              isset
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $b
-                  Label : INDEX
-                    'J'
-            Label : THEN
-              K
-            Label : ELSE
-              L
-          Label : KEY
-            'I'
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            ::
-            Label : METHOD
-              D
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  H
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    F
-                  Label : CONSTANT
-                    G
-                Label : ARGUMENT
-                  'E'
-            Label : CLASS
-              C
-          Label : KEY
-            'B'
-    Label : LEFT
-      $a
+                  Q
+                Label : CONSTANT
+                  R
+              Label : ARGUMENT
+                'P'
+          Label : CLASS
+            N
+        Label : KEY
+          'M'
+      Label : ARGUMENT
+        =>
+        Label : VALUE
+          ?
+          Label : CONDITION
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  'J'
+          Label : THEN
+            K
+          Label : ELSE
+            L
+        Label : KEY
+          'I'
+      Label : ARGUMENT
+        =>
+        Label : VALUE
+          ::
+          Label : METHOD
+            D
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                H
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  F
+                Label : CONSTANT
+                  G
+              Label : ARGUMENT
+                'E'
+          Label : CLASS
+            C
+        Label : KEY
+          'B'
+  Label : LEFT
+    $a

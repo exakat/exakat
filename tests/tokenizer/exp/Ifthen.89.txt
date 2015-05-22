@@ -3,6 +3,58 @@
 Label : CODE
   ;
   Label : ELEMENT
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $c
+      Label : ELEMENT
+        F
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            C
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                'D'
+      Label : ELEMENT
+        E
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            C
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                'D'
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            B
+  Label : ELEMENT
     function
     Label : ARGUMENTS
       Arguments
@@ -25,69 +77,17 @@ Label : CODE
             Label : CONCAT
               __METHOD__
   Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        F
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $b
-        Label : THEN
-          ;
-          Label : ELEMENT
-            B
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            C
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $c
-              Label : ARGUMENT
-                'D'
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            C
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $c
-              Label : ARGUMENT
-                'D'
-      Label : ELEMENT
-        E
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $b
-        Label : THEN
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $c
+    =
+    Label : RIGHT
+      0
+    Label : LEFT
+      $b
   Label : ELEMENT
     =
     Label : RIGHT
       3
     Label : LEFT
       $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      0
-    Label : LEFT
-      $b
   Label : ELEMENT
     =
     Label : RIGHT

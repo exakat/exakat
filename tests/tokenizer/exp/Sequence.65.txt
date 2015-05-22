@@ -1,35 +1,33 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      0
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          H
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'I'
-        Label : CLASS
-          G
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        E
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          D
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'E'
-        Label : CLASS
-          C
-      Label : ELEMENT
-        A
+  if
+  Label : CONDITION
+    0
+  Label : THEN
+    ;
+    Label : ELEMENT
+      ::
+      Label : METHOD
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'E'
+      Label : CLASS
+        C
+    Label : ELEMENT
+      E
+    Label : ELEMENT
+      ::
+      Label : METHOD
+        H
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'I'
+      Label : CLASS
+        G
+    Label : ELEMENT
+      void
+    Label : ELEMENT
+      A

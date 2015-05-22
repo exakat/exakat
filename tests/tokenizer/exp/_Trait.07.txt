@@ -10,16 +10,16 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          a
-        Label : BLOCK
-          void
+        Label : PUBLIC
+          public
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : PUBLIC
-          public
+        Label : NAME
+          a
+        Label : BLOCK
+          void
   Label : ELEMENT
     trait
     Label : NAME
@@ -28,16 +28,16 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          a
-        Label : BLOCK
-          void
+        Label : PUBLIC
+          public
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : PUBLIC
-          public
+        Label : NAME
+          a
+        Label : BLOCK
+          void
   Label : ELEMENT
     trait
     Label : NAME
@@ -46,13 +46,13 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          a
-        Label : BLOCK
-          void
+        Label : PUBLIC
+          public
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : PUBLIC
-          public
+        Label : NAME
+          a
+        Label : BLOCK
+          void

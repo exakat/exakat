@@ -27,8 +27,6 @@ Label : CODE
     C
   Label : ELEMENT
     or
-    Label : LEFT
-      $a
     Label : RIGHT
       print
       Label : ARGUMENTS
@@ -37,3 +35,5 @@ Label : CODE
           (
           Label : CODE
             'B'
+    Label : LEFT
+      $a

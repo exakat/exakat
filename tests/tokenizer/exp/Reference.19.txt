@@ -1,20 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
+  =
+  Label : RIGHT
+    $b
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $e
+      Label : ARGUMENT
+        $d
+      Label : ARGUMENT
+        $c
+    Label : NAME
       $b
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $e
-        Label : ARGUMENT
-          $d
-        Label : ARGUMENT
-          $c
-      Label : NAME
-        $b
-    Label : LEFT
-      $a
+  Label : LEFT
+    $a

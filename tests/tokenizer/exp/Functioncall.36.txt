@@ -1,8 +1,6 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    die
-    Label : ARGUMENTS
-      void
+  die
+  Label : ARGUMENTS
+    void

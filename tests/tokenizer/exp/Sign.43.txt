@@ -2,18 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $d
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $e
-  Label : ELEMENT
     -
     Label : RIGHT
       =
@@ -23,6 +11,18 @@ Label : CODE
         $c
     Label : LEFT
       $b
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $e
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $d
   Label : ELEMENT
     =
     Label : RIGHT

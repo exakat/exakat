@@ -1,32 +1,30 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
-      Label : LEFT
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $_REQUEST
-            Label : INDEX
-              'opt'
+  if
+  Label : CONDITION
+    &&
+    Label : RIGHT
+      ==
       Label : RIGHT
-        ==
-        Label : LEFT
+        1
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $_REQUEST
+        Label : INDEX
+          'opt'
+    Label : LEFT
+      isset
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           [
           Label : VARIABLE
             $_REQUEST
           Label : INDEX
             'opt'
-        Label : RIGHT
-          1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        '1'
+  Label : THEN
+    ;
+    Label : ELEMENT
+      '1'

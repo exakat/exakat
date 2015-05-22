@@ -1,8 +1,6 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      1
+  return
+  Label : RETURN
+    1

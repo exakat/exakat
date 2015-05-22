@@ -1,18 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    do
-    Label : CONDITION
-      <
-      Label : RIGHT
-        2
-      Label : LEFT
-        ++
-        Label : POSTPLUSPLUS
-          $e
-    Label : BLOCK
+  do
+  Label : CONDITION
+    <
+    Label : RIGHT
+      2
+    Label : LEFT
+      ++
+      Label : POSTPLUSPLUS
+        $e
+  Label : BLOCK
+    ;
+    Label : ELEMENT
       ;
       Label : ELEMENT
         if
@@ -28,7 +28,7 @@ Label : CODE
                 Arguments
                 Label : ARGUMENT
                   "
-                  Label : CONTAIN
+                  Label : CONTAINS
                     Concatenation
                     Label : CONCAT
                       $c

@@ -33,30 +33,26 @@ Label : CODE
       Label : CLASS
         H
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      ::
-      Label : METHOD
-        C
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'D'
-          Label : ARGUMENT
-            $a
-      Label : CLASS
-        B
+    ->
+    Label : OBJECT
+      $b
+    Label : METHOD
+      E
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          'G'
+        Label : ARGUMENT
+          F
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      ->
-      Label : OBJECT
-        $b
-      Label : METHOD
-        E
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'G'
-          Label : ARGUMENT
-            F
+    ::
+    Label : METHOD
+      C
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          'D'
+        Label : ARGUMENT
+          $a
+    Label : CLASS
+      B

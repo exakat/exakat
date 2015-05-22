@@ -1,34 +1,32 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      x
-    Label : BLOCK
-      ;
-      Label : ELEMENT
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      var
+      Label : VALUE
+        Void
+      Label : DEFINE
+        $z
+      Label : VAR
         var
-        Label : VALUE
-          Void
-        Label : DEFINE
-          $z
-        Label : VAR
-          var
-      Label : ELEMENT
+    Label : ELEMENT
+      var
+      Label : VALUE
+        Void
+      Label : DEFINE
+        $y
+      Label : VAR
         var
-        Label : VALUE
-          Void
-        Label : DEFINE
-          $y
-        Label : VAR
-          var
-      Label : ELEMENT
+    Label : ELEMENT
+      var
+      Label : VALUE
+        Void
+      Label : DEFINE
+        $x
+      Label : VAR
         var
-        Label : VALUE
-          Void
-        Label : DEFINE
-          $x
-        Label : VAR
-          var

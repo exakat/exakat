@@ -1,28 +1,26 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      void
-    Label : VALUE
-      $e
-    Label : SOURCE
-      ?
-      Label : CONDITION
-        is_array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a
-      Label : THEN
-        $b
-      Label : ELSE
-        explode
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $d
-          Label : ARGUMENT
-            'd'
+  foreach
+  Label : VALUE
+    $e
+  Label : SOURCE
+    ?
+    Label : CONDITION
+      is_array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $a
+    Label : THEN
+      $b
+    Label : ELSE
+      explode
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $d
+        Label : ARGUMENT
+          'd'
+  Label : BLOCK
+    void

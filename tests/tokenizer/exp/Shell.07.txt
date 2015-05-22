@@ -1,60 +1,58 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      `
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          $a
-        Label : CONCAT
-           b 
-        Label : CONCAT
-          $c
-        Label : CONCAT
-           d 
-        Label : CONCAT
-          ->
-          Label : OBJECT
-            $e
-          Label : PROPERTY
-            f
-        Label : CONCAT
-           
-        Label : CONCAT
-          ->
-          Label : OBJECT
-            $g
-          Label : METHOD
-            h
-            Label : ARGUMENTS
+  =
+  Label : RIGHT
+    `
+    Label : CONTAINS
+      Concatenation
+      Label : CONCAT
+        $a
+      Label : CONCAT
+         b 
+      Label : CONCAT
+        $c
+      Label : CONCAT
+         d 
+      Label : CONCAT
+        ->
+        Label : OBJECT
+          $e
+        Label : PROPERTY
+          f
+      Label : CONCAT
+         
+      Label : CONCAT
+        ->
+        Label : METHOD
+          h
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
               void
-              Label : ARGUMENT
-                void
-        Label : CONCAT
-           i j 
-        Label : CONCAT
+        Label : OBJECT
+          $g
+      Label : CONCAT
+         i j 
+      Label : CONCAT
+        [
+        Label : VARIABLE
+          $k
+        Label : INDEX
+          'l'
+      Label : CONCAT
+         
+      Label : CONCAT
+        [
+        Label : VARIABLE
           [
           Label : VARIABLE
-            $k
+            $m
           Label : INDEX
-            'l'
-        Label : CONCAT
-           
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $m
-            Label : INDEX
-              'n'
-          Label : INDEX
-            'o'
-        Label : CONCAT
-           
+            'n'
+        Label : INDEX
+          'o'
+      Label : CONCAT
+         
+  Label : LEFT
+    $x

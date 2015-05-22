@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    &&
-    Label : LEFT
-      !
-      Label : NOT
-        $a
-    Label : RIGHT
-      --
-      Label : POSTPLUSPLUS
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
+  &&
+  Label : RIGHT
+    --
+    Label : POSTPLUSPLUS
+      [
+      Label : VARIABLE
+        $b
+      Label : INDEX
+        'c'
+  Label : LEFT
+    !
+    Label : NOT
+      $a

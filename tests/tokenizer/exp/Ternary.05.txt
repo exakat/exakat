@@ -1,28 +1,26 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        (
-        Label : CODE
-          !=
-          Label : RIGHT
-            ""
-          Label : LEFT
-            $b
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          $e
-        Label : CONCAT
-          "d"
-        Label : CONCAT
-          $c
-      Label : ELSE
-        "f"
-    Label : LEFT
-      $a
+  =
+  Label : RIGHT
+    ?
+    Label : CONDITION
+      (
+      Label : CODE
+        !=
+        Label : RIGHT
+          ""
+        Label : LEFT
+          $b
+    Label : THEN
+      Concatenation
+      Label : CONCAT
+        $e
+      Label : CONCAT
+        "d"
+      Label : CONCAT
+        $c
+    Label : ELSE
+      "f"
+  Label : LEFT
+    $a

@@ -1,10 +1,8 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        __FUNCTION__
+  print
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      __FUNCTION__

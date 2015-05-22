@@ -1,60 +1,58 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ==
-      Label : RIGHT
-        3
-      Label : LEFT
-        (
-        Label : CODE
-          %
-          Label : RIGHT
-            2
-          Label : LEFT
-            (
-            Label : CODE
-              +
-              Label : RIGHT
-                1
-              Label : LEFT
-                $e
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
+  if
+  Label : CONDITION
+    ==
+    Label : RIGHT
+      3
+    Label : LEFT
+      (
+      Label : CODE
+        %
         Label : RIGHT
+          2
+        Label : LEFT
           (
           Label : CODE
+            +
+            Label : RIGHT
+              1
+            Label : LEFT
+              $e
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        (
+        Label : CODE
+          -
+          Label : RIGHT
+            (
+            Label : CODE
+              *
+              Label : RIGHT
+                $m
+              Label : LEFT
+                $l
+          Label : LEFT
             -
             Label : RIGHT
               (
               Label : CODE
                 *
                 Label : RIGHT
-                  $m
+                  $k
                 Label : LEFT
-                  $l
+                  $j
             Label : LEFT
-              -
-              Label : RIGHT
-                (
-                Label : CODE
-                  *
-                  Label : RIGHT
-                    $k
-                  Label : LEFT
-                    $j
-              Label : LEFT
-                (
-                Label : CODE
-                  *
-                  Label : RIGHT
-                    $i
-                  Label : LEFT
-                    $h
-        Label : LEFT
-          $g
+              (
+              Label : CODE
+                *
+                Label : RIGHT
+                  $i
+                Label : LEFT
+                  $h
+      Label : LEFT
+        $g

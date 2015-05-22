@@ -1,73 +1,71 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      Concatenation
-      Label : CONCAT
-        'K'
-      Label : CONCAT
-        ->
-        Label : OBJECT
-          $f
-        Label : METHOD
-          I
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                [
-                Label : VARIABLE
-                  $h
-                Label : INDEX
-                  2
-              Label : CONCAT
-                [
-                Label : VARIABLE
-                  $g
-                Label : INDEX
-                  1
-              Label : CONCAT
-                'J'
-      Label : CONCAT
-        "
-        Label : CONTAIN
-          Concatenation
-          Label : CONCAT
-            B
-          Label : CONCAT
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              C
-          Label : CONCAT
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              D
-          Label : CONCAT
-            E
-          Label : CONCAT
-            [
-            Label : VARIABLE
-              $d
-            Label : INDEX
-              F
-          Label : CONCAT
-            [
-            Label : VARIABLE
-              $e
-            Label : INDEX
-              G
-          Label : CONCAT
-            H
-      Label : CONCAT
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          0
+  return
+  Label : RETURN
+    Concatenation
+    Label : CONCAT
+      'K'
+    Label : CONCAT
+      ->
+      Label : METHOD
+        I
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $h
+              Label : INDEX
+                2
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $g
+              Label : INDEX
+                1
+            Label : CONCAT
+              'J'
+      Label : OBJECT
+        $f
+    Label : CONCAT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          B
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            C
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            D
+        Label : CONCAT
+          E
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            F
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $e
+          Label : INDEX
+            G
+        Label : CONCAT
+          H
+    Label : CONCAT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        0

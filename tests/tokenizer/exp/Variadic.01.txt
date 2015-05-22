@@ -3,6 +3,34 @@
 Label : CODE
   ;
   Label : ELEMENT
+    $h
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          $i
+        Label : METHOD
+          E
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+    Label : NAME
+      $h
+  Label : ELEMENT
+    $j
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
+        Label : PROPERTY
+          $k
+        Label : CLASS
+          F
+    Label : NAME
+      $j
+  Label : ELEMENT
     $l
     Label : ARGUMENTS
       void
@@ -26,34 +54,6 @@ Label : CODE
           J
     Label : NAME
       $m
-  Label : ELEMENT
-    $j
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          F
-        Label : PROPERTY
-          $k
-    Label : NAME
-      $j
-  Label : ELEMENT
-    $h
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $i
-        Label : METHOD
-          E
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-    Label : NAME
-      $h
   Label : ELEMENT
     $f
     Label : ARGUMENTS

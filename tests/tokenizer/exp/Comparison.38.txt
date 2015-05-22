@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        !=
+  var_dump
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      !=
+      Label : RIGHT
+        'B'
+      Label : LEFT
+        <
         Label : RIGHT
-          'B'
+          1
         Label : LEFT
-          <
-          Label : RIGHT
-            1
-          Label : LEFT
-            $b
+          $b

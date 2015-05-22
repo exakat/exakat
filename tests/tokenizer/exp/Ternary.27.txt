@@ -2,18 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $b
-  Label : ELEMENT
     ?
     Label : CONDITION
       (
@@ -47,3 +35,15 @@ Label : CODE
             $g
           Label : PROPERTY
             h
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b

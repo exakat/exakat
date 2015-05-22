@@ -3,6 +3,34 @@
 Label : CODE
   ;
   Label : ELEMENT
+    while
+    Label : CONDITION
+      =
+      Label : RIGHT
+        b
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c
+      Label : LEFT
+        $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $s
+        Label : THEN
+          void
+        Label : ELSE
+          void
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $d
+        Label : THEN
+          void
+  Label : ELEMENT
     if
     Label : CONDITION
       ==
@@ -22,31 +50,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $t
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $s
-        Label : THEN
-          void
-        Label : ELSE
-          void
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $d
-        Label : THEN
-          void
-    Label : CONDITION
-      =
-      Label : RIGHT
-        b
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $c
-      Label : LEFT
-        $a

@@ -5,8 +5,8 @@ Label : CODE
   Label : ELEMENT
     (string)
     Label : CAST
-      $x
+      $y
   Label : ELEMENT
     (string)
     Label : CAST
-      $y
+      $x

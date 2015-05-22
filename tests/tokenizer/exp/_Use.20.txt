@@ -3,60 +3,60 @@
 Label : CODE
   ;
   Label : ELEMENT
-    namespace
+    class
     Label : BLOCK
       ;
       Label : ELEMENT
-        class
-        Label : NAME
-          F
+        use
         Label : BLOCK
           ;
           Label : ELEMENT
-            use
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                as
-                Label : SUBNAME
-                  N
-                Label : AS
-                  protected
-              Label : ELEMENT
-                as
-                Label : SUBNAME
-                  M
-                Label : AS
-                  private
-              Label : ELEMENT
-                as
-                Label : SUBNAME
-                  L
-                Label : AS
-                  public
-            Label : USE
-              \
-              Label : SUBNAME
-                K
-              Label : SUBNAME
-                J
-              Label : SUBNAME
-                I
-              Label : SUBNAME
-                H
-        Label : EXTENDS
-          G
-      Label : ELEMENT
-        use
+            as
+            Label : SUBNAME
+              M
+            Label : AS
+              private
+          Label : ELEMENT
+            as
+            Label : SUBNAME
+              N
+            Label : AS
+              protected
+          Label : ELEMENT
+            as
+            Label : SUBNAME
+              L
+            Label : AS
+              public
         Label : USE
           \
           Label : SUBNAME
-            E
+            K
           Label : SUBNAME
-            D
+            J
+          Label : SUBNAME
+            I
+          Label : SUBNAME
+            H
+    Label : NAME
+      F
+    Label : EXTENDS
+      G
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        E
+      Label : SUBNAME
+        D
+  Label : ELEMENT
+    namespace
     Label : NAMESPACE
       \
       Label : SUBNAME
         C
       Label : SUBNAME
         B
+    Label : BLOCK
+      void

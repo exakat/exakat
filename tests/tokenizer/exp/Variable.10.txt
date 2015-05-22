@@ -6,7 +6,7 @@ Label : CODE
     =
     Label : RIGHT
       "
-      Label : CONTAIN
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           x
@@ -22,7 +22,7 @@ Label : CODE
     =
     Label : RIGHT
       "
-      Label : CONTAIN
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           x
@@ -36,7 +36,7 @@ Label : CODE
     =
     Label : RIGHT
       "
-      Label : CONTAIN
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           $a
@@ -46,7 +46,7 @@ Label : CODE
     =
     Label : RIGHT
       "
-      Label : CONTAIN
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           $z
@@ -56,7 +56,7 @@ Label : CODE
     =
     Label : RIGHT
       "
-      Label : CONTAIN
+      Label : CONTAINS
         Concatenation
         Label : CONCAT
           $y

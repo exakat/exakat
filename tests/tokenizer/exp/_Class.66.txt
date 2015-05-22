@@ -6,6 +6,8 @@ Label : CODE
     class
     Label : NAME
       A4
+    Label : BLOCK
+      void
     Label : IMPLEMENTS
       \
       Label : SUBNAME
@@ -22,12 +24,12 @@ Label : CODE
       \
       Label : SUBNAME
         C
-    Label : BLOCK
-      void
   Label : ELEMENT
     class
     Label : NAME
       A3
+    Label : BLOCK
+      void
     Label : IMPLEMENTS
       F
     Label : IMPLEMENTS
@@ -36,31 +38,29 @@ Label : CODE
       D
     Label : IMPLEMENTS
       C
-    Label : BLOCK
-      void
   Label : ELEMENT
     class
     Label : NAME
       A2
+    Label : BLOCK
+      void
+    Label : EXTENDS
+      B
     Label : IMPLEMENTS
       E
     Label : IMPLEMENTS
       D
     Label : IMPLEMENTS
       C
-    Label : BLOCK
-      void
-    Label : EXTENDS
-      B
   Label : ELEMENT
     class
     Label : NAME
       A1
-    Label : IMPLEMENTS
-      D
-    Label : IMPLEMENTS
-      C
     Label : BLOCK
       void
     Label : EXTENDS
       B
+    Label : IMPLEMENTS
+      D
+    Label : IMPLEMENTS
+      C

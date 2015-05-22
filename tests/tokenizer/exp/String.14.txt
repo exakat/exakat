@@ -45,7 +45,7 @@ Label : CODE
         E
       Label : ARGUMENT
         "
-        Label : CONTAIN
+        Label : CONTAINS
           Concatenation
           Label : CONCAT
             C

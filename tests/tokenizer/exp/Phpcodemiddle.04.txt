@@ -1,10 +1,10 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      isset
+;
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      K
       Label : ARGUMENTS
         void
         Label : ARGUMENT
@@ -12,32 +12,16 @@ Label : CODE
           Label : VARIABLE
             $d
           Label : INDEX
-            'I'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            K
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $d
-                Label : INDEX
-                  'L'
-          Label : ARGUMENT
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $d
-              Label : INDEX
-                'I'
+            'L'
+    Label : ARGUMENT
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          $d
+        Label : INDEX
+          'I'
+Label : ELEMENT
+  void
+Label : ELEMENT
+  void

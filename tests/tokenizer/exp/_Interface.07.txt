@@ -10,8 +10,6 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -20,6 +18,38 @@ Label : CODE
               $f
             Label : CLASS
               E
+        Label : NAME
+          D
+    Label : EXTENDS
+      Arguments
+      Label : EXTENDS
+        I
+      Label : EXTENDS
+        G
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : VARIABLE
+              $f
+            Label : CLASS
+              E
+        Label : NAME
+          D
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -44,8 +74,6 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -54,36 +82,8 @@ Label : CODE
               $f
             Label : CLASS
               E
-    Label : EXTENDS
-      Arguments
-      Label : EXTENDS
-        I
-      Label : EXTENDS
-        G
-      Label : EXTENDS
-        \
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          B
-  Label : ELEMENT
-    interface
-    Label : NAME
-      A
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
         Label : NAME
           D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Typehint
-            Label : VARIABLE
-              $f
-            Label : CLASS
-              E
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -102,8 +102,6 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -112,6 +110,8 @@ Label : CODE
               $f
             Label : CLASS
               E
+        Label : NAME
+          D
     Label : EXTENDS
       \
       Label : SUBNAME

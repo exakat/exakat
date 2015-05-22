@@ -2,7 +2,7 @@
 
 Label : CODE
   "
-  Label : CONTAIN
+  Label : CONTAINS
     Concatenation
     Label : CONCAT
       $b

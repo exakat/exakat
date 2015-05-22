@@ -1,138 +1,136 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $a
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              6
-            Label : LEFT
-              $x
-        Label : CASE
-          'f'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              7
-            Label : LEFT
-              $x
-        Label : CASE
-          'g'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              8
-            Label : LEFT
-              $x
-        Label : CASE
-          'h'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              9
-            Label : LEFT
-              $x
-        Label : CASE
-          'i'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              10
-            Label : LEFT
-              $x
-        Label : CASE
-          'j'
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              5
-            Label : LEFT
-              $x
-        Label : CASE
-          'e'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              4
-            Label : LEFT
-              $x
-        Label : CASE
-          'd'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              3
-            Label : LEFT
-              $x
-        Label : CASE
-          'c'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $x
-        Label : CASE
-          'b'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $x
-        Label : CASE
-          'a'
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      case
+      Label : CASE
+        'f'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            6
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      case
+      Label : CASE
+        'g'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            7
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      case
+      Label : CASE
+        'h'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            8
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      case
+      Label : CASE
+        'i'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            9
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      case
+      Label : CASE
+        'j'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            10
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      default
+      Label : CODE
+        Block with Sequence For Default
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+    Label : ELEMENT
+      case
+      Label : CASE
+        'e'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            5
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      case
+      Label : CASE
+        'd'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            4
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      case
+      Label : CASE
+        'c'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      case
+      Label : CASE
+        'b'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $x
+    Label : ELEMENT
+      case
+      Label : CASE
+        'a'
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $x

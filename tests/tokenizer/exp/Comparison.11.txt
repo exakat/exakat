@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    !==
-    Label : RIGHT
-      false
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $conn
-      Label : METHOD
-        Execute
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $sql
+  !==
+  Label : RIGHT
+    false
+  Label : LEFT
+    ->
+    Label : OBJECT
+      $conn
+    Label : METHOD
+      Execute
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $sql

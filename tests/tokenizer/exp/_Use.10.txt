@@ -9,8 +9,6 @@ Label : CODE
         $a
   Label : ELEMENT
     class
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -25,3 +23,5 @@ Label : CODE
               E
         Label : USE
           C
+    Label : NAME
+      B

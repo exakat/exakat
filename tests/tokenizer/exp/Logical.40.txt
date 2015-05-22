@@ -1,41 +1,39 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    ||
+  ||
+  Label : RIGHT
+    ==
+    Label : RIGHT
+      'G'
     Label : LEFT
-      ==
-      Label : LEFT
+      {
+      Label : VARIABLE
         ->
         Label : OBJECT
-          $a
+          $c
         Label : PROPERTY
-          B
-      Label : RIGHT
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              D
+          E
+      Label : INDEX
+        ->
+        Label : OBJECT
+          $d
+        Label : PROPERTY
+          F
+  Label : LEFT
+    ==
     Label : RIGHT
-      ==
-      Label : LEFT
-        {
-        Label : VARIABLE
+      C
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           ->
           Label : OBJECT
-            $c
+            $b
           Label : PROPERTY
-            E
-        Label : INDEX
-          ->
-          Label : OBJECT
-            $d
-          Label : PROPERTY
-            F
-      Label : RIGHT
-        'G'
+            D
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        B

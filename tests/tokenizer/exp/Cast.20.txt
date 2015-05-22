@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      (string)
-      Label : CAST
-        {
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          $b
+  return
+  Label : RETURN
+    (string)
+    Label : CAST
+      {
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        $b

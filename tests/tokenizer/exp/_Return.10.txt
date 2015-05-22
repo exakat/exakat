@@ -1,38 +1,36 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
-    Label : NAME
-      cmp1
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          ==
-          Label : RIGHT
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              'd'
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'c'
-        Label : THEN
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              0
+  function
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      $b
+    Label : ARGUMENT
+      $a
+  Label : NAME
+    cmp1
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        ==
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            'd'
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'c'
+      Label : THEN
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            0

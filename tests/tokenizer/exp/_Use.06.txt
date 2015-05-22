@@ -1,42 +1,40 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    use
-    Label : USE
-      \
-      Label : SUBNAME
-        N
-    Label : USE
-      \
-      Label : SUBNAME
-        M
-    Label : USE
-      \
-      Label : SUBNAME
-        L
-    Label : USE
-      \
-      Label : SUBNAME
-        K
-    Label : USE
-      \
-      Label : SUBNAME
-        X
-      Label : SUBNAME
-        Z
-    Label : USE
-      \
-      Label : SUBNAME
-        E
-      Label : SUBNAME
-        D
-    Label : USE
-      \
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        A
+  use
+  Label : USE
+    \
+    Label : SUBNAME
+      N
+  Label : USE
+    \
+    Label : SUBNAME
+      M
+  Label : USE
+    \
+    Label : SUBNAME
+      L
+  Label : USE
+    \
+    Label : SUBNAME
+      K
+  Label : USE
+    \
+    Label : SUBNAME
+      X
+    Label : SUBNAME
+      Z
+  Label : USE
+    \
+    Label : SUBNAME
+      E
+    Label : SUBNAME
+      D
+  Label : USE
+    \
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B
+    Label : SUBNAME
+      A

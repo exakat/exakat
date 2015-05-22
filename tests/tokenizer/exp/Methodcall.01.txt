@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      [
-      Label : VARIABLE
-        $c
-      Label : INDEX
-        'd'
-    Label : METHOD
-      e
-      Label : ARGUMENTS
+  ->
+  Label : OBJECT
+    [
+    Label : VARIABLE
+      $c
+    Label : INDEX
+      'd'
+  Label : METHOD
+    e
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         void
-        Label : ARGUMENT
-          void

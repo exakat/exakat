@@ -1,32 +1,30 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      number_format
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          +
+  =
+  Label : RIGHT
+    number_format
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        +
+        Label : RIGHT
+          *
           Label : RIGHT
-            *
-            Label : RIGHT
-              1
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $f
-              Label : INDEX
-                'g'
+            1
           Label : LEFT
-            PHP_MAJOR_VERSION
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'b'
+            [
+            Label : VARIABLE
+              $f
+            Label : INDEX
+              'g'
+        Label : LEFT
+          PHP_MAJOR_VERSION
+  Label : LEFT
+    [
+    Label : VARIABLE
+      $a
+    Label : INDEX
+      'b'

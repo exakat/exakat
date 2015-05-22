@@ -1,30 +1,50 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      isset
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              B
-          Label : INDEX
-            'C'
-    Label : THEN
+  if
+  Label : CONDITION
+    isset
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            B
+        Label : INDEX
+          'C'
+  Label : THEN
+    ;
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $a
+  Label : ELSE
+    ;
+    Label : ELEMENT
       ;
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
-    Label : ELSE
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $this
+          Label : METHOD
+            AW
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  AX
+        Label : LEFT
+          $d
+    Label : ELEMENT
       ;
       Label : ELEMENT
         ;
@@ -44,23 +64,3 @@ Label : CODE
                   'Q'
           Label : LEFT
             $b
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            ->
-            Label : OBJECT
-              $this
-            Label : METHOD
-              AW
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $c
-                  Label : PROPERTY
-                    AX
-          Label : LEFT
-            $d

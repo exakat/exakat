@@ -1,36 +1,34 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      Block with While
-      Label : ELEMENT
-        .=
+  while
+  Label : CONDITION
+    !=
+    Label : RIGHT
+      chr
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          2
+    Label : LEFT
+      (
+      Label : CODE
+        =
         Label : RIGHT
-          $d
+          fread
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              $b
         Label : LEFT
-          $c
-    Label : CONDITION
-      !=
+          $a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      .=
       Label : RIGHT
-        chr
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            2
+        $d
       Label : LEFT
-        (
-        Label : CODE
-          =
-          Label : RIGHT
-            fread
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                $b
-          Label : LEFT
-            $a
+        $c

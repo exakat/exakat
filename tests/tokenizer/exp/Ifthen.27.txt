@@ -7,7 +7,7 @@ Label : CODE
     Label : CONDITION
       $x
     Label : BLOCK
-      Block with While
+      ;
       Label : ELEMENT
         void
   Label : ELEMENT

@@ -1,34 +1,32 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      c
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          {
-          Label : VARIABLE
-            ::
-            Label : CLASS
-              C
+  =
+  Label : RIGHT
+    c
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        {
+        Label : VARIABLE
+          ::
+          Label : PROPERTY
+            $e
+          Label : CLASS
+            C
+        Label : INDEX
+          ++
+          Label : POSTPLUSPLUS
+            ->
+            Label : OBJECT
+              $f
             Label : PROPERTY
-              $e
-          Label : INDEX
-            ++
-            Label : POSTPLUSPLUS
-              ->
-              Label : OBJECT
-                $f
-              Label : PROPERTY
-                g
-    Label : LEFT
-      [
-      Label : VARIABLE
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          b
+              g
+  Label : LEFT
+    [
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b

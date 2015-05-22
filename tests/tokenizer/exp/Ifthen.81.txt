@@ -1,20 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          $b
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
-        return
-        Label : RETURN
-          null
+  if
+  Label : CONDITION
+    $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      return
+      Label : RETURN
+        $b
+  Label : ELSE
+    Block with else
+    Label : ELEMENT
+      return
+      Label : RETURN
+        null

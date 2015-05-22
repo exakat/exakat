@@ -3,16 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    C
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          $e
-        Label : CONCAT
-          'D'
-  Label : ELEMENT
     print
     Label : ARGUMENTS
       void
@@ -40,6 +30,16 @@ Label : CODE
           $h
         Label : ELSE
           'E'
+  Label : ELEMENT
+    C
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          $e
+        Label : CONCAT
+          'D'
   Label : ELEMENT
     =
     Label : RIGHT

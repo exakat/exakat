@@ -3,10 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    return
-    Label : RETURN
-      false
-  Label : ELEMENT
     @
     Label : AT
       g
@@ -14,6 +10,10 @@ Label : CODE
         void
         Label : ARGUMENT
           $h
+  Label : ELEMENT
+    return
+    Label : RETURN
+      false
   Label : ELEMENT
     ->
     Label : OBJECT

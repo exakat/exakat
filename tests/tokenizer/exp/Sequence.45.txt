@@ -3,6 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    interface
+    Label : NAME
+      x
+    Label : BLOCK
+      void
+  Label : ELEMENT
     if
     Label : CONDITION
       $a
@@ -12,9 +18,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $b
-  Label : ELEMENT
-    interface
-    Label : NAME
-      x
-    Label : BLOCK
-      void

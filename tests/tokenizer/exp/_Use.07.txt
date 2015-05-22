@@ -3,12 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    use
+    Label : USE
+      A
+  Label : ELEMENT
     namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        use
-        Label : USE
-          A
     Label : NAMESPACE
       B
+    Label : BLOCK
+      void

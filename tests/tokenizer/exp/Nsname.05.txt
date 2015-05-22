@@ -1,18 +1,16 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    new
-    Label : NEW
-      \
-      Label : ARGUMENTS
+  new
+  Label : NEW
+    \
+    Label : SUBNAME
+      c
+    Label : SUBNAME
+      b
+    Label : SUBNAME
+      a
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         void
-        Label : ARGUMENT
-          void
-      Label : SUBNAME
-        c
-      Label : SUBNAME
-        b
-      Label : SUBNAME
-        a

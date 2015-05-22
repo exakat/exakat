@@ -1,28 +1,26 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        $x
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            3
-          Label : ARGUMENT
-            2
-          Label : ARGUMENT
-            1
-        Label : NAME
-          $x
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $x
-        Label : RIGHT
+  if
+  Label : CONDITION
+    !
+    Label : NOT
+      $x
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
           1
+      Label : NAME
+        $x
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $x

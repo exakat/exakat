@@ -4,6 +4,10 @@ Label : ELEMENT
   Label : CODE
     ;
     Label : ELEMENT
+      H
+    Label : ELEMENT
+      <?php /* empty, no closing tag */ ?>
+    Label : ELEMENT
       if
       Label : CONDITION
         !
@@ -29,9 +33,5 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'E'
-    Label : ELEMENT
-      <?php /* empty, no closing tag */ ?>
-    Label : ELEMENT
-      H
 Label : ELEMENT
   A

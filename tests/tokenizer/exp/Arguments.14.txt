@@ -1,24 +1,22 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    x
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        {
+  x
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      {
+      Label : VARIABLE
+        [
         Label : VARIABLE
-          [
-          Label : VARIABLE
-            ->
-            Label : PROPERTY
-              var
-            Label : OBJECT
-              $x
-          Label : INDEX
-            3
+          ->
+          Label : OBJECT
+            $x
+          Label : PROPERTY
+            var
         Label : INDEX
-          4
-      Label : ARGUMENT
-        1
+          3
+      Label : INDEX
+        4
+    Label : ARGUMENT
+      1

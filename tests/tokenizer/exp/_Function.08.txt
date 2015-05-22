@@ -1,20 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      x
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : NAME
-          x
-        Label : BLOCK
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      function
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           void
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
+      Label : NAME
+        x
+      Label : BLOCK
+        void

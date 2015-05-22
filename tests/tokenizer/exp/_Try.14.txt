@@ -7,46 +7,6 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ->
-        Label : OBJECT
-          $l
-        Label : METHOD
-          L
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'N'
-            Label : ARGUMENT
-              ::
-              Label : PROPERTY
-                $m
-              Label : CLASS
-                M
-      Label : ELEMENT
-        return
-        Label : RETURN
-          [
-          Label : VARIABLE
-            $q
-          Label : INDEX
-            'Q'
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $o
-          Label : METHOD
-            O
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $p
-              Label : ARGUMENT
-                'P'
-        Label : LEFT
-          $n
-      Label : ELEMENT
         =
         Label : RIGHT
           new
@@ -65,27 +25,67 @@ Label : CODE
       Label : ELEMENT
         =
         Label : RIGHT
+          ->
+          Label : OBJECT
+            $o
+          Label : METHOD
+            O
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $p
+              Label : ARGUMENT
+                'P'
+        Label : LEFT
+          $n
+      Label : ELEMENT
+        return
+        Label : RETURN
+          [
+          Label : VARIABLE
+            $q
+          Label : INDEX
+            'Q'
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $l
+        Label : METHOD
+          L
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'N'
+            Label : ARGUMENT
+              ::
+              Label : PROPERTY
+                $m
+              Label : CLASS
+                M
+      Label : ELEMENT
+        =
+        Label : RIGHT
           array
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
               =>
-              Label : VALUE
-                $i
               Label : KEY
                 'I'
+              Label : VALUE
+                $i
             Label : ARGUMENT
               =>
-              Label : VALUE
-                $h
               Label : KEY
                 'H'
+              Label : VALUE
+                $h
             Label : ARGUMENT
               =>
-              Label : VALUE
-                $g
               Label : KEY
                 'G'
+              Label : VALUE
+                $g
         Label : LEFT
           $f
       Label : ELEMENT
@@ -102,6 +102,8 @@ Label : CODE
           $d
     Label : CATCH
       catch
+      Label : VARIABLE
+        $y
       Label : CODE
         ;
         Label : ELEMENT
@@ -114,12 +116,12 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'AH'
-      Label : VARIABLE
-        $y
       Label : CLASS
         AF
     Label : CATCH
       catch
+      Label : VARIABLE
+        $w
       Label : CODE
         ;
         Label : ELEMENT
@@ -140,12 +142,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-      Label : VARIABLE
-        $w
       Label : CLASS
         AC
     Label : CATCH
       catch
+      Label : VARIABLE
+        $u
       Label : CODE
         ;
         Label : ELEMENT
@@ -166,12 +168,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-      Label : VARIABLE
-        $u
       Label : CLASS
         Z
     Label : CATCH
       catch
+      Label : VARIABLE
+        $s
       Label : CODE
         ;
         Label : ELEMENT
@@ -196,12 +198,12 @@ Label : CODE
                       'Y'
                   Label : CONCAT
                     'W'
-      Label : VARIABLE
-        $s
       Label : CLASS
         U
     Label : CATCH
       catch
+      Label : VARIABLE
+        $r
       Label : CODE
         ;
         Label : ELEMENT
@@ -214,8 +216,6 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'T'
-      Label : VARIABLE
-        $r
       Label : CLASS
         R
   Label : ELEMENT

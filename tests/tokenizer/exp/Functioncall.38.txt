@@ -1,10 +1,8 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    die
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        true
+  die
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      true

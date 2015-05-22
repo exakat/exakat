@@ -10,11 +10,35 @@ Label : ELEMENT
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $a
+            $d
       Label : THEN
         ;
         Label : ELEMENT
-          E
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              M
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'N'
+        Label : ELEMENT
+          N
+        Label : ELEMENT
+          K
+    Label : ELEMENT
+      J
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+      Label : THEN
+        ;
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -26,6 +50,8 @@ Label : ELEMENT
                 Label : ARGUMENT
                   'E'
         Label : ELEMENT
+          E
+        Label : ELEMENT
           B
       Label : ELSE
         elseif
@@ -33,8 +59,6 @@ Label : ELEMENT
           $b
         Label : THEN
           ;
-          Label : ELEMENT
-            I
           Label : ELEMENT
             echo
             Label : ARGUMENTS
@@ -48,32 +72,8 @@ Label : ELEMENT
                   Label : ARGUMENT
                     $c
           Label : ELEMENT
+            I
+          Label : ELEMENT
             F
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        empty
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $d
-      Label : THEN
-        ;
-        Label : ELEMENT
-          N
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              M
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'N'
-        Label : ELEMENT
-          K
-    Label : ELEMENT
-      J
 Label : ELEMENT
   A

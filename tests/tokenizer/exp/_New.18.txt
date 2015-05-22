@@ -3,24 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      new
-      Label : NEW
-        ::
-        Label : CLASS
-          C
-        Label : METHOD
-          $y
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-          Label : NAME
-            $y
-    Label : LEFT
-      $x
-  Label : ELEMENT
     class
     Label : NAME
       C
@@ -42,14 +24,32 @@ Label : CODE
               'b'
       Label : ELEMENT
         static
-        Label : STATIC
-          static
         Label : VALUE
           'f'
         Label : DEFINE
           $y
         Label : PUBLIC
           public
+        Label : STATIC
+          static
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        ::
+        Label : CLASS
+          C
+        Label : METHOD
+          $y
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+          Label : NAME
+            $y
+    Label : LEFT
+      $x
   Label : ELEMENT
     =
     Label : RIGHT

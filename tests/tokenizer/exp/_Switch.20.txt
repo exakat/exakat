@@ -1,100 +1,96 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $a
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-        Label : CASE
-          'b'
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'n'
-            Label : LEFT
-              $m
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              Concatenation
-              Label : CONCAT
-                'l'
-              Label : CONCAT
-                i
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $j
-                    Label : METHOD
-                      k
-                      Label : ARGUMENTS
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      case
+      Label : CASE
+        'b'
+      Label : CODE
+        Void
+    Label : ELEMENT
+      default
+      Label : CODE
+        Block with Sequence For Default Without Semicolon
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            'n'
+          Label : LEFT
+            $m
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            Concatenation
+            Label : CONCAT
+              'l'
+            Label : CONCAT
+              i
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $j
+                  Label : METHOD
+                    k
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
                         void
-                        Label : ARGUMENT
-                          void
-              Label : CONCAT
-                'h'
-            Label : LEFT
-              $b
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'a'
-            Label : LEFT
-              $a
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'n'
-            Label : LEFT
-              $m
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              Concatenation
-              Label : CONCAT
-                'l'
-              Label : CONCAT
-                i
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $j
-                    Label : METHOD
-                      k
-                      Label : ARGUMENTS
+            Label : CONCAT
+              'h'
+          Label : LEFT
+            $b
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            'a'
+          Label : LEFT
+            $a
+    Label : ELEMENT
+      case
+      Label : CASE
+        "b"
+      Label : CODE
+        Block with Sequence For Case Without Semicolon
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            'n'
+          Label : LEFT
+            $m
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            Concatenation
+            Label : CONCAT
+              'l'
+            Label : CONCAT
+              i
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $j
+                  Label : METHOD
+                    k
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
                         void
-                        Label : ARGUMENT
-                          void
-              Label : CONCAT
-                'h'
-            Label : LEFT
-              $b
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'a'
-            Label : LEFT
-              $a
-        Label : CASE
-          "b"
+            Label : CONCAT
+              'h'
+          Label : LEFT
+            $b
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            'a'
+          Label : LEFT
+            $a

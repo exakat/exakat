@@ -1,44 +1,42 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    try
+  try
+  Label : CODE
+    ;
+    Label : ELEMENT
+      ->
+      Label : OBJECT
+        $a
+      Label : METHOD
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+  Label : CATCH
+    catch
+    Label : VARIABLE
+      $b
     Label : CODE
       ;
       Label : ELEMENT
-        ->
-        Label : OBJECT
-          $a
-        Label : METHOD
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-    Label : CATCH
-      catch
-      Label : CLASS
-        C
-      Label : CODE
-        ;
-        Label : ELEMENT
-          throw
-          Label : THROW
-            ?
-            Label : CONDITION
-              $c
-            Label : THEN
-              $d
-            Label : ELSE
-              ->
-              Label : OBJECT
-                $e
-              Label : METHOD
-                D
-                Label : ARGUMENTS
+        throw
+        Label : THROW
+          ?
+          Label : CONDITION
+            $c
+          Label : THEN
+            $d
+          Label : ELSE
+            ->
+            Label : OBJECT
+              $e
+            Label : METHOD
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
                   void
-                  Label : ARGUMENT
-                    void
-      Label : VARIABLE
-        $b
+    Label : CLASS
+      C

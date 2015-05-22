@@ -3,6 +3,16 @@
 Label : CODE
   ;
   Label : ELEMENT
+    while
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        2
+      Label : LEFT
+        $x
+    Label : BLOCK
+      void
+  Label : ELEMENT
     if
     Label : CONDITION
       1
@@ -50,13 +60,3 @@ Label : CODE
             3
     Label : ELSE
       void
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      void
-    Label : CONDITION
-      ==
-      Label : RIGHT
-        2
-      Label : LEFT
-        $x

@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      [
-      Label : VARIABLE
-        $x
-      Label : INDEX
-        1
+  ++
+  Label : POSTPLUSPLUS
+    [
+    Label : VARIABLE
+      $x
+    Label : INDEX
+      1

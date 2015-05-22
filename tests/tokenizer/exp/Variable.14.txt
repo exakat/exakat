@@ -1,26 +1,24 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    .=
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        "f"
-      Label : CONCAT
-        $
-        Label : NAME
+  .=
+  Label : RIGHT
+    Concatenation
+    Label : CONCAT
+      "f"
+    Label : CONCAT
+      $
+      Label : NAME
+        [
+        Label : VARIABLE
           [
           Label : VARIABLE
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              'd'
+            $c
           Label : INDEX
-            $e
-      Label : CONCAT
-        "b"
-    Label : LEFT
-      $a
+            'd'
+        Label : INDEX
+          $e
+    Label : CONCAT
+      "b"
+  Label : LEFT
+    $a

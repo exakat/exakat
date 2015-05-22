@@ -4,8 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     while
+    Label : CONDITION
+      1
     Label : BLOCK
       ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          h
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              8
+            Label : ARGUMENT
+              $g
+        Label : LEFT
+          $f
       Label : ELEMENT
         if
         Label : CONDITION
@@ -36,20 +50,6 @@ Label : CODE
             break
             Label : LEVEL
               void
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          h
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              8
-            Label : ARGUMENT
-              $g
-        Label : LEFT
-          $f
-    Label : CONDITION
-      1
   Label : ELEMENT
     if
     Label : CONDITION

@@ -1,52 +1,50 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $a
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              ==
-              Label : RIGHT
-                0
-              Label : LEFT
-                $e
-            Label : THEN
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  $f
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            =
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      default
+      Label : CODE
+        ;
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
             Label : RIGHT
-              *
-              Label : RIGHT
-                $d
-              Label : LEFT
-                $c
+              0
             Label : LEFT
-              $b
-        Label : CASE
-          '1'
+              $e
+          Label : THEN
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                $f
+    Label : ELEMENT
+      case
+      Label : CASE
+        '1'
+      Label : CODE
+        ;
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            *
+            Label : RIGHT
+              $d
+            Label : LEFT
+              $c
+          Label : LEFT
+            $b

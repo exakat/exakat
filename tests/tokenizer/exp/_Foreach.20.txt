@@ -1,54 +1,52 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          &&
-          Label : RIGHT
-            !
-            Label : NOT
-              f
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  (array)
-                  Label : CAST
-                    $h
-                Label : ARGUMENT
-                  $g
-          Label : LEFT
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $d
-                Label : INDEX
-                  'e'
-        Label : THEN
-          ;
-          Label : ELEMENT
-            unset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $j
-                Label : INDEX
-                  $k
+  foreach
+  Label : VALUE
+    =>
+    Label : KEY
+      $b
     Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b
-    Label : SOURCE
-      $a
+      $c
+  Label : SOURCE
+    $a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        &&
+        Label : RIGHT
+          !
+          Label : NOT
+            f
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                (array)
+                Label : CAST
+                  $h
+              Label : ARGUMENT
+                $g
+        Label : LEFT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                'e'
+      Label : THEN
+        ;
+        Label : ELEMENT
+          unset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $j
+              Label : INDEX
+                $k

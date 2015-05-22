@@ -25,6 +25,12 @@ Label : CODE
           Label : INDEX
             'h'
   Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $e
+  Label : ELEMENT
     if
     Label : CONDITION
       empty
@@ -46,9 +52,3 @@ Label : CODE
               $c
         Label : LEFT
           $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $e

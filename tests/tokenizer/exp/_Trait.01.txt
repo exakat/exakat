@@ -5,27 +5,27 @@ Label : CODE
   Label : ELEMENT
     class
     Label : NAME
-      H
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        use
-        Label : USE
-          J
-    Label : EXTENDS
-      I
-  Label : ELEMENT
-    class
-    Label : NAME
       E
+    Label : EXTENDS
+      F
     Label : BLOCK
       ;
       Label : ELEMENT
         use
         Label : USE
           G
+  Label : ELEMENT
+    class
+    Label : NAME
+      H
     Label : EXTENDS
-      F
+      I
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        use
+        Label : USE
+          J
   Label : ELEMENT
     trait
     Label : NAME
@@ -34,21 +34,21 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           D
         Label : BLOCK
           void
+      Label : ELEMENT
+        function
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-      Label : ELEMENT
-        function
         Label : NAME
           C
         Label : BLOCK
           void
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void

@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        1
-      Label : ARGUMENT
-        'x'
+  define
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      1
+    Label : ARGUMENT
+      'x'
