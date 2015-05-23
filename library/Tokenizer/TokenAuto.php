@@ -227,26 +227,6 @@ fullcode.setProperty('$name', $value)";
             unset($actions['rank']);
         }
 
-        if (isset($actions['add_void'])) {
-            foreach($actions['add_void'] as $destination => $label) {
-                if ($destination > 0) {
-                    $d = str_repeat(".out('NEXT')", $destination).'.next()';
-                } elseif ($destination < 0) {
-                    $d = str_repeat(".in('NEXT')", $destination).'.next()';
-                } else {
-                    $d = '';
-                }
-                $qactions[] = "
-/* add void out ($destination) */
-x = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
-
-g.addEdge(it$d, x, '$label');
-
-";
-             }
-             unset($actions['add_void']);
-        }
-
         if (isset($actions['toVarNew'])) {
             $token = new _Ppp(Token::$client);
             $fullcode = $token->fullcode();
@@ -281,6 +261,7 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     g.removeEdge(it.inE('ARGUMENT').next());
     
     tvoid = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
+    g.idx('atoms').put('atom', 'Void', tvoid);
 
     g.addEdge(ppp, tvoid, 'VALUE');
 
@@ -361,6 +342,7 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable', 'Static', 'Ppp']}.each{
     g.addEdge(x, it, 'DEFINE');
     g.removeEdge(it.inE('ARGUMENT').next());
     tvoid = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
+    g.idx('atoms').put('atom', 'Void', tvoid);
 
     g.addEdge(x, tvoid, 'VALUE');
 }
@@ -446,6 +428,7 @@ arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
     g.addEdge(ppp, it, 'DEFINE');
     g.removeEdge(it.inE('ARGUMENT').next());
     tvoid = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
+    g.idx('atoms').put('atom', 'Void', tvoid);
 
     g.addEdge(ppp, tvoid, 'VALUE');
     
@@ -698,6 +681,7 @@ g.idx('atoms').put('atom', 'Ppp', x);
 g.addEdge(x, it.out('NEXT').next(), 'DEFINE');
 it.out('NEXT').has('atom', 'Variable').each {
     tvoid = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
+    g.idx('atoms').put('atom', 'Void', tvoid);
 
     g.addEdge(x, tvoid, 'VALUE');
 }
@@ -1167,6 +1151,7 @@ semicolon.setProperty('code', 'Void');
 semicolon.setProperty('token', 'T_VOID');
 semicolon.setProperty('atom', 'Void');
 semicolon.setProperty('fullcode', ' ');
+g.idx('atoms').put('atom', 'Void', semicolon);
 
 ";
             unset($actions['to_void']);
@@ -1176,9 +1161,10 @@ if (isset($actions['insertVoid'])) {
     $out = str_repeat(".out('NEXT')", $actions['insertVoid']);
     
     $qactions[] = "
-/* insert_void */
+/* insertVoid */
 
 x = g.addVertex(null, [code:'void', fullcode:' ', atom:'Void', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
+g.idx('atoms').put('atom', 'Void', x);
 
 e = it{$out}.next();
 f = e.out('NEXT').next();
@@ -1302,48 +1288,52 @@ g.addEdge(it, suivant, 'NEXT');
             unset($actions['toSpecialmethodcall']);
         }
         
-        if (isset($actions['insert_ns'])) {
+        if (isset($actions['insertNs'])) {
             $qactions[] = "
 /* insert namespace */
 
 it.setProperty('no_block', true);
 
-g.addEdge(it, it.out('NEXT').next(), 'NAMESPACE');
-g.idx('delete').put('node', 'delete', it.out('NEXT').out('NEXT').next());
-g.addEdge(it, it.out('NEXT').out('NEXT').out('NEXT').next(), 'BLOCK');
+g.addEdge(it, a1, 'NAMESPACE');
+g.idx('delete').put('node', 'delete', a2);
+g.addEdge(it, a3, 'BLOCK');
 
-end = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+a3.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
+a1.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
 
-it.out('NEXT').out('NEXT').out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
-it.out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
-
-g.addEdge(it, end, 'NEXT');
+g.addEdge(it, a4, 'NEXT');
 
 ";
-            unset($actions['insert_ns']);
+            unset($actions['insertNs']);
         }
         
-        if (isset($actions['insertNsVoid'])) {
+        if (isset($actions['globalNamespace'])) {
             $qactions[] = "
 /* insert void for namespace */
 
-a3 = a2.out('NEXT').next();
-it.setProperty('no_block', true);
-
-g.addEdge(it, a1, 'NAMESPACE');
-
-tvoid = g.addVertex(null, [code:'void', fullcode:' ', atom:'Void', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
-g.addEdge(it, tvoid, 'BLOCK');
-
-a1.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
-a2.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
-g.idx('delete').put('node', 'delete', a2);
-
-g.addEdge(it, a3, 'NEXT');
 
 ";
-            unset($actions['insertNsVoid']);
+            unset($actions['globalNamespace']);
         }
+
+        if (isset($actions['insertNsSeq'])) {
+            $qactions[] = "
+/* insert sequence for namespace */
+
+sequence = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line, fullcode:';']);
+
+g.addEdge(sequence, a3, 'ELEMENT');
+a3.bothE('NEXT').each{ g.removeEdge(it); }
+a4.bothE('NEXT').each{ g.removeEdge(it); }
+g.removeVertex(a4);
+
+g.addEdge(a2, sequence, 'NEXT');
+g.addEdge(sequence, a5, 'NEXT');
+
+";
+            unset($actions['insertNsSeq']);
+        }
+        
         if (isset($actions['sign'])) {
             $qactions[] = "
 /* Sign the integer */
@@ -1437,6 +1427,7 @@ $fullcode
                 $qactions[] = "
 /* insertEdge out */
 x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
+g.idx('atoms').put('atom', 'Void', x);
 
 f = it.out('NEXT').out('NEXT').next();
 
@@ -1467,6 +1458,7 @@ $fullcode
                 $qactions[] = "
 /* addEdge out */
 x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
+g.idx('atoms').put('atom', 'Void', x);
 
 f = it.out('NEXT').next();
 
@@ -1480,6 +1472,7 @@ g.addEdge(x,  f, 'NEXT');
                 $qactions[] = "
 /* addEdge in */
 x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', virtual:true, line:it.line, fullcode:' ']);
+g.idx('atoms').put('atom', 'Void', x);
 
 f = it.in('NEXT').next();
 
@@ -1495,6 +1488,7 @@ g.addEdge(f, x, 'NEXT');
                 $qactions[] = "
 /* addEdge out $destination */
 x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', virtual:true, line:it.line, fullcode:' ']);
+g.idx('atoms').put('atom', 'Void', x);
 
 a = it$next.next();
 b = a.out('NEXT').next();
@@ -2232,6 +2226,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $qactions[] = "
 /* createVoidForCase */
 x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
+g.idx('atoms').put('atom', 'Void', x);
 a = it.out('NEXT').out('NEXT').next();
 b = a.out('NEXT').next();
 
@@ -2279,6 +2274,7 @@ g.idx('atoms').put('atom', 'Functioncall', a2)
             $qactions[] = "
 /* createVoidForDefault */
 x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
+g.idx('atoms').put('atom', 'Void', x);
 a = it.out('NEXT').next();
 b = a.out('NEXT').next();
 
@@ -2702,6 +2698,20 @@ if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).
 
     g.addEdge($token, semicolon, 'NEXT');
     g.addEdge(semicolon, next, 'NEXT');
+
+    g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
+} else {
+    semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
+    tvoid     = g.addVertex(null, [code:'', fullcode:' ', token:'T_VOID', atom:'Void', virtual:true, line:it.line, addSemicolon:true]);
+    g.idx('atoms').put('atom', 'Void', tvoid);
+
+    next = $token.out('NEXT').next();
+
+    $token.outE('NEXT').each{ g.removeEdge(it); }
+
+    g.addEdge($token, semicolon, 'NEXT');
+    g.addEdge(semicolon, tvoid, 'NEXT');
+    g.addEdge(tvoid, next, 'NEXT');
 
     g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
 }

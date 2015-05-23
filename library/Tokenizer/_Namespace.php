@@ -58,21 +58,20 @@ class _Namespace extends TokenAuto {
                                'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
 
-        // namespace myproject ;
+        // namespace A; atom ;  ? >
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
                                   2 => array('token' => 'T_SEMICOLON',
                                              'atom'  => 'none'),
-//                                  3 => array('token' => array('T_CLOSE_TAG', 'T_END', 'T_SEMICOLON'),
-//                                             'atom'  => 'none')
+                                  3 => array('atom'  => 'yes',
+                                             'notAtom' => 'Sequence'),
+                                  4 => array('token' => 'T_SEMICOLON'),
+                                  5 => array('token' => array('T_CLOSE_TAG', 'T_END'))
         );
         
-        $this->actions = array('insertNsVoid' => true,
-                               'atom'           => 'Namespace',
-                               'cleanIndex'     => true,
-                               'addSemicolon'   => 'it'
-                               );
+        $this->actions = array('insertNsSeq'  => true,
+                               'keepIndexed'  => true);
         $this->checkAuto();
 
         // namespace A; <Sequence> ? >
@@ -84,7 +83,7 @@ class _Namespace extends TokenAuto {
                                   4 => array('token' => array('T_CLOSE_TAG', 'T_END'))
         );
         
-        $this->actions = array('insert_ns'    => true,
+        $this->actions = array('insertNs'     => true,
                                'atom'         => 'Namespace',
                                'cleanIndex'   => true,
                                'addSemicolon' => 'it');
@@ -97,8 +96,8 @@ class _Namespace extends TokenAuto {
                                              'atom'  => 'none')
         );
         
-        $this->actions = array('atom'         => 'Identifier',
-                               'cleanIndex'   => true);
+        $this->actions = array('atom'       => 'Identifier',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return false;

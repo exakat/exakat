@@ -56,7 +56,7 @@ class _Function extends TokenAuto {
                                'checkTypehint' => 'Function',
                                'makeBlock'     => 'BLOCK',
                                'cleanIndex'    => true,
-                               'addSemicolon'  => 'it');
+                               'addAlwaysSemicolon'  => 'it');
         $this->checkAuto();
 
         // function x(args); for interfaces or abstract

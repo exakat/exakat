@@ -48,7 +48,7 @@ class _Trait extends TokenAuto {
                                'atom'         => 'Trait',
                                'makeBlock'    => 'BLOCK',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
+                               'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
         
         return false;

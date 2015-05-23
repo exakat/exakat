@@ -179,7 +179,7 @@ class Tokenizer implements Tasks {
         $log->log("Total regex time\t".(($regex_time) * 1000));
         $log->log("final cost : $cost");
 
-//        $server_stat->collect();
+        $server_stat->collect();
         $stats['token_out'] = $server_stat->tokens_count;
         $stats['relation_out'] = $server_stat->relations_count;
         \Tokenizer\Token::cleanHidden();
