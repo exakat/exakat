@@ -18,11 +18,11 @@ Label : CODE
             Void
       Label : ELEMENT
         case
+        Label : CASE
+          1
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             break
             Label : LEVEL
               1
-        Label : CASE
-          1

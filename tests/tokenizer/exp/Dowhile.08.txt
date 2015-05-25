@@ -8,11 +8,11 @@ Label : CODE
     foreach
     Label : VALUE
       $b
-    Label : SOURCE
-      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $c
+    Label : SOURCE
+      $a

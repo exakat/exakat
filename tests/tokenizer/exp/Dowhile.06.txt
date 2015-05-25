@@ -6,8 +6,6 @@ Label : CODE
     !
     Label : NOT
       ->
-      Label : OBJECT
-        $f
       Label : METHOD
         g
         Label : ARGUMENTS
@@ -16,23 +14,23 @@ Label : CODE
             ++
             Label : PREPLUSPLUS
               $h
+      Label : OBJECT
+        $f
   Label : BLOCK
     ;
     Label : ELEMENT
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $b
-          Label : METHOD
-            c
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                $d
-        Label : LEFT
-          $a
+      =
+      Label : RIGHT
+        ->
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $e
+            Label : ARGUMENT
+              $d
+        Label : OBJECT
+          $b
+      Label : LEFT
+        $a

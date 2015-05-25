@@ -11,8 +11,6 @@ Label : CODE
   Label : BLOCK
     ;
     Label : ELEMENT
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
+      ++
+      Label : POSTPLUSPLUS
+        $x

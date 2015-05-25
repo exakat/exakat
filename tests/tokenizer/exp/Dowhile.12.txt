@@ -16,6 +16,16 @@ Label : CODE
           void
       Label : ELEMENT
         ->
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              6
+            Label : ARGUMENT
+              5
+            Label : ARGUMENT
+              4
         Label : OBJECT
           [
           Label : VARIABLE
@@ -30,16 +40,6 @@ Label : CODE
                 2
             Label : LEFT
               1
-        Label : METHOD
-          f
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              6
-            Label : ARGUMENT
-              5
-            Label : ARGUMENT
-              4
     Label : ELSE
       ;
       Label : ELEMENT

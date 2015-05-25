@@ -7,10 +7,11 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Continue extends Tokenizer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function test_Continue01()  { $this->generic_test('_Continue.01'); }
     public function test_Continue02()  { $this->generic_test('_Continue.02'); }
     public function test_Continue03()  { $this->generic_test('_Continue.03'); }
+    public function test_Continue04()  { $this->generic_test('_Continue.04'); }
 }
 ?>
