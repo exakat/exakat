@@ -57,7 +57,7 @@ class StrposCompare extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->_as('result')
              ->code($operator)
-             ->inIs('CONDITION') 
+             ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('result');
         $this->prepareQuery();
@@ -68,7 +68,7 @@ class StrposCompare extends Analyzer\Analyzer {
              ->inIs('RIGHT')
              ->_as('result')
              ->atomIs('Assignation')
-             ->inIs('CONDITION') 
+             ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('result');
         $this->prepareQuery();

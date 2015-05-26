@@ -36,7 +36,7 @@ class CompareHash extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // if (hash()) 
+        // if (hash())
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomIs('Functioncall')

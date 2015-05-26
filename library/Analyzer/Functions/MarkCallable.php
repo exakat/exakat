@@ -115,7 +115,7 @@ if (i > 0) {
     // case for "parent::method";
     i = theArray.cbMethod.indexOf("::");
     theArray.i = i;
-    if (i > 0) { 
+    if (i > 0) {
         theArray.cbMethod = theArray.cbMethod.substring(i + 2);
         
         // we assume it is only parent.

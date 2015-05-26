@@ -53,7 +53,7 @@ class CouldBeStatic extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
         
-        // todo : add support for the $GLOBALS 
+        // todo : add support for the $GLOBALS
     }
 }
 

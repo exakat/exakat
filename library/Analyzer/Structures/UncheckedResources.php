@@ -33,8 +33,8 @@ class UncheckedResources extends Analyzer\Analyzer {
         $positions = array(0);
         foreach($resourceUsage as $creation => $usage) {
             foreach($positions as $pos) {
-                if (!isset($usage->{"function$pos"})) { 
-                    continue; 
+                if (!isset($usage->{"function$pos"})) {
+                    continue;
                 }
                 $functions = $this->makeFullNsPath((array) $usage->{"function$pos"});
                 
