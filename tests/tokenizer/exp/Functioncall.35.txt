@@ -1,6 +1,0 @@
-<?php
-
-Label : CODE
-  exit
-  Label : ARGUMENTS
-    void

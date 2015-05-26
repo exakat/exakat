@@ -1,6 +1,0 @@
-<?php
-
-Label : CODE
-  throw
-  Label : THROW
-    $e

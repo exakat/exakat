@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  instanceof
-  Label : VARIABLE
-    $x
-  Label : CLASS
-    $y

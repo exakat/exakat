@@ -1,6 +1,0 @@
-<?php
-
-Label : CODE
-  global
-  Label : GLOBAL
-    $a

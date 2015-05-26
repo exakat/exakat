@@ -1,1 +1,0 @@
-<?php if($a) : ?>A<?php ?>B<?php echo $location; endif; ?>

@@ -1,1 +1,0 @@
-<script language="php">$htmltags++; </script>

@@ -1,4 +1,0 @@
-<?php
-
-Label : CODE
-  --1

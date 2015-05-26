@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  =
-  Label : RIGHT
-    "1 2 en latin-1 éç"
-  Label : LEFT
-    $a

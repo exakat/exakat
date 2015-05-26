@@ -1,6 +1,0 @@
-<?php
-
-Label : CODE
-  -
-  Label : SIGN
-    'b'

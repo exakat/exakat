@@ -1,1 +1,0 @@
-<?php if(!defined('A')) exit ?>

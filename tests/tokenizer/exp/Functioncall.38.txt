@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  die
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      true

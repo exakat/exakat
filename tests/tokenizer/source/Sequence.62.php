@@ -1,1 +1,0 @@
-<?php echo isset($a->b) ? htmlspecialchars($c->d($e->f), G, 'H') : 'I'; ?>

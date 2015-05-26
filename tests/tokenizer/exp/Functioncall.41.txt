@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  eval
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      "echo 1;"

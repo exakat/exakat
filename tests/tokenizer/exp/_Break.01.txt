@@ -1,6 +1,0 @@
-<?php
-
-Label : CODE
-  break
-  Label : LEVEL
-    1

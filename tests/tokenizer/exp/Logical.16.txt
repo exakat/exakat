@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  xor
-  Label : RIGHT
-    2
-  Label : LEFT
-    1

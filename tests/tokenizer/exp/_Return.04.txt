@@ -1,6 +1,0 @@
-<?php
-
-Label : CODE
-  return
-  Label : RETURN
-    1

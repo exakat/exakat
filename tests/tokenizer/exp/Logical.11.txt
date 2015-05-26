@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  XOR
-  Label : RIGHT
-    6
-  Label : LEFT
-    5

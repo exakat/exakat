@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  {
-  Label : VARIABLE
-    $b
-  Label : INDEX
-    "c"

@@ -1,1 +1,0 @@
-<?php $a or print('B') ?>C<?php echo D(E('F'), 'G'.$a.'H') ?>

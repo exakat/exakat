@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  while
-  Label : CONDITION
-    1
-  Label : BLOCK
-    void

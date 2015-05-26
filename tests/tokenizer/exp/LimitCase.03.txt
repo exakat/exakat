@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  =
-  Label : RIGHT
-    "1 2 这个就是中文"
-  Label : LEFT
-    $a

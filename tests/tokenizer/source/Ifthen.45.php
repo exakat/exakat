@@ -1,1 +1,0 @@
-<?php if (1): ?>A<?php elseif (2): ?>B<?php else: ?>C<?php endif; ?>

@@ -1,1 +1,0 @@
-<?php include('a.php' ) ?>A<?php include('b.php' ) ?>B<?php b( 'c' ) ?>

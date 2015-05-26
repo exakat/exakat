@@ -1,5 +1,0 @@
-;
-Label : ELEMENT
-  B
-Label : ELEMENT
-  A

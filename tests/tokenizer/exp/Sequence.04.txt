@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    2
-  Label : ELEMENT
-    1

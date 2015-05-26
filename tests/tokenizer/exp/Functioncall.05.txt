@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  strtolower
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      true

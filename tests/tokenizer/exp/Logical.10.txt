@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  ^
-  Label : RIGHT
-    6
-  Label : LEFT
-    5

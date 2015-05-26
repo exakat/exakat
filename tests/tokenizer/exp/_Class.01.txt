@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  class
-  Label : BLOCK
-    void
-  Label : NAME
-    x

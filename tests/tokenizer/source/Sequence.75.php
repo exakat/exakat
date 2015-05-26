@@ -1,2 +1,0 @@
-<?php if ($a): ?>A<?php echo C('D');?>D<?php echo F('G');?>
-G<?php echo I('J');?><?php endif ?>

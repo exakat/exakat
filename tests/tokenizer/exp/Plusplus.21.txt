@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  ++
-  Label : POSTPLUSPLUS
-    $
-    Label : NAME
-      $i

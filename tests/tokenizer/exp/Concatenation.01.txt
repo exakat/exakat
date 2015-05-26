@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  Concatenation
-  Label : CONCAT
-    '2'
-  Label : CONCAT
-    '1'

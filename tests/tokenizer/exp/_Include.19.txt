@@ -1,7 +1,0 @@
-<?php 
-Label : CODE
-  B
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      'C'
