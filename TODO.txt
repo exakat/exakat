@@ -1264,3 +1264,10 @@ uniform variable syntax
 exceptiosn (catch...)
 spaceship ? (what could be replaced by it?)
 unicode escape syntax (what could benefit?)
+?? operator (what could benefit)
+group use
+generator return value
+delegation
+scalar typehint
+return typehint
+avoid session fixation : ext/session must use session_regenerate_id(true); somewhere (
