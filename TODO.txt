@@ -1232,3 +1232,35 @@ no-raw-exceptions
 no-curly-array
 
 project has a 'third-party' folder ?
+
+Instanceof with unused classes is dead code
+Missing Semicolons before ?>
+
+/e for preg_match
+don't use / as delimiter for regular expressions
+empty/isset and type test 
+phpcheatsheets.com
+
+
+Escape late
+
+hook filter : they should return always
+theme has a theme checker.
+
+WP : for debug situations		if ( $debug_display && ( $debug || $wpseo_debug ) ) {
+		if ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ) {
+
+			$xdebug = ( extension_loaded( 'xdebug' ) ? true : false );
+
+Locate heavy functions (big-O style, or simple counts)
+no-missing-; ? 
+
+Remove all usage of g.V 
+
+PHP 7 : remove ereg
+PHP 7 : alternative tags
+multiple default cases in switch
+uniform variable syntax
+exceptiosn (catch...)
+spaceship ? (what could be replaced by it?)
+unicode escape syntax (what could benefit?)
