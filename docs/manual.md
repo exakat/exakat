@@ -7,30 +7,34 @@ Exakat is a static analyzer for PHP. It applies the [clear PHP rules](http://git
 
 # Install Exakat
 ## Install For Osx
+[Read the Install for Osx manual](./Installation.osx.md)
+
 ## Install For Debian
+[Read the Install for Osx manual](./Installation.debian.md)
+
 ## Other Installs
+[Read the Generic install](./Installation.generic.md)
 
 
 # Usage
 
-
-```sh
-mvn clean package
-# for TP3 use: mvn clean package -Dtp.version=3
-unzip target/neo4j-gremlin-plugin-*-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin
-$NEO4J_HOME/bin/neo4j restart
-```
-
 ## A first tests using curl
 
-If everything went well, you should already see an empty success message when you access the Gremln REST endpoint.
+A simple run for the report : 
 
 ```
-$ curl -s -G http://localhost:7474/tp/gremlin/execute
-{
-    "success": true
-}
+$ php exakat init -p sculpin -R https://github.com/sculpin/sculpin
 ```
+This will init the project in the 'projects' folder, and clone the code with the provided repository. The name after `-p` will be reused later for all subsequent operations.
+
+Then, you can run : 
+```
+$ php exakat project -p sculpin 
+```
+
+This will run the whole analyzis. 
+
+Once it is finished, you may find the result in `projects/sculpin/report`. Simply open the 'index.html' file in Firefox (Note that Safari or Chrome has a security feature that will prevent them from using directly the report. To avoid this, put the report on a webserver and open it again via http). 
 
 ## Parameters
 
