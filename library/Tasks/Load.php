@@ -479,7 +479,7 @@ class Load implements Tasks {
                             $id++;
                             continue;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
-                          in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING'))) {
+                          in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING', 'T_CONTINUE', 'T_BREAK'))) {
                           $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                               ->setProperty('code', ';')
                                                               ->setProperty('fullcode', ';')
