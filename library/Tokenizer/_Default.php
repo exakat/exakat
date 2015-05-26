@@ -58,7 +58,7 @@ class _Default extends TokenAuto {
                                               'atom'    => 'none'),
                                    1 => array('token'   => array('T_COLON', 'T_SEMICOLON')),
                                    2 => array('atom'    => 'yes'),
-                                   3 => array('token'   => 'T_SEMICOLON', 
+                                   3 => array('token'   => 'T_SEMICOLON',
                                               'atom'    => 'none'),
                                    4 => array('token'   => $finalToken));
         
@@ -70,7 +70,7 @@ class _Default extends TokenAuto {
         $this->conditions = array( 0 => array('token'   => _Default::$operators,
                                               'atom'    => 'none'),
                                    1 => array('token'   => array('T_COLON', 'T_SEMICOLON')),
-                                   2 => array('atom'    => 'yes', 
+                                   2 => array('atom'    => 'yes',
                                               'notAtom' => 'Sequence'),
                                    3 => array('token'   => $finalToken));
         

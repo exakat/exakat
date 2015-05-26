@@ -28,7 +28,7 @@ class _Interface extends TokenAuto {
     static public $atom = 'Interface';
 
     public function _check() {
-        // interface x {}   
+        // interface x {}
         $this->conditions = array(0 => array('token'    => _Interface::$operators,
                                              'atom'     => 'none'),
                                   1 => array('atom'     => array('Identifier', 'Boolean', 'Null')),

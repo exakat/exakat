@@ -62,10 +62,9 @@ class IsInterfaceMethod extends Analyzer\Analyzer {
         $interfaces = $this->loadIni('php_interfaces_methods.ini', 'interface');
         
         foreach($interfaces as $interface => $methods) {
-//            if ($interface != 'arrayaccess') { continue; }
             if (empty($methods)) {
                 // may be the case for Traversable : interface without methods
-                continue; 
+                continue;
             }
             $methods = explode(',', $methods);
             
@@ -73,7 +72,6 @@ class IsInterfaceMethod extends Analyzer\Analyzer {
             $this->atomIs('Function')
                  ->outIs('NAME')
                  ->code($methods)
-//                 ->goToClass() but this is going to be faster as we know where we are
                  ->inIs('NAME')
                  ->inIs('ELEMENT')
                  ->inIs('BLOCK')
@@ -87,7 +85,6 @@ class IsInterfaceMethod extends Analyzer\Analyzer {
             $this->atomIs('Function')
                  ->outIs('NAME')
                  ->code($methods)
-//                 ->goToClass() but this is going to be faster as we know where we are
                  ->inIs('NAME')
                  ->inIs('ELEMENT')
                  ->inIs('BLOCK')

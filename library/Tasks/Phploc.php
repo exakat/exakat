@@ -102,15 +102,15 @@ class Phploc implements Tasks {
         }
     }
 
-    private function readRecursiveDir($dirname, $excludeFiles = array(), $excludeDirs = array()) { 
+    private function readRecursiveDir($dirname, $excludeFiles = array(), $excludeDirs = array()) {
         $dir = opendir($dirname);
         
         $return = array();
         while(false !== ($file = readdir($dir))) {
             if ($file[0] == '.') { continue; }
             foreach($excludeFiles as $part) {
-                if (strpos($file, $part) !== false) { 
-                    continue 2; 
+                if (strpos($file, $part) !== false) {
+                    continue 2;
                 }
             }
             
@@ -124,7 +124,7 @@ class Phploc implements Tasks {
         }
         
         return $return;
-    } 
+    }
 
     
     private function countLocInFile($filename) {

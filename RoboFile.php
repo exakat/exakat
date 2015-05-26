@@ -216,8 +216,6 @@ LICENCE;
     
     private function addFiles($packer, $files) {
         foreach ($files as $file) {
-//            print "$file {$file->getRelativePathname()} {$file->getRealPath()}\n";
-            print "$file\n";
             $packer->addFile($file->getRelativePathname(), $file->getRealPath());
         }
     }

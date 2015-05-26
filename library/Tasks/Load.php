@@ -599,7 +599,7 @@ class Load implements Tasks {
                         if ($block_level == $dowhiles[count($dowhiles) - 1]['level']) {
                             $T[$Tid]->setProperty('association', 'dowhile')->save();
                             array_pop($dowhiles);
-                        } 
+                        }
                     }
                 }
 
@@ -848,7 +848,7 @@ class Load implements Tasks {
                         // ';' will not be processed by process_parenthesis
                         if ($type = $this->process_parenthesis($token_value)) {
                             $T[$Tid]->setProperty('association', $type)->save();
-                        } 
+                        }
 
                         if ($in_for < 1) {
                             $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
@@ -982,7 +982,7 @@ class Load implements Tasks {
                                                   ->save();
                     if ($type = $this->process_parenthesis($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
-                    } 
+                    }
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
@@ -1258,7 +1258,7 @@ class Load implements Tasks {
             }
         }
         
-        if ($tokenValue == 'T_SEMICOLON' && 
+        if ($tokenValue == 'T_SEMICOLON' &&
             count($states) > 0) {
                 if (in_array($states[count($states) - 1], array('Use', 'Function'))) {
                     array_pop($states);
@@ -1338,8 +1338,8 @@ Too many updates (If expected a Parenthesis, not a ( ... )
                 return '';
             }
         }
-/*        
-        if ($tokenValue == 'T_SEMICOLON' && 
+/*
+        if ($tokenValue == 'T_SEMICOLON' &&
             count($states) > 0) {
                 if (in_array($states[count($states) - 1], array('Use', 'Function'))) {
                     array_pop($states);

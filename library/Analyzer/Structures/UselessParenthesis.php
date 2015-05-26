@@ -67,7 +67,7 @@ class UselessParenthesis extends Analyzer\Analyzer {
              ->inIs('CODE');
         $this->prepareQuery();
         
-        // f(($x)) 
+        // f(($x))
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
