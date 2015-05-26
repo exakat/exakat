@@ -241,7 +241,7 @@ INI;
         } else {
             $stats['PHP 5.5']['configured'] = 'Yes';
             $res = trim(shell_exec($config->php55.' -r "echo phpversion();" 2>&1'));
-            if (!preg_match('/5\.5\.[^0-9+]/', $res)) {
+            if (!preg_match('/5\.5\.[0-9]+/', $res)) {
                 $stats['PHP 5.5']['installed'] = 'No';
             } else {
                 $stats['PHP 5.5']['installed'] = 'Yes';
