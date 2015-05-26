@@ -163,7 +163,8 @@ LICENCE;
     
     public function pharBuild() {
         $packer = $this->taskPackPhar('exakat.phar')
-                       ->compress();
+//                       ->compress()
+                       ;
         
         $this->updateBuild();
 
@@ -215,9 +216,13 @@ LICENCE;
     }
     
     private function addFiles($packer, $files) {
+        $total = 0;
         foreach ($files as $file) {
+            print "$file\n";
+            $total++;
             $packer->addFile($file->getRelativePathname(), $file->getRealPath());
         }
+        print "Added $total files\n";
     }
     
     public function checkFormat() {
