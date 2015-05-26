@@ -2,13 +2,13 @@
 
 Label : CODE
   foreach
-  Label : VALUE
-    $y
   Label : SOURCE
     [
     Label : VARIABLE
       $x
     Label : INDEX
       'a'
+  Label : VALUE
+    $y
   Label : BLOCK
     void

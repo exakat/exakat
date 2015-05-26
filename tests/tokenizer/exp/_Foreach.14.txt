@@ -2,6 +2,8 @@
 
 Label : CODE
   foreach
+  Label : SOURCE
+    $a
   Label : VALUE
     $y
   Label : BLOCK
@@ -10,5 +12,3 @@ Label : CODE
       ++
       Label : POSTPLUSPLUS
         $z
-  Label : SOURCE
-    $a

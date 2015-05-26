@@ -16,14 +16,14 @@ Label : CODE
       $m
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $c
     Label : SOURCE
       ->
       Label : OBJECT
         $a
       Label : PROPERTY
         b
+    Label : VALUE
+      $c
     Label : BLOCK
       ;
       Label : ELEMENT

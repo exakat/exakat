@@ -2,11 +2,11 @@
 
 Label : CODE
   foreach
-  Label : VALUE
-    $e
   Label : SOURCE
     @
     Label : AT
       $array
+  Label : VALUE
+    $e
   Label : BLOCK
     void

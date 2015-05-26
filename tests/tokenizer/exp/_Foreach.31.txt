@@ -2,11 +2,11 @@
 
 Label : CODE
   foreach
-  Label : VALUE
-    $y
   Label : SOURCE
     clone
     Label : CLONE
       $x
+  Label : VALUE
+    $y
   Label : BLOCK
     void

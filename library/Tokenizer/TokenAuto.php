@@ -2006,6 +2006,17 @@ sequence = g.addVertex(null, [code:';', fullcode:';', token:'T_SEMICOLON', atom:
 instruction = it$offset.next();
 binstruction = instruction.in('NEXT').next();
 ainstruction = instruction.out('NEXT').next();
+// remove the next, if this is a ;
+if (ainstruction.getProperty('token') == 'T_SEMICOLON' &&
+    ainstruction.getProperty('atom') == null) {
+    semicolon = ainstruction;
+    ainstruction = semicolon.out('NEXT').next();
+    
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
+    g.idx('delete').put('node', 'delete', semicolon);
+}
+
 instruction.bothE('NEXT').each{ g.removeEdge(it); }
 
 g.addEdge(sequence, instruction, 'ELEMENT');

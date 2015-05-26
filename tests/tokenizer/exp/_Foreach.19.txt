@@ -1,14 +1,14 @@
 <?php 
 Label : CODE
   foreach
-  Label : VALUE
-    =>
-    Label : KEY
-      $b
-    Label : VALUE
-      $c
   Label : SOURCE
     $a
+  Label : VALUE
+    =>
+    Label : VALUE
+      $c
+    Label : KEY
+      $b
   Label : BLOCK
     ++
     Label : POSTPLUSPLUS

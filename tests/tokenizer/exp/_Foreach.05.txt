@@ -2,12 +2,12 @@
 
 Label : CODE
   foreach
-  Label : VALUE
-    $y
   Label : SOURCE
     (array)
     Label : CAST
       $x
+  Label : VALUE
+    $y
   Label : BLOCK
     ;
     Label : ELEMENT

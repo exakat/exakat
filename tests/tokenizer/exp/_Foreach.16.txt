@@ -2,18 +2,18 @@
 
 Label : CODE
   foreach
+  Label : SOURCE
+    $a
   Label : VALUE
     =>
+    Label : VALUE
+      $y
     Label : KEY
       ->
       Label : OBJECT
         $x
       Label : PROPERTY
         a
-    Label : VALUE
-      $y
-  Label : SOURCE
-    $a
   Label : BLOCK
     ;
     Label : ELEMENT

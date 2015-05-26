@@ -1,0 +1,21 @@
+<?php 
+Label : CODE
+  if
+  Label : CONDITION
+    $x
+  Label : THEN
+    ;
+    Label : ELEMENT
+      foreach
+      Label : SOURCE
+        $a
+      Label : VALUE
+        $b
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            true
+          Label : LEFT
+            $a

@@ -2,14 +2,14 @@
 
 Label : CODE
   foreach
-  Label : VALUE
-    =>
-    Label : KEY
-      $x
-    Label : VALUE
-      $y
   Label : SOURCE
     $a
+  Label : VALUE
+    =>
+    Label : VALUE
+      $y
+    Label : KEY
+      $x
   Label : BLOCK
     ;
     Label : ELEMENT

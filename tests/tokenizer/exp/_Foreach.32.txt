@@ -3,14 +3,14 @@ Label : ELEMENT
   <?php 
   Label : CODE
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $label
-      Label : VALUE
-        $data
     Label : SOURCE
       $tables
+    Label : VALUE
+      =>
+      Label : VALUE
+        $data
+      Label : KEY
+        $label
     Label : BLOCK
       ;
       Label : ELEMENT

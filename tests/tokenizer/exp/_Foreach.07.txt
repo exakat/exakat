@@ -2,17 +2,17 @@
 
 Label : CODE
   foreach
+  Label : SOURCE
+    $a
   Label : VALUE
     ::
-    Label : CLASS
-      C
     Label : PROPERTY
       $d
+    Label : CLASS
+      C
   Label : BLOCK
     ;
     Label : ELEMENT
       ++
       Label : POSTPLUSPLUS
         $j
-  Label : SOURCE
-    $a

@@ -2,9 +2,9 @@
 
 Label : CODE
   foreach
+  Label : SOURCE
+    $x
   Label : VALUE
     $y
   Label : BLOCK
     void
-  Label : SOURCE
-    $x

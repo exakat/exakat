@@ -4,14 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $z
     Label : SOURCE
       +
       Label : RIGHT
         $y
       Label : LEFT
         $x
+    Label : VALUE
+      $z
     Label : BLOCK
       ;
       Label : ELEMENT

@@ -1,39 +1,43 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    ==
-    Label : RIGHT
-      'b'
-    Label : LEFT
-      $a
-  Label : THEN
-    ;
-    Label : ELEMENT
-      foreach
-      Label : VALUE
-        $g
-      Label : BLOCK
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        'b'
+      Label : LEFT
+        $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        foreach
+        Label : SOURCE
+          ->
+          Label : OBJECT
             ->
             Label : OBJECT
-              $h
+              $c
             Label : PROPERTY
-              i
-      Label : SOURCE
-        ->
-        Label : METHOD
-          e
+              d
+          Label : METHOD
+            e
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'f'
+        Label : VALUE
+          $g
+        Label : BLOCK
+          echo
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              'f'
-        Label : OBJECT
-          ->
-          Label : OBJECT
-            $c
-          Label : PROPERTY
-            d
+              ->
+              Label : OBJECT
+                $h
+              Label : PROPERTY
+                i

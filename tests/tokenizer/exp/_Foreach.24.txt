@@ -2,6 +2,8 @@
 
 Label : CODE
   foreach
+  Label : SOURCE
+    $a
   Label : VALUE
     $b
   Label : BLOCK
@@ -20,5 +22,3 @@ Label : CODE
               $d
         Label : ARGUMENT
           $c
-  Label : SOURCE
-    $a
