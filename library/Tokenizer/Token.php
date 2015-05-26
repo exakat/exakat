@@ -313,16 +313,11 @@ g.idx('delete')[['node':'delete']].each{
     g.removeVertex(it);
 }
 
-/*
 // clean indexed (if no more index...)
 g.V.has('index', true).filter{it.out().count() == 0}.each{
     g.removeVertex(it);
 };
-// running twice the query, for better cleaning (why so?)
-g.V.has('index', true).filter{it.out().count() == 0}.each{
-    g.removeVertex(it);
-};
-*/
+
 ", "
 //////////////////////////////////////////////////////////////////////////////////////////
 // calculating the full namespaces paths
