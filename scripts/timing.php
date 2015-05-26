@@ -7,7 +7,7 @@ use mcordingley\Regression\RegressionAlgorithm\LinearLeastSquares;
 
 
 $files = glob('projects/*');
-$fp = fopen('../timing.csv', 'w+');
+$fp = fopen('timing.csv', 'w+');
 fputcsv($fp, array('project', 'initialSize', 'size', 'buildRoot', 'tokenizer', 'analyze', 'final'));
 
 $total = 0;
@@ -16,7 +16,10 @@ $regression = new Regression();
 
 
 foreach($files as $id => $file) {
+    unset($project, $initialSize, $size, $buildRoot, $tokenizer, $analyze, $final);
     list(, $project) = explode('/', $file);
+
+    if (in_array($project, array('test'))) { continue; }
     
 //    if ($project != 'baun') { continue; }
 
@@ -35,6 +38,7 @@ foreach($files as $id => $file) {
     if (!preg_match("#Final\t([0-9\.]+)\t([0-9\.]+)#is", $content, $r)) { continue; }
     $final = $r[2];
 
+    
     if (!file_exists("projects/$project/log/stat.log")) { continue; }
     $content = file_get_contents("projects/$project/log/stat.log");
     if (!preg_match("#tokens_count : (\d+)#is", $content, $r)) { continue; }
@@ -52,6 +56,10 @@ foreach($files as $id => $file) {
 
     $res = array($project, $initialSize, $size, $buildRoot, $tokenizer, $analyze, $final);
     $regression->addData(floor($final), [floor($size)]);
+    
+    if ($initialSize < $size) {
+        print "Tokens grown : $project\n";
+    }
     
     fputcsv($fp, $res);
     $total++;
