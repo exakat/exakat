@@ -40,7 +40,6 @@ class _As extends TokenAuto {
                                                        -1 => 'SUBNAME'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,
-//                               'addSemicolon' => 'it',
                                'rank'         => array(-1 => '0'));
         $this->checkAuto();
 
