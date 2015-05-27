@@ -32,7 +32,7 @@ class _Ppp extends TokenAuto {
     // class x { protected $x }
         $this->conditions = array( -1 => array('filterOut2' =>  'T_STATIC'),
                                     0 => array('token'      => _Ppp::$operators),
-                                    1 => array('atom'       => array('Variable', 'String', 'Staticconstant')),
+                                    1 => array('atom'       => array('Variable', 'String', 'Staticconstant', 'Identifier')),
                                     2 => array('filterOut'  => $values),
                                  );
         $this->actions = array('to_ppp'       => 1,
