@@ -5,48 +5,48 @@ Exakat Static Analyzer
 
 Exakat is a static analyzer for PHP. It applies the [clear PHP rules](http://github.com/dseguy/clearPHP/) to PHP code and provides a report on violations. 
 
-# Install Exakat
-## Install For Osx
-## Install For Debian
-## Other Installs
+# Version
+This manual is for Exakt version 0.2.0 (build 
 
+# Install Exakat
+* [Read the Install for Osx manual](./Installation.osx.md)
+* [Read the Install for Osx manual](./Installation.debian.md)
+* [Read the Generic install](./Installation.generic.md)
+
+# Check Install
+
+Once the prerequisite are installed, it is advised to run to check if all is found : 
+
+`php exakat.phar doctor`
+
+After this run, You may have to edit 'config/config.ini' to add some extra configuration. Most of the time, the default values will be OK.
 
 # Usage
 
+## A first test
 
-```sh
-mvn clean package
-# for TP3 use: mvn clean package -Dtp.version=3
-unzip target/neo4j-gremlin-plugin-*-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin
-$NEO4J_HOME/bin/neo4j restart
-```
-
-## A first tests using curl
-
-If everything went well, you should already see an empty success message when you access the Gremln REST endpoint.
+A simple run for the report : 
 
 ```
-$ curl -s -G http://localhost:7474/tp/gremlin/execute
-{
-    "success": true
-}
+$ php exakat.phar init -p sculpin -R https://github.com/sculpin/sculpin
 ```
 
-## Parameters
+This will init the project in the 'projects' folder, and clone the code with the provided repository. The name after `-p` will be reused later for all subsequent operations.
 
-| parameter  | format                          | description                                                |
-| ---------- | ------------------------------- | ---------------------------------------------------------- |
-| **script** | String                          | the Gremlin script to be evaluated                         |
-| **params** | JSON object                     | a map of parameters to bind to the script engine           |
-| **load**   | comma-separated list of Strings | a list of Gremlin scripts to execute prior to the 'script' |
+Then, you can run : 
+```
+$ php exakat.phar project -p sculpin 
+```
 
+This will run the whole analysis. 
 
+Once it is finished, you may find the result in `projects/sculpin/report`. Simply open the 'index.html' file in a browser (Note that Safari or Chrome have a security feature that will prevent them from loading directly the report. To avoid this, put the report on a webserver and open it again via http). 
 
 
 # Licenses
 
-* Neo4j Gremlin Plugin - Apache2
-* TinkerPop2 - [BSD](https://github.com/tinkerpop/gremlin/blob/master/LICENSE.txt)
+* Exakat - [GNU Affero General Public License](http://www.exakat.io/exakat-licence)
+* Neo4j Gremlin Plugin - [Apache2](https://github.com/neo4j-contrib/gremlin-plugin/blob/master/LICENSE.txt)
 * Neo4j - [Dual free software/commercial license](http://www.neo4j.org/learn/licensing)
 
 - - -
