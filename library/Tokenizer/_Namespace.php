@@ -58,6 +58,21 @@ class _Namespace extends TokenAuto {
                                'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
 
+        // namespace myproject ? >
+        $this->conditions = array(0 => array('token' => _Namespace::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => array('Identifier', 'Nsname')),
+                                  2 => array('token' => 'T_SEMICOLON'),
+                                  3 => array('token' => array('T_END', 'T_CLOSE_TAG')),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'NAMESPACE',
+                                                        2 => 'DROP',
+                                                        ),
+                               'atom'         => 'Namespace',
+                               'cleanIndex'   => true,
+                               'addAlwaysSemicolon' => 'it');
+        $this->checkAuto();
         // namespace A; atom ;  ? >
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),

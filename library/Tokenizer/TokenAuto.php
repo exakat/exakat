@@ -1651,7 +1651,10 @@ if (current.token == 'T_OPEN_PARENTHESIS') {
             $qactions[] = "
 /* to Sequence */
 
+// those may be unavailable, depending on the rule.
 b1 = it.in('NEXT').next();
+a1 = it.out('NEXT').next();
+
 if (it.atom == 'Sequence' && it.bracket == null) {
     current = it;
     rank = it.out('ELEMENT').count() - 1;
@@ -1678,10 +1681,13 @@ if (it.atom == 'Sequence' && it.bracket == null) {
 makeNext = false;
 
 // LOOPS
-while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) && (
-    (a1.atom == 'Sequence' && a1.bracket == null) || (a1.atom != null && a2.token in ['T_SEMICOLON', $endSequence])) ) { // && a2.atom == null
-    
-    if (a1.atom != null && a2.token == 'T_SEMICOLON' && a2.atom == null) {  // && a2.atom == null
+while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
+    UnprocessedSequence == 0 &&
+        (a1.atom != null) && 
+        ( (a1.atom == 'Sequence' && a1.bracket == null) || 
+          (a2.token in ['T_SEMICOLON', $endSequence]))) { 
+
+    if (a1.atom != null && a2.token == 'T_SEMICOLON' && a2.atom == null) {  
         if (a1.atom == 'Sequence') {
             a1.out('ELEMENT').each{
                 g.addEdge(current, it, 'ELEMENT');
@@ -1704,7 +1710,29 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) && (
 
         a2 = a1.out('NEXT').next(); 
         makeNext = true;
-    } else if (a1.atom != null && a2.token in [$endSequence]) { // && a2.atom == null
+    } else if (a1.atom != null && a2.token == 'T_SEMICOLON' && a2.atom == 'Sequence') {  
+        if (a1.atom == 'Sequence') {
+            MergingTwoSequences; 
+        } else {
+            a1.setProperty('rank', ++rank);
+            a1.bothE('NEXT').each{ g.removeEdge(it); }
+            g.addEdge(current, a1, 'ELEMENT');
+
+            a2.out('ELEMENT').each{
+                it.rank += rank;
+                it.inE('ELEMENT').each{ g.removeEdge(it); }
+                g.addEdge(current, it, 'ELEMENT');
+            }
+            g.idx('delete').put('node', 'delete', a2);
+            rank = current.out('ELEMENT').count();
+            
+            a1 = a2.out('NEXT').next();
+            a2.bothE('INDEXED', 'NEXT').each{ g.removeEdge(it); };
+            g.idx('delete').put('node', 'delete', a2);
+            a2 = a1.out('NEXT').next(); 
+        }
+        makeNext = true;
+    } else if (a1.atom != null && a2.token in [$endSequence]) { 
         if (a1.atom == 'Sequence') {
             a1.out('ELEMENT').each{
                 g.addEdge(current, it, 'ELEMENT');
@@ -1973,9 +2001,9 @@ a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ;
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+x.out('NEXT').out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     semicolon = it;
-    g.addEdge(x, it.out('NEXT').next(), 'NEXT');
+    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
     g.removeVertex(semicolon);
@@ -2698,7 +2726,7 @@ GREMLIN;
             $avoidSemicolon = "'T_SEMICOLON'";
 
             $qactions[] = <<<GREMLIN
-/* always adds a semicolon  */
+/* always adds a semicolon (except rare cases) */
 
 if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false) {
     semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
