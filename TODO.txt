@@ -1271,3 +1271,9 @@ delegation
 scalar typehint
 return typehint
 avoid session fixation : ext/session must use session_regenerate_id(true); somewhere (
+
+List differences between constants, variables, classes (const, method, property) interfaces and trait between versions (exclude the one from extensions, make a standard distribution).
+
+List some function for exclusion for security measures if they are not used in the code. 
+
+check the to_var (index with _) and remove them. 
