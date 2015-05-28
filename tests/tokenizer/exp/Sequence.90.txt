@@ -1,0 +1,61 @@
+;
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      W
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            Z
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : ARGUMENT
+          'Y'
+        Label : ARGUMENT
+          'X'
+Label : ELEMENT
+  Q
+Label : ELEMENT
+  R
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      'V'
+    Label : ARGUMENT
+      ::
+      Label : METHOD
+        T
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'U'
+      Label : CLASS
+        S
+Label : ELEMENT
+  void
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      I
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $a
+          Label : METHOD
+            J
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
