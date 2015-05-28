@@ -4,26 +4,6 @@ Label : CODE
   Label : ELEMENT
     class
     Label : NAME
-      x2
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          __clone
-        Label : BLOCK
-          void
-        Label : FINAL
-          final
-        Label : PUBLIC
-          public
-  Label : ELEMENT
-    class
-    Label : NAME
       x3
     Label : BLOCK
       ;
@@ -37,10 +17,30 @@ Label : CODE
           __clone
         Label : BLOCK
           void
-        Label : FINAL
-          final
         Label : PROTECTED
           protected
+        Label : FINAL
+          final
+  Label : ELEMENT
+    class
+    Label : NAME
+      x2
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          __clone
+        Label : BLOCK
+          void
+        Label : PUBLIC
+          public
+        Label : FINAL
+          final
   Label : ELEMENT
     class
     Label : NAME

@@ -1,259 +1,147 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      $a
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ->
-          Label : OBJECT
-            $this
-          Label : METHOD
-            D
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $a
-      Label : ELSE
-        elseif
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        if
         Label : CONDITION
-          instanceof
-          Label : VARIABLE
-            $a
-          Label : CLASS
-            E
+          C
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
         Label : THEN
           ;
           Label : ELEMENT
             ->
             Label : OBJECT
-              $a
+              $this
             Label : METHOD
-              F
+              D
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  $this
+                  $a
         Label : ELSE
           elseif
           Label : CONDITION
-            G
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $a
+            instanceof
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $a
           Label : THEN
-            void
+            ;
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                $a
+              Label : METHOD
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $this
           Label : ELSE
             elseif
             Label : CONDITION
-              H
+              G
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $a
             Label : THEN
-              ;
-              Label : ELEMENT
-                foreach
-                Label : VALUE
-                  =>
-                  Label : KEY
-                    $b
+              void
+            Label : ELSE
+              elseif
+              Label : CONDITION
+                H
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $a
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  foreach
+                  Label : SOURCE
+                    $a
                   Label : VALUE
-                    $c
-                Label : SOURCE
-                  $a
-                Label : BLOCK
-                  ;
-                  Label : ELEMENT
-                    ->
-                    Label : OBJECT
-                      $this
-                    Label : METHOD
-                      AB
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          $b
-                  Label : ELEMENT
-                    ->
-                    Label : OBJECT
-                      $this
-                    Label : METHOD
-                      AC
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          $d
-                  Label : ELEMENT
-                    ->
-                    Label : OBJECT
-                      $this
-                    Label : METHOD
-                      B
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          $c
-                  Label : ELEMENT
-                    ->
-                    Label : OBJECT
-                      $this
-                    Label : METHOD
-                      AE
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
+                    =>
+                    Label : VALUE
+                      $c
+                    Label : KEY
+                      $b
+                  Label : BLOCK
+                    ;
+                    Label : ELEMENT
+                      ->
+                      Label : OBJECT
+                        $this
+                      Label : METHOD
+                        AB
+                        Label : ARGUMENTS
                           void
-                  Label : ELEMENT
-                    if
-                    Label : CONDITION
-                      J
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          $b
-                    Label : THEN
-                      ;
-                      Label : ELEMENT
-                        =
-                        Label : RIGHT
-                          [
-                          Label : VARIABLE
+                          Label : ARGUMENT
+                            $b
+                    Label : ELEMENT
+                      ->
+                      Label : OBJECT
+                        $this
+                      Label : METHOD
+                        AC
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $d
+                    Label : ELEMENT
+                      ->
+                      Label : OBJECT
+                        $this
+                      Label : METHOD
+                        B
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
                             $c
-                          Label : INDEX
-                            'M'
-                        Label : LEFT
-                          $b
-                      Label : ELEMENT
-                        =
-                        Label : RIGHT
-                          [
-                          Label : VARIABLE
-                            $c
-                          Label : INDEX
-                            'O'
-                        Label : LEFT
-                          $c
-                      Label : ELEMENT
-                        =
-                        Label : RIGHT
-                          ?
-                          Label : CONDITION
-                            isset
-                            Label : ARGUMENTS
-                              void
-                              Label : ARGUMENT
-                                [
-                                Label : VARIABLE
-                                  $c
-                                Label : INDEX
-                                  'R'
-                          Label : THEN
-                            [
-                            Label : VARIABLE
-                              $c
-                            Label : INDEX
-                              'R'
-                          Label : ELSE
-                            [
-                            Label : ARGUMENTS
-                              void
-                              Label : ARGUMENTS
-                                void
-                        Label : LEFT
-                          $d
-                      Label : ELEMENT
-                        if
-                        Label : CONDITION
-                          ||
-                          Label : RIGHT
-                            ||
-                            Label : RIGHT
-                              !
-                              Label : NOT
-                                L
-                                Label : ARGUMENTS
-                                  Arguments
-                                  Label : ARGUMENT
-                                    $c
-                                  Label : ARGUMENT
-                                    'O'
-                            Label : LEFT
-                              !
-                              Label : NOT
-                                L
-                                Label : ARGUMENTS
-                                  Arguments
-                                  Label : ARGUMENT
-                                    $c
-                                  Label : ARGUMENT
-                                    'M'
-                          Label : LEFT
-                            !
-                            Label : NOT
-                              H
-                              Label : ARGUMENTS
-                                void
-                                Label : ARGUMENT
-                                  $c
-                        Label : THEN
-                          ;
-                          Label : ELEMENT
-                            throw
-                            Label : THROW
-                              new
-                              Label : NEW
-                                P
-                                Label : ARGUMENTS
-                                  void
-                                  Label : ARGUMENT
-                                    'Q'
-                    Label : ELSE
-                      elseif
-                      Label : CONDITION
-                        &&
-                        Label : RIGHT
-                          L
-                          Label : ARGUMENTS
-                            Arguments
-                            Label : ARGUMENT
-                              $c
-                            Label : ARGUMENT
-                              'O'
-                        Label : LEFT
-                          H
-                          Label : ARGUMENTS
+                    Label : ELEMENT
+                      ->
+                      Label : OBJECT
+                        $this
+                      Label : METHOD
+                        AE
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
                             void
-                            Label : ARGUMENT
-                              $c
+                    Label : ELEMENT
+                      
+                    Label : ELEMENT
+                      if
+                      Label : CONDITION
+                        J
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $b
                       Label : THEN
                         ;
-                        Label : ELEMENT
-                          =
-                          Label : RIGHT
-                            [
-                            Label : VARIABLE
-                              $c
-                            Label : INDEX
-                              'O'
-                          Label : LEFT
-                            $c
                         Label : ELEMENT
                           =
                           Label : RIGHT
@@ -282,51 +170,175 @@ Label : CODE
                                   void
                           Label : LEFT
                             $d
-                      Label : ELSE
-                        ;
                         Label : ELEMENT
                           =
                           Label : RIGHT
                             [
-                            Label : ARGUMENTS
-                              void
-                              Label : ARGUMENTS
-                                void
+                            Label : VARIABLE
+                              $c
+                            Label : INDEX
+                              'M'
                           Label : LEFT
-                            $d
-              Label : ELEMENT
-                I
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $a
-            Label : ELSE
-              elseif
-              Label : CONDITION
-                AF
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $a
-              Label : THEN
-                ;
-                Label : ELEMENT
-                  throw
-                  Label : THROW
-                    new
-                    Label : NEW
-                      P
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          Concatenation
-                          Label : CONCAT
-                            AI
+                            $b
+                        Label : ELEMENT
+                          =
+                          Label : RIGHT
+                            [
+                            Label : VARIABLE
+                              $c
+                            Label : INDEX
+                              'O'
+                          Label : LEFT
+                            $c
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            ||
+                            Label : RIGHT
+                              ||
+                              Label : RIGHT
+                                !
+                                Label : NOT
+                                  L
+                                  Label : ARGUMENTS
+                                    Arguments
+                                    Label : ARGUMENT
+                                      $c
+                                    Label : ARGUMENT
+                                      'O'
+                              Label : LEFT
+                                !
+                                Label : NOT
+                                  L
+                                  Label : ARGUMENTS
+                                    Arguments
+                                    Label : ARGUMENT
+                                      $c
+                                    Label : ARGUMENT
+                                      'M'
+                            Label : LEFT
+                              !
+                              Label : NOT
+                                H
+                                Label : ARGUMENTS
+                                  void
+                                  Label : ARGUMENT
+                                    $c
+                          Label : THEN
+                            ;
+                            Label : ELEMENT
+                              throw
+                              Label : THROW
+                                new
+                                Label : NEW
+                                  P
+                                  Label : ARGUMENTS
+                                    void
+                                    Label : ARGUMENT
+                                      'Q'
+                      Label : ELSE
+                        elseif
+                        Label : CONDITION
+                          &&
+                          Label : RIGHT
+                            L
+                            Label : ARGUMENTS
+                              Arguments
+                              Label : ARGUMENT
+                                $c
+                              Label : ARGUMENT
+                                'O'
+                          Label : LEFT
+                            H
                             Label : ARGUMENTS
                               void
                               Label : ARGUMENT
-                                $a
-                          Label : CONCAT
-                            'AH'
-  Label : NAME
-    B
+                                $c
+                        Label : THEN
+                          ;
+                          Label : ELEMENT
+                            =
+                            Label : RIGHT
+                              [
+                              Label : VARIABLE
+                                $c
+                              Label : INDEX
+                                'O'
+                            Label : LEFT
+                              $c
+                          Label : ELEMENT
+                            =
+                            Label : RIGHT
+                              ?
+                              Label : CONDITION
+                                isset
+                                Label : ARGUMENTS
+                                  void
+                                  Label : ARGUMENT
+                                    [
+                                    Label : VARIABLE
+                                      $c
+                                    Label : INDEX
+                                      'R'
+                              Label : THEN
+                                [
+                                Label : VARIABLE
+                                  $c
+                                Label : INDEX
+                                  'R'
+                              Label : ELSE
+                                [
+                                Label : ARGUMENTS
+                                  void
+                                  Label : ARGUMENTS
+                                    void
+                            Label : LEFT
+                              $d
+                        Label : ELSE
+                          ;
+                          Label : ELEMENT
+                            =
+                            Label : RIGHT
+                              [
+                              Label : ARGUMENTS
+                                void
+                                Label : ARGUMENTS
+                                  void
+                            Label : LEFT
+                              $d
+                Label : ELEMENT
+                  I
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $a
+              Label : ELSE
+                elseif
+                Label : CONDITION
+                  AF
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $a
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    throw
+                    Label : THROW
+                      new
+                      Label : NEW
+                        P
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            Concatenation
+                            Label : CONCAT
+                              AI
+                              Label : ARGUMENTS
+                                void
+                                Label : ARGUMENT
+                                  $a
+                            Label : CONCAT
+                              'AH'
+    Label : NAME
+      B

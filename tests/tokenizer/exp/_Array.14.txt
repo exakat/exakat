@@ -5,28 +5,6 @@ Label : CODE
   Label : ELEMENT
     {
     Label : VARIABLE
-      [
-      Label : VARIABLE
-        {
-        Label : VARIABLE
-          $f
-        Label : INDEX
-          3
-      Label : INDEX
-        4
-    Label : INDEX
-      -
-      Label : RIGHT
-        1
-      Label : LEFT
-        strlen
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $dd
-  Label : ELEMENT
-    {
-    Label : VARIABLE
       {
       Label : VARIABLE
         $e
@@ -86,6 +64,28 @@ Label : CODE
           void
           Label : ARGUMENT
             $cc
+  Label : ELEMENT
+    {
+    Label : VARIABLE
+      [
+      Label : VARIABLE
+        {
+        Label : VARIABLE
+          $f
+        Label : INDEX
+          3
+      Label : INDEX
+        4
+    Label : INDEX
+      -
+      Label : RIGHT
+        1
+      Label : LEFT
+        strlen
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $dd
   Label : ELEMENT
     {
     Label : VARIABLE

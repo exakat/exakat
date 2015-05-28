@@ -3,6 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $a
+  Label : ELEMENT
     if
     Label : CONDITION
       3
@@ -22,12 +28,6 @@ Label : CODE
           4
         Label : LEFT
           $d
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a
   Label : ELEMENT
     if
     Label : CONDITION

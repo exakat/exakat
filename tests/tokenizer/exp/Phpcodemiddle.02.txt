@@ -4,13 +4,13 @@ Label : ELEMENT
   Label : CODE
     ;
     Label : ELEMENT
-      B
-    Label : ELEMENT
       echo
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $b
+    Label : ELEMENT
+      B
     Label : ELEMENT
       echo
       Label : ARGUMENTS

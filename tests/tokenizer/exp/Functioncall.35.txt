@@ -1,6 +1,8 @@
 <?php
 
 Label : CODE
-  exit
-  Label : ARGUMENTS
-    void
+  ;
+  Label : ELEMENT
+    exit
+    Label : ARGUMENTS
+      void

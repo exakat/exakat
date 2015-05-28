@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    1
-  Label : THEN
-    ;
-    Label : ELEMENT
-      2
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        2

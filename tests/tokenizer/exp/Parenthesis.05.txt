@@ -1,6 +1,8 @@
 <?php
 
 Label : CODE
-  (
-  Label : CODE
-    true
+  ;
+  Label : ELEMENT
+    (
+    Label : CODE
+      true

@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  **
-  Label : RIGHT
-    34
-  Label : LEFT
-    '2'
+  ;
+  Label : ELEMENT
+    **
+    Label : RIGHT
+      34
+    Label : LEFT
+      '2'

@@ -1,19 +1,23 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    $a
-  Label : THEN
-    ;
-    Label : ELEMENT
-      B
-    Label : ELEMENT
-      C
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $location
-    Label : ELEMENT
-      A
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $location
+      Label : ELEMENT
+        A

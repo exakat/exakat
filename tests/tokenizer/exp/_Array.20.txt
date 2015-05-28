@@ -100,23 +100,23 @@ Label : CODE
             4.3
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       ;
       Label : ELEMENT
         const
-        Label : NAME
-          A
         Label : VALUE
           array
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
               =>
-              Label : VALUE
-                3
               Label : KEY
                 2
+              Label : VALUE
+                3
             Label : ARGUMENT
               1
-    Label : NAME
-      x
+        Label : NAME
+          A

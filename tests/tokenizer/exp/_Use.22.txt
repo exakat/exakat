@@ -1,48 +1,45 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      isset
+;
+Label : ELEMENT
+  if
+  Label : CONDITION
+    isset
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          $this
+        Label : INDEX
+          'F'
+  Label : THEN
+    ;
+    Label : ELEMENT
+      echo
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $this
-          Label : INDEX
-            'F'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              H
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $this
-                  Label : INDEX
-                    'F'
-            Label : CONCAT
-              'G'
-  Label : ELEMENT
-    E
-  Label : ELEMENT
-    use
-    Label : USE
-      \
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
+          Concatenation
+          Label : CONCAT
+            H
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $this
+                Label : INDEX
+                  'F'
+          Label : CONCAT
+            'G'
+Label : ELEMENT
+  E
+Label : ELEMENT
+  use
+  Label : USE
+    \
+    Label : SUBNAME
+      D
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B

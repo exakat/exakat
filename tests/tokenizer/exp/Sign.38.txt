@@ -1,71 +1,73 @@
 <?php 
 Label : CODE
-  =
-  Label : RIGHT
-    +
+  ;
+  Label : ELEMENT
+    =
     Label : RIGHT
-      *
+      +
       Label : RIGHT
-        cos
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            deg2rad
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                abs
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    -
-                    Label : RIGHT
-                      ->
-                      Label : OBJECT
-                        $e
-                      Label : METHOD
-                        getX
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            void
-                    Label : LEFT
-                      ->
-                      Label : OBJECT
-                        $c
-                      Label : METHOD
-                        d
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            void
-      Label : LEFT
         *
         Label : RIGHT
           cos
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              $d
+              deg2rad
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  abs
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      -
+                      Label : RIGHT
+                        ->
+                        Label : OBJECT
+                          $e
+                        Label : METHOD
+                          getX
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              void
+                      Label : LEFT
+                        ->
+                        Label : OBJECT
+                          $c
+                        Label : METHOD
+                          d
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              void
         Label : LEFT
-          cos
+          *
+          Label : RIGHT
+            cos
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $d
+          Label : LEFT
+            cos
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+      Label : LEFT
+        *
+        Label : RIGHT
+          sin
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              $c
+              $b
+        Label : LEFT
+          sin
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
     Label : LEFT
-      *
-      Label : RIGHT
-        sin
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-      Label : LEFT
-        sin
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a
-  Label : LEFT
-    $z
+      $z

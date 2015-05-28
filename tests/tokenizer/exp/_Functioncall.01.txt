@@ -5,16 +5,16 @@ Label : CODE
     E
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      F
     Label : VALUE
       =>
-      Label : VALUE
-        $d
       Label : KEY
         $c
+      Label : VALUE
+        $d
     Label : SOURCE
       $b
+    Label : BLOCK
+      F
   Label : ELEMENT
     echo
     Label : ARGUMENTS

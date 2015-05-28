@@ -1,40 +1,42 @@
 <?php
 
 Label : CODE
-  return
-  Label : RETURN
-    (
-    Label : CODE
-      new
-      Label : NEW
-        Date
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            mktime
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $b
-                Label : PROPERTY
-                  year
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                +
-                Label : RIGHT
-                  1
-                Label : LEFT
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      (
+      Label : CODE
+        new
+        Label : NEW
+          Date
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              mktime
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
                   ->
                   Label : OBJECT
-                    $a
+                    $b
                   Label : PROPERTY
-                    month
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                0
+                    year
+                Label : ARGUMENT
+                  0
+                Label : ARGUMENT
+                  +
+                  Label : RIGHT
+                    1
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $a
+                    Label : PROPERTY
+                      month
+                Label : ARGUMENT
+                  0
+                Label : ARGUMENT
+                  0
+                Label : ARGUMENT
+                  0

@@ -1,27 +1,17 @@
 <?php
 
 Label : CODE
-  return
-  Label : RETURN
-    %
-    Label : RIGHT
-      7
-    Label : LEFT
-      (
-      Label : CODE
-        +
-        Label : RIGHT
-          (int)
-          Label : CAST
-            (
-            Label : CODE
-              /
-              Label : RIGHT
-                6
-              Label : LEFT
-                $f
-        Label : LEFT
-          -
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      %
+      Label : RIGHT
+        7
+      Label : LEFT
+        (
+        Label : CODE
+          +
           Label : RIGHT
             (int)
             Label : CAST
@@ -29,11 +19,11 @@ Label : CODE
               Label : CODE
                 /
                 Label : RIGHT
-                  5
+                  6
                 Label : LEFT
-                  $e
+                  $f
           Label : LEFT
-            +
+            -
             Label : RIGHT
               (int)
               Label : CAST
@@ -41,28 +31,40 @@ Label : CODE
                 Label : CODE
                   /
                   Label : RIGHT
-                    4
+                    5
                   Label : LEFT
-                    $d
+                    $e
             Label : LEFT
-              (int)
-              Label : CAST
-                +
-                Label : RIGHT
-                  3
-                Label : LEFT
+              +
+              Label : RIGHT
+                (int)
+                Label : CAST
+                  (
+                  Label : CODE
+                    /
+                    Label : RIGHT
+                      4
+                    Label : LEFT
+                      $d
+              Label : LEFT
+                (int)
+                Label : CAST
                   +
                   Label : RIGHT
-                    $c
+                    3
                   Label : LEFT
-                    (
-                    Label : CODE
-                      /
-                      Label : RIGHT
-                        2
-                      Label : LEFT
-                        *
+                    +
+                    Label : RIGHT
+                      $c
+                    Label : LEFT
+                      (
+                      Label : CODE
+                        /
                         Label : RIGHT
-                          $b
+                          2
                         Label : LEFT
-                          $a
+                          *
+                          Label : RIGHT
+                            $b
+                          Label : LEFT
+                            $a

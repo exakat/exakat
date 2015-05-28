@@ -2,6 +2,9 @@
 Label : CODE
   ;
   Label : ELEMENT
+    J
+
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
@@ -39,9 +42,6 @@ Label : CODE
           'H'
         Label : ELSE
           'I'
-  Label : ELEMENT
-    J
-
   Label : ELEMENT
     echo
     Label : ARGUMENTS

@@ -1,22 +1,22 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    [
-    Label : VARIABLE
-      $a
-    Label : INDEX
-      'b'
-  Label : THEN
-    ;
-    Label : ELEMENT
-      do
-      Label : CONDITION
-        $x
-      Label : BLOCK
-        ;
-        Label : ELEMENT
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        do
+        Label : CONDITION
+          $x
+        Label : BLOCK
           ;
           Label : ELEMENT
             =

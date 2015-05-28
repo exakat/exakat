@@ -18,10 +18,10 @@ Label : CODE
       [
       Label : VARIABLE
         ::
-        Label : PROPERTY
-          $a
         Label : CLASS
           self
+        Label : PROPERTY
+          $a
       Label : INDEX
         $b
     Label : PROPERTY

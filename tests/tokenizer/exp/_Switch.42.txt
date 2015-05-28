@@ -16,8 +16,6 @@ Label : CODE
             new
             Label : NEW
               \
-              Label : SUBNAME
-                M
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
@@ -32,8 +30,16 @@ Label : CODE
                           $f
                     Label : ARGUMENT
                       'O'
+              Label : SUBNAME
+                M
     Label : ELEMENT
       case
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          return
+          Label : RETURN
+            'L'
       Label : CASE
         instanceof
         Label : VARIABLE
@@ -42,14 +48,14 @@ Label : CODE
           \
           Label : SUBNAME
             K
+    Label : ELEMENT
+      case
       Label : CODE
-        Block with Sequence For Case
+        ;
         Label : ELEMENT
           return
           Label : RETURN
-            'L'
-    Label : ELEMENT
-      case
+            'J'
       Label : CASE
         instanceof
         Label : VARIABLE
@@ -58,14 +64,14 @@ Label : CODE
           \
           Label : SUBNAME
             I
+    Label : ELEMENT
+      case
       Label : CODE
         ;
         Label : ELEMENT
           return
           Label : RETURN
-            'J'
-    Label : ELEMENT
-      case
+            'H'
       Label : CASE
         instanceof
         Label : VARIABLE
@@ -74,14 +80,14 @@ Label : CODE
           \
           Label : SUBNAME
             G
+    Label : ELEMENT
+      case
       Label : CODE
         ;
         Label : ELEMENT
           return
           Label : RETURN
-            'H'
-    Label : ELEMENT
-      case
+            'F'
       Label : CASE
         instanceof
         Label : VARIABLE
@@ -90,14 +96,14 @@ Label : CODE
           \
           Label : SUBNAME
             E
+    Label : ELEMENT
+      case
       Label : CODE
         ;
         Label : ELEMENT
           return
           Label : RETURN
-            'F'
-    Label : ELEMENT
-      case
+            'D'
       Label : CASE
         instanceof
         Label : VARIABLE
@@ -106,9 +112,3 @@ Label : CODE
           \
           Label : SUBNAME
             C
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            'D'

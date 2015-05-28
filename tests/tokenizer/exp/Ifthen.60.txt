@@ -1,24 +1,32 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    $a
-  Label : THEN
-    ;
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        $b
-  Label : ELSE
-    elseif
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
     Label : CONDITION
-      $b
+      $a
     Label : THEN
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
-          $c
+          $b
     Label : ELSE
       elseif
       Label : CONDITION
@@ -80,8 +88,18 @@ Label : CODE
                     Label : POSTPLUSPLUS
                       $c
                 Label : ELSE
-                  ;
-                  Label : ELEMENT
-                    ++
-                    Label : POSTPLUSPLUS
-                      $d
+                  elseif
+                  Label : CONDITION
+                    $b
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $c
+                  Label : ELSE
+                    ;
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $d

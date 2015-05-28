@@ -3,6 +3,56 @@
 Label : CODE
   ;
   Label : ELEMENT
+    if
+    Label : CONDITION
+      O
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            'S'
+          Label : CONCAT
+            ::
+            Label : CLASS
+              P
+            Label : METHOD
+              Q
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'R'
+    Label : THEN
+      void
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    H
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'I'
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    M
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'N'
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    J
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        'L'
+      Label : ARGUMENT
+        'K'
+  Label : ELEMENT
+    void
+  Label : ELEMENT
     D
     Label : ARGUMENTS
       Arguments
@@ -32,7 +82,7 @@ Label : CODE
       void
       Label : ARGUMENT
         $a
-    Label : BLOCK
-      void
     Label : NAME
       B
+    Label : BLOCK
+      void

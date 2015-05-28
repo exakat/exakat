@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    (integer)
-    Label : CAST
-      $b
-  Label : LEFT
-    [
-    Label : VARIABLE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (integer)
+      Label : CAST
+        $b
+    Label : LEFT
       [
       Label : VARIABLE
-        $a
+        [
+        Label : VARIABLE
+          $a

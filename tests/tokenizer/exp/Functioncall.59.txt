@@ -1,26 +1,28 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    str_replace
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        (string)
-        Label : CAST
-          $c
-      Label : ARGUMENT
-        'A'
-      Label : ARGUMENT
-        array
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'B'
-          Label : ARGUMENT
-            'C'
-          Label : ARGUMENT
-            'D'
-  Label : LEFT
-    $a
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      str_replace
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          (string)
+          Label : CAST
+            $c
+        Label : ARGUMENT
+          'A'
+        Label : ARGUMENT
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'B'
+            Label : ARGUMENT
+              'C'
+            Label : ARGUMENT
+              'D'
+    Label : LEFT
+      $a

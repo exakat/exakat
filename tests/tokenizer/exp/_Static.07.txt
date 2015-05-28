@@ -16,15 +16,15 @@ Label : CODE
         static
         Label : VALUE
           Void
-        Label : STATIC
-          static
         Label : DEFINE
           $z
+        Label : STATIC
+          static
   Label : ELEMENT
     static
     Label : VALUE
       Void
-    Label : STATIC
-      static
     Label : DEFINE
       $x
+    Label : STATIC
+      static

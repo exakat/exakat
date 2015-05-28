@@ -3,73 +3,21 @@
 Label : CODE
   ;
   Label : ELEMENT
+    global
+    Label : GLOBAL
+      $
+      Label : NAME
+        ->
+        Label : OBJECT
+          $foo
+        Label : PROPERTY
+          bar
+  Label : ELEMENT
     =
     Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'c'
-          Label : VALUE
-            'Yes'
+      'a'
     Label : LEFT
-      $b
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $
-      Label : NAME
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $
-      Label : NAME
-        $a
-  Label : ELEMENT
-    $
-    Label : NAME
-      $a
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $
-        Label : NAME
-          {
-          Label : VARIABLE
-            $foo
-          Label : INDEX
-            'bar'
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $
-      Label : NAME
-        {
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $
-        Label : NAME
-          [
-          Label : VARIABLE
-            $foo
-          Label : INDEX
-            'bar'
+      $Yes
   Label : ELEMENT
     =
     Label : RIGHT
@@ -87,19 +35,71 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      'a'
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'c'
+          Label : VALUE
+            'Yes'
     Label : LEFT
-      $Yes
+      $b
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $
+        Label : NAME
+          {
+          Label : VARIABLE
+            $foo
+          Label : INDEX
+            'bar'
   Label : ELEMENT
     global
     Label : GLOBAL
       $
       Label : NAME
-        ->
-        Label : OBJECT
-          $foo
-        Label : PROPERTY
-          bar
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'c'
+  Label : ELEMENT
+    $
+    Label : NAME
+      $a
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $
+      Label : NAME
+        $a
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $
+        Label : NAME
+          [
+          Label : VARIABLE
+            $foo
+          Label : INDEX
+            'bar'
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $
+      Label : NAME
+        {
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'c'
   Label : ELEMENT
     =
     Label : RIGHT

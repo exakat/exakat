@@ -1,24 +1,26 @@
 <?php
 
 Label : CODE
-  return
-  Label : RETURN
-    Concatenation
-    Label : CONCAT
-      ->
-      Label : OBJECT
-        $c
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      Concatenation
+      Label : CONCAT
+        ->
+        Label : OBJECT
+          $c
+        Label : METHOD
+          d
+          Label : ARGUMENTS
             void
-    Label : CONCAT
-      'b'
-    Label : CONCAT
-      ::
-      Label : CLASS
-        self
-      Label : CONSTANT
-        a
+            Label : ARGUMENT
+              void
+      Label : CONCAT
+        'b'
+      Label : CONCAT
+        ::
+        Label : CLASS
+          self
+        Label : CONSTANT
+          a

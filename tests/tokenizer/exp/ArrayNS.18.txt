@@ -10,21 +10,21 @@ Label : CODE
         void
       Label : ARGUMENT
         =>
-        Label : KEY
-          'D'
         Label : VALUE
           2
+        Label : KEY
+          'D'
       Label : ARGUMENT
         =>
-        Label : KEY
-          'C'
         Label : VALUE
           1
+        Label : KEY
+          'C'
       Label : ARGUMENT
         =>
-        Label : KEY
-          'B'
         Label : VALUE
           0
+        Label : KEY
+          'B'
   Label : LEFT
     $a

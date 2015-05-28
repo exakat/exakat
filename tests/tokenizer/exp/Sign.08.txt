@@ -1,6 +1,8 @@
 <?php
 
 Label : CODE
-  -
-  Label : SIGN
-    $x
+  ;
+  Label : ELEMENT
+    -
+    Label : SIGN
+      $x

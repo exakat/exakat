@@ -1,29 +1,27 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    B
-  Label : ELEMENT
-    include
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          'b.php'
-  Label : ELEMENT
-    b
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'c'
-  Label : ELEMENT
-    A
-  Label : ELEMENT
-    include
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          'a.php'
+;
+Label : ELEMENT
+  A
+Label : ELEMENT
+  B
+Label : ELEMENT
+  include
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      (
+      Label : CODE
+        'b.php'
+Label : ELEMENT
+  b
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      'c'
+Label : ELEMENT
+  include
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      (
+      Label : CODE
+        'a.php'

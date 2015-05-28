@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  f
-  Label : ARGUMENTS
-    Arguments
-    Label : ARGUMENT
-      3.4
-    Label : ARGUMENT
-      1.2
+  ;
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        3.4
+      Label : ARGUMENT
+        1.2

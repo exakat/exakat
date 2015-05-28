@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    2
-  Label : LEFT
-    [
-    Label : VARIABLE
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      [
+      Label : VARIABLE
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          b

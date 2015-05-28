@@ -1,23 +1,29 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    ==
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a
-  Label : THEN
-    void
-  Label : ELSE
-    elseif
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
     Label : CONDITION
       ==
       Label : RIGHT
         1
       Label : LEFT
-        $b
+        $a
     Label : THEN
       void
     Label : ELSE
-      void
+      elseif
+      Label : CONDITION
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $b
+      Label : THEN
+        void
+      Label : ELSE
+        void

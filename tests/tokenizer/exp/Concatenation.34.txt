@@ -1,26 +1,28 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    "
-    Label : CONTAINS
-      Concatenation
-      Label : CONCAT
-        [
-        Label : VARIABLE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              properties
+          Label : INDEX
+            'prefix'
+        Label : CONCAT
           ->
           Label : OBJECT
-            $this
+            $node
           Label : PROPERTY
-            properties
-        Label : INDEX
-          'prefix'
-      Label : CONCAT
-        ->
-        Label : OBJECT
-          $node
-        Label : PROPERTY
-          id
-  Label : LEFT
-    $x
+            id
+    Label : LEFT
+      $x

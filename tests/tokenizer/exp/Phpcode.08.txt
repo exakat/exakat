@@ -2,8 +2,6 @@
 
 Label : CODE
   namespace
-  Label : BLOCK
-    void
   Label : NAMESPACE
     \
     Label : SUBNAME

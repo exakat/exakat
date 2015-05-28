@@ -2,16 +2,6 @@
 
 Label : CODE
   interface
-  Label : NAME
-    a
-  Label : EXTENDS
-    Arguments
-    Label : EXTENDS
-      d
-    Label : EXTENDS
-      c
-    Label : EXTENDS
-      b
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -22,3 +12,13 @@ Label : CODE
           void
       Label : NAME
         x
+  Label : NAME
+    a
+  Label : EXTENDS
+    Arguments
+    Label : EXTENDS
+      d
+    Label : EXTENDS
+      c
+    Label : EXTENDS
+      b

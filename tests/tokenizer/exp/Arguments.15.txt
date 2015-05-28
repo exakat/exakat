@@ -1,54 +1,56 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      ||
-      Label : RIGHT
-        (
-        Label : CODE
-          &&
-          Label : RIGHT
-            (
-            Label : CODE
-              ||
-              Label : RIGHT
-                [
-                Label : VARIABLE
-                  $h
-                Label : INDEX
-                  'i'
-              Label : LEFT
-                [
-                Label : VARIABLE
-                  $f
-                Label : INDEX
-                  'g'
-          Label : LEFT
-            [
-            Label : VARIABLE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ||
+        Label : RIGHT
+          (
+          Label : CODE
+            &&
+            Label : RIGHT
+              (
+              Label : CODE
+                ||
+                Label : RIGHT
+                  [
+                  Label : VARIABLE
+                    $h
+                  Label : INDEX
+                    'i'
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'g'
+            Label : LEFT
               [
               Label : VARIABLE
-                $C
+                [
+                Label : VARIABLE
+                  $C
+                Label : INDEX
+                  'd'
               Label : INDEX
-                'd'
+                'e'
+        Label : LEFT
+          (
+          Label : CODE
+            [
+            Label : VARIABLE
+              $a
             Label : INDEX
-              'e'
-      Label : LEFT
-        (
-        Label : CODE
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
+              'b'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        a
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
             'b'
-  Label : THEN
-    ;
-    Label : ELEMENT
-      a
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'b'

@@ -7,15 +7,17 @@ Label : CODE
   Label : THEN
     ;
     Label : ELEMENT
+      
+    Label : ELEMENT
       ;
       Label : ELEMENT
         ->
         Label : OBJECT
           ::
-          Label : PROPERTY
-            $b
           Label : CLASS
             B
+          Label : PROPERTY
+            $b
         Label : METHOD
           K
           Label : ARGUMENTS
@@ -30,10 +32,10 @@ Label : CODE
             ->
             Label : OBJECT
               ::
-              Label : PROPERTY
-                $b
               Label : CLASS
                 B
+              Label : PROPERTY
+                $b
             Label : METHOD
               K
               Label : ARGUMENTS
@@ -44,10 +46,10 @@ Label : CODE
             ->
             Label : OBJECT
               ::
-              Label : PROPERTY
-                $b
               Label : CLASS
                 B
+              Label : PROPERTY
+                $b
             Label : METHOD
               I
               Label : ARGUMENTS
@@ -58,10 +60,10 @@ Label : CODE
             ->
             Label : OBJECT
               ::
-              Label : PROPERTY
-                $b
               Label : CLASS
                 B
+              Label : PROPERTY
+                $b
             Label : METHOD
               C
               Label : ARGUMENTS
@@ -72,10 +74,10 @@ Label : CODE
             ->
             Label : OBJECT
               ::
-              Label : PROPERTY
-                $b
               Label : CLASS
                 B
+              Label : PROPERTY
+                $b
             Label : METHOD
               K
               Label : ARGUMENTS
@@ -86,10 +88,10 @@ Label : CODE
             ->
             Label : OBJECT
               ::
-              Label : PROPERTY
-                $b
               Label : CLASS
                 B
+              Label : PROPERTY
+                $b
             Label : METHOD
               I
               Label : ARGUMENTS
@@ -100,10 +102,10 @@ Label : CODE
             ->
             Label : OBJECT
               ::
-              Label : PROPERTY
-                $b
               Label : CLASS
                 B
+              Label : PROPERTY
+                $b
             Label : METHOD
               C
               Label : ARGUMENTS
@@ -114,10 +116,10 @@ Label : CODE
       ->
       Label : OBJECT
         ::
-        Label : PROPERTY
-          $b
         Label : CLASS
           B
+        Label : PROPERTY
+          $b
       Label : METHOD
         C
         Label : ARGUMENTS

@@ -3,10 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    GOTO
-    Label : LABEL
-      cleanupCookie
-  Label : ELEMENT
     switch
     Label : NAME
       $x
@@ -15,11 +11,13 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
+          Void
         Label : CASE
           1
+  Label : ELEMENT
+    GOTO
+    Label : LABEL
+      cleanupCookie
   Label : ELEMENT
     :
     Label : LABEL

@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -36,14 +30,14 @@ Label : CODE
         $b
     Label : NAME
       a2
-  Label : ELEMENT
-    function
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $x
+  Label : ELEMENT
+    function
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -72,3 +66,9 @@ Label : CODE
         $b
     Label : NAME
       a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

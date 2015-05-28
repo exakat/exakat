@@ -3,42 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    $
-    Label : NAME
-      ;
-      Label : ELEMENT
-        [
-        Label : VARIABLE
-          [
-          Label : VARIABLE
-            $foo
-          Label : INDEX
-            'bar'
-        Label : INDEX
-          'baz'
-  Label : ELEMENT
-    [
-    Label : VARIABLE
-      ->
-      Label : OBJECT
-        $foo
-      Label : PROPERTY
-        $bar
-    Label : INDEX
-      'baz'
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $foo
-    Label : PROPERTY
-      ;
-      Label : ELEMENT
-        [
-        Label : VARIABLE
-          $bar
-        Label : INDEX
-          'baz'
-  Label : ELEMENT
     ->
     Label : OBJECT
       $foo
@@ -55,19 +19,13 @@ Label : CODE
   Label : ELEMENT
     [
     Label : VARIABLE
-      ::
+      ->
+      Label : OBJECT
+        $foo
       Label : PROPERTY
         $bar
-      Label : CLASS
-        Foo
     Label : INDEX
       'baz'
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : NAME
-      [
   Label : ELEMENT
     ::
     Label : METHOD
@@ -84,6 +42,10 @@ Label : CODE
       Foo
   Label : ELEMENT
     [
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
     Label : VARIABLE
       ->
       Label : OBJECT
@@ -92,12 +54,50 @@ Label : CODE
         $bar
     Label : INDEX
       'baz'
+    Label : NAME
+      [
+  Label : ELEMENT
+    [
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
+    Label : VARIABLE
+      ::
+      Label : CLASS
+        Foo
+      Label : PROPERTY
+        $bar
+    Label : INDEX
+      'baz'
     Label : NAME
       [
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $foo
+    Label : PROPERTY
+      ;
+      Label : ELEMENT
+        [
+        Label : VARIABLE
+          $bar
+        Label : INDEX
+          'baz'
+  Label : ELEMENT
+    $
+    Label : NAME
+      ;
+      Label : ELEMENT
+        [
+        Label : VARIABLE
+          [
+          Label : VARIABLE
+            $foo
+          Label : INDEX
+            'bar'
+        Label : INDEX
+          'baz'
   Label : ELEMENT
     $
     Label : NAME

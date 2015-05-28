@@ -7,6 +7,8 @@ Label : ELEMENT
     void
     Label : ARGUMENT
       ::
+      Label : CLASS
+        D
       Label : METHOD
         E
         Label : ARGUMENTS
@@ -17,24 +19,26 @@ Label : ELEMENT
               Arguments
               Label : ARGUMENT
                 =>
-                Label : VALUE
-                  'S'
                 Label : KEY
                   'R'
+                Label : VALUE
+                  'S'
               Label : ARGUMENT
                 =>
-                Label : VALUE
-                  'Q'
                 Label : KEY
                   'P'
+                Label : VALUE
+                  'Q'
               Label : ARGUMENT
                 =>
-                Label : VALUE
-                  'O'
                 Label : KEY
                   'N'
+                Label : VALUE
+                  'O'
           Label : ARGUMENT
             ::
+            Label : CLASS
+              G
             Label : METHOD
               H
               Label : ARGUMENTS
@@ -49,17 +53,13 @@ Label : ELEMENT
                     [
                     Label : VARIABLE
                       ::
-                      Label : PROPERTY
-                        $b
                       Label : CLASS
                         I
+                      Label : PROPERTY
+                        $b
                     Label : INDEX
                       'J'
                   Label : INDEX
                     'K'
-            Label : CLASS
-              G
           Label : ARGUMENT
             F
-      Label : CLASS
-        D

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
+    Label : CLASS
+      $c
     Label : METHOD
       ;
       Label : ARGUMENTS
@@ -14,8 +16,6 @@ Label : CODE
           'C'
         Label : CONCAT
           'B'
-    Label : CLASS
-      $c
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -26,9 +26,9 @@ Label : CODE
         void
   Label : ELEMENT
     ::
+    Label : CLASS
+      $a
     Label : METHOD
       __FILE__
       Label : ARGUMENTS
         void
-    Label : CLASS
-      $a

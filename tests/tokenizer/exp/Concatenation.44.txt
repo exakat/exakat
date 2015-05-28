@@ -1,48 +1,50 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    @
-    Label : AT
-      unpack
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            "i"
-          Label : CONCAT
-            {
-            Label : VARIABLE
-              $g
-            Label : INDEX
-              +
-              Label : RIGHT
-                6
-              Label : LEFT
-                $h
-          Label : CONCAT
-            {
-            Label : VARIABLE
-              $e
-            Label : INDEX
-              +
-              Label : RIGHT
-                5
-              Label : LEFT
-                $f
-          Label : CONCAT
-            {
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              +
-              Label : RIGHT
-                4
-              Label : LEFT
-                $d
-        Label : ARGUMENT
-          'b'
-  Label : LEFT
-    $a
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      @
+      Label : AT
+        unpack
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              "i"
+            Label : CONCAT
+              {
+              Label : VARIABLE
+                $g
+              Label : INDEX
+                +
+                Label : RIGHT
+                  6
+                Label : LEFT
+                  $h
+            Label : CONCAT
+              {
+              Label : VARIABLE
+                $e
+              Label : INDEX
+                +
+                Label : RIGHT
+                  5
+                Label : LEFT
+                  $f
+            Label : CONCAT
+              {
+              Label : VARIABLE
+                $c
+              Label : INDEX
+                +
+                Label : RIGHT
+                  4
+                Label : LEFT
+                  $d
+          Label : ARGUMENT
+            'b'
+    Label : LEFT
+      $a

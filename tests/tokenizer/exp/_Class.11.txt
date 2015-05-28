@@ -2,8 +2,6 @@
 
 Label : CODE
   class
-  Label : NAME
-    x
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -30,3 +28,5 @@ Label : CODE
         $x
       Label : VAR
         var
+  Label : NAME
+    x

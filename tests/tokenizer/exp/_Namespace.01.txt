@@ -1,8 +1,8 @@
 <?php
 
 Label : CODE
-  namespace
-  Label : BLOCK
-    void
-  Label : NAMESPACE
-    A
+  ;
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      A

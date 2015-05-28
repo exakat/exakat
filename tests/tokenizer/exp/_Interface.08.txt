@@ -2,6 +2,18 @@
 
 Label : CODE
   interface
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      function
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+      Label : NAME
+        E
+      Label : PUBLIC
+        public
   Label : NAME
     B
   Label : EXTENDS
@@ -10,15 +22,3 @@ Label : CODE
       D
     Label : EXTENDS
       C
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      function
-      Label : PUBLIC
-        public
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-      Label : NAME
-        E

@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  @
-  Label : AT
-    ->
-    Label : OBJECT
-      $x
-    Label : PROPERTY
-      t
+  ;
+  Label : ELEMENT
+    @
+    Label : AT
+      ->
+      Label : OBJECT
+        $x
+      Label : PROPERTY
+        t

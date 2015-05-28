@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  ++
-  Label : PREPLUSPLUS
-    ::
-    Label : PROPERTY
-      $count
-    Label : CLASS
-      self
+  ;
+  Label : ELEMENT
+    ++
+    Label : PREPLUSPLUS
+      ::
+      Label : CLASS
+        self
+      Label : PROPERTY
+        $count

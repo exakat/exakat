@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  return
-  Label : RETURN
-    (
-    Label : CODE
-      1
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      (
+      Label : CODE
+        1

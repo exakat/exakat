@@ -8,12 +8,6 @@ Label : CODE
       ;
       Label : ELEMENT
         ::
-        Label : METHOD
-          l
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
         Label : CLASS
           \
           Label : SUBNAME
@@ -22,14 +16,14 @@ Label : CODE
             D
           Label : SUBNAME
             C3
-      Label : ELEMENT
-        ::
         Label : METHOD
           l
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
+      Label : ELEMENT
+        ::
         Label : CLASS
           \
           Label : SUBNAME
@@ -38,10 +32,14 @@ Label : CODE
             D
           Label : SUBNAME
             C3
+        Label : METHOD
+          l
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
       Label : ELEMENT
         ::
-        Label : PROPERTY
-          $k
         Label : CLASS
           \
           Label : SUBNAME
@@ -50,10 +48,10 @@ Label : CODE
             D
           Label : SUBNAME
             C2
-      Label : ELEMENT
-        ::
         Label : PROPERTY
           $k
+      Label : ELEMENT
+        ::
         Label : CLASS
           \
           Label : SUBNAME
@@ -62,6 +60,8 @@ Label : CODE
             D
           Label : SUBNAME
             C2
+        Label : PROPERTY
+          $k
       Label : ELEMENT
         ::
         Label : CLASS

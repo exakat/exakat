@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $array
     Label : VALUE
       list
       Label : ARGUMENTS
@@ -14,6 +12,8 @@ Label : CODE
           $b2
         Label : ARGUMENT
           $a1
+    Label : SOURCE
+      $array
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -36,10 +36,10 @@ Label : CODE
                 \n
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $array
     Label : VALUE
       =>
+      Label : KEY
+        $id
       Label : VALUE
         list
         Label : ARGUMENTS
@@ -48,8 +48,8 @@ Label : CODE
             $b4
           Label : ARGUMENT
             $a3
-      Label : KEY
-        $id
+    Label : SOURCE
+      $array
     Label : BLOCK
       ;
       Label : ELEMENT

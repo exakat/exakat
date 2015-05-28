@@ -2,10 +2,10 @@
 
 Label : CODE
   class
-  Label : NAME
-    x
   Label : BLOCK
     void
+  Label : NAME
+    x
   Label : IMPLEMENTS
     c
   Label : IMPLEMENTS

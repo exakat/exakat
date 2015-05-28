@@ -8,16 +8,16 @@ Label : CODE
       $c
     Label : ARGUMENT
       Typehint
+      Label : CLASS
+        Stdclass
       Label : VARIABLE
         $b
-      Label : CLASS
-        Stdclass
     Label : ARGUMENT
       Typehint
-      Label : VARIABLE
-        $a
       Label : CLASS
         Stdclass
+      Label : VARIABLE
+        $a
   Label : BLOCK
     ;
     Label : ELEMENT

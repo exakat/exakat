@@ -10,8 +10,6 @@ Label : CODE
         class
         Label : NAME
           ClassName
-        Label : EXTENDS
-          ParentClass
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -56,6 +54,26 @@ Label : CODE
                       class
             Label : STATIC
               static
+        Label : EXTENDS
+          ParentClass
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              "\n"
+            Label : CONCAT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  ClassName1
+                Label : SUBNAME
+                  NS1
+              Label : CONSTANT
+                class
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -86,24 +104,6 @@ Label : CODE
               ::
               Label : CLASS
                 ClassName1
-              Label : CONSTANT
-                class
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              "\n"
-            Label : CONCAT
-              ::
-              Label : CLASS
-                \
-                Label : SUBNAME
-                  ClassName1
-                Label : SUBNAME
-                  NS1
               Label : CONSTANT
                 class
       Label : ELEMENT

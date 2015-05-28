@@ -6,14 +6,14 @@ Label : CODE
     ->
     Label : OBJECT
       ::
+      Label : CLASS
+        M
       Label : METHOD
         l
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'e'
-      Label : CLASS
-        M
     Label : METHOD
       k
       Label : ARGUMENTS

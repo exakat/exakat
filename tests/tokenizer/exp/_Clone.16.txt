@@ -8,18 +8,16 @@ Label : CODE
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      d
     Label : BLOCK
       void
+    Label : NAME
+      d
   Label : ELEMENT
     function
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -34,3 +32,5 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $b
+    Label : NAME
+      c

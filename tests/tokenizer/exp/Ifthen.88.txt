@@ -1,26 +1,26 @@
 <?php 
 Label : CODE
   foreach
-  Label : VALUE
-    =>
-    Label : KEY
-      $b
-    Label : VALUE
-      $c
   Label : SOURCE
     $a
+  Label : VALUE
+    =>
+    Label : VALUE
+      $c
+    Label : KEY
+      $b
   Label : BLOCK
     ;
     Label : ELEMENT
       foreach
-      Label : VALUE
-        $e
       Label : SOURCE
         [
         Label : VARIABLE
           $d
         Label : INDEX
           $b
+      Label : VALUE
+        $e
       Label : BLOCK
         if
         Label : CONDITION
@@ -64,18 +64,6 @@ Label : CODE
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          J
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $c
-    Label : ELEMENT
-      K
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
           L
           Label : ARGUMENTS
             void
@@ -91,6 +79,8 @@ Label : CODE
                 'M'
     Label : ELEMENT
       N
+    Label : ELEMENT
+      S
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -110,6 +100,18 @@ Label : CODE
               Label : INDEX
                 'R'
     Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          J
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c
+    Label : ELEMENT
+      K
+    Label : ELEMENT
       K
     Label : ELEMENT
       echo
@@ -123,8 +125,6 @@ Label : CODE
               $c
     Label : ELEMENT
       I
-    Label : ELEMENT
-      S
     Label : ELEMENT
       echo
       Label : ARGUMENTS

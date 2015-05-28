@@ -1,36 +1,38 @@
 <?php
 
 Label : CODE
-  do
-  Label : CONDITION
-    !
-    Label : NOT
-      ->
-      Label : METHOD
-        g
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ++
-            Label : PREPLUSPLUS
-              $h
-      Label : OBJECT
-        $f
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
+  ;
+  Label : ELEMENT
+    do
+    Label : CONDITION
+      !
+      Label : NOT
         ->
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              $d
         Label : OBJECT
-          $b
-      Label : LEFT
-        $a
+          $f
+        Label : METHOD
+          g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ++
+              Label : PREPLUSPLUS
+                $h
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                $d
+        Label : LEFT
+          $a

@@ -2,33 +2,17 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    if
-    Label : CONDITION
-      empty
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        echo
+    ;
+    Label : ELEMENT
+      
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        empty
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            D
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'E'
-      Label : ELEMENT
-        E
-      Label : ELEMENT
-        B
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        $b
+            $a
       Label : THEN
         ;
         Label : ELEMENT
@@ -36,17 +20,37 @@ Label : ELEMENT
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              H
+              D
               Label : ARGUMENTS
-                Arguments
+                void
                 Label : ARGUMENT
-                  'I'
-                Label : ARGUMENT
-                  $c
+                  'E'
         Label : ELEMENT
-          I
+          E
         Label : ELEMENT
-          F
+          B
+      Label : ELSE
+        elseif
+        Label : CONDITION
+          $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                H
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'I'
+                  Label : ARGUMENT
+                    $c
+          Label : ELEMENT
+            I
+          Label : ELEMENT
+            F
 Label : ELEMENT
   J
 Label : ELEMENT

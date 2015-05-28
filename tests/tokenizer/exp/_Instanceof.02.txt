@@ -1,52 +1,54 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    !
-    Label : NOT
-      (
-      Label : CODE
-        ||
-        Label : RIGHT
-          instanceof
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $e
-                Label : PROPERTY
-                  f
-              Label : INDEX
-                $g
-            Label : PROPERTY
-              h
-          Label : CLASS
-            ArrayAccess
-        Label : LEFT
-          is_array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        (
+        Label : CODE
+          ||
+          Label : RIGHT
+            instanceof
+            Label : VARIABLE
               ->
               Label : OBJECT
                 [
                 Label : VARIABLE
                   ->
                   Label : OBJECT
-                    $a
+                    $e
                   Label : PROPERTY
-                    b
+                    f
                 Label : INDEX
-                  $c
+                  $g
               Label : PROPERTY
-                d
-  Label : THEN
-    ;
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        $x
+                h
+            Label : CLASS
+              ArrayAccess
+          Label : LEFT
+            is_array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  [
+                  Label : VARIABLE
+                    ->
+                    Label : OBJECT
+                      $a
+                    Label : PROPERTY
+                      b
+                  Label : INDEX
+                    $c
+                Label : PROPERTY
+                  d
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

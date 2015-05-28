@@ -1,22 +1,24 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    `
-    Label : CONTAINS
-      Concatenation
-      Label : CONCAT
-        ->
-        Label : OBJECT
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      `
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
           ->
           Label : OBJECT
-            $b
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              c
           Label : PROPERTY
-            c
-        Label : PROPERTY
-          d
-      Label : CONCAT
-         e 
-  Label : LEFT
-    $a
+            d
+        Label : CONCAT
+           e 
+    Label : LEFT
+      $a

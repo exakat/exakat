@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  throw
-  Label : THROW
-    (
-    Label : CODE
-      new
-      Label : NEW
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            1
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      (
+      Label : CODE
+        new
+        Label : NEW
+          C
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              1

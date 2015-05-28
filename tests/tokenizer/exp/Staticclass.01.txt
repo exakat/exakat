@@ -6,8 +6,6 @@ Label : CODE
     ;
     Label : ELEMENT
       class
-      Label : NAME
-        ClassName
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -16,8 +14,6 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-          Label : NAME
-            x
           Label : BLOCK
             ;
             Label : ELEMENT
@@ -50,8 +46,12 @@ Label : CODE
                     self
                   Label : CONSTANT
                     class
+          Label : NAME
+            x
           Label : STATIC
             static
+      Label : NAME
+        ClassName
       Label : EXTENDS
         ParentClass
     Label : ELEMENT
@@ -116,9 +116,9 @@ Label : CODE
             class
     Label : ELEMENT
       class
-      Label : NAME
-        ParentClass
       Label : BLOCK
         void
+      Label : NAME
+        ParentClass
   Label : NAMESPACE
     NS

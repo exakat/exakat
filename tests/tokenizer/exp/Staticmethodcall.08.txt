@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  ::
-  Label : CLASS
-    [
-    Label : VARIABLE
-      $x
-    Label : INDEX
-      1
-  Label : METHOD
-    b
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $c
+  ;
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      [
+      Label : VARIABLE
+        $x
+      Label : INDEX
+        1
+    Label : METHOD
+      b
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $c

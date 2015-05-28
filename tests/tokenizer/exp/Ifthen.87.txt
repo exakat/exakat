@@ -1,144 +1,146 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    ==
-    Label : RIGHT
-      $b
-    Label : LEFT
-      B
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $a
-  Label : THEN
-    ;
-    Label : ELEMENT
-      +=
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
       Label : RIGHT
-        $t
+        $b
       Label : LEFT
-        $s
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        (int)
-        Label : CAST
-          (
-          Label : CODE
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        +=
+        Label : RIGHT
+          $t
+        Label : LEFT
+          $s
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          (int)
+          Label : CAST
+            (
+            Label : CODE
+              ->
+              Label : OBJECT
+                $q
+              Label : METHOD
+                O
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $r
+        Label : LEFT
+          $p
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          ==
+          Label : RIGHT
+            'D'
+          Label : LEFT
             ->
             Label : OBJECT
-              $q
+              $c
             Label : METHOD
-              O
+              C
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  $r
-      Label : LEFT
-        $p
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        ==
-        Label : RIGHT
-          'D'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $c
-          Label : METHOD
-            C
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-      Label : THEN
-        ;
-        Label : ELEMENT
-          or
-          Label : RIGHT
-            (
-            Label : CODE
+                  void
+        Label : THEN
+          ;
+          Label : ELEMENT
+            or
+            Label : RIGHT
+              (
+              Label : CODE
+                =
+                Label : RIGHT
+                  ->
+                  Label : OBJECT
+                    $i
+                  Label : METHOD
+                    I
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $h
+            Label : LEFT
               =
               Label : RIGHT
                 ->
                 Label : OBJECT
-                  $i
+                  $e
                 Label : METHOD
-                  I
+                  E
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
-                      void
+                      "
+                      Label : CONTAINS
+                        Concatenation
+                        Label : CONCAT
+                          F
+                        Label : CONCAT
+                          $fG
+                        Label : CONCAT
+                          $gH
               Label : LEFT
-                [
-                Label : VARIABLE
-                  $h
-          Label : LEFT
-            =
+                $d
+        Label : ELSE
+          Block with else
+          Label : ELEMENT
+            or
             Label : RIGHT
-              ->
-              Label : OBJECT
-                $e
-              Label : METHOD
-                E
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    "
-                    Label : CONTAINS
-                      Concatenation
-                      Label : CONCAT
-                        F
-                      Label : CONCAT
-                        $fG
-                      Label : CONCAT
-                        $gH
+              (
+              Label : CODE
+                =
+                Label : RIGHT
+                  ->
+                  Label : OBJECT
+                    $o
+                  Label : METHOD
+                    N
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $n
             Label : LEFT
-              $d
-      Label : ELSE
-        Block with else
-        Label : ELEMENT
-          or
-          Label : RIGHT
-            (
-            Label : CODE
               =
               Label : RIGHT
                 ->
                 Label : OBJECT
-                  $o
+                  $k
                 Label : METHOD
-                  N
+                  J
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
-                      void
+                      "
+                      Label : CONTAINS
+                        Concatenation
+                        Label : CONCAT
+                          K
+                        Label : CONCAT
+                          $lL
+                        Label : CONCAT
+                          $mM
               Label : LEFT
-                [
-                Label : VARIABLE
-                  $n
-          Label : LEFT
-            =
-            Label : RIGHT
-              ->
-              Label : OBJECT
-                $k
-              Label : METHOD
-                J
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    "
-                    Label : CONTAINS
-                      Concatenation
-                      Label : CONCAT
-                        K
-                      Label : CONCAT
-                        $lL
-                      Label : CONCAT
-                        $mM
-            Label : LEFT
-              $j
+                $j

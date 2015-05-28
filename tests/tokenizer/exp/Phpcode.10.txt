@@ -1,7 +1,9 @@
 <script language="php">
 Label : CODE
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      $a
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a

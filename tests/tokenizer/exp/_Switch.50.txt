@@ -21,7 +21,9 @@ Label : CODE
     Label : ELEMENT
       default
       Label : CODE
-        Block with Sequence For Default
+        ;
+        Label : ELEMENT
+          
         Label : ELEMENT
           ;
           Label : ELEMENT
@@ -32,18 +34,18 @@ Label : CODE
                 new
                 Label : NEW
                   \
-                  Label : SUBNAME
-                    C
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
                       'D'
+                  Label : SUBNAME
+                    C
     Label : ELEMENT
       case
-      Label : CASE
-        1
       Label : CODE
-        Block with Sequence For Case
+        ;
+        Label : ELEMENT
+          
         Label : ELEMENT
           ;
           Label : ELEMENT
@@ -54,9 +56,11 @@ Label : CODE
                 new
                 Label : NEW
                   \
-                  Label : SUBNAME
-                    C
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
                       'D'
+                  Label : SUBNAME
+                    C
+      Label : CASE
+        1

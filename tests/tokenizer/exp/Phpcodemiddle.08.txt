@@ -14,30 +14,6 @@ Label : ELEMENT
   Label : LEFT
     $c
 Label : ELEMENT
-  D
-Label : ELEMENT
-  J
-Label : ELEMENT
-  ++
-  Label : PREPLUSPLUS
-    $d
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      ->
-      Label : OBJECT
-        $c
-      Label : METHOD
-        I
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-Label : ELEMENT
-  H
-Label : ELEMENT
   if
   Label : CONDITION
     ->
@@ -62,6 +38,32 @@ Label : ELEMENT
         Label : ARGUMENT
           'G'
 Label : ELEMENT
+  ++
+  Label : PREPLUSPLUS
+    $d
+Label : ELEMENT
+  D
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      ->
+      Label : OBJECT
+        $c
+      Label : METHOD
+        I
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+Label : ELEMENT
+  J
+Label : ELEMENT
+  H
+Label : ELEMENT
+  C
+Label : ELEMENT
   echo
   Label : ARGUMENTS
     void
@@ -71,7 +73,5 @@ Label : ELEMENT
         0
       Label : LEFT
         $d
-Label : ELEMENT
-  C
 Label : ELEMENT
   void

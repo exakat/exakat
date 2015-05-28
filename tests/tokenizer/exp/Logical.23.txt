@@ -40,14 +40,14 @@ Label : CODE
       ^
       Label : RIGHT
         ::
+        Label : CLASS
+          D
         Label : METHOD
           E
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
-        Label : CLASS
-          D
       Label : LEFT
         $b
     Label : LEFT
@@ -58,10 +58,10 @@ Label : CODE
       |
       Label : RIGHT
         ::
-        Label : PROPERTY
-          $E
         Label : CLASS
           D
+        Label : PROPERTY
+          $E
       Label : LEFT
         $b
     Label : LEFT

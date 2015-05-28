@@ -31,14 +31,14 @@ Label : ELEMENT
       'V'
     Label : ARGUMENT
       ::
+      Label : CLASS
+        S
       Label : METHOD
         T
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'U'
-      Label : CLASS
-        S
 Label : ELEMENT
   void
 Label : ELEMENT

@@ -1,58 +1,60 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
       void
-  Label : NAME
-    a
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      return
-      Label : RETURN
-        ?
-        Label : CONDITION
-          >=
-          Label : RIGHT
-            0
-          Label : LEFT
-            (
-            Label : CODE
-              =
-              Label : RIGHT
-                c
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $d
-                    Label : PROPERTY
-                      e
-              Label : LEFT
-                $b
-        Label : THEN
-          $f
-        Label : ELSE
-          ->
-          Label : OBJECT
-            $g
-          Label : METHOD
-            h
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                9
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $this
-                Label : METHOD
-                  i
+      Label : ARGUMENT
+        void
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ?
+          Label : CONDITION
+            >=
+            Label : RIGHT
+              0
+            Label : LEFT
+              (
+              Label : CODE
+                =
+                Label : RIGHT
+                  c
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
-                      "J"
+                      ->
+                      Label : OBJECT
+                        $d
+                      Label : PROPERTY
+                        e
+                Label : LEFT
+                  $b
+          Label : THEN
+            $f
+          Label : ELSE
+            ->
+            Label : OBJECT
+              $g
+            Label : METHOD
+              h
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  9
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : METHOD
+                    i
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        "J"
+    Label : NAME
+      a

@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      complex
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,16 +12,16 @@ Label : CODE
           ;
           Label : ELEMENT
             const
-            Label : NAME
-              a
             Label : VALUE
               2
+            Label : NAME
+              a
         Label : NAME
           path
+    Label : NAMESPACE
+      complex
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -43,7 +41,27 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
+              path
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
               absolute_path
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a3
             Label : CONSTANT
               a
       Label : ELEMENT
@@ -63,7 +81,9 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              path
+              \
+              Label : SUBNAME
+                a1
             Label : CONSTANT
               a
       Label : ELEMENT
@@ -73,7 +93,17 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              a3
+              a2
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a1
             Label : CONSTANT
               a
       Label : ELEMENT
@@ -94,38 +124,6 @@ Label : CODE
             ::
             Label : CLASS
               one_identifier3
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a1
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a2
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              \
-              Label : SUBNAME
-                a1
             Label : CONSTANT
               a
       Label : ELEMENT
@@ -194,32 +192,32 @@ Label : CODE
         use
         Label : USE
           one_identifier
+    Label : NAMESPACE
+      x
   Label : ELEMENT
     namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : VALUE
+              2
+            Label : NAME
+              a
+        Label : NAME
+          path2
     Label : NAMESPACE
       \
       Label : SUBNAME
         complex
       Label : SUBNAME
         absolute
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-        Label : NAME
-          path2
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      Global
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -228,22 +226,10 @@ Label : CODE
           ;
           Label : ELEMENT
             const
-            Label : NAME
-              a
             Label : VALUE
               2
-        Label : NAME
-          one_identifier3
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
             Label : NAME
               a
-            Label : VALUE
-              2
         Label : NAME
           a1
       Label : ELEMENT
@@ -252,10 +238,22 @@ Label : CODE
           ;
           Label : ELEMENT
             const
-            Label : NAME
-              a
             Label : VALUE
               2
+            Label : NAME
+              a
+        Label : NAME
+          one_identifier3
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : VALUE
+              2
+            Label : NAME
+              a
         Label : NAME
           absolute_path
       Label : ELEMENT
@@ -264,9 +262,11 @@ Label : CODE
           ;
           Label : ELEMENT
             const
-            Label : NAME
-              a
             Label : VALUE
               2
+            Label : NAME
+              a
         Label : NAME
           one_identifier
+    Label : NAMESPACE
+      Global

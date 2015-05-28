@@ -9,18 +9,6 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        if
-        Label : CONDITION
-          $b
-        Label : THEN
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $c
-      Label : ELEMENT
-        F
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -32,6 +20,16 @@ Label : CODE
                 $c
               Label : ARGUMENT
                 'D'
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $c
       Label : ELEMENT
         E
       Label : ELEMENT
@@ -47,13 +45,17 @@ Label : CODE
               Label : ARGUMENT
                 'D'
       Label : ELEMENT
+        F
+      Label : ELEMENT
+        B
+      Label : ELEMENT
         if
         Label : CONDITION
           $b
         Label : THEN
           ;
           Label : ELEMENT
-            B
+            void
   Label : ELEMENT
     function
     Label : ARGUMENTS

@@ -1,10 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    [
-    Label : VARIABLE
-      $_array
-    Label : INDEX
-      1
+;
+Label : ELEMENT
+  [
+  Label : VARIABLE
+    $_array
+  Label : INDEX
+    1

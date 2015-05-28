@@ -3,6 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $b
+  Label : ELEMENT
      
 
 $x = 3;
@@ -11,12 +17,6 @@ $y = 4;
 ?>
   Label : ELEMENT
     __HALT_COMPILER
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $b
   Label : ELEMENT
     =
     Label : RIGHT

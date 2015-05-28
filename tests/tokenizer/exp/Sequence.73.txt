@@ -3,6 +3,8 @@
 Label : CODE
   ;
   Label : ELEMENT
+    
+  Label : ELEMENT
     if
     Label : CONDITION
       !
@@ -30,26 +32,26 @@ Label : CODE
           ;
           Label : ELEMENT
             var
-            Label : DEFINE
-              $b
             Label : VALUE
               array
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
+            Label : DEFINE
+              $b
             Label : VAR
               var
           Label : ELEMENT
             var
-            Label : DEFINE
-              $a
             Label : VALUE
               array
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
+            Label : DEFINE
+              $a
             Label : VAR
               var
   Label : ELEMENT

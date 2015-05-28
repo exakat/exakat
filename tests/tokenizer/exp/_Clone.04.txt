@@ -8,9 +8,9 @@ Label : CODE
       (
       Label : CODE
         ::
-        Label : PROPERTY
-          $C
         Label : CLASS
           y
+        Label : PROPERTY
+          $C
   Label : LEFT
     $x

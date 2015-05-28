@@ -23,11 +23,11 @@ Label : CODE
         Label : SUBNAME
           D
   Label : ELEMENT
+    $c
+  Label : ELEMENT
     :
     Label : LABEL
       E
-  Label : ELEMENT
-    $c
   Label : ELEMENT
     =
     Label : RIGHT

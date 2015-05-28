@@ -4,6 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
+    Label : VALUE
+      $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -20,40 +28,44 @@ Label : CODE
               void
               Label : ARGUMENT
                 '3'
-    Label : VALUE
-      $c
+  Label : ELEMENT
+    foreach
     Label : SOURCE
       ->
       Label : OBJECT
         $a
       Label : PROPERTY
         b
-  Label : ELEMENT
-    foreach
+    Label : VALUE
+      $c
     Label : BLOCK
       ;
       Label : ELEMENT
         ;
         Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              '2'
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                '2'
+      Label : ELEMENT
+        
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $a
-    Label : VALUE
-      $c
+  Label : ELEMENT
+    foreach
     Label : SOURCE
       ->
       Label : OBJECT
         $a
       Label : PROPERTY
         b
-  Label : ELEMENT
-    foreach
+    Label : VALUE
+      $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -66,11 +78,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 '1'
-    Label : VALUE
-      $c
-    Label : SOURCE
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b

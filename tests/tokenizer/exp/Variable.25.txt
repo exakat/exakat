@@ -1,18 +1,18 @@
 <?php
 
 Label : CODE
-  do
-  Label : CONDITION
-    <
-    Label : RIGHT
-      2
-    Label : LEFT
-      ++
-      Label : POSTPLUSPLUS
-        $e
-  Label : BLOCK
-    ;
-    Label : ELEMENT
+  ;
+  Label : ELEMENT
+    do
+    Label : CONDITION
+      <
+      Label : RIGHT
+        2
+      Label : LEFT
+        ++
+        Label : POSTPLUSPLUS
+          $e
+    Label : BLOCK
       ;
       Label : ELEMENT
         if

@@ -1,70 +1,72 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
       void
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      return
-      Label : RETURN
-        F
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $h
-          Label : ARGUMENT
-            'G'
-    Label : ELEMENT
-      foreach
-      Label : VALUE
-        $c
-      Label : SOURCE
-        ->
-        Label : OBJECT
-          $b
-        Label : PROPERTY
-          C
-      Label : BLOCK
-        if
-        Label : CONDITION
+      Label : ARGUMENT
+        void
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        foreach
+        Label : VALUE
+          $c
+        Label : SOURCE
           ->
           Label : OBJECT
-            $d
-          Label : METHOD
-            D
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
+            $b
+          Label : PROPERTY
+            C
+        Label : BLOCK
+          if
+          Label : CONDITION
+            ->
+            Label : OBJECT
+              $d
+            Label : METHOD
+              D
+              Label : ARGUMENTS
                 void
-        Label : THEN
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              $g
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $e
-              Label : INDEX
-                ->
-                Label : OBJECT
-                  $f
-                Label : PROPERTY
-                  E
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+                Label : ARGUMENT
+                  void
+          Label : THEN
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                $g
+              Label : LEFT
+                [
+                Label : VARIABLE
+                  $e
+                Label : INDEX
+                  ->
+                  Label : OBJECT
+                    $f
+                  Label : PROPERTY
+                    E
+      Label : ELEMENT
+        return
+        Label : RETURN
+          F
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $h
+            Label : ARGUMENT
+              'G'
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
             void
-      Label : LEFT
-        $a
-  Label : NAME
-    B
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          $a

@@ -1,40 +1,42 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    Arguments
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
             void
-      Label : LEFT
-        $d
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          $d
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
             void
-      Label : LEFT
-        $c
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          $c
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
             void
-      Label : LEFT
-        $b
-  Label : NAME
-    a
-  Label : BLOCK
-    void
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          $b
+    Label : NAME
+      a
+    Label : BLOCK
+      void

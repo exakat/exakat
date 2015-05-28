@@ -12,10 +12,10 @@ Label : CODE
         [
         Label : VARIABLE
           ::
-          Label : PROPERTY
-            $d
           Label : CLASS
             C
+          Label : PROPERTY
+            $d
         Label : INDEX
           $e
       Label : INDEX

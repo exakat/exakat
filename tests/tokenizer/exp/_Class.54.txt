@@ -2,10 +2,6 @@
 
 Label : CODE
   class
-  Label : NAME
-    x
-  Label : EXTENDS
-    y
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -22,10 +18,10 @@ Label : CODE
         void
         Label : ARGUMENT
           void
-      Label : NAME
-        c
       Label : BLOCK
         void
+      Label : NAME
+        c
     Label : ELEMENT
       var
       Label : VALUE
@@ -40,10 +36,10 @@ Label : CODE
         void
         Label : ARGUMENT
           void
-      Label : NAME
-        b
       Label : BLOCK
         void
+      Label : NAME
+        b
     Label : ELEMENT
       var
       Label : VALUE
@@ -52,5 +48,9 @@ Label : CODE
         $a
       Label : VAR
         var
+  Label : NAME
+    x
+  Label : EXTENDS
+    y
   Label : IMPLEMENTS
     z

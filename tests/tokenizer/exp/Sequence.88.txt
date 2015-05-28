@@ -37,6 +37,8 @@ Label : CODE
             'X'
           Label : CONCAT
             ::
+            Label : CLASS
+              D
             Label : METHOD
               E
               Label : ARGUMENTS
@@ -61,8 +63,6 @@ Label : CODE
                   'T'
                 Label : ARGUMENT
                   'S'
-            Label : CLASS
-              D
           Label : CONCAT
             'C'
           Label : CONCAT
@@ -87,6 +87,8 @@ Label : CODE
         'K'
       Label : ARGUMENT
         ::
+        Label : CLASS
+          D
         Label : METHOD
           E
           Label : ARGUMENTS
@@ -117,8 +119,6 @@ Label : CODE
               $b
             Label : ARGUMENT
               'F'
-        Label : CLASS
-          D
       Label : ARGUMENT
         'C'
       Label : ARGUMENT

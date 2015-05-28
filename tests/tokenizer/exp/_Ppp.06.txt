@@ -10,28 +10,28 @@ Label : CODE
         ;
         Label : ELEMENT
           protected
-          Label : DEFINE
-            $a
           Label : VALUE
             Void
           Label : PROTECTED
             protected
+          Label : DEFINE
+            $a
         Label : ELEMENT
           use
-          Label : USE
-            H
           Label : BLOCK
             ;
             Label : ELEMENT
               as
+              Label : SUBNAME
+                K
               Label : AS
                 private
                 Label : DEFINE
                   L
                 Label : PRIVATE
                   private
-              Label : SUBNAME
-                K
+          Label : USE
+            H
       Label : NAME
         I
     Label : ELEMENT

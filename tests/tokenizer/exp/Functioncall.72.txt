@@ -50,10 +50,10 @@ Label : CODE
                 __DIR__
     Label : LEFT
       ::
-      Label : PROPERTY
-        $a
       Label : CLASS
         C
+      Label : PROPERTY
+        $a
   Label : ELEMENT
     if
     Label : CONDITION
@@ -64,10 +64,10 @@ Label : CODE
           void
           Label : ARGUMENT
             ::
-            Label : PROPERTY
-              $a
             Label : CLASS
               C
+            Label : PROPERTY
+              $a
     Label : THEN
       ;
       Label : ELEMENT

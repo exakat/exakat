@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  "
-  Label : CONTAINS
-    Concatenation
-    Label : CONCAT
-      $b
+  ;
+  Label : ELEMENT
+    "
+    Label : CONTAINS
+      Concatenation
+      Label : CONCAT
+        $b

@@ -1,169 +1,171 @@
 <?php 
 Label : CODE
-  =
-  Label : RIGHT
-    array
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        =>
-        Label : KEY
-          0
-        Label : VALUE
-          array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'P'
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'Q'
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          void
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            11
-                          Label : VALUE
-                            12
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'J'
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            0
+          Label : VALUE
+            array
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'P'
+                Label : VALUE
+                  array
+                  Label : ARGUMENTS
                     void
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'O'
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'Q'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          Arguments
+                          Label : ARGUMENT
+                            void
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              11
+                            Label : VALUE
+                              12
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'J'
+                Label : VALUE
+                  array
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      void
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'O'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          Arguments
+                          Label : ARGUMENT
+                            void
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              9
+                            Label : VALUE
+                              10
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'N'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          Arguments
+                          Label : ARGUMENT
+                            void
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              7
+                            Label : VALUE
+                              8
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'M'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          Arguments
+                          Label : ARGUMENT
+                            void
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              5
+                            Label : VALUE
+                              6
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'L'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
                           void
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            9
-                          Label : VALUE
-                            10
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'N'
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          void
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            7
-                          Label : VALUE
-                            8
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'M'
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          void
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            5
-                          Label : VALUE
-                            6
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'L'
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          void
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'K'
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          void
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            3
-                          Label : VALUE
-                            4
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'E'
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    void
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'H'
-                    Label : VALUE
-                      'I'
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'F'
-                    Label : VALUE
-                      'G'
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'D'
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    void
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      1
-                    Label : VALUE
-                      2
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'B'
-              Label : VALUE
-                'C'
-  Label : LEFT
-    $a
+                          Label : ARGUMENT
+                            void
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'K'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          Arguments
+                          Label : ARGUMENT
+                            void
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              3
+                            Label : VALUE
+                              4
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'E'
+                Label : VALUE
+                  array
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      void
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'H'
+                      Label : VALUE
+                        'I'
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'F'
+                      Label : VALUE
+                        'G'
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'D'
+                Label : VALUE
+                  array
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      void
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        1
+                      Label : VALUE
+                        2
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'B'
+                Label : VALUE
+                  'C'
+    Label : LEFT
+      $a

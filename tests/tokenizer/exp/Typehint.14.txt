@@ -6,28 +6,6 @@ Label : CODE
     =
     Label : RIGHT
       function
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            new
-            Label : NEW
-              Match
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    0
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    1
       Label : ARGUMENTS
         void
         Label : ARGUMENT
@@ -38,12 +16,6 @@ Label : CODE
             callable
       Label : NAME
         
-    Label : LEFT
-      $x
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      function
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -66,6 +38,12 @@ Label : CODE
                     $matches
                   Label : INDEX
                     1
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      function
       Label : ARGUMENTS
         void
         Label : ARGUMENT
@@ -80,12 +58,6 @@ Label : CODE
               x
       Label : NAME
         
-    Label : LEFT
-      $x
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      function
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -108,48 +80,12 @@ Label : CODE
                     $matches
                   Label : INDEX
                     1
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Typehint
-          Label : VARIABLE
-            $matches
-          Label : CLASS
-            \
-            Label : SUBNAME
-              d
-            Label : SUBNAME
-              x
-      Label : NAME
-        
     Label : LEFT
       $x
   Label : ELEMENT
     =
     Label : RIGHT
       function
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            new
-            Label : NEW
-              Match
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    0
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    1
       Label : ARGUMENTS
         void
         Label : ARGUMENT
@@ -160,12 +96,6 @@ Label : CODE
             x
       Label : NAME
         
-    Label : LEFT
-      $x
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      function
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -188,6 +118,54 @@ Label : CODE
                     $matches
                   Label : INDEX
                     1
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      function
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          Typehint
+          Label : VARIABLE
+            $matches
+          Label : CLASS
+            \
+            Label : SUBNAME
+              d
+            Label : SUBNAME
+              x
+      Label : NAME
+        
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            new
+            Label : NEW
+              Match
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    0
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    1
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      function
       Label : ARGUMENTS
         void
         Label : ARGUMENT
@@ -198,5 +176,27 @@ Label : CODE
             array
       Label : NAME
         
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            new
+            Label : NEW
+              Match
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    0
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    1
     Label : LEFT
       $x

@@ -6,8 +6,6 @@ Label : CODE
     void
     Label : ARGUMENT
       $a
-  Label : NAME
-    
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -20,6 +18,8 @@ Label : CODE
           void
           Label : ARGUMENT
             $g
+  Label : NAME
+    
   Label : USE
     Arguments
     Label : ARGUMENT

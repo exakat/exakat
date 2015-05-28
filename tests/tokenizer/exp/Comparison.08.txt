@@ -10,10 +10,10 @@ Label : CODE
       [
       Label : VARIABLE
         ::
-        Label : PROPERTY
-          $a
         Label : CLASS
           self
+        Label : PROPERTY
+          $a
       Label : INDEX
         'b'
   Label : THEN
@@ -24,10 +24,10 @@ Label : CODE
         [
         Label : VARIABLE
           ::
-          Label : PROPERTY
-            $f
           Label : CLASS
             e
+          Label : PROPERTY
+            $f
         Label : INDEX
           'g'
       Label : LEFT

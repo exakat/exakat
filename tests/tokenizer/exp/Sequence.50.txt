@@ -3,15 +3,15 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $a
-  Label : ELEMENT
     =
     Label : RIGHT
       2
     Label : LEFT
       $b
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $a
   Label : ELEMENT
     =
     Label : RIGHT
@@ -28,14 +28,14 @@ Label : CODE
           $d
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
       Label : CODE
         ;
         Label : ELEMENT
           continue
           Label : LEVEL
             void
-      Label : VARIABLE
-        $e
       Label : CLASS
         Exception
   Label : ELEMENT

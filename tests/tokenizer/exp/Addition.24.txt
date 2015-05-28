@@ -1,28 +1,30 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    -
+  ;
+  Label : ELEMENT
+    =
     Label : RIGHT
-      ->
-      Label : METHOD
-        f
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $g
-      Label : OBJECT
-        ::
-        Label : CLASS
-          C
+      -
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          ::
+          Label : CLASS
+            C
+          Label : METHOD
+            d
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'e'
         Label : METHOD
-          d
+          f
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              'e'
+              $g
+      Label : LEFT
+        $b
     Label : LEFT
-      $b
-  Label : LEFT
-    $a
+      $a

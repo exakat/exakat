@@ -1,26 +1,28 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    array
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $f
-      Label : ARGUMENT
-        $e
-      Label : ARGUMENT
-        >
-        Label : RIGHT
-          0
-        Label : LEFT
-          $d
-      Label : ARGUMENT
-        $c
-  Label : LEFT
-    [
-    Label : VARIABLE
-      $a
-    Label : INDEX
-      b
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $f
+        Label : ARGUMENT
+          $e
+        Label : ARGUMENT
+          >
+          Label : RIGHT
+            0
+          Label : LEFT
+            $d
+        Label : ARGUMENT
+          $c
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        b

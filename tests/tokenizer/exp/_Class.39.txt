@@ -1,35 +1,27 @@
 <?php
 
 Label : CODE
-  class
-  Label : NAME
-    x
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      ppp
-      Label : VALUE
-        void
-      Label : DEFINE
-        $e
-      Label : PUBLIC
-        public
-    Label : ELEMENT
-      ppp
-      Label : VALUE
-        2
-      Label : DEFINE
-        $f
-      Label : PUBLIC
-        public
-    Label : ELEMENT
-      Sequence
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
       Label : ELEMENT
         ppp
         Label : VALUE
-          3
+          void
         Label : DEFINE
-          $g
+          $e
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          2
+        Label : DEFINE
+          $f
         Label : PUBLIC
           public
       Label : ELEMENT
@@ -40,14 +32,20 @@ Label : CODE
           $h
         Label : PUBLIC
           public
-    Label : ELEMENT
-      const
-      Label : VALUE
-        3
-      Label : NAME
-        b
-    Label : ELEMENT
-      Sequence
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          3
+        Label : DEFINE
+          $g
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        const
+        Label : VALUE
+          3
+        Label : NAME
+          b
       Label : ELEMENT
         ppp
         Label : VALUE
@@ -64,19 +62,19 @@ Label : CODE
           $c
         Label : PUBLIC
           public
-    Label : ELEMENT
-      public
-      Label : VALUE
-        1
-      Label : DEFINE
-        $b
-      Label : PUBLIC
+      Label : ELEMENT
         public
-    Label : ELEMENT
-      public
-      Label : VALUE
-        Void
-      Label : DEFINE
-        $a
-      Label : PUBLIC
+        Label : VALUE
+          1
+        Label : DEFINE
+          $b
+        Label : PUBLIC
+          public
+      Label : ELEMENT
         public
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $a
+        Label : PUBLIC
+          public

@@ -24,10 +24,10 @@ Label : CODE
           void
       Label : NAME
         d
-      Label : ABSTRACT
-        abstract
       Label : STATIC
         static
+      Label : ABSTRACT
+        abstract
     Label : ELEMENT
       function
       Label : ARGUMENTS

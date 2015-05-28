@@ -8,7 +8,7 @@ Label : CODE
       $b
     Label : ARGUMENT
       $a
-  Label : NAME
-    x
   Label : BLOCK
     void
+  Label : NAME
+    x

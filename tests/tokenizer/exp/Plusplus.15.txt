@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  ++
-  Label : POSTPLUSPLUS
-    $
-    Label : NAME
-      $x
+  ;
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $
+      Label : NAME
+        $x

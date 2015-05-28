@@ -37,10 +37,34 @@ Label : CODE
           ;
           Label : ELEMENT
             foreach
+            Label : SOURCE
+              $s
+            Label : VALUE
+              =>
+              Label : VALUE
+                $u
+              Label : KEY
+                $t
             Label : BLOCK
               ;
               Label : ELEMENT
                 foreach
+                Label : SOURCE
+                  ->
+                  Label : OBJECT
+                    $v
+                  Label : METHOD
+                    O
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $w
+                Label : VALUE
+                  =>
+                  Label : VALUE
+                    $y
+                  Label : KEY
+                    $x
                 Label : BLOCK
                   ;
                   Label : ELEMENT
@@ -69,30 +93,6 @@ Label : CODE
                               'Q'
                         Label : CONCAT
                           $aa
-                Label : VALUE
-                  =>
-                  Label : VALUE
-                    $y
-                  Label : KEY
-                    $x
-                Label : SOURCE
-                  ->
-                  Label : OBJECT
-                    $v
-                  Label : METHOD
-                    O
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        $w
-            Label : VALUE
-              =>
-              Label : VALUE
-                $u
-              Label : KEY
-                $t
-            Label : SOURCE
-              $s
           Label : ELEMENT
             =
             Label : RIGHT

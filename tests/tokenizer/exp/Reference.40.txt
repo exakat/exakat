@@ -27,6 +27,8 @@ Label : CODE
         Label : CASE
           1
   Label : ELEMENT
+    
+  Label : ELEMENT
     if
     Label : CONDITION
       &

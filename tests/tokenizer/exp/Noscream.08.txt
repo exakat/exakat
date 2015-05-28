@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  @
-  Label : AT
-    ->
-    Label : METHOD
-      t
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    @
+    Label : AT
+      ->
+      Label : OBJECT
+        $x
+      Label : METHOD
+        t
+        Label : ARGUMENTS
           void
-    Label : OBJECT
-      $x
+          Label : ARGUMENT
+            void

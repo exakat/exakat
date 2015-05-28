@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  aNd
-  Label : RIGHT
-    2
-  Label : LEFT
-    1
+  ;
+  Label : ELEMENT
+    aNd
+    Label : RIGHT
+      2
+    Label : LEFT
+      1

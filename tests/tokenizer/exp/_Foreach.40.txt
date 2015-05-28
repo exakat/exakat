@@ -26,6 +26,12 @@ Label : CODE
         $b
       Label : VALUE
         $c
+    Label : SOURCE
+      ::
+      Label : CLASS
+        B
+      Label : CONSTANT
+        C
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -42,12 +48,6 @@ Label : CODE
               $b
         Label : LEFT
           $a
-    Label : SOURCE
-      ::
-      Label : CLASS
-        B
-      Label : CONSTANT
-        C
   Label : ELEMENT
     =
     Label : RIGHT

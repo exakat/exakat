@@ -1,41 +1,43 @@
 <?php 
 Label : CODE
-  echo
-  Label : ARGUMENTS
-    Arguments
-    Label : ARGUMENT
-      Concatenation
-      Label : CONCAT
-        'N'
-      Label : CONCAT
-        'L'
-      Label : CONCAT
-        'J'
-    Label : ARGUMENT
-      Concatenation
-      Label : CONCAT
-        D
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $b
-            Label : METHOD
-              G
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'H'
-          Label : ARGUMENT
-            'E'
-      Label : CONCAT
-        'B'
-      Label : CONCAT
-        (
-        Label : CODE
-          +
-          Label : RIGHT
-            0
-          Label : LEFT
-            $a
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          'N'
+        Label : CONCAT
+          'L'
+        Label : CONCAT
+          'J'
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          D
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $b
+              Label : METHOD
+                G
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'H'
+            Label : ARGUMENT
+              'E'
+        Label : CONCAT
+          'B'
+        Label : CONCAT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              0
+            Label : LEFT
+              $a

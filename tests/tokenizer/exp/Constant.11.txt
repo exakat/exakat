@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  (
-  Label : CODE
-    ?
-    Label : CONDITION
-      $x
-    Label : THEN
-      Concatenation
-      Label : CONCAT
-        B
-      Label : CONCAT
-        'a'
-    Label : ELSE
-      'c'
+  ;
+  Label : ELEMENT
+    (
+    Label : CODE
+      ?
+      Label : CONDITION
+        $x
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          B
+        Label : CONCAT
+          'a'
+      Label : ELSE
+        'c'

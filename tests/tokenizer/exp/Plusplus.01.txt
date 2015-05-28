@@ -1,6 +1,8 @@
 <?php
 
 Label : CODE
-  ++
-  Label : POSTPLUSPLUS
-    $x
+  ;
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $x

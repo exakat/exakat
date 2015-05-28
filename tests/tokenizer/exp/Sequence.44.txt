@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
       void
-  Label : NAME
-    x
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        void

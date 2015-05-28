@@ -3,64 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        $b
-      Label : ELEMENT
-        $a
-  Label : ELEMENT
-    break
-    Label : LEVEL
-      void
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $a
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            $b
-          Label : ELEMENT
-            $a
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            $b
-          Label : ELEMENT
-            $a
-        Label : CASE
-          'b'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            $b
-          Label : ELEMENT
-            $a
-        Label : CASE
-          'a'
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        $b
-      Label : ELEMENT
-        $a
-    Label : CONDITION
-      $a
-  Label : ELEMENT
     for
     Label : BLOCK
       ;
@@ -79,17 +21,33 @@ Label : CODE
       Label : POSTPLUSPLUS
         $i
   Label : ELEMENT
+    
+  Label : ELEMENT
     foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b
     Label : BLOCK
       ;
       Label : ELEMENT
         $b
       Label : ELEMENT
         $a
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+  Label : ELEMENT
+    break
+    Label : LEVEL
+      void
   Label : ELEMENT
     return
     Label : RETURN
@@ -130,6 +88,50 @@ Label : CODE
                         void
       Label : ELSE
         G
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+        Label : CASE
+          'b'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+        Label : CASE
+          'a'
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
   Label : ELEMENT
     =
     Label : RIGHT

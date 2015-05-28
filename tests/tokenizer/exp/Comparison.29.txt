@@ -1,90 +1,92 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    ||
-    Label : RIGHT
-      &&
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ||
       Label : RIGHT
-        !=
+        &&
         Label : RIGHT
-          substr
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              +
-              Label : RIGHT
-                1
-              Label : LEFT
-                strrpos
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'n'
-                  Label : ARGUMENT
-                    [
-                    Label : VARIABLE
-                      $m
-                    Label : INDEX
+          !=
+          Label : RIGHT
+            substr
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                +
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  strrpos
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
                       'n'
-            Label : ARGUMENT
-              0
-            Label : ARGUMENT
+                    Label : ARGUMENT
+                      [
+                      Label : VARIABLE
+                        $m
+                      Label : INDEX
+                        'n'
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $k
+                Label : INDEX
+                  'l'
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $i
+            Label : INDEX
+              'j'
+        Label : LEFT
+          !
+          Label : NOT
+            defined
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'H'
+      Label : LEFT
+        &&
+        Label : RIGHT
+          !=
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              $f
+            Label : INDEX
+              'g'
+          Label : LEFT
+            Concatenation
+            Label : CONCAT
+              d
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  E
+            Label : CONCAT
               [
               Label : VARIABLE
-                $k
+                $b
               Label : INDEX
-                'l'
+                'c'
         Label : LEFT
-          [
-          Label : VARIABLE
-            $i
-          Label : INDEX
-            'j'
-      Label : LEFT
-        !
-        Label : NOT
           defined
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              'H'
-    Label : LEFT
-      &&
-      Label : RIGHT
-        !=
-        Label : RIGHT
-          [
-          Label : VARIABLE
-            $f
-          Label : INDEX
-            'g'
-        Label : LEFT
-          Concatenation
-          Label : CONCAT
-            d
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                E
-          Label : CONCAT
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              'c'
-      Label : LEFT
-        defined
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'a'
-  Label : THEN
-    ;
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        $x
+              'a'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

@@ -16,10 +16,10 @@ Label : CODE
               void
               Label : ARGUMENT
                 ::
-                Label : PROPERTY
-                  $k
                 Label : CLASS
                   K
+                Label : PROPERTY
+                  $k
         Label : LEFT
           $j
       Label : ELEMENT
@@ -58,10 +58,10 @@ Label : CODE
               'N'
             Label : ARGUMENT
               ::
-              Label : PROPERTY
-                $m
               Label : CLASS
                 M
+              Label : PROPERTY
+                $m
       Label : ELEMENT
         =
         Label : RIGHT
@@ -70,22 +70,22 @@ Label : CODE
             Arguments
             Label : ARGUMENT
               =>
-              Label : KEY
-                'I'
               Label : VALUE
                 $i
+              Label : KEY
+                'I'
             Label : ARGUMENT
               =>
-              Label : KEY
-                'H'
               Label : VALUE
                 $h
+              Label : KEY
+                'H'
             Label : ARGUMENT
               =>
-              Label : KEY
-                'G'
               Label : VALUE
                 $g
+              Label : KEY
+                'G'
         Label : LEFT
           $f
       Label : ELEMENT
@@ -102,8 +102,8 @@ Label : CODE
           $d
     Label : CATCH
       catch
-      Label : VARIABLE
-        $y
+      Label : CLASS
+        AF
       Label : CODE
         ;
         Label : ELEMENT
@@ -116,12 +116,12 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'AH'
-      Label : CLASS
-        AF
+      Label : VARIABLE
+        $y
     Label : CATCH
       catch
-      Label : VARIABLE
-        $w
+      Label : CLASS
+        AC
       Label : CODE
         ;
         Label : ELEMENT
@@ -142,12 +142,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-      Label : CLASS
-        AC
+      Label : VARIABLE
+        $w
     Label : CATCH
       catch
-      Label : VARIABLE
-        $u
+      Label : CLASS
+        Z
       Label : CODE
         ;
         Label : ELEMENT
@@ -168,12 +168,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-      Label : CLASS
-        Z
+      Label : VARIABLE
+        $u
     Label : CATCH
       catch
-      Label : VARIABLE
-        $s
+      Label : CLASS
+        U
       Label : CODE
         ;
         Label : ELEMENT
@@ -198,12 +198,12 @@ Label : CODE
                       'Y'
                   Label : CONCAT
                     'W'
-      Label : CLASS
-        U
+      Label : VARIABLE
+        $s
     Label : CATCH
       catch
-      Label : VARIABLE
-        $r
+      Label : CLASS
+        R
       Label : CODE
         ;
         Label : ELEMENT
@@ -216,8 +216,8 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'T'
-      Label : CLASS
-        R
+      Label : VARIABLE
+        $r
   Label : ELEMENT
     if
     Label : CONDITION

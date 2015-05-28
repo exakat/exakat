@@ -47,28 +47,6 @@ Label : CODE
         Label : INDEX
           3
   Label : ELEMENT
-    class
-    Label : NAME
-      x
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        const
-        Label : NAME
-          A
-        Label : VALUE
-          array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              =>
-              Label : VALUE
-                3
-              Label : KEY
-                2
-            Label : ARGUMENT
-              1
-  Label : ELEMENT
     print
     Label : ARGUMENTS
       void
@@ -82,3 +60,25 @@ Label : CODE
             A
         Label : INDEX
           0
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        const
+        Label : VALUE
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              =>
+              Label : VALUE
+                3
+              Label : KEY
+                2
+            Label : ARGUMENT
+              1
+        Label : NAME
+          A
+    Label : NAME
+      x

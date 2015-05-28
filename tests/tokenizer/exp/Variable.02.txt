@@ -1,4 +1,6 @@
 <?php
 
 Label : CODE
-  $C1
+  ;
+  Label : ELEMENT
+    $C1

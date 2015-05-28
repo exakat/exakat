@@ -34,6 +34,8 @@ Label : ELEMENT
                   Label : INDEX
                     'S'
     Label : ELEMENT
+      
+    Label : ELEMENT
       if
       Label : CONDITION
         ==

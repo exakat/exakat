@@ -1,57 +1,53 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $x
-    Label : THEN
-      ;
-      Label : ELEMENT
-        foreach
-        Label : SOURCE
-          $a
-        Label : VALUE
-          $b
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              true
-            Label : LEFT
-              [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $a
-                Label : PROPERTY
-                  b
-              Label : INDEX
-                d
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $c
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          true
-        Label : LEFT
-          [
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              b
-          Label : INDEX
-            d
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
+  if
+  Label : CONDITION
+    $x
+  Label : THEN
+    ;
+    Label : ELEMENT
+      foreach
+      Label : VALUE
+        $b
+      Label : SOURCE
+        $a
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            true
+          Label : LEFT
+            [
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                b
+            Label : INDEX
+              d
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $c
+  Label : ELSE
+    Block with else
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        true
+      Label : LEFT
+        [
+        Label : VARIABLE
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
+        Label : INDEX
+          d
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c

@@ -9,6 +9,8 @@ Label : CODE
     Label : BLOCK
       void
   Label : ELEMENT
+    
+  Label : ELEMENT
     if
     Label : CONDITION
       $a

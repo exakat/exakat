@@ -1,32 +1,34 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      $b
-  Label : NAME
-    a
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      ?
-      Label : CONDITION
-        $a
-      Label : THEN
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         $b
-      Label : ELSE
-        $c
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        !
-        Label : NOT
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ?
+        Label : CONDITION
+          $a
+        Label : THEN
+          $b
+        Label : ELSE
           $c
-      Label : THEN
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            false
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          !
+          Label : NOT
+            $c
+        Label : THEN
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              false
+    Label : NAME
+      a

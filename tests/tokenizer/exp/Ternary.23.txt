@@ -1,60 +1,62 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    ?
-    Label : CONDITION
-      >
-      Label : RIGHT
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        >
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $c
+            Label : PROPERTY
+              d
+          Label : INDEX
+            'e'
+        Label : LEFT
+          $b
+      Label : THEN
         [
         Label : VARIABLE
           ->
           Label : OBJECT
-            $c
+            $f
           Label : PROPERTY
-            d
+            g
         Label : INDEX
-          'e'
-      Label : LEFT
-        $b
-    Label : THEN
-      [
-      Label : VARIABLE
-        ->
-        Label : OBJECT
-          $f
-        Label : PROPERTY
-          g
-      Label : INDEX
-        'h'
-    Label : ELSE
-      ||
-      Label : RIGHT
-        (
-        Label : CODE
-          /
-          Label : RIGHT
-            [
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $m
-              Label : PROPERTY
-                n
-            Label : INDEX
-              'o'
-          Label : LEFT
-            $l
-      Label : LEFT
-        [
-        Label : VARIABLE
-          ->
-          Label : OBJECT
-            $i
-          Label : PROPERTY
-            j
-        Label : INDEX
-          'k'
-  Label : LEFT
-    $a
+          'h'
+      Label : ELSE
+        ||
+        Label : RIGHT
+          (
+          Label : CODE
+            /
+            Label : RIGHT
+              [
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $m
+                Label : PROPERTY
+                  n
+              Label : INDEX
+                'o'
+            Label : LEFT
+              $l
+        Label : LEFT
+          [
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $i
+            Label : PROPERTY
+              j
+          Label : INDEX
+            'k'
+    Label : LEFT
+      $a

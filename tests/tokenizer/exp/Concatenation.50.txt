@@ -15,7 +15,7 @@ Label : CODE
             Label : CONCAT
               'D'
             Label : CONCAT
-              [
+              {
               Label : VARIABLE
                 $f
               Label : INDEX
@@ -25,7 +25,7 @@ Label : CODE
                 Label : LEFT
                   $g
             Label : CONCAT
-              [
+              {
               Label : VARIABLE
                 $d
               Label : INDEX
@@ -35,7 +35,7 @@ Label : CODE
                 Label : LEFT
                   $e
             Label : CONCAT
-              [
+              {
               Label : VARIABLE
                 $b
               Label : INDEX
@@ -65,7 +65,7 @@ Label : CODE
             Label : CONCAT
               'D'
             Label : CONCAT
-              [
+              {
               Label : VARIABLE
                 $f
               Label : INDEX
@@ -75,7 +75,7 @@ Label : CODE
                 Label : LEFT
                   $g
             Label : CONCAT
-              [
+              {
               Label : VARIABLE
                 $d
               Label : INDEX
@@ -85,7 +85,7 @@ Label : CODE
                 Label : LEFT
                   $e
             Label : CONCAT
-              [
+              {
               Label : VARIABLE
                 $b
               Label : INDEX
@@ -109,63 +109,13 @@ Label : CODE
       Label : AT
         B
         Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              'D'
-            Label : CONCAT
-              {
-              Label : VARIABLE
-                $f
-              Label : INDEX
-                +
-                Label : RIGHT
-                  2
-                Label : LEFT
-                  $g
-            Label : CONCAT
-              {
-              Label : VARIABLE
-                $d
-              Label : INDEX
-                +
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  $e
-            Label : CONCAT
-              {
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                +
-                Label : RIGHT
-                  0
-                Label : LEFT
-                  $c
-            Label : CONCAT
-              'H'
-            Label : CONCAT
-              'G'
-            Label : CONCAT
-              'C'
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      @
-      Label : AT
-        B
-        Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
             Concatenation
             Label : CONCAT
               'D'
             Label : CONCAT
-              {
+              [
               Label : VARIABLE
                 $f
               Label : INDEX
@@ -175,7 +125,7 @@ Label : CODE
                 Label : LEFT
                   $g
             Label : CONCAT
-              {
+              [
               Label : VARIABLE
                 $d
               Label : INDEX
@@ -185,7 +135,7 @@ Label : CODE
                 Label : LEFT
                   $e
             Label : CONCAT
-              {
+              [
               Label : VARIABLE
                 $b
               Label : INDEX
@@ -208,6 +158,56 @@ Label : CODE
       'Z'
     Label : CONCAT
       'Y'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      @
+      Label : AT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'D'
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                +
+                Label : RIGHT
+                  2
+                Label : LEFT
+                  $g
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                +
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  $e
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                +
+                Label : RIGHT
+                  0
+                Label : LEFT
+                  $c
+            Label : CONCAT
+              'H'
+            Label : CONCAT
+              'G'
+            Label : CONCAT
+              'C'
+    Label : LEFT
+      $a
   Label : ELEMENT
     =
     Label : RIGHT

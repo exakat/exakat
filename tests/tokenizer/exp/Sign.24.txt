@@ -1,18 +1,20 @@
 <?php
 
 Label : CODE
-  [
-  Label : VARIABLE
-    $a
-  Label : INDEX
-    -
-    Label : SIGN
-      [
-      Label : VARIABLE
+  ;
+  Label : ELEMENT
+    [
+    Label : VARIABLE
+      $a
+    Label : INDEX
+      -
+      Label : SIGN
         [
         Label : VARIABLE
-          $b
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            'c'
         Label : INDEX
-          'c'
-      Label : INDEX
-        0
+          0

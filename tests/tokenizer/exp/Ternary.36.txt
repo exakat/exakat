@@ -51,18 +51,18 @@ Label : ELEMENT
         ->
         Label : OBJECT
           ::
-          Label : METHOD
-            Y
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
           Label : CLASS
             \
             Label : SUBNAME
               X
             Label : SUBNAME
               W
+          Label : METHOD
+            Y
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
         Label : METHOD
           Z
           Label : ARGUMENTS
@@ -77,14 +77,6 @@ Label : ELEMENT
       U
     Label : ELEMENT
       L
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $e
-    Label : ELEMENT
-      M
     Label : ELEMENT
       if
       Label : CONDITION
@@ -123,6 +115,18 @@ Label : ELEMENT
           ;
           Label : ELEMENT
             K
+    Label : ELEMENT
+      
+    Label : ELEMENT
+      
+    Label : ELEMENT
+      print
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $e
+    Label : ELEMENT
+      M
     Label : ELEMENT
       E
     Label : ELEMENT

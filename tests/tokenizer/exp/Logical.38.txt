@@ -1,33 +1,35 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    &&
-    Label : RIGHT
-      $d
-    Label : LEFT
-      instanceof
-      Label : VARIABLE
-        $a
-      Label : CLASS
-        \
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          B
-  Label : THEN
-    ;
-    Label : ELEMENT
-      =
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      &&
       Label : RIGHT
-        ->
-        Label : OBJECT
-          $f
-        Label : METHOD
-          g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
+        $d
       Label : LEFT
-        $e
+        instanceof
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
+        Label : VARIABLE
+          $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $f
+          Label : METHOD
+            g
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : LEFT
+          $e

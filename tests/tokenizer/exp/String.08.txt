@@ -1,17 +1,19 @@
 <?php 
 Label : CODE
-  =
-  Label : RIGHT
-    "
-    Label : CONTAINS
-      Concatenation
-      Label : CONCAT
-        $b4
-      Label : CONCAT
-        C
-      Label : CONCAT
-        $c
-      Label : CONCAT
-        $d4
-  Label : LEFT
-    $a4
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          $b4
+        Label : CONCAT
+          C
+        Label : CONCAT
+          $c
+        Label : CONCAT
+          $d4
+    Label : LEFT
+      $a4

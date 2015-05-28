@@ -251,46 +251,6 @@ Label : CODE
         Label : ELEMENT
           =
           Label : RIGHT
-            AF
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $m
-          Label : LEFT
-            $m
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            ?
-            Label : CONDITION
-              (
-              Label : CODE
-                ==
-                Label : RIGHT
-                  'AC'
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $k
-                  Label : INDEX
-                    $i
-            Label : THEN
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                AD
-            Label : ELSE
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                AE
-          Label : LEFT
-            $l
-        Label : ELEMENT
-          =
-          Label : RIGHT
             @
             Label : AT
               G
@@ -398,6 +358,46 @@ Label : CODE
                     Concatenation
                     Label : CONCAT
                       $i
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                ==
+                Label : RIGHT
+                  'AC'
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $k
+                  Label : INDEX
+                    $i
+            Label : THEN
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                AD
+            Label : ELSE
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                AE
+          Label : LEFT
+            $l
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            AF
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $m
+          Label : LEFT
+            $m
         Label : ELEMENT
           require
           Label : ARGUMENTS

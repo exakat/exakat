@@ -5,13 +5,13 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      3
+      1
     Label : LEFT
-      $c
+      $a
   Label : ELEMENT
     :
     Label : LABEL
-      C
+      B
   Label : ELEMENT
     =
     Label : RIGHT
@@ -21,13 +21,13 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      B
+      C
   Label : ELEMENT
     =
     Label : RIGHT
-      1
+      3
     Label : LEFT
-      $a
+      $c
   Label : ELEMENT
     :
     Label : LABEL

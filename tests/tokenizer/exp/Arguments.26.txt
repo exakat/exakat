@@ -1,62 +1,64 @@
 <?php
 
 Label : CODE
-  namespace
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          ?
-          Label : CONDITION
-            >
-            Label : RIGHT
-              0
-            Label : LEFT
-              $d
-          Label : THEN
-            'H'
-          Label : ELSE
-            'I'
-        Label : ARGUMENT
-          =
-          Label : RIGHT
-            F
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  G
-          Label : LEFT
-            $b
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        empty
+  ;
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        D
+      Label : ELEMENT
+        echo
         Label : ARGUMENTS
-          void
+          Arguments
           Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              D
-      Label : THEN
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
+            ?
+            Label : CONDITION
+              >
+              Label : RIGHT
+                0
+              Label : LEFT
+                $d
+            Label : THEN
+              'H'
+            Label : ELSE
+              'I'
+          Label : ARGUMENT
+            =
+            Label : RIGHT
+              F
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $c
+                  Label : PROPERTY
+                    G
+            Label : LEFT
+              $b
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          empty
+          Label : ARGUMENTS
             void
-    Label : ELEMENT
-      D
-    Label : ELEMENT
-      use
-      Label : USE
-        C
-  Label : NAMESPACE
-    B
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                D
+        Label : THEN
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              void
+      Label : ELEMENT
+        use
+        Label : USE
+          C
+    Label : NAMESPACE
+      B

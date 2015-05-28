@@ -1,26 +1,28 @@
 <?php
 
 Label : CODE
-  ->
-  Label : OBJECT
+  ;
+  Label : ELEMENT
     ->
     Label : OBJECT
-      $a
-    Label : PROPERTY
-      b
-  Label : METHOD
-    c
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        f
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
+    Label : METHOD
+      c
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          f
+          Label : ARGUMENTS
             void
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          $e
-        Label : CONCAT
-          'D'
+            Label : ARGUMENT
+              void
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            $e
+          Label : CONCAT
+            'D'

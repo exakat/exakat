@@ -1,42 +1,44 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    ?
-    Label : CONDITION
-      ||
-      Label : RIGHT
-        ==
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        ||
         Label : RIGHT
-          3
-        Label : LEFT
-          [
-          Label : VARIABLE
+          ==
+          Label : RIGHT
+            3
+          Label : LEFT
             [
             Label : VARIABLE
-              $e
+              [
+              Label : VARIABLE
+                $e
+              Label : INDEX
+                'f'
             Label : INDEX
-              'f'
-          Label : INDEX
-            'g'
-      Label : LEFT
-        ==
-        Label : RIGHT
-          2
+              'g'
         Label : LEFT
-          [
-          Label : VARIABLE
+          ==
+          Label : RIGHT
+            2
+          Label : LEFT
             [
             Label : VARIABLE
-              $b
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                'c'
             Label : INDEX
-              'c'
-          Label : INDEX
-            'd'
-    Label : THEN
-      'h'
-    Label : ELSE
-      'i'
-  Label : LEFT
-    $a
+              'd'
+      Label : THEN
+        'h'
+      Label : ELSE
+        'i'
+    Label : LEFT
+      $a

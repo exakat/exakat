@@ -14,10 +14,10 @@ Label : CODE
       $g
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $i
     Label : SOURCE
       $h
+    Label : VALUE
+      $i
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -38,14 +38,14 @@ Label : CODE
       ;
       Label : ELEMENT
         foreach
-        Label : VALUE
-          =>
-          Label : KEY
-            $c
-          Label : VALUE
-            $d
         Label : SOURCE
           $b
+        Label : VALUE
+          =>
+          Label : VALUE
+            $d
+          Label : KEY
+            $c
         Label : BLOCK
           ;
           Label : ELEMENT

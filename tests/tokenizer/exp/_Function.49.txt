@@ -8,8 +8,6 @@ Label : CODE
       $b
     Label : ARGUMENT
       $a
-  Label : NAME
-    B
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -126,3 +124,5 @@ Label : CODE
             $d
       Label : LEFT
         $c
+  Label : NAME
+    B

@@ -24,7 +24,7 @@ Label : CODE
             void
       Label : LEFT
         $b
-  Label : NAME
-    a
   Label : BLOCK
     void
+  Label : NAME
+    a

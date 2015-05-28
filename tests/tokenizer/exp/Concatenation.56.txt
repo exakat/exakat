@@ -6,8 +6,6 @@ Label : CODE
     $a
   Label : METHOD
     ;
-    Label : ARGUMENTS
-      void
     Label : ELEMENT
       Concatenation
       Label : CONCAT
@@ -18,3 +16,5 @@ Label : CODE
           $b
         Label : PROPERTY
           c
+    Label : ARGUMENTS
+      void

@@ -3,6 +3,8 @@
 Label : CODE
   ;
   Label : ELEMENT
+    
+  Label : ELEMENT
     if
     Label : CONDITION
       $a
@@ -84,6 +86,8 @@ Label : CODE
             void
             Label : ARGUMENT
               'B'
+  Label : ELEMENT
+    
   Label : ELEMENT
     if
     Label : CONDITION

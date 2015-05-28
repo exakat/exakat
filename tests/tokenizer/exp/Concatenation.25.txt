@@ -1,22 +1,24 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    <<<EOD
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<EOD
 
-    Label : CONTAINS
-      Concatenation
-      Label : CONCAT
-        
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          
 Oui
 
 
-      Label : CONCAT
-        $x
-      Label : CONCAT
-        
+        Label : CONCAT
+          $x
+        Label : CONCAT
+          
 
 
-  Label : LEFT
-    $x
+    Label : LEFT
+      $x

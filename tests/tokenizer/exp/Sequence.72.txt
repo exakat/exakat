@@ -12,24 +12,24 @@ Label : CODE
           Arguments
           Label : ARGUMENT
             =>
+            Label : KEY
+              'M'
             Label : VALUE
               [
               Label : VARIABLE
                 $t
               Label : INDEX
                 'N'
-            Label : KEY
-              'M'
           Label : ARGUMENT
             =>
+            Label : KEY
+              'K'
             Label : VALUE
               [
               Label : VARIABLE
                 $s
               Label : INDEX
                 'L'
-            Label : KEY
-              'K'
       Label : ARGUMENT
         [
         Label : VARIABLE

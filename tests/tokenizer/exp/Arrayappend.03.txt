@@ -10,9 +10,9 @@ Label : CODE
       [
       Label : VARIABLE
         ::
-        Label : PROPERTY
-          $b
         Label : CLASS
           $a
+        Label : PROPERTY
+          $b
       Label : INDEX
         2

@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  ?
-  Label : CONDITION
-    *
-    Label : RIGHT
-      $x
-    Label : LEFT
-      '1'
-  Label : THEN
-    2
-  Label : ELSE
-    3
+  ;
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      *
+      Label : RIGHT
+        $x
+      Label : LEFT
+        '1'
+    Label : THEN
+      2
+    Label : ELSE
+      3

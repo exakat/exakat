@@ -1,8 +1,6 @@
 <?php 
 Label : CODE
   foreach
-  Label : VALUE
-    $d
   Label : SOURCE
     ->
     Label : OBJECT
@@ -13,6 +11,8 @@ Label : CODE
         void
         Label : ARGUMENT
           void
+  Label : VALUE
+    $d
   Label : BLOCK
     ;
     Label : ELEMENT

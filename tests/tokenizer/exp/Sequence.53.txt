@@ -12,11 +12,11 @@ Label : CODE
         $d
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b
     Label : BLOCK
       ;
       Label : ELEMENT
         $c
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $a

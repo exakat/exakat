@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  throw
-  Label : THROW
-    new
-    Label : NEW
-      a
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          "
-          Label : CONTAINS
-            Concatenation
-            Label : CONCAT
-              b '
-            Label : CONCAT
-              $c
-            Label : CONCAT
-              ' d
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        a
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                b '
+              Label : CONCAT
+                $c
+              Label : CONCAT
+                ' d

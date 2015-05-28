@@ -10,8 +10,6 @@ Label : CODE
   Label : THEN
     ;
     Label : ELEMENT
-      G
-    Label : ELEMENT
       echo
       Label : ARGUMENTS
         void
@@ -26,7 +24,7 @@ Label : CODE
               Label : INDEX
                 'G'
     Label : ELEMENT
-      D
+      G
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -37,6 +35,8 @@ Label : CODE
             $b
           Label : INDEX
             'D'
+    Label : ELEMENT
+      D
     Label : ELEMENT
       B
   Label : ELSE

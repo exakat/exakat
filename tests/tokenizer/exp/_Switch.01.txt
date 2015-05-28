@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $x
-  Label : CASES
-    void
+  ;
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $x
+    Label : CASES
+      void

@@ -74,42 +74,6 @@ Label : CODE
                 $c1
         Label : CONCAT
           C1
-    Label : LEFT
-      $a2
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b
-          Label : INDEX
-            "
-            Label : CONTAINS
-              Concatenation
-              Label : CONCAT
-                B
-              Label : CONCAT
-                $c
-        Label : CONCAT
-          C
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b1
-          Label : INDEX
-            "
-            Label : CONTAINS
-              Concatenation
-              Label : CONCAT
-                B1
-              Label : CONCAT
-                $c1
-        Label : CONCAT
-          C1
         Label : CONCAT
           [
           Label : VARIABLE
@@ -166,6 +130,42 @@ Label : CODE
                 $c5
         Label : CONCAT
           C5
+    Label : LEFT
+      $a2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B
+              Label : CONCAT
+                $c
+        Label : CONCAT
+          C
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b1
+          Label : INDEX
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                B1
+              Label : CONCAT
+                $c1
+        Label : CONCAT
+          C1
     Label : LEFT
       $a2
   Label : ELEMENT

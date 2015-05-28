@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  oR
-  Label : RIGHT
-    4
-  Label : LEFT
-    3
+  ;
+  Label : ELEMENT
+    oR
+    Label : RIGHT
+      4
+    Label : LEFT
+      3

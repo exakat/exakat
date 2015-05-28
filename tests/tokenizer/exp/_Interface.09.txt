@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     interface
+    Label : BLOCK
+      void
     Label : NAME
       int
-    Label : BLOCK
-      void
   Label : ELEMENT
     interface
+    Label : BLOCK
+      void
     Label : NAME
       true
-    Label : BLOCK
-      void
   Label : ELEMENT
     interface
-    Label : NAME
-      null
     Label : BLOCK
       void
+    Label : NAME
+      null

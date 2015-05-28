@@ -1,4 +1,3 @@
-<?php
-
-Label : CODE
+;
+Label : ELEMENT
   FALSE

@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  XoR
-  Label : RIGHT
-    6
-  Label : LEFT
-    5
+  ;
+  Label : ELEMENT
+    XoR
+    Label : RIGHT
+      6
+    Label : LEFT
+      5

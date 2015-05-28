@@ -1,28 +1,30 @@
 <?php
 
 Label : CODE
-  +
-  Label : RIGHT
-    ::
-    Label : METHOD
-      d
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-    Label : CLASS
-      static
-  Label : LEFT
+  ;
+  Label : ELEMENT
     +
     Label : RIGHT
       ::
       Label : CLASS
         static
-      Label : CONSTANT
-        C
+      Label : METHOD
+        d
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
     Label : LEFT
-      ::
-      Label : PROPERTY
-        $B
-      Label : CLASS
-        static
+      +
+      Label : RIGHT
+        ::
+        Label : CLASS
+          static
+        Label : CONSTANT
+          C
+      Label : LEFT
+        ::
+        Label : CLASS
+          static
+        Label : PROPERTY
+          $B

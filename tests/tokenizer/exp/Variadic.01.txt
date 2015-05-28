@@ -24,10 +24,10 @@ Label : CODE
       void
       Label : ARGUMENT
         ::
-        Label : PROPERTY
-          $k
         Label : CLASS
           F
+        Label : PROPERTY
+          $k
     Label : NAME
       $j
   Label : ELEMENT

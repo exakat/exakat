@@ -2,6 +2,10 @@
 
 Label : CODE
   [
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      34
   Label : VARIABLE
     [
     Label : VARIABLE
@@ -14,9 +18,5 @@ Label : CODE
       d
   Label : INDEX
     'e'
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      34
   Label : NAME
     [

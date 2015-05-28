@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  interface
-  Label : NAME
-    a
-  Label : BLOCK
-    void
+  ;
+  Label : ELEMENT
+    interface
+    Label : NAME
+      a
+    Label : BLOCK
+      void

@@ -4,7 +4,7 @@ Label : CODE
   new
   Label : NEW
     ::
-    Label : PROPERTY
-      $y
     Label : CLASS
       C
+    Label : PROPERTY
+      $y

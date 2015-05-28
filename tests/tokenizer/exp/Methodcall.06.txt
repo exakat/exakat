@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    ->
-    Label : OBJECT
-      $b
-    Label : METHOD
-      'c'
-      Label : ARGUMENTS
-        void
-  Label : LEFT
-    $a
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $b
+      Label : METHOD
+        'c'
+        Label : ARGUMENTS
+          void
+    Label : LEFT
+      $a

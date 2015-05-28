@@ -3,6 +3,8 @@
 Label : CODE
   ;
   Label : ELEMENT
+    
+  Label : ELEMENT
     while
     Label : CONDITION
       1

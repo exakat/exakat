@@ -18,10 +18,10 @@ Label : CODE
     return
     Label : RETURN
       ::
-      Label : PROPERTY
-        $y
       Label : CLASS
         b
+      Label : PROPERTY
+        $y
   Label : ELEMENT
     return
     Label : RETURN

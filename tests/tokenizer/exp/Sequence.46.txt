@@ -1,38 +1,40 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    $z
-  Label : THEN
-    ;
-    Label : ELEMENT
-      ->
-      Label : OBJECT
-        $e
-      Label : METHOD
-        f
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $g
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        !
-        Label : NOT
-          empty
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $z
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $e
+        Label : METHOD
+          f
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              [
-              Label : VARIABLE
+              $g
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          !
+          Label : NOT
+            empty
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 [
                 Label : VARIABLE
-                  $b
+                  [
+                  Label : VARIABLE
+                    $b
+                  Label : INDEX
+                    'c'
                 Label : INDEX
-                  'c'
-              Label : INDEX
-                'd'
-      Label : THEN
-        void
+                  'd'
+        Label : THEN
+          void

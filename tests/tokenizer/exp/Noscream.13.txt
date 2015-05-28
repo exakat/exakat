@@ -1,26 +1,28 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    2
-  Label : LEFT
-    @
-    Label : AT
-      [
-      Label : VARIABLE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      @
+      Label : AT
         [
         Label : VARIABLE
           [
           Label : VARIABLE
-            $x
+            [
+            Label : VARIABLE
+              $x
+            Label : INDEX
+              1
           Label : INDEX
-            1
+            2
         Label : INDEX
-          2
-      Label : INDEX
-        +
-        Label : RIGHT
-          3
-        Label : LEFT
-          2
+          +
+          Label : RIGHT
+            3
+          Label : LEFT
+            2
