@@ -60,11 +60,12 @@ class Sign extends TokenAuto {
         
         //  + -$s (Normal case)
         //'T_OPEN_CURLY',
-        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_ARRAY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_ARRAY', 'T_OBJECT_OPERATOR', 
                                                                                  'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
                                                                                  'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',
                                                                                  'T_CLOSE_BRACKET','T_DOLLAR', 'T_CLOSE_CURLY',
-                                                                                 'T_FUNCTION', 'T_INC', 'T_DEC'),
+                                                                                 'T_FUNCTION', 'T_INC', 'T_DEC', 'T_DOUBLE_COLON',
+                                                                                 'T_QUOTE', 'T_QUOTE_CLOSE'),
                                                                           Magicconstant::$operators, Not::$operators),
                                                'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
                                                                      'Multiplication', 'Cast', 'Integer', 'Float', 'Function')),
