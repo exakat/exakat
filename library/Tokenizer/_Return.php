@@ -42,7 +42,8 @@ class _Return extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Return::$operators,
                                               'atom' => 'none' ),
                                    1 => array('atom' => 'yes'),
-                                   2 => array('filterOut2' => Token::$instructionEnding),
+                                   2 => array('filterOut2' => array_merge(Token::$instructionEnding,
+                                                                          array('T_OPEN_CURLY'))),
         );
         
         $this->actions = array('transform'    => array( 1 => 'RETURN'),
