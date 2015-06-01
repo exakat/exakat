@@ -9,10 +9,10 @@ Label : CODE
       Label : ARGUMENT
         [
         Label : VARIABLE
-          ::
-          Label : CLASS
-            b
-          Label : CONSTANT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
             x
         Label : INDEX
           1
@@ -23,10 +23,10 @@ Label : CODE
       Label : ARGUMENT
         [
         Label : VARIABLE
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
+          ::
+          Label : CLASS
+            b
+          Label : CONSTANT
             x
         Label : INDEX
           1

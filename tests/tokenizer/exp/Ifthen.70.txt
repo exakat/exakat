@@ -1,20 +1,12 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    &&
-    Label : RIGHT
-      isset
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'D'
-    Label : LEFT
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
       &&
       Label : RIGHT
         isset
@@ -23,188 +15,204 @@ Label : CODE
           Label : ARGUMENT
             [
             Label : VARIABLE
-              $b
+              $c
             Label : INDEX
-              'C'
+              'D'
       Label : LEFT
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'B'
-  Label : THEN
-    ;
-    Label : ELEMENT
-      AI
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          AJ
+        &&
+        Label : RIGHT
+          isset
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              AK
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'AL'
-    Label : ELEMENT
-      exit
-      Label : ARGUMENTS
-        void
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        &&
-        Label : RIGHT
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                'C'
+        Label : LEFT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                'B'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        AI
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            AJ
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                AK
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'AL'
+      Label : ELEMENT
+        exit
+        Label : ARGUMENTS
+          void
+      Label : ELEMENT
+        if
+        Label : CONDITION
           &&
           Label : RIGHT
-            ->
-            Label : OBJECT
-              $i
-            Label : METHOD
-              K
+            &&
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $i
+              Label : METHOD
+                K
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'M'
+                  Label : ARGUMENT
+                    'L'
+            Label : LEFT
+              G
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
-                  'M'
+                  array
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'J'
+                    Label : ARGUMENT
+                      'I'
                 Label : ARGUMENT
-                  'L'
+                  ->
+                  Label : OBJECT
+                    $h
+                  Label : PROPERTY
+                    H
           Label : LEFT
-            G
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'J'
-                  Label : ARGUMENT
-                    'I'
-              Label : ARGUMENT
+            &&
+            Label : RIGHT
+              ==
+              Label : RIGHT
+                $g
+              Label : LEFT
                 ->
                 Label : OBJECT
-                  $h
+                  $f
                 Label : PROPERTY
-                  H
-        Label : LEFT
-          &&
-          Label : RIGHT
-            ==
-            Label : RIGHT
-              $g
+                  F
             Label : LEFT
-              ->
-              Label : OBJECT
-                $f
-              Label : PROPERTY
-                F
-          Label : LEFT
-            ==
-            Label : RIGHT
-              $e
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $d
-              Label : PROPERTY
-                E
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ->
-          Label : OBJECT
-            $k
-          Label : METHOD
-            R
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                S
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'U'
-                  Label : ARGUMENT
-                    'T'
-        Label : ELEMENT
-          V
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $l
-              Label : PROPERTY
-                X
-            Label : ARGUMENT
-              'W'
-        Label : ELEMENT
-          ->
-          Label : OBJECT
-            $j
-          Label : METHOD
-            N
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                O
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'Q'
-                  Label : ARGUMENT
-                    'P'
-      Label : ELSE
-        elseif
-        Label : CONDITION
-          !=
-          Label : RIGHT
-            'Z'
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $m
-            Label : PROPERTY
-              Y
+              ==
+              Label : RIGHT
+                $e
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  E
         Label : THEN
           ;
           Label : ELEMENT
             ->
             Label : OBJECT
-              $n
+              $k
             Label : METHOD
-              AA
+              R
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  AB
+                  S
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      'AD'
+                      'U'
                     Label : ARGUMENT
-                      'AC'
-        Label : ELSE
-          ;
+                      'T'
+          Label : ELEMENT
+            V
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $l
+                Label : PROPERTY
+                  X
+              Label : ARGUMENT
+                'W'
           Label : ELEMENT
             ->
             Label : OBJECT
-              $o
+              $j
             Label : METHOD
-              AE
+              N
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  AF
+                  O
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      'AH'
+                      'Q'
                     Label : ARGUMENT
-                      'AG'
+                      'P'
+        Label : ELSE
+          elseif
+          Label : CONDITION
+            !=
+            Label : RIGHT
+              'Z'
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $m
+              Label : PROPERTY
+                Y
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                $n
+              Label : METHOD
+                AA
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    AB
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        'AD'
+                      Label : ARGUMENT
+                        'AC'
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                $o
+              Label : METHOD
+                AE
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    AF
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        'AH'
+                      Label : ARGUMENT
+                        'AG'

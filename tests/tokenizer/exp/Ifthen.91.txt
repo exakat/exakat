@@ -8,6 +8,8 @@ Label : CODE
       void
       Label : ARGUMENT
         $a
+    Label : NAME
+      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -42,10 +44,10 @@ Label : CODE
           elseif
           Label : CONDITION
             instanceof
-            Label : CLASS
-              E
             Label : VARIABLE
               $a
+            Label : CLASS
+              E
           Label : THEN
             ;
             Label : ELEMENT
@@ -80,14 +82,6 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   foreach
-                  Label : SOURCE
-                    $a
-                  Label : VALUE
-                    =>
-                    Label : VALUE
-                      $c
-                    Label : KEY
-                      $b
                   Label : BLOCK
                     ;
                     Label : ELEMENT
@@ -145,6 +139,26 @@ Label : CODE
                         Label : ELEMENT
                           =
                           Label : RIGHT
+                            [
+                            Label : VARIABLE
+                              $c
+                            Label : INDEX
+                              'O'
+                          Label : LEFT
+                            $c
+                        Label : ELEMENT
+                          =
+                          Label : RIGHT
+                            [
+                            Label : VARIABLE
+                              $c
+                            Label : INDEX
+                              'M'
+                          Label : LEFT
+                            $b
+                        Label : ELEMENT
+                          =
+                          Label : RIGHT
                             ?
                             Label : CONDITION
                               isset
@@ -170,26 +184,6 @@ Label : CODE
                                   void
                           Label : LEFT
                             $d
-                        Label : ELEMENT
-                          =
-                          Label : RIGHT
-                            [
-                            Label : VARIABLE
-                              $c
-                            Label : INDEX
-                              'M'
-                          Label : LEFT
-                            $b
-                        Label : ELEMENT
-                          =
-                          Label : RIGHT
-                            [
-                            Label : VARIABLE
-                              $c
-                            Label : INDEX
-                              'O'
-                          Label : LEFT
-                            $c
                         Label : ELEMENT
                           if
                           Label : CONDITION
@@ -306,6 +300,14 @@ Label : CODE
                                   void
                             Label : LEFT
                               $d
+                  Label : VALUE
+                    =>
+                    Label : KEY
+                      $b
+                    Label : VALUE
+                      $c
+                  Label : SOURCE
+                    $a
                 Label : ELEMENT
                   I
                   Label : ARGUMENTS
@@ -340,5 +342,3 @@ Label : CODE
                                   $a
                             Label : CONCAT
                               'AH'
-    Label : NAME
-      B

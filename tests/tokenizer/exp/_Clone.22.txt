@@ -14,8 +14,6 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           (array)
           Label : CAST
@@ -24,3 +22,5 @@ Label : CODE
               (object)
               Label : CAST
                 $a
+        Label : LEFT
+          $b

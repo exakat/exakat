@@ -14,18 +14,6 @@ Label : CODE
       ;
       Label : ELEMENT
         while
-        Label : CONDITION
-          !
-          Label : NOT
-            ->
-            Label : OBJECT
-              $b
-            Label : METHOD
-              D
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -38,6 +26,18 @@ Label : CODE
                   $c
                 Label : PROPERTY
                   F
+        Label : CONDITION
+          !
+          Label : NOT
+            ->
+            Label : OBJECT
+              $b
+            Label : METHOD
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
       Label : ELEMENT
         if
         Label : CONDITION

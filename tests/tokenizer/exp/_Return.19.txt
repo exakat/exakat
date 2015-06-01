@@ -8,6 +8,8 @@ Label : CODE
       void
       Label : ARGUMENT
         $a
+    Label : NAME
+      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -16,14 +18,14 @@ Label : CODE
           ?
           Label : CONDITION
             instanceof
+            Label : VARIABLE
+              $b
             Label : CLASS
               \
               Label : SUBNAME
                 D
               Label : SUBNAME
                 C
-            Label : VARIABLE
-              $b
           Label : THEN
             ->
             Label : OBJECT
@@ -44,5 +46,3 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $f
-    Label : NAME
-      B

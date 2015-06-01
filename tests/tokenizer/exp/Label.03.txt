@@ -5,10 +5,6 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      B
-  Label : ELEMENT
-    :
-    Label : LABEL
       C
   Label : ELEMENT
     =
@@ -16,6 +12,10 @@ Label : CODE
       2
     Label : LEFT
       $b
+  Label : ELEMENT
+    :
+    Label : LABEL
+      B
   Label : ELEMENT
     =
     Label : RIGHT

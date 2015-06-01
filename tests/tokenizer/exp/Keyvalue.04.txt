@@ -8,6 +8,8 @@ Label : CODE
       void
       Label : ARGUMENT
         =>
+        Label : KEY
+          'a'
         Label : VALUE
           ?
           Label : CONDITION
@@ -40,5 +42,3 @@ Label : CODE
                   'e'
           Label : ELSE
             2
-        Label : KEY
-          'a'

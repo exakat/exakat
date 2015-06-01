@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  die
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      '34'
+  ;
+  Label : ELEMENT
+    die
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        '34'

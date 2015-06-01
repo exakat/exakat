@@ -1,42 +1,44 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
       void
-  Label : NAME
-    x
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      return
-      Label : RETURN
-        Concatenation
-        Label : CONCAT
-          "g"
-        Label : CONCAT
-          b
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                is_array
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $d
-              Label : THEN
-                $e
-              Label : ELSE
-                array
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $f
-            Label : ARGUMENT
-              "c"
-        Label : CONCAT
-          "a"
+      Label : ARGUMENT
+        void
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          Concatenation
+          Label : CONCAT
+            "g"
+          Label : CONCAT
+            b
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                ?
+                Label : CONDITION
+                  is_array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $d
+                Label : THEN
+                  $e
+                Label : ELSE
+                  array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $f
+              Label : ARGUMENT
+                "c"
+          Label : CONCAT
+            "a"

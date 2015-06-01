@@ -4,24 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     trait
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : BLOCK
-          void
-        Label : NAME
-          a
-        Label : PUBLIC
-          public
     Label : NAME
       int
-  Label : ELEMENT
-    trait
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -30,16 +14,16 @@ Label : CODE
           void
           Label : ARGUMENT
             void
-        Label : BLOCK
-          void
         Label : NAME
           a
+        Label : BLOCK
+          void
         Label : PUBLIC
           public
+  Label : ELEMENT
+    trait
     Label : NAME
       true
-  Label : ELEMENT
-    trait
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -48,11 +32,27 @@ Label : CODE
           void
           Label : ARGUMENT
             void
-        Label : BLOCK
-          void
         Label : NAME
           a
+        Label : BLOCK
+          void
         Label : PUBLIC
           public
+  Label : ELEMENT
+    trait
     Label : NAME
       null
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          a
+        Label : BLOCK
+          void
+        Label : PUBLIC
+          public

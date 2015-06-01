@@ -1,6 +1,8 @@
 <?php
 
 Label : CODE
-  clone
-  Label : CLONE
-    $x
+  ;
+  Label : ELEMENT
+    clone
+    Label : CLONE
+      $x

@@ -1,180 +1,182 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
       void
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      try
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            $result
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            useResource
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $resource
-          Label : LEFT
-            $result
-      Label : CATCH
-        finally
+      Label : ARGUMENT
+        void
+    Label : NAME
+      doSomething
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        try
         Label : CODE
           ;
           Label : ELEMENT
-            releaseResource
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $resource
-      Label : CATCH
-        catch
-        Label : CLASS
-          Exception5
-        Label : CODE
-          ;
+            return
+            Label : RETURN
+              $result
           Label : ELEMENT
-            throw
-            Label : THROW
-              $e
-          Label : ELEMENT
-            log
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $e
-                Label : METHOD
-                  getMessage
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
+            =
+            Label : RIGHT
+              useResource
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $resource
+            Label : LEFT
+              $result
+        Label : CATCH
+          finally
+          Label : CODE
+            ;
+            Label : ELEMENT
+              releaseResource
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $resource
+        Label : CATCH
+          catch
+          Label : VARIABLE
+            $e
+          Label : CODE
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
+            Label : ELEMENT
+              log
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : METHOD
+                    getMessage
+                    Label : ARGUMENTS
                       void
-        Label : VARIABLE
-          $e
-      Label : CATCH
-        catch
-        Label : CLASS
-          Exception4
-        Label : CODE
-          ;
-          Label : ELEMENT
-            throw
-            Label : THROW
-              $e
-          Label : ELEMENT
-            log
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $e
-                Label : METHOD
-                  getMessage
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
+                      Label : ARGUMENT
+                        void
+          Label : CLASS
+            Exception5
+        Label : CATCH
+          catch
+          Label : VARIABLE
+            $e
+          Label : CODE
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
+            Label : ELEMENT
+              log
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : METHOD
+                    getMessage
+                    Label : ARGUMENTS
                       void
-        Label : VARIABLE
-          $e
-      Label : CATCH
-        catch
-        Label : CLASS
-          Exception3
-        Label : CODE
-          ;
-          Label : ELEMENT
-            throw
-            Label : THROW
-              $e
-          Label : ELEMENT
-            log
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $e
-                Label : METHOD
-                  getMessage
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
+                      Label : ARGUMENT
+                        void
+          Label : CLASS
+            Exception4
+        Label : CATCH
+          catch
+          Label : VARIABLE
+            $e
+          Label : CODE
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
+            Label : ELEMENT
+              log
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : METHOD
+                    getMessage
+                    Label : ARGUMENTS
                       void
-        Label : VARIABLE
-          $e
-      Label : CATCH
-        catch
-        Label : CLASS
-          Exception2
-        Label : CODE
-          ;
-          Label : ELEMENT
-            throw
-            Label : THROW
-              $e
-          Label : ELEMENT
-            log
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $e
-                Label : METHOD
-                  getMessage
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
+                      Label : ARGUMENT
+                        void
+          Label : CLASS
+            Exception3
+        Label : CATCH
+          catch
+          Label : VARIABLE
+            $e
+          Label : CODE
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
+            Label : ELEMENT
+              log
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : METHOD
+                    getMessage
+                    Label : ARGUMENTS
                       void
-        Label : VARIABLE
-          $e
-      Label : CATCH
-        catch
-        Label : CLASS
-          Exception
-        Label : CODE
-          ;
-          Label : ELEMENT
-            throw
-            Label : THROW
-              $e
-          Label : ELEMENT
-            log
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $e
-                Label : METHOD
-                  getMessage
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
+                      Label : ARGUMENT
+                        void
+          Label : CLASS
+            Exception2
+        Label : CATCH
+          catch
+          Label : VARIABLE
+            $e
+          Label : CODE
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
+            Label : ELEMENT
+              log
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : METHOD
+                    getMessage
+                    Label : ARGUMENTS
                       void
-        Label : VARIABLE
-          $e
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        createResource
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+                      Label : ARGUMENT
+                        void
+          Label : CLASS
+            Exception
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          createResource
+          Label : ARGUMENTS
             void
-      Label : LEFT
-        $resource
-  Label : NAME
-    doSomething
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          $resource

@@ -7,10 +7,6 @@ Label : CODE
     ;
     Label : ELEMENT
       foreach
-      Label : VALUE
-        $b
-      Label : SOURCE
-        $a
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -31,6 +27,10 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $c
+      Label : VALUE
+        $b
+      Label : SOURCE
+        $a
   Label : ELSE
     Block with else
     Label : ELEMENT

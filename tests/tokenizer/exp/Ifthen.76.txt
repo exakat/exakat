@@ -8,6 +8,8 @@ Label : CODE
       void
       Label : ARGUMENT
         $a
+    Label : NAME
+      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -84,5 +86,3 @@ Label : CODE
             return
             Label : RETURN
               D
-    Label : NAME
-      B

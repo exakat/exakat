@@ -1,62 +1,60 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        use
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            as
+  namespace
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      class
+      Label : NAME
+        F
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          use
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              as
+              Label : SUBNAME
+                N
+              Label : AS
+                protected
+            Label : ELEMENT
+              as
+              Label : SUBNAME
+                M
+              Label : AS
+                private
+            Label : ELEMENT
+              as
+              Label : SUBNAME
+                L
+              Label : AS
+                public
+          Label : USE
+            \
             Label : SUBNAME
-              M
-            Label : AS
-              private
-          Label : ELEMENT
-            as
+              K
             Label : SUBNAME
-              N
-            Label : AS
-              protected
-          Label : ELEMENT
-            as
+              J
             Label : SUBNAME
-              L
-            Label : AS
-              public
-        Label : USE
-          \
-          Label : SUBNAME
-            K
-          Label : SUBNAME
-            J
-          Label : SUBNAME
-            I
-          Label : SUBNAME
-            H
-    Label : NAME
-      F
-    Label : EXTENDS
-      G
-  Label : ELEMENT
-    use
-    Label : USE
-      \
-      Label : SUBNAME
-        E
-      Label : SUBNAME
-        D
-  Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
-    Label : BLOCK
-      void
+              I
+            Label : SUBNAME
+              H
+      Label : EXTENDS
+        G
+    Label : ELEMENT
+      use
+      Label : USE
+        \
+        Label : SUBNAME
+          E
+        Label : SUBNAME
+          D
+  Label : NAMESPACE
+    \
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B

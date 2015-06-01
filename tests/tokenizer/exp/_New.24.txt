@@ -1,51 +1,53 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    &&
-    Label : RIGHT
-      ==
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      &&
       Label : RIGHT
-        'D'
+        ==
+        Label : RIGHT
+          'D'
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            C
       Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          C
-    Label : LEFT
-      !
-      Label : NOT
-        empty
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                B
+    Label : THEN
+      ;
+      Label : ELEMENT
+        echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              B
-  Label : THEN
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          new
-          Label : NEW
-            F
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $a
-                Label : PROPERTY
-                  B
-              Label : ARGUMENT
-                'G'
-    Label : ELEMENT
-      I
-    Label : ELEMENT
-      E
+            new
+            Label : NEW
+              F
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $a
+                  Label : PROPERTY
+                    B
+                Label : ARGUMENT
+                  'G'
+      Label : ELEMENT
+        I
+      Label : ELEMENT
+        E

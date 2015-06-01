@@ -23,7 +23,11 @@ Label : CODE
     Label : EXTENDS
       Arguments
       Label : EXTENDS
-        I
+        \
+        Label : SUBNAME
+          H
+        Label : SUBNAME
+          I
       Label : EXTENDS
         G
       Label : EXTENDS
@@ -53,11 +57,7 @@ Label : CODE
     Label : EXTENDS
       Arguments
       Label : EXTENDS
-        \
-        Label : SUBNAME
-          H
-        Label : SUBNAME
-          I
+        I
       Label : EXTENDS
         G
       Label : EXTENDS

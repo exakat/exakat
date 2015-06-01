@@ -28,10 +28,10 @@ Label : CODE
           'f'
         Label : DEFINE
           $y
-        Label : PUBLIC
-          public
         Label : STATIC
           static
+        Label : PUBLIC
+          public
   Label : ELEMENT
     =
     Label : RIGHT

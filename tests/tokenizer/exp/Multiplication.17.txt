@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  *
-  Label : RIGHT
-    1
-  Label : LEFT
-    ::
-    Label : METHOD
-      x
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          1
-    Label : CLASS
-      a
+  ;
+  Label : ELEMENT
+    *
+    Label : RIGHT
+      1
+    Label : LEFT
+      ::
+      Label : CLASS
+        a
+      Label : METHOD
+        x
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            1

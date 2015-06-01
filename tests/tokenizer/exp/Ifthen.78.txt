@@ -27,12 +27,12 @@ Label : CODE
           ;
           Label : ELEMENT
             foreach
+            Label : BLOCK
+              void
             Label : VALUE
               $f
             Label : SOURCE
               $e
-            Label : BLOCK
-              void
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

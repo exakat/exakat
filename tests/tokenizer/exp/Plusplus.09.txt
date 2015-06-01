@@ -1,22 +1,24 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    ==
-    Label : RIGHT
-      %
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
       Label : RIGHT
-        2
+        %
+        Label : RIGHT
+          2
+        Label : LEFT
+          ++
+          Label : POSTPLUSPLUS
+            $i
       Label : LEFT
-        ++
-        Label : POSTPLUSPLUS
-          $i
-    Label : LEFT
-      1
-  Label : THEN
-    ;
-    Label : ELEMENT
-      return
-      Label : RETURN
-        $a
+        1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          $a

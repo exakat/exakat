@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    range
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        0
-  Label : LEFT
-    list
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      range
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          0
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $a

@@ -1,46 +1,58 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    $x
-  Label : THEN
-    ;
-    Label : ELEMENT
-      $y
-  Label : ELSE
-    elseif
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
     Label : CONDITION
-      $w
+      $x
     Label : THEN
       ;
       Label : ELEMENT
-        $ww
+        $y
     Label : ELSE
       elseif
       Label : CONDITION
-        $v
+        $w
       Label : THEN
         ;
         Label : ELEMENT
-          $vv
+          $ww
       Label : ELSE
         elseif
         Label : CONDITION
-          $u
+          $v
         Label : THEN
           ;
           Label : ELEMENT
-            $uu
+            $vv
         Label : ELSE
           elseif
           Label : CONDITION
-            $t
+            $u
           Label : THEN
             ;
             Label : ELEMENT
-              $tt
+              $uu
           Label : ELSE
-            ;
-            Label : ELEMENT
-              $z
+            elseif
+            Label : CONDITION
+              $t
+            Label : THEN
+              ;
+              Label : ELEMENT
+                $tt
+            Label : ELSE
+              ;
+              Label : ELEMENT
+                $z

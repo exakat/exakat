@@ -3,21 +3,39 @@
 Label : CODE
   ;
   Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $
+        Label : NAME
+          {
+          Label : VARIABLE
+            $foo
+          Label : INDEX
+            'bar'
+  Label : ELEMENT
     global
     Label : GLOBAL
       $
       Label : NAME
-        ->
-        Label : OBJECT
-          $foo
-        Label : PROPERTY
-          bar
+        {
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'c'
   Label : ELEMENT
-    =
-    Label : RIGHT
-      'a'
-    Label : LEFT
-      $Yes
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $
+        Label : NAME
+          [
+          Label : VARIABLE
+            $foo
+          Label : INDEX
+            'bar'
   Label : ELEMENT
     =
     Label : RIGHT
@@ -35,6 +53,32 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
+      'a'
+    Label : LEFT
+      $Yes
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $
+      Label : NAME
+        ->
+        Label : OBJECT
+          $foo
+        Label : PROPERTY
+          bar
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $
+      Label : NAME
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'c'
+  Label : ELEMENT
+    =
+    Label : RIGHT
       array
       Label : ARGUMENTS
         void
@@ -47,28 +91,6 @@ Label : CODE
     Label : LEFT
       $b
   Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $
-        Label : NAME
-          {
-          Label : VARIABLE
-            $foo
-          Label : INDEX
-            'bar'
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $
-      Label : NAME
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
-  Label : ELEMENT
     $
     Label : NAME
       $a
@@ -78,28 +100,6 @@ Label : CODE
       $
       Label : NAME
         $a
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $
-        Label : NAME
-          [
-          Label : VARIABLE
-            $foo
-          Label : INDEX
-            'bar'
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $
-      Label : NAME
-        {
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
   Label : ELEMENT
     =
     Label : RIGHT

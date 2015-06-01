@@ -5,12 +5,6 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      2
-    Label : LEFT
-      $y
-  Label : ELEMENT
-    =
-    Label : RIGHT
       1
     Label : LEFT
       {
@@ -26,6 +20,12 @@ Label : CODE
             'd'
           Label : LEFT
             $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $y
   Label : ELEMENT
     =
     Label : RIGHT

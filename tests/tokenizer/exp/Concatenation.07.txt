@@ -1,12 +1,14 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    Concatenation
-    Label : CONCAT
-      "b"
-    Label : CONCAT
-      'a'
-  Label : LEFT
-    $x
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      Concatenation
+      Label : CONCAT
+        "b"
+      Label : CONCAT
+        'a'
+    Label : LEFT
+      $x

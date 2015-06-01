@@ -8,11 +8,11 @@ Label : CODE
       $a
     Label : METHOD
       ;
-      Label : ARGUMENTS
-        void
       Label : ELEMENT
         [
         Label : VARIABLE
           $b
         Label : INDEX
           'c'
+      Label : ARGUMENTS
+        void

@@ -2,6 +2,16 @@
 
 Label : CODE
   while
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        ->
+        Label : OBJECT
+          $this
+        Label : PROPERTY
+          B
   Label : CONDITION
     &&
     Label : RIGHT
@@ -37,16 +47,6 @@ Label : CODE
         Label : PROPERTY
           C
       Label : LEFT
-        ->
-        Label : OBJECT
-          $this
-        Label : PROPERTY
-          B
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
         ->
         Label : OBJECT
           $this

@@ -27,7 +27,7 @@ Label : CODE
           Label : RIGHT
             7
           Label : LEFT
-            true
+            null
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -53,7 +53,7 @@ Label : CODE
           Label : RIGHT
             7
           Label : LEFT
-            null
+            true
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -106,6 +106,8 @@ Label : CODE
       ;
       Label : ELEMENT
         const
+        Label : NAME
+          A
         Label : VALUE
           array
           Label : ARGUMENTS
@@ -118,5 +120,3 @@ Label : CODE
                 3
             Label : ARGUMENT
               1
-        Label : NAME
-          A
