@@ -1748,7 +1748,9 @@ GREMLIN;
                 $report[] = array('code' => $v[0][0],
                                   'file' => $v[0][2],
                                   'line' => $v[0][1],
-                                  'desc' => $this->description->getName());
+                                  'desc' => $this->description->getName(),
+                                  'clearphp' => $this->description->getClearPHP(),
+                                  );
             }
         }
         
