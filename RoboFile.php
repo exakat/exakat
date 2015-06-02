@@ -163,7 +163,9 @@ LICENCE;
     
     public function pharBuild() {
         $packer = $this->taskPackPhar('exakat.phar')
-                       ->compress();
+//                       ->compress()
+// compress yield a 'too many files open' error
+                       ;
         
         $this->updateBuild();
 
