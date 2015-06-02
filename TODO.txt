@@ -1277,3 +1277,7 @@ List differences between constants, variables, classes (const, method, property)
 List some function for exclusion for security measures if they are not used in the code. 
 
 check the to_var (index with _) and remove them. 
+
+uniqid : not for crypto either.
+
+Loader : split attr in as many files to simplify the Cypher query.
