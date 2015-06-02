@@ -1,0 +1,96 @@
+<?php
+
+Label : NEXT
+  $a
+  Label : NEXT
+    =
+    Label : NEXT
+      <=>
+      Label : NEXT
+        ;
+        Label : NEXT
+          $a
+          Label : NEXT
+            =
+            Label : NEXT
+              <=>
+              Label : NEXT
+                ->
+                Label : NEXT
+                  d
+                  Label : NEXT
+                    ;
+                    Label : NEXT
+                      $a
+                      Label : NEXT
+                        =
+                        Label : NEXT
+                          <=>
+                          Label : NEXT
+                            ::
+                            Label : NEXT
+                              E
+                              Label : NEXT
+                                ;
+                                Label : NEXT
+                                  $a
+                                  Label : NEXT
+                                    =
+                                    Label : NEXT
+                                      <=>
+                                      Label : NEXT
+                                        ::
+                                        Label : NEXT
+                                          E
+                                          Label : NEXT
+                                            ;
+                                            Label : NEXT
+                                              $a
+                                              Label : NEXT
+                                                =
+                                                Label : NEXT
+                                                  <=>
+                                                  Label : NEXT
+                                                    ::
+                                                    Label : NEXT
+                                                      $E
+                                                      Label : NEXT
+                                                        ;
+                                                        Label : NEXT
+                                                          ?>
+                                                          Label : NEXT
+                                                            /**/
+                                                            Label : NEXT
+                                                              /* * */
+                                                  Label : LEFT
+                                                    $b
+                                                  Label : RIGHT
+                                                    D
+                                          Label : ARGUMENTS
+                                            void
+                                            Label : ARGUMENT
+                                              void
+                                      Label : LEFT
+                                        $b
+                                      Label : RIGHT
+                                        D
+                          Label : LEFT
+                            $b
+                          Label : RIGHT
+                            D
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+              Label : LEFT
+                $b
+              Label : RIGHT
+                $c
+      Label : LEFT
+        $b
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $c
+        Label : PROPERTY
+          d

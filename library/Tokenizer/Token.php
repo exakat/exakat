@@ -54,6 +54,7 @@ class Token {
                                       49 => '_Ppp',
                                       16 => 'Reference',
                                       12 => 'Logical',
+                                      92 => 'Spaceship',
                                       13 => 'Heredoc',
                                       14 => 'Not',
                                       15 => 'Cast',

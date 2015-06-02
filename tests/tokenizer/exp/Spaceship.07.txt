@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    array_merge
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        <=>
+        Label : LEFT
+          $e
+        Label : RIGHT
+          $f
+      Label : ARGUMENT
+        <=>
+        Label : LEFT
+          $c
+        Label : RIGHT
+          $d
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
+        Label : LEFT
+          $a
+        Label : RIGHT
+          $b
