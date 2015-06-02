@@ -51,12 +51,7 @@ class OnePage implements Tasks {
         copy($config->filename, $config->projects_root.'/projects/'.$project.'/code/onepage.php');
         $this->reports['OnePage']['Json'] = md5_file($config->filename);
         
-        // cleaning log directory (possibly logs)
-        $logs = glob($config->projects_root.'/projects/'.$project.'/log/*');
-        foreach($logs as $log) {
-            unlink($log);
-        }
-
+        $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
         $this->logTime('Start');
 
         $datastorePath = $config->projects_root.'/projects/'.$project.'/datastore.sqlite';
@@ -79,7 +74,7 @@ class OnePage implements Tasks {
 
         display("Cleaning DB\n");
 // cleaning should be done after, not initialy
-//        shell_exec('php '.$this->executable.' cleandb -v');
+        shell_exec('php '.$this->executable.' cleandb -v');
         $this->logTime('Files');
 
         display("Running files\n");
@@ -151,6 +146,16 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         display("End 2\n");
         $end = microtime(true);
         display("Total time : ".number_format(($end - $begin), 2)."s\n");
+        
+        $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
+    }
+
+    private function cleanLog($path) {
+        // cleaning log directory (possibly logs)
+        $logs = glob("$path/*");
+        foreach($logs as $log) {
+            unlink($log);
+        }
     }
 
     private function logTime($step) {
