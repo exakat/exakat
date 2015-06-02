@@ -183,7 +183,6 @@ LICENCE;
             ->path('data/')
             ->path('human/')
             ->path('library/')
-            ->path('scripts/')
             ->path('vendor/')
             ->path('devoops/') 
             ->notPath('batch-import')

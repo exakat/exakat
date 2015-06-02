@@ -35,8 +35,8 @@ class Variable extends TokenAuto {
                                   2 => array('token' => 'T_CLOSE_CURLY'),
         );
         
-        $this->actions = array( 'to_variable' => 1,
-                                'cleanIndex'  => true);
+        $this->actions = array( 'toVariable' => 1,
+                                'cleanIndex' => true);
         $this->checkAuto();
         
         // todo find a way to process those remainings atom that may be found in those {}

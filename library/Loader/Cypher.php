@@ -98,7 +98,7 @@ CYPHER;
             $result = $query->getResultSet();
         } catch (\Exception $e) {
             $this->cleanCsv(); 
-            die("Couldn't load nodes in the database\n");
+            die("Couldn't load nodes in the database\n".$e->getMessage());
         }
 
         display('Loaded nodes');
@@ -131,7 +131,7 @@ CYPHER;
             $result = $query->getResultSet();
         } catch (\Exception $e) {
             $this->cleanCsv(); 
-            die("Couldn't load nodes attributes in the database\n");
+            die("Couldn't load nodes attributes in the database\n".$e->getMessage());
         }
 
         display('Loaded nodes attributes');
@@ -154,7 +154,7 @@ CYPHER;
                 $result = $query->getResultSet();
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
-                die("Couldn't load relations for $name in the database\n");
+                die("Couldn't load relations for $name in the database\n".$e->getMessage());
             }
 
             display('Loaded link '.$name);

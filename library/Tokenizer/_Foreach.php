@@ -28,9 +28,9 @@ class _Foreach extends TokenAuto {
     static public $atom = 'Foreach';
 
     public function _check() {
-        $operands = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
-                          'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary',
-                          'Noscream', 'Not', 'Assignation', 'New', 'Addition', 'Clone', 'Include');
+        $operands       = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
+                                'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 'Staticconstant',
+                                'Noscream', 'Not', 'Assignation', 'New', 'Addition', 'Clone', 'Include');
         $blindVariables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Functioncall' );
 
         // foreach(); (empty)

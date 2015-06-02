@@ -5,52 +5,48 @@ Exakat Static Analyzer
 
 Exakat is a static analyzer for PHP. It applies the [clear PHP rules](http://github.com/dseguy/clearPHP/) to PHP code and provides a report on violations. 
 
+# Version
+This manual is for Exakt version 0.2.0 (build 
+
 # Install Exakat
-## Install For Osx
-[Read the Install for Osx manual](./Installation.osx.md)
+* [Read the Install for Osx manual](./Installation.osx.md)
+* [Read the Install for Osx manual](./Installation.debian.md)
+* [Read the Generic install](./Installation.generic.md)
 
-## Install For Debian
-[Read the Install for Osx manual](./Installation.debian.md)
+# Check Install
 
-## Other Installs
-[Read the Generic install](./Installation.generic.md)
+Once the prerequisite are installed, it is advised to run to check if all is found : 
 
+`php exakat.phar doctor`
+
+After this run, You may have to edit 'config/config.ini' to add some extra configuration. Most of the time, the default values will be OK.
 
 # Usage
 
-## A first tests using curl
+## A first test
 
 A simple run for the report : 
 
 ```
-$ php exakat init -p sculpin -R https://github.com/sculpin/sculpin
+$ php exakat.phar init -p sculpin -R https://github.com/sculpin/sculpin
 ```
+
 This will init the project in the 'projects' folder, and clone the code with the provided repository. The name after `-p` will be reused later for all subsequent operations.
 
 Then, you can run : 
 ```
-$ php exakat project -p sculpin 
+$ php exakat.phar project -p sculpin 
 ```
 
-This will run the whole analyzis. 
+This will run the whole analysis. 
 
-Once it is finished, you may find the result in `projects/sculpin/report`. Simply open the 'index.html' file in Firefox (Note that Safari or Chrome has a security feature that will prevent them from using directly the report. To avoid this, put the report on a webserver and open it again via http). 
-
-## Parameters
-
-| parameter  | format                          | description                                                |
-| ---------- | ------------------------------- | ---------------------------------------------------------- |
-| **script** | String                          | the Gremlin script to be evaluated                         |
-| **params** | JSON object                     | a map of parameters to bind to the script engine           |
-| **load**   | comma-separated list of Strings | a list of Gremlin scripts to execute prior to the 'script' |
-
-
+Once it is finished, you may find the result in `projects/sculpin/report`. Simply open the 'index.html' file in a browser (Note that Safari or Chrome have a security feature that will prevent them from loading directly the report. To avoid this, put the report on a webserver and open it again via http). 
 
 
 # Licenses
 
-* Neo4j Gremlin Plugin - Apache2
-* TinkerPop2 - [BSD](https://github.com/tinkerpop/gremlin/blob/master/LICENSE.txt)
+* Exakat - [GNU Affero General Public License](http://www.exakat.io/exakat-licence)
+* Neo4j Gremlin Plugin - [Apache2](https://github.com/neo4j-contrib/gremlin-plugin/blob/master/LICENSE.txt)
 * Neo4j - [Dual free software/commercial license](http://www.neo4j.org/learn/licensing)
 
 - - -

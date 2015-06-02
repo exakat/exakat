@@ -127,6 +127,17 @@ class Sequence extends TokenAuto {
         $this->actions = array('toOneSequence'  => true);
         $this->checkAuto();
 
+        // <?php 2 ; ? >
+        $this->conditions = array( -2 => array('token'    => 'T_OPEN_TAG'),
+                                   -1 => array('atom'     => $operands,
+                                               'notToken' => $forbiddenTokens ),
+                                    0 => array('token'    => Sequence::$operators),
+                                    1 => array('token'    => 'T_CLOSE_TAG'),
+        );
+        
+        $this->actions = array('toOneSequence'  => true);
+        $this->checkAuto();
+
         return false;
     }
 
