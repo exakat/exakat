@@ -1,2 +1,13 @@
-Version 0.2.0 (Demon of Confusion)
+Version 0.2.1 (General Yin, June 2nd, 2015)
++ Analyzer
+    + sizeOf may have 2 arguments
+    + 2 clearPHP link added in documentation
++ Tokenizer
+    + Fixed bug with Bitshift and Addition
+    + Fixed bug with Sequence when merging sequences
+    + Fixed bug with String and Addition
+    + Fixed Visibility in Use instruction
+    + Foreach accepts Constants as Source
+    + Fixed special case for nested IfThen
+Version 0.2.0 (Demon of Confusion, May 15th, 2015)
 + First version
