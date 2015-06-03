@@ -51,11 +51,12 @@ class Assignation extends TokenAuto {
                           'Assignation', 'Variable', 'Boolean', 'Null', 'Magicconstant',
                           'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison',
                           'Clone', 'Shell', 'Include', 'Instanceof', 'Function', 'ArrayNS', 'Identifier',
-                          'Arrayappend', 'Power', 'Spaceship'
+                          'Arrayappend', 'Power', 'Spaceship', 'Coalesce'
                          );
         $filterOut2 = array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators,
                                   Comparison::$operators, Logical::$booleans, Multiplication::$operators,
                                   Postplusplus::$operators, Power::$operators, _Instanceof::$operators,
+                                  Coalesce::$operators, 
                                   array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                         'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                         'T_QUESTION', 'T_NS_SEPARATOR' ));
@@ -65,11 +66,11 @@ class Assignation extends TokenAuto {
         $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR',
                                                                                 'T_AT', 'T_AND'),
                                                                            Preplusplus::$operators )),
-                                  -1 => array('atom'  => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
-                                                               'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
-                                                               'Static', 'Cast', 'Sign', 'Power', 'Null', 'Boolean' )),
-                                   0 => array('token' => Assignation::$operators),
-                                   1 => array('atom'  => $operands),
+                                  -1 => array('atom'       => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
+                                                                    'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
+                                                                    'Static', 'Cast', 'Sign', 'Power', 'Null', 'Boolean' )),
+                                   0 => array('token'      => Assignation::$operators),
+                                   1 => array('atom'       => $operands),
                                    2 => array('filterOut2' => $filterOut2),
         );
         

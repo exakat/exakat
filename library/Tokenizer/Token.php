@@ -55,6 +55,7 @@ class Token {
                                       16 => 'Reference',
                                       12 => 'Logical',
                                       92 => 'Spaceship',
+                                      93 => 'Coalesce',
                                       13 => 'Heredoc',
                                       14 => 'Not',
                                       15 => 'Cast',
