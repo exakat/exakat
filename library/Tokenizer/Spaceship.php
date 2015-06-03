@@ -31,11 +31,12 @@ class Spaceship extends TokenAuto {
 
     public function _check() {
         // logical boolean (and, or)
-        $this->conditions = array( -1 => array('atom'    => 'yes'),
-                                    0 => array('token'   => Spaceship::$operators,
-                                               'atom'    => 'none'),
-                                    1 => array('atom'    => 'yes',
-                                               'notAtom' => 'Sequence'),
+        $this->conditions = array( -1 => array('atom'     => 'yes'),
+                                    0 => array('token'    => Spaceship::$operators,
+                                               'atom'     => 'none'),
+                                    1 => array('atom'     => 'yes',
+                                               'notAtom'  => 'Sequence'),
+                                    2 => array('notToken' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
                                    );
         
         $this->actions = array('transform'    => array( -1 => 'LEFT',

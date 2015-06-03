@@ -1,196 +1,58 @@
 <?php
 
-Label : NEXT
+Label : CODE
   ;
-  Label : NEXT
+  Label : ELEMENT
     echo
-    Label : NEXT
-      <=>
-      Label : NEXT
-        /**/
-        Label : NEXT
-          /* * */
-      Label : LEFT
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
+        Label : RIGHT
+          [
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENTS
+              void
+        Label : LEFT
+          [
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENTS
+              void
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (object)
+      Label : CAST
         [
         Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            3
-          Label : ARGUMENT
-            2
-          Label : ARGUMENT
-            1
-      Label : RIGHT
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $b
-          Label : RIGHT
-            (object)
-            Label : CAST
-              [
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENTS
-                  =>
-                  Label : KEY
-                    "b"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            (object)
-            Label : CAST
-              [
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENTS
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "c"
-        Label : ELEMENT
-          echo
+          void
           Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            (object)
-            Label : CAST
-              [
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENTS
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            (object)
-            Label : CAST
-              [
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENTS
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $b
-          Label : RIGHT
-            (object)
-            Label : CAST
-              [
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENTS
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $b
-          Label : RIGHT
-            (object)
-            Label : CAST
-              [
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENTS
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "c"
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $b
-          Label : RIGHT
-            (object)
-            Label : CAST
-              [
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENTS
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            (object)
-            Label : CAST
-              [
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENTS
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
+            =>
+            Label : KEY
+              "a"
+            Label : VALUE
+              "b"
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
+        Label : RIGHT
+          $b
+        Label : LEFT
+          $a
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
+        Label : RIGHT
           [
           Label : ARGUMENTS
             Arguments
@@ -200,30 +62,154 @@ Label : NEXT
               2
             Label : ARGUMENT
               1
+        Label : LEFT
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              1
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (object)
+      Label : CAST
+        [
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENTS
+            =>
+            Label : KEY
+              "b"
+            Label : VALUE
+              "b"
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (object)
+      Label : CAST
+        [
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENTS
+            =>
+            Label : KEY
+              "a"
+            Label : VALUE
+              "c"
+    Label : LEFT
+      $a
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         <=>
+        Label : RIGHT
+          $b
+        Label : LEFT
+          $a
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
+        Label : RIGHT
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              1
         Label : LEFT
           [
           Label : ARGUMENTS
-            void
-            Label : ARGUMENTS
-              void
+            Arguments
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              1
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (object)
+      Label : CAST
+        [
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENTS
+            =>
+            Label : KEY
+              "a"
+            Label : VALUE
+              "b"
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
+        Label : RIGHT
+          $b
+        Label : LEFT
+          $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (object)
+      Label : CAST
+        [
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENTS
+            =>
+            Label : KEY
+              "a"
+            Label : VALUE
+              "b"
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (object)
+      Label : CAST
+        [
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENTS
+            =>
+            Label : KEY
+              "a"
+            Label : VALUE
+              "b"
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
         Label : RIGHT
           [
           Label : ARGUMENTS
             void
             Label : ARGUMENTS
               void
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        <=>
         Label : LEFT
           [
           Label : ARGUMENTS
@@ -234,22 +220,54 @@ Label : NEXT
               2
             Label : ARGUMENT
               1
-        Label : RIGHT
-          [
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (object)
+      Label : CAST
+        [
+        Label : ARGUMENTS
+          void
           Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              2
-            Label : ARGUMENT
-              1
+            =>
+            Label : KEY
+              "a"
+            Label : VALUE
+              "c"
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (object)
+      Label : CAST
+        [
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENTS
+            =>
+            Label : KEY
+              "a"
+            Label : VALUE
+              "b"
+    Label : LEFT
+      $b
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         <=>
+        Label : RIGHT
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              1
         Label : LEFT
           [
           Label : ARGUMENTS
@@ -260,67 +278,35 @@ Label : NEXT
               2
             Label : ARGUMENT
               1
-        Label : RIGHT
-          [
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENTS
-              void
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         <=>
+        Label : RIGHT
+          $b
         Label : LEFT
-          [
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              2
-            Label : ARGUMENT
-              1
-        Label : RIGHT
-          [
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              2
-            Label : ARGUMENT
-              1
+          $a
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         <=>
+        Label : RIGHT
+          "aa"
         Label : LEFT
           "zz"
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
         Label : RIGHT
           "aa"
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        <=>
         Label : LEFT
-          "a"
-        Label : RIGHT
-          "aa"
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        <=>
-        Label : LEFT
-          "b"
-        Label : RIGHT
           "a"
   Label : ELEMENT
     echo
@@ -328,9 +314,9 @@ Label : NEXT
       void
       Label : ARGUMENT
         <=>
-        Label : LEFT
-          "a"
         Label : RIGHT
+          "a"
+        Label : LEFT
           "b"
   Label : ELEMENT
     echo
@@ -338,9 +324,19 @@ Label : NEXT
       void
       Label : ARGUMENT
         <=>
+        Label : RIGHT
+          "b"
         Label : LEFT
           "a"
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
         Label : RIGHT
+          "a"
+        Label : LEFT
           "a"
   Label : ELEMENT
     echo
@@ -348,19 +344,9 @@ Label : NEXT
       void
       Label : ARGUMENT
         <=>
-        Label : LEFT
-          2.5
         Label : RIGHT
           1.5
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        <=>
         Label : LEFT
-          1.5
-        Label : RIGHT
           2.5
   Label : ELEMENT
     echo
@@ -368,9 +354,19 @@ Label : NEXT
       void
       Label : ARGUMENT
         <=>
+        Label : RIGHT
+          2.5
         Label : LEFT
           1.5
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
         Label : RIGHT
+          1.5
+        Label : LEFT
           1.5
   Label : ELEMENT
     echo
@@ -378,19 +374,9 @@ Label : NEXT
       void
       Label : ARGUMENT
         <=>
-        Label : LEFT
-          2
         Label : RIGHT
           1
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        <=>
         Label : LEFT
-          1
-        Label : RIGHT
           2
   Label : ELEMENT
     echo
@@ -398,7 +384,17 @@ Label : NEXT
       void
       Label : ARGUMENT
         <=>
+        Label : RIGHT
+          2
         Label : LEFT
           1
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        <=>
         Label : RIGHT
+          1
+        Label : LEFT
           1

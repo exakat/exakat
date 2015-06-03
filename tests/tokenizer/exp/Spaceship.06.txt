@@ -1,71 +1,51 @@
 <?php
 
-Label : NEXT
+Label : CODE
   ;
-  Label : NEXT
+  Label : ELEMENT
     usort
-    Label : NEXT
-      (
-      Label : NEXT
-        $data
-        Label : NEXT
-          ,
-          Label : NEXT
-            function
-            Label : NEXT
-              (
-              Label : NEXT
-                Arguments
-                Label : NEXT
-                  )
-                  Label : NEXT
-                    {
-                    Label : NEXT
-                      return
-                      Label : NEXT
-                        ;
-                        Label : NEXT
-                          <=>
-                          Label : NEXT
-                            [
-                            Label : NEXT
-                              ;
-                              Label : NEXT
-                                }
-                                Label : NEXT
-                                  )
-                                  Label : NEXT
-                                    ;
-                                    Label : NEXT
-                                      ?>
-                                      Label : NEXT
-                                        /**/
-                                        Label : NEXT
-                                          /* * */
-                            Label : VARIABLE
-                              $right
-                            Label : INDEX
-                              1
-                      Label : RETURN
-                        [
-                        Label : VARIABLE
-                          $left
-                        Label : INDEX
-                          1
-                Label : ARGUMENT
-                  $left
-                Label : ARGUMENT
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $right
+          Label : ARGUMENT
+            $left
+        Label : NAME
+          
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              <=>
+              Label : RIGHT
+                [
+                Label : VARIABLE
                   $right
+                Label : INDEX
+                  1
+              Label : LEFT
+                [
+                Label : VARIABLE
+                  $left
+                Label : INDEX
+                  1
+      Label : ARGUMENT
+        $data
   Label : ELEMENT
     if
     Label : CONDITION
       !==
+      Label : RIGHT
+        FALSE
       Label : LEFT
         (
         Label : CODE
           =
-          Label : LEFT
-            $handle
           Label : RIGHT
             fopen
             Label : ARGUMENTS
@@ -74,8 +54,8 @@ Label : NEXT
                 "r"
               Label : ARGUMENT
                 "people.csv"
-      Label : RIGHT
-        FALSE
+          Label : LEFT
+            $handle
     Label : THEN
       ;
       Label : ELEMENT
@@ -88,12 +68,12 @@ Label : NEXT
         while
         Label : CONDITION
           !==
+          Label : RIGHT
+            FALSE
           Label : LEFT
             (
             Label : CODE
               =
-              Label : LEFT
-                $row
               Label : RIGHT
                 fgetcsv
                 Label : ARGUMENTS
@@ -104,15 +84,15 @@ Label : NEXT
                     1000
                   Label : ARGUMENT
                     $handle
-          Label : RIGHT
-            FALSE
+              Label : LEFT
+                $row
         Label : BLOCK
           ;
           Label : ELEMENT
             =
+            Label : RIGHT
+              $row
             Label : LEFT
               [
               Label : VARIABLE
                 $data
-            Label : RIGHT
-              $row

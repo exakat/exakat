@@ -2420,7 +2420,7 @@ g.idx('atoms').put('atom', 'Array', x);
                                'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
                                'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
-                               'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
+                               'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_COALESCE', 'T_SPACESHIP',
                                'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_QUESTION', 'T_COLON',
                                'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
                                'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 
@@ -2428,8 +2428,7 @@ g.idx('atoms').put('atom', 'Array', x);
                                'T_POW_EQUAL', 'T_DOUBLE_ARROW', 'T_SR','T_SL', 'T_IMPLEMENTS', 'T_EXTENDS',
                                'T_POW', 'T_PLUS', 'T_MINUS', 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_INC', 'T_DEC',
                                'T_OPEN_CURLY', 'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF'";
-                               
-//                               'T_CLOSE_CURLY',
+
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */
 

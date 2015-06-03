@@ -8,23 +8,23 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         <=>
-        Label : LEFT
-          $e
         Label : RIGHT
           $f
+        Label : LEFT
+          $e
       Label : ARGUMENT
         <=>
-        Label : LEFT
-          $c
         Label : RIGHT
           $d
+        Label : LEFT
+          $c
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         <=>
-        Label : LEFT
-          $a
         Label : RIGHT
           $b
+        Label : LEFT
+          $a

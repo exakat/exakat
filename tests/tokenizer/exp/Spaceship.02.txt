@@ -2,13 +2,13 @@
 
 Label : CODE
   ===
+  Label : RIGHT
+    -1
   Label : LEFT
     (
     Label : CODE
       <=>
-      Label : LEFT
-        $a
       Label : RIGHT
         $b
-  Label : RIGHT
-    -1
+      Label : LEFT
+        $a
