@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  namespace
-  Label : BLOCK
-    void
-  Label : NAMESPACE
-    \
-    Label : SUBNAME
-      B
-    Label : SUBNAME
-      A
+  ;
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        A

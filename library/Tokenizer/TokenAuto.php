@@ -991,10 +991,10 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             unset($actions['createSequenceForDefaultWithoutSemicolon']);
         }
         
-if (isset($actions['insertVoid'])) {
-    $out = str_repeat(".out('NEXT')", $actions['insertVoid']);
+    if (isset($actions['insertVoid'])) {
+        $out = str_repeat(".out('NEXT')", $actions['insertVoid']);
     
-    $qactions[] = "
+        $qactions[] = "
 /* insertVoid */
 
 x = g.addVertex(null, [code:'void', fullcode:' ', atom:'Void', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
@@ -1010,7 +1010,32 @@ g.addEdge(x, f, 'NEXT');
 ";
             unset($actions['insertVoid']);
         }
-        
+
+    if (isset($actions['insertCurlyVoid'])) {
+        $out = str_repeat(".out('NEXT')", $actions['insertCurlyVoid']);
+    
+        $qactions[] = "
+/* insertCurlyVoid */
+
+oc = g.addVertex(null, [code:'{', token:'T_OPEN_CURLY', virtual:true, line:it.line]);
+theVoid = g.addVertex(null, [code:'void', fullcode:' ', atom:'Void', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
+g.idx('atoms').put('atom', 'Void', theVoid);
+cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.line]);
+
+
+e = it{$out}.next();
+f = e.out('NEXT').next();
+
+g.removeEdge(e.outE('NEXT').next());
+g.addEdge(e, oc, 'NEXT');
+g.addEdge(oc, theVoid, 'NEXT');
+g.addEdge(theVoid, cc, 'NEXT');
+g.addEdge(cc, f, 'NEXT');
+
+";
+            unset($actions['insertCurlyVoid']);
+        }
+
         if (isset($actions['toBlock'])) {
             $qactions[] = "
 /* toBlock */

@@ -7,35 +7,63 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          connect
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        class
+        Label : NAME
+          Connection
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        const
+        Label : NAME
+          CONNECT_OK
+        Label : VALUE
+          1
+    Label : NAMESPACE
+      MyProject
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
-            Label : METHOD
-              start
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
             Label : CLASS
               \
               Label : SUBNAME
                 Connection
               Label : SUBNAME
                 MyProject
+            Label : METHOD
+              start
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
       Label : ELEMENT
         =
         Label : RIGHT
           \
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
           Label : SUBNAME
             connect
           Label : SUBNAME
             MyProject
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
         Label : LEFT
           $a
       Label : ELEMENT
@@ -46,34 +74,6 @@ Label : CODE
             void
     Label : NAMESPACE
       Global
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : BLOCK
-          void
-        Label : NAME
-          connect
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          void
-        Label : NAME
-          Connection
-      Label : ELEMENT
-        const
-        Label : VALUE
-          1
-        Label : NAME
-          CONNECT_OK
-    Label : NAMESPACE
-      MyProject
   Label : ELEMENT
     declare
     Label : TICKS

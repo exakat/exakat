@@ -28,6 +28,18 @@ class _Namespace extends TokenAuto {
     static public $atom = 'Namespace';
 
     public function _check() {
+        // namespace A ; namespace (empty namespace)
+        $this->conditions = array(0 => array('token'  => _Namespace::$operators,
+                                             'atom'   => 'none'),
+                                  1 => array('atom'   => array('Identifier', 'Nsname')),
+                                  2 => array('token'  => 'T_SEMICOLON'),
+                                  3 => array('token'  => _Namespace::$operators),
+        );
+        
+        $this->actions = array('insertCurlyVoid'  => 1,
+                               'keepIndexed'      => true);
+        $this->checkAuto();
+
         // namespace {}
         $this->conditions = array(0 => array('token'  => _Namespace::$operators,
                                              'atom'   => 'none'),
@@ -73,6 +85,7 @@ class _Namespace extends TokenAuto {
                                'cleanIndex'   => true,
                                'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
+        
         // namespace A; atom ;  ? >
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
