@@ -22,5 +22,6 @@ class Classes_WrongCase extends Analyzer {
     public function testClasses_WrongCase10()  { $this->generic_test('Classes_WrongCase.10'); }
     public function testClasses_WrongCase11()  { $this->generic_test('Classes_WrongCase.11'); }
     public function testClasses_WrongCase12()  { $this->generic_test('Classes_WrongCase.12'); }
+    public function testClasses_WrongCase13()  { $this->generic_test('Classes_WrongCase.13'); }
 }
 ?>

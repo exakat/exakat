@@ -40,7 +40,6 @@ class UselessConstructor extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->analyzerIs('Analyzer\\Classes\\Constructor')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
@@ -53,7 +52,6 @@ class UselessConstructor extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->analyzerIs('Analyzer\\Classes\\Constructor')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first')
              ->outIs('EXTENDS')
@@ -72,7 +70,6 @@ class UselessConstructor extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->analyzerIs('Analyzer\\Classes\\Constructor')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first')
              ->outIs('EXTENDS')

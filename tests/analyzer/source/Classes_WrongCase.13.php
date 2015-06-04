@@ -2,9 +2,6 @@
 
 namespace B\C {
 
-use Y\Z\ALLUPPERCASE;
-use Y\Z\ALLLOWERCASE;
-
 class J extends K\L {
 
     public function M() {
@@ -19,7 +16,7 @@ class J extends K\L {
 
 }
 
-namespace Y\Z {
+namespace B\C {
     class ALLUPPERCASE {}
     class alllowercase {}
 }
