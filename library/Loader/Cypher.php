@@ -45,12 +45,16 @@ class Cypher {
     
     private static $fp_rels = null;
     private static $fp_nodes = null;
-    private static $fp_nodes_attr = null;
+    private static $fp_nodes_attr = array();
     private static $indexedId = array();
 
     private $config = null;
     
     private $isLink = false;
+    
+    private $les_attr = array('index', 'fullcode', 'atom', 'root', 'hidden', 
+                              'in_quote', 'delimiter', 'noDelimiter', 'rank', 
+                              'block', 'bracket', 'filename', 'tag', 'association', 'in_for' );
     
     public function __construct() {
         $this->config = \Config::factory();
@@ -72,7 +76,9 @@ class Cypher {
             fclose($fp);
         }
         fclose(static::$fp_nodes);
-        fclose(static::$fp_nodes_attr);
+        foreach(static::$fp_nodes_attr as $fpa) {
+            fclose($fpa);
+        }
 
         $client = new Client();
 
@@ -103,35 +109,31 @@ CYPHER;
 
         display('Loaded nodes');
 
-        $queryTemplate = <<<CYPHER
+        Print "ICI\n";
+        foreach($this->les_attr as $attribute) {
+            print "$attribute\n";
+            
+            if ($attribute == 'rank') {
+                $toAttribute = "toInt(csvLine.rank)";
+            } elseif (in_array($attribute, array('index', 'hidden', 'in_quote', 'bracket', 'block', 'in_for', 'root'))) {
+                $toAttribute = "(csvLine.$attribute = \"true\")";
+            } else {
+                $toAttribute = "csvLine.$attribute";
+            }
+            $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.attr.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.$attribute.csv" AS csvLine
 MATCH (token:Token { eid: toInt(csvLine.id)})
-FOREACH(ignoreMe IN CASE WHEN csvLine.index <> "" THEN [1] ELSE [] END | SET token.index = (csvLine.index = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.atom <> "" THEN [1] ELSE [] END | SET token.atom = csvLine.atom)
-FOREACH(ignoreMe IN CASE WHEN csvLine.hidden <> "" THEN [1] ELSE [] END | SET token.hidden = (csvLine.hidden = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.in_quote <> "" THEN [1] ELSE [] END | SET token.in_quote = (csvLine.in_quote = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.association <> "" THEN [1] ELSE [] END | SET token.association = csvLine.association)
-FOREACH(ignoreMe IN CASE WHEN csvLine.tag <> "" THEN [1] ELSE [] END | SET token.tag = csvLine.tag)
-FOREACH(ignoreMe IN CASE WHEN csvLine.filename <> "" THEN [1] ELSE [] END | SET token.filename = csvLine.filename)
-FOREACH(ignoreMe IN CASE WHEN csvLine.bracket <> "" THEN [1] ELSE [] END | SET token.bracket = (csvLine.bracket = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.block <> "" THEN [1] ELSE [] END | SET token.block = (csvLine.block = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.rank <> "" THEN [1] ELSE [] END | SET token.rank = toInt(csvLine.rank))
-FOREACH(ignoreMe IN CASE WHEN csvLine.noDelimiter <> "" THEN [1] ELSE [] END | SET token.noDelimiter = csvLine.noDelimiter)
-FOREACH(ignoreMe IN CASE WHEN csvLine.delimiter <> "" THEN [1] ELSE [] END | SET token.delimiter = csvLine.delimiter)
-FOREACH(ignoreMe IN CASE WHEN csvLine.root <> "" THEN [1] ELSE [] END | SET token.root = (csvLine.root = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.fullcode <> "" THEN [1] ELSE [] END | SET token.fullcode = csvLine.fullcode)
-FOREACH(ignoreMe IN CASE WHEN csvLine.in_for <> "" THEN [1] ELSE [] END | SET token.in_for = (csvLine.in_for = "true"))
-// Desactivate modifiedBy 
-//FOREACH(ignoreMe IN CASE WHEN csvLine.modifiedBy <> "" THEN [1] ELSE [] END | SET token.modifiedBy = csvLine.modifiedBy)
+SET token.$attribute = $toAttribute
 
 CYPHER;
-        try {
-            $query = new Query($client, $queryTemplate, array());
-            $result = $query->getResultSet();
-        } catch (\Exception $e) {
-            $this->cleanCsv(); 
-            die("Couldn't load nodes attributes in the database\n".$e->getMessage());
+            try {
+                $query = new Query($client, $queryTemplate, array());
+                $result = $query->getResultSet();
+            } catch (\Exception $e) {
+                $this->cleanCsv(); 
+                die("Couldn't load nodes attributes '$attribute' in the database\n".$e->getMessage());
+            }
         }
 
         display('Loaded nodes attributes');
@@ -195,7 +197,9 @@ CYPHER;
     
     private function cleanCsv() {
         unlink($this->config->projects_root.'/nodes.cypher.csv');
-        unlink($this->config->projects_root.'/nodes.cypher.attr.csv');
+        foreach($this->les_attr as $attribute) {
+            unlink($this->config->projects_root.'/nodes.cypher.'.$attribute.'.csv');
+        }
         unlink($this->config->projects_root.'/rels.cypher.next.csv');
         unlink($this->config->projects_root.'/rels.cypher.element.csv');
         unlink($this->config->projects_root.'/rels.cypher.file.csv');
@@ -205,20 +209,23 @@ CYPHER;
     public function save_chunk() {
         if (static::$fp_nodes === null) {
             static::$fp_nodes = fopen($this->config->projects_root.'/nodes.cypher.csv', 'a');
-            static::$fp_nodes_attr = fopen($this->config->projects_root.'/nodes.cypher.attr.csv', 'a');
+            foreach($this->les_attr as $attribute) {
+                static::$fp_nodes_attr[$attribute] = fopen($this->config->projects_root.'/nodes.cypher.'.$attribute.'.csv', 'a');
+            }
         }
+
         $fp = static::$fp_nodes;
-        $fpa = static::$fp_nodes_attr;
+//        $fpa = static::$fp_nodes_attr;
         // adding in_quote here, as it may not appear on the first token.
         $les_cols = array('id', 'token', 'code', 'line');
-        $les_attr = array('id', 'index', 'fullcode', 'atom', 'root', 'hidden', 
-                          'in_quote', 'delimiter', 'noDelimiter', 'rank', 
-                          'block', 'bracket', 'filename', 'tag', 'association', 'in_for' );
         //'modifiedBy',
         if (static::$file_saved == 0) {
             fputcsv($fp, $les_cols, self::CSV_SEPARATOR);
-            fputcsv($fpa, $les_attr, self::CSV_SEPARATOR);
+            foreach(static::$fp_nodes_attr as $attribute => $fpa) {
+                fputcsv($fpa, array('id', $attribute), self::CSV_SEPARATOR);
+            }
         }
+
         foreach(static::$nodes as $id => $node) {
             $row = array();
             foreach($les_cols as $col) {
@@ -242,27 +249,17 @@ CYPHER;
             $row['code'] = $this->escapeString($row['code']);
             fputcsv($fp, $row, self::CSV_SEPARATOR);
 
-            $rowa = array();
-            $count = 0;
-            foreach($les_attr as $col) {
+        // processing the attributes
+            foreach($this->les_attr as $col) {
+                $rowa = array('id' => $id);
                 if (isset($node[$col])) {
                     $rowa[$col] = $node[$col];
-                    $count++;
-                } else {
-                    $rowa[$col] = '';
-                }
-                if ($diff = array_diff(array_keys($rowa), $les_attr, array('id'))) {
-                    display('Some columns were not processed for attributes : '.join(', ', $diff).".\n");
-                }
+                    if (in_array($col, array('fullcode', 'delimiter', 'noDelimiter'))) {
+                        $rowa[$col] = $this->escapeString($rowa[$col]);
+                    }
+                    fputcsv(static::$fp_nodes_attr[$col], $rowa, self::CSV_SEPARATOR);
+                } 
             }
-            if ($count === 0) {
-                continue; 
-            }
-            $rowa['id'] = $id;
-            $rowa['fullcode'] = $this->escapeString($rowa['fullcode']);
-            $rowa['delimiter'] = $this->escapeString($rowa['delimiter']);
-            $rowa['noDelimiter'] = $this->escapeString($rowa['noDelimiter']);
-            fputcsv($fpa, $rowa, self::CSV_SEPARATOR);
         }
         static::$nodes = array();
         
