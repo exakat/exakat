@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
