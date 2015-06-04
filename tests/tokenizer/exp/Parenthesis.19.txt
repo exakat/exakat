@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  return
+  Label : RETURN
+    ?
+    Label : CONDITION
+      &
+      Label : RIGHT
+        (
+        Label : CODE
+          |
+          Label : RIGHT
+            ::
+            Label : CLASS
+              static
+            Label : CONSTANT
+              C
+          Label : LEFT
+            ::
+            Label : CLASS
+              static
+            Label : CONSTANT
+              B
+      Label : LEFT
+        $a
+    Label : THEN
+      D
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          'F'
+        Label : ARGUMENT
+          'E'
+    Label : ELSE
+      G
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          'F'
+        Label : ARGUMENT
+          'H'

@@ -28,14 +28,14 @@ Label : CODE
         =
         Label : RIGHT
           \
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
           Label : SUBNAME
             connect
           Label : SUBNAME
             MyProject
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
         Label : LEFT
           $a
       Label : ELEMENT

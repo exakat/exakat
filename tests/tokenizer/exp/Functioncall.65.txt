@@ -6,25 +6,25 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            '1'
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
         function
+        Label : NAME
+          
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $x
         Label : BLOCK
           void
-        Label : NAME
-          
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            '1'
   Label : ELEMENT
     include
     Label : ARGUMENTS

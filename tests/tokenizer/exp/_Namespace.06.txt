@@ -24,10 +24,10 @@ Label : CODE
           void
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           CONNECT_OK
+        Label : VALUE
+          1
     Label : NAMESPACE
       AnotherProject
   Label : ELEMENT
@@ -52,9 +52,9 @@ Label : CODE
           void
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           CONNECT_OK
+        Label : VALUE
+          1
     Label : NAMESPACE
       MyProject

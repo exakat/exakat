@@ -33,6 +33,18 @@ Label : CODE
             Label : LEFT
               $indexed
           Label : ELEMENT
+            foreach
+            Label : BLOCK
+              void
+            Label : VALUE
+              =>
+              Label : VALUE
+                $value
+              Label : KEY
+                $key
+            Label : SOURCE
+              $data
+          Label : ELEMENT
             =
             Label : RIGHT
               array
@@ -42,18 +54,6 @@ Label : CODE
                   void
             Label : LEFT
               $associative
-          Label : ELEMENT
-            foreach
-            Label : SOURCE
-              $data
-            Label : VALUE
-              =>
-              Label : VALUE
-                $value
-              Label : KEY
-                $key
-            Label : BLOCK
-              void
           Label : ELEMENT
             =
             Label : RIGHT

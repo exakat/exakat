@@ -77,7 +77,7 @@ class Reference extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
-                               'propertyNext' => array('reference' => true),
+                               'propertyPrev' => array('reference' => true),
         );
         $this->checkAuto();
         

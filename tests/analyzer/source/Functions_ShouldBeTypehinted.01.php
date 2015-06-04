@@ -2,7 +2,7 @@
 
 function xp ($string, $array1, $objectp1) {
     $string .= 'a';
-    $array1[3] = 3;
+    $array1['a'] = 3;
     
     $objectp1->property;
     $objectm1->method();
@@ -18,7 +18,7 @@ function xm ($string, $array2, $objectm2) {
 
 function xmp ($string, $array3, $objectm3, $objectp4) {
     $string .= 'a';
-    $array3[3]();
+    $array3['b']();
     
     $objectp4->property;
     $objectm3->method();
@@ -26,12 +26,12 @@ function xmp ($string, $array3, $objectm3, $objectp4) {
 
 function xmp2 ($string32, $array32, $objectm32, $objectp32) {
     $string .= 'a';
-    $array32[3][3]();
+    $array32['c']['d']();
 }
 
 function xpm ($string, $array4, $objectp5, $objectm6) {
     $string .= 'a';
-    $array[3] = 3;
+    $array["f"] = 3;
     
     $objectp5->property;
     $objectm6->method();

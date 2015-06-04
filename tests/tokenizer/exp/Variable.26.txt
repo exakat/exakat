@@ -3,49 +3,79 @@
 Label : CODE
   ;
   Label : ELEMENT
+    [
+    Label : NAME
+      [
+      Label : VARIABLE
+        ->
+        Label : OBJECT
+          $foo
+        Label : PROPERTY
+          $bar
+      Label : INDEX
+        'baz'
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+  Label : ELEMENT
+    $
+    Label : NAME
+      [
+      Label : VARIABLE
+        [
+        Label : VARIABLE
+          $foo
+        Label : INDEX
+          'bar'
+      Label : INDEX
+        'baz'
+  Label : ELEMENT
     ->
     Label : OBJECT
       $foo
     Label : METHOD
       ;
+      Label : ARGUMENTS
+        void
       Label : ELEMENT
         [
         Label : VARIABLE
           $bar
         Label : INDEX
           'baz'
-      Label : ARGUMENTS
-        void
-  Label : ELEMENT
-    [
-    Label : VARIABLE
-      ->
-      Label : OBJECT
-        $foo
-      Label : PROPERTY
-        $bar
-    Label : INDEX
-      'baz'
   Label : ELEMENT
     ::
+    Label : CLASS
+      Foo
     Label : METHOD
       ;
+      Label : ARGUMENTS
+        void
       Label : ELEMENT
         [
         Label : VARIABLE
           $bar
         Label : INDEX
           'baz'
-      Label : ARGUMENTS
-        void
-    Label : CLASS
-      Foo
   Label : ELEMENT
     [
+    Label : NAME
+      [
+      Label : VARIABLE
+        ::
+        Label : PROPERTY
+          $bar
+        Label : CLASS
+          Foo
+      Label : INDEX
+        'baz'
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
+  Label : ELEMENT
+    [
     Label : VARIABLE
       ->
       Label : OBJECT
@@ -54,24 +84,6 @@ Label : CODE
         $bar
     Label : INDEX
       'baz'
-    Label : NAME
-      [
-  Label : ELEMENT
-    [
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : VARIABLE
-      ::
-      Label : CLASS
-        Foo
-      Label : PROPERTY
-        $bar
-    Label : INDEX
-      'baz'
-    Label : NAME
-      [
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -82,20 +94,6 @@ Label : CODE
         [
         Label : VARIABLE
           $bar
-        Label : INDEX
-          'baz'
-  Label : ELEMENT
-    $
-    Label : NAME
-      ;
-      Label : ELEMENT
-        [
-        Label : VARIABLE
-          [
-          Label : VARIABLE
-            $foo
-          Label : INDEX
-            'bar'
         Label : INDEX
           'baz'
   Label : ELEMENT

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('use Y\\Z\\AB');
+$expected     = array('use Y\\Z\\ALLLOWERCASE');
 
-$expected_not = array('use Y\\Z\\AA');
+$expected_not = array('ALLUPPERCASE::$c',
+                      'use Y\\Z\\ALLUPPERCASE',
+                      'ALLLOWERCASE::$b');
 
 ?>

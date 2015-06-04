@@ -54,6 +54,8 @@ class Token {
                                       49 => '_Ppp',
                                       16 => 'Reference',
                                       12 => 'Logical',
+                                      92 => 'Spaceship',
+                                      93 => 'Coalesce',
                                       13 => 'Heredoc',
                                       14 => 'Not',
                                       15 => 'Cast',
@@ -113,6 +115,7 @@ class Token {
                                       75 => '_Catch',
                                       88 => '_Finally',
                                       89 => '_Yield',
+                                      94 => '_Yieldfrom',
                                       76 => '_Try',
                                       77 => 'Sequence',
                                       81 => 'Phpcode',
@@ -296,6 +299,38 @@ class Token {
 
     
     static public function cleanHidden() {
+        $solvingClassNames = <<<GREMLIN
+    if (fullcode.absolutens == true) {
+        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+    } else {
+        isDefault = true;
+        if (fullcode.token == 'T_NS_SEPARATOR') {
+            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
+        } else {
+            fullcodealias = fullcode.code.toLowerCase();
+        }
+        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
+            if (fullcode.token == 'T_NS_SEPARATOR') {
+                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', alias.fullnspath);
+            }
+            fullcode.setProperty('aliased', true);
+            isDefault = false;
+        } ;
+        
+        if (isDefault) {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+            }
+        };
+    }
+GREMLIN;
+    
         $queries = array( "
 
 // cleans root token
@@ -565,230 +600,35 @@ g.idx('atoms')[['atom':'Functioncall']]
 
 // class usage
 g.idx('atoms')[['atom':'Staticmethodcall']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-    if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
-    } else {
-        isDefault = true;
-        if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
-        } else {
-            fullcodealias = fullcode.code.toLowerCase();
-        }
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').any()) { it.out('ELEMENT').next(); } else { it }}.out('CODE').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
-            if (fullcode.token == 'T_NS_SEPARATOR') {
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', alias.fullnspath);
-            }
-            fullcode.setProperty('aliased', true);
-            isDefault = false;
-        };
-        
-        if (isDefault) {
-            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-            }
-        };
-    }
+    $solvingClassNames
 };
 
 ", "
 g.idx('atoms')[['atom':'Staticproperty']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-    if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
-    } else {
-        isDefault = true;
-        if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
-        } else {
-            fullcodealias = fullcode.code.toLowerCase();
-        }
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').any()) { it.out('ELEMENT').next(); } else { it }}.out('CODE').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
-            if (fullcode.token == 'T_NS_SEPARATOR') {
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', alias.fullnspath);
-            }
-            fullcode.setProperty('aliased', true);
-            isDefault = false;
-        } ;
-        
-        if (isDefault) {
-            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-            }
-        };
-    }
+    $solvingClassNames
 };
 
 ", "
 g.idx('atoms')[['atom':'Staticconstant']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-    if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else {
-        isDefault = true;
-        if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
-        } else {
-            fullcodealias = fullcode.code.toLowerCase();
-        }
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').any()) { it.out('ELEMENT').next(); } else { it }}.out('CODE').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
-            if (fullcode.token == 'T_NS_SEPARATOR') {
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', alias.fullnspath);
-            }
-            fullcode.setProperty('aliased', true);
-            isDefault = false;
-        } ;
-        
-        if (isDefault) {
-            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-            }
-        };
-    }
+    $solvingClassNames
 };
 
 ", "
 g.idx('atoms')[['atom':'Staticclass']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-    if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
-    } else {
-        isDefault = true;
-        if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
-        } else {
-            fullcodealias = fullcode.code.toLowerCase();
-        }
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').any()) { it.out('ELEMENT').next(); } else { it }}.out('CODE').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
-            if (fullcode.token == 'T_NS_SEPARATOR') {
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', alias.fullnspath);
-            }
-            fullcode.setProperty('aliased', true);
-            isDefault = false;
-        } ;
-        
-        if (isDefault) {
-            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-            }
-        };
-    }
+    $solvingClassNames
 };
 
 ", "
 g.idx('atoms')[['atom':'Instanceof']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-    if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-    } else {
-        isDefault = true;
-        if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
-        } else {
-            fullcodealias = fullcode.code.toLowerCase();
-        }
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
-            if (fullcode.token == 'T_NS_SEPARATOR') {
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', alias.fullnspath);
-            }
-            fullcode.setProperty('aliased', true);
-            isDefault = false;
-        } ;
-        
-        if (isDefault) {
-            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-            }
-        };
-    }
+    $solvingClassNames
 };
 ", "
 g.idx('atoms')[['atom':'Catch']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-    if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
-    } else {
-        isDefault = true;
-        if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
-        } else {
-            fullcodealias = fullcode.code.toLowerCase();
-        }
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').any()) { it.out('ELEMENT').next(); } else { it }}.out('CODE').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
-            if (fullcode.token == 'T_NS_SEPARATOR') {
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', alias.fullnspath);
-            }
-            fullcode.setProperty('aliased', true);
-            isDefault = false;
-        } ;
-        
-        if (isDefault) {
-            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-            }
-        };
-    }
-};
+    $solvingClassNames};
 
 ", "
 g.idx('atoms')[['atom':'Typehint']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-    if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
-    } else {
-        isDefault = true;
-        if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
-        } else {
-            fullcodealias = fullcode.code.toLowerCase();
-        }
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').any()) { it.out('ELEMENT').next(); } else { it }}.out('CODE').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
-            if (fullcode.token == 'T_NS_SEPARATOR') {
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', alias.fullnspath);
-            }
-            fullcode.setProperty('aliased', true);
-            isDefault = false;
-        } ;
-        
-        if (isDefault) {
-            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-            } else {
-                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-            }
-        };
-    }
+    $solvingClassNames
 };
 
 ", "

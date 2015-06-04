@@ -9,17 +9,15 @@ Label : CODE
       Label : ARGUMENT
         $
         Label : NAME
-          ;
-          Label : ELEMENT
-            Concatenation
-            Label : CONCAT
-              'c'
-            Label : CONCAT
-              b
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  __FILE__
+          Concatenation
+          Label : CONCAT
+            'c'
+          Label : CONCAT
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                __FILE__
   Label : ELEMENT
     =
     Label : RIGHT

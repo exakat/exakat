@@ -24,8 +24,6 @@ Label : CODE
             void
             Label : ARGUMENT
               =>
-              Label : KEY
-                'g'
               Label : VALUE
                 Concatenation
                 Label : CONCAT
@@ -34,6 +32,8 @@ Label : CODE
                   "i"
                 Label : CONCAT
                   H
+              Label : KEY
+                'g'
         Label : ARGUMENT
           $f
   Label : ELEMENT

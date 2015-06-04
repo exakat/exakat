@@ -1281,3 +1281,4 @@ check the to_var (index with _) and remove them.
 uniqid : not for crypto either.
 
 Loader : split attr in as many files to simplify the Cypher query.
+            if ($fp !== true && $fp !== false) { // surprisingly faster than !is_bool() or is_resource()

@@ -2,16 +2,16 @@
 
 namespace B\C {
 
-use Y\Z\AA;
-use Y\Z\AB;
+use Y\Z\ALLUPPERCASE;
+use Y\Z\ALLLOWERCASE;
 
 class J extends K\L {
 
     public function M() {
         $a->N('O')
              ->P('Q')
-             ->R(AA::$b)
-             ->T(AB::$c)
+             ->R(ALLUPPERCASE::$b)
+             ->T(ALLLOWERCASE::$c)
              ->V('W');
         $d->X();
     }
@@ -20,7 +20,7 @@ class J extends K\L {
 }
 
 namespace Y\Z {
-    class AA {}
-    class ab {}
+    class ALLUPPERCASE {}
+    class alllowercase {}
 }
 ?>

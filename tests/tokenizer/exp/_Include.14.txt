@@ -1,8 +1,12 @@
 ;
 Label : ELEMENT
-  A
-Label : ELEMENT
   B
+Label : ELEMENT
+  b
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      'c'
 Label : ELEMENT
   include
   Label : ARGUMENTS
@@ -12,11 +16,7 @@ Label : ELEMENT
       Label : CODE
         'b.php'
 Label : ELEMENT
-  b
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      'c'
+  A
 Label : ELEMENT
   include
   Label : ARGUMENTS

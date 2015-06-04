@@ -3,26 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        $b
-      Label : ELEMENT
-        $a
-    Label : INIT
-      $i
-    Label : FINAL
-      ++
-      Label : POSTPLUSPLUS
-        $i
-    Label : INCREMENT
-      --
-      Label : POSTPLUSPLUS
-        $i
-  Label : ELEMENT
-    
-  Label : ELEMENT
     foreach
     Label : SOURCE
       $a
@@ -34,60 +14,6 @@ Label : CODE
         $b
       Label : ELEMENT
         $a
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        $b
-      Label : ELEMENT
-        $a
-  Label : ELEMENT
-    break
-    Label : LEVEL
-      void
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ?
-      Label : CONDITION
-        (
-        Label : CODE
-          $c
-      Label : THEN
-        (bool)
-        Label : CAST
-          (
-          Label : CODE
-            <
-            Label : RIGHT
-              $d
-            Label : LEFT
-              C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    ::
-                    Label : METHOD
-                      E
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          void
-                    Label : CLASS
-                      D
-                  Label : METHOD
-                    F
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        void
-      Label : ELSE
-        G
   Label : ELEMENT
     switch
     Label : NAME
@@ -123,6 +49,24 @@ Label : CODE
         Label : CASE
           'a'
   Label : ELEMENT
+    for
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+    Label : INIT
+      $i
+    Label : FINAL
+      ++
+      Label : POSTPLUSPLUS
+        $i
+    Label : INCREMENT
+      --
+      Label : POSTPLUSPLUS
+        $i
+  Label : ELEMENT
     while
     Label : CONDITION
       $a
@@ -132,6 +76,62 @@ Label : CODE
         $b
       Label : ELEMENT
         $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    break
+    Label : LEVEL
+      void
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ?
+      Label : CONDITION
+        (
+        Label : CODE
+          $c
+      Label : THEN
+        (bool)
+        Label : CAST
+          (
+          Label : CODE
+            <
+            Label : RIGHT
+              $d
+            Label : LEFT
+              C
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    ::
+                    Label : CLASS
+                      D
+                    Label : METHOD
+                      E
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          void
+                  Label : METHOD
+                    F
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+      Label : ELSE
+        G
   Label : ELEMENT
     =
     Label : RIGHT

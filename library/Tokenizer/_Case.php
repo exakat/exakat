@@ -71,20 +71,6 @@ class _Case extends TokenAuto {
                                'keepIndexed'                    => true);
         $this->checkAuto();
 
-/*
-        // Case has only one instruction and no ; (case 'a': $x++)
-        $this->conditions = array( 0 => array('token'   => _Case::$operators,
-                                              'atom'    => 'none'),
-                                   1 => array('atom'    => 'yes'),
-                                   2 => array('token'   => array('T_COLON', 'T_SEMICOLON')),
-                                   3 => array('atom'    => 'yes',
-                                              'notAtom' => 'Sequence'),
-                                   4 => array('token'   => $finalToken));
-        
-        $this->actions = array('createBlockWithSequenceForCase' => true,
-                               'keepIndexed'                    => true);
-        $this->checkAuto();
-*/
     // create block for Case  case 'a' : $x++; (or a sequence).
         $this->conditions = array(  0 => array('token'   => _Case::$operators,
                                                'atom'    => 'none'),
@@ -131,7 +117,8 @@ class _Case extends TokenAuto {
                                                                         Assignation::$operators, Property::$operators,
                                                                         _Array::$operators, Bitshift::$operators,
                                                                         Comparison::$operators, Logical::$operators,
-                                                                        Staticproperty::$operators, Label::$operators)),
+                                                                        Staticproperty::$operators, Label::$operators,
+                                                                        Spaceship::$operators)),
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,

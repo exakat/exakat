@@ -6,6 +6,8 @@ Label : CODE
     ;
     Label : ELEMENT
       class
+      Label : NAME
+        J
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -14,12 +16,10 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-          Label : BLOCK
-            void
           Label : NAME
             M
-      Label : NAME
-        J
+          Label : BLOCK
+            void
       Label : EXTENDS
         K
       Label : IMPLEMENTS

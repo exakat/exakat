@@ -40,9 +40,11 @@ class _Return extends TokenAuto {
 
         // return with something ;
         $this->conditions = array( 0 => array('token' => _Return::$operators,
-                                              'atom' => 'none' ),
-                                   1 => array('atom' => 'yes'),
+                                              'atom'  => 'none' ),
+                                   1 => array('atom'  => 'yes'),
                                    2 => array('filterOut2' => array_merge(Token::$instructionEnding,
+                                                                          Spaceship::$operators,
+                                                                          Coalesce::$operators,
                                                                           array('T_OPEN_CURLY'))),
         );
         

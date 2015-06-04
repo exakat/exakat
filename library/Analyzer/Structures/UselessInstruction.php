@@ -33,7 +33,7 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Logical', 'Comparison', 'Null',
-                            'Heredoc'))
+                            'Heredoc', 'Power', 'Spaceship', 'Coalesce'))
              ->noAtomInside('Functioncall');
         $this->prepareQuery();
         

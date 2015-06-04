@@ -48,7 +48,7 @@ Label : ELEMENT
                   Label : INDEX
                     'S'
         Label : ELEMENT
-          V
+          AB
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -68,7 +68,7 @@ Label : ELEMENT
                   Label : INDEX
                     'X'
         Label : ELEMENT
-          AB
+          AA
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -76,7 +76,13 @@ Label : ELEMENT
             Label : ARGUMENT
               $c
         Label : ELEMENT
-          AA
+          V
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c
         Label : ELEMENT
           Q
         Label : ELEMENT
@@ -84,15 +90,9 @@ Label : ELEMENT
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              $c
+              $g
         Label : ELEMENT
           P
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $g
         Label : ELEMENT
           O
         Label : ELEMENT

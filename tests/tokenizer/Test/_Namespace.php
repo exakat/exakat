@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Namespace extends Tokenizer {
-    /* 13 methods */
+    /* 14 methods */
 
     public function test_Namespace01()  { $this->generic_test('_Namespace.01'); }
     public function test_Namespace02()  { $this->generic_test('_Namespace.02'); }
@@ -22,5 +22,6 @@ class _Namespace extends Tokenizer {
     public function test_Namespace11()  { $this->generic_test('_Namespace.11'); }
     public function test_Namespace12()  { $this->generic_test('_Namespace.12'); }
     public function test_Namespace13()  { $this->generic_test('_Namespace.13'); }
+    public function test_Namespace14()  { $this->generic_test('_Namespace.14'); }
 }
 ?>
