@@ -14,14 +14,12 @@ Label : CODE
           ;
           Label : ELEMENT
             function
-            Label : STATIC
-              static
+            Label : NAME
+              F
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $a
-            Label : NAME
-              F
             Label : BLOCK
               ;
               Label : ELEMENT
@@ -30,12 +28,12 @@ Label : CODE
                   new
                   Label : NEW
                     \
-                    Label : SUBNAME
-                      AL
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
                         'AM'
+                    Label : SUBNAME
+                      AL
               Label : ELEMENT
                 if
                 Label : CONDITION
@@ -214,6 +212,8 @@ Label : CODE
                             void
                             Label : ARGUMENT
                               $a
+            Label : STATIC
+              static
     Label : NAMESPACE
       \
       Label : SUBNAME
@@ -227,7 +227,7 @@ Label : CODE
     Label : BLOCK
       void
     Label : NAMESPACE
-      D
+      C
   Label : ELEMENT
     
   Label : ELEMENT
@@ -235,7 +235,7 @@ Label : CODE
     Label : BLOCK
       void
     Label : NAMESPACE
-      C
+      D
   Label : ELEMENT
     
   Label : ELEMENT

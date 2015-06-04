@@ -1,32 +1,34 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    array
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        void
-      Label : ARGUMENT
-        =>
-        Label : VALUE
-          require_once
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              (
-              Label : CODE
-                Concatenation
-                Label : CONCAT
-                  'c'
-                Label : CONCAT
-                  b
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      __FILE__
-        Label : KEY
-          'a'
-  Label : LEFT
-    $x
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'a'
+          Label : VALUE
+            require_once
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  Concatenation
+                  Label : CONCAT
+                    'c'
+                  Label : CONCAT
+                    b
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        __FILE__
+    Label : LEFT
+      $x

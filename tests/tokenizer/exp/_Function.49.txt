@@ -1,128 +1,130 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    Arguments
-    Label : ARGUMENT
-      $b
-    Label : ARGUMENT
-      $a
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        !
-        Label : NOT
-          F
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $g
-            Label : ARGUMENT
-              $f
-      Label : THEN
-        ;
-        Label : ELEMENT
-          H
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              I
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  $k
-                Label : ARGUMENT
-                  'J'
-            Label : ARGUMENT
-              $j
-            Label : ARGUMENT
-              $i
-        Label : ELEMENT
-          throw
-          Label : THROW
-            new
-            Label : NEW
-              \
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : NAME
+      B
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          !
+          Label : NOT
+            F
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $g
+              Label : ARGUMENT
+                $f
+        Label : THEN
+          ;
+          Label : ELEMENT
+            H
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                I
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    $k
+                  Label : ARGUMENT
+                    'J'
+              Label : ARGUMENT
+                $j
+              Label : ARGUMENT
+                $i
+          Label : ELEMENT
+            throw
+            Label : THROW
+              new
+              Label : NEW
+                \
+                Label : ARGUMENTS
                   void
-              Label : SUBNAME
-                K
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            'G'
-          Label : LEFT
-            $h
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        null
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $q
-        Label : PROPERTY
-          O
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+                  Label : ARGUMENT
+                    void
+                Label : SUBNAME
+                  K
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              'G'
+            Label : LEFT
+              $h
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $q
+          Label : PROPERTY
+            O
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
             void
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $p
-        Label : PROPERTY
-          N
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        $o
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $n
-        Label : PROPERTY
-          M
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        $m
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $l
-        Label : PROPERTY
-          L
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'E'
-          Label : ARGUMENT
-            'D'
-      Label : LEFT
-        $e
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $d
-      Label : LEFT
-        $c
-  Label : NAME
-    B
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $p
+          Label : PROPERTY
+            N
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $o
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $n
+          Label : PROPERTY
+            M
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $m
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $l
+          Label : PROPERTY
+            L
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'E'
+            Label : ARGUMENT
+              'D'
+        Label : LEFT
+          $e
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          C
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $d
+        Label : LEFT
+          $c

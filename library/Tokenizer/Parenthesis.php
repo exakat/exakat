@@ -31,7 +31,8 @@ class Parenthesis extends TokenAuto {
         $operands    = "yes";
 
         // ( normal parenthesis )
-        $this->conditions = array(-1 => array('filterOut2' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
+        $this->conditions = array(-2 => array('filterOut2' => 'T_FUNCTION'),
+                                  -1 => array('filterOut2' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
                                                                     array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
                                                                     'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
                                                                     'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',

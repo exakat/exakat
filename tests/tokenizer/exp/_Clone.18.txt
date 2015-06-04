@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  clone
-  Label : CLONE
-    @
-    Label : AT
-      $x
+  ;
+  Label : ELEMENT
+    clone
+    Label : CLONE
+      @
+      Label : AT
+        $x

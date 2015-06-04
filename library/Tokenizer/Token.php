@@ -115,6 +115,7 @@ class Token {
                                       75 => '_Catch',
                                       88 => '_Finally',
                                       89 => '_Yield',
+                                      94 => '_Yieldfrom',
                                       76 => '_Try',
                                       77 => 'Sequence',
                                       81 => 'Phpcode',

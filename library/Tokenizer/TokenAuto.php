@@ -199,6 +199,27 @@ fullcode.setProperty('$name', $value)";
             }
             unset($actions['propertyNext']);
         }
+
+        if (isset($actions['propertyPrev'])) {
+            if (is_array($actions['propertyPrev']) && !empty($actions['propertyPrev'])) {
+                $qactions[] = " /* propertyPrev */
+fullcode = it.in('NEXT').next(); \n";
+                foreach($actions['propertyPrev'] as $name => $value) {
+                    if (substr($value, 0, 3) == 'it.') {
+                        $value = 'fullcode.' . substr($value, 3);
+                    } elseif (substr($value, 0, 3) == '"&"') {
+                        // Just let it go
+                    } elseif ($value === true) {
+                        $value = 'true';
+                    } else {
+                        $value = "'$value'";
+                    }
+                    $qactions[] .= "
+fullcode.setProperty('$name', $value)";
+                }
+            }
+            unset($actions['propertyPrev']);
+        }
         
         if (isset($actions['rank']) && is_array($actions['rank'])) {
             foreach($actions['rank'] as $offset => $rank) {
@@ -428,14 +449,29 @@ x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, l
 g.addEdge(it, x, 'NAME');
 it.setProperty('lambda', true);
 
-op = it.out('NEXT').next();
-cp = it.out('NEXT').out('NEXT').out('NEXT').next();
+if (a1.token == 'T_AND') {
+    a1.bothE('NEXT').each{ g.removeEdge(it); }
+    g.idx('delete').put('node', 'delete', a1);
+    it.setProperty('reference', true);
 
-oc = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
-cc = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+    op = a2;
+    args = a3;
+    cp = a4;
 
-g.addEdge(it, it.out('NEXT').out('NEXT').next(), 'ARGUMENTS');
-block = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+    oc = a5;
+    block = a6;
+    cc = a7;
+} else {
+    op = a1;
+    args = a2;
+    cp = a3;
+
+    oc = a4;
+    block = a5;
+    cc = a6;
+}
+
+g.addEdge(it, args, 'ARGUMENTS');
 g.addEdge(it, block, 'BLOCK');
 block.setProperty('bracket', true);
 
@@ -466,6 +502,11 @@ g.addEdge(it, x, 'NAME');
 it.setProperty('lambda', true);
 
 x = it.out('NEXT').next();
+if (x.token == 'T_AND') {
+    it.setProperty('reference', true);
+    g.idx('delete').put('node', 'delete', x);
+    x = x.out('NEXT').next();
+}
 g.idx('delete').put('node', 'delete', x);
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 
@@ -2190,6 +2231,35 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
 ";
             unset($actions['toVariable']);
         }
+
+        if (isset($actions['toVariableDollar'])) {
+            $qactions[] = "
+/* to variable dollar */
+
+a4 = a3.out('NEXT').next();
+g.addEdge(it, a4, 'NEXT');
+
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+a2.bothE('NEXT').each{ g.removeEdge(it); }
+a3.bothE('NEXT').each{ g.removeEdge(it); }
+
+if (a2.atom == 'Sequence') {
+    g.addEdge(it, a2.out('ELEMENT').next(), 'NAME');
+    g.removeVertex(a2);
+} else {
+    g.addEdge(it, a2, 'NAME');
+}
+
+g.removeVertex(a1);
+g.removeVertex(a3);
+
+if (a4.token == 'T_OPEN_PARENTHESIS') {
+    g.addEdge(g.idx('racines')[['token':'S_ARRAY']].next(), it, 'INDEXED');
+}
+
+";
+            unset($actions['toVariableDollar']);
+        }
         
         if (isset($actions['makeForeachSequence'])) {
             $qactions[] = "
@@ -2407,9 +2477,23 @@ g.idx('atoms').put('atom', 'Variable', x);
             $qactions[] = "
 /* hold the array as property.  */
 
-x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:'T_OPEN_BRACKET', virtual:true, line:it.line]);
-g.addEdge(it, x, 'NAME');
-g.idx('atoms').put('atom', 'Array', x);
+// it may be an array or a variable variable
+x = g.addVertex(null, [code:it.code, atom:'Functioncall', token:it.token, virtual:true, line:it.line]);
+g.addEdge(x, it, 'NAME');
+g.addEdge(it.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a3.out('NEXT').next(), 'NEXT');
+g.addEdge(x, a2, 'ARGUMENTS');
+
+it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+a1.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+a3.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.removeVertex(a1);
+g.removeVertex(a3);
+
+fullcode = x;
+$fullcode
+
                 ";
             unset($actions['arrayToFunctioncall']);
         }
