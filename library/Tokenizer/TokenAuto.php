@@ -1318,35 +1318,26 @@ $fullcode
         }
         
         if (isset($actions['insertEdge'])) {
-            foreach($actions['insertEdge'] as $destination => $config) {
-            if ($destination == 0) {
+            foreach($actions['insertEdge'] as $config) {
                 list($atom, $link) = each($config);
                 
                 $fullcode = $this->fullcode();
                 
                 $qactions[] = "
 /* insertEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
+x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_COMMA', virtual:true, line:it.line, line:it.line]);
 g.idx('atoms').put('atom', 'Void', x);
 
-f = it.out('NEXT').out('NEXT').next();
-
 g.addEdge(it, x, 'NEXT');
-g.addEdge(x, f, 'NEXT');
-g.addEdge(x, it.out('NEXT').next(), '$link');
-g.removeEdge(it.outE('NEXT').next());
-g.removeEdge(x.out('$link').outE('NEXT').next());
+g.addEdge(x, a2, 'NEXT');
+g.addEdge(x, a1, '$link');
+x.setProperty('fullcode', a1.fullcode);
+a1.bothE('NEXT').each{g.removeEdge(it);}
 
-x.out('$link').inE('INDEXED').each{
-    g.removeEdge(it);
-}
+a1.inE('INDEXED').each{ g.removeEdge(it); }
 
 fullcode = x;
-$fullcode
 ";
-            } else {
-                print "No support for insertEdge with destination less than 0\n";
-            }
             unset($actions['insertEdge']);
             }
         }

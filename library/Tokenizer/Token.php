@@ -272,13 +272,13 @@ class Token {
     public function checkRemaining() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, array('Staticclass','Staticconstant','Staticmethodcall','Staticproperty'))) {
-            $query = "g.idx('racines')[['token':'Staticproperty']].out('INDEXED').count()";
+            $query = "g.idx('racines')[['token':'Staticproperty']].out('INDEXED').any()";
             return Token::queryOne($query) > 0;
         } elseif (in_array($class, array('Property','Methodcall'))) {
-            $query = "g.idx('racines')[['token':'Property']].out('INDEXED').count()";
+            $query = "g.idx('racines')[['token':'Property']].out('INDEXED').any()";
             return Token::queryOne($query) > 0;
         } elseif (in_array($class, Token::$types)) {
-            $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
+            $query = "g.idx('racines')[['token':'$class']].out('INDEXED').any()";
             return Token::queryOne($query) > 0;
         } else {
             return true;
@@ -540,6 +540,11 @@ g.idx('atoms')[['atom':'Interface']].sideEffect{fullcode = it;}.in.loop(1){!(it.
 // also add interfaces and Traits and their respective extensions
 ", "
 
+// case for [1,2,3] : all are \array
+g.idx('atoms')[['atom':'Functioncall']].has('token', 'T_OPEN_BRACKET').each{
+    it.setProperty('fullnspath', '\\\\array');
+};
+
 g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
                                        .filter{it.in('NEW').any() == false}
                                        .filter{it.token in ['T_STRING', 'T_NS_SEPARATOR']}
@@ -563,7 +568,6 @@ g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + s);
     }
 };
-
 ", "
 // function usage
 // fallback for functions : if not defined, then fallback to \
