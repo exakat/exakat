@@ -57,9 +57,29 @@ class Build_root implements Tasks {
 
         $this->logTime('g.idx("atoms")');
         display( "g.idx('atoms') : filling\n");
-        $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
-                                         'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{
-                                         g.idx('atoms').put('atom', it.atom, it); }";
+
+        // separate processing for T_STRING 
+        $query = "g.V.has('token', 'T_STRING').each{
+            it.setProperty('fullcode', it.getProperty('code'));
+            it.setProperty('atom', 'Identifier');
+            g.idx('atoms').put('atom', it.atom, it); 
+        }";
+        $this->query($query, 1);
+        display( "g.idx('atoms') : T_STRING\n");
+
+        // separate processing for T_VARIABLE 
+        $query = "g.V.has('token', 'T_VARIABLE').each{
+            it.setProperty('fullcode', it.getProperty('code'));
+            it.setProperty('atom', 'Variable');
+            g.idx('atoms').put('atom', it.atom, it); 
+        }";
+        $this->query($query, 1);
+        display( "g.idx('atoms') : T_VARIABLE\n");
+
+        $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant',
+                                         'Rawstring', 'Float', 'Boolean', 'Void', 'File']}.each{
+                                         g.idx('atoms').put('atom', it.atom, it); 
+        }";
         $this->query($query, 1);
         display( "g.idx('atoms') : filled\n" );
         $this->logTime('g.idx("atom")[["atom":"******"]] : filling');

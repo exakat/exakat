@@ -348,7 +348,6 @@ class Load implements Tasks {
                     $Tid++;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                   ->setProperty('code', ';')
-                                                  ->setProperty('fullcode', ';')
                                                   ->setProperty('line', $line)
                                                   ->setProperty('modifiedBy', 'bin/load18')
                                                   ->save();
@@ -359,9 +358,9 @@ class Load implements Tasks {
                           is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_END_HEREDOC') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
-                                                  ->setProperty('code', $token[1])
-                                                  ->setProperty('fullcode', $token[1])
-                                                  ->setProperty('line', $token[2])->save();
+                                                        ->setProperty('code', $token[1])
+                                                        ->setProperty('fullcode', $token[1])
+                                                        ->setProperty('line', $token[2])->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $regexIndex['Heredoc']->relateTo($T[$Tid], 'INDEXED')->save();
@@ -622,12 +621,9 @@ class Load implements Tasks {
                             ->setProperty('fullcode', $token[1])->save();
                     $to_index = ($tokens[$id + 1] == '('); // if the next is (, this may be a function or a method!!
                 } elseif (isset($atoms[$token[3]])) {
-                    if ($token[3] == 'T_STRING') {
-                        $T[$Tid]->setProperty('atom', $atoms[$token[3]])
-                                ->setProperty('code', $token[1])
-                                ->setProperty('fullcode', $token[1])->save();
+                    if (in_array($token[3], array('T_STRING', 'T_VARIABLE'))) {
+                        $T[$Tid]->setProperty('code', $token[1])->save();
                         $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
-
                     } elseif ($token[3] == 'T_STRING_VARNAME') {
                         $T[$Tid]->setProperty('atom', $atoms[$token[3]])
                                 ->setProperty('code', '$'.$token[1])

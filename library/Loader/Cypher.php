@@ -52,9 +52,9 @@ class Cypher {
     
     private $isLink = false;
     
-    private $les_attr = array('index', 'fullcode', 'atom', 'root', 'hidden', 
+    private $les_attr = array('index',  'root', 'hidden', 
                               'in_quote', 'delimiter', 'noDelimiter', 'rank', 
-                              'block', 'bracket', 'filename', 'tag', 'association', 'in_for' );
+                              'block', 'bracket', 'filename', 'tag', 'association', 'in_for', 'atom', 'fullcode' );
     
     public function __construct() {
         $this->config = \Config::factory();
@@ -90,7 +90,7 @@ class Cypher {
         display('Created index');
 
         $queryTemplate = <<<CYPHER
-USING PERIODIC COMMIT
+USING PERIODIC COMMIT 200
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.csv" AS csvLine
 CREATE (token:Token { 
 eid: toInt(csvLine.id),
@@ -109,9 +109,8 @@ CYPHER;
 
         display('Loaded nodes');
 
-        Print "ICI\n";
         foreach($this->les_attr as $attribute) {
-            print "$attribute\n";
+            display( "Loading $attribute");
             
             if ($attribute == 'rank') {
                 $toAttribute = "toInt(csvLine.rank)";
@@ -121,7 +120,7 @@ CYPHER;
                 $toAttribute = "csvLine.$attribute";
             }
             $queryTemplate = <<<CYPHER
-USING PERIODIC COMMIT
+USING PERIODIC COMMIT 200
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.$attribute.csv" AS csvLine
 MATCH (token:Token { eid: toInt(csvLine.id)})
 SET token.$attribute = $toAttribute
@@ -131,8 +130,8 @@ CYPHER;
                 $query = new Query($client, $queryTemplate, array());
                 $result = $query->getResultSet();
             } catch (\Exception $e) {
-                $this->cleanCsv(); 
-                die("Couldn't load nodes attributes '$attribute' in the database\n".$e->getMessage());
+
+                die("Couldn't load nodes attributes '$attribute' in the database\n Exception : ".$e->getMessage()."\n");
             }
         }
 
@@ -145,7 +144,7 @@ CYPHER;
                            'indexed' => 'INDEXED');
         foreach($relations as $name => $relation) {
             $queryTemplate = <<<CYPHER
-USING PERIODIC COMMIT
+USING PERIODIC COMMIT 200
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.cypher.{$name}.csv" AS csvLine
 MATCH (token:Token { eid: toInt(csvLine.start)}),(token2:Token { eid: toInt(csvLine.end)})
 CREATE (token)-[:$relation]->(token2)
