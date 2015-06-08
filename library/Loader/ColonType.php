@@ -99,3 +99,5 @@ class ColonType {
         return $r;
     }
 }
+
+?>

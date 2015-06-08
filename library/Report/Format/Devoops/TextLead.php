@@ -34,4 +34,4 @@ class TextLead extends \Report\Format\Devoops {
     }
 
 }
-
+?>

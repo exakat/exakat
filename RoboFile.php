@@ -308,3 +308,5 @@ function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $err
     print __METHOD__."\n";
     return true;
 }
+
+?>
