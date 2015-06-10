@@ -4,6 +4,8 @@ Label : ELEMENT
   Label : CODE
     ;
     Label : ELEMENT
+      
+    Label : ELEMENT
       while
       Label : CONDITION
         =

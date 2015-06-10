@@ -3,12 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
+    
+  Label : ELEMENT
     while
+    Label : CONDITION
+      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $c
-    Label : CONDITION
-      $a

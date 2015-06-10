@@ -8,8 +8,12 @@ Label : CODE
       void
       Label : ARGUMENT
         $n
+    Label : NAME
+      a
     Label : BLOCK
       ;
+      Label : ELEMENT
+        
       Label : ELEMENT
         while
         Label : CONDITION
@@ -26,5 +30,3 @@ Label : CODE
               2
             Label : LEFT
               $n
-    Label : NAME
-      a

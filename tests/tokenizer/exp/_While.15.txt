@@ -21,6 +21,8 @@ Label : CODE
         Label : POSTPLUSPLUS
           $x
   Label : ELEMENT
+    
+  Label : ELEMENT
     =
     Label : RIGHT
       1

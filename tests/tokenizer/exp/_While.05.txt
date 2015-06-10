@@ -3,10 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    
+  Label : ELEMENT
     while
+    Label : CONDITION
+      1
     Label : BLOCK
       ;
       Label : ELEMENT
         void
-    Label : CONDITION
-      1
