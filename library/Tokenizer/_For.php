@@ -96,37 +96,8 @@ class _For extends TokenAuto {
                                                       ),
                                'atom'         => 'For',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'makeBlock'    => 'BLOCK'
-                               );
-        $this->checkAuto();
-
-    // @doc for(a; b; c) { code }
-        $this->conditions = array(  0 => array('token' => _For::$operators,
-                                               'atom'  => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                               'property' => array('association' => 'For')),
-                                    2 => array('atom'  => 'yes'),
-                                    3 => array('token' => 'T_SEMICOLON'),
-                                    4 => array('atom'  => 'yes'),
-                                    5 => array('token' => 'T_SEMICOLON'),
-                                    6 => array('atom'  => 'yes'),
-                                    7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    8 => array('atom'  => 'Sequence')
-        );
-        
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'INIT',
-                                                        3 => 'DROP',
-                                                        4 => 'FINAL',
-                                                        5 => 'DROP',
-                                                        6 => 'INCREMENT',
-                                                        7 => 'DROP',
-                                                        8 => 'BLOCK'
-                                                      ),
-                               'atom'         => 'For',
-                               'cleanIndex'   => true,
-                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 

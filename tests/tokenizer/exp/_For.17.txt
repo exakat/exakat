@@ -3,14 +3,14 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $h
-      Label : VALUE
-        $i
     Label : SOURCE
       $g
+    Label : VALUE
+      =>
+      Label : VALUE
+        $i
+      Label : KEY
+        $h
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -43,6 +43,8 @@ Label : CODE
           void
     Label : LEFT
       $f
+  Label : ELEMENT
+    
   Label : ELEMENT
     for
     Label : BLOCK

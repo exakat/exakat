@@ -1,44 +1,46 @@
 <?php
 
 Label : CODE
-  for
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        +
+  ;
+  Label : ELEMENT
+    for
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        =
         Label : RIGHT
-          $c
+          +
+          Label : RIGHT
+            $c
+          Label : LEFT
+            $a
+        Label : LEFT
+          $b
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          b
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              'c'
         Label : LEFT
           $a
-      Label : LEFT
-        $b
-    Label : ELEMENT
+    Label : INIT
       =
       Label : RIGHT
-        b
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $c
-          Label : ARGUMENT
-            'c'
+        0
       Label : LEFT
         $a
-  Label : INIT
-    =
-    Label : RIGHT
-      0
-    Label : LEFT
-      $a
-  Label : FINAL
-    <
-    Label : RIGHT
-      1
-    Label : LEFT
-      $b
-  Label : INCREMENT
-    ++
-    Label : POSTPLUSPLUS
-      $c
+    Label : FINAL
+      <
+      Label : RIGHT
+        1
+      Label : LEFT
+        $b
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $c
