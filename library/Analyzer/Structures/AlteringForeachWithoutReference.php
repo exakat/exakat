@@ -46,6 +46,8 @@ class AlteringForeachWithoutReference extends Analyzer\Analyzer {
 
              ->outIs('BLOCK')
              ->atomInside('Array')
+             ->filter('it.in("CAST").has("token", "T_UNSET_CAST").any() == false')
+             ->filter('it.in("ARGUMENT").in("ARGUMENTS").has("token", "T_UNSET").any() == false')
              ->outIs('VARIABLE')
              ->analyzerIs('Analyzer\\Variables\\IsModified')
              ->samePropertyAs('code', 'source')
