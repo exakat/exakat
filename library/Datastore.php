@@ -103,8 +103,6 @@ class Datastore {
     }
 
     public function getHash($key) {
-        $return = array();
-
         $query = "SELECT value FROM hash WHERE key=:key";
         $stmt = $this->sqlite->prepare($query);
         $stmt->bindValue(':key', $key, SQLITE3_TEXT);

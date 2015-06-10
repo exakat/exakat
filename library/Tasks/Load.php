@@ -41,7 +41,6 @@ class Load implements Tasks {
 
         // formerly -q option. Currently, only one loader, via csv-batchimport;
         $this->client = new \Loader\Cypher();
-//        $this->client = new \Loader\Csv();
 
         if ($filename = $this->config->filename) {
             $nbTokens = $this->process_file($filename);
@@ -369,12 +368,12 @@ class Load implements Tasks {
 
                     $Tid++;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ENCAPSED_AND_WHITESPACE')
-                                                  ->setProperty('atom', 'String')
-                                                  ->setProperty('code', ' ')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load26')
-                                                  ->save();
+                                                        ->setProperty('atom', 'String')
+                                                        ->setProperty('code', ' ')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load26')
+                                                        ->save();
 
                     $to_index = false;
                 } elseif ($token[3] == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
@@ -1050,19 +1049,9 @@ class Load implements Tasks {
 
             if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
                 $inQuote++;
-                if (is_array($token)) {
-                    $T[$Tid]->setProperty('fullcode', $token[1])->save();
-                } else {
-                    $T[$Tid]->setProperty('fullcode', $token)->save();
-                }
             } elseif ($inQuote && in_array($token_value, array('T_QUOTE_CLOSE', 'T_SHELL_QUOTE_CLOSE', 'T_END_HEREDOC'))) {
                 $inQuote--;
                 $T[$Tid]->setProperty('in_quote', 'true')->save();
-                if (is_array($token)) {
-                    $T[$Tid]->setProperty('fullcode', $token[1])->save();
-                } else {
-                    $T[$Tid]->setProperty('fullcode', $token)->save();
-                }
             }
 
             if ($inQuote) {

@@ -33,7 +33,6 @@ class Counts extends \Report\Content {
                         );
 
         $total = 0;
-        $analyzes = array();
         foreach($themes as $theme) {
             if (null !== $datastore->getHash($theme)) {
                 $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($theme);

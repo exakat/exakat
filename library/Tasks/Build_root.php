@@ -36,7 +36,6 @@ class Build_root implements Tasks {
         $this->config = $config;
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
 
-        $begin = microtime(true);
         display( "Connecting to server\n");
         $this->client = new Client();
         display( "Starting\n");
@@ -127,8 +126,6 @@ class Build_root implements Tasks {
         $this->logTime('g.idx("last index")');
 
         display("Creating index for constant, function and classes resolution.\n");
-
-        $end = microtime(true);
     }
 
     private function query($query, $retry = 1) {

@@ -176,7 +176,7 @@ class Files implements Tasks {
             }
     
             $datastore->cleanTable('compilation'.$version);
-            $datastore->addRow('compilation'.$version.'', $incompilables);
+            $datastore->addRow('compilation'.$version, $incompilables);
             $stats['notCompilable'.$version] = count($incompilables);
         }
 

@@ -70,7 +70,6 @@ HTML;
                 $row['code'] = '&nbsp;';
             }
             
-            $id = str_replace(' ', '-', strtolower($row['desc']));
 $html .= <<<HTML
 
 										<tr>

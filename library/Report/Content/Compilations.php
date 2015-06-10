@@ -27,8 +27,6 @@ class Compilations extends \Report\Content {
     private $versions = array();
 
     public function collect() {
-        $allVersions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56', '7.0' => '70');
-
         $queryTemplate = "g.V.has('atom', 'File').count()";
         $params = array('type' => 'IN');
         $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
