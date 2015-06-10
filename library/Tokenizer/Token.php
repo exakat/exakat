@@ -919,6 +919,11 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
     g.removeVertex(it.out('NEXT').next());
     g.removeVertex(it);
 }
+
+g.idx('delete')[['node':'delete']].each{
+    g.removeVertex(it);
+}
+
 ";
         Token::query($query);
     }
