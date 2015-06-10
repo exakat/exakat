@@ -663,7 +663,9 @@ $fullcode
             $c = 0;
             
             foreach($actions['transform'] as $destination => $label) {
-                if ($label == 'NONE') { continue; }
+                if ($label == 'NONE') { 
+                    continue; 
+                }
 
                 // Destination > 0
                 if ($destination > 0) {
