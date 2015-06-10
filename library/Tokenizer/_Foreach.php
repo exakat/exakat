@@ -63,7 +63,7 @@ class _Foreach extends TokenAuto {
                                    7 => array('filterOut' => array_merge(array('T_OPEN_BRACKET', 'T_OBJECT_OPERATOR',
                                                                                'T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS'),
                                                                 Assignation::$operators, Addition::$operators,
-                                                                Multiplication::$operators)),
+                                                                Multiplication::$operators, Logical::$operators)),
         );
         $this->actions = array( 'toBlockForeach' => 6,
                                 'keepIndexed'    => true,

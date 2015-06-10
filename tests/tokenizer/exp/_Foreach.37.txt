@@ -1,40 +1,42 @@
 <?php
 
 Label : CODE
-  foreach
-  Label : SOURCE
-    require
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          $a
-  Label : VALUE
-    =>
+  ;
+  Label : ELEMENT
+    foreach
     Label : VALUE
-      $c
-    Label : KEY
-      $b
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      ->
-      Label : OBJECT
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
+    Label : BLOCK
+      ;
+      Label : ELEMENT
         ->
         Label : OBJECT
-          $d
-        Label : PROPERTY
-          e
-      Label : METHOD
-        f
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'g'
-          Label : ARGUMENT
-            $i
-          Label : ARGUMENT
-            $h
-          Label : ARGUMENT
-            'g'
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            e
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'g'
+            Label : ARGUMENT
+              $i
+            Label : ARGUMENT
+              $h
+            Label : ARGUMENT
+              'g'
+    Label : SOURCE
+      require
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          (
+          Label : CODE
+            $a

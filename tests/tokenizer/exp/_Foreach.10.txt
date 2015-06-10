@@ -6,8 +6,6 @@ Label : CODE
     foreach
     Label : BLOCK
       void
-    Label : VALUE
-      $e
     Label : SOURCE
       ?
       Label : CONDITION
@@ -26,3 +24,5 @@ Label : CODE
             $d
           Label : ARGUMENT
             'd'
+    Label : VALUE
+      $e

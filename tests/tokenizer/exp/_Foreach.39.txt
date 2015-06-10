@@ -7,8 +7,6 @@ Label : CODE
     ;
     Label : ELEMENT
       foreach
-      Label : SOURCE
-        $a
       Label : VALUE
         $b
       Label : BLOCK
@@ -19,3 +17,5 @@ Label : CODE
             true
           Label : LEFT
             $a
+      Label : SOURCE
+        $a

@@ -15,6 +15,18 @@ Label : CODE
       ;
       Label : ELEMENT
         foreach
+        Label : VALUE
+          $g
+        Label : BLOCK
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $h
+              Label : PROPERTY
+                i
         Label : SOURCE
           ->
           Label : OBJECT
@@ -29,15 +41,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 'f'
-        Label : VALUE
-          $g
-        Label : BLOCK
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $h
-              Label : PROPERTY
-                i

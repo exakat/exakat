@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  foreach
+  Label : VALUE
+    $b
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      or
+      Label : RIGHT
+        H
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $c
+            Label : METHOD
+              H
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+          Label : ARGUMENT
+            __LINE__
+          Label : ARGUMENT
+            __FILE__
+          Label : ARGUMENT
+            'I'
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $c
+        Label : METHOD
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                'G'
+              Label : CONCAT
+                $b
+              Label : CONCAT
+                'F'
+              Label : CONCAT
+                $d
+              Label : CONCAT
+                'E'
+              Label : CONCAT
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  D
+              Label : CONCAT
+                'C'
+  Label : SOURCE
+    $a

@@ -16,12 +16,6 @@ Label : CODE
       $m
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
     Label : VALUE
       $c
     Label : BLOCK
@@ -64,3 +58,9 @@ Label : CODE
                   $i
             Label : LEFT
               $g
+    Label : SOURCE
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
