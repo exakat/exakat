@@ -38,11 +38,10 @@ class RoboFile extends \Robo\Tasks
      */
     public function licence()
     {
-        $files = $mit = Finder::create()->files()
-                                        ->name('*.php')
-                                        ->in('library')
-                                        ->in('scripts');
-        $docs = array();
+        $files = Finder::create()->files()
+                                 ->name('*.php')
+                                 ->in('library')
+                                 ->in('scripts');
         
         $licence = <<<'LICENCE'
 /*
@@ -70,7 +69,6 @@ class RoboFile extends \Robo\Tasks
 LICENCE;
         $licenceCRC = crc32(trim($licence));
         
-        $id = 0;
         foreach ($files as $file) {
             $id++;
             if (strpos($file, 'Everyman') !== false) { continue; }
@@ -94,10 +92,8 @@ LICENCE;
                         }
                     }
                     fclose($fp);
-                } else {
-                    if (crc32($tokens[$tokenId + 1][1]) != $licenceCRC) {
-                        print "Licence seems to be changed in file '$file'\n";
-                    }
+                } elseif (crc32($tokens[$tokenId + 1][1]) != $licenceCRC) {
+                    print "Licence seems to be changed in file '$file'\n";
                 }
             } else {
                 print "Couldn't apply licence on '$file'\n";
