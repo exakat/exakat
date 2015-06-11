@@ -52,8 +52,7 @@ class Load implements Tasks {
             $nbTokens = $res['tokens'];
     
         } else {
-            display('No file to process. Aborting');
-            die();
+            die('No file to process. Aborting');
         }
 
         $this->client->finalize();
@@ -274,7 +273,7 @@ class Load implements Tasks {
 
             if (is_array($token)) {
                 $token[3] = $this->php->getTokenname($token[0]);
-
+                
                 $colonTokens->surveyToken($token);
                 if ($token[3] == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
@@ -450,8 +449,8 @@ class Load implements Tasks {
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
-                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
-
+                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG'
+                          ) {
                             $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                                 ->setProperty('code', ';')
                                                                 ->setProperty('fullcode', ';')
@@ -477,7 +476,11 @@ class Load implements Tasks {
                             $id++;
                             continue;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
-                          in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING', 'T_CONTINUE', 'T_BREAK'))) {
+                          isset($tokens[$id + 1]) &&
+                          is_array($tokens[$id + 1]) &&
+                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG_WITH_ECHO'
+                          ) {
+                    if (in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING', 'T_CONTINUE', 'T_BREAK'))) {
                           $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                               ->setProperty('code', ';')
                                                               ->setProperty('fullcode', ';')
@@ -496,10 +499,7 @@ class Load implements Tasks {
                                                   ->setProperty('line', $token[2])->save();
 
                           $to_index = false;
-                } elseif ($token[3] == 'T_CLOSE_TAG' &&
-                          isset($tokens[$id + 1]) &&
-                          is_array($tokens[$id + 1]) &&
-                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG_WITH_ECHO') {
+                    }
 
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ECHO')
                                                   ->setProperty('code', 'echo')
@@ -514,6 +514,27 @@ class Load implements Tasks {
 
                     $id++;
                     continue;
+                } elseif ($token[3] == 'T_CLOSE_TAG' &&
+                          in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING', 'T_CONTINUE', 'T_BREAK'))) {
+
+                          $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                              ->setProperty('code', ';')
+                                                              ->setProperty('fullcode', ';')
+                                                              ->setProperty('line', $line)
+                                                              ->setProperty('modifiedBy', 'bin/load28')
+                                                              ->setProperty('root', 'true')
+                                                              ->save();
+                          $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+                          $previous->relateTo($T[$Tid], 'NEXT')->save();
+                          $previous = $T[$Tid];
+
+                          $Tid++;
+                          $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
+                                                  ->setProperty('code', $token[1])
+                                                  ->setProperty('fullcode', $token[1])
+                                                  ->setProperty('line', $token[2])->save();
+
+                          $to_index = false;
                 } elseif ($token[3] == 'T_INLINE_HTML' &&
                           $id == 0) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
