@@ -63,8 +63,7 @@ class Functioncall extends TokenAuto {
                                                         2 => 'ARGUMENTS',
                                                         3 => 'DROP'),
                                'atom'         => 'Functioncall',
-                               'property'     => array('parenthesis' => true),
-//                               'keepIndexed'  => true,
+                               'property'     => array('parenthesis' => true)
                                );
         $this->checkAuto();
 
