@@ -17,17 +17,15 @@ Label : CODE
         Label : GLOBAL
           $
           Label : NAME
-            ;
-            Label : ELEMENT
+            [
+            Label : VARIABLE
               [
               Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $foo4
-                Label : INDEX
-                  'bar5'
+                $foo4
               Label : INDEX
-                'baz6'
+                'bar5'
+            Label : INDEX
+              'baz6'
         Label : GLOBAL
           $foo2
         Label : GLOBAL
@@ -53,17 +51,15 @@ Label : CODE
         Label : GLOBAL
           $
           Label : NAME
-            ;
-            Label : ELEMENT
+            [
+            Label : VARIABLE
               [
               Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $foo
-                Label : INDEX
-                  'bar'
+                $foo
               Label : INDEX
-                'baz'
+                'bar'
+            Label : INDEX
+              'baz'
       Label : ELEMENT
         global
         Label : GLOBAL

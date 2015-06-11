@@ -3,13 +3,15 @@
 Label : CODE
   ;
   Label : ELEMENT
+    
+  Label : ELEMENT
     while
+    Label : CONDITION
+      $x
     Label : BLOCK
       ;
       Label : ELEMENT
         void
-    Label : CONDITION
-      $x
   Label : ELEMENT
     if
     Label : CONDITION

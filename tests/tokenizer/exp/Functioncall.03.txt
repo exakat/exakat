@@ -1,6 +1,5 @@
-<?php
-
-Label : CODE
+;
+Label : ELEMENT
   f
   Label : ARGUMENTS
     Arguments

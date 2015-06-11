@@ -2,10 +2,20 @@
 
 Label : CODE
   class
+  Label : NAME
+    x
   Label : BLOCK
     ;
     Label : ELEMENT
       function
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $c
+        Label : ARGUMENT
+          $b
+      Label : NAME
+        a
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -24,15 +34,5 @@ Label : CODE
               return
               Label : RETURN
                 null
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          $b
-      Label : NAME
-        a
       Label : PRIVATE
         private
-  Label : NAME
-    x

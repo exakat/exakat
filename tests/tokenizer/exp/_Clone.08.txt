@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    clone
-    Label : CLONE
-      y
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      clone
+      Label : CLONE
+        y
+        Label : ARGUMENTS
           void
-  Label : LEFT
-    $x
+          Label : ARGUMENT
+            void
+    Label : LEFT
+      $x

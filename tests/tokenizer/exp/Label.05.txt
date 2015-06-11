@@ -3,12 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a
-  Label : ELEMENT
     :
     Label : LABEL
       B
@@ -28,6 +22,12 @@ Label : CODE
       3
     Label : LEFT
       $c
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $a
   Label : ELEMENT
     :
     Label : LABEL

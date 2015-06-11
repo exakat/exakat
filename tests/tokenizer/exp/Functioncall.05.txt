@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  strtolower
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      true
+  ;
+  Label : ELEMENT
+    strtolower
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        true

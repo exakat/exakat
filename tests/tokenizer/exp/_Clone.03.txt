@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    clone
-    Label : CLONE
-      [
-      Label : VARIABLE
-        $y
-      Label : INDEX
-        0
-  Label : LEFT
-    $x
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      clone
+      Label : CLONE
+        [
+        Label : VARIABLE
+          $y
+        Label : INDEX
+          0
+    Label : LEFT
+      $x

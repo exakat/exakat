@@ -9,14 +9,14 @@ Label : CODE
         $d
       Label : LEFT
         instanceof
+        Label : VARIABLE
+          $a
         Label : CLASS
           \
           Label : SUBNAME
             C
           Label : SUBNAME
             B
-        Label : VARIABLE
-          $a
     Label : THEN
       ;
       Label : ELEMENT

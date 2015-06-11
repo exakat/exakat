@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  declare
-  Label : TICKS
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      ticks
+  ;
+  Label : ELEMENT
+    declare
+    Label : TICKS
+      =
+      Label : RIGHT
+        2
+      Label : LEFT
+        ticks

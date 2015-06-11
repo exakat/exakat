@@ -3,96 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    foreach
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        $b
-      Label : ELEMENT
-        $a
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $a
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            $b
-          Label : ELEMENT
-            $a
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            $b
-          Label : ELEMENT
-            $a
-        Label : CASE
-          'b'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            $b
-          Label : ELEMENT
-            $a
-        Label : CASE
-          'a'
-  Label : ELEMENT
-    for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        $b
-      Label : ELEMENT
-        $a
-    Label : INIT
-      $i
-    Label : FINAL
-      ++
-      Label : POSTPLUSPLUS
-        $i
-    Label : INCREMENT
-      --
-      Label : POSTPLUSPLUS
-        $i
-  Label : ELEMENT
-    while
-    Label : CONDITION
-      $a
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        $b
-      Label : ELEMENT
-        $a
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        $b
-      Label : ELEMENT
-        $a
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    break
-    Label : LEVEL
-      void
-  Label : ELEMENT
     return
     Label : RETURN
       ?
@@ -132,6 +42,98 @@ Label : CODE
                         void
       Label : ELSE
         G
+  Label : ELEMENT
+    break
+    Label : LEVEL
+      void
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+    Label : VALUE
+      $b
+    Label : SOURCE
+      $a
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+        Label : CASE
+          'a'
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+            $a
+        Label : CASE
+          'b'
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+  Label : ELEMENT
+    for
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        $a
+    Label : INIT
+      $i
+    Label : FINAL
+      ++
+      Label : POSTPLUSPLUS
+        $i
+    Label : INCREMENT
+      --
+      Label : POSTPLUSPLUS
+        $i
   Label : ELEMENT
     =
     Label : RIGHT

@@ -10,6 +10,8 @@ Label : CODE
       Label : CLASS
         self
   Label : ELEMENT
+    
+  Label : ELEMENT
     if
     Label : CONDITION
       !

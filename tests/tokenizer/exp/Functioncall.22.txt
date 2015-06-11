@@ -1,54 +1,56 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    array
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        =>
-        Label : KEY
-          'd'
-        Label : VALUE
-          [
-          Label : VARIABLE
-            $i
-          Label : INDEX
-            6
-      Label : ARGUMENT
-        =>
-        Label : KEY
-          'c'
-        Label : VALUE
-          [
-          Label : VARIABLE
-            $h
-          Label : INDEX
-            5
-      Label : ARGUMENT
-        =>
-        Label : KEY
-          'b'
-        Label : VALUE
-          intval
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $g
-              Label : INDEX
-                4
-      Label : ARGUMENT
-        =>
-        Label : KEY
-          'a'
-        Label : VALUE
-          [
-          Label : VARIABLE
-            $f
-          Label : INDEX
-            3
-  Label : LEFT
-    $z
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'd'
+          Label : VALUE
+            [
+            Label : VARIABLE
+              $i
+            Label : INDEX
+              6
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'c'
+          Label : VALUE
+            [
+            Label : VARIABLE
+              $h
+            Label : INDEX
+              5
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'b'
+          Label : VALUE
+            intval
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $g
+                Label : INDEX
+                  4
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'a'
+          Label : VALUE
+            [
+            Label : VARIABLE
+              $f
+            Label : INDEX
+              3
+    Label : LEFT
+      $z

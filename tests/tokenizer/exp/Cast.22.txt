@@ -1,22 +1,24 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    array_merge
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        (array)
-        Label : CAST
-          $c
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-          Label : NAME
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array_merge
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          (array)
+          Label : CAST
             $c
-      Label : ARGUMENT
-        $b
-  Label : LEFT
-    $a
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+            Label : NAME
+              $c
+        Label : ARGUMENT
+          $b
+    Label : LEFT
+      $a

@@ -43,33 +43,11 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          $a
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      range
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          0
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
           void
         Label : ARGUMENT
           $b
+        Label : ARGUMENT
+          void
         Label : ARGUMENT
           $a
   Label : ELEMENT
@@ -111,11 +89,33 @@ Label : CODE
         Label : ARGUMENT
           void
         Label : ARGUMENT
+          void
+        Label : ARGUMENT
           $b
+        Label : ARGUMENT
+          $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      range
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          0
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $a
         Label : ARGUMENT
           void
         Label : ARGUMENT
-          $a
+          void
   Label : ELEMENT
     =
     Label : RIGHT

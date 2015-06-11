@@ -1,33 +1,11 @@
 ;
 Label : ELEMENT
-  <?php
-  Label : CODE
-    ;
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        $a
-    Label : ELEMENT
-      G
-    Label : ELEMENT
-      echo
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      C
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          E
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'F'
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          C
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'D'
-Label : ELEMENT
-  B
+          'D'

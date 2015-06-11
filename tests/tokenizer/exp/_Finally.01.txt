@@ -62,8 +62,6 @@ Label : CODE
                     getMessage
                     Label : ARGUMENTS
                       void
-                      Label : ARGUMENT
-                        void
           Label : CLASS
             Exception5
         Label : CATCH

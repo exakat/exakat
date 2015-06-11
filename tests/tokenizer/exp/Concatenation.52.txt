@@ -118,13 +118,13 @@ Label : CODE
             $e
   Label : VALUE
     =>
-    Label : VALUE
-      $c
     Label : KEY
       $b
+    Label : VALUE
+      $c
   Label : SOURCE
     ::
-    Label : CLASS
-      B
     Label : PROPERTY
       $a
+    Label : CLASS
+      B

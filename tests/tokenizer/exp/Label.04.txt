@@ -3,15 +3,19 @@
 Label : CODE
   ;
   Label : ELEMENT
-    :
+    goto
     Label : LABEL
-      C
+      A
   Label : ELEMENT
     =
     Label : RIGHT
       2
     Label : LEFT
       $b
+  Label : ELEMENT
+    :
+    Label : LABEL
+      C
   Label : ELEMENT
     :
     Label : LABEL
@@ -22,10 +26,6 @@ Label : CODE
       1
     Label : LEFT
       $a
-  Label : ELEMENT
-    goto
-    Label : LABEL
-      A
   Label : ELEMENT
     :
     Label : LABEL

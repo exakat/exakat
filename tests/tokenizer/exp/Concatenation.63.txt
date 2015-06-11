@@ -44,6 +44,8 @@ Label : CODE
             Label : ARGUMENT
               'H'
       Label : ELEMENT
+        T
+      Label : ELEMENT
         G
         Label : ARGUMENTS
           Arguments
@@ -51,8 +53,6 @@ Label : CODE
             'I'
           Label : ARGUMENT
             'Q'
-      Label : ELEMENT
-        T
       Label : ELEMENT
         S
       Label : ELEMENT
@@ -63,6 +63,8 @@ Label : CODE
             $a
       Label : ELEMENT
         O
+      Label : ELEMENT
+        Y
       Label : ELEMENT
         V
       Label : ELEMENT
@@ -99,8 +101,6 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     $b
-      Label : ELEMENT
-        Y
       Label : ELEMENT
         F
     Label : ELSE

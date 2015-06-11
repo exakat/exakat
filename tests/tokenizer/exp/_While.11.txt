@@ -3,8 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     while
     Label : CONDITION
       <=
@@ -30,6 +28,8 @@ Label : CODE
           void
           Label : ARGUMENT
             $i
+  Label : ELEMENT
+    
   Label : ELEMENT
     =
     Label : RIGHT

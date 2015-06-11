@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  isset
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      $x
+  ;
+  Label : ELEMENT
+    isset
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $x

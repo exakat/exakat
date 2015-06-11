@@ -10,11 +10,11 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $j
-    Label : SOURCE
-      $a
     Label : VALUE
       ->
       Label : OBJECT
         $b
       Label : PROPERTY
         d
+    Label : SOURCE
+      $a

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
+    Label : PROPERTY
+      $B
     Label : CLASS
       \
       Label : SUBNAME
@@ -12,23 +14,21 @@ Label : CODE
         C
       Label : SUBNAME
         A
-    Label : PROPERTY
-      $B
   Label : ELEMENT
     ::
+    Label : PROPERTY
+      $B
     Label : CLASS
       \
       Label : SUBNAME
         C
       Label : SUBNAME
         A
-    Label : PROPERTY
-      $B
   Label : ELEMENT
     ::
+    Label : PROPERTY
+      $B
     Label : CLASS
       \
       Label : SUBNAME
         A
-    Label : PROPERTY
-      $B

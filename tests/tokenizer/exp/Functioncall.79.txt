@@ -2,14 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    $b
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        0
-    Label : NAME
-      $b
-  Label : ELEMENT
     eval
     Label : ARGUMENTS
       void
@@ -17,6 +9,14 @@ Label : CODE
         (
         Label : CODE
           $a
+  Label : ELEMENT
+    $b
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        0
+    Label : NAME
+      $b
   Label : ELEMENT
     C
     Label : ARGUMENTS

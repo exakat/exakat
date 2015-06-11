@@ -4,6 +4,38 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          D
+        Label : CONCAT
+          $b7
+        Label : CONCAT
+          $c
+        Label : CONCAT
+          C
+    Label : LEFT
+      $a7
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          D
+        Label : CONCAT
+          $b9
+        Label : CONCAT
+          $c
+        Label : CONCAT
+          C
+    Label : LEFT
+      $a9
+  Label : ELEMENT
+    =
+    Label : RIGHT
       +
       Label : RIGHT
         ->
@@ -28,43 +60,11 @@ Label : CODE
         Label : CONCAT
           D
         Label : CONCAT
-          $b9
-        Label : CONCAT
-          $c
-        Label : CONCAT
-          C
-    Label : LEFT
-      $a9
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          D
-        Label : CONCAT
           $b8
         Label : CONCAT
           C
     Label : LEFT
       $a8
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          D
-        Label : CONCAT
-          $b7
-        Label : CONCAT
-          $c
-        Label : CONCAT
-          C
-    Label : LEFT
-      $a7
   Label : ELEMENT
     =
     Label : RIGHT

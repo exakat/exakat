@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  do
-  Label : CONDITION
-    $z
-  Label : BLOCK
-    if
+  ;
+  Label : ELEMENT
+    do
     Label : CONDITION
-      $x
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $y
+      $z
+    Label : BLOCK
+      if
+      Label : CONDITION
+        $x
+      Label : THEN
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $y

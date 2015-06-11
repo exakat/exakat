@@ -6,9 +6,9 @@ Label : CODE
     class
     Label : NAME
       x
-    Label : BLOCK
-      void
     Label : IMPLEMENTS
       y
     Label : IMPLEMENTS
       z
+    Label : BLOCK
+      void

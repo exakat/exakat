@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  echo
-  Label : ARGUMENTS
-    Arguments
-    Label : ARGUMENT
-      [
-      Label : VARIABLE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
         [
         Label : VARIABLE
-          $y
+          [
+          Label : VARIABLE
+            $y
+          Label : INDEX
+            1
         Label : INDEX
-          1
-      Label : INDEX
-        2
-    Label : ARGUMENT
-      $x
-    Label : ARGUMENT
-      '1'
+          2
+      Label : ARGUMENT
+        $x
+      Label : ARGUMENT
+        '1'

@@ -1,36 +1,23 @@
 ;
 Label : ELEMENT
-  <?php
-  Label : CODE
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          ::
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  $g
-                Label : CONCAT
-                  'f'
-          Label : CLASS
-            D
-        Label : CONCAT
-          C
-Label : ELEMENT
-  <?
-
-$h = i();
-j();
-/* comments */
-
-Label : ELEMENT
-  <? a('b') ?>
-
-
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      Concatenation
+      Label : CONCAT
+        ::
+        Label : CLASS
+          D
+        Label : METHOD
+          e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                $g
+              Label : CONCAT
+                'f'
+      Label : CONCAT
+        C

@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  trait
-  Label : NAME
-    A
-  Label : BLOCK
-    void
+  ;
+  Label : ELEMENT
+    trait
+    Label : NAME
+      A
+    Label : BLOCK
+      void
