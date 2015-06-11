@@ -70,7 +70,6 @@ LICENCE;
         $licenceCRC = crc32(trim($licence));
         
         foreach ($files as $file) {
-            $id++;
             if (strpos($file, 'Everyman') !== false) { continue; }
             print $file."\n";
             
