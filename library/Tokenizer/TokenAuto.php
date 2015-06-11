@@ -28,8 +28,8 @@ class TokenAuto extends Token {
     protected $conditions = array();
     protected $actions    = array();
     protected $setAtom    = false;
-    public $total         = null ;
-    public $done          = null ;
+    public    $total      = null ;
+    public    $done       = null ;
 
     public function _check() {
         return false;
@@ -38,14 +38,16 @@ class TokenAuto extends Token {
     public function prepareQuery() {
         $query = ' total = 0; done = 0; ';
         $class = str_replace('Tokenizer\\', '', get_class($this));
+//        $moderator = '[0..2]';
+        $moderator = '';
         if (in_array($class, array('FunctioncallArray'))) {
             $query .= 'g.idx("racines")[["token":"S_ARRAY"]].out("INDEXED")';
         } elseif (in_array($class, array('Staticclass','Staticconstant','Staticmethodcall','Staticproperty'))) {
-            $query .= "g.idx('racines')[['token':'Staticproperty']].out('INDEXED')";
+            $query .= 'g.idx("racines")[["token":"Staticproperty"]].out("INDEXED")';
         } elseif (in_array($class, array('Property','Methodcall'))) {
-            $query .= "g.idx('racines')[['token':'Property']].out('INDEXED')";
+            $query .= 'g.idx("racines")[["token":"Property"]].out("INDEXED")';
         } elseif (in_array($class, Token::$types)) {
-            $query .= "g.idx('racines')[['token':'$class']].out('INDEXED')";
+            $query .= 'g.idx("racines")[["token":"'.$class.'"]].out("INDEXED")';
         } else {
             die("Should only use atoms!");
         }
@@ -91,7 +93,7 @@ class TokenAuto extends Token {
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
         //; fullcode.round = ".(self::$round).
-        $query .= '.each{ done++; fullcode = it;
+        $query .= $moderator.'.each{ done++; fullcode = it;
 '.implode(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
         
         return $query;
