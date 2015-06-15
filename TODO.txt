@@ -1280,5 +1280,19 @@ check the to_var (index with _) and remove them.
 
 uniqid : not for crypto either.
 
-Loader : split attr in as many files to simplify the Cypher query.
-            if ($fp !== true && $fp !== false) { // surprisingly faster than !is_bool() or is_resource()
+Underived abstract class is useless? 
+
+$c is not modified!
+            foreach($contents as $id => $c) {
+                if (get_class($c) != "Report\\Template\\Section") { 
+                    unset($contents[$id]); 
+                } 
+            }
+
+foo() && bar() ; // that is not useless, as the function call may change some state.
+                 // It means we need to mark the function as context marking or not. 
+
+MacBookPro:analyze famille$ php exakat project -p -v concrete5
+PHP Notice:  Undefined offset: 3 in /Users/famille/Desktop/analyze/library/Config.php on line 219
+
+make Task reentrant (one may re-run a task even if it was already run and interrupted).
