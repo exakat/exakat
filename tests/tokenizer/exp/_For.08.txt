@@ -10,13 +10,13 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $j
-    Label : INIT
-      void
     Label : FINAL
       <
       Label : RIGHT
         5
       Label : LEFT
         $i
+    Label : INIT
+      void
     Label : INCREMENT
       void

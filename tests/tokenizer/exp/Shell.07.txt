@@ -26,14 +26,14 @@ Label : CODE
            
         Label : CONCAT
           ->
-          Label : OBJECT
-            $g
           Label : METHOD
             h
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 void
+          Label : OBJECT
+            $g
         Label : CONCAT
            i j 
         Label : CONCAT

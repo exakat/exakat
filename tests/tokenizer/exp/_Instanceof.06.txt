@@ -22,14 +22,14 @@ Label : CODE
             B
       Label : THEN
         ->
-        Label : OBJECT
-          $c
         Label : METHOD
           F
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
+        Label : OBJECT
+          $c
       Label : ELSE
         $d
     Label : LEFT

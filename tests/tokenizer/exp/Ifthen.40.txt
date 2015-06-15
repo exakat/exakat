@@ -45,6 +45,8 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
+        
+      Label : ELEMENT
         if
         Label : CONDITION
           =

@@ -2,8 +2,6 @@
 
 Label : CODE
   ->
-  Label : OBJECT
-    $b
   Label : METHOD
     I
     Label : ARGUMENTS
@@ -96,3 +94,5 @@ Label : CODE
               $d
       Label : ARGUMENT
         $c
+  Label : OBJECT
+    $b

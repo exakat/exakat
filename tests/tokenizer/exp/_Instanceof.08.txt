@@ -5,6 +5,8 @@ Label : ELEMENT
     void
     Label : ARGUMENT
       ::
+      Label : CLASS
+        D
       Label : METHOD
         E
         Label : ARGUMENTS
@@ -25,12 +27,12 @@ Label : ELEMENT
                       I
               Label : LEFT
                 instanceof
-                Label : VARIABLE
-                  $d
                 Label : CLASS
                   \
                   Label : SUBNAME
                     H
+                Label : VARIABLE
+                  $d
             Label : THEN
               ->
               Label : OBJECT
@@ -43,26 +45,24 @@ Label : ELEMENT
             0
           Label : ARGUMENT
             ->
-            Label : OBJECT
-              $c
             Label : METHOD
               G
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
+            Label : OBJECT
+              $c
           Label : ARGUMENT
             ->
-            Label : OBJECT
-              $b
             Label : METHOD
               F
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
-      Label : CLASS
-        D
+            Label : OBJECT
+              $b
 Label : ELEMENT
   void
 Label : ELEMENT

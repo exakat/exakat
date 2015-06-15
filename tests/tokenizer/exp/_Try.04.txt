@@ -8,28 +8,28 @@ Label : CODE
       void
     Label : CATCH
       catch
-      Label : VARIABLE
-        $e
       Label : CODE
         void
       Label : CLASS
         Exception3
-    Label : CATCH
-      catch
       Label : VARIABLE
         $e
+    Label : CATCH
+      catch
       Label : CODE
         void
       Label : CLASS
         Exception2
-    Label : CATCH
-      catch
       Label : VARIABLE
         $e
+    Label : CATCH
+      catch
       Label : CODE
         void
       Label : CLASS
         Exception
+      Label : VARIABLE
+        $e
   Label : ELEMENT
     =
     Label : RIGHT

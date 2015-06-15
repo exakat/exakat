@@ -13,15 +13,19 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
+        return
+        Label : RETURN
+          F
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $h
+            Label : ARGUMENT
+              'G'
+      Label : ELEMENT
         foreach
         Label : VALUE
           $c
-        Label : SOURCE
-          ->
-          Label : OBJECT
-            $b
-          Label : PROPERTY
-            C
         Label : BLOCK
           if
           Label : CONDITION
@@ -50,16 +54,12 @@ Label : CODE
                     $f
                   Label : PROPERTY
                     E
-      Label : ELEMENT
-        return
-        Label : RETURN
-          F
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $h
-            Label : ARGUMENT
-              'G'
+        Label : SOURCE
+          ->
+          Label : OBJECT
+            $b
+          Label : PROPERTY
+            C
       Label : ELEMENT
         =
         Label : RIGHT

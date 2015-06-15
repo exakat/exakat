@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  <<=
-  Label : RIGHT
-    $y
-  Label : LEFT
-    $x
+  ;
+  Label : ELEMENT
+    <<=
+    Label : RIGHT
+      $y
+    Label : LEFT
+      $x

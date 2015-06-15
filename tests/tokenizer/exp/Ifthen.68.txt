@@ -36,8 +36,6 @@ Label : CODE
             K
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $a
     Label : VALUE
       $b
     Label : BLOCK
@@ -182,3 +180,5 @@ Label : CODE
               $d
         Label : LEFT
           $c
+    Label : SOURCE
+      $a

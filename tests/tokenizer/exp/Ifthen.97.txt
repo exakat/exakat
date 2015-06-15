@@ -1,38 +1,40 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    ==
-    Label : RIGHT
-      'C'
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $this
-      Label : PROPERTY
-        B
-  Label : THEN
-    ;
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        $a
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $e
-      Label : ELSE
-        Block with else
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $d
-  Label : ELSE
-    Block with else
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        $d
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        'C'
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $this
+        Label : PROPERTY
+          B
+    Label : THEN
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $a
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $e
+        Label : ELSE
+          Block with else
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $d
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $d

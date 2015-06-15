@@ -24,10 +24,10 @@ Label : CODE
         void
         Label : ARGUMENTS
           =>
-          Label : KEY
-            "c"
           Label : VALUE
             "d"
+          Label : KEY
+            "c"
     Label : LEFT
       $x
   Label : ELEMENT

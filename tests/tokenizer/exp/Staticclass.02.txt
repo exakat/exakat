@@ -29,7 +29,7 @@ Label : CODE
                   Label : ARGUMENT
                     ::
                     Label : CLASS
-                      parent
+                      static
                     Label : CONSTANT
                       class
               Label : ELEMENT
@@ -39,7 +39,7 @@ Label : CODE
                   Label : ARGUMENT
                     ::
                     Label : CLASS
-                      static
+                      parent
                     Label : CONSTANT
                       class
               Label : ELEMENT
@@ -67,7 +67,11 @@ Label : CODE
             Label : CONCAT
               ::
               Label : CLASS
-                X
+                \
+                Label : SUBNAME
+                  ClassName1
+                Label : SUBNAME
+                  NS1
               Label : CONSTANT
                 class
       Label : ELEMENT
@@ -113,11 +117,7 @@ Label : CODE
             Label : CONCAT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  ClassName1
-                Label : SUBNAME
-                  NS1
+                X
               Label : CONSTANT
                 class
       Label : ELEMENT

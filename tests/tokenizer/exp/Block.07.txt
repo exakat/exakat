@@ -41,17 +41,15 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
+        
+      Label : ELEMENT
         ;
         Label : ELEMENT
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                '2'
-      Label : ELEMENT
-        
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              '2'
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

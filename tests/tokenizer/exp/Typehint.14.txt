@@ -10,52 +10,14 @@ Label : CODE
         void
         Label : ARGUMENT
           Typehint
-          Label : VARIABLE
-            $matches
-          Label : CLASS
-            callable
-      Label : NAME
-        
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            new
-            Label : NEW
-              Match
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    0
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    1
-    Label : LEFT
-      $x
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      function
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Typehint
-          Label : VARIABLE
-            $matches
           Label : CLASS
             \
             Label : SUBNAME
               d
             Label : SUBNAME
               x
+          Label : VARIABLE
+            $matches
       Label : NAME
         
       Label : BLOCK
@@ -90,10 +52,52 @@ Label : CODE
         void
         Label : ARGUMENT
           Typehint
+          Label : CLASS
+            \
+            Label : SUBNAME
+              d
+            Label : SUBNAME
+              x
           Label : VARIABLE
             $matches
+      Label : NAME
+        
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            new
+            Label : NEW
+              Match
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    0
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    1
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      function
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          Typehint
           Label : CLASS
             x
+          Label : VARIABLE
+            $matches
       Label : NAME
         
       Label : BLOCK
@@ -128,14 +132,10 @@ Label : CODE
         void
         Label : ARGUMENT
           Typehint
-          Label : VARIABLE
-            $matches
           Label : CLASS
-            \
-            Label : SUBNAME
-              d
-            Label : SUBNAME
-              x
+            callable
+          Label : VARIABLE
+            $matches
       Label : NAME
         
       Label : BLOCK
@@ -170,10 +170,10 @@ Label : CODE
         void
         Label : ARGUMENT
           Typehint
-          Label : VARIABLE
-            $matches
           Label : CLASS
             array
+          Label : VARIABLE
+            $matches
       Label : NAME
         
       Label : BLOCK

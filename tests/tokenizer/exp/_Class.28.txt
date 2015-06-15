@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -22,3 +20,5 @@ Label : CODE
           2
         Label : NAME
           b
+    Label : NAME
+      x

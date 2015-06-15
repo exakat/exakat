@@ -38,6 +38,8 @@ Label : CODE
     foreach
     Label : VALUE
       =>
+      Label : KEY
+        $id
       Label : VALUE
         list
         Label : ARGUMENTS
@@ -46,8 +48,6 @@ Label : CODE
             $b4
           Label : ARGUMENT
             $a3
-      Label : KEY
-        $id
     Label : BLOCK
       ;
       Label : ELEMENT

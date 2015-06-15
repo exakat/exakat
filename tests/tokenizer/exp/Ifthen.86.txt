@@ -7,8 +7,6 @@ Label : ELEMENT
     void
     Label : ARGUMENT
       ::
-      Label : CLASS
-        D
       Label : METHOD
         E
         Label : ARGUMENTS
@@ -37,8 +35,6 @@ Label : ELEMENT
                   'O'
           Label : ARGUMENT
             ::
-            Label : CLASS
-              G
             Label : METHOD
               H
               Label : ARGUMENTS
@@ -61,5 +57,9 @@ Label : ELEMENT
                       'J'
                   Label : INDEX
                     'K'
+            Label : CLASS
+              G
           Label : ARGUMENT
             F
+      Label : CLASS
+        D

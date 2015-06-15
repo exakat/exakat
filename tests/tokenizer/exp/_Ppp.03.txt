@@ -18,10 +18,10 @@ Label : CODE
           c
         Label : BLOCK
           void
-        Label : PROTECTED
-          protected
         Label : STATIC
           static
+        Label : PROTECTED
+          protected
       Label : ELEMENT
         function
         Label : ARGUMENTS

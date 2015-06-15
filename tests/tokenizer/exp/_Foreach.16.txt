@@ -6,19 +6,19 @@ Label : CODE
     foreach
     Label : VALUE
       =>
-      Label : VALUE
-        $y
       Label : KEY
         ->
         Label : OBJECT
           $x
         Label : PROPERTY
           a
+      Label : VALUE
+        $y
+    Label : SOURCE
+      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $z
-    Label : SOURCE
-      $a

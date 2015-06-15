@@ -1,40 +1,42 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        true
-      Label : LEFT
-        $b
-  Label : NAME
-    a
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      exit
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          true
+        Label : LEFT
+          $b
+    Label : NAME
+      a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        exit
+        Label : ARGUMENTS
           void
-    Label : ELEMENT
-      ob_flush
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        ob_flush
+        Label : ARGUMENTS
           void
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          <<< C
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            <<< C
 
-          Label : CONTAINS
-            Concatenation
-            Label : CONCAT
-              D
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                D
 

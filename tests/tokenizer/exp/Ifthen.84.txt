@@ -30,24 +30,6 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        M
-      Label : ELEMENT
-        O
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'P'
-      Label : ELEMENT
-        I
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'J'
-      Label : ELEMENT
-        J
-      Label : ELEMENT
-        P
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -58,13 +40,31 @@ Label : CODE
               Label : ARGUMENT
                 'M'
       Label : ELEMENT
-        G
+        P
+      Label : ELEMENT
+        O
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'P'
+      Label : ELEMENT
+        M
       Label : ELEMENT
         F
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'G'
+      Label : ELEMENT
+        J
+      Label : ELEMENT
+        I
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'J'
+      Label : ELEMENT
+        G
       Label : ELEMENT
         D
     Label : ELSE
@@ -84,9 +84,9 @@ Label : CODE
         Label : ELEMENT
           
         Label : ELEMENT
-          void
-        Label : ELEMENT
           
+        Label : ELEMENT
+          void
         Label : ELEMENT
           if
           Label : CONDITION
@@ -187,6 +187,8 @@ Label : CODE
                     AA
                     Label : ARGUMENTS
                       void
+                      Label : ARGUMENT
+                        void
                   Label : LEFT
                     $t
               Label : CASE

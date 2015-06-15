@@ -2,8 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     for
     Label : BLOCK
       ;

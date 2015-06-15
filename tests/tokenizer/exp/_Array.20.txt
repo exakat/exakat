@@ -35,6 +35,24 @@ Label : CODE
       Label : ARGUMENT
         [
         Label : VARIABLE
+          ::
+          Label : CLASS
+            x
+          Label : CONSTANT
+            A
+        Label : INDEX
+          +
+          Label : RIGHT
+            7
+          Label : LEFT
+            4.3
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
           [
           Label : VARIABLE
             [
@@ -81,24 +99,6 @@ Label : CODE
           Label : LEFT
             null
   Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        [
-        Label : VARIABLE
-          ::
-          Label : CLASS
-            x
-          Label : CONSTANT
-            A
-        Label : INDEX
-          +
-          Label : RIGHT
-            7
-          Label : LEFT
-            4.3
-  Label : ELEMENT
     class
     Label : NAME
       x
@@ -114,9 +114,9 @@ Label : CODE
             Arguments
             Label : ARGUMENT
               =>
-              Label : VALUE
-                3
               Label : KEY
                 2
+              Label : VALUE
+                3
             Label : ARGUMENT
               1

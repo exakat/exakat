@@ -10,16 +10,6 @@ Label : CODE
         ||
         Label : RIGHT
           ->
-          Label : OBJECT
-            ::
-            Label : CLASS
-              C
-            Label : METHOD
-              t
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'e'
           Label : METHOD
             f
             Label : ARGUMENTS
@@ -30,6 +20,16 @@ Label : CODE
                   $g
                 Label : INDEX
                   'h'
+          Label : OBJECT
+            ::
+            Label : CLASS
+              C
+            Label : METHOD
+              t
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'e'
         Label : LEFT
           [
           Label : VARIABLE

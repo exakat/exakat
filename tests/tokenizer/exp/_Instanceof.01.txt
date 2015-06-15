@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  instanceof
-  Label : CLASS
-    $y
-  Label : VARIABLE
-    $x
+  ;
+  Label : ELEMENT
+    instanceof
+    Label : VARIABLE
+      $x
+    Label : CLASS
+      $y

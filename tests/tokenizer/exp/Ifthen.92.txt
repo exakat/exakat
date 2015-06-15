@@ -17,16 +17,6 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        ::
-        Label : CLASS
-          P
-        Label : METHOD
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
-      Label : ELEMENT
         if
         Label : CONDITION
           F
@@ -108,6 +98,16 @@ Label : CODE
                       $a
                 Label : CASE
                   'H'
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+        Label : CLASS
+          P
       Label : ELEMENT
         if
         Label : CONDITION

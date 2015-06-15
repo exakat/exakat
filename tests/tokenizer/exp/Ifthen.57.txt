@@ -14,6 +14,14 @@ Label : CODE
           Label : ARGUMENT
             $b
       Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c
+      Label : ELEMENT
+        C
+      Label : ELEMENT
         B
       Label : ELEMENT
         echo
@@ -21,14 +29,6 @@ Label : CODE
           void
           Label : ARGUMENT
             $d
-      Label : ELEMENT
-        C
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $c
       Label : ELEMENT
         D
       Label : ELEMENT

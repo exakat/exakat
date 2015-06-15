@@ -4,6 +4,30 @@ Label : CODE
   Label : ELEMENT
     M
   Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        n
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            r
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                's'
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $p
+              Label : PROPERTY
+                q
+            Label : CONCAT
+              'o'
+  Label : ELEMENT
     T
   Label : ELEMENT
     echo
@@ -39,30 +63,6 @@ Label : CODE
                 x
             Label : CONCAT
               'v'
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        n
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            r
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                's'
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              ->
-              Label : OBJECT
-                $p
-              Label : PROPERTY
-                q
-            Label : CONCAT
-              'o'
   Label : ELEMENT
     echo
     Label : ARGUMENTS

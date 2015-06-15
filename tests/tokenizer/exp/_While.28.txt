@@ -25,6 +25,8 @@ Label : CODE
         Label : THEN
           ;
           Label : ELEMENT
+            P
+          Label : ELEMENT
             echo
             Label : ARGUMENTS
               void
@@ -34,8 +36,6 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     void
-          Label : ELEMENT
-            P
           Label : ELEMENT
             echo
             Label : ARGUMENTS
@@ -63,21 +63,19 @@ Label : CODE
           Label : ARGUMENT
             'T'
       Label : ELEMENT
-        Z
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            0
-      Label : ELEMENT
         Y
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
       Label : ELEMENT
-        X
+        Z
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            0
       Label : ELEMENT
-        AH
+        X
       Label : ELEMENT
         AA
         Label : ARGUMENTS
@@ -98,6 +96,8 @@ Label : CODE
                   'AD'
           Label : ARGUMENT
             'AB'
+      Label : ELEMENT
+        AH
       Label : ELEMENT
         R
       Label : ELEMENT

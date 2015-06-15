@@ -18,14 +18,14 @@ Label : CODE
       $backupdir
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $unzip
     Label : METHOD
       ReadFile
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $datafile_server
+    Label : OBJECT
+      $unzip
   Label : ELEMENT
     =
     Label : RIGHT

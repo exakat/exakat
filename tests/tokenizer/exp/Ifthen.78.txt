@@ -27,10 +27,10 @@ Label : CODE
           ;
           Label : ELEMENT
             foreach
-            Label : BLOCK
-              void
             Label : VALUE
               $f
+            Label : BLOCK
+              void
             Label : SOURCE
               $e
       Label : ELEMENT

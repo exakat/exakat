@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     interface
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -16,6 +14,8 @@ Label : CODE
             void
         Label : NAME
           x
+    Label : NAME
+      a
     Label : EXTENDS
       Arguments
       Label : EXTENDS

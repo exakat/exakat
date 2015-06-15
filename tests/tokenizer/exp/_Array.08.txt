@@ -8,10 +8,10 @@ Label : CODE
       [
       Label : VARIABLE
         ::
-        Label : PROPERTY
-          $c
         Label : CLASS
           b
+        Label : PROPERTY
+          $c
       Label : INDEX
         [
         Label : VARIABLE

@@ -8,12 +8,12 @@ Label : CODE
     ;
     Label : ELEMENT
       function
-      Label : NAME
-        E
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
+      Label : NAME
+        E
       Label : PUBLIC
         public
   Label : EXTENDS

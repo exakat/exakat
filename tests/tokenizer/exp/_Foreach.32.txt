@@ -7,10 +7,10 @@ Label : ELEMENT
       foreach
       Label : VALUE
         =>
-        Label : VALUE
-          $data
         Label : KEY
           $label
+        Label : VALUE
+          $data
       Label : BLOCK
         ;
         Label : ELEMENT

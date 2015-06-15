@@ -47,14 +47,14 @@ Label : CODE
             yield
             Label : YIELD
               ->
-              Label : OBJECT
-                $server
               Label : METHOD
                 accept
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
+              Label : OBJECT
+                $server
         Label : NAME
           $handler
   Label : ELEMENT
@@ -75,14 +75,14 @@ Label : CODE
             yield
             Label : YIELD
               ->
-              Label : OBJECT
-                $a
               Label : METHOD
                 b
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
+              Label : OBJECT
+                $a
         Label : NAME
           $handler
   Label : ELEMENT

@@ -16,14 +16,14 @@ Label : CODE
       false
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $d
     Label : METHOD
       e
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           'f'
+    Label : OBJECT
+      $d
   Label : ELEMENT
     a
     Label : ARGUMENTS

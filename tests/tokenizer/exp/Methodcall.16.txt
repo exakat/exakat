@@ -3,21 +3,21 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      void
-    Label : VALUE
-      $d
     Label : SOURCE
       ->
-      Label : OBJECT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          b
       Label : METHOD
         c
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
+      Label : OBJECT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          b
+    Label : VALUE
+      $d
+    Label : BLOCK
+      void

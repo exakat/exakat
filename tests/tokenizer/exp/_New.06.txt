@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  new
-  Label : NEW
-    stdclass
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        1
+  ;
+  Label : ELEMENT
+    new
+    Label : NEW
+      stdclass
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          1

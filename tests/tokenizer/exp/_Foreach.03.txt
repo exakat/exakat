@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $y
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -18,5 +20,3 @@ Label : CODE
         $x
       Label : PROPERTY
         b
-    Label : VALUE
-      $y

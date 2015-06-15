@@ -33,6 +33,8 @@ Label : CODE
       Label : ELEMENT
         E
       Label : ELEMENT
+        F
+      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -44,8 +46,6 @@ Label : CODE
                 $c
               Label : ARGUMENT
                 'D'
-      Label : ELEMENT
-        F
       Label : ELEMENT
         B
       Label : ELEMENT

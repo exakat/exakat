@@ -5,12 +5,6 @@ Label : CODE
     throw
     Label : THROW
       ->
-      Label : OBJECT
-        (
-        Label : CODE
-          new
-          Label : NEW
-            A
       Label : METHOD
         b
         Label : ARGUMENTS
@@ -25,3 +19,9 @@ Label : CODE
                   $this
                 Label : PROPERTY
                   c
+      Label : OBJECT
+        (
+        Label : CODE
+          new
+          Label : NEW
+            A

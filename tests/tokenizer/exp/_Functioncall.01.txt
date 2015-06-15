@@ -5,8 +5,6 @@ Label : CODE
     E
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      F
     Label : VALUE
       =>
       Label : KEY
@@ -15,6 +13,8 @@ Label : CODE
         $d
     Label : SOURCE
       $b
+    Label : BLOCK
+      F
   Label : ELEMENT
     echo
     Label : ARGUMENTS

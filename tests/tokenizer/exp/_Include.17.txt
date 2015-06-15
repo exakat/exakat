@@ -12,6 +12,8 @@ Label : CODE
           void
         Label : ARGUMENT
           =>
+          Label : KEY
+            'a'
           Label : VALUE
             require
             Label : ARGUMENTS
@@ -28,7 +30,5 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         __FILE__
-          Label : KEY
-            'a'
     Label : LEFT
       $x

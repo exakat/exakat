@@ -3,8 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    void
-  Label : ELEMENT
     switch
     Label : NAME
       $a
@@ -21,6 +19,10 @@ Label : CODE
             Label : RETURN
               FALSE
   Label : ELEMENT
+    void
+  Label : ELEMENT
+    void
+  Label : ELEMENT
     =
     Label : RIGHT
       +
@@ -31,8 +33,6 @@ Label : CODE
     Label : LEFT
       $y
   Label : ELEMENT
-    void
-  Label : ELEMENT
     switch
     Label : NAME
       $a
@@ -40,8 +40,6 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          1
         Label : CODE
           ;
           Label : ELEMENT
@@ -50,3 +48,5 @@ Label : CODE
             return
             Label : RETURN
               FALSE
+        Label : CASE
+          1

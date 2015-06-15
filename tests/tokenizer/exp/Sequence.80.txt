@@ -32,10 +32,10 @@ Label : CODE
             $f
           Label : ARGUMENT
             $e
-        Label : BLOCK
-          void
         Label : NAME
           F
+        Label : BLOCK
+          void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -64,7 +64,7 @@ Label : CODE
                 $b
               Label : ARGUMENT
                 $a
-            Label : BLOCK
-              void
             Label : NAME
               D
+            Label : BLOCK
+              void

@@ -4,7 +4,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      3
+      4
     Label : THEN
       ;
       Label : ELEMENT
@@ -13,7 +13,7 @@ Label : CODE
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
-          $b
+          $c
       Label : ELEMENT
         return
         Label : RETURN
@@ -25,7 +25,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      4
+      3
     Label : THEN
       ;
       Label : ELEMENT
@@ -34,7 +34,7 @@ Label : CODE
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
-          $c
+          $b
       Label : ELEMENT
         return
         Label : RETURN

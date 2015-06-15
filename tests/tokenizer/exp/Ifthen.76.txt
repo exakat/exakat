@@ -33,10 +33,6 @@ Label : CODE
             Label : RETURN
               G
       Label : ELEMENT
-        return
-        Label : RETURN
-          K
-      Label : ELEMENT
         if
         Label : CONDITION
           ->
@@ -64,6 +60,10 @@ Label : CODE
                         $g
                       Label : PROPERTY
                         J
+      Label : ELEMENT
+        return
+        Label : RETURN
+          K
       Label : ELEMENT
         if
         Label : CONDITION

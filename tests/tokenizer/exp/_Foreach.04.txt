@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $y
     Label : BLOCK
       void
     Label : SOURCE
@@ -14,5 +16,3 @@ Label : CODE
           'a'
       Label : NAME
         $x
-    Label : VALUE
-      $y

@@ -1,82 +1,86 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    ==
-    Label : RIGHT
-      B
-    Label : LEFT
-      $a
-  Label : THEN
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        Concatenation
-        Label : CONCAT
-          'D'
-        Label : CONCAT
-          C
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              *
-              Label : RIGHT
-                $d
-              Label : LEFT
-                (
-                Label : CODE
-                  /
-                  Label : RIGHT
-                    $c
-                  Label : LEFT
-                    0
-      Label : LEFT
-        $b
-  Label : ELSE
-    elseif
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
     Label : CONDITION
       ==
       Label : RIGHT
-        E
+        B
       Label : LEFT
         $a
     Label : THEN
       ;
       Label : ELEMENT
-        Concatenation
-        Label : CONCAT
-          'D'
-        Label : CONCAT
-          C
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              *
-              Label : RIGHT
-                $d
-              Label : LEFT
-                (
-                Label : CODE
-                  /
-                  Label : RIGHT
-                    $c
-                  Label : LEFT
-                    0
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
         =
         Label : RIGHT
           Concatenation
           Label : CONCAT
-            $f
+            'D'
           Label : CONCAT
-            $d
+            C
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                *
+                Label : RIGHT
+                  $d
+                Label : LEFT
+                  (
+                  Label : CODE
+                    /
+                    Label : RIGHT
+                      $c
+                    Label : LEFT
+                      0
         Label : LEFT
           $b
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        ==
+        Label : RIGHT
+          E
+        Label : LEFT
+          $a
+      Label : THEN
+        ;
+        Label : ELEMENT
+          Concatenation
+          Label : CONCAT
+            'D'
+          Label : CONCAT
+            C
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                *
+                Label : RIGHT
+                  $d
+                Label : LEFT
+                  (
+                  Label : CODE
+                    /
+                    Label : RIGHT
+                      $c
+                    Label : LEFT
+                      0
+      Label : ELSE
+        Block with else
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            Concatenation
+            Label : CONCAT
+              $f
+            Label : CONCAT
+              $d
+          Label : LEFT
+            $b

@@ -16,14 +16,14 @@ Label : CODE
             =
             Label : RIGHT
               ->
-              Label : OBJECT
-                $this
               Label : METHOD
                 F
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     'G'
+              Label : OBJECT
+                $this
             Label : LEFT
               ->
               Label : OBJECT
