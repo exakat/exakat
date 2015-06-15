@@ -148,7 +148,8 @@ class Token {
                                                Property::$operators,
                                                Staticproperty::$operators,
                                                _Instanceof::$operators,
-                                               array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_QUESTION'));
+                                               Ternary::$operators,
+                                               array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF'));
     }
 
     public static function getTokenizers($version = null) {
@@ -343,10 +344,6 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
 g.V.has('root', true)[0].inE('INDEXED').each{
     g.removeEdge(it);
 };
-
-g.idx('delete')[['node':'delete']].each{
-    g.removeVertex(it);
-}
 
 // clean indexed (if no more index...)
 g.V.has('index', true).filter{it.out().count() == 0}.each{
@@ -880,7 +877,6 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
     }
 };
 ",
-"g.dropIndex('delete');",
 "// Build the classes hierarchy
 
 g.idx('atoms')[['atom':'Class']]
@@ -917,10 +913,6 @@ g.idx('atoms')[['atom':'Class']]
 g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{
     g.removeVertex(it.in('NEXT').in('NEXT').next());
     g.removeVertex(it.out('NEXT').next());
-    g.removeVertex(it);
-}
-
-g.idx('delete')[['node':'delete']].each{
     g.removeVertex(it);
 }
 

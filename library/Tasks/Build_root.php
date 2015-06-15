@@ -118,7 +118,7 @@ class Build_root implements Tasks {
         display("Check for empty strings\n");
 
         // resolving the constants
-        $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete', 'namespaces', 'files');
+        $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'namespaces', 'files');
         foreach($extra_indices as $indice) {
             $this->query("g.dropIndex('$indice');");
             $this->query("g.createIndex('$indice', Vertex)");
