@@ -216,10 +216,15 @@ class Config {
 
         foreach($optionsValue as $key => $config) {
             if ( ($id = array_search($key, $args)) !== false) {
-                $this->commandline[$config[0]] = $args[$id + 1];
+                if (isset($args[$id + 1])) {
+                    $this->commandline[$config[0]] = $args[$id + 1];
 
-                unset($args[$id]);
-                unset($args[$id + 1]);
+                    unset($args[$id]);
+                    unset($args[$id + 1]);
+                } else {
+                    $this->commandline[$config[0]] = $config[1];
+                    unset($args[$id]);
+                }
             } else {
                 $this->commandline[$config[0]] = $config[1];
             }
