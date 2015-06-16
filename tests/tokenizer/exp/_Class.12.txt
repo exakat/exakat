@@ -10,7 +10,7 @@ Label : CODE
       ;
       Label : ELEMENT
         const
-        Label : NAME
-          c
         Label : VALUE
           3
+        Label : NAME
+          c

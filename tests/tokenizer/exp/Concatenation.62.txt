@@ -1,120 +1,122 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    &&
-    Label : RIGHT
-      (
-      Label : CODE
-        ||
-        Label : RIGHT
-          !
-          Label : NOT
-            $a
-        Label : LEFT
-          ==
-          Label : RIGHT
-            'F'
-          Label : LEFT
-            $a
-    Label : LEFT
-      ==
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      &&
       Label : RIGHT
-        'E'
+        (
+        Label : CODE
+          ||
+          Label : RIGHT
+            !
+            Label : NOT
+              $a
+          Label : LEFT
+            ==
+            Label : RIGHT
+              'F'
+            Label : LEFT
+              $a
       Label : LEFT
-        B
+        ==
+        Label : RIGHT
+          'E'
+        Label : LEFT
+          B
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'D'
+            Label : ARGUMENT
+              'C'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        print
         Label : ARGUMENTS
-          Arguments
+          void
           Label : ARGUMENT
-            'D'
+            (
+            Label : CODE
+              Concatenation
+              Label : CONCAT
+                +
+                Label : SIGN
+                  (
+                  Label : CODE
+                    ?
+                    Label : CONDITION
+                      true
+                    Label : THEN
+                      '1'
+                    Label : ELSE
+                      '0'
+              Label : CONCAT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  I
+              Label : CONCAT
+                'H'
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
           Label : ARGUMENT
-            'C'
-  Label : THEN
-    ;
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          (
-          Label : CODE
             Concatenation
             Label : CONCAT
-              +
-              Label : SIGN
-                (
-                Label : CODE
-                  ?
-                  Label : CONDITION
-                    true
-                  Label : THEN
-                    '1'
-                  Label : ELSE
-                    '0'
+              'd4'
             Label : CONCAT
-              ->
-              Label : OBJECT
-                $a
-              Label : PROPERTY
-                I
+              'c4'
             Label : CONCAT
-              'H'
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'd4'
-          Label : CONCAT
-            'c4'
-          Label : CONCAT
-            'b4'
-          Label : CONCAT
-            'a4'
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'c3'
-          Label : CONCAT
-            'b3'
-          Label : CONCAT
-            'a3'
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'b2'
-          Label : CONCAT
-            'a2'
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        'I'
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          I
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        new
-        Label : NEW
-          Stdclass
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
+              'b4'
+            Label : CONCAT
+              'a4'
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'c3'
+            Label : CONCAT
+              'b3'
+            Label : CONCAT
+              'a3'
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'b2'
+            Label : CONCAT
+              'a2'
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          'I'
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            I
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            Stdclass
+            Label : ARGUMENTS
               void
-      Label : LEFT
-        $a
+              Label : ARGUMENT
+                void
+        Label : LEFT
+          $a

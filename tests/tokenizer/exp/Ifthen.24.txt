@@ -14,8 +14,6 @@ Label : CODE
       ;
       Label : ELEMENT
         for
-        Label : BLOCK
-          void
         Label : INIT
           =
           Label : RIGHT
@@ -32,3 +30,5 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $e
+        Label : BLOCK
+          void

@@ -14,12 +14,12 @@ Label : CODE
           ;
           Label : ELEMENT
             function
-            Label : NAME
-              F
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $a
+            Label : NAME
+              F
             Label : BLOCK
               ;
               Label : ELEMENT
@@ -188,12 +188,12 @@ Label : CODE
                               $b
                   Label : ELEMENT
                     static
+                    Label : VALUE
+                      Z
                     Label : STATIC
                       static
                     Label : DEFINE
                       $b
-                    Label : VALUE
-                      Z
                   Label : ELEMENT
                     if
                     Label : CONDITION

@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $j
     Label : INIT
       void
     Label : FINAL
@@ -24,3 +18,9 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $i
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $j

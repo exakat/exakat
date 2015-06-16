@@ -8,10 +8,10 @@ Label : CODE
       ++
       Label : PREPLUSPLUS
         ::
-        Label : CLASS
-          self
         Label : PROPERTY
           $b
+        Label : CLASS
+          self
     Label : LEFT
       ->
       Label : OBJECT

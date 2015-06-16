@@ -2,6 +2,8 @@
 
 Label : CODE
   class
+  Label : NAME
+    B
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -32,8 +34,6 @@ Label : CODE
         G
       Label : USE
         F
-  Label : NAME
-    B
   Label : EXTENDS
     \
     Label : SUBNAME

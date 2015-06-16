@@ -38,8 +38,6 @@ Label : CODE
                     =
                     Label : RIGHT
                       ::
-                      Label : CLASS
-                        G
                       Label : METHOD
                         h
                         Label : ARGUMENTS
@@ -48,6 +46,8 @@ Label : CODE
                             $j
                           Label : ARGUMENT
                             $i
+                      Label : CLASS
+                        G
                     Label : LEFT
                       $f
               Label : ELEMENT

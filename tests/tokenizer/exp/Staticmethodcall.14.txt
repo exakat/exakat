@@ -4,11 +4,11 @@ Label : CODE
   return
   Label : RETURN
     ::
-    Label : CLASS
-      a
     Label : METHOD
       'B'
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $c
+    Label : CLASS
+      a

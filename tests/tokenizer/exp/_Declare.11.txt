@@ -1,18 +1,20 @@
 <?php
 
 Label : CODE
-  declare
-  Label : BLOCK
-    ;
-    Label : ELEMENT
+  ;
+  Label : ELEMENT
+    declare
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $a
+        Label : LEFT
+          $b
+    Label : TICKS
       =
       Label : RIGHT
-        $a
+        1
       Label : LEFT
-        $b
-  Label : TICKS
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      ticks
+        ticks

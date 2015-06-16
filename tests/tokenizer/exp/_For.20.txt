@@ -4,16 +4,48 @@ Label : CODE
   ;
   Label : ELEMENT
     for
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $i
+    Label : FINAL
+      <
+      Label : RIGHT
+        20
+      Label : LEFT
+        $i
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $i
     Label : BLOCK
       ;
       Label : ELEMENT
         for
+        Label : INIT
+          =
+          Label : RIGHT
+            0
+          Label : LEFT
+            $j
+        Label : FINAL
+          <
+          Label : RIGHT
+            5
+          Label : LEFT
+            $j
+        Label : INCREMENT
+          +=
+          Label : RIGHT
+            2
+          Label : LEFT
+            $j
         Label : BLOCK
           ;
           Label : ELEMENT
             for
-            Label : BLOCK
-              void
             Label : INIT
               =
               Label : RIGHT
@@ -30,6 +62,30 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $j
+            Label : BLOCK
+              void
+  Label : ELEMENT
+    for
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $i
+    Label : FINAL
+      <
+      Label : RIGHT
+        20
+      Label : LEFT
+        $i
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $i
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        for
         Label : INIT
           =
           Label : RIGHT
@@ -48,34 +104,10 @@ Label : CODE
             2
           Label : LEFT
             $j
-    Label : INIT
-      =
-      Label : RIGHT
-        0
-      Label : LEFT
-        $i
-    Label : FINAL
-      <
-      Label : RIGHT
-        20
-      Label : LEFT
-        $i
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $i
-  Label : ELEMENT
-    for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        for
         Label : BLOCK
           ;
           Label : ELEMENT
             for
-            Label : BLOCK
-              void
             Label : INIT
               =
               Label : RIGHT
@@ -92,24 +124,10 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $k
-        Label : INIT
-          =
-          Label : RIGHT
-            0
-          Label : LEFT
-            $j
-        Label : FINAL
-          <
-          Label : RIGHT
-            5
-          Label : LEFT
-            $j
-        Label : INCREMENT
-          +=
-          Label : RIGHT
-            2
-          Label : LEFT
-            $j
+            Label : BLOCK
+              void
+  Label : ELEMENT
+    for
     Label : INIT
       =
       Label : RIGHT
@@ -126,34 +144,10 @@ Label : CODE
       ++
       Label : POSTPLUSPLUS
         $i
-  Label : ELEMENT
-    for
     Label : BLOCK
       ;
       Label : ELEMENT
         for
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            for
-            Label : BLOCK
-              void
-            Label : INIT
-              =
-              Label : RIGHT
-                0
-              Label : LEFT
-                $k
-            Label : FINAL
-              >
-              Label : RIGHT
-                3
-              Label : LEFT
-                $k
-            Label : INCREMENT
-              ++
-              Label : POSTPLUSPLUS
-                $i
         Label : INIT
           =
           Label : RIGHT
@@ -172,19 +166,25 @@ Label : CODE
             2
           Label : LEFT
             $i
-    Label : INIT
-      =
-      Label : RIGHT
-        0
-      Label : LEFT
-        $i
-    Label : FINAL
-      <
-      Label : RIGHT
-        20
-      Label : LEFT
-        $i
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $i
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            for
+            Label : INIT
+              =
+              Label : RIGHT
+                0
+              Label : LEFT
+                $k
+            Label : FINAL
+              >
+              Label : RIGHT
+                3
+              Label : LEFT
+                $k
+            Label : INCREMENT
+              ++
+              Label : POSTPLUSPLUS
+                $i
+            Label : BLOCK
+              void
