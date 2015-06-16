@@ -1098,24 +1098,22 @@ g.addEdge(cc, f, 'NEXT');
 
 a3 = a2.out('NEXT').next();
 
-toBlockSequence = g.addVertex(null, [code:';', fullcode:'{ /**/ }', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, bracket:true, block:true]);
+toBlockSequence = g.addVertex(null, [code:';', fullcode:'{ /**/ }', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 
 a1.bothE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(toBlockSequence, a1, 'ELEMENT');
 a1.setProperty('rank', 0);
 if (a1.atom == 'Sequence') {
-    a1.block = true;
+    g.idx('atoms').put('atom', 'Sequence', a1);
+    a1.block    = true;
+    a1.bracket  = true;
     a1.fullcode = '{ /**/ }';
 }
 
-semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line]);
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
-
 g.addEdge(b1, toBlockSequence, 'NEXT');
-g.addEdge(toBlockSequence, semicolon, 'NEXT');
-g.addEdge(semicolon, a3, 'NEXT');
+g.addEdge(toBlockSequence, a3, 'NEXT');
 
-it.bothE('NEXT').each{ g.removeEdge(it); }
+it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
 a2.bothE('NEXT').each{ g.removeEdge(it); }
 
 toDelete.push(it);
