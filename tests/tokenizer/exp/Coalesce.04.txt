@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ??
+        Label : RIGHT
+          foo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          true
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      foo
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            PHP_EOL
+          Label : ARGUMENT
+            "executed!"

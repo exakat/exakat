@@ -1,0 +1,138 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          K
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'L'
+        Label : THEN
+          ;
+          Label : ELEMENT
+            P
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                Q
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'O'
+          Label : ELEMENT
+            M
+      Label : ELEMENT
+        S
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'W'
+          Label : ARGUMENT
+            F
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'V'
+          Label : ARGUMENT
+            'T'
+      Label : ELEMENT
+        Y
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        Z
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            0
+      Label : ELEMENT
+        X
+      Label : ELEMENT
+        AA
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'AG'
+          Label : ARGUMENT
+            'AF'
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'AE'
+            Label : CONCAT
+              F
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'AD'
+          Label : ARGUMENT
+            'AB'
+      Label : ELEMENT
+        AH
+      Label : ELEMENT
+        R
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'H'
+            Label : CONCAT
+              F
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'G'
+            Label : CONCAT
+              'E'
+      Label : ELEMENT
+        J
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        I
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        void
+      Label : ELEMENT
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        void

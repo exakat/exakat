@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        5
+      Label : ARGUMENT
+        <<<'NOWDOC'
+
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            BadFunctionCallException
+
+      Label : ARGUMENT
+        <<<HEREDOC
+
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            a
+
+      Label : ARGUMENT
+        'a'
+      Label : ARGUMENT
+        1

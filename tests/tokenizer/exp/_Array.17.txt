@@ -1,0 +1,54 @@
+<?php
+
+Label : CODE
+  while
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        ->
+        Label : PROPERTY
+          B
+        Label : OBJECT
+          $this
+  Label : CONDITION
+    &&
+    Label : RIGHT
+      ===
+      Label : RIGHT
+        G
+      Label : LEFT
+        D
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            {
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                E
+              Label : OBJECT
+                $this
+            Label : INDEX
+              ->
+              Label : PROPERTY
+                B
+              Label : OBJECT
+                $this
+          Label : ARGUMENT
+            $a
+    Label : LEFT
+      <
+      Label : RIGHT
+        ->
+        Label : PROPERTY
+          C
+        Label : OBJECT
+          $this
+      Label : LEFT
+        ->
+        Label : PROPERTY
+          B
+        Label : OBJECT
+          $this

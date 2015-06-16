@@ -1,0 +1,76 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              \
+              Label : SUBNAME
+                Connection
+              Label : SUBNAME
+                MyProject
+            Label : METHOD
+              start
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          \
+          Label : SUBNAME
+            connect
+          Label : SUBNAME
+            MyProject
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          $a
+      Label : ELEMENT
+        session_start
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : NAMESPACE
+      Global
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          connect
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        class
+        Label : NAME
+          Connection
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        const
+        Label : NAME
+          CONNECT_OK
+        Label : VALUE
+          1
+    Label : NAMESPACE
+      MyProject

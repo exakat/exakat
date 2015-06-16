@@ -1,0 +1,84 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'e'
+          Label : VALUE
+            -
+            Label : RIGHT
+              $j
+            Label : LEFT
+              --
+              Label : PREPLUSPLUS
+                $i
+    Label : LEFT
+      $a4
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'd'
+          Label : VALUE
+            -
+            Label : RIGHT
+              $j
+            Label : LEFT
+              --
+              Label : POSTPLUSPLUS
+                $i
+    Label : LEFT
+      $a3
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'c'
+          Label : VALUE
+            -
+            Label : RIGHT
+              $j
+            Label : LEFT
+              ++
+              Label : PREPLUSPLUS
+                $i
+    Label : LEFT
+      $a2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'b'
+          Label : VALUE
+            -
+            Label : RIGHT
+              $j
+            Label : LEFT
+              ++
+              Label : POSTPLUSPLUS
+                $i
+    Label : LEFT
+      $a1

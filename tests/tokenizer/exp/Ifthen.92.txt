@@ -1,0 +1,124 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          $a
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          F
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+        Label : THEN
+          ;
+          Label : ELEMENT
+            switch
+            Label : NAME
+              ->
+              Label : OBJECT
+                $this
+              Label : METHOD
+                G
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+            Label : CASES
+              Sequence Case Default
+              Label : ELEMENT
+                default
+                Label : CODE
+                  Block with Sequence For Default
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      'O'
+                    Label : LEFT
+                      $a
+              Label : ELEMENT
+                case
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    break
+                    Label : LEVEL
+                      void
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      L
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          M
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              ->
+                              Label : OBJECT
+                                $this
+                              Label : PROPERTY
+                                N
+                    Label : LEFT
+                      $a
+                Label : CASE
+                  'K'
+              Label : ELEMENT
+                case
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    break
+                    Label : LEVEL
+                      void
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      I
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          'J'
+                    Label : LEFT
+                      $a
+                Label : CASE
+                  'H'
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+        Label : CLASS
+          P
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          C
+        Label : THEN
+          ;
+          Label : ELEMENT
+            D
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                __METHOD__
+              Label : ARGUMENT
+                'E'

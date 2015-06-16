@@ -1,0 +1,41 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ->
+      Label : OBJECT
+        $f
+      Label : PROPERTY
+        h
+    Label : THEN
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $f
+        Label : THEN
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              $d
+            Label : LEFT
+              $c
+        Label : ELSE
+          Block with else
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $b
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $a

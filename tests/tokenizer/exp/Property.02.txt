@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $x
+    Label : PROPERTY
+      b

@@ -1,0 +1,50 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ->
+              Label : METHOD
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'G'
+              Label : OBJECT
+                $this
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                E
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              D
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                C
+        Label : CASE
+          @
+          Label : AT
+            B

@@ -1,0 +1,178 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    assert
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &&
+        Label : RIGHT
+          (
+          Label : CODE
+            =
+            Label : RIGHT
+              function
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+              Label : NAME
+                
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  yield
+                  Label : YIELD
+                    =>
+                    Label : VALUE
+                      2
+                    Label : KEY
+                      1
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    clone
+                    Label : CLONE
+                      $x
+                  Label : LEFT
+                    $y
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ??
+                    Label : RIGHT
+                      $b
+                    Label : LEFT
+                      $a
+                  Label : LEFT
+                    $x
+                Label : ELEMENT
+                  unset
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $e
+                Label : ELEMENT
+                  yield from
+                  Label : YIELD
+                    $x
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ||
+                    Label : RIGHT
+                      eval
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          $c
+                    Label : LEFT
+                      &&
+                      Label : RIGHT
+                        !
+                        Label : NOT
+                          empty
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              $b
+                      Label : LEFT
+                        isset
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $a
+                  Label : LEFT
+                    $x
+                Label : ELEMENT
+                  @
+                  Label : AT
+                    foo
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      $a
+                    Label : THEN
+                      $b
+                    Label : ELSE
+                      $c
+                  Label : LEFT
+                    $x
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      $a
+                    Label : THEN
+                      :
+                    Label : ELSE
+                      $c
+                  Label : LEFT
+                    $x
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    [
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        =>
+                        Label : VALUE
+                          'c'
+                        Label : KEY
+                          'z'
+                      Label : ARGUMENT
+                        =>
+                        Label : VALUE
+                          'x'
+                        Label : KEY
+                          2
+                      Label : ARGUMENT
+                        1
+                  Label : LEFT
+                    list
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        $c
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        $a
+                Label : ELEMENT
+                  ppp
+                  Label : VALUE
+                    0
+                  Label : STATIC
+                    static
+                  Label : DEFINE
+                    $d
+                Label : ELEMENT
+                  ppp
+                  Label : VALUE
+                    void
+                  Label : STATIC
+                    static
+                  Label : DEFINE
+                    $c
+                Label : ELEMENT
+                  global
+                  Label : GLOBAL
+                    $
+                    Label : NAME
+                      $b
+                  Label : GLOBAL
+                    $a
+            Label : LEFT
+              $a
+        Label : LEFT
+          0

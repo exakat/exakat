@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          -
+          Label : SIGN
+            'b'
+        Label : CONCAT
+          -
+          Label : SIGN
+            'a'
