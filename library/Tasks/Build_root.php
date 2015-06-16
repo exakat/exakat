@@ -36,7 +36,6 @@ class Build_root implements Tasks {
         $this->config = $config;
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
 
-        $begin = microtime(true);
         display( "Connecting to server\n");
         $this->client = new Client();
         display( "Starting\n");
@@ -57,9 +56,29 @@ class Build_root implements Tasks {
 
         $this->logTime('g.idx("atoms")');
         display( "g.idx('atoms') : filling\n");
-        $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
-                                         'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{
-                                         g.idx('atoms').put('atom', it.atom, it); }";
+
+        // separate processing for T_STRING 
+        $query = "g.V.has('token', 'T_STRING').each{
+            it.setProperty('fullcode', it.getProperty('code'));
+            it.setProperty('atom', 'Identifier');
+            g.idx('atoms').put('atom', it.atom, it); 
+        }";
+        $this->query($query, 1);
+        display( "g.idx('atoms') : T_STRING\n");
+
+        // separate processing for T_VARIABLE 
+        $query = "g.V.has('token', 'T_VARIABLE').each{
+            it.setProperty('fullcode', it.getProperty('code'));
+            it.setProperty('atom', 'Variable');
+            g.idx('atoms').put('atom', it.atom, it); 
+        }";
+        $this->query($query, 1);
+        display( "g.idx('atoms') : T_VARIABLE\n");
+
+        $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant',
+                                         'Rawstring', 'Float', 'Boolean', 'Void', 'File']}.each{
+                                         g.idx('atoms').put('atom', it.atom, it); 
+        }";
         $this->query($query, 1);
         display( "g.idx('atoms') : filled\n" );
         $this->logTime('g.idx("atom")[["atom":"******"]] : filling');
@@ -99,7 +118,7 @@ class Build_root implements Tasks {
         display("Check for empty strings\n");
 
         // resolving the constants
-        $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete', 'namespaces', 'files');
+        $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'namespaces', 'files');
         foreach($extra_indices as $indice) {
             $this->query("g.dropIndex('$indice');");
             $this->query("g.createIndex('$indice', Vertex)");
@@ -107,8 +126,6 @@ class Build_root implements Tasks {
         $this->logTime('g.idx("last index")');
 
         display("Creating index for constant, function and classes resolution.\n");
-
-        $end = microtime(true);
     }
 
     private function query($query, $retry = 1) {

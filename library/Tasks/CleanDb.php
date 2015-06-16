@@ -100,7 +100,7 @@ DELETE n,r';
         } catch (\Exception $e) {
             display('Couldn\'t access Neo4j');
             shell_exec('cd '.$this->config->projects_root.'/neo4j; ./bin/neo4j start');
-            $res = shell_exec('curl 127.0.0.1:7474/db/data/ 2>&1');
+            shell_exec('curl 127.0.0.1:7474/db/data/ 2>&1');
             sleep(1);
             
             $this->getClient();

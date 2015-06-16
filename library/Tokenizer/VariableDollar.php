@@ -63,12 +63,10 @@ class VariableDollar extends TokenAuto {
                                   3 => array('token' => 'T_CLOSE_CURLY'),
         );
         
-        $this->actions = array( 'transform'  => array(1 => 'DROP',
-                                                      2 => 'NAME',
-                                                      3 => 'DROP'),
-                                'property'   => array('bracket' => true),
-                                'atom'       => 'Variable',
-                                'cleanIndex' => true);
+        $this->actions = array( 'toVariableDollar' => true,
+                                'property'         => array('bracket' => true),
+                                'atom'             => 'Variable',
+                                'cleanIndex'       => true);
         $this->checkAuto();
         
         return false;

@@ -103,7 +103,31 @@ class _Function extends TokenAuto {
                                'checkTypehint' => 'Function',
                                'cleanIndex'    => true,
                                'addSemicolon'  => 'it',
-                               'makeBlock'      => 'BLOCK');
+                               'makeBlock'     => 'BLOCK');
+        $this->checkAuto();
+
+        // lambda function &(no name)
+        $this->conditions = array(0 => array('token'    =>  _Function::$operators,
+                                             'atom'     => 'none'),
+                                  1 => array('token'    => 'T_AND'),
+                                  2 => array('token'    => 'T_OPEN_PARENTHESIS',
+//                                             'property' => array('association' => 'Function')
+                                             ),
+                                  3 => array('atom'     => 'Arguments'),
+                                  4 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                  5 => array('token'    => 'T_OPEN_CURLY',
+                                             'property' => array('association' => 'Function')
+                                             ),
+                                  6 => array('atom'     => array('Sequence', 'Void')),
+                                  7 => array('token'    => 'T_CLOSE_CURLY')
+        );
+        
+        $this->actions = array('toLambda'      => true,
+                               'atom'          => 'Function',
+                               'checkTypehint' => 'Function',
+                               'cleanIndex'    => true,
+                               'addSemicolon'  => 'it',
+                               'makeBlock'     => 'BLOCK');
         $this->checkAuto();
 
         // lambda function ($x) use ($y)
@@ -133,6 +157,34 @@ class _Function extends TokenAuto {
                                'makeBlock'      => 'BLOCK');
         $this->checkAuto();
 
+        // lambda function &($x) use ($y)
+        $this->conditions = array(0  => array('token' =>  _Function::$operators,
+                                              'atom'  => 'none'),
+                                  1  => array('token' => 'T_AND'),
+                                  2  => array('token' => 'T_OPEN_PARENTHESIS',
+//                                              'property' => array('association' => 'Function')
+                                              ),
+                                  3  => array('atom'  => 'Arguments'),
+                                  4  => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  5  => array('token' => 'T_USE'),
+                                  6  => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  7  => array('atom'  => 'Arguments'),
+                                  8  => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  9  => array('token' => 'T_OPEN_CURLY',
+                                              'property' => array('association' => 'Use')
+                                              ),
+                                  10 => array('atom'  => array('Sequence', 'Void')),
+                                  11 => array('token' => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array('toLambdaUse'    => true,
+                               'atom'           => 'Function',
+                               'checkTypehint'  => 'Function',
+                               'cleanIndex'     => true,
+                               'addSemicolon'   => 'it',
+                               'makeBlock'      => 'BLOCK');
+        $this->checkAuto();
+
         return false;
     }
 
@@ -141,14 +193,19 @@ class _Function extends TokenAuto {
 
 fullcode.setProperty('fullcode', '');
 
+if (fullcode.reference == true) {
+    keyword = 'function &';
+} else {
+    keyword = 'function ';
+}
 // for methods
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
 
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
 
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function (" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
 
-fullcode.filter{it.out("USE").any()}.each{ fullcode.fullcode = "function (" + fullcode.out("ARGUMENTS").next().fullcode + ") use " + fullcode.out("USE").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
+fullcode.filter{it.out("USE").any()}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") use (" + fullcode.out("USE").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
 
 // for properties
 if (fullcode.out('DEFINE').any()) {

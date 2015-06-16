@@ -66,8 +66,6 @@ php exakat analyze -P <One/rule> -p <project>\n");
         $client = new Client();
         $log = new \Log('analyze', $config->projects_root.'/projects/'.$config->project);
 
-        $analyzers = new NodeIndex($client, 'analyzers');
-
         $log->log("Analyzing project $project");
         $log->log("Runnable analyzers\t".count($analyzers_class));
 

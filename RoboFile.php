@@ -38,11 +38,10 @@ class RoboFile extends \Robo\Tasks
      */
     public function licence()
     {
-        $files = $mit = Finder::create()->files()
-                                        ->name('*.php')
-                                        ->in('library')
-                                        ->in('scripts');
-        $docs = array();
+        $files = Finder::create()->files()
+                                 ->name('*.php')
+                                 ->in('library')
+                                 ->in('scripts');
         
         $licence = <<<'LICENCE'
 /*
@@ -70,9 +69,7 @@ class RoboFile extends \Robo\Tasks
 LICENCE;
         $licenceCRC = crc32(trim($licence));
         
-        $id = 0;
         foreach ($files as $file) {
-            $id++;
             if (strpos($file, 'Everyman') !== false) { continue; }
             print $file."\n";
             
@@ -94,10 +91,8 @@ LICENCE;
                         }
                     }
                     fclose($fp);
-                } else {
-                    if (crc32($tokens[$tokenId + 1][1]) != $licenceCRC) {
-                        print "Licence seems to be changed in file '$file'\n";
-                    }
+                } elseif (crc32($tokens[$tokenId + 1][1]) != $licenceCRC) {
+                    print "Licence seems to be changed in file '$file'\n";
                 }
             } else {
                 print "Couldn't apply licence on '$file'\n";
@@ -164,6 +159,7 @@ LICENCE;
     public function pharBuild() {
         $packer = $this->taskPackPhar('exakat.phar')
 //                       ->compress()
+// compress yield a 'too many files open' error
                        ;
         
         $this->updateBuild();
@@ -215,13 +211,11 @@ LICENCE;
     }
     
     private function addFiles($packer, $files) {
-        $total = 0;
         foreach ($files as $file) {
+//            print "$file {$file->getRelativePathname()} {$file->getRealPath()}\n";
             print "$file\n";
-            $total++;
             $packer->addFile($file->getRelativePathname(), $file->getRealPath());
         }
-        print "Added $total files\n";
     }
     
     public function checkFormat() {
@@ -309,3 +303,5 @@ function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $err
     print __METHOD__."\n";
     return true;
 }
+
+?>

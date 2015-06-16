@@ -29,7 +29,6 @@ class UncheckedResources extends Analyzer\Analyzer {
     public function analyze() {
         $resourceUsage = $this->loadJson('resource_usage.json');
 
-        $positions = array(0,1,2);
         $positions = array(0);
         foreach($resourceUsage as $creation => $usage) {
             foreach($positions as $pos) {

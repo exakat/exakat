@@ -32,6 +32,7 @@ class UsePathinfo extends Analyzer\Analyzer {
         $temp = explode('.', $config);
         $ext = array_pop($temp);
         */
+
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('Functioncall')
@@ -42,6 +43,7 @@ class UsePathinfo extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs('String')
+             ->tokenIs('T_CONSTANT_ENCAPSED_STRING') // could be T_VARIABLE, T_QUOTE, T_OBJECT_OPERATOR, T_DOUBLE_COLON
              ->noDelimiter('.')
              ->back('first')
              ->outIs('LEFT')
@@ -76,6 +78,7 @@ class UsePathinfo extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
+             ->tokenIs('T_CONSTANT_ENCAPSED_STRING') // could be T_VARIABLE, T_QUOTE, T_OBJECT_OPERATOR, T_DOUBLE_COLON
              ->noDelimiter('.')
              ->back('first')
              ->outIs('LEFT')

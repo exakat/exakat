@@ -41,7 +41,6 @@ class Load implements Tasks {
 
         // formerly -q option. Currently, only one loader, via csv-batchimport;
         $this->client = new \Loader\Cypher();
-//        $this->client = new \Loader\Csv();
 
         if ($filename = $this->config->filename) {
             $nbTokens = $this->process_file($filename);
@@ -53,8 +52,7 @@ class Load implements Tasks {
             $nbTokens = $res['tokens'];
     
         } else {
-            display('No file to process. Aborting');
-            die();
+            die('No file to process. Aborting');
         }
 
         $this->client->finalize();
@@ -275,7 +273,7 @@ class Load implements Tasks {
 
             if (is_array($token)) {
                 $token[3] = $this->php->getTokenname($token[0]);
-
+                
                 $colonTokens->surveyToken($token);
                 if ($token[3] == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
@@ -348,7 +346,6 @@ class Load implements Tasks {
                     $Tid++;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                   ->setProperty('code', ';')
-                                                  ->setProperty('fullcode', ';')
                                                   ->setProperty('line', $line)
                                                   ->setProperty('modifiedBy', 'bin/load18')
                                                   ->save();
@@ -359,9 +356,9 @@ class Load implements Tasks {
                           is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_END_HEREDOC') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
-                                                  ->setProperty('code', $token[1])
-                                                  ->setProperty('fullcode', $token[1])
-                                                  ->setProperty('line', $token[2])->save();
+                                                        ->setProperty('code', $token[1])
+                                                        ->setProperty('fullcode', $token[1])
+                                                        ->setProperty('line', $token[2])->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $regexIndex['Heredoc']->relateTo($T[$Tid], 'INDEXED')->save();
@@ -370,12 +367,12 @@ class Load implements Tasks {
 
                     $Tid++;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ENCAPSED_AND_WHITESPACE')
-                                                  ->setProperty('atom', 'String')
-                                                  ->setProperty('code', ' ')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load26')
-                                                  ->save();
+                                                        ->setProperty('atom', 'String')
+                                                        ->setProperty('code', ' ')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load26')
+                                                        ->save();
 
                     $to_index = false;
                 } elseif ($token[3] == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
@@ -452,8 +449,8 @@ class Load implements Tasks {
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
-                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
-
+                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG'
+                          ) {
                             $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                                 ->setProperty('code', ';')
                                                                 ->setProperty('fullcode', ';')
@@ -479,7 +476,11 @@ class Load implements Tasks {
                             $id++;
                             continue;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
-                          in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING', 'T_CONTINUE', 'T_BREAK'))) {
+                          isset($tokens[$id + 1]) &&
+                          is_array($tokens[$id + 1]) &&
+                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG_WITH_ECHO'
+                          ) {
+                    if (in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING', 'T_CONTINUE', 'T_BREAK'))) {
                           $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                               ->setProperty('code', ';')
                                                               ->setProperty('fullcode', ';')
@@ -498,10 +499,7 @@ class Load implements Tasks {
                                                   ->setProperty('line', $token[2])->save();
 
                           $to_index = false;
-                } elseif ($token[3] == 'T_CLOSE_TAG' &&
-                          isset($tokens[$id + 1]) &&
-                          is_array($tokens[$id + 1]) &&
-                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG_WITH_ECHO') {
+                    }
 
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ECHO')
                                                   ->setProperty('code', 'echo')
@@ -516,6 +514,27 @@ class Load implements Tasks {
 
                     $id++;
                     continue;
+                } elseif ($token[3] == 'T_CLOSE_TAG' &&
+                          in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING', 'T_CONTINUE', 'T_BREAK'))) {
+
+                          $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                              ->setProperty('code', ';')
+                                                              ->setProperty('fullcode', ';')
+                                                              ->setProperty('line', $line)
+                                                              ->setProperty('modifiedBy', 'bin/load28')
+                                                              ->setProperty('root', 'true')
+                                                              ->save();
+                          $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+                          $previous->relateTo($T[$Tid], 'NEXT')->save();
+                          $previous = $T[$Tid];
+
+                          $Tid++;
+                          $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
+                                                  ->setProperty('code', $token[1])
+                                                  ->setProperty('fullcode', $token[1])
+                                                  ->setProperty('line', $token[2])->save();
+
+                          $to_index = false;
                 } elseif ($token[3] == 'T_INLINE_HTML' &&
                           $id == 0) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
@@ -622,12 +641,9 @@ class Load implements Tasks {
                             ->setProperty('fullcode', $token[1])->save();
                     $to_index = ($tokens[$id + 1] == '('); // if the next is (, this may be a function or a method!!
                 } elseif (isset($atoms[$token[3]])) {
-                    if ($token[3] == 'T_STRING') {
-                        $T[$Tid]->setProperty('atom', $atoms[$token[3]])
-                                ->setProperty('code', $token[1])
-                                ->setProperty('fullcode', $token[1])->save();
+                    if (in_array($token[3], array('T_STRING', 'T_VARIABLE'))) {
+                        $T[$Tid]->setProperty('code', $token[1])->save();
                         $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
-
                     } elseif ($token[3] == 'T_STRING_VARNAME') {
                         $T[$Tid]->setProperty('atom', $atoms[$token[3]])
                                 ->setProperty('code', '$'.$token[1])
@@ -1054,19 +1070,9 @@ class Load implements Tasks {
 
             if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
                 $inQuote++;
-                if (is_array($token)) {
-                    $T[$Tid]->setProperty('fullcode', $token[1])->save();
-                } else {
-                    $T[$Tid]->setProperty('fullcode', $token)->save();
-                }
             } elseif ($inQuote && in_array($token_value, array('T_QUOTE_CLOSE', 'T_SHELL_QUOTE_CLOSE', 'T_END_HEREDOC'))) {
                 $inQuote--;
                 $T[$Tid]->setProperty('in_quote', 'true')->save();
-                if (is_array($token)) {
-                    $T[$Tid]->setProperty('fullcode', $token[1])->save();
-                } else {
-                    $T[$Tid]->setProperty('fullcode', $token)->save();
-                }
             }
 
             if ($inQuote) {

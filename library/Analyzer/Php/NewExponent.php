@@ -27,8 +27,7 @@ use Analyzer;
 
 class NewExponent extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->fullnspath('\\pow');
+        $this->atomFunctionIs('\\pow');
         $this->prepareQuery();
     }
 }

@@ -21,17 +21,28 @@
 */
 
 
-namespace Report\Format\Devoops;
+namespace Analyzer\Namespaces;
 
-class TextLead extends \Report\Format\Devoops { 
-    public function render($output, $data) {
-        $data = nl2br($data);
-        $output->push("<article><p class=\"lead\">".$data."</p></article>\n");
+use Analyzer;
 
-        $output->push("<script src=\"plugins/readmore/readmore.js\"></script>\n");
-        $output->push("<script src=\"plugins/readmore/jquery.mockjax.js\"></script>\n");
-        $output->push("<script>$('article').readmore({collapsedHeight: 90});</script>\n");
+class EmptyNamespace extends Analyzer\Analyzer {
+    public function analyze() {
+        $this->atomIs('Namespace')
+             ->raw('filter{it.out("NAMESPACE").has("code", "Global").any() == false}')
+             ->outIs('BLOCK')
+             ->atomIs('Void')
+             ->raw('filter{it.out("ELEMENT").hasNot("atom", "Use").any() == false}')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Namespace')
+             ->raw('filter{it.out("NAMESPACE").has("code", "Global").any() == false}')
+             ->outIs('BLOCK')
+             ->atomIs('Sequence')
+             ->raw('filter{it.out("ELEMENT").hasNot("atom", "Use").any() == false}')
+             ->back('first');
+        $this->prepareQuery();
     }
-
 }
+
 ?>

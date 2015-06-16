@@ -30,8 +30,6 @@ class Status implements Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 
-        $client = new Client();
-        
         $path = $config->projects_root.'/projects/'.$project;
         
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {

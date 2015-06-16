@@ -27,7 +27,7 @@ use Analyzer;
 
 class VardumpUsage extends Analyzer\Analyzer {
     public function analyze() {
-        $debug_functions = array('\\var_dump', '\\print_r', '\\var_export');
+        $debug_functions = array('var_dump', 'print_r', 'var_export');
         
         // print_r (but not print_r($a, 1))
         $this->atomIs('Functioncall')
@@ -81,7 +81,7 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->is('rank', 0)
              ->atomIs('String')
              ->tokenIsNot('T_QUOTE')
-             ->noDelimiter(array('print_r', 'var_dump', 'var_export'))
+             ->noDelimiter($debug_functions)
              ->back('first');
         $this->prepareQuery();
     }

@@ -28,7 +28,7 @@ class Staticmethodcall extends TokenAuto {
     static public $atom = 'Staticmethodcall';
 
     public function _check() {
-        $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Nsname', 'Static', 'Nsname',);
+        $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Nsname', 'Static');
 
         // unusual call : Class::{Method}(); Only build the Functioncall
         $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
@@ -50,9 +50,9 @@ class Staticmethodcall extends TokenAuto {
 
         // normal call : Class::Method();
         $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
-                                   -1 => array('atom' => $operands),
-                                    0 => array('token' => Staticmethodcall::$operators),
-                                    1 => array('atom' => array('Functioncall', 'Methodcall')),
+                                   -1 => array('atom'       => $operands),
+                                    0 => array('token'      => Staticmethodcall::$operators),
+                                    1 => array('atom'       => array('Functioncall', 'Methodcall')),
                                  );
         
         $this->actions = array('transform'    => array( -1 => 'CLASS',

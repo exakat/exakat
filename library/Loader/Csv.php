@@ -139,12 +139,10 @@ HEADER
             foreach($les_cols as $col) {
                 if (isset($node[$col])) {
                     $row[$col] = $node[$col];
+                } elseif ($col == 'line') {
+                    $row[$col] = 0;
                 } else {
-                    if ($col == 'line') {
-                        $row[$col] = 0;
-                    } else {
-                        $row[$col] = '';
-                    }
+                    $row[$col] = '';
                 }
                 if ($diff = array_diff(array_keys($row), $les_cols, array('id'))) {
                     display("Some columns were not processed : ".implode(", ", $diff).".\n");
