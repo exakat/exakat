@@ -217,10 +217,17 @@ class Config {
         foreach($optionsValue as $key => $config) {
             if ( ($id = array_search($key, $args)) !== false) {
                 if (isset($args[$id + 1])) {
-                    $this->commandline[$config[0]] = $args[$id + 1];
+                    if (isset($optionsValue[$args[$id + 1]])) {
+                        // in case this option value is actually the next option (exakat -p -T)
+                        $this->commandline[$config[0]] = $config[1];
+                        unset($args[$id]);
+                    } else {
+                        // Normal case is here
+                        $this->commandline[$config[0]] = $args[$id + 1];
 
-                    unset($args[$id]);
-                    unset($args[$id + 1]);
+                        unset($args[$id]);
+                        unset($args[$id + 1]);
+                    }
                 } else {
                     $this->commandline[$config[0]] = $config[1];
                     unset($args[$id]);
