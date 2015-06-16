@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('function  ( ) { /**/ } ', 
-                      'function ( ) use $x { /**/ } ');
+                      'function ( ) use ($x) { /**/ } ');
 
 $expected_not = array();
 
