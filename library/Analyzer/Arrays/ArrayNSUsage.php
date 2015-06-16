@@ -27,7 +27,7 @@ use Analyzer;
 
 class ArrayNSUsage extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Array')
+        $this->atomIs('Functioncall')
              ->is('short_syntax', true);
         $this->prepareQuery();
     }
