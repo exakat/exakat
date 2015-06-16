@@ -37,9 +37,11 @@ class CleanDb implements Tasks {
         $this->config = $config;
         $client = $this->getClient();
         
-        $queryTemplate = 'start n=node(*)
+        $queryTemplate = <<<CYPHER
+start n=node(*)
 match n
-return count(n)';
+return count(n)
+CYPHER;
         $query = new Query($client, $queryTemplate, array());
         $result = $query->getResultSet();
         $nodes = $result[0][0];
@@ -50,7 +52,7 @@ return count(n)';
             display('No nodes in neo4j. No need to clean');
         } elseif ($config->quick || $nodes > 10000) {
             display('Cleaning with restart');
-            shell_exec('cd '.$config->projects_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data');
+            shell_exec('cd '.$config->projects_root.'/neo4j/;sh ./bin/neo4j stop; rm -rf data; mkdir data');
             
             // checking that the server has indeed restarted
             $round = 0;
@@ -99,8 +101,16 @@ DELETE n,r';
             $client->getServerInfo();
         } catch (\Exception $e) {
             display('Couldn\'t access Neo4j');
-            shell_exec('cd '.$this->config->projects_root.'/neo4j; ./bin/neo4j start');
-            shell_exec('curl 127.0.0.1:7474/db/data/ 2>&1');
+            shell_exec('cd '.$this->config->projects_root.'/neo4j;sh ./bin/neo4j start');
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
+                curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                $res = curl_exec($ch);
+                curl_close($ch);
+
             sleep(1);
             
             $this->getClient();

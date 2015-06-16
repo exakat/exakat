@@ -140,7 +140,7 @@ class Build_root implements Tasks {
             fclose($fp);
         
             if ($retry) {
-                echo shell_exec ('cd '.$this->config->dir_root.'/neo4j/; ./bin/neo4j restart');
+                echo shell_exec ('cd '.$this->config->projects_root.'/neo4j/;sh ./bin/neo4j restart');
                 return $this->query($query, 0);
             }
         
