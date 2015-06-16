@@ -1,3 +1,19 @@
+Version 0.2.3 (Techu Shi, Coming up)
++ Analyzer
+    + 
++ Tokenizer
+    + 
+Version 0.2.2 (Xiong Shangjun, June 16th, 2015)
++ Analyzer
+    + Now spots short assignations
+    + More UselessInstructions spotted
+    + Ignore Unset as modified values in loops
++ Tokenizer
+    + Added support for PHP7 new tokens (T_SPACESHIP, T_COALESCE, T_YIELD_FROM)
+    + Split loading into more .csv files for lighter and more robust queries
+    + Better support for arrays [1,2,3] as functioncall (just like array())
+    + Process tokens by batches of 800
+    + Clean vertex at each queries, not Sequence
 Version 0.2.1 (General Yin, June 2nd, 2015)
 + Analyzer
     + sizeOf may have 2 arguments
