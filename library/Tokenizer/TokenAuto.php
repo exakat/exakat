@@ -32,7 +32,7 @@ class TokenAuto extends Token {
     public    $done       = null ;
     public    $cycles     = null ;
     
-    const CYCLE = 800;
+    const CYCLE = 700;
 
     public function _check() {
         return false;
