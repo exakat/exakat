@@ -179,6 +179,10 @@ INI;
             }
         }
 
+        $stats['folders']['test'] = file_exists($config->projects_root.'/projects/test/') ? 'Yes' : 'No';
+        $stats['folders']['default'] = file_exists($config->projects_root.'/projects/default/') ? 'Yes' : 'No';
+        $stats['folders']['onepage'] = file_exists($config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
+
         return $stats;
     }
 
@@ -303,6 +307,26 @@ INI;
         } else {
             $stats['svn']['installed'] = 'No';
             $stats['svn']['optional'] = 'Yes';
+        }
+
+        // composer
+        $res = trim(shell_exec('composer about --version'));
+        // remove colors from shell syntax
+        $res = preg_replace('/\e\[[\d;]*m/', '', $res);
+        if (preg_match('/ version ([0-9\.a-z\-]+)/', $res, $r)) {//
+            $stats['composer']['installed'] = 'Yes';
+            $stats['composer']['version'] = $r[1];
+        } else {
+            $stats['composer']['installed'] = 'No';
+        }
+
+        // wget
+        $res = explode("\n", shell_exec('wget -V'))[0];
+        if ($res !== '') {//
+            $stats['wget']['installed'] = 'Yes';
+            $stats['wget']['version'] = $res;
+        } else {
+            $stats['wget']['installed'] = 'No';
         }
 
         // neo4jphp
