@@ -4,10 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          MethodDefinedWithAReference
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -18,12 +22,10 @@ Label : CODE
             return
             Label : RETURN
               $x
-        Label : NAME
-          MethodDefinedWithAReference
-    Label : NAME
-      x
   Label : ELEMENT
     function
+    Label : NAME
+      DefinedWithAReference
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -34,5 +36,3 @@ Label : CODE
         return
         Label : RETURN
           $x
-    Label : NAME
-      DefinedWithAReference

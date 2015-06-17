@@ -50,12 +50,12 @@ Label : CODE
               new
               Label : NEW
                 \
+                Label : SUBNAME
+                  K
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
-                Label : SUBNAME
-                  K
           Label : ELEMENT
             =
             Label : RIGHT

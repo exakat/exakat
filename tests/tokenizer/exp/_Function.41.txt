@@ -6,14 +6,16 @@ Label : CODE
     =
     Label : RIGHT
       function
+      Label : NAME
+        
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           Typehint
-          Label : CLASS
-            Stdclass
           Label : VARIABLE
             $e
+          Label : CLASS
+            Stdclass
         Label : ARGUMENT
           $d
         Label : ARGUMENT
@@ -26,7 +28,5 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $a
-      Label : NAME
-        
     Label : LEFT
       $x

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      a
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -12,8 +14,6 @@ Label : CODE
           $b
         Label : CLASS
           StdClass
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT

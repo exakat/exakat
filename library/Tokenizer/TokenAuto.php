@@ -470,104 +470,24 @@ if (a1.token == 'T_AND') {
     op = a2;
     args = a3;
     cp = a4;
-
-    oc = a5;
-    block = a6;
-    cc = a7;
 } else {
     op = a1;
     args = a2;
     cp = a3;
-
-    oc = a4;
-    block = a5;
-    cc = a6;
 }
 
 g.addEdge(it, args, 'ARGUMENTS');
-g.addEdge(it, block, 'BLOCK');
-block.setProperty('bracket', true);
 
-g.addEdge(it, block.out('NEXT').out('NEXT').next(), 'NEXT');
-g.removeEdge(block.outE('NEXT').next());
+g.addEdge(it, cp.out('NEXT').next(), 'NEXT');
 
 op.bothE('NEXT').each{ g.removeEdge(it); }
 cp.bothE('NEXT').each{ g.removeEdge(it); }
-oc.bothE('NEXT').each{ g.removeEdge(it); }
-cc.bothE('NEXT').each{ g.removeEdge(it); }
 
 toDelete.push(op);
 toDelete.push(cp);
-toDelete.push(oc);
-toDelete.push(cc);
 
 ";
             unset($actions['toLambda']);
-        }
-
-        if (isset($actions['toLambdaUse'])) {
-            $qactions[] = "
-/* to to_lambda function with use */
-
-x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line, fullcode:'']);
-
-g.addEdge(it, x, 'NAME');
-it.setProperty('lambda', true);
-
-x = it.out('NEXT').next();
-if (x.token == 'T_AND') {
-    it.setProperty('reference', true);
-    toDelete.push(x);
-    x = x.out('NEXT').next();
-}
-toDelete.push(x);
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(it, x, 'ARGUMENTS');
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-x.inE('INDEXED').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-g.addEdge(it, x, 'USE');
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-// 8 T_OPEN_CURLY
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-g.addEdge(it, x, 'BLOCK');
-x.setProperty('bracket', true);
-x.inE('INDEXED').each{ g.removeEdge(it); }
-
-// 10 T_CLOSE_CURLY
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-g.removeEdge(x.inE('NEXT').next());
-g.addEdge(it, x, 'NEXT');
-
-";
-            unset($actions['toLambdaUse']);
         }
 
         if (isset($actions['to_ppp'])) {

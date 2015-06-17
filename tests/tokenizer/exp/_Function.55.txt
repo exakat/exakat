@@ -1,0 +1,216 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    interface
+    Label : NAME
+      i
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : NAME
+          x4
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+        Label : RETURN
+          Stdclass
+      Label : ELEMENT
+        function
+        Label : NAME
+          x3
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+  Label : ELEMENT
+    function
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    function
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : USE
+      void
+      Label : ARGUMENT
+        $y
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    function
+    Label : NAME
+      x2r
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : NAME
+      xr
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    function
+    Label : USE
+      void
+      Label : ARGUMENT
+        $y
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : USE
+      void
+      Label : ARGUMENT
+        $y
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    function
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    function
+    Label : USE
+      void
+      Label : ARGUMENT
+        $y
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    function
+    Label : NAME
+      
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    interface
+    Label : NAME
+      i
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : NAME
+          x4r
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+        Label : RETURN
+          Stdclass
+      Label : ELEMENT
+        function
+        Label : NAME
+          x3r
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+  Label : ELEMENT
+    function
+    Label : NAME
+      x2
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : NAME
+      x
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : BLOCK
+      void
