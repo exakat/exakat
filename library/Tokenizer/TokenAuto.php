@@ -32,7 +32,7 @@ class TokenAuto extends Token {
     public    $done       = null ;
     public    $cycles     = null ;
     
-    const CYCLE = 800;
+    const CYCLE = 700;
 
     public function _check() {
         return false;
@@ -470,104 +470,24 @@ if (a1.token == 'T_AND') {
     op = a2;
     args = a3;
     cp = a4;
-
-    oc = a5;
-    block = a6;
-    cc = a7;
 } else {
     op = a1;
     args = a2;
     cp = a3;
-
-    oc = a4;
-    block = a5;
-    cc = a6;
 }
 
 g.addEdge(it, args, 'ARGUMENTS');
-g.addEdge(it, block, 'BLOCK');
-block.setProperty('bracket', true);
 
-g.addEdge(it, block.out('NEXT').out('NEXT').next(), 'NEXT');
-g.removeEdge(block.outE('NEXT').next());
+g.addEdge(it, cp.out('NEXT').next(), 'NEXT');
 
 op.bothE('NEXT').each{ g.removeEdge(it); }
 cp.bothE('NEXT').each{ g.removeEdge(it); }
-oc.bothE('NEXT').each{ g.removeEdge(it); }
-cc.bothE('NEXT').each{ g.removeEdge(it); }
 
 toDelete.push(op);
 toDelete.push(cp);
-toDelete.push(oc);
-toDelete.push(cc);
 
 ";
             unset($actions['toLambda']);
-        }
-
-        if (isset($actions['toLambdaUse'])) {
-            $qactions[] = "
-/* to to_lambda function with use */
-
-x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line, fullcode:'']);
-
-g.addEdge(it, x, 'NAME');
-it.setProperty('lambda', true);
-
-x = it.out('NEXT').next();
-if (x.token == 'T_AND') {
-    it.setProperty('reference', true);
-    toDelete.push(x);
-    x = x.out('NEXT').next();
-}
-toDelete.push(x);
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(it, x, 'ARGUMENTS');
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-x.inE('INDEXED').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-g.addEdge(it, x, 'USE');
-
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-// 8 T_OPEN_CURLY
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-g.addEdge(it, x, 'BLOCK');
-x.setProperty('bracket', true);
-x.inE('INDEXED').each{ g.removeEdge(it); }
-
-// 10 T_CLOSE_CURLY
-x = x.out('NEXT').next();
-x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-toDelete.push(x);
-
-x = x.out('NEXT').next();
-g.removeEdge(x.inE('NEXT').next());
-g.addEdge(it, x, 'NEXT');
-
-";
-            unset($actions['toLambdaUse']);
         }
 
         if (isset($actions['to_ppp'])) {
@@ -1098,24 +1018,22 @@ g.addEdge(cc, f, 'NEXT');
 
 a3 = a2.out('NEXT').next();
 
-toBlockSequence = g.addVertex(null, [code:';', fullcode:'{ /**/ }', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, bracket:true, block:true]);
+toBlockSequence = g.addVertex(null, [code:';', fullcode:'{ /**/ }', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 
 a1.bothE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(toBlockSequence, a1, 'ELEMENT');
 a1.setProperty('rank', 0);
 if (a1.atom == 'Sequence') {
-    a1.block = true;
+    g.idx('atoms').put('atom', 'Sequence', a1);
+    a1.block    = true;
+    a1.bracket  = true;
     a1.fullcode = '{ /**/ }';
 }
 
-semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line]);
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
-
 g.addEdge(b1, toBlockSequence, 'NEXT');
-g.addEdge(toBlockSequence, semicolon, 'NEXT');
-g.addEdge(semicolon, a3, 'NEXT');
+g.addEdge(toBlockSequence, a3, 'NEXT');
 
-it.bothE('NEXT').each{ g.removeEdge(it); }
+it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
 a2.bothE('NEXT').each{ g.removeEdge(it); }
 
 toDelete.push(it);

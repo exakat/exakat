@@ -113,18 +113,23 @@ class Project implements Tasks {
         shell_exec('php '.$this->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
         $this->logTime('Loading');
+        if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/load.final.log')) {
+            return false;
+        }
 
         $res = shell_exec('php '.$this->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
         display("Build root\n");
         $this->logTime('Build_root');
-
-        $res = shell_exec('php '.$this->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
-        if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
-            file_put_contents($config->projects_root.'/log/tokenizer_error.log', $res);
-            die();
+        if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/build_root.final.log')) {
+            return false;
         }
 
+        $res = shell_exec('php '.$this->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         $this->logTime('Tokenizer');
+        if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log')) {
+            return false;
+        }
+        
         display("Project tokenized\n");
 
         $thread->run('php '.$this->executable.' magicnumber -p '.$project);
@@ -145,6 +150,9 @@ class Project implements Tasks {
             shell_exec('php '.$this->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
 mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
             display("Analyzing $theme\n");
+            if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log')) {
+                return false;
+            }
         }
 
         display("Project analyzed\n");
@@ -166,9 +174,15 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
                                 );
                 $config = \Config::factory($args);
             
-                $report = new Report();
-                $report->run($config);
-                unset($report);
+                try {
+                    $report = new Report();
+                    $report->run($config);
+                    unset($report);
+                } catch (\Exception $e) {
+                    print "Error while building $reportName in $format \n";
+                    print $e->getMessage();
+                    die();
+                }
             }
         }
         \Config::factory($oldConfig);
@@ -203,6 +217,40 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
     }
+
+    protected function checkFinalLog($log) {
+        $logRes = file_get_contents($log);
+        if (preg_match('#Exception :  => PermGen space#is', $logRes)) {
+            print "Neo4j hadn't sufficient memory. Please, increase it by changing ./neoj/config/neo4j-wrapper.conf, and adding 'wrapper.java.additional=-XX:MaxPermSize=512m' or changing 512 to more.\n Aborting analyze\n";
+            return false;
+        }
+
+        if (preg_match('#\[message\] => PermGen space#is', $logRes)) {
+            print "Neo4j hadn't sufficient memory. Please, increase it by changing ./neoj/config/neo4j-wrapper.conf, and adding 'wrapper.java.additional=-XX:MaxPermSize=512m' or changing 512 to more.\n Aborting analyze\n";
+            return false;
+        }
+
+        if (preg_match('#Exception : Can\'t open connection to http://#is', $logRes)) {
+            print "Neo4j can't be reached. It may have stopped working, or is stuck in a long transaction. Either way, it should be killed (killall) and restarted. Try again.\n Aborting analyze\n";
+            return false;
+        }
+
+        if (preg_match('#Exception :  => Cannot invoke method toLowerCase\(\) on null object#is', $logRes)) {
+            print "An error happened while processing the code (toLowerCase()). Please, send the log folder to exakat@gmail.com for analyzis.\n Aborting analyze\n";
+            return false;
+        }
+
+        if (preg_match('#Exception :  => Cannot invoke method plus\(\) on null object#is', $logRes)) {
+            print "An error happened while processing the code (plus()). Please, send the log folder to exakat@gmail.com for analyzis.\n Aborting analyze\n";
+            return false;
+        }
+
+//Exception : Unable to retrieve server info [500]:
+        
+        // checked it all. All is fine.
+        return true;
+    }
+
 }
 
 ?>

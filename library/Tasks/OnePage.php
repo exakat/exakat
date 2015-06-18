@@ -49,7 +49,7 @@ class OnePage implements Tasks {
         // todo : check that there is indeed this project or create it.
         
         copy($config->filename, $config->projects_root.'/projects/'.$project.'/code/onepage.php');
-        $this->reports['OnePage']['Json'] = md5_file($config->filename);
+        $this->reports['OnePage']['Json'] = 'onepage';
         
         $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
         $this->logTime('Start');

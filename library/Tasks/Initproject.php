@@ -98,53 +98,64 @@ INI;
         shell_exec('chmod -R g+w '.$config->projects_root.'/projects/'.$project);
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
-            if ($repo_url === '' || $repo_url === false) {
-                display( "Installing empty code\n");
-                mkdir($config->projects_root.'/projects/'.$project.'/code', 0777);
-                return null;
-            } elseif (strpos($repo_url, 'bitbucket.org') !== false) {
-                display( "Installing with git on bitbucket\n");
-                print shell_exec("cd {$config->projects_root}/projects/$project; hg clone $repo_url code");
-            } elseif (strpos($repo_url, '.googlecode.com/svn/') !== false) {
-                display( "Installing with svn on googlecode\n");
-                print shell_exec("cd {$config->projects_root}/projects/$project; svn checkout $repo_url code");
-            } elseif (strpos($repo_url, 'svn.code.sf.net') !== false) {
-                display( "Installing with svn on sourceforge\n");
-                print shell_exec("cd {$config->projects_root}/projects/$project; svn checkout $repo_url code");
-            } elseif (preg_match('#^[a-z0-9\-]+/[a-z0-9\-]+$#', $repo_url)) {
-                display( "Installing with composer\n");
-                // composer install
-                $composer = new stdClass();
-                $composer->require = new stdClass();
-                $composer->require->$repo_url = 'dev-master';
-                $json = json_encode($composer);
-                file_put_contents($config->projects_root.'projects/'.$project.'/composer.json', $json);
-                print shell_exec("cd {$config->projects_root}/projects/$project; composer install; mv vendor code");
-            } elseif (strpos($repo_url, '.zip') !== false) {
-                display( "Installing with URL and zip\n");
-                $file = basename($repo_url);
-                $file_noext = str_replace('.zip', '', $file);
-                print shell_exec("cd {$config->projects_root}/projects/$project; wget $repo_url; unzip -qq $file; mv $file_noext code; rm $file");
-            } elseif (strpos($repo_url, '.tbz') !== false || strpos($repo_url, '.tar.bz2') !== false) {
-                display( "Installing with URL and tar.bz2\n");
-                $file = basename($repo_url);
-                $file_noext = str_replace('.tbz', '', $file);
-                $file_noext = str_replace('.tar.bz2', '', $file);
-                print shell_exec("cd {$config->projects_root}/projects/$project; wget $repo_url; mkdir code; tar -jxf $file -C code; rm $file");
-            } elseif (strpos($repo_url, '.tgz') !== false || strpos($repo_url, '.tar.gz') !== false) {
-                display( "Installing with URL and tar.gz\n");
-                $file = basename($repo_url);
-                $file_noext = str_replace('.tgz', '', $file);
-                $file_noext = str_replace('.tar.gz', '', $file);
-                print shell_exec("cd {$config->projects_root}/projects/$project; wget $repo_url; mkdir code; tar -zxf $file -C code; rm $file");
-        // xz etc.
-            } else {
-                display( "Installing with git\n");
-                print shell_exec("cd {$config->projects_root}/projects/$project; git clone $repo_url code");
-            }
+            switch (true) {
+                // Empty initialization
+                case ($repo_url === '' || $repo_url === false) : 
+                    display('Empty initialization');
+                    break 1;
+                
+                // Git 
+                case ($config->git === true) : 
+                    display('Git initialization');
+                    print 'cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repo_url.' code'."\n";
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repo_url.' code');
+                    break 1;
 
-            if (!file_exists("{$config->projects_root}/projects/$project/code")) {
-                display( "Error : code was not cloned\n");
+                // SVN 
+                case ($config->svn === true) : 
+                    display('SVN initialization');
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repo_url).' code');
+                    break 1;
+
+                // HG 
+                case ($config->hg === true) : 
+                    display('Mercurial initialization');
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repo_url).' code');
+                    break 1;
+
+                // Tbz archive 
+                case ($config->tbz === true) : 
+                    display('Initialization from tar.bz2 archive');
+                    print shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tbz2 '.escapeshellarg($repo_url).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xjf archive.tbz2 -C code; rm -rf archive.tbz2');
+                    break 1;
+
+                // tgz archive 
+                case ($config->tgz === true) : 
+                    display('Initialization from tar.gz archive');
+                    shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tgz '.escapeshellarg($repo_url).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xzf archive.tgz -C code; rm -rf archive.tgz');
+                    break 1;
+
+                // tgz archive 
+                case ($config->zip === true) : 
+                    display('Initialization from zip archive');
+                    shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.zip '.escapeshellarg($repo_url).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; unzip archive.zip -d code');
+                    break 1;
+
+                // composer archive 
+                case ($config->composer === true) : 
+                    display('Initialization with composer');
+
+                    // composer install
+                    $composer = new \stdClass();
+                    $composer->require = new \stdClass();
+                    $composer->require->$repo_url = 'dev-master';
+                    $json = json_encode($composer);
+                    file_put_contents($config->projects_root.'/projects/'.$project.'/composer.json', $json);
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; composer -q install; mv vendor code');
+                    break 1;
+            
+                default : 
+                    print "No Initialization\n";
             }
         } elseif (file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             display( "Code folder is already there. Leaving it intact.\n");

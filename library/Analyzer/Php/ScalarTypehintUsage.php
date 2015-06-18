@@ -21,14 +21,16 @@
 */
 
 
-namespace Analyzer\Arrays;
+namespace Analyzer\Php;
 
 use Analyzer;
 
-class ArrayNSUsage extends Analyzer\Analyzer {
+class ScalarTypehintUsage extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->is('short_syntax', true);
+        $this->atomIs('Typehint')
+             ->outIs('CLASS')
+             ->fullnspath(array('\\int', '\\float', '\\bool', '\\string'))
+             ->back('first');
         $this->prepareQuery();
     }
 }

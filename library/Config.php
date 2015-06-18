@@ -187,6 +187,15 @@ class Config {
                                  '-table'     => array('table',          false),
                                  '-text'      => array('text',           false),
                                  '-o'         => array('output',         false),
+
+                                 '-git'       => array('git',            true),
+                                 '-svn'       => array('svn',            false),
+                                 '-hg'        => array('hg',             false),
+                                 '-composer'  => array('composer',       false),
+                                 '-tgz'       => array('tgz',            false),
+                                 '-tbz'       => array('tbz',            false),
+                                 '-zip'       => array('zip',            false),
+
                                  );
 
         foreach($optionsBoolean as $key => $config) {
@@ -198,7 +207,15 @@ class Config {
                 $this->commandline[$config[0]] = $config[1];
             }
         }
-                                 
+        
+        // git is default, so it should be unset if another is set
+        $this->commandline['git'] = (boolean) (true ^ ($this->commandline['svn']      || 
+                                              $this->commandline['hg']       ||
+                                              $this->commandline['composer'] ||
+                                              $this->commandline['tgz']      ||
+                                              $this->commandline['tbz']      ||
+                                              $this->commandline['zip']        ));
+
         $optionsValue   = array('-f'            => array('filename',    null),
                                 '-d'            => array('dirname',     null),
                                 '-p'            => array('project',     'default'),

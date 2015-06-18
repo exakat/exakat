@@ -28,7 +28,7 @@ use Everyman\Neo4j\Client,
 
 class Report implements Tasks {
     public function run(\Config $config) {
-        $reportClass = "\\Report\\Report\\".ucfirst(strtolower($config->report));
+        $reportClass = "\\Report\\Report\\".$config->report;
 
         if (!class_exists($reportClass)) {
             die("Report '{$config->report}' doesn't exist.\nAborting\n");

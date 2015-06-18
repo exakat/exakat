@@ -28,7 +28,19 @@ class _Function extends TokenAuto {
     static public $atom = 'Function';
     
     public function _check() {
-        // function x(args) { normal code }
+
+        // function name ( arguments ) 
+        $this->conditions = array(0 => array('token' => _Function::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('token' => 'T_AND')
+        );
+        
+        $this->actions = array('transform'     => array( 1 => 'DROP'),
+                               'property'      => array('reference' => true),
+                               'keepIndexed'   => true);
+        $this->checkAuto();
+
+        // function name ( arguments ) 
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
@@ -36,153 +48,94 @@ class _Function extends TokenAuto {
 //                                             'property' => array('association' => 'Function')
                                              ),
                                   3 => array('atom'  => 'Arguments'),
-                                  4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('token' => 'T_OPEN_CURLY',
-                                             'atom'  => 'none',
-                                             'property' => array('association' => 'Function')
-                                             ),
-                                  6 => array('atom'  => array('Sequence', 'Void')),
-                                  7 => array('token' => 'T_CLOSE_CURLY'),
+                                  4 => array('token' => 'T_CLOSE_PARENTHESIS')
         );
         
         $this->actions = array('transform'     => array( 1 => 'NAME',
                                                          2 => 'DROP',
                                                          3 => 'ARGUMENTS',
-                                                         4 => 'DROP',
-                                                         5 => 'DROP',
-                                                         6 => 'BLOCK',
-                                                         7 => 'DROP'),
-                               'atom'          => 'Function',
+                                                         4 => 'DROP'),
                                'checkTypehint' => 'Function',
-                               'makeBlock'     => 'BLOCK',
                                'cleanIndex'    => true,
-                               'addAlwaysSemicolon'  => 'it');
+                               'keepIndexed'   => true);
         $this->checkAuto();
 
-        // function x(args); for interfaces or abstract
-        $this->conditions = array(0 => array('token' =>  _Function::$operators,
+        // function : returnType 
+        $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
-                                  2 => array('token' => 'T_OPEN_PARENTHESIS',
-//                                             'property' => array('association' => 'Function')
-                                             ),
-                                  3 => array('atom'  => 'Arguments'),
-                                  4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('token' => 'T_SEMICOLON',
-                                             'atom'  => 'none'),
+                                  1 => array('token' => 'T_COLON'),
+                                        // check for association? 
+                                  2 => array('atom' => array('Identifier', 'Nsname'))
         );
         
-        $this->actions = array('transform'     => array( 1 => 'NAME',
-                                                         2 => 'DROP',
-                                                         3 => 'ARGUMENTS',
-                                                         4 => 'DROP',
-                                                         5 => 'DROP'),
-                               'atom'          => 'Function',
-                               'checkTypehint' => 'Function',
-                               'addSemicolon'  => 'it',
-                               'cleanIndex'    => true);
+        $this->actions = array('transform'     => array( 1 => 'DROP',
+                                                         2 => 'RETURN'),
+                               'cleanIndex'    => true,
+                               'keepIndexed'   => true);
         $this->checkAuto();
 
-        // lambda function (no name)
+        // Closures (no names)
         $this->conditions = array(0 => array('token'    =>  _Function::$operators,
                                              'atom'     => 'none'),
                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
 //                                             'property' => array('association' => 'Function')
                                              ),
                                   2 => array('atom'     => 'Arguments'),
-                                  3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('token'    => 'T_OPEN_CURLY',
-                                             'property' => array('association' => 'Function')
-                                             ),
-                                  5 => array('atom'     => array('Sequence', 'Void')),
-                                  6 => array('token'    => 'T_CLOSE_CURLY')
+                                  3 => array('token'    => 'T_CLOSE_PARENTHESIS')
         );
         
         $this->actions = array('toLambda'      => true,
-                               'atom'          => 'Function',
                                'checkTypehint' => 'Function',
                                'cleanIndex'    => true,
-                               'addSemicolon'  => 'it',
-                               'makeBlock'     => 'BLOCK');
+                               'keepIndexed'   => true);
         $this->checkAuto();
 
-        // lambda function &(no name)
-        $this->conditions = array(0 => array('token'    =>  _Function::$operators,
-                                             'atom'     => 'none'),
-                                  1 => array('token'    => 'T_AND'),
-                                  2 => array('token'    => 'T_OPEN_PARENTHESIS',
-//                                             'property' => array('association' => 'Function')
-                                             ),
-                                  3 => array('atom'     => 'Arguments'),
-                                  4 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('token'    => 'T_OPEN_CURLY',
-                                             'property' => array('association' => 'Function')
-                                             ),
-                                  6 => array('atom'     => array('Sequence', 'Void')),
-                                  7 => array('token'    => 'T_CLOSE_CURLY')
-        );
-        
-        $this->actions = array('toLambda'      => true,
-                               'atom'          => 'Function',
-                               'checkTypehint' => 'Function',
-                               'cleanIndex'    => true,
-                               'addSemicolon'  => 'it',
-                               'makeBlock'     => 'BLOCK');
-        $this->checkAuto();
-
-        // lambda function ($x) use ($y)
+        // function use ($y)
         $this->conditions = array(0  => array('token' =>  _Function::$operators,
                                               'atom'  => 'none'),
-                                  1  => array('token' => 'T_OPEN_PARENTHESIS',
-//                                              'property' => array('association' => 'Function')
-                                              ),
-                                  2  => array('atom'  => 'Arguments'),
-                                  3  => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  4  => array('token' => 'T_USE'),
-                                  5  => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  6  => array('atom'  => 'Arguments'),
-                                  7  => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  8  => array('token' => 'T_OPEN_CURLY',
-                                              'property' => array('association' => 'Use')
-                                              ),
-                                  9  => array('atom'  => array('Sequence', 'Void')),
-                                  10 => array('token' => 'T_CLOSE_CURLY'),
-        );
-        
-        $this->actions = array('toLambdaUse'    => true,
-                               'atom'           => 'Function',
-                               'checkTypehint'  => 'Function',
-                               'cleanIndex'     => true,
-                               'addSemicolon'   => 'it',
-                               'makeBlock'      => 'BLOCK');
-        $this->checkAuto();
-
-        // lambda function &($x) use ($y)
-        $this->conditions = array(0  => array('token' =>  _Function::$operators,
-                                              'atom'  => 'none'),
-                                  1  => array('token' => 'T_AND'),
-                                  2  => array('token' => 'T_OPEN_PARENTHESIS',
-//                                              'property' => array('association' => 'Function')
-                                              ),
+                                  1  => array('token' => 'T_USE'),
+                                  2  => array('token' => 'T_OPEN_PARENTHESIS'),
                                   3  => array('atom'  => 'Arguments'),
                                   4  => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5  => array('token' => 'T_USE'),
-                                  6  => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  7  => array('atom'  => 'Arguments'),
-                                  8  => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  9  => array('token' => 'T_OPEN_CURLY',
-                                              'property' => array('association' => 'Use')
-                                              ),
-                                  10 => array('atom'  => array('Sequence', 'Void')),
-                                  11 => array('token' => 'T_CLOSE_CURLY'),
         );
         
-        $this->actions = array('toLambdaUse'    => true,
-                               'atom'           => 'Function',
-                               'checkTypehint'  => 'Function',
-                               'cleanIndex'     => true,
-                               'addSemicolon'   => 'it',
-                               'makeBlock'      => 'BLOCK');
+        $this->actions = array('transform'     => array( 1 => 'DROP',
+                                                         2 => 'DROP',
+                                                         3 => 'USE',
+                                                         4 => 'DROP'),
+                               'cleanIndex'    => true,
+                               'keepIndexed'   => true);
+        $this->checkAuto();
+
+
+        // function x(args) { normal code }
+        $this->conditions = array(0 => array('token' => _Function::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('token' => 'T_OPEN_CURLY',
+                                             'atom'  => 'none',
+//                                             'property' => array('association' => 'Function')
+                                             ),
+                                  2 => array('atom'  => array('Sequence', 'Void')),
+                                  3 => array('token' => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array('transform'     => array( 1 => 'DROP',
+                                                         2 => 'BLOCK',
+                                                         3 => 'DROP'),
+                               'atom'          => 'Function',
+                               'makeBlock'     => 'BLOCK',
+                               'cleanIndex'    => true,
+                               'addSemicolon'  => 'it');
+        $this->checkAuto();
+
+        // function ; (No Body, for interfaces or abstract)
+        $this->conditions = array(0 => array('token' => _Function::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('token' => 'T_SEMICOLON'),
+        );
+        
+        $this->actions = array('atom'          => 'Function',
+                               'cleanIndex'    => true);
         $this->checkAuto();
 
         return false;
@@ -194,18 +147,22 @@ class _Function extends TokenAuto {
 fullcode.setProperty('fullcode', '');
 
 if (fullcode.reference == true) {
-    keyword = 'function &';
+    fullcode.fullcode = 'function &';
 } else {
-    keyword = 'function ';
+    fullcode.fullcode = 'function ';
 }
 // for methods
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
 
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+if (fullcode.out('NAME').any())   { fullcode.fullcode = fullcode.fullcode +           fullcode.out('NAME').next().fullcode; }
+                                    fullcode.fullcode = fullcode.fullcode + '(' +     fullcode.out('ARGUMENTS').next().fullcode + ')';
+if (fullcode.out('USE').any())    { fullcode.fullcode = fullcode.fullcode + ' use ('+ fullcode.out('USE').next().fullcode + ')';       }
+if (fullcode.out('RETURN').any()) { fullcode.fullcode = fullcode.fullcode + ' : ' +   fullcode.out('RETURN').next().fullcode; }
+if (fullcode.out('BLOCK').any())  { fullcode.fullcode = fullcode.fullcode + ' ' +     fullcode.out('BLOCK').next().fullcode; }
 
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
-
-fullcode.filter{it.out("USE").any()}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") use (" + fullcode.out("USE").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+//fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
+//fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+//fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+//fullcode.filter{it.out("USE").any()}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") use (" + fullcode.out("USE").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
 
 // for properties
 if (fullcode.out('DEFINE').any()) {
