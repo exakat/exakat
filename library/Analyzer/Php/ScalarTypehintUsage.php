@@ -29,7 +29,7 @@ class ScalarTypehintUsage extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Typehint')
              ->outIs('CLASS')
-             ->fullnspath(array('\\int', '\\float', '\\boolean', '\\string'))
+             ->fullnspath(array('\\int', '\\float', '\\bool', '\\string'))
              ->back('first');
         $this->prepareQuery();
     }
