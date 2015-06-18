@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('function withReturnType($a) : stdclass { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('function withoutReturnType($a) { /**/ } ');
 
 ?>

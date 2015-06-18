@@ -36,7 +36,7 @@ class _Function extends TokenAuto {
         );
         
         $this->actions = array('transform'     => array( 1 => 'DROP'),
-                               'property'      => array('reference', true),
+                               'property'      => array('reference' => true),
                                'keepIndexed'   => true);
         $this->checkAuto();
 
@@ -147,18 +147,22 @@ class _Function extends TokenAuto {
 fullcode.setProperty('fullcode', '');
 
 if (fullcode.reference == true) {
-    keyword = 'function &';
+    fullcode.fullcode = 'function &';
 } else {
-    keyword = 'function ';
+    fullcode.fullcode = 'function ';
 }
 // for methods
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
 
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+if (fullcode.out('NAME').any())   { fullcode.fullcode = fullcode.fullcode +           fullcode.out('NAME').next().fullcode; }
+                                    fullcode.fullcode = fullcode.fullcode + '(' +     fullcode.out('ARGUMENTS').next().fullcode + ')';
+if (fullcode.out('USE').any())    { fullcode.fullcode = fullcode.fullcode + ' use ('+ fullcode.out('USE').next().fullcode + ')';       }
+if (fullcode.out('RETURN').any()) { fullcode.fullcode = fullcode.fullcode + ' : ' +   fullcode.out('RETURN').next().fullcode; }
+if (fullcode.out('BLOCK').any())  { fullcode.fullcode = fullcode.fullcode + ' ' +     fullcode.out('BLOCK').next().fullcode; }
 
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
-
-fullcode.filter{it.out("USE").any()}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") use (" + fullcode.out("USE").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+//fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
+//fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+//fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
+//fullcode.filter{it.out("USE").any()}.each{ fullcode.fullcode = keyword + "(" + fullcode.out("ARGUMENTS").next().fullcode + ") use (" + fullcode.out("USE").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
 
 // for properties
 if (fullcode.out('DEFINE').any()) {
