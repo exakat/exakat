@@ -8,10 +8,10 @@ Label : CODE
       void
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          Stdclass
         Label : VARIABLE
           $a
+        Label : CLASS
+          Stdclass
     Label : NAME
       x
     Label : BLOCK

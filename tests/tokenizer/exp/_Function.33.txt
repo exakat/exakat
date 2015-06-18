@@ -8,22 +8,22 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          CLASSE
         Label : VARIABLE
           $c
-      Label : ARGUMENT
-        Typehint
         Label : CLASS
           CLASSE
+      Label : ARGUMENT
+        Typehint
         Label : VARIABLE
           $b
-      Label : ARGUMENT
-        Typehint
         Label : CLASS
           CLASSE
+      Label : ARGUMENT
+        Typehint
         Label : VARIABLE
           $a
+        Label : CLASS
+          CLASSE
     Label : NAME
       b
     Label : BLOCK

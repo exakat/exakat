@@ -8,24 +8,24 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         &
-        Label : CLASS
-          StdClass
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $b
-      Label : ARGUMENT
-        &
         Label : CLASS
           StdClass
+      Label : ARGUMENT
+        &
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $x
+        Label : CLASS
+          StdClass
     Label : NAME
       a
     Label : BLOCK

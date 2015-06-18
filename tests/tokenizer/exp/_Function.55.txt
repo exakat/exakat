@@ -130,8 +130,28 @@ Label : CODE
       void
       Label : ARGUMENT
         $a
+    Label : NAME
+      
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
     Label : RETURN
       Stdclass
+    Label : NAME
+      
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
     Label : NAME
       
     Label : BLOCK
@@ -146,28 +166,8 @@ Label : CODE
       void
       Label : ARGUMENT
         $a
-    Label : NAME
-      
-    Label : BLOCK
-      void
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
     Label : RETURN
       Stdclass
-    Label : NAME
-      
-    Label : BLOCK
-      void
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
     Label : NAME
       
     Label : BLOCK

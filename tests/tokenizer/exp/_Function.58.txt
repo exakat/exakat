@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ?
+        Label : CONDITION
+          (
+          Label : CODE
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'D'
+        Label : THEN
+          'D'
+        Label : ELSE
+          die
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'F'

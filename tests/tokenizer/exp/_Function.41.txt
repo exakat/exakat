@@ -10,10 +10,10 @@ Label : CODE
         Arguments
         Label : ARGUMENT
           Typehint
-          Label : CLASS
-            Stdclass
           Label : VARIABLE
             $e
+          Label : CLASS
+            Stdclass
         Label : ARGUMENT
           $d
         Label : ARGUMENT

@@ -8,16 +8,16 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         &
-        Label : CLASS
-          StdClass
         Label : VARIABLE
           $b
-      Label : ARGUMENT
-        &
         Label : CLASS
           StdClass
+      Label : ARGUMENT
+        &
         Label : VARIABLE
           $x
+        Label : CLASS
+          StdClass
     Label : NAME
       a
     Label : BLOCK
