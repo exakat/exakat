@@ -104,8 +104,8 @@ DELETE n,r';
             shell_exec('cd '.$this->config->projects_root.'/neo4j;sh ./bin/neo4j start');
 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
-                curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
+                curl_setopt($ch, CURLOPT_URL, 'http://'.$this->config->neo4j_host);
+                curl_setopt($ch, CURLOPT_PORT, $this->config->neo4j_port);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 $res = curl_exec($ch);
