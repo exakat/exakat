@@ -1092,7 +1092,7 @@ Exporter uniquement les définitions des règles (référence documentaire)
 Make themas configurable in config.ini
 
 Move support for spip out of tasks
-Detect early and remove non-composer dependencies (pclzip, krumo, jpgraph, fpdf...)
+Detect early and remove non-composer dependencies (pclzip, krumo, jpgraph, fpdf, phpexcel...)
 
 add other composer classes (silex, ..) Automate the process
 definitions only
@@ -1226,8 +1226,6 @@ support de call_method()
 
 Handling PHP7 incompatibilities, such as : $foo()['bar'](); Do need a directive (can't have them both. Can detect them?)
 
-Constructors returning null rather than throwing an exception (https://wiki.php.net/rfc/internal_constructor_behaviour)
-They should be checked with === null after NEW
 no-raw-exceptions
 no-curly-array
 
@@ -1269,7 +1267,7 @@ group use
 generator return value
 delegation
 scalar typehint
-return typehint
+
 avoid session fixation : ext/session must use session_regenerate_id(true); somewhere (
 
 List differences between constants, variables, classes (const, method, property) interfaces and trait between versions (exclude the one from extensions, make a standard distribution).
@@ -1280,15 +1278,6 @@ check the to_var (index with _) and remove them.
 
 uniqid : not for crypto either.
 
-Underived abstract class is useless? 
-
-$c is not modified!
-            foreach($contents as $id => $c) {
-                if (get_class($c) != "Report\\Template\\Section") { 
-                    unset($contents[$id]); 
-                } 
-            }
-
 foo() && bar() ; // that is not useless, as the function call may change some state.
                  // It means we need to mark the function as context marking or not. 
 
@@ -1296,3 +1285,9 @@ MacBookPro:analyze famille$ php exakat project -p -v concrete5
 PHP Notice:  Undefined offset: 3 in /Users/famille/Desktop/analyze/library/Config.php on line 219
 
 make Task reentrant (one may re-run a task even if it was already run and interrupted).
+
+Collect a list of classes by project, 
+
+Make 'project' different than the one in production
+
+.final.log should be empty always (or may be have a 'Done' result).
