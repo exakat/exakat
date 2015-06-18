@@ -49,8 +49,7 @@ class Functioncall extends TokenAuto {
         $this->checkAuto();
         
         // functioncall(with arguments or void) that will be in a sequence
-        $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
-                                    -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
+        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
                                      0 => array('token' => Functioncall::$operatorsWithoutEcho),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),
@@ -68,8 +67,7 @@ class Functioncall extends TokenAuto {
         $this->checkAuto();
 
         // functioncall special case for Echo
-        $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
-                                    -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
+        $this->conditions = array(  -1 => array('filterOut' => 'T_NS_SEPARATOR'),
                                      0 => array('token' => array('T_ECHO', 'T_PRINT')),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),

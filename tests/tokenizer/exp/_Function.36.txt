@@ -6,12 +6,12 @@ Label : CODE
     =
     Label : RIGHT
       function
-      Label : NAME
-        
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $b
+      Label : NAME
+        
       Label : BLOCK
         ;
         Label : ELEMENT

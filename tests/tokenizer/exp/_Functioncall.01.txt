@@ -5,14 +5,14 @@ Label : CODE
     E
   Label : ELEMENT
     foreach
+    Label : BLOCK
+      F
     Label : VALUE
       =>
       Label : KEY
         $c
       Label : VALUE
         $d
-    Label : BLOCK
-      F
     Label : SOURCE
       $b
   Label : ELEMENT

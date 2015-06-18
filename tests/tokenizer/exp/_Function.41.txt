@@ -6,22 +6,22 @@ Label : CODE
     =
     Label : RIGHT
       function
-      Label : NAME
-        
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           Typehint
-          Label : VARIABLE
-            $e
           Label : CLASS
             Stdclass
+          Label : VARIABLE
+            $e
         Label : ARGUMENT
           $d
         Label : ARGUMENT
           $c
         Label : ARGUMENT
           $b
+      Label : NAME
+        
       Label : BLOCK
         ;
         Label : ELEMENT

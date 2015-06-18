@@ -8,12 +8,12 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          G
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $a
+        Label : NAME
+          G
         Label : BLOCK
           ;
           Label : ELEMENT

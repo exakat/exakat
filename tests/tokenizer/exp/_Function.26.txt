@@ -4,16 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      test
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $x
         Label : CLASS
           array
+        Label : VARIABLE
+          $x
+    Label : NAME
+      test
     Label : BLOCK
       ;
       Label : ELEMENT

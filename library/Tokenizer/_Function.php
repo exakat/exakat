@@ -40,7 +40,6 @@ class _Function extends TokenAuto {
                                'keepIndexed'   => true);
         $this->checkAuto();
 
-
         // function name ( arguments ) 
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
@@ -126,7 +125,7 @@ class _Function extends TokenAuto {
                                'atom'          => 'Function',
                                'makeBlock'     => 'BLOCK',
                                'cleanIndex'    => true,
-                               'addAlwaysSemicolon'  => 'it');
+                               'addSemicolon'  => 'it');
         $this->checkAuto();
 
         // function ; (No Body, for interfaces or abstract)
@@ -135,10 +134,8 @@ class _Function extends TokenAuto {
                                   1 => array('token' => 'T_SEMICOLON'),
         );
         
-        $this->actions = array('transform'     => array( 1 => 'DROP'),
-                               'atom'          => 'Function',
-                               'cleanIndex'    => true,
-                               'addAlwaysSemicolon'  => 'it');
+        $this->actions = array('atom'          => 'Function',
+                               'cleanIndex'    => true);
         $this->checkAuto();
 
         return false;
