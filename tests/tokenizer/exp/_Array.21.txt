@@ -10,10 +10,10 @@ Label : CODE
         [
         Label : VARIABLE
           ->
-          Label : PROPERTY
-            x
           Label : OBJECT
             $a
+          Label : PROPERTY
+            x
         Label : INDEX
           1
   Label : ELEMENT
@@ -42,8 +42,6 @@ Label : CODE
           1
   Label : ELEMENT
     const
-    Label : NAME
-      x
     Label : VALUE
       array
       Label : ARGUMENTS
@@ -54,3 +52,5 @@ Label : CODE
           3
         Label : ARGUMENT
           2
+    Label : NAME
+      x

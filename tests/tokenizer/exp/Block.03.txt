@@ -3,6 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $e
+  Label : ELEMENT
     if
     Label : CONDITION
       !
@@ -24,12 +30,6 @@ Label : CODE
             $g
           Label : INDEX
             'h'
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $e
   Label : ELEMENT
     if
     Label : CONDITION

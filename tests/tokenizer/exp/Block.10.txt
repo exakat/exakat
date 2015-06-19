@@ -1,29 +1,13 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    $a
-  Label : THEN
-    ;
-    Label : ELEMENT
-      
-    Label : ELEMENT
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
       ;
-      Label : ELEMENT
-        ->
-        Label : OBJECT
-          ::
-          Label : CLASS
-            B
-          Label : PROPERTY
-            $b
-        Label : METHOD
-          K
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
       Label : ELEMENT
         ;
         Label : ELEMENT
@@ -32,10 +16,10 @@ Label : CODE
             ->
             Label : OBJECT
               ::
-              Label : CLASS
-                B
               Label : PROPERTY
                 $b
+              Label : CLASS
+                B
             Label : METHOD
               K
               Label : ARGUMENTS
@@ -43,86 +27,102 @@ Label : CODE
                 Label : ARGUMENT
                   void
           Label : ELEMENT
-            ->
-            Label : OBJECT
-              ::
-              Label : CLASS
-                B
-              Label : PROPERTY
-                $b
-            Label : METHOD
-              I
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $d
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              ::
-              Label : CLASS
-                B
-              Label : PROPERTY
-                $b
-            Label : METHOD
-              C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  N
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              ::
-              Label : CLASS
-                B
-              Label : PROPERTY
-                $b
-            Label : METHOD
-              K
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
+            ;
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                ::
+                Label : PROPERTY
+                  $b
+                Label : CLASS
+                  B
+              Label : METHOD
+                K
+                Label : ARGUMENTS
                   void
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              ::
-              Label : CLASS
-                B
-              Label : PROPERTY
-                $b
-            Label : METHOD
-              I
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $c
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              ::
-              Label : CLASS
-                B
-              Label : PROPERTY
-                $b
-            Label : METHOD
-              C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  G
-    Label : ELEMENT
-      ->
-      Label : OBJECT
-        ::
-        Label : CLASS
-          B
-        Label : PROPERTY
-          $b
-      Label : METHOD
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            D
+                  Label : ARGUMENT
+                    void
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                ::
+                Label : PROPERTY
+                  $b
+                Label : CLASS
+                  B
+              Label : METHOD
+                I
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $d
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                ::
+                Label : PROPERTY
+                  $b
+                Label : CLASS
+                  B
+              Label : METHOD
+                C
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    N
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                ::
+                Label : PROPERTY
+                  $b
+                Label : CLASS
+                  B
+              Label : METHOD
+                K
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                ::
+                Label : PROPERTY
+                  $b
+                Label : CLASS
+                  B
+              Label : METHOD
+                I
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $c
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                ::
+                Label : PROPERTY
+                  $b
+                Label : CLASS
+                  B
+              Label : METHOD
+                C
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    G
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            ::
+            Label : PROPERTY
+              $b
+            Label : CLASS
+              B
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                D

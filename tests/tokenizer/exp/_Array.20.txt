@@ -9,32 +9,6 @@ Label : CODE
       Label : ARGUMENT
         [
         Label : VARIABLE
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              ::
-              Label : CLASS
-                x
-              Label : CONSTANT
-                A
-            Label : INDEX
-              2
-          Label : INDEX
-            3
-        Label : INDEX
-          +
-          Label : RIGHT
-            7
-          Label : LEFT
-            $x
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        [
-        Label : VARIABLE
           ::
           Label : CLASS
             x
@@ -97,6 +71,32 @@ Label : CODE
           Label : RIGHT
             7
           Label : LEFT
+            $x
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              ::
+              Label : CLASS
+                x
+              Label : CONSTANT
+                A
+            Label : INDEX
+              2
+          Label : INDEX
+            3
+        Label : INDEX
+          +
+          Label : RIGHT
+            7
+          Label : LEFT
             null
   Label : ELEMENT
     class
@@ -106,8 +106,6 @@ Label : CODE
       ;
       Label : ELEMENT
         const
-        Label : NAME
-          A
         Label : VALUE
           array
           Label : ARGUMENTS
@@ -120,3 +118,5 @@ Label : CODE
                 3
             Label : ARGUMENT
               1
+        Label : NAME
+          A

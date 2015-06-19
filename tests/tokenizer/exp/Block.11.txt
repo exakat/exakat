@@ -26,25 +26,17 @@ Label : CODE
             $e
         Label : LEFT
           $d
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    ;
     Label : ELEMENT
       ;
       Label : ELEMENT
         ;
         Label : ELEMENT
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              1
-            Label : THEN
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $a
+          if
+          Label : CONDITION
+            1
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a

@@ -27,31 +27,29 @@ Label : CODE
     Label : ELSE
       ;
       Label : ELEMENT
-        
-      Label : ELEMENT
         ;
         Label : ELEMENT
-          +=
-          Label : RIGHT
-            ++
-            Label : POSTPLUSPLUS
-              $e
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $f
-            Label : INDEX
-              2
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            ++
-            Label : POSTPLUSPLUS
-              $e
-          Label : LEFT
-            $d
-      Label : ELEMENT
-        ;
+          ;
+          Label : ELEMENT
+            +=
+            Label : RIGHT
+              ++
+              Label : POSTPLUSPLUS
+                $e
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                2
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ++
+              Label : POSTPLUSPLUS
+                $e
+            Label : LEFT
+              $d
         Label : ELEMENT
           ;
           Label : ELEMENT

@@ -2,16 +2,6 @@
 
 Label : CODE
   while
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        ->
-        Label : PROPERTY
-          B
-        Label : OBJECT
-          $this
   Label : CONDITION
     &&
     Label : RIGHT
@@ -26,29 +16,39 @@ Label : CODE
             {
             Label : VARIABLE
               ->
+              Label : OBJECT
+                $this
               Label : PROPERTY
                 E
-              Label : OBJECT
-                $this
             Label : INDEX
               ->
-              Label : PROPERTY
-                B
               Label : OBJECT
                 $this
+              Label : PROPERTY
+                B
           Label : ARGUMENT
             $a
     Label : LEFT
       <
       Label : RIGHT
         ->
+        Label : OBJECT
+          $this
         Label : PROPERTY
           C
-        Label : OBJECT
-          $this
       Label : LEFT
         ->
-        Label : PROPERTY
-          B
         Label : OBJECT
           $this
+        Label : PROPERTY
+          B
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        ->
+        Label : OBJECT
+          $this
+        Label : PROPERTY
+          B
