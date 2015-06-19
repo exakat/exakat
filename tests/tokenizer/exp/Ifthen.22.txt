@@ -11,8 +11,6 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        
-      Label : ELEMENT
         ;
         Label : ELEMENT
           ;
@@ -20,8 +18,6 @@ Label : CODE
             $y
     Label : ELSE
       ;
-      Label : ELEMENT
-        
       Label : ELEMENT
         ;
         Label : ELEMENT

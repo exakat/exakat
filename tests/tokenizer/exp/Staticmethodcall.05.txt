@@ -12,12 +12,12 @@ Label : CODE
         static
         Label : VALUE
           Void
+        Label : STATIC
+          static
         Label : DEFINE
           $g
         Label : PROTECTED
           protected
-        Label : STATIC
-          static
   Label : ELEMENT
     ::
     Label : CLASS

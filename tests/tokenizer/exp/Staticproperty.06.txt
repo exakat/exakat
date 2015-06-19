@@ -4,6 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      ->
+      Label : OBJECT
+        ::
+        Label : PROPERTY
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            $b
+        Label : CLASS
+          self
+      Label : PROPERTY
+        d
     Label : RIGHT
       new
       Label : NEW
@@ -14,17 +28,3 @@ Label : CODE
             void
         Label : NAME
           $e
-    Label : LEFT
-      ->
-      Label : OBJECT
-        [
-        Label : VARIABLE
-          ::
-          Label : CLASS
-            self
-          Label : PROPERTY
-            $a
-        Label : INDEX
-          $b
-      Label : PROPERTY
-        d

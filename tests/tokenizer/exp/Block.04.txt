@@ -10,9 +10,9 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          $c
         Label : LEFT
           $b
+        Label : RIGHT
+          $c
       Label : ELEMENT
         void

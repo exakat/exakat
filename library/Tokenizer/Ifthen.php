@@ -209,13 +209,13 @@ class Ifthen extends TokenAuto {
         // Make a block from sequence after a if/elseif (alternative syntax)
         $this->conditions = array(  0 => array('token'     => self::$operators,
                                                'atom'      => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                               'property' => array('association' => 'If')),
-                                    2 => array('atom'  => 'yes'),
-                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    4 => array('token'     => array('T_COLON', 'T_SEMICOLON')),
-                                    5 => array('notAtom'   => 'Sequence',
-                                               'atom'      => 'yes'),
+                                    1 => array('token'     => 'T_OPEN_PARENTHESIS',
+                                               'property'  => array('association' => 'If')),
+                                    2 => array('atom'      => 'yes'),
+                                    3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
+                                    4 => array('token'     => 'T_COLON',
+                                              'property'   => array('association' => 'Ifthen')),
+                                    5 => array('atom'      => 'yes'),
                                     6 => array('token'     => 'T_SEMICOLON',
                                                'atom'      => 'none'),
                                     7 => array('token'     => array('T_ELSEIF', 'T_ENDIF', 'T_ELSE'))
@@ -227,16 +227,16 @@ class Ifthen extends TokenAuto {
         $this->checkAuto();
 
     // @doc if ( ) : endif
-        $this->conditions = array( 0 => array('token' => self::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
+        $this->conditions = array( 0 => array('token'    => self::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
                                               'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_COLON',
+                                   2 => array('atom'     => 'yes'),
+                                   3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                   4 => array('token'    => 'T_COLON',
                                               'property' => array('association' => 'Ifthen')),
-                                   5 => array('atom'  => 'yes'),
-                                   6 => array('token' => 'T_ENDIF'),
+                                   5 => array('atom'     => 'yes'),
+                                   6 => array('token'    => 'T_ENDIF'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',

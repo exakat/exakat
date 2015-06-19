@@ -18,6 +18,8 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+            Label : STATIC
+              static
             Label : NAME
               x
             Label : BLOCK
@@ -52,10 +54,26 @@ Label : CODE
                       self
                     Label : CONSTANT
                       class
-            Label : STATIC
-              static
         Label : EXTENDS
           ParentClass
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              "\n"
+            Label : CONCAT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  ClassName1
+                Label : SUBNAME
+                  NS1
+              Label : CONSTANT
+                class
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -99,24 +117,6 @@ Label : CODE
             Label : CONCAT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  ClassName1
-                Label : SUBNAME
-                  NS1
-              Label : CONSTANT
-                class
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              "\n"
-            Label : CONCAT
-              ::
-              Label : CLASS
                 X
               Label : CONSTANT
                 class
@@ -138,12 +138,12 @@ Label : CODE
         use
         Label : USE
           \
+          Label : AS
+            X
           Label : SUBNAME
             ClassName1
           Label : SUBNAME
             NS1
-          Label : AS
-            X
     Label : NAMESPACE
       NS
   Label : ELEMENT

@@ -6,8 +6,6 @@ Label : CODE
     if
     Label : CONDITION
       =
-      Label : RIGHT
-        D
       Label : LEFT
         $
         Label : NAME
@@ -24,10 +22,14 @@ Label : CODE
               'B'
           Label : PROPERTY
             C
+      Label : RIGHT
+        D
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           [
           Label : VARIABLE
@@ -38,14 +40,10 @@ Label : CODE
               $b
           Label : INDEX
             'E'
-        Label : LEFT
-          $c
   Label : ELEMENT
     if
     Label : CONDITION
       ==
-      Label : RIGHT
-        D
       Label : LEFT
         $
         Label : NAME
@@ -62,10 +60,14 @@ Label : CODE
               'B'
           Label : PROPERTY
             C
+      Label : RIGHT
+        D
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           [
           Label : VARIABLE
@@ -76,5 +78,3 @@ Label : CODE
               $b
           Label : INDEX
             'E'
-        Label : LEFT
-          $c

@@ -7,29 +7,29 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        [
-        Label : VARIABLE
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
+        ::
+        Label : PROPERTY
+          [
+          Label : VARIABLE
             x
-        Label : INDEX
-          1
+          Label : INDEX
+            1
+        Label : CLASS
+          b
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        [
-        Label : VARIABLE
-          ::
-          Label : CLASS
-            b
-          Label : CONSTANT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          [
+          Label : VARIABLE
             x
-        Label : INDEX
-          1
+          Label : INDEX
+            1
   Label : ELEMENT
     echo
     Label : ARGUMENTS

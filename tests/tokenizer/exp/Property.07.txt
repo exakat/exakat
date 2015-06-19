@@ -1,15 +1,15 @@
 ;
 Label : ELEMENT
-  [
-  Label : VARIABLE
+  ->
+  Label : OBJECT
     ->
     Label : OBJECT
-      ->
-      Label : OBJECT
-        $x
-      Label : PROPERTY
-        a
+      $x
     Label : PROPERTY
+      a
+  Label : PROPERTY
+    [
+    Label : VARIABLE
       b
-  Label : INDEX
-    1
+    Label : INDEX
+      1

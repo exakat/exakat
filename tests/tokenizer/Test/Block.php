@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Block extends Tokenizer {
-    /* 15 methods */
+    /* 16 methods */
 
     public function testBlock01()  { $this->generic_test('Block.01'); }
     public function testBlock02()  { $this->generic_test('Block.02'); }
@@ -24,5 +24,6 @@ class Block extends Tokenizer {
     public function testBlock13()  { $this->generic_test('Block.13'); }
     public function testBlock14()  { $this->generic_test('Block.14'); }
     public function testBlock15()  { $this->generic_test('Block.15'); }
+    public function testBlock16()  { $this->generic_test('Block.16'); }
 }
 ?>

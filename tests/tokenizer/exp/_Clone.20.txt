@@ -1,18 +1,20 @@
 <?php
 
 Label : CODE
-  clone
-  Label : CLONE
-    Concatenation
-    Label : CONCAT
-      "
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          $b
-        Label : CONCAT
-           c 
-        Label : CONCAT
-          $d
-    Label : CONCAT
-      "a"
+  ;
+  Label : ELEMENT
+    clone
+    Label : CLONE
+      Concatenation
+      Label : CONCAT
+        "
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            $b
+          Label : CONCAT
+             c 
+          Label : CONCAT
+            $d
+      Label : CONCAT
+        "a"

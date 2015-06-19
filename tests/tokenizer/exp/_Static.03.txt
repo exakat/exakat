@@ -12,29 +12,29 @@ Label : CODE
         protected
         Label : VALUE
           Void
+        Label : STATIC
+          static
         Label : DEFINE
           $c
         Label : PROTECTED
           protected
-        Label : STATIC
-          static
       Label : ELEMENT
         private
         Label : VALUE
           Void
-        Label : DEFINE
-          $d
         Label : STATIC
           static
+        Label : DEFINE
+          $d
         Label : PRIVATE
           private
       Label : ELEMENT
         public
         Label : VALUE
           Void
+        Label : STATIC
+          static
         Label : DEFINE
           $b
         Label : PUBLIC
           public
-        Label : STATIC
-          static

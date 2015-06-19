@@ -18,6 +18,12 @@ Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'M'
         Label : RIGHT
           ::
           Label : CLASS
@@ -28,12 +34,6 @@ Label : CODE
               void
               Label : ARGUMENT
                 'P'
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'M'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -52,18 +52,18 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            S
         Label : LEFT
           [
           Label : VARIABLE
             $e
           Label : INDEX
             'R'
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $f
+          Label : PROPERTY
+            S
   Label : ELEMENT
     ::
     Label : CLASS
@@ -74,24 +74,30 @@ Label : CODE
         void
         Label : ARGUMENT
           ->
-          Label : METHOD
-            W
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $h
           Label : OBJECT
             ->
+            Label : OBJECT
+              $g
             Label : METHOD
               V
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
-            Label : OBJECT
-              $g
+          Label : METHOD
+            W
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $h
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $b
+      Label : INDEX
+        'F'
     Label : RIGHT
       ::
       Label : CLASS
@@ -102,14 +108,14 @@ Label : CODE
           void
           Label : ARGUMENT
             'I'
+  Label : ELEMENT
+    =
     Label : LEFT
       [
       Label : VARIABLE
-        $b
+        $a
       Label : INDEX
-        'F'
-  Label : ELEMENT
-    =
+        'B'
     Label : RIGHT
       ::
       Label : CLASS
@@ -120,9 +126,3 @@ Label : CODE
           void
           Label : ARGUMENT
             'E'
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'B'

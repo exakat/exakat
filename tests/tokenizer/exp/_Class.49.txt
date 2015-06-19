@@ -14,33 +14,33 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+        Label : STATIC
+          static
         Label : NAME
           c
         Label : BLOCK
           void
-        Label : STATIC
-          static
       Label : ELEMENT
         function
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
+        Label : STATIC
+          static
+        Label : PUBLIC
+          public
         Label : NAME
           b
         Label : BLOCK
           void
-        Label : PUBLIC
-          public
-        Label : STATIC
-          static
       Label : ELEMENT
         public
         Label : VALUE
           Void
+        Label : STATIC
+          static
         Label : DEFINE
           $a
         Label : PUBLIC
           public
-        Label : STATIC
-          static

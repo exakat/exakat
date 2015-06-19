@@ -17,14 +17,14 @@ Label : CODE
             Label : INDEX
               $e
           Label : ARGUMENT
-            [
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $a
-              Label : PROPERTY
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              [
+              Label : VARIABLE
                 $b
-            Label : INDEX
-              $c
+              Label : INDEX
+                $c
     Label : THEN
       void

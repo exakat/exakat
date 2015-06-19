@@ -3,10 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     while
     Label : CONDITION
       <
@@ -19,10 +15,10 @@ Label : CODE
       Label : ELEMENT
         void
   Label : ELEMENT
+    
+  Label : ELEMENT
     ;
     Label : ELEMENT
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
+      ++
+      Label : POSTPLUSPLUS
+        $a

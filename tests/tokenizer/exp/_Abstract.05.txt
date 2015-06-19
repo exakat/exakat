@@ -14,12 +14,12 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+        Label : STATIC
+          static
         Label : NAME
           d
         Label : BLOCK
           void
-        Label : STATIC
-          static
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -36,12 +36,12 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+        Label : PROTECTED
+          protected
         Label : NAME
           b
         Label : BLOCK
           void
-        Label : PROTECTED
-          protected
       Label : ELEMENT
         function
         Label : ARGUMENTS

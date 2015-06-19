@@ -11,10 +11,10 @@ Label : CODE
         {
         Label : VARIABLE
           ::
-          Label : CLASS
-            c
           Label : PROPERTY
             $E
+          Label : CLASS
+            c
         Label : INDEX
           ->
           Label : OBJECT

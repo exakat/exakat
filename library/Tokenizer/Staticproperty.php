@@ -34,7 +34,7 @@ class Staticproperty extends TokenAuto {
                                    -1 => array('atom' => $operands),
                                     0 => array('token' => Staticproperty::$operators),
                                     1 => array('atom' => array('Variable', 'Array', 'Property', )),
-                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS')));
+                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
         
         $this->actions = array('transform'    => array( -1 => 'CLASS',
                                                          1 => 'PROPERTY'),

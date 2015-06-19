@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    $c
-  Label : THEN
-    void
-  Label : ELSE
+  foreach
+  Label : VALUE
+    $b
+  Label : BLOCK
     ;
     Label : ELEMENT
       ;
@@ -15,21 +13,21 @@ Label : CODE
         Label : ELEMENT
           =
           Label : LEFT
-            $i
+            $g
           Label : RIGHT
             ->
             Label : OBJECT
-              $this
+              $c
             Label : METHOD
-              c
+              d
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   ->
                   Label : OBJECT
-                    $d
+                    $e
                   Label : PROPERTY
-                    e
+                    f
       Label : ELEMENT
         ;
         Label : ELEMENT
@@ -48,3 +46,5 @@ Label : CODE
                   'a'
                 Label : VALUE
                   'b'
+  Label : SOURCE
+    $a

@@ -18,9 +18,9 @@ Label : CODE
               $c
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $b
           Label : CLASS
             \
             Label : SUBNAME
               C
-          Label : VARIABLE
-            $b

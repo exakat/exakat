@@ -1,12 +1,14 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    (array)
-    Label : CAST
-      (boolean)
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (array)
       Label : CAST
-        $y
-  Label : LEFT
-    $x
+        (boolean)
+        Label : CAST
+          $y
+    Label : LEFT
+      $x

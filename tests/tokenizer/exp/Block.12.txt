@@ -9,15 +9,15 @@ Label : CODE
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          [
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            [
+            Label : VARIABLE
               B
-          Label : INDEX
-            'C'
+            Label : INDEX
+              'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -32,24 +32,24 @@ Label : CODE
           ;
           Label : ELEMENT
             +=
-            Label : RIGHT
-              ++
-              Label : POSTPLUSPLUS
-                $e
             Label : LEFT
               [
               Label : VARIABLE
                 $f
               Label : INDEX
                 2
-          Label : ELEMENT
-            =
             Label : RIGHT
               ++
               Label : POSTPLUSPLUS
                 $e
+          Label : ELEMENT
+            =
             Label : LEFT
               $d
+            Label : RIGHT
+              ++
+              Label : POSTPLUSPLUS
+                $e
         Label : ELEMENT
           ;
           Label : ELEMENT

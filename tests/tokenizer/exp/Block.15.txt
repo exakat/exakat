@@ -22,6 +22,8 @@ Label : CODE
             ;
             Label : ELEMENT
               =
+              Label : LEFT
+                $k
               Label : RIGHT
                 ->
                 Label : OBJECT
@@ -36,12 +38,12 @@ Label : CODE
                         $n
                       Label : INDEX
                         'o'
-              Label : LEFT
-                $k
           Label : ELEMENT
             ;
             Label : ELEMENT
               =
+              Label : LEFT
+                $i
               Label : RIGHT
                 ->
                 Label : OBJECT
@@ -56,12 +58,12 @@ Label : CODE
                         $d
                       Label : PROPERTY
                         e
-              Label : LEFT
-                $i
           Label : ELEMENT
             ;
             Label : ELEMENT
               =
+              Label : LEFT
+                $h
               Label : RIGHT
                 array
                 Label : ARGUMENTS
@@ -74,5 +76,3 @@ Label : CODE
                       'a'
                     Label : VALUE
                       'b'
-              Label : LEFT
-                $h

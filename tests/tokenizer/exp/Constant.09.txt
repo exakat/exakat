@@ -1,18 +1,20 @@
 <?php
 
 Label : CODE
-  ?
-  Label : CONDITION
-    $x
-  Label : THEN
-    ::
-    Label : CLASS
-      a
-    Label : CONSTANT
-      b
-  Label : ELSE
-    ::
-    Label : CLASS
-      c
-    Label : CONSTANT
-      d
+  ;
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      $x
+    Label : THEN
+      ::
+      Label : CLASS
+        a
+      Label : CONSTANT
+        b
+    Label : ELSE
+      ::
+      Label : CLASS
+        c
+      Label : CONSTANT
+        d

@@ -6,27 +6,27 @@ Label : CODE
     use
     Label : USE
       \
-      Label : SUBNAME
-        A
       Label : AS
         F
+      Label : SUBNAME
+        A
   Label : ELEMENT
     use
     Label : USE
       as
-      Label : SUBNAME
-        A
       Label : AS
         E
+      Label : SUBNAME
+        A
   Label : ELEMENT
     use
     Label : USE
       \
+      Label : AS
+        D
       Label : SUBNAME
         C
       Label : SUBNAME
         B
       Label : SUBNAME
         A
-      Label : AS
-        D

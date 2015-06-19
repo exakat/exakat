@@ -7,235 +7,185 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        class
-        Label : NAME
-          path
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-            Label : NAME
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
               a
-            Label : BLOCK
-              void
-            Label : STATIC
-              static
-            Label : PUBLIC
-              public
-    Label : NAMESPACE
-      complex
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : NAME
-          path2
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
+              Label : ARGUMENTS
                 void
-            Label : NAME
-              a
-            Label : BLOCK
-              void
-            Label : STATIC
-              static
-            Label : PUBLIC
-              public
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        complex
-      Label : SUBNAME
-        absolute
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      ;
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              one_identifier
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
             Label : CLASS
               absolute_path
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              a2
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
             Label : CLASS
               path
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              one_identifier3
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              a1
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              a4
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              path2
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              a3
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
             Label : CLASS
               \
               Label : SUBNAME
                 a1
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              one_identifier3
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              path2
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a3
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a2
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a4
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a1
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              one_identifier
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
       Label : ELEMENT
         use
         Label : USE
           \
-          Label : SUBNAME
-            path3
-          Label : SUBNAME
-            complex
           Label : AS
-            a3
-      Label : ELEMENT
-        use
-        Label : USE
-          \
+            a4
           Label : SUBNAME
             path32
           Label : SUBNAME
             complex
           Label : SUBNAME
             absolute
-          Label : AS
-            a4
       Label : ELEMENT
         use
         Label : USE
           \
+          Label : AS
+            a3
           Label : SUBNAME
-            absolute_path3
+            path3
+          Label : SUBNAME
+            complex
+      Label : ELEMENT
+        use
+        Label : USE
+          \
           Label : AS
             a2
+          Label : SUBNAME
+            absolute_path3
       Label : ELEMENT
         use
         Label : USE
           as
-          Label : SUBNAME
-            one_identifier3
           Label : AS
             a1
+          Label : SUBNAME
+            one_identifier3
       Label : ELEMENT
         use
         Label : USE
@@ -273,7 +223,7 @@ Label : CODE
       Label : ELEMENT
         class
         Label : NAME
-          a1
+          path2
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -282,18 +232,28 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-            Label : NAME
-              a
-            Label : BLOCK
-              void
             Label : STATIC
               static
             Label : PUBLIC
               public
+            Label : NAME
+              a
+            Label : BLOCK
+              void
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        complex
+      Label : SUBNAME
+        absolute
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
       Label : ELEMENT
         class
         Label : NAME
-          absolute_path
+          path
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -302,14 +262,20 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-            Label : NAME
-              a
-            Label : BLOCK
-              void
             Label : STATIC
               static
             Label : PUBLIC
               public
+            Label : NAME
+              a
+            Label : BLOCK
+              void
+    Label : NAMESPACE
+      complex
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
       Label : ELEMENT
         class
         Label : NAME
@@ -322,14 +288,54 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-            Label : NAME
-              a
-            Label : BLOCK
-              void
             Label : STATIC
               static
             Label : PUBLIC
               public
+            Label : NAME
+              a
+            Label : BLOCK
+              void
+      Label : ELEMENT
+        class
+        Label : NAME
+          a1
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+            Label : STATIC
+              static
+            Label : PUBLIC
+              public
+            Label : NAME
+              a
+            Label : BLOCK
+              void
+      Label : ELEMENT
+        class
+        Label : NAME
+          absolute_path
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+            Label : STATIC
+              static
+            Label : PUBLIC
+              public
+            Label : NAME
+              a
+            Label : BLOCK
+              void
       Label : ELEMENT
         class
         Label : NAME
@@ -342,13 +348,13 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-            Label : NAME
-              a
-            Label : BLOCK
-              void
             Label : STATIC
               static
             Label : PUBLIC
               public
+            Label : NAME
+              a
+            Label : BLOCK
+              void
     Label : NAMESPACE
       Global

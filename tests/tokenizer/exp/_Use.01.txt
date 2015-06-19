@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  use
-  Label : USE
-    \
-    Label : SUBNAME
-      A
+  ;
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        A

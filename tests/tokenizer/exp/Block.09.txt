@@ -9,15 +9,15 @@ Label : CODE
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          [
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            [
+            Label : VARIABLE
               B
-          Label : INDEX
-            'C'
+            Label : INDEX
+              'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -32,6 +32,8 @@ Label : CODE
           ;
           Label : ELEMENT
             =
+            Label : LEFT
+              $d
             Label : RIGHT
               ->
               Label : OBJECT
@@ -46,12 +48,12 @@ Label : CODE
                       $c
                     Label : PROPERTY
                       AX
-            Label : LEFT
-              $d
         Label : ELEMENT
           ;
           Label : ELEMENT
             =
+            Label : LEFT
+              $b
             Label : RIGHT
               array
               Label : ARGUMENTS
@@ -64,5 +66,3 @@ Label : CODE
                     'Q'
                   Label : VALUE
                     'R'
-            Label : LEFT
-              $b

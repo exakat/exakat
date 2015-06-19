@@ -2429,8 +2429,8 @@ $fullcode
                                'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 
                                'T_POW_EQUAL', 'T_DOUBLE_ARROW', 'T_SR','T_SL', 'T_IMPLEMENTS', 'T_EXTENDS',
                                'T_POW', 'T_PLUS', 'T_MINUS', 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_INC', 'T_DEC',
-                               'T_OPEN_CURLY', 'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF'";
-
+                               'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF'";
+//'T_OPEN_CURLY', 
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */
 

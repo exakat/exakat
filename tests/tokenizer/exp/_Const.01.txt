@@ -1,62 +1,64 @@
 <?php
 
 Label : CODE
-  class
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      static
-      Label : VALUE
-        Void
-      Label : STATIC
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
         static
-      Label : PROTECTED
-        protected
-      Label : DEFINE
-        $E
-    Label : ELEMENT
-      function
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
+        Label : VALUE
+          Void
+        Label : STATIC
+          static
+        Label : DEFINE
+          $E
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
           void
-      Label : BLOCK
-        void
-      Label : NAME
-        f
-      Label : STATIC
-        static
-      Label : PUBLIC
-        public
-    Label : ELEMENT
-      const
-      Label : VALUE
-        1
-      Label : NAME
-        C
-    Label : ELEMENT
-      const
-      Label : VALUE
-        '2'
-      Label : NAME
-        D
-    Label : ELEMENT
-      const
-      Label : VALUE
-        ::
-        Label : CLASS
-          F
-        Label : CONSTANT
-          G
-      Label : NAME
-        E
-    Label : ELEMENT
-      private
-      Label : VALUE
-        'b'
-      Label : DEFINE
-        $a
-      Label : PRIVATE
+          Label : ARGUMENT
+            void
+        Label : STATIC
+          static
+        Label : PUBLIC
+          public
+        Label : NAME
+          f
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        const
+        Label : VALUE
+          1
+        Label : NAME
+          C
+      Label : ELEMENT
+        const
+        Label : VALUE
+          '2'
+        Label : NAME
+          D
+      Label : ELEMENT
+        const
+        Label : VALUE
+          ::
+          Label : CLASS
+            F
+          Label : CONSTANT
+            G
+        Label : NAME
+          E
+      Label : ELEMENT
         private
-  Label : NAME
-    x
+        Label : VALUE
+          'b'
+        Label : DEFINE
+          $a
+        Label : PRIVATE
+          private

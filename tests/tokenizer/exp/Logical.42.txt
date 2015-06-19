@@ -6,16 +6,16 @@ Label : CODE
     or
     Label : RIGHT
       ::
-      Label : CLASS
-        \
-        Label : SUBNAME
-          J
       Label : METHOD
         K
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'L'
+      Label : CLASS
+        \
+        Label : SUBNAME
+          J
     Label : LEFT
       =
       Label : RIGHT

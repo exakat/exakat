@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  ->
-  Label : OBJECT
-    $this
-  Label : METHOD
-    a
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
+  ;
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $this
+    Label : METHOD
+      a
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           ->
           Label : OBJECT
-            $b
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              c
           Label : PROPERTY
-            c
-        Label : PROPERTY
-          False
+            False

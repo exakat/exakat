@@ -1,0 +1,74 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $x
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          $y
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        $x2
+      Label : THEN
+        ;
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            $y2
+      Label : ELSE
+        elseif
+        Label : CONDITION
+          $x3
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              $y3
+        Label : ELSE
+          elseif
+          Label : CONDITION
+            $x4
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                $y4
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              $x5
+            Label : THEN
+              ;
+              Label : ELEMENT
+                ;
+                Label : ELEMENT
+                  ;
+                  Label : ELEMENT
+                    $y5
+            Label : ELSE
+              ;
+              Label : ELEMENT
+                ;
+                Label : ELEMENT
+                  ;
+                  Label : ELEMENT
+                    $z

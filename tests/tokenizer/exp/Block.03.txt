@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       $e
+    Label : RIGHT
+      1
   Label : ELEMENT
     if
     Label : CONDITION
@@ -22,14 +22,14 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          $i
         Label : LEFT
           [
           Label : VARIABLE
             $g
           Label : INDEX
             'h'
+        Label : RIGHT
+          $i
   Label : ELEMENT
     if
     Label : CONDITION
@@ -42,6 +42,8 @@ Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $b
         Label : RIGHT
           strrchr
           Label : ARGUMENTS
@@ -50,5 +52,3 @@ Label : CODE
               'd'
             Label : ARGUMENT
               $c
-        Label : LEFT
-          $b

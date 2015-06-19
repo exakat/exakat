@@ -40,8 +40,6 @@ Label : CODE
             G
       Label : ELEMENT
         ::
-        Label : CLASS
-          E
         Label : METHOD
           F
           Label : ARGUMENTS
@@ -50,3 +48,5 @@ Label : CODE
               $e
             Label : ARGUMENT
               $d
+        Label : CLASS
+          E

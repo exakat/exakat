@@ -3,8 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     while
     Label : CONDITION
       <=
@@ -22,6 +20,8 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $x
+  Label : ELEMENT
+    
   Label : ELEMENT
     =
     Label : RIGHT

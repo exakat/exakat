@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -22,14 +24,10 @@ Label : CODE
                   'B'
                 Label : VALUE
                   'o'
-    Label : LEFT
-      $a
   Label : ELEMENT
     if
     Label : CONDITION
       ==
-      Label : RIGHT
-        D
       Label : LEFT
         $
         Label : NAME
@@ -46,10 +44,14 @@ Label : CODE
               'B'
           Label : PROPERTY
             C
+      Label : RIGHT
+        D
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           [
           Label : VARIABLE
@@ -60,8 +62,6 @@ Label : CODE
               $b
           Label : INDEX
             'E'
-        Label : LEFT
-          $c
   Label : ELEMENT
     var_dump
     Label : ARGUMENTS
@@ -84,14 +84,14 @@ Label : CODE
             C
   Label : ELEMENT
     =
-    Label : RIGHT
-      D
     Label : LEFT
       ->
       Label : OBJECT
         $o
       Label : PROPERTY
         C
+    Label : RIGHT
+      D
   Label : ELEMENT
     const
     Label : VALUE
@@ -100,15 +100,15 @@ Label : CODE
       D
   Label : ELEMENT
     =
+    Label : LEFT
+      $o
     Label : RIGHT
       new
       Label : NEW
         stdclass
-    Label : LEFT
-      $o
   Label : ELEMENT
     =
-    Label : RIGHT
-      'b'
     Label : LEFT
       $b
+    Label : RIGHT
+      'b'

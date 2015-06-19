@@ -8,24 +8,24 @@ Label : CODE
       ;
       Label : ELEMENT
         +=
-        Label : RIGHT
-          ++
-          Label : POSTPLUSPLUS
-            $e
         Label : LEFT
           [
           Label : VARIABLE
             $f
           Label : INDEX
             2
-      Label : ELEMENT
-        =
         Label : RIGHT
           ++
           Label : POSTPLUSPLUS
             $e
+      Label : ELEMENT
+        =
         Label : LEFT
           $d
+        Label : RIGHT
+          ++
+          Label : POSTPLUSPLUS
+            $e
     Label : ELEMENT
       ;
       Label : ELEMENT
