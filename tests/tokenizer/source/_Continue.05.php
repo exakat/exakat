@@ -1,7 +1,7 @@
 <?php
 function a() {
     foreach (range(1, 3) as $i) {
-        yield;
+        continue ?> A <?php
     }
 }
 

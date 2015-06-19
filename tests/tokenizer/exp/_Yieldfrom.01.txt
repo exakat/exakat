@@ -36,8 +36,6 @@ Label : CODE
       $baz
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $baz
     Label : VALUE
       $element
     Label : BLOCK
@@ -50,6 +48,8 @@ Label : CODE
             "\n"
           Label : ARGUMENT
             $element
+    Label : SOURCE
+      $baz
   Label : ELEMENT
     echo
     Label : ARGUMENTS

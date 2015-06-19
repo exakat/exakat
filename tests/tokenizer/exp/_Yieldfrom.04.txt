@@ -23,13 +23,11 @@ Label : CODE
               Label : BLOCK
                 ;
                 Label : ELEMENT
-                  yield
-                  Label : YIELD
-                    =>
-                    Label : VALUE
-                      2
-                    Label : KEY
-                      1
+                  unset
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $e
                 Label : ELEMENT
                   =
                   Label : RIGHT
@@ -41,6 +39,36 @@ Label : CODE
                 Label : ELEMENT
                   =
                   Label : RIGHT
+                    [
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'z'
+                        Label : VALUE
+                          'c'
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          2
+                        Label : VALUE
+                          'x'
+                      Label : ARGUMENT
+                        1
+                  Label : LEFT
+                    list
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        $c
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        $a
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
                     ??
                     Label : RIGHT
                       $b
@@ -49,14 +77,40 @@ Label : CODE
                   Label : LEFT
                     $x
                 Label : ELEMENT
-                  unset
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $e
-                Label : ELEMENT
                   yield from
                   Label : YIELD
+                    $x
+                Label : ELEMENT
+                  yield
+                  Label : YIELD
+                    =>
+                    Label : KEY
+                      1
+                    Label : VALUE
+                      2
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      $a
+                    Label : THEN
+                      :
+                    Label : ELSE
+                      $c
+                  Label : LEFT
+                    $x
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      $a
+                    Label : THEN
+                      $b
+                    Label : ELSE
+                      $c
+                  Label : LEFT
                     $x
                 Label : ELEMENT
                   =
@@ -94,60 +148,6 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    ?
-                    Label : CONDITION
-                      $a
-                    Label : THEN
-                      $b
-                    Label : ELSE
-                      $c
-                  Label : LEFT
-                    $x
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    ?
-                    Label : CONDITION
-                      $a
-                    Label : THEN
-                      :
-                    Label : ELSE
-                      $c
-                  Label : LEFT
-                    $x
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    [
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        =>
-                        Label : VALUE
-                          'c'
-                        Label : KEY
-                          'z'
-                      Label : ARGUMENT
-                        =>
-                        Label : VALUE
-                          'x'
-                        Label : KEY
-                          2
-                      Label : ARGUMENT
-                        1
-                  Label : LEFT
-                    list
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        $c
-                      Label : ARGUMENT
-                        $b
-                      Label : ARGUMENT
-                        $a
                 Label : ELEMENT
                   ppp
                   Label : VALUE

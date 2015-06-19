@@ -10,12 +10,6 @@ Label : CODE
         $k
       Label : VALUE
         $v
-    Label : SOURCE
-      x
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -34,6 +28,12 @@ Label : CODE
                 $v
               Label : CONCAT
                 \n
+    Label : SOURCE
+      x
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
   Label : ELEMENT
     function
     Label : ARGUMENTS
@@ -52,8 +52,6 @@ Label : CODE
             $k
           Label : VALUE
             $v
-        Label : SOURCE
-          $y
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -64,6 +62,8 @@ Label : CODE
                 $k
               Label : VALUE
                 $v
+        Label : SOURCE
+          $y
       Label : ELEMENT
         =
         Label : RIGHT

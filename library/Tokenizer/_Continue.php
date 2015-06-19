@@ -28,16 +28,6 @@ class _Continue extends TokenAuto {
     static public $atom = 'Continue';
 
     public function _check() {
-        // continue ; without nothing behind
-        $this->conditions = array(0 => array('token' => _Continue::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('token' => array('T_SEMICOLON', 'T_ENDIF'))
-                                  );
-        
-        $this->actions = array('addEdge'     => array(0 => array('Void' => 'LEVEL')),
-                               'keepIndexed' => true);
-        $this->checkAuto();
-
         // continue 2 ;
         $this->conditions = array(0 => array('token' => _Continue::$operators,
                                              'atom' => 'none'),

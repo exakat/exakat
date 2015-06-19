@@ -66,6 +66,8 @@ Label : CODE
                           $i
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
       Label : CODE
         ;
         Label : ELEMENT
@@ -84,8 +86,6 @@ Label : CODE
                   \n
       Label : CLASS
         Exception
-      Label : VARIABLE
-        $e
   Label : ELEMENT
     var_dump
     Label : ARGUMENTS
@@ -138,6 +138,8 @@ Label : CODE
                   0
         Label : CATCH
           catch
+          Label : VARIABLE
+            $e
           Label : CODE
             ;
             Label : ELEMENT
@@ -156,8 +158,6 @@ Label : CODE
                       \n
           Label : CLASS
             Exception
-          Label : VARIABLE
-            $e
       Label : ELEMENT
         try
         Label : CODE
@@ -166,12 +166,14 @@ Label : CODE
             yield
             Label : YIELD
               =>
-              Label : VALUE
-                0
               Label : KEY
                 "gen"
+              Label : VALUE
+                0
         Label : CATCH
           catch
+          Label : VARIABLE
+            $e
           Label : CODE
             ;
             Label : ELEMENT
@@ -190,8 +192,6 @@ Label : CODE
                       \n
           Label : CLASS
             Exception
-          Label : VARIABLE
-            $e
   Label : ELEMENT
     function
     Label : ARGUMENTS
@@ -224,6 +224,8 @@ Label : CODE
                 $off
         Label : CATCH
           catch
+          Label : VARIABLE
+            $e
           Label : CODE
             ;
             Label : ELEMENT
@@ -242,5 +244,3 @@ Label : CODE
                       \n
           Label : CLASS
             Exception
-          Label : VARIABLE
-            $e

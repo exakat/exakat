@@ -6,14 +6,6 @@ Label : CODE
     foreach
     Label : VALUE
       $number
-    Label : SOURCE
-      generateRange
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1000000
-        Label : ARGUMENT
-          0
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -22,6 +14,14 @@ Label : CODE
           void
           Label : ARGUMENT
             $number
+    Label : SOURCE
+      generateRange
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1000000
+        Label : ARGUMENT
+          0
   Label : ELEMENT
     function
     Label : ARGUMENTS
