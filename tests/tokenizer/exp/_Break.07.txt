@@ -1,0 +1,39 @@
+;
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $swimlane
+            Label : INDEX
+              'columns'
+      Label : THEN
+        ;
+        Label : ELEMENT
+                  
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+      Label : ELSE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $this
+        Label : ELEMENT
+                  
+        Label : ELEMENT
+                      
+Label : ELEMENT
+          
