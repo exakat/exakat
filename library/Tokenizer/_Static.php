@@ -34,8 +34,8 @@ class _Static extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Static::$operators),
                                    1 => array('token' => 'T_FUNCTION'),
                                  );
-        $this->actions = array('to_option' => 1,
-                               'atom'      => 'Static');
+        $this->actions = array('toOption' => 1,
+                               'atom'     => 'Static');
         $this->checkAuto();
 
     // class x { static public function x() }
@@ -43,8 +43,8 @@ class _Static extends TokenAuto {
                                    1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED')),
                                    2 => array('token' => array('T_FUNCTION')),
                                  );
-        $this->actions = array('to_option' => 2,
-                               'atom'      => 'Static');
+        $this->actions = array('toOption' => 2,
+                               'atom'     => 'Static');
         $this->checkAuto();
 
     // class x { static $x }
@@ -66,8 +66,8 @@ class _Static extends TokenAuto {
                                    1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED')),
                                    2 => array('token' => 'T_VARIABLE'),
                                  );
-        $this->actions = array('to_option' => 1,
-                               'atom'      => 'Static');
+        $this->actions = array('toOption' => 1,
+                               'atom'     => 'Static');
         $this->checkAuto();
 
 
@@ -91,8 +91,8 @@ class _Static extends TokenAuto {
                                    3 => array('filterOut' => $values)
                                  );
         
-        $this->actions = array('to_option' => 1,
-                               'atom'      => 'Static');
+        $this->actions = array('toOption' => 1,
+                               'atom'     => 'Static');
         $this->checkAuto();
 
 
@@ -114,8 +114,8 @@ class _Static extends TokenAuto {
                                    3 => array('filterOut'  => 'T_COMMA'),
                                  );
         
-        $this->actions = array('to_option' => 1,
-                               'atom'       => 'Static');
+        $this->actions = array('toOption' => 1,
+                               'atom'     => 'Static');
         $this->checkAuto();
 
 
@@ -123,8 +123,8 @@ class _Static extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Static::$operators),
                                    1 => array('token' => array('T_FUNCTION')),
                                  );
-        $this->actions = array('to_option' => 1,
-                               'atom'      => 'Static');
+        $this->actions = array('toOption' => 1,
+                               'atom'     => 'Static');
         $this->checkAuto();
 
     // class x { static private function f() }
@@ -132,8 +132,8 @@ class _Static extends TokenAuto {
                                    1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                    2 => array('token' => 'T_FUNCTION'),
                                  );
-        $this->actions = array('to_option' => 2,
-                               'atom'      => 'Static');
+        $this->actions = array('toOption' => 2,
+                               'atom'     => 'Static');
         $this->checkAuto();
 
     // class x { static private final function f() }
@@ -142,8 +142,8 @@ class _Static extends TokenAuto {
                                    2 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                    3 => array('token' => 'T_FUNCTION'),
                                  );
-        $this->actions = array('to_option' => 3,
-                               'atom'      => 'Static');
+        $this->actions = array('toOption' => 3,
+                               'atom'     => 'Static');
         $this->checkAuto();
 
     // class x { static $x, $y }

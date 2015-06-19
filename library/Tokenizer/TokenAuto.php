@@ -532,8 +532,8 @@ $fullcode
             unset($actions['to_ppp']);
         }
 
-        if (isset($actions['to_option'])) {
-            $position = str_repeat(".out('NEXT')", $actions['to_option']);
+        if (isset($actions['toOption'])) {
+            $position = str_repeat(".out('NEXT')", $actions['toOption']);
 
             $token = new _Ppp(Token::$client);
             $fullcode = $token->fullcode();
@@ -548,11 +548,8 @@ g.addEdge(it.in('NEXT').next() , it.out('NEXT').next(), 'NEXT');
 
 it.bothE('NEXT').each{ g.removeEdge(it); }
 it.fullcode = it.code;
-
-fullcode = ppp;
-$fullcode
 ";
-            unset($actions['to_option']);
+            unset($actions['toOption']);
         }
         
         if (isset($actions['to_ppp_assignation'])) {
