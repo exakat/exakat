@@ -1,0 +1,52 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        and
+        Label : RIGHT
+          print
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              (
+              Label : CODE
+                "bar"
+        Label : LEFT
+          (
+          Label : CODE
+            "foo"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &&
+        Label : RIGHT
+          print
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              (
+              Label : CODE
+                "bar"
+        Label : LEFT
+          (
+          Label : CODE
+            "foo"

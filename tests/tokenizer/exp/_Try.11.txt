@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    try
+    Label : CODE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : CATCH
+      catch
+      Label : CLASS
+        \
+        Label : SUBNAME
+          Exception
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+      Label : VARIABLE
+        $e

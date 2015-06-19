@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<
+      Label : RIGHT
+        $c
+      Label : LEFT
+        >>
+        Label : RIGHT
+          0
+        Label : LEFT
+          $b
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      -
+      Label : RIGHT
+        (
+        Label : CODE
+          +
+          Label : RIGHT
+            (
+            Label : CODE
+              $d
+          Label : LEFT
+            $c
+      Label : LEFT
+        >>
+        Label : RIGHT
+          0
+        Label : LEFT
+          $b
+    Label : LEFT
+      $a

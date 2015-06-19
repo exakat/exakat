@@ -1,0 +1,11 @@
+;
+Label : ELEMENT
+  f
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      3
+    Label : ARGUMENT
+      2
+    Label : ARGUMENT
+      1

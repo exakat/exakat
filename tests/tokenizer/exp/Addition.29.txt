@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    +
+    Label : RIGHT
+      1
+    Label : LEFT
+      /
+      Label : RIGHT
+        3
+      Label : LEFT
+        (
+        Label : CODE
+          /
+          Label : RIGHT
+            log
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                2
+          Label : LEFT
+            log
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                PHP_INT_MAX
+  Label : LEFT
+    $maxSize

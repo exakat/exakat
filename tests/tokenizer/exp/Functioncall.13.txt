@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    isset
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $x

@@ -1,0 +1,21 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      Concatenation
+      Label : CONCAT
+        <<<HEREDOC
+
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            bc
+
+
+      Label : CONCAT
+        'd'
+    Label : LEFT
+      $a

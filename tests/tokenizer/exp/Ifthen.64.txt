@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    .=
+    Label : RIGHT
+      Concatenation
+      Label : CONCAT
+        'I'
+      Label : CONCAT
+        H
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+      Label : CONCAT
+        'F'
+      Label : CONCAT
+        $d
+      Label : CONCAT
+        'D'
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        .=
+        Label : RIGHT
+          'B'
+        Label : LEFT
+          $b

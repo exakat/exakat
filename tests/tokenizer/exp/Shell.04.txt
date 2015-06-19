@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      strtolower
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          `
+          Label : CONTAINS
+            Concatenation
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $file
+              Label : PROPERTY
+                x
+            Label : CONCAT
+               sf 
+    Label : LEFT
+      $x

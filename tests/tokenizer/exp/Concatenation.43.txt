@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  Concatenation
+  Label : CONCAT
+    'b'
+  Label : CONCAT
+    (string)
+    Label : CAST
+      $x
+  Label : CONCAT
+    'a'

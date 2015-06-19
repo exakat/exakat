@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $b
+      Label : METHOD
+        'c'
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            1
+    Label : LEFT
+      $a

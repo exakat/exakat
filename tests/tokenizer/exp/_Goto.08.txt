@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    :
+    Label : LABEL
+      cleanupCookie
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $x
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $y
+        Label : CASE
+          1
+  Label : ELEMENT
+    GOTO
+    Label : LABEL
+      cleanupCookie

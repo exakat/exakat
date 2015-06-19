@@ -1,0 +1,66 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    >>
+    Label : RIGHT
+      0
+    Label : LEFT
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            $b
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      default
+      Label : CODE
+        ;
+        Label : ELEMENT
+          
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                new
+                Label : NEW
+                  \
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'D'
+                  Label : SUBNAME
+                    C
+    Label : ELEMENT
+      case
+      Label : CODE
+        ;
+        Label : ELEMENT
+          
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                new
+                Label : NEW
+                  \
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'D'
+                  Label : SUBNAME
+                    C
+      Label : CASE
+        1

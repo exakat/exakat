@@ -1,0 +1,200 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    interface
+    Label : NAME
+      i
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+        Label : RETURN
+          Stdclass
+        Label : NAME
+          x4
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+        Label : NAME
+          x3
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : NAME
+      
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : NAME
+      
+    Label : BLOCK
+      void
+    Label : USE
+      void
+      Label : ARGUMENT
+        $y
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      x2r
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : NAME
+      xr
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      
+    Label : BLOCK
+      void
+    Label : USE
+      void
+      Label : ARGUMENT
+        $y
+  Label : ELEMENT
+    interface
+    Label : NAME
+      i
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+        Label : RETURN
+          Stdclass
+        Label : NAME
+          x4r
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+        Label : NAME
+          x3r
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : NAME
+      
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      
+    Label : BLOCK
+      void
+    Label : USE
+      void
+      Label : ARGUMENT
+        $y
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : NAME
+      
+    Label : BLOCK
+      void
+    Label : USE
+      void
+      Label : ARGUMENT
+        $y
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      x2
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : RETURN
+      Stdclass
+    Label : NAME
+      x
+    Label : BLOCK
+      void

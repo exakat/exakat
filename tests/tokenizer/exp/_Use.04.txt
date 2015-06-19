@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        A
+    Label : USE
+      \
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        A

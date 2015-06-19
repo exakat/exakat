@@ -1,0 +1,52 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        Sequence
+        Label : ELEMENT
+          ppp
+          Label : VALUE
+            3
+          Label : DEFINE
+            $z
+          Label : PROTECTED
+            protected
+        Label : ELEMENT
+          ppp
+          Label : VALUE
+            void
+          Label : DEFINE
+            $a
+          Label : PROTECTED
+            protected
+        Label : ELEMENT
+          ppp
+          Label : VALUE
+            void
+          Label : DEFINE
+            $y
+          Label : PROTECTED
+            protected
+        Label : ELEMENT
+          ppp
+          Label : VALUE
+            void
+          Label : DEFINE
+            $x
+          Label : PROTECTED
+            protected
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $c
+    Label : GLOBAL
+      $b
+    Label : GLOBAL
+      $a

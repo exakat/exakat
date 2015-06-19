@@ -1,0 +1,180 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      Global
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO3
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO2
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+      Label : ELEMENT
+        f2
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO3
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+          Label : AS
+            a3
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO2
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+          Label : AS
+            a2
+      Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+          Label : AS
+            a1
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              "\n"
+            Label : CONCAT
+              FOO
+      Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO3
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+          Label : AS
+            a6
+        Label : CONST
+          as
+          Label : SUBNAME
+            Name
+          Label : AS
+            a5
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO2
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+          Label : AS
+            a4
+      Label : ELEMENT
+        use
+        Label : FUNCTION
+          \
+          Label : SUBNAME
+            FOO3
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+        Label : FUNCTION
+          \
+          Label : SUBNAME
+            FOO2
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+      Label : ELEMENT
+        use
+        Label : FUNCTION
+          \
+          Label : SUBNAME
+            f
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+      Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : SUBNAME
+            c
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        Space
+      Label : SUBNAME
+        Name
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  "\n"
+                Label : CONCAT
+                  __FUNCTION__
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          f
+      Label : ELEMENT
+        const
+        Label : NAME
+          FOO
+        Label : VALUE
+          42

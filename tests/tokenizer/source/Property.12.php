@@ -1,0 +1,5 @@
+<?php
+
+$obj->{$extend['method']};
+
+?>

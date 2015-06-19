@@ -1,0 +1,45 @@
+;
+Label : ELEMENT
+  I
+Label : ELEMENT
+  ++
+  Label : POSTPLUSPLUS
+    $b
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      ?
+      Label : CONDITION
+        void
+        Label : ARGUMENT
+          ==
+          Label : RIGHT
+            'C'
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'B'
+      Label : THEN
+        'D'
+      Label : ELSE
+        (
+        Label : CODE
+          ?
+          Label : CONDITION
+            ==
+            Label : RIGHT
+              'F'
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                'B'
+          Label : THEN
+            'G'
+          Label : ELSE
+            'C'

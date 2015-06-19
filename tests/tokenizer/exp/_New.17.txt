@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  new
+  Label : NEW
+    ::
+    Label : CLASS
+      C
+    Label : PROPERTY
+      $y

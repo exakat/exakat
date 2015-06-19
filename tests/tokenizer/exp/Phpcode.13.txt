@@ -1,0 +1,37 @@
+;
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    ;
+    Label : ELEMENT
+      H
+    Label : ELEMENT
+      <?php /* empty, no closing tag */ ?>
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        !
+        Label : NOT
+          ->
+          Label : OBJECT
+            $a
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+      Label : THEN
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'E'
+Label : ELEMENT
+  A

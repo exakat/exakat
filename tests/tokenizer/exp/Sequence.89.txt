@@ -1,0 +1,62 @@
+;
+Label : ELEMENT
+  <?php
+
+  Label : CODE
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        new
+        Label : NEW
+          E
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              new
+              Label : NEW
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'I'
+                        Label : VALUE
+                          'J'
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'G'
+                        Label : VALUE
+                          'H'
+      Label : LEFT
+        $a
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $a
+          Label : METHOD
+            K
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'G'
+    Label : ELEMENT
+      <<<C
+
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          D
+
+Label : ELEMENT
+  B

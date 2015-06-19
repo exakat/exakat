@@ -1,0 +1,44 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ?
+      Label : CONDITION
+        a
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              c
+      Label : THEN
+        ->
+        Label : OBJECT
+          $d
+        Label : PROPERTY
+          e
+      Label : ELSE
+        =
+        Label : RIGHT
+          @
+          Label : AT
+            h
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $i
+                Label : PROPERTY
+                  j
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $f
+          Label : PROPERTY
+            g

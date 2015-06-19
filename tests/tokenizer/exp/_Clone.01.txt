@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    clone
+    Label : CLONE
+      $b
+  Label : LEFT
+    $a

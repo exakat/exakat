@@ -1,0 +1,52 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          B
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              new
+              Label : NEW
+                C
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+            Label : LEFT
+              ::
+              Label : PROPERTY
+                $a
+              Label : CLASS
+                static
+          Label : ELEMENT
+            ->
+            Label : OBJECT
+              ::
+              Label : PROPERTY
+                $a
+              Label : CLASS
+                static
+            Label : METHOD
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+          Label : ELEMENT
+            void

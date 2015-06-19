@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    Concatenation
+    Label : CONCAT
+      " b"
+    Label : CONCAT
+      (
+      Label : CODE
+        +
+        Label : RIGHT
+          1
+        Label : LEFT
+          1
+    Label : CONCAT
+      "a"
+  Label : LEFT
+    $x

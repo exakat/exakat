@@ -1,0 +1,70 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ?
+        Label : CONDITION
+          (
+          Label : CODE
+            &&
+            Label : RIGHT
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $g
+            Label : LEFT
+              isset
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $f
+        Label : THEN
+          $h
+        Label : ELSE
+          'E'
+  Label : ELEMENT
+    C
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          $e
+        Label : CONCAT
+          'D'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        (
+        Label : CODE
+          ||
+          Label : RIGHT
+            empty
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+          Label : LEFT
+            !
+            Label : NOT
+              isset
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $b
+      Label : THEN
+        'B'
+      Label : ELSE
+        $d
+    Label : LEFT
+      $a

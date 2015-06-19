@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        x
+  Label : ELEMENT
+    define
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        'x'

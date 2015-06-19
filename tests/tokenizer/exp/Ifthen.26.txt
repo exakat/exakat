@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        while
+        Label : CONDITION
+          $x
+        Label : BLOCK
+          void

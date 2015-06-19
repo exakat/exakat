@@ -1,0 +1,108 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    $h
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          $i
+        Label : METHOD
+          E
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+    Label : NAME
+      $h
+  Label : ELEMENT
+    $j
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
+        Label : PROPERTY
+          $k
+        Label : CLASS
+          F
+    Label : NAME
+      $j
+  Label : ELEMENT
+    $m
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
+        Label : CLASS
+          I
+        Label : CONSTANT
+          J
+    Label : NAME
+      $m
+  Label : ELEMENT
+    $l
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
+        Label : CLASS
+          G
+        Label : CONSTANT
+          H
+    Label : NAME
+      $l
+  Label : ELEMENT
+    $f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          $g
+        Label : PROPERTY
+          D
+    Label : NAME
+      $f
+  Label : ELEMENT
+    $e
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        C
+    Label : NAME
+      $e
+  Label : ELEMENT
+    $d
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        null
+    Label : NAME
+      $d
+  Label : ELEMENT
+    $c
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        B
+    Label : NAME
+      $c
+  Label : ELEMENT
+    $b
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        0
+    Label : NAME
+      $b
+  Label : ELEMENT
+    $a
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        __FILE__
+    Label : NAME
+      $a

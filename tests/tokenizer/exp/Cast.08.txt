@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    (array)
+    Label : CAST
+      (boolean)
+      Label : CAST
+        $y
+  Label : LEFT
+    $x

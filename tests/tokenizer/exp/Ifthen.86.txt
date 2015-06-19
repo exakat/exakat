@@ -1,0 +1,65 @@
+;
+Label : ELEMENT
+  S
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      ::
+      Label : METHOD
+        E
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'R'
+                Label : VALUE
+                  'S'
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'P'
+                Label : VALUE
+                  'Q'
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'N'
+                Label : VALUE
+                  'O'
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              H
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  M
+                Label : ARGUMENT
+                  'L'
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    [
+                    Label : VARIABLE
+                      ::
+                      Label : PROPERTY
+                        $b
+                      Label : CLASS
+                        I
+                    Label : INDEX
+                      'J'
+                  Label : INDEX
+                    'K'
+            Label : CLASS
+              G
+          Label : ARGUMENT
+            F
+      Label : CLASS
+        D

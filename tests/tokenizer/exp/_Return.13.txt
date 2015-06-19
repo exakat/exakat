@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      !=
+      Label : RIGHT
+        false
+      Label : LEFT
+        a
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b

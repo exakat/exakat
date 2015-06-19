@@ -1,0 +1,77 @@
+;
+Label : ELEMENT
+  =
+  Label : RIGHT
+    [
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        $this
+      Label : PROPERTY
+        B
+    Label : INDEX
+      $d
+  Label : LEFT
+    $c
+Label : ELEMENT
+  if
+  Label : CONDITION
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        $this
+      Label : METHOD
+        E
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : PROPERTY
+      F
+  Label : THEN
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'G'
+Label : ELEMENT
+  ++
+  Label : PREPLUSPLUS
+    $d
+Label : ELEMENT
+  D
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      ->
+      Label : OBJECT
+        $c
+      Label : METHOD
+        I
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+Label : ELEMENT
+  J
+Label : ELEMENT
+  H
+Label : ELEMENT
+  C
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      +
+      Label : RIGHT
+        0
+      Label : LEFT
+        $d
+Label : ELEMENT
+  void

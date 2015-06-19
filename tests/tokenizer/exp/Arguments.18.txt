@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    a
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        include
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            (
+            Label : CODE
+              'b'

@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        +
+        Label : RIGHT
+          2
+        Label : LEFT
+          1
+    Label : NAMESPACE
+      Global
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            \
+            Label : SUBNAME
+              Another
+            Label : SUBNAME
+              namespace
+        Label : LEFT
+          $obj
+    Label : NAMESPACE
+      A

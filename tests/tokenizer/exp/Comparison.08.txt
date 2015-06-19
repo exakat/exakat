@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    >
+    Label : RIGHT
+      0
+    Label : LEFT
+      [
+      Label : VARIABLE
+        ::
+        Label : CLASS
+          self
+        Label : PROPERTY
+          $a
+      Label : INDEX
+        'b'
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        [
+        Label : VARIABLE
+          ::
+          Label : CLASS
+            e
+          Label : PROPERTY
+            $f
+        Label : INDEX
+          'g'
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $c
+        Label : INDEX
+          'd'

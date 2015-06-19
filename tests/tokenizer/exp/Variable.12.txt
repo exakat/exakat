@@ -1,0 +1,47 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<EOF
+
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          A
+        Label : CONCAT
+          ?
+          Label : CONDITION
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'c'
+          Label : THEN
+            'true'
+          Label : ELSE
+            'false'
+        Label : CONCAT
+          
+
+D
+        Label : CONCAT
+          ?
+          Label : CONDITION
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              'f'
+          Label : THEN
+            'true'
+          Label : ELSE
+            'false'
+        Label : CONCAT
+          
+
+
+    Label : LEFT
+      $result

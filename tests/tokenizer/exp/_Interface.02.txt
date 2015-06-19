@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  interface
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      function
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+      Label : NAME
+        y
+  Label : NAME
+    x

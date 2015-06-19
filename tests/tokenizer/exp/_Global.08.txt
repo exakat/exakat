@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  global
+  Label : GLOBAL
+    $c
+  Label : GLOBAL
+    $b
+  Label : GLOBAL
+    $a

@@ -1,0 +1,31 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    do
+    Label : CONDITION
+      4
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        do
+        Label : CONDITION
+          3
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            do
+            Label : CONDITION
+              2
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                do
+                Label : CONDITION
+                  1
+                Label : BLOCK
+                  ;
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $x

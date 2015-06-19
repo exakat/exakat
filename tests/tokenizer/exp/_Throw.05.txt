@@ -1,0 +1,14 @@
+<?php
+
+Label : CODE
+  throw
+  Label : THROW
+    new
+    Label : NEW
+      \
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        A

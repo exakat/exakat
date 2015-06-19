@@ -1,0 +1,11 @@
+;
+Label : ELEMENT
+  [
+  Label : VARIABLE
+    [
+    Label : VARIABLE
+      $_array
+    Label : INDEX
+      'a'
+  Label : INDEX
+    $x

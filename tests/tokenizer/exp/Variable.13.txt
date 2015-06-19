@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<EOF
+
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          
+
+        Label : CONCAT
+          ->
+          Label : OBJECT
+            $object
+          Label : PROPERTY
+            property
+        Label : CONCAT
+          ;
+
+
+        Label : CONCAT
+          ->
+          Label : OBJECT
+            $object
+          Label : METHOD
+            method
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : CONCAT
+          ;
+
+
+    Label : LEFT
+      $result

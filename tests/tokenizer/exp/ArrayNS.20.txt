@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      void
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      return
+      Label : RETURN
+        new
+        Label : NEW
+          \
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENTS
+                  =>
+                  Label : VALUE
+                    'G'
+                  Label : KEY
+                    'F'
+          Label : SUBNAME
+            E
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C
+  Label : NAME
+    B

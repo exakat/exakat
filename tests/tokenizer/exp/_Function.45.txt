@@ -1,0 +1,21 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        static
+        Label : VALUE
+          NULL
+        Label : DEFINE
+          $b
+        Label : STATIC
+          static

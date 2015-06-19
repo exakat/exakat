@@ -1,0 +1,72 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      B2
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'D'
+              Label : ARGUMENT
+                __CLASS__
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      B1
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            (
+            Label : CODE
+              array
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'D'
+                Label : ARGUMENT
+                  __CLASS__
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        C
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'D'
+              Label : ARGUMENT
+                __CLASS__

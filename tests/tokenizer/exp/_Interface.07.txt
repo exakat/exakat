@@ -1,0 +1,120 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : VARIABLE
+              $f
+            Label : CLASS
+              E
+        Label : NAME
+          D
+    Label : EXTENDS
+      Arguments
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          H
+        Label : SUBNAME
+          I
+      Label : EXTENDS
+        G
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : VARIABLE
+              $f
+            Label : CLASS
+              E
+        Label : NAME
+          D
+    Label : EXTENDS
+      Arguments
+      Label : EXTENDS
+        I
+      Label : EXTENDS
+        G
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : VARIABLE
+              $f
+            Label : CLASS
+              E
+        Label : NAME
+          D
+    Label : EXTENDS
+      Arguments
+      Label : EXTENDS
+        G
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : VARIABLE
+              $f
+            Label : CLASS
+              E
+        Label : NAME
+          D
+    Label : EXTENDS
+      \
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B

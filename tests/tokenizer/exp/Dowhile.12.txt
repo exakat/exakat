@@ -1,0 +1,50 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    do
+    Label : CONDITION
+      FALSE
+    Label : BLOCK
+      if
+      Label : CONDITION
+        1
+      Label : THEN
+        ;
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            [
+            Label : VARIABLE
+              $x
+            Label : INDEX
+              +
+              Label : RIGHT
+                *
+                Label : RIGHT
+                  4
+                Label : LEFT
+                  2
+              Label : LEFT
+                1
+          Label : METHOD
+            f
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                6
+              Label : ARGUMENT
+                5
+              Label : ARGUMENT
+                4
+      Label : ELSE
+        ;
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void

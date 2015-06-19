@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    for
+    Label : BLOCK
+      void
+    Label : INIT
+      =
+      Label : RIGHT
+        ?
+        Label : CONDITION
+          (
+          Label : CODE
+            $b
+        Label : THEN
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              1
+            Label : LEFT
+              $c
+        Label : ELSE
+          0
+      Label : LEFT
+        $a
+    Label : FINAL
+      <
+      Label : RIGHT
+        $e
+      Label : LEFT
+        $d
+    Label : INCREMENT
+      ++
+      Label : PREPLUSPLUS
+        $f

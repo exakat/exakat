@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  namespace
+  Label : NAMESPACE
+    \
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B
+    Label : SUBNAME
+      A

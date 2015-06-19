@@ -1,0 +1,69 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    for
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        void
+    Label : INIT
+      =
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : LEFT
+        $c
+    Label : FINAL
+      <
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+      Label : LEFT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $d
+    Label : INCREMENT
+      =
+      Label : RIGHT
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            E
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $h
+              Label : ARGUMENT
+                $g
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      Concatenation
+      Label : CONCAT
+        (string)
+        Label : CAST
+          $b
+      Label : CONCAT
+        __FILE__
+    Label : LEFT
+      $a

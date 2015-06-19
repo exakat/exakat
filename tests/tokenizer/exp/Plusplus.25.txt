@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        [
+        Label : VARIABLE
+          $e
+        Label : INDEX
+          [
+          Label : VARIABLE
+            $f
+          Label : INDEX
+            'f'
+      Label : THEN
+        --
+        Label : POSTPLUSPLUS
+          [
+          Label : VARIABLE
+            $g
+          Label : INDEX
+            [
+            Label : VARIABLE
+              $h
+            Label : INDEX
+              'i'
+      Label : ELSE
+        -1
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'c'

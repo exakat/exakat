@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  .=
+  Label : RIGHT
+    Concatenation
+    Label : CONCAT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+           = 
+        Label : CONCAT
+          $f
+        Label : CONCAT
+          ;\r\n
+    Label : CONCAT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          ['
+        Label : CONCAT
+          $e
+        Label : CONCAT
+          ']
+    Label : CONCAT
+      [
+      Label : VARIABLE
+        $c
+      Label : INDEX
+        -
+        Label : RIGHT
+          1
+        Label : LEFT
+          $d
+    Label : CONCAT
+      $b
+  Label : LEFT
+    $a

@@ -1,0 +1,134 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      $number
+    Label : SOURCE
+      generateRange
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1000000
+        Label : ARGUMENT
+          0
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $number
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $step
+      Label : ARGUMENT
+        $end
+      Label : ARGUMENT
+        $start
+    Label : NAME
+      generateRange2
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        for
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              ?
+              Label : CONDITION
+                ->
+                Label : OBJECT
+                  $i
+                Label : PROPERTY
+                  y
+              Label : THEN
+                'd'
+              Label : ELSE
+                +
+                Label : RIGHT
+                  2
+                Label : LEFT
+                  2
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                1
+        Label : INIT
+          =
+          Label : RIGHT
+            $start
+          Label : LEFT
+            $i
+        Label : FINAL
+          <
+          Label : RIGHT
+            $end
+          Label : LEFT
+            $i
+        Label : INCREMENT
+          +=
+          Label : RIGHT
+            $step
+          Label : LEFT
+            $i
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $step
+      Label : ARGUMENT
+        $end
+      Label : ARGUMENT
+        $start
+    Label : NAME
+      generateRange
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        for
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              $i
+        Label : INIT
+          =
+          Label : RIGHT
+            $start
+          Label : LEFT
+            $i
+        Label : FINAL
+          <
+          Label : RIGHT
+            $end
+          Label : LEFT
+            $i
+        Label : INCREMENT
+          +=
+          Label : RIGHT
+            $step
+          Label : LEFT
+            $i

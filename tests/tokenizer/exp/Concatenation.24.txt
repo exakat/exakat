@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    <<<EOD
+
+    Label : CONTAINS
+      Concatenation
+      Label : CONCAT
+        
+Oui
+
+
+  Label : LEFT
+    $x

@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    try
+    Label : CODE
+      void
+    Label : CATCH
+      catch
+      Label : VARIABLE
+        $e
+      Label : CODE
+        void
+      Label : CLASS
+        Exception

@@ -1,0 +1,19 @@
+;
+Label : ELEMENT
+  do
+  Label : BLOCK
+    &&
+    Label : RIGHT
+      ++
+      Label : POSTPLUSPLUS
+        $y
+    Label : LEFT
+      ++
+      Label : POSTPLUSPLUS
+        $x
+  Label : CONDITION
+    <
+    Label : RIGHT
+      4
+    Label : LEFT
+      $x

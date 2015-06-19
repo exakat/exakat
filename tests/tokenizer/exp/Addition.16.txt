@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      number_format
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          -
+          Label : RIGHT
+            *
+            Label : RIGHT
+              1
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                'g'
+          Label : LEFT
+            (int)
+            Label : CAST
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                'e'
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'

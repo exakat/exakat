@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    
+
+?>
+  Label : ELEMENT
+    __halt_compiler
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
+      void

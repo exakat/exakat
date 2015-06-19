@@ -1,0 +1,7 @@
+;
+Label : ELEMENT
+  ::
+  Label : CLASS
+    a
+  Label : CONSTANT
+    b

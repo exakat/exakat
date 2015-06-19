@@ -1,0 +1,1 @@
+<?php if ($a['B']): ?>B<?php echo $b['D'] ?>D<?php echo F($c['G']) ?>G<?php else: echo 'I', J($d['K']), 'L'; endif ?>

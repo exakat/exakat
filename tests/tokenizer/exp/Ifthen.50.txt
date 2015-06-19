@@ -1,0 +1,70 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    exit
+    Label : ARGUMENTS
+      void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        b
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            _
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                "C"
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          ==
+          Label : RIGHT
+            1
+          Label : LEFT
+            $d
+        Label : THEN
+          ;
+          Label : ELEMENT
+            e
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                f
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    "g"
+        Label : ELSE
+          Block with else
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              ==
+              Label : RIGHT
+                2
+              Label : LEFT
+                $h
+            Label : THEN
+              ;
+              Label : ELEMENT
+                i
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    j
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        "l"

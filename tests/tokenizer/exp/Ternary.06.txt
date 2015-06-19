@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        b
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'd'
+      Label : THEN
+        [
+        Label : VARIABLE
+          $e
+        Label : INDEX
+          'f'
+      Label : ELSE
+        "g"
+    Label : LEFT
+      $a

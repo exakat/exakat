@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    (object)
+    Label : CAST
+      $y
+  Label : ELEMENT
+    (object)
+    Label : CAST
+      $x

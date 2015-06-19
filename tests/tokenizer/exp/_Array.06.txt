@@ -1,0 +1,15 @@
+;
+Label : ELEMENT
+  =
+  Label : RIGHT
+    [
+    Label : VARIABLE
+      [
+      Label : VARIABLE
+        $y
+      Label : INDEX
+        2
+    Label : INDEX
+      3
+  Label : LEFT
+    $x

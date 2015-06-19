@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      include_once
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          (
+          Label : CODE
+            'a.php'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

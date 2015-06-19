@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    clone
+    Label : CLONE
+      (
+      Label : CODE
+        ::
+        Label : CLASS
+          y
+        Label : PROPERTY
+          $C
+  Label : LEFT
+    $x

@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      $c
+    Label : METHOD
+      ;
+      Label : ARGUMENTS
+        void
+      Label : ELEMENT
+        Concatenation
+        Label : CONCAT
+          'C'
+        Label : CONCAT
+          'B'
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $b
+    Label : METHOD
+      __FILE__
+      Label : ARGUMENTS
+        void
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      $a
+    Label : METHOD
+      __FILE__
+      Label : ARGUMENTS
+        void

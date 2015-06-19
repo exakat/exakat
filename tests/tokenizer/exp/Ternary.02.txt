@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ?
+  Label : CONDITION
+    !
+    Label : NOT
+      $x
+  Label : THEN
+    'a'
+  Label : ELSE
+    'b'

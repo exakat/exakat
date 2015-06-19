@@ -1,0 +1,62 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        2
+      Label : LEFT
+        $x
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          +
+          Label : RIGHT
+            {
+            Label : VARIABLE
+              $y
+            Label : INDEX
+              4
+          Label : LEFT
+            +
+            Label : RIGHT
+              4
+            Label : LEFT
+              +
+              Label : RIGHT
+                3
+              Label : LEFT
+                +
+                Label : RIGHT
+                  2
+                Label : LEFT
+                  1
+        Label : LEFT
+          $c
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          b
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $x
+          Label : INDEX
+            3
+    Label : ELSE
+      void

@@ -1,0 +1,15 @@
+;
+Label : ELEMENT
+  ->
+  Label : OBJECT
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        $x
+      Label : PROPERTY
+        a
+    Label : PROPERTY
+      b
+  Label : PROPERTY
+    c

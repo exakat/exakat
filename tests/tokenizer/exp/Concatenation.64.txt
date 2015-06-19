@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    !
+    Label : NOT
+      empty
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $
+          Label : NAME
+            ;
+            Label : ELEMENT
+              Concatenation
+              Label : CONCAT
+                $a
+              Label : CONCAT
+                'E'
+  Label : THEN
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          "
+          Label : CONTAINS
+            Concatenation
+            Label : CONCAT
+              F
+            Label : CONCAT
+              Concatenation
+              Label : CONCAT
+                $a
+              Label : CONCAT
+                'E'
+            Label : CONCAT
+              H

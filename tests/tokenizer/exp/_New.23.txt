@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    C
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      static
+      Label : VALUE
+        'f'
+      Label : DEFINE
+        $y4
+      Label : STATIC
+        static
+      Label : PROTECTED
+        protected
+    Label : ELEMENT
+      static
+      Label : VALUE
+        'f'
+      Label : DEFINE
+        $y3
+      Label : STATIC
+        static
+      Label : PRIVATE
+        private
+    Label : ELEMENT
+      static
+      Label : VALUE
+        'f'
+      Label : DEFINE
+        $y
+      Label : PUBLIC
+        public
+      Label : STATIC
+        static

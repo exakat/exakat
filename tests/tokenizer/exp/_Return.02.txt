@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      empty
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          void

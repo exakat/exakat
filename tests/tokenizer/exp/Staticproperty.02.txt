@@ -1,0 +1,8 @@
+<?php
+
+Label : CODE
+  ::
+  Label : CLASS
+    T
+  Label : PROPERTY
+    $x

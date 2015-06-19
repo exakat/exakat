@@ -1,0 +1,14 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        Exception
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void

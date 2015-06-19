@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  declare
+  Label : TICKS
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      ticks

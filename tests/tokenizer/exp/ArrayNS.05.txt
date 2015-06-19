@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENTS
+          ++
+          Label : POSTPLUSPLUS
+            $b
+    Label : LEFT
+      $a

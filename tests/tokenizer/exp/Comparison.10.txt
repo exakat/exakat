@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    ===
+    Label : RIGHT
+      =
+      Label : RIGHT
+        coucou
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            1
+      Label : LEFT
+        $greeting
+    Label : LEFT
+      false
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $x

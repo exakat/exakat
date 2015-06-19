@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    =
+    Label : RIGHT
+      fopen
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          'r+b'
+        Label : ARGUMENT
+          '/tmp/test'
+    Label : LEFT
+      !
+      Label : NOT
+        $handle
+  Label : THEN
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          1

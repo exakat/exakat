@@ -1,0 +1,114 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'b'
+          Label : VALUE
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'B'
+                Label : VALUE
+                  'o'
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        D
+      Label : LEFT
+        $
+        Label : NAME
+          ->
+          Label : OBJECT
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                $b
+            Label : INDEX
+              'B'
+          Label : PROPERTY
+            C
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              $b
+          Label : INDEX
+            'E'
+        Label : LEFT
+          $c
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $
+        Label : NAME
+          ->
+          Label : OBJECT
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                $b
+            Label : INDEX
+              'B'
+          Label : PROPERTY
+            C
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      D
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $o
+      Label : PROPERTY
+        C
+  Label : ELEMENT
+    const
+    Label : VALUE
+      1
+    Label : NAME
+      D
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        stdclass
+    Label : LEFT
+      $o
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'b'
+    Label : LEFT
+      $b

@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      void
+    Label : NAME
+      int
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      void
+    Label : NAME
+      true
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      void
+    Label : NAME
+      null

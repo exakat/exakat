@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $d
+        Label : METHOD
+          e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $f
+    Label : SOURCE
+      $a

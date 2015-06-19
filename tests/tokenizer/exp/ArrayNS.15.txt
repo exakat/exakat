@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  [
+  Label : VARIABLE
+    {
+    Label : VARIABLE
+      {
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'
+    Label : INDEX
+      'C'
+  Label : INDEX
+    0

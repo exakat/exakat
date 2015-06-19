@@ -1,0 +1,2 @@
+<?php
+if($e): ?>a<?php // $b ?>C<?php endif; ?>

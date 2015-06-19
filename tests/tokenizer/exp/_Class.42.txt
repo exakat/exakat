@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      void
+    Label : IMPLEMENTS
+      u
+    Label : IMPLEMENTS
+      t
+    Label : IMPLEMENTS
+      s

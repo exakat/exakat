@@ -1,0 +1,9 @@
+;
+Label : ELEMENT
+  !
+  Label : NOT
+    ->
+    Label : OBJECT
+      $x
+    Label : PROPERTY
+      y

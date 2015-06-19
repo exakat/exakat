@@ -1,0 +1,23 @@
+;
+Label : ELEMENT
+  C
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      'D'
+Label : ELEMENT
+  D
+Label : ELEMENT
+  ->
+  Label : OBJECT
+    $b
+  Label : METHOD
+    F
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+Label : ELEMENT
+  void
+Label : ELEMENT
+  void

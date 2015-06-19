@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ->
+  Label : OBJECT
+    $this
+  Label : METHOD
+    a
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            $b
+          Label : PROPERTY
+            c
+        Label : PROPERTY
+          False

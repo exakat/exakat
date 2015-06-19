@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          date
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              strtotime
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $b
+            Label : ARGUMENT
+              "Y"
+        Label : CONCAT
+          'a'

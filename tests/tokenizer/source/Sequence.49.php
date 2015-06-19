@@ -1,0 +1,1 @@
+<?php echo __('B') ?>A<?php C::D(__('F'))->g() ?>H<?php echo I('J') ?>K

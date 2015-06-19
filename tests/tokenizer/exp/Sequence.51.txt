@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        Stdclass
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
+      void

@@ -1,0 +1,82 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    J
+
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ?
+        Label : CONDITION
+          ==
+          Label : RIGHT
+            'G'
+          Label : LEFT
+            @
+            Label : AT
+              [
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  [
+                  Label : VARIABLE
+                    ::
+                    Label : CLASS
+                      A
+                    Label : PROPERTY
+                      $B
+                  Label : INDEX
+                    $C
+                Label : INDEX
+                  [
+                  Label : VARIABLE
+                    $D
+                  Label : INDEX
+                    'E'
+              Label : INDEX
+                'F'
+        Label : THEN
+          'H'
+        Label : ELSE
+          'I'
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ?
+        Label : CONDITION
+          ==
+          Label : RIGHT
+            'g'
+          Label : LEFT
+            @
+            Label : AT
+              [
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  [
+                  Label : VARIABLE
+                    ::
+                    Label : CLASS
+                      a
+                    Label : PROPERTY
+                      $b
+                  Label : INDEX
+                    $c
+                Label : INDEX
+                  [
+                  Label : VARIABLE
+                    $d
+                  Label : INDEX
+                    'e'
+              Label : INDEX
+                'f'
+        Label : THEN
+          'h'
+        Label : ELSE
+          'i'

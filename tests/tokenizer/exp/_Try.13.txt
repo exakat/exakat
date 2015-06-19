@@ -1,0 +1,86 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      G
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                'J'
+              Label : VALUE
+                Concatenation
+                Label : CONCAT
+                  ->
+                  Label : METHOD
+                    R
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        'S'
+                  Label : OBJECT
+                    $g
+                Label : CONCAT
+                  ->
+                  Label : METHOD
+                    O
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        'P'
+                  Label : OBJECT
+                    $f
+                Label : CONCAT
+                  'M'
+                Label : CONCAT
+                  ->
+                  Label : METHOD
+                    L
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+                  Label : OBJECT
+                    $e
+        Label : ARGUMENT
+          'H'
+    Label : OBJECT
+      [
+      Label : VARIABLE
+        $d
+      Label : INDEX
+        'E'
+  Label : ELEMENT
+    try
+    Label : CODE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            'B'
+        Label : LEFT
+          $a
+    Label : CATCH
+      catch
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            void
+      Label : CLASS
+        D
+      Label : VARIABLE
+        $c

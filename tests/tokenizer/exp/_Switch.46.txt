@@ -1,0 +1,78 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    switch
+    Label : NAME
+      ->
+      Label : OBJECT
+        $this
+      Label : PROPERTY
+        algorithm
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Block with Sequence For Case Without Semicolon
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              Void
+        Label : CASE
+          ::
+          Label : CLASS
+            self
+          Label : CONSTANT
+            ALGORITHM_NONE
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default
+          Label : ELEMENT
+            return
+            Label : RETURN
+              null
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            .=
+            Label : RIGHT
+              base64_decode
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    key
+            Label : LEFT
+              $data
+        Label : CASE
+          ::
+          Label : CLASS
+            self
+          Label : CONSTANT
+            ALGORITHM_RSA
+      Label : ELEMENT
+        case
+        Label : CODE
+          Void
+        Label : CASE
+          ::
+          Label : CLASS
+            self
+          Label : CONSTANT
+            ALGORITHM_DSA

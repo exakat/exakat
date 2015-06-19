@@ -1,0 +1,64 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      &&
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $b
+        Label : METHOD
+          D
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : LEFT
+        instanceof
+        Label : VARIABLE
+          $a
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $f
+        Label : METHOD
+          F
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+      Label : ELEMENT
+        return
+        Label : RETURN
+          $h
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          clone
+          Label : CLONE
+            (
+            Label : CODE
+              ?
+              Label : CONDITION
+                $d
+              Label : THEN
+                :
+              Label : ELSE
+                ->
+                Label : OBJECT
+                  $e
+                Label : PROPERTY
+                  E
+        Label : LEFT
+          $c

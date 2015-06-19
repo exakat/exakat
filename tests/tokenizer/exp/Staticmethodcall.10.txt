@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        A
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        A
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
+      Label : SUBNAME
+        A
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void

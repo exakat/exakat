@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      f
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        static
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $g
+        Label : PROTECTED
+          protected
+        Label : STATIC
+          static
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      C
+    Label : METHOD
+      d
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'e'
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        defined
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'A'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        exit
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'B'

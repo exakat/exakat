@@ -1,0 +1,21 @@
+;
+Label : ELEMENT
+  A
+Label : ELEMENT
+  f
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $d
+Label : ELEMENT
+  print
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      a
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          "c"
+        Label : ARGUMENT
+          'b'

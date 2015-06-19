@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        'b'
+      Label : LEFT
+        $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $d
+        Label : THEN
+          ;
+          Label : ELEMENT
+            --
+            Label : PREPLUSPLUS
+              $e

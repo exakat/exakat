@@ -1,0 +1,45 @@
+<?php 
+Label : CODE
+  foreach
+  Label : VALUE
+    $b
+  Label : SOURCE
+    ->
+    Label : OBJECT
+      $a
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : BLOCK
+    if
+    Label : CONDITION
+      !==
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'E'
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $c
+            Label : METHOD
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+      Label : LEFT
+        0
+    Label : THEN
+      ;
+      Label : ELEMENT
+        void
+      Label : ELEMENT
+        continue
+        Label : LEVEL
+          void

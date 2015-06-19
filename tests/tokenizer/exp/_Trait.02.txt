@@ -1,0 +1,96 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      J
+    Label : EXTENDS
+      K
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        use
+        Label : USE
+          L
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        M
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $b
+    Label : METHOD
+      N
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    trait
+    Label : NAME
+      E
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          F
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'I'
+          Label : ELEMENT
+            ::
+            Label : METHOD
+              H
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              G
+  Label : ELEMENT
+    class
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          C
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'D'

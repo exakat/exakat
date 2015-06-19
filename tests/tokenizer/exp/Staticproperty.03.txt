@@ -1,0 +1,11 @@
+;
+Label : ELEMENT
+  [
+  Label : VARIABLE
+    ::
+    Label : CLASS
+      self
+    Label : PROPERTY
+      $a
+  Label : INDEX
+    'b'

@@ -1,0 +1,49 @@
+;
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    ;
+    Label : ELEMENT
+      
+    Label : ELEMENT
+      while
+      Label : CONDITION
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : LEFT
+          $a
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              new
+              Label : NEW
+                D
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        =>
+                        Label : VALUE
+                          $a
+                        Label : KEY
+                          'F'
+                  Label : ARGUMENT
+                    'E'
+Label : ELEMENT
+  B

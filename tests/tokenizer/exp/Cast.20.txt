@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  return
+  Label : RETURN
+    (string)
+    Label : CAST
+      {
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        $b

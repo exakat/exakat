@@ -1,0 +1,17 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        +
+        Label : RIGHT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $a
+        Label : LEFT
+          1

@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      (
+      Label : CODE
+        ?
+        Label : CONDITION
+          true
+        Label : THEN
+          'true'
+        Label : ELSE
+          ?
+          Label : CONDITION
+            false
+          Label : THEN
+            't'
+          Label : ELSE
+            'f'

@@ -1,0 +1,7 @@
+<?php
+echo $a;
+?>
+b
+<?php
+echo $c;
+?>

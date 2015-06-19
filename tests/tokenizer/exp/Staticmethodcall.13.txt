@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  namespace
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          K
+        Label : SUBNAME
+          F
+      Label : METHOD
+        L
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'M'
+    Label : ELEMENT
+      class
+      Label : NAME
+        D
+      Label : BLOCK
+        void
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          D
+        Label : SUBNAME
+          F
+    Label : ELEMENT
+      use
+      Label : USE
+        \
+        Label : SUBNAME
+          F
+        Label : SUBNAME
+          B
+  Label : NAMESPACE
+    \
+    Label : SUBNAME
+      D
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B

@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  ->
+  Label : OBJECT
+    $a
+  Label : METHOD
+    b
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        ::
+        Label : METHOD
+          e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $f
+        Label : CLASS
+          D
+      Label : ARGUMENT
+        <<<EOF
+
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            A 
+          Label : CONCAT
+            $b
+          Label : CONCAT
+             C
+

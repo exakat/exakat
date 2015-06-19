@@ -1,0 +1,57 @@
+<?php 
+Label : CODE
+  if
+  Label : CONDITION
+    &&
+    Label : RIGHT
+      is_array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $type
+    Label : LEFT
+      $type
+  Label : THEN
+    ;
+    Label : ELEMENT
+      .=
+      Label : RIGHT
+        Concatenation
+        Label : CONCAT
+          ')'
+        Label : CONCAT
+          implode
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              db_input
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $type
+            Label : ARGUMENT
+              ','
+        Label : CONCAT
+          ' AND thread.thread_type IN('
+      Label : LEFT
+        $sql
+  Label : ELSE
+    elseif
+    Label : CONDITION
+      $type
+    Label : THEN
+      ;
+      Label : ELEMENT
+        .=
+        Label : RIGHT
+          Concatenation
+          Label : CONCAT
+            db_input
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $type
+          Label : CONCAT
+            ' AND thread.thread_type='
+        Label : LEFT
+          $sql

@@ -1,0 +1,88 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        &&
+        Label : RIGHT
+          (
+          Label : CODE
+            ||
+            Label : RIGHT
+              !
+              Label : NOT
+                file_exists
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    Concatenation
+                    Label : CONCAT
+                      'n'
+                    Label : CONCAT
+                      [
+                      Label : VARIABLE
+                        ->
+                        Label : OBJECT
+                          $k
+                        Label : PROPERTY
+                          l
+                      Label : INDEX
+                        'm'
+                    Label : CONCAT
+                      'j'
+                    Label : CONCAT
+                      I
+            Label : LEFT
+              !
+              Label : NOT
+                preg_match
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      ->
+                      Label : OBJECT
+                        $f
+                      Label : PROPERTY
+                        g
+                    Label : INDEX
+                      'h'
+                  Label : ARGUMENT
+                    '/^\w+$/'
+        Label : LEFT
+          !
+          Label : NOT
+            in_array
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : PROPERTY
+                    c
+                Label : INDEX
+                  'd'
+      Label : THEN
+        'o'
+      Label : ELSE
+        [
+        Label : VARIABLE
+          ->
+          Label : OBJECT
+            $p
+          Label : PROPERTY
+            q
+        Label : INDEX
+          'r'
+    Label : LEFT
+      $a

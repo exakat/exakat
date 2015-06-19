@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      (
+      Label : CODE
+        1

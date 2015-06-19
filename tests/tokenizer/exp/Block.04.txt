@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    $a
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        $c
+      Label : LEFT
+        $b
+    Label : ELEMENT
+      void

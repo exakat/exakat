@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ->
+  Label : OBJECT
+    $a
+  Label : METHOD
+    ;
+    Label : ELEMENT
+      Concatenation
+      Label : CONCAT
+        'd'
+      Label : CONCAT
+        ->
+        Label : OBJECT
+          $b
+        Label : PROPERTY
+          c
+    Label : ARGUMENTS
+      void

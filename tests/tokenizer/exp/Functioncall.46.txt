@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        'K'
+      Label : ARGUMENT
+        (
+        Label : CODE
+          ?
+          Label : CONDITION
+            $j
+          Label : THEN
+            "J"
+          Label : ELSE
+            "K"
+      Label : ARGUMENT
+        'I'
+      Label : ARGUMENT
+        (
+        Label : CODE
+          ?
+          Label : CONDITION
+            $j
+          Label : THEN
+            'A'
+          Label : ELSE
+            'H'

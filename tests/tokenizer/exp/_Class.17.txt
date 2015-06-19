@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      var
+      Label : VALUE
+        Void
+      Label : DEFINE
+        $a
+      Label : VAR
+        var

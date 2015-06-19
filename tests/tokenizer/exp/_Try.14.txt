@@ -1,0 +1,250 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    try
+    Label : CODE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            J
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ::
+                Label : PROPERTY
+                  $k
+                Label : CLASS
+                  K
+        Label : LEFT
+          $j
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $o
+          Label : METHOD
+            O
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $p
+              Label : ARGUMENT
+                'P'
+        Label : LEFT
+          $n
+      Label : ELEMENT
+        return
+        Label : RETURN
+          [
+          Label : VARIABLE
+            $q
+          Label : INDEX
+            'Q'
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $l
+        Label : METHOD
+          L
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'N'
+            Label : ARGUMENT
+              ::
+              Label : PROPERTY
+                $m
+              Label : CLASS
+                M
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                'I'
+              Label : VALUE
+                $i
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                'H'
+              Label : VALUE
+                $h
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                'G'
+              Label : VALUE
+                $g
+        Label : LEFT
+          $f
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            F
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $e
+        Label : LEFT
+          $d
+    Label : CATCH
+      catch
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              AG
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'AH'
+      Label : VARIABLE
+        $y
+      Label : CLASS
+        AF
+    Label : CATCH
+      catch
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              AD
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $x
+                  Label : METHOD
+                    AE
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+      Label : VARIABLE
+        $w
+      Label : CLASS
+        AC
+    Label : CATCH
+      catch
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              AA
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $v
+                  Label : METHOD
+                    AB
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+      Label : VARIABLE
+        $u
+      Label : CLASS
+        Z
+    Label : CATCH
+      catch
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              V
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  Concatenation
+                  Label : CONCAT
+                    [
+                    Label : VARIABLE
+                      ->
+                      Label : OBJECT
+                        $t
+                      Label : PROPERTY
+                        X
+                    Label : INDEX
+                      'Y'
+                  Label : CONCAT
+                    'W'
+      Label : VARIABLE
+        $s
+      Label : CLASS
+        U
+    Label : CATCH
+      catch
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              S
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'T'
+      Label : VARIABLE
+        $r
+      Label : CLASS
+        R
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        C
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $b
+    Label : THEN
+      ;
+      Label : ELEMENT
+        throw
+        Label : THROW
+          new
+          Label : NEW
+            D
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'E'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'B'
+    Label : LEFT
+      $a

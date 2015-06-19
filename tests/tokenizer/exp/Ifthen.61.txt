@@ -1,0 +1,23 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      true
+    Label : THEN
+      ;
+      Label : ELEMENT
+        EMPTY_TRASH_DAYS
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        EMPTY_TRASH_DAYS
+      Label : THEN
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b

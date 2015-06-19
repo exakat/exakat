@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          b
+        Label : VARIABLE
+          $c
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          ==
+          Label : RIGHT
+            ::
+            Label : METHOD
+              e
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $f
+            Label : CLASS
+              d
+          Label : LEFT
+            false
+        Label : THEN
+          ;
+          Label : ELEMENT
+            false
+    Label : NAME
+      a

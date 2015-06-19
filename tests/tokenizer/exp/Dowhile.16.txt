@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  do
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      .=
+      Label : RIGHT
+        $lineEnd
+      Label : LEFT
+        $output
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $line
+      Label : THEN
+        ;
+        Label : ELEMENT
+          .=
+          Label : RIGHT
+            '='
+          Label : LEFT
+            $output
+  Label : CONDITION
+    !
+    Label : NOT
+      empty
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $line

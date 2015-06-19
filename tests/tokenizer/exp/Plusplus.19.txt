@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    ++
+    Label : POSTPLUSPLUS
+      ::
+      Label : CLASS
+        self
+      Label : PROPERTY
+        $b
+  Label : LEFT
+    ->
+    Label : OBJECT
+      $this
+    Label : PROPERTY
+      a

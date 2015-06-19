@@ -1,0 +1,4 @@
+<?php
+
+f(new Stdclass());
+?>

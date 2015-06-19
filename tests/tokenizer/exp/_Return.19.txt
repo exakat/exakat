@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ?
+          Label : CONDITION
+            instanceof
+            Label : VARIABLE
+              $b
+            Label : CLASS
+              \
+              Label : SUBNAME
+                D
+              Label : SUBNAME
+                C
+          Label : THEN
+            ->
+            Label : OBJECT
+              $c
+            Label : METHOD
+              E
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $d
+          Label : ELSE
+            ->
+            Label : OBJECT
+              $e
+            Label : METHOD
+              F
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $f

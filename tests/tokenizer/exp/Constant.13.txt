@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $this
+      Label : METHOD
+        b
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            false
+          Label : ARGUMENT
+            false
+          Label : ARGUMENT
+            ''
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              '\C'
+            Label : CONCAT
+              __NAMESPACE__
+    Label : LEFT
+      $a

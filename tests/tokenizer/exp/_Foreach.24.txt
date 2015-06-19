@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      $b
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        call_user_func_array
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                $d
+          Label : ARGUMENT
+            $c
+    Label : SOURCE
+      $a

@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            d
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $e
+                Label : INDEX
+                  $f
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $g
+          Label : INDEX
+            [
+            Label : VARIABLE
+              $h
+            Label : INDEX
+              $i

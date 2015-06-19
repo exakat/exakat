@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  try
+  Label : CODE
+    ;
+    Label : ELEMENT
+      ->
+      Label : OBJECT
+        $a
+      Label : METHOD
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+  Label : CATCH
+    catch
+    Label : VARIABLE
+      $b
+    Label : CODE
+      ;
+      Label : ELEMENT
+        throw
+        Label : THROW
+          ?
+          Label : CONDITION
+            $c
+          Label : THEN
+            $d
+          Label : ELSE
+            ->
+            Label : OBJECT
+              $e
+            Label : METHOD
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+    Label : CLASS
+      C

@@ -1,0 +1,47 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $c
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $d
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $a
+        Label : CASE
+          'a'

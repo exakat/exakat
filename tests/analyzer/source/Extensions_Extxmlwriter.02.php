@@ -1,0 +1,5 @@
+<?php
+
+$x = new \XMLWRITER();
+
+?>

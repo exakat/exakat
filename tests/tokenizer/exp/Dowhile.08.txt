@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  do
+  Label : CONDITION
+    $z
+  Label : BLOCK
+    foreach
+    Label : VALUE
+      $b
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
+    Label : SOURCE
+      $a

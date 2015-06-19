@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        Sequence
+        Label : ELEMENT
+          ppp
+          Label : VALUE
+            3
+          Label : DEFINE
+            $d
+          Label : VAR
+            var
+        Label : ELEMENT
+          ppp
+          Label : VALUE
+            2
+          Label : DEFINE
+            $c
+          Label : VAR
+            var
+    Label : NAME
+      x

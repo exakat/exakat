@@ -1,0 +1,61 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                t
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'd'
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  $f
+                Label : CONCAT
+                  t
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'e'
+          Label : ELEMENT
+            F
+          Label : ELEMENT
+            D
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+          Label : ELEMENT
+            C
+          Label : ELEMENT
+            B
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        G
+      Label : ELEMENT
+        A

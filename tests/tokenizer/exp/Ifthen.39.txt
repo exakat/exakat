@@ -1,0 +1,92 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        1
+      Label : LEFT
+        $l
+    Label : THEN
+      void
+    Label : ELSE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        2
+      Label : LEFT
+        $l
+    Label : THEN
+      void
+    Label : ELSE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        3
+      Label : LEFT
+        $l
+    Label : THEN
+      ;
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+        Label : ELSE
+          elseif
+          Label : CONDITION
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $b
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        ==
+        Label : RIGHT
+          4
+        Label : LEFT
+          $l
+      Label : THEN
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $d

@@ -1,0 +1,8 @@
+<?php
+
+Label : CODE
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      __NAMESPACE__

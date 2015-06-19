@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    ::
+    Label : CLASS
+      y
+    Label : PROPERTY
+      $c
+  Label : LEFT
+    $x

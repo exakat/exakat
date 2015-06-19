@@ -1,0 +1,27 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    "
+    Label : CONTAINS
+      Concatenation
+      Label : CONCAT
+        H: 
+      Label : CONCAT
+        $g
+  Label : ELEMENT
+    c
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            D: 
+          Label : CONCAT
+            ->
+            Label : OBJECT
+              $e
+            Label : PROPERTY
+              f

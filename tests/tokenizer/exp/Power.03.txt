@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    +
+    Label : RIGHT
+      **
+      Label : RIGHT
+        4
+      Label : LEFT
+        **
+        Label : RIGHT
+          3
+        Label : LEFT
+          2
+    Label : LEFT
+      1
+  Label : ELEMENT
+    +
+    Label : RIGHT
+      *
+      Label : RIGHT
+        4
+      Label : LEFT
+        **
+        Label : RIGHT
+          3
+        Label : LEFT
+          2
+    Label : LEFT
+      1
+  Label : ELEMENT
+    +
+    Label : RIGHT
+      *
+      Label : RIGHT
+        **
+        Label : RIGHT
+          4
+        Label : LEFT
+          3
+      Label : LEFT
+        2
+    Label : LEFT
+      1

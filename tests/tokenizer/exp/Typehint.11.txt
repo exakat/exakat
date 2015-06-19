@@ -1,0 +1,74 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          $d
+        Label : CLASS
+          \
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          =
+          Label : RIGHT
+            null
+          Label : LEFT
+            $c
+        Label : CLASS
+          A
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      a2
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          $d
+        Label : CLASS
+          \
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          =
+          Label : RIGHT
+            null
+          Label : LEFT
+            $c
+        Label : CLASS
+          \
+          Label : SUBNAME
+            A
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

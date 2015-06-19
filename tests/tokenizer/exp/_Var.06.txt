@@ -1,0 +1,44 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      var
+      Label : VALUE
+        '23'
+      Label : DEFINE
+        $e
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        array
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : DEFINE
+        $d
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        -2
+      Label : DEFINE
+        $c
+      Label : VAR
+        var
+    Label : ELEMENT
+      var
+      Label : VALUE
+        1
+      Label : DEFINE
+        $b
+      Label : VAR
+        var

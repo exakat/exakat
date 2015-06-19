@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    [
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        ::
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : CLASS
+          B
+      Label : PROPERTY
+        d
+    Label : INDEX
+      'e'
+  Label : LEFT
+    $a

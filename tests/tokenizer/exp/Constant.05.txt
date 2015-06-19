@@ -1,0 +1,8 @@
+<?php
+
+Label : CODE
+  print
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      __FUNCTION__

@@ -1,0 +1,84 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    require_once
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        o
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'r'
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              $q
+            Label : CONCAT
+              'p'
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        $j
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $k
+            Label : INDEX
+              'l'
+          Label : INDEX
+            'm'
+        Label : LEFT
+          $k
+    Label : ELSE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          true
+        Label : LEFT
+          $n
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      str_replace
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                'g'
+            Label : INDEX
+              'h'
+          Label : INDEX
+            'i'
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'd'
+          Label : INDEX
+            'e'
+        Label : ARGUMENT
+          'b'
+    Label : LEFT
+      $a

@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    x
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        (array)
+        Label : CAST
+          4
+      Label : ARGUMENT
+        (string)
+        Label : CAST
+          3
+  Label : ELEMENT
+    x
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        (int)
+        Label : CAST
+          '3'

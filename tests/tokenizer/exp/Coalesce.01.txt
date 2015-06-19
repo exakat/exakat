@@ -1,0 +1,50 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ??
+      Label : RIGHT
+        $h
+      Label : LEFT
+        ::
+        Label : CLASS
+          E
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+    Label : LEFT
+      $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ??
+      Label : RIGHT
+        l
+      Label : LEFT
+        j
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'l'
+    Label : LEFT
+      $i
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ??
+      Label : RIGHT
+        'c'
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $_GET
+        Label : INDEX
+          'b'
+    Label : LEFT
+      $a

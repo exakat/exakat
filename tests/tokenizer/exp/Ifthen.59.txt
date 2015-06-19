@@ -1,0 +1,33 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        $b
+      Label : THEN
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $c
+      Label : ELSE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $d

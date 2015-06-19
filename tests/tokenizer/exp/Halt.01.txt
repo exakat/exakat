@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+     
+
+?>
+  Label : ELEMENT
+    __HALT_COMPILER

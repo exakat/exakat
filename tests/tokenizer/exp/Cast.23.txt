@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (array)
+      Label : CAST
+        $b
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c
+        Label : NAME
+          $b
+    Label : LEFT
+      $a

@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'C'
+      Label : THEN
+        (float)
+        Label : CAST
+          D
+      Label : ELSE
+        null
+    Label : LEFT
+      $a

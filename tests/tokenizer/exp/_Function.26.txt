@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          $x
+        Label : CLASS
+          array
+    Label : NAME
+      test
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          $x

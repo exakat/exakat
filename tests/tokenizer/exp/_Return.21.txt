@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  return
+  Label : RETURN
+    {
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        $this
+      Label : PROPERTY
+        B
+    Label : INDEX
+      ++
+      Label : POSTPLUSPLUS
+        ->
+        Label : OBJECT
+          $this
+        Label : PROPERTY
+          C

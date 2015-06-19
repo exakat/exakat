@@ -1,0 +1,19 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          D
+        Label : CONCAT
+          $b1
+        Label : CONCAT
+          $c
+        Label : CONCAT
+          C
+    Label : LEFT
+      $a1

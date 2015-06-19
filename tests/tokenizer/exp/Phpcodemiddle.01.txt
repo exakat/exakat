@@ -1,0 +1,23 @@
+;
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $b
+    Label : ELEMENT
+      B
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $a
+Label : ELEMENT
+  C
+Label : ELEMENT
+  A

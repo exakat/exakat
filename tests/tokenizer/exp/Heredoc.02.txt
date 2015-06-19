@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<'EOF'
+
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          b
+
+    Label : LEFT
+      $a

@@ -1,0 +1,31 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    -
+    Label : RIGHT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $c
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $e
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      0
+    Label : LEFT
+      $a

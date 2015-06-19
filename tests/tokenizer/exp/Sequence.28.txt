@@ -1,0 +1,63 @@
+;
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        7
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      void
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        6
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      f
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        5
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      e
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        4
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      d
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        3
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      c
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        2
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      b
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $x
+Label : ELEMENT
+  g
+Label : ELEMENT
+  a

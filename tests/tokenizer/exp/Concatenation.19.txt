@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    Concatenation
+    Label : CONCAT
+      $c
+    Label : CONCAT
+      @
+      Label : AT
+        y
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            1
+    Label : CONCAT
+      "a"
+  Label : LEFT
+    $z

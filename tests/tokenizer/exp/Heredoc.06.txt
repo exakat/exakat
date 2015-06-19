@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<'NOWDOC'
+
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          abc
+
+    Label : LEFT
+      $a

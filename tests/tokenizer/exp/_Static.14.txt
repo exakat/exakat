@@ -1,0 +1,39 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    y
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        new
+        Label : NEW
+          static
+          Label : ARGUMENTS
+            void
+  Label : ELEMENT
+    x
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        new
+        Label : NEW
+          static
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+  Label : ELEMENT
+    [
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENTS
+        new
+        Label : NEW
+          static
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $method
+            Label : ARGUMENT
+              void

@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      ->
+      Label : OBJECT
+        $b
+      Label : PROPERTY
+        d
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $j
+    Label : SOURCE
+      $a

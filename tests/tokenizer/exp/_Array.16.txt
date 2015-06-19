@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          '456'
+        Label : INDEX
+          2
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          '123'
+        Label : INDEX
+          1

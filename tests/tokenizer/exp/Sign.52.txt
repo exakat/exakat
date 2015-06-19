@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    instanceof
+    Label : VARIABLE
+      $a
+    Label : CLASS
+      B
+  Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $d
+        Label : METHOD
+          e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : LEFT
+        $c
+  Label : ELSE
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        '-'
+      Label : LEFT
+        -
+        Label : SIGN
+          $f

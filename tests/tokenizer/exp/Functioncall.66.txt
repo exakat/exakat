@@ -1,0 +1,19 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    foo
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        <<<HEREDOC
+
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            bc
+
+
+      Label : ARGUMENT
+        'd'

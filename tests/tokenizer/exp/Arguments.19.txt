@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  a
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      instanceof
+      Label : CLASS
+        c
+      Label : VARIABLE
+        $b

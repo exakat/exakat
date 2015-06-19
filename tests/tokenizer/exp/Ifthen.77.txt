@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $d
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $e
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ->
+      Label : OBJECT
+        $a
+      Label : METHOD
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        try
+        Label : CODE
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+        Label : CATCH
+          catch
+          Label : VARIABLE
+            $c
+          Label : CODE
+            void
+          Label : CLASS
+            \
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              C

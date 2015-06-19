@@ -1,0 +1,13 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+     
+
+$x = 1;
+$y = 2;
+
+?>
+  Label : ELEMENT
+    __HALT_COMPILER

@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    .=
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        >
+        Label : RIGHT
+          127
+        Label : LEFT
+          ord
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                $i
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            ++
+            Label : PREPLUSPLUS
+              $l
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            $e
+      Label : ELSE
+        [
+        Label : VARIABLE
+          $e
+        Label : INDEX
+          $k
+    Label : LEFT
+      $a

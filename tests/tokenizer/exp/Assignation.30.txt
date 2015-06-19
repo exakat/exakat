@@ -1,0 +1,80 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    switch
+    Label : NAME
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                ->
+                Label : OBJECT
+                  $e
+                Label : PROPERTY
+                  F
+              Label : PROPERTY
+                G
+            Label : LEFT
+              $d
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              H
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'I'
+                Label : ARGUMENT
+                  $f
+            Label : THEN
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  'J'
+                Label : LEFT
+                  $g
+            Label : ELSE
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  'K'
+                Label : LEFT
+                  $h
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              (string)
+              Label : CAST
+                D
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $c
+                    Label : INDEX
+                      'E'
+            Label : LEFT
+              $b
+        Label : CASE
+          'C'

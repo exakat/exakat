@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      0
+    Label : THEN
+      ;
+      Label : ELEMENT
+        continue
+        Label : LEVEL
+          void
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a

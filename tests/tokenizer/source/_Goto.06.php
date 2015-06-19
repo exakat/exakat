@@ -1,0 +1,4 @@
+<?php
+  cleanupCookie:
+  GOTO cleanupCookie;
+?>

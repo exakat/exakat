@@ -1,0 +1,56 @@
+<?php
+
+Label : CODE
+  namespace
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      trait
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          protected
+          Label : VALUE
+            Void
+          Label : PROTECTED
+            protected
+          Label : DEFINE
+            $a
+        Label : ELEMENT
+          use
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              as
+              Label : SUBNAME
+                K
+              Label : AS
+                private
+                Label : DEFINE
+                  L
+                Label : PRIVATE
+                  private
+          Label : USE
+            H
+      Label : NAME
+        I
+    Label : ELEMENT
+      use
+      Label : USE
+        \
+        Label : SUBNAME
+          H
+        Label : SUBNAME
+          D
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
+  Label : NAMESPACE
+    \
+    Label : SUBNAME
+      D
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B

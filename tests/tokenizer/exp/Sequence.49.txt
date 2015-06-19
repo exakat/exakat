@@ -1,0 +1,47 @@
+;
+Label : ELEMENT
+  ->
+  Label : OBJECT
+    ::
+    Label : CLASS
+      C
+    Label : METHOD
+      D
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          __
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'F'
+  Label : METHOD
+    g
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      I
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'J'
+Label : ELEMENT
+  H
+Label : ELEMENT
+  A
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      __
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'B'

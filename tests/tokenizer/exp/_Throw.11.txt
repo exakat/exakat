@@ -1,0 +1,13 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      (
+      Label : CODE
+        $xb
+  Label : ELEMENT
+    throw
+    Label : THROW
+      $x

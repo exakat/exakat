@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      F
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          (array)
+          Label : CAST
+            clone
+            Label : CLONE
+              (object)
+              Label : CAST
+                $a
+        Label : LEFT
+          $b

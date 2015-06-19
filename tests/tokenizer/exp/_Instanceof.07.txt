@@ -1,0 +1,130 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    B
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      case
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            void
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b
+      Label : CASE
+        instanceof
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+        Label : VARIABLE
+          $a
+    Label : ELEMENT
+      case
+      Label : CODE
+        Void
+      Label : CASE
+        instanceof
+        Label : CLASS
+          \
+          Label : SUBNAME
+            R
+          Label : SUBNAME
+            Q
+          Label : SUBNAME
+            P
+          Label : SUBNAME
+            O
+          Label : SUBNAME
+            N
+        Label : VARIABLE
+          $g
+    Label : ELEMENT
+      case
+      Label : CODE
+        Block with Sequence For Case
+        Label : ELEMENT
+          return
+          Label : RETURN
+            void
+      Label : CASE
+        instanceof
+        Label : CLASS
+          \
+          Label : SUBNAME
+            W
+          Label : SUBNAME
+            V
+          Label : SUBNAME
+            U
+          Label : SUBNAME
+            T
+          Label : SUBNAME
+            S
+        Label : VARIABLE
+          $h
+    Label : ELEMENT
+      case
+      Label : CODE
+        Void
+      Label : CASE
+        instanceof
+        Label : CLASS
+          \
+          Label : SUBNAME
+            M
+          Label : SUBNAME
+            L
+          Label : SUBNAME
+            K
+          Label : SUBNAME
+            J
+        Label : VARIABLE
+          $f
+    Label : ELEMENT
+      case
+      Label : CODE
+        Void
+      Label : CASE
+        instanceof
+        Label : CLASS
+          \
+          Label : SUBNAME
+            I
+          Label : SUBNAME
+            H
+          Label : SUBNAME
+            G
+        Label : VARIABLE
+          $e
+    Label : ELEMENT
+      case
+      Label : CODE
+        Void
+      Label : CASE
+        ::
+        Label : METHOD
+          F
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $d
+        Label : CLASS
+          E
+    Label : ELEMENT
+      case
+      Label : CODE
+        Void
+      Label : CASE
+        instanceof
+        Label : CLASS
+          D
+        Label : VARIABLE
+          $c

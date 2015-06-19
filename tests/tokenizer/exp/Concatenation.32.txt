@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  =
+  Label : RIGHT
+    ?
+    Label : CONDITION
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'd'
+    Label : THEN
+      Concatenation
+      Label : CONCAT
+        'i'
+      Label : CONCAT
+        $g
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'h'
+        Label : NAME
+          $g
+      Label : CONCAT
+        'f'
+    Label : ELSE
+      'j'
+  Label : LEFT
+    $a

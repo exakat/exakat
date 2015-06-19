@@ -1,0 +1,13 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $y
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $x
