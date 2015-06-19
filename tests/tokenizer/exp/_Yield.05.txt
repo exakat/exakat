@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        iterator_to_array
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            a
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        foreach
+        Label : VALUE
+          $i
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+             A 
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              void
+        Label : SOURCE
+          range
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              1
