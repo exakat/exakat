@@ -28,20 +28,22 @@ class Block extends TokenAuto {
     static public $atom = 'Sequence';
     
     public function _check() {
-    // @doc {{ Block}}
-        $this->conditions = array( -1 => array('token'   => array('T_OPEN_CURLY')),
+    // @doc {{ Block }}
+        $this->conditions = array( -1 => array('token'   => 'T_OPEN_CURLY',
+                                               'atom'    => 'none'),
                                     0 => array('token'   => self::$operators),
                                     1 => array('atom'    => 'yes'),
                                     2 => array('token'   => 'T_CLOSE_CURLY',
                                                'atom'    => 'none'),
+                                    3 => array('token'   => 'T_CLOSE_CURLY'),
         );
         
         $this->actions = array('toBlock'      => true);
         $this->checkAuto();
 
-    // @doc Block
+    // @doc { Block }
         $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR',
-                                                                     'T_CLOSE_CURLY', 'T_OPEN_CURLY',// $x{1}{3},
+                                                                     'T_CLOSE_CURLY', // $x{1}{3}, 'T_OPEN_CURLY',
                                                                      'T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS',// x(1){3},
                                                                      'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',  // $x[1]{3},
                                                                      'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT',
@@ -54,8 +56,7 @@ class Block extends TokenAuto {
         );
 
         $this->actions = array('toBlock'            => true,
-                               'addAlwaysSemicolon' => 'toBlockSequence'
-                               );
+                               'addAlwaysSemicolon' => 'toBlockSequence');
         $this->checkAuto();
 
         return false;

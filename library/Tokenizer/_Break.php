@@ -28,9 +28,9 @@ class _Break extends TokenAuto {
     static public $atom = 'Break';
     
     public function _check() {
-        $this->conditions = array(0 => array('token' => _Break::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => 'yes'),
+        $this->conditions = array(0 => array('token'     => _Break::$operators,
+                                             'atom'      => 'none'),
+                                  1 => array('atom'      => 'yes'),
                                   2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators)),
                                   );
         
