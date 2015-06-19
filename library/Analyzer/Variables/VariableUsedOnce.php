@@ -35,7 +35,7 @@ class VariableUsedOnce extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs('Variable')
+        $this->atomIs(array('Variable', 'Functioncall'))
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->analyzerIsNot("Analyzer\\Variables\\Blind")
              ->analyzerIsNot("Analyzer\\Variables\\InterfaceArguments")

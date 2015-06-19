@@ -27,6 +27,7 @@ use Analyzer;
 
 class Variablenames extends Analyzer\Analyzer {
     public function analyze() {
+        // $x
         $this->atomIs('Variable')
              ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Staticproperty', 'PROPERTY')
@@ -34,6 +35,18 @@ class Variablenames extends Analyzer\Analyzer {
              ->analyzerIsNot("Analyzer\\Variables\\Blind");
         $this->prepareQuery();
 
+        // $object->$x()
+        $this->atomIs('Functioncall')
+             ->tokenIs('T_VARIABLE');
+        $this->prepareQuery();
+
+        // $object->$x or $object->{$x}
+        $this->atomIs('Property')
+             ->outIs('PROPERTY')
+             ->tokenIs('token', 'T_VARIABLE');
+        $this->prepareQuery();
+
+        // ${'x'}
         $this->atomIs('Variable')
              ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Staticproperty', 'PROPERTY')
