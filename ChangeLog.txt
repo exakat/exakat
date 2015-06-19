@@ -1,9 +1,15 @@
 Version 0.2.3 (Techu Shi, Coming up)
+This is a maintenance release, with improved ease of use. 
 + Analyzer
-    + 
+    + Report usage of Return Typehint, and Scalar Typehint
+    + Report usage of classes that used to return null on new
+    + Report useless abstract classes
 + Tokenizer
-    + 
+    + Upgraded 'init' command, to handle various VCS
+    + Added support for Return Typehint
+
 Version 0.2.2 (Xiong Shangjun, June 16th, 2015)
+This is a maintenance release, with vastly improved speed
 + Analyzer
     + Now spots short assignations
     + More UselessInstructions spotted
@@ -14,7 +20,9 @@ Version 0.2.2 (Xiong Shangjun, June 16th, 2015)
     + Better support for arrays [1,2,3] as functioncall (just like array())
     + Process tokens by batches of 800
     + Clean vertex at each queries, not Sequence
+
 Version 0.2.1 (General Yin, June 2nd, 2015)
+This is a maintenance release
 + Analyzer
     + sizeOf may have 2 arguments
     + 2 clearPHP link added in documentation
@@ -25,5 +33,6 @@ Version 0.2.1 (General Yin, June 2nd, 2015)
     + Fixed Visibility in Use instruction
     + Foreach accepts Constants as Source
     + Fixed special case for nested IfThen
+
 Version 0.2.0 (Demon of Confusion, May 15th, 2015)
 + First version
