@@ -294,6 +294,40 @@ class Load implements Tasks {
                                                   ->save();
 
                     $to_index = false;
+
+        // TODO : centralize this with RETURN, CONTINUE, etc...
+                } elseif ($token[3] == 'T_BREAK'     && 
+                          is_array($tokens[$id + 1]) && 
+                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
+                          print __LINE__."\n";
+                    $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
+                                                  ->setProperty('code', $token[1])
+                                                  ->setProperty('line', $token[2])->save();
+
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    $previous = $T[$Tid];
+                    $regexIndex['_Break']->relateTo($T[$Tid], 'INDEXED')->save();
+                
+                    $Tid++;
+                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                                  ->setProperty('code', 'void')
+                                                  ->setProperty('fullcode', ' ')
+                                                  ->setProperty('line', $line)
+                                                  ->setProperty('modifiedBy', 'bin/load13')
+                                                  ->setProperty('atom', 'Void')
+                                                  ->save();
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    $previous = $T[$Tid];
+
+                    $Tid++;
+                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                        ->setProperty('code', ';')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load18')
+                                                        ->save();
+                    $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+
+                    $to_index = false;
                 } elseif ($token[3] == 'T_YIELD' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
