@@ -91,8 +91,8 @@ class Appinfo extends \Report\Content {
                             'Closures'             => 'Functions/Closures',
 
                             'Typehint'             => 'Functions/Typehints',
-                            'Scalar Typehint'      => 'Functions/ScalarTypehintUsage',
-                            'Return Typehint'      => 'Functions/ReturnTypehintUsage',
+                            'Scalar Typehint'      => 'Php/ScalarTypehintUsage',
+                            'Return Typehint'      => 'Php/ReturnTypehintUsage',
                             'Static variables'     => 'Variables/StaticVariables',
 
                             'Dynamic functioncall' => 'Functions/Dynamiccall',
