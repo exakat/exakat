@@ -1150,14 +1150,20 @@ g.addEdge(it, a4, 'NEXT');
 /* insert sequence for namespace */
 
 sequence = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line, fullcode:';']);
+g.idx('atoms').put('atom', 'Sequence', sequence);
+
+g.addEdge(a2, sequence, 'NEXT');
 
 g.addEdge(sequence, a3, 'ELEMENT');
 a3.bothE('NEXT').each{ g.removeEdge(it); }
-a4.bothE('NEXT').each{ g.removeEdge(it); }
-g.removeVertex(a4);
-
-g.addEdge(a2, sequence, 'NEXT');
-g.addEdge(sequence, a5, 'NEXT');
+if (a4.token == 'T_SEMICOLON') {
+    a5 = a4.out('NEXT').next();
+    a4.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(a4);
+    g.addEdge(sequence, a5, 'NEXT');
+} else {
+    g.addEdge(sequence, a4, 'NEXT');
+}
 
 ";
             unset($actions['insertNsSeq']);
