@@ -10,12 +10,12 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          null
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          null
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -34,12 +34,12 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          null
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          null
         Label : BLOCK
           ;
           Label : ELEMENT

@@ -3,13 +3,17 @@
 Label : CODE
   ;
   Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
     function
+    Label : NAME
+      
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
-    Label : NAME
-      
     Label : BLOCK
       void
     Label : USE
@@ -21,13 +25,31 @@ Label : CODE
       Label : ARGUMENT
         $e
   Label : ELEMENT
+    
+  Label : ELEMENT
     function
+    Label : NAME
+      
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
+    Label : BLOCK
+      void
+    Label : USE
+      void
+      Label : ARGUMENT
+        $bq
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    function
     Label : NAME
       
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
     Label : BLOCK
       void
     Label : USE
@@ -38,26 +60,12 @@ Label : CODE
         $c
   Label : ELEMENT
     function
+    Label : NAME
+      
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
-    Label : NAME
-      
-    Label : BLOCK
-      void
-    Label : USE
-      void
-      Label : ARGUMENT
-        $bq
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
-    Label : NAME
-      
     Label : BLOCK
       void
     Label : USE

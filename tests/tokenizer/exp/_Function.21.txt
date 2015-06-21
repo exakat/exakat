@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      a
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      a
     Label : BLOCK
       void

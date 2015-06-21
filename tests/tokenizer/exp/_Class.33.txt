@@ -12,25 +12,25 @@ Label : CODE
         Sequence
         Label : ELEMENT
           ppp
-          Label : VALUE
-            5
           Label : DEFINE
             $h
+          Label : VALUE
+            5
           Label : VAR
             var
         Label : ELEMENT
           ppp
-          Label : VALUE
-            4
           Label : DEFINE
             $g
+          Label : VALUE
+            4
           Label : VAR
             var
         Label : ELEMENT
           ppp
-          Label : VALUE
-            void
           Label : DEFINE
             $e
+          Label : VALUE
+            void
           Label : VAR
             var

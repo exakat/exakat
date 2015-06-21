@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      getValue
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      getValue
     Label : BLOCK
       ;
       Label : ELEMENT

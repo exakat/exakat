@@ -10,12 +10,12 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          FALSE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          FALSE
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -28,12 +28,12 @@ Label : CODE
           static
       Label : ELEMENT
         function
+        Label : NAME
+          TRUE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          TRUE
         Label : BLOCK
           ;
           Label : ELEMENT

@@ -10,42 +10,42 @@ Label : CODE
       ;
       Label : ELEMENT
         var
-        Label : VALUE
-          Void
         Label : DEFINE
           $b
+        Label : VALUE
+          Void
         Label : VAR
           var
       Label : ELEMENT
         var
-        Label : VALUE
-          Void
         Label : DEFINE
           $c
+        Label : VALUE
+          Void
         Label : VAR
           var
       Label : ELEMENT
         var
-        Label : VALUE
-          Void
         Label : DEFINE
           $d
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
         Label : VALUE
           Void
-        Label : DEFINE
-          $e
         Label : VAR
           var
       Label : ELEMENT
         var
+        Label : DEFINE
+          $e
         Label : VALUE
-          0
+          Void
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
         Label : DEFINE
           $a
+        Label : VALUE
+          0
         Label : VAR
           var
   Label : ELEMENT

@@ -4,29 +4,29 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      a
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         &
+        Label : CLASS
+          StdClass
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $b
-        Label : CLASS
-          StdClass
       Label : ARGUMENT
         &
+        Label : CLASS
+          StdClass
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $x
-        Label : CLASS
-          StdClass
-    Label : NAME
-      a
     Label : BLOCK
       void

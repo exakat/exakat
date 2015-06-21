@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  class
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      var
-      Label : VALUE
-        1
-      Label : DEFINE
-        $b
-      Label : VAR
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
         var
-  Label : NAME
-    x
+        Label : DEFINE
+          $b
+        Label : VALUE
+          1
+        Label : VAR
+          var

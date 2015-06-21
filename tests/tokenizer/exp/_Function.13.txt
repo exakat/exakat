@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      x
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -14,7 +16,5 @@ Label : CODE
         $x
       Label : ARGUMENT
         $y
-    Label : NAME
-      x
     Label : BLOCK
       void

@@ -2,21 +2,21 @@
 
 Label : CODE
   class
+  Label : NAME
+    x
   Label : BLOCK
     ;
     Label : ELEMENT
       const
-      Label : VALUE
-        2
       Label : NAME
         b
+      Label : VALUE
+        2
     Label : ELEMENT
       var
-      Label : VALUE
-        Void
       Label : DEFINE
         $a
+      Label : VALUE
+        Void
       Label : VAR
         var
-  Label : NAME
-    x

@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
-    Label : NAME
-      
     Label : BLOCK
       ;
       Label : ELEMENT

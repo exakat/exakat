@@ -9,16 +9,16 @@ Label : ELEMENT
         (
         Label : CODE
           &&
+          Label : RIGHT
+            !
+            Label : NOT
+              $f
           Label : LEFT
             d
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'e'
-          Label : RIGHT
-            !
-            Label : NOT
-              $f
       Label : THEN
         "g"
       Label : ELSE

@@ -4,25 +4,25 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       ;
       Label : ELEMENT
         Sequence
         Label : ELEMENT
           ppp
-          Label : VALUE
-            3
           Label : DEFINE
             $d
+          Label : VALUE
+            3
           Label : VAR
             var
         Label : ELEMENT
           ppp
-          Label : VALUE
-            2
           Label : DEFINE
             $c
+          Label : VALUE
+            2
           Label : VAR
             var
-    Label : NAME
-      x
