@@ -2,6 +2,12 @@
 
 Label : CODE
   namespace
+  Label : NAMESPACE
+    \
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -10,6 +16,16 @@ Label : CODE
         ;
         Label : ELEMENT
           use
+          Label : USE
+            \
+            Label : SUBNAME
+              K
+            Label : SUBNAME
+              J
+            Label : SUBNAME
+              I
+            Label : SUBNAME
+              H
           Label : BLOCK
             ;
             Label : ELEMENT
@@ -30,16 +46,6 @@ Label : CODE
                 L
               Label : AS
                 public
-          Label : USE
-            \
-            Label : SUBNAME
-              K
-            Label : SUBNAME
-              J
-            Label : SUBNAME
-              I
-            Label : SUBNAME
-              H
       Label : NAME
         F
       Label : EXTENDS
@@ -52,9 +58,3 @@ Label : CODE
           E
         Label : SUBNAME
           D
-  Label : NAMESPACE
-    \
-    Label : SUBNAME
-      C
-    Label : SUBNAME
-      B

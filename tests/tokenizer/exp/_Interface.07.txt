@@ -4,22 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     interface
-    Label : NAME
-      A
     Label : BLOCK
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $f
             Label : CLASS
               E
-        Label : NAME
-          D
+            Label : VARIABLE
+              $f
+    Label : NAME
+      A
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -38,22 +38,22 @@ Label : CODE
           B
   Label : ELEMENT
     interface
-    Label : NAME
-      A
     Label : BLOCK
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $f
             Label : CLASS
               E
-        Label : NAME
-          D
+            Label : VARIABLE
+              $f
+    Label : NAME
+      A
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -68,22 +68,22 @@ Label : CODE
           B
   Label : ELEMENT
     interface
-    Label : NAME
-      A
     Label : BLOCK
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $f
             Label : CLASS
               E
-        Label : NAME
-          D
+            Label : VARIABLE
+              $f
+    Label : NAME
+      A
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -96,22 +96,22 @@ Label : CODE
           B
   Label : ELEMENT
     interface
-    Label : NAME
-      A
     Label : BLOCK
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $f
             Label : CLASS
               E
-        Label : NAME
-          D
+            Label : VARIABLE
+              $f
+    Label : NAME
+      A
     Label : EXTENDS
       \
       Label : SUBNAME

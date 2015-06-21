@@ -4,22 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C
     Label : BLOCK
       Sequence
       Label : ELEMENT
         class
-        Label : NAME
-          E
         Label : BLOCK
           ;
           Label : ELEMENT
             function
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $a
-            Label : NAME
-              F
             Label : BLOCK
               ;
               Label : ELEMENT
@@ -28,12 +26,12 @@ Label : CODE
                   new
                   Label : NEW
                     \
+                    Label : SUBNAME
+                      AL
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
                         'AM'
-                    Label : SUBNAME
-                      AL
               Label : ELEMENT
                 if
                 Label : CONDITION
@@ -212,35 +210,37 @@ Label : CODE
                             void
                             Label : ARGUMENT
                               $a
+            Label : NAME
+              F
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $a
             Label : STATIC
               static
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
+        Label : NAME
+          E
+  Label : ELEMENT
+    
   Label : ELEMENT
     
   Label : ELEMENT
     namespace
-    Label : BLOCK
-      void
-    Label : NAMESPACE
-      C
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      void
     Label : NAMESPACE
       D
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      C
+    Label : BLOCK
+      void
   Label : ELEMENT
     
   Label : ELEMENT
     namespace
-    Label : BLOCK
-      void
     Label : NAMESPACE
       B
+    Label : BLOCK
+      void

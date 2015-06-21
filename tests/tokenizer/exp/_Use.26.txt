@@ -5,44 +5,40 @@ Label : CODE
   Label : NAMESPACE
     \
     Label : SUBNAME
-      E
-    Label : SUBNAME
-      D
-    Label : SUBNAME
       C
     Label : SUBNAME
       B
   Label : BLOCK
     ;
     Label : ELEMENT
-      class
+      interface
       Label : BLOCK
         ;
         Label : ELEMENT
           function
-          Label : BLOCK
-            void
+          Label : PUBLIC
+            public
           Label : NAME
-            M
+            K
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
       Label : NAME
-        J
+        I
       Label : EXTENDS
-        K
-      Label : IMPLEMENTS
-        L
+        H
     Label : ELEMENT
       use
       Label : USE
         \
         Label : SUBNAME
-          I
-        Label : SUBNAME
           H
         Label : SUBNAME
-          G
+          C
         Label : SUBNAME
           F
+        Label : SUBNAME
+          E
+        Label : SUBNAME
+          D

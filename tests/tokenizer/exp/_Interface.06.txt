@@ -8,6 +8,8 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -16,40 +18,6 @@ Label : CODE
               E
             Label : VARIABLE
               $f
-        Label : NAME
-          D
-    Label : NAME
-      A
-    Label : EXTENDS
-      Arguments
-      Label : EXTENDS
-        \
-        Label : SUBNAME
-          H
-        Label : SUBNAME
-          G
-      Label : EXTENDS
-        \
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          B
-  Label : ELEMENT
-    interface
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              E
-            Label : VARIABLE
-              $f
-        Label : NAME
-          D
     Label : NAME
       A
     Label : EXTENDS
@@ -78,6 +46,8 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -86,8 +56,38 @@ Label : CODE
               E
             Label : VARIABLE
               $f
+    Label : NAME
+      A
+    Label : EXTENDS
+      Arguments
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          H
+        Label : SUBNAME
+          G
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
         Label : NAME
           D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f
     Label : NAME
       A
     Label : EXTENDS

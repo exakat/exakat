@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
+    Label : NAMESPACE
+      B
     Label : BLOCK
       Sequence
       Label : ELEMENT
         use
         Label : USE
           A
-    Label : NAMESPACE
-      B

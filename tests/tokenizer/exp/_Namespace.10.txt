@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
+    Label : NAMESPACE
+      Global
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -12,10 +14,10 @@ Label : CODE
           2
         Label : LEFT
           1
-    Label : NAMESPACE
-      Global
   Label : ELEMENT
     namespace
+    Label : NAMESPACE
+      A
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -30,5 +32,3 @@ Label : CODE
               namespace
         Label : LEFT
           $obj
-    Label : NAMESPACE
-      A

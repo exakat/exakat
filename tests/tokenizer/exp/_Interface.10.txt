@@ -4,31 +4,31 @@ Label : CODE
   ;
   Label : ELEMENT
     interface
+    Label : BLOCK
+      void
     Label : NAME
       int
-    Label : BLOCK
-      void
     Label : EXTENDS
       i
   Label : ELEMENT
     interface
+    Label : BLOCK
+      void
     Label : NAME
       true
-    Label : BLOCK
-      void
     Label : EXTENDS
       i
   Label : ELEMENT
     interface
+    Label : BLOCK
+      void
     Label : NAME
       null
-    Label : BLOCK
-      void
     Label : EXTENDS
       i
   Label : ELEMENT
     interface
-    Label : NAME
-      i
     Label : BLOCK
       void
+    Label : NAME
+      i

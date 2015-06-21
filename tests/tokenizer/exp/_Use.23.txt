@@ -2,18 +2,18 @@
 
 Label : CODE
   class
-  Label : NAME
-    B
   Label : BLOCK
     ;
     Label : ELEMENT
       use
-      Label : BLOCK
-        void
       Label : USE
         G
       Label : USE
         F
+      Label : BLOCK
+        void
+  Label : NAME
+    B
   Label : EXTENDS
     \
     Label : SUBNAME

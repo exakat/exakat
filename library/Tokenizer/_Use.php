@@ -36,8 +36,7 @@ class _Use extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'USE'),
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it'
-                               );
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
     // use \b\c, \a\c;
@@ -109,7 +108,7 @@ class _Use extends TokenAuto {
                                    4 => array('token'    => 'T_CLOSE_CURLY'),
                                  );
         
-        $this->actions = array('toUseBlock' => true,
+        $this->actions = array('toUseBlock'   => true,
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
                                'addSemicolon' => 'it'  );

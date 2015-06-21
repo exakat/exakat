@@ -4,34 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          connect
-        Label : BLOCK
-          void
-      Label : ELEMENT
-        class
-        Label : NAME
-          Connection
-        Label : BLOCK
-          void
-      Label : ELEMENT
-        const
-        Label : NAME
-          CONNECT_OK
-        Label : VALUE
-          1
     Label : NAMESPACE
-      MyProject
-  Label : ELEMENT
-    namespace
+      Global
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -72,8 +46,34 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+  Label : ELEMENT
+    namespace
     Label : NAMESPACE
-      Global
+      MyProject
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : BLOCK
+          void
+        Label : NAME
+          connect
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          void
+        Label : NAME
+          Connection
+      Label : ELEMENT
+        const
+        Label : NAME
+          CONNECT_OK
+        Label : VALUE
+          1
   Label : ELEMENT
     declare
     Label : TICKS
