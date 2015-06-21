@@ -1155,6 +1155,7 @@ g.idx('atoms').put('atom', 'Sequence', sequence);
 g.addEdge(a2, sequence, 'NEXT');
 
 g.addEdge(sequence, a3, 'ELEMENT');
+a3.setProperty('rank', 0);
 a3.bothE('NEXT').each{ g.removeEdge(it); }
 if (a4.token == 'T_SEMICOLON') {
     a5 = a4.out('NEXT').next();
