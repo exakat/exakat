@@ -146,25 +146,29 @@ class _Function extends TokenAuto {
 
 fullcode.setProperty('fullcode', '');
 
-if (fullcode.reference == true) {
-    fullcode.fullcode = 'function &';
-} else {
-    fullcode.fullcode = 'function ';
-}
-// for methods
-
-if (fullcode.out('NAME').any())      { fullcode.fullcode = fullcode.fullcode +           fullcode.out('NAME').next().fullcode;            }
-if (fullcode.out('ARGUMENTS').any()) { fullcode.fullcode = fullcode.fullcode + '(' +     fullcode.out('ARGUMENTS').next().fullcode + ')'; }
-if (fullcode.out('USE').any())       { fullcode.fullcode = fullcode.fullcode + ' use ('+ fullcode.out('USE').next().fullcode + ')';       }
-if (fullcode.out('RETURN').any())    { fullcode.fullcode = fullcode.fullcode + ' : ' +   fullcode.out('RETURN').next().fullcode;          }
-if (fullcode.out('BLOCK').any())     { fullcode.fullcode = fullcode.fullcode + ' ' +     fullcode.out('BLOCK').next().fullcode;           }
-
 // for properties
 if (fullcode.out('DEFINE').any()) {
     fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.out('DEFINE').next().getProperty('fullcode'));
     fullcode.setProperty('propertyname', fullcode.out('DEFINE').next().getProperty('fullcode').substring(1, fullcode.out('DEFINE').next().getProperty('fullcode').size()) );
     fullcode.out('PROTECTED', 'PRIVATE', 'PUBLIC').each{ it.setProperty('atom', 'Visibility'); }
+} else if (fullcode.token in ['T_STATIC']) {
+    // Then, this is an identifier, like static::method();
+    fullcode.setProperty('fullcode', fullcode.getProperty('code'));
 } else {
+    // for methods
+
+    if (fullcode.reference == true) {
+        fullcode.fullcode = 'function &';
+    } else {
+        fullcode.fullcode = 'function ';
+    }
+
+    if (fullcode.out('NAME').any())      { fullcode.fullcode = fullcode.fullcode +           fullcode.out('NAME').next().fullcode;            }
+    if (fullcode.out('ARGUMENTS').any()) { fullcode.fullcode = fullcode.fullcode + '(' +     fullcode.out('ARGUMENTS').next().fullcode + ')'; }
+    if (fullcode.out('USE').any())       { fullcode.fullcode = fullcode.fullcode + ' use ('+ fullcode.out('USE').next().fullcode + ')';       }
+    if (fullcode.out('RETURN').any())    { fullcode.fullcode = fullcode.fullcode + ' : ' +   fullcode.out('RETURN').next().fullcode;          }
+    if (fullcode.out('BLOCK').any())     { fullcode.fullcode = fullcode.fullcode + ' ' +     fullcode.out('BLOCK').next().fullcode;           }
+
     fullcode.setProperty('args_min', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').count());
     if (fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').has('variadic', true).any()) {
         fullcode.setProperty('args_max', 100);
