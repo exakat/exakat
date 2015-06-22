@@ -1494,6 +1494,10 @@ if (it.atom == 'Sequence' && it.bracket == null) {
     a2 = a1.out('NEXT').next(); 
 } else {
     current = it;
+    // This is is going to be a new sequence
+    g.idx('atoms').put('atom', 'Sequence', current);
+    current.setProperty('atom', 'Sequence');
+    current.setProperty('fullcode', ';');
 
     b2 = b1.in('NEXT').next();
     b1.setProperty('rank', 0);
@@ -1610,8 +1614,6 @@ if (makeNext == true) {
 }
 
 current.out('ELEMENT').inE('INDEXED').each{ g.removeEdge(it); }
-current.setProperty('atom', 'Sequence');
-current.setProperty('fullcode', ';');
 
 ";
             unset($actions['toSequence']);

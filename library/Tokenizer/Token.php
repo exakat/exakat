@@ -304,7 +304,7 @@ class Token {
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
     } else {
         isDefault = true;
         if (fullcode.token == 'T_NS_SEPARATOR') {

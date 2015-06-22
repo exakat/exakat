@@ -40,6 +40,8 @@ class CouldBeClassConstant extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'staticName')
              ->goToClass()
              ->outIs('BLOCK')
+
+                // array usage as property with $this
              ->raw('filter{it.out.loop(1){true}{it.object.atom == "Property"}.filter{ it.out("OBJECT").has("code", "\$this").any()}
                                                                              .filter{ it.out("PROPERTY").has("code", name).any()}
                                                                              .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\IsModified").any()}
@@ -47,7 +49,7 @@ class CouldBeClassConstant extends Analyzer\Analyzer {
 
                 // array usage as static property with self or static
              ->raw('filter{it.out.loop(1){true}{it.object.atom == "Staticproperty"}.filter{ it.out("CLASS").filter{ it.code.toLowerCase() in ["static", "self"]}.any()}
-                                                                                   .filter{ it.out("PROPERTY").has("code", staticName).any()}
+                                                                                   .filter{ it.out("PROPERTY").has("code", staticName).any() || it.out("PROPERTY").out("VARIABLE").has("code", staticName).any()}
                                                                                    .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\IsModified").any()}
                                                                                    .any() == false}')
              ->back('first');
