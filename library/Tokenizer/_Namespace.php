@@ -94,7 +94,7 @@ class _Namespace extends TokenAuto {
                                              'atom'  => 'none'),
                                   3 => array('atom'  => 'yes',
                                              'notAtom' => 'Sequence'),
-                                  4 => array('token' => 'T_SEMICOLON'),
+                                  4 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_END')),
                                   5 => array('token' => array('T_CLOSE_TAG', 'T_END'))
         );
         

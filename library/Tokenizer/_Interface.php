@@ -45,7 +45,7 @@ class _Interface extends TokenAuto {
                                'atom'         => 'Interface',
                                'makeBlock'    => 'BLOCK',
                                'cleanIndex'   => true,
-                               'addAlwaysSemicolon' => 'it');
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         // interface x extends y {}
@@ -69,7 +69,7 @@ class _Interface extends TokenAuto {
                                'makeBlock'         => 'BLOCK',
                                'arguments2extends' => true,
                                'cleanIndex'        => true,
-                               'addAlwaysSemicolon'      => 'it');
+                               'addSemicolon'      => 'it');
         $this->checkAuto();
 
         return false;

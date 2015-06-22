@@ -55,8 +55,9 @@ class Block extends TokenAuto {
                                                'atom'       => 'none'),
         );
 
-        $this->actions = array('toBlock'            => true,
-                               'addAlwaysSemicolon' => 'toBlockSequence');
+        $this->actions = array('toBlock'      => true,
+                               'addSemicolon' => 'toBlockSequence'
+                               );
         $this->checkAuto();
 
         return false;

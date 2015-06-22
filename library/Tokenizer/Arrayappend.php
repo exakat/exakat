@@ -29,8 +29,7 @@ class Arrayappend extends TokenAuto {
     
     public function _check() {
         // $x[] and mutlidimensional too
-        $this->conditions = array( -2 => array('notToken'      => array_merge(Staticproperty::$operators, Property::$operators)),
-                                   -1 => array('atom'          => _Array::$allowedObject),
+        $this->conditions = array( -1 => array('atom'          => _Array::$allowedObject),
                                     0 => array('token'         => _Array::$operators,
                                                'checkForArray' => true),
                                     1 => array('token'         => 'T_CLOSE_BRACKET'),

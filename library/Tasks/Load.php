@@ -254,6 +254,11 @@ class Load implements Tasks {
                         'T_TRAIT_C'                  => 'Magicconstant',
                         'T_CALLABLE'                 => 'Identifer',
                         );
+
+         $tokenToIndex = array('T_BREAK'    => '_Break', 
+                               'T_CONTINUE' => '_Continue',
+                               'T_YIELD'    => '_Yield',
+                               'T_RETURN'   => '_Return');
             
     
         $nb = count($tokens);
@@ -275,13 +280,17 @@ class Load implements Tasks {
                 $token[3] = $this->php->getTokenname($token[0]);
                 
                 $colonTokens->surveyToken($token);
-                if ($token[3] == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
+                // Break, return, Yield ;
+                if (in_array($token[3], array_keys($tokenToIndex))      && 
+                    is_string($tokens[$id + 1]) && 
+                    $tokens[$id + 1] == ';') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
                                                   ->setProperty('line', $token[2])->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
-                    $regexIndex['_Break']->relateTo($T[$Tid], 'INDEXED')->save();
+                    
+                    $regexIndex[$tokenToIndex[$token[3]]]->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
                     $Tid++;
@@ -296,17 +305,16 @@ class Load implements Tasks {
                     $to_index = false;
 
         // TODO : centralize this with RETURN, CONTINUE, etc...
-                } elseif ($token[3] == 'T_BREAK'     && 
+                } elseif (in_array($token[3], array_keys($tokenToIndex))      && 
                           is_array($tokens[$id + 1]) && 
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
-                          print __LINE__."\n";
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
                                                   ->setProperty('line', $token[2])->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
-                    $regexIndex['_Break']->relateTo($T[$Tid], 'INDEXED')->save();
+                    $regexIndex[$tokenToIndex[$token[3]]]->relateTo($T[$Tid], 'INDEXED')->save();
                 
                     $Tid++;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
@@ -328,25 +336,6 @@ class Load implements Tasks {
                     $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
                     $to_index = false;
-                } elseif ($token[3] == 'T_YIELD' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
-                    $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
-                                                  ->setProperty('code', $token[1])
-                                                  ->setProperty('line', $token[2])->save();
-
-                    $previous->relateTo($T[$Tid], 'NEXT')->save();
-                    $regexIndex['_Yield']->relateTo($T[$Tid], 'INDEXED')->save();
-                    $previous = $T[$Tid];
-                
-                    $Tid++;
-                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                  ->setProperty('code', 'void')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load13')
-                                                  ->setProperty('atom', 'Void')
-                                                  ->save();
-
-                    $to_index = false;
                 } elseif ($token[3] == 'T_STATIC' && is_string($tokens[$id + 1]) &&
                           $tokens[$id + 1] != '(' && $this->php->getTokenname($tokens[$id - 1][0]) == 'T_NEW') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
@@ -365,25 +354,6 @@ class Load implements Tasks {
                                                   ->setProperty('modifiedBy', 'bin/load21')
                                                   ->setProperty('atom', 'Void')
                                                   ->save();
-
-                    $to_index = false;
-                } elseif ($token[3] == 'T_RETURN' && is_array($tokens[$id + 1]) &&
-                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
-                    $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
-                                                  ->setProperty('code', $token[1])
-                                                  ->setProperty('line', $token[2])->save();
-
-                    $previous->relateTo($T[$Tid], 'NEXT')->save();
-                    $regexIndex['_Return']->relateTo($T[$Tid], 'INDEXED')->save();
-                    $previous = $T[$Tid];
-
-                    $Tid++;
-                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
-                                                  ->setProperty('code', ';')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load18')
-                                                  ->save();
-                    $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
                     $to_index = false;
                 } elseif ($token[3] == 'T_START_HEREDOC' &&

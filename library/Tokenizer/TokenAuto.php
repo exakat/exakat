@@ -1150,14 +1150,21 @@ g.addEdge(it, a4, 'NEXT');
 /* insert sequence for namespace */
 
 sequence = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line, fullcode:';']);
-
-g.addEdge(sequence, a3, 'ELEMENT');
-a3.bothE('NEXT').each{ g.removeEdge(it); }
-a4.bothE('NEXT').each{ g.removeEdge(it); }
-g.removeVertex(a4);
+g.idx('atoms').put('atom', 'Sequence', sequence);
 
 g.addEdge(a2, sequence, 'NEXT');
-g.addEdge(sequence, a5, 'NEXT');
+
+g.addEdge(sequence, a3, 'ELEMENT');
+a3.setProperty('rank', 0);
+a3.bothE('NEXT').each{ g.removeEdge(it); }
+if (a4.token == 'T_SEMICOLON') {
+    a5 = a4.out('NEXT').next();
+    a4.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(a4);
+    g.addEdge(sequence, a5, 'NEXT');
+} else {
+    g.addEdge(sequence, a4, 'NEXT');
+}
 
 ";
             unset($actions['insertNsSeq']);
@@ -2429,8 +2436,8 @@ $fullcode
                                'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 
                                'T_POW_EQUAL', 'T_DOUBLE_ARROW', 'T_SR','T_SL', 'T_IMPLEMENTS', 'T_EXTENDS',
                                'T_POW', 'T_PLUS', 'T_MINUS', 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_INC', 'T_DEC',
-                               'T_OPEN_CURLY', 'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF'";
-
+                               'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF'";
+//'T_OPEN_CURLY', 
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */
 
