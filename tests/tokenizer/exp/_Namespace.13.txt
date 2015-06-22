@@ -1,0 +1,13 @@
+<?php 
+Label : CODE
+  namespace
+  Label : BLOCK
+    Sequence
+    Label : ELEMENT
+      interface
+      Label : NAME
+        C
+      Label : BLOCK
+        void
+  Label : NAMESPACE
+    A

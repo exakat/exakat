@@ -1,0 +1,205 @@
+;
+Label : ELEMENT
+  for
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      for
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                ===
+                Label : RIGHT
+                  Concatenation
+                  Label : CONCAT
+                    $e
+                  Label : CONCAT
+                    $b
+                Label : LEFT
+                  $a
+            Label : THEN
+              'M'
+            Label : ELSE
+              'N'
+          Label : LEFT
+            $g
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              R
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'U'
+                Label : ARGUMENT
+                  T
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'S'
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              R
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'U'
+                Label : ARGUMENT
+                  T
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'X'
+        Label : ELEMENT
+          AB
+        Label : ELEMENT
+          AA
+        Label : ELEMENT
+          V
+        Label : ELEMENT
+          Q
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+        Label : ELEMENT
+          P
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c
+        Label : ELEMENT
+          O
+        Label : ELEMENT
+          I
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  [
+                  Label : VARIABLE
+                    $d
+                  Label : INDEX
+                    'J'
+                Label : INDEX
+                  $e
+              Label : INDEX
+                'K'
+            Label : INDEX
+              $b
+          Label : LEFT
+            $f
+        Label : ELEMENT
+          I
+      Label : INIT
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $e
+      Label : FINAL
+        <
+        Label : RIGHT
+          3
+        Label : LEFT
+          $e
+      Label : INCREMENT
+        ++
+        Label : POSTPLUSPLUS
+          $e
+    Label : ELEMENT
+      AC
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        **
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            'G'
+        Label : LEFT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              4
+            Label : LEFT
+              $b
+      Label : LEFT
+        $c
+    Label : ELEMENT
+      H
+    Label : ELEMENT
+      F
+  Label : INIT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $b
+  Label : FINAL
+    <
+    Label : RIGHT
+      3
+    Label : LEFT
+      $b
+  Label : INCREMENT
+    ++
+    Label : POSTPLUSPLUS
+      $b
+Label : ELEMENT
+  B
+Label : ELEMENT
+  =
+  Label : RIGHT
+    Concatenation
+    Label : CONCAT
+      C
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+    Label : CONCAT
+      C
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          0
+  Label : LEFT
+    $a

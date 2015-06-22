@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ::
+    Label : PROPERTY
+      $B
+    Label : CLASS
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        A
+  Label : ELEMENT
+    ::
+    Label : PROPERTY
+      $B
+    Label : CLASS
+      \
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        A
+  Label : ELEMENT
+    ::
+    Label : PROPERTY
+      $B
+    Label : CLASS
+      \
+      Label : SUBNAME
+        A

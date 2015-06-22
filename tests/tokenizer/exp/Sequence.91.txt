@@ -1,0 +1,148 @@
+<?php
+
+Label : CODE
+  function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $a
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      return
+      Label : RETURN
+        new
+        Label : NEW
+          C
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              function
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  while
+                  Label : BLOCK
+                    ;
+                    Label : ELEMENT
+                      ->
+                      Label : OBJECT
+                        $b
+                      Label : METHOD
+                        G
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            void
+                    Label : ELEMENT
+                      yield
+                      Label : YIELD
+                        =>
+                        Label : KEY
+                          ->
+                          Label : OBJECT
+                            $b
+                          Label : METHOD
+                            I
+                            Label : ARGUMENTS
+                              void
+                              Label : ARGUMENT
+                                void
+                        Label : VALUE
+                          ->
+                          Label : OBJECT
+                            $b
+                          Label : METHOD
+                            J
+                            Label : ARGUMENTS
+                              void
+                              Label : ARGUMENT
+                                void
+                  Label : CONDITION
+                    ->
+                    Label : OBJECT
+                      $b
+                    Label : METHOD
+                      F
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          void
+                Label : ELEMENT
+                  for
+                  Label : INIT
+                    =
+                    Label : RIGHT
+                      0
+                    Label : LEFT
+                      $c
+                  Label : FINAL
+                    &&
+                    Label : RIGHT
+                      ->
+                      Label : OBJECT
+                        $b
+                      Label : METHOD
+                        F
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            void
+                    Label : LEFT
+                      <
+                      Label : RIGHT
+                        $a
+                      Label : LEFT
+                        $c
+                  Label : INCREMENT
+                    ++
+                    Label : PREPLUSPLUS
+                      $c
+                  Label : BLOCK
+                    ;
+                    Label : ELEMENT
+                      ->
+                      Label : OBJECT
+                        $b
+                      Label : METHOD
+                        G
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            void
+                Label : ELEMENT
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : METHOD
+                    E
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : METHOD
+                      D
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          void
+                  Label : LEFT
+                    $b
+              Label : NAME
+                
+              Label : USE
+                void
+                Label : ARGUMENT
+                  $a
+  Label : NAME
+    B

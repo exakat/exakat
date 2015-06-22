@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        for
+        Label : BLOCK
+          void
+        Label : INIT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $c
+        Label : FINAL
+          <=
+          Label : RIGHT
+            8
+          Label : LEFT
+            $d
+        Label : INCREMENT
+          ++
+          Label : POSTPLUSPLUS
+            $e

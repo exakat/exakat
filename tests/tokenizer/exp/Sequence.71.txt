@@ -1,0 +1,64 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    Concatenation
+    Label : CONCAT
+      ->
+      Label : METHOD
+        L
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'N'
+          Label : ARGUMENT
+            'M'
+      Label : OBJECT
+        $e
+    Label : CONCAT
+      ->
+      Label : METHOD
+        H
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'K'
+          Label : ARGUMENT
+            'J'
+          Label : ARGUMENT
+            'I'
+      Label : OBJECT
+        $d
+    Label : CONCAT
+      ->
+      Label : METHOD
+        D
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'G'
+          Label : ARGUMENT
+            'F'
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              E
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : OBJECT
+              $c
+      Label : OBJECT
+        $b
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'C'
+    Label : OBJECT
+      $a
