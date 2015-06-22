@@ -1,5 +1,0 @@
-;
-Label : ELEMENT
-  (
-  Label : CODE
-    1
