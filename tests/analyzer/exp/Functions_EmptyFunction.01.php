@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('function emptyfunction ($case) { /**/ } ');
+$expected     = array('function emptyfunction($case) { /**/ } ');
 
 $expected_not = array();
 

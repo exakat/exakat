@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('public function grandParentNotDerived ( ) { /**/ } ',
-                      'private function parentIsConcrete ( ) { /**/ } ',
-                      'public function noParentMethod ( ) { /**/ } ',
-                      'public function grandParentExists ( ) { /**/ } ',
-                      'protected function parentNotDerived ( ) { /**/ } ');
+$expected     = array('protected function parentNotDerived( ) { /**/ } ', 
+                      'public function grandParentNotDerived( ) { /**/ } ', 
+                      'public function noParentMethod( ) { /**/ } ', 
+                      'private function parentIsConcrete( ) { /**/ } ', 
+                      'public function grandParentExists( ) { /**/ } ');
 
 $expected_not = array('public function parentIsAbstract ( ) { /**/ } ',
                       'public function parentIsConcrete ( ) { /**/ } ',
