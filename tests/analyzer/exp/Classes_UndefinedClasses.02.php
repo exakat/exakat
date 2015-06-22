@@ -6,7 +6,8 @@ $expected     = array('UndefinedClass1::constante',
 
 $expected_not = array('DefinedClass1::constante',
                       '\DefinedClass2::$property',
-                      'A\DefinedClass3::method( )'
+                      'A\DefinedClass3::method( )',
+                      'A\\DefinedClass3::method( )'
 );
 
 ?>
