@@ -25,7 +25,7 @@ namespace Report\Report;
 
 use Report\Report;
 
-class OnePage extends Report {
+class Onepage extends Report {
     private $projectUrl    = null;
 
     public function __construct($project, $client) {
