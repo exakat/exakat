@@ -172,7 +172,11 @@ foreach($tokens as $t) {
             
             case T_NAMESPACE : 
             case T_IMPLEMENTS : 
-            
+
+            case T_MUL_EQUAL :
+            case T_MUL_EQUAL :
+            case T_DIV_EQUAL :
+
             case T_RETURN :
             case T_SWITCH : 
             case T_CASE : 
