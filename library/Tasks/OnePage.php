@@ -72,11 +72,6 @@ class OnePage implements Tasks {
         $thread = new \Thread();
         display("Running project '$project'\n");
 
-        display("Cleaning DB\n");
-// cleaning should be done after, not initialy
-        shell_exec('php '.$this->executable.' cleandb -v');
-        $this->logTime('Files');
-
         display("Running files\n");
         shell_exec('php '.$this->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
         $this->logTime('Files');
@@ -148,6 +143,11 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         display("Total time : ".number_format(($end - $begin), 2)."s\n");
         
         $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
+
+        display("Cleaning DB\n");
+// cleaning should be done after, not initialy
+        shell_exec('php '.$this->executable.' cleandb -v');
+        $this->logTime('Files');
     }
 
     private function cleanLog($path) {
