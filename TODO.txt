@@ -1352,3 +1352,7 @@ Noté.
 
 - certains listing ne s'affiche pas correctement (seulement la colonne Code ou Code et file)
 C'est pas le code qui est très large, et dépasse la largeur de l'écran ? 
+
+it is possible to configure boolean within namespace (spot namespace renaming for constant)
+
+https://wiki.phpbb.com/Best_Practices:PHP#Declaring
