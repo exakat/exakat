@@ -10,6 +10,8 @@ Label : CODE
       catch
       Label : VARIABLE
         $e
+      Label : CLASS
+        Exception
       Label : CODE
         ;
         Label : ELEMENT
@@ -24,5 +26,3 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $a
-      Label : CLASS
-        Exception

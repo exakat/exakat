@@ -10,23 +10,23 @@ Label : CODE
       catch
       Label : VARIABLE
         $e
-      Label : CODE
-        void
       Label : CLASS
         Exception3
+      Label : CODE
+        void
     Label : CATCH
       catch
       Label : VARIABLE
         $e
-      Label : CODE
-        void
       Label : CLASS
         Exception2
+      Label : CODE
+        void
     Label : CATCH
       catch
       Label : VARIABLE
         $e
-      Label : CODE
-        void
       Label : CLASS
         Exception
+      Label : CODE
+        void

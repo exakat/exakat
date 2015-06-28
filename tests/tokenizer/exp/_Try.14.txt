@@ -104,6 +104,8 @@ Label : CODE
       catch
       Label : VARIABLE
         $y
+      Label : CLASS
+        AF
       Label : CODE
         ;
         Label : ELEMENT
@@ -116,12 +118,12 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'AH'
-      Label : CLASS
-        AF
     Label : CATCH
       catch
       Label : VARIABLE
         $w
+      Label : CLASS
+        AC
       Label : CODE
         ;
         Label : ELEMENT
@@ -142,12 +144,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-      Label : CLASS
-        AC
     Label : CATCH
       catch
       Label : VARIABLE
         $u
+      Label : CLASS
+        Z
       Label : CODE
         ;
         Label : ELEMENT
@@ -168,12 +170,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-      Label : CLASS
-        Z
     Label : CATCH
       catch
       Label : VARIABLE
         $s
+      Label : CLASS
+        U
       Label : CODE
         ;
         Label : ELEMENT
@@ -187,23 +189,23 @@ Label : CODE
                 Label : ARGUMENT
                   Concatenation
                   Label : CONCAT
-                    [
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $t
-                      Label : PROPERTY
+                    ->
+                    Label : OBJECT
+                      $t
+                    Label : PROPERTY
+                      [
+                      Label : VARIABLE
                         X
-                    Label : INDEX
-                      'Y'
+                      Label : INDEX
+                        'Y'
                   Label : CONCAT
                     'W'
-      Label : CLASS
-        U
     Label : CATCH
       catch
       Label : VARIABLE
         $r
+      Label : CLASS
+        R
       Label : CODE
         ;
         Label : ELEMENT
@@ -216,8 +218,6 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'T'
-      Label : CLASS
-        R
   Label : ELEMENT
     if
     Label : CONDITION

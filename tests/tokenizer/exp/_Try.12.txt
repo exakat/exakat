@@ -41,6 +41,8 @@ Label : CODE
       catch
       Label : VARIABLE
         $e
+      Label : CLASS
+        ACL_RoleNoExist
       Label : CODE
         ;
         Label : ELEMENT
@@ -87,24 +89,22 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         'g'
-      Label : CLASS
-        ACL_RoleNoExist
     Label : CATCH
       catch
       Label : VARIABLE
         $e
-      Label : CODE
-        void
       Label : CLASS
         Ugmanager_GroupNoExist
+      Label : CODE
+        void
     Label : CATCH
       catch
       Label : VARIABLE
         $e
-      Label : CODE
-        void
       Label : CLASS
         Router_ArgNoExist
+      Label : CODE
+        void
   Label : ELEMENT
     if
     Label : CONDITION

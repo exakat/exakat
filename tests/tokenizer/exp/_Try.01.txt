@@ -10,7 +10,7 @@ Label : CODE
       catch
       Label : VARIABLE
         $e
-      Label : CODE
-        void
       Label : CLASS
         Exception
+      Label : CODE
+        void
