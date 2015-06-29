@@ -2,13 +2,19 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        elseif
+        Label : CONDITION
+          $d
+        Label : THEN
+          ;
+          Label : ELEMENT
+            C
     Label : THEN
       ;
       Label : ELEMENT
@@ -25,11 +31,3 @@ Label : CODE
         B
       Label : ELEMENT
         A
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        $d
-      Label : THEN
-        ;
-        Label : ELEMENT
-          C

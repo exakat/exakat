@@ -2,8 +2,6 @@
 
 Label : CODE
   foreach
-  Label : VALUE
-    $b
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -12,8 +10,6 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : LEFT
-            $g
           Label : RIGHT
             ->
             Label : OBJECT
@@ -24,16 +20,16 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   ->
-                  Label : OBJECT
-                    $e
                   Label : PROPERTY
                     f
+                  Label : OBJECT
+                    $e
+          Label : LEFT
+            $g
       Label : ELEMENT
         ;
         Label : ELEMENT
           =
-          Label : LEFT
-            $h
           Label : RIGHT
             array
             Label : ARGUMENTS
@@ -46,5 +42,9 @@ Label : CODE
                   'a'
                 Label : VALUE
                   'b'
+          Label : LEFT
+            $h
+  Label : VALUE
+    $b
   Label : SOURCE
     $a

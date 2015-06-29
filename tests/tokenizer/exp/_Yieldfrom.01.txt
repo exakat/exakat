@@ -26,30 +26,14 @@ Label : CODE
           2
   Label : ELEMENT
     =
+    Label : LEFT
+      $baz
     Label : RIGHT
       foo
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
-    Label : LEFT
-      $baz
-  Label : ELEMENT
-    foreach
-    Label : VALUE
-      $element
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            "\n"
-          Label : ARGUMENT
-            $element
-    Label : SOURCE
-      $baz
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -66,6 +50,22 @@ Label : CODE
             void
             Label : ARGUMENT
               void
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      $element
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            "\n"
+          Label : ARGUMENT
+            $element
+    Label : SOURCE
+      $baz
   Label : ELEMENT
     function
     Label : ARGUMENTS

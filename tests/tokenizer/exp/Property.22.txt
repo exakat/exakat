@@ -2,10 +2,10 @@
 
 Label : CODE
   =
+  Label : RIGHT
+    $a
   Label : LEFT
     ->
-    Label : OBJECT
-      $a
     Label : PROPERTY
       [
       Label : VARIABLE
@@ -18,5 +18,5 @@ Label : CODE
             'c'
         Label : INDEX
           $d
-  Label : RIGHT
-    $a
+    Label : OBJECT
+      $a

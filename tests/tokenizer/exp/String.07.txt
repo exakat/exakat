@@ -7,16 +7,16 @@ Label : CODE
       +
       Label : RIGHT
         ->
-        Label : OBJECT
-          $d10
         Label : PROPERTY
           $e10
+        Label : OBJECT
+          $d10
       Label : LEFT
         ->
-        Label : OBJECT
-          $b10
         Label : PROPERTY
           $c10
+        Label : OBJECT
+          $b10
     Label : LEFT
       $a10
   Label : ELEMENT
@@ -117,16 +117,16 @@ Label : CODE
       +
       Label : RIGHT
         ->
-        Label : OBJECT
-          $d3
         Label : PROPERTY
           $e3
+        Label : OBJECT
+          $d3
       Label : LEFT
         ->
-        Label : OBJECT
-          $b3
         Label : PROPERTY
           $c3
+        Label : OBJECT
+          $b3
     Label : LEFT
       $a3
   Label : ELEMENT

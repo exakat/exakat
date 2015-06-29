@@ -33,7 +33,7 @@ Label : CODE
           Label : CONTAINS
             Concatenation
             Label : CONCAT
-              b
+              e
             Label : CONCAT
               [
               Label : VARIABLE
@@ -41,6 +41,6 @@ Label : CODE
               Label : INDEX
                 d
             Label : CONCAT
-              e
+              b
     Label : LEFT
       $a

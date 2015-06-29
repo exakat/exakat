@@ -10,8 +10,6 @@ Label : CODE
       Label : CLASS
         self
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       !
@@ -28,20 +26,6 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        =
-        Label : RIGHT
-          new
-          Label : NEW
-            C
-        Label : LEFT
-          ::
-          Label : PROPERTY
-            $b
-          Label : CLASS
-            self
-    Label : ELSE
-      ;
-      Label : ELEMENT
         ->
         Label : OBJECT
           ::
@@ -55,3 +39,17 @@ Label : CODE
             void
             Label : ARGUMENT
               void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            C
+        Label : LEFT
+          ::
+          Label : PROPERTY
+            $b
+          Label : CLASS
+            self

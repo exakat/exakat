@@ -30,27 +30,55 @@ Label : CODE
           Label : LEFT
             $c
         Label : THEN
+          ;
+          Label : ELEMENT
+            elseif
+            Label : CONDITION
+              ==
+              Label : RIGHT
+                4
+              Label : LEFT
+                $d
+            Label : THEN
+              void
+            Label : THEN
+              void
+        Label : THEN
           void
-        Label : ELSE
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : RIGHT
+        1
+      Label : LEFT
+        $a
+    Label : THEN
+      void
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        ==
+        Label : RIGHT
+          2
+        Label : LEFT
+          $b
+      Label : THEN
+        ;
+        Label : ELEMENT
           elseif
           Label : CONDITION
             ==
             Label : RIGHT
-              4
+              3
             Label : LEFT
-              $d
+              $c
           Label : THEN
             void
-          Label : ELSE
+          Label : THEN
             void
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
+      Label : THEN
+        void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -60,33 +88,21 @@ Label : CODE
       Label : LEFT
         $a
     Label : THEN
-      void
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        ==
-        Label : RIGHT
-          2
-        Label : LEFT
-          $b
-      Label : THEN
-        void
-      Label : ELSE
+      ;
+      Label : ELEMENT
         elseif
         Label : CONDITION
           ==
           Label : RIGHT
-            3
+            2
           Label : LEFT
-            $c
+            $b
         Label : THEN
           void
-        Label : ELSE
+        Label : THEN
           void
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
+    Label : THEN
+      void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -96,51 +112,19 @@ Label : CODE
       Label : LEFT
         $a
     Label : THEN
-      void
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        ==
-        Label : RIGHT
-          2
-        Label : LEFT
-          $b
-      Label : THEN
-        void
-      Label : ELSE
-        void
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ==
-      Label : RIGHT
-        1
-      Label : LEFT
-        $a
+      ;
+      Label : ELEMENT
+        elseif
+        Label : CONDITION
+          ==
+          Label : RIGHT
+            1
+          Label : LEFT
+            $b
+        Label : THEN
+          void
     Label : THEN
       void
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          $b
-      Label : THEN
-        void
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
   Label : ELEMENT
     if
     Label : CONDITION

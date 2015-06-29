@@ -38,6 +38,8 @@ Label : CODE
           private
       Label : ELEMENT
         function
+        Label : PUBLIC
+          public
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -46,7 +48,5 @@ Label : CODE
           a
         Label : BLOCK
           void
-        Label : PUBLIC
-          public
         Label : STATIC
           static

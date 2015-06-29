@@ -2,8 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $a
@@ -26,6 +24,8 @@ Label : CODE
                   Label : ARGUMENT
                     'd'
           Label : ELEMENT
+            D
+          Label : ELEMENT
             print
             Label : ARGUMENTS
               void
@@ -42,8 +42,6 @@ Label : CODE
           Label : ELEMENT
             F
           Label : ELEMENT
-            D
-          Label : ELEMENT
             print
             Label : ARGUMENTS
               void
@@ -53,8 +51,6 @@ Label : CODE
             C
           Label : ELEMENT
             B
-      Label : ELEMENT
-        
       Label : ELEMENT
         G
       Label : ELEMENT

@@ -10,25 +10,25 @@ Label : CODE
       ;
       Label : ELEMENT
         var
+        Label : VALUE
+          Void
         Label : DEFINE
           $z
-        Label : VALUE
-          Void
         Label : VAR
           var
       Label : ELEMENT
         var
+        Label : VALUE
+          Void
         Label : DEFINE
           $y
-        Label : VALUE
-          Void
         Label : VAR
           var
       Label : ELEMENT
         var
-        Label : DEFINE
-          $x
         Label : VALUE
           Void
+        Label : DEFINE
+          $x
         Label : VAR
           var

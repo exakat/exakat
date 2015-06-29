@@ -34,6 +34,8 @@ Label : CODE
             $x
           Label : INDEX
             ->
+            Label : PROPERTY
+              p
             Label : OBJECT
               ->
               Label : OBJECT
@@ -44,5 +46,3 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     void
-            Label : PROPERTY
-              p

@@ -4,20 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
     Label : BLOCK
       Sequence
       Label : ELEMENT
         class
+        Label : NAME
+          E
         Label : BLOCK
           ;
           Label : ELEMENT
             function
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $a
+            Label : NAME
+              F
             Label : BLOCK
               ;
               Label : ELEMENT
@@ -186,12 +188,12 @@ Label : CODE
                               $b
                   Label : ELEMENT
                     static
-                    Label : VALUE
-                      Z
                     Label : STATIC
                       static
                     Label : DEFINE
                       $b
+                    Label : VALUE
+                      Z
                   Label : ELEMENT
                     if
                     Label : CONDITION
@@ -210,37 +212,35 @@ Label : CODE
                             void
                             Label : ARGUMENT
                               $a
-            Label : NAME
-              F
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $a
             Label : STATIC
               static
-        Label : NAME
-          E
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C
   Label : ELEMENT
     
   Label : ELEMENT
     
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      D
     Label : BLOCK
       void
-  Label : ELEMENT
-    namespace
     Label : NAMESPACE
       C
-    Label : BLOCK
-      void
   Label : ELEMENT
     
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      B
     Label : BLOCK
       void
+    Label : NAMESPACE
+      D
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      void
+    Label : NAMESPACE
+      B

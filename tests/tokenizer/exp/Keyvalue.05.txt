@@ -12,10 +12,10 @@ Label : CODE
           =>
           Label : KEY
             ->
-            Label : OBJECT
-              $b
             Label : PROPERTY
               c
+            Label : OBJECT
+              $b
           Label : VALUE
             $d
         Label : ARGUMENT

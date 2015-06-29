@@ -2,10 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $a

@@ -4,22 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
-    Label : NAME
-      B
     Label : BLOCK
       ;
-      Label : ELEMENT
-        
-      Label : ELEMENT
-        
-      Label : ELEMENT
-        
-      Label : ELEMENT
-        
       Label : ELEMENT
         if
         Label : CONDITION
@@ -32,34 +18,34 @@ Label : CODE
           ;
           Label : ELEMENT
             ->
+            Label : OBJECT
+              $this
             Label : METHOD
               D
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $a
-            Label : OBJECT
-              $this
         Label : ELSE
           elseif
           Label : CONDITION
             instanceof
-            Label : CLASS
-              E
             Label : VARIABLE
               $a
+            Label : CLASS
+              E
           Label : THEN
             ;
             Label : ELEMENT
               ->
+              Label : OBJECT
+                $a
               Label : METHOD
                 F
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     $this
-              Label : OBJECT
-                $a
           Label : ELSE
             elseif
             Label : CONDITION
@@ -82,58 +68,48 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   foreach
-                  Label : VALUE
-                    =>
-                    Label : KEY
-                      $b
-                    Label : VALUE
-                      $c
-                  Label : SOURCE
-                    $a
                   Label : BLOCK
                     ;
                     Label : ELEMENT
                       ->
+                      Label : OBJECT
+                        $this
                       Label : METHOD
                         AB
                         Label : ARGUMENTS
                           void
                           Label : ARGUMENT
                             $b
-                      Label : OBJECT
-                        $this
                     Label : ELEMENT
                       ->
+                      Label : OBJECT
+                        $this
                       Label : METHOD
                         AC
                         Label : ARGUMENTS
                           void
                           Label : ARGUMENT
                             $d
-                      Label : OBJECT
-                        $this
                     Label : ELEMENT
                       ->
+                      Label : OBJECT
+                        $this
                       Label : METHOD
                         B
                         Label : ARGUMENTS
                           void
                           Label : ARGUMENT
                             $c
-                      Label : OBJECT
-                        $this
                     Label : ELEMENT
                       ->
+                      Label : OBJECT
+                        $this
                       Label : METHOD
                         AE
                         Label : ARGUMENTS
                           void
                           Label : ARGUMENT
                             void
-                      Label : OBJECT
-                        $this
-                    Label : ELEMENT
-                      
                     Label : ELEMENT
                       if
                       Label : CONDITION
@@ -144,6 +120,26 @@ Label : CODE
                             $b
                       Label : THEN
                         ;
+                        Label : ELEMENT
+                          =
+                          Label : RIGHT
+                            [
+                            Label : VARIABLE
+                              $c
+                            Label : INDEX
+                              'O'
+                          Label : LEFT
+                            $c
+                        Label : ELEMENT
+                          =
+                          Label : RIGHT
+                            [
+                            Label : VARIABLE
+                              $c
+                            Label : INDEX
+                              'M'
+                          Label : LEFT
+                            $b
                         Label : ELEMENT
                           =
                           Label : RIGHT
@@ -172,26 +168,6 @@ Label : CODE
                                   void
                           Label : LEFT
                             $d
-                        Label : ELEMENT
-                          =
-                          Label : RIGHT
-                            [
-                            Label : VARIABLE
-                              $c
-                            Label : INDEX
-                              'M'
-                          Label : LEFT
-                            $b
-                        Label : ELEMENT
-                          =
-                          Label : RIGHT
-                            [
-                            Label : VARIABLE
-                              $c
-                            Label : INDEX
-                              'O'
-                          Label : LEFT
-                            $c
                         Label : ELEMENT
                           if
                           Label : CONDITION
@@ -308,6 +284,14 @@ Label : CODE
                                   void
                             Label : LEFT
                               $d
+                  Label : SOURCE
+                    $a
+                  Label : VALUE
+                    =>
+                    Label : VALUE
+                      $c
+                    Label : KEY
+                      $b
                 Label : ELEMENT
                   I
                   Label : ARGUMENTS
@@ -342,3 +326,9 @@ Label : CODE
                                   $a
                             Label : CONCAT
                               'AH'
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B

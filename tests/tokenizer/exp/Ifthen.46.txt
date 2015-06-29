@@ -2,31 +2,37 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $a
     Label : THEN
       ;
       Label : ELEMENT
-        [
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            34
-        Label : NAME
+        elseif
+        Label : CONDITION
+          $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            B
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $b
+        Label : METHOD
           [
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              34
+          Label : NAME
+            [
+            Label : VARIABLE
               c
-          Label : INDEX
-            d
+            Label : INDEX
+              d
       Label : ELEMENT
         =
         Label : RIGHT
@@ -37,11 +43,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $a
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        $b
-      Label : THEN
-        ;
-        Label : ELEMENT
-          B

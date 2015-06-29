@@ -12,36 +12,36 @@ Label : CODE
         ;
         Label : ELEMENT
           ppp
-          Label : DEFINE
-            $e
           Label : VALUE
             void
           Label : PRIVATE
             private
+          Label : DEFINE
+            $e
         Label : ELEMENT
           ppp
-          Label : DEFINE
-            $f
           Label : VALUE
             2
           Label : PRIVATE
             private
+          Label : DEFINE
+            $f
         Label : ELEMENT
           ppp
-          Label : DEFINE
-            $h
           Label : VALUE
             void
           Label : PRIVATE
             private
+          Label : DEFINE
+            $h
         Label : ELEMENT
           ppp
-          Label : DEFINE
-            $g
           Label : VALUE
             3
           Label : PRIVATE
             private
+          Label : DEFINE
+            $g
         Label : ELEMENT
           const
           Label : NAME
@@ -50,25 +50,25 @@ Label : CODE
             3
         Label : ELEMENT
           ppp
+          Label : VALUE
+            void
+          Label : PRIVATE
+            private
           Label : DEFINE
             $d
-          Label : VALUE
-            void
-          Label : PRIVATE
-            private
         Label : ELEMENT
           ppp
-          Label : DEFINE
-            $c
           Label : VALUE
             void
           Label : PRIVATE
             private
+          Label : DEFINE
+            $c
         Label : ELEMENT
           private
-          Label : DEFINE
-            $b
           Label : VALUE
             1
           Label : PRIVATE
             private
+          Label : DEFINE
+            $b

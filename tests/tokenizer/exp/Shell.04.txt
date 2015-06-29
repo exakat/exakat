@@ -14,10 +14,10 @@ Label : CODE
             Concatenation
             Label : CONCAT
               ->
-              Label : OBJECT
-                $file
               Label : PROPERTY
                 x
+              Label : OBJECT
+                $file
             Label : CONCAT
                sf 
     Label : LEFT

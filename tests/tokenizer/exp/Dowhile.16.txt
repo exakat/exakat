@@ -2,6 +2,14 @@
 
 Label : CODE
   do
+  Label : CONDITION
+    !
+    Label : NOT
+      empty
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $line
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -28,11 +36,3 @@ Label : CODE
             '='
           Label : LEFT
             $output
-  Label : CONDITION
-    !
-    Label : NOT
-      empty
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $line

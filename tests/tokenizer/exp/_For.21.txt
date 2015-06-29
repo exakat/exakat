@@ -2,6 +2,16 @@
 
 Label : CODE
   for
+  Label : INIT
+    void
+  Label : FINAL
+    B
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+  Label : INCREMENT
+    void
   Label : BLOCK
     ;
     Label : ELEMENT
@@ -15,8 +25,6 @@ Label : CODE
       Label : THEN
         ;
         Label : ELEMENT
-          P
-        Label : ELEMENT
           echo
           Label : ARGUMENTS
             void
@@ -26,6 +34,8 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
+        Label : ELEMENT
+          P
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -126,13 +136,3 @@ Label : CODE
       void
     Label : ELEMENT
       void
-  Label : INIT
-    void
-  Label : FINAL
-    B
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-  Label : INCREMENT
-    void

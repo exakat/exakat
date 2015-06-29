@@ -15,15 +15,7 @@ Label : CODE
       Label : ELEMENT
         
       Label : ELEMENT
-        
-      Label : ELEMENT
         while
-        Label : CONDITION
-          >=
-          Label : RIGHT
-            1
-          Label : LEFT
-            $b
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -48,3 +40,9 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $i
+        Label : CONDITION
+          >=
+          Label : RIGHT
+            1
+          Label : LEFT
+            $b

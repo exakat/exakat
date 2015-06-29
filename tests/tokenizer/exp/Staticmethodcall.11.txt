@@ -18,12 +18,6 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'M'
         Label : RIGHT
           ::
           Label : CLASS
@@ -34,6 +28,12 @@ Label : CODE
               void
               Label : ARGUMENT
                 'P'
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'M'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -44,26 +44,26 @@ Label : CODE
           void
           Label : ARGUMENT
             ->
-            Label : OBJECT
-              $d
             Label : PROPERTY
               Q
+            Label : OBJECT
+              $d
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : RIGHT
+          ->
+          Label : PROPERTY
+            S
+          Label : OBJECT
+            $f
         Label : LEFT
           [
           Label : VARIABLE
             $e
           Label : INDEX
             'R'
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            S
   Label : ELEMENT
     ::
     Label : CLASS
@@ -92,12 +92,6 @@ Label : CODE
                 $h
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $b
-      Label : INDEX
-        'F'
     Label : RIGHT
       ::
       Label : CLASS
@@ -108,14 +102,14 @@ Label : CODE
           void
           Label : ARGUMENT
             'I'
-  Label : ELEMENT
-    =
     Label : LEFT
       [
       Label : VARIABLE
-        $a
+        $b
       Label : INDEX
-        'B'
+        'F'
+  Label : ELEMENT
+    =
     Label : RIGHT
       ::
       Label : CLASS
@@ -126,3 +120,9 @@ Label : CODE
           void
           Label : ARGUMENT
             'E'
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'

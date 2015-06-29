@@ -14,10 +14,10 @@ Label : CODE
            
         Label : CONCAT
           ->
-          Label : OBJECT
-            $a
           Label : PROPERTY
             b
+          Label : OBJECT
+            $a
         Label : CONCAT
            c
     Label : LEFT
@@ -34,10 +34,10 @@ Label : CODE
            c 
         Label : CONCAT
           ->
-          Label : OBJECT
-            $a
           Label : PROPERTY
             b
+          Label : OBJECT
+            $a
     Label : LEFT
       $loc
   Label : ELEMENT
@@ -48,10 +48,10 @@ Label : CODE
         Concatenation
         Label : CONCAT
           ->
-          Label : OBJECT
-            $a
           Label : PROPERTY
             b
+          Label : OBJECT
+            $a
         Label : CONCAT
            c 
         Label : CONCAT

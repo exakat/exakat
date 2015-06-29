@@ -3,8 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       &&
@@ -42,10 +40,6 @@ Label : CODE
                 'B'
     Label : THEN
       ;
-      Label : ELEMENT
-        
-      Label : ELEMENT
-        
       Label : ELEMENT
         AI
         Label : ARGUMENTS
@@ -125,6 +119,56 @@ Label : CODE
         Label : THEN
           ;
           Label : ELEMENT
+            elseif
+            Label : CONDITION
+              !=
+              Label : RIGHT
+                'Z'
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $m
+                Label : PROPERTY
+                  Y
+            Label : THEN
+              ;
+              Label : ELEMENT
+                ->
+                Label : OBJECT
+                  $o
+                Label : METHOD
+                  AE
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      AF
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          'AH'
+                        Label : ARGUMENT
+                          'AG'
+            Label : THEN
+              ;
+              Label : ELEMENT
+                ->
+                Label : OBJECT
+                  $n
+                Label : METHOD
+                  AA
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      AB
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          'AD'
+                        Label : ARGUMENT
+                          'AC'
+        Label : THEN
+          ;
+          Label : ELEMENT
             ->
             Label : OBJECT
               $k
@@ -168,51 +212,3 @@ Label : CODE
                       'Q'
                     Label : ARGUMENT
                       'P'
-        Label : ELSE
-          elseif
-          Label : CONDITION
-            !=
-            Label : RIGHT
-              'Z'
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $m
-              Label : PROPERTY
-                Y
-          Label : THEN
-            ;
-            Label : ELEMENT
-              ->
-              Label : OBJECT
-                $n
-              Label : METHOD
-                AA
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    AB
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        'AD'
-                      Label : ARGUMENT
-                        'AC'
-          Label : ELSE
-            ;
-            Label : ELEMENT
-              ->
-              Label : OBJECT
-                $o
-              Label : METHOD
-                AE
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    AF
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        'AH'
-                      Label : ARGUMENT
-                        'AG'

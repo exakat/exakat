@@ -85,10 +85,6 @@ Label : CODE
             Label : ARGUMENT
               'B'
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $a

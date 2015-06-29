@@ -3,16 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $x
@@ -43,16 +33,18 @@ Label : CODE
           Label : THEN
             ;
             Label : ELEMENT
+              elseif
+              Label : CONDITION
+                $t
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  $z
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  $tt
+          Label : THEN
+            ;
+            Label : ELEMENT
               $uu
-          Label : ELSE
-            elseif
-            Label : CONDITION
-              $t
-            Label : THEN
-              ;
-              Label : ELEMENT
-                $tt
-            Label : ELSE
-              ;
-              Label : ELEMENT
-                $z

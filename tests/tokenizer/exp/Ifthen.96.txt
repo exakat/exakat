@@ -14,8 +14,6 @@ Label : ELEMENT
 Label : ELEMENT
   void
 Label : ELEMENT
-  void
-Label : ELEMENT
   if
   Label : CONDITION
     isset
@@ -37,5 +35,7 @@ Label : ELEMENT
               $b
             Label : ARGUMENT
               'I'
+Label : ELEMENT
+  void
 Label : ELEMENT
   void

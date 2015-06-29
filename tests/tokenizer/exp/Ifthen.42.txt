@@ -2,8 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $a
@@ -24,13 +22,9 @@ Label : CODE
               Label : ELEMENT
                 D
           Label : ELEMENT
-            
-          Label : ELEMENT
             E
           Label : ELEMENT
             C
-      Label : ELEMENT
-        
       Label : ELEMENT
         F
       Label : ELEMENT

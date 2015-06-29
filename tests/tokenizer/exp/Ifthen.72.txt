@@ -5,8 +5,6 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       foreach
-      Label : VALUE
-        $b
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -35,10 +33,10 @@ Label : ELEMENT
                         void
                         Label : ARGUMENT
                           =>
-                          Label : KEY
-                            'K'
                           Label : VALUE
                             'L'
+                          Label : KEY
+                            'K'
                     Label : ARGUMENT
                       I
                       Label : ARGUMENTS
@@ -63,5 +61,7 @@ Label : ELEMENT
           B
       Label : SOURCE
         $a
+      Label : VALUE
+        $b
 Label : ELEMENT
   A

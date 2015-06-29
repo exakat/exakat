@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -24,8 +18,6 @@ Label : CODE
               'G'
       Label : ELEMENT
         foreach
-        Label : VALUE
-          $c
         Label : BLOCK
           if
           Label : CONDITION
@@ -60,6 +52,8 @@ Label : CODE
             $b
           Label : PROPERTY
             C
+        Label : VALUE
+          $c
       Label : ELEMENT
         =
         Label : RIGHT
@@ -70,3 +64,9 @@ Label : CODE
               void
         Label : LEFT
           $a
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      B

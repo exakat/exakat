@@ -10,9 +10,9 @@ Label : CODE
         $d
       Label : LEFT
         ->
-        Label : OBJECT
-          $b
         Label : PROPERTY
           c
+        Label : OBJECT
+          $b
   Label : LEFT
     $a

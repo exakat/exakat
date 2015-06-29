@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
-    Label : CLASS
-      [
-      Label : VARIABLE
-        $x
-      Label : INDEX
-        1
     Label : METHOD
       b
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
+    Label : CLASS
+      [
+      Label : VARIABLE
+        $x
+      Label : INDEX
+        1

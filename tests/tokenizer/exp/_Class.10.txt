@@ -6,8 +6,6 @@ Label : CODE
     class
     Label : NAME
       x
-    Label : BLOCK
-      void
     Label : IMPLEMENTS
       e
     Label : IMPLEMENTS
@@ -18,3 +16,5 @@ Label : CODE
       b
     Label : IMPLEMENTS
       a
+    Label : BLOCK
+      void

@@ -6,6 +6,8 @@ Label : CODE
     function
     Label : NAME
       x
+    Label : BLOCK
+      void
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -14,5 +16,3 @@ Label : CODE
           2
         Label : LEFT
           $y
-    Label : BLOCK
-      void

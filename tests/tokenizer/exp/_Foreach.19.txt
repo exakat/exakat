@@ -3,15 +3,15 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : BLOCK
+      ++
+      Label : POSTPLUSPLUS
+        $d
     Label : VALUE
       =>
       Label : KEY
         $b
       Label : VALUE
         $c
-    Label : BLOCK
-      ++
-      Label : POSTPLUSPLUS
-        $d
     Label : SOURCE
       $a

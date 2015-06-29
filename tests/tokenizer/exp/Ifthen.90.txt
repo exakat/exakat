@@ -247,80 +247,6 @@ Label : CODE
           Label : ELEMENT
             =
             Label : RIGHT
-              @
-              Label : AT
-                G
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    Concatenation
-                    Label : CONCAT
-                      'R'
-                    Label : CONCAT
-                      I
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          $b
-                        Label : ARGUMENT
-                          2
-                        Label : ARGUMENT
-                          $e
-                    Label : CONCAT
-                      'P'
-                    Label : CONCAT
-                      I
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          $b
-                        Label : ARGUMENT
-                          1
-                        Label : ARGUMENT
-                          $e
-                    Label : CONCAT
-                      "
-                      Label : CONTAINS
-                        Concatenation
-                        Label : CONCAT
-                          J
-                        Label : CONCAT
-                          $lAK
-                        Label : CONCAT
-                          $mAL
-                        Label : CONCAT
-                          $fN
-                    Label : CONCAT
-                      I
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          $b
-                        Label : ARGUMENT
-                          0
-                        Label : ARGUMENT
-                          $e
-                    Label : CONCAT
-                      'H'
-                  Label : ARGUMENT
-                    $b
-                  Label : ARGUMENT
-                    $d
-            Label : LEFT
-              $c
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              [
-              Label : VARIABLE
-                $j
-              Label : INDEX
-                $i
-            Label : LEFT
-              $m
-          Label : ELEMENT
-            =
-            Label : RIGHT
               ?
               Label : CONDITION
                 (
@@ -404,6 +330,80 @@ Label : CODE
                       Concatenation
                       Label : CONCAT
                         $i
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              @
+              Label : AT
+                G
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    Concatenation
+                    Label : CONCAT
+                      'R'
+                    Label : CONCAT
+                      I
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          $b
+                        Label : ARGUMENT
+                          2
+                        Label : ARGUMENT
+                          $e
+                    Label : CONCAT
+                      'P'
+                    Label : CONCAT
+                      I
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          $b
+                        Label : ARGUMENT
+                          1
+                        Label : ARGUMENT
+                          $e
+                    Label : CONCAT
+                      "
+                      Label : CONTAINS
+                        Concatenation
+                        Label : CONCAT
+                          J
+                        Label : CONCAT
+                          $lAK
+                        Label : CONCAT
+                          $mAL
+                        Label : CONCAT
+                          $fN
+                    Label : CONCAT
+                      I
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          $b
+                        Label : ARGUMENT
+                          0
+                        Label : ARGUMENT
+                          $e
+                    Label : CONCAT
+                      'H'
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    $d
+            Label : LEFT
+              $c
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              [
+              Label : VARIABLE
+                $j
+              Label : INDEX
+                $i
+            Label : LEFT
+              $m
           Label : ELEMENT
             require
             Label : ARGUMENTS

@@ -11,13 +11,17 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          Block with Sequence For Case Without Semicolon
+          ;
           Label : ELEMENT
-            if
-            Label : CONDITION
-              $h
-            Label : THEN
+            require_once
+            Label : ARGUMENTS
               void
+              Label : ARGUMENT
+                a
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'b'
           Label : ELEMENT
             if
             Label : CONDITION
@@ -29,15 +33,11 @@ Label : CODE
             Label : LEVEL
               void
           Label : ELEMENT
-            require_once
-            Label : ARGUMENTS
+            if
+            Label : CONDITION
+              $h
+            Label : THEN
               void
-              Label : ARGUMENT
-                a
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'b'
           Label : ELEMENT
             if
             Label : CONDITION
@@ -60,8 +60,6 @@ Label : CODE
                       'h'
               Label : THEN
                 void
-          Label : ELEMENT
-            
         Label : CASE
           'b'
       Label : ELEMENT

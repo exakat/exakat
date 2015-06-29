@@ -12,8 +12,6 @@ Label : CODE
           'g'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'b'
           Label : VALUE
             ?
             Label : CONDITION
@@ -26,6 +24,8 @@ Label : CODE
               'e'
             Label : ELSE
               'f'
+          Label : KEY
+            'b'
     Label : LEFT
       $y
   Label : ELEMENT
@@ -36,13 +36,13 @@ Label : CODE
         void
         Label : ARGUMENT
           =>
-          Label : KEY
-            'a'
           Label : VALUE
             ==
             Label : RIGHT
               $c
             Label : LEFT
               $b
+          Label : KEY
+            'a'
     Label : LEFT
       $x

@@ -24,22 +24,20 @@ Label : CODE
               'b'
       Label : ELEMENT
         static
-        Label : VALUE
-          'f'
-        Label : DEFINE
-          $y
-        Label : STATIC
-          static
         Label : PUBLIC
           public
+        Label : STATIC
+          static
+        Label : DEFINE
+          $y
+        Label : VALUE
+          'f'
   Label : ELEMENT
     =
     Label : RIGHT
       new
       Label : NEW
         ::
-        Label : CLASS
-          C
         Label : METHOD
           $y
           Label : ARGUMENTS
@@ -48,6 +46,8 @@ Label : CODE
               void
           Label : NAME
             $y
+        Label : CLASS
+          C
     Label : LEFT
       $x
   Label : ELEMENT

@@ -16,10 +16,10 @@ Label : CODE
             J
         Label : LEFT
           ->
-          Label : OBJECT
-            $c
           Label : PROPERTY
             H
+          Label : OBJECT
+            $c
       Label : LEFT
         ||
         Label : RIGHT
@@ -34,10 +34,10 @@ Label : CODE
                 G
           Label : LEFT
             ->
-            Label : OBJECT
-              $b
             Label : PROPERTY
               E
+            Label : OBJECT
+              $b
         Label : LEFT
           ===
           Label : RIGHT
@@ -48,10 +48,10 @@ Label : CODE
               D
           Label : LEFT
             ->
-            Label : OBJECT
-              $a
             Label : PROPERTY
               B
+            Label : OBJECT
+              $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -64,10 +64,10 @@ Label : CODE
             M
         Label : LEFT
           ->
-          Label : OBJECT
-            $d
           Label : PROPERTY
             K
+          Label : OBJECT
+            $d
     Label : ELSE
       ;
       Label : ELEMENT
@@ -80,7 +80,7 @@ Label : CODE
             P
         Label : LEFT
           ->
-          Label : OBJECT
-            $e
           Label : PROPERTY
             N
+          Label : OBJECT
+            $e

@@ -1,8 +1,6 @@
 ;
 Label : ELEMENT
   =
-  Label : LEFT
-    $x
   Label : RIGHT
     [
     Label : VARIABLE
@@ -13,3 +11,5 @@ Label : ELEMENT
         2
     Label : INDEX
       3
+  Label : LEFT
+    $x

@@ -49,6 +49,24 @@ Label : CODE
     Label : ELEMENT
       case
       Label : CODE
+        Void
+      Label : CASE
+        instanceof
+        Label : CLASS
+          \
+          Label : SUBNAME
+            M
+          Label : SUBNAME
+            L
+          Label : SUBNAME
+            K
+          Label : SUBNAME
+            J
+        Label : VARIABLE
+          $f
+    Label : ELEMENT
+      case
+      Label : CODE
         Block with Sequence For Case
         Label : ELEMENT
           return
@@ -79,24 +97,6 @@ Label : CODE
         Label : CLASS
           \
           Label : SUBNAME
-            M
-          Label : SUBNAME
-            L
-          Label : SUBNAME
-            K
-          Label : SUBNAME
-            J
-        Label : VARIABLE
-          $f
-    Label : ELEMENT
-      case
-      Label : CODE
-        Void
-      Label : CASE
-        instanceof
-        Label : CLASS
-          \
-          Label : SUBNAME
             I
           Label : SUBNAME
             H
@@ -110,14 +110,14 @@ Label : CODE
         Void
       Label : CASE
         ::
+        Label : CLASS
+          E
         Label : METHOD
           F
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $d
-        Label : CLASS
-          E
     Label : ELEMENT
       case
       Label : CODE

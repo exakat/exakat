@@ -3,8 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       !
@@ -18,6 +16,8 @@ Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : BLOCK
+          void
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
@@ -32,12 +32,12 @@ Label : CODE
             $f
           Label : ARGUMENT
             $e
-        Label : BLOCK
-          void
         Label : NAME
           F
       Label : ELEMENT
         function
+        Label : BLOCK
+          void
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
@@ -56,7 +56,5 @@ Label : CODE
             $b
           Label : ARGUMENT
             $a
-        Label : BLOCK
-          void
         Label : NAME
           D

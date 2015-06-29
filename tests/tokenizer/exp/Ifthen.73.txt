@@ -4,11 +4,25 @@ Label : ELEMENT
   Label : CODE
     ;
     Label : ELEMENT
-      
-    Label : ELEMENT
       if
       Label : CONDITION
         $a
+      Label : THEN
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              AO
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'AP'
+        Label : ELEMENT
+          AP
+        Label : ELEMENT
+          AM
       Label : THEN
         ;
         Label : ELEMENT
@@ -109,10 +123,10 @@ Label : ELEMENT
                       void
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'AK'
                         Label : VALUE
                           'AL'
+                        Label : KEY
+                          'AK'
                   Label : ARGUMENT
                     'AJ'
         Label : ELEMENT
@@ -187,21 +201,5 @@ Label : ELEMENT
           I
         Label : ELEMENT
           B
-      Label : ELSE
-        ;
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              AO
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'AP'
-        Label : ELEMENT
-          AP
-        Label : ELEMENT
-          AM
 Label : ELEMENT
   A

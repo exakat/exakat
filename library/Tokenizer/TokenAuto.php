@@ -1310,14 +1310,18 @@ g.addEdge(f, x, 'NEXT');
 ";
             } elseif ($destination > 0) {
                 list($atom, $link) = each($config);
-                $next = str_repeat(".out('NEXT')", $destination - 1);
+                if ($destination == 1) {
+                    $next = 'it;';
+                } else {
+                    $next = 'it'.str_repeat(".out('NEXT')", $destination - 1).'.next()';
+                }
                 
                 $qactions[] = "
 /* addEdge out $destination */
 x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', virtual:true, line:it.line, fullcode:' ']);
 g.idx('atoms').put('atom', 'Void', x);
 
-a = it$next.next();
+a = $next;
 b = a.out('NEXT').next();
 
 g.removeEdge(a.outE('NEXT').next());
@@ -2438,7 +2442,7 @@ $fullcode
                                'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 
                                'T_POW_EQUAL', 'T_DOUBLE_ARROW', 'T_SR','T_SL', 'T_IMPLEMENTS', 'T_EXTENDS',
                                'T_POW', 'T_PLUS', 'T_MINUS', 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_INC', 'T_DEC',
-                               'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF'";
+                               'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF', 'T_ELSE'";
 //'T_OPEN_CURLY', 
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */

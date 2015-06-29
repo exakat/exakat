@@ -3,8 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $x
@@ -15,12 +13,10 @@ Label : CODE
         Label : ELEMENT
           ;
           Label : ELEMENT
-            $y
-    Label : ELSE
+            $z
+    Label : THEN
       ;
       Label : ELEMENT
         ;
         Label : ELEMENT
-          ;
-          Label : ELEMENT
-            $z
+          $y

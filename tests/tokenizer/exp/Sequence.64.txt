@@ -2,8 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       !
@@ -17,6 +15,10 @@ Label : CODE
       ;
       Label : ELEMENT
         foreach
+        Label : BLOCK
+          ++
+          Label : POSTPLUSPLUS
+            $e
         Label : VALUE
           =>
           Label : KEY
@@ -25,7 +27,3 @@ Label : CODE
             $d
         Label : SOURCE
           $b
-        Label : BLOCK
-          ++
-          Label : POSTPLUSPLUS
-            $e

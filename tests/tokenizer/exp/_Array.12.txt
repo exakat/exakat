@@ -4,6 +4,30 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          -
+          Label : RIGHT
+            1
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $i
+            Label : INDEX
+              $j
+        Label : ARGUMENT
+          +
+          Label : RIGHT
+            1
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $g
+            Label : INDEX
+              $h
     Label : LEFT
       [
       Label : VARIABLE
@@ -24,27 +48,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 $e
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          -
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $i
-            Label : INDEX
-              $j
-          Label : RIGHT
-            1
-        Label : ARGUMENT
-          +
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $g
-            Label : INDEX
-              $h
-          Label : RIGHT
-            1

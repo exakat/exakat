@@ -3,16 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $x
@@ -49,26 +39,26 @@ Label : CODE
           Label : THEN
             ;
             Label : ELEMENT
-              ;
-              Label : ELEMENT
-                $y4
-          Label : ELSE
-            elseif
-            Label : CONDITION
-              $x5
-            Label : THEN
-              ;
-              Label : ELEMENT
+              elseif
+              Label : CONDITION
+                $x5
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  ;
+                  Label : ELEMENT
+                    ;
+                    Label : ELEMENT
+                      $z
+              Label : THEN
                 ;
                 Label : ELEMENT
                   ;
                   Label : ELEMENT
                     $y5
-            Label : ELSE
+          Label : THEN
+            ;
+            Label : ELEMENT
               ;
               Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  ;
-                  Label : ELEMENT
-                    $z
+                $y4

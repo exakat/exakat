@@ -2,22 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $a
@@ -84,22 +68,24 @@ Label : CODE
                 Label : THEN
                   ;
                   Label : ELEMENT
+                    elseif
+                    Label : CONDITION
+                      $b
+                    Label : THEN
+                      ;
+                      Label : ELEMENT
+                        ++
+                        Label : POSTPLUSPLUS
+                          $d
+                    Label : THEN
+                      ;
+                      Label : ELEMENT
+                        ++
+                        Label : POSTPLUSPLUS
+                          $c
+                Label : THEN
+                  ;
+                  Label : ELEMENT
                     ++
                     Label : POSTPLUSPLUS
                       $c
-                Label : ELSE
-                  elseif
-                  Label : CONDITION
-                    $b
-                  Label : THEN
-                    ;
-                    Label : ELEMENT
-                      ++
-                      Label : POSTPLUSPLUS
-                        $c
-                  Label : ELSE
-                    ;
-                    Label : ELEMENT
-                      ++
-                      Label : POSTPLUSPLUS
-                        $d

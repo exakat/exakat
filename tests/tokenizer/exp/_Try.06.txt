@@ -28,10 +28,6 @@ Label : CODE
           $d
     Label : CATCH
       catch
-      Label : VARIABLE
-        $e
-      Label : CLASS
-        Exception
       Label : CODE
         ;
         Label : ELEMENT
@@ -50,3 +46,7 @@ Label : CODE
                 'Y-m-d-H-i-s'
           Label : LEFT
             $c
+      Label : CLASS
+        Exception
+      Label : VARIABLE
+        $e

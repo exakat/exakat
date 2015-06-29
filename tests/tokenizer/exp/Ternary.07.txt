@@ -12,9 +12,9 @@ Label : CODE
         2
       Label : ELSE
         ->
-        Label : OBJECT
-          $a
         Label : PROPERTY
           b
+        Label : OBJECT
+          $a
     Label : LEFT
       $x

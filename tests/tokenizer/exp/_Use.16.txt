@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      complex
     Label : BLOCK
       ;
       Label : ELEMENT
         class
+        Label : NAME
+          path2
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -18,42 +18,18 @@ Label : CODE
               a
             Label : VALUE
               2
-        Label : NAME
-          path
-  Label : ELEMENT
-    namespace
     Label : NAMESPACE
       \
       Label : SUBNAME
         complex
       Label : SUBNAME
         absolute
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-        Label : NAME
-          path2
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
         function
-        Label : BLOCK
-          void
-        Label : NAME
-          y
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
@@ -118,6 +94,10 @@ Label : CODE
               one_identifier
             Label : VARIABLE
               $a
+        Label : NAME
+          y
+        Label : BLOCK
+          void
       Label : ELEMENT
         use
         Label : USE
@@ -184,14 +164,16 @@ Label : CODE
         use
         Label : USE
           one_identifier
+    Label : NAMESPACE
+      x
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      Global
     Label : BLOCK
       ;
       Label : ELEMENT
         class
+        Label : NAME
+          path
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -200,10 +182,16 @@ Label : CODE
               a
             Label : VALUE
               2
+    Label : NAMESPACE
+      complex
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        class
         Label : NAME
           a1
-      Label : ELEMENT
-        class
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -212,10 +200,10 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           one_identifier3
-      Label : ELEMENT
-        class
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -224,10 +212,10 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           absolute_path
-      Label : ELEMENT
-        class
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -236,5 +224,17 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           one_identifier
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+    Label : NAMESPACE
+      Global

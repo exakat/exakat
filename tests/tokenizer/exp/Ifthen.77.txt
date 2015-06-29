@@ -36,10 +36,10 @@ Label : CODE
               $b
         Label : CATCH
           catch
-          Label : VARIABLE
-            $c
           Label : CODE
             void
+          Label : VARIABLE
+            $c
           Label : CLASS
             \
             Label : SUBNAME

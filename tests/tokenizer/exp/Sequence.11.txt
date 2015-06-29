@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,6 +12,8 @@ Label : CODE
           3
         Label : LEFT
           $c
+    Label : VALUE
+      $b
     Label : SOURCE
       $y
   Label : ELEMENT
@@ -30,8 +30,6 @@ Label : CODE
           $x
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -40,6 +38,8 @@ Label : CODE
           2
         Label : LEFT
           $c
+    Label : VALUE
+      $b
     Label : SOURCE
       $y
   Label : ELEMENT

@@ -33,8 +33,6 @@ Label : CODE
       Label : ELEMENT
         E
       Label : ELEMENT
-        F
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -47,6 +45,8 @@ Label : CODE
               Label : ARGUMENT
                 'D'
       Label : ELEMENT
+        F
+      Label : ELEMENT
         B
       Label : ELEMENT
         if
@@ -58,14 +58,6 @@ Label : CODE
             void
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
-    Label : NAME
-      C
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -78,6 +70,14 @@ Label : CODE
               "\n"
             Label : CONCAT
               __METHOD__
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      C
   Label : ELEMENT
     =
     Label : RIGHT

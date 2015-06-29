@@ -4,18 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          null
-        Label : LEFT
-          $a
-    Label : NAME
-      B
     Label : BLOCK
       ;
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+        Label : CLASS
+          P
       Label : ELEMENT
         if
         Label : CONDITION
@@ -99,16 +99,6 @@ Label : CODE
                 Label : CASE
                   'H'
       Label : ELEMENT
-        ::
-        Label : METHOD
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
-        Label : CLASS
-          P
-      Label : ELEMENT
         if
         Label : CONDITION
           C
@@ -122,3 +112,13 @@ Label : CODE
                 __METHOD__
               Label : ARGUMENT
                 'E'
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          $a
+    Label : NAME
+      B

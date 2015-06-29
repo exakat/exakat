@@ -14,15 +14,15 @@ Label : CODE
           $d
         Label : LEFT
           ->
-          Label : OBJECT
-            $b
           Label : PROPERTY
             ;
             Label : ELEMENT
               ->
-              Label : OBJECT
-                $c
               Label : PROPERTY
                 B
+              Label : OBJECT
+                $c
+          Label : OBJECT
+            $b
     Label : LEFT
       $a

@@ -6,12 +6,6 @@ Label : CODE
     
   Label : ELEMENT
     while
-    Label : CONDITION
-      B
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -77,6 +71,8 @@ Label : CODE
       Label : ELEMENT
         X
       Label : ELEMENT
+        AH
+      Label : ELEMENT
         AA
         Label : ARGUMENTS
           Arguments
@@ -96,8 +92,6 @@ Label : CODE
                   'AD'
           Label : ARGUMENT
             'AB'
-      Label : ELEMENT
-        AH
       Label : ELEMENT
         R
       Label : ELEMENT
@@ -136,3 +130,9 @@ Label : CODE
             void
       Label : ELEMENT
         void
+    Label : CONDITION
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void

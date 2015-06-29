@@ -25,16 +25,16 @@ Label : CODE
             Label : CONCAT
               ->
               Label : OBJECT
-                $d
+                $f
               Label : PROPERTY
-                e
+                g
             Label : CONCAT
               :
             Label : CONCAT
               ->
               Label : OBJECT
-                $f
+                $d
               Label : PROPERTY
-                g
+                e
         Label : LEFT
           $c

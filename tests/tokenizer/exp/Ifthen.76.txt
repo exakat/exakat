@@ -22,10 +22,10 @@ Label : CODE
               $e
             Label : ARGUMENT
               ->
-              Label : OBJECT
-                $d
               Label : PROPERTY
                 F
+              Label : OBJECT
+                $d
         Label : THEN
           ;
           Label : ELEMENT
@@ -33,13 +33,17 @@ Label : CODE
             Label : RETURN
               G
       Label : ELEMENT
+        return
+        Label : RETURN
+          K
+      Label : ELEMENT
         if
         Label : CONDITION
           ->
-          Label : OBJECT
-            $f
           Label : PROPERTY
             H
+          Label : OBJECT
+            $f
         Label : THEN
           ;
           Label : ELEMENT
@@ -56,14 +60,10 @@ Label : CODE
                       $h
                     Label : ARGUMENT
                       ->
-                      Label : OBJECT
-                        $g
                       Label : PROPERTY
                         J
-      Label : ELEMENT
-        return
-        Label : RETURN
-          K
+                      Label : OBJECT
+                        $g
       Label : ELEMENT
         if
         Label : CONDITION

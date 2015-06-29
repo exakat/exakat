@@ -12,11 +12,11 @@ Label : CODE
         void
         Label : ARGUMENT
           ->
-          Label : OBJECT
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              c
           Label : PROPERTY
             False
+          Label : OBJECT
+            ->
+            Label : PROPERTY
+              c
+            Label : OBJECT
+              $b
