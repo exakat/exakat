@@ -47,6 +47,7 @@ class Appinfo extends \Report\Content {
                             'Autoload'                   => 'Php/AutoloadUsage',
                             'inclusion'                  => 'Structures/IncludeUsage',
                             'include_once'               => 'Structures/OnceUsage',
+                            'Output control'             => 'Extensions/Extob',
           
                             'Goto'                       => 'Php/Gotonames',
                             'Labels'                     => 'Php/Labelnames',
@@ -219,6 +220,7 @@ class Appinfo extends \Report\Content {
                             'ext/mssql'      => 'Extensions/Extmssql',
                             'ext/mysql'      => 'Extensions/Extmysql',
                             'ext/mysqli'     => 'Extensions/Extmysqli',
+                            'ext/ob'         => 'Extensions/Extob',
                             'ext/oci8'       => 'Extensions/Extoci8',
                             'ext/odbc'       => 'Extensions/Extodbc',
                             'ext/opcache'    => 'Extensions/Extopcache',
