@@ -2,6 +2,9 @@
 
 //print_r(processFile('/private/var/folders/3j/pf24y7cx7j71yg0h59t16xqr0000gn/T/exComposer8TRJo9/vendor/monolog/monolog/tests/Monolog/Processor/IntrospectionProcessorTest.php')); die();
 
+if (!isset($argv[1])) {
+    die( "getComposer <project>\n");
+}
 $project = $argv[1];
 if (empty($project)) {
     die( "getComposer <project>\n");
