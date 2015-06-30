@@ -8,22 +8,28 @@ Label : CODE
       void
       Label : ARGUMENT
         &&
+        Label : LEFT
+          0
         Label : RIGHT
           (
           Label : CODE
             =
+            Label : LEFT
+              $a
             Label : RIGHT
               function
+              Label : NAME
+                
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
                   Typehint
                   Label : VARIABLE
                     =
-                    Label : RIGHT
-                      null
                     Label : LEFT
                       $b
+                    Label : RIGHT
+                      null
                   Label : CLASS
                     X
                 Label : ARGUMENT
@@ -32,36 +38,38 @@ Label : CODE
                     $a
                   Label : CLASS
                     array
-              Label : NAME
-                
               Label : BLOCK
                 ;
                 Label : ELEMENT
                   class
                   Label : NAME
                     A
+                  Label : FINAL
+                    final
                   Label : BLOCK
                     ;
                     Label : ELEMENT
                       function
+                      Label : NAME
+                        f2
+                      Label : FINAL
+                        final
+                      Label : PROTECTED
+                        protected
                       Label : ARGUMENTS
                         void
                         Label : ARGUMENT
                           void
-                      Label : PROTECTED
-                        protected
-                      Label : NAME
-                        f2
                       Label : BLOCK
                         ;
                         Label : ELEMENT
                           if
                           Label : CONDITION
                             ==
-                            Label : RIGHT
-                              1
                             Label : LEFT
                               $x
+                            Label : RIGHT
+                              1
                           Label : THEN
                             ;
                             Label : ELEMENT
@@ -74,10 +82,10 @@ Label : CODE
                               if
                               Label : CONDITION
                                 ==
-                                Label : RIGHT
-                                  2
                                 Label : LEFT
                                   $x
+                                Label : RIGHT
+                                  2
                               Label : THEN
                                 ;
                                 Label : ELEMENT
@@ -90,10 +98,10 @@ Label : CODE
                                   if
                                   Label : CONDITION
                                     ==
-                                    Label : RIGHT
-                                      3
                                     Label : LEFT
                                       $x
+                                    Label : RIGHT
+                                      3
                                   Label : THEN
                                     ;
                                     Label : ELEMENT
@@ -124,54 +132,54 @@ Label : CODE
                                                     void
                                             Label : ELEMENT
                                               case
+                                              Label : CASE
+                                                8
                                               Label : CODE
                                                 Block with Sequence For Case
                                                 Label : ELEMENT
                                                   goto
                                                   Label : LABEL
                                                     L0
-                                              Label : CASE
-                                                8
                                             Label : ELEMENT
                                               case
-                                              Label : CODE
-                                                Block with Sequence For Case
-                                                Label : ELEMENT
-                                                  continue
-                                                  Label : LEVEL
-                                                    2
                                               Label : CASE
                                                 7
+                                              Label : CODE
+                                                Block with Sequence For Case
+                                                Label : ELEMENT
+                                                  continue
+                                                  Label : LEVEL
+                                                    2
                                             Label : ELEMENT
                                               case
+                                              Label : CASE
+                                                6
                                               Label : CODE
                                                 Block with Sequence For Case
                                                 Label : ELEMENT
                                                   break
                                                   Label : LEVEL
                                                     2
-                                              Label : CASE
-                                                6
                                             Label : ELEMENT
                                               case
+                                              Label : CASE
+                                                5
                                               Label : CODE
                                                 Block with Sequence For Case
                                                 Label : ELEMENT
                                                   continue
                                                   Label : LEVEL
                                                     void
-                                              Label : CASE
-                                                5
                                             Label : ELEMENT
                                               case
+                                              Label : CASE
+                                                4
                                               Label : CODE
                                                 Block with Sequence For Case
                                                 Label : ELEMENT
                                                   break
                                                   Label : LEVEL
                                                     void
-                                              Label : CASE
-                                                4
                                     Label : ELEMENT
                                       :
                                       Label : LABEL
@@ -180,10 +188,10 @@ Label : CODE
                                       if
                                       Label : CONDITION
                                         ==
-                                        Label : RIGHT
-                                          9
                                         Label : LEFT
                                           $x
+                                        Label : RIGHT
+                                          9
                                       Label : THEN
                                         ;
                                         Label : ELEMENT
@@ -202,32 +210,30 @@ Label : CODE
                               return
                               Label : RETURN
                                 0
-                      Label : FINAL
-                        final
-                  Label : FINAL
-                    final
               Label : USE
                 Arguments
                 Label : ARGUMENT
                   $d
                 Label : ARGUMENT
                   $c
-            Label : LEFT
-              $a
-        Label : LEFT
-          0
   Label : ELEMENT
     assert
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         &&
+        Label : LEFT
+          0
         Label : RIGHT
           (
           Label : CODE
             =
+            Label : LEFT
+              $a
             Label : RIGHT
               function
+              Label : NAME
+                
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
@@ -236,8 +242,6 @@ Label : CODE
                     $a
                   Label : CLASS
                     array
-              Label : NAME
-                
               Label : BLOCK
                 ;
                 Label : ELEMENT
@@ -262,6 +266,8 @@ Label : CODE
                     catch
                     Label : VARIABLE
                       $e
+                    Label : CLASS
+                      Exception
                     Label : CODE
                       ;
                       Label : ELEMENT
@@ -270,12 +276,12 @@ Label : CODE
                           void
                           Label : ARGUMENT
                             2
-                    Label : CLASS
-                      Exception
                   Label : CATCH
                     catch
                     Label : VARIABLE
                       $e
+                    Label : CLASS
+                      MyException
                     Label : CODE
                       ;
                       Label : ELEMENT
@@ -284,46 +290,44 @@ Label : CODE
                           void
                           Label : ARGUMENT
                             1
-                    Label : CLASS
-                      MyException
                 Label : ELEMENT
                   declare
                   Label : TICKS
                     Arguments
                     Label : ARGUMENT
                       =
-                      Label : RIGHT
-                        2
                       Label : LEFT
                         B
+                      Label : RIGHT
+                        2
                     Label : ARGUMENT
                       =
-                      Label : RIGHT
-                        1
                       Label : LEFT
                         A
-            Label : LEFT
-              $a
-        Label : LEFT
-          0
+                      Label : RIGHT
+                        1
   Label : ELEMENT
     assert
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         &&
+        Label : LEFT
+          0
         Label : RIGHT
           (
           Label : CODE
             =
+            Label : LEFT
+              $a
             Label : RIGHT
               function
+              Label : NAME
+                
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
-              Label : NAME
-                
               Label : BLOCK
                 ;
                 Label : ELEMENT
@@ -339,9 +343,9 @@ Label : CODE
                     Label : THEN
                       void
                 Label : ELEMENT
-                  
-                Label : ELEMENT
                   =
+                  Label : LEFT
+                    $x
                   Label : RIGHT
                     new
                     Label : NEW
@@ -354,10 +358,10 @@ Label : CODE
                         foo
                       Label : SUBNAME
                         namespace
-                  Label : LEFT
-                    $x
                 Label : ELEMENT
                   =
+                  Label : LEFT
+                    $x
                   Label : RIGHT
                     new
                     Label : NEW
@@ -368,10 +372,10 @@ Label : CODE
                           void
                       Label : SUBNAME
                         foo
-                  Label : LEFT
-                    $x
                 Label : ELEMENT
                   =
+                  Label : LEFT
+                    $x
                   Label : RIGHT
                     new
                     Label : NEW
@@ -380,10 +384,10 @@ Label : CODE
                         void
                         Label : ARGUMENT
                           void
-                  Label : LEFT
-                    $x
                 Label : ELEMENT
                   =
+                  Label : LEFT
+                    $x
                   Label : RIGHT
                     "
                     Label : CONTAINS
@@ -394,46 +398,6 @@ Label : CODE
                         '---'
                       Label : CONCAT
                          
-                  Label : LEFT
-                    $x
-                Label : ELEMENT
-                  foo
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      void
-                Label : ELEMENT
-                  \
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      void
-                  Label : SUBNAME
-                    foo
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    \
-                    Label : SUBNAME
-                      foo
-                    Label : SUBNAME
-                      namespace
-                  Label : LEFT
-                    $x
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    \
-                    Label : SUBNAME
-                      foo
-                  Label : LEFT
-                    $x
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    foo
-                  Label : LEFT
-                    $x
                 Label : ELEMENT
                   \
                   Label : ARGUMENTS
@@ -446,6 +410,46 @@ Label : CODE
                     namespace
                 Label : ELEMENT
                   =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    \
+                    Label : SUBNAME
+                      foo
+                Label : ELEMENT
+                  \
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+                  Label : SUBNAME
+                    foo
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    foo
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    \
+                    Label : SUBNAME
+                      foo
+                    Label : SUBNAME
+                      namespace
+                Label : ELEMENT
+                  foo
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
                   Label : RIGHT
                     "
                     Label : CONTAINS
@@ -468,16 +472,16 @@ Label : CODE
                           bar
                       Label : CONCAT
                          
-                  Label : LEFT
-                    $x
                 Label : ELEMENT
                   =
+                  Label : LEFT
+                    $x
                   Label : RIGHT
                     '\'"`$a'
-                  Label : LEFT
-                    $x
                 Label : ELEMENT
                   =
+                  Label : LEFT
+                    $x
                   Label : RIGHT
                     "
                     Label : CONTAINS
@@ -486,10 +490,10 @@ Label : CODE
                         $a
                       Label : CONCAT
                         b
-                  Label : LEFT
-                    $x
                 Label : ELEMENT
                   =
+                  Label : LEFT
+                    $x
                   Label : RIGHT
                     "
                     Label : CONTAINS
@@ -498,22 +502,10 @@ Label : CODE
                         $a
                       Label : CONCAT
                         b
-                  Label : LEFT
-                    $x
                 Label : ELEMENT
                   =
-                  Label : RIGHT
-                    "
-                    Label : CONTAINS
-                      Concatenation
-                      Label : CONCAT
-                        '\"`
-                      Label : CONCAT
-                        $a
                   Label : LEFT
                     $x
-                Label : ELEMENT
-                  =
                   Label : RIGHT
                     `
                     Label : CONTAINS
@@ -522,8 +514,18 @@ Label : CODE
                         '"\`
                       Label : CONCAT
                         $a
+                Label : ELEMENT
+                  =
                   Label : LEFT
                     $x
+                  Label : RIGHT
+                    "
+                    Label : CONTAINS
+                      Concatenation
+                      Label : CONCAT
+                        '\"`
+                      Label : CONCAT
+                        $a
                 Label : ELEMENT
                   declare
                   Label : BLOCK
@@ -536,36 +538,38 @@ Label : CODE
                           1
                   Label : TICKS
                     =
-                    Label : RIGHT
-                      1
                     Label : LEFT
                       C
-            Label : LEFT
-              $a
-        Label : LEFT
-          0
+                    Label : RIGHT
+                      1
   Label : ELEMENT
     assert
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         &&
+        Label : LEFT
+          0
         Label : RIGHT
           (
           Label : CODE
             =
+            Label : LEFT
+              $a
             Label : RIGHT
               function
+              Label : NAME
+                
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
                   Typehint
                   Label : VARIABLE
                     =
-                    Label : RIGHT
-                      null
                     Label : LEFT
                       $b
+                    Label : RIGHT
+                      null
                   Label : CLASS
                     X
                 Label : ARGUMENT
@@ -574,8 +578,6 @@ Label : CODE
                     $a
                   Label : CLASS
                     array
-              Label : NAME
-                
               Label : BLOCK
                 ;
                 Label : ELEMENT
@@ -610,24 +612,24 @@ Label : CODE
                             ops
                         Label : ELEMENT
                           as
-                          Label : RIGHT
-                            bar
                           Label : LEFT
                             ::
                             Label : CLASS
                               T2
                             Label : CONSTANT
                               foo
+                          Label : RIGHT
+                            bar
                         Label : ELEMENT
                           insteadof
-                          Label : RIGHT
-                            foo
                           Label : LEFT
                             ::
                             Label : CLASS
                               T1
                             Label : CONSTANT
                               foo
+                          Label : RIGHT
+                            foo
                       Label : USE
                         T2
                       Label : USE
@@ -638,32 +640,34 @@ Label : CODE
                   $d
                 Label : ARGUMENT
                   $c
-            Label : LEFT
-              $a
-        Label : LEFT
-          0
   Label : ELEMENT
     assert
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         &&
+        Label : LEFT
+          0
         Label : RIGHT
           (
           Label : CODE
             =
+            Label : LEFT
+              $a
             Label : RIGHT
               function
+              Label : NAME
+                
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
                   Typehint
                   Label : VARIABLE
                     =
-                    Label : RIGHT
-                      null
                     Label : LEFT
                       $b
+                    Label : RIGHT
+                      null
                   Label : CLASS
                     X
                 Label : ARGUMENT
@@ -672,30 +676,40 @@ Label : CODE
                     $a
                   Label : CLASS
                     array
-              Label : NAME
-                
               Label : BLOCK
                 ;
                 Label : ELEMENT
                   class
                   Label : NAME
                     A
+                  Label : ABSTRACT
+                    abstract
+                  Label : EXTENDS
+                    B
+                  Label : IMPLEMENTS
+                    D
+                  Label : IMPLEMENTS
+                    C
                   Label : BLOCK
                     ;
                     Label : ELEMENT
                       function
+                      Label : NAME
+                        f1
+                      Label : STATIC
+                        static
+                      Label : PRIVATE
+                        private
                       Label : ARGUMENTS
                         void
                         Label : ARGUMENT
                           void
-                      Label : STATIC
-                        static
-                      Label : NAME
-                        f1
                       Label : BLOCK
                         ;
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             foo
                             Label : ARGUMENTS
@@ -714,14 +728,14 @@ Label : CODE
                                 4
                               Label : ARGUMENT
                                 +
-                                Label : RIGHT
-                                  1
                                 Label : LEFT
                                   $a
-                          Label : LEFT
-                            $x
+                                Label : RIGHT
+                                  1
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             ::
                             Label : PROPERTY
@@ -734,10 +748,10 @@ Label : CODE
                                   $z
                             Label : CLASS
                               C
-                          Label : LEFT
-                            $x
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             ::
                             Label : PROPERTY
@@ -750,26 +764,18 @@ Label : CODE
                                   "_1"
                                 Label : CONCAT
                                   $a
-                          Label : LEFT
-                            $x
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             ::
                             Label : PROPERTY
                               $z
                             Label : CLASS
                               C
-                          Label : LEFT
-                            $x
                         Label : ELEMENT
                           =
-                          Label : RIGHT
-                            ::
-                            Label : CLASS
-                              C
-                            Label : CONSTANT
-                              C
                           Label : LEFT
                             ->
                             Label : OBJECT
@@ -782,20 +788,14 @@ Label : CODE
                                   "_1"
                                 Label : CONCAT
                                   a
-                        Label : ELEMENT
-                          =
                           Label : RIGHT
                             ::
                             Label : CLASS
-                              $
-                              Label : NAME
-                                Concatenation
-                                Label : CONCAT
-                                  "_1"
-                                Label : CONCAT
-                                  $a
+                              C
                             Label : CONSTANT
                               C
+                        Label : ELEMENT
+                          =
                           Label : LEFT
                             ->
                             Label : OBJECT
@@ -808,40 +808,54 @@ Label : CODE
                                   $a
                             Label : PROPERTY
                               a
-                        Label : ELEMENT
-                          =
                           Label : RIGHT
                             ::
                             Label : CLASS
-                              C
+                              $
+                              Label : NAME
+                                Concatenation
+                                Label : CONCAT
+                                  "_1"
+                                Label : CONCAT
+                                  $a
                             Label : CONSTANT
                               C
+                        Label : ELEMENT
+                          =
                           Label : LEFT
                             ->
                             Label : OBJECT
                               $x
                             Label : PROPERTY
                               a
+                          Label : RIGHT
+                            ::
+                            Label : CLASS
+                              C
+                            Label : CONSTANT
+                              C
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             ->
                             Label : OBJECT
                               $x
                             Label : METHOD
                               ;
+                              Label : ARGUMENTS
+                                void
                               Label : ELEMENT
                                 Concatenation
                                 Label : CONCAT
                                   "_1"
                                 Label : CONCAT
                                   $a
-                              Label : ARGUMENTS
-                                void
-                          Label : LEFT
-                            $x
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             ->
                             Label : OBJECT
@@ -858,10 +872,10 @@ Label : CODE
                                 void
                                 Label : ARGUMENT
                                   void
-                          Label : LEFT
-                            $x
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             ->
                             Label : OBJECT
@@ -872,18 +886,16 @@ Label : CODE
                                 void
                                 Label : ARGUMENT
                                   void
-                          Label : LEFT
-                            $x
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             ::
+                            Label : CLASS
+                              A
                             Label : METHOD
                               $
-                              Label : ARGUMENTS
-                                void
-                                Label : ARGUMENT
-                                  void
                               Label : NAME
                                 $
                                 Label : NAME
@@ -892,20 +904,16 @@ Label : CODE
                                     "_1"
                                   Label : CONCAT
                                     $a
-                            Label : CLASS
-                              A
-                          Label : LEFT
-                            $x
-                        Label : ELEMENT
-                          =
-                          Label : RIGHT
-                            ::
-                            Label : METHOD
-                              foo
                               Label : ARGUMENTS
                                 void
                                 Label : ARGUMENT
                                   void
+                        Label : ELEMENT
+                          =
+                          Label : LEFT
+                            $x
+                          Label : RIGHT
+                            ::
                             Label : CLASS
                               $
                               Label : NAME
@@ -914,30 +922,32 @@ Label : CODE
                                   "_1"
                                 Label : CONCAT
                                   $a
-                          Label : LEFT
-                            $x
-                        Label : ELEMENT
-                          =
-                          Label : RIGHT
-                            ::
                             Label : METHOD
                               foo
                               Label : ARGUMENTS
                                 void
                                 Label : ARGUMENT
                                   void
-                            Label : CLASS
-                              A
-                          Label : LEFT
-                            $x
                         Label : ELEMENT
                           =
+                          Label : LEFT
+                            $x
+                          Label : RIGHT
+                            ::
+                            Label : CLASS
+                              A
+                            Label : METHOD
+                              foo
+                              Label : ARGUMENTS
+                                void
+                                Label : ARGUMENT
+                                  void
+                        Label : ELEMENT
+                          =
+                          Label : LEFT
+                            $x
                           Label : RIGHT
                             $
-                            Label : ARGUMENTS
-                              void
-                              Label : ARGUMENT
-                                void
                             Label : NAME
                               $
                               Label : NAME
@@ -946,22 +956,10 @@ Label : CODE
                                   "_1"
                                 Label : CONCAT
                                   $a
-                          Label : LEFT
-                            $x
-                        Label : ELEMENT
-                          do
-                          Label : CONDITION
-                            [
-                            Label : VARIABLE
-                              $s
-                            Label : INDEX
-                              $i
-                          Label : BLOCK
-                            ;
-                            Label : ELEMENT
-                              --
-                              Label : POSTPLUSPLUS
-                                $i
+                            Label : ARGUMENTS
+                              void
+                              Label : ARGUMENT
+                                void
                         Label : ELEMENT
                           while
                           Label : CONDITION
@@ -977,6 +975,20 @@ Label : CODE
                               Label : POSTPLUSPLUS
                                 $i
                         Label : ELEMENT
+                          do
+                          Label : CONDITION
+                            [
+                            Label : VARIABLE
+                              $s
+                            Label : INDEX
+                              $i
+                          Label : BLOCK
+                            ;
+                            Label : ELEMENT
+                              --
+                              Label : POSTPLUSPLUS
+                                $i
+                        Label : ELEMENT
                           foreach
                           Label : VALUE
                             =>
@@ -984,6 +996,8 @@ Label : CODE
                               $key
                             Label : VALUE
                               $val
+                          Label : SOURCE
+                            $a
                           Label : BLOCK
                             ;
                             Label : ELEMENT
@@ -1002,46 +1016,44 @@ Label : CODE
                                       $val
                                     Label : CONCAT
                                       \n
-                          Label : SOURCE
-                            $a
                         Label : ELEMENT
                           for
+                          Label : FINAL
+                            <
+                            Label : LEFT
+                              $i
+                            Label : RIGHT
+                              $j
                           Label : BLOCK
                             ;
                             Label : ELEMENT
                               =
-                              Label : RIGHT
-                                [
-                                Label : VARIABLE
-                                  $a
-                                Label : INDEX
-                                  $j
                               Label : LEFT
                                 [
                                 Label : VARIABLE
                                   $s
                                 Label : INDEX
                                   $i
+                              Label : RIGHT
+                                [
+                                Label : VARIABLE
+                                  $a
+                                Label : INDEX
+                                  $j
                           Label : INIT
                             Arguments
                             Label : ARGUMENT
                               =
-                              Label : RIGHT
-                                100
                               Label : LEFT
                                 $j
+                              Label : RIGHT
+                                100
                             Label : ARGUMENT
                               =
-                              Label : RIGHT
-                                0
                               Label : LEFT
                                 $i
-                          Label : FINAL
-                            <
-                            Label : RIGHT
-                              $j
-                            Label : LEFT
-                              $i
+                              Label : RIGHT
+                                0
                           Label : INCREMENT
                             Arguments
                             Label : ARGUMENT
@@ -1052,8 +1064,6 @@ Label : CODE
                               ++
                               Label : POSTPLUSPLUS
                                 $i
-                      Label : PRIVATE
-                        private
                     Label : ELEMENT
                       ppp
                       Label : VALUE
@@ -1072,14 +1082,14 @@ Label : CODE
                         public
                     Label : ELEMENT
                       function
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          void
                       Label : NAME
                         foo
                       Label : ABSTRACT
                         abstract
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          void
                     Label : ELEMENT
                       private
                       Label : VALUE
@@ -1100,41 +1110,29 @@ Label : CODE
                         protected
                     Label : ELEMENT
                       const
-                      Label : VALUE
-                        "aaa"
                       Label : NAME
                         Z
+                      Label : VALUE
+                        "aaa"
                     Label : ELEMENT
                       const
+                      Label : NAME
+                        Y
                       Label : VALUE
                         ::
                         Label : CLASS
                           self
                         Label : CONSTANT
                           X
-                      Label : NAME
-                        Y
                     Label : ELEMENT
                       const
-                      Label : VALUE
-                        12
                       Label : NAME
                         X
-                  Label : ABSTRACT
-                    abstract
-                  Label : EXTENDS
-                    B
-                  Label : IMPLEMENTS
-                    D
-                  Label : IMPLEMENTS
-                    C
+                      Label : VALUE
+                        12
               Label : USE
                 Arguments
                 Label : ARGUMENT
                   $d
                 Label : ARGUMENT
                   $c
-            Label : LEFT
-              $a
-        Label : LEFT
-          0
