@@ -1868,9 +1868,18 @@ GREMLIN;
     
     public function makeFullNsPath($functions) {
         if (is_string($functions)) {
-            $r = "\\".strtolower($functions);
+            $r = strtolower($functions);
+            if ($r[0] != "\\") {
+                $r = "\\". $r;
+            }
         } else {
-            $r = array_map(function ($x) { return "\\".strtolower($x); },  $functions);
+            $r = array_map(function ($x) { 
+                $r = strtolower($x);
+                if ($r[0] != "\\") {
+                    $r = "\\". $r;
+                }
+                return $r;
+            },  $functions);
         }
         return $r;
     }
