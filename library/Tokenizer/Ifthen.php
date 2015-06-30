@@ -150,7 +150,7 @@ class Ifthen extends TokenAuto {
                                                        2 => 'THEN',
                                                        3 => 'DROP'),
                                'cleanIndex'   => true,
-                               'property'    => array('alternative' => false),
+                               'property'     => array('alternative' => true),
                                'atom'         => 'Ifthen',
                                'addSemicolon' => 'it'
                                );
@@ -167,7 +167,7 @@ class Ifthen extends TokenAuto {
                                                        2 => 'THEN'),
                                'cleanIndex'   => true,
                                'keepIndexed'  => true,
-                               'property'     => array('alternative' => false)
+                               'property'     => array('alternative' => true),
                                );
         $this->checkAuto();
 
@@ -184,7 +184,7 @@ class Ifthen extends TokenAuto {
                                                        3 => 'THEN',
                                                        4 => 'DROP'),
                                'cleanIndex'   => true,
-                               'property'    => array('alternative' => false),
+                               'property'     => array('alternative' => true),
                                'atom'         => 'Ifthen',
                                'addSemicolon' => 'it'
                                );
