@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$dynamicFunction', 
-                      '$dynamicMethod', 
-                      '$dynamicStaticMethod',
+$expected     = array('$dynamicFunction( )', 
+                      '$dynamicStaticMethod(3)', 
+                      '$dynamicMethod(1)',
                       '$object', 
                       '$object');
 

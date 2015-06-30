@@ -6,7 +6,8 @@ $expected     = array('$a',
                       '$d', 
                       '$e', 
                       '$g',
-                      '$i');
+                      '$i( )',
+                      '$ik( )');
 
 $expected_not = array();
 

@@ -2389,7 +2389,7 @@ g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
             unset($actions['addToIndex']);
         }
 
-        if (isset($actions['variable_to_functioncall'])) {
+        if (isset($actions['variableToFunctioncall'])) {
             $fullcode = $this->fullcode();
             
             $qactions[] = "
@@ -2397,9 +2397,10 @@ g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
 
 x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');
-g.idx('atoms').put('atom', 'Variable', x);
-                ";
-            unset($actions['variable_to_functioncall']);
+// No need for indexing here g.idx('atoms').put('atom', 'Variable', x);
+
+";
+            unset($actions['variableToFunctioncall']);
         }
 
         if (isset($actions['arrayToFunctioncall'])) {
