@@ -2,7 +2,7 @@
 
 $expected     = array();
 
-$expected_not = array('function  ( ) { /**/ } ',
+$expected_not = array('function ( ) { /**/ } ',
                       'function dontGetClosure( ) { /**/ } ');
 
 ?>
