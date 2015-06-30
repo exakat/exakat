@@ -26,7 +26,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class MethodCallOnNew extends Analyzer\Analyzer {
-    public $phpversion = '5.4+';
+    public $phpVersion = '5.4+';
     
     public function analyze() {
         $this->atomIs('Parenthesis')
