@@ -1,5 +1,9 @@
 <?php
 
+if (1) 2;
+
+if (3) ; else 4;
+
 if (4) :
     $ifnoblock++;
 elseif (5) :

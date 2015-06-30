@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('function unused ( ) { /**/ } ');
+$expected     = array('function unused( ) { /**/ } ');
 
-$expected_not = array('function used ( ) { /**/ } ');
+$expected_not = array('function used( ) { /**/ } ');
 
 ?>
