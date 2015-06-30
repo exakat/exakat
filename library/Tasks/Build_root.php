@@ -83,7 +83,7 @@ class Build_root implements Tasks {
         $this->query($query, 1);
         display( "g.idx('atoms') : T_VARIABLE\n");
 
-        $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant',
+        $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant', 'Null',
                                          'Rawstring', 'Float', 'Boolean', 'Void', 'File']}.each{
                                          g.idx('atoms').put('atom', it.atom, it); 
         }";
