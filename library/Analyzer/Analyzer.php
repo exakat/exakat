@@ -615,8 +615,9 @@ GREMLIN;
     }
 
     public function hasRank($value = '0', $link = 'ARGUMENT') {
-        if ($value == 'first') {
-            $this->addMethod("has('rank','0')");
+        if ($value === 'first') {
+            // @note : can't use has() with integer!
+            $this->addMethod('filter{it.rank == 0}'); 
         } elseif ($value === 'last') {
             $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 1}");
         } elseif ($value === '2last') {
