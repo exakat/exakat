@@ -130,6 +130,8 @@ class Phpexec {
 
             default: 
                 $this->phpexec = $config->php;
+                // PHP will be valide if we use the one that is currently executing us
+                $this->isValid = true;
         }
         
         if ($this->isValid) {
@@ -141,13 +143,13 @@ class Phpexec {
     private function finish() {
         // prepare the configuration for Short tags
         if ($this->isCurrentVersion){
-            $shortTags = ini_get('short_open_tag');
+            $shortTags = ini_get('short_open_tag') == 'On';
         } else {
             $res = shell_exec($this->phpexec.' -i');
             preg_match('/short_open_tag => (\w+) => (\w+)/', $res, $r);
             $shortTags = $r[2] == 'On';
         }
-        $this->config['short_open_tag'] = $shortTags ? 'On' : 'Off';
+        $this->config['short_open_tag'] = $shortTags;
 
         // prepare the list of tokens
         if ($this->isCurrentVersion) {
@@ -227,8 +229,10 @@ class Phpexec {
         if ($name === null) {
             return $this->config;
         } elseif (isset($this->config[$name])) {
-            return ($this->config[$name] === 'On');
+            return $this->config[$name];
         } else {
+            var_dump($this);
+            print "default behavior\n";
             return $this->config;
         }
     }
