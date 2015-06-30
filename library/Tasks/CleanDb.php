@@ -52,7 +52,7 @@ CYPHER;
             display('No nodes in neo4j. No need to clean');
         } elseif ($config->quick || $nodes > 10000) {
             display('Cleaning with restart');
-            shell_exec('cd '.$config->projects_root.'/neo4j/;sh ./bin/neo4j stop; rm -rf data; mkdir data');
+            shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid); rm -rf data; mkdir data');
             
             // checking that the server has indeed restarted
             $round = 0;
