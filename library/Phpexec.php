@@ -153,13 +153,16 @@ class Phpexec {
 
         // prepare the configuration for Asp tags
         if ($this->isCurrentVersion){
-            $aspTags = ini_get('asp_tag') == '1';
+            $aspTags = ini_get('asp_tags') == '1';
         } else {
             $res = shell_exec($this->phpexec.' -i');
-            preg_match('/asp_tag => (\w+) => (\w+)/', $res, $r);
-            $aspTags = $r[2] == 'On';
+            if (preg_match('/asp_tags => (\w+) => (\w+)/', $res, $r)) {
+                $aspTags = $r[2] == 'On';
+            } else {
+                $aspTags = false;
+            }
         }
-        $this->config['asp_tag'] = $aspTags;
+        $this->config['asp_tags'] = $aspTags;
 
         // prepare the list of tokens
         if ($this->isCurrentVersion) {
