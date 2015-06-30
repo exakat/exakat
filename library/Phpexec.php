@@ -227,7 +227,7 @@ class Phpexec {
         if ($name === null) {
             return $this->config;
         } elseif (isset($this->config[$name])) {
-            return $this->config[$name];
+            return ($this->config[$name] === 'On');
         } else {
             return $this->config;
         }
