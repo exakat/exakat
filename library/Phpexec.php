@@ -143,13 +143,23 @@ class Phpexec {
     private function finish() {
         // prepare the configuration for Short tags
         if ($this->isCurrentVersion){
-            $shortTags = ini_get('short_open_tag') == 'On';
+            $shortTags = ini_get('short_open_tag') == '1';
         } else {
             $res = shell_exec($this->phpexec.' -i');
             preg_match('/short_open_tag => (\w+) => (\w+)/', $res, $r);
             $shortTags = $r[2] == 'On';
         }
         $this->config['short_open_tag'] = $shortTags;
+
+        // prepare the configuration for Asp tags
+        if ($this->isCurrentVersion){
+            $aspTags = ini_get('asp_tag') == '1';
+        } else {
+            $res = shell_exec($this->phpexec.' -i');
+            preg_match('/asp_tag => (\w+) => (\w+)/', $res, $r);
+            $aspTags = $r[2] == 'On';
+        }
+        $this->config['asp_tag'] = $aspTags;
 
         // prepare the list of tokens
         if ($this->isCurrentVersion) {
@@ -231,8 +241,6 @@ class Phpexec {
         } elseif (isset($this->config[$name])) {
             return $this->config[$name];
         } else {
-            var_dump($this);
-            print "default behavior\n";
             return $this->config;
         }
     }
