@@ -1635,6 +1635,7 @@ g.addEdge(it, b1, 'ELEMENT');
 
 b1.inE('INDEXED').each{ g.removeEdge(it); }
 it.setProperty('atom', 'Sequence');
+g.idx('atoms').put('atom','Sequence', it);
 it.setProperty('fullcode', ';'); // fullcode 
 
 g.addEdge(b2, it, 'NEXT');
