@@ -70,6 +70,22 @@ class Ifthen extends TokenAuto {
         $this->actions = array( 'toBlockIfelseif' => 1,
                                 'keepIndexed'     => true);
         $this->checkAuto();
+        
+        // @doc if () /**/ else $x++;
+        // Make a block from sequence after else
+        $this->conditions = array(  0 => array('token'   => self::$operators,
+                                               'atom'    => 'none'),
+                                    1 => array('token'   => 'T_ELSE'),
+                                    2 => array('atom'    => 'yes'),
+                                    3 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
+                                                                  'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_END',
+                                                                  'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
+                                                                  'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_VOID')),
+        );
+        
+        $this->actions = array( 'toBlockElse' => 1,
+                                'keepIndexed' => true);
+        $this->checkAuto();
 
         // Finish the THEN block
         $this->conditions = array( 0 => array('token' => self::$operators),
@@ -138,6 +154,23 @@ class Ifthen extends TokenAuto {
         $this->checkAuto();
         
         // alternatives
+
+        // @doc if () /**/ else $x++;
+        // Make a block from sequence after else
+        $this->conditions = array(  0 => array('token'   => self::$operators,
+                                               'atom'    => 'none'),
+                                    1 => array('token'   => 'T_ELSE'),
+                                    2 => array('token'   => 'T_COLON'),
+                                    3 => array('atom'    => 'yes'),
+                                    4 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
+                                                                  'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_END',
+                                                                  'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
+                                                                  'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_VOID')),
+        );
+        
+        $this->actions = array( 'toBlockElse' => true,
+                                'keepIndexed' => true);
+        $this->checkAuto();
         
         // Finish the THEN block
         $this->conditions = array( 0 => array('token' => self::$operators),
@@ -197,15 +230,36 @@ class Ifthen extends TokenAuto {
         return <<<GREMLIN
 
 if (fullcode.alternative == true) {
-    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") : " + fullcode.out("THEN").next().fullcode;
+    then = fullcode.out("THEN").next();
+    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") : " + then.fullcode;
     if (fullcode.out('ELSE').any()) {
-        fullcode.fullcode = fullcode.fullcode + " else : " + fullcode.out("ELSE").next().fullcode;
+        theElse = fullcode.out("ELSE").next();
+        if (theElse.token == 'T_ELSEIF') {
+            fullcode.fullcode = fullcode.fullcode + " " + theElse.fullcode;
+        } else {
+            fullcode.fullcode = fullcode.fullcode + " else : " + fullcode.out("ELSE").next().fullcode;
+            fullcode.fullcode = fullcode.fullcode + ' endif'
+        }
+    } else {
+        fullcode.fullcode = fullcode.fullcode + ' endif'
     }
-    fullcode.fullcode = fullcode.fullcode + ' endif'
 } else {
-    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") " + fullcode.out("THEN").next().fullcode;
+    theThen = fullcode.out("THEN").next();
+    if (theThen.bracket == false) {
+        fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") " + theThen.fullcode;
+    } else {
+        fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") { " + theThen.fullcode + " }";
+    }
+    
     if (fullcode.out('ELSE').any()) {
-        fullcode.fullcode = fullcode.fullcode + " else " + fullcode.out("ELSE").next().fullcode;
+        theElse = fullcode.out("ELSE").next();
+        if (theElse.token == 'T_ELSEIF') {
+            fullcode.fullcode = fullcode.fullcode + " " + theElse.fullcode;
+        } else if (theThen.bracket == false) {
+            fullcode.fullcode = fullcode.fullcode + " else " + theElse.fullcode;
+        } else {
+            fullcode.fullcode = fullcode.fullcode + " else { " + theElse.fullcode + " }";
+        }
     }
 }
 
