@@ -4,7 +4,7 @@ namespace Test;
 
 class Tokenizer extends \PHPUnit_Framework_TestCase {
     public function generic_test($file) {
-/*
+
         $ini = parse_ini_file('../../projects/test/config.ini');
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
         $test_config = 'Tokenizer'.str_replace('_', '\\', substr(get_class($this), 4));
@@ -16,7 +16,8 @@ class Tokenizer extends \PHPUnit_Framework_TestCase {
 
         // initialize Config (needed by phpexec)
         \Config::factory(array('foo', '-p', 'test'));
-        
+
+/*        
         $Php = new \Phpexec($phpversion);
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();

@@ -975,6 +975,11 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
         // Default behavior if we don't understand :
         return false;
     }
+
+    public function getPhpversion() {
+        return $this->phpVersion;
+    }
+
 }
 
 ?>
