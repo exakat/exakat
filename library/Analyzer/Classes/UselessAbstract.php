@@ -39,6 +39,14 @@ class UselessAbstract extends Analyzer\Analyzer {
              ->filter('g.idx("atoms")[["atom":"Class"]].out("EXTENDS").has("fullnspath", fnp).any() == false')
              ->back('first');
         $this->prepareQuery();
+
+        // abstract class without nothing in
+        $this->atomIs('Class')
+             ->hasOut('ABSTRACT')
+             ->outIs('BLOCK')
+             ->atomIs('Void')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

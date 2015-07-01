@@ -1,10 +1,12 @@
 <?php
 
-abstract class abstractClass {}
+abstract class abstractClass { public $v; }
 
 class abstractSubClass extends abstractClass {}
 
-abstract class uselessAbstractClass {}
+abstract class uselessEmptyAbstractClass {}
+
+abstract class uselessAbstractClass {public $v;}
 
 class normalClasssWithoutExtends {}
 
