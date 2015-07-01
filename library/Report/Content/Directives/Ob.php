@@ -33,7 +33,7 @@ class Ob extends Directives {
         if ($this->checkPresence('Extensions\\Extob')) {
             $this->directives[] = array('name' => 'output_buffering',
                                        'suggested' => '4096', 
-                                       'documentation' => 'You can enable output buffering for all files by setting this directive to 'On'. If you wish to limit the size of the buffer to a certain size - you can use a maximum number of bytes instead of 'On', as a value for this directive (e.g., output_buffering=4096). As of PHP 4.3.5, this directive is always Off in PHP-CLI.');
+                                       'documentation' => 'You can enable output buffering for all files by setting this directive to \'On\'. If you wish to limit the size of the buffer to a certain size - you can use a maximum number of bytes instead of \'On\', as a value for this directive (e.g., output_buffering=4096). As of PHP 4.3.5, this directive is always Off in PHP-CLI.');
 
             $this->directives[] = array('name' => 'output_handler',
                                        'suggested' => ' mb_output_handler or ob_iconv_handler(); ob_gzhandler() or zlib.output_compression;', 

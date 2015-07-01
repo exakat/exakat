@@ -34,7 +34,7 @@ class Directives extends \Report\Content {
 
         // @todo automate this
         $directives = array('Standard', 'Bcmath', 'Date', 'Filesystem', 
-                            'FileUpload', 'Mail',
+                            'FileUpload', 'Mail', 'Ob', 
                             // standard extensions
                             'Apache', 'Assertion', 'Curl', 'Dba',
                             'Filter', 'Image', 'Intl', 'Ldap',
