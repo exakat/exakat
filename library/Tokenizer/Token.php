@@ -885,7 +885,8 @@ g.idx('atoms')[['atom':'Class']]
     it.as('a').out('EXTENDS')
       .sideEffect{ s.add(it.fullnspath); }
       .transform{ g.idx('classes')[['path':it.fullnspath]].next(); }
-      .loop('a'){it.object.out('EXTENDS').any()}.iterate();
+      // it.loops is arbitrary : avoid circular reference loop.
+      .loop('a'){it.object.out('EXTENDS').any() && it.loops < 10}.iterate();
       true;
 }
 .each{
