@@ -1733,7 +1733,7 @@ cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.l
 
 x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:true, bracket:false, virtual:true, line:it.line]);
 
-a = it.out('NEXT').next();
+a = it.out('NEXT').out('NEXT').next();
 if (a.token == 'T_COLON') {
     a = a.out('NEXT').next();
 }
