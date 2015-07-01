@@ -5,10 +5,12 @@
 if (!isset($argv[1])) {
     die( "getComposer <project>\n");
 }
+
 $project = $argv[1];
 if (empty($project)) {
     die( "getComposer <project>\n");
 }
+
 if (!file_exists('./projects/'.$project.'')) {
     die( "No such project as $project\n");
 }
@@ -22,7 +24,11 @@ $components = array_merge((array) @$composer->require,
                           (array) @$composer->{'require-dev'},
                           (array) @$composer->suggest);
 
-//$components = array('monolog/monolog' => '~1.3');
+//$components = array('guzzlehttp/guzzle' => '~6.0');
+//$components = array('guzzlehttp/guzzle' => '~5.3.0');
+//$components = array('guzzlehttp/ringphp' => '1.1.0');
+
+
 unset($components['php']);
 foreach($components as $k => $v) {
     if (substr($k, 0, 4) == 'ext-') {
@@ -41,7 +47,121 @@ foreach($components as $fullName => $version) {
 
 $sqlite = new sqlite3('data/composer.sqlite');
 
+/*
+$sqlite->query('DELETE FROM traits');
+$sqlite->query('DELETE FROM interfaces');
+$sqlite->query('DELETE FROM functions');
+$sqlite->query('DELETE FROM classes');
+$sqlite->query('DELETE FROM namespaces');
+$sqlite->query('DELETE FROM versions');
+$sqlite->query('DELETE FROM components');
+print "DELETED all\n";
+*/
+
 foreach($components as $fullName => $version) {
+    print "Fetching $fullName\n";
+    $composer = new stdClass();
+    $composer->require = new stdClass();
+    $composer->require->$fullName = $version;
+    $json = json_encode($composer);
+    
+    $tmpdir = tempnam(sys_get_temp_dir(), 'exComposer');
+    unlink($tmpdir);
+    mkdir($tmpdir, 0755);
+    file_put_contents($tmpdir.'/composer.json', $json);
+    print shell_exec("cd $tmpdir; composer install --ignore-platform-reqs");
+
+//    $tmpdir = '/private/var/folders/3j/pf24y7cx7j71yg0h59t16xqr0000gn/T/exComposer2qJd36';
+
+    print $tmpdir."\n";
+    
+    // reading actual version installed
+    $installed = file_get_contents($tmpdir.'/vendor/composer/installed.json');
+    $installed = json_decode($installed);
+//    print_r($installed);
+
+    foreach($installed as $k => $v) {
+       print $v->name.' '.$v->version."\n";
+       processComponent($v->name, $v->version, $tmpdir, $sqlite);
+    }
+}
+
+$res = $sqlite->query("SELECT count(*) AS nb FROM components");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." components\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM versions");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." versions\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM classes");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." classes\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM interfaces");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM traits");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
+
+
+function recursiveReaddir($tmpdir) {
+    $dir = opendir($tmpdir);
+    $return = array();
+    
+    while($file = readdir($dir)) {
+        if ($file[0] == '.') { continue; }
+        
+        if (is_dir($tmpdir.'/'.$file)) {
+            $return = array_merge($return, recursiveReaddir($tmpdir.'/'.$file));
+        } else {
+            if (substr($file, -4) != '.php') { continue; }
+            $return[] = $tmpdir.'/'.$file;
+        }
+    }
+    
+    return $return;
+}
+
+function processFile($file) {
+    $tokens = token_get_all(file_get_contents($file));
+    
+    $return = array('Class' => array(),
+                    'Interface' => array(),
+                    'Trait' => array());
+    $namespace = 'global';
+    
+    foreach($tokens as $id => $token) {
+        if (is_array($token)) {
+            switch($token[0]) {
+                case T_NAMESPACE : 
+                    $namespace = '';
+                    for ($i = $id + 2; ($tokens[$i] != ';' && $tokens[$i] != '{') && ($i - $id < 20); $i++) {
+                        if (is_array($tokens[$i])) {
+                            $namespace .= $tokens[$i][1];
+                        } else {
+                            $namespace .= $tokens[$i];
+                        }
+                    }
+                    $namespace = trim($namespace);
+                    break;
+
+                case T_CLASS : 
+                    $return['Class'][$namespace][] = $tokens[$id + 2][1];
+                    break;
+
+                case T_INTERFACE : 
+                    $return['Interface'][$namespace][] = $tokens[$id + 2][1];
+                    break;
+
+                case T_TRAIT : 
+                    $return['Trait'][$namespace][] = $tokens[$id + 2][1];
+                    break;
+                
+                default : 
+                    // nothing to do
+                
+            }
+        }
+    }
+    
+    return $return;
+}
+
+function processComponent($fullName, $version, $tmpdir, $sqlite) {
     list($vendor, $component) = explode('/', strtolower($fullName));
     
     $res = $sqlite->query("SELECT id FROM components WHERE vendor='$vendor' AND component = '$component'");
@@ -56,7 +176,7 @@ foreach($components as $fullName => $version) {
         print "$vendor/$component newly inserted in reference ($componentId)\n";
     }
 
-    print "Reading $vendor/$component versions\n";
+    print "Reading $fullName versions\n";
     $res = shell_exec('composer show '.$fullName);
 
     // remove colors
@@ -64,26 +184,20 @@ foreach($components as $fullName => $version) {
     preg_match_all("#versions : (.*?)\n#s", $res, $r);
     $versions = explode(', ', $r[1][0]);
 
-    foreach($versions as $version) {
-        if ($version[0] == 'v') { $version = substr($version, 1);}
-        $sqlite->query("INSERT OR IGNORE INTO versions (component_id, version) VALUES ($componentId, '$version');");
+    foreach($versions as $v) {
+        if ($v[0] == 'v') { $v = substr($v, 1);}
+        $sqlite->query("INSERT OR IGNORE INTO versions (component_id, version) VALUES ($componentId, '$v');");
     }
 
-    print "Fetching $vendor/$component\n";
-    $composer = new stdClass();
-    $composer->require = new stdClass();
-    $composer->require->$fullName = $version;
-    $json = json_encode($composer);
+    $res = $sqlite->query("SELECT id FROM versions WHERE component_id = '$componentId' AND version = '$version'");
+    $vid = $res->fetchArray(SQLITE3_ASSOC)['id'];
+    if ($vid) {
+        $versionId = $vid;
+    } else {
+        $sqlite->query("INSERT INTO versions (component_id, version) VALUES ('$componentId', '$version');");
+        $versionId = $sqlite->lastInsertRowID();
+    }
     
-    $tmpdir = tempnam(sys_get_temp_dir(), 'exComposer');
-    unlink($tmpdir);
-    mkdir($tmpdir, 0755);
-    file_put_contents($tmpdir.'/composer.json', $json);
-    print shell_exec("cd $tmpdir; composer install --ignore-platform-reqs");
-    
-    print $tmpdir."\n";
-    
-//    $tmpdir = '/private/var/folders/3j/pf24y7cx7j71yg0h59t16xqr0000gn/T/exComposerp2EDgr');
     $files = recursiveReaddir($tmpdir.'/vendor/'.strtolower($fullName));
     $all = array();
     foreach($files as $file) {
@@ -95,12 +209,12 @@ foreach($components as $fullName => $version) {
         foreach(array_keys($objects) as $ns) {
             if (!isset($namespacesIds[$ns])) {
                 $ns = $sqlite->escapeString($ns);
-                $res = $sqlite->query("SELECT id FROM namespaces WHERE component_id = '$componentId' AND namespace = '$ns'");
+                $res = $sqlite->query("SELECT id FROM namespaces WHERE version_id = '$versionId' AND namespace = '$ns'");
                 $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
                 if ($nsid) {
                     $namespacesIds[$ns] = $nsid;
                 } else {
-                    $sqlite->query("INSERT INTO namespaces (component_id, namespace) VALUES ('$componentId', '$ns');");
+                    $sqlite->query("INSERT INTO namespaces (version_id, namespace) VALUES ('$versionId', '$ns');");
                     $namespacesIds[$ns] = $sqlite->lastInsertRowID();
                 }
             }
@@ -148,80 +262,6 @@ foreach($components as $fullName => $version) {
             }
         }
     }
-}
-
-$res = $sqlite->query("SELECT count(*) AS nb FROM components");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." components\n";
-$res = $sqlite->query("SELECT count(*) AS nb FROM versions");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." versions\n";
-$res = $sqlite->query("SELECT count(*) AS nb FROM classes");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." classes\n";
-$res = $sqlite->query("SELECT count(*) AS nb FROM interfaces");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
-$res = $sqlite->query("SELECT count(*) AS nb FROM traits");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
-
-
-function recursiveReaddir($tmpdir) {
-    $dir = opendir($tmpdir);
-    $return = array();
-    
-    while($file = readdir($dir)) {
-        if ($file[0] == '.') { continue; }
-        
-        if (is_dir($tmpdir.'/'.$file)) {
-            $return = array_merge($return, recursiveReaddir($tmpdir.'/'.$file));
-        } else {
-            if (substr($file, -4) != '.php') { continue; }
-            $return[] = $tmpdir.'/'.$file;
-        }
-    }
-    
-    return $return;
-}
-
-function processFile($file) {
-    $tokens = token_get_all(file_get_contents($file));
-    
-    $return = array('Class' => array(),
-                    'Interface' => array(),
-                    'Trait' => array());
-    $namespace = 'global';
-    
-    foreach($tokens as $id => $token) {
-        if (is_array($token)) {
-            switch($token[0]) {
-                case T_NAMESPACE : 
-                    $namespace = '';
-                    for ($i = $id + 2; ($tokens[$i] != ';') && ($i - $id < 20); $i++) {
-                        if (is_array($tokens[$i])) {
-                            $namespace .= $tokens[$i][1];
-                        } else {
-                            $namespace .= $tokens[$i];
-                        }
-                    }
-                    break;
-
-                case T_CLASS : 
-                    $return['Class'][$namespace][] = $tokens[$id + 2][1];
-                    break;
-
-                case T_INTERFACE : 
-                    $return['Interface'][$namespace][] = $tokens[$id + 2][1];
-                    break;
-
-                case T_TRAIT : 
-                    $return['Trait'][$namespace][] = $tokens[$id + 2][1];
-                    break;
-                
-                default : 
-                    // nothing to do
-                
-            }
-        }
-    }
-    
-    return $return;
 }
 
 ?>
