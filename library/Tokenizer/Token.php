@@ -148,7 +148,7 @@ class Token {
                                                Staticproperty::$operators,
                                                _Instanceof::$operators,
                                                Ternary::$operators,
-                                               array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF'));
+                                               array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS')); //'T_ELSE', ,  'T_ELSEIF'
     }
 
     public static function getTokenizers($version = null) {
