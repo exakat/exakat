@@ -101,7 +101,7 @@ class Ifthen extends TokenAuto {
                                                        3 => 'DROP'),
                                'cleanIndex'   => true,
                                'atom'         => 'Ifthen',
-                               'addSemicolon' => 'it'
+                               'addAlwaysSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -161,7 +161,8 @@ class Ifthen extends TokenAuto {
                                                'atom'    => 'none'),
                                     1 => array('token'   => 'T_ELSE'),
                                     2 => array('token'   => 'T_COLON'),
-                                    3 => array('atom'    => 'yes'),
+                                    3 => array('atom'    => 'yes',
+                                               'notAtom' => 'Sequence'),
                                     4 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
                                                                   'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_END',
                                                                   'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
@@ -238,7 +239,7 @@ if (fullcode.alternative == true) {
             fullcode.fullcode = fullcode.fullcode + " " + theElse.fullcode;
         } else {
             fullcode.fullcode = fullcode.fullcode + " else : " + fullcode.out("ELSE").next().fullcode;
-            fullcode.fullcode = fullcode.fullcode + ' endif'
+            fullcode.fullcode = fullcode.fullcode + ' endif';
         }
     } else {
         fullcode.fullcode = fullcode.fullcode + ' endif'
