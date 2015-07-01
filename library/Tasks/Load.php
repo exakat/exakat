@@ -594,7 +594,7 @@ class Load implements Tasks {
                                                   ->setProperty('modifiedBy', 'bin/load25a')
                                                   ->save();
 
-                    $regexIndex['IfthenElse']->relateTo($T[$Tid], 'INDEXED')->save();
+//                    $regexIndex['IfthenElse']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
                
