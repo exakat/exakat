@@ -14,4 +14,13 @@ print floor(array_sum($numbers) / count($numbers))." on average\n";
 print min($numbers)." minimum\n";
 print max($numbers)." maximum\n";
 
+$files = glob('exp/*.php');
+foreach($files as $file) {
+    include($file);
+    
+    if (empty($expected) && empty($expected_not)) {
+        print "$file has both empty arrays\n";
+    }
+}
+
 ?>
