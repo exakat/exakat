@@ -6,7 +6,7 @@ $expected     = array('exit($f)',
                       'echo $c',
                       'strtolower($e)',
                       'die($g)',
-                      'print($d)');
+                      'print ( $d)');
 
 $expected_not = array();
 

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array('fglobal($x)');
 
-$expected_not = array();
+$expected_not = array('functioncallInMethod()',
+                      'functioncallInTrait()',
+                      'functioncallInFunction()');
 
 ?>
