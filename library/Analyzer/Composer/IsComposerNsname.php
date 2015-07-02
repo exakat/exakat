@@ -70,7 +70,8 @@ class IsComposerNsname extends Analyzer\Analyzer {
         foreach($packagistClassesChunks as $id => $p) {
             $this->atomIs('Class')
                  ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-                 ->fullnspath($packagistClasses);
+                 ->analyzerIsNot('self')
+                 ->fullnspath($p);
             $this->prepareQuery();
         }
 
