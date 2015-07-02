@@ -1,10 +1,12 @@
 <?php
 
-class a extends c {
+// class c is not defined here. 
+
+class aa extends ac {
     function definedMethod() {}
 }
 
-class b extends a {
+class ab extends aa {
      public $x = 2;
      
      function x() {

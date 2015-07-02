@@ -1,11 +1,11 @@
 <?php
 
-class a extends c {
+class aa extends ac {
     private $definedProperty;
     protected $definedProtectedProperty;
 }
 
-class b extends a {
+class ab extends aa {
      public $x = 2;
      
      function x() {
