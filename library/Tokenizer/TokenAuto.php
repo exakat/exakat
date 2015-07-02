@@ -2412,6 +2412,7 @@ g.addEdge(it, x, 'NAME');
 
 // it may be an array or a variable variable
 x = g.addVertex(null, [code:it.code, atom:'Functioncall', token:it.token, virtual:true, line:it.line]);
+g.idx('atoms').put('atom', 'Functioncall', x);
 g.addEdge(x, it, 'NAME');
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a3.out('NEXT').next(), 'NEXT');
