@@ -29,10 +29,11 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
         $total = 0;
         foreach($tests as $test) {
             preg_match('/(\d) methods/', file_get_contents(str_replace('\Test\\', 'Test/', $test).'.php'), $r);
-            print "+ $test ($r[1])\n";
+            print substr("phpunit Test/".str_replace('\\Test\\', '', $test).".php". str_repeat(' ', 70), 0, 70)." ($r[1] - $total)\n";
             $total += $r[1];
         }
         print "Testing a total of $total tests\n";
+        die();
         
         $offset = 0;
         $number = 1000;
