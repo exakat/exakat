@@ -167,6 +167,7 @@ class Ifthen extends TokenAuto {
                                                                   'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_END',
                                                                   'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
                                                                   'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_VOID')),
+                                    5 => array('token'   => 'T_ENDIF'),
         );
         
         $this->actions = array( 'toBlockElse' => true,
