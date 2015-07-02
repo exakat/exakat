@@ -37,10 +37,7 @@ class FunctioncallArray extends TokenAuto {
                                                 'token' => 'T_CLOSE_PARENTHESIS'),
         );
 
-        $this->actions = array('arrayToFunctioncall' => true,
-//                               'atom'                => 'Functioncall',
-//                               'addSemicolon'        => 'it'
-                               );
+        $this->actions = array('arrayToFunctioncall' => true);
         $this->checkAuto();
 
         // $x[3]()
