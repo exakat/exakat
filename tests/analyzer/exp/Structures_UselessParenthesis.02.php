@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array();
+$expected     = array('( $f += $f)',
+                      '( $b == $c)');
 
-$expected_not = array();
+$expected_not = array('($a = $b)');
 
 ?>
