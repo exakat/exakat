@@ -1,26 +1,32 @@
 <?php
 
-class A implements \arrayaccess {
+class Z {
     function x () {
-        $this[] = $this[1];
+        $this['z'] = $this['z1'];
+    }
+}
+
+class A extends Z implements \arrayaccess {
+    function x () {
+        $this['a'] = $this['a1'];
     }
 }
 
 class B extends A {
     function x () {
-        $this[] = $this[2];
+        $this['b'] = $this['b2'];
     }
 }
 
 class C extends B {
     function x () {
-        $this[] = $this[3];
+        $this['c'] = $this['c3'];
     }
 }
 
 class D extends C {
     function x () {
-        $this[] = $this[4];
+        $this['d'] = $this['d4'];
     }
 }
 
