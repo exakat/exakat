@@ -30,7 +30,7 @@ class UselessReturn extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->hasClass()
              ->outIs('NAME')
-             ->code(array('__constructor', '__destructor', '__set', '__clone', '__unset', '__wakeup'))
+             ->code(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'))
              ->inIs('NAME')
              ->raw("filter{ it.out('BLOCK').out.loop(1){it.object.atom != 'Function'}{it.object.atom == 'Return'}.filter{it.out('RETURN').filter{it.atom in ['Void', 'Null']}.any() == false}.count() > 0}")
              ->back('first');

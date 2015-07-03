@@ -1,13 +1,16 @@
 <?php
 
 class x {
-    function __constructor() {
+    function __construct() {
+        return true;
     }
 
-    function __destructor() {
+    function __destruct() {
+        return true;
     }
     
     function usableReturn() {
+        return true;
     }
 }
 
