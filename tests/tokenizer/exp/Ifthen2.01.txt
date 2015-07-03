@@ -15,14 +15,14 @@ Label : CODE
             ->
             Label : OBJECT
               ::
-              Label : CLASS
-                V
               Label : METHOD
                 W
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
+              Label : CLASS
+                V
             Label : METHOD
               X
               Label : ARGUMENTS

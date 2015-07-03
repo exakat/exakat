@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Ifthen2 extends Tokenizer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testIfthen201()  { $this->generic_test('Ifthen2.01'); }
+    public function testIfthen202()  { $this->generic_test('Ifthen2.02'); }
 }
 ?>
