@@ -1352,3 +1352,29 @@ Noté.
 
 - certains listing ne s'affiche pas correctement (seulement la colonne Code ou Code et file)
 C'est pas le code qui est très large, et dépasse la largeur de l'écran ? 
+
+properties that are different for only the case
+
+Consistence of comparison within a if/elseif 
+
+getComposer : 
++ Some class have no name
++ Some namespaces are global\something
++ Some namespaces are starting with \
+
+- List of empty classes : 
+    * si la classe hérite d'une classe vide héritant d'une exception cela serait bien de l'ignorer également
+    * pour symfony 2, on peut également ignorer celles héritant de Symfony\Component\HttpKernel\Bundle\Bundle
+   * certaines classes héritant directement de \Exception ne sont pas ignorées
+   * ignorer également celles héritant de \RuntimeException
+
+- unused classes :
+   * pour symfony 2, ne pas prendre en compte les classes étant des controllers, des commands, héritant de \Symfony\Component\HttpKernel\Bundle\Bundle
+
+- avoir l'inverse de ignore_dirs
+
+
+Ergonomie
+
+- Dans Analysis, lors que l'on clique sur une des anomalies, le fil d'ariane n'est pas bon :
+   * exemple : Dashboard/Sleep is a security risk au lieu de Dashboard/Security/Sleep is a security risk
