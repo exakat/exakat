@@ -33,7 +33,6 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
             $total += $r[1];
         }
         print "Testing a total of $total tests\n";
-        die();
         
         $offset = 0;
         $number = 1000;
