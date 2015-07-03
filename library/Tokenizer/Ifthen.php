@@ -174,25 +174,6 @@ class Ifthen extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // @doc if () /**/ else $x++;
-        // Make a block from sequence after else
-        $this->conditions = array(  0 => array('token'   => self::$operators,
-                                               'atom'    => 'none'),
-                                    1 => array('token'   => 'T_ELSE'),
-                                    2 => array('token'   => 'T_COLON'),
-                                    3 => array('atom'    => 'yes',
-                                               'notAtom' => 'Sequence'),
-                                    4 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
-                                                                  'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_END',
-                                                                  'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
-                                                                  'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_VOID')),
-                                    5 => array('token'   => 'T_ENDIF'),
-        );
-        
-        $this->actions = array( 'toBlockElse' => true,
-                                'keepIndexed' => true);
-//        $this->checkAuto();
-
         // build the THEN block
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => 'T_COLON'),
