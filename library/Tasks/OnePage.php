@@ -33,7 +33,7 @@ class OnePage implements Tasks {
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
                               'OneFile');
 
-    protected $reports = array('OnePage' => array('Json'   => 'report'));
+    protected $reports = array('Onepage' => array('Json'   => 'report'));
     
     public function run(\Config $config) {
         $begin = microtime(true);
@@ -49,7 +49,7 @@ class OnePage implements Tasks {
         // todo : check that there is indeed this project or create it.
         
         copy($config->filename, $config->projects_root.'/projects/'.$project.'/code/onepage.php');
-        $this->reports['OnePage']['Json'] = 'onepage';
+        $this->reports['Onepage']['Json'] = 'onepage';
         
         $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
         $this->logTime('Start');
