@@ -11,12 +11,12 @@ class z {
 }
 
 $y = new z();
-$z = $y->array(
-    2,
-    ONE,
-    z::THREE,
-    4,
-    5,
+$z = array(
+    2 => 1,
+    ONE => 2,
+    z::THREE => 3,
+    4 => 4,
+    5 => 5,
     9);
 
 
