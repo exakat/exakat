@@ -1378,3 +1378,11 @@ Ergonomie
 
 - Dans Analysis, lors que l'on clique sur une des anomalies, le fil d'ariane n'est pas bon :
    * exemple : Dashboard/Sleep is a security risk au lieu de Dashboard/Security/Sleep is a security risk
+
+Multiple implemented interface in a class tree
+
+Only variable references should be returned by reference (function &a() { return new stdclass(); }
+
+Spot that autoload is case-sensitive (then check for classes and files, and classes and call consistence).
+
+List OS by extensions.
