@@ -1,0 +1,3 @@
+<?php
+setproctitle("myscript");
+?>
