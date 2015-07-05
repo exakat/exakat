@@ -36,7 +36,7 @@ class Directives extends \Report\Content {
         $directives = array('Standard', 'Bcmath', 'Date', 'Filesystem', 
                             'FileUpload', 'Mail', 'Ob', 
                             // standard extensions
-                            'Apache', 'Assertion', 'Curl', 'Dba',
+                            'Amqp', 'Apache', 'Assertion', 'Curl', 'Dba',
                             'Filter', 'Image', 'Intl', 'Ldap',
                             'Mbstring', 
                             'Opcache', 'Pcre', 'Pdo', 'Pgsql',
