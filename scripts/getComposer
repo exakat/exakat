@@ -40,12 +40,19 @@ foreach($components as $k => $v) {
     }
 }
 
+$sqlite = new sqlite3('data/composer.sqlite');
+
 print "About to check for ".count($components)." components\n";
 foreach($components as $fullName => $version) {
-    print " + $fullName\n";
+    print " + $fullName";
+    $res = $sqlite->query("SELECT COUNT(*) AS nb FROM components WHERE vendor || '/' || component == '$fullName'");
+    if ($res->fetchArray(SQLITE3_ASSOC)['nb'] > 0) {
+        print " Already Here\n";
+        unset($components[$fullName]);
+        continue;
+    }
+    print "\n";
 }
-
-$sqlite = new sqlite3('data/composer.sqlite');
 
 /*
 $sqlite->query('DELETE FROM traits');
