@@ -738,7 +738,8 @@ class Load implements Tasks {
             
                 if ($token == '{' && $tokens[$id + 1] == '}') {
                     // This will be a structure with Association
-                    if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && in_array($this->php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY', 'T_ELSE', 'T_FINALLY')))) {
+                    if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && 
+                        in_array($this->php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY', 'T_ELSE', 'T_FINALLY', 'T_CALLALBLE', 'T_ARRAY')))) {
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                             ->setProperty('code', $token)
                                                             ->setProperty('fullcode', '{')
