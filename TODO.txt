@@ -1383,3 +1383,40 @@ Spot that autoload is case-sensitive (then check for classes and files, and clas
 List OS by extensions.
 
 Check for precedence with &, |, ^ and, or, xor, etc. 
+
+break in default is useless ?
+
+Support an option that reads a list of files in a file (ignore anything that doesn't exists).
+
+Check that provided literal is actually the expected type for argument
+function test(int $arg, int $arg2=1.5, A $arg3=null) { } : Check that default value is consistent with typehint
+Support @return (phpdoc?)
+Undefined variable
+taint propagation
+array to string conversion
+
+Better support for Traits in classes (Can we detect redefinition ehre?)
+<?php
+trait T {
+    static function t1(int $arg1, string $arg2="abc") {
+        return $arg1;
+    }
+}
+
+class C {
+    use T;
+}
+
+C::unknown();
+C::t1();
+C::t1(1,2,3);
+C::t1(1.5);
+
+Class, interface or traits with the same name in a namespace (Across application?)
+
+<?php
+	function test($req, ...$params) { }
+
+	test(1,2,3,4,5);
+	test();
+ 
