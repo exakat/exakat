@@ -65,7 +65,7 @@ class _Function extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_COLON'),
                                         // check for association? 
-                                  2 => array('atom' => array('Identifier', 'Nsname'))
+                                  2 => array('token' => array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_CALLABLE'))
         );
         
         $this->actions = array('transform'     => array( 1 => 'DROP',
@@ -145,6 +145,12 @@ class _Function extends TokenAuto {
         return <<<GREMLIN
 
 fullcode.setProperty('fullcode', '');
+
+// Those won't get a chance to be made into an atom.
+fullcode.out('RETURN').filter{ it.token in ['T_CALLABLE', 'T_ARRAY'] }.each{
+    it.fullcode = it.code;
+    it.atom = 'Identifer';
+}
 
 // for properties
 if (fullcode.out('DEFINE').any()) {
