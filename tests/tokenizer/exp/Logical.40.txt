@@ -3,10 +3,26 @@ Label : CODE
   ;
   Label : ELEMENT
     ||
+    Label : LEFT
+      ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              D
     Label : RIGHT
       ==
-      Label : RIGHT
-        'G'
       Label : LEFT
         {
         Label : VARIABLE
@@ -21,21 +37,5 @@ Label : CODE
             $d
           Label : PROPERTY
             F
-    Label : LEFT
-      ==
       Label : RIGHT
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              D
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          B
+        'G'

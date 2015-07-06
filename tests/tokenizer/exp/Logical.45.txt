@@ -1,0 +1,54 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &
+        Label : LEFT
+          1
+        Label : RIGHT
+          &&
+          Label : LEFT
+            2
+          Label : RIGHT
+            3
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &
+        Label : LEFT
+          1
+        Label : RIGHT
+          (
+          Label : CODE
+            &&
+            Label : LEFT
+              2
+            Label : RIGHT
+              3
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &&
+        Label : LEFT
+          2
+        Label : RIGHT
+          3
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &
+        Label : LEFT
+          1
+        Label : RIGHT
+          2

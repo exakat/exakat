@@ -4,20 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     or
-    Label : RIGHT
-      ::
-      Label : METHOD
-        K
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'L'
-      Label : CLASS
-        \
-        Label : SUBNAME
-          J
     Label : LEFT
       =
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B
       Label : RIGHT
         new
         Label : NEW
@@ -25,40 +19,46 @@ Label : CODE
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
+              ->
+              Label : OBJECT
+                $d
+              Label : PROPERTY
+                [
+                Label : VARIABLE
                   H
-              Label : INDEX
-                'I'
+                Label : INDEX
+                  'I'
             Label : ARGUMENT
-              [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
+              ->
+              Label : OBJECT
+                $c
+              Label : PROPERTY
+                [
+                Label : VARIABLE
                   F
-              Label : INDEX
-                'G'
+                Label : INDEX
+                  'G'
             Label : ARGUMENT
-              [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $b
-                Label : PROPERTY
+              ->
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                [
+                Label : VARIABLE
                   D
-              Label : INDEX
-                'E'
+                Label : INDEX
+                  'E'
           Label : SUBNAME
             C
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          B
+    Label : RIGHT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          J
+      Label : METHOD
+        K
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'L'

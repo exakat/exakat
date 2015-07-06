@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     &&
-    Label : RIGHT
-      c
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'd'
     Label : LEFT
       !
       Label : NOT
@@ -18,3 +12,9 @@ Label : CODE
           void
           Label : ARGUMENT
             'b'
+    Label : RIGHT
+      c
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'd'
