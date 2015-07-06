@@ -1,0 +1,45 @@
+<?php
+
+$sqlite = new sqlite3('data/composer.sqlite');
+
+$values = array();
+
+$res = $sqlite->query("SELECT * FROM components JOIN versions on components.id = versions.component_id
+                                                JOIN namespaces on versions.id = namespaces.version_id");
+while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+    $component = "{$row['vendor']}/{$row['component']}";
+    if (!isset($values[$component])) {
+        $values[$component] = array();
+    }
+    
+    if (!isset($values[$component][$row['version']])) {
+        $values[$component][$row['version']] = array();
+    }
+
+    if (!isset($values[$component][$row['version']][$row['namespace']])) {
+        $values[$component][$row['version']][$row['namespace']] = array();
+    }
+}
+
+/*
+$res = $sqlite->query("SELECT * FROM components JOIN namespaces on components.id = namespaces.component_id");
+while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+//    $component = "{$row['vendor']}/{$row['component']}";
+//    if (!isset($values[$component][$row['version']])) {
+//        $values[$component][$row['version']] = array();
+//    }
+}
+*/
+
+foreach($values as $component => $versions) {
+    print "+ $component \n";
+    foreach($versions as $version => $namespaces) {
+        print "  o $version \n";
+        foreach($namespaces as $namespace => $elements) {
+            print "    . $namespace \n";
+        }
+    }
+}
+
+
+?>
