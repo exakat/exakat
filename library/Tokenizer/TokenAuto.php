@@ -1488,7 +1488,7 @@ a1 = it.out('NEXT').next();
 
 if (it.atom == 'Sequence' && it.bracket == null) {
     current = it;
-    rank = it.out('ELEMENT').count() - 1;
+    rank = it.out('ELEMENT').count();
     
     a2 = a1.out('NEXT').next(); 
 } else if (b1.atom == 'Sequence' && b1.bracket == null) {
@@ -1505,9 +1505,11 @@ if (it.atom == 'Sequence' && it.bracket == null) {
 
     b2 = b1.in('NEXT').next();
     b1.setProperty('rank', 0);
-    b1.bothE('NEXT').each{ g.removeEdge(it); }
+    b1.bothE('NEXT').each{ 
+        g.removeEdge(it); 
+    }
     g.addEdge(current, b1, 'ELEMENT');
-    rank = 0;
+    rank = 1; 
 
     a2 = a1.out('NEXT').next(); 
 
@@ -1524,7 +1526,7 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
      if (a1.atom == 'Sequence' && a1.bracket == null) {
         a1.out('ELEMENT').each{
             g.addEdge(current, it, 'ELEMENT');
-            it.setProperty('rank', it.getProperty('rank') + rank + 1);
+            it.setProperty('rank', it.getProperty('rank') + rank);
         }
         rank = current.out('ELEMENT').count();
 
@@ -1537,14 +1539,15 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
         if (a1.atom == 'Sequence') {
             a1.out('ELEMENT').each{
                 g.addEdge(current, it, 'ELEMENT');
-                it.setProperty('rank', it.getProperty('rank') + rank + 1);
+                it.setProperty('rank', it.getProperty('rank') + rank);
             }
             rank = current.out('ELEMENT').count();
     
             a1.bothE('ELEMENT', 'INDEXED', 'NEXT').each{ g.removeEdge(it); };
             toDelete.push(a1);
         } else {
-            a1.setProperty('rank', ++rank);
+            a1.setProperty('rank', rank);
+            rank = rank + 1;
             a1.bothE('NEXT').each{ g.removeEdge(it); }
             g.addEdge(current, a1, 'ELEMENT');
         }
@@ -1557,9 +1560,10 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
         makeNext = true;
     } else if (a1.atom != null && a2.token == 'T_SEMICOLON' && a2.atom == 'Sequence') {  
         if (a1.atom == 'Sequence') {
-            MergingTwoSequences; 
+            MergingTwoSequences; // shouldn't happen
         } else {
-            a1.setProperty('rank', ++rank);
+            a1.setProperty('rank', rank);
+            rank = rank + 1;
             a1.bothE('NEXT').each{ g.removeEdge(it); }
             g.addEdge(current, a1, 'ELEMENT');
 
@@ -1589,7 +1593,8 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
             a1.bothE('ELEMENT', 'INDEXED', 'NEXT').each{ g.removeEdge(it); };
             toDelete.push(a1);
         } else {
-            a1.setProperty('rank', ++rank);
+            a1.setProperty('rank', rank);
+            rank = rank + 1;
             a1.bothE('NEXT').each{ g.removeEdge(it); }
             g.addEdge(current, a1, 'ELEMENT');
         }
@@ -1604,7 +1609,6 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
 }
 
 // LOOPS
-
 
 // FINISH
 
@@ -1660,7 +1664,7 @@ g.addEdge(b2, x, 'NEXT');
 
 while(a2.token == 'T_COMMA') {
     g.addEdge(x, a1, 'ARGUMENT');
-    rank += 1;
+    rank += 500;
     a1.setProperty('rank', rank);
     a2.bothE('INDEXED').each{ g.removeEdge(it); }
 
@@ -1677,7 +1681,7 @@ while(a2.token == 'T_COMMA') {
 }
 
 g.addEdge(x, a1, 'ARGUMENT');
-rank += 1;
+rank = rank + 1;
 a1.setProperty('rank', rank);
 a1.bothE('NEXT').each{ g.removeEdge(it); }
 
