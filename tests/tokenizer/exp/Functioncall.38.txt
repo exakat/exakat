@@ -1,7 +1,0 @@
-;
-Label : ELEMENT
-  die
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      true

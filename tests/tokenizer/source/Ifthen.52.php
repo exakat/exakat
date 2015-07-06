@@ -1,1 +1,0 @@
-<?php if ($target == 1) : ?><?php else : ?><?php endif;?>

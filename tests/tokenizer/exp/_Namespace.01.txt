@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      A

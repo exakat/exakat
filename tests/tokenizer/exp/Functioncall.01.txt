@@ -1,7 +1,0 @@
-;
-Label : ELEMENT
-  f
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      1

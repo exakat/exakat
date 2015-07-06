@@ -1,8 +1,0 @@
-<?php
-
-Label : CODE
-  switch
-  Label : NAME
-    $foo
-  Label : CASES
-    void

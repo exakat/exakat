@@ -1,3 +1,0 @@
-<?php
-$x = new Imagick();
-?>

@@ -1,3 +1,0 @@
-<?php
-    @`mkdir -p $dir`;
-?>

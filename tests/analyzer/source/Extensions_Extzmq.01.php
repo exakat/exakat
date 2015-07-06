@@ -1,6 +1,0 @@
-<?php
-
-$z = new ZMQSocket();
-
-
-?>

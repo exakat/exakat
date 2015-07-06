@@ -1,6 +1,0 @@
-<?php
-switch($x) {
-    default : 
-}
-
-?>

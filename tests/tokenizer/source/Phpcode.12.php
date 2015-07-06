@@ -1,1 +1,0 @@
-<?php if($a->B): ?><?php C('D'); ?>D<?php $b->F() ?><?php endif; ?>

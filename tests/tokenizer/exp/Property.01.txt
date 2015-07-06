@@ -1,7 +1,0 @@
-;
-Label : ELEMENT
-  ->
-  Label : OBJECT
-    $x
-  Label : PROPERTY
-    b

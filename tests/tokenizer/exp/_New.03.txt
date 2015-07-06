@@ -1,5 +1,0 @@
-;
-Label : ELEMENT
-  new
-  Label : NEW
-    stdclass

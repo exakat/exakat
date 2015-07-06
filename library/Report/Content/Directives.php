@@ -32,7 +32,7 @@ class Directives extends \Report\Content {
         // extensions configurations
         ///////////////////////////////////////////////////////////////
 
-        // @todo automate this
+        // @todo automate this : Each string must be found in Report/Content/Directives/*.php
         $directives = array('Standard', 'Bcmath', 'Date', 'Filesystem', 
                             'FileUpload', 'Mail', 'Ob', 
                             // standard extensions
@@ -40,8 +40,10 @@ class Directives extends \Report\Content {
                             'Filter', 'Image', 'Intl', 'Ldap',
                             'Mbstring', 
                             'Opcache', 'Pcre', 'Pdo', 'Pgsql',
-                            'Session', 'Sqlite', 'Sqlite',
+                            'Session', 'Sqlite', 'Sqlite3', 
                             // pecl extensions
+                            'Com',
+                            'Geoip', 'Ibase', 
                             'Imagick', 'Mailparse', 'Mongo', 
                             'Trader', 'Wincache', 'Xcache'
                              );
