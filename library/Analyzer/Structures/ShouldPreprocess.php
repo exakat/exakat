@@ -68,7 +68,9 @@ class ShouldPreprocess extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath(array('\\join', '\\explode', '\\implode', '\\split'))
              ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
+             ->outIs('ARGUMENTS')
+             ->noAtomInside($dynamicAtoms)
+             ->back('first');
         $this->prepareQuery();
     }
 }

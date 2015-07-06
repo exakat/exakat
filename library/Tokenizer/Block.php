@@ -47,12 +47,14 @@ class Block extends TokenAuto {
                                                                      'T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS',// x(1){3},
                                                                      'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',  // $x[1]{3},
                                                                      'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT',
-                                                                     'T_STRING', 'T_COMMA', 'T_ELSE', 'T_DO')),
+                                                                     'T_STRING', 'T_COMMA', 'T_DO',
+                                                                     'T_IF', 'T_ELSEIF', 'T_ELSE')),
                                     0 => array('token'      => self::$operators,
                                                'property'   => array('association' => 'none')),
                                     1 => array('atom'       => 'yes'),
                                     2 => array('token'      => 'T_CLOSE_CURLY',
                                                'atom'       => 'none'),
+                                    3 => array('notToken'   => array('T_ENDIF'))
         );
 
         $this->actions = array('toBlock'      => true,
@@ -60,6 +62,24 @@ class Block extends TokenAuto {
                                );
         $this->checkAuto();
 
+    // @doc { Block }
+        $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR',
+                                                                     'T_CLOSE_CURLY', // $x{1}{3}, 'T_OPEN_CURLY',
+                                                                     'T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS',// x(1){3},
+                                                                     'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',  // $x[1]{3},
+                                                                     'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT',
+                                                                     'T_STRING', 'T_COMMA', 'T_DO',
+                                                                     'T_IF', 'T_ELSEIF', 'T_ELSE')),
+                                    0 => array('token'      => self::$operators,
+                                               'property'   => array('association' => 'none')),
+                                    1 => array('atom'       => 'yes'),
+                                    2 => array('token'      => 'T_CLOSE_CURLY',
+                                               'atom'       => 'none'),
+                                    3 => array('token'      => array('T_ENDIF'))
+        );
+
+        $this->actions = array('toBlock'      => true);
+        $this->checkAuto();
         return false;
     }
 

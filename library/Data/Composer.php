@@ -45,7 +45,7 @@ class Composer {
     }
 
     public function getComposerNamespaces($vendor = null) {
-        $query = "SELECT namespace FROM namespaces";
+        $query = "SELECT namespace AS namespace FROM namespaces";
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
             $query .= " WHERE vendor = '$vendor' and component = '$component'";
@@ -62,13 +62,16 @@ class Composer {
     }
 
     public function getComposerClasses($vendor = null) {
-        $query = "SELECT namespace || '\\' || classname AS classname FROM namespaces 
-JOIN classes ON classes.namespace_id = namespaces.id";
+        $query = "SELECT namespace || '\\' || classname AS classname 
+        FROM namespaces 
+        JOIN classes 
+            ON classes.namespace_id = namespaces.id";
+
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
             $query .= " WHERE vendor = '$vendor' and component = '$component'";
-        
         }
+
         $res = $this->sqlite->query($query);
         $return = array();
         

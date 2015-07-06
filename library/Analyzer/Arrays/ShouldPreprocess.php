@@ -27,15 +27,17 @@ use Analyzer;
 
 class ShouldPreprocess extends Analyzer\Analyzer {
     public function analyze() {
+        $variables = array('Variable', 'Property', 'Staticproperty');
+        
         // $a = array(); $a[1] = 2;
         $this->atomIs('Assignation')
              ->code('=')
              ->outIs('LEFT')
-             ->atomIs(array('Variable', 'Property', 'Staticproperty'))
+             ->atomIs('Variable')
              ->savePropertyAs('fullcode', 'tableau')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->tokenIs('T_ARRAY')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->inIs('RIGHT')
              ->nextSibling()
              ->atomIs('Assignation')
@@ -47,24 +49,55 @@ class ShouldPreprocess extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // same as above with $array[]
-        // in case this is the first one in the sequence
+        // $a->b = array(); $a->b[1] = 2;
         $this->atomIs('Assignation')
              ->code('=')
              ->outIs('LEFT')
-             ->atomIs(array('Variable', 'Property', 'Staticproperty'))
-             ->savePropertyAs('fullcode', 'tableau')
+             ->atomIs(array('Property', 'Staticproperty'))
+             ->outIs(array('OBJECT', 'CLASS'))
+             ->savePropertyAs('fullcode', 'tableauClass')
+             ->inIs(array('OBJECT', 'CLASS'))
+             ->outIs('PROPERTY')
+             ->savePropertyAs('fullcode', 'tableauProperty')
+             ->inIs('PROPERTY')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->tokenIs('T_ARRAY')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->inIs('RIGHT')
              ->nextSibling()
              ->atomIs('Assignation')
              ->code('=')
              ->outIs('LEFT')
+             ->atomIs(array('Property', 'Staticproperty'))
+             ->outIs(array('OBJECT', 'CLASS'))
+             ->samePropertyAs('fullcode', 'tableauClass')
+             ->inIs(array('OBJECT', 'CLASS'))
+             ->outIs('PROPERTY')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->samePropertyAs('code', 'tableauProperty')
+             ->back('first');
+        $this->prepareQuery();
+
+        // same as above with $array[]
+        // in case this is the first one in the sequence
+        $this->atomIs('Assignation')
+             ->code('=')
+             ->outIs('LEFT')
+             ->atomIs($variables)
+             ->savePropertyAs('fullcode', 'tableau')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
+             ->inIs('RIGHT')
+             ->nextSibling()
+             ->atomIs('Assignation')
+             ->code('=')
+             ->outIs('LEFT')
+             ->outIsIE('PROPERTY')
              ->atomIs('Arrayappend')
              ->outIs('VARIABLE')
-             ->atomIs(array('Variable', 'Property', 'Staticproperty'))
+             ->atomIs($variables)
              ->samePropertyAs('fullcode', 'tableau')
              ->back('first');
         $this->prepareQuery();

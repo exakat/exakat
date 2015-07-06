@@ -49,6 +49,8 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
+             // checking one of the grand-parents is not defining this method
+
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop("extension"){true}{it.object.atom == "Class"}

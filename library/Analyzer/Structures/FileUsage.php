@@ -33,9 +33,9 @@ class FileUsage extends Analyzer\Analyzer {
         $fileClasses = array('\\SplFileObject', '\\SplTempFileObject', '\\SplFileInfo');
 
         $this->atomIs('New')
+             ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(array('Variable', 'Array', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
-             ->outIs('NEW')
              ->fullnspath($fileClasses);
         $this->prepareQuery();
 

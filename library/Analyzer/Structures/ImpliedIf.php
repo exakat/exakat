@@ -27,6 +27,7 @@ use Analyzer;
 
 class ImpliedIf extends Analyzer\Analyzer {
     public function analyze() {
+        // defined() or die
         $this->atomIs('Logical')
              ->code(array('or', '||', 'and', '&&'))
              ->inIsIE('CODE')

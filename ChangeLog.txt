@@ -1,4 +1,31 @@
-Version 0.2.3 (Techu Shi, Coming up)
+Version 0.2.5 (Scholar in a White Robe, Coming up)
+This is a maintenance release, with improved ease of use. 
++ Analyzer
+    +
++ Tokenizer
+    +
+
+Version 0.2.4 (Black Wind Demon, Coming up)
+This is a maintenance release, with improved ease of use and new analyzes.
++ Analyzer
+    + Rebuild the composer database
+    + Lots of new extensions supported : ev, libevent, event, php-ast, wikidiff2, proctitle, inotify, ibase, amqp, geoip, output buffering,
+    + Report errors when non-variables are returned by reference
+    + Marked more analyzes for PHP 7
+    + Fixed Unpreprocess structures with split
+    + Upgraded spotting for useless parenthesis
+    + Added a check ++$i vs $i++;
+    + Exclude abstract methods from Variables Used Once
+    + Added new directives
+    + Also check for ASP Tags
++ Tokenizer
+    + Fixed the fullpath for functions when they are not defined in the code
+    + Upgraded support for Return Type (PHP 7.0+)
+    + error_reporting with -1 is OK
+    + Fixed a precedence problem with & and &&
+    + Refactored Ifthen token to support return type 
+    + Added a kill command when cleaning Database
+Version 0.2.3 (Techu Shi, 2015-06-22)
 This is a maintenance release, with improved ease of use. 
 + Analyzer
     + Report usage of Return Typehint, and Scalar Typehint
@@ -8,7 +35,7 @@ This is a maintenance release, with improved ease of use.
     + Upgraded 'init' command, to handle various VCS
     + Added support for Return Typehint
 
-Version 0.2.2 (Xiong Shangjun, June 16th, 2015)
+Version 0.2.2 (Xiong Shangjun, 2015-06-16)
 This is a maintenance release, with vastly improved speed
 + Analyzer
     + Now spots short assignations
@@ -21,7 +48,7 @@ This is a maintenance release, with vastly improved speed
     + Process tokens by batches of 800
     + Clean vertex at each queries, not Sequence
 
-Version 0.2.1 (General Yin, June 2nd, 2015)
+Version 0.2.1 (General Yin, 2015-06-02)
 This is a maintenance release
 + Analyzer
     + sizeOf may have 2 arguments
@@ -34,5 +61,5 @@ This is a maintenance release
     + Foreach accepts Constants as Source
     + Fixed special case for nested IfThen
 
-Version 0.2.0 (Demon of Confusion, May 15th, 2015)
+Version 0.2.0 (Demon of Confusion, 2015-05-15)
 + First version

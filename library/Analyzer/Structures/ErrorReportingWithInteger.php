@@ -34,6 +34,7 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Integer')
+             ->codeIsNot('-1')
              ->back('first');
         $this->prepareQuery();
 
@@ -50,6 +51,7 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
              ->rankIs('ARGUMENT', 1)
              ->atomIs('Integer')
              ->codeIsNot(0)
+             ->codeIsNot('-1')
              ->back('first');
         $this->prepareQuery();
     }

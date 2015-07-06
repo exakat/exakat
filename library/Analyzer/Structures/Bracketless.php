@@ -33,13 +33,13 @@ class Bracketless extends Analyzer\Analyzer {
              ->outIs('THEN')
              ->is('bracket', false)
              ->back('first');
-//        $this->prepareQuery();
+        $this->prepareQuery();
 
         $this->atomIs('Ifthen')
              ->isNot('alternative', true)
-//             ->outIs('ELSE')
-//             ->is('bracket', false)
-//             ->raw("filter{ (it.out('ELEMENT').count() != 1) || (it.out('ELEMENT').has('atom', 'Ifthen').any() == false)}")
+             ->outIs('ELSE')
+             ->is('bracket', false)
+             ->raw("filter{ (it.out('ELEMENT').count() != 1) || (it.out('ELEMENT').has('atom', 'Ifthen').any() == false)}")
              ->back('first');
         $this->prepareQuery();
 

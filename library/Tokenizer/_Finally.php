@@ -50,7 +50,9 @@ class _Finally extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.setProperty('fullcode', "finally " + fullcode.out("CODE").next().getProperty('fullcode'));
+
+fullcode.setProperty('fullcode', "finally {" + fullcode.out("CODE").next().getProperty('fullcode') + "}");
+
 GREMLIN;
     }
 }
