@@ -32,9 +32,7 @@ class Unpreprocessed extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->outIs('NAME')
              ->fullnspath(array('\\explode', '\\split'))
-             ->inIs('NAME')
              ->outIs('ARGUMENTS')
              ->noAtomInside(array('Variable', 'Functioncall'))
              ->back('first');

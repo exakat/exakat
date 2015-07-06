@@ -28,19 +28,30 @@ class Ifthen extends TokenAuto {
     static public $atom = 'Ifthen';
 
     public function _check() {
-        // @doc if () with only ;
+        // Build the condition
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
                                               'property' => array('association' => 'If')),
                                    2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_SEMICOLON',
+                                   3 => array('token' => 'T_CLOSE_PARENTHESIS')
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'CONDITION',
+                                                       3 => 'DROP'),
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true);
+        $this->checkAuto();
+
+        // @doc if () with only ;
+        $this->conditions = array( 0 => array('token' => self::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('token' => 'T_SEMICOLON',
                                               'atom'  => 'none')
         );
         
-        $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
+        $this->actions = array('addEdge'     => array(1 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true,
-                               'property'    => array('alternative' => false),
                                'cleanIndex'  => true);
         $this->checkAuto();
 
@@ -48,272 +59,152 @@ class Ifthen extends TokenAuto {
         // Make a block from sequence after a if/elseif
         $this->conditions = array(  0 => array('token'   => self::$operators,
                                                'atom'    => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                               'property' => array('association' => 'If')),
-                                    2 => array('atom'  => 'yes'),
-                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    4 => array('notAtom' => 'Sequence',
+                                    1 => array('notAtom' => 'Sequence',
                                                'atom'    => 'yes'),
-                                    5 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
-                                                                  'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML',
+                                    2 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
+                                                                  'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_END',
                                                                   'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
                                                                   'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_VOID')),
         );
         
-        $this->actions = array( 'toBlockIfelseif' => 4,
+        $this->actions = array( 'toBlockIfelseif' => 1,
                                 'keepIndexed'     => true);
         $this->checkAuto();
+        
+        // @doc if () /**/ else $x++;
+        // Make a block from sequence after else
+        $this->conditions = array(  0 => array('token'   => self::$operators,
+                                               'atom'    => 'none'),
+                                    1 => array('token'   => 'T_ELSE'),
+                                    2 => array('atom'    => 'yes'),
+                                    3 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
+                                                                  'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_END',
+                                                                  'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
+                                                                  'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_VOID')),
+        );
+        
+        $this->actions = array( 'toBlockElse' => 1,
+                                'keepIndexed' => true);
+        $this->checkAuto();
 
-        // @doc if then { block }   [without else]
-        $this->conditions = array( 0 => array('token' => self::$operators,
+        // Finish the THEN block
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => 'T_OPEN_CURLY',
                                               'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_OPEN_CURLY',
-                                              'atom'  => 'none'),
-                                   5 => array('atom'  => array('Sequence', 'Void')),
-                                   6 => array('token' => 'T_CLOSE_CURLY'),
-                                   7 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
+                                   2 => array('atom'  => array('Sequence', 'Void')),
+                                   3 => array('token' => 'T_CLOSE_CURLY'),
+                                   4 => array('notToken' => array('T_ELSE', 'T_ELSEIF'))
         );
         
         $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'CONDITION',
-                                                       3 => 'DROP',
-                                                       4 => 'DROP',
-                                                       5 => 'THEN',
-                                                       6 => 'DROP'),
-                               'property'     => array('alternative' => false),
-                               'atom'         => 'Ifthen',
+                                                       2 => 'THEN',
+                                                       3 => 'DROP'),
                                'cleanIndex'   => true,
-                               'makeBlock'    => 'THEN',
-                               'addAlwaysSemicolon' => 'it');
-        $this->checkAuto();
-
-        // @doc if { sequence } then else { sequence }
-        $this->conditions = array( 0 => array('token' => self::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_OPEN_CURLY',
-                                              'atom'  => 'none'),
-                                   5 => array('atom'  => array('Sequence', 'Void')),
-                                   6 => array('token' => 'T_CLOSE_CURLY'),
-                                   7 => array('token' => 'T_ELSE',
-                                              'atom'  => 'none'),
-                                   8 => array('token' => 'T_OPEN_CURLY'),
-                                   9 => array('atom'  => array('Sequence', 'Void')),
-                                   10 => array('token' => 'T_CLOSE_CURLY'),
-        );
-        
-        $this->actions = array('transform'    => array(1  => 'DROP',
-                                                       2  => 'CONDITION',
-                                                       3  => 'DROP',
-                                                       4  => 'DROP',
-                                                       5  => 'THEN',
-                                                       6  => 'DROP',
-                                                       7  => 'DROP',
-                                                       8  => 'DROP',
-                                                       9  => 'ELSE',
-                                                       10 => 'DROP'),
                                'atom'         => 'Ifthen',
-                               'property'     => array('alternative' => false),
-                               'addAlwaysSemicolon' => 'it',
-                               'cleanIndex'   => true,
-                               'makeBlock'    => "THEN','ELSE", //array('THEN', 'ELSE')
+                               'addAlwaysSemicolon' => 'it'
                                );
         $this->checkAuto();
 
-        // @doc if then elseif [without else]
+        // Build the THEN block
         $this->conditions = array( 0 => array('token' => self::$operators),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_OPEN_CURLY',
+                                   1 => array('token' => 'T_OPEN_CURLY',
                                               'atom'  => 'none'),
-                                   5 => array('atom'  => array('Sequence', 'Void')),
-                                   6 => array('token' => 'T_CLOSE_CURLY'),
-                                   7 => array('atom'  => 'Ifthen',
-                                              'token' => 'T_ELSEIF',
-                                              'property' => array('alternative' => false))
+                                   2 => array('atom'  => array('Sequence', 'Void')),
+                                   3 => array('token' => 'T_CLOSE_CURLY'),
+                                   4 => array('token' => array('T_ELSE', 'T_ELSEIF'))
         );
         
         $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'CONDITION',
-                                                       3 => 'DROP',
-                                                       4 => 'DROP',
-                                                       5 => 'THEN',
-                                                       6 => 'DROP',
-                                                       7 => 'ELSE'
-                                                      ),
-                               'property'     => array('alternative' => false),
-                               'addAlwaysSemicolon' => 'it',
-                               'atom'         => 'Ifthen',
-                               'cleanIndex'   => true,
-                               'makeBlock'    => 'THEN'
-                               );
-        $this->checkAuto();
-
-        // @doc if then { block } [without else] (but within a else alternatif)
-        $this->conditions = array( 0 => array('token' => self::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_OPEN_CURLY'),
-                                   5 => array('atom'  => 'Sequence'),
-                                   6 => array('token' => 'T_CLOSE_CURLY'),
-                                   7 => array('token' => array('T_ELSE', 'T_ELSEIF')),
-                                   8 => array('token' => 'T_COLON'),
-        );
-        
-        $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'CONDITION',
-                                                       3 => 'DROP',
-                                                       4 => 'DROP',
-                                                       5 => 'THEN',
-                                                       6 => 'DROP'),
-                               'addAlwaysSemicolon' => 'it',
-                               'property'     => array('alternative' => false),
-                               'atom'         => 'Ifthen',
-                               'cleanIndex'   => true,
-                               'makeBlock'    => 'THEN');
-        $this->checkAuto();
-
-    ////////////////////////////////////////////////////////////
-    //// Alternative syntax                                 ////
-    ////////////////////////////////////////////////////////////
-                
-    // @doc if () : endif (empty )
-        $this->conditions = array( 0 => array('token' => self::$operators),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_COLON',
-                                              'property' => array('association' => 'Ifthen')),
-                                   5 => array('token' => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE')),
-        );
-        
-        $this->actions = array('insertVoid'  => 4,
-                               'keepIndexed' => true,
-                               'property'    => array('alternative' => true),
-                               'cleanIndex'  => true);
-        $this->checkAuto();
-
-        // Make a block from sequence after a if/elseif (alternative syntax)
-        $this->conditions = array(  0 => array('token'     => self::$operators,
-                                               'atom'      => 'none'),
-                                    1 => array('token'     => 'T_OPEN_PARENTHESIS',
-                                               'property'  => array('association' => 'If')),
-                                    2 => array('atom'      => 'yes'),
-                                    3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
-                                    4 => array('token'     => 'T_COLON',
-                                              'property'   => array('association' => 'Ifthen')),
-                                    5 => array('atom'      => 'yes'),
-                                    6 => array('token'     => 'T_SEMICOLON',
-                                               'atom'      => 'none'),
-                                    7 => array('token'     => array('T_ELSEIF', 'T_ENDIF', 'T_ELSE'))
-        );
-        
-        $this->actions = array( 'toBlockIfelseifAlternative' => 5,
-                                'property'                   => array('alternative' => true),
-                                'keepIndexed'                => true);
-        $this->checkAuto();
-
-    // @doc if ( ) : endif
-        $this->conditions = array( 0 => array('token'    => self::$operators,
-                                              'atom'     => 'none'),
-                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'     => 'yes'),
-                                   3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token'    => 'T_COLON',
-                                              'property' => array('association' => 'Ifthen')),
-                                   5 => array('atom'     => 'yes'),
-                                   6 => array('token'    => 'T_ENDIF'),
-        );
-        
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'CONDITION',
-                                                        3 => 'DROP',
-                                                        4 => 'DROP',
-                                                        5 => 'THEN',
-                                                        6 => 'DROP'),
-                               'property'     => array('alternative' => true),
-                               'atom'         => 'Ifthen',
-                               'addAlwaysSemicolon' => 'it',
+                                                       2 => 'THEN',
+                                                       3 => 'DROP'),
+                               'keepIndexed'  => true,
                                'cleanIndex'   => true
                                );
         $this->checkAuto();
-
-    // @doc if ( ) : else: endif (alternative syntax)
-        $this->conditions = array( 0 => array('token' => self::$operators,
+        
+        // Build the ELSE block
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => 'T_ELSE',
                                               'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_COLON',
-                                              'property' => array('association' => 'Ifthen')),
-                                   5 => array('atom'  => 'yes'),
-                                   6 => array('token' => 'T_ELSE'),
-                                   7 => array('token' => 'T_COLON',
-                                              'property' => array('association' => 'Ifthen')),
-                                   8 => array('atom'  => 'yes'),
-                                   9 => array('token' => array('T_ENDIF', 'T_ELSEIF')),
+                                   2 => array('token' => 'T_OPEN_CURLY',
+                                              'atom'  => 'none'),
+                                   3 => array('atom'  => array('Sequence', 'Void')),
+                                   4 => array('token' => 'T_CLOSE_CURLY')
         );
         
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'CONDITION',
-                                                        3 => 'DROP',
-                                                        4 => 'DROP',
-                                                        5 => 'THEN',
-                                                        6 => 'DROP',
-                                                        7 => 'DROP',
-                                                        8 => 'ELSE',
-                                                        9 => 'DROP',
-                                                      ),
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'DROP',
+                                                       3 => 'ELSE',
+                                                       4 => 'DROP'),
+                               'cleanIndex'   => true,
                                'atom'         => 'Ifthen',
-                               'addAlwaysSemicolon' => 'it',
-                               'property'     => array('alternative' => true),
-                               'cleanIndex'   => true
-                               );
-
+                               'addSemicolon' => 'it');
         $this->checkAuto();
 
-    // @doc if ( ) : elseif
-        $this->conditions = array( 0 => array('token' => self::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_COLON',
-                                              'property' => array('association' => 'Ifthen')),
-                                   5 => array('atom'  => 'yes'),
-                                   6 => array('atom'  => 'Ifthen',
-                                              'token' => 'T_ELSEIF',
-                                              'property' => array('alternative' => true) ),
-                                   7 => array('filterOut2' => 'T_ENDIF'),
+        // Build the ELSEIF block
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => 'T_ELSEIF',
+                                              'atom'  => 'Ifthen')
         );
         
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'CONDITION',
-                                                        3 => 'DROP',
-                                                        4 => 'DROP',
-                                                        5 => 'THEN',
-                                                        6 => 'ELSE',
-                                                      ),
-                               'atom'         => 'Ifthen',
-                               'addAlwaysSemicolon' => 'it',
+        $this->actions = array('transform'    => array(1 => 'ELSE'),
                                'cleanIndex'   => true,
-                               'property'     => array('alternative' => true)
+                               'atom'         => 'Ifthen',
+                               'addSemicolon' => 'it');
+        $this->checkAuto();
+        
+        ////////////////////////////////////////////////////////////
+        // alternative syntax
+        ////////////////////////////////////////////////////////////
+
+        // Finish the THEN block
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => 'T_COLON'),
+                                   2 => array('atom'  => array('Sequence', 'Void')),
+                                   3 => array('token' => 'T_ENDIF')
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'THEN',
+                                                       3 => 'DROP'),
+                               'cleanIndex'   => true,
+                               'property'     => array('alternative' => true),
+                               'atom'         => 'Ifthen',
+                               'addSemicolon' => 'it'
+                               );
+        $this->checkAuto();
+
+        // build the THEN block
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => 'T_COLON'),
+                                   2 => array('atom'  => array('Sequence', 'Void')),
+                                   3 => array('token' => array('T_ELSE', 'T_ELSEIF'))
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'THEN'),
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true,
+                               'property'     => array('alternative' => true),
+                               );
+        $this->checkAuto();
+
+        // Finish the ELSE block
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => 'T_ELSE'),
+                                   2 => array('token' => 'T_COLON'),
+                                   3 => array('atom'  => array('Sequence', 'Void')),
+                                   4 => array('token' => 'T_ENDIF')
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'DROP',
+                                                       3 => 'THEN',
+                                                       4 => 'DROP'),
+                               'cleanIndex'   => true,
+                               'property'     => array('alternative' => true),
+                               'atom'         => 'Ifthen',
+                               'addSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -324,15 +215,36 @@ class Ifthen extends TokenAuto {
         return <<<GREMLIN
 
 if (fullcode.alternative == true) {
-    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") : " + fullcode.out("THEN").next().fullcode;
+    then = fullcode.out("THEN").next();
+    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") : " + then.fullcode;
     if (fullcode.out('ELSE').any()) {
-        fullcode.fullcode = fullcode.fullcode + " else : " + fullcode.out("ELSE").next().fullcode;
+        theElse = fullcode.out("ELSE").next();
+        if (theElse.token == 'T_ELSEIF') {
+            fullcode.fullcode = fullcode.fullcode + " " + theElse.fullcode;
+        } else {
+            fullcode.fullcode = fullcode.fullcode + " else : " + fullcode.out("ELSE").next().fullcode;
+            fullcode.fullcode = fullcode.fullcode + ' endif';
+        }
+    } else {
+        fullcode.fullcode = fullcode.fullcode + ' endif'
     }
-    fullcode.fullcode = fullcode.fullcode + ' endif'
 } else {
-    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") " + fullcode.out("THEN").next().fullcode;
+    theThen = fullcode.out("THEN").next();
+    if (theThen.bracket == false) {
+        fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") " + theThen.fullcode;
+    } else {
+        fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") { " + theThen.fullcode + " }";
+    }
+    
     if (fullcode.out('ELSE').any()) {
-        fullcode.fullcode = fullcode.fullcode + " else " + fullcode.out("ELSE").next().fullcode;
+        theElse = fullcode.out("ELSE").next();
+        if (theElse.token == 'T_ELSEIF') {
+            fullcode.fullcode = fullcode.fullcode + " " + theElse.fullcode;
+        } else if (theThen.bracket == false) {
+            fullcode.fullcode = fullcode.fullcode + " else " + theElse.fullcode;
+        } else {
+            fullcode.fullcode = fullcode.fullcode + " else { " + theElse.fullcode + " }";
+        }
     }
 }
 

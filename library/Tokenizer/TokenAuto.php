@@ -1310,14 +1310,18 @@ g.addEdge(f, x, 'NEXT');
 ";
             } elseif ($destination > 0) {
                 list($atom, $link) = each($config);
-                $next = str_repeat(".out('NEXT')", $destination - 1);
+                if ($destination == 1) {
+                    $next = 'it;';
+                } else {
+                    $next = 'it'.str_repeat(".out('NEXT')", $destination - 1).'.next()';
+                }
                 
                 $qactions[] = "
 /* addEdge out $destination */
 x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', virtual:true, line:it.line, fullcode:' ']);
 g.idx('atoms').put('atom', 'Void', x);
 
-a = it$next.next();
+a = $next;
 b = a.out('NEXT').next();
 
 g.removeEdge(a.outE('NEXT').next());
@@ -1631,6 +1635,7 @@ g.addEdge(it, b1, 'ELEMENT');
 
 b1.inE('INDEXED').each{ g.removeEdge(it); }
 it.setProperty('atom', 'Sequence');
+g.idx('atoms').put('atom','Sequence', it);
 it.setProperty('fullcode', ';'); // fullcode 
 
 g.addEdge(b2, it, 'NEXT');
@@ -1729,7 +1734,7 @@ cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.l
 
 x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:true, bracket:false, virtual:true, line:it.line]);
 
-a = it.out('NEXT').next();
+a = it.out('NEXT').out('NEXT').next();
 if (a.token == 'T_COLON') {
     a = a.out('NEXT').next();
 }
@@ -2385,7 +2390,7 @@ g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
             unset($actions['addToIndex']);
         }
 
-        if (isset($actions['variable_to_functioncall'])) {
+        if (isset($actions['variableToFunctioncall'])) {
             $fullcode = $this->fullcode();
             
             $qactions[] = "
@@ -2393,9 +2398,10 @@ g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
 
 x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');
-g.idx('atoms').put('atom', 'Variable', x);
-                ";
-            unset($actions['variable_to_functioncall']);
+// No need for indexing here g.idx('atoms').put('atom', 'Variable', x);
+
+";
+            unset($actions['variableToFunctioncall']);
         }
 
         if (isset($actions['arrayToFunctioncall'])) {
@@ -2406,6 +2412,7 @@ g.idx('atoms').put('atom', 'Variable', x);
 
 // it may be an array or a variable variable
 x = g.addVertex(null, [code:it.code, atom:'Functioncall', token:it.token, virtual:true, line:it.line]);
+g.idx('atoms').put('atom', 'Functioncall', x);
 g.addEdge(x, it, 'NAME');
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a3.out('NEXT').next(), 'NEXT');
@@ -2438,7 +2445,7 @@ $fullcode
                                'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 
                                'T_POW_EQUAL', 'T_DOUBLE_ARROW', 'T_SR','T_SL', 'T_IMPLEMENTS', 'T_EXTENDS',
                                'T_POW', 'T_PLUS', 'T_MINUS', 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_INC', 'T_DEC',
-                               'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF'";
+                               'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF', 'T_ELSE'";
 //'T_OPEN_CURLY', 
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */

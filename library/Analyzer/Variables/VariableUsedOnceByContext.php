@@ -41,6 +41,7 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
              ->codeIsNot(VariablePhp::$variables, true)
              ->hasNoIn('GLOBAL')
              ->analyzerIsNot('Analyzer\\Variables\\VariableUsedOnceByContext')
+             ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}.out("ABSTRACT").any() == false')
              ->fetchContext()
              ->eachCounted('it.code + "/" + context.Function + "/" + context.Class + "/" + context.Namespace', 1);
         $this->prepareQuery();

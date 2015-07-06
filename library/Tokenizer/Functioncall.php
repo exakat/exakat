@@ -42,9 +42,9 @@ class Functioncall extends TokenAuto {
                                                 'token' => 'T_CLOSE_PARENTHESIS')
         );
         
-        $this->actions = array('variable_to_functioncall'   => 1,
-                               'keepIndexed'                => true,
-                               'property'                   => array('parenthesis' => true),
+        $this->actions = array('variableToFunctioncall' => 1,
+                               'keepIndexed'            => true,
+                               'property'               => array('parenthesis' => true),
                                );
         $this->checkAuto();
         

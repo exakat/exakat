@@ -56,7 +56,7 @@ class Sequence extends TokenAuto {
                                       Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators,
                                       _Include::$operators, Power::$operators );
                                       
-        $forbiddenTokens = array('T_ELSEIF', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_COMMA');
+        $forbiddenTokens = array('T_ELSEIF', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_COMMA', 'T_CATCH');
 
         // Actual rules starting now
 

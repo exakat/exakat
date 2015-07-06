@@ -615,8 +615,9 @@ GREMLIN;
     }
 
     public function hasRank($value = '0', $link = 'ARGUMENT') {
-        if ($value == 'first') {
-            $this->addMethod("has('rank','0')");
+        if ($value === 'first') {
+            // @note : can't use has() with integer!
+            $this->addMethod('filter{it.rank == 0}'); 
         } elseif ($value === 'last') {
             $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 1}");
         } elseif ($value === '2last') {
@@ -1868,9 +1869,18 @@ GREMLIN;
     
     public function makeFullNsPath($functions) {
         if (is_string($functions)) {
-            $r = "\\".strtolower($functions);
+            $r = strtolower($functions);
+            if (isset($r[0]) && $r[0] != "\\") {
+                $r = "\\". $r;
+            }
         } else {
-            $r = array_map(function ($x) { return "\\".strtolower($x); },  $functions);
+            $r = array_map(function ($x) { 
+                $r = strtolower($x);
+                if (isset($r[0]) && $r[0] != "\\") {
+                    $r = "\\". $r;
+                }
+                return $r;
+            },  $functions);
         }
         return $r;
     }

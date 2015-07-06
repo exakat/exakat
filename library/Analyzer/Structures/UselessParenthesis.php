@@ -58,12 +58,20 @@ class UselessParenthesis extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // ($y) == (1);
-        // ($a = $b) == $c : NOT A CASE
         $this->atomIs('Comparison')
              ->outIs(array('RIGHT', 'LEFT'))
              ->atomIs('Parenthesis')
              ->outIs('CODE')
              ->atomIsNot('Assignation')
+             ->inIs('CODE');
+        $this->prepareQuery();
+
+        // ($a = $b) == $c : NOT A CASE
+        $this->atomIs('Comparison')
+             ->outIs('RIGHT')
+             ->atomIs('Parenthesis')
+             ->outIs('CODE')
+             ->atomIs('Assignation')
              ->inIs('CODE');
         $this->prepareQuery();
         

@@ -58,7 +58,7 @@ class Build_root implements Tasks {
         display( "g.idx('atoms') : filling\n");
 
         // separate processing for T_STRING 
-        $query = "g.V.has('token', 'T_STRING').each{
+        $query = "g.V.has('token', 'T_STRING').has('atom', null).each{
             it.setProperty('fullcode', it.getProperty('code'));
             it.setProperty('atom', 'Identifier');
             g.idx('atoms').put('atom', it.atom, it); 
@@ -75,7 +75,15 @@ class Build_root implements Tasks {
         $this->query($query, 1);
         display( "g.idx('atoms') : T_VARIABLE\n");
 
-        $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant',
+        $query = "g.V.has('token', 'T_STRING_VARNAME').each{
+            it.setProperty('fullcode', it.getProperty('code'));
+            it.setProperty('atom', 'Variable');
+            g.idx('atoms').put('atom', it.atom, it); 
+        }";
+        $this->query($query, 1);
+        display( "g.idx('atoms') : T_VARIABLE\n");
+
+        $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant', 'Null',
                                          'Rawstring', 'Float', 'Boolean', 'Void', 'File']}.each{
                                          g.idx('atoms').put('atom', it.atom, it); 
         }";

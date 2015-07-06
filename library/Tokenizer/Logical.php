@@ -25,7 +25,7 @@ namespace Tokenizer;
 
 class Logical extends TokenAuto {
     static public $operators = array('T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
-                                     'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
+                                     'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR',  'T_OROR',
                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR');
     // and or xor
     static public $logicals = array('T_LOGICAL_AND', 'T_ANDAND',
@@ -44,8 +44,8 @@ class Logical extends TokenAuto {
                                  Preplusplus::$operators,    //Assignation::$operators,
                                  _New::$operators,           Property::$operators,
                                  Staticproperty::$operators, Nsname::$operators,
-                                 Noscream::$operators,       Not::$operators,
-                                 Reference::$operators);
+                                 Noscream::$operators,       Not::$operators);
+
         // logical boolean (and, or)
         $this->conditions = array( -2 => array('filterOut' => $filterOut),
                                    -1 => array('atom'      => 'yes',
@@ -57,6 +57,7 @@ class Logical extends TokenAuto {
                                     2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators,
                                                                           Addition::$operators, Multiplication::$operators,
                                                                           Bitshift::$operators, Concatenation::$operators,
+                                                                          Logical::$booleans,
                                                                            array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                                  'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_INC', 'T_DEC',
                                                                                  'T_NS_SEPARATOR',
@@ -80,7 +81,7 @@ class Logical extends TokenAuto {
                                     2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators,
                                                                           Addition::$operators, Multiplication::$operators,
                                                                           Bitshift::$operators, Concatenation::$operators,
-                                                                          Logical::$logicals,
+                                                                          Logical::$booleans,
                                                                            array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                                  'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_INC', 'T_DEC',
                                                                                  'T_NS_SEPARATOR',

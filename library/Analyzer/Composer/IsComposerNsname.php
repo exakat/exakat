@@ -40,10 +40,13 @@ class IsComposerNsname extends Analyzer\Analyzer {
 
         // classes in Composer
         $packagistClasses = $data->getComposerClasses();
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->is('originpath', $packagistClasses);
-        $this->prepareQuery();
+        $packagistClassesChunks = array_chunk($packagistClasses, 5000);
+        foreach($packagistClassesChunks as $id => $p) {
+            $this->atomIs('Use')
+                 ->outIs('USE')
+                 ->is('originpath', $p);
+            $this->prepareQuery();
+        }
 
         // interfaces in Composer
         $packagistInterfaces = $data->getComposerInterfaces();
@@ -63,10 +66,14 @@ class IsComposerNsname extends Analyzer\Analyzer {
         // Classes extends or implements
         // Classes in Composer
         $packagistClasses = $this->makeFullNSpath($packagistClasses);
-        $this->atomIs('Class')
-             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-             ->is('fullnspath', $packagistClasses);
-        $this->prepareQuery();
+        $packagistClassesChunks = array_chunk($packagistClasses, 5000);
+        foreach($packagistClassesChunks as $id => $p) {
+            $this->atomIs('Class')
+                 ->outIs(array('IMPLEMENTS', 'EXTENDS'))
+                 ->analyzerIsNot('self')
+                 ->fullnspath($p);
+            $this->prepareQuery();
+        }
 
         $packagistInterfaces = $this->makeFullNSpath($packagistInterfaces);
         $this->atomIs('Class')

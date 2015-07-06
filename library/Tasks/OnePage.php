@@ -33,7 +33,7 @@ class OnePage implements Tasks {
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
                               'OneFile');
 
-    protected $reports = array('OnePage' => array('Json'   => 'report'));
+    protected $reports = array('Onepage' => array('Json'   => 'report'));
     
     public function run(\Config $config) {
         $begin = microtime(true);
@@ -49,7 +49,7 @@ class OnePage implements Tasks {
         // todo : check that there is indeed this project or create it.
         
         copy($config->filename, $config->projects_root.'/projects/'.$project.'/code/onepage.php');
-        $this->reports['OnePage']['Json'] = 'onepage';
+        $this->reports['Onepage']['Json'] = 'onepage';
         
         $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
         $this->logTime('Start');
@@ -71,11 +71,6 @@ class OnePage implements Tasks {
 
         $thread = new \Thread();
         display("Running project '$project'\n");
-
-        display("Cleaning DB\n");
-// cleaning should be done after, not initialy
-        shell_exec('php '.$this->executable.' cleandb -v');
-        $this->logTime('Files');
 
         display("Running files\n");
         shell_exec('php '.$this->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
@@ -148,6 +143,11 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         display("Total time : ".number_format(($end - $begin), 2)."s\n");
         
         $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
+
+        display("Cleaning DB\n");
+// cleaning should be done after, not initialy
+        shell_exec('php '.$this->executable.' cleandb -v');
+        $this->logTime('Files');
     }
 
     private function cleanLog($path) {

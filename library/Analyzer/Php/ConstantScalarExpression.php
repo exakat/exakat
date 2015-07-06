@@ -35,7 +35,7 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
         $this->atomIs('Const')
              ->outIs('VALUE')
              ->atomIsNot($validAtoms)
-             ->tokenIsNot('T_ARRAY')
+             ->tokenIsNot(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
 
@@ -46,7 +46,7 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
              ->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIsNot($validAtoms)
-             ->tokenIsNot('T_ARRAY')
+             ->tokenIsNot(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
     }

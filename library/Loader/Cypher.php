@@ -52,9 +52,9 @@ class Cypher {
     
     private $isLink = false;
     
-    private $les_attr = array('index',  'root', 'hidden', 
+    private $les_attr = array('index', 'root', 'hidden', 'association', 'in_for',
                               'in_quote', 'delimiter', 'noDelimiter', 'rank', 
-                              'block', 'bracket', 'filename', 'tag', 'association', 'in_for', 'atom', 'fullcode' );
+                              'block', 'bracket', 'filename', 'tag',  'atom', 'fullcode' );
     
     public function __construct() {
         $this->config = \Config::factory();

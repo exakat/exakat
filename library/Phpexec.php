@@ -130,6 +130,8 @@ class Phpexec {
 
             default: 
                 $this->phpexec = $config->php;
+                // PHP will be valide if we use the one that is currently executing us
+                $this->isValid = true;
         }
         
         if ($this->isValid) {
@@ -141,13 +143,26 @@ class Phpexec {
     private function finish() {
         // prepare the configuration for Short tags
         if ($this->isCurrentVersion){
-            $shortTags = ini_get('short_open_tag');
+            $shortTags = ini_get('short_open_tag') == '1';
         } else {
             $res = shell_exec($this->phpexec.' -i');
             preg_match('/short_open_tag => (\w+) => (\w+)/', $res, $r);
             $shortTags = $r[2] == 'On';
         }
-        $this->config['short_open_tag'] = $shortTags ? 'On' : 'Off';
+        $this->config['short_open_tag'] = $shortTags;
+
+        // prepare the configuration for Asp tags
+        if ($this->isCurrentVersion){
+            $aspTags = ini_get('asp_tags') == '1';
+        } else {
+            $res = shell_exec($this->phpexec.' -i');
+            if (preg_match('/asp_tags => (\w+) => (\w+)/', $res, $r)) {
+                $aspTags = $r[2] == 'On';
+            } else {
+                $aspTags = false;
+            }
+        }
+        $this->config['asp_tags'] = $aspTags;
 
         // prepare the list of tokens
         if ($this->isCurrentVersion) {

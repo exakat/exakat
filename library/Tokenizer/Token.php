@@ -106,7 +106,6 @@ class Token {
                                       66 => '_Case',
                                       67 => '_Default',
                                       68 => '_Switch',
-                                      70 => 'IfthenElse',
                                       69 => 'Ifthen',
                                       71 => '_Foreach',
                                       72 => '_For',
@@ -149,7 +148,7 @@ class Token {
                                                Staticproperty::$operators,
                                                _Instanceof::$operators,
                                                Ternary::$operators,
-                                               array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF'));
+                                               array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS')); //'T_ELSE', ,  'T_ELSEIF'
     }
 
     public static function getTokenizers($version = null) {
@@ -566,18 +565,6 @@ g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
     }
 };
 ", "
-// function usage
-// fallback for functions : if not defined, then fallback to \
-g.idx('atoms')[['atom':'Functioncall']]
-    .has('token', 'T_STRING')
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any() == false; }
-    .hasNot('fullnspath', null)
-    .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}
-    .each{
-        it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
-    }
-
 // fallback for functions : if no fullnspath, then fallback to \
 g.idx('atoms')[['atom':'Functioncall']]
     .has('token', 'T_STRING')
@@ -595,7 +582,6 @@ g.idx('atoms')[['atom':'Functioncall']]
     .each{
         it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
     };
-
 
 ", "
 
@@ -886,7 +872,8 @@ g.idx('atoms')[['atom':'Class']]
     it.as('a').out('EXTENDS')
       .sideEffect{ s.add(it.fullnspath); }
       .transform{ g.idx('classes')[['path':it.fullnspath]].next(); }
-      .loop('a'){it.object.out('EXTENDS').any()}.iterate();
+      // it.loops is arbitrary : avoid circular reference loop.
+      .loop('a'){it.object.out('EXTENDS').any() && it.loops < 10}.iterate();
       true;
 }
 .each{
@@ -975,6 +962,11 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
         // Default behavior if we don't understand :
         return false;
     }
+
+    public function getPhpversion() {
+        return $this->phpVersion;
+    }
+
 }
 
 ?>
