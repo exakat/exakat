@@ -1,10 +1,30 @@
-Version 0.2.4 (Black Wind Demon, Coming up)
+Version 0.2.5 (Scholar in a White Robe, Coming up)
 This is a maintenance release, with improved ease of use. 
 + Analyzer
     +
 + Tokenizer
     +
 
+Version 0.2.4 (Black Wind Demon, Coming up)
+This is a maintenance release, with improved ease of use and new analyzes.
++ Analyzer
+    + Rebuild the composer database
+    + Lots of new extensions supported : ev, libevent, event, php-ast, wikidiff2, proctitle, inotify, ibase, amqp, geoip, output buffering,
+    + Report errors when non-variables are returned by reference
+    + Marked more analyzes for PHP 7
+    + Fixed Unpreprocess structures with split
+    + Upgraded spotting for useless parenthesis
+    + Added a check ++$i vs $i++;
+    + Exclude abstract methods from Variables Used Once
+    + Added new directives
+    + Also check for ASP Tags
++ Tokenizer
+    + Fixed the fullpath for functions when they are not defined in the code
+    + Upgraded support for Return Type (PHP 7.0+)
+    + error_reporting with -1 is OK
+    + Fixed a precedence problem with & and &&
+    + Refactored Ifthen token to support return type 
+    + Added a kill command when cleaning Database
 Version 0.2.3 (Techu Shi, 2015-06-22)
 This is a maintenance release, with improved ease of use. 
 + Analyzer
