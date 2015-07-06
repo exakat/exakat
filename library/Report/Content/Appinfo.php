@@ -170,6 +170,7 @@ class Appinfo extends \Report\Content {
                             'ext/apc'        => 'Extensions/Extapc',
                             'ext/apcu'       => 'Extensions/Extapcu',
                             'ext/array'      => 'Extensions/Extarray',
+                            'ext/ast'        => 'Extensions/Extast',
                             'ext/bcmath'     => 'Extensions/Extbcmath',
                             'ext/bzip2'      => 'Extensions/Extbzip2',
                             'ext/cairo'      => 'Extensions/Extcairo',
