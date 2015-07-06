@@ -388,11 +388,6 @@ Spot useless of them
 Complete the list of directive in Content/Directives
 Add a list of directive spotted in the code
 
-Finishes the following standard extensions : 
-interbase
-dotnet
-xdiff
-
 Check on reference returning functions (they should be called with reference).
 
 Link referenced variables together
@@ -1386,3 +1381,5 @@ Only variable references should be returned by reference (function &a() { return
 Spot that autoload is case-sensitive (then check for classes and files, and classes and call consistence).
 
 List OS by extensions.
+
+Check for precedence with &, |, ^ and, or, xor, etc. 
