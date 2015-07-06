@@ -297,6 +297,36 @@ LICENCE;
             print_r($errors);
         }
     }
+
+    public function checkDirective() {
+        $code = file_get_contents('./library/Report/Content/Directives.php');
+        preg_match('#\$directives = array\((.*?)\);#is', $code, $r);
+        eval($r[0]);
+        
+        $counts = array_count_values($directives);
+        $diff = array_filter($counts, function($a, $b) { return $a > 1;}, ARRAY_FILTER_USE_BOTH);
+        if (count($diff)) {
+            print count($diff)." values are double in \$directives : ".join(', ', array_keys($diff))."\n";
+        }
+        
+        foreach($directives as $d) {
+            if (!file_exists('./library/Report/Content/Directives/'.$d.'.php')) {
+                print "$d is missing\n";
+            } 
+        }
+        
+        $files = glob('./library/Report/Content/Directives/*.php');
+        foreach($files as $f) {
+            $f2 = substr(basename($f), 0, -4);
+            if ($f2 == 'Directives') { continue; }
+            if (in_array($f2, $directives) === false) {
+                print "'$f2' is missing in the Directive class\n";
+            }
+        }
+
+        die();
+    }
+
 }
 
 function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $errcontext = array()) {
