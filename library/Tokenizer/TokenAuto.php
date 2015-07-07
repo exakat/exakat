@@ -119,13 +119,13 @@ toDelete.each{ g.removeVertex(it); }
 
         $query = $this->prepareQuery();
         do {
-            $res = Token::query($query);
-        
-            $this->total += (int) $res['total'][0];
-            $this->done += (int) $res['done'][0];
+            $res = gremlin_query($query);
+            
+            $this->total += (int) $res->total;
+            $this->done += (int) $res->done;
             $this->cycles++;
 //            print("Cycle {$this->cycles} {$res['done'][0]}\n");
-        } while ($res['done'][0] > self::CYCLE && $this->cycles < 100);
+        } while ($res->done > self::CYCLE && $this->cycles < 100);
         
         return $res;
     }

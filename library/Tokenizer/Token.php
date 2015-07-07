@@ -225,30 +225,23 @@ class Token {
     }
 
     static public function countTotalToken() {
-        $result = Token::query("g.V.count()");
-        
-        return $result[0][0];
+        return gremlin_queryOne("g.V.count()");
     }
 
     static public function countLeftToken() {
-        $result = Token::query("g.idx('racines')[['token':'ROOT']].out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
-        
-        return $result[0][0];
+        return gremlin_queryOne("g.idx('racines')[['token':'ROOT']].out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     }
 
     static public function countLeftNext() {
-        $result = Token::query("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
-        
-        return $result[0][0] + 1;
+        return 1 + gremlin_queryOne("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     }
 
     static public function countNextEdge() {
-        $result = Token::query("g.E.has('label','NEXT').count()");
-        
-        return $result[0][0];
+        return gremlin_queryOne("g.E.has('label','NEXT').count()");
     }
 
     static public function query($query) {
+        
         $queryTemplate = $query;
         $parameters = array('type' => 'IN');
         try {
@@ -263,38 +256,28 @@ class Token {
         return $query->getResultSet();
     }
 
-    static public function queryOne($query) {
-        $result = Token::query($query);
-        
-        return $result[0][0];
-    }
-
     public function checkRemaining() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, array('Staticclass','Staticconstant','Staticmethodcall','Staticproperty'))) {
             $query = "g.idx('racines')[['token':'Staticproperty']].out('INDEXED').any()";
-            return Token::queryOne($query) > 0;
+            return gremlin_queryOne($query);
         } elseif (in_array($class, array('Property','Methodcall'))) {
             $query = "g.idx('racines')[['token':'Property']].out('INDEXED').any()";
-            return Token::queryOne($query) > 0;
+            return gremlin_queryOne($query);
         } elseif (in_array($class, Token::$types)) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEXED').any()";
-            return Token::queryOne($query) > 0;
+            return gremlin_queryOne($query);
         } else {
             return true;
         }
     }
 
     static public function leftInIndex($class) {
-        $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
-
-        return Token::queryOne($query);
+        return gremlin_queryOne("g.idx('racines')[['token':'$class']].out('INDEXED').count()");
     }
 
     static public function countFileToProcess() {
-        $query = "g.idx('racines')[['token':'ROOT']].out('INDEXED').count()";
-
-        return Token::queryOne($query);
+        return gremlin_queryOne("g.idx('racines')[['token':'ROOT']].out('INDEXED').count()");
     }
 
     
@@ -887,7 +870,7 @@ g.idx('atoms')[['atom':'Class']]
         $begin = microtime(true);
         foreach($queries as $query) {
             // @todo make this //
-            Token::query($query);
+            gremlin_query($query);
         }
         $end = microtime(true);
         display('CleanHidden : '.number_format(1000 * ($end - $begin), 0)."ms\n");
@@ -904,7 +887,7 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
 }
 
 ";
-        Token::query($query);
+        gremlin_query($query);
     }
 
     public static function getClass($class) {
