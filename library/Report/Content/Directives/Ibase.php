@@ -25,7 +25,7 @@ namespace Report\Content\Directives;
 
 use Everyman\Neo4j\Client;
 
-class Com extends Directives {
+class Ibase extends Directives {
     public function __construct(Client $neo4j) {
         parent::__construct($neo4j);
         $this->name         = 'Ibase';
