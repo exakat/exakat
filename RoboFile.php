@@ -301,6 +301,7 @@ LICENCE;
     public function checkDirective() {
         $code = file_get_contents('./library/Report/Content/Directives.php');
         preg_match('#\$directives = array\((.*?)\);#is', $code, $r);
+        // easy quick code but shouldn't be there...
         eval($r[0]);
         
         $counts = array_count_values($directives);
@@ -327,6 +328,26 @@ LICENCE;
         die();
     }
 
+    public function checkClassnames() {
+        $files = Finder::create()->ignoreVCS(true)
+                                 ->files()
+                                 ->in('library')
+                                 ->name('*.php');
+        
+        foreach($files as $file) {
+            if ($file == 'library/helpers.php') { continue; }
+            $code = file_get_contents($file);
+            if (!preg_match('#(class|interface) ([^ ]+)#is', $code, $r)) {
+                print "No class in $file\n";
+                continue;
+            }
+            
+            $filename = substr(basename($file), 0, -4);
+            if ($filename != $r[2]) {
+                print "Classname error in $file\n";
+            }
+        }
+    }
 }
 
 function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $errcontext = array()) {
