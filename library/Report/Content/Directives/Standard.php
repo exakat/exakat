@@ -39,6 +39,14 @@ class Standard extends Directives {
                                     'suggested' => 'Off',
                                     'documentation' => 'Exposes to the world that PHP is installed on the server. For security reasons, it is better to keep this hidden.');
 
+        $this->directives[] = array('name' => 'realpath_cache_size',
+                                    'suggested' => '128k',
+                                    'documentation' => 'Determines the size of the realpath cache to be used by PHP. The default value of "16k" is usually too low for modern application that open many files (autoload, fopen, filet_get_contents...). It is recommended to make this value up to 128 to 256k, and reduce it by testing with realpath_cache_get().');
+
+        $this->directives[] = array('name' => 'realpath_cache_ttl',
+                                    'suggested' => '3600',
+                                    'documentation' => 'Duration of time (in seconds) for which to cache realpath information for a given file or directory. If the application\'s code doesn\'t change too often, you may set this directive to 3600 (one hour) or even more.');
+
         $this->directives[] = $this->extraConfiguration($this->name, 'info');
     }
 }
