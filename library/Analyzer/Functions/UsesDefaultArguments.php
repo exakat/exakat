@@ -30,7 +30,7 @@ class UsesDefaultArguments extends Analyzer\Analyzer {
         $data = new \Data\Methods();
         $functions = $data->getFunctionsArgsInterval();
 
-        $positions = array(array(), array(), array(), array(), array());
+        $positions = array();
         foreach($functions as $function) {
             if ($function['args_min'] == $function['args_max']) { continue; }
             if ($function['args_max'] == 100) { continue; }
