@@ -103,6 +103,10 @@ function gremlin_queryA($query, $params = [], $load = '') {
 
     //close connection
     curl_close($ch);
+    
+    if (isset($result->message)) {
+        throw new \Exception($result->message);
+    }
 
     return json_decode($result);
 }
@@ -140,6 +144,10 @@ function gremlin_queryN($query, $params = [], $load = '') {
 
     //close connection
     curl_close($ch);
+
+    if (isset($result->message)) {
+        throw new \Exception($result->message);
+    }
 
     return json_decode($result);
 }
