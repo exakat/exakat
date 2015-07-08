@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('try { /**/ } catch (Exception $e) { /**/ }  finally { }');
 
-$expected_not = array();
+$expected_not = array('try { /**/ } catch (Exception $e) { /**/ }');
 
 ?>
