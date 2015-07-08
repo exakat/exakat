@@ -21,8 +21,8 @@
 */
 
 class Exakat {
-    const VERSION = '0.2.4';
-    const BUILD = '171';
+    const VERSION = '0.2.4a';
+    const BUILD = '172';
     
     public function execute(Config $config) {
         switch ($config->command) {
@@ -138,6 +138,11 @@ class Exakat {
 
             case 'onepage' : 
                 $task = new Tasks\OnePage();
+                print $task->run($config);
+                break;
+
+            case 'onepagereport' : 
+                $task = new Tasks\OnepageReport();
                 print $task->run($config);
                 break;
 
