@@ -45,9 +45,19 @@ class OnePage implements Tasks {
         } else {
             $this->executable = $_SERVER['SCRIPT_NAME'];
         }
+        
+        // checking for installation
+        if (!file_exists($this->project_dir)) {
+            shell_exec('php '.$this->executable.' init -p onepage ');
+            mkdir($this->project_dir.'/code', 0755);
+            shell_exec('php '.$this->executable.' phploc -p onepage ');
+        }
 
         // todo : check that there is indeed this project or create it.
-        
+        if (!file_exists($config->filename)) {
+            die("Can't find the file '$config->filename'. Aborting\n");
+        }
+
         copy($config->filename, $config->projects_root.'/projects/'.$project.'/code/onepage.php');
         $this->reports['Onepage']['Json'] = 'onepage';
         
@@ -108,28 +118,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         display("Project analyzed\n");
         $this->logTime('Analyze');
 
-        $oldConfig = \Config::factory();
-        foreach($this->reports as $reportName => $formats) {
-            foreach($formats as $format => $fileName) {
-                display("Reporting $reportName in $format in file $fileName\n");
-                $args = array ( 1 => 'report',
-                                2 => '-p',
-                                3 => $project,
-                                4 => '-f',
-                                5 => $fileName,
-                                6 => '-format',
-                                7 => $format,
-                                8 => '-report',
-                                9 => $reportName,
-                                );
-                $config = \Config::factory($args);
-            
-                $report = new Report();
-                $report->run($config);
-                unset($report);
-            }
-        }
-        \Config::factory($oldConfig);
+        shell_exec('php '.$this->executable.' onepagereport -p onepage');
 
         display("Project reported\n");
 
