@@ -14,14 +14,28 @@ print floor(array_sum($numbers) / count($numbers))." on average\n";
 print min($numbers)." minimum\n";
 print max($numbers)." maximum\n";
 
-$files = glob('exp/*.php');
 
+// unfinished tests
+$total = 0;
+$files = glob('exp/*.php');
 foreach($files as $file) {
     include($file);
     
     if (empty($expected) && empty($expected_not)) {
+        ++$total;
         print "Empty tests : $file\n";
     }
 }
+print "total unfinished tests : $total\n";
+
+$total = 0;
+$files = glob('source/*.php');
+foreach($files as $file) {
+    if (filesize($file) < 15) {
+        ++$total;
+        print "Empty tests : $file\n";
+    }
+}
+print "total unfinished tests : $total\n";
 
 ?>
