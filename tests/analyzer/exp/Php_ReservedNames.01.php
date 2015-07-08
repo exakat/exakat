@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('function null ( ) { /**/ } ', 
+$expected     = array('function null( ) { /**/ } ', 
                       'class true', 
                       '$this->die( )', 
                       '$this->exit( )', 

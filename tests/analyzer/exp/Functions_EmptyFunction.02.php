@@ -6,8 +6,8 @@ $expected     = array('protected function parentNotDerived( ) { /**/ } ',
                       'private function parentIsConcrete( ) { /**/ } ', 
                       'public function grandParentExists( ) { /**/ } ');
 
-$expected_not = array('public function parentIsAbstract ( ) { /**/ } ',
-                      'public function parentIsConcrete ( ) { /**/ } ',
-                      'public function grandParentExists ( ) { /**/ } ');
+$expected_not = array('public function parentIsAbstract( ) { /**/ } ',
+                      'public function parentIsConcrete( ) { /**/ } ',
+                      'public function grandParentExists( ) { /**/ } ');
 
 ?>

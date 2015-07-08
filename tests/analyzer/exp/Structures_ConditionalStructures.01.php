@@ -3,13 +3,13 @@
 $expected     = array('class conditionnedX',
                       'interface conditionnedInterface',
                       'trait conditionnedTrait',
-                      'function conditionnedFunction ( ) { /**/ } ',
+                      'function conditionnedFunction( ) { /**/ } ',
                       "'ConditionedConstant'");
 
 $expected_not = array('class NormalX',
                       'interface NormalInterface',
                       'trait NormalTrait',
-                      'function NormalFunction ( ) { /**/ } ',
+                      'function NormalFunction( ) { /**/ } ',
                       "'NormalConstant'");
 
 ?>
