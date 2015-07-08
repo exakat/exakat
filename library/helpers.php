@@ -62,7 +62,6 @@ function gremlin_query($query, $params = [], $load = '') {
             }
         }
 
-        echo "gremlin : ", GREMLIN_QUERY, "\n";
     }
     
     if (GREMLIN_QUERY == 'gremlin_queryN') {
