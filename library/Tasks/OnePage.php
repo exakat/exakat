@@ -135,7 +135,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
 
         display("Cleaning DB\n");
 // cleaning should be done after, not initialy
-        shell_exec('php '.$this->executable.' cleandb -v');
+//        shell_exec('php '.$this->executable.' cleandb -v');
         $this->logTime('Files');
     }
 
