@@ -539,26 +539,24 @@ g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
         s = fullcode.code.toLowerCase();
     }
     
+    if (it.atom == 'Namespace') {
+        npath = '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + s;
+    } else {
+        npath = '\\\\' + s;
+    }
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', '\\\\' + s);
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + s);
+    } else if ( g.idx('functions')[['path':npath]].any() ) {
+        fullcode.setProperty('fullnspath', npath);
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + s);
+        // if we don't find it defined, we rely on the global namespace
+        fullcode.setProperty('fullnspath', '\\\\' + s);
     }
 };
 ", "
-// fallback for functions : if no fullnspath, then fallback to \
-g.idx('atoms')[['atom':'Functioncall']]
-    .has('token', 'T_STRING')
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any() == false; }
-    .has('fullnspath', null)
-    .each{
-        it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
-    }
 
-", "
 // special case for isset, unset, array, etc. Except for static.
 g.idx('atoms')[['atom':'Functioncall']]
     .filter{ it.token in ['T_ARRAY', 'T_LIST', 'T_UNSET', 'T_EXIT', 'T_DIE', 'T_ISSET', 'T_ECHO', 'T_PRINT', 'T_EMPTY', 'T_EVAL']}
@@ -870,7 +868,7 @@ g.idx('atoms')[['atom':'Class']]
         $begin = microtime(true);
         foreach($queries as $query) {
             // @todo make this //
-            gremlin_query($query);
+            $res = gremlin_query($query);
         }
         $end = microtime(true);
         display('CleanHidden : '.number_format(1000 * ($end - $begin), 0)."ms\n");
