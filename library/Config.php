@@ -279,6 +279,7 @@ class Config {
                           'tokenizer'   => 1, 
                           'version'     => 1,
                           'onepage'     => 1,
+                          'onepagereport' => 1,
                           );
 
         if (count($args) > 0) {
