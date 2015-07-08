@@ -1356,3 +1356,9 @@ C'est pas le code qui est très large, et dépasse la largeur de l'écran ?
 it is possible to configure boolean within namespace (spot namespace renaming for constant)
 
 https://wiki.phpbb.com/Best_Practices:PHP#Declaring
+
+Add xhprof extension
+
+Add // execution of queries in analyzer / build_root
+
+Faire une liste des fonctions dispo pour wp
