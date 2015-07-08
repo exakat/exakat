@@ -35,6 +35,14 @@ class Standard extends Directives {
                                     'suggested' => '120',
                                     'documentation' => 'This sets the maximum amount of memory in bytes that a script is allowed to allocate. This helps prevent poorly written scripts for eating up all available memory on a server. It is recommended to set this as low as possible and avoid removing the limit.');
 
+        $this->directives[] = array('name' => 'max_execution_time',
+                                    'suggested' => '90',
+                                    'documentation' => 'This sets the maximum amount of time, in seconds, that a script is allowed to run. The lower the value, the better for the server, but also, the better has the script to be written. Avoid really large values that are only useful for admin, and set them per directory.');
+
+        $this->directives[] = array('name' => 'expose_php',
+                                    'suggested' => 'Off',
+                                    'documentation' => 'Exposes to the world that PHP is installed on the server. For security reasons, it is better to keep this hidden.');
+
         $this->directives[] = array('name' => 'expose_php',
                                     'suggested' => 'Off',
                                     'documentation' => 'Exposes to the world that PHP is installed on the server. For security reasons, it is better to keep this hidden.');
