@@ -40,6 +40,7 @@ class NoRealComparison extends Analyzer\Analyzer {
              ->code(array('==', '!=', '===', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomInside('Float')
+             ->hasNoIn(array('ARGUMENT', 'INDEX'))
              ->back('first');
         $this->prepareQuery();
 
