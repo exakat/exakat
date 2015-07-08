@@ -1664,7 +1664,7 @@ g.addEdge(b2, x, 'NEXT');
 
 while(a2.token == 'T_COMMA') {
     g.addEdge(x, a1, 'ARGUMENT');
-    rank += 500;
+    rank += 1;
     a1.setProperty('rank', rank);
     a2.bothE('INDEXED').each{ g.removeEdge(it); }
 
