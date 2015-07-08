@@ -35,6 +35,7 @@ class HardcodedPasswords extends Analyzer\Analyzer {
                            'oci_connect'    => 2,
                            'imap_open'      => 3,
                            'cyrus_authenticate' => 8,
+                           'ssh2_auth_password' => 2,
                            );
         
         $positions = array();
