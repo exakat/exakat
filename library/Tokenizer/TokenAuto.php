@@ -1621,7 +1621,12 @@ if (makeNext == true) {
     g.addEdge(current, a1, 'NEXT');
 }
 
-current.out('ELEMENT').inE('INDEXED').each{ g.removeEdge(it); }
+current.out('ELEMENT').inE('INDEXED').each{ g.removeEdge(it); };
+
+current.out('ELEMENT').has('root', true).each{
+    current.setProperty('root', true);
+    it.removeProperty('root');
+};
 
 ";
             unset($actions['toSequence']);
