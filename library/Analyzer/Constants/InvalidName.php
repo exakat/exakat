@@ -35,8 +35,28 @@ class InvalidName extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 'first')
              ->atomIs('String')
-             ->regexNot('noDelimiter', '^[a-zA-Z_\\\\u007f-\\\\u00ff][a-zA-Z0-9_\\\\u007f-\\\\u00ff]*\\$');
+             // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
+             ->regexNot('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$');
         $this->prepareQuery();
+
+        $invalidNames = $this->loadIni('php_keywords.ini', 'keyword');
+        $invalidNames = "'".join("', '", $invalidNames)."'";
+        
+        // case-sensitive constants
+        $this->atomIs('Functioncall')
+             ->analyzerIsNot('self')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath("\\define")
+             ->outIs('ARGUMENTS')
+             ->rankIs('ARGUMENT', 'first')
+             ->atomIs('String')
+             ->regex('noDelimiter', '\\\\\\\\')
+             // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
+             ->filter('['.$invalidNames.'].intersect(it.noDelimiter.tokenize("\\\\\\\\")).size() > 0');
+        $this->prepareQuery();
+
+
     }
 }
 
