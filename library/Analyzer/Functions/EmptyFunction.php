@@ -31,6 +31,7 @@ class EmptyFunction extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // standalone function
         $this->atomIs('Function')
              ->hasNoClass()
              ->outIs('BLOCK')
@@ -38,6 +39,7 @@ class EmptyFunction extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // method : then, it should not overwrite a parent's methdo
         $this->atomIs('Function')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
