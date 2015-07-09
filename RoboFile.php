@@ -288,7 +288,25 @@ LICENCE;
             }
         }
 
-
+        // check for sqlite's composer : no special chars
+        $sqlite = new Sqlite3('./data/composer.sqlite');
+        
+        $tables = array('classes' => 'classname', 'interfaces' => 'interfacename', 'traits' => 'traitname');
+        foreach($tables as $table => $col) {
+            $res = $sqlite->query('SELECT id, '.$col.' FROM '.$table);
+            $toDelete = array();
+            while($row = $res->fetchArray()) {
+                if (preg_match('/[^a-z0-9_]/i', $row[$col])) {
+                    print $row['id'].') '.$row[$col]." is wrong in table $table\n";
+                    $toDelete[] = $row['id'];
+                }
+            }
+            if (!empty($toDelete)) {
+                $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.join(', ', $toDelete).')');
+                print count($toDelete)." rows removed\n";
+            }
+        }
+        
         // results
         if (empty($errors)) {
             print "No error found in $total files tested.\n";
@@ -296,6 +314,7 @@ LICENCE;
             echo count($errors).' errors found'."\n";
             print_r($errors);
         }
+
     }
 
     public function checkDirective() {
