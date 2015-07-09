@@ -92,7 +92,7 @@ class Phpcode extends TokenAuto {
 
 // <?php ? > (empty script with closing tag)
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
-                                             'atom' => 'none'),
+                                             'atom'  => 'none'),
                                   1 => array('token' => 'T_CLOSE_TAG'),
         );
         
