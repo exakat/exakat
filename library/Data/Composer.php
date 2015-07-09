@@ -45,10 +45,10 @@ class Composer {
     }
 
     public function getComposerNamespaces($vendor = null) {
-        $query = "SELECT namespace AS namespace FROM namespaces";
+        $query = "SELECT namespace AS namespace FROM namespaces WHERE namespace != 'global' ";
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
-            $query .= " WHERE vendor = '$vendor' and component = '$component'";
+            $query .= " AND vendor = '$vendor' AND component = '$component'";
         
         }
         $res = $this->sqlite->query($query);
@@ -62,7 +62,8 @@ class Composer {
     }
 
     public function getComposerClasses($vendor = null) {
-        $query = "SELECT namespace || '\\' || classname AS classname 
+        // global namespace is stored with 'global' keyword, so we remove it.
+        $query = "SELECT CASE namespace WHEN 'global' THEN classname ELSE namespace || '\\' || classname END AS classname 
         FROM namespaces 
         JOIN classes 
             ON classes.namespace_id = namespaces.id";
@@ -83,7 +84,8 @@ class Composer {
     }
 
     public function getComposerInterfaces($vendor = null) {
-        $query = "SELECT namespace || '\\' || interfacename AS interfacename FROM namespaces 
+        // global namespace is stored with 'global' keyword, so we remove it.
+        $query = "SELECT CASE namespace WHEN 'global' THEN interfacename ELSE namespace || '\\' || interfacename END AS interfacename FROM namespaces 
 JOIN interfaces ON interfaces.namespace_id = namespaces.id";
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
@@ -101,7 +103,8 @@ JOIN interfaces ON interfaces.namespace_id = namespaces.id";
     }
 
     public function getComposerTraits($vendor = null) {
-        $query = "SELECT namespace || '\\' || traitname AS traitname FROM namespaces 
+        // global namespace is stored with 'global' keyword, so we remove it.
+        $query = "SELECT CASE namespace WHEN 'global' THEN traitname ELSE namespace || '\\' || traitname END AS traitname FROM namespaces 
 JOIN traits ON traits.namespace_id = namespaces.id";
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
