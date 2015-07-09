@@ -2,7 +2,7 @@
 
 $expected     = array(
                 'new $k(1)',
-                'new $k[\'j\']1',
+                'new $k[\'j\'](1)',
                 'new $j',
                 'new $j[\'k\']',
                 '$l::m',
