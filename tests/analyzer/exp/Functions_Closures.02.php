@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('function  ( ) { /**/ } ', 
+$expected     = array('function ( ) { /**/ } ', 
                       'function ( ) use ($x) { /**/ } ');
 
 $expected_not = array();
