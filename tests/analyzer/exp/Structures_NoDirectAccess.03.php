@@ -2,7 +2,7 @@
 
 $expected     = array('if (defined(\'A\'))  /**/ ', 
                       'if (defined(\'B\'))  /**/ ', 
-                      'if (defined(\'C\')) { /**/ } ',
+                      'if (defined(\'C\')) { ; }',
                       );
 
 $expected_not = array();

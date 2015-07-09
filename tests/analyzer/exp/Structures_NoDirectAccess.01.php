@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array( 'if (!defined("G")) { /**/ } ', 
-                       'if (!defined("H")) { /**/ } ', 
-                       'if (!defined(\'D\')) { /**/ } ', 
+$expected     = array( 'if (!defined(\'D\')) { ; }', 
+                       'if (!defined("H")) { ; }', 
+                       'if (!defined("G")) { ; }', 
+                       'if (!defined(\'E\')) { ; }',
                        'if (!defined(\'A\'))  /**/ ', 
                        'if (!defined(\'C\'))  /**/ ', 
                        'if (!defined(\'I\'))  /**/ ', 
-                       'if (!defined(\'E\')) { /**/ } ',
                        'defined(\'B\') or die("b")', 
                        'defined(\'F\') or die(\'f\')',
                        'defined(\'J\') or die(\'i\')'
