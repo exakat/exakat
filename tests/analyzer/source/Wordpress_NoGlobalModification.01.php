@@ -1,6 +1,6 @@
 <?php
 
-function x() {
+fu nction x() {
     global $post;
     global $authordata;
     global $noWPglobal, $noWPglobal2;
