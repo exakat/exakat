@@ -68,7 +68,15 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
                     $missing[] = $e;
                 }
             }
-            $this->assertEquals(count($missing), 0, count($missing)." expected values were not found : '".join("', '", $missing)."' in the received values of '".join("', '", $list)."'");
+            $list = array_map(function ($x) { return str_replace("'", "\\'", $x); }, $list);
+            $this->assertEquals(count($missing), 0, count($missing)." expected values were not found :\n '".join("',\n '", $missing)."'\n\nin the ".count($list)." received values of \n '".join("', \n '", $list)."'
+
+source/$file.php
+exp/$file.php
+phpunit --filter=$number Tests/$analyzer.php
+
+");
+            // also add a phpunit --filter to rerun it easily
         }
         
         if (isset($expected_not) && is_array($expected)) {
