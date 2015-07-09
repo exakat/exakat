@@ -3,6 +3,6 @@
 $expected     = array('private static $h = array( )', 
                       'private static $a = -0');
 
-$expected_not = array();
+$expected_not = array('public static $i = array( )');
 
 ?>

@@ -44,6 +44,7 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // static property in an variable static::$c
         $this->atomIs('Ppp')
              ->isNot('propertyname', null)
              ->hasOut('STATIC')
@@ -60,6 +61,7 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // static property in an array
         $this->atomIs('Ppp')
              ->isNot('propertyname', null)
              ->hasOut('STATIC')
@@ -72,12 +74,10 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('PROPERTY')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
+             ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'property')
              ->back('first');
         $this->prepareQuery();
-        // static property
     }
 }
 
