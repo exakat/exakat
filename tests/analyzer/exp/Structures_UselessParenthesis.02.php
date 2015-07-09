@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('( $f += $f)');
 
 $expected_not = array();
 
