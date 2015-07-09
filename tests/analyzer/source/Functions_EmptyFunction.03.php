@@ -1,6 +1,6 @@
 <?php
 
-class b extends Crada\Apidoc\Builder {
+class b extends guzzlehttp\pool {
     public function methodHeritedFromComposer(){} 
 }
 
