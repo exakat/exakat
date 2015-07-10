@@ -1,9 +1,8 @@
 <?php
 
-$expected     = array('floatval(\'$y\')',
-                      'intval($value)',
+$expected     = array('intval($value)',
                       'settype($var, \'float\')');
 
-$expected_not = array();
+$expected_not = array('floatval(\'$y\')');
 
 ?>

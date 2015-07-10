@@ -9,7 +9,9 @@ class ShouldTypecast extends Analyzer\Analyzer {
         $typeCasting = array('\\intval', '\\floatval', '\\strval', '\\boolval', '\\settype');
         
         $this->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath($typeCasting)
              ->back('first');
         $this->prepareQuery();
     }
