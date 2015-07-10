@@ -35,6 +35,11 @@ class CleanDb implements Tasks {
     
     public function run(\Config $config) {
         $this->config = $config;
+        if ($config->quick) {
+            $this->restartNeo4j();
+            return false;
+        }
+
         $client = $this->getClient();
         
         $queryTemplate = <<<CYPHER
@@ -50,37 +55,8 @@ CYPHER;
         $begin = microtime(true);
         if ($nodes == 0) {
             display('No nodes in neo4j. No need to clean');
-        } elseif ($config->quick || $nodes > 10000) {
-            display('Cleaning with restart');
-            shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid); rm -rf data; mkdir data');
-            
-            // checking that the server has indeed restarted
-            $round = 0;
-            do {
-                $round++;
-                if ($round > 0) {
-                    sleep($round);
-                }
-                shell_exec('cd '.$config->projects_root.'/neo4j/;sh ./bin/neo4j start-no-wait 2>&1');
-
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
-                curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                $res = curl_exec($ch);
-                curl_close($ch);
-            } while ( $res === false);
-            
-            display('Database cleaned with restart');
-
-            try {
-                $client = new Client();
-                $client->getServerInfo();
-                display('Restarted Neo4j cleanly');
-            } catch (\Exception $e) {
-                display('Didn\'t restart neo4j cleanly');
-            }
+        } elseif ($nodes > 10000) {
+            $this->restartNeo4j();
         } else {
             display('Cleaning with cypher');
         
@@ -117,6 +93,44 @@ DELETE n,r';
         }
 
         return $client;
+    }
+    
+    private function restartNeo4j() {
+        display('Cleaning with restart');
+        $config = $this->config;
+        if (file_exists($config->projects_root.'/neo4j/neo4j-service.pid')) {
+            shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid); rm -rf data; mkdir data');
+        } else {
+            shell_exec('cd '.$config->projects_root.'/neo4j/; rm -rf data; mkdir data');
+        }
+        
+        // checking that the server has indeed restarted
+        $round = 0;
+        do {
+            $round++;
+            if ($round > 0) {
+                sleep($round);
+            }
+            shell_exec('cd '.$config->projects_root.'/neo4j/; ./bin/neo4j start-no-wait 2>&1');
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
+            curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+            curl_close($ch);
+        } while ( $res === false);
+        
+        display('Database cleaned with restart');
+
+        try {
+            $client = new Client();
+            $client->getServerInfo();
+            display('Restarted Neo4j cleanly');
+        } catch (\Exception $e) {
+            display('Didn\'t restart neo4j cleanly');
+        }
     }
 }
 
