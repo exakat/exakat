@@ -121,6 +121,11 @@ toDelete.each{ g.removeVertex(it); }
         do {
             $res = gremlin_query($query);
             
+            if (!isset($res->done)) {
+                print $query;
+                var_dump($res);
+                die();
+            }
             $this->total += (int) $res->total;
             $this->done += (int) $res->done;
             $this->cycles++;
@@ -2238,9 +2243,21 @@ a4.bothE('NEXT').each{ g.removeEdge(it); }
 
 g.addEdge(a3, oc, 'NEXT');
 g.addEdge(oc, sequence, 'NEXT');
+if (a5.token == 'T_SEMICOLON') {
+    a6 = a5.out('NEXT').next();
+    
+    a5.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(a5);
+    
+    g.addEdge(sequence, cc, 'NEXT');
+    g.addEdge(cc, a6, 'NEXT');
+} else {
+    g.addEdge(a3, oc, 'NEXT');
+    g.addEdge(oc, sequence, 'NEXT');
 
-g.addEdge(sequence, cc, 'NEXT');
-g.addEdge(cc, a5, 'NEXT');
+    g.addEdge(sequence, cc, 'NEXT');
+    g.addEdge(cc, a5, 'NEXT');
+}
 
 
 ";

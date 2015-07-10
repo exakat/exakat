@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _While extends Tokenizer {
-    /* 29 methods */
+    /* 31 methods */
 
     public function test_While01()  { $this->generic_test('_While.01'); }
     public function test_While02()  { $this->generic_test('_While.02'); }
@@ -38,5 +38,7 @@ class _While extends Tokenizer {
     public function test_While27()  { $this->generic_test('_While.27'); }
     public function test_While28()  { $this->generic_test('_While.28'); }
     public function test_While29()  { $this->generic_test('_While.29'); }
+    public function test_While30()  { $this->generic_test('_While.30'); }
+    public function test_While31()  { $this->generic_test('_While.31'); }
 }
 ?>
