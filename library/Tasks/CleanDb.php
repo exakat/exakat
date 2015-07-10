@@ -98,7 +98,7 @@ DELETE n,r';
     private function restartNeo4j() {
         display('Cleaning with restart');
         $config = $this->config;
-        if (file_exists($config->projects_root.'/neo4j/neo4j-service.pid')) {
+        if (file_exists($config->projects_root.'/neo4j/data/neo4j-service.pid')) {
             shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid); rm -rf data; mkdir data');
         } else {
             shell_exec('cd '.$config->projects_root.'/neo4j/; rm -rf data; mkdir data');
@@ -111,13 +111,18 @@ DELETE n,r';
             if ($round > 0) {
                 sleep($round);
             }
-            shell_exec('cd '.$config->projects_root.'/neo4j/; ./bin/neo4j start-no-wait 2>&1');
+            $shellRes = shell_exec('cd '.$config->projects_root.'/neo4j/; ./bin/neo4j start-no-wait 2>&1');
+            
+            // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
+            // Needs to pick up this error and act
+            // also, may be we can wait for the pid to appear?
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
             curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
             $res = curl_exec($ch);
             curl_close($ch);
         } while ( $res === false);
