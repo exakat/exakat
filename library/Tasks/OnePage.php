@@ -70,6 +70,8 @@ class OnePage implements Tasks {
         }
         
         // cleaning datastore
+        $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
+
         $datastore = new \Datastore($config);
         
         $datastore->cleanTable('hash');
@@ -81,14 +83,6 @@ class OnePage implements Tasks {
 
         $thread = new \Thread();
         display("Running project '$project'\n");
-
-        display("Running files\n");
-        shell_exec('php '.$this->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
-        $this->logTime('Files');
-        display("Loading project\n");
-
-        $thread->waitForAll();
-        display("waited For All\n");
 
         shell_exec('php '.$this->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
@@ -119,6 +113,8 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         $this->logTime('Analyze');
 
         shell_exec('php '.$this->executable.' onepagereport -p onepage');
+        $this->logTime('Report');
+
 
         display("Project reported\n");
 
@@ -131,11 +127,6 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         $end = microtime(true);
         display("Total time : ".number_format(($end - $begin), 2)."s\n");
         
-        $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
-
-        display("Cleaning DB\n");
-// cleaning should be done after, not initialy
-//        shell_exec('php '.$this->executable.' cleandb -v');
         $this->logTime('Files');
     }
 
