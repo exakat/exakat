@@ -50,7 +50,7 @@ $variables = "a";
 $stringsNames = array();
 $strings = "A";
 
-$checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD');
+$checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD', 'T_COALESCE');
 foreach($checks as $check) {
     if (!defined($check)) { 
         define($check, 1); 
@@ -220,6 +220,7 @@ foreach($tokens as $t) {
             case T_XOR_EQUAL :
             case T_OR_EQUAL : 
             case T_IS_NOT_EQUAL : 
+            case T_COALESCE : 
             
             case T_OPEN_TAG_WITH_ECHO : 
             case T_CALLABLE : 
