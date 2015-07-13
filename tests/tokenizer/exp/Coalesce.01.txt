@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $d
     Label : RIGHT
       ??
-      Label : RIGHT
-        $h
       Label : LEFT
         ::
         Label : CLASS
@@ -18,33 +18,33 @@ Label : CODE
             void
             Label : ARGUMENT
               $g
-    Label : LEFT
-      $d
+      Label : RIGHT
+        $h
   Label : ELEMENT
     =
+    Label : LEFT
+      $i
     Label : RIGHT
       ??
-      Label : RIGHT
-        l
       Label : LEFT
         j
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'l'
-    Label : LEFT
-      $i
+      Label : RIGHT
+        l
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ??
-      Label : RIGHT
-        'c'
       Label : LEFT
         [
         Label : VARIABLE
           $_GET
         Label : INDEX
           'b'
-    Label : LEFT
-      $a
+      Label : RIGHT
+        'c'

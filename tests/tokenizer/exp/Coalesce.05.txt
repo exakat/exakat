@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  =
+  Label : LEFT
+    $a
+  Label : RIGHT
+    ??
+    Label : LEFT
+      [
+      Label : VARIABLE
+        [
+        Label : VARIABLE
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            B
+        Label : INDEX
+          $c
+      Label : INDEX
+        C
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+    Label : RIGHT
+      Concatenation
+      Label : CONCAT
+        $a
+      Label : CONCAT
+        $d
