@@ -32,7 +32,8 @@ class TokenAuto extends Token {
     public    $done       = null ;
     public    $cycles     = null ;
     
-    const CYCLE = 700;
+    const CYCLE_COUNT = 80;
+    const CYCLE_SIZE = 500;
 
     public function _check() {
         return false;
@@ -41,9 +42,9 @@ class TokenAuto extends Token {
     public function prepareQuery() {
         $query = ' total = 0; done = 0; toDelete = []; ';
         $class = str_replace('Tokenizer\\', '', get_class($this));
-//        $moderator = '[0..'.self::CYCLE.']';
+//        $moderator = '[0..'.self::CYCLE_SIZE.']';
         $moderator = '';
-        $moderatorFinal = '[0..'.self::CYCLE.']';
+        $moderatorFinal = '[0..'.self::CYCLE_SIZE.']';
 //        $moderatorFinal = '';
 
         if (in_array($class, array('FunctioncallArray'))) {
@@ -119,7 +120,9 @@ toDelete.each{ g.removeVertex(it); }
 
         $query = $this->prepareQuery();
         do {
+            $begin = microtime(true);
             $res = gremlin_query($query);
+            $end = microtime(true);
             
             if (!isset($res->done)) {
                 print $query;
@@ -129,8 +132,8 @@ toDelete.each{ g.removeVertex(it); }
             $this->total += (int) $res->total;
             $this->done += (int) $res->done;
             $this->cycles++;
-//            print("Cycle {$this->cycles} {$res['done'][0]}\n");
-        } while ($res->done > self::CYCLE && $this->cycles < 100);
+            print("Cycle ".get_class($this)." {$this->cycles} {$res->done} ".number_format(($end - $begin) * 1000, 0)."\n");
+        } while ($res->done > self::CYCLE_SIZE && $this->cycles < self::CYCLE_COUNT);
         
         return $res;
     }
