@@ -1,0 +1,80 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        ltrim
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $r
+      Label : ARGUMENT
+        $f
+      Label : ARGUMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $z
+      Label : ARGUMENT
+        $y
+      Label : ARGUMENT
+        $x
+    Label : NAME
+      f
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $z
+          Label : ARGUMENT
+            $y
+          Label : ARGUMENT
+            $x
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $c
+      Label : ARGUMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+      Label : ARGUMENT
+        void
+        Label : ARGUMENT
+          $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'r'
+    Label : LEFT
+      $r
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'e'
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'f'
+    Label : LEFT
+      $f

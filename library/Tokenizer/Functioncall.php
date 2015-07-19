@@ -91,6 +91,24 @@ class Functioncall extends TokenAuto {
                                    0 => array('token'      => array('T_ECHO', 'T_PRINT', 'T_EXIT'),
                                               'atom'       => 'none'),
                                    1 => array('atom'       => 'Arguments'),
+                                   2 => array('filterOut2' => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA'),
+                                                                           Addition::$operators, Multiplication::$operators,
+                                                                           Bitshift::$operators, Logical::$booleans,
+                                                                           Ternary::$operators)),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'ARGUMENTS'),
+                               'atom'         => 'Functioncall',
+                               'addSemicolon' => 'it',
+                               'property'     => array('parenthesis' => false),
+                               );
+        $this->checkAuto();
+
+        // functioncall(with arguments but without parenthesis)
+        $this->conditions = array(-1 => array('filterOut'  => _Ppp::$operators),
+                                   0 => array('token'      => 'T_PRINT',
+                                              'atom'       => 'none'),
+                                   1 => array('atom'       => 'Arguments'),
                                    2 => array('filterOut2' => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
                                                                            Addition::$operators, Multiplication::$operators,
                                                                            Bitshift::$operators, Logical::$booleans,
