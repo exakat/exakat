@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  array
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      void
+    Label : ARGUMENT
+      =>
+      Label : KEY
+        'B'
+      Label : VALUE
+        Concatenation
+        Label : CONCAT
+          -0
+        Label : CONCAT
+          (
+          Label : CODE
+            ?
+            Label : CONDITION
+              ===
+              Label : RIGHT
+                'C'
+              Label : LEFT
+                $a
+            Label : THEN
+              'D'
+            Label : ELSE
+              'E'
