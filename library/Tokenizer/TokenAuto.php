@@ -131,8 +131,8 @@ toDelete.each{ g.removeVertex(it); }
             }
             $this->total += (int) $res->total;
             $this->done += (int) $res->done;
-            $this->cycles++;
-            print("Cycle ".get_class($this)." {$this->cycles} {$res->done} ".number_format(($end - $begin) * 1000, 0)."\n");
+            ++$this->cycles;
+            display("Cycle ".get_class($this)." {$this->cycles} {$res->done} ".number_format(($end - $begin) * 1000, 0)."\t".($res->done > self::CYCLE_SIZE && $this->cycles < self::CYCLE_COUNT)."\n");
         } while ($res->done > self::CYCLE_SIZE && $this->cycles < self::CYCLE_COUNT);
         
         return $res;
@@ -1766,15 +1766,6 @@ g.addEdge(x, a, 'ELEMENT');
 a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
-// remove the next, if this is a ;
-x.out('NEXT').out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    semicolon = it;
-    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
-
 /* Clean index */
 x.out('ELEMENT').each{
     it.inE('INDEXED').each{
@@ -2369,7 +2360,8 @@ GREMLIN;
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
 rank = 0;
-it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}{!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
+it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}
+                      {!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
     if (it.token in ['T_CURLY_OPEN', 'T_CLOSE_CURLY']) {
         it.inE('NEXT').each{ g.removeEdge(it);}
         toDelete.push(it);
@@ -2377,7 +2369,7 @@ it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', '
         g.addEdge(x, it, 'CONCAT');
         it.setProperty('rank', rank);
         rank++;
-        it.inE('NEXT').each{ g.removeEdge(it);}
+        it.inE('NEXT').each{ g.removeEdge(it); }
         f = it;
     }
 }
@@ -2406,6 +2398,32 @@ x.out('CONCAT').each{
 
 ";
             unset($actions['makeQuotedString']);
+        }
+
+        if (isset($actions['emptyHeredoc'])) {
+            $heredoc = new Heredoc(Token::$client);
+            $fullcode = $heredoc->fullcode();
+
+            $qactions[] = "
+/* emptyHeredoc */
+
+concat = g.addVertex(null, [code:'', fullcode:'', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
+content = g.addVertex(null, [code:'', fullcode:'', atom:'String', token:'T_ENCAPSED_AND_WHITESPACE', virtual:true, line:it.line, rank:0]);
+
+g.addEdge(it, concat, 'CONTAINS');
+g.addEdge(concat, content, 'CONCAT');
+
+g.addEdge(it, a1.out('NEXT').next(), 'NEXT');
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+g.removeVertex(a1);
+
+/* indexing */  g.idx('atoms').put('atom', 'Heredoc', it);
+
+fullcode = concat;
+$fullcode;
+
+";
+            unset($actions['emptyHeredoc']);
         }
         
         if (isset($actions['addToIndex'])) {

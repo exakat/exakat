@@ -30,8 +30,19 @@ class Heredoc extends TokenAuto {
     public function _check() {
         $this->conditions = array(0 => array('token'            => Heredoc::$operators,
                                              'atom'             => 'none'),
+                                  1 => array('token'            => 'T_END_HEREDOC',
+                                             'atom'             => 'none')
+                                 );
+
+        $this->actions = array('emptyHeredoc' => true,
+                               'atom'         => 'Heredoc');
+        $this->checkAuto();
+
+        $this->conditions = array(0 => array('token'            => Heredoc::$operators,
+                                             'atom'             => 'none'),
                                   1 => array('atom'             => String::$allowedClasses,
-                                             'check_for_string' => String::$allowedClasses),
+                                             'check_for_string' => String::$allowedClasses
+                                             ),
                                  );
 
         $this->actions = array( 'makeQuotedString' => 'Heredoc');
@@ -47,7 +58,9 @@ s = [];
 fullcode.out("CONCAT").sort{it.rank}._().each{ s.add(it.fullcode); };
 fullcode.setProperty('noDelimiter', s.join(""));
 
-if (fullcode.in('CONTAINS').next().code.substring(3, 4) in ["'"]) {
+heredoc = fullcode.in('CONTAINS').next();
+heredoc.fullcode = heredoc.code;
+if (heredoc.code.substring(3, 4) in ["'"]) {
     // must get rid of ' in the nowdoc indicator
     fullcode.setProperty('fullcode', it.code + s.join("") + it.code.substring(4, it.code.size() - 2));
     fullcode.setProperty('nowdoc', true);
