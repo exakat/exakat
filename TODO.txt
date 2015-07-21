@@ -1362,3 +1362,13 @@ See how We can store those queries with Aurelius
 Prepare Aurelius plug-in support.
 
 Update Config to handle the case for onepage (project should be onepage by default, not mentioned).
+
+Variable should always handle the same kind of value : within a scope, or across the applciation ($i will always be int, etc.)
+
+List of functions emitting errors or exception in PHP : how to build that ? 
+
+Comment the code with all values that are known at static compile time. 
+
+if (cdt) {}  if (cdt) {} // twice the same cdt in a row
+
+Tester stripe, idio (Cf sourceinno).
