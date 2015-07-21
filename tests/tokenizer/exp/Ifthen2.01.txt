@@ -1,0 +1,186 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'D'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          AC
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : THEN
+          ;
+          Label : ELEMENT
+            AD
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                AC
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          AB
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $d
+        Label : LEFT
+          $e
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          Concatenation
+          Label : CONCAT
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                Z
+              Label : CONCAT
+                $cAA
+          Label : CONCAT
+            H
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  Y
+          Label : CONCAT
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                U
+              Label : CONCAT
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  VW
+        Label : LEFT
+          $d
+      Label : ELEMENT
+        
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          E
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                'D'
+        Label : THEN
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'J'
+              Label : CONCAT
+                H
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $b
+                    Label : INDEX
+                      'D'
+              Label : CONCAT
+                'G'
+            Label : LEFT
+              $c
+        Label : ELSE
+          Block with else
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'T'
+              Label : CONCAT
+                H
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $b
+                    Label : INDEX
+                      'S'
+              Label : CONCAT
+                'Q'
+              Label : CONCAT
+                H
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $b
+                    Label : INDEX
+                      'P'
+              Label : CONCAT
+                'N'
+              Label : CONCAT
+                H
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $b
+                    Label : INDEX
+                      'D'
+              Label : CONCAT
+                'K'
+            Label : LEFT
+              $c
+  Label : ELEMENT
+    .=
+    Label : RIGHT
+      'C'
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<B
+
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          
+
+    Label : LEFT
+      $a
