@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Sign extends Tokenizer {
-    /* 52 methods */
+    /* 53 methods */
     public function testSign01()  { $this->generic_test('Sign.01'); }
     public function testSign02()  { $this->generic_test('Sign.02'); }
     public function testSign03()  { $this->generic_test('Sign.03'); }
@@ -60,5 +60,6 @@ class Sign extends Tokenizer {
     public function testSign50()  { $this->generic_test('Sign.50'); }
     public function testSign51()  { $this->generic_test('Sign.51'); }
     public function testSign52()  { $this->generic_test('Sign.52'); }
+    public function testSign53()  { $this->generic_test('Sign.53'); }
 }
 ?>
