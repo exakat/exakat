@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      "
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          $a
+        Label : CONCAT
+           b 
+        Label : CONCAT
+          $c
