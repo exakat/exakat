@@ -272,7 +272,7 @@ class Appinfo extends \Report\Content {
                             'ext/wincache'   => 'Extensions/Extwincache',
                             'ext/xcache'     => 'Extensions/Extxcache',
                             'ext/xdebug'     => 'Extensions/Extxdebug',
-                            'ext/xdiff'      => 'Extensions/Extdiff',
+                            'ext/xdiff'      => 'Extensions/Extxdiff',
                             'ext/xhprof'     => 'Extensions/Extxhprof',
                             'ext/xml'        => 'Extensions/Extxml',
                             'ext/xmlreader'  => 'Extensions/Extxmlreader',
