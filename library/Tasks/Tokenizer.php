@@ -27,6 +27,8 @@ use Everyman\Neo4j\Client,
     Everyman\Neo4j\Gremlin\Query;
 
 class Tokenizer implements Tasks {
+    const EXTRA_ROUNDS = 2;
+
     public function run(\Config $config) {
         $begin = microtime(true);
 
@@ -85,9 +87,8 @@ class Tokenizer implements Tasks {
                        'project'      => $project);
         $log->log('Finished counting Token');
 
-        $extra_rounds = 4;
         $prev = array();
-        for($i = 0; $i < $extra_rounds + 1; $i++) {
+        for($i = 0; $i < self::EXTRA_ROUNDS + 1; $i++) {
             $prev[$i] = $count + $i;
         }
         $round = 0;
@@ -99,7 +100,7 @@ class Tokenizer implements Tasks {
         $end = microtime(true);
         $log->log('initialisation : '.(($end - $begin) * 1000));
 
-        while($this->check_prev($prev, $extra_rounds)) {
+        while($this->check_prev($prev, self::EXTRA_ROUNDS)) {
             $rbegin = microtime(true);
             $round++;
             $log->log("round $round)");
