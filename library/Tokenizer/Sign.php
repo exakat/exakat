@@ -32,12 +32,12 @@ class Sign extends TokenAuto {
 
     public function _check() {
         //  + -1  (special case for Integers)
-        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                                 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
-                                                                                 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 
-                                                                                 'T_CLOSE_BRACKET', 'T_SHELL_QUOTE',
-                                                                                 'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE',
-                                                                                 'T_DOLLAR', 'T_CLOSE_CURLY', 'T_FUNCTION'),
+        $this->conditions = array( -1 => array('notToken' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                               'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
+                                                                               'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 
+                                                                               'T_CLOSE_BRACKET', 'T_SHELL_QUOTE','T_DOT',
+                                                                               'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE',
+                                                                               'T_DOLLAR', 'T_CLOSE_CURLY', 'T_FUNCTION'),
                                                                           Magicconstant::$operators, Preplusplus::$operators),
                                                'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast', 'Integer' )),
                                     0 => array('token'      => Sign::$operators,
@@ -60,12 +60,13 @@ class Sign extends TokenAuto {
         
         //  + -$s (Normal case)
         //'T_OPEN_CURLY',
-        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_ARRAY', 'T_OBJECT_OPERATOR', 
-                                                                                 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
-                                                                                 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 
-                                                                                 'T_CLOSE_BRACKET','T_DOLLAR', 'T_CLOSE_CURLY',
-                                                                                 'T_FUNCTION', 'T_INC', 'T_DEC', 'T_DOUBLE_COLON',
-                                                                                 'T_QUOTE', 'T_QUOTE_CLOSE'),
+        $this->conditions = array( -1 => array('notToken' => array_merge(array('T_STRING', 'T_ARRAY', 'T_DOT',
+                                                                               'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
+                                                                               'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 
+                                                                               'T_CLOSE_BRACKET','T_DOLLAR', 'T_CLOSE_CURLY',
+                                                                               'T_FUNCTION', 'T_INC', 'T_DEC',
+                                                                               'T_QUOTE', 'T_QUOTE_CLOSE',
+                                                                               'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR'),
                                                                           Magicconstant::$operators, Bitshift::$operators),
                                                'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
                                                                      'Multiplication', 'Cast', 'Integer', 'Float', 'Function')),
