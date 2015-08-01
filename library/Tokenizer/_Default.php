@@ -114,7 +114,7 @@ class _Default extends TokenAuto {
                                               'atom'  => 'none', ),
                                    2 => array('atom'  => 'yes'),
                                    3 => array('atom'  => 'yes'),
-                                   4 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
+                                   4 => array('notToken' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
                                                                         Assignation::$operators,    Property::$operators,
                                                                         _Array::$operators,         Bitshift::$operators,
                                                                         Comparison::$operators,     Logical::$operators,

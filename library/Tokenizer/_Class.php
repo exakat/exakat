@@ -40,10 +40,10 @@ class _Class extends TokenAuto {
         $this->checkAuto();
 
     // class x extends y {} get the extends
-        $this->conditions = array( 0 => array('token' => _Class::$operators),
-                                   1 => array('token' => 'T_EXTENDS'),
-                                   2 => array('atom'  => array('Identifier', 'Nsname')),
-                                   3 => array('filterOut2' => 'T_NS_SEPARATOR'),
+        $this->conditions = array( 0 => array('token'    => _Class::$operators),
+                                   1 => array('token'    => 'T_EXTENDS'),
+                                   2 => array('atom'     => array('Identifier', 'Nsname')),
+                                   3 => array('notToken' => 'T_NS_SEPARATOR'),
                                  );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',

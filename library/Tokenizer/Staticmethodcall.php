@@ -31,15 +31,15 @@ class Staticmethodcall extends TokenAuto {
         $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Nsname', 'Static');
 
         // unusual call : Class::{Method}(); Only build the Functioncall
-        $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
-                                   -1 => array('atom'       => $operands),
-                                    0 => array('token'      => Staticmethodcall::$operators),
-                                    1 => array('token'      => 'T_OPEN_CURLY'),
-                                    2 => array('atom'       => 'yes'),
-                                    3 => array('token'      => 'T_CLOSE_CURLY'),
-                                    4 => array('token'      => 'T_OPEN_PARENTHESIS'),
-                                    5 => array('atom'       => array('Arguments', 'Void')),
-                                    6 => array('token'      => 'T_CLOSE_PARENTHESIS'),
+        $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
+                                   -1 => array('atom'     => $operands),
+                                    0 => array('token'    => Staticmethodcall::$operators),
+                                    1 => array('token'    => 'T_OPEN_CURLY'),
+                                    2 => array('atom'     => 'yes'),
+                                    3 => array('token'    => 'T_CLOSE_CURLY'),
+                                    4 => array('token'    => 'T_OPEN_PARENTHESIS'),
+                                    5 => array('atom'     => array('Arguments', 'Void')),
+                                    6 => array('token'    => 'T_CLOSE_PARENTHESIS'),
                                  );
 
         $this->actions = array('toSpecialmethodcall' => true,
@@ -49,10 +49,10 @@ class Staticmethodcall extends TokenAuto {
         $this->checkAuto();
 
         // normal call : Class::Method();
-        $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
-                                   -1 => array('atom'       => $operands),
-                                    0 => array('token'      => Staticmethodcall::$operators),
-                                    1 => array('atom'       => array('Functioncall', 'Methodcall')),
+        $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
+                                   -1 => array('atom'     => $operands),
+                                    0 => array('token'    => Staticmethodcall::$operators),
+                                    1 => array('atom'     => array('Functioncall', 'Methodcall')),
                                  );
         
         $this->actions = array('transform'    => array( -1 => 'CLASS',

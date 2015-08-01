@@ -35,12 +35,12 @@ class ArrayNS extends TokenAuto {
                          'T_CLOSE_PARENTHESIS' );
 
         // [ arguments ] : prepare arguments
-        $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
-                                   0 => array('token'      => ArrayNS::$operators),
-                                   1 => array('atom'       => 'yes',
-                                              'notAtom'    => 'Arguments'),
-                                   2 => array('token'      => 'T_CLOSE_BRACKET'),
+        $this->conditions = array(-1 => array('notToken' => $yields,
+                                              'notAtom'  => array('Parenthesis', 'Array', 'Arrayappend')),
+                                   0 => array('token'    => ArrayNS::$operators),
+                                   1 => array('atom'     => 'yes',
+                                              'notAtom'  => 'Arguments'),
+                                   2 => array('token'    => 'T_CLOSE_BRACKET'),
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENTS')),
@@ -48,10 +48,10 @@ class ArrayNS extends TokenAuto {
         $this->checkAuto();
 
         // [ ] empty array
-        $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
-                                   0 => array('token'      => ArrayNS::$operators),
-                                   1 => array('token'      => 'T_CLOSE_BRACKET'),
+        $this->conditions = array(-1 => array('notToken' => $yields,
+                                              'notAtom'  => array('Parenthesis', 'Array', 'Arrayappend')),
+                                   0 => array('token'    => ArrayNS::$operators),
+                                   1 => array('token'    => 'T_CLOSE_BRACKET'),
         );
         
         $this->actions = array('addEdge'     => array(0 => array('Void' => 'ARGUMENTS')),
@@ -60,9 +60,9 @@ class ArrayNS extends TokenAuto {
         $this->checkAuto();
 
         // [ ] non-empty array
-        $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
-                                   0 => array('token'      => ArrayNS::$operators),
+        $this->conditions = array(-1 => array('notToken' => $yields,
+                                              'notAtom'  => array('Parenthesis', 'Array', 'Arrayappend')),
+                                   0 => array('token'    => ArrayNS::$operators),
                                    1 => array('atom'       => 'Arguments'),
                                    2 => array('token'      => 'T_CLOSE_BRACKET'),
         );

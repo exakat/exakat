@@ -2793,16 +2793,6 @@ GREMLIN;
             unset($conditions['filterOut']);
         }
 
-        if (isset($conditions['filterOut2'])) {
-            if (is_string($conditions['filterOut2'])) {
-                $queryConditions[] = "filter{it.token != '".$conditions['filterOut2']."' }";
-            } else {
-                $queryConditions[] = "filter{!(it.token in ['".implode("', '", $conditions['filterOut2'])."'])}";
-            }
-
-            unset($conditions['filterOut2']);
-        }
-
         if ($remainder = array_keys($conditions)) {
             print 'Warning : the following '.count($remainder).' conditions were ignored : '.implode(', ', $remainder).' ('.get_class($this).")\n";
             print_r($conditions);

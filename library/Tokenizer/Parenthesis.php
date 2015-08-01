@@ -31,19 +31,19 @@ class Parenthesis extends TokenAuto {
         $operands    = "yes";
 
         // ( normal parenthesis )
-        $this->conditions = array(-1 => array('filterOut2' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
-                                                                    array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
-                                                                    'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
-                                                                    'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
-                                                                    'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
-                                                                    'T_DOLLAR')),
-                                              'notAtom'     => array('Array', 'Property')),
-                                   0 => array('token'       => Parenthesis::$operators,
-                                              'atom'        => 'none',
-                                              'property'    => array('association' => 'none')),
-                                   1 => array('atom'        => $operands),
-                                   2 => array('token'       => 'T_CLOSE_PARENTHESIS',
-                                              'atom'        => 'none'),
+        $this->conditions = array(-1 => array('notToken' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
+                                                                 array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
+                                                                 'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
+                                                                 'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
+                                                                 'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
+                                                                 'T_DOLLAR')),
+                                              'notAtom'  => array('Array', 'Property')),
+                                   0 => array('token'    => Parenthesis::$operators,
+                                              'atom'     => 'none',
+                                              'property' => array('association' => 'none')),
+                                   1 => array('atom'     => $operands),
+                                   2 => array('token'    => 'T_CLOSE_PARENTHESIS',
+                                              'atom'     => 'none'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'CODE',

@@ -53,25 +53,25 @@ class Assignation extends TokenAuto {
                           'Clone', 'Shell', 'Include', 'Instanceof', 'Function', 'ArrayNS', 'Identifier',
                           'Arrayappend', 'Power', 'Spaceship', 'Coalesce'
                          );
-        $filterOut2 = array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators,
-                                  Comparison::$operators, Logical::$booleans, Multiplication::$operators,
-                                  Postplusplus::$operators, Power::$operators, _Instanceof::$operators,
-                                  Coalesce::$operators, 
-                                  array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                        'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
-                                        'T_QUESTION', 'T_NS_SEPARATOR' ));
+        $forbiddenTokens = array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators,
+                                       Comparison::$operators, Logical::$booleans, Multiplication::$operators,
+                                       Postplusplus::$operators, Power::$operators, _Instanceof::$operators,
+                                       Coalesce::$operators, 
+                                       array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                             'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
+                                             'T_QUESTION', 'T_NS_SEPARATOR' ));
 
         // check for preplusplus in the yield filterout.
         // 'T_AND' used to be here, but should be processed by reference first
-        $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR',
-                                                                                'T_AT', 'T_AND'),
-                                                                           Preplusplus::$operators )),
-                                  -1 => array('atom'       => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
-                                                                    'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
-                                                                    'Static', 'Cast', 'Sign', 'Power', 'Null', 'Boolean' )),
-                                   0 => array('token'      => Assignation::$operators),
-                                   1 => array('atom'       => $operands),
-                                   2 => array('filterOut2' => $filterOut2),
+        $this->conditions = array(-2 => array('notToken' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR',
+                                                                              'T_AT', 'T_AND'),
+                                                                         Preplusplus::$operators )),
+                                  -1 => array('atom'     => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
+                                                                  'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
+                                                                  'Static', 'Cast', 'Sign', 'Power', 'Null', 'Boolean' )),
+                                   0 => array('token'    => Assignation::$operators),
+                                   1 => array('atom'     => $operands),
+                                   2 => array('notToken' => $forbiddenTokens),
         );
         
         $this->actions = array('transform'    => array( 1 => 'RIGHT',
@@ -82,11 +82,11 @@ class Assignation extends TokenAuto {
         $this->checkAuto();
 
         //$a & $b	= B($c);
-        $this->conditions = array(-2 => array('token' => 'T_AND'),
-                                  -1 => array('atom'  => 'Variable'),
-                                   0 => array('token' => Assignation::$operators),
-                                   1 => array('atom'  => $operands),
-                                   2 => array('filterOut2' => $filterOut2),
+        $this->conditions = array(-2 => array('token'    => 'T_AND'),
+                                  -1 => array('atom'     => 'Variable'),
+                                   0 => array('token'    => Assignation::$operators),
+                                   1 => array('atom'     => $operands),
+                                   2 => array('notToken' => $forbiddenTokens),
         );
         
         $this->actions = array('transform'    => array( 1 => 'RIGHT',

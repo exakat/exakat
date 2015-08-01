@@ -28,17 +28,17 @@ class Reference extends TokenAuto {
     static public $atom = 'Reference';
 
     public function _check() {
-        $this->conditions = array(-1 => array('filterOut2' => array_merge(Logical::$operators, Staticproperty::$operators,
-                                                                array('T_VARIABLE', 'T_LNUMBER', 'T_DNUMBER', 'T_STRING',
-                                                                      'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS',
-                                                                      'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS', 'T_CONSTANT_ENCAPSED_STRING')),
-                                              'notAtom'    => array('Parenthesis', 'Array', 'Comparison', 'Bitshift', 'Not', 'Functioncall',
-                                                                    'Noscream', 'Methodcall', 'Property')),
-                                   0 => array('token'      => Reference::$operators,
-                                              'atom'       => 'none'),
-                                   1 => array('atom'       => array('Variable', 'Array', 'Property', 'Functioncall',
-                                                                    'Methodcall', 'Staticmethodcall', 'Staticproperty',
-                                                                    'New', 'Arrayappend')),
+        $this->conditions = array(-1 => array('notToken'  => array_merge(Logical::$operators, Staticproperty::$operators,
+                                                               array('T_VARIABLE', 'T_LNUMBER', 'T_DNUMBER', 'T_STRING',
+                                                                     'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS',
+                                                                     'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS', 'T_CONSTANT_ENCAPSED_STRING')),
+                                              'notAtom'   => array('Parenthesis', 'Array', 'Comparison', 'Bitshift', 'Not', 'Functioncall',
+                                                                   'Noscream', 'Methodcall', 'Property')),
+                                   0 => array('token'     => Reference::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => array('Variable', 'Array', 'Property', 'Functioncall',
+                                                                   'Methodcall', 'Staticmethodcall', 'Staticproperty',
+                                                                   'New', 'Arrayappend')),
                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY',
                                                                    'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
         );

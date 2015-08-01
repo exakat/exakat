@@ -48,9 +48,9 @@ class _Static extends TokenAuto {
         $this->checkAuto();
 
     // class x { static $x }
-        $this->conditions = array(-1 => array('filterOut2' => _Ppp::$operators),
-                                   0 => array('token' => _Static::$operators),
-                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', )), //'Function', 'Abstract', 'Final'
+        $this->conditions = array(-1 => array('notToken'  => _Ppp::$operators),
+                                   0 => array('token'     => _Static::$operators),
+                                   1 => array('atom'      => array('Variable', 'String', 'Staticconstant', )),
                                    2 => array('filterOut' => $values)
                                  );
         
@@ -72,10 +72,10 @@ class _Static extends TokenAuto {
 
 
     // class x { static $x = 2 }
-        $this->conditions = array(-1 => array('filterOut2' => _Ppp::$operators),
-                                   0 => array('token'      => _Static::$operators),
-                                   1 => array('atom'       => 'Assignation'),
-                                   2 => array('filterOut'  => $values)
+        $this->conditions = array(-1 => array('notToken'  => _Ppp::$operators),
+                                   0 => array('token'     => _Static::$operators),
+                                   1 => array('atom'      => 'Assignation'),
+                                   2 => array('filterOut' => $values)
                                  );
         
         $this->actions = array('to_ppp_assignation' => 1,
@@ -147,10 +147,10 @@ class _Static extends TokenAuto {
         $this->checkAuto();
 
     // class x { static $x, $y }
-        $this->conditions = array(-1 => array('filterOut2' => array('T_NEW', 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
-                                   0 => array('token'      => _Static::$operators),
-                                   1 => array('atom'       => 'Arguments'),
-                                   2 => array('filterOut'  => 'T_COMMA'),
+        $this->conditions = array(-1 => array('notToken'  => array('T_NEW', 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
+                                   0 => array('token'     => _Static::$operators),
+                                   1 => array('atom'      => 'Arguments'),
+                                   2 => array('filterOut' => 'T_COMMA'),
                                  );
         
         $this->actions = array('toVarNew' => 'Static',

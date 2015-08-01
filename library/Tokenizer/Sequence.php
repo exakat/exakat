@@ -41,7 +41,10 @@ class Sequence extends TokenAuto {
                           'RawString', 'Namespace', 'Boolean', 'Null', 'Use', 'ArrayNS', 'Identifier', 'Trait',
                           'As', 'Power', 'Staticclass', 'Yield', 'Shell', 'Heredoc'
                            );
+
         $operands = 'yes';
+
+        $association = array('association' => array('Ifthen', 'Switch', 'While', 'Case', 'Default', 'Declare', 'For', 'Foreach'));
         
         $yieldOperator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG', 'T_COALESCE', 
                                'T_DOUBLE_COLON', 'T_COLON', 'T_NEW', 'T_INSTANCEOF', 'T_RETURN', 'T_DOUBLE_ARROW',
@@ -62,7 +65,7 @@ class Sequence extends TokenAuto {
 
         // @note : $x; endif
         $this->conditions = array(-2 => array('token'    => 'T_COLON',
-                                              'property' => array('association' => array('Ifthen', 'Switch', 'While', 'Case', 'Default', 'Declare', 'For', 'Foreach'))),
+                                              'property' => $association),
                                   -1 => array('atom'     => $operands,
                                               'notToken' => $forbiddenTokens ),
                                    0 => array('token'    => Sequence::$operators,
@@ -75,14 +78,14 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note instructions separated by ;
-        $this->conditions = array(-2 => array('filterOut2' => $yieldOperator,
-                                              'filterOut'  => 'T_IF',
-                                              'notAtom'    => 'Parenthesis'),
-                                  -1 => array('atom'       => $operands,
-                                              'notToken'   => $forbiddenTokens),
-                                   0 => array('token'      => Sequence::$operators),
-                                   1 => array('atom'       => $operands,
-                                              'notToken'   => $forbiddenTokens)
+        $this->conditions = array(-2 => array('notToken'  => $yieldOperator,
+                                              'filterOut' => 'T_IF',
+                                              'notAtom'   => 'Parenthesis'),
+                                  -1 => array('atom'      => $operands,
+                                              'notToken'  => $forbiddenTokens),
+                                   0 => array('token'     => Sequence::$operators),
+                                   1 => array('atom'      => $operands,
+                                              'notToken'  => $forbiddenTokens)
         );
         
         $this->actions = array('toSequence'  => true,
@@ -102,7 +105,7 @@ class Sequence extends TokenAuto {
 
         // reenter a sequence in building (special case with : for alternative syntax)
         $this->conditions = array( -2 => array('token'    => 'T_COLON',
-                                               'property' => array('association' => array('Ifthen', 'Switch', 'While', 'Case', 'Default', 'Declare', 'For', 'Foreach'))),
+                                               'property' => $association),
                                    -1 => array('atom'     => $operands,
                                                'notToken' => $forbiddenTokens),
                                     0 => array('token'    => Sequence::$operators,

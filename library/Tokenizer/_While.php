@@ -45,15 +45,15 @@ class _While extends TokenAuto {
         $this->checkAuto();
 
          //  syntax   While() $x++;
-        $this->conditions = array( 0 => array('token'      => _While::$operators,
-                                              'dowhile'    => false),
-                                   1 => array('token'      => 'T_OPEN_PARENTHESIS',
-                                              'property'   => array('association' => 'While')),
-                                   2 => array('atom'       => 'yes'),
-                                   3 => array('token'      => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('atom'       => 'yes',
-                                              'notAtom'    => 'Sequence'),
-                                   5 => array('filterOut2' => Token::$instructionEnding),
+        $this->conditions = array( 0 => array('token'    => _While::$operators,
+                                              'dowhile'  => false),
+                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'While')),
+                                   2 => array('atom'     => 'yes'),
+                                   3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                   4 => array('atom'     => 'yes',
+                                              'notAtom'  => 'Sequence'),
+                                   5 => array('notToken' => Token::$instructionEnding),
         );
         
         $this->actions = array('toWhileBlock' => true,

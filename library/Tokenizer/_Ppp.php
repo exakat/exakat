@@ -30,10 +30,10 @@ class _Ppp extends TokenAuto {
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
     // class x { protected $x }
-        $this->conditions = array( -1 => array('filterOut2' =>  'T_STATIC'),
-                                    0 => array('token'      => _Ppp::$operators),
-                                    1 => array('atom'       => array('Variable', 'String', 'Staticconstant', 'Identifier')),
-                                    2 => array('filterOut'  => $values),
+        $this->conditions = array( -1 => array('notToken'  => 'T_STATIC'),
+                                    0 => array('token'     => _Ppp::$operators),
+                                    1 => array('atom'      => array('Variable', 'String', 'Staticconstant', 'Identifier')),
+                                    2 => array('filterOut' => $values),
                                  );
         $this->actions = array('to_ppp'       => 1,
                                'atom'         => 'Ppp',
@@ -50,10 +50,10 @@ class _Ppp extends TokenAuto {
         $this->checkAuto();
 
     // class x { public $x = 2 }
-        $this->conditions = array(-1 => array('filterOut2' =>  'STATIC'),
-                                   0 => array('token'      =>  _Ppp::$operators),
-                                   1 => array('atom'       => 'Assignation'),
-                                   2 => array('token'      => array('T_SEMICOLON')),
+        $this->conditions = array(-1 => array('notToken' => 'STATIC'),
+                                   0 => array('token'    =>  _Ppp::$operators),
+                                   1 => array('atom'     => 'Assignation'),
+                                   2 => array('token'    => 'T_SEMICOLON'),
                                  );
         
         $this->actions = array('to_ppp_assignation' => true,
@@ -64,10 +64,10 @@ class _Ppp extends TokenAuto {
         $this->checkAuto();
 
     // class x { public static $x = 2; }
-        $this->conditions = array(-1 => array('filterOut2' =>  'STATIC'),
-                                   0 => array('token'      =>  _Ppp::$operators),
-                                   1 => array('atom'       => 'Assignation'),
-                                   2 => array('token'      => array('T_SEMICOLON')),
+        $this->conditions = array(-1 => array('notToken' => 'STATIC'),
+                                   0 => array('token'    =>  _Ppp::$operators),
+                                   1 => array('atom'     => 'Assignation'),
+                                   2 => array('token'    => 'T_SEMICOLON'),
                                  );
         
         $this->actions = array('to_ppp_assignation' => true,
@@ -106,10 +106,10 @@ class _Ppp extends TokenAuto {
         $this->checkAuto();
 
     // class x { public $x, $y }
-        $this->conditions = array(-1 => array('filterOut2' => 'T_STATIC'),
-                                   0 => array('token'      => _Ppp::$operators),
-                                   1 => array('atom'       => 'Arguments'),
-                                   2 => array('filterOut'  => array('T_COMMA')),
+        $this->conditions = array(-1 => array('notToken'  => 'STATIC'),
+                                   0 => array('token'     => _Ppp::$operators),
+                                   1 => array('atom'      => 'Arguments'),
+                                   2 => array('filterOut' => 'T_COMMA'),
                                  );
         
         $this->actions = array('toVarNew' => 'Ppp',

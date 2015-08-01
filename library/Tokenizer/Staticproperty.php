@@ -30,11 +30,11 @@ class Staticproperty extends TokenAuto {
     public function _check() {
         $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname', );
         
-        $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
-                                   -1 => array('atom'       => $operands),
-                                    0 => array('token'      => Staticproperty::$operators),
-                                    1 => array('atom'       => array('Variable', 'Array', 'Arrayappend', 'Property', )),
-                                    2 => array('filterOut'  => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
+        $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
+                                   -1 => array('atom'      => $operands),
+                                    0 => array('token'     => Staticproperty::$operators),
+                                    1 => array('atom'      => array('Variable', 'Array', 'Arrayappend', 'Property', )),
+                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
         
         $this->actions = array('transform'    => array( -1 => 'CLASS',
                                                          1 => 'PROPERTY'),

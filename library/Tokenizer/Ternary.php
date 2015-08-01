@@ -28,24 +28,25 @@ class Ternary extends TokenAuto {
     static public $atom = 'Ternary';
     
     public function _check() {
+        $association = array('association' => 'Ternary');
         
         // $a ? $b : $c
-        $this->conditions = array( -2 => array('filterOut' => array_merge(  Comparison::$operators,  Logical::$operators,
-                                                                            Bitshift::$operators,    Multiplication::$operators,
-                                                                            Addition::$operators,    Concatenation::$operators,
-                                                                            Not::$operators,         Noscream::$operators,
-                                                                            _Instanceof::$operators, Property::$operators,
-                                                                            Staticmethodcall::$operators, Spaceship::$operators)),
-                                   -1 => array('atom'       => 'yes',
-                                               'notAtom'    => 'Sequence'),
-                                    0 => array('token'      => Ternary::$operators),
-                                    1 => array('atom'       => 'yes',
-                                               'notAtom'    => 'Sequence'),
-                                    2 => array('token'      => 'T_COLON',
-                                               'property'   => array('association' => 'Ternary')),
-                                    3 => array('atom'       => 'yes',
-                                               'notAtom'    => 'Sequence'),
-                                    4 => array('filterOut2' => array_merge(Token::$instructionEnding, array('T_OPEN_CURLY'))),
+        $this->conditions = array( -2 => array('filterOut' => array_merge( Comparison::$operators,  Logical::$operators,
+                                                                           Bitshift::$operators,    Multiplication::$operators,
+                                                                           Addition::$operators,    Concatenation::$operators,
+                                                                           Not::$operators,         Noscream::$operators,
+                                                                           _Instanceof::$operators, Property::$operators,
+                                                                           Staticmethodcall::$operators, Spaceship::$operators)),
+                                   -1 => array('atom'      => 'yes',
+                                               'notAtom'   => 'Sequence'),
+                                    0 => array('token'     => Ternary::$operators),
+                                    1 => array('atom'      => 'yes',
+                                               'notAtom'   => 'Sequence'),
+                                    2 => array('token'     => 'T_COLON',
+                                               'property'  => $association),
+                                    3 => array('atom'      => 'yes',
+                                               'notAtom'   => 'Sequence'),
+                                    4 => array('notToken'  => array_merge(Token::$instructionEnding, array('T_OPEN_CURLY'))),
                                  );
         
         $this->actions = array('transform'    => array( -1 => 'CONDITION',
@@ -68,7 +69,8 @@ class Ternary extends TokenAuto {
                                    -1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     0 => array('token'      => Ternary::$operators),
-                                    1 => array('token'      => 'T_COLON'),
+                                    1 => array('token'      => 'T_COLON',
+                                                'property'  => $association),
                                     2 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     3 => array('filterOut'  => array_merge(Token::$instructionEnding, array('T_OPEN_CURLY')))
