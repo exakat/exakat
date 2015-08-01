@@ -2610,15 +2610,15 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             unset($conditions['property']);
         }
 
-        if (isset($conditions['check_for_string'])) {
-            if (is_array($conditions['check_for_string'])) {
-                $classes = "'".implode("', '", $conditions['check_for_string'])."'";
+        if (isset($conditions['checkForString'])) {
+            if (is_array($conditions['checkForString'])) {
+                $classes = "'".implode("', '", $conditions['checkForString'])."'";
             } else {
-                $classes = "'".$conditions['check_for_string']."'";
+                $classes = "'".$conditions['checkForString']."'";
             }
             $queryConditions[] = "as('cfs').out('NEXT').filter{ it.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.back('cfs')";
 
-            unset($conditions['check_for_string']);
+            unset($conditions['checkForString']);
         }
 
         if (isset($conditions['checkForArguments'])) {
@@ -2641,11 +2641,11 @@ GREMLIN;
             unset($conditions['checkForArguments']);
         }
 
-        if (isset($conditions['check_for_namelist'])) {
-            if (is_array($conditions['check_for_namelist'])) {
-                $classes = "'".implode("', '", $conditions['check_for_namelist'])."'";
+        if (isset($conditions['checkForNamelist'])) {
+            if (is_array($conditions['checkForNamelist'])) {
+                $classes = "'".implode("', '", $conditions['checkForNamelist'])."'";
             } else {
-                $classes = "'".$conditions['check_for_namelist']."'";
+                $classes = "'".$conditions['checkForNamelist']."'";
             }
 
             $finalTokens = array_merge( Token::$alternativeEnding,
@@ -2655,14 +2655,14 @@ GREMLIN;
 filter{ it.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }
 .loop(2){!(it.object.token in [$finalTokens])}.any() }
 GREMLIN;
-            unset($conditions['check_for_namelist']);
+            unset($conditions['checkForNamelist']);
         }
 
-        if (isset($conditions['check_for_concatenation'])) {
-            if (is_array($conditions['check_for_concatenation'])) {
-                $classes = "'".implode("', '", $conditions['check_for_concatenation'])."'";
+        if (isset($conditions['checkForConcatenation'])) {
+            if (is_array($conditions['checkForConcatenation'])) {
+                $classes = "'".implode("', '", $conditions['checkForConcatenation'])."'";
             } else {
-                $classes = "'".$conditions['check_for_concatenation']."'";
+                $classes = "'".$conditions['checkForConcatenation']."'";
             }
             
             $finalTokens = array_merge(Token::$alternativeEnding,
@@ -2682,7 +2682,7 @@ filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.toke
 .filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }
 GREMLIN;
 
-            unset($conditions['check_for_concatenation']);
+            unset($conditions['checkForConcatenation']);
         }
 
         if (isset($conditions['checkForArray'])) {
@@ -2697,29 +2697,6 @@ filter{ it.as('a').out('NEXT').transform{
 }.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY'] && it.object.atom == null}.any()}
 GREMLIN;
             unset($conditions['checkForArray']);
-        }
-
-        if (isset($conditions['code'])) {
-            if (is_array($conditions['code']) && !empty($conditions['code'])) {
-                $queryConditions[] = "filter{it.code in ['".implode("', '", $conditions['code'])."']}";
-            } else {
-                $queryConditions[] = "has('code', '".$conditions['code']."')";
-            }
-            unset($conditions['code']);
-        }
-
-        if (isset($conditions['icode'])) {
-            if (is_array($conditions['icode']) && !empty($conditions['icode'])) {
-                $queryConditions[] = "hasNot('code', null).filter{it.code.toLowerCase() in ['".implode("', '", $conditions['icode'])."']}";
-            } else {
-                $queryConditions[] = "hasNot('code', null).filter{it.code.toLowerCase() == '".$conditions['icode']."'}";
-            }
-            unset($conditions['icode']);
-        }
-
-        if (isset($conditions['notcode']) && is_array($conditions['notcode']) && !empty($conditions['notcode'])) {
-            $queryConditions[] = "filter{!(it.code in ['".implode("', '", $conditions['notcode'])."'])}";
-            unset($conditions['notcode']);
         }
 
         if (isset($conditions['token'])) {

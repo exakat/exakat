@@ -38,11 +38,10 @@ class Heredoc extends TokenAuto {
                                'atom'         => 'Heredoc');
         $this->checkAuto();
 
-        $this->conditions = array(0 => array('token'            => Heredoc::$operators,
-                                             'atom'             => 'none'),
-                                  1 => array('atom'             => String::$allowedClasses,
-                                             'check_for_string' => String::$allowedClasses
-                                             ),
+        $this->conditions = array(0 => array('token'          => Heredoc::$operators,
+                                             'atom'           => 'none'),
+                                  1 => array('atom'           => String::$allowedClasses,
+                                             'checkForString' => String::$allowedClasses)
                                  );
 
         $this->actions = array( 'makeQuotedString' => 'Heredoc');

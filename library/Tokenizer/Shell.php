@@ -29,10 +29,10 @@ class Shell extends TokenAuto {
 
     public function _check() {
 // Case of string with interpolation : `a${b}c`;
-        $this->conditions = array(  0 => array('token'            => Shell::$operators,
-                                               'atom'             => 'none'),
-                                    1 => array('atom'             => String::$allowedClasses,
-                                               'check_for_string' => String::$allowedClasses),
+        $this->conditions = array(  0 => array('token'          => Shell::$operators,
+                                               'atom'           => 'none'),
+                                    1 => array('atom'           => String::$allowedClasses,
+                                               'checkForString' => String::$allowedClasses),
                                  );
         
         $this->actions = array( 'makeQuotedString' => 'Shell',
