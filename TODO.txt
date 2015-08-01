@@ -1372,3 +1372,16 @@ Comment the code with all values that are known at static compile time.
 if (cdt) {}  if (cdt) {} // twice the same cdt in a row
 
 Tester stripe, idio (Cf sourceinno).
+
+Afficher la liste des configurations utilisées
+
+Result count doit pouvoir être trier
+
+Regrouper les résultats par fichier et compte d'erreurs par fichier (pouvoir selectionner la règle)
+
+Cesure pour le code trop long dans le rapport.
+
+Remove filterOut2 and replace with notToken in tokenizer. 
+
+Suggest a reference from a code source : List all clearPHP rules that could be a reference, because they are applicable (find array_merge), but are already well enforced (nothing found for this rule). 
+Then, build a full PDF from the clearPHP (and language).
