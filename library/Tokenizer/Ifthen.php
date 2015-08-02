@@ -138,7 +138,7 @@ class Ifthen extends TokenAuto {
                                                        4 => 'DROP'),
                                'cleanIndex'   => true,
                                'atom'         => 'Ifthen',
-                               'addSemicolon' => 'it');
+                               'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
 
         // Build the ELSEIF block
