@@ -51,7 +51,7 @@ class Assignation extends TokenAuto {
                           'Assignation', 'Variable', 'Boolean', 'Null', 'Magicconstant',
                           'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison',
                           'Clone', 'Shell', 'Include', 'Instanceof', 'Function', 'ArrayNS', 'Identifier',
-                          'Arrayappend', 'Power', 'Spaceship', 'Coalesce'
+                          'Arrayappend', 'Power', 'Spaceship', 'Coalesce', 'Yield'
                          );
         $forbiddenTokens = array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators,
                                        Comparison::$operators, Logical::$booleans, Multiplication::$operators,

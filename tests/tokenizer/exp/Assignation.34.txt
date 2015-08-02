@@ -1,0 +1,216 @@
+<?php
+
+Label : CODE
+  function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      void
+  Label : NAME
+    B
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      while
+      Label : CONDITION
+        C
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  [
+                  Label : VARIABLE
+                    D
+                  Label : INDEX
+                    $b
+          Label : THEN
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                isset
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      [
+                      Label : VARIABLE
+                        J
+                      Label : INDEX
+                        $b
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  unset
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $this
+                      Label : PROPERTY
+                        [
+                        Label : VARIABLE
+                          J
+                        Label : INDEX
+                          $b
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      [
+                      Label : VARIABLE
+                        J
+                      Label : INDEX
+                        $b
+                  Label : LEFT
+                    $d
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  M
+              Label : METHOD
+                N
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    Concatenation
+                    Label : CONCAT
+                      $a
+                    Label : CONCAT
+                      $d
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                'I'
+              Label : LEFT
+                $d
+            Label : ELEMENT
+              G
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $c
+                  Label : PROPERTY
+                    H
+            Label : ELEMENT
+              unset
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    [
+                    Label : VARIABLE
+                      D
+                    Label : INDEX
+                      $b
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  [
+                  Label : VARIABLE
+                    D
+                  Label : INDEX
+                    $b
+              Label : LEFT
+                $c
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                isset
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      [
+                      Label : VARIABLE
+                        J
+                      Label : INDEX
+                        $b
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  .=
+                  Label : RIGHT
+                    $a
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      [
+                      Label : VARIABLE
+                        J
+                      Label : INDEX
+                        $b
+              Label : ELSE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    $a
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      [
+                      Label : VARIABLE
+                        J
+                      Label : INDEX
+                        $b
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ===
+            Label : RIGHT
+              null
+            Label : LEFT
+              $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            yield
+            Label : YIELD
+              void
+          Label : LEFT
+            $a
