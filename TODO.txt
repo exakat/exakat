@@ -1385,3 +1385,7 @@ Remove filterOut2 and replace with notToken in tokenizer.
 
 Suggest a reference from a code source : List all clearPHP rules that could be a reference, because they are applicable (find array_merge), but are already well enforced (nothing found for this rule). 
 Then, build a full PDF from the clearPHP (and language).
+
+Base de données OLAP ? Y stocker les resources.
+
+in PHP 7, break as to be in a loop or switch or .. . It will compile but not run.
