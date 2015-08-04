@@ -70,7 +70,7 @@ class Ifthen extends TokenAuto {
         $this->actions = array( 'toBlockIfelseif' => 1,
                                 'keepIndexed'     => true);
         $this->checkAuto();
-        
+
         // @doc if () /**/ else $x++;
         // Make a block from sequence after else
         $this->conditions = array(  0 => array('token'   => self::$operators,
@@ -88,19 +88,19 @@ class Ifthen extends TokenAuto {
         $this->checkAuto();
 
         // Finish the THEN block
-        $this->conditions = array( 0 => array('token' => self::$operators),
-                                   1 => array('token' => 'T_OPEN_CURLY',
-                                              'atom'  => 'none'),
-                                   2 => array('atom'  => array('Sequence', 'Void')),
-                                   3 => array('token' => 'T_CLOSE_CURLY'),
+        $this->conditions = array( 0 => array('token'    => self::$operators),
+                                   1 => array('token'    => 'T_OPEN_CURLY',
+                                              'atom'     => 'none'),
+                                   2 => array('atom'     => array('Sequence', 'Void')),
+                                   3 => array('token'    => 'T_CLOSE_CURLY'),
                                    4 => array('notToken' => array('T_ELSE', 'T_ELSEIF'))
         );
         
-        $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'THEN',
-                                                       3 => 'DROP'),
-                               'cleanIndex'   => true,
-                               'atom'         => 'Ifthen',
+        $this->actions = array('transform'          => array(1 => 'DROP',
+                                                             2 => 'THEN',
+                                                             3 => 'DROP'),
+                               'cleanIndex'         => true,
+                               'atom'               => 'Ifthen',
                                'addAlwaysSemicolon' => 'it'
                                );
         $this->checkAuto();
@@ -121,7 +121,7 @@ class Ifthen extends TokenAuto {
                                'cleanIndex'   => true
                                );
         $this->checkAuto();
-        
+
         // Build the ELSE block
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => 'T_ELSE',
@@ -132,12 +132,12 @@ class Ifthen extends TokenAuto {
                                    4 => array('token' => 'T_CLOSE_CURLY')
         );
         
-        $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'DROP',
-                                                       3 => 'ELSE',
-                                                       4 => 'DROP'),
-                               'cleanIndex'   => true,
-                               'atom'         => 'Ifthen',
+        $this->actions = array('transform'          => array(1 => 'DROP',
+                                                             2 => 'DROP',
+                                                             3 => 'ELSE',
+                                                             4 => 'DROP'),
+                               'cleanIndex'         => true,
+                               'atom'               => 'Ifthen',
                                'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
 
@@ -174,11 +174,29 @@ class Ifthen extends TokenAuto {
                                );
         $this->checkAuto();
 
+        // Finish the THEN block with ELSEIF
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => 'T_COLON'),
+                                   2 => array('atom'  => array('Sequence', 'Void')),
+                                   3 => array('token' => 'T_ELSEIF',
+                                              'atom'  => 'yes')
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'THEN',
+                                                       3 => 'ELSE'),
+                               'cleanIndex'   => true,
+                               'property'     => array('alternative' => true),
+                               'atom'         => 'Ifthen',
+                               'addSemicolon' => 'it'
+                               );
+        $this->checkAuto();
+
         // build the THEN block
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => 'T_COLON'),
                                    2 => array('atom'  => array('Sequence', 'Void')),
-                                   3 => array('token' => array('T_ELSE', 'T_ELSEIF'))
+                                   3 => array('token' => 'T_ELSE')
         );
         
         $this->actions = array('transform'    => array(1 => 'DROP',

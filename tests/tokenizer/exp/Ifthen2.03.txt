@@ -1,0 +1,126 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      0
+    Label : THEN
+      ;
+      Label : ELEMENT
+        W
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'AA'
+          Label : ARGUMENT
+            'Z'
+      Label : ELEMENT
+        W
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'X'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          &&
+          Label : RIGHT
+            ===
+            Label : RIGHT
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                'B'
+            Label : LEFT
+              'C'
+          Label : LEFT
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $a
+                  Label : INDEX
+                    'B'
+        Label : THEN
+          ;
+          Label : ELEMENT
+            E
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'I'
+              Label : ARGUMENT
+                'H'
+          Label : ELEMENT
+            E
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'F'
+        Label : ELSE
+          elseif
+          Label : CONDITION
+            &&
+            Label : RIGHT
+              ===
+              Label : RIGHT
+                [
+                Label : VARIABLE
+                  $a
+                Label : INDEX
+                  'B'
+              Label : LEFT
+                'K'
+            Label : LEFT
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $a
+                    Label : INDEX
+                      'B'
+          Label : THEN
+            ;
+            Label : ELEMENT
+              T
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'V'
+                Label : ARGUMENT
+                  'H'
+            Label : ELEMENT
+              R
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'S'
+          Label : THEN
+            ;
+            Label : ELEMENT
+              M
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'Q'
+                Label : ARGUMENT
+                  'H'
+            Label : ELEMENT
+              M
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'N'

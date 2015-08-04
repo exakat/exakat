@@ -1742,6 +1742,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         if (isset($actions['toBlockElse']) && $actions['toBlockElse']) {
             $sequence = new Sequence(Token::$client);
             $fullcode = $sequence->fullcode();
+            
+            $offset = str_repeat(".out('NEXT')", $actions['toBlockElse']);
 
             $qactions[] = "
 /* toBlockElse */
@@ -1751,20 +1753,26 @@ cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.l
 
 x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:true, bracket:false, virtual:true, line:it.line]);
 
-a = it.out('NEXT').out('NEXT').next();
-if (a.token == 'T_COLON') {
-    a = a.out('NEXT').next();
+// remove the next, if this is a ;
+if (a3.getProperty('token') == 'T_SEMICOLON' &&
+    a3.getProperty('atom') == null) {
+    semicolon = a3;
+    a3 = semicolon.out('NEXT').next();
+    
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
+    toDelete.push(semicolon);
 }
 
-g.addEdge(a.in('NEXT').next(), oc, 'NEXT');
+g.addEdge(a1, oc, 'NEXT');
 g.addEdge(oc, x, 'NEXT');
 
 g.addEdge(x, cc, 'NEXT');
-g.addEdge(cc, a.out('NEXT').next(), 'NEXT');
+g.addEdge(cc, a3, 'NEXT');
 
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('rank', 0);
-a.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(x, a2, 'ELEMENT');
+a2.setProperty('rank', 0);
+a2.bothE('NEXT').each{ g.removeEdge(it); }
 
 /* Clean index */
 x.out('ELEMENT').each{
@@ -1791,6 +1799,7 @@ sequence = g.addVertex(null, [code:';', fullcode:';', token:'T_SEMICOLON', atom:
 instruction = it$offset.next();
 binstruction = instruction.in('NEXT').next();
 ainstruction = instruction.out('NEXT').next();
+
 // remove the next, if this is a ;
 if (ainstruction.getProperty('token') == 'T_SEMICOLON' &&
     ainstruction.getProperty('atom') == null) {
