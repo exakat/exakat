@@ -1389,3 +1389,6 @@ Then, build a full PDF from the clearPHP (and language).
 Base de données OLAP ? Y stocker les resources.
 
 in PHP 7, break as to be in a loop or switch or .. . It will compile but not run.
+
+ $expireSeconds !== null || $expireSeconds = 7 * self::DAY NOT USELESS. 2nd is an assignation! This is a clever if 
+  
