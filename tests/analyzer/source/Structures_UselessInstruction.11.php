@@ -7,4 +7,6 @@ new $x instanceof X;
 ($a = new $x) instanceof X;
 ($a = (new $x)) instanceof X;
 
+$y = new $x5;
+
 ?>

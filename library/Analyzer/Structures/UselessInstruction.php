@@ -32,9 +32,9 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
-                            'Identifier', 'String', 'Instanceof', 'Bitshift', 'Logical', 'Comparison', 'Null',
+                            'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce'))
-             ->noAtomInside('Functioncall');
+             ->noAtomInside(array('Functioncall', 'Assignation'));
         $this->prepareQuery();
         
         // -$x = 3
@@ -57,7 +57,7 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // array_merge($a);
+        // array_merge($a); one argument is useless.
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -84,7 +84,7 @@ class UselessInstruction extends Analyzer\Analyzer {
         // Closure with some operations
         $this->atomIs('Function')
              ->inIs('LEFT')
-             ->atomIs(array('Addition', 'Multiplication'))
+             ->atomIs(array('Addition', 'Multiplication', 'Power'))
              ->back('first');
         $this->prepareQuery();
 
@@ -97,8 +97,9 @@ class UselessInstruction extends Analyzer\Analyzer {
 
         // New in a instanceof (with/without parenthesis)
         $this->atomIs('New')
-             ->inIsIE(array('CODE', 'LEFT'))
-             ->inIs('CLASS')
+             ->analyzerIsNot('self')
+             ->inIsIE(array('CODE', 'RIGHT'))
+             ->inIs('VARIABLE')
              ->atomIs('Instanceof')
              ->back('first');
         $this->prepareQuery();
