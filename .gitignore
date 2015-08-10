@@ -57,3 +57,5 @@ rels.cypher.file.csv
 rels.cypher.indexed.csv
 rels.cypher.next.csv
 .gitignore
+neo4jA
+neo4jN
