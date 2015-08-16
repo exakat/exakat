@@ -30,8 +30,10 @@ class ImpliedIf extends Analyzer\Analyzer {
         // defined() or die
         $this->atomIs('Logical')
              ->code(array('or', '||', 'and', '&&'))
-             ->inIsIE('CODE')
+             ->inIsIE(array('CODE', 'RIGHT'))
              ->hasIn('ELEMENT')
+             ->outIs('RIGHT')
+             ->atomIs(array('Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
              ->back('first');
         $this->prepareQuery();
     }
