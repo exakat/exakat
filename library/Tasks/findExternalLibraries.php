@@ -135,7 +135,7 @@ class findExternalLibraries implements Tasks {
                 if (isset($this->classic[$lclass])) {
                     if ($this->classic[$lclass] == self::WHOLE_DIR) {
                         $return[$class] = dirname(preg_replace('#projects/.*?/code/#', '/', $filename));
-                    } elseif ($this->classic[$lclass] == self::ONE_FILE) {
+                    } elseif ($this->classic[$lclass] == self::FILE_ONLY) {
                         $return[$class] = preg_replace('#projects/.*?/code/#', '/', $filename);
                     } else {
                         // This is a coding error
