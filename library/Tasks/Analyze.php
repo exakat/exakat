@@ -180,6 +180,8 @@ GREMLIN;
                 display( "$analyzer_class fait ($count)\n");
                 $end = microtime(true);
                 $log->log("$analyzer_class\t".($end - $begin)."\t$count");
+                // storing the number of row found in Hash table (datastore)
+                $datastore->addRow('hash', array($analyzer_class => $count ) );
             }
         }
 
