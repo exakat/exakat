@@ -222,6 +222,15 @@ CREATE TABLE files (
 SQLITE;
                 break;
 
+            case 'ignoredFiles' : 
+                $createTable = <<<SQLITE
+CREATE TABLE ignoredFiles (
+  id INTEGER PRIMARY KEY,
+  file TEXT
+);
+SQLITE;
+                break;
+
             case 'hash' : 
                 $createTable = <<<SQLITE
 CREATE TABLE hash (
