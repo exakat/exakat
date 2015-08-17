@@ -356,30 +356,6 @@ class Load implements Tasks {
                                                   ->save();
 
                     $to_index = false;
-/*                } elseif ($token[3] == 'T_START_HEREDOC' &&
-                          is_array($tokens[$id + 1]) &&
-                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_END_HEREDOC') {
-                    $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
-                                                        ->setProperty('code', $token[1])
-                                                        ->setProperty('fullcode', $token[1])
-                                                        ->setProperty('line', $token[2])->save();
-
-                    $previous->relateTo($T[$Tid], 'NEXT')->save();
-                    $regexIndex['Heredoc']->relateTo($T[$Tid], 'INDEXED')->save();
-                    $inQuote++;
-                    $previous = $T[$Tid];
-
-                    $Tid++;
-                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ENCAPSED_AND_WHITESPACE')
-                                                        ->setProperty('atom', 'String')
-                                                        ->setProperty('code', ' ')
-                                                        ->setProperty('fullcode', ' ')
-                                                        ->setProperty('line', $line)
-                                                        ->setProperty('modifiedBy', 'bin/load26')
-                                                        ->save();
-                    $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED')->save();
-
-                    $to_index = false;*/
                 } elseif ($token[3] == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
