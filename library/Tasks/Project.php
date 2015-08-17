@@ -102,12 +102,16 @@ class Project implements Tasks {
         shell_exec('php '.$this->executable.' cleandb -v');
         $this->logTime('Files');
 
+        display("Search for external libraries\n");
+        shell_exec('php '.$this->executable.' findextlib -p '.$project.' -v -u > '.$config->projects_root.'/projects/'.$project.'/log/findExtlib.log');
+        $this->logTime('Find External Libraries');
+        $thread->waitForAll();
+
         display("Running files\n");
         shell_exec('php '.$this->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
         $this->logTime('Files');
-        display("Loading project\n");
-
         $thread->waitForAll();
+
         display("waited For All\n");
 
         shell_exec('php '.$this->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
