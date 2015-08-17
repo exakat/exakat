@@ -271,7 +271,7 @@ This may be due to configuration file, compilation error, wrong extension (inclu
         $this->createLevel2('Non-processed files');
         $this->addContent('Text', 'This is the list of non-processed files. The following files were found in the project, but were omitted as requested in the config.ini file.', 'textLead');
 
-        $this->addContent('SimpleTable', 'ProcessedFileList', 'oneColumn');
+        $this->addContent('SimpleTable', 'NonprocessedFileList', 'oneColumn');
 
         // List of dynamic calls
         $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls', $this->client);
