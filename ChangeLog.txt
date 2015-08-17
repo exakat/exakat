@@ -1,11 +1,29 @@
-Version 0.2.5 (Scholar in a White Robe, Coming up)
+Version 0.2.6 (Lingxuzi, Coming up)
 This is a maintenance release, with improved ease of use. 
++ Report
+    + 
 + Analyzer
     +
 + Tokenizer
     +
 
-Version 0.2.4 (Black Wind Demon, Coming up)
+Version 0.2.5 (Scholar in a White Robe, 2015-Aug-17)
+This is a maintenance release, with improved ease of use. 
++ Report
+    + List the files that are ignored in the annex
++ Analyzer
+    + Updated Knowledge Database for memcache, aliases, zlib, standard
+    + Added more directives to Review
+    + Added support for xhprof
++ Tokenizer
+    + Fixed bug with Else (Not-alternative)
+    + Fixed Sequence creation with If-Then
+    + Yield may be assigned
+    + Removed one Tokenizer's operation (filterOut2)
+    + Fixed priorities with Concatenation, Multiplication, Additions
+    + Process Echo and Print separately
+    + Automatically removes common bundled libraries to reduce app size
+Version 0.2.4 (Black Wind Demon, 2015-06-22)
 This is a maintenance release, with improved ease of use and new analyzes.
 + Analyzer
     + Rebuild the composer database
