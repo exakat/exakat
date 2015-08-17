@@ -80,7 +80,7 @@ class findExternalLibraries implements Tasks {
             display(count($newConfigs)." external libraries are going to be omitted : ".join(', ', array_keys($newConfigs)));
         } 
         
-        if ($config->update === true) {
+        if ($config->update === true && count($newConfigs) > 0) {
              display('Updating '.$project.'/config.ini');
              $ini = file_get_contents($configFile);
              $ini = preg_replace("#(ignore_dirs\[\] = \/.*?\n)\n#is", '$1'."\n".';Ignoring external libraries'."\n".'ignore_dirs[] = '.join("\n".'ignore_dirs[] = ', $newConfigs)."\n;Ignoring external libraries\n\n", $ini);
@@ -89,7 +89,7 @@ class findExternalLibraries implements Tasks {
 
              file_put_contents($configFile, $ini);
         } else {
-            display('Not updating '.$project.'/config.ini');
+            display('Not updating '.$project.'/config.ini. '.count($newConfigs).' external libraries found');
         }
     }
     
