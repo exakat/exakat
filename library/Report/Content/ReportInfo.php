@@ -56,11 +56,14 @@ class ReportInfo extends \Report\Content {
         $datastore = new \Datastore(\Config::factory());
         
         $this->array[] = array('Number of PHP files', $datastore->getHash('files'));
-        $this->array[] = array('Number of lines of code', $datastore->getHash('phploc'));
+        $this->array[] = array('Number of lines of code', $datastore->getHash('loc'));
+        $this->array[] = array('Number of lines of code with comments', $datastore->getHash('locTotal'));
 
         $this->array[] = array('Report production date', date('r', strtotime('now')));
         
-        $this->array[] = array('PHP used', PHP_VERSION);
+        $this->array[] = array('PHP used', PHP_VERSION.' ('.$config->phpversion.')');
+        $this->array[] = array('Ignored files/folders', join(', '.$config->ignore_dirs));
+        
         $this->array[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
     }
 }
