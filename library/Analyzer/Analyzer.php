@@ -1379,6 +1379,12 @@ GREMLIN
         return $this;
     }
 
+    public function inClass() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any()}');
+        
+        return $this;
+    }
+
     public function goToInterface() {
         $this->addMethod('in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}');
         
