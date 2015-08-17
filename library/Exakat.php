@@ -21,8 +21,8 @@
 */
 
 class Exakat {
-    const VERSION = '0.2.4g';
-    const BUILD = '181';
+    const VERSION = '0.2.5';
+    const BUILD = '182';
     
     public function execute(Config $config) {
         switch ($config->command) {
@@ -148,6 +148,11 @@ class Exakat {
 
             case 'phploc' : 
                 $task = new Tasks\Phploc();
+                print $task->run($config);
+                break;
+
+            case 'findextlib' : 
+                $task = new Tasks\findExternalLibraries();
                 print $task->run($config);
                 break;
 
