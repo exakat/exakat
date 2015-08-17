@@ -1401,3 +1401,13 @@ Files that should look the same in a folder (same variables, same classes/extens
 Spot common external library (tcpdf, krumo, etc), and add them to config.ini automatically.
 
 Add support for common standards (calistenics, psr-r *..)
+
+Centralize the folder scannings (several instances across the first tasks).
+
+Remove usage of Everyman library.
+
+token_get_all will spew some errors (along with fopen). Report this as a 'may use @' situation.
+
+@include("file.php")) : error is also set for error reporting.
+
+small penalty for global inside for/foreach. 
