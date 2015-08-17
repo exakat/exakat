@@ -268,6 +268,19 @@ This may be due to configuration file, compilation error, wrong extension (inclu
             $this->addContent('Horizontal', $analyzer);
         }
 
+        $this->createLevel2('Non-processed files');
+        $this->addContent('Text', 'This is the list of non-processed files. The following files were found in the project, but were omitted as requested in the config.ini file.', 'textLead');
+
+        $this->addContent('SimpleTable', 'ProcessedFileList', 'oneColumn');
+
+        // List of dynamic calls
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls', $this->client);
+        if ($analyzer->hasResults()) {
+            $this->createLevel2('Dynamic code');
+            $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');
+            $this->addContent('Horizontal', $analyzer);
+        }
+
         $this->createLevel2('About This Report');
         $aboutDevoops = <<<Devoops
             This report has been build, thanks to the following other Open Source projects. 
