@@ -77,7 +77,24 @@ class Files implements Tasks {
         }
 
         $datastore = new \Datastore($config);
+        
 
+        display('Ignoring files');
+        // Ignored files
+        $datastore->cleanTable('ignoredFiles');
+        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -path "'.(join('" -or -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
+        $files = trim(shell_exec($shellBase));
+
+        $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
+        $files = explode("\n", $files);
+        $files = array_map(function ($a) {
+            return array('file' => $a);
+        }, $files);
+
+        $datastore->addRow('ignoredFiles', $files);
+
+        // actually used files
+        $datastore->cleanTable('files');
         $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
 
         $files = trim(shell_exec($shellBase));
@@ -87,7 +104,6 @@ class Files implements Tasks {
             return array('file' => $a);
         }, $files);
 
-        $datastore->cleanTable('files');
         $datastore->addRow('files', $files);
 
         $ignoreDirs = array();
