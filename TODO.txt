@@ -1387,8 +1387,17 @@ Suggest a reference from a code source : List all clearPHP rules that could be a
 Then, build a full PDF from the clearPHP (and language).
 
 Base de données OLAP ? Y stocker les resources.
+Stocker les résultats dans une base SQL, organisée par résultats + dimensions.
 
 in PHP 7, break as to be in a loop or switch or .. . It will compile but not run.
 
  $expireSeconds !== null || $expireSeconds = 7 * self::DAY NOT USELESS. 2nd is an assignation! This is a clever if 
   
+Files that should look the same in a folder (same variables, same classes/extensions, [don't care for more], [don't care for less]).
+
+// check that this is possible
+        if (substr($analyzer, 0, 17) === 'Analyzer\\\\Files\\\\') {
+
+Spot common external library (tcpdf, krumo, etc), and add them to config.ini automatically.
+
+Add support for common standards (calistenics, psr-r *..)
