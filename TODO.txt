@@ -1359,8 +1359,6 @@ Faire une liste des fonctions dispo pour wp
 See how One may cache queries from the current scripts, and then just run them later, without rebuild. => time gain? 
 See how We can store those queries with Aurelius
 
-Prepare Aurelius plug-in support.
-
 Update Config to handle the case for onepage (project should be onepage by default, not mentioned).
 
 Variable should always handle the same kind of value : within a scope, or across the applciation ($i will always be int, etc.)
@@ -1381,18 +1379,12 @@ Regrouper les résultats par fichier et compte d'erreurs par fichier (pouvoir se
 
 Cesure pour le code trop long dans le rapport.
 
-Remove filterOut2 and replace with notToken in tokenizer. 
-
 Suggest a reference from a code source : List all clearPHP rules that could be a reference, because they are applicable (find array_merge), but are already well enforced (nothing found for this rule). 
 Then, build a full PDF from the clearPHP (and language).
 
 Base de données OLAP ? Y stocker les resources.
 Stocker les résultats dans une base SQL, organisée par résultats + dimensions.
 
-in PHP 7, break as to be in a loop or switch or .. . It will compile but not run.
-
- $expireSeconds !== null || $expireSeconds = 7 * self::DAY NOT USELESS. 2nd is an assignation! This is a clever if 
-  
 Files that should look the same in a folder (same variables, same classes/extensions, [don't care for more], [don't care for less]).
 
 // check that this is possible
