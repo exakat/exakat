@@ -808,9 +808,9 @@ GREMLIN;
         return $this;
     }
 
-    public function sameContextAs($stoage, $context = array('Namespace', 'Class', 'Function')) {
+    public function sameContextAs($storage = 'context', $context = array('Namespace', 'Class', 'Function')) {
         foreach($context as &$c) {
-            $c = 'context["'.$c.'"] == '.$context.'["'.$c.'"] ';
+            $c = $storage.'["'.$c.'"] == '.$context.'["'.$c.'"] ';
         }
         unset($c);
         $context = join(' && ', $context);

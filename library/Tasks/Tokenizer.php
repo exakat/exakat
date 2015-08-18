@@ -134,7 +134,6 @@ class Tokenizer implements Tasks {
                 $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->total."\t".$r->done."\t".$r->cycles."\t".number_format(100 * $ratio, 0));
             }
             $log->log('Finished foreach');
-            unset($precedence);
             \Tokenizer\Token::finishSequence();
     
             $rend = microtime(true);

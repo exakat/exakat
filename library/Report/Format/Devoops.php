@@ -143,7 +143,6 @@ HTML
             $this->jsLibraries = "<!-- No extra libraries -->";
         }
 
-        $project_name = $this->projectName;
         $project_code_source = $this->projectUrl;
 
         if (empty($project_code_source)) {

@@ -124,8 +124,6 @@ class Files implements Tasks {
         $counting->run($config);
         display('Counted files');
 
-        $notCompilable = array();
-
         $versions = $config->other_php_versions;
 
         foreach($versions as $version) {
@@ -200,7 +198,6 @@ class Files implements Tasks {
         $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 '.$config->php.'                     -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
         $resultNosot = shell_exec($shell);
         $tokens = (int) array_sum(explode("\n", $resultNosot));
-//        $datastore->addRow('hash', array('tokens' => $stats['tokens']));
 
         $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 '.$config->php.' -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
 
