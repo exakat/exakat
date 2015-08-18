@@ -24,8 +24,9 @@
 namespace Tasks;
 
 class findExternalLibraries implements Tasks {
-    const WHOLE_DIR  = 1;
-    const FILE_ONLY  = 2;
+    const WHOLE_DIR   = 1;
+    const FILE_ONLY   = 2;
+    const PARENT_DIR  = 3; // Whole_dir and parent.
     
     // classic must be in lower case form. 
     private $classic = array('bbq'              => self::WHOLE_DIR,
@@ -54,6 +55,9 @@ class findExternalLibraries implements Tasks {
                              'yii'              => self::FILE_ONLY,
                              'utf8'             => self::WHOLE_DIR,
                              'lessc'            => self::FILE_ONLY,
+                             'dompdf'           => self::PARENT_DIR,
+                             'graph'            => self::PARENT_DIR,
+                             'html2pdf'         => self::WHOLE_DIR,
                              );
 
     public function run(\Config $config) {
@@ -137,6 +141,8 @@ class findExternalLibraries implements Tasks {
                 if (isset($this->classic[$lclass])) {
                     if ($this->classic[$lclass] == self::WHOLE_DIR) {
                         $return[$class] = dirname(preg_replace('#projects/.*?/code/#', '/', $filename));
+                    } elseif ($this->classic[$lclass] == self::PARENT_DIR) {
+                        $return[$class] = dirname(dirname(preg_replace('#projects/.*?/code/#', '/', $filename)));
                     } elseif ($this->classic[$lclass] == self::FILE_ONLY) {
                         $return[$class] = preg_replace('#projects/.*?/code/#', '/', $filename);
                     } else {
