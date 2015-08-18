@@ -45,7 +45,7 @@ class Methods {
     }
 
     public function getMethodsArgsInterval() {
-        $query = "SELECT class, name, args_min, args_max FROM methods";
+        $query = 'SELECT class, name, args_min, args_max FROM methods';
         $res = $this->sqlite->query($query);
         $return = array();
         
@@ -57,7 +57,7 @@ class Methods {
     }
 
     public function getFunctionsArgsInterval() {
-        $query = "SELECT class, name, args_min, args_max FROM methods WHERE Class = 'PHP'";
+        $query = 'SELECT class, name, args_min, args_max FROM methods WHERE Class = "PHP"';
         $res = $this->sqlite->query($query);
         $return = array();
         
@@ -105,7 +105,7 @@ class Methods {
     }
 
     public function getDeterministFunctions() {
-        $query = "SELECT name FROM methods WHERE determinist = 'true'";
+        $query = 'SELECT name FROM methods WHERE determinist = "true"';
         $res = $this->sqlite->query($query);
         $return = array();
         
@@ -117,7 +117,7 @@ class Methods {
     }
 
     public function getNonDeterministFunctions() {
-        $query = "SELECT name FROM methods WHERE determinist != 0";
+        $query = 'SELECT name FROM methods WHERE determinist != 0';
         $res = $this->sqlite->query($query);
         $return = array();
         
