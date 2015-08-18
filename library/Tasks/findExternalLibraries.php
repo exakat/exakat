@@ -52,6 +52,8 @@ class findExternalLibraries implements Tasks {
                              'text_highlighter' => self::WHOLE_DIR,
                              'tfpdf'            => self::WHOLE_DIR,
                              'yii'              => self::FILE_ONLY,
+                             'utf8'             => self::WHOLE_DIR,
+                             'lessc'            => self::FILE_ONLY,
                              );
 
     public function run(\Config $config) {
