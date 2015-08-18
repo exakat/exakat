@@ -260,6 +260,7 @@ class Config {
                           'constantes'    => 1, 
                           'clean'         => 1, 
                           'cleandb'       => 1, 
+                          'dump'          => 1, 
                           'doctor'        => 1, 
                           'errors'        => 1,
                           'export'        => 1,

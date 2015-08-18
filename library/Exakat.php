@@ -156,6 +156,11 @@ class Exakat {
                 print $task->run($config);
                 break;
 
+            case 'dump' : 
+                $task = new Tasks\Dump();
+                print $task->run($config);
+                break;
+
             case 'version' : 
             default : 
                 $version = self::VERSION;
