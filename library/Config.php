@@ -122,12 +122,13 @@ class Config {
         
         $this->projectConfig = parse_ini_file($this->projects_root.'/projects/'.$project.'/config.ini');
         
+        // removing empty values in the INI file
         foreach($this->projectConfig as &$value) {
             if (is_array($value) && empty($value[0])) {
-                unset($value[0]);
+                (unset) $value[0];
             }
         }
-        unset($value);
+        (unset) $value;
         
         $other_php_versions = array();
         foreach(array('52', '53', '54', '55', '56', '70') as $version) {
