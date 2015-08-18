@@ -53,12 +53,14 @@ class Sqlite extends \Report\Format {
         $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
 
         foreach($this->output as $t) {
-            foreach($t as $k => $v) {
+            foreach($t as &$v) {
                 if (is_array($v)) {
                     die(print_r($v,true));
                 }
-                $t[$k] = $db->escapeString($v);
+                $v = $db->escapeString($v);
             }
+            (unset) $v;
+            
             if (count($t) != 3) {
                 die(print_r($t, true).__METHOD__);
             }

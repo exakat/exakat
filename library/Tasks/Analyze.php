@@ -96,9 +96,9 @@ php exakat analyze -P <One/rule> -p <project>\n");
             $c = count($dependencies) + 1;
             while(!empty($dependencies) && $c > count($dependencies)) {
                 $c = count($dependencies);
-                foreach($dependencies as $a => $d) {
+                foreach($dependencies as $a => &$d) {
                     $diff = array_diff($d, $dependencies2);
-        
+
                     foreach($diff as $k => $v) {
                         if (!isset($dependencies[$v])) {
                             $x = \Analyzer\Analyzer::getInstance($v, $client);
@@ -124,9 +124,10 @@ php exakat analyze -P <One/rule> -p <project>\n");
                         $dependencies2[] = $a;
                         unset($dependencies[$a]);
                     } else {
-                        $dependencies[$a] = $diff;
+                        $d = $diff;
                     }
                 }
+                (unset) $d;
             }
 
             if (!empty($dependencies)) {

@@ -56,15 +56,16 @@ class Datastore {
         foreach($data as $key => $row) {
             if (is_array($row)) {
                 $d = array_values($row);
-                foreach($d as $id => $e) {
-                    $d[$id] = Sqlite3::escapeString($e);
+                foreach($d as &$e) {
+                    $e = Sqlite3::escapeString($e);
                 }
+                (unset) $e;
                 
             } else {
                 $d = array($key, $row);
             }
 
-            $query = "REPLACE INTO $table (".implode(", ", $cols).") VALUES ('".implode("', '", $d)."')";
+            $query = "REPLACE INTO $table (".implode(', ', $cols).") VALUES ('".implode("', '", $d)."')";
             $this->sqlite->querySingle($query);
         }
         
@@ -103,7 +104,7 @@ class Datastore {
     }
 
     public function getHash($key) {
-        $query = "SELECT value FROM hash WHERE key=:key";
+        $query = 'SELECT value FROM hash WHERE key=:key';
         $stmt = $this->sqlite->prepare($query);
         $stmt->bindValue(':key', $key, SQLITE3_TEXT);
         $res = $stmt->execute();
