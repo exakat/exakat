@@ -69,7 +69,7 @@ class TokenAuto extends Token {
             unset($this->conditions[0]);
         }
 
-        for($i = -8; $i < 0; $i++) {
+        for($i = -8; $i < 0; ++$i) {
             if (!empty($this->conditions[$i])) {
                 $conditions = $this->conditions[$i];
                 $conditions['previous'] = abs($i);
@@ -80,7 +80,7 @@ class TokenAuto extends Token {
             unset($this->conditions[$i]);
         }
 
-        for($i = 1; $i < 12; $i++) {
+        for($i = 1; $i < 12; ++$i) {
             if (!empty($this->conditions[$i])) {
                 $conditions = $this->conditions[$i];
                 $conditions['next'] = $i;
@@ -95,7 +95,7 @@ class TokenAuto extends Token {
             throw new UnprocessedCondition();
         }
         
-        $query = $query.'.'.implode('.', $queryConditions);
+        $query .= '.'.implode('.', $queryConditions);
         
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
@@ -607,7 +607,7 @@ $fullcode
 
                 // Destination > 0
                 if ($destination > 0) {
-                    $c++;
+                    ++$c;
                 
                     if ($label == 'DROP') {
                         $qactions[] = "
@@ -2587,7 +2587,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         $queryConditions = array();
 
         if (isset($conditions['next'])) {
-            for($i = 0; $i < $conditions['next']; $i++) {
+            for($i = 0; $i < $conditions['next']; ++$i) {
                 $queryConditions[] = "out('NEXT')";
             }
             $queryConditions[] = "sideEffect{ a{$conditions['next']} = it;}";
@@ -2595,7 +2595,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         }
 
         if (isset($conditions['previous'])) {
-            for($i = 0; $i < $conditions['previous']; $i++) {
+            for($i = 0; $i < $conditions['previous']; ++$i) {
                 $queryConditions[] = "in('NEXT')";
             }
             $queryConditions[] = "sideEffect{ b{$conditions['previous']} = it;}";

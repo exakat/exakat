@@ -94,12 +94,16 @@ HEADER
         
         $fnodes = -1;
         $fp = fopen('nodes.csv', 'r');
-        while(fgetcsv($fp, 100000, "\t", '"')) { $fnodes++; }
+        while(fgetcsv($fp, 100000, "\t", '"')) { 
+            ++$fnodes; 
+        }
         fclose($fp);
         
         $frels = -1;
         $fp = fopen('rels.csv', 'r');
-        while(fgetcsv($fp, 1000, "\t", '"')) { $frels++; }
+        while(fgetcsv($fp, 1000, "\t", '"')) { 
+            ++$frels; 
+        }
         fclose($fp);
         
         if ($fnodes != $nodes[1]) {
@@ -171,7 +175,7 @@ HEADER
             fputcsv($fp, $link, "\t");
         }
         static::$links = array();
-        static::$file_saved++;
+        ++static::$file_saved;
     }
     
     public function makeNode() {
@@ -202,7 +206,7 @@ HEADER
     
     public function save() {
         if (empty($this->id)) {
-            static::$count++;
+            ++static::$count;
             $this->id = static::$count;
             static::$nodes[$this->id] = $this->node;
         } else {

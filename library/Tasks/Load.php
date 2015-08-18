@@ -272,7 +272,7 @@ class Load implements Tasks {
     
         for($id = 0; $id < $nb; $id++) {
             if (empty($tokens[$id])) { continue; }
-            $Tid++;
+            ++$Tid;
             $token = $tokens[$id];
             $to_index = true;
 
@@ -293,7 +293,7 @@ class Load implements Tasks {
                     $regexIndex[$tokenToIndex[$token[3]]]->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -316,7 +316,7 @@ class Load implements Tasks {
                     $previous = $T[$Tid];
                     $regexIndex[$tokenToIndex[$token[3]]]->relateTo($T[$Tid], 'INDEXED')->save();
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -327,7 +327,7 @@ class Load implements Tasks {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                         ->setProperty('code', ';')
                                                         ->setProperty('line', $line)
@@ -346,7 +346,7 @@ class Load implements Tasks {
                     $regexIndex['Functioncall']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -368,7 +368,7 @@ class Load implements Tasks {
                     $regexIndex['Phpcode']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_OPEN_TAG')
                                                   ->setProperty('code', '<?php /* empty, no closing tag */ ?>')
                                                   ->setProperty('fullcode', '<?php /* empty, no closing tag */ ?>')
@@ -392,7 +392,7 @@ class Load implements Tasks {
                     }
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ECHO')
                                                   ->setProperty('code', 'echo')
                                                   ->setProperty('line', $line)
@@ -418,7 +418,7 @@ class Load implements Tasks {
                     }
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('fullcode', ' ')
@@ -454,7 +454,7 @@ class Load implements Tasks {
                                                     ->save();
                             $T[$Tid]->relateTo($void, 'ELEMENT')->save();
   
-                            $id++;
+                            ++$id;
                             continue;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
@@ -473,7 +473,7 @@ class Load implements Tasks {
                           $previous->relateTo($T[$Tid], 'NEXT')->save();
                           $previous = $T[$Tid];
 
-                          $Tid++;
+                          ++$Tid;
                           $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
                                                   ->setProperty('fullcode', $token[1])
@@ -493,7 +493,7 @@ class Load implements Tasks {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
 
-                    $id++;
+                    ++$id;
                     continue;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           in_array($previous->getProperty('token'), array('T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_STRING', 'T_CONTINUE', 'T_BREAK'))) {
@@ -509,7 +509,7 @@ class Load implements Tasks {
                           $previous->relateTo($T[$Tid], 'NEXT')->save();
                           $previous = $T[$Tid];
 
-                          $Tid++;
+                          ++$Tid;
                           $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
                                                   ->setProperty('fullcode', $token[1])
@@ -575,7 +575,7 @@ class Load implements Tasks {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
                
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                     ->setProperty('code', 'void')
                                                     ->setProperty('fullcode', ' ')
@@ -657,7 +657,7 @@ class Load implements Tasks {
                 }
 
                 if ($token[3] == 'T_CURLY_OPEN' || $token[3] == 'T_DOLLAR_OPEN_CURLY_BRACES') {
-                    $block_level++;
+                    ++$block_level;
                 }
 
                 if ($token[3] == 'T_OPEN_CURLY') {
@@ -679,9 +679,9 @@ class Load implements Tasks {
                 $token_value = $this->php->getTokenname($token);
             
                 if ($token_value == 'T_OPEN_CURLY') {
-                    $block_level ++;
+                    ++$block_level;
                 } elseif ($token_value == 'T_CLOSE_CURLY') {
-                    $block_level --;
+                    --$block_level;
                 }
             
                 if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE'))) {
@@ -690,15 +690,15 @@ class Load implements Tasks {
                             if (in_array($tokens[$id - 1], array('[', '+', '-', '*', '/', '%', '.', '('))) { // string inside a string !!
                                 throw new Exceptions\TooManyLevelInsideAStringException();
                             } else {
-                                $delimitedStrings['T_QUOTE_2']++;
+                                ++$delimitedStrings['T_QUOTE_2'];
                             }
                         } elseif (in_array($tokens[$id - 1], array('[', '+', '-', '*', '/', '%', '.', '('))) { // string inside a string !!
-                            $delimitedStrings['T_QUOTE_2']++;
+                            ++$delimitedStrings['T_QUOTE_2'];
                         } else {
-                            $delimitedStrings[$token_value]++;
+                            ++$delimitedStrings[$token_value];
                         }
                     } else {
-                        $delimitedStrings[$token_value]++;
+                        ++$delimitedStrings[$token_value];
                     }
                 
                     if ($delimitedStrings[$token_value] % 2 == 0) {
@@ -739,10 +739,10 @@ class Load implements Tasks {
                                                      ->setProperty('rank', 0)
                                                      ->save();
 
-                        $Tid++;
+                        ++$Tid;
                         $T[$Tid] = $void;
                     } else {
-                        $block_level--;
+                        --$block_level;
                         $block = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                       ->setProperty('code', $token)
                                                       ->setProperty('fullcode', '{ /**/ } ')
@@ -798,7 +798,7 @@ class Load implements Tasks {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -824,7 +824,7 @@ class Load implements Tasks {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -854,7 +854,7 @@ class Load implements Tasks {
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
                         $previous = $T[$Tid];
                 
-                        $Tid++;
+                        ++$Tid;
                         $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                         ->setProperty('code', 'void')
                                                         ->setProperty('fullcode', ' ')
@@ -876,7 +876,7 @@ class Load implements Tasks {
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
                         $previous = $T[$Tid];
                 
-                        $Tid++;
+                        ++$Tid;
                         $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                         ->setProperty('code', 'void')
                                                         ->setProperty('fullcode', ' ')
@@ -901,7 +901,7 @@ class Load implements Tasks {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -943,7 +943,7 @@ class Load implements Tasks {
                                                    ->setProperty('rank', 0)
                                                    ->save();
 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $sequence;
                     $sequence->relateTo($void, 'ELEMENT')->save();
 
@@ -963,7 +963,7 @@ class Load implements Tasks {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -985,7 +985,7 @@ class Load implements Tasks {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -1005,7 +1005,7 @@ class Load implements Tasks {
                     $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -1025,7 +1025,7 @@ class Load implements Tasks {
                     $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
-                    $Tid++;
+                    ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
@@ -1051,9 +1051,9 @@ class Load implements Tasks {
             }
 
             if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
-                $inQuote++;
+                ++$inQuote;
             } elseif ($inQuote && in_array($token_value, array('T_QUOTE_CLOSE', 'T_SHELL_QUOTE_CLOSE', 'T_END_HEREDOC'))) {
-                $inQuote--;
+                --$inQuote;
                 $T[$Tid]->setProperty('in_quote', 'true')->save();
             }
 
@@ -1067,9 +1067,9 @@ class Load implements Tasks {
 
             if ($in_for > 0) {
                 if (in_array($token_value, array('T_OPEN_PARENTHESIS'))) {
-                    $in_for++;
+                    ++$in_for;
                 } elseif (in_array($token_value, array('T_CLOSE_PARENTHESIS'))) {
-                    $in_for--;
+                    --$in_for;
                     if ($in_for == 1) {
                         $in_for = 0;
                     }
@@ -1191,49 +1191,49 @@ class Load implements Tasks {
         
         if ($tokenValue == 'T_CLASS' ) {
             $states[] = 'Class';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_FUNCTION' ) {
             $states[] = 'Function';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_FINALLY' ) {
             $states[] = 'Finally';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_USE' ) {
             $states[] = 'Use';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_CATCH' ) {
             $states[] = 'Catch';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_TRY' ) {
             $states[] = 'Try';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_INTERFACE' ) {
             $states[] = 'Interface';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_TRAIT' ) {
             $states[] = 'Trait';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
@@ -1268,53 +1268,43 @@ class Load implements Tasks {
         
         if ($tokenValue == 'T_FOR' ) {
             $states[] = 'For';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_FOREACH' ) {
             $states[] = 'Foreach';
-            $statesId++;
+            ++$statesId;
             return '';
         }
         
         if ($tokenValue == 'T_WHILE' ) {
             $states[] = 'While';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_SWITCH' ) {
             $states[] = 'Switch';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_DECLARE' ) {
             $states[] = 'Declare';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
         if ($tokenValue == 'T_CATCH' ) {
             $states[] = 'Catch';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
-/*
-Will stress Arguments too much
-        if ($tokenValue == 'T_FUNCTION' ) {
-            $states[] = 'Function';
-            $statesId++;
-            return '';
-        }
-
-Too many updates (If expected a Parenthesis, not a ( ... )
-*/
         if ($tokenValue == 'T_IF' || $tokenValue == 'T_ELSEIF') {
             $states[] = 'If';
-            $statesId++;
+            ++$statesId;
             return '';
         }
 
@@ -1326,15 +1316,7 @@ Too many updates (If expected a Parenthesis, not a ( ... )
                 return '';
             }
         }
-/*
-        if ($tokenValue == 'T_SEMICOLON' &&
-            count($states) > 0) {
-                if (in_array($states[count($states) - 1], array('Use', 'Function'))) {
-                    array_pop($states);
-                    return '';
-                }
-        }
-    */
+
         return '';
     }
 }

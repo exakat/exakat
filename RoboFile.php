@@ -15,7 +15,7 @@ class RoboFile extends \Robo\Tasks
     public function versionBump($version = null) {
         if (!$version) {
             $versionParts = explode('.', \Exakat::VERSION);
-            $versionParts[count($versionParts)-1]++;
+            ++$versionParts[count($versionParts)-1];
             $version = implode('.', $versionParts);
         }
         $this->taskReplaceInFile(__DIR__.'/library/Exakat.php')
@@ -77,7 +77,7 @@ LICENCE;
             
             $tokenId = 0;
             if ($tokens[$tokenId][0] == T_INLINE_HTML && trim($tokens[$tokenId][1]) == '#!/usr/bin/env php') {
-                $tokenId++;
+                ++$tokenId;
             }
             if ($tokens[$tokenId][0] == T_OPEN_TAG) {
                 if ($tokens[$tokenId + 1][0] != T_COMMENT) {
@@ -91,7 +91,7 @@ LICENCE;
                         }
                     }
                     fclose($fp);
-                } elseif (crc32($tokens[$tokenId + 1][1]) != $licenceCRC) {
+                } elseif (crc32($tokens[$tokenId + 1][1]) !== $licenceCRC) {
                     print "Licence seems to be changed in file '$file'\n";
                 }
             } else {
@@ -235,7 +235,7 @@ LICENCE;
         $total = 0;
         
         foreach($files as $file) {
-            $total++;
+            ++$total;
             $raw = file_get_contents($file);
             $json = json_decode($raw);
             if (empty($json)) {
@@ -256,7 +256,7 @@ LICENCE;
         set_error_handler('error_handler');
         
         foreach($files as $file) {
-            $total++;
+            ++$total;
             $ini = parse_ini_file($file);
             if (empty($ini)) {
                 $errors[] = "$file is INI invalid\n";
@@ -271,7 +271,7 @@ LICENCE;
             ->name('*.sqlite');
         
         foreach($files as $file) {
-            $total++;
+            ++$total;
             $sqlite = new sqlite3($file);
             $results = $sqlite->query('pragma integrity_check');
             $response = $results->fetchArray()['integrity_check'];
@@ -302,7 +302,7 @@ LICENCE;
                 }
             }
             if (!empty($toDelete)) {
-                $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.join(', ', $toDelete).')');
+                $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', $toDelete).')');
                 print count($toDelete)." rows removed\n";
             }
         }
