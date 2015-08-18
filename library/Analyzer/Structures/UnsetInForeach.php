@@ -84,11 +84,12 @@ class UnsetInForeach extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-
         // foreach($a as $v) { unset($v[1]); }
+        // Not &$v
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->atomIs('Variable')
+             ->isNot('reference', true)
              ->savePropertyAs('code', 'blind')
              ->back('first')
              ->outIs('BLOCK')
@@ -105,7 +106,7 @@ class UnsetInForeach extends Analyzer\Analyzer {
         // foreach($a as $k => $v) { unset($k[1]); }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE('KEY')
+             ->outIs('KEY')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'blind')
              ->back('first')
@@ -121,10 +122,12 @@ class UnsetInForeach extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // foreach($a as $k => $v) { unset($v[1]); }
+        // is OK on &$v
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE('VALUE')
              ->atomIs('Variable')
+             ->isNot('reference', true)
              ->savePropertyAs('code', 'blind')
              ->back('first')
              ->outIs('BLOCK')
@@ -132,6 +135,111 @@ class UnsetInForeach extends Analyzer\Analyzer {
              ->tokenIs('T_UNSET')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->samePropertyAs('code', 'blind')
+             ->back('first');
+        $this->prepareQuery();
+
+////////////////////////////////////////////////////////////
+// same but with (unset) instead of (unset)
+////////////////////////////////////////////////////////////
+        // foreach($a as $v) { (unset) $v; }
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE(array('KEY', 'VALUE'))
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'blind')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->outIs('CAST')
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'blind')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foreach($a as $k => $v) { unset($v); }
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE('VALUE')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'blind')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->outIs('CAST')
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'blind')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foreach($a as $k => $v) { unset($k); }
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE('KEY')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'blind')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->outIs('CAST')
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'blind')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foreach($a as $v) { unset($v[1]); }
+        // Not &$v
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->atomIs('Variable')
+             ->isNot('reference', true)
+             ->savePropertyAs('code', 'blind')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->outIs('CAST')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->samePropertyAs('code', 'blind')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foreach($a as $k => $v) { unset($k[1]); }
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIs('KEY')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'blind')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->outIs('CAST')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->samePropertyAs('code', 'blind')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foreach($a as $k => $v) { unset($v[1]); }
+        // is OK on &$v
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE('VALUE')
+             ->atomIs('Variable')
+             ->isNot('reference', true)
+             ->savePropertyAs('code', 'blind')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->outIs('CAST')
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->samePropertyAs('code', 'blind')
