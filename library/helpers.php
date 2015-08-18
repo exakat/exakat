@@ -161,7 +161,6 @@ function gremlin_queryOne($query, $params = [], $load = '') {
         print "Help needed in ".__METHOD__."\n";
         var_dump($res);
         die();
-        return $res[0];
     }
 }
 
