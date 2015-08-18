@@ -30,11 +30,15 @@ class findExternalLibraries implements Tasks {
     
     // classic must be in lower case form. 
     private $classic = array('bbq'              => self::WHOLE_DIR,
+                             'cpdf'             => self::WHOLE_DIR, // ezpdf
+                             'dompdf'           => self::PARENT_DIR,
                              'fpdf'             => self::FILE_ONLY, 
-                             'html2pdf'         => self::WHOLE_DIR,
+                             'graph'            => self::PARENT_DIR,
+                             'html2pdf'         => self::WHOLE_DIR, // contains tcpdf
                              'htmlpurifier'     => self::FILE_ONLY,
                              'http_class'       => self::WHOLE_DIR,
                              'idna_convert'     => self::WHOLE_DIR,
+                             'lessc'            => self::FILE_ONLY,
                              'magpierss'        => self::WHOLE_DIR,
                              'markdown_parser'  => self::FILE_ONLY,
                              'markdown'         => self::WHOLE_DIR,
@@ -52,12 +56,8 @@ class findExternalLibraries implements Tasks {
                              'text_diff'        => self::WHOLE_DIR,
                              'text_highlighter' => self::WHOLE_DIR,
                              'tfpdf'            => self::WHOLE_DIR,
-                             'yii'              => self::FILE_ONLY,
                              'utf8'             => self::WHOLE_DIR,
-                             'lessc'            => self::FILE_ONLY,
-                             'dompdf'           => self::PARENT_DIR,
-                             'graph'            => self::PARENT_DIR,
-                             'html2pdf'         => self::WHOLE_DIR,
+                             'yii'              => self::FILE_ONLY,
                              );
 
     public function run(\Config $config) {
