@@ -205,7 +205,7 @@ class UnsetInForeach extends Analyzer\Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
              ->atomIs('Array')
-             ->outIs('VARIABLE')
+             ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'blind')
              ->back('first');
         $this->prepareQuery();
@@ -222,7 +222,7 @@ class UnsetInForeach extends Analyzer\Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
              ->atomIs('Array')
-             ->outIs('VARIABLE')
+             ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'blind')
              ->back('first');
         $this->prepareQuery();
@@ -241,7 +241,7 @@ class UnsetInForeach extends Analyzer\Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
              ->atomIs('Array')
-             ->outIs('VARIABLE')
+             ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'blind')
              ->back('first');
         $this->prepareQuery();
