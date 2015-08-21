@@ -23,9 +23,6 @@
 
 namespace Analyzer;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Index\NodeIndex;
-
 class Analyzer {
     protected $neo4j = null;
     protected $code = null;
@@ -68,8 +65,7 @@ class Analyzer {
     
     static public $docs = null;
 
-    public function __construct(Client $client = null) {
-        $this->neo4j = $client;
+    public function __construct() {
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
         $this->analyzerIsNot($this->analyzer);
@@ -164,9 +160,9 @@ class Analyzer {
         return $r;
     }
     
-    public static function getInstance($name, $client) {
+    public static function getInstance($name) {
         if ($analyzer = Analyzer::getClass($name)) {
-            return new $analyzer($client);
+            return new $analyzer(null);
         } else {
             echo "No such class as '$name'\n";
             return null;
@@ -218,7 +214,7 @@ class Analyzer {
     
     public function init() {
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
-        if ($result[0][0] == 0) {
+        if ($result[0] == 0) {
             $this->query("g.createIndex('analyzers', Vertex)");
         }
         
@@ -247,7 +243,7 @@ GREMLIN;
 
     public function isDone() {
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
-        if ($result[0][0] == 0) {
+        if ($result[0] == 0) {
             $this->query("g.createIndex('analyzers', Vertex)");
 
             return false;
@@ -323,21 +319,18 @@ GREMLIN;
     }
 
     public function query($queryString, $arguments = null) {
-        if ($arguments === null) {
-            $arguments = array('type' => 'IN');
+        $result = gremlin_query($queryString, $arguments);
+        if (!isset($result->results)) {
+            return array();
+            print __METHOD__."\n";
+            var_dump($arguments);
+            var_dump($queryString);
+            var_dump($result);
+            die();
         }
-
-        try {
-            $result = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryString, $arguments);
-            return $result->getResultSet();
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            die( 'Exception : '.$message."\n".
-                 $queryString."\n".
-                 print_r($this->arguments, true).
-                 __METHOD__);
-        }
+        $result = $result->results;
+        
+        return $result;
     }
 
     public function _as($name) {
@@ -1621,7 +1614,6 @@ GREMLIN
     }
     
     public function run() {
-
         $this->analyze();
         $this->prepareQuery();
 
@@ -1703,7 +1695,9 @@ GREMLIN;
         // @todo add a test here ?
         foreach($this->queries as $id => $query) {
             $r = $this->query($query, $this->queriesArguments[$id]);
-            $this->rowCount += $r[0][0];
+            if (isset($r[0])) {
+                $this->rowCount += $r[0];
+            } // else means that it is not set, so it's 0. No need for an operation.
         }
 
         // reset for the next
@@ -1726,7 +1720,7 @@ GREMLIN;
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
-                $report[] = $v[0]->fullcode;
+                $report[] = $v->fullcode;
             }
         }
         
@@ -1847,7 +1841,7 @@ GREMLIN;
         
         $return = array();
         foreach($vertices as $k => $v) {
-            $return[$k] = $v[0];
+            $return[$k] = (array) $v;
         }
         
         return $return;
