@@ -1080,7 +1080,7 @@ class Load implements Tasks {
                 $T[$Tid]->setProperty('in_for', 'true')->save();
             }
         
-            if ($type = $this->process_blocks($token_value)) {
+            if (!empty($previous) && $previous->getProperty('token') != 'T_DOUBLE_COLON' && $type = $this->process_blocks($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
             if ($type = $this->process_parenthesis($token_value)) {
@@ -1168,7 +1168,7 @@ class Load implements Tasks {
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
         if (!empty($this->process_blocks('T_OPEN_CURLY'))) {
-            print "Alert, all blocks were not flushed in '$filename'\n";
+            print "Alert, all { and } were not flushed in '$filename'\n";
         }
         if (!empty($this->process_blocks('T_OPEN_PARENTHESIS'))) {
             print "Alert, all parenthesis were not flushed in '$filename'\n";
