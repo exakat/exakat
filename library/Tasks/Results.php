@@ -49,12 +49,12 @@ class Results implements Tasks {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.any()';
             $vertices = $this->query($queryTemplate);
 
-            $return[] = $vertices[0][0];
+            $return[] = $vertices[0];
         } elseif ($config->style == 'COUNTED_ALL') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.count()';
             $vertices = $this->query($queryTemplate);
 
-            $return[] = $vertices[0][0];
+            $return[] = $vertices[0];
         } elseif ($config->style == 'ALL') {
               $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Line':it.line, 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x')
@@ -87,7 +87,7 @@ GREMLIN;
             $vertices = $this->query($queryTemplate);
 
             $return = array();
-            foreach($vertices[0][0] as $k => $v) {
+            foreach($vertices[0] as $k => $v) {
                 $return[$k] = $v;
             }
         }

@@ -275,7 +275,7 @@ class Premier extends Report {
 This is an overview of your application. 
 
 Ticked <i class="icon-ok"></i> information are features used in your application. Non-ticked are feature that are not in use in the application.
-Crossed <i class="fa fa-times-circle-o"> information were not tested.
+Crossed <i class="fa fa-times-circle-o"></i> information were not tested.
 
 TEXT
 );

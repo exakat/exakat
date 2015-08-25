@@ -306,7 +306,7 @@ class Appinfo extends \Report\Content {
                 
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].hasNot('notCompatibleWithPhpVersion', null).count()"; 
                 $vertices = $this->query($queryTemplate);
-                $v = $vertices[0][0];
+                $v = $vertices[0];
                 if ($v == 1) {
                     $this->array[$section][$name] = 'Incomp.';
                     continue ;
@@ -314,7 +314,7 @@ class Appinfo extends \Report\Content {
 
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
                 $vertices = $this->query($queryTemplate);
-                $v = $vertices[0][0];
+                $v = $vertices[0];
                 if ($v == 0) {
                     $this->array[$section][$name] = 'Not run';
                     continue;
@@ -328,9 +328,9 @@ class Appinfo extends \Report\Content {
                 $list = $this->array[$section];
                 uksort($this->array[$section], function ($ka, $kb) use ($list) {
                     if ($list[$ka] == $list[$kb]) {
-                        if ($ka > $kb) { return  1; }
-                        if ($ka == $kb) { return 0; }
-                        if ($ka > $kb) { return -1; }
+                        if ($ka > $kb)  { return  1; }
+                        if ($ka == $kb) { return  0; }
+                        if ($ka > $kb)  { return -1; }
                     } else {
                         return $list[$ka] == 'Yes' ? -1 : 1;
                     }

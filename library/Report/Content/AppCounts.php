@@ -72,9 +72,8 @@ class AppCounts extends \Report\Content {
                             'Variables variables' => 'Variables\\VariableVariable',
                             'Variables functions' => 'Functions\\Dynamiccall',
                             'Variables classes' => 'Classes\\VariableClasses',
-                            
-                     ),
-                    );
+                    ),
+                );
 
         foreach($extensions as $section => $hash) {
             $this->hash[$section] = array();
@@ -93,9 +92,8 @@ class AppCounts extends \Report\Content {
                     $queryTemplate = "g.idx('atoms')[['atom':'{$ext['index']}']].count()"; 
                 }
                 $vertices = $this->query($queryTemplate);
-                $v = $vertices[0][0];
+                $v = $vertices[0];
                 $this->hash[$section][$name] = $v;
-                continue;
             }
         }
     }
