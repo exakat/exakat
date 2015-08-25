@@ -37,7 +37,7 @@ class UnicodeBlock extends Analyzer\Analyzer {
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
-                $report[] = $v[0]->unicode_block;
+                $report[] = $v->unicode_block;
             }
         }
         
@@ -50,7 +50,7 @@ class UnicodeBlock extends Analyzer\Analyzer {
 
         $report = array();
         if (count($vertices) > 0) {
-            foreach($vertices[0][0] as $k => $v) {
+            foreach($vertices[0] as $k => $v) {
                 $report[$k] = $v;
             }
         }
