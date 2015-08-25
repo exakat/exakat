@@ -20,18 +20,11 @@
  *
 */
 
-
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin;
-
 class Stats {
-    private $client = null;
     private $stats = array();
     private $file_filter = '';
     
-    public function __construct(Client $client = null) {
-        $this->client = $client;
-    }
+    public function __construct() { }
 
     public function toArray() {
         return $this->stats;
@@ -72,18 +65,12 @@ class Stats {
     
     private function queryOne($queryString) {
         $r = $this->query($queryString);
-        return $r[0][0];
+        return $r[0];
     }
 
     private function query($queryString) {
-        $parameters = array('type' => 'IN');
-        try {
-            $query = new Gremlin\Query($this->client, $queryString, $parameters);
-            return $query->getResultSet();
-        } catch (Everyman\Neo4j\Exception $e) {
-            print "Can't execute '$queryString'\n".$e->getMessage()."\n";
-            return null;
-        }
+        $res = gremlin_query($queryString);
+        return (array) $res->results;
     }
 }
 

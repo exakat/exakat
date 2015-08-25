@@ -23,11 +23,7 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class Build_root implements Tasks {
-    private $client = null;
     private $project_dir = '.';
     private $config = null;
     
@@ -36,8 +32,6 @@ class Build_root implements Tasks {
         $this->config = $config;
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
 
-        display( "Connecting to server\n");
-        $this->client = new Client();
         display( "Starting\n");
 
         $this->logTime('Start');
@@ -45,7 +39,8 @@ class Build_root implements Tasks {
         $result = gremlin_query("g.idx('racines')");
         display("Got racines\n");
 
-        if ($result === null) {
+        if (!isset($result->results)) {
+            display("Create racines\n");
             gremlin_query("g.createIndex('racines', Vertex)");
         }
         display("Created racines index\n");
@@ -63,7 +58,7 @@ class Build_root implements Tasks {
             it.setProperty('atom', 'Identifier');
             g.idx('atoms').put('atom', it.atom, it); 
         }";
-        gremlin_query($query, 1);
+        gremlin_query($query);
         display( "g.idx('atoms') : T_STRING\n");
 
         // separate processing for T_VARIABLE 
@@ -72,7 +67,7 @@ class Build_root implements Tasks {
             it.setProperty('atom', 'Variable');
             g.idx('atoms').put('atom', it.atom, it); 
         }";
-        gremlin_query($query, 1);
+        gremlin_query($query);
         display( "g.idx('atoms') : T_VARIABLE\n");
 
         $query = "g.V.has('token', 'T_STRING_VARNAME').each{
@@ -80,14 +75,14 @@ class Build_root implements Tasks {
             it.setProperty('atom', 'Variable');
             g.idx('atoms').put('atom', it.atom, it); 
         }";
-        gremlin_query($query, 1);
+        gremlin_query($query);
         display( "g.idx('atoms') : T_VARIABLE\n");
 
         $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant', 'Null',
                                          'Rawstring', 'Float', 'Boolean', 'Void', 'File']}.each{
                                          g.idx('atoms').put('atom', it.atom, it); 
         }";
-        gremlin_query($query, 1);
+        gremlin_query($query);
         display( "g.idx('atoms') : filled\n" );
         $this->logTime('g.idx("atom")[["atom":"******"]] : filling');
 
@@ -137,23 +132,9 @@ class Build_root implements Tasks {
     }
 
     private function query($query, $retry = 1) {
-        $params = array('type' => 'IN');
-        try {
-            $GremlinQuery = new Query($this->client, $query, $params);
-            return $GremlinQuery->getResultSet();
-        } catch (\Exception $e) {
-            $fp = fopen($this->project_dir.'/log/build_root.log', 'a');
-            fwrite($fp, $query."\n");
-            fwrite($fp, $e->getMessage());
-            fclose($fp);
-        
-            if ($retry) {
-                echo shell_exec ('cd '.$this->config->projects_root.'/neo4j/;sh ./bin/neo4j restart');
-                return gremlin_query($query, 0);
-            }
-        
-            die('died in '.__METHOD__."\n");
-        }
+        $res = gremlin_query($query);
+
+        return $res->results;
     }
 
     private function logTime($step) {

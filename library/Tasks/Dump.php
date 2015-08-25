@@ -97,8 +97,15 @@ g.idx('analyzers')[['analyzer':'$analyzerName']].out
 
 GREMLIN;
                     $res = gremlin_query($query);
+                    $res = $res->results;
+                    
                     foreach($res as $result) {
-                        if (!is_object($result)) { var_dump($result); die();}
+                        if (!is_object($result)) { 
+                            print "Object expected but not found\n";
+                            var_dump($result); 
+                            die();
+                        }
+                        
                         $stmt->bindValue(':fullcode', $result->fullcode, SQLITE3_TEXT);
                         $stmt->bindValue(':file',     $result->file,     SQLITE3_TEXT);
                         $stmt->bindValue(':line',     $result->line,     SQLITE3_TEXT);

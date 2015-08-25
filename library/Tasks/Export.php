@@ -23,28 +23,17 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin,
-    Everyman\Neo4j\Index\NodeIndex;
-
 class Export implements Tasks {
     public function run(\Config $config) {
-        $client = new Client();
-
         $queryTemplate = 'g.V.as("x").except([g.v(0)])';
 
-        $params = array('type' => 'IN');
-        $query = new Gremlin\Query($client, $queryTemplate, $params);
-        try {
-            $vertices = $query->getResultSet();
-        } catch (Exception $e) {
-            die( 'Error reading the Vertices\n{$e->getmessage()}'."\n");
-        }
+        $result = gremlin_query($queryTemplate);
+        $vertices = (array) $result->results;
 
         $V = array();
         foreach($vertices as $v) {
-            $x = $v[0]->getId();
-            $V[$x] =  $v[0]->getProperties();
+            $x = $v->_id;
+            $V[$x] =  (array) $v;
     
             if (isset($V[$x]['root'])) {
                 $root = $x;
@@ -52,23 +41,22 @@ class Export implements Tasks {
         }
 
         $queryTemplate .= '.outE()';
-        $params = array('type' => 'IN');
-        $query = new Gremlin\Query($client, $queryTemplate, $params);
-        $edges = $query->getResultSet();
+        $result = gremlin_query($queryTemplate);
+        $edges = (array) $result->results;
 
         $E = array();
         foreach($edges as $e) {
-            $id = $e[0]->getStartNode()->getId();
+            $id = $e->_outV;
     
             if (!isset($E[$id])) {
                 $E[$id] = array();
             }
     
-            $endNodeId = $e[0]->getEndNode()->getId();
+            $endNodeId = $e->_inV;
             if(isset($E[$id][$endNodeId])) {
-                $E[$id][$endNodeId] .= ', '.$e[0]->getType();
+                $E[$id][$endNodeId] .= ', '.$e->_label;
             } else {
-                $E[$id][$endNodeId] = $e[0]->getType();
+                $E[$id][$endNodeId] = $e->_label;
             }
         }
 

@@ -23,13 +23,7 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query,
-    Everyman\Neo4j\Index\NodeIndex;
-
 class Analyze implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
         $project = $config->project;
         
@@ -63,7 +57,6 @@ class Analyze implements Tasks {
 php exakat analyze -P <One/rule> -p <project>\n");
         }
 
-        $client = new Client();
         $log = new \Log('analyze', $config->projects_root.'/projects/'.$config->project);
 
         $log->log("Analyzing project $project");
@@ -75,7 +68,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
             $dependencies = array();
             $dependencies2 = array();
             foreach($analyzers_class as $a) {
-                $d = \Analyzer\Analyzer::getInstance($a, $client);
+                $d = \Analyzer\Analyzer::getInstance($a);
                 $configName = str_replace('/', '_', $a);
                 if (null !== ($analyzerConfig = $config->$configName)) {
                     $d->setConfig($analyzerConfig);
@@ -101,7 +94,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
 
                     foreach($diff as $k => $v) {
                         if (!isset($dependencies[$v])) {
-                            $x = \Analyzer\Analyzer::getInstance($v, $client);
+                            $x = \Analyzer\Analyzer::getInstance($v);
                             if ($x === null) {
                                 display( "No such dependency as '$v'. Ignoring\n");
                                 continue;
@@ -141,7 +134,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
 
         foreach($dependencies2 as $analyzer_class) {
             $begin = microtime(true);
-            $analyzer = \Analyzer\Analyzer::getInstance($analyzer_class, $client);
+            $analyzer = \Analyzer\Analyzer::getInstance($analyzer_class);
             $configName = str_replace(array('/', '\\'), '_', str_replace('Analyzer\\', '', $analyzer_class));
             if (null !== ($analyzerConfig = $config->$configName)) {
                 $analyzer->setConfig($analyzerConfig);
@@ -159,8 +152,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
                 $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpVersion', '$config->phpversion');
 GREMLIN;
-                $arguments = array('type' => 'IN');
-                $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
+                gremlin_query($query);
 
                 display( "$analyzer_class is not compatible with PHP version {$config->phpversion}. Ignoring\n");
             } elseif (!$analyzer->checkPhpConfiguration($Php)) {
@@ -169,18 +161,20 @@ GREMLIN;
                 $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '{$config->phpversion}');
 GREMLIN;
-                $arguments = array('type' => 'IN');
-                $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
+                gremin_query($query);
 
                 display( "$analyzer_class is not compatible with PHP configuration of this version. Ignoring\n");
             } else {
                 $analyzer->run();
 
                 $count = $analyzer->getRowCount();
+                $processed = $analyzer->getProcessedCount();
+                $queries = $analyzer->getQueryCount();
+                $rawQueries = $analyzer->getRawQueryCount();
                 $total_results += $count;
-                display( "$analyzer_class fait ($count)\n");
+                display( "$analyzer_class fait ($count / $processed)\n");
                 $end = microtime(true);
-                $log->log("$analyzer_class\t".($end - $begin)."\t$count");
+                $log->log("$analyzer_class\t".($end - $begin)."\t$count\t$processed\t$queries\t$rawQueries");
                 // storing the number of row found in Hash table (datastore)
                 $datastore->addRow('hash', array($analyzer_class => $count ) );
             }

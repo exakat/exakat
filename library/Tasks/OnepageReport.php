@@ -23,20 +23,15 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class OnepageReport implements Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 
-        $client = new Client();
-        
         $result = new \Stdclass();
         $analyzers = \Analyzer\Analyzer::getThemeAnalyzers('OneFile');
         
         foreach($analyzers as $analyzer) {
-            $a = \Analyzer\Analyzer::getInstance($analyzer, $client);
+            $a = \Analyzer\Analyzer::getInstance($analyzer);
             $results = $a->getArray();
             if (!empty($results)) {
                 $result->{$a->getDescription()->getName()} = $results;

@@ -23,10 +23,6 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query,
-    Everyman\Neo4j\Index\NodeIndex;
-
 class Log2csv implements Tasks {
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project.'/log/tokenizer.log')) {

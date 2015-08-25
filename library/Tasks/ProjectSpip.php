@@ -23,9 +23,6 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class ProjectSpip extends Project {
     protected $themes = array('Spip', 'Appinfo',
                               'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',

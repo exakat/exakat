@@ -23,9 +23,6 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class ReportAll implements Tasks {
     public function run(\Config $config) {
         display("Starting reportAll\n");

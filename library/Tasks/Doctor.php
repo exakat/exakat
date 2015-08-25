@@ -66,6 +66,8 @@ class Doctor implements Tasks {
             $stats['java']['error'] = $res;
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         }
+        $res = getenv('JAVA_HOME');
+        $stats['java']['$JAVA_HOME'] = $res;
 
         // neo4j
         if (!file_exists($config->neo4j_folder)) {
@@ -100,10 +102,9 @@ class Doctor implements Tasks {
                 } else {
                     $stats['neo4j']['running here'] = 'No';
                 }
-                $json = json_decode($json);
-                if (isset($json->extensions->GremlinPlugin)) {
+                
+                if ('{"success":true}' === file_get_contents('http://localhost:7474/tp/gremlin/execute')) {
                     $stats['neo4j']['gremlin'] = 'Yes';
-                    $stats['neo4j']['gremlin-url'] = $json->extensions->GremlinPlugin->execute_script;
                 } else {
                     $stats['neo4j']['gremlin'] = 'No';
                     $stats['neo4j']['gremlin-installation'] = 'Install gremlin plugin for neo4j';

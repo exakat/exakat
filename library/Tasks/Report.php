@@ -23,9 +23,6 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class Report implements Tasks {
     public function run(\Config $config) {
         $reportClass = "\\Report\\Report\\".$config->report;
@@ -49,12 +46,10 @@ class Report implements Tasks {
         $datastore = new \Datastore($config);
         \Analyzer\Analyzer::$datastore = $datastore;
 
-        $client = new Client();
-
         display( "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n");
         $begin = microtime(true);
 
-        $report = new $reportClass($config->project, $client);
+        $report = new $reportClass($config->project);
         $report->prepare();
         $size = $report->render($config->format, $config->filename);
 

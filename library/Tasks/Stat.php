@@ -23,15 +23,11 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class Stat implements Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 
-        $client = new Client();
-        $stats = new \Stats($client);
+        $stats = new \Stats();
         if ($config->filename) {
             $stats->setFileFilter($config->filename);
         }

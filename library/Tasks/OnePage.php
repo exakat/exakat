@@ -23,9 +23,6 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class OnePage implements Tasks {
     private $project_dir = '.';
     private $executable = 'exakat';

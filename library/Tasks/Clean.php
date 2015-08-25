@@ -23,12 +23,7 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class Clean implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
         $project = $config->project;
 
@@ -67,7 +62,6 @@ class Clean implements Tasks {
 
         // rebuild log
         mkdir($config->projects_root.'/projects/'.$config->project.'/log', 0755);
-
     }
 }
 

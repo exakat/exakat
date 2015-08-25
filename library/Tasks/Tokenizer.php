@@ -23,9 +23,6 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class Tokenizer implements Tasks {
     const EXTRA_ROUNDS = 2;
 
@@ -48,14 +45,12 @@ class Tokenizer implements Tasks {
         $log = new \Log('tokenizer', $config->projects_root.'/projects/'.$config->project);
         $log->log( 'Starting time : '.date('r'));
 
-        $client = new Client();
-
         $regex = array();
         $regex2 = array();
         foreach($classes as $class) {
             $new = "Tokenizer\\$class";
     
-            $r = \Tokenizer\Token::getInstance($new, $client, $config->phpversion);
+            $r = \Tokenizer\Token::getInstance($new, $config->phpversion);
             if ($r === null) {
                 display("Ignore $new (Version incompatible)\n");
                 // ignore
@@ -76,7 +71,7 @@ class Tokenizer implements Tasks {
 
         $log->log( "Finished loading classes");
 
-        $server_stat = new \Stats($client);
+        $server_stat = new \Stats(null);
         $total = \Tokenizer\Token::countTotalToken();
         $count = $total + 1;
 

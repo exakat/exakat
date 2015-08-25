@@ -24,7 +24,6 @@
 namespace Tokenizer;
 
 class Token {
-    protected static $client = null;
     protected static $reserved = array();
     
     // the numeric indices are NOT important for processing order
@@ -130,9 +129,7 @@ class Token {
 
     static public $instructionEnding = array();
     
-    public function __construct($client) {
-        // @todo typehint ?
-        self::$client = $client;
+    public function __construct() {
         
         self::$instructionEnding = array_merge(Preplusplus::$operators,
                                                Postplusplus::$operators,
@@ -241,19 +238,11 @@ class Token {
     }
 
     static public function query($query) {
+        print __METHOD__."\n";
+        $res = gremlin_query($query);
+        $res = (array) $res->results;
         
-        $queryTemplate = $query;
-        $parameters = array('type' => 'IN');
-        try {
-            $query = new \Everyman\Neo4j\Gremlin\Query(Token::$client, $queryTemplate, $parameters);
-            return $query->getResultSet();
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-
-            die( 'Exception : ' . $message . "\n" .$queryTemplate . "\n" . __METHOD__);
-        }
-        return $query->getResultSet();
+        return $res;
     }
 
     public function checkRemaining() {
@@ -896,9 +885,9 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
         }
     }
     
-    public static function getInstance($name, $client, $phpVersion = 'Any') {
+    public static function getInstance($name, $phpVersion = 'Any') {
         if ($analyzer = Token::getClass($name)) {
-            $analyzer = new $analyzer($client);
+            $analyzer = new $analyzer();
             if ($analyzer->checkPhpVersion($phpVersion)) {
                 return $analyzer;
             } else {

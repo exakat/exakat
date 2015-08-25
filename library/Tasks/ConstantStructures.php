@@ -23,18 +23,11 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query,
-    Everyman\Neo4j\Index\NodeIndex;
-
 class ConstantStructures implements Tasks {
-    private $client = null;
     private $lastTiming = 0;
     
     public function run(\Config $config) {
         $project = $config->project;
-
-        $this->client = new Client();
 
         // First, clean it all
         $query = 'g.V.hasNot("constante", null).each{ it.removeProperty("constante")};';
@@ -137,23 +130,13 @@ GREMLIN;
     private function query($query, $retry = 1) {
         $this->lastTiming = 0;
         $begin = microtime(true);
-        $params = array('type' => 'IN');
-        try {
-            $GremlinQuery = new Query($this->client, $query, $params);
-            $this->lastTiming = $begin - time();
-            return $GremlinQuery->getResultSet();
-        } catch (Exception $e) {
-            $fp = fopen($config->projects_root.'/'.$config->project.'/log/build_root.log', 'a');
-            fwrite($fp, $query."\n");
-            fwrite($fp, $e->getMessage());
-            fclose($fp);
-        
-            if ($retry) {
-                sleep (3);
-                return $this->query($query, 0);
-            }
-            die('died in '.__METHOD__."\n");
-        }
+
+        $res = gremlin_query($query);
+        $res = $res->results;
+
+        $this->lastTiming = $begin - time();
+
+        return $res;
     }
 }
 

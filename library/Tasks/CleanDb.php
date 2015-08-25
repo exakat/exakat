@@ -23,12 +23,6 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Index\NodeIndex,
-    Everyman\Neo4j\Relationship,
-    Everyman\Neo4j\Node,
-    Everyman\Neo4j\Cypher\Query;
-
 class CleanDb implements Tasks {
     private $client = null;
     private $config = null;
@@ -40,15 +34,13 @@ class CleanDb implements Tasks {
             return false;
         }
 
-        $client = $this->getClient();
-        
         $queryTemplate = <<<CYPHER
-start n=node(*)
+START n=node(*)
 match n
 return count(n)
 CYPHER;
-        $query = new Query($client, $queryTemplate, array());
-        $result = $query->getResultSet();
+        $result = cypher_query($queryTemplate);
+        $result = $result->data;
         $nodes = $result[0][0];
         display($nodes.' nodes in the database');
 
@@ -63,8 +55,7 @@ CYPHER;
             $queryTemplate = 'MATCH (n)
 OPTIONAL MATCH (n)-[r]-()
 DELETE n,r';
-            $query = new Query($client, $queryTemplate, array());
-            $result = $query->getResultSet();
+            cypher_query($queryTemplate);
             display('Database cleaned');
         }
         $end = microtime(true);
@@ -73,19 +64,12 @@ DELETE n,r';
     
     private function getClient() {
         try {
-            $client = new Client();
-            $client->getServerInfo();
+            neo4j_serverInfo();
         } catch (\Exception $e) {
             display('Couldn\'t access Neo4j');
             shell_exec('cd '.$this->config->projects_root.'/neo4j;sh ./bin/neo4j start');
 
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://'.$this->config->neo4j_host);
-                curl_setopt($ch, CURLOPT_PORT, $this->config->neo4j_port);
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                $res = curl_exec($ch);
-                curl_close($ch);
+            neo4j_serverInfo();
 
             sleep(1);
             
@@ -117,21 +101,13 @@ DELETE n,r';
             // Needs to pick up this error and act
             // also, may be we can wait for the pid to appear?
 
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
-            curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
-            $res = curl_exec($ch);
-            curl_close($ch);
+            $res = neo4j_serverInfo();
         } while ( $res === false);
         
         display('Database cleaned with restart');
 
         try {
-            $client = new Client();
-            $client->getServerInfo();
+            neo4j_serverInfo();
             display('Restarted Neo4j cleanly');
         } catch (\Exception $e) {
             display('Didn\'t restart neo4j cleanly');

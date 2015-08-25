@@ -23,13 +23,8 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin\Query;
-
 class Results implements Tasks {
     public function run(\Config $config) {
-        $client = new Client();
-        
         $analyzer = $config->program;
         if (empty($analyzer)) {
             die('Provide an analyzer with -P X/Y. Aborting'."\n");
@@ -52,12 +47,12 @@ class Results implements Tasks {
         $return = array();
         if ($config->style == 'BOOLEAN') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.any()';
-            $vertices = $this->query($client, $queryTemplate);
+            $vertices = $this->query($queryTemplate);
 
             $return[] = $vertices[0][0];
         } elseif ($config->style == 'COUNTED_ALL') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.count()';
-            $vertices = $this->query($client, $queryTemplate);
+            $vertices = $this->query($queryTemplate);
 
             $return[] = $vertices[0][0];
         } elseif ($config->style == 'ALL') {
@@ -66,22 +61,22 @@ g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.f
                                             .transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
 GREMLIN;
 
-            $vertices = $this->query($client, $query);
+            $vertices = $this->query($query);
 
             $return = array();
             foreach($vertices as $k => $v) {
                 $row = array();
-                $row[] = $v[0]['Fullcode'];
-                $row[] = $v[0]['File'];
-                $row[] = $v[0]['Line'];
-                $row[] = $v[0]['Namespace'];
-                $row[] = $v[0]['Class'];
-                $row[] = $v[0]['Function'];
+                $row[] = $v->Fullcode;
+                $row[] = $v->File;
+                $row[] = $v->Line;
+                $row[] = $v->Namespace;
+                $row[] = $v->Class;
+                $row[] = $v->Function;
                 $return[] = $row;
             }
         } elseif ($config->style == 'DISTINCT') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.code.unique()';
-            $vertices = $this->query($client, $queryTemplate);
+            $vertices = $this->query($queryTemplate);
 
             $return = array();
             foreach($vertices as $k => $v) {
@@ -89,7 +84,7 @@ GREMLIN;
             }
         } elseif ($config->style == 'COUNTED') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.groupCount(m){it.code}.cap';
-            $vertices = $this->query($client, $queryTemplate);
+            $vertices = $this->query($queryTemplate);
 
             $return = array();
             foreach($vertices[0][0] as $k => $v) {
@@ -189,19 +184,9 @@ GREMLIN;
         }
     }
 
-    private function query($client, $query) {
-        $queryTemplate = $query;
-        $params = array('type' => 'IN');
-        try {
-            $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
-            return $query->getResultSet();
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            die( 'Exception : '.$message."\n" .
-                  $queryTemplate."\n");
-        }
-        return $query->getResultSet();
+    private function query($query) {
+        $result = gremlin_query($query);
+        return (array) $result->results;
     }
 }
 

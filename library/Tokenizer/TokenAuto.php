@@ -122,13 +122,22 @@ toDelete.each{ g.removeVertex(it); }
         do {
             $begin = microtime(true);
             $res = gremlin_query($query);
+            if (!is_object($res)) {
+                var_dump($res);
+                print $query."\n";
+                die();
+            }
+            $res = $res->results[0];
+
             $end = microtime(true);
             
             if (!isset($res->done)) {
+                print __METHOD__."\n";
                 print $query;
                 var_dump($res);
                 die();
             }
+
             $this->total += (int) $res->total;
             $this->done += (int) $res->done;
             ++$this->cycles;
@@ -260,7 +269,7 @@ fullcode.setProperty('$name', $value)";
         }
 
         if (isset($actions['toVarNew'])) {
-            $token = new _Ppp(Token::$client);
+            $token = new _Ppp();
             $fullcode = $token->fullcode();
             
             $atom = $actions['toVarNew'];
@@ -349,7 +358,7 @@ g.removeVertex(arg);
         }
 
         if (isset($actions['toGlobal'])) {
-            $globalAtom = new _Global(Token::$client);
+            $globalAtom = new _Global();
             $fullcode = $globalAtom->fullcode();
 
             $qactions[] = "
@@ -543,7 +552,7 @@ $fullcode
         if (isset($actions['toOption'])) {
             $position = str_repeat(".out('NEXT')", $actions['toOption']);
 
-            $token = new _Ppp(Token::$client);
+            $token = new _Ppp();
             $fullcode = $token->fullcode();
             
             $qactions[] = "
@@ -561,7 +570,7 @@ it.fullcode = it.code;
         }
         
         if (isset($actions['to_ppp_assignation'])) {
-            $token = new _Ppp(Token::$client);
+            $token = new _Ppp();
             $fullcode = $token->fullcode();
 
             $qactions[] = "
@@ -747,7 +756,7 @@ g.removeVertex(assignation);
         }
         
         if (isset($actions['to_const'])) {
-            $sequence = new Sequence(Token::$client);
+            $sequence = new Sequence();
             $fullCodeSequence = $sequence->fullcode();
             $fullcode = $this->fullcode();
             
@@ -802,7 +811,7 @@ toDelete.push(it);
 }
 
         if (isset($actions['createSequenceForCaseWithoutSemicolon'])) {
-            $sequence = new Sequence(Token::$client);
+            $sequence = new Sequence();
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
@@ -906,7 +915,7 @@ while(p.getProperty('token') == 'T_NS_SEPARATOR') {
         }
         
         if (isset($actions['createSequenceForDefaultWithoutSemicolon'])) {
-            $sequence = new Sequence(Token::$client);
+            $sequence = new Sequence();
             $fullcode = $sequence->fullcode();
             $qactions[] = "
 
@@ -1049,7 +1058,7 @@ toDelete.push(a2);
         }
 
         if (isset($actions['toBlockFor']) && $actions['toBlockFor']) {
-            $sequence = new Block(Token::$client);
+            $sequence = new Block();
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
@@ -1397,10 +1406,10 @@ fullcode = x;
         }
 
         if (isset($actions['toArray']) && $actions['toArray']) {
-            $array = new _Array(Token::$client);
+            $array = new _Array();
             $fullcodeArray = $array->fullcode();
 
-            $arrayAppend = new Arrayappend(Token::$client);
+            $arrayAppend = new Arrayappend();
             $fullcodeArrayappend = $arrayAppend->fullcode();
 
             $qactions[] = "
@@ -1740,7 +1749,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         }
 
         if (isset($actions['toBlockElse']) && $actions['toBlockElse']) {
-            $sequence = new Sequence(Token::$client);
+            $sequence = new Sequence();
             $fullcode = $sequence->fullcode();
             
             $offset = str_repeat(".out('NEXT')", $actions['toBlockElse']);
@@ -1945,7 +1954,7 @@ it.bothE('NEXT').each{ g.removeEdge(it) ; }
         }
         
         if (isset($actions['createBlockWithSequenceForCase']) && $actions['createBlockWithSequenceForCase']) {
-            $sequence = new Sequence(Token::$client);
+            $sequence = new Sequence();
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
@@ -1982,7 +1991,7 @@ x.out('ELEMENT').each{
         }
 
         if (isset($actions['createBlockWithSequenceForDefault']) && $actions['createBlockWithSequenceForDefault']) {
-            $sequence = new Sequence(Token::$client);
+            $sequence = new Sequence();
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
@@ -2268,7 +2277,7 @@ if (a5.token == 'T_SEMICOLON') {
         }
 
         if (isset($actions['to_methodcall'])) {
-            $string = new Methodcall(Token::$client);
+            $string = new Methodcall();
             $fullCodeString = $string->fullcode();
 
             $qactions[] = "
@@ -2307,13 +2316,13 @@ g.addEdge(b1, x, 'NEXT');
         }
 
         if (isset($actions['checkTypehint'])) {
-            $reference = new Reference(Token::$client);
+            $reference = new Reference();
             $fullcodeReference = $reference->fullcode();
 
-            $typehint = new Typehint(Token::$client);
+            $typehint = new Typehint();
             $fullcodeTypehint = $typehint->fullcode();
 
-            $arguments = new Arguments(Token::$client);
+            $arguments = new Arguments();
             $fullcodeArguments = $arguments->fullcode();
 
             $qactions[] = <<<GREMLIN
@@ -2360,7 +2369,7 @@ GREMLIN;
         if (isset($actions['makeQuotedString'])) {
             $atom = $actions['makeQuotedString'];
             $class = "\\Tokenizer\\$atom";
-            $string = new $class(Token::$client);
+            $string = new $class();
             $fullCodeString = $string->fullcode();
             
             $qactions[] = "
@@ -2410,7 +2419,7 @@ x.out('CONCAT').each{
         }
 
         if (isset($actions['emptyHeredoc'])) {
-            $heredoc = new Heredoc(Token::$client);
+            $heredoc = new Heredoc();
             $fullcode = $heredoc->fullcode();
 
             $qactions[] = "

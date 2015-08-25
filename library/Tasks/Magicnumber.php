@@ -23,12 +23,7 @@
 
 namespace Tasks;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Gremlin;
-
 class Magicnumber implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
         $project = $config->project;
         if ($project == 'default') {
@@ -39,8 +34,6 @@ class Magicnumber implements Tasks {
             die("No such project as $project.\nAborting\n");
         }
 
-        $this->client = new Client();
-        
         $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/magicnumber.sqlite';
         if (file_exists($sqliteFile)) {
             unlink($sqliteFile);
@@ -55,7 +48,8 @@ m = [:];
 g.idx('atoms')[['atom':'$type']].groupCount(m){it.code}.iterate();
 m.findAll()
 SQL;
-            $res = $this->query($query);
+            $res = gremlin_query($query);
+            $res = $res->results;
 
             $sqlite->exec('CREATE TABLE '.$type.' (id INTEGER PRIMARY KEY, value STRING, count INTEGER)');
             $stmt = $sqlite->prepare('INSERT INTO '.$type.' (value, count) VALUES(:value, :count)');
@@ -74,7 +68,8 @@ SQL;
         }
 
         // export big arrays (more than 10)
-        $res = $this->query("g.V.has('token', 'T_ARRAY').filter{ it.out('ARGUMENTS').out('ARGUMENT').count() > 10}.fullcode");
+        $res = gremlin_query("g.V.has('token', 'T_ARRAY').filter{ it.out('ARGUMENTS').out('ARGUMENT').count() > 10}.fullcode");
+        $res = $res->results;
         
         $fp = fopen($config->projects_root.'/projects/'.$config->project.'/bigArrays.txt', 'w+');
         foreach($res as $v) {
@@ -82,12 +77,6 @@ SQL;
             fwrite($fp, "\n");
         }
         fclose($fp);
-    }
-
-    private function query($query) {
-        $params = array('type' => 'IN');
-        $query = new Gremlin\Query($this->client, $query, $params);
-        return $query->getResultSet();
     }
 }
 
