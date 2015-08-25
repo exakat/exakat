@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Interfaces_UndefinedInterfaces extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testInterfaces_UndefinedInterfaces01()  { $this->generic_test('Interfaces_UndefinedInterfaces.01'); }
     public function testInterfaces_UndefinedInterfaces02()  { $this->generic_test('Interfaces_UndefinedInterfaces.02'); }
+    public function testInterfaces_UndefinedInterfaces03()  { $this->generic_test('Interfaces_UndefinedInterfaces.03'); }
 }
 ?>
