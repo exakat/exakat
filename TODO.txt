@@ -1408,5 +1408,6 @@ isset($params) is useless on an argument (null, OK).
 
 no recount inside loop : also true for assignations. 
 
-
 All constants in a class should go to properties to avoid rebuiding it.
+
+continue as the last element of a loop? Useless.
