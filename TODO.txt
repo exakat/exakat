@@ -1092,14 +1092,12 @@ Exporter uniquement les définitions des règles (référence documentaire)
 Make themas configurable in config.ini
 
 Move support for spip out of tasks
-Detect early and remove non-composer dependencies (pclzip, krumo, jpgraph, fpdf, phpexcel...)
 
-add other composer classes (silex, ..) Automate the process
 definitions only
 Check undefined parent (when the parent is a composer component )
 method that MUST be overloaded (abstract) may be empty
 
-incompilable files (set a limit in the config file)
+incompilable files (set a limit in the config file) : better detection (some are only warnings)
 
 composer class may be array interface ($this is an array)
 
@@ -1114,9 +1112,7 @@ pas de REQUEST
 
 config/ecran_securite.php => ignorer GPR detecitons
 _request
-Exclure PCLZIP
 
-Check that phploc is executable in doctor
 Faire une tache 'check project' pour savoir ou est le project
 Faire une tache 'progress' pour savoir ou est le project / le system 
 Check that compilation tables are all available or not.
@@ -1390,8 +1386,6 @@ Files that should look the same in a folder (same variables, same classes/extens
 // check that this is possible
         if (substr($analyzer, 0, 17) === 'Analyzer\\\\Files\\\\') {
 
-Spot common external library (tcpdf, krumo, etc), and add them to config.ini automatically.
-
 Add support for common standards (calistenics, psr-r *..)
 
 Centralize the folder scannings (several instances across the first tasks).
@@ -1403,3 +1397,16 @@ token_get_all will spew some errors (along with fopen). Report this as a 'may us
 @include("file.php")) : error is also set for error reporting.
 
 small penalty for global inside for/foreach. 
+
+Methods that don't return but are actually collected.
+
+Analyzers that help refactoring : removing a structure, an argument, etc.
+
+Such Code should contains that or that statement (General validations)
+
+isset($params) is useless on an argument (null, OK).
+
+no recount inside loop : also true for assignations. 
+
+
+All constants in a class should go to properties to avoid rebuiding it.
