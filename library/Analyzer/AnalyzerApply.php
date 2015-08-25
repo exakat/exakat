@@ -48,7 +48,7 @@ x = it;
 applyBelowRoot.out.loop(1){true}{it.object.code == x.code}.each{
     g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED');
     it.setProperty('appliedBelow', true);
-    c = c + 1;
+    total++;
 }
 
 GREMLIN;
@@ -63,9 +63,10 @@ GREMLIN;
     // Apply below
     {$applyBelow}
     
-    c = c + 1;
+    total++;
 }
-c;
+['processed':processed, 'total':total];
+
 
 GREMLIN;
         

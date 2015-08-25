@@ -27,11 +27,7 @@ include 'helpers.php';
 
 class Autoload {
     static public function autoload_library($name) {
-        if (substr($name, 0, 8) == 'Everyman') {
-            $file = dirname(__DIR__).'/vendor/everyman/neo4jphp/lib/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
-        } else {
-            $file = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
-        }
+        $file = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
         
         if (file_exists($file)) {
             include $file;

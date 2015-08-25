@@ -31,7 +31,10 @@ class Analyzer {
     
     static public $datastore = null;
     
-    protected $rowCount = 0;
+    protected $rowCount = 0;       // Number of found values
+    protected $processedCount = 0; // Number of initial values
+    protected $queryCount = 0;     // Number of ran queries
+    protected $rawQueryCount = 0;  // Number of ran queries
 
     private $queries = array();
     private $queriesArguments = array();
@@ -162,7 +165,7 @@ class Analyzer {
     
     public static function getInstance($name) {
         if ($analyzer = Analyzer::getClass($name)) {
-            return new $analyzer(null);
+            return new $analyzer();
         } else {
             echo "No such class as '$name'\n";
             return null;
@@ -191,9 +194,9 @@ class Analyzer {
     }
 
     private function addMethod($method, $arguments = null) {
-        if ($arguments === null) {
+        if ($arguments === null) { // empty
             $this->methods[] = $method;
-        } elseif (func_num_args() > 2) {
+        } elseif (func_num_args() > 2) { 
             $arguments = func_get_args();
             array_shift($arguments);
             $argnames = array(str_replace('***', '%s', $method));
@@ -203,7 +206,7 @@ class Analyzer {
                 $argnames[] = $argname;
             }
             $this->methods[] = call_user_func_array('sprintf', $argnames);
-        } else {
+        } else { // one argument
             $argname = 'arg'.count($this->arguments);
             $this->arguments[$argname] = $arguments;
             $this->methods[] = str_replace('***', $argname, $method);
@@ -320,17 +323,18 @@ GREMLIN;
 
     public function query($queryString, $arguments = null) {
         $result = gremlin_query($queryString, $arguments);
-        if (!isset($result->results)) {
-            return array();
-            print __METHOD__."\n";
-            var_dump($arguments);
-            var_dump($queryString);
+
+        if ($result->success !== true) {
+            print "Error in query : \n";
+            print $queryString."\n";
             var_dump($result);
             die();
         }
-        $result = $result->results;
-        
-        return $result;
+
+        if (!isset($result->results)) {
+            return array();
+        }
+        return $result->results;
     }
 
     public function _as($name) {
@@ -495,9 +499,9 @@ GREMLIN;
 
     public function noAtomInside($atom) {
         if (is_array($atom)) {
-            $this->addMethod('filter{ it.as("loop").out().loop("loop"){true}{it.object.atom in ***}.any() == false}', $atom);
+            $this->addMethod('filter{ it.out().loop(1){true}{it.object.atom in ***}.any() == false}', $atom);
         } else {
-            $this->addMethod('filter{ it.as("loop").out().loop("loop"){true}{it.object.atom == ***}.any() == false}', $atom);
+            $this->addMethod('filter{ it.out().loop(1){true}{it.object.atom == ***}.any() == false}', $atom);
         }
         
         return $this;
@@ -1127,6 +1131,7 @@ GREMLIN
     }
 
     public function raw($query) {
+        ++$this->rawQueryCount;
         $this->addMethod($query);
         
         return $this;
@@ -1626,6 +1631,18 @@ GREMLIN
         return $this->rowCount;
     }
 
+    public function getProcessedCount() {
+        return $this->processedCount;
+    }
+
+    public function getRawQueryCount() {
+        return $this->rawQueryCount;
+    }
+
+    public function getQueryCount() {
+        return $this->queryCount;
+    }
+
     public function analyze() { return true; }
     // @todo log errors when using this ?
 
@@ -1662,15 +1679,16 @@ GREMLIN
         $query = implode('.', $this->methods);
         
         if ($this->methods[1] == 'has("atom", arg1)') {
-            $query = "g.idx('atoms')[['atom':'{$this->arguments['arg1']}']].{$query}";
+            $query = "g.idx('atoms')[['atom':'{$this->arguments['arg1']}']].sideEffect{processed++;}.{$query}";
         } else {
-            $query = "g.V.{$query}";
+            // should log this. g.V is BAD!
+            $query = "g.V.sideEffect{processed++;}.{$query}";
         }
         
         // search what ? All ?
         $query = <<<GREMLIN
 
-c = 0;
+processed = 0; total = 0;
 m = [:]; gf = [:];
 n = [];
 {$query}
@@ -1695,8 +1713,15 @@ GREMLIN;
         // @todo add a test here ?
         foreach($this->queries as $id => $query) {
             $r = $this->query($query, $this->queriesArguments[$id]);
-            if (isset($r[0])) {
-                $this->rowCount += $r[0];
+            ++$this->queryCount;
+            $r = $r[0];
+            if (isset($r->processed)) {
+                $this->processedCount += $r->processed;
+                $this->rowCount += $r->total;
+            } else {
+                print __METHOD__."\n";
+                print $query."\n";
+                print "No result from this query\n";
             } // else means that it is not set, so it's 0. No need for an operation.
         }
 
@@ -1729,7 +1754,7 @@ GREMLIN;
 
     public function getArray() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        if (substr($analyzer, 0, 17) === 'Analyzer\\\\Files\\\\') {
+        if (substr($analyzer, 0, 5) === 'Analyzer\\Files\\') {
             $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').as('line').as('filename').select{it.fullcode}{it.line}{it.fullcode}
 GREMLIN;
@@ -1744,9 +1769,15 @@ GREMLIN;
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
-                $report[] = array('code' => $v[0][0],
-                                  'file' => $v[0][2],
-                                  'line' => $v[0][1],
+                if (!isset($v->file)) {
+                    print ($query."\n");
+                    print get_class($this)."\n";
+                    print_r($v);
+                    die();
+                }
+                $report[] = array('code' => $v->fullcode,
+                                  'file' => $v->file,
+                                  'line' => $v->line,
                                   'desc' => $this->description->getName(),
                                   'clearphp' => $this->description->getClearPHP(),
                                   );
@@ -1823,7 +1854,7 @@ GREMLIN;
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.count()";
         $vertices = $this->query($queryTemplate);
         
-        return (int) $vertices[0][0];
+        return (int) $vertices[0];
     }
     
     public function getSeverity() {
@@ -1836,8 +1867,8 @@ GREMLIN;
 
     public function getFileList() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "m=[:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.filename}.iterate(); m;";
-        $vertices = $this->query($queryTemplate);
+        $query = "m=[:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.fullcode}.iterate(); m;";
+        $vertices = $this->query($query);
         
         $return = array();
         foreach($vertices as $k => $v) {

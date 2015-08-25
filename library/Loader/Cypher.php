@@ -23,12 +23,6 @@
 
 namespace Loader;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Index\NodeIndex,
-    Everyman\Neo4j\Relationship,
-    Everyman\Neo4j\Node,
-    Everyman\Neo4j\Cypher\Query;
-
 class Cypher {
     const CSV_SEPARATOR = ',';
     
@@ -80,13 +74,9 @@ class Cypher {
             fclose($fpa);
         }
 
-        $client = new Client();
-
         // Load Nodes
         $queryTemplate = 'CREATE INDEX ON :Token(eid)';
-        $query = new Query($client, $queryTemplate, array());
-        $result = $query->getResultSet();
-
+        cypher_query($queryTemplate);
         display('Created index');
 
         $queryTemplate = <<<CYPHER
@@ -100,8 +90,7 @@ line: toInt(csvLine.line)})
 
 CYPHER;
         try {
-            $query = new Query($client, $queryTemplate, array());
-            $result = $query->getResultSet();
+            cypher_query($queryTemplate);
         } catch (\Exception $e) {
             $this->cleanCsv(); 
             die("Couldn't load nodes in the database\n".$e->getMessage());
@@ -127,8 +116,7 @@ SET token.$attribute = $toAttribute
 
 CYPHER;
             try {
-                $query = new Query($client, $queryTemplate, array());
-                $result = $query->getResultSet();
+                cypher_query($queryTemplate);
             } catch (\Exception $e) {
 
                 die("Couldn't load nodes attributes '$attribute' in the database\n Exception : ".$e->getMessage()."\n");
@@ -151,8 +139,7 @@ CREATE (token)-[:$relation]->(token2)
 
 CYPHER;
             try {
-                $query = new Query($client, $queryTemplate, array());
-                $result = $query->getResultSet();
+                cypher_query($queryTemplate);
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load relations for $name in the database\n".$e->getMessage());
@@ -160,34 +147,6 @@ CYPHER;
 
             display('Loaded link '.$name);
         }
-/*
-        $queryTemplate = <<<CYPHER
-DROP INDEX ON :Token(eid)
-CYPHER;
-        try {
-            $query = new Query($client, $queryTemplate, array());
-            $result = $query->getResultSet();
-        } catch (\Exception $e) {
-            $this->cleanCsv(); 
-            die("Couldn't remove eid\n");
-        } 
-
-        display('dropped index on eid ');
-
-        $queryTemplate = <<<CYPHER
-MATCH (Token {  })
-REMOVE Token.eid
-CYPHER;
-        try {
-            $query = new Query($client, $queryTemplate, array());
-            $result = $query->getResultSet();
-        } catch (\Exception $e) {
-            $this->cleanCsv(); 
-            die("Couldn't remove eid\n");
-        } 
-
-        display('cleaned eid');
-*/
         $this->cleanCsv();
         display('Cleaning CSV');
 
@@ -214,7 +173,6 @@ CYPHER;
         }
 
         $fp = static::$fp_nodes;
-//        $fpa = static::$fp_nodes_attr;
         // adding in_quote here, as it may not appear on the first token.
         $les_cols = array('id', 'token', 'code', 'line');
         //'modifiedBy',
