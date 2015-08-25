@@ -73,8 +73,6 @@ function gremlin_query($query, $params = [], $load = '') {
 }
 
 function gremlin_queryA($query, $params = [], $load = '') {
-    static $loadedScripts = [];
-
     $getString = 'script='.urlencode($query);
     
     if (isset($params) && !empty($params)) {
@@ -86,18 +84,11 @@ function gremlin_queryA($query, $params = [], $load = '') {
                 $defName = 'a'.crc32($gremlin);
                 $defFileName = 'neo4j/scripts/'.$defName.'.gremlin';
 
-                if (isset($loadedScripts[$defName])) {
-                    $query = str_replace($name, $defName.'()', $query);
-                    $getString = 'script='.urlencode($query);
-                    unset($params[$name]);
-
-                } elseif (file_exists($defFileName)) {
+                if (file_exists($defFileName)) {
                     $query = str_replace($name, $defName.'()', $query);
 
                     $getString = 'script='.urlencode($query).'&load='.$defName;
                     unset($params[$name]);
-                    
-                    $loadedScripts[$defName] = true;
                 } else {
                     $gremlin = 'def '.$defName.'() '.$gremlin;
                     file_put_contents($defFileName, $gremlin);
@@ -106,8 +97,6 @@ function gremlin_queryA($query, $params = [], $load = '') {
 
                     $getString = 'script='.urlencode($query).'&load='.$defName;
                     unset($params[$name]);
-
-                    $loadedScripts[$defName] = true;
                 }
             } elseif (is_array($value) && strlen(join('', $value)) > 2000) {
                 $value = array_map('addslashes', $value);
@@ -115,18 +104,11 @@ function gremlin_queryA($query, $params = [], $load = '') {
                 $defName = 'a'.crc32($gremlin);
                 $defFileName = 'neo4j/scripts/'.$defName.'.gremlin';
 
-                if (isset($loadedScripts[$defName])) {
-                    $query = str_replace($name, $defName.'()', $query);
-                    $getString = 'script='.urlencode($query);
-                    unset($params[$name]);
-
-                } elseif (file_exists($defFileName)) {
+                if (file_exists($defFileName)) {
                     $query = str_replace($name, $defName.'()', $query);
 
                     $getString = 'script='.urlencode($query).'&load='.$defName;
                     unset($params[$name]);
-                    
-                    $loadedScripts[$defName] = true;
                 } else {
                     $gremlin = 'def '.$defName.'() '.$gremlin;
                     file_put_contents($defFileName, $gremlin);
@@ -135,8 +117,6 @@ function gremlin_queryA($query, $params = [], $load = '') {
 
                     $getString = 'script='.urlencode($query).'&load='.$defName;
                     unset($params[$name]);
-
-                    $loadedScripts[$defName] = true;
                 }
             } elseif (is_array($value)) { 
             // all the other arrays, we hardcode them
