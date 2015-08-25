@@ -40,10 +40,10 @@ class ListByFile extends \Report\Content\GroupBy {
                     $array[$file]['count'] += $count;
                     $array[$file]['sort']  += $count;
                 } else {
-                    $array[$file] = array('name' => $file,
-                                          'count' => $count,
+                    $array[$file] = array('name'     => $file,
+                                          'count'    => $count,
                                           'severity' => '',
-                                          'sort' => $count);
+                                          'sort'     => $count);
                 }
             }
         }

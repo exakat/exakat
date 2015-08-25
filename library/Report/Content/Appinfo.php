@@ -69,7 +69,7 @@ class Appinfo extends \Report\Content {
 
                     'Namespaces' => array(
                             'Namespaces'              => 'Namespaces/Namespacesnames',
-                            'Vendor'                  => 'Namespaces/Vendor',
+//                            'Vendor'                  => 'Namespaces/Vendor',
                             'Alias'                   => 'Namespaces/Alias',
                     ),
 
@@ -297,11 +297,11 @@ class Appinfo extends \Report\Content {
 
             foreach($hash as $name => $ext) {
                 if (($a = \Analyzer\Analyzer::getClass($ext)) === null) {
-                    print "'$ext' is not a class ($name).Ignoring\n";
+                    display( "'$ext' is not a class ($name). Ignoring\n");
                     continue;
                 }
                 if (!in_array($ext, $themed)) {
-                    print "$ext was not analyzed in Appinfo\n";
+                    display( "$ext was not analyzed in Appinfo.");
                 }
                 
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].hasNot('notCompatibleWithPhpVersion', null).count()"; 
@@ -313,8 +313,8 @@ class Appinfo extends \Report\Content {
                 } 
 
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
-                $vertices = $this->query($queryTemplate);
-                $v = $vertices[0];
+                $vertices = gremlin_query($queryTemplate);
+                $v = $vertices->results[0];
                 if ($v == 0) {
                     $this->array[$section][$name] = 'Not run';
                     continue;
