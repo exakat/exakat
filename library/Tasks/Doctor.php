@@ -111,6 +111,8 @@ class Doctor implements Tasks {
                 }
             }
         }
+        $res = getenv('NEO4J_HOME');
+        $stats['neo4j']['$NEO4J_HOME'] = $res;
 
         // zip
         $res = shell_exec('zip -v');
