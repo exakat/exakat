@@ -52,7 +52,7 @@ class Groupby extends \Report\Content {
         $m = 'getSeverity';
         $c = 'toCount';
         foreach($this->analyzers as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
+            $analyzer = \Analyzer\Analyzer::getInstance($a);
             
             $this->array[$analyzer->$m()] += $analyzer->$c();
         }

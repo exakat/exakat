@@ -36,7 +36,7 @@ class ListBySeverity extends \Report\Content\GroupBy {
         );
         
         foreach($this->analyzers as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
+            $analyzer = \Analyzer\Analyzer::getInstance($a);
             
             $count = $analyzer->toCount();
             if ($count == 0) { continue; }

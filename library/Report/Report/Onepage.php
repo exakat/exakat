@@ -28,9 +28,7 @@ use Report\Report;
 class Onepage extends Report {
     private $projectUrl    = null;
 
-    public function __construct($project, $client) {
-        parent::__construct($project, $client);
-    }
+    public function __construct($project) { }
     
     public function setProject($project) {
         $this->project = $project;
@@ -52,7 +50,7 @@ class Onepage extends Report {
                                 );
         $analyzes2 = array();
         foreach($analyzes as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
+            $analyzer = \Analyzer\Analyzer::getInstance($a);
             $analyzes2[$analyzer->getDescription()->getName()] = $analyzer;
         }
         uksort($analyzes2, function($a, $b) { 

@@ -28,9 +28,7 @@ use Report\Report;
 class Spip extends Report {
     private $projectUrl    = null;
 
-    public function __construct($project, $client) {
-        parent::__construct($project, $client);
-    }
+    public function __construct($project) {    }
     
     public function setProject($project) {
         $this->project = $project;
@@ -77,7 +75,6 @@ class Spip extends Report {
 
         $config = \Config::factory();
         $compilations = new \Report\Content\Compilations();
-        $compilations->setNeo4j($this->client);
         $compilations->setVersions($config->other_php_versions);
         $compilations->collect();
         $this->addContent('Compilations', $compilations);
@@ -104,7 +101,7 @@ class Spip extends Report {
                                 );
         $analyzes2 = array();
         foreach($analyzes as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
+            $analyzer = \Analyzer\Analyzer::getInstance($a);
             $analyzes2[$analyzer->getDescription()->getName()] = $analyzer;
         }
         uksort($analyzes2, function($a, $b) { 
@@ -149,7 +146,7 @@ class Spip extends Report {
             
             
             // defined here, but for later use
-            $definitions = new \Report\Content\Definitions($this->client);
+            $definitions = new \Report\Content\Definitions(null);
             $definitions->setAnalyzers($analyzes);
         }
 
@@ -193,7 +190,7 @@ TEXT
 /// Custom analyzers
 /////////////////////////////////////////////////////////////////////////////////////
         
-        $analyzer = \Analyzer\Analyzer::getInstance('Classes/AvoidUsing', $this->client);
+        $analyzer = \Analyzer\Analyzer::getInstance('Classes/AvoidUsing');
 
         if ($analyzer->hasResults()) {
             $this->createLevel1('Custom');
@@ -209,7 +206,7 @@ TEXT
         
             $this->addContent('SimpleTable', $content, 'oneColumn'); 
 
-            $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing', $this->client);
+            $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing');
             $this->addContent('Horizontal', $analyzer);
         }
 
@@ -229,7 +226,7 @@ This may be due to configuration file, compilation error, wrong extension (inclu
         $this->addContent('SimpleTable', 'ProcessedFileList', 'oneColumn');
 
         // List of dynamic calls
-        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls', $this->client);
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls');
         if ($analyzer->hasResults()) {
             $this->createLevel2('Dynamic code');
             $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');

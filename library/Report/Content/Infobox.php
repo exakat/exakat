@@ -32,21 +32,19 @@ class Infobox extends \Report\Content {
     
     public function collect() {
         $queryTemplate = "g.V.has('token', 'T_FILENAME').count()";
-        $params = array('type' => 'IN');
-        $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
-        $vertices = $query->getResultSet();
+        $res = gremlin_query($queryTemplate);
+        $vertices = $res->results[0];
 
         $this->array[] = array('icon'    => 'ok',
-                               'number'  => $vertices[0][0],
+                               'number'  => $vertices,
                                'content' => 'PHP files');
         
         $queryTemplate = "g.V.has('token', 'T_FILENAME').out('FILE').transform{ x = it.out.loop(1){true}{true}.line.unique().count()}.sum()";
-        $params = array('type' => 'IN');
-        $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
-        $vertices = $query->getResultSet();
+        $res = gremlin_query($queryTemplate);
+        $vertices = $res->results[0];
         
         $this->array[] = array('icon'    => 'leaf',
-                               'number'  => $vertices[0][0],
+                               'number'  => $vertices,
                                'content' => 'Lines of code');
 
         $this->array[] = array('icon'    => 'wrench',

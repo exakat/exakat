@@ -34,7 +34,7 @@ class AnalyzerResultCounts extends \Report\Content {
         $total = 0;
         foreach($this->analyzers as $analyzer) {
             if (is_string($analyzer)) {
-                $o = \Analyzer\Analyzer::getInstance($analyzer, $this->neo4j);
+                $o = \Analyzer\Analyzer::getInstance($analyzer);
             } elseif ($analyzer instanceof \Analyzer\Analyzer) {
                 $o = $analyzer;
             } else {

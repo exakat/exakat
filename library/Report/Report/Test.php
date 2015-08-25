@@ -24,9 +24,7 @@
 namespace Report\Report;
 
 class Test extends Premier {
-    public function __construct($project, $client) {
-        parent::__construct($project, $client);
-    }
+    public function __construct($project) {    }
 
     public function prepare() {
 /////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +36,7 @@ class Test extends Premier {
         $this->createLevel2('Compile');
         $config = \Config::factory();
 
-        $compilations = new \Report\Content\Compilations($this->client);
+        $compilations = new \Report\Content\Compilations(null);
         $compilations->setVersions($config->other_php_versions);
         $this->addContent('Compilations', $compilations);
 

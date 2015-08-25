@@ -70,6 +70,7 @@ HTML;
                 $row['code'] = '&nbsp;';
             }
             
+            $row['file'] = $this->makeLink($row['file']);
 $html .= <<<HTML
 
 										<tr>

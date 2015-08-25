@@ -26,9 +26,7 @@ namespace Report\Report;
 use Report\Report;
 
 class TestDevoops extends Report {
-    public function __construct($project, $client) {
-        parent::__construct($project, $client);
-    }
+    public function __construct($project) {    }
 
     public function prepare() {
         $this->createLevel1('Report presentation');
@@ -41,7 +39,7 @@ class TestDevoops extends Report {
         $this->createLevel2('Documentation');
         $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
-            $definitions = new \Report\Content\Definitions($this->client);
+            $definitions = new \Report\Content\Definitions(null);
             $definitions->setAnalyzers($analyzes);
         $this->addContent('Definitions', $definitions, 'annexes');
 
@@ -53,7 +51,7 @@ This may be due to configuration file, compilation error, wrong extension (inclu
         $this->addContent('SimpleTable', 'ProcessedFileList', 'oneColumn');
 
         // List of dynamic calls
-        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls', $this->client);
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls');
         if ($analyzer->hasResults()) {
             $this->createLevel2('Dynamic code');
             $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');

@@ -28,10 +28,8 @@ class Compilations extends \Report\Content {
 
     public function collect() {
         $queryTemplate = "g.V.has('atom', 'File').count()";
-        $params = array('type' => 'IN');
-        $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
-        $vertices = $query->getResultSet();
-        $total = $vertices[0][0];
+        $res = gremlin_query($queryTemplate);
+        $total = $res->results[0];
         
         foreach($this->versions as $suffix) {
             $files = \Analyzer\Analyzer::$datastore->getCol('compilation'.$suffix, 'file');

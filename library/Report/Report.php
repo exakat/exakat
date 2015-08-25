@@ -26,7 +26,6 @@ namespace Report;
 class Report {
     static public $formats = array('Devoops', 'Json', 'Sqlite');
     
-    protected $client    = null;
     protected $project   = null;
 
     private $content   = null;
@@ -34,9 +33,8 @@ class Report {
     private $currentLevel1 = null;
     private $currentLevel2 = null;
 
-    public function __construct($project, $client) {
+    public function __construct($project) {
         $this->project = $project;
-        $this->client  = $client;
         
         $this->content = new \Report\Template\Section('');
         $this->current = $this->content;
@@ -48,7 +46,6 @@ class Report {
         $content = new $nsname();
 
         $content->setProject($this->project);
-        $content->setNeo4j($this->client);
         
         return $content;
     }

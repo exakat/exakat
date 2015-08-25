@@ -28,8 +28,8 @@ use Report\Report;
 class Premier extends Report {
     private $projectUrl    = null;
 
-    public function __construct($project, $client) {
-        parent::__construct($project, $client);
+    public function __construct($project) {
+        parent::__construct($project);
     }
     
     public function setProject($project) {
@@ -107,7 +107,6 @@ class Premier extends Report {
 
         $config = \Config::factory();
         $compilations = new \Report\Content\Compilations();
-        $compilations->setNeo4j($this->client);
         $compilations->setVersions($config->other_php_versions);
         $compilations->collect();
         $this->addContent('Compilations', $compilations);
@@ -121,10 +120,10 @@ class Premier extends Report {
         }
 
 /////////////////////////////////////////////////////////////////////////////////////
-/// Detailled
+/// Detailled by analyzer
 /////////////////////////////////////////////////////////////////////////////////////
 
-        $this->createLevel1('Detailled');
+        $this->createLevel1('By analyze');
         $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Security'),
@@ -136,7 +135,7 @@ class Premier extends Report {
                                 );
         $analyzes2 = array();
         foreach($analyzes as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
+            $analyzer = \Analyzer\Analyzer::getInstance($a);
             $analyzes2[$analyzer->getDescription()->getName()] = $analyzer;
         }
         uksort($analyzes2, function($a, $b) { 
@@ -154,7 +153,7 @@ class Premier extends Report {
             $resultsCount = new \Report\Content\AnalyzerResultCounts();
             $resultsCount->setAnalyzers($analyzes2);
             $resultsCount->collect();
-            $this->addContent('SimpleTableResultCounts', $resultsCount);
+            $this->addContent('SimpleTableResultCounts', $resultsCount, 'SimpleTableResultCounts');
 
             foreach($analyzes2 as $analyzer) {
                 if ($analyzer->hasResults()) {
@@ -181,8 +180,89 @@ class Premier extends Report {
             
             
             // defined here, but for later use
-            $definitions = new \Report\Content\Definitions($this->client);
+            $definitions = new \Report\Content\Definitions(null);
             $definitions->setAnalyzers($analyzes);
+        }
+
+/////////////////////////////////////////////////////////////////////////////////////
+/// Detailled by file
+/////////////////////////////////////////////////////////////////////////////////////
+
+        $this->createLevel1('By file');
+        $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Security'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70')
+                                );
+
+        $fileList = [];
+        $analyzesList = [];
+        foreach($analyzes as $a) {
+            $analyzer = \Analyzer\Analyzer::getInstance($a);
+            $analyzerName = $analyzer->getDescription()->getName();
+
+            $filesForAnalyze = $analyzer->getFileList();
+            if (empty($filesForAnalyze[0])) { continue; }
+            foreach($filesForAnalyze[0] as $file => $count) {
+                if (isset($fileList[$file])) {
+                    $fileList[$file][] = $analyzerName;
+                } else {
+                    $fileList[$file] = array($analyzerName);
+                }
+
+                $rows = $analyzer->getArray();
+                foreach($rows as $row) {
+                    if ($row['file'] != $file) { continue; }
+                    if (isset($analyzesList[$file])) {
+                        $analyzesList[$file][] = ['code' => $row['code'], 
+                                                  'line' => $row['line'],
+                                                  'file' => $analyzerName];
+                    } else {
+                        $analyzesList[$file] = [['code' => $row['code'], 
+                                                 'line' => $row['line'],
+                                                 'file' => $analyzerName]];
+                    }
+                }
+            }
+        }
+        
+        foreach($fileList as &$analyzes) {
+            $analyzes = array_keys(array_count_values($analyzes));
+            sort($analyzes);
+        }
+        (unset) $analyzes;
+        
+        uksort($fileList, function($a, $b) { 
+            $a = strtolower($a); 
+            $b = strtolower($b); 
+            if ($a > $b) { 
+                return 1; 
+            } else { 
+                return $a == $b ? 0 : -1; 
+            } 
+        });
+
+        if (count($analyzes) > 0) {
+            $this->createLevel2('Files counts');
+            $resultsCount = new \Report\Content\FilesResultCounts();
+            $resultsCount->setValues($fileList);
+            $resultsCount->collect();
+            $this->addContent('FilesHashTableLinked', $resultsCount);
+
+            foreach($fileList as $file => $results) {
+               $this->createLevel2($file);
+               $this->addContent('Text', 'File : '.$file, 'textLead');
+
+               $fileAnalyzers = new \Report\Content\FileAnalyzers();
+               $fileAnalyzers->setValues($analyzesList[$file]);
+               $fileAnalyzers->setFilename($file);
+               $fileAnalyzers->collect();
+               $this->addContent('Horizontal', $fileAnalyzers, 'horizontalForFiles');
+            }
         }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -226,7 +306,7 @@ TEXT
 /// Custom analyzers
 /////////////////////////////////////////////////////////////////////////////////////
         
-        $analyzer = \Analyzer\Analyzer::getInstance('Classes/AvoidUsing', $this->client);
+        $analyzer = \Analyzer\Analyzer::getInstance('Classes/AvoidUsing');
 
         if ($analyzer->hasResults()) {
             $this->createLevel1('Custom');
@@ -242,7 +322,7 @@ TEXT
         
             $this->addContent('SimpleTable', $content, 'oneColumn'); 
 
-            $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing', $this->client);
+            $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing');
             $this->addContent('Horizontal', $analyzer);
         }
 
@@ -251,8 +331,8 @@ TEXT
 /////////////////////////////////////////////////////////////////////////////////////
         $this->createLevel1('Annexes');
 
-        $this->createLevel2('Documentation');
-        $this->addContent('Definitions', $definitions, 'annexes');
+//        $this->createLevel2('Documentation');
+//        $this->addContent('Definitions', $definitions, 'annexes');
 
         $this->createLevel2('Processed files');
         $this->addContent('Text', 'This is the list of processed files. Any file that is in the project, but not in the list below was omitted in the analyze. 
@@ -262,7 +342,7 @@ This may be due to configuration file, compilation error, wrong extension (inclu
         $this->addContent('SimpleTable', 'ProcessedFileList', 'oneColumn');
 
         // List of dynamic calls
-        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls', $this->client);
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls');
         if ($analyzer->hasResults()) {
             $this->createLevel2('Dynamic code');
             $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');
@@ -275,7 +355,7 @@ This may be due to configuration file, compilation error, wrong extension (inclu
         $this->addContent('SimpleTable', 'NonprocessedFileList', 'oneColumn');
 
         // List of dynamic calls
-        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls', $this->client);
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls');
         if ($analyzer->hasResults()) {
             $this->createLevel2('Dynamic code');
             $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');

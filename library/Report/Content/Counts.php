@@ -37,7 +37,7 @@ class Counts extends \Report\Content {
             if (null !== $datastore->getHash($theme)) {
                 $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($theme);
                 foreach($analyzers as $analyzer) {
-                    $analyzer = \Analyzer\Analyzer::getInstance($analyzer, $this->neo4j);
+                    $analyzer = \Analyzer\Analyzer::getInstance($analyzer);
                     if (!$analyzer->isRun()) { 
                         continue; 
                     }

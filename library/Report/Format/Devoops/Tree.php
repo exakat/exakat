@@ -35,7 +35,6 @@ class Tree extends \Report\Format\Devoops {
             $text .= "    <ul>\n";
             foreach($v as $k2 => $v2) {
                 $text .= "        <li>$k2 ".($this->makeIcon($v2))."</li>";
-            
             }
             $text .= "    </ul>\n";
             

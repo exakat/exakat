@@ -28,8 +28,8 @@ use Report\Report;
 class Counts extends Report {
     private $projectUrl    = null;
 
-    public function __construct($project, $client) {
-        parent::__construct($project, $client);
+    public function __construct($project) {
+        parent::__construct($project);
     }
 
     public function prepare() {
@@ -37,7 +37,6 @@ class Counts extends Report {
 
         $this->createLevel1('Detailled');
         $counts = new \Report\Content\Counts();
-        $counts->setNeo4j($this->client);
         $counts->collect();
 
         $this->addContent('SimpleTable', $counts, 'oneColumn');

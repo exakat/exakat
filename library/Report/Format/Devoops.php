@@ -224,6 +224,16 @@ HTML;
     protected function makeHtml($text) {
         return nl2br(trim(htmlentities($text, ENT_COMPAT | ENT_HTML401 , 'UTF-8')));
     }
+    
+    protected function makeList($array) {
+        $text = "    <ul>\n";
+        foreach($array as $v) {
+            $text .= "        <li>$v</li>";
+        }
+        $text .= "    </ul>\n";
+        
+        return $text;
+    }
 
     private function copyDir($src, $dst) { 
         $dir = opendir($src); 

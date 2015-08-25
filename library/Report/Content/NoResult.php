@@ -27,7 +27,7 @@ class NoResult extends \Report\Content {
     private $analyzers = array();
     
     public function addAnalyzer($analyzer) {
-        $a = \Analyzer\Analyzer::getInstance($analyzer, null);
+        $a = \Analyzer\Analyzer::getInstance($analyzer);
         
         $this->analyzers[] = $a->getName();
     }

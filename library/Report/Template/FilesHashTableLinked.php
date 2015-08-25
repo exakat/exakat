@@ -21,20 +21,14 @@
 */
 
 
-namespace Report\Content\Directives;
+namespace Report\Template;
 
-class Assertion extends Directives {
-    public function __construct() {
-        $this->name         = 'Assertion';
+class FilesHashTableLinked extends \Report\Template\DefaultTemplate {
+    public function render($output) {
+        $renderer = $output->getRenderer('FilesHashTableLinked');
 
-        // Assertions
-        if ($this->checkPresence('Php\\AssertionUsage')) {
-            $this->directives[] = array('name' => 'assert.active',
-                                        'suggested' => 'On',
-                                        'documentation' => 'In production, set this to Off to remove all assertions. During developement, set this to On to activate them.');
-
-            $this->directives[] = $this->extraConfiguration($this->name, 'info');
-        }
+        $renderer->setCss($this->css);
+        $renderer->render($output, $this->data->getArray());
     }
 }
 

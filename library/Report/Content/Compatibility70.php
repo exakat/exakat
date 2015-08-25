@@ -31,7 +31,7 @@ class Compatibility70 extends \Report\Content {
         $list = \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70');
         
         foreach($list as $l) {
-            $analyzer = \Analyzer\Analyzer::getInstance($l, $this->neo4j);
+            $analyzer = \Analyzer\Analyzer::getInstance($l);
             $this->array[ $analyzer->getDescription()->getName()] = array('id'     => 1, 
                                                         'result' => $analyzer->toCount());
         }
@@ -39,7 +39,7 @@ class Compatibility70 extends \Report\Content {
 /*
         $deprecatedExtensions = self::$deprecatedExtensions;
         foreach($deprecatedExtensions as $extension) {
-            $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Extensions\\Ext'.$extension, $this->neo4j);
+            $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Extensions\\Ext'.$extension);
             $this->array[ $analyzer->getDescription()->getName()] = array('id'     => 1, 
                                                         'result' => $analyzer->toCount());
         }

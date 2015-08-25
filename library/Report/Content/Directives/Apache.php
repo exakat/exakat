@@ -23,11 +23,8 @@
 
 namespace Report\Content\Directives;
 
-use Everyman\Neo4j\Client;
-
 class Apache extends Directives {
-    public function __construct(Client $neo4j) {
-        parent::__construct($neo4j);
+    public function __construct() {
         $this->name         = 'Apache';
 
         if ($this->checkPresence('Extensions\\Extapache')) {

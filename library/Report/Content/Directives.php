@@ -50,7 +50,7 @@ class Directives extends \Report\Content {
         
         foreach($directives as $directive) {
             $classname = "\\Report\\Content\\Directives\\$directive";
-            $ext = new $classname($this->neo4j);
+            $ext = new $classname(null);
             if ($ext->hasDirective()) {
                 $this->array[$ext->name] = $ext;
             }

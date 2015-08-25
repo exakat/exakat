@@ -23,7 +23,7 @@
 
 namespace Report\Format\Devoops;
 
-class SimpleTableResultCounts extends \Report\Format\Devoops { 
+class FilesHashTableLinked extends \Report\Format\Devoops { 
     static public $hastableCounter = 0;
     
     public function render($output, $data) {
@@ -40,6 +40,7 @@ $js = <<<JS
 
 JS;
         $output->pushToTheEnd($js);
+//id="datatable-1"
 
         $text = <<<HTML
 <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="hashtable-{$counter}">
@@ -63,16 +64,17 @@ $text .= <<<HTML
 										<tbody>
 HTML;
         foreach($data as $k => $v) {
-            if ($v[0] == 'Total') { 
-                $bottom = $v;
-                continue; 
+            if ($v['result'] !== 0) {
+                $k = $this->makeLink($v['file']);//$k);
+                $icon = '<i class="fa fa-check-o red"></i>';
+                $analyzers = array_map(array($this, 'makeLink'), $v['result']);
+                $v['result'] = $this->makeList($analyzers);
+            } else {
+                $icon = '<i class="fa fa-check-square-o green"></i>';
+                $v['result'] = "";
             }
-            $v[0] = $this->makeLink($v[0]);
-            $text .= "<tr><td>{$v[0]}</td><td>{$v[1]}</td><td>{$v[2]}</td></tr>\n";
+            $text .= "<tr><td>$k</td><td>$icon".$v['result']."</td></tr>\n";
         }
-        
-        $text .= "<tfoot><tr><td>{$v[0]}</td><td>{$v[1]}</td><td>{$v[2]}</td></tr></tfoot>\n";
-
         $text .= <<<HTML
 										</tbody>
 									</table>

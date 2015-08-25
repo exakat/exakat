@@ -26,8 +26,18 @@ namespace Report\Template;
 class Horizontal extends \Report\Template {
     public function render($output) {
         $renderer = $output->getRenderer('Horizontal');
-
-        $renderer->setAnalyzer($this->data->getDescription()->getName());
+        
+        if ($this->data instanceof \Analyzer\Analyzer) {
+            $renderer->setAnalyzer($this->data->getDescription()->getName());
+        } elseif ($this->data instanceof \Report\Content) {
+            $renderer->setAnalyzer($this->data->getFilename());
+        } else {
+            print __METHOD__;
+            "Horizontal don't know what kind of description is needed\n";
+            var_dump(get_class($this->data));
+            var_dump($this->data instanceof \Analyzer\Analyzer);
+            die();
+        }
         $renderer->setCss($this->css);
         
         $renderer->render($output, $this->data->getArray());

@@ -21,19 +21,16 @@
 */
 
 
-namespace Report\Content\Directives;
+namespace Report\Content;
 
-class Assertion extends Directives {
-    public function __construct() {
-        $this->name         = 'Assertion';
-
-        // Assertions
-        if ($this->checkPresence('Php\\AssertionUsage')) {
-            $this->directives[] = array('name' => 'assert.active',
-                                        'suggested' => 'On',
-                                        'documentation' => 'In production, set this to Off to remove all assertions. During developement, set this to On to activate them.');
-
-            $this->directives[] = $this->extraConfiguration($this->name, 'info');
+class FilesResultCounts extends \Report\Content {
+    private $analyzers = null;
+    
+    public function collect() {    }
+    
+    public function setValues($fileList) {
+        foreach($fileList as $k => $v) {
+            $this->array[] = ['file' => $k,'result' => $v];
         }
     }
 }

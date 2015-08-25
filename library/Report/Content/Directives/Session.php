@@ -23,11 +23,8 @@
 
 namespace Report\Content\Directives;
 
-use Everyman\Neo4j\Client;
-
 class Session extends Directives {
-    public function __construct(Client $neo4j) {
-        parent::__construct($neo4j);
+    public function __construct() {
         $this->name         = 'Session';
         
         if ($this->checkPresence('Extensions\\Extsession')) {

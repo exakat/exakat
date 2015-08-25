@@ -320,7 +320,7 @@ class Appinfo extends \Report\Content {
                     continue;
                 } 
 
-                $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
+                $analyzer = \Analyzer\Analyzer::getInstance($a);
                 $this->array[$section][$name] = $analyzer->hasResults() == 'true' ? 'Yes' : 'No';
             }
             
@@ -339,7 +339,7 @@ class Appinfo extends \Report\Content {
         }
     
         // collecting information for Composer
-        $packages = \Analyzer\Analyzer::getInstance('Composer/PackagesNames', $this->neo4j);
+        $packages = \Analyzer\Analyzer::getInstance('Composer/PackagesNames');
         
         if ($packages->hasResults()) {
             $this->array['Composer Packages'] = $packages->toArray();

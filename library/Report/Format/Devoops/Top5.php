@@ -60,14 +60,16 @@ HTML;
             } else {
                 $severity = $this->makeLink($value['name']);
             }
-            $html .= <<<HTML
+            if (is_object($value)) {
+                $html .= <<<HTML
                         <tr>
 							<td>$severity</td>
-							<td>{$value['count']}</td>
-							<td><span class="label label-info arrowed-right arrowed-in">{$value['severity']}</span></td>
+							<td>{$value->count}</td>
+							<td><span class="label label-info arrowed-right arrowed-in">{$value->severity}</span></td>
                         </tr>
 
 HTML;
+            }
         }
         
         $html .= <<<HTML

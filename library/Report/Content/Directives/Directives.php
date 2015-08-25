@@ -23,8 +23,6 @@
 
 namespace Report\Content\Directives;
 
-use Everyman\Neo4j\Client;
-
 abstract class Directives implements \Iterator {
     const ON  = true;
     const OFF = false;
@@ -34,11 +32,9 @@ abstract class Directives implements \Iterator {
     protected $directives   = array();
     public    $name         = 'No Name';
     private   $position     = 0;
-    private   $neo4j        = null;
     protected $hasDirective = self::OFF;
 
-    public function __construct(Client $neo4j) {
-        $this->neo4j    = $neo4j;
+    public function __construct() {
         $this->position = 0;
     }
 
@@ -63,24 +59,15 @@ abstract class Directives implements \Iterator {
     }
 
     protected function checkPresence($analyzer) {
-        $vertices = $this->query("g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $analyzer)."']].out.any()");
-        $this->hasDirective = ($vertices[0][0] === false ? self::OFF : self::ON);
+        $vertices = gremlin_query("g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $analyzer)."']].out.any()");
+        $this->hasDirective = ($vertices->results[0] === false ? self::OFF : self::ON);
         return $this->hasDirective;
     }
 
     public function query($query) {
-        $params = array('type' => 'IN');
-        try {
-            $result = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $query, $params);
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            print "Exception : ".$message."\n";
+        $res = gremlin_query($query);
         
-            print $query."\n";
-            die(__METHOD__);
-        }
-        return $result->getResultSet();
+        return (array) $res->results;
     }
     
     public function hasDirective() {

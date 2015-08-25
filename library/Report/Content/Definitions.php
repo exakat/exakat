@@ -35,7 +35,7 @@ class Definitions extends \Report\Content {
         $return = array();
         
         foreach($this->analyzers as $analyzer) {
-            $o = \Analyzer\Analyzer::getInstance($analyzer, null);
+            $o = \Analyzer\Analyzer::getInstance($analyzer);
             $return[$o->getDescription()->getName()] = $o->getDescription();
         }
         

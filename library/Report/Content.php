@@ -26,14 +26,9 @@ namespace Report;
 class Content {
     protected $name    = 'Content'; 
     protected $project = null;
-    protected $neo4j   = null;
     protected $array   = array();
     protected $hasResults = false;
     
-    public function setNeo4j($client) {
-        $this->neo4j = $client;
-    }
-
     public function setProject($project) {
         $this->project = $project;
     }
@@ -51,18 +46,9 @@ class Content {
     }
 
     public function query($query) {
-        $params = array('type' => 'IN');
-        try {
-            $result = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $query, $params);
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            print "Exception : ".$message."\n";
+        $res = gremlin_query($query);
         
-            print $query."\n";
-            die(__METHOD__);
-        }
-        return $result->getResultSet();
+        return (array) $res->results;
     }
 }
 
