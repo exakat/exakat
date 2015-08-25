@@ -1,11 +1,20 @@
-Version 0.2.6 (Lingxuzi, Coming up)
-This is a maintenance release, with improved ease of use. 
+Version 0.3.1 (Yellow Wind Demon, Coming up)
+
+Version 0.3.0 (Lingxuzi, 2015-Aug-25)
+This is a important release, with some noticeable changes. 
++ Architecture
+    + Moved to Thinkaurelius's gremlin plug-in, Neo4j 2.2.4 and Java 8.
 + Report
-    + 
+    + Added a view by File 
+    + Added sorting for results (by file and by analyze)
 + Analyzer
-    +
+    + Spot functions whose results should be checked before they are used
+    + Spot breaks/continue out of a loop
+    + Exports all the results in a dump.sqlite file
 + Tokenizer
-    +
+    + Fixed a minor bug with ::class (messed up the {} counts)
+    + removed dependency to Everyman's Neo4j classes.
+    + Added a step that removes big and identifiable libraries in PHP (such as tcpdf, jpgraph, etc..)
 
 Version 0.2.5 (Scholar in a White Robe, 2015-Aug-17)
 This is a maintenance release, with improved ease of use. 
@@ -23,6 +32,7 @@ This is a maintenance release, with improved ease of use.
     + Fixed priorities with Concatenation, Multiplication, Additions
     + Process Echo and Print separately
     + Automatically removes common bundled libraries to reduce app size
+
 Version 0.2.4 (Black Wind Demon, 2015-06-22)
 This is a maintenance release, with improved ease of use and new analyzes.
 + Analyzer
