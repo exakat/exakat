@@ -59,7 +59,7 @@ class _Final extends TokenAuto {
     }
 
     public function fullcode() {
-        $function = new _Function(Token::$client);
+        $function = new _Function();
         return $function->fullcode();
     }
 }

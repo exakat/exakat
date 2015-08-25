@@ -131,7 +131,7 @@ class _Ppp extends TokenAuto {
     }
 
     public function fullcode() {
-        $token = new _Function(Token::$client);
+        $token = new _Function();
         return $token->fullcode();
     }
 }
