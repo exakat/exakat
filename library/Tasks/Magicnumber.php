@@ -56,13 +56,13 @@ SQL;
 
             $total = 0;
             foreach($res as $v) {
-                preg_match('/^(.*)=(\d+)/is', $v[0], $r);
+                preg_match('/^(.*)=(\d+)/is', $v, $r);
                 $value = $r[1];
                 $count = $r[2];
                 $stmt->bindValue(':value', $value, SQLITE3_TEXT);
                 $stmt->bindValue(':count', $count, SQLITE3_INTEGER);
                 $stmt->execute();
-                $total++;
+                ++$total;
             }
             display( "$type : $total\n");
         }
