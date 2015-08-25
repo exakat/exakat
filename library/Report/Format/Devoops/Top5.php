@@ -27,14 +27,15 @@ class Top5 extends \Report\Format\Devoops {
     static public $top5_counter = 0;
     
     public function render($output, $data) {
-        $html = <<<HTML
+
+        $html = "<p>".$this->css->title."</p>\n";
+        $html .= <<<HTML
 <table class="table table-striped">
 					<thead>
 						<tr>
 HTML;
 
-        $columnsHeaders = array();
-        foreach($columnsHeaders as $columnHeader) {
+        foreach($this->css->titles as $columnHeader) {
             $html .= "<th>$columnHeader</th>\n";
         }
         
@@ -56,20 +57,18 @@ HTML;
         foreach($values as $value) {
             // @note This is the same getId() than in Section::getId()
             if ($value['severity'] == '') {
-                $severity = $value['name'];
+                $severity = $this->makeLink($value['name']);
             } else {
                 $severity = $this->makeLink($value['name']);
             }
-            if (is_object($value)) {
-                $html .= <<<HTML
-                        <tr>
-							<td>$severity</td>
-							<td>{$value->count}</td>
-							<td><span class="label label-info arrowed-right arrowed-in">{$value->severity}</span></td>
-                        </tr>
+            $html .= <<<HTML
+                    <tr>
+						<td>$severity</td>
+						<td>{$value['count']}</td>
+						<td><span class="label label-info arrowed-right arrowed-in">{$value['severity']}</span></td>
+                    </tr>
 
 HTML;
-            }
         }
         
         $html .= <<<HTML
@@ -77,7 +76,6 @@ HTML;
 				</table>
 
 HTML;
-
         $output->push($html);
     }
 }

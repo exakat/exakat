@@ -1,3 +1,4 @@
 {
- "title":"Top 5 errors"
+ "title":"Top 5 errors",
+ "titles":["Error", "Count", "Severity"]
 }

@@ -34,6 +34,7 @@ class ListByFile extends \Report\Content\GroupBy {
             if ($count == 0) { continue; }
             
             $files = $analyzer->getFileList();
+            $files = $files[0];
             foreach($files as $file => $count) {
                 if (isset($array[$file])) {
                     $array[$file]['count'] += $count;

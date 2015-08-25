@@ -47,7 +47,7 @@ class Dashboard extends \Report\Content {
         $listBySeverity->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers($this->theme));
         $this->array['downLeft'] = $listBySeverity;
 
-        $listByFile = new \Report\Content\ListByFile(null);
+        $listByFile = new \Report\Content\ListByFile();
         $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers($this->theme));
         $this->array['downRight'] = $listByFile;
 

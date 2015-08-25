@@ -31,8 +31,7 @@ class ListBySeverity extends \Report\Content\GroupBy {
         $severities = array(\Analyzer\Analyzer::S_CRITICAL => 3,
                             \Analyzer\Analyzer::S_MAJOR    => 2,
                             \Analyzer\Analyzer::S_MINOR    => 1,
-//                            \\Analyzer\\Analyzer::S_NOTE    => 2,
-                            \Analyzer\Analyzer::S_NONE    => 0,
+                            \Analyzer\Analyzer::S_NONE     => 0,
         );
         
         foreach($this->analyzers as $a) {
