@@ -254,14 +254,17 @@ class Premier extends Report {
             $this->addContent('FilesHashTableLinked', $resultsCount);
 
             foreach($fileList as $file => $results) {
-               $this->createLevel2($file);
-               $this->addContent('Text', 'File : '.$file, 'textLead');
+                if (!isset($analyzesList[$file])) { continue; }
+                if ( empty($analyzesList[$file])) { continue; }
 
-               $fileAnalyzers = new \Report\Content\FileAnalyzers();
-               $fileAnalyzers->setValues($analyzesList[$file]);
-               $fileAnalyzers->setFilename($file);
-               $fileAnalyzers->collect();
-               $this->addContent('Horizontal', $fileAnalyzers, 'horizontalForFiles');
+                $this->createLevel2($file);
+                $this->addContent('Text', 'File : '.$file, 'textLead');
+ 
+                $fileAnalyzers = new \Report\Content\FileAnalyzers();
+                $fileAnalyzers->setValues($analyzesList[$file]);
+                $fileAnalyzers->setFilename($file);
+                $fileAnalyzers->collect();
+                $this->addContent('Horizontal', $fileAnalyzers, 'horizontalForFiles');
             }
         }
 
