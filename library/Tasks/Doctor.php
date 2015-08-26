@@ -87,10 +87,22 @@ class Doctor implements Tasks {
             }
 
             $file = file_get_contents('neo4j/conf/neo4j-server.properties');
-            if (!preg_match('/org.neo4j.server.webserver.port=(\d+)/is', $file, $r)) {
-                $stats['neo4j']['port'] = 'Unset (default : 7474)';
-            } else {
+            if (preg_match('/org.neo4j.server.webserver.port=(\d+)/is', $file, $r)) {
                 $stats['neo4j']['port'] = $r[1];
+            } else {
+                $stats['neo4j']['port'] = 'Unset (default : 7474)';
+            }
+
+            if (preg_match('/dbms.security.auth_enabled=false/is', $file, $r)) {
+                $stats['neo4j']['authentication'] = 'Not enabled. (good, for the moment)';
+            } else {
+                $stats['neo4j']['authentication'] = 'Enabled. Please, disable it with false.';
+            }
+
+            if (preg_match('#org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp#is', $file, $r)) {
+                $stats['neo4j']['gremlinPlugin'] = 'Configured.';
+            } else {
+                $stats['neo4j']['gremlinPlugin'] = 'Not found. Make sure that "org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp" is in the conf/neo4j-server.property.';
             }
             
             $pidPath = $config->neo4j_folder.'/conf/neo4j-service.pid';
