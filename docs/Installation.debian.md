@@ -3,8 +3,8 @@
 This is a specific installation guide for a debian server.
 
 ##pre-requisite
-* Java 1.7 or 1.8 (needed for Neo4j)
-* Neo4j 2.1.*
+* Java 1.8
+* Neo4j 2.2.*
 * Gremlin plugin
 * PHP (at least one version)
 * exakat.phar
@@ -13,7 +13,7 @@ This is a specific installation guide for a debian server.
 
 ### apt-get
 
-This long list of apt-get will install several needed libs for the installation. 
+This list of apt-get will install several needed libs for the installation. 
 
 `apt-get install php5-cli zip wkhtmltopdf maven vim python-software-properties php5-mysqlnd sqlite gcc make libxml2-dev autoconf re2c bison screen php5-curl php5-sqlite libssl-dev libcurl4-openssl-dev pkg-config libbz2-dev libjpeg-dev libpng-dev libXpm-dev libfreetype6-dev libt1-dev libgmp3-dev libldap2-dev libmcrypt-dev libmhash-dev freetds-dev libz-dev ncurses-dev libpcre3-dev unixODBC-dev libsqlite-dev libaspell-dev libreadline6-dev librecode-dev 
 apt-get update
@@ -32,19 +32,18 @@ apt-get install oracle-java7-installer`
 
 ### Neo4j
 
-Download Neo4j 2.1.* version (currently, 2.1.9. Works also with 2.1.6 to 2.1.8). 
-Version 2.2.* and up are not working, due to a lack of support for Gremlin.
+Download Neo4j 2.2.* version (currently, 2.2.4).
 
 [Neo4j](http://neo4j.com/)
 
-`wget http://dist.neo4j.org/neo4j-community-2.1.8-unix.tar.gz
-tar -xvf neo4j-community-2.1.6-unix.tar.gz 
-mv neo4j-community-2.1.8 neo4j
+`wget http://dist.neo4j.org/neo4j-community-2.2.4-unix.tar.gz
+tar -xvf neo4j-community-2.2.4-unix.tar.gz 
+mv neo4j-community-2.2.4 neo4j
 `
 
 ### Gremlin plug-in
 
-There is a [gremlin plug-in](https://github.com/neo4j-contrib/gremlin-plugin) for Neo4j. Follow the install instructions there. 
+There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
 
 `git clone https://github.com/neo4j-contrib/gremlin-plugin.git gremlin
 cd gremlin
