@@ -76,12 +76,14 @@ class Doctor implements Tasks {
             $file = file($config->neo4j_folder.'/README.txt');
             $stats['neo4j']['version'] = trim($file[0]);
 
-            $file = file_get_contents($config->neo4j_folder.'/conf/neo4j-wrapper.conf');
-            if (!preg_match('/wrapper.java.additional=-XX:MaxPermSize=(\d+\w)/is', $file, $r)) {
-                $stats['neo4j']['MaxPermSize'] = 'Unset (64M)';
-                $stats['neo4j']['MaxPermSize warning'] = 'Set MaxPermSize to 512 or more in neo4j/conf/neo4j-wrapper.conf, with "wrapper.java.additional=-XX:MaxPermSize=512m" around line 20';
-            } else {
-                $stats['neo4j']['MaxPermSize'] = $r[1];
+            if (isset($stats['java']['version']) && version_compare($stats['java']['version'], '1.8') < 0) {
+                $file = file_get_contents($config->neo4j_folder.'/conf/neo4j-wrapper.conf');
+                if (!preg_match('/wrapper.java.additional=-XX:MaxPermSize=(\d+\w)/is', $file, $r)) {
+                    $stats['neo4j']['MaxPermSize'] = 'Unset (64M)';
+                    $stats['neo4j']['MaxPermSize warning'] = 'Set MaxPermSize to 512 or more in neo4j/conf/neo4j-wrapper.conf, with "wrapper.java.additional=-XX:MaxPermSize=512m" around line 20';
+                } else {
+                    $stats['neo4j']['MaxPermSize'] = $r[1];
+                }
             }
 
             $file = file_get_contents('neo4j/conf/neo4j-server.properties');
@@ -89,6 +91,15 @@ class Doctor implements Tasks {
                 $stats['neo4j']['port'] = 'Unset (default : 7474)';
             } else {
                 $stats['neo4j']['port'] = $r[1];
+            }
+            
+            $pidPath = $config->neo4j_folder.'/conf/neo4j-service.pid';
+            if (file_exists($pidPath)) {
+                $stats['neo4j']['pid'] = file_get_contents($pidPath);
+            } else {
+                $res = shell_exec('ps aux | grep gremlin | grep plugin');
+                preg_match('/^\w+\s+(\d+)\s/is', $res, $r);
+                $stats['neo4j']['pid'] = $r[1];
             }
     
             $json = @file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
@@ -330,13 +341,6 @@ INI;
             $stats['wget']['version'] = $res;
         } else {
             $stats['wget']['installed'] = 'No';
-        }
-
-        // neo4jphp
-        if (file_exists('vendor/everyman/neo4jphp/')) {
-            $stats['neo4jphp']['installed'] = 'Yes';
-        } else {
-            $stats['neo4jphp']['installed'] = 'No';
         }
 
         return $stats;
