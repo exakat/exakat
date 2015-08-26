@@ -207,6 +207,7 @@ LICENCE;
         $this->taskExecStack()
              ->stopOnFail()
              ->exec('mv exakat.phar ../release/')
+             ->exec('cp docs/* ../release/docs/')
              ->run();
     }
     
