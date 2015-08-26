@@ -35,12 +35,15 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Variable')
+            // Not a static property
+             ->filter(' it.in("VARIABLE").loop(1){true}{ true}.in("PROPERTY").any() == false')
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->analyzerIsNot('Analyzer\\Variables\\Blind')
              ->analyzerIsNot('Analyzer\\Variables\\InterfaceArguments')
              ->codeIsNot(VariablePhp::$variables, true)
              ->hasNoIn('GLOBAL')
              ->analyzerIsNot('Analyzer\\Variables\\VariableUsedOnceByContext')
+             // 
              ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}.out("ABSTRACT").any() == false')
              ->fetchContext()
              ->eachCounted('it.code + "/" + context.Function + "/" + context.Class + "/" + context.Namespace', 1);
