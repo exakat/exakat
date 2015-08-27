@@ -166,6 +166,11 @@ class Exakat {
                 print $task->run($config);
                 break;
 
+            case 'queue' : 
+                $task = new Tasks\Queue();
+                print $task->run($config);
+                break;
+
             case 'version' : 
             default : 
                 $version = self::VERSION;

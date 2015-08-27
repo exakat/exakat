@@ -68,7 +68,9 @@ class Jobqueue implements Tasks {
         }
 
         $pipe = fopen($pipefile,'r+');
-        if(!$pipe) die('unable to open the named pipe');
+        if(!$pipe) {
+            die('unable to open the named pipe');
+        }
         stream_set_blocking($pipe,false);
 
         //////// process the queue ////////
@@ -116,12 +118,14 @@ class Jobqueue implements Tasks {
             return;
         }
 
-        file_put_contents($this->config->projects_root.'/progress/'.$job.'.exakat', time());
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job]));
         shell_exec('php '.$this->config->executable.' onepage -f '.$this->config->projects_root.'/in/'.$job.'.php -p onepage');
 
         // cleaning
         rename($this->config->projects_root.'/projects/onepage/onepage.json', $this->config->projects_root.'/out/'.$job.'.json');
-        unlink($this->config->projects_root.'/progress/'.$job.'.exakat');
+        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
+        $progress->end = time();
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
 
         fwrite($this->log, 'Finished : ' . $job.' '.time()."\n");
 
@@ -139,11 +143,13 @@ class Jobqueue implements Tasks {
             return;
         }
 
-        file_put_contents($this->config->projects_root.'/progress/'.$job.'.exakat', time());
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job]));
         shell_exec('php '.$this->config->executable.' project -p '.$job);
 
         // cleaning
-        unlink($this->config->projects_root.'/progress/'.$job.'.exakat');
+        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
+        $progress->end = time();
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
 
         fwrite($this->log, 'Finished Project : ' . $job.' '.time()."\n");
 

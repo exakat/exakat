@@ -25,29 +25,28 @@ namespace Tasks;
 
 class OnePage implements Tasks {
     private $project_dir = '.';
-    private $executable = 'exakat';
+    private $config = null;
     
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
                               'OneFile');
+    const TOTAL_STEPS = 11; //
 
     protected $reports = array('Onepage' => array('Json'   => 'report'));
     
     public function run(\Config $config) {
+        $this->config = $config;
+        
+        $progress = 0;
+        
         $begin = microtime(true);
         $project = 'onepage';
         $this->project_dir = $config->projects_root.'/projects/'.$project;
 
-        if ($config->is_phar) {
-            $this->executable = basename(dirname(dirname(__DIR__)));
-        } else {
-            $this->executable = $_SERVER['SCRIPT_NAME'];
-        }
-        
         // checking for installation
         if (!file_exists($this->project_dir)) {
-            shell_exec('php '.$this->executable.' init -p onepage ');
+            shell_exec('php '.$config->executable.' init -p onepage ');
             mkdir($this->project_dir.'/code', 0755);
-            shell_exec('php '.$this->executable.' phploc -p onepage ');
+            shell_exec('php '.$config->executable.' phploc -p onepage ');
         }
 
         // todo : check that there is indeed this project or create it.
@@ -81,15 +80,17 @@ class OnePage implements Tasks {
         $thread = new \Thread();
         display("Running project '$project'\n");
 
-        shell_exec('php '.$this->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
+        shell_exec('php '.$config->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
+        $this->updateProgress($progress++);
         $this->logTime('Loading');
 
-        $res = shell_exec('php '.$this->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
+        $res = shell_exec('php '.$config->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
         display("Build root\n");
+        $this->updateProgress($progress++);
         $this->logTime('Build_root');
 
-        $res = shell_exec('php '.$this->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
+        $res = shell_exec('php '.$config->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
             file_put_contents($config->projects_root.'/log/tokenizer_error.log', $res);
             die();
@@ -97,22 +98,26 @@ class OnePage implements Tasks {
 
         $this->logTime('Tokenizer');
         display("Project tokenized\n");
+        $this->updateProgress($progress++);
 
         $processes = array();
         foreach($this->themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
-            shell_exec('php '.$this->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
+            shell_exec('php '.$config->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
 mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
             display("Analyzing $theme\n");
+            $this->updateProgress($progress++);
         }
 
         display("Project analyzed\n");
+        $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
-        shell_exec('php '.$this->executable.' onepagereport -p onepage');
+        shell_exec('php '.$config->executable.' onepagereport -p onepage');
         $this->logTime('Report');
 
         display("Project reported\n");
+        $this->updateProgress($progress++);
 
         unlink($config->projects_root.'/projects/'.$project.'/code/onepage.php');
 
@@ -121,11 +126,18 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
                                          'audit_length' => $audit_end - $audit_start));
 
         $this->logTime('Final');
+        $this->updateProgress($progress++);
         display("End 2\n");
         $end = microtime(true);
         display("Total time : ".number_format(($end - $begin), 2)."s\n");
         
         $this->logTime('Files');
+    }
+
+    private function updateProgress($status) {
+        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
+        $progress->progress = number_format(100 * $status / self::TOTAL_STEPS, 0);
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
     }
 
     private function cleanLog($path) {

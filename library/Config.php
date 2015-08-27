@@ -269,6 +269,7 @@ class Config {
                           'help'          => 1, 
                           'init'          => 1, 
                           'jobqueue'      => 1, 
+                          'queue'         => 1, 
                           'load'          => 1, 
                           'log2csv'       => 1, 
                           'magicnumber'   => 1, 

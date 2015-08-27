@@ -25,7 +25,7 @@ namespace Tasks;
 
 class Project implements Tasks {
     private $project_dir = '.';
-    private $executable = 'exakat';
+    private $config = null;
     
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
                               'Appinfo', '"Dead code"', 'Security', 'Custom',
@@ -38,8 +38,13 @@ class Project implements Tasks {
                                                   //'Text'     => 'report'
                                                   ),
                                'Counts'  => array('Sqlite'   => 'counts'));
+    const TOTAL_STEPS = 22; // 2 Reports + 10 Analyzes + 10 other steps
     
     public function run(\Config $config) {
+        $this->config = $config;
+        
+        $progress = 0;
+
         $project = $config->project;
 
         $this->project_dir = $config->projects_root.'/projects/'.$project;
@@ -92,16 +97,19 @@ class Project implements Tasks {
         display("Cleaning DB\n");
         shell_exec('php '.$config->executable.' cleandb -v');
         $this->logTime('Files');
+        $this->updateProgress($progress++);
 
         display("Search for external libraries\n");
         shell_exec('php '.$config->executable.' findextlib -p '.$project.' -v -u > '.$config->projects_root.'/projects/'.$project.'/log/findExtlib.log');
         $this->logTime('Find External Libraries');
         $thread->waitForAll();
+        $this->updateProgress($progress++);
 
         display("Running files\n");
         shell_exec('php '.$config->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
         $this->logTime('Files');
         $thread->waitForAll();
+        $this->updateProgress($progress++);
 
         display("waited For All\n");
 
@@ -111,6 +119,7 @@ class Project implements Tasks {
         if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/load.final.log')) {
             return false;
         }
+        $this->updateProgress($progress++);
 
         $res = shell_exec('php '.$config->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
         display("Build root\n");
@@ -118,22 +127,26 @@ class Project implements Tasks {
         if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/build_root.final.log')) {
             return false;
         }
+        $this->updateProgress($progress++);
 
         $res = shell_exec('php '.$config->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         $this->logTime('Tokenizer');
         if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log')) {
             return false;
         }
-        
         display("Project tokenized\n");
+        $this->updateProgress($progress++);
 
         $thread->run('php '.$config->executable.' magicnumber -p '.$project);
+        $this->updateProgress($progress++);
 
         $thread->run('php '.$config->executable.' errors > '.$config->projects_root.'/projects/'.$project.'/log/errors.log');
         display("Got the errors (if any)\n");
+        $this->updateProgress($progress++);
 
         $thread->run('php '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         display("Stats\n");
+        $this->updateProgress($progress++);
 
         $thread->run('php '.$config->executable.' log2csv -p '.$project);
 
@@ -145,18 +158,23 @@ class Project implements Tasks {
             shell_exec('php '.$config->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
 mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
             display("Analyzing $theme\n");
+            $this->updateProgress($progress++);
+
             if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log')) {
                 return false;
             }
         }
 
         display("Project analyzed\n");
+        $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
         $oldConfig = \Config::factory();
         foreach($this->reports as $reportName => $formats) {
             foreach($formats as $format => $fileName) {
                 display("Reporting $reportName in $format\n");
+                $this->updateProgress($progress++);
+                
                 $args = array ( 1 => 'report',
                                 2 => '-p',
                                 3 => $config->project,
@@ -195,6 +213,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         shell_exec('php '.$config->executable.' results -P Functions/IsExtFunction   -json -f '.$config->projects_root.'/projects/'.$project.'/PhpFunctions');
         $this->logTime('Final');
         display("End 2\n");
+        $this->updateProgress($progress++);
     }
 
     private function logTime($step) {
@@ -244,6 +263,12 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         
         // checked it all. All is fine.
         return true;
+    }
+
+    private function updateProgress($status) {
+        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
+        $progress->progress = number_format(100 * $status / self::TOTAL_STEPS, 0);
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
     }
 
 }
