@@ -27,10 +27,6 @@ class Missing extends \Report\Format\Devoops {
     public function render($output, $data) {
         $output->push("<!-- Missing widget --> Missing Widget ");
     }
-
-    public function __call($name, $args) {
-        return true; 
-    }
 }
 
 ?>

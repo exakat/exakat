@@ -24,13 +24,7 @@
 namespace Report\Format\Json;
 
 class Missing extends \Report\Format\Json {
-    public function render($output, $data) {
-//        $output->push('Missing', '/** Missing widget **/');
-    }
-    
-    public function __call($name, $args) {
-        return true; 
-    }
+    public function render($output, $data) {    }
 }
 
 ?>
