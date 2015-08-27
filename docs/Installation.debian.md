@@ -9,7 +9,7 @@ This is a specific installation guide for a debian server.
 * PHP (at least one version)
 * exakat.phar
 
-## OSX install
+## Debian install
 
 ### apt-get
 
@@ -22,13 +22,16 @@ apt-get clean`
 
 
 ### Java install
-You need a recent version of Java. 
+You need a Java 8. Java 7 might work.
 
-`echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee /etc/apt/sources.list.d/webupd8team-java.list
-echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
-apt-get update
-apt-get install oracle-java7-installer`
+`$ su root
+# echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" > /etc/apt/sources.list.d/webupd8team-java.list
+# echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/webupd8team-java.list
+# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+# apt-get update
+# apt-get install oracle-java8-installer
+# java -version
+# exit`
 
 ### Neo4j
 
@@ -44,6 +47,20 @@ mv neo4j-community-2.2.4 neo4j
 ### Gremlin plug-in
 
 There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
+
+Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors.) : 
+`
+    <repositories>
+       <repository>
+         <id>snapshots-repo</id>
+         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+         <releases><enabled>false</enabled></releases>
+         <snapshots><enabled>true</enabled></snapshots>
+       </repository>
+     </repositories>
+  `
+  
+  Then, in command line : 
 
 `git clone https://github.com/neo4j-contrib/gremlin-plugin.git gremlin
 cd gremlin

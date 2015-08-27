@@ -59,7 +59,22 @@ Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` fi
 
 ### Gremlin plug-in
 
-This install [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j
+This install [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j.
+
+Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors.) : 
+`
+    <repositories>
+       <repository>
+         <id>snapshots-repo</id>
+         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+         <releases><enabled>false</enabled></releases>
+         <snapshots><enabled>true</enabled></snapshots>
+       </repository>
+     </repositories>
+  `
+  
+Then, in command line : 
+
 
 * `git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git`
 * `cd gremlin-plugin`
