@@ -39,9 +39,6 @@ Scope change between a method and the one in the parent classes.
 Variables : 
 Camel case, underscore separated, Spelling, $[type]Name ($sString, $iId,), variables with numbers or sharing prefixes).
 
-Export analyze to Sqlite for stats
-
-Add a deamon to project, that scans then start
 Build a test project for the reports styles (avoid md/pdf pb)
 
 Add exemples from the found code to the explanations. 
@@ -107,7 +104,7 @@ You should not throw an extension exception yourself (PDO)
 // display the actual hierarchy in a complex logical expression (add parenthesis?)
 
 Complex logical expression, without ().
-Commented Code
+Commented Code (PHPCIC)
 First support comments in exakat
 
 Spot identical files and avoir double analyse (.... ?)
@@ -265,7 +262,8 @@ Suggest replacement for str_replace/ereg/preg/strtr
 
 Conditional declarations ?
 
-Heavily used classes/functions...
+Heavily used classes/functions
+Rarely used classes/functions
 
 Using empty() with Function Calls and Expressions : $x = $object->getProperty(); empty($x)
 
@@ -863,11 +861,6 @@ Spot entry point in the application and outgoing points.
 
 Suggest positive conditions when there is a if/else
 
-neo4j 2.2.0ME 4 : ditch batch-import
-    No support for Gremlin
-    Tutorial for neo4j-import
-    migration to Cypher ? 
-
 Remove die, print_r, var_dump.
     Vérifier que les tests fonctionnent avec phar
     
@@ -1402,12 +1395,18 @@ Methods that don't return but are actually collected.
 
 Analyzers that help refactoring : removing a structure, an argument, etc.
 
-Such Code should contains that or that statement (General validations)
+Such Code should contains that or that statement (General validations), that will be customized.
 
 isset($params) is useless on an argument (null, OK).
 
-no recount inside loop : also true for assignations. 
+no recount inside loop : also true for assignations of literals (unless this is a default value)
 
-All constants in a class should go to properties to avoid rebuiding it.
+All literals in a class should go to properties to avoid rebuilding it.
 
 continue as the last element of a loop? Useless.
+
+Add support for Neo4j Authentication Authenticate by sending a username and a password to Neo4j using HTTP Basic Auth. Requests should include an Authorization header, with a value of Basic <payload>, where "payload" is a base64 encoded string of "username:password".
+
+in_array($a, array()); // pas de Array dans le 2eme argument, c'est une recréation a chaque fois.
+
+Test Neo4j batch import de la version 2.2.4.
