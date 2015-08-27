@@ -174,7 +174,6 @@ foreach($tokens as $t) {
             case T_IMPLEMENTS : 
 
             case T_MUL_EQUAL :
-            case T_MUL_EQUAL :
             case T_DIV_EQUAL :
 
             case T_RETURN :
@@ -277,6 +276,23 @@ foreach($tokens as $t) {
             case T_LINE : 
             case T_METHOD_C : 
             case T_NS_C : 
+
+            case T_POW_EQUAL :
+            case T_SL_EQUAL :
+            case T_AND_EQUAL :
+            case T_MOD_EQUAL :
+
+            case T_DECLARE :
+            case T_ENDDECLARE :
+            case T_GOTO :
+            case T_ABSTRACT :
+            case T_HALT_COMPILER :
+            case T_TRAIT_C :
+            case T_PAAMAYIM_NEKUDOTAYIM :
+
+            case T_STRING_VARNAME : //complex variable parsed syntax
+            case T_CHARACTER :      // Not used
+            case T_BAD_CHARACTER :  //anything below ASCII 32 except \t (0x09), \n (0x0a) and \r (0x0d)
 
             case T_IS_IDENTICAL:
             case T_CONCAT_EQUAL:
