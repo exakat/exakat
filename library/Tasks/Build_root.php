@@ -131,12 +131,6 @@ class Build_root implements Tasks {
         display("Creating index for constant, function and classes resolution.\n");
     }
 
-    private function query($query, $retry = 1) {
-        $res = gremlin_query($query);
-
-        return $res->results;
-    }
-
     private function logTime($step) {
         static $log, $begin, $end, $start;
     
