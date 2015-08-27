@@ -35,6 +35,9 @@ class Clean implements Tasks {
             shell_exec('rm -rf '.$config->projects_root.'/projects/'.$config->project.'/'.$dir);
         }
 
+        // rebuild log
+        mkdir($config->projects_root.'/projects/'.$config->project.'/log', 0755);
+
         $filesToErase = array('Flat-html.html',
                               'Flat-markdown.md',
                               'Flat-sqlite.sqlite',
@@ -49,19 +52,28 @@ class Clean implements Tasks {
                               'counts.sqlite',
                               'report.html',
                               'report.md',
+                              'report.odt',
+                              'report.pdf',
                               'report.sqlite',
                               'report.txt',
                               'report.zip',
+                              'EchoWithConcat.json',
+                              'PhpFunctions.json',
+                              'bigArrays.txt',
+                              'counts.sqlite',
+                              'datastore.sqlite',
+                              'stats.txt'
                              );
+        $total = 0;
         foreach($filesToErase as $file) {
             $path = $config->projects_root.'/projects/'.$config->project.'/'.$file;
             if (file_exists($path)) {
+                display('removing '.$file);
                 unlink($path);
+                ++$total;
             }
         }
-
-        // rebuild log
-        mkdir($config->projects_root.'/projects/'.$config->project.'/log', 0755);
+        display("Removed $total files\n");
     }
 }
 
