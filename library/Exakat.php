@@ -161,13 +161,28 @@ class Exakat {
                 print $task->run($config);
                 break;
 
+            case 'jobqueue' : 
+                $task = new Tasks\Jobqueue();
+                print $task->run($config);
+                break;
+
             case 'version' : 
             default : 
                 $version = self::VERSION;
                 $build = self::BUILD;
                 $date = date('r', filemtime(__FILE__));
-                print "Exakat : @ 2014-2015 Damien Seguy. 
-Version : {$version} - Build $build - $date\n";
+                print "
+ ________                 __              _    
+|_   __  |               [  |  _         / |_  
+  | |_ \_| _   __  ,--.   | | / ]  ,--. `| |-' 
+  |  _| _ [ \ [  ]`'_\ :  | '' <  `'_\ : | |   
+ _| |__/ | > '  < // | |, | |`\ \ // | |,| |,  
+|________|[__]`\_]\'-;__/[__|  \_]\'-;__/\__/  
+                                               
+
+Exakat : @ 2014-2015 Damien Seguy. 
+Version : {$version} - Build $build - $date
+";
                 break;
         }
     }

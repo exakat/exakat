@@ -44,14 +44,8 @@ class Project implements Tasks {
 
         $this->project_dir = $config->projects_root.'/projects/'.$project;
 
-        if ($config->is_phar) {
-            $this->executable = basename(dirname(dirname(__DIR__)));
-        } else {
-            $this->executable = $_SERVER['SCRIPT_NAME'];
-        }
-
         if ($config->project === 'default') {
-            die("Usage : php {$this->executable} project -p [Project name]\n");
+            die("Usage : php {$config->executable} project -p [Project name]\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project)) {
@@ -96,36 +90,36 @@ class Project implements Tasks {
         display("Running project '$project'\n");
 
         display("Cleaning DB\n");
-        shell_exec('php '.$this->executable.' cleandb -v');
+        shell_exec('php '.$config->executable.' cleandb -v');
         $this->logTime('Files');
 
         display("Search for external libraries\n");
-        shell_exec('php '.$this->executable.' findextlib -p '.$project.' -v -u > '.$config->projects_root.'/projects/'.$project.'/log/findExtlib.log');
+        shell_exec('php '.$config->executable.' findextlib -p '.$project.' -v -u > '.$config->projects_root.'/projects/'.$project.'/log/findExtlib.log');
         $this->logTime('Find External Libraries');
         $thread->waitForAll();
 
         display("Running files\n");
-        shell_exec('php '.$this->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
+        shell_exec('php '.$config->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
         $this->logTime('Files');
         $thread->waitForAll();
 
         display("waited For All\n");
 
-        shell_exec('php '.$this->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
+        shell_exec('php '.$config->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
         $this->logTime('Loading');
         if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/load.final.log')) {
             return false;
         }
 
-        $res = shell_exec('php '.$this->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
+        $res = shell_exec('php '.$config->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
         display("Build root\n");
         $this->logTime('Build_root');
         if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/build_root.final.log')) {
             return false;
         }
 
-        $res = shell_exec('php '.$this->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
+        $res = shell_exec('php '.$config->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         $this->logTime('Tokenizer');
         if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log')) {
             return false;
@@ -133,22 +127,22 @@ class Project implements Tasks {
         
         display("Project tokenized\n");
 
-        $thread->run('php '.$this->executable.' magicnumber -p '.$project);
+        $thread->run('php '.$config->executable.' magicnumber -p '.$project);
 
-        $thread->run('php '.$this->executable.' errors > '.$config->projects_root.'/projects/'.$project.'/log/errors.log');
+        $thread->run('php '.$config->executable.' errors > '.$config->projects_root.'/projects/'.$project.'/log/errors.log');
         display("Got the errors (if any)\n");
 
-        $thread->run('php '.$this->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
+        $thread->run('php '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         display("Stats\n");
 
-        $thread->run('php '.$this->executable.' log2csv -p '.$project);
+        $thread->run('php '.$config->executable.' log2csv -p '.$project);
 
         $this->logTime('Stats');
 
         $processes = array();
         foreach($this->themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
-            shell_exec('php '.$this->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
+            shell_exec('php '.$config->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
 mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
             display("Analyzing $theme\n");
             if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log')) {
@@ -190,15 +184,15 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
 
         display("Project reported\n");
 
-        shell_exec('php '.$this->executable.' stat > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
+        shell_exec('php '.$config->executable.' stat > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         display("Stats 2\n");
         
         $audit_end = time();
         $datastore->addRow('hash', array('audit_end'    => $audit_end,
                                          'audit_length' => $audit_end - $audit_start));
 
-        shell_exec('php '.$this->executable.' results -P Structures/EchoWithConcat -json -f '.$config->projects_root.'/projects/'.$project.'/EchoWithConcat');
-        shell_exec('php '.$this->executable.' results -P Functions/IsExtFunction   -json -f '.$config->projects_root.'/projects/'.$project.'/PhpFunctions');
+        shell_exec('php '.$config->executable.' results -P Structures/EchoWithConcat -json -f '.$config->projects_root.'/projects/'.$project.'/EchoWithConcat');
+        shell_exec('php '.$config->executable.' results -P Functions/IsExtFunction   -json -f '.$config->projects_root.'/projects/'.$project.'/PhpFunctions');
         $this->logTime('Final');
         display("End 2\n");
     }

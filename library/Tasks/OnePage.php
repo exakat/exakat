@@ -112,8 +112,9 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         shell_exec('php '.$this->executable.' onepagereport -p onepage');
         $this->logTime('Report');
 
-
         display("Project reported\n");
+
+        unlink($config->projects_root.'/projects/'.$project.'/code/onepage.php');
 
         $audit_end = time();
         $datastore->addRow('hash', array('audit_end'    => $audit_end,
