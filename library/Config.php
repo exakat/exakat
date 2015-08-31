@@ -28,11 +28,57 @@ class Config {
            private $argv           = array();
            public  $dir_root       = '.';
            public  $projects_root  = '.';
+           public  $codePath       = '.';
            public  $is_phar        = true;
            public  $executable     = '';
            private $projectConfig  = array();
         
            private $options = array();
+
+           private $defaultConfig  = array( // directives with boolean value
+                                            'verbose'        => false,
+                                            'quick'          => false,
+                                            'help'           => false,
+                                            'recursive'      => false,
+                                            'update'         => false,
+                                            'delete'         => false,
+                                            'lint'           => false,
+                                            'json'           => false,
+                                            'dot'            => false,
+                                            'ss'             => false,
+                                            'sm'             => false,
+                                            'sl'             => false,
+                                            'noDependencies' => false,
+                                            'noRefresh'      => false,
+                                            'today'          => false,
+                                            'none'           => false,
+                                            'table'          => false,
+                                            'text'           => false,
+                                            'output'         => false,
+                                            
+                                            'git'            => true,
+                                            'svn'            => false,
+                                            'hg'             => false,
+                                            'composer'       => false,
+                                            'tgz'            => false,
+                                            'tbz'            => false,
+                                            'zip'            => false,
+
+                                             // directives with literal value
+                                            'filename'       => null,
+                                            'dirname'        => null,
+                                            'project'        => 'default',
+                                            'program'        => null,
+                                            'repository'     => false,
+                                            'thema'          => null,
+                                            'report'         => 'Premier',
+                                            'format'         => 'Text',
+                                            'file'           => 'report',
+                                            'style'          => 'ALL',
+                                            'neo4j_host'     => '127.0.0.1',
+                                            'neo4j_port'     => '7474',
+                                            'neo4j_port'     => 'neo4j',
+                                           );
      
     private function __construct($argv) {
         $this->argv = $argv;
@@ -66,14 +112,18 @@ class Config {
         // then read the config for the project in its folder
         if (isset($this->commandline['project'])) {
             $this->readProjectConfig($this->commandline['project']);
-        } 
+            $this->codePath = realpath($this->projects_root.'/projects/'.$this->commandline['project'].'/code');
+        }  else {
+            $this->codePath = '/No/Path/To/Code';
+        }
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
-        $this->options = array_merge($this->configFile, $this->commandline, $this->projectConfig);
+        $this->options = array_merge($this->defaultConfig, $this->configFile, $this->commandline, $this->projectConfig);
 
-        if ($this->options['neo4j_folder'][0] != '/') {
-            $this->options['neo4j_folder'] = dirname($this->projects_root).'/'.$this->options['neo4j_folder'];
+        if ($this->options['neo4j_folder'][0] !== '/') {
+            $this->options['neo4j_folder'] = $this->projects_root.'/'.$this->options['neo4j_folder'];
         }
+        $this->options['neo4j_folder'] = realpath($this->options['neo4j_folder']);
     }
     
     static public function factory($argv = array()) {
@@ -163,73 +213,71 @@ class Config {
     private function readCommandline() {
         $args = $this->argv;
         unset($args[0]);
-
+        
         if (empty($args)) {
-            return null;
+            return array();
         }
         
         $optionsBoolean = array(
-                                 '-v'         => array('verbose',        false),
-                                 '-Q'         => array('quick',          false),
-                                 '-h'         => array('help',           false),
-                                 '-r'         => array('recursive',      false),
-                                 '-u'         => array('update',         false),
-                                 '-D'         => array('delete',         false),
-                                 '-l'         => array('lint',           false),
-                                 '-json'      => array('json',           false),
-                                 '-dot'       => array('dot',            false),
-                                 '-ss'        => array('ss',             false),
-                                 '-sm'        => array('sm',             false),
-                                 '-sl'        => array('sl',             false),
-                                 '-nodep'     => array('noDependencies', false),
-                                 '-norefresh' => array('noRefresh',      false),
-                                 '-today'     => array('today',          false),
-                                 '-none'      => array('none',           false),
-                                 '-table'     => array('table',          false),
-                                 '-text'      => array('text',           false),
-                                 '-o'         => array('output',         false),
+                                 '-v'         => 'verbose',
+                                 '-Q'         => 'quick',
+                                 '-h'         => 'help',
+                                 '-r'         => 'recursive',
+                                 '-u'         => 'update',
+                                 '-D'         => 'delete',
+                                 '-l'         => 'lint',
+                                 '-json'      => 'json',
+                                 '-dot'       => 'dot',
+                                 '-ss'        => 'ss',
+                                 '-sm'        => 'sm',
+                                 '-sl'        => 'sl',
+                                 '-nodep'     => 'noDependencies',
+                                 '-norefresh' => 'noRefresh',
+                                 '-today'     => 'today',
+                                 '-none'      => 'none',
+                                 '-table'     => 'table',
+                                 '-text'      => 'text',
+                                 '-o'         => 'output',
 
-                                 '-git'       => array('git',            true),
-                                 '-svn'       => array('svn',            false),
-                                 '-hg'        => array('hg',             false),
-                                 '-composer'  => array('composer',       false),
-                                 '-tgz'       => array('tgz',            false),
-                                 '-tbz'       => array('tbz',            false),
-                                 '-zip'       => array('zip',            false),
-
+                                 '-git'       => 'git',
+                                 '-svn'       => 'svn',
+                                 '-hg'        => 'hg',
+                                 '-composer'  => 'composer',
+                                 '-tgz'       => 'tgz',
+                                 '-tbz'       => 'tbz',
+                                 '-zip'       => 'zip',
                                  );
 
         foreach($optionsBoolean as $key => $config) {
             if (($id = array_search($key, $args)) !== false) {
-                $this->commandline[$config[0]] = true;
+                $this->commandline[$config] = true;
 
                 unset($args[$id]);
-            } else {
-                $this->commandline[$config[0]] = $config[1];
-            }
+            } 
         }
         
         // git is default, so it should be unset if another is set
-        $this->commandline['git'] = (boolean) (true ^ ($this->commandline['svn']      || 
-                                              $this->commandline['hg']       ||
-                                              $this->commandline['composer'] ||
-                                              $this->commandline['tgz']      ||
-                                              $this->commandline['tbz']      ||
-                                              $this->commandline['zip']        ));
+        $this->commandline['git'] = (boolean) (true ^ ((isset($this->commandline['svn'])       && $this->commandline['svn'])      || 
+                                                       (isset($this->commandline['hg'])        && $this->commandline['hg'])       || 
+                                                       (isset($this->commandline['hg'])        && $this->commandline['hg'])       || 
+                                                       (isset($this->commandline['composer'])  && $this->commandline['composer']) || 
+                                                       (isset($this->commandline['tgz'])       && $this->commandline['tgz'])      || 
+                                                       (isset($this->commandline['tbz'])       && $this->commandline['tbz'])      || 
+                                                       (isset($this->commandline['zip'])       && $this->commandline['zip']))      );
 
-        $optionsValue   = array('-f'            => array('filename',    null),
-                                '-d'            => array('dirname',     null),
-                                '-p'            => array('project',     'default'),
-                                '-P'            => array('program',     null),
-                                '-R'            => array('repository',  false),
-                                '-T'            => array('thema',       null),
-                                '-report'       => array('report',      'Premier'),
-                                '-format'       => array('format',      'Text'),
-                                '-file'         => array('file',        'report'),
-                                '-style'        => array('style',       'ALL'), 
-                                '-neo4j_host'   => array('neo4j_host',  '127.0.0.1'), 
-                                '-neo4j_port'   => array('neo4j_port',  '7474'), 
-                                '-neo4j_folder' => array('neo4j_folder',  $this->projects_root.'/neo4j'), 
+        $optionsValue   = array('-f'            => 'filename',
+                                '-d'            => 'dirname',
+                                '-p'            => 'project',
+                                '-P'            => 'program',
+                                '-R'            => 'repository',
+                                '-T'            => 'thema',
+                                '-report'       => 'report',
+                                '-format'       => 'format',
+                                '-file'         => 'file',
+                                '-style'        => 'style', 
+                                '-neo4j_host'   => 'neo4j_host', 
+                                '-neo4j_port'   => 'neo4j_port', 
+                                '-neo4j_folder' => 'neo4j_folder', 
                                  );
 
         foreach($optionsValue as $key => $config) {
@@ -237,22 +285,17 @@ class Config {
                 if (isset($args[$id + 1])) {
                     if (isset($optionsValue[$args[$id + 1]])) {
                         // in case this option value is actually the next option (exakat -p -T)
-                        $this->commandline[$config[0]] = $config[1];
+                        // We just ignore it
                         unset($args[$id]);
                     } else {
                         // Normal case is here
-                        $this->commandline[$config[0]] = $args[$id + 1];
+                        $this->commandline[$config] = $args[$id + 1];
 
                         unset($args[$id]);
                         unset($args[$id + 1]);
                     }
-                } else {
-                    $this->commandline[$config[0]] = $config[1];
-                    unset($args[$id]);
                 }
-            } else {
-                $this->commandline[$config[0]] = $config[1];
-            }
+            } 
         }
 
         $commands = array('analyze'       => 1, 
