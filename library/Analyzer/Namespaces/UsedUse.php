@@ -80,44 +80,18 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'used')
+             ->analyzerIsNot('self')
+             ->savePropertyAs('alias', 'alias')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Class')
-             ->outIs('EXTENDS', 'IMPLEMENTS')
-             ->samePropertyAs('code', 'used')
+             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+             ->isNot('alias', null)
+             ->samePropertyAs('alias', 'alias')
              ->back('result');
         $this->prepareQuery();
 
-    // case of simple use in a extends
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->_as('result')
-             ->savePropertyAs('code', 'used')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Class')
-             ->outIs('EXTENDS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a implements
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->_as('result')
-             ->savePropertyAs('code', 'used')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Class')
-             ->outIs('IMPLEMENTS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-        
     // case of simple use in a Static constant
         $this->atomIs('Use')
              ->outIs('USE')
