@@ -62,30 +62,16 @@ DELETE n,r';
         display(number_format(($end - $begin) * 1000, 0).' ms');
     }
     
-    private function getClient() {
-        try {
-            neo4j_serverInfo();
-        } catch (\Exception $e) {
-            display('Couldn\'t access Neo4j');
-            shell_exec('cd '.$this->config->projects_root.'/neo4j;sh ./bin/neo4j start');
-
-            neo4j_serverInfo();
-
-            sleep(1);
-            
-            $this->getClient();
-        }
-
-        return $client;
-    }
-    
     private function restartNeo4j() {
         display('Cleaning with restart');
         $config = $this->config;
+        
+        // preserve data/dbms/auth to preserve authentication
+        $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth';
         if (file_exists($config->projects_root.'/neo4j/data/neo4j-service.pid')) {
-            shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid); rm -rf data; mkdir data');
+            shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid); '.$sshLoad);
         } else {
-            shell_exec('cd '.$config->projects_root.'/neo4j/; rm -rf data; mkdir data');
+            shell_exec('cd '.$config->projects_root.'/neo4j/; '.$sshLoad);
         }
         
         // checking that the server has indeed restarted
@@ -112,6 +98,7 @@ DELETE n,r';
         } catch (\Exception $e) {
             display('Didn\'t restart neo4j cleanly');
         }
+        
     }
 }
 

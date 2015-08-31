@@ -48,8 +48,8 @@ class Doctor implements Tasks {
 // Compulsory
         // check for PHP
         $stats['php']['version'] = phpversion();
-        $stats['php']['curl']    = extension_loaded('curl')    ? 'Yes' : 'No';
-        $stats['php']['sqlite3'] = extension_loaded('sqlite3') ? 'Yes' : 'No';
+        $stats['php']['curl']    = extension_loaded('curl')        ? 'Yes' : 'No';
+        $stats['php']['sqlite3'] = extension_loaded('sqlite3')     ? 'Yes' : 'No';
         $stats['php']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No';
 
         // java
@@ -70,8 +70,10 @@ class Doctor implements Tasks {
         $stats['java']['$JAVA_HOME'] = $res;
 
         // neo4j
-        if (!file_exists($config->neo4j_folder)) {
-            $stats['neo4j']['installed'] = 'No';
+        if ($config->neo4j_folder === false) {
+            $stats['neo4j']['installed'] = 'Couldn\'t find the path from the config. Please, check it.';
+        } elseif (!file_exists($config->neo4j_folder)) {
+            $stats['neo4j']['installed'] = 'No (folder : '.$config->neo4j_folder.')';
         } else {
             $file = file($config->neo4j_folder.'/README.txt');
             $stats['neo4j']['version'] = trim($file[0]);
@@ -90,13 +92,30 @@ class Doctor implements Tasks {
             if (preg_match('/org.neo4j.server.webserver.port=(\d+)/is', $file, $r)) {
                 $stats['neo4j']['port'] = $r[1];
             } else {
-                $stats['neo4j']['port'] = 'Unset (default : 7474)';
+                $stats['neo4j']['port'] = '7474 (in fact, unset value. Using default : 7474)';
             }
 
-            if (preg_match('/dbms.security.auth_enabled=false/is', $file, $r)) {
-                $stats['neo4j']['authentication'] = 'Not enabled. (good, for the moment)';
+            if ($stats['neo4j']['port'] != $config->neo4j_port) {
+                $stats['neo4j']['port_alert'] = $config->neo4j_port.' : configured port in config/config.ini is not the one in the neo4j installation. Please, sync them.';
+            }
+
+            if (preg_match('/dbms.security.auth_enabled\s*=\s*false/is', $file, $r)) {
+                $stats['neo4j']['authentication'] = 'Not enabled (Please, enable it)';
             } else {
-                $stats['neo4j']['authentication'] = 'Enabled. Please, disable it with false.';
+                $stats['neo4j']['authentication'] = 'Enabled.';
+                if (empty($config->neo4j_login)) {
+                    $stats['neo4j']['login'] = 'Login is not set, but authentication is. Please, set login in config/config.ini';
+                } else {
+                    if (empty($config->neo4j_password)) {
+                        $stats['neo4j']['password'] = 'Login is set, but not password. Please, set it in config/config.ini';
+                    }
+                }
+                $res = gremlin_query('"Hello world"');
+                if (isset($res->success) && $res->success === true) {
+                    $stats['neo4j']['credentials'] = 'OK.';
+                } else {
+                    $stats['neo4j']['credentials'] = 'Login or password are wrong (message : '.$res->errors[0]->message.')';
+                }
             }
 
             if (preg_match('#org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp#is', $file, $r)) {
@@ -126,7 +145,7 @@ class Doctor implements Tasks {
                     $stats['neo4j']['running here'] = 'No';
                 }
                 
-                if ('{"success":true}' === file_get_contents('http://localhost:7474/tp/gremlin/execute')) {
+                if ('{"success":true}' === file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/tp/gremlin/execute')) {
                     $stats['neo4j']['gremlin'] = 'Yes';
                 } else {
                     $stats['neo4j']['gremlin'] = 'No';
@@ -162,9 +181,12 @@ class Doctor implements Tasks {
         if (!file_exists($config->projects_root.'/config/config.ini')) {
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             $ini = <<<INI
-neo4j_host   = '127.0.0.1';
-neo4j_port   = '7474';
-neo4j_folder = 'neo4j';
+neo4j_host     = '127.0.0.1';
+neo4j_port     = '7474';
+neo4j_folder   = 'neo4j';
+neo4j_login    = 'admin';
+neo4j_password = 'admin';
+
 
 ; where and which PHP executable are available
 php          = {$_SERVER['_']}

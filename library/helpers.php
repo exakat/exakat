@@ -49,7 +49,8 @@ function gremlin_query($query, $params = [], $load = '') {
     if (!defined('GREMLIN_QUERY')) {
         // Define the GREMLIN_QUERY constant
         $config = \Config::factory();
-        $json = file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
+        // @ is there in case the host returns an Authorization error
+        $json = @file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
 
         if (empty($json)) {
             define('GREMLIN_QUERY', 'gremlin_queryA');
@@ -156,14 +157,28 @@ function gremlin_queryA($query, $params = [], $load = '') {
 
     $ch = curl_init();
 
-    //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_HTTPHEADER, array(
-                    'Content-Length: '.strlen($getString),
-                    'User-Agent: exakat',
-                    'X-Stream: true'
-                ));
+    static $neo4j_host, $neo4j_auth;
+    if (!isset($neo4j_ip)) {
+        $config = \Config::factory();
+        $neo4j_host   = $config->neo4j_ip.':'.$config->neo4j_port;
 
-    curl_setopt($ch,CURLOPT_URL, 'http://127.0.0.1:7474/tp/gremlin/execute?'.$getString);
+        if ($config->neo4j_login !== '') {
+            $neo4j_auth   = base64_encode($config->neo4j_login.':'.$config->neo4j_password);
+        } else {
+            $neo4j_auth   = '';
+        }
+    }
+
+    //set the url, number of POST vars, POST data
+    $headers = array( 'Content-Length: '.strlen($getString),
+                      'User-Agent: exakat',
+                      'X-Stream: true');
+    if (!empty($neo4j_auth)) {
+        $headers[] = 'Authorization: Basic '.$neo4j_auth;
+    }
+    curl_setopt($ch,CURLOPT_HTTPHEADER, $headers);
+
+    curl_setopt($ch,CURLOPT_URL, 'http://'.$neo4j_host.'/tp/gremlin/execute?'.$getString);
     curl_setopt($ch,CURLOPT_CUSTOMREQUEST,'GET');
     curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch,CURLOPT_IPRESOLVE,CURL_IPRESOLVE_V4);
@@ -200,11 +215,16 @@ function gremlin_queryN($query, $params = [], $load = '') {
                     'User-Agent: exakat',
                     'X-Stream: true'
                 ));
-                //''
-    curl_setopt($ch,CURLOPT_URL, 'http://127.0.0.1:7474/db/data/ext/GremlinPlugin/graphdb/execute_script');
+    
+    static $neo4j_host, $neo4j_port;
+    if (!isset($neo4j_host)) {  
+        $config = \Config::factory();
+        $neo4j_host = $config->neo4j_host.':'.$config->neo4j_port;
+    }
+    
+    curl_setopt($ch,CURLOPT_URL, 'http://'.$neo4j_host.'/db/data/ext/GremlinPlugin/graphdb/execute_script');
     curl_setopt($ch,CURLOPT_CUSTOMREQUEST,'POST');
     curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-//    curl_setopt($ch,CURLOPT_HEADER,true);
     curl_setopt($ch,CURLOPT_POST,true);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch,CURLOPT_IPRESOLVE,CURL_IPRESOLVE_V4);
@@ -260,16 +280,28 @@ function cypher_query($query, $params = []) {
 
     $ch = curl_init();
 
-    //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_HTTPHEADER, array(
-    				'Accept: application/json;stream=true',
-    				'Content-type: application/json',
-                    'Content-Length: '.strlen($fields_string),
-//                    'User-Agent: exakat',
-//                    'X-Stream: true'
-                ));
+    static $neo4j_host, $neo4j_port, $neo4j_auth;
+    if (!isset($neo4j_host)) {  
+        $config = \Config::factory();
+        $neo4j_host = $config->neo4j_host.':'.$config->neo4j_port;
+        
+        if ($config->neo4j_login !== '') {
+            $neo4j_auth   = base64_encode($config->neo4j_login.':'.$config->neo4j_password);
+        } else {
+            $neo4j_auth   = '';
+        }
+    }
 
-    curl_setopt($ch,CURLOPT_URL, 'http://localhost:7474/db/data/cypher');
+    //set the url, number of POST vars, POST data
+    $headers = array( 'Accept: application/json;stream=true',
+                      'Content-type: application/json',
+                      'Content-Length: '.strlen($fields_string));
+    if (!empty($neo4j_auth)) {
+        $headers[] = 'Authorization: Basic '.$neo4j_auth;
+    }
+    curl_setopt($ch,CURLOPT_HTTPHEADER, $headers);
+
+    curl_setopt($ch,CURLOPT_URL, 'http://'.$neo4j_host.'/db/data/cypher');
     curl_setopt($ch,CURLOPT_POST,true);
     curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
