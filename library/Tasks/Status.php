@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Status implements Tasks {
+class Status extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 

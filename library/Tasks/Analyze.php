@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Analyze implements Tasks {
+class Analyze extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
         
@@ -57,10 +57,8 @@ class Analyze implements Tasks {
 php exakat analyze -P <One/rule> -p <project>\n");
         }
 
-        $log = new \Log('analyze', $config->projects_root.'/projects/'.$config->project);
-
-        $log->log("Analyzing project $project");
-        $log->log("Runnable analyzers\t".count($analyzers_class));
+        $this->log->log("Analyzing project $project");
+        $this->log->log("Runnable analyzers\t".count($analyzers_class));
 
         if ($config->noDependencies) {
             $dependencies2 = $analyzers_class;
@@ -174,7 +172,7 @@ GREMLIN;
                 $total_results += $count;
                 display( "$analyzer_class fait ($count / $processed)\n");
                 $end = microtime(true);
-                $log->log("$analyzer_class\t".($end - $begin)."\t$count\t$processed\t$queries\t$rawQueries");
+                $this->log->log("$analyzer_class\t".($end - $begin)."\t$count\t$processed\t$queries\t$rawQueries");
                 // storing the number of row found in Hash table (datastore)
                 $datastore->addRow('hash', array($analyzer_class => $count ) );
             }

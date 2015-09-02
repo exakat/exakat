@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class ReportAll implements Tasks {
+class ReportAll extends Tasks {
     public function run(\Config $config) {
         display("Starting reportAll\n");
 

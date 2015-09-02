@@ -22,16 +22,12 @@
 
 namespace Tasks;
 
-class Load implements Tasks {
-    private $log    = null;
+class Load extends Tasks {
     private $php    = null;
-    private $config = null;
     
     public function run(\Config $config) {
         $this->config = $config;
         
-        $this->log = new \Log('load', $this->config->projects_root.'/projects/'.$this->config->project);
-
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
             display('No such project as "'.$this->config->project.'". Aborting');
             die();

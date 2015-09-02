@@ -23,8 +23,18 @@
 
 namespace Tasks;
 
-interface Tasks {
-    public function run(\Config $config);
+abstract class Tasks {
+    protected $log    = null;
+    
+    public function __construct() {
+        // Config is the general one.
+        $config = \Config::factory();
+
+        $this->log = new \Log(strtolower((new \ReflectionClass($this))->getShortName()), 
+                              $config->projects_root.'/projects/'.$config->project);
+    }
+    
+    public abstract function run(\Config $config);
 }
 
 ?>

@@ -23,9 +23,9 @@
 
 namespace Tasks;
 
-class Build_root implements Tasks {
+class Build_root extends Tasks {
     private $project_dir = '.';
-    private $config = null;
+    private $config      = null;
     
     public function run(\Config $config) {
         $project = $config->project;
@@ -132,22 +132,17 @@ class Build_root implements Tasks {
     }
 
     private function logTime($step) {
-        static $log, $begin, $end, $start;
+        static $begin, $end, $start;
     
-        if ($log === null) {
-            file_put_contents($this->project_dir.'/log/build_root.log', '');
-            $log = fopen($this->project_dir.'/log/build_root.timing.csv', 'w+');
-        }
         $end = microtime(true);
         if ($begin === null) {
             $begin = $end;
             $start = $end;
         }
     
-        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
+        $this->log->log($step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
     }
-
 }
 
 ?>

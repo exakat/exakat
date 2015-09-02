@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class OnePage implements Tasks {
+class OnePage extends Tasks {
     private $project_dir = '.';
     private $config = null;
     

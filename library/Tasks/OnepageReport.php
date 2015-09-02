@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class OnepageReport implements Tasks {
+class OnepageReport extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 

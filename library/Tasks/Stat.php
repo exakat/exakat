@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Stat implements Tasks {
+class Stat extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 

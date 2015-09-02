@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Initproject implements Tasks {
+class Initproject extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
         if ($project == 'default') {

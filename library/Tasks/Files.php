@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Files implements Tasks {
+class Files extends Tasks {
     public function run(\Config $config) {
         $dir = $config->project;
 
@@ -143,21 +143,19 @@ class Files implements Tasks {
                 } elseif ($resFile == '') {
                     continue;
                     // do nothing. All is fine.
-                } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
+                } elseif (substr($resFile, 0, 17) == 'PHP Parse error: ') {
                     preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-                } elseif (substr($resFile, 0, 17) == 'PHP Parse error: ') {
-                    preg_match('#PHP Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
+                    // Actually, almost a repeat of the previous. We just ignore it. (Except in PHP 5.4)
                 } elseif (substr($resFile, 0, 14) == 'PHP Warning:  ') {
                     preg_match('#PHP Warning:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                } elseif (substr($resFile, 0, 13) == 'Fatal error: ') {
+                    preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 18) == 'PHP Fatal error:  ') {
-                    preg_match('#PHP Fatal error:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-                } elseif (substr($resFile, 0, 23) == 'PHP Strict Standards:  ') {
-                    preg_match('#PHP Strict Standards:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    // Actually, a repeat of the previous. We just ignore it.
                 } elseif (substr($resFile, 0, 23) == 'PHP Strict standards:  ') {
                     preg_match('#PHP Strict standards:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
@@ -173,14 +171,11 @@ class Files implements Tasks {
                 } elseif (substr($resFile, 0, 12) == 'Deprecated: ') {
                     preg_match('#Deprecated: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-                } elseif (substr($resFile, 0, 13) == 'Fatal error: ') {
-                    preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 9) == 'Warning: ') {
                     preg_match('#Warning: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
-                    // let it run
+                    // ignore (stdout reporting)
                 } else {
                     die( "\nCouldn't interpret on syntax error : \n" .
                          print_r($resFile, true) .

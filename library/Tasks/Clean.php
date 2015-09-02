@@ -23,7 +23,11 @@
 
 namespace Tasks;
 
-class Clean implements Tasks {
+class Clean extends Tasks {
+    public function __construct() {
+        // This is here to short-circuit the normal __construct
+    }
+
     public function run(\Config $config) {
         $project = $config->project;
 

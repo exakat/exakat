@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Dump implements Tasks {
+class Dump extends Tasks {
     // Beware : shared with Project
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
                               'Appinfo', '"Dead code"', 'Security', 'Custom',
@@ -101,18 +101,17 @@ GREMLIN;
                     
                     foreach($res as $result) {
                         if (!is_object($result)) { 
-                            print "Object expected but not found\n";
-                            var_dump($result); 
-                            die();
+                            $this->log->log("Object expected but not found\n".print_r($result)."\n");
+                            continue;
                         }
                         
-                        $stmt->bindValue(':fullcode', $result->fullcode, SQLITE3_TEXT);
-                        $stmt->bindValue(':file',     $result->file,     SQLITE3_TEXT);
-                        $stmt->bindValue(':line',     $result->line,     SQLITE3_TEXT);
-                        $stmt->bindValue(':namespace',$result->{'namespace'},SQLITE3_TEXT);
-                        $stmt->bindValue(':class',    $result->class,    SQLITE3_TEXT);
-                        $stmt->bindValue(':function', $result->function, SQLITE3_TEXT);
-                        $stmt->bindValue(':analyzer', $class,            SQLITE3_TEXT);
+                        $stmt->bindValue(':fullcode', $result->fullcode,      SQLITE3_TEXT);
+                        $stmt->bindValue(':file',     $result->file,          SQLITE3_TEXT);
+                        $stmt->bindValue(':line',     $result->line,          SQLITE3_TEXT);
+                        $stmt->bindValue(':namespace',$result->{'namespace'}, SQLITE3_TEXT);
+                        $stmt->bindValue(':class',    $result->class,         SQLITE3_TEXT);
+                        $stmt->bindValue(':function', $result->function,      SQLITE3_TEXT);
+                        $stmt->bindValue(':analyzer', $class,                 SQLITE3_TEXT);
                         
                         $result = $stmt->execute();
                     }

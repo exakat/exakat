@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Queue implements Tasks {
+class Queue extends Tasks {
     public function run(\Config $config) {
         $this->config = $config;
         

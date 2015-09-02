@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class CleanDb implements Tasks {
+class CleanDb extends Tasks {
     private $client = null;
     private $config = null;
     

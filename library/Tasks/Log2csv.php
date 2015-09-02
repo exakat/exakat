@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Log2csv implements Tasks {
+class Log2csv extends Tasks {
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project.'/log/tokenizer.log')) {
             die( "No log/tokenizer.log. Aborting\n");

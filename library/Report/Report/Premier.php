@@ -113,6 +113,7 @@ class Premier extends Report {
 
         $config = \Config::factory();
         foreach($config->other_php_versions as $code) {
+            if ($code == 52) { continue; }
             $version = substr($code, 0, 1).'.'.substr($code, 1);
             $this->createLevel2('Compatibility '.$version);
             $this->addContent('Text', 'This is a summary of the compatibility of the code with PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');

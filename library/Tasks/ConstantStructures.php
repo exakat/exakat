@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class ConstantStructures implements Tasks {
+class ConstantStructures extends Tasks {
     private $lastTiming = 0;
     
     public function run(\Config $config) {

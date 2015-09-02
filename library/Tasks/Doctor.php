@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Doctor implements Tasks {
+class Doctor extends Tasks {
 
     public function run(\Config $config) {
         $stats = array();

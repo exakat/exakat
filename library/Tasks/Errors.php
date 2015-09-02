@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Errors implements Tasks {
+class Errors extends Tasks {
     public function run(\Config $config) {
 
         $stats = array();

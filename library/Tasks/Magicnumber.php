@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Magicnumber implements Tasks {
+class Magicnumber extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
         if ($project == 'default') {

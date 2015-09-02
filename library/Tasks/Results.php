@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Results implements Tasks {
+class Results extends Tasks {
     public function run(\Config $config) {
         $analyzer = $config->program;
         if (empty($analyzer)) {

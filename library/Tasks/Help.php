@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Help implements Tasks {
+class Help extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 

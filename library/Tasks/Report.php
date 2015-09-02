@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Report implements Tasks {
+class Report extends Tasks {
     public function run(\Config $config) {
         $reportClass = "\\Report\\Report\\".$config->report;
 

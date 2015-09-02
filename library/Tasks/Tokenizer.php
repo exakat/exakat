@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Tokenizer implements Tasks {
+class Tokenizer extends Tasks {
     const EXTRA_ROUNDS = 2;
 
     public function run(\Config $config) {
@@ -42,8 +42,7 @@ class Tokenizer implements Tasks {
         $begin_time = microtime(true);
         $classes = \Tokenizer\Token::getTokenizers($config->phpversion);
 
-        $log = new \Log('tokenizer', $config->projects_root.'/projects/'.$config->project);
-        $log->log( 'Starting time : '.date('r'));
+        $this->log->log( 'Starting time : '.date('r'));
 
         $regex = array();
         $regex2 = array();
@@ -69,7 +68,7 @@ class Tokenizer implements Tasks {
             }
         }
 
-        $log->log( "Finished loading classes");
+        $this->log->log( "Finished loading classes");
 
         $server_stat = new \Stats(null);
         $total = \Tokenizer\Token::countTotalToken();
@@ -80,7 +79,7 @@ class Tokenizer implements Tasks {
                        'relation_in'  => $server_stat->countRelations(),
                        'relation_out' => 4,
                        'project'      => $project);
-        $log->log('Finished counting Token');
+        $this->log->log('Finished counting Token');
 
         $prev = array();
         for($i = 0; $i < self::EXTRA_ROUNDS + 1; $i++) {
@@ -93,12 +92,12 @@ class Tokenizer implements Tasks {
         $regex_time = 0;
         $regex_next = $regex;
         $end = microtime(true);
-        $log->log('initialisation : '.(($end - $begin) * 1000));
+        $this->log->log('initialisation : '.(($end - $begin) * 1000));
 
         while($this->check_prev($prev, self::EXTRA_ROUNDS)) {
             $rbegin = microtime(true);
             $round++;
-            $log->log("round $round)");
+            $this->log->log("round $round)");
             \Tokenizer\TokenAuto::$round = $round;
     
             array_unshift($prev, $count);
@@ -126,16 +125,16 @@ class Tokenizer implements Tasks {
                     $ratio = -1;
                 }
         
-                $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->total."\t".$r->done."\t".$r->cycles."\t".number_format(100 * $ratio, 0));
+                $this->log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->total."\t".$r->done."\t".$r->cycles."\t".number_format(100 * $ratio, 0));
             }
-            $log->log('Finished foreach');
+            $this->log->log('Finished foreach');
             \Tokenizer\Token::finishSequence();
     
             $rend = microtime(true);
             $begin = microtime(true);
-            $log->log("round : $round\t".(($rend - $rbegin) * 1000));
+            $this->log->log("round : $round\t".(($rend - $rbegin) * 1000));
             $cost += count($regex_next);
-            $log->log("cost : $cost");
+            $this->log->log("cost : $cost");
 
             if (isset($count)) {
                 $count_prev = $count;
@@ -154,11 +153,11 @@ class Tokenizer implements Tasks {
             }
     
             $end = microtime(true);
-            $log->log('countLeftNext time : '.(($end - $begin) * 1000));
+            $this->log->log('countLeftNext time : '.(($end - $begin) * 1000));
 
-            $log->log("Remaining token to process : $count (".($count - $count_prev).')');
-            $log->log("Remaining files to process : $count_file (".($count_file - $count_file_prev).')');
-            $log->log('Remaining regex : '.count($regex_next).' ('.(count($regex) - count($regex_next)).')');
+            $this->log->log("Remaining token to process : $count (".($count - $count_prev).')');
+            $this->log->log("Remaining files to process : $count_file (".($count_file - $count_file_prev).')');
+            $this->log->log('Remaining regex : '.count($regex_next).' ('.(count($regex) - count($regex_next)).')');
             
 //            if ($round == 3) { die('Round '.$round);}
             if ($count > 3) {
@@ -170,9 +169,9 @@ class Tokenizer implements Tasks {
         }
 
         $wend = microtime(true);
-        $log->log("Total while $round)\t".(($wend - $wbegin)*1000));
-        $log->log("Total regex time\t".(($regex_time) * 1000));
-        $log->log("final cost : $cost");
+        $this->log->log("Total while $round)\t".(($wend - $wbegin)*1000));
+        $this->log->log("Total regex time\t".(($regex_time) * 1000));
+        $this->log->log("final cost : $cost");
 
 //        $server_stat->collect();
         $stats['token_out'] = $server_stat->tokens_count;

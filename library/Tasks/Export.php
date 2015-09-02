@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Export implements Tasks {
+class Export extends Tasks {
     public function run(\Config $config) {
         $queryTemplate = 'g.V.as("x").except([g.v(0)])';
 

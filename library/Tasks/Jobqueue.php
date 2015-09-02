@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Jobqueue implements Tasks {
+class Jobqueue extends Tasks {
     private $log = null;
     private $config = null;
     

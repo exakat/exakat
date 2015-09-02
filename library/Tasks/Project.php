@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Project implements Tasks {
+class Project extends Tasks {
     private $project_dir = '.';
     private $config = null;
     

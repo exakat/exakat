@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class Phploc implements Tasks {
+class Phploc extends Tasks {
     public function run(\Config $config) {
         
         $loc = array('comments' => 0,
@@ -136,7 +136,6 @@ class Phploc implements Tasks {
         
         $res = shell_exec('php -l '.escapeshellarg($filename).' 2>&1');
         if (strpos($res, 'No syntax errors detected in ') === false) {
-            display( "$filename can't compile\n");
             $return['files'] = 0;
             return $return;
         }
