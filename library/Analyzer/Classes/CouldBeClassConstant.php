@@ -32,9 +32,11 @@ class CouldBeClassConstant extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Ppp')
+             // speed up test (many won't have this)
              ->hasOut('DEFINE')
-             ->filter('it.out("VALUE").has("atom", "Void").any() == false')
-             ->filter(' it.out("VALUE").filter{ it.atom == "Void"}.any() == false')
+
+             ->filter('it.out("VALUE").filter{it.atom in ["Void", "Null", "Staticconstant"]}.any() == false')
+//             ->filter('it.out("VALUE").filter{ it.atom == "Void"}.any() == false')
              ->savePropertyAs('propertyname', 'name')
              ->outIs('DEFINE')
              ->savePropertyAs('code', 'staticName')
