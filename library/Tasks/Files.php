@@ -130,7 +130,7 @@ class Files implements Tasks {
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
             
-            $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh -c "'.$config->{'php'.$version}.' -l $1 2>&1" || true ';
+            $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 -I {} sh -c "'.$config->{'php'.$version}.' -l {} 2>&1" || true ';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
