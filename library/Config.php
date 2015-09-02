@@ -79,6 +79,68 @@ class Config {
                                             'neo4j_port'     => '7474',
                                             'neo4j_port'     => 'neo4j',
                                            );
+
+        const BOOLEAN_OPTIONS = array(
+                                 '-v'         => 'verbose',
+                                 '-Q'         => 'quick',
+                                 '-h'         => 'help',
+                                 '-r'         => 'recursive',
+                                 '-u'         => 'update',
+                                 '-D'         => 'delete',
+                                 '-l'         => 'lint',
+                                 '-json'      => 'json',
+                                 '-dot'       => 'dot',
+                                 '-ss'        => 'ss',
+                                 '-sm'        => 'sm',
+                                 '-sl'        => 'sl',
+                                 '-nodep'     => 'noDependencies',
+                                 '-norefresh' => 'noRefresh',
+                                 '-today'     => 'today',
+                                 '-none'      => 'none',
+                                 '-table'     => 'table',
+                                 '-text'      => 'text',
+                                 '-o'         => 'output',
+
+                                 '-git'       => 'git',
+                                 '-svn'       => 'svn',
+                                 '-hg'        => 'hg',
+                                 '-composer'  => 'composer',
+                                 '-tgz'       => 'tgz',
+                                 '-tbz'       => 'tbz',
+                                 '-zip'       => 'zip',
+                                 );
+
+        const COMMANDS = array('analyze'       => 1, 
+                               'build_root'    => 1, 
+                               'constantes'    => 1, 
+                               'clean'         => 1, 
+                               'cleandb'       => 1, 
+                               'dump'          => 1, 
+                               'doctor'        => 1, 
+                               'errors'        => 1,
+                               'export'        => 1,
+                               'files'         => 1, 
+                               'findextlib'    => 1,
+                               'help'          => 1, 
+                               'init'          => 1, 
+                               'jobqueue'      => 1, 
+                               'queue'         => 1, 
+                               'load'          => 1, 
+                               'log2csv'       => 1, 
+                               'magicnumber'   => 1, 
+                               'project'       => 1, 
+                               'projectspip'   => 1, 
+                               'phploc'        => 1, 
+                               'report_all'    => 1,
+                               'report'        => 1, 
+                               'results'       => 1, 
+                               'stat'          => 1, 
+                               'status'        => 1, 
+                               'tokenizer'     => 1, 
+                               'version'       => 1,
+                               'onepage'       => 1,
+                               'onepagereport' => 1,
+                               );
      
     private function __construct($argv) {
         $this->argv = $argv;
@@ -218,37 +280,7 @@ class Config {
             return array();
         }
         
-        $optionsBoolean = array(
-                                 '-v'         => 'verbose',
-                                 '-Q'         => 'quick',
-                                 '-h'         => 'help',
-                                 '-r'         => 'recursive',
-                                 '-u'         => 'update',
-                                 '-D'         => 'delete',
-                                 '-l'         => 'lint',
-                                 '-json'      => 'json',
-                                 '-dot'       => 'dot',
-                                 '-ss'        => 'ss',
-                                 '-sm'        => 'sm',
-                                 '-sl'        => 'sl',
-                                 '-nodep'     => 'noDependencies',
-                                 '-norefresh' => 'noRefresh',
-                                 '-today'     => 'today',
-                                 '-none'      => 'none',
-                                 '-table'     => 'table',
-                                 '-text'      => 'text',
-                                 '-o'         => 'output',
-
-                                 '-git'       => 'git',
-                                 '-svn'       => 'svn',
-                                 '-hg'        => 'hg',
-                                 '-composer'  => 'composer',
-                                 '-tgz'       => 'tgz',
-                                 '-tbz'       => 'tbz',
-                                 '-zip'       => 'zip',
-                                 );
-
-        foreach($optionsBoolean as $key => $config) {
+        foreach(self::BOOLEAN_OPTIONS as $key => $config) {
             if (($id = array_search($key, $args)) !== false) {
                 $this->commandline[$config] = true;
 
@@ -298,41 +330,9 @@ class Config {
             } 
         }
 
-        $commands = array('analyze'       => 1, 
-                          'build_root'    => 1, 
-                          'constantes'    => 1, 
-                          'clean'         => 1, 
-                          'cleandb'       => 1, 
-                          'dump'          => 1, 
-                          'doctor'        => 1, 
-                          'errors'        => 1,
-                          'export'        => 1,
-                          'files'         => 1, 
-                          'findextlib'    => 1,
-                          'help'          => 1, 
-                          'init'          => 1, 
-                          'jobqueue'      => 1, 
-                          'queue'         => 1, 
-                          'load'          => 1, 
-                          'log2csv'       => 1, 
-                          'magicnumber'   => 1, 
-                          'project'       => 1, 
-                          'projectspip'   => 1, 
-                          'phploc'        => 1, 
-                          'report_all'    => 1,
-                          'report'        => 1, 
-                          'results'       => 1, 
-                          'stat'          => 1, 
-                          'status'        => 1, 
-                          'tokenizer'     => 1, 
-                          'version'       => 1,
-                          'onepage'       => 1,
-                          'onepagereport' => 1,
-                          );
-
         if (count($args) > 0) {
             $arg = array_shift($args);
-            if (isset($commands[$arg])) {
+            if (null !== self::COMMANDS[$arg]) {
                 $this->commandline['command'] = $arg;
             } else {
                 array_unshift($args, $arg);
