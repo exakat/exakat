@@ -1770,9 +1770,10 @@ GREMLIN;
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
                 if (!isset($v->file)) {
-                    print ($query."\n");
-                    print get_class($this)."\n";
-                    print_r($v);
+                    echo "Error in getArray() : Couldn't find the file\n$query\n",
+                         get_class($this),
+                         "\n",
+                         print_r($v, true);
                     die();
                 }
                 $report[] = array('code' => $v->fullcode,
