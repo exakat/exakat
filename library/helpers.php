@@ -158,9 +158,9 @@ function gremlin_queryA($query, $params = [], $load = '') {
     $ch = curl_init();
 
     static $neo4j_host, $neo4j_auth;
-    if (!isset($neo4j_ip)) {
+    if (!isset($neo4j_host)) {
         $config = \Config::factory();
-        $neo4j_host   = $config->neo4j_ip.':'.$config->neo4j_port;
+        $neo4j_host   = $config->neo4j_host.':'.$config->neo4j_port;
 
         if ($config->neo4j_login !== '') {
             $neo4j_auth   = base64_encode($config->neo4j_login.':'.$config->neo4j_password);
@@ -178,10 +178,10 @@ function gremlin_queryA($query, $params = [], $load = '') {
     }
     curl_setopt($ch,CURLOPT_HTTPHEADER, $headers);
 
-    curl_setopt($ch,CURLOPT_URL, 'http://'.$neo4j_host.'/tp/gremlin/execute?'.$getString);
-    curl_setopt($ch,CURLOPT_CUSTOMREQUEST,'GET');
+    curl_setopt($ch,CURLOPT_URL,            'http://'.$neo4j_host.'/tp/gremlin/execute?'.$getString);
+    curl_setopt($ch,CURLOPT_CUSTOMREQUEST,  'GET');
     curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch,CURLOPT_IPRESOLVE,CURL_IPRESOLVE_V4);
+    curl_setopt($ch,CURLOPT_IPRESOLVE,      CURL_IPRESOLVE_V4);
 
     //execute post
     $result = curl_exec($ch);
