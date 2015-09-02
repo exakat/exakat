@@ -115,6 +115,7 @@ class Groupby extends \Report\Content {
                 break 1;
 
             default : // AKA SORT_NONE or all unknown values
+                break 1;
         }
         
         return true;
