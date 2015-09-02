@@ -65,15 +65,19 @@ $text .= <<<HTML
 HTML;
         foreach($data as $k => $v) {
             if ($v['result'] !== 0) {
-                $k = $this->makeLink($v['file']);//$k);
-                $icon = '<i class="fa fa-check-o red"></i>';
-                $analyzers = array_map(array($this, 'makeLink'), $v['result']);
+                $k = $this->makeLink($v['file']);
+                $analyzers = array_map(function($title, $count) {
+                    return $this->makeLink($title).' ('.$count.')';
+                }, array_keys($v['result']), array_merge($v['result']));
+                $v['analyzers'] = count($analyzers);
+                $v['total'] = array_sum($v['result']);
                 $v['result'] = $this->makeList($analyzers);
             } else {
-                $icon = '<i class="fa fa-check-square-o green"></i>';
-                $v['result'] = "";
+                $v['result'] = '';
+                $v['total'] = '';
+                $v['analyzers'] = '';
             }
-            $text .= "<tr><td>$k</td><td>$icon".$v['result']."</td></tr>\n";
+            $text .= '<tr><td>'.$k.'</td><td>'.$v['total'].'</td><td>'.$v['analyzers'].'</td><td>'.$v['result'].'</td></tr>'."\n";
         }
         $text .= <<<HTML
 										</tbody>

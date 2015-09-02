@@ -24,11 +24,15 @@
 namespace Report;
 
 class Content {
-    protected $name    = 'Content'; 
-    protected $project = null;
-    protected $array   = array();
+    protected $name       = 'Content'; 
+    protected $project    = null;
+    protected $array      = array();
     protected $hasResults = false;
     
+    public function collect() {
+        // By default, nothing to do.
+    }
+
     public function setProject($project) {
         $this->project = $project;
     }

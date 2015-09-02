@@ -26,8 +26,6 @@ namespace Report\Content;
 class FileAnalyzers extends \Report\Content {
     private $filename = "No Filename";
     
-    public function collect() {    }
-    
     public function setValues($fileList) {
         $this->array = $fileList;
     }

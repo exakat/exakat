@@ -26,11 +26,11 @@ namespace Report\Content;
 class FilesResultCounts extends \Report\Content {
     private $analyzers = null;
     
-    public function collect() {    }
-    
     public function setValues($fileList) {
         foreach($fileList as $k => $v) {
-            $this->array[] = ['file' => $k,'result' => $v];
+            $this->array[] = ['file'   => $k,
+                              'result' => $v,
+                              ];
         }
     }
 }

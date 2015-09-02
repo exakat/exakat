@@ -231,8 +231,8 @@ class Premier extends Report {
         }
         
         foreach($fileList as &$analyzes) {
-            $analyzes = array_keys(array_count_values($analyzes));
-            sort($analyzes);
+            $analyzes = array_count_values($analyzes);
+            ksort($analyzes);
         }
         (unset) $analyzes;
         
