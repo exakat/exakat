@@ -24,12 +24,10 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$client = new Client();
-
 $query = <<<'QUERY'
 
 /// insert a query here
-g.idx('atoms')[['atom':'Class']].out('EXTENDS').map;
+
 
 QUERY;
 
@@ -40,7 +38,7 @@ $res = gremlin_query($query);
 foreach($res as $k => $v) {
     print_r($k);
     print " ";
-    print_r($v[0]);
+    print_r($v);
     print "\n";
 }
 
