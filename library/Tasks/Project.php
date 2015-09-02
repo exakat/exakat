@@ -38,7 +38,7 @@ class Project implements Tasks {
                                                   //'Text'     => 'report'
                                                   ),
                                'Counts'  => array('Sqlite'   => 'counts'));
-    const TOTAL_STEPS = 22; // 2 Reports + 10 Analyzes + 10 other steps
+    const TOTAL_STEPS = 23; // 2 Reports + 10 Analyzes + 10 other steps
     
     public function run(\Config $config) {
         $this->config = $config;
@@ -61,7 +61,7 @@ class Project implements Tasks {
             die("Project '$project' exists but has no config file. Aborting\n");
         }
 
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/code')) {
+        if (!file_exists($config->codePath)) {
             die("Project '$project' exists but has no code folder. Aborting\n");
         }
 
@@ -113,7 +113,7 @@ class Project implements Tasks {
 
         display("waited For All\n");
 
-        shell_exec('php '.$config->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
+        shell_exec('php '.$config->executable.' load -v -r -d '.$config->codePath.' -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
         $this->logTime('Loading');
         if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/load.final.log')) {
@@ -165,7 +165,14 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
             }
         }
 
-        display("Project analyzed\n");
+        display("Analyzed project\n");
+        $this->updateProgress($progress++);
+        $this->logTime('Analyze');
+
+        $dump = new \Tasks\Dump();
+        $dump->run($config);
+
+        display("Dumped project \n");
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
@@ -200,7 +207,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         }
         \Config::factory($oldConfig);
 
-        display("Project reported\n");
+        display("Reported project\n");
 
         shell_exec('php '.$config->executable.' stat > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         display("Stats 2\n");
