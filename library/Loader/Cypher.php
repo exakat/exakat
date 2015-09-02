@@ -46,9 +46,9 @@ class Cypher {
     
     private $isLink = false;
     
-    private $les_attr = array('index', 'root', 'hidden', 'association', 'in_for',
-                              'in_quote', 'delimiter', 'noDelimiter', 'rank', 
-                              'block', 'bracket', 'filename', 'tag',  'atom', 'fullcode' );
+    const ATTRIBUTES = array('index',    'root',      'hidden',      'association', 'in_for',
+                             'in_quote', 'delimiter', 'noDelimiter', 'rank',        'fullcode',
+                             'block',    'bracket',   'filename',    'tag',         'atom');
     
     public function __construct() {
         $this->config = \Config::factory();
@@ -98,7 +98,7 @@ CYPHER;
 
         display('Loaded nodes');
 
-        foreach($this->les_attr as $attribute) {
+        foreach(self::ATTRIBUTES as $attribute) {
             display( "Loading $attribute");
             
             if ($attribute == 'rank') {
@@ -155,7 +155,7 @@ CYPHER;
     
     private function cleanCsv() {
         unlink($this->config->projects_root.'/nodes.cypher.csv');
-        foreach($this->les_attr as $attribute) {
+        foreach(self::ATTRIBUTES as $attribute) {
             unlink($this->config->projects_root.'/nodes.cypher.'.$attribute.'.csv');
         }
         unlink($this->config->projects_root.'/rels.cypher.next.csv');
@@ -167,7 +167,7 @@ CYPHER;
     public function save_chunk() {
         if (static::$fp_nodes === null) {
             static::$fp_nodes = fopen($this->config->projects_root.'/nodes.cypher.csv', 'a');
-            foreach($this->les_attr as $attribute) {
+            foreach(self::ATTRIBUTES as $attribute) {
                 static::$fp_nodes_attr[$attribute] = fopen($this->config->projects_root.'/nodes.cypher.'.$attribute.'.csv', 'a');
             }
         }
@@ -205,7 +205,7 @@ CYPHER;
             fputcsv($fp, $row, self::CSV_SEPARATOR);
 
         // processing the attributes
-            foreach($this->les_attr as $col) {
+            foreach(self::ATTRIBUTES as $col) {
                 $rowa = array('id' => $id);
                 if (isset($node[$col])) {
                     $rowa[$col] = $node[$col];
@@ -219,8 +219,8 @@ CYPHER;
         static::$nodes = array();
         
         if (static::$fp_rels === null) {
-            static::$fp_rels = array('NEXT'    => fopen($this->config->projects_root.'/rels.cypher.next.csv', 'a'),
-                                     'FILE'    => fopen($this->config->projects_root.'/rels.cypher.file.csv', 'a'),
+            static::$fp_rels = array('NEXT'    => fopen($this->config->projects_root.'/rels.cypher.next.csv',    'a'),
+                                     'FILE'    => fopen($this->config->projects_root.'/rels.cypher.file.csv',    'a'),
                                      'INDEXED' => fopen($this->config->projects_root.'/rels.cypher.indexed.csv', 'a'),
                                      'ELEMENT' => fopen($this->config->projects_root.'/rels.cypher.element.csv', 'a'),
                                      );
