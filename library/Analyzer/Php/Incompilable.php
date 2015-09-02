@@ -26,8 +26,6 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Incompilable extends Analyzer\Analyzer {
-    private $versions = array('53', '54', '55', '56', '70');
-
     public function analyze() {
         // This is not actually done here....
         return true;
