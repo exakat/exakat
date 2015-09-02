@@ -6,6 +6,6 @@ const c = true;
 const d = 3.4;
 const e = "d";
 const f = "f"."g";
-const g = self::d;
+//const g = self::d;
 
 ?>

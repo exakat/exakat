@@ -27,10 +27,32 @@ use Analyzer;
 
 class ConstantScalarExpression extends Analyzer\Analyzer {
     public function analyze() {
+        $authorizedAtoms = array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null');
+        
+        // in constants
         $this->atomIs('Const')
              ->outIs('VALUE')
-             ->atomIsNot(array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null'))
+             ->atomIsNot($authorizedAtoms)
              ->back('first');
+        $this->prepareQuery();
+
+        // in argument's default value
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('RIGHT')
+             ->atomIsNot($authorizedAtoms)
+             ->back('first');
+        $this->prepareQuery();
+
+        // in property's default value
+        $this->atomIs('Class')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Ppp')
+             ->outIs('VALUE')
+             ->atomIsNot($authorizedAtoms)
+             ->inIs('VALUE');
         $this->prepareQuery();
     }
 }
