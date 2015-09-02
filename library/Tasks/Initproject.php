@@ -30,7 +30,7 @@ class Initproject implements Tasks {
             die("No project name provided. Add -p option\n");
         }
 
-        $repo_url = $config->repository;
+        $repositoryURL = $config->repository;
 
         if ($config->delete === true) {
             $this->check_project_dir($project);
@@ -46,14 +46,14 @@ class Initproject implements Tasks {
     
             shell_exec('cd '.$config->projects_root.'/projects/'.$project.'/code/; git pull');
         } else {
-            display( "Initializing $project with '$repo_url'\n");
-            $this->init_project($project, $repo_url);
+            display( "Initializing $project with '$repositoryURL'\n");
+            $this->init_project($project, $repositoryURL);
         }
 
         display( "Done\n");
     }
     
-    private function init_project($project, $repo_url) {
+    private function init_project($project, $repositoryURL) {
         $config = \Config::factory();
         
         if (!file_exists($config->projects_root.'/projects/'.$project)) {
@@ -84,7 +84,7 @@ ignore_dirs[] = /version
 file_extensions =
 
 project_name = "$project";
-project_url = "$repo_url";
+project_url = "$repositoryURL";
 project_description = "";
 project_packagist = "";
 
@@ -100,45 +100,45 @@ INI;
         if (!file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
                 // Empty initialization
-                case ($repo_url === '' || $repo_url === false) : 
+                case ($repositoryURL === '' || $repositoryURL === false) : 
                     display('Empty initialization');
                     break 1;
                 
                 // Git 
                 case ($config->git === true) : 
                     display('Git initialization');
-                    print 'cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repo_url.' code'."\n";
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repo_url.' code');
+                    print 'cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repositoryURL.' code'."\n";
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repositoryURL.' code');
                     break 1;
 
                 // SVN 
                 case ($config->svn === true) : 
                     display('SVN initialization');
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repo_url).' code');
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // HG 
                 case ($config->hg === true) : 
                     display('Mercurial initialization');
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repo_url).' code');
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // Tbz archive 
                 case ($config->tbz === true) : 
                     display('Initialization from tar.bz2 archive');
-                    print shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tbz2 '.escapeshellarg($repo_url).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xjf archive.tbz2 -C code; rm -rf archive.tbz2');
+                    print shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tbz2 '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xjf archive.tbz2 -C code; rm -rf archive.tbz2');
                     break 1;
 
                 // tgz archive 
                 case ($config->tgz === true) : 
                     display('Initialization from tar.gz archive');
-                    shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tgz '.escapeshellarg($repo_url).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xzf archive.tgz -C code; rm -rf archive.tgz');
+                    shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tgz '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xzf archive.tgz -C code; rm -rf archive.tgz');
                     break 1;
 
                 // tgz archive 
                 case ($config->zip === true) : 
                     display('Initialization from zip archive');
-                    shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.zip '.escapeshellarg($repo_url).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; unzip archive.zip -d code');
+                    shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.zip '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; unzip archive.zip -d code');
                     break 1;
 
                 // composer archive 
@@ -148,7 +148,7 @@ INI;
                     // composer install
                     $composer = new \stdClass();
                     $composer->require = new \stdClass();
-                    $composer->require->$repo_url = 'dev-master';
+                    $composer->require->$repositoryURL = 'dev-master';
                     $json = json_encode($composer);
                     file_put_contents($config->projects_root.'/projects/'.$project.'/composer.json', $json);
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; composer -q install; mv vendor code');

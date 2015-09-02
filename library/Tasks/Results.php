@@ -173,11 +173,11 @@ GREMLIN;
                 shell_exec('pandoc -o '.$name.' '.$name1);
                 unlink($name1);
             } elseif ($config->format == 'CSV') {
-                $fp = fopen($name, 'w');
+                $csvFile = fopen($name, 'w');
                 foreach($text as $t) {
-                    fputcsv($fp, $t);
+                    fputcsv($csvFile, $t);
                 }
-                fclose($fp);
+                fclose($csvFile);
             } else {
                 file_put_contents($name, $text);
             }

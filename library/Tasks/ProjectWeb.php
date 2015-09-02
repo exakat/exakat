@@ -200,7 +200,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         
         $log = fopen($this->project_dir.'/progress.json', 'w+');
         fwrite($log, json_encode($state));
-        fclose($fp);
+        fclose($log);
     }
     
     private function logTime($step) {

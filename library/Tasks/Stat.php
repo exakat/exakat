@@ -43,9 +43,9 @@ class Stat implements Tasks {
         }
 
         if ($config->output) {
-            $fp = fopen($config->filename, 'w+');
-            fwrite($fp, $output);
-            fclose($fp);
+            $outputFile = fopen($config->filename, 'w+');
+            fwrite($outputFile, $output);
+            fclose($outputFile);
         } else {
             echo $output;
         }

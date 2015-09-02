@@ -71,12 +71,11 @@ SQL;
         $res = gremlin_query("g.V.has('token', 'T_ARRAY').filter{ it.out('ARGUMENTS').out('ARGUMENT').count() > 10}.fullcode");
         $res = $res->results;
         
-        $fp = fopen($config->projects_root.'/projects/'.$config->project.'/bigArrays.txt', 'w+');
+        $outputFile = fopen($config->projects_root.'/projects/'.$config->project.'/bigArrays.txt', 'w+');
         foreach($res as $v) {
-            fwrite($fp, $v[0]);
-            fwrite($fp, "\n");
+            fwrite($outputFile, $v[0]."\n");
         }
-        fclose($fp);
+        fclose($outputFile);
     }
 }
 

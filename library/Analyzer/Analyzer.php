@@ -1814,7 +1814,7 @@ GREMLIN;
         $iniFile = parse_ini_file($fullpath);
         
         if ($index != null && isset($iniFile[$index])) {
-            $iniFile = $iniFile[$index];
+            return $iniFile[$index];
         }
         
         return $iniFile;

@@ -36,9 +36,9 @@ class Queue implements Tasks {
         }
 
         display('Adding '.$config->project.' to the queue');
-        $fp = fopen('/tmp/onepageQueue', 'w');
-        fwrite($fp, $config->project."\n");
-        fclose($fp);
+        $queuePipe = fopen('/tmp/onepageQueue', 'w');
+        fwrite($queuePipe, $config->project."\n");
+        fclose($queuePipe);
 
         display('Done');
     }
