@@ -290,6 +290,7 @@ class Token {
                 fullcode.setProperty('fullnspath', alias.fullnspath);
             }
             fullcode.setProperty('aliased', true);
+            fullcode.setProperty('alias', fullcodealias);
             isDefault = false;
         } ;
         
@@ -410,6 +411,7 @@ g.idx('atoms')[['atom':'Class']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
                 fullcode.setProperty('fullnspath', alias.fullnspath);
             }
             fullcode.setProperty('aliased', true);
+            fullcode.setProperty('alias', fullcodealias);
             isDefault = false;
         };
         
@@ -442,6 +444,7 @@ g.idx('atoms')[['atom':'Interface']].out('IMPLEMENTS', 'EXTENDS').sideEffect{ful
                 fullcode.setProperty('fullnspath', alias.fullnspath);
             }
             fullcode.setProperty('aliased', true);
+            fullcode.setProperty('alias', fullcodealias);
             isDefault = false;
         };
         
@@ -474,6 +477,7 @@ g.idx('atoms')[['atom':'Trait']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
                 fullcode.setProperty('fullnspath', alias.fullnspath);
             }
             fullcode.setProperty('aliased', true);
+            fullcode.setProperty('alias', fullcodealias);
             isDefault = false;
         };
         
@@ -601,6 +605,7 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
         it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it; }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
             fullcode.setProperty('aliased', true);
+            fullcode.setProperty('alias', fullcodealias);
             isDefault = false;
         } ;
         
@@ -617,7 +622,7 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
             s.add(it.getProperty('code'));
         };
         fullcodealias = s[0].toLowerCase();
-                fullcode.setProperty('fullcodealias', fullcodealias);
+        fullcode.setProperty('fullcodealias', fullcodealias);
 
         if (fullcode.absolutens == true) {
             fullcode.setProperty('fullnspath', '\\\\' + s.join('\\\\').toLowerCase());
@@ -627,8 +632,9 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
                 fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
                 fullcode.setProperty('aliased', true);
                 fullcode.setProperty('noDefault', true);
+                fullcode.setProperty('alias', fullcodealias);
                 isDefault = false;
-            } ;
+            }
         
             if (isDefault) {
                 if (it.atom == 'File' || it.fullcode == 'namespace Global') {
