@@ -1317,9 +1317,6 @@ Ici, unused param est normal, car imposé par l'interface ou la classe abstraite
 - a priori l'analyse ne fonctionne pas si l'on remplace le répertoire code par un lien symbolique
 Je vais voir ca.
  
-- avoir une progress bar de l'analyse
-Yep :) 
-
 - lorsque l'on relance une analyse il est souvent nécessaire de relancer neo4j
 Oui. En fait, c'est souvent lui qui finit par se bloquer (mémoire, longue requêtes... etc.). 
 
@@ -1362,8 +1359,6 @@ Tester stripe, idio (Cf sourceinno).
 
 Afficher la liste des configurations utilisées
 
-Result count doit pouvoir être trier
-
 Regrouper les résultats par fichier et compte d'erreurs par fichier (pouvoir selectionner la règle)
 
 Cesure pour le code trop long dans le rapport.
@@ -1383,8 +1378,6 @@ Add support for common standards (calistenics, psr-r *..)
 
 Centralize the folder scannings (several instances across the first tasks).
 
-Remove usage of Everyman library.
-
 token_get_all will spew some errors (along with fopen). Report this as a 'may use @' situation.
 
 @include("file.php")) : error is also set for error reporting.
@@ -1401,12 +1394,31 @@ isset($params) is useless on an argument (null, OK).
 
 no recount inside loop : also true for assignations of literals (unless this is a default value)
 
-All literals in a class should go to properties to avoid rebuilding it.
+All literals in a class should go to properties to avoid rebuilding them at each pass.
 
 continue as the last element of a loop? Useless.
-
-Add support for Neo4j Authentication Authenticate by sending a username and a password to Neo4j using HTTP Basic Auth. Requests should include an Authorization header, with a value of Basic <payload>, where "payload" is a base64 encoded string of "username:password".
 
 in_array($a, array()); // pas de Array dans le 2eme argument, c'est une recréation a chaque fois.
 
 Test Neo4j batch import de la version 2.2.4.
+Move to 2.2.5
+
+Object Calisthenics
+[ ] Only One Level Of Indentation Per Method
+[X] Don't Use The ELSE Keyword
+[Y] Wrap All Primitives And Strings
+[ ] First Class Collections
+[ ] One Dot Per Line
+[Y] Don't Abbreviate
+[ ] Keep All Entities Small
+[ ] No Classes With More Than Two Instance Variables
+[ ] No Getters/Setters/Properties
+
+Check how Scalar Expression can't be constants (or not)
+Also, what about PPP (constants have none, but they won't change)
+
+(substr($resFile, 0, 14) == 'Errors parsing') {
+
+Spot repeats in if/elseif
+Suggest long if/elseif into switch structure
+
