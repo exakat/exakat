@@ -324,7 +324,7 @@ GREMLIN;
     public function query($queryString, $arguments = null) {
         $result = gremlin_query($queryString, $arguments);
 
-        if ($result->success !== true) {
+        if (!is_object($result) || $result->success !== true) {
             print "Error in query : \n";
             print $queryString."\n";
             var_dump($result);
