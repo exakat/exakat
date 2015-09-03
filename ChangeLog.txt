@@ -1,4 +1,26 @@
-Version 0.3.1 (Yellow Wind Demon, Coming up)
+Version 0.3.2 (Tiger Vanguard, Coming up)
++ Architecture
+    + 
++ Report
+    + 
++ Analyzer
+    + 
++ Tokenizer
+    + 
+
+Version 0.3.1 (Yellow Wind Demon, 2015-09-03)
++ Architecture
+    + Cleaned code with exakat
+    + Removed usage of Everyman dependencies
+    + Added support for Neo4j Authentication
+    + Added a JobQueue
++ Report
+    + Added Dump to SQLITE format
+    + Added new collection of rules for Calesthenics (dev)
++ Analyzer
+    + Fixed Compilation spotting
++ Tokenizer
+    + Fixed an edge case with Sign, when used in a concatenation
 
 Version 0.3.0 (Lingxuzi, 2015-Aug-25)
 This is a important release, with some noticeable changes. 
