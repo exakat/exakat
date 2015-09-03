@@ -72,7 +72,7 @@ HTML;
                 $icon = '<i class="fa fa-check-square-o green"></i>';
                 $v['result'] = "";
             }
-            $text .= "<tr><td>$k</td><td>$icon".$v['result']."</td></tr>\n";
+            $text .= '<tr><td>'.$k.'</td><td>'.$icon.'"'.$v['result']."</td></tr>\n";
         }
         $text .= <<<HTML
 										</tbody>

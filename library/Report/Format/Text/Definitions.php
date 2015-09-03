@@ -32,7 +32,7 @@ TEXT;
         foreach($data as $name => $definition) {
             $t = wordwrap(str_repeat(' ', strlen($name)).$definition->getDescription(), 75);
             $t = str_replace("\n", "\n     ", $t);
-            $text .= "\n$name : ".trim($t)."\n";
+            $text .= "\n".$name.' : '.trim($t)."\n";
         }
 
         $text .= <<<TEXT

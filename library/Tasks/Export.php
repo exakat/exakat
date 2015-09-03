@@ -93,7 +93,7 @@ class Export extends Tasks {
         }
         if (isset($E[$root])) {
             foreach($E[$root] as $id => $label) {
-                $r .= str_repeat('  ', $level)."Label : $label\n".$this->display_text($V, $E, $id, $level + 1);
+                $r .= str_repeat('  ', $level)."Label : ".$label."\n".$this->display_text($V, $E, $id, $level + 1);
             }
         }
 

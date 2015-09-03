@@ -124,7 +124,7 @@ GREMLIN;
     }
 
     private function displayTiming($message) {
-        display( "$message\nTime : ".number_format($this->lastTiming * 1000, 0)."ms\n");
+        display( $message."\nTime : ".number_format($this->lastTiming * 1000, 0)."ms\n");
     }
     
     private function query($query, $retry = 1) {

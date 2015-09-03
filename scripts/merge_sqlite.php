@@ -28,7 +28,6 @@ unlink('mergedReport.sqlite');
 $db = new SQLite3('mergedReport.sqlite');
 
 $results = $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, project TEXT, analyzer TEXT, value TEXT, count INT)');
-print $db->lastErrorMsg();
 
 foreach($projects as $project) {
     print "$project\n";
@@ -36,7 +35,7 @@ foreach($projects as $project) {
     if ($project == 'default') { continue; }
     if ($project == 'tests') { continue; }
     if ($project == 'progress.log') { continue; }
-    $path = dirname(__DIR__)."/projects/$project/report.sqlite";
+    $path = dirname(__DIR__).'/projects/'.$project.'/report.sqlite';
     if (!file_exists($path)) {
         print "No report for '$project'\n";
         continue;

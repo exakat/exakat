@@ -1790,7 +1790,7 @@ GREMLIN;
 
     public function toCountedArray($load = 'it.fullcode') {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){{$load}}.cap";
+        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){".$load."}.cap";
         $vertices = $this->query($queryTemplate);
 
         $report = array();

@@ -54,13 +54,13 @@ class Errors extends Tasks {
     }
 
     private function table_encode($stats) {
-        $html = "<html><body>";
+        $html = '<html><body>';
     
         foreach($stats as $name => $value) {
-            $html .= "<tr><td>$name</td><td>$value</td></tr>\n";
+            $html .= '<tr><td>'.$name.'</td><td>'.$value."</td></tr>\n";
         }
     
-        $html .= "</body></html>";
+        $html .= '</body></html>';
         return $html;
     }
 
@@ -69,9 +69,9 @@ class Errors extends Tasks {
     
         foreach($stats as $name => $value) {
             if (is_array($value)) {
-                $html .= "$name : ".join(" \n".str_repeat(' ', strlen("$name : ")), $value)."\n";
+                $html .= $name." : ".join(" \n".str_repeat(' ', strlen($name.' : ')), $value)."\n";
             } else {
-                $html .= "$name : $value\n";
+                $html .= $name.' : '.$value."\n";
             }
         }
     

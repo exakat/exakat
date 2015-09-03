@@ -23,7 +23,7 @@
 
 namespace Tokenizer;
 
-class TokenAuto extends Token {
+abstract class TokenAuto extends Token {
     static    public    $round      = -1;
               protected $conditions = array();
               protected $actions    = array();
@@ -99,7 +99,6 @@ class TokenAuto extends Token {
         
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
-        //; fullcode.round = ".(self::$round).
         $query .= $moderatorFinal.'.each{ done++; fullcode = it;
 '.implode(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n}; 
 toDelete.each{ g.removeVertex(it); }
@@ -2617,7 +2616,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         if (isset($conditions['property'])) {
             foreach($conditions['property'] as $property => $value) {
                 if (is_array($value)) {
-                    $queryConditions[] = "filter{it.$property in ['".implode("', '", $value)."']}";
+                    $queryConditions[] = 'filter{it.'.$property." in ['".implode("', '", $value)."']}";
                 } elseif ($value === true) {
                     $queryConditions[] = "has('$property', true)";
                 } elseif ($value === false) {
@@ -2799,9 +2798,7 @@ GREMLIN;
         return $queryConditions;
     }
 
-    public function fullcode() {
-        return '';
-    }
+    abstract function fullcode() ;
 }
 
 ?>

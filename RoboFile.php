@@ -213,8 +213,6 @@ LICENCE;
     
     private function addFiles($packer, $files) {
         foreach ($files as $file) {
-//            print "$file {$file->getRelativePathname()} {$file->getRealPath()}\n";
-            print "$file\n";
             $packer->addFile($file->getRelativePathname(), $file->getRealPath());
         }
     }
@@ -298,7 +296,7 @@ LICENCE;
             $toDelete = array();
             while($row = $res->fetchArray()) {
                 if (preg_match('/[^a-z0-9_]/i', $row[$col])) {
-                    print $row['id'].') '.$row[$col]." is wrong in table $table\n";
+                    display( $row['id'].') '.$row[$col]." is wrong in table ".$table."\n");
                     $toDelete[] = $row['id'];
                 }
             }

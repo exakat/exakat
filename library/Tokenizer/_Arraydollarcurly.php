@@ -48,6 +48,8 @@ class _Arraydollarcurly extends TokenAuto {
 
         return false;
     }
+    
+    public function fullcode() { return '';}
 }
 
 ?>

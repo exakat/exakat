@@ -38,10 +38,10 @@ class Css {
             $json = file_get_contents(__DIR__.'/Css/'.$cssName.'.json');
             $this->css = json_decode($json);
             if ($this->css === null) {
-                print "JSON error in '$cssName.json' : ".json_last_error()."\n";
+                display( "JSON error in '".$cssName.".json' : ".json_last_error()."\n");
             }
         } else {
-            print "Couldn't find '$cssName.json' file.\n";
+            display( "Couldn't find '$cssName.json' file.\n");
         }
 
         $this->cssDefault = json_decode(file_get_contents(__DIR__.'/Css/default/'.$className.'.json'));
@@ -52,8 +52,8 @@ class Css {
             return $this->css->$name;
         } else {
             if (!property_exists($this->cssDefault, $name)) { 
-                print "Warning : No such default as '$name' in '$this->cssName'\n";
-                print_r($this); 
+                display( "Warning : No such default as '$name' in '$this->cssName'\n".
+                         print_r($this, true)); 
             }
             return $this->cssDefault->$name;
         }

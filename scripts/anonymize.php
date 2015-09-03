@@ -35,7 +35,7 @@ echo "Processing file $file into $file.anon\n";
 $res = shell_exec($_SERVER['_'].' -l '.$file);
 //@todo : differentiate fatal error and non-fatal ones.
 if (substr($res, 0, 28) != 'No syntax errors detected in') {
-    die( "Can't compile '$file' script with PHP version ".phpversion().".\n");
+    die( "Can't compile '".$file."' script with PHP version ".phpversion().".\n");
 }
 
 $php = file_get_contents($file);

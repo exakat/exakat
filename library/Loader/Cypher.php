@@ -119,7 +119,7 @@ CYPHER;
                 cypher_query($queryTemplate);
             } catch (\Exception $e) {
 
-                die("Couldn't load nodes attributes '$attribute' in the database\n Exception : ".$e->getMessage()."\n");
+                die("Couldn't load nodes attributes '".$attribute."' in the database\n Exception : ".$e->getMessage()."\n");
             }
         }
 
@@ -142,7 +142,7 @@ CYPHER;
                 cypher_query($queryTemplate);
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
-                die("Couldn't load relations for $name in the database\n".$e->getMessage());
+                die("Couldn't load relations for ".$name." in the database\n".$e->getMessage());
             }
 
             display('Loaded link '.$name);
@@ -232,7 +232,7 @@ CYPHER;
         }
         foreach(static::$links as $label => $links) {
             if (!isset(static::$fp_rels[$label])) {
-                die(print_r(array_keys(static::$fp_rels), true)."\nNO $label\n");
+                die(print_r(array_keys(static::$fp_rels), true)."\nNO ".$label."\n");
             }
             $fp = static::$fp_rels[$label];
             foreach($links as $id => $link) {

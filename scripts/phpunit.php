@@ -70,6 +70,6 @@ $mysql = new mysqli('localhost', 'root', '', 'exakat');
 $query = "INSERT INTO unittests (`".implode("`, `", array_keys($row))."`) VALUES (".implode(", ", array_values($row)).")";
 $mysql->query($query);
     
-echo $row['tests']." tests ran : {$row['fails']} failed (".number_format($row['fails'] / $row['tests'] * 100, 2)." %)\n";
+echo $row['tests'], ' tests ran : ', $row['fails'].' failed (', number_format($row['fails'] / $row['tests'] * 100, 2), " %)\n";
 
 ?>

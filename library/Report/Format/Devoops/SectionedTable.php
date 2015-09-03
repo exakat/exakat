@@ -57,8 +57,8 @@ HTML;
             $readOrder = range(0, count($this->css->titles)-1);
         }
         foreach($data as $k => $v) {
-            $text .= "<tr><td style=\"background-color: {$this->css->backgroundColor}\">$k</td>".
-            str_repeat("<td style=\"background-color: {$this->css->backgroundColor}\">&nbsp;</td>", count($this->css->titles) -1)."</tr>\n";
+            $text .= '<tr><td style="background-color: '.$this->css->backgroundColor.'">'.$k.'</td>'.
+            str_repeat('<td style="background-color: '.$this->css->backgroundColor.'">&nbsp;</td>', count($this->css->titles) -1)."</tr>\n";
             if ($v instanceof \Iterator) {
                 if (empty($v)) { 
                     continue; 
@@ -80,7 +80,6 @@ HTML;
         
         $output->push($text);
     }
-
 }
 
 ?>

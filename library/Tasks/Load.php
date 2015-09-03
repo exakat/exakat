@@ -1123,7 +1123,7 @@ class Load extends Tasks {
         $end = microtime(true);
         $log['memory_usage'] = memory_get_usage(true);
         $log['memory_max_usage'] = memory_get_peak_usage(true);
-        $this->log->log("$filename\t".(($end - $begin)*1000)."\t".join("\t", $log));
+        $this->log->log($filename."\t".(($end - $begin)*1000)."\t".join("\t", $log));
 
         if (!isset($T)) {
             echo "Empty script. Ignoring\n";

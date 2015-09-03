@@ -32,7 +32,7 @@ class Text extends \Report\Format\Devoops {
         } else {
             $class = '';
         }
-        $output->push("<p$class>".$data."</p>\n");
+        $output->push('<p'.$class.'>'.$data."</p>\n");
     }
 
 }

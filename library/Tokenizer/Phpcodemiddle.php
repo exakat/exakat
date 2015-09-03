@@ -43,6 +43,8 @@ class Phpcodemiddle extends TokenAuto {
         
         return false;
     }
+
+    public function fullcode() { return '';}
 }
 
 ?>
