@@ -260,8 +260,10 @@ if (fullcode.alternative == true) {
             fullcode.fullcode = fullcode.fullcode + " " + theElse.fullcode;
         } else if (theThen.bracket == false) {
             fullcode.fullcode = fullcode.fullcode + " else " + theElse.fullcode;
+            theElse.count = theElse.out('ELEMENT').count();
         } else {
             fullcode.fullcode = fullcode.fullcode + " else { " + theElse.fullcode + " }";
+            theElse.count = theElse.out('ELEMENT').count();
         }
     }
 }
