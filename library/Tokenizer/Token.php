@@ -202,15 +202,11 @@ class Token {
     }
 
     final public function check() {
-        if (!method_exists($this, '_check')) {
-            echo get_class($this), ' has no check yet', "\n";
-        } else {
-            $this->remaining = 0;
-            $this->done = 0;
-            return $this->_check();
-        }
-
-        return true;
+        if (empty($this->queries)) {
+            $this->_check();
+        } 
+        
+        $this->execQueries();
     }
     
     public function reserve() {

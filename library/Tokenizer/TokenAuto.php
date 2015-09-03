@@ -24,16 +24,17 @@
 namespace Tokenizer;
 
 class TokenAuto extends Token {
-    static public $round  = -1;
-    protected $conditions = array();
-    protected $actions    = array();
-    protected $setAtom    = false;
-    public    $total      = null ;
-    public    $done       = null ;
-    public    $cycles     = null ;
+    static    public    $round      = -1;
+              protected $conditions = array();
+              protected $actions    = array();
+              protected $setAtom    = false;
+              public    $total      = null ;
+              public    $done       = null ;
+              public    $cycles     = null ;
+              protected $queries    = array();
     
     const CYCLE_COUNT = 80;
-    const CYCLE_SIZE = 500;
+    const CYCLE_SIZE  = 500;
 
     public function _check() {
         return false;
@@ -42,10 +43,9 @@ class TokenAuto extends Token {
     public function prepareQuery() {
         $query = ' total = 0; done = 0; toDelete = []; ';
         $class = str_replace('Tokenizer\\', '', get_class($this));
-//        $moderator = '[0..'.self::CYCLE_SIZE.']';
+
         $moderator = '';
         $moderatorFinal = '[0..'.self::CYCLE_SIZE.']';
-//        $moderatorFinal = '';
 
         if (in_array($class, array('FunctioncallArray'))) {
             $query .= 'g.idx("racines")[["token":"S_ARRAY"]].out("INDEXED")'.$moderator;
@@ -115,36 +115,39 @@ toDelete.each{ g.removeVertex(it); }
     }
 
     public function checkAuto() {
-        $this->total  = 0;
-        $this->cycles = 0;
-
-        $query = $this->prepareQuery();
-        do {
-            $begin = microtime(true);
-            $res = gremlin_query($query);
-            if (!is_object($res)) {
-                var_dump($res);
-                print $query."\n";
-                die();
-            }
-            $res = $res->results[0];
-
-            $end = microtime(true);
-            
-            if (!isset($res->done)) {
-                print __METHOD__."\n";
-                print $query;
-                var_dump($res);
-                die();
-            }
-
-            $this->total += (int) $res->total;
-            $this->done += (int) $res->done;
-            ++$this->cycles;
-            display("Cycle ".get_class($this)." {$this->cycles} {$res->done} ".number_format(($end - $begin) * 1000, 0)."\t".($res->done > self::CYCLE_SIZE && $this->cycles < self::CYCLE_COUNT)."\n");
-        } while ($res->done > self::CYCLE_SIZE && $this->cycles < self::CYCLE_COUNT);
+        $this->queries[] = $this->prepareQuery();
+    }
+    
+    public function execQueries() {
+        foreach($this->queries as $query) {
+            $this->cycles = 0;
+            $this->total  = 0;
         
-        return $res;
+            do {
+                $begin = microtime(true);
+                $res = gremlin_query($query);
+                if (!is_object($res)) {
+                    var_dump($res);
+                    print $query."\n";
+                    die();
+                }
+                $res = $res->results[0];
+
+                $end = microtime(true);
+            
+                if (!isset($res->done)) {
+                    print __METHOD__."\n";
+                    print $query;
+                    var_dump($res);
+                    die();
+                }
+
+                $this->total += (int) $res->total;
+                $this->done  += (int) $res->done;
+                ++$this->cycles;
+                display("Cycle ".get_class($this)." ".$this->cycles." ".$res->done." ".number_format(($end - $begin) * 1000, 0)."\n");
+            } while ($res->done > self::CYCLE_SIZE && $this->cycles < self::CYCLE_COUNT);
+        }
     }
 
     private function readActions($actions) {
