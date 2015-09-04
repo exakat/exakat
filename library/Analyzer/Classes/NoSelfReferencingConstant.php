@@ -44,7 +44,7 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code('self')
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
 
         // const c = a::b
         $this->atomIs('Const')

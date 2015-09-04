@@ -167,7 +167,7 @@ class Analyzer {
         if ($analyzer = Analyzer::getClass($name)) {
             return new $analyzer();
         } else {
-            echo "No such class as '$name'\n";
+            echo "No such class as '", $name, "'\n";
             return null;
         }
     }
@@ -196,7 +196,7 @@ class Analyzer {
     private function addMethod($method, $arguments = null) {
         if ($arguments === null) { // empty
             $this->methods[] = $method;
-        } elseif (func_num_args() > 2) { 
+        } elseif (func_num_args() > 2) {
             $arguments = func_get_args();
             array_shift($arguments);
             $argnames = array(str_replace('***', '%s', $method));
@@ -325,9 +325,9 @@ GREMLIN;
         $result = gremlin_query($queryString, $arguments);
 
         if (!is_object($result) || $result->success !== true) {
-            print "Error in query : \n";
-            print $queryString."\n";
-            var_dump($result);
+            echo "Error in query : \n",
+                 $queryString, "\n",
+                 print_r($result, true);
             die();
         }
 
@@ -614,7 +614,7 @@ GREMLIN;
     public function hasRank($value = '0', $link = 'ARGUMENT') {
         if ($value === 'first') {
             // @note : can't use has() with integer!
-            $this->addMethod('filter{it.rank == 0}'); 
+            $this->addMethod('filter{it.rank == 0}');
         } elseif ($value === 'last') {
             $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 1}");
         } elseif ($value === '2last') {
@@ -1719,9 +1719,9 @@ GREMLIN;
                 $this->processedCount += $r->processed;
                 $this->rowCount += $r->total;
             } else {
-                print __METHOD__."\n";
-                print $query."\n";
-                print "No result from this query\n";
+                echo __METHOD__, "\n",
+                     $query, "\n",
+                     "No result from this query\n";
             } // else means that it is not set, so it's 0. No need for an operation.
         }
 
@@ -1906,7 +1906,7 @@ GREMLIN;
                 $r = "\\". $r;
             }
         } else {
-            $r = array_map(function ($x) { 
+            $r = array_map(function ($x) {
                 $r = strtolower($x);
                 if (isset($r[0]) && $r[0] != "\\") {
                     $r = "\\". $r;

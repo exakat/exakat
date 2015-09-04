@@ -58,10 +58,8 @@ class Extension extends Analyzer\Analyzer {
             if (count($interfaces) == 1 && empty($interfaces[0])) {
                 $interfaces = array();
             }
-        } elseif (substr($this->source, -4) == '.txt') {
-            $functions = file(dirname(dirname(dirname(__DIR__))).'/data/'.$this->source);
         } else {
-            print "Cannot process the '{$this->source}' file. Sorry\n";
+            echo "Cannot process the '", $this->source, "' file. It has to be .ini format.\n";
             return true;
         }
         

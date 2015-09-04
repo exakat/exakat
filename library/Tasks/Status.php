@@ -61,14 +61,14 @@ class Status extends Tasks {
         if ($res == "Done\nDone\nDone\nDone\nDone\nDone\n") {
             foreach($logs as $log) {
                 if (filemtime($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log') < $tokenizerLogTime) {
-                    echo "analyze.$log.final.log is too old\n";
+                    echo "analyze.", $log, ".final.log is too old\n";
                 }
             }
             echo "All analyzes were OK\n";
         } else {
             foreach($logs as $log) {
                 if (!file_exists($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log')) {
-                    echo 'analyze.',$log,'.final.log not yet here', "\n";
+                    echo 'analyze.', $log, '.final.log not yet here', "\n";
                     continue 1;
                 }
                 $log_content = file_get_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log');

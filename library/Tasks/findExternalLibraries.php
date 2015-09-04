@@ -28,11 +28,11 @@ class findExternalLibraries extends Tasks {
     const FILE_ONLY   = 2;
     const PARENT_DIR  = 3; // Whole_dir and parent.
     
-    // classic must be in lower case form. 
+    // classic must be in lower case form.
     private $classic = array('bbq'              => self::WHOLE_DIR,
                              'cpdf'             => self::WHOLE_DIR, // ezpdf
                              'dompdf'           => self::PARENT_DIR,
-                             'fpdf'             => self::FILE_ONLY, 
+                             'fpdf'             => self::FILE_ONLY,
                              'graph'            => self::PARENT_DIR,
                              'html2pdf'         => self::WHOLE_DIR, // contains tcpdf
                              'htmlpurifier'     => self::FILE_ONLY,
@@ -84,7 +84,7 @@ class findExternalLibraries extends Tasks {
             display("One external libraries is going to be omitted : ".join(', ', array_keys($newConfigs)));
         } elseif (count($newConfigs)) {
             display(count($newConfigs)." external libraries are going to be omitted : ".join(', ', array_keys($newConfigs)));
-        } 
+        }
         
         if ($config->update === true && count($newConfigs) > 0) {
              display('Updating '.$project.'/config.ini');
@@ -109,7 +109,7 @@ class findExternalLibraries extends Tasks {
                $return = array_merge($this->process($file), $return);
            } elseif (is_dir($file)) {
                $return = array_merge($this->processDir($file), $return);
-           } 
+           }
            // else should go to LOG
        }
     
@@ -129,7 +129,7 @@ class findExternalLibraries extends Tasks {
             if ($token[0] == T_DOC_COMMENT) { continue; }
             if ($token[0] == T_COMMENT) { continue; }
         
-            if ($token[0] == T_CLASS) { 
+            if ($token[0] == T_CLASS) {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];
                 if (!is_string($class)) {

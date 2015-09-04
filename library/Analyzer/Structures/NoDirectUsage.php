@@ -29,7 +29,7 @@ class NoDirectUsage extends Analyzer\Analyzer {
     public function analyze() {
         $functions = $this->loadIni('NoDirectUsage.ini', 'functions');
         
-        // foreach(glob() as $x) {} 
+        // foreach(glob() as $x) {}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
              ->atomIs('Functioncall')

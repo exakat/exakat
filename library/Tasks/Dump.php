@@ -89,7 +89,7 @@ g.idx('analyzers')[['analyzer':'$analyzerName']].out
                 rclass = it.out('NAME').next().code;
             } else if (it.token == 'T_FUNCTION') {
                 rfunction = it.out('NAME').next().code;
-            } 
+            }
         }
         m = ['fullcode':it.fullcode, 'file':file, 'line':it.line, 'namespace':rnamespace, 'class':rclass, 'function':rfunction ];
     }
@@ -100,7 +100,7 @@ GREMLIN;
                     $res = $res->results;
                     
                     foreach($res as $result) {
-                        if (!is_object($result)) { 
+                        if (!is_object($result)) {
                             $this->log->log("Object expected but not found\n".print_r($result)."\n");
                             continue;
                         }

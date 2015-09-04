@@ -100,49 +100,48 @@ INI;
         if (!file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
                 // Empty initialization
-                case ($repositoryURL === '' || $repositoryURL === false) : 
+                case ($repositoryURL === '' || $repositoryURL === false) :
                     display('Empty initialization');
                     break 1;
                 
-                // Git 
-                case ($config->git === true) : 
+                // Git
+                case ($config->git === true) :
                     display('Git initialization');
-                    print 'cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repositoryURL.' code'."\n";
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repositoryURL.' code');
                     break 1;
 
-                // SVN 
-                case ($config->svn === true) : 
+                // SVN
+                case ($config->svn === true) :
                     display('SVN initialization');
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
-                // HG 
-                case ($config->hg === true) : 
+                // HG
+                case ($config->hg === true) :
                     display('Mercurial initialization');
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
-                // Tbz archive 
-                case ($config->tbz === true) : 
+                // Tbz archive
+                case ($config->tbz === true) :
                     display('Initialization from tar.bz2 archive');
                     print shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tbz2 '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xjf archive.tbz2 -C code; rm -rf archive.tbz2');
                     break 1;
 
-                // tgz archive 
-                case ($config->tgz === true) : 
+                // tgz archive
+                case ($config->tgz === true) :
                     display('Initialization from tar.gz archive');
                     shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tgz '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xzf archive.tgz -C code; rm -rf archive.tgz');
                     break 1;
 
-                // tgz archive 
-                case ($config->zip === true) : 
+                // tgz archive
+                case ($config->zip === true) :
                     display('Initialization from zip archive');
                     shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.zip '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; unzip archive.zip -d code');
                     break 1;
 
-                // composer archive 
-                case ($config->composer === true) : 
+                // composer archive
+                case ($config->composer === true) :
                     display('Initialization with composer');
 
                     // composer install
@@ -154,7 +153,7 @@ INI;
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; composer -q install; mv vendor code');
                     break 1;
             
-                default : 
+                default :
                     print "No Initialization\n";
             }
         } elseif (file_exists($config->projects_root.'/projects/'.$project.'/code/')) {

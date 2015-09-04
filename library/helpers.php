@@ -29,7 +29,7 @@ function display($text) {
     }
     
     if ($config->verbose) {
-        echo trim($text)."\n";
+        echo trim($text), "\n";
     }
 }
 
@@ -249,9 +249,9 @@ function gremlin_queryOne($query, $params = [], $load = '') {
     if (is_bool($res) || is_int($res)) {
         return $res;
     } else {
-        print "Help needed in ".__METHOD__."\n";
-        print "Query : '$query'\n";
-        var_dump($res);
+        echo "Help needed in ", __METHOD__, "\n",
+             "Query : '", $query, "'\n",
+             print_r($res, true);
         die();
     }
 }

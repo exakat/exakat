@@ -251,7 +251,7 @@ class Load extends Tasks {
                         'T_CALLABLE'                 => 'Identifer',
                         );
 
-         $tokenToIndex = array('T_BREAK'    => '_Break', 
+         $tokenToIndex = array('T_BREAK'    => '_Break',
                                'T_CONTINUE' => '_Continue',
                                'T_YIELD'    => '_Yield',
                                'T_RETURN'   => '_Return');
@@ -277,8 +277,8 @@ class Load extends Tasks {
                 
                 $colonTokens->surveyToken($token);
                 // Break, return, Yield ;
-                if (in_array($token[3], array_keys($tokenToIndex))      && 
-                    is_string($tokens[$id + 1]) && 
+                if (in_array($token[3], array_keys($tokenToIndex))      &&
+                    is_string($tokens[$id + 1]) &&
                     $tokens[$id + 1] == ';') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
@@ -301,8 +301,8 @@ class Load extends Tasks {
                     $to_index = false;
 
         // TODO : centralize this with RETURN, CONTINUE, etc...
-                } elseif (in_array($token[3], array_keys($tokenToIndex))      && 
-                          is_array($tokens[$id + 1]) && 
+                } elseif (in_array($token[3], array_keys($tokenToIndex))      &&
+                          is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
@@ -711,7 +711,7 @@ class Load extends Tasks {
             
                 if ($token == '{' && $tokens[$id + 1] == '}') {
                     // This will be a structure with Association
-                    if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && 
+                    if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) &&
                         in_array($this->php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY', 'T_ELSE', 'T_FINALLY', 'T_CALLALBLE', 'T_ARRAY')))) {
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                             ->setProperty('code', $token)

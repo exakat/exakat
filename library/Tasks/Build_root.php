@@ -52,20 +52,20 @@ class Build_root extends Tasks {
         $this->logTime('g.idx("atoms")');
         display( "g.idx('atoms') : filling\n");
 
-        // separate processing for T_STRING 
+        // separate processing for T_STRING
         $query = "g.V.has('token', 'T_STRING').has('atom', null).each{
             it.setProperty('fullcode', it.getProperty('code'));
             it.setProperty('atom', 'Identifier');
-            g.idx('atoms').put('atom', it.atom, it); 
+            g.idx('atoms').put('atom', it.atom, it);
         }";
         gremlin_query($query);
         display( "g.idx('atoms') : T_STRING\n");
 
-        // separate processing for T_VARIABLE 
+        // separate processing for T_VARIABLE
         $query = "g.V.has('token', 'T_VARIABLE').each{
             it.setProperty('fullcode', it.getProperty('code'));
             it.setProperty('atom', 'Variable');
-            g.idx('atoms').put('atom', it.atom, it); 
+            g.idx('atoms').put('atom', it.atom, it);
         }";
         gremlin_query($query);
         display( "g.idx('atoms') : T_VARIABLE\n");
@@ -73,14 +73,14 @@ class Build_root extends Tasks {
         $query = "g.V.has('token', 'T_STRING_VARNAME').each{
             it.setProperty('fullcode', it.getProperty('code'));
             it.setProperty('atom', 'Variable');
-            g.idx('atoms').put('atom', it.atom, it); 
+            g.idx('atoms').put('atom', it.atom, it);
         }";
         gremlin_query($query);
         display( "g.idx('atoms') : T_VARIABLE\n");
 
         $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant', 'Null',
                                          'Rawstring', 'Float', 'Boolean', 'Void', 'File']}.each{
-                                         g.idx('atoms').put('atom', it.atom, it); 
+                                         g.idx('atoms').put('atom', it.atom, it);
         }";
         gremlin_query($query);
         display( "g.idx('atoms') : filled\n" );

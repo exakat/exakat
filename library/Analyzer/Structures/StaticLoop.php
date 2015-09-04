@@ -65,7 +65,7 @@ class StaticLoop extends Analyzer\Analyzer {
         
         // foreach with complex structures (property, static property, arrays, references... ?)
         
-        // for 
+        // for
         $this->atomIs('For')
              ->outIs('INCREMENT')
              ->atomIs('Void')
@@ -85,7 +85,7 @@ class StaticLoop extends Analyzer\Analyzer {
 
         // for with complex structures (property, static property, arrays, references... ?)
 
-        // do...while 
+        // do...while
         $this->atomIs('Dowhile')
              ->outIs('CONDITION')
              // collect all variables
@@ -99,7 +99,7 @@ class StaticLoop extends Analyzer\Analyzer {
 
         // do while with complex structures (property, static property, arrays, references... ?)
 
-        // while 
+        // while
         $this->atomIs('While')
              ->outIs('CONDITION')
              // collect all variables

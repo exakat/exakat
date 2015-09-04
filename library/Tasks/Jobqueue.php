@@ -90,7 +90,7 @@ class Jobqueue extends Tasks {
                         fwrite($this->log, 'Quit jobQueue : '.time()."\n");
                         die();
 
-                    default: 
+                    default:
                         if (file_exists($this->config->projects_root.'/in/'.$job.'.php')) {
                             print 'processing onepage job ' . $job . PHP_EOL;
                             $this->process($job);
