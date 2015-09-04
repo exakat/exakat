@@ -56,7 +56,7 @@ class Assignation extends TokenAuto {
         $forbiddenTokens = array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators,
                                        Comparison::$operators, Logical::$booleans, Multiplication::$operators,
                                        Postplusplus::$operators, Power::$operators, _Instanceof::$operators,
-                                       Coalesce::$operators, 
+                                       Coalesce::$operators,
                                        array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                              'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                              'T_QUESTION', 'T_NS_SEPARATOR' ));

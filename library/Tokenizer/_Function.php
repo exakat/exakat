@@ -29,7 +29,7 @@ class _Function extends TokenAuto {
     
     public function _check() {
 
-        // function name ( arguments ) 
+        // function name ( arguments )
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_AND')
@@ -40,7 +40,7 @@ class _Function extends TokenAuto {
                                'keepIndexed'   => true);
         $this->checkAuto();
 
-        // function name ( arguments ) 
+        // function name ( arguments )
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
@@ -60,11 +60,11 @@ class _Function extends TokenAuto {
                                'keepIndexed'   => true);
         $this->checkAuto();
 
-        // function : returnType 
+        // function : returnType
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_COLON'),
-                                        // check for association? 
+                                        // check for association?
                                   2 => array('token' => array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_CALLABLE'))
         );
         

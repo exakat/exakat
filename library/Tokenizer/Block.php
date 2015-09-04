@@ -29,7 +29,7 @@ class Block extends TokenAuto {
     
     public function _check() {
         $notToken = array('T_VARIABLE', 'T_DOLLAR',
-                          'T_CLOSE_CURLY', // $x{1}{3}, 
+                          'T_CLOSE_CURLY', // $x{1}{3},
                           'T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS',// x(1){3},
                           'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',  // $x[1]{3},
                           'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT',

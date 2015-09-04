@@ -34,7 +34,7 @@ class Variadic extends TokenAuto {
         $this->conditions = array( 0 => array('token' => Variadic::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => array('Variable', 'Property', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
-                                                               'Identifier', 'Nsname', 'Boolean', 'Null', 'Functioncall', 'Magicconstant', 
+                                                               'Identifier', 'Nsname', 'Boolean', 'Null', 'Functioncall', 'Magicconstant',
                                                                'Integer', 'Array'))
         );
         

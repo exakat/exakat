@@ -100,7 +100,7 @@ abstract class TokenAuto extends Token {
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
         $query .= $moderatorFinal.'.each{ done++; fullcode = it;
-'.implode(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n}; 
+'.implode(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n};
 toDelete.each{ g.removeVertex(it); }
 [total:total, done:done];";
         
@@ -612,8 +612,8 @@ $fullcode
             $c = 0;
             
             foreach($actions['transform'] as $destination => $label) {
-                if ($label == 'NONE') { 
-                    continue; 
+                if ($label == 'NONE') {
+                    continue;
                 }
 
                 // Destination > 0
@@ -1495,7 +1495,7 @@ if (current.token == 'T_OPEN_PARENTHESIS') {
         }
 
         if (isset($actions['toSequence']) && $actions['toSequence']) {
-            $endSequence = "'T_CLOSE_TAG', 'T_DEFAULT', 'T_CASE', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 
+            $endSequence = "'T_CLOSE_TAG', 'T_DEFAULT', 'T_CASE', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE',
                             'T_ENDDECLARE', 'T_SEQUENCE_CASEDEFAULT', 'T_END', 'T_CLOSE_CURLY', 'T_ELSEIF', 'T_ELSE' ";
 
             $qactions[] = "
@@ -1509,12 +1509,12 @@ if (it.atom == 'Sequence' && it.bracket == null) {
     current = it;
     rank = it.out('ELEMENT').count();
     
-    a2 = a1.out('NEXT').next(); 
+    a2 = a1.out('NEXT').next();
 } else if (b1.atom == 'Sequence' && b1.bracket == null) {
     current = b1;
     rank = b1.out('ELEMENT').count() - 1;
 
-    a2 = a1.out('NEXT').next(); 
+    a2 = a1.out('NEXT').next();
 } else {
     current = it;
     // This is is going to be a new sequence
@@ -1524,13 +1524,13 @@ if (it.atom == 'Sequence' && it.bracket == null) {
 
     b2 = b1.in('NEXT').next();
     b1.setProperty('rank', 0);
-    b1.bothE('NEXT').each{ 
-        g.removeEdge(it); 
+    b1.bothE('NEXT').each{
+        g.removeEdge(it);
     }
     g.addEdge(current, b1, 'ELEMENT');
-    rank = 1; 
+    rank = 1;
 
-    a2 = a1.out('NEXT').next(); 
+    a2 = a1.out('NEXT').next();
 
     g.addEdge(b2, current, 'NEXT');
 }
@@ -1538,9 +1538,9 @@ makeNext = false;
 
 // LOOPS
 while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
-        (a1.atom != null) && 
-        ( (a1.atom == 'Sequence' && a1.bracket == null) || 
-          (a2.token in ['T_SEMICOLON', $endSequence]))) { 
+        (a1.atom != null) &&
+        ( (a1.atom == 'Sequence' && a1.bracket == null) ||
+          (a2.token in ['T_SEMICOLON', $endSequence]))) {
 
      if (a1.atom == 'Sequence' && a1.bracket == null) {
         a1.out('ELEMENT').each{
@@ -1552,9 +1552,9 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
         a1.bothE().each{ g.removeEdge(it); };
         toDelete.push(a1);
         a1 = a2;
-        a2 = a1.out('NEXT').next(); 
+        a2 = a1.out('NEXT').next();
         makeNext = true;
-    } else if (a1.atom != null && a2.token == 'T_SEMICOLON' && a2.atom == null) {  
+    } else if (a1.atom != null && a2.token == 'T_SEMICOLON' && a2.atom == null) {
         if (a1.atom == 'Sequence') {
             a1.out('ELEMENT').each{
                 g.addEdge(current, it, 'ELEMENT');
@@ -1575,9 +1575,9 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
 
         a2.bothE('INDEXED', 'NEXT').each{ g.removeEdge(it); };
         toDelete.push(a2);
-        a2 = a1.out('NEXT').next(); 
+        a2 = a1.out('NEXT').next();
         makeNext = true;
-    } else if (a1.atom != null && a2.token == 'T_SEMICOLON' && a2.atom == 'Sequence') {  
+    } else if (a1.atom != null && a2.token == 'T_SEMICOLON' && a2.atom == 'Sequence') {
         if (a1.atom == 'Sequence') {
             MergingTwoSequences; // shouldn't happen
         } else {
@@ -1598,10 +1598,10 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
             a2.bothE('INDEXED', 'NEXT').each{ g.removeEdge(it); };
             toDelete.push(a2);
 
-            a2 = a1.out('NEXT').next(); 
+            a2 = a1.out('NEXT').next();
         }
         makeNext = true;
-    } else if (a1.atom != null && a2.token in [$endSequence]) { 
+    } else if (a1.atom != null && a2.token in [$endSequence]) {
         if (a1.atom == 'Sequence') {
             a1.out('ELEMENT').each{
                 g.addEdge(current, it, 'ELEMENT');
@@ -1619,7 +1619,7 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
         }
 
         a1 = a2;
-        a2 = a1.out('NEXT').next(); 
+        a2 = a1.out('NEXT').next();
         makeNext = true;
     } else {
         // Undefined variables, that acts as a die.
@@ -1633,7 +1633,7 @@ while( !(a1.token in ['T_SEQUENCE_CASEDEFAULT', 'T_ELSEIF']) &&
 
 if (makeNext == true) {
     // clean outgoing link first
-    current.out('NEXT').each{ 
+    current.out('NEXT').each{
         it.inE('NEXT').each{  g.removeEdge(it); }
         toDelete.push(it);
     }
@@ -1664,7 +1664,7 @@ g.addEdge(it, b1, 'ELEMENT');
 b1.inE('INDEXED').each{ g.removeEdge(it); }
 it.setProperty('atom', 'Sequence');
 g.idx('atoms').put('atom','Sequence', it);
-it.setProperty('fullcode', ';'); // fullcode 
+it.setProperty('fullcode', ';'); // fullcode
 
 g.addEdge(b2, it, 'NEXT');
 
@@ -2508,12 +2508,12 @@ $fullcode
                                'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_COALESCE', 'T_SPACESHIP',
                                'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_QUESTION', 'T_COLON',
                                'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
-                               'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 
-                               'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 
+                               'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL',
+                               'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
                                'T_POW_EQUAL', 'T_DOUBLE_ARROW', 'T_SR','T_SL', 'T_IMPLEMENTS', 'T_EXTENDS',
                                'T_POW', 'T_PLUS', 'T_MINUS', 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_INC', 'T_DEC',
                                'T_INSTANCEOF', 'T_INSTEADOF', 'T_ELSEIF', 'T_ELSE'";
-//'T_OPEN_CURLY', 
+//'T_OPEN_CURLY',
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */
 

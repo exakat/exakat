@@ -204,7 +204,7 @@ class Token {
     final public function check() {
         if (empty($this->queries)) {
             $this->_check();
-        } 
+        }
         
         $this->execQueries();
     }
