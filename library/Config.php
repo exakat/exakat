@@ -224,7 +224,7 @@ class Config {
     }
     
     public function __set($name, $value) {
-        print "It is not possible to modify configuration $name with value '$value'\n";
+        display("It is not possible to modify configuration $name with value '$value'\n");
     }
 
     private function readProjectConfig($project) {
