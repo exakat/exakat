@@ -227,6 +227,13 @@ INI;
             }
         }
 
+        $stats['folders']['log'] = file_exists($config->projects_root.'/log/') ? 'Yes' : 'No';
+        if ($stats['folders']['log'] == 'No') {
+            mkdir($config->projects_root.'/log/', 0755);
+            $stats['folders']['log'] = file_exists($config->projects_root.'/projects/log/') ? 'Yes' : 'No';
+        }
+        $stats['folders']['in'] = file_exists($config->projects_root.'/in/') ? 'Yes' : 'No';
+        $stats['folders']['out'] = file_exists($config->projects_root.'/out/') ? 'Yes' : 'No';
         $stats['folders']['test'] = file_exists($config->projects_root.'/projects/test/') ? 'Yes' : 'No';
         $stats['folders']['default'] = file_exists($config->projects_root.'/projects/default/') ? 'Yes' : 'No';
         $stats['folders']['onepage'] = file_exists($config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
@@ -242,7 +249,7 @@ INI;
             $stats['PHP 5.2']['configured'] = 'No';
         } else {
             $version = shell_exec($config->php52.' -r "echo phpversion();" 2>&1');
-            if (!preg_match('/5\.2\.[0-9]+/', $res)) {
+            if (!preg_match('/5\.2\.[0-9]+/', $version)) {
                 $stats['PHP 5.3']['installed'] = 'No';
             } else {
                 $stats['PHP 5.2']['installed'] = 'Yes';
