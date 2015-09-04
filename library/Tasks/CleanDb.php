@@ -67,7 +67,11 @@ DELETE n,r';
         $config = $this->config;
         
         // preserve data/dbms/auth to preserve authentication
-        $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth';
+        if (file_exists($config->projects_root.'/neo4j/data/dbms/auth')) {
+            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; ';
+        } else {
+            $sshLoad =  'rm -rf data; mkdir -p data; ';
+        }
         if (file_exists($config->projects_root.'/neo4j/data/neo4j-service.pid')) {
             shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid); '.$sshLoad);
         } else {
