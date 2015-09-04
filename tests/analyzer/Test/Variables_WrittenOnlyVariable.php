@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Variables_WrittenOnlyVariable extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testVariables_WrittenOnlyVariable01()  { $this->generic_test('Variables_WrittenOnlyVariable.01'); }
     public function testVariables_WrittenOnlyVariable02()  { $this->generic_test('Variables_WrittenOnlyVariable.02'); }
     public function testVariables_WrittenOnlyVariable03()  { $this->generic_test('Variables_WrittenOnlyVariable.03'); }
+    public function testVariables_WrittenOnlyVariable04()  { $this->generic_test('Variables_WrittenOnlyVariable.04'); }
 }
 ?>

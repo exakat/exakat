@@ -85,6 +85,14 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // variable in a new 
+        $this->atomIs('Variable')
+             ->inIs('NAME')
+             ->inIs('NEW')
+             ->atomIs('New')
+             ->back('first');
+        $this->prepareQuery();
+
         // array only
         $this->atomIs('Variable')
              ->inIs('VARIABLE')

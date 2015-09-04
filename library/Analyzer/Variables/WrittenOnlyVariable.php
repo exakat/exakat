@@ -39,9 +39,13 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->codeIsNot($superglobals)
+             // this variable is modified
              ->analyzerIs('Analyzer\\Variables\\IsModified')
+             // this variable is not read
              ->analyzerIsNot('Analyzer\\Variables\\IsRead')
-             ->raw('filter{
+
+            // Another instance of this variable (based on name), in the same function, is not read
+             ->filter(<<<GREMLIN
     name = it.code;
     itself = it;
     it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.out("BLOCK").
@@ -49,8 +53,10 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
              .has("code", name)
              .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsRead").any()}
              .any() == false
-             }')
-             ;
+GREMLIN
+)
+;
+
         $this->prepareQuery();
     }
 }
