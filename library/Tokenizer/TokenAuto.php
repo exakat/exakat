@@ -2463,7 +2463,8 @@ g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
 
 x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');
-// No need for indexing here g.idx('atoms').put('atom', 'Variable', x);
+// No need for indexing here 
+g.idx('atoms').put('atom', 'Variable', x);
 
 ";
             unset($actions['variableToFunctioncall']);
