@@ -33,7 +33,10 @@ class DanglingArrayReferences extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'array')
              ->back('first')
              ->nextSibling()
+            // unset($x);
              ->raw('filter{ it.has("atom", "Functioncall").has("code", "unset").out("ARGUMENTS").out("ARGUMENT").filter{ it.code == array }.any() == false; }')
+            // (unset) $x;
+             ->raw('filter{ it.has("token", "T_UNSET_CAST").out("CAST").filter{ it.code == array }.any() == false; }')
              ->back('first');
         $this->prepareQuery();
     }
