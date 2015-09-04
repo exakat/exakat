@@ -134,7 +134,7 @@ class Load extends Tasks {
                     $tokensNewlines[$merge] += substr_count($tokens[$id][1], "\n");
                 }
                 $x[] = substr_count($tokens[$id][1], "\n");
-                $deleted++;
+                ++$deleted;
                 unset($tokens[$id]);
             } else {
                 $merge = false;
@@ -173,18 +173,18 @@ class Load extends Tasks {
     
         $log['token_cleaned'] = count($tokens);
 
-        $regexIndex = array();
-        $regexIndex['INDEX'] = $this->client->makeNode()->setProperty('token', 'INDEX')
-                                                  ->setProperty('code', 'Index for INDEX')
-                                                  ->setProperty('index', 'true')
-                                                  ->save();
+        $regexIndex = array(
+                    'INDEX' => $this->client->makeNode()->setProperty('token', 'INDEX')
+                                                        ->setProperty('code', 'Index for INDEX')
+                                                        ->setProperty('index', 'true')
+                                                        ->save(),
 
         // @doc delete old tokens
         // This index should be only created once. It will hold all the index for files.
-        $regexIndex['FILE'] = $this->client->makeNode()->setProperty('token', 'FILE')
-                                                 ->setProperty('code', 'Index for FILE')
-                                                 ->setProperty('index', 'true')
-                                                 ->save();
+                    'FILE' => $this->client->makeNode()->setProperty('token', 'FILE')
+                                                       ->setProperty('code', 'Index for FILE')
+                                                       ->setProperty('index', 'true')
+                                                       ->save());
         $regexIndex['INDEX']->relateTo($regexIndex['FILE'], 'INDEXED');
     
         $regexIndex['CLASS'] = $this->client->makeNode()->setProperty('token', 'CLASS')
@@ -197,9 +197,9 @@ class Load extends Tasks {
 
         foreach($regex as $r) {
             $regexIndex[$r] = $this->client->makeNode()->setProperty('token', $r)
-                                                 ->setProperty('code', 'Index for '.$r)
-                                                 ->setProperty('index', 'true')
-                                                 ->save();
+                                                       ->setProperty('code', 'Index for '.$r)
+                                                       ->setProperty('index', 'true')
+                                                       ->save();
             $regexIndex['INDEX']->relateTo($regexIndex[$r], 'INDEXED');
         }
 
@@ -266,7 +266,7 @@ class Load extends Tasks {
         $block_level = 0;
         $regex = \Tokenizer\Token::getTokenizers();
     
-        for($id = 0; $id < $nb; $id++) {
+        for($id = 0; $id < $nb; ++$id) {
             if (empty($tokens[$id])) { continue; }
             ++$Tid;
             $token = $tokens[$id];

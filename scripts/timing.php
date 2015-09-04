@@ -83,7 +83,7 @@ foreach($files as $id => $file) {
     }
     
     fputcsv($fp, $res);
-    $total++;
+    ++$total;
 }
 
 print "Did $total files\n";

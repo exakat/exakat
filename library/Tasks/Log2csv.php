@@ -38,11 +38,11 @@ class Log2csv extends Tasks {
         $total_time = 0;
         while($row = fgets($in, 1000)) {
             if (preg_match("/Tokenizer\\\\(.*?)	(\d+\.\d+)	(\d+)/", $row, $r)) {
-                $total++;
+                ++$total;
                 if (isset($result[$r[1]])) {
                     $result[$r[1]]['Time'] += $r[2];
                     $total_time += $r[2];
-                    $result[$r[1]]['Times']++;
+                    ++$result[$r[1]]['Times'];
             
                     $matrix[$r[1]][] = $r[2];
                     $matrix2[$r[1]][] = $r[3];
@@ -77,13 +77,13 @@ class Log2csv extends Tasks {
             $max = max($max, count($matrix[$t]));
         }
 
-        for($i = 0; $i < $max; $i++) {
+        for($i = 0; $i < $max; ++$i) {
             $row = array($i, 0);
             $count = 0;
     
             foreach($titles as $t) {
                 $row[] = isset($matrix[$t][$i]) ? str_replace('.', ',', $matrix[$t][$i]) : 0;
-                isset($matrix[$t][$i]) ? $count++ : 0;
+                isset($matrix[$t][$i]) ? ++$count : 0;
             }
             $row[1] = $count;
             fputcsv($out, $row);
@@ -99,13 +99,13 @@ class Log2csv extends Tasks {
             $max = max($max, count($matrix2[$t]));
         }
 
-        for($i = 0; $i < $max; $i++) {
+        for($i = 0; $i < $max; ++$i) {
             $row = array($i, 0);
             $count = 0;
     
             foreach($titles as $t) {
                 $row[] = isset($matrix2[$t][$i]) ? str_replace('.', ',', $matrix2[$t][$i]) : 0;
-                isset($matrix2[$t][$i]) ? $count++ : 0;
+                isset($matrix2[$t][$i]) ? ++$count : 0;
             }
             $row[1] = $count;
 

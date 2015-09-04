@@ -165,17 +165,17 @@ class Phploc extends Tasks {
                     
                 } else {
                     if (isset($lines[$line])) {
-                        $lines[$line]++;
+                        ++$lines[$line];
                     } else {
                         $lines[$line] = 1;
                     }
-                    $return['tokens']++;
+                    ++$return['tokens'];
                 }
             } else {
-                $return['tokens']++;
+                ++$return['tokens'];
                 if (!in_array($token, array('{', '}'))) {
                     if (isset($lines[$line])) {
-                        $lines[$line]++;
+                        ++$lines[$line];
                     } else {
                         $lines[$line] = 1;
                     }
@@ -187,10 +187,10 @@ class Phploc extends Tasks {
             print "Unset token in ". $filename."\n";
         }
         if (is_array($token) && ($tokenName == 'T_CLOSE_TAG')) {
-            $lines[$line]--;
+            --$lines[$line];
             if ($lines[$line] == 0) {
                 unset($lines[$line]);
-                $line--;
+                --$line;
             }
         }
         

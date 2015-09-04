@@ -65,7 +65,7 @@ foreach($tokens as $t) {
                 if (isset($lnumberValues[$t[1]])) {
                     $t[1] = $lnumberValues[$t[1]];
                 } else {
-                    $lnumberValues[$t[1]] = $lnumber++;
+                    $lnumberValues[$t[1]] = ++$lnumber;
                     $t[1] = $lnumberValues[$t[1]];
                 }
                 break;
@@ -73,7 +73,7 @@ foreach($tokens as $t) {
                 if (isset($dnumberValues[$t[1]])) {
                     $t[1] = floor(rand(0, 100000) ) / 100;
                 } else {
-                    $dnumberValues[$t[1]] = $dnumber++;
+                    $dnumberValues[$t[1]] = ++$dnumber;
                     $t[1] = floor(rand(0, 100000) ) / 100;
                 }
                 break;
@@ -82,16 +82,16 @@ foreach($tokens as $t) {
                     if (isset($variableNames[$t[1]])) {
                         $t[1] = $variableNames[$t[1]];
                     } else {
-                        $variableNames[$t[1]] = '$'.$variables++;
+                        $variableNames[$t[1]] = '$'.++$variables;
                         $t[1] = $variableNames[$t[1]];
                     }
                 }
                 break;
             case T_CONSTANT_ENCAPSED_STRING:
-                $strings++;
+                ++$strings;
                 if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { 
                     echo 'Skip T_CONSTANT_ENCAPSED_STRING : ', $strings, "\n"; 
-                    $strings++; 
+                    ++$strings; 
                 }
                 if (isset($stringsNames[$t[1]])) {
                     $t[1] = $stringsNames[$t[1]];
@@ -105,10 +105,10 @@ foreach($tokens as $t) {
                 if (strtolower($t[1]) == 'null') { break ; }
                 // otherwise, fall through!
             case T_ENCAPSED_AND_WHITESPACE :
-                $strings++;
+                ++$strings;
                 if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { 
                     echo 'Skip T_ENCAPSED_AND_WHITESPACE : ', $strings, "\n"; 
-                    $strings++; 
+                    ++$strings; 
                 }
                 if (isset($stringsNames[$t[1]])) {
                     $t[1] = $stringsNames[$t[1]];
@@ -123,7 +123,7 @@ foreach($tokens as $t) {
                 break;
 
             case T_INLINE_HTML : 
-                $strings++;
+                ++$strings;
                 if (isset($stringsNames[$t[1]])) {
                     $t[1] = $stringsNames[$t[1]];
                 } else {
@@ -133,7 +133,7 @@ foreach($tokens as $t) {
                 break;
 
             case T_START_HEREDOC:
-                $strings++;
+                ++$strings;
                 $short = substr($t[1], 3);
 
                 if (!isset($stringsNames[$short])) {

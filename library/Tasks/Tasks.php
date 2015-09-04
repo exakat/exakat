@@ -30,7 +30,7 @@ abstract class Tasks {
         // Config is the general one.
         $config = \Config::factory();
         
-        $task = (new \ReflectionClass($this))->getShortName();
+        $task = strtolower((new \ReflectionClass($this))->getShortName());
         if (!in_array($task, array('doctor', 'version', 'errors'))) {
             $this->log = new \Log($task,
                                   $config->projects_root.'/projects/'.$config->project);

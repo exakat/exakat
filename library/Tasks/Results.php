@@ -65,13 +65,12 @@ GREMLIN;
 
             $return = array();
             foreach($vertices as $k => $v) {
-                $row = array();
-                $row[] = $v->Fullcode;
-                $row[] = $v->File;
-                $row[] = $v->Line;
-                $row[] = $v->Namespace;
-                $row[] = $v->Class;
-                $row[] = $v->Function;
+                $row = array($v->Fullcode,
+                             $v->File,
+                             $v->Line,
+                             $v->Namespace,
+                             $v->Class,
+                             $v->Function);
                 $return[] = $row;
             }
         } elseif ($config->style == 'DISTINCT') {

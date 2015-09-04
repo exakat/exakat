@@ -77,7 +77,7 @@ DELETE n,r';
         // checking that the server has indeed restarted
         $round = 0;
         do {
-            $round++;
+            ++$round;
             if ($round > 0) {
                 sleep($round);
             }

@@ -141,8 +141,7 @@ class Export extends Tasks {
         $r = '<table>';
 
         foreach($V as $id => $v) {
-            $row = array();
-            $row[] = highlight_string($v['code'], true);
+            $row = array(highlight_string($v['code'], true));
             if (isset($v['atom'])) {
                 $row[] = $v['atom'];
             } else {
@@ -163,7 +162,6 @@ class Export extends Tasks {
             } else {
                 $row[] = '';
             }
-    
 
             $row = '<td>'.join('</td><td>', $row).'</td>';
             $r .= "<tr>$row</tr>\n";

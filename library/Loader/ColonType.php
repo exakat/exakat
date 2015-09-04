@@ -78,9 +78,9 @@ class ColonType {
             }
             
             if ($token == '(') {
-                $this->parenthesisLevel++;
+                ++$this->parenthesisLevel;
             } elseif ($token == ')') {
-                $this->parenthesisLevel--;
+                --$this->parenthesisLevel;
                 if (isset($this->parenthesisStack[$this->parenthesisLevel])) {
                     $this->checkNext = true;
                     unset($this->parenthesisStack[$this->parenthesisLevel]);

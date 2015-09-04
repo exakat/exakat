@@ -244,7 +244,7 @@ CYPHER;
             }
         }
         static::$links = array();
-        static::$file_saved++;
+        ++static::$file_saved;
     }
     
     public function makeNode() {
@@ -283,7 +283,7 @@ CYPHER;
     
     public function save() {
         if (empty($this->id)) {
-            static::$count++;
+            ++static::$count;
             $this->id = static::$count;
             static::$nodes[$this->id] = &$this->node;
         } else {

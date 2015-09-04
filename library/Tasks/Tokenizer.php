@@ -82,7 +82,7 @@ class Tokenizer extends Tasks {
         $this->log->log('Finished counting Token');
 
         $prev = array();
-        for($i = 0; $i < self::EXTRA_ROUNDS + 1; $i++) {
+        for($i = 0; $i < self::EXTRA_ROUNDS + 1; ++$i) {
             $prev[$i] = $count + $i;
         }
         $round = 0;
@@ -96,7 +96,7 @@ class Tokenizer extends Tasks {
 
         while($this->check_prev($prev, self::EXTRA_ROUNDS)) {
             $rbegin = microtime(true);
-            $round++;
+            ++$round;
             $this->log->log("round $round)");
             \Tokenizer\TokenAuto::$round = $round;
     
@@ -185,7 +185,7 @@ class Tokenizer extends Tasks {
 
     private function check_prev($prev, $extra_rounds) {
         $b = false;
-        for($i = 0; $i < $extra_rounds; $i++) {
+        for($i = 0; $i < $extra_rounds; ++$i) {
             $b = $b || ($prev[$i + 1] > $prev[$i]);
         }
         return $b;
