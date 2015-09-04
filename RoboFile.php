@@ -319,8 +319,10 @@ LICENCE;
     public function checkDirective() {
         $code = file_get_contents('./library/Report/Content/Directives.php');
         preg_match('#\$directives = array\((.*?)\);#is', $code, $r);
-        // easy quick code but shouldn't be there...
-        eval($r[0]);
+
+        include('./library/Report/Content.php');
+        include('./library/Report/Content/Directives.php');
+        $directives = \Report\Content\Directives::$directives;
         
         $counts = array_count_values($directives);
         $diff = array_filter($counts, function($a, $b) { return $a > 1;}, ARRAY_FILTER_USE_BOTH);

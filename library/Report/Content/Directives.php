@@ -25,30 +25,28 @@ namespace Report\Content;
 
 class Directives extends \Report\Content {
     protected $name = 'Directives';
-    
+
+    // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
+    public static $directives = array('Standard', 'Bcmath', 'Date', 'Filesystem', 
+                                      'FileUpload', 'Mail', 'Ob', 
+                                      // standard extensions
+                                      'Amqp', 'Apache', 'Assertion', 'Curl', 'Dba',
+                                      'Filter', 'Image', 'Intl', 'Ldap',
+                                      'Mbstring', 
+                                      'Opcache', 'Pcre', 'Pdo', 'Pgsql',
+                                      'Session', 'Sqlite', 'Sqlite3', 
+                                      // pecl extensions
+                                      'Com',
+                                      'Geoip', 'Ibase', 
+                                      'Imagick', 'Mailparse', 'Mongo', 
+                                      'Trader', 'Wincache', 'Xcache'
+                                       );
     public function collect() {
 
         ///////////////////////////////////////////////////////////////
         // extensions configurations
         ///////////////////////////////////////////////////////////////
-
-        // @todo automate this : Each string must be found in Report/Content/Directives/*.php
-        $directives = array('Standard', 'Bcmath', 'Date', 'Filesystem', 
-                            'FileUpload', 'Mail', 'Ob', 
-                            // standard extensions
-                            'Amqp', 'Apache', 'Assertion', 'Curl', 'Dba',
-                            'Filter', 'Image', 'Intl', 'Ldap',
-                            'Mbstring', 
-                            'Opcache', 'Pcre', 'Pdo', 'Pgsql',
-                            'Session', 'Sqlite', 'Sqlite3', 
-                            // pecl extensions
-                            'Com',
-                            'Geoip', 'Ibase', 
-                            'Imagick', 'Mailparse', 'Mongo', 
-                            'Trader', 'Wincache', 'Xcache'
-                             );
-        
-        foreach($directives as $directive) {
+        foreach(self::$directives as $directive) {
             $classname = "\\Report\\Content\\Directives\\$directive";
             $ext = new $classname(null);
             if ($ext->hasDirective()) {
