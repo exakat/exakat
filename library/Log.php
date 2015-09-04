@@ -22,33 +22,43 @@
 
 
 class Log {
-    private $name = null;
-    private $log = null;
+    private $name  = null;
+    private $log   = null;
     private $begin = 0;
+    private $first = '';
     
     public function __construct($name = null, $dir = '.') {
         $this->name = $name;
 
         $this->log = fopen($dir.'/log/'.$this->name.'.log', 'w+');
-        $this->log($this->name.' created on '.date('r'));
+        if (!$this->log) {
+            display('Couldn\'t create log in '.$dir.'/log/');
+            $this->log = null;
+        }
 
+        $this->first = $this->name.' created on '.date('r');
         $this->begin = microtime(true);
     }
 
     public function __destruct() {
+        if ($this->log === null) { return true; }
+
         $this->log('Duration : '.number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
         $this->log($this->name.' closed on '.date('r'));
         
         if ($this->log !== null) {
             fclose($this->log);
             unset($this->log);
-        } else {
-            print 'Log already destroyed.';
-        }
+        } 
     }
     
     public function log($message) {
         if ($this->log === null) { return true; }
+
+        if ($this->first !== null) { 
+            fwrite($this->log, $this->first."\n");
+            $this->first = null;
+        }
         
         fwrite($this->log, $message."\n");
     }
