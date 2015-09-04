@@ -32,7 +32,6 @@ class Counts extends \Report\Content {
                         'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
                         );
 
-        $total = 0;
         foreach($themes as $theme) {
             if (null !== $datastore->getHash($theme)) {
                 $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($theme);
@@ -44,7 +43,6 @@ class Counts extends \Report\Content {
 
                     $count = $analyzer->getResultsCount();
                     $this->array[] = array($analyzer->getDescription()->getName(), $count);
-                    $total += $count;
                 }
             }
         } 

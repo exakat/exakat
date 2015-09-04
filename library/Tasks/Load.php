@@ -40,13 +40,8 @@ class Load extends Tasks {
 
         if ($filename = $this->config->filename) {
             $nbTokens = $this->process_file($filename);
-            $nbFiles = 1;
-
         } elseif ($dirName = $this->config->dirname) {
             $res = $this->process_dir($dirName);
-            $nbFiles = $res['files'];
-            $nbTokens = $res['tokens'];
-    
         } else {
             die('No file to process. Aborting');
         }

@@ -159,7 +159,7 @@ GREMLIN;
                 $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '{$config->phpversion}');
 GREMLIN;
-                gremin_query($query);
+                gremlin_query($query);
 
                 display( "$analyzer_class is not compatible with PHP configuration of this version. Ignoring\n");
             } else {
