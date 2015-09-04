@@ -109,7 +109,9 @@ class Doctor extends Tasks {
                     $stats['neo4j']['password'] = 'Login is set, but not password. Please, set it in config/config.ini';
                 }
                 $res = gremlin_query('"Hello world"');
-                if (isset($res->success) && $res->success === true) {
+                if ($res === null) {
+                    $stats['neo4j']['credentials'] = 'Server is not running.';
+                } elseif (isset($res->success) && $res->success === true) {
                     $stats['neo4j']['credentials'] = 'OK.';
                 } else {
                     $stats['neo4j']['credentials'] = 'Login or password are wrong (message : '.$res->errors[0]->message.')';
@@ -232,9 +234,10 @@ INI;
         }
         $stats['folders']['in'] = file_exists($config->projects_root.'/in/') ? 'Yes' : 'No';
         $stats['folders']['out'] = file_exists($config->projects_root.'/out/') ? 'Yes' : 'No';
-        $stats['folders']['test'] = file_exists($config->projects_root.'/projects/test/') ? 'Yes' : 'No';
-        $stats['folders']['default'] = file_exists($config->projects_root.'/projects/default/') ? 'Yes' : 'No';
-        $stats['folders']['onepage'] = file_exists($config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
+        $stats['folders']['progress'] = file_exists($config->projects_root.'/progress/') ? 'Yes' : 'No';
+        $stats['folders']['projects/test'] = file_exists($config->projects_root.'/projects/test/') ? 'Yes' : 'No';
+        $stats['folders']['projects/default'] = file_exists($config->projects_root.'/projects/default/') ? 'Yes' : 'No';
+        $stats['folders']['projects/onepage'] = file_exists($config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
 
         return $stats;
     }
