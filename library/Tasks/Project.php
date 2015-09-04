@@ -209,7 +209,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
 
         display("Reported project\n");
 
-        shell_exec('php '.$config->executable.' stat > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
+        shell_exec('php '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         display("Stats 2\n");
         
         $audit_end = time();
