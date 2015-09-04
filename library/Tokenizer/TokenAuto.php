@@ -663,8 +663,7 @@ b$d.bothE('NEXT').each{ g.removeEdge(it); }
                     }
 
                 // Destination == 0
-                } else {
-                    if ($label == 'DROP') {
+                } elseif ($label == 'DROP') {
                         $qactions[] = "
 /* transform drop in (0) */
 a = it.in('NEXT').next();
@@ -677,9 +676,8 @@ g.removeVertex(it);
 g.addEdge(a, b, 'NEXT');
 ";
                         $this->setAtom = false;
-                    } else {
-                        die("Destination 0 for transform\n");
-                    }
+                } else {
+                    die("Destination 0 for transform\n");
                 }
             }
 

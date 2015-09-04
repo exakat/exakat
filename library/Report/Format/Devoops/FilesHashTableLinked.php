@@ -68,7 +68,7 @@ HTML;
                 $k = $this->makeLink($v['file']);
                 $analyzers = array_map(function($title, $count) {
                     return $this->makeLink($title).' ('.$count.')';
-                }, array_keys($v['result']), array_merge($v['result']));
+                }, array_keys($v['result']), array_values($v['result']));
                 $v['analyzers'] = count($analyzers);
                 $v['total'] = array_sum($v['result']);
                 $v['result'] = $this->makeList($analyzers);

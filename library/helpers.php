@@ -147,11 +147,11 @@ function gremlin_queryA($query, $params = [], $load = '') {
     }
     
     if (strlen($getString) > 20000) {
-        print "Query string too big for GET (".strlen($getString).")\n";
-        print "Query : ";
-        print($query);
-        print "\n\n";
-        print_r($params);
+        echo "Query string too big for GET (", strlen($getString), ")\n",
+             "Query : ",
+             $query,
+            "\n\n",
+            print_r($params, true);
         die();
     }
 

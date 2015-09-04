@@ -32,10 +32,10 @@ class Horizontal extends \Report\Template {
         } elseif ($this->data instanceof \Report\Content) {
             $renderer->setAnalyzer($this->data->getFilename());
         } else {
-            print __METHOD__;
-            "Horizontal don't know what kind of description is needed\n";
-            var_dump(get_class($this->data));
-            var_dump($this->data instanceof \Analyzer\Analyzer);
+            echo __METHOD__,
+                "Horizontal don't know what kind of description is needed\n",
+                print_r(get_class($this->data), true),
+                print_r($this->data instanceof \Analyzer\Analyzer, true);
             die();
         }
         $renderer->setCss($this->css);

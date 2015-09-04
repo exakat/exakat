@@ -44,12 +44,10 @@ class Json extends \Report\Format {
     public function push($key, $value) {
         if ($value == 'Rule') {
             $this->rule = $key;
+        } elseif (!isset($this->output[$this->rule])) {
+            $this->output[$this->rule] = array($key => $value);
         } else {
-            if (!isset($this->output[$this->rule])) {
-                $this->output[$this->rule] = array($key => $value);
-            } else {
-                $this->output[$this->rule][$key] = $value;
-            }
+            $this->output[$this->rule][$key] = $value;
         }
     }
     

@@ -105,10 +105,8 @@ class Doctor extends Tasks {
                 $stats['neo4j']['authentication'] = 'Enabled.';
                 if (empty($config->neo4j_login)) {
                     $stats['neo4j']['login'] = 'Login is not set, but authentication is. Please, set login in config/config.ini';
-                } else {
-                    if (empty($config->neo4j_password)) {
-                        $stats['neo4j']['password'] = 'Login is set, but not password. Please, set it in config/config.ini';
-                    }
+                } elseif (empty($config->neo4j_password)) {
+                    $stats['neo4j']['password'] = 'Login is set, but not password. Please, set it in config/config.ini';
                 }
                 $res = gremlin_query('"Hello world"');
                 if (isset($res->success) && $res->success === true) {

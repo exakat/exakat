@@ -74,23 +74,21 @@ if (empty($res)) {
         print "\n\n";
     
     }
+} elseif (preg_match_all('/INIT_CLASS_ENTRY\([a-z_]+, "([a-zA-Z0-9_]+)"/is', $res, $classes)) {
+    $classes = $classes[1];
+    print count($classes)." classes\n  "; 
+    print implode("\n  ", $classes);
+    print "\n\n";
+} elseif (preg_match_all('/INIT_CLASS_ENTRY\([a-z_]+,\s*([a-zA-Z0-9_]+)/is', $res, $classesDefine)) {
+    $classesDefine = $classesDefine[1];
+    $res = shell_exec('grep -r "('.implode('\\|', $classesDefine).')" '.substr($version, 0, -4));
+    preg_match_all("/(".implode('|', $classesDefine).") \"([a-zA-Z0-9_]+)\"/is", $res, $classes);
+    $classes = $classes[2];
+    print count($classes)." classes\n  ";
+    print implode("\n  ", $classes);
+    print "\n\n";
 } else {
-    if (preg_match_all('/INIT_CLASS_ENTRY\([a-z_]+, "([a-zA-Z0-9_]+)"/is', $res, $classes)) {
-        $classes = $classes[1];
-        print count($classes)." classes\n  "; 
-        print implode("\n  ", $classes);
-        print "\n\n";
-    } elseif (preg_match_all('/INIT_CLASS_ENTRY\([a-z_]+,\s*([a-zA-Z0-9_]+)/is', $res, $classesDefine)) {
-        $classesDefine = $classesDefine[1];
-        $res = shell_exec('grep -r "('.implode('\\|', $classesDefine).')" '.substr($version, 0, -4));
-        preg_match_all("/(".implode('|', $classesDefine).") \"([a-zA-Z0-9_]+)\"/is", $res, $classes);
-        $classes = $classes[2];
-        print count($classes)." classes\n  ";
-        print implode("\n  ", $classes);
-        print "\n\n";
-    } else {
-        print "Nothing found, but having res : $res\n";
-    }
+    print "Nothing found, but having res : $res\n";
 }
 
 // constants
