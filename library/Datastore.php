@@ -77,11 +77,15 @@ class Datastore {
         try {
             $query = "SELECT * FROM $table";
             $res = $this->sqlite->query($query);
-            $return = array();
         } catch (\Exception $e) {
             return array();
         }
         
+        if (!$res) {
+            return array();
+        }        
+        $return = array();
+
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $return[] = $row;
         }
@@ -94,6 +98,10 @@ class Datastore {
 
         $query = "SELECT $col FROM $table";
         $res = $this->sqlite->query($query);
+
+        if (!$res) {
+            return array();
+        }
         $return = array();
         
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
@@ -110,7 +118,7 @@ class Datastore {
         $res = $stmt->execute();
 
         if (!$res) { 
-            return null;
+            return array();
         } else {
             $row = $res->fetchArray(SQLITE3_ASSOC);
             return $row['value'];
