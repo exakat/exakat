@@ -37,7 +37,8 @@ Install Java(TM) JDK 1.8. Neo4j recommends using Java 1.7, but is currently repo
 
 * Go to [Java Se Download] (http://www.oracle.com/technetwork/java/javase/downloads/index.html) and follow the instructions
 * Check with `java -version`
-* `export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home'` (Note that 1.8.0_60 may differ on your installation)
+* `echo $JAVA_HOME` (Should be set to the path of Java 1.8)
+* `export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home'` (Note that 1.8.0_60 may differ on your installation. Check the path)
 
 ### Neo4j
 
@@ -46,12 +47,16 @@ As of today (august 2015), version 2.2.4 have been tested successfully. Versions
 
 `curl -O http://neo4j.com/artifact.php?name=neo4j-community-2.2.4-unix.tar.gz 
 tar -xf artifact.php\?name=neo4j-community-2.2.4-unix.tar.gz
-tar -xf artifact.php\?name=neo4j-community-2.2.4-unix.tar.gz
 mv neo4j-community-2.2.4 neo4j
 cd neo4j
 ./bin/neo4j start
 ./bin/neo4j stop
-cd ..`
+cd ..
+
+//This will set the environnement variable
+
+export NEO4J_HOME=\`pwd\`
+`
 
 Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` file. To do so, add this line:
 
