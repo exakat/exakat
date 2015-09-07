@@ -1408,7 +1408,7 @@ Object Calisthenics
 [X] Don't Use The ELSE Keyword
 [Y] Wrap All Primitives And Strings
 [ ] First Class Collections
-[ ] One Dot Per Line
+[X] One Dot Per Line
 [Y] Don't Abbreviate
 [ ] Keep All Entities Small
 [ ] No Classes With More Than Two Instance Variables
@@ -1422,3 +1422,29 @@ Also, what about PPP (constants have none, but they won't change)
 Spot repeats in if/elseif
 Suggest long if/elseif into switch structure
 
+trim spaces in strings (fopen('a/b/c.txt '); (here, extra space in literal)
+
+Mention where some analyzers are used (ext/apc is used for Compatibility 70, etc.). The reverse tree.
+
+Dans fullcode, toujours utiliser /* 2 */ et le nombre d'instructions dans le block pour être plus clair.
+
+This is static loop (should be pre-processed).
+        for ($c = 'a'; $c <= 'z'; $c++) { $b .= $c; }
+
+Spot child-classes that share the same function, and suggest migrating it to the parent
+
+strpbrk : this is a substring + strpos at the same time.
+array_column (instead of a foreach/for loop)
+
+Besoin de mettre une référence poru modifier l'objet? 
+Faut-il filtrer ce type de structures? (out)
+                $attr[$def_i]->required = ($required || $attr[$def_i]->required);
+
+array_slice vs array_pop
+            array_pop($result); // removes \n\n
+            array_pop($result); // removes </p>
+
+Blind will overwrite a variable
+$b = 2;    foreach($a as $b) {
+
+Finish IsComposerNsname (static, new...)
