@@ -23,7 +23,7 @@
 
 namespace Tasks;
 
-class findExternalLibraries extends Tasks {
+class FindExternalLibraries extends Tasks {
     const WHOLE_DIR   = 1;
     const FILE_ONLY   = 2;
     const PARENT_DIR  = 3; // Whole_dir and parent.
