@@ -33,7 +33,7 @@ class DoubleInstruction extends Analyzer\Analyzer {
              ->savePropertyAs('fullcode', 'code')
              ->_as('result')
              ->nextSibling()
-             ->samePropertyAs('fullcode', 'code')
+             ->samePropertyAs('fullcode', 'code', true)
              ->back('result');
         $this->prepareQuery();
     }
