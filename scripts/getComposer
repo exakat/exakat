@@ -158,7 +158,7 @@ $res = $sqlite->query("SELECT count(*) AS nb FROM traits");
 print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
 
 // print "Optimize database\n";
-//$sqlite->query("VACUUM");
+shell_exec('sqlite3 my.db "VACUUM;"');
 
 $tmpdirs = opendir(sys_get_temp_dir());
 
