@@ -74,7 +74,7 @@ class FindExternalLibraries extends Tasks {
         $configFile = $config->projects_root.'/projects/'.$project.'/config.ini';
         $ini = parse_ini_file($configFile);
         
-        if ($config->update && isset($ini['findExternalLibraries'])) {
+        if ($config->update && isset($ini['FindExternalLibraries'])) {
             display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the file.');
             return true; //Cancel task
         }
@@ -92,7 +92,7 @@ class FindExternalLibraries extends Tasks {
              $ini = file_get_contents($configFile);
              $ini = preg_replace("#(ignore_dirs\[\] = \/.*?\n)\n#is", '$1'."\n".';Ignoring external libraries'."\n".'ignore_dirs[] = '.join("\n".'ignore_dirs[] = ', $newConfigs)."\n;Ignoring external libraries\n\n", $ini);
 
-             $ini .= "\nfindExternalLibraries = 1\n";
+             $ini .= "\nFindExternalLibraries = 1\n";
 
              file_put_contents($configFile, $ini);
         } else {
