@@ -30,7 +30,8 @@ class Log {
     public function __construct($name = null, $dir = '.') {
         $this->name = $name;
 
-        if (!file_exists($dir.'/log/'.$this->name.'.log')) { return ; }
+        if (!file_exists($dir.'/log/')) { return ; }
+        if (!is_dir($dir.'/log/')) { return ; }
         $this->log = fopen($dir.'/log/'.$this->name.'.log', 'w+');
         if (!$this->log) {
             display('Couldn\'t create log in '.$dir.'/log/');
