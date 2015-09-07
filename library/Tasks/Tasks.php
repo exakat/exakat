@@ -24,14 +24,15 @@
 namespace Tasks;
 
 abstract class Tasks {
-    protected $log    = null;
+    protected $log        = null;
+    protected $enabledLog = true;
     
     public function __construct() {
         // Config is the general one.
         $config = \Config::factory();
         
-        $task = strtolower((new \ReflectionClass($this))->getShortName());
-        if (!in_array($task, array('doctor', 'version', 'errors'))) {
+        if ($this->enabledLog) {
+            $task = strtolower((new \ReflectionClass($this))->getShortName());
             $this->log = new \Log($task,
                                   $config->projects_root.'/projects/'.$config->project);
         }

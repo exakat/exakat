@@ -24,8 +24,12 @@
 namespace Tasks;
 
 class CleanDb extends Tasks {
-    private $client = null;
     private $config = null;
+
+    public function __construct() {
+        $this->enabledLog = false;
+        parent::__construct();
+    }
     
     public function run(\Config $config) {
         $this->config = $config;

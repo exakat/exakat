@@ -24,6 +24,11 @@
 namespace Tasks;
 
 class Errors extends Tasks {
+    public function __construct() {
+        $this->enabledLog = false;
+        parent::__construct();
+    }
+
     public function run(\Config $config) {
 
         $stats = array(

@@ -25,7 +25,8 @@ namespace Tasks;
 
 class Clean extends Tasks {
     public function __construct() {
-        // This is here to short-circuit the normal __construct
+        $this->enabledLog = false;
+        parent::__construct();
     }
 
     public function run(\Config $config) {

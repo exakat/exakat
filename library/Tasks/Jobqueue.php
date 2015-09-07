@@ -24,7 +24,6 @@
 namespace Tasks;
 
 class Jobqueue extends Tasks {
-    private $log = null;
     private $config = null;
     
     public function __destruct() {
@@ -37,8 +36,7 @@ class Jobqueue extends Tasks {
     public function run(\Config $config) {
         $this->config = $config;
         
-        $this->log = fopen($config->projects_root.'/log/jobqueue.log', 'a');
-        fwrite($this->log, 'Started jobQueue : '.time()."\n");
+        $this->log->log('Started jobQueue : '.time()."\n");
 
         $queue = array();
         
@@ -86,16 +84,16 @@ class Jobqueue extends Tasks {
             if($job) {
                 switch($job) {
                     case 'quit' :
-                        print "Received quit command. Bye\n";
-                        fwrite($this->log, 'Quit jobQueue : '.time()."\n");
+                        display( "Received quit command. Bye\n");
+                        $this->log->log('Quit jobQueue : '.time()."\n");
                         die();
 
                     default:
                         if (file_exists($this->config->projects_root.'/in/'.$job.'.php')) {
-                            print 'processing onepage job ' . $job . PHP_EOL;
+                            display( 'processing onepage job ' . $job . PHP_EOL);
                             $this->process($job);
                         } else {
-                            print 'processing project ' . $job . PHP_EOL;
+                            display( 'processing project ' . $job . PHP_EOL);
                             $this->processProject($job);
                         }
                 }
@@ -103,18 +101,18 @@ class Jobqueue extends Tasks {
                 next($queue);
                 unset($job,$queue[$jobkey]);
             } else {
-                print 'no jobs to do - waiting...'. PHP_EOL;
+                display( 'no jobs to do - waiting...'. PHP_EOL);
                 stream_set_blocking($pipe,true);
             }
         }
     }
 
     private function process($job) {
-        fwrite($this->log, 'Started : ' . $job.' '.time()."\n");
+        $this->log->log('Started : ' . $job.' '.time()."\n");
 
         // This has already been processed
         if (file_exists($this->config->projects_root.'/out/'.$job.'.json')) {
-            print "$job already exists\n";
+            display( "$job already exists\n");
             return;
         }
 
@@ -127,7 +125,7 @@ class Jobqueue extends Tasks {
         $progress->end = time();
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
 
-        fwrite($this->log, 'Finished : ' . $job.' '.time()."\n");
+        $this->log->log('Finished : ' . $job.' '.time()."\n");
 
         shell_exec('php '.$this->config->executable.' cleandb');
 
@@ -135,11 +133,11 @@ class Jobqueue extends Tasks {
     }
 
     private function processProject($job) {
-        fwrite($this->log, 'Started Project : ' . $job.' '.time()."\n");
+        $this->log->log('Started Project : ' . $job.' '.time()."\n");
 
         // This has already been processed
         if (file_exists($this->config->projects_root.'/projects/'.$job.'/report')) {
-            print "$job has already a report (/projects/$job/report). Remove it first. Aborting\n";
+            display( "$job has already a report (/projects/$job/report). Remove it first. Aborting\n");
             return;
         }
 
@@ -151,7 +149,7 @@ class Jobqueue extends Tasks {
         $progress->end = time();
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
 
-        fwrite($this->log, 'Finished Project : ' . $job.' '.time()."\n");
+        $this->log->log('Finished Project : ' . $job.' '.time()."\n");
 
         shell_exec('php '.$this->config->executable.' cleandb');
 
