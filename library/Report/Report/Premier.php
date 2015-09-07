@@ -298,6 +298,17 @@ TEXT
 );
         $this->addContent('Directives', 'Directives');
 
+        $composerList = new \Report\Content\ComposerList();
+        $composerList->collect();
+        if ($composerList->hasResults()) {
+            $this->createLevel2('Composer');
+            $this->addContent('Text', <<<TEXT
+This is the list of the classes, interfaces or traits used in the application. 
+TEXT
+);
+            $this->addContent('Horizontal', $composerList, 'composer');
+        }
+        
         $this->createLevel1('Stats');
         $this->addContent('Text', <<<TEXT
 These are various stats of different structures in your application.

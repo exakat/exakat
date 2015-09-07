@@ -29,6 +29,10 @@ class Horizontal extends \Report\Template {
         
         if ($this->data instanceof \Analyzer\Analyzer) {
             $renderer->setAnalyzer($this->data->getDescription()->getName());
+        } elseif ($this->data instanceof \Report\Content\ComposerList) {
+            $renderer->setAnalyzer('Composer');
+        } elseif ($this->data instanceof \Report\Content\Compilations) {
+            $renderer->setAnalyzer('Compilations');
         } elseif ($this->data instanceof \Report\Content) {
             $renderer->setAnalyzer($this->data->getFilename());
         } else {
