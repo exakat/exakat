@@ -28,14 +28,14 @@ use Analyzer;
 class UndefinedClasses extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Classes\\IsVendor');
+                     'Analyzer\\Composer\\IsComposerNsname');
     }
     
     public function analyze() {
         // in a New
         $this->atomIs('New')
              ->outIs('NEW')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
@@ -45,7 +45,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a class::Method()
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
@@ -58,7 +58,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a parent::Method()
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->code('parent')
@@ -68,7 +68,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a class::$property
         $this->atomIs('Staticproperty')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
@@ -90,7 +90,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a class::constante
         $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
@@ -103,7 +103,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a parent::constante
         $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->code('parent')
@@ -113,7 +113,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a class::instanceof
         $this->atomIs('Instanceof')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))

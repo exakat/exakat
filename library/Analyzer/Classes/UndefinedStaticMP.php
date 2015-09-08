@@ -28,7 +28,7 @@ use Analyzer;
 class UndefinedStaticMP extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Analyzer\\Classes\\DefinedStaticMP',
-                     'Analyzer\\Classes\\IsVendor');
+                     'Analyzer\\Composer\\IsComposerNsname');
     }
     
     public function analyze() {
@@ -37,7 +37,7 @@ class UndefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('self', 'static'))
              ->back('first')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->analyzerIsNot('Analyzer\\Classes\\DefinedStaticMP');
         $this->prepareQuery();
 
@@ -46,7 +46,7 @@ class UndefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('self', 'static'))
              ->back('first')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->analyzerIsNot('Analyzer\\Classes\\DefinedStaticMP');
         $this->prepareQuery();
     }

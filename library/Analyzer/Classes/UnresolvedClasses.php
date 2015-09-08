@@ -28,7 +28,7 @@ use Analyzer;
 class UnresolvedClasses extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Classes\\IsVendor',);
+                     'Analyzer\\Composer\\IsComposerNsname',);
     }
 
     public function analyze() {
@@ -39,7 +39,7 @@ class UnresolvedClasses extends Analyzer\Analyzer {
              ->outIs('NEW')
              ->noClassDefinition()
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->fullnspathIsNot($classes);
         $this->prepareQuery();
 
@@ -47,7 +47,7 @@ class UnresolvedClasses extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->noClassDefinition()
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->fullnspathIsNot($classes);
         $this->prepareQuery();
         

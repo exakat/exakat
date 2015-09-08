@@ -28,7 +28,7 @@ use Analyzer;
 class DefinedConstants extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Classes\\IsVendor',
+                     'Analyzer\\Composer\\IsComposerNsname',
                      'Analyzer\\Interfaces\\IsExtInterface');
     }
     
@@ -64,7 +64,7 @@ class DefinedConstants extends Analyzer\Analyzer {
 
         // constants defined in a class of an vendor library
         $this->atomIs('Staticconstant')
-             ->analyzerIs('Analyzer\\Classes\\IsVendor')
+             ->analyzerIs('Analyzer\\Composer\\IsComposerNsname')
              ->back('first');
         $this->prepareQuery();
 

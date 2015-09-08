@@ -29,6 +29,9 @@ class IsComposerNsname extends Analyzer\Analyzer {
     public function analyze() {
         $data = new \Data\Composer();
 
+        $packagistNamespaces = $data->getComposerNamespaces();
+        $packagistNamespacesFullNS = $this->makeFullNSpath($packagistNamespaces);
+
         $packagistClasses = $data->getComposerClasses();
         $packagistClassesFullNS = $this->makeFullNSpath($packagistClasses);
         // Chunks is made to shorten the queries
@@ -40,10 +43,9 @@ class IsComposerNsname extends Analyzer\Analyzer {
         ////////////////////////////////////////////////
         // Use
         // namespaces in Composer
-        $packagistNamespaces = $data->getComposerNamespaces();
         $this->atomIs('Use')
              ->outIs('USE')
-             ->is('originpath', $packagistNamespaces);
+             ->is('originpath', $packagistNamespacesFullNS);
         $this->prepareQuery();
 
         // classes in Composer
