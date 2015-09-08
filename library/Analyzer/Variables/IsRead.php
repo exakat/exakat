@@ -34,7 +34,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
-                           'CASE', 'CLONE', 'FINAL', 'CLASS'));
+                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL'));
             // note : NAME is for Switch!!
         $this->prepareQuery();
 
