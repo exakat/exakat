@@ -17,6 +17,8 @@ Version 0.3.1 (Yellow Wind Demon, 2015-09-03)
 + Report
     + Added Dump to SQLITE format
     + Added new collection of rules for Calesthenics (dev)
+    + Updated composer database 
+    + Now reporting found Composer.
 + Analyzer
     + Fixed Compilation spotting
 + Tokenizer
