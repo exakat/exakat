@@ -25,20 +25,33 @@ namespace Tasks;
 
 class Queue extends Tasks {
     public function run(\Config $config) {
-        $this->config = $config;
-        
-        display('Adding "'.$config->project.'" to the queue.');
-        
-        if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
-            display('Cleaning the project first');
-            $clean = new Clean();
-            $clean->run($config);
-        }
+        if ($config->project != 'default') {
+            if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
+                display('Cleaning the project first');
+                $clean = new Clean();
+                $clean->run($config);
+            }
 
-        display('Adding '.$config->project.' to the queue');
-        $queuePipe = fopen('/tmp/onepageQueue', 'w');
-        fwrite($queuePipe, $config->project."\n");
-        fclose($queuePipe);
+            display('Adding project '.$config->project.' to the queue');
+            $queuePipe = fopen('/tmp/onepageQueue', 'w');
+            fwrite($queuePipe, $config->project."\n");
+            fclose($queuePipe);
+        } elseif (!empty($config->filename)) {
+            if (!file_exists($config->projects_root.'/in/'.$config->filename.'.php')) {
+                display('No such file "'.$config->filename.'" in /in/ folder');
+                die();
+            }
+
+            if (file_exists($config->projects_root.'/out/'.$config->filename.'.json')) {
+                display('Report already exists for "'.$config->filename.'" in /out/ folder');
+                die();
+            }
+
+            display('Adding file '.$config->project.' to the queue');
+            $queuePipe = fopen('/tmp/onepageQueue', 'w');
+            fwrite($queuePipe, $config->filename."\n");
+            fclose($queuePipe);
+        }
 
         display('Done');
     }
