@@ -1447,4 +1447,8 @@ array_slice vs array_pop
 Blind will overwrite a variable
 $b = 2;    foreach($a as $b) {
 
-Finish IsComposerNsname (static, new...)
+Finish IsComposerNsname (static, new, constants...)
+
+in report, list the dashboards that uses a specific analyzer.
+
+Report severity and other informations from the description of the rule
