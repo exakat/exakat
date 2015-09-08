@@ -10,12 +10,12 @@ Version 0.3.2 (Tiger Vanguard, Coming up)
 
 Version 0.3.1 (Yellow Wind Demon, 2015-09-03)
 + Architecture
-    + Cleaned code with exakat
     + Removed usage of Everyman dependencies
     + Added support for Neo4j Authentication
     + Added a JobQueue
+    + Cleaned code with exakat itself
 + Report
-    + Added Dump to SQLITE format
+    + Added Dump to SQLITE format for custom manipulations of the results
     + Added new collection of rules for Calesthenics (dev)
     + Updated composer database 
     + Now reporting found Composer.
