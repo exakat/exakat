@@ -265,9 +265,9 @@ LICENCE;
         
         // checking sqlite files
         $files = Finder::create()->ignoreVCS(true)
-            ->in('data/')
-            ->files()
-            ->name('*.sqlite');
+                                 ->in('data/')
+                                 ->files()
+                                 ->name('*.sqlite');
         
         foreach($files as $file) {
             ++$total;
@@ -280,9 +280,9 @@ LICENCE;
             }
 
             $results = $sqlite->query('PRAGMA foreign_key_check');
-            $response = $results->fetchArray()['foreign_key_check'];
-            if ($response !== null) {
-                $errors[] = "$file is SQLITE3 invalid (foreign key check : $response)\n";
+            $response = $results->fetchArray();
+            if (isset($response['foreign_key_check']) && empty($response['foreign_key_check'])) {
+                $errors[] = "$file is SQLITE3 invalid (foreign key check : $response[foreign_key_check])\n";
                 continue;
             }
         }
@@ -290,16 +290,21 @@ LICENCE;
         // check for sqlite's composer : no special chars
         $sqlite = new Sqlite3('./data/composer.sqlite');
         
-        $tables = array('classes' => 'classname', 'interfaces' => 'interfacename', 'traits' => 'traitname');
+        $tables = array('classes'    => 'classname', 
+                        'interfaces' => 'interfacename', 
+                        'traits'     => 'traitname',
+                        'namespaces' => 'namespace');
         foreach($tables as $table => $col) {
             $res = $sqlite->query('SELECT id, '.$col.' FROM '.$table);
             $toDelete = array();
             while($row = $res->fetchArray()) {
+                print $row[$col]."\n";
                 if (preg_match('/[^a-z0-9_]/i', $row[$col])) {
                     display( $row['id'].') '.$row[$col]." is wrong in table ".$table."\n");
                     $toDelete[] = $row['id'];
                 }
             }
+
             if (!empty($toDelete)) {
                 $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', $toDelete).')');
                 print count($toDelete)." rows removed\n";
