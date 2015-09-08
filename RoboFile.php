@@ -321,6 +321,25 @@ LICENCE;
 
     }
 
+    public function checkPhplint() {
+        // checking json files
+        $files = Finder::create()->ignoreVCS(true)
+            ->in('library/')
+            ->files()
+            ->name('*.php');
+            
+        $total = count($files);
+        foreach($files as $file) {
+            $res = shell_exec('php -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                var_dump($res);die();
+            }
+        }
+        
+        print "All $total compilations OK\n";
+    }
+    
     public function checkDirective() {
         $code = file_get_contents('./library/Report/Content/Directives.php');
         preg_match('#\$directives = array\((.*?)\);#is', $code, $r);
