@@ -22,7 +22,7 @@
 
 class Exakat {
     const VERSION = '0.3.1';
-    const BUILD = '202';
+    const BUILD = '203';
     
     public function execute(Config $config) {
         switch ($config->command) {
@@ -152,7 +152,7 @@ class Exakat {
                 break;
 
             case 'findextlib' : 
-                $task = new Tasks\findExternalLibraries();
+                $task = new Tasks\FindExternalLibraries();
                 print $task->run($config);
                 break;
 
