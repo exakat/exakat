@@ -1452,3 +1452,8 @@ Finish IsComposerNsname (static, new, constants...)
 in report, list the dashboards that uses a specific analyzer.
 
 Report severity and other informations from the description of the rule
+
+Make a picture from the Unit tests (update some tests, and export to color picture, tokenizer, analyzer, checks).
+
+Integrate exakat into sonar (in PHP?)
+Must find the file format that sonar-runner reads.
