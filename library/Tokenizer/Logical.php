@@ -41,34 +41,11 @@ class Logical extends TokenAuto {
         $filterOut = array_merge(Comparison::$operators,     Bitshift::$operators,
                                  Addition::$operators,       Multiplication::$operators,
                                  Concatenation::$operators,  _Instanceof::$operators,
-                                 Preplusplus::$operators,    //Assignation::$operators,
+                                 Preplusplus::$operators,    Not::$operators,
                                  _New::$operators,           Property::$operators,
                                  Staticproperty::$operators, Nsname::$operators,
-                                 Noscream::$operators,       Not::$operators);
+                                 Noscream::$operators       );
 
-        // logical boolean (and, or)
-        $this->conditions = array( -2 => array('filterOut' => $filterOut),
-                                   -1 => array('atom'      => 'yes',
-                                               'notAtom'   => 'Sequence'),
-                                    0 => array('token'     => Logical::$logicals,
-                                               'atom'      => 'none'),
-                                    1 => array('atom'      => 'yes',
-                                               'notAtom'   => 'Sequence'),
-                                    2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators,
-                                                                          Addition::$operators, Multiplication::$operators,
-                                                                          Bitshift::$operators, Concatenation::$operators,
-                                                                          Logical::$booleans,
-                                                                           array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
-                                                                                 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_INC', 'T_DEC',
-                                                                                 'T_NS_SEPARATOR',
-                                                                           ))));
-        
-        $this->actions = array('transform'    => array( -1 => 'LEFT',
-                                                         1 => 'RIGHT'),
-                               'atom'         => 'Logical',
-                               'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
-        $this->checkAuto();
 
         // boolean comparison (||, &&)
         $this->conditions = array( -2 => array('filterOut' => $filterOut),
@@ -93,7 +70,32 @@ class Logical extends TokenAuto {
                                'cleanIndex'   => true,
                                'addSemicolon' => 'it');
         $this->checkAuto();
+
+        // logical boolean (and, or)
+        $filterOut = array_merge($filterOut, Assignation::$operators);
+        $this->conditions = array( -2 => array('filterOut' => $filterOut),
+                                   -1 => array('atom'      => 'yes',
+                                               'notAtom'   => 'Sequence'),
+                                    0 => array('token'     => Logical::$logicals,
+                                               'atom'      => 'none'),
+                                    1 => array('atom'      => 'yes',
+                                               'notAtom'   => 'Sequence'),
+                                    2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators,
+                                                                          Addition::$operators, Multiplication::$operators,
+                                                                          Bitshift::$operators, Concatenation::$operators,
+                                                                          Logical::$booleans,
+                                                                           array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
+                                                                                 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_INC', 'T_DEC',
+                                                                                 'T_NS_SEPARATOR',
+                                                                           ))));
         
+        $this->actions = array('transform'    => array( -1 => 'LEFT',
+                                                         1 => 'RIGHT'),
+                               'atom'         => 'Logical',
+                               'cleanIndex'   => true,
+                               'addSemicolon' => 'it');
+        $this->checkAuto();
+
         return false;
     }
 

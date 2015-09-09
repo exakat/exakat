@@ -81,6 +81,26 @@ class Assignation extends TokenAuto {
                                'addSemicolon' => 'it');
         $this->checkAuto();
 
+        // special case for $a = 1 and $b (is actually ($a = 1 ) and $b;
+        $this->conditions = array(-2 => array('notToken' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR',
+                                                                              'T_AT', 'T_AND'),
+                                                                         Preplusplus::$operators )),
+                                  -1 => array('atom'     => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
+                                                                  'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
+                                                                  'Static', 'Cast', 'Sign', 'Power', 'Null', 'Boolean' )),
+                                   0 => array('token'    => Assignation::$operators),
+                                   1 => array('atom'     => $operands),
+                                   2 => array('token'    => array('T_LOGICAL_AND', 'T_LOGICAL_OR'),
+                                              'code'     => array('and', 'or'))
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'RIGHT',
+                                                       -1 => 'LEFT'),
+                               'atom'         => 'Assignation',
+                               'cleanIndex'   => true,
+                               'addSemicolon' => 'it');
+        $this->checkAuto();
+
         //$a & $b	= B($c);
         $this->conditions = array(-2 => array('token'    => 'T_AND'),
                                   -1 => array('atom'     => 'Variable'),
