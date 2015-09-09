@@ -29,6 +29,7 @@ class Variablenames extends Analyzer\Analyzer {
     public function analyze() {
         // $x
         $this->atomIs('Variable')
+             ->hasNoParent('Functioncall', array('NAME'))
              ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Staticproperty', 'PROPERTY')
