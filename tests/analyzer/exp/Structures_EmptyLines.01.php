@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array(' ',
+$expected     = array(' ', // Total of 3 empty lines
                       ' ',
                       ' ');
 

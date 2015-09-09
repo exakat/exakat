@@ -39,15 +39,15 @@ class _Trait extends TokenAuto {
                                   3 => array('atom'  => array('Sequence','Void')),
                                   4 => array('token' => 'T_CLOSE_CURLY'),
         );
-        
-        $this->actions = array('transform'    => array( 1 => 'NAME',
-                                                        2 => 'DROP',
-                                                        3 => 'BLOCK',
-                                                        4 => 'DROP',
-                                                        ),
-                               'atom'         => 'Trait',
-                               'makeBlock'    => 'BLOCK',
-                               'cleanIndex'   => true,
+              
+        $this->actions = array('transform'          => array( 1 => 'NAME',
+                                                              2 => 'DROP',
+                                                              3 => 'BLOCK',
+                                                              4 => 'DROP',
+                                                              ),
+                               'atom'               => 'Trait',
+                               'makeBlock'          => 'BLOCK',
+                               'cleanIndex'         => true,
                                'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
         

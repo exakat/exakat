@@ -125,7 +125,7 @@ class _Function extends TokenAuto {
                                'atom'          => 'Function',
                                'makeBlock'     => 'BLOCK',
                                'cleanIndex'    => true,
-                               'addSemicolon'  => 'it');
+                               'addSemicolonFunction'  => 'it');
         $this->checkAuto();
 
         // function ; (No Body, for interfaces or abstract)

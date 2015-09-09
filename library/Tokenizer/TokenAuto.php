@@ -2516,7 +2516,8 @@ $fullcode
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */
 
-if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false && $token.in_quote == null) {
+if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false && 
+    $token.in_quote == null) {
     semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
 
     next = $token.out('NEXT').next();
@@ -2533,6 +2534,35 @@ GREMLIN;
             unset($actions['addSemicolon']);
         }
 
+        if (isset($actions['addSemicolonFunction'])) {
+            $token = $actions['addSemicolonFunction'];
+
+            $qactions[] = <<<GREMLIN
+/* always adds a semicolon (except rare cases) */
+
+// If next token is not an semicolon only add a ;
+if ($token.out('NAME').has('code', '').any() == false) { // Not Closure
+    if ($token.out('NEXT').has('token', 'T_SEMICOLON').any()) { // followed by ;
+        semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
+        tvoid     = g.addVertex(null, [code:'', fullcode:' ', token:'T_VOID', atom:'Void', virtual:true, line:it.line, addSemicolon:true]);
+        g.idx('atoms').put('atom', 'Void', tvoid);
+
+        next = $token.out('NEXT').next();
+
+        $token.outE('NEXT').each{ g.removeEdge(it); }
+
+        g.addEdge($token, semicolon, 'NEXT');
+        g.addEdge(semicolon, tvoid, 'NEXT');
+        g.addEdge(tvoid, next, 'NEXT');
+
+        g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
+    } 
+}
+
+GREMLIN;
+            unset($actions['addSemicolonFunction']);
+        }
+        
         if (isset($actions['addAlwaysSemicolon'])) {
             $token = $actions['addAlwaysSemicolon'];
             $avoidSemicolon = "'T_SEMICOLON'";
@@ -2540,6 +2570,7 @@ GREMLIN;
             $qactions[] = <<<GREMLIN
 /* always adds a semicolon (except rare cases) */
 
+// If next token is not an semicolon only add a ;
 if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false) {
     semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
 
@@ -2552,6 +2583,7 @@ if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).
 
     g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
 } else {
+// If next token is a semicolon, add a void and ;
     semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
     tvoid     = g.addVertex(null, [code:'', fullcode:' ', token:'T_VOID', atom:'Void', virtual:true, line:it.line, addSemicolon:true]);
     g.idx('atoms').put('atom', 'Void', tvoid);
