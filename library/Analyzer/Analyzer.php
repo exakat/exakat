@@ -152,7 +152,7 @@ class Analyzer {
         self::initDocs();
         $list = self::$docs->listAllAnalyzer();
         $r = array();
-        foreach($list as $id => $c) {
+        foreach($list as $c) {
             $l = levenshtein($c, $name);
 
             if ($l < 8) {
@@ -644,14 +644,7 @@ GREMLIN;
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -668,14 +661,7 @@ GREMLIN;
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -694,14 +680,7 @@ GREMLIN;
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -720,14 +699,7 @@ GREMLIN;
         if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -744,14 +716,7 @@ GREMLIN;
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -768,14 +733,7 @@ GREMLIN;
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -850,14 +808,7 @@ GREMLIN;
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -875,14 +826,7 @@ GREMLIN;
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -899,14 +843,7 @@ GREMLIN;
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
-            if (is_array($code)) {
-                foreach($code as $k => &$v) {
-                    $v = strtolower($v);
-                }
-                unset($v);
-            } else {
-                $code = strtolower($code);
-            }
+            $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
         
@@ -1915,6 +1852,17 @@ GREMLIN;
             },  $functions);
         }
         return $r;
+    }
+    
+    private function tolowercase(&$code) {
+        if (is_array($code)) {
+            foreach($code as $k => &$v) {
+                $v = strtolower($v);
+            }
+            unset($v);
+        } else {
+            $code = strtolower($code);
+        }
     }
 }
 ?>
