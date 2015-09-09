@@ -26,7 +26,7 @@ namespace Analyzer\Files;
 use Analyzer;
 
 class DefinitionsOnly extends Analyzer\Analyzer {
-    public static $definitions = array('Interface', 'Trait', 'Function', 'Const', 'Class');
+    public static $definitions        = array('Interface', 'Trait', 'Function', 'Const', 'Class');
     public static $definitionsHelpers = array('Use', 'Global', 'Include');
     //'Namespace',  is excluded
 

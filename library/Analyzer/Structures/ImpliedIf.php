@@ -35,14 +35,9 @@ class ImpliedIf extends Analyzer\Analyzer {
              ->atomIsNot('Assignation')
              ->inIs('LEFT')
 
-
              ->inIsIE('CODE')
              ->hasIn('ELEMENT')
 
-
-//             ->outIs('RIGHT')
-//             ->atomIs(array('Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall', 'Variable', 
-//                            'Instanceof', 'Comparison'))
              ->back('first');
         $this->prepareQuery();
     }
