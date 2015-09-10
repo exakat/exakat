@@ -61,17 +61,12 @@ class Composer {
         return $return;
     }
 
-    public function getComposerClasses($vendor = null) {
+    public function getComposerClasses() {
         // global namespace is stored with 'global' keyword, so we remove it.
-        $query = "SELECT CASE namespace WHEN 'global' THEN classname ELSE namespace || '\\' || classname END AS classname 
+        $query = "SELECT DISTINCT CASE namespace WHEN 'global' THEN classname ELSE namespace || '\\' || classname END AS classname 
         FROM namespaces 
         JOIN classes 
             ON classes.namespace_id = namespaces.id";
-
-        if ($vendor !== null) {
-            list($vendor, $component) = explode('/', $vendor);
-            $query .= " WHERE vendor = '$vendor' and component = '$component'";
-        }
 
         $res = $this->sqlite->query($query);
         $return = array();
