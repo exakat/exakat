@@ -251,7 +251,7 @@ if (fullcode.alternative == true) {
     if (theThen.bracket == false) {
         fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") " + theThen.fullcode;
     } else {
-        fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") { " + theThen.fullcode + " }";
+        fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") { /**/ }";
     }
     
     if (fullcode.out('ELSE').any()) {
@@ -262,7 +262,7 @@ if (fullcode.alternative == true) {
             fullcode.fullcode = fullcode.fullcode + " else " + theElse.fullcode;
             theElse.count = theElse.out('ELEMENT').count();
         } else {
-            fullcode.fullcode = fullcode.fullcode + " else { " + theElse.fullcode + " }";
+            fullcode.fullcode = fullcode.fullcode + " else { /**/ }";
             theElse.count = theElse.out('ELEMENT').count();
         }
     }
