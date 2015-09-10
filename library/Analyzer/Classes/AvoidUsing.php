@@ -27,7 +27,8 @@ use Analyzer;
 
 class AvoidUsing extends Analyzer\Analyzer {
     public function analyze() {
-        $classes = $this->config;
+        $config = \Config::factory();
+        $classes = $config->Classes_AvoidUsing;
         
         if (empty($classes)) {
             return null;
