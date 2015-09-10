@@ -1,20 +1,20 @@
 <?php
 
-class definedClassA extends Crada\Apidoc\Response {
+class definedClassA extends Silex\EventListener\ConverterListener {
     public function x() {
-        parent::someAMethodInCrada();
+        parent::someAMethodInSilex();
     }
 }
 
 class definedClassB extends definedClassA {
     public function x() {
-        parent::someBMethodInCrada();
+        parent::someBMethodInSilex();
     }
 }
 
 class definedClassC extends definedClassB {
     public function x() {
-        parent::someCMethodInCrada();
+        parent::someCMethodInSilex();
     }
 }
 
