@@ -2,8 +2,8 @@
 
 $expected     = array('parent::$someDPropertyLost');
 
-$expected_not = array('parent::$someAPropertyInCrada',
-                      'parent::$someBPropertyInCrada',
-                      'parent::$someCPropertyInCrada');
+$expected_not = array('parent::$someAPropertyInSilex',
+                      'parent::$someBPropertyInSilex',
+                      'parent::$someCPropertyInSilex');
 
 ?>

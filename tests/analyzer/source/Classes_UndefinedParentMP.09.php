@@ -1,24 +1,24 @@
 <?php
 
-class A extends Crada\Apidoc\Response {
+class definedClassA extends Crada\Apidoc\Response {
     public function x() {
         parent::someAMethodInCrada();
     }
 }
 
-class B extends A {
+class definedClassB extends definedClassA {
     public function x() {
         parent::someBMethodInCrada();
     }
 }
 
-class C extends B {
+class definedClassC extends definedClassB {
     public function x() {
         parent::someCMethodInCrada();
     }
 }
 
-class D {
+class definedClassD {
     public function x() {
         parent::someDMethodLost();
     }

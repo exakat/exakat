@@ -2,8 +2,8 @@
 
 $expected     = array('parent::someDMethodLost( )');
 
-$expected_not = array('parent::someAMethodInCrada( )',
-                      'parent::someBMethodInCrada( )',
-                      'parent::someCMethodInCrada( )');
+$expected_not = array('parent::someAMethodInSilex( )',
+                      'parent::someBMethodInSilex( )',
+                      'parent::someCMethodInSilex( )');
 
 ?>

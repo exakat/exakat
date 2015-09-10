@@ -1,10 +1,10 @@
 <?php
 
-class a extends c {
+class definedClassA extends definedClassC {
     function definedMethod() {}
 }
 
-class b extends a {
+class definedClassB extends definedClassA {
      public $x = 2;
      
      function x() {

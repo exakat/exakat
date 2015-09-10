@@ -1,12 +1,12 @@
 <?php
 
-class a extends c {
+class definedClassA extends definedClassC {
     private   function definedMethod() {}
     protected function definedProtectedMethod() {}
     public    function definedPublicMethod() {}
 }
 
-class b extends a {
+class definedClassB extends definedClassA {
      public $x = 2;
      
      function x() {

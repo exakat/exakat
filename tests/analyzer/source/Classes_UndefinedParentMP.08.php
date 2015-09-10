@@ -1,24 +1,24 @@
 <?php
 
-class A extends Crada\Apidoc\Response {
+class definedClassA extends Silex\EventListener\ConverterListener {
     public function x() {
         parent::$someAPropertyInCrada;
     }
 }
 
-class B extends A {
+class definedClassB extends definedClassA {
     public function x() {
         parent::$someBPropertyInCrada;
     }
 }
 
-class C extends B {
+class definedClassC extends definedClassB {
     public function x() {
         parent::$someCPropertyInCrada;
     }
 }
 
-class D {
+class definedClassD {
     public function x() {
         parent::$someDPropertyLost;
     }
