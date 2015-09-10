@@ -2537,12 +2537,14 @@ GREMLIN;
         if (isset($actions['addSemicolonFunction'])) {
             $token = $actions['addSemicolonFunction'];
 
+            $avoidToken = "'T_SEMICOLON', 'T_CLOSE_BRACKET'";
             $qactions[] = <<<GREMLIN
-/* always adds a semicolon (except rare cases) */
+/* always adds a semicolon to named functions, 
+   And not to closures. */
 
 // If next token is not an semicolon only add a ;
 if ($token.out('NAME').has('code', '').any() == false) { // Not Closure
-    if ($token.out('NEXT').has('token', 'T_SEMICOLON').any()) { // followed by ;
+    if ($token.out('NEXT').filter{ it.token in [$avoidToken]}.any()) { // followed by ;
         semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
         tvoid     = g.addVertex(null, [code:'', fullcode:' ', token:'T_VOID', atom:'Void', virtual:true, line:it.line, addSemicolon:true]);
         g.idx('atoms').put('atom', 'Void', tvoid);
@@ -2556,8 +2558,19 @@ if ($token.out('NAME').has('code', '').any() == false) { // Not Closure
         g.addEdge(tvoid, next, 'NEXT');
 
         g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
-    } 
-}
+    } else { // Not closure (named fucntion)
+        semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
+    
+        next = $token.out('NEXT').next();
+    
+        $token.outE('NEXT').each{ g.removeEdge(it); }
+    
+        g.addEdge($token, semicolon, 'NEXT');
+        g.addEdge(semicolon, next, 'NEXT');
+    
+        g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
+    }
+} 
 
 GREMLIN;
             unset($actions['addSemicolonFunction']);
