@@ -178,7 +178,7 @@ class Config {
         }  else {
             $this->codePath = '/No/Path/To/Code';
         }
-        
+                
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->defaultConfig, $this->configFile, $this->commandline, $this->projectConfig);
 
@@ -237,10 +237,10 @@ class Config {
         // removing empty values in the INI file
         foreach($this->projectConfig as &$value) {
             if (is_array($value) && empty($value[0])) {
-                (unset) $value[0];
+                unset($value[0]);
             }
         }
-        (unset) $value;
+        unset($value);
         
         $other_php_versions = array();
         foreach(array('52', '53', '54', '55', '56', '70') as $version) {
@@ -267,9 +267,8 @@ class Config {
             foreach($this->projectConfig['other_php_versions'] as &$version) {
                 $version = str_replace('.', '', trim($version));
             }
+            unset($version);
         }
-        
-        return null;
     }
 
     private function readCommandline() {
