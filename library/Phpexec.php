@@ -130,14 +130,13 @@ class Phpexec {
 
             default: 
                 $this->phpexec = $config->php;
-                // PHP will be valide if we use the one that is currently executing us
+                // PHP will be valid if we use the one that is currently executing us
                 $this->isValid = true;
         }
         
         if ($this->isValid) {
             $this->finish();
         }
-        
     }
 
     private function finish() {
