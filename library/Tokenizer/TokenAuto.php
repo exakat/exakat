@@ -2772,6 +2772,15 @@ GREMLIN;
             unset($conditions['token']);
         }
 
+        if (isset($conditions['code'])) {
+            if ( is_array($conditions['code']) && !empty($conditions['code'])) {
+                $queryConditions[] = "filter{it.code in ['".implode("', '", $conditions['code'])."']}";
+            } else {
+                $queryConditions[] = "has('code', '".$conditions['code']."')";
+            }
+            unset($conditions['code']);
+        }
+
         if (isset($conditions['notToken'])) {
             if ( is_array($conditions['notToken']) && !empty($conditions['notToken'])) {
                 $queryConditions[] = "filter{!(it.token in ['".implode("', '", $conditions['notToken'])."'])}";
