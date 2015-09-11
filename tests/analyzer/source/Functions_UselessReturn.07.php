@@ -1,6 +1,7 @@
 <?php
 
-class x {
+// a trait
+trait x {
     function __construct() {
         $a ++;
         $b += 2;

@@ -28,10 +28,14 @@ use Analyzer;
 class UselessReturn extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
-             ->hasClass()
+             ->hasClassTrait()
+
              ->outIs('NAME')
-             ->code(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'))
+             ->code(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'), true)
              ->inIs('NAME')
+
+             // returning null or void is OK to terminate the function
+             // May be spot this at other level than 1 of the function (this means after a test or a special branch)
              ->raw("filter{ it.out('BLOCK').out.loop(1){it.object.atom != 'Function'}{it.object.atom == 'Return'}.filter{it.out('RETURN').filter{it.atom in ['Void', 'Null']}.any() == false}.count() > 0}")
              ->back('first');
         $this->prepareQuery();
