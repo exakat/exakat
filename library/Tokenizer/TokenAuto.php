@@ -2463,7 +2463,7 @@ g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
 
 x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');
-// No need for indexing here 
+// No need for indexing here
 g.idx('atoms').put('atom', 'Variable', x);
 
 ";
@@ -2516,7 +2516,7 @@ $fullcode
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */
 
-if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false && 
+if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false &&
     $token.in_quote == null) {
     semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
 
@@ -2539,7 +2539,7 @@ GREMLIN;
 
             $avoidToken = "'T_SEMICOLON', 'T_CLOSE_BRACKET'";
             $qactions[] = <<<GREMLIN
-/* always adds a semicolon to named functions, 
+/* always adds a semicolon to named functions,
    And not to closures. */
 
 // If next token is not an semicolon only add a ;
@@ -2570,7 +2570,7 @@ if ($token.out('NAME').has('code', '').any() == false) { // Not Closure
     
         g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
     }
-} 
+}
 
 GREMLIN;
             unset($actions['addSemicolonFunction']);

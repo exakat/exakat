@@ -99,7 +99,7 @@ class IsComposerNsname extends Analyzer\Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->is('fullnspath', $packagistInterfacesFullNs);
-        $this->prepareQuery();    
+        $this->prepareQuery();
     }
 }
 
