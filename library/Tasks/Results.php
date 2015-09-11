@@ -185,6 +185,10 @@ GREMLIN;
 
     private function query($query) {
         $result = gremlin_query($query);
+        if (!isset($result->results)) {
+            print $query;
+            var_dump($result);
+        }
         return (array) $result->results;
     }
 }
