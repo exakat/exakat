@@ -1457,3 +1457,11 @@ Make a picture from the Unit tests (update some tests, and export to color pictu
 
 Integrate exakat into sonar (in PHP?)
 Must find the file format that sonar-runner reads.
+
+Tokens should be standardized to T_ (INDEX, and some index have a name not a token).
+Documents the extra tokens
+
+Collect conditions and see the one that are often. Then, suggest refactoring based on this.
+
+Robo : check that we have all composer from projects/* 
+Add an update for getComposer (update the current status of the database).
