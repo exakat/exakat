@@ -1428,6 +1428,12 @@ GREMLIN
         return $this;
     }
 
+    public function hasClassTrait() {
+        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Class", "Trait"])}{it.object.atom in ["Class", "Trait"]}.any()}');
+        
+        return $this;
+    }
+
     public function hasNoClass() {
         $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any() == false}');
         
