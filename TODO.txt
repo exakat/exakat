@@ -1469,3 +1469,6 @@ Add getComposer check in Project task, so as to mention forgotten / old version 
 
 unset in foreach (on a key) : check that it is not an array (partial unset       unset($project['_type']);)
 eval/create function with constant structures are OK (but why are they here? )
+
+Method that must be called for the object to run (sometimes, objects are build, then finally, some execution happens, and then, they are read).
+This may also be a sequence as documented in a manual / recipe. 
