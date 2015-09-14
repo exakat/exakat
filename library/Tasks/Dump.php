@@ -99,6 +99,7 @@ GREMLIN;
                     $res = gremlin_query($query);
                     if (!isset($res->results)) {
                         print "Couldn't run the query and get a result : \n";
+                        print "Query : $query \n";
                         print_r($res);
                         die();
                     }
