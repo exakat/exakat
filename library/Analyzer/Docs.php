@@ -65,6 +65,29 @@ SQL;
         return $return;
     }
 
+    public function getThemeForAnalyzer($analyzer) {
+        list($vendor, $class) = explode('/', $analyzer);
+        
+        $query = <<<SQL
+SELECT c.name FROM categories AS c
+    JOIN analyzers_categories AS ac
+        ON ac.id_categories = c.id
+    JOIN analyzers AS a
+        ON a.id = ac.id_analyzer
+    WHERE
+        a.folder = '$vendor' AND
+        a.name   = '$class'
+SQL;
+        $res = $this->sqlite->query($query);
+
+        $return = array();
+        while($row = $res->fetchArray()) {
+            $return[] = $row['name'];
+        }
+        
+        return $return;
+    }
+    
     public function getSeverity($analyzer) {
         list(, $folder, $name) = explode('\\', $analyzer);
         $query = "SELECT severity FROM analyzers WHERE folder = '$folder' AND name = '$name'";

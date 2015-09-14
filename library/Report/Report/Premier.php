@@ -28,6 +28,17 @@ use Report\Report;
 class Premier extends Report {
     private $projectUrl    = null;
 
+    private $dashboards = array('Analyze'               => 'Code smells', 
+                                'Security'              => 'Security', 
+                                'Performances'          => 'Performances', 
+                                'Dead code'             => 'Dead code',
+                                'CompatibilityPHP53'    => 'Compatibility 53',
+                                'CompatibilityPHP54'    => 'Compatibility 54',
+                                'CompatibilityPHP55'    => 'Compatibility 55',
+                                'CompatibilityPHP56'    => 'Compatibility 56',
+                                'CompatibilityPHP70'    => 'Compatibility 70',
+                                );
+
     public function __construct($project) {
         parent::__construct($project);
     }
@@ -64,7 +75,7 @@ class Premier extends Report {
         if ($analyzer->hasResults()) {
             $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
         }  else {
-            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
+            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean. Good job!');
         }
 
         $this->createLevel2('Dead code');
@@ -74,7 +85,7 @@ class Premier extends Report {
         if ($analyzer->hasResults()) {
             $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
         }  else {
-            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
+            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean. Good job!');
         }
 
         $this->createLevel2('Security');
@@ -84,7 +95,7 @@ class Premier extends Report {
         if ($analyzer->hasResults()) {
             $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
         } else {
-            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
+            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean. Good job!');
         }
 
         $this->createLevel2('Performances');
@@ -94,7 +105,7 @@ class Premier extends Report {
         if ($analyzer->hasResults()) {
             $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
         } else {
-            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
+            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean. Good job!');
         }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -173,7 +184,17 @@ class Premier extends Report {
                         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
                             $this->addContent('Text', 'clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />', 'textLead');
                         }
+
+
                         $this->addContent('TextLead', $description, 'textLead');
+                        $themelist = new \Report\Content\Themelist($list, $this->dashboards);
+                        $list = $analyzer->getThemes();
+                        $themelist->setList($list);
+                        $themelist->setDashboards($this->dashboards);
+                        $themelist->collect();
+                        
+                        $this->addContent('ThemeList', $themelist);
+
                         $this->addContent('Horizontal', $analyzer);
                     }
                 }

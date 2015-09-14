@@ -28,7 +28,7 @@ class Analyzer {
     protected $code = null;
 
     protected $description = null;
-    
+
     static public $datastore = null;
     
     protected $rowCount = 0;       // Number of found values
@@ -179,6 +179,11 @@ class Analyzer {
     static public function getThemeAnalyzers($theme) {
         self::initDocs();
         return Analyzer::$docs->getThemeAnalyzers($theme);
+    }
+
+    public function getThemes() {
+        $analyzer = str_replace('\\', '/', substr(get_class($this), 9));
+        return Analyzer::$docs->getThemeForAnalyzer($analyzer);
     }
 
     public function getAppinfoHeader($lang = 'en') {
