@@ -35,21 +35,58 @@ foreach($components as $fullName => $version) {
 
 $sqlite = new sqlite3('data/composer.sqlite');
 
+if (in_array('-t', $argv)) {
+    foreach($components as $fullName => $version) {
+        list($vendor, $component) = explode('/', strtolower($fullName));
+    
+        $res = $sqlite->query(<<<SQL
+    SELECT components.id, group_concat(version) FROM components 
+              JOIN versions
+                ON versions.component_id = components.id
+            WHERE vendor='$vendor' AND 
+                  component = '$component'
+            ORDER BY version DESC
+SQL
+    );
+
+        $row = $res->fetchArray(SQLITE3_NUM);
+        $numRows = 1;
+        while($res->fetchArray(SQLITE3_NUM)) { ++$numRows; }
+        print $numRows." lines for $vendor/$component\n";
+
+        list($res, $dbVersion) = $row;
+        if ($res) {
+            $componentId = $res;
+            print "$vendor/$component already in reference ($version / $dbVersion)\n";
+        } else {
+            print "$vendor/$component is not yet in the database\n";
+        }
+    }
+    die();
+}
+
 foreach($components as $fullName => $version) {
     list($vendor, $component) = explode('/', strtolower($fullName));
     
-    $res = $sqlite->query("SELECT id FROM components WHERE vendor='$vendor' AND component = '$component'");
+    $res = $sqlite->query(<<<SQL
+SELECT id FROM components 
+        WHERE vendor='$vendor' AND 
+              component = '$component'
+SQL
+);
+
     $res = $res->fetchArray(SQLITE3_ASSOC)['id'];
+
     if ($res) {
         $componentId = $res;
-        print "$vendor/$component already in reference ($componentId)\n";
+        print "$vendor/$component already in reference ($version)\n";
     } else {
         $date = time();
         $sqlite->query("INSERT INTO components (vendor, component, last_check) VALUES ('$vendor', '$component', $date);");
         $componentId = $sqlite->lastInsertRowID();
         print "$vendor/$component newly inserted in reference ($componentId)\n";
     }
-
+    
     print "Reading $vendor/$component versions\n";
     $res = shell_exec('composer show '.$fullName);
 
