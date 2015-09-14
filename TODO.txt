@@ -1465,3 +1465,7 @@ Collect conditions and see the one that are often. Then, suggest refactoring bas
 
 Robo : check that we have all composer from projects/* 
 Add an update for getComposer (update the current status of the database).
+Add getComposer check in Project task, so as to mention forgotten / old version from composer
+
+unset in foreach (on a key) : check that it is not an array (partial unset       unset($project['_type']);)
+eval/create function with constant structures are OK (but why are they here? )
