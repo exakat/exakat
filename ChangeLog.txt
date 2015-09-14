@@ -1,4 +1,4 @@
-Version 0.3.2 (Tiger Vanguard, Coming up)
+Version 0.3.3 (Immortal Zhenyuan, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 0.3.2 (Tiger Vanguard, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.2 (Tiger Vanguard, 2014-09-14)
++ Report
+    + Added link back from analyzers to its themes.
++ Analyzer
+    + Useless Returns are now Trait compatible
+    + Optimized Composer validation 
+    + Removed IsKnownVendor analyze (replaced by Composer)
+    + Spot inconsistent concatenations ("$a b".$c)
++ Tokenizer
+    + Fixed situation where forgotten white spaces didn't have a file
+    + Removed DELETE and S_STRING index
+    + Fixed compatibility with Debian (shell commands)
+    + Added UT for and / && precedence versus =
+    + Fixed identification of empty instructions (Functions / Closure have different behaviors)
 
 Version 0.3.1 (Yellow Wind Demon, 2015-09-03)
 + Architecture
