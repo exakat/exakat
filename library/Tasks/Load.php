@@ -198,24 +198,12 @@ class Load extends Tasks {
             $regexIndex['INDEX']->relateTo($regexIndex[$r], 'INDEXED');
         }
 
-        $regexIndex['S_STRING'] = $this->client->makeNode()->setProperty('token', 'S_STRING')
-                                                    ->setProperty('code', 'Index for S_STRING')
-                                                    ->setProperty('index', 'true')
-                                                    ->save();
-        $regexIndex['INDEX']->relateTo($regexIndex['S_STRING'], 'INDEXED');
-
         $regexIndex['S_ARRAY'] = $this->client->makeNode()->setProperty('token', 'S_ARRAY')
                                                     ->setProperty('code', 'Index for S_ARRAY')
                                                     ->setProperty('index', 'true')
                                                     ->save();
         $regexIndex['INDEX']->relateTo($regexIndex['S_ARRAY'], 'INDEXED');
     
-        $regexIndex['DELETE'] = $this->client->makeNode()->setProperty('token', 'DELETE')
-                                                   ->setProperty('code', 'Index for DELETE')
-                                                   ->setProperty('index', 'true')
-                                                   ->save();
-        $regexIndex['INDEX']->relateTo($regexIndex['DELETE'], 'INDEXED');
-
         $regexIndex['ROOT'] = $this->client->makeNode()->setProperty('token', 'ROOT')
                                                  ->setProperty('code', 'Index for ROOT')
                                                  ->setProperty('index', 'true')
@@ -615,7 +603,6 @@ class Load extends Tasks {
                 } elseif (isset($atoms[$token[3]])) {
                     if (in_array($token[3], array('T_STRING', 'T_VARIABLE'))) {
                         $T[$Tid]->setProperty('code', $token[1])->save();
-                        $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
                     } elseif ($token[3] == 'T_STRING_VARNAME') {
                         $T[$Tid]->setProperty('atom', $atoms[$token[3]])
                                 ->setProperty('code', '$'.$token[1])
@@ -634,16 +621,11 @@ class Load extends Tasks {
                                 ->setProperty('atom', $atoms[$token[3]])
                                 ->setProperty('code', $token[1])
                                 ->setProperty('fullcode', $token[1])->save();
-
-                        $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
                     } else {
                         $T[$Tid]->setProperty('atom', $atoms[$token[3]])
                                 ->setProperty('modifiedBy', 'bin/load17')
                                 ->setProperty('code', $token[1])
                                 ->setProperty('fullcode', $token[1])->save();
-                        if ($token[3] == 'T_ENCAPSED_AND_WHITESPACE') {
-                            $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
-                        }
                     }
                 }
 
