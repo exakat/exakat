@@ -169,13 +169,18 @@ toDelete.each{ g.removeVertex(it); }
          if (isset($actions['transfert'])) {
             list(, $where) = each($actions['transfert']);
             $next = str_repeat(".out('NEXT')", $where);
-            $qactions[] = "
+            $qactions[] = <<<GREMLIN
 /* transfert property root away  */
+file = it.in('FILE').next();
+
 it.has('root', true)$next.each{
     it.setProperty('root', true);
+    g.addEdge(file, it, 'FILE');
 }
-it.setProperty('root', 'null');
-";
+
+it.removeProperty('root');
+g.removeEdge(it.inE('FILE').next());
+GREMLIN;
             unset($actions['transfert']);
         }
 
@@ -1641,8 +1646,13 @@ if (makeNext == true) {
 current.out('ELEMENT').inE('INDEXED').each{ g.removeEdge(it); };
 
 current.out('ELEMENT').has('root', true).each{
+    file = it.in('FILE').next();
+
     current.setProperty('root', true);
+    g.addEdge(file, current, 'FILE');
+
     it.removeProperty('root');
+    g.removeEdge(it.inE('FILE').next());
 };
 
 ";
