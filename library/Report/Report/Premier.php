@@ -187,7 +187,7 @@ class Premier extends Report {
 
 
                         $this->addContent('TextLead', $description, 'textLead');
-                        $themelist = new \Report\Content\Themelist($list, $this->dashboards);
+                        $themelist = new \Report\Content\ThemeList($list, $this->dashboards);
                         $list = $analyzer->getThemes();
                         $themelist->setList($list);
                         $themelist->setDashboards($this->dashboards);
