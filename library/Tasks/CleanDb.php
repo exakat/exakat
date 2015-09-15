@@ -33,6 +33,7 @@ class CleanDb extends Tasks {
     
     public function run(\Config $config) {
         $this->config = $config;
+
         if ($config->quick) {
             $this->restartNeo4j();
             return false;
@@ -44,6 +45,11 @@ match n
 return count(n)
 CYPHER;
         $result = cypher_query($queryTemplate);
+        if ($result === null) {
+            // Can't connect to neo4j. Forcing restart.
+            $this->restartNeo4j();
+            return false;
+        }
         $result = $result->data;
         $nodes = $result[0][0];
         display($nodes.' nodes in the database');
