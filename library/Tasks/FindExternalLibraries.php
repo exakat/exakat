@@ -48,6 +48,7 @@ class FindExternalLibraries extends Tasks {
                              'pchart'           => self::WHOLE_DIR,
                              'pclzip'           => self::FILE_ONLY,
                              'Propel'           => self::PARENT_DIR,
+                             'gettext_reader'   => self::PARENT_DIR,
                              'phpexcel'         => self::WHOLE_DIR,
                              'phpmailer'        => self::WHOLE_DIR,
                              'services_json'    => self::FILE_ONLY,
@@ -126,9 +127,9 @@ class FindExternalLibraries extends Tasks {
         foreach($tokens as $id => $token) {
             if (is_string($token)) { continue; }
 
-            if ($token[0] == T_WHITESPACE) { continue; }
+            if ($token[0] == T_WHITESPACE)  { continue; }
             if ($token[0] == T_DOC_COMMENT) { continue; }
-            if ($token[0] == T_COMMENT) { continue; }
+            if ($token[0] == T_COMMENT)     { continue; }
         
             if ($token[0] == T_CLASS) {
                 if (!is_array($tokens[$id + 2])) { continue; }
