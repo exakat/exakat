@@ -165,6 +165,9 @@ class Files extends Tasks {
                 } elseif (substr($resFile, 0, 18) == 'Strict standards: ') {
                     preg_match('#Strict standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                } elseif (substr($resFile, 0, 22) == 'PHP Strict Standards: ') {
+                    preg_match('#PHP Strict Standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 17) == 'PHP Deprecated:  ') {
                     preg_match('#PHP Deprecated:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
@@ -177,10 +180,11 @@ class Files extends Tasks {
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
                     // ignore (stdout reporting)
                 } else {
-                    die( "\nCouldn't interpret on syntax error : \n" .
+                    $this->log->log( "\nCouldn't interpret on syntax error : \n" .
                          print_r($resFile, true) .
                          print_r($res, true) .
                          "\n" . __FILE__ . "\n");
+                    // Then, ignore it.
                 }
             }
     
@@ -203,7 +207,7 @@ class Files extends Tasks {
         if ($tokenssot != $tokens) {
             $nosot = explode("\n", trim($resultNosot));
             $nosot2 = array();
-            foreach($nosot as $id => $value) {
+            foreach($nosot as $value) {
                 list($count, $file) = explode(' ', $value);
                 $nosot2[$file] = $count;
             }
@@ -212,7 +216,7 @@ class Files extends Tasks {
 
             $sot = explode("\n", trim($resultSot));
             $sot2 = array();
-            foreach($sot as $id => $value) {
+            foreach($sot as $value) {
                 list($count, $file) = explode(' ', $value);
                 $sot2[$file] = $count;
             }
@@ -220,7 +224,8 @@ class Files extends Tasks {
             unset($sot2);
     
             if (count($nosot) != count($sot)) {
-                die("Error in short open tag analyze\n");
+                $this->log->log("Error in short open tag analyze : not the same number of files ".count($nosot)." / ".count($sot).".\n");
+                break 1;
             }
             $shortOpenTag = array();
             foreach($nosot as $file => $countNoSot) {
