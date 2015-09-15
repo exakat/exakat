@@ -82,7 +82,7 @@ class Files extends Tasks {
         display('Ignoring files');
         // Ignored files
         $datastore->cleanTable('ignoredFiles');
-        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -path "'.(join('" -or -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
+        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -path "'.(join('" -or -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
         $files = trim(shell_exec($shellBase));
 
         $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
@@ -95,7 +95,7 @@ class Files extends Tasks {
 
         // actually used files
         $datastore->cleanTable('files');
-        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
+        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
 
         $files = trim(shell_exec($shellBase));
         $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
