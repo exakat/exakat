@@ -57,7 +57,7 @@ SQL
         list($res, $dbVersion) = $row;
         if ($res) {
             $componentId = $res;
-            print "$vendor/$component already in reference ($version / $dbVersion)\n";
+            print "$vendor/$component already in reference ($version / ".substr($dbVersion, 0, 50).")\n";
         } else {
             print "$vendor/$component is not yet in the database\n";
         }
