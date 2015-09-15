@@ -40,22 +40,23 @@ class Phploc extends Tasks {
             }
 
             $ignoreDirs = array();
-            $ignoreName = array();
             foreach($config->ignore_dirs as $ignore) {
                 if ($ignore[0] == '/') {
                     $d = $config->projects_root.'/projects/'.$config->project.'/code'.$ignore;
-                    if ($toIgnore = glob($d."*")) {
-                        foreach($toIgnore as $x) {
-                            $ignoreDirs[] = $x;
-                        }
+                    if (!file_exists($d)) {
+                        continue;
                     }
+                    $d .= '*';
+                    $ignoreDirs[] = $d;
                 } else {
-                    $ignoreName[] = $ignore;
+                    $ignoreDirs[] = '*'.$ignore.'*';
                 }
             }
 
-            $files = $this->readRecursiveDir($dirPath, $ignoreName, $ignoreDirs);
-            
+            $shellBase = 'find '.$config->projects_root.'/projects/'.$config->project.'/code \\( -name "*.'.(join('" -o -name "*.', Files::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
+            $res = shell_exec($shellBase);
+            $files = explode("\n", $res);
+
             foreach($files as $file) {
                 $this->array_add($loc, $this->countLocInFile($file));
             }
@@ -65,7 +66,6 @@ class Phploc extends Tasks {
                                              array('key' => 'locTotal',    'value' => $loc['total']),
                                              array('key' => 'files',       'value' => $loc['files']),
                                              array('key' => 'tokens',      'value' => $loc['tokens']),
-//                                             array('key' => 'directories', 'value' => $loc['dirs']),
                                         )
                           );
         } elseif (!empty($config->dirname)) {

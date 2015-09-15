@@ -24,6 +24,25 @@
 namespace Tasks;
 
 class Files extends Tasks {
+      static public $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  ),
+                                  'images'   => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot', 'dhp', 'JPG',),
+                                  'media'    => array('ttf', 'swf', 'woff', 'eot', 'otf', ),
+                                  'text'     => array('xml', 'txt', 'rst', 'md', 'markdown', 'po', 'mo', 'pot', 'dtd', 'TXT',
+                                                      'WEBHELP', 'mxml', 'mime', 'latte', 'MIT', 'python', 'text'),
+                                  'config'   => array('neon', 'ini', 'yml', 'yaml') ,
+                                  'web'      => array('html', 'htm', 'css', 'js', 'json', 'less', 'webloc', 'wsdl',  ),
+                                  'document' => array('doc', 'xls', 'docx', 'pdf', 'odt', 'epub', 'book', 'xlsx', 'ods', 'slk' ),
+                                  'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', 'tar', 'bz', 'tbz', ),
+                                  'audio'    => array('mp3', 'fla', 'wav', 'xap', 'ses'),
+                                  'video'    => array('avi', 'pxm') ,
+                                  'data'     => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install',
+                                                      'sqlite', 'lang', 'conf', 'config', 'db', 'phar', 'db3', 'neon', 'data', 'ast'),
+                                  'prog'     => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss',
+                                                      'xsl', 'as', 'cmd','m4', 'dsp', 'sln', 'vcproj', 'w32', 'diff', 'pl', 'dsw', 'am', 'in', 'ac', ),
+                                  'misc'     => array('test', 'table', 'dat', 'admin', 'cur', 'git', 'rng', 'bin',  'ser', 'mgc',),
+                                  'security' => array('pub', 'pem', 'crt', 'xcf', ),
+                     );
+
     public function run(\Config $config) {
         $dir = $config->project;
 
@@ -42,25 +61,6 @@ class Files extends Tasks {
         } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
             die("No code in project '$dir'\nAborting\n");
         }
-
-        $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  ),
-                      'images'   => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot', 'dhp', 'JPG',),
-                      'media'    => array('ttf', 'swf', 'woff', 'eot', 'otf', ),
-                      'text'     => array('xml', 'txt', 'rst', 'md', 'markdown', 'po', 'mo', 'pot', 'dtd', 'TXT',
-                                          'WEBHELP', 'mxml', 'mime', 'latte', 'MIT', 'python', 'text'),
-                      'config'   => array('neon', 'ini', 'yml', 'yaml') ,
-                      'web'      => array('html', 'htm', 'css', 'js', 'json', 'less', 'webloc', 'wsdl',  ),
-                      'document' => array('doc', 'xls', 'docx', 'pdf', 'odt', 'epub', 'book', 'xlsx', 'ods', 'slk' ),
-                      'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', 'tar', 'bz', 'tbz', ),
-                      'audio'    => array('mp3', 'fla', 'wav', 'xap', 'ses'),
-                      'video'    => array('avi', 'pxm') ,
-                      'data'     => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install',
-                                          'sqlite', 'lang', 'conf', 'config', 'db', 'phar', 'db3', 'neon', 'data', 'ast'),
-                      'prog'     => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss',
-                                          'xsl', 'as', 'cmd','m4', 'dsp', 'sln', 'vcproj', 'w32', 'diff', 'pl', 'dsw', 'am', 'in', 'ac', ),
-                      'misc'     => array('test', 'table', 'dat', 'admin', 'cur', 'git', 'rng', 'bin',  'ser', 'mgc',),
-                      'security' => array('pub', 'pem', 'crt', 'xcf', ),
-                     );
 
         $ignoreDirs = array();
         foreach($config->ignore_dirs as $ignore) {
