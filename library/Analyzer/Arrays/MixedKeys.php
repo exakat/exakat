@@ -28,16 +28,20 @@ use Analyzer;
 class MixedKeys extends Analyzer\Analyzer {
 
     public function analyze() {
+        // build with array()
         $this->atomIs('Functioncall')
              ->hasIn('VALUE')
-             ->tokenIs('T_ARRAY')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->fullnspath('\\array')
+             ->_as('result')
              ->outIs('ARGUMENTS')
+             // count keys styles
              ->raw('filter{ m=[:];
                             it.out("ARGUMENT").groupBy(m){
               if (it.out("KEY").any() && it.out("KEY").next().atom in ["Identifier", "Staticconstant"]) { "a" } else { "b" }
              }{it}{it.size()}.iterate();
-m.size() > 1; }');
+m.size() > 1; }')
+              ->back('result');
         $this->prepareQuery();
     }
 }

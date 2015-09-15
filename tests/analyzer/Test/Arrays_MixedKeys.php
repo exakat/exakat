@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Arrays_MixedKeys extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testArrays_MixedKeys01()  { $this->generic_test('Arrays_MixedKeys.01'); }
     public function testArrays_MixedKeys02()  { $this->generic_test('Arrays_MixedKeys.02'); }
+    public function testArrays_MixedKeys03()  { $this->generic_test('Arrays_MixedKeys.03'); }
 }
 ?>
