@@ -1,0 +1,138 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      5
+    Label : LEFT
+      $b3
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'c2'
+          Label : VALUE
+            4
+    Label : LEFT
+      $b2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'D2'
+    Label : LEFT
+      $d2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'D'
+    Label : LEFT
+      $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'c'
+          Label : VALUE
+            3
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'D3'
+    Label : LEFT
+      $d3
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'a'
+          Label : VALUE
+            Concatenation
+            Label : CONCAT
+              -
+              Label : SIGN
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  'c'
+            Label : CONCAT
+              $d
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'a2'
+          Label : VALUE
+            Concatenation
+            Label : CONCAT
+              -
+              Label : RIGHT
+                [
+                Label : VARIABLE
+                  $b2
+                Label : INDEX
+                  'c2'
+              Label : LEFT
+                2
+            Label : CONCAT
+              $d2
+    Label : LEFT
+      $a2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'a3'
+          Label : VALUE
+            Concatenation
+            Label : CONCAT
+              -
+              Label : RIGHT
+                $b3
+              Label : LEFT
+                Concatenation
+                Label : CONCAT
+                  '3'
+                Label : CONCAT
+                  $d
+            Label : CONCAT
+              $d3
+    Label : LEFT
+      $a3
+  Label : ELEMENT
+    print_r
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a3

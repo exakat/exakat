@@ -35,11 +35,11 @@ class Concatenation extends TokenAuto {
                           'Heredoc', 'New' );
         
         $this->conditions = array(-2 => array('token' => array_merge( Assignation::$operators, Comparison::$operators,
-                                                                      Logical::$operators, _Include::$operators,
-                                                                      Bitshift::$operators, _Clone::$operators,
-                                                                      Ternary::$operators, _Return::$operators,
-                                                                      Keyvalue::$operators, RawString::$operators,
-                                                                      Coalesce::$operators, Sign::$operators,
+                                                                      Logical::$operators,     _Include::$operators,
+                                                                      Bitshift::$operators,    _Clone::$operators,
+                                                                      Ternary::$operators,     _Return::$operators,
+                                                                      Keyvalue::$operators,    RawString::$operators,
+                                                                      Coalesce::$operators,    
                                                                       array('T_COLON', 'T_COMMA', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
                                                                             'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                             'T_ECHO', 'T_PRINT','T_OPEN_TAG',
