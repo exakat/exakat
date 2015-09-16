@@ -49,7 +49,7 @@ mv neo4j-community-2.2.4 neo4j
 There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
 
 Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors.) : 
-`
+```
     <repositories>
        <repository>
          <id>snapshots-repo</id>
@@ -58,16 +58,18 @@ Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT.
          <snapshots><enabled>true</enabled></snapshots>
        </repository>
      </repositories>
-  `
+```
   
   Then, in command line : 
 
-`git clone https://github.com/neo4j-contrib/gremlin-plugin.git gremlin
+```
+git clone https://github.com/neo4j-contrib/gremlin-plugin.git gremlin
 cd gremlin
 mvn clean package
 unzip target/neo4j-gremlin-plugin-2.1-SNAPSHOT-server-plugin.zip -d ../neo4j/plugins/gremlin-plugin
 cd ../neo4j
-bin/neo4j restart`
+bin/neo4j restart
+```
 
 ### Various versions of PHP
 You need one version of PHP (at least) to run exakat. This version needs the `curl` and `sqlite3` extensions.  
