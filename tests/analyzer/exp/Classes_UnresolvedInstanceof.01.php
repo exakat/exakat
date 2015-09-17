@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a instanceof b'
+$expected     = array('$a instanceof notDefinedClass'
 );
 
 $expected_not = array('$a instanceof a',

@@ -4,6 +4,6 @@ class a extends Exception {}
 
 $a instanceof a;
 $a instanceof \a;
-$a instanceof b;
+$a instanceof notDefinedClass;
 
 ?>

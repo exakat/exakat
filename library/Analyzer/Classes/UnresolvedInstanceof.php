@@ -39,15 +39,27 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
         $interfaces = $this->loadIni('php_interfaces.ini', 'interfaces');
         $interfaces = $this->makeFullNsPath($interfaces);
         
+        //general case
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->codeIsNot(array('self', 'static', 'parent'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
              ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
              ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
              ->fullnspathIsNot(array_merge($classes, $interfaces))
+             ->back('first');
+        $this->prepareQuery();
+
+        // special case for parents
+        $this->atomIs('Instanceof')
+             ->outIs('CLASS')
+             ->tokenIs('T_STRING')
+             ->code('parent')
+             ->goToClass()
+             ->filter('it.out("EXTENDS").any() == false')
              ->back('first');
         $this->prepareQuery();
     }
