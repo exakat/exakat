@@ -81,8 +81,14 @@ class Report {
     public function render($format, $filename = null) {
         $format = "\\Report\\Format\\$format";
 
+        $config = \Config::factory();
+
         $this->output = new $format();
-        $this->output->setProjectName($this->project);
+        if (!empty($config->project_name)) {
+            $this->output->setProjectName($config->project_name);
+        } else {
+            $this->output->setProjectName($this->project);
+        }
         $this->output->setProjectUrl('');
         $this->output->setSummaryData($this->root);
         
@@ -91,8 +97,6 @@ class Report {
         }
         
         if ($filename !== null) {
-            $config = \Config::factory();
-            
             return $this->output->toFile($config->projects_root.'/projects/'.$config->project.'/'.$filename.'.'.$this->output->getExtension());
         } else {
             die("No filename? ".__METHOD__);
