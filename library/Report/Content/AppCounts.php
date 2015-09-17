@@ -53,7 +53,7 @@ class AppCounts extends \Report\Content {
                      ),
                     'Structures' => array(
                             'Ifthen'        => 'Ifthen',
-                            'Else'          => 'ElseUsage',
+                            'Else'          => 'Structures\\ElseUsage',
                             'Switch'        => 'Switch',
                             'Case'          => 'Case',
                             'Default'       => 'Default',
