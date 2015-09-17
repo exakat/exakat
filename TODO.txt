@@ -1467,8 +1467,12 @@ Robo : check that we have all composer from projects/*
 Add an update for getComposer (update the current status of the database).
 Add getComposer check in Project task, so as to mention forgotten / old version from composer
 
-unset in foreach (on a key) : check that it is not an array (partial unset       unset($project['_type']);)
 eval/create function with constant structures are OK (but why are they here? )
 
 Method that must be called for the object to run (sometimes, objects are build, then finally, some execution happens, and then, they are read).
 This may also be a sequence as documented in a manual / recipe. 
+
+Try to spot classic error generating functions (file_put_contents...)
+
+Written, then only read : This is a constant! 
+Written once and then read : constant property! 
