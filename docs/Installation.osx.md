@@ -65,9 +65,16 @@ Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` fi
 ### Gremlin plug-in
 
 This install [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j.
+  
+First, in command line : 
 
-Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors.) : 
-`
+* `git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git gremlin-plugin`
+* `cd gremlin-plugin`
+
+
+Now, check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors section.) : 
+
+```code
     <repositories>
        <repository>
          <id>snapshots-repo</id>
@@ -76,19 +83,15 @@ Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT.
          <snapshots><enabled>true</enabled></snapshots>
        </repository>
      </repositories>
-  `
-  
-Then, in command line : 
+```
 
-
-* `git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git`
-* `cd gremlin-plugin`
-* `brew install maven`
+Then, finish the compilation : 
+* `brew install maven` // If you haven't installed maven yet
 * `mvn clean package`
 
 `$NEO4J_HOME`  is the home of the neo4j server. It was installed just before. Use the path or set the variable.
 
-* `unzip target/neo4j-gremlin-plugin-2.2-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin`
+* `unzip target/neo4j-gremlin-plugin-2.2.3-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin`
 * `cd $NEO4J_HOME`
 * `bin/neo4j start`
 
