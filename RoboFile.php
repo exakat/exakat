@@ -245,9 +245,13 @@ LICENCE;
 
         // checking inifile files
         $files = Finder::create()->ignoreVCS(true)
-            ->in('data/')
-            ->files()
-            ->name('*.ini');
+                                 ->in('data/')
+                                 ->files()
+                                 ->name('*.ini');
+        $docs = Finder::create()->ignoreVCS(true)
+                                 ->in('human/')
+                                 ->files()
+                                 ->name('*.ini');
         
         $errors = array();
         $total = 0;
@@ -255,6 +259,14 @@ LICENCE;
         set_error_handler('error_handler');
         
         foreach($files as $file) {
+            ++$total;
+            $ini = parse_ini_file($file);
+            if (empty($ini)) {
+                $errors[] = "$file is INI invalid\n";
+            }
+        }
+
+        foreach($docs as $file) {
             ++$total;
             $ini = parse_ini_file($file);
             if (empty($ini)) {
