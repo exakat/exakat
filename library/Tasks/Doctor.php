@@ -161,7 +161,7 @@ class Doctor extends Tasks {
         $stats['neo4j']['$NEO4J_HOME'] = $res;
 
         // zip
-        $res = shell_exec('zip -v');
+        $res = shell_exec('zip -v  2>&1');
         if (preg_match('/command not found/is', $res)) {
             $stats['zip']['installed'] = 'No';
         } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
@@ -370,7 +370,7 @@ INI;
         }
 
         // composer
-        $res = trim(shell_exec('composer about --version'));
+        $res = trim(shell_exec('composer about --version 2>&1'));
         // remove colors from shell syntax
         $res = preg_replace('/\e\[[\d;]*m/', '', $res);
         if (preg_match('/ version ([0-9\.a-z\-]+)/', $res, $r)) {//
@@ -381,7 +381,7 @@ INI;
         }
 
         // wget
-        $res = explode("\n", shell_exec('wget -V'))[0];
+        $res = explode("\n", shell_exec('wget -V 2>&1'))[0];
         if ($res !== '') {//
             $stats['wget']['installed'] = 'Yes';
             $stats['wget']['version'] = $res;
