@@ -83,7 +83,7 @@ DELETE n,r';
             $sshLoad =  'rm -rf data; mkdir -p data; ';
         }
         if (file_exists($config->projects_root.'/neo4j/data/neo4j-service.pid')) {
-            shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid); '.$sshLoad);
+            shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid) 2 >> /dev/null; '.$sshLoad);
         } else {
             shell_exec('cd '.$config->projects_root.'/neo4j/; '.$sshLoad);
         }
