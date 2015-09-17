@@ -31,7 +31,7 @@ class Help extends Tasks {
 [Usage] :   php {$config->executable} init -p <Project name> -R <Repository>
             php {$config->executable} project -p <Project name>
             php {$config->executable} doctor
-            php {$config->executable} version
+            php {$config->executable} version (default)
 
 
 HELP;
