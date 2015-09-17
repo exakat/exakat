@@ -32,11 +32,19 @@ class IsPhpConstant extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $ini = $this->loadIni('php_constants.ini');
-        $constants = $ini['constants'];
+        $constants = $this->loadIni('php_constants.ini', 'constants');
         
+        // Naked constant (PATHINFO_BASENAME)
         $this->analyzerIs("Analyzer\\Constants\\ConstantUsage")
              ->code($constants);
+        $this->prepareQuery();
+
+        // Namespaced constant (\PATHINFO_BASENAME)
+        $this->analyzerIs("Analyzer\\Constants\\ConstantUsage")
+             ->is('absolutens', true)
+             ->outIs('SUBNAME')
+             ->code($constants)
+             ->back('first');
         $this->prepareQuery();
     }
 }

@@ -26,68 +26,109 @@ namespace Analyzer\Functions;
 use Analyzer;
 
 class UseConstantAsArguments extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('IsPhpConstant');
+    }
+    
     public function analyze() {
         $functions = $this->loadJson('php_constant_arguments.json');
 
-        // combinaison : several constants may be combined.
-        $positions = range(0, count((array) $functions->combinaison) - 1);
+        //alternative : one of the constants or nothing
+        $positions = range(0, count((array) $functions->alternative) - 1);
         foreach($positions as $position) {
-            foreach($functions->combinaison->{$position} as $function => $constants) {
-                $constants = $this->makeFullNsPath($constants);
+            foreach($functions->alternative->{$position} as $function => $constants) {
 
-                // if it's a constant, check that constant
+                // Not a PHP constant
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs(array('Identifier', 'Nsname'))
-                     ->fullnspathIsNot($constants)
+                     ->analyzerIsNot('IsPhpConstant')
                      ->back('first');
                 $this->prepareQuery();
 
-                // in a logical combinaison, check that constants are OK
+                // PHP constant but wrong one
+                $this->atomFunctionIs($function)
+                     ->outIs('ARGUMENTS')
+                     ->outIs('ARGUMENT')
+                     ->is('rank', $position)
+                     ->atomIs(array('Identifier', 'Nsname'))
+                     ->analyzerIs('IsPhpConstant')
+                     ->outIsIE('SUBNAME')
+                     ->codeIsNot($constants)
+                     ->back('first');
+                $this->prepareQuery();
+
+                // unwanted guests
+                $this->atomFunctionIs($function)
+                     ->outIs('ARGUMENTS')
+                     ->outIs('ARGUMENT')
+                     ->is('rank', $position)
+                     ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'String', 'Concatenation', 'Logical'))
+                     ->back('first');
+                $this->prepareQuery();
+            }
+        }
+
+        // combinaison : several constants may be combined with a logical operator
+        $positions = range(0, count((array) $functions->combinaison) - 1);
+        foreach($positions as $position) {
+            foreach($functions->combinaison->{$position} as $function => $constants) {
+
+                // if it's a constant, but not a PHP one
+                $this->atomFunctionIs($function)
+                     ->outIs('ARGUMENTS')
+                     ->outIs('ARGUMENT')
+                     ->is('rank', $position)
+                     ->atomIs(array('Identifier', 'Nsname'))
+                     ->analyzerIsNot('IsPhpConstant')
+                     ->back('first');
+                $this->prepareQuery();
+
+                // if it's a PHP constant, but not a good one for the function
+                $this->atomFunctionIs($function)
+                     ->outIs('ARGUMENTS')
+                     ->outIs('ARGUMENT')
+                     ->is('rank', $position)
+                     ->atomIs(array('Identifier', 'Nsname'))
+                     ->analyzerIs('IsPhpConstant')
+                     ->outIsIE('SUBNAME')
+                     ->codeIsNot($constants)
+                     ->back('first');
+                $this->prepareQuery();
+
+                // in a logical combinaison, check that constants are at least PHP's one
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs('Logical')
                      ->atomInside(array('Identifier', 'Nsname'))
+                     ->analyzerIsNot('IsPhpConstant')
                      ->hasNoIn('SUBNAME')
-                     ->fullnspathIsNot($constants)
-                     ->back('first');
+                     ->back('first')
+                     ;
                 $this->prepareQuery();
 
+                // in a logical combinaison, check that constants are the one for the function
+                $this->atomFunctionIs($function)
+                     ->outIs('ARGUMENTS')
+                     ->outIs('ARGUMENT')
+                     ->is('rank', $position)
+                     ->atomIs('Logical')
+                     ->atomInside(array('Identifier', 'Nsname'))
+                     ->analyzerIs('IsPhpConstant')
+                     ->outIsIE('SUBNAME')
+                     ->codeIsNot($constants)
+                     ->back('first');
+                $this->prepareQuery();
                 // unwanted guests
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs(array('Boolean', 'Null', 'Integer', 'Float'))
-                     ->back('first');
-                $this->prepareQuery();
-            }
-        }
-
-        $positions = range(0, count((array) $functions->alternative) - 1);
-        foreach($positions as $position) {
-            foreach($functions->alternative->{$position} as $function => $constants) {
-                $constants = $this->makeFullNsPath($constants);
-
-                $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENTS')
-                     ->outIs('ARGUMENT')
-                     ->is('rank', $position)
-                     ->atomIs(array('Identifier', 'Nsname'))
-                     ->fullnspathIsNot($constants)
-                     ->back('first');
-                $this->prepareQuery();
-
-                // unwanted guests
-                $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENTS')
-                     ->outIs('ARGUMENT')
-                     ->is('rank', $position)
-                     ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'Logical'))
                      ->back('first');
                 $this->prepareQuery();
             }
