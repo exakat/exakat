@@ -60,7 +60,7 @@ class Dump extends Tasks {
             $stmt = $sqlite->prepare($sqlQuery);
 
             foreach($themaClasses as $class) {
-                $count = $datastore->getHash($class) + 0;
+                $count = (int) $datastore->getHash($class);
 
                 $sqlQuery = 'INSERT INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, "'.$class.'", '.$count.' )';
                 $sqlite->query($sqlQuery);
