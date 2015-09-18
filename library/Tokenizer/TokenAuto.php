@@ -2554,7 +2554,7 @@ GREMLIN;
 
 // If next token is not an semicolon only add a ;
 if ($token.out('NAME').has('code', '').any() == false) { // Not Closure
-    if ($token.out('NEXT').filter{ it.token in [$avoidToken]}.any()) { // followed by ;
+    if ($token.out('NEXT').filter{ it.token in [$avoidToken]}.has('atom', null).any()) { // followed by ;
         semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
         tvoid     = g.addVertex(null, [code:'', fullcode:' ', token:'T_VOID', atom:'Void', virtual:true, line:it.line, addSemicolon:true]);
         g.idx('atoms').put('atom', 'Void', tvoid);
@@ -2568,7 +2568,7 @@ if ($token.out('NAME').has('code', '').any() == false) { // Not Closure
         g.addEdge(tvoid, next, 'NEXT');
 
         g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
-    } else { // Not closure (named fucntion)
+    } else { // Closure (named fucntion)
         semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
     
         next = $token.out('NEXT').next();
