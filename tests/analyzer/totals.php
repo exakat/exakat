@@ -23,7 +23,7 @@ foreach($files as $file) {
     
     if (empty($expected) && empty($expected_not)) {
         ++$total;
-        print "Empty tests : $file\n";
+        print "Empty exp files : $file\n";
     }
 }
 print "total unfinished tests : $total\n";
@@ -33,11 +33,27 @@ $files = glob('source/*.php');
 foreach($files as $file) {
     if (filesize($file) < 15) {
         ++$total;
-        print "Empty tests : $file\n";
+        print "Empty source : $file\n";
     }
 }
 print "total unfinished tests : $total\n";
 
+$total = 0;
+$files = glob('../../library/Analyzer/*/*.php');
+
+foreach($files as $file) {
+    $analyze = basename($file);
+    $folder = basename(dirname($file));
+    $test = $folder.'_'.$analyze;
+    if (!file_exists('Test/'.$test)) {
+        ++$total;
+        print "No test : $test\n";
+    }
+//    print $test;
+//    die();
+}
+print "total untested class : $total\n";
+die();
 print shell_exec('find source -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
 print shell_exec('find exp -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
 
