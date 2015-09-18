@@ -37,7 +37,7 @@ class StaticLoop extends Analyzer\Analyzer {
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->atomIs('Variable')
-             ->savePropertyAs('fullcode', 'blind')
+             ->savePropertyAs('code', 'blind')
              ->back('first')
              ->outIs('BLOCK')
              ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode == blind}.any() == false')
@@ -54,11 +54,12 @@ class StaticLoop extends Analyzer\Analyzer {
              ->inIs('KEY')
 
              ->outIs('VALUE')
-             ->savePropertyAs('fullcode', 'value')
+             ->savePropertyAs('code', 'value')
              ->inIs('VALUE')
 
              ->back('first')
              ->outIs('BLOCK')
+             
              ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && (it.object.fullcode == key || it.object.fullcode == value)}.any() == false')
              ->back('first');
         $this->prepareQuery();
@@ -77,6 +78,7 @@ class StaticLoop extends Analyzer\Analyzer {
              // collect all variables
              ->raw('sideEffect{ blind = []; it.out().loop(1){true}{it.object.atom == "Variable"}.aggregate(blind){it.fullcode}.iterate(); }')
              ->inIs('INCREMENT')
+
              ->outIs('BLOCK')
              // check if the variables are used here
              ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode in blind}.any() == false')
