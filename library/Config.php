@@ -280,7 +280,8 @@ class Config {
         }
         
         foreach(self::BOOLEAN_OPTIONS as $key => $config) {
-            if (($id = array_search($key, $args)) !== false) {
+            $id = array_search($key, $args);
+            if ($id !== false) {
                 $this->commandline[$config] = true;
 
                 unset($args[$id]);
@@ -312,7 +313,8 @@ class Config {
                                  );
 
         foreach($optionsValue as $key => $config) {
-            if ( ($id = array_search($key, $args)) !== false) {
+            $id = array_search($key, $args);
+            if ( $id !== false) {
                 if (isset($args[$id + 1])) {
                     if (isset($optionsValue[$args[$id + 1]])) {
                         // in case this option value is actually the next option (exakat -p -T)
