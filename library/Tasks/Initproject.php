@@ -80,6 +80,7 @@ ignore_dirs[] = /docs
 ignore_dirs[] = /doc
 ignore_dirs[] = /tmp
 ignore_dirs[] = /version
+ignore_dirs[] = /vendor
 
 file_extensions =
 
