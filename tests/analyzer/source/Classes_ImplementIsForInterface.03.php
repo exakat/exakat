@@ -8,6 +8,6 @@ class withInterface implements i {}
 
 class withClass implements c {}
 
-class withUndefined implements d {}
+class withUndefined implements undefinedInterface {}
 
 ?>
