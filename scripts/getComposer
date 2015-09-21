@@ -148,7 +148,6 @@ SQL
 
         $sqlite->query("INSERT OR IGNORE INTO versions (component_id, version) VALUES ($componentId, '$v');");
         if (in_array($v, $solvedVersions)) {
-            print "testing $v in solvedVersions\n";
             // needsa a reading 
             $res = $sqlite->query("SELECT id FROM versions WHERE component_id = $componentId AND version= '$v';");
             
