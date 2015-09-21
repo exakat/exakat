@@ -345,15 +345,14 @@ LICENCE;
                 // Checking that structures have the right characters
                 if (preg_match('/[^a-z0-9_\\\\]/i', $row[$col])) {
                     display( $row['id'].') '.$row[$col]." is wrong in table ".$table."\n");
-                    $toDelete[] = $row['id'];
+                    $toDelete[$row['id']] = $row[$col];
                 }
             }
 
             if (!empty($toDelete)) {
 //                print "To be deleted " .implode(', ', $toDelete)."\n";
-//                $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', $toDelete).')');
-                print count($toDelete)." rows removed in $table\n";
-                print_r($toDelete);
+                $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', array_keys($toDelete)).')');
+                print count($toDelete)." rows removed in $table : \"".join('", "', array_values($toDelete))."\"\n";
             }
         }
 
