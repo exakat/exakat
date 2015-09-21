@@ -452,7 +452,7 @@ This may be due to configuration file, compilation error, wrong extension (inclu
         // List of used analyzers
         $this->createLevel2('Analyzers');
         $this->addContent('Text', 'This is the list of analyzers that were run.', 'textLead');
-        $this->addContent('SimpleTable', 'UsedAnalyzerList', 'UsedAnalyzerList');
+        $this->addContent('SimpleTable', 'UsedAnalyzerList', 'usedAnalyzerList');
 
         // About this report
         $this->createLevel2('About This Report');
