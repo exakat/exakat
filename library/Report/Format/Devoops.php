@@ -95,6 +95,27 @@ class Devoops extends \Report\Format {
         $renderSidebar = new \Report\Format\Devoops\SummarySidebar();
         $sidebar = new static();
         
+        // fetching the favicon from the project
+        $faviconHtml = '';
+        if (file_exists($config->dir_root.'/projects/'.$config->project.'/code/favicon.ico')) {
+            // Should be checked and reported
+            copy($config->dir_root.'/projects/'.$config->project.'/code/favicon.ico', $dir.'/img/'.$this->projectName.'.ico');
+            
+            $faviconHtml = <<<HTML
+<img src="img/{$this->projectName}.ico" class="img-circle" alt="{$this->projectName} logo" />
+HTML;
+
+            if (!empty($config->project_url)) {
+                $faviconHtml = "<a href=\"{$config->project_url}\" class=\"avatar\">$faviconHtml</a>";
+            }
+
+            $faviconHtml = <<<HTML
+				<div class="avatar">
+					$faviconHtml
+				</div>
+HTML;
+        } 
+
         if ($this->summary === null) {
             $sidebar = '<!-- No sidebar -->';
         } else {
@@ -108,6 +129,7 @@ class Devoops extends \Report\Format {
         $html = str_replace('EXAKAT_VERSION', \Exakat::VERSION, $html);
         $html = str_replace('EXAKAT_BUILD', \Exakat::BUILD, $html);
         $html = str_replace('PROJECT_NAME', $this->projectName, $html);
+        $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 
         file_put_contents($dir.'/index.'.$this->fileExtension, $html);
         
