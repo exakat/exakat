@@ -149,6 +149,7 @@ SQL
     //                print "   $class found in $nsid\n";
                 } else {
                     $sqlite->query("INSERT INTO classes (namespace_id, classname) VALUES ('{$namespacesIds[$ns]}', '$class');");
+                    print "Insertion de '$class'\n";
                 }
             }
         }
@@ -194,7 +195,9 @@ print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
 $res = $sqlite->query("SELECT count(*) AS nb FROM traits");
 print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
 
+unset($sqlite);
 // print "Optimize database\n";
+print shell_exec('robo check:composer');
 shell_exec('sqlite3 my.db "VACUUM;"');
 
 $tmpdirs = opendir(sys_get_temp_dir());
