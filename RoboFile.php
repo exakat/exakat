@@ -351,11 +351,47 @@ LICENCE;
 
             if (!empty($toDelete)) {
 //                print "To be deleted " .implode(', ', $toDelete)."\n";
-                $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', $toDelete).')');
+//                $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', $toDelete).')');
                 print count($toDelete)." rows removed in $table\n";
+                print_r($toDelete);
             }
         }
+
+        $downLink = array('trait'     => 'namespace',
+                          'interface' => 'namespace',
+                          'classe'    => 'namespace',
+                          'namespace' => 'version',
+                          'version'   => 'component');
         
+        foreach($downLink as $child => $parent) {
+            $res = $sqlite->query('SELECT '.$child.'s.id FROM '.$child.'s LEFT JOIN '.$parent.'s ON '.$child.'s.'.$parent.'_id = '.$parent.'s.id WHERE '.$parent.'s.id IS NULL');
+            $missing = 0;
+            while($row = $res->fetchArray()) {
+                ++$missing;
+            }
+
+            $res = $sqlite->query('SELECT * FROM '.$child.'s');
+            $total = 0;
+            while($row = $res->fetchArray()) {
+                ++$total;
+            }
+
+            print "Found $missing / $total {$child}s without parent {$parent}s\n";
+        }
+        print "\n";
+
+        foreach(array_flip($downLink) as $parent => $child) {
+            $res = $sqlite->query('SELECT count(*) FROM '.$parent.'s LEFT JOIN '.$child.'s ON '.$child.'s.'.$parent.'_id = '.$parent.'s.id GROUP BY '.$parent.'s.id HAVING COUNT(*) = 0');
+            $children = 0;
+            while($row = $res->fetchArray()) {
+                ++$children;
+            }
+
+            if ($children == 0) {
+                print "Found $children $parent without $child\n";
+                // what to do?
+            }
+        }
         // What are empty Namespaces ? namespace == ''
     }
     
