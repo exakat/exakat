@@ -250,6 +250,16 @@ CREATE TABLE hash (
 SQLITE;
                 break;
 
+            case 'analyzed' : 
+                $createTable = <<<SQLITE
+CREATE TABLE analyzed (
+  id INTEGER PRIMARY KEY,
+  analyzer TEXT UNIQUE,
+  counts TEXT
+);
+SQLITE;
+                break;
+
             case 'composer' : 
                 $createTable = <<<SQLITE
 CREATE TABLE composer (

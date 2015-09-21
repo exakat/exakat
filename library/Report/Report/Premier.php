@@ -329,8 +329,68 @@ TEXT
 );
             $this->addContent('Horizontal', $composerList, 'composer');
         }
+
+        // List of dynamic calls
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls');
+        $this->createLevel2('Dynamic code');
+        $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');
+        if ($analyzer->hasResults()) {
+            $this->addContent('Horizontal', $analyzer);
+        } else {
+            $text = <<<'TEXT'
+No dynamic calls where found in the code. Dynamic calls may be one of the following : 
+<ul>
+    <li>Constant<br />
+    <ul>
+        <li>define('CONSTANT_NAME', $value);</li>
+        <li>constant('Constant name');</li>
+    </ul></li>
+
+    <li>Variables<br />
+    <ul>
+        <li>$$variablevariable</li>
+        <li>${$variablevariable}</li>
+    </ul></li>
+
+    <li>Properties<br />
+    <ul>
+        <li>$object->$propertyName</li>
+        <li>$object->{$propertyName}</li>
+        <li>$object->{'property'.'Name'}</li>
+    </ul></li>
+
+    <li>Methods<br />
+    <ul>
+        <li>$object->$methodName()</li>
+        <li>call_user_func(array($object, $methodName), $arguments)</li>
+    </ul></li>
+
+    <li>Static Constants<br />
+    <ul>
+        <li>constant('StaticClass::ConstantName');</li>
+    </ul></li>
+
+    <li>Static Properties<br />
+    <ul>
+        <li>$class::$propertyName</li>
+        <li>$class::{$propertyName}</li>
+        <li>$class::{'property'.'Name'}</li>
+    </ul></li>
+
+    <li>Static Methods<br />
+    <ul>
+        <li>$class::$methodName()</li>
+        <li>call_user_func(array('Class', $methodName), $arguments)</li>
+    </ul></li>
+
+</ul>
+
+TEXT;
+            $this->addContent('Text', $text);
+        }
         
-        $this->createLevel1('Stats');
+        // Stats        
+        $this->createLevel2('Stats');
         $this->addContent('Text', <<<TEXT
 These are various stats of different structures in your application.
 
@@ -367,9 +427,11 @@ TEXT
 /////////////////////////////////////////////////////////////////////////////////////
         $this->createLevel1('Annexes');
 
-//        $this->createLevel2('Documentation');
-//        $this->addContent('Definitions', $definitions, 'annexes');
+        // Definition for the analyzers
+        $this->createLevel2('Documentation');
+        $this->addContent('Definitions', $definitions, 'annexes');
 
+        // List of processed files
         $this->createLevel2('Processed files');
         $this->addContent('Text', 'This is the list of processed files. Any file that is in the project, but not in the list below was omitted in the analyze. 
         
@@ -377,27 +439,22 @@ This may be due to configuration file, compilation error, wrong extension (inclu
 
         $this->addContent('SimpleTable', 'ProcessedFileList', 'oneColumn');
 
-        // List of dynamic calls
-        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls');
-        if ($analyzer->hasResults()) {
-            $this->createLevel2('Dynamic code');
-            $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');
-            $this->addContent('Horizontal', $analyzer);
-        }
-
+        // List of processed files
         $this->createLevel2('Non-processed files');
         $this->addContent('Text', 'This is the list of non-processed files. The following files were found in the project, but were omitted as requested in the config.ini file.', 'textLead');
-
-        $this->addContent('SimpleTable', 'NonprocessedFileList', 'oneColumn');
-
-        // List of dynamic calls
-        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls');
         if ($analyzer->hasResults()) {
-            $this->createLevel2('Dynamic code');
-            $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');
-            $this->addContent('Horizontal', $analyzer);
+            $this->addContent('Text', 'This is the list of non-processed files. The following files were found in the project, but were omitted as requested in the config.ini file.', 'textLead');
+            $this->addContent('SimpleTable', 'NonprocessedFileList', 'oneColumn');
+        } else {
+            $this->addContent('Text', 'All files and folder were used');
         }
 
+        // List of used analyzers
+        $this->createLevel2('Analyzers');
+        $this->addContent('Text', 'This is the list of analyzers that were run.', 'textLead');
+        $this->addContent('SimpleTable', 'UsedAnalyzerList', 'UsedAnalyzerList');
+
+        // About this report
         $this->createLevel2('About This Report');
         $aboutDevoops = <<<Devoops
             This report has been build, thanks to the following other Open Source projects. 
@@ -415,7 +472,6 @@ This may be due to configuration file, compilation error, wrong extension (inclu
 				<p>Twitter - <a href="https://twitter.com/jQuery" target="_blank">https://twitter.com/jQuery</a></p>
 			</div>
 Devoops;
-
         $this->addContent('Text', $aboutDevoops);
     }
 }

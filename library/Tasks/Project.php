@@ -85,6 +85,8 @@ class Project extends Tasks {
         // cleaning datastore
         $datastore = new \Datastore($config);
         $datastore->cleanTable('hash');
+        $datastore->cleanTable('analyzed');
+        
         $audit_start = time();
         $datastore->addRow('hash', array('audit_start' => $audit_start,
                                          'exakat_version' => \Exakat::VERSION,

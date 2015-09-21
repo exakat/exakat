@@ -34,6 +34,7 @@ class Analyze extends Tasks {
         $begin = microtime(true);
 
         $datastore = new \Datastore($config);
+
         if ($config->program !== null) {
             $analyzer = $config->program;
             if (\Analyzer\Analyzer::getClass($analyzer)) {
@@ -174,7 +175,7 @@ GREMLIN;
                 $end = microtime(true);
                 $this->log->log("$analyzer_class\t".($end - $begin)."\t$count\t$processed\t$queries\t$rawQueries");
                 // storing the number of row found in Hash table (datastore)
-                $datastore->addRow('hash', array($analyzer_class => $count ) );
+                $datastore->addRow('analyzed', array($analyzer_class => $count ) );
             }
         }
 
