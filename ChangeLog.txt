@@ -1,4 +1,4 @@
-Version 0.3.3 (Immortal Zhenyuan, Coming up)
+Version 0.3.4 (Qingfeng, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 0.3.3 (Immortal Zhenyuan, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.3 (Immortal Zhenyuan, 2014-09-21)
++ Architecture
+    + Removed some shell stderr that leaked to the main script
++ Report
+    + Added the list of used analyzers
+    + favicon is now used in the report (Devoops)
+    + Fixed count report for Else 
+    + Fixed directive reports for trader, bcmath and ldap.
++ Analyzer
+    + Rebuild the composer database
+    + Fixed htmlentities analyze
+    + Spot usage of 'substr($s, $p, +/- 1)' and recommend '$s[$p]'
++ Tokenizer
+    + Fixed Multiplication with instantiation
 
 Version 0.3.2 (Tiger Vanguard, 2014-09-14)
 + Report
