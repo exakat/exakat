@@ -1476,3 +1476,16 @@ Try to spot classic error generating functions (file_put_contents...)
 
 Written, then only read : This is a constant! 
 Written once and then read : constant property! 
+
+Support symlink for le code, le projet, neoj4...
+
+mpdf : is it totally removed ? 
+
+Support for ( and ) in file names
+
+Build a difference of API between version of a same library : constants, functions, classes, and arguments.
+May be for PHP? 
+
+Publication : run a few commands on the new exakat to make sure it is OK.
+
+Tokenizer : make nsname go directly in the neo4j.
