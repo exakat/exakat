@@ -31,8 +31,9 @@ class Power extends TokenAuto {
         $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators,
                                                                          Staticproperty::$operators,
                                                                          Concatenation::$operators,
-                                                                         Preplusplus::$operators,
-                                                                         Sign::$operators)),
+                                                                         Preplusplus::$operators
+//                                                                         Sign::$operators
+                                                                         )),
                                   -1 => array('atom'  => Multiplication::$operands ),
                                    0 => array('token' => Power::$operators,
                                               'atom'  => 'none'),
