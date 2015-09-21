@@ -27,7 +27,7 @@ class Trader extends Directives {
     public function __construct() {
         $this->name         = 'Trader';
         
-        if ($this->checkPresence('Extensions\\Extfilter')) {
+        if ($this->checkPresence('Extensions\\Exttrader')) {
             $this->directives[] = $this->extraConfiguration($this->name, 'trader');
         }
     }

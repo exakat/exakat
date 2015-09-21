@@ -27,7 +27,7 @@ class Ldap extends Directives {
     public function __construct() {
         $this->name         = 'Ldap';
         
-        if ($this->checkPresence('Extensions\\Extfilter')) {
+        if ($this->checkPresence('Extensions\\Extldap')) {
             $this->directives[] = $this->extraConfiguration($this->name, 'ldap');
         }
     }

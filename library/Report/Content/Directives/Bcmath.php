@@ -27,7 +27,7 @@ class Bcmath extends Directives {
     public function __construct() {
         $this->name         = 'Bcmath';
         
-        if ($this->checkPresence('Extensions\\Extfilter')) {
+        if ($this->checkPresence('Extensions\\Bcmath')) {
             $this->directives[] = $this->extraConfiguration($this->name, 'bc');
         }
     }
