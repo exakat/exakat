@@ -88,6 +88,7 @@ file_put_contents('library/Analyzer/'.$analyzer.'.php', $php);
 $ini = <<<INI
 name = "$analyzer";
 description = "";
+clearphp = "";
 
 INI;
 
