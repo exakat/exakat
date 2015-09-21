@@ -68,18 +68,54 @@ SQL
 foreach($components as $fullName => $version) {
     list($vendor, $component) = explode('/', strtolower($fullName));
     
+    processComponent($vendor, $component, $version);
+}
+
+$res = $sqlite->query("SELECT count(*) AS nb FROM components");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." components\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM versions");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." versions\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM classes");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." classes\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM interfaces");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM traits");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
+
+unset($sqlite);
+// print "Optimize database\n";
+//print shell_exec('robo check:composer');
+shell_exec('sqlite3 my.db "VACUUM;"');
+
+$count = 0;
+foreach(glob(sys_get_temp_dir()."/exComposer*") as $tmpdir) {
+    if (strpos($tmpdir, 'exComposer') === false) {
+        continue;
+    }
+    ++$count;
+    shell_exec( "rm -rf $tmpdir");
+}
+print "Removed $count temporary dirs\n";
+
+function processComponent($vendor, $component, $version, $dir = '') {
+    global $sqlite; 
+    
     $res = $sqlite->query(<<<SQL
-SELECT id FROM components 
+SELECT versions.version AS version, components.id AS id FROM components 
+        JOIN versions 
+            ON versions.component_id = components.id
         WHERE vendor='$vendor' AND 
               component = '$component'
+        ORDER BY versions.version DESC
 SQL
 );
 
-    $res = $res->fetchArray(SQLITE3_ASSOC)['id'];
+    $res = $res->fetchArray(SQLITE3_ASSOC);
 
     if ($res) {
-        $componentId = $res;
-        print "$vendor/$component already in reference ($version)\n";
+        $componentId = $res['id'];
+        print substr("$vendor/$component".str_repeat(' ', 50), 0, 50)."$version / {$res['version']}\n";
+//        continue;
     } else {
         $date = time();
         $sqlite->query("INSERT INTO components (vendor, component, last_check) VALUES ('$vendor', '$component', $date);");
@@ -88,41 +124,71 @@ SQL
     }
     
     print "Reading $vendor/$component versions\n";
-    $res = shell_exec('composer show '.$fullName);
+    $res = shell_exec('composer show '.$vendor.'/'.$component);
 
     // remove colors
     $res = preg_replace('/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/s', '', $res);
     preg_match_all("#versions : (.*?)\n#s", $res, $r);
     $versions = explode(', ', $r[1][0]);
 
-    foreach($versions as $v) {
-        if ($v[0] == 'v') { $v = substr($v, 1);}
-        $sqlite->query("INSERT OR IGNORE INTO versions (component_id, version) VALUES ($componentId, '$v');");
+    $res = shell_exec('composer show '.$vendor.'/'.$component.' '.$version.' 2>&1');
+    preg_match_all("#versions : (.*?)\n#s", $res, $r);
+    $solvedVersions = explode(', ', $r[1][0]);
+    foreach($solvedVersions as &$sv) {
+        if ($sv[0] == 'v') { 
+            $sv = substr($sv, 1);
+        }
     }
-
-    print "Fetching $vendor/$component\n";
-    $composer = new stdClass();
-    $composer->require = new stdClass();
-    $composer->require->$fullName = $version;
-    $json = json_encode($composer);
+    unset($sv);
     
-    $tmpdir = tempnam(sys_get_temp_dir(), 'exComposer');
-    unlink($tmpdir);
-    mkdir($tmpdir, 0755);
-    file_put_contents($tmpdir.'/composer.json', $json);
-//    print $tmpdir."\n";
+    foreach($versions as $v) {
+        if ($v[0] == 'v') { 
+            $v = substr($v, 1);
+        }
 
-    print shell_exec("cd $tmpdir; composer update");
+        $sqlite->query("INSERT OR IGNORE INTO versions (component_id, version) VALUES ($componentId, '$v');");
+        if (in_array($v, $solvedVersions)) {
+            print "testing $v in solvedVersions\n";
+            // needsa a reading 
+            $res = $sqlite->query("SELECT id FROM versions WHERE component_id = $componentId AND version= '$v';");
+            
+            $versionId = $res->fetchArray(SQLITE3_ASSOC)['id'];
+        }
+    }
+            if (empty($versionId)) {
+                print "SELECT id FROM versions WHERE component_id = $componentId AND version= '$v';\n$version requested\n";
+                die();
+            }
 
-    $files = recursiveReaddir($tmpdir.'/vendor/'.strtolower($fullName));
+    if ($dir === '') {
+        print "Fetching $vendor/$component\n";
+        $composer = new stdClass();
+        $composer->require = new stdClass();
+        $composer->require->{$vendor.'/'.$component} = $version;
+        $json = json_encode($composer);
+    
+        $tmpdir = tempnam(sys_get_temp_dir(), 'exComposer');
+        unlink($tmpdir);
+        mkdir($tmpdir, 0755);
+        file_put_contents($tmpdir.'/composer.json', $json);
+
+        print shell_exec("cd $tmpdir; composer update");
+
+        print $tmpdir.'/vendor/'.$vendor.'/'.$component."\n";
+    } else {
+        $tmpdir = $dir;
+        
+        print "Reusing dir $tmpdir\n";
+    }
+    
+    $files = recursiveReaddir($tmpdir.'/vendor/'.$vendor.'/'.$component);
     $all = array();
     foreach($files as $file) {
         $all = array_merge_recursive($all, processFile($file));
     }
     
-    $res = $sqlite->query("SELECT id FROM versions WHERE component_id = ".$componentId);
-    $versionId = $res->fetchArray(SQLITE3_ASSOC)['id'];
-    
+    print "$vendor/$component / $version ($componentId / $versionId)\n";
+
     $namespacesIds = array();
     foreach($all as $type => $objects) {
         foreach(array_keys($objects) as $ns) {
@@ -135,11 +201,12 @@ SQL
                 } else {
                     $sqlite->query("INSERT INTO namespaces (version_id, namespace) VALUES ('$versionId', '$ns');");
                     $namespacesIds[$ns] = $sqlite->lastInsertRowID();
+                    print "Insertion du namespace '$ns'\n";
                 }
             }
         }
     }
-    
+
     if (isset($all['Class'])) {
         foreach($all['Class'] as $ns => $classes) {
             foreach($classes as $class) {
@@ -149,7 +216,7 @@ SQL
     //                print "   $class found in $nsid\n";
                 } else {
                     $sqlite->query("INSERT INTO classes (namespace_id, classname) VALUES ('{$namespacesIds[$ns]}', '$class');");
-                    print "Insertion de '$class'\n";
+                    print "Insertion de la classe '$class'\n";
                 }
             }
         }
@@ -182,31 +249,19 @@ SQL
             }
         }
     }
-}
-
-$res = $sqlite->query("SELECT count(*) AS nb FROM components");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." components\n";
-$res = $sqlite->query("SELECT count(*) AS nb FROM versions");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." versions\n";
-$res = $sqlite->query("SELECT count(*) AS nb FROM classes");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." classes\n";
-$res = $sqlite->query("SELECT count(*) AS nb FROM interfaces");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
-$res = $sqlite->query("SELECT count(*) AS nb FROM traits");
-print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
-
-unset($sqlite);
-// print "Optimize database\n";
-print shell_exec('robo check:composer');
-shell_exec('sqlite3 my.db "VACUUM;"');
-
-$tmpdirs = opendir(sys_get_temp_dir());
-
-while($tmpdir = readdir($tmpdirs)) {
-    if (strpos($tmpdir, 'exComposer') === false) {
-        continue;
+    
+    if ($dir === '') {
+        $installed = json_decode(file_get_contents($tmpdir.'/composer.lock'));
+        
+        foreach($installed->packages as $package) {
+            list($subVendor, $subComponent) = explode('/', $package->name);
+            if (substr($package->version, 0, 1) == 'v') {
+                $package->version = substr($package->version, 1);
+            }
+            print " + $subVendor / $subComponent ".$package->version."\n";
+            processComponent($subVendor, $subComponent, $package->version, $tmpdir);
+        }
     }
-    shell_exec( "rm -rf $tmpdir");
 }
 
 
@@ -242,17 +297,21 @@ function processFile($file) {
             switch($token[0]) {
                 case T_NAMESPACE : 
                     $namespace = '';
-                    for ($i = $id + 2; ($tokens[$i] != ';') && ($i - $id < 20); $i++) {
+                    for ($i = $id + 2; ($tokens[$i] != ';') && ($tokens[$i] != '{') && ($i - $id < 20); $i++) {
                         if (is_array($tokens[$i])) {
                             $namespace .= $tokens[$i][1];
                         } else {
                             $namespace .= $tokens[$i];
                         }
                     }
+                    $namespace = trim($namespace);
                     break;
 
                 case T_CLASS : 
-                    $return['Class'][$namespace][] = $tokens[$id + 2][1];
+                    // skip ::class 
+                    if ($tokens[$id - 1][1] != '::') { 
+                        $return['Class'][$namespace][] = $tokens[$id + 2][1];
+                    }
                     break;
 
                 case T_INTERFACE : 
