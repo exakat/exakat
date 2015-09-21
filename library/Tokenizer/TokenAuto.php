@@ -2861,7 +2861,7 @@ GREMLIN;
         return $queryConditions;
     }
 
-    abstract function fullcode() ;
+    abstract public function fullcode() ;
 }
 
 ?>
