@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Composer_IsComposerClass extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testComposer_IsComposerClass01()  { $this->generic_test('Composer_IsComposerClass.01'); }
+    public function testComposer_IsComposerClass02()  { $this->generic_test('Composer_IsComposerClass.02'); }
 }
 ?>

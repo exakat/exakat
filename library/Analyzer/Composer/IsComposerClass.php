@@ -25,6 +25,12 @@ class IsComposerClass extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->fullnspath($classesFullNP);
         $this->prepareQuery();
+
+        $this->atomIs('New')
+             ->outIs('NEW')
+//             ->atomIs('Nsname')
+             ->fullnspath($classesFullNP);
+        $this->prepareQuery();
     }
 }
 
