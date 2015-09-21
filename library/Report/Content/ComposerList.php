@@ -27,9 +27,7 @@ class ComposerList extends \Report\Content {
     private $analyzers = array();
     protected $name = 'Composer';
 
-    public function hasResults() { return true; }
-
-    public function getArray() {
+    public function collect() {
         $res = gremlin_query(<<<GREMLIN
 g.idx("analyzers")[["analyzer":"Analyzer\\\\Composer\\\\IsComposerNsname"]].out
     .sideEffect{c = it;}
@@ -40,12 +38,20 @@ g.idx("analyzers")[["analyzer":"Analyzer\\\\Composer\\\\IsComposerNsname"]].out
 GREMLIN
 );
 
+        if (empty($res->results)) {
+            $this->array = [];
+            $this->hasResults = false;
+
+            return;
+        }
+
         foreach($res->results as &$r) {
             $r = (array) $r;
         }
-        return $res->results;
-    }
-    
+        unset($r);
+        
+        $this->array = $res->results;
+   }
 }
 
 ?>
