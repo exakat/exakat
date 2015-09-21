@@ -271,6 +271,17 @@ LICENCE;
             $ini = parse_ini_file($file);
             if (empty($ini)) {
                 $errors[] = "$file is INI invalid\n";
+                continue 1;
+            }
+            
+            if (empty($ini['name'])) {
+                $errors[] = "$file has an empty name\n";
+                continue 1;
+            }
+
+            if (empty($ini['description'])) {
+                $errors[] = "$file has an empty description\n";
+                continue 1;
             }
         }
         set_error_handler(NULL);
