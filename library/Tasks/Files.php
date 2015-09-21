@@ -198,7 +198,7 @@ class Files extends Tasks {
         $shell = $shellBase . ' | sort | tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
         
         $resultNosot = shell_exec($shell);
-        $tokens = (int) array_sum(explode("\n", $resultNosot)); 
+        $tokens = (int) array_sum(explode("\n", $resultNosot));
 
         display('Check short tag (with directive activated)');
         $shell = $shellBase . ' | sort |  tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';

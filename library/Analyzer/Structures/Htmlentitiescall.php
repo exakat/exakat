@@ -48,7 +48,7 @@ class Htmlentitiescall extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // Case 2nd argument is a constant 
+        // Case 2nd argument is a constant
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
