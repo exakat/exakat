@@ -392,6 +392,20 @@ LICENCE;
             }
         }
         // What are empty Namespaces ? namespace == ''
+
+        // Display stats
+        print "\n";
+        $res = $sqlite->query("SELECT count(*) AS nb FROM components");
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']." components\n";
+        $res = $sqlite->query("SELECT count(*) AS nb FROM versions");
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']." versions\n";
+        $res = $sqlite->query("SELECT count(*) AS nb FROM classes");
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']." classes\n";
+        $res = $sqlite->query("SELECT count(*) AS nb FROM interfaces");
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
+        $res = $sqlite->query("SELECT count(*) AS nb FROM traits");
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
+        print "\n";
     }
     
     public function checkDirective() {
