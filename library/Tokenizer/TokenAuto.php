@@ -125,7 +125,7 @@ toDelete.each{ g.removeVertex(it); }
             do {
                 $begin = microtime(true);
                 $res = gremlin_query($query);
-                if (!is_object($res)) {
+                if (!isset($res->results)) {
                     var_dump($res);
                     print $query."\n";
                     die();
@@ -2594,7 +2594,9 @@ GREMLIN;
 /* always adds a semicolon (except rare cases) */
 
 // If next token is not an semicolon only add a ;
-if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false) {
+if ($token.out('NEXT').has('token', 'T_CLOSE_PARENTHESIS').has('atom', null).any()) {
+    // Do nothing
+} else if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false) {
     semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
 
     next = $token.out('NEXT').next();

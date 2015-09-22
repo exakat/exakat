@@ -28,6 +28,23 @@ class _Class extends TokenAuto {
     static public $atom = 'Class';
 
     public function _check() {
+    // class ( arguments ) {} Get the arguments
+        $this->conditions = array( 0 => array('token' => _Class::$operators),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   2 => array('atom'  => 'Arguments'),
+                                   3 => array('token' => 'T_CLOSE_PARENTHESIS')
+                                 );
+        
+        $this->actions = array('transform'   => array(   1 => 'DROP', 
+                                                         2 => 'ARGUMENTS',
+                                                         3 => 'DROP',
+                                                         ),
+                               'keepIndexed' => true,
+                               'atom'        => 'Class',
+                               'cleanIndex'  => true
+                               );
+        $this->checkAuto();
+
     // class x {} Get the name
         $this->conditions = array( 0 => array('token' => _Class::$operators),
                                    1 => array('atom'  => array('Identifier', 'Null', 'Boolean'))
@@ -92,7 +109,13 @@ class _Class extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.fullcode = "class " + it.out("NAME").next().code;
+fullcode.fullcode = "class ";
+
+// class name
+fullcode.out("NAME").each{ fullcode.fullcode = fullcode.fullcode + it.code;}
+
+// class arguments
+fullcode.out("ARGUMENTS").each{ fullcode.fullcode = fullcode.fullcode + '(' + it.fullcode + ')';}
 
 // abstract
 fullcode.out("ABSTRACT").each{ fullcode.fullcode = 'abstract ' + fullcode.fullcode;}

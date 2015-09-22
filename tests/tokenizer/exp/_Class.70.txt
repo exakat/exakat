@@ -1,0 +1,44 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        new
+        Label : NEW
+          class
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $i
+            Label : ARGUMENT
+              $k
+            Label : ARGUMENT
+              $j
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              function
+              Label : PUBLIC
+                public
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $i
+              Label : NAME
+                __construct
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    $i
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      i

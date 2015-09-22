@@ -32,7 +32,7 @@ class _New extends TokenAuto {
                                              'atom'       => 'none'),
                                   1 => array('atom'       => array('Functioncall', 'Constant', 'Variable', 'Methodcall', 'String',
                                                                    'Array', 'Property', 'Staticproperty', 'Staticmethodcall',
-                                                                   'Nsname', 'Identifier')),
+                                                                   'Nsname', 'Identifier', 'Class')),
                                   2 => array('notToken' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR',
                                                                  'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_DOUBLE_COLON',
                                                                  'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' )),
