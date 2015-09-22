@@ -28,7 +28,7 @@ use Analyzer;
 class IsExtClass extends Analyzer\Analyzer {
 
     public function dependsOn() {
-        return array("Analyzer\\Classes\\ClassUsage");
+        return array('Classes/ClassUsage');
     }
     
     public function analyze() {
@@ -47,7 +47,7 @@ class IsExtClass extends Analyzer\Analyzer {
         
         $classes = $this->makeFullNsPath($classes);
         
-        $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
+        $this->analyzerIs('Classes/ClassUsage')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR', 'T_AS'))
              ->fullnspath($classes);
         $this->prepareQuery();
