@@ -23,14 +23,23 @@
 
 namespace Report\Content;
 
-class NonprocessedFileList extends \Report\Content {
+class ExternalLibraries extends \Report\Content {
+    protected $name = 'External libraries';
+    
     public function collect() {
-        $this->array = \Analyzer\Analyzer::$datastore->getCol('ignoredFiles', 'file');
-        $this->array = array_map(function ($a) { return array($a); }, $this->array);
+        $config = \Config::factory();
+        $datastore = new \Datastore($config);
         
-        $this->hasResult = (boolean) count($this->array);
+        $externallibraries = $this->loadJson('externallibraries');
+        
+        $this->array = $datastore->getRow('externallibraries');
+        foreach($this->array as &$row) {
+            unset($row['id']);
+            $row = [$row['library'], $row['file'], "<a href=\"".$externallibraries->{strtolower($row['library'])}->homepage."\">".$row['library']." <i class=\"fa fa-sign-out\"></i></a>"];
+        }
+        unset($row);
 
-        return true;
+        $this->hasResults = (boolean) count($this->array);
     }
 }
 

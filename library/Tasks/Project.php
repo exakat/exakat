@@ -86,6 +86,7 @@ class Project extends Tasks {
         $datastore = new \Datastore($config);
         $datastore->cleanTable('hash');
         $datastore->cleanTable('analyzed');
+        $datastore->cleanTable('externallibraries');
         
         $audit_start = time();
         $datastore->addRow('hash', array('audit_start' => $audit_start,

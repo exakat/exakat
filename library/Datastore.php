@@ -59,7 +59,7 @@ class Datastore {
                 foreach($d as &$e) {
                     $e = Sqlite3::escapeString($e);
                 }
-                (unset) $e;
+                unset($e);
                 
             } else {
                 $d = array($key, $row);
@@ -256,6 +256,16 @@ CREATE TABLE analyzed (
   id INTEGER PRIMARY KEY,
   analyzer TEXT UNIQUE,
   counts TEXT
+);
+SQLITE;
+                break;
+
+            case 'externallibraries' : 
+                $createTable = <<<SQLITE
+CREATE TABLE externallibraries (
+  id INTEGER PRIMARY KEY,
+  library TEXT UNIQUE,
+  file TEXT
 );
 SQLITE;
                 break;

@@ -33,7 +33,7 @@ class FindExternalLibraries extends Tasks {
                              'cpdf'             => self::WHOLE_DIR, // ezpdf
                              'dompdf'           => self::PARENT_DIR,
                              'fpdf'             => self::FILE_ONLY,
-                             'graph'            => self::PARENT_DIR,
+                             'graph'            => self::PARENT_DIR, // Jpgraph
                              'html2pdf'         => self::WHOLE_DIR, // contains tcpdf
                              'htmlpurifier'     => self::FILE_ONLY,
                              'http_class'       => self::WHOLE_DIR,
@@ -47,18 +47,21 @@ class FindExternalLibraries extends Tasks {
                              'passwordhash'     => self::FILE_ONLY,
                              'pchart'           => self::WHOLE_DIR,
                              'pclzip'           => self::FILE_ONLY,
-                             'Propel'           => self::PARENT_DIR,
+                             'propel'           => self::PARENT_DIR,
                              'gettext_reader'   => self::PARENT_DIR,
                              'phpexcel'         => self::WHOLE_DIR,
                              'phpmailer'        => self::WHOLE_DIR,
+                             'qrcode'           => self::FILE_ONLY,
                              'services_json'    => self::FILE_ONLY,
                              'sfyaml'           => self::WHOLE_DIR,
+                             'swift'            => self::WHOLE_DIR,
                              'smarty'           => self::WHOLE_DIR,
                              'tcpdf'            => self::WHOLE_DIR,
                              'text_diff'        => self::WHOLE_DIR,
                              'text_highlighter' => self::WHOLE_DIR,
                              'tfpdf'            => self::WHOLE_DIR,
                              'utf8'             => self::WHOLE_DIR,
+                             'ci_xmlrpc'        => self::FILE_ONLY,
                              'yii'              => self::FILE_ONLY,
                              );
 
@@ -76,8 +79,8 @@ class FindExternalLibraries extends Tasks {
         $ini = parse_ini_file($configFile);
         
         if ($config->update && isset($ini['FindExternalLibraries'])) {
-            display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the file.');
-            return true; //Cancel task
+            display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the file before running it again.');
+            return; //Cancel task
         }
     
         $newConfigs = $this->processDir($dir);
@@ -87,7 +90,16 @@ class FindExternalLibraries extends Tasks {
         } elseif (count($newConfigs)) {
             display(count($newConfigs)." external libraries are going to be omitted : ".join(', ', array_keys($newConfigs)));
         }
-        
+
+        $store = [];
+        foreach($newConfigs as $library => $file) {
+            $store[] = ['library' => $library,
+                        'file'    => $file];
+        }
+        $datastore = new \Datastore($config);
+        $datastore->cleanTable('externallibraries');
+        $datastore->addRow('externallibraries', $store);
+
         if ($config->update === true && count($newConfigs) > 0) {
              display('Updating '.$project.'/config.ini');
              $ini = file_get_contents($configFile);
@@ -142,11 +154,11 @@ class FindExternalLibraries extends Tasks {
                 $lclass = strtolower($class);
                 if (isset($this->classic[$lclass])) {
                     if ($this->classic[$lclass] == self::WHOLE_DIR) {
-                        $return[$class] = dirname(preg_replace('#projects/.*?/code/#', '/', $filename));
+                        $return[$class] = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
                     } elseif ($this->classic[$lclass] == self::PARENT_DIR) {
-                        $return[$class] = dirname(dirname(preg_replace('#projects/.*?/code/#', '/', $filename)));
+                        $return[$class] = dirname(dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)));
                     } elseif ($this->classic[$lclass] == self::FILE_ONLY) {
-                        $return[$class] = preg_replace('#projects/.*?/code/#', '/', $filename);
+                        $return[$class] = preg_replace('#.*projects/.*?/code/#', '/', $filename);
                     } else {
                         // This is a coding error
                     }

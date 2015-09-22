@@ -54,6 +54,20 @@ class Content {
         
         return (array) $res->results;
     }
+    
+    // Make this a trait?
+    public function loadJson($name) {
+        $config = \Config::factory();
+        $fullpath = $config->dir_root.'/data/'.$name.'.json';
+
+        if (!file_exists($fullpath)) {
+            return null;
+        }
+
+        $jsonFile = json_decode(file_get_contents($fullpath));
+        
+        return $jsonFile;
+    }
 }
 
 ?>

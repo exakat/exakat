@@ -418,7 +418,7 @@ TEXT
         
             $this->addContent('SimpleTable', $content, 'oneColumn'); 
 
-            $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing');
+            $analyzer = \Analyzer\Analyzer::getInstance('Classes/AvoidUsing');
             $this->addContent('Horizontal', $analyzer);
         }
 
@@ -429,7 +429,7 @@ TEXT
 
         // Definition for the analyzers
         $this->createLevel2('Documentation');
-        $this->addContent('Definitions', $definitions, 'annexes');
+//        $this->addContent('Definitions', $definitions, 'annexes');
 
         // List of processed files
         $this->createLevel2('Processed files');
@@ -442,11 +442,26 @@ This may be due to configuration file, compilation error, wrong extension (inclu
         // List of processed files
         $this->createLevel2('Non-processed files');
         $this->addContent('Text', 'This is the list of non-processed files. The following files were found in the project, but were omitted as requested in the config.ini file.', 'textLead');
-        if ($analyzer->hasResults()) {
+        $content = $this->getContent('NonprocessedFileList');
+        $content->collect();
+        if ($content->hasResults()) {
             $this->addContent('Text', 'This is the list of non-processed files. The following files were found in the project, but were omitted as requested in the config.ini file.', 'textLead');
-            $this->addContent('SimpleTable', 'NonprocessedFileList', 'oneColumn');
+            $this->addContent('SimpleTable', $content, 'oneColumn');
         } else {
             $this->addContent('Text', 'All files and folder were used');
+        }
+
+        // List of external libraries
+        $this->createLevel2('External libraries');
+        $this->addContent('Text', 'This is the list of ignored external libraries. Those libraries are ignored as they are independant projects, and their analyze will be useful. 
+        
+Not that such list is not exhaustive. Feel free to submit forgotten libraries to use (exakat@gmail.com)', 'textLead');
+        $content = $this->getContent('ExternalLibraries');
+        $content->collect();
+        if ($content->hasResults()) {
+            $this->addContent('SimpleTable', $content, 'externalLibraries');
+        } else {
+            $this->addContent('Text', 'No external libraries found. Note that those external libraries are here to avoid analyzing libraries that are not from your own coding. This list is not exhaustive.');
         }
 
         // List of used analyzers
