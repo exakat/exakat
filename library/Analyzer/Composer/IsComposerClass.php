@@ -49,7 +49,7 @@ class IsComposerClass extends Analyzer\Analyzer {
 
         $this->atomIs('New')
              ->outIs('NEW')
-//             ->atomIs('Nsname')
+             ->tokenIs(array('T_NS_SEPARATOR', 'T_STRING'))
              ->fullnspath($classesFullNP);
         $this->prepareQuery();
     }
