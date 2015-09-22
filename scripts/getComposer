@@ -13,9 +13,9 @@ if (!file_exists('./projects/'.$project.'/code/composer.json')) {
 }
 
 $composer = json_decode(file_get_contents("projects/$project/code/composer.json"));
-$components = array_merge((array) @$composer->require,
+$components = array_merge((array) @$composer->suggest,
                           (array) @$composer->{'require-dev'},
-                          (array) @$composer->suggest);
+                          (array) @$composer->require);
 
 unset($components['php']);
 foreach($components as $k => $v) {
@@ -25,6 +25,10 @@ foreach($components as $k => $v) {
 
     if (substr($k, 0, 4) == 'lib-') {
         unset($components[$k]);
+    }
+    
+    if (strpos($v, ' ') !== false) {
+        $components[$k] = 'latest';
     }
 }
 
@@ -68,6 +72,7 @@ SQL
 foreach($components as $fullName => $version) {
     list($vendor, $component) = explode('/', strtolower($fullName));
     
+    print "Processing $vendor/$component $version\n";
     processComponent($vendor, $component, $version);
 }
 
@@ -131,8 +136,21 @@ SQL
     preg_match_all("#versions : (.*?)\n#s", $res, $r);
     $versions = explode(', ', $r[1][0]);
 
+    if ($version == 'latest') {
+        foreach($versions as $v) {
+            if (preg_match('/^\d+\.\d+\.\d+$/', $v)) {
+                $version = $v;
+                break 1;
+            }
+        }
+    }
+
     $res = shell_exec('composer show '.$vendor.'/'.$component.' '.$version.' 2>&1');
-    preg_match_all("#versions : (.*?)\n#s", $res, $r);
+    if (!preg_match_all("#versions : (.*?)\n#s", $res, $r)) {
+        print 'composer show '.$vendor.'/'.$component.' '.$version.' 2>&1'."\n";
+        print_r($res);
+        die();
+    }
     $solvedVersions = explode(', ', $r[1][0]);
     foreach($solvedVersions as &$sv) {
         if ($sv[0] == 'v') { 
@@ -154,10 +172,12 @@ SQL
             $versionId = $res->fetchArray(SQLITE3_ASSOC)['id'];
         }
     }
-            if (empty($versionId)) {
-                print "SELECT id FROM versions WHERE component_id = $componentId AND version= '$v';\n$version requested\n";
-                die();
-            }
+    
+    if (empty($versionId)) {
+        print "Couldn't find versions for '$v'\n";
+        print "SELECT id FROM versions WHERE component_id = $componentId AND version= '$v';\n$version requested\n";
+        die();
+    }
 
     if ($dir === '') {
         print "Fetching $vendor/$component\n";
