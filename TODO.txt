@@ -994,8 +994,6 @@ Gerer le cas ou le code est vide (pas d'erreur inutiles)
 
 Spot undefined exception in Catch (like undefined)
 
-interfaces : they should be used in Typehint to be useful .
-
 Value is the same (saved as property but passed also as argument. $this->x = $a; $this->f($a); arguments == property)
 
 Client is always called without any configuration!
@@ -1489,3 +1487,14 @@ May be for PHP?
 Publication : run a few commands on the new exakat to make sure it is OK.
 
 Tokenizer : make nsname go directly in the neo4j.
+
+Collect the literal used with certains methods => They should be turned to constant!
+
+Simplifier les appels aux analyzers à la syntaxe : Folder/Analyzer 
+
+Corriger les sort: write failed: standard output: Broken pipe sur Debian
+
+Add a synch check between Tasks/FindExternal and data/externallibrary 
+
+Add symfony and zend to the external libraries
+
