@@ -237,8 +237,8 @@ LICENCE;
             ++$total;
             $raw = file_get_contents($file);
             $json = json_decode($raw);
-            if (empty($json)) {
-                $errors[] = "$file is JSON invalid\n";
+            if (json_last_error_msg() !== 'No error') {
+                $errors[] = "$file is JSON invalid (".json_last_error_msg().")\n";
             }
         }
 
@@ -252,9 +252,6 @@ LICENCE;
                                  ->in('human/')
                                  ->files()
                                  ->name('*.ini');
-        
-        $errors = array();
-        $total = 0;
         
         set_error_handler('error_handler');
         
@@ -321,7 +318,7 @@ LICENCE;
     }
 
     public function checkPhplint() {
-        // checking json files
+        // checking php files
         $files = Finder::create()->ignoreVCS(true)
             ->in('library/')
             ->files()
