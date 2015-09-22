@@ -1624,13 +1624,20 @@ GREMLIN
         if (count($this->methods) == 1) { return true; }
         
         array_splice($this->methods, 2, 0, array('as("first")'));
-        $query = implode('.', $this->methods);
         
         if ($this->methods[1] == 'has("atom", arg1)') {
+            $query = implode('.', $this->methods);
             $query = "g.idx('atoms')[['atom':'{$this->arguments['arg1']}']].sideEffect{processed++;}.{$query}";
         } else {
-            // should log this. g.V is BAD!
-            $query = "g.V.sideEffect{processed++;}.{$query}";
+            $q = "z = [];\n";
+            foreach($this->arguments['arg1'] as $arg) {
+                $q .= 'g.idx("atoms")[["atom":"'.$arg.'"]].fill(z);'."\n";
+            }
+
+            unset($this->methods[1]);
+            unset($this->arguments['arg1']);
+
+            $query = $q."z._().sideEffect{processed++;}.".implode('.', $this->methods);
         }
         
         // search what ? All ?
