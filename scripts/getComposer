@@ -21,14 +21,22 @@ unset($components['php']);
 foreach($components as $k => $v) {
     if (substr($k, 0, 4) == 'ext-') {
         unset($components[$k]);
+        continue;
     }
 
     if (substr($k, 0, 4) == 'lib-') {
         unset($components[$k]);
+        continue;
     }
     
     if (strpos($v, ' ') !== false) {
         $components[$k] = 'latest';
+        continue;
+    }
+
+    if ($v === '*') {
+        $components[$k] = 'latest';
+        continue;
     }
 }
 
