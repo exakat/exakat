@@ -453,9 +453,9 @@ This may be due to configuration file, compilation error, wrong extension (inclu
 
         // List of external libraries
         $this->createLevel2('External libraries');
-        $this->addContent('Text', 'This is the list of ignored external libraries. Those libraries are ignored as they are independant projects, and their analyze will be useful. 
+        $this->addContent('Text', 'This is the list of ignored external libraries. Those libraries are ignored as they are independant projects, and their analyze would be useless. 
         
-Not that such list is not exhaustive. Feel free to submit forgotten libraries to use (exakat@gmail.com)', 'textLead');
+The external library list is not exhaustive : it is mainly made to reduce the load of the analyze, by avoiding frequently used libraries. Feel free to submit others libraries to add to the list.', 'textLead');
         $content = $this->getContent('ExternalLibraries');
         $content->collect();
         if ($content->hasResults()) {
