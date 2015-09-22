@@ -105,6 +105,7 @@ class Appinfo extends \Report\Content {
 
                     'Classes' => array(
                             'Classes'           => 'Classes/Classnames',
+                            'Anonymous Classes' => 'Classes/Anonymous',
                             'Class aliases'     => 'Classes/ClassAliasUsage',
 
                             'Abstract classes'  => 'Classes/Abstractclass',

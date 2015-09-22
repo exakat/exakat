@@ -109,13 +109,22 @@ class _Class extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.fullcode = "class ";
+fullcode.fullcode = "class";
+
+if (fullcode.out('NAME').any() == false && fullcode.out('ARGUMENTS').any() == false) {
+    arguments = g.addVertex(null, [code:'', fullcode:'', atom:'Void', token:'T_VOID',virtual:true, line:it.line]);
+    g.addEdge(fullcode, arguments, 'ARGUMENTS');
+}
 
 // class name
 fullcode.out("NAME").each{ fullcode.fullcode = fullcode.fullcode + it.code;}
 
 // class arguments
-fullcode.out("ARGUMENTS").each{ fullcode.fullcode = fullcode.fullcode + '(' + it.fullcode + ')';}
+fullcode.out("ARGUMENTS").each{ 
+    if (it.token != 'T_VOID') {
+        fullcode.fullcode = fullcode.fullcode + ' (' + it.fullcode + ')';
+    }
+}
 
 // abstract
 fullcode.out("ABSTRACT").each{ fullcode.fullcode = 'abstract ' + fullcode.fullcode;}
