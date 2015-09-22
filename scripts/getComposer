@@ -147,10 +147,11 @@ SQL
     if ($version == 'latest') {
         foreach($versions as $v) {
             if (preg_match('/^\d+\.\d+\.\d+$/', $v)) {
-                $version = $v;
                 break 1;
             }
         }
+        // taking the last version used. This way, we always have a default value
+        $version = $v;
     }
 
     $res = shell_exec('composer show '.$vendor.'/'.$component.' '.$version.' 2>&1');
