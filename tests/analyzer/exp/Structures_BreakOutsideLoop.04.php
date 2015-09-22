@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('continue 2');
+$expected     = array();
 
-$expected_not = array('continue 1');
+$expected_not = array('continue 1',
+                      'continue 2');
 
 ?>
