@@ -53,7 +53,7 @@ class AppCounts extends \Report\Content {
                      ),
                     'Structures' => array(
                             'Ifthen'        => 'Ifthen',
-                            'Else'          => 'Structures\\ElseUsage',
+                            'Else'          => 'Structures/ElseUsage',
                             'Switch'        => 'Switch',
                             'Case'          => 'Case',
                             'Default'       => 'Default',
@@ -69,10 +69,12 @@ class AppCounts extends \Report\Content {
                             'Finally'       => 'Finally',
                             'Yield'         => 'Yield',
                             '?  :'          => 'Ternary',
-                            'Variables constants' => 'Constants\\VariableConstants',
-                            'Variables variables' => 'Variables\\VariableVariable',
-                            'Variables functions' => 'Functions\\Dynamiccall',
-                            'Variables classes' => 'Classes\\VariableClasses',
+                            '?: '           => 'Php/Coalesce',
+                            '??'            => 'Php/NullCoalesce',
+                            'Variables constants' => 'Constants/VariableConstants',
+                            'Variables variables' => 'Variables/VariableVariable',
+                            'Variables functions' => 'Functions/Dynamiccall',
+                            'Variables classes' => 'Classes/VariableClasses',
                     ),
                 );
 

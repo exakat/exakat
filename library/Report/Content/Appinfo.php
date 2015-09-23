@@ -52,6 +52,9 @@ class Appinfo extends \Report\Content {
                             'Goto'                       => 'Php/Gotonames',
                             'Labels'                     => 'Php/Labelnames',
 
+                            'Coalesce'                   => 'Php/Coalesce',
+                            'Null Coalesce'              => 'Php/NullCoalesce',
+
                             'Function dereferencing'     => 'Structures/FunctionSubscripting',
                             'Constant scalar expression' => 'Structures/ConstantScalarExpression',
                             '... usage'                  => 'Php/EllipsisUsage',
