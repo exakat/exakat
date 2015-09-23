@@ -28,7 +28,8 @@ use Analyzer;
 class IsExtConstant extends Analyzer\Analyzer {
 
     public function dependsOn() {
-        return array("Analyzer\\Constants\\ConstantUsage");
+        return array('Constants/ConstantUsage',
+                     'Constants/IsGlobalConstant');
     }
     
     public function analyze() {
@@ -45,9 +46,19 @@ class IsExtConstant extends Analyzer\Analyzer {
             }
         }
         
-        $this->analyzerIs("Analyzer\\Constants\\ConstantUsage")
+        $constantsFullNs = $this->makeFullNsPath($constants);
+        
+        // based on full ns path
+        $this->analyzerIs('Constants/ConstantUsage')
+             ->fullnspath($constantsFullNs);
+        $this->prepareQuery();
+
+        $this->analyzerIs('Constants/ConstantUsage')
+             ->analyzerIs('Constants/IsGlobalConstant')
              ->code($constants);
         $this->prepareQuery();
+
+        
     }
 }
 
