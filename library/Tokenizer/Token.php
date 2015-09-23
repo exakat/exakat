@@ -695,7 +695,7 @@ g.idx('atoms')[['atom':'Phpcode']].in.loop(1){true}{it.object.atom == 'File'}.ea
 // collecting namespaces
 g.idx('atoms')[['atom':'Namespace']].each{
     // creating namespace's fullnspath
-    it.fullnspath = '\\\\' + it.out('NAMESPACE').next().fullcode;
+    it.fullnspath = '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase();
     g.idx('namespaces').put('path', it.fullnspath.toLowerCase(), it)
 };
 
