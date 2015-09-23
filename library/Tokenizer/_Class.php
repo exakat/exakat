@@ -117,7 +117,7 @@ if (fullcode.out('NAME').any() == false && fullcode.out('ARGUMENTS').any() == fa
 }
 
 // class name
-fullcode.out("NAME").each{ fullcode.fullcode = fullcode.fullcode + it.code;}
+fullcode.out("NAME").each{ fullcode.fullcode = fullcode.fullcode + ' ' + it.code;}
 
 // class arguments
 fullcode.out("ARGUMENTS").each{ 
