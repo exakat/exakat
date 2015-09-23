@@ -1628,7 +1628,10 @@ GREMLIN
         if ($this->methods[1] == 'has("atom", arg1)') {
             $query = implode('.', $this->methods);
             $query = "g.idx('atoms')[['atom':'{$this->arguments['arg1']}']].sideEffect{processed++;}.{$query}";
-        } else {
+        } elseif ($this->methods[1] == 'filter{ it.in("ANALYZED").has("code", arg1).any()}') {
+            $query = implode('.', $this->methods);
+            $query = "g.idx('analyzers')[['analyzer':'".str_replace('\\', '\\\\', $this->arguments['arg1'])."']].out.sideEffect{processed++;}.{$query}";
+        } elseif ($this->methods[1] == 'filter{it.atom in arg1}') {
             $q = "z = [];\n";
             foreach($this->arguments['arg1'] as $arg) {
                 $q .= 'g.idx("atoms")[["atom":"'.$arg.'"]].fill(z);'."\n";
@@ -1638,6 +1641,8 @@ GREMLIN
             unset($this->arguments['arg1']);
 
             $query = $q."z._().sideEffect{processed++;}.".implode('.', $this->methods);
+        } else {
+            throw new \Exception('No optimization : gremlin query in analyzer should have use g.V. Fix me!'.get_class($this));
         }
         
         // search what ? All ?
