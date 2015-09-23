@@ -32,7 +32,6 @@ class MutualExtension extends Analyzer\Analyzer {
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\MutualExtension')
              ->outIs('EXTENDS')
              ->classDefinition()
              ->samePropertyAs('fullnspath', 'fullnspath')
@@ -44,15 +43,15 @@ class MutualExtension extends Analyzer\Analyzer {
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\MutualExtension')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\MutualExtension')
              ->outIs('EXTENDS')
              ->classDefinition()
              ->samePropertyAs('fullnspath', 'fullnspath')
              ->back('first');
         $this->prepareQuery();
+
+        // A -> B -> C (more  levels ? )
     }
 }
 
