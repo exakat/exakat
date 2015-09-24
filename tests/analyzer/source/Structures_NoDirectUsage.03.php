@@ -1,5 +1,7 @@
 <?php
 
+namespace X;
+
 foreach(glob() as $x) {}
 
 f(parse_ini_file('./someIni.ini'));

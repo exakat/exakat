@@ -28,27 +28,31 @@ use Analyzer;
 class NoDirectUsage extends Analyzer\Analyzer {
     public function analyze() {
         $functions = $this->loadIni('NoDirectUsage.ini', 'functions');
+        $functionsFullNsPath = $this->makeFullNsPath($functions);
         
         // foreach(glob() as $x) {}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
              ->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->code($functions)
+             ->fullnspath($functionsFullNsPath)
              ->back('first');
         $this->prepareQuery();
 
         // Direct call with a function without check
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->code($functions)
+             ->hasNoIn('METHOD')
+             ->fullnspath($functionsFullNsPath)
              ->hasIn('ARGUMENT');
         $this->prepareQuery();
 
         // Direct usage in an operation +, *, **
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->code($functions)
+             ->hasNoIn('METHOD')
+             ->fullnspath($functionsFullNsPath)
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs(array('Addition', 'Multiplication', 'Power'));
         $this->prepareQuery();
