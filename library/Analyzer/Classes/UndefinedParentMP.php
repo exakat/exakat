@@ -73,7 +73,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // parent::method()
+        // parent::$property without parent
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->code('parent')
@@ -82,7 +82,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // parent::property
+        // parent::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->code('parent')
@@ -91,6 +91,8 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->goToClass()
+             // checking one of the grand-parents is not defining this property
+
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop("extension"){true}{it.object.atom == "Class"}
