@@ -2,19 +2,19 @@
 
 class definedClassA extends Silex\EventListener\ConverterListener {
     public function x() {
-        parent::$someAPropertyInCrada;
+        parent::$someAPropertyInCL;
     }
 }
 
 class definedClassB extends definedClassA {
     public function x() {
-        parent::$someBPropertyInCrada;
+        parent::$someBPropertyInCL;
     }
 }
 
 class definedClassC extends definedClassB {
     public function x() {
-        parent::$someCPropertyInCrada;
+        parent::$someCPropertyInCL;
     }
 }
 
