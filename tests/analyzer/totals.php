@@ -2,18 +2,18 @@
 
 $files = glob('./Test/*.php');
 
-print count($files)." Tests\n";
-
 $res = shell_exec('grep " methods " Test/*.php | grep -v Skeleton');
 $numbers = explode("\n", trim($res));
 
 $numbers = array_map(function ($x) { preg_match('/ (\d+) method/', $x, $r); return $r[1]; }, $numbers);
 
+print "Statistics \n";
+print "======================== \n";
+print count($files)." Tests\n";
 print array_sum($numbers)." methods\n";
-print floor(array_sum($numbers) / count($numbers))." on average\n";
+print number_format(array_sum($numbers) / count($numbers), 2)." on average\n";
 print min($numbers)." minimum\n";
-print max($numbers)." maximum\n";
-
+print max($numbers)." maximum\n\n";
 
 // unfinished tests
 $total = 0;
@@ -26,7 +26,7 @@ foreach($files as $file) {
         print "Empty exp files : $file\n";
     }
 }
-print "total unfinished tests : $total\n";
+print "total unfinished tests : $total\n\n";
 
 $total = 0;
 $files = glob('source/*.php');
@@ -36,7 +36,7 @@ foreach($files as $file) {
         print "Empty source : $file\n";
     }
 }
-print "total unfinished tests : $total\n";
+print "total unfinished tests : $total\n\n";
 
 $total = 0;
 $files = glob('../../library/Analyzer/*/*.php');
@@ -52,7 +52,7 @@ foreach($files as $file) {
 //    print $test;
 //    die();
 }
-print "total untested class : $total\n";
+print "total untested class : $total\n\n";
 die();
 print shell_exec('find source -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
 print shell_exec('find exp -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
