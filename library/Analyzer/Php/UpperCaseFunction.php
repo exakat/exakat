@@ -27,12 +27,12 @@ use Analyzer;
 
 class UpperCaseFunction extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\IsExtFunction');
+        return array('Functions/IsExtFunction');
     }
     
     public function analyze() {
         $this->atomIs('Functioncall')
-             ->analyzerIs('Analyzer\\Functions\\IsExtFunction')
+             ->analyzerIs('Functions/IsExtFunction')
              ->isNotLowerCase('code');
         $this->prepareQuery();
         

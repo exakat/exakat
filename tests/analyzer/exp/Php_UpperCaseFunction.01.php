@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('Join( )', 
-                      'LIst( )', 
+                      'LIst($a)', 
                       'strToLower( )', 
                       'PRINT ( 1)');
 

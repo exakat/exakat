@@ -47,7 +47,7 @@ class IsExtFunction extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->hasNoIn('METHOD')
-             ->fullnspath($functions, true);
+             ->fullnspath($functions);
         $this->prepareQuery();
     }
 }
