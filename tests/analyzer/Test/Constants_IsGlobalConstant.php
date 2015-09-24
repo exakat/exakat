@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Constants_IsGlobalConstant extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testConstants_IsGlobalConstant01()  { $this->generic_test('Constants_IsGlobalConstant.01'); }
     public function testConstants_IsGlobalConstant02()  { $this->generic_test('Constants_IsGlobalConstant.02'); }
     public function testConstants_IsGlobalConstant03()  { $this->generic_test('Constants_IsGlobalConstant.03'); }
+    public function testConstants_IsGlobalConstant04()  { $this->generic_test('Constants_IsGlobalConstant.04'); }
 }
 ?>
