@@ -141,7 +141,13 @@ SQL
 
     // remove colors
     $res = preg_replace('/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/s', '', $res);
-    preg_match_all("#versions : (.*?)\n#s", $res, $r);
+    if (!preg_match_all("#versions : (.*?)\n#s", $res, $r)) {
+        // Probably an error : ignoring the rest.
+        print "Can't read $vendor/$component profile\n ";
+        print_r($res);
+        
+        return;
+    }
     $versions = explode(', ', $r[1][0]);
 
     if ($version == 'latest') {
@@ -154,9 +160,9 @@ SQL
         $version = $v;
     }
 
-    $res = shell_exec('composer show '.$vendor.'/'.$component.' '.$version.' 2>&1');
+    $res = shell_exec('composer show '.$vendor.'/'.$component.' "'.$version.'" 2>&1');
     if (!preg_match_all("#versions : (.*?)\n#s", $res, $r)) {
-        print 'composer show '.$vendor.'/'.$component.' '.$version.' 2>&1'."\n";
+        print 'composer show '.$vendor.'/'.$component.' "'.$version.'" 2>&1'."\n";
         print_r($res);
         die();
     }
@@ -200,7 +206,7 @@ SQL
         mkdir($tmpdir, 0755);
         file_put_contents($tmpdir.'/composer.json', $json);
 
-        print shell_exec("cd $tmpdir; composer update");
+        print shell_exec("cd $tmpdir; composer update 2>&1");
 
         print $tmpdir.'/vendor/'.$vendor.'/'.$component."\n";
     } else {
@@ -238,6 +244,9 @@ SQL
     if (isset($all['Class'])) {
         foreach($all['Class'] as $ns => $classes) {
             foreach($classes as $class) {
+                // ignore classes with strange characters
+                if (preg_match('/[^a-z0-9_\\\\]/i', $class)) { continue; }
+                
                 $res = $sqlite->query("SELECT id FROM classes WHERE namespace_id = '{$namespacesIds[$ns]}' AND classname = '$class'");
                 $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
                 if ($nsid) {
@@ -278,9 +287,14 @@ SQL
         }
     }
     
-    if ($dir === '') {
+    if ($dir === '' && file_exists($tmpdir.'/composer.lock')) {
         $installed = json_decode(file_get_contents($tmpdir.'/composer.lock'));
         
+        if (!isset($installed->packages)) {
+            print "$file has a pb with composer.lock\n";
+            var_dump($installed);
+            die();
+        }
         foreach($installed->packages as $package) {
             list($subVendor, $subComponent) = explode('/', $package->name);
             if (substr($package->version, 0, 1) == 'v') {
@@ -337,9 +351,13 @@ function processFile($file) {
 
                 case T_CLASS : 
                     // skip ::class 
-                    if ($tokens[$id - 1][1] != '::') { 
-                        $return['Class'][$namespace][] = $tokens[$id + 2][1];
-                    }
+                    if ($tokens[$id - 1][1] == '::') { break 1; }
+
+                    // skip anonymous class : 
+                    if (!is_array($tokens[$id + 2])) { break 1; }
+                    if ($tokens[$id + 2][0] != 'T_STRING') { break 1; }
+
+                    $return['Class'][$namespace][] = $tokens[$id + 2][1];
                     break;
 
                 case T_INTERFACE : 
