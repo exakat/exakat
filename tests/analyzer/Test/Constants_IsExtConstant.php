@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Constants_IsExtConstant extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testConstants_IsExtConstant01()  { $this->generic_test('Constants_IsExtConstant.01'); }
     public function testConstants_IsExtConstant02()  { $this->generic_test('Constants_IsExtConstant.02'); }
@@ -17,5 +17,6 @@ class Constants_IsExtConstant extends Analyzer {
     public function testConstants_IsExtConstant05()  { $this->generic_test('Constants_IsExtConstant.05'); }
     public function testConstants_IsExtConstant06()  { $this->generic_test('Constants_IsExtConstant.06'); }
     public function testConstants_IsExtConstant07()  { $this->generic_test('Constants_IsExtConstant.07'); }
+    public function testConstants_IsExtConstant08()  { $this->generic_test('Constants_IsExtConstant.08'); }
 }
 ?>
