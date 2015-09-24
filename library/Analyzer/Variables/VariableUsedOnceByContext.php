@@ -28,24 +28,26 @@ use Analyzer;
 class VariableUsedOnceByContext extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Analyzer\\Variables\\VariableUsedOnce',
-                     'Analyzer\\Variables\\Variablenames',
-                     'Analyzer\\Variables\\InterfaceArguments');
+        return array('Variables/VariableUsedOnce',
+                     'Variables/Variablenames',
+                     'Variables/InterfaceArguments');
     }
     
     public function analyze() {
         $this->atomIs('Variable')
             // Not a static property
              ->filter(' it.in("VARIABLE").loop(1){true}{ true}.in("PROPERTY").any() == false')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
-             ->analyzerIsNot('Analyzer\\Variables\\Blind')
-             ->analyzerIsNot('Analyzer\\Variables\\InterfaceArguments')
+             ->analyzerIs('Variables/Variablenames')
+             ->analyzerIsNot('Variables/Blind')
+             ->analyzerIsNot('Variables/InterfaceArguments')
              ->codeIsNot(VariablePhp::$variables, true)
              ->hasNoIn('GLOBAL')
-             ->analyzerIsNot('Analyzer\\Variables\\VariableUsedOnceByContext')
-             //
+             ->analyzerIsNot('Variables/VariableUsedOnceByContext')
+
+             //This is not an argument in an abstract method
              ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}.out("ABSTRACT").any() == false')
              ->fetchContext()
+
              ->eachCounted('it.code + "/" + context.Function + "/" + context.Class + "/" + context.Namespace', 1);
         $this->prepareQuery();
     }

@@ -27,7 +27,7 @@ use Analyzer;
 
 class MustReturn extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\MethodDefinition');
+        return array('Classes/MethodDefinition');
     }
     
     public function analyze() {
@@ -37,7 +37,7 @@ class MustReturn extends Analyzer\Analyzer {
              ->outIs('NAME')
              ->code(array('__call', '__callStatic', '__get', '__isset', '__sleep', '__toString', '__set_state',
                           '__invoke', '__debugInfo'))
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->back('first')
              ->noAtomInside('Return');
         $this->prepareQuery();

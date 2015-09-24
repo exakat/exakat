@@ -28,17 +28,17 @@ use Analyzer;
 class VariableUsedOnce extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Blind',
-                     'Analyzer\\Variables\\InterfaceArguments',
-                     'Analyzer\\Variables\\Variablenames'
+        return array('Variables/Blind',
+                     'Variables/InterfaceArguments',
+                     'Variables/Variablenames'
                      );
     }
     
     public function analyze() {
         $this->atomIs(array('Variable', 'Functioncall'))
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
-             ->analyzerIsNot("Analyzer\\Variables\\Blind")
-             ->analyzerIsNot("Analyzer\\Variables\\InterfaceArguments")
+             ->analyzerIs('Variables/Variablenames')
+             ->analyzerIsNot('Variables/Blind')
+             ->analyzerIsNot('Variables/InterfaceArguments')
              ->codeIsNot(VariablePhp::$variables, true)
              ->hasNoIn('GLOBAL') // ignore global $variable; This is not a use.
              ->eachCounted('it.code', 1);
