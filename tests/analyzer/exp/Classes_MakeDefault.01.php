@@ -2,7 +2,8 @@
 
 $expected     = array('$this->withDefaultButRedefined',
                       '$this->withoutDefault',
-                      '$this->undefinedProperty');
+                      '$this->undefinedProperty',
+                      '$this->arrayWithDefault[2]');
 
 $expected_not = array('$this->resetInAnotherMethod',
                       '$withDefaultAndIntact',
