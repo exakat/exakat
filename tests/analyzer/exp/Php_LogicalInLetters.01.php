@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('false or true');
+$expected     = array('$e = false or true');
 
 $expected_not = array('false || true');
 
