@@ -12,7 +12,6 @@ $expected     = array("'x'",
                       "'X2', 'parent::x3'", 
                       "'Y2', 'x3'");
 
-$expected_not = array(  // x doesn't exists
-                     );
+$expected_not = array();
 
 ?>

@@ -34,6 +34,8 @@ class MarkCallable extends Analyzer\Analyzer {
             }
         }
 
+        $positions = array(0, 1, 2, 3, 4, 5, 6);
+
         /* Supports :
             string as callable : array_map($array, 'string');
             array with static call : array_map($array, array('string', 'string'));
@@ -50,19 +52,20 @@ call_user_func(array($obj, 'myCallbackMethod'));
         ////////////////////////////////////////////////////////////////////////////////////////////////
         // working with functions (not methods)
 
-        $apply = 'sideEffect{
-i = it.noDelimiter.indexOf("::");
-if (i > 0) {
-    it.cbClass = it.noDelimiter.substring(0, i).toLowerCase();
-    if (it.cbClass.toString()[0] != "\\\\") {it.cbClass = "\\\\" + it.cbClass;};
-    it.cbMethod = it.noDelimiter.substring(2 + i).toLowerCase();
-} else {
-    it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath == "" || it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;};
+        $apply = <<<GREMLIN
+sideEffect{
+    i = it.noDelimiter.indexOf("::");
+    if (i > 0) {
+        it.cbClass = it.noDelimiter.substring(0, i).toLowerCase();
+        if (it.cbClass.toString()[0] != "\\\\") {it.cbClass = "\\\\" + it.cbClass;};
+        it.cbMethod = it.noDelimiter.substring(2 + i).toLowerCase();
+    } else {
+        it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath == "" || it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;};
+    }
 }
-            }';
+GREMLIN;
 
         // callable is in # position
-        $positions = array(0, 1, 2, 3, 4, 5, 6);
         foreach($positions as $position) {
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
@@ -101,8 +104,6 @@ if (i > 0) {
              ->raw($apply);
         $this->prepareQuery();
 
-
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array('Class', 'method');
 
@@ -129,9 +130,9 @@ if (i > 0) {
     }
 }';
 
+        $arrayContainsTwoStrings = 'filter{it.out("ARGUMENT").has("atom", "String").filter{ it.out("CONTAINS").any() == false}.count() >= 2}';
 
         // callable is in # position
-        $positions = array(0, 1, 2, 3, 4, 5, 6);
         foreach($positions as $position) {
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
@@ -141,10 +142,10 @@ if (i > 0) {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Functioncall')
-                 ->tokenIs('T_ARRAY')
+                 ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
                  ->raw('sideEffect{ theArray = it; }')
                  ->outIs('ARGUMENTS')
-                 ->raw('filter{it.out("ARGUMENT").has("atom", "String").count() >= 2}')
+                 ->raw($arrayContainsTwoStrings)
                  ->raw($apply);
             $this->prepareQuery();
         }
@@ -158,10 +159,10 @@ if (i > 0) {
              ->outIs('ARGUMENT')
              ->hasRank('last')
              ->atomIs('Functioncall')
-             ->tokenIs('T_ARRAY')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->raw('sideEffect{ theArray = it; }')
              ->outIs('ARGUMENTS')
-             ->raw('filter{it.out("ARGUMENT").has("atom", "String").count() >= 2}')
+             ->raw($arrayContainsTwoStrings)
              ->raw($apply);
         $this->prepareQuery();
 
@@ -174,26 +175,23 @@ if (i > 0) {
              ->outIs('ARGUMENT')
              ->hasRank('2last')
              ->atomIs('Functioncall')
-             ->tokenIs('T_ARRAY')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->raw('sideEffect{ theArray = it; }')
              ->outIs('ARGUMENTS')
-             ->raw('filter{it.out("ARGUMENT").has("atom", "String").count() >= 2}')
+             ->raw($arrayContainsTwoStrings)
              ->raw($apply);
         $this->prepareQuery();
 
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // array($this, 'method');
+        // array($object, 'method'); Also, [$object, 'method']
         $apply = 'sideEffect{
-    theArray.cbClass = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next().fullnspath;
-
     theArray.cbMethod = it.out("ARGUMENT").has("rank", 1).next().noDelimiter.toLowerCase();
 }';
 
-
+        $firstArgIsAVariable = 'filter{it.out("ARGUMENT").has("rank", 0).has("atom", "Variable").any()}';
+        $secondArgIsAString = 'filter{it.out("ARGUMENT").has("rank", 1).has("atom", "String").filter{ it.out("CONTAINS").any() == false}.any()}';
+        
         // callable is in # position
-        $positions = array(0, 1, 2, 3, 4, 5, 6);
-        $positions = array(0);
         foreach($positions as $position) {
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
@@ -203,11 +201,13 @@ if (i > 0) {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Functioncall')
-                 ->tokenIs('T_ARRAY')
+                 ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
                  ->raw('sideEffect{ theArray = it; }')
                  ->outIs('ARGUMENTS')
-                 ->raw('filter{it.out("ARGUMENT").has("rank", 0).has("atom", "Variable").has("code", "\$this").any()}')
-                 ->raw('filter{it.out("ARGUMENT").has("rank", 1).has("atom", "String").any()}')
+                 // 1rst array argument is a $this
+                 ->raw($firstArgIsAVariable )
+                 // 2nd array argument is a real string
+                 ->raw($secondArgIsAString)
                  ->raw($apply);
             $this->prepareQuery();
         }
@@ -221,11 +221,11 @@ if (i > 0) {
              ->outIs('ARGUMENT')
              ->hasRank('last')
              ->atomIs('Functioncall')
-             ->tokenIs('T_ARRAY')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->raw('sideEffect{ theArray = it; }')
              ->outIs('ARGUMENTS')
-             ->raw('filter{it.out("ARGUMENT").has("rank", 0).has("atom", "Variable").has("code", "\$this").any()}')
-             ->raw('filter{it.out("ARGUMENT").has("rank", 1).has("atom", "String").any()}')
+             ->raw($firstArgIsAVariable)
+             ->raw($secondArgIsAString)
              ->raw($apply);
         $this->prepareQuery();
 
@@ -238,11 +238,11 @@ if (i > 0) {
              ->outIs('ARGUMENT')
              ->hasRank('2last')
              ->atomIs('Functioncall')
-             ->tokenIs('T_ARRAY')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->raw('sideEffect{ theArray = it; }')
              ->outIs('ARGUMENTS')
-             ->raw('filter{it.out("ARGUMENT").has("rank", 0).has("atom", "Variable").has("code", "\$this").any()}')
-             ->raw('filter{it.out("ARGUMENT").has("rank", 1).has("atom", "String").any()}')
+             ->raw($firstArgIsAVariable)
+             ->raw($secondArgIsAString)
              ->raw($apply);
         $this->prepareQuery();
     }
