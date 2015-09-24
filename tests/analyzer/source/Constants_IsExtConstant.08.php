@@ -10,4 +10,6 @@ echo true;
 
 ANOTHER_CONSTANT;
 
+print SQLITE3_OPEN_READONLY;
+
 ?>

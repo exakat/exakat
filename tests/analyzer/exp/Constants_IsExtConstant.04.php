@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('SQLITE3_NULL');
 
-$expected_not = array();
+$expected_not = array('SQLITE3_FLOAT');
 
 ?>
