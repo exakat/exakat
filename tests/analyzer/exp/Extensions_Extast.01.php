@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('ast\ast_dump(new ast\Node())',
-                      'ast\Node()');
+$expected     = array( 'ast\Node( )', 
+                       'ast\ast_dump(new ast\Node( ))');
 
 $expected_not = array();
 
