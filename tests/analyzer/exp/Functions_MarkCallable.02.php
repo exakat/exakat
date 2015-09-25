@@ -10,7 +10,9 @@ $expected     = array("'x'",
                       "'Y2', 'parent::x3'",
                       "'X2', 'parent::x3'", 
                       "'X2', 'parent::x3'", 
-                      "'Y2', 'x3'");
+                      "'Y2', 'x3'",
+                      '$this, \'x\'', 
+                      '$a, \'x2\'');
 
 $expected_not = array();
 

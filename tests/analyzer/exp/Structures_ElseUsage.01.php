@@ -1,8 +1,9 @@
 <?php
 
-$expected     = array('if ($withinElseAndWithElse) { ; } else { ; }',
-                      'if ($withElseifAndElse) { ; } else { ; }',
-                      'if ($withElse) { ; } else { ; }');
+$expected     = array( 'if ($withElseifAndElse) { /**/ } else { /**/ }', 
+                       'if ($withElse) { /**/ } else { /**/ }', 
+                       'if ($withinElseAndWithElse) { /**/ } else { /**/ }'
+);
 
 $expected_not = array('if ($noElse) {$z--;}',
                       'if ($withElseifNoElse) { $b++; }');
