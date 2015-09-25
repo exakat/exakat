@@ -223,6 +223,81 @@ LICENCE;
         shell_exec('php ~/.composer/vendor/bin/php-cs-fixer fix ./library/Tasks --fixers=encoding,eof_ending,elseif,trailing_spaces,indentation');
     }
 
+    public function checkAnalyzers() {
+        $sqlite = new sqlite3('data/analyzers.sqlite');
+        
+        // analyzers in Unassigned 
+        $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM categories 
+JOIN analyzers_categories 
+    ON categories.id = analyzers_categories.id_categories
+JOIN analyzers 
+    ON analyzers_categories.id_analyzer = analyzers.id
+        WHERE categories.name="Unassigned"');
+        
+        $total = 0;
+        while($row = $res->fetchArray()) {
+            ++$total;
+            print ' + '.$row['name']."\n";
+        }
+        print "$total analyzers in Unassigned\n";
+
+        // categories with orphans
+        $res = $sqlite->query('SELECT analyzers_categories.id_analyzer, analyzers_categories.id_categories FROM categories 
+JOIN analyzers_categories 
+    ON categories.id = analyzers_categories.id_categories
+JOIN analyzers 
+    ON analyzers_categories.id_analyzer = analyzers.id
+        WHERE analyzers.id IS NULL');
+        
+        $total = 0;
+        while($row = $res->fetchArray()) {
+            ++$total;
+            print_r($row);
+//            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
+        }
+        print "$total categories have orphans\n";
+
+        // analyzers in no categories
+        $res = $sqlite->query('SELECT analyzers_categories.id_analyzer, analyzers_categories.id_categories FROM analyzers 
+JOIN analyzers_categories 
+    ON analyzers.id = analyzers_categories.id_analyzer
+JOIN categories 
+    ON analyzers_categories.id_categories = categories.id
+        WHERE categories.id IS NULL');
+        
+        $total = 0;
+        while($row = $res->fetchArray()) {
+            ++$total;
+            print_r($row);
+//            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
+        }
+        print "$total analyzers are orphans\n";
+
+        // check for analyzers in Files
+        $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM analyzers');
+        while($row = $res->fetchArray()) {
+            print_r($row);
+        }
+        $total = 0;
+        while($row = $res->fetchArray()) {
+            ++$total;
+            if (!file_exists('library/Analyzer/'.$row['name'].'.php')) {
+                print $row['name']." has no exakat code\n";
+            }
+            if (!file_exists('human/en/'.$row['name'].'.ini')) {
+                print $row['name']." has no documentation\n";
+            }
+            if (!file_exists('tests/analyzer/Test/'.str_replace('/', '_', $row['name']).'.php')) {
+                print $row['name']." has no Test\n";
+            }
+        }
+        print "\n$total analyzers are in the base\n";
+        
+        // cleaning
+        $sqlite->query('VACUUM');
+        print "Vaccumed\n\n";
+    }
+
     public function checkSyntax() {
         // checking json files
         $files = Finder::create()->ignoreVCS(true)
