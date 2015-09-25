@@ -148,7 +148,7 @@ LICENCE;
     /**
      * Clean the build process
      */
-    public function clean() {    
+    public function clean() {
         $this->taskExecStack()
          ->stopOnFail()
          ->exec('rm -rf release')
@@ -215,6 +215,29 @@ LICENCE;
         foreach ($files as $file) {
             $packer->addFile($file->getRelativePathname(), $file->getRealPath());
         }
+    }
+
+    public function checkAll() {
+        print "Check format\n";
+        $this->checkFormat();
+
+        print "Check analyzers database\n";
+        $this->checkAnalyzers();
+
+        print "Check external file's syntax\n";
+        $this->checkSyntax();
+
+        print "Check PHP' scripts syntax\n";
+        $this->checkPhplint();
+
+        print "Check composer data\n";
+        $this->checkComposerData();
+
+        print "Check Directives' sync\n";
+        $this->checkDirective();
+
+        print "Check Classname' case\n";
+        $this->checkClassnames();
     }
     
     public function checkFormat() {
@@ -366,7 +389,8 @@ JOIN categories
         
         foreach($files as $file) {
             ++$total;
-            $sqlite = new sqlite3($file);
+            print "$file\n";
+            $sqlite = new \Sqlite3($file);
             $results = $sqlite->query('pragma integrity_check');
             $response = $results->fetchArray()['integrity_check'];
             if ($response != 'ok') {
@@ -531,6 +555,7 @@ JOIN categories
         
         foreach($files as $file) {
             if ($file == 'library/helpers.php') { continue; }
+            
             $code = file_get_contents($file);
             if (!preg_match('#(class|interface) ([^ ]+)#is', $code, $r)) {
                 print "No class in $file\n";
