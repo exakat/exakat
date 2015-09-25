@@ -289,7 +289,7 @@ GREMLIN;
         }
 
         // up to version
-        if ((substr($this->phpVersion, -1) === '-') && version_compare($version, $this->phpVersion) <= 0) {
+        if ((substr($this->phpVersion, -1) === '-') && version_compare($version, $this->phpVersion) < 0) {
             return true;
         }
 
