@@ -54,7 +54,6 @@ class Clean extends Tasks {
                               'Premier-text.txt',
                               'datastore.sqlite',
                               'magicnumber.sqlite',
-                              'counts.sqlite',
                               'report.html',
                               'report.md',
                               'report.odt',
@@ -66,7 +65,6 @@ class Clean extends Tasks {
                               'PhpFunctions.json',
                               'bigArrays.txt',
                               'counts.sqlite',
-                              'datastore.sqlite',
                               'stats.txt'
                              );
         $total = 0;
