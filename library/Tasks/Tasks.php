@@ -36,6 +36,17 @@ abstract class Tasks {
             $this->log = new \Log($task,
                                   $config->projects_root.'/projects/'.$config->project);
         }
+        
+        $this->datastore = new \Datastore($config);
+    }
+    
+    protected function checkTokenLimit() {
+        $nb_tokens = $this->datastore->getHash('tokens');
+
+        $config = \Config::factory();
+        if ($nb_tokens > $config->token_limit) {
+            die("Project too large ($nb_tokens / {$config->token_limit}.\n");
+        }
     }
     
     public abstract function run(\Config $config);

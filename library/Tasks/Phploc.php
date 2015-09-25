@@ -61,11 +61,10 @@ class Phploc extends Tasks {
                 $this->array_add($loc, $this->countLocInFile($file));
             }
             
-            $datastore = new \Datastore($config);
-            $datastore->addRow('hash', array(array('key' => 'loc',         'value' => $loc['code']),
-                                             array('key' => 'locTotal',    'value' => $loc['total']),
-                                             array('key' => 'files',       'value' => $loc['files']),
-                                             array('key' => 'tokens',      'value' => $loc['tokens']),
+            $this->datastore->addRow('hash', array(array('key' => 'loc',         'value' => $loc['code']),
+                                                   array('key' => 'locTotal',    'value' => $loc['total']),
+                                                   array('key' => 'files',       'value' => $loc['files']),
+                                                   array('key' => 'tokens',      'value' => $loc['tokens']),
                                         )
                           );
         } elseif (!empty($config->dirname)) {

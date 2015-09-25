@@ -96,9 +96,9 @@ class FindExternalLibraries extends Tasks {
             $store[] = ['library' => $library,
                         'file'    => $file];
         }
-        $datastore = new \Datastore($config);
-        $datastore->cleanTable('externallibraries');
-        $datastore->addRow('externallibraries', $store);
+
+        $this->datastore->cleanTable('externallibraries');
+        $this->datastore->addRow('externallibraries', $store);
 
         if ($config->update === true && count($newConfigs) > 0) {
              display('Updating '.$project.'/config.ini');

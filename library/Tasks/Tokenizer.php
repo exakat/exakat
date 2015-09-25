@@ -38,6 +38,8 @@ class Tokenizer extends Tasks {
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             die("No such config.ini in project '$project'. Aborting\n");
         }
+        
+        $this->checkTokenLimit();
 
         $begin_time = microtime(true);
         $classes = \Tokenizer\Token::getTokenizers($config->phpversion);

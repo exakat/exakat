@@ -83,13 +83,14 @@ class Project extends Tasks {
         }
         
         // cleaning datastore
-        $datastore = new \Datastore($config);
-        $datastore->cleanTable('hash');
-        $datastore->cleanTable('analyzed');
-        $datastore->cleanTable('externallibraries');
+        unset($this->datastore);
+        $this->datastore = new \Datastore($config);
+        $this->datastore->cleanTable('hash');
+        $this->datastore->cleanTable('analyzed');
+        $this->datastore->cleanTable('externallibraries');
         
         $audit_start = time();
-        $datastore->addRow('hash', array('audit_start' => $audit_start,
+        $this->datastore->addRow('hash', array('audit_start' => $audit_start,
                                          'exakat_version' => \Exakat::VERSION,
                                          'exakat_build' => \Exakat::BUILD,
                                          ));
@@ -115,6 +116,7 @@ class Project extends Tasks {
         $this->updateProgress($progress++);
 
         display("waited For All\n");
+        $this->checkTokenLimit();
 
         shell_exec('php '.$config->executable.' load -v -r -d '.$config->codePath.' -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
@@ -216,7 +218,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         display("Stats 2\n");
         
         $audit_end = time();
-        $datastore->addRow('hash', array('audit_end'    => $audit_end,
+        $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                          'audit_length' => $audit_end - $audit_start));
 
         shell_exec('php '.$config->executable.' results -P Structures/EchoWithConcat -json -f '.$config->projects_root.'/projects/'.$project.'/EchoWithConcat');

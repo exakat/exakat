@@ -30,10 +30,9 @@ class Analyze extends Tasks {
         if ($project == 'default') {
             die("analyze require -p <project> option. Aborting\n");
         }
-        
-        $begin = microtime(true);
 
-        $datastore = new \Datastore($config);
+        $this->checkTokenLimit();
+        $begin = microtime(true);
 
         if ($config->program !== null) {
             $analyzer = $config->program;
@@ -52,7 +51,7 @@ class Analyze extends Tasks {
             if (!$analyzers_class = \Analyzer\Analyzer::getThemeAnalyzers($thema)) {
                 die("No such thema as '$thema'. Aborting\n");
             }
-            $datastore->addRow('hash', array($config->thema => count($analyzers_class) ) );
+            $this->datastore->addRow('hash', array($config->thema => count($analyzers_class) ) );
         } else {
             die( "Usage :php exakat analyze -T <\"Thema\"> -p <project>\n
 php exakat analyze -P <One/rule> -p <project>\n");
@@ -175,7 +174,7 @@ GREMLIN;
                 $end = microtime(true);
                 $this->log->log("$analyzer_class\t".($end - $begin)."\t$count\t$processed\t$queries\t$rawQueries");
                 // storing the number of row found in Hash table (datastore)
-                $datastore->addRow('analyzed', array($analyzer_class => $count ) );
+                $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
             }
         }
 

@@ -76,12 +76,9 @@ class Files extends Tasks {
             }
         }
 
-        $datastore = new \Datastore($config);
-        
-
         display('Ignoring files');
         // Ignored files
-        $datastore->cleanTable('ignoredFiles');
+        $this->datastore->cleanTable('ignoredFiles');
         $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -path "'.(join('" -or -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
         $files = trim(shell_exec($shellBase));
 
@@ -91,10 +88,10 @@ class Files extends Tasks {
             return array('file' => $a);
         }, $files);
 
-        $datastore->addRow('ignoredFiles', $files);
+        $this->datastore->addRow('ignoredFiles', $files);
 
         // actually used files
-        $datastore->cleanTable('files');
+        $this->datastore->cleanTable('files');
         $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
 
         $files = trim(shell_exec($shellBase));
@@ -104,7 +101,7 @@ class Files extends Tasks {
             return array('file' => $a);
         }, $files);
 
-        $datastore->addRow('files', $files);
+        $this->datastore->addRow('files', $files);
 
         $ignoreDirs = array();
         $ignoreName = array();
@@ -188,8 +185,8 @@ class Files extends Tasks {
                 }
             }
     
-            $datastore->cleanTable('compilation'.$version);
-            $datastore->addRow('compilation'.$version, $incompilables);
+            $this->datastore->cleanTable('compilation'.$version);
+            $this->datastore->addRow('compilation'.$version, $incompilables);
             $stats['notCompilable'.$version] = count($incompilables);
         }
 
@@ -206,7 +203,7 @@ class Files extends Tasks {
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
 
-        $datastore->cleanTable('shortopentag');
+        $this->datastore->cleanTable('shortopentag');
         if ($tokenssot != $tokens) {
             $nosot = explode("\n", trim($resultNosot));
             $nosot2 = array();
@@ -239,17 +236,17 @@ class Files extends Tasks {
                 }
             }
     
-            $datastore->addRow('shortopentag', $shortOpenTag);
+            $this->datastore->addRow('shortopentag', $shortOpenTag);
         } else {
             display('Short tag OK');
         }
 
-        $datastore->addRow('hash', $stats);
+        $this->datastore->addRow('hash', $stats);
         
         // composer.json
         display('Check composer');
         $composerInfo = array();
-        $datastore->cleanTable('composer');
+        $this->datastore->cleanTable('composer');
         if ($composerInfo['composer.json'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.json')) {
             $composerInfo['composer.lock'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.lock');
             
@@ -262,10 +259,10 @@ class Files extends Tasks {
             }
             
             if (isset($composer->require)) {
-                $datastore->addRow('composer', (array) $composer->require);
+                $this->datastore->addRow('composer', (array) $composer->require);
             }
         }
-        $datastore->addRow('hash', $composerInfo);
+        $this->datastore->addRow('hash', $composerInfo);
         
         display('Done');
         

@@ -203,6 +203,7 @@ php          = {$_SERVER['_']}
 ;php70        = /path/to/php70
 php$version        = {$_SERVER['_']}
 
+token_limit = 100000
 INI;
             file_put_contents($config->projects_root.'/config/config.ini', $ini);
         }

@@ -31,6 +31,8 @@ class Report extends Tasks {
             die("Report '{$config->report}' doesn't exist.\nAborting\n");
         }
 
+        $this->checkTokenLimit();
+        
         if (!class_exists("\\Report\\Format\\".$config->format)) {
             die("Format '".$config->format."' doesn't exist. Choose among : ".implode(", ", \Report\Report::$formats)."\nAborting\n");
         }
@@ -43,8 +45,7 @@ class Report extends Tasks {
             die("Project hasn't been analyzed. Run project first.\nAborting\n");
         }
 
-        $datastore = new \Datastore($config);
-        \Analyzer\Analyzer::$datastore = $datastore;
+        \Analyzer\Analyzer::$datastore = $this->datastore;
 
         display( "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n");
         $begin = microtime(true);

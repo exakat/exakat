@@ -30,8 +30,6 @@ class Dump extends Tasks {
                               'Analyze');
 
     public function run(\Config $config) {
-        $datastore = new \Datastore($config);
-        
         $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
         if (file_exists($sqliteFile)) {
             unlink($sqliteFile);
@@ -60,7 +58,7 @@ class Dump extends Tasks {
             $stmt = $sqlite->prepare($sqlQuery);
 
             foreach($themaClasses as $class) {
-                $count = (int) $datastore->getHash($class);
+                $count = (int) $this->datastore->getHash($class);
 
                 $sqlQuery = 'INSERT INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, "'.$class.'", '.$count.' )';
                 $sqlite->query($sqlQuery);

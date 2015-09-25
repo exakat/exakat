@@ -68,14 +68,15 @@ class OnePage extends Tasks {
         // cleaning datastore
         $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
 
-        $datastore = new \Datastore($config);
+        unset($this->datastore);
+        $this->datastore = new \Datastore($config);
         
-        $datastore->cleanTable('hash');
+        $this->datastore->cleanTable('hash');
         $audit_start = time();
-        $datastore->addRow('hash', array('audit_start' => $audit_start,
-                                         'exakat_version' => \Exakat::VERSION,
-                                         'exakat_build' => \Exakat::BUILD,
-                                         ));
+        $this->datastore->addRow('hash', array('audit_start' => $audit_start,
+                                               'exakat_version' => \Exakat::VERSION,
+                                               'exakat_build' => \Exakat::BUILD,
+                                               ));
 
         $thread = new \Thread();
         display("Running project '$project'\n");
@@ -122,8 +123,8 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         unlink($config->projects_root.'/projects/'.$project.'/code/onepage.php');
 
         $audit_end = time();
-        $datastore->addRow('hash', array('audit_end'    => $audit_end,
-                                         'audit_length' => $audit_end - $audit_start));
+        $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
+                                               'audit_length' => $audit_end - $audit_start));
 
         $this->logTime('Final');
         $this->updateProgress($progress++);

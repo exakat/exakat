@@ -33,6 +33,8 @@ class Load extends Tasks {
             die();
         }
 
+        $this->checkTokenLimit();
+
         $this->php = new \Phpexec($this->config->phpversion);
 
         // formerly -q option. Currently, only one loader, via csv-batchimport;
