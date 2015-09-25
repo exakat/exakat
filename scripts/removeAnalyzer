@@ -1,0 +1,59 @@
+<?php
+
+$analyzer = $argv[1];
+
+var_dump($analyzer);
+
+if (!file_exists('library/Analyzer/'.$analyzer.'.php')) {
+    print "'$analyzer' doesn't exists in Analyzer\n";
+} else {
+    shell_exec("git rm library/Analyzer/$analyzer.php");
+}
+
+if (!file_exists('human/en/'.$analyzer.'.ini')) {
+    print "'$analyzer' doesn't exists in Definitions\n";
+} else {
+    shell_exec("git rm human/en/$analyzer.ini");
+}
+
+if (!file_exists('tests/analyzer/Test/'.str_replace('/', '_', $analyzer).'.php')) {
+    print "'$analyzer' doesn't exists in Test\n";
+} else {
+    shell_exec("git rm tests/analyzer/Test/".str_replace('/', '_', $analyzer).".php");
+}
+
+$files = glob('tests/analyzer/source/'.str_replace('/', '_', $analyzer).'.*.php');
+if (count($files) == 0) {
+    print "'$analyzer' doesn't exists in Test/source\n";
+} else {
+    print count($files)." '$analyzer' removed in Test/source\n";
+    foreach($files as $file) {
+        shell_exec("git rm $file");
+    }
+}
+
+$files = glob('tests/analyzer/exp/'.str_replace('/', '_', $analyzer).'.*.php');
+if (count($files) == 0) {
+    print "'$analyzer' doesn't exists in Test/exp\n";
+} else {
+    print count($files)." '$analyzer' removed in Test/exp\n";
+    foreach($files as $file) {
+        shell_exec("git rm $file");
+    }
+}
+
+$sqlite = new \Sqlite3('data/analyzers.sqlite');
+list($folder, $name) = explode('/', $analyzer);
+
+$res = $sqlite->query('SELECT id FROM analyzers WHERE folder = "'.$folder.'" AND name = "'.$name.'"');
+$analyzerId = $res->fetchArray(SQLITE3_ASSOC)['id'];
+
+if (!empty($analyzerId)) {
+    print "deleting $analyzerId \n";
+
+    $sqlite->query('DELETE FROM analyzers WHERE id = '.$analyzerId);
+    $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer = '.$analyzerId);
+} else {
+    print "Couldn't find $analyzer in analyzers table\n";
+}
+?>
