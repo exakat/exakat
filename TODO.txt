@@ -598,7 +598,7 @@ Inconsistent conditions
         if (fullcode.token == 'T_NS_SEPARATOR') {
 
 Support for class_alias
- list class_aliases created 
+list class_aliases created 
   
 Spot Origin of values if they can be tracked back f('a'); f($a) { b($a); } b($c) { useful_function($c); }
 
@@ -1157,8 +1157,6 @@ Find a way to add 'association' for foreach/for/if/ifelse, etc. They are not com
 
 Review : https://wiki.php.net/rfc#php_70 for PHP 7 compatibility.
 
-& new x() => fatal error.
-
 Unmodified Referenced Argument
 
 Spot IsRead/IsModified Static property
@@ -1498,3 +1496,13 @@ Add a synch check between Tasks/FindExternal and data/externallibrary
 
 Add symfony and zend to the external libraries
 
+?? (null coalesce) is a short circuit just like || (add this to implied if)
+
+Replacing a variable by itself is useless (here, $val doesn't need to be changed)
+
+Move 'chunk' into Analyzer.php (do not mess the whole API with that!)
+
+List functions that return a NaN : They should use is_Nan()!
+
+Overwritten literal (        $positions = array(0, 1, 2, 3, 4, 5, 6);
+        $positions = array(0);). Right after each other.
