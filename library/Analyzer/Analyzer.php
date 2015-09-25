@@ -111,7 +111,7 @@ class Analyzer {
         // PHP short name : Type\\Class
         // Human short name : Type/Class
         // Human shortcut : Class (must be unique among the classes)
-        
+
         if (strpos($name, '\\') !== false) {
             if (substr($name, 0, 9) == 'Analyzer\\') {
                 $class = $name;
@@ -137,7 +137,7 @@ class Analyzer {
         
         if (class_exists($class)) {
             $actualClassName = new \ReflectionClass($class);
-            if ($class != $actualClassName->getName()) {
+            if ($class !== $actualClassName->getName()) {
                 // problems with the case
                 return false;
             } else {
@@ -164,7 +164,7 @@ class Analyzer {
     }
     
     public static function getInstance($name) {
-        if ($analyzer = Analyzer::getClass($name)) {
+        if ($analyzer = static::getClass($name)) {
             return new $analyzer();
         } else {
             echo "No such class as '", $name, "'\n";
@@ -279,17 +279,17 @@ GREMLIN;
     
     public function checkPhpVersion($version) {
         // this handles Any version of PHP
-        if ($this->phpVersion == 'Any') {
+        if ($this->phpVersion === 'Any') {
             return true;
         }
 
         // version and above
-        if ((substr($this->phpVersion, -1) == '+') && version_compare($version, $this->phpVersion) >= 0) {
+        if ((substr($this->phpVersion, -1) === '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
         }
 
         // up to version
-        if ((substr($this->phpVersion, -1) == '-') && version_compare($version, $this->phpVersion) <= 0) {
+        if ((substr($this->phpVersion, -1) === '-') && version_compare($version, $this->phpVersion) <= 0) {
             return true;
         }
 

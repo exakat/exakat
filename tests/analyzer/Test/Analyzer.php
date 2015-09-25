@@ -2,6 +2,9 @@
 
 namespace Test;
 
+include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
 class Analyzer extends \PHPUnit_Framework_TestCase {
     public function generic_test($file) {
         list($analyzer, $number) = explode('.', $file);
@@ -9,9 +12,9 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         
         $ini = parse_ini_file('../../projects/test/config.ini');
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
-        $test_config = 'Analyzer'.str_replace('_', '\\', substr(get_class($this), 4));
+        $test_config = str_replace('_', '/', substr(get_class($this), 5));
 
-        $analyzerobject = new $test_config(null);
+        $analyzerobject = \Analyzer\Analyzer::getInstance($test_config);
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
