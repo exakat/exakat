@@ -59,7 +59,7 @@ class Ternary extends TokenAuto {
                                'addSemicolon' => 'it');
         $this->checkAuto();
 
-        // $a ?: $b : we keep the : as 'Then', and it will have to be interpreted as $a in fullcode. 
+        // $a ?: $b : we keep the : as 'Then', and it will have to be interpreted as $a in fullcode.
         // May need to build a specific processing here.
         $this->conditions = array( -2 => array('filterOut' => array_merge(Comparison::$operators,  Logical::$operators,
                                                                           Bitshift::$operators,    Multiplication::$operators,

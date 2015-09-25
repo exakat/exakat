@@ -32,7 +32,7 @@ class IsGlobalConstant extends Analyzer\Analyzer {
                  ->analyzerIsNot('self')
                  ->tokenIs('T_STRING')  // No namespace
                  ->regex('fullnspath', '\\\\\\\\.+\\\\\\\\.+')
-                 // is the constant defined where it should ? 
+                 // is the constant defined where it should ?
                  ->filter("g.idx('constants')[['path':it.fullnspath]].any() == false")
 
                  // is the constant defined in the global

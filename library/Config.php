@@ -310,6 +310,7 @@ class Config {
                                 '-neo4j_host'   => 'neo4j_host', 
                                 '-neo4j_port'   => 'neo4j_port', 
                                 '-neo4j_folder' => 'neo4j_folder', 
+                                '-token_limit'  => 1000000,
                                  );
 
         foreach($optionsValue as $key => $config) {

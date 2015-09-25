@@ -35,7 +35,7 @@ class _Class extends TokenAuto {
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS')
                                  );
         
-        $this->actions = array('transform'   => array(   1 => 'DROP', 
+        $this->actions = array('transform'   => array(   1 => 'DROP',
                                                          2 => 'ARGUMENTS',
                                                          3 => 'DROP',
                                                          ),
@@ -120,7 +120,7 @@ if (fullcode.out('NAME').any() == false && fullcode.out('ARGUMENTS').any() == fa
 fullcode.out("NAME").each{ fullcode.fullcode = fullcode.fullcode + ' ' + it.code;}
 
 // class arguments
-fullcode.out("ARGUMENTS").each{ 
+fullcode.out("ARGUMENTS").each{
     if (it.token != 'T_VOID') {
         fullcode.fullcode = fullcode.fullcode + ' (' + it.fullcode + ')';
     }
