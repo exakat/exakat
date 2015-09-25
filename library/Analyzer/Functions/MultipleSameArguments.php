@@ -26,6 +26,8 @@ namespace Analyzer\Functions;
 use Analyzer;
 
 class MultipleSameArguments extends Analyzer\Analyzer {
+    protected $phpVersion = '7.0-';
+    
     public function analyze() {
         $this->atomIs('Function')
              ->raw("filter{ it.out('ARGUMENTS').out('ARGUMENT').aggregate().groupCount(){
