@@ -337,6 +337,11 @@ GREMLIN;
             $result->total = 0;
             return [$result];
         }
+
+        if (!isset($result->results)) {
+            return array();
+        }
+        
         return $result->results;
     }
 
