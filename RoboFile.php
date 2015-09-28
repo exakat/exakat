@@ -173,32 +173,15 @@ LICENCE;
              ->printed(false)
              ->run();
 
-        $files = Finder::create()->ignoreVCS(true)
-            ->files()
-            ->path('config/')
-            ->path('data/')
-            ->path('human/')
-            ->path('library/')
-            ->path('vendor/')
-            ->path('devoops/') 
-            ->notPath('batch-import')
-            ->notPath('library/Report/Format/Ace')
-            ->notPath('projects/')
-            ->notPath('media/')
-            ->notPath('config.ini')
-
-            ->in(__DIR__)
-            ->exclude('neo4j')
-            ->exclude('batch-import');
-        $this->addFiles($packer, $files);
-
-        $files = Finder::create()->ignoreVCS(true)
-                                 ->files()
-                                 ->notPath('projects/')
-                                 ->notPath('bootstrapvalidator')
-                                 ->path('media/devoops/')
-                                 ->in(__DIR__);
-        $this->addFiles($packer, $files);
+        $folders = array('data', 'human', 'library', 'media/devoops');
+        foreach($folders as $folder) {
+            $files = Finder::create()->ignoreVCS(true)
+                                     ->files()
+                                     ->in(__DIR__.'/'.$folder);
+            foreach($files as $file) {
+                $packer->addFile($folder.'/'.$file->getRelativePathname(), $file->getRealPath());
+            }
+        }
 
         $packer->addFile('exakat','exakat')
                ->executable('exakat')
@@ -297,11 +280,8 @@ JOIN categories
         print "$total analyzers are orphans\n";
 
         // check for analyzers in Files
-        $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM analyzers');
-        while($row = $res->fetchArray()) {
-            print_r($row);
-        }
         $total = 0;
+        $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM analyzers');
         while($row = $res->fetchArray()) {
             ++$total;
             if (!file_exists('library/Analyzer/'.$row['name'].'.php')) {
