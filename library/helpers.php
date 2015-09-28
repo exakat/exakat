@@ -46,34 +46,6 @@ function display_r($object) {
 }
 
 function gremlin_query($query, $params = [], $load = '') {
-    if (!defined('GREMLIN_QUERY')) {
-        // Define the GREMLIN_QUERY constant
-        $config = \Config::factory();
-        // @ is there in case the host returns an Authorization error
-        $json = @file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
-
-        if (empty($json)) {
-            define('GREMLIN_QUERY', 'gremlin_queryA');
-        } else {
-            $json = json_decode($json);
-            if (isset($json->extensions->GremlinPlugin)) {
-                define('GREMLIN_QUERY', 'gremlin_queryN');
-            } else {
-                define('GREMLIN_QUERY', 'gremlin_queryA');
-            }
-        }
-    }
-    
-    if (GREMLIN_QUERY == 'gremlin_queryN') {
-        return gremlin_queryN($query, $params);
-    } elseif (GREMLIN_QUERY == 'gremlin_queryA') {
-        return gremlin_queryA($query, $params, $load);
-    } else {
-        throw new \Exception('Couldn\'t find Gremlin');
-    }
-}
-
-function gremlin_queryA($query, $params = [], $load = '') {
     $getString = 'script='.urlencode($query);
     
     if (isset($params) && !empty($params)) {
@@ -189,58 +161,14 @@ function gremlin_queryA($query, $params = [], $load = '') {
     //close connection
     curl_close($ch);
     
-    if (isset($result->message)) {
-        throw new \GremlinException($result->message, $query);
+    $result = json_decode($result);
+    if (isset($result->errormessage)) {
+        throw new \Exceptions\GremlinException($result->errormessage, $query);
     }
 
-    return json_decode($result);
+    return $result;
 }
 
-
-function gremlin_queryN($query, $params = [], $load = '') {
-    $fields = ['script' => $query];
-    if (isset($params) && !empty($params)) {
-        $fields['params'] = $params;
-    }
-
-    $fields_string = json_encode($fields);
-
-    $ch = curl_init();
-
-    //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_HTTPHEADER, array(
-    				'Accept: application/json;stream=true',
-    				'Content-type: application/json',
-                    'Content-Length: '.strlen($fields_string),
-                    'User-Agent: exakat',
-                    'X-Stream: true'
-                ));
-    
-    static $neo4j_host, $neo4j_port;
-    if (!isset($neo4j_host)) {  
-        $config = \Config::factory();
-        $neo4j_host = $config->neo4j_host.':'.$config->neo4j_port;
-    }
-    
-    curl_setopt($ch,CURLOPT_URL, 'http://'.$neo4j_host.'/db/data/ext/GremlinPlugin/graphdb/execute_script');
-    curl_setopt($ch,CURLOPT_CUSTOMREQUEST,'POST');
-    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-    curl_setopt($ch,CURLOPT_POST,true);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch,CURLOPT_IPRESOLVE,CURL_IPRESOLVE_V4);
-
-    //execute post
-    $result = curl_exec($ch);
-
-    //close connection
-    curl_close($ch);
-
-    if (isset($result->message)) {
-        throw new \Exception($result->message);
-    }
-
-    return json_decode($result);
-}
 
 function gremlin_queryOne($query, $params = [], $load = '') {
     $res = gremlin_query($query, $params, $load );

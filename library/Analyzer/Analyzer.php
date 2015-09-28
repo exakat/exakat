@@ -327,17 +327,15 @@ GREMLIN;
     }
 
     public function query($queryString, $arguments = null) {
-        $result = gremlin_query($queryString, $arguments);
-
-        if (!is_object($result) || $result->success !== true) {
-            echo "Error in query : \n",
-                 $queryString, "\n",
-                 print_r($result, true);
-            die();
-        }
-
-        if (!isset($result->results)) {
-            return array();
+        try {
+            $result = gremlin_query($queryString, $arguments);
+        } catch (\Exceptions\GremlinException $e) {
+            display($e->getMessage(),
+                 $queryString, "\n");
+            $result = new \StdClass();
+            $result->processed = 0;
+            $result->total = 0;
+            return [$result];
         }
         return $result->results;
     }

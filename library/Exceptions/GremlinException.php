@@ -24,7 +24,7 @@
 namespace Exceptions;
 
 class GremlinException extends \Exception {
-    public function __construct($message = '', $query = 0, \Exception $previous = null) {
+    public function __construct($message = '', $query = '', \Exception $previous = null) {
         
         parent::__construct("Error during Gremlin query : '$message'.\nQuery : $query\n", 1, $previous);
     }
