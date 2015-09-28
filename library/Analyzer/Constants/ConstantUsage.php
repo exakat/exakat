@@ -33,7 +33,7 @@ class ConstantUsage extends Analyzer\Analyzer {
     public function analyze() {
         // Nsname that is not used somewhere else
         $this->atomIs('Nsname')
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'EXTENDS', 'IMPLEMENTS', 'CLASS'));
+             ->hasNoIn(array('NEW', 'USE', 'NAME', 'NAMESPACE', 'EXTENDS', 'IMPLEMENTS', 'CLASS'));
         $this->prepareQuery();
 
         // Identifier that is not used somewhere else
@@ -56,6 +56,8 @@ class ConstantUsage extends Analyzer\Analyzer {
              ->is('rank', 0)
              ->atomIs('String');
         $this->prepareQuery();
+        
+        // Const outside a class
     }
 }
 
