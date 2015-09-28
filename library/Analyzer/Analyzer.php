@@ -23,7 +23,7 @@
 
 namespace Analyzer;
 
-class Analyzer {
+abstract class Analyzer {
     protected $neo4j = null;
     protected $code = null;
 
@@ -1594,8 +1594,7 @@ GREMLIN
         return $this->queryCount;
     }
 
-    public function analyze() { return true; }
-    // @todo log errors when using this ?
+    public abstract function analyze(); 
 
     public function printQuery() {
         $this->prepareQuery();
