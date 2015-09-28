@@ -36,7 +36,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs configuration : '.$confs.'.');
         }
         
-        $shell = 'cd ../..; php exakat cleandb; php exakat load -p test -f ./tests/analyzer/source/'.$file.'.php';
+        $shell = 'cd ../..; php exakat cleandb; php exakat load -p test -f ./tests/analyzer/source/'.$file.'.php -v';
         
         $res = shell_exec($shell);
         if (strpos($res, "won't compile") !== false) {
