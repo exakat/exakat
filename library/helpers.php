@@ -190,7 +190,7 @@ function gremlin_queryA($query, $params = [], $load = '') {
     curl_close($ch);
     
     if (isset($result->message)) {
-        throw new \Exception($result->message);
+        throw new \GremlinException($result->message, $query);
     }
 
     return json_decode($result);
