@@ -1506,3 +1506,14 @@ List functions that return a NaN : They should use is_Nan()!
 
 Overwritten literal (        $positions = array(0, 1, 2, 3, 4, 5, 6);
         $positions = array(0);). Right after each other.
+        
+Document options (in COnfig), and put them in the docs.
+
+Robofile : find options usage (from config), and compare to definitions (is it useful?)
+
+Functions whose result should be checked before usage : There should be a longer list.
+
+UT for various PHP versions (support for version limitations, and compilations : I need a dashboard)
+
+    if (isset($result->errormessage)) {} // but result is not yet an object!
+    $result = json_decode($result)
