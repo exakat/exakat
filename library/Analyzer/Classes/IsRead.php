@@ -27,63 +27,36 @@ use Analyzer;
 
 class IsRead extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\Constructor');
+        return array('Classes/Constructor',
+                     'Variables/IsRead');
     }
     
     public function analyze() {
-        // all is doubled by for Property and StaticProperty
-        $this->atomIs('Property')
+        $atoms = array('Property', 'Staticproperty');
+        
+        $this->atomIs($atoms)
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
-                           'CASE', 'CLONE', 'FINAL', 'CLASS'));
-            // note : NAME is for Switch!!
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
-                           'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
-                           'CASE', 'CLONE', 'FINAL', 'CLASS'));
+                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL'));
             // note : NAME is for Switch!!
         $this->prepareQuery();
 
         // right or left, same
-        $this->atomIs('Property')
-             ->inIs(array('RIGHT', 'LEFT'))
-             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // right or left, same
-        $this->atomIs('Staticproperty')
+        $this->atomIs($atoms)
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
              ->back('first');
         $this->prepareQuery();
 
         // right only
-        $this->atomIs('Property')
-             ->inIs('RIGHT')
-             ->atomIs('Assignation')
-             ->back('first');
-        $this->prepareQuery();
-
-        // right only
-        $this->atomIs('Staticproperty')
+        $this->atomIs($atoms)
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->back('first');
         $this->prepareQuery();
 
         // $x++ + 2 (a plusplus within another
-        $this->atomIs('Property')
-             ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
-             ->inIs(array('RIGHT', 'LEFT'))
-             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift', 'Assignation'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // $x++ + 2 (a plusplus within another
-        $this->atomIs('Staticproperty')
+        $this->atomIs($atoms)
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift', 'Assignation'))
@@ -91,28 +64,14 @@ class IsRead extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // variable in a sequence (also useless...)
-        $this->atomIs('Property')
-             ->inIs('ELEMENT')
-             ->atomIs('Sequence')
-             ->back('first');
-        $this->prepareQuery();
-
-        // variable in a sequence (also useless...)
-        $this->atomIs('Staticproperty')
+        $this->atomIs($atoms)
              ->inIs('ELEMENT')
              ->atomIs('Sequence')
              ->back('first');
         $this->prepareQuery();
 
         // array only
-        $this->atomIs('Property')
-             ->inIs('VARIABLE')
-             ->atomIs(array('Array', 'Arrayappend'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // array only
-        $this->atomIs('Staticproperty')
+        $this->atomIs($atoms)
              ->inIs('VARIABLE')
              ->atomIs(array('Array', 'Arrayappend'))
              ->back('first');
@@ -133,18 +92,7 @@ class IsRead extends Analyzer\Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs('Property')
-                 ->is('rank', $position)
-                 ->inIs('ARGUMENT')
-                 ->inIs('ARGUMENTS')
-                 ->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspath($functions)
-                 ->back('first');
-            $this->prepareQuery();
-
-            $this->atomIs('Staticproperty')
+            $this->atomIs($atoms)
                  ->is('rank', $position)
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
@@ -157,21 +105,14 @@ class IsRead extends Analyzer\Analyzer {
         }
 
         // Variable that are not a reference in a functioncall
-        $this->atomIs('Property')
+        $this->atomIs($atoms)
              ->hasIn(array('ARGUMENT'))
              ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
-             ->analyzerIsNot('Analyzer\\Variables\\IsRead');
-        $this->prepareQuery();
-
-        // Variable that are not a reference in a functioncall
-        $this->atomIs('Staticproperty')
-             ->hasIn(array('ARGUMENT'))
-             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
-             ->analyzerIsNot('Analyzer\\Variables\\IsRead');
+             ->analyzerIsNot('Variables/IsRead');
         $this->prepareQuery();
 
         // Class constructors (__construct)
-        $this->atomIs('Property')
+        $this->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -181,27 +122,7 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->_as('method')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
-             ->back('method')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Class constructors (__construct)
-        $this->atomIs('Staticproperty')
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->atomIs('Functioncall')
-             ->hasIn('NEW')
-             ->classDefinition()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->_as('method')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -211,7 +132,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // Class constructors with self
-        $this->atomIs('Property')
+        $this->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -223,7 +144,7 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->_as('method')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -233,7 +154,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // Class constructors with self
-        $this->atomIs('Property')
+        $this->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -245,14 +166,15 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->_as('method')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
              ->isNot('reference', true)
              ->back('first');
-        $this->prepareQuery();    }
+        $this->prepareQuery();
+    }
 }
 
 ?>
