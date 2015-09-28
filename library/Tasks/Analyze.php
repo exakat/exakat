@@ -145,23 +145,32 @@ php exakat analyze -P <One/rule> -p <project>\n");
             $analyzer->init();
     
             if (!$analyzer->checkPhpVersion($config->phpversion)) {
+                $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
+                
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
-            
+                
                 $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpVersion', '$config->phpversion');
+result = g.addVertex(null, [code:'Not Compatible With PhpVersion', fullcode:'Not Compatible With PhpVersion', virtual:true, notCompatibleWithPhpVersion:'$config->phpversion']);
+index = g.addVertex(null, [analyzer:'$analyzerQuoted', analyzer:true, line:0, description:'Analyzer index for $analyzer', code:'', fullcode:'',  atom:'Index', token:'T_INDEX']);
+g.idx('analyzers').put('analyzer', '$analyzerQuoted', index);
+g.addEdge(index, result, 'ANALYZED');
 GREMLIN;
                 gremlin_query($query);
 
-                display( "$analyzer_class is not compatible with PHP version {$config->phpversion}. Ignoring\n");
+                display("$analyzer is not compatible with PHP version {$config->phpversion}. Ignoring\n");
             } elseif (!$analyzer->checkPhpConfiguration($Php)) {
+                $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
                 $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '{$config->phpversion}');
+result = g.addVertex(null, [code:'Not Compatible With Php Configuration', fullcode:'Not Compatible With Php Configuration', virtual:true, notCompatibleWithPhpConfiguration:'$config->phpversion']);
+index = g.addVertex(null, [analyzer:'$analyzerQuoted', analyzer:true, line:0, description:'Analyzer index for $analyzer', code:'', fullcode:'',  atom:'Index', token:'T_INDEX']);
+g.idx('analyzers').put('analyzer', '$analyzerQuoted', index);
+g.addEdge(index, result, 'ANALYZED');
 GREMLIN;
                 gremlin_query($query);
 
-                display( "$analyzer_class is not compatible with PHP configuration of this version. Ignoring\n");
+                display( "$analyzer is not compatible with PHP configuration of this version. Ignoring\n");
             } else {
                 $analyzer->run();
 

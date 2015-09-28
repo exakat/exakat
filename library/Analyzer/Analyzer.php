@@ -1594,7 +1594,7 @@ GREMLIN
         return $this->queryCount;
     }
 
-    public abstract function analyze(); 
+    public abstract function analyze();
 
     public function printQuery() {
         $this->prepareQuery();
