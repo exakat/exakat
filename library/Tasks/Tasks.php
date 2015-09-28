@@ -37,7 +37,9 @@ abstract class Tasks {
                                   $config->projects_root.'/projects/'.$config->project);
         }
         
-        $this->datastore = new \Datastore($config);
+        if ($config->project != 'default') {
+            $this->datastore = new \Datastore($config);
+        }
     }
     
     protected function checkTokenLimit() {
@@ -45,7 +47,7 @@ abstract class Tasks {
 
         $config = \Config::factory();
         if ($nb_tokens > $config->token_limit) {
-            die("Project too large ($nb_tokens / {$config->token_limit}.\n");
+            die("Project too large ($nb_tokens / {$config->token_limit})\n");
         }
     }
     

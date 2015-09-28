@@ -26,6 +26,7 @@ namespace Tasks;
 class Initproject extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
+
         if ($project == 'default') {
             die("No project name provided. Add -p option\n");
         }
@@ -68,6 +69,7 @@ class Initproject extends Tasks {
             display( $config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n");
             return null;
         }
+        $this->datastore = new \Datastore(\Config::factory());
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             // default initial config. Found in test project.
