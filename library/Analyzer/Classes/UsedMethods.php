@@ -27,13 +27,15 @@ use Analyzer;
 
 class UsedMethods extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\MarkCallable');
+        return array('Functions/MarkCallable');
     }
-    
-    public function analyze() {
-        $magicMethods = $this->loadIni('php_magic_methods.ini');
-        $magicMethods = $magicMethods['magicMethod'];
 
+    public function analyze() {
+        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
+        
+        $methods = $this->query('g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
+        print_r($methods);
+        
         // Normal Methodcall
         $this->atomIs('Class')
              ->outIs('BLOCK')
@@ -42,11 +44,11 @@ class UsedMethods extends Analyzer\Analyzer {
              ->_as('used')
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
-             ->savePropertyAs('code', 'method')
-             ->raw('filter{ g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").filter{ it.code.toLowerCase() == method.toLowerCase()}.any()}')
+             ->code($methods)
              ->back('used');
         $this->prepareQuery();
 
+         // call with call_user_func (???)
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -55,12 +57,12 @@ class UsedMethods extends Analyzer\Analyzer {
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
              ->savePropertyAs('code', 'method')
-            // call with call_user_func
              ->raw('filter{ g.idx("atoms")[["atom":"Functioncall"]].hasNot("fullnspath", null).has("fullnspath", "\\\\call_user_func").any() }')
              ->back('used');
         $this->prepareQuery();
         
         // Staticmethodcall
+        $staticmethods = $this->query('g.idx("atoms")[["atom":"Staticmethodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -68,14 +70,33 @@ class UsedMethods extends Analyzer\Analyzer {
              ->_as('used')
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
-             ->savePropertyAs('code', 'method')
-             ->raw('filter{ g.idx("atoms")[["atom":"Staticmethodcall"]].out("METHOD").filter{ it.code.toLowerCase() == method.toLowerCase()}.any()}')
+             ->code($staticmethods)
              ->back('used');
         $this->prepareQuery();
 
         // the special methods must be processed independantly
         // __destruct is always used, no need to spot
 
+        $callables = $this->query(<<<GREMLIN
+g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.transform{ 
+    // Strings
+    if (it.atom == 'String') {
+        if (it.noDelimiter =~ /::/) {
+            s = it.noDelimiter.split('::');
+            s[1].toLowerCase();
+        } else {
+            it.noDelimiter.toLowerCase();
+        }
+    } else if (it.atom == 'Arguments') {
+        it.out('ARGUMENT').has('rank', 1).next().noDelimiter.toLowerCase();
+    } else {
+        it.fullcode;
+    }
+}
+
+GREMLIN
+);
+        
         // method used statically in a callback with an array
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
@@ -85,21 +106,7 @@ class UsedMethods extends Analyzer\Analyzer {
              ->_as('used')
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
-             ->savePropertyAs('code', 'method')
-             ->raw('filter{ g.idx("atoms")[["atom":"Functioncall"]].has("token", "T_ARRAY").hasNot("cbClass", null).filter{ it.cbMethod == method.toLowerCase()}.filter{ it.cbClass == fullnspath.toLowerCase()}.any()}')
-             ->back('used');
-        $this->prepareQuery();
-
-        $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'fullnspath')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->_as('used')
-             ->outIs('NAME')
-             ->codeIsNot($magicMethods)
-             ->savePropertyAs('code', 'method')
-             ->raw('filter{ g.idx("atoms")[["atom":"String"]].hasNot("cbClass", null).filter{ it.cbMethod == method.toLowerCase()}.filter{ it.cbClass == fullnspath.toLowerCase()}.any()}')
+             ->code($callables)
              ->back('used');
         $this->prepareQuery();
     }
