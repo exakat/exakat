@@ -117,7 +117,7 @@ class Build_root extends Tasks {
 
         display("String unicode done\n");
 
-        gremlin_query("g.idx('atoms')[['token':'String']].has('noDelimiter', null).filter{ it.code in ['\"\"', \"''\"]}.each{ it.setProperty('noDelimiter', ''); };");
+        gremlin_query("g.idx('atoms')[['atom':'String']].has('noDelimiter', null).filter{ it.code in ['\"\"', \"''\"]}.each{ it.setProperty('noDelimiter', ''); };");
         $this->logTime('Unicodes block');
 
         display("Check for empty strings\n");
