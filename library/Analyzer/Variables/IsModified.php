@@ -27,17 +27,19 @@ use Analyzer;
 
 class IsModified extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\Constructor');
+        return array('Classes/Constructor');
     }
     
     public function analyze() {
-        $this->atomIs('Variable')
+        $atoms = 'Variable';
+
+        $this->atomIs($atoms)
              ->inIsIE('VARIABLE')
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'DEFINE', 'CAST'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Variable')
+        $this->atomIs($atoms)
              ->inIsIE('VARIABLE')
              ->inIs(array('LEFT', 'VARIABLE'))
              ->atomIs(array('Assignation', 'Arrayappend'))
@@ -46,14 +48,14 @@ class IsModified extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // catch
-        $this->atomIs('Variable')
+        $this->atomIs($atoms)
              ->inIs('VARIABLE')
              ->atomIs(array('Catch'))
              ->back('first');
         $this->prepareQuery();
 
         // arguments : reference variable in a custom function
-        $this->atomIs('Variable')
+        $this->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -73,7 +75,7 @@ class IsModified extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Variable');
+             ->atomIs($atoms);
         $this->prepareQuery();
 
         // simple variable + default value : already done in line 18
@@ -84,7 +86,7 @@ class IsModified extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Typehint')
              ->outIs('VARIABLE')
-             ->atomIs('Variable');
+             ->atomIs($atoms);
         $this->prepareQuery();
 
         // typehint + default value
@@ -114,7 +116,7 @@ class IsModified extends Analyzer\Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs('Variable')
+            $this->atomIs($atoms)
                  ->inIsIE('VARIABLE')
                  ->is('rank', $position)
                  ->inIs('ARGUMENT')
@@ -128,7 +130,7 @@ class IsModified extends Analyzer\Analyzer {
         }
 
         // Class constructors (__construct)
-        $this->atomIs('Variable')
+        $this->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -139,7 +141,7 @@ class IsModified extends Analyzer\Analyzer {
              ->classDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
