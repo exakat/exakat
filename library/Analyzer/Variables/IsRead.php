@@ -27,8 +27,7 @@ use Analyzer;
 
 class IsRead extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Classes/Constructor',
-                     'Variables/IsRead');
+        return array('Classes/Constructor');
     }
     
     public function analyze() {
@@ -154,7 +153,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->hasIn(array('ARGUMENT'))
              ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
-             ->analyzerIsNot('Variables/IsRead');
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // Class constructors (__construct)
