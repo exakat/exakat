@@ -1,4 +1,4 @@
-Version 0.3.4 (Qingfeng, Coming up)
+Version 0.3.5 (Mingyue, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,26 @@ Version 0.3.4 (Qingfeng, Coming up)
 + Tokenizer
     + 
 
-Version 0.3.3 (Immortal Zhenyuan, 2014-09-21)
+Version 0.3.4 (Qingfeng, 2015-09-28 up)
++ Architecture
+    + Added token_limit configuration to avoid running too large project (default is 1 000 000)
+    + Several new tools for internal consistency check.
+    + Removed support for neo-contrib's gremlin plugin
++ Report
+    + Report libraries that were found and ignored
++ Analyzer
+    + Sped up queries that required previous analyzers or multiples atoms
+    + Spot global keywords inside loops (perf)
+    + Better spotting of Composer classes 
+    + Report double assignations
++ Tokenizer
+    + Added support for Anonymous classes (PHP 7)
+    + Fixed namespace manipulations (They weren't lower case)
+    + Mark constants as fail back globals or local to the namespace
+    + Support Null Coalesce operator (PHP 7)
+    + Fixed rare case for empty strings and noDelimiter
+
+Version 0.3.3 (Immortal Zhenyuan, 2015-09-21)
 + Architecture
     + Removed some shell stderr that leaked to the main script
 + Report
@@ -23,7 +42,7 @@ Version 0.3.3 (Immortal Zhenyuan, 2014-09-21)
 + Tokenizer
     + Fixed Multiplication with instantiation
 
-Version 0.3.2 (Tiger Vanguard, 2014-09-14)
+Version 0.3.2 (Tiger Vanguard, 2015-09-14)
 + Report
     + Added link back from analyzers to its themes.
 + Analyzer
