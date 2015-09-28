@@ -26,14 +26,18 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class IssetWithConstant extends Analyzer\Analyzer {
+    protected $phpVersion = '7.0+';
+    
     public function analyze() {
         // isset(X[$a]) or isset(Y::X[$a])
-        $this->atomFunctionIs('isset')
+        $this->atomIs('Functioncall')
+             ->tokenIs('T_ISSET')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->outIsIE('PROPERTY')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs(array('Identifier', 'Staticconstant'))
+             ->atomIs('Identifier')
              ->back('first');
         $this->prepareQuery();
     }
