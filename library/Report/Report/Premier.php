@@ -429,7 +429,7 @@ TEXT
 
         // Definition for the analyzers
         $this->createLevel2('Documentation');
-//        $this->addContent('Definitions', $definitions, 'annexes');
+        $this->addContent('Definitions', $definitions, 'annexes');
 
         // List of processed files
         $this->createLevel2('Processed files');
@@ -461,7 +461,7 @@ The external library list is not exhaustive : it is mainly made to reduce the lo
         if ($content->hasResults()) {
             $this->addContent('SimpleTable', $content, 'externalLibraries');
         } else {
-            $this->addContent('Text', 'No external libraries found. Note that those external libraries are here to avoid analyzing libraries that are not from your own coding. This list is not exhaustive.');
+            $this->addContent('Text', 'No external libraries found. Note that this tool is made to avoid analyzing code that are not part of this code.');
         }
 
         // List of used analyzers
