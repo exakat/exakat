@@ -90,19 +90,6 @@ class Phpcode extends TokenAuto {
                                'cleanIndex'    => true);
         $this->checkAuto();
 
-// <?php ? > (empty script with closing tag)
-        $this->conditions = array(0 => array('token' => Phpcode::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('token' => 'T_CLOSE_TAG'),
-        );
-        
-        $this->actions = array('transform'     => array( 1 => 'DROP',
-                                                         0 => 'DROP'),
-                               'atom'          => 'Phpcode',
-                               'property'      => array('closing_tag' => true),
-                               'transfert'     => array('root' => 2));
-        $this->checkAuto();
-        
         return false;
     }
 

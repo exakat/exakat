@@ -148,21 +148,6 @@ class Load extends Tasks {
             return true; // we just ignore the file. this is an empty script or a text file
         }
 
-        while ( $this->php->getTokenname($tokens[0][0]) == 'T_OPEN_TAG' &&
-                $this->php->getTokenname($tokens[1][0]) == 'T_CLOSE_TAG') {
-            unset($tokens[0]);
-            unset($tokens[1]);
-            $tokens = array_values($tokens);
-
-            if (empty($tokens)) {
-                return true; // we just ignore the file.
-            }
-
-            if (count($tokens) == 1) {
-                return true; // we just ignore the file. this is an empty script or a text file
-            }
-        }
-
         if (count($tokens) == 0) {
             echo 'Ignoring file ', $filename, " as it is empty\n";
             return false;
@@ -337,7 +322,8 @@ class Load extends Tasks {
                                                         ->save();
 
                     $to_index = false;
-                } elseif ($token[3] == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
+                } elseif ($token[3] == 'T_OPEN_TAG' && 
+                          !isset($tokens[$id + 1])) {
                     if ($previous->getProperty('token') != 'T_SEMICOLON') {
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                             ->setProperty('code', ';')
@@ -414,30 +400,41 @@ class Load extends Tasks {
                           isset($tokens[$id + 1])    &&
                           is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
-                            $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
-                                                                ->setProperty('code', ';')
-                                                                ->setProperty('fullcode', ';')
-                                                                ->setProperty('line', $line)
-                                                                ->setProperty('atom', 'Sequence')
-                                                                ->setProperty('modifiedBy', 'bin/load24a')
-                                                                ->setProperty('root', 'true')
-                                                                ->save();
-                            $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
-                            $previous->relateTo($T[$Tid], 'NEXT')->save();
-                            $previous = $T[$Tid];
+
+                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_OPEN_TAG')
+                                                  ->setProperty('code', $token[1])
+                                                  ->setProperty('tag', '<?php')
+                                                  ->setProperty('line', $token[2])
+                                                  ->setProperty('modifiedBy', 'bin/load27')
+                                                  ->save();
+                    $regexIndex['Phpcode']->relateTo($T[$Tid], 'INDEXED')->save();
+                    if (isset($previous)) {
+                        $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    }
+                    $previous = $T[$Tid];
+                
+                    ++$Tid;
+                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                        ->setProperty('code', ';')
+                                                        ->setProperty('fullcode', ';')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('atom', 'Sequence')
+                                                        ->setProperty('modifiedBy', 'bin/load24a')
+                                                        ->setProperty('root', 'true')
+                                                        ->save();
+                    $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
   
-                            $void = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                    ->setProperty('code', 'void')
-                                                    ->setProperty('rank', 0)
-                                                    ->setProperty('fullcode', ' ')
-                                                    ->setProperty('line', $line)
-                                                    ->setProperty('atom', 'Void')
-                                                    ->setProperty('modifiedBy', 'bin/load24')
-                                                    ->save();
-                            $T[$Tid]->relateTo($void, 'ELEMENT')->save();
-  
-                            ++$id;
-                            continue;
+                    $void = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                            ->setProperty('code', 'void')
+                                            ->setProperty('rank', 0)
+                                            ->setProperty('fullcode', ' ')
+                                            ->setProperty('line', $line)
+                                            ->setProperty('atom', 'Void')
+                                            ->setProperty('modifiedBy', 'bin/load24')
+                                            ->save();
+                    $T[$Tid]->relateTo($void, 'ELEMENT')->save();
+
+                    $to_index = false;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
