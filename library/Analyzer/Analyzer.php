@@ -1814,7 +1814,7 @@ GREMLIN;
 
     public function getResultsCount() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.count()";
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.has('notCompatibleWithPhpVersion', null).has('notCompatibleWithPhpConfiguration', null).count()";
         $vertices = $this->query($queryTemplate);
         
         return (int) $vertices[0];
