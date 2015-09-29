@@ -98,7 +98,7 @@ function gremlin_query($query, $params = [], $load = '') {
                 foreach($value as &$v) {
                     $v = str_replace(array('\\', '"', "'", '$'), array('\\\\\\\\', '\\"', "\\'", '\\\\$'), $v); // double encoding for Gremlin, plus a third for PHP string.
                 }
-                (unset) $v;
+                unset($v);
 
                 $gremlinArray = '["'.join('", "', $value).'"]';
                 $query = preg_replace('/'.$name.'/is', $gremlinArray, $query);
