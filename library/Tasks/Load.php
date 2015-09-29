@@ -339,9 +339,9 @@ class Load extends Tasks {
                     $to_index = false;
                 } elseif ($token[3] == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
-                                                  ->setProperty('code', $token[1])
-                                                  ->setProperty('line', $token[2])
-                                                  ->save();
+                                                        ->setProperty('code', $token[1])
+                                                        ->setProperty('line', $token[2])
+                                                        ->save();
 
                     if (isset($previous)) {
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
@@ -408,6 +408,34 @@ class Load extends Tasks {
                                               ->setProperty('modifiedBy', 'bin/load27b')
                                               ->save();
                     $to_index = false;
+                } elseif ($token[3] == 'T_OPEN_TAG'  &&
+                          isset($tokens[$id + 1])    &&
+                          is_array($tokens[$id + 1]) &&
+                          $this->php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
+                            $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                                ->setProperty('code', ';')
+                                                                ->setProperty('fullcode', ';')
+                                                                ->setProperty('line', $line)
+                                                                ->setProperty('atom', 'Sequence')
+                                                                ->setProperty('modifiedBy', 'bin/load24a')
+                                                                ->setProperty('root', 'true')
+                                                                ->save();
+                            $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
+                            $previous->relateTo($T[$Tid], 'NEXT')->save();
+                            $previous = $T[$Tid];
+  
+                            $void = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                                    ->setProperty('code', 'void')
+                                                    ->setProperty('rank', 0)
+                                                    ->setProperty('fullcode', ' ')
+                                                    ->setProperty('line', $line)
+                                                    ->setProperty('atom', 'Void')
+                                                    ->setProperty('modifiedBy', 'bin/load24')
+                                                    ->save();
+                            $T[$Tid]->relateTo($void, 'ELEMENT')->save();
+  
+                            ++$id;
+                            continue;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
@@ -552,7 +580,6 @@ class Load extends Tasks {
                                                   ->setProperty('modifiedBy', 'bin/load25a')
                                                   ->save();
 
-//                    $regexIndex['IfthenElse']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
                
@@ -1020,8 +1047,7 @@ class Load extends Tasks {
                         $T[$Tid]->setProperty($label, $value)->save();
                     }
                 }
-        
-    
+
                 $T[$Tid]->save();
             }
 
