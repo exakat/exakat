@@ -34,7 +34,6 @@ class UsedMethods extends Analyzer\Analyzer {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         $methods = $this->query('g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
-        print_r($methods);
         
         // Normal Methodcall
         $this->atomIs('Class')
