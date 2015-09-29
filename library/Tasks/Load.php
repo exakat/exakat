@@ -320,8 +320,8 @@ class Load extends Tasks {
                 } elseif ($token[3] == 'T_STATIC' && is_string($tokens[$id + 1]) &&
                           $tokens[$id + 1] != '(' && $this->php->getTokenname($tokens[$id - 1][0]) == 'T_NEW') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
-                                                  ->setProperty('code', $token[1])
-                                                  ->setProperty('line', $token[2])->save();
+                                                        ->setProperty('code', $token[1])
+                                                        ->setProperty('line', $token[2])->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $regexIndex['Functioncall']->relateTo($T[$Tid], 'INDEXED')->save();
@@ -329,35 +329,37 @@ class Load extends Tasks {
                 
                     ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                  ->setProperty('code', 'void')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load21')
-                                                  ->setProperty('atom', 'Void')
-                                                  ->save();
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load21')
+                                                        ->setProperty('atom', 'Void')
+                                                        ->save();
 
                     $to_index = false;
                 } elseif ($token[3] == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
-                    $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
-                                                        ->setProperty('code', $token[1])
-                                                        ->setProperty('line', $token[2])
-                                                        ->save();
+                    if ($previous->getProperty('token') != 'T_SEMICOLON') {
+                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                            ->setProperty('code', ';')
+                                                            ->setProperty('line', $line)
+                                                            ->setProperty('modifiedBy', 'bin/load18')
+                                                            ->save();
+                        $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
-                    if (isset($previous)) {
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
+                        $previous = $T[$Tid];
+
+                        ++$Tid;
                     }
-                    $regexIndex['Phpcode']->relateTo($T[$Tid], 'INDEXED')->save();
-                    $previous = $T[$Tid];
-                
-                    ++$Tid;
+                    
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_OPEN_TAG')
-                                                  ->setProperty('code', '<?php /* empty, no closing tag */ ?>')
-                                                  ->setProperty('fullcode', '<?php /* empty, no closing tag */ ?>')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('atom', 'Phpcode')
-                                                  ->setProperty('closing_tag', 'false')
-                                                  ->setProperty('modifiedBy', 'bin/load1')
-                                                  ->save();
+                                                        ->setProperty('code', '<?php /* empty, no closing tag */ ')
+                                                        ->setProperty('fullcode', '<?php /* empty, no closing tag */ ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('atom', 'Phpcode')
+                                                        ->setProperty('closing_tag', 'false')
+                                                        ->setProperty('modifiedBy', 'bin/load1')
+                                                        ->save();
 
                     $to_index = false;
                 } elseif ($token[3] == 'T_OPEN_TAG_WITH_ECHO') {

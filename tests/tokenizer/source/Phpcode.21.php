@@ -1,0 +1,3 @@
+I<?php echo $b ?>
+J<?php ?>
+K<?php
