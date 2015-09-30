@@ -32,13 +32,25 @@ class _Array extends TokenAuto {
     
     public function _check() {
         // $x[3] or $x[] and multidimensional
-        $this->conditions = array( -2 => array('notToken'      => _Namespace::$operators),
-                                   -1 => array('atom'          => _Array::$allowedObject),
-                                    0 => array('token'         => _Array::$operators,
-                                               'checkForArray' => true),
-                                    1 => array('atom'          => 'yes'),
-                                    2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
-                                 );
+        if (version_compare('7.0', PHP_VERSION) > 0) {
+            // before PHP 7.0
+            $this->conditions = array( -2 => array('notToken'      => _Namespace::$operators),
+                                       -1 => array('atom'          => static::$allowedObject),
+                                        0 => array('token'         => static::$operators,
+                                                   'checkForArray' => true),
+                                        1 => array('atom'          => 'yes'),
+                                        2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
+                                     );
+        } else {
+            $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, VariableDollar::$operators,
+                                                                                  Property::$operators,   Staticproperty::$operators)),
+                                       -1 => array('atom'          => static::$allowedObject),
+                                        0 => array('token'         => static::$operators,
+                                                   'checkForArray' => true),
+                                        1 => array('atom'          => 'yes'),
+                                        2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
+                                     );
+        }
         
         $this->actions = array('toArray'      => true,
                                'addSemicolon' => 'b1',

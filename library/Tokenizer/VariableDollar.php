@@ -29,22 +29,30 @@ class VariableDollar extends TokenAuto {
     
     public function _check() {
         // $x or $$x or $$$ (Except for global)
-        $this->conditions = array(-1 => array('notToken'  => 'T_GLOBAL'),
-                                   0 => array('token'     => VariableDollar::$operators,
-                                              'atom'      => 'none'),
-                                   1 => array('atom'      => array('Variable', 'Array', 'Property')),
-                                   2 => array('filterOut' => array('T_OPEN_BRACKET', 'T_OPEN_CURLY')),
-        );
+        if (version_compare('7.0', PHP_VERSION) > 0) {
+            // before PHP 7.0
+            $this->conditions = array(-1 => array('notToken'  => 'T_GLOBAL'),
+                                       0 => array('token'     => static::$operators,
+                                                  'atom'      => 'none'),
+                                       1 => array('atom'      => array('Variable', 'Array', 'Property')),
+                                       2 => array('filterOut' => array('T_OPEN_BRACKET', 'T_OPEN_CURLY')),
+            );
+        } else {
+            $this->conditions = array( 0 => array('token'     => static::$operators,
+                                                  'atom'      => 'none'),
+                                       1 => array('atom'      => array('Variable', 'Array', 'Property'))
+            );
+        }
         
-        $this->actions = array( 'transform'  => array(1 => 'NAME'),
-                                'atom'       => 'Variable',
-                                'cleanIndex' => true,
+        $this->actions = array( 'transform'   => array(1 => 'NAME'),
+                                'atom'        => 'Variable',
+                                'cleanIndex'  => true,
                                 'keepIndexed' => true);
         $this->checkAuto();
 
         // global $$x->c
         $this->conditions = array(-1 => array('token'     => 'T_GLOBAL'),
-                                   0 => array('token'     => VariableDollar::$operators,
+                                   0 => array('token'     => static::$operators,
                                               'atom'      => 'none'),
                                    1 => array('atom'      => array('Variable', 'Array', 'Property')),
                                    2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_CURLY')),
@@ -56,7 +64,7 @@ class VariableDollar extends TokenAuto {
         $this->checkAuto();
 
         // ${x}
-        $this->conditions = array(0 => array('token' => VariableDollar::$operators,
+        $this->conditions = array(0 => array('token' => static::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_CURLY'),
                                   2 => array('atom'  => 'yes'),
