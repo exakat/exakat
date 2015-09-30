@@ -403,16 +403,39 @@ JOIN categories
             ->files()
             ->name('*.php');
             
+        $errors56 = [];
+        $errors70 = [];
         $total = count($files);
         foreach($files as $file) {
-            $res = shell_exec('php -l '.$file);
+            $res = shell_exec('php56 -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                var_dump($res);die();
+                $errors56[$file] = $res;
+            }
+
+            $res = shell_exec('php70 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                var_dump($file);
+                $errors70[$file] = $res;
             }
         }
         
-        print "All $total compilations OK\n";
+        if (empty($errors56)) {
+            print "All $total compilations OK for PHP 5.6\n";
+        } else {
+            print count($errors56)." errors out of $total compilations for PHP 5.6\n";
+            print_r($errors56);
+            print "\n";
+        }
+
+        if (empty($errors70)) {
+            print "All $total compilations OK for PHP 7.0\n";
+        } else {
+            print count($errors70)." errors out of $total compilations for PHP 7.0\n";
+            print_r($errors70);
+            print "\n";
+        }
     }
     
     public function checkComposerData() {
