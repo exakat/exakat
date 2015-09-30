@@ -225,14 +225,12 @@ class Files extends Tasks {
     
             if (count($nosot) != count($sot)) {
                 $this->log->log("Error in short open tag analyze : not the same number of files ".count($nosot)." / ".count($sot).".\n");
-                break 1;
-            }
-
-            display('Short tag KO');
-            $shortOpenTag = array();
-            foreach($nosot as $file => $countNoSot) {
-                if ($sot[$file] != $countNoSot) {
-                    $shortOpenTag[] = array('file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $file));
+                display('Short tag KO');
+                $shortOpenTag = array();
+                foreach($nosot as $file => $countNoSot) {
+                    if ($sot[$file] != $countNoSot) {
+                        $shortOpenTag[] = array('file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $file));
+                    }
                 }
             }
     
