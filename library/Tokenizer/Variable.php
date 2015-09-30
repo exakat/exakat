@@ -29,9 +29,9 @@ class Variable extends TokenAuto {
     
     public function _check() {
         // "  {$variable}  " or " ${x} "
-        $this->conditions = array(0 => array('token' => Variable::$operators,
+        $this->conditions = array(0 => array('token' => static::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('atom'  => String::$allowedClasses),
+                                  1 => array('atom'  => _String::$allowedClasses),
                                   2 => array('token' => 'T_CLOSE_CURLY'),
         );
         

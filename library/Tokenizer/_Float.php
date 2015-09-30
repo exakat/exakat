@@ -23,7 +23,7 @@
 
 namespace Tokenizer;
 
-class Float extends TokenAuto {
+class _Float extends TokenAuto {
     static public $atom = 'Float';
 
     public function _check() {

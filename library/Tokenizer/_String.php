@@ -23,7 +23,7 @@
 
 namespace Tokenizer;
 
-class String extends TokenAuto {
+class _String extends TokenAuto {
     static public $operators = array('T_QUOTE');
     static public $allowedClasses = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall',
                                           'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary', 'Concatenation',
@@ -32,10 +32,10 @@ class String extends TokenAuto {
 
     public function _check() {
 // Case of string with interpolation : "a${b}c";
-        $this->conditions = array(  0 => array('token'          => String::$operators,
+        $this->conditions = array(  0 => array('token'          => static::$operators,
                                                'atom'           => 'none'),
-                                    1 => array('atom'           => String::$allowedClasses,
-                                               'checkForString' => String::$allowedClasses),
+                                    1 => array('atom'           => static::$allowedClasses,
+                                               'checkForString' => static::$allowedClasses),
                                  );
 
         $this->actions = array( 'makeQuotedString' => 'String');

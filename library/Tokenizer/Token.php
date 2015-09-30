@@ -37,7 +37,7 @@ class Token {
                                       22 => '_Goto',
                                       5 => '_Array',
                                       24 => '_Global',
-                                      6 => 'String',
+                                      6 => '_String',
                                       59 => 'Shell',
                                       7 => '_Arraydollarcurly',
                                       8 => 'Property',
