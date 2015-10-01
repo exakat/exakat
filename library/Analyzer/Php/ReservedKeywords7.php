@@ -29,21 +29,9 @@ class ReservedKeywords7 extends Analyzer\Analyzer {
     protected $phpVersion = '7.0-';
     
     public function analyze() {
-        $keywords = array('int', 'float', 'bool', 'string', 'true', 'false', 'null');
+        $keywords = array('int', 'float', 'bool', 'string', 'true', 'false', 'null', 'object', 'mixed', 'numeric');
         
-        $this->atomIs('Class')
-             ->outIs('NAME')
-             ->code($keywords)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Trait')
-             ->outIs('NAME')
-             ->code($keywords)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Interface')
+        $this->atomIs(array('Class', 'Trait', 'Interface'))
              ->outIs('NAME')
              ->code($keywords)
              ->back('first');
