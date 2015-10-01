@@ -2516,7 +2516,7 @@ $fullcode
                                'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_COALESCE', 'T_SPACESHIP',
                                'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_QUESTION', 'T_COLON',
-                               'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
+                               'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_CURLY',
                                'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL',
                                'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
                                'T_POW_EQUAL', 'T_DOUBLE_ARROW', 'T_SR','T_SL', 'T_IMPLEMENTS', 'T_EXTENDS',
