@@ -218,7 +218,7 @@ class Token {
     }
 
     static public function countTotalToken() {
-        return gremlin_queryOne("g.V.count()");
+        return gremlin_queryOne('g.V.count()');
     }
 
     static public function countLeftToken() {

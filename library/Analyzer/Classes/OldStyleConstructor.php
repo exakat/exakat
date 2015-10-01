@@ -33,7 +33,7 @@ class OldStyleConstructor extends Analyzer\Analyzer {
              ->back('first')
              ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == "__construct"}.any() == false}')
              ->atomInside('Function')
-             ->outIs("NAME")
+             ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
              ->atomIs('File') // no namespace => Global
@@ -46,7 +46,7 @@ class OldStyleConstructor extends Analyzer\Analyzer {
              ->back('first')
              ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == "__construct"}.any() == false}')
              ->atomInside('Function')
-             ->outIs("NAME")
+             ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
              ->atomIs('Namespace')

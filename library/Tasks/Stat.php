@@ -52,13 +52,13 @@ class Stat extends Tasks {
     }
 
     private function table_encode($stats) {
-        $html = "<html><body>";
+        $html = '<html><body>';
 
         foreach($stats as $name => $value) {
             $html .= "<tr><td>$name</td><td>$value</td></tr>\n";
         }
 
-        $html .= "</body></html>";
+        $html .= '</body></html>';
         return $html;
     }
 

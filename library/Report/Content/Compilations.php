@@ -35,8 +35,8 @@ class Compilations extends \Report\Content {
             $files = \Analyzer\Analyzer::$datastore->getCol('compilation'.$suffix, 'file');
             $version = substr($suffix, 0, 1).'.'.substr($suffix, 1);
             if (empty($files)) {
-                $files       = "No compilation error found.";
-                $errors      = "N/A";
+                $files       = 'No compilation error found.';
+                $errors      = 'N/A';
                 $total_error = 'None';
             } else {
                 $errors      = array_count_values(\Analyzer\Analyzer::$datastore->getCol('compilation'.$suffix, 'error'));

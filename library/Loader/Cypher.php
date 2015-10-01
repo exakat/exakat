@@ -102,9 +102,9 @@ CYPHER;
             display( "Loading $attribute");
             
             if ($attribute == 'rank') {
-                $toAttribute = "toInt(csvLine.rank)";
+                $toAttribute = 'toInt(csvLine.rank)';
             } elseif (in_array($attribute, array('index', 'hidden', 'in_quote', 'bracket', 'block', 'in_for', 'root'))) {
-                $toAttribute = "(csvLine.$attribute = \"true\")";
+                $toAttribute = '(csvLine.$attribute = "true")';
             } else {
                 $toAttribute = "csvLine.$attribute";
             }

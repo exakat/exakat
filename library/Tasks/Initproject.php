@@ -171,7 +171,7 @@ INI;
         $config = \Config::factory();
         
         if ($project === null ) {
-            die( "Usage : php ".$config->executable." project_init -p project_name -R repository");
+            die( 'Usage : php '.$config->executable.' project_init -p project_name -R repository');
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project) ) {

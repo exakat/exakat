@@ -119,8 +119,8 @@ function gremlin_query($query, $params = [], $load = '') {
     }
     
     if (strlen($getString) > 20000) {
-        echo "Query string too big for GET (", strlen($getString), ")\n",
-             "Query : ",
+        echo 'Query string too big for GET (', strlen($getString), ")\n",
+             'Query : ',
              $query,
             "\n\n",
             print_r($params, true);
@@ -177,7 +177,7 @@ function gremlin_queryOne($query, $params = [], $load = '') {
     if (is_bool($res) || is_int($res)) {
         return $res;
     } else {
-        echo "Help needed in ", __METHOD__, "\n",
+        echo 'Help needed in ', __METHOD__, "\n",
              "Query : '", $query, "'\n",
              print_r($res, true);
         die();

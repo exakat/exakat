@@ -86,9 +86,9 @@ class FindExternalLibraries extends Tasks {
         $newConfigs = $this->processDir($dir);
 
         if (count($newConfigs) == 1) {
-            display("One external libraries is going to be omitted : ".join(', ', array_keys($newConfigs)));
+            display('One external libraries is going to be omitted : '.join(', ', array_keys($newConfigs)));
         } elseif (count($newConfigs)) {
-            display(count($newConfigs)." external libraries are going to be omitted : ".join(', ', array_keys($newConfigs)));
+            display(count($newConfigs).' external libraries are going to be omitted : '.join(', ', array_keys($newConfigs)));
         }
 
         $store = [];

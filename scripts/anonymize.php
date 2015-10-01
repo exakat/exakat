@@ -28,7 +28,7 @@ if (!isset($argv[1])) {
 $file = $argv[1];
 
 if (!file_exists($file)) {
-    die("Usage : php script/anonymize.php <filename>");
+    die('Usage : php script/anonymize.php <filename>');
 }
 echo "Processing file $file into $file.anon\n";
 
@@ -46,9 +46,9 @@ $lnumber = 0;
 $dnumberValues = array();
 $dnumber = 0;
 $variableNames = array();
-$variables = "a";
+$variables = 'a';
 $stringsNames = array();
-$strings = "A";
+$strings = 'A';
 
 $checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD', 'T_COALESCE');
 foreach($checks as $check) {
@@ -119,7 +119,7 @@ foreach($tokens as $t) {
                 break;
             case T_DOC_COMMENT:
             case T_COMMENT:
-                $t[1] = "";
+                $t[1] = '';
                 break;
 
             case T_INLINE_HTML : 

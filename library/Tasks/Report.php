@@ -34,7 +34,7 @@ class Report extends Tasks {
         $this->checkTokenLimit();
         
         if (!class_exists("\\Report\\Format\\".$config->format)) {
-            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(", ", \Report\Report::$formats)."\nAborting\n");
+            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', \Report\Report::$formats)."\nAborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
@@ -47,7 +47,7 @@ class Report extends Tasks {
 
         \Analyzer\Analyzer::$datastore = $this->datastore;
 
-        display( "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n");
+        display( 'Building report '.$config->report.' for project '.$config->project.' in file '.$config->file.', with format '.$config->format."\n");
         $begin = microtime(true);
 
         $report = new $reportClass($config->project);

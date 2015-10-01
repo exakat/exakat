@@ -224,7 +224,7 @@ class Files extends Tasks {
             unset($sot2);
     
             if (count($nosot) != count($sot)) {
-                $this->log->log("Error in short open tag analyze : not the same number of files ".count($nosot)." / ".count($sot).".\n");
+                $this->log->log('Error in short open tag analyze : not the same number of files '.count($nosot).' / '.count($sot).".\n");
                 display('Short tag KO');
                 $shortOpenTag = array();
                 foreach($nosot as $file => $countNoSot) {

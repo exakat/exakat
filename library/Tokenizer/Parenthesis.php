@@ -28,7 +28,7 @@ class Parenthesis extends TokenAuto {
     static public $atom = 'Parenthesis';
     
     public function _check() {
-        $operands    = "yes";
+        $operands    = 'yes';
 
         // ( normal parenthesis )
         $this->conditions = array(-1 => array('notToken' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,

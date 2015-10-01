@@ -1642,7 +1642,7 @@ GREMLIN
             unset($this->methods[1]);
             unset($this->arguments['arg1']);
 
-            $query = $q."z._().sideEffect{processed++;}.".implode('.', $this->methods);
+            $query = $q.'z._().sideEffect{processed++;}.'.implode('.', $this->methods);
         } else {
             throw new \Exception('No optimization : gremlin query in analyzer should have use g.V. Fix me!'.get_class($this));
         }
@@ -1752,7 +1752,7 @@ GREMLIN;
 
     public function toCountedArray($load = 'it.fullcode') {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){".$load."}.cap";
+        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){".$load.'}.cap';
         $vertices = $this->query($queryTemplate);
 
         $report = array();

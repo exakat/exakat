@@ -9,7 +9,7 @@ class RoboFile extends \Robo\Tasks
 {
     public function release()
     {
-        $this->yell("Releasing Exakat");
+        $this->yell('Releasing Exakat');
     }
 
     public function versionBump($version = null) {
@@ -454,7 +454,7 @@ JOIN categories
             
                 // Checking that structures have the right characters
                 if (preg_match('/[^a-z0-9_\\\\]/i', $row[$col])) {
-                    display( $row['id'].') '.$row[$col]." is wrong in table ".$table."\n");
+                    display( $row['id'].') '.$row[$col].' is wrong in table '.$table."\n");
                     $toDelete[$row['id']] = $row[$col];
                 }
             }
@@ -505,15 +505,15 @@ JOIN categories
 
         // Display stats
         print "\n";
-        $res = $sqlite->query("SELECT count(*) AS nb FROM components");
+        $res = $sqlite->query('SELECT count(*) AS nb FROM components');
         print $res->fetchArray(SQLITE3_ASSOC)['nb']." components\n";
-        $res = $sqlite->query("SELECT count(*) AS nb FROM versions");
+        $res = $sqlite->query('SELECT count(*) AS nb FROM versions');
         print $res->fetchArray(SQLITE3_ASSOC)['nb']." versions\n";
-        $res = $sqlite->query("SELECT count(*) AS nb FROM classes");
+        $res = $sqlite->query('SELECT count(*) AS nb FROM classes');
         print $res->fetchArray(SQLITE3_ASSOC)['nb']." classes\n";
-        $res = $sqlite->query("SELECT count(*) AS nb FROM interfaces");
+        $res = $sqlite->query('SELECT count(*) AS nb FROM interfaces');
         print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
-        $res = $sqlite->query("SELECT count(*) AS nb FROM traits");
+        $res = $sqlite->query('SELECT count(*) AS nb FROM traits');
         print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
         print "\n";
     }

@@ -158,7 +158,7 @@ SELECT folder || '\\' || name AS name FROM analyzers
 
 SQL;
         if ($folder !== null) {
-            $query .= " WHERE folder=:folder";
+            $query .= ' WHERE folder=:folder';
             $stmt = $this->sqlite->prepare($query);
             
             $stmt->bindValue(':folder', $folder, SQLITE3_TEXT);

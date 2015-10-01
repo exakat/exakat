@@ -32,7 +32,7 @@ class ConstantStructures extends Tasks {
         // First, clean it all
         $query = 'g.V.hasNot("constante", null).each{ it.removeProperty("constante")};';
         $this->query($query);
-        $this->displayTiming("Initial clean");
+        $this->displayTiming('Initial clean');
     
         // Case for Literals
         $literals = array('Integer', 'Boolean', 'Real', 'Null', 'Void');
@@ -113,13 +113,13 @@ GREMLIN;
 g.V.count();
 GREMLIN;
         $vertices = $this->query($query);
-        display( "Total tokens : ".$vertices[0][0]." \n");
+        display( 'Total tokens : '.$vertices[0][0]." \n");
 
         $query = <<<GREMLIN
 g.V.hasNot('constante', null).count();
 GREMLIN;
         $vertices = $this->query($query);
-        display( "Constante tokens : ".$vertices[0][0]." \n");
+        display( 'Constante tokens : '.$vertices[0][0]." \n");
 
     }
 

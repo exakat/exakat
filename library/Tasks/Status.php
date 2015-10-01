@@ -61,7 +61,7 @@ class Status extends Tasks {
         if ($res == "Done\nDone\nDone\nDone\nDone\nDone\n") {
             foreach($logs as $log) {
                 if (filemtime($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log') < $tokenizerLogTime) {
-                    echo "analyze.", $log, ".final.log is too old\n";
+                    echo 'analyze.', $log, ".final.log is too old\n";
                 }
             }
             echo "All analyzes were OK\n";
@@ -75,7 +75,7 @@ class Status extends Tasks {
                 if (trim(substr($log_content, -5)) != "Done") {
                     echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is wrong'."\n";
                     if (preg_match('#\[\[\'analyzer\':\'Analyzer\\\\\\\\(.+?)\\\\\\\\(.+?)\'\]\]#s', $log_content, $r) !== false) {
-                        echo "   php bin/analyze -P ", $r[1], '/', $r[2], " \n";
+                        echo '   php bin/analyze -P ', $r[1], '/', $r[2], " \n";
                     }
                 } else {
                     echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is OK', "\n";

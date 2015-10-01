@@ -183,7 +183,7 @@ class Phploc extends Tasks {
         }
 
         if (!isset($token)) {
-            print "Unset token in ". $filename."\n";
+            echo 'Unset token in ', $filename, "\n";
         }
         if (is_array($token) && ($tokenName == 'T_CLOSE_TAG')) {
             --$lines[$line];

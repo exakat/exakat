@@ -144,7 +144,7 @@ toDelete.each{ g.removeVertex(it); }
                 $this->total += (int) $res->total;
                 $this->done  += (int) $res->done;
                 ++$this->cycles;
-                display("Cycle ".get_class($this)." ".$this->cycles." ".$res->done." ".number_format(($end - $begin) * 1000, 0)."\n");
+                display('Cycle '.get_class($this).' '.$this->cycles.' '.$res->done.' '.number_format(($end - $begin) * 1000, 0)."\n");
             } while ($res->done > self::CYCLE_SIZE && $this->cycles < self::CYCLE_COUNT);
         }
     }
@@ -1159,11 +1159,11 @@ g.addEdge(it, a4, 'NEXT');
         }
         
         if (isset($actions['globalNamespace'])) {
-            $qactions[] = "
+            $qactions[] = '
 /* insert void for namespace */
 
 
-";
+';
             unset($actions['globalNamespace']);
         }
 
@@ -2377,8 +2377,8 @@ GREMLIN;
         }
 
         if (isset($actions['makeQuotedString'])) {
-            $atom = $actions['makeQuotedString'];
-            $class = "\\Tokenizer\\$atom";
+            $atom = str_replace('_', '', $actions['makeQuotedString']);
+            $class = "\\Tokenizer\\".$actions['makeQuotedString'];
             $string = new $class();
             $fullCodeString = $string->fullcode();
             

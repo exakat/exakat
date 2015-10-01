@@ -27,13 +27,13 @@ use Analyzer;
 
 class VariableLong extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Variablenames');
+        return array('Variables/Variablenames');
     }
     
     public function analyze() {
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
-             ->codeLength(" > 20 ");
+             ->analyzerIs('Variables/Variablenames')
+             ->codeLength(' > 20 ');
         $this->prepareQuery();
     }
 }

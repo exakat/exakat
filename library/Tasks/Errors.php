@@ -74,7 +74,7 @@ class Errors extends Tasks {
     
         foreach($stats as $name => $value) {
             if (is_array($value)) {
-                $html .= $name." : ".join(" \n".str_repeat(' ', strlen($name.' : ')), $value)."\n";
+                $html .= $name.' : '.join(" \n".str_repeat(' ', strlen($name.' : ')), $value)."\n";
             } else {
                 $html .= $name.' : '.$value."\n";
             }

@@ -130,7 +130,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         $this->updateProgress($progress++);
         display("End 2\n");
         $end = microtime(true);
-        display("Total time : ".number_format(($end - $begin), 2)."s\n");
+        display('Total time : '.number_format(($end - $begin), 2)."s\n");
         
         $this->logTime('Files');
     }
