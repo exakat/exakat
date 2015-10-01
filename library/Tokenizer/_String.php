@@ -38,7 +38,7 @@ class _String extends TokenAuto {
                                                'checkForString' => static::$allowedClasses),
                                  );
 
-        $this->actions = array( 'makeQuotedString' => 'String');
+        $this->actions = array( 'makeQuotedString' => '_String');
         $this->checkAuto();
 
         return false;
