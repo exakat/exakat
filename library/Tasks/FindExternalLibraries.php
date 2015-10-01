@@ -154,13 +154,14 @@ class FindExternalLibraries extends Tasks {
                 $lclass = strtolower($class);
                 if (isset($this->classic[$lclass])) {
                     if ($this->classic[$lclass] == self::WHOLE_DIR) {
-                        $return[$class] = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
+                        $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
                     } elseif ($this->classic[$lclass] == self::PARENT_DIR) {
-                        $return[$class] = dirname(dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)));
+                        $returnPath = dirname(dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)));
                     } elseif ($this->classic[$lclass] == self::FILE_ONLY) {
-                        $return[$class] = preg_replace('#.*projects/.*?/code/#', '/', $filename);
-                    } else {
-                        // This is a coding error
+                        $returnPath = preg_replace('#.*projects/.*?/code/#', '/', $filename);
+                    }
+                    if ($returnPath != '/') {
+                        $return[$class] = $returnPath;
                     }
                 }
             }
