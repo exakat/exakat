@@ -28,7 +28,7 @@ class Filesystem extends Directives {
         $this->name         = 'File System';
 
         
-        if ($this->checkPresence('Php\\FileUsage')) {
+        if ($this->checkPresence('Structures\\FileUsage')) {
             $this->directives[] = array('name' => 'allow_url_fopen',
                                         'suggested' => 'Off',
                                         'documentation' => 'Unless you need to access remote files, it is better to be safe and forbid this feature');
