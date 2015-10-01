@@ -40,7 +40,7 @@ class DynamicCalls extends Analyzer\Analyzer {
 
         // dynamic functioncall
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
+             ->hasNoIn(array('METHOD', 'NEW'))
              ->outIs('NAME')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
              ->back('first');
@@ -55,7 +55,13 @@ class DynamicCalls extends Analyzer\Analyzer {
 
         // property
         // $$o->p
-        $this->atomIs('Property')
+        $this->atomIs(array('Property', 'Methodcall'))
+             ->outIs('OBJECT')
+             ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Property', 'Methodcall'))
              ->outIs('OBJECT')
              ->atomIsNot(array('Variable', 'Methodcall', 'Property', 'Staticproperty', 'Staticmethodcall', 'Array'))
              ->back('first');
@@ -64,15 +70,7 @@ class DynamicCalls extends Analyzer\Analyzer {
         // $o->{$p}
         $this->atomIs('Property')
              ->outIs('PROPERTY')
-             ->tokenIsNot('T_STRING')
-             ->back('first');
-        $this->prepareQuery();
-
-        // method
-        // $$o->m()
-        $this->atomIs('Methodcall')
-             ->outIs('OBJECT')
-             ->atomIsNot(array('Variable', 'Methodcall', 'Property', 'Staticproperty', 'Staticmethodcall', 'Array'))
+             ->tokenIsNot(array('T_STRING', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
 
