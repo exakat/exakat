@@ -25,9 +25,11 @@ namespace Report\Content\Directives;
 
 class Pcre extends Directives {
     public function __construct() {
-        $this->name         = 'Perl Regex';
+        $this->name         = 'PCRE';
 
-        $this->directives[] = $this->extraConfiguration($this->name, 'pcre');
+        if ($this->checkPresence('Extensions\\Extpcre')) {
+            $this->directives[] = $this->extraConfiguration($this->name, 'pcre');
+        }
     }
 }
 
