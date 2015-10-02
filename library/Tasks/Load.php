@@ -322,7 +322,7 @@ class Load extends Tasks {
                                                         ->save();
 
                     $to_index = false;
-                } elseif ($token[3] == 'T_OPEN_TAG' && 
+                } elseif ($token[3] == 'T_OPEN_TAG' &&
                           !isset($tokens[$id + 1])) {
                     if ($previous->getProperty('token') != 'T_SEMICOLON') {
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')

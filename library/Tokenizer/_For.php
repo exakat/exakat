@@ -96,7 +96,7 @@ class _For extends TokenAuto {
                                                       ),
                                'atom'         => 'For',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it',
+                               'addAlwaysSemicolon' => 'it',
                                'makeBlock'    => 'BLOCK'
                                );
         $this->checkAuto();

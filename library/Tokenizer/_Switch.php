@@ -49,7 +49,7 @@ class _Switch extends TokenAuto {
                                'atom'         => 'Switch',
                                'makeBlock'    => 'CASES',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
+                               'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
 
         // alternative syntax
