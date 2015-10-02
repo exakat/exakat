@@ -1809,7 +1809,7 @@ GREMLIN;
     }
     
     public function hasResults() {
-        return $this->getResultsCount() > 0;
+        return (bool) $this->getResultsCount() > 0;
     }
 
     public function getResultsCount() {
