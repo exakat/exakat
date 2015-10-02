@@ -77,7 +77,7 @@ class UsedMethods extends Analyzer\Analyzer {
         // __destruct is always used, no need to spot
 
         $callables = $this->query(<<<GREMLIN
-g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.transform{ 
+g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.transform{
     // Strings
     if (it.atom == 'String') {
         if (it.noDelimiter =~ /::/) {
