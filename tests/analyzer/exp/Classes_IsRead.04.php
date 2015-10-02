@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array();
+$expected     = array('$read->r');
 
-$expected_not = array();
+$expected_not = array('$written->d',
+                      '$written2->w');
 
 ?>
