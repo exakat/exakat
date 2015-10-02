@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_NonStaticMethodsCalledStatic extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testClasses_NonStaticMethodsCalledStatic01()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.01'); }
     public function testClasses_NonStaticMethodsCalledStatic02()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.02'); }
@@ -16,5 +16,6 @@ class Classes_NonStaticMethodsCalledStatic extends Analyzer {
     public function testClasses_NonStaticMethodsCalledStatic04()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.04'); }
     public function testClasses_NonStaticMethodsCalledStatic05()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.05'); }
     public function testClasses_NonStaticMethodsCalledStatic06()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.06'); }
+    public function testClasses_NonStaticMethodsCalledStatic07()  { $this->generic_test('Classes_NonStaticMethodsCalledStatic.07'); }
 }
 ?>

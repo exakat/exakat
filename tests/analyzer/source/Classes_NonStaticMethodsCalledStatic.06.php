@@ -1,8 +1,16 @@
 <?php
 
-C::a();
-C::d();
-C::e();
+b::a();
+b::d();
+b::e();
+
+E::a();
+E::d();
+E::e();
+
+\E::a();
+\E::d();
+\E::e();
 
 class b {
     public function a() {}

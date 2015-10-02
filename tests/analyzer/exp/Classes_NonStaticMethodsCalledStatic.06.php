@@ -1,8 +1,15 @@
 <?php
 
-$expected     = array('C::a()',
-                      'C::e()');
+$expected     = array( 'b::a( )', 
+                       'E::e( )', 
+                       '\E::e( )', 
+                       'b::e( )');
 
-$expected_not = array('C::d()');
+$expected_not = array('b::d()',
+                      'E::a( )',
+                      '\E::a( )',
+                      'E::e( )',
+                      '\E::e( )',
+                      );
 
 ?>

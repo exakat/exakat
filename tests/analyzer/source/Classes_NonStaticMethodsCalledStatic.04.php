@@ -7,6 +7,10 @@ class a {
     function normala() {
         echo __METHOD__."\n";
     }
+
+    static function statica() {
+        echo __METHOD__."\n";
+    }
 }
 
 class b extends a {
@@ -20,7 +24,10 @@ class c extends b {
         parent::normalb();
         a::normala();
         z\a::normala();
+        z\a::statica();
         d::normald();
+        d::normala();
+        d::statica();
         e::normale();
         c::normale();
     }

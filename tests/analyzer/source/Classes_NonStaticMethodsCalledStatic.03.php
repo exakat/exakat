@@ -12,6 +12,7 @@ class A extends B {
         static::nonStaticMethod();
         static::staticMethod();
     }
+    
     public static function staticMethod() {}
 }
 

@@ -1,8 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('self::b( )');
 
-$expected_not = array('self::b( )',
-                      'parent::__construct($a)');
+$expected_not = array('parent::__construct($a)');
 
 ?>

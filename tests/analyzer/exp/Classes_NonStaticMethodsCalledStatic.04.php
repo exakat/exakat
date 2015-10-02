@@ -1,8 +1,14 @@
 <?php
 
 $expected     = array('d::normald( )',
-                      'e::normale( )');
+                      'd::normala( )',
+                      'e::normale( )',
+                      'parent::normalb( )',
+                      'a::normala( )', 
+                      'z\a::normala( )');
 
-$expected_not = array();
+$expected_not = array('z\a::statica( )',
+                      'd::statica( )',
+                      );
 
 ?>
