@@ -1077,6 +1077,17 @@ g.addEdge(sequence, a8, 'ELEMENT');
 a8.rank = 0;
 a8.bothE('NEXT').each{ g.removeEdge(it); }
 
+// remove a7, if this is a ;
+if (a9.getProperty('token') == 'T_SEMICOLON' &&
+    a9.getProperty('atom') == null) {
+    semicolon = a9;
+    a9 = semicolon.out('NEXT').next();
+    
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
+    toDelete.push(semicolon);
+}
+
 g.addEdge(a7, oc, 'NEXT');
 g.addEdge(oc, sequence, 'NEXT');
 
