@@ -54,6 +54,8 @@ class Tree extends \Report\Format\Devoops {
                 return '&nbsp;';
             case 'Not run' : 
                 return '<i class="fa fa-times-circle-o"></i>';
+            case 'Incompatible' : 
+                return '<i class="fa fa-minus-circle"></i>';
             default : 
                 return '&nbsp;';
         }

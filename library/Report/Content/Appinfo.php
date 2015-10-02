@@ -308,11 +308,11 @@ class Appinfo extends \Report\Content {
                     display( "$ext was not analyzed in Appinfo.");
                 }
                 
-                $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].hasNot('notCompatibleWithPhpVersion', null).count()"; 
+                $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.hasNot('notCompatibleWithPhpVersion', null).count()"; 
                 $vertices = $this->query($queryTemplate);
                 $v = $vertices[0];
                 if ($v == 1) {
-                    $this->array[$section][$name] = 'Incomp.';
+                    $this->array[$section][$name] = 'Incompatible';
                     continue ;
                 } 
 
@@ -325,7 +325,7 @@ class Appinfo extends \Report\Content {
                 } 
 
                 $analyzer = \Analyzer\Analyzer::getInstance($a);
-                $this->array[$section][$name] = $analyzer->hasResults() == 'true' ? 'Yes' : 'No';
+                $this->array[$section][$name] = $analyzer->hasResults() === true ? 'Yes' : 'No';
             }
             
             if ($section == 'Extensions') {
