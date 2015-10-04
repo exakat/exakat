@@ -95,7 +95,7 @@ class _Use extends TokenAuto {
                                                       ),
                                'atom'       => 'Use',
                                'cleanIndex' => true,
-                               'addSemicolon' => 'it'
+                               'addAlwaysSemicolon' => 'it'
                                );
         $this->checkAuto();
 
@@ -111,7 +111,7 @@ class _Use extends TokenAuto {
         $this->actions = array('toUseBlock'   => true,
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it'  );
+                               'addAlwaysSemicolon' => 'it'  );
         $this->checkAuto();
         
         return false;
