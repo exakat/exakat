@@ -1517,3 +1517,22 @@ UT for various PHP versions (support for version limitations, and compilations :
 
     if (isset($result->errormessage)) {} // but result is not yet an object!
     $result = json_decode($result)
+
+Not a static loop
+						for ($i = 0; $i < $blockreads; $i++) {
+							$this->rawImageData .= fread($fp, $blocksize);
+						}
+
+Spot discrepancies between visibility definitions in a hierarchy. 
+
+Support the use grouping (!!!)
+Support multiple function indirections
+
+Make a stat for the number of results in reports/ajax/ per analyze (some will be empty, so what?)
+
+Usage of declare() encoding needs zend encoding.
+Spot other PHP configurations in the code? 
+
+Minimal PHP configuration (list of enable/with to use in the php ini, so has to have a light PHP)
+Is lighter PHP really faster ? 
+
