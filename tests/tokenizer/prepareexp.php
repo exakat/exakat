@@ -57,12 +57,20 @@ function run($test, $number) {
     
     shell_exec($shell);
     
+    if (!file_exists('./exp/'."$test.$number".'.txt')) {
+        print "This script has no exp file.\n";
+        return;
+    }
+
     $exp = file_get_contents('./exp/'."$test.$number".'.txt');
     if (strpos($exp, 'Parse error') !== false) {
         print "This script doesn't compile.\n";
+        return;
     }
+
     if (strpos($exp, 'Label : NEXT') !== false) {
         print "There are some unprocessed link in this script\n";
+        return;
     }
 }
 ?>
