@@ -27,6 +27,7 @@ use Analyzer;
 
 class ObjectReferences extends Analyzer\Analyzer {
     public function analyze() {
+
         // f(stdclass &$x)
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
@@ -62,7 +63,8 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->atomIs('Variable')
              ->is('reference', true)
              ->savePropertyAs('code', 'variable')
-             ->back('first')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
@@ -76,7 +78,8 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->atomIs('Variable')
              ->is('reference', true)
              ->savePropertyAs('code', 'variable')
-             ->back('first')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
              ->atomInside('Property')
              ->outIs('OBJECT')
