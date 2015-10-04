@@ -1,5 +1,5 @@
 <?php
-	public function a($b = null, $c)
+	function a($b = null, $c)
 	{
 		if ($d !== null)
 		{
