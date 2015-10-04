@@ -92,7 +92,7 @@ class _Declare extends TokenAuto {
                                                         6 => 'DROP'),
                                'atom'         => 'Declare',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it'
+                               'addAlwaysSemicolon' => 'it'
                                );
         $this->checkAuto();
 
