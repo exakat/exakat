@@ -28,13 +28,13 @@ class _Array extends TokenAuto {
     static public $atom = 'Array';
     static public $allowedObject = array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend',
                                          'Functioncall', 'Methodcall', 'Staticmethodcall', 'String',
-                                         'Staticconstant', 'Identifier');
+                                         'Staticconstant', 'Identifier', 'Nsname');
     
     public function _check() {
         // $x[3] or $x[] and multidimensional
         if (version_compare('7.0', PHP_VERSION) > 0) {
-            // before PHP 7.0
-            $this->conditions = array( -2 => array('notToken'      => _Namespace::$operators),
+            // PHP 7.0 and +
+            $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, Nsname::$operators)),
                                        -1 => array('atom'          => static::$allowedObject),
                                         0 => array('token'         => static::$operators,
                                                    'checkForArray' => true),
@@ -42,8 +42,10 @@ class _Array extends TokenAuto {
                                         2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                      );
         } else {
+            print 'ICI';
             $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, VariableDollar::$operators,
-                                                                                  Property::$operators,   Staticproperty::$operators)),
+                                                                                  Property::$operators,   Staticproperty::$operators,
+                                                                                  array('T_NS_SEPARATOR'))),
                                        -1 => array('atom'          => static::$allowedObject),
                                         0 => array('token'         => static::$operators,
                                                    'checkForArray' => true),

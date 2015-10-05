@@ -32,7 +32,7 @@ class ArrayNS extends TokenAuto {
     public function _check() {
         $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR',
                          'T_DOLLAR', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 'T_CLOSE_CURLY',
-                         'T_CLOSE_PARENTHESIS' );
+                         'T_CLOSE_PARENTHESIS', 'T_NS_SEPARATOR' );
 
         // [ arguments ] : prepare arguments
         $this->conditions = array(-1 => array('notToken' => $yields,
