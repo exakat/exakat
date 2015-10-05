@@ -110,7 +110,7 @@ class Config {
                                  '-zip'       => 'zip',
                                  );
 
-        const COMMANDS = array('analyze'       => 1, 
+        const $COMMANDS = array('analyze'       => 1, 
                                'build_root'    => 1, 
                                'constantes'    => 1, 
                                'clean'         => 1, 
@@ -335,7 +335,7 @@ class Config {
 
         if (count($args) > 0) {
             $arg = array_shift($args);
-            if (null !== @self::COMMANDS[$arg]) {
+            if (null !== @self::$COMMANDS[$arg]) {
                 $this->commandline['command'] = $arg;
             } else {
                 array_unshift($args, $arg);
