@@ -80,7 +80,7 @@ class Config {
                                             'neo4j_port'     => 'neo4j',
                                            );
 
-        const BOOLEAN_OPTIONS = array(
+        private $BOOLEAN_OPTIONS = array(
                                  '-v'         => 'verbose',
                                  '-Q'         => 'quick',
                                  '-h'         => 'help',
@@ -110,7 +110,7 @@ class Config {
                                  '-zip'       => 'zip',
                                  );
 
-        const $COMMANDS = array('analyze'       => 1, 
+        private $COMMANDS = array('analyze'       => 1, 
                                'build_root'    => 1, 
                                'constantes'    => 1, 
                                'clean'         => 1, 
@@ -280,7 +280,7 @@ class Config {
             return array();
         }
         
-        foreach(self::BOOLEAN_OPTIONS as $key => $config) {
+        foreach(self::$BOOLEAN_OPTIONS as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {
                 $this->commandline[$config] = true;
