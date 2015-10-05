@@ -221,6 +221,9 @@ LICENCE;
 
         echo "Check Classname' case\n";
         $this->checkClassnames();
+
+        echo "Check Compatibility themes\n";
+        $this->checkCompatibilityThemes();
     }
     
     public function checkFormat() {
@@ -429,9 +432,73 @@ JOIN categories
         if (empty($errors70)) {
             echo 'All ', $total, " compilations OK for PHP 7.0\n";
         } else {
-            echo count($errors70), ' errors out of ', $total, " compilations for PHP 7.0\n", ;
+            echo count($errors70), ' errors out of ', $total, " compilations for PHP 7.0\n", 
                  print_r($errors70, true), "\n";
         }
+    }
+
+    public function checkCompatibilityThemes() {
+        $sqlite = new Sqlite3('./data/analyzers.sqlite');
+        
+        $themes = array('53', '54', '55', '56', '70');
+        $first = $themes[0];
+        $last = $themes[count($themes) - 1];
+        
+        $errors = 0;
+        
+        foreach($themes as $theme) {
+            $res = $sqlite->query(<<<SQL
+SELECT * FROM categories 
+    JOIN analyzers_categories AS ac
+        ON ac.id_categories = categories.id
+    JOIN analyzers 
+        ON ac.id_analyzer = analyzers.id
+WHERE categories.name = "CompatibilityPHP$theme"
+SQL
+);
+//            print "Version $theme\n";
+            if (!$res) { 
+                continue;
+            }
+
+            while($row = $res->fetchArray()) {
+                $analyze = $row[5].'/'.$row[6];
+                
+                if (!isset($compats[$analyze])) {
+                    $compats[$analyze] = array($theme => 'x');
+                } else {
+                    $compats[$analyze][$theme] = 'x';
+                }
+            }
+        }
+
+        foreach($compats as $name => $versions) {
+            if (!isset($versions[$first]) && !isset($versions[$last])) {
+                print "Must check $name (Not with first or last)\n";
+            }
+
+            if (count($versions) == count($themes)) {
+                print "Must check $name (Too many incompatibles versions)\n";
+            }
+        }
+
+        /*
+        foreach($compats as $name => $versions) {
+            print substr($name. str_repeat(' ', 40), 0, 40);
+            
+            foreach(['70', '56', '55', '54', '53', '52'] as $version) {
+                if (isset($versions[$version]) && $versions[$version] === 'x') {
+                    print "  x  ";
+                } else {
+                    print "     ";
+                }
+            }
+            print "\n";
+        }
+        */
+
+        print "\n";
+        print $errors." errors\n\n";
     }
     
     public function checkComposerData() {
