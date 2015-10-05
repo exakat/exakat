@@ -35,8 +35,7 @@ class SimpleTable extends \Report\Format\Sqlite {
                                'value'    => $value[1],
                                'count'    => 1);
             } else {
-                print_r($value);
-                print __METHOD__."\n";
+                echo __METHOD__, "\n", print_r($value, true);
             }
         
             $output->push($array);

@@ -1168,10 +1168,10 @@ class Load extends Tasks {
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
         if (!empty($this->process_blocks('T_OPEN_CURLY'))) {
-            print "Alert, all { and } were not flushed in '$filename'\n";
+            echo "Alert, all { and } were not flushed in '", $filename, "'\n";
         }
         if (!empty($this->process_blocks('T_OPEN_PARENTHESIS'))) {
-            print "Alert, all parenthesis were not flushed in '$filename'\n";
+            echo "Alert, all parenthesis were not flushed in '", $filename, "'\n";
         }
 
         $this->client->save_chunk();
@@ -1185,8 +1185,7 @@ class Load extends Tasks {
         static $statesId = 0;
         
         if ($display) {
-            print "Display\n";
-            var_dump($states);
+            echo "Display\n", var_dump($states, true);
         }
         
         if ($tokenValue == 'T_CLASS' ) {
@@ -1262,8 +1261,7 @@ class Load extends Tasks {
         static $statesId = 0;
         
         if ($display) {
-            print "Display\n";
-            var_dump($states);
+            echo "Display\n", var_dump($states, true);
         }
         
         if ($tokenValue == 'T_FOR' ) {

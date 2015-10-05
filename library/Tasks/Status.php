@@ -73,7 +73,7 @@ class Status extends Tasks {
                 }
                 $log_content = file_get_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log');
                 if (trim(substr($log_content, -5)) != "Done") {
-                    echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is wrong'."\n";
+                    echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is wrong', "\n";
                     if (preg_match('#\[\[\'analyzer\':\'Analyzer\\\\\\\\(.+?)\\\\\\\\(.+?)\'\]\]#s', $log_content, $r) !== false) {
                         echo '   php bin/analyze -P ', $r[1], '/', $r[2], " \n";
                     }

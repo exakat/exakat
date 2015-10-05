@@ -126,8 +126,7 @@ toDelete.each{ g.removeVertex(it); }
                 $begin = microtime(true);
                 $res = gremlin_query($query);
                 if (!isset($res->results)) {
-                    var_dump($res);
-                    print $query."\n";
+                    echo $query, "\n",  print_r($res, true);
                     die();
                 }
                 $res = $res->results[0];
@@ -135,9 +134,7 @@ toDelete.each{ g.removeVertex(it); }
                 $end = microtime(true);
             
                 if (!isset($res->done)) {
-                    print __METHOD__."\n";
-                    print $query;
-                    var_dump($res);
+                    echo __METHOD__, "\n", $query, print_r($res, true);
                     die();
                 }
 
@@ -1363,7 +1360,7 @@ g.addEdge(x, b, 'NEXT');
 
 ";
             } else {
-                print "Only support for addEdge with destination -1 or 0\n";
+                echo "Only support for addEdge with destination -1 or 0\n";
             }
             unset($actions['addEdge']);
             }
@@ -2655,7 +2652,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         }
 
         if ($remainder = array_keys($actions)) {
-            print 'Warning : the following '.count($remainder).' actions were ignored : '.implode(', ', $remainder)."\n";
+            echo 'Warning : the following ', count($remainder), ' actions were ignored : ', implode(', ', $remainder), "\n";
         }
 
         return $qactions;
@@ -2867,8 +2864,8 @@ GREMLIN;
         }
 
         if ($remainder = array_keys($conditions)) {
-            print 'Warning : the following '.count($remainder).' conditions were ignored : '.implode(', ', $remainder).' ('.get_class($this).")\n";
-            print_r($conditions);
+            echo 'Warning : the following ', count($remainder), ' conditions were ignored : ', implode(', ', $remainder), ' (', get_class($this), ")\n", 
+                 print_r($conditions, true);
         }
         
         return $queryConditions;

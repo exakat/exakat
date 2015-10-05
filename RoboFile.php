@@ -71,7 +71,7 @@ LICENCE;
         
         foreach ($files as $file) {
             if (strpos($file, 'Everyman') !== false) { continue; }
-            print $file."\n";
+            echo $file, "\n";
             
             $tokens = token_get_all(file_get_contents($file));
             
@@ -92,11 +92,11 @@ LICENCE;
                     }
                     fclose($fp);
                 } elseif (crc32($tokens[$tokenId + 1][1]) !== $licenceCRC) {
-                    print "Licence seems to be changed in file '$file'\n";
+                    echo "Licence seems to be changed in file '", $file, "'\n";
                 }
             } else {
-                print "Couldn't apply licence on '$file'\n";
-                print_r($tokens[$tokenId]);
+                echo "Couldn't apply licence on '", $file, "'\n", 
+                      print_r($tokens[$tokenId], true);
             }
         }
     }
@@ -201,25 +201,25 @@ LICENCE;
     }
 
     public function checkAll() {
-        print "Check format\n";
+        echo "Check format\n";
         $this->checkFormat();
 
-        print "Check analyzers database\n";
+        echo "Check analyzers database\n";
         $this->checkAnalyzers();
 
-        print "Check external file's syntax\n";
+        echo "Check external file's syntax\n";
         $this->checkSyntax();
 
-        print "Check PHP' scripts syntax\n";
+        echo "Check PHP' scripts syntax\n";
         $this->checkPhplint();
 
-        print "Check composer data\n";
+        echo "Check composer data\n";
         $this->checkComposerData();
 
-        print "Check Directives' sync\n";
+        echo "Check Directives' sync\n";
         $this->checkDirective();
 
-        print "Check Classname' case\n";
+        echo "Check Classname' case\n";
         $this->checkClassnames();
     }
     
@@ -243,9 +243,9 @@ JOIN analyzers
         $total = 0;
         while($row = $res->fetchArray()) {
             ++$total;
-            print ' + '.$row['name']."\n";
+            echo ' + ', $row['name'], "\n";
         }
-        print "$total analyzers in Unassigned\n";
+        echo $total, "analyzers in Unassigned\n";
 
         // categories with orphans
         $res = $sqlite->query('SELECT analyzers_categories.id_analyzer, analyzers_categories.id_categories FROM categories 
@@ -261,7 +261,7 @@ JOIN analyzers
             print_r($row);
 //            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
         }
-        print "$total categories have orphans\n";
+        echo $total, " categories have orphans\n";
 
         // analyzers in no categories
         $res = $sqlite->query('SELECT analyzers_categories.id_analyzer, analyzers_categories.id_categories FROM analyzers 
@@ -277,7 +277,7 @@ JOIN categories
             print_r($row);
 //            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
         }
-        print "$total analyzers are orphans\n";
+        echo $total, "analyzers are orphans\n";
 
         // check for analyzers in Files
         $total = 0;
@@ -285,20 +285,20 @@ JOIN categories
         while($row = $res->fetchArray()) {
             ++$total;
             if (!file_exists('library/Analyzer/'.$row['name'].'.php')) {
-                print $row['name']." has no exakat code\n";
+                echo $row['name'], " has no exakat code\n";
             }
             if (!file_exists('human/en/'.$row['name'].'.ini')) {
-                print $row['name']." has no documentation\n";
+                echo $row['name'], " has no documentation\n";
             }
             if (!file_exists('tests/analyzer/Test/'.str_replace('/', '_', $row['name']).'.php')) {
-                print $row['name']." has no Test\n";
+                echo $row['name'], " has no Test\n";
             }
         }
-        print "\n$total analyzers are in the base\n";
+        echo "\n", $total, " analyzers are in the base\n";
         
         // cleaning
         $sqlite->query('VACUUM');
-        print "Vaccumed\n\n";
+        echo "Vaccumed\n\n";
     }
 
     public function checkSyntax() {
@@ -369,7 +369,7 @@ JOIN categories
         
         foreach($files as $file) {
             ++$total;
-            print "$file\n";
+            echo $file, "\n";
             $sqlite = new \Sqlite3($file);
             $results = $sqlite->query('pragma integrity_check');
             $response = $results->fetchArray()['integrity_check'];
@@ -388,12 +388,10 @@ JOIN categories
 
         // results
         if (empty($errors)) {
-            print "No error found in $total files tested.\n";
+            echo 'No error found in ', $total, " files tested.\n";
         } else {
-            echo count($errors).' errors found'."\n";
-            print_r($errors);
+            echo count($errors), ' errors found'."\n", print_r($errors, true);
         }
-
     }
 
     public function checkPhplint() {
@@ -422,19 +420,17 @@ JOIN categories
         }
         
         if (empty($errors56)) {
-            print "All $total compilations OK for PHP 5.6\n";
+            echo 'All ', $total, " compilations OK for PHP 5.6\n";
         } else {
-            print count($errors56)." errors out of $total compilations for PHP 5.6\n";
-            print_r($errors56);
-            print "\n";
+            echo count($errors56), " errors out of $total compilations for PHP 5.6\n",
+                  print_r($errors56, true), "\n";
         }
 
         if (empty($errors70)) {
-            print "All $total compilations OK for PHP 7.0\n";
+            echo 'All ', $total, " compilations OK for PHP 7.0\n";
         } else {
-            print count($errors70)." errors out of $total compilations for PHP 7.0\n";
-            print_r($errors70);
-            print "\n";
+            echo count($errors70), ' errors out of ', $total, " compilations for PHP 7.0\n", ;
+                 print_r($errors70, true), "\n";
         }
     }
     
@@ -460,9 +456,9 @@ JOIN categories
             }
 
             if (!empty($toDelete)) {
-//                print "To be deleted " .implode(', ', $toDelete)."\n";
+//                echo "To be deleted " , implode(', ', $toDelete), "\n";
                 $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', array_keys($toDelete)).')');
-                print count($toDelete)." rows removed in $table : \"".join('", "', array_values($toDelete))."\"\n";
+                echo count($toDelete), ' rows removed in ', $table, ' : "', join('", "', array_values($toDelete)), "\"\n";
             }
         }
 
@@ -485,9 +481,9 @@ JOIN categories
                 ++$total;
             }
 
-            print "Found $missing / $total {$child}s without parent {$parent}s\n";
+            echo 'Found ', ($missing / $total), $child. "s without parent ", $parent. "s\n";
         }
-        print "\n";
+        echo "\n";
 
         foreach(array_flip($downLink) as $parent => $child) {
             $res = $sqlite->query('SELECT count(*) FROM '.$parent.'s LEFT JOIN '.$child.'s ON '.$child.'s.'.$parent.'_id = '.$parent.'s.id GROUP BY '.$parent.'s.id HAVING COUNT(*) = 0');
@@ -497,25 +493,25 @@ JOIN categories
             }
 
             if ($children == 0) {
-                print "Found $children $parent without $child\n";
+                echo 'Found ', $children, ' ', $parent, ' without ', $child, "\n";
                 // what to do?
             }
         }
         // What are empty Namespaces ? namespace == ''
 
         // Display stats
-        print "\n";
+        echo "\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM components');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb']." components\n";
+        echo $res->fetchArray(SQLITE3_ASSOC)['nb'], " components\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM versions');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb']." versions\n";
+        echo $res->fetchArray(SQLITE3_ASSOC)['nb'], " versions\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM classes');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb']." classes\n";
+        echo $res->fetchArray(SQLITE3_ASSOC)['nb'], " classes\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM interfaces');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
+        echo $res->fetchArray(SQLITE3_ASSOC)['nb'], " interfaces\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM traits');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
-        print "\n";
+        echo $res->fetchArray(SQLITE3_ASSOC)['nb'], " traits\n";
+        echo "\n";
     }
     
     public function checkDirective() {
@@ -529,12 +525,12 @@ JOIN categories
         $counts = array_count_values($directives);
         $diff = array_filter($counts, function($a, $b) { return $a > 1;}, ARRAY_FILTER_USE_BOTH);
         if (count($diff)) {
-            print count($diff)." values are double in \$directives : ".join(', ', array_keys($diff))."\n";
+            echo count($diff), ' values are double in \$directives : ', join(', ', array_keys($diff)), "\n";
         }
         
         foreach($directives as $d) {
             if (!file_exists('./library/Report/Content/Directives/'.$d.'.php')) {
-                print "$d is missing\n";
+                echo $d, " is missing\n";
             } 
         }
         
@@ -543,10 +539,9 @@ JOIN categories
             $f2 = substr(basename($f), 0, -4);
             if ($f2 == 'Directives') { continue; }
             if (in_array($f2, $directives) === false) {
-                print "'$f2' is missing in the Directive class\n";
+                echo "'", $f2, "' is missing in the Directive class\n";
             }
         }
-
         die();
     }
 
@@ -561,20 +556,20 @@ JOIN categories
             
             $code = file_get_contents($file);
             if (!preg_match('#(class|interface) ([^ ]+)#is', $code, $r)) {
-                print "No class in $file\n";
+                echo 'No class in ', $file, "\n";
                 continue;
             }
             
             $filename = substr(basename($file), 0, -4);
             if ($filename != $r[2]) {
-                print "Classname error in $file\n";
+                echo 'Classname error in ', $file, "\n";
             }
         }
     }
 }
 
 function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $errcontext = array()) {
-    print __METHOD__."\n";
+    echo __METHOD__, "\n";
     return true;
 }
 
