@@ -26,6 +26,8 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class NewExponent extends Analyzer\Analyzer {
+    protected $phpVersion = '5.6+';
+    
     public function analyze() {
         $this->atomFunctionIs('\\pow');
         $this->prepareQuery();

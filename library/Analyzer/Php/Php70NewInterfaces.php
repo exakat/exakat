@@ -26,7 +26,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Php70NewInterfaces extends Analyzer\Common\InterfaceDefinition {
-    protected $phpVersion = '70-';
+    protected $phpVersion = '7.0-';
     
     public function analyze() {
         $this->interfaces = array(

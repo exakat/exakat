@@ -26,6 +26,8 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class ClassConstWithArray extends Analyzer\Analyzer {
+    protected $phpVersion = '5.5+';
+
     public function analyze() {
         $this->atomIs('Const')
              ->outIs('VALUE')

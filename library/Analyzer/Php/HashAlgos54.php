@@ -26,6 +26,8 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class HashAlgos54 extends Analyzer\Analyzer {
+    protected $phpVersion = '5.4-';
+    
     public static $functions = array('hash', 'hash_algo', 'hash_hmac_file', 'hash_hmac', 'hash_init', 'hash_pbkdf2');
     
     public function analyze() {

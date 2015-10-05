@@ -26,6 +26,8 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class Anonymous extends Analyzer\Analyzer {
+    protected $phpVersion = '7.0+';
+    
     public function analyze() {
         $this->atomIs('Class')
              ->hasOut('ARGUMENTS');

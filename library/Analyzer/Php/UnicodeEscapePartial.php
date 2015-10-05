@@ -5,7 +5,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class UnicodeEscapePartial extends Analyzer\Analyzer {
-    public $phpVersion = '7.0-';
+    protected $phpVersion = '7.0-';
     
     public function analyze() {
         // Normal string

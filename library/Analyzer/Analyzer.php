@@ -31,10 +31,10 @@ abstract class Analyzer {
 
     static public $datastore = null;
     
-    protected $rowCount = 0;       // Number of found values
+    protected $rowCount       = 0; // Number of found values
     protected $processedCount = 0; // Number of initial values
-    protected $queryCount = 0;     // Number of ran queries
-    protected $rawQueryCount = 0;  // Number of ran queries
+    protected $queryCount     = 0; // Number of ran queries
+    protected $rawQueryCount  = 0; // Number of ran queries
 
     private $queries = array();
     private $queriesArguments = array();

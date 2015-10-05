@@ -26,6 +26,8 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class ConstantScalarExpression extends Analyzer\Analyzer {
+    protected $phpVersion = '5.6+';
+    
     public function analyze() {
         $authorizedAtoms = array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null');
         

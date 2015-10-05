@@ -26,6 +26,8 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class ExponentUsage extends Analyzer\Analyzer {
+    protected $phpVersion = '5.6+';
+    
     public function analyze() {
         $this->atomIs('Power');
         $this->prepareQuery();

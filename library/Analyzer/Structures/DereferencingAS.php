@@ -26,6 +26,8 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class DereferencingAS extends Analyzer\Analyzer {
+    protected $phpVersion = '5.3-';
+    
     public function analyze() {
         // $x = array(1,2,3)
         // $x[3];

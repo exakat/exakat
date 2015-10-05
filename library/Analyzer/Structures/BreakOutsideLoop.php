@@ -26,6 +26,8 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class BreakOutsideLoop extends Analyzer\Analyzer {
+    protected $phpVersion = '7.0-';
+    
     public function analyze() {
         // break (null)
         $this->atomIs('Break')

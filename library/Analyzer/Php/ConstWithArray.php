@@ -26,6 +26,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class ConstWithArray extends Analyzer\Analyzer {
+    protected $phpVersion = '5.5-';
 
     public function analyze() {
         // method used in a static methodcall \a\b::b()

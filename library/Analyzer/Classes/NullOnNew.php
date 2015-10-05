@@ -26,6 +26,8 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class NullOnNew extends Analyzer\Analyzer {
+    protected $phpVersion = '7.0-';
+    
     public function analyze() {
         $names = array('finfo',
                        'PDO',

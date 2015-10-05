@@ -26,7 +26,7 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class ForeachWithList extends Analyzer\Analyzer {
-    public $phpVersion = '5.5+';
+    protected $phpVersion = '5.5+';
     
     public function analyze() {
         $this->atomIs('Foreach')

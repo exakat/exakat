@@ -26,7 +26,8 @@ namespace Analyzer\Arrays;
 use Analyzer;
 
 class MixedKeys extends Analyzer\Analyzer {
-
+    protected $phpVersion = '5.6+';
+    
     public function analyze() {
         // build with array()
         $this->atomIs('Functioncall')

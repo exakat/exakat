@@ -26,7 +26,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class ScalarTypehintUsage extends Analyzer\Analyzer {
-    public $phpVersion = '7.0+';
+    protected $phpVersion = '7.0+';
 
     public function analyze() {
         $this->atomIs('Typehint')
