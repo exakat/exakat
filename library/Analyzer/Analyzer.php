@@ -335,7 +335,7 @@ GREMLIN;
             $result = new \StdClass();
             $result->processed = 0;
             $result->total = 0;
-            return [$result];
+            return array($result);
         }
 
         if (!isset($result->results)) {
