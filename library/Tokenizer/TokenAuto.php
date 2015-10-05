@@ -163,24 +163,6 @@ toDelete.each{ g.removeVertex(it); }
 ";
         }
 
-         if (isset($actions['transfert'])) {
-            list(, $where) = each($actions['transfert']);
-            $next = str_repeat(".out('NEXT')", $where);
-            $qactions[] = <<<GREMLIN
-/* transfert property root away  */
-file = it.in('FILE').next();
-
-it.has('root', true)$next.each{
-    it.setProperty('root', true);
-    g.addEdge(file, it, 'FILE');
-}
-
-it.removeProperty('root');
-g.removeEdge(it.inE('FILE').next());
-GREMLIN;
-            unset($actions['transfert']);
-        }
-
         if (isset($actions['atom'])) {
             if (is_string($actions['atom'])) {
                 $qactions[] = " /* atom */\n   it.setProperty('atom', '".$actions['atom']."')";
@@ -2462,17 +2444,6 @@ $fullcode;
             unset($actions['emptyHeredoc']);
         }
         
-        if (isset($actions['addToIndex'])) {
-            list(, $token) = each($actions['addToIndex']);
-            $qactions[] = "
-/* add to the following index */
-
-g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
-
-";
-            unset($actions['addToIndex']);
-        }
-
         if (isset($actions['variableToFunctioncall'])) {
             $fullcode = $this->fullcode();
             

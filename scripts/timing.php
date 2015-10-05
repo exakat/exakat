@@ -38,12 +38,10 @@ $regression = new Regression();
 
 foreach($files as $id => $file) {
     unset($project, $initialSize, $size, $buildRoot, $tokenizer, $analyze, $final);
-    list(, $project) = explode('/', $file);
+    list($projectDir, $project) = explode('/', $file);
 
     if (in_array($project, array('test'))) { continue; }
     
-//    if ($project != 'baun') { continue; }
-
     if (!file_exists("projects/$project/log/project.timing.csv")) { 
         print "$project\n";
         continue; 
