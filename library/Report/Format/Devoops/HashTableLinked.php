@@ -28,14 +28,14 @@ class HashTableLinked extends \Report\Format\Devoops {
     
     public function render($output, $data) {
         $counter = self::$hastableCounter++;
-        $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
-                                          "assets/js/jquery.dataTables.bootstrap.js"));
+        $output->pushToJsLibraries( array('assets/js/jquery.dataTables.min.js',
+                                          'assets/js/jquery.dataTables.bootstrap.js'));
 
 $js = <<<JS
-    				var oTable1 = \$('#hashtable-{$counter}').dataTable( {
-	    			"aoColumns": [
-		    	      null, null
-			    	] } );
+					var oTable1 = \$('#hashtable-{$counter}').dataTable( {
+					"aoColumns": [
+					  null, null
+					] } );
 
 
 JS;
@@ -55,7 +55,7 @@ HTML;
 
 HTML;
             }
-            $text .= "</tr>";
+            $text .= '</tr>';
         }
 
 $text .= <<<HTML
@@ -67,10 +67,10 @@ HTML;
             if ($v['result'] !== 0) {
                 $k = $this->makeLink($k);
                 $icon = '<i class="fa fa-check-o red"></i>';
-                $v['result'] .= " warnings";
+                $v['result'] .= ' warnings';
             } else {
                 $icon = '<i class="fa fa-check-square-o green"></i>';
-                $v['result'] = "";
+                $v['result'] = '';
             }
             $text .= '<tr><td>'.$k.'</td><td>'.$icon.' '.$v['result']."</td></tr>\n";
         }

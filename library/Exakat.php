@@ -171,6 +171,11 @@ class Exakat {
                 print $task->run($config);
                 break;
 
+            case 'vector' : 
+                $task = new Tasks\Vector();
+                print $task->run($config);
+                break;
+
             case 'version' : 
             default : 
                 $version = self::VERSION;

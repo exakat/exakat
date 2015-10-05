@@ -2835,7 +2835,7 @@ GREMLIN;
         }
 
         if ($remainder = array_keys($conditions)) {
-            echo 'Warning : the following ', count($remainder), ' conditions were ignored : ', implode(', ', $remainder), ' (', get_class($this), ")\n", 
+            echo 'Warning : the following ', count($remainder), ' conditions were ignored : ', implode(', ', $remainder), ' (', get_class($this), ")\n",
                  print_r($conditions, true);
         }
         

@@ -96,7 +96,7 @@ g.idx('analyzers')[['analyzer':'$analyzerName']].out
 GREMLIN;
                     $res = gremlin_query($query);
                     if (!isset($res->results)) {
-                        echo "Couldn't run the query and get a result : \n", 
+                        echo "Couldn't run the query and get a result : \n",
                              "Query : ", $query, " \n",
                              print_r($res, true);
                         die();

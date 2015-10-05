@@ -56,7 +56,7 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // check outside the class : the first found class has not method
-        // Here, we find methods that are in the grand parents, and not static. 
+        // Here, we find methods that are in the grand parents, and not static.
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
