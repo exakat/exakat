@@ -80,7 +80,7 @@ class Config {
                                             'neo4j_port'     => 'neo4j',
                                            );
 
-        private $BOOLEAN_OPTIONS = array(
+        private static $BOOLEAN_OPTIONS = array(
                                  '-v'         => 'verbose',
                                  '-Q'         => 'quick',
                                  '-h'         => 'help',
@@ -110,7 +110,7 @@ class Config {
                                  '-zip'       => 'zip',
                                  );
 
-        private $COMMANDS = array('analyze'       => 1, 
+        private static $COMMANDS = array('analyze'       => 1, 
                                'build_root'    => 1, 
                                'constantes'    => 1, 
                                'clean'         => 1, 
@@ -191,17 +191,17 @@ class Config {
     
     static public function factory($argv = array()) {
         if (empty($argv)) {
-            if (empty(self::$singleton)) {
-                self::$singleton = new self(array());
+            if (empty(static::$singleton)) {
+                static::$singleton = new self(array());
             }
-            return self::$singleton;
+            return static::$singleton;
         } else {
             if (is_object($argv) && ($argv instanceof \Config)) {
-                self::$singleton = $argv;
+                static::$singleton = $argv;
             } else {
-                self::$singleton = new self($argv);
+                static::$singleton = new self($argv);
             }
-            return self::$singleton;
+            return static::$singleton;
         }
         
     }
@@ -280,7 +280,7 @@ class Config {
             return array();
         }
         
-        foreach(self::$BOOLEAN_OPTIONS as $key => $config) {
+        foreach(static::$BOOLEAN_OPTIONS as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {
                 $this->commandline[$config] = true;
@@ -335,7 +335,7 @@ class Config {
 
         if (count($args) > 0) {
             $arg = array_shift($args);
-            if (null !== @self::$COMMANDS[$arg]) {
+            if (null !== @static::$COMMANDS[$arg]) {
                 $this->commandline['command'] = $arg;
             } else {
                 array_unshift($args, $arg);
