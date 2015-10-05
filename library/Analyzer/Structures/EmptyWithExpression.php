@@ -26,6 +26,8 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class EmptyWithExpression extends Analyzer\Analyzer {
+    public $phpVersion = '5.5+';
+    
     public function analyze() {
         // $a = 2; empty($a) ; in a row
         // only works for variables
