@@ -2250,3 +2250,8 @@ border-radius: 50%;}
     display: none;
   }
 }
+pre{
+    overflow: scroll;
+    word-wrap: break-word;
+    width: 840px;
+}
