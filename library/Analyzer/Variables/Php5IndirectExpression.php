@@ -20,6 +20,8 @@ class Php5IndirectExpression extends Analyzer\Analyzer {
         $this->atomIs('Property')
              ->outIs('PROPERTY')
              ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('T_VARIABLE')
              ->back('first');
         $this->prepareQuery();
 
