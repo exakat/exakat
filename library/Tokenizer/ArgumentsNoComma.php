@@ -30,7 +30,8 @@ class ArgumentsNoComma extends Arguments {
     public function _check() {
         // @note f(1) : no comma
         $this->conditions = array(-1 => array('token'     => array_merge(Functioncall::$operatorsWithoutEcho,
-                                                                         array('T_FUNCTION', 'T_DECLARE', 'T_USE', 'T_CLASS'))),
+                                                                         array('T_FUNCTION', 'T_DECLARE', 'T_USE', 'T_CLASS',
+                                                                               'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'))),
                                    0 => array('token'     => ArgumentsNoComma::$operators,
                                               'atom'      => 'none'),
                                    1 => array('atom'      => 'yes',

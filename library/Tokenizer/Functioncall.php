@@ -34,7 +34,7 @@ class Functioncall extends TokenAuto {
 
     public function _check() {
         // functioncall(with arguments or void) with another function as name (initial name is $variable or string)
-        $this->conditions = array(   0 => array('token' => array('T_STRING', 'T_VARIABLE', 'T_NS_SEPARATOR')),
+        $this->conditions = array(   0 => array('token' => array('T_STRING', 'T_VARIABLE', 'T_NS_SEPARATOR', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),
                                      2 => array('atom'  =>  array('Arguments', 'Void')),
@@ -50,12 +50,12 @@ class Functioncall extends TokenAuto {
         $this->checkAuto();
         
         // $functioncall(with arguments or void) with a variable as name
-        $this->conditions = array(   0 => array('token' => 'T_VARIABLE'),
-                                     1 => array('atom'  => 'none',
-                                                'token' => 'T_OPEN_PARENTHESIS' ),
-                                     2 => array('atom'  =>  array('Arguments', 'Void')),
-                                     3 => array('atom'  => 'none',
-                                                'token' => 'T_CLOSE_PARENTHESIS'),
+        $this->conditions = array(   0 => array('token'    => 'T_VARIABLE'),
+                                     1 => array('atom'     => 'none',
+                                                'token'    => 'T_OPEN_PARENTHESIS' ),
+                                     2 => array('atom'     =>  array('Arguments', 'Void')),
+                                     3 => array('atom'     => 'none',
+                                                'token'    => 'T_CLOSE_PARENTHESIS'),
                                      4 => array('notToken' => 'T_OPEN_PARENTHESIS')
         );
         
@@ -66,14 +66,14 @@ class Functioncall extends TokenAuto {
         $this->checkAuto();
 
         // functioncall(with arguments or void) that will be in a sequence
-        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
-                                     0 => array('token' => static::$operatorsWithoutEcho),
-                                     1 => array('atom'  => 'none',
-                                                'token' => 'T_OPEN_PARENTHESIS' ),
-                                     2 => array('atom'  =>  array('Arguments', 'Void')),
-                                     3 => array('atom'  => 'none',
-                                                'token' => 'T_CLOSE_PARENTHESIS'),
-                                     4 => array('notToken' => 'T_OPEN_PARENTHESIS')
+        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+                                     0 => array('token'     => static::$operatorsWithoutEcho),
+                                     1 => array('atom'      => 'none',
+                                                'token'     => 'T_OPEN_PARENTHESIS'),
+                                     2 => array('atom'      =>  array('Arguments', 'Void')),
+                                     3 => array('atom'      => 'none',
+                                                'token'     => 'T_CLOSE_PARENTHESIS'),
+                                     4 => array('notToken'  => 'T_OPEN_PARENTHESIS')
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
@@ -174,9 +174,9 @@ if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
 }
 
 if (fullcode.getProperty('parenthesis') == true) {
-    fullcode.setProperty('fullcode', it.getProperty('fullcode') + "(" + it.out("ARGUMENTS").next().getProperty('fullcode') + ")");
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + "(" + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + ")");
 } else {
-    fullcode.setProperty('fullcode', it.getProperty('fullcode') + " " + it.out("ARGUMENTS").next().getProperty('fullcode') + "");
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + "");
 }
 
 fullcode.setProperty("args_count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count());

@@ -2444,6 +2444,74 @@ $fullcode;
             unset($actions['emptyHeredoc']);
         }
 
+        if (isset($actions['methodToFunctioncall'])) {
+            $token = new Functioncall();
+            $fullcode = $token->fullcode();
+
+            $fullcodeMethod = $this->fullcode();
+            
+            $qactions[] = "
+/* create a functioncall, and hold the methodcall as property.  */
+
+// build the functioncall
+b1 = it.in('NEXT').next();
+it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+a3.bothE('NEXT').each{ g.removeEdge(it); }
+toDelete.push(a1);
+toDelete.push(a3);
+
+// bury it as a property name
+x = g.addVertex(null, [code:it.fullcode, fullcode: it.fullcode, atom:'Functioncall', token:'T_OBJECT_OPERATOR', virtual:true, line:it.line, parenthesis:true]);
+g.addEdge(g.idx('racines')[['token':'Property']].next(), x, 'INDEXED');
+
+g.addEdge(x, a2, 'ARGUMENTS');
+fullcode = x;
+$fullcode
+
+g.addEdge(b1, x, 'NEXT');
+g.addEdge(x, a4, 'NEXT');
+g.addEdge(x, it, 'NAME');
+
+";
+            unset($actions['methodToFunctioncall']);
+        }
+
+        if (isset($actions['staticmethodToFunctioncall'])) {
+            $token = new Functioncall();
+            $fullcode = $token->fullcode();
+
+            $fullcodeMethod = $this->fullcode();
+            
+            $qactions[] = "
+/* create a functioncall, and hold the methodcall as property.  */
+
+// build the functioncall
+b1 = it.in('NEXT').next();
+it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+a3.bothE('NEXT').each{ g.removeEdge(it); }
+toDelete.push(a1);
+toDelete.push(a3);
+
+// bury it as a property name
+x = g.addVertex(null, [code:fullcode.fullcode, fullcode:fullcode.fullcode, atom:'Functioncall', token:'T_DOUBLE_COLON', virtual:true, line:it.line, parenthesis:true]);
+g.addEdge(g.idx('racines')[['token':'Staticproperty']].next(), x, 'INDEXED');
+g.addEdge(x, a2, 'ARGUMENTS');
+
+fullcode = x;
+$fullcode;
+
+g.addEdge(b1, x, 'NEXT');
+g.addEdge(x, a4, 'NEXT');
+g.addEdge(x, it, 'NAME');
+
+";
+            unset($actions['staticmethodToFunctioncall']);
+        }
+
         if (isset($actions['functionToFunctioncall'])) {
             $fullcode = $this->fullcode();
             
@@ -2469,8 +2537,6 @@ g.addEdge(g.idx('racines')[['token':'Functioncall']].next(), x, 'INDEXED');
 g.addEdge(b1, x, 'NEXT');
 g.addEdge(x, a4, 'NEXT');
 g.addEdge(x, it, 'NAME');
-
-//g.idx('atoms').put('atom', 'Identifier', x);
 
 ";
             unset($actions['functionToFunctioncall']);

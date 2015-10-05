@@ -48,12 +48,61 @@ class Methodcall extends TokenAuto {
                                'keepIndexed'     => true);
         $this->checkAuto();
 
+        // $this->x($args)(
+        $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR')),
+                                   -1 => array('atom'      => $operands),
+                                    0 => array('token'     => Methodcall::$operators,
+                                               'atom'      => 'none'),
+                                    1 => array('atom'      => 'Functioncall'),
+                                    2 => array('token'     => 'T_OPEN_PARENTHESIS')
+                                 );
+        
+        $this->actions = array('to_methodcall' => true,
+                               'keepIndexed'   => true,
+                               );
+        $this->checkAuto();
+
+        // NOT A METHODCALL!!! Functioncall
+        // functioncall (with arguments or void) that will be in a sequence
+        $this->conditions = array(   0 => array('token'     => Methodcall::$operators),
+                                     1 => array('atom'      => 'none',
+                                                'token'     => 'T_OPEN_PARENTHESIS'),
+                                     2 => array('atom'      =>  array('Arguments', 'Void')),
+                                     3 => array('atom'      => 'none',
+                                                'token'     => 'T_CLOSE_PARENTHESIS'),
+                                     4 => array('notToken'  => 'T_OPEN_PARENTHESIS')
+        );
+        
+        $this->actions = array('methodToFunctioncall' => true,
+                               'keepIndexed'          => true,
+                               'property'             => array('parenthesis' => true),
+                               );
+        $this->checkAuto();
+
+        // NOT A METHODCALL!!! Functioncall
+        // functioncall(with arguments or void) with another function as name (initial name is $variable or string)
+        $this->conditions = array(   0 => array('token' => Methodcall::$operators),
+                                     1 => array('atom'  => 'none',
+                                                'token' => 'T_OPEN_PARENTHESIS' ),
+                                     2 => array('atom'  =>  array('Arguments', 'Void')),
+                                     3 => array('atom'  => 'none',
+                                                'token' => 'T_CLOSE_PARENTHESIS'),
+                                     4 => array('token' => 'T_OPEN_PARENTHESIS')
+        );
+        
+        $this->actions = array('methodToFunctioncall' => true,
+                               'keepIndexed'          => true,
+                               'property'             => array('parenthesis' => true),
+                               );
+        $this->checkAuto();
+
         // $this->x($args);
         $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR')),
                                    -1 => array('atom'      => $operands),
                                     0 => array('token'     => Methodcall::$operators,
                                                'atom'      => 'none'),
-                                    1 => array('atom'      => 'Functioncall')
+                                    1 => array('atom'      => 'Functioncall'),
+                                    2 => array('notToken'  => 'T_OPEN_PARENTHESIS')
                                  );
         
         $this->actions = array('addSemicolon'  => 'b1',

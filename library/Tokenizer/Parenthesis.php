@@ -36,7 +36,7 @@ class Parenthesis extends TokenAuto {
                                                                  'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
                                                                  'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
                                                                  'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
-                                                                 'T_DOLLAR', 'T_CLASS')),
+                                                                 'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
                                               'notAtom'  => array('Array', 'Property')),
                                    0 => array('token'    => Parenthesis::$operators,
                                               'atom'     => 'none',
