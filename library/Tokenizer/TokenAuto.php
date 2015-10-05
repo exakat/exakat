@@ -2443,12 +2443,44 @@ $fullcode;
 ";
             unset($actions['emptyHeredoc']);
         }
-        
+
+        if (isset($actions['functionToFunctioncall'])) {
+            $fullcode = $this->fullcode();
+            
+            $qactions[] = "
+/* create a functioncall, and hold the first functioncall as property.  */
+
+// build the functioncall
+g.addEdge(it, a2, 'ARGUMENTS');
+b1 = it.in('NEXT').next();
+it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+fullcode = it;
+$fullcode
+
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+a3.bothE('NEXT').each{ g.removeEdge(it); }
+toDelete.push(a1);
+toDelete.push(a3);
+
+// bury it as a property name
+x = g.addVertex(null, [code:it.fullcode, fullcode: it.fullcode, atom:'Functioncall', token:'T_STRING', virtual:true, line:it.line]);
+g.addEdge(g.idx('racines')[['token':'Functioncall']].next(), x, 'INDEXED');
+
+g.addEdge(b1, x, 'NEXT');
+g.addEdge(x, a4, 'NEXT');
+g.addEdge(x, it, 'NAME');
+
+//g.idx('atoms').put('atom', 'Identifier', x);
+
+";
+            unset($actions['functionToFunctioncall']);
+        }
+
         if (isset($actions['variableToFunctioncall'])) {
             $fullcode = $this->fullcode();
             
             $qactions[] = "
-/* create a functioncall, and hold the variable as property.  */
+/* do not create a functioncall, but hold the variable as property.  */
 
 x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');

@@ -1,0 +1,102 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    $y1
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        1
+    Label : NAME
+      $y1
+  Label : ELEMENT
+    $y2(1)
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        2
+    Label : NAME
+      $y2
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          1
+  Label : ELEMENT
+    x1
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        1
+  Label : ELEMENT
+    x2(2)
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        22
+    Label : NAME
+      x2
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          2
+  Label : ELEMENT
+    x3(3)(33)
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        333
+    Label : NAME
+      x3(3)
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          33
+      Label : NAME
+        x3
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            3
+  Label : ELEMENT
+    $y3(1)(2)
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        3
+    Label : NAME
+      $y3(1)
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          2
+      Label : NAME
+        $y3
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            1
+  Label : ELEMENT
+    x4(4)(44)(444)
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        4444
+    Label : NAME
+      x4(4)(44)
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          444
+      Label : NAME
+        x4(4)
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            44
+        Label : NAME
+          x4
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              4

@@ -33,13 +33,30 @@ class Functioncall extends TokenAuto {
     static public $atom = 'Functioncall';
 
     public function _check() {
+        // functioncall(with arguments or void) with another function as name (initial name is $variable or string)
+        $this->conditions = array(   0 => array('token' => array('T_STRING', 'T_VARIABLE', 'T_NS_SEPARATOR')),
+                                     1 => array('atom'  => 'none',
+                                                'token' => 'T_OPEN_PARENTHESIS' ),
+                                     2 => array('atom'  =>  array('Arguments', 'Void')),
+                                     3 => array('atom'  => 'none',
+                                                'token' => 'T_CLOSE_PARENTHESIS'),
+                                     4 => array('token' => 'T_OPEN_PARENTHESIS')
+        );
+        
+        $this->actions = array('functionToFunctioncall' => 1,
+                               'keepIndexed'            => true,
+                               'property'               => array('parenthesis' => true),
+                               );
+        $this->checkAuto();
+        
         // $functioncall(with arguments or void) with a variable as name
         $this->conditions = array(   0 => array('token' => 'T_VARIABLE'),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),
                                      2 => array('atom'  =>  array('Arguments', 'Void')),
                                      3 => array('atom'  => 'none',
-                                                'token' => 'T_CLOSE_PARENTHESIS')
+                                                'token' => 'T_CLOSE_PARENTHESIS'),
+                                     4 => array('notToken' => 'T_OPEN_PARENTHESIS')
         );
         
         $this->actions = array('variableToFunctioncall' => 1,
@@ -47,15 +64,16 @@ class Functioncall extends TokenAuto {
                                'property'               => array('parenthesis' => true),
                                );
         $this->checkAuto();
-        
+
         // functioncall(with arguments or void) that will be in a sequence
         $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
-                                     0 => array('token' => Functioncall::$operatorsWithoutEcho),
+                                     0 => array('token' => static::$operatorsWithoutEcho),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),
                                      2 => array('atom'  =>  array('Arguments', 'Void')),
                                      3 => array('atom'  => 'none',
-                                                'token' => 'T_CLOSE_PARENTHESIS')
+                                                'token' => 'T_CLOSE_PARENTHESIS'),
+                                     4 => array('notToken' => 'T_OPEN_PARENTHESIS')
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',

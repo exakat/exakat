@@ -1,0 +1,66 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    x2( )
+    Label : ARGUMENTS
+      void
+    Label : NAME
+      x2
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    $y
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      $y
+  Label : ELEMENT
+    x1
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+  Label : ELEMENT
+    x3( )( )
+    Label : ARGUMENTS
+      void
+    Label : NAME
+      x3( )
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+      Label : NAME
+        x3
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+  Label : ELEMENT
+    x4( )( )( )
+    Label : ARGUMENTS
+      void
+    Label : NAME
+      x4( )( )
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+      Label : NAME
+        x4( )
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          x4
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
