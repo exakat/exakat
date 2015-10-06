@@ -24,7 +24,6 @@
 namespace Report\Content;
 
 class ComposerList extends \Report\Content {
-    private $analyzers = array();
     protected $name = 'Composer';
 
     public function collect() {
