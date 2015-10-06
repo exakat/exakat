@@ -224,6 +224,9 @@ LICENCE;
 
         echo "Check Compatibility themes\n";
         $this->checkCompatibilityThemes();
+
+        echo "Check Docs\n";
+        $this->checkDoc();
     }
     
     public function checkFormat() {
@@ -610,6 +613,28 @@ SQL
             }
         }
         die();
+    }
+
+    public function checkDoc() {
+        
+        // no Exakat.com
+        $res = shell_exec('grep -r "exakat\.com" docs');
+        if ($res) {
+            print "Exakat.com was found! \n$res\n";
+        }
+        
+        // Update doc version
+        $php = file_get_contents('library/Exakat.php');
+
+        preg_match('/const VERSION = \'(\d+.\d+.\d+)\'/is', $php, $version);
+        $version = $version[1];
+        preg_match('/const BUILD = \'(\d+)\'/is', $php, $build);
+        $build = $build[1];
+        
+        $md = file_get_contents('docs/manual.md');
+        $md = preg_replace('/This manual is for Exakat version (\d+.\d+.\d+) \(build (\d+)\)/', 
+                           'This manual is for Exakat version ('.$version.') (build '.$build.')', $md);
+        file_put_contents('docs/manual.md', $md);
     }
 
     public function checkClassnames() {
