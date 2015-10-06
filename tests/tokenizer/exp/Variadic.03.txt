@@ -1,0 +1,152 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    $f
+    Label : NAME
+      $f
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          $g
+        Label : PROPERTY
+          D
+  Label : ELEMENT
+    \
+    Label : SUBNAME
+      ee
+    Label : SUBNAME
+      e
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        C
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $d2
+    Label : METHOD
+      d
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          null
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    \
+    Label : SUBNAME
+      b
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        0
+  Label : ELEMENT
+    ::
+    Label : METHOD
+      c
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          B
+        Label : ARGUMENT
+          2
+    Label : CLASS
+      c1
+  Label : ELEMENT
+    a
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        __FILE__
+  Label : ELEMENT
+    $l
+    Label : NAME
+      $l
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        ::
+        Label : CLASS
+          G
+        Label : CONSTANT
+          H
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        2
+  Label : ELEMENT
+    $m
+    Label : NAME
+      $m
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        ::
+        Label : CLASS
+          I
+        Label : CONSTANT
+          J
+  Label : ELEMENT
+    $h
+    Label : NAME
+      $h
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          $i
+        Label : METHOD
+          E
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ARGUMENT
+        3
+  Label : ELEMENT
+    $j
+    Label : NAME
+      $j
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        ::
+        Label : PROPERTY
+          $k
+        Label : CLASS
+          F
