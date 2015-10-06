@@ -33,10 +33,10 @@ class Property extends TokenAuto {
 
         // $object->property{1}
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOLLAR')),
-                                   -1 => array('atom' => $operands),
-                                    0 => array('token' => Property::$operators),
-                                    1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier', 'Boolean', 'Null')),
-                                    2 => array('token' => array('T_OPEN_CURLY', 'T_OPEN_BRACKET')),
+                                   -1 => array('atom'      => $operands),
+                                    0 => array('token'     => Property::$operators),
+                                    1 => array('atom'      => array('String', 'Variable', 'Array', 'Identifier', 'Boolean', 'Null')),
+                                    2 => array('token'     => array('T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                     );
         
         $this->actions = array('transform'    => array( -1 => 'OBJECT',
@@ -47,9 +47,9 @@ class Property extends TokenAuto {
         
         // $object->property
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
-                                   -1 => array('atom' => $operands),
-                                    0 => array('token' => Property::$operators),
-                                    1 => array('atom' => array('String', 'Variable', 'Array', 'Arrayappend', 'Identifier', 'Boolean', 'Null')),
+                                   -1 => array('atom'      => $operands),
+                                    0 => array('token'     => Property::$operators),
+                                    1 => array('atom'      => array('String', 'Variable', 'Array', 'Arrayappend', 'Identifier', 'Boolean', 'Null')),
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                     );
         
@@ -62,11 +62,11 @@ class Property extends TokenAuto {
 
         // $object->{property}
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
-                                   -1 => array('atom'  => $operands),
-                                    0 => array('token' => Property::$operators),
-                                    1 => array('token' => 'T_OPEN_CURLY'),
-                                    2 => array('atom'  => 'yes'),
-                                    3 => array('token' => 'T_CLOSE_CURLY'),
+                                   -1 => array('atom'      => $operands),
+                                    0 => array('token'     => Property::$operators),
+                                    1 => array('token'     => 'T_OPEN_CURLY'),
+                                    2 => array('atom'      => 'yes'),
+                                    3 => array('token'     => 'T_CLOSE_CURLY'),
                                     4 => array('filterOut' => array('T_OPEN_PARENTHESIS')),
                                     );
         
