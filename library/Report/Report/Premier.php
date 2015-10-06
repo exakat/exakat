@@ -330,6 +330,29 @@ TEXT
             $this->addContent('Horizontal', $composerList, 'composer');
         }
 
+        $directiveList = new \Report\Content\DirectivesList();
+        $directiveList->collect();
+        if ($directiveList->hasResults()) {
+            $this->createLevel2('Altered Directives');
+            $this->addContent('Text', <<<TEXT
+This is an overview of the directives that are modified inside the application's code. 
+
+TEXT
+);
+            $this->addContent('Horizontal', $directiveList, 'directive');
+        } 
+
+        $composerList = new \Report\Content\ComposerList();
+        $composerList->collect();
+        if ($composerList->hasResults()) {
+            $this->createLevel2('Composer');
+            $this->addContent('Text', <<<TEXT
+This is the list of the classes, interfaces or traits used in the application. 
+TEXT
+);
+            $this->addContent('Horizontal', $composerList, 'composer');
+        }
+
         // List of dynamic calls
         $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCalls');
         $this->createLevel2('Dynamic code');
