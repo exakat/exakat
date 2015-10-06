@@ -1545,3 +1545,11 @@ Add a feature theme, so as to suggest using new features (contrary to incompatib
 Move directives to each extension's folder (apc. => data/apc.ini, under directive)
 
 Display errors in the directives (standard)
+
+Add PHP71 to config.ini
+
+More validation on the docs.
+Publish several versions ? (PDF, text, ..)
+
+Check that the right version of PHP are really used.
+Shall the usage of PHPexec be limited to a specific part of the code ? (Task)
