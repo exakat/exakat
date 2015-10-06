@@ -31,11 +31,12 @@ class Variadic extends TokenAuto {
 
     public function _check() {
         // function x(...$a) {} or functioncall  x(...$a);
-        $this->conditions = array( 0 => array('token' => Variadic::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('atom'  => array('Variable', 'Property', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
-                                                               'Identifier', 'Nsname', 'Boolean', 'Null', 'Functioncall', 'Magicconstant',
-                                                               'Integer', 'Array'))
+        $this->conditions = array( 0 => array('token'    => Variadic::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('atom'     => array('Variable', 'Property', 'Staticproperty', 'Staticmethodcall', 
+                                                                  'Staticconstant','Magicconstant', 'Integer', 'Array', 'Methodcall',
+                                                                  'Identifier', 'Nsname', 'Boolean', 'Null', 'Functioncall')),
+                                   2 => array('notToken' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'))
         );
         
         $this->actions = array('transform'    => array( 0         => 'DROP'),
