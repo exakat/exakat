@@ -1,4 +1,4 @@
-Version 0.3.5 (Mingyue, Coming up)
+Version 0.3.6 (White Bone Demon, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,27 @@ Version 0.3.5 (Mingyue, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.5 (Mingyue, 2015-10-06)
++ Architecture
+    + Reported usage of array constants, improving backward compatibility
+    + Checked running on PHP 7
++ Report
+    + Added Definition annex
+    + Fixed 'version incompatible' report that was mistaken with 'no result'
+    + List all directives being modified in the code
+    + List more directives that should be set for production.
++ Analyzer
+    + Reworked the Themes about compatibility. 
+    + Added many tests for PHP 7.0 compatibility
+    + Sped up UsedMethod analyzer
+    + Added support for PHP 7 feature : Unicode Escape Sequences, New functions/classes/interfaces, Removed Functions, 
++ Tokenizer
+    + Changed processing for Empty PHP code
+    + Support Variable Indirection for both PHP 5 and 7 (depends on exec version)
+    + Avoid ignoring all code when finding External Libraries
+    + Fixed edge cases with declare() when it is conditional.
+    + Support for PHP 7's f()()()
 
 Version 0.3.4 (Qingfeng, 2015-09-28 up)
 + Architecture
