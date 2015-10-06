@@ -117,6 +117,10 @@ if (fullcode.out('NAME').any() == false && fullcode.out('ARGUMENTS').any() == fa
 }
 
 // class name
+if (fullcode.out("NAME").any() == false) {
+    x = g.addVertex(null, [code:'', fullcode: '', atom:'Void', token:'T_VOID', virtual:true, line:fullcode.line]);
+    g.addEdge(fullcode, x, 'NAME');
+}
 fullcode.out("NAME").each{ fullcode.fullcode = fullcode.fullcode + ' ' + it.code;}
 
 // class arguments
