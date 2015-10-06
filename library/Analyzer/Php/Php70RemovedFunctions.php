@@ -40,7 +40,19 @@ class Php70RemovedFunctions extends Analyzer\Common\FunctionUsage {
                                  'set_magic_quotes_runtime',
                                  'call_user_method',
                                  'call_user_method_array',
-                                 'set_socket_blocking');
+                                 'set_socket_blocking',
+                                 'mcrypt_ecb', 
+                                 'mcrypt_cbc', 
+                                 'mcrypt_cfb',
+                                 'mcrypt_ofb',
+                                 'datefmt_set_timezone_id',
+                                 'imagepsbbox',
+                                 'imagepsencodefont',
+                                 'imagepsextendfont',
+                                 'imagepsfreefont',
+                                 'imagepsloadfont',
+                                 'imagepsslantfont',
+                                 'imagepstext' );
         parent::analyze();
     }
 }
