@@ -2450,7 +2450,7 @@ $fullcode;
 
             $fullcodeMethod = $this->fullcode();
             
-            $qactions[] = "
+            $qactions[] = <<<GREMLIN
 /* create a functioncall, and hold the methodcall as property.  */
 
 // build the functioncall
@@ -2474,7 +2474,7 @@ g.addEdge(b1, x, 'NEXT');
 g.addEdge(x, a4, 'NEXT');
 g.addEdge(x, it, 'NAME');
 
-";
+GREMLIN;
             unset($actions['methodToFunctioncall']);
         }
 
@@ -2484,7 +2484,7 @@ g.addEdge(x, it, 'NAME');
 
             $fullcodeMethod = $this->fullcode();
             
-            $qactions[] = "
+            $qactions[] = <<<GREMLIN
 /* create a functioncall, and hold the methodcall as property.  */
 
 // build the functioncall
@@ -2508,7 +2508,7 @@ g.addEdge(b1, x, 'NEXT');
 g.addEdge(x, a4, 'NEXT');
 g.addEdge(x, it, 'NAME');
 
-";
+GREMLIN;
             unset($actions['staticmethodToFunctioncall']);
         }
 

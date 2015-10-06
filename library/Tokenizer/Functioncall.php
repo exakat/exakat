@@ -66,7 +66,8 @@ class Functioncall extends TokenAuto {
         $this->checkAuto();
 
         // functioncall(with arguments or void) that will be in a sequence
-        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+        // No -> or ::, but OK as atoms.
+        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
                                      0 => array('token'     => static::$operatorsWithoutEcho),
                                      1 => array('atom'      => 'none',
                                                 'token'     => 'T_OPEN_PARENTHESIS'),
@@ -169,14 +170,18 @@ if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
     } else {
         fullcode.setProperty('fullcode', s.join("\\\\"));
     }
-} else {
+} else if (fullcode.getProperty('token') == 'T_OBJECT_OPERATOR') {
+    // Do nothing. 
+} else if (fullcode.getProperty('token') == 'T_DOUBLE_COLON') {
+    // Do nothing. 
+} else{
     fullcode.setProperty('fullcode', it.getProperty('code'));
 }
 
 if (fullcode.getProperty('parenthesis') == true) {
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + "(" + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + ")");
+    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + "(" + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + ")");
 } else {
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + "");
+    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + " " + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + "");
 }
 
 fullcode.setProperty("args_count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count());
