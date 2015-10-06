@@ -1536,3 +1536,12 @@ Spot other PHP configurations in the code?
 Minimal PHP configuration (list of enable/with to use in the php ini, so has to have a light PHP)
 Is lighter PHP really faster ? 
 
+Make a better check of phpexec before starting
+
+Check consistency for Array / assoc indexing in database queries. (recommend assoc always)
+
+Add a feature theme, so as to suggest using new features (contrary to incompatibility theme)
+
+Move directives to each extension's folder (apc. => data/apc.ini, under directive)
+
+Display errors in the directives (standard)
