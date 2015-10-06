@@ -1,4 +1,4 @@
-<a href="http://thinkaurelius.com"><img src="http://www.exakat.com/wp-content/uploads/2014/05/logo-exakat.png" alt="Exakat Logo" width="275" /></a>
+<a href="http://exakat.io/"><img src="http://www.exakat.io/wp-content/uploads/2014/05/logo-exakat.png" alt="Exakat Logo" width="275" /></a>
 
 Exakat Static Analyzer
 ======================
@@ -6,12 +6,17 @@ Exakat Static Analyzer
 Exakat is a static analyzer for PHP. It applies the [clear PHP rules](http://github.com/dseguy/clearPHP/) to PHP code and provides a report on violations. 
 
 # Version
-This manual is for Exakt version 0.3.0 (build 190)
+This manual is for Exakat version (0.3.5) \(build 242\)
 
 # Install Exakat
 * [Read the Install for Mac OSX manual](./Installation.osx.md)
 * [Read the Install for Debian manual](./Installation.debian.md)
 * [Read the Generic install](./Installation.generic.md)
+
+# Exakat Configuration
+
+* [Exakat configuration](./Configuration.md)
+
 
 # Check Install
 
@@ -183,4 +188,4 @@ $ rm -rf projects/<name>
 
 Exakat is maintained by [Exakat](http://exakat.io/).
 
-<a href="http://thinkaurelius.com"><img src="http://www.exakat.com/wp-content/uploads/2014/05/logo-exakat.png" alt="Exakat Logo" width="275" /></a>
+<a href="http://exakat.io"><img src="http://www.exakat.io/wp-content/uploads/2014/05/logo-exakat.png" alt="Exakat Logo" width="275" /></a>
