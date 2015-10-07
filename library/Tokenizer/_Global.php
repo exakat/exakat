@@ -29,27 +29,17 @@ class _Global extends TokenAuto {
 
     public function _check() {
     // global $x; (nothing more)
-        $this->conditions = array( 0 => array('token' => _Global::$operators),
+        $this->conditions = array( 0 => array('token' => _Global::$operators,
+                                              'checkForGlobal' => array('Variable', 'String', 'Staticconstant', 'Static', 'Property', 'Array')),
                                    1 => array('atom'  => array('Variable', 'String', 'Staticconstant', 'Static', 'Property', 'Array' )),
-                                   2 => array('token' => 'T_SEMICOLON')
+                                   2 => array('token' => array('T_SEMICOLON', 'T_COMMA'))
                                  );
         
-        $this->actions = array('transform'    => array( 1 => 'GLOBAL'),
+        $this->actions = array('makeGlobal'   => true,
                                'atom'         => 'Global',
                                'cleanIndex'   => true,
                                'addSemicolon' => 'it'
                                );
-        $this->checkAuto();
-
-    // global $x, $y, $z;
-        $this->conditions = array( 0 => array('token'     => _Global::$operators),
-                                   1 => array('atom'      => 'Arguments'),
-                                   2 => array('filterOut' => 'T_COMMA'),
-                                 );
-        
-        $this->actions = array('toGlobal'     => true,
-                               'atom'         => 'Global',
-                               'addSemicolon' => 'it');
         $this->checkAuto();
 
         return false;

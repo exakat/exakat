@@ -668,6 +668,32 @@ g.addEdge(a, b, 'NEXT');
             unset($actions['transform']);
         }
 
+        if (isset($actions['makeGlobal'])) {
+            // must be after transform
+            $qactions[] = "
+/* Move arguments to implements */
+
+global = it;
+
+// first and n-1 -th round. 
+while(a2.token == 'T_COMMA') {
+    a1.bothE('NEXT').each{ g.removeEdge(it); }
+    g.addEdge(global, a1, 'GLOBAL');
+    
+    toDelete.push(a2); // drop ,
+    a1 = a2.out('NEXT').next();
+    a2 = a1.out('NEXT').next();
+}
+
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(global, a1, 'GLOBAL');
+
+g.addEdge(it, a2, 'NEXT');
+
+";
+            unset($actions['makeGlobal']);
+        }
+
         if (isset($actions['toImplements'])) {
             // must be after transform
             $qactions[] = "
@@ -675,11 +701,7 @@ g.addEdge(a, b, 'NEXT');
 
 classe = it;
 
-// first round. 
-//a2.bothE.each{ g.removeEdge(it); }
-//g.addEdge(classe, a2, 'IMPLEMENTS');
-
-// second and n-1 -th round. 
+// first and n-1 -th round. 
 while(a3.token != 'T_OPEN_CURLY') {
     a2.bothE('NEXT').each{ g.removeEdge(it); }
     g.addEdge(classe, a2, 'IMPLEMENTS');
@@ -2787,6 +2809,24 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             unset($conditions['checkForString']);
         }
 
+        if (isset($conditions['checkForGlobal'])) {
+            if (is_array($conditions['checkForGlobal'])) {
+                $classes = "'".implode("', '", $conditions['checkForGlobal'])."'";
+            } else {
+                $classes = "'".$conditions['checkForGlobal']."'";
+            }
+
+            $finalTokens = "'T_SEMICOLON'";
+            $queryConditions[] = <<<GREMLIN
+filter{
+    it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
+    .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any() 
+                             }
+GREMLIN;
+
+            unset($conditions['checkForGlobal']);
+        }
+        
         if (isset($conditions['checkForImplements'])) {
             if (is_array($conditions['checkForImplements'])) {
                 $classes = "'".implode("', '", $conditions['checkForImplements'])."'";

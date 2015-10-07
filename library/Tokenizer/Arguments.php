@@ -40,7 +40,7 @@ class Arguments extends TokenAuto {
                            'Include', 'Instanceof', 'Yield', 'Staticclass', 'Spaceship',
                            'Coalesce');
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_STATIC', 'T_GLOBAL',
+        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_STATIC', 
                                                                  'T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT',
                                                                  'T_SEMICOLON', 'T_CONST', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                  'T_FUNCTION', 'T_VARIABLE')),
