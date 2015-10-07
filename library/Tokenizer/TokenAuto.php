@@ -680,6 +680,7 @@ global = it;
 // first and n-1 -th round. 
 while(a2.token == 'T_COMMA') {
     a1.bothE('NEXT').each{ g.removeEdge(it); }
+    a1.bothE('INDEXED').each{ g.removeEdge(it); }
     g.addEdge(global, a1, '$link');
     
     toDelete.push(a2); // drop ,
@@ -688,7 +689,38 @@ while(a2.token == 'T_COMMA') {
 }
 
 a1.bothE('NEXT').each{ g.removeEdge(it); }
+a1.bothE('INDEXED').each{ g.removeEdge(it); }
 g.addEdge(global, a1, '$link');
+
+g.addEdge(it, a2, 'NEXT');
+
+";
+            unset($actions['makeFromList']);
+        }
+
+        if (isset($actions['makePpp'])) {
+            
+            // must be after transform
+            $qactions[] = "
+/* Move arguments under the keyword (IMPLEMENT, CONST) */
+
+global = it;
+link = it.code.toUpperCase();
+
+// first and n-1 -th round. 
+while(a2.token == 'T_COMMA') {
+    a1.bothE('NEXT').each{ g.removeEdge(it); }
+    a1.bothE('INDEXED').each{ g.removeEdge(it); }
+    g.addEdge(global, a1, link);
+    
+    toDelete.push(a2); // drop ,
+    a1 = a2.out('NEXT').next();
+    a2 = a1.out('NEXT').next();
+}
+
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+a1.bothE('INDEXED').each{ g.removeEdge(it); }
+g.addEdge(global, a1, link);
 
 g.addEdge(it, a2, 'NEXT');
 

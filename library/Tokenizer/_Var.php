@@ -29,47 +29,32 @@ class _Var extends TokenAuto {
 
     public function _check() {
     // class x { var $x }
-        $this->conditions = array( 0 => array('token' => _Var::$operators),
-                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static' )),
-                                   2 => array('filterOut' => array('T_EQUAL', 'T_COMMA'))
-                                 );
-        
-        $this->actions = array('to_ppp'       => 1,
-                               'atom'         => 'Var',
-                               'addSemicolon' => 'x',
-                               'cleanIndex'   => true
-                               );
-        $this->checkAuto();
-
     // class x { var $x = 2 }
-        $this->conditions = array( 0 => array('token' => _Var::$operators),
-                                   1 => array('atom' => 'Assignation'),
-                                   2 => array('token' => array('T_SEMICOLON')),
+    // class x { var $x, $y }
+        $allowedAtoms = array('Assignation', 'Variable');
+        $this->conditions = array( 0 => array('token'    => static::$operators,
+                                              'checkFor' => $allowedAtoms),
+                                   1 => array('atom'     => $allowedAtoms),
+                                   2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),
                                  );
         
-        $this->actions = array('to_ppp_assignation' => true,
-                               'atom'               => 'Var',
-                               'addSemicolon'       => 'x'
+        $this->actions = array('makeFromList' => 'VAR',
+                               'atom'         => 'Var',
                                );
 
-        $this->checkAuto();
-
-    // class x { var $x, $y }
-        $this->conditions = array( 0 => array('token'     => _Var::$operators),
-                                   1 => array('atom'      => 'Arguments'),
-                                   2 => array('filterOut' => array('T_COMMA')),
-                                 );
-        
-        $this->actions = array('toVarNew'   => 'Var',
-                               'atom'       => 'Var');
         $this->checkAuto();
 
         return false;
     }
 
     public function fullcode() {
-        $token = new _Function();
-        return $token->fullcode();
+        return <<<GREMLIN
+
+s=[];
+fullcode.out('VAR').each{ s.add(it.fullcode);}
+fullcode.setProperty('fullcode', 'var ' + s.join(', '));
+
+GREMLIN;
     }
 }
 ?>
