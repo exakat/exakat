@@ -668,24 +668,37 @@ g.addEdge(a, b, 'NEXT');
             unset($actions['transform']);
         }
 
-        if (isset($actions['arg2implement'])) {
+        if (isset($actions['toImplements'])) {
             // must be after transform
             $qactions[] = "
 /* Move arguments to implements */
 
-if (it.out('IMPLEMENTS').out('ARGUMENT').any()) {
-    classe = it;
-    impl = it.out('IMPLEMENTS').next();
-    impl.out('ARGUMENT').each{
-        g.addEdge(classe, it, 'IMPLEMENTS');
-    }
+classe = it;
 
-    impl.outE('ARGUMENT').{ g.removeEdge(it); }
-    g.removeVertex(impl);
+// first round. 
+//a2.bothE.each{ g.removeEdge(it); }
+//g.addEdge(classe, a2, 'IMPLEMENTS');
+
+// second and n-1 -th round. 
+while(a3.token != 'T_OPEN_CURLY') {
+    a2.bothE('NEXT').each{ g.removeEdge(it); }
+    g.addEdge(classe, a2, 'IMPLEMENTS');
+    
+    toDelete.push(a3); // drop ,
+    a2 = a3.out('NEXT').next();
+    a3 = a2.out('NEXT').next();
 }
 
+a2.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(classe, a2, 'IMPLEMENTS');
+
+g.addEdge(it, a3, 'NEXT');
+
+a1.bothE.each{ g.removeEdge(it); }
+toDelete.push(a1); // drop IMPLEMENT
+
 ";
-            unset($actions['arg2implement']);
+            unset($actions['toImplements']);
         }
         
         if (isset($actions['makeBlock'])) {
@@ -2774,6 +2787,24 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             unset($conditions['checkForString']);
         }
 
+        if (isset($conditions['checkForImplements'])) {
+            if (is_array($conditions['checkForImplements'])) {
+                $classes = "'".implode("', '", $conditions['checkForImplements'])."'";
+            } else {
+                $classes = "'".$conditions['checkForImplements']."'";
+            }
+
+            $finalTokens = "'T_OPEN_CURLY'";
+            $queryConditions[] = <<<GREMLIN
+filter{
+    it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
+    .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any() 
+                             }
+GREMLIN;
+
+            unset($conditions['checkForImplements']);
+        }
+        
         if (isset($conditions['checkForArguments'])) {
             if (is_array($conditions['checkForArguments'])) {
                 $classes = "'".implode("', '", $conditions['checkForArguments'])."'";

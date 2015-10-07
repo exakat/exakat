@@ -72,17 +72,15 @@ class _Class extends TokenAuto {
 
     // class x implements a {} get the implements
         $this->conditions = array( 0 => array('token'     => _Class::$operators),
-                                   1 => array('token'     => 'T_IMPLEMENTS'),
-                                   2 => array('atom'      => array('Identifier', 'Nsname', 'Arguments')),
-                                   3 => array('filterOut' => array('T_COMMA', 'T_NS_SEPARATOR'))
+                                   1 => array('token'     => 'T_IMPLEMENTS',
+                                              'checkForImplements' => array('Identifier', 'Nsname')),
+                                   2 => array('atom'      => array('Identifier', 'Nsname')),
+                                   3 => array('token'     => array('T_COMMA', 'T_OPEN_CURLY'))
                                  );
         
-        $this->actions = array('transform'     => array( 1 => 'DROP',
-                                                         2 => 'IMPLEMENTS'),
-                               'property'      => array('rank' => 0),
-                               'arg2implement' => true,
-                               'keepIndexed'   => true,
-                               'cleanIndex'    => true
+        $this->actions = array('toImplements' => true,
+                               'keepIndexed'  => true,
+                               'cleanIndex'   => true
                                );
         $this->checkAuto();
 

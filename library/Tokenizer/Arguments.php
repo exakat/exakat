@@ -60,7 +60,7 @@ class Arguments extends TokenAuto {
         $this->checkAuto();
 
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token'   => array('T_IMPLEMENTS', 'T_EXTENDS', 'T_USE')),
+        $this->conditions = array(-2 => array('token'   => 'T_USE'),
                                   -1 => array('atom'    => 'yes'),
                                    0 => array('token'   => Arguments::$operators,
                                               'atom'    => 'none'),
@@ -72,6 +72,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('to_argument' => true,
                                'atom'        => 'Arguments');
         $this->checkAuto();
+        
         return false;
     }
 
