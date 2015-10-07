@@ -49,7 +49,7 @@ abstract class TokenAuto extends Token {
 
         if (in_array($class, array('FunctioncallArray'))) {
             $query .= 'g.idx("racines")[["token":"S_ARRAY"]].out("INDEXED")'.$moderator;
-        } elseif (in_array($class, array('Staticclass','Staticconstant','Staticmethodcall','Staticproperty'))) {
+        } elseif (in_array($class, array('Staticconstant','Staticmethodcall','Staticproperty'))) {
             $query .= 'g.idx("racines")[["token":"Staticproperty"]].out("INDEXED")'.$moderator;
         } elseif (in_array($class, array('Property','Methodcall'))) {
             $query .= 'g.idx("racines")[["token":"Property"]].out("INDEXED")'.$moderator;

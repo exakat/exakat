@@ -1097,14 +1097,15 @@ class Load extends Tasks {
                                 $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                             }
                         } elseif ($token_value == 'T_DOUBLE_COLON') {
-                             $regexIndex['Staticproperty']->relateTo($T[$Tid], 'INDEXED')->save();
+                            if (is_array($tokens[$id + 1]) &&
+                                $this->php->getTokenName($tokens[$id + 1][0]) == 'T_CLASS') {
+                                $regexIndex['Staticclass']->relateTo($T[$Tid], 'INDEXED')->save();
+                            } else {
+                                $regexIndex['Staticproperty']->relateTo($T[$Tid], 'INDEXED')->save();
+                            }
                         } elseif ($token_value == 'T_OBJECT_OPERATOR') {
                              $regexIndex['Property']->relateTo($T[$Tid], 'INDEXED')->save();
-                        } /*elseif ($token_value == 'T_COLON') {
-                            if (!$T[$Tid]->hasProperty('association')) {
-                                $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
-                            }
-                        } */ else {
+                        } else {
                             $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                         }
                     }

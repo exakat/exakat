@@ -243,7 +243,7 @@ class Token {
 
     public function checkRemaining() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
-        if (in_array($class, array('Staticclass','Staticconstant','Staticmethodcall','Staticproperty'))) {
+        if (in_array($class, array('Staticconstant','Staticmethodcall','Staticproperty'))) {
             $query = "g.idx('racines')[['token':'Staticproperty']].out('INDEXED').any()";
             return gremlin_queryOne($query);
         } elseif (in_array($class, array('Property','Methodcall'))) {
