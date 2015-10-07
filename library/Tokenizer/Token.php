@@ -28,23 +28,23 @@ class Token {
     
     // the numeric indices are NOT important for processing order
     // the order of this array is important for processing and optimization
-    protected static $types = array ( 0 => 'Variable',
-                                      2 => 'VariableDollar',
-                                      3 => 'Boolean',
-                                      4 => 'Sign',
+    protected static $types = array ( 0  => 'Variable',
+                                      2  => 'VariableDollar',
+                                      3  => 'Boolean',
+                                      4  => 'Sign',
                                       19 => '_Break',
                                       21 => 'Label',
                                       22 => '_Goto',
-                                      5 => '_Array',
+                                      5  => '_Array',
                                       24 => '_Global',
-                                      6 => '_String',
+                                      6  => '_String',
                                       59 => 'Shell',
-                                      7 => '_Arraydollarcurly',
-                                      8 => 'Property',
+                                      7  => '_Arraydollarcurly',
+                                      8  => 'Property',
                                       80 => 'Phpcodemiddle',
                                       31 => 'Postplusplus',
                                       30 => 'Preplusplus',
-                                      9 => 'Keyvalue',
+                                      9  => 'Keyvalue',
                                       62 => '_Abstract',
                                       50 => '_Static',
                                       85 => '_Final',
@@ -77,7 +77,7 @@ class Token {
                                       36 => 'ArgumentsNoParenthesis',
                                       37 => 'ArgumentsNoComma',
                                       33 => 'Parenthesis',
-                                      1 => 'Halt',
+                                      1  => 'Halt',
                                       39 => 'Functioncall',
                                       40 => 'FunctioncallArray',
                                       41 => 'Methodcall',
@@ -323,21 +323,27 @@ g.V.has('index', true).filter{it.out().count() == 0}.each{
 // calculating the full namespaces paths
 //////////////////////////////////////////////////////////////////////////////////////////
 // const in a namespace (and not a class)
-g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom =='Namespace'}.each{
+g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.sideEffect{fullcode = it;}
+.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom =='Namespace'}.each{
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().fullcode.toLowerCase());
+        fullnspath = '\\\\' ; //+ fullcode.out('NAME').next().fullcode.toLowerCase();
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('NAME').next().fullcode.toLowerCase());
+        fullnspath = it.fullnspath + '\\\\';
+        //'\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('LEFT').next().fullcode.toLowerCase();
     }
-
-    g.idx('constants').put('path', fullcode.fullnspath, it)
+    
+    fullcode.out('CONST').each{ 
+        it.setProperty('fullnspath', fullnspath + it.out('LEFT').next().code.toLowerCase());
+        g.idx('constants').put('path', fullnspath + it.out('LEFT').next().code.toLowerCase(), it)
+    }
 };
-
+", "
 // const without class nor namspace (aka, global)
 g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.each{
-    it.setProperty('fullnspath', '\\\\' + it.out('NAME').next().fullcode.toLowerCase());
-
-    g.idx('constants').put('path', it.fullnspath, it)
+    it.out('CONST').each{ 
+        it.setProperty('fullnspath', '\\\\' + it.out('LEFT').next().fullcode.toLowerCase());
+        g.idx('constants').put('path', '\\\\' + it.out('LEFT').next().fullcode.toLowerCase(), it)
+    }
 };
 ", "
 // Const (out of a class) with define

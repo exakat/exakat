@@ -668,17 +668,19 @@ g.addEdge(a, b, 'NEXT');
             unset($actions['transform']);
         }
 
-        if (isset($actions['makeGlobal'])) {
+        if (isset($actions['makeFromList'])) {
+            $link = $actions['makeFromList'];
+            
             // must be after transform
             $qactions[] = "
-/* Move arguments to implements */
+/* Move arguments under the keyword (IMPLEMENT, CONST) */
 
 global = it;
 
 // first and n-1 -th round. 
 while(a2.token == 'T_COMMA') {
     a1.bothE('NEXT').each{ g.removeEdge(it); }
-    g.addEdge(global, a1, 'GLOBAL');
+    g.addEdge(global, a1, '$link');
     
     toDelete.push(a2); // drop ,
     a1 = a2.out('NEXT').next();
@@ -686,12 +688,12 @@ while(a2.token == 'T_COMMA') {
 }
 
 a1.bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(global, a1, 'GLOBAL');
+g.addEdge(global, a1, '$link');
 
 g.addEdge(it, a2, 'NEXT');
 
 ";
-            unset($actions['makeGlobal']);
+            unset($actions['makeFromList']);
         }
 
         if (isset($actions['toImplements'])) {
@@ -752,82 +754,6 @@ it.out('$link').each{
             }
             unset($actions['makeBlock']);
         }
-
-        if (isset($actions['to_const_assignation'])) {
-            $fullcode = $this->fullcode();
-            
-            $qactions[] = "
-/* to const with arguments or not */
-
-assignation = it.out('NEXT').next();
-g.addEdge(it, assignation.out('LEFT').next(), 'NAME');
-g.addEdge(it, assignation.out('RIGHT').next(), 'VALUE');
-g.removeEdge(assignation.outE('LEFT').next());
-g.removeEdge(assignation.outE('RIGHT').next());
-
-g.addEdge(it, assignation.out('NEXT').next(), 'NEXT');
-
-assignation.bothE('NEXT').each{ g.removeEdge(it); }
-g.removeVertex(assignation);
-
-";
-            unset($actions['to_const_assignation']);
-        }
-        
-        if (isset($actions['to_const'])) {
-            $sequence = new Sequence();
-            $fullCodeSequence = $sequence->fullcode();
-            $fullcode = $this->fullcode();
-            
-            $qactions[] = "
-/* transform to const a=1 ,  b=2 => const a=1; const b=2 */
-
-sequence = g.addVertex(null, [code:';', fullcode:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
-
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');
-
-fullcode = sequence;
-$fullCodeSequence
-
-_const = it;
-arg = _const.out('NEXT').next();
-
-g.addEdge(_const.in('NEXT').next(), sequence, 'NEXT');
-g.addEdge(sequence, _const.out('NEXT').out('NEXT').out('NEXT').next(), 'NEXT');
-toDelete.push(_const.out('NEXT').out('NEXT').next());
-
-g.removeEdge(_const.out('NEXT').out('NEXT').outE('NEXT').next());
-g.removeEdge(_const.out('NEXT').outE('NEXT').next());
-_const.bothE('NEXT').each{ g.removeEdge(it); }
-
-arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true, line:it.line]);
-    x.setProperty('rank', it.rank);
-
-    fullcode = x;
-    
-    g.addEdge(sequence, x, 'ELEMENT');
-
-    /* indexing */
-    g.idx('atoms').put('atom', 'Const', x);
-
-    g.addEdge(x, it.out('LEFT').next(), 'NAME');
-    g.addEdge(x, it.out('RIGHT').next(), 'VALUE');
-    g.removeEdge(it.outE('LEFT').next());
-    g.removeEdge(it.outE('RIGHT').next());
-    g.removeEdge(it.inE('ARGUMENT').next());
-
-    $fullcode
-    
-    toDelete.push(it);
-}
-
-toDelete.push(arg);
-toDelete.push(it);
-
-";
-            unset($actions['to_const']);
-}
 
         if (isset($actions['createSequenceForCaseWithoutSemicolon'])) {
             $sequence = new Sequence();
@@ -2809,11 +2735,11 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             unset($conditions['checkForString']);
         }
 
-        if (isset($conditions['checkForGlobal'])) {
-            if (is_array($conditions['checkForGlobal'])) {
-                $classes = "'".implode("', '", $conditions['checkForGlobal'])."'";
+        if (isset($conditions['checkFor'])) {
+            if (is_array($conditions['checkFor'])) {
+                $classes = "'".implode("', '", $conditions['checkFor'])."'";
             } else {
-                $classes = "'".$conditions['checkForGlobal']."'";
+                $classes = "'".$conditions['checkFor']."'";
             }
 
             $finalTokens = "'T_SEMICOLON'";
@@ -2824,7 +2750,7 @@ filter{
                              }
 GREMLIN;
 
-            unset($conditions['checkForGlobal']);
+            unset($conditions['checkFor']);
         }
         
         if (isset($conditions['checkForImplements'])) {
