@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              inFunctionScope
+            Label : CONSTANT
+              class
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
+        Label : CLASS
+          inGlobalScope
+        Label : CONSTANT
+          class
+  Label : ELEMENT
+    trait
+    Label : NAME
+      t
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          tx
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  inTraitMethodScope
+                Label : CONSTANT
+                  class

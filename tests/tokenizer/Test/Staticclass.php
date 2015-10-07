@@ -7,9 +7,11 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Staticclass extends Tokenizer {
-    /* 2 methods */
+    /* 4 methods */
 
     public function testStaticclass01()  { $this->generic_test('Staticclass.01'); }
     public function testStaticclass02()  { $this->generic_test('Staticclass.02'); }
+    public function testStaticclass03()  { $this->generic_test('Staticclass.03'); }
+    public function testStaticclass04()  { $this->generic_test('Staticclass.04'); }
 }
 ?>
