@@ -53,8 +53,7 @@ class Tokenizer extends Tasks {
     
             $r = \Tokenizer\Token::getInstance($new, $config->phpversion);
             if ($r === null) {
-                display("Ignore $new (Version incompatible)\n");
-                // ignore
+                // ignore but should throw an exception ? 
             } elseif ($new == 'Tokenizer\\FunctioncallArray') {
                 $regex[$class] = $r;
             } elseif ($new == 'Tokenizer\\Sequence') {
@@ -66,7 +65,7 @@ class Tokenizer extends Tasks {
                     $regex[$class] = $r;
                 }
             } else {
-                display("Ignore $new (No token to process)\n");
+//                display("Ignore $new (No token to process)\n");
             }
         }
 
