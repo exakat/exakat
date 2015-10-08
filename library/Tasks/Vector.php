@@ -62,7 +62,8 @@ g.idx('atoms')[['atom':'Foreach']]
              'IsKeyIndex':IsKeyIndex,
              'IsUnset':IsUnset,
              'IsKeyModify':IsKeyModify,
-             'File':theFile];}
+             'File':theFile,
+             'Line':it.line];}
 
 GREMLIN
 );
