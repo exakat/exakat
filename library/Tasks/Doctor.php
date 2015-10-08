@@ -351,6 +351,16 @@ INI;
             }
         }
 
+        // git
+        $res = trim(shell_exec('git --version 2>&1'));
+        if (preg_match('/git version ([0-9\.]+)/', $res, $r)) {//
+            $stats['git']['installed'] = 'Yes';
+            $stats['git']['version'] = $r[1];
+        } else {
+            $stats['git']['installed'] = 'No';
+            $stats['git']['optional'] = 'Yes';
+        }
+
         // hg
         $res = trim(shell_exec('hg --version 2>&1'));
         if (preg_match('/Mercurial Distributed SCM \(version ([0-9\.]+)\)/', $res, $r)) {//
