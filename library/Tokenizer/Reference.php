@@ -54,9 +54,11 @@ class Reference extends TokenAuto {
         // special case for Stdclass &$x =
         $this->conditions = array(-2 => array('filterOut' => 'T_DOUBLE_COLON'),
                                   -1 => array('token'     => 'T_STRING',
-                                              'atom'      => 'none'),
-                                   0 => array('token'     => Reference::$operators,
-                                              'atom'      => 'none'),
+                                              //'atom'      => 'none'
+                                              ),
+                                   0 => array('token'     => static::$operators,
+                                              'atom'      => 'none',
+                                              'property'  => array('isFunctionDefinition' => true)),
                                    1 => array('atom'      => 'Variable'),
                                    2 => array('token'     => array('T_COMMA', 'T_EQUAL', 'T_CLOSE_PARENTHESIS'))
         );
@@ -69,7 +71,7 @@ class Reference extends TokenAuto {
         // special case for &function x()
         $this->conditions = array(-1 => array('token' => 'T_FUNCTION',
                                               'atom'  => 'none'),
-                                  0 => array('token'  => Reference::$operators),
+                                  0 => array('token'  => static::$operators),
                                   1 => array('atom'   => 'Identifier'),
                                   2 => array('token'  => 'T_OPEN_PARENTHESIS'),
                                   3 => array('atom'   => 'Arguments'),

@@ -48,7 +48,8 @@ class Cypher {
     
     const ATTRIBUTES = array('index',    'root',      'hidden',      'association', 'in_for',
                              'in_quote', 'delimiter', 'noDelimiter', 'rank',        'fullcode',
-                             'block',    'bracket',   'filename',    'tag',         'atom');
+                             'block',    'bracket',   'filename',    'tag',         'atom',
+                             'isFunctionDefinition');
     
     public function __construct() {
         $this->config = \Config::factory();
@@ -103,11 +104,12 @@ CYPHER;
             
             if ($attribute == 'rank') {
                 $toAttribute = 'toInt(csvLine.rank)';
-            } elseif (in_array($attribute, array('index', 'hidden', 'in_quote', 'bracket', 'block', 'in_for', 'root'))) {
+            } elseif (in_array($attribute, array('index', 'hidden', 'in_quote', 'isFunctionDefinition', 'bracket', 'block', 'in_for', 'root'))) {
                 $toAttribute = '(csvLine.'.$attribute.' = "true")';
             } else {
                 $toAttribute = "csvLine.$attribute";
             }
+            
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 200
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.$attribute.csv" AS csvLine
@@ -118,7 +120,6 @@ CYPHER;
             try {
                 cypher_query($queryTemplate);
             } catch (\Exception $e) {
-
                 die("Couldn't load nodes attributes '".$attribute."' in the database\n Exception : ".$e->getMessage()."\n");
             }
         }

@@ -38,8 +38,8 @@ class _Var extends TokenAuto {
                                    2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),
                                  );
         
-        $this->actions = array('makeFromList' => 'VAR',
-                               'atom'         => 'Var',
+        $this->actions = array('makePpp' => true,
+                               'atom'    => 'Var',
                                );
 
         $this->checkAuto();

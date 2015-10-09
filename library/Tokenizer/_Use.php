@@ -28,92 +28,96 @@ class _Use extends TokenAuto {
     static public $atom = 'Use';
 
     public function _check() {
-    // use \a\b;
-        $this->conditions = array( 0 => array('token' => _Use::$operators),
-                                   1 => array('atom'  => array('Nsname', 'Identifier', 'As')),
-                                   2 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG')));
-        
-        $this->actions = array('transform'    => array( 1 => 'USE'),
-                               'atom'         => 'Use',
-                               'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
-        $this->checkAuto();
-
-    // use \b\c, \a\c;
-        $this->conditions = array( 0 => array('token'    => _Use::$operators),
-                                   1 => array('atom'     => 'Arguments'),
-                                   2 => array('token'    => array('T_SEMICOLON', 'T_CLOSE_TAG'),
-                                              'atom'     => 'none')
+    // use \a\b {} (grouping)
+        $this->conditions = array( 0 => array('token'     => static::$operators),
+                                   1 => array('atom'      => array('Identifier', 'Nsname')),
+                                   2 => array('token'     => 'T_OPEN_CURLY'),
+                                   3 => array('atom'      => array('Identifier', 'As', 'Nsname')),
+                                   4 => array('token'     => array('T_COMMA', 'T_CLOSE_CURLY')),
                                  );
         
-        $this->actions = array('toUse'        => true,
-                               'atom'         => 'Use',
-                               'addSemicolon' => 'it' );
+        $this->actions = array('makeGroupedUse' => true,
+                               'atom'           => 'Use'
+                               );
         $this->checkAuto();
+
+    // use \a\b;
+        $this->conditions = array( 0 => array('token'     => static::$operators,
+                                              'checkFor'  => array('Identifier', 'Nsname', 'As')),
+                                   1 => array('atom'      => array('Identifier', 'Nsname', 'As')),
+                                   2 => array('token'     => array('T_COMMA', 'T_OPEN_CURLY', 'T_SEMICOLON'))
+                                 );
+        
+        $this->actions = array('makeFromList' => 'USE',
+                               'atom'         => 'Use',
+                               'keepIndexed'  => true,
+                               'cleanIndex'   => true
+                               );
+        $this->checkAuto();
+
+    // use \a\b {} (Not grouping, detailing imported methods/constants)
+        $this->conditions = array( 0 => array('token'     => static::$operators,
+                                              'atom'      => 'yes'),
+                                   1 => array('token'     => 'T_OPEN_CURLY'),
+                                   2 => array('atom'      => array('Sequence', 'Void')),
+                                   3 => array('token'     => 'T_CLOSE_CURLY'),
+                                 );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'BLOCK',
+                                                       3 => 'DROP'),
+                               'addAlwaysSemicolon' => 'it',
+                               'makeBlock'    => 'BLOCK',
+                               'cleanIndex'   => true
+                               );
+        $this->checkAuto();
+
+    // use function|const \a\b{}; with grouping
+        $this->conditions = array(  0 => array('token' => static::$operators),
+                                    1 => array('token' => array('T_FUNCTION', 'T_CONST')),
+                                    2 => array('atom'  => array('Identifier', 'Nsname')),
+                                    3 => array('token' => 'T_OPEN_CURLY'),
+                                    4 => array('atom'  => array('Identifier', 'Nsname', 'As')),
+                                    5 => array('token' => array('T_COMMA', 'T_CLOSE_CURLY')),
+                                 );
+        
+        $this->actions = array('makeGroupedUse' => true,
+                               'atom'           => 'Use'
+                               );
+        $this->checkAuto();
+        
+
 
     // use const \a\b;
-        $this->conditions = array( 0 => array('token' => _Use::$operators),
-                                   1 => array('token' => array('T_CONST', 'T_FUNCTION')),
-                                   2 => array('atom'  => array('Nsname', 'Identifier', 'As')),
-                                   3 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
-                                              'atom'  => 'none')
+        $this->conditions = array(  0 => array('token'        => _Use::$operators,
+                                               'checkNextFor' => array('Identifier', 'Nsname', 'As')),
+                                    1 => array('token'        => _Const::$operators),
+                                    2 => array('atom'         => array('Identifier', 'Nsname', 'As')),
+                                    3 => array('token'        => array('T_COMMA', 'T_OPEN_CURLY', 'T_SEMICOLON'))
                                  );
         
-        $this->actions = array('toUseConst'   => true,
-                               'atom'         => 'Use',
-                               'cleanIndex'   => true,
-                               'addSemicolon' => 'it'
+        $this->actions = array('makeNextFromList' => 'CONST',
+                               'atom'             => 'Use',
+                               'keepIndexed'      => true,
+                               'cleanIndex'       => true,
                                );
         $this->checkAuto();
 
-    // use const \b\c, \a\c;
-        $this->conditions = array( 0 => array('token' => _Use::$operators),
-                                   1 => array('token' => array('T_CONST', 'T_FUNCTION')),
-                                   2 => array('atom'  => 'Arguments'),
-                                   3 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
-                                              'atom'  => 'none')
+    // use function \a\b;
+        $this->conditions = array(  0 => array('token'        => _Use::$operators,
+                                               'checkNextFor' => array('Identifier', 'Nsname', 'As')),
+                                    1 => array('token'        => _Function::$operators),
+                                    2 => array('atom'         => array('Identifier', 'Nsname', 'As')),
+                                    3 => array('token'        => array('T_COMMA', 'T_OPEN_CURLY', 'T_SEMICOLON'))
                                  );
         
-        $this->actions = array('toUse'        => true,
-                               'atom'         => 'Use',
-                               'addSemicolon' => 'it' );
-        $this->checkAuto();
-
-    // use A { B as C; }
-        $this->conditions = array( 0 => array('token'    => _Use::$operators),
-                                   1 => array('atom'     => array('Nsname', 'Identifier')),
-                                   2 => array('token'    => 'T_OPEN_CURLY',
-                                              'property' => array('association' => 'Use')),
-                                   3 => array('atom'     => array('Sequence', 'Void')),
-                                   4 => array('token'    => 'T_CLOSE_CURLY'),
-                                 );
-        
-        $this->actions = array('transform'  => array( 1 => 'USE',
-                                                      2 => 'DROP',
-                                                      3 => 'BLOCK',
-                                                      4 => 'DROP',
-                                                      ),
-                               'atom'       => 'Use',
-                               'cleanIndex' => true,
-                               'addAlwaysSemicolon' => 'it'
+        $this->actions = array('makeNextFromList' => 'FUNCTION',
+                               'atom'             => 'Use',
+                               'keepIndexed'      => true,
+                               'cleanIndex'       => true,
                                );
         $this->checkAuto();
 
-    // use A,B {};
-        $this->conditions = array( 0 => array('token'    => _Use::$operators),
-                                   1 => array('atom'     => 'Arguments'),
-                                   2 => array('token'    => 'T_OPEN_CURLY',
-                                              'property' => array('association' => 'Use')),
-                                   3 => array('atom'     => array('Sequence', 'Void')),
-                                   4 => array('token'    => 'T_CLOSE_CURLY'),
-                                 );
-        
-        $this->actions = array('toUseBlock'   => true,
-                               'atom'         => 'Use',
-                               'cleanIndex'   => true,
-                               'addAlwaysSemicolon' => 'it'  );
-        $this->checkAuto();
-        
         return false;
     }
 
@@ -125,13 +129,22 @@ fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{
     a = it.getProperty('fullcode');
     s.add(a);
 };
+
 if (fullcode.out('FUNCTION').any()) {
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " function " + s.join(", "));
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " function ");
 } else if (it.out('CONST').any()) {
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " const " + s.join(", "));
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " const ");
 } else {
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + s.join(", "));
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " ");
 }
+
+if (fullcode.groupedUse == true) {
+    fullcode.fullcode = fullcode.fullcode + fullcode.groupPath + "{ " + s.join(", ") + " }";
+} else {
+    fullcode.fullcode = fullcode.fullcode + s.join(", ");
+}
+
+
 
 // use a (aka c);
 fullcode.out('USE').has('atom', 'Identifier').each{
@@ -142,7 +155,7 @@ fullcode.out('USE').has('atom', 'Identifier').each{
     it.setProperty('originalias', it.code);
 }
 
-// use a\b\c (aka c);
+// use a\b\c as c (aka c);
 fullcode.out('USE').has('atom', 'As').each{
     s = [];
     it.out("SUBNAME").sort{it.rank}._().each{
@@ -190,6 +203,9 @@ fullcode.out('FUNCTION', 'CONST').each{
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
     };
+    if (s.size() == 0) {
+        s = [it.code];
+    }
     if (it.absolutens == true) {
         it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s[s.size() - 1]);

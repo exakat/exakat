@@ -28,6 +28,8 @@ class _Final extends TokenAuto {
     static public $atom = 'Final';
 
     public function _check() {
+        $skippable = array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED', 'T_STATIC', 'T_ABSTRACT');
+
     // final class x { final function x() }
         $this->conditions = array( 0 => array('token' => _Final::$operators),
                                    1 => array('token' => array('T_CLASS', 'T_FUNCTION')),
@@ -38,7 +40,7 @@ class _Final extends TokenAuto {
 
     // final class x { final private function x() }
         $this->conditions = array( 0 => array('token' => _Final::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
+                                   1 => array('token' => $skippable),
                                    2 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('toOption' => 2,
@@ -47,8 +49,8 @@ class _Final extends TokenAuto {
 
     // final class x { final private static function x() }
         $this->conditions = array( 0 => array('token' => _Final::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
-                                   2 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
+                                   1 => array('token' => $skippable),
+                                   2 => array('token' => $skippable),
                                    3 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('toOption' => 3,

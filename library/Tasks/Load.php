@@ -661,6 +661,8 @@ class Load extends Tasks {
                     ++$block_level;
                 }
 
+                $this->processComma($token[3]);
+
                 if ($token[3] == 'T_OPEN_CURLY') {
                     $token[3] = 'T_CURLY_OPEN';
                 }
@@ -811,10 +813,11 @@ class Load extends Tasks {
                 } elseif ($token == '(' && $tokens[$id + 1] == ')' &&
                           $this->php->getTokenname($tokens[$id - 1][0]) != 'T_HALT_COMPILER') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
-                                                  ->setProperty('code', $token)
-                                                  ->setProperty('line', $line)
-                                                  ->save();
-                    if ($type = $this->process_parenthesis($token_value)) {
+                                                        ->setProperty('code', $token)
+                                                        ->setProperty('line', $line)
+                                                        ->save();
+                    $this->processComma($token_value);
+                    if ($type = $this->processParenthesis($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     } else {
                         $regexIndex['Parenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
@@ -827,12 +830,12 @@ class Load extends Tasks {
                 
                     ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                  ->setProperty('code', 'void')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('atom', 'Void')
-                                                  ->setProperty('modifiedBy', 'bin/load6')
-                                                  ->save();
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('atom', 'Void')
+                                                        ->setProperty('modifiedBy', 'bin/load6')
+                                                        ->save();
 
                     $to_index = false;
                 } elseif ( ($tokens[$id] == '(' || $tokens[$id] == ';') &&
@@ -840,12 +843,13 @@ class Load extends Tasks {
                                 ( $tokens[$id + 1] == ';' || $tokens[$id + 1] == ')')) {
                         // This must be after the processing of case with ( and ) (right above)
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
-                                                      ->setProperty('code', $token)
-                                                      ->setProperty('line', $line)
-                                                      ->setProperty('modifiedBy', 'bin/load18a')
-                                                      ->save();
-                        // ';' will not be processed by process_parenthesis
-                        if ($type = $this->process_parenthesis($token_value)) {
+                                                            ->setProperty('code', $token)
+                                                            ->setProperty('line', $line)
+                                                            ->setProperty('modifiedBy', 'bin/load18a')
+                                                            ->save();
+                        $this->processComma($token_value);
+                        // ';' will not be processed by processParenthesis
+                        if ($type = $this->processParenthesis($token_value)) {
                             $T[$Tid]->setProperty('association', $type)->save();
                         }
 
@@ -857,12 +861,12 @@ class Load extends Tasks {
                 
                         ++$Tid;
                         $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                        ->setProperty('code', 'void')
-                                                        ->setProperty('fullcode', ' ')
-                                                        ->setProperty('line', $line)
-                                                        ->setProperty('atom', 'Void')
-                                                        ->setProperty('modifiedBy', 'bin/load8b')
-                                                        ->save();
+                                                              ->setProperty('code', 'void')
+                                                              ->setProperty('fullcode', ' ')
+                                                              ->setProperty('line', $line)
+                                                              ->setProperty('atom', 'Void')
+                                                              ->setProperty('modifiedBy', 'bin/load8b')
+                                                              ->save();
                         $to_index = false;
                 } elseif ( $tokens[$id] == ',' &&
                            isset($tokens[$id + 1]) && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ']') {
@@ -979,7 +983,8 @@ class Load extends Tasks {
                                                   ->setProperty('code', $token)
                                                   ->setProperty('line', $line)
                                                   ->save();
-                    if ($type = $this->process_parenthesis($token_value)) {
+                    $this->processComma($token_value);
+                    if ($type = $this->processParenthesis($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     }
 
@@ -988,62 +993,73 @@ class Load extends Tasks {
                 
                     ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                  ->setProperty('code', 'void')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load8')
-                                                  ->setProperty('atom', 'Void')
-                                                  ->save();
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load8')
+                                                        ->setProperty('atom', 'Void')
+                                                        ->save();
 
                     $to_index = false;
                 } elseif ($token == ',' && $tokens[$id + 1] == ')') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
-                                                  ->setProperty('code', $token)
-                                                  ->setProperty('line', $line)
-                                                  ->save();
+                                                        ->setProperty('code', $token)
+                                                        ->setProperty('line', $line)
+                                                        ->save();
 
+                    $this->processComma($token_value);
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
                     ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                  ->setProperty('code', 'void')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load9')
-                                                  ->setProperty('atom', 'Void')
-                                                  ->save();
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load9')
+                                                        ->setProperty('atom', 'Void')
+                                                        ->save();
 
                     $to_index = false;
                 } elseif ($token == ',' && $tokens[$id + 1] == ',') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
-                                                  ->setProperty('code', $token)
-                                                  ->setProperty('line', $line)
-                                                  ->save();
+                                                        ->setProperty('code', $token)
+                                                        ->setProperty('line', $line)
+                                                        ->save();
 
+                    $this->processComma($token_value);
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
                     ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                  ->setProperty('code', 'void')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load10')
-                                                  ->setProperty('atom', 'Void')
-                                                  ->save();
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load10')
+                                                        ->setProperty('atom', 'Void')
+                                                        ->save();
 
                     $to_index = false;
                 } else {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
-                                                  ->setProperty('code', $token) // no fullcode at this level!
-                                                  ->setProperty('line', $line)
-                                                  ->save();
+                                                        ->setProperty('code', $token) // no fullcode at this level!
+                                                        ->setProperty('line', $line)
+                                                        ->save();
                     if ($token == ':') {
                         list($label, $value) = $colonTokens->characterizeToken();
                         $T[$Tid]->setProperty($label, $value)->save();
+                    }
+
+                    if (($rank = $this->processComma($token_value)) !== '') {
+                        if ($token_value === 'T_COMMA') {
+                            $T[$Tid]->setProperty('rank', $rank);
+                        }
+                        if ($rank > 0 && $in_for == 0) {
+                            $to_index = false;
+                        }
                     }
                 }
 
@@ -1080,11 +1096,18 @@ class Load extends Tasks {
                 $T[$Tid]->setProperty('in_for', 'true')->save();
             }
         
-            if (!empty($previous) && $previous->getProperty('token') != 'T_DOUBLE_COLON' && $type = $this->process_blocks($token_value)) {
+            if (!empty($previous) && 
+                $previous->getProperty('token') != 'T_DOUBLE_COLON' && 
+                $type = $this->process_blocks($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
-            if ($type = $this->process_parenthesis($token_value)) {
+
+            if ($type = $this->processParenthesis($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
+            }
+
+            if ($this->processFunctionDefinition($token_value)) {
+                $T[$Tid]->setProperty('isFunctionDefinition', 'true')->save();
             }
 
             // test is for booleans.
@@ -1150,7 +1173,6 @@ class Load extends Tasks {
                                        ->save();
         $fileNode->relateTo($T[0], 'FILE')->save();
 
-    
         $last     = $this->client->makeNode()->setProperty('token', 'T_END')
                                        ->setProperty('code', '/**/')
                                        ->setProperty('line', $line)
@@ -1174,6 +1196,7 @@ class Load extends Tasks {
         if (!empty($this->process_blocks('T_OPEN_PARENTHESIS'))) {
             echo "Alert, all parenthesis were not flushed in '", $filename, "'\n";
         }
+        $this->processComma('T_IGNORE', true);
 
         $this->client->save_chunk();
         display('      memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
@@ -1257,13 +1280,9 @@ class Load extends Tasks {
         return '';
     }
 
-    private function process_parenthesis($tokenValue, $display = false) {
+    private function processParenthesis($tokenValue) {
         static $states = array();
         static $statesId = 0;
-        
-        if ($display) {
-            echo "Display\n", var_dump($states, true);
-        }
         
         if ($tokenValue == 'T_FOR' ) {
             $states[] = 'For';
@@ -1317,6 +1336,107 @@ class Load extends Tasks {
         }
 
         return '';
+    }
+
+    private function processComma($tokenValue, $display = false) {
+        static $echoCount         = 0;
+        static $parenthesisCount  = 0;
+        static $parenthesisId     = 0;
+        static $parenthesisStates = array();
+        static $commaCount        = array();
+        
+        if ($display) {
+            return true;
+            var_dump($parenthesisCount);
+            var_dump($parenthesisId);     
+            print_r($parenthesisStates); 
+            ksort($commaCount);
+            print_r($commaCount);        
+            
+            if (count($parenthesisStates) != $echoCount) {
+                print "Warning : some states are left over!";
+                print "echoCount : $echoCount\n";
+                print_r($parenthesisStates);
+                die();
+            }
+        }
+        
+        if ($tokenValue === 'T_COMMA' ) {
+            if (isset($commaCount[$parenthesisId])) {
+                ++$commaCount[$parenthesisId];
+            } else {
+                $commaCount[$parenthesisId] = 0;
+            }
+            return $commaCount[$parenthesisId];
+        }
+
+        if ($tokenValue === 'T_OPEN_PARENTHESIS' ) {
+            $parenthesisStates[] = $parenthesisId;
+            ++$parenthesisCount;
+            $parenthesisId       = $parenthesisCount;
+            return '';
+        }
+
+        if ($tokenValue === 'T_CLOSE_PARENTHESIS' ) {
+            $parenthesisId = array_pop($parenthesisStates);
+            return '';
+        }
+
+        // Handle cases of arrays [1,2,3]
+        if ($tokenValue === 'T_OPEN_BRACKET' ) {
+            $parenthesisStates[] = $parenthesisId;
+            ++$parenthesisCount;
+            $parenthesisId       = $parenthesisCount;
+            return '';
+        }
+
+        if ($tokenValue === 'T_CLOSE_BRACKET' ) {
+            $parenthesisId = array_pop($parenthesisStates);
+            return '';
+        }
+
+        // Handle cases of echo
+        if ($tokenValue === 'T_ECHO') {
+            $parenthesisStates[] = $parenthesisId;
+            ++$parenthesisCount;
+            $parenthesisId       = $parenthesisCount;
+            ++$echoCount;
+            return '';
+        }
+
+        return '';
+    }
+    
+    private function processFunctionDefinition($tokenValue) {
+        static $inFunction  = false;
+        static $parenthesisLevel = 0;
+        
+        if ($tokenValue === 'T_FUNCTION' ) {
+            $inFunction = true;
+            $parenthesisLevel = 0;
+            return true;
+        }
+        
+        if (!$inFunction) {
+            return false;
+        }
+
+        // Only level 1, deeper means expression
+
+        if ($tokenValue === 'T_OPEN_PARENTHESIS') {
+            ++$parenthesisLevel;
+            return $parenthesisLevel == 1;
+        }
+
+        if ($tokenValue === 'T_CLOSE_PARENTHESIS') {
+            --$parenthesisLevel;
+            if ($parenthesisLevel == 0) {
+                $inFunction = false;
+            }
+            return $parenthesisLevel == 1;
+        }
+        
+        return $parenthesisLevel == 1;
     }
 }
 

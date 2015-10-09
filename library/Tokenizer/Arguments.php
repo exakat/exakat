@@ -41,8 +41,7 @@ class Arguments extends TokenAuto {
                            'Coalesce');
         // @note arguments separated by ,
         $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_STATIC', 
-                                                                 'T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT',
-                                                                 'T_SEMICOLON', 'T_CONST', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
+                                                                 'T_SEMICOLON', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                  'T_FUNCTION', 'T_VARIABLE')),
                                   -1 => array('atom'    => 'yes'),
                                    0 => array('token'   => Arguments::$operators,
@@ -58,7 +57,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('to_argument' => true,
                                'atom'        => 'Arguments');
         $this->checkAuto();
-
+/*
         // @note arguments separated by ,
         $this->conditions = array(-2 => array('token'   => 'T_USE'),
                                   -1 => array('atom'    => 'yes'),
@@ -72,7 +71,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('to_argument' => true,
                                'atom'        => 'Arguments');
         $this->checkAuto();
-        
+        */
         return false;
     }
 

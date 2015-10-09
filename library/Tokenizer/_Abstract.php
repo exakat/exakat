@@ -28,6 +28,7 @@ class _Abstract extends TokenAuto {
     static public $atom = 'Abstract';
 
     public function _check() {
+        $skippable = array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED', 'T_STATIC', 'T_FINAL');
     // abstract class x { abstract function x() }
         $this->conditions = array( 0 => array('token' => _Abstract::$operators),
                                    1 => array('token' => array('T_CLASS', 'T_FUNCTION')),
@@ -38,7 +39,7 @@ class _Abstract extends TokenAuto {
 
     // abstract class x { abstract public function x() }
         $this->conditions = array( 0 => array('token' => _Abstract::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
+                                   1 => array('token' => $skippable),
                                    2 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('toOption' => 2,
@@ -47,8 +48,8 @@ class _Abstract extends TokenAuto {
 
     // abstract class x { abstract public static function x() }
         $this->conditions = array( 0 => array('token' => _Abstract::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
-                                   2 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
+                                   1 => array('token' => $skippable),
+                                   2 => array('token' => $skippable),
                                    3 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('toOption' => 3,

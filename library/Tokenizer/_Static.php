@@ -30,6 +30,34 @@ class _Static extends TokenAuto {
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
 
+    // class x { static private $x, $y }
+    // class x { static public $x = 2 }
+    // class x { static private $s }
+        $this->conditions = array( 0 => array('token'    => _Static::$operators),
+                                   1 => array('token'    => _Ppp::$operators),
+                                   2 => array('notToken' => _Function::$operators)
+                                 );
+        
+        $this->actions = array('toOption' => 1,
+                               'atom'     => 'Static');
+        $this->checkAuto();
+
+    // class x { static $x = 2 }
+    // class x { static $x, $y }
+    // class x { static $x }
+        $allowedAtoms = array('Assignation', 'Variable');
+        $this->conditions = array(-1 => array('notToken' => _Ppp::$operators),
+                                   0 => array('token'    => _Static::$operators,
+                                              'checkFor' => $allowedAtoms),
+                                   1 => array('atom'     => $allowedAtoms),
+                                   2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),
+                                 );
+        
+        $this->actions = array('makePpp' => 'Ppp',
+                               'atom'    => 'Ppp',
+                               );
+        $this->checkAuto();
+
     // class x { static function f() }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
                                    1 => array('token' => 'T_FUNCTION'),
@@ -40,97 +68,8 @@ class _Static extends TokenAuto {
 
     // class x { static public function x() }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED')),
-                                   2 => array('token' => array('T_FUNCTION')),
-                                 );
-        $this->actions = array('toOption' => 2,
-                               'atom'     => 'Static');
-        $this->checkAuto();
-
-    // class x { static $x }
-        $this->conditions = array(-1 => array('notToken'  => _Ppp::$operators),
-                                   0 => array('token'     => _Static::$operators),
-                                   1 => array('atom'      => array('Variable', 'String', 'Staticconstant', )),
-                                   2 => array('filterOut' => $values)
-                                 );
-        
-        $this->actions = array('to_ppp'       => 1,
-                               'atom'         => 'Static',
-                               'cleanIndex'   => true,
-                               'addSemicolon' => 'x'
-                               );
-        $this->checkAuto();
-
-    // class x { static private $s }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED')),
-                                   2 => array('token' => 'T_VARIABLE'),
-                                 );
-        $this->actions = array('toOption' => 1,
-                               'atom'     => 'Static');
-        $this->checkAuto();
-
-
-    // class x { static $x = 2 }
-        $this->conditions = array(-1 => array('notToken'  => _Ppp::$operators),
-                                   0 => array('token'     => _Static::$operators),
-                                   1 => array('atom'      => 'Assignation'),
-                                   2 => array('filterOut' => $values)
-                                 );
-        
-        $this->actions = array('to_ppp_assignation' => 1,
-                               'atom'               => 'Static',
-                               'addSemicolon'       => 'x' );
-        $this->checkAuto();
-
-    // class x { static public $x = 2 }
-
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED')),
-                                   2 => array('atom'  => 'Assignation'),
-                                   3 => array('filterOut' => $values)
-                                 );
-        
-        $this->actions = array('toOption' => 1,
-                               'atom'     => 'Static');
-        $this->checkAuto();
-
-
-    // class x { static $x, $y }
-        $this->conditions = array(-1 => array('token'     => array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
-                                   0 => array('token'     => _Static::$operators),
-                                   1 => array('atom'      => 'Arguments'),
-                                   2 => array('filterOut' => 'T_COMMA'),
-                                 );
-        
-        $this->actions = array('toVarNew' => 'Atom',
-                               'atom'     => 'Static');
-        $this->checkAuto();
-
-    // class x { static private $x, $y }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('token' => array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
-                                   2 => array('atom'  => 'Arguments'),
-                                   3 => array('filterOut'  => 'T_COMMA'),
-                                 );
-        
-        $this->actions = array('toOption' => 1,
-                               'atom'     => 'Static');
-        $this->checkAuto();
-
-
-    // class x { static function f() }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('token' => array('T_FUNCTION')),
-                                 );
-        $this->actions = array('toOption' => 1,
-                               'atom'     => 'Static');
-        $this->checkAuto();
-
-    // class x { static private function f() }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
                                    1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
-                                   2 => array('token' => 'T_FUNCTION'),
+                                   2 => array('token' => array('T_FUNCTION')),
                                  );
         $this->actions = array('toOption' => 2,
                                'atom'     => 'Static');
@@ -146,17 +85,6 @@ class _Static extends TokenAuto {
                                'atom'     => 'Static');
         $this->checkAuto();
 
-    // class x { static $x, $y }
-        $this->conditions = array(-1 => array('notToken'  => array('T_NEW', 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
-                                   0 => array('token'     => _Static::$operators),
-                                   1 => array('atom'      => 'Arguments'),
-                                   2 => array('filterOut' => 'T_COMMA'),
-                                 );
-        
-        $this->actions = array('toVarNew' => 'Static',
-                               'atom'     => 'Static',
-                               );
-        $this->checkAuto();
 
 
 

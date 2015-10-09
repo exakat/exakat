@@ -28,48 +28,47 @@ class _Interface extends TokenAuto {
     static public $atom = 'Interface';
 
     public function _check() {
-        // interface x {}
-        $this->conditions = array(0 => array('token'    => _Interface::$operators,
-                                             'atom'     => 'none'),
-                                  1 => array('atom'     => array('Identifier', 'Boolean', 'Null')),
-                                  2 => array('token'    => 'T_OPEN_CURLY',
-                                             'property' => array('association' => 'Interface')),
-                                  3 => array('atom'     => array('Sequence', 'Void')),
-                                  4 => array('token'    => 'T_CLOSE_CURLY')
-        );
-              
-        $this->actions = array('transform'          => array( 1 => 'NAME',
-                                                              2 => 'DROP',
-                                                              3 => 'BLOCK',
-                                                              4 => 'DROP'),
-                               'atom'               => 'Interface',
-                               'makeBlock'          => 'BLOCK',
-                               'cleanIndex'         => true,
-                               'addAlwaysSemicolon' => 'it');
+        // interface x {} Get the name
+        $this->conditions = array( 0 => array('token' => static::$operators),
+                                   1 => array('atom'  => array('Identifier', 'Null', 'Boolean'))
+                                 );
+        
+        $this->actions = array('transform'   => array(   1 => 'NAME'),
+                               'keepIndexed' => true,
+                               'atom'        => 'Class',
+                               'cleanIndex'  => true);
         $this->checkAuto();
 
-        // interface x extends y {}
-        $this->conditions = array(0 => array('token' => _Interface::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
-                                  2 => array('token' => 'T_EXTENDS'),
-                                  3 => array('atom'  => array('Arguments', 'Identifier', 'Nsname')),
-                                  4 => array('token' => 'T_OPEN_CURLY'),
-                                  5 => array('atom'  => array('Sequence', 'Void')),
-                                  6 => array('token' => 'T_CLOSE_CURLY'),
-        );
+    // interface x implements a {} get the implements
+        $this->conditions = array( 0 => array('token'     => static::$operators),
+                                   1 => array('token'     => 'T_EXTENDS',
+                                              'checkForImplements' => array('Identifier', 'Nsname')),
+                                   2 => array('atom'      => array('Identifier', 'Nsname')),
+                                   3 => array('token'     => array('T_COMMA', 'T_OPEN_CURLY'))
+                                 );
         
-        $this->actions = array('transform'         => array( 1 => 'NAME',
-                                                             2 => 'DROP',
-                                                             3 => 'EXTENDS',
-                                                             4 => 'DROP',
-                                                             5 => 'BLOCK',
-                                                             6 => 'DROP'),
-                               'atom'              => 'Interface',
-                               'makeBlock'         => 'BLOCK',
-                               'arguments2extends' => true,
-                               'cleanIndex'        => true,
-                               'addSemicolon'      => 'it');
+        $this->actions = array('toImplements' => true,
+                               'keepIndexed'  => true,
+                               'cleanIndex'   => true
+                               );
+        $this->checkAuto();
+
+    // class x { // some real code} get the block
+        $this->conditions = array( 0 => array('token'    => static::$operators),
+                                   1 => array('token'    => 'T_OPEN_CURLY',
+                                              'property' => array('association' => 'Interface')),
+                                   2 => array('atom'     => array('Sequence', 'Void')),
+                                   3 => array('token'    => 'T_CLOSE_CURLY')
+                                  );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'BLOCK',
+                                                       3 => 'DROP'),
+                               'atom'         => 'Interface',
+                               'addSemicolon' => 'it',
+                               'makeBlock'    => 'BLOCK',
+                               'cleanIndex'   => true
+                               );
         $this->checkAuto();
 
         return false;

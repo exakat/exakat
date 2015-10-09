@@ -28,15 +28,48 @@ class _As extends TokenAuto {
     static public $atom = 'As';
 
     public function _check() {
+        // use A as B 
+        $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
+                                   -1 => array('atom'     => 'Identifier'),
+                                    0 => array('token'    => _As::$operators,
+                                               'atom'     => 'none'),
+                                    1 => array('token'    => 'T_STRING')
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'AS',
+                                                       -1 => 'SUBNAME'),
+                               'atom'         => 'As',
+                               'cleanIndex'   => true,
+                               'rank'         => array(-1 => '0'));
+        $this->checkAuto();
+
+        // use A as public
+        $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
+                                   -1 => array('atom'     => 'Identifier'),
+                                    0 => array('token'    => _As::$operators,
+                                               'atom'     => 'none'),
+                                    1 => array('token'    => array('T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE')),
+                                    2 => array('notToken' => 'T_STRING'),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'AS',
+                                                       -1 => 'SUBNAME'),
+                               'atom'         => 'As',
+                               'cleanIndex'   => true,
+                               'rank'         => array(-1 => '0'));
+        $this->checkAuto();
+        
         // use A as B (adds rank)
         $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
                                    -1 => array('atom'     => 'Identifier'),
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
-                                    1 => array('token'    => array('T_STRING', 'T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE'))
+                                    1 => array('token'    => array('T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE')),
+                                    2 => array('token'    => 'T_STRING'),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'AS',
+        $this->actions = array('transform'    => array( 2 => 'AS',
+                                                        1 => 'PPP',
                                                        -1 => 'SUBNAME'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,
@@ -74,11 +107,11 @@ if (fullcode.out('SUBNAME').any()) {
         s = s.join('\\\\');
     }
 
-    fullcode.setProperty('fullcode', s + " as " + fullcode.out("AS").next().getProperty('fullcode'));
     fullcode.out('AS').filter{ it.token in [ 'T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE']}.each{
         it.setProperty('fullcode', it.code);
         it.setProperty('atom', 'Ppp');
     }
+    fullcode.setProperty('fullcode', s + " as " + fullcode.out("AS").next().getProperty('fullcode'));
 } else {
     fullcode.setProperty('fullcode', fullcode.out('LEFT').next().fullcode + ' as ' + fullcode.out('RIGHT').next().fullcode);
 }

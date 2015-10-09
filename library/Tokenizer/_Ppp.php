@@ -29,17 +29,8 @@ class _Ppp extends TokenAuto {
 
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
-    // class x { protected $x }
-        $this->conditions = array( -1 => array('notToken'  => 'T_STATIC'),
-                                    0 => array('token'     => _Ppp::$operators),
-                                    1 => array('atom'      => array('Variable', 'String', 'Staticconstant', 'Identifier')),
-                                    2 => array('filterOut' => $values),
-                                 );
-        $this->actions = array('to_ppp'       => 1,
-                               'atom'         => 'Ppp',
-                               'addSemicolon' => 'x' );
-        $this->checkAuto();
 
+/*
     // class x { static private $s }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
                                    1 => array('token' => 'T_STATIC'),
@@ -47,20 +38,6 @@ class _Ppp extends TokenAuto {
                                  );
         $this->actions = array('toOption' => 1,
                                'atom'     => 'Ppp');
-        $this->checkAuto();
-
-    // class x { public $x = 2 }
-        $this->conditions = array(-1 => array('notToken' => 'STATIC'),
-                                   0 => array('token'    =>  _Ppp::$operators),
-                                   1 => array('atom'     => 'Assignation'),
-                                   2 => array('token'    => 'T_SEMICOLON'),
-                                 );
-        
-        $this->actions = array('to_ppp_assignation' => true,
-                               'atom'               => 'Ppp',
-                               'addSemicolon'       => 'x'
-                               );
-
         $this->checkAuto();
 
     // class x { public static $x = 2; }
@@ -74,7 +51,6 @@ class _Ppp extends TokenAuto {
                                'atom'               => 'Ppp',
                                'addSemicolon'       => 'x'
                                );
-
         $this->checkAuto();
 
 
@@ -104,23 +80,27 @@ class _Ppp extends TokenAuto {
         $this->actions = array('toOption' => 3,
                                'atom'     => 'Ppp');
         $this->checkAuto();
-
+*/
+    // class x { public $x }
+    // class x { public $x = 2 }
     // class x { public $x, $y }
-        $this->conditions = array(-1 => array('notToken'  => 'STATIC'),
-                                   0 => array('token'     => _Ppp::$operators),
-                                   1 => array('atom'      => 'Arguments'),
-                                   2 => array('filterOut' => 'T_COMMA'),
+    // class x { public $x = 2, $y = 2 }
+        $allowedAtoms = array('Assignation', 'Variable');
+        $this->conditions = array(-1 => array('notToken' => 'STATIC'),
+                                   0 => array('token'    => _Ppp::$operators,
+                                              'checkFor' => $allowedAtoms),
+                                   1 => array('atom'     => $allowedAtoms),
+                                   2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),
                                  );
         
-        $this->actions = array('toVarNew' => 'Ppp',
-                               'atom'     => 'Ppp',
+        $this->actions = array('makePpp' => 'Ppp',
+                               'atom'    => 'Ppp',
                                );
         $this->checkAuto();
 
-    // class x { static private $x, $y }
+    // class x { private static $x, $y }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
-                                   1 => array('token' => _Static::$operators),
-                                   2 => array('atom'  => 'Arguments'),
+                                   1 => array('token' => array_merge(_Static::$operators, _Function::$operators))
                                  );
         
         $this->actions = array('toOption' => 1,
@@ -131,8 +111,13 @@ class _Ppp extends TokenAuto {
     }
 
     public function fullcode() {
-        $token = new _Function();
-        return $token->fullcode();
+        return <<<GREMLIN
+
+s=[];
+fullcode.out('CONST').each{ s.add(it.fullcode);}
+fullcode.setProperty('fullcode', 'const ' + s.join(', '));
+
+GREMLIN;
     }
 }
 ?>

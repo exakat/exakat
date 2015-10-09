@@ -42,6 +42,20 @@ class Nsname extends TokenAuto {
                                );
         $this->checkAuto();
 
+        // @note use a\{ (for grouped Use)
+        $this->conditions = array( -2 => array('token'     => 'T_USE'),
+                                   -1 => array('atom'      => 'Identifier'),
+                                    0 => array('token'     => self::$operators,
+                                               'atom'      => 'none'),
+                                    1 => array('token'     => 'T_OPEN_CURLY'),
+        );
+
+        $this->actions = array('transform'    => array( 0 => 'DROP'),
+                               'atom'         => 'Nsname',
+                               'keepIndexed'  => true,
+                               );
+        $this->checkAuto();
+
         // @note a\b\c as F
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => _As::$operators),

@@ -67,7 +67,7 @@ class Assignation extends TokenAuto {
                                                                               'T_AT', 'T_AND'),
                                                                          Preplusplus::$operators )),
                                   -1 => array('atom'     => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
-                                                                  'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
+                                                                  'Noscream', 'Not', 'Arrayappend' , 'Identifier',
                                                                   'Static', 'Cast', 'Sign', 'Power', 'Null', 'Boolean' )),
                                    0 => array('token'    => Assignation::$operators),
                                    1 => array('atom'     => $operands),

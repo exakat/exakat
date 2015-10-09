@@ -49,7 +49,7 @@ class _Insteadof extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.out("LEFT").next().code + " insteadof " + fullcode.out("RIGHT").next().code;
+fullcode.fullcode = fullcode.out("LEFT").next().fullcode + " insteadof " + fullcode.out("RIGHT").next().fullcode;
 
 GREMLIN;
     }
