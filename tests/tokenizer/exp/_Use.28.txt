@@ -1,0 +1,49 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    use
+    Label : USE
+      as
+      Label : AS
+        A3
+      Label : SUBNAME
+        ClassNonAbsGroupedAs
+    Label : USE
+      ClassNonAbsGroupedNonAs
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : AS
+        A2
+      Label : SUBNAME
+        ClassAbsNonGroupedAs
+      Label : SUBNAME
+        Baz
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : AS
+        A1
+      Label : SUBNAME
+        ClassNonAbsNonGroupedAs
+      Label : SUBNAME
+        Baz
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        Baz
+      Label : SUBNAME
+        ClassAbsNonGroupedNonAs
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        Baz
+      Label : SUBNAME
+        ClassNonAbsNonGroupedNonAs

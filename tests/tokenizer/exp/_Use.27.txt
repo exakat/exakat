@@ -1,0 +1,67 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
+    Label : ELEMENT
+      class
+      Label : NAME
+        B
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            C
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              as
+              Label : AS
+                E
+              Label : SUBNAME
+                D
+        Label : ELEMENT
+          use
+          Label : USE
+            G
+          Label : USE
+            F
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              as
+              Label : AS
+                E
+              Label : SUBNAME
+                D
+        Label : ELEMENT
+          use
+          Label : USE
+            \
+            Label : SUBNAME
+              F2
+            Label : SUBNAME
+              F3
+          Label : USE
+            \
+            Label : SUBNAME
+              G4
+            Label : SUBNAME
+              G3
+            Label : SUBNAME
+              G2
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              as
+              Label : AS
+                E
+              Label : SUBNAME
+                D

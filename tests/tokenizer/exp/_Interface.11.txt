@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    interface
+    Label : NAME
+      i4
+    Label : IMPLEMENTS
+      i2
+    Label : IMPLEMENTS
+      i1
+    Label : IMPLEMENTS
+      i3
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    interface
+    Label : NAME
+      i3
+    Label : IMPLEMENTS
+      i1
+    Label : IMPLEMENTS
+      i2
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    interface
+    Label : NAME
+      i1
+    Label : IMPLEMENTS
+      i2
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    interface
+    Label : NAME
+      i
+    Label : BLOCK
+      void

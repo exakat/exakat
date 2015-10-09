@@ -19,5 +19,6 @@ class _Interface extends Tokenizer {
     public function test_Interface08()  { $this->generic_test('_Interface.08'); }
     public function test_Interface09()  { $this->generic_test('_Interface.09'); }
     public function test_Interface10()  { $this->generic_test('_Interface.10'); }
+    public function test_Interface11()  { $this->generic_test('_Interface.11'); }
 }
 ?>

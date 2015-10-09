@@ -1,0 +1,82 @@
+<?php
+
+Label : CODE
+  function
+  Label : NAME
+    a
+  Label : ARGUMENTS
+    Arguments
+    Label : ARGUMENT
+      Typehint
+      Label : VARIABLE
+        $d
+      Label : CLASS
+        array
+    Label : ARGUMENT
+      Typehint
+      Label : VARIABLE
+        =
+        Label : RIGHT
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              (
+              Label : CODE
+                &
+                Label : RIGHT
+                  4
+                Label : LEFT
+                  3
+            Label : ARGUMENT
+              1
+        Label : LEFT
+          $e
+      Label : CLASS
+        array
+    Label : ARGUMENT
+      Typehint
+      Label : VARIABLE
+        $c
+      Label : CLASS
+        b
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      for
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            &
+            Label : RIGHT
+              $g
+            Label : LEFT
+              f
+          Label : LEFT
+            $i
+      Label : INIT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $i
+      Label : FINAL
+        <
+        Label : RIGHT
+          10
+        Label : LEFT
+          $i
+      Label : INCREMENT
+        <
+        Label : RIGHT
+          count
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+        Label : LEFT
+          $i

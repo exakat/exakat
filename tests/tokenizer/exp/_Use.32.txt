@@ -1,0 +1,15 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    use
+    Label : CONST
+      B
+  Label : ELEMENT
+    use
+    Label : FUNCTION
+      B
+  Label : ELEMENT
+    use
+    Label : USE
+      B

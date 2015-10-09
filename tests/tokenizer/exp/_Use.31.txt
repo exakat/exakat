@@ -1,0 +1,65 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    use
+    Label : CONST
+      \
+      Label : AS
+        A1
+      Label : SUBNAME
+        Baz
+      Label : SUBNAME
+        ClassNonAbsNonGroupedAs
+      Label : SUBNAME
+        Bar
+      Label : SUBNAME
+        FooLibrary
+  Label : ELEMENT
+    use
+    Label : CONST
+      \
+      Label : SUBNAME
+        Bar
+      Label : SUBNAME
+        Baz
+      Label : SUBNAME
+        ClassNonAbsNonGroupedNonAs
+      Label : SUBNAME
+        FooLibrary
+  Label : ELEMENT
+    use
+    Label : CONST
+      as
+      Label : AS
+        A3
+      Label : SUBNAME
+        ClassNonAbsGroupedAs
+    Label : CONST
+      ClassNonAbsGroupedNonAs
+  Label : ELEMENT
+    use
+    Label : CONST
+      \
+      Label : SUBNAME
+        FooLibrary
+      Label : SUBNAME
+        ClassAbsNonGroupedNonAs
+      Label : SUBNAME
+        Bar
+      Label : SUBNAME
+        Baz
+  Label : ELEMENT
+    use
+    Label : CONST
+      \
+      Label : AS
+        A2
+      Label : SUBNAME
+        ClassAbsNonGroupedAs
+      Label : SUBNAME
+        Baz
+      Label : SUBNAME
+        Bar
+      Label : SUBNAME
+        FooLibrary

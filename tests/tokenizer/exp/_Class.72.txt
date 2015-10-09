@@ -1,0 +1,112 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      a4
+    Label : IMPLEMENTS
+      b4
+    Label : IMPLEMENTS
+      c4
+    Label : IMPLEMENTS
+      d4
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    class
+    Label : NAME
+      a6
+    Label : IMPLEMENTS
+      b4
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        cc
+      Label : SUBNAME
+        c4
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        d4
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        f5
+      Label : SUBNAME
+        e5
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    class
+    Label : NAME
+      a5
+    Label : IMPLEMENTS
+      e5
+    Label : IMPLEMENTS
+      b4
+    Label : IMPLEMENTS
+      c4
+    Label : IMPLEMENTS
+      d4
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    class
+    Label : NAME
+      a24
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        d33
+      Label : SUBNAME
+        c3
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        b3
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    class
+    Label : NAME
+      a
+    Label : IMPLEMENTS
+      b
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    class
+    Label : NAME
+      a3
+    Label : IMPLEMENTS
+      b3
+    Label : IMPLEMENTS
+      c3
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    class
+    Label : NAME
+      a23
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        c3
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        b3
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    class
+    Label : NAME
+      a2
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        b2
+    Label : BLOCK
+      void

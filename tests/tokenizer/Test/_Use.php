@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Use extends Tokenizer {
-    /* 26 methods */
+    /* 32 methods */
 
     public function test_Use01()  { $this->generic_test('_Use.01'); }
     public function test_Use02()  { $this->generic_test('_Use.02'); }
@@ -35,5 +35,11 @@ class _Use extends Tokenizer {
     public function test_Use24()  { $this->generic_test('_Use.24'); }
     public function test_Use25()  { $this->generic_test('_Use.25'); }
     public function test_Use26()  { $this->generic_test('_Use.26'); }
+    public function test_Use27()  { $this->generic_test('_Use.27'); }
+    public function test_Use28()  { $this->generic_test('_Use.28'); }
+    public function test_Use29()  { $this->generic_test('_Use.29'); }
+    public function test_Use30()  { $this->generic_test('_Use.30'); }
+    public function test_Use31()  { $this->generic_test('_Use.31'); }
+    public function test_Use32()  { $this->generic_test('_Use.32'); }
 }
 ?>
