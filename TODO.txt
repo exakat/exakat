@@ -1553,3 +1553,12 @@ Publish several versions ? (PDF, text, ..)
 
 Check that the right version of PHP are really used.
 Shall the usage of PHPexec be limited to a specific part of the code ? (Task)
+
+::class outside a class ? 
+
+Interface implementée 2 fois .
+Fatal error: Class i3 cannot implement previously implemented interface i2 in /Users/famille/Desktop/analyze/test.php on line 6
+
+Check that index in arrays are used twice
+
+Stop analyze when no code / token is found.
