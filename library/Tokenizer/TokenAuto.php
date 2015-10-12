@@ -687,11 +687,14 @@ g.addEdge(a, b, 'NEXT');
 /* Move arguments under the keyword (IMPLEMENT, CONST) */
 
 global = it;
+rank = 0;
 
 // first and n-1 -th round. 
 while(a2.token == 'T_COMMA') {
     a1.bothE('NEXT').each{ g.removeEdge(it); }
     a1.bothE('INDEXED').each{ g.removeEdge(it); }
+    a1.rank = rank;
+    ++rank;
     g.addEdge(global, a1, '$link');
     
     toDelete.push(a2); // drop ,
@@ -701,6 +704,8 @@ while(a2.token == 'T_COMMA') {
 
 a1.bothE('NEXT').each{ g.removeEdge(it); }
 a1.bothE('INDEXED').each{ g.removeEdge(it); }
+a1.rank = rank;
+++rank;
 g.addEdge(global, a1, '$link');
 
 g.addEdge(it, a2, 'NEXT');
@@ -717,6 +722,7 @@ g.addEdge(it, a2, 'NEXT');
 /* Move arguments under the keyword (FUNCTION, CONST) */
 
 global = it;
+rank = 0;
 
 toDelete.push(a1);
 
@@ -727,6 +733,8 @@ a2 = a1.out('NEXT').next();
 while(a2.token == 'T_COMMA') {
     a1.bothE('NEXT').each{ g.removeEdge(it); }
     a1.bothE('INDEXED').each{ g.removeEdge(it); }
+    a1.rank = rank;
+    ++rank;
     g.addEdge(global, a1, '$link');
     
     toDelete.push(a2); // drop ,
@@ -736,6 +744,8 @@ while(a2.token == 'T_COMMA') {
 
 a1.bothE('NEXT').each{ g.removeEdge(it); }
 a1.bothE('INDEXED').each{ g.removeEdge(it); }
+a1.rank = rank;
+++rank;
 g.addEdge(global, a1, '$link');
 
 g.addEdge(it, a2, 'NEXT');
@@ -1057,11 +1067,14 @@ if (a1.atom == 'Nsname') {
 }
 toDelete.push(a1);
 
+rank = 0;
 // a2 is the { then ,
 while(!(a2.token == 'T_CLOSE_CURLY')) {
     toDelete.push(a2);
 
     a2 = a2.out('NEXT').next();
+    a2.rank = rank;
+    ++rank;
     g.addEdge(it, a2, link);
 
     a2 = a2.out('NEXT').next();

@@ -147,7 +147,7 @@ if (fullcode.groupedUse == true) {
 
 
 // use a (aka c);
-fullcode.out('USE').has('atom', 'Identifier').each{
+fullcode.out('USE').sort{it.rank}._().has('atom', 'Identifier').each{
     it.setProperty('originpath', it.code.toLowerCase());
     it.setProperty('originclass', it.code);
     
@@ -156,7 +156,7 @@ fullcode.out('USE').has('atom', 'Identifier').each{
 }
 
 // use a\b\c as c (aka c);
-fullcode.out('USE').has('atom', 'As').each{
+fullcode.out('USE').sort{it.rank}._().has('atom', 'As').each{
     s = [];
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
@@ -174,7 +174,7 @@ fullcode.out('USE').has('atom', 'As').each{
 }
 
 // use a; (aka a)
-fullcode.out('USE').has('atom', 'Nsname').each{
+fullcode.out('USE').sort{it.rank}._().has('atom', 'Nsname').each{
     s = [];
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
@@ -198,7 +198,7 @@ fullcode.out('USE').has('atom', 'Nsname').each{
 
 // use function a as b;
 // use const a as b;
-fullcode.out('FUNCTION', 'CONST').each{
+fullcode.out('FUNCTION', 'CONST').sort{it.rank}._().each{
     s = [];
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));

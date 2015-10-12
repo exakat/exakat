@@ -51,7 +51,7 @@ class _Const extends TokenAuto {
         return <<<GREMLIN
 
 s=[];
-fullcode.out('CONST').each{ s.add(it.fullcode);}
+fullcode.out('CONST').sort{it.rank}._().each{ s.add(it.fullcode);}
 fullcode.setProperty('fullcode', 'const ' + s.join(', '));
 
 GREMLIN;
