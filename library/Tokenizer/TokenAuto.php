@@ -785,10 +785,13 @@ g.addEdge(it, x, it.code.toUpperCase());
 /* Move arguments to implements */
 
 classe = it;
+rank = 0;
 
 // first and n-1 -th round. 
 while(a3.token != 'T_OPEN_CURLY') {
     a2.bothE('NEXT').each{ g.removeEdge(it); }
+    a2.rank = rank;
+    ++rank;
     g.addEdge(classe, a2, '$link');
     
     toDelete.push(a3); // drop ,
@@ -797,6 +800,7 @@ while(a3.token != 'T_OPEN_CURLY') {
 }
 
 a2.bothE('NEXT').each{ g.removeEdge(it); }
+a2.rank = rank;
 g.addEdge(classe, a2, '$link');
 
 g.addEdge(it, a3, 'NEXT');
