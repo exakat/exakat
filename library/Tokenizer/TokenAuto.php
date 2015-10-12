@@ -1139,25 +1139,34 @@ g.addEdge(cc, f, 'NEXT');
             $qactions[] = "
 /* toBlock */
 
-a3 = a2.out('NEXT').next();
-
-toBlockSequence = g.addVertex(null, [code:';', fullcode:'{ /**/ }', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
-
-a1.bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(toBlockSequence, a1, 'ELEMENT');
-a1.setProperty('rank', 0);
 if (a1.atom == 'Sequence') {
-    g.idx('atoms').put('atom', 'Sequence', a1);
     a1.block    = true;
     a1.bracket  = true;
-    a1.fullcode = '{ /**/ }';
+
+    g.addEdge(b1, a1, 'NEXT');
+    g.addEdge(a1, a3, 'NEXT');
+
+} else {
+    a3 = a2.out('NEXT').next();
+    toBlockSequence = g.addVertex(null, [code:';', fullcode:'{ /**/ }', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
+
+    a1.bothE('NEXT').each{ g.removeEdge(it); }
+    g.addEdge(toBlockSequence, a1, 'ELEMENT');
+    a1.setProperty('rank', 0);
+    if (a1.atom == 'Sequence') {
+        a1.block    = true;
+        a1.bracket  = true;
+        a1.fullcode = '{ /**/ }';
+    }
+
+    g.addEdge(b1, toBlockSequence, 'NEXT');
+    g.addEdge(toBlockSequence, a3, 'NEXT');
+    
+    a1 = toBlockSequence;
 }
 
-g.addEdge(b1, toBlockSequence, 'NEXT');
-g.addEdge(toBlockSequence, a3, 'NEXT');
-
 it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
-a2.bothE('NEXT').each{ g.removeEdge(it); }
+a2.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
 
 toDelete.push(it);
 toDelete.push(a2);

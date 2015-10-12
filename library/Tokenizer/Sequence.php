@@ -64,20 +64,6 @@ class Sequence extends TokenAuto {
 
         // Actual rules starting now
 
-        // @note : $x; endif
-        $this->conditions = array(-2 => array('token'    => 'T_COLON',
-                                              'property' => $association),
-                                  -1 => array('atom'     => $operands,
-                                              'notToken' => $forbiddenTokens ),
-                                   0 => array('token'    => Sequence::$operators,
-                                              'atom'     => 'none'),
-                                   1 => array('token'    => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDSWITCH', 'T_ENDWHILE', 'T_CASE', 'T_ENDDECLARE', 'T_ENDFOR', 'T_ENDFOREACH')),
-        );
-        
-        $this->actions = array('toSequence'  => true,
-                               'keepIndexed' => true);
-        $this->checkAuto();
-
         // @note instructions separated by ;
         $this->conditions = array(-2 => array('notToken'  => $yieldOperator,
                                               'filterOut' => 'T_IF',
@@ -98,6 +84,20 @@ class Sequence extends TokenAuto {
                                               'atom'     => 'yes'),
                                    1 => array('atom'     => $operands,
                                               'notToken' => $forbiddenTokens)
+        );
+        
+        $this->actions = array('toSequence'  => true,
+                               'keepIndexed' => true);
+        $this->checkAuto();
+
+        // @note : $x; endif
+        $this->conditions = array(-2 => array('token'    => 'T_COLON',
+                                              'property' => $association),
+                                  -1 => array('atom'     => $operands,
+                                              'notToken' => $forbiddenTokens ),
+                                   0 => array('token'    => Sequence::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDSWITCH', 'T_ENDWHILE', 'T_CASE', 'T_ENDDECLARE', 'T_ENDFOR', 'T_ENDFOREACH')),
         );
         
         $this->actions = array('toSequence'  => true,

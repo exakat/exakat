@@ -60,7 +60,7 @@ class Block extends TokenAuto {
         );
 
         $this->actions = array('toBlock'            => true,
-                               'addAlwaysSemicolon' => 'toBlockSequence'
+                               'addAlwaysSemicolon' => 'a1'
                                );
         $this->checkAuto();
 
