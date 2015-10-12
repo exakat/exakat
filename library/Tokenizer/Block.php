@@ -59,8 +59,8 @@ class Block extends TokenAuto {
                                     3 => array('notToken' => 'T_ENDIF')
         );
 
-        $this->actions = array('toBlock'      => true,
-                               'addSemicolon' => 'toBlockSequence'
+        $this->actions = array('toBlock'            => true,
+                               'addAlwaysSemicolon' => 'toBlockSequence'
                                );
         $this->checkAuto();
 

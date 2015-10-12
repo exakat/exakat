@@ -61,13 +61,13 @@ class _Interface extends TokenAuto {
                                    3 => array('token'    => 'T_CLOSE_CURLY')
                                   );
         
-        $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'BLOCK',
-                                                       3 => 'DROP'),
-                               'atom'         => 'Interface',
-                               'addSemicolon' => 'it',
-                               'makeBlock'    => 'BLOCK',
-                               'cleanIndex'   => true
+        $this->actions = array('transform'          => array(1 => 'DROP',
+                                                             2 => 'BLOCK',
+                                                             3 => 'DROP'),
+                               'atom'               => 'Interface',
+                               'addAlwaysSemicolon' => 'it',
+                               'makeBlock'          => 'BLOCK',
+                               'cleanIndex'         => true
                                );
         $this->checkAuto();
 
