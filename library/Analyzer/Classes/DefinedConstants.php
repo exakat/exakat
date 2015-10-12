@@ -27,9 +27,9 @@ use Analyzer;
 
 class DefinedConstants extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Composer\\IsComposerNsname',
-                     'Analyzer\\Interfaces\\IsExtInterface');
+        return array('Classes/IsExtClass',
+                     'Composer/IsComposerNsname',
+                     'Interfaces/IsExtInterface');
     }
     
     public function analyze() {
@@ -40,7 +40,7 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('CLASS')
              ->classDefinition()
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any(); }")
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any(); }')
              ->back('first');
         $this->prepareQuery();
 
@@ -51,20 +51,20 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('CLASS')
              ->interfaceDefinition()
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any(); }")
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any(); }')
              ->back('first');
         $this->prepareQuery();
 
         // constants defined in a class of an extension
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
-             ->analyzerIs('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIs('Classes/IsExtClass')
              ->back('first');
         $this->prepareQuery();
 
         // constants defined in a class of an vendor library
         $this->atomIs('Staticconstant')
-             ->analyzerIs('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIs('Composer/IsComposerNsname')
              ->back('first');
         $this->prepareQuery();
 
@@ -75,10 +75,10 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('CLASS')
              ->classDefinition()
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }")
-             ->raw("filter{ it.out('EXTENDS').transform{ g.idx('classes')[['path':it.fullnspath]].next(); }
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }')
+             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop(2){true}
-                                      {it.object.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}.any(); }")
+                                      {it.object.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}.any(); }')
              ->back('first');
         $this->prepareQuery();
 
@@ -89,10 +89,10 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('CLASS')
              ->classDefinition()
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }")
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }')
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any(); }")
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any(); }')
              ->back('first');
         $this->prepareQuery();
 
@@ -103,11 +103,11 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('CLASS')
              ->classDefinition()
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }")
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }')
              ->outIs('IMPLEMENTS')
              ->outIs('ARGUMENT')
              ->interfaceDefinition()
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any(); }")
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any(); }')
              ->back('first');
         $this->prepareQuery();
         
@@ -117,15 +117,15 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'constante')
              ->back('first')
              ->outIs('CLASS')
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }")
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }')
              ->classDefinition()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
              ->hasOut('EXTENDS')
-             ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }")
-             ->raw("filter{ it.out('EXTENDS').transform{ g.idx('interfaces')[['path' : it.fullnspath]].next(); }
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }')
+             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("interfaces")[["path" : it.fullnspath]].next(); }
                               .loop(2){ true }
-                                      {it.object.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}.any(); }")
+                                      {it.object.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}.any(); }')
              ->back('first');
         $this->prepareQuery();
     }

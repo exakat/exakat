@@ -27,12 +27,12 @@ use Analyzer;
 
 class UndefinedConstants extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\DefinedConstants');
+        return array('Classes/DefinedConstants');
     }
     
     public function analyze() {
         $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Analyzer\\Classes\\DefinedConstants');
+             ->analyzerIsNot('Classes/DefinedConstants');
         $this->prepareQuery();
     }
 }
