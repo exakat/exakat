@@ -6,9 +6,9 @@ function y ($y) { $y++;}; // empty line
 
 interface i { function i();} ; // empty line
 
-trait t {}; // empty line
+trait t { function x() { $emptyTrait++; }}; // empty line
 
-{}; // empty line
+{ $emptyBlock++; }; // empty line
 
-$a++;
+$a++; $b++;
 ?>
