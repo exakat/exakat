@@ -1,4 +1,4 @@
-Version 0.3.6 (White Bone Demon, Coming up)
+Version 0.3.7 (Yellow Robe Demon, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,16 @@ Version 0.3.6 (White Bone Demon, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.6 (White Bone Demon, 2015-10-12)
++ Architecture
+    + Large speed up at Parsing stage, for large projects
+    + Added git informations in Doctor
++ Tokenizer
+    + Changed processing for Arguments.
+    + Support for more PHP 7 features, including Use Grouping, 
+    + Fixed support for ~ 
+    + Simplified ::class handling
 
 Version 0.3.5 (Mingyue, 2015-10-06)
 + Architecture
