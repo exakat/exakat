@@ -26,15 +26,19 @@ namespace Analyzer\Variables;
 use Analyzer;
 
 class Variablenames extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Variables/Blind');
+    }
+    
     public function analyze() {
         // $x
         $this->atomIs('Variable')
              ->hasNoParent('Functioncall', array('NAME'))
-             ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Class', array('LEFT', 'DEFINE', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Staticproperty', 'PROPERTY')
              ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
-             ->analyzerIsNot("Analyzer\\Variables\\Blind");
+             ->analyzerIsNot('Variables/Blind');
         $this->prepareQuery();
 
         // $object->$x()
@@ -51,9 +55,10 @@ class Variablenames extends Analyzer\Analyzer {
         // ${'x'}
         $this->atomIs('Variable')
              ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Class', array('LEFT', 'DEFINE', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Staticproperty', 'PROPERTY')
              ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
-             ->analyzerIsNot("Analyzer\\Variables\\Blind")
+             ->analyzerIsNot('Variables/Blind')
              ->tokenIs('T_DOLLAR')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
