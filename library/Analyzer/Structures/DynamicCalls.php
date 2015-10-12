@@ -49,24 +49,13 @@ class DynamicCalls extends Analyzer\Analyzer {
         // dynamic new
         $this->atomIs('New')
              ->outIs('NEW')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->outIs('NAME')
+             ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
 
+        // $$o->p or $$o->m() are variable variable, not variable object
         // property
-        // $$o->p
-        $this->atomIs(array('Property', 'Methodcall'))
-             ->outIs('OBJECT')
-             ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs(array('Property', 'Methodcall'))
-             ->outIs('OBJECT')
-             ->atomIsNot(array('Variable', 'Methodcall', 'Property', 'Staticproperty', 'Staticmethodcall', 'Array'))
-             ->back('first');
-        $this->prepareQuery();
-
         // $o->{$p}
         $this->atomIs('Property')
              ->outIs('PROPERTY')

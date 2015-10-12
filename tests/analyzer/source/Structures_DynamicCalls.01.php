@@ -7,9 +7,9 @@ $dnv = $dnf($$dna[1]);
 $x = constant('PHP_VERSION');
 $xx = constant('Stdclass::VERSION');
 
-$$o->b = $o->$c;
+$$o1->b = $o2->$c;
 
-$o->$cm2() + $$o->cm1();
+$o3->$cm2() + $$o4->cm1();
 
 $c::$p = $c2::$$p2;
 
