@@ -30,8 +30,7 @@ class OldStyleVar extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->outIs('ELEMENT')
-             ->tokenIs('T_VAR');
+             ->hasOut('VAR');
         $this->prepareQuery();
     }
 }

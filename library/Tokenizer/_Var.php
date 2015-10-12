@@ -51,7 +51,7 @@ class _Var extends TokenAuto {
         return <<<GREMLIN
 
 s=[];
-fullcode.out('VAR').each{ s.add(it.fullcode);}
+fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}
 fullcode.setProperty('fullcode', 'var ' + s.join(', '));
 
 GREMLIN;

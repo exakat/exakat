@@ -752,11 +752,14 @@ g.addEdge(it, a2, 'NEXT');
 
 global = it;
 link = 'DEFINE';
+rank = 0;
 
 // first and n-1 -th round. 
 while(a2.token == 'T_COMMA') {
     a1.bothE('NEXT').each{ g.removeEdge(it); }
     a1.bothE('INDEXED').each{ g.removeEdge(it); }
+    a1.rank = rank;
+    ++rank;
     g.addEdge(global, a1, link);
     
     toDelete.push(a2); // drop ,
@@ -764,8 +767,10 @@ while(a2.token == 'T_COMMA') {
     a2 = a1.out('NEXT').next();
 }
 
+// last round
 a1.bothE('NEXT').each{ g.removeEdge(it); }
 a1.bothE('INDEXED').each{ g.removeEdge(it); }
+a1.rank = rank;
 g.addEdge(global, a1, link);
 
 g.addEdge(it, a2, 'NEXT');
