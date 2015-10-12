@@ -778,6 +778,8 @@ g.addEdge(it, x, it.code.toUpperCase());
         }
 
         if (isset($actions['toImplements'])) {
+            $link = $actions['toImplements'];
+
             // must be after transform
             $qactions[] = "
 /* Move arguments to implements */
@@ -787,7 +789,7 @@ classe = it;
 // first and n-1 -th round. 
 while(a3.token != 'T_OPEN_CURLY') {
     a2.bothE('NEXT').each{ g.removeEdge(it); }
-    g.addEdge(classe, a2, 'IMPLEMENTS');
+    g.addEdge(classe, a2, '$link');
     
     toDelete.push(a3); // drop ,
     a2 = a3.out('NEXT').next();
@@ -795,7 +797,7 @@ while(a3.token != 'T_OPEN_CURLY') {
 }
 
 a2.bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(classe, a2, 'IMPLEMENTS');
+g.addEdge(classe, a2, '$link');
 
 g.addEdge(it, a3, 'NEXT');
 

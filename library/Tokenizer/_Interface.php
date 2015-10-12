@@ -47,7 +47,7 @@ class _Interface extends TokenAuto {
                                    3 => array('token'     => array('T_COMMA', 'T_OPEN_CURLY'))
                                  );
         
-        $this->actions = array('toImplements' => true,
+        $this->actions = array('toImplements' => 'EXTENDS',
                                'keepIndexed'  => true,
                                'cleanIndex'   => true
                                );
@@ -80,7 +80,11 @@ class _Interface extends TokenAuto {
 fullcode.fullcode = "interface " + fullcode.out("NAME").next().code;
 
 // extends
-fullcode.out("EXTENDS").each{ fullcode.fullcode = fullcode.fullcode + " extends " + it.fullcode;}
+if (fullcode.out("EXTENDS").count() > 0) {
+    s = [];
+    fullcode.out("EXTENDS").sort{it.rank}._().each{ s.add(it.fullcode); };
+    fullcode.fullcode = fullcode.fullcode + " extends " + s.join(", ");
+}
 
 GREMLIN;
     }

@@ -78,7 +78,7 @@ class _Class extends TokenAuto {
                                    3 => array('token'     => array('T_COMMA', 'T_OPEN_CURLY'))
                                  );
         
-        $this->actions = array('toImplements' => true,
+        $this->actions = array('toImplements' => 'IMPLEMENTS',
                                'keepIndexed'  => true,
                                'cleanIndex'   => true
                                );
