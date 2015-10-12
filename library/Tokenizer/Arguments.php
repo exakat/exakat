@@ -57,21 +57,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('to_argument' => true,
                                'atom'        => 'Arguments');
         $this->checkAuto();
-/*
-        // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token'   => 'T_USE'),
-                                  -1 => array('atom'    => 'yes'),
-                                   0 => array('token'   => Arguments::$operators,
-                                              'atom'    => 'none'),
-                                   1 => array('atom'    => 'yes',
-                                              'checkForNamelist' => array('Identifier', 'Nsname', 'As')),
-                                   2 => array('token'   => array('T_OPEN_CURLY', 'T_COMMA', 'T_SEMICOLON'))
-                                 );
-        
-        $this->actions = array('to_argument' => true,
-                               'atom'        => 'Arguments');
-        $this->checkAuto();
-        */
+
         return false;
     }
 
