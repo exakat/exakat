@@ -1096,8 +1096,8 @@ class Load extends Tasks {
                 $T[$Tid]->setProperty('in_for', 'true')->save();
             }
         
-            if (!empty($previous) && 
-                $previous->getProperty('token') != 'T_DOUBLE_COLON' && 
+            if (!empty($previous) &&
+                $previous->getProperty('token') != 'T_DOUBLE_COLON' &&
                 $type = $this->process_blocks($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
@@ -1348,10 +1348,10 @@ class Load extends Tasks {
         if ($display) {
             return true;
             var_dump($parenthesisCount);
-            var_dump($parenthesisId);     
-            print_r($parenthesisStates); 
+            var_dump($parenthesisId);
+            print_r($parenthesisStates);
             ksort($commaCount);
-            print_r($commaCount);        
+            print_r($commaCount);
             
             if (count($parenthesisStates) != $echoCount) {
                 print "Warning : some states are left over!";

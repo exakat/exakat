@@ -171,9 +171,9 @@ if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
         fullcode.setProperty('fullcode', s.join("\\\\"));
     }
 } else if (fullcode.getProperty('token') == 'T_OBJECT_OPERATOR') {
-    // Do nothing. 
+    // Do nothing.
 } else if (fullcode.getProperty('token') == 'T_DOUBLE_COLON') {
-    // Do nothing. 
+    // Do nothing.
 } else{
     fullcode.setProperty('fullcode', it.getProperty('code'));
 }

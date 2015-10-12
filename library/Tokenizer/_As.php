@@ -28,7 +28,7 @@ class _As extends TokenAuto {
     static public $atom = 'As';
 
     public function _check() {
-        // use A as B 
+        // use A as B
         $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
                                    -1 => array('atom'     => 'Identifier'),
                                     0 => array('token'    => _As::$operators,

@@ -32,7 +32,7 @@ class Typehint extends TokenAuto {
         
         // normal case for classes
         $this->conditions = array( 0 => array('token'     => Typehint::$operators),
-                                   1 => array('token'     => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR', 
+                                   1 => array('token'     => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
                                                                    'T_CALLABLE', 'T_ARRAY', 'T_EQUAL')),
 //                                   2 => array('atom'      => $atoms),
 //                                   3 => array('filterOut' => Assignation::$operators),

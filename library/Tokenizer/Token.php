@@ -332,7 +332,7 @@ g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.side
         //'\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('LEFT').next().fullcode.toLowerCase();
     }
     
-    fullcode.out('CONST').each{ 
+    fullcode.out('CONST').each{
         it.setProperty('fullnspath', fullnspath + it.out('LEFT').next().code.toLowerCase());
         g.idx('constants').put('path', fullnspath + it.out('LEFT').next().code.toLowerCase(), it)
     }
@@ -340,7 +340,7 @@ g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.side
 ", "
 // const without class nor namspace (aka, global)
 g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.each{
-    it.out('CONST').each{ 
+    it.out('CONST').each{
         it.setProperty('fullnspath', '\\\\' + it.out('LEFT').next().fullcode.toLowerCase());
         g.idx('constants').put('path', '\\\\' + it.out('LEFT').next().fullcode.toLowerCase(), it)
     }

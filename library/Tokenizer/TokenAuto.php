@@ -689,7 +689,7 @@ g.addEdge(a, b, 'NEXT');
 global = it;
 rank = 0;
 
-// first and n-1 -th round. 
+// first and n-1 -th round.
 while(a2.token == 'T_COMMA') {
     a1.bothE('NEXT').each{ g.removeEdge(it); }
     a1.bothE('INDEXED').each{ g.removeEdge(it); }
@@ -729,7 +729,7 @@ toDelete.push(a1);
 a1 = a2;
 a2 = a1.out('NEXT').next();
 
-// first and n-1 -th round. 
+// first and n-1 -th round.
 while(a2.token == 'T_COMMA') {
     a1.bothE('NEXT').each{ g.removeEdge(it); }
     a1.bothE('INDEXED').each{ g.removeEdge(it); }
@@ -764,7 +764,7 @@ global = it;
 link = 'DEFINE';
 rank = 0;
 
-// first and n-1 -th round. 
+// first and n-1 -th round.
 while(a2.token == 'T_COMMA') {
     a1.bothE('NEXT').each{ g.removeEdge(it); }
     a1.bothE('INDEXED').each{ g.removeEdge(it); }
@@ -802,7 +802,7 @@ g.addEdge(it, x, it.code.toUpperCase());
 classe = it;
 rank = 0;
 
-// first and n-1 -th round. 
+// first and n-1 -th round.
 while(a3.token != 'T_OPEN_CURLY') {
     a2.bothE('NEXT').each{ g.removeEdge(it); }
     a2.rank = rank;
@@ -1367,7 +1367,7 @@ while (a0.token in ['T_OPEN_PARENTHESIS', 'T_COMMA']) {
             // Skip along, it's already done
             a0 = a2;
         }
-    } else if (a1.token in ['T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE', 'T_ARRAY'] && 
+    } else if (a1.token in ['T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE', 'T_ARRAY'] &&
                a2.atom  in ['Variable', 'Assignation']) {
         
         if (a3.token == 'T_EQUAL') {
@@ -1388,7 +1388,7 @@ while (a0.token in ['T_OPEN_PARENTHESIS', 'T_COMMA']) {
             g.addEdge(a0, x, 'NEXT');
             g.addEdge(x, a3, 'NEXT');
     
-            // indexing 
+            // indexing
             g.idx('atoms').put('atom', 'Typehint', x);
     
             fullcode = x;
@@ -2940,7 +2940,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             $queryConditions[] = <<<GREMLIN
 filter{
     it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
-    .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any() 
+    .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any()
                              }
 GREMLIN;
 
@@ -2958,7 +2958,7 @@ GREMLIN;
             $queryConditions[] = <<<GREMLIN
 filter{
     it.out('NEXT').out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
-    .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any() 
+    .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any()
                              }
 GREMLIN;
 
@@ -2976,7 +2976,7 @@ GREMLIN;
             $queryConditions[] = <<<GREMLIN
 filter{
     it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
-    .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any() 
+    .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any()
                              }
 GREMLIN;
 

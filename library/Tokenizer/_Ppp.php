@@ -76,7 +76,7 @@ if (fullcode.out('PUBLIC').any()) {
 
 if (fullcode.out('STATIC').any()) {
     finalcode = finalcode + 'static ';
-} 
+}
 
 s=[];
 fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}

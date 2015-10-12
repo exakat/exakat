@@ -53,7 +53,7 @@ class Tokenizer extends Tasks {
     
             $r = \Tokenizer\Token::getInstance($new, $config->phpversion);
             if ($r === null) {
-                // ignore but should throw an exception ? 
+                // ignore but should throw an exception ?
             } elseif ($new == 'Tokenizer\\FunctioncallArray') {
                 $regex[$class] = $r;
             } elseif ($new == 'Tokenizer\\Sequence') {
