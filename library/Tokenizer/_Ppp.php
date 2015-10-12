@@ -30,57 +30,6 @@ class _Ppp extends TokenAuto {
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
 
-/*
-    // class x { static private $s }
-        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
-                                   1 => array('token' => 'T_STATIC'),
-                                   2 => array('token' => 'T_VARIABLE'),
-                                 );
-        $this->actions = array('toOption' => 1,
-                               'atom'     => 'Ppp');
-        $this->checkAuto();
-
-    // class x { public static $x = 2; }
-        $this->conditions = array(-1 => array('notToken' => 'STATIC'),
-                                   0 => array('token'    =>  _Ppp::$operators),
-                                   1 => array('atom'     => 'Assignation'),
-                                   2 => array('token'    => 'T_SEMICOLON'),
-                                 );
-        
-        $this->actions = array('to_ppp_assignation' => true,
-                               'atom'               => 'Ppp',
-                               'addSemicolon'       => 'x'
-                               );
-        $this->checkAuto();
-
-
-    // class x { protected function f()  }
-        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
-                                   1 => array('token' => 'T_FUNCTION'),
-                                 );
-        $this->actions = array('toOption' => 1,
-                               'atom'     => 'Ppp');
-        $this->checkAuto();
-
-    // class x { protected private function f()  }
-        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
-                                   1 => array('token' => array('T_ABSTRACT', 'T_FINAL', 'T_STATIC')),
-                                   2 => array('token' => 'T_FUNCTION'),
-                                 );
-        $this->actions = array('toOption' => 2,
-                               'atom'     => 'Ppp');
-        $this->checkAuto();
-
-    // class x { protected private static function f()  }
-        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
-                                   1 => array('token' => array('T_ABSTRACT', 'T_FINAL', 'T_STATIC')),
-                                   2 => array('token' => array('T_ABSTRACT', 'T_FINAL', 'T_STATIC')),
-                                   3 => array('token' => 'T_FUNCTION'),
-                                 );
-        $this->actions = array('toOption' => 3,
-                               'atom'     => 'Ppp');
-        $this->checkAuto();
-*/
     // class x { public $x }
     // class x { public $x = 2 }
     // class x { public $x, $y }
@@ -113,9 +62,25 @@ class _Ppp extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
+finalcode = '';
+
+if (fullcode.out('PUBLIC').any()) {
+    finalcode = 'public ';
+} else if (fullcode.out('PRIVATE').any()) {
+    finalcode = 'private ';
+} else if (fullcode.out('PROTECTED').any()) {
+    finalcode = 'protected ';
+} else {
+    finalcode = '';
+}
+
+if (fullcode.out('STATIC').any()) {
+    finalcode = finalcode + 'static ';
+} 
+
 s=[];
-fullcode.out('CONST').each{ s.add(it.fullcode);}
-fullcode.setProperty('fullcode', 'const ' + s.join(', '));
+fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}
+fullcode.setProperty('fullcode', finalcode + s.join(', '));
 
 GREMLIN;
     }
