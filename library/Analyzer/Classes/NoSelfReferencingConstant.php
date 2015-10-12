@@ -30,7 +30,8 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
         // const c = self::b
         $this->atomIs('Const')
              ->inClass()
-             ->outIs('VALUE')
+             ->outIs('CONST')
+             ->outIs('RIGHT')
              ->outIs('CLASS')
              ->code('self')
              ->back('first');
@@ -39,7 +40,8 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
         // const c = self::$b + 1
         $this->atomIs('Const')
              ->inClass()
-             ->outIs('VALUE')
+             ->outIs('CONST')
+             ->outIs('RIGHT')
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
              ->code('self')
@@ -53,11 +55,13 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->savePropertyAs('fullnspath', 'classe')
              ->back('first')
 
-             ->outIs('NAME')
+             ->outIs('CONST')
+             
+             ->outIs('LEFT')
              ->savePropertyAs('code', 'constante')
-             ->inIs('NAME')
+             ->inIs('LEFT')
 
-             ->outIs('VALUE')
+             ->outIs('RIGHT')
              ->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->samePropertyAs('fullnspath', 'classe')
@@ -76,11 +80,13 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->savePropertyAs('fullnspath', 'classe')
              ->back('first')
 
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'constante')
-             ->inIs('NAME')
+             ->outIs('CONST')
 
-             ->outIs('VALUE')
+             ->outIs('LEFT')
+             ->savePropertyAs('code', 'constante')
+             ->inIs('LEFT')
+
+             ->outIs('RIGHT')
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
              ->samePropertyAs('fullnspath', 'classe')

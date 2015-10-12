@@ -33,7 +33,8 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
 
         // const x = 1 + 2;
         $this->atomIs('Const')
-             ->outIs('VALUE')
+             ->outIs('CONST')
+             ->outIs('RIGHT')
              ->atomIsNot($validAtoms)
              ->tokenIsNot(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');

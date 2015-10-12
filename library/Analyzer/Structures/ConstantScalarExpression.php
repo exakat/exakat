@@ -29,11 +29,12 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
     protected $phpVersion = '5.6+';
     
     public function analyze() {
-        $authorizedAtoms = array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null');
+        $authorizedAtoms = array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null', 'Identifier');
         
         // in constants
         $this->atomIs('Const')
-             ->outIs('VALUE')
+             ->outIs('CONST')
+             ->outIs('RIGHT')
              ->atomIsNot($authorizedAtoms)
              ->back('first');
         $this->prepareQuery();
@@ -52,9 +53,10 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
-             ->outIs('VALUE')
+             ->outIs('DEFINE')
+             ->outIs('RIGHT')
              ->atomIsNot($authorizedAtoms)
-             ->inIs('VALUE');
+             ->inIs('RIGHT');
         $this->prepareQuery();
     }
 }
