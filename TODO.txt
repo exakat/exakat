@@ -1562,3 +1562,11 @@ Fatal error: Class i3 cannot implement previously implemented interface i2 in /U
 Check that index in arrays are used twice
 
 Stop analyze when no code / token is found.
+
+Separate Functioncall / Methodcall index
+
+Spot non-existent includes (based on the file)
+
+Match default value type with the associated argument in the functioncall (f($x = 2) {} and f('IsAString') )
+
+parent, self, static, list may be defined as property but hard, confusing or impossible to use.
