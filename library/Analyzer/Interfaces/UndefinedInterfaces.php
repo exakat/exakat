@@ -27,27 +27,36 @@ use Analyzer;
 
 class UndefinedInterfaces extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Interfaces\\IsExtInterface');
+        return array('Classes/IsExtClass',
+                     'Interfaces/IsExtInterface',
+                     'Composer/IsComposerClass',
+                     'Composer/IsComposerInterface'
+                     );
     }
     
     public function analyze() {
         // interface used in a instanceof nor a Typehint but not defined
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
+             ->isNot('aliased', true)
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface');
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Interfaces/IsExtInterface')
+             ->analyzerIsNot('Composer/IsComposerClass')
+             ->analyzerIsNot('Composer/IsComposerInterface');
         $this->prepareQuery();
 
         $this->atomIs('Typehint')
              ->outIs('CLASS')
+             ->isNot('aliased', true)
              ->noClassDefinition()
              ->noInterfaceDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Interfaces/IsExtInterface')
+             ->analyzerIsNot('Composer/IsComposerClass')
+             ->analyzerIsNot('Composer/IsComposerInterface')
              ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'));
         $this->prepareQuery();
     }

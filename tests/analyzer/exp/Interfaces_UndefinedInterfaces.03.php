@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('\\C', 
-                      'D');
+$expected     = array('\CC', 
+                      'DD');
 
 $expected_not = array('$class');
 

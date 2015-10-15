@@ -1,6 +1,6 @@
 <?php
     if ($a instanceof $b) {}
-    if ($a instanceof \C) {}
-    if ($a instanceof D) {}
+    if ($a instanceof \CC) {}
+    if ($a instanceof DD) {}
 
 ?>

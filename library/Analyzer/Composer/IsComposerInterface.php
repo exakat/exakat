@@ -28,7 +28,7 @@ use Analyzer;
 class IsComposerInterface extends Analyzer\Analyzer {
 
     public function dependsOn() {
-        return array('Analyzer\\Interfaces\\InterfaceUsage');
+        return array('Interfaces/InterfaceUsage');
     }
     
     public function analyze() {
@@ -39,16 +39,24 @@ class IsComposerInterface extends Analyzer\Analyzer {
         
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
+             ->isNot('aliased', true)
              ->fullnspath($interfacesFullNP);
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
+             ->isNot('aliased', true)
              ->fullnspath($interfacesFullNP);
         $this->prepareQuery();
 
         $this->atomIs('Typehint')
              ->outIs('CLASS')
+             ->isNot('aliased', true)
+             ->fullnspath($interfacesFullNP);
+        $this->prepareQuery();
+
+        $this->atomIs('Use')
+             ->outIs('USE')
              ->fullnspath($interfacesFullNP);
         $this->prepareQuery();
     }
