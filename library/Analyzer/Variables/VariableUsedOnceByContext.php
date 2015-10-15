@@ -28,7 +28,7 @@ use Analyzer;
 class VariableUsedOnceByContext extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Variables/VariableUsedOnce',
+        return array('Variables/Blind',
                      'Variables/Variablenames',
                      'Variables/InterfaceArguments');
     }
@@ -36,7 +36,8 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Variable')
             // Not a static property
-             ->filter(' it.in("VARIABLE").loop(1){true}{ true}.in("PROPERTY").any() == false')
+             ->hasNoIn('PROPERTY')
+
              ->analyzerIs('Variables/Variablenames')
              ->analyzerIsNot('Variables/Blind')
              ->analyzerIsNot('Variables/InterfaceArguments')

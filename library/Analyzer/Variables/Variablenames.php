@@ -38,6 +38,7 @@ class Variablenames extends Analyzer\Analyzer {
              ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Staticproperty', 'PROPERTY')
              ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
+             ->hasNoParent('Staticproperty', array('VARIABLE', 'VARIABLE', 'PROPERTY'))
              ->analyzerIsNot('Variables/Blind');
         $this->prepareQuery();
 

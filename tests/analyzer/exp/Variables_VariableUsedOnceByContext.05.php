@@ -9,7 +9,8 @@ $expected_not = array('$staticArrayAppend',
                       '$staticArrayOnceTwoLevel',
                       '$staticNoArray',
                       '$staticArrayOnce',
-                      '$links'
+                      '$links',
+                      '$link2'
                       );
 
 ?>

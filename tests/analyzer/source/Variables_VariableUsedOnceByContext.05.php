@@ -2,7 +2,7 @@
 
 class x {
     function y() {
-        static::$links[count(static::$links) - 1][$name] = $value;
+        static::$links[count(static::$links2) - 1][$name] = $value;
         $arrayOnce[1] = 1;
         static::$staticArrayOnce[1] = 1;
         static::$staticArrayAppend[] = 1;
