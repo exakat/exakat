@@ -53,8 +53,8 @@ class _Static extends TokenAuto {
                                    2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),
                                  );
         
-        $this->actions = array('makePpp' => 'Ppp',
-                               'atom'    => 'Ppp',
+        $this->actions = array('makePpp' => 'Visibility',
+                               'atom'    => 'Visibility',
                                );
         $this->checkAuto();
 

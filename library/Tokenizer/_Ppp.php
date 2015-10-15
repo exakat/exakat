@@ -42,8 +42,8 @@ class _Ppp extends TokenAuto {
                                    2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),
                                  );
         
-        $this->actions = array('makePpp' => 'Ppp',
-                               'atom'    => 'Ppp',
+        $this->actions = array('makePpp' => 'Visibility',
+                               'atom'    => 'Visibility',
                                );
         $this->checkAuto();
 
@@ -53,7 +53,7 @@ class _Ppp extends TokenAuto {
                                  );
         
         $this->actions = array('toOption' => 1,
-                               'atom'     => 'Ppp');
+                               'atom'     => 'Visibility');
         $this->checkAuto();
 
         return false;
@@ -81,6 +81,14 @@ if (fullcode.out('STATIC').any()) {
 s=[];
 fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}
 fullcode.setProperty('fullcode', finalcode + s.join(', '));
+
+fullcode.out('DEFINE').each{
+    if (it.atom == 'Variable') {
+        it.setProperty('propertyname', it.code.substring(1, it.code.size()).toLowerCase());
+    } else if (it.atom == 'Assignation') {
+        it.setProperty('propertyname', it.out('LEFT').next().code.substring(1, it.out('LEFT').next().code.size()).toLowerCase());
+    } 
+}
 
 GREMLIN;
     }

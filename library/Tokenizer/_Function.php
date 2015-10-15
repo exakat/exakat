@@ -155,7 +155,6 @@ fullcode.out('RETURN').filter{ it.token in ['T_CALLABLE', 'T_ARRAY'] }.each{
 // for properties
 if (fullcode.out('DEFINE').any()) {
     fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.out('DEFINE').next().getProperty('fullcode'));
-    fullcode.setProperty('propertyname', fullcode.out('DEFINE').next().getProperty('fullcode').substring(1, fullcode.out('DEFINE').next().getProperty('fullcode').size()) );
     fullcode.out('PROTECTED', 'PRIVATE', 'PUBLIC').each{ it.setProperty('atom', 'Visibility'); }
 } else if (fullcode.token in ['T_STATIC']) {
     // Then, this is an identifier, like static::method();

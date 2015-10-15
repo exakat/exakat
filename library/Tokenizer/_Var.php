@@ -39,7 +39,7 @@ class _Var extends TokenAuto {
                                  );
         
         $this->actions = array('makePpp' => true,
-                               'atom'    => 'Var',
+                               'atom'    => 'Visibility',
                                );
 
         $this->checkAuto();
@@ -53,6 +53,14 @@ class _Var extends TokenAuto {
 s=[];
 fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}
 fullcode.setProperty('fullcode', 'var ' + s.join(', '));
+
+fullcode.out('DEFINE').each{
+    if (it.atom == 'Variable') {
+        it.setProperty('propertyname', it.code.substring(1, it.code.size()).toLowerCase());
+    } else if (it.atom == 'Assignation') {
+        it.setProperty('propertyname', it.out('LEFT').next().code.substring(1, it.out('LEFT').next().code.size()).toLowerCase());
+    } 
+}
 
 GREMLIN;
     }

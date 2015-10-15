@@ -273,8 +273,8 @@ root = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON',
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), root, 'INDEXED');
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
-    ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:token, virtual:true, line:it.line, fullcode:'ppp']);
-    g.idx('atoms').put('atom','Ppp', ppp);
+    ppp = g.addVertex(null, [code:'ppp', atom:'Visibility', token:token, virtual:true, line:it.line, fullcode:'Visibility']);
+    g.idx('atoms').put('atom','Visibility', ppp);
 
     var.out('PUBLIC', 'PRIVATE', 'PROTECTED', 'STATIC').each{
         option = g.addVertex(null, [code:it.code, fullcode:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
@@ -300,12 +300,12 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:token, virtual:true, line:it.line, fullcode: var.code]);
+    ppp = g.addVertex(null, [code:'ppp', atom:'Visibility', token:token, virtual:true, line:it.line, fullcode: var.code]);
     var.out('PUBLIC', 'PRIVATE', 'PROTECTED', 'STATIC').each{
         option = g.addVertex(null, [code:it.code, fullcode:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
         g.addEdge(ppp, option, it.code.toUpperCase());
     }
-    g.idx('atoms').put('atom','Ppp', ppp);
+    g.idx('atoms').put('atom','Visibility', ppp);
 
     ppp.setProperty('rank', it.rank);
     g.addEdge(root, ppp, 'ELEMENT');
@@ -499,10 +499,10 @@ toDelete.push(cp);
             $qactions[] = "
 
 /* to ppp alone */
-x = g.addVertex(null, [code:it.code, atom:'Ppp', token:it.token, virtual:true, line:it.line, fullcode:it.code ]);
+x = g.addVertex(null, [code:it.code, atom:'Visibility', token:it.token, virtual:true, line:it.line, fullcode:it.code ]);
 
 /* indexing */
-g.idx('atoms').put('atom', 'Ppp', x);
+g.idx('atoms').put('atom', 'Visibility', x);
 
 g.addEdge(x, it.out('NEXT').next(), 'DEFINE');
 it.out('NEXT').has('atom', 'Variable').each {
@@ -562,7 +562,7 @@ it.fullcode = it.code;
             $qactions[] = "
 /* to ppp with assignation */
 
-x = g.addVertex(null, [code:it.code, atom:'Ppp', token:it.token, virtual:true, line:it.line]);
+x = g.addVertex(null, [code:it.code, atom:'Visibility', token:it.token, virtual:true, line:it.line]);
 
 it.out('PUBLIC', 'PRIVATE', 'PROTECTED', 'STATIC').each{
     it.inE('STATIC', 'PRIVATE', 'PUBLIC', 'PROTECTED').each{ g.removeEdge( it ); }
@@ -584,7 +584,7 @@ g.removeVertex(assignation);
 g.removeEdge( it.inE('NEXT').next());
 
 /* indexing */
-g.idx('atoms').put('atom', 'Ppp', x);
+g.idx('atoms').put('atom', 'Visibility', x);
 
 fullcode = x;
 $fullcode

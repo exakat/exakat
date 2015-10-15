@@ -109,7 +109,7 @@ if (fullcode.out('SUBNAME').any()) {
 
     fullcode.out('AS').filter{ it.token in [ 'T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE']}.each{
         it.setProperty('fullcode', it.code);
-        it.setProperty('atom', 'Ppp');
+        it.setProperty('atom', 'Visibility');
     }
     fullcode.setProperty('fullcode', s + " as " + fullcode.out("AS").next().getProperty('fullcode'));
 } else {
