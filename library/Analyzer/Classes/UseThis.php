@@ -27,13 +27,13 @@ use Analyzer;
 
 class UseThis extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('MethodDefinition');
+        return array('Classes/MethodDefinition');
     }
     
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
              ->hasNoOut('STATIC')
              ->outIs('BLOCK')
@@ -45,7 +45,7 @@ class UseThis extends Analyzer\Analyzer {
         // Case for statics
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
              ->hasOut('STATIC')
              ->outIs('BLOCK')
@@ -59,7 +59,7 @@ class UseThis extends Analyzer\Analyzer {
 
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
              ->hasOut('STATIC')
              ->outIs('BLOCK')

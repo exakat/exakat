@@ -27,7 +27,7 @@ use Analyzer;
 
 class EmptyFunction extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Composer\\IsComposerNsname");
+        return array('Composer/IsComposerNsname');
     }
     
     public function analyze() {
@@ -69,7 +69,6 @@ class EmptyFunction extends Analyzer\Analyzer {
                               .any() == false;
                               }')
              ->back('first');
-
         $this->prepareQuery();
     }
 }
