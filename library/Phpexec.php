@@ -258,7 +258,7 @@ class Phpexec {
     }
     
     public function getActualVersion() {
-        
+        return $this->actualVersion;
     }
 }
 
