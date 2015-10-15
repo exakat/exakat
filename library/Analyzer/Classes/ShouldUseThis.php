@@ -40,8 +40,7 @@ class ShouldUseThis extends Analyzer\Analyzer {
              ->inIs('NAME')
              ->analyzerIsNot('Classes/UseThis')
              ->hasNoOut('STATIC')
-             ->hasNoOut('ABSTRACT')
-             ;
+             ->hasNoOut('ABSTRACT');
         $this->prepareQuery();
 
         // Static Methods must use a static call to property or variable (not constant though)
