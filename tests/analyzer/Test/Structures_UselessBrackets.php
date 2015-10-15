@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_UselessBrackets extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testStructures_UselessBrackets01()  { $this->generic_test('Structures_UselessBrackets.01'); }
     public function testStructures_UselessBrackets02()  { $this->generic_test('Structures_UselessBrackets.02'); }
+    public function testStructures_UselessBrackets03()  { $this->generic_test('Structures_UselessBrackets.03'); }
 }
 ?>
