@@ -78,7 +78,7 @@ class Build_root extends Tasks {
             g.idx('atoms').put('atom', it.atom, it);
         }";
         gremlin_query($query);
-        display( "g.idx('atoms') : T_VARIABLE\n");
+        display( "g.idx('atoms') : T_STRING_VARNAME\n");
 
         $query = "g.V.filter{it.atom in ['Integer', 'String',  'Magicconstant', 'Null',
                                          'Rawstring', 'Float', 'Boolean', 'Void', 'File']}.each{
