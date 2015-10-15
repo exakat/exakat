@@ -37,10 +37,6 @@ class MimeType extends Analyzer\Analyzer {
 'text',
 'video',
     );
-
-    public function dependsOn() {
-        return array('Analyzer\\Type\\String');
-    }
     
     public function analyze() {
         $this->atomIs('String')

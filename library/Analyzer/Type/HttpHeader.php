@@ -78,10 +78,6 @@ class HttpHeader extends Analyzer\Analyzer {
 'WWW-Authenticate',
     );
 
-    public function dependsOn() {
-        return array('Analyzer\\Type\\String');
-    }
-    
     public function analyze() {
         $this->atomIs('String')
              ->regex('code', '[\'\"]('.implode('|', $this->HttpHeadersList).'): .*[\'\"]');
