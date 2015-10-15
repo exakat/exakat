@@ -24,30 +24,44 @@
 namespace Report\Report;
 
 class Test extends Premier {
-    public function __construct($project) {    }
+    public function __construct($project) { 
+        parent::__construct($project);
+    }
 
     public function prepare() {
-/////////////////////////////////////////////////////////////////////////////////////
-/// Compilations
-/////////////////////////////////////////////////////////////////////////////////////
+        $this->createLevel1('By analyze');
 
-        $this->createLevel1('Compilation');
-        $this->addContent('Text', 'This table is a summary of compilation situation. Every PHP script has been tested for compilation with the mentionned versions. Any error that was found is displayed, along with the kind of messsages and the list of erroneous files.');
-        $this->createLevel2('Compile');
-        $config = \Config::factory();
+            $analyzes2 = ['Php/UnicodeEscapeSyntax'];
+            foreach($analyzes2 as $a) {
+                $analyzer = \Analyzer\Analyzer::getInstance($a);
+//                $analyzes2[$analyzer->getDescription()->getName()] = $analyzer;
+                
+                if ($analyzer->hasResults()) {
+                    $this->createLevel2($analyzer->getDescription()->getName());
+                    if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
+                        $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textLead');
+                        $this->addContent('TableForVersions', $analyzer);
+                    } elseif (get_class($analyzer) == "Analyzer\\Php\\ShortOpenTagRequired") {
+                        $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textLead');
+                        $this->addContent('SimpleTable', $analyzer, 'oneColumn');
+                    } else {
+                        $description = $analyzer->getDescription()->getDescription();
+                        if ($description == '') {
+                            $description = 'No documentation yet';
+                        }
+                        if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
+                            $this->addContent('Text', 'clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />', 'textLead');
+                        }
 
-        $compilations = new \Report\Content\Compilations(null);
-        $compilations->setVersions($config->other_php_versions);
-        $this->addContent('Compilations', $compilations);
 
-        foreach($config->other_php_versions as $code) {
-            $version = substr($code, 0, 1).'.'.substr($code, 1);
-            $this->createLevel2('Compatibility '.$version);
-            $this->addContent('Text', 'This is a summary of the compatibility of the code with PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
-            $this->addContent('Compatibility', 'Compatibility'.$code);
-        }
+                        $this->addContent('TextLead', $description, 'textLead');
 
-        
+                        $this->addContent('Horizontal', $analyzer);
+                    }
+                }
+            }
+            
+            
         return true;
     }
 }

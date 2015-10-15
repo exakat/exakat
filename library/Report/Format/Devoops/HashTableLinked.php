@@ -64,13 +64,19 @@ $text .= <<<HTML
 										<tbody>
 HTML;
         foreach($data as $k => $v) {
-            if ($v['result'] !== 0) {
-                $k = $this->makeLink($k);
-                $icon = '<i class="fa fa-check-o red"></i>';
-                $v['result'] .= ' warnings';
-            } else {
+            if ($v['result'] == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
+                $v['result'] = '';
+                $icon = '<i class="fa fa-stethoscope"></i>';
+            } elseif ($v['result'] == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
+                $v['result'] = '';
+                $icon = '<i class="fa fa-stethoscope"></i>';
+            } elseif ($v['result'] === 0) {
                 $icon = '<i class="fa fa-check-square-o green"></i>';
                 $v['result'] = '';
+            } else {
+                $k = $this->makeLink($k);
+                $icon = '<i class="fa fa-exclamation red"></i>';
+                $v['result'] .= ' warnings';
             }
             $text .= '<tr><td>'.$k.'</td><td>'.$icon.' '.$v['result']."</td></tr>\n";
         }
@@ -104,7 +110,6 @@ HTML;
         
         $output->push($text);
     }
-
 }
 
 ?>

@@ -24,47 +24,53 @@
 namespace Analyzer;
 
 abstract class Analyzer {
-    protected $neo4j = null;
-    protected $code = null;
+    protected $neo4j          = null;
+    protected $code           = null;
 
-    protected $description = null;
+    protected $description    = null;
 
-    static public $datastore = null;
+    static public $datastore  = null;
     
     protected $rowCount       = 0; // Number of found values
     protected $processedCount = 0; // Number of initial values
     protected $queryCount     = 0; // Number of ran queries
     protected $rawQueryCount  = 0; // Number of ran queries
 
-    private $queries = array();
+    private $queries          = array();
     private $queriesArguments = array();
-    private $methods = array();
-    private $arguments = array();
+    private $methods          = array();
+    private $arguments        = array();
     
-    protected $config = null;
+    protected $config         = null;
     
-    static public $analyzers = array();
+    static public $analyzers  = array();
     
-    protected $apply = null;
+    protected $apply          = null;
 
-    protected $phpVersion = 'Any';
+    protected $phpVersion       = 'Any';
     protected $phpConfiguration = 'Any';
     
-    private $path_tmp = null;
+    private $path_tmp           = null;
 
     protected $severity = self::S_NONE; // Default to None.
     const S_CRITICAL = 'Critical';
-    const S_MAJOR = 'Major';
-    const S_MINOR = 'Minor';
-    const S_NOTE = 'Note';
-    const S_NONE = 'None';
+    const S_MAJOR    = 'Major';
+    const S_MINOR    = 'Minor';
+    const S_NOTE     = 'Note';
+    const S_NONE     = 'None';
 
     protected $timeToFix = self::T_NONE; // Default to no time (Should not display)
-    const T_NONE = '0';
+    const T_NONE    = '0';
     const T_INSTANT = '5';
-    const T_QUICK = '30';
-    const T_SLOW = '60';
-    const T_LONG = '360';
+    const T_QUICK   = '30';
+    const T_SLOW    = '60';
+    const T_LONG    = '360';
+
+    private $isCompatible            = self::UNKNOWN_COMPATIBILITY;
+    const COMPATIBLE                 =  0;
+    const UNKNOWN_COMPATIBILITY      = -1;
+    const VERSION_INCOMPATIBLE       = -2;
+    const CONFIGURATION_INCOMPATIBLE = -3;
     
     static public $docs = null;
 
@@ -1809,15 +1815,43 @@ GREMLIN;
     }
     
     public function hasResults() {
-        return (bool) $this->getResultsCount() > 0;
+        return (bool) ($this->getResultsCount() > 0);
     }
 
     public function getResultsCount() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.has('notCompatibleWithPhpVersion', null).has('notCompatibleWithPhpConfiguration', null).count()";
+        $queryTemplate = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'$analyzer']].out
+.has('notCompatibleWithPhpVersion', null)
+.has('notCompatibleWithPhpConfiguration', null)
+.count();
+
+GREMLIN;
         $vertices = $this->query($queryTemplate);
         
-        return (int) $vertices[0];
+        $return = (int) $vertices[0];
+        if ($return > 0) {
+            return $return; 
+        }
+        
+        $queryTemplate = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'$analyzer']].out
+.transform{ ['versionCompatible':it.notCompatibleWithPhpVersion, 
+             'configurationCompatible': it.notCompatibleWithPhpConfiguration]};
+
+GREMLIN;
+        $vertices = $this->query($queryTemplate);
+        
+        if (empty($vertices[0])) { // really no results
+            return 0;
+        } elseif (isset($vertices[0]->versionCompatible)) {
+            return self::VERSION_INCOMPATIBLE;
+        } elseif (isset($vertices[0]->configurationCompatible)) {
+            return self::CONFIGURATION_INCOMPATIBLE;
+        } else {
+            // Error
+            return 0;
+        }
     }
     
     public function getSeverity() {

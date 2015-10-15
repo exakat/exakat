@@ -32,7 +32,7 @@ class Compatibility55 extends \Report\Content {
         foreach($list as $l) {
             $analyzer = \Analyzer\Analyzer::getInstance($l);
             $this->array[ $analyzer->getDescription()->getName()] = array('id'     => 1, 
-                                                        'result' => $analyzer->toCount());
+                                                                          'result' => $analyzer->getResultsCount());
         }
 
         $deprecatedExtensions = array_merge( self::$deprecatedExtensions,

@@ -33,14 +33,14 @@ class Compatibility53 extends \Report\Content {
         foreach($list as $l) {
             $analyzer = \Analyzer\Analyzer::getInstance($l);
             $this->array[ $analyzer->getDescription()->getName()] = array('id'     => 1, 
-                                                        'result' => $analyzer->toCount());
+                                                                          'result' => $analyzer->getResultsCount());
         }
 
         $deprecatedExtensions = self::$deprecatedExtensions;
         foreach($deprecatedExtensions as $extension) {
             $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Extensions\\Ext'.$extension);
             $this->array[ $analyzer->getDescription()->getName()] = array('id'     => 1, 
-                                                        'result' => $analyzer->toCount());
+                                                                          'result' => $analyzer->toCount());
         }
         
         return true;

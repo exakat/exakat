@@ -61,7 +61,8 @@ class ReportInfo extends \Report\Content {
 
         $this->array[] = array('Report production date', date('r', strtotime('now')));
         
-        $this->array[] = array('PHP used', PHP_VERSION.' ('.$config->phpversion.')');
+        $php = new \PhpExec($config->phpversion);
+        $this->array[] = array('PHP used', $php->getActualVersion().' (version '.$config->phpversion.' configured)');
         $this->array[] = array('Ignored files/folders', join(', ', $config->ignore_dirs));
         
         $this->array[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');

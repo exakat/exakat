@@ -67,7 +67,11 @@ HTML;
                 $bottom = $v;
                 continue; 
             }
-            $v[0] = $this->makeLink($v[0]);
+            // below 0 are errors
+            if ($v[1] >= 0) {
+                $v[0] = $this->makeLink($v[0]);
+            }
+            $v[1] = $this->reportStatus($v[1]);
             $text .= "<tr><td>{$v[0]}</td><td>{$v[1]}</td><td>{$v[2]}</td></tr>\n";
         }
         
@@ -102,6 +106,16 @@ $(document).ready(function() {
 HTML;
         
         $output->push($text);
+    }
+    
+    private function reportStatus($count) {
+        if ($count == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
+            return '<i class="fa fa-stethoscope"></i>';
+        } elseif ($count == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
+            return '<i class="fa fa-stethoscope"></i>';
+        } else {
+            return $count;
+        }
     }
 
 }

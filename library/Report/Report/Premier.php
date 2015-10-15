@@ -109,10 +109,10 @@ class Premier extends Report {
         }
 
 /////////////////////////////////////////////////////////////////////////////////////
-/// Compilations
+/// Compatibility
 /////////////////////////////////////////////////////////////////////////////////////
 
-        $this->createLevel1('Compilation');
+        $this->createLevel1('Compatibility');
         $this->addContent('Text', 'This table is a summary of compilation situation. Every PHP script has been tested for compilation with the mentionned versions. Any error that was found is displayed, along with the kind of messsages and the list of erroneous files.');
         $this->createLevel2('Compile');
 
@@ -124,10 +124,15 @@ class Premier extends Report {
 
         $config = \Config::factory();
         foreach($config->other_php_versions as $code) {
+            // No Compatibility with PHP 5.2 is done. Just ignored.
             if ($code == 52) { continue; }
+
             $version = substr($code, 0, 1).'.'.substr($code, 1);
             $this->createLevel2('Compatibility '.$version);
-            $this->addContent('Text', 'This is a summary of the compatibility of the code with PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
+            $this->addContent('Text', 
+            'This is a summary of the compatibility of the code with PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.
+            
+<i class="fa fa-check-square-o green"></i> : OK. Found nothing. <i class="fa fa-exclamation red"></i> : Found something worth checking. <i class="fa fa-stethoscope"></i> : Analyze is not compatible with used php version or with its compilation');
             $this->addContent('Compatibility', 'Compatibility'.$code);
         }
 

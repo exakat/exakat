@@ -26,12 +26,14 @@ namespace Report;
 class Report {
     static public $formats = array('Devoops', 'Json', 'Sqlite');
     
-    protected $project   = null;
+    protected $project     = null;
 
-    private $content   = null;
-    private $current   = null;
+    private $content       = null;
+    private $current       = null;
     private $currentLevel1 = null;
     private $currentLevel2 = null;
+    
+    private $root          = null;
 
     public function __construct($project) {
         $this->project = $project;

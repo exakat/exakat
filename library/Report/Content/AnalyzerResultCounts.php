@@ -41,11 +41,16 @@ class AnalyzerResultCounts extends \Report\Content {
                 // If we reach here, there is a structural problem.
             }
             
-            $count = $o->toCount();
-            // only show non-empty
-            if ($count == 0) { continue 1; }
+            $count = $o->getResultsCount();
 
-            $total += $count;
+            // only show non-empty
+            if ($count == 0) { 
+                continue 1; 
+            }
+
+            if ($count > 0) { 
+                $total += $count;
+            }
             $this->array[] = array( $o->getDescription()->getName(), $count, $o->getSeverity() );
         }
 
