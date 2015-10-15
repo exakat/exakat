@@ -279,6 +279,7 @@ class Token {
         } else {
             fullcodealias = fullcode.code.toLowerCase();
         }
+
         it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
             if (fullcode.token == 'T_NS_SEPARATOR') {
                 fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
@@ -839,6 +840,7 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
     it.in('USE').in('ELEMENT').out().loop(1){true}{ it.object.fullnspath != null && it.object.atom != 'Use'}.each{
         if (alias == it.code.toLowerCase()) {
             it.setProperty('fullnspath', fullnspath);
+            it.setProperty('aliased', true);
         }
     }
 };
