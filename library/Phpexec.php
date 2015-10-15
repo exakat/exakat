@@ -58,6 +58,7 @@ class Phpexec {
     private $config           = array();
     private $isCurrentVersion = false;
     private $isValid          = false;
+    private $actualVersion    = 'None';
     
     public function __construct($phpversion) {
         $phpversion3 = substr($phpversion, 0, 3);
@@ -70,11 +71,10 @@ class Phpexec {
                 $this->phpexec = $config->php52;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (substr($res, 0, 4) == 'PHP ') {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
                         $this->isValid = true;
-                    } else {
-                    
-                    }
+                        $this->actualVersion = $r[1];
+                    } 
                 }
                 break 1;
 
@@ -82,8 +82,9 @@ class Phpexec {
                 $this->phpexec = $config->php53;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (substr($res, 0, 4) == 'PHP ') {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
                         $this->isValid = true;
+                        $this->actualVersion = $r[1];
                     } 
                 }
                 break 1;
@@ -92,8 +93,9 @@ class Phpexec {
                 $this->phpexec = $config->php54;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (substr($res, 0, 4) == 'PHP ') {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
                         $this->isValid = true;
+                        $this->actualVersion = $r[1];
                     } 
                 }
                 break 1;
@@ -102,8 +104,9 @@ class Phpexec {
                 $this->phpexec = $config->php55;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (substr($res, 0, 4) == 'PHP ') {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
                         $this->isValid = true;
+                        $this->actualVersion = $r[1];
                     } 
                 }
                 break 1;
@@ -112,8 +115,9 @@ class Phpexec {
                 $this->phpexec = $config->php56;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (substr($res, 0, 4) == 'PHP ') {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
                         $this->isValid = true;
+                        $this->actualVersion = $r[1];
                     } 
                 }
                 break 1;
@@ -122,8 +126,9 @@ class Phpexec {
                 $this->phpexec = $config->php70;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (substr($res, 0, 4) == 'PHP ') {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
                         $this->isValid = true;
+                        $this->actualVersion = $r[1];
                     } 
                 }
                 break 1;
@@ -132,6 +137,7 @@ class Phpexec {
                 $this->phpexec = $config->php;
                 // PHP will be valid if we use the one that is currently executing us
                 $this->isValid = true;
+                $this->actualVersion = PHP_VERSION;
         }
         
         if ($this->isValid) {
@@ -249,6 +255,10 @@ class Phpexec {
     
     public function isValid() {
         return $this->isValid;
+    }
+    
+    public function getActualVersion() {
+        
     }
 }
 
