@@ -1570,3 +1570,28 @@ Spot non-existent includes (based on the file)
 Match default value type with the associated argument in the functioncall (f($x = 2) {} and f('IsAString') )
 
 parent, self, static, list may be defined as property but hard, confusing or impossible to use.
+
+COlon for alternative syntax shouldn't get indexed for label.
+
+Spot dependencies in dependsOn that are not used in prepareQuery
+Harvest raw for internal usage of g.idx() or g.V (!!!)
+
+Calculate the number of indexed values at load, and reduce this (a lot are not going to be used...)
+Spot Tokens that have low yield (in-indexed versus out-done) and try to reduce this 
+ArgumentsWithoutComma is a good one for that.
+
+Remove applyBelow (we use atomInside now)
+
+incompilable is now reported for all versions 
+
+Analyzer has 'toArray()' et 'getArray'. Confusing!
+
+Add support PHP 7.1 (and coming up versions)
+
+Request is not found interface ? Check with Composer's database.
+
+Adds a check in a report : all links should be OK to ajax!
+
+Spot useless \\ in literals
+
+Unresolved interface/class : check in return typehint too
