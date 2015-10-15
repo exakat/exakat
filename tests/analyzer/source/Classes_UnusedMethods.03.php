@@ -11,6 +11,7 @@ array_filter($a, array($a, 'x2'));
 class Y {
     static function x() {}
     static function x2() {}
+    static function x3() {}
     
     function z() {
         array_filter($a, array($this, 'x'));

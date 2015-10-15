@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('static function x2( ) { /**/ } ', 
-                      'function x22( ) { /**/ } ', 
-                      'function z( ) { /**/ } ');
+$expected     = array('function x22( ) { /**/ } ', 
+                      'function z( ) { /**/ } ',
+                      'static function x3( ) { /**/ } ',
+);
 
-$expected_not = array();
+$expected_not = array('static function x2( ) { /**/ } ', 
+                      );
 
 ?>

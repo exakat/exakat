@@ -33,9 +33,9 @@ class UsedMethods extends Analyzer\Analyzer {
     public function analyze() {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
-        $methods = $this->query('g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
         
         // Normal Methodcall
+        $methods = $this->query('g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -48,6 +48,7 @@ class UsedMethods extends Analyzer\Analyzer {
         $this->prepareQuery();
 
          // call with call_user_func (???)
+        $staticMethodCallable = $this->query('g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.filter{ it.out("ARGUMENT").has("rank", 0).has("atom", "String").any() }.out("ARGUMENT").has("rank", 1).noDelimiter.unique()');
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -56,7 +57,7 @@ class UsedMethods extends Analyzer\Analyzer {
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
              ->savePropertyAs('code', 'method')
-             ->raw('filter{ g.idx("atoms")[["atom":"Functioncall"]].hasNot("fullnspath", null).has("fullnspath", "\\\\call_user_func").any() }')
+             ->code($staticMethodCallable)
              ->back('used');
         $this->prepareQuery();
         

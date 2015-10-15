@@ -27,8 +27,8 @@ use Analyzer;
 
 class UnusedMethods extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\UsedMethods',
-                     'Analyzer\\Classes\\MethodDefinition');
+        return array('Classes/UsedMethods',
+                     'Classes/MethodDefinition');
     }
     
     public function analyze() {
@@ -36,9 +36,10 @@ class UnusedMethods extends Analyzer\Analyzer {
         
         // Methods definitions
         $this->atomIs('Function')
-             ->analyzerIsNot('Analyzer\\Classes\\UsedMethods')
+             ->analyzerIsNot('Classes/UsedMethods')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
+             ->notInInterface()
              ->codeIsNot($magicMethods)
              ->back('first');
         $this->prepareQuery();

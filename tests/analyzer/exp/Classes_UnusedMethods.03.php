@@ -1,8 +1,9 @@
 <?php
 
-$expected     = array('static function x2( ) { /**/ } ', 
+$expected     = array('static function x3( ) { /**/ } ', 
                       'function z( ) { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('static function x2( ) { /**/ } ', 
+                      );
 
 ?>
