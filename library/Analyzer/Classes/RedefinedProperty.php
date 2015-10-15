@@ -29,6 +29,7 @@ class RedefinedProperty extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Ppp')
              ->outIs('DEFINE')
+             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToAllParents()
@@ -36,6 +37,7 @@ class RedefinedProperty extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->outIs('DEFINE')
+             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'property');
         $this->prepareQuery();
     }
