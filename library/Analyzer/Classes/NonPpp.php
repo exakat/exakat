@@ -27,17 +27,17 @@ use Analyzer;
 
 class NonPpp extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('MethodDefinition');
+        return array('Classes/MethodDefinition');
     }
     
     public function analyze() {
         $this->atomIs('Identifier')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
              ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'));
         $this->prepareQuery();
 
-        $this->atomIs('Ppp')
+        $this->atomIs('Visibility')
              ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'))
              ->hasOut('DEFINE')
              ->inIs('ELEMENT')
