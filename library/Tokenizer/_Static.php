@@ -109,11 +109,11 @@ class _Static extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-finalcode = fullcode.code + ' ';
+finalcode = fullcode.code;
 
 s=[];
 fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}
-fullcode.setProperty('fullcode', finalcode + s.join(', '));
+fullcode.setProperty('fullcode', finalcode + ' ' + s.join(', '));
 
 fullcode.out('DEFINE').each{
     if (it.atom == 'Variable') {
