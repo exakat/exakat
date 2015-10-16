@@ -783,7 +783,29 @@ GREMLIN;
         } else {
             $caseSensitive = '.toLowerCase()';
         }
+        
+        if (is_array($name)) {
+            $name = "['". join("', '", $name)."']"; 
+        }
+
         $this->addMethod('filter{ it.'.$property.$caseSensitive.' in '.$name.'}');
+    
+        return $this;
+    }
+
+    public function isPropertyNotIn($property, $name, $caseSensitive = false) {
+        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
+            $caseSensitive = '';
+        } else {
+            $caseSensitive = '.toLowerCase()';
+        }
+
+        if (is_array($name)) {
+            $name = "['". join("', '", $name)."']"; 
+            $name = str_replace('\\', '\\\\', $name);
+        }
+
+        $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' in '.$name.')}');
     
         return $this;
     }
