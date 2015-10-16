@@ -1,14 +1,8 @@
 <?php
 
-$expected     = array('private static $psp', 
-                      'private static $psp2', 
-                      'private static $psp3', 
-                      'private static $spp3', 
-                      'private static $spp2', 
-                      'private static $spp', 
-                      'static $sp3', 
-                      'static $sp2', 
-                      'static $sp');
+$expected     = array( 'private static $spp, $spp2, $spp3', 
+                       'static $sp, $sp2, $sp3', 
+                       'static $psp, $psp2, $psp3');
 
 $expected_not = array();
 

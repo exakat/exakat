@@ -52,7 +52,7 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Ppp')
+             ->atomIs('Visibility')
              ->outIs('DEFINE')
              ->outIs('RIGHT')
              ->atomIsNot($authorizedAtoms)

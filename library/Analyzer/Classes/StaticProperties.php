@@ -31,10 +31,9 @@ class StaticProperties extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Ppp')
-             ->_as('ppp')
-             ->outIs('STATIC')
-             ->back('ppp');
+             ->atomIs('Visibility')
+             ->hasOut('STATIC');
+        $this->prepareQuery();
     }
 }
 

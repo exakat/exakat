@@ -27,13 +27,13 @@ use Analyzer;
 
 class ShouldBeTypehinted extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Arguments');
+        return array('Variables/Arguments');
     }
     
     public function analyze() {
         // spotting objects with property
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -47,7 +47,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
 
         // spotting objects with methodcall
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -61,7 +61,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
 
         // spotting array with array[index]
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -76,7 +76,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
 
         // spotting array with arrayappend[]
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -90,7 +90,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
 
         // spotting array in a functioncall
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -105,7 +105,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
 
         // spotting array with callable
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')

@@ -27,17 +27,15 @@ use Analyzer;
 
 class UnusedPrivateProperty extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\UsedPrivateProperty');
+        return array('Classes/UsedPrivateProperty');
     }
 
     public function analyze() {
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->_as('block')
-             ->outIs('ELEMENT')
-             ->atomIs('Ppp')
+        $this->atomIs('Visibility')
              ->hasOut('PRIVATE')
-             ->analyzerIsNot('Analyzer\\Classes\\UsedPrivateProperty');
+             ->outIs('DEFINE')
+             ->outIsIE('LEFT')
+             ->analyzerIsNot('Classes/UsedPrivateProperty');
         $this->prepareQuery();
     }
 }

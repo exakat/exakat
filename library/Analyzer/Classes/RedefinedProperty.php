@@ -27,7 +27,7 @@ use Analyzer;
 
 class RedefinedProperty extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Ppp')
+        $this->atomIs('Visibility')
              ->outIs('DEFINE')
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
@@ -35,7 +35,7 @@ class RedefinedProperty extends Analyzer\Analyzer {
              ->goToAllParents()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Ppp')
+             ->atomIs('Visibility')
              ->outIs('DEFINE')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'property');

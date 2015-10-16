@@ -30,7 +30,7 @@ class OneLineTwoInstructions extends Analyzer\Analyzer {
         $this->atomIs('Sequence')
              ->outIs('ELEMENT')
              ->_as('report')
-             ->atomIsNot(array('Ppp', 'Global', 'Const', 'RawString'))
+             ->atomIsNot(array('Visibility', 'Global', 'Const', 'RawString'))
              ->savePropertyAs('line', 'line_number')
              ->nextSibling()
              ->atomIsNot(array('RawString'))

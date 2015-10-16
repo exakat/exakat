@@ -27,19 +27,21 @@ use Analyzer;
 
 class PropertyVariableConfusion extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Arguments');
+        return array('Variables/Arguments');
     }
     
     public function analyze() {
-        $this->atomIs('Ppp')
+        $this->atomIs('Visibility')
              ->outIs('DEFINE')
+             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'name')
+             ->inIsIE('LEFT')
              ->inIs('DEFINE')
              ->inIs('ELEMENT')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'name')
              ->hasNoIn('DEFINE')
-             ->analyzerIsNot('Analyzer\\Variables\\Arguments')
+             ->analyzerIsNot('Variables/Arguments')
              ->back('first');
         $this->prepareQuery();
     }
