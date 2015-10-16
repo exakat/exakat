@@ -27,34 +27,40 @@ use Analyzer;
 
 class CouldBeClassConstant extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsModified');
+        return array('Classes/IsModified');
     }
     
     public function analyze() {
-        $this->atomIs('Ppp')
-             // speed up test (many won't have this)
-             ->hasOut('DEFINE')
+        $this->atomIs('Visibility')
 
-             ->filter('it.out("VALUE").filter{it.atom in ["Void", "Null", "Staticconstant"]}.any() == false')
-//             ->filter('it.out("VALUE").filter{ it.atom == "Void"}.any() == false')
-             ->savePropertyAs('propertyname', 'name')
+             ->hasNoOut(array('PRIVATE', 'PROTECTED'))
+
              ->outIs('DEFINE')
+
+             ->hasOut('RIGHT')
+             ->filter('it.out("RIGHT").filter{it.atom in ["Null", "Staticconstant"]}.any() == false')
+
+             ->savePropertyAs('propertyname', 'name')
+             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'staticName')
              ->goToClass()
+             ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('BLOCK')
 
-                // array usage as property with $this
+                // usage as property with $this
              ->raw('filter{it.out.loop(1){true}{it.object.atom == "Property"}.filter{ it.out("OBJECT").has("code", "\$this").any()}
-                                                                             .filter{ it.out("PROPERTY").has("code", name).any()}
+                                                                             .filter{ it.out("PROPERTY").filter{ it.code.toLowerCase() == name}.any()}
                                                                              .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\IsModified").any()}
                                                                              .any() == false}')
 
-                // array usage as static property with self or static
-             ->raw('filter{it.out.loop(1){true}{it.object.atom == "Staticproperty"}.filter{ it.out("CLASS").filter{ it.code.toLowerCase() in ["static", "self"]}.any()}
-                                                                                   .filter{ it.out("PROPERTY").has("code", staticName).any() || it.out("PROPERTY").out("VARIABLE").has("code", staticName).any()}
+                // usage as static property with (namespace, self or static)
+             ->raw('filter{it.out.loop(1){true}{it.object.atom == "Staticproperty"}.filter{ it.out("CLASS").filter{ it.fullnspath == fnp}.any()}
+                                                                                   .filter{ it.out("PROPERTY").filter{ it.code.toLowerCase() == staticName.toLowerCase()}.any() || it.out("PROPERTY").out("VARIABLE").filter{ it.code.toLowerCase() == staticName.toLowerCase()}.any()}
                                                                                    .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\IsModified").any()}
                                                                                    .any() == false}')
              ->back('first');
+             
+             // Exclude situations where property is used asan object or a resource (can'tbe class constant)
         $this->prepareQuery();
     }
 }
