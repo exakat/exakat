@@ -27,22 +27,34 @@ use Analyzer;
 
 class NoPublicAccess extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Ppp')
+
+        $properties = $this->query('g.idx("atoms")[["atom":"Property"]].out("OBJECT").has("atom", "Variable").hasNot("code", \'$this\').in("OBJECT").out("PROPERTY").transform{ it.code.toLowerCase(); }.unique()');
+        $this->atomIs('Visibility')
              ->hasOut('PUBLIC')
              ->hasNoOut('STATIC')
-             ->savePropertyAs('propertyname', 'property')
-             ->raw('filter{ g.idx("atoms")[["atom":"Property"]].out("OBJECT").has("atom", "Variable").hasNot("code", "$this").in("OBJECT").out("PROPERTY").has("code", property).any() == false}')
-             ->back('first');
+             ->outIs('DEFINE')
+             ->_as('ppp')
+             ->isPropertyNotIn('propertyname', $properties)
+             ->back('ppp');
         $this->prepareQuery();
 
-        $this->atomIs('Ppp')
+        $staticproperties = $this->query('g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").filter{it.code in ["self", "static"]}.any() == false}.transform{ z = it.out("PROPERTY").has("token", "T_VARIABLE").next().code; it.out("CLASS").next().fullnspath + "::" + z.substring(1, z.size() ).toLowerCase() }.unique()');
+        $staticproperties = "['". join("', '", $staticproperties)."']"; 
+        $staticproperties = str_replace('\\', '\\\\', $staticproperties);
+        
+        if (strlen($staticproperties) > 10000) {
+            display('Warning : '.__CLASS__.' staticproperties are too long');
+        }
+        
+        $this->atomIs('Visibility')
              ->hasOut('PUBLIC')
              ->hasOut('STATIC')
-             ->savePropertyAs('code', 'property')
+             ->outIs('DEFINE')
+             ->_as('ppp')
              ->goToClass()
-             ->savePropertyAs('fullnspath', 'fns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Staticproperty"]].out("CLASS").filter{it.token in ["T_STRING", "T_NS_SEPARATOR"]}.has("fullnspath", fns).in("CLASS").out("PROPERTY").has("code", property).any() == false}')
-             ->back('first');
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('ppp')
+             ->filter('!(fnp + "::" + it.propertyname in '.$staticproperties.')');
         $this->prepareQuery();
     }
 }

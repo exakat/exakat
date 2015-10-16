@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('public $unused = 2',
-                      'public static $usedButStatic = 4');
+$expected     = array('$unused = 2',
+                      '$usedInside = 3');
 
 $expected_not = array('$used',
-                      '$usedInside',
-                      '$usedButStatic'
+                      '$usedButStatic',
+                      '$usedButStatic = 4'
 );
 
 ?>

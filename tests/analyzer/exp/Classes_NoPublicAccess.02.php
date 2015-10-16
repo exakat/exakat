@@ -1,11 +1,12 @@
 <?php
 
-$expected     = array( 'public static $usedByX = 1',
-                       'public static $usedByXFQN = 1',
-                       'public static $usedButWrongClass = 4',
-                       'public static $unused = 2',
-                       'public static $usedInside = 3');
+$expected     = array( '$unused = 2',
+                       '$usedButWrongClass = 4',
+                       '$usedInside = 3');
 
-$expected_not = array();
+$expected_not = array('$usedByX = 1',
+                      '$usedByXFQN = 1',
+                      
+                       );
 
 ?>
