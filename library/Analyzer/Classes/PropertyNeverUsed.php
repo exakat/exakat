@@ -27,15 +27,16 @@ use Analyzer;
 
 class PropertyNeverUsed extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\PropertyUsedInternally');
+        return array('Classes/PropertyUsedInternally');
     }
 
     public function analyze() {
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Ppp')
-             ->analyzerIsNot('Analyzer\\Classes\\PropertyUsedInternally');
+             ->atomIs('Visibility')
+             ->outIs('DEFINE')
+             ->analyzerIsNot('Classes/PropertyUsedInternally');
         $this->prepareQuery();
     }
 }

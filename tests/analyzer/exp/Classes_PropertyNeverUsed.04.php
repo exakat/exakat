@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('static $staticPropertyUnused = 5');
+$expected     = array('$staticPropertyUnused = 5');
 
-$expected_not = array('static $staticPropertySelf = 1',
-                      'static $staticPropertyStatic = 2',
-                      'static $staticPropertyx = 3',
-                      'static $staticPropertyxFNS = 4'
+$expected_not = array('$staticPropertySelf = 1',
+                      '$staticPropertyStatic = 2',
+                      '$staticPropertyx = 3',
+                      '$staticPropertyxFNS = 4'
                       );
 
 ?>

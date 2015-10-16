@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('protected $unusedProtected',
-                      'protected $unusedProtectedByBelowD',
+$expected     = array('$unusedProtected',
+                      '$unusedProtectedByBelowD',
                       );
 
-$expected_not = array('protected $usedProtectedByAbove',
-                      'protected $usedProtectedByBelowC',
-                      'protected $usedProtectedByBelowE',
-                      'protected $usedProtectedByBelowF'
+$expected_not = array('$usedProtectedByAbove',
+                      '$usedProtectedByBelowC',
+                      '$usedProtectedByBelowE',
+                      '$usedProtectedByBelowF'
 );
 
 ?>

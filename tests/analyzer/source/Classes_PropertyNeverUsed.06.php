@@ -5,8 +5,8 @@ class x {
 //        self::$staticPropertySelf = 6;
         static::$staticPropertyStatic = 7;
 // undeclared 
-//         x::$staticPropertyx = 8;
-//        \x::$staticPropertyxFNS = 9;
+         x::$staticPropertyx = 8;
+        \x::$staticPropertyxFNS = 9;
         w::$staticPropertyx = 8;
         \w::$staticPropertyxFNS = 9;
         \otherClass::$staticPropertyxFNS = 10;

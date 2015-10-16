@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('private $notUsedVar',
-                      'var $nonPrivate',
+$expected     = array('$notUsedVar',
+                      '$nonPrivate',
 );
 
-$expected_not = array('private $usedVar');
+$expected_not = array('$usedVar');
 
 ?>

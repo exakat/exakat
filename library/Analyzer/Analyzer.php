@@ -777,6 +777,17 @@ GREMLIN;
         return $this;
     }
 
+    public function isPropertyIn($property, $name, $caseSensitive = false) {
+        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
+            $caseSensitive = '';
+        } else {
+            $caseSensitive = '.toLowerCase()';
+        }
+        $this->addMethod('filter{ it.'.$property.$caseSensitive.' in '.$name.'}');
+    
+        return $this;
+    }
+
     public function sameContextAs($storage = 'context', $context = array('Namespace', 'Class', 'Function')) {
         foreach($context as &$c) {
             $c = $storage.'["'.$c.'"] == '.$context.'["'.$c.'"] ';
@@ -1413,7 +1424,7 @@ GREMLIN
     }
 
     public function goToAllChildren() {
-        $this->addMethod('transform{root = it.fullnspath; g.idx("atoms")[["atom":"Class"]].filter{ it.getProperty("tree").findAll{it == root;}.size() > 0; }.toList()}.scatter');
+        $this->addMethod('transform{root = it.fullnspath; g.idx("atoms")[["atom":"Class"]].filter{ it.getProperty("classTree").findAll{it == root;}.size() > 0; }.toList()}.scatter');
         
         return $this;
     }
