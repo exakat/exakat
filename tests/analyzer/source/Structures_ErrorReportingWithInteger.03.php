@@ -1,5 +1,5 @@
 <?php
 
-error_reporting("e$x", );
+error_reporting("e$x", 2);
 
 ?>
