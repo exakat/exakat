@@ -1381,18 +1381,20 @@ while (a0.token in ['T_OPEN_PARENTHESIS', 'T_COMMA']) {
         
         if (a3.token == 'T_EQUAL') {
             a0 = a3.out('NEXT').out('NEXT').next();
-        } else {
+        } else if (a3.token in ['T_COMMA' ,'T_CLOSE_PARENTHESIS']) {
             x = g.addVertex(null, [code:'Typehint', atom:'Typehint', token:'T_TYPEHINT', virtual:true, line:it.line]);
 
             g.addEdge(x, a1, 'CLASS');
             if (a1.token == 'T_ARRAY') {
                 a1.setProperty('atom', 'Identifier');
-                a1.setProperty('fullcode', it.code);
+                a1.setProperty('fullcode', a1.code);
             }
             g.addEdge(x, a2, 'VARIABLE');
-
-            x.out.bothE('NEXT').each{ g.removeEdge(it);}
-            x.out.bothE('INDEXED').each{ g.removeEdge(it);}
+            
+            a1.bothE('NEXT').each{ g.removeEdge(it);}
+            a1.bothE('INDEXED').each{ g.removeEdge(it);}
+            a2.bothE('NEXT').each{ g.removeEdge(it);}
+            a2.bothE('INDEXED').each{ g.removeEdge(it);}
 
             g.addEdge(a0, x, 'NEXT');
             g.addEdge(x, a3, 'NEXT');
@@ -1404,6 +1406,8 @@ while (a0.token in ['T_OPEN_PARENTHESIS', 'T_COMMA']) {
             $fullcode;
             
             a0 = a3;
+        } else {
+            Dunno;
         }
     } else {
         // In case we don't know, just skip it

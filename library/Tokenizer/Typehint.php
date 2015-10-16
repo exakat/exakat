@@ -34,8 +34,7 @@ class Typehint extends TokenAuto {
         $this->conditions = array( 0 => array('token'     => Typehint::$operators),
                                    1 => array('token'     => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
                                                                    'T_CALLABLE', 'T_ARRAY', 'T_EQUAL')),
-//                                   2 => array('atom'      => $atoms),
-//                                   3 => array('filterOut' => Assignation::$operators),
+                                    
         );
         
         $this->actions = array('toTypehint'  => true,
@@ -49,8 +48,10 @@ class Typehint extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', 'typehint fullcode');
-//fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty("fullcode") + " " + fullcode.out("VARIABLE").next().getProperty('fullcode'));
+// This may happens during the processing 
+if (fullcode.atom == 'Typehint') {
+    fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty("fullcode") + " " + fullcode.out("VARIABLE").next().getProperty('fullcode'));
+}
 
 GREMLIN;
     }
