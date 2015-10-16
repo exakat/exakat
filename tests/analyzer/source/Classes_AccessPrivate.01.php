@@ -2,11 +2,13 @@
 
 class a extends c {
      private $x = 1;
+     protected $xpr = 1;
      private function y() {}
 }
 
 class b extends a {
      private $x = 2;
+     protected $xpr = 1;
      private function y() {}
      
      function __construct() {
@@ -19,16 +21,23 @@ class b extends a {
         b::$x;
         c::$x;
         d::$x;
+
+        a::$xpr;
+        b::$xpr;
+        c::$xpr;
+        d::$xpr;
      }
 }
 
 class c {
      private $x = 1;
+     protected $xpr = 1;
      private function y() {}
 }
 
 class d {
      private $x = 1;
+     protected $xpr = 1;
      private function y() {}
 }
 

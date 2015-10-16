@@ -133,7 +133,14 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->codeIsNot(array('parent', 'static', 'self'))
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).in("DEFINE").out("PRIVATE").any()}')
+             ->outIs("BLOCK")
+             ->outIs("ELEMENT")
+             ->atomIs("Visibility")
+             ->hasOut('PRIVATE')
+             ->outIs("DEFINE")
+             ->outIsIE('LEFT')
+             ->samePropertyAs('code', 'name')
+//             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").out("DEFINE").transform{ a = it; while (a.in("LEFT").any()) { a = a.in("LEFT").next(); };  a;}.has("code", name).transform{ a = it; while (a.out("LEFT").any()) { a = a.out("LEFT").next(); };  a;}.in("DEFINE").out("PRIVATE").any()}')
              ->back('first');
         $this->prepareQuery();
         
@@ -145,11 +152,17 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code('parent')
              ->goToClass()
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).in("DEFINE").out("PRIVATE").any()}')
+             ->goToAllParents()
+             ->outIs("BLOCK")
+             ->outIs("ELEMENT")
+             ->atomIs("Visibility")
+             ->hasOut('PRIVATE')
+             ->outIs("DEFINE")
+             ->outIsIE('LEFT')
+             ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
+
         return false;
     }
 }

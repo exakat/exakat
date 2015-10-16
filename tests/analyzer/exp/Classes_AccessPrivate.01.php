@@ -8,6 +8,9 @@ $expected     = array('d::y( )',
                       'a::$x',);
 
 $expected_not = array('b::$x',
-                      'b::y()',);
+                      'b::y()',
+                      'd::$xpr',
+                      'c::$xpr',
+                      'a::$xpr',);
 
 ?>
