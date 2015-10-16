@@ -107,8 +107,23 @@ class _Static extends TokenAuto {
     }
 
     public function fullcode() {
-        $token = new _Function();
-        return $token->fullcode();
+        return <<<GREMLIN
+
+finalcode = fullcode.code;
+
+s=[];
+fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}
+fullcode.setProperty('fullcode', finalcode + s.join(', '));
+
+fullcode.out('DEFINE').each{
+    if (it.atom == 'Variable') {
+        it.setProperty('propertyname', it.code.substring(1, it.code.size()).toLowerCase());
+    } else if (it.atom == 'Assignation') {
+        it.setProperty('propertyname', it.out('LEFT').next().code.substring(1, it.out('LEFT').next().code.size()).toLowerCase());
+    } 
+}
+
+GREMLIN;
     }
 }
 ?>
