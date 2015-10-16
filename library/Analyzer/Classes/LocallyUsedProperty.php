@@ -27,48 +27,52 @@ use Analyzer;
 
 class LocallyUsedProperty extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\StaticVariables');
+        return array('Variables/StaticVariables');
     }
     
     public function analyze() {
         // normal property
-        $this->atomIs('Ppp')
-             ->isNot('propertyname', null)
+        $this->atomIs('Visibility')
              ->hasNoOut('STATIC')
+             ->outIs('DEFINE')
+             ->_as('ppp')
+             ->isNot('propertyname', null)
              ->savePropertyAs('propertyname', 'property')
              ->goToClass()
              ->outIs('BLOCK')
              ->atomInside('Property')
              ->outIs('PROPERTY')
              ->samePropertyAs('code', 'property')
-             ->back('first');
+             ->back('ppp');
         $this->prepareQuery();
 
         // static property in an variable static::$c
-        $this->atomIs('Ppp')
-             ->isNot('propertyname', null)
+        $this->atomIs('Visibility')
              ->hasOut('STATIC')
              ->outIs('DEFINE')
+             ->_as('ppp')
+             ->isNot('propertyname', null)
              // not a static variable for a function/method
              ->hasNoFunction()
-             ->analyzerIsNot('Analyzer\\Variables\\StaticVariables')
+             ->analyzerIsNot('Variables/StaticVariables')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('PROPERTY')
              ->samePropertyAs('code', 'property')
-             ->back('first');
+             ->back('ppp');
         $this->prepareQuery();
 
         // static property in an array
-        $this->atomIs('Ppp')
-             ->isNot('propertyname', null)
+        $this->atomIs('Visibility')
              ->hasOut('STATIC')
              ->outIs('DEFINE')
+             ->_as('ppp')
+             ->isNot('propertyname', null)
              // not a static variable for a function/method
              ->hasNoFunction()
-             ->analyzerIsNot('Analyzer\\Variables\\StaticVariables')
+             ->analyzerIsNot('Variables/StaticVariables')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->outIs('BLOCK')
@@ -76,7 +80,7 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'property')
-             ->back('first');
+             ->back('ppp');
         $this->prepareQuery();
     }
 }

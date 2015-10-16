@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('protected $localyUsed = 1');
+$expected     = array('$localyUsed = 1');
 
-$expected_not = array('protected $usedInChild = 2',
-                      'protected $unused = 3',
-                      'protected $usedInGrandChild = 4');
+$expected_not = array('$usedInChild = 2',
+                      '$unused = 3',
+                      '$usedInGrandChild = 4');
 
 ?>

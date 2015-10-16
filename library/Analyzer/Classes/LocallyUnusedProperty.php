@@ -27,16 +27,16 @@ use Analyzer;
 
 class LocallyUnusedProperty extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Classes\\LocallyUsedProperty");
+        return array('Classes/LocallyUsedProperty',
+                     'Variables/StaticVariables');
     }
     
     public function analyze() {
-        $this->atomIs('Ppp')
-             ->isNot('propertyname', null)
-             ->analyzerIsNot('Analyzer\\Classes\\LocallyUsedProperty')
-                // must ignore static in functions
+        $this->atomIs('Visibility')
              ->outIs('DEFINE')
-             ->analyzerIsNot('Analyzer\\Variables\\StaticVariables')
+             ->analyzerIsNot('Classes/LocallyUsedProperty')
+                // must ignore static in functions
+             ->analyzerIsNot('Variables/StaticVariables')
              ->back('first');
         $this->prepareQuery();
     }
