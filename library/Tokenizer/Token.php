@@ -859,7 +859,7 @@ g.idx('atoms')[['atom':'Class']]
       true;
 }
 .each{
-    it.setProperty('tree', s);
+    it.setProperty('classTree', s);
 };
 
 "
