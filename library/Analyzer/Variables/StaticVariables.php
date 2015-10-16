@@ -28,14 +28,15 @@ use Analyzer;
 class StaticVariables extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Variablenames');
+        return array('Variables/Variablenames');
     }
     
     public function analyze() {
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
+             ->analyzerIs('Variables/Variablenames')
+             ->inIsIE('LEFT')
              ->inIs('DEFINE')
-             ->atomIs('Ppp')
+             ->atomIs('Visibility')
              ->outIs('STATIC')
              ->hasFunction()
              ->back('first');
