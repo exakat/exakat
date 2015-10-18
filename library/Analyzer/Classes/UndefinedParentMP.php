@@ -96,7 +96,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop("extension"){true}{it.object.atom == "Class"}
-                              .out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{ it.out("PRIVATE").any() == false}.out("DEFINE").has("code", name)
+                              .out("BLOCK").out("ELEMENT").has("atom", "Visibility").filter{ it.out("PRIVATE").any() == false}.out("DEFINE").has("code", name)
                               .any() == false}')
 
                 // checking parent is not a composer class

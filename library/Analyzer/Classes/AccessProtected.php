@@ -52,7 +52,7 @@ class AccessProtected extends Analyzer\Analyzer {
              ->codeIsNot(array('parent', 'static', 'self'))
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).in("DEFINE").out("PRIVATE").any()}')
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").out("DEFINE").has("code", name).in("DEFINE").out("PRIVATE").any()}')
              ->back('first');
         $this->prepareQuery();
     }
