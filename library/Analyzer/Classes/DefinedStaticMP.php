@@ -35,11 +35,11 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).any()}')
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").out("NAME").has("code", name).any()}')
              ->back('first');
         $this->prepareQuery();
 
-        // static::method() 2nd level
+        // static::method() parents and beyond
         $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('self')
              ->outIs('CLASS')
@@ -48,30 +48,12 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).any()}')
+             ->goToAllParents()
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").out("NAME").has("code", name).any()}')
              ->back('first');
         $this->prepareQuery();
 
-        // static::method() 3rd level
-        $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('self')
-             ->outIs('CLASS')
-             ->code(array('static', 'self'))
-             ->back('first')
-             ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->goToClass()
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).any()}')
-             ->back('first');
-        $this->prepareQuery();
-
-        // static::$property 1rst level
+        // static::$property the current class
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->code(array('static', 'self'))
@@ -80,11 +62,11 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIsIE('VARIABLE')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).any()}')
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").out("DEFINE").has("code", name).any()}')
              ->back('first');
         $this->prepareQuery();
 
-        // static::$property 2nd level
+        // static::$property Parents
         $this->atomIs('Staticproperty')
              ->analyzerIsNot('self')
              ->outIs('CLASS')
@@ -94,27 +76,8 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIsIE('VARIABLE')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).any()}')
-             ->back('first');
-        $this->prepareQuery();
-
-        // static::$property 3rd level
-        $this->atomIs('Staticproperty')
-             ->analyzerIsNot('self')
-             ->outIs('CLASS')
-             ->code(array('static', 'self'))
-             ->back('first')
-             ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE')
-             ->savePropertyAs('code', 'name')
-             ->goToClass()
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).any()}')
+             ->goToAllParents()
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").out("DEFINE").has("code", name).any()}')
              ->back('first');
         $this->prepareQuery();
     }
