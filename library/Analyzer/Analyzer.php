@@ -1534,17 +1534,6 @@ GREMLIN
         return $this;
     }
     
-    public function goToPropertyDefinition() {
-        // starting with a staticproperty
-        $this->addMethod('sideEffect{ propertyname = it.out("PROPERTY").next().code.toLowerCase() }.out("CLASS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                .out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                .loop(2){ it.object.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").filter{ it.code.toLowerCase() == propertyname }.any() == false}
-                        { it.object.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").filter{ it.code.toLowerCase() == propertyname }.any()}
-                .out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{ it.out("DEFINE").code.toLowerCase() == methodname }');
-        
-        return $this;
-    }
-
     public function goToNamespace() {
         $this->addMethod('in.loop(1){!(it.object.atom in ["Namespace", "File"])}{it.object.atom in ["Namespace", "File"]}');
         
