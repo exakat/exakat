@@ -26,10 +26,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class UselessInstruction extends Analyzer\Analyzer {
-    public function dependsOn() {
-        return array('ImpliedIf');
-    }
-    
     public function analyze() {
         // Structures that should be put somewhere, and never left alone
         $this->atomIs('Sequence')
@@ -38,8 +34,7 @@ class UselessInstruction extends Analyzer\Analyzer {
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
-             ->noAtomInside(array('Functioncall', 'Assignation'))
-             ->analyzerIsNot('ImpliedIf');
+             ->noAtomInside(array('Functioncall', 'Assignation'));
         $this->prepareQuery();
         
         // -$x = 3
