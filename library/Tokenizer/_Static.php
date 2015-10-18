@@ -113,7 +113,11 @@ finalcode = fullcode.code;
 
 s=[];
 fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}
-fullcode.setProperty('fullcode', finalcode + ' ' + s.join(', '));
+if (s.size() > 0) {
+    finalcode = finalcode + ' ' + s.join(', ');
+}
+
+fullcode.setProperty('fullcode', finalcode);
 
 fullcode.out('DEFINE').each{
     if (it.atom == 'Variable') {
