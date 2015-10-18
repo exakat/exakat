@@ -45,7 +45,10 @@ class BuriedAssignation extends Analyzer\Analyzer {
 
              // in an argument (with or without typehint)
              ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
-             ->raw('filter{ it.in("VARIABLE").in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}');
+             ->raw('filter{ it.in("VARIABLE").in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
+             
+             // in a property definition
+             ->hasNoIn('DEFINE');
         $this->prepareQuery();
     }
 }
