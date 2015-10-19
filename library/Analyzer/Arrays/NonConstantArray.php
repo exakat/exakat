@@ -28,14 +28,14 @@ use Analyzer;
 class NonConstantArray extends Analyzer\Analyzer {
 
     public function dependsOn() {
-        return array('Analyzer\\Constants\\Constantnames');
+        return array('Constants/Constantnames');
     }
     
     public function analyze() {
         $this->atomIs('Array')
              ->outIs('INDEX')
              ->atomIs('Identifier')
-             ->analyzerIsNot('Analyzer\\Constants\\Constantnames')
+             ->analyzerIsNot('Constants/Constantnames')
              ->hasNoConstantDefinition();
         $this->prepareQuery();
 
@@ -44,7 +44,7 @@ class NonConstantArray extends Analyzer\Analyzer {
              ->isNot('enclosing', null)
              ->outIs('INDEX')
              ->atomIs('Identifier')
-             ->analyzerIsNot('Analyzer\\Constants\\Constantnames')
+             ->analyzerIsNot('Constants/Constantnames')
              ->hasNoConstantDefinition();
         $this->prepareQuery();
     }

@@ -27,8 +27,8 @@ use Analyzer;
 
 class UndefinedProperty extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\DefinedProperty',
-                     'Analyzer\\Classes\\HasMagicProperty');
+        return array('Classes/DefinedProperty',
+                     'Classes/HasMagicProperty');
     }
     
     public function analyze() {
@@ -37,11 +37,11 @@ class UndefinedProperty extends Analyzer\Analyzer {
              ->outIs('PROPERTY')
              ->tokenIs('T_STRING')
              ->inIs('PROPERTY')
-             ->analyzerIsNot('Analyzer\\Classes\\DefinedProperty')
+             ->analyzerIsNot('Classes/DefinedProperty')
              ->outIs('OBJECT')
              ->code('$this')
              ->goToClass()
-             ->analyzerIsNot('Analyzer\\Classes\\HasMagicProperty')
+             ->analyzerIsNot('Classes/HasMagicProperty')
              ->back('first');
         $this->prepareQuery();
     }

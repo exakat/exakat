@@ -27,7 +27,7 @@ use Analyzer;
 
 class IsModified extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\Constructor');
+        return array('Classes/Constructor');
     }
     
     public function analyze() {
@@ -107,7 +107,7 @@ class IsModified extends Analyzer\Analyzer {
              ->classDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')

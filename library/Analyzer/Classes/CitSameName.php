@@ -36,7 +36,7 @@ class CitSameName extends Analyzer\Analyzer {
 
         // Classes - Traits
         $this->atomIs('Class')
-             ->analyzerIsNot('Analyzer\\Classes\\CitSameName')
+             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->raw('filter{ g.idx("atoms")[["atom":"Trait"]].out("NAME").next().code == it.code}')
              ->back('first');
@@ -44,6 +44,7 @@ class CitSameName extends Analyzer\Analyzer {
 
         // Interfaces - Traits
         $this->atomIs('Interface')
+             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->raw('filter{ g.idx("atoms")[["atom":"Trait"]].out("NAME").next().code == it.code}')
              ->back('first');

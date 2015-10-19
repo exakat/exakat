@@ -27,7 +27,7 @@ use Analyzer;
 
 class IsRead extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\Constructor');
+        return array('Classes/Constructor');
     }
     
     public function analyze() {
@@ -134,7 +134,7 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->_as('method')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -156,7 +156,7 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->_as('method')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

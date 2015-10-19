@@ -28,14 +28,13 @@ use Analyzer;
 class EmptyClass extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Analyzer\\Exceptions\\DefinedExceptions');
+        return array('Exceptions/DefinedExceptions');
     }
     
     public function analyze() {
         $this->atomIs('Class')
-             ->analyzerIsNot('Analyzer\\Exceptions\\DefinedExceptions')
-             ->outIs('EXTENDS')
-             ->back('first')
+             ->analyzerIsNot('Exceptions/DefinedExceptions')
+             ->hasOut('EXTENDS')
              ->outIs('BLOCK')
              ->atomIs('Void')
              ->back('first');

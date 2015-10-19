@@ -27,18 +27,18 @@ use Analyzer;
 
 class VariableOneLetter extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Variablenames');
+        return array('Variables/Variablenames');
     }
     
     public function analyze() {
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
+             ->analyzerIs('Variables/Variablenames')
              ->fullcodeLength(' == 2 ');
         $this->prepareQuery();
         
         $this->atomIs('Variable')
              ->tokenIs('T_DOLLAR')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
+             ->analyzerIs('Variables/Variablenames')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
              ->fullcodeLength(' == 1 ');
