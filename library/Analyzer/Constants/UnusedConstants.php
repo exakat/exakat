@@ -27,18 +27,27 @@ use Analyzer;
 
 class UnusedConstants extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Constants\\ConstantUsage');
+        return array('Constants/ConstantUsage');
     }
     
     public function analyze() {
-      $this->atomIs('Functioncall')
+        // Const from a define
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath("\\define")
+             ->fullnspath('\define')
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 'first')
              ->atomIs('String')
-             ->raw('filter{ name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").has("code", name).any() == false }');
+             ->raw('filter{ name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").filter{it.code.toLowerCase() == name}.any() == false }');
+        $this->prepareQuery();
+
+        // Const from a const
+        $this->atomIs('Const')
+             ->hasNoClass()
+             ->outIs('CONST')
+             ->outIs('LEFT')
+             ->raw('filter{ name = it.code.toLowerCase(); g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").filter{it.code.toLowerCase() == name}.any() == false }');
         $this->prepareQuery();
       }
 }

@@ -27,7 +27,7 @@ use Analyzer;
 
 class CustomConstantUsage extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Constants\\ConstantUsage');
+        return array('Constants/ConstantUsage');
     }
     
     public function analyze() {
@@ -46,13 +46,13 @@ class CustomConstantUsage extends Analyzer\Analyzer {
         $constants = $this->makeFullNsPath($constants);
 
         $this->atomIs('Identifier')
-             ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
+             ->analyzerIs('Constants/ConstantUsage')
              ->fullnspathIsNot($constants);
         $this->prepareQuery();
 
         // @note NSnamed are OK by default (may be not always!)
         $this->atomIs('Nsname')
-             ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
+             ->analyzerIs('Constants/ConstantUsage')
              ->fullnspathIsNot($constants);
         $this->prepareQuery();
     }

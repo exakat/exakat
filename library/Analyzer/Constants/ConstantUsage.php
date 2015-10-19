@@ -27,7 +27,7 @@ use Analyzer;
 
 class ConstantUsage extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Extensions\\Extstandard');
+        return array('Extensions/Extstandard');
     }
     
     public function analyze() {
@@ -39,7 +39,8 @@ class ConstantUsage extends Analyzer\Analyzer {
         // Identifier that is not used somewhere else
         $this->atomIs('Identifier')
              ->codeIsNot(array('true', 'false', 'null'))
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS'));
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS'))
+             ->hasNoParent('Const', array('LEFT', 'CONST'));
         $this->prepareQuery();
 
         // special case for Boolean and Null
@@ -50,7 +51,7 @@ class ConstantUsage extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\defined', '\\constant'))
+             ->fullnspath(array('\defined', '\constant'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
