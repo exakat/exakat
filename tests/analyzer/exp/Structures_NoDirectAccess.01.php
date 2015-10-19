@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array( 'if (!defined(\'D\')) { ; }', 
-                       'if (!defined("H")) { ; }', 
-                       'if (!defined("G")) { ; }', 
-                       'if (!defined(\'E\')) { ; }',
+$expected     = array( 'if (!defined(\'D\')) { /**/ }', 
+                       'if (!defined("H")) { /**/ }', 
+                       'if (!defined("G")) { /**/ }', 
+                       'if (!defined(\'E\')) { /**/ }',
                        'if (!defined(\'A\'))  /**/ ', 
                        'if (!defined(\'C\'))  /**/ ', 
                        'if (!defined(\'I\'))  /**/ ', 
