@@ -1746,11 +1746,17 @@ GREMLIN;
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         if (substr($analyzer, 0, 5) === 'Analyzer\\Files\\') {
             $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').as('line').as('filename').select{it.fullcode}{it.line}{it.fullcode}
+g.idx('analyzers')[['analyzer':'$analyzer']].out
+.has('notCompatibleWithPhpVersion', null)
+.has('notCompatibleWithPhpConfiguration', null)
+.as('fullcode').as('line').as('filename').select{it.fullcode}{it.line}{it.fullcode}
 GREMLIN;
         } else {
             $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in.loop(1){ it.object.token != 'T_FILENAME'}.as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.fullcode}
+g.idx('analyzers')[['analyzer':'$analyzer']].out
+.has('notCompatibleWithPhpVersion', null)
+.has('notCompatibleWithPhpConfiguration', null)
+.as('fullcode').in.loop(1){ it.object.token != 'T_FILENAME'}.as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.fullcode}
 GREMLIN;
         }
         $vertices = $this->query($query);
