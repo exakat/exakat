@@ -1,6 +1,7 @@
 <?php
 
-    use A\B\C;  
+    use A\B\C;
+    use D\C\E;
 
     new C\D($e);
     new C($f);

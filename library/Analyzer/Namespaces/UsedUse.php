@@ -34,6 +34,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple subuse in a new with alias :  use a\b; new b\c()
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
              ->savePropertyAs('alias', 'used')
              ->inIs('USE')
@@ -50,8 +52,10 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a new with alias :  use a; new a()
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
-             ->atomIs('Identifier')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
@@ -65,6 +69,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in Typehint
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
              ->savePropertyAs('code', 'used')
              ->inIs('USE')
@@ -79,8 +85,9 @@ class UsedUse extends Analyzer\Analyzer {
     // case of alias use in extends or implements
         $this->atomIs('Use')
              ->outIs('USE')
-             ->_as('result')
              ->analyzerIsNot('self')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->_as('result')
              ->savePropertyAs('alias', 'alias')
              ->inIs('USE')
              ->inIs('ELEMENT')
@@ -95,6 +102,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a Static constant
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
              ->savePropertyAs('code', 'used')
              ->inIs('USE')
@@ -109,6 +118,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a Static property
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
              ->savePropertyAs('code', 'used')
              ->inIs('USE')
@@ -123,6 +134,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a Static method
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
              ->savePropertyAs('code', 'used')
              ->inIs('USE')
@@ -137,6 +150,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a instanceof
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
              ->savePropertyAs('fullnspath', 'used')
              ->inIs('USE')
@@ -154,6 +169,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in Typehint
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
              ->savePropertyAs('code', 'used')
@@ -170,6 +187,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a new
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
              ->savePropertyAs('code', 'used')
@@ -186,6 +205,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a extends
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
              ->savePropertyAs('code', 'used')
@@ -202,6 +223,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a implements
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
              ->savePropertyAs('code', 'used')
@@ -218,6 +241,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a Static constant
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
              ->savePropertyAs('code', 'used')
@@ -234,6 +259,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a Static property
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
              ->savePropertyAs('code', 'used')
@@ -250,6 +277,8 @@ class UsedUse extends Analyzer\Analyzer {
     // case of simple use in a Static method
         $this->atomIs('Use')
              ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
              ->savePropertyAs('code', 'used')
@@ -267,7 +296,8 @@ class UsedUse extends Analyzer\Analyzer {
         // subcase for the original path
         $this->atomIs('Use')
              ->outIs('USE')
-             ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->raw('sideEffect{ thealias = it;}')
              ->inIs('USE')
@@ -282,7 +312,8 @@ class UsedUse extends Analyzer\Analyzer {
         // subcase for the alias
         $this->atomIs('Use')
              ->outIs('USE')
-             ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_AS')
              ->_as('result')
              ->raw('sideEffect{ result = it;}')
              ->savePropertyAs('alias', 'thealias')
