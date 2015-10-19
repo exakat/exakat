@@ -26,11 +26,6 @@ namespace Analyzer\Interfaces;
 use Analyzer;
 
 class IsExtInterface extends Analyzer\Analyzer {
-
-    public function dependsOn() {
-        return array('Analyzer\\Interfaces\\InterfaceUsage');
-    }
-    
     public function analyze() {
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_interfaces';
