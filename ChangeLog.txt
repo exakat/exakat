@@ -1,4 +1,4 @@
-Version 0.3.7 (Yellow Robe Demon, Coming up)
+Version 0.3.8 (Baihuaxiu, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 0.3.7 (Yellow Robe Demon, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.7 (Yellow Robe Demon, 2015-10-19)
++ Architecture
+    + Added and reviewed many UT. More stability.
++ Report
+    + Fixed the report of the actual version of PHP being used.
+    + Non-run analysis are not marked with a stethoscope
+    + Report now report closures and not the containing method
+    + Removed some dashboard that would generate empty links
++ Analyzer
+    + Better spot of blocks inside Alternative syntax
+    + Speed up method spotting
+    + Fixed properties which were mistaken with deep definitions
++ Tokenizer
+    + Fixed fullcode for Typehint
+    + Removed Ppp and moved it to Visibility
 
 Version 0.3.6 (White Bone Demon, 2015-10-12)
 + Architecture
