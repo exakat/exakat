@@ -145,9 +145,8 @@ if (fullcode.groupedUse == true) {
 }
 
 
-
 // use a (aka c);
-fullcode.out('USE').sort{it.rank}._().has('atom', 'Identifier').each{
+fullcode.out('USE').has('atom', 'Identifier').each{
     it.setProperty('originpath', it.code.toLowerCase());
     it.setProperty('originclass', it.code);
     
@@ -156,7 +155,7 @@ fullcode.out('USE').sort{it.rank}._().has('atom', 'Identifier').each{
 }
 
 // use a\b\c as c (aka c);
-fullcode.out('USE').sort{it.rank}._().has('atom', 'As').each{
+fullcode.out('USE').has('atom', 'As').each{
     s = [];
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
@@ -173,12 +172,14 @@ fullcode.out('USE').sort{it.rank}._().has('atom', 'As').each{
     it.setProperty('originalias', it.out('AS').next().code);
 }
 
-// use a; (aka a)
-fullcode.out('USE').sort{it.rank}._().has('atom', 'Nsname').each{
+// use b\c\a; (aka a)
+fullcode.out('USE').has('atom', 'Nsname').each{
     s = [];
     it.out("SUBNAME").sort{it.rank}._().each{
-        s.add(it.getProperty('code'));
+        last = it.getProperty('code');
+        s.add(last);
     };
+
     if (it.absolutens == true) {
         it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s[s.size() - 1]);
@@ -188,17 +189,18 @@ fullcode.out('USE').sort{it.rank}._().has('atom', 'Nsname').each{
     }
     
     if (it.out('AS').any()) {
-        it.setProperty('alias', it.out('AS').next().code.toLowerCase());
-        it.setProperty('originalias', it.out('AS').next().code.toLowerCase());
+        alias = it.out('AS').next().code;
+        it.setProperty('alias', alias.toLowerCase());
+        it.setProperty('originalias', alias);
     } else {
-        it.setProperty('alias', s[s.size() - 1].toLowerCase());
-        it.setProperty('originalias', s[s.size() - 1]);
+        it.setProperty('alias', last.toLowerCase());
+        it.setProperty('originalias', last);
     }
 }
 
 // use function a as b;
 // use const a as b;
-fullcode.out('FUNCTION', 'CONST').sort{it.rank}._().each{
+fullcode.out('FUNCTION', 'CONST').each{
     s = [];
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
