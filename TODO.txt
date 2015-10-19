@@ -1595,3 +1595,5 @@ Adds a check in a report : all links should be OK to ajax!
 Spot useless \\ in literals
 
 Unresolved interface/class : check in return typehint too
+
+property/method is defined in a class below, but used in a class above
