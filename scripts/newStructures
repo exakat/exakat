@@ -5,7 +5,6 @@ $new = $argv[2];
 
 print "New structures between PHP $old and PHP $new\n";
 
-/*
 // Functions
 eval(' $oldFunctions = '.shell_exec('php'.$old.' -r "var_export(get_defined_functions());"').'; ?>');
 
@@ -18,9 +17,7 @@ print_r($d);
 $d = array_diff($oldFunctions['internal'], $newFunctions['internal']);
 print "Removed functions (".count($d).")\n";
 print_r($d);
-*/
 
-/*
 // Constants
 eval(' $oldConstants = '.shell_exec('php'.$old.' -r "var_export(array_keys(get_defined_constants()));"').'; ?>');
 
@@ -33,9 +30,7 @@ print_r($d);
 $d = array_diff($oldConstants, $newConstants);
 print "Removed Constants (".count($d).")\n";
 print_r($d);
-*/
 
-/*
 // classes
 eval(' $oldClasses = '.shell_exec('php'.$old.' -r "var_export(get_declared_Classes());"').'; ?>');
 
@@ -48,9 +43,7 @@ print_r($d);
 $d = array_diff($oldClasses, $newClasses);
 print "Removed Classes (".count($d).")\n";
 print_r($d);
-*/
 
-/*
 // Traits
 eval(' $oldTraits = '.shell_exec('php'.$old.' -r "var_export(get_declared_traits());"').'; ?>');
 
@@ -63,8 +56,7 @@ print_r($d);
 $d = array_diff($oldTraits, $newTraits);
 print "Removed Traits (".count($d).")\n";
 print_r($d);
-*/
-/*
+
 // Interfaces
 eval(' $oldInterfaces = '.shell_exec('php'.$old.' -r "var_export(get_declared_Interfaces());"').'; ?>');
 
@@ -77,12 +69,11 @@ print_r($d);
 $d = array_diff($oldInterfaces, $newInterfaces);
 print "Removed Interfaces (".count($d).")\n";
 print_r($d);
-*/
 
+/*
 // Variables
-eval(' $oldVariables = '.shell_exec('php'.$old.' -r "var_export(get_defined_vars());"').'; ?>');
-print_r($oldVariables);die();
-eval(' $newVariables = '.shell_exec('php'.$new.' -r "var_export(get_defined_vars());"').'; ?>');
+eval(' $oldVariables = '.shell_exec('php'.$old.' -r "var_export(get_defined_vars());"').'["_SERVER"]; ?>');
+eval(' $newVariables = '.shell_exec('php'.$new.' -r "var_export(get_defined_vars());"').'["_SERVER"]; ?>');
 
 $d = array_diff($newVariables, $oldVariables);
 print "New Variables (".count($d).")\n";
@@ -91,5 +82,5 @@ print_r($d);
 $d = array_diff($oldVariables, $newVariables);
 print "Removed Variables (".count($d).")\n";
 print_r($d);
-
+*/
 ?>
