@@ -27,7 +27,7 @@ class Results extends Tasks {
     public function run(\Config $config) {
         $analyzer = $config->program;
         if (empty($analyzer)) {
-            die('Provide an analyzer with -P X/Y. Aborting'."\n");
+            die('Provide the analyzer with the option -P X/Y. Aborting'."\n");
         }
         
         $analyzerClass = \Analyzer\Analyzer::getClass($analyzer);
@@ -43,6 +43,19 @@ class Results extends Tasks {
         }
 
         $analyzer = str_replace('\\', '\\\\', $analyzerClass);
+
+        $query = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'$analyzer']].out.map;
+GREMLIN;
+
+        $vertices = $this->query($query);
+        if (isset($vertices[0]->notCompatibleWithPhpVersion)) {
+            die($config->program." is not compatible with the running version of PHP. No result available.\n");
+        }
+
+        if (isset($vertices[0]->notCompatibleWithPhpConfiguration)) {
+            die($config->program." is not compatible with the compilation of the running version of PHP. No result available.\n");
+        }
 
         $return = array();
         if ($config->style == 'BOOLEAN') {
