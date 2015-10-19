@@ -29,12 +29,17 @@ class EmptyList extends Analyzer\Analyzer {
     protected $phpVersion = '7.0-';
     
     public function analyze() {
+        // list()
         $this->atomIs('Functioncall')
              ->tokenIs('T_LIST')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
              ->atomIs('Void')
              ->back('first');
+        $this->prepareQuery();
+
+        // list( , )
+        $this->atomIs('Functioncall')
+             ->tokenIs('T_LIST')
+             ->filter(' it.out("ARGUMENTS").out("ARGUMENT").hasNot("atom", "Void").any() == false');
         $this->prepareQuery();
     }
 }
