@@ -340,11 +340,11 @@ g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.side
 };
 ", "
 // const without class nor namspace (aka, global)
-g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.each{
-    it.out('CONST').each{
-        it.setProperty('fullnspath', '\\\\' + it.out('LEFT').next().fullcode.toLowerCase());
-        g.idx('constants').put('path', '\\\\' + it.out('LEFT').next().fullcode.toLowerCase(), it)
-    }
+
+g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class'] }.any() == false}.out('CONST').out('LEFT')
+    .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
+        $solvingClassNames;
+        g.idx('constants').put('path', fullcode.fullnspath, it)
 };
 ", "
 // Const (out of a class) with define
