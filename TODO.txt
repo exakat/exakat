@@ -1224,7 +1224,6 @@ don't use / as delimiter for regular expressions
 empty/isset and type test 
 phpcheatsheets.com
 
-
 Escape late
 
 hook filter : they should return always
@@ -1597,3 +1596,9 @@ Spot useless \\ in literals
 Unresolved interface/class : check in return typehint too
 
 property/method is defined in a class below, but used in a class above
+
+Generate a list of dependencies based on a file's content. 
+Classes (via autoload), includes.
+Generate a web 
+Spot most important files (the one that are required by everyone else?)
+Spot undefined dependencies..
