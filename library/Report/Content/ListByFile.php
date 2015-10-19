@@ -30,8 +30,10 @@ class ListByFile extends \Report\Content\GroupBy {
         foreach($this->analyzers as $a) {
             $analyzer = \Analyzer\Analyzer::getInstance($a);
             
+            if ($analyzer->hasResults() <= 0) { 
+                continue; 
+            }
             $count = $analyzer->toCount();
-            if ($count == 0) { continue; }
             
             $files = $analyzer->getFileList();
             $files = $files[0];

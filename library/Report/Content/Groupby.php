@@ -53,8 +53,10 @@ class Groupby extends \Report\Content {
         $c = 'toCount';
         foreach($this->analyzers as $a) {
             $analyzer = \Analyzer\Analyzer::getInstance($a);
-            
-            $this->array[$analyzer->$m()] += $analyzer->$c();
+
+            if ($analyzer->hasResults()) {
+                $this->array[$analyzer->$m()] += $analyzer->$c();
+            } 
         }
         
         $this->sort_array($this->array);
