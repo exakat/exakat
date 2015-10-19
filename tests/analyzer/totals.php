@@ -44,6 +44,8 @@ $files = glob('../../library/Analyzer/*/*.php');
 foreach($files as $file) {
     $analyze = basename($file);
     $folder = basename(dirname($file));
+    if ($folder == 'Common') { continue; }
+
     $test = $folder.'_'.$analyze;
     if (!file_exists('Test/'.$test)) {
         ++$total;
