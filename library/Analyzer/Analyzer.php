@@ -785,7 +785,7 @@ GREMLIN;
         }
         
         if (is_array($name)) {
-            $name = "['". join("', '", $name)."']"; 
+            $name = "['". join("', '", $name)."']";
         }
 
         $this->addMethod('filter{ it.'.$property.$caseSensitive.' in '.$name.'}');
@@ -801,7 +801,7 @@ GREMLIN;
         }
 
         if (is_array($name)) {
-            $name = "['". join("', '", $name)."']"; 
+            $name = "['". join("', '", $name)."']";
             $name = str_replace('\\', '\\\\', $name);
         }
 
@@ -1853,12 +1853,12 @@ GREMLIN;
         
         $return = (int) $vertices[0];
         if ($return > 0) {
-            return $return; 
+            return $return;
         }
         
         $queryTemplate = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out
-.transform{ ['versionCompatible':it.notCompatibleWithPhpVersion, 
+.transform{ ['versionCompatible':it.notCompatibleWithPhpVersion,
              'configurationCompatible': it.notCompatibleWithPhpConfiguration]};
 
 GREMLIN;

@@ -48,7 +48,7 @@ class Typehint extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-// This may happens during the processing 
+// This may happens during the processing
 if (fullcode.atom == 'Typehint') {
     fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty("fullcode") + " " + fullcode.out("VARIABLE").next().getProperty('fullcode'));
 }

@@ -39,7 +39,7 @@ class NoPublicAccess extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $staticproperties = $this->query('g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").filter{it.code in ["self", "static"]}.any() == false}.transform{ z = it.out("PROPERTY").has("token", "T_VARIABLE").next().code; it.out("CLASS").next().fullnspath + "::" + z.substring(1, z.size() ).toLowerCase() }.unique()');
-        $staticproperties = "['". join("', '", $staticproperties)."']"; 
+        $staticproperties = "['". join("', '", $staticproperties)."']";
         $staticproperties = str_replace('\\', '\\\\', $staticproperties);
         
         if (strlen($staticproperties) > 10000) {

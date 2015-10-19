@@ -59,7 +59,7 @@ fullcode.out('DEFINE').each{
         it.setProperty('propertyname', it.code.substring(1, it.code.size()).toLowerCase());
     } else if (it.atom == 'Assignation') {
         it.setProperty('propertyname', it.out('LEFT').next().code.substring(1, it.out('LEFT').next().code.size()).toLowerCase());
-    } 
+    }
 }
 
 GREMLIN;
