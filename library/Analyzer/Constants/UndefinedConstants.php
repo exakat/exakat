@@ -27,24 +27,23 @@ use Analyzer;
 
 class UndefinedConstants extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Constants\\CustomConstantUsage',
-                     'Analyzer\\Constants\\IsExtConstant');
+        return array('Constants/CustomConstantUsage',
+                     'Constants/IsExtConstant');
     }
     
     public function analyze() {
         $this->atomIs('Identifier')
              ->raw('filter{ it.in("ARGUMENT").in("IMPLEMENTS").any() == false}')
-             ->analyzerIs('Analyzer\\Constants\\CustomConstantUsage')
+             ->analyzerIs('Constants/CustomConstantUsage')
              ->hasNoConstantDefinition()
-             ->analyzerIsNot('Analyzer\\Constants\\IsExtConstant');
+             ->analyzerIsNot('Constants/IsExtConstant');
         $this->prepareQuery();
 
         $this->atomIs('Nsname')
              ->raw('filter{ it.in("ARGUMENT").in("IMPLEMENTS").any() == false}')
-             ->analyzerIs('Analyzer\\Constants\\CustomConstantUsage')
+             ->analyzerIs('Constants/CustomConstantUsage')
              ->hasNoConstantDefinition()
-             ->analyzerIsNot('Analyzer\\Constants\\IsExtConstant')
-             ;
+             ->analyzerIsNot('Constants/IsExtConstant');
         $this->prepareQuery();
     }
 }

@@ -29,8 +29,8 @@ class Extension extends Analyzer\Analyzer {
     protected $source = '';
     
     public function dependsOn() {
-        return array("Analyzer\\Classes\\ClassUsage",
-                     "Analyzer\\Interfaces\\InterfaceUsage");
+        return array('Classes/ClassUsage',
+                     'Interfaces/InterfaceUsage');
     }
     
     public function analyze() {
@@ -121,23 +121,23 @@ class Extension extends Analyzer\Analyzer {
         }
 
         if (!empty($interfaces)) {
-            $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
+            $this->analyzerIs('Interfaces/InterfaceUsage')
                  ->code($interfaces);
             $this->prepareQuery();
 
             $interfaces = $this->makeFullNsPath($interfaces);
-            $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
+            $this->analyzerIs('Interfaces/InterfaceUsage')
                  ->fullcode($interfaces);
             $this->prepareQuery();
         }
 
         if (!empty($namespaces)) {
-            $this->analyzerIs("Analyzer\\Namespaces\\NamespaceUsage")
+            $this->analyzerIs('Namespaces/NamespaceUsage')
                  ->code($namespaces);
             $this->prepareQuery();
 
             $interfaces = $this->makeFullNsPath($interfaces);
-            $this->analyzerIs("Analyzer\\Namespaces\\NamespaceUsage")
+            $this->analyzerIs('Namespaces/NamespaceUsage')
                  ->fullcode($namespaces);
             $this->prepareQuery();
         }
