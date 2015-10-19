@@ -27,8 +27,8 @@ use Analyzer;
 
 class ImplementIsForInterface extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Composer\\IsComposerClass');
+        return array('Classes/IsExtClass',
+                     'Composer/IsComposerClass');
     }
     
     public function analyze() {
@@ -42,14 +42,14 @@ class ImplementIsForInterface extends Analyzer\Analyzer {
         // class a implements a PHP class
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
-             ->analyzerIs('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIs('Classes/IsExtClass')
              ->back('first');
         $this->prepareQuery();
 
         // class a implements a PHP class
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
-             ->analyzerIs('Analyzer\\Composer\\IsComposerClass')
+             ->analyzerIs('Composer/IsComposerClass')
              ->back('first');
         $this->prepareQuery();
     }

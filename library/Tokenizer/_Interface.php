@@ -35,7 +35,7 @@ class _Interface extends TokenAuto {
         
         $this->actions = array('transform'   => array(   1 => 'NAME'),
                                'keepIndexed' => true,
-                               'atom'        => 'Class',
+                               'atom'        => 'Interface',
                                'cleanIndex'  => true);
         $this->checkAuto();
 

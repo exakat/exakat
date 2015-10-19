@@ -34,26 +34,22 @@ class IsComposerClass extends Analyzer\Analyzer {
         
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS', 'EXTENDS')
-             ->isNot('aliased', true)
              ->fullnspath($classesFullNP);
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->isNot('aliased', true)
              ->fullnspath($classesFullNP);
         $this->prepareQuery();
 
         $this->atomIs('Typehint')
              ->outIs('CLASS')
-             ->isNot('aliased', true)
              ->fullnspath($classesFullNP);
         $this->prepareQuery();
 
         $this->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_NS_SEPARATOR', 'T_STRING'))
-             ->isNot('aliased', true)
              ->fullnspath($classesFullNP);
         $this->prepareQuery();
     }
