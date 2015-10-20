@@ -63,3 +63,4 @@ out
 in
 progress
 library/sonar-project.properties
+tests/analyzer/phpunit.sh
