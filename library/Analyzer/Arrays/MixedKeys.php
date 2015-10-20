@@ -30,8 +30,9 @@ class MixedKeys extends Analyzer\Analyzer {
     
     public function analyze() {
         // build with array()
-        $this->atomIs('Functioncall')
-             ->hasIn('VALUE')
+        $this->atomIs('Visibility')
+             ->outIs('DEFINE')
+             ->atomInside('Functioncall')
              ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->fullnspath('\\array')
              ->_as('result')
@@ -42,7 +43,8 @@ class MixedKeys extends Analyzer\Analyzer {
               if (it.out("KEY").any() && it.out("KEY").next().atom in ["Identifier", "Staticconstant"]) { "a" } else { "b" }
              }{it}{it.size()}.iterate();
 m.size() > 1; }')
-              ->back('result');
+              ->back('result')
+              ;
         $this->prepareQuery();
     }
 }

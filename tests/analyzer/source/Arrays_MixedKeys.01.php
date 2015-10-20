@@ -14,6 +14,7 @@ static public $z = array(
     7,
 );
 
+// the array is an inside array, not the first one
 static public $z2 = array(
     0 => array(
     2,
