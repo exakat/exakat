@@ -60,6 +60,7 @@ class Ifthen extends TokenAuto {
         $this->conditions = array(  0 => array('token'   => self::$operators,
                                                'atom'    => 'none'),
                                     1 => array('notAtom' => 'Sequence',
+                                               'notToken'=> 'T_ELSEIF',
                                                'atom'    => 'yes'),
                                     2 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
                                                                   'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_END',
