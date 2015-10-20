@@ -27,7 +27,7 @@ use Analyzer;
 
 class UnusedPrivateMethod extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\UsedPrivateMethod');
+        return array('Classes/UsedPrivateMethod');
     }
 
     public function analyze() {
@@ -37,7 +37,7 @@ class UnusedPrivateMethod extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->hasOut('PRIVATE')
-             ->analyzerIsNot('Analyzer\\Classes\\UsedPrivateMethod');
+             ->analyzerIsNot('Classes/UsedPrivateMethod');
         $this->prepareQuery();
     }
 }

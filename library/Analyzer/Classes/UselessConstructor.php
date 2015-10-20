@@ -27,7 +27,7 @@ use Analyzer;
 
 class UselessConstructor extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\Constructor');
+        return array('Classes/Constructor');
     }
 
     public function analyze() {
@@ -38,7 +38,7 @@ class UselessConstructor extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->atomIs('Void')
              ->back('first');
@@ -50,7 +50,7 @@ class UselessConstructor extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->atomIs('Void')
              ->back('first')
@@ -68,7 +68,7 @@ class UselessConstructor extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->atomIs('Void')
              ->back('first')

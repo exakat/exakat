@@ -27,9 +27,9 @@ use Analyzer;
 
 class UnresolvedInstanceof extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Composer\\IsComposerNsname',
-                     'Analyzer\\Interfaces\\IsExtInterface');
+        return array('Classes/IsExtClass',
+                     'Composer/IsComposerNsname',
+                     'Interfaces/IsExtInterface');
     }
 
     public function analyze() {
@@ -46,9 +46,9 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Interfaces/IsExtInterface')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->fullnspathIsNot(array_merge($classes, $interfaces))
              ->back('first');
         $this->prepareQuery();

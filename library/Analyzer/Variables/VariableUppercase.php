@@ -27,12 +27,12 @@ use Analyzer;
 
 class VariableUppercase extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Variablenames');
+        return array('Variables/Variablenames');
     }
     
     public function analyze() {
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
+             ->analyzerIs('Variables/Variablenames')
              ->codeIsNot(VariablePhp::$variables, true)
              ->codeIsNot('$_', true)
              ->regex('code', '^\\\\\\$[a-zA-Z0-9_]{2,}\\$')

@@ -28,12 +28,12 @@ use Analyzer;
 class VariableVariables extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Variablenames');
+        return array('Variables/Variablenames');
     }
     
     public function analyze() {
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
+             ->analyzerIs('Variables/Variablenames')
              ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'));
         $this->prepareQuery();
     }

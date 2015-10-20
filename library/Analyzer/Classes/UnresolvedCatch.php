@@ -27,7 +27,7 @@ use Analyzer;
 
 class UnresolvedCatch extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Exceptions\\DefinedExceptions');
+        return array('Exceptions/DefinedExceptions');
     }
 
     public function analyze() {
@@ -47,7 +47,7 @@ class UnresolvedCatch extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIsNot($exceptions)
              ->classDefinition()
-             ->analyzerIsNot('Analyzer\\Exceptions\\DefinedExceptions')
+             ->analyzerIsNot('Exceptions/DefinedExceptions')
              ->back('first');
         $this->prepareQuery();
     }

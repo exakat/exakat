@@ -27,7 +27,7 @@ use Analyzer;
 
 class UndefinedParentMP extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Composer\\IsComposerNsname');
+        return array('Composer/IsComposerNsname');
     }
     
     public function analyze() {

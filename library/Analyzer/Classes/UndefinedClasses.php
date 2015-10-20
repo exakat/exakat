@@ -27,29 +27,29 @@ use Analyzer;
 
 class UndefinedClasses extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Composer\\IsComposerNsname');
+        return array('Classes/IsExtClass',
+                     'Composer/IsComposerNsname');
     }
     
     public function analyze() {
         // in a New
         $this->atomIs('New')
              ->outIs('NEW')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->back('first');
         $this->prepareQuery();
 
         // in a class::Method()
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
@@ -58,7 +58,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a parent::Method()
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->code('parent')
@@ -68,11 +68,11 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a class::$property
         $this->atomIs('Staticproperty')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
@@ -90,11 +90,11 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a class::constante
         $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
@@ -103,7 +103,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a parent::constante
         $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->code('parent')
@@ -113,12 +113,12 @@ class UndefinedClasses extends Analyzer\Analyzer {
 
         // in a class::instanceof
         $this->atomIs('Instanceof')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Interfaces/IsExtInterface')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()

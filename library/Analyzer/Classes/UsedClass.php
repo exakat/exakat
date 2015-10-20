@@ -27,7 +27,7 @@ use Analyzer;
 
 class UsedClass extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Functions\\MarkCallable');
+        return array('Functions/MarkCallable');
     }
     
     public function analyze() {

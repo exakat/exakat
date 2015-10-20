@@ -28,8 +28,8 @@ use Analyzer;
 class WrittenOnlyVariable extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsModified',
-                     'Analyzer\\Variables\\IsRead');
+        return array('Variables/IsModified',
+                     'Variables/IsRead');
     }
     
     public function analyze() {
@@ -40,9 +40,9 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
              ->atomInside('Variable')
              ->codeIsNot($superglobals)
              // this variable is modified
-             ->analyzerIs('Analyzer\\Variables\\IsModified')
+             ->analyzerIs('Variables/IsModified')
              // this variable is not read
-             ->analyzerIsNot('Analyzer\\Variables\\IsRead')
+             ->analyzerIsNot('Variables/IsRead')
 
             // Another instance of this variable (based on name), in the same function, is not read
              ->filter(<<<GREMLIN

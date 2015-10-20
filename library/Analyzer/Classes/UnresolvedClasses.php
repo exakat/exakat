@@ -27,8 +27,8 @@ use Analyzer;
 
 class UnresolvedClasses extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Composer\\IsComposerNsname',);
+        return array('Classes/IsExtClass',
+                     'Composer/IsComposerNsname',);
     }
 
     public function analyze() {
@@ -38,16 +38,16 @@ class UnresolvedClasses extends Analyzer\Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->noClassDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->fullnspathIsNot($classes);
         $this->prepareQuery();
 
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->noClassDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Composer/IsComposerNsname')
              ->fullnspathIsNot($classes);
         $this->prepareQuery();
         

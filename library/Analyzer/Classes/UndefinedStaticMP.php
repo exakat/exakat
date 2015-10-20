@@ -27,8 +27,8 @@ use Analyzer;
 
 class UndefinedStaticMP extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\DefinedStaticMP',
-                     'Analyzer\\Composer\\IsComposerNsname');
+        return array('Classes/DefinedStaticMP',
+                     'Composer/IsComposerNsname');
     }
     
     public function analyze() {
@@ -37,8 +37,8 @@ class UndefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('self', 'static'))
              ->back('first')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
-             ->analyzerIsNot('Analyzer\\Classes\\DefinedStaticMP');
+             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->analyzerIsNot('Classes/DefinedStaticMP');
         $this->prepareQuery();
 
         // static::$property 1rst level
@@ -46,8 +46,8 @@ class UndefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('self', 'static'))
              ->back('first')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
-             ->analyzerIsNot('Analyzer\\Classes\\DefinedStaticMP');
+             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->analyzerIsNot('Classes/DefinedStaticMP');
         $this->prepareQuery();
     }
 }
