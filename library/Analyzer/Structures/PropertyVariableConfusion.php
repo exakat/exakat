@@ -31,6 +31,7 @@ class PropertyVariableConfusion extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // public $x = 3; static or not
         $this->atomIs('Visibility')
              ->outIs('DEFINE')
              ->outIsIE('LEFT')
@@ -40,7 +41,7 @@ class PropertyVariableConfusion extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'name')
-             ->hasNoIn('DEFINE')
+             ->hasFunction()
              ->analyzerIsNot('Variables/Arguments')
              ->back('first');
         $this->prepareQuery();
