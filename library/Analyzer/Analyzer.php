@@ -1266,7 +1266,13 @@ GREMLIN
     }
 
     public function notInFunction() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}');
+        $this->notInInstruction('Function');
+        
+        return $this;
+    }
+
+    public function notInInstruction($atom = 'Function') {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "'.$atom.'"}{it.object.atom == "'.$atom.'"}.any() == false}');
         
         return $this;
     }
@@ -1356,7 +1362,7 @@ GREMLIN
     }
     
     public function notInClass() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any() == false}');
+        $this->notInInstruction('Class');
         
         return $this;
     }
@@ -1374,7 +1380,7 @@ GREMLIN
     }
 
     public function notInInterface() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}.any() == false}');
+        $this->notInInstruction('Trait');
         
         return $this;
     }
