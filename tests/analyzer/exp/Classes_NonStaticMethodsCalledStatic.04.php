@@ -2,13 +2,13 @@
 
 $expected     = array('d::normald( )',
                       'd::normala( )',
-                      'e::normale( )',
-                      'parent::normalb( )',
-                      'a::normala( )', 
-                      'z\a::normala( )');
+                      'e::normale( )');
 
-$expected_not = array('z\a::statica( )',
-                      'd::statica( )',
+$expected_not = array('d::statica( )',
+                      'parent::normalb( )',
+                      'a::normala( )',
+                      'z\a::statica( )',
+                      'z\a::normala( )'
                       );
 
 ?>

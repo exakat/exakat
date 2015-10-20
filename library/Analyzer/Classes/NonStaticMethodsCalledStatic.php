@@ -27,11 +27,10 @@ use Analyzer;
 
 class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Classes\\MethodDefinition",
-                     "Analyzer\\Classes\\StaticMethods"
-        );
+        return array('Classes/IsNotFamily',
+                     'Classes/UndefinedClasses');
     }
-
+    
     public function analyze() {
         // check outside the class : the first found class has the method, and it is not static
         $this->atomIs('Staticmethodcall')
@@ -42,7 +41,8 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
              ->inIs('METHOD')
 
              ->outIs('CLASS')
-             ->codeIsNot(array('parent', 'self', 'static'))
+             ->codeIsNot(array('self', 'parent', 'static'))
+             ->analyzerIs('Classes/IsNotFamily')
              ->classDefinition()
 
              ->outIs('BLOCK')
@@ -51,6 +51,13 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
              ->hasNoOut('STATIC')
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')
+
+             ->back('first');
+        $this->prepareQuery();
+
+        // check outside the class to undefined Class : report it as pb. 
+        $this->atomIs('Staticmethodcall')
+             ->analyzerIs('Classes/UndefinedClasses')
 
              ->back('first');
         $this->prepareQuery();
@@ -66,6 +73,7 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
 
              ->outIs('CLASS')
              ->codeIsNot(array('parent', 'self', 'static'))
+             ->analyzerIs('Classes/IsNotFamily')
              ->classDefinition()
              ->goToAllParents()
 
@@ -77,51 +85,6 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
              ->samePropertyAs('code', 'methodname')
 
              ->back('first');
-        $this->prepareQuery();
-        
-        // static call with self or static::
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->codeIsNot('__construct')
-             ->savePropertyAs('code', 'methodname')
-             ->inIs('METHOD')
-
-             ->outIs('CLASS')
-             ->code(array('self', 'static'))
-             ->goToClass()
-
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->hasNoOut('STATIC')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'methodname')
-
-             ->back('first');
-        $this->prepareQuery();
-
-        // static call with parent::
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->codeIsNot('__construct')
-             ->savePropertyAs('code', 'methodname')
-             ->inIs('METHOD')
-
-             ->outIs('CLASS')
-             ->code('parent')
-             ->goToClass()
-             ->goToAllParents()
-
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->hasNoOut('STATIC')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'methodname')
-             ->back('first')
-             ;
         $this->prepareQuery();
     }
 }
