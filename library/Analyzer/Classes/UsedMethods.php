@@ -33,7 +33,6 @@ class UsedMethods extends Analyzer\Analyzer {
     public function analyze() {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
-        
         // Normal Methodcall
         $methods = $this->query('g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
         $this->atomIs('Class')
@@ -74,9 +73,6 @@ class UsedMethods extends Analyzer\Analyzer {
              ->back('used');
         $this->prepareQuery();
 
-        // the special methods must be processed independantly
-        // __destruct is always used, no need to spot
-
         $callables = $this->query(<<<GREMLIN
 g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.transform{
     // Strings
@@ -109,7 +105,30 @@ GREMLIN
              ->code($callables)
              ->back('used');
         $this->prepareQuery();
+
+        // Private constructors
+        $this->atomIs('Class')
+             ->savePropertyAs('fullnspath', 'fullnspath')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->hasOut('PRIVATE')
+             ->_as('used')
+             ->outIs('NAME')
+             ->code('__construct')
+             ->inIs('NAME')
+             ->inIs('ELEMENT')
+             ->atomInside('New')
+             ->outIs('NEW')
+             ->samePropertyAs('fullnspath', 'fullnspath')
+             ->back('used');
+        $this->prepareQuery();
+
+        // the special methods must be processed independantly
+        // __destruct is always used, no need to spot
+
     }
+
 }
 
 ?>
