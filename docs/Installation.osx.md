@@ -45,9 +45,9 @@ Install Java(TM) JDK 1.8. Neo4j recommends using Java 1.7, but is currently repo
 * Go to [Neo4j Releases](http://neo4j.com/download/other-releases/) and download the Community edition for Linux/Mac.
 As of today (august 2015), version 2.2.4 have been tested successfully. Versions 2.1.\* might work, though they are not supported. Neo4j 2.3.\* won't work yet (The gremlin plug-in doesn't work yet). 
 
-`curl -O http://neo4j.com/artifact.php?name=neo4j-community-2.2.4-unix.tar.gz 
-tar -xf artifact.php\?name=neo4j-community-2.2.4-unix.tar.gz
-mv neo4j-community-2.2.4 neo4j
+`curl -O http://neo4j.com/artifact.php?name=neo4j-community-2.2.6-unix.tar.gz 
+tar -xf artifact.php\?name=neo4j-community-2.2.6-unix.tar.gz
+mv neo4j-community-2.2.6 neo4j
 cd neo4j
 ./bin/neo4j start
 ./bin/neo4j stop
@@ -91,7 +91,7 @@ Then, finish the compilation :
 
 `$NEO4J_HOME`  is the home of the neo4j server. It was installed just before. Use the path or set the variable.
 
-* `unzip target/neo4j-gremlin-plugin-2.2.3-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin`
+* `unzip target/neo4j-gremlin-plugin-tp2-2.2.3-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin`
 * `cd $NEO4J_HOME`
 * `bin/neo4j start`
 
