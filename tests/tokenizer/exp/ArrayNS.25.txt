@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  print
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      <<<EOL
+
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          $b
+        Label : CONCAT
+          a
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            $d
+        Label : CONCAT
+          "  "
+        Label : CONCAT
+          "
+

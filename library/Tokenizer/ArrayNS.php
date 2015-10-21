@@ -37,7 +37,8 @@ class ArrayNS extends TokenAuto {
         // [ arguments ] : prepare arguments
         $this->conditions = array(-1 => array('notToken' => $yields,
                                               'notAtom'  => array('Parenthesis', 'Array', 'Arrayappend')),
-                                   0 => array('token'    => ArrayNS::$operators),
+                                   0 => array('token'    => ArrayNS::$operators,
+                                              'in_quote' => 'none'),
                                    1 => array('atom'     => 'yes',
                                               'notAtom'  => 'Arguments'),
                                    2 => array('token'    => 'T_CLOSE_BRACKET'),
