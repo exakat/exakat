@@ -27,7 +27,7 @@ use Analyzer;
 
 class AlteringForeachWithoutReference extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsModified');
+        return array('Variables/IsModified');
     }
     
     public function analyze() {
@@ -49,7 +49,7 @@ class AlteringForeachWithoutReference extends Analyzer\Analyzer {
              ->filter('it.in("CAST").has("token", "T_UNSET_CAST").any() == false')
              ->filter('it.in("ARGUMENT").in("ARGUMENTS").has("token", "T_UNSET").any() == false')
              ->outIs('VARIABLE')
-             ->analyzerIs('Analyzer\\Variables\\IsModified')
+             ->analyzerIs('Variables/IsModified')
              ->samePropertyAs('code', 'source')
              ->inIs('VARIABLE')
 
