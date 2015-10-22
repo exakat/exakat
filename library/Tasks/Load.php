@@ -80,7 +80,6 @@ class Load extends Tasks {
     }
 
     private function process_file($filename) {
-        display($filename);
         $log = array();
         $begin = microtime(true);
     
@@ -1199,7 +1198,7 @@ class Load extends Tasks {
         $this->processComma('T_IGNORE', true);
 
         $this->client->save_chunk();
-        display('      memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
+        $this->log->log('      memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
 
         return $Tid;
     }
