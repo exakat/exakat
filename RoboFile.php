@@ -201,6 +201,9 @@ LICENCE;
     }
 
     public function checkAll() {
+        echo "Check licence\n";
+        $this->checkLicence();
+
         echo "Check format\n";
         $this->checkFormat();
 
