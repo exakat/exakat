@@ -27,6 +27,9 @@ use Analyzer;
 
 class pregOptionE extends Analyzer\Analyzer {
     public function analyze() {
+        // delimiters
+        $delimiters = '=~/|`%#\\$!,@\\\\{\\\\(\\\\[';
+        
         // preg_match with a string
         $this->atomIs('Functioncall')
              ->fullnspath('\preg_replace')
@@ -34,7 +37,7 @@ class pregOptionE extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->regex('noDelimiter', '^([~/|`%#\\$!,@\\\\{\\\\(\\\\[]).*?([~/|`%#\\$!,@\\\\}\\\\)\\\\]])(.*e.*)\\$') //
+             ->regex('noDelimiter', '^(['.$delimiters.']).*?(['.$delimiters.'])(.*e.*)\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -45,7 +48,7 @@ class pregOptionE extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs('T_QUOTE')
-             ->regex('fullcode', '^.([~/|`%#\\$!,@\\\\{\\\\(\\\\[]).*?([~/|`%#\\$!,@\\\\}\\\\)\\\\]])(.*e.*)*.\\$') //
+             ->regex('noDelimiter', '^(['.$delimiters.']).*?(['.$delimiters.'])(.*e.*)\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -56,10 +59,10 @@ class pregOptionE extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs('T_DOT')
-             ->regex('fullcode', '^.([~/|`%#\\$!,@\\\\{\\\\(\\\\[]).*?([~/|`%#\\$!,@\\\\}\\\\)\\\\]])(.*e.*).\\$') //
+             ->regex('noDelimiter', '^(['.$delimiters.']).*?(['.$delimiters.'])(.*e.*)\\$')
              ->back('first');
         $this->prepareQuery();
-// Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error)
+// Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
     }
 }
 
