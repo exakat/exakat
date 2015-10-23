@@ -426,6 +426,18 @@ TEXT
 );
         $this->addContent('SectionedHashTable', 'AppCounts');
 
+        // Global list
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/GlobalInGlobal');
+        if ($analyzer->hasResults()) {
+            $this->createLevel2('Global variable list');
+            $this->addContent('Text', <<<TEXT
+Here are the global variables, including the implicit ones : any variable that are used in the global scope, outside methods, are implicitely globals.
+
+TEXT
+);
+            $this->addContent('Horizontal', $analyzer);
+        }
+
 /////////////////////////////////////////////////////////////////////////////////////
 /// Custom analyzers
 /////////////////////////////////////////////////////////////////////////////////////
