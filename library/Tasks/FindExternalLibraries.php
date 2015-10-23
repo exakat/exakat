@@ -29,7 +29,8 @@ class FindExternalLibraries extends Tasks {
     const PARENT_DIR  = 3; // Whole_dir and parent.
     
     // classic must be in lower case form.
-    private $classic = array('bbq'              => self::WHOLE_DIR,
+    private $classic = array('adoconnection'    => self::WHOLE_DIR,
+                             'bbq'              => self::WHOLE_DIR,
                              'cpdf'             => self::WHOLE_DIR, // ezpdf
                              'dompdf'           => self::PARENT_DIR,
                              'fpdf'             => self::FILE_ONLY,
@@ -47,6 +48,7 @@ class FindExternalLibraries extends Tasks {
                              'passwordhash'     => self::FILE_ONLY,
                              'pchart'           => self::WHOLE_DIR,
                              'pclzip'           => self::FILE_ONLY,
+                             'gacl'             => self::WHOLE_DIR,
                              'propel'           => self::PARENT_DIR,
                              'gettext_reader'   => self::PARENT_DIR,
                              'phpexcel'         => self::WHOLE_DIR,
@@ -62,6 +64,7 @@ class FindExternalLibraries extends Tasks {
                              'tfpdf'            => self::WHOLE_DIR,
                              'utf8'             => self::WHOLE_DIR,
                              'ci_xmlrpc'        => self::FILE_ONLY,
+                             'xajax'            => self::PARENT_DIR,
                              'yii'              => self::FILE_ONLY,
                              );
 
@@ -79,7 +82,7 @@ class FindExternalLibraries extends Tasks {
         $ini = parse_ini_file($configFile);
         
         if ($config->update && isset($ini['FindExternalLibraries'])) {
-            display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the file before running it again.');
+            display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the config.ini file in the project directory, before running it again.');
             return; //Cancel task
         }
     
