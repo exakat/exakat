@@ -44,8 +44,8 @@ class ArrayNS extends TokenAuto {
                                    2 => array('token'    => 'T_CLOSE_BRACKET'),
         );
         
-        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENTS')),
-                               'keepIndexed' => true);
+        $this->actions = array('makeArguments' => true,
+                               'keepIndexed'   => true);
         $this->checkAuto();
 
         // [ ] empty array
@@ -55,7 +55,7 @@ class ArrayNS extends TokenAuto {
                                    1 => array('token'    => 'T_CLOSE_BRACKET'),
         );
         
-        $this->actions = array('addEdge'     => array(0 => array('Void' => 'ARGUMENTS')),
+        $this->actions = array('addEdge'     => array(0 => array('Void' => 'ARGUMENT')),
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
         $this->checkAuto();

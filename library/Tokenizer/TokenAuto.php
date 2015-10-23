@@ -1441,7 +1441,7 @@ if (a0.token == 'T_CLOSE_PARENTHESIS') {
                 
                 $qactions[] = "
 /* insertEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_COMMA', virtual:true, line:it.line, line:it.line]);
+x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_COMMA', virtual:true, line:it.line]);
 g.idx('atoms').put('atom', 'Void', x);
 
 g.addEdge(it, x, 'NEXT');
@@ -1456,6 +1456,26 @@ fullcode = x;
 ";
             unset($actions['insertEdge']);
             }
+        }
+
+        if (isset($actions['makeArguments'])) {
+                $qactions[] = <<<GREMLIN
+/* makeArgument */
+
+x = g.addVertex(null, [code:',', atom:'Arguments', fullcode:a1.fullcode, token:'T_COMMA', virtual:true, line:it.line]);
+g.idx('atoms').put('atom', 'Arguments', x);
+
+g.addEdge(x, a1, 'ARGUMENT');
+a1.rank = 0;
+a1.bothE('NEXT').each{g.removeEdge(it);}
+a1.inE('INDEXED').each{ g.removeEdge(it); }
+
+g.addEdge(it, x, 'NEXT');
+g.addEdge(x, a2, 'NEXT');
+
+fullcode = x;
+GREMLIN;
+            unset($actions['makeArguments']);
         }
 
         if (isset($actions['addEdge'])) {
