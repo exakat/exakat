@@ -31,9 +31,14 @@ g.idx('atoms')[['atom':'Foreach']]
     ForeachControlKeyAssignement = it.out('VALUE').has('atom', 'Keyvalue').count();
     if (it.out('VALUE').has('atom', 'Keyvalue').out('KEY').any()) {
         key = it.out('VALUE').has('atom', 'Keyvalue').out('KEY').next().code;
+        value = it.out('VALUE').has('atom', 'Keyvalue').out('VALUE').next().code;
+        hasKeyIndex = 1;
     } else {
+        hasKeyIndex = 0;
         key = 'no key';
+        value = it.out('VALUE').next().code;
     }
+    source = it.out('SOURCE').next().code;
 }
 .sideEffect{
     source = it.out('SOURCE').next().code;
@@ -46,6 +51,10 @@ g.idx('atoms')[['atom':'Foreach']]
 .sideEffect{
     IsUnset = it.out('BLOCK').out.loop(1){true}{it.object.token == 'T_UNSET'}.out('ARGUMENTS').out.loop(1){true}{it.object.code == source}.count();
     IsKeyModify = it.out('BLOCK').out.loop(1){true}{it.object.code == key}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Variables\\\\IsModified').any()}.count();
+    IsSourceKeyModify = it.out('BLOCK').out.loop(1){true}{it.object.atom == 'Array'}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Arrays\\\\IsModified').any()}
+                                                                                    .transform{ a = it; while (a.out('VARIABLE').any()) { a = a.out('VARIABLE').next(); };  a;}
+                                                                                    .filter{ it.out('VARIABLE').has('code', source).any() == false}.count();
+    IsValueModify = it.out('BLOCK').out.loop(1){true}{it.object.code == value}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Variables\\\\IsModified').any()}.count();
 }
 .sideEffect{
     if (it.in.loop(1){true}{it.object.token == 'T_FILENAME'}.any()) {
@@ -55,20 +64,38 @@ g.idx('atoms')[['atom':'Foreach']]
     }
 }
 
-.transform{ ['ForeachControlStructureExist':it.id,
+.transform{ ['ForeachControlStructureExist':1,
              'ForeachControlKeyAssignement':ForeachControlKeyAssignement,
              'ForeachCommandArrayNumber':ForeachCommandArrayNumber,
              'ForeachCommandKeyArrayNumber':ForeachCommandKeyArrayNumber,
+             'HasKeyIndex':hasKeyIndex,
              'IsKeyIndex':IsKeyIndex,
              'IsUnset':IsUnset,
              'IsKeyModify':IsKeyModify,
+             'IsSourceKeyModify':IsSourceKeyModify,
+             'IsValueModify':IsValueModify,
              'File':theFile,
-             'Line':it.line];}
+             'Line':it.line,
+             'Id':it.id];}
 
 GREMLIN
 );
         
         $fp = fopen('vector.csv', 'w+');
+        $headers = array('ForeachControlStructureExist',
+                         'ForeachControlKeyAssignement',
+                         'ForeachCommandArrayNumber',
+                         'ForeachCommandKeyArrayNumber',
+                         'HasKeyIndex',
+                         'IsKeyIndex',
+                         'IsUnset',
+                         'IsKeyModify',
+                         'IsSourceKeyModify',
+                         'IsValueModify',
+                         'File',
+                         'Line',
+                         'Id');
+        fputcsv($fp, $headers);
         foreach($stats as $stat) {
             fputcsv($fp, (array) $stat);
         }
