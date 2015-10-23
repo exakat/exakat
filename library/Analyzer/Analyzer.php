@@ -1505,6 +1505,18 @@ GREMLIN
         return $this;
     }
 
+    public function hasInterface() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}.any()}');
+        
+        return $this;
+    }
+
+    public function hasNoInterface() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}.any() == false}');
+        
+        return $this;
+    }
+
     public function goToMethodDefinition() {
         // starting with a staticmethodcall , no support for static, self, parent
         $this->addMethod('sideEffect{methodname = it.out("METHOD").next().code.toLowerCase();}
