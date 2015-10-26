@@ -36,7 +36,7 @@ class RoboFile extends \Robo\Tasks
     /**
      * check that licence is in the PHP source files
      */
-    public function licence()
+    public function checkLicence()
     {
         $files = Finder::create()->files()
                                  ->name('*.php')
