@@ -1,4 +1,4 @@
-Version 0.3.8 (Baihuaxiu, Coming up)
+Version 0.3.9 (Golden Horned King, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,29 @@ Version 0.3.8 (Baihuaxiu, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.8 (Baihuaxiu, 2015-10-26)
++ Architecture
+    + Cleaned too many display (they go to log now), leaving commandline empty (or -v)
+    + A lot more PHP 7 incompatibilities spotted 
++ Report
+    + Added the list of global variables in the projects (if any)
+    + Fixed reports for PHP 5.2 (they were ignored)
++ Analyzer
+    + Better handling of composer in unresolved classes
+    + Spot setlocale with string (PHP 7)
+    + Spot string unpacking (PHP 7)
+    + Upgraded static method call, to avoid classes of the same family
+    + Report eval without try/catch
+    + Report preg_replace with /e 
+    + Fixed report for empty list()
+    + Spot hexadecimal in strings 
+    + Report usort (and co) as incompatibilities between PHP 7 and 5
++ Tokenizer
+    + Fixed edge case with Sign and namespaced function
+    + Added xajax, adodb and gacl as common library
+    + Fixed arguments in short array syntax
+    + Fixed case where [3] was spotted inside a string
 
 Version 0.3.7 (Yellow Robe Demon, 2015-10-19)
 + Architecture
