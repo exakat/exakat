@@ -141,6 +141,7 @@ class Config {
                                'onepage'       => 1,
                                'onepagereport' => 1,
                                'vector'        => 1,
+                               'classes'       => 1,
                                );
      
     private function __construct($argv) {
