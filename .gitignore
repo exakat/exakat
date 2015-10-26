@@ -64,3 +64,6 @@ in
 progress
 library/sonar-project.properties
 tests/analyzer/phpunit.sh
+tests/analyzer/alltests.txt
+run.sh
+classes.csv
