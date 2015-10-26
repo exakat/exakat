@@ -1219,7 +1219,6 @@ project has a 'third-party' folder ?
 Instanceof with unused classes is dead code
 Missing Semicolons before ?>
 
-/e for preg_match
 don't use / as delimiter for regular expressions
 empty/isset and type test 
 phpcheatsheets.com
@@ -1555,7 +1554,7 @@ Shall the usage of PHPexec be limited to a specific part of the code ? (Task)
 
 ::class outside a class ? 
 
-Interface implementée 2 fois .
+Interface implementée 2 fois  dans la même classe (par les parents).
 Fatal error: Class i3 cannot implement previously implemented interface i2 in /Users/famille/Desktop/analyze/test.php on line 6
 
 Check that index in arrays are used twice
@@ -1593,7 +1592,7 @@ Adds a check in a report : all links should be OK to ajax!
 
 Spot useless \\ in literals
 
-Unresolved interface/class : check in return typehint too
+Unresolved interface/class : check in return typehint too (PHP 7 only)
 
 property/method is defined in a class below, but used in a class above
 
@@ -1602,3 +1601,37 @@ Classes (via autoload), includes.
 Generate a web 
 Spot most important files (the one that are required by everyone else?)
 Spot undefined dependencies..
+
+  Note that this only applies to calls from an incompatible context. If class B
+  extended from A the call would be allowed without any notices.
+
+Yield doesn't need () anymore in PHP 7 when inside expression. Old parenthesis will be ignored or made into ()
+Older syntax may yield a parse error, or different priorities.
+
+foreach ($_POST as $k => $var) {
+	$_POST[$k] = mysql_escape_string($var);
+	echo "$var\n";
+}
+f($_POST) => f($var) { echo $var} : Security! 
+
+
+When looping with preg_match (and other functions that handle a reference), it is recommended to unset the reference to avoid parasiting values
+foreach($rows as $row) {
+    //projects/anchor-cms/log//analyze.analyze.log:Structures/AlteringForeachWithoutReference	0.067572116851807	3	111	1	0
+    preg_match('', $res, $r);
+    print_r($r);
+}
+
+Warning en cas de composer qui n'est pas dans la base.
+Faire un outil pour interroger la base de composer 
+
+add = to Regex search
+
+Build a list of file (initially), and search better for PHP files (remove the one with .php but no code, and add the one without extensions but with PHP in it).
+Also, mark scripts (with #! ) as such
+
+Mark scripts as first hit scripts (the one that will include all others)
+
+Could use the right option for preg_match_all
+preg_match_all('#(\d+) \[label="([^"]+?)" shape=box \]#is', $dot, $nodes);
+    fputcsv($fp, [$nodes[1][$id], $nodes[2][$id]]);
