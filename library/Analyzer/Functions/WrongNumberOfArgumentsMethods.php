@@ -35,7 +35,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
         $argsMaxs = array();
         
         // Needs to finish the list of methods and their arguments.
-        
+
         // Currently, classes are not checked.
         foreach($methods as $method) {
             if ($method['args_min'] > 0) {

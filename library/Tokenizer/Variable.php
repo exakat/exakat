@@ -40,7 +40,7 @@ class Variable extends TokenAuto {
         $this->checkAuto();
         
         // todo find a way to process those remainings atom that may be found in those {}
-        
+
         return false;
     }
 

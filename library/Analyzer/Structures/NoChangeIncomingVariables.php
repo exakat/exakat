@@ -31,7 +31,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
                                     '$_ENV', '$_SERVER',
                                     '$PHP_SELF','$HTTP_RAW_POST_DATA');
         //'$_COOKIE', '$_SESSION' : those are OK
-        
+
         // full array unset($_GET);
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')

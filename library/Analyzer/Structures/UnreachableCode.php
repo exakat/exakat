@@ -32,7 +32,7 @@ class UnreachableCode extends Analyzer\Analyzer {
     
     public function analyze() {
         // code after a halt_compiler is expected to be unreachable.
-        
+
         $this->atomIs('Return')
              ->nextSiblings()
              ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));

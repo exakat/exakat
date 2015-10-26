@@ -72,7 +72,7 @@ class DynamicCalls extends Analyzer\Analyzer {
 
         // static constants
         // use constant() or reflexion
-        
+
         
         // static property
         $this->atomIs('Staticproperty')

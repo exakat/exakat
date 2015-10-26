@@ -47,7 +47,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
         $nonDefinitions = 'it.atom in ['.$definitionsList.', '.$nonDefinitionsList.', "Namespace"]  || (it.atom == "Functioncall" && it.fullnspath in ['.$definitionsFunctionsList.']) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
 
         // all cases without extra string before/after the script
-        
+
         // one or several namespaces
         $this->atomIs('File')
              ->outIs('FILE')

@@ -27,7 +27,7 @@ use Analyzer;
 
 class SetlocaleNeedsConstants extends Analyzer\Analyzer {
     public function analyze() {
-        $allowedConstants = array('\\LC_ALL', 
+        $allowedConstants = array('\\LC_ALL',
                                   '\\LC_COLLATE',
                                   '\\LC_CTYPE',
                                   '\\LC_MONETARY',

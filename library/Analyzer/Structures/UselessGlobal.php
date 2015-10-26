@@ -61,7 +61,7 @@ class UselessGlobal extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         // used only once
-        
+
         // written only
     }
 }

@@ -39,7 +39,7 @@ class Project extends Tasks {
                                                   ),
                                'Counts'  => array('Sqlite'   => 'counts'));
     const TOTAL_STEPS = 23; // 2 Reports + 10 Analyzes + 10 other steps
-    
+
     public function run(\Config $config) {
         $this->config = $config;
         
@@ -272,7 +272,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         }
 
 //Exception : Unable to retrieve server info [500]:
-        
+
         // checked it all. All is fine.
         return true;
     }

@@ -65,7 +65,7 @@ class StaticLoop extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         // foreach with complex structures (property, static property, arrays, references... ?)
-        
+
         // for
         $this->atomIs('For')
              ->outIs('INCREMENT')
