@@ -1,4 +1,4 @@
-Version 0.3.9 (Golden Horned King, Coming up)
+Version 0.3.10 (Silver Horned King, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,18 @@ Version 0.3.9 (Golden Horned King, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.9 (Golden Horned King, 2015-11-02 up)
++ Architecture
+    + Cleaned code with Exakat
++ Analyzer
+    + Refined report about double assignation
+    + Fixed argument counting in Function Definition
+    + Better support of array in Locally Used Properties
+    + Updated Composer database
++ Tokenizer
+    + Fixed a bug that ignored Blocks
+    + Fixed a rare bug with echo and the following arguments
 
 Version 0.3.8 (Baihuaxiu, 2015-10-26)
 + Architecture
