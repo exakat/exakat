@@ -174,13 +174,17 @@ if (fullcode.out('DEFINE').any()) {
     if (fullcode.out('RETURN').any())    { fullcode.fullcode = fullcode.fullcode + ' : ' +   fullcode.out('RETURN').next().fullcode;          }
     if (fullcode.out('BLOCK').any())     { fullcode.fullcode = fullcode.fullcode + ' ' +     fullcode.out('BLOCK').next().fullcode;           }
 
-    fullcode.setProperty('args_min', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').count());
+    args_min = fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').count();
+    args_min += fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Typehint').out('VARIABLE').has('atom', 'Variable').count();
+    fullcode.setProperty('args_min', args_min);
+    
     if (fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').has('variadic', true).any()) {
         fullcode.setProperty('args_max', 100);
     } else {
-        fullcode.setProperty('args_max', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Assignation').count() + fullcode.getProperty('args_min'));
+        fullcode.setProperty('args_max', fullcode.out('ARGUMENTS').out('ARGUMENT').count());
     }
     // No support for T_ELLIPSIS yet :( => 100!
+    
 }
 if (fullcode.out('VALUE').hasNot('atom', 'Void').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
 

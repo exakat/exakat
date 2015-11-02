@@ -27,7 +27,7 @@ use Analyzer;
 
 class WrongNumberOfArguments extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\VariableArguments');
+        return array('Functions/VariableArguments');
     }
     
     public function analyze() {
@@ -70,7 +70,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
              ->savePropertyAs('args_count', 'args_count')
              ->functionDefinition()
              ->inIs('NAME')
-             ->analyzerIsNot('Analyzer\\Functions\\VariableArguments')
+             ->analyzerIsNot('Functions/VariableArguments')
              ->isMore('args_min', 'args_count')
              ->back('first');
         $this->prepareQuery();
@@ -81,7 +81,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
              ->savePropertyAs('args_count', 'args_count')
              ->functionDefinition()
              ->inIs('NAME')
-             ->analyzerIsNot('Analyzer\\Functions\\VariableArguments')
+             ->analyzerIsNot('Functions/VariableArguments')
              ->isLess('args_max', 'args_count')
              ->back('first');
         $this->prepareQuery();
