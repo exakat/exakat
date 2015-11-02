@@ -1339,7 +1339,7 @@ class Load extends Tasks {
         return '';
     }
 
-    private function processComma($tokenValue, $display) {
+    private function processComma($tokenValue) {
         static $echoCount         = 0;
         static $parenthesisCount  = 0;
         static $parenthesisId     = 0;
