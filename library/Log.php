@@ -43,15 +43,15 @@ class Log {
     }
 
     public function __destruct() {
-        if ($this->log === null) { return true; }
-
-        $this->log('Duration : '.number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
-        $this->log($this->name.' closed on '.date('r'));
+        if ($this->log !== null) {  
+            $this->log('Duration : '.number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
+            $this->log($this->name.' closed on '.date('r'));
         
-        if ($this->log !== null) {
-            fclose($this->log);
-            unset($this->log);
-        } 
+            if ($this->log !== null) {
+                fclose($this->log);
+                unset($this->log);
+            } 
+        }
     }
     
     public function log($message) {
