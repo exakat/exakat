@@ -33,6 +33,7 @@ class DoubleAssignation extends Analyzer\Analyzer {
              ->inIs('LEFT')
              ->nextSibling()
              ->atomIs('Assignation')
+             ->code('=')
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'name')
              ->inIs('LEFT')
