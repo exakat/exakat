@@ -27,23 +27,35 @@ use Analyzer;
 
 class UsedFunctions extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\MarkCallable');
+        return array('Functions/MarkCallable');
     }
     
     public function analyze() {
         // function used
-        $this->atomIs('Function')
-             ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}')
-             ->raw('filter{it.out("NAME").next().code != ""}')
-             ->outIs('NAME')
-             ->raw("filter{ g.idx('atoms')[['atom':'Functioncall']].has('fullnspath', it.fullnspath).any() }");
-        $this->prepareQuery();
+        $functions = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Functioncall"]].hasNot("fullnspath", null).fullnspath.unique()
+GREMLIN
+);
+        if (!empty($functions)) {
+            $this->atomIs('Function')
+                 ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}')
+                 ->raw('filter{it.out("NAME").next().code != ""}')
+                 ->outIs('NAME')
+                 ->fullnspath($functions);
+            $this->prepareQuery();
+        }
 
         // function name used in a string
-        $this->atomIs('Function')
-             ->outIs('NAME')
-             ->raw('filter{ f = it; g.idx("atoms")[["atom":"String"]].hasNot("fullnspath", null).filter{it.fullnspath == f.fullnspath; }.any()}');
-        $this->prepareQuery();
+        $functionsInStrings = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"String"]].hasNot("fullnspath", null).fullnspath.unique()
+GREMLIN
+);
+        if (!empty($functionsInStrings)) {
+            $this->atomIs('Function')
+                 ->outIs('NAME')
+                 ->fullnspath($functionsInStrings);
+            $this->prepareQuery();
+        }
     }
 }
 
