@@ -286,7 +286,7 @@ JOIN categories
             print_r($row);
 //            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
         }
-        echo $total, "analyzers are orphans\n";
+        echo $total, " analyzers are orphans\n";
 
         // check for analyzers in Files
         $total = 0;
@@ -298,7 +298,19 @@ JOIN categories
             }
             if (!file_exists('human/en/'.$row['name'].'.ini')) {
                 echo $row['name'], " has no documentation\n";
+            } else {
+                $ini = parse_ini_file('human/en/'.$row['name'].'.ini');
+
+                if (!isset($ini['name'])) {
+                    echo 'human/en/'.$row['name'].'.ini', " is not set\n";
+                } elseif (str_replace('PHP', '', $ini['name']) !== ucwords(strtolower(str_replace('PHP', '', $ini['name'])))) {
+                    if (!preg_match('$^ext/$', $ini['name'])) { 
+                        echo 'human/en/'.$row['name'].'.ini', " name is not Capital Worded ($ini[name])\n";
+                    }
+                } 
+                // else all is fine
             }
+            
             if (!file_exists('tests/analyzer/Test/'.str_replace('/', '_', $row['name']).'.php')) {
                 echo $row['name'], " has no Test\n";
             }
