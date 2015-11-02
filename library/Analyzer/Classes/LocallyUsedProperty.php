@@ -42,6 +42,7 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Property')
              ->outIs('PROPERTY')
+             ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'property')
              ->back('ppp');
         $this->prepareQuery();
