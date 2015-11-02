@@ -90,14 +90,16 @@ class Sequence extends TokenAuto {
                                'keepIndexed' => true);
         $this->checkAuto();
 
+
         // @note : $x; endif
         $this->conditions = array(-2 => array('token'    => 'T_COLON',
                                               'property' => $association),
                                   -1 => array('atom'     => $operands,
                                               'notToken' => $forbiddenTokens ),
-                                   0 => array('token'    => Sequence::$operators,
+                                   0 => array('token'    => self::$operators,
                                               'atom'     => 'none'),
-                                   1 => array('token'    => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDSWITCH', 'T_ENDWHILE', 'T_CASE', 'T_ENDDECLARE', 'T_ENDFOR', 'T_ENDFOREACH')),
+                                   1 => array('token'    => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDSWITCH', 'T_ENDWHILE', 
+                                                                  'T_CASE', 'T_ENDDECLARE', 'T_ENDFOR', 'T_ENDFOREACH')),
         );
         
         $this->actions = array('toSequence'  => true,

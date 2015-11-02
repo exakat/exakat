@@ -29,13 +29,13 @@ class Ifthen extends TokenAuto {
 
     public function _check() {
         // Build the condition
-        $this->conditions = array( 0 => array('token' => self::$operators),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'If')),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('token' => 'T_CLOSE_PARENTHESIS')
+        $this->conditions = array( 0 => array('token'     => self::$operators),
+                                   1 => array('token'     => 'T_OPEN_PARENTHESIS',
+                                              'property'  => array('association' => 'If')),
+                                   2 => array('atom'      => 'yes'),
+                                   3 => array('token'     => 'T_CLOSE_PARENTHESIS')
         );
-        
+
         $this->actions = array('transform'    => array(1 => 'DROP',
                                                        2 => 'CONDITION',
                                                        3 => 'DROP'),

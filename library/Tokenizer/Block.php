@@ -56,7 +56,7 @@ class Block extends TokenAuto {
                                     1 => array('atom'     => 'yes'),
                                     2 => array('token'    => 'T_CLOSE_CURLY',
                                                'atom'     => 'none'),
-                                    3 => array('notToken' => 'T_ENDIF')
+                                    3 => array('notToken' => array('T_ENDIF', 'T_ELSE', 'T_ELSEIF'))
         );
 
         $this->actions = array('toBlock'            => true,
@@ -64,14 +64,14 @@ class Block extends TokenAuto {
                                );
         $this->checkAuto();
 
-    // @doc { Block }
+    // @doc : { Block } endif
         $this->conditions = array( -1 => array('notToken' => $notToken),
                                     0 => array('token'    => self::$operators,
                                                'property' => array('association' => 'none')),
                                     1 => array('atom'     => 'yes'),
                                     2 => array('token'    => 'T_CLOSE_CURLY',
                                                'atom'     => 'none'),
-                                    3 => array('token'    => 'T_ENDIF')
+                                    3 => array('token'    => array('T_ENDIF', 'T_ELSE', 'T_ELSEIF'))
         );
 
         $this->actions = array('toBlock'      => true);
