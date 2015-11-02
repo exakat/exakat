@@ -349,11 +349,11 @@ class Load extends Tasks {
                     $to_index = false;
                 } elseif ($token[3] == 'T_OPEN_TAG_WITH_ECHO') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_OPEN_TAG')
-                                                  ->setProperty('code', str_replace('<?=', '<?php', $token[1]))
-                                                  ->setProperty('tag', '<?=')
-                                                  ->setProperty('line', $token[2])
-                                                  ->setProperty('modifiedBy', 'bin/load19a')
-                                                  ->save();
+                                                        ->setProperty('code', str_replace('<?=', '<?php', $token[1]))
+                                                        ->setProperty('tag', '<?=')
+                                                        ->setProperty('line', $token[2])
+                                                        ->setProperty('modifiedBy', 'bin/load19a')
+                                                        ->save();
                     $regexIndex['Phpcode']->relateTo($T[$Tid], 'INDEXED')->save();
                     if (isset($previous)) {
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
@@ -362,10 +362,10 @@ class Load extends Tasks {
                 
                     ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ECHO')
-                                                  ->setProperty('code', 'echo')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load19b')
-                                                  ->save();
+                                                        ->setProperty('code', 'echo')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load19b')
+                                                        ->save();
                     $regexIndex['ArgumentsNoParenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
                     $regexIndex['Functioncall']->relateTo($T[$Tid], 'INDEXED')->save();
 
@@ -375,11 +375,11 @@ class Load extends Tasks {
                           $tokens[$id + 1] == ';') {
 
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_OPEN_TAG')
-                                                  ->setProperty('code', $token[1])
-                                                  ->setProperty('tag', '<?php')
-                                                  ->setProperty('line', $token[2])
-                                                  ->setProperty('modifiedBy', 'bin/load27')
-                                                  ->save();
+                                                        ->setProperty('code', $token[1])
+                                                        ->setProperty('tag', '<?php')
+                                                        ->setProperty('line', $token[2])
+                                                        ->setProperty('modifiedBy', 'bin/load27')
+                                                        ->save();
                     $regexIndex['Phpcode']->relateTo($T[$Tid], 'INDEXED')->save();
                     if (isset($previous)) {
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
@@ -388,12 +388,12 @@ class Load extends Tasks {
                 
                     ++$Tid;
                     $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                              ->setProperty('code', 'void')
-                                              ->setProperty('fullcode', ' ')
-                                              ->setProperty('line', $line)
-                                              ->setProperty('atom', 'Void')
-                                              ->setProperty('modifiedBy', 'bin/load27b')
-                                              ->save();
+                                                          ->setProperty('code', 'void')
+                                                          ->setProperty('fullcode', ' ')
+                                                          ->setProperty('line', $line)
+                                                          ->setProperty('atom', 'Void')
+                                                          ->setProperty('modifiedBy', 'bin/load27b')
+                                                          ->save();
                     $to_index = false;
                 } elseif ($token[3] == 'T_OPEN_TAG'  &&
                           isset($tokens[$id + 1])    &&
@@ -490,15 +490,17 @@ class Load extends Tasks {
                     }
 
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ECHO')
-                                                  ->setProperty('code', 'echo')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load22')
-                                                  ->save();
+                                                        ->setProperty('code', 'echo')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load22')
+                                                        ->save();
                     $regexIndex['ArgumentsNoParenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
                     $regexIndex['Functioncall']->relateTo($T[$Tid], 'INDEXED')->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
+                    
+                    $this->processComma('T_OPEN_TAG_WITH_ECHO');
 
                     ++$id;
                     continue;
@@ -1337,28 +1339,12 @@ class Load extends Tasks {
         return '';
     }
 
-    private function processComma($tokenValue, $display = false) {
+    private function processComma($tokenValue, $display) {
         static $echoCount         = 0;
         static $parenthesisCount  = 0;
         static $parenthesisId     = 0;
         static $parenthesisStates = array();
         static $commaCount        = array();
-        
-        if ($display) {
-            return true;
-            var_dump($parenthesisCount);
-            var_dump($parenthesisId);
-            print_r($parenthesisStates);
-            ksort($commaCount);
-            print_r($commaCount);
-            
-            if (count($parenthesisStates) != $echoCount) {
-                print "Warning : some states are left over!";
-                print "echoCount : $echoCount\n";
-                print_r($parenthesisStates);
-                die();
-            }
-        }
         
         if ($tokenValue === 'T_COMMA' ) {
             if (isset($commaCount[$parenthesisId])) {
@@ -1395,7 +1381,8 @@ class Load extends Tasks {
         }
 
         // Handle cases of echo
-        if ($tokenValue === 'T_ECHO') {
+        if ($tokenValue === 'T_ECHO' || $tokenValue === 'T_OPEN_TAG_WITH_ECHO') {
+            print "Found one Echo ($tokenValue)\n";
             $parenthesisStates[] = $parenthesisId;
             ++$parenthesisCount;
             $parenthesisId       = $parenthesisCount;
