@@ -35,6 +35,9 @@ class DoubleAssignation extends Analyzer\Analyzer {
              ->atomIs('Assignation')
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'name')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->filter(' it.out.loop(1){true}{ it.object.atom == "Variable"}.has("fullcode", name).any() == false ')
              ->back('first');
         $this->prepareQuery();
     }
