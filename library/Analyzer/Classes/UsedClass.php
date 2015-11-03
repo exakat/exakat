@@ -31,82 +31,133 @@ class UsedClass extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $new = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"New"]].out("NEW").hasNot("fullnspath", null).fullnspath.unique()
+GREMLIN
+);
         // class used in a New
-        $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"New"]].out("NEW").hasNot("fullnspath", null).has("fullnspath", classdns).any()}');
-        $this->prepareQuery();
+        if (!empty($new)) {
+            $this->atomIs('Class')
+                 ->savePropertyAs('fullnspath', 'classdns')
+                 ->fullnspath($new);
+            $this->prepareQuery();
+        }
         
         // classed used in a extends
+        $extends = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Class"]].out("EXTENDS").fullnspath.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Class"]].out("EXTENDS").has("fullnspath", classdns).any()}');
+             ->fullnspath($extends);
         $this->prepareQuery();
 
         // class used in an implements
+        $implements = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Class"]].out("IMPLEMENTS").fullnspath.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Class"]].out("IMPLEMENTS").has("fullnspath", classdns).any()}');
+             ->fullnspath($implements);
         $this->prepareQuery();
 
         // class used in a staticmethodcall
+        $staticmethodcalls = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Staticmethodcall"]].out("CLASS").fullnspath.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Staticmethodcall"]].out("CLASS").has("fullnspath", classdns).any()}');
+             ->fullnspath($staticmethodcalls);
         $this->prepareQuery();
 
         // class used in static property
+        $staticproperties = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Staticproperty"]].out("CLASS").fullnspath.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Staticproperty"]].out("CLASS").has("fullnspath", classdns).any()}');
+             ->fullnspath($staticproperties);
         $this->prepareQuery();
 
         // class used in static constant
+        $staticconstants = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Staticconstant"]].out("CLASS").fullnspath.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Staticconstant"]].out("CLASS").has("fullnspath", classdns).any()}');
+             ->fullnspath($staticconstants);
         $this->prepareQuery();
 
         // class use in a instanceof
+        $instanceofs = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Instanceof"]].out("CLASS").fullnspath.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Instanceof"]].out("CLASS").has("fullnspath", classdns).any()}');
+             ->fullnspath($instanceofs);
         $this->prepareQuery();
 
         // class used in a typehint
+        $typehints = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Typehint"]].out("CLASS").fullnspath.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Typehint"]].out("CLASS").has("fullnspath", classdns).any()}');
+             ->fullnspath($typehints);
         $this->prepareQuery();
 
         // class used in a Use
+        $uses = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Use"]].out("Use").originpath.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')
-             ->raw('filter{ g.idx("atoms")[["atom":"Use"]].out("USE").has("originpath", classdns).any()}');
+             ->fullnspath($uses);
         $this->prepareQuery();
 
         // class used in a String (full string only)
+        $strings = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"String"]].filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Functions\\\\MarkCallable").any()}
+                                 .noDelimiter.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->raw('filter{ g.idx("atoms")[["atom":"String"]].has("code", name).any()}');
+             ->code($strings)
+             ->back('first');
         $this->prepareQuery();
 
         // class used in an array
+        $arrays = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Functioncall"]].filter{ it.token in ["T_OPEN_BRACKET", "T_ARRAY"]}
+                                       .out("ARGUMENTS")
+                                       .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Functions\\\\MarkCallable").any()}
+                                       .out("ARGUMENT")
+                                       .has("rank", 0)
+                                       .noDelimiter.unique()
+GREMLIN
+);
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->raw('filter{ g.idx("atoms")[["atom":"Functioncall"]].has("token", "T_ARRAY").out("ARGUMENTS").filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Functions\\\\MarkCallable").any()}.out("ARGUMENT").has("rank", 0).has("noDelimiter", name).any() }')
+             ->code($arrays)
              ->back('first');
         $this->prepareQuery();
     }
