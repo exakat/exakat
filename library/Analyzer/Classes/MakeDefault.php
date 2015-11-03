@@ -50,9 +50,9 @@ class MakeDefault extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'propriete')
              
              // search for PPP now
-
+             
              ->back('result');
-//        $this->printQuery();
+
         $this->prepareQuery();
     }
 }
