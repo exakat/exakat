@@ -60,12 +60,11 @@ abstract class TokenAuto extends Token {
         }
         $query .= '.sideEffect{ total++; }';
 
-        $queryConditions = array();
-        
+        $q = array();
         if (!empty($this->conditions[0])) {
-            $queryConditions = array_merge($queryConditions, $this->readConditions($this->conditions[0]));
-            
-            $queryConditions[] = 'as("origin")';
+            $q[] = $this->readConditions($this->conditions[0]);
+            $q[] = ['as("origin")'];
+
             unset($this->conditions[0]);
         }
 
@@ -73,9 +72,9 @@ abstract class TokenAuto extends Token {
             if (!empty($this->conditions[$i])) {
                 $conditions = $this->conditions[$i];
                 $conditions['previous'] = abs($i);
-                $queryConditions = array_merge($queryConditions, $this->readConditions($conditions));
 
-                $queryConditions[] = 'back("origin")';
+                $q[] = $this->readConditions($conditions);
+                $q[] = ['back("origin")'];
             }
             unset($this->conditions[$i]);
         }
@@ -84,12 +83,15 @@ abstract class TokenAuto extends Token {
             if (!empty($this->conditions[$i])) {
                 $conditions = $this->conditions[$i];
                 $conditions['next'] = $i;
-                $queryConditions = array_merge($queryConditions, $this->readConditions($conditions));
 
-                $queryConditions[] = 'back("origin")';
+                $q[] = $this->readConditions($conditions);
+                $q[] = ['back("origin")'];
             }
             unset($this->conditions[$i]);
         }
+
+        $queryConditions = call_user_func_array('array_merge', $q);
+        unset($q);
         
         if (!empty($this->conditions)) {
             throw new UnprocessedCondition();

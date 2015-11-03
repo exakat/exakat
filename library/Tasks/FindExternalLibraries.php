@@ -116,20 +116,21 @@ class FindExternalLibraries extends Tasks {
         }
     }
     
-    
     private function processDir($dir) {
        $return = array();
     
        $files = glob($dir.'/*');
+       $r = array();
        foreach($files as $file) {
            if (is_file($file)) {
-               $return = array_merge($this->process($file), $return);
+               $r[] = $this->process($file);
            } elseif (is_dir($file)) {
-               $return = array_merge($this->processDir($file), $return);
+               $r[] = $this->processDir($file);
            }
            // else should go to LOG
        }
-    
+       $return = call_user_func_array('array_merge', $r);
+
         return $return;
     }
 

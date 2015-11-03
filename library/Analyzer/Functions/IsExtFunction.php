@@ -31,15 +31,16 @@ class IsExtFunction extends Analyzer\Analyzer {
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_functions';
         
-        $functions = array();
+        $f = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile, 'functions');
             
             if (!empty($ini)) {
-                $functions = array_merge($functions, $ini);
+                $f[] = $ini;
             }
         }
+        $functions = call_user_func_array('array_merge', $f);
         
         $functions = array_keys(array_count_values($functions));
         $functions = $this->makeFullNsPath($functions);

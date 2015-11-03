@@ -104,7 +104,7 @@ class Phploc extends Tasks {
     private function readRecursiveDir($dirname, $excludeFiles = array(), $excludeDirs = array()) {
         $dir = opendir($dirname);
         
-        $return = array();
+        $r = array();
         while(false !== ($file = readdir($dir))) {
             if ($file[0] == '.') { continue; }
             foreach($excludeFiles as $part) {
@@ -114,13 +114,15 @@ class Phploc extends Tasks {
             }
             
             if (is_dir($dirname.'/'.$file) && !in_array($dirname.'/'.$file, $excludeDirs)) {
-                $return = array_merge($return, $this->readRecursiveDir($dirname.'/'.$file, $excludeFiles, $excludeDirs));
+                $r = $this->readRecursiveDir($dirname.'/'.$file, $excludeFiles, $excludeDirs);
             } else {
-                if (substr($file, -4) !== '.php') { continue; }
-
-                $return[] = $dirname.'/'.$file;
+                if (substr($file, -4) !== '.php') { 
+                    continue; 
+                }
+                $r[] = [$dirname.'/'.$file];
             }
         }
+        $return = call_user_func_array('array_merge', $r);
         
         return $return;
     }

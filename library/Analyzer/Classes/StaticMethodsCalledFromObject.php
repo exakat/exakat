@@ -40,7 +40,6 @@ g.idx("atoms")[["atom":"Function"]].out("NAME")
                                    .unique()
 GREMLIN
 );
-//        $methods = array_slice($methods, 0, 100);
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->code($methods)

@@ -35,15 +35,16 @@ class IsExtTrait extends Analyzer\Analyzer {
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_traits';
         
-        $traits = array();
+        $t = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
             if (!empty($ini['traits'][0])) {
-                $traits = array_merge($traits, $ini['traits']);
+                $t[] = $ini['traits'];
             }
         }
+        $traits = call_user_func_array('array_merge', $t);
 
         // no need to process anything!
         if (empty($traits)) { return true; }

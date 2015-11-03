@@ -35,16 +35,17 @@ class IsExtClass extends Analyzer\Analyzer {
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_classes';
         
-        $classes = array();
+        $c = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
             if (!empty($ini['classes'][0])) {
-                $classes = array_merge($classes, $ini['classes']);
+                $c[] = $ini['classes'];
             }
         }
-        
+
+        $classes = call_user_func_array('array_merge', $c);
         $classes = $this->makeFullNsPath($classes);
         
         $this->analyzerIs('Classes/ClassUsage')

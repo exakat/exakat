@@ -33,12 +33,13 @@ class RedeclaredPhpFunction extends Analyzer\Analyzer {
     public function analyze() {
         $extensions = $this->loadIni('php_distribution_53.ini');
         
-        $extensionFunctions = array();
+        $e = array();
         foreach($extensions['ext'] as $ext) {
             if ($iniFile = $this->loadIni($ext.'.ini', 'functions')) {
-                $extensionFunctions = array_merge($extensionFunctions, $iniFile);
+                $e[] = $iniFile;
             }
         }
+        $extensionFunctions = call_user_func_array('array_merge', $e);
         
         $this->atomIs('Function')
              ->outIs('NAME')
