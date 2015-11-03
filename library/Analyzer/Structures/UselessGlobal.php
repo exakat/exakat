@@ -37,7 +37,6 @@ class UselessGlobal extends Analyzer\Analyzer {
 g.idx("atoms")[["atom":"Variable"]].has("code", "\\\$GLOBALS").in("VARIABLE").has("atom", "Array").out("INDEX").has("atom", "String").transform{ '\$' + it.noDelimiter}.unique()
 GREMLIN
 );
-        print_r($inGlobals);
         $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->analyzerIsNot('Structures/UnusedGlobal')
@@ -50,7 +49,6 @@ GREMLIN
 g.idx("atoms")[["atom":"Global"]].out("GLOBAL").has("atom", "Variable").has("token", "T_VARIABLE").transform{ it.code.substring(1, it.code.size())}.unique()
 GREMLIN
 );
-        print_r($globals);
         $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->code('$GLOBALS')
