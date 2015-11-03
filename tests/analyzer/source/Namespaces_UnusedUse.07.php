@@ -18,14 +18,14 @@ use j\SingleWithoutAliasUsed2,
     n\OriginalAliasBothUsedo2 as OriginalAliasBothUseda2,
     o\OriginalAliasBothUnusedo2 as OriginalAliasBothUnused2;
 
-$x instanceof a\SingleWithoutAliasUsed;
-$x1 instanceof c\OriginalUsedAliasUnusedo;
+$x instanceof \a\SingleWithoutAliasUsed;
+$x1 instanceof \c\OriginalUsedAliasUnusedo;
 $x2 instanceof OriginalUnusedAliasUseda;
 $x3 instanceof e\OriginalAliasBothUsedo;
 $x4 instanceof OriginalAliasBothUseda;
 
 $x2 instanceof SingleWithoutAliasUsed2;
-$x12 instanceof l\OriginalUsedAliasUnusedo2;
+$x12 instanceof \l\OriginalUsedAliasUnusedo2;
 $x22 instanceof OriginalUnusedAliasUseda2;
 $x32 instanceof n\OriginalAliasBothUsedo2;
 $x42 instanceof OriginalAliasBothUseda2;
