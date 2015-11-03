@@ -98,7 +98,7 @@ class Sequence extends TokenAuto {
                                               'notToken' => $forbiddenTokens ),
                                    0 => array('token'    => self::$operators,
                                               'atom'     => 'none'),
-                                   1 => array('token'    => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDSWITCH', 'T_ENDWHILE', 
+                                   1 => array('token'    => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDSWITCH', 'T_ENDWHILE',
                                                                   'T_CASE', 'T_ENDDECLARE', 'T_ENDFOR', 'T_ENDFOREACH')),
         );
         
