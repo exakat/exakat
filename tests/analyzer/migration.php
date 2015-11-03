@@ -1,7 +1,21 @@
 <?php
 
-$classes = glob('Test/*');
+$classes = glob('Test/*/*.php');
+
+
 foreach($classes as $class) {
+//    print $class."\n";
+    
+    $php = file_get_contents($class);
+    if (strpos($php, "include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');") !== false) {
+        $php = str_replace("include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');",
+                           "include_once(dirname(dirname(dirname(dirname(__DIR__)))).'/library/Autoload.php');",
+                           $php);
+        file_put_contents($class, $php);
+//        print "Not to update : " .$class."\n";
+    }
+//    
+    continue;
     //$class = 'Test/Classes_NonStaticMethodsCalledStatic.php';
 
     $file = basename($class);

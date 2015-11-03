@@ -39,7 +39,7 @@
     }
     
     // restore $test value
-    $test = $dir.'_'.$test;
+    $test = $dir.'/'.$test;
     $files = glob('source/'.$test.'.*.php');
     sort($files);
     $last = array_pop($files);

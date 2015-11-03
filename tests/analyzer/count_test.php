@@ -1,6 +1,6 @@
 <?php
 
-$files = glob('Test/*.php');
+$files = glob('Test/*/*.php');
 
 $ignoreList = array('Test/Skeleton.php', 'Test/Analyzer.php');
 foreach($ignoreList as $i) {
@@ -10,8 +10,8 @@ foreach($ignoreList as $i) {
 
 print count($files)." classes in Test folder\n";
 
-$shell = shell_exec('grep " methods" Test/*');
-$lines = split("\n", trim($shell));
+$shell = shell_exec('grep -r " methods" Test/*');
+$lines = explode("\n", trim($shell));
 
 $total = 0;
 foreach($lines as $line) {

@@ -9,17 +9,9 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
     public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
  
-        $tests = glob('Test/*.php');
+        $tests = glob('Test/*/*.php');
         foreach($tests as $id => $t) {
-            if ($t == 'Test/Skeleton.php') { 
-                unset($tests[$id]) ;
-            } elseif ($t == 'Test/Analyzer.php') { 
-                unset($tests[$id]) ;
-            } elseif ($t == 'Test/Random.php') { 
-                unset($tests[$id]) ;
-            } else {
-                $tests[$id] = '\\'.str_replace(array('/','.php'), array('\\',''), $t);
-            }
+           $tests[$id] = '\\'.str_replace(array('/','.php'), array('\\',''), $t);
         }
         
         shuffle($tests);
@@ -28,8 +20,9 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
         print "Testing with ".count($tests)." tests\n";
         $total = 0;
         foreach($tests as $test) {
-            preg_match('/(\d) methods/', file_get_contents(str_replace('\Test\\', 'Test/', $test).'.php'), $r);
-            print substr("phpunit .".str_replace('\\', '/',$test).".php ".str_repeat(' ', 60), 0, 60)."($r[1] - $total)\n";
+            $testFile = str_replace('\\', '/', str_replace('\Test\\', 'Test/', $test)).'.php';
+            preg_match('/(\d) methods/', file_get_contents($testFile), $r);
+            print substr("phpunit .".$testFile.".php ".str_repeat(' ', 60), 0, 60)."($r[1] - $total)\n";
             $total += $r[1];
         }
         print "Testing a total of $total tests\n";
@@ -37,25 +30,28 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
         $offset = 0;
         $number = 1000;
         foreach($tests as $i => $test ) {
-            if ($i < $offset) continue;
-            $name = str_replace('\\Test\\', '', $test);
+            if ($i < $offset) { 
+                continue; 
+            }
+            $name = str_replace('\\', '/', str_replace('\\Test\\', '', $test));
+            $name_ = str_replace('\\', '_', str_replace('\\Test\\', '', $test));
 
             // check code
             $code = file_get_contents('Test/'.$name.'.php');
-            preg_match_all('/test'.$name.'\d\d/', $code, $r);
-            $methods = array();
-            foreach($r[0] as $k => $v) {
-                $methods[$k] = preg_replace('#test'.$name.'(\d+)#is', '\1', $v);
+            preg_match_all('#test'.$name_.'\d\d#', $code, $r);
+            $methods = $r[0];
+            foreach($methods as &$v) {
+                $v = preg_replace('#test'.$name_.'(\d+)#is', '\1', $v);
             }
 
             $sources = glob('source/'.$name.'.*.php');
-            foreach($sources as $k => $v) {
-                $sources[$k] = preg_replace('#source/'.$name.'\.(\d+)\.php#is', '\1', $v);
+            foreach($sources as &$v) {
+                $v = preg_replace('#source/'.$name.'\.(\d+)\.php#is', '\1', $v);
             }
 
             $exp = glob('exp/'.$name.'.*.php');
-            foreach($exp as $k => $v) {
-                $exp[$k] = preg_replace('#exp/'.$name.'\.(\d+)\.php#is', '\1', $v);
+            foreach($exp as &$v) {
+                $v = preg_replace('#exp/'.$name.'\.(\d+)\.php#is', '\1', $v);
             }
             
             $diff = array_diff($sources, $methods);
@@ -74,7 +70,10 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
                 print "\n";
             }
 
-            $suite->addTestSuite($test);
+            list($a, $b, $c, $d) = explode('\\', $test);
+            $testClass = '\Test\\'.$c.'_'.$d;
+
+            $suite->addTestSuite($testClass);
             if ($i > $offset + $number) { 
                 print "Limited at $number element from $offset position\n";
                 return $suite; 
