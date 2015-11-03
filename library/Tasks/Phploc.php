@@ -116,8 +116,8 @@ class Phploc extends Tasks {
             if (is_dir($dirname.'/'.$file) && !in_array($dirname.'/'.$file, $excludeDirs)) {
                 $r = $this->readRecursiveDir($dirname.'/'.$file, $excludeFiles, $excludeDirs);
             } else {
-                if (substr($file, -4) !== '.php') { 
-                    continue; 
+                if (substr($file, -4) !== '.php') {
+                    continue;
                 }
                 $r[] = [$dirname.'/'.$file];
             }
