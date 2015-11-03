@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Constants_UndefinedConstants extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testConstants_UndefinedConstants01()  { $this->generic_test('Constants_UndefinedConstants.01'); }
     public function testConstants_UndefinedConstants02()  { $this->generic_test('Constants_UndefinedConstants.02'); }
@@ -17,5 +17,6 @@ class Constants_UndefinedConstants extends Analyzer {
     public function testConstants_UndefinedConstants05()  { $this->generic_test('Constants_UndefinedConstants.05'); }
     public function testConstants_UndefinedConstants06()  { $this->generic_test('Constants_UndefinedConstants.06'); }
     public function testConstants_UndefinedConstants07()  { $this->generic_test('Constants_UndefinedConstants.07'); }
+    public function testConstants_UndefinedConstants08()  { $this->generic_test('Constants_UndefinedConstants.08'); }
 }
 ?>
