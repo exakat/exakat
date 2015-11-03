@@ -39,7 +39,7 @@ class ConstantUsage extends Analyzer\Analyzer {
         // Identifier that is not used somewhere else
         $this->atomIs('Identifier')
              ->codeIsNot(array('true', 'false', 'null'))
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY',
                              'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE'))
              ->hasNoParent('Const', array('LEFT', 'CONST'));
         $this->prepareQuery();
