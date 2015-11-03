@@ -95,7 +95,7 @@ DELETE n,r';
             if ($round > 0) {
                 sleep($round);
             }
-            $shellRes = shell_exec('cd '.$config->projects_root.'/neo4j/; ./bin/neo4j start-no-wait 2>&1');
+            shell_exec('cd '.$config->projects_root.'/neo4j/; ./bin/neo4j start-no-wait 2>&1');
             
             // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
             // Needs to pick up this error and act

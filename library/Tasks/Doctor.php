@@ -180,7 +180,7 @@ class Doctor extends Tasks {
         
         // config
         if (!file_exists($config->projects_root.'/config')) {
-            $res = mkdir($config->projects_root.'/config', 0755);
+            mkdir($config->projects_root.'/config', 0755);
         }
 
         if (!file_exists($config->projects_root.'/config/config.ini')) {
@@ -225,7 +225,7 @@ INI;
         if (file_exists($config->projects_root.'/projects/')) {
             $stats['folders']['projects folder'] = 'Yes';
         } else {
-            $res = mkdir($config->projects_root.'/projects/', 0755);
+            mkdir($config->projects_root.'/projects/', 0755);
             if (file_exists($config->projects_root.'/projects/')) {
                 $stats['folders']['projects folder'] = 'Yes';
             } else {

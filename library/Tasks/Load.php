@@ -41,9 +41,9 @@ class Load extends Tasks {
         $this->client = new \Loader\Cypher();
 
         if ($filename = $this->config->filename) {
-            $nbTokens = $this->process_file($filename);
+            $this->process_file($filename);
         } elseif ($dirName = $this->config->dirname) {
-            $res = $this->process_dir($dirName);
+            $this->process_dir($dirName);
         } else {
             die('No file to process. Aborting');
         }
@@ -230,7 +230,6 @@ class Load extends Tasks {
     
         $nb = count($tokens);
         $Tid = -1;
-        $root = 0;
         $inQuote = 0;
         $in_for = 0;
         $dowhiles = array();

@@ -30,8 +30,6 @@ class Clean extends Tasks {
     }
 
     public function run(\Config $config) {
-        $project = $config->project;
-
         $dirsToErase = array('log',
                              'report',
                              'Premier-ace',

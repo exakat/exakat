@@ -30,7 +30,6 @@ class Build_root extends Tasks {
     public function run(\Config $config) {
         $this->checkTokenLimit();
         
-        $project = $config->project;
         $this->config = $config;
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
 

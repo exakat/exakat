@@ -27,8 +27,6 @@ class ConstantStructures extends Tasks {
     private $lastTiming = 0;
     
     public function run(\Config $config) {
-        $project = $config->project;
-
         // First, clean it all
         $query = 'g.V.hasNot("constante", null).each{ it.removeProperty("constante")};';
         $this->query($query);
