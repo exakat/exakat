@@ -30,7 +30,7 @@ $file = $argv[1];
 if (!file_exists($file)) {
     die('Usage : php script/anonymize.php <filename>');
 }
-echo 'Processing file ', $file,' into ', $file, "anon\n";
+echo 'Processing file ', $file,' into ', $file, ".anon\n";
 
 $res = shell_exec($_SERVER['_'].' -l '.$file);
 //@todo : differentiate fatal error and non-fatal ones.
