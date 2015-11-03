@@ -47,7 +47,7 @@ class ConstantStructures extends Tasks {
         $this->query($query);
         $this->displayTiming('String/concatenations');
 
-        for ($i =0; $i < 3; $i++) {
+        for ($i =0; $i < 3; ++$i) {
         // Cases for Structures (all sub element are constante => structure is constante)
         $structures = array('Addition'       => array('LEFT', 'RIGHT'),
                             'Multiplication' => array('LEFT', 'RIGHT'),

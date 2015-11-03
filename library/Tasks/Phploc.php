@@ -159,7 +159,7 @@ class Phploc extends Tasks {
                 if ($tokenName == 'T_DOC_COMMENT') {
                     $return['comments'] += substr_count($token[1], "\n") + 1;
                 } elseif ($tokenName == 'T_COMMENT') {
-                    $return['comments'] ++;
+                    ++$return['comments'];
                 } elseif ($tokenName == 'T_WHITESPACE') {
                     
                 } else {

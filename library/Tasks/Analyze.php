@@ -100,7 +100,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
                             $dep = $x->dependsOn();
                             if (count($dep) == 0) {
                                 $dependencies2[] = $v;
-                                $c++;
+                                ++$c;
                             } else {
                                 $dependencies[$v] = $dep;
                                 $c += count($dep) + 1;

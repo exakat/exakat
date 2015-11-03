@@ -34,7 +34,7 @@ class UsesDefaultArguments extends Analyzer\Analyzer {
         foreach($functions as $function) {
             if ($function['args_min'] == $function['args_max']) { continue; }
             if ($function['args_max'] == 100) { continue; }
-            for ($i = $function['args_min'] + 1; $i <= $function['args_max']; $i++) {
+            for ($i = $function['args_min'] + 1; $i <= $function['args_max']; ++$i) {
                 $positions[$i - 1][] = '\\'.$function['name'];
             }
         }
