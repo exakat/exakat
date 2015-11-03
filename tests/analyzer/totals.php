@@ -2,7 +2,7 @@
 
 $files = glob('./Test/*.php');
 
-$res = shell_exec('grep " methods " Test/*.php | grep -v Skeleton');
+$res = shell_exec('grep " methods " Test/*/*.php | grep -v Skeleton');
 $numbers = explode("\n", trim($res));
 
 $numbers = array_map(function ($x) { preg_match('/ (\d+) method/', $x, $r); return $r[1]; }, $numbers);
@@ -17,7 +17,7 @@ print max($numbers)." maximum\n\n";
 
 // unfinished tests
 $total = 0;
-$files = glob('exp/*.php');
+$files = glob('exp/*/*.php');
 foreach($files as $file) {
     include($file);
     
@@ -29,7 +29,7 @@ foreach($files as $file) {
 print "total unfinished tests : $total\n\n";
 
 $total = 0;
-$files = glob('source/*.php');
+$files = glob('source/*/*.php');
 foreach($files as $file) {
     if (filesize($file) < 15) {
         ++$total;
@@ -46,7 +46,7 @@ foreach($files as $file) {
     $folder = basename(dirname($file));
     if ($folder == 'Common') { continue; }
 
-    $test = $folder.'_'.$analyze;
+    $test = $folder.'/'.$analyze;
     if (!file_exists('Test/'.$test)) {
         ++$total;
         print "No test : $test\n";
