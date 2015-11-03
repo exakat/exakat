@@ -32,15 +32,19 @@ class StaticMethodsCalledFromObject extends Analyzer\Analyzer {
     }
 
     public function analyze() {
+        $methods = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Function"]].out("NAME")
+                                   .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\MethodDefinition").any()}
+                                   .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\StaticMethods").any()}
+                                   .transform{it.code.toLowerCase()}
+                                   .unique()
+GREMLIN
+);
+//        $methods = array_slice($methods, 0, 100);
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->raw('filter{ x = it;  g.idx("atoms")[["atom":"Function"]].
-                                         out("NAME")
-                                         .filter{it.code.toLowerCase() == x.code.toLowerCase()}
-                                         .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\MethodDefinition").any()}
-                                         .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\StaticMethods").any()}
-                                         .any() }')
-             ->back('first');
+             ->code($methods)
+             ->inIs('METHOD');
         $this->prepareQuery();
     }
 }
