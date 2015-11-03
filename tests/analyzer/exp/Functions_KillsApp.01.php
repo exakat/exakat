@@ -1,9 +1,9 @@
 <?php
 
 $expected     = array('function KillApp( ) { /**/ } ', 
-                      'function willKillApp( ) { /**/ } ',
-                      'function willKillApp2ndround( ) { /**/ } ');
+                      'function willKillApp( ) { /**/ } ');
 
-$expected_not = array('function willNotKillApp( ) { /**/ } ');
+$expected_not = array('function willNotKillApp( ) { /**/ } ',
+                      'function willKillApp2ndround( ) { /**/ } ');
 
 ?>

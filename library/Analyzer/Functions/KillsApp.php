@@ -30,9 +30,9 @@ class KillsApp extends Analyzer\Analyzer {
         // first round : only die and exit
         $this->atomIs('Function')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_DIE', 'T_EXIT', 'T_NS_SEPARATOR'))
+             // We need this straight in the main sequence, not deep in a condition
+             ->outIs('ELEMENT')
+             ->tokenIs(array('T_DIE', 'T_EXIT'))
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
@@ -40,7 +40,20 @@ class KillsApp extends Analyzer\Analyzer {
         // second round
         $this->atomIs('Function')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             // We need this straight in the main sequence, not deep in a condition
+             ->outIs('ELEMENT')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->functionDefinition()
+             ->inIs('NAME')
+             ->analyzerIs('self')
+             ->back('first');
+        $this->prepareQuery();
+
+        // third round
+        $this->atomIs('Function')
+             ->outIs('BLOCK')
+             // We need this straight in the main sequence, not deep in a condition
+             ->outIs('ELEMENT')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
              ->inIs('NAME')
