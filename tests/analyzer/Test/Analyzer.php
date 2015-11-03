@@ -36,7 +36,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs configuration : '.$confs.'.');
         }
         
-        $shell = 'cd ../..; php exakat cleandb; php exakat load -p test -f ./tests/analyzer/source/'.$file.'.php -v';
+        $shell = 'cd ../..; php exakat cleandb; php exakat load -p test -f ./tests/analyzer/source/'.str_replace('_', '/', $file).'.php -v';
         
         $res = shell_exec($shell);
         if (strpos($res, "won't compile") !== false) {
@@ -60,7 +60,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->assertNotEquals(count($list), 0, 'No values were read from the analyzer' );
         }
         
-        include('exp/'.$file.'.php');
+        include('exp/'.str_replace('_', '/', $file).'.php');
         
         if (isset($expected) && is_array($expected)) {
             $missing = array();
