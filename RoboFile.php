@@ -411,7 +411,7 @@ JOIN categories
         if (empty($errors)) {
             echo 'No error found in ', $total, " files tested.\n";
         } else {
-            echo count($errors), ' errors found'."\n", print_r($errors, true);
+            echo count($errors), ' errors found', "\n", print_r($errors, true);
         }
     }
 
@@ -566,7 +566,7 @@ SQL
                 ++$total;
             }
 
-            echo 'Found ', ($missing / $total), $child. "s without parent ", $parent. "s\n";
+            echo 'Found ', ($missing / $total), $child, 's without parent ', $parent. "s\n";
         }
         echo "\n";
 
