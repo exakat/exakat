@@ -9,16 +9,24 @@ function foo(&$argByReference, $argByValue) {
 	unset($argByReference); // useless, will only destroy local reference
 	unset($argByValue); // useless, will only destroy local copy 
 	
-	foreach($array as $key => $value) {
-		unset($value);
+	foreach($array as $key => $valuek) {
+		unset($valuek);
 	}
 
 	foreach($array as $value) {
 		unset($value);
 	}
 
-	foreach($array as $value->property) {
-		unset($value);
+	foreach($array as $valuep->property) {
+		unset($valuep);                      // useless
+		unset($valuep->property);            // useless
+		unset($valuep->property->property2); // OK, if this is an object 
+	}
+
+	foreach($array as $key => $valuep2->property) {
+		unset($valuep2);                      // useless
+		unset($valuep2->property);            // useless
+		unset($valuep2->property->property2); // OK, if this is an object 
 	}
 }
 
