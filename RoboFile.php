@@ -608,7 +608,7 @@ SQL
         $directives = \Report\Content\Directives::$directives;
         
         $counts = array_count_values($directives);
-        $diff = array_filter($counts, function($a, $b) { return $a > 1;}, ARRAY_FILTER_USE_BOTH);
+        $diff = array_filter($counts, function($a) { return $a > 1;}, ARRAY_FILTER_USE_BOTH);
         if (count($diff)) {
             echo count($diff), ' values are double in \$directives : ', join(', ', array_keys($diff)), "\n";
         }
