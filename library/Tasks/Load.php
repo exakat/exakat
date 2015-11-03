@@ -58,7 +58,9 @@ class Load extends Tasks {
         }
 
         $ignoreDirs = array();
-        if (substr($dir, -1) == '/') { $dir = substr($dir, 0, -1); }
+        if ($dir[strlen($dir) -1] == '/') { 
+            $dir = substr($dir, 0, -1); 
+        }
         foreach($this->config->ignore_dirs as $ignore) {
             if ($ignore[0] === '/') {
                 $ignoreDirs[] = $dir.$ignore.'*';

@@ -31,7 +31,7 @@ class EchoPrintConsistance extends Analyzer\Analyzer {
         
         $this->atomIs('Functioncall')
              ->code(array('echo', 'print'))
-             ->groupFilter("x2 = it.code", 10 / 100);
+             ->groupFilter('x2 = it.code', 10 / 100);
         $this->prepareQuery();
     }
 }

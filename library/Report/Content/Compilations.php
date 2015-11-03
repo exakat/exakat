@@ -33,7 +33,7 @@ class Compilations extends \Report\Content {
         
         foreach($this->versions as $suffix) {
             $files = \Analyzer\Analyzer::$datastore->getCol('compilation'.$suffix, 'file');
-            $version = substr($suffix, 0, 1).'.'.substr($suffix, 1);
+            $version = $suffix[0].'.'.substr($suffix, 1);
             if (empty($files)) {
                 $files       = 'No compilation error found.';
                 $errors      = 'N/A';
