@@ -49,7 +49,14 @@ class MakeDefault extends Analyzer\Analyzer {
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'propriete')
              
-             // search for PPP now
+             // search for property definition
+             ->goToClass()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Visibility')
+             ->outIs('DEFINE')
+             ->atomIs('Variable')
+             ->samePropertyAs('propertyname', 'propriete')
              
              ->back('result');
 
