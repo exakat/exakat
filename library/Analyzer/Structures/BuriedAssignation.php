@@ -48,7 +48,7 @@ class BuriedAssignation extends Analyzer\Analyzer {
              ->raw('filter{ it.in("VARIABLE").in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
              
              // in a property definition
-             ->hasNoIn('DEFINE');
+             ->hasNoIn(array('DEFINE', 'CONST'));
         $this->prepareQuery();
     }
 }
