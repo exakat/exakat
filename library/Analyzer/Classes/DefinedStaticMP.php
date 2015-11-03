@@ -62,7 +62,12 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIsIE('VARIABLE')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").out("DEFINE").has("code", name).any()}')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Visibility')
+             ->outIs('DEFINE')
+             ->outIsIE('LEFT')
+             ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
 
@@ -77,7 +82,12 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'name')
              ->goToClass()
              ->goToAllParents()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").out("DEFINE").has("code", name).any()}')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Visibility')
+             ->outIs('DEFINE')
+             ->outIsIE('LEFT')
+             ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
     }
