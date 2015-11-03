@@ -27,7 +27,7 @@ use Analyzer;
 
 class NoGlobalModification extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsModified');
+        return array('Variables/IsModified');
     }
 
     public function analyze() {
@@ -43,7 +43,7 @@ class NoGlobalModification extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'name')
-             ->analyzerIs('Analyzer\\Variables\\IsModified')
+             ->analyzerIs('Variables/IsModified')
              ->back('first');
         $this->prepareQuery();
 
@@ -58,7 +58,7 @@ class NoGlobalModification extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->atomIs('Variable')
              ->code('$GLOBALS')
-             ->analyzerIs('Analyzer\\Variables\\IsModified')
+             ->analyzerIs('Variables/IsModified')
              ->back('first');
         $this->prepareQuery();
     }

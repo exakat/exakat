@@ -27,13 +27,13 @@ use Analyzer;
 
 class UnusedUse extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Namespaces\\UsedUse');
+        return array('Namespaces/UsedUse');
     }
 
     public function analyze() {
         $this->atomIs('Use')
              ->outIs('USE')
-             ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse');
+             ->analyzerIsNot('Namespaces/UsedUse');
         $this->prepareQuery();
     }
 }

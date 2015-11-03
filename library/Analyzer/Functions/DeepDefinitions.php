@@ -27,12 +27,12 @@ use Analyzer;
 
 class DeepDefinitions extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\Closures');
+        return array('Functions/Closures');
     }
     
     public function analyze() {
         $this->atomIs('Function')
-             ->analyzerIsNot('Analyzer\\Functions\\Closures')
+             ->analyzerIsNot('Functions/Closures')
              ->goToFunction()
              ->back('first');
         $this->prepareQuery();

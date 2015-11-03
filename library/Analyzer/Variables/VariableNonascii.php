@@ -27,12 +27,12 @@ use Analyzer;
 
 class VariableNonascii extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Variablenames');
+        return array('Variables/Variablenames');
     }
     
     public function analyze() {
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
+             ->analyzerIs('Variables/Variablenames')
              ->regex('code', '[^a-zA-Z0-9\\$_]');
         $this->prepareQuery();
     }

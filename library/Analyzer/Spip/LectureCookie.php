@@ -27,8 +27,8 @@ use Analyzer;
 
 class LectureCookie extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsRead',
-                     'Analyzer\\Arrays\\IsRead',
+        return array('Variables/IsRead',
+                     'Arrays/IsRead',
                      );
     }
     
@@ -37,7 +37,7 @@ class LectureCookie extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->hasNoIn('VARIABLE') // exclude arrays
              ->code('$_COOKIE')
-             ->analyzerIs('Analyzer\\Variables\\IsRead')
+             ->analyzerIs('Variables/IsRead')
              ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "recuperer_cookies_spip").any() == false}')
              ->back('first');
         $this->prepareQuery();
@@ -45,7 +45,7 @@ class LectureCookie extends Analyzer\Analyzer {
         // $_COOKIE[] just read
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE') // exclude arrays
-             ->analyzerIs('Analyzer\\Arrays\\IsRead')
+             ->analyzerIs('Arrays/IsRead')
              ->outIs('VARIABLE')
              ->code('$_COOKIE')
              ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "recuperer_cookies_spip").any() == false}')
@@ -55,7 +55,7 @@ class LectureCookie extends Analyzer\Analyzer {
         // $_COOKIE['a'][] just read (2 levels)
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE') // exclude arrays
-             ->analyzerIs('Analyzer\\Arrays\\IsRead')
+             ->analyzerIs('Arrays/IsRead')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
              ->code('$_COOKIE')
@@ -66,7 +66,7 @@ class LectureCookie extends Analyzer\Analyzer {
         // $_COOKIE['a']['b'][] just read (3 levels)
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE') // exclude arrays
-             ->analyzerIs('Analyzer\\Arrays\\IsRead')
+             ->analyzerIs('Arrays/IsRead')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')

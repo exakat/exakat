@@ -27,15 +27,15 @@ use Analyzer;
 
 class HasFluentInterface extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\HasNotFluentInterface',
-                     'Analyzer\\Classes\\MethodDefinition');
+        return array('Functions/HasNotFluentInterface',
+                     'Classes/MethodDefinition');
     }
     
     public function analyze() {
         $this->atomIs('Function')
-             ->analyzerIsNot('Analyzer\\Functions\\HasNotFluentInterface')
+             ->analyzerIsNot('Functions/HasNotFluentInterface')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->back('first');
         $this->prepareQuery();
     }

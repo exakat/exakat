@@ -34,12 +34,12 @@ class VariablePhp extends Analyzer\Analyzer {
                                      '$argv', '$argc');
 
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Variablenames');
+        return array('Variables/Variablenames');
     }
     
     public function analyze() {
         $this->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Variablenames')
+             ->analyzerIs('Variables/Variablenames')
              ->code(VariablePhp::$variables, true);
     }
 }

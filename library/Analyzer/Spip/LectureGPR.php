@@ -27,8 +27,8 @@ use Analyzer;
 
 class LectureGPR extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsRead',
-                     'Analyzer\\Arrays\\IsRead');
+        return array('Variables/IsRead',
+                     'Arrays/IsRead');
     }
     
     public function analyze() {
@@ -38,7 +38,7 @@ class LectureGPR extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->hasNoIn('VARIABLE') // exclude arrays
              ->code($gpr)
-             ->analyzerIs('Analyzer\\Variables\\IsRead')
+             ->analyzerIs('Variables/IsRead')
              ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "_request").any() == false}')
              ->raw('filter{ it.in.loop(1){true}{it.object.atom == "File"}.has("fullcode", "config/ecran_securite.php").any() == false}')
              ->back('first');
@@ -47,7 +47,7 @@ class LectureGPR extends Analyzer\Analyzer {
         // $_GPR[] just read
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE') // exclude arrays
-             ->analyzerIs('Analyzer\\Arrays\\IsRead')
+             ->analyzerIs('Arrays/IsRead')
              ->outIs('VARIABLE')
              ->code($gpr)
              ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "_request").any() == false}')
@@ -58,7 +58,7 @@ class LectureGPR extends Analyzer\Analyzer {
         // $_GPR['a'][] just read (2 levels)
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE') // exclude arrays
-             ->analyzerIs('Analyzer\\Arrays\\IsRead')
+             ->analyzerIs('Arrays/IsRead')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
              ->code($gpr)
@@ -70,7 +70,7 @@ class LectureGPR extends Analyzer\Analyzer {
         // $_GPR['a']['b'][] just read (3 levels)
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE') // exclude arrays
-             ->analyzerIs('Analyzer\\Arrays\\IsRead')
+             ->analyzerIs('Arrays/IsRead')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')

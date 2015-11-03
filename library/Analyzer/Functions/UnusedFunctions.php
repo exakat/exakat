@@ -27,7 +27,7 @@ use Analyzer;
 
 class UnusedFunctions extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\UsedFunctions');
+        return array('Functions/UsedFunctions');
     }
     
     public function analyze() {
@@ -35,7 +35,7 @@ class UnusedFunctions extends Analyzer\Analyzer {
              ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}')
              ->raw('filter{it.out("NAME").next().code != ""}')
              ->outIs('NAME')
-             ->analyzerIsNot('Analyzer\\Functions\\UsedFunctions')
+             ->analyzerIsNot('Functions/UsedFunctions')
              ->fullnspathIsNot('__autoload');
         $this->prepareQuery();
     }

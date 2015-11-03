@@ -27,7 +27,7 @@ use Analyzer;
 
 class UnreachableCode extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\KillsApp');
+        return array('Functions/KillsApp');
     }
     
     public function analyze() {
@@ -71,7 +71,7 @@ class UnreachableCode extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
              ->inIs('NAME')
-             ->analyzerIs('Analyzer\\Functions\\KillsApp')
+             ->analyzerIs('Functions/KillsApp')
              ->back('first')
              ->nextSibling()
              ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));

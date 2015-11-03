@@ -29,19 +29,19 @@ class FunctionDefinition extends Analyzer\Analyzer {
     protected $functions = array();
     
     public function dependsOn() {
-        return array('Analyzer\\Classes\\MethodDefinition',
-                     'Analyzer\\Interfaces\\InterfaceMethod',
-                     'Analyzer\\Traits\\TraitMethod');
+        return array('Classes/MethodDefinition',
+                     'Interfaces/InterfaceMethod',
+                     'Traits/TraitMethod');
     }
     
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIsNot('Analyzer\\Classes\\MethodDefinition')
-             ->analyzerIsNot('Analyzer\\Interfaces\\InterfaceMethod')
-             ->analyzerIsNot('Analyzer\\Traits\\TraitMethod')
-
+             ->analyzerIsNot('Classes/MethodDefinition')
+             ->analyzerIsNot('Interfaces/InterfaceMethod')
+             ->analyzerIsNot('Traits/TraitMethod')
              ->code($this->functions, false);
+        $this->prepareQuery();
     }
 }
 

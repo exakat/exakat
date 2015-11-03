@@ -27,13 +27,13 @@ use Analyzer;
 
 class ConditionalStructures extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\MethodDefinition');
+        return array('Classes/MethodDefinition');
     }
     
     public function analyze() {
         // classes, interfaces, Traits
         $this->atomIs(array('Class', 'Interface', 'Trait'))
-             ->analyzerIsNot('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIsNot('Classes/MethodDefinition')
              ->atomAboveIs('Ifthen')
              ->back('first');
         $this->prepareQuery();
@@ -41,7 +41,7 @@ class ConditionalStructures extends Analyzer\Analyzer {
         // functions
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIsNot('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIsNot('Classes/MethodDefinition')
              ->back('first')
              ->atomAboveIs('Ifthen')
              ->back('first');
@@ -56,7 +56,6 @@ class ConditionalStructures extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0);
         $this->prepareQuery();
- 
     }
 }
 

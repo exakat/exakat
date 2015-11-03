@@ -27,13 +27,13 @@ use Analyzer;
 
 class HasNotFluentInterface extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\MethodDefinition');
+        return array('Classes/MethodDefinition');
     }
     
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Return')
@@ -44,7 +44,7 @@ class HasNotFluentInterface extends Analyzer\Analyzer {
 
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Return')
@@ -57,7 +57,7 @@ class HasNotFluentInterface extends Analyzer\Analyzer {
         // no return == return null!
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
+             ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->noAtomInside('Return')

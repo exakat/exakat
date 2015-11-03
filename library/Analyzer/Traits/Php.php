@@ -31,7 +31,7 @@ class Php extends Analyzer\Analyzer {
         $ini = $this->loadIni('php_trait.ini');
         
         if (isset($ini['trait'])) {
-            $this->analyzerIs("Analyzer\\Interfaces\\TraitUsage")
+            $this->analyzerIs('Interfaces/TraitUsage')
                  ->code($ini['trait']);
         }
     }

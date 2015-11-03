@@ -28,19 +28,19 @@ use Analyzer;
 class IsPhpConstant extends Analyzer\Analyzer {
 
     public function dependsOn() {
-        return array("Analyzer\\Constants\\ConstantUsage");
+        return array('Constants/ConstantUsage');
     }
     
     public function analyze() {
         $constants = $this->loadIni('php_constants.ini', 'constants');
         
         // Naked constant (PATHINFO_BASENAME)
-        $this->analyzerIs("Analyzer\\Constants\\ConstantUsage")
+        $this->analyzerIs('Constants/ConstantUsage')
              ->code($constants);
         $this->prepareQuery();
 
         // Namespaced constant (\PATHINFO_BASENAME)
-        $this->analyzerIs("Analyzer\\Constants\\ConstantUsage")
+        $this->analyzerIs('Constants/ConstantUsage')
              ->is('absolutens', true)
              ->outIs('SUBNAME')
              ->code($constants)

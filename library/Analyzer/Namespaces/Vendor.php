@@ -26,10 +26,6 @@ namespace Analyzer\Namespaces;
 use Analyzer;
 
 class Vendor extends Analyzer\Analyzer {
-    public function dependsOn() {
-        return array('Analyzer\\Namespaces\\Namespacesnames');
-    }
-    
     public function analyze() {
         $this->atomIs('Namespace')
              ->regex('fullcode', '^namespace [a-zA-Z0-9_]+\\\\\\\\');

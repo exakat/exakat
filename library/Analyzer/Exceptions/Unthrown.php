@@ -27,12 +27,12 @@ use Analyzer;
 
 class Unthrown extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Exceptions\\DefinedExceptions');
+        return array('Exceptions/DefinedExceptions');
     }
     
     public function analyze() {
         $this->atomIs('Class')
-             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
+             ->analyzerIs('Exceptions/DefinedExceptions')
              ->savePropertyAs('fullnspath', 'path')
              ->raw('filter{ g.idx("atoms")[["atom":"Throw"]].out("THROW").out("NEW").has("fullnspath", path).any() == false}');
         $this->prepareQuery();

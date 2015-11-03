@@ -27,11 +27,11 @@ use Analyzer;
 
 class UnresolvedUse extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Interfaces\\IsExtInterface',
-                     'Analyzer\\Traits\\IsExtTrait',
-                     'Analyzer\\Composer\\IsComposerNsname',
-                     'Namespaces\\GlobalImport');
+        return array('Classes/IsExtClass',
+                     'Interfaces/IsExtInterface',
+                     'Traits/IsExtTrait',
+                     'Composer/IsComposerNsname',
+                     'Namespaces/GlobalImport');
     }
 
     public function analyze() {
@@ -41,11 +41,11 @@ class UnresolvedUse extends Analyzer\Analyzer {
              ->noNamespaceDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
-             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
-             ->analyzerIsNot('Analyzer\\Traits\\IsExtTrait')
-             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname')
-             ->analyzerIsNot('Namespaces\\GlobalImport');
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Interfaces/IsExtInterface')
+             ->analyzerIsNot('Traits/IsExtTrait')
+             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->analyzerIsNot('Namespaces/GlobalImport');
         $this->prepareQuery();
     }
 }

@@ -27,7 +27,7 @@ use Analyzer;
 
 class UnsetOnArguments extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Arguments');
+        return array('Variables/Arguments');
     }
     
     public function analyze() {
@@ -36,7 +36,7 @@ class UnsetOnArguments extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->back('first');
         $this->prepareQuery();
     }

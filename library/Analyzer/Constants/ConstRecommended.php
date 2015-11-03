@@ -27,7 +27,7 @@ use Analyzer;
 
 class ConstRecommended extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Constants\\ConstantUsage');
+        return array('Constants/ConstantUsage');
     }
     
     public function analyze() {
@@ -63,7 +63,7 @@ class ConstRecommended extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 1)
              ->atomIs(array('Identifier', 'Nsname'))
-             ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
+             ->analyzerIs('Constants/ConstantUsage')
              ->back('first');
         $this->prepareQuery();
 

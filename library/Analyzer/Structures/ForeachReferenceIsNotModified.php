@@ -27,7 +27,7 @@ use Analyzer;
 
 class ForeachReferenceIsNotModified extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsModified');
+        return array('Variables/IsModified');
     }
     
     public function analyze() {

@@ -27,8 +27,8 @@ use Analyzer;
 
 class ConstantConditions extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsModified',
-                     'Analyzer\\Constants\\IsPhpConstant');
+        return array('Variables/IsModified',
+                     'Constants/IsPhpConstant');
     }
     
     public function analyze() {

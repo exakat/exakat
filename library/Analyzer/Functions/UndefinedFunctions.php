@@ -27,14 +27,14 @@ use Analyzer;
 
 class UndefinedFunctions extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\IsExtFunction');
+        return array('Functions/IsExtFunction');
     }
     
     public function analyze() {
         $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
              ->tokenIsNot(array('T_VARIABLE','T_OPEN_BRACKET', 'T_ARRAY'))
-             ->analyzerIsNot('Analyzer\\Functions\\IsExtFunction')
+             ->analyzerIsNot('Functions/IsExtFunction')
              ->hasNoFunctionDefinition();
         $this->prepareQuery();
     }

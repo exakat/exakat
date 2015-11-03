@@ -27,7 +27,7 @@ use Analyzer;
 
 class OverwriteException extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsModified');
+        return array('Variables/IsModified');
     }
 
     public function analyze() {
@@ -40,7 +40,7 @@ class OverwriteException extends Analyzer\Analyzer {
              ->outIs('CODE')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'exception')
-             ->analyzerIs('Analyzer\\Variables\\IsModified')
+             ->analyzerIs('Variables/IsModified')
              ->back('result');
         $this->prepareQuery();
     }

@@ -44,7 +44,7 @@ class KillsApp extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
              ->inIs('NAME')
-             ->analyzerIs('Analyzer\\Functions\\KillsApp')
+             ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();
     }

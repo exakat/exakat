@@ -27,7 +27,7 @@ use Analyzer;
 
 class UselessUnset extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\Arguments');
+        return array('Variables/Arguments');
     }
     
     public function analyze() {
@@ -38,7 +38,7 @@ class UselessUnset extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->back('first');
         $this->prepareQuery();
 
@@ -119,7 +119,7 @@ class UselessUnset extends Analyzer\Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
              ->atomIs('Variable')
-             ->analyzerIs('Analyzer\\Variables\\Arguments')
+             ->analyzerIs('Variables/Arguments')
              ->back('first');
         $this->prepareQuery();
 

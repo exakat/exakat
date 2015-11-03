@@ -27,7 +27,7 @@ use Analyzer;
 
 class RemoteInjection extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Security\\SensitiveArgument');
+        return array('Security/SensitiveArgument');
     }
 
     public function analyze() {
@@ -38,7 +38,7 @@ class RemoteInjection extends Analyzer\Analyzer {
              ->raw('sideEffect{ first = it;}')
 
              // Must change to list of incoming points
-             ->analyzerIs('Analyzer\\Security\\ContaminatedFunction')
+             ->analyzerIs('Security/ContaminatedFunction')
 
             // Loop initialisation    .filter{ it.code == '\$a' }
              ->raw("sideEffect{ x=[]; y = it.out('ARGUMENTS').out('ARGUMENT').rank.toList(); x += [y]; x += [y] ; x += 0;}")

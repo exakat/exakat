@@ -27,7 +27,7 @@ use Analyzer;
 
 class OverwrittenLiterals extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\IsModified');
+        return array('Variables/IsModified');
     }
     
     public function analyze() {
@@ -41,7 +41,7 @@ class OverwrittenLiterals extends Analyzer\Analyzer {
              ->atomIs('Variable')
              ->analyzerIsNot('self')
              ->_as('result')
-             ->analyzerIs('Analyzer\\Variables\\IsModified')
+             ->analyzerIs('Variables/IsModified')
              ->fetchContext()
              ->eachCounted('it.code + "/" + context.Function + "/" + context.Class + "/" + context.Namespace', 1, '>');
         $this->prepareQuery();

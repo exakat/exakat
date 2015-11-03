@@ -28,7 +28,7 @@ use Analyzer;
 class IsExtTrait extends Analyzer\Analyzer {
 
     public function dependsOn() {
-        return array("Analyzer\\Traits\\TraitUsage");
+        return array('Traits/TraitUsage');
     }
     
     public function analyze() {
@@ -49,7 +49,7 @@ class IsExtTrait extends Analyzer\Analyzer {
         if (empty($traits)) { return true; }
         $traits = $this->makeFullNsPath($traits);
         
-        $this->analyzerIs("Analyzer\\Traits\\TraitUsage")
+        $this->analyzerIs('Traits/TraitUsage')
              ->fullnspath($traits);
         $this->prepareQuery();
     }

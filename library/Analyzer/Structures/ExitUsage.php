@@ -27,7 +27,7 @@ use Analyzer;
 
 class ExitUsage extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Structures\\NoDirectAccess");
+        return array('Structures/NoDirectAccess');
     }
     
     public function analyze() {

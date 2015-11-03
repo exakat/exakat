@@ -27,13 +27,13 @@ use Analyzer;
 
 class PhpConstantUsage extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Constants\\ConstantUsage");
+        return array('Constants/ConstantUsage');
     }
     
     public function analyze() {
         $ini = parse_ini_file(dirname(dirname(dirname(__DIR__))).'/data/php_constants.ini');
 
-        $this->analyzerIs('Analyzer\\Constants\\ConstantUsage')
+        $this->analyzerIs('Constants/ConstantUsage')
              ->code($ini['constants'], true);
     }
 }

@@ -27,7 +27,7 @@ use Analyzer;
 
 class DirectInjection extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Security\\SensitiveArgument');
+        return array('Security/SensitiveArgument');
     }
     
     public function analyze() {
@@ -37,7 +37,7 @@ class DirectInjection extends Analyzer\Analyzer {
         // $_GET/_POST ... directly as argument of PHP functions
         $this->atomIs('Variable')
              ->code($vars)
-             ->analyzerIs('Analyzer\\Security\\SensitiveArgument')
+             ->analyzerIs('Security/SensitiveArgument')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS');
         $this->prepareQuery();
@@ -46,7 +46,7 @@ class DirectInjection extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->code($vars)
              ->inIs('VARIABLE')
-             ->analyzerIs('Analyzer\\Security\\SensitiveArgument')
+             ->analyzerIs('Security/SensitiveArgument')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS');
         $this->prepareQuery();
@@ -55,7 +55,7 @@ class DirectInjection extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->code($vars)
              ->raw('in("VARIABLE").loop(1){true}{it.object.atom == "Array"}')
-             ->analyzerIs('Analyzer\\Security\\SensitiveArgument')
+             ->analyzerIs('Security/SensitiveArgument')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->analyzerIsNot('self');

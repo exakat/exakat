@@ -27,7 +27,7 @@ use Analyzer;
 
 class ListOmissions extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Variables\\VariableUsedOnceByContext');
+        return array('Variables/VariableUsedOnceByContext');
     }
     
     public function analyze() {
@@ -37,7 +37,7 @@ class ListOmissions extends Analyzer\Analyzer {
              ->fullnspath('\\list')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->analyzerIs('Analyzer\\Variables\\VariableUsedOnceByContext');
+             ->analyzerIs('Variables/VariableUsedOnceByContext');
         $this->prepareQuery();
     }
 }
