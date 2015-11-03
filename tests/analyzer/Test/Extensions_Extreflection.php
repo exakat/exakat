@@ -7,9 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Extensions_Extreflexion extends Analyzer {
+class Extensions_Extreflection extends Analyzer {
     /* 1 methods */
 
-    public function testExtensions_Extreflexion01()  { $this->generic_test('Extensions_Extreflexion.01'); }
+    public function testExtensions_Extreflection01()  { $this->generic_test('Extensions_Extreflection.01'); }
 }
 ?>
