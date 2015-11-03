@@ -77,7 +77,6 @@ class Config {
                                             'style'          => 'ALL',
                                             'neo4j_host'     => '127.0.0.1',
                                             'neo4j_port'     => '7474',
-                                            'neo4j_port'     => 'neo4j',
                                            );
 
         private static $BOOLEAN_OPTIONS = array(
