@@ -67,3 +67,7 @@ tests/analyzer/phpunit.sh
 tests/analyzer/alltests.txt
 run.sh
 classes.csv
+composer.sh
+my.db
+timing2.csv
+timing3.csv
