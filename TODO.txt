@@ -1635,3 +1635,8 @@ Mark scripts as first hit scripts (the one that will include all others)
 Could use the right option for preg_match_all
 preg_match_all('#(\d+) \[label="([^"]+?)" shape=box \]#is', $dot, $nodes);
     fputcsv($fp, [$nodes[1][$id], $nodes[2][$id]]);
+
+self:: is only the current class; static:: is LSB : it may be used 
+
+Tester sur Orientdb (Gremlin 2.0)
+Migration vers Gremlin 3.0 (quelle database ? )
