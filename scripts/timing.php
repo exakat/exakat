@@ -38,7 +38,7 @@ $regression = new Regression();
 
 foreach($files as $id => $file) {
     unset($project, $initialSize, $size, $buildRoot, $tokenizer, $analyze, $final);
-    list($projectDir, $project) = explode('/', $file);
+    list(, $project) = explode('/', $file);
 
     if (in_array($project, array('test'))) { continue; }
     
