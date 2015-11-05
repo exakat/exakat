@@ -37,6 +37,7 @@ class Premier extends Report {
                                 'CompatibilityPHP55'    => 'Compatibility 55',
                                 'CompatibilityPHP56'    => 'Compatibility 56',
                                 'CompatibilityPHP70'    => 'Compatibility 70',
+                                'CompatibilityPHP71'    => 'Compatibility 71',
                                 );
 
     public function __construct($project) {
@@ -148,7 +149,8 @@ class Premier extends Report {
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70')
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
                                 );
         $analyzes2 = array();
         foreach($analyzes as $a) {
@@ -223,7 +225,8 @@ class Premier extends Report {
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70')
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
                                 );
 
         $fileList = [];

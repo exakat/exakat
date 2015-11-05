@@ -458,7 +458,7 @@ JOIN categories
     public function checkCompatibilityThemes() {
         $sqlite = new Sqlite3('./data/analyzers.sqlite');
         
-        $themes = array('53', '54', '55', '56', '70');
+        $themes = array('53', '54', '55', '56', '70', '71');
         $first = $themes[0];
         $last = $themes[count($themes) - 1];
         
@@ -493,10 +493,6 @@ SQL
         foreach($compats as $name => $versions) {
             if (!isset($versions[$first]) && !isset($versions[$last])) {
                 print "Must check $name (Not with first or last)\n";
-            }
-
-            if (count($versions) == count($themes)) {
-                print "Must check $name (Too many incompatibles versions)\n";
             }
         }
 
