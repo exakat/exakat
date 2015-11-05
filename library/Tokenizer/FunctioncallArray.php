@@ -41,7 +41,7 @@ class FunctioncallArray extends TokenAuto {
         $this->checkAuto();
 
         // $x[3]()
-        $this->conditions = array(   0 => array('atom'  => array('Array', 'Variable')),
+        $this->conditions = array(   0 => array('atom'     => array('Array', 'Variable')),
                                      1 => array('notToken' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET')));
 
         $this->actions = array('cleanIndex' => 'yes');
