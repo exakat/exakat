@@ -34,10 +34,11 @@ class ImplicitGlobal extends Analyzer\Analyzer {
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
              ->codeIsNot($superglobals)
+             ->codeIsNot(array('$argv', '$argc'))
              ->_as('result')
              ->savePropertyAs('code', 'theGlobal')
-             ->codeIsNot(array('$argv', '$argc'))
-             ->raw('filter{ g.idx("atoms")[["atom":"Global"]].out("GLOBAL").filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}.filter{theGlobal == it.code}.any() == false }')
+             ->raw('filter{ g.idx("atoms")[["atom":"Global"]].out("GLOBAL").filter{theGlobal == it.code}
+                                                             .filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}.any() == false }')
              ->back('result');
         $this->prepareQuery();
     }
