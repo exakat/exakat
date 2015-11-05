@@ -27,9 +27,10 @@ class ThemeList extends \Report\Format\Devoops {
     public function render($output, $data) {
         $html = 'This analyze is part of those themes : ';
         
-        foreach($data as $title => $file) {
-            $html .= $this->makeLink($title, 'ajax/'.$this->makeFileName($title));
+        foreach($data as $title => &$file) {
+            $file = $this->makeLink($title, 'ajax/'.$this->makeFileName($title));
         }
+        $html .= join(', ', $data);
 /*
         $th = '';
         
