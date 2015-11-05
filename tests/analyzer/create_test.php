@@ -58,7 +58,7 @@
         copy('Test/Skeleton.php', 'Test/'.$test.'.php');
         $code = file_get_contents('Test/'.$test.'.php');
         
-        $code = str_replace('Skeleton', $test, $code);
+        $code = str_replace('Skeleton', $test_, $code);
     }
 
     $code = substr($code, 0, -4)."    public function test$test_$next()  { \$this->generic_test('$test.$next'); }
