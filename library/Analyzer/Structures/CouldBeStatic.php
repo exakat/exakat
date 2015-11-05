@@ -28,7 +28,6 @@ use Analyzer;
 class CouldBeStatic extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Global')
-             ->hasFunction()
              ->outIs('GLOBAL')
              ->savePropertyAs('code', 'theGlobal')
              ->goToFunction()
