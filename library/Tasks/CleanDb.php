@@ -39,19 +39,16 @@ class CleanDb extends Tasks {
             return false;
         }
 
-        $queryTemplate = <<<CYPHER
-START n=node(*)
-match n
-return count(n)
-CYPHER;
-        $result = cypher_query($queryTemplate);
-        if ($result === null) {
+        $queryTemplate = <<<GREMLIN
+g.V.count();
+GREMLIN;
+        $result = gremlin_query($queryTemplate);
+        if ($result->results === null) {
             // Can't connect to neo4j. Forcing restart.
             $this->restartNeo4j();
             return false;
         }
-        $result = $result->data;
-        $nodes = $result[0][0];
+        $nodes = $result->results[0];
         display($nodes.' nodes in the database');
 
         $begin = microtime(true);
@@ -60,12 +57,15 @@ CYPHER;
         } elseif ($nodes > 10000) {
             $this->restartNeo4j();
         } else {
-            display('Cleaning with cypher');
+            display('Cleaning with gremlin');
         
-            $queryTemplate = 'MATCH (n)
-OPTIONAL MATCH (n)-[r]-()
-DELETE n,r';
-            cypher_query($queryTemplate);
+            $queryTemplate = <<<GREMLIN
+
+g.E.each{ g.removeEdge(it); }
+g.V.each{ g.removeVertex(it); } 
+
+GREMLIN;
+            gremlin_query($queryTemplate);
             display('Database cleaned');
         }
         $end = microtime(true);
