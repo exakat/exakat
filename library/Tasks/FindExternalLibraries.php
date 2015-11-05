@@ -32,6 +32,7 @@ class FindExternalLibraries extends Tasks {
     private $classic = array('adoconnection'    => self::WHOLE_DIR,
                              'bbq'              => self::WHOLE_DIR,
                              'cpdf'             => self::WHOLE_DIR, // ezpdf
+                             'dispatcher'       => self::WHOLE_DIR, // cakephp
                              'dompdf'           => self::PARENT_DIR,
                              'fpdf'             => self::FILE_ONLY,
                              'graph'            => self::PARENT_DIR, // Jpgraph
@@ -117,19 +118,28 @@ class FindExternalLibraries extends Tasks {
     }
     
     private function processDir($dir) {
-       $return = array();
+        $return = array();
     
-       $files = glob($dir.'/*');
-       $r = array();
-       foreach($files as $file) {
+        $files = glob($dir.'/*');
+        $r = array();
+        foreach($files as $file) {
            if (is_file($file)) {
-               $r[] = $this->process($file);
-           } elseif (is_dir($file)) {
-               $r[] = $this->processDir($file);
-           }
+                $s = $this->process($file);
+            } elseif (is_dir($file)) {
+                $s = $this->processDir($file);
+            }
+            
+            if (!empty($s)) {
+               $r[] = $s;
+            }
            // else should go to LOG
        }
-       $return = call_user_func_array('array_merge', $r);
+
+       if (!empty($r)) {
+           $return = call_user_func_array('array_merge', $r);
+        } else {
+            $return = array();
+        }
 
         return $return;
     }
