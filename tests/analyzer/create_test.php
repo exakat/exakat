@@ -39,6 +39,7 @@
     }
     
     // restore $test value
+    $test_ = $dir.'_'.$test;
     $test = $dir.'/'.$test;
     $files = glob('source/'.$test.'.*.php');
     sort($files);
@@ -60,7 +61,7 @@
         $code = str_replace('Skeleton', $test, $code);
     }
 
-    $code = substr($code, 0, -4)."    public function test$test$next()  { \$this->generic_test('$test.$next'); }
+    $code = substr($code, 0, -4)."    public function test$test_$next()  { \$this->generic_test('$test.$next'); }
 ".substr($code, -4);
     $count = $next + 0;
     $code = preg_replace('#/\* \d+ methods \*/#is', '/* '.$count.' methods */', $code);
