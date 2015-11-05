@@ -12,7 +12,7 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              'G'
+              'E'
           Label : NAME
             $e
       Label : ARGUMENT
@@ -32,7 +32,7 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              'E'
+              'G'
           Label : NAME
             $e
   Label : ELEMENT

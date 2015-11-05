@@ -9,6 +9,8 @@ Label : CODE
       Label : ARGUMENT
         Concatenation
         Label : CONCAT
+          '2'
+        Label : CONCAT
           ::
           Label : CLASS
             a
@@ -18,8 +20,6 @@ Label : CODE
               void
               Label : ARGUMENT
                 3
-        Label : CONCAT
-          '2'
         Label : CONCAT
           [
           Label : VARIABLE

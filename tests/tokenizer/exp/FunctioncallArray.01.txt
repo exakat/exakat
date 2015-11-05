@@ -3,18 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
-    [
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        34
-    Label : NAME
+    ->
+    Label : OBJECT
+      $b
+    Label : METHOD
       [
-      Label : VARIABLE
-        ->
-        Label : OBJECT
-          $b
-        Label : PROPERTY
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          34
+      Label : NAME
+        [
+        Label : VARIABLE
           c
-      Label : INDEX
-        d
+        Label : INDEX
+          d

@@ -3,16 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            2
-  Label : ELEMENT
     print
     Label : ARGUMENTS
       void
@@ -22,3 +12,13 @@ Label : CODE
           void
           Label : ARGUMENT
             '1'
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            2

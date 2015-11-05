@@ -9,36 +9,6 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            \
-            Label : SUBNAME
-              l
-            Label : SUBNAME
-              k
-          Label : VALUE
-            \
-            Label : SUBNAME
-              n
-            Label : SUBNAME
-              m
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $f
-            Label : PROPERTY
-              g
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $h
-            Label : PROPERTY
-              i
-        Label : ARGUMENT
           =>
           Label : KEY
             -4
@@ -61,8 +31,38 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
+            \
+            Label : SUBNAME
+              l
+            Label : SUBNAME
+              k
+          Label : VALUE
+            \
+            Label : SUBNAME
+              m
+            Label : SUBNAME
+              n
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ->
+            Label : PROPERTY
+              g
+            Label : OBJECT
+              $f
+          Label : VALUE
+            ->
+            Label : PROPERTY
+              i
+            Label : OBJECT
+              $h
+        Label : ARGUMENT
+          =>
+          Label : KEY
             $a
           Label : VALUE
             $b
+        Label : ARGUMENT
+          void
     Label : LEFT
       $a

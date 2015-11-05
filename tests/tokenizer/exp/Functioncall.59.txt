@@ -9,20 +9,20 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'D'
+            Label : ARGUMENT
+              'B'
+            Label : ARGUMENT
+              'C'
+        Label : ARGUMENT
           (string)
           Label : CAST
             $c
         Label : ARGUMENT
           'A'
-        Label : ARGUMENT
-          array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'B'
-            Label : ARGUMENT
-              'C'
-            Label : ARGUMENT
-              'D'
     Label : LEFT
       $a

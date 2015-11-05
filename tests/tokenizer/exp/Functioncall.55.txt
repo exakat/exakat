@@ -9,7 +9,17 @@ Label : CODE
       Label : ARGUMENT
         (
         Label : CODE
-          0
+          "
+          Label : CONTAINS
+            Concatenation
+            Label : CONCAT
+              $cE
+            Label : CONCAT
+              $bD
+            Label : CONCAT
+              $aC
+            Label : CONCAT
+              B
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -17,14 +27,4 @@ Label : CODE
       Label : ARGUMENT
         (
         Label : CODE
-          "
-          Label : CONTAINS
-            Concatenation
-            Label : CONCAT
-              B
-            Label : CONCAT
-              $aC
-            Label : CONCAT
-              $bD
-            Label : CONCAT
-              $cE
+          0

@@ -1851,7 +1851,7 @@ g.addEdge(b2, it, 'NEXT');
             unset($actions['toOneSequence']);
         }
 
-        if (isset($actions['to_argument']) && $actions['to_argument']) {
+        if (isset($actions['toArgument']) && $actions['toArgument']) {
                 $qactions[] = "
 /* to Argument */
 
@@ -1898,7 +1898,7 @@ x.out('ARGUMENT').inE('INDEXED').each{ g.removeEdge(it);}
 fullcode = x;
 
 ";
-            unset($actions['to_argument']);
+            unset($actions['toArgument']);
         }
         
         if (isset($actions['createSequenceWithNext']) && $actions['createSequenceWithNext']) {

@@ -1,16 +1,18 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $b
-        Label : METHOD
-          G
+;
+Label : ELEMENT
+  K
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        $a
+      Label : THEN
+        ;
+        Label : ELEMENT
+          echo
           Label : ARGUMENTS
             void
             Label : ARGUMENT
@@ -24,58 +26,56 @@ Label : CODE
               Label : METHOD
                 D
                 Label : ARGUMENTS
-                  Arguments
+                  void
                   Label : ARGUMENT
-                    $d
-                  Label : ARGUMENT
-                    array
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
+                    $a
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          E
+    Label : ELEMENT
+      F
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        $a
+      Label : THEN
+        ;
+        Label : ELEMENT
+          J
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            G
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  [
+                  Label : VARIABLE
+                    $b
+                  Label : INDEX
+                    'C'
+                Label : METHOD
+                  D
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      array
+                      Label : ARGUMENTS
                         void
-                  Label : ARGUMENT
-                    $c
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        J
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    F
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                'C'
-            Label : METHOD
-              D
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $a
-      Label : ELEMENT
-        E
-      Label : ELEMENT
-        B
+                        Label : ARGUMENT
+                          void
+                    Label : ARGUMENT
+                      $d
+    Label : ELEMENT
+      void

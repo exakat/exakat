@@ -7,6 +7,16 @@ Label : CODE
     Label : RIGHT
       ::
       Label : CLASS
+        B
+      Label : CONSTANT
+        TRUE
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ::
+      Label : CLASS
         D
       Label : METHOD
         false
@@ -16,13 +26,3 @@ Label : CODE
             void
     Label : LEFT
       $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ::
-      Label : CLASS
-        B
-      Label : CONSTANT
-        TRUE
-    Label : LEFT
-      $a

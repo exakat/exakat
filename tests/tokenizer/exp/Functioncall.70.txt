@@ -9,11 +9,11 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
+          1
+        Label : ARGUMENT
           3
         Label : ARGUMENT
           2
-        Label : ARGUMENT
-          1
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -33,12 +33,12 @@ Label : CODE
         Label : ARGUMENT
           [
           Label : VARIABLE
+            $a
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
             [
             Label : VARIABLE
               $b
             Label : INDEX
               1
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $a

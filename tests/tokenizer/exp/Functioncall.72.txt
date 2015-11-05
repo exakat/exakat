@@ -15,29 +15,29 @@ Label : CODE
             Label : ARGUMENT
               Concatenation
               Label : CONCAT
-                'I'
-              Label : CONCAT
                 __DIR__
-        Label : ARGUMENT
-          include
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
               Label : CONCAT
                 'H'
-              Label : CONCAT
-                __DIR__
         Label : ARGUMENT
           include
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               Concatenation
+              Label : CONCAT
+                __DIR__
+              Label : CONCAT
+                'I'
+        Label : ARGUMENT
+          include
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                __DIR__
               Label : CONCAT
                 'G'
-              Label : CONCAT
-                __DIR__
         Label : ARGUMENT
           include
           Label : ARGUMENTS
@@ -45,9 +45,9 @@ Label : CODE
             Label : ARGUMENT
               Concatenation
               Label : CONCAT
-                'F'
-              Label : CONCAT
                 __DIR__
+              Label : CONCAT
+                'F'
     Label : LEFT
       ::
       Label : PROPERTY

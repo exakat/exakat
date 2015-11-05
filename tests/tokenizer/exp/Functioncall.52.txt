@@ -3,37 +3,17 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      O
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'S'
-          Label : CONCAT
-            ::
-            Label : CLASS
-              P
-            Label : METHOD
-              Q
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'R'
-    Label : THEN
-      void
+    B
   Label : ELEMENT
-    void
-  Label : ELEMENT
-    H
+    function
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'I'
-  Label : ELEMENT
-    void
+        $a
+    Label : NAME
+      B
+    Label : BLOCK
+      void
   Label : ELEMENT
     M
     Label : ARGUMENTS
@@ -41,21 +21,19 @@ Label : CODE
       Label : ARGUMENT
         'N'
   Label : ELEMENT
-    void
-  Label : ELEMENT
     J
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        'L'
-      Label : ARGUMENT
         'K'
-  Label : ELEMENT
-    void
+      Label : ARGUMENT
+        'L'
   Label : ELEMENT
     D
     Label : ARGUMENTS
       Arguments
+      Label : ARGUMENT
+        'E'
       Label : ARGUMENT
         array
         Label : ARGUMENTS
@@ -72,17 +50,39 @@ Label : CODE
               'F'
             Label : VALUE
               $b
-      Label : ARGUMENT
-        'E'
   Label : ELEMENT
-    B
+    void
   Label : ELEMENT
-    function
+    void
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    H
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        $a
-    Label : NAME
-      B
-    Label : BLOCK
+        'I'
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      O
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            ::
+            Label : CLASS
+              P
+            Label : METHOD
+              Q
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'R'
+          Label : CONCAT
+            'S'
+    Label : THEN
       void

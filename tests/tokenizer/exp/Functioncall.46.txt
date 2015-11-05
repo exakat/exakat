@@ -7,7 +7,7 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        'K'
+        'I'
       Label : ARGUMENT
         (
         Label : CODE
@@ -19,7 +19,7 @@ Label : CODE
           Label : ELSE
             "K"
       Label : ARGUMENT
-        'I'
+        'K'
       Label : ARGUMENT
         (
         Label : CODE

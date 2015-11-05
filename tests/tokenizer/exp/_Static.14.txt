@@ -26,14 +26,12 @@ Label : CODE
   Label : ELEMENT
     [
     Label : ARGUMENTS
-      void
-      Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $method
+      Label : ARGUMENT
         new
         Label : NEW
           static
           Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $method
-            Label : ARGUMENT
-              void
+            void

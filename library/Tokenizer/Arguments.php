@@ -40,7 +40,7 @@ class Arguments extends TokenAuto {
                            'Include', 'Instanceof', 'Yield', 'Staticclass', 'Spaceship',
                            'Coalesce');
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_STATIC',
+        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 
                                                                  'T_SEMICOLON', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                  'T_FUNCTION', 'T_VARIABLE')),
                                   -1 => array('atom'    => 'yes'),
@@ -54,8 +54,8 @@ class Arguments extends TokenAuto {
                                                                        Sequence::$operators, Arguments::$operators))
                                  );
         
-        $this->actions = array('to_argument' => true,
-                               'atom'        => 'Arguments');
+        $this->actions = array('toArgument' => true,
+                               'atom'       => 'Arguments');
         $this->checkAuto();
 
         return false;

@@ -9,68 +9,22 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        Sequence
-        Label : ELEMENT
-          ppp
-          Label : VALUE
-            void
-          Label : DEFINE
-            $i
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : VALUE
-            void
-          Label : DEFINE
-            $h
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : VALUE
-            void
-          Label : DEFINE
-            $g
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : VALUE
-            void
-          Label : DEFINE
-            $f
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : VALUE
-            void
-          Label : DEFINE
-            $e
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : VALUE
-            void
-          Label : DEFINE
-            $d
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : VALUE
-            void
-          Label : DEFINE
-            $c
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : VALUE
-            void
-          Label : DEFINE
-            $b
-          Label : STATIC
-            static
+        static
+        Label : DEFINE
+          $i
+        Label : DEFINE
+          $g
+        Label : DEFINE
+          $h
+        Label : DEFINE
+          $b
+        Label : DEFINE
+          $e
+        Label : DEFINE
+          $f
+        Label : DEFINE
+          $c
+        Label : DEFINE
+          $d
+        Label : STATIC
+          static

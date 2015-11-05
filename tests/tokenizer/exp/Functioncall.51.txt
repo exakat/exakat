@@ -1,5 +1,7 @@
 ;
 Label : ELEMENT
+  A
+Label : ELEMENT
   <?php 
   Label : CODE
     ;
@@ -26,10 +28,6 @@ Label : ELEMENT
                     Label : ARGUMENTS
                       Arguments
                       Label : ARGUMENT
-                        H
-                      Label : ARGUMENT
-                        'G'
-                      Label : ARGUMENT
                         ->
                         Label : OBJECT
                           [
@@ -39,7 +37,9 @@ Label : ELEMENT
                             'E'
                         Label : PROPERTY
                           F
+                      Label : ARGUMENT
+                        'G'
+                      Label : ARGUMENT
+                        H
 Label : ELEMENT
   H
-Label : ELEMENT
-  A

@@ -15,7 +15,7 @@ Label : CODE
             Label : ARGUMENT
               void
         Label : LEFT
-          $c
+          $b
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -25,7 +25,7 @@ Label : CODE
             Label : ARGUMENT
               void
         Label : LEFT
-          $b
+          $c
     Label : NAME
       a
     Label : BLOCK

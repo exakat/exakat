@@ -1,44 +1,54 @@
 <?php
 
 Label : CODE
-  class
-  Label : NAME
-    a
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      static
-      Label : VALUE
-        '23'
-      Label : STATIC
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
         static
-      Label : DEFINE
-        $e
-    Label : ELEMENT
-      static
-      Label : VALUE
-        array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-      Label : STATIC
+        Label : DEFINE
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+          Label : LEFT
+            $d
+        Label : STATIC
+          static
+      Label : ELEMENT
         static
-      Label : DEFINE
-        $d
-    Label : ELEMENT
-      static
-      Label : VALUE
-        -2
-      Label : STATIC
+        Label : DEFINE
+          =
+          Label : RIGHT
+            '23'
+          Label : LEFT
+            $e
+        Label : STATIC
+          static
+      Label : ELEMENT
         static
-      Label : DEFINE
-        $c
-    Label : ELEMENT
-      static
-      Label : VALUE
-        1
-      Label : STATIC
+        Label : DEFINE
+          =
+          Label : RIGHT
+            -2
+          Label : LEFT
+            $c
+        Label : STATIC
+          static
+      Label : ELEMENT
         static
-      Label : DEFINE
-        $b
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $b
+        Label : STATIC
+          static

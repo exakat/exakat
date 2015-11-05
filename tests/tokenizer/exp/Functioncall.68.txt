@@ -3,10 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       isset
@@ -81,13 +77,13 @@ Label : CODE
               Label : ARGUMENT
                 Concatenation
                 Label : CONCAT
+                  'L'
+                Label : CONCAT
                   [
                   Label : VARIABLE
                     $a
                   Label : INDEX
                     'M'
-                Label : CONCAT
-                  'L'
                 Label : CONCAT
                   [
                   Label : VARIABLE

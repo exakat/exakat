@@ -7,22 +7,6 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        >>
-        Label : RIGHT
-          $c
-        Label : LEFT
-          (
-          Label : CODE
-            +
-            Label : RIGHT
-              $b
-            Label : LEFT
-              $a
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
         %
         Label : RIGHT
           $c
@@ -55,6 +39,22 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
+        >>
+        Label : RIGHT
+          $c
+        Label : LEFT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              $b
+            Label : LEFT
+              $a
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         *
         Label : RIGHT
           $c
@@ -67,7 +67,7 @@ Label : CODE
             Label : LEFT
               $a
   Label : ELEMENT
-    echo
+    print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -83,7 +83,7 @@ Label : CODE
             Label : LEFT
               $a
   Label : ELEMENT
-    print
+    echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT

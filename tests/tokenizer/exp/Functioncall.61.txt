@@ -7,7 +7,7 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        6
+        1
       Label : ARGUMENT
         <<
         Label : RIGHT
@@ -15,11 +15,11 @@ Label : CODE
         Label : LEFT
           4
       Label : ARGUMENT
-        3
+        6
       Label : ARGUMENT
         2
       Label : ARGUMENT
-        1
+        3
   Label : ELEMENT
     if
     Label : CONDITION

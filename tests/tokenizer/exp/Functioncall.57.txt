@@ -1,5 +1,14 @@
 ;
 Label : ELEMENT
+  a
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      'b'
+Label : ELEMENT
+  
+
+Label : ELEMENT
   echo
   Label : ARGUMENTS
     void
@@ -21,3 +30,21 @@ Label : ELEMENT
                 'f'
       Label : CONCAT
         C
+Label : ELEMENT
+  =
+  Label : RIGHT
+    i
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+  Label : LEFT
+    $h
+Label : ELEMENT
+  j
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      void
+Label : ELEMENT
+  void

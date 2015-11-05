@@ -7,6 +7,8 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
+        1
+      Label : ARGUMENT
         $y
         Label : ARGUMENTS
           void
@@ -16,7 +18,5 @@ Label : CODE
           $y
       Label : ARGUMENT
         2
-      Label : ARGUMENT
-        1
     Label : NAME
       $x

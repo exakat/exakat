@@ -7,15 +7,7 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        5
-      Label : ARGUMENT
-        <<<'NOWDOC'
-
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            BadFunctionCallException
-
+        1
       Label : ARGUMENT
         <<<HEREDOC
 
@@ -25,6 +17,14 @@ Label : CODE
             a
 
       Label : ARGUMENT
+        <<<'NOWDOC'
+
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            BadFunctionCallException
+
+      Label : ARGUMENT
         'a'
       Label : ARGUMENT
-        1
+        5

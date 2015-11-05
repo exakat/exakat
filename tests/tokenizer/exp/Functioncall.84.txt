@@ -36,36 +36,12 @@ Label : CODE
           33
       Label : NAME
         \
-        Label : SUBNAME
-          x3
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             3
-  Label : ELEMENT
-    \
-    Label : SUBNAME
-      x1
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        1
-  Label : ELEMENT
-    \x2\y2(2)
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        22
-    Label : NAME
-      \
-      Label : SUBNAME
-        x2
-      Label : SUBNAME
-        y2
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          2
+        Label : SUBNAME
+          x3
   Label : ELEMENT
     $y3(1)(2)
     Label : ARGUMENTS
@@ -84,6 +60,30 @@ Label : CODE
           void
           Label : ARGUMENT
             1
+  Label : ELEMENT
+    \x2\y2(2)
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        22
+    Label : NAME
+      \
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          2
+      Label : SUBNAME
+        x2
+      Label : SUBNAME
+        y2
+  Label : ELEMENT
+    \
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        1
+    Label : SUBNAME
+      x1
   Label : ELEMENT
     \x4\y4\z4(4)(44)(444)
     Label : ARGUMENTS
@@ -104,13 +104,13 @@ Label : CODE
             44
         Label : NAME
           \
-          Label : SUBNAME
-            x4
-          Label : SUBNAME
-            y4
-          Label : SUBNAME
-            z4
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               4
+          Label : SUBNAME
+            z4
+          Label : SUBNAME
+            y4
+          Label : SUBNAME
+            x4

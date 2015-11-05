@@ -8,13 +8,15 @@ Label : CODE
       Label : ARGUMENT
         Concatenation
         Label : CONCAT
+          'J'
+        Label : CONCAT
           'N'
         Label : CONCAT
           'L'
-        Label : CONCAT
-          'J'
       Label : ARGUMENT
         Concatenation
+        Label : CONCAT
+          'B'
         Label : CONCAT
           D
           Label : ARGUMENTS
@@ -31,8 +33,6 @@ Label : CODE
                     'H'
             Label : ARGUMENT
               'E'
-        Label : CONCAT
-          'B'
         Label : CONCAT
           (
           Label : CODE

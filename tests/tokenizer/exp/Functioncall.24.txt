@@ -9,26 +9,6 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          9
-        Label : ARGUMENT
-          6
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          $f
-        Label : ARGUMENT
-          $e
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      range
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
           5
         Label : ARGUMENT
           3
@@ -49,6 +29,26 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
+          6
+        Label : ARGUMENT
+          9
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          $e
+        Label : ARGUMENT
+          $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      range
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
           2
         Label : ARGUMENT
           0
@@ -57,8 +57,8 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          $b
-        Label : ARGUMENT
           $a
+        Label : ARGUMENT
+          $b
         Label : ARGUMENT
           void

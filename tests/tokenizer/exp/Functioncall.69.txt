@@ -1,5 +1,11 @@
 ;
 Label : ELEMENT
+  ++
+  Label : POSTPLUSPLUS
+    $a
+Label : ELEMENT
+  G
+Label : ELEMENT
   echo
   Label : ARGUMENTS
     void
@@ -9,3 +15,13 @@ Label : ELEMENT
         void
         Label : ARGUMENT
           'D'
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      E
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'F'

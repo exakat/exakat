@@ -3,20 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        {
-        Label : VARIABLE
-          $c
-        Label : INDEX
-          $i
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
-  Label : ELEMENT
     n
     Label : ARGUMENTS
       Arguments
@@ -31,31 +17,7 @@ Label : CODE
       Label : ARGUMENT
         $b
   Label : ELEMENT
-    m
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $g
-      Label : ARGUMENT
-        {
-        Label : VARIABLE
-          $f
-        Label : INDEX
-          $i
-  Label : ELEMENT
-    l
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        {
-        Label : VARIABLE
-          $e
-        Label : INDEX
-          $i
-      Label : ARGUMENT
-        $d
-  Label : ELEMENT
-    k
+    echo
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -68,3 +30,41 @@ Label : CODE
         $b
       Label : ARGUMENT
         $a
+  Label : ELEMENT
+    l
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $d
+      Label : ARGUMENT
+        {
+        Label : VARIABLE
+          $e
+        Label : INDEX
+          $i
+  Label : ELEMENT
+    m
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $g
+      Label : ARGUMENT
+        {
+        Label : VARIABLE
+          $f
+        Label : INDEX
+          $i
+  Label : ELEMENT
+    k
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $a
+      Label : ARGUMENT
+        {
+        Label : VARIABLE
+          $c
+        Label : INDEX
+          $i
+      Label : ARGUMENT
+        $b

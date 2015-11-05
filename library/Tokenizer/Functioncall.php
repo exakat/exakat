@@ -146,7 +146,6 @@ class Functioncall extends TokenAuto {
                                    0 => array('token' => 'T_STATIC',
                                               'atom'  => 'none'),
                                    1 => array('atom'  => array('Arguments', 'Void')), // actually, T_VOID
-                                   2 => array('token' => array('T_SEMICOLON', 'T_COMMA', 'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS')),
         );
         
         $this->actions = array('transform'    => array(1 => 'ARGUMENTS'),

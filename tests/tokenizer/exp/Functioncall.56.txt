@@ -29,6 +29,26 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
+        *
+        Label : RIGHT
+          $c
+        Label : LEFT
+          (
+          Label : CODE
+            -
+            Label : RIGHT
+              $b
+            Label : LEFT
+              -
+              Label : RIGHT
+                4
+              Label : LEFT
+                $a
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         &&
         Label : RIGHT
           $c
@@ -69,26 +89,6 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        **
-        Label : RIGHT
-          $c
-        Label : LEFT
-          (
-          Label : CODE
-            -
-            Label : RIGHT
-              $b
-            Label : LEFT
-              -
-              Label : RIGHT
-                4
-              Label : LEFT
-                $a
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
         -
         Label : RIGHT
           $c
@@ -109,7 +109,7 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        *
+        **
         Label : RIGHT
           $c
         Label : LEFT

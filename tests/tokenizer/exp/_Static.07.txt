@@ -3,6 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    static
+    Label : DEFINE
+      $x
+    Label : STATIC
+      static
+  Label : ELEMENT
     function
     Label : ARGUMENTS
       void
@@ -14,17 +20,7 @@ Label : CODE
       ;
       Label : ELEMENT
         static
-        Label : VALUE
-          Void
-        Label : STATIC
-          static
         Label : DEFINE
           $z
-  Label : ELEMENT
-    static
-    Label : VALUE
-      Void
-    Label : STATIC
-      static
-    Label : DEFINE
-      $x
+        Label : STATIC
+          static

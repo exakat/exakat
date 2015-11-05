@@ -3,6 +3,64 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      'f'
+    Label : LEFT
+      $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'r'
+    Label : LEFT
+      $r
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'e'
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $x
+      Label : ARGUMENT
+        $y
+      Label : ARGUMENT
+        $z
+    Label : NAME
+      f
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $y
+          Label : ARGUMENT
+            $z
+          Label : ARGUMENT
+            $x
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        void
+        Label : ARGUMENT
+          $a
+      Label : ARGUMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+      Label : ARGUMENT
+        $c
+  Label : ELEMENT
     f
     Label : ARGUMENTS
       Arguments
@@ -20,61 +78,3 @@ Label : CODE
           void
           Label : ARGUMENT
             $e
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $z
-      Label : ARGUMENT
-        $y
-      Label : ARGUMENT
-        $x
-    Label : NAME
-      f
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $z
-          Label : ARGUMENT
-            $y
-          Label : ARGUMENT
-            $x
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $c
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-      Label : ARGUMENT
-        void
-        Label : ARGUMENT
-          $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      'r'
-    Label : LEFT
-      $r
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      'e'
-    Label : LEFT
-      $e
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      'f'
-    Label : LEFT
-      $f

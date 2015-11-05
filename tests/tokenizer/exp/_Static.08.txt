@@ -14,10 +14,10 @@ Label : CODE
           void
           Label : ARGUMENT
             void
-        Label : STATIC
-          static
         Label : NAME
           c
+        Label : STATIC
+          static
         Label : BLOCK
           void
       Label : ELEMENT
@@ -26,10 +26,10 @@ Label : CODE
           void
           Label : ARGUMENT
             void
-        Label : STATIC
-          static
         Label : NAME
           b
+        Label : STATIC
+          static
         Label : BLOCK
           void
       Label : ELEMENT
@@ -38,9 +38,9 @@ Label : CODE
           void
           Label : ARGUMENT
             void
-        Label : STATIC
-          static
         Label : NAME
           a
+        Label : STATIC
+          static
         Label : BLOCK
           void
