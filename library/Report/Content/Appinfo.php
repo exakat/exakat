@@ -195,6 +195,7 @@ class Appinfo extends \Report\Content {
                             'ext/ev'         => 'Extensions/Extev',
                             'ext/exif'       => 'Extensions/Extexif',
                             'ext/expect'     => 'Extensions/Extexpect',
+                            'ext/fann'       => 'Extensions/Extfann',
                             'ext/fdf'        => 'Extensions/Extfdf',
                             'ext/ffmpeg'     => 'Extensions/Extffmpeg',
                             'ext/file'       => 'Extensions/Extfile',
