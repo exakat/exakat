@@ -233,9 +233,7 @@ LICENCE;
     }
     
     public function checkFormat() {
-        shell_exec('php ~/.composer/vendor/bin/php-cs-fixer fix ./library/Tokenizer --fixers=encoding,eof_ending,elseif,trailing_spaces,indentation');
-        shell_exec('php ~/.composer/vendor/bin/php-cs-fixer fix ./library/Analyzer --fixers=encoding,eof_ending,elseif,trailing_spaces,indentation');
-        shell_exec('php ~/.composer/vendor/bin/php-cs-fixer fix ./library/Tasks --fixers=encoding,eof_ending,elseif,trailing_spaces,indentation');
+        shell_exec('php ~/.composer/vendor/bin/php-cs-fixer fix');
     }
 
     public function checkAnalyzers() {
@@ -500,7 +498,7 @@ SQL
         foreach($compats as $name => $versions) {
             print substr($name. str_repeat(' ', 40), 0, 40);
             
-            foreach(['70', '56', '55', '54', '53', '52'] as $version) {
+            foreach(['71', '70', '56', '55', '54', '53', '52'] as $version) {
                 if (isset($versions[$version]) && $versions[$version] === 'x') {
                     print "  x  ";
                 } else {
