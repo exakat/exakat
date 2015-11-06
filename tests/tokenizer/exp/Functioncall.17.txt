@@ -9,13 +9,17 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          2
+          void
+        Label : ARGUMENT
+          4
         Label : ARGUMENT
           3
         Label : ARGUMENT
+          2
+        Label : ARGUMENT
           1
     Label : LEFT
-      $x
+      $b
   Label : ELEMENT
     =
     Label : RIGHT
@@ -23,14 +27,10 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          void
+          3
         Label : ARGUMENT
           2
         Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          4
+          1
     Label : LEFT
-      $b
+      $x

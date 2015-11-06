@@ -21,14 +21,14 @@ Label : CODE
             $b
       Label : THEN
         ->
+        Label : PROPERTY
+          f
         Label : OBJECT
           current
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $e
-        Label : PROPERTY
-          f
       Label : ELSE
         ''
     Label : LEFT

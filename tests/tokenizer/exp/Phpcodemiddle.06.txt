@@ -2,6 +2,23 @@
 Label : CODE
   ;
   Label : ELEMENT
+    XC
+
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      [
+      Label : VARIABLE
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'B'
+      Label : INDEX
+        0
+    Label : LEFT
+      $a
+  Label : ELEMENT
     if
     Label : CONDITION
       ==
@@ -24,6 +41,11 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
+        E
+
+      Label : ELEMENT
+        void
+      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -36,33 +58,28 @@ Label : CODE
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
+                  'G'
+                Label : ARGUMENT
                   array
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
                       =>
+                      Label : KEY
+                        'I'
                       Label : VALUE
                         ->
                         Label : OBJECT
                           $this
                         Label : PROPERTY
                           J
-                      Label : KEY
-                        'I'
                     Label : ARGUMENT
                       =>
-                      Label : VALUE
-                        $a
                       Label : KEY
                         'H'
-                Label : ARGUMENT
-                  'G'
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        E
-
-    Label : ELSE
+                      Label : VALUE
+                        $a
+    Label : THEN
       ;
       Label : ELEMENT
         =
@@ -75,22 +92,3 @@ Label : CODE
 
       Label : ELEMENT
         C
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    XC
-
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'B'
-      Label : INDEX
-        0
-    Label : LEFT
-      $a

@@ -2,6 +2,8 @@
 Label : ELEMENT
   A
 Label : ELEMENT
+  H
+Label : ELEMENT
   <?php 
   Label : CODE
     ;
@@ -28,18 +30,16 @@ Label : ELEMENT
                     Label : ARGUMENTS
                       Arguments
                       Label : ARGUMENT
+                        'G'
+                      Label : ARGUMENT
+                        H
+                      Label : ARGUMENT
                         ->
+                        Label : PROPERTY
+                          F
                         Label : OBJECT
                           [
                           Label : VARIABLE
                             $a
                           Label : INDEX
                             'E'
-                        Label : PROPERTY
-                          F
-                      Label : ARGUMENT
-                        'G'
-                      Label : ARGUMENT
-                        H
-Label : ELEMENT
-  H

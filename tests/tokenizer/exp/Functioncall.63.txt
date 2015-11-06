@@ -9,6 +9,8 @@ Label : CODE
       Label : ARGUMENT
         1
       Label : ARGUMENT
+        5
+      Label : ARGUMENT
         <<<HEREDOC
 
         Label : CONTAINS
@@ -26,5 +28,3 @@ Label : CODE
 
       Label : ARGUMENT
         'a'
-      Label : ARGUMENT
-        5

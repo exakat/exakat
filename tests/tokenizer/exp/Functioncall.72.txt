@@ -17,26 +17,6 @@ Label : CODE
               Label : CONCAT
                 __DIR__
               Label : CONCAT
-                'H'
-        Label : ARGUMENT
-          include
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                __DIR__
-              Label : CONCAT
-                'I'
-        Label : ARGUMENT
-          include
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                __DIR__
-              Label : CONCAT
                 'G'
         Label : ARGUMENT
           include
@@ -47,13 +27,33 @@ Label : CODE
               Label : CONCAT
                 __DIR__
               Label : CONCAT
+                'H'
+        Label : ARGUMENT
+          include
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                __DIR__
+              Label : CONCAT
                 'F'
+        Label : ARGUMENT
+          include
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                __DIR__
+              Label : CONCAT
+                'I'
     Label : LEFT
       ::
-      Label : PROPERTY
-        $a
       Label : CLASS
         C
+      Label : PROPERTY
+        $a
   Label : ELEMENT
     if
     Label : CONDITION
@@ -64,10 +64,10 @@ Label : CODE
           void
           Label : ARGUMENT
             ::
-            Label : PROPERTY
-              $a
             Label : CLASS
               C
+            Label : PROPERTY
+              $a
     Label : THEN
       ;
       Label : ELEMENT

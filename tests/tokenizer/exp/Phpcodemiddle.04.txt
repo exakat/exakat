@@ -1,8 +1,20 @@
 ;
 Label : ELEMENT
+  void
+Label : ELEMENT
+  void
+Label : ELEMENT
   echo
   Label : ARGUMENTS
     Arguments
+    Label : ARGUMENT
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          $d
+        Label : INDEX
+          'I'
     Label : ARGUMENT
       K
       Label : ARGUMENTS
@@ -13,15 +25,3 @@ Label : ELEMENT
             $d
           Label : INDEX
             'L'
-    Label : ARGUMENT
-      void
-      Label : ARGUMENT
-        [
-        Label : VARIABLE
-          $d
-        Label : INDEX
-          'I'
-Label : ELEMENT
-  void
-Label : ELEMENT
-  void

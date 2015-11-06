@@ -9,11 +9,13 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
+          void
+        Label : ARGUMENT
           =>
           Label : KEY
-            -4
+            $a
           Label : VALUE
-            -5
+            $b
         Label : ARGUMENT
           =>
           Label : KEY
@@ -31,17 +33,9 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            \
-            Label : SUBNAME
-              l
-            Label : SUBNAME
-              k
+            -4
           Label : VALUE
-            \
-            Label : SUBNAME
-              m
-            Label : SUBNAME
-              n
+            -5
         Label : ARGUMENT
           =>
           Label : KEY
@@ -59,10 +53,16 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            $a
+            \
+            Label : SUBNAME
+              l
+            Label : SUBNAME
+              k
           Label : VALUE
-            $b
-        Label : ARGUMENT
-          void
+            \
+            Label : SUBNAME
+              n
+            Label : SUBNAME
+              m
     Label : LEFT
       $a

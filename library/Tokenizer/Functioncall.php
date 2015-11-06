@@ -85,47 +85,9 @@ class Functioncall extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // functioncall special case for Echo
-        $this->conditions = array(  -1 => array('filterOut' => 'T_NS_SEPARATOR'),
-                                     0 => array('token'     => array('T_ECHO', 'T_PRINT')),
-                                     1 => array('atom'      => 'none',
-                                                'token'     => 'T_OPEN_PARENTHESIS' ),
-                                     2 => array('atom'      =>  array('Arguments', 'Void')),
-                                     3 => array('atom'      => 'none',
-                                                'token'     => 'T_CLOSE_PARENTHESIS'),
-                                     4 => array('notToken'  => array('T_COMMA', 'T_QUESTION')),
-        );
-        
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'ARGUMENTS',
-                                                        3 => 'DROP'),
-                               'atom'         => 'Functioncall',
-                               'addSemicolon' => 'it',
-                               'property'     => array('parenthesis' => true),
-                               );
-        $this->checkAuto();
-
         // functioncall(with arguments but without parenthesis)
         $this->conditions = array(-1 => array('filterOut' => _Ppp::$operators),
                                    0 => array('token'     => array('T_ECHO', 'T_PRINT', 'T_EXIT'),
-                                              'atom'      => 'none'),
-                                   1 => array('atom'      => 'Arguments'),
-                                   2 => array('notToken'  => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA'),
-                                                                          Addition::$operators, Multiplication::$operators,
-                                                                          Bitshift::$operators, Logical::$booleans,
-                                                                          Ternary::$operators)),
-        );
-        
-        $this->actions = array('transform'    => array(1 => 'ARGUMENTS'),
-                               'atom'         => 'Functioncall',
-                               'addSemicolon' => 'it',
-                               'property'     => array('parenthesis' => false),
-                               );
-        $this->checkAuto();
-
-        // functioncall(with arguments but without parenthesis)
-        $this->conditions = array(-1 => array('filterOut' => _Ppp::$operators),
-                                   0 => array('token'     => 'T_PRINT',
                                               'atom'      => 'none'),
                                    1 => array('atom'      => 'Arguments'),
                                    2 => array('notToken'  => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),

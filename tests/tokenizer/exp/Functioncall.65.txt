@@ -2,30 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $x
-        Label : NAME
-          
-        Label : BLOCK
-          void
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            '1'
-  Label : ELEMENT
     =
     Label : RIGHT
       ord
@@ -54,26 +30,6 @@ Label : CODE
     Label : LEFT
       $a
   Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        (
-        Label : CODE
-          3
-      Label : ARGUMENT
-        (
-        Label : CODE
-          1
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          $d
-  Label : ELEMENT
     include
     Label : ARGUMENTS
       void
@@ -86,6 +42,26 @@ Label : CODE
           Label : CODE
             'a'
   Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $d
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        (
+        Label : CODE
+          3
+      Label : ARGUMENT
+        (
+        Label : CODE
+          1
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
@@ -93,3 +69,27 @@ Label : CODE
         (
         Label : CODE
           1
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            '1'
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $x
+        Label : NAME
+          
+        Label : BLOCK
+          void

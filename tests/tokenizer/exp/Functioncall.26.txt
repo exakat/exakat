@@ -7,11 +7,33 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        ->
+        ::
+        Label : CLASS
+          Stdclass
+        Label : METHOD
+          i
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ARGUMENT
+        ::
+        Label : CLASS
+          Stdclass
         Label : PROPERTY
-          c
+          $g
+      Label : ARGUMENT
+        ->
         Label : OBJECT
           $this
+        Label : METHOD
+          h
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ARGUMENT
+        "b"
       Label : ARGUMENT
         ::
         Label : CLASS
@@ -25,30 +47,8 @@ Label : CODE
         Label : SUBNAME
           e
       Label : ARGUMENT
-        "b"
-      Label : ARGUMENT
         ->
-        Label : METHOD
-          h
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
+        Label : PROPERTY
+          c
         Label : OBJECT
           $this
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          Stdclass
-        Label : PROPERTY
-          $g
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          Stdclass
-        Label : METHOD
-          i
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void

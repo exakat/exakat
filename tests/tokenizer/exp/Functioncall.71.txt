@@ -9,63 +9,27 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $f
-        Label : PROPERTY
-          [
-          Label : VARIABLE
-            L
-          Label : INDEX
-            $e
-      Label : ARGUMENT
-        $c
-      Label : ARGUMENT
-        $l
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            Q
-        Label : PROPERTY
-          R
-      Label : ARGUMENT
         new
         Label : NEW
           J
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $e
+            Label : ARGUMENT
               ->
-              Label : OBJECT
-                $f
               Label : PROPERTY
                 [
                 Label : VARIABLE
                   K
                 Label : INDEX
                   $e
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              $d
+              Label : OBJECT
+                $f
       Label : ARGUMENT
-        ->
-        Label : OBJECT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            L
-        Label : PROPERTY
-          M
-      Label : ARGUMENT
-        clone
-        Label : CLONE
-          $g
+        $c
       Label : ARGUMENT
         (
         Label : CODE
@@ -83,16 +47,52 @@ Label : CODE
       Label : ARGUMENT
         $i
       Label : ARGUMENT
-        $j
+        ->
+        Label : PROPERTY
+          M
+        Label : OBJECT
+          ->
+          Label : PROPERTY
+            L
+          Label : OBJECT
+            $f
+      Label : ARGUMENT
+        clone
+        Label : CLONE
+          $g
+      Label : ARGUMENT
+        ->
+        Label : PROPERTY
+          R
+        Label : OBJECT
+          ->
+          Label : PROPERTY
+            Q
+          Label : OBJECT
+            $this
+      Label : ARGUMENT
+        $l
       Label : ARGUMENT
         $k
       Label : ARGUMENT
+        $j
+      Label : ARGUMENT
         ->
+        Label : PROPERTY
+          [
+          Label : VARIABLE
+            L
+          Label : INDEX
+            $e
         Label : OBJECT
           $f
+      Label : ARGUMENT
+        ->
         Label : PROPERTY
           [
           Label : VARIABLE
             O
           Label : INDEX
             $e
+        Label : OBJECT
+          $f

@@ -1,10 +1,10 @@
 ;
 Label : ELEMENT
-  I
-Label : ELEMENT
   ++
   Label : POSTPLUSPLUS
     $b
+Label : ELEMENT
+  I
 Label : ELEMENT
   echo
   Label : ARGUMENTS

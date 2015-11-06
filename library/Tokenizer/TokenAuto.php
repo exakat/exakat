@@ -1437,6 +1437,8 @@ if (a0.token == 'T_CLOSE_PARENTHESIS') {
 x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_COMMA', virtual:true, line:it.line]);
 g.idx('atoms').put('atom', 'Void', x);
 
+a2 = a1.out('NEXT').next();
+
 g.addEdge(it, x, 'NEXT');
 g.addEdge(x, a2, 'NEXT');
 g.addEdge(x, a1, '$link');

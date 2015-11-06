@@ -1,7 +1,5 @@
 ;
 Label : ELEMENT
-  K
-Label : ELEMENT
   <?php 
   Label : CODE
     ;
@@ -11,6 +9,10 @@ Label : ELEMENT
         $a
       Label : THEN
         ;
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          E
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -29,10 +31,6 @@ Label : ELEMENT
                   void
                   Label : ARGUMENT
                     $a
-        Label : ELEMENT
-          B
-        Label : ELEMENT
-          E
     Label : ELEMENT
       F
     Label : ELEMENT
@@ -79,3 +77,5 @@ Label : ELEMENT
                       $d
     Label : ELEMENT
       void
+Label : ELEMENT
+  K

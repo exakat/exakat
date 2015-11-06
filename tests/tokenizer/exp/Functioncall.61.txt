@@ -3,24 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        1
-      Label : ARGUMENT
-        <<
-        Label : RIGHT
-          5
-        Label : LEFT
-          4
-      Label : ARGUMENT
-        6
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        3
-  Label : ELEMENT
     if
     Label : CONDITION
       ||
@@ -36,10 +18,10 @@ Label : CODE
               c d
       Label : LEFT
         ->
-        Label : OBJECT
-          $a
         Label : PROPERTY
           b
+        Label : OBJECT
+          $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -52,3 +34,21 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        1
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        6
+      Label : ARGUMENT
+        <<
+        Label : RIGHT
+          5
+        Label : LEFT
+          4

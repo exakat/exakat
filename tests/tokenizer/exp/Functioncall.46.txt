@@ -7,8 +7,6 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        'I'
-      Label : ARGUMENT
         (
         Label : CODE
           ?
@@ -20,6 +18,8 @@ Label : CODE
             "K"
       Label : ARGUMENT
         'K'
+      Label : ARGUMENT
+        'I'
       Label : ARGUMENT
         (
         Label : CODE

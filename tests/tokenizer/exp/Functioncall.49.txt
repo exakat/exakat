@@ -10,13 +10,19 @@ Label : CODE
         Label : CONCAT
           'J'
         Label : CONCAT
-          'N'
-        Label : CONCAT
           'L'
+        Label : CONCAT
+          'N'
       Label : ARGUMENT
         Concatenation
         Label : CONCAT
-          'B'
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              0
+            Label : LEFT
+              $a
         Label : CONCAT
           D
           Label : ARGUMENTS
@@ -34,10 +40,4 @@ Label : CODE
             Label : ARGUMENT
               'E'
         Label : CONCAT
-          (
-          Label : CODE
-            +
-            Label : RIGHT
-              0
-            Label : LEFT
-              $a
+          'B'

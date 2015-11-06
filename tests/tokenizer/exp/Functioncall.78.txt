@@ -8,13 +8,13 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        void
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $e
+      Label : ELEMENT
+        void
     Label : SOURCE
       ->
       Label : OBJECT

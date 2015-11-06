@@ -2,9 +2,9 @@
 Label : CODE
   ;
   Label : ELEMENT
-    strtolower
+    eval
     Label : ARGUMENTS
-      Arguments
+      void
       Label : ARGUMENT
         (
         Label : CODE
@@ -15,6 +15,10 @@ Label : CODE
               'E'
           Label : NAME
             $e
+  Label : ELEMENT
+    strtolower
+    Label : ARGUMENTS
+      Arguments
       Label : ARGUMENT
         (
         Label : CODE
@@ -35,10 +39,6 @@ Label : CODE
               'G'
           Label : NAME
             $e
-  Label : ELEMENT
-    eval
-    Label : ARGUMENTS
-      void
       Label : ARGUMENT
         (
         Label : CODE

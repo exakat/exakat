@@ -21,15 +21,33 @@ Label : CODE
     Label : LEFT
       $e
   Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+      Label : ARGUMENT
+        ltrim
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $r
+      Label : ARGUMENT
+        $f
+  Label : ELEMENT
     function
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        $x
+        $z
       Label : ARGUMENT
         $y
       Label : ARGUMENT
-        $z
+        $x
     Label : NAME
       f
     Label : BLOCK
@@ -49,9 +67,7 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        void
-        Label : ARGUMENT
-          $a
+        $a
       Label : ARGUMENT
         print
         Label : ARGUMENTS
@@ -60,21 +76,3 @@ Label : CODE
             $b
       Label : ARGUMENT
         $c
-  Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        ltrim
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $r
-      Label : ARGUMENT
-        $f
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $e

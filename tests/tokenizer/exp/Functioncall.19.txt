@@ -11,12 +11,6 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            5
-          Label : VALUE
-            6
-        Label : ARGUMENT
-          =>
-          Label : KEY
             3
           Label : VALUE
             4
@@ -26,5 +20,11 @@ Label : CODE
             1
           Label : VALUE
             2
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            5
+          Label : VALUE
+            6
     Label : LEFT
       $a

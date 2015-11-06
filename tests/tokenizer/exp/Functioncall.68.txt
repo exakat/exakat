@@ -77,7 +77,11 @@ Label : CODE
               Label : ARGUMENT
                 Concatenation
                 Label : CONCAT
-                  'L'
+                  [
+                  Label : VARIABLE
+                    $a
+                  Label : INDEX
+                    'K'
                 Label : CONCAT
                   [
                   Label : VARIABLE
@@ -85,11 +89,7 @@ Label : CODE
                   Label : INDEX
                     'M'
                 Label : CONCAT
-                  [
-                  Label : VARIABLE
-                    $a
-                  Label : INDEX
-                    'K'
+                  'L'
         Label : ELSE
           Block with else
           Label : ELEMENT

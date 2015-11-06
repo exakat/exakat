@@ -15,12 +15,6 @@ Label : CODE
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                ::
-                Label : CLASS
-                  C
-                Label : CONSTANT
-                  class
-              Label : ARGUMENT
                 ?
                 Label : CONDITION
                   is_object
@@ -42,3 +36,9 @@ Label : CODE
                       $f
               Label : ARGUMENT
                 'b'
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  C
+                Label : CONSTANT
+                  class
