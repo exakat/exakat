@@ -1383,7 +1383,6 @@ class Load extends Tasks {
 
         // Handle cases of echo
         if ($tokenValue === 'T_ECHO' || $tokenValue === 'T_OPEN_TAG_WITH_ECHO') {
-            print "Found one Echo ($tokenValue)\n";
             $parenthesisStates[] = $parenthesisId;
             ++$parenthesisCount;
             $parenthesisId       = $parenthesisCount;
