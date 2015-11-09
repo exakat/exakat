@@ -84,12 +84,15 @@ GREMLIN;
 g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
                        "Rawstring", "Float", "Boolean", "Void", "File"]}.each{
     g.idx("atoms").put("atom", it.atom, it);
+    if (it.atom == 'Integer') {
+        it.setProperty('intval', it.code.toInteger());
+    }
 }
 GREMLIN;
         gremlin_query($query);
         $this->logTime('g.idx("atom")[["atom":"******"]] : filling');
 
-        // creating the neo4j Index
+        // creating the index
         // @todo check this index
         gremlin_query("g.V.has('root', true).each{ g.idx('racines').put('token', 'ROOT', it); };");
         $this->logTime('g.idx("ROOT")');
