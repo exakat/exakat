@@ -38,7 +38,9 @@ class Constantnames extends Analyzer\Analyzer {
         // with const
         $this->atomIs('Const')
              ->hasNoParent('Class', array('ELEMENT', 'BLOCK'))
-             ->outIs('NAME');
+             ->hasNoParent('Interface', array('ELEMENT', 'BLOCK'))
+             ->outIs('CONST')
+             ->outIs('LEFT');
         $this->prepareQuery();
     }
 }
