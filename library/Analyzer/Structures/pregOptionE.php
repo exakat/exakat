@@ -41,25 +41,25 @@ class pregOptionE extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // With a concatenation
+        // With an interpolated string 
         $this->atomIs('Functioncall')
              ->fullnspath('\preg_replace')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs('T_QUOTE')
-             ->regex('noDelimiter', '^(['.$delimiters.']).*?(['.$delimiters.'])(.*e.*)\\$')
+             ->regex('fullcode', '^.(['.$delimiters.']).+?(['.$delimiters.'])(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();
 
-        // with a string 
+        // with a concatenation
         $this->atomIs('Functioncall')
              ->fullnspath('\preg_replace')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs('T_DOT')
-             ->regex('noDelimiter', '^(['.$delimiters.']).*?(['.$delimiters.'])(.*e.*)\\$')
+             ->regex('fullcode', '^.(['.$delimiters.']).*?(['.$delimiters.'])(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
