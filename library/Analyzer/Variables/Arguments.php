@@ -26,14 +26,28 @@ namespace Analyzer\Variables;
 use Analyzer;
 
 class Arguments extends Analyzer\Analyzer {
-    
     public function analyze() {
+        // Arguments itself
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('VARIABLE')
              ->outIsIE('LEFT')
              ->atomIs('Variable');
+        $this->prepareQuery();
+        
+        // Below
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIsIE('VARIABLE')
+             ->outIsIE('LEFT')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'arg')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Variable')
+             ->samePropertyAs('code', 'arg');
         $this->prepareQuery();
     }
 }
