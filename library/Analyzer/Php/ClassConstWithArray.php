@@ -30,7 +30,8 @@ class ClassConstWithArray extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Const')
-             ->outIs('VALUE')
+             ->outIs('CONST')
+             ->outIs('RIGHT')
              ->tokenIs(array('T_OPEN_BRACKET', 'T_ARRAY'))
              ->back('first')
              ->inIs('ELEMENT')
