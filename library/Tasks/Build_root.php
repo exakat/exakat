@@ -84,7 +84,7 @@ GREMLIN;
 g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
                        "Rawstring", "Float", "Boolean", "Void", "File"]}.each{
     g.idx("atoms").put("atom", it.atom, it);
-    if (it.atom == 'Integer') {
+    if (it.atom == 'Integer' && it.code.substring(0, 1) != '0') {
         it.setProperty('intval', it.code.toInteger());
     }
 }

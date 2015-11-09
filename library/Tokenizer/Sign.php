@@ -50,12 +50,13 @@ class Sign extends TokenAuto {
                                     2 => array('filterOut'  => Multiplication::$operators),
                                  );
         
-        $this->actions = array('atom'       => 'Integer',
-                               'sign'       => true,
-                               'property'   => array('scalar' => true,
-                                                     'instruction' => true,
-                                                     'signed' => true),
-                               'cleanIndex' => true
+        $this->actions = array('atom'        => 'Integer',
+                               'minusIntval' => true,
+                               'sign'        => true,
+                               'property'    => array('scalar' => true,
+                                                      'instruction' => true,
+                                                      'signed' => true),
+                               'cleanIndex'  => true
                                );
         $this->checkAuto();
         

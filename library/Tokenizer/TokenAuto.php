@@ -184,6 +184,15 @@ toDelete.each{ g.removeVertex(it); }
             ";
             unset($actions['atom1']);
         }
+
+        if (isset($actions['minusIntval'])) {
+            $qactions[] = " /* minusIntval */\n   if (it.intval != null) {
+    it.intval = -1 * it.intval;
+}
+
+";
+            unset($actions['minusIntval']);
+        }
         
         if (isset($actions['property'])) {
             if (is_array($actions['property']) && !empty($actions['property'])) {
