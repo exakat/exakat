@@ -1,4 +1,4 @@
-Version 0.3.10 (Silver Horned King, Coming up)
+Version 0.3.11 (Hu A'qi, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 0.3.10 (Silver Horned King, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.10 (Silver Horned King, 2015-11-09)
++ Architecture
+    + Centralized call to cypher.
++ Report
+    + Sped up several analyzes
++ Analyzer
+    + Fixed naming bug with reflexion
+    + Support class name in arrays, short syntax
+    + Report Relay Functions
+    + More PHP 7 incompatibilities reports
++ Tokenizer
+    + Support for 7.1 compilation (dev only)
+    + Added cakephp to external libraries
+    + Fixed parsing bug with static (as property definition)
+    + Fixed 'count' in sequences from Function
+    + Rewrote Argument detection (when there is no parenthesis)
 
 Version 0.3.9 (Golden Horned King, 2015-11-02 up)
 + Architecture
