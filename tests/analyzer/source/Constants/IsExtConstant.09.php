@@ -1,7 +1,16 @@
 <?php
 
-define('a', 1);
+namespace X {
 
-defined('E_ALL');
+const E_ALL = 4;
 
+echo null;
+
+echo true;
+
+ANOTHER_CONSTANT;
+
+print SQLITE3_OPEN_READONLY;
+
+}
 ?>
