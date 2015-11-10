@@ -48,7 +48,7 @@ class Arguments extends Analyzer\Analyzer {
              ->inIsIE('VARIABLE')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->inIs('BLOCK')
+             ->outIs('BLOCK')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'arg');
         $this->prepareQuery();
