@@ -84,8 +84,18 @@ GREMLIN;
 g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
                        "Rawstring", "Float", "Boolean", "Void", "File"]}.each{
     g.idx("atoms").put("atom", it.atom, it);
-    if (it.atom == 'Integer' && it.code.substring(0, 1) != '0') {
-        it.setProperty('intval', it.code.toInteger());
+    if (it.atom == 'Integer') {
+        if (it.code.length() == 1) { // number
+            it.setProperty('intval', Integer.parseInt(it.code));
+        } else if (it.code.substring(0, 2) == '0b') { // binary
+            it.setProperty('intval', Integer.parseInt(it.code.substring(2), 2).toInteger());
+        } else if (it.code.substring(0, 2) == '0x') { // hexadecimal
+            it.setProperty('intval', Integer.parseInt(it.code.substring(2), 16).toInteger());
+        } else if (it.code.substring(0, 1) == '0') { // octal
+            it.setProperty('intval', Integer.parseInt(it.code.substring(1), 8).toInteger());
+        } else {
+            it.setProperty('intval', new BigInteger(it.code).toLong());
+        }
     }
 }
 GREMLIN;
