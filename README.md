@@ -30,10 +30,18 @@ There, you may proceed with the rest of the installation (Neo4j, gremlin, and de
 You can also immediately use the PHAR after you have downloaded it, of course:
 
 ```bash
-$ php exakat.phar doctor
+$ php exakat doctor
 ```
+
+### Run online
+
+Projects smaller than 1k lines of code may be [tested online](http://www.exakat.io/free-trial/), with the most recent version of exakat. 
 
 ## Contribute
 
 See [CONTRIBUTING.md](https://github.com/exakat/exakat/blob/master/CONTRIBUTING.md) for information on how to contribute to the Exakat engine.
+
+## Changelog
+
+See [Changelog.txt](https://github.com/exakat/exakat/blob/master/Changelog.txt) for information on how to contribute to the Exakat engine.
 
