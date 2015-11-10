@@ -29,11 +29,12 @@ class BreakOutsideLoop extends Analyzer\Analyzer {
     protected $phpVersion = '7.0-';
     
     public function analyze() {
+        $loops = '"Dowhile", "For", "Foreach", "While", "Switch"';
         // break (null)
         $this->atomIs('Break')
              ->outIs('LEVEL')
              ->atomIs('Void')
-             ->filter('it.in.loop(1){true}{it.object.atom in ["Dowhile", "For", "Foreach", "While", "Switch"]}.any() == false')
+             ->filter('it.in.loop(1){true}{it.object.atom in ['.$loops.']}.any() == false')
              ->back('first');
         $this->prepareQuery();
 
@@ -42,7 +43,7 @@ class BreakOutsideLoop extends Analyzer\Analyzer {
              ->outIs('LEVEL')
              ->atomIs('Integer')
              ->savePropertyAs('code', 'counter')
-             ->filter('it.in.loop(1){true}{ it.object.atom in ["Dowhile", "For", "Foreach", "While", "Switch"] }.count() < counter.toInteger()') // really count temps
+             ->filter('it.in.loop(1){true}{ it.object.atom in ['.$loops.'] }.count() < counter.toInteger()') // really count temps
              ->back('first');
         $this->prepareQuery();
 
@@ -50,7 +51,7 @@ class BreakOutsideLoop extends Analyzer\Analyzer {
         $this->atomIs('Continue')
              ->outIs('LEVEL')
              ->atomIs('Void')
-             ->filter('it.in.loop(1){true}{it.object.atom in ["Dowhile", "For", "Foreach", "While", "Switch"]}.any() == false')
+             ->filter('it.in.loop(1){true}{it.object.atom in ['.$loops.']}.any() == false')
              ->back('first');
         $this->prepareQuery();
 
@@ -59,7 +60,7 @@ class BreakOutsideLoop extends Analyzer\Analyzer {
              ->outIs('LEVEL')
              ->atomIs('Integer')
              ->savePropertyAs('code', 'counter')
-             ->filter('it.in.loop(1){true}{ it.object.atom in ["Dowhile", "For", "Foreach", "While", "Switch"] }.count() < counter.toInteger()') // really count temps
+             ->filter('it.in.loop(1){true}{ it.object.atom in ['.$loops.'] }.count() < counter.toInteger()') // really count temps
              ->back('first');
         $this->prepareQuery();
     }
