@@ -1,0 +1,6 @@
+<?php
+
+$_REQUEST  = $_GET + $_POST + $_COOKIE;
+
+echo $_SERVER['REQUEST_URI'] + $_SERVER['OTHER_VARIABLE'];
+?>

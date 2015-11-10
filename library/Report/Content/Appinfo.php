@@ -67,6 +67,14 @@ class Appinfo extends \Report\Content {
                             'composer autoload'          => 'Composer/Autoload',
                     ),
 
+                    'Web' => array(
+                            '$_GET, _POST...'            => 'Php/UseWeb',
+                    ),
+
+                    'CLI' => array(
+                            'argv, argc'                 => 'Php/UseCli',
+                    ),
+
                     // filled later
                     'Composer Packages' => array(),
 
