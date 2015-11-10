@@ -105,7 +105,7 @@ class Appinfo extends \Report\Content {
                             'Function dereferencing'     => 'Structures/FunctionSubscripting',
                             'Constant scalar expression' => 'Structures/ConstantScalarExpression',
                             '... usage'                  => 'Php/EllipsisUsage',
-                            'func_get_args'              => 'Php/funcGetArgs',
+                            'func_get_args'              => 'Functions/VariableArguments.php',
 
 
                             'Dynamic functioncall' => 'Functions/Dynamiccall',
