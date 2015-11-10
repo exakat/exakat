@@ -30,7 +30,7 @@ class VariableDollar extends TokenAuto {
     public function _check() {
         // $x or $$x or $$$ (Except for global)
         if (version_compare('7.0', PHP_VERSION) > 0) {
-            // PHP 7.0 and +
+            // PHP 5.6 and -
             $this->conditions = array(-1 => array('notToken'  => 'T_GLOBAL'),
                                        0 => array('token'     => static::$operators,
                                                   'atom'      => 'none'),
@@ -38,6 +38,7 @@ class VariableDollar extends TokenAuto {
                                        2 => array('filterOut' => array('T_OPEN_BRACKET', 'T_OPEN_CURLY')),
             );
         } else {
+            // PHP 7.0 and +
             $this->conditions = array( 0 => array('token'     => static::$operators,
                                                   'atom'      => 'none'),
                                        1 => array('atom'      => array('Variable', 'Array', 'Property'))
