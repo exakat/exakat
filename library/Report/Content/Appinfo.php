@@ -55,10 +55,6 @@ class Appinfo extends \Report\Content {
                             'Coalesce'                   => 'Php/Coalesce',
                             'Null Coalesce'              => 'Php/NullCoalesce',
 
-                            'Function dereferencing'     => 'Structures/FunctionSubscripting',
-                            'Constant scalar expression' => 'Structures/ConstantScalarExpression',
-                            '... usage'                  => 'Php/EllipsisUsage',
-
                             'File upload'                => 'Structures/FileUploadUsage',
                     ),
 
@@ -72,7 +68,7 @@ class Appinfo extends \Report\Content {
                     ),
 
                     'CLI' => array(
-                            'argv, argc'                 => 'Php/UseCli',
+                            '$argv, $argc'                 => 'Php/UseCli',
                     ),
 
                     // filled later
@@ -80,7 +76,6 @@ class Appinfo extends \Report\Content {
 
                     'Namespaces' => array(
                             'Namespaces'              => 'Namespaces/Namespacesnames',
-//                            'Vendor'                  => 'Namespaces/Vendor',
                             'Alias'                   => 'Namespaces/Alias',
                     ),
 
@@ -106,6 +101,12 @@ class Appinfo extends \Report\Content {
                             'Scalar Typehint'      => 'Php/ScalarTypehintUsage',
                             'Return Typehint'      => 'Php/ReturnTypehintUsage',
                             'Static variables'     => 'Variables/StaticVariables',
+
+                            'Function dereferencing'     => 'Structures/FunctionSubscripting',
+                            'Constant scalar expression' => 'Structures/ConstantScalarExpression',
+                            '... usage'                  => 'Php/EllipsisUsage',
+                            'func_get_args'              => 'Php/funcGetArgs',
+
 
                             'Dynamic functioncall' => 'Functions/Dynamiccall',
 
