@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array();
+$expected     = array('break 2',
+                      'break 1');
 
-$expected_not = array('break 1',
-                      'break 2');
+$expected_not = array();
 
 ?>
