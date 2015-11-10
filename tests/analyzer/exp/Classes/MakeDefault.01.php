@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('$this->withDefaultButRedefined',
-                      '$this->withoutDefault',
-                      '$this->undefinedProperty',
-                      '$this->arrayWithDefault[2]');
+$expected     = array('$this->withoutDefault');
 
 $expected_not = array('$this->resetInAnotherMethod',
                       '$withDefaultAndIntact',
-                      '$this->assignedWithVariable');
+                      '$this->assignedWithVariable',
+                      '$this->withDefaultButRedefined',
+                      '$this->undefinedProperty',
+                      '$this->arrayWithDefault[2]');
 
 ?>
