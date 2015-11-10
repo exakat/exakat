@@ -46,20 +46,6 @@ class UsedMethods extends Analyzer\Analyzer {
              ->back('used');
         $this->prepareQuery();
 
-         // call with call_user_func (???)
-        $staticMethodCallable = $this->query('g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.filter{ it.out("ARGUMENT").has("rank", 0).has("atom", "String").any() }.out("ARGUMENT").has("rank", 1).noDelimiter.unique()');
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->_as('used')
-             ->outIs('NAME')
-             ->codeIsNot($magicMethods)
-             ->savePropertyAs('code', 'method')
-             ->code($staticMethodCallable)
-             ->back('used');
-        $this->prepareQuery();
-        
         // Staticmethodcall
         $staticmethods = $this->query('g.idx("atoms")[["atom":"Staticmethodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
         $this->atomIs('Class')
@@ -92,7 +78,7 @@ g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.tra
 
 GREMLIN
 );
-        
+
         // method used statically in a callback with an array
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
