@@ -26,6 +26,8 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Coalesce extends Analyzer\Analyzer {
+    public $phpVersion = '7.0+';
+    
     public function analyze() {
         $this->atomIs('Ternary')
              ->outIs('THEN')
