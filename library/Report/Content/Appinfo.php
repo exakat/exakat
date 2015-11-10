@@ -88,8 +88,8 @@ class Appinfo extends \Report\Content {
 
                             'PHP arrays'              => 'Arrays/Phparrayindex',
 
-                            'Globals'                 => 'Php/SuperGlobalUsage',
-                            'PHP SuperGlobals'        => 'Structures/GlobalUsage',
+                            'Globals'                 => 'Php/GlobalUsage',
+                            'PHP SuperGlobals'        => 'Structures/SuperGlobalUsage',
                     ),
 
                     'Functions' => array(
