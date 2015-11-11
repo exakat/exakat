@@ -621,7 +621,6 @@ SQL
                 echo "'", $f2, "' is missing in the Directive class\n";
             }
         }
-        die();
     }
 
     public function checkDoc() {
@@ -667,6 +666,22 @@ SQL
             }
         }
     }
+
+    public function checkAppinfo() {
+        $php = file_get_contents('library/Report/Content/Appinfo.php');
+        preg_match_all("#'([A-Z][a-z0-9]+?/[A-Z][a-zA-Z0-9]+?)'#s", $php, $r);
+        foreach($r[1] as $class) {
+            if ($class == 'Extensions/Extskeleton') {
+                continue;
+            }
+
+            if (!file_exists("./library/Analyzer/$class.php")) {
+                print "./library/Analyzer/$class.php";
+                echo 'Appinfo is missing a class : ', $class, "\n";
+            }
+        }
+    }
+
 }
 
 function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $errcontext = array()) {
