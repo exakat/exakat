@@ -218,7 +218,7 @@ class Ifthen extends TokenAuto {
         
         $this->actions = array('transform'    => array(1 => 'DROP',
                                                        2 => 'DROP',
-                                                       3 => 'THEN',
+                                                       3 => 'ELSE',
                                                        4 => 'DROP'),
                                'cleanIndex'   => true,
                                'property'     => array('alternative' => true),
