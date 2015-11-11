@@ -51,7 +51,7 @@ GREMLIN
 );
         $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->code('$GLOBALS')
+             ->code('$GLOBALS', true)
              ->inIs('VARIABLE')
              ->outIs('INDEX')
              ->atomIs('String')
