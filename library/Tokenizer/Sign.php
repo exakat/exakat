@@ -31,6 +31,12 @@ class Sign extends TokenAuto {
     static public $atom = 'Sign';
 
     public function _check() {
+        if (version_compare('7.0', self::$phpExecVersion) > 0) {
+            $php7Precedence = array('T_YIELD');
+        } else {
+            $php7Precedence = array();
+        }
+        
         //  + -1  (special case for Integers)
         $this->conditions = array( -1 => array('notToken' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                                'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
@@ -38,6 +44,7 @@ class Sign extends TokenAuto {
                                                                                'T_CLOSE_BRACKET', 'T_SHELL_QUOTE',
                                                                                'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE',
                                                                                'T_DOLLAR', 'T_CLOSE_CURLY', 'T_FUNCTION'),
+                                                                          $php7Precedence,
                                                                           Magicconstant::$operators,
                                                                           Preplusplus::$operators,
                                                                           PostPlusPlus::$operators),
@@ -69,7 +76,9 @@ class Sign extends TokenAuto {
                                                                                'T_FUNCTION', 'T_INC', 'T_DEC',
                                                                                'T_QUOTE', 'T_QUOTE_CLOSE',
                                                                                'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR'),
-                                                                          Magicconstant::$operators, Bitshift::$operators),
+                                                                          $php7Precedence,
+                                                                          Magicconstant::$operators, 
+                                                                          Bitshift::$operators),
                                                'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
                                                                      'Multiplication', 'Cast', 'Integer', 'Float', 'Function',
                                                                      'Concatenation', 'Power')),

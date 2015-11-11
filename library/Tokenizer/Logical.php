@@ -44,8 +44,11 @@ class Logical extends TokenAuto {
                                  Preplusplus::$operators,    Not::$operators,
                                  _New::$operators,           Property::$operators,
                                  Staticproperty::$operators, Nsname::$operators,
-                                 Noscream::$operators       );
-
+                                 Noscream::$operators);
+        if (version_compare('7.0', self::$phpExecVersion) < 0) {
+            // Before PHP 7
+            $filterOut = array_merge($filterOut, _Yield::$operators);
+        }
 
         // boolean comparison (||, &&)
         $this->conditions = array( -2 => array('filterOut' => $filterOut),
