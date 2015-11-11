@@ -3,6 +3,164 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : LEFT
+      $i
+    Label : RIGHT
+      0
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      gen
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        try
+        Label : CODE
+          ;
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              =>
+              Label : VALUE
+                0
+              Label : KEY
+                "gen"
+        Label : CATCH
+          catch
+          Label : CODE
+            ;
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  "
+                  Label : CONTAINS
+                    Concatenation
+                    Label : CONCAT
+                      $e
+                    Label : CONCAT
+                      \n
+                    Label : CONCAT
+                      catch in gen()\n
+          Label : VARIABLE
+            $e
+          Label : CLASS
+            Exception
+      Label : ELEMENT
+        yield from
+        Label : YIELD
+          from
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              2
+      Label : ELEMENT
+        try
+        Label : CODE
+          ;
+          Label : ELEMENT
+            yield from
+            Label : YIELD
+              from
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  0
+        Label : CATCH
+          catch
+          Label : CODE
+            ;
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  "
+                  Label : CONTAINS
+                    Concatenation
+                    Label : CONCAT
+                      catch in gen()\n
+                    Label : CONCAT
+                      $e
+                    Label : CONCAT
+                      \n
+          Label : VARIABLE
+            $e
+          Label : CLASS
+            Exception
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $off
+    Label : NAME
+      from
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        try
+        Label : CODE
+          ;
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              +
+              Label : LEFT
+                $off
+              Label : RIGHT
+                1
+        Label : CATCH
+          catch
+          Label : CODE
+            ;
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  "
+                  Label : CONTAINS
+                    Concatenation
+                    Label : CONCAT
+                      catch in from()\n
+                    Label : CONCAT
+                      $e
+                    Label : CONCAT
+                      \n
+          Label : VARIABLE
+            $e
+          Label : CLASS
+            Exception
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          +
+          Label : LEFT
+            $off
+          Label : RIGHT
+            2
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          $gen
+        Label : METHOD
+          valid
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+  Label : ELEMENT
     try
     Label : CODE
       ;
@@ -26,14 +184,14 @@ Label : CODE
                       void
         Label : INIT
           =
+          Label : LEFT
+            $gen
           Label : RIGHT
             gen
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 void
-          Label : LEFT
-            $gen
         Label : FINAL
           ->
           Label : OBJECT
@@ -66,8 +224,6 @@ Label : CODE
                           $i
     Label : CATCH
       catch
-      Label : VARIABLE
-        $e
       Label : CODE
         ;
         Label : ELEMENT
@@ -81,166 +237,10 @@ Label : CODE
                 Label : CONCAT
                   catch in {main}\n
                 Label : CONCAT
-                  $e
-                Label : CONCAT
                   \n
+                Label : CONCAT
+                  $e
+      Label : VARIABLE
+        $e
       Label : CLASS
         Exception
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $gen
-        Label : METHOD
-          valid
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : NAME
-      gen
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        yield from
-        Label : YIELD
-          from
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              2
-      Label : ELEMENT
-        try
-        Label : CODE
-          ;
-          Label : ELEMENT
-            yield from
-            Label : YIELD
-              from
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  0
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
-          Label : CODE
-            ;
-            Label : ELEMENT
-              print
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  "
-                  Label : CONTAINS
-                    Concatenation
-                    Label : CONCAT
-                      catch in gen()\n
-                    Label : CONCAT
-                      $e
-                    Label : CONCAT
-                      \n
-          Label : CLASS
-            Exception
-      Label : ELEMENT
-        try
-        Label : CODE
-          ;
-          Label : ELEMENT
-            yield
-            Label : YIELD
-              =>
-              Label : KEY
-                "gen"
-              Label : VALUE
-                0
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
-          Label : CODE
-            ;
-            Label : ELEMENT
-              print
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  "
-                  Label : CONTAINS
-                    Concatenation
-                    Label : CONCAT
-                      catch in gen()\n
-                    Label : CONCAT
-                      $e
-                    Label : CONCAT
-                      \n
-          Label : CLASS
-            Exception
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      0
-    Label : LEFT
-      $i
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $off
-    Label : NAME
-      from
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        yield
-        Label : YIELD
-          +
-          Label : RIGHT
-            2
-          Label : LEFT
-            $off
-      Label : ELEMENT
-        try
-        Label : CODE
-          ;
-          Label : ELEMENT
-            yield
-            Label : YIELD
-              +
-              Label : RIGHT
-                1
-              Label : LEFT
-                $off
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
-          Label : CODE
-            ;
-            Label : ELEMENT
-              print
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  "
-                  Label : CONTAINS
-                    Concatenation
-                    Label : CONCAT
-                      catch in from()\n
-                    Label : CONCAT
-                      $e
-                    Label : CONCAT
-                      \n
-          Label : CLASS
-            Exception

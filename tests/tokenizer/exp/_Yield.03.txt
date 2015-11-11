@@ -28,14 +28,6 @@ Label : CODE
       ;
       Label : ELEMENT
         foreach
-        Label : VALUE
-          $i
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            yield
-            Label : YIELD
-              void
         Label : SOURCE
           range
           Label : ARGUMENTS
@@ -44,3 +36,11 @@ Label : CODE
               3
             Label : ARGUMENT
               1
+        Label : VALUE
+          $i
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              void
