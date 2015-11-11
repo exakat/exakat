@@ -36,7 +36,7 @@ class RegisterGlobals extends Analyzer\Analyzer {
         // With a foreach
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->code($superGlobals)
+             ->code($superGlobals, true)
              ->inIs('SOURCE')
              ->outIs('VALUE')
              ->outIs('KEY')
@@ -57,7 +57,7 @@ class RegisterGlobals extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
-             ->code($superGlobals)
+             ->code($superGlobals, true)
              ->inIs('ARGUMENT')
              ->outIs('ARGUMENT')
              ->is('rank', 1)
@@ -69,10 +69,10 @@ class RegisterGlobals extends Analyzer\Analyzer {
         // With extract and default option (EXTR_OVERWRITE)
         $this->atomFunctionIs('\\extract')
              ->outIs('ARGUMENTS')
-             ->noChildWithRank(1)
+             ->noChildWithRank('ARGUMENT', 1)
              ->outIs('ARGUMENT')
              ->is('rank', 0)
-             ->code($superGlobals)
+             ->code($superGlobals, true)
              ->back('first');
         $this->prepareQuery();
 
