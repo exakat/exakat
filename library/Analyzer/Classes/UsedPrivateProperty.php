@@ -117,7 +117,6 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->samePropertyAs('code', 'x')
              ->back('ppp');
         $this->prepareQuery();
-
     }
 }
 ?>
