@@ -96,7 +96,15 @@ g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
         } else if (it.code.substring(0, 2) == '0X') { // hexadecimal
             it.setProperty('intval', Integer.parseInt(it.code.substring(2), 16).toInteger());
         } else if (it.code.substring(0, 1) == '0') { // octal
-            it.setProperty('intval', Integer.parseInt(it.code.substring(1), 8).toInteger());
+            // Calculating PHP 5 style. In case of problem (presence of 9), PHP 7 will just stop.
+            nine = it.code.indexOf('9');
+            if (nine == -1) {
+                it.setProperty('intval', Integer.parseInt(it.code.substring(1), 8).toInteger());
+            } else if (nine == 1) {
+                it.setProperty('intval', 0);
+            } else {
+                it.setProperty('intval', Integer.parseInt(it.code.substring(1, nine), 8).toInteger());
+            }
         } else {
             it.setProperty('intval', new BigInteger(it.code).toLong());
         }

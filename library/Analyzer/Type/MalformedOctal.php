@@ -26,6 +26,8 @@ namespace Analyzer\Type;
 use Analyzer;
 
 class MalformedOctal extends Analyzer\Analyzer {
+    public $phpVersion = '7.0-';
+    
     public function analyze() {
         // malformed Octals
         $this->atomIs('Integer')
