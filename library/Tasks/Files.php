@@ -266,6 +266,29 @@ class Files extends Tasks {
         }
         $this->datastore->addRow('hash', $composerInfo);
         
+        // check for special files
+        display('Check config files');
+        $this->datastore->cleanTable('configFiles');
+        $files = glob($config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
+        $files = array_map(function ($x) { return basename($x); }, $files);
+        
+        $services = json_decode(file_get_contents($config->projects_root.'/data/serviceConfig.json'));
+
+        $configFiles = array();
+        foreach($services as $name => $service) {
+            $diff = array_intersect((array) $service->file, $files);
+            if (!empty($diff)) {
+                foreach($diff as $d) {
+                    $configFiles[] = array('file'     => $d, 
+                                           'name'     => $name, 
+                                           'homepage' => $service->homepage);
+                }
+            }
+        }
+        $this->datastore->addRow('configFiles', $configFiles);
+        print_r($configFiles);
+        // Composer is check previously
+        
         display('Done');
         
         if ($config->json) {

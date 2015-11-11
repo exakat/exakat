@@ -177,10 +177,10 @@ class Premier extends Report {
             foreach($analyzes2 as $analyzer) {
                 if ($analyzer->hasResults()) {
                     $this->createLevel2($analyzer->getDescription()->getName());
-                    if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
+                    if ($analyzer instanceof \Analyzer\Php\Incompilable) {
                         $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textLead');
                         $this->addContent('TableForVersions', $analyzer);
-                    } elseif (get_class($analyzer) == "Analyzer\\Php\\ShortOpenTagRequired") {
+                    } elseif ($analyzer instanceof \Analyzer\Php\ShortOpenTagRequired) {
                         $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textLead');
                         $this->addContent('SimpleTable', $analyzer, 'oneColumn');
                     } else {
@@ -191,7 +191,6 @@ class Premier extends Report {
                         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
                             $this->addContent('Text', 'clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />', 'textLead');
                         }
-
 
                         $this->addContent('TextLead', $description, 'textLead');
                         $themelist = new \Report\Content\ThemeList($list, $this->dashboards);
@@ -440,6 +439,15 @@ TEXT
 );
             $this->addContent('Horizontal', $analyzer);
         }
+
+        // List of external services used 
+        $analyzer = \Analyzer\Analyzer::getInstance('Files/Services');
+        if ($analyzer->hasResults()) {
+            $this->createLevel2($analyzer->getDescription()->getName());
+            $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textLead');
+            $this->addContent('ExternalServices', $analyzer);
+        }
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 /// Custom analyzers

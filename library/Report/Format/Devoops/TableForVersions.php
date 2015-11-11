@@ -34,6 +34,7 @@ class TableForVersions extends \Report\Format\Devoops {
 										<thead>
 											<tr>
 												<th>File</th>
+												<th>PHP 7.1</th>
 												<th>PHP 7.0</th>
 												<th>PHP 5.6</th>
 												<th>PHP 5.5</th>
@@ -49,6 +50,7 @@ HTML;
         foreach($data as $d) {
             if (!isset($rows[$d['file']])) {
                 $rows[$d['file']] = array('file' => $d['file'],
+                                'php71' => '<button class="btn btn-app btn-success .btn-circle"><i class="fa fa-thumbs-o-up"></i></button>',
                                 'php70' => '<button class="btn btn-app btn-success .btn-circle"><i class="fa fa-thumbs-o-up"></i></button>',
                                 'php56' => '<button class="btn btn-app btn-success .btn-circle"><i class="fa fa-thumbs-o-up"></i></button>',
                                 'php55' => '<button class="btn btn-app btn-success .btn-circle"><i class="fa fa-thumbs-o-up"></i></i></button>',
@@ -63,6 +65,7 @@ HTML;
             $row = <<<HTML
 											<tr>
 												<td>{$d['file']}</td>
+												<td>{$d['php71']}</td>
 												<td>{$d['php70']}</td>
 												<td>{$d['php56']}</td>
 												<td>{$d['php55']}</td>

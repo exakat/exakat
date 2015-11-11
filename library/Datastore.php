@@ -293,6 +293,17 @@ CREATE TABLE composer (
 SQLITE;
                 break;
 
+            case 'configFiles' : 
+                $createTable = <<<SQLITE
+CREATE TABLE configFiles (
+  id INTEGER PRIMARY KEY,
+  file TEXT UNIQUE,
+  name TEXT UNIQUE,
+  homepage TEXT UNIQUE
+);
+SQLITE;
+                break;
+
             default : 
                 throw new Exceptions\NoStructureForTable($table);
         }
