@@ -29,11 +29,8 @@ class Appinfo extends \Report\Content {
                     'PHP' => array(
                             'Short tags'                 => 'Structures/ShortTags',
                             'Echo tags <?='              => 'Php/EchoTagUsage',
-//                            'Closed scripts'  => 'Php/ClosedTags',
                             'Incompilable'               => 'Php/Incompilable',
                             
-//                            'Iffectations'   => 'Structures/Iffectation',
-
                             '@ operator'                 => 'Structures/Noscream',
                             'Alternative syntax'         => 'Php/AlternativeSyntax',
                             'Magic constants'            => 'Constants/MagicConstantUsage',
@@ -88,8 +85,8 @@ class Appinfo extends \Report\Content {
 
                             'PHP arrays'              => 'Arrays/Phparrayindex',
 
-                            'Globals'                 => 'Php/GlobalUsage',
-                            'PHP SuperGlobals'        => 'Structures/SuperGlobalUsage',
+                            'Globals'                 => 'Structures/GlobalUsage',
+                            'PHP SuperGlobals'        => 'Php/SuperGlobalUsage',
                     ),
 
                     'Functions' => array(
@@ -105,8 +102,7 @@ class Appinfo extends \Report\Content {
                             'Function dereferencing'     => 'Structures/FunctionSubscripting',
                             'Constant scalar expression' => 'Structures/ConstantScalarExpression',
                             '... usage'                  => 'Php/EllipsisUsage',
-                            'func_get_args'              => 'Functions/VariableArguments.php',
-
+                            'func_get_args'              => 'Functions/VariableArguments',
 
                             'Dynamic functioncall' => 'Functions/Dynamiccall',
 
@@ -164,7 +160,7 @@ class Appinfo extends \Report\Content {
                     
                     'Errors' => array(
                             'Throw exceptions' => 'Php/ThrowUsage',
-                            'Try/Catch'        => 'Php/TryCatchUsage',
+                            'Try...Catch'      => 'Php/TryCatchUsage',
                             'Multiple catch'   => 'Structures/MultipleCatch',
                             'Finally'          => 'Structures/TryFinally',
                             'Trigger error'    => 'Php/TriggerErrorUsage',
