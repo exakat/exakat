@@ -126,6 +126,7 @@ class Token {
                                                 'T_ENDIF',
                                                 'T_ENDDECLARE');
     protected $phpVersion = 'Any';
+    protected static $phpExecVersion = PHP_VERSION;
 
     static public $instructionEnding = array();
     
@@ -146,6 +147,9 @@ class Token {
                                                _Instanceof::$operators,
                                                Ternary::$operators,
                                                array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS')); //'T_ELSE', ,  'T_ELSEIF'
+        
+        $config = \Config::factory();
+        self::$phpExecVersion = $config->phpversion;
     }
 
     public static function getTokenizers($version = null) {
