@@ -52,10 +52,9 @@ class ArgumentsNoParenthesis extends Arguments {
                                                'token'      => 'T_ECHO'),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Arguments'),
-                                    2 => array('token'      => array_merge(static::$alternativeEnding,
-                                                               array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF', 'T_ENDSWITCH', 'T_ENDFOR',
+                                    2 => array('token'      => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF', 'T_ENDSWITCH', 'T_ENDFOR',
                                                                      'T_ENDFOREACH', 'T_CLOSE_PARENTHESIS', 'T_QUESTION', 'T_COLON',
-                                                                     'T_ELSEIF', 'T_ECHO', 'T_AS', 'T_INLINE_HTML', 'T_IF', 'T_VOID')))
+                                                                     'T_ELSEIF', 'T_ECHO', 'T_AS', 'T_INLINE_HTML', 'T_IF', 'T_VOID'))
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
@@ -66,8 +65,22 @@ class ArgumentsNoParenthesis extends Arguments {
         // @note exit; no parenthesis, no argument.
         $this->conditions = array( -1 => array('notToken' => 'T_INSTANCEOF'),
                                     0 => array('atom'     => 'none',
-                                               'token'    => array('T_EXIT', 'T_STATIC')),
-                                    1 => array('token'    => array('T_SEMICOLON', 'T_CLOSE_TAG'))
+                                               'token'    => array('T_EXIT', 'T_STATIC')), 
+                                    1 => array('token'    => array_merge(Preplusplus::$operators,
+                                                                         Postplusplus::$operators,
+                                                                         Assignation::$operators,
+                                                                         Addition::$operators,
+                                                                         Multiplication::$operators,
+                                                                         Preplusplus::$operators,
+                                                                         Concatenation::$operators,
+                                                                         Comparison::$operators,
+                                                                         Bitshift::$operators,
+                                                                         Logical::$operators,
+                                                                         Property::$operators,
+                                                                         Staticproperty::$operators,
+                                                                         _Instanceof::$operators,
+                                                                         Ternary::$operators,
+                                                                         array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG')))
                                   );
         
         $this->actions = array('addEdge'     => array(0 => array('Arguments' => 'ARGUMENT')),
