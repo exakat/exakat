@@ -77,7 +77,7 @@ class Sign extends TokenAuto {
                                                                                'T_QUOTE', 'T_QUOTE_CLOSE',
                                                                                'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR'),
                                                                           $php7Precedence,
-                                                                          Magicconstant::$operators, 
+                                                                          Magicconstant::$operators,
                                                                           Bitshift::$operators),
                                                'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
                                                                      'Multiplication', 'Cast', 'Integer', 'Float', 'Function',

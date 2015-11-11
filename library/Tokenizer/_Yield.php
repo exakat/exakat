@@ -66,7 +66,7 @@ class _Yield extends TokenAuto {
                                                  'atom'  => 'none'),
                                       1 => array('atom'  => 'yes'),
                                       2 => array('token' => array_merge( array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG'),
-                                                                         Addition::$operators, 
+                                                                         Addition::$operators,
                                                                          Logical::$operators)
                                                 )
                                       );

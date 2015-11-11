@@ -62,7 +62,7 @@ class RegisterGlobals extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 1)
              // Lazy way to check for EXTR_IF_EXISTS, \EXTR_IF_EXISTS and | EXTR_REFS
-             ->regex('fullcode', '(EXTR_OVERWRITE|EXTR_IF_EXISTS)') 
+             ->regex('fullcode', '(EXTR_OVERWRITE|EXTR_IF_EXISTS)')
              ->back('first');
         $this->prepareQuery();
 

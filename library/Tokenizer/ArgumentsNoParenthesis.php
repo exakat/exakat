@@ -65,7 +65,7 @@ class ArgumentsNoParenthesis extends Arguments {
         // @note exit; no parenthesis, no argument.
         $this->conditions = array( -1 => array('notToken' => 'T_INSTANCEOF'),
                                     0 => array('atom'     => 'none',
-                                               'token'    => array('T_EXIT', 'T_STATIC')), 
+                                               'token'    => array('T_EXIT', 'T_STATIC')),
                                     1 => array('token'    => array_merge(Preplusplus::$operators,
                                                                          Postplusplus::$operators,
                                                                          Assignation::$operators,
