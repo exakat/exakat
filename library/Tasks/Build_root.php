@@ -89,7 +89,11 @@ g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
             it.setProperty('intval', Integer.parseInt(it.code));
         } else if (it.code.substring(0, 2) == '0b') { // binary
             it.setProperty('intval', Integer.parseInt(it.code.substring(2), 2).toInteger());
+        } else if (it.code.substring(0, 2) == '0B') { // binary
+            it.setProperty('intval', Integer.parseInt(it.code.substring(2), 2).toInteger());
         } else if (it.code.substring(0, 2) == '0x') { // hexadecimal
+            it.setProperty('intval', Integer.parseInt(it.code.substring(2), 16).toInteger());
+        } else if (it.code.substring(0, 2) == '0X') { // hexadecimal
             it.setProperty('intval', Integer.parseInt(it.code.substring(2), 16).toInteger());
         } else if (it.code.substring(0, 1) == '0') { // octal
             it.setProperty('intval', Integer.parseInt(it.code.substring(1), 8).toInteger());
