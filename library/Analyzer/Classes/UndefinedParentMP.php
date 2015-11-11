@@ -87,16 +87,18 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code('parent')
              ->hasClassDefinition()
-             ->back('first')
+             ->inIs('CLASS')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             // checking one of the grand-parents is not defining this property
 
+             // checking one of the grand-parents is not defining this property
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop("extension"){true}{it.object.atom == "Class"}
-                              .out("BLOCK").out("ELEMENT").has("atom", "Visibility").filter{ it.out("PRIVATE").any() == false}.out("DEFINE").has("code", name)
+                              .out("BLOCK").out("ELEMENT").has("atom", "Visibility").filter{ it.out("PRIVATE").any() == false}.out("DEFINE")
+                              .transform{ if (it.out("LEFT").any()) { it.out("LEFT").next(); } else { it; }} // Case of definition
+                              .has("code", name)
                               .any() == false}')
 
                 // checking parent is not a composer class
