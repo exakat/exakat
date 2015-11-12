@@ -31,6 +31,7 @@ class UsedUse extends Analyzer\Analyzer {
 // case of use without alias nor namespacing (use A), single or multiple declaration
 //////////////////////////////////////////////////////////////////////////////////////////
     public function analyze() {
+
     // case of simple subuse in a new with alias :  use a\b; new b\c()
         $this->atomIs('Use')
              ->outIs('USE')
@@ -322,6 +323,47 @@ class UsedUse extends Analyzer\Analyzer {
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Instanceof')
              ->outIs('CLASS')
+             ->samePropertyAs('fullcode', 'thealias')
+             ->raw('transform{ result}');
+        $this->prepareQuery();
+
+        // alias used in a class use (for traits)
+        // subcase for the original path
+        $this->atomIs('Use')
+             ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->atomIs('As')
+             ->_as('result')
+
+             ->raw('sideEffect{ thealias = it;}')
+             ->inIs('USE')
+             ->inIs('ELEMENT')
+             
+             ->inIs(array('CODE', 'BLOCK'))
+             ->atomInside('Class')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Use')
+             ->outIs('USE')
+             ->raw('filter{ it.fullcode.toLowerCase() == thealias.alias.toLowerCase()}')
+             ->raw('transform{ thealias}');
+        $this->prepareQuery();
+        
+        $this->atomIs('Use')
+             ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->atomIsNot('As')
+             ->_as('result')
+             ->raw('sideEffect{ result = it;}')
+             ->savePropertyAs('alias', 'thealias')
+             ->inIs('USE')
+             ->inIs('ELEMENT')
+             ->inIs(array('CODE', 'BLOCK'))
+             ->atomInside('Class')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Use')
+             ->outIs('USE')
              ->samePropertyAs('fullcode', 'thealias')
              ->raw('transform{ result}');
         $this->prepareQuery();
