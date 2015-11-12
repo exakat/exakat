@@ -79,8 +79,7 @@ class RegisterGlobals extends Analyzer\Analyzer {
         // With parse_url and no final argument
         $this->atomFunctionIs('\\parse_str')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->noChildWithRank(1)
+             ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
 
