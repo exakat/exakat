@@ -8,11 +8,12 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Traits_UsedTrait extends Analyzer {
-    /* 4 methods */
+    /* 5 methods */
 
     public function testTraits_UsedTrait01()  { $this->generic_test('Traits/UsedTrait.01'); }
     public function testTraits_UsedTrait02()  { $this->generic_test('Traits/UsedTrait.02'); }
     public function testTraits_UsedTrait03()  { $this->generic_test('Traits/UsedTrait.03'); }
     public function testTraits_UsedTrait04()  { $this->generic_test('Traits/UsedTrait.04'); }
+    public function testTraits_UsedTrait05()  { $this->generic_test('Traits/UsedTrait.05'); }
 }
 ?>
