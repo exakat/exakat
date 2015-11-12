@@ -27,14 +27,16 @@ use Analyzer;
 
 class ErrorReportingWithInteger extends Analyzer\Analyzer {
     public function analyze() {
+        $allowedIntegers = array('-1', 0);
+        
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->code('error_reporting', false)
+             ->fullnspath('\\error_reporting')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Integer')
-             ->codeIsNot('-1')
+             ->codeIsNot($allowedIntegers)
              ->back('first');
         $this->prepareQuery();
 
@@ -51,7 +53,7 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
              ->rankIs('ARGUMENT', 1)
              ->atomIs('Integer')
              ->codeIsNot(0)
-             ->codeIsNot('-1')
+             ->codeIsNot($allowedIntegers)
              ->back('first');
         $this->prepareQuery();
     }
