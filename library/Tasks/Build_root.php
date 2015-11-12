@@ -88,22 +88,22 @@ g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
         if (it.code.length() == 1) { // number
             it.setProperty('intval', Integer.parseInt(it.code));
         } else if (it.code.substring(0, 2) == '0b') { // binary
-            it.setProperty('intval', Integer.parseInt(it.code.substring(2), 2).toInteger());
+            it.setProperty('intval', new BigInteger(it.code.substring(2), 2).toLong());
         } else if (it.code.substring(0, 2) == '0B') { // binary
-            it.setProperty('intval', Integer.parseInt(it.code.substring(2), 2).toInteger());
+            it.setProperty('intval', new BigInteger(it.code.substring(2), 2).toLong());
         } else if (it.code.substring(0, 2) == '0x') { // hexadecimal
-            it.setProperty('intval', Integer.parseInt(it.code.substring(2), 16).toInteger());
+            it.setProperty('intval', new BigInteger(it.code.substring(2), 16).toLong());
         } else if (it.code.substring(0, 2) == '0X') { // hexadecimal
-            it.setProperty('intval', Integer.parseInt(it.code.substring(2), 16).toInteger());
+            it.setProperty('intval', new BigInteger(it.code.substring(2), 16).toLong());
         } else if (it.code.substring(0, 1) == '0') { // octal
             // Calculating PHP 5 style. In case of problem (presence of 9), PHP 7 will just stop.
             nine = it.code.indexOf('9');
             if (nine == -1) {
-                it.setProperty('intval', Integer.parseInt(it.code.substring(1), 8).toInteger());
+                it.setProperty('intval', new BigInteger(it.code.substring(1), 8).toLong());
             } else if (nine == 1) {
                 it.setProperty('intval', 0);
             } else {
-                it.setProperty('intval', Integer.parseInt(it.code.substring(1, nine), 8).toInteger());
+                it.setProperty('intval', new BigInteger(it.code.substring(1, nine), 8).toLong());
             }
         } else {
             it.setProperty('intval', new BigInteger(it.code).toLong());

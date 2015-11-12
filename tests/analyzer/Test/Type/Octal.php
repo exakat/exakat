@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Type_Octal extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testType_Octal01()  { $this->generic_test('Type_Octal.01'); }
     public function testType_Octal02()  { $this->generic_test('Type_Octal.02'); }
+    public function testType_Octal03()  { $this->generic_test('Type/Octal.03'); }
 }
 ?>
