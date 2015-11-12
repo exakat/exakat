@@ -25,13 +25,14 @@ namespace Analyzer\Traits;
 
 use Analyzer;
 
-class UsedTrait extends Analyzer\Analyzer {
-    public function analyze() {
-        $uses = $this->query('g.idx("atoms")[["atom":"Class"]].out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE").fullnspath');
+class UnusedTrait extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Traits/UsedTrait');
+    }
 
+    public function analyze() {
         $this->atomIs('Trait')
-             ->fullnspath($uses)
-             ->back('first');
+             ->analyzerIsNot('Traits/UsedTrait');
         $this->prepareQuery();
     }
 }
