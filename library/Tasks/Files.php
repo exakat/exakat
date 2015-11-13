@@ -279,8 +279,8 @@ class Files extends Tasks {
             $diff = array_intersect((array) $service->file, $files);
             if (!empty($diff)) {
                 foreach($diff as $d) {
-                    $configFiles[] = array('file'     => $d, 
-                                           'name'     => $name, 
+                    $configFiles[] = array('file'     => $d,
+                                           'name'     => $name,
                                            'homepage' => $service->homepage);
                 }
             }
@@ -288,7 +288,7 @@ class Files extends Tasks {
         $this->datastore->addRow('configFiles', $configFiles);
         print_r($configFiles);
         // Composer is check previously
-        
+
         display('Done');
         
         if ($config->json) {
