@@ -53,7 +53,7 @@ class _As extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'AS',
-                                                       -1 => 'SUBNAME'),
+                                                       -1 => 'PPP'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,
                                'rank'         => array(-1 => '0'));
