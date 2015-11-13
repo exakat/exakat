@@ -27,12 +27,9 @@ use Analyzer;
 
 class MultipleDefinedCase extends Analyzer\Analyzer {
     public function analyze() {
+        // Check that fullcode is the same or not
         $this->atomIs('Switch')
-             ->raw("aggregate().findAll{ m = [:]; it.out('CASES').out('ELEMENT').has('atom', 'Case').out('CASE').groupCount(m){it.fullcode}.cap.next().findAll{it.value > 1}.size() > 0}");
-        $this->prepareQuery();
-
-        $this->atomIs('Switch')
-             ->raw("aggregate().findAll{ m = [:]; it.out('CASES').out('ELEMENT').has('atom', 'Case').out('CASE').groupCount(m){it.atom}.cap.next().size() > 1}");
+             ->raw('aggregate().findAll{ m = [:]; it.out("CASES").out("ELEMENT").has("atom", "Case").out("CASE").groupCount(m){it.fullcode}.cap.next().findAll{it.value > 1}.size() > 0}');
         $this->prepareQuery();
     }
 }
