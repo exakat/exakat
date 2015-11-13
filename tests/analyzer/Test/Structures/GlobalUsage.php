@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_GlobalUsage extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testStructures_GlobalUsage01()  { $this->generic_test('Structures_GlobalUsage.01'); }
+    public function testStructures_GlobalUsage02()  { $this->generic_test('Structures/GlobalUsage.02'); }
 }
 ?>

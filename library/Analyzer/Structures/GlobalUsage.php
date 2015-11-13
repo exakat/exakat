@@ -42,13 +42,13 @@ class GlobalUsage extends Analyzer\Analyzer {
         // $GLOBALS as a whole
         $this->atomIs('Variable')
              ->hasNoIn('VARIABLE')
-             ->code('$GLOBALS');
+             ->code('$GLOBALS', true);
         $this->prepareQuery();
 
         // $GLOBALS as a whole
         $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->code('$GLOBALS')
+             ->code('$GLOBALS', true)
              ->inIs('VARIABLE')
              ->outIs('INDEX');
         $this->prepareQuery();
