@@ -328,7 +328,7 @@ function cypher_query($query, $params = []) {
 
     $ch = curl_init();
 
-    static $neo4j_host, $neo4j_port, $neo4j_auth;
+    static $neo4j_host, $neo4j_auth;
     if (!isset($neo4j_host)) {  
         $config = \Config::factory();
         $neo4j_host = $config->neo4j_host.':'.$config->neo4j_port;

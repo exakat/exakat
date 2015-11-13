@@ -64,7 +64,6 @@ $text .= <<<HTML
 HTML;
         foreach($data as $k => $v) {
             if ($v[0] == 'Total') { 
-                $bottom = $v;
                 continue; 
             }
             // below 0 are errors
