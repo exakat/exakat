@@ -27,11 +27,11 @@ use Analyzer;
 
 class UsedUse extends Analyzer\Analyzer {
 
+    public function analyze() {
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // case of use without alias nor namespacing (use A), single or multiple declaration
 //////////////////////////////////////////////////////////////////////////////////////////
-    public function analyze() {
-
     // case of simple subuse in a new with alias :  use a\b; new b\c()
         $this->atomIs('Use')
              ->outIs('USE')
@@ -106,7 +106,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->analyzerIsNot('self')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
-             ->savePropertyAs('code', 'used')
+             ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
@@ -122,7 +122,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->analyzerIsNot('self')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
-             ->savePropertyAs('code', 'used')
+             ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
@@ -138,7 +138,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->analyzerIsNot('self')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
-             ->savePropertyAs('code', 'used')
+             ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
