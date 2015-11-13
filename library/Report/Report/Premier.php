@@ -128,7 +128,7 @@ class Premier extends Report {
             // No Compatibility with PHP 5.2 is done. Just ignored.
             if ($code == 52) { continue; }
 
-            $version = substr($code, 0, 1).'.'.substr($code, 1);
+            $version = $code[0].'.'.substr($code, 1);
             $this->createLevel2('Compatibility '.$version);
             $this->addContent('Text', 
             'This is a summary of the compatibility of the code with PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.

@@ -81,7 +81,7 @@ class Spip extends Report {
 
         $config = \Config::factory();
         foreach($config->other_php_versions as $code) {
-            $version = substr($code, 0, 1).'.'.substr($code, 1);
+            $version = $code[0].'.'.substr($code, 1);
             $this->createLevel2('Compatibility '.$version);
             $this->addContent('Text', 'This is a summary of the compatibility of the code with PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
             $this->addContent('Compatibility', 'Compatibility'.$code);
