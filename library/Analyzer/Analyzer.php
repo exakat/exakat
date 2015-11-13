@@ -1517,6 +1517,18 @@ GREMLIN
         return $this;
     }
 
+    public function hasTryCatch() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Try"}{it.object.atom == "Try"}.any()}');
+        
+        return $this;
+    }
+
+    public function hasNotTryCatch() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Try"}{it.object.atom == "Try"}.any() == false}');
+        
+        return $this;
+    }
+
     public function goToMethodDefinition() {
         // starting with a staticmethodcall , no support for static, self, parent
         $this->addMethod('sideEffect{methodname = it.out("METHOD").next().code.toLowerCase();}
