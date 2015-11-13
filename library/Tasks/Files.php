@@ -272,7 +272,7 @@ class Files extends Tasks {
         $files = glob($config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
         $files = array_map(function ($x) { return basename($x); }, $files);
         
-        $services = json_decode(file_get_contents($config->projects_root.'/data/serviceConfig.json'));
+        $services = json_decode(file_get_contents($config->dir_root.'/data/serviceConfig.json'));
 
         $configFiles = array();
         foreach($services as $name => $service) {
