@@ -194,12 +194,6 @@ LICENCE;
              ->run();
     }
     
-    private function addFiles($packer, $files) {
-        foreach ($files as $file) {
-            $packer->addFile($file->getRelativePathname(), $file->getRealPath());
-        }
-    }
-
     public function checkAll() {
         echo "Check licence\n";
         $this->checkLicence();
