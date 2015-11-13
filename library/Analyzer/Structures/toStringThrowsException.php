@@ -38,6 +38,7 @@ class toStringThrowsException extends Analyzer\Analyzer {
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Throw')
+             ->hasNotTryCatch()
              ->back('first');
         $this->prepareQuery();
     }

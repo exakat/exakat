@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_toStringThrowsException extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testStructures_toStringThrowsException01()  { $this->generic_test('Structures_toStringThrowsException.01'); }
+    public function testStructures_toStringThrowsException02()  { $this->generic_test('Structures/toStringThrowsException.02'); }
 }
 ?>
