@@ -128,6 +128,21 @@ class Doctor extends Tasks {
             } else {
                 $stats['neo4j']['gremlinPlugin'] = 'Not found. Make sure that "org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp" is in the conf/neo4j-server.property.';
             }
+
+            $gremlinPlugin = glob('neo4j/plugins/*/gremlin-java-*-SNAPSHOT.jar');
+            if (empty($gremlinPlugin)) {
+                $stats['neo4j']['gremlinJar'] = 'gremlin-java-2.7.0-SNAPSHOT.jar coudln\'t be found in the neo4j/plugins/* folders. Make sure it was installed. ';
+            } elseif (count($gremlinPlugin) > 1) {
+                $stats['neo4j']['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin. There should only be one gremlin-java-2.7.0-SNAPSHOT.jar. ';
+            } else {
+                $stats['neo4j']['gremlinJar'] = trim(array_pop($gremlinPlugin));
+            }
+
+            $stats['neo4j']['scriptFolder'] = file_exists($config->projects_root.'/neo4j/scripts/') ? 'Yes' : 'No';
+            if ($stats['neo4j']['scriptFolder'] == 'No') {
+                mkdir($config->projects_root.'/neo4j/scripts/', 0755);
+                $stats['neo4j']['scriptFolder'] = file_exists($config->projects_root.'/neo4j/scripts/') ? 'Yes' : 'No';
+            }
             
             $pidPath = $config->neo4j_folder.'/conf/neo4j-service.pid';
             if (file_exists($pidPath)) {
@@ -233,14 +248,15 @@ INI;
             }
         }
 
-        $stats['folders']['log'] = file_exists($config->projects_root.'/log/') ? 'Yes' : 'No';
-        if ($stats['folders']['log'] == 'No') {
-            mkdir($config->projects_root.'/log/', 0755);
-            $stats['folders']['log'] = file_exists($config->projects_root.'/projects/log/') ? 'Yes' : 'No';
+        $stats['folders']['progress'] = file_exists($config->projects_root.'/progress/') ? 'Yes' : 'No';
+        if ($stats['folders']['progress'] == 'No') {
+            mkdir($config->projects_root.'/progress/', 0755);
+            file_put_contents('progress/jobqueue.exakat', '{"progress":"17"}');
+            $stats['folders']['progress'] = file_exists($config->projects_root.'/progress/') ? 'Yes' : 'No';
         }
+
         $stats['folders']['in'] = file_exists($config->projects_root.'/in/') ? 'Yes' : 'No';
         $stats['folders']['out'] = file_exists($config->projects_root.'/out/') ? 'Yes' : 'No';
-        $stats['folders']['progress'] = file_exists($config->projects_root.'/progress/') ? 'Yes' : 'No';
         $stats['folders']['projects/test'] = file_exists($config->projects_root.'/projects/test/') ? 'Yes' : 'No';
         $stats['folders']['projects/default'] = file_exists($config->projects_root.'/projects/default/') ? 'Yes' : 'No';
         $stats['folders']['projects/onepage'] = file_exists($config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
