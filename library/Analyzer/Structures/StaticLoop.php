@@ -33,6 +33,10 @@ class StaticLoop extends Analyzer\Analyzer {
     */
     
     public function analyze() {
+        $nonDeterminist = $this->loadIni('php_nondeterministic.ini', 'functions');
+        $nonDeterminist = $this->makeFullNsPath($nonDeterminist);
+        $nonDeterminist = "'\\" . join("', '\\", $nonDeterminist)."'";
+        
         // foreach with only one value
         $this->atomIs('Foreach')
              ->outIs('VALUE')
@@ -41,6 +45,9 @@ class StaticLoop extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode == blind}.any() == false')
+
+             // check if there are non-deterministic function : calling them in a loop is non-static.
+             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
              ->back('first');
         $this->prepareQuery();
 
@@ -61,6 +68,9 @@ class StaticLoop extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              
              ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && (it.object.fullcode == key || it.object.fullcode == value)}.any() == false')
+
+             // check if there are non-deterministic function : calling them in a loop is non-static.
+             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
              ->back('first');
         $this->prepareQuery();
         
@@ -82,6 +92,10 @@ class StaticLoop extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              // check if the variables are used here
              ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode in blind}.any() == false')
+
+             // check if there are non-deterministic function : calling them in a loop is non-static.
+             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
+
              ->back('first');
         $this->prepareQuery();
 
@@ -96,6 +110,10 @@ class StaticLoop extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              // check if the variables are used here
              ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode in blind}.any() == false')
+
+             // check if there are non-deterministic function : calling them in a loop is non-static.
+             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
+
              ->back('first');
         $this->prepareQuery();
 
@@ -110,6 +128,9 @@ class StaticLoop extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              // check if the variables are used here
              ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode in blind}.any() == false')
+
+             // check if there are non-deterministic function : calling them in a loop is non-static.
+             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
              ->back('first');
         $this->prepareQuery();
 
