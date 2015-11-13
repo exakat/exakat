@@ -30,6 +30,10 @@ class NoSubstrOne extends Analyzer\Analyzer {
         $this->atomFunctionIs('\\substr')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->is('rank', 1)
+             ->code(0)
+             ->inIs('ARGUMENT')
+             ->outIs('ARGUMENT')
              ->is('rank', 2)
              ->code(array('1', '-1'))
              ->back('first');
