@@ -303,7 +303,7 @@ JOIN categories
                 // else all is fine
             }
             
-            if (!file_exists('tests/analyzer/Test/'.str_replace('/', '_', $row['name']).'.php')) {
+            if (!file_exists('tests/analyzer/Test/'.$row['name'].'.php')) {
                 echo $row['name'], " has no Test\n";
             }
         }
@@ -554,7 +554,7 @@ SQL
                 ++$total;
             }
 
-            echo 'Found ', ($missing / $total), $child, 's without parent ', $parent. "s\n";
+            echo 'Found ', $missing / $total, $child, 's without parent ', $parent. "s\n";
         }
         echo "\n";
 
