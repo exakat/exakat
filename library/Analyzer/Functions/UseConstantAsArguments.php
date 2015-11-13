@@ -59,11 +59,8 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                  ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'String', 'Concatenation', 'Logical'))
                  ->back('first');
             $this->prepareQuery();
-        }
 
-        foreach($positions as $position) {
             foreach($functions->alternative->{$position} as $function => $constants) {
-
                 // PHP constant but wrong one
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENTS')
@@ -80,7 +77,6 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
 
         // combinaison : several constants may be combined with a logical operator
         $positions = range(0, count((array) $functions->combinaison) - 1);
-
         // First loop federate some queries
         foreach($positions as $position) {
             $fullnspath = array();
