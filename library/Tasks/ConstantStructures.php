@@ -27,19 +27,24 @@ class ConstantStructures extends Tasks {
     private $lastTiming = 0;
     
     public function run(\Config $config) {
+        $this->displayTiming('Start');
+
         // First, clean it all
         $query = 'g.V.hasNot("constante", null).each{ it.removeProperty("constante")};';
         $this->query($query);
         $this->displayTiming('Initial clean');
-    
+
         // Case for Literals
-        $literals = array('Integer', 'Boolean', 'Real', 'Null', 'Void');
+//        $literals = array('Integer', 'Boolean', 'Float', 'Null', 'Void');
+        $literals = array('Integer', 'Boolean', 'Float', 'Null');
+        $literals = array( 'Void');
+//        $literals = array();
         foreach($literals as $literal) {
-            $query = 'g.idx("atoms")[["atom":"'.$literal.'"]].each{ it.setProperty("constante", true)};';
+            print $query = 'g.idx("atoms")[["atom":"'.$literal.'"]].each{ it.setProperty("constante", true)};';
             $this->query($query);
             $this->displayTiming($literal);
         }
-
+/*    
         // String that are concatenations are differente
         $query = 'g.idx("atoms")[["atom":"String"]].filter{it.out("CONTAINS").any() == false}.each{ it.setProperty("constante", true)};';
         $this->query($query);
@@ -104,20 +109,21 @@ GREMLIN;
         $this->displayTiming('Array');
         }
 
-
-
+*/
         // Final count
         $query = <<<GREMLIN
 g.V.count();
 GREMLIN;
         $vertices = $this->query($query);
-        display( 'Total tokens : '.$vertices[0][0]." \n");
+        $total = $vertices[0];
+        display( 'Total tokens : '.$total." \n");
 
         $query = <<<GREMLIN
-g.V.hasNot('constante', null).count();
+g.V.has('constante', true).count();
 GREMLIN;
         $vertices = $this->query($query);
-        display( 'Constante tokens : '.$vertices[0][0]." \n");
+        $constantes = $vertices[0];
+        display( 'Constante tokens : '.$constantes." (".number_format($constantes / $total * 100, 2)."% )\n");
 
     }
 

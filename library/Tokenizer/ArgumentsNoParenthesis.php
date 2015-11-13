@@ -42,9 +42,9 @@ class ArgumentsNoParenthesis extends Arguments {
                                                                      'T_ELSEIF', 'T_COMMA', 'T_AS', 'T_INLINE_HTML', 'T_IF', 'T_VOID')))
         );
         
-        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'rank'        => array(1 => 0),
-                               'keepIndexed' => true);
+        $this->actions = array('insertVertex' => true,
+                               'rank'         => array(1 => 0),
+                               'keepIndexed'  => true);
         $this->checkAuto();
 
         // @note echo 's' : no parenthesis, but may have several expressions.
@@ -57,9 +57,9 @@ class ArgumentsNoParenthesis extends Arguments {
                                                                      'T_ELSEIF', 'T_ECHO', 'T_AS', 'T_INLINE_HTML', 'T_IF', 'T_VOID'))
         );
         
-        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'rank'        => array(1 => 0),
-                               'keepIndexed' => true);
+        $this->actions = array('insertVertex' => true,
+                               'rank'         => array(1 => 0),
+                               'keepIndexed'  => true);
         $this->checkAuto();
 
         // @note exit; no parenthesis, no argument.

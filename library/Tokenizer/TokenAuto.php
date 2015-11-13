@@ -1435,31 +1435,28 @@ if (a0.token == 'T_CLOSE_PARENTHESIS') {
             unset($actions['fullcode']);
         }
         
-        if (isset($actions['insertEdge'])) {
-            foreach($actions['insertEdge'] as $config) {
-                list($atom, $link) = each($config);
-                
-                $fullcode = $this->fullcode();
-                
-                $qactions[] = "
-/* insertEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_COMMA', virtual:true, line:it.line]);
-g.idx('atoms').put('atom', 'Void', x);
+        if (isset($actions['insertVertex'])) {
+            $fullcode = $this->fullcode();
+        
+            $qactions[] = <<<GREMLIN
+/* insertVertex out */
+x = g.addVertex(null, [code:"", atom:"Arguments", token:"T_COMMA", virtual:true, line:it.line]);
+g.idx("atoms").put("atom", "Arguments", x);
 
-a2 = a1.out('NEXT').next();
+a2 = a1.out("NEXT").next();
 
-g.addEdge(it, x, 'NEXT');
-g.addEdge(x, a2, 'NEXT');
-g.addEdge(x, a1, '$link');
-x.setProperty('fullcode', a1.fullcode);
-a1.bothE('NEXT').each{g.removeEdge(it);}
+g.addEdge(it, x, "NEXT");
+g.addEdge(x, a2, "NEXT");
+g.addEdge(x, a1, "ARGUMENT");
+x.setProperty("fullcode", a1.fullcode);
+a1.bothE("NEXT").each{g.removeEdge(it);}
 
-a1.inE('INDEXED').each{ g.removeEdge(it); }
+a1.inE("INDEXED").each{ g.removeEdge(it); }
 
 fullcode = x;
-";
-            unset($actions['insertEdge']);
-            }
+$fullcode
+GREMLIN;
+            unset($actions['insertVertex']);
         }
 
         if (isset($actions['makeArguments'])) {
