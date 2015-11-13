@@ -25,7 +25,7 @@ namespace Analyzer\Type;
 
 use Analyzer;
 
-class Real extends Analyzer\Common\Type {
+class _Float extends Analyzer\Common\Type {
 
     public function analyze() {
         $this->type = 'Float';

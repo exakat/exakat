@@ -35,7 +35,7 @@ class OverwrittenLiterals extends Analyzer\Analyzer {
              ->code('=')
              ->hasNoIn('INIT')
              ->outIs('RIGHT')
-             ->atomIs(array('Integer', 'String', 'Real', 'Float'))
+             ->atomIs(array('Integer', 'String', 'Float'))
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->atomIs('Variable')

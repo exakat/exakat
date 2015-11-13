@@ -38,7 +38,7 @@ class MakeDefault extends Analyzer\Analyzer {
              ->atomInside('Assignation')
              ->code('=')
              ->outIs('RIGHT')
-             ->atomIs(array('String', 'Integer', 'Boolean', 'Real'))
+             ->atomIs(array('String', 'Integer', 'Boolean', 'Float'))
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->atomIs('Property')
