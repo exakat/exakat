@@ -9,220 +9,178 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $f2
-          Label : VALUE
-            2
-          Label : PROTECTED
-            protected
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $g4
-          Label : VALUE
-            5
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $f3
-          Label : VALUE
-            3
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $g2
-          Label : VALUE
-            3
-          Label : PROTECTED
-            protected
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $f4
-          Label : VALUE
-            4
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $g3
-          Label : VALUE
-            3
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $g1
-          Label : VALUE
-            2
-          Label : PUBLIC
-            public
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $f1
-          Label : VALUE
-            1
-          Label : PUBLIC
-            public
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $d3
-          Label : VALUE
-            void
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          public
-          Label : DEFINE
-            $b3
-          Label : VALUE
-            3
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $e3
-          Label : VALUE
-            void
-          Label : PUBLIC
-            public
-        Label : ELEMENT
+        static
+        Label : DEFINE
+          $a4
+        Label : STATIC
           static
-          Label : DEFINE
-            $b2
-          Label : VALUE
-            2
-          Label : PRIVATE
-            private
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $d4
-          Label : VALUE
-            void
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $d2
-          Label : VALUE
-            void
-          Label : PRIVATE
-            private
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $e2
-          Label : VALUE
-            void
-          Label : PRIVATE
-            private
-          Label : STATIC
-            static
-        Label : ELEMENT
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          $a1
+        Label : PUBLIC
           public
-          Label : DEFINE
+        Label : STATIC
+          static
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
             $b1
-          Label : VALUE
-            1
-          Label : PUBLIC
-            public
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $e1
-          Label : VALUE
-            void
-          Label : PUBLIC
-            public
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $e4
-          Label : VALUE
-            void
-          Label : STATIC
-            static
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $d1
-          Label : VALUE
-            void
-          Label : PUBLIC
-            public
-          Label : STATIC
-            static
-        Label : ELEMENT
+        Label : PUBLIC
+          public
+        Label : STATIC
           static
-          Label : DEFINE
-            $b4
-          Label : VALUE
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          $a3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $a2
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $g2
+        Label : DEFINE
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $f2
+        Label : STATIC
+          static
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $f3
+        Label : DEFINE
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $g3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            5
+          Label : LEFT
+            $g4
+        Label : DEFINE
+          =
+          Label : RIGHT
             4
-          Label : STATIC
-            static
-        Label : ELEMENT
-          public
-          Label : DEFINE
-            $a1
-          Label : VALUE
-            Void
-          Label : PUBLIC
-            public
-          Label : STATIC
-            static
-        Label : ELEMENT
-          public
-          Label : DEFINE
-            $a3
-          Label : VALUE
-            Void
-          Label : PUBLIC
-            public
-        Label : ELEMENT
+          Label : LEFT
+            $f4
+        Label : STATIC
           static
-          Label : DEFINE
-            $a4
-          Label : VALUE
-            Void
-          Label : STATIC
-            static
-        Label : ELEMENT
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $d2
+        Label : DEFINE
+          $e2
+        Label : STATIC
           static
-          Label : DEFINE
-            $a2
-          Label : VALUE
-            Void
-          Label : PUBLIC
-            public
-          Label : STATIC
-            static
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $d4
+        Label : DEFINE
+          $e4
+        Label : STATIC
+          static
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          $e3
+        Label : DEFINE
+          $d3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $g1
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $f1
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $b2
+        Label : STATIC
+          static
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $b3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            4
+          Label : LEFT
+            $b4
+        Label : STATIC
+          static
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          $e1
+        Label : DEFINE
+          $d1
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static

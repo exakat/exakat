@@ -7,21 +7,17 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        $d
-      Label : ARGUMENT
-        $c
+        $a
       Label : ARGUMENT
         $b
       Label : ARGUMENT
-        $a
+        $d
+      Label : ARGUMENT
+        $c
     Label : NAME
       B
     Label : BLOCK
       ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          AA
       Label : ELEMENT
         switch
         Label : NAME
@@ -29,7 +25,25 @@ Label : CODE
         Label : CASES
           Sequence Case Default
           Label : ELEMENT
-            default
+            case
+            Label : CODE
+              Void
+            Label : CASE
+              E
+          Label : ELEMENT
+            case
+            Label : CODE
+              Void
+            Label : CASE
+              L
+          Label : ELEMENT
+            case
+            Label : CODE
+              Void
+            Label : CASE
+              K
+          Label : ELEMENT
+            case
             Label : CODE
               ;
               Label : ELEMENT
@@ -43,25 +57,27 @@ Label : CODE
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
                       "
                       Label : CONTAINS
                         Concatenation
                         Label : CONCAT
-                          Z
+                          J
                         Label : CONCAT
                           $b
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      $d
                     Label : ARGUMENT
                       ::
                       Label : CLASS
                         H
                       Label : CONSTANT
-                        Y
+                        I
                 Label : CLASS
                   static
+            Label : CASE
+              F
           Label : ELEMENT
             case
             Label : CODE
@@ -81,6 +97,12 @@ Label : CODE
                     Label : ARGUMENT
                       $c
                     Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        U
+                    Label : ARGUMENT
                       "
                       Label : CONTAINS
                         Concatenation
@@ -88,12 +110,6 @@ Label : CODE
                           V
                         Label : CONCAT
                           $b
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        H
-                      Label : CONSTANT
-                        U
                 Label : CLASS
                   static
             Label : CASE
@@ -115,9 +131,11 @@ Label : CODE
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      $c
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        P
                     Label : ARGUMENT
                       "
                       Label : CONTAINS
@@ -127,11 +145,9 @@ Label : CODE
                         Label : CONCAT
                           $b
                     Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        H
-                      Label : CONSTANT
-                        P
+                      $c
+                    Label : ARGUMENT
+                      $d
                 Label : CLASS
                   static
             Label : CASE
@@ -139,19 +155,7 @@ Label : CODE
               Label : AT
                 M
           Label : ELEMENT
-            case
-            Label : CODE
-              Void
-            Label : CASE
-              K
-          Label : ELEMENT
-            case
-            Label : CODE
-              Void
-            Label : CASE
-              L
-          Label : ELEMENT
-            case
+            default
             Label : CODE
               ;
               Label : ELEMENT
@@ -165,33 +169,29 @@ Label : CODE
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
                       "
                       Label : CONTAINS
                         Concatenation
                         Label : CONCAT
-                          J
+                          Z
                         Label : CONCAT
                           $b
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      $d
                     Label : ARGUMENT
                       ::
                       Label : CLASS
                         H
                       Label : CONSTANT
-                        I
+                        Y
                 Label : CLASS
                   static
-            Label : CASE
-              F
-          Label : ELEMENT
-            case
-            Label : CODE
-              Void
-            Label : CASE
-              E
+      Label : ELEMENT
+        return
+        Label : RETURN
+          AA
       Label : ELEMENT
         if
         Label : CONDITION
@@ -203,7 +203,7 @@ Label : CODE
             Label : NOT
               C
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   void
         Label : THEN

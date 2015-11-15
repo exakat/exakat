@@ -17,11 +17,11 @@ Label : CODE
       Label : ELEMENT
         b
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             _
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 "C"
     Label : ELSE
@@ -39,11 +39,11 @@ Label : CODE
           Label : ELEMENT
             e
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 f
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     "g"
         Label : ELSE
@@ -61,10 +61,10 @@ Label : CODE
               Label : ELEMENT
                 i
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     j
                     Label : ARGUMENTS
-                      void
+                      
                       Label : ARGUMENT
                         "l"

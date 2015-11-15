@@ -7,6 +7,6 @@ Label : CODE
     Label : NEW
       static
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           1

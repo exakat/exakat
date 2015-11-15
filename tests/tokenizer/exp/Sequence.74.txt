@@ -3,27 +3,53 @@
 Label : CODE
   ;
   Label : ELEMENT
+    E
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        'F'
+      Label : ARGUMENT
+        G
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        B
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'C'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        exit
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'D'
+  Label : ELEMENT
     =
     Label : RIGHT
       M
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           N
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
+              'O'
+            Label : ARGUMENT
               P
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   [
                   Label : VARIABLE
                     $f
                   Label : INDEX
                     'Q'
-            Label : ARGUMENT
-              'O'
     Label : LEFT
       @
       Label : AT
@@ -33,9 +59,15 @@ Label : CODE
           Label : ARGUMENT
             [
             Label : VARIABLE
-              $e
+              $a
             Label : INDEX
-              'L'
+              'H'
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'I'
           Label : ARGUMENT
             [
             Label : VARIABLE
@@ -51,38 +83,6 @@ Label : CODE
           Label : ARGUMENT
             [
             Label : VARIABLE
-              $b
+              $e
             Label : INDEX
-              'I'
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'H'
-  Label : ELEMENT
-    E
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        G
-      Label : ARGUMENT
-        'F'
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        B
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'C'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        exit
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'D'
+              'L'

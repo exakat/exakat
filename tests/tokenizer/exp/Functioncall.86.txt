@@ -1,0 +1,88 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        private
+        Label : DEFINE
+          $y
+        Label : DEFINE
+          $z
+        Label : DEFINE
+          $x
+        Label : PRIVATE
+          private
+  Label : ELEMENT
+    array
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          'C'
+        Label : VALUE
+          function
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $c
+          Label : NAME
+            
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                [
+                Label : VARIABLE
+                  $e
+                Label : INDEX
+                  Concatenation
+                  Label : CONCAT
+                    (
+                    Label : CODE
+                      ?
+                      Label : CONDITION
+                        empty
+                        Label : ARGUMENTS
+                          
+                          Label : ARGUMENT
+                            [
+                            Label : VARIABLE
+                              $c
+                            Label : INDEX
+                              'E'
+                      Label : THEN
+                        'F'
+                      Label : ELSE
+                        [
+                        Label : VARIABLE
+                          [
+                          Label : VARIABLE
+                            $f
+                          Label : INDEX
+                            'G'
+                        Label : INDEX
+                          [
+                          Label : VARIABLE
+                            $c
+                          Label : INDEX
+                            'E'
+                  Label : CONCAT
+                    'D'
+            Label : ELEMENT
+              global
+              Label : GLOBAL
+                $e
+              Label : GLOBAL
+                $f
+      Label : ARGUMENT
+        1

@@ -9,13 +9,13 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        public
+        protected
         Label : DEFINE
-          $b
-        Label : PUBLIC
-          public
+          $c
         Label : STATIC
           static
+        Label : PROTECTED
+          protected
       Label : ELEMENT
         private
         Label : DEFINE
@@ -25,10 +25,10 @@ Label : CODE
         Label : PRIVATE
           private
       Label : ELEMENT
-        protected
+        public
         Label : DEFINE
-          $c
+          $b
+        Label : PUBLIC
+          public
         Label : STATIC
           static
-        Label : PROTECTED
-          protected

@@ -7,6 +7,14 @@ Label : CODE
     Label : NEW
       static
       Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    new
+    Label : NEW
+      static
+      Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           2
@@ -18,31 +26,23 @@ Label : CODE
       static
       Label : ARGUMENTS
         Arguments
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          2
-  Label : ELEMENT
-    new
-    Label : NEW
-      static
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
         Label : ARGUMENT
           4
         Label : ARGUMENT
+          1
+        Label : ARGUMENT
           3
+        Label : ARGUMENT
+          2
   Label : ELEMENT
     new
     Label : NEW
       static
       Label : ARGUMENTS
-        void
+        Arguments
         Label : ARGUMENT
-          void
+          1
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          2

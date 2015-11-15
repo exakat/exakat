@@ -11,11 +11,11 @@ Label : CODE
       Label : ELEMENT
         static
         Label : DEFINE
-          $b
-        Label : PUBLIC
-          public
+          $d
         Label : STATIC
           static
+        Label : PRIVATE
+          private
       Label : ELEMENT
         static
         Label : DEFINE
@@ -27,8 +27,8 @@ Label : CODE
       Label : ELEMENT
         static
         Label : DEFINE
-          $d
+          $b
+        Label : PUBLIC
+          public
         Label : STATIC
           static
-        Label : PRIVATE
-          private

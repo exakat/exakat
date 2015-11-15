@@ -9,74 +9,58 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $e
-          Label : VALUE
-            void
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $f
-          Label : VALUE
-            2
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $h
-          Label : VALUE
-            void
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $g
-          Label : VALUE
-            3
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          const
-          Label : NAME
-            b
-          Label : VALUE
-            3
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $d
-          Label : VALUE
-            void
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $c
-          Label : VALUE
-            void
-          Label : PUBLIC
-            public
-        Label : ELEMENT
+        public
+        Label : DEFINE
+          $a
+        Label : PUBLIC
           public
-          Label : DEFINE
-            $b
-          Label : VALUE
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : RIGHT
             1
-          Label : PUBLIC
-            public
-        Label : ELEMENT
+          Label : LEFT
+            $b
+        Label : PUBLIC
           public
-          Label : DEFINE
-            $a
-          Label : VALUE
-            Void
-          Label : PUBLIC
-            public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          $c
+        Label : DEFINE
+          $d
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            b
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          $e
+        Label : DEFINE
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $f
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $g
+        Label : DEFINE
+          $h
+        Label : PUBLIC
+          public

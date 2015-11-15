@@ -3,67 +3,43 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       &&
       Label : RIGHT
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              'D'
-      Label : LEFT
         &&
         Label : RIGHT
           isset
           Label : ARGUMENTS
-            void
+            
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $c
+              Label : INDEX
+                'D'
+        Label : LEFT
+          isset
+          Label : ARGUMENTS
+            
             Label : ARGUMENT
               [
               Label : VARIABLE
                 $b
               Label : INDEX
                 'C'
-        Label : LEFT
-          isset
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                'B'
+      Label : LEFT
+        isset
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'B'
     Label : THEN
       ;
-      Label : ELEMENT
-        
-      Label : ELEMENT
-        
-      Label : ELEMENT
-        AI
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            AJ
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                AK
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'AL'
-      Label : ELEMENT
-        exit
-        Label : ARGUMENTS
-          void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -71,38 +47,38 @@ Label : CODE
           Label : RIGHT
             &&
             Label : RIGHT
-              ->
-              Label : OBJECT
-                $i
-              Label : METHOD
-                K
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'M'
-                  Label : ARGUMENT
-                    'L'
-            Label : LEFT
-              G
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  array
+              &&
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $i
+                Label : METHOD
+                  K
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      'J'
+                      'L'
                     Label : ARGUMENT
-                      'I'
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $h
-                  Label : PROPERTY
-                    H
-          Label : LEFT
-            &&
-            Label : RIGHT
+                      'M'
+              Label : LEFT
+                G
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        'I'
+                      Label : ARGUMENT
+                        'J'
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $h
+                    Label : PROPERTY
+                      H
+            Label : LEFT
               ==
               Label : RIGHT
                 $g
@@ -112,46 +88,18 @@ Label : CODE
                   $f
                 Label : PROPERTY
                   F
+          Label : LEFT
+            ==
+            Label : RIGHT
+              $e
             Label : LEFT
-              ==
-              Label : RIGHT
-                $e
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  E
+              ->
+              Label : OBJECT
+                $d
+              Label : PROPERTY
+                E
         Label : THEN
           ;
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              $k
-            Label : METHOD
-              R
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  S
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      'U'
-                    Label : ARGUMENT
-                      'T'
-          Label : ELEMENT
-            V
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $l
-                Label : PROPERTY
-                  X
-              Label : ARGUMENT
-                'W'
           Label : ELEMENT
             ->
             Label : OBJECT
@@ -159,15 +107,43 @@ Label : CODE
             Label : METHOD
               N
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   O
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      'Q'
-                    Label : ARGUMENT
                       'P'
+                    Label : ARGUMENT
+                      'Q'
+          Label : ELEMENT
+            ->
+            Label : OBJECT
+              $k
+            Label : METHOD
+              R
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  S
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'T'
+                    Label : ARGUMENT
+                      'U'
+          Label : ELEMENT
+            V
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'W'
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $l
+                Label : PROPERTY
+                  X
         Label : ELSE
           elseif
           Label : CONDITION
@@ -189,15 +165,15 @@ Label : CODE
               Label : METHOD
                 AA
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     AB
                     Label : ARGUMENTS
                       Arguments
                       Label : ARGUMENT
-                        'AD'
-                      Label : ARGUMENT
                         'AC'
+                      Label : ARGUMENT
+                        'AD'
           Label : ELSE
             ;
             Label : ELEMENT
@@ -207,12 +183,30 @@ Label : CODE
               Label : METHOD
                 AE
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     AF
                     Label : ARGUMENTS
                       Arguments
                       Label : ARGUMENT
-                        'AH'
-                      Label : ARGUMENT
                         'AG'
+                      Label : ARGUMENT
+                        'AH'
+      Label : ELEMENT
+        exit
+        Label : ARGUMENTS
+          void
+      Label : ELEMENT
+        AI
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            AJ
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                AK
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    'AL'

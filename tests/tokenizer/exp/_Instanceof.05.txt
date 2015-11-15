@@ -2,6 +2,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    instanceof
+    Label : VARIABLE
+      $a
+    Label : CLASS
+      static
+  Label : ELEMENT
     if
     Label : CONDITION
       instanceof
@@ -13,9 +19,3 @@ Label : CODE
       ;
       Label : ELEMENT
         void
-  Label : ELEMENT
-    instanceof
-    Label : VARIABLE
-      $a
-    Label : CLASS
-      static

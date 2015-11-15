@@ -15,21 +15,11 @@ Label : CODE
           Label : RIGHT
             array
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 void
           Label : LEFT
             $d
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            '23'
-          Label : LEFT
-            $e
         Label : STATIC
           static
       Label : ELEMENT
@@ -50,5 +40,15 @@ Label : CODE
             1
           Label : LEFT
             $b
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            '23'
+          Label : LEFT
+            $e
         Label : STATIC
           static

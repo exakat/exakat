@@ -4,20 +4,48 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
+    Label : BLOCK
+      void
     Label : NAMESPACE
-      \
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
+      C
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      void
+    Label : NAMESPACE
+      D
+  Label : ELEMENT
+    
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      void
+    Label : NAMESPACE
+      B
+  Label : ELEMENT
+    namespace
     Label : BLOCK
       Sequence
       Label : ELEMENT
         class
+        Label : NAME
+          E
         Label : BLOCK
           ;
           Label : ELEMENT
             function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                $a
+            Label : NAME
+              F
+            Label : STATIC
+              static
             Label : BLOCK
               ;
               Label : ELEMENT
@@ -26,12 +54,12 @@ Label : CODE
                   new
                   Label : NEW
                     \
-                    Label : SUBNAME
-                      AL
                     Label : ARGUMENTS
-                      void
+                      
                       Label : ARGUMENT
                         'AM'
+                    Label : SUBNAME
+                      AL
               Label : ELEMENT
                 if
                 Label : CONDITION
@@ -41,7 +69,7 @@ Label : CODE
                   Label : LEFT
                     G
                     Label : ARGUMENTS
-                      void
+                      
                       Label : ARGUMENT
                         H
                         Label : ARGUMENTS
@@ -49,9 +77,9 @@ Label : CODE
                           Label : ARGUMENT
                             1
                           Label : ARGUMENT
-                            0
-                          Label : ARGUMENT
                             I
+                          Label : ARGUMENT
+                            0
                 Label : THEN
                   ;
                   Label : ELEMENT
@@ -63,15 +91,15 @@ Label : CODE
                         Label : ARGUMENTS
                           Arguments
                           Label : ARGUMENT
+                            S
+                          Label : ARGUMENT
                             'U'
                           Label : ARGUMENT
                             'T'
-                          Label : ARGUMENT
-                            S
                       Label : LEFT
                         K
                         Label : ARGUMENTS
-                          void
+                          
                           Label : ARGUMENT
                             'Q'
                     Label : THEN
@@ -81,7 +109,7 @@ Label : CODE
                         Label : RETURN
                           V
                           Label : ARGUMENTS
-                            void
+                            
                             Label : ARGUMENT
                               $a
                   Label : ELEMENT
@@ -91,13 +119,13 @@ Label : CODE
                       Label : RIGHT
                         K
                         Label : ARGUMENTS
-                          void
+                          
                           Label : ARGUMENT
                             'N'
                       Label : LEFT
                         K
                         Label : ARGUMENTS
-                          void
+                          
                           Label : ARGUMENT
                             'L'
                     Label : THEN
@@ -107,11 +135,59 @@ Label : CODE
                         Label : RETURN
                           O
                           Label : ARGUMENTS
-                            void
+                            
                             Label : ARGUMENT
                               $a
                 Label : ELSE
                   ;
+                  Label : ELEMENT
+                    static
+                    Label : DEFINE
+                      =
+                      Label : RIGHT
+                        Z
+                      Label : LEFT
+                        $b
+                    Label : STATIC
+                      static
+                  Label : ELEMENT
+                    if
+                    Label : CONDITION
+                      K
+                      Label : ARGUMENTS
+                        
+                        Label : ARGUMENT
+                          'Q'
+                    Label : THEN
+                      ;
+                      Label : ELEMENT
+                        return
+                        Label : RETURN
+                          V
+                          Label : ARGUMENTS
+                            
+                            Label : ARGUMENT
+                              $a
+                  Label : ELEMENT
+                    if
+                    Label : CONDITION
+                      K
+                      Label : ARGUMENTS
+                        
+                        Label : ARGUMENT
+                          'L'
+                    Label : THEN
+                      ;
+                      Label : ELEMENT
+                        return
+                        Label : RETURN
+                          O
+                          Label : ARGUMENTS
+                            Arguments
+                            Label : ARGUMENT
+                              $a
+                            Label : ARGUMENT
+                              AK
                   Label : ELEMENT
                     if
                     Label : CONDITION
@@ -131,31 +207,11 @@ Label : CODE
                             Label : ARGUMENTS
                               Arguments
                               Label : ARGUMENT
-                                'AD'
-                              Label : ARGUMENT
                                 'AC'
+                              Label : ARGUMENT
+                                'AD'
                         Label : LEFT
                           $b
-                  Label : ELEMENT
-                    if
-                    Label : CONDITION
-                      K
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          'L'
-                    Label : THEN
-                      ;
-                      Label : ELEMENT
-                        return
-                        Label : RETURN
-                          O
-                          Label : ARGUMENTS
-                            Arguments
-                            Label : ARGUMENT
-                              AK
-                            Label : ARGUMENT
-                              $a
                   Label : ELEMENT
                     if
                     Label : CONDITION
@@ -181,66 +237,12 @@ Label : CODE
                           Label : ARGUMENTS
                             Arguments
                             Label : ARGUMENT
-                              $a
-                            Label : ARGUMENT
                               $b
-                  Label : ELEMENT
-                    static
-                    Label : VALUE
-                      Z
-                    Label : STATIC
-                      static
-                    Label : DEFINE
-                      $b
-                  Label : ELEMENT
-                    if
-                    Label : CONDITION
-                      K
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          'Q'
-                    Label : THEN
-                      ;
-                      Label : ELEMENT
-                        return
-                        Label : RETURN
-                          V
-                          Label : ARGUMENTS
-                            void
                             Label : ARGUMENT
                               $a
-            Label : NAME
-              F
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $a
-            Label : STATIC
-              static
-        Label : NAME
-          E
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    namespace
     Label : NAMESPACE
-      D
-    Label : BLOCK
-      void
-  Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      C
-    Label : BLOCK
-      void
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      B
-    Label : BLOCK
-      void
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C

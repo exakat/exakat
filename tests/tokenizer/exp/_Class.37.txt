@@ -9,74 +9,58 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $e
-          Label : VALUE
-            void
-          Label : PROTECTED
-            protected
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $f
-          Label : VALUE
+        protected
+        Label : DEFINE
+          $a
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        protected
+        Label : DEFINE
+          $c
+        Label : DEFINE
+          $d
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        protected
+        Label : DEFINE
+          =
+          Label : RIGHT
             2
-          Label : PROTECTED
-            protected
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $h
-          Label : VALUE
-            void
-          Label : PROTECTED
-            protected
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
+          Label : LEFT
+            $f
+        Label : DEFINE
+          $e
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        protected
+        Label : DEFINE
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
             $g
-          Label : VALUE
-            3
-          Label : PROTECTED
-            protected
-        Label : ELEMENT
-          const
-          Label : NAME
-            b
-          Label : VALUE
-            3
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $d
-          Label : VALUE
-            void
-          Label : PROTECTED
-            protected
-        Label : ELEMENT
-          ppp
-          Label : DEFINE
-            $c
-          Label : VALUE
-            void
-          Label : PROTECTED
-            protected
-        Label : ELEMENT
+        Label : DEFINE
+          $h
+        Label : PROTECTED
           protected
-          Label : DEFINE
-            $b
-          Label : VALUE
+      Label : ELEMENT
+        protected
+        Label : DEFINE
+          =
+          Label : RIGHT
             1
-          Label : PROTECTED
-            protected
-        Label : ELEMENT
+          Label : LEFT
+            $b
+        Label : PROTECTED
           protected
-          Label : DEFINE
-            $a
-          Label : VALUE
-            Void
-          Label : PROTECTED
-            protected
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            b

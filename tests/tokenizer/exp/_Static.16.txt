@@ -11,7 +11,13 @@ Label : CODE
       Label : ELEMENT
         public
         Label : DEFINE
-          $b
+          $c
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          $e
         Label : PUBLIC
           public
       Label : ELEMENT
@@ -23,13 +29,7 @@ Label : CODE
       Label : ELEMENT
         public
         Label : DEFINE
-          $c
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          $e
+          $b
         Label : PUBLIC
           public
       Label : ELEMENT
@@ -47,7 +47,7 @@ Label : CODE
       Label : ELEMENT
         function
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
         Label : NAME
@@ -65,11 +65,11 @@ Label : CODE
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      4
+                      2
                     Label : ARGUMENT
                       3
                     Label : ARGUMENT
-                      2
+                      4
               Label : LEFT
                 new
                 Label : NEW

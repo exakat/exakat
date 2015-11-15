@@ -11,7 +11,7 @@ Label : CODE
       Label : ELEMENT
         function
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
         Label : NAME
@@ -21,7 +21,21 @@ Label : CODE
           Label : ELEMENT
             echo
             Label : ARGUMENTS
-              void
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  "\n"
+                Label : CONCAT
+                  ::
+                  Label : CLASS
+                    parent
+                  Label : CONSTANT
+                    class
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              
               Label : ARGUMENT
                 Concatenation
                 Label : CONCAT
@@ -35,28 +49,14 @@ Label : CODE
           Label : ELEMENT
             echo
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 Concatenation
-                Label : CONCAT
-                  ::
-                  Label : CLASS
-                    parent
-                  Label : CONSTANT
-                    class
-                Label : CONCAT
-                  "\n"
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  "\n"
                 Label : CONCAT
                   ::
                   Label : CLASS
                     static
                   Label : CONSTANT
                     class
+                Label : CONCAT
+                  "\n"

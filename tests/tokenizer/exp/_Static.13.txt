@@ -9,9 +9,13 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        private
+        static
         Label : DEFINE
-          $sp2
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $ps1
         Label : STATIC
           static
         Label : PRIVATE
@@ -29,6 +33,22 @@ Label : CODE
         Label : PRIVATE
           private
       Label : ELEMENT
+        static
+        Label : DEFINE
+          $y1
+        Label : DEFINE
+          $x1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $ps2
+        Label : STATIC
+          static
+        Label : PRIVATE
+          private
+      Label : ELEMENT
         private
         Label : DEFINE
           =
@@ -39,127 +59,35 @@ Label : CODE
         Label : PRIVATE
           private
       Label : ELEMENT
+        static
+        Label : DEFINE
+          $s2
+        Label : STATIC
+          static
+      Label : ELEMENT
         private
         Label : DEFINE
           $pr2
         Label : PRIVATE
           private
       Label : ELEMENT
-        public
+        private
         Label : DEFINE
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $p6
-        Label : PUBLIC
-          public
+          $sp2
+        Label : STATIC
+          static
+        Label : PRIVATE
+          private
       Label : ELEMENT
         static
+        Label : DEFINE
+          $x5
         Label : DEFINE
           $a5
         Label : DEFINE
-          $z5
-        Label : DEFINE
           $y5
         Label : DEFINE
-          $x5
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $z11
-        Label : DEFINE
-          $y11
-        Label : DEFINE
-          $x11
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $y4
-        Label : DEFINE
-          $x4
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $p7
-        Label : PUBLIC
-          public
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $ps1
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $y8
-        Label : DEFINE
-          $z8
-        Label : DEFINE
-          $x8
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $a8
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $ps2
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $y7
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $x7
-        Label : DEFINE
-          $a7
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $z7
+          $z5
         Label : STATIC
           static
       Label : ELEMENT
@@ -171,29 +99,17 @@ Label : CODE
       Label : ELEMENT
         static
         Label : DEFINE
-          $y9
-        Label : DEFINE
-          $x9
-        Label : DEFINE
-          $z9
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $x6
-        Label : DEFINE
           =
           Label : RIGHT
             1
           Label : LEFT
             $a6
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $z6
         Label : DEFINE
           =
           Label : RIGHT
@@ -205,35 +121,9 @@ Label : CODE
           Label : RIGHT
             1
           Label : LEFT
-            $z6
+            $x6
         Label : STATIC
           static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $p4
-        Label : STATIC
-          static
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          $p1
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $y1
-        Label : DEFINE
-          $x1
-        Label : STATIC
-          static
-      Label : ELEMENT
-        protected
-        Label : DEFINE
-          $p3
-        Label : PROTECTED
-          protected
       Label : ELEMENT
         static
         Label : DEFINE
@@ -246,6 +136,18 @@ Label : CODE
           $y3
         Label : STATIC
           static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $x9
+        Label : DEFINE
+          $y9
+        Label : DEFINE
+          $z9
+        Label : STATIC
+          static
+        Label : PRIVATE
+          private
       Label : ELEMENT
         static
         Label : DEFINE
@@ -263,6 +165,34 @@ Label : CODE
         Label : STATIC
           static
       Label : ELEMENT
+        static
+        Label : DEFINE
+          $p4
+        Label : STATIC
+          static
+      Label : ELEMENT
+        protected
+        Label : DEFINE
+          $p3
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          $p1
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $p6
+        Label : PUBLIC
+          public
+      Label : ELEMENT
         private
         Label : DEFINE
           $p2
@@ -271,7 +201,77 @@ Label : CODE
       Label : ELEMENT
         static
         Label : DEFINE
-          $s2
+          $x11
+        Label : DEFINE
+          $z11
+        Label : DEFINE
+          $y11
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $a8
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $y8
+        Label : DEFINE
+          $z8
+        Label : DEFINE
+          $x8
+        Label : STATIC
+          static
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $p7
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $y7
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $z7
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $x7
+        Label : DEFINE
+          $a7
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $y4
+        Label : DEFINE
+          $x4
         Label : STATIC
           static
       Label : ELEMENT

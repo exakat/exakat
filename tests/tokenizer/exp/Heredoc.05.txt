@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -17,21 +17,9 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        exit
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-      Label : ELEMENT
-        ob_flush
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             <<< C
 
@@ -40,3 +28,15 @@ Label : CODE
               Label : CONCAT
                 D
 
+      Label : ELEMENT
+        exit
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        ob_flush
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void

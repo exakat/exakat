@@ -11,19 +11,19 @@ Label : CODE
       Label : ELEMENT
         static
         Label : DEFINE
+          $h
+        Label : DEFINE
           $i
         Label : DEFINE
-          $g
-        Label : DEFINE
-          $h
+          $c
         Label : DEFINE
           $b
         Label : DEFINE
-          $e
+          $g
         Label : DEFINE
           $f
         Label : DEFINE
-          $c
+          $e
         Label : DEFINE
           $d
         Label : STATIC
