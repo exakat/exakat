@@ -66,21 +66,7 @@ class ArgumentsNoParenthesis extends Arguments {
         $this->conditions = array( -1 => array('notToken' => 'T_INSTANCEOF'),
                                     0 => array('atom'     => 'none',
                                                'token'    => array('T_EXIT', 'T_STATIC')),
-                                    1 => array('token'    => array_merge(Preplusplus::$operators,
-                                                                         Postplusplus::$operators,
-                                                                         Assignation::$operators,
-                                                                         Addition::$operators,
-                                                                         Multiplication::$operators,
-                                                                         Preplusplus::$operators,
-                                                                         Concatenation::$operators,
-                                                                         Comparison::$operators,
-                                                                         Bitshift::$operators,
-                                                                         Logical::$operators,
-                                                                         Property::$operators,
-                                                                         Staticproperty::$operators,
-                                                                         _Instanceof::$operators,
-                                                                         Ternary::$operators,
-                                                                         array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG')))
+                                    1 => array('token'    => array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET'))
                                   );
         
         $this->actions = array('addEdge'     => array(0 => array('Arguments' => 'ARGUMENT')),

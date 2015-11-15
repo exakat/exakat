@@ -56,20 +56,6 @@ class Nsname extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // @note a\b\c as F
-        $this->conditions = array( 0 => array('token' => self::$operators),
-                                   1 => array('token' => _As::$operators),
-                                   2 => array('atom'  => 'Identifier'),
-        );
-        
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'AS' ),
-                               'atom'         => 'As',
-                               'cleanIndex'   => true,
-                               'addSemicolon' => 'it'
-                               );
-        $this->checkAuto();
-
         return false;
     }
 

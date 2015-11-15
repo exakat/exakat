@@ -29,21 +29,22 @@ class _As extends TokenAuto {
 
     public function _check() {
         // use A as B
+        // use C::Const as string
         $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
-                                   -1 => array('atom'     => 'Identifier'),
+                                   -1 => array('atom'     => array('Staticconstant', 'Identifier', 'Nsname')),
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
                                     1 => array('token'    => 'T_STRING')
         );
         
         $this->actions = array('transform'    => array( 1 => 'AS',
-                                                       -1 => 'SUBNAME'),
+                                                       -1 => 'NAME'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,
                                'rank'         => array(-1 => '0'));
         $this->checkAuto();
 
-        // use A as public
+        // use A as public;
         $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
                                    -1 => array('atom'     => 'Identifier'),
                                     0 => array('token'    => _As::$operators,
@@ -52,14 +53,16 @@ class _As extends TokenAuto {
                                     2 => array('notToken' => 'T_STRING'),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'AS',
-                                                       -1 => 'PPP'),
+        //  A as public;
+        $this->actions = array('transform'    => array( 1 => 'VISIBILITY',
+                                                       -1 => 'NAME'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,
-                               'rank'         => array(-1 => '0'));
+                               'rank'         => array(-1 => '0')
+                               );
         $this->checkAuto();
-        
-        // use A as B (adds rank)
+
+        // use A as B private
         $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
                                    -1 => array('atom'     => 'Identifier'),
                                     0 => array('token'    => _As::$operators,
@@ -68,26 +71,12 @@ class _As extends TokenAuto {
                                     2 => array('token'    => 'T_STRING'),
         );
         
-        $this->actions = array('transform'    => array( 2 => 'AS',
-                                                        1 => 'PPP',
-                                                       -1 => 'SUBNAME'),
+        $this->actions = array('transform'    => array( 2 => 'VISIBILITY',
+                                                        1 => 'AS',
+                                                       -1 => 'NAME'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,
                                'rank'         => array(-1 => '0'));
-        $this->checkAuto();
-
-        // use C::Const as string
-        $this->conditions = array( -1 => array('atom'  => 'Staticconstant'),
-                                    0 => array('token' => self::$operators,
-                                               'atom'  => 'none'),
-                                    1 => array('token' => 'T_STRING')
-        );
-        
-        $this->actions = array('transform'    => array( 1 => 'RIGHT',
-                                                       -1 => 'LEFT'),
-                               'atom'         => 'As',
-                               'cleanIndex'   => true,
-                               );
         $this->checkAuto();
         
         return false;
@@ -96,26 +85,25 @@ class _As extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (fullcode.out('SUBNAME').any()) {
-    s = [];
-    fullcode.out("SUBNAME").sort{it.rank}._().each{
-        s.add(it.getProperty('code'));
-    };
-    if (fullcode.absolutens == true) {
-        s =  '\\\\' + s.join('\\\\');
-    } else {
-        s = s.join('\\\\');
-    }
-
-    fullcode.out('AS').filter{ it.token in [ 'T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE']}.each{
-        it.setProperty('fullcode', it.code);
-        it.setProperty('atom', 'Visibility');
-    }
-    fullcode.setProperty('fullcode', s + " as " + fullcode.out("AS").next().getProperty('fullcode'));
-} else {
-    fullcode.setProperty('fullcode', fullcode.out('LEFT').next().fullcode + ' as ' + fullcode.out('RIGHT').next().fullcode);
+theVisibility = '';
+fullcode.out('VISIBILITY').each{
+    it.setProperty('fullcode', it.code);
+    it.setProperty('atom', 'Visibility');
+    theVisibility = fullcode.out('VISIBILITY').next().fullcode + ' ';
 }
 
+if (fullcode.out('NAME').any()) {
+    theName = fullcode.out('NAME').next().fullcode;
+} else {
+    theName = '';
+}
+
+theAs = '';
+if (fullcode.out('AS').any()) {
+    theAs = fullcode.out("AS").next().getProperty('fullcode')
+}
+
+fullcode.setProperty('fullcode', theName + " as " + theVisibility + theAs);
 
 GREMLIN;
     }

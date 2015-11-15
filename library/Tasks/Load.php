@@ -1338,14 +1338,48 @@ class Load extends Tasks {
         return '';
     }
 
-    private function processComma($tokenValue) {
+    private function processComma($tokenValue, $display = false) {
         static $echoCount         = 0;
         static $parenthesisCount  = 0;
         static $parenthesisId     = 0;
         static $parenthesisStates = array();
         static $commaCount        = array();
+        static $isNotFunctioncall = false;
+        static $isArray           = false;
         
+        if ($display === true) {
+            return '';
+            print "isArray : ".$isArray ? 'True' : 'False'."\n";
+            print "isNotFunctioncall : ".$isArray ? 'True' : 'False'."\n";
+            print "parenthesisStates : ".print_r($parenthesisStates, true)."\n";
+            print "commaCount : ".print_r($commaCount, true)."\n";
+        }
+        
+        if (in_array($tokenValue, array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED','T_VAR', 'T_CONST', 'T_GLOBAL', 'T_STATIC')) ) {
+            $isNotFunctioncall = true;
+            print "isNotFunctioncall : true ($tokenValue)\n";
+            return '';
+        }
+
+        if (($isNotFunctioncall === true) && $tokenValue === 'T_SEMICOLON' ) {
+            $isNotFunctioncall = false;
+            return '';
+        }
+
+        if ($tokenValue === 'T_ARRAY') {
+            $isArray++;
+            return '';
+        }
+
+        if (($isArray === true) && $tokenValue === 'T_SEMICOLON' ) {
+            $isGlobal = false;
+            return '';
+        }
+
         if ($tokenValue === 'T_COMMA' ) {
+            if ($isNotFunctioncall) {
+                return '';
+            }
             if (isset($commaCount[$parenthesisId])) {
                 ++$commaCount[$parenthesisId];
             } else {

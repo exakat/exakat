@@ -85,8 +85,6 @@ class _Use extends TokenAuto {
                                'atom'           => 'Use'
                                );
         $this->checkAuto();
-        
-
 
     // use const \a\b;
         $this->conditions = array(  0 => array('token'        => _Use::$operators,
@@ -156,20 +154,11 @@ fullcode.out('USE').has('atom', 'Identifier').each{
 
 // use a\b\c as c (aka c);
 fullcode.out('USE').has('atom', 'As').each{
-    s = [];
-    it.out("SUBNAME").sort{it.rank}._().each{
-        s.add(it.getProperty('code'));
-    };
-    if (it.absolutens == true) {
-        it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
-        it.setProperty('originclass', s.pop());
-    } else {
-        it.setProperty('originpath', s.join('\\\\').toLowerCase());
-        it.setProperty('originclass', s.pop());
-    }
-    
     it.setProperty('alias', it.out('AS').next().code.toLowerCase());
     it.setProperty('originalias', it.out('AS').next().code);
+
+    it.setProperty('originpath', it.out('NAME').next().fullcode.toLowerCase());
+    it.setProperty('originclass', it.out('AS').next().fullcode.toLowerCase());
 }
 
 // use b\c\a; (aka a)
