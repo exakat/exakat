@@ -1357,7 +1357,6 @@ class Load extends Tasks {
         
         if (in_array($tokenValue, array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED','T_VAR', 'T_CONST', 'T_GLOBAL', 'T_STATIC')) ) {
             $isNotFunctioncall = true;
-            print "isNotFunctioncall : true ($tokenValue)\n";
             return '';
         }
 
