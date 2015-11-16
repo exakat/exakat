@@ -35,16 +35,13 @@ class ConstantStructures extends Tasks {
         $this->displayTiming('Initial clean');
 
         // Case for Literals
-//        $literals = array('Integer', 'Boolean', 'Float', 'Null', 'Void');
-        $literals = array('Integer', 'Boolean', 'Float', 'Null');
-        $literals = array( 'Void');
-//        $literals = array();
+        $literals = array('Integer', 'Boolean', 'Float', 'Null', 'Void', 'RawString', 'Magicconstant');
         foreach($literals as $literal) {
-            print $query = 'g.idx("atoms")[["atom":"'.$literal.'"]].each{ it.setProperty("constante", true)};';
+            $query = 'g.idx("atoms")[["atom":"'.$literal.'"]].each{ it.setProperty("constante", true)};';
             $this->query($query);
             $this->displayTiming($literal);
         }
-/*    
+
         // String that are concatenations are differente
         $query = 'g.idx("atoms")[["atom":"String"]].filter{it.out("CONTAINS").any() == false}.each{ it.setProperty("constante", true)};';
         $this->query($query);
@@ -60,6 +57,11 @@ class ConstantStructures extends Tasks {
                             'Break'          => array('BREAK'),
                             'Continue'       => array('CONTINUE'),
                             'Return'         => array('RETURN'),
+                            'Ternary'        => array('CONDITION', 'THEN', 'ELSE'),
+                            'Comparison'     => array('LEFT', 'RIGHT'),
+                            'Sequence'       => array('ELEMENT'),
+                            'Noscream'       => array('AT'),
+                            'Not'            => array('NOT'),
                             );
         
         foreach($structures as $atom => $links) {
@@ -74,7 +76,7 @@ GREMLIN;
             $this->query($query);
             $this->displayTiming($atom);
         }
-        
+
         // case for Arguments
         $query = <<<GREMLIN
 g.idx("atoms")[["atom":"Functioncall"]]
@@ -107,9 +109,10 @@ g.idx("atoms")[["atom":"Functioncall"]]
 GREMLIN;
         $this->query($query);
         $this->displayTiming('Array');
+
         }
 
-*/
+
         // Final count
         $query = <<<GREMLIN
 g.V.count();
