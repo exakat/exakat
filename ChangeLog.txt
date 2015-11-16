@@ -1,4 +1,4 @@
-Version 0.3.11 (Hu A'qi, Coming up)
+Version 0.3.12 (Nine Tailed Vixen, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,19 @@ Version 0.3.11 (Hu A'qi, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.11 (Hu A'qi, 2015-11-16)
++ Architecture
+    + Report external services files that may be in the repository
++ Report
+    + Report nested dirname calls (may be changed in PHP 7)
++ Analyzer
+    + Better spotting of static loops
+    + Don't confuse $globals and $GLOBALS
++ Tokenizer
+    + Rewrote support for As in classes. 
+    + Fixed arguments that were indexed as Void
+    + Trimmed code
 
 Version 0.3.10 (Silver Horned King, 2015-11-09)
 + Architecture
