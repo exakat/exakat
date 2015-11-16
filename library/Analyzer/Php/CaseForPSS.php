@@ -32,8 +32,7 @@ class CaseForPSS extends Analyzer\Analyzer {
         $this->atomIs('Identifier')
              ->code(array('parent', 'self', 'static'), false)
              ->codeIsNot(array('parent', 'self', 'static'), true);
-
-        parent::analyze();
+        $this->prepareQuery();
     }
 }
 
