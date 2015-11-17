@@ -164,6 +164,7 @@ class Appinfo extends \Report\Content {
                             'Multiple catch'   => 'Structures/MultipleCatch',
                             'Finally'          => 'Structures/TryFinally',
                             'Trigger error'    => 'Php/TriggerErrorUsage',
+                            'Error messages'   => 'Structures/ErrorMessages',
                      ),
 
                     'External systems' => array(

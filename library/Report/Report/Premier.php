@@ -448,7 +448,14 @@ TEXT
             $this->addContent('ExternalServices', $analyzer);
         }
 
-
+        // List of error messages
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/ErrorMessages');
+        if ($analyzer->hasResults()) {
+            $this->createLevel2($analyzer->getDescription()->getName());
+            $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textLead');
+            $this->addContent('Horizontal', $analyzer);
+        }
+        
 /////////////////////////////////////////////////////////////////////////////////////
 /// Custom analyzers
 /////////////////////////////////////////////////////////////////////////////////////
