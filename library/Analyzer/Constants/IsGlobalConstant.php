@@ -70,6 +70,16 @@ class IsGlobalConstant extends Analyzer\Analyzer {
              ->regex('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$')
              ->back('first');
         $this->prepareQuery();
+        
+        // constants that fallback to global constants
+        $this->analyzerIs('Constants/ConstantUsage')
+             ->analyzerIsNot('self')
+             ->tokenIs('T_STRING')  // No namespace
+             ->hasNoConstantDefinition()
+             ->filter(' g.idx("constants")[["path":"\\\\global\\\\" + it.code.toLowerCase()]].any()')
+             ->back('first');
+        $this->prepareQuery();
+        
     }
 }
 

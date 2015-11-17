@@ -327,28 +327,17 @@ g.V.has('index', true).filter{it.out().count() == 0}.each{
 //////////////////////////////////////////////////////////////////////////////////////////
 // calculating the full namespaces paths
 //////////////////////////////////////////////////////////////////////////////////////////
-// const in a namespace (and not a class)
-g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.sideEffect{fullcode = it;}
-.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom =='Namespace'}.each{
-    if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullnspath = '\\\\' ; //+ fullcode.out('NAME').next().fullcode.toLowerCase();
-    } else {
-        fullnspath = it.fullnspath + '\\\\';
-        //'\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('LEFT').next().fullcode.toLowerCase();
-    }
-    
-    fullcode.out('CONST').each{
-        it.setProperty('fullnspath', fullnspath + it.out('LEFT').next().code.toLowerCase());
-        g.idx('constants').put('path', fullnspath + it.out('LEFT').next().code.toLowerCase(), it)
-    }
-};
-", "
 // const without class nor namspace (aka, global)
 
 g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class'] }.any() == false}.out('CONST').out('LEFT')
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-        $solvingClassNames;
-        g.idx('constants').put('path', fullcode.fullnspath, it)
+    
+    if (it.atom == 'File') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+    }
+    g.idx('constants').put('path', fullcode.fullnspath, it)
 };
 ", "
 // Const (out of a class) with define
@@ -379,6 +368,7 @@ g.idx('atoms')[['atom':'Function']].filter{it.out('NAME').next().code != ''}.sid
     g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), fullcode);
 };
 ", "
+
 // use  usage
 g.idx('atoms')[['atom':'Use']].sideEffect{theUse = it;}.out('USE').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
     if (fullcode.absolutens == true) {
@@ -386,7 +376,7 @@ g.idx('atoms')[['atom':'Use']].sideEffect{theUse = it;}.out('USE').sideEffect{fu
     } else if (theUse.groupedUse == true) {
         fullcode.setProperty('fullnspath', theUse.fullnsprefix + fullcode.originpath.toLowerCase());
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.originpath.toLowerCase());
+        fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
     }
 };
 
@@ -434,6 +424,7 @@ g.idx('atoms')[['atom':'Class']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
     }
 };
 ", "
+
 g.idx('atoms')[['atom':'Interface']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
@@ -659,9 +650,10 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
 };
 
 ", "
-// Constant usage (1)
+// Constant usage (simple resolution of the namespaces)
 g.idx('atoms')[['atom':'Identifier']].filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').count() == 0}
-    .filter{it.out('ARGUMENTS').count() == 0}
+    .filter{it.out('ARGUMENTS').any() == false}
+    .filter{it.in('LEFT').in('CONST').any() == false}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
 
     if (fullcode.absolutens == true) {
@@ -693,6 +685,7 @@ g.idx('atoms')[['atom':'Nsname']].filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLAS
         }
 };
 ", "
+
 // collecting classes
 g.idx('atoms')[['atom':'Class']].each{
     g.idx('classes').put('path', it.fullnspath.toLowerCase(), it)
