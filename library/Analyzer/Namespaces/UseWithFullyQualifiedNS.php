@@ -30,6 +30,7 @@ class UseWithFullyQualifiedNS extends Analyzer\Analyzer {
         $this->atomIs('Use')
              ->outIs('USE')
              ->atomIs(array('Nsname', 'As'))
+             ->outIsIE('NAME')
              ->is('absolutens', true);
         $this->prepareQuery();
     }
