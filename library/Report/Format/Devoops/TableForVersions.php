@@ -56,6 +56,7 @@ HTML;
                                 'php55' => '<button class="btn btn-app btn-success .btn-circle"><i class="fa fa-thumbs-o-up"></i></i></button>',
                                 'php54' => '<button class="btn btn-app btn-success .btn-circle"><i class="fa fa-thumbs-o-up"></i></i></button>',
                                 'php53' => '<button class="btn btn-app btn-success .btn-circle"><i class="fa fa-thumbs-o-up"></i></i></button>',
+                                'php52' => '<button class="btn btn-app btn-success .btn-circle"><i class="fa fa-thumbs-o-up"></i></i></button>',
                                 );
             }
             $rows[$d['file']]['php'.$d['version']] = $d['error'];
@@ -71,6 +72,7 @@ HTML;
 												<td>{$d['php55']}</td>
 												<td>{$d['php54']}</td>
 												<td>{$d['php53']}</td>
+												<td>{$d['php52']}</td>
 											</tr>
 HTML;
             $html .= $row;
