@@ -150,7 +150,7 @@ class Appinfo extends \Report\Content {
                             'Hexadecimal' => 'Type/Hexadecimal',
                             'Octal'       => 'Type/Octal',
                             'Binary'      => 'Type/Binary',
-                            'Float'       => 'Type/Float',
+                            'Float'       => 'Type/_Float',
                     ),
 
                     'Strings' => array(
