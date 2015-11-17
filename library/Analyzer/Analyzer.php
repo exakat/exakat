@@ -834,7 +834,21 @@ GREMLIN;
     }
 
     public function savePropertyAs($property, $name) {
-        $this->addMethod("sideEffect{ $name = it.$property; }");
+        if ($property == 'arglist') {
+            $this->addMethod(<<<GREMLIN
+sideEffect{ s=[]; 
+    it.out("ARGUMENT")
+     .transform{ if (it.atom == 'Typehint') { it.out('VARIABLE').next(); } else { it; }}
+     .transform{ if (it.atom == 'Assignation') { it.out('LEFT').next(); } else { it; }}
+     .code.store(s).iterate();
+    $name = s.join(", "); 
+    true;
+}
+GREMLIN
+);
+        } else {
+            $this->addMethod("sideEffect{ $name = it.$property; }");
+        }
 
         return $this;
     }

@@ -29,11 +29,14 @@ class RelayFunction extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
-             ->savePropertyAs('fullcode', 'args')
+             ->savePropertyAs('arglist', 'args')
              ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
              ->is('count', 1)
-             ->atomInside('Functioncall')
+             ->outIs('ELEMENT')
+             ->outIsIE('RETURN')
+             ->atomIs(array('Functioncall', 'Staticmethodcall','Methodcall'))
+             ->outIsIE('METHOD')
              ->outIs('ARGUMENTS')
              ->samePropertyAs('fullcode', 'args')
              ->back('first');
