@@ -75,6 +75,7 @@ class IsGlobalConstant extends Analyzer\Analyzer {
         $this->analyzerIs('Constants/ConstantUsage')
              ->analyzerIsNot('self')
              ->tokenIs('T_STRING')  // No namespace
+             ->isNot('fullnspath', null)
              ->hasNoConstantDefinition()
              ->filter(' g.idx("constants")[["path":"\\\\global\\\\" + it.code.toLowerCase()]].any()')
              ->back('first');
