@@ -368,11 +368,10 @@ g.idx('atoms')[['atom':'Function']].filter{it.out('NAME').next().code != ''}.sid
     g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), fullcode);
 };
 ", "
-// use  usage
-g.idx('atoms')[['atom':'Use']].sideEffect{theUse = it;}.out('USE').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
+// use  usage inside Trait or class
+g.idx('atoms')[['atom':'Use']].filter{ it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class']}.any() }
+    .sideEffect{theUse = it;}.out('USE').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
     if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
-    } else if (fullcode.out('NAME').any() && fullcode.out('NAME').next().absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
     } else if (theUse.groupedUse == true) {
         fullcode.setProperty('fullnspath', theUse.fullnsprefix + fullcode.originpath.toLowerCase());
@@ -380,6 +379,20 @@ g.idx('atoms')[['atom':'Use']].sideEffect{theUse = it;}.out('USE').sideEffect{fu
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.originpath.toLowerCase());
     } else {
         fullcode.setProperty('fullnspath',  '\\\\' + it.out('NAMESPACE').next().code.toLowerCase() + '\\\\' +  fullcode.originpath.toLowerCase());
+    }
+};
+
+", "
+// use  usage in a namespace
+g.idx('atoms')[['atom':'Use']].filter{ it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class']}.any() == false}
+.sideEffect{theUse = it;}.out('USE').each{
+    fullcode = it;
+    if (fullcode.absolutens == true) {
+        fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
+    } else if (fullcode.out('NAME').any() && fullcode.out('NAME').next().absolutens == true) {
+        fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.originpath.toLowerCase());
     }
 };
 
