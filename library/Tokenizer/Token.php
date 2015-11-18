@@ -368,15 +368,18 @@ g.idx('atoms')[['atom':'Function']].filter{it.out('NAME').next().code != ''}.sid
     g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), fullcode);
 };
 ", "
-
 // use  usage
 g.idx('atoms')[['atom':'Use']].sideEffect{theUse = it;}.out('USE').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
+    } else if (fullcode.out('NAME').any() && fullcode.out('NAME').next().absolutens == true) {
+        fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
     } else if (theUse.groupedUse == true) {
         fullcode.setProperty('fullnspath', theUse.fullnsprefix + fullcode.originpath.toLowerCase());
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.originpath.toLowerCase());
     } else {
-        fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
+        fullcode.setProperty('fullnspath',  '\\\\' + it.out('NAMESPACE').next().code.toLowerCase() + '\\\\' +  fullcode.originpath.toLowerCase());
     }
 };
 
