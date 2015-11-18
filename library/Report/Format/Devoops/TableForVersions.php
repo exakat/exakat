@@ -40,6 +40,7 @@ class TableForVersions extends \Report\Format\Devoops {
 												<th>PHP 5.5</th>
 												<th>PHP 5.4</th>
 												<th>PHP 5.3</th>
+												<th>PHP 5.2</th>
 											</tr>
 										</thead>
 
