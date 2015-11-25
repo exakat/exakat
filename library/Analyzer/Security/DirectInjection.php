@@ -33,19 +33,58 @@ class DirectInjection extends Analyzer\Analyzer {
     public function analyze() {
         $vars = $this->loadIni('php_incoming.ini');
         $vars = $vars['incoming'];
+        
+        $safeIndex = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
+                           'SCRIPT_NAME', 'SERVER_ADMIN');
+        $safeIndex = '(it.out("VARIABLE").has("code", "\$_SERVER").any() == false) ||
+                       it.out("INDEX").has("atom", "String").filter{!(it.noDelimiter in ["' . join('", "', $safeIndex) . '"])}.any()';
+
+        // Relayed call to another function
+        $this->atomIs('Variable')
+             ->code($vars, true)
+             ->inIsIE('VARIABLE')
+             ->filter($safeIndex)
+             ->_as('result')
+             ->savePropertyAs('rank', 'rank')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->functionDefinition()
+             ->inIs('NAME')
+
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('rank', 'rank')
+
+             ->savePropertyAs('code', 'varname')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+
+             ->outIs('BLOCK')
+             ->atomInside('Functioncall')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->analyzerIs('Security/SensitiveArgument')
+             ->outIsIE('CODE')
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'varname')
+             ->back('result');
+        $this->prepareQuery();
 
         // $_GET/_POST ... directly as argument of PHP functions
         $this->atomIs('Variable')
-             ->code($vars)
+             ->code($vars, true)
              ->analyzerIs('Security/SensitiveArgument')
+             ->inIsIE('CODE')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS');
         $this->prepareQuery();
 
         // $_GET/_POST ['index'] (one level).. directly as argument of PHP functions
         $this->atomIs('Variable')
-             ->code($vars)
+             ->code($vars, true)
              ->inIs('VARIABLE')
+             ->filter($safeIndex)
+             ->inIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS');
@@ -53,9 +92,10 @@ class DirectInjection extends Analyzer\Analyzer {
 
         // $_GET/_POST ['index']['index2'] (2 levels and more)... directly as argument of PHP functions
         $this->atomIs('Variable')
-             ->code($vars)
+             ->code($vars, true)
              ->raw('in("VARIABLE").loop(1){true}{it.object.atom == "Array"}')
              ->analyzerIs('Security/SensitiveArgument')
+             ->filter($safeIndex)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->analyzerIsNot('self');
@@ -64,27 +104,28 @@ class DirectInjection extends Analyzer\Analyzer {
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs('Variable')
-             ->code($vars)
+             ->code($vars, true)
              ->raw('in("VARIABLE").loop(1){true}{ it.object.atom == "Array"}')
-             ->inIs('CONCAT')
-             ->analyzerIsNot('self');
-        $this->prepareQuery();
-
-        $this->atomIs('Variable')
-             ->code($vars)
-             ->inIs('VARIABLE')
+             ->filter($safeIndex)
              ->inIs('CONCAT')
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
+        $this->atomIs('Variable')
+             ->code($vars, true)
+             ->inIs('VARIABLE')
+             ->inIs('CONCAT')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
 
         // foreach (looping on incoming variables)
         $this->atomIs('Variable')
-             ->code($vars)
+             ->code($vars, true)
              ->raw('in("VARIABLE").loop(1){true}{ it.object.atom == "Array"}')
              ->inIs('SOURCE');
         $this->prepareQuery();
+
     }
 }
 
