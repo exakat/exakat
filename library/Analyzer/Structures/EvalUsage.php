@@ -26,11 +26,20 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class EvalUsage extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Constants/ConstantUsage');
+    }
+    
     public function analyze() {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_EVAL'))
-             ->fullnspath(array('\\eval', '\\create_function'));
+             ->fullnspath(array('\\eval', '\\create_function'))
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
+             ->tokenIsNot('T_CONSTANT_ENCAPSED_STRING')
+             ->analyzerIsNot('Constants/ConstantUsage');
         $this->prepareQuery();
     }
 }
