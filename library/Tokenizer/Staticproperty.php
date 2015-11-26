@@ -30,7 +30,7 @@ class Staticproperty extends TokenAuto {
     public function _check() {
         $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname', );
         
-        if (version_compare('7.0', PHP_VERSION) > 0) {
+        if (version_compare('7.0', $config->phpversion) > 0) {
             // PHP 7.0 +
             $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
                                        -1 => array('atom'      => $operands),
@@ -38,6 +38,7 @@ class Staticproperty extends TokenAuto {
                                         1 => array('atom'      => array('Variable', 'Array', 'Arrayappend', 'Property', )),
                                         2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
         } else {
+            // PHP 5.6 and -
             $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
                                        -1 => array('atom'      => $operands),
                                         0 => array('token'     => Staticproperty::$operators),

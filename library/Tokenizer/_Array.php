@@ -32,22 +32,24 @@ class _Array extends TokenAuto {
     
     public function _check() {
         // $x[3] or $x[] and multidimensional
-        if (version_compare('7.0', PHP_VERSION) > 0) {
+        if (version_compare('7.0', $config->phpversion) > 0) {
             // PHP 7.0 and +
             $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, Nsname::$operators)),
                                        -1 => array('atom'          => static::$allowedObject),
                                         0 => array('token'         => static::$operators,
-                                                   'checkForArray' => true),
+                                                   'checkForArray' => true
+                                                   ),
                                         1 => array('atom'          => 'yes'),
                                         2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                      );
         } else {
+            // PHP 5.6 and -
             $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, VariableDollar::$operators,
-                                                                                  Property::$operators,   Staticproperty::$operators,
-                                                                                  array('T_NS_SEPARATOR'))),
+                                                                                  Property::$operators,   Staticproperty::$operators)),
                                        -1 => array('atom'          => static::$allowedObject),
                                         0 => array('token'         => static::$operators,
-                                                   'checkForArray' => true),
+//                                                   'checkForArray' => true
+                                                   ),
                                         1 => array('atom'          => 'yes'),
                                         2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                      );
