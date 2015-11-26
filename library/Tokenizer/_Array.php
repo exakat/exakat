@@ -32,6 +32,7 @@ class _Array extends TokenAuto {
     
     public function _check() {
         // $x[3] or $x[] and multidimensional
+        $config = \Config::factory();
         if (version_compare('7.0', $config->phpversion) > 0) {
             // PHP 7.0 and +
             $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, Nsname::$operators)),

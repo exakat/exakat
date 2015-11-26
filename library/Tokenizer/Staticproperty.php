@@ -30,6 +30,7 @@ class Staticproperty extends TokenAuto {
     public function _check() {
         $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname', );
         
+        $config = \Config::factory();
         if (version_compare('7.0', $config->phpversion) > 0) {
             // PHP 7.0 +
             $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
