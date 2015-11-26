@@ -238,7 +238,6 @@ class Token {
     }
 
     static public function query($query) {
-        echo __METHOD__, "\n";
         $res = gremlin_query($query);
         $res = (array) $res->results;
         

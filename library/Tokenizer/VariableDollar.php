@@ -40,7 +40,6 @@ class VariableDollar extends TokenAuto {
             );
         } else {
             // PHP 5.6 and -
-            print __METHOD__."\n";
             $this->conditions = array( 0 => array('token'     => static::$operators,
                                                   'atom'      => 'none'),
                                        1 => array('atom'      => array('Variable', 'Array', 'Property'))
