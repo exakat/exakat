@@ -105,6 +105,10 @@ class Load extends Tasks {
     
         $tokens = $this->php->getTokenFromFile($filename);
         $log['token_initial'] = count($tokens);
+        if (count($tokens) == 1) {
+            display('Ignoring file '.$filename.' as it is not a PHP file (No PHP token found)');
+            return false;
+        }
 
         $delimitedStrings = array('T_QUOTE' => 0, 'T_QUOTE_2' => 0, 'T_SHELL_QUOTE' => 0);
         $whiteCode = $this->php->getWhiteCode();
