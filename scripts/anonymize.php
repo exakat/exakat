@@ -50,7 +50,7 @@ $variables = 'a';
 $stringsNames = array();
 $strings = 'A';
 
-$checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD', 'T_COALESCE');
+$checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD', 'T_COALESCE', 'T_CHARACTER', 'T_BAD_CHARACTER');
 foreach($checks as $check) {
     if (!defined($check)) { 
         define($check, 1); 
