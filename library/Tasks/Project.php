@@ -221,8 +221,6 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                          'audit_length' => $audit_end - $audit_start));
 
-        shell_exec('php '.$config->executable.' results -P Structures/EchoWithConcat -json -f '.$config->projects_root.'/projects/'.$project.'/EchoWithConcat');
-        shell_exec('php '.$config->executable.' results -P Functions/IsExtFunction   -json -f '.$config->projects_root.'/projects/'.$project.'/PhpFunctions');
         $this->logTime('Final');
         display("End 2\n");
         $this->updateProgress($progress++);
