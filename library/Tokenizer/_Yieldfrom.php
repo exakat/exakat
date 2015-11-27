@@ -25,7 +25,7 @@ namespace Tokenizer;
 
 class _Yieldfrom extends TokenAuto {
     static public $operators = array('T_YIELD_FROM');
-    static public $atom = 'YieldFrom';
+    static public $atom = 'Yieldfrom';
 
     public function _check() {
         $this->conditions = array(0 => array('token' => _Yieldfrom::$operators,
@@ -36,7 +36,7 @@ class _Yieldfrom extends TokenAuto {
         
         $this->actions = array('transform'    => array( 1 => 'YIELD' ),
                                'cleanIndex'   => true,
-                               'atom'         => 'YieldFrom',
+                               'atom'         => 'Yieldfrom',
                                'addSemicolon' => 'it');
                                
         $this->checkAuto();

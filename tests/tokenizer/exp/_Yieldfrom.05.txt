@@ -1,0 +1,54 @@
+<?php
+
+Label : CODE
+  function
+  Label : ARGUMENTS
+    
+    Label : ARGUMENT
+      void
+  Label : NAME
+    B
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        =
+        Label : RIGHT
+          yield from
+          Label : YIELD
+            ->
+            Label : OBJECT
+              $this
+            Label : METHOD
+              C
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $c
+        Label : LEFT
+          $b
+      Label : THEN
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            $b
+          Label : LEFT
+            list
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  D
+      Label : ELSE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            $d
