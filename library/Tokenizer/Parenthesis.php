@@ -36,7 +36,8 @@ class Parenthesis extends TokenAuto {
                                                                  'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
                                                                  'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
                                                                  'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
-                                                                 'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+                                                                 'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS')),
                                               'notAtom'  => array('Array', 'Property')),
                                    0 => array('token'    => Parenthesis::$operators,
                                               'atom'     => 'none',
@@ -50,7 +51,8 @@ class Parenthesis extends TokenAuto {
                                                         2 => 'DROP'),
                                'atom'         => 'Parenthesis',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
+                               'addSemicolon' => 'it',
+                               'keepIndexed'  => true);
         $this->checkAuto();
 
 // this applies to situations like print ($a * $b) + $c; where parenthesis actually belong to the following expression.

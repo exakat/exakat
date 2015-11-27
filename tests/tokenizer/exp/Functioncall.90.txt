@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    ->
+    Label : OBJECT
+      $b
+    Label : PROPERTY
+      B
+  Label : THEN
+    ;
+    Label : ELEMENT
+      (
+      Label : CODE
+        ->
+        Label : OBJECT
+          $b
+        Label : PROPERTY
+          B
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $b
