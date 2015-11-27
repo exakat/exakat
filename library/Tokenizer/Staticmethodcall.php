@@ -28,11 +28,9 @@ class Staticmethodcall extends TokenAuto {
     static public $atom = 'Staticmethodcall';
 
     public function _check() {
-        $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Nsname', 'Static');
-
         // unusual call : Class::{Method}(); Only build the Functioncall
         $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'     => $operands),
+                                   -1 => array('atom'     => Staticproperty::$operands),
                                     0 => array('token'    => Staticmethodcall::$operators),
                                     1 => array('token'    => 'T_OPEN_CURLY'),
                                     2 => array('atom'     => 'yes'),
@@ -50,7 +48,7 @@ class Staticmethodcall extends TokenAuto {
 
         // normal call : Class::Method();
         $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'     => $operands),
+                                   -1 => array('atom'     => Staticproperty::$operands),
                                     0 => array('token'    => Staticmethodcall::$operators),
                                     1 => array('atom'     => array('Functioncall', 'Methodcall')),
                                     2 => array('notToken' => 'T_OPEN_PARENTHESIS'),
@@ -65,7 +63,7 @@ class Staticmethodcall extends TokenAuto {
 
         // normal call : Class::Method()(
         $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'     => $operands),
+                                   -1 => array('atom'     => Staticproperty::$operands),
                                     0 => array('token'    => Staticmethodcall::$operators),
                                     1 => array('atom'     => array('Functioncall', 'Methodcall')),
                                     2 => array('token'    => 'T_OPEN_PARENTHESIS'),

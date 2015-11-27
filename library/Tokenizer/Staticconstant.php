@@ -29,7 +29,7 @@ class Staticconstant extends TokenAuto {
 
     public function _check() {
         $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'      => array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname')),
+                                   -1 => array('atom'      => Staticproperty::$operands),
                                     0 => array('token'     => Staticconstant::$operators),
                                     1 => array('atom'      => array('Constant', 'Identifier', 'Boolean', 'Null')),
                                     2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),

@@ -31,7 +31,8 @@ class Coalesce extends TokenAuto {
 
     public function _check() {
         // logical boolean (and, or)
-        $this->conditions = array( -1 => array('atom'     => 'yes'),
+        $this->conditions = array( -2 => array('notToken' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_CLOSE_PARENTHESIS')),
+                                   -1 => array('atom'     => 'yes'),
                                     0 => array('token'    => Coalesce::$operators,
                                                'atom'     => 'none'),
                                     1 => array('atom'     => 'yes',

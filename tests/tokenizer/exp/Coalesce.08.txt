@@ -1,0 +1,140 @@
+<?php
+
+Label : CODE
+  function
+  Label : ARGUMENTS
+    
+    Label : ARGUMENT
+      Typehint
+      Label : VARIABLE
+        $b
+      Label : CLASS
+        C
+  Label : NAME
+    B
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        !
+        Label : NOT
+          E
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $c
+              Label : INDEX
+                'G'
+            Label : ARGUMENT
+              'F'
+      Label : THEN
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            void
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        yield
+        Label : YIELD
+          $c
+      Label : LEFT
+        $f
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        'H'
+      Label : LEFT
+        $d
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        ??
+        Label : RIGHT
+          1
+        Label : LEFT
+          ->
+          Label : OBJECT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              I
+          Label : PROPERTY
+            J
+      Label : LEFT
+        $e
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        ??
+        Label : RIGHT
+          1
+        Label : LEFT
+          ->
+          Label : OBJECT
+            (
+            Label : CODE
+              ::
+              Label : CLASS
+                Bb
+              Label : CONSTANT
+                I
+          Label : PROPERTY
+            J
+      Label : LEFT
+        $e
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        ??
+        Label : RIGHT
+          1
+        Label : LEFT
+          ::
+          Label : CLASS
+            ::
+            Label : CLASS
+              Bb
+            Label : METHOD
+              I
+              Label : ARGUMENTS
+                void
+          Label : CONSTANT
+            J
+      Label : LEFT
+        $e
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        ??
+        Label : RIGHT
+          1
+        Label : LEFT
+          ->
+          Label : OBJECT
+            [
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  +
+                  Label : RIGHT
+                    3
+                  Label : LEFT
+                    3
+              Label : PROPERTY
+                I
+            Label : INDEX
+              '4'
+          Label : PROPERTY
+            J
+      Label : LEFT
+        $e
