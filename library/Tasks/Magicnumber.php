@@ -73,7 +73,7 @@ SQL;
         
         $outputFile = fopen($config->projects_root.'/projects/'.$config->project.'/bigArrays.txt', 'w+');
         foreach($res as $v) {
-            fwrite($outputFile, $v[0]."\n");
+            fwrite($outputFile, $v."\n");
         }
         fclose($outputFile);
     }
