@@ -37,8 +37,8 @@ class Parenthesis extends TokenAuto {
                                                                  'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
                                                                  'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
                                                                  'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS')),
-                                              'notAtom'  => array('Array', 'Property')),
+                                                                 'T_CLOSE_PARENTHESIS')),
+                                              'notAtom'  => array('Array', 'Property', 'Parenthesis')),
                                    0 => array('token'    => Parenthesis::$operators,
                                               'atom'     => 'none',
                                               'property' => array('association' => 'none')),
@@ -54,6 +54,29 @@ class Parenthesis extends TokenAuto {
                                'addSemicolon' => 'it',
                                'keepIndexed'  => true);
         $this->checkAuto();
+
+        // ((parenthesis inside parenthesis))
+        $this->conditions = array( -1 => array('notToken' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
+                                                                 array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
+                                                                 'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
+                                                                 'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
+                                                                 'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
+                                                                 'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                 'T_CLOSE_PARENTHESIS')),
+                                              'notAtom'  => array('Array', 'Property', 'Parenthesis')),
+                                   0 => array('token'    => self::$operators),
+                                   1 => array('atom'     => self::$atom),
+                                   2 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'CODE',
+                                                        2 => 'DROP'),
+                               'atom'         => 'Parenthesis',
+                               'cleanIndex'   => true,
+                               'addSemicolon' => 'it',
+                               'keepIndexed'  => true);
+        $this->checkAuto();
+
 
 // this applies to situations like print ($a * $b) + $c; where parenthesis actually belong to the following expression.
         $this->conditions = array(-1 => array('token' => array_merge(array('T_ECHO', 'T_PRINT'), _Include::$operators)),
@@ -78,7 +101,7 @@ class Parenthesis extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode',  "( " + fullcode.out("CODE").next().getProperty('fullcode') + ")");
+fullcode.setProperty('fullcode',  "( " + fullcode.out("CODE").next().getProperty('fullcode') + " )");
 
 GREMLIN;
     }

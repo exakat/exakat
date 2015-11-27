@@ -29,12 +29,14 @@ class Functioncall extends TokenAuto {
                                                 'T_EXIT', 'T_DIE', 'T_STATIC', 'T_ECHO', 'T_PRINT', 'T_OPEN_PARENTHESIS');
     static public $operatorsWithoutEcho = array('T_VARIABLE', 'T_DOLLAR', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY',
                                                 'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL',
-                                                'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER', 'T_OPEN_PARENTHESIS');
+                                                'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER');
     static public $atom = 'Functioncall';
 
     public function _check() {
         // functioncall(with arguments or void) with another function as name (initial name is $variable or string)
-        $this->conditions = array(   0 => array('token' => array('T_STRING', 'T_VARIABLE', 'T_NS_SEPARATOR', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+        $this->conditions = array(   0 => array('token' => array('T_STRING', 'T_VARIABLE', 'T_NS_SEPARATOR', 'T_OBJECT_OPERATOR', 
+                                                                 'T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS'),
+                                                'atom'  => 'yes'),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),
                                      2 => array('atom'  =>  array('Arguments', 'Void')),
@@ -68,7 +70,7 @@ class Functioncall extends TokenAuto {
         // functioncall(with arguments or void) that will be in a sequence
         // No -> or ::, but OK as atoms.
         $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
-                                     0 => array('token'     => static::$operatorsWithoutEcho),
+                                     0 => array('token'     => array_merge(static::$operatorsWithoutEcho, array('T_OPEN_PARENTHESIS'))),
                                      1 => array('atom'      => 'none',
                                                 'token'     => 'T_OPEN_PARENTHESIS'),
                                      2 => array('atom'      =>  array('Arguments', 'Void')),

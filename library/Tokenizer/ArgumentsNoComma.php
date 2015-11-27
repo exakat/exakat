@@ -38,7 +38,7 @@ class ArgumentsNoComma extends Arguments {
                                               'notAtom'   => 'Arguments'),
                                    2 => array('token'     => 'T_CLOSE_PARENTHESIS',
                                               'atom'      => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLE_COLON')), //, 'T_OPEN_PARENTHESIS'
+                                   3 => array('filterOut' => 'T_DOUBLE_COLON'),
         );
 
         $this->actions = array('insertVertex' => true,
@@ -46,7 +46,23 @@ class ArgumentsNoComma extends Arguments {
                                );
         $this->checkAuto();
 
-        // @note f(1) : no comma
+        // @note ($a->b())(c); special case for parenthesis as a function name
+        $this->conditions = array(-1 => array('atom'      => 'Parenthesis'),
+                                   0 => array('token'     => ArgumentsNoComma::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => 'yes',
+                                              'notAtom'   => 'Arguments'),
+                                   2 => array('token'     => 'T_CLOSE_PARENTHESIS',
+                                              'atom'      => 'none'),
+                                   3 => array('filterOut' => 'T_DOUBLE_COLON'),
+        );
+
+        $this->actions = array('insertVertex' => true,
+                               'rank'         => array(1 => 0)
+                               );
+        $this->checkAuto();
+
+        // @note function &f(1) : no comma
         $this->conditions = array(-2 => array('token'     => 'T_FUNCTION'),
                                   -1 => array('token'     => 'T_AND'),
                                    0 => array('token'     => ArgumentsNoComma::$operators,
@@ -55,7 +71,7 @@ class ArgumentsNoComma extends Arguments {
                                               'notAtom'   => 'Arguments'),
                                    2 => array('token'     => 'T_CLOSE_PARENTHESIS',
                                               'atom'      => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLE_COLON')), //, 'T_OPEN_PARENTHESIS'
+                                   3 => array('filterOut' => 'T_DOUBLE_COLON'), 
         );
 
         $this->actions = array('insertVertex' => true,
