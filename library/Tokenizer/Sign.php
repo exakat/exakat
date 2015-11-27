@@ -41,7 +41,7 @@ class Sign extends TokenAuto {
         $this->conditions = array( -1 => array('notToken' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                                'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
                                                                                'T_CLOSE_PARENTHESIS', 'T_VARIABLE',
-                                                                               'T_CLOSE_BRACKET', 'T_SHELL_QUOTE',
+                                                                               'T_CLOSE_BRACKET', 'T_SHELL_QUOTE', 'T_NS_SEPARATOR',
                                                                                'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE',
                                                                                'T_DOLLAR', 'T_CLOSE_CURLY', 'T_FUNCTION'),
                                                                           $php7Precedence,
