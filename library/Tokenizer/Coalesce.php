@@ -39,7 +39,8 @@ class Coalesce extends TokenAuto {
                                                'notAtom'  => 'Sequence'),
                                     2 => array('notToken' => array_merge(Coalesce::$operators, Parenthesis::$operators,
                                                                          Concatenation::$operators, Coalesce::$operators,
-                                                                         _Array::$operators, Property::$operators)),
+                                                                         _Array::$operators, Property::$operators,
+                                                                         Assignation::$operators, Comparison::$operators)),
                                    );
         
         $this->actions = array('transform'    => array( -1 => 'LEFT',

@@ -1,0 +1,142 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : NAME
+      foo
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ??
+          Label : RIGHT
+            =
+            Label : RIGHT
+              count
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $a
+                  Label : PROPERTY
+                    fields
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                names
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              names
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            names
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ??
+          Label : RIGHT
+            =
+            Label : RIGHT
+              array_keys
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    fields
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                names
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              names
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              3
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            fields
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            stdclass
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                void
+        Label : LEFT
+          $a
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $a
+        Label : STATIC
+          static
+      Label : ELEMENT
+        print_r
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $a
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        foo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        foo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
