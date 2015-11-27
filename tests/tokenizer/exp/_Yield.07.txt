@@ -1,0 +1,54 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : NAME
+      B
+    Label : RETURN
+      Generator
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        while
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            void
+        Label : CONDITION
+          !==
+          Label : RIGHT
+            null
+          Label : LEFT
+            yield
+            Label : YIELD
+              void
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          yield
+          Label : YIELD
+            void
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      B
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : VALUE
+      $c
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        var_dump
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $c

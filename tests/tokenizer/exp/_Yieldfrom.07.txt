@@ -1,0 +1,124 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : NAME
+      count_to_ten
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          1
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          2
+      Label : ELEMENT
+        yield from
+        Label : YIELD
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              4
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          9
+      Label : ELEMENT
+        yield from
+        Label : YIELD
+          seven_eight
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          10
+      Label : ELEMENT
+        yield from
+        Label : YIELD
+          new
+          Label : NEW
+            ArrayIterator
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                [
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    5
+                  Label : ARGUMENT
+                    6
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : NAME
+      eight
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          8
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : NAME
+      seven_eight
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        yield from
+        Label : YIELD
+          eight
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          7
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            "
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                $num
+              Label : CONCAT
+                 
+    Label : SOURCE
+      count_to_ten
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : VALUE
+      $num

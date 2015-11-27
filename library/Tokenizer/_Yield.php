@@ -51,7 +51,8 @@ class _Yield extends TokenAuto {
                                'keepIndexed' => true);
         $this->checkAuto();
 
-        if (version_compare('7.0', self::$phpExecVersion) > 0) {
+        $config = \Config::factory();
+        if (version_compare('7.0', $config->phpversion) > 0) {
             // PHP 5.6 and -
             $this->conditions = array(0 => array('token' => _Yield::$operators,
                                                  'atom'  => 'none'),
@@ -67,7 +68,8 @@ class _Yield extends TokenAuto {
                                       1 => array('atom'  => 'yes'),
                                       2 => array('token' => array_merge( array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG'),
                                                                          Addition::$operators,
-                                                                         Logical::$operators)
+                                                                         Logical::$operators,
+                                                                         Comparison::$operators)
                                                 )
                                       );
         }
