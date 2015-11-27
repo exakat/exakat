@@ -43,7 +43,7 @@ class _Function extends TokenAuto {
         // function name ( arguments )
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => array('T_STRING', 'T_EMPTY', 'T_LIST')),
+                                  1 => array('token' => Functioncall::$operators),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS',
 //                                             'property' => array('association' => 'Function')
                                              ),
@@ -166,6 +166,12 @@ if (fullcode.out('DEFINE').any()) {
         fullcode.fullcode = 'function &';
     } else {
         fullcode.fullcode = 'function ';
+    }
+
+    if (fullcode.out('NAME').any() && fullcode.out('NAME').next().fullcode == null) { 
+        name = fullcode.out('NAME').next();
+        name.fullcode = name.code;
+        name.atom = 'String';
     }
 
     if (fullcode.out('NAME').any())      { fullcode.fullcode = fullcode.fullcode +           fullcode.out('NAME').next().fullcode;            }

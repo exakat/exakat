@@ -125,6 +125,10 @@ class _Use extends TokenAuto {
 s = [];
 fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{
     a = it.getProperty('fullcode');
+    link = it.inE().next().label.toLowerCase();
+    if (link != 'use') {
+        a = link + ' ' + a;
+    }
     s.add(a);
 };
 

@@ -1084,9 +1084,31 @@ while(!(a2.token == 'T_CLOSE_CURLY')) {
     toDelete.push(a2);
 
     a2 = a2.out('NEXT').next();
+    
+    if (a2.token == 'T_FUNCTION') {
+        f = a2;
+        
+        a2 = a2.out('NEXT').next();
+
+        toDelete.push(f);
+        f.bothE('NEXT').each{ g.removeEdge(it); }
+        
+        g.addEdge(it, a2, 'FUNCTION');
+    } else if (a2.token == 'T_CONST') {
+        f = a2;
+        
+        a2 = a2.out('NEXT').next();
+
+        toDelete.push(f);
+        f.bothE('NEXT').each{ g.removeEdge(it); }
+        
+        g.addEdge(it, a2, 'CONST');
+    } else {
+        g.addEdge(it, a2, link);
+    }
+    
     a2.rank = rank;
     ++rank;
-    g.addEdge(it, a2, link);
 
     a2 = a2.out('NEXT').next();
 }
@@ -1094,8 +1116,12 @@ while(!(a2.token == 'T_CLOSE_CURLY')) {
 g.addEdge(it, a2.out('NEXT').next(), 'NEXT');
 toDelete.push(a2);
 
-it.out(link).bothE('NEXT').each{ g.removeEdge(it); }
-it.out(link).bothE('INDEXED').each{ g.removeEdge(it); }
+it.out('USE').bothE('NEXT').each{ g.removeEdge(it); }
+it.out('CONST').bothE('NEXT').each{ g.removeEdge(it); }
+it.out('FUNCTION').bothE('NEXT').each{ g.removeEdge(it); }
+it.out('USE').bothE('INDEXED').each{ g.removeEdge(it); }
+it.out('CONST').bothE('INDEXED').each{ g.removeEdge(it); }
+it.out('FUNCTION').bothE('INDEXED').each{ g.removeEdge(it); }
 
 GREMLIN;
             unset($actions['makeGroupedUse']);

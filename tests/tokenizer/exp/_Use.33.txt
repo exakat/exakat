@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  namespace
+  Label : NAMESPACE
+    X
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      use
+      Label : USE
+        A
+      Label : USE
+        \
+        Label : SUBNAME
+          D
+        Label : SUBNAME
+          B
+      Label : FUNCTION
+        fc
+      Label : FUNCTION
+        fa
+      Label : FUNCTION
+        fb
+      Label : CONST
+        ca
+      Label : CONST
+        cd
+    Label : ELEMENT
+      foo
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $a

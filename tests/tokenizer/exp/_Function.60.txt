@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  namespace
+  Label : BLOCK
+    Sequence
+    Label : ELEMENT
+      class
+      Label : NAME
+        b
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          function
+          Label : PROTECTED
+            protected
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+          Label : NAME
+            exit
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              exit
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    d
+  Label : NAMESPACE
+    a
