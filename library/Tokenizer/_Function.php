@@ -43,7 +43,7 @@ class _Function extends TokenAuto {
         // function name ( arguments )
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => Functioncall::$operators),
+                                  1 => array('token' => array_merge(Functioncall::$operators, array('T_DO', 'T_WHILE', 'T_FOREACH'))),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS',
 //                                             'property' => array('association' => 'Function')
                                              ),

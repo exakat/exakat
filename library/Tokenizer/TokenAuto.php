@@ -1061,6 +1061,7 @@ it.groupedUse = true;
 
 if (a1.token in ['T_FUNCTION', 'T_CONST']) {
     link = a1.code.toUpperCase();
+
     toDelete.push(a1);
     a1 = a1.out('NEXT').next();
     a2 = a1.out('NEXT').next();
@@ -1075,8 +1076,15 @@ if (a1.atom == 'Nsname') {
 } else {
     it.groupPath = '\\\\' + a1.fullcode + '\\\\';
     it.fullnsprefix = '\\\\' + a1.fullcode.toLowerCase() + '\\\\';
+
 }
 toDelete.push(a1);
+// Drop the \
+if (a2.token == 'T_NS_SEPARATOR') {
+    // a1 is now unused
+    toDelete.push(a2);
+    a2 = a2.out('NEXT').next();
+}
 
 rank = 0;
 // a2 is the { then ,
@@ -1091,7 +1099,7 @@ while(!(a2.token == 'T_CLOSE_CURLY')) {
         a2 = a2.out('NEXT').next();
 
         toDelete.push(f);
-        f.bothE('NEXT').each{ g.removeEdge(it); }
+//        f.bothE('NEXT').each{ g.removeEdge(it); }
         
         g.addEdge(it, a2, 'FUNCTION');
     } else if (a2.token == 'T_CONST') {
@@ -1100,7 +1108,7 @@ while(!(a2.token == 'T_CLOSE_CURLY')) {
         a2 = a2.out('NEXT').next();
 
         toDelete.push(f);
-        f.bothE('NEXT').each{ g.removeEdge(it); }
+//        f.bothE('NEXT').each{ g.removeEdge(it); }
         
         g.addEdge(it, a2, 'CONST');
     } else {

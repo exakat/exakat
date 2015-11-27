@@ -76,9 +76,10 @@ class _Use extends TokenAuto {
         $this->conditions = array(  0 => array('token' => static::$operators),
                                     1 => array('token' => array('T_FUNCTION', 'T_CONST')),
                                     2 => array('atom'  => array('Identifier', 'Nsname')),
-                                    3 => array('token' => 'T_OPEN_CURLY'),
-                                    4 => array('atom'  => array('Identifier', 'Nsname', 'As')),
-                                    5 => array('token' => array('T_COMMA', 'T_CLOSE_CURLY')),
+                                    3 => array('token' => 'T_NS_SEPARATOR'),
+                                    4 => array('token' => 'T_OPEN_CURLY'),
+                                    5 => array('atom'  => array('Identifier', 'Nsname', 'As')),
+                                    6 => array('token' => array('T_COMMA', 'T_CLOSE_CURLY')),
                                  );
         
         $this->actions = array('makeGroupedUse' => true,
@@ -134,16 +135,18 @@ fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{
 
 if (fullcode.out('FUNCTION').any()) {
     fullcode.setProperty('fullcode', fullcode.getProperty('code') + " function ");
+    fullcode.setProperty('originpath', fullcode.getProperty('code').toLowerCase());
 } else if (it.out('CONST').any()) {
     fullcode.setProperty('fullcode', fullcode.getProperty('code') + " const ");
+    fullcode.setProperty('fullcode', fullcode.getProperty('code').toLowerCase());
 } else {
     fullcode.setProperty('fullcode', fullcode.getProperty('code') + " ");
 }
 
 if (fullcode.groupedUse == true) {
-    fullcode.fullcode = fullcode.fullcode + fullcode.groupPath + "{ " + s.join(", ") + " }";
+    fullcode.fullcode = fullcode.fullcode + ' ' + fullcode.groupPath + "{ " + s.join(", ") + " }";
 } else {
-    fullcode.fullcode = fullcode.fullcode + s.join(", ");
+    fullcode.fullcode = fullcode.fullcode + ' ' + s.join(", ");
 }
 
 

@@ -29,15 +29,17 @@ class Parenthesis extends TokenAuto {
     
     public function _check() {
         $operands    = 'yes';
+        
+        $prerequisite = array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
+                                    array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
+                                    'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
+                                    'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
+                                    'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
+                                    'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                    'T_CLOSE_PARENTHESIS', 'T_DO'));
 
         // ( normal parenthesis )
-        $this->conditions = array(-1 => array('notToken' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
-                                                                 array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
-                                                                 'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
-                                                                 'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
-                                                                 'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
-                                                                 'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                 'T_CLOSE_PARENTHESIS')),
+        $this->conditions = array(-1 => array('notToken' => $prerequisite,
                                               'notAtom'  => array('Array', 'Property', 'Parenthesis')),
                                    0 => array('token'    => Parenthesis::$operators,
                                               'atom'     => 'none',
@@ -56,17 +58,11 @@ class Parenthesis extends TokenAuto {
         $this->checkAuto();
 
         // ((parenthesis inside parenthesis))
-        $this->conditions = array( -1 => array('notToken' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
-                                                                 array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
-                                                                 'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
-                                                                 'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
-                                                                 'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
-                                                                 'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                 'T_CLOSE_PARENTHESIS')),
-                                              'notAtom'  => array('Array', 'Property', 'Parenthesis')),
-                                   0 => array('token'    => self::$operators),
-                                   1 => array('atom'     => self::$atom),
-                                   2 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+        $this->conditions = array( -1 => array('notToken' => $prerequisite,
+                                               'notAtom'  => array('Array', 'Property', 'Parenthesis')),
+                                    0 => array('token'    => self::$operators),
+                                    1 => array('atom'     => self::$atom),
+                                    2 => array('token'    => 'T_CLOSE_PARENTHESIS'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'CODE',

@@ -384,10 +384,13 @@ g.idx('atoms')[['atom':'Use']].filter{ it.in('ELEMENT').in('BLOCK').filter{ it.a
 ", "
 // use  usage in a namespace
 g.idx('atoms')[['atom':'Use']].filter{ it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class']}.any() == false}
-.sideEffect{theUse = it;}.out('USE').each{
+.sideEffect{theUse = it;}.outE.filter{it.label in ['USE', 'FUNCTION', 'CONST']}.inV.each{
+                                                                                // Indeed, inV
     fullcode = it;
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
+    } else if (theUse.groupedUse == true) {
+        fullcode.setProperty('fullnspath', theUse.fullnsprefix + fullcode.originpath.toLowerCase());
     } else if (fullcode.out('NAME').any() && fullcode.out('NAME').next().absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
     } else {
@@ -506,6 +509,7 @@ g.idx('atoms')[['atom':'Trait']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
     }
 };
 ", "
+
 // trait definitions
 g.idx('atoms')[['atom':'Trait']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
@@ -666,7 +670,7 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
 
 ", "
 // Constant usage (simple resolution of the namespaces)
-g.idx('atoms')[['atom':'Identifier']].filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').count() == 0}
+g.idx('atoms')[['atom':'Identifier']].filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').count() == 0}
     .filter{it.out('ARGUMENTS').any() == false}
     .filter{it.in('LEFT').in('CONST').any() == false}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
@@ -681,7 +685,7 @@ g.idx('atoms')[['atom':'Identifier']].filter{it.in('USE', 'SUBNAME', 'METHOD', '
 };
 ", "
 // Constant usage (2)
-g.idx('atoms')[['atom':'Nsname']].filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
+g.idx('atoms')[['atom':'Nsname']].filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
     .filter{it.out('ARGUMENTS').count() == 0}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
         if (fullcode.absolutens == true) {

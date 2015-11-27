@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  namespace
+  Label : BLOCK
+    Sequence
+    Label : ELEMENT
+      interface
+      Label : NAME
+        C
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          function
+          Label : PUBLIC
+            public
+          Label : NAME
+            foreach
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $c
+        Label : ELEMENT
+          function
+          Label : PUBLIC
+            public
+          Label : NAME
+            do
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              Typehint
+              Label : CLASS
+                D
+              Label : VARIABLE
+                $b
+  Label : NAMESPACE
+    B
