@@ -28,11 +28,27 @@ class ArgumentsNoComma extends Arguments {
     static public $atom = 'Arguments';
 
     public function _check() {
+        // @note function f($a) {}
+        $this->conditions = array(-2 => array('token'     => 'T_FUNCTION'),
+                                  -1 => array('notToken'  => 'T_OPEN_CURLY'),
+                                   0 => array('token'     => ArgumentsNoComma::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => 'yes',
+                                              'notAtom'   => 'Arguments'),
+                                   2 => array('token'     => 'T_CLOSE_PARENTHESIS',
+                                              'atom'      => 'none'),
+                                   3 => array('filterOut' => 'T_DOUBLE_COLON'),
+        );
+
+        $this->actions = array('insertVertex' => true,
+                               'rank'         => array(1 => 0)
+                               );
+        $this->checkAuto();
+
         // @note f(1) : no comma
         $this->conditions = array(-1 => array('token'     => array_merge(Functioncall::$operatorsWithoutEcho,
-                                                                         array('T_FUNCTION', 'T_DECLARE', 'T_USE', 'T_CLASS',
-                                                                               'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_VARIABLE',
-                                                                               'T_DO'))),
+                                                                 array('T_FUNCTION', 'T_DECLARE', 'T_USE', 'T_CLASS',
+                                                                       'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_VARIABLE'))),
                                    0 => array('token'     => ArgumentsNoComma::$operators,
                                               'atom'      => 'none'),
                                    1 => array('atom'      => 'yes',

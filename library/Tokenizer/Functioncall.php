@@ -69,7 +69,7 @@ class Functioncall extends TokenAuto {
 
         // functioncall(with arguments or void) that will be in a sequence
         // No -> or ::, but OK as atoms.
-        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
+        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR', 'T_EVAL')),
                                      0 => array('token'     => array_merge(static::$operatorsWithoutEcho, array('T_OPEN_PARENTHESIS'))),
                                      1 => array('atom'      => 'none',
                                                 'token'     => 'T_OPEN_PARENTHESIS'),
@@ -139,7 +139,9 @@ if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
     // Do nothing.
 } else if (fullcode.getProperty('token') == 'T_OPEN_PARENTHESIS') {
     // Do nothing.
-} else{
+} else if (fullcode.getProperty('fullcode') != null) {
+    fullcode.setProperty('fullcode', it.getProperty('fullcode'));
+} else {
     fullcode.setProperty('fullcode', it.getProperty('code'));
 }
 

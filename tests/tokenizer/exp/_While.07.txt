@@ -21,6 +21,66 @@ Label : CODE
       Label : LEFT
         +
         Label : RIGHT
+          @
+          Label : AT
+            3
+        Label : LEFT
+          +
+          Label : RIGHT
+            2
+          Label : LEFT
+            1
+    Label : THEN
+      void
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      1
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      -
+      Label : RIGHT
+        [
+        Label : VARIABLE
+          $r
+        Label : INDEX
+          $s
+      Label : LEFT
+        +
+        Label : RIGHT
+          ~
+          Label : NOT
+            3
+        Label : LEFT
+          +
+          Label : RIGHT
+            2
+          Label : LEFT
+            1
+    Label : THEN
+      void
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      1
+    Label : BLOCK
+      void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      -
+      Label : RIGHT
+        [
+        Label : VARIABLE
+          $r
+        Label : INDEX
+          $s
+      Label : LEFT
+        +
+        Label : RIGHT
           !
           Label : NOT
             3

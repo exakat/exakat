@@ -22,3 +22,39 @@ Label : CODE
         
         Label : ARGUMENT
           $b
+    Label : ELEMENT
+      (
+      Label : CODE
+        ->
+        Label : OBJECT
+          $b2
+        Label : PROPERTY
+          B2
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $b2
+    Label : ELEMENT
+      [
+      Label : VARIABLE
+        $x
+      Label : INDEX
+        (
+        Label : CODE
+          ->
+          Label : OBJECT
+            $b3
+          Label : PROPERTY
+            B3
+    Label : ELEMENT
+      (
+      Label : CODE
+        ->
+        Label : OBJECT
+          $b3
+        Label : PROPERTY
+          B3
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $b3

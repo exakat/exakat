@@ -36,7 +36,9 @@ class Parenthesis extends TokenAuto {
                                     'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
                                     'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
                                     'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                    'T_CLOSE_PARENTHESIS', 'T_DO'));
+                                    'T_CLOSE_PARENTHESIS'));
+                                    
+        //, 'T_DO' and other keywords must be added for PHP 7 only
 
         // ( normal parenthesis )
         $this->conditions = array(-1 => array('notToken' => $prerequisite,
