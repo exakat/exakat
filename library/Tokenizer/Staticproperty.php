@@ -30,10 +30,8 @@ class Staticproperty extends TokenAuto {
                                     'Staticproperty', 'Staticconstant', 'Staticmethodcall' );
 
     public function _check() {
-        
-        
         $config = \Config::factory();
-        if (version_compare('7.0', $config->phpversion) > 0) {
+        if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 +
             $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
                                        -1 => array('atom'      => Staticproperty::$operands),
@@ -46,7 +44,7 @@ class Staticproperty extends TokenAuto {
                                        -1 => array('atom'      => Staticproperty::$operands),
                                         0 => array('token'     => Staticproperty::$operators),
                                         1 => array('atom'      => array('Variable', 'Array', 'Arrayappend', 'Property')),
-                                        2 => array('filterOut' => 'T_OPEN_PARENTHESIS'));
+                                        2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
         }
         
         $this->actions = array('transform'    => array( -1 => 'CLASS',
@@ -56,6 +54,22 @@ class Staticproperty extends TokenAuto {
                                'addSemicolon' => 'it');
         $this->checkAuto();
 
+        if (version_compare('7.0', $config->phpversion) >= 0) {
+            print __METHOD__."\n\n";
+            // PHP 7.0 +
+            $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
+                                       -1 => array('atom'      => Staticproperty::$operands),
+                                        0 => array('token'     => Staticproperty::$operators),
+                                        1 => array('atom'      => array('Variable', 'Array', 'Arrayappend', 'Property', )),
+                                        2 => array('token'     => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));        
+
+            $this->actions = array('transform'    => array( -1 => 'CLASS',
+                                                             1 => 'PROPERTY'),
+                                   'atom'         => 'Staticproperty',
+                                   'cleanIndex'   => true);
+            $this->checkAuto();
+        }
+        
         return false;
     }
 

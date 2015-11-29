@@ -6,13 +6,51 @@ Label : CODE
     Label : RIGHT
       ==
       Label : RIGHT
-        'G'
+        'G3'
+      Label : LEFT
+        ::
+        Label : CLASS
+          c
+        Label : METHOD
+          E3
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $d
+              Label : PROPERTY
+                F
+    Label : LEFT
+      ==
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              D
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a3
+        Label : PROPERTY
+          B
+  Label : ELEMENT
+    ||
+    Label : RIGHT
+      ==
+      Label : RIGHT
+        'G1'
       Label : LEFT
         {
         Label : VARIABLE
           ::
           Label : PROPERTY
-            $E
+            $E1
           Label : CLASS
             c
         Label : INDEX
@@ -26,7 +64,7 @@ Label : CODE
       Label : RIGHT
         C
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             ->
             Label : OBJECT
@@ -36,6 +74,44 @@ Label : CODE
       Label : LEFT
         ->
         Label : OBJECT
-          $a
+          $a1
+        Label : PROPERTY
+          B
+  Label : ELEMENT
+    ||
+    Label : RIGHT
+      ==
+      Label : RIGHT
+        'G2'
+      Label : LEFT
+        [
+        Label : VARIABLE
+          ::
+          Label : PROPERTY
+            $E2
+          Label : CLASS
+            c
+        Label : INDEX
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            F
+    Label : LEFT
+      ==
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              D
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a2
         Label : PROPERTY
           B
