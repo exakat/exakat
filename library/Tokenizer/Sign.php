@@ -32,29 +32,30 @@ class Sign extends TokenAuto {
 
     public function _check() {
         $config = \Config::factory();
-        if (version_compare('7.0', $config->phpversion) > 0) {
-            // PHP 5.6 and -
-            $php7Precedence = array();
-        } else {
+        if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 and +
             $php7Precedence = array('T_YIELD');
+        } else {
+            // PHP 5.6 and -
+            $php7Precedence = array();
         }
         
+        $prerequisite = array('notToken' => array_merge(array('T_STRING', 'T_ARRAY', 'T_DOT',
+                                                              'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
+                                                              'T_CLOSE_PARENTHESIS', 'T_VARIABLE',
+                                                              'T_CLOSE_BRACKET','T_DOLLAR', 'T_CLOSE_CURLY',
+                                                              'T_FUNCTION', 'T_INC', 'T_DEC',
+                                                              'T_QUOTE', 'T_QUOTE_CLOSE',
+                                                              'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR'),
+                                                         $php7Precedence,
+                                                         Magicconstant::$operators,
+                                                         Bitshift::$operators),
+                              'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
+                                                    'Multiplication', 'Cast', 'Integer', 'Float', 'Function',
+                                                    'Concatenation', 'Power', 'Not'));
+        
         //  + -1  (special case for Integers)
-        $this->conditions = array( -1 => array('notToken' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                               'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
-                                                                               'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 
-                                                                               'T_CLOSE_BRACKET', 'T_SHELL_QUOTE', 'T_NS_SEPARATOR',
-                                                                               'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE',
-                                                                               'T_DOLLAR', 'T_CLOSE_CURLY', 'T_FUNCTION'),
-                                                                          $php7Precedence,
-                                                                          Magicconstant::$operators,
-                                                                          Preplusplus::$operators,
-                                                                          PostPlusPlus::$operators,
-                                                                          Not::$operators),
-                                               'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
-                                                                     'Multiplication', 'Cast', 'Integer', 'Float', 'Function',
-                                                                     'Concatenation', 'Power' )),
+        $this->conditions = array( -1 => $prerequisite,
                                     0 => array('token'      => Sign::$operators,
                                                'atom'       => 'none'),
                                     1 => array('atom'       => 'Integer'),
@@ -73,20 +74,7 @@ class Sign extends TokenAuto {
         
         //  + -$s (Normal case)
         //'T_OPEN_CURLY',
-        $this->conditions = array( -1 => array('notToken' => array_merge(array('T_STRING', 'T_ARRAY', 'T_DOT',
-                                                                               'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
-                                                                               'T_CLOSE_PARENTHESIS', 'T_VARIABLE',
-                                                                               'T_CLOSE_BRACKET','T_DOLLAR', 'T_CLOSE_CURLY',
-                                                                               'T_FUNCTION', 'T_INC', 'T_DEC',
-                                                                               'T_QUOTE', 'T_QUOTE_CLOSE',
-                                                                               'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR'),
-                                                                          $php7Precedence,
-                                                                          Magicconstant::$operators,
-                                                                          Bitshift::$operators,
-                                                                          Not::$operators),
-                                               'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
-                                                                     'Multiplication', 'Cast', 'Integer', 'Float', 'Function',
-                                                                     'Concatenation', 'Power')),
+        $this->conditions = array( -1 => $prerequisite,
                                     0 => array('token'      => Sign::$operators),
                                     1 => array('atom'       => Sign::$operands),
                                     2 => array('filterOut'  => array_merge( Methodcall::$operators, Parenthesis::$operators,

@@ -42,16 +42,16 @@ namespace x {
     
     function y(
     one_identifier $a, 
-    absolute_path $a, 
-    path $a, 
-    path2 $a, 
+    absolute_path $ab, 
+    path $ac, 
+    path2 $ad, 
 
-    a1 $a, 
-    \a1 $a, 
-    one_identifier3 $a, 
+    a1 $ae, 
+    \a1 $af, 
+    one_identifier3 $ag, 
 
-    a2 $a, 
-    a3 $a, 
-    a4 $a) {}
+    a2 $ah, 
+    a3 $ai, 
+    a4 $aj) {}
 
 }

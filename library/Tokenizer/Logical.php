@@ -38,16 +38,25 @@ class Logical extends TokenAuto {
     static public $atom = 'Logical';
 
     public function _check() {
-        $filterOut = array_merge(Comparison::$operators,     Bitshift::$operators,
-                                 Addition::$operators,       Multiplication::$operators,
-                                 Concatenation::$operators,  _Instanceof::$operators,
-                                 Preplusplus::$operators,    Not::$operators,
-                                 _New::$operators,           Property::$operators,
-                                 Staticproperty::$operators, Nsname::$operators,
-                                 Noscream::$operators);
-        if (version_compare('7.0', self::$phpExecVersion) < 0) {
-            // Before PHP 7
-            $filterOut = array_merge($filterOut, _Yield::$operators);
+        $config = \Config::factory();
+        if (version_compare('7.0', $config->phpversion) >= 0) {
+            // PHP 7.0 and +
+            $filterOut = array_merge(Comparison::$operators,     Bitshift::$operators,
+                                     Addition::$operators,       Multiplication::$operators,
+                                     Concatenation::$operators,  _Instanceof::$operators,
+                                     Preplusplus::$operators,    Not::$operators,
+                                     _New::$operators,           Property::$operators,
+                                     Staticproperty::$operators, Nsname::$operators,
+                                     Noscream::$operators);
+        } else {
+            // PHP 5.6 and -
+            $filterOut = array_merge(Comparison::$operators,     Bitshift::$operators,
+                                     Addition::$operators,       Multiplication::$operators,
+                                     Concatenation::$operators,  _Instanceof::$operators,
+                                     Preplusplus::$operators,    Not::$operators,
+                                     _New::$operators,           Property::$operators,
+                                     Staticproperty::$operators, Nsname::$operators,
+                                     Noscream::$operators,       _Yield::$operators);
         }
 
         // boolean comparison (||, &&)

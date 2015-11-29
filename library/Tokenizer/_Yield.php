@@ -52,16 +52,7 @@ class _Yield extends TokenAuto {
         $this->checkAuto();
 
         $config = \Config::factory();
-        if (version_compare('7.0', $config->phpversion) > 0) {
-            // PHP 5.6 and -
-            $this->conditions = array(0 => array('token' => _Yield::$operators,
-                                                 'atom'  => 'none'),
-                                      1 => array('atom'  => 'yes'),
-                                      2 => array('token' => array_merge( array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG'),
-                                                                         Addition::$operators)
-                                                )
-                                      );
-        } else {
+        if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 and +
             $this->conditions = array(0 => array('token' => _Yield::$operators,
                                                  'atom'  => 'none'),
@@ -70,6 +61,15 @@ class _Yield extends TokenAuto {
                                                                          Addition::$operators,
                                                                          Logical::$operators,
                                                                          Comparison::$operators)
+                                                )
+                                      );
+        } else {
+            // PHP 5.6 and -
+            $this->conditions = array(0 => array('token' => _Yield::$operators,
+                                                 'atom'  => 'none'),
+                                      1 => array('atom'  => 'yes'),
+                                      2 => array('token' => array_merge( array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG'),
+                                                                         Addition::$operators)
                                                 )
                                       );
         }

@@ -30,19 +30,19 @@ class VariableDollar extends TokenAuto {
     public function _check() {
         // $x or $$x or $$$ (Except for global)
         $config = \Config::factory();
-        if (version_compare('7.0', $config->phpversion) > 0) {
+        if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 and +
+            $this->conditions = array( 0 => array('token'     => static::$operators,
+                                                  'atom'      => 'none'),
+                                       1 => array('atom'      => array('Variable', 'Array', 'Property'))
+            );
+        } else {
+            // PHP 5.6 and -
             $this->conditions = array(-1 => array('notToken'  => 'T_GLOBAL'),
                                        0 => array('token'     => static::$operators,
                                                   'atom'      => 'none'),
                                        1 => array('atom'      => array('Variable', 'Array', 'Property')),
                                        2 => array('filterOut' => array('T_OPEN_BRACKET', 'T_OPEN_CURLY')),
-            );
-        } else {
-            // PHP 5.6 and -
-            $this->conditions = array( 0 => array('token'     => static::$operators,
-                                                  'atom'      => 'none'),
-                                       1 => array('atom'      => array('Variable', 'Array', 'Property'))
             );
         }
         

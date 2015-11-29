@@ -33,9 +33,10 @@ class _Array extends TokenAuto {
     public function _check() {
         // $x[3] or $x[] and multidimensional
         $config = \Config::factory();
-        if (version_compare('7.0', $config->phpversion) > 0) {
-            // PHP 5.6 and -
-            $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, Nsname::$operators)),
+        if (version_compare('7.0', $config->phpversion) >= 0) {
+            // PHP 7.0 and +
+            $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, VariableDollar::$operators,
+                                                                                  Property::$operators,   Staticproperty::$operators)),
                                        -1 => array('atom'          => static::$allowedObject),
                                         0 => array('token'         => static::$operators,
                                                    'checkForArray' => true),
@@ -43,9 +44,8 @@ class _Array extends TokenAuto {
                                         2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                      );
         } else {
-            // PHP 7.0 and +
-            $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, VariableDollar::$operators,
-                                                                                  Property::$operators,   Staticproperty::$operators)),
+            // PHP 5.6 and -
+            $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, Nsname::$operators)),
                                        -1 => array('atom'          => static::$allowedObject),
                                         0 => array('token'         => static::$operators,
                                                    'checkForArray' => true),

@@ -953,31 +953,20 @@ if (subname.getProperty('token') in ['T_STRING', 'T_NAMESPACE']) {
 }
 
 // Get the next token
-while(p.getProperty('token') == 'T_NS_SEPARATOR') {
+while(p.getProperty('token') == 'T_NS_SEPARATOR' && p.out('NEXT').next().token != 'T_OPEN_CURLY') {
     subname = p.out('NEXT').next();
-    if (subname.token == 'T_OPEN_CURLY') {
-        if (p != it) {
-            p.bothE('NEXT').each{ g.removeEdge(it); }
-            p.bothE('INDEXED').each{ g.removeEdge(it); }
-            toDelete.push(p);
-        }
-        p = subname; // that will stop the loop
-        p2 = subname;
-    } else {
-        g.addEdge(nsname, subname, 'SUBNAME');
-        subname.setProperty('rank', rank++);
+    g.addEdge(nsname, subname, 'SUBNAME');
+    subname.setProperty('rank', rank++);
 
-        p2 = subname.out('NEXT').next();
-        if (p != it) {
-            p.bothE('NEXT').each{ g.removeEdge(it); }
-            p.bothE('INDEXED').each{ g.removeEdge(it); }
-            toDelete.push(p);
-        }
-    
-//        g.addEdge(nsname, p2, 'NEXT');
-        p = p2;
-        subname.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+    p2 = subname.out('NEXT').next();
+    if (p != it) {
+        p.bothE('NEXT').each{ g.removeEdge(it); }
+        p.bothE('INDEXED').each{ g.removeEdge(it); }
+        toDelete.push(p);
     }
+
+    p = p2;
+    subname.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
 }
 
 g.addEdge(nsname, p2, 'NEXT');

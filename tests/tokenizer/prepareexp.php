@@ -53,8 +53,16 @@ if (empty($file)) {
 
 function run($test, $number) {
     print "$test.$number\n";
-    $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'."$test.$number".'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
     
+    $shell = 'php -l ./source/'.$test.'.'.$number.'.php';
+    $res = shell_exec($shell);
+    
+    if (strpos('No syntax errors detected in', $res) !== false) {
+        print "This script doesn't compile with ".PHP_VERSION." .\n";
+        return;
+    }
+    
+    $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'.$test.'.'.$number.'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
     shell_exec($shell);
     
     if (!file_exists('./exp/'."$test.$number".'.txt')) {

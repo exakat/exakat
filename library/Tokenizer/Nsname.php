@@ -42,6 +42,7 @@ class Nsname extends TokenAuto {
                                );
         $this->checkAuto();
 
+/*
         // @note use a\{ (for grouped Use)
         $this->conditions = array( -2 => array('token'     => 'T_USE'),
                                    -1 => array('atom'      => 'Identifier'),
@@ -55,7 +56,7 @@ class Nsname extends TokenAuto {
                                'keepIndexed'  => true,
                                );
         $this->checkAuto();
-
+*/
         return false;
     }
 

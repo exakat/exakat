@@ -29,11 +29,12 @@ class _Use extends TokenAuto {
 
     public function _check() {
     // use \a\b {} (grouping)
-        $this->conditions = array( 0 => array('token'     => static::$operators),
-                                   1 => array('atom'      => array('Identifier', 'Nsname')),
-                                   2 => array('token'     => 'T_OPEN_CURLY'),
-                                   3 => array('atom'      => array('Identifier', 'As', 'Nsname')),
-                                   4 => array('token'     => array('T_COMMA', 'T_CLOSE_CURLY')),
+        $this->conditions = array( 0 => array('token' => static::$operators),
+                                   1 => array('atom'  => array('Identifier', 'Nsname')),
+                                   2 => array('token' => 'T_NS_SEPARATOR'),
+                                   3 => array('token' => 'T_OPEN_CURLY'),
+                                   4 => array('atom'  => array('Identifier', 'As', 'Nsname')),
+                                   5 => array('token' => array('T_COMMA', 'T_CLOSE_CURLY')),
                                  );
         
         $this->actions = array('makeGroupedUse' => true,
@@ -72,7 +73,7 @@ class _Use extends TokenAuto {
                                );
         $this->checkAuto();
 
-    // use function|const \a\b{}; with grouping
+    // use function|const \a\b\ {}; with grouping
         $this->conditions = array(  0 => array('token' => static::$operators),
                                     1 => array('token' => array('T_FUNCTION', 'T_CONST')),
                                     2 => array('atom'  => array('Identifier', 'Nsname')),
