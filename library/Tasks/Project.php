@@ -160,10 +160,32 @@ class Project extends Tasks {
         $processes = array();
         foreach($this->themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
-            shell_exec('php '.$config->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
-mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
-            display("Analyzing $theme\n");
-            $this->updateProgress($progress++);
+
+                $args = array ( 1 => 'analyze',
+                                2 => '-p',
+                                3 => $config->project,
+                                4 => '-T',
+                                5 => trim($theme, '"'), // No need to protect anymore, as this is internal
+                                6 => '-norefresh',
+                                );
+            
+                try {
+                    $configThema = \Config::push($args);
+
+                    $analyze = new Analyze();
+                    $analyze->run($configThema);
+                    unset($report);
+                    
+                    rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
+                    $this->updateProgress($progress++);
+
+                    \Config::pop();
+                } catch (\Exception $e) {
+                    echo "Error while running the Analyze $theme \n",
+                         $e->getMessage();
+                    file_put_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+                    die();
+                }
 
             if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log')) {
                 return false;
