@@ -132,6 +132,7 @@ class Config {
                                'phploc'        => 1, 
                                'report_all'    => 1,
                                'report'        => 1, 
+                               'report2'       => 1, 
                                'results'       => 1, 
                                'stat'          => 1, 
                                'status'        => 1, 
@@ -142,6 +143,8 @@ class Config {
                                'vector'        => 1,
                                'classes'       => 1,
                                );
+                               
+    static private $stack = array();
      
     private function __construct($argv) {
         $this->argv = $argv;
@@ -192,22 +195,36 @@ class Config {
     static public function factory($argv = array()) {
         if (empty($argv)) {
             if (empty(static::$singleton)) {
-                static::$singleton = new self(array());
+                self::$singleton = new self(array());
+                self::$stack[] = self::$singleton;
             }
             return static::$singleton;
         } else {
             if (is_object($argv) && ($argv instanceof \Config)) {
-                static::$singleton = $argv;
+                self::$singleton = $argv;
             } else {
-                static::$singleton = new self($argv);
+                self::$singleton = new self($argv);
             }
-            return static::$singleton;
+            self::$stack[] = self::$singleton;
+            return self::$singleton;
         }
-        
     }
 
     static public function factorySingle($argv = array()) {
         return new Config($argv);
+    }
+    
+    static public function push($argv = array()) {
+        self::factory($argv);
+        
+        return self::$singleton;
+    }
+
+    static public function pop() {
+        $r = array_pop(self::$stack);
+        self::$singleton = self::$stack[count(self::$stack) -1];
+        
+        return $r;
     }
 
     public function __isset($name) {

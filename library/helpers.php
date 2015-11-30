@@ -22,11 +22,7 @@
 
 
 function display($text) {
-    static $config;
-    
-    if ($config === null) {
-        $config = \Config::factory();
-    }
+    $config = \Config::factory();
     
     if ($config->verbose) {
         echo trim($text), "\n";
