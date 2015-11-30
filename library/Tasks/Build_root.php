@@ -138,7 +138,17 @@ GREMLIN;
         gremlin_query("g.idx('atoms')[['token':'Rawstring']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
         $this->logTime('Unicodes block');
 
-        gremlin_query("g.idx('atoms')[['atom':'String']].has('noDelimiter', null).filter{ it.code in ['\"\"', \"''\"]}.each{ it.setProperty('noDelimiter', ''); };");
+        gremlin_query(<<<GREMLIN
+g.idx("atoms")[["atom":"String"]].has("noDelimiter", null).each{ 
+    if (it.code in ['""', "''"]) {
+        it.setProperty("noDelimiter", ''); 
+    } else {
+        it.setProperty("noDelimiter", it.getProperty("code")); 
+    }
+};
+
+GREMLIN
+);
         $this->logTime('Unicodes block');
 
         // resolving the constants

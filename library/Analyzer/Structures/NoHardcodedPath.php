@@ -30,7 +30,8 @@ class NoHardcodedPath extends Analyzer\Analyzer {
         $functions = array('glob', 'fopen', 'file', 'file_get_contents', 'file_put_contents', 'unlink',
                            'opendir', 'rmdir', 'mkdir');
 
-        $regex = '^php://(input|output|fd|memory|filter|stdin|stdout|stderr)';
+        $regexPhpProtocol = '^php://(input|output|fd|memory|filter|stdin|stdout|stderr)';
+        $regexAllowedProtocol = '^(https|http)';
         
         // string literal fopen('a', 'r');
         // may need some regex to exclude http...
@@ -40,7 +41,8 @@ class NoHardcodedPath extends Analyzer\Analyzer {
              ->is('rank', 0)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->regexNot('noDelimiter', $regex)
+             ->regexNot('noDelimiter', $regexPhpProtocol)
+             ->regexNot('noDelimiter', $regexAllowedProtocol)
              ->back('first');
         $this->prepareQuery();
 
@@ -56,7 +58,8 @@ class NoHardcodedPath extends Analyzer\Analyzer {
              ->outIs('CONCAT')
              ->is('rank', 0)
              ->tokenIs('T_ENCAPSED_AND_WHITESPACE')
-             ->regexNot('noDelimiter', $regex)
+             ->regexNot('noDelimiter', $regexPhpProtocol)
+             ->regexNot('noDelimiter', $regexAllowedProtocol)
              ->back('first');
         $this->prepareQuery();
 
@@ -70,7 +73,8 @@ class NoHardcodedPath extends Analyzer\Analyzer {
              ->outIs('CONCAT')
              ->is('rank', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->regexNot('noDelimiter', $regex)
+             ->regexNot('noDelimiter', $regexPhpProtocol)
+             ->regexNot('noDelimiter', $regexAllowedProtocol)
              ->back('first');
         $this->prepareQuery();
     }
