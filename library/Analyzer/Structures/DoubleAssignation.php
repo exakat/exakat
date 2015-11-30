@@ -29,6 +29,7 @@ class DoubleAssignation extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Assignation')
              ->outIs('LEFT')
+             ->atomIsNot('Arrayappend')
              ->savePropertyAs('fullcode', 'name')
              ->inIs('LEFT')
              ->nextSibling()
