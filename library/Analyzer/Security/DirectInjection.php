@@ -35,7 +35,7 @@ class DirectInjection extends Analyzer\Analyzer {
         $vars = $vars['incoming'];
         
         $safeIndex = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
-                           'SCRIPT_NAME', 'SERVER_ADMIN');
+                           'SCRIPT_NAME', 'SERVER_ADMIN', '_');
         $safeIndex = '(it.out("VARIABLE").has("code", "\$_SERVER").any() == false) ||
                        it.out("INDEX").has("atom", "String").filter{!(it.noDelimiter in ["' . join('", "', $safeIndex) . '"])}.any()';
 
