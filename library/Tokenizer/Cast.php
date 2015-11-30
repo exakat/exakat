@@ -32,7 +32,7 @@ class Cast extends TokenAuto {
         $this->conditions = array(0 => array('token'     => Cast::$operators,
                                              'atom'      => 'none'),
                                   1 => array('atom'      => 'yes',
-                                             'notAtom'   => array('Sequence', 'Label')),
+                                             'notAtom'   => array('Sequence', 'Label', 'Argument')),
                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', ),
                                                                         Preplusplus::$operators, Postplusplus::$operators,
                                                                         Nsname::$operators,

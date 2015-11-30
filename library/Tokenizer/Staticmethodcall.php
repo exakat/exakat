@@ -50,7 +50,7 @@ class Staticmethodcall extends TokenAuto {
         $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
                                    -1 => array('atom'     => Staticproperty::$operands),
                                     0 => array('token'    => Staticmethodcall::$operators),
-                                    1 => array('atom'     => array('Functioncall', 'Methodcall')),
+                                    1 => array('atom'     => array('Functioncall', 'Methodcall', 'Include')),
                                     2 => array('notToken' => 'T_OPEN_PARENTHESIS'),
                                  );
         

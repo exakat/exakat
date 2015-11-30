@@ -30,7 +30,7 @@ class ArgumentsNoComma extends Arguments {
     public function _check() {
         // @note function f($a) {}
         $this->conditions = array(-2 => array('token'     => 'T_FUNCTION'),
-                                  -1 => array('notToken'  => 'T_OPEN_CURLY'),
+                                  -1 => array('notToken'  => array('T_OPEN_CURLY', 'T_OPEN_PARENTHESIS')),
                                    0 => array('token'     => ArgumentsNoComma::$operators,
                                               'atom'      => 'none'),
                                    1 => array('atom'      => 'yes',
@@ -46,7 +46,8 @@ class ArgumentsNoComma extends Arguments {
         $this->checkAuto();
 
         // @note f(1) : no comma
-        $this->conditions = array(-1 => array('token'     => array_merge(Functioncall::$operatorsWithoutEcho,
+        $functioncalls = array_filter(Functioncall::$operatorsWithoutEcho, function ($x) { return $x != 'T_OPEN_PARENTHESIS'; });
+        $this->conditions = array(-1 => array('token'     => array_merge($functioncalls,
                                                                  array('T_FUNCTION', 'T_DECLARE', 'T_USE', 'T_CLASS',
                                                                        'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_VARIABLE'))),
                                    0 => array('token'     => ArgumentsNoComma::$operators,

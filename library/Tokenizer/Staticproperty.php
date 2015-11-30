@@ -55,7 +55,6 @@ class Staticproperty extends TokenAuto {
         $this->checkAuto();
 
         if (version_compare('7.0', $config->phpversion) >= 0) {
-            print __METHOD__."\n\n";
             // PHP 7.0 +
             $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
                                        -1 => array('atom'      => Staticproperty::$operands),

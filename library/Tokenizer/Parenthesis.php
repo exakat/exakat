@@ -31,14 +31,14 @@ class Parenthesis extends TokenAuto {
         $operands    = 'yes';
         
         $prerequisite = array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
-                                    array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
-                                    'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
-                                    'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
-                                    'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
-                                    'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                    'T_CLOSE_PARENTHESIS'));
-                                    
-        //, 'T_DO' and other keywords must be added for PHP 7 only
+                                    array('T_STRING',   'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
+                                          'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
+                                          'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
+                                          'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
+                                          'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                    ));
+        // Removing  (
+        $prerequisite = array_filter($prerequisite, function ($x) { return $x != 'T_OPEN_PARENTHESIS'; });
 
         // ( normal parenthesis )
         $this->conditions = array(-1 => array('notToken' => $prerequisite,
@@ -74,7 +74,6 @@ class Parenthesis extends TokenAuto {
                                'addSemicolon' => 'it',
                                'keepIndexed'  => true);
         $this->checkAuto();
-
 
 // this applies to situations like print ($a * $b) + $c; where parenthesis actually belong to the following expression.
         $this->conditions = array(-1 => array('token' => array_merge(array('T_ECHO', 'T_PRINT'), _Include::$operators)),
