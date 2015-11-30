@@ -89,7 +89,7 @@ class ArgumentsNoComma extends Arguments {
                                               'notAtom'   => 'Arguments'),
                                    2 => array('token'     => 'T_CLOSE_PARENTHESIS',
                                               'atom'      => 'none'),
-                                   3 => array('filterOut' => 'T_DOUBLE_COLON'), 
+                                   3 => array('filterOut' => 'T_DOUBLE_COLON'),
         );
 
         $this->actions = array('insertVertex' => true,

@@ -24,7 +24,7 @@
 namespace Tokenizer;
 
 class Typehint extends TokenAuto {
-    static public $operators = array('T_OPEN_PARENTHESIS'); 
+    static public $operators = array('T_OPEN_PARENTHESIS');
     static public $atom = 'Typehint';
     
     public function _check() {

@@ -26,7 +26,7 @@ namespace Tokenizer;
 class Staticproperty extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
     static public $atom = 'Staticproperty';
-    static public $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname', 
+    static public $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname',
                                     'Staticproperty', 'Staticconstant', 'Staticmethodcall' );
 
     public function _check() {
@@ -60,7 +60,7 @@ class Staticproperty extends TokenAuto {
                                        -1 => array('atom'      => Staticproperty::$operands),
                                         0 => array('token'     => Staticproperty::$operators),
                                         1 => array('atom'      => array('Variable', 'Array', 'Arrayappend', 'Property', )),
-                                        2 => array('token'     => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));        
+                                        2 => array('token'     => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
 
             $this->actions = array('transform'    => array( -1 => 'CLASS',
                                                              1 => 'PROPERTY'),
