@@ -25,13 +25,19 @@ namespace Tasks;
 
 class Dump extends Tasks {
     // Beware : shared with Project
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
+    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
                               'Appinfo', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
 
     public function run(\Config $config) {
+        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
+            display('No such project as "'.$config->project.'"');
+            die();
+        }
+        
         $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
         if (file_exists($sqliteFile)) {
+            display('Removing old dump.sqlite');
             unlink($sqliteFile);
         }
         
@@ -49,15 +55,29 @@ class Dump extends Tasks {
         $sqlite->query('CREATE TABLE resultsCounts (   id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                        analyzer STRING,
                                                        count INTEGER)');
+        display('Inited tables');
         
         foreach($this->themes as $thema) {
+            display('Processing thema "'.$thema.'"');
             $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
 
-            $sqlQuery = 'INSERT INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer") VALUES (
-            NULL, :fullcode, :file, :line, :namespace, :class, :function, :analyzer)';
+            $sqlQuery = <<<SQL
+INSERT INTO results (
+        "id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer"
+        ) 
+    VALUES (
+            NULL, :fullcode, :file, :line, :namespace, :class, :function, :analyzer
+            )
+SQL;
             $stmt = $sqlite->prepare($sqlQuery);
 
+            $counts = array();
+            foreach($this->datastore->getRow('analyzed') as $row) {
+                $counts[$row['analyzer']] = $row['counts'];
+            }
+
             foreach($themaClasses as $class) {
+//                display('     Processing class "'.$class.'"');
                 $count = (int) $this->datastore->getHash($class);
 
                 $sqlQuery = 'INSERT INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, "'.$class.'", '.$count.' )';
@@ -65,7 +85,12 @@ class Dump extends Tasks {
 
                 $stmt->bindValue(':class', $class, SQLITE3_TEXT);
 
-                if ($count > 0) {
+                if (!isset($counts[$class])) {
+                    // May be it as out of configuration or incompatible with the current run. Ignore but don't display it.
+                    continue;
+                }
+                
+                if ($counts[$class] > 0) {
                     $analyzerName = 'Analyzer\\\\'.str_replace('/', '\\\\', $class);
                     $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzerName']].out
@@ -78,15 +103,25 @@ g.idx('analyzers')[['analyzer':'$analyzerName']].out
     if (it.token == 'T_FILENAME') {
         m = ['fullcode':it.fullcode, 'file':it.fullcode, 'line':0, 'namespace':'', 'class':'', 'function':'' ];
     } else {
-        it.in.loop(1){true}{it.object.token in ['T_FILENAME', 'T_NAMESPACE', 'T_CLASS', 'T_FUNCTION']}.each{
+        // Support for closure, traits or interfaces? 
+        it.in.loop(1){true}{it.object.token in ['T_FILENAME', 'T_NAMESPACE', 'T_CLASS', 'T_TRAIT', 'T_INTERFACE', 'T_FUNCTION']}.each{
             if (it.token == 'T_FILENAME') {
                 file = it.fullcode;
             } else if (it.token == 'T_NAMESPACE') {
-                rnamespace = it.out('NAME').next().code;
-            } else if (it.token == 'T_CLASS') {
-                rclass = it.out('NAME').next().code;
+                rnamespace = it.out('NAMESPACE').next().code;
+            } else if (it.token in ['T_CLASS', 'T_INTERFACE', 'T_TRAIT']) {
+                if (it.out('NAME').any()) {
+                    // class, interface and trait all have names.
+                    rclass = it.fullnspath;
+                } else {
+                    rfunction = 'Anonymous class';
+                }
             } else if (it.token == 'T_FUNCTION') {
-                rfunction = it.out('NAME').next().code;
+                if (it.out('NAME').any()) {
+                    rfunction = it.out('NAME').next().code;
+                } else {
+                    rfunction = 'Closure';
+                }
             }
         }
         m = ['fullcode':it.fullcode, 'file':file, 'line':it.line, 'namespace':rnamespace, 'class':rclass, 'function':rfunction ];
@@ -96,17 +131,23 @@ g.idx('analyzers')[['analyzer':'$analyzerName']].out
 GREMLIN;
                     $res = gremlin_query($query);
                     if (!isset($res->results)) {
-                        echo "Couldn't run the query and get a result : \n",
-                             "Query : ", $query, " \n",
-                             print_r($res, true);
-                        die();
+                        die( "Couldn't run the query and get a result : \n" .
+                             "Query : " . $query . " \n".
+                             print_r($res, true));
                     }
+
                     $res = $res->results;
                     
                     foreach($res as $result) {
                         if (!is_object($result)) {
                             $this->log->log("Object expected but not found\n".print_r($result)."\n");
                             continue;
+                        }
+                        
+                        if (!isset($result->class)) {
+                            print_r($result);
+                            print "Analyzer : $class\n";
+                            die();
                         }
                         
                         $stmt->bindValue(':fullcode', $result->fullcode,      SQLITE3_TEXT);
