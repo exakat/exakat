@@ -10,6 +10,9 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
     public function analyze() {
         $keywords = $this->loadIni('php7_relaxed_keyword.ini', 'keywords');
         
+        //////////////////////////////////////////////////////////////////////
+        // Definitions in a class                                           //
+        //////////////////////////////////////////////////////////////////////
         // Method names
         $this->atomIs('Class')
              ->outIs('BLOCK')
@@ -42,31 +45,48 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
              ->inIs('NAME');
         $this->prepareQuery();
 
+        //////////////////////////////////////////////////////////////////////
+        // Static usage                                                     //
+        //////////////////////////////////////////////////////////////////////
         // Static Constant
         $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
-             ->code($keywords);
-        $this->prepareQuery();
-
-        // Static Property
-        $this->atomIs('Staticconstant')
-             ->outIs('CONSTANT')
-             ->code($keywords);
+             ->code($keywords)
+             ->back('first');
         $this->prepareQuery();
 
         // Static Methodcall
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->code($keywords);
+             ->code($keywords)
+             ->back('first');
         $this->prepareQuery();
 
-        // Methodcall not static
-        $this->atomIs('Functioncall')
-             ->tokenIs('T_STRING')
-             ->hasIn('METHOD')
-             ->code($keywords);
+        // Static Property
+        $keywordsVariables = array_map(function ($x) { return '$'.$x; }, $keywords);
+        $this->atomIs('Staticproperty')
+             ->outIs('PROPERTY')
+             ->code($keywordsVariables)
+             ->back('first');
         $this->prepareQuery();
+
+        //////////////////////////////////////////////////////////////////////
+        // Static usage                                                     //
+        //////////////////////////////////////////////////////////////////////
+        // Methodcall 
+        $this->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->code($keywords)
+             ->back('first');
+        $this->prepareQuery();
+
+        // Property
+        $this->atomIs('Property')
+             ->outIs('PROPERTY')
+             ->code($keywords)
+             ->back('first');
+        $this->prepareQuery();
+
     }
 }
 
