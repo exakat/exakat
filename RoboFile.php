@@ -572,6 +572,8 @@ SQL
         }
         // What are empty Namespaces ? namespace == ''
 
+        $sqlite->query('VACUUM');
+
         // Display stats
         echo "\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM components');
