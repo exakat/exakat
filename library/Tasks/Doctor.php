@@ -367,6 +367,22 @@ INI;
             }
         }
 
+        // check PHP 7.1
+        if (!$config->php71) {
+            $stats['PHP 7.1']['configured'] = 'No';
+        } else {
+            $stats['PHP 7.1']['configured'] = 'Yes';
+            $version = shell_exec($config->php71.' -r "echo phpversion();" 2>&1');
+            if (strpos($version, 'not found') !== false) {
+                $stats['PHP 7.1']['installed'] = 'No';
+            } else {
+                $stats['PHP 7.1']['version'] = $version;
+                $stats['PHP 7.1']['short_open_tags'] = shell_exec($config->php70.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+                $stats['PHP 7.1']['timezone'] = shell_exec($config->php70.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+                $stats['PHP 7.1']['tokenizer'] = shell_exec($config->php70.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+            }
+        }
+
         // git
         $res = trim(shell_exec('git --version 2>&1'));
         if (preg_match('/git version ([0-9\.]+)/', $res, $r)) {//
