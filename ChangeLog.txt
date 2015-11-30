@@ -1,4 +1,4 @@
-Version 0.3.12 (Nine Tailed Vixen, Coming up)
+Version 0.3.13 (Lion Lynx Demon, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,24 @@ Version 0.3.12 (Nine Tailed Vixen, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.3.12 (Nine Tailed Vixen, 2015-11-30)
++ Architecture
+    + ProgressBar is now displayed during Analyze phase.
++ Report
+    + Report list of error messages used in the library
++ Analyzer
+    + Omit eval with hardcoded strings
+    + Exclude some index from _SERVER from the report (they are safe)
+    + Exclude php://* files as hard coded path
+    + Report usage of timestamp to calculate duration 
+    + Spots unused traits
+    + Fixed support for big integers
++ Tokenizer
+    + First support for relaxed keywords in classes. More to come.
+    + Checked UT on PHP 7 (Soon to become default version)
+    + Fixed version detection in Tokenizer
+    + Fixed fullnspath in Use expression;
 
 Version 0.3.11 (Hu A'qi, 2015-11-16)
 + Architecture
