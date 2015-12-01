@@ -285,7 +285,11 @@ class Token {
 
         it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
             if (fullcode.token == 'T_NS_SEPARATOR') {
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
+                s = [];
+                fullcode.out('SUBNAME').filter{ it.rank > 0}.sort{it.rank}._().each{
+                    s.add(it.getProperty('code'));
+                };
+                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + s.join('\\\\').toLowerCase());
             } else {
                 fullcode.setProperty('fullnspath', alias.fullnspath);
             }
@@ -604,7 +608,8 @@ g.idx('atoms')[['atom':'Instanceof']].out('CLASS').sideEffect{fullcode = it;}.in
 };
 ", "
 g.idx('atoms')[['atom':'Catch']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
-    $solvingClassNames};
+    $solvingClassNames
+};
 
 ", "
 g.idx('atoms')[['atom':'Typehint']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
@@ -648,7 +653,7 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
         } else {
             isDefault = true;
             it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it; }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
-                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + fullcode.out('SUBNAME').has('rank', 1).next().code.toLowerCase());
+                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + s.drop(1).join('\\\\').toLowerCase());
                 fullcode.setProperty('aliased', true);
                 fullcode.setProperty('noDefault', true);
                 fullcode.setProperty('alias', fullcodealias);
