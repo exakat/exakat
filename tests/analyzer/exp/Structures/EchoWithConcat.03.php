@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('echo ( \'should\' . \'also\' . $be . \' with comma\')', 
-                      'echo ( "should$be with comma")', 
+$expected     = array('echo ( \'should\' . \'also\' . $be . \' with comma\' )', 
+                      'echo ( "should$be with comma" )', 
                       'echo ( <<<HEREDOC
 should\' too $be with comma
 HEREDOC
-)',
-                      'echo ( "should" . "really $be with comma")',
-                      'echo ( "$KO")');
+ )',
+                      'echo ( "should" . "really $be with comma" )',
+                      'echo ( "$KO" )');
 
 $expected_not = array('echo ("OK")',
                       'echo ($OK)',
