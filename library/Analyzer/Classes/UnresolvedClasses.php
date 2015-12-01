@@ -40,6 +40,7 @@ class UnresolvedClasses extends Analyzer\Analyzer {
         
         $this->atomIs('New')
              ->outIs('NEW')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->noClassDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
