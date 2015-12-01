@@ -3,25 +3,27 @@
 class x1 { const c1 = 1; }
 class x2 extends x1 { const c2 = 2; }
 class x3 extends x2 { const c3 = 3; }
-class x4 extends x3 { const c4 = 4;
+class x4 extends x3 { 
+    const c4 = 4;
+    
     function x() {
-self::c5;
-self::c4;
-self::c3;
-self::c2;
-self::c1;
-
-static::c5;
-static::c4;
-static::c3;
-static::c2;
-static::c1;
-
-parent::c5;
-parent::c4;
-parent::c3;
-parent::c2;
-parent::c1;
+        self::c5;
+        self::c4;
+        self::c3;
+        self::c2;
+        self::c1;
+        
+        static::c5;
+        static::c4;
+        static::c3;
+        static::c2;
+        static::c1;
+        
+        parent::c5;
+        parent::c4;
+        parent::c3;
+        parent::c2;
+        parent::c1;
     }
  }
 
