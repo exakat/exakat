@@ -49,7 +49,7 @@
  * 
  * @author Maciej Szkamruk <ex3v@ex3v.com>
  */
-class ProgressBar {
+class Progressbar {
 
     private $currentProgress;
     private $endProgress;

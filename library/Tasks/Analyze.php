@@ -133,7 +133,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
         if (!$config->verbose) {
             echo "Analyzing {$config->thema}\n";
         }
-        $progressBar = new \ProgressBar(count($dependencies2));
+        $progressBar = new \Progressbar(count($dependencies2));
         foreach($dependencies2 as $analyzer_class) {
             if (!$config->verbose) {
                 echo $progressBar->drawCurrentProgress();
