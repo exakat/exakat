@@ -27,7 +27,7 @@ use Analyzer;
 
 class IsInterfaceMethod extends Analyzer\Analyzer {
     public function analyze() {
-        // interface defined in the local class
+        // interface extended in the local class
         $this->atomIs('Function')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
@@ -42,6 +42,23 @@ class IsInterfaceMethod extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // interface extended in the parent interface
+        $this->atomIs('Function')
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'name')
+             ->goToClass()
+             ->outIs('IMPLEMENTS')
+             ->interfaceDefinition()
+             ->outIs('EXTENDS')
+             ->interfaceDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name')
+             ->back('first');
+        $this->prepareQuery();
+        
         // interface defined in the parents
         $this->atomIs('Function')
              ->outIs('NAME')
