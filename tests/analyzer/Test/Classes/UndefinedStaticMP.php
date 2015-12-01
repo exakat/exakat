@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_UndefinedStaticMP extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testClasses_UndefinedStaticMP01()  { $this->generic_test('Classes_UndefinedStaticMP.01'); }
     public function testClasses_UndefinedStaticMP02()  { $this->generic_test('Classes_UndefinedStaticMP.02'); }
+    public function testClasses_UndefinedStaticMP03()  { $this->generic_test('Classes/UndefinedStaticMP.03'); }
 }
 ?>

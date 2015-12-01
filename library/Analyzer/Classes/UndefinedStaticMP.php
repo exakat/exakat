@@ -37,6 +37,9 @@ class UndefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('self', 'static'))
              ->back('first')
+             ->outIs('METHOD')
+             ->tokenIs('T_STRING')
+             ->inIs('METHOD')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->analyzerIsNot('Classes/DefinedStaticMP');
         $this->prepareQuery();
@@ -46,6 +49,10 @@ class UndefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('self', 'static'))
              ->back('first')
+             ->outIs('PROPERTY')
+             ->outIsIE('VARIABLE')
+             ->tokenIs('T_VARIABLE')
+             ->inIs('PROPERTY')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->analyzerIsNot('Classes/DefinedStaticMP');
         $this->prepareQuery();
