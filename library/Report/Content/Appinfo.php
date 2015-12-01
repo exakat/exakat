@@ -217,6 +217,7 @@ class Appinfo extends \Report\Content {
                             'ext/gmp'        => 'Extensions/Extgmp',
                             'ext/gnupg'      => 'Extensions/Extgnupg',
                             'ext/hash'       => 'Extensions/Exthash',
+                            'ext/php_http'   => 'Extensions/Exthttp',
                             'ext/ibase'      => 'Extensions/Extibase',
                             'ext/iconv'      => 'Extensions/Exticonv',
                             'ext/iis'        => 'Extensions/Extiis',
