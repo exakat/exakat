@@ -70,6 +70,16 @@ GREMLIN;
         }
         $end = microtime(true);
         display(number_format(($end - $begin) * 1000, 0).' ms');
+        
+        $this->cleanScripts();
+    }
+    
+    private function cleanScripts() {
+        display('Cleaning scripts');
+        $res = (int) shell_exec('cd '.$config->projects_root.'/neo4j/scripts; ls | wc -l; rm a*.gremlin');
+        if ($res > 0) {
+            display('   Cleaned '.$res.' scripts');
+        }
     }
     
     private function restartNeo4j() {
