@@ -23,10 +23,12 @@
 
 class Datastore {
     private $sqlite = null;
+    private $sqlitePath = null;
     
     public function __construct(Config $config) {
         if (file_exists($config->projects_root.'/projects/'.$config->project)) {
-            $this->sqlite = new sqlite3($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite');
+            $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
+            $this->sqlite = new sqlite3($this->sqlitePath);
         }
     }
 
@@ -71,9 +73,58 @@ class Datastore {
             $this->sqlite->querySingle($query);
         }
         
+        // flush to disk
+        $this->flush();
+        
         return true;
     }
+    
+    public function deleteRow($table, $data) {
+        if (empty($data)) {
+            return true;
+        }
 
+        $this->checkTable($table);
+        
+        $first = current($data);
+        if (is_array($first)) {
+            $cols = array_keys($first);
+        } else {
+            $query = "PRAGMA table_info($table)";
+            $res = $this->sqlite->query($query);
+            
+            $cols = array();
+            while($row = $res->fetchArray()) {
+                if ($row['name'] == 'id') { continue; }
+                $cols[] = $row['name'];
+            }
+            
+            if (count($cols) != 2) {
+                throw new Exceptions\WrongNumberOfColsForAHash();
+            }
+        }
+        
+        foreach($data as $col => $row) {
+            if (is_array($row)) {
+                $d = array_values($row);
+                foreach($d as &$e) {
+                    $e = Sqlite3::escapeString($e);
+                }
+                unset($e);
+            } else {
+                $d = array($row);
+            }
+
+            $query = 'DELETE FROM '.$table.' WHERE '.$col." IN ('".implode("', '", $d)."')";
+            $this->sqlite->querySingle($query);
+        }
+        
+        // flush to disk
+        $this->flush();
+        
+        return true;
+    }
+    
     public function getRow($table) {
         $return = array();
         try {
@@ -311,6 +362,12 @@ SQLITE;
         $this->sqlite->query($createTable);
         
         return true;
+    }
+    
+    private function flush() {
+        display("Close datastore\n");
+        $this->sqlite->close();
+        $this->sqlite = new sqlite3($this->sqlitePath);
     }
 }
 

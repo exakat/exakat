@@ -25,9 +25,12 @@ namespace Tasks;
 
 class Dump extends Tasks {
     // Beware : shared with Project
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
+    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                              'CompatibilityPHP70', 'CompatibilityPHP71',
                               'Appinfo', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
+    private $stmtResults = null;
+    private $stmtResultsCount = null;
 
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
@@ -56,43 +59,69 @@ class Dump extends Tasks {
                                                        analyzer STRING,
                                                        count INTEGER)');
         display('Inited tables');
+
+        $sqlQuery = <<<SQL
+INSERT INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer") 
+             VALUES ( NULL, :fullcode, :file,  :line,  :namespace,  :class,  :function,  :analyzer )
+SQL;
+        $this->stmtResults = $sqlite->prepare($sqlQuery);
+
+        $sqlQuery = <<<SQL
+INSERT INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, :class, :count )
+SQL;
+        $this->stmtResultsCounts = $sqlite->prepare($sqlQuery);
         
+        $themes = array();
         foreach($this->themes as $thema) {
             display('Processing thema "'.$thema.'"');
             $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
 
-            $sqlQuery = <<<SQL
-INSERT INTO results (
-        "id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer"
-        ) 
-    VALUES (
-            NULL, :fullcode, :file, :line, :namespace, :class, :function, :analyzer
-            )
-SQL;
-            $stmt = $sqlite->prepare($sqlQuery);
+            $themes[] = $themaClasses;
+        }
+        $themes = array_merge(...$themes);
+        $themes = array_keys(array_count_values($themes));
 
+        while (count($themes) > 0) {
             $counts = array();
             foreach($this->datastore->getRow('analyzed') as $row) {
                 $counts[$row['analyzer']] = $row['counts'];
             }
-
-            foreach($themaClasses as $class) {
-//                display('     Processing class "'.$class.'"');
-                $count = (int) $this->datastore->getHash($class);
-
-                $sqlQuery = 'INSERT INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, "'.$class.'", '.$count.' )';
-                $sqlite->query($sqlQuery);
-
-                $stmt->bindValue(':class', $class, SQLITE3_TEXT);
-
-                if (!isset($counts[$class])) {
-                    // May be it as out of configuration or incompatible with the current run. Ignore but don't display it.
-                    continue;
+        
+            foreach($themes as $id => $thema) {
+                if (isset($counts[$thema])) {
+                    print $thema." : ".($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n";
+                    $this->processResults($thema, $counts[$thema]);
+                    unset($themes[$id]);
+                } else {
+                    print $thema." : No\n";
                 }
-                
-                if ($counts[$class] > 0) {
-                    $analyzerName = 'Analyzer\\\\'.str_replace('/', '\\\\', $class);
-                    $query = <<<GREMLIN
+            }
+            print "Still ".count($themes)." to be processed\n";
+            for($i = 0; $i < 5; $i++) {
+                print '.';
+                sleep(1);
+            }
+            print "\n";
+        }
+        
+        return true;
+    }
+        
+    private function processResults($class, $count) {
+        $this->stmtResultsCounts->bindValue(':class', $class, SQLITE3_TEXT);
+        $this->stmtResultsCounts->bindValue(':count', $count, SQLITE3_INTEGER);
+
+        $result = $this->stmtResultsCounts->execute();
+        
+        // No need to go further
+        if ($count <= 0) {
+            return; 
+        }
+
+        $this->stmtResults->bindValue(':class', $class, SQLITE3_TEXT);
+        $analyzerName = 'Analyzer\\\\'.str_replace('/', '\\\\', $class);
+        
+        $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzerName']].out
 .sideEffect{
     // file
@@ -129,39 +158,44 @@ g.idx('analyzers')[['analyzer':'$analyzerName']].out
 }.transform{ m; }
 
 GREMLIN;
-                    $res = gremlin_query($query);
-                    if (!isset($res->results)) {
-                        die( "Couldn't run the query and get a result : \n" .
-                             "Query : " . $query . " \n".
-                             print_r($res, true));
-                    }
+        $res = gremlin_query($query);
+        if (!isset($res->results)) {
+            $this->log->log( "Couldn't run the query and get a result : \n" .
+                 "Query : " . $query . " \n".
+                 print_r($res, true));
+            return ;
+        }
 
-                    $res = $res->results;
-                    
-                    foreach($res as $result) {
-                        if (!is_object($result)) {
-                            $this->log->log("Object expected but not found\n".print_r($result)."\n");
-                            continue;
-                        }
-                        
-                        if (!isset($result->class)) {
-                            print_r($result);
-                            print "Analyzer : $class\n";
-                            die();
-                        }
-                        
-                        $stmt->bindValue(':fullcode', $result->fullcode,      SQLITE3_TEXT);
-                        $stmt->bindValue(':file',     $result->file,          SQLITE3_TEXT);
-                        $stmt->bindValue(':line',     $result->line,          SQLITE3_TEXT);
-                        $stmt->bindValue(':namespace',$result->{'namespace'}, SQLITE3_TEXT);
-                        $stmt->bindValue(':class',    $result->class,         SQLITE3_TEXT);
-                        $stmt->bindValue(':function', $result->function,      SQLITE3_TEXT);
-                        $stmt->bindValue(':analyzer', $class,                 SQLITE3_TEXT);
-                        
-                        $result = $stmt->execute();
-                    }
-                }
+        $res = $res->results;
+        
+        $saved = 0;
+        foreach($res as $result) {
+            if (!is_object($result)) {
+                $this->log->log("Object expected but not found\n".print_r($result)."\n");
+                continue;
             }
+            
+            if (!isset($result->class)) {
+                continue; 
+            }
+            
+            $this->stmtResults->bindValue(':fullcode', $result->fullcode,      SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':file',     $result->file,          SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':line',     $result->line,          SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':namespace',$result->{'namespace'}, SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':class',    $result->class,         SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':function', $result->function,      SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':analyzer', $class,                 SQLITE3_TEXT);
+            
+            $this->stmtResults->execute();
+            ++$saved;
+        }
+        $this->log->log("$class : dumped $saved");
+        
+        if ($count != $saved) {
+            display("$saved results saved, $count expected for $class\n");
+        } else {
+            display("All $saved results saved for $class\n");
         }
     }
 }

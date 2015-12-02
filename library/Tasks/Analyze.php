@@ -34,6 +34,13 @@ class Analyze extends Tasks {
         $this->checkTokenLimit();
         $begin = microtime(true);
 
+        // Take this before we clean it up
+        $rows = $this->datastore->getRow('analyzed');
+        $analyzed = array();
+        foreach($rows as $row) {
+            $analyzed[$row['analyzer']] = $row['counts'];
+        }
+
         if ($config->program !== null) {
             $analyzer = $config->program;
             if (\Analyzer\Analyzer::getClass($analyzer)) {
@@ -134,6 +141,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
             echo "Analyzing {$config->thema}\n";
         }
         $progressBar = new \Progressbar(count($dependencies2));
+        
         foreach($dependencies2 as $analyzer_class) {
             if (!$config->verbose) {
                 echo $progressBar->drawCurrentProgress();
@@ -145,7 +153,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
                 $analyzer->setConfig($analyzerConfig);
             }
     
-            if ($config->noRefresh && $analyzer->isDone()) {
+            if ($config->noRefresh && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");
                 continue 1;
             }
@@ -163,6 +171,7 @@ g.idx('analyzers').put('analyzer', '$analyzerQuoted', index);
 g.addEdge(index, result, 'ANALYZED');
 GREMLIN;
                 gremlin_query($query);
+                $this->datastore->addRow('analyzed', array($analyzer_class => -2 ) );
 
                 display("$analyzer is not compatible with PHP version {$config->phpversion}. Ignoring\n");
             } elseif (!$analyzer->checkPhpConfiguration($Php)) {
@@ -176,6 +185,7 @@ g.idx('analyzers').put('analyzer', '$analyzerQuoted', index);
 g.addEdge(index, result, 'ANALYZED');
 GREMLIN;
                 gremlin_query($query);
+                $this->datastore->addRow('analyzed', array($analyzer_class => -1 ) );
 
                 display( "$analyzer is not compatible with PHP configuration of this version. Ignoring\n");
             } else {

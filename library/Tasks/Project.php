@@ -157,6 +157,9 @@ class Project extends Tasks {
 
         $this->logTime('Stats');
 
+        exec('php exakat dump -p '.$config->project.'   > /dev/null &');
+        display('Started dump process');
+
         $processes = array();
         foreach($this->themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
@@ -196,10 +199,10 @@ class Project extends Tasks {
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
-        $dump = new \Tasks\Dump();
-        $dump->run($config);
+/*        
+check on dump ? 
+*/
 
-        display("Dumped project \n");
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
