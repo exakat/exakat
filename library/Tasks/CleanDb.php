@@ -36,6 +36,7 @@ class CleanDb extends Tasks {
 
         if ($config->quick) {
             $this->restartNeo4j();
+            $this->cleanScripts();
             return false;
         }
 
@@ -46,6 +47,7 @@ GREMLIN;
         if ($result->results === null) {
             // Can't connect to neo4j. Forcing restart.
             $this->restartNeo4j();
+            $this->cleanScripts();
             return false;
         }
         $nodes = $result->results[0];
@@ -76,7 +78,7 @@ GREMLIN;
     
     private function cleanScripts() {
         display('Cleaning scripts');
-        $res = (int) shell_exec('cd '.$config->projects_root.'/neo4j/scripts; ls | wc -l; rm a*.gremlin');
+        $res = (int) shell_exec('cd '.$this->config->neo4j_folder.'/scripts; ls | wc -l; rm -rf a*.gremlin');
         if ($res > 0) {
             display('   Cleaned '.$res.' scripts');
         }
