@@ -34,7 +34,7 @@ class UsedMethods extends Analyzer\Analyzer {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         // Normal Methodcall
-        $methods = $this->query('g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
+        $methods = $this->query('g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").has("token", "T_STRING").transform{ it.code.toLowerCase(); }.unique()');
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -47,7 +47,7 @@ class UsedMethods extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // Staticmethodcall
-        $staticmethods = $this->query('g.idx("atoms")[["atom":"Staticmethodcall"]].out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
+        $staticmethods = $this->query('g.idx("atoms")[["atom":"Staticmethodcall"]].has("token", "T_STRING").out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -112,7 +112,6 @@ GREMLIN
 
         // the special methods must be processed independantly
         // __destruct is always used, no need to spot
-
     }
 
 }

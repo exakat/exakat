@@ -42,6 +42,8 @@ class funcGetArgModified extends Analyzer\Analyzer {
              ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\func_get_arg')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

@@ -52,6 +52,7 @@ GREMLIN
 );
         if (!empty($functionsInStrings)) {
             $this->atomIs('Function')
+                 ->hasNoClass()
                  ->outIs('NAME')
                  ->fullnspath($functionsInStrings);
             $this->prepareQuery();

@@ -65,20 +65,9 @@ GREMLIN
              ->fullnspath($implements);
         $this->prepareQuery();
 
-        // class used in a staticmethodcall
-        $staticmethodcalls = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Staticmethodcall"]].out("CLASS").fullnspath.unique()
-GREMLIN
-);
-        $this->atomIs('Class')
-             ->analyzerIsNot('self')
-             ->savePropertyAs('fullnspath', 'classdns')
-             ->fullnspath($staticmethodcalls);
-        $this->prepareQuery();
-
         // class used in static property
         $staticproperties = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Staticproperty"]].out("CLASS").fullnspath.unique()
+g.idx("atoms")[["atom":"Staticproperty"]].out("CLASS").filter{it.token in ['T_NS_SEPARATOR', 'T_STRING']}.fullnspath.unique()
 GREMLIN
 );
         $this->atomIs('Class')
@@ -89,7 +78,7 @@ GREMLIN
 
         // class used in static constant
         $staticconstants = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Staticconstant"]].out("CLASS").fullnspath.unique()
+g.idx("atoms")[["atom":"Staticconstant"]].out("CLASS").filter{it.token in ['T_NS_SEPARATOR', 'T_STRING']}.fullnspath.unique()
 GREMLIN
 );
         $this->atomIs('Class')
@@ -98,9 +87,19 @@ GREMLIN
              ->fullnspath($staticconstants);
         $this->prepareQuery();
 
+        // class used in a staticmethodcall
+        $staticmethodcalls = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Staticmethodcall"]].out("CLASS").filter{it.token in ['T_NS_SEPARATOR', 'T_STRING']}.fullnspath.unique()
+GREMLIN
+);
+        $this->atomIs('Class')
+             ->analyzerIsNot('self')
+             ->fullnspath($staticmethodcalls);
+        $this->prepareQuery();
+
         // class use in a instanceof
         $instanceofs = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Instanceof"]].out("CLASS").fullnspath.unique()
+g.idx("atoms")[["atom":"Instanceof"]].out("CLASS").filter{it.token in ['T_NS_SEPARATOR', 'T_STRING']}.fullnspath.unique()
 GREMLIN
 );
         $this->atomIs('Class')
