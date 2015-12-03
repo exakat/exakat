@@ -32,7 +32,7 @@ class pregOptionE extends Analyzer\Analyzer {
         
         // preg_match with a string
         $this->atomIs('Functioncall')
-             ->fullnspath('\preg_replace')
+             ->functioncallIs('\preg_replace')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
@@ -43,7 +43,7 @@ class pregOptionE extends Analyzer\Analyzer {
 
         // With an interpolated string 
         $this->atomIs('Functioncall')
-             ->fullnspath('\preg_replace')
+             ->functioncallIs('\preg_replace')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
@@ -54,7 +54,7 @@ class pregOptionE extends Analyzer\Analyzer {
 
         // with a concatenation
         $this->atomIs('Functioncall')
-             ->fullnspath('\preg_replace')
+             ->functioncallIs('\preg_replace')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
