@@ -76,9 +76,10 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->classDefinition()
              ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }')
-             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop(2){true}
-                                      {it.object.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}.any(); }')
+             ->raw('filter{ it.transform{ s = []; it.classTree.each{ s.add(g.idx("classes")[["path":it]].next())}; s;}
+                              .scatter
+                              .filter{it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}
+                              .any(); }')
              ->back('first');
         $this->prepareQuery();
 
@@ -123,9 +124,10 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->interfaceDefinition()
              ->hasOut('EXTENDS')
              ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }')
-             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("interfaces")[["path" : it.fullnspath]].next(); }
-                              .loop(2){ true }
-                                      {it.object.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}.any(); }')
+             ->raw('filter{ it.transform{ s = []; it.classTree.each{ s.add(g.idx("classes")[["path":it]].next())}; s;}
+                              .scatter
+                              .filter{it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}
+                              .any(); }')
              ->back('first');
         $this->prepareQuery();
     }

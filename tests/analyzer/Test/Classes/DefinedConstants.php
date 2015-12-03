@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_DefinedConstants extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testClasses_DefinedConstants01()  { $this->generic_test('Classes_DefinedConstants.01'); }
+    public function testClasses_DefinedConstants02()  { $this->generic_test('Classes/DefinedConstants.02'); }
 }
 ?>
