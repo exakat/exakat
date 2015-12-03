@@ -1,5 +1,5 @@
 <?php
-class a1 { private function m1() { print __CLASS__."\n"; }
+class a1 extends a1 { private function m1() { print __CLASS__."\n"; }
            private function m6() { print __CLASS__."\n"; } }
 class a2 extends a1 { private function m2() { print __CLASS__."\n"; } 
                       private function m7() { print __CLASS__."\n"; } 
