@@ -97,13 +97,25 @@ g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
             it.setProperty('intval', new BigInteger(it.code.substring(2), 16).toLong());
         } else if (it.code.substring(0, 1) == '0') { // octal
             // Calculating PHP 5 style. In case of problem (presence of 9), PHP 7 will just stop.
-            nine = it.code.indexOf('9');
+            c = it.code;
+            
+            nine = c.indexOf('9');
             if (nine == -1) {
-                it.setProperty('intval', new BigInteger(it.code.substring(1), 8).toLong());
-            } else if (nine == 1) {
+                eight = c.indexOf('8');
+            } else {
+                c = c[0..nine - 1];
+                eight = c.indexOf('8');
+            }
+
+            eight = c.indexOf('8');
+            if (eight != -1) {
+                c = c[0..eight - 1];
+            }
+            
+            if (c.size() == 1) {
                 it.setProperty('intval', 0);
             } else {
-                it.setProperty('intval', new BigInteger(it.code.substring(1, nine), 8).toLong());
+                it.setProperty('intval', new BigInteger(c.substring(1), 8).toLong());
             }
         } else {
             it.setProperty('intval', new BigInteger(it.code).toLong());
