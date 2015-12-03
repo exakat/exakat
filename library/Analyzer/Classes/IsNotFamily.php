@@ -41,6 +41,7 @@ class IsNotFamily extends Analyzer\Analyzer {
         // All non-in-class calls are OK
         $this->atomIs('Staticmethodcall')
              ->hasNoClass()
+             ->hasNoTrait()
              ->outIs('CLASS')
              ->analyzerIsNot('self');
         $this->prepareQuery();
