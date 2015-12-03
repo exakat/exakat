@@ -28,9 +28,8 @@ use Analyzer;
 class PHP7Dirname extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
+             ->functioncallIs('\\dirname')
              ->filter('it.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\dirname").any() == false')
-             ->fullnspath('\\dirname')
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->outIs('ARGUMENT')
