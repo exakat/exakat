@@ -29,6 +29,8 @@ class Devoops {
     private $dump      = null; // Dump.sqlite
     private $datastore = null; // Datastore.sqlite
     
+    private $analyzers = array(); // cache for analyzers
+    
     public function generateFileReport($report) {
         $out = new XMLWriter;
         $out->openMemory();
@@ -95,7 +97,7 @@ class Devoops {
             if ($code == 52) { continue; }
 
             $version = $code[0].'.'.substr($code, 1);
-            $compatibility['Compatibility '.$version] = 'Compatiliblity'.$code;
+            $compatibility['Compatibility '.$version] = 'Compatibility';
         }
 
         // Analyze
@@ -104,10 +106,8 @@ class Devoops {
         while($row = $res->fetchArray()) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
             
-            if (empty($analyzer->getDescription()->getName())) {
-                print_r($row);
-            }
-            $analyze[$analyzer->getDescription()->getName()] = 'Compatiliblity'.$code;
+            $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
+            $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';
         }
         ksort($analyze);
         $analyze = array_merge(array('Results Counts' => 'AnalyzeResultCounts'), $analyze);
@@ -116,7 +116,7 @@ class Devoops {
         $files = array();
         $res = $this->dump->query('SELECT DISTINCT file FROM results ORDER BY file');
         while($row = $res->fetchArray()) {
-            $files[$row['file']] = 'Files';
+            $files[$row['file']] = 'OneFile';
         }
         $files = array_merge(array('Files Counts' => 'FileResultCounts'), $files);
         
@@ -180,7 +180,7 @@ HTML;
         foreach($summary as $titleUp => $section) {
             foreach($section as $title => $method) {
                 if (method_exists($this, $method)) {
-                    $html = $this->$method();
+                    $html = $this->$method($title);
                 } else {
                     print $html = 'Using default for '.$title."\n";
                 }
@@ -278,10 +278,128 @@ HTML;
         } 
         closedir($dir); 
     } 
+    
+    protected function loadJson($file) {
+        $config = \Config::factory();
+        $fullpath = $config->dir_root.'/data/'.$file;
+
+        if (!file_exists($fullpath)) {
+            return null;
+        }
+
+        $jsonFile = json_decode(file_get_contents($fullpath));
+        
+        return $jsonFile;
+    }
+
+    protected function makeLink($title, $file = null) {
+        if ($file === null) {
+            $file = 'ajax/'.$this->makeFileName($title);
+        }
+        $title = $this->makeHtml($title);
+        return "<a href=\"$file\" class=\"exakat-link\">$title</a>";
+    }
+
+    protected function makeHtml($text) {
+        return nl2br(trim(htmlentities($text, ENT_COMPAT | ENT_HTML401 , 'UTF-8')));
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     /// Formatting methods 
     ////////////////////////////////////////////////////////////////////////////////////
+    private function formatHorizontal($data, $css) {
+        static $counter;
+        
+        if (!isset($counter)) {
+            $counter = 1;
+        }
+//        $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
+//                                          "assets/js/jquery.dataTables.bootstrap.js"));
+
+//        $counter = self::$horizontal_counter++;
+
+$js = <<<JS
+    				var oTable1 = \$('#horizontal-{$counter}').dataTable( {
+	    			"aoColumns": [
+		    	      null, null, null, null
+			    	] } );
+
+
+JS;
+
+//        $output->pushToTheEnd($js);
+
+        $html = <<<HTML
+							<p>
+								<table id="horizontal-{$counter}" class="table table-bordered table-striped table-hover table-heading table-datatable">
+									<thead>
+HTML;
+
+        if ($css->displayTitles === true) {
+            $html .= '<tr>';
+            foreach($css->titles as $title) {
+                $html .= <<<HTML
+															<th>
+																$title
+															</th>
+HTML;
+        }
+            $html .= "</tr>";
+        }
+        $html .= <<<HTML
+									</thead>
+									<tbody>
+HTML;
+
+        foreach($data as $row) {
+            $row['Code'] = $this->makeHtml($row['Code']);
+            if (empty($row['Code'])) {
+                $row['Code'] = '&nbsp;';
+            }
+            
+            $row['File'] = $this->makeLink($row['File']);
+$html .= <<<HTML
+
+										<tr>
+											<td><pre class="prettyprint linenums">{$row['Code']}</pre></td>
+											<td>{$row['File']}</td>
+											<td>{$row['Line']}</td>
+										</tr>
+HTML;
+            }
+
+
+        $html .= <<<HTML
+									</tbody>
+								</table>
+							</p>
+<script type="text/javascript">
+// Run Datables plugin and create 3 variants of settings
+function AllTables(){
+	$('#horizontal-{$counter}').dataTable( {
+		"aaSorting": [[ 0, "asc" ]],
+		"sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sSearch": "",
+			"sLengthMenu": '_MENU_'
+		}
+	});
+}
+
+$(document).ready(function() {
+	// Load Datatables and run plugin on tables 
+	LoadDataTablesScripts(AllTables);
+	// Add Drag-n-Drop feature
+	WinMove();
+});
+</script>
+
+HTML;
+
+        return $html;
+    }
+
     private function formatSimpleTable($data, $css) {
         $th = '';
         
@@ -342,6 +460,26 @@ HTML;
 
         return '<p'.$class.'>'.$text."</p>\n";
     }
+
+    private function formatTextLead($text) {
+        $text = nl2br($text);
+
+        return "<article><p class=\"lead\">".$text."</p></article>\n".
+               "<script src=\"plugins/readmore/readmore.js\"></script>\n".
+               "<script src=\"plugins/readmore/jquery.mockjax.js\"></script>\n".
+               "<script>$('article').readmore({collapsedHeight: 90});</script>\n";
+    }
+
+    private function formatThemeList($list) {
+        $html = 'This analyze is part of those themes : ';
+        
+        foreach($list as &$title) {
+            $title = $this->makeLink($title, 'ajax/'.$this->makeFileName($title));
+        }
+        return $html . join(', ', $list);
+    }
+
+
     /// End of Formatting methods 
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -367,6 +505,115 @@ Devoops
 );
     }
 
+    private function Analyzers() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Analyzer');
+        $css->readOrder = $css->titles;
+        
+        $data = array();
+        $res = $this->datastore->query('SELECT analyzer FROM analyzed WHERE counts >= 0');
+        while($row = $res->fetchArray()) {
+            if (empty($row['analyzer'])) { continue; }
+
+            $data[] = array('Analyzer' => $row['analyzer']);
+        }
+        
+        $return = $this->formatText( <<<TEXT
+This is the list of analyzers that were run. Those that doesn't have result will not be listed in the 'Analyzers' section.
+
+This may be due to PHP version or PHP configuration incompatibilities.
+TEXT
+, 'textLead');
+
+        $return .= $this->formatSimpleTable($data, $css);
+        
+        return $return;
+    }
+
+    private function ExternalLibraries() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array("Library", "Folder", "Home page");
+        $css->readOrder = $css->titles;
+
+        $externallibraries = $this->loadJson('externallibraries.json');
+
+        $data = array();
+        $res = $this->datastore->query('SELECT library AS Library, file AS Folder FROM externallibraries ORDER BY library');
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $url = $externallibraries->{strtolower($row['Library'])}->homepage;
+            if (empty($url)) {
+                $row['Home page'] = '';
+            } else {
+                $row['Home page'] = "<a href=\"".$url."\">".$row['Library']." <i class=\"fa fa-sign-out\"></i></a>";
+            }
+            $data[] = $row;
+        }
+        
+        $return = $this->formatText( <<<TEXT
+This is the list of analyzers that were run. Those that doesn't have result will not be listed in the 'Analyzers' section.
+
+This may be due to PHP version or PHP configuration incompatibilities.
+TEXT
+, 'textLead');
+
+        $return .= $this->formatSimpleTable($data, $css);
+        
+        return $return;
+    }
+
+    private function OneAnalyzer($title) {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array("Code", "File", "Line");
+        $css->sort = $css->titles;
+
+        $analyzer = $this->analyzers[$title];
+        
+        $description = $analyzer->getDescription()->getDescription();
+        if ($description == '') {
+            $description = 'No documentation yet';
+        }
+        $return = $this->formatTextLead($description);
+
+        if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
+            $return .= $this->formatText('clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />', 'textLead');
+        }
+
+        $return .= $this->formatThemeList($analyzer->getThemes());
+        $data = array();
+        $sqlQuery = 'SELECT fullcode as Code, file AS File, line AS Line FROM results WHERE analyzer="'.$this->dump->escapeString($analyzer->getInBaseName()).'"';
+        $res = $this->dump->query($sqlQuery);
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $data[] = $row;
+        }
+        $return .= $this->formatHorizontal($data, $css);
+        
+        return $return;
+    }
+
+    private function OneFile($title) {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array("Code", "Analyzer", "Line");
+        $css->sort = $css->titles;
+
+        $return = $this->formatText("All results for the file : ".$title, 'textLead');
+
+        $data = array();
+        $sqlQuery = 'SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results WHERE file="'.$this->dump->escapeString($title).'"';
+        $res = $this->dump->query($sqlQuery);
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $analyzer = \Analyzer\Analyzer::getInstance($row['Analyzer']);
+            $row['File'] = $analyzer->getDescription()->getName();
+            $data[] = $row;
+        }
+        $return .= $this->formatHorizontal($data, $css);
+        
+        return $return;
+    }
+        
     private function NonProcessedFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -396,7 +643,6 @@ TEXT
         
         return $return;
     }
-
     
     private function ProcessedFiles() {
         $css = new \Stdclass();
