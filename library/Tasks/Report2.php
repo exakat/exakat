@@ -120,13 +120,16 @@ class Report2 extends Tasks {
 //        $report = new \Reports\Xml();
 //        echo $report->generate( $results);
 
-        $report = new \Reports\Text();
-        if ($config->file == 'stdout') {
-            echo $report->generate($results);
-        } else {
-            file_put_contents($config->projects_root.'/projects/'.$config->project.'/'.$config->file.'.'.$report->extension, $report->generate( $results));
-            display("Reported ".$report->count." messages\n");
-        }
+//        $report = new \Reports\Text();
+//        if ($config->file == 'stdout') {
+//            echo $report->generate($results);
+//        } else {
+//            file_put_contents($config->projects_root.'/projects/'.$config->project.'/'.$config->file.'.'.$report->extension, $report->generate( $results));
+//            display("Reported ".$report->count." messages\n");
+//        }
+
+        $report = new \Reports\Devoops();
+        echo $report->generate( $config->projects_root.'/projects/'.$config->project, 'report');
 
         $end = microtime(true);
         display( "Processing time : ".number_format($end - $begin, 2)." s\n");
