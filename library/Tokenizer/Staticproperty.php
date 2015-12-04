@@ -31,6 +31,8 @@ class Staticproperty extends TokenAuto {
 
     public function _check() {
         $config = \Config::factory();
+        
+        // Class::$property (with nothing else behind)
         if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 +
             $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
@@ -54,6 +56,7 @@ class Staticproperty extends TokenAuto {
                                'addSemicolon' => 'it');
         $this->checkAuto();
 
+        // Class::$property (with ( or [ to continue)
         if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 +
             $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
@@ -65,7 +68,7 @@ class Staticproperty extends TokenAuto {
             $this->actions = array('transform'    => array( -1 => 'CLASS',
                                                              1 => 'PROPERTY'),
                                    'atom'         => 'Staticproperty',
-                                   'cleanIndex'   => true);
+                                   );
             $this->checkAuto();
         }
         

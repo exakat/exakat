@@ -1,0 +1,122 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : STATIC
+          static
+        Label : NAME
+          D
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              'F'
+            Label : LEFT
+              $c
+          Label : ELEMENT
+            ::
+            Label : CLASS
+              B
+            Label : METHOD
+              $b
+              Label : NAME
+                $b
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $c
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              'E'
+            Label : LEFT
+              $b
+          Label : ELEMENT
+            ::
+            Label : CLASS
+              static
+            Label : METHOD
+              $b
+              Label : NAME
+                $b
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $c
+      Label : ELEMENT
+        static
+        Label : STATIC
+          static
+        Label : DEFINE
+          =
+          Label : RIGHT
+            'C'
+          Label : LEFT
+            $b
+      Label : ELEMENT
+        function
+        Label : STATIC
+          static
+        Label : NAME
+          H
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $d
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  __METHOD__
+                Label : CONCAT
+                  'I'
+      Label : ELEMENT
+        function
+        Label : STATIC
+          static
+        Label : NAME
+          J
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $d
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  __METHOD__
+                Label : CONCAT
+                  'I'
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      B
+    Label : METHOD
+      D
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
