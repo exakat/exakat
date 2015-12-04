@@ -31,9 +31,7 @@ class VardumpUsage extends Analyzer\Analyzer {
         
         // print_r (but not print_r($a, 1))
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\print_r', '\\var_export'))
+             ->functioncallIs(array('\\print_r', '\\var_export'))
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)
              ->codeIsNot(array('true', 1))
@@ -41,17 +39,13 @@ class VardumpUsage extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\var_dump')
+             ->functioncallIs('\\var_dump')
              ->back('first');
         $this->prepareQuery();
 
         // (well, we need to check if the result string is not printed now...)
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\var_export', '\\print_r'))
+             ->functioncallIs(array('\\var_export', '\\print_r'))
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
@@ -62,9 +56,7 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->tokenIs(array('T_ECHO', 'T_PRINT'))
              ->outIs('ARGUMENTS')
              ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\var_export', '\\print_r'))
+             ->functioncallIs(array('\\var_export', '\\print_r'))
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)
              ->code(array('true', '1'))
@@ -75,7 +67,7 @@ class VardumpUsage extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\call_user_func_array', '\\call_user_func'))
+             ->functioncallIs(array('\\call_user_func_array', '\\call_user_func'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)

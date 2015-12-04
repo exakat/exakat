@@ -29,9 +29,7 @@ class Htmlentitiescall extends Analyzer\Analyzer {
     public function analyze() {
         // Case with no 2nd argument (using default)
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-             ->fullnspath(array('\\htmlentities', '\\htmlspecialchars'))
+             ->functioncallIs(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
