@@ -26,6 +26,9 @@ namespace Reports;
 class Devoops {
     const FOLDER_PRIVILEGES = 0755;
     
+    private $dump      = null; // Dump.sqlite
+    private $datastore = null; // Datastore.sqlite
+    
     public function generateFileReport($report) {
         $out = new XMLWriter;
         $out->openMemory();
@@ -83,7 +86,8 @@ class Devoops {
         $this->copyDir($config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
         $this->copyDir($config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
-        $sqlite = new \sqlite3($folder.'/dump.sqlite');
+        $this->dump      = new \sqlite3($folder.'/dump.sqlite');
+        $this->datastore = new \sqlite3($folder.'/datastore.sqlite');
         
         // Compatibility
         $compatibility = array('Compilation' => 'Compilation');
@@ -96,7 +100,7 @@ class Devoops {
 
         // Analyze
         $analyze = array();
-        $res = $sqlite->query('SELECT * FROM resultsCounts WHERE count > 0');
+        $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0');
         while($row = $res->fetchArray()) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
             
@@ -110,7 +114,7 @@ class Devoops {
 
         // Files
         $files = array();
-        $res = $sqlite->query('SELECT DISTINCT file FROM results ORDER BY file');
+        $res = $this->dump->query('SELECT DISTINCT file FROM results ORDER BY file');
         while($row = $res->fetchArray()) {
             $files[$row['file']] = 'Files';
         }
@@ -188,7 +192,7 @@ HTML;
 if (!document.getElementById("main")) {
     window.location.href = "../index.html#ajax/$filename";
 }
-</script>
+</script >
 <div class="row">
 	<div id="breadcrumb" class="col-xs-12">
 		<a href="#" class="show-sidebar">
@@ -214,21 +218,12 @@ HTML;
             }
         }
 
-        print 'finished';
-//        print_r($all);
-        die();
-        
-        foreach($all as $file) {
-            $this->generateFileReport($file);
-        }
-        
-        $return = '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL .
-                  '<phpcs version="'.\Exakat::VERSION.'">'.PHP_EOL . 
-                  $this->cachedData . 
-                  '</phpcs>'.PHP_EOL;
-        return $return;
+        return true;
     }//end generate()
     
+    ////////////////////////////////////////////////////////////////////////////////////
+    // Utilities
+    ////////////////////////////////////////////////////////////////////////////////////
     private function makeSummary($summary, $level = 0) {
         if ($level === 0) {
             $html = '<ul class="nav main-menu">';
@@ -284,24 +279,74 @@ HTML;
         closedir($dir); 
     } 
 
+    ////////////////////////////////////////////////////////////////////////////////////
     /// Formatting methods 
-    private function formatText($text) {
+    ////////////////////////////////////////////////////////////////////////////////////
+    private function formatSimpleTable($data, $css) {
+        $th = '';
+        
+        if ($css->displayTitles === true) {
+            $th .= '<tr>';
+            foreach($css->titles as $title) {
+                $th .= <<<HTML
+<th>$title</th>
+
+HTML;
+        }
+            $th .= "</tr>";
+        }
+        
+        $text = <<<HTML
+				<table class="table">
+					<thead>
+						<tr>
+{$th}
+						</tr>
+					</thead>
+
+													<tbody>
+
+HTML;
+
+        $readOrder = $css->readOrder;
+        if (empty($readOrder)) {
+            $readOrder = range(0, count($css->titles) - 1);
+        }
+
+        foreach($data as $v) {
+            $row = '<tr>';
+            foreach($readOrder as $V) {
+                $row .= "<td>$v[$V]</td>\n";
+            }
+            $row .= "</tr>";
+
+            $text .= $row;
+        }
+        $text .= <<<HTML
+					</tbody>
+				</table>
+
+HTML;
+
+        return $text;
+    }
+
+    private function formatText($text, $style = '') {
         $text = nl2br($text);
         
-        $class = '';
-        /*
-        if (!empty($this->css->style)) {
-            $class = ' class="'.$this->css->style.'"';
+        if (!empty($style)) {
+            $class = ' class="'.$style.'"';
         } else {
-            
+            $class = '';
         }
-        */
 
         return '<p'.$class.'>'.$text."</p>\n";
     }
     /// End of Formatting methods 
 
+    ////////////////////////////////////////////////////////////////////////////////////
     /// Content methods
+    ////////////////////////////////////////////////////////////////////////////////////
     private function AboutThisReport() {
         return $this->formatText( <<<Devoops
             This report has been build, thanks to the following other Open Source projects. 
@@ -320,7 +365,58 @@ HTML;
 			</div>
 Devoops
 );
+    }
 
+    private function NonProcessedFiles() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('File');
+        $css->readOrder = $css->titles;
+        
+        $data = array();
+        $res = $this->datastore->query('SELECT file FROM ignoredFiles');
+        while($row = $res->fetchArray()) {
+            if (empty($row['file'])) { continue; }
+
+            $data[] = array('File' => $row['file']);
+        }
+        
+        $return = $this->formatText( <<<TEXT
+This is the list of processed files. Any file that is in the project, but not in the list below was omitted in the analyze. 
+
+This may be due to configuration file, compilation error, wrong extension (including no extension). 
+TEXT
+, 'textLead');
+
+        if (!empty($data)) {
+           $return .= $this->formatSimpleTable($data, $css);
+        } else {
+           $return .= $this->formatText('All files and folders were used');
+        }
+        
+        return $return;
+    }
+
+    
+    private function ProcessedFiles() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('File');
+        $css->readOrder = $css->titles;
+        
+        $data = array();
+        $res = $this->datastore->query('SELECT file FROM files');
+        while($row = $res->fetchArray()) {
+            $data[] = array('File' => $row['file']);
+        }
+        
+        return $this->formatText( <<<TEXT
+This is the list of processed files. Any file that is in the project, but not in the list below was omitted in the analyze. 
+
+This may be due to configuration file, compilation error, wrong extension (including no extension). 
+TEXT
+, 'textLead')
+                .$this->formatSimpleTable($data, $css);
     }
     
     
