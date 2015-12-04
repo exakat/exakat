@@ -31,7 +31,7 @@ class Dump extends Tasks {
                               'Analyze');
     private $stmtResults = null;
     private $stmtResultsCount = null;
-
+    
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             display('No such project as "'.$config->project.'"');
@@ -81,27 +81,36 @@ SQL;
         $themes = array_merge(...$themes);
         $themes = array_keys(array_count_values($themes));
 
+        $rounds = 0;
         while (count($themes) > 0) {
+            $this->log->log( "Run round $rounds");
+
             $counts = array();
+            
             foreach($this->datastore->getRow('analyzed') as $row) {
                 $counts[$row['analyzer']] = $row['counts'];
             }
         
             foreach($themes as $id => $thema) {
                 if (isset($counts[$thema])) {
-                    print $thema." : ".($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n";
+                    display( $thema." : ".($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
                     $this->processResults($thema, $counts[$thema]);
                     unset($themes[$id]);
                 } else {
-                    print $thema." : No\n";
+                    display( $thema." : No\n");
                 }
             }
-            print "Still ".count($themes)." to be processed\n";
-            for($i = 0; $i < 5; $i++) {
-                print '.';
-                sleep(1);
+
+            $this->log->log( "Still ".count($themes)." to be processed\n");
+            display("Still ".count($themes)." to be processed\n");
+            $wait = rand(2,7);
+            sleep($wait);
+            display('Sleep '.$wait.' seconds');
+            
+            if ($rounds >= 200) {
+                $this->log->log( "Reached 200 rounds. Aborting\n");
+                return true;
             }
-            print "\n";
         }
         
         return true;

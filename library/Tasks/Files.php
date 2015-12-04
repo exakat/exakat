@@ -78,7 +78,6 @@ class Files extends Tasks {
 
         display('Ignoring files');
         // Ignored files
-        $this->datastore->cleanTable('ignoredFiles');
         $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -path "'.(join('" -or -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
         $files = trim(shell_exec($shellBase));
 
@@ -91,7 +90,6 @@ class Files extends Tasks {
         $this->datastore->addRow('ignoredFiles', $files);
 
         // actually used files
-        $this->datastore->cleanTable('files');
         $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
 
         $files = trim(shell_exec($shellBase));
@@ -207,7 +205,6 @@ class Files extends Tasks {
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
 
-        $this->datastore->cleanTable('shortopentag');
         if ($tokenssot != $tokens) {
             $nosot = explode("\n", trim($resultNosot));
             $nosot2 = array();
@@ -248,7 +245,6 @@ class Files extends Tasks {
         // composer.json
         display('Check composer');
         $composerInfo = array();
-        $this->datastore->cleanTable('composer');
         if ($composerInfo['composer.json'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.json')) {
             $composerInfo['composer.lock'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.lock');
             
@@ -268,7 +264,6 @@ class Files extends Tasks {
         
         // check for special files
         display('Check config files');
-        $this->datastore->cleanTable('configFiles');
         $files = glob($config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
         $files = array_map(function ($x) { return basename($x); }, $files);
         

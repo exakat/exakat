@@ -22,13 +22,45 @@
 
 
 class Datastore {
-    private $sqlite = null;
+    private static $sqliteRead = null;
+    private static $sqliteWrite = null;
     private $sqlitePath = null;
     
-    public function __construct(Config $config) {
-        if (file_exists($config->projects_root.'/projects/'.$config->project)) {
-            $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
-            $this->sqlite = new sqlite3($this->sqlitePath);
+    const CREATE = 1;
+    
+    public function __construct(Config $config, $create = 0) {
+        $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
+        
+        if ($create === self::CREATE) {
+            if (self::$sqliteWrite !== null) {
+//                unset(self::$sqliteWrite);
+//                unset(self::$sqliteRead);
+            }
+            if (file_exists($this->sqlitePath)) {
+                unlink($this->sqlitePath);
+            }
+            // force creation 
+            self::$sqliteWrite = new \sqlite3($this->sqlitePath);
+            self::$sqliteWrite->close();
+            self::$sqliteWrite = null;
+        }
+        
+        if (self::$sqliteWrite === null) {
+            self::$sqliteWrite = new \sqlite3($this->sqlitePath);
+//            self::$sqliteWrite->busyTimeout(1000);
+            // open the read connexion AFTER the write, to have the sqlite databse created
+            self::$sqliteRead = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+        }
+        
+        if ($create === self::CREATE) {
+            $this->cleanTable('hash');
+            $this->cleanTable('analyzed');
+            $this->cleanTable('externallibraries');
+            $this->cleanTable('ignoredFiles');
+            $this->cleanTable('files');
+            $this->cleanTable('shortopentag');
+            $this->cleanTable('composer');
+            $this->cleanTable('configFiles');
         }
     }
 
@@ -44,7 +76,7 @@ class Datastore {
             $cols = array_keys($first);
         } else {
             $query = "PRAGMA table_info($table)";
-            $res = $this->sqlite->query($query);
+            $res = self::$sqliteRead->query($query);
             
             $cols = array();
             while($row = $res->fetchArray()) {
@@ -70,11 +102,8 @@ class Datastore {
             }
 
             $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ('".implode("', '", $d)."')";
-            $this->sqlite->querySingle($query);
+            self::$sqliteWrite->querySingle($query);
         }
-        
-        // flush to disk
-        $this->flush();
         
         return true;
     }
@@ -91,7 +120,7 @@ class Datastore {
             $cols = array_keys($first);
         } else {
             $query = "PRAGMA table_info($table)";
-            $res = $this->sqlite->query($query);
+            $res = self::$sqliteRead->query($query);
             
             $cols = array();
             while($row = $res->fetchArray()) {
@@ -116,11 +145,8 @@ class Datastore {
             }
 
             $query = 'DELETE FROM '.$table.' WHERE '.$col." IN ('".implode("', '", $d)."')";
-            $this->sqlite->querySingle($query);
+            self::$sqliteWrite->querySingle($query);
         }
-        
-        // flush to disk
-        $this->flush();
         
         return true;
     }
@@ -129,7 +155,7 @@ class Datastore {
         $return = array();
         try {
             $query = "SELECT * FROM $table";
-            $res = $this->sqlite->query($query);
+            $res = self::$sqliteRead->query($query);
         } catch (\Exception $e) {
             return array();
         }
@@ -150,7 +176,7 @@ class Datastore {
         $return = array();
 
         $query = "SELECT $col FROM $table";
-        $res = $this->sqlite->query($query);
+        $res = self::$sqliteRead->query($query);
 
         if (!$res) {
             return array();
@@ -166,7 +192,7 @@ class Datastore {
 
     public function getHash($key) {
         $query = 'SELECT value FROM hash WHERE key=:key';
-        $stmt = $this->sqlite->prepare($query);
+        $stmt = self::$sqliteRead->prepare($query);
         $stmt->bindValue(':key', $key, SQLITE3_TEXT);
         $res = $stmt->execute();
 
@@ -180,7 +206,7 @@ class Datastore {
 
     public function hasResult($table) {
         $query = "SELECT * FROM $table LIMIT 1";
-        $r = $this->sqlite->querySingle($query);
+        $r = self::$sqliteRead->querySingle($query);
 
         return !empty($r);
     }
@@ -188,14 +214,14 @@ class Datastore {
     public function cleanTable($table) {
         if ($this->checkTable($table)) {
             $query = "DELETE FROM $table";
-            $this->sqlite->querySingle($query);
+            self::$sqliteWrite->querySingle($query);
         }
 
         return true;
     }
 
     private function checkTable($table) {
-        $res = $this->sqlite->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
+        $res = self::$sqliteWrite->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
         
         if ($res == 1) { return true; }
 
@@ -359,15 +385,9 @@ SQLITE;
                 throw new Exceptions\NoStructureForTable($table);
         }
 
-        $this->sqlite->query($createTable);
+        self::$sqliteWrite->query($createTable);
         
         return true;
-    }
-    
-    private function flush() {
-        display("Close datastore\n");
-        $this->sqlite->close();
-        $this->sqlite = new sqlite3($this->sqlitePath);
     }
 }
 

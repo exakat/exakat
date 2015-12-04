@@ -77,22 +77,13 @@ class Project extends Tasks {
 
         $this->logTime('Start');
 
-        $datastorePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
-        if (file_exists($datastorePath)) {
-            unlink($datastorePath);
-        }
-        
         // cleaning datastore
-        unset($this->datastore);
-        $this->datastore = new \Datastore($config);
-        $this->datastore->cleanTable('hash');
-        $this->datastore->cleanTable('analyzed');
-        $this->datastore->cleanTable('externallibraries');
+        $this->datastore = new \Datastore($config, \Datastore::CREATE);
         
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start' => $audit_start,
-                                         'exakat_version' => \Exakat::VERSION,
-                                         'exakat_build' => \Exakat::BUILD,
+                                               'exakat_version' => \Exakat::VERSION,
+                                               'exakat_build' => \Exakat::BUILD,
                                          ));
 
         $thread = new \Thread();
@@ -199,9 +190,10 @@ class Project extends Tasks {
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
-/*        
-check on dump ? 
+/*
+        check on dump ? 
 */
+//        $thread->run('php '.$config->executable.' dump -p '.$project);
 
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
