@@ -409,11 +409,17 @@ GREMLIN;
     }
 
     public function atomFunctionIs($atom) {
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
+        $this->atomIs('Functioncall');
+        $this->functioncallIs($atom);
+
+        return $this;
+    }
+    
+    public function functioncallIs($fullnspath) {
+        $this->hasNoIn(array('METHOD', 'NEW'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($this->makeFullNsPath($atom));
-             
+             ->fullnspath($this->makeFullNsPath($fullnspath));
+
         return $this;
     }
 
