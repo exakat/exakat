@@ -82,14 +82,19 @@ SQL;
         $themes = array_keys(array_count_values($themes));
 
         $rounds = 0;
+        $sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         while (count($themes) > 0) {
             $this->log->log( "Run round $rounds");
 
             $counts = array();
-            
-            foreach($this->datastore->getRow('analyzed') as $row) {
+            $datastore = new \Sqlite3($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
+            $datastore->busyTimeout(5000);
+            $res = $datastore->query('SELECT * FROM analyzed');
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $counts[$row['analyzer']] = $row['counts'];
             }
+            $datastore->close();
+            unset($datastore);
         
             foreach($themes as $id => $thema) {
                 if (isset($counts[$thema])) {

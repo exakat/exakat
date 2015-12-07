@@ -24,6 +24,12 @@
 namespace Tasks;
 
 class Phploc extends Tasks {
+    const OK = 0;
+    const IGNORED_BY_CONFIG = 1;
+    const INCOMPILABLE = 2;
+    const EMPTYFILE = 4;
+    const ONETOKEN = 8;
+    
     public function run(\Config $config) {
         
         $loc = array('comments' => 0,
@@ -32,33 +38,30 @@ class Phploc extends Tasks {
                      'code'     => 0,
                      'files'    => 0);
         if ($config->project != 'default') {
-            $project = $config->project;
-            $dirPath = $config->projects_root.'/projects/'.$config->project.'/code';
+            $projectPath = $config->projects_root.'/projects/'.$config->project;
 
-            if (!file_exists($dirPath)) {
-                die("Project '$project' doesn't exists\n");
+            if (!file_exists($projectPath)) {
+                die("Project '$project' doesn't exist\n");
             }
 
-            $ignoreDirs = array();
-            foreach($config->ignore_dirs as $ignore) {
-                if ($ignore[0] == '/') {
-                    $d = $config->projects_root.'/projects/'.$config->project.'/code'.$ignore;
-                    if (!file_exists($d)) {
-                        continue;
-                    }
-                    $d .= '*';
-                    $ignoreDirs[] = $d;
-                } else {
-                    $ignoreDirs[] = '*'.$ignore.'*';
-                }
+            if (!file_exists($projectPath.'/datastore.sqlite')) {
+                die("Datastore for '$project' doesn't exist. Run 'files' first.\n");
             }
-
-            $shellBase = 'find '.$config->projects_root.'/projects/'.$config->project.'/code \\( -name "*.'.(join('" -o -name "*.', Files::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
-            $res = shell_exec($shellBase);
-            $files = explode("\n", $res);
+            
+            $datastore = new \Datastore($config);
+            $files = $datastore->getCol('files', 'file');
 
             foreach($files as $file) {
-                $this->array_add($loc, $this->countLocInFile($file));
+                $counts = $this->countLocInFile($config->projects_root.'/projects/'.$config->project.'/code'.$file);
+                $this->array_add($loc, $counts);
+                
+                if ($counts['error'] != self::OK) {
+                    $datastore->deleteRow('files', array('file' => $file));
+                    $datastore->addRow('ignoredFiles', array(array('file' => $file,
+                                                             'reason' => $counts['error'])));
+                    print "Moving $file\n";
+                    print($file ."\n");
+                }
             }
             
             $this->datastore->addRow('hash', array(array('key' => 'loc',         'value' => $loc['code']),
@@ -137,16 +140,26 @@ class Phploc extends Tasks {
         
         $res = shell_exec('php -l '.escapeshellarg($filename).' 2>&1');
         if (strpos($res, 'No syntax errors detected in ') === false) {
+            display( "$filename doesn't compile\n");
             $return['files'] = 0;
+            $return['error'] = self::INCOMPILABLE;
             return $return;
         }
         
         $lines = array();
-        $tokens = token_get_all(file_get_contents($filename));
+        $tokens = @token_get_all(file_get_contents($filename));
         
         if (empty($tokens)) {
             display( "$filename is empty\n");
             $return['files'] = 0;
+            $return['error'] = self::EMPTYFILE;
+            return $return;
+        }
+
+        if (count($tokens) == 1) {
+            display( "$filename has only one token\n");
+            $return['files'] = 0;
+            $return['error'] = self::ONETOKEN;
             return $return;
         }
 
@@ -184,9 +197,6 @@ class Phploc extends Tasks {
             }
         }
 
-        if (!isset($token)) {
-            echo 'Unset token in ', $filename, "\n";
-        }
         if (is_array($token) && ($tokenName == 'T_CLOSE_TAG')) {
             --$lines[$line];
             if ($lines[$line] == 0) {
@@ -197,6 +207,7 @@ class Phploc extends Tasks {
         
         $return['total']  = $line;
         $return['code']  = count($lines);
+        $return['error']  = self::OK;
         
         return $return;
     }

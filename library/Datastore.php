@@ -27,6 +27,8 @@ class Datastore {
     private $sqlitePath = null;
     
     const CREATE = 1;
+    const TIMEOUT_WRITE = 500;
+    const TIMEOUT_READ = 3000;
     
     public function __construct(Config $config, $create = 0) {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
@@ -47,9 +49,10 @@ class Datastore {
         
         if (self::$sqliteWrite === null) {
             self::$sqliteWrite = new \sqlite3($this->sqlitePath);
-//            self::$sqliteWrite->busyTimeout(1000);
+            self::$sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
             // open the read connexion AFTER the write, to have the sqlite databse created
             self::$sqliteRead = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+            self::$sqliteWrite->busyTimeout(self::TIMEOUT_READ);
         }
         
         if ($create === self::CREATE) {
@@ -126,10 +129,6 @@ class Datastore {
             while($row = $res->fetchArray()) {
                 if ($row['name'] == 'id') { continue; }
                 $cols[] = $row['name'];
-            }
-            
-            if (count($cols) != 2) {
-                throw new Exceptions\WrongNumberOfColsForAHash();
             }
         }
         
@@ -325,7 +324,8 @@ SQLITE;
                 $createTable = <<<SQLITE
 CREATE TABLE ignoredFiles (
   id INTEGER PRIMARY KEY,
-  file TEXT
+  file TEXT,
+  reason INTEGER DEFAULT 1
 );
 SQLITE;
                 break;
@@ -388,6 +388,17 @@ SQLITE;
         self::$sqliteWrite->query($createTable);
         
         return true;
+    }
+    
+    public function reload() {
+        self::$sqliteRead->close();
+        self::$sqliteWrite->close();
+        
+        self::$sqliteWrite = new \sqlite3($this->sqlitePath);
+        self::$sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
+        // open the read connexion AFTER the write, to have the sqlite databse created
+        self::$sqliteRead = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+        self::$sqliteWrite->busyTimeout(self::TIMEOUT_READ);
     }
 }
 
