@@ -62,7 +62,7 @@ class Phpexec {
     
     public function __construct($phpversion) {
         $phpversion3 = substr($phpversion, 0, 3);
-        $this->isCurrentVersion = substr(phpversion(), 0, 3) === $phpversion3;
+        $this->isCurrentVersion = substr(PHP_VERSION, 0, 3) === $phpversion3;
         
         $config = \Config::factory();
 
@@ -71,7 +71,7 @@ class Phpexec {
                 $this->phpexec = $config->php52;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S*) #', $res, $r)) {
                         $this->isValid = true;
                         $this->actualVersion = $r[1];
                     } 
@@ -82,7 +82,7 @@ class Phpexec {
                 $this->phpexec = $config->php53;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S*) #', $res, $r)) {
                         $this->isValid = true;
                         $this->actualVersion = $r[1];
                     } 
@@ -93,7 +93,7 @@ class Phpexec {
                 $this->phpexec = $config->php54;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S*) #', $res, $r)) {
                         $this->isValid = true;
                         $this->actualVersion = $r[1];
                     } 
@@ -104,7 +104,7 @@ class Phpexec {
                 $this->phpexec = $config->php55;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S*) #', $res, $r)) {
                         $this->isValid = true;
                         $this->actualVersion = $r[1];
                     } 
@@ -115,7 +115,7 @@ class Phpexec {
                 $this->phpexec = $config->php56;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S*) #', $res, $r)) {
                         $this->isValid = true;
                         $this->actualVersion = $r[1];
                     } 
@@ -126,7 +126,19 @@ class Phpexec {
                 $this->phpexec = $config->php70;
                 if (!empty($this->phpexec)) {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
-                    if (preg_match('#PHP (\d+\.\d+\.\d+\S+) #', $res, $r)) {
+                    //PHP 7.0.0 (cli) (built: Dec  6 2015 20:41:33) ( NTS )
+                    if (preg_match('#^PHP (\d+\.\d+\.\d+\S*) #', $res, $r)) {
+                        $this->isValid = true;
+                        $this->actualVersion = $r[1];
+                    } 
+                }
+                break 1;
+
+            case '7.1' : 
+                $this->phpexec = $config->php71;
+                if (!empty($this->phpexec)) {
+                    $res = shell_exec($this->phpexec.' -v 2>&1');
+                    if (preg_match('#PHP (\d+\.\d+\.\d+\S*) #', $res, $r)) {
                         $this->isValid = true;
                         $this->actualVersion = $r[1];
                     } 
@@ -135,7 +147,7 @@ class Phpexec {
 
             default: 
                 $this->phpexec = $config->php;
-                // PHP will be valid if we use the one that is currently executing us
+                // PHP will be always valid if we use the one that is currently executing us
                 $this->isValid = true;
                 $this->actualVersion = PHP_VERSION;
         }
@@ -189,7 +201,7 @@ class Phpexec {
         }
         
         // prepare extra tokens
-        $this->tokens += $tokens;
+        $this->tokens = $tokens + $this->tokens;
     }
     
     public function getTokenName($token) {
