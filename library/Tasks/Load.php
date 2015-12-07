@@ -40,10 +40,12 @@ class Load extends Tasks {
         // formerly -q option. Currently, only one loader, via csv-batchimport;
         $this->client = new \Loader\Cypher();
 
-        if ($filename = $this->config->filename) {
-            $this->process_file($filename);
+        if (($project = $this->config->project) != 'default') {
+            $this->processProject($project);
+        } elseif ($filename = $this->config->filename) {
+            $this->processFile($filename);
         } elseif ($dirName = $this->config->dirname) {
-            $this->process_dir($dirName);
+            $this->processDir($dirName);
         } else {
             die('No file to process. Aborting');
         }
@@ -52,7 +54,19 @@ class Load extends Tasks {
         display('Final memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
     }
 
-    private function process_dir($dir) {
+    private function processProject($project) {
+        $files = $this->datastore->getCol('files', 'file');
+    
+        $nbTokens = 0;
+        $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
+        foreach($files as $file) {
+            $nbTokens += $this->processFile($this->config->projects_root.'/projects/'.$this->config->project.'/code'.$file);
+        }
+
+        return array('files' => count($files), 'tokens' => $nbTokens);
+    }
+
+    private function processDir($dir) {
         if (!file_exists($dir)) {
             return array('files' => -1, 'tokens' => -1);
         }
@@ -68,18 +82,19 @@ class Load extends Tasks {
         }
 
         $extPhp = array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  );
+        $files = $this->datastore->getCol('files', 'file');
         $shell = 'find '.$dir.' \\( -name "*.'.(join('" -o -name "*.', $extPhp)).'" \\) \\( -not -path "*'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l';
         $res = trim(shell_exec($shell));
         $files = explode("\n", $res);
     
         $nbTokens = 0;
         foreach($files as $file) {
-            $nbTokens += $this->process_file($file);
+            $nbTokens += $this->processFile($file);
         }
         return array('files' => count($files), 'tokens' => $nbTokens);
     }
 
-    private function process_file($filename) {
+    private function processFile($filename) {
         $log = array();
         $begin = microtime(true);
     
@@ -730,7 +745,7 @@ class Load extends Tasks {
                                                             ->setProperty('line', $line)
                                                             ->setProperty('modifiedBy', 'bin/load12a')
                                                             ->save();
-                        if ($type = $this->process_blocks($token_value)) {
+                        if ($type = $this->processBlocks($token_value)) {
                             $T[$Tid]->setProperty('association', $type)->save();
                         }
 
@@ -798,7 +813,7 @@ class Load extends Tasks {
                         list($label, $value) = $colonTokens->characterizeToken();
                         $T[$Tid]->setProperty($label, $value)->save();
                     }
-                    if ($type = $this->process_blocks($token_value)) {
+                    if ($type = $this->processBlocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     }
                     
@@ -904,7 +919,7 @@ class Load extends Tasks {
                         list($label, $value) = $colonTokens->characterizeToken();
                         $T[$Tid]->setProperty($label, $value)->save();
                     }
-                    if ($type = $this->process_blocks($token_value)) {
+                    if ($type = $this->processBlocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     }
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
@@ -925,7 +940,7 @@ class Load extends Tasks {
                                                         ->setProperty('line', $line)
                                                         ->save();
 
-                    if ($type = $this->process_blocks($token_value)) {
+                    if ($type = $this->processBlocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     } else {
                         // Only index for block is not associated
@@ -963,7 +978,7 @@ class Load extends Tasks {
                                                   ->setProperty('code', $token)
                                                   ->setProperty('line', $line)
                                                   ->save();
-                    if ($type = $this->process_blocks($token_value)) {
+                    if ($type = $this->processBlocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     } else {
                         $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();
@@ -1102,7 +1117,7 @@ class Load extends Tasks {
         
             if (!empty($previous) &&
                 $previous->getProperty('token') != 'T_DOUBLE_COLON' &&
-                $type = $this->process_blocks($token_value)) {
+                $type = $this->processBlocks($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
 
@@ -1194,10 +1209,10 @@ class Load extends Tasks {
 
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
-        if (!empty($this->process_blocks('T_OPEN_CURLY'))) {
+        if (!empty($this->processBlocks('T_OPEN_CURLY'))) {
             echo "Alert, all { and } were not flushed in '", $filename, "'\n";
         }
-        if (!empty($this->process_blocks('T_OPEN_PARENTHESIS'))) {
+        if (!empty($this->processBlocks('T_OPEN_PARENTHESIS'))) {
             echo "Alert, all parenthesis were not flushed in '", $filename, "'\n";
         }
         $this->processComma('T_IGNORE', true);
@@ -1208,7 +1223,7 @@ class Load extends Tasks {
         return $Tid;
     }
 
-    private function process_blocks($tokenValue, $display = false) {
+    private function processBlocks($tokenValue, $display = false) {
         static $states = array();
         static $statesId = 0;
         
