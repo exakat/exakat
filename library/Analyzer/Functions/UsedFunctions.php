@@ -38,7 +38,9 @@ GREMLIN
 );
         if (!empty($functions)) {
             $this->atomIs('Function')
-                 ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}')
+                 ->hasNoClass()
+                 ->hasNoTrait()
+                 ->hasNoInterface()
                  ->raw('filter{it.out("NAME").next().code != ""}')
                  ->outIs('NAME')
                  ->fullnspath($functions);
@@ -53,6 +55,8 @@ GREMLIN
         if (!empty($functionsInStrings)) {
             $this->atomIs('Function')
                  ->hasNoClass()
+                 ->hasNoTrait()
+                 ->hasNoInterface()
                  ->outIs('NAME')
                  ->fullnspath($functionsInStrings);
             $this->prepareQuery();

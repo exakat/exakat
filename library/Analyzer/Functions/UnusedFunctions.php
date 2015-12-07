@@ -32,7 +32,9 @@ class UnusedFunctions extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Function')
-             ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}')
+             ->hasNoClass()
+             ->hasNoTrait()
+             ->hasNoInterface()
              ->raw('filter{it.out("NAME").next().code != ""}')
              ->outIs('NAME')
              ->analyzerIsNot('Functions/UsedFunctions')
