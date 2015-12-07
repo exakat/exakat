@@ -32,8 +32,7 @@ class GlobalInGlobal extends Analyzer\Analyzer {
              ->hasNoFunction()
              ->hasNoClass()
              ->hasNoTrait()
-             ->hasNoInterface()
-             ->back('first');
+             ->hasNoInterface();
         $this->prepareQuery();
     }
 }
