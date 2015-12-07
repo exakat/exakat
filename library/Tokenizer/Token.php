@@ -873,6 +873,7 @@ g.idx('atoms')[['atom':'Class']]
     s = [];
     s.add(it.fullnspath);
     it.as('a').out('EXTENDS')
+      .filter{ !(it.fullnspath in s)} // Avoid recursion in the tree
       .sideEffect{ s.add(it.fullnspath); }
       .transform{ g.idx('classes')[['path':it.fullnspath]].next(); }
       // it.loops is arbitrary : avoid circular reference loop.
