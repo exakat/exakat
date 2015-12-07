@@ -22,7 +22,7 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
         foreach($tests as $test) {
             $testFile = str_replace('\\', '/', str_replace('\Test\\', 'Test/', $test)).'.php';
             preg_match('/(\d) methods/', file_get_contents($testFile), $r);
-            print substr("phpunit .".$testFile.".php ".str_repeat(' ', 60), 0, 60)."($r[1] - $total)\n";
+            print substr("phpunit ./".$testFile." ".str_repeat(' ', 60), 0, 60)."($r[1] - $total)\n";
             $total += $r[1];
         }
         print "Testing a total of $total tests\n";
