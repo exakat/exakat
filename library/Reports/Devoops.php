@@ -530,6 +530,56 @@ TEXT
         
         return $return;
     }
+    
+    private function AuditConfiguration() {
+        $config = \Config::factory();
+        
+        $css = new \Stdclass();
+        $css->displayTitles = false;
+        $css->titles = array(0, 1);
+        $css->readOrder = $css->titles;
+        
+        $info = array();
+        $info[] = array('Code name', $config->project_name);
+        if (!empty($config->project_description)) {
+            $info[] = array('Code description', $config->project_description);
+        }
+        if (!empty($config->project_packagist)) {
+            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$config->project_packagist.'">'.$config->project_packagist.'</a>');
+        }
+        if (!empty($config->project_url)) {
+            $info[] = array('Home page', '<a href="'.$config->project_url.'">'.$config->project_url.'</a>');
+        }
+        if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/.git/config')) {
+            $gitConfig = file_get_contents($config->projects_root.'/projects/'.$config->project.'/code/.git/config');
+            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
+            $info[] = array('Git URL', $r[1]);
+            
+            $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git branch');
+            $info[] = array('Git branch', trim($res));
+
+            $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git rev-parse HEAD');
+            $info[] = array('Git commit', trim($res));
+        } else {
+            $info[] = array('Repository URL', 'Downloaded archive');
+        }
+
+        $datastore = new \Datastore(\Config::factory());
+        
+        $info[] = array('Number of PHP files', $datastore->getHash('files'));
+        $info[] = array('Number of lines of code', $datastore->getHash('loc'));
+        $info[] = array('Number of lines of code with comments', $datastore->getHash('locTotal'));
+
+        $info[] = array('Report production date', date('r', strtotime('now')));
+        
+        $php = new \PhpExec($config->phpversion);
+        $info[] = array('PHP used', $php->getActualVersion().' (version '.$config->phpversion.' configured)');
+        $info[] = array('Ignored files/folders', join(', ', $config->ignore_dirs));
+        
+        $info[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
+        
+        return $this->formatSimpleTable($info, $css);
+    }
 
     private function ExternalLibraries() {
         $css = new \Stdclass();
