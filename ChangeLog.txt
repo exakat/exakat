@@ -1,12 +1,33 @@
-Version 0.3.13 (Lion Lynx Demon, Coming up)
+Version 0.4.1 (Azure Lion, Coming up)
 + Architecture
-    + 
+    + Work on PHP 7 compatibility
+    + Finish new report style
 + Report
     + 
 + Analyzer
     + 
 + Tokenizer
     + 
+
+Version 0.4.0 (Lion Lynx Demon, Coming up)
++ Architecture
+    + Made PHP 7.0 the default (moved to 0.4.0)
+    + Ran unit tests on PHPunit 5.1
+    + Added a background tasks to build report. Will allow for progressive report.
++ Report
+    + Rewrote the report from scratch. Should be finished next iteration.
+    + New report is working for XML and Text report.
++ Analyzer
+    + Added support for ext/pecl_http
+    + Added several classic folders as ignored by default (change this in config.ini)
+    + Create a check for functioncall (and not methods)
+    + Spots join('', file())
+    + Safely ignoring some dynamic calls in undefined functions (Thanks Marc Delisle)
+    + Removed ArrayAppend from double assignation
++ Tokenizer
+    + Fixed a bug when class was auto-referenced.
+    + Fixed detecting Static properties when they are also arrays.
+    + Fixed fatal errors for mal-formed octals
 
 Version 0.3.12 (Nine Tailed Vixen, 2015-11-30)
 + Architecture
