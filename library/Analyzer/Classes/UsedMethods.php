@@ -47,7 +47,7 @@ class UsedMethods extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // Staticmethodcall
-        $staticmethods = $this->query('g.idx("atoms")[["atom":"Staticmethodcall"]].has("token", "T_STRING").out("METHOD").transform{ it.code.toLowerCase(); }.unique()');
+        $staticmethods = $this->query('g.idx("atoms")[["atom":"Staticmethodcall"]].out("METHOD").has("token", "T_STRING").transform{ it.code.toLowerCase(); }.unique()');
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -78,7 +78,6 @@ g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.tra
 
 GREMLIN
 );
-
         // method used statically in a callback with an array
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
@@ -106,7 +105,22 @@ GREMLIN
              ->inIs('ELEMENT')
              ->atomInside('New')
              ->outIs('NEW')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->samePropertyAs('fullnspath', 'fullnspath')
+             ->back('used');
+        $this->prepareQuery();
+
+        // Normal Constructors
+        $this->atomIs('Class')
+             ->savePropertyAs('fullnspath', 'fullnspath')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->hasNoOut('PRIVATE')
+             ->_as('used')
+             ->outIs('NAME')
+             ->code('__construct')
+             ->filter(' g.idx("atoms")[["atom":"New"]].out("NEW").hasNot("fullnspath", null).has("fullnspath", fullnspath).any() ')
              ->back('used');
         $this->prepareQuery();
 
