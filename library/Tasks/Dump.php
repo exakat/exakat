@@ -25,7 +25,7 @@ namespace Tasks;
 
 class Dump extends Tasks {
     // Beware : shared with Project
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71',
                               'Appinfo', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
@@ -129,7 +129,7 @@ SQL;
         
         // No need to go further
         if ($count <= 0) {
-            return; 
+            return;
         }
 
         $this->stmtResults->bindValue(':class', $class, SQLITE3_TEXT);
@@ -190,7 +190,7 @@ GREMLIN;
             }
             
             if (!isset($result->class)) {
-                continue; 
+                continue;
             }
             
             $this->stmtResults->bindValue(':fullcode', $result->fullcode,      SQLITE3_TEXT);

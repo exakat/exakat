@@ -90,7 +90,7 @@ class Files extends Tasks {
         if (!empty($files)) {
             $files = explode("\n", $files);
             $files = array_map(function ($a) {
-                return array('file' => $a, 
+                return array('file' => $a,
                              'reason' => Phploc::IGNORED_BY_CONFIG);
             }, $files);
         }
