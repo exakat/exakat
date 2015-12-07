@@ -109,7 +109,7 @@ class Project extends Tasks {
         display("waited For All\n");
         $this->checkTokenLimit();
 
-        shell_exec('php '.$config->executable.' load -v -r -d '.$config->codePath.' -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
+        shell_exec('php '.$config->executable.' load -v -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
         $this->logTime('Loading');
         if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/load.final.log')) {
