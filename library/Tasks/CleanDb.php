@@ -44,7 +44,7 @@ class CleanDb extends Tasks {
 g.V.count();
 GREMLIN;
         $result = gremlin_query($queryTemplate);
-        if ($result->results === null) {
+        if (!is_object($result) || $result->results === null) {
             // Can't connect to neo4j. Forcing restart.
             $this->restartNeo4j();
             $this->cleanScripts();
