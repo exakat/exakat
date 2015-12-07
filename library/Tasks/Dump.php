@@ -44,6 +44,8 @@ class Dump extends Tasks {
             unlink($sqliteFile);
         }
         
+        \Analyzer\Analyzer::initDocs();
+        
         $sqlite = new \Sqlite3($sqliteFile);
         $sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 fullcode STRING,
@@ -52,7 +54,8 @@ class Dump extends Tasks {
                                                 namespace STRING,
                                                 class STRING,
                                                 function STRING,
-                                                analyzer STRING
+                                                analyzer STRING,
+                                                severity STRING
                                               )');
 
         $sqlite->query('CREATE TABLE resultsCounts (   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,8 +64,8 @@ class Dump extends Tasks {
         display('Inited tables');
 
         $sqlQuery = <<<SQL
-INSERT INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer") 
-             VALUES ( NULL, :fullcode, :file,  :line,  :namespace,  :class,  :function,  :analyzer )
+INSERT INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
+             VALUES ( NULL, :fullcode, :file,  :line,  :namespace,  :class,  :function,  :analyzer,  :severity )
 SQL;
         $this->stmtResults = $sqlite->prepare($sqlQuery);
 
@@ -183,9 +186,11 @@ GREMLIN;
         $res = $res->results;
         
         $saved = 0;
+        $severity = \Analyzer\Analyzer::$docs->getSeverity(str_replace('\\\\', '\\', $analyzerName));
+        var_dump($severity);
         foreach($res as $result) {
             if (!is_object($result)) {
-                $this->log->log("Object expected but not found\n".print_r($result)."\n");
+                $this->log->log("Object expected but not found\n".print_r($result, true)."\n");
                 continue;
             }
             
@@ -200,6 +205,7 @@ GREMLIN;
             $this->stmtResults->bindValue(':class',    $result->class,         SQLITE3_TEXT);
             $this->stmtResults->bindValue(':function', $result->function,      SQLITE3_TEXT);
             $this->stmtResults->bindValue(':analyzer', $class,                 SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':severity', $severity,              SQLITE3_TEXT);
             
             $this->stmtResults->execute();
             ++$saved;
