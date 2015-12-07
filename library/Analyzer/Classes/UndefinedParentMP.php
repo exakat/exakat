@@ -53,7 +53,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
 
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){true}{it.object.atom == "Class"}
+                              .loop("extension"){it.loops < 10}{it.object.atom == "Class"}
                               .out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("PRIVATE").any() == false}.out("NAME").has("code", name)
                               .any() == false}')
 
@@ -66,7 +66,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
                 // checking grand-parents are not a composer class
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){true}{it.object.atom == "Class"}
+                              .loop("extension"){it.loops < 10}{it.object.atom == "Class"}
                               .filter{ it.out("IMPLEMENTS", "EXTENDS").in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
                               .any() == false;
                               }')
@@ -95,7 +95,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              // checking one of the grand-parents is not defining this property
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){true}{it.object.atom == "Class"}
+                              .loop("extension"){it.loops < 10}{it.object.atom == "Class"}
                               .out("BLOCK").out("ELEMENT").has("atom", "Visibility").filter{ it.out("PRIVATE").any() == false}.out("DEFINE")
                               .transform{ if (it.out("LEFT").any()) { it.out("LEFT").next(); } else { it; }} // Case of definition
                               .has("code", name)
@@ -110,7 +110,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
                 // checking grand-parents are not a composer class
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){true}{it.object.atom == "Class"}
+                              .loop("extension"){it.loops < 10}{it.object.atom == "Class"}
                               .filter{ it.out("IMPLEMENTS", "EXTENDS").in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
                               .any() == false;
                               }')
