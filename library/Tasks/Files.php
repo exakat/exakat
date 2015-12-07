@@ -51,7 +51,9 @@ class Files extends Tasks {
                        'notCompilable54' => 'N/C',
                        'notCompilable55' => 'N/C',
                        'notCompilable56' => 'N/C',
-                       'notCompilable70' => 'N/C') ;
+                       'notCompilable70' => 'N/C',
+                       'notCompilable71' => 'N/C',
+                       ) ;
         $unknown = array();
 
         if ($config->project === null) {
@@ -76,30 +78,39 @@ class Files extends Tasks {
             }
         }
 
-        display('Ignoring files');
+        // Finding files
+        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
+
+        display('Finding ignored files');
         // Ignored files
-        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -path "'.(join('" -or -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
-        $files = trim(shell_exec($shellBase));
+        $shellBaseIgnored = str_replace(' -not ', ' ', $shellBase);
+        $files = trim(shell_exec($shellBaseIgnored));
 
         $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
-        $files = explode("\n", $files);
-        $files = array_map(function ($a) {
-            return array('file' => $a);
-        }, $files);
+        if (!empty($files)) {
+            $files = explode("\n", $files);
+            $files = array_map(function ($a) {
+                return array('file' => $a, 
+                             'reason' => Phploc::IGNORED_BY_CONFIG);
+            }, $files);
+        }
 
         $this->datastore->addRow('ignoredFiles', $files);
 
-        // actually used files
-        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
-
+        // Actually finding the files
         $files = trim(shell_exec($shellBase));
         $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
-        $files = explode("\n", $files);
-        $files = array_map(function ($a) {
-            return array('file' => $a);
-        }, $files);
-
-        $this->datastore->addRow('files', $files);
+        if (empty($files)) {
+            $this->log->log("Couldn't find a single file to analyze for project $config->project. Aborting\n");
+            die("Couldn't find a single file to analyze for project $config->project. Aborting\n");
+        } else {
+            $files = explode("\n", $files);
+            $filesDatastore = array_map(function ($a) {
+                return array('file'   => $a);
+            }, $files);
+        }
+        $this->datastore->addRow('files', $filesDatastore);
+        $this->datastore->reload();
 
         $ignoreDirs = array();
         $ignoreName = array();
@@ -115,9 +126,14 @@ class Files extends Tasks {
         }
 
         display('Counting files');
+        // Also refining the file list with empty, one-tokened and incompilable files.
         $counting = new Phploc();
         $counting->run($config);
         display('Counted files');
+        
+        $files = $this->datastore->getCol('files', 'file');
+        $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
+        file_put_contents($tmpFileName, $config->projects_root.'/projects/'.$dir.'/code'.join("\n$config->projects_root/projects/$dir/code", $files));
 
         $versions = $config->other_php_versions;
 
@@ -125,7 +141,7 @@ class Files extends Tasks {
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
             
-            $shell = $shellBase . '  | tr "\n" "\0" |  xargs -n1 -P5 -0I {} sh -c "'.$config->{'php'.$version}.' -l {} 2>&1" || true';
+            $shell = 'cat '.$tmpFileName.'  | tr "\n" "\0" |  xargs -n1 -P5 -0I {} sh -c "'.$config->{'php'.$version}.' -l {} 2>&1" || true';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
@@ -143,7 +159,7 @@ class Files extends Tasks {
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
                     // Actually, almost a repeat of the previous. We just ignore it. (Except in PHP 5.4)
-                    if ($version == '52') {
+                    if ($version == '52' || $version == '71') {
                         preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                         $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                     }
@@ -194,16 +210,18 @@ class Files extends Tasks {
 
         display('Check short tag (normal pass)');
         $stats['php'] = count($resFiles);
-        $shell = $shellBase . ' | sort | tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
+        $shell = 'cat '.$tmpFileName.' | sort | tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
         
         $resultNosot = shell_exec($shell);
         $tokens = (int) array_sum(explode("\n", $resultNosot));
 
         display('Check short tag (with directive activated)');
-        $shell = $shellBase . ' | sort |  tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
+        $shell = 'cat '.$tmpFileName.' | sort |  tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
         
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
+
+        unlink($tmpFileName);
 
         if ($tokenssot != $tokens) {
             $nosot = explode("\n", trim($resultNosot));
@@ -281,7 +299,7 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('configFiles', $configFiles);
-        print_r($configFiles);
+        display(print_r($configFiles, true));
         // Composer is check previously
 
         display('Done');
