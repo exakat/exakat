@@ -1,5 +1,5 @@
 {
- "bbq":{"homepage":"",
+ "bbq":{"homepage":"https://github.com/eventio/bbq",
         "ignore":"wholedir"},
  "dompdf":{"homepage":"https://github.com/dompdf/dompdf",
            "ignore":"wholedir"},
