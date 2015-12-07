@@ -51,7 +51,7 @@ class FindExternalLibraries extends Tasks {
                              'pclzip'           => self::FILE_ONLY,
                              'gacl'             => self::WHOLE_DIR,
                              'propel'           => self::PARENT_DIR,
-                             'gettext_reader'   => self::PARENT_DIR,
+                             'gettext_reader'   => self::WHOLE_DIR,
                              'phpexcel'         => self::WHOLE_DIR,
                              'phpmailer'        => self::WHOLE_DIR,
                              'qrcode'           => self::FILE_ONLY,
