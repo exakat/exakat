@@ -28,7 +28,15 @@ use Analyzer;
 class NoPublicAccess extends Analyzer\Analyzer {
     public function analyze() {
 
-        $properties = $this->query('g.idx("atoms")[["atom":"Property"]].out("OBJECT").has("atom", "Variable").hasNot("code", \'$this\').in("OBJECT").out("PROPERTY").transform{ it.code.toLowerCase(); }.unique()');
+        $gremlin = <<<GREMLIN
+g.idx("atoms")[["atom":"Property"]].out("OBJECT").has("atom", "Variable").hasNot("code", '\$this')
+        .in("OBJECT")
+        .out("PROPERTY")
+        .has('token', 'T_STRING')
+        .transform{ it.code.toLowerCase(); }
+        .unique()
+GREMLIN;
+        $properties = $this->query($gremlin);
         $this->atomIs('Visibility')
              ->hasOut('PUBLIC')
              ->hasNoOut('STATIC')
@@ -38,12 +46,20 @@ class NoPublicAccess extends Analyzer\Analyzer {
              ->back('ppp');
         $this->prepareQuery();
 
-        $staticproperties = $this->query('g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").filter{it.code in ["self", "static"]}.any() == false}.transform{ z = it.out("PROPERTY").has("token", "T_VARIABLE").next().code; it.out("CLASS").next().fullnspath + "::" + z.substring(1, z.size() ).toLowerCase() }.unique()');
+        $gremlin = <<<GREMLIN
+g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").filter{it.code in ["self", "static"]}.any() == false}
+        .transform{ 
+            z = it.out("PROPERTY").has("token", "T_VARIABLE").next().code; 
+            it.out("CLASS").next().fullnspath + "::" + z.substring(1, z.size() ).toLowerCase() 
+        }
+        .unique()
+GREMLIN;
+        $staticproperties = $this->query($gremlin);
         $staticproperties = "['". join("', '", $staticproperties)."']";
         $staticproperties = str_replace('\\', '\\\\', $staticproperties);
         
         if (strlen($staticproperties) > 10000) {
-            display('Warning : '.__CLASS__.' staticproperties are too long');
+            display('Warning : '.__CLASS__.' staticproperties are too long in '.__CLASS__);
         }
         
         $this->atomIs('Visibility')
