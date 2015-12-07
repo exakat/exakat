@@ -31,16 +31,21 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
         // property used in a staticmethodcall \a\b::$b
         $this->atomIs('Visibility')
              ->hasOut('PRIVATE')
+
              ->outIs('DEFINE')
              ->outIsIE('LEFT')
              ->_as('ppp')
              ->savePropertyAs('code', 'property')
-             ->back('first')
+             ->inIsIE('LEFT')
+             ->inIs('DEFINE')
              ->inIs('ELEMENT')
+
              ->inIs('BLOCK')
              ->savePropertyAs('fullnspath', 'classe')
              ->raw('filter{ g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").has("fullnspath", classe).any()}.filter{it.out("PROPERTY").has("code", property).any()}.any()}')
-             ->back('ppp');
+
+             ->outIs('DEFINE')
+             ->outIsIE('LEFT');
         $this->prepareQuery();
 
         // property used in a static property static::$b or self::$b
