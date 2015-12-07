@@ -74,15 +74,28 @@ class Initproject extends Tasks {
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             // default initial config. Found in test project.
             $configIni = <<<INI
-phpversion = 5.6
+phpversion = 7.0
 
 ignore_dirs[] = /test
 ignore_dirs[] = /tests
+ignore_dirs[] = /Tests
+ignore_dirs[] = /Test
+ignore_dirs[] = /example
+ignore_dirs[] = /examples
 ignore_dirs[] = /docs
 ignore_dirs[] = /doc
 ignore_dirs[] = /tmp
 ignore_dirs[] = /version
 ignore_dirs[] = /vendor
+ignore_dirs[] = /js
+ignore_dirs[] = /lang
+ignore_dirs[] = /data
+ignore_dirs[] = /css
+ignore_dirs[] = /cache
+ignore_dirs[] = /vendor
+ignore_dirs[] = /assets
+ignore_dirs[] = /spec
+ignore_dirs[] = /sql
 
 file_extensions =
 
