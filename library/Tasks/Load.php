@@ -40,12 +40,12 @@ class Load extends Tasks {
         // formerly -q option. Currently, only one loader, via csv-batchimport;
         $this->client = new \Loader\Cypher();
 
-        if (($project = $this->config->project) != 'default') {
-            $this->processProject($project);
-        } elseif ($filename = $this->config->filename) {
+        if ($filename = $this->config->filename) {
             $this->processFile($filename);
         } elseif ($dirName = $this->config->dirname) {
             $this->processDir($dirName);
+        } elseif (($project = $this->config->project) != 'default') {
+            $this->processProject($project);
         } else {
             die('No file to process. Aborting');
         }
