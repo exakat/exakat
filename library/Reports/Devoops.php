@@ -122,10 +122,10 @@ class Devoops {
         
         $summary = array(
             'Report presentation' => array('Audit configuration' => 'AuditConfiguration'),
-            'Analysis'            => array('Code Smells'         => 'DashboardCodesmell',
-                                           'Dead Code'           => 'DeadCode',
-                                           'Security'            => 'Security',
-                                           'Performances'        => 'Performances'),
+            'Analysis'            => array('Code Smells'         => 'Dashboard',
+                                           'Dead Code'           => 'Dashboard',
+                                           'Security'            => 'Dashboard',
+                                           'Performances'        => 'Dashboard'),
             'Compatibility'       => $compatibility,
             'By analyze'          => $analyze,
             'By file'             => $files,
@@ -307,18 +307,206 @@ HTML;
     ////////////////////////////////////////////////////////////////////////////////////
     /// Formatting methods 
     ////////////////////////////////////////////////////////////////////////////////////
+    private function formatCamembert($data, $css) {
+        $datajs = '';
+        foreach($data as $k => $v) {
+            $datajs .= "{label: \"$k\", value: $v[count]},\n";
+        }
+        
+        $html = <<<HTML
+ <label class="label label-success">Pie Chart</label>
+      <div id="pie-chart" style="height: 200px;" ></div>
+
+<script type="text/javascript">
+function DrawAllMorrisCharts(){
+Morris.Donut({
+  element: 'pie-chart',
+  colors: [
+    '#1424b8',
+    '#0aa623',
+    '#940f3f',
+    '#148585',
+    '#098215',
+    '#b86c14',
+    '#b83214'
+  ],  
+  data: [
+    $datajs
+  ]
+});
+}
+$(document).ready(function() {
+	// Load required scripts and draw graphs
+	LoadMorrisScripts(DrawAllMorrisCharts);
+	WinMove();
+});
+</script>
+
+HTML;
+
+        return $html;
+    }
+    
+    private function formatCompilationTable($data, $css) {
+        $th = '<tr>';
+        foreach($css->titles as $title) {
+            $th .= <<<HTML
+															<th>
+																$title
+															</th>
+
+HTML;
+        }
+        $th .= "</tr>";
+        
+        $text = <<<HTML
+												<table class="table">
+													<thead>
+														<tr>
+{$th}
+														</tr>
+													</thead>
+
+													<tbody>
+
+HTML;
+        foreach($data as $v) {
+            $row = '<tr>';
+            foreach($v as $V) {
+                if( is_array($V)) {
+                    if (empty($V)) {
+                        $row .= "<td>&nbsp;</td>\n";
+                    } else {
+                        $row .= '<td><ul><li>'.join('</li><li>', $V)."</li></ul></td>\n";
+                    }
+                } else {
+                    $row .= "<td>$V</td>\n";
+                }
+            }
+            $row .= '</tr>';
+
+            $text .= $row;
+        }
+        $text .= <<<HTML
+													</tbody>
+												</table>
+HTML;
+        
+        return $text;
+    }
+    
+    private function formatDashboard($data, $css) {
+        $camembert = $this->formatCamembert($data['upLeft'], $css);
+        $infobox = $this->formatInfobox($data['upRight'], $css);
+
+        $css = new \Stdclass();
+        $css->title = 'List by Severity';
+        $css->titles = array('Analyzer', 'Count', 'Severity');
+        $top5Severity = $this->formatTop5($data['downLeft'], $css);
+
+        $css = new \Stdclass();
+        $css->title = 'List by Files';
+        $css->titles = array('Analyzer', 'Count');
+        $top5Files = $this->formatTop5($data['downRight'], $css);
+        
+        return $this->formatRow($camembert, $infobox, $css) . 
+               $this->formatRow($top5Severity, $top5Files, $css);
+    }
+    
+    private function formatHashTableLinked($data, $css) {
+        static $counter;
+        
+        if (!isset($counter)) {
+            $counter = 1;
+        }
+
+        $js = <<<JS
+					var oTable1 = \$('#hashtable-{$counter}').dataTable( {
+					"aoColumns": [
+					  null, null
+					] } );
+
+
+JS;
+//        $output->pushToTheEnd($js);
+
+        $text = <<<HTML
+<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="hashtable-{$counter}">
+										<thead>
+HTML;
+        
+        if ($css->displayTitles === true) {
+            $text .= '<tr>';
+            foreach($css->titles as $title) {
+                $text .= <<<HTML
+															<th>$title</th>
+
+HTML;
+            }
+            $text .= '</tr>';
+        }
+
+$text .= <<<HTML
+										</thead>
+
+										<tbody>
+HTML;
+        foreach($data as $k => $v) {
+            if ($v['result'] == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
+                $v['result'] = '';
+                $icon = '<i class="fa fa-stethoscope"></i>';
+            } elseif ($v['result'] == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
+                $v['result'] = '';
+                $icon = '<i class="fa fa-stethoscope"></i>';
+            } elseif ($v['result'] === 0) {
+                $icon = '<i class="fa fa-check-square-o green"></i>';
+                $v['result'] = '';
+            } else {
+                $k = $this->makeLink($k);
+                $icon = '<i class="fa fa-exclamation red"></i>';
+                $v['result'] .= ' warnings';
+            }
+            $text .= '<tr><td>'.$k.'</td><td>'.$icon.' '.$v['result']."</td></tr>\n";
+        }
+        $text .= <<<HTML
+										</tbody>
+									</table>
+
+<script type="text/javascript">
+// Run Datables plugin and create 3 variants of settings
+function AllTables(){
+	$('#hashtable-{$counter}').dataTable( {
+		"aaSorting": [[ 0, "asc" ]],
+		"sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sSearch": "",
+			"sLengthMenu": '_MENU_'
+		}
+	});
+}
+
+$(document).ready(function() {
+	// Load Datatables and run plugin on tables 
+	LoadDataTablesScripts(AllTables);
+	// Add Drag-n-Drop feature
+	WinMove();
+});
+</script>
+
+HTML;
+        
+        return $text;
+    }
+    
     private function formatHorizontal($data, $css) {
         static $counter;
         
         if (!isset($counter)) {
             $counter = 1;
         }
-//        $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
-//                                          "assets/js/jquery.dataTables.bootstrap.js"));
 
-//        $counter = self::$horizontal_counter++;
-
-$js = <<<JS
+        $js = <<<JS
     				var oTable1 = \$('#horizontal-{$counter}').dataTable( {
 	    			"aoColumns": [
 		    	      null, null, null, null
@@ -326,8 +514,6 @@ $js = <<<JS
 
 
 JS;
-
-//        $output->pushToTheEnd($js);
 
         $html = <<<HTML
 							<p>
@@ -344,7 +530,7 @@ HTML;
 															</th>
 HTML;
         }
-            $html .= "</tr>";
+            $html .= '</tr>';
         }
         $html .= <<<HTML
 									</thead>
@@ -399,6 +585,51 @@ HTML;
 
         return $html;
     }
+    
+    private function formatInfobox($data, $css) {
+        /*
+        $text = <<<HTML
+<div class="row">
+HTML;
+        $colors = $this->css->colors;
+        
+        $i = -1;
+        foreach($data as $id => $row) {
+            $i = ++$i % count($colors);
+            $color = $colors[$i];
+            
+            $text .= <<<HTML
+  <div class="col-md-1">
+    {$row['icon']}&nbsp;{$row['number']}&nbsp;{$row['content']}
+  </div>
+HTML;
+
+        }
+
+            $text .= <<<HTML
+								</div>
+
+HTML;
+    */
+        $html = '&nbsp;';
+
+        return $html;
+    }
+    
+    private function formatRow($left, $right, $css) {
+        $html = <<<HTML
+        <div class="row">
+        	<div class="col-xs-6">
+                $left
+            </div>
+        	<div class="col-xs-6">
+                $right
+			</div>
+		</div>
+HTML;
+
+        return $html;
+    }
 
     private function formatSimpleTable($data, $css) {
         $th = '';
@@ -411,7 +642,7 @@ HTML;
 
 HTML;
         }
-            $th .= "</tr>";
+            $th .= '</tr>';
         }
         
         $text = <<<HTML
@@ -436,7 +667,7 @@ HTML;
             foreach($readOrder as $V) {
                 $row .= "<td>$v[$V]</td>\n";
             }
-            $row .= "</tr>";
+            $row .= '</tr>';
 
             $text .= $row;
         }
@@ -468,6 +699,50 @@ HTML;
                "<script src=\"plugins/readmore/readmore.js\"></script>\n".
                "<script src=\"plugins/readmore/jquery.mockjax.js\"></script>\n".
                "<script>$('article').readmore({collapsedHeight: 90});</script>\n";
+    }
+    
+    private function formatTop5($data, $css) {
+        $html = '<p>'.$css->title."</p>\n";
+        $html .= <<<HTML
+<table class="table table-striped">
+					<thead>
+						<tr>
+HTML;
+
+        foreach($css->titles as $columnHeader) {
+            $html .= "<th>$columnHeader</th>\n";
+        }
+        
+        $html .= <<<HTML
+						</tr>
+					</thead>
+					<tbody>
+HTML;
+
+        foreach($data as $value) {
+            // @note This is the same getId() than in Section::getId()
+            if ($value['severity'] == '') {
+                $severity = $this->makeLink($value['name']);
+            } else {
+                $severity = $this->makeLink($value['name']);
+            }
+            $html .= <<<HTML
+                    <tr>
+						<td>$severity</td>
+						<td>{$value['count']}</td>
+						<td><span class="label label-info arrowed-right arrowed-in">{$value['severity']}</span></td>
+                    </tr>
+
+HTML;
+        }
+        
+        $html .= <<<HTML
+					</tbody>
+				</table>
+
+HTML;
+
+        return $html;
     }
 
     private function formatThemeList($list) {
@@ -581,10 +856,162 @@ TEXT
         return $this->formatSimpleTable($info, $css);
     }
 
+    private function Compilation() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Version', 'Count', 'Fraction', 'Files', 'Errors');
+        $css->readOrder = $css->titles;
+        
+        $config = \Config::Factory();
+
+        $total = $this->datastore->querySingle('SELECT value FROM hash WHERE key = "files"');
+        $info = array();
+        foreach($config->other_php_versions as $suffix) {
+            $res = $this->datastore->query('SELECT file FROM compilation'.$suffix);
+            $files = array();
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                $files[] = $row['file'];
+            }
+            $version = $suffix[0].'.'.substr($suffix, 1);
+            if (empty($files)) {
+                $files       = 'No compilation error found.';
+                $errors      = 'N/A';
+                $total_error = 'None';
+            } else {
+                $res = $this->datastore->query('SELECT error FROM compilation'.$suffix);
+                $readErrors = array();
+                while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                    $readErrors[] = $row['error'];
+                }
+                $errors      = array_count_values($readErrors);
+                $errors      = array_keys($errors);
+                $errors      = array_keys(array_count_values($errors));
+
+                $total_error = count($files).' (' .number_format(count($files) / $total * 100, 0). '%)';
+                $files       = array_keys(array_count_values($files));
+            }
+            
+            $array = array('version'       => $version,
+                           'total'         => $total,
+                           'total_error'   => $total_error,
+                           'files'         => $files,
+                           'errors'        => $errors,
+                           );
+
+            $info[] = $array;
+        }
+        
+        return $this->formatCompilationTable($info, $css);
+    }
+
+    private function Compatibility($title) {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Feature', 'Status');
+        $css->readOrder = $css->titles;
+        
+        $list = \Analyzer\Analyzer::getThemeAnalyzers(str_replace(array(' ', '.'), array('PHP', ''), $title));
+        
+        $begin = microtime(true);
+        $res = $this->datastore->query('SELECT analyzer, counts FROM analyzed');
+        $counts = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $counts[$row['analyzer']] = $row['counts'];
+        }
+        foreach($list as $l) {
+            $ini = parse_ini_file('./human/en/'.$l.'.ini');
+            $info[ $ini['name']] = array('result' => (int) $counts[$l]);
+        }
+        $end = microtime(true);
+
+        return $this->formatHashTableLinked($info, $css);
+    }
+
+    private function Dashboard($title) {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Library', 'Folder', 'Home page');
+        $css->readOrder = $css->titles;
+        
+        $titles = array('Code Smells'         => 'Analyze',
+                        'Dead Code'           => 'Dead code',
+                        'Security'            => 'Security',
+                        'Performances'        => 'Performances');
+        
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($titles[$title]);
+        $where = 'WHERE analyzer in ("'.join('", "', $list).'")';
+
+        $res = $this->dump->query('SELECT severity, count(*) AS nb FROM results '.$where.' GROUP BY severity ORDER BY severity');
+        $severities = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $severities[$row['severity']] = array('severity' => $row['severity'], 
+                                                  'count'    => $row['nb']);
+        }
+
+        $res = $this->dump->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
+        $listBySeverity = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $ini = parse_ini_file('./human/en/'.$row['analyzer'].'.ini');
+            $listBySeverity[] = array('name'  => $ini['name'],
+                                      'severity' => $row['severity'], 
+                                      'count' => $row['nb']);
+        }
+        uasort($listBySeverity, function ($a, $b) {
+            $s = ['Major' => 5, 'Middle' => 4, 'Minor' => 3, 'None' => 0];
+            if ($s[$a['severity']] > $s[$b['severity']]) {
+                return -1;
+            } elseif ($s[$a['severity']] < $s[$b['severity']]) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+        $listBySeverity = array_slice($listBySeverity, 0, 5);
+
+        $res = $this->dump->query('SELECT file, count(*) AS nb FROM results '.$where.' GROUP BY file ORDER BY count(*) DESC LIMIT 5');
+        $listByFile = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $listByFile[] = array('name'  => $row['file'],
+                                  'severity' => '',
+                                  'count' => $row['nb'],
+                                  );
+        }
+        
+        $info = array('upLeft'    => $severities,
+                      'upRight'   => '&nbsp;',
+                      'downLeft'  => $listBySeverity,
+                      'downRight' => $listByFile);
+        
+        return $this->formatDashboard($info, $css);
+    }
+
+    private function ErrorMessages() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Message');
+        $css->readOrder = $css->titles;
+        
+        $data = array();
+        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/ErrorMessages"');
+        while($row = $res->fetchArray()) {
+            $data[] = array('Message' => $row['fullcode']);
+        }
+        
+        return $this->formatText( <<<TEXT
+Error message when an error is reported in the code. Those messages will be read by whoever is triggering the error, and it has to be helpful. 
+
+It is a good excercice to read the messages out of context, and try to understand what is about.
+
+Error messages are spotted via die, exit or exception. 
+TEXT
+, 'textLead')
+                .$this->formatSimpleTable($data, $css);
+    }
+        
     private function ExternalLibraries() {
         $css = new \Stdclass();
         $css->displayTitles = true;
-        $css->titles = array("Library", "Folder", "Home page");
+        $css->titles = array('Library', 'Folder', 'Home page');
         $css->readOrder = $css->titles;
 
         $externallibraries = $this->loadJson('externallibraries.json');
@@ -616,7 +1043,7 @@ TEXT
     private function OneAnalyzer($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
-        $css->titles = array("Code", "File", "Line");
+        $css->titles = array('Code', 'File', 'Line');
         $css->sort = $css->titles;
 
         $analyzer = $this->analyzers[$title];
@@ -646,10 +1073,10 @@ TEXT
     private function OneFile($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
-        $css->titles = array("Code", "Analyzer", "Line");
+        $css->titles = array('Code', 'Analyzer', 'Line');
         $css->sort = $css->titles;
 
-        $return = $this->formatText("All results for the file : ".$title, 'textLead');
+        $return = $this->formatText('All results for the file : '.$title, 'textLead');
 
         $data = array();
         $sqlQuery = 'SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results WHERE file="'.$this->dump->escapeString($title).'"';
