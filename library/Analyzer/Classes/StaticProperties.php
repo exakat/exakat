@@ -28,7 +28,7 @@ use Analyzer;
 class StaticProperties extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Class')
+        $this->atomIs(array('Class', 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Visibility')
