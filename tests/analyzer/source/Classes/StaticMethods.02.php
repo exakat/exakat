@@ -1,6 +1,6 @@
 <?php
 
-abstract class x5 {
+trait x5 {
     function m() {}
     static function ms() {}
     static private function msp() {}

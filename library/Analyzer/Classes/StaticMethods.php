@@ -28,7 +28,7 @@ use Analyzer;
 class StaticMethods extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Class')
+        $this->atomIs(array('Class', 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
@@ -36,6 +36,7 @@ class StaticMethods extends Analyzer\Analyzer {
              ->outIs('STATIC')
              ->back('function')
              ->outIs('NAME');
+        $this->prepareQuery();
     }
 }
 
