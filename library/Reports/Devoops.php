@@ -780,6 +780,25 @@ Devoops
 );
     }
 
+    private function AlteredDirectives() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Directive');
+        $css->readOrder = $css->titles;
+        
+        $data = array();
+        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Php/DirectivesUsage"');
+        while($row = $res->fetchArray()) {
+            $data[] = array('Directive' => $row['fullcode']);
+        }
+        
+        return $this->formatText( <<<TEXT
+This is an overview of the directives that are modified inside the application's code. 
+TEXT
+, 'textLead')
+                .$this->formatSimpleTable($data, $css);
+    }
+    
     private function Analyzers() {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -985,6 +1004,78 @@ TEXT
         return $this->formatDashboard($info, $css);
     }
 
+    private function DynamicCode() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Code');
+        $css->readOrder = $css->titles;
+        
+        $data = array();
+        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/DynamicCalls"');
+        while($row = $res->fetchArray()) {
+            $data[] = array('Code' => $row['fullcode']);
+        }
+        
+        if (count($data) == 0) {
+            return $this->formatText( <<<'TEXT'
+No dynamic calls where found in the code. Dynamic calls may be one of the following : 
+<ul>
+    <li>Constant<br />
+    <ul>
+        <li>define('CONSTANT_NAME', $value);</li>
+        <li>constant('Constant name');</li>
+    </ul></li>
+
+    <li>Variables<br />
+    <ul>
+        <li>$$variablevariable</li>
+        <li>${$variablevariable}</li>
+    </ul></li>
+
+    <li>Properties<br />
+    <ul>
+        <li>$object->$propertyName</li>
+        <li>$object->{$propertyName}</li>
+        <li>$object->{'property'.'Name'}</li>
+    </ul></li>
+
+    <li>Methods<br />
+    <ul>
+        <li>$object->$methodName()</li>
+        <li>call_user_func(array($object, $methodName), $arguments)</li>
+    </ul></li>
+
+    <li>Static Constants<br />
+    <ul>
+        <li>constant('StaticClass::ConstantName');</li>
+    </ul></li>
+
+    <li>Static Properties<br />
+    <ul>
+        <li>$class::$propertyName</li>
+        <li>$class::{$propertyName}</li>
+        <li>$class::{'property'.'Name'}</li>
+    </ul></li>
+
+    <li>Static Methods<br />
+    <ul>
+        <li>$class::$methodName()</li>
+        <li>call_user_func(array('Class', $methodName), $arguments)</li>
+    </ul></li>
+
+</ul>
+
+TEXT
+);
+        } else {
+            return $this->formatText( <<<TEXT
+This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.
+TEXT
+, 'textLead')
+                  .$this->formatSimpleTable($data, $css);
+        }
+    }
+    
     private function ErrorMessages() {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -1040,6 +1131,25 @@ TEXT
         return $return;
     }
 
+    private function GlobalVariablesList() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Variable');
+        $css->readOrder = $css->titles;
+        
+        $data = array();
+        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/GlobalInGlobal"');
+        while($row = $res->fetchArray()) {
+            $data[] = array('Variable' => $row['fullcode']);
+        }
+        
+        return $this->formatText( <<<TEXT
+Here are the global variables, including the implicit ones : any variable that are used in the global scope, outside methods, are implicitely globals.
+TEXT
+, 'textLead')
+                .$this->formatSimpleTable($data, $css);
+    }
+    
     private function OneAnalyzer($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
