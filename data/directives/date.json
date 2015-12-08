@@ -1,0 +1,1 @@
+[{"name":"date.timezone","suggested":"Europe\/Amsterdam","documentation":"It is not safe to rely on the system's timezone settings. Make sure the directive date.timezone is set in php.ini."}]

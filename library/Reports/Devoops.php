@@ -304,6 +304,21 @@ HTML;
         return nl2br(trim(htmlentities($text, ENT_COMPAT | ENT_HTML401 , 'UTF-8')));
     }
 
+    private function makeIcon($tag) {
+        switch($tag) {
+            case 'Yes' : 
+                return '<i class="fa fa-check"></i>';
+            case 'No' : 
+                return '&nbsp;';
+            case 'Not run' : 
+                return '<i class="fa fa-times-circle-o"></i>';
+            case 'Incompatible' : 
+                return '<i class="fa fa-minus-circle"></i>';
+            default : 
+                return '&nbsp;';
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     /// Formatting methods 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -412,12 +427,14 @@ HTML;
         return $this->formatRow($camembert, $infobox, $css) . 
                $this->formatRow($top5Severity, $top5Files, $css);
     }
-    
+
     private function formatHashTableLinked($data, $css) {
         static $counter;
         
         if (!isset($counter)) {
             $counter = 1;
+        } else {
+            ++$counter;
         }
 
         $js = <<<JS
@@ -504,6 +521,8 @@ HTML;
         
         if (!isset($counter)) {
             $counter = 1;
+        } else {
+            ++$counter;
         }
 
         $js = <<<JS
@@ -631,6 +650,115 @@ HTML;
         return $html;
     }
 
+    private function formatSectionedHashTable($data, $css) {
+        static $counter;
+        
+        if (!isset($counter)) {
+            $counter = 1;
+        } else {
+            ++$counter;
+        }
+        
+        $text = <<<HTML
+<table id="sectionedhashtable-{$counter}" class="table">
+										<thead>
+HTML;
+        
+        if ($css->displayTitles === true) {
+            $text .= '<tr>';
+            foreach($css->titles as $title) {
+                $text .= <<<HTML
+															<th>
+																$title
+															</th>
+
+HTML;
+            }
+            $text .= "</tr>";
+        }
+
+$text .= <<<HTML
+										</thead>
+
+										<tbody>
+HTML;
+        foreach($data as $k => $v) {
+            $text .= "<tr class=\"primary\"><td>$k</td><td>&nbsp;</td></tr>\n";
+            if (is_array($v)) {
+                foreach($v as $k2 => $v2) {
+                    $text .= "<tr><td>$k2</td><td>$v2</td></tr>\n";
+                }
+            }
+        }
+        $text .= <<<HTML
+										</tbody>
+									</table>
+HTML;
+        
+        return $text;
+    }
+
+    private function formatSectionedTable($data, $css) {
+        static $counter;
+        if (!isset($counter)) {
+            $counter = 1;
+        } else {
+            ++$counter;
+        }
+        
+        $text = <<<HTML
+<table id="sectionedhashtable-{$counter}" class="table">
+										<thead>
+HTML;
+        
+        if ($css->displayTitles === true) {
+            $text .= '<tr>';
+            foreach($css->titles as $title) {
+                $text .= <<<HTML
+															<th>
+																$title
+															</th>
+
+HTML;
+            }
+            $text .= "</tr>";
+        }
+
+$text .= <<<HTML
+										</thead>
+
+										<tbody>
+HTML;
+        $readOrder = $css->readOrder;
+        if (empty($readOrder)) {
+            $readOrder = range(0, count($css->titles)-1);
+        }
+
+        foreach($data as $k => $v) {
+            $text .= '<tr><td style="background-color: '.$css->backgroundColor.'">'.$k.'</td>'.
+            str_repeat('<td style="background-color: '.$css->backgroundColor.'">&nbsp;</td>', count($css->titles) -1)."</tr>\n";
+            if (empty($v)) { 
+                continue; 
+            }
+
+            foreach($v as $v2) {
+                $v2 = (array) $v2;
+                $text .= "<tr>";
+                foreach($readOrder as $id) {
+                    $text .= "<td>$v2[$id]</td>\n";
+                }
+                $text .= "</tr>\n";
+            }
+        }
+        $text .= <<<HTML
+										</tbody>
+									</table>
+HTML;
+        
+        return $text;
+    }
+    
+
     private function formatSimpleTable($data, $css) {
         $th = '';
         
@@ -754,6 +882,24 @@ HTML;
         return $html . join(', ', $list);
     }
 
+    private function formatTree($data, $css) {
+        $text = "<ul>\n";
+        foreach($data as $k => $v) {
+            $text .= "    <li>$k";
+            
+            $text .= "    <ul>\n";
+            foreach($v as $k2 => $v2) {
+                $text .= "        <li>$k2 ".($this->makeIcon($v2))."</li>";
+            }
+            $text .= "    </ul>\n";
+            
+            
+            $text .= "</li>\n";
+        }
+        $text .= "</ul>\n";
+        
+        return $text;
+    }
 
     /// End of Formatting methods 
 
@@ -824,7 +970,362 @@ TEXT
         
         return $return;
     }
-    
+
+    private function Appinfo() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('File');
+        $css->readOrder = $css->titles;
+        
+        $extensions = array(
+                    'PHP' => array(
+                            'Short tags'                 => 'Structures/ShortTags',
+                            'Echo tags <?='              => 'Php/EchoTagUsage',
+                            'Incompilable'               => 'Php/Incompilable',
+                            
+                            '@ operator'                 => 'Structures/Noscream',
+                            'Alternative syntax'         => 'Php/AlternativeSyntax',
+                            'Magic constants'            => 'Constants/MagicConstantUsage',
+                            'halt compiler'              => 'Php/Haltcompiler',
+                            'Assertions'                 => 'Php/AssertionUsage',
+          
+                            'Casting'                    => 'Php/CastingUsage',
+                            'Resources'                  => 'Structures/ResourcesUsage',
+                            'Nested Loops'               => 'Structures/NestedLoops',
+            
+                            'Autoload'                   => 'Php/AutoloadUsage',
+                            'inclusion'                  => 'Structures/IncludeUsage',
+                            'include_once'               => 'Structures/OnceUsage',
+                            'Output control'             => 'Extensions/Extob',
+          
+                            'Goto'                       => 'Php/Gotonames',
+                            'Labels'                     => 'Php/Labelnames',
+
+                            'Coalesce'                   => 'Php/Coalesce',
+                            'Null Coalesce'              => 'Php/NullCoalesce',
+
+                            'File upload'                => 'Structures/FileUploadUsage',
+                    ),
+
+                    'Composer' => array(
+                            'composer.json'              => 'Composer/UseComposer',
+                            'composer autoload'          => 'Composer/Autoload',
+                    ),
+
+                    'Web' => array(
+                            '$_GET, _POST...'            => 'Php/UseWeb',
+                    ),
+
+                    'CLI' => array(
+                            '$argv, $argc'                 => 'Php/UseCli',
+                    ),
+
+                    // filled later
+                    'Composer Packages' => array(),
+
+                    'Namespaces' => array(
+                            'Namespaces'              => 'Namespaces/Namespacesnames',
+                            'Alias'                   => 'Namespaces/Alias',
+                    ),
+
+                    'Variables' => array(
+                            'References'              => 'Variables/References',
+                            'Array'                   => 'Arrays/Arrayindex',
+                            'Multidimensional arrays' => 'Arrays/Multidimensional',
+                            'Array short syntax'      => 'Arrays/ArrayNSUsage',
+                            'Variable variables'      => 'Variables/VariableVariables',
+
+                            'PHP arrays'              => 'Arrays/Phparrayindex',
+
+                            'Globals'                 => 'Structures/GlobalUsage',
+                            'PHP SuperGlobals'        => 'Php/SuperGlobalUsage',
+                    ),
+
+                    'Functions' => array(
+                            'Functions'                => 'Functions/Functionnames',
+                            'Redeclared PHP Functions' => 'Functions/RedeclaredPhpFunction',
+                            'Closures'             => 'Functions/Closures',
+
+                            'Typehint'             => 'Functions/Typehints',
+                            'Scalar Typehint'      => 'Php/ScalarTypehintUsage',
+                            'Return Typehint'      => 'Php/ReturnTypehintUsage',
+                            'Static variables'     => 'Variables/StaticVariables',
+
+                            'Function dereferencing'     => 'Structures/FunctionSubscripting',
+                            'Constant scalar expression' => 'Structures/ConstantScalarExpression',
+                            '... usage'                  => 'Php/EllipsisUsage',
+                            'func_get_args'              => 'Functions/VariableArguments',
+
+                            'Dynamic functioncall' => 'Functions/Dynamiccall',
+
+                            'Recursive Functions'  => 'Functions/Recursive',
+                            'Generator Functions'  => 'Functions/IsGenerator',
+                            'Conditioned Function' => 'Functions/ConditionedFunctions',
+                    ),
+
+                    'Classes' => array(
+                            'Classes'           => 'Classes/Classnames',
+                            'Anonymous Classes' => 'Classes/Anonymous',
+                            'Class aliases'     => 'Classes/ClassAliasUsage',
+
+                            'Abstract classes'  => 'Classes/Abstractclass',
+                            'Interfaces'        => 'Interfaces/Interfacenames',
+                            'Traits'            => 'Traits/Traitnames',
+
+                            'Static properties' => 'Classes/StaticProperties',
+                            
+                            'Static methods'    => 'Classes/StaticMethods',
+                            'Abstract methods'  => 'Classes/Abstractmethods',
+                            'Final methods'     => 'Classes/Finalmethod',
+
+                            'Class constants'   => 'Classes/ConstantDefinition',
+                            'Overwritten constants' => 'Classes/OverwrittenConst',
+
+                            'Magic methods'     => 'Classes/MagicMethod',
+                            'Cloning'           => 'Classes/CloningUsage',
+                            'Dynamic class call'=> 'Classes/VariableClasses',
+
+                            'PHP 4 constructor' => 'Classes/OldStyleConstructor',
+                            'Multiple class in one file' => 'Classes/MultipleClassesInFile',
+                    ),
+
+                    'Constants' => array(
+                            'Constants'           => 'Constants/ConstantUsage',
+                            'Variable Constant'   => 'Constants/VariableConstant',
+                            'PHP constants'       => 'Constants/PhpConstantUsage',
+                            'PHP Magic constants' => 'Constants/MagicConstantUsage',
+                            'Conditioned constant'=> 'Constants/ConditionedConstants',
+                    ),
+
+                    'Numbers' => array(
+                            'Integers'    => 'Type/Integer',
+                            'Hexadecimal' => 'Type/Hexadecimal',
+                            'Octal'       => 'Type/Octal',
+                            'Binary'      => 'Type/Binary',
+                            'Float'       => 'Type/_Float',
+                    ),
+
+                    'Strings' => array(
+                            'Heredoc'    => 'Type/Heredoc',
+                            'Nowdoc'     => 'Type/Nowdoc',
+                     ),
+                    
+                    'Errors' => array(
+                            'Throw exceptions' => 'Php/ThrowUsage',
+                            'Try...Catch'      => 'Php/TryCatchUsage',
+                            'Multiple catch'   => 'Structures/MultipleCatch',
+                            'Finally'          => 'Structures/TryFinally',
+                            'Trigger error'    => 'Php/TriggerErrorUsage',
+                            'Error messages'   => 'Structures/ErrorMessages',
+                     ),
+
+                    'External systems' => array(
+                            'System'           => 'Structures/ShellUsage',
+                            'Files'            => 'Structures/FileUsage',
+                            'LDAP'             => 'Extensions/Extldap',
+                            'mail'             => 'Structures/MailUsage',
+                     ),
+
+                    'Extensions' => array(
+                            'ext/amqp'       => 'Extensions/Extamqp',
+                            'ext/apache'     => 'Extensions/Extapache',
+                            'ext/apc'        => 'Extensions/Extapc',
+                            'ext/apcu'       => 'Extensions/Extapcu',
+                            'ext/array'      => 'Extensions/Extarray',
+                            'ext/ast'        => 'Extensions/Extast',
+                            'ext/bcmath'     => 'Extensions/Extbcmath',
+                            'ext/bzip2'      => 'Extensions/Extbzip2',
+                            'ext/cairo'      => 'Extensions/Extcairo',
+                            'ext/calendar'   => 'Extensions/Extcalendar',
+                            'ext/com'        => 'Extensions/Extcom',
+                            'ext/crypto'     => 'Extensions/Extcrypto',
+                            'ext/ctype'      => 'Extensions/Extctype',
+                            'ext/curl'       => 'Extensions/Extcurl',
+                            'ext/cyrus'      => 'Extensions/Extcyrus',
+                            'ext/date'       => 'Extensions/Extdate',
+                            'ext/dba'        => 'Extensions/Extdba',
+                            'ext/dio'        => 'Extensions/Extdio',
+                            'ext/dom'        => 'Extensions/Extdom',
+                            'ext/eaccelerator' => 'Extensions/Exteaccelerator',
+                            'ext/enchant'    => 'Extensions/Extenchant',
+                            'ext/ereg'       => 'Extensions/Extereg',
+                            'ext/event'      => 'Extensions/Extevent',
+                            'ext/ev'         => 'Extensions/Extev',
+                            'ext/exif'       => 'Extensions/Extexif',
+                            'ext/expect'     => 'Extensions/Extexpect',
+                            'ext/fann'       => 'Extensions/Extfann',
+                            'ext/fdf'        => 'Extensions/Extfdf',
+                            'ext/ffmpeg'     => 'Extensions/Extffmpeg',
+                            'ext/file'       => 'Extensions/Extfile',
+                            'ext/fileinfo'   => 'Extensions/Extfileinfo',
+                            'ext/filter'     => 'Extensions/Extfilter',
+                            'ext/fpm'        => 'Extensions/Extfpm',
+                            'ext/ftp'        => 'Extensions/Extftp',
+                            'ext/gd'         => 'Extensions/Extgd',
+                            'ext/gearman'    => 'Extensions/Extgearman',
+                            'ext/geoip'      => 'Extensions/Extgeoip',
+                            'ext/gettext'    => 'Extensions/Extgettext',
+                            'ext/gmagick'    => 'Extensions/Extgmagick',
+                            'ext/gmp'        => 'Extensions/Extgmp',
+                            'ext/gnupg'      => 'Extensions/Extgnupg',
+                            'ext/hash'       => 'Extensions/Exthash',
+                            'ext/php_http'   => 'Extensions/Exthttp',
+                            'ext/ibase'      => 'Extensions/Extibase',
+                            'ext/iconv'      => 'Extensions/Exticonv',
+                            'ext/iis'        => 'Extensions/Extiis',
+                            'ext/imagick'    => 'Extensions/Extimagick',
+                            'ext/imap'       => 'Extensions/Extimap',
+                            'ext/info'       => 'Extensions/Extinfo',
+                            'ext/inotify'    => 'Extensions/Extinotify',
+                            'ext/intl'       => 'Extensions/Extintl',
+                            'ext/json'       => 'Extensions/Extjson',
+                            'ext/kdm5'       => 'Extensions/Extkdm5',
+                            'ext/ldap'       => 'Extensions/Extldap',
+                            'ext/libevent'   => 'Extensions/Extlibevent',
+                            'ext/libxml'     => 'Extensions/Extlibxml',
+                            'ext/mail'       => 'Extensions/Extmail',
+                            'ext/mailparse'  => 'Extensions/Extmailparse',
+                            'ext/math'       => 'Extensions/Extmath',
+                            'ext/mbstring'   => 'Extensions/Extmbstring',
+                            'ext/mcrypt'     => 'Extensions/Extmcrypt',
+                            'ext/memcache'   => 'Extensions/Extmemcache',
+                            'ext/memcached'  => 'Extensions/Extmemcached',
+                            'ext/ming'       => 'Extensions/Extming',
+                            'ext/mongo'      => 'Extensions/Extmongo',
+                            'ext/mssql'      => 'Extensions/Extmssql',
+                            'ext/mysql'      => 'Extensions/Extmysql',
+                            'ext/mysqli'     => 'Extensions/Extmysqli',
+                            'ext/ob'         => 'Extensions/Extob',
+                            'ext/oci8'       => 'Extensions/Extoci8',
+                            'ext/odbc'       => 'Extensions/Extodbc',
+                            'ext/opcache'    => 'Extensions/Extopcache',
+                            'ext/openssl'    => 'Extensions/Extopenssl',
+                            'ext/parsekit'   => 'Extensions/Extparsekit',
+                            'ext/pcntl'      => 'Extensions/Extpcntl',
+                            'ext/pcre'       => 'Extensions/Extpcre',
+                            'ext/pdo'        => 'Extensions/Extpdo',
+                            'ext/pgsql'      => 'Extensions/Extpgsql',
+                            'ext/phalcon'    => 'Extensions/Extphalcon',
+                            'ext/phar'       => 'Extensions/Extphar',
+                            'ext/posix'      => 'Extensions/Extposix',
+                            'ext/proctitle'  => 'Extensions/Extproctitle',
+                            'ext/pspell'     => 'Extensions/Extpspell',
+                            'ext/readline'   => 'Extensions/Extreadline',
+                            'ext/recode'     => 'Extensions/Extrecode',
+                            'ext/redis'      => 'Extensions/Extredis',
+                            'ext/reflexion'  => 'Extensions/Extreflection',
+                            'ext/runkit'     => 'Extensions/Extrunkit',
+                            'ext/sem'        => 'Extensions/Extsem',
+                            'ext/session'    => 'Extensions/Extsession',
+                            'ext/shmop'      => 'Extensions/Extshmop',
+                            'ext/simplexml'  => 'Extensions/Extsimplexml',
+                            'ext/snmp'       => 'Extensions/Extsnmp',
+                            'ext/soap'       => 'Extensions/Extsoap',
+                            'ext/sockets'    => 'Extensions/Extsockets',
+                            'ext/spl'        => 'Extensions/Extspl',
+                            'ext/sqlite'     => 'Extensions/Extsqlite',
+                            'ext/sqlite3'    => 'Extensions/Extsqlite3',
+                            'ext/sqlsrv'     => 'Extensions/Extsqlsrv',
+                            'ext/ssh2'       => 'Extensions/Extssh2',
+                            'ext/standard'   => 'Extensions/Extstandard',
+                            'ext/tidy'       => 'Extensions/Exttidy',
+                            'ext/tokenizer'  => 'Extensions/Exttokenizer',
+                            'ext/trader'     => 'Extensions/Exttrader',
+                            'ext/wddx'       => 'Extensions/Extwddx',
+                            'ext/wikidiff2'  => 'Extensions/Extwikidiff2',
+                            'ext/wincache'   => 'Extensions/Extwincache',
+                            'ext/xcache'     => 'Extensions/Extxcache',
+                            'ext/xdebug'     => 'Extensions/Extxdebug',
+                            'ext/xdiff'      => 'Extensions/Extxdiff',
+                            'ext/xhprof'     => 'Extensions/Extxhprof',
+                            'ext/xml'        => 'Extensions/Extxml',
+                            'ext/xmlreader'  => 'Extensions/Extxmlreader',
+                            'ext/xmlrpc'     => 'Extensions/Extxmlrpc',
+                            'ext/xmlwriter'  => 'Extensions/Extxmlwriter',
+                            'ext/xsl'        => 'Extensions/Extxsl',
+                            'ext/yaml'       => 'Extensions/Extyaml',
+                            'ext/yis'        => 'Extensions/Extyis',
+                            'ext/zip'        => 'Extensions/Extzip',
+                            'ext/zlib'       => 'Extensions/Extzlib',
+                            'ext/zmq'        => 'Extensions/Extzmq',
+//                          'ext/skeleton'   => 'Extensions/Extskeleton',
+                    ),
+                );
+
+        // collecting information for Extensions
+        $themed = \Analyzer\Analyzer::getThemeAnalyzers('Appinfo');
+        $res = $this->dump->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.join('", "', $themed).'")');
+        $sources = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $sources[$row['analyzer']] = $row['count'];
+        }
+        $data = array();
+        
+        foreach($extensions as $section => $hash) {
+            $data[$section] = array();
+
+            foreach($hash as $name => $ext) {
+                if (!isset($sources[$ext])) {
+                    display( "'$ext' is not a class ($name). Ignoring\n");
+                    continue;
+                }
+                if (!in_array($ext, $themed)) {
+                    display( "$ext was not analyzed in Appinfo.");
+                    continue;
+                }
+                
+                // incompatible
+                if ($sources[$ext] == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
+                    $data[$section][$name] = 'Incompatible';
+                    continue ;
+                } 
+
+                if ($sources[$ext] == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
+                    $data[$section][$name] = 'Incompatible';
+                    continue ;
+                } 
+
+                $data[$section][$name] = $sources[$ext] > 0 ? 'Yes' : 'No';
+            }
+            
+            if ($section == 'Extensions') {
+                $list = $data[$section];
+                uksort($data[$section], function ($ka, $kb) use ($list) {
+                    if ($list[$ka] == $list[$kb]) {
+                        if ($ka > $kb)  { return  1; }
+                        if ($ka == $kb) { return  0; }
+                        if ($ka > $kb)  { return -1; }
+                    } else {
+                        return $list[$ka] == 'Yes' ? -1 : 1;
+                    }
+                });
+            }
+        }
+        // collecting information for Composer
+        if (isset($sources['Composer/PackagesNames'])) {
+            $data['Composer Packages'] = array();
+            $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                $data['Composer Packages'][] = $row['fullcode'];
+            }
+        } else {
+            unset($data['Composer Packages']);
+        }
+
+        $return = $this->formatText( <<<TEXT
+This is an overview of your application. 
+
+Ticked <i class="icon-ok"></i> information are features used in your application. Non-ticked are feature that are not in use in the application.
+Crossed <i class="fa fa-times-circle-o"></i> information were not tested.
+
+TEXT
+, 'textLead');
+
+        $return .= $this->formatTree($data, $css);
+
+        return $return;
+    }
+
     private function AuditConfiguration() {
         $config = \Config::factory();
         
@@ -976,7 +1477,7 @@ TEXT
                                       'count' => $row['nb']);
         }
         uasort($listBySeverity, function ($a, $b) {
-            $s = ['Major' => 5, 'Middle' => 4, 'Minor' => 3, 'None' => 0];
+            $s = ['Critical' => 6, 'Major' => 5, 'Middle' => 4, 'Minor' => 3, 'None' => 0];
             if ($s[$a['severity']] > $s[$b['severity']]) {
                 return -1;
             } elseif ($s[$a['severity']] < $s[$b['severity']]) {
@@ -1002,6 +1503,53 @@ TEXT
                       'downRight' => $listByFile);
         
         return $this->formatDashboard($info, $css);
+    }
+
+    private function Directives() {
+        $config = \Config::factory();
+        
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = ["Directive", "Suggestion", "Description"];
+        $css->backgroundColor = "#DDDDDD";
+        $css->readOrder = ["name", "suggested", "documentation"];
+
+    // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
+        $directives = array('standard', 'bcmath', 'date', 'filesystem', 
+                            'fileupload', 'mail', 'ob', 
+                            // standard extensions
+                            'amqp', 'apache', 'assertion', 'curl', 'dba',
+                            'filter', 'image', 'intl', 'ldap',
+                            'mbstring', 
+                            'opcache', 'pcre', 'pdo', 'pgsql',
+                            'session', 'sqlite', 'sqlite3', 
+                            // pecl extensions
+                            'com',
+                            'geoip', 'ibase', 
+                            'imagick', 'mailparse', 'mongo', 
+                            'trader', 'wincache', 'xcache'
+                             );
+
+        $data = array();
+        $res = $this->dump->query('SELECT analyzer FROM resultsCounts WHERE analyzer like "Extensions/Ext%" and count > 0');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $ext = substr($row['analyzer'], 14);
+            if (in_array($ext, $directives)) {
+                $data[$ext] = (array) json_decode(file_get_contents($config->dir_root.'/data/directives/'.$ext.'.json'));
+            }
+        }
+        
+        return $this->formatText( <<<TEXT
+This is an overview of the recommended directives for your application. 
+The most important directives have been collected here, for a quick review. 
+The whole list of directive is available as a link to the manual, when applicable. 
+
+When an extension is missing from the list below, either it as no specific configuration directive, 
+or it is not used by the current code. 
+
+TEXT
+, 'textLead')
+                  .$this->formatSectionedTable($data, $css);
     }
 
     private function DynamicCode() {
@@ -1252,5 +1800,79 @@ TEXT
                 .$this->formatSimpleTable($data, $css);
     }
     
+    private function Stats() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('File');
+        $css->readOrder = $css->titles;
+        
+        $extensions = array(
+                    'Summary' => array(
+                            'Namespaces'     => 'Namespace',
+                            'Classes'        => 'Class',
+                            'Interfaces'     => 'Interface',
+                            'Trait'          => 'Trait',
+                            'Function'       => 'Functions/RealFunctions',
+                            'Variables'      => 'Variables/RealVariables',
+                            'Constants'      => 'Constants/Constantnames',
+                     ),
+                    'Classes' => array(
+                            'Classes'           => 'Class',
+                            'Class constants'   => 'Classes/ConstantDefinition',
+                            'Properties'        => 'Classes/NormalProperties',
+                            'Static properties' => 'Classes/StaticProperties',
+                            'Methods'           => 'Classes/NormalMethods',
+                            'Static methods'    => 'Classes/StaticMethods',
+                            // Spot Abstract methods
+                            // Spot Final Methods 
+                     ),
+                    'Structures' => array(
+                            'Ifthen'              => 'Ifthen',
+                            'Else'                => 'Structures/ElseUsage',
+                            'Switch'              => 'Switch',
+                            'Case'                => 'Case',
+                            'Default'             => 'Default',
+                            'For'                 => 'For',
+                            'Foreach'             => 'Foreach',
+                            'While'               => 'While',
+                            'Do..while'           => 'Dowhile',
+                            'New'                 => 'New',
+                            'Clone'               => 'Clone',
+                            'Throw'               => 'Throw',
+                            'Try'                 => 'Try',
+                            'Catch'               => 'Catch',
+                            'Finally'             => 'Finally',
+                            'Yield'               => 'Yield',
+                            '?  :'                => 'Ternary',
+                            '?: '                 => 'Php/Coalesce',
+                            '??'                  => 'Php/NullCoalesce',
+                            'Variables constants' => 'Constants/VariableConstants',
+                            'Variables variables' => 'Variables/VariableVariable',
+                            'Variables functions' => 'Functions/Dynamiccall',
+                            'Variables classes'   => 'Classes/VariableClasses',
+                    ),
+                );
+
+        $data = array();
+        foreach($extensions as $section => $hash) {
+            $data[$section] = array();
+            foreach($hash as $name => $ext) {
+                if (strpos($ext, '/') === false) {
+                    $res = $this->dump->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"'); 
+                    $d = (int) $res->fetchArray(\SQLITE3_ASSOC)['count'];
+                } else {
+                    $res = $this->dump->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"'); 
+                    $d = (int) $res->fetchArray(\SQLITE3_ASSOC)['count'];
+                }
+                $data[$section][$name] = $d;
+            }
+        }
+        
+        return $this->formatText( <<<TEXT
+These are various stats of different structures in your application.
+TEXT
+, 'textLead')
+                .$this->formatSectionedHashTable($data, $css);
+    }
     
 }//end class

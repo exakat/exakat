@@ -1,0 +1,1 @@
+[{"name":"com.allow_dcom","suggested":"False","documentation":"Allow Distributed-COM calls. Keep if false unless you need Distributed com calls."},{"name":"Extra configurations","suggested":"&nbsp;","documentation":"<a href=\"http:\/\/php.net\/manual\/en\/com.configuration.php\">Com runtime configuration<\/a>"}]

@@ -1,0 +1,1 @@
+[{"name":"geoip.custom_directory","documentation":"Use this directive if you have a special database of GeoIp. (Default is empty).","suggested":""},{"name":"Extra configurations","suggested":"&nbsp;","documentation":"<a href=\"http:\/\/php.net\/manual\/en\/bc.configuration.php\">Geoip runtime configuration<\/a>"}]

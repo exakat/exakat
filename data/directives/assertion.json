@@ -1,0 +1,1 @@
+[{"name":"assert.active","suggested":"On","documentation":"In production, set this to Off to remove all assertions. During developement, set this to On to activate them."},{"name":"Extra configurations","suggested":"&nbsp;","documentation":"<a href=\"http:\/\/php.net\/manual\/en\/info.configuration.php\">Assertion runtime configuration<\/a>"}]

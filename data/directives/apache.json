@@ -1,0 +1,1 @@
+[{"name":"child_terminate","suggested":"true","documentation":"Specify whether PHP scripts may request child process termination on end of request."},{"name":"Extra configurations","suggested":"&nbsp;","documentation":"<a href=\"http:\/\/php.net\/manual\/en\/apache.configuration.php\">Apache runtime configuration<\/a>"}]
