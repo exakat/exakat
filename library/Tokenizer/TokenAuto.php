@@ -2661,8 +2661,6 @@ $fullcode;
             $token = new Functioncall();
             $fullcode = $token->fullcode();
 
-            $fullcodeMethod = $this->fullcode();
-            
             $qactions[] = <<<GREMLIN
 /* create a functioncall, and hold the methodcall as property.  */
 
@@ -2695,8 +2693,6 @@ GREMLIN;
             $token = new Functioncall();
             $fullcode = $token->fullcode();
 
-            $fullcodeMethod = $this->fullcode();
-            
             $qactions[] = <<<GREMLIN
 /* create a functioncall, and hold the methodcall as property.  */
 

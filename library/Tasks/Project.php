@@ -28,7 +28,7 @@ class Project extends Tasks {
     private $config = null;
     
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
-                              'Appinfo', '"Dead code"', 'Security', 'Custom',
+                              'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
 
     protected $reports = array('Premier' => array(//'Markdown' => 'report',
@@ -151,7 +151,6 @@ class Project extends Tasks {
         exec('php exakat dump -p '.$config->project.'   > /dev/null &');
         display('Started dump process');
 
-        $processes = array();
         foreach($this->themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
 
@@ -217,7 +216,7 @@ class Project extends Tasks {
                 $config = \Config::factory($args);
             
                 try {
-                    $report = new Report();
+                    $report = new Report2();
                     $report->run($config);
                     unset($report);
                 } catch (\Exception $e) {

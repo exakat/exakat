@@ -101,7 +101,6 @@ class OnePage extends Tasks {
         display("Project tokenized\n");
         $this->updateProgress($progress++);
 
-        $processes = array();
         foreach($this->themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
             shell_exec('php '.$config->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;

@@ -28,8 +28,6 @@ class Typehint extends TokenAuto {
     static public $atom = 'Typehint';
     
     public function _check() {
-        $atoms = array('Variable', 'Assignation', 'Identifier');
-        
         // normal case for classes
         $this->conditions = array( 0 => array('token'     => Typehint::$operators),
                                    1 => array('token'     => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',

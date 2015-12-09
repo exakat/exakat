@@ -110,7 +110,7 @@ class Devoops {
             $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';
         }
         ksort($analyze);
-        $analyze = array_merge(array('Results Counts' => 'AnalyzeResultCounts'), $analyze);
+        $analyze = array_merge(array('Results Counts' => 'AnalyzersResultsCounts'), $analyze);
 
         // Files
         $files = array();
@@ -118,7 +118,7 @@ class Devoops {
         while($row = $res->fetchArray()) {
             $files[$row['file']] = 'OneFile';
         }
-        $files = array_merge(array('Files Counts' => 'FileResultCounts'), $files);
+        $files = array_merge(array('Files Counts' => 'FilesResultsCounts'), $files);
         
         $summary = array(
             'Report presentation' => array('Audit configuration' => 'AuditConfiguration'),
@@ -319,6 +319,16 @@ HTML;
         }
     }
 
+    private function reportStatus($count) {
+        if ($count == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
+            return '<i class="fa fa-stethoscope"></i>';
+        } elseif ($count == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
+            return '<i class="fa fa-stethoscope"></i>';
+        } else {
+            return $count;
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     /// Formatting methods 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -372,7 +382,7 @@ HTML;
 
 HTML;
         }
-        $th .= "</tr>";
+        $th .= '</tr>';
         
         $text = <<<HTML
 												<table class="table">
@@ -427,6 +437,49 @@ HTML;
         return $this->formatRow($camembert, $infobox, $css) . 
                $this->formatRow($top5Severity, $top5Files, $css);
     }
+    
+    private function formatDefinitions($data, $css) {
+        $text = <<<HTML
+													<dl id="dt-list-1" >
+HTML;
+        
+        uksort($data, function ($a, $b) { 
+            return strtolower($a) > strtolower($b) ;
+        });
+        
+        if (!empty($css->dt->class)) {
+            $dt_class = ' class="'.$css->dt->class.'"';
+        } else {
+            $dt_class = '';
+        }
+
+        if (!empty($css->dd->class)) {
+            $dd_class = ' class="'.$css->dd->class.'"';
+        } else {
+            $dd_class = '';
+        }
+
+        foreach($data as $name => $definition) {
+            $id = str_replace(' ', '-', strtolower($name));
+            $description = nl2br(trim($definition['description']));
+
+            $clearPHP = $definition['clearphp'];
+            if (!empty($clearPHP)) {
+                $description .= "<br />\n<br />\nThis rule is named '<a href=\"https://github.com/dseguy/clearPHP/blob/master/rules/$clearPHP.md\">$clearPHP</a>', in the clearPHP reference.";
+            }
+
+            $nameLink = $this->makeLink($name);
+            $text .= "
+														<dt$dt_class><a name=\"$id\"></a>$nameLink</dt>
+														<dd$dd_class><p>$description</p></dd>";
+        }
+
+        $text .= <<<HTML
+													</dl>
+HTML;
+
+        return $text;
+    }
 
     private function formatHashTableLinked($data, $css) {
         static $counter;
@@ -436,16 +489,6 @@ HTML;
         } else {
             ++$counter;
         }
-
-        $js = <<<JS
-					var oTable1 = \$('#hashtable-{$counter}').dataTable( {
-					"aoColumns": [
-					  null, null
-					] } );
-
-
-JS;
-//        $output->pushToTheEnd($js);
 
         $text = <<<HTML
 <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="hashtable-{$counter}">
@@ -524,15 +567,6 @@ HTML;
         } else {
             ++$counter;
         }
-
-        $js = <<<JS
-    				var oTable1 = \$('#horizontal-{$counter}').dataTable( {
-	    			"aoColumns": [
-		    	      null, null, null, null
-			    	] } );
-
-
-JS;
 
         $html = <<<HTML
 							<p>
@@ -674,7 +708,7 @@ HTML;
 
 HTML;
             }
-            $text .= "</tr>";
+            $text .= '</tr>';
         }
 
 $text .= <<<HTML
@@ -721,7 +755,7 @@ HTML;
 
 HTML;
             }
-            $text .= "</tr>";
+            $text .= '</tr>';
         }
 
 $text .= <<<HTML
@@ -743,7 +777,7 @@ HTML;
 
             foreach($v as $v2) {
                 $v2 = (array) $v2;
-                $text .= "<tr>";
+                $text .= '<tr>';
                 foreach($readOrder as $id) {
                     $text .= "<td>$v2[$id]</td>\n";
                 }
@@ -808,6 +842,88 @@ HTML;
         return $text;
     }
 
+    private function formatSimpleTableResultsCount($data, $css) {
+        static $counter;
+        if (!isset($counter)) {
+            $counter = 1;
+        } else {
+            ++$counter;
+        }
+
+        $text = <<<HTML
+<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="hashtable-{$counter}">
+										<thead>
+HTML;
+        
+        if ($css->displayTitles === true) {
+            $text .= '<tr>';
+            foreach($css->titles as $title) {
+                $text .= <<<HTML
+															<th>$title</th>
+
+HTML;
+            }
+            $text .= '</tr>';
+        }
+
+$text .= <<<HTML
+										</thead>
+
+										<tbody>
+HTML;
+        foreach($data as $k => $v) {
+            if ($v[0] == 'Total') { 
+                continue; 
+            }
+            // below 0 are errors
+            if ($v[1] >= 0) {
+                $v[0] = $this->makeLink($v[0]);
+            }
+            $v[1] = $this->reportStatus($v[1]);
+            $text .= "<tr><td>{$v[0]}</td><td>{$v[1]}</td>";
+            if (isset($v[2])) {
+                $text .= "<td>{$v[2]}</td>";
+            }
+            $text .= "</tr>\n";
+        }
+        
+        $text .= "<tfoot><tr><td>{$v[0]}</td><td>{$v[1]}</td>";
+        if (isset($v[2])) {
+            $text .= "<td>{$v[2]}</td>";
+        }
+        $text .= "</tr></tfoot>\n";
+
+        $text .= <<<HTML
+										</tbody>
+									</table>
+
+<script type="text/javascript">
+// Run Datables plugin and create 3 variants of settings
+function AllTables(){
+	$('#hashtable-{$counter}').dataTable( {
+		"aaSorting": [[ 0, "asc" ]],
+		"sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sSearch": "",
+			"sLengthMenu": '_MENU_'
+		}
+	});
+}
+
+$(document).ready(function() {
+	// Load Datatables and run plugin on tables 
+	LoadDataTablesScripts(AllTables);
+	// Add Drag-n-Drop feature
+	WinMove();
+});
+</script>
+
+HTML;
+        
+        return $text;
+    }
+    
     private function formatText($text, $style = '') {
         $text = nl2br($text);
         
@@ -879,6 +995,7 @@ HTML;
         foreach($list as &$title) {
             $title = $this->makeLink($title, 'ajax/'.$this->makeFileName($title));
         }
+        unset($title);
         return $html . join(', ', $list);
     }
 
@@ -889,7 +1006,7 @@ HTML;
             
             $text .= "    <ul>\n";
             foreach($v as $k2 => $v2) {
-                $text .= "        <li>$k2 ".($this->makeIcon($v2))."</li>";
+                $text .= "        <li>$k2 ".($this->makeIcon($v2)).'</li>';
             }
             $text .= "    </ul>\n";
             
@@ -971,6 +1088,41 @@ TEXT
         return $return;
     }
 
+    private function AnalyzersResultsCounts() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Label', 'Count', 'Severity');
+        $css->readOrder = $css->titles;
+
+        $themed = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('Security'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
+                              );
+        $list = '("'.join('", "', $themed).'")';
+        $res = $this->dump->query(<<<SQL
+SELECT analyzer, count(*) AS count, severity FROM results 
+        WHERE analyzer IN $list 
+        GROUP BY analyzer
+        HAVING count > 0
+SQL
+);
+        $data = array();
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            $analyzer = \Analyzer\Analyzer::getInstance($row[0]);
+            $row[0] = $analyzer->getDescription()->getName();
+
+            $data[] = $row;
+        }
+
+        return $this->formatSimpleTableResultsCount($data, $css);
+    }
+    
     private function Appinfo() {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -1432,7 +1584,6 @@ TEXT
         
         $list = \Analyzer\Analyzer::getThemeAnalyzers(str_replace(array(' ', '.'), array('PHP', ''), $title));
         
-        $begin = microtime(true);
         $res = $this->datastore->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -1442,7 +1593,6 @@ TEXT
             $ini = parse_ini_file('./human/en/'.$l.'.ini');
             $info[ $ini['name']] = array('result' => (int) $counts[$l]);
         }
-        $end = microtime(true);
 
         return $this->formatHashTableLinked($info, $css);
     }
@@ -1510,9 +1660,9 @@ TEXT
         
         $css = new \Stdclass();
         $css->displayTitles = true;
-        $css->titles = ["Directive", "Suggestion", "Description"];
-        $css->backgroundColor = "#DDDDDD";
-        $css->readOrder = ["name", "suggested", "documentation"];
+        $css->titles = ['Directive', 'Suggestion', 'Description'];
+        $css->backgroundColor = '#DDDDDD';
+        $css->readOrder = ['name', 'suggested', 'documentation'];
 
     // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
         $directives = array('standard', 'bcmath', 'date', 'filesystem', 
@@ -1552,6 +1702,23 @@ TEXT
                   .$this->formatSectionedTable($data, $css);
     }
 
+    private function Documentation() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+//        $css->titles = array('Library', 'Folder', 'Home page');
+//        $css->readOrder = $css->titles;
+
+        $data = array();
+        foreach($this->analyzers as $analyzer) {
+            $description = $analyzer->getDescription();
+            $data[$description->getName()] = array('description' => $description->getDescription(),
+                                                   'clearphp'    => $description->getClearPHP());
+        
+        }
+
+        return $this->formatDefinitions($data, $css);
+    }
+    
     private function DynamicCode() {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -1646,7 +1813,33 @@ TEXT
 , 'textLead')
                 .$this->formatSimpleTable($data, $css);
     }
+
+    private function ExternalConfigFiles() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Service', 'File', 'Home page');
+        $css->readOrder = $css->titles;
+
+        $data = array();
+        $res = $this->datastore->query('SELECT name AS Service, file AS File, homepage AS url FROM configFiles');
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            if (empty($row['url'])) {
+                $row['Home page'] = '';
+            } else {
+                $row['Home page'] = "<a href=\"".$row['url']."\">".$row['Service']." <i class=\"fa fa-sign-out\"></i></a>";
+            }
+            $data[] = $row;
+        }
         
+        $return = $this->formatText( <<<TEXT
+List services being used in this code repository, based on config files that are committed. For example, a .git folder is an artefact of a GIT repository.
+TEXT
+, 'textLead');
+
+        $return .= $this->formatSimpleTable($data, $css);
+        
+        return $return;    }
+    
     private function ExternalLibraries() {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -1677,6 +1870,38 @@ TEXT
         $return .= $this->formatSimpleTable($data, $css);
         
         return $return;
+    }
+
+    private function FilesResultsCounts() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('File', 'Count');
+        $css->readOrder = $css->titles;
+
+        $themed = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('Security'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
+                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
+                              );
+        $list = '("'.join('", "', $themed).'")';
+
+        $res = $this->dump->query(<<<SQL
+SELECT file, count(*) AS count FROM results 
+        WHERE analyzer in $list
+        GROUP BY file
+SQL
+);
+        $data = array();
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            $data[] = $row;
+        }
+
+        return $this->formatSimpleTableResultsCount($data, $css);
     }
 
     private function GlobalVariablesList() {

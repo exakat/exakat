@@ -60,7 +60,7 @@ class Load extends Tasks {
         $nbTokens = 0;
         $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
         foreach($files as $file) {
-            $nbTokens += $this->processFile($this->config->projects_root.'/projects/'.$this->config->project.'/code'.$file);
+            $nbTokens += $this->processFile($path.$file);
         }
 
         return array('files' => count($files), 'tokens' => $nbTokens);
@@ -148,7 +148,6 @@ class Load extends Tasks {
                 } else {
                     $tokensNewlines[$merge] += substr_count($tokens[$id][1], "\n");
                 }
-                $x[] = substr_count($tokens[$id][1], "\n");
                 ++$deleted;
                 unset($tokens[$id]);
             } else {
@@ -246,6 +245,7 @@ class Load extends Tasks {
             
     
         $nb = count($tokens);
+        $T = array();
         $Tid = -1;
         $inQuote = 0;
         $in_for = 0;
@@ -1390,7 +1390,7 @@ class Load extends Tasks {
         }
 
         if (($isArray === true) && $tokenValue === 'T_SEMICOLON' ) {
-            $isGlobal = false;
+            $isArray = false;
             return '';
         }
 

@@ -342,7 +342,7 @@ GREMLIN;
             $result = gremlin_query($queryString, $arguments);
         } catch (\Exceptions\GremlinException $e) {
             display($e->getMessage().
-                    $queryString, "\n");
+                    $queryString);
             $result = new \StdClass();
             $result->processed = 0;
             $result->total = 0;

@@ -57,6 +57,7 @@ use XmlWriter;
  */
 class Xml {
     private $cachedData = '';
+    private $count = 0;
     
     public $extension = 'xml';
     /**

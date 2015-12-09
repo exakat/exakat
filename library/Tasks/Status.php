@@ -29,49 +29,49 @@ class Status extends Tasks {
 
         $path = $config->projects_root.'/projects/'.$project;
         
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
+        if (!file_exists($path.'/')) {
             die("Project '$project' does not exists. Aborting\n");
         }
 
-        if (filesize($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log') == 0) {
+        if (filesize($path.'/log/tokenizer.final.log') == 0) {
             echo "tokenizer.final.log is OK\n";
         } else {
             echo "tokenizer.final.log is KO : \n",
-                 file_get_contents($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
+                 file_get_contents($path.'/log/tokenizer.final.log');
         }
-        $tokenizerLogTime = filemtime($config->projects_root.'/projects/'.$project.'/log/tokenizer.log');
+        $tokenizerLogTime = filemtime($path.'/log/tokenizer.log');
 
-        $res = shell_exec('tail '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.log | grep "Remaining token to process :"');
+        $res = shell_exec('tail '.$path.'/log/tokenizer.log | grep "Remaining token to process :"');
         if (preg_match('/Remaining token to process : 1/s', $res)) {
             echo "Tokenizing was OK\n";
         } else {
             echo "Tokenizing failed : \n", $res;
         }
 
-        if (filesize($config->projects_root.'/projects/'.$project.'/log/errors.log') == 191) {
+        if (filesize($path.'/log/errors.log') == 191) {
             echo "Error.log is OK\n";
         } else {
             echo "Error.log signal some problems : \n",
-                 file_get_contents($config->projects_root.'/projects/'.$project.'/log/errors.log');
+                 file_get_contents($path.'/log/errors.log');
 
         }
 
-        $res = shell_exec('tail -n 1 '.$config->projects_root.'/projects/'.$project.'/log/analyze.*.final.log| grep Done');
+        $res = shell_exec('tail -n 1 '.$path.'/log/analyze.*.final.log| grep Done');
         $logs = array('analyze', 'appinfo', 'Coding_Conventions', 'Dead_code', 'Custom');
         if ($res == "Done\nDone\nDone\nDone\nDone\nDone\n") {
             foreach($logs as $log) {
-                if (filemtime($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log') < $tokenizerLogTime) {
+                if (filemtime($path.'/log/analyze.'.$log.'.final.log') < $tokenizerLogTime) {
                     echo 'analyze.', $log, ".final.log is too old\n";
                 }
             }
             echo "All analyzes were OK\n";
         } else {
             foreach($logs as $log) {
-                if (!file_exists($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log')) {
+                if (!file_exists($path.'/log/analyze.'.$log.'.final.log')) {
                     echo 'analyze.', $log, '.final.log not yet here', "\n";
                     continue 1;
                 }
-                $log_content = file_get_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log');
+                $log_content = file_get_contents($path.'/log/analyze.'.$log.'.final.log');
                 if (trim(substr($log_content, -5)) != "Done") {
                     echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is wrong', "\n";
                     if (preg_match('#\[\[\'analyzer\':\'Analyzer\\\\\\\\(.+?)\\\\\\\\(.+?)\'\]\]#s', $log_content, $r) !== false) {
@@ -84,8 +84,8 @@ class Status extends Tasks {
             echo "Some analyzes are KO\n";
         }
 
-        if (file_exists($config->projects_root.'/projects/'.$project.'/report')) {
-            if (filemtime($config->projects_root.'/projects/'.$project.'/report') < $tokenizerLogTime) {
+        if (file_exists($path.'/report')) {
+            if (filemtime($path.'/report') < $tokenizerLogTime) {
                 echo " Report is too old\n";
             } else {
                echo " Report OK\n";

@@ -81,7 +81,6 @@ class Report2 extends Tasks {
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        $i = 0;
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
@@ -110,23 +109,21 @@ class Report2 extends Tasks {
             $results[ $row['file'] ]['messages'][ $row['line'] ][0][] = $message;
 
             ++$results[ $row['file'] ]['warnings'];
-            
-            $i++;
         }
 
         display( 'Building report '.$config->report.' for project '.$config->project.' in file '.$config->file.', with format '.$config->format."\n");
         $begin = microtime(true);
 
-//        $report = new \Reports\Xml();
-//        echo $report->generate( $results);
+        $report = new \Reports\Xml();
+        file_put_contents( $config->projects_root.'/projects/'.$config->project.'/report.xml', $report->generate( $results));
 
-//        $report = new \Reports\Text();
-//        if ($config->file == 'stdout') {
-//            echo $report->generate($results);
-//        } else {
-//            file_put_contents($config->projects_root.'/projects/'.$config->project.'/'.$config->file.'.'.$report->extension, $report->generate( $results));
-//            display("Reported ".$report->count." messages\n");
-//        }
+        $report = new \Reports\Text();
+        if ($config->file == 'stdout') {
+            echo $report->generate($results);
+        } else {
+            file_put_contents($config->projects_root.'/projects/'.$config->project.'/'.$config->file.'.txt', $report->generate( $results));
+            display("Reported ".$report->count." messages\n");
+        }
 
         $report = new \Reports\Devoops();
         echo $report->generate( $config->projects_root.'/projects/'.$config->project, 'report');
