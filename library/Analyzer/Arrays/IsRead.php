@@ -60,6 +60,13 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $x++ + 2 (a plusplus in a functioncall
+        $this->atomIs('Array')
+             ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
+             ->hasIn('ARGUMENT')
+             ->back('first');
+        $this->prepareQuery();
+
         // variable in a sequence (also useless...)
         $this->atomIs('Array')
              ->inIs('ELEMENT')
