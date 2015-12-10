@@ -53,12 +53,14 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->outIs('FILE')
              ->atomIs('Phpcode')
              ->outIs('CODE')
+             ->atomIs('Namespace')
+             ->outIs('BLOCK')
 
              // spot a definition
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out("ELEMENT").filter{ '.$definitions.' }.any()}')
+             ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
 
              // spot a non-definition
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
+             ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
 
              ->back('first');
         $this->prepareQuery();
@@ -68,16 +70,25 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->outIs('FILE')
              ->atomIs('Phpcode')
              ->outIs('CODE')
-
              // check that there are no namespaces
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").any() == false}')
+             ->atomIs('Sequence')
 
              // spot a definition
              ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
 
-             // cannot spot a non-definition
+             // spot a non-definition
              ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
 
+             ->back('first');
+        $this->prepareQuery();
+
+        // namespaces are implicit
+        $this->atomIs('File')
+             ->outIs('FILE')
+             ->atomIs('Phpcode')
+             ->outIs('CODE')
+             // check that there are no namespaces
+             ->atomIs(array_merge(self::$definitions, self::$definitionsHelpers))
              ->back('first');
         $this->prepareQuery();
     }

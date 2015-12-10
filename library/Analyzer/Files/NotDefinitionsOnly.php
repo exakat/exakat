@@ -28,13 +28,15 @@ use Analyzer;
 class NotDefinitionsOnly extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Files/DefinitionsOnly',
-                     'Files/GlobalCodeOnly');
+//                     'Files/GlobalCodeOnly'
+                     );
     }
     
     public function analyze() {
         $this->atomIs('File')
              ->analyzerIsNot('Files/DefinitionsOnly')
-             ->analyzerIsNot('Files/GlobalCodeOnly');
+//             ->analyzerIsNot('Files/GlobalCodeOnly')
+             ;
         $this->prepareQuery();
     }
 }
