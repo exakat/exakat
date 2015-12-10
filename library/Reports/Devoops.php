@@ -32,6 +32,7 @@ class Devoops {
     private $analyzers  = array(); // cache for analyzers [Title] = object
     private $themes     = array(); // cache for themes list
     private $themesList = '';      // cache for themes list in SQLITE
+    private $config = null;
     
     function __construct() {
         $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
@@ -45,6 +46,8 @@ class Devoops {
                                     \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
                                     );
         $this->themesList = '("'.join('", "', $this->themes).'")';
+        
+        $this->config = \Config::Factory();
 
     }
     
@@ -96,21 +99,20 @@ class Devoops {
     public function generate($folder, $name) {
         shell_exec('rm -rf '.$folder.'/'.$name);
 
-        $config = \Config::factory();
         mkdir($folder.'/'.$name, Devoops::FOLDER_PRIVILEGES);
         mkdir($folder.'/'.$name.'/ajax', Devoops::FOLDER_PRIVILEGES);
 
-        $this->copyDir($config->dir_root.'/media/devoops/css', $folder.'/'.$name.'/css');
-        $this->copyDir($config->dir_root.'/media/devoops/img', $folder.'/'.$name.'/img');
-        $this->copyDir($config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
-        $this->copyDir($config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
+        $this->copyDir($this->config->dir_root.'/media/devoops/css', $folder.'/'.$name.'/css');
+        $this->copyDir($this->config->dir_root.'/media/devoops/img', $folder.'/'.$name.'/img');
+        $this->copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
+        $this->copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
         $this->dump      = new \sqlite3($folder.'/dump.sqlite');
         $this->datastore = new \sqlite3($folder.'/datastore.sqlite');
         
         // Compatibility
         $compatibility = array('Compilation' => 'Compilation');
-        foreach($config->other_php_versions as $code) {
+        foreach($this->config->other_php_versions as $code) {
             if ($code == 52) { continue; }
 
             $version = $code[0].'.'.substr($code, 1);
@@ -165,16 +167,16 @@ class Devoops {
         $summaryHtml = $this->makeSummary($summary);
         
         $faviconHtml = '';
-        if (file_exists($config->dir_root.'/projects/'.$config->project.'/code/favicon.ico')) {
+        if (file_exists($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico')) {
             // Should be checked and reported
-            copy($config->dir_root.'/projects/'.$config->project.'/code/favicon.ico', $dir.'/img/'.$this->projectName.'.ico');
+            copy($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico', $dir.'/img/'.$this->projectName.'.ico');
             
             $faviconHtml = <<<HTML
 <img src="img/{$this->projectName}.ico" class="img-circle" alt="{$this->projectName} logo" />
 HTML;
 
-            if (!empty($config->project_url)) {
-                $faviconHtml = "<a href=\"{$config->project_url}\" class=\"avatar\">$faviconHtml</a>";
+            if (!empty($this->config->project_url)) {
+                $faviconHtml = "<a href=\"{$this->config->project_url}\" class=\"avatar\">$faviconHtml</a>";
             }
 
             $faviconHtml = <<<HTML
@@ -189,7 +191,7 @@ HTML;
 
         $html = str_replace('EXAKAT_VERSION', \Exakat::VERSION, $html);
         $html = str_replace('EXAKAT_BUILD', \Exakat::BUILD, $html);
-        $html = str_replace('PROJECT_NAME', $config->project_name, $html);
+        $html = str_replace('PROJECT_NAME', $this->config->project_name, $html);
         $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 
         file_put_contents($folder.'/'.$name.'/index.html', $html);
@@ -199,7 +201,8 @@ HTML;
                 if (method_exists($this, $method)) {
                     $html = $this->$method($title);
                 } else {
-                    print $html = 'Using default for '.$title."\n";
+                    $html = 'Using default for '.$title."\n";
+                    display($html);
                 }
 
                 $filename = $this->makeFileName($title);
@@ -297,8 +300,7 @@ HTML;
     } 
     
     protected function loadJson($file) {
-        $config = \Config::factory();
-        $fullpath = $config->dir_root.'/data/'.$file;
+        $fullpath = $this->config->dir_root.'/data/'.$file;
 
         if (!file_exists($fullpath)) {
             return null;
@@ -536,12 +538,12 @@ HTML;
                 $v['result'] = '';
                 $icon = '<i class="fa fa-stethoscope"></i>';
             } elseif ($v['result'] === 0) {
-                $icon = '<i class="fa fa-check-square-o green"></i>';
                 $v['result'] = '';
+                $icon = '<i class="fa fa-check-square-o green"></i>';
             } else {
                 $k = $this->makeLink($k);
-                $icon = '<i class="fa fa-exclamation red"></i>';
                 $v['result'] .= ' warnings';
+                $icon = '<i class="fa fa-exclamation red"></i>';
             }
             $text .= '<tr><td>'.$k.'</td><td>'.$icon.' '.$v['result']."</td></tr>\n";
         }
@@ -1485,39 +1487,36 @@ TEXT
     }
 
     private function AuditConfiguration() {
-        $config = \Config::factory();
-        
         $css = new \Stdclass();
         $css->displayTitles = false;
         $css->titles = array(0, 1);
         $css->readOrder = $css->titles;
         
-        $info = array();
-        $info[] = array('Code name', $config->project_name);
-        if (!empty($config->project_description)) {
-            $info[] = array('Code description', $config->project_description);
+        $info = array(array('Code name', $this->config->project_name));
+        if (!empty($this->config->project_description)) {
+            $info[] = array('Code description', $this->config->project_description);
         }
-        if (!empty($config->project_packagist)) {
-            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$config->project_packagist.'">'.$config->project_packagist.'</a>');
+        if (!empty($this->config->project_packagist)) {
+            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
         }
-        if (!empty($config->project_url)) {
-            $info[] = array('Home page', '<a href="'.$config->project_url.'">'.$config->project_url.'</a>');
+        if (!empty($this->config->project_url)) {
+            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
         }
-        if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/.git/config')) {
-            $gitConfig = file_get_contents($config->projects_root.'/projects/'.$config->project.'/code/.git/config');
+        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
+            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
             preg_match('#url = (\S+)\s#is', $gitConfig, $r);
             $info[] = array('Git URL', $r[1]);
             
-            $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git branch');
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
             $info[] = array('Git branch', trim($res));
 
-            $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git rev-parse HEAD');
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
             $info[] = array('Git commit', trim($res));
         } else {
             $info[] = array('Repository URL', 'Downloaded archive');
         }
 
-        $datastore = new \Datastore(\Config::factory());
+        $datastore = new \Datastore($this->config);
         
         $info[] = array('Number of PHP files', $datastore->getHash('files'));
         $info[] = array('Number of lines of code', $datastore->getHash('loc'));
@@ -1525,9 +1524,9 @@ TEXT
 
         $info[] = array('Report production date', date('r', strtotime('now')));
         
-        $php = new \PhpExec($config->phpversion);
-        $info[] = array('PHP used', $php->getActualVersion().' (version '.$config->phpversion.' configured)');
-        $info[] = array('Ignored files/folders', join(', ', $config->ignore_dirs));
+        $php = new \PhpExec($this->config->phpversion);
+        $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
+        $info[] = array('Ignored files/folders', join(', ', $this->config->ignore_dirs));
         
         $info[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
         
@@ -1540,11 +1539,11 @@ TEXT
         $css->titles = array('Version', 'Count', 'Fraction', 'Files', 'Errors');
         $css->readOrder = $css->titles;
         
-        $config = \Config::Factory();
+        
 
         $total = $this->datastore->querySingle('SELECT value FROM hash WHERE key = "files"');
         $info = array();
-        foreach($config->other_php_versions as $suffix) {
+        foreach($this->config->other_php_versions as $suffix) {
             $res = $this->datastore->query('SELECT file FROM compilation'.$suffix);
             $files = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -1662,8 +1661,6 @@ TEXT
     }
 
     private function Directives() {
-        $config = \Config::factory();
-        
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = ['Directive', 'Suggestion', 'Description'];
@@ -1691,7 +1688,7 @@ TEXT
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $ext = substr($row['analyzer'], 14);
             if (in_array($ext, $directives)) {
-                $data[$ext] = (array) json_decode(file_get_contents($config->dir_root.'/data/directives/'.$ext.'.json'));
+                $data[$ext] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
             }
         }
         

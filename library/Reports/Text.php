@@ -23,27 +23,26 @@
 namespace Reports;
 
 class Text extends Reports {
-
-    public $extension = 'txt';
+    CONST FILE_EXTENSION = 'txt';
 
     public function generateFileReport($report) {
         return false;
     }
 
     public function generate($all) {
-        $return = '';
+        $text = '';
 
         foreach($all as $file) {
             foreach($file['messages'] as $line => $column) {
                 $messages = $column[0];
                 foreach($messages as $message) {
-                    $return .= $file['filename'].":".$line." ".$message['message']."\n";
+                    $text .= $file['filename'].':'.$line.' '.$message['message']."\n";
                     $this->count();
                 }
             }
         }
         
-        return $return;
+        return $text;
     }//end generate()
 
 
