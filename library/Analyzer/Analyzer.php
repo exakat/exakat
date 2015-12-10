@@ -71,6 +71,9 @@ abstract class Analyzer {
     const UNKNOWN_COMPATIBILITY      = -1;
     const VERSION_INCOMPATIBLE       = -2;
     const CONFIGURATION_INCOMPATIBLE = -3;
+
+    const CONTEXT_IN_CLOSURE = 1;
+    const CONTEXT_OUTSIDE_CLOSURE = 2;
     
     static public $docs = null;
 
@@ -1595,12 +1598,40 @@ GREMLIN
         return $this;
     }
 
-    public function fetchContext($variable = null) {
-        $this->addMethod('sideEffect{ context = ["Namespace":"Global", "Function":"Global", "Class":"Global"]; it.in.loop(1){true}{it.object.atom in ["Namespace", "Function", "Class"]}.each{ if (it.atom == "Namespace") { context[it.atom] = it.out("NAMESPACE").next().fullcode; } else if (context[it.atom] == "Global") { context[it.atom] = it.out("NAME").next().code; } } }');
-        
-        if ($variable !== null) {
-            $this->addMethod("sideEffect{ $variable = context}");
+    public function fetchContext($context = self::CONTEXT_OUTSIDE_CLOSURE) {
+        $forClosure = "                    // This is make variables in USE available in the parent level
+                    if (it.out('USE').out('ARGUMENT').retain([current]).any()) {
+                        context[it.atom] = 'Global';
+                    }
+";      
+        if ($context == self::CONTEXT_IN_CLOSURE) {
+            $forClosure = "";
         }
+        
+        $this->addMethod(<<<GREMLIN
+sideEffect{ 
+    current = it;
+    context = ["Namespace":"Global", "Function":"Global", "Class":"Global"]; 
+    it.in.loop(1){true}{it.object.atom in ["Namespace", "Function", "Class"]}
+         .each{ 
+            if (it.atom == "Namespace") { 
+                context[it.atom] = it.out("NAMESPACE").next().fullcode; 
+            } else if (context[it.atom] == "Global") { 
+                context[it.atom] = it.out("NAME").next().code; 
+
+                // In case of closure, we use the id number to differentiate them 
+                if (context[it.atom] == '') {
+                    context[it.atom] = it.out("NAME").next().id; 
+                    
+                    $forClosure
+                }
+            } 
+        }
+    } 
+
+GREMLIN
+);
+        
         return $this;
     }
     
