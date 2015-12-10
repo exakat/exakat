@@ -19,7 +19,13 @@ print max($numbers)." maximum\n\n";
 $total = 0;
 $files = glob('exp/*/*.php');
 foreach($files as $file) {
-    include($file);
+    try {
+        include($file);
+    } catch (Throwable $e) {
+        echo "Exception: {$e->getMessage()}\n";
+        continue;
+    }
+
     
     if (empty($expected) && empty($expected_not)) {
         ++$total;
