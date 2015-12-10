@@ -27,7 +27,7 @@ class Dump extends Tasks {
     // Beware : shared with Project
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71',
-                              'Appinfo', '"Dead code"', 'Security', 'Custom',
+                              'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
     private $stmtResults = null;
     private $stmtResultsCount = null;
@@ -47,6 +47,8 @@ class Dump extends Tasks {
         \Analyzer\Analyzer::initDocs();
         
         $sqlite = new \Sqlite3($sqliteFile);
+        $this->getAtomCounts($sqlite);
+
         $sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 fullcode STRING,
                                                 file STRING,
@@ -73,7 +75,7 @@ SQL;
 INSERT INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, :class, :count )
 SQL;
         $this->stmtResultsCounts = $sqlite->prepare($sqlQuery);
-        
+
         $themes = array();
         foreach($this->themes as $thema) {
             display('Processing thema "'.$thema.'"');
@@ -120,7 +122,7 @@ SQL;
                 return true;
             }
         }
-        
+
         return true;
     }
         
@@ -187,7 +189,7 @@ GREMLIN;
         
         $saved = 0;
         $severity = \Analyzer\Analyzer::$docs->getSeverity(str_replace('\\\\', '\\', $analyzerName));
-        var_dump($severity);
+
         foreach($res as $result) {
             if (!is_object($result)) {
                 $this->log->log("Object expected but not found\n".print_r($result, true)."\n");
@@ -218,6 +220,42 @@ GREMLIN;
             display("All $saved results saved for $class\n");
         }
     }
+
+    private function getAtomCounts($sqlite) {
+        $sqlite->query('CREATE TABLE atomsCounts (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                    atom STRING,
+                                                    count INTEGER
+                                              )');
+
+        $sqlQuery = <<<SQL
+INSERT INTO atomsCounts ("id", "atom", "count") VALUES (NULL, :atom, :count )
+SQL;
+        $insert = $sqlite->prepare($sqlQuery);
+
+        
+        foreach(\Tokenizer\Token::$types as $class) {
+            $tokenClass = "\\Tokenizer\\$class";
+            if (!isset($tokenClass::$atom)) {
+                // Some classes have no such property
+                continue;
+            }
+            $atom = $tokenClass::$atom;
+            $query = "g.idx('atoms')[['atom':'$atom']].count()";
+            $res = gremlin_query($query);
+            if (!is_object($res) || !isset($res->results)) {
+                $this->log->log( "Couldn't run the query and get a result : \n" .
+                     "Query : " . $query . " \n".
+                     print_r($res, true));
+                continue ;
+            }
+
+            $res = $res->results;
+            $insert->bindValue(':atom', $atom ,   SQLITE3_TEXT);
+            $insert->bindValue(':count', $res[0], SQLITE3_INTEGER);
+            $insert->execute();
+        }
+    }
+
 }
 
 ?>
