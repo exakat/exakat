@@ -58,9 +58,11 @@ class DefinitionsOnly extends Analyzer\Analyzer {
 
              // spot a definition
              ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
+             // Not closure
+             ->raw('filter{ it.out("ELEMENT").has("atom", "Function").out("NAME").has("atom", "String").any() == false}')
 
              // spot a non-definition
-             ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
+//             ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
 
              ->back('first');
         $this->prepareQuery();
@@ -75,13 +77,15 @@ class DefinitionsOnly extends Analyzer\Analyzer {
 
              // spot a definition
              ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
+             // Not closure
+             ->raw('filter{ it.out("ELEMENT").has("atom", "Function").out("NAME").has("atom", "String").any() == false}')
 
              // spot a non-definition
              ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
 
              ->back('first');
         $this->prepareQuery();
-
+return true;
         // namespaces are implicit
         $this->atomIs('File')
              ->outIs('FILE')

@@ -113,8 +113,7 @@ class _Namespace extends TokenAuto {
         
         $this->actions = array('insertNs'     => true,
                                'atom'         => 'Namespace',
-                               'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
+                               'cleanIndex'   => true);
         $this->checkAuto();
 
         // namespace\Another : using namespace to build a namespace

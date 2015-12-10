@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Files_NotDefinitionsOnly extends Analyzer {
-    /* 11 methods */
+    /* 13 methods */
 
     public function testFiles_NotDefinitionsOnly01()  { $this->generic_test('Files_NotDefinitionsOnly.01'); }
     public function testFiles_NotDefinitionsOnly02()  { $this->generic_test('Files_NotDefinitionsOnly.02'); }
@@ -21,5 +21,7 @@ class Files_NotDefinitionsOnly extends Analyzer {
     public function testFiles_NotDefinitionsOnly09()  { $this->generic_test('Files/NotDefinitionsOnly.09'); }
     public function testFiles_NotDefinitionsOnly10()  { $this->generic_test('Files/NotDefinitionsOnly.10'); }
     public function testFiles_NotDefinitionsOnly11()  { $this->generic_test('Files/NotDefinitionsOnly.11'); }
+    public function testFiles_NotDefinitionsOnly12()  { $this->generic_test('Files/NotDefinitionsOnly.12'); }
+    public function testFiles_NotDefinitionsOnly13()  { $this->generic_test('Files/NotDefinitionsOnly.13'); }
 }
 ?>

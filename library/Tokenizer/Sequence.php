@@ -28,20 +28,6 @@ class Sequence extends TokenAuto {
     static public $atom = 'Sequence';
     
     public function _check() {
-        $operands = array('Addition', 'Multiplication', 'String', 'Integer', 'Sequence',
-                          'Float', 'Not', 'Variable','Array','Concatenation', 'Sign',
-                          'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
-                          'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
-                          'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
-                          'Var', 'Const', 'Visibility', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
-                          'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
-                          'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
-                          'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
-                          'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface',
-                          'RawString', 'Namespace', 'Boolean', 'Null', 'Use', 'ArrayNS', 'Identifier', 'Trait',
-                          'As', 'Power', 'Staticclass', 'Yield', 'Shell', 'Heredoc'
-                           );
-
         $operands = 'yes';
 
         $association = array('association' => array('Ifthen', 'Switch', 'While', 'Case', 'Default', 'Declare', 'For', 'Foreach'));
@@ -138,7 +124,7 @@ class Sequence extends TokenAuto {
                                    -1 => array('atom'     => $operands,
                                                'notToken' => $forbiddenTokens ),
                                     0 => array('token'    => Sequence::$operators),
-                                    1 => array('token'    => 'T_CLOSE_TAG'),
+                                    1 => array('token'    => array('T_CLOSE_TAG', 'T_END')),
         );
         
         $this->actions = array('toOneSequence'  => true);
