@@ -27,7 +27,8 @@ use Analyzer;
 
 class CouldBeClassConstant extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Classes/IsModified');
+        return array('Classes/IsModified',
+                     'Classes/LocallyUnusedProperty');
     }
     
     public function analyze() {
@@ -36,6 +37,7 @@ class CouldBeClassConstant extends Analyzer\Analyzer {
              ->hasNoOut(array('PRIVATE', 'PROTECTED'))
 
              ->outIs('DEFINE')
+             ->analyzerIsNot('Classes/LocallyUnusedProperty')
 
              ->hasOut('RIGHT')
              ->filter('it.out("RIGHT").filter{it.atom in ["Null", "Staticconstant"]}.any() == false')
