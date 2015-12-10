@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('static $h = array( )', 
-                      'static $a = -0',
+$expected     = array('$h = array( )', 
+                      '$a = -0',
                       );
 
-$expected_not = array('static $i = array( )',
-                      'static $b = null');
+$expected_not = array('$i = array( )',
+                      '$b = null');
 
 ?>

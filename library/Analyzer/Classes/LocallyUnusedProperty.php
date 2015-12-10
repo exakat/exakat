@@ -34,10 +34,11 @@ class LocallyUnusedProperty extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Visibility')
              ->outIs('DEFINE')
+             ->_as('ppp')
              ->analyzerIsNot('Classes/LocallyUsedProperty')
                 // must ignore static in functions
              ->analyzerIsNot('Variables/StaticVariables')
-             ->back('first');
+             ->back('ppp');
         $this->prepareQuery();
     }
 }

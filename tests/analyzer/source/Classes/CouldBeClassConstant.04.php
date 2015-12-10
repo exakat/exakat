@@ -18,6 +18,26 @@ class x {
 
     public $intM1CouldBe = 1, $intM2CouldBe = 1, $intM3CouldBe = 1; // right
     
+    function ye() {
+        $this->realPrivateCouldNotBe + 4.4; // Constant are visible!
+        $this->realProtectedCouldNotBe + 4.4; // Constant are visible!
+
+        $this->nullCouldNotBe + null; // probably not a good idea
+
+        $this->staticconstantCouldNotBe + self::NONE; // Assigning another constant ? 
+
+        $this->undefinedCouldNotBe; // right
+
+        $this->intCouldBe + 6; // right
+        $this->floatCouldBe + 6.2; // right
+        $this->stringCouldBe + "6.2"; // right
+
+        $this->intVarCouldBe + 6; // right
+
+        $this->intM6CouldBe + 6;
+        $this->intM2CouldBe + 6;
+        $this->intM4CouldBe + 6; // right
+    }
 }
 
 ?>
