@@ -29,7 +29,24 @@ class Devoops {
     private $dump      = null; // Dump.sqlite
     private $datastore = null; // Datastore.sqlite
     
-    private $analyzers = array(); // cache for analyzers
+    private $analyzers  = array(); // cache for analyzers [Title] = object
+    private $themes     = array(); // cache for themes list
+    private $themesList = '';      // cache for themes list in SQLITE
+    
+    function __construct() {
+        $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
+                                    \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
+                                    \Analyzer\Analyzer::getThemeAnalyzers('Security'),
+                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
+                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
+                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
+                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
+                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
+                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
+                                    );
+        $this->themesList = '("'.join('", "', $this->themes).'")';
+
+    }
     
     public function generateFileReport($report) {
         $out = new XMLWriter;
@@ -1094,20 +1111,9 @@ TEXT
         $css->titles = array('Label', 'Count', 'Severity');
         $css->readOrder = $css->titles;
 
-        $themed = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('Security'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
-                              );
-        $list = '("'.join('", "', $themed).'")';
         $res = $this->dump->query(<<<SQL
 SELECT analyzer, count(*) AS count, severity FROM results 
-        WHERE analyzer IN $list 
+        WHERE analyzer IN $this->themesList 
         GROUP BY analyzer
         HAVING count > 0
 SQL
@@ -1861,13 +1867,13 @@ TEXT
         }
         
         $return = $this->formatText( <<<TEXT
-This is the list of analyzers that were run. Those that doesn't have result will not be listed in the 'Analyzers' section.
+This is the list of analyzers that were run. Those that doesn t have result will not be listed in the 'Analyzers' section.
 
 This may be due to PHP version or PHP configuration incompatibilities.
-TEXT
-, 'textLead');
 
-        $return .= $this->formatSimpleTable($data, $css);
+TEXT
+, 'textLead').
+                  $this->formatSimpleTable($data, $css);
         
         return $return;
     }
@@ -1878,21 +1884,9 @@ TEXT
         $css->titles = array('File', 'Count');
         $css->readOrder = $css->titles;
 
-        $themed = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('Security'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                              \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
-                              );
-        $list = '("'.join('", "', $themed).'")';
-
         $res = $this->dump->query(<<<SQL
 SELECT file, count(*) AS count FROM results 
-        WHERE analyzer in $list
+        WHERE analyzer IN $this->themesList
         GROUP BY file
 SQL
 );
@@ -1962,7 +1956,13 @@ TEXT
         $return = $this->formatText('All results for the file : '.$title, 'textLead');
 
         $data = array();
-        $sqlQuery = 'SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results WHERE file="'.$this->dump->escapeString($title).'"';
+        $sqliteTitle = $this->dump->escapeString($title);
+        $sqlQuery = <<<SQL
+SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results 
+    WHERE file="$sqliteTitle" AND
+          analyzer IN $this->themesList
+
+SQL;
         $res = $this->dump->query($sqlQuery);
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['Analyzer']);
