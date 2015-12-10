@@ -37,7 +37,14 @@ class pregOptionE extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->regex('noDelimiter', '^(['.$delimiters.']).*?(['.$delimiters.'])(.*e.*)\\$')
+             ->raw(' sideEffect{ 
+    delimiter = it.noDelimiter[0]; 
+    if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
+    else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
+    else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
+    else { delimiterFinal = delimiter; } 
+}')
+             ->regex('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*)\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -48,7 +55,14 @@ class pregOptionE extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs('T_QUOTE')
-             ->regex('fullcode', '^.(['.$delimiters.']).+?(['.$delimiters.'])(.*e.*).\\$')
+             ->raw(' sideEffect{ 
+    delimiter = it.noDelimiter[0]; 
+    if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
+    else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
+    else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
+    else { delimiterFinal = delimiter; } 
+}')
+             ->regex('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*)\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -59,7 +73,14 @@ class pregOptionE extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs('T_DOT')
-             ->regex('fullcode', '^.(['.$delimiters.']).*?(['.$delimiters.'])(.*e.*).\\$')
+             ->raw(' sideEffect{ 
+    delimiter = it.noDelimiter[0]; 
+    if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
+    else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
+    else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
+    else { delimiterFinal = delimiter; } 
+}')
+             ->regex('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*)\\$')
              ->back('first');
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
