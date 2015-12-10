@@ -38,7 +38,7 @@ class Text extends Reports {
                 $messages = $column[0];
                 foreach($messages as $message) {
                     $return .= $file['filename'].":".$line." ".$message['message']."\n";
-                    ++$this->count;
+                    $this->count();
                 }
             }
         }

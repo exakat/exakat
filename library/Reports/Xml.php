@@ -57,7 +57,6 @@ use XmlWriter;
  */
 class Xml {
     private $cachedData = '';
-    private $count = 0;
     
     public $extension = 'xml';
     /**
@@ -107,16 +106,13 @@ class Xml {
                     $out->writeAttribute('fixable', (int) $error['fixable']);
                     $out->text($error['message']);
                     $out->endElement();
-                    ++$this->count;
+                    $this->count();
                 }
             }
         }//end foreach
 
         $out->endElement();
         $this->cachedData .= $out->flush();
-
-        return true;
-
     }//end generateFileReport()
 
 

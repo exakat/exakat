@@ -23,10 +23,17 @@
 namespace Reports;
 
 abstract class Reports {
-    public $count = 0;
+    private $count = 0;
     
     public abstract function generateFileReport($report);
 
-    public abstract function generate($all);
-
+    public abstract function generate($dirName, $fileName);
+    
+    protected function count($step = 1) {
+        $this->count += $step;
+    }
+    
+    protected function getCount() {
+        return $this->count;
+    }
 }
