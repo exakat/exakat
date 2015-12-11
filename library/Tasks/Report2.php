@@ -33,8 +33,8 @@ class Report2 extends Tasks {
 
         $this->checkTokenLimit();
         
-        if (!class_exists("\\Report\\Format\\".$config->format)) {
-            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', \Report\Report::$formats)."\nAborting\n");
+        if (!class_exists('\Reports\\'.$config->format)) {
+            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', \Reports\Reports::FORMATS)."\nAborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
@@ -49,7 +49,8 @@ class Report2 extends Tasks {
         // errors, warnings, fixable and filename
         // line number => columnnumber => type, source, severity, fixable, message
 
-        $sqlQuery = 'SELECT * FROM results';
+/*
+        That should be a configuration for the report
         if ($config->program !== null) {
             $analyzer = $config->program;
             if (\Analyzer\Analyzer::getClass($analyzer)) {
@@ -74,61 +75,23 @@ class Report2 extends Tasks {
         } else {
             display( "Reporting ALL results\n");
         }
+        */
 
-        $sqlite = new \Sqlite3($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
-        $res = $sqlite->query($sqlQuery);
-        
-        $results = array();
-        $titleCache = array();
-        $severityCache = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            if (!isset($results[$row['file']])) {
-                $file = array('errors'   => 0,
-                              'warnings' => 0,
-                              'fixable'  => 0,
-                              'filename' => $row['file'],
-                              'messages' => array());
-                $results[$row['file']] = $file;
-            }
-
-            if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
-                $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
-                $severityCache[$row['analyzer']] = $analyzer->getSeverity();
-            }
-
-            $message = array('type'     => 'warning',
-                             'source'   => $row['analyzer'],
-                             'severity' => $severityCache[$row['analyzer']],
-                             'fixable'  => 'fixable',
-                             'message'  => $titleCache[$row['analyzer']]);
-
-            if (!isset($results[ $row['file'] ]['messages'][ $row['line'] ])) {
-                $results[ $row['file'] ]['messages'][ $row['line'] ] = array(0 => array());
-            }
-            $results[ $row['file'] ]['messages'][ $row['line'] ][0][] = $message;
-
-            ++$results[ $row['file'] ]['warnings'];
-        }
-
-        display( 'Building report '.$config->report.' for project '.$config->project.' in file '.$config->file.', with format '.$config->format."\n");
+        display( 'Building report for project '.$config->project.' in file "'.$config->file.'", with format '.$config->format."\n");
         $begin = microtime(true);
+        
+        // Choose format from options
 
-        $report = new \Reports\Xml();
-        file_put_contents( $config->projects_root.'/projects/'.$config->project.'/report.xml', $report->generate( $results));
-
-        $report = new \Reports\Text();
+        $format = '\Reports\\'.$config->format;
+        $report = new $format();
         if ($config->file == 'stdout') {
-            echo $report->generate($results);
+            $report->generate( $config->projects_root.'/projects/'.$config->project);
         } else {
-            file_put_contents($config->projects_root.'/projects/'.$config->project.'/'.$config->file.'.txt', $report->generate( $results));
-            display("Reported ".$report->count." messages\n");
+            $report->generate( $config->projects_root.'/projects/'.$config->project, $config->file);
         }
-
-        $report = new \Reports\Devoops();
-        echo $report->generate( $config->projects_root.'/projects/'.$config->project, 'report');
-
+        display("Reported ".$report->getCount()." messages in $config->format\n");
         $end = microtime(true);
+
         display( "Processing time : ".number_format($end - $begin, 2)." s\n");
         display( "Done\n");
     }

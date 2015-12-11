@@ -55,10 +55,15 @@ use XmlWriter;
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class Xml {
+class Xml extends Reports {
     private $cachedData = '';
     
-    public $extension = 'xml';
+    CONST FILE_EXTENSION = 'xml';
+
+    public function __construct() {
+        parent::__construct();
+    }
+
     /**
      * Generate a partial report for a single processed file.
      *
@@ -131,8 +136,45 @@ class Xml {
      *
      * @return void
      */
-    public function generate($all) {
-        foreach($all as $file) {
+    public function generate($folder, $name = null) {
+        $sqlite = new \Sqlite3($folder.'/dump.sqlite');
+        $sqlQuery = 'SELECT * FROM results WHERE analyzer in '.$this->themesList;
+        $res = $sqlite->query($sqlQuery);
+        
+        $results = array();
+        $titleCache = array();
+        $severityCache = array();
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            if (!isset($results[$row['file']])) {
+                $file = array('errors'   => 0,
+                              'warnings' => 0,
+                              'fixable'  => 0,
+                              'filename' => $row['file'],
+                              'messages' => array());
+                $results[$row['file']] = $file;
+            }
+
+            if (!isset($titleCache[$row['analyzer']])) {
+                $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+                $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
+                $severityCache[$row['analyzer']] = $analyzer->getSeverity();
+            }
+
+            $message = array('type'     => 'warning',
+                             'source'   => $row['analyzer'],
+                             'severity' => $severityCache[$row['analyzer']],
+                             'fixable'  => 'fixable',
+                             'message'  => $titleCache[$row['analyzer']]);
+
+            if (!isset($results[ $row['file'] ]['messages'][ $row['line'] ])) {
+                $results[ $row['file'] ]['messages'][ $row['line'] ] = array(0 => array());
+            }
+            $results[ $row['file'] ]['messages'][ $row['line'] ][0][] = $message;
+
+            ++$results[ $row['file'] ]['warnings'];
+        }
+        
+        foreach($results as $file) {
             $this->generateFileReport($file);
         }
         
@@ -140,7 +182,14 @@ class Xml {
                   '<phpcs version="'.\Exakat::VERSION.'">'.PHP_EOL . 
                   $this->cachedData . 
                   '</phpcs>'.PHP_EOL;
-        return $return;
+
+        if ($name !== null) {
+            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $return);
+            return true;
+        } else {
+            echo $return;
+            return true;
+        }
     }//end generate()
 
 

@@ -23,32 +23,16 @@
 
 namespace Reports;
 
-class Devoops {
+class Devoops extends Reports {
     const FOLDER_PRIVILEGES = 0755;
     
     private $dump      = null; // Dump.sqlite
     private $datastore = null; // Datastore.sqlite
     
     private $analyzers  = array(); // cache for analyzers [Title] = object
-    private $themes     = array(); // cache for themes list
-    private $themesList = '';      // cache for themes list in SQLITE
-    private $config = null;
     
-    function __construct() {
-        $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('Security'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
-                                    );
-        $this->themesList = '("'.join('", "', $this->themes).'")';
-        
-        $this->config = \Config::Factory();
-
+    public function __construct() {
+        parent::__construct();
     }
     
     public function generateFileReport($report) {
@@ -287,7 +271,7 @@ HTML;
     private function copyDir($src, $dst) { 
         $dir = opendir($src); 
         mkdir($dst, Devoops::FOLDER_PRIVILEGES); 
-        while(false !== ( $file = readdir($dir)) ) { 
+        while(false !==  $file = readdir($dir) ) { 
             if (( $file != '.' ) && ( $file != '..' )) { 
                 if ( is_dir($src . '/' . $file) ) { 
                     $this->copyDir($src . '/' . $file,$dst . '/' . $file); 
@@ -421,7 +405,7 @@ HTML;
                     if (empty($V)) {
                         $row .= "<td>&nbsp;</td>\n";
                     } else {
-                        $row .= '<td><ul><li>'.join('</li><li>', $V)."</li></ul></td>\n";
+                        $row .= '<td><ul><li>'.implode('</li><li>', $V)."</li></ul></td>\n";
                     }
                 } else {
                     $row .= "<td>$V</td>\n";
@@ -482,9 +466,8 @@ HTML;
             $id = str_replace(' ', '-', strtolower($name));
             $description = nl2br(trim($definition['description']));
 
-            $clearPHP = $definition['clearphp'];
-            if (!empty($clearPHP)) {
-                $description .= "<br />\n<br />\nThis rule is named '<a href=\"https://github.com/dseguy/clearPHP/blob/master/rules/$clearPHP.md\">$clearPHP</a>', in the clearPHP reference.";
+            if (!empty($definition['clearphp'])) {
+                $description .= "<br />\n<br />\nThis rule is named '<a href=\"https://github.com/dseguy/clearPHP/blob/master/rules/$definition[clearphp].md\">$definition[clearphp]</a>', in the clearPHP reference.";
             }
 
             $nameLink = $this->makeLink($name);
@@ -1015,7 +998,7 @@ HTML;
             $title = $this->makeLink($title, 'ajax/'.$this->makeFileName($title));
         }
         unset($title);
-        return $html . join(', ', $list);
+        return $html . implode(', ', $list);
     }
 
     private function formatTree($data, $css) {
@@ -1414,7 +1397,7 @@ SQL
 
         // collecting information for Extensions
         $themed = \Analyzer\Analyzer::getThemeAnalyzers('Appinfo');
-        $res = $this->dump->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.join('", "', $themed).'")');
+        $res = $this->dump->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
@@ -1526,7 +1509,7 @@ TEXT
         
         $php = new \PhpExec($this->config->phpversion);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
-        $info[] = array('Ignored files/folders', join(', ', $this->config->ignore_dirs));
+        $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
         
         $info[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
         
@@ -1614,7 +1597,7 @@ TEXT
                         'Performances'        => 'Performances');
         
         $list = \Analyzer\Analyzer::getThemeAnalyzers($titles[$title]);
-        $where = 'WHERE analyzer in ("'.join('", "', $list).'")';
+        $where = 'WHERE analyzer in ("'.implode('", "', $list).'")';
 
         $res = $this->dump->query('SELECT severity, count(*) AS nb FROM results '.$where.' GROUP BY severity ORDER BY severity');
         $severities = array();

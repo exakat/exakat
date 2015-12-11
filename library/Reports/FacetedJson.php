@@ -22,17 +22,12 @@
 
 namespace Reports;
 
-abstract class Reports {
-    private $count = 0;
+class FacetedJson extends Reports {
+    const FILE_EXTENSION = 'json';
 
-    CONST FILE_EXTENSION = 'undefined';
-    CONST FORMATS = ['Text', 'Json', 'FacetedJson', 'Devoops'];
+    public function generateFileReport($report) {}
 
-    protected $themes     = array(); // cache for themes list
-    protected $themesList = '';      // cache for themes list in SQLITE
-    protected $config = null;
-    
-    public function __construct() {
+    public function generate($dirName, $fileName) {
         $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
                                     \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
                                     \Analyzer\Analyzer::getThemeAnalyzers('Security'),
@@ -43,20 +38,31 @@ abstract class Reports {
                                     \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
                                     \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
                                     );
-        $this->themesList = '("'.implode('", "', $this->themes).'")';
-        
-        $this->config = \Config::Factory();
-    }
-    
-    public abstract function generateFileReport($report);
+        $themesList = '("'.join('", "', $this->themes).'")';
 
-    public abstract function generate($dirName, $fileName);
-    
-    protected function count($step = 1) {
-        $this->count += $step;
-    }
-    
-    public function getCount() {
-        return $this->count;
-    }
-}
+        $sqlite      = new \sqlite3($dirName.'/dump.sqlite');
+
+        $sqlQuery = <<<SQL
+SELECT  id AS id,
+        fullcode AS code, 
+        file AS file, 
+        line AS line,
+        analyzer AS error
+    FROM results 
+    WHERE analyzer IN $themesList
+
+SQL;
+        $res = $sqlite->query($sqlQuery);
+        
+        $items = array();
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $items[] = $row;
+            $this->count();
+        }
+
+        file_put_contents($dirName.'/'.$fileName.'.'.self::FILE_EXTENSION, json_encode($items));
+        
+    }//end generate()
+
+
+}//end class
