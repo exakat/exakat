@@ -68,6 +68,7 @@ class Staticproperty extends TokenAuto {
             $this->actions = array('transform'    => array( -1 => 'CLASS',
                                                              1 => 'PROPERTY'),
                                    'atom'         => 'Staticproperty',
+                                   'keepIndexed'  => true
                                    );
             $this->checkAuto();
         }

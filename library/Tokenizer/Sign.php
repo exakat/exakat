@@ -40,7 +40,7 @@ class Sign extends TokenAuto {
             $php7Precedence = array();
         }
         
-        $prerequisite = array('notToken' => array_merge(array('T_STRING', 'T_ARRAY', 'T_DOT',
+        $prerequisite = array('notToken' => array_merge(array('T_STRING', 'T_ARRAY', //'T_DOT',
                                                               'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
                                                               'T_CLOSE_PARENTHESIS', 'T_VARIABLE',
                                                               'T_CLOSE_BRACKET','T_DOLLAR', 'T_CLOSE_CURLY',
@@ -48,8 +48,8 @@ class Sign extends TokenAuto {
                                                               'T_QUOTE', 'T_QUOTE_CLOSE',
                                                               'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR'),
                                                          $php7Precedence,
-                                                         Magicconstant::$operators,
-                                                         Bitshift::$operators),
+                                                         Magicconstant::$operators
+                                                         ),
                               'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
                                                     'Multiplication', 'Cast', 'Integer', 'Float', 'Function',
                                                     'Concatenation', 'Power', 'Not'));

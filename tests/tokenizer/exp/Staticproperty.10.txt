@@ -1,0 +1,78 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    $b::$c
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        array
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            =>
+            Label : KEY
+              ->
+              Label : METHOD
+                B
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    void
+              Label : OBJECT
+                $this
+            Label : VALUE
+              ->
+              Label : METHOD
+                C
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    void
+              Label : OBJECT
+                $this
+      Label : ARGUMENT
+        D
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $d
+          Label : ARGUMENT
+            'H'
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              F
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+            Label : OBJECT
+              $this
+      Label : ARGUMENT
+        array
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            D
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'E'
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  F
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      void
+                Label : OBJECT
+                  $this
+    Label : NAME
+      ::
+      Label : CLASS
+        $b
+      Label : PROPERTY
+        $c
