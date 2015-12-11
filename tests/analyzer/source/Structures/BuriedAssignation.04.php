@@ -10,5 +10,7 @@ static $D = 4;
 
 if (false != ($b = strtolower($c))) {}
 
-function x (Stdclass $y = null) {}
+function x (Stdclass $y = null) {
+    $a = 1 + 2 * ($b = intval($c));
+}
 ?>
