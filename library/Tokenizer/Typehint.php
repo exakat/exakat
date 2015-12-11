@@ -32,7 +32,20 @@ class Typehint extends TokenAuto {
         $this->conditions = array( 0 => array('token'    => Typehint::$operators),
                                    1 => array('token'    => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
                                                                   'T_CALLABLE', 'T_ARRAY', 'T_EQUAL')),
-                                   2 => array('notToken' => array('T_EQUAL'))
+                                   2 => array('token'    => array('T_COMMA', 'T_CLOSE_PARENTHESIS'))
+        );
+        
+        $this->actions = array('toTypehint'  => true,
+                               'keepIndexed' => true
+                               );
+        $this->checkAuto();
+
+        // normal case for classes
+        $this->conditions = array( 0 => array('token'    => Typehint::$operators),
+                                   1 => array('token'    => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
+                                                                  'T_CALLABLE', 'T_ARRAY', 'T_EQUAL')),
+                                   2 => array('token'    => array('T_EQUAL', 'T_VARIABLE'),
+                                              'atom'     => 'yes')
         );
         
         $this->actions = array('toTypehint'  => true,
