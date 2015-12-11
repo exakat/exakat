@@ -31,13 +31,8 @@ class Project extends Tasks {
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
 
-    protected $reports = array('Premier' => array(//'Markdown' => 'report',
-                                                  //'Sqlite'   => 'report',
-                                                  'Devoops'  => 'report',
-                                                  //'Html'     => 'report',
-                                                  //'Text'     => 'report'
-                                                  ),
-                               'Counts'  => array('Sqlite'   => 'counts'));
+    protected $reports = array('Premier' => array('Devoops'  => 'report',));
+    
     const TOTAL_STEPS = 23; // 2 Reports + 10 Analyzes + 10 other steps
 
     public function run(\Config $config) {
@@ -235,7 +230,7 @@ class Project extends Tasks {
         
         $audit_end = time();
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
-                                         'audit_length' => $audit_end - $audit_start));
+                                               'audit_length' => $audit_end - $audit_start));
 
         $this->logTime('Final');
         display("End 2\n");

@@ -80,7 +80,7 @@ class Devoops extends Reports {
 
     }//end generateFileReport()
 
-    public function generate($folder, $name) {
+    public function generate($folder, $name = 'report') {
         shell_exec('rm -rf '.$folder.'/'.$name);
 
         mkdir($folder.'/'.$name, Devoops::FOLDER_PRIVILEGES);
