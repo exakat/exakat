@@ -2390,6 +2390,12 @@ variable = it.out('NEXT').next();
 variable.setProperty('delimiter', it.code);
 variable.setProperty('enclosing', it.token);
 
+if (it.token == 'T_CURLY_OPEN') {
+    variable.setProperty('inBracket', true);
+} else if (it.token == 'T_DOLLAR_OPEN_CURLY_BRACES') {
+    variable.setProperty('inBracketDollar', true);
+}
+
 toDelete.push(it);
 g.addEdge(it.in('NEXT').next(), variable, 'NEXT');
 it.bothE('NEXT').each{ g.removeEdge(it); }

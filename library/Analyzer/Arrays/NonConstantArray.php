@@ -32,7 +32,9 @@ class NonConstantArray extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // Normal array, outside a string
         $this->atomIs('Array')
+             ->isNot('in_quote', true)
              ->outIs('INDEX')
              ->atomIs('Identifier')
              ->analyzerIsNot('Constants/Constantnames')
@@ -47,6 +49,26 @@ class NonConstantArray extends Analyzer\Analyzer {
              ->analyzerIsNot('Constants/Constantnames')
              ->hasNoConstantDefinition();
         $this->prepareQuery();
+
+        // Normal array, inside a string and {}
+        $this->atomIs('Array')
+             ->is('in_quote', true)
+             ->is('inBracket', true)
+             ->outIs('INDEX')
+             ->atomIs('Identifier')
+             ->analyzerIsNot('Constants/Constantnames')
+             ->hasNoConstantDefinition();
+        $this->prepareQuery();
+
+        $this->atomIs('Array')
+             ->is('in_quote', true)
+             ->is('inBracketDollar', true)
+             ->outIs('INDEX')
+             ->atomIs('Identifier')
+             ->analyzerIsNot('Constants/Constantnames')
+             ->hasNoConstantDefinition();
+        $this->prepareQuery();
+
     }
 }
 
