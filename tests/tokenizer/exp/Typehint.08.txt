@@ -7,15 +7,15 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        Typehint
-        Label : VARIABLE
-          $c
-        Label : CLASS
-          Stdclass
-      Label : ARGUMENT
         $b
       Label : ARGUMENT
         $a
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          Stdclass
+        Label : VARIABLE
+          $c
     Label : NAME
       x
     Label : BLOCK

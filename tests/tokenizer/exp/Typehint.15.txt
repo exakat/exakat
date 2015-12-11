@@ -1,0 +1,44 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        sadf
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $b
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      sadf
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          >
+          Label : RIGHT
+            3
+          Label : LEFT
+            $b
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      sadf
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $c
+    Label : LEFT
+      $a

@@ -29,10 +29,10 @@ class Typehint extends TokenAuto {
     
     public function _check() {
         // normal case for classes
-        $this->conditions = array( 0 => array('token'     => Typehint::$operators),
-                                   1 => array('token'     => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
-                                                                   'T_CALLABLE', 'T_ARRAY', 'T_EQUAL')),
-                                    
+        $this->conditions = array( 0 => array('token'    => Typehint::$operators),
+                                   1 => array('token'    => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
+                                                                  'T_CALLABLE', 'T_ARRAY', 'T_EQUAL')),
+                                   2 => array('notToken' => array('T_EQUAL'))
         );
         
         $this->actions = array('toTypehint'  => true,

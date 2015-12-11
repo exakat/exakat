@@ -2,6 +2,18 @@
 Label : CODE
   ;
   Label : ELEMENT
+    A
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : LEFT
+      $d
+  Label : ELEMENT
     if
     Label : CONDITION
       $e
@@ -12,7 +24,7 @@ Label : CODE
         Label : RIGHT
           g
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               $h
         Label : LEFT
@@ -20,21 +32,9 @@ Label : CODE
           Label : VARIABLE
             $f
   Label : ELEMENT
-    A
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-    Label : LEFT
-      $d
-  Label : ELEMENT
     print
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         a
         Label : ARGUMENTS

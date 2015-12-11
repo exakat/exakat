@@ -8,20 +8,20 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          C
+        Label : VARIABLE
+          $a
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          callable
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $b
-        Label : CLASS
-          callable
-      Label : ARGUMENT
-        Typehint
-        Label : VARIABLE
-          $a
-        Label : CLASS
-          C
     Label : NAME
       B
     Label : BLOCK

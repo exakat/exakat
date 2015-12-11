@@ -8,26 +8,38 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $c
-        Label : CLASS
-          callable
-      Label : ARGUMENT
-        Typehint
-        Label : VARIABLE
-          $b
-        Label : CLASS
-          D
-      Label : ARGUMENT
-        Typehint
-        Label : VARIABLE
-          $a
         Label : CLASS
           C
+        Label : VARIABLE
+          $a
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          callable
+        Label : VARIABLE
+          $c
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          D
+        Label : VARIABLE
+          $b
     Label : NAME
       B
     Label : BLOCK
       ;
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          E
+        Label : METHOD
+          F
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $e
+            Label : ARGUMENT
+              $d
       Label : ELEMENT
         =
         Label : RIGHT
@@ -38,15 +50,3 @@ Label : CODE
             $f
           Label : PROPERTY
             G
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          F
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              $d
-        Label : CLASS
-          E

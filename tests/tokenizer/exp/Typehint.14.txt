@@ -7,15 +7,11 @@ Label : CODE
     Label : RIGHT
       function
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           Typehint
           Label : CLASS
-            \
-            Label : SUBNAME
-              d
-            Label : SUBNAME
-              x
+            array
           Label : VARIABLE
             $matches
       Label : NAME
@@ -49,87 +45,7 @@ Label : CODE
     Label : RIGHT
       function
       Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Typehint
-          Label : CLASS
-            \
-            Label : SUBNAME
-              d
-            Label : SUBNAME
-              x
-          Label : VARIABLE
-            $matches
-      Label : NAME
         
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            new
-            Label : NEW
-              Match
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    0
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    1
-    Label : LEFT
-      $x
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      function
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Typehint
-          Label : CLASS
-            x
-          Label : VARIABLE
-            $matches
-      Label : NAME
-        
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            new
-            Label : NEW
-              Match
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    0
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $matches
-                  Label : INDEX
-                    1
-    Label : LEFT
-      $x
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      function
-      Label : ARGUMENTS
-        void
         Label : ARGUMENT
           Typehint
           Label : CLASS
@@ -167,11 +83,95 @@ Label : CODE
     Label : RIGHT
       function
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           Typehint
           Label : CLASS
-            array
+            \
+            Label : SUBNAME
+              d
+            Label : SUBNAME
+              x
+          Label : VARIABLE
+            $matches
+      Label : NAME
+        
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            new
+            Label : NEW
+              Match
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    0
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    1
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      function
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          Typehint
+          Label : CLASS
+            x
+          Label : VARIABLE
+            $matches
+      Label : NAME
+        
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            new
+            Label : NEW
+              Match
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    0
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $matches
+                  Label : INDEX
+                    1
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      function
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          Typehint
+          Label : CLASS
+            \
+            Label : SUBNAME
+              x
+            Label : SUBNAME
+              d
           Label : VARIABLE
             $matches
       Label : NAME

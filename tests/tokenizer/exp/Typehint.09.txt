@@ -8,31 +8,31 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          Stdclass
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $c
-        Label : CLASS
-          Stdclass
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          Stdclass
         Label : VARIABLE
           $b
-        Label : CLASS
-          Stdclass
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $a
         Label : CLASS
           Stdclass
+        Label : VARIABLE
+          $a
+    Label : NAME
+      x
     Label : BLOCK
       ;
       Label : ELEMENT
         return
         Label : RETURN
           1
-    Label : NAME
-      x
