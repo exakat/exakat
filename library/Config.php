@@ -73,7 +73,7 @@ class Config {
                                             'thema'          => null,
                                             'report'         => 'Premier',
                                             'format'         => 'Text',
-                                            'file'           => 'report',
+                                            'file'           => 'stdout',
                                             'style'          => 'ALL',
                                             'neo4j_host'     => '127.0.0.1',
                                             'neo4j_port'     => '7474',
