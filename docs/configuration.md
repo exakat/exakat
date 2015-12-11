@@ -81,3 +81,10 @@ Here are the currently available options in Exakat's project configuration file 
 |FindExternalLibraries| This is a generated value, that appears after exakat's first run on the project. You may remove this line entirely if you want Exakat to check again for libraries. Otherwise, just let it there. |
 
 
+## Check Install
+
+Once the prerequisite are installed, it is advised to run to check if all is found : 
+
+`php exakat.phar doctor`
+
+After this run, you may edit 'config/config.ini' to change some of the default values. Most of the time, the default values will be OK for a quick start.
