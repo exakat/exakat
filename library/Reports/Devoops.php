@@ -105,7 +105,7 @@ class Devoops extends Reports {
 
         // Analyze
         $analyze = array();
-        $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0');
+        $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$this->themesList);
         while($row = $res->fetchArray()) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
             
@@ -153,10 +153,10 @@ class Devoops extends Reports {
         $faviconHtml = '';
         if (file_exists($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico')) {
             // Should be checked and reported
-            copy($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico', $dir.'/img/'.$this->projectName.'.ico');
+            copy($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico', $folder.'/'.$name.'/img/'.$this->config->project.'.ico');
             
             $faviconHtml = <<<HTML
-<img src="img/{$this->projectName}.ico" class="img-circle" alt="{$this->projectName} logo" />
+<img src="img/{$this->config->project}.ico" class="img-circle" alt="{$this->config->project} logo" />
 HTML;
 
             if (!empty($this->config->project_url)) {
