@@ -1,4 +1,4 @@
-Version 0.4.1 (Azure Lion, Coming up)
+Version 0.4.2 (Red Boy, Coming up)
 + Architecture
     + Work on PHP 7 compatibility
     + Finish new report style
@@ -9,7 +9,27 @@ Version 0.4.1 (Azure Lion, Coming up)
 + Tokenizer
     + 
 
-Version 0.4.0 (Lion Lynx Demon, Coming up)
+Version 0.4.1 (Azure Lion, 2015-12-14)
++ Architecture
+    + Rebuild the report system, for speed and versatility.
++ Report
+    + Available format : JSON, Sqlite, XML, Text and HTML (Devoops).
+    + Rules are now part of the documentation. 
++ Analyzer
+    + Upgraded 'Buried assignations' 
+    + Locally Unused also spots properties without visibility (but with definition)
+    + Could be class constant, if the property is used at least once
+    + Better detection of files that are Definitions only (fix at Namespace calls)
+    + ++ is now correctly reported as isRead and isWritten in Arguments
+    + Closure's use($x) are now reported in both context (calling and called)
+    + Removed usage of 'back' method, that is blocking at high token counts
++ Tokenizer
+    + Fixed support for {} and {$ } inside strings
+    + Fixed bug with Typehint, that prevented compilation
+    + Fixed several (rare) edge cases with Sign and Staticproperties.
+    + Fixed detection of closing tags
+
+Version 0.4.0 (Lion Lynx Demon, 2015-12-07)
 + Architecture
     + Made PHP 7.0 the default (moved to 0.4.0)
     + Ran unit tests on PHPunit 5.1
