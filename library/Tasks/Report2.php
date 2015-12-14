@@ -48,6 +48,41 @@ class Report2 extends Tasks {
         \Analyzer\Analyzer::$datastore = $this->datastore;
         // errors, warnings, fixable and filename
         // line number => columnnumber => type, source, severity, fixable, message
+        
+        $dumpFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
+        
+        $max = 20;
+        while (!file_exists($dumpFile)) {
+            display("$config->project/dump.sqlite doesn't exist yet ($max). Waiting\n");
+            sleep(rand(1,3));
+            --$max;
+            
+            if ($max == 0) {
+                die("Waited for dump.sqlite, but it never came. Try again later\n");
+            }
+        }
+
+        $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
+        $dump = new \Sqlite3($dumpFile);
+        $res = $dump->query($ProjectDumpSql);
+        $row = $res->fetchArray(\SQLITE3_NUM);
+
+        $max = 20;
+        while( $row[0] != 1) {
+            unset($dump);
+            sleep(rand(1,3));
+            display("No Dump finish signal ($max). Waiting\n");
+
+            $dump = new \Sqlite3($dumpFile);
+
+            $res = $dump->query($ProjectDumpSql);
+            $row = $res->fetchArray(\SQLITE3_NUM);
+            
+            --$max;
+            if ($max == 0) {
+                die("Waited for Project/Dump, but it never came. Try again later\n");
+            }
+        }
 
 /*
         That should be a configuration for the report
@@ -85,7 +120,7 @@ class Report2 extends Tasks {
         $format = '\Reports\\'.$config->format;
         $report = new $format();
         if ($config->file == 'stdout') {
-            $report->generate( $config->projects_root.'/projects/'.$config->project);
+            echo $report->generate( $config->projects_root.'/projects/'.$config->project);
         } else {
             $report->generate( $config->projects_root.'/projects/'.$config->project, $config->file);
         }
