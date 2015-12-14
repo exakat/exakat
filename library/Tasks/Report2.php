@@ -48,7 +48,7 @@ class Report2 extends Tasks {
         \Analyzer\Analyzer::$datastore = $this->datastore;
         // errors, warnings, fixable and filename
         // line number => columnnumber => type, source, severity, fixable, message
-        
+
         $dumpFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
         
         $max = 20;

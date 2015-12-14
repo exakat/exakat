@@ -421,14 +421,13 @@ JOIN categories
             $res = shell_exec('php56 -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                $errors56[$file] = $res;
+                $errors56[(string) $file] = $res;
             }
 
             $res = shell_exec('php70 -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                var_dump($file);
-                $errors70[$file] = $res;
+                $errors70[(string) $file] = $res;
             }
         }
         

@@ -1603,7 +1603,7 @@ GREMLIN
                     if (it.out('USE').out('ARGUMENT').retain([current]).any()) {
                         context[it.atom] = 'Global';
                     }
-";      
+";
         if ($context == self::CONTEXT_IN_CLOSURE) {
             $forClosure = "";
         }
