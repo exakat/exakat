@@ -6,7 +6,7 @@ Exakat Static Analyzer
 Exakat is a static analyzer for PHP. It applies the [clear PHP rules](http://github.com/dseguy/clearPHP/) to PHP code and provides a report on violations. 
 
 # Version
-This manual is for Exakat version (0.4.0) \(build 255\)
+This manual is for Exakat version (0.4.1) \(build 256\)
 
 # Install
 * [Read the Install for Mac OSX manual](./Installation.osx.md)
