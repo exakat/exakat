@@ -119,9 +119,12 @@ SQL;
             
             if ($rounds >= 200) {
                 $this->log->log( "Reached 200 rounds. Aborting\n");
+                $this->finish();
                 return true;
             }
         }
+
+        $this->finish();
 
         return true;
     }
@@ -254,6 +257,13 @@ SQL;
             $insert->bindValue(':count', $res[0], SQLITE3_INTEGER);
             $insert->execute();
         }
+    }
+    
+    private function finish() {
+        $this->stmtResultsCounts->bindValue(':class', 'Project/Dump', SQLITE3_TEXT);
+        $this->stmtResultsCounts->bindValue(':count', 1, SQLITE3_INTEGER);
+
+        $result = $this->stmtResultsCounts->execute();
     }
 
 }
