@@ -282,3 +282,17 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+
+import sphinx_rtd_theme
+html_theme = "sphinx_rtd_theme"
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+    
+# Set up PHP syntax highlights
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+lexers["php"] = PhpLexer(startinline=True, linenos=1)
+lexers["php-annotations"] = PhpLexer(startinline=True, linenos=1)
+primary_domain = "php"
+
+
