@@ -59,8 +59,7 @@ class Phploc extends Tasks {
                     $datastore->deleteRow('files', array('file' => $file));
                     $datastore->addRow('ignoredFiles', array(array('file' => $file,
                                                              'reason' => $counts['error'])));
-                    print "Moving $file\n";
-                    print($file ."\n");
+                    display("Finally ignoring $file\n");
                 }
             }
             
