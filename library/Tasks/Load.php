@@ -166,7 +166,7 @@ class Load extends Tasks {
         }
 
         if (count($tokens) == 0) {
-            echo 'Ignoring file ', $filename, " as it is empty\n";
+            display( "Ignoring file $filename, as it is empty\n");
             return false;
         }
     
@@ -1173,7 +1173,7 @@ class Load extends Tasks {
         $this->log->log($filename."\t".(($end - $begin)*1000)."\t".join("\t", $log));
 
         if (!isset($T)) {
-            echo "Empty script. Ignoring\n";
+            display( "Empty script. Ignoring\n");
             return false;
         }
         $T[0]->setProperty('root', 'true')->save();
@@ -1210,10 +1210,12 @@ class Load extends Tasks {
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
         if (!empty($this->processBlocks('T_OPEN_CURLY'))) {
-            echo "Alert, all { and } were not flushed in '", $filename, "'\n";
+            display( "Alert, all { and } were not flushed in '", $filename, "'\n");
+            $this->log->log("Alert, all { and } were not flushed in '", $filename, "'\n");
         }
         if (!empty($this->processBlocks('T_OPEN_PARENTHESIS'))) {
-            echo "Alert, all parenthesis were not flushed in '", $filename, "'\n";
+            display( "Alert, all parenthesis were not flushed in '", $filename, "'\n");
+            $this->log->log( "Alert, all parenthesis were not flushed in '", $filename, "'\n");
         }
         $this->processComma('T_IGNORE', true);
 
