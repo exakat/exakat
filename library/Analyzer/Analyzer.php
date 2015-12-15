@@ -181,7 +181,7 @@ abstract class Analyzer {
         if ($analyzer = static::getClass($name)) {
             return new $analyzer();
         } else {
-            echo "No such class as '", $name, "'\n";
+            display( "No such class as '", $name, "'\n");
             return null;
         }
     }
