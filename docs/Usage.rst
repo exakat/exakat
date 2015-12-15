@@ -50,7 +50,7 @@ Doctor
 The 'doctor' command displays a list of configuration, and checks the current installation.
 ::
 
-php exakat.phar doctor
+   php exakat.phar doctor
 
 It displays a list of configurations and information about the installation. This is useful to check if the installation is what `exakat` expects.
 ::
@@ -154,7 +154,7 @@ You may update the code in the `projects/<name>/code` folder. After such an oper
 
 ::
 
-php exakat.phar project -p sculpin 
+   php exakat.phar project -p sculpin 
 
 
 Project removal
