@@ -111,7 +111,7 @@ Here are the currently available options in Exakat's configuration file : config
 +----------------+-------------------------------------------------------------------------------------------+
 
 Project Configuration
-#####################
+---------------------
 
 Project configuration file are called 'config.ini'. They are located, one per project, in the 'projects/&lt;project name&gt;/config.ini' file. 
 
@@ -147,7 +147,7 @@ Here are the currently available options in Exakat's project configuration file 
 +-----------------------+-------------------------------------------------------------------------------------------+
 
 Check Install
-##################
+-------------
 
 Once the prerequisite are installed, it is advised to run to check if all is found : 
 

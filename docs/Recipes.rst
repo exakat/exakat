@@ -17,534 +17,605 @@ List of recipes
 
 Here is the list of the current recipes supported by Exakat Engine.
 
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|Name                      | Description                                                                                          |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`Security`_               | Check the code for common security bad practices, especially in the Web environnement.               |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`Performances`_           | Check the code for slow code.                                                                        |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`Dead code`_              | Check the unused code or unreachable code.                                                           |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`Analysis`_               | Check for common best practices.                                                                     |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`CompatibilityPHP70`_     | List features that are incompatible with PHP 7.0. This recipe is helpful for checking compatibility. |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`CompatibilityPHP71`_     | List features that are incompatible with PHP 7.1. This recipe is helpful for forward compatibility,  |
-|                          | and it currently under developpement.                                                                |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`CompatibilityPHP56`_     | List features that are incompatible with PHP 5.6. This recipe is helpful for backward compatibility. |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`CompatibilityPHP55`_     | List features that are incompatible with PHP 5.5. This recipe is helpful for backward compatibility. |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`CompatibilityPHP54`_     | List features that are incompatible with PHP 5.4. This recipe is helpful for backward compatibility. |
-+--------------------------+------------------------------------------------------------------------------------------------------+
-|`CompatibilityPHP53`_     | List features that are incompatible with PHP 5.3. This recipe is helpful for backward compatibility. |
-+--------------------------+------------------------------------------------------------------------------------------------------+
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|Name                                  | Description                                                                                          |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Security`                       | Check the code for common security bad practices, especially in the Web environnement.               |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Performances`                   | Check the code for slow code.                                                                        |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Dead code <dead-code>`          | Check the unused code or unreachable code.                                                           |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Analyze`                        | Check for common best practices.                                                                     |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP70`             | List features that are incompatible with PHP 7.0. This recipe is helpful for checking compatibility. |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP71`             | List features that are incompatible with PHP 7.1. This recipe is helpful for forward compatibility,  |
+|                                      | and it currently under developpement.                                                                |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP56`             | List features that are incompatible with PHP 5.6. This recipe is helpful for backward compatibility. |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP55`             | List features that are incompatible with PHP 5.5. This recipe is helpful for backward compatibility. |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP54`             | List features that are incompatible with PHP 5.4. This recipe is helpful for backward compatibility. |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP53`             | List features that are incompatible with PHP 5.3. This recipe is helpful for backward compatibility. |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
 
 Recipes details
-################
+###############
+
+.. comment: The rest of the document is automatically generated. Don't modify it manually. 
+.. comment: Recipes details
+.. comment: Generation date : Tue, 15 Dec 2015 17:32:19 +0000
+.. comment: Generation hash : 41221d44bdb613846eb7ee7f544e138b2fe7656c
+
+
+.. _analyze:
 
 Analyze
-*******
- 
-* [&lt;?= usage](./Rules.md#<?=-usage)
-* [Abstract static methods](./Rules.md#Abstract-static-methods)
-* [Access protected structures](./Rules.md#Access-protected-structures)
-* [Accessing private](./Rules.md#Accessing-private)
-* [Adding Zero](./Rules.md#Adding-Zero)
-* [Aliases usage](./Rules.md#Aliases-usage)
-* [Altering Foreach Without Reference](./Rules.md#Altering-Foreach-Without-Reference)
-* [Ambiguous Index](./Rules.md#Ambiguous-Index)
-* [Argument should be typehinted](./Rules.md#Argument-should-be-typehinted)
-* [Assign Default To Properties](./Rules.md#Assign-Default-To-Properties)
-* [Avoid Parenthesis](./Rules.md#Avoid-Parenthesis)
-* [Avoid array\_unique](./Rules.md#Avoid-array_unique)
-* [Break Outside Loop](./Rules.md#Break-Outside-Loop)
-* [Break With 0](./Rules.md#Break-With-0)
-* [Break With Non Integer](./Rules.md#Break-With-Non-Integer)
-* [Buried Assignation](./Rules.md#Buried-Assignation)
-* [Calltime Pass By Reference](./Rules.md#Calltime-Pass-By-Reference)
-* [Case After Default](./Rules.md#Case-After-Default)
-* [Case For Parent, Static And Self](./Rules.md#Case-For-Parent,-Static-And-Self)
-* [Catch Overwrite Variable](./Rules.md#Catch-Overwrite-Variable)
-* [Class, Interface or Ttrait With Identical Names](./Rules.md#Class,-Interface-or-Ttrait-With-Identical-Names)
-* [Classes Mutually Extending Each Other](./Rules.md#Classes-Mutually-Extending-Each-Other)
-* [Close Tags](./Rules.md#Close-Tags)
-* [Closure May Use `$this`](./Rules.md#Closure-May-Use-$this)
-* [Compared comparison](./Rules.md#Compared-comparison)
-* [Concrete Visibility](./Rules.md#Concrete-Visibility)
-* [Constant Class](./Rules.md#Constant-Class)
-* [Constants Created Outside Its Namespace](./Rules.md#Constants-Created-Outside-Its-Namespace)
-* [Constants With Strange Names](./Rules.md#Constants-With-Strange-Names)
-* [Could Be Class Constant](./Rules.md#Could-Be-Class-Constant)
-* [Could Be Static](./Rules.md#Could-Be-Static)
-* [Could Use Short Assignation](./Rules.md#Could-Use-Short-Assignation)
-* [Could use self](./Rules.md#Could-use-self)
-* [Dangling Array References](./Rules.md#Dangling-Array-References)
-* [Deep Definitions](./Rules.md#Deep-Definitions)
-* [Deprecated code](./Rules.md#Deprecated-code)
-* [Don't Change Incomings](./Rules.md#Don't-Change-Incomings)
-* [Double Assignation](./Rules.md#Double-Assignation)
-* [Double Instruction](./Rules.md#Double-Instruction)
-* [Echo With Concat](./Rules.md#Echo-With-Concat)
-* [Else If Versus Elseif](./Rules.md#Else-If-Versus-Elseif)
-* [Empty Classes](./Rules.md#Empty-Classes)
-* [Empty Function](./Rules.md#Empty-Function)
-* [Empty Instructions](./Rules.md#Empty-Instructions)
-* [Empty Interfaces](./Rules.md#Empty-Interfaces)
-* [Empty List](./Rules.md#Empty-List)
-* [Empty Namespace](./Rules.md#Empty-Namespace)
-* [Empty Try Catch](./Rules.md#Empty-Try-Catch)
-* [Empty traits](./Rules.md#Empty-traits)
-* [Eval Without Try](./Rules.md#Eval-Without-Try)
-* [Eval() Usage](./Rules.md#Eval()-Usage)
-* [Exit() Usage](./Rules.md#Exit()-Usage)
-* [Extension fann](./Rules.md#Extension-fann)
-* [For Using Functioncall](./Rules.md#For-Using-Functioncall)
-* [Foreach Needs Reference Array](./Rules.md#Foreach-Needs-Reference-Array)
-* [Foreach Reference Is Not Modified](./Rules.md#Foreach-Reference-Is-Not-Modified)
-* [Forgotten Visibility](./Rules.md#Forgotten-Visibility)
-* [Forgotten Whitespace](./Rules.md#Forgotten-Whitespace)
-* [Fully Qualified Constants](./Rules.md#Fully-Qualified-Constants)
-* [Function Subscripting, Old Style](./Rules.md#Function-Subscripting,-Old-Style)
-* [Functions Removed In PHP 5.4](./Rules.md#Functions-Removed-In-PHP-5.4)
-* [Functions in loop calls](./Rules.md#Functions-in-loop-calls)
-* [Global usage](./Rules.md#Global-usage)
-* [Hardcoded passwords](./Rules.md#Hardcoded-passwords)
-* [Hash Algorithms](./Rules.md#Hash-Algorithms)
-* [Htmlentities Calls](./Rules.md#Htmlentities-Calls)
-* [Implement is for interface](./Rules.md#Implement-is-for-interface)
-* [Implicit global](./Rules.md#Implicit-global)
-* [Incompilable Files](./Rules.md#Incompilable-Files)
-* [Indices Are Int Or String](./Rules.md#Indices-Are-Int-Or-String)
-* [Instantiating Abstract Class](./Rules.md#Instantiating-Abstract-Class)
-* [Invalid constant name](./Rules.md#Invalid-constant-name)
-* [List With Appends](./Rules.md#List-With-Appends)
-* [Locally Unused Property](./Rules.md#Locally-Unused-Property)
-* [Logical should use &amp;&amp;, ||, ^](./Rules.md#Logical-should-use-&&,-||,-^)
-* [Lone blocks](./Rules.md#Lone-blocks)
-* [Lost References](./Rules.md#Lost-References)
-* [Magic Visibility](./Rules.md#Magic-Visibility)
-* [Malformed Octal](./Rules.md#Malformed-Octal)
-* [Multiple Class Declarations](./Rules.md#Multiple-Class-Declarations)
-* [Multiple Constant Definition](./Rules.md#Multiple-Constant-Definition)
-* [Multiple Definition of the same argument](./Rules.md#Multiple-Definition-of-the-same-argument)
-* [Multiple Index Definition](./Rules.md#Multiple-Index-Definition)
-* [Multiples Identical Case](./Rules.md#Multiples-Identical-Case)
-* [Multiply By One](./Rules.md#Multiply-By-One)
-* [Must Return Methods](./Rules.md#Must-Return-Methods)
-* [Namespace with fully qualified name](./Rules.md#Namespace-with-fully-qualified-name)
-* [Nested Ternary](./Rules.md#Nested-Ternary)
-* [Never used properties](./Rules.md#Never-used-properties)
-* [No Direct Call To MagicMethod](./Rules.md#No-Direct-Call-To-MagicMethod)
-* [No Direct Usage](./Rules.md#No-Direct-Usage)
-* [No Hardcoded Ip](./Rules.md#No-Hardcoded-Ip)
-* [No Hardcoded Path](./Rules.md#No-Hardcoded-Path)
-* [No Hardcoded Port](./Rules.md#No-Hardcoded-Port)
-* [No Implied If](./Rules.md#No-Implied-If)
-* [No Parenthesis For Language Construct](./Rules.md#No-Parenthesis-For-Language-Construct)
-* [No Public Access](./Rules.md#No-Public-Access)
-* [No Real Comparison](./Rules.md#No-Real-Comparison)
-* [No Self Referencing Constant](./Rules.md#No-Self-Referencing-Constant)
-* [No array\_merge In Loops](./Rules.md#No-array_merge-In-Loops)
-* [Non Ascii variables](./Rules.md#Non-Ascii-variables)
-* [Non Static Methods Called In A Static](./Rules.md#Non-Static-Methods-Called-In-A-Static)
-* [Non-constant Index In Array](./Rules.md#Non-constant-Index-In-Array)
-* [Not Definitions Only](./Rules.md#Not-Definitions-Only)
-* [Not Not](./Rules.md#Not-Not)
-* [Not Substr One](./Rules.md#Not-Substr-One)
-* [Null On New](./Rules.md#Null-On-New)
-* [Objects Don't Need References](./Rules.md#Objects-Don't-Need-References)
-* [Old Style Constructor](./Rules.md#Old-Style-Constructor)
-* [One Letter Functions](./Rules.md#One-Letter-Functions)
-* [One variable String](./Rules.md#One-variable-String)
-* [Only Variable Returned By Reference](./Rules.md#Only-Variable-Returned-By-Reference)
-* [Or Die](./Rules.md#Or-Die)
-* [Overwritten Exceptions](./Rules.md#Overwritten-Exceptions)
-* [Overwritten Literals](./Rules.md#Overwritten-Literals)
-* [PHP Keywords as Names](./Rules.md#PHP-Keywords-as-Names)
-* [PREG Option e](./Rules.md#PREG-Option-e)
-* [Parent, static or self outside class](./Rules.md#Parent,-static-or-self-outside-class)
-* [Phpinfo](./Rules.md#Phpinfo)
-* [Pre-Increment](./Rules.md#Pre-Increment)
-* [Preprocess Arrays](./Rules.md#Preprocess-Arrays)
-* [Preprocessable](./Rules.md#Preprocessable)
-* [Print And Die](./Rules.md#Print-And-Die)
-* [Property/Variable Confusion](./Rules.md#Property/Variable-Confusion)
-* [Queries in loops](./Rules.md#Queries-in-loops)
-* [Redeclared PHP Functions](./Rules.md#Redeclared-PHP-Functions)
-* [Redefined Property](./Rules.md#Redefined-Property)
-* [Relay Function](./Rules.md#Relay-Function)
-* [Repeated prints](./Rules.md#Repeated-prints)
-* [Sequences In For](./Rules.md#Sequences-In-For)
-* [Several Instructions On The Same Line](./Rules.md#Several-Instructions-On-The-Same-Line)
-* [Short Open Tags](./Rules.md#Short-Open-Tags)
-* [Should Be Single Quote](./Rules.md#Should-Be-Single-Quote)
-* [Should Chain Exception](./Rules.md#Should-Chain-Exception)
-* [Should Typecast](./Rules.md#Should-Typecast)
-* [Should Use Constants](./Rules.md#Should-Use-Constants)
-* [Should Use Prepared Statement](./Rules.md#Should-Use-Prepared-Statement)
-* [Should Use `$this`](./Rules.md#Should-Use-$this)
-* [Silently Cast Integer](./Rules.md#Silently-Cast-Integer)
-* [Static Loop](./Rules.md#Static-Loop)
-* [Static Methods Called From Object](./Rules.md#Static-Methods-Called-From-Object)
-* [Static Methods Can't Contain `$this`](./Rules.md#Static-Methods-Can't-Contain-$this)
-* [Strict comparison with booleans](./Rules.md#Strict-comparison-with-booleans)
-* [String May Hold A Variable](./Rules.md#String-May-Hold-A-Variable)
-* [Strpos Comparison](./Rules.md#Strpos-Comparison)
-* [Switch With Too Many Default](./Rules.md#Switch-With-Too-Many-Default)
-* [Switch Without Default](./Rules.md#Switch-Without-Default)
-* [Throws An Assignement](./Rules.md#Throws-An-Assignement)
-* [Timestamp Difference](./Rules.md#Timestamp-Difference)
-* [Unchecked Resources](./Rules.md#Unchecked-Resources)
-* [Undefined Class Constants](./Rules.md#Undefined-Class-Constants)
-* [Undefined Classes](./Rules.md#Undefined-Classes)
-* [Undefined Constants](./Rules.md#Undefined-Constants)
-* [Undefined Interfaces](./Rules.md#Undefined-Interfaces)
-* [Undefined function](./Rules.md#Undefined-function)
-* [Undefined parent](./Rules.md#Undefined-parent)
-* [Undefined properties](./Rules.md#Undefined-properties)
-* [Undefined static:: or self::](./Rules.md#Undefined-static::-or-self::)
-* [Unpreprocessed values](./Rules.md#Unpreprocessed-values)
-* [Unreachable Code](./Rules.md#Unreachable-Code)
-* [Unresolved Instanceof](./Rules.md#Unresolved-Instanceof)
-* [Unresolved classes](./Rules.md#Unresolved-classes)
-* [Unresolved use](./Rules.md#Unresolved-use)
-* [Unset In Foreach](./Rules.md#Unset-In-Foreach)
-* [Unthrown Exception](./Rules.md#Unthrown-Exception)
-* [Unused Global](./Rules.md#Unused-Global)
-* [Unused Interfaces](./Rules.md#Unused-Interfaces)
-* [Unused Label](./Rules.md#Unused-Label)
-* [Unused Methods](./Rules.md#Unused-Methods)
-* [Unused Static Properties](./Rules.md#Unused-Static-Properties)
-* [Unused Trait](./Rules.md#Unused-Trait)
-* [Unused classes](./Rules.md#Unused-classes)
-* [Unused constants](./Rules.md#Unused-constants)
-* [Unused functions](./Rules.md#Unused-functions)
-* [Unused static methods](./Rules.md#Unused-static-methods)
-* [Unused use](./Rules.md#Unused-use)
-* [Use === null](./Rules.md#Use-===-null)
-* [Use Constant As Arguments](./Rules.md#Use-Constant-As-Arguments)
-* [Use Instanceof](./Rules.md#Use-Instanceof)
-* [Use Object Api](./Rules.md#Use-Object-Api)
-* [Use Pathinfo](./Rules.md#Use-Pathinfo)
-* [Use const](./Rules.md#Use-const)
-* [Use with fully qualified name](./Rules.md#Use-with-fully-qualified-name)
-* [Used once variables (in scope)](./Rules.md#Used-once-variables-(in-scope))
-* [Used once variables](./Rules.md#Used-once-variables)
-* [Useless Abstract Class](./Rules.md#Useless-Abstract-Class)
-* [Useless Brackets](./Rules.md#Useless-Brackets)
-* [Useless Final](./Rules.md#Useless-Final)
-* [Useless Global](./Rules.md#Useless-Global)
-* [Useless Interfaces](./Rules.md#Useless-Interfaces)
-* [Useless Parenthesis](./Rules.md#Useless-Parenthesis)
-* [Useless Unset](./Rules.md#Useless-Unset)
-* [Useless constructor](./Rules.md#Useless-constructor)
-* [Useless instructions](./Rules.md#Useless-instructions)
-* [Useless return](./Rules.md#Useless-return)
-* [Uses default values](./Rules.md#Uses-default-values)
-* [Var](./Rules.md#Var)
-* [While(List() = Each())](./Rules.md#While(List()-=-Each()))
-* [Written Only Variables](./Rules.md#Written-Only-Variables)
-* [Wrong Number Of Arguments](./Rules.md#Wrong-Number-Of-Arguments)
-* [Wrong Optional parameter](./Rules.md#Wrong-Optional-parameter)
-* [\_\_toString() Throws Exception](./Rules.md#__toString()-Throws-Exception)
-* [`$HTTP\_RAW\_POST\_DATA`](./Rules.md#$HTTP_RAW_POST_DATA)
-* [`$this` Belongs To Classes](./Rules.md#$this-Belongs-To-Classes)
-* [`$this` is not an array](./Rules.md#$this-is-not-an-array)
-* [`$this` is not for static methods](./Rules.md#$this-is-not-for-static-methods)
-* [crypt without salt](./Rules.md#crypt-without-salt)
-* [error\_reporting() With Integers](./Rules.md#error_reporting()-With-Integers)
-* [ext/apc](./Rules.md#ext/apc)
-* [ext/fdf](./Rules.md#ext/fdf)
-* [ext/mysql](./Rules.md#ext/mysql)
-* [ext/sqlite](./Rules.md#ext/sqlite)
-* [func\_get\_arg Modified](./Rules.md#func_get_arg-Modified)
-* [include\_once() Usage](./Rules.md#include_once()-Usage)
-* [list() May Omit Variables](./Rules.md#list()-May-Omit-Variables)
-* [mcrypt\_create\_iv with default values](./Rules.md#mcrypt_create_iv-with-default-values)
-* [old \_\_autoload](./Rules.md#old-__autoload)
-* [var\_dump()... Usage](./Rules.md#var_dump()...-Usage)
++++++++
 
-### CompatibilityPHP53
+Total : 218 analysis
 
-* [** for exponent](./Rules.md#**-for-exponent)
-* [... usage](./Rules.md#...-usage)
-* [::class](./Rules.md#::class)
-* [Anonymous Classes](./Rules.md#Anonymous-Classes)
-* [Binary Glossary](./Rules.md#Binary-Glossary)
-* [Break With 0](./Rules.md#Break-With-0)
-* [Case For Parent, Static And Self](./Rules.md#Case-For-Parent,-Static-And-Self)
-* [Class Const With Array](./Rules.md#Class-Const-With-Array)
-* [Closure May Use `$this`](./Rules.md#Closure-May-Use-$this)
-* [Const With Array](./Rules.md#Const-With-Array)
-* [Constant Scalar Expression](./Rules.md#Constant-Scalar-Expression)
-* [Constant Scalar Expressions](./Rules.md#Constant-Scalar-Expressions)
-* [Define With Array](./Rules.md#Define-With-Array)
-* [Dereferencing String And Arrays](./Rules.md#Dereferencing-String-And-Arrays)
-* [Eval Without Try](./Rules.md#Eval-Without-Try)
-* [Exponent usage](./Rules.md#Exponent-usage)
-* [Foreach With list()](./Rules.md#Foreach-With-list())
-* [Function subscripting](./Rules.md#Function-subscripting)
-* [Hash Algorithms incompatible with PHP 5.3](./Rules.md#Hash-Algorithms-incompatible-with-PHP-5.3)
-* [Hexadecimal In String](./Rules.md#Hexadecimal-In-String)
-* [Isset With Constant](./Rules.md#Isset-With-Constant)
-* [List With Appends](./Rules.md#List-With-Appends)
-* [Magic Visibility](./Rules.md#Magic-Visibility)
-* [Methodcall On New](./Rules.md#Methodcall-On-New)
-* [Mixed Keys](./Rules.md#Mixed-Keys)
-* [New functions in PHP 5.4](./Rules.md#New-functions-in-PHP-5.4)
-* [New functions in PHP 5.5](./Rules.md#New-functions-in-PHP-5.5)
-* [New functions in PHP 5.6](./Rules.md#New-functions-in-PHP-5.6)
-* [No List With String](./Rules.md#No-List-With-String)
-* [Null On New](./Rules.md#Null-On-New)
-* [PHP 7.0 New Classes](./Rules.md#PHP-7.0-New-Classes)
-* [PHP 7.0 New Functions](./Rules.md#PHP-7.0-New-Functions)
-* [PHP 7.0 New Interfaces](./Rules.md#PHP-7.0-New-Interfaces)
-* [PHP5 Indirect Variable Expression](./Rules.md#PHP5-Indirect-Variable-Expression)
-* [PHP7 Dirname](./Rules.md#PHP7-Dirname)
-* [Php 7 Indirect Expression](./Rules.md#Php-7-Indirect-Expression)
-* [Php7 Relaxed Keyword](./Rules.md#Php7-Relaxed-Keyword)
-* [Scalar Typehint Usage](./Rules.md#Scalar-Typehint-Usage)
-* [Short syntax for arrays](./Rules.md#Short-syntax-for-arrays)
-* [Unicode Escape Partial](./Rules.md#Unicode-Escape-Partial)
-* [Unicode Escape Syntax](./Rules.md#Unicode-Escape-Syntax)
-* [Use Const And Functions](./Rules.md#Use-Const-And-Functions)
-* [Usort Sorting In PHP 7.0](./Rules.md#Usort-Sorting-In-PHP-7.0)
-* [Variable Global](./Rules.md#Variable-Global)
-* [\_\_debugInfo()](./Rules.md#__debugInfo())
-* [ext/dba](./Rules.md#ext/dba)
-* [ext/fdf](./Rules.md#ext/fdf)
-* [ext/ming](./Rules.md#ext/ming)
+* :ref:`$HTTP\_RAW\_POST\_DATA`
+* :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
+* :ref:`$this is not an array <$this-is-not-an-array>`
+* :ref:`$this is not for static methods <$this-is-not-for-static-methods>`
+* :ref:`<?= usage <<?=-usage>`
+* :ref:`Abstract static methods <abstract-static-methods>`
+* :ref:`Access protected structures <access-protected-structures>`
+* :ref:`Accessing private <accessing-private>`
+* :ref:`Adding Zero <adding-zero>`
+* :ref:`Aliases usage <aliases-usage>`
+* :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
+* :ref:`Ambiguous Index <ambiguous-index>`
+* :ref:`Argument should be typehinted <argument-should-be-typehinted>`
+* :ref:`Assign Default To Properties <assign-default-to-properties>`
+* :ref:`Avoid Parenthesis <avoid-parenthesis>`
+* :ref:`Avoid array\_unique <avoid-array\_unique>`
+* :ref:`Break Outside Loop <break-outside-loop>`
+* :ref:`Break With 0 <break-with-0>`
+* :ref:`Break With Non Integer <break-with-non-integer>`
+* :ref:`Buried Assignation <buried-assignation>`
+* :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
+* :ref:`Case After Default <case-after-default>`
+* :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
+* :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
+* :ref:`Class, Interface or Ttrait With Identical Names <class,-interface-or-ttrait-with-identical-names>`
+* :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
+* :ref:`Close Tags <close-tags>`
+* :ref:`Closure May Use $this <closure-may-use-$this>`
+* :ref:`Compared comparison <compared-comparison>`
+* :ref:`Concrete Visibility <concrete-visibility>`
+* :ref:`Constant Class <constant-class>`
+* :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
+* :ref:`Constants With Strange Names <constants-with-strange-names>`
+* :ref:`Could Be Class Constant <could-be-class-constant>`
+* :ref:`Could Be Static <could-be-static>`
+* :ref:`Could Use Short Assignation <could-use-short-assignation>`
+* :ref:`Could use self <could-use-self>`
+* :ref:`Dangling Array References <dangling-array-references>`
+* :ref:`Deep Definitions <deep-definitions>`
+* :ref:`Deprecated code <deprecated-code>`
+* :ref:`Don't Change Incomings <don't-change-incomings>`
+* :ref:`Double Assignation <double-assignation>`
+* :ref:`Double Instruction <double-instruction>`
+* :ref:`Echo With Concat <echo-with-concat>`
+* :ref:`Else If Versus Elseif <else-if-versus-elseif>`
+* :ref:`Empty Classes <empty-classes>`
+* :ref:`Empty Function <empty-function>`
+* :ref:`Empty Instructions <empty-instructions>`
+* :ref:`Empty Interfaces <empty-interfaces>`
+* :ref:`Empty List <empty-list>`
+* :ref:`Empty Namespace <empty-namespace>`
+* :ref:`Empty Try Catch <empty-try-catch>`
+* :ref:`Empty traits <empty-traits>`
+* :ref:`Eval Without Try <eval-without-try>`
+* :ref:`Eval() Usage <eval()-usage>`
+* :ref:`Exit() Usage <exit()-usage>`
+* :ref:`Extension fann <extension-fann>`
+* :ref:`For Using Functioncall <for-using-functioncall>`
+* :ref:`Foreach Needs Reference Array <foreach-needs-reference-array>`
+* :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
+* :ref:`Forgotten Visibility <forgotten-visibility>`
+* :ref:`Forgotten Whitespace <forgotten-whitespace>`
+* :ref:`Fully Qualified Constants <fully-qualified-constants>`
+* :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
+* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
+* :ref:`Functions in loop calls <functions-in-loop-calls>`
+* :ref:`Global usage <global-usage>`
+* :ref:`Hardcoded passwords <hardcoded-passwords>`
+* :ref:`Hash Algorithms <hash-algorithms>`
+* :ref:`Htmlentities Calls <htmlentities-calls>`
+* :ref:`Implement is for interface <implement-is-for-interface>`
+* :ref:`Implicit global <implicit-global>`
+* :ref:`Incompilable Files <incompilable-files>`
+* :ref:`Indices Are Int Or String <indices-are-int-or-string>`
+* :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
+* :ref:`Invalid constant name <invalid-constant-name>`
+* :ref:`List With Appends <list-with-appends>`
+* :ref:`Locally Unused Property <locally-unused-property>`
+* :ref:`Logical should use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
+* :ref:`Lone blocks <lone-blocks>`
+* :ref:`Lost References <lost-references>`
+* :ref:`Magic Visibility <magic-visibility>`
+* :ref:`Malformed Octal <malformed-octal>`
+* :ref:`Multiple Class Declarations <multiple-class-declarations>`
+* :ref:`Multiple Constant Definition <multiple-constant-definition>`
+* :ref:`Multiple Definition of the same argument <multiple-definition-of-the-same-argument>`
+* :ref:`Multiple Index Definition <multiple-index-definition>`
+* :ref:`Multiples Identical Case <multiples-identical-case>`
+* :ref:`Multiply By One <multiply-by-one>`
+* :ref:`Must Return Methods <must-return-methods>`
+* :ref:`Namespace with fully qualified name <namespace-with-fully-qualified-name>`
+* :ref:`Nested Ternary <nested-ternary>`
+* :ref:`Never used properties <never-used-properties>`
+* :ref:`No Direct Call To MagicMethod <no-direct-call-to-magicmethod>`
+* :ref:`No Direct Usage <no-direct-usage>`
+* :ref:`No Hardcoded Ip <no-hardcoded-ip>`
+* :ref:`No Hardcoded Path <no-hardcoded-path>`
+* :ref:`No Hardcoded Port <no-hardcoded-port>`
+* :ref:`No Implied If <no-implied-if>`
+* :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
+* :ref:`No Public Access <no-public-access>`
+* :ref:`No Real Comparison <no-real-comparison>`
+* :ref:`No Self Referencing Constant <no-self-referencing-constant>`
+* :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
+* :ref:`Non Ascii variables <non-ascii-variables>`
+* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+* :ref:`Non-constant Index In Array <non-constant-index-in-array>`
+* :ref:`Not Definitions Only <not-definitions-only>`
+* :ref:`Not Not <not-not>`
+* :ref:`Not Substr One <not-substr-one>`
+* :ref:`Null On New <null-on-new>`
+* :ref:`Objects Don't Need References <objects-don't-need-references>`
+* :ref:`Old Style Constructor <old-style-constructor>`
+* :ref:`One Letter Functions <one-letter-functions>`
+* :ref:`One variable String <one-variable-string>`
+* :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
+* :ref:`Or Die <or-die>`
+* :ref:`Overwritten Exceptions <overwritten-exceptions>`
+* :ref:`Overwritten Literals <overwritten-literals>`
+* :ref:`PHP Keywords as Names <php-keywords-as-names>`
+* :ref:`PREG Option e <preg-option-e>`
+* :ref:`Parent, static or self outside class <parent,-static-or-self-outside-class>`
+* :ref:`Phpinfo`
+* :ref:`Pre-Increment`
+* :ref:`Preprocess Arrays <preprocess-arrays>`
+* :ref:`Preprocessable`
+* :ref:`Print And Die <print-and-die>`
+* :ref:`Property/Variable Confusion <property/variable-confusion>`
+* :ref:`Queries in loops <queries-in-loops>`
+* :ref:`Redeclared PHP Functions <redeclared-php-functions>`
+* :ref:`Redefined Property <redefined-property>`
+* :ref:`Relay Function <relay-function>`
+* :ref:`Repeated prints <repeated-prints>`
+* :ref:`Sequences In For <sequences-in-for>`
+* :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
+* :ref:`Short Open Tags <short-open-tags>`
+* :ref:`Should Be Single Quote <should-be-single-quote>`
+* :ref:`Should Chain Exception <should-chain-exception>`
+* :ref:`Should Typecast <should-typecast>`
+* :ref:`Should Use $this <should-use-$this>`
+* :ref:`Should Use Constants <should-use-constants>`
+* :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
+* :ref:`Silently Cast Integer <silently-cast-integer>`
+* :ref:`Static Loop <static-loop>`
+* :ref:`Static Methods Called From Object <static-methods-called-from-object>`
+* :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+* :ref:`Strict comparison with booleans <strict-comparison-with-booleans>`
+* :ref:`String May Hold A Variable <string-may-hold-a-variable>`
+* :ref:`Strpos Comparison <strpos-comparison>`
+* :ref:`Switch With Too Many Default <switch-with-too-many-default>`
+* :ref:`Switch Without Default <switch-without-default>`
+* :ref:`Throws An Assignement <throws-an-assignement>`
+* :ref:`Timestamp Difference <timestamp-difference>`
+* :ref:`Unchecked Resources <unchecked-resources>`
+* :ref:`Undefined Class Constants <undefined-class-constants>`
+* :ref:`Undefined Classes <undefined-classes>`
+* :ref:`Undefined Constants <undefined-constants>`
+* :ref:`Undefined Interfaces <undefined-interfaces>`
+* :ref:`Undefined function <undefined-function>`
+* :ref:`Undefined parent <undefined-parent>`
+* :ref:`Undefined properties <undefined-properties>`
+* :ref:`Undefined static:: or self:: <undefined-static\:\:-or-self\:\:>`
+* :ref:`Unpreprocessed values <unpreprocessed-values>`
+* :ref:`Unreachable Code <unreachable-code>`
+* :ref:`Unresolved Instanceof <unresolved-instanceof>`
+* :ref:`Unresolved classes <unresolved-classes>`
+* :ref:`Unresolved use <unresolved-use>`
+* :ref:`Unset In Foreach <unset-in-foreach>`
+* :ref:`Unthrown Exception <unthrown-exception>`
+* :ref:`Unused Global <unused-global>`
+* :ref:`Unused Interfaces <unused-interfaces>`
+* :ref:`Unused Label <unused-label>`
+* :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Static Properties <unused-static-properties>`
+* :ref:`Unused Trait <unused-trait>`
+* :ref:`Unused classes <unused-classes>`
+* :ref:`Unused constants <unused-constants>`
+* :ref:`Unused functions <unused-functions>`
+* :ref:`Unused static methods <unused-static-methods>`
+* :ref:`Unused use <unused-use>`
+* :ref:`Use === null <use-===-null>`
+* :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+* :ref:`Use Instanceof <use-instanceof>`
+* :ref:`Use Object Api <use-object-api>`
+* :ref:`Use Pathinfo <use-pathinfo>`
+* :ref:`Use const <use-const>`
+* :ref:`Use with fully qualified name <use-with-fully-qualified-name>`
+* :ref:`Used once variables (in scope) <used-once-variables-(in-scope)>`
+* :ref:`Used once variables <used-once-variables>`
+* :ref:`Useless Abstract Class <useless-abstract-class>`
+* :ref:`Useless Brackets <useless-brackets>`
+* :ref:`Useless Final <useless-final>`
+* :ref:`Useless Global <useless-global>`
+* :ref:`Useless Interfaces <useless-interfaces>`
+* :ref:`Useless Parenthesis <useless-parenthesis>`
+* :ref:`Useless Unset <useless-unset>`
+* :ref:`Useless constructor <useless-constructor>`
+* :ref:`Useless instructions <useless-instructions>`
+* :ref:`Useless return <useless-return>`
+* :ref:`Uses default values <uses-default-values>`
+* :ref:`Var`
+* :ref:`While(List() = Each()) <while(list()-=-each())>`
+* :ref:`Written Only Variables <written-only-variables>`
+* :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
+* :ref:`Wrong Optional parameter <wrong-optional-parameter>`
+* :ref:`\_\_toString() Throws Exception <\_\_tostring()-throws-exception>`
+* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`error\_reporting() With Integers <error\_reporting()-with-integers>`
+* :ref:`ext/apc`
+* :ref:`ext/fdf`
+* :ref:`ext/mysql`
+* :ref:`ext/sqlite`
+* :ref:`func\_get\_arg Modified <func\_get\_arg-modified>`
+* :ref:`include\_once() Usage <include\_once()-usage>`
+* :ref:`list() May Omit Variables <list()-may-omit-variables>`
+* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`old \_\_autoload <old-\_\_autoload>`
+* :ref:`var\_dump()... Usage <var\_dump()...-usage>`
 
-### CompatibilityPHP54
+.. _compatibilityphp53:
 
-* [** for exponent](./Rules.md#**-for-exponent)
-* [... usage](./Rules.md#...-usage)
-* [::class](./Rules.md#::class)
-* [Anonymous Classes](./Rules.md#Anonymous-Classes)
-* [Break With Non Integer](./Rules.md#Break-With-Non-Integer)
-* [Calltime Pass By Reference](./Rules.md#Calltime-Pass-By-Reference)
-* [Case For Parent, Static And Self](./Rules.md#Case-For-Parent,-Static-And-Self)
-* [Class Const With Array](./Rules.md#Class-Const-With-Array)
-* [Const With Array](./Rules.md#Const-With-Array)
-* [Constant Scalar Expression](./Rules.md#Constant-Scalar-Expression)
-* [Constant Scalar Expressions](./Rules.md#Constant-Scalar-Expressions)
-* [Define With Array](./Rules.md#Define-With-Array)
-* [Dereferencing String And Arrays](./Rules.md#Dereferencing-String-And-Arrays)
-* [Eval Without Try](./Rules.md#Eval-Without-Try)
-* [Exponent usage](./Rules.md#Exponent-usage)
-* [Foreach With list()](./Rules.md#Foreach-With-list())
-* [Functions Removed In PHP 5.4](./Rules.md#Functions-Removed-In-PHP-5.4)
-* [Hash Algorithms incompatible with PHP 5.4/5](./Rules.md#Hash-Algorithms-incompatible-with-PHP-5.4/5)
-* [Hexadecimal In String](./Rules.md#Hexadecimal-In-String)
-* [Isset With Constant](./Rules.md#Isset-With-Constant)
-* [List With Appends](./Rules.md#List-With-Appends)
-* [Magic Visibility](./Rules.md#Magic-Visibility)
-* [Mixed Keys](./Rules.md#Mixed-Keys)
-* [New functions in PHP 5.5](./Rules.md#New-functions-in-PHP-5.5)
-* [New functions in PHP 5.6](./Rules.md#New-functions-in-PHP-5.6)
-* [No List With String](./Rules.md#No-List-With-String)
-* [Null On New](./Rules.md#Null-On-New)
-* [PHP 7.0 New Classes](./Rules.md#PHP-7.0-New-Classes)
-* [PHP 7.0 New Functions](./Rules.md#PHP-7.0-New-Functions)
-* [PHP 7.0 New Interfaces](./Rules.md#PHP-7.0-New-Interfaces)
-* [PHP5 Indirect Variable Expression](./Rules.md#PHP5-Indirect-Variable-Expression)
-* [PHP7 Dirname](./Rules.md#PHP7-Dirname)
-* [Php 7 Indirect Expression](./Rules.md#Php-7-Indirect-Expression)
-* [Php7 Relaxed Keyword](./Rules.md#Php7-Relaxed-Keyword)
-* [Scalar Typehint Usage](./Rules.md#Scalar-Typehint-Usage)
-* [Unicode Escape Partial](./Rules.md#Unicode-Escape-Partial)
-* [Unicode Escape Syntax](./Rules.md#Unicode-Escape-Syntax)
-* [Use Const And Functions](./Rules.md#Use-Const-And-Functions)
-* [Usort Sorting In PHP 7.0](./Rules.md#Usort-Sorting-In-PHP-7.0)
-* [Variable Global](./Rules.md#Variable-Global)
-* [\_\_debugInfo()](./Rules.md#__debugInfo())
-* [crypt without salt](./Rules.md#crypt-without-salt)
-* [mcrypt\_create\_iv with default values](./Rules.md#mcrypt_create_iv-with-default-values)
+CompatibilityPHP53
+++++++++++++++++++
 
-### CompatibilityPHP55
+Total : 48 analysis
 
-* [** for exponent](./Rules.md#**-for-exponent)
-* [... usage](./Rules.md#...-usage)
-* [Anonymous Classes](./Rules.md#Anonymous-Classes)
-* [Break With Non Integer](./Rules.md#Break-With-Non-Integer)
-* [Calltime Pass By Reference](./Rules.md#Calltime-Pass-By-Reference)
-* [Class Const With Array](./Rules.md#Class-Const-With-Array)
-* [Const With Array](./Rules.md#Const-With-Array)
-* [Constant Scalar Expression](./Rules.md#Constant-Scalar-Expression)
-* [Constant Scalar Expressions](./Rules.md#Constant-Scalar-Expressions)
-* [Define With Array](./Rules.md#Define-With-Array)
-* [Empty With Expression](./Rules.md#Empty-With-Expression)
-* [Eval Without Try](./Rules.md#Eval-Without-Try)
-* [Exponent usage](./Rules.md#Exponent-usage)
-* [Functions Removed In PHP 5.4](./Rules.md#Functions-Removed-In-PHP-5.4)
-* [Functions Removed In PHP 5.5](./Rules.md#Functions-Removed-In-PHP-5.5)
-* [Hash Algorithms incompatible with PHP 5.4/5](./Rules.md#Hash-Algorithms-incompatible-with-PHP-5.4/5)
-* [Hexadecimal In String](./Rules.md#Hexadecimal-In-String)
-* [Isset With Constant](./Rules.md#Isset-With-Constant)
-* [List With Appends](./Rules.md#List-With-Appends)
-* [Magic Visibility](./Rules.md#Magic-Visibility)
-* [New functions in PHP 5.6](./Rules.md#New-functions-in-PHP-5.6)
-* [No List With String](./Rules.md#No-List-With-String)
-* [Null On New](./Rules.md#Null-On-New)
-* [PHP 7.0 New Classes](./Rules.md#PHP-7.0-New-Classes)
-* [PHP 7.0 New Functions](./Rules.md#PHP-7.0-New-Functions)
-* [PHP 7.0 New Interfaces](./Rules.md#PHP-7.0-New-Interfaces)
-* [PHP5 Indirect Variable Expression](./Rules.md#PHP5-Indirect-Variable-Expression)
-* [PHP7 Dirname](./Rules.md#PHP7-Dirname)
-* [Php 7 Indirect Expression](./Rules.md#Php-7-Indirect-Expression)
-* [Php7 Relaxed Keyword](./Rules.md#Php7-Relaxed-Keyword)
-* [Scalar Typehint Usage](./Rules.md#Scalar-Typehint-Usage)
-* [Unicode Escape Partial](./Rules.md#Unicode-Escape-Partial)
-* [Unicode Escape Syntax](./Rules.md#Unicode-Escape-Syntax)
-* [Use Const And Functions](./Rules.md#Use-Const-And-Functions)
-* [Use password\_hash()](./Rules.md#Use-password_hash())
-* [Usort Sorting In PHP 7.0](./Rules.md#Usort-Sorting-In-PHP-7.0)
-* [Variable Global](./Rules.md#Variable-Global)
-* [\_\_debugInfo()](./Rules.md#__debugInfo())
-* [crypt without salt](./Rules.md#crypt-without-salt)
-* [ext/apc](./Rules.md#ext/apc)
-* [ext/mysql](./Rules.md#ext/mysql)
-* [mcrypt\_create\_iv with default values](./Rules.md#mcrypt_create_iv-with-default-values)
+* :ref:`... usage <...-usage>`
+* :ref:`::class`
+* :ref:`Anonymous Classes <anonymous-classes>`
+* :ref:`Binary Glossary <binary-glossary>`
+* :ref:`Break With 0 <break-with-0>`
+* :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
+* :ref:`Class Const With Array <class-const-with-array>`
+* :ref:`Closure May Use $this <closure-may-use-$this>`
+* :ref:`Const With Array <const-with-array>`
+* :ref:`Constant Scalar Expression <constant-scalar-expression>`
+* :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
+* :ref:`Define With Array <define-with-array>`
+* :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
+* :ref:`Eval Without Try <eval-without-try>`
+* :ref:`Exponent usage <exponent-usage>`
+* :ref:`Foreach With list() <foreach-with-list()>`
+* :ref:`Function subscripting <function-subscripting>`
+* :ref:`Hash Algorithms incompatible with PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
+* :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`Isset With Constant <isset-with-constant>`
+* :ref:`List With Appends <list-with-appends>`
+* :ref:`Magic Visibility <magic-visibility>`
+* :ref:`Methodcall On New <methodcall-on-new>`
+* :ref:`Mixed Keys <mixed-keys>`
+* :ref:`New functions in PHP 5.4 <new-functions-in-php-5.4>`
+* :ref:`New functions in PHP 5.5 <new-functions-in-php-5.5>`
+* :ref:`New functions in PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`No List With String <no-list-with-string>`
+* :ref:`Null On New <null-on-new>`
+* :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
+* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
+* :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
+* :ref:`PHP7 Dirname <php7-dirname>`
+* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
+* :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
+* :ref:`Short syntax for arrays <short-syntax-for-arrays>`
+* :ref:`Unicode Escape Partial <unicode-escape-partial>`
+* :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
+* :ref:`Use Const And Functions <use-const-and-functions>`
+* :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+* :ref:`Variable Global <variable-global>`
+* :ref:`\*\* for exponent <**-for-exponent>`
+* :ref:`\_\_debugInfo()`
+* :ref:`ext/dba`
+* :ref:`ext/fdf`
+* :ref:`ext/ming`
 
-### CompatibilityPHP56
+.. _compatibilityphp54:
 
-* [Anonymous Classes](./Rules.md#Anonymous-Classes)
-* [Break With Non Integer](./Rules.md#Break-With-Non-Integer)
-* [Calltime Pass By Reference](./Rules.md#Calltime-Pass-By-Reference)
-* [Define With Array](./Rules.md#Define-With-Array)
-* [Empty With Expression](./Rules.md#Empty-With-Expression)
-* [Eval Without Try](./Rules.md#Eval-Without-Try)
-* [Functions Removed In PHP 5.4](./Rules.md#Functions-Removed-In-PHP-5.4)
-* [Functions Removed In PHP 5.5](./Rules.md#Functions-Removed-In-PHP-5.5)
-* [Hash Algorithms incompatible with PHP 5.4/5](./Rules.md#Hash-Algorithms-incompatible-with-PHP-5.4/5)
-* [Hexadecimal In String](./Rules.md#Hexadecimal-In-String)
-* [Isset With Constant](./Rules.md#Isset-With-Constant)
-* [List With Appends](./Rules.md#List-With-Appends)
-* [Magic Visibility](./Rules.md#Magic-Visibility)
-* [No List With String](./Rules.md#No-List-With-String)
-* [Non Static Methods Called In A Static](./Rules.md#Non-Static-Methods-Called-In-A-Static)
-* [Null On New](./Rules.md#Null-On-New)
-* [PHP 7.0 New Classes](./Rules.md#PHP-7.0-New-Classes)
-* [PHP 7.0 New Functions](./Rules.md#PHP-7.0-New-Functions)
-* [PHP 7.0 New Interfaces](./Rules.md#PHP-7.0-New-Interfaces)
-* [PHP5 Indirect Variable Expression](./Rules.md#PHP5-Indirect-Variable-Expression)
-* [PHP7 Dirname](./Rules.md#PHP7-Dirname)
-* [Php 7 Indirect Expression](./Rules.md#Php-7-Indirect-Expression)
-* [Php7 Relaxed Keyword](./Rules.md#Php7-Relaxed-Keyword)
-* [Scalar Typehint Usage](./Rules.md#Scalar-Typehint-Usage)
-* [Unicode Escape Partial](./Rules.md#Unicode-Escape-Partial)
-* [Unicode Escape Syntax](./Rules.md#Unicode-Escape-Syntax)
-* [Use password\_hash()](./Rules.md#Use-password_hash())
-* [Usort Sorting In PHP 7.0](./Rules.md#Usort-Sorting-In-PHP-7.0)
-* [Variable Global](./Rules.md#Variable-Global)
-* [`$HTTP\_RAW\_POST\_DATA`](./Rules.md#$HTTP_RAW_POST_DATA)
-* [crypt without salt](./Rules.md#crypt-without-salt)
-* [ext/apc](./Rules.md#ext/apc)
-* [ext/mysql](./Rules.md#ext/mysql)
-* [mcrypt\_create\_iv with default values](./Rules.md#mcrypt_create_iv-with-default-values)
+CompatibilityPHP54
+++++++++++++++++++
 
-### CompatibilityPHP70
+Total : 43 analysis
 
-* [Break Outside Loop](./Rules.md#Break-Outside-Loop)
-* [Break With Non Integer](./Rules.md#Break-With-Non-Integer)
-* [Calltime Pass By Reference](./Rules.md#Calltime-Pass-By-Reference)
-* [Empty List](./Rules.md#Empty-List)
-* [Empty With Expression](./Rules.md#Empty-With-Expression)
-* [Foreach Dont Change Pointer](./Rules.md#Foreach-Dont-Change-Pointer)
-* [Functions Removed In PHP 5.4](./Rules.md#Functions-Removed-In-PHP-5.4)
-* [Functions Removed In PHP 5.5](./Rules.md#Functions-Removed-In-PHP-5.5)
-* [Hash Algorithms incompatible with PHP 5.4/5](./Rules.md#Hash-Algorithms-incompatible-with-PHP-5.4/5)
-* [Hexadecimal In String](./Rules.md#Hexadecimal-In-String)
-* [List With Appends](./Rules.md#List-With-Appends)
-* [Multiple Definition of the same argument](./Rules.md#Multiple-Definition-of-the-same-argument)
-* [Non Static Methods Called In A Static](./Rules.md#Non-Static-Methods-Called-In-A-Static)
-* [PHP 70 Removed Directive](./Rules.md#PHP-70-Removed-Directive)
-* [PHP 70 Removed Functions](./Rules.md#PHP-70-Removed-Functions)
-* [PREG Option e](./Rules.md#PREG-Option-e)
-* [Parenthesis As Parameter](./Rules.md#Parenthesis-As-Parameter)
-* [Reserved Keywords in PHP 7](./Rules.md#Reserved-Keywords-in-PHP-7)
-* [Setlocale Needs Constants](./Rules.md#Setlocale-Needs-Constants)
-* [Simple Global Variable](./Rules.md#Simple-Global-Variable)
-* [Use password\_hash()](./Rules.md#Use-password_hash())
-* [Usort Sorting In PHP 7.0](./Rules.md#Usort-Sorting-In-PHP-7.0)
-* [`$HTTP\_RAW\_POST\_DATA`](./Rules.md#$HTTP_RAW_POST_DATA)
-* [crypt without salt](./Rules.md#crypt-without-salt)
-* [ext/apc](./Rules.md#ext/apc)
-* [ext/ereg](./Rules.md#ext/ereg)
-* [ext/mysql](./Rules.md#ext/mysql)
-* [func\_get\_arg Modified](./Rules.md#func_get_arg-Modified)
-* [mcrypt\_create\_iv with default values](./Rules.md#mcrypt_create_iv-with-default-values)
+* :ref:`... usage <...-usage>`
+* :ref:`::class`
+* :ref:`Anonymous Classes <anonymous-classes>`
+* :ref:`Break With Non Integer <break-with-non-integer>`
+* :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
+* :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
+* :ref:`Class Const With Array <class-const-with-array>`
+* :ref:`Const With Array <const-with-array>`
+* :ref:`Constant Scalar Expression <constant-scalar-expression>`
+* :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
+* :ref:`Define With Array <define-with-array>`
+* :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
+* :ref:`Eval Without Try <eval-without-try>`
+* :ref:`Exponent usage <exponent-usage>`
+* :ref:`Foreach With list() <foreach-with-list()>`
+* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
+* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
+* :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`Isset With Constant <isset-with-constant>`
+* :ref:`List With Appends <list-with-appends>`
+* :ref:`Magic Visibility <magic-visibility>`
+* :ref:`Mixed Keys <mixed-keys>`
+* :ref:`New functions in PHP 5.5 <new-functions-in-php-5.5>`
+* :ref:`New functions in PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`No List With String <no-list-with-string>`
+* :ref:`Null On New <null-on-new>`
+* :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
+* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
+* :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
+* :ref:`PHP7 Dirname <php7-dirname>`
+* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
+* :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
+* :ref:`Unicode Escape Partial <unicode-escape-partial>`
+* :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
+* :ref:`Use Const And Functions <use-const-and-functions>`
+* :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+* :ref:`Variable Global <variable-global>`
+* :ref:`\*\* for exponent <**-for-exponent>`
+* :ref:`\_\_debugInfo()`
+* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
 
-### CompatibilityPHP71
+.. _compatibilityphp55:
 
-* [Break Outside Loop](./Rules.md#Break-Outside-Loop)
-* [Break With Non Integer](./Rules.md#Break-With-Non-Integer)
-* [Calltime Pass By Reference](./Rules.md#Calltime-Pass-By-Reference)
-* [Empty List](./Rules.md#Empty-List)
-* [Empty With Expression](./Rules.md#Empty-With-Expression)
-* [Foreach Dont Change Pointer](./Rules.md#Foreach-Dont-Change-Pointer)
-* [Functions Removed In PHP 5.4](./Rules.md#Functions-Removed-In-PHP-5.4)
-* [Functions Removed In PHP 5.5](./Rules.md#Functions-Removed-In-PHP-5.5)
-* [Hash Algorithms incompatible with PHP 5.4/5](./Rules.md#Hash-Algorithms-incompatible-with-PHP-5.4/5)
-* [Hexadecimal In String](./Rules.md#Hexadecimal-In-String)
-* [List With Appends](./Rules.md#List-With-Appends)
-* [Multiple Definition of the same argument](./Rules.md#Multiple-Definition-of-the-same-argument)
-* [New functions in PHP 5.4](./Rules.md#New-functions-in-PHP-5.4)
-* [New functions in PHP 5.5](./Rules.md#New-functions-in-PHP-5.5)
-* [Non Static Methods Called In A Static](./Rules.md#Non-Static-Methods-Called-In-A-Static)
-* [PHP 7.0 New Classes](./Rules.md#PHP-7.0-New-Classes)
-* [PHP 7.0 New Functions](./Rules.md#PHP-7.0-New-Functions)
-* [PHP 7.0 New Interfaces](./Rules.md#PHP-7.0-New-Interfaces)
-* [PHP 70 Removed Directive](./Rules.md#PHP-70-Removed-Directive)
-* [PHP 70 Removed Functions](./Rules.md#PHP-70-Removed-Functions)
-* [PHP Keywords as Names](./Rules.md#PHP-Keywords-as-Names)
-* [PREG Option e](./Rules.md#PREG-Option-e)
-* [Parenthesis As Parameter](./Rules.md#Parenthesis-As-Parameter)
-* [Reserved Keywords in PHP 7](./Rules.md#Reserved-Keywords-in-PHP-7)
-* [Setlocale Needs Constants](./Rules.md#Setlocale-Needs-Constants)
-* [Simple Global Variable](./Rules.md#Simple-Global-Variable)
-* [Use password\_hash()](./Rules.md#Use-password_hash())
-* [Usort Sorting In PHP 7.0](./Rules.md#Usort-Sorting-In-PHP-7.0)
-* [`$HTTP\_RAW\_POST\_DATA`](./Rules.md#$HTTP_RAW_POST_DATA)
-* [crypt without salt](./Rules.md#crypt-without-salt)
-* [ext/apc](./Rules.md#ext/apc)
-* [ext/ereg](./Rules.md#ext/ereg)
-* [ext/mysql](./Rules.md#ext/mysql)
-* [func\_get\_arg Modified](./Rules.md#func_get_arg-Modified)
-* [mcrypt\_create\_iv with default values](./Rules.md#mcrypt_create_iv-with-default-values)
+CompatibilityPHP55
+++++++++++++++++++
 
-### Dead code
+Total : 42 analysis
 
-* [Empty Instructions](./Rules.md#Empty-Instructions)
-* [Empty Namespace](./Rules.md#Empty-Namespace)
-* [Locally Unused Property](./Rules.md#Locally-Unused-Property)
-* [Unreachable Code](./Rules.md#Unreachable-Code)
-* [Unresolved Catch](./Rules.md#Unresolved-Catch)
-* [Unresolved Instanceof](./Rules.md#Unresolved-Instanceof)
-* [Unset In Foreach](./Rules.md#Unset-In-Foreach)
-* [Unthrown Exception](./Rules.md#Unthrown-Exception)
-* [Unused Interfaces](./Rules.md#Unused-Interfaces)
-* [Unused Label](./Rules.md#Unused-Label)
-* [Unused Methods](./Rules.md#Unused-Methods)
-* [Unused Static Properties](./Rules.md#Unused-Static-Properties)
-* [Unused classes](./Rules.md#Unused-classes)
-* [Unused constants](./Rules.md#Unused-constants)
-* [Unused functions](./Rules.md#Unused-functions)
-* [Unused static methods](./Rules.md#Unused-static-methods)
-* [Unused use](./Rules.md#Unused-use)
+* :ref:`... usage <...-usage>`
+* :ref:`Anonymous Classes <anonymous-classes>`
+* :ref:`Break With Non Integer <break-with-non-integer>`
+* :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
+* :ref:`Class Const With Array <class-const-with-array>`
+* :ref:`Const With Array <const-with-array>`
+* :ref:`Constant Scalar Expression <constant-scalar-expression>`
+* :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
+* :ref:`Define With Array <define-with-array>`
+* :ref:`Empty With Expression <empty-with-expression>`
+* :ref:`Eval Without Try <eval-without-try>`
+* :ref:`Exponent usage <exponent-usage>`
+* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
+* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
+* :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`Isset With Constant <isset-with-constant>`
+* :ref:`List With Appends <list-with-appends>`
+* :ref:`Magic Visibility <magic-visibility>`
+* :ref:`New functions in PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`No List With String <no-list-with-string>`
+* :ref:`Null On New <null-on-new>`
+* :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
+* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
+* :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
+* :ref:`PHP7 Dirname <php7-dirname>`
+* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
+* :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
+* :ref:`Unicode Escape Partial <unicode-escape-partial>`
+* :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
+* :ref:`Use Const And Functions <use-const-and-functions>`
+* :ref:`Use password\_hash() <use-password\_hash()>`
+* :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+* :ref:`Variable Global <variable-global>`
+* :ref:`\*\* for exponent <**-for-exponent>`
+* :ref:`\_\_debugInfo()`
+* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`ext/apc`
+* :ref:`ext/mysql`
+* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
 
-### Security
+.. _compatibilityphp56:
 
-* [Avoid Those Crypto](./Rules.md#Avoid-Those-Crypto)
-* [Compare Hash](./Rules.md#Compare-Hash)
-* [Direct Injection](./Rules.md#Direct-Injection)
-* [Followed injections](./Rules.md#Followed-injections)
-* [PREG Option e](./Rules.md#PREG-Option-e)
-* [Register Globals](./Rules.md#Register-Globals)
-* [Should Use Prepared Statement](./Rules.md#Should-Use-Prepared-Statement)
-* [Sleep is a security risk](./Rules.md#Sleep-is-a-security-risk)
-* [parse\_str warning](./Rules.md#parse_str-warning)
+CompatibilityPHP56
+++++++++++++++++++
+
+Total : 34 analysis
+
+* :ref:`$HTTP\_RAW\_POST\_DATA`
+* :ref:`Anonymous Classes <anonymous-classes>`
+* :ref:`Break With Non Integer <break-with-non-integer>`
+* :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
+* :ref:`Define With Array <define-with-array>`
+* :ref:`Empty With Expression <empty-with-expression>`
+* :ref:`Eval Without Try <eval-without-try>`
+* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
+* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
+* :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`Isset With Constant <isset-with-constant>`
+* :ref:`List With Appends <list-with-appends>`
+* :ref:`Magic Visibility <magic-visibility>`
+* :ref:`No List With String <no-list-with-string>`
+* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+* :ref:`Null On New <null-on-new>`
+* :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
+* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
+* :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
+* :ref:`PHP7 Dirname <php7-dirname>`
+* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
+* :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
+* :ref:`Unicode Escape Partial <unicode-escape-partial>`
+* :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
+* :ref:`Use password\_hash() <use-password\_hash()>`
+* :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+* :ref:`Variable Global <variable-global>`
+* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`ext/apc`
+* :ref:`ext/mysql`
+* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+
+.. _compatibilityphp70:
+
+CompatibilityPHP70
+++++++++++++++++++
+
+Total : 29 analysis
+
+* :ref:`$HTTP\_RAW\_POST\_DATA`
+* :ref:`Break Outside Loop <break-outside-loop>`
+* :ref:`Break With Non Integer <break-with-non-integer>`
+* :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
+* :ref:`Empty List <empty-list>`
+* :ref:`Empty With Expression <empty-with-expression>`
+* :ref:`Foreach Dont Change Pointer <foreach-dont-change-pointer>`
+* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
+* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
+* :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`List With Appends <list-with-appends>`
+* :ref:`Multiple Definition of the same argument <multiple-definition-of-the-same-argument>`
+* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+* :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
+* :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+* :ref:`PREG Option e <preg-option-e>`
+* :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
+* :ref:`Reserved Keywords in PHP 7 <reserved-keywords-in-php-7>`
+* :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
+* :ref:`Simple Global Variable <simple-global-variable>`
+* :ref:`Use password\_hash() <use-password\_hash()>`
+* :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`ext/apc`
+* :ref:`ext/ereg`
+* :ref:`ext/mysql`
+* :ref:`func\_get\_arg Modified <func\_get\_arg-modified>`
+* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+
+.. _compatibilityphp71:
+
+CompatibilityPHP71
+++++++++++++++++++
+
+Total : 35 analysis
+
+* :ref:`$HTTP\_RAW\_POST\_DATA`
+* :ref:`Break Outside Loop <break-outside-loop>`
+* :ref:`Break With Non Integer <break-with-non-integer>`
+* :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
+* :ref:`Empty List <empty-list>`
+* :ref:`Empty With Expression <empty-with-expression>`
+* :ref:`Foreach Dont Change Pointer <foreach-dont-change-pointer>`
+* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
+* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
+* :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`List With Appends <list-with-appends>`
+* :ref:`Multiple Definition of the same argument <multiple-definition-of-the-same-argument>`
+* :ref:`New functions in PHP 5.4 <new-functions-in-php-5.4>`
+* :ref:`New functions in PHP 5.5 <new-functions-in-php-5.5>`
+* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+* :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
+* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
+* :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
+* :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+* :ref:`PHP Keywords as Names <php-keywords-as-names>`
+* :ref:`PREG Option e <preg-option-e>`
+* :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
+* :ref:`Reserved Keywords in PHP 7 <reserved-keywords-in-php-7>`
+* :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
+* :ref:`Simple Global Variable <simple-global-variable>`
+* :ref:`Use password\_hash() <use-password\_hash()>`
+* :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`ext/apc`
+* :ref:`ext/ereg`
+* :ref:`ext/mysql`
+* :ref:`func\_get\_arg Modified <func\_get\_arg-modified>`
+* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+
+.. _dead-code:
+
+Dead code
++++++++++
+
+Total : 17 analysis
+
+* :ref:`Empty Instructions <empty-instructions>`
+* :ref:`Empty Namespace <empty-namespace>`
+* :ref:`Locally Unused Property <locally-unused-property>`
+* :ref:`Unreachable Code <unreachable-code>`
+* :ref:`Unresolved Catch <unresolved-catch>`
+* :ref:`Unresolved Instanceof <unresolved-instanceof>`
+* :ref:`Unset In Foreach <unset-in-foreach>`
+* :ref:`Unthrown Exception <unthrown-exception>`
+* :ref:`Unused Interfaces <unused-interfaces>`
+* :ref:`Unused Label <unused-label>`
+* :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Static Properties <unused-static-properties>`
+* :ref:`Unused classes <unused-classes>`
+* :ref:`Unused constants <unused-constants>`
+* :ref:`Unused functions <unused-functions>`
+* :ref:`Unused static methods <unused-static-methods>`
+* :ref:`Unused use <unused-use>`
+
+.. _performances:
+
+Performances
+++++++++++++
+
+Total : 13 analysis
+
+* :ref:`Could Use Short Assignation <could-use-short-assignation>`
+* :ref:`Echo With Concat <echo-with-concat>`
+* :ref:`Echo concatenation <echo-concatenation>`
+* :ref:`Eval() Usage <eval()-usage>`
+* :ref:`For Using Functioncall <for-using-functioncall>`
+* :ref:`Functions in loop calls <functions-in-loop-calls>`
+* :ref:`Global Inside Loop <global-inside-loop>`
+* :ref:`Join file() <join-file()>`
+* :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
+* :ref:`Not Substr One <not-substr-one>`
+* :ref:`Pre-Increment`
+* :ref:`Slow Functions <slow-functions>`
+* :ref:`While(List() = Each()) <while(list()-=-each())>`
+
+.. _security:
+
+Security
+++++++++
+
+Total : 9 analysis
+
+* :ref:`Avoid Those Crypto <avoid-those-crypto>`
+* :ref:`Compare Hash <compare-hash>`
+* :ref:`Direct Injection <direct-injection>`
+* :ref:`Followed injections <followed-injections>`
+* :ref:`PREG Option e <preg-option-e>`
+* :ref:`Register Globals <register-globals>`
+* :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
+* :ref:`Sleep is a security risk <sleep-is-a-security-risk>`
+* :ref:`parse\_str warning <parse\_str-warning>`
 
