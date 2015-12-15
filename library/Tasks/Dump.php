@@ -32,6 +32,8 @@ class Dump extends Tasks {
     private $stmtResults = null;
     private $stmtResultsCount = null;
     
+    const WAITING_LOOP = 200;
+    
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             display('No such project as "'.$config->project.'"');
@@ -117,8 +119,8 @@ SQL;
             sleep($wait);
             display('Sleep '.$wait.' seconds');
             
-            if ($rounds >= 200) {
-                $this->log->log( "Reached 200 rounds. Aborting\n");
+            if ($rounds >= self::WAITING_LOOP) {
+                $this->log->log( "Waited for ".self::WAITING_LOOP." loop. Now aborting. Aborting\n");
                 $this->finish();
                 return true;
             }
@@ -126,7 +128,7 @@ SQL;
 
         $this->finish();
 
-        return true;
+        return ;
     }
         
     private function processResults($class, $count) {
