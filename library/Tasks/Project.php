@@ -174,10 +174,6 @@ class Project extends Tasks {
                     file_put_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
                     die();
                 }
-
-            if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log')) {
-                return false;
-            }
         }
 
         display("Analyzed project\n");
@@ -215,8 +211,8 @@ class Project extends Tasks {
                     $report->run($config);
                     unset($report);
                 } catch (\Exception $e) {
-                    print "Error while building $reportName in $format \n";
-                    print $e->getMessage();
+                    echo "Error while building $reportName in $format \n",
+                         $e->getMessage();
                     die();
                 }
             }
@@ -251,39 +247,6 @@ class Project extends Tasks {
 
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
-    }
-
-    protected function checkFinalLog($log) {
-        $logRes = file_get_contents($log);
-        if (preg_match('#Exception :  => PermGen space#is', $logRes)) {
-            print "Neo4j hadn't sufficient memory. Please, increase it by changing ./neoj/config/neo4j-wrapper.conf, and adding 'wrapper.java.additional=-XX:MaxPermSize=512m' or changing 512 to more.\n Aborting analyze\n";
-            return false;
-        }
-
-        if (preg_match('#\[message\] => PermGen space#is', $logRes)) {
-            print "Neo4j hadn't sufficient memory. Please, increase it by changing ./neoj/config/neo4j-wrapper.conf, and adding 'wrapper.java.additional=-XX:MaxPermSize=512m' or changing 512 to more.\n Aborting analyze\n";
-            return false;
-        }
-
-        if (preg_match('#Exception : Can\'t open connection to http://#is', $logRes)) {
-            print "Neo4j can't be reached. It may have stopped working, or is stuck in a long transaction. Either way, it should be killed (killall) and restarted. Try again.\n Aborting analyze\n";
-            return false;
-        }
-
-        if (preg_match('#Exception :  => Cannot invoke method toLowerCase\(\) on null object#is', $logRes)) {
-            print "An error happened while processing the code (toLowerCase()). Please, send the log folder to exakat@gmail.com for analyzis.\n Aborting analyze\n";
-            return false;
-        }
-
-        if (preg_match('#Exception :  => Cannot invoke method plus\(\) on null object#is', $logRes)) {
-            print "An error happened while processing the code (plus()). Please, send the log folder to exakat@gmail.com for analyzis.\n Aborting analyze\n";
-            return false;
-        }
-
-//Exception : Unable to retrieve server info [500]:
-
-        // checked it all. All is fine.
-        return true;
     }
 
     private function updateProgress($status) {
