@@ -27,10 +27,11 @@ class Datastore {
     private $sqlitePath = null;
     
     const CREATE = 1;
+    const REUSE = 1;
     const TIMEOUT_WRITE = 500;
     const TIMEOUT_READ = 3000;
     
-    public function __construct(Config $config, $create = 0) {
+    public function __construct(Config $config, $create = self::REUSE) {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         
         if ($create === self::CREATE) {
