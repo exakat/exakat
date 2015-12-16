@@ -91,6 +91,7 @@ SQL;
         $rounds = 0;
         $sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         while (count($themes) > 0) {
+            ++$rounds;
             $this->log->log( "Run round $rounds");
 
             $counts = array();
