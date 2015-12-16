@@ -107,24 +107,15 @@ class Project extends Tasks {
         shell_exec('php '.$config->executable.' load -v -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
         $this->logTime('Loading');
-        if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/load.final.log')) {
-            return false;
-        }
         $this->updateProgress($progress++);
 
         $res = shell_exec('php '.$config->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
         display("Build root\n");
         $this->logTime('Build_root');
-        if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/build_root.final.log')) {
-            return false;
-        }
         $this->updateProgress($progress++);
 
         $res = shell_exec('php '.$config->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         $this->logTime('Tokenizer');
-        if (!$this->checkFinalLog($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log')) {
-            return false;
-        }
         display("Project tokenized\n");
         $this->updateProgress($progress++);
 
