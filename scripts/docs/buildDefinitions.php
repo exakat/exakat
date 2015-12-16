@@ -101,7 +101,7 @@ function rst_anchor_def($name) {
 
 function rst_escape($string) {
     $r = preg_replace_callback('/<\?php(.*?)\?>/is', function ($r) {
-        $rst = ".. code-block:php\n\n   ".str_replace("\n", "\n   ", $r[0])."\n";
+        $rst = ".. code-block:: php\n\n   ".str_replace("\n", "\n   ", $r[0])."\n";
         return $rst;
     }, $string);
 
