@@ -24,6 +24,7 @@
 namespace Tasks;
 
 class Initproject extends Tasks {
+
     public function run(\Config $config) {
         $project = $config->project;
 
@@ -69,7 +70,8 @@ class Initproject extends Tasks {
             display( $config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n");
             return null;
         }
-        $this->datastore = new \Datastore(\Config::factory());
+
+        $this->datastore = new \Datastore(\Config::factory(), \Datastore::CREATE);
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             // default initial config. Found in test project.
@@ -123,7 +125,7 @@ INI;
                 // Git
                 case ($config->git === true) :
                     display('Git initialization');
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone '.$repositoryURL.' code');
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 >> /dev/null');
                     break 1;
 
                 // SVN
@@ -175,7 +177,7 @@ INI;
         } elseif (file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             display( "Code folder is already there. Leaving it intact.\n");
         }
-    
+
         display( "Counting files\n");
         shell_exec('php '.$config->executable.' files -p '.$project);
     }
