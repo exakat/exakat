@@ -1712,7 +1712,7 @@ TEXT
         $css->readOrder = $css->titles;
         
         $data = array();
-        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/DynamicCalls"');
+        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/DynamicCode"');
         while($row = $res->fetchArray()) {
             $data[] = array('Code' => $row['fullcode']);
         }
