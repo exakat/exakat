@@ -60,11 +60,11 @@ abstract class Analyzer {
     const S_NONE     = 'None';
 
     protected $timeToFix = self::T_NONE; // Default to no time (Should not display)
-    const T_NONE    = '0';
-    const T_INSTANT = '5';
-    const T_QUICK   = '30';
-    const T_SLOW    = '60';
-    const T_LONG    = '360';
+    const T_NONE    = 'None';    //'0';
+    const T_INSTANT = 'Instant'; //'5';
+    const T_QUICK   = 'Quick';   //30';
+    const T_SLOW    = 'Slow';    //60';
+    const T_LONG    = 'Long';    //360';
 
     private $isCompatible            = self::UNKNOWN_COMPATIBILITY;
     const COMPATIBLE                 =  0;
@@ -1998,7 +1998,11 @@ GREMLIN;
     }
 
     public function getTimeToFix() {
-        return $this->timeToFix;
+        if (Analyzer::$docs === null) {
+            Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
+        }
+        
+        return Analyzer::$docs->getTimeToFix($this->analyzer);
     }
 
     public function getPhpversion() {
