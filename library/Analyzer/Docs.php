@@ -110,10 +110,10 @@ SQL;
         $res = $this->sqlite->query($query);
         $res2 = $res->fetchArray();
 
-        $return = constant("\\Analyzer\\Analyzer::$res2[0]");
-
-        if (empty($return['timetofix'])) {
+        if (empty($res2[0])) {
             $return = \Analyzer\Analyzer::T_NONE;
+        } else {
+            $return = constant("\\Analyzer\\Analyzer::$res2[0]");
         }
 
         return $return;
