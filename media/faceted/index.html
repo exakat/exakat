@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Exakat Faceted search for PROJECT_NAME</title>
+
+	<style>
+		<!--
+		p
+		{
+			margin: 0;
+			padding: 0;
+		}
+
+		a
+		{
+			text-decoration: none;
+			color: black;
+		}
+		
+		.left
+		{
+			display: inline;
+			float: left;
+			margin-left: 10px;
+			margin-right: 10px;
+			width: 20%;
+		}
+		
+		.right
+		{
+			display: inline;
+			float: left;
+			margin-left: 10px;
+			margin-right: 10px;
+			width: 60%;
+		}
+		
+		.top
+		{
+			border-bottom: thin solid rgb(218, 218, 218);
+			padding-bottom: 10px;
+		}
+		
+		.left { margin: 5px; }
+		label { cursor: pointer; }
+		
+		.filter
+		{
+			margin: 10px;
+			border-bottom: thin solid rgb(218, 218, 218);
+		}
+		
+		.filter h4
+		{
+			margin-bottom: 5px;
+			text-transform: capitalize;
+		}
+		
+		.clearFacet
+		{
+			cursor: pointer;
+			padding-right: 10px;
+		}
+		
+		.clearFacet:before
+		{
+			color: #999;
+			content: '× ';
+		}
+		
+		.search-input
+		{
+			font-size: 16px;
+			padding-right: 20px;
+		}
+		
+		.clearQuery
+		{
+			color: #999;
+			cursor: pointer;
+			margin-left: -20px;
+		}
+		
+		[ng\:cloak],
+					[ng-cloak],
+					[data-ng-cloak],
+					[x-ng-cloak],
+					.ng-cloak,
+					.x-ng-cloak { display: none !important; }
+		
+		table, th , td
+		{
+			border: 1px solid grey;
+			border-collapse: collapse;
+			padding: 5px;
+		}
+		
+		table tr:nth-child(odd) { background-color: #f1f1f1; }
+		table tr:nth-child(even) { background-color: #ffffff; }
+
+		-->
+	</style>
+
+</head>
+<body ng-cloak>
+    <h1><a href="http://www.exakat.io/"><img src="http://www.exakat.io/exakat.png" width="100">Exakat faceted report for PROJECT_NAME</a></h1>
+
+	<div ng-controller="MainCtrl">
+
+		<section class="left">
+			<div ng-repeat="group in facetGroups" class="filter">
+				<h4>{{group.name}} ({{ group.facets.length}})</h4>
+                <select name="multipleSelect" id="multipleSelect" ng-model="useFacets[group.name]" multiple>
+                  <option ng-repeat="option in group.facets | orderBy : option" value="{{option}}">{{option}}</option>
+                </select><br />
+			</div>	
+		</section>
+
+		<section class="right">
+			<div>
+				<h2>{{(filteredItems | filter:query).length}} Item{{(filteredItems | filter:query).length !== 1 ? 's' : null}}</h2>
+
+				<p class="wrapper-facets">
+					<a ng-if="activeFacets.length" class="clearFacet" ng-click="clearAllFacets()">Clear All</a>
+					<a class="clearFacet" ng-repeat="facet in activeFacets" ng-click="clearFacet(facet)">{{facet}}</a>
+				</p>
+
+				<table ng-if="(filteredItems | filter:query).length">
+					<tr>
+						<th>Error</th>
+						<th>File</th>
+						<th>Code</th>
+						<th>Severity</th>
+						<th>Fix time</th>
+					</tr>
+					<tr ng-repeat="item in filteredItems | filter:query">
+						<td>{{item.error}}</td>
+						<td>{{item.file}}#{{item.line}}</td>
+						<td>{{item.code}}</td>
+						<td>{{item.severity}}</td>
+						<td>{{item.impact}}</td>
+					</tr>
+				</table><br />
+				<p ng-if="!(filteredItems | filter:query).length">Sorry, no results found!</p>
+			</div>
+		</section>
+
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>

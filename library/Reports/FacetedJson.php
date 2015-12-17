@@ -27,19 +27,7 @@ class FacetedJson extends Reports {
 
     public function generateFileReport($report) {}
 
-    public function generate($dirName, $fileName) {
-        $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('Security'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
-                                    );
-        $themesList = '("'.join('", "', $this->themes).'")';
-
+    public function generate($dirName, $fileName = null) {
         $sqlite      = new \sqlite3($dirName.'/dump.sqlite');
 
         $sqlQuery = <<<SQL
@@ -47,22 +35,38 @@ SELECT  id AS id,
         fullcode AS code, 
         file AS file, 
         line AS line,
-        analyzer AS error
+        analyzer AS analyzer
     FROM results 
-    WHERE analyzer IN $themesList
+    WHERE analyzer IN $this->themesList
 
 SQL;
         $res = $sqlite->query($sqlQuery);
         
+        $config = \Config::factory();
+
+        $datastore = new \Datastore($config);
+
+
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            
+            $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $row['error'] = $ini['name'];
+            
+            $a = \Analyzer\Analyzer::getInstance($row['analyzer']);
+            $row['severity'] = $a->getSeverity();
+            $row['impact'] = $a->getTimeToFix();
+            $row['recipes'] = $a->getThemes();
+            
             $items[] = $row;
             $this->count();
         }
 
-        file_put_contents($dirName.'/'.$fileName.'.'.self::FILE_EXTENSION, json_encode($items));
-        
-    }//end generate()
-
-
-}//end class
+        if ($fileName === null) {
+            return json_encode($items);
+        } else {
+            file_put_contents($dirName.'/'.$fileName.'.'.self::FILE_EXTENSION, json_encode($items));
+            return true;
+        }
+    }
+}

@@ -183,14 +183,11 @@ class Xml extends Reports {
                   $this->cachedData . 
                   '</phpcs>'.PHP_EOL;
 
-        if ($name !== null) {
+        if ($name === null) {
+            return $return;
+        } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $return);
             return true;
-        } else {
-            echo $return;
-            return true;
         }
-    }//end generate()
-
-
-}//end class
+    } 
+} 

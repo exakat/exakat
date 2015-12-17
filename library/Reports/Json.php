@@ -69,16 +69,14 @@ class Json extends Reports {
             $results[ $row['file'] ]['messages'][ $row['line'] ][0][] = $message;
 
             ++$results[ $row['file'] ]['warnings'];
+            $this->count();
         }
         
-        if ($name !== null) {
+        if ($name === null) {
+            return json_encode($results);
+        } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, json_encode($results));
             return true;
-        } else {
-            echo json_encode($results);
-            return true;
         }
-    }//end generate()
-
-
-}//end class
+    }
+}

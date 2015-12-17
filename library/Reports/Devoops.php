@@ -81,6 +81,10 @@ class Devoops extends Reports {
     }//end generateFileReport()
 
     public function generate($folder, $name = 'report') {
+        if ($name === null) {
+            return "Can't produce Devoops format to stdout";
+        }
+
         shell_exec('rm -rf '.$folder.'/'.$name);
 
         mkdir($folder.'/'.$name, Devoops::FOLDER_PRIVILEGES);
@@ -222,7 +226,7 @@ HTML;
             }
         }
 
-        return true;
+        return '';
     }//end generate()
     
     ////////////////////////////////////////////////////////////////////////////////////

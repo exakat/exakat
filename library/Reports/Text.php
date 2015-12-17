@@ -82,14 +82,11 @@ class Text extends Reports {
             }
         }
         
-        if ($name !== null) {
+        if ($name === null) {
+            return $text;
+        } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);
             return true;
-        } else {
-            echo $text;
-            return true;
         }
-    }//end generate()
-
-
-}//end class
+    }
+}
