@@ -80,7 +80,7 @@ abstract class Analyzer {
     public function __construct() {
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
-        $this->analyzerInBase = str_replace('\\', '/', str_replace('Analyzer\\', '', $this->analyzer));
+        $this->analyzerInBase = 
         $this->analyzerIsNot($this->analyzer);
 
         $this->code = $this->analyzer;
@@ -943,7 +943,15 @@ GREMLIN
         return $this;
     }
 
+    public function cleanAnalyzerName($gremlin) {
+        $dependencies = $this->dependsOn();
+        $fullNames = array_map('\Analyzer\Analyzer::makeBaseName', $dependencies);
+        
+        return str_replace($dependencies, $fullNames, $gremlin);
+    }
+
     public function filter($filter) {
+        $filter = $this->cleanAnalyzerName($filter);
         $this->addMethod("filter{ $filter }");
 
         return $this;
@@ -1144,6 +1152,8 @@ GREMLIN
 
     public function raw($query) {
         ++$this->rawQueryCount;
+        $query = $this->cleanAnalyzerName($query);
+
         $this->addMethod($query);
         
         return $this;
@@ -1408,7 +1418,7 @@ GREMLIN
     }
 
     public function notInInterface() {
-        $this->notInInstruction('Trait');
+        $this->notInInstruction('Interface');
         
         return $this;
     }
@@ -2040,6 +2050,11 @@ GREMLIN;
         } else {
             $code = strtolower($code);
         }
+    }
+    
+    public static function makeBaseName($className) {
+        // A/B to Analyzer\\\\A\\\\B
+        return 'Analyzer\\\\'.str_replace('/', '\\\\', $className);
     }
 }
 ?>
