@@ -173,7 +173,7 @@ LICENCE;
              ->printed(false)
              ->run();
 
-        $folders = array('data', 'human', 'library', 'media/devoops');
+        $folders = array('data', 'human', 'library', 'media/devoops', 'media/faceted');
         foreach($folders as $folder) {
             $files = Finder::create()->ignoreVCS(true)
                                      ->files()
@@ -190,7 +190,8 @@ LICENCE;
         $this->taskExecStack()
              ->stopOnFail()
              ->exec('mv exakat.phar ../release/')
-             ->exec('cp docs/* ../release/docs/')
+             ->exec('cp docs/*.rst ../release/docs/')
+             ->exec('cp -r docs/images ../release/docs/')
              ->run();
     }
     
@@ -308,6 +309,37 @@ JOIN categories
             }
         }
         echo "\n", $total, " analyzers are in the base\n";
+
+        $analyzes = array('Analyze', 
+                          'Dead Code',
+                          'Security',
+                          'CompatibilityPHP53',
+                          'CompatibilityPHP54',
+                          'CompatibilityPHP55',
+                          'CompatibilityPHP56',
+                          'CompatibilityPHP70',
+                          'CompatibilityPHP71'
+                          );
+        $analyzeList = '("'.implode('", "', $analyzes).'")';
+
+        $res = $sqlite->query('SELECT DISTINCT analyzers.folder || "/" || analyzers.name as name FROM analyzers 
+JOIN analyzers_categories 
+    ON analyzers.id = analyzers_categories.id_analyzer
+JOIN categories 
+    ON analyzers_categories.id_categories = categories.id
+        WHERE categories.name IN '.$analyzeList.' AND 
+              (analyzers.severity IS NULL OR 
+              analyzers.timetofix IS NULL)
+    ORDER BY name');
+        
+        $total = 0;
+        while($row = $res->fetchArray()) {
+            ++$total;
+            print " + ".$row['name']."\n";
+        }
+        echo $total, " analyzers have no Severity\n";
+        
+
         
         // cleaning
         $sqlite->query('VACUUM');
@@ -634,10 +666,10 @@ SQL
         preg_match('/const BUILD = \'(\d+)\'/is', $php, $build);
         $build = $build[1];
         
-        $md = file_get_contents('docs/manual.md');
-        $md = preg_replace('/This manual is for Exakat version (\d+.\d+.\d+) \(build (\d+)\)/', 
-                           'This manual is for Exakat version ('.$version.') (build '.$build.')', $md);
-        file_put_contents('docs/manual.md', $md);
+//        $md = file_get_contents('docs/manual.md');
+//        $md = preg_replace('/This manual is for Exakat version (\d+.\d+.\d+) \(build (\d+)\)/', 
+//                           'This manual is for Exakat version ('.$version.') (build '.$build.')', $md);
+//        file_put_contents('docs/manual.md', $md);
     }
 
     public function checkClassnames() {
