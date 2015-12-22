@@ -116,6 +116,10 @@ SQL;
 
             $this->log->log( "Still ".count($themes)." to be processed\n");
             display("Still ".count($themes)." to be processed\n");
+            if (count($themes) === 0) {
+                $this->finish();
+                return ;
+            }
             $wait = rand(2,7);
             sleep($wait);
             display('Sleep '.$wait.' seconds');
@@ -128,7 +132,6 @@ SQL;
         }
 
         $this->finish();
-
         return ;
     }
         
