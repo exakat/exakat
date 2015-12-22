@@ -80,7 +80,8 @@ class Report2 extends Tasks {
             
             --$max;
             if ($max == 0) {
-                die("Waited for Project/Dump, but it never came. Try again later\n");
+                display("Waited for Project/Dump, but it never came. Try again later\n");
+                die();
             }
         }
 
