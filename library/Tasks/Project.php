@@ -135,7 +135,7 @@ class Project extends Tasks {
 
         $this->logTime('Stats');
 
-        exec('php exakat dump -p '.$config->project.'   > /dev/null &');
+        exec('php '.$config->executable.' dump -p '.$config->project.'   > /dev/null &');
         display('Started dump process');
 
         foreach($this->themes as $theme) {

@@ -179,7 +179,7 @@ HTML;
 HTML;
         } 
 
-        $html = file_get_contents('./media/devoops/index.exakat.html');
+        $html = file_get_contents($this->config->dir_root.'/media/devoops/index.exakat.html');
         $html = str_replace('<menu>', $summaryHtml, $html);
 
         $html = str_replace('EXAKAT_VERSION', \Exakat::VERSION, $html);
@@ -1586,8 +1586,8 @@ TEXT
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = $row['counts'];
         }
+        
         $config = \Config::factory();
-
         foreach($list as $l) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$l.'.ini');
             if (isset($counts[$l])) {
@@ -1623,8 +1623,10 @@ TEXT
 
         $res = $this->dump->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
         $listBySeverity = array();
+
+        $config = \Config::factory();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $ini = parse_ini_file('./human/en/'.$row['analyzer'].'.ini');
+            $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $listBySeverity[] = array('name'  => $ini['name'],
                                       'severity' => $row['severity'], 
                                       'count' => $row['nb']);
