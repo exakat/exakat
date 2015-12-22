@@ -82,9 +82,7 @@ GREMLIN;
         foreach($files as $file) {
             unlink($file);
         }
-        if ($res > 0) {
-            display('   Cleaned '.count($files).' gremlin scripts');
-        }
+        display('   Cleaned '.count($files).' gremlin scripts');
     }
     
     private function restartNeo4j() {
