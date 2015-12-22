@@ -31,7 +31,8 @@ class Project extends Tasks {
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
 
-    protected $reports = array('Premier' => array('Devoops'  => 'report',));
+    protected $reports = array('Premier' => array('Devoops' => 'report',
+                                                  'Faceted' => 'faceted'));
     
     const TOTAL_STEPS = 23; // 2 Reports + 10 Analyzes + 10 other steps
 
@@ -188,12 +189,10 @@ class Project extends Tasks {
                 $args = array ( 1 => 'report',
                                 2 => '-p',
                                 3 => $config->project,
-                                4 => '-f',
+                                4 => '-file',
                                 5 => $fileName,
                                 6 => '-format',
                                 7 => $format,
-                                8 => '-report',
-                                9 => $reportName,
                                 );
                 $config = \Config::factory($args);
             
