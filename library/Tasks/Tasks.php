@@ -37,7 +37,7 @@ abstract class Tasks {
                                   $config->projects_root.'/projects/'.$config->project);
         }
         
-        if ($config->project != 'default' && 
+        if ($config->project != 'default' &&
             file_exists($config->projects_root.'/projects/'.$config->project)) {
             $this->datastore = new \Datastore($config);
         }
