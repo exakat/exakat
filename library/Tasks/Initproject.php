@@ -41,7 +41,7 @@ class Initproject extends Tasks {
             // final wait..., just in case
             sleep(2);
 
-            shell_exec('rm -rf '.$config->projects_root.'/projects/'.$project.'/');
+            rmdirRecursive($config->projects_root.'/projects/'.$project);
         } elseif ($config->update === true) {
             $this->scheck_project_dir($project);
             display( "Updating $project\n");

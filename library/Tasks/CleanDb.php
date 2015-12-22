@@ -78,9 +78,12 @@ GREMLIN;
     
     private function cleanScripts() {
         display('Cleaning scripts');
-        $res = (int) shell_exec('cd '.$this->config->neo4j_folder.'/scripts; ls | wc -l; rm -rf a*.gremlin');
+        $files = glob($this->config->neo4j_folder.'/scripts/a*.gremlin');
+        foreach($files as $file) {
+            unlink($file);
+        }
         if ($res > 0) {
-            display('   Cleaned '.$res.' scripts');
+            display('   Cleaned '.count($files).' gremlin scripts');
         }
     }
     

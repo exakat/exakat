@@ -212,4 +212,26 @@ function neo4j_serverInfo() {
     return $res;
 }
 
+function rmdirRecursive($dir) { 
+    if (empty($dir)) { 
+        return 0;
+    }
+    
+    $total = 0;
+    $files = array_diff(scandir($dir), array('.','..')); 
+    
+    foreach ($files as $file) { 
+        if (is_dir("$dir/$file")) {
+            $total += rmdirRecursive("$dir/$file");
+        } else {
+            unlink("$dir/$file"); 
+            ++$total;
+        }
+    } 
+
+    rmdir($dir);
+    ++$total;
+
+    return $total; 
+  } 
 ?>
