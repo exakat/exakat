@@ -80,7 +80,7 @@ abstract class Analyzer {
     public function __construct() {
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
-        $this->analyzerInBase = 
+        $this->analyzerInBase = str_replace('\\', '/', str_replace('Analyzer\\', '', $this->analyzer));
         $this->analyzerIsNot($this->analyzer);
 
         $this->code = $this->analyzer;
