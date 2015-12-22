@@ -26,6 +26,11 @@ namespace Reports;
 class Devoops extends Reports {
     const FOLDER_PRIVILEGES = 0755;
     
+    const NOT_RUN      = 'Not Run';
+    const YES          = 'Yes';
+    const NO           = 'No';
+    const INCOMPATIBLE = 'Incompatible';
+    
     private $dump      = null; // Dump.sqlite
     private $datastore = null; // Datastore.sqlite
     
@@ -313,13 +318,13 @@ HTML;
 
     private function makeIcon($tag) {
         switch($tag) {
-            case 'Yes' : 
+            case self::YES : 
                 return '<i class="fa fa-check"></i>';
-            case 'No' : 
+            case self::NO : 
                 return '&nbsp;';
-            case 'Not run' : 
+            case self::NOT_RUN : 
                 return '<i class="fa fa-times-circle-o"></i>';
-            case 'Incompatible' : 
+            case self::INCOMPATIBLE : 
                 return '<i class="fa fa-minus-circle"></i>';
             default : 
                 return '&nbsp;';
@@ -1413,26 +1418,26 @@ SQL
 
             foreach($hash as $name => $ext) {
                 if (!isset($sources[$ext])) {
-                    display( "'$ext' is not a class ($name). Ignoring\n");
+                    $data[$section][$name] = self::NOT_RUN;
                     continue;
                 }
                 if (!in_array($ext, $themed)) {
-                    display( "$ext was not analyzed in Appinfo.");
+                    $data[$section][$name] = self::NOT_RUN;
                     continue;
                 }
                 
                 // incompatible
                 if ($sources[$ext] == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
-                    $data[$section][$name] = 'Incompatible';
+                    $data[$section][$name] = self::INCOMPATIBLE;
                     continue ;
                 } 
 
                 if ($sources[$ext] == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
-                    $data[$section][$name] = 'Incompatible';
+                    $data[$section][$name] = self::INCOMPATIBLE;
                     continue ;
                 } 
 
-                $data[$section][$name] = $sources[$ext] > 0 ? 'Yes' : 'No';
+                $data[$section][$name] = $sources[$ext] > 0 ? self::YES : self::NO;
             }
             
             if ($section == 'Extensions') {
@@ -1443,7 +1448,7 @@ SQL
                         if ($ka == $kb) { return  0; }
                         if ($ka > $kb)  { return -1; }
                     } else {
-                        return $list[$ka] == 'Yes' ? -1 : 1;
+                        return $list[$ka] == self::YES ? -1 : 1;
                     }
                 });
             }
@@ -1583,7 +1588,11 @@ TEXT
         }
         foreach($list as $l) {
             $ini = parse_ini_file('./human/en/'.$l.'.ini');
-            $info[ $ini['name']] = array('result' => (int) $counts[$l]);
+            if (isset($counts[$l])) {
+                $info[ $ini['name'] ] = array('result' => (int) $counts[$l]);
+            } else {
+                $info[ $ini['name'] ] = array('result' => -1);
+            }
         }
 
         return $this->formatHashTableLinked($info, $css);
