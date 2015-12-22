@@ -1586,8 +1586,10 @@ TEXT
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = $row['counts'];
         }
+        $config = \Config::factory();
+
         foreach($list as $l) {
-            $ini = parse_ini_file('./human/en/'.$l.'.ini');
+            $ini = parse_ini_file($config->dir_root.'/human/en/'.$l.'.ini');
             if (isset($counts[$l])) {
                 $info[ $ini['name'] ] = array('result' => (int) $counts[$l]);
             } else {
