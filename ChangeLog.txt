@@ -1,13 +1,24 @@
-Version 0.4.2 (Red Boy, Coming up)
+Version 0.4.3 (Tuolong, Coming up)
 + Architecture
-    + Work on PHP 7 compatibility
-    + Finish new report style
+    +
 + Report
     + 
 + Analyzer
     + 
 + Tokenizer
     + 
+
+Version 0.4.2 (Red Boy, 2015-12-22)
++ Architecture
+    + Published documentation on http://exakat.readthedocs.org
+    + First version of the faceted report (-format Faceted)
++ Report
+    + First version of the faceted report (-format Faceted)
+    + Fixed Dump that actually finishes after some time
++ Analyzer
+    + Spot unused arguments
+    + Fixed notInInterface() filter
+    + Upgraded HtmlEntitiesCall
 
 Version 0.4.1 (Azure Lion, 2015-12-14)
 + Architecture
