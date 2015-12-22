@@ -30,16 +30,23 @@ class Clean extends Tasks {
     }
 
     public function run(\Config $config) {
+        $path = $config->projects_root.'/projects/'.$config->project;
+        
         $dirsToErase = array('log',
                              'report',
                              'Premier-ace',
+                             'faceted',
                              );
         foreach($dirsToErase as $dir) {
-            shell_exec('rm -rf '.$config->projects_root.'/projects/'.$config->project.'/'.$dir);
+            $dirPath = $path.'/'.$dir;
+            if (file_exists($dirPath)) {
+                display('removing '.$dir);
+                rmdirRecursive($dirPath);
+            }
         }
 
         // rebuild log
-        mkdir($config->projects_root.'/projects/'.$config->project.'/log', 0755);
+        mkdir($path.'/log', 0755);
 
         $filesToErase = array('Flat-html.html',
                               'Flat-markdown.md',
@@ -63,17 +70,19 @@ class Clean extends Tasks {
                               'PhpFunctions.json',
                               'bigArrays.txt',
                               'counts.sqlite',
-                              'stats.txt'
+                              'stats.txt',
+                              'dump.sqlite'
                              );
         $total = 0;
         foreach($filesToErase as $file) {
-            $path = $config->projects_root.'/projects/'.$config->project.'/'.$file;
-            if (file_exists($path)) {
+            $filePath = $path.'/'.$file;
+            if (file_exists($filePath)) {
                 display('removing '.$file);
-                unlink($path);
+                unlink($filePath);
                 ++$total;
             }
         }
+        
         display("Removed $total files\n");
     }
 }
