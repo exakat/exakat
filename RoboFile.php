@@ -337,8 +337,44 @@ JOIN categories
             ++$total;
             print " + ".$row['name']."\n";
         }
-        echo $total, " analyzers have no Severity\n";
+        echo $total, " analyzers have no Severity or TimeToFix\n";
+
+        // Checking that severity and timetofix are only using the right values
+        $analyzes = array('Analyze', 
+                          'Dead Code',
+                          'Security',
+                          'CompatibilityPHP53',
+                          'CompatibilityPHP54',
+                          'CompatibilityPHP55',
+                          'CompatibilityPHP56',
+                          'CompatibilityPHP70',
+                          'CompatibilityPHP71'
+                          );
+        $analyzeList = '("'.implode('", "', $analyzes).'")';
         
+        include 'library/Analyzer/Analyzer.php';
+        $oClass = new ReflectionClass('\Analyzer\Analyzer');
+        $analyzerConstants = array_keys($oClass->getConstants());
+
+       $severityList = "'". join("', '", array_filter($analyzerConstants, function ($x) { return substr($x, 0, 2) === 'S_';})) . "'";
+       $timeToFixList = "'". join("', '", array_filter($analyzerConstants, function ($x) { return substr($x, 0, 2) === 'T_';})) . "'";
+
+        $res = $sqlite->query('SELECT DISTINCT analyzers.folder || "/" || analyzers.name as name, severity || " " || timetofix AS s FROM analyzers 
+JOIN analyzers_categories 
+    ON analyzers.id = analyzers_categories.id_analyzer
+JOIN categories 
+    ON analyzers_categories.id_categories = categories.id
+        WHERE categories.name IN '.$analyzeList.' AND 
+              (analyzers.severity NOT IN ('.$severityList.') OR 
+              analyzers.timetofix NOT IN ('.$timeToFixList.'))
+    ORDER BY name');
+        
+        $total = 0;
+        while($row = $res->fetchArray()) {
+            ++$total;
+            print " + ".$row['name'].' '.$row['s']."\n";
+        }
+        echo $total, " analyzers have unknown Severity or TimeToFix\n";
 
         
         // cleaning
