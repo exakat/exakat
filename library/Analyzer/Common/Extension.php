@@ -30,7 +30,8 @@ class Extension extends Analyzer\Analyzer {
     
     public function dependsOn() {
         return array('Classes/ClassUsage',
-                     'Interfaces/InterfaceUsage');
+                     'Interfaces/InterfaceUsage'
+                     );
     }
     
     public function analyze() {
@@ -74,8 +75,7 @@ class Extension extends Analyzer\Analyzer {
         
         if (!empty($constants)) {
             $this->atomIs('Identifier')
-                 ->analyzerIs('ConstantUsage')
-                 ->code($constants);
+                 ->fullnspath($this->makeFullNsPath($constants));
             $this->prepareQuery();
         }
 
