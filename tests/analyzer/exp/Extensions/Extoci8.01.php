@@ -8,7 +8,9 @@ $expected     = array('oci_connect(\'hr\', \'welcome\', \'localhost/XE\')',
                       'oci_error($stid)', 
                       'oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)', 
                       'oci_free_statement($stid)', 
-                      'oci_close($conn)');
+                      'oci_close($conn)',
+                      'OCI_RETURN_NULLS', 
+                      'OCI_ASSOC');
 
 $expected_not = array();
 
