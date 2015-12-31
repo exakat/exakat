@@ -686,6 +686,29 @@ SQL
         }
     }
 
+    public function checkExtensionsIni() {
+        $files = glob('data/*.ini');
+        
+        foreach($files as $file) {
+            $ini = parse_ini_file($file);
+            if (!isset($ini['functions'])) {
+                continue; 
+            }
+
+            if (!isset($ini['traits'])) {
+                print "$file is missing traits[] = \n"; 
+            }
+/*
+            if (!isset($ini['namespaces'])) {
+                print "$file is missing namespaces[] = \n"; 
+            }
+*/
+            if (isset($ini['trait'])) {
+                print "$file is using trait[] = \n"; 
+            }
+        }
+    }
+    
     public function checkDoc() {
         
         // no Exakat.com

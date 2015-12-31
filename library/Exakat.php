@@ -21,8 +21,8 @@
 */
 
 class Exakat {
-    const VERSION = '0.4.1';
-    const BUILD = '257';
+    const VERSION = '0.4.2';
+    const BUILD = '271';
     
     public function execute(Config $config) {
         switch ($config->command) {
@@ -183,6 +183,11 @@ class Exakat {
 
             case 'classes' : 
                 $task = new Tasks\Classes();
+                print $task->run($config);
+                break;
+
+            case 'test' : 
+                $task = new Tasks\Test();
                 print $task->run($config);
                 break;
 
