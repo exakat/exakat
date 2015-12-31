@@ -38,10 +38,12 @@ class Extension extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $functions = array();
-        $constants = array();
-        $classes = array();
+        $functions  = array();
+        $constants  = array();
+        $classes    = array();
         $interfaces = array();
+        $traits     = array();
+        $namespaces = array();
 
         if (substr($this->source, -4) == '.ini') {
             $ini = $this->loadIni($this->source);
@@ -65,6 +67,10 @@ class Extension extends Analyzer\Analyzer {
 
             if (count($traits) == 1 && empty($traits[0])) {
                 $traits = array();
+            }
+
+            if (count($namespaces) == 1 && empty($namespaces[0])) {
+                $namespaces = array();
             }
         } else {
             echo "Cannot process the '", $this->source, "' file. It has to be .ini format.\n";
