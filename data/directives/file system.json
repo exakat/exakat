@@ -1,1 +1,0 @@
-[{"name":"allow_url_fopen","suggested":"Off","documentation":"Unless you need to access remote files, it is better to be safe and forbid this feature"},{"name":"Extra configurations","suggested":"&nbsp;","documentation":"<a href=\"http:\/\/php.net\/manual\/en\/filesystem.configuration.php\">File System runtime configuration<\/a>"}]

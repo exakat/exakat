@@ -898,7 +898,9 @@ HTML;
             $text .= "</tr>\n";
         }
         
-        $text .= "<tfoot><tr><td>{$v[0]}</td><td>{$v[1]}</td>";
+        if (isset($v)) {
+            $text .= "<tfoot><tr><td>{$v[0]}</td><td>{$v[1]}</td>";
+        }
         if (isset($v[2])) {
             $text .= "<td>{$v[2]}</td>";
         }
@@ -1157,6 +1159,7 @@ SQL
                             'Null Coalesce'              => 'Php/NullCoalesce',
 
                             'File upload'                => 'Structures/FileUploadUsage',
+                            'Environnement Variables'    => 'Php/UsesEnv',
                     ),
 
                     'Composer' => array(
@@ -1668,8 +1671,8 @@ TEXT
         $css->readOrder = ['name', 'suggested', 'documentation'];
 
     // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
-        $directives = array('standard', 'bcmath', 'date', 'filesystem', 
-                            'fileupload', 'mail', 'ob', 
+        $directives = array('standard', 'bcmath', 'date', 'file', 
+                            'fileupload', 'mail', 'ob', 'env',
                             // standard extensions
                             'amqp', 'apache', 'assertion', 'curl', 'dba',
                             'filter', 'image', 'intl', 'ldap',
@@ -1684,11 +1687,24 @@ TEXT
                              );
 
         $data = array();
-        $res = $this->dump->query('SELECT analyzer FROM resultsCounts WHERE analyzer like "Extensions/Ext%" and count > 0');
+        $res = $this->dump->query(<<<SQL
+SELECT analyzer FROM resultsCounts 
+    WHERE ( analyzer LIKE "Extensions/Ext%" OR 
+            analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
+        AND count > 0
+SQL
+);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $ext = substr($row['analyzer'], 14);
-            if (in_array($ext, $directives)) {
-                $data[$ext] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
+            var_dump($row);
+            if ($row['analyzer'] == 'Structures/FileUploadUsage') {
+                $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
+            } elseif ($row['analyzer'] == 'Php/UsesEnv') {
+                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+            } else {
+                $ext = substr($row['analyzer'], 14);
+                if (in_array($ext, $directives)) {
+                    $data[$ext] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
+                }
             }
         }
         
