@@ -32,8 +32,7 @@ class TraitUsage extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Use')
-             ->outIs('USE')
-             ->traitDefinition();
+             ->outIs('USE');
         $this->prepareQuery();
     }
 }

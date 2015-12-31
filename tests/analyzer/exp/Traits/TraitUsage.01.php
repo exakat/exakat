@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('trait G', 
-                      'trait G', 
-                      'trait B');
+$expected     = array('G', 
+                      'G', 
+                      'B');
 
 $expected_not = array();
 
