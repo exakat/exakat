@@ -26,10 +26,6 @@ namespace Analyzer\Constants;
 use Analyzer;
 
 class ConstantUsage extends Analyzer\Analyzer {
-    public function dependsOn() {
-        return array('Extensions/Extstandard');
-    }
-    
     public function analyze() {
         // Nsname that is not used somewhere else
         $this->atomIs('Nsname')
