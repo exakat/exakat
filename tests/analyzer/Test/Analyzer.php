@@ -36,17 +36,8 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs configuration : '.$confs.'.');
         }
         
-        $shell = 'cd ../..; php exakat cleandb; php exakat load -p test -f ./tests/analyzer/source/'.str_replace('_', '/', $file).'.php -v';
-        
-        $res = shell_exec($shell);
-        if (strpos($res, "won't compile") !== false) {
-            $this->assertFalse(true, 'test '.$file.' can\'t compile with PHP version "'. ($phpversion).'", so no test is being run.');
-        }
-        
-        $shell = 'cd ../..;  php exakat build_root -p test; php exakat tokenizer -p test;  php exakat analyze -P '.escapeshellarg($test_config).' -p test ';
-        $res = shell_exec($shell);
-
-        $shell = 'cd ../..; php exakat results  -p test -P '.$analyzer.' -o -json';
+        $analyzer = escapeshellarg($test_config);
+        $shell = 'cd ../..; php exakat test -f ./tests/analyzer/source/'.str_replace('_', '/', $file).'.php -P '.$analyzer.'; php exakat results  -p test -P '.$analyzer.' -o -json';
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);
 

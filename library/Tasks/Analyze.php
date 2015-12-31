@@ -137,13 +137,11 @@ php exakat analyze -P <One/rule> -p <project>\n");
         $total_results = 0;
         $Php = new \Phpexec($config->version);
 
-        if (!$config->verbose) {
-            echo "Analyzing {$config->thema}\n";
-        }
+        display("Analyzing {$config->thema}\n");
         $progressBar = new \Progressbar(count($dependencies2));
         
         foreach($dependencies2 as $analyzer_class) {
-            if (!$config->verbose) {
+            if (!$config->verbose && !$config->quiet) {
                 echo $progressBar->drawCurrentProgress();
             }
             $begin = microtime(true);

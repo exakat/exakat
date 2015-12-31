@@ -38,6 +38,7 @@ class Config {
            private $defaultConfig  = array( // directives with boolean value
                                             'verbose'        => false,
                                             'quick'          => false,
+                                            'quiet'          => false,
                                             'help'           => false,
                                             'recursive'      => false,
                                             'update'         => false,
@@ -82,6 +83,7 @@ class Config {
         private static $BOOLEAN_OPTIONS = array(
                                  '-v'         => 'verbose',
                                  '-Q'         => 'quick',
+                                 '-q'         => 'quiet',
                                  '-h'         => 'help',
                                  '-r'         => 'recursive',
                                  '-u'         => 'update',
@@ -142,6 +144,7 @@ class Config {
                                'onepagereport' => 1,
                                'vector'        => 1,
                                'classes'       => 1,
+                               'test'          => 1,
                                );
                                
     static private $stack = array();
