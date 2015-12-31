@@ -1695,7 +1695,6 @@ SELECT analyzer FROM resultsCounts
 SQL
 );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            var_dump($row);
             if ($row['analyzer'] == 'Structures/FileUploadUsage') {
                 $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
