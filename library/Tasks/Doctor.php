@@ -271,15 +271,18 @@ INI;
         if (!$config->php52) {
             $stats['PHP 5.2']['configured'] = 'No';
         } else {
-            $version = shell_exec($config->php52.' -r "echo phpversion();" 2>&1');
-            if (!preg_match('/5\.2\.[0-9]+/', $version)) {
-                $stats['PHP 5.3']['installed'] = 'No';
+            $version = trim(shell_exec($config->php52.' -r "echo phpversion();" 2>&1'));
+            if (strpos($version, 'not found') !== false) {
+                $stats['PHP 5.2']['installed'] = 'No';
             } else {
                 $stats['PHP 5.2']['installed'] = 'Yes';
-                $stats['PHP 5.2']['version'] = $version;
+                if (substr($version, 0, 3) != '5.3') {
+                    $stats['PHP 5.3']['version'] = $version.' (This doesn\'t seem to be version 5.3)';
+                }
                 $stats['PHP 5.2']['short_open_tags'] = shell_exec($config->php52.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.2']['timezone'] = shell_exec($config->php52.' -r "echo ini_get(\'date.timezone\');" 2>&1');
                 $stats['PHP 5.2']['tokenizer'] = shell_exec($config->php52.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                $stats['PHP 5.2']['memory_limit'] = shell_exec($config->php52.' -r "echo ini_get(\'memory_limit\');" 2>&1');
             }
         }
 
@@ -288,15 +291,19 @@ INI;
             $stats['PHP 5.3']['configured'] = 'No';
         } else {
             $stats['PHP 5.3']['configured'] = 'Yes';
-            $res = trim(shell_exec($config->php53.' -r "echo phpversion();" 2>&1'));
-            if (!preg_match('/5\.3\.[0-9]+/', $res)) {
+            $version = trim(shell_exec($config->php53.' -r "echo phpversion();" 2>&1'));
+            if (strpos($version, 'not found') !== false) {
                 $stats['PHP 5.3']['installed'] = 'No';
             } else {
                 $stats['PHP 5.3']['installed'] = 'Yes';
-                $stats['PHP 5.3']['version'] = $res;
+                $stats['PHP 5.3']['version'] = $version;
+                if (substr($version, 0, 3) != '5.3') {
+                    $stats['PHP 5.3']['version'] = $version.' (This doesn\'t seem to be version 5.3)';
+                }
                 $stats['PHP 5.3']['short_open_tags'] = shell_exec($config->php53.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.3']['timezone'] = shell_exec($config->php53.' -r "echo ini_get(\'date.timezone\');" 2>&1');
                 $stats['PHP 5.3']['tokenizer'] = shell_exec($config->php53.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                $stats['PHP 5.3']['memory_limit'] = shell_exec($config->php53.' -r "echo ini_get(\'memory_limit\');" 2>&1');
             }
         }
         
@@ -305,15 +312,19 @@ INI;
             $stats['PHP 5.4']['configured'] = 'No';
         } else {
             $stats['PHP 5.4']['configured'] = 'Yes';
-            $res = trim(shell_exec($config->php54.' -r "echo phpversion();" 2>&1'));
-            if (!preg_match('/5\.4\.[0-9]+/', $res)) {
+            $version = trim(shell_exec($config->php54.' -r "echo phpversion();" 2>&1'));
+            if (strpos($version, 'not found') !== false) {
                 $stats['PHP 5.4']['installed'] = 'No';
             } else {
                 $stats['PHP 5.4']['installed'] = 'Yes';
-                $stats['PHP 5.4']['version'] = $res;
+                $stats['PHP 5.4']['version'] = $version;
+                if (substr($version, 0, 3) != '5.4') {
+                    $stats['PHP 5.4']['version'] = $version.' (This doesn\'t seem to be version 5.4)';
+                }
                 $stats['PHP 5.4']['short_open_tags'] = shell_exec($config->php54.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.4']['timezone'] = shell_exec($config->php54.' -r "echo ini_get(\'date.timezone\');" 2>&1');
                 $stats['PHP 5.4']['tokenizer'] = shell_exec($config->php54.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                $stats['PHP 5.4']['memory_limit'] = shell_exec($config->php54.' -r "echo ini_get(\'memory_limit\');" 2>&1');
             }
         }
         
@@ -322,15 +333,19 @@ INI;
             $stats['PHP 5.5']['configured'] = 'No';
         } else {
             $stats['PHP 5.5']['configured'] = 'Yes';
-            $res = trim(shell_exec($config->php55.' -r "echo phpversion();" 2>&1'));
-            if (!preg_match('/5\.5\.[0-9]+/', $res)) {
+            $version = trim(shell_exec($config->php55.' -r "echo phpversion();" 2>&1'));
+            if (strpos($version, 'not found') !== false) {
                 $stats['PHP 5.5']['installed'] = 'No';
             } else {
                 $stats['PHP 5.5']['installed'] = 'Yes';
-                $stats['PHP 5.5']['version'] = $res;
+                $stats['PHP 5.5']['version'] = $version;
+                if (substr($version, 0, 3) != '5.5') {
+                    $stats['PHP 5.5']['version'] = $version.' (This doesn\'t seem to be version 5.5)';
+                }
                 $stats['PHP 5.5']['short_open_tags'] = trim(shell_exec($config->php55.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1'));
                 $stats['PHP 5.5']['timezone'] = trim(shell_exec($config->php55.' -r "echo ini_get(\'date.timezone\');" 2>&1'));
                 $stats['PHP 5.5']['tokenizer'] = shell_exec($config->php55.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                $stats['PHP 5.5']['memory_limit'] = shell_exec($config->php55.' -r "echo ini_get(\'memory_limit\');" 2>&1');
             }
         }
         
@@ -339,15 +354,19 @@ INI;
             $stats['PHP 5.6']['configured'] = 'No';
         } else {
             $stats['PHP 5.6']['configured'] = $config->php56;
-            $res = trim(shell_exec($config->php56.' -r "echo phpversion();" 2>&1'));
-            if (!preg_match('/5\.6\.[0-9]+/is', $res)) {
+            $version = trim(shell_exec($config->php56.' -r "echo phpversion();" 2>&1'));
+            if (strpos($version, 'not found') !== false) {
                 $stats['PHP 5.6']['installed'] = 'No';
             } else {
                 $stats['PHP 5.6']['installed'] = 'Yes';
-                $stats['PHP 5.6']['version'] = $res;
+                $stats['PHP 5.6']['version'] = $version;
+                if (substr($version, 0, 3) != '5.6') {
+                    $stats['PHP 5.6']['version'] = $version.' (This doesn\'t seem to be version 5.6)';
+                }
                 $stats['PHP 5.6']['short_open_tags'] = shell_exec($config->php56.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.6']['timezone'] = shell_exec($config->php56.' -r "echo ini_get(\'date.timezone\');" 2>&1');
                 $stats['PHP 5.6']['tokenizer'] = shell_exec($config->php56.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                $stats['PHP 5.6']['memory_limit'] = shell_exec($config->php56.' -r "echo ini_get(\'memory_limit\');" 2>&1');
             }
         }
         
@@ -361,9 +380,13 @@ INI;
                 $stats['PHP 7.0']['installed'] = 'No';
             } else {
                 $stats['PHP 7.0']['version'] = $version;
+                if (substr($version, 0, 3) != '7.0') {
+                    $stats['PHP 7.0']['version'] = $version.' (This doesn\'t seem to be version 7.0)';
+                }
                 $stats['PHP 7.0']['short_open_tags'] = shell_exec($config->php70.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 7.0']['timezone'] = shell_exec($config->php70.' -r "echo ini_get(\'date.timezone\');" 2>&1');
                 $stats['PHP 7.0']['tokenizer'] = shell_exec($config->php70.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                $stats['PHP 7.0']['memory_limit'] = shell_exec($config->php70.' -r "echo ini_get(\'memory_limit\');" 2>&1');
             }
         }
 
@@ -377,9 +400,13 @@ INI;
                 $stats['PHP 7.1']['installed'] = 'No';
             } else {
                 $stats['PHP 7.1']['version'] = $version;
-                $stats['PHP 7.1']['short_open_tags'] = shell_exec($config->php70.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-                $stats['PHP 7.1']['timezone'] = shell_exec($config->php70.' -r "echo ini_get(\'date.timezone\');" 2>&1');
-                $stats['PHP 7.1']['tokenizer'] = shell_exec($config->php70.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                if (substr($version, 0, 3) != '7.1') {
+                    $stats['PHP 7.1']['version'] = $version.' (This doesn\'t seem to be version 7.1)';
+                }
+                $stats['PHP 7.1']['short_open_tags'] = shell_exec($config->php71.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+                $stats['PHP 7.1']['timezone'] = shell_exec($config->php71.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+                $stats['PHP 7.1']['tokenizer'] = shell_exec($config->php71.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                $stats['PHP 7.1']['memory_limit'] = shell_exec($config->php71.' -r "echo ini_get(\'memory_limit\');" 2>&1');
             }
         }
 
