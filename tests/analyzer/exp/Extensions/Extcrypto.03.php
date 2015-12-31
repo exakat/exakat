@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array('Hash( )');
+$expected     = array('Hash( )',
+                      'Crypto');
 
 $expected_not = array();
 

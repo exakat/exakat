@@ -30,7 +30,10 @@ class Extension extends Analyzer\Analyzer {
     
     public function dependsOn() {
         return array('Classes/ClassUsage',
-                     'Interfaces/InterfaceUsage'
+                     'Interfaces/InterfaceUsage',
+                     'Traits/TraitUsage',
+                     'Constants/ConstantUsage',
+                     'Namespaces/NamespaceUsage'
                      );
     }
     
@@ -59,6 +62,10 @@ class Extension extends Analyzer\Analyzer {
             if (count($interfaces) == 1 && empty($interfaces[0])) {
                 $interfaces = array();
             }
+
+            if (count($traits) == 1 && empty($traits[0])) {
+                $traits = array();
+            }
         } else {
             echo "Cannot process the '", $this->source, "' file. It has to be .ini format.\n";
             return true;
@@ -75,6 +82,7 @@ class Extension extends Analyzer\Analyzer {
         
         if (!empty($constants)) {
             $this->atomIs('Identifier')
+                 ->analyzerIs('Constants/ConstantUsage')
                  ->fullnspath($this->makeFullNsPath($constants));
             $this->prepareQuery();
         }
@@ -131,15 +139,23 @@ class Extension extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
+        if (!empty($traits)) {
+            $this->analyzerIs('Traits/TraitUsage')
+                 ->code($traits);
+            $this->prepareQuery();
+
+            $traits = $this->makeFullNsPath($traits);
+            $this->analyzerIs('Traits/TraitUsage')
+                 ->fullcode($traits);
+            $this->prepareQuery();
+        }
+
         if (!empty($namespaces)) {
             $this->analyzerIs('Namespaces/NamespaceUsage')
                  ->code($namespaces);
             $this->prepareQuery();
-
-            $interfaces = $this->makeFullNsPath($interfaces);
-            $this->analyzerIs('Namespaces/NamespaceUsage')
-                 ->fullcode($namespaces);
-            $this->prepareQuery();
+            
+            // Can a namespace be used in a nsname (as prefix) ? 
         }
     }
 }
