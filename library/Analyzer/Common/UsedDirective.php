@@ -26,8 +26,6 @@ namespace Analyzer\Common;
 use Analyzer;
 
 class UsedDirective extends Analyzer\Analyzer {
-    protected $directives = array();
-    
     public function analyze() {
         // Processing ini_get_all ?
         // ini_set($var ? )
@@ -36,8 +34,7 @@ class UsedDirective extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\ini_set', '\\ini_get', '\\ini_restore', '\\ini_alter'))
-             
+             ->fullnspath(array('\\ini_set', '\\ini_get', '\\ini_restore', '\\ini_alter', '\\iconv_set_encoding'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
