@@ -251,9 +251,6 @@ LICENCE;
         echo "Check composer data\n";
         $this->checkComposerData();
 
-        echo "Check Directives' sync\n";
-        $this->checkDirective();
-
         echo "Check Classname' case\n";
         $this->checkClassnames();
 
@@ -529,7 +526,7 @@ JOIN categories
                 $errors56[(string) $file] = $res;
             }
 
-            $res = shell_exec('php70 -l '.$file);
+            $res = shell_exec('php -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
                 $errors70[(string) $file] = $res;
@@ -691,36 +688,6 @@ SQL
         $res = $sqlite->query('SELECT count(*) AS nb FROM traits');
         echo $res->fetchArray(SQLITE3_ASSOC)['nb'], " traits\n";
         echo "\n";
-    }
-    
-    public function checkDirective() {
-        $code = file_get_contents('./library/Report/Content/Directives.php');
-        preg_match('#\$directives = array\((.*?)\);#is', $code, $r);
-
-        include('./library/Report/Content.php');
-        include('./library/Report/Content/Directives.php');
-        $directives = \Report\Content\Directives::$directives;
-        
-        $counts = array_count_values($directives);
-        $diff = array_filter($counts, function($a) { return $a > 1;}, ARRAY_FILTER_USE_BOTH);
-        if (count($diff)) {
-            echo count($diff), ' values are double in \$directives : ', join(', ', array_keys($diff)), "\n";
-        }
-        
-        foreach($directives as $d) {
-            if (!file_exists('./library/Report/Content/Directives/'.$d.'.php')) {
-                echo $d, " is missing\n";
-            } 
-        }
-        
-        $files = glob('./library/Report/Content/Directives/*.php');
-        foreach($files as $f) {
-            $f2 = substr(basename($f), 0, -4);
-            if ($f2 == 'Directives') { continue; }
-            if (in_array($f2, $directives) === false) {
-                echo "'", $f2, "' is missing in the Directive class\n";
-            }
-        }
     }
 
     public function checkExtensionsIni() {
