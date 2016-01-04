@@ -27,7 +27,9 @@ spl_autoload_register('Autoload::autoload_library');
 $query = <<<'QUERY'
 
 /// insert a query here
-
+//g.V.has('atom', 'Class').filter{it.out('NAME').has('code', 'FlagVisitorImplementation').any() }.map
+//g.V.has('atom', 'Class').filter{it.out('NAME').has('code', 'BinaryOperatorFlagVisitor').any() }.map
+g.V.has('atom', 'File').fullcode;
 
 QUERY;
 

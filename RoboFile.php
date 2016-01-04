@@ -43,7 +43,7 @@ class RoboFile extends \Robo\Tasks
                                  ->in('library')
                                  ->in('scripts');
         
-        $licence = <<<'LICENCE'
+        $licence2015 = <<<'LICENCE'
 /*
  * Copyright 2012-2015 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -67,8 +67,32 @@ class RoboFile extends \Robo\Tasks
 
 
 LICENCE;
+        $licenceCRC2015 = crc32(trim($licence2015));
+
+        $licence = <<<'LICENCE'
+/*
+ * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
+LICENCE;
         $licenceCRC = crc32(trim($licence));
-        
+
         foreach ($files as $file) {
             if (strpos($file, 'Everyman') !== false) { continue; }
             echo $file, "\n";
@@ -82,6 +106,19 @@ LICENCE;
             if ($tokens[$tokenId][0] == T_OPEN_TAG) {
                 if ($tokens[$tokenId + 1][0] != T_COMMENT) {
                     array_splice($tokens, $tokenId + 1, 0, array(array(0 => T_COMMENT, 1 => $licence, 2 => 2)));
+                    $fp = fopen($file, 'w+');
+                    foreach($tokens as $token) {
+                        if (is_array($token)) {
+                            fwrite($fp, $token[1]);
+                        } else {
+                            fwrite($fp, $token);
+                        }
+                    }
+                    fclose($fp);
+                } elseif (crc32($tokens[$tokenId + 1][1]) === $licenceCRC2015) {
+                    echo "Updating licence date in file '", $file, "'\n";
+                    $tokens[$tokenId + 1][1] = $licence;
+
                     $fp = fopen($file, 'w+');
                     foreach($tokens as $token) {
                         if (is_array($token)) {
