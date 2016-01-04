@@ -1,10 +1,26 @@
-Version 0.4.3 (Tuolong, Coming up)
+Version 0.4.4 (Crown Prince Mo'ang, Coming up)
 + Architecture
     +
 + Report
     + 
 + Analyzer
     + 
++ Tokenizer
+    + 
+
+Version 0.4.3 (Tuolong, 2015-01-04)
++ Architecture
+    + Copyright year bump
+    + Doctor reports memory_limit and php version consistency
+    + Switched to rmDirRecursive
++ Report
+    + Removed old style reporting system
++ Analyzer
+    + Fixed fileupload and filesystem directives reports
+    + Added report of Environnement variable usage
+    + Added iconv_set_encoding to the list of directive usage
+    + Extension analyzes now takes into account namespaces and traits
+    + Analyzers all have severity and time to fix
 + Tokenizer
     + 
 
