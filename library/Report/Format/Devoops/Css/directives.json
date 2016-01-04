@@ -1,6 +1,0 @@
-{
- "displayTitles":true,
- "titles":["Directive","Suggested value","Documentation"],
- "readOrder":["name","suggested","documentation"],
- "backgroundColor":"#DDDDDD"
-}

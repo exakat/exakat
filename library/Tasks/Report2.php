@@ -25,12 +25,6 @@ namespace Tasks;
 
 class Report2 extends Tasks {
     public function run(\Config $config) {
-        $reportClass = "\\Report\\Report\\".$config->report;
-
-        if (!class_exists($reportClass)) {
-            die("Report '{$config->report}' doesn't exist.\nAborting\n");
-        }
-
         $this->checkTokenLimit();
         
         if (!class_exists('\Reports\\'.$config->format)) {
