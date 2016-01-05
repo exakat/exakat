@@ -46,24 +46,24 @@ SQL;
 
         $datastore = new \Datastore($config);
 
-
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $row['error'] = $ini['name'];
             
             $a = \Analyzer\Analyzer::getInstance($row['analyzer']);
             $row['severity'] = $a->getSeverity();
-            $row['impact'] = $a->getTimeToFix();
-            $row['recipes'] = $a->getThemes();
-            
+            $row['impact']   = $a->getTimeToFix();
+            $row['recipes']  = $a->getThemes();
+
             $items[] = $row;
             $this->count();
         }
 
         if ($fileName === null) {
-            return json_encode($items);
+            $json = json_encode($items, JSON_PARTIAL_OUTPUT_ON_ERROR);
+            // @todo Log if $json == false 
+            return $json;
         } else {
             file_put_contents($dirName.'/'.$fileName.'.'.self::FILE_EXTENSION, json_encode($items));
             return true;
