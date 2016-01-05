@@ -211,7 +211,7 @@ GREMLIN;
             
             $this->stmtResults->bindValue(':fullcode', $result->fullcode,      SQLITE3_TEXT);
             $this->stmtResults->bindValue(':file',     $result->file,          SQLITE3_TEXT);
-            $this->stmtResults->bindValue(':line',     $result->line,          SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':line',     $result->line,          SQLITE3_INTEGER);
             $this->stmtResults->bindValue(':namespace',$result->{'namespace'}, SQLITE3_TEXT);
             $this->stmtResults->bindValue(':class',    $result->class,         SQLITE3_TEXT);
             $this->stmtResults->bindValue(':function', $result->function,      SQLITE3_TEXT);
