@@ -114,6 +114,15 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // arguments in a method : all of them are at least read
+        // we need to find a way to link to the definition 
+        $this->atomIs('Variable')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->hasIn('METHOD') 
+             ->back('first');
+        $this->prepareQuery();
+
         // arguments : normal variable in a custom function
         $this->atomIs('Variable')
              ->savePropertyAs('rank', 'rank')

@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_UnusedArguments extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testFunctions_UnusedArguments01()  { $this->generic_test('Functions/UnusedArguments.01'); }
+    public function testFunctions_UnusedArguments02()  { $this->generic_test('Functions/UnusedArguments.02'); }
 }
 ?>

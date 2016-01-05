@@ -42,12 +42,14 @@ class UnusedArguments extends Analyzer\Analyzer {
              ->inIsIE('VARIABLE') // for typehint
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
+             ->atomIs('Function')
              ->hasNoOut('ABSTRACT')
              ->notInTrait()
              ->notInInterface()
              
              // this argument must be read at least once
-             ->filter('it.out("BLOCK").out.loop(1){true}{ it.object.atom == "Variable" }.has("code", varname).filter{ it.in("ANALYZED").has("code", "Variables/IsRead").any()}.any() == false')
+             ->filter('it.out("BLOCK").out.loop(1){true}{ it.object.atom == "Variable" }.filter{it.code == varname}.filter{ it.in("ANALYZED").has("code", "Variables/IsRead").any()}.any() == false')
+
              ->back('first');
         $this->prepareQuery();
 
@@ -59,6 +61,7 @@ class UnusedArguments extends Analyzer\Analyzer {
              ->inIsIE('VARIABLE') // for typehint
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
+             ->atomIs('Function')
              ->hasNoOut('ABSTRACT')
              ->notInTrait()
              ->notInInterface()
