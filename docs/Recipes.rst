@@ -47,8 +47,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 15 Dec 2015 17:32:19 +0000
-.. comment: Generation hash : 41221d44bdb613846eb7ee7f544e138b2fe7656c
+.. comment: Generation date : Mon, 04 Jan 2016 18:00:47 +0000
+.. comment: Generation hash : dd2f45698ecc60f393b906b465ebd638de865d2c
 
 
 .. _analyze:
@@ -56,7 +56,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 218 analysis
+Total : 219 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -227,6 +227,7 @@ Total : 218 analysis
 * :ref:`Unresolved use <unresolved-use>`
 * :ref:`Unset In Foreach <unset-in-foreach>`
 * :ref:`Unthrown Exception <unthrown-exception>`
+* :ref:`Unused Arguments <unused-arguments>`
 * :ref:`Unused Global <unused-global>`
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`

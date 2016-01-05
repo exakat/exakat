@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 15 Dec 2015 17:32:19 +0000
-.. comment: Generation hash : 41221d44bdb613846eb7ee7f544e138b2fe7656c
+.. comment: Generation date : Mon, 04 Jan 2016 18:00:47 +0000
+.. comment: Generation hash : dd2f45698ecc60f393b906b465ebd638de865d2c
 
 
 .. _$http\_raw\_post\_data:
@@ -182,7 +182,7 @@ When using a foreach loop that modifies the original source, it is recommended t
 
 Using references is then must faster, and easier to read. 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
    foreach($source as $key => &$value) {
@@ -483,7 +483,7 @@ In a number of situations, the hash value will start with '0e', and PHP will und
 
 Here is an example 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
    // more at https://blog.whitehatsec.com/magic-hashes/
@@ -618,7 +618,7 @@ Could Be Static
 
 This global is only used in one function or method. It may be called 'static', instead of global. This will allow you to keep the value between call to the function, but will not be accessible outside this function.
 
-.. code-block:php
+.. code-block:: php
 
    <?php
    function x() {
@@ -1054,7 +1054,7 @@ When the array is the result of an expression, the array is not kept in memory a
 
 This will do nothing
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        foreach(array(1,2,3) as &$value) {
@@ -1065,7 +1065,7 @@ This will do nothing
 
 This will have an actual effect
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        $array = array(1,2,3);
@@ -1096,7 +1096,7 @@ Foreach With list()
 
 PHP 5.5 introduced the ability to use list in foreach loops. This was not possible in the earlier versions.
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        foreach($array as list($a, $b)) { 
@@ -1107,7 +1107,7 @@ PHP 5.5 introduced the ability to use list in foreach loops. This was not possib
 
 Previously, it was compulsory to extract the data from the blind array : 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        foreach($array as $c) { 
@@ -1422,7 +1422,7 @@ Isset With Constant
 
 Until PHP 7, it was possible to use arrays as constants, but it was not possible to test them with isset.
 
-.. code-block:php
+.. code-block:: php
 
    <?php
    const X = [1,2,3];
@@ -1768,7 +1768,7 @@ The results of the following functions shouldn't be used directly, but checked f
 
 For example, glob() returns an array, unless some error happens, in which case it returns a boolean (false). In such case, however rare it is, plugging glob() directly in a foreach() loops will yield errors.
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        // Used without check : 
@@ -1902,7 +1902,7 @@ No Self Referencing Constant
 
 It is not possible to use 'self' when defining a constant in a class. It will yield a fatal error at runtime. 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        class a { 
@@ -1915,7 +1915,7 @@ It is not possible to use 'self' when defining a constant in a class. It will yi
 
 The code needs to reference the full class's name to do so, without using the current class's name. 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        class a { 
@@ -1969,7 +1969,7 @@ one may call them without instantiating the object.
 However, PHP doesn't check that a method is static or not : at any point, you may call one
 method statically : 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        class x {
@@ -2398,7 +2398,7 @@ Property/Variable Confusion
 
 Within a class, there is both a property and some variables bearing the same name. 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
    class Object {
@@ -2615,7 +2615,7 @@ This doesn't change the thrown message, but provides more information.
 
 Note : Chaining requires PHP > 5.3.0.
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        try {
@@ -2762,7 +2762,7 @@ object context, to perform some utility task.
 To maintain code readability, it is recommended to call static method in a static
 way, rather than within object context.
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        class x {
@@ -3160,6 +3160,17 @@ clearPHP: `no-unthrown-exceptions <https://github.com/dseguy/clearPHP/tree/maste
 This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
 
 
+.. _unused-arguments:
+
+Unused Arguments
+################
+
+
+Those arguments are not used in the method or function.
+
+This analyzer is part of the following recipes :  :ref:`Analyze`
+
+
 .. _unused-global:
 
 Unused Global
@@ -3168,7 +3179,7 @@ Unused Global
 
 List of global keyword, used in various functions but not actually used in the code. for example : 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        function foo() {
@@ -3643,7 +3654,7 @@ While(List() = Each())
 
 This code structure is quite old : it should be replace by the more modern and efficient foreach.
 
-.. code-block:php
+.. code-block:: php
 
    <?php
        foreach($array as $key => $value) {
@@ -3830,7 +3841,7 @@ func\_get\_arg Modified
 
 func\_get\_arg() and func\_get\_args() used to report the calling value of the argument until PHP 7. Since PHP 7, it is reporting the value of the argument at calling time, which may have been modified by a previous instruction. 
 
-.. code-block:php
+.. code-block:: php
 
    <?php
    
