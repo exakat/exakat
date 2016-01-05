@@ -251,6 +251,10 @@ LICENCE;
         echo "Check composer data\n";
         $this->checkComposerData();
 
+        echo "Check Reports' format\n";
+        $this->checkReportFormat();
+
+
         echo "Check Classname' case\n";
         $this->checkClassnames();
 
@@ -757,6 +761,31 @@ SQL
         }
     }
 
+    public function checkReportFormat() {
+        $php = file_get_contents('library/Reports/Reports.php');
+        preg_match('/    CONST FORMATS        = \[(.*?)\];/is', $php, $r);
+        
+        $formats = explode(',', $r[1]);
+        $formats = array_map(function($x) { return trim($x, "' "); }, $formats);
+        
+        $files = glob('./library/Reports/*');
+        $files = array_map(function($x) { return substr(basename($x), 0, -4);}, $files);
+        $files = array_filter($files, function($x) { return $x !== 'Reports'; });
+        sort($files);
+        
+        $missing = array_diff($files, $formats);
+        if (count($missing) > 0) {
+            print count($missing).' format are missing in ./library/Reports/Reports.php : '.join(', ', $missing)."\n";
+            print "    CONST FORMATS = ['".join("', '", $files)."'];\n";
+        }
+
+        $toomany = array_diff($formats, $files);
+        if (count($toomany) > 0) {
+            print count($toomany).' format are too many in ./library/Reports/Reports.php : '.join(', ', $toomany)."\n";
+            print "    CONST FORMATS        = ['".join("', '", $files)."'];\n";
+        }
+    }
+    
     public function checkAppinfo() {
         $php = file_get_contents('library/Report/Content/Appinfo.php');
         preg_match_all("#'([A-Z][a-z0-9]+?/[A-Z][a-zA-Z0-9]+?)'#s", $php, $r);
