@@ -34,6 +34,8 @@ class LocallyUnusedProperty extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Visibility')
              ->outIs('DEFINE')
+             ->hasNoFunction()
+             ->hasClass()
              ->_as('ppp')
              ->analyzerIsNot('Classes/LocallyUsedProperty')
                 // must ignore static in functions
