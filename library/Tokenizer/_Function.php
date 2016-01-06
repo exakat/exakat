@@ -41,15 +41,15 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // function name ( arguments )
-        $this->conditions = array(0 => array('token' => _Function::$operators,
-                                             'atom'  => 'none'),
+        $this->conditions = array(0 => array('token'    => _Function::$operators,
+                                             'atom'     => 'none'),
                                   1 => array('notToken' => 'T_OPEN_CURLY'),
 // Function name may be anything, indeed. 
-                                  2 => array('token' => 'T_OPEN_PARENTHESIS',
+                                  2 => array('token'    => 'T_OPEN_PARENTHESIS',
 //                                             'property' => array('association' => 'Function')
                                              ),
-                                  3 => array('atom'  => 'Arguments'),
-                                  4 => array('token' => 'T_CLOSE_PARENTHESIS')
+                                  3 => array('atom'     => 'Arguments'),
+                                  4 => array('token'    => 'T_CLOSE_PARENTHESIS')
         );
         
         $this->actions = array('transform'     => array( 1 => 'NAME',
@@ -108,7 +108,6 @@ class _Function extends TokenAuto {
                                'keepIndexed'   => true);
         $this->checkAuto();
 
-
         // function x(args) { normal code }
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
@@ -126,7 +125,8 @@ class _Function extends TokenAuto {
                                'atom'          => 'Function',
                                'makeBlock'     => 'BLOCK',
                                'cleanIndex'    => true,
-                               'addSemicolonFunction'  => 'it');
+                               'addSemicolonFunction'  => 'it'
+                               );
         $this->checkAuto();
 
         // function ; (No Body, for interfaces or abstract)

@@ -1,0 +1,90 @@
+<?php
+
+Label : NEXT
+  ;
+  Label : NEXT
+    function
+    Label : NEXT
+      -
+      Label : NEXT
+        (
+        Label : NEXT
+          
+          Label : NEXT
+            )
+            Label : NEXT
+              ->
+              Label : NEXT
+                d
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    /**/
+                    Label : NEXT
+                      /* * */
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    'e'
+          Label : ARGUMENT
+            new
+            Label : NEW
+              A
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  $c
+                Label : ARGUMENT
+                  $b
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $g
+      Label : ARGUMENT
+        $f
+    Label : NAME
+      
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
+  Label : ELEMENT
+    +
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        (
+        Label : CODE
+          new
+          Label : NEW
+            A
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                $b
+      Label : METHOD
+        d
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'e'
+    Label : LEFT
+      function
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $g
+        Label : ARGUMENT
+          $f
+      Label : NAME
+        
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a

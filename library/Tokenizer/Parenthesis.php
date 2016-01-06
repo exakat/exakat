@@ -37,7 +37,7 @@ class Parenthesis extends TokenAuto {
                                           'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
                                           'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                     ));
-        // Removing  (
+        // Removing  ( from Prerequisite
         $prerequisite = array_filter($prerequisite, function ($x) { return $x != 'T_OPEN_PARENTHESIS'; });
 
         // ( normal parenthesis )
