@@ -3,72 +3,64 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     function
-    Label : NAME
-      
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a
+    Label : NAME
+      
+    Label : BLOCK
+      void
+    Label : USE
+      
+      Label : ARGUMENT
+        $a1
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      
     Label : BLOCK
       void
     Label : USE
       Arguments
       Label : ARGUMENT
-        $g
+        $e
       Label : ARGUMENT
         $f
       Label : ARGUMENT
-        $e
-  Label : ELEMENT
-    
+        $g
   Label : ELEMENT
     function
-    Label : NAME
-      
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a
-    Label : BLOCK
-      void
-    Label : USE
-      void
-      Label : ARGUMENT
-        $bq
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    function
     Label : NAME
       
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
     Label : BLOCK
       void
     Label : USE
       Arguments
       Label : ARGUMENT
-        $d
-      Label : ARGUMENT
         $c
+      Label : ARGUMENT
+        $d
   Label : ELEMENT
     function
-    Label : NAME
-      
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a
+    Label : NAME
+      
     Label : BLOCK
       void
     Label : USE
-      void
+      
       Label : ARGUMENT
-        $a1
+        $bq

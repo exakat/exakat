@@ -1,0 +1,139 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              C
+            Label : VARIABLE
+              $b
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              D
+            Label : VARIABLE
+              =
+              Label : RIGHT
+                null
+              Label : LEFT
+                $c
+        Label : NAME
+          include_once
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  'G'
+                Label : CONCAT
+                  $b
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              C
+            Label : VARIABLE
+              $b
+        Label : NAME
+          include
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                E
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'F'
+                  Label : ARGUMENT
+                    $c
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              C
+            Label : VARIABLE
+              $b
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              D
+            Label : VARIABLE
+              =
+              Label : RIGHT
+                null
+              Label : LEFT
+                $c
+        Label : NAME
+          require_once
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  'G'
+                Label : CONCAT
+                  $b
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              C
+            Label : VARIABLE
+              $b
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              D
+            Label : VARIABLE
+              =
+              Label : RIGHT
+                null
+              Label : LEFT
+                $c
+        Label : NAME
+          require
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                E
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    $c
+                  Label : ARGUMENT
+                    'F'

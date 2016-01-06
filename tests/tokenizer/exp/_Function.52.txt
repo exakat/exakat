@@ -32,18 +32,18 @@ Label : CODE
                     void
             Label : LEFT
               ::
-              Label : PROPERTY
-                $a
               Label : CLASS
                 static
+              Label : PROPERTY
+                $a
           Label : ELEMENT
             ->
             Label : OBJECT
               ::
-              Label : PROPERTY
-                $a
               Label : CLASS
                 static
+              Label : PROPERTY
+                $a
             Label : METHOD
               D
               Label : ARGUMENTS

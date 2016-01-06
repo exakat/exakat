@@ -30,7 +30,7 @@ class Parenthesis extends TokenAuto {
     public function _check() {
         $operands    = 'yes';
         
-        $prerequisite = array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
+        $prerequisite = array_merge(Functioncall::$operators, _Include::$operators,
                                     array('T_STRING',   'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
                                           'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
                                           'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',
@@ -76,12 +76,13 @@ class Parenthesis extends TokenAuto {
         $this->checkAuto();
 
 // this applies to situations like print ($a * $b) + $c; where parenthesis actually belong to the following expression.
-        $this->conditions = array(-1 => array('token' => array_merge(array('T_ECHO', 'T_PRINT'), _Include::$operators)),
-                                   0 => array('token' => Parenthesis::$operators,
-                                              'atom'  => 'none' ),
-                                   1 => array('atom'  => $operands),
-                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none')
+        $this->conditions = array(-2 => array('notToken' => 'T_FUNCTION'),
+                                  -1 => array('token'    => array_merge(array('T_ECHO', 'T_PRINT'), _Include::$operators)),
+                                   0 => array('token'    => Parenthesis::$operators,
+                                              'atom'     => 'none' ),
+                                   1 => array('atom'     => $operands),
+                                   2 => array('token'    => 'T_CLOSE_PARENTHESIS',
+                                              'atom'     => 'none')
         );
         
         $this->actions = array('transform'    => array( 1 => 'CODE',

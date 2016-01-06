@@ -12,22 +12,6 @@ Label : CODE
         ;
         Label : ELEMENT
           function
-          Label : PUBLIC
-            public
-          Label : NAME
-            foreach
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $d
-            Label : ARGUMENT
-              $c
-        Label : ELEMENT
-          function
-          Label : PUBLIC
-            public
-          Label : NAME
-            do
           Label : ARGUMENTS
             
             Label : ARGUMENT
@@ -36,5 +20,21 @@ Label : CODE
                 D
               Label : VARIABLE
                 $b
+          Label : NAME
+            do
+          Label : PUBLIC
+            public
+        Label : ELEMENT
+          function
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              $d
+          Label : NAME
+            foreach
+          Label : PUBLIC
+            public
   Label : NAMESPACE
     B

@@ -92,7 +92,7 @@ class Functioncall extends TokenAuto {
         $this->checkAuto();
 
         // functioncall(with arguments but without parenthesis)
-        $this->conditions = array(-1 => array('filterOut' => _Ppp::$operators),
+        $this->conditions = array(-1 => array('filterOut' => array_merge(_Ppp::$operators, _Function::$operators)),
                                    0 => array('token'     => array('T_ECHO', 'T_PRINT', 'T_EXIT'),
                                               'atom'      => 'none'),
                                    1 => array('atom'      => 'Arguments'),

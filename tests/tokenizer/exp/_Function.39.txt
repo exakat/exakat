@@ -6,18 +6,18 @@ Label : CODE
     =
     Label : RIGHT
       function
-      Label : NAME
-        
       Label : ARGUMENTS
         Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $c
         Label : ARGUMENT
           $e
         Label : ARGUMENT
           $d
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          $b
+      Label : NAME
+        
       Label : BLOCK
         ;
         Label : ELEMENT

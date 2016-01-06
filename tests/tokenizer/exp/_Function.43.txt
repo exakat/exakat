@@ -1,28 +1,26 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : NAME
-      
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ->
-        Label : OBJECT
-          $e
-        Label : METHOD
-          f
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $g
-    Label : USE
-      void
-      Label : ARGUMENT
-        $d
+  function
+  Label : ARGUMENTS
+    
+    Label : ARGUMENT
+      $a
+  Label : NAME
+    
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      ->
+      Label : OBJECT
+        $e
+      Label : METHOD
+        f
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $g
+  Label : USE
+    
+    Label : ARGUMENT
+      $d

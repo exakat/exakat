@@ -3,26 +3,22 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     function
-    Label : NAME
-      
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a
+    Label : NAME
+      
     Label : BLOCK
       void
   Label : ELEMENT
     function
-    Label : NAME
-      
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a
+    Label : NAME
+      
     Label : BLOCK
       void

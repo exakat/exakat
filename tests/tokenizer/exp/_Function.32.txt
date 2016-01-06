@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      z
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -13,13 +11,13 @@ Label : CODE
         Label : RIGHT
           null
         Label : LEFT
-          $f
+          $a
       Label : ARGUMENT
         =
         Label : RIGHT
           null
         Label : LEFT
-          $e
+          $b
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -37,12 +35,14 @@ Label : CODE
         Label : RIGHT
           null
         Label : LEFT
-          $b
+          $f
       Label : ARGUMENT
         =
         Label : RIGHT
           null
         Label : LEFT
-          $a
+          $e
+    Label : NAME
+      z
     Label : BLOCK
       void

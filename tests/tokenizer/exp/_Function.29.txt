@@ -4,22 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      a
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        &
-        Label : CLASS
-          StdClass
-        Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $b
-      Label : ARGUMENT
-        &
+        Typehint
         Label : CLASS
           StdClass
         Label : VARIABLE
@@ -28,5 +16,17 @@ Label : CODE
             null
           Label : LEFT
             $x
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          StdClass
+        Label : VARIABLE
+          =
+          Label : RIGHT
+            null
+          Label : LEFT
+            $b
+    Label : NAME
+      a
     Label : BLOCK
       void

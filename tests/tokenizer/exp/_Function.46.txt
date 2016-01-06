@@ -10,37 +10,37 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : PUBLIC
-          public
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : NAME
-          TRUE
-        Label : STATIC
-          static
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              TRUE
-      Label : ELEMENT
-        function
-        Label : PUBLIC
-          public
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
         Label : NAME
           FALSE
-        Label : STATIC
-          static
         Label : BLOCK
           ;
           Label : ELEMENT
             return
             Label : RETURN
               FALSE
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : NAME
+          TRUE
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              TRUE
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
