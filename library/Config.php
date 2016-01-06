@@ -145,6 +145,7 @@ class Config {
                                'vector'        => 1,
                                'classes'       => 1,
                                'test'          => 1,
+                               'update'        => 1,
                                );
                                
     static private $stack = array();
