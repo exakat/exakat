@@ -32,7 +32,8 @@ class Staticconstant extends TokenAuto {
                                    -1 => array('atom'      => Staticproperty::$operands),
                                     0 => array('token'     => Staticconstant::$operators),
                                     1 => array('token'     => array_merge(Constant::$operators, _Include::$operators,
-                                                                          _Dowhile::$operators,  _While::$operators)),
+                                                                          _Dowhile::$operators,  _While::$operators,
+                                                                          _Const::$operators)),
                                     2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
                                  );
         

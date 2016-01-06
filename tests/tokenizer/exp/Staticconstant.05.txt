@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ::
+      Label : CLASS
+        A
+      Label : CONSTANT
+        coNSt
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ::
+      Label : CLASS
+        A
+      Label : CONSTANT
+        const
+    Label : LEFT
+      $x
