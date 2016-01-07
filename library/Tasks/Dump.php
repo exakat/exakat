@@ -79,7 +79,12 @@ SQL;
         $this->stmtResultsCounts = $sqlite->prepare($sqlQuery);
 
         $themes = array();
-        foreach($this->themes as $thema) {
+        if ($config->thema !== null) {
+            $toProcess = array($config->thema);
+        } else {
+            $toProcess = $this->themes;
+        }
+        foreach($toProcess as $thema) {
             display('Processing thema "'.$thema.'"');
             $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
 
