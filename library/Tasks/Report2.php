@@ -57,7 +57,7 @@ class Report2 extends Tasks {
         }
 
         $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
-        $dump = new \Sqlite3($dumpFile);
+        $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
 
@@ -67,7 +67,7 @@ class Report2 extends Tasks {
             sleep(rand(1,3));
             display("No Dump finish signal ($max). Waiting\n");
 
-            $dump = new \Sqlite3($dumpFile);
+            $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
 
             $res = $dump->query($ProjectDumpSql);
             $row = $res->fetchArray(\SQLITE3_NUM);
