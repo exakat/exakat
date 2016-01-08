@@ -43,16 +43,17 @@ class _Use extends TokenAuto {
         $this->checkAuto();
 
     // use \a\b;
-        $this->conditions = array( 0 => array('token'     => static::$operators,
-                                              'checkFor'  => array('Identifier', 'Nsname', 'As')),
-                                   1 => array('atom'      => array('Identifier', 'Nsname', 'As')),
-                                   2 => array('token'     => array('T_COMMA', 'T_OPEN_CURLY', 'T_SEMICOLON'))
+        $this->conditions = array( 0 => array('token'    => static::$operators,
+                                              'checkFor' => array('Identifier', 'Nsname', 'As')),
+                                   1 => array('atom'     => array('Identifier', 'Nsname', 'As')),
+                                   2 => array('token'    => array('T_COMMA', 'T_OPEN_CURLY', 'T_SEMICOLON', 'T_INLINE_HTML'))
                                  );
         
-        $this->actions = array('makeFromList' => 'USE',
-                               'atom'         => 'Use',
-                               'keepIndexed'  => true,
-                               'cleanIndex'   => true
+        $this->actions = array('makeFromList'       => 'USE',
+                               'atom'               => 'Use',
+                               'keepIndexed'        => true,
+                               'cleanIndex'         => true,
+                               'addSemicolon'       => 'it'
                                );
         $this->checkAuto();
 
@@ -64,12 +65,12 @@ class _Use extends TokenAuto {
                                    3 => array('token'     => 'T_CLOSE_CURLY'),
                                  );
         
-        $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'BLOCK',
-                                                       3 => 'DROP'),
+        $this->actions = array('transform'          => array(1 => 'DROP',
+                                                             2 => 'BLOCK',
+                                                             3 => 'DROP'),
                                'addAlwaysSemicolon' => 'it',
-                               'makeBlock'    => 'BLOCK',
-                               'cleanIndex'   => true
+                               'makeBlock'          => 'BLOCK',
+                               'cleanIndex'         => true
                                );
         $this->checkAuto();
 

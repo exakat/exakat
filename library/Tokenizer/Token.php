@@ -65,7 +65,7 @@ class Token {
                                    87 => '_As',
                                    20 => '_Continue',
                                    23 => '_New',
-                                   25 => 'Nsname',
+//                                   25 => 'Nsname',
                                    26 => '_Namespace',
                                    27 => '_Use',
                                    28 => 'ArrayNS',
@@ -278,7 +278,7 @@ class Token {
     } else {
         isDefault = true;
         if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
+            fullcodealias = fullcode.out('SUBNAME').filter{ it.rank == 0}.next().code.toLowerCase();
         } else {
             fullcodealias = fullcode.code.toLowerCase();
         }
@@ -344,7 +344,7 @@ g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').filter{ it.
 };
 ", "
 // Const (out of a class) with define
-g.idx('atoms')[['atom':'Functioncall']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('rank', 0).as('name')
+g.idx('atoms')[['atom':'Functioncall']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').filter{ it.rank == 0}.as('name')
     .has('atom', 'String').hasNot('noDelimiter', null)
     .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
 .each{
@@ -419,7 +419,7 @@ g.idx('atoms')[['atom':'Class']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
     } else {
         isDefault = true;
         if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
+            fullcodealias = fullcode.out('SUBNAME').filter{ it.rank == 0}.next().code.toLowerCase();
         } else {
             fullcodealias = fullcode.code.toLowerCase();
         }
@@ -453,7 +453,7 @@ g.idx('atoms')[['atom':'Interface']].out('IMPLEMENTS', 'EXTENDS').sideEffect{ful
     } else {
         isDefault = true;
         if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
+            fullcodealias = fullcode.out('SUBNAME').filter{ it.rank == 0}.next().code.toLowerCase();
         } else {
             fullcodealias = fullcode.code.toLowerCase();
         }
@@ -486,7 +486,7 @@ g.idx('atoms')[['atom':'Trait']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
     } else {
         isDefault = true;
         if (fullcode.token == 'T_NS_SEPARATOR') {
-            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
+            fullcodealias = fullcode.out('SUBNAME').filter{ it.rank == 0}.next().code.toLowerCase();
         } else {
             fullcodealias = fullcode.code.toLowerCase();
         }

@@ -339,6 +339,109 @@ class Load extends Tasks {
                                                         ->save();
 
                     $to_index = false;
+                } elseif ($token[3] == 'T_NS_SEPARATOR' || 
+                          (($token[3] == 'T_STRING' || $token[3] == 'T_NAMESPACE') && is_array($tokens[$id + 1]) && 
+                           'T_NS_SEPARATOR' === $this->php->getTokenname($tokens[$id + 1][0]))) {
+
+                    if ($token[3] == 'T_NS_SEPARATOR') {
+                        // Then the NSname itself
+                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_NS_SEPARATOR')
+                                                            ->setProperty('code', '\\')
+                                                            ->setProperty('line', $line)
+                                                            ->setProperty('atom', 'Nsname')
+                                                            ->setProperty('modifiedBy', 'bin/load30')
+                                                            ->save();
+                        $nsname = $T[$Tid];
+                        ++$Tid;
+                        $fullcode = '';
+                        $rank = -1;
+    
+                        $theToken = $token[3];
+                        $f = 0;
+                    } else {
+                        // Starting with a a\b\c
+                        $rank = 0;
+                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_STRING')
+                                                            ->setProperty('code', $token[1])
+                                                            ->setProperty('fullcode', $token[1])
+                                                            ->setProperty('line', $line)
+                                                            ->setProperty('rank', 0)
+                                                            ->setProperty('absolutens', 'true')
+                                                            ->setProperty('atom', 'Identifier')
+                                                            ->setProperty('modifiedBy', 'bin/load30')
+                                                            ->save();
+                        ++$Tid;
+
+                        // Then the NSname itself
+                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_NS_SEPARATOR')
+                                                            ->setProperty('code', '\\')
+                                                            ->setProperty('line', $line)
+                                                            ->setProperty('atom', 'Nsname')
+                                                            ->setProperty('modifiedBy', 'bin/load30')
+                                                            ->save();
+                        $nsname = $T[$Tid];
+                        ++$Tid;
+
+                        $nsname->relateTo($T[$Tid - 2], 'SUBNAME')->save();
+                        $fullcode = $token[1];
+
+                        $theToken = 'T_NS_SEPARATOR';
+                        $f = 1;
+                    }
+
+                    while ($theToken == 'T_NS_SEPARATOR') {
+                        ++$f;
+                        
+                        // use a\b\{ grouping }
+                        if (is_string($tokens[$id + $f]) && $tokens[$id + $f] == '{') {
+                            break 1;
+                        }
+
+                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_STRING')
+                                                            ->setProperty('code', $tokens[$id + $f][1])
+                                                            ->setProperty('fullcode', $tokens[$id + $f][1])
+                                                            ->setProperty('line', $line)
+                                                            ->setProperty('rank', ++$rank)
+                                                            ->setProperty('atom', 'Identifier')
+                                                            ->setProperty('modifiedBy', 'bin/load30')
+                                                            ->save();
+                        $nsname->relateTo($T[$Tid], 'SUBNAME')->save();
+                        ++$Tid;
+                        $fullcode .= '\\' . $tokens[$id + $f][1];
+
+                        ++$f;
+                        if (is_array($tokens[$id + $f])) {
+                            $theToken = $this->php->getTokenname($tokens[$id + $f][0]);
+                        } else {
+                            $theToken = 'T_NOT_NS_SEPARATOR';
+                        }
+                    }
+                    
+                    $nsname->setProperty('fullcode', $fullcode)
+                           ->save();
+
+                    $previous->relateTo($nsname, 'NEXT')->save();
+                    $previous = $nsname;
+                    $regexIndex['Functioncall']->relateTo($nsname, 'INDEXED')->save();
+
+                    if (is_string($tokens[$id + $f]) && $tokens[$id + $f] == '{') {
+                        if (is_array($tokens[$id + $f - 1]) && $this->php->getTokenname($tokens[$id + $f -1][0]) == 'T_NS_SEPARATOR') {
+                            $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_NS_SEPARATOR')
+                                                                ->setProperty('code', '\\')
+                                                                ->setProperty('line', $line)
+                                                                ->setProperty('modifiedBy', 'bin/load30')
+                                                                ->save();
+                            $previous->relateTo($T[$Tid], 'NEXT')->save();
+                            $previous = $T[$Tid];
+                            ++$Tid;
+                        } else {
+//                            die('YEPS    ');
+                        }
+                    }
+
+                    $id += $f - 1;
+
+                    continue;
                 } elseif ($token[3] == 'T_OPEN_TAG' &&
                           !isset($tokens[$id + 1])) {
                     if ($previous->getProperty('token') != 'T_SEMICOLON') {

@@ -2996,12 +2996,12 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
                 $classes = "'".$conditions['checkFor']."'";
             }
 
-            $finalTokens = "'T_SEMICOLON', 'T_OPEN_CURLY'";
+            $finalTokens = "'T_SEMICOLON', 'T_OPEN_CURLY', 'T_INLINE_HTML'";
             $queryConditions[] = <<<GREMLIN
 filter{
     it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
     .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any()
-                             }
+      }
 GREMLIN;
 
             unset($conditions['checkFor']);

@@ -28,6 +28,8 @@ class Nsname extends TokenAuto {
     static public $atom = 'Nsname';
 
     public function _check() {
+        // Disabled.
+        return true;
         // @note \a\b\c (\ initial)
         $this->conditions = array( -2 => array('filterOut' => self::$operators),
                                    -1 => array('notToken'  => 'T_NS_SEPARATOR'),
@@ -42,21 +44,6 @@ class Nsname extends TokenAuto {
                                );
         $this->checkAuto();
 
-/*
-        // @note use a\{ (for grouped Use)
-        $this->conditions = array( -2 => array('token'     => 'T_USE'),
-                                   -1 => array('atom'      => 'Identifier'),
-                                    0 => array('token'     => self::$operators,
-                                               'atom'      => 'none'),
-                                    1 => array('token'     => 'T_OPEN_CURLY'),
-        );
-
-        $this->actions = array('transform'    => array( 0 => 'DROP'),
-                               'atom'         => 'Nsname',
-                               'keepIndexed'  => true,
-                               );
-        $this->checkAuto();
-*/
         return false;
     }
 

@@ -49,7 +49,7 @@ class Cypher {
     const ATTRIBUTES = array('index',    'root',      'hidden',      'association', 'in_for',
                              'in_quote', 'delimiter', 'noDelimiter', 'rank',        'fullcode',
                              'block',    'bracket',   'filename',    'tag',         'atom',
-                             'isFunctionDefinition');
+                             'isFunctionDefinition', 'absolutens');
     
     public function __construct() {
         $this->config = \Config::factory();
@@ -104,7 +104,7 @@ CYPHER;
             
             if ($attribute == 'rank') {
                 $toAttribute = 'toInt(csvLine.rank)';
-            } elseif (in_array($attribute, array('index', 'hidden', 'in_quote', 'isFunctionDefinition', 'bracket', 'block', 'in_for', 'root'))) {
+            } elseif (in_array($attribute, array('index', 'hidden', 'in_quote', 'isFunctionDefinition', 'bracket', 'absolutens', 'block', 'in_for', 'root'))) {
                 $toAttribute = '(csvLine.'.$attribute.' = "true")';
             } else {
                 $toAttribute = "csvLine.$attribute";
@@ -130,7 +130,8 @@ CYPHER;
         $relations = array('file'    => 'FILE',
                            'element' => 'ELEMENT',
                            'next'    => 'NEXT',
-                           'indexed' => 'INDEXED');
+                           'indexed' => 'INDEXED',
+                           'subname' => 'SUBNAME');
         foreach($relations as $name => $relation) {
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 200
@@ -148,6 +149,7 @@ CYPHER;
 
             display('Loaded link '.$name);
         }
+
         $this->cleanCsv();
         display('Cleaning CSV');
 
@@ -163,6 +165,7 @@ CYPHER;
         unlink($this->config->projects_root.'/rels.cypher.element.csv');
         unlink($this->config->projects_root.'/rels.cypher.file.csv');
         unlink($this->config->projects_root.'/rels.cypher.indexed.csv');
+        unlink($this->config->projects_root.'/rels.cypher.subname.csv');
     }
     
     public function save_chunk() {
@@ -224,6 +227,7 @@ CYPHER;
                                      'FILE'    => fopen($this->config->projects_root.'/rels.cypher.file.csv',    'a'),
                                      'INDEXED' => fopen($this->config->projects_root.'/rels.cypher.indexed.csv', 'a'),
                                      'ELEMENT' => fopen($this->config->projects_root.'/rels.cypher.element.csv', 'a'),
+                                     'SUBNAME' => fopen($this->config->projects_root.'/rels.cypher.subname.csv', 'a'),
                                      );
         }
         if (static::$file_saved == 0) {
