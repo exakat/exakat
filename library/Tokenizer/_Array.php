@@ -45,7 +45,7 @@ class _Array extends TokenAuto {
                                      );
         } else {
             // PHP 5.6 and -
-            $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, Nsname::$operators)),
+            $this->conditions = array( -2 => array('notToken'      => _Namespace::$operators),
                                        -1 => array('atom'          => static::$allowedObject),
                                         0 => array('token'         => static::$operators,
                                                    'checkForArray' => true),

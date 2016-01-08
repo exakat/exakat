@@ -28,6 +28,7 @@ class _Use extends TokenAuto {
     static public $atom = 'Use';
 
     public function _check() {
+
     // use \a\b {} (grouping)
         $this->conditions = array( 0 => array('token' => static::$operators),
                                    1 => array('atom'  => array('Identifier', 'Nsname')),
@@ -42,18 +43,31 @@ class _Use extends TokenAuto {
                                );
         $this->checkAuto();
 
-    // use \a\b;
+    // use \a\b; (Finished)
         $this->conditions = array( 0 => array('token'    => static::$operators,
                                               'checkFor' => array('Identifier', 'Nsname', 'As')),
                                    1 => array('atom'     => array('Identifier', 'Nsname', 'As')),
-                                   2 => array('token'    => array('T_COMMA', 'T_OPEN_CURLY', 'T_SEMICOLON', 'T_INLINE_HTML'))
+                                   2 => array('token'    => array('T_SEMICOLON', 'T_INLINE_HTML'))
+                                 );
+        
+        $this->actions = array('makeFromList'       => 'USE',
+                               'atom'               => 'Use',
+                               'cleanIndex'         => true,
+                               'addSemicolon'       => 'it'
+                               );
+        $this->checkAuto();
+
+    // use \a\b { 
+        $this->conditions = array( 0 => array('token'    => static::$operators,
+                                              'checkFor' => array('Identifier', 'Nsname', 'As')),
+                                   1 => array('atom'     => array('Identifier', 'Nsname', 'As')),
+                                   2 => array('token'    => array('T_COMMA', 'T_OPEN_CURLY'))
                                  );
         
         $this->actions = array('makeFromList'       => 'USE',
                                'atom'               => 'Use',
                                'keepIndexed'        => true,
-                               'cleanIndex'         => true,
-                               'addSemicolon'       => 'it'
+                               'cleanIndex'         => true
                                );
         $this->checkAuto();
 

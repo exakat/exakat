@@ -46,8 +46,7 @@ class Logical extends TokenAuto {
                                      Concatenation::$operators,  _Instanceof::$operators,
                                      Preplusplus::$operators,    Not::$operators,
                                      _New::$operators,           Property::$operators,
-                                     Staticproperty::$operators, Nsname::$operators,
-                                     Noscream::$operators);
+                                     Staticproperty::$operators, Noscream::$operators);
         } else {
             // PHP 5.6 and -
             $filterOut = array_merge(Comparison::$operators,     Bitshift::$operators,
@@ -55,8 +54,8 @@ class Logical extends TokenAuto {
                                      Concatenation::$operators,  _Instanceof::$operators,
                                      Preplusplus::$operators,    Not::$operators,
                                      _New::$operators,           Property::$operators,
-                                     Staticproperty::$operators, Nsname::$operators,
-                                     Noscream::$operators,       _Yield::$operators);
+                                     Staticproperty::$operators, _Yield::$operators,
+                                     Noscream::$operators       );
         }
 
         // boolean comparison (||, &&)
