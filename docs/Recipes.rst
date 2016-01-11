@@ -47,8 +47,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 04 Jan 2016 18:00:47 +0000
-.. comment: Generation hash : dd2f45698ecc60f393b906b465ebd638de865d2c
+.. comment: Generation date : Mon, 11 Jan 2016 10:04:32 +0000
+.. comment: Generation hash : 9b2d01ea8c07794971a11285ad5b6223b4e8cead
 
 
 .. _analyze:
@@ -56,7 +56,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 219 analysis
+Total : 220 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -207,6 +207,7 @@ Total : 219 analysis
 * :ref:`Strict comparison with booleans <strict-comparison-with-booleans>`
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strpos Comparison <strpos-comparison>`
+* :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Switch Without Default <switch-without-default>`
 * :ref:`Throws An Assignement <throws-an-assignement>`

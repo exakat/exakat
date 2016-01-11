@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 04 Jan 2016 18:00:47 +0000
-.. comment: Generation hash : dd2f45698ecc60f393b906b465ebd638de865d2c
+.. comment: Generation date : Mon, 11 Jan 2016 10:04:32 +0000
+.. comment: Generation hash : 9b2d01ea8c07794971a11285ad5b6223b4e8cead
 
 
 .. _$http\_raw\_post\_data:
@@ -2833,6 +2833,17 @@ This analyzer list all the strpos function that are directly compared with == or
 
 clearPHP: `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__
 
+
+This analyzer is part of the following recipes :  :ref:`Analyze`
+
+
+.. _switch-to-switch:
+
+Switch To Switch
+################
+
+
+The following structures are based on if / elseif / else. Since they have more than three conditions (not withstanding the final else), it is recommended to use the switch structure, so as to make this more readable.
 
 This analyzer is part of the following recipes :  :ref:`Analyze`
 
