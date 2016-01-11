@@ -27,11 +27,7 @@ class OnePage extends Tasks {
     private $project_dir = '.';
     private $config = null;
     
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
-                              'OneFile');
-    const TOTAL_STEPS = 11; //
-
-    protected $reports = array('Onepage' => array('Json'   => 'report'));
+    const TOTAL_STEPS = 11; 
     
     public function run(\Config $config) {
         $this->config = $config;
@@ -39,8 +35,8 @@ class OnePage extends Tasks {
         $progress = 0;
         
         $begin = microtime(true);
-        $project = 'onepage';
-        $this->project_dir = $config->projects_root.'/projects/'.$project;
+        $path = $config->projects_root.'/projects/onepage/log';
+        $this->project_dir = $config->projects_root.'/projects/onepage/';
 
         // checking for installation
         if (!file_exists($this->project_dir)) {
@@ -54,98 +50,115 @@ class OnePage extends Tasks {
             die("Can't find the file '$config->filename'. Aborting\n");
         }
 
-        copy($config->filename, $config->projects_root.'/projects/'.$project.'/code/onepage.php');
-        $this->reports['Onepage']['Json'] = 'onepage';
-        
-        $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
+        // todo : check that there is indeed this project or create it.
+        if (!is_file($config->filename) || !is_readable($config->filename)) {
+            die("'$config->filename' must be a readable file. Aborting\n");
+        }
+
+        $this->cleanLog($path);
+
+        copy($config->filename, $config->projects_root.'/projects/onepage/code/onepage.php');
+
         $this->logTime('Start');
 
-        $datastorePath = $config->projects_root.'/projects/'.$project.'/datastore.sqlite';
+        $datastorePath = $config->projects_root.'/projects/onepage/datastore.sqlite';
         if (file_exists($datastorePath)) {
             unlink($datastorePath);
         }
         
-        // cleaning datastore
-        $this->cleanLog($config->projects_root.'/projects/'.$project.'/log/');
-
         unset($this->datastore);
-        $this->datastore = new \Datastore($config);
+        $this->datastore = new \Datastore($config, \Datastore::CREATE);
         
-        $this->datastore->cleanTable('hash');
         $audit_start = time();
-        $this->datastore->addRow('hash', array('audit_start' => $audit_start,
+        $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => \Exakat::VERSION,
-                                               'exakat_build' => \Exakat::BUILD,
+                                               'exakat_build'   => \Exakat::BUILD,
                                                ));
 
-        $thread = new \Thread();
-        display("Running project '$project'\n");
+        display("Cleaning DB\n");
+        $task = new CleanDb();
+        $task->run($config);
 
-        shell_exec('php '.$config->executable.' load -v -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
+        $this->logTime('CleanDb');
+
+        display("Running files\n");
+        $task = new Files();
+        $task->run($config);
+
+        $this->logTime('Files');
+
+        display("Running project 'onepage'\n");
+
+        $task = new Load();
+        $task->run($config);
+
         display("Project loaded\n");
-        $this->updateProgress($progress++);
         $this->logTime('Loading');
 
-        $res = shell_exec('php '.$config->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
+        $task = new Build_root();
+        $task->run($config);
+
         display("Build root\n");
-        $this->updateProgress($progress++);
         $this->logTime('Build_root');
 
-        $res = shell_exec('php '.$config->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
-        if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
-            file_put_contents($config->projects_root.'/log/tokenizer_error.log', $res);
-            die();
-        }
+        $task = new Tokenizer();
+        $task->run($config);
 
         $this->logTime('Tokenizer');
         display("Project tokenized\n");
-        $this->updateProgress($progress++);
 
-        foreach($this->themes as $theme) {
-            $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
-            shell_exec('php '.$config->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
-mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
-            display("Analyzing $theme\n");
-            $this->updateProgress($progress++);
+        try {
+            $task = new Analyze();
+            $task->run($config);
+            
+            rename($config->projects_root.'/projects/onepage/log/analyze.log', $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
+        } catch (\Exception $e) {
+            echo "Error while running the Analyze $theme \n",
+                 $e->getMessage();
+            file_put_contents($config->projects_root.'/projects/onepage/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+            die();
         }
 
         display("Project analyzed\n");
-        $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
-        shell_exec('php '.$config->executable.' onepagereport -p onepage');
+        $b1 = microtime(true);
+        $task = new Dump();
+        $task->run($config);
+        display("Project dumped\n");
+        $e1 = microtime(true);
+        print "Dump + Report : ".number_format(($e1 - $b1) * 1000, 2)." ms\n";
+
+        $b1 = microtime(true);
+        $task = new Report2();
+        $task->run($config);
+        display("Project reported\n");
         $this->logTime('Report');
+        $e1 = microtime(true);
+        print "Dump + Report : ".number_format(($e1 - $b1) * 1000, 2)." ms\n";
+
+        $b1 = microtime(true);
+        $task = new EmptyTask();
+        $task->run($config);
+        display("Empty task\n");
+        $this->logTime('Report');
+        $e1 = microtime(true);
+        print "Dump + Report : ".number_format(($e1 - $b1) * 1000, 2)." ms\n";
 
         display("Project reported\n");
-        $this->updateProgress($progress++);
 
-        unlink($config->projects_root.'/projects/'.$project.'/code/onepage.php');
+        unlink($config->projects_root.'/projects/onepage/code/onepage.php');
 
         $audit_end = time();
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                'audit_length' => $audit_end - $audit_start));
 
         $this->logTime('Final');
-        $this->updateProgress($progress++);
         display("End 2\n");
         $end = microtime(true);
-        display('Total time : '.number_format($end - $begin, 2)."s\n");
+        print('Total time : '.number_format($end - $begin, 2)."s\n");
         
         $this->logTime('Files');
-    }
-
-    private function updateProgress($status) {
-        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
-        $progress->progress = number_format(100 * $status / self::TOTAL_STEPS, 0);
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
-    }
-
-    private function cleanLog($path) {
-        // cleaning log directory (possibly logs)
-        $logs = glob("$path/*");
-        foreach($logs as $log) {
-            unlink($log);
-        }
     }
 
     private function logTime($step) {
@@ -153,6 +166,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
 
         if ($log === null) {
             $log = fopen($this->project_dir.'/log/project.timing.csv', 'w+');
+            fwrite($log, "Yes $step\n");
         }
         $end = microtime(true);
         if ($begin === null) {

@@ -53,6 +53,15 @@ abstract class Tasks {
     }
     
     public abstract function run(\Config $config);
+
+    protected function cleanLog($path) {
+        // cleaning log directory (possibly logs)
+        $logs = glob("$path/*");
+        foreach($logs as $log) {
+            unlink($log);
+        }
+    }
+
 }
 
 ?>

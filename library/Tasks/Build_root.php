@@ -82,7 +82,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
-                       "Rawstring", "Float", "Boolean", "Void", "File"]}.each{
+                       "Rawstring", "Float", "Boolean", "Void", "File", "Nsname"]}.each{
     g.idx("atoms").put("atom", it.atom, it);
     if (it.atom == 'Integer') {
         if (it.code.length() == 1) { // number

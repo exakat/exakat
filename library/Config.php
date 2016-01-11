@@ -112,41 +112,41 @@ class Config {
                                  );
 
         private static $COMMANDS = array('analyze'       => 1, 
-                               'build_root'    => 1, 
-                               'constantes'    => 1, 
-                               'clean'         => 1, 
-                               'cleandb'       => 1, 
-                               'dump'          => 1, 
-                               'doctor'        => 1, 
-                               'errors'        => 1,
-                               'export'        => 1,
-                               'files'         => 1, 
-                               'findextlib'    => 1,
-                               'help'          => 1, 
-                               'init'          => 1, 
-                               'jobqueue'      => 1, 
-                               'queue'         => 1, 
-                               'load'          => 1, 
-                               'log2csv'       => 1, 
-                               'magicnumber'   => 1, 
-                               'project'       => 1, 
-                               'projectspip'   => 1, 
-                               'phploc'        => 1, 
-                               'report_all'    => 1,
-                               'report'        => 1, 
-                               'report2'       => 1, 
-                               'results'       => 1, 
-                               'stat'          => 1, 
-                               'status'        => 1, 
-                               'tokenizer'     => 1, 
-                               'version'       => 1,
-                               'onepage'       => 1,
-                               'onepagereport' => 1,
-                               'vector'        => 1,
-                               'classes'       => 1,
-                               'test'          => 1,
-                               'update'        => 1,
-                               );
+                                         'build_root'    => 1, 
+                                         'constantes'    => 1, 
+                                         'clean'         => 1, 
+                                         'cleandb'       => 1, 
+                                         'dump'          => 1, 
+                                         'doctor'        => 1, 
+                                         'errors'        => 1,
+                                         'export'        => 1,
+                                         'files'         => 1, 
+                                         'findextlib'    => 1,
+                                         'help'          => 1, 
+                                         'init'          => 1, 
+                                         'jobqueue'      => 1, 
+                                         'queue'         => 1, 
+                                         'load'          => 1, 
+                                         'log2csv'       => 1, 
+                                         'magicnumber'   => 1, 
+                                         'project'       => 1, 
+                                         'projectspip'   => 1, 
+                                         'phploc'        => 1, 
+                                         'report_all'    => 1,
+                                         'report'        => 1, 
+                                         'report2'       => 1, 
+                                         'results'       => 1, 
+                                         'stat'          => 1, 
+                                         'status'        => 1, 
+                                         'tokenizer'     => 1, 
+                                         'version'       => 1,
+                                         'onepage'       => 1,
+                                         'onepagereport' => 1,
+                                         'vector'        => 1,
+                                         'classes'       => 1,
+                                         'test'          => 1,
+                                         'update'        => 1,
+                                         );
                                
     static private $stack = array();
      
@@ -367,6 +367,16 @@ class Config {
         if (count($args) != 0) {
             $c = count($args);
             display( 'Found '.$c.' argument'. $c > 1 ? 's' : '' .' that '.$c > 1 ? 'are' : 'is' ." not understood.\n\n\"".implode('", "', $args)."\"\n\nIgnoring ". $c > 1 ? 'them all' : 'it'. ".\n");
+        }
+
+        // Special case for onepage command. It will only work on 'onepage' project
+        if ($this->commandline['command'] == 'onepage') {
+            $this->commandline['project']   = 'onepage';
+            $this->commandline['thema']     = 'OneFile';
+            $this->commandline['format']    = 'Json';
+            $this->commandline['file']      = 'onepage';
+            $this->commandline['norefresh'] = true;
+            
         }
     }
 }
