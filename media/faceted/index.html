@@ -112,9 +112,10 @@
 			<div ng-repeat="group in facetGroups" class="filter">
 				<h4>{{group.name}} ({{ group.facets.length}})</h4>
                 <select name="multipleSelect" id="multipleSelect" ng-model="useFacets[group.name]" multiple>
-                  <option ng-repeat="option in group.facets | orderBy : option" value="{{option}}">{{option}}</option>
+                   <option ng-repeat="(name, count) in group.facets | orderBy : option" value="{{name}}">{{name + ' (' + count + ')'}}</option>
                 </select><br />
 			</div>	
+		Search: <input name="searchQuery" type="text" class="search-input" ng-model="query"/><a ng-if="query" class="clearQuery" ng-click="clearQuery()">&times;</a>
 		</section>
 
 		<section class="right">
@@ -132,7 +133,7 @@
 						<th>File</th>
 						<th>Code</th>
 						<th>Severity</th>
-						<th>Fix time</th>
+						<th>Impact</th>
 					</tr>
 					<tr ng-repeat="item in filteredItems | filter:query">
 						<td>{{item.error}}</td>

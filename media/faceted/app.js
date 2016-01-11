@@ -158,9 +158,19 @@ myApp.controller('MainCtrl', function($scope, Helpers) {
 	// The HTML template will iterate over the facetGroups array to generate filter options.
 	// (Alternately, we could pre-define the facets we want to use)
 	for (var i = 0; i < facetGroupNamesLen; i++) {
+	    var facets = {};
+	    for (var p in $scope.items) { //, facetGroupNames[i]
+	        var n = $scope.items[p][facetGroupNames[i]];
+	        if (facets.hasOwnProperty(n)) {
+    	        facets[n]++;
+	        } else {
+    	        facets[n] = 1;
+    	    }
+        }
 		var facetGroupObj = {
 				name: facetGroupNames[i],
-				facets: Helpers.uniq($scope.items, facetGroupNames[i])
+				facets: facets,
+				count: i
 			};
 
 		$scope.facetGroups.push(facetGroupObj);
