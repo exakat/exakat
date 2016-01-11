@@ -1,4 +1,4 @@
-Version 0.4.4 (Crown Prince Mo'ang, Coming up)
+Version 0.4.5 ( Immortal of Tiger Power, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,27 @@ Version 0.4.4 (Crown Prince Mo'ang, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.4.4 (Crown Prince Mo'ang, Coming up)
++ Architecture
+    + Reviewed OnePage analysis
+    + Dump as now an option to select Recipes
+    + Dump forces line to be integer
+    + Added a task to update a project's code (git only ATM)
++ Report
+    + Better check when opening database for report (more to come)
+    + FacetedJson (and Json) report ignore non-unicode lines
+    + Added 'search' box to facetedJson
++ Analyzer
+    + Switch To Switch suggestions
+    + Unused arguments patch for arguments used in methods
+    + Unused properties doesn't mistake function static variable
++ Tokenizer
+    + All Nsnames are now build at Loading time
+    + Constants may be calld 'const'
+    + More relaxed syntax for methods (exit, include, eval...)
+    + Foreach may use coalesce
+    + Fixed an edge case with Closures in functioncall
 
 Version 0.4.3 (Tuolong, 2015-01-04)
 + Architecture
