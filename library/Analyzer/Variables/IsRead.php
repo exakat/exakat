@@ -119,7 +119,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->hasIn('METHOD') 
+             ->hasIn('METHOD')
              ->back('first');
         $this->prepareQuery();
 

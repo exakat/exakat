@@ -27,7 +27,7 @@ class OnePage extends Tasks {
     private $project_dir = '.';
     private $config = null;
     
-    const TOTAL_STEPS = 11; 
+    const TOTAL_STEPS = 11;
     
     public function run(\Config $config) {
         $this->config = $config;

@@ -56,7 +56,7 @@ class Update extends Tasks {
                 
                 break;
 
-            default : 
+            default :
                 display('No VCS found to update (Only git is supported. Ask exakat to add more).');
         }
     }

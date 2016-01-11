@@ -339,8 +339,8 @@ class Load extends Tasks {
                                                         ->save();
 
                     $to_index = false;
-                } elseif ($token[3] == 'T_NS_SEPARATOR' || 
-                          (($token[3] == 'T_STRING' || $token[3] == 'T_NAMESPACE') && is_array($tokens[$id + 1]) && 
+                } elseif ($token[3] == 'T_NS_SEPARATOR' ||
+                          (($token[3] == 'T_STRING' || $token[3] == 'T_NAMESPACE') && is_array($tokens[$id + 1]) &&
                            'T_NS_SEPARATOR' === $this->php->getTokenname($tokens[$id + 1][0]))) {
 
                     if ($token[3] == 'T_NS_SEPARATOR') {

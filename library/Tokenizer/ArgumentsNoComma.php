@@ -31,7 +31,7 @@ class ArgumentsNoComma extends Arguments {
         // @note function f($a) {}
         $this->conditions = array(-2 => array('token'     => 'T_FUNCTION'),
                                   -1 => array('notToken'  => array_merge(Addition::$operators, Multiplication::$operators,
-                                                                         Sequence::$operators, Arguments::$operators, 
+                                                                         Sequence::$operators, Arguments::$operators,
                                                                          array('T_OPEN_CURLY', 'T_OPEN_PARENTHESIS'))),
                                    0 => array('token'     => ArgumentsNoComma::$operators,
                                               'atom'      => 'none'),
