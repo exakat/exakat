@@ -127,6 +127,27 @@ class Methods {
         
         return $return;
     }
+
+    public function getInternalParameterType() {
+        $return = array();
+
+        $args = array('arg0', 'arg1');
+        foreach($args as $id => $arg) {
+            $query = <<<SQL
+SELECT $arg, lower(GROUP_CONCAT('\\' || name)) AS functions FROM args_type WHERE class='PHP' AND $arg IN ('int', 'array', 'bool','string') GROUP BY $arg
+SQL;
+            $res = $this->sqlite->query($query);
+            
+            $position = array();
+            while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+                $position[$row[$arg]] = explode(',', $row['functions']);
+            }
+            
+            $return[$id] = $position;
+        }
+
+        return $return;
+    }
 }
 
 ?>
