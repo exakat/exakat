@@ -1608,6 +1608,18 @@ GREMLIN
         return $this;
     }
 
+    public function isLiteral() {
+        $this->addMethod(<<<GREMLIN
+filter{ it.atom in ["Integer", "Boolean", "Magicconstant", "Float", "String", "Heredoc", "Function"] ||
+        (it.atom == 'Functioncall' && it.constante == true && it.token in ['T_ARRAY', 'T_OPEN_BRACKET'])
+}
+
+GREMLIN
+);
+        
+        return $this;
+    }
+    
     public function fetchContext($context = self::CONTEXT_OUTSIDE_CLOSURE) {
         $forClosure = "                    // This is make variables in USE available in the parent level
                     if (it.out('USE').out('ARGUMENT').retain([current]).any()) {
