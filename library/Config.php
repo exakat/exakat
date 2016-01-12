@@ -368,6 +368,10 @@ class Config {
             $c = count($args);
             display( 'Found '.$c.' argument'. $c > 1 ? 's' : '' .' that '.$c > 1 ? 'are' : 'is' ." not understood.\n\n\"".implode('", "', $args)."\"\n\nIgnoring ". $c > 1 ? 'them all' : 'it'. ".\n");
         }
+        
+        if (!isset($this->commandline['command'])) {
+            $this->commandline['command'] = 'help'; // Default behavior
+        }
 
         // Special case for onepage command. It will only work on 'onepage' project
         if ($this->commandline['command'] == 'onepage') {
