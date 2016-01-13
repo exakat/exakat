@@ -27,12 +27,21 @@ use Analyzer;
 
 class VariableArguments extends Analyzer\Analyzer {
     public function analyze() {
+        // Using function_get_args
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
-             ->fullnspath(array('\\func_get_arg', '\\func_get_args', '\\func_num_args'))
+             ->functioncallIs(array('\\func_get_arg', '\\func_get_args', '\\func_num_args'))
+             ->back('first');
+        $this->prepareQuery();
+        
+        // Using function_get_args
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIsIE('VARIABLE')
+             ->atomIs('Variable')
+             ->is('variadic', true)
              ->back('first');
         $this->prepareQuery();
     }

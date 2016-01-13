@@ -424,7 +424,8 @@ GREMLIN;
     }
     
     public function functioncallIs($fullnspath) {
-        $this->hasNoIn(array('METHOD', 'NEW'))
+        $this->atomIs('Functioncall')
+             ->hasNoIn(array('METHOD', 'NEW'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_EVAL'))
              ->fullnspath($this->makeFullNsPath($fullnspath));
 
