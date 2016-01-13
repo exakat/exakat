@@ -13,4 +13,8 @@ function squareArray(array &$a) {
 squareArray((getArray()));
 squareArray((getArray()), (f()));
 squareArray((getArray()), (f()), (f2()));
+
+(1) + (strtolower($x)); 
+
+(strtoupper($x));
 ?>

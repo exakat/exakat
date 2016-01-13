@@ -1,10 +1,11 @@
 <?php
 
-$expected     = array('squareArray(( getArray( )), ( f( )), ( f2( )))',
-                      'squareArray(( getArray( )), ( f( )))',
-                      'squareArray(( getArray( )))',
+$expected     = array( 'squareArray(( getArray( ) ))', 
+                       'squareArray(( getArray( ) ), ( f( ) ))', 
+                       'squareArray(( getArray( ) ), ( f( ) ), ( f2( ) ))'
 );
 
-$expected_not = array();
+$expected_not = array('(1) + (strtolower($x))',
+                      '(strtoupper($x))');
 
 ?>
