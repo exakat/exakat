@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('print ( $_GET[\'DOCUMENT_ROOT\'])',
-                      'print ( $_SERVER[\'UNKNOWN_INDEX\'])',
+$expected     = array('print($_GET[\'DOCUMENT_ROOT\'])',
+                      'print($_SERVER[\'UNKNOWN_INDEX\'])',
                       '\'ls \' . $_POST[\'DOCUMENT_ROOT\']',
                       '\'ls \' . $_SERVER[\'UNKNOWN_INDEX\'][\'a2\']',
                       '\'ls \' . $_POST[\'DOCUMENT_ROOT\'][\'a4\']',
