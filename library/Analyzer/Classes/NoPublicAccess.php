@@ -55,12 +55,6 @@ g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").filter{it.code 
         .unique()
 GREMLIN;
         $staticproperties = $this->query($gremlin);
-        $staticproperties = "['". join("', '", $staticproperties)."']";
-        $staticproperties = str_replace('\\', '\\\\', $staticproperties);
-        
-        if (strlen($staticproperties) > 10000) {
-            display('Warning : '.__CLASS__.' staticproperties are too long in '.__CLASS__);
-        }
         
         $this->atomIs('Visibility')
              ->hasOut('PUBLIC')
@@ -70,7 +64,7 @@ GREMLIN;
              ->goToClass()
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('ppp')
-             ->filter('!(fnp + "::" + it.propertyname in '.$staticproperties.')');
+             ->filter('!(fnp + "::" + it.propertyname in *** )', $staticproperties);
         $this->prepareQuery();
     }
 }

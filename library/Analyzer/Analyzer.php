@@ -798,12 +798,12 @@ GREMLIN;
         } else {
             $caseSensitive = '.toLowerCase()';
         }
-        
-        if (is_array($name)) {
-            $name = "['". join("', '", $name)."']";
-        }
 
-        $this->addMethod('filter{ it.'.$property.$caseSensitive.' in '.$name.'}');
+        if (is_array($name)) {
+            $this->addMethod('filter{ it.'.$property.$caseSensitive.' in *** }', $name);
+        } else {
+            $this->addMethod('filter{ it.'.$property.$caseSensitive.' != *** }', $name);
+        }
     
         return $this;
     }
@@ -816,11 +816,10 @@ GREMLIN;
         }
 
         if (is_array($name)) {
-            $name = "['". join("', '", $name)."']";
-            $name = str_replace('\\', '\\\\', $name);
+            $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' in *** )}', $name);
+        } else {
+            $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' != *** )}', $name);
         }
-
-        $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' in '.$name.')}');
     
         return $this;
     }
@@ -951,9 +950,9 @@ GREMLIN
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
-    public function filter($filter) {
+    public function filter($filter, $arguments = null) {
         $filter = $this->cleanAnalyzerName($filter);
-        $this->addMethod("filter{ $filter }");
+        $this->addMethod("filter{ $filter }", $arguments);
 
         return $this;
     }
