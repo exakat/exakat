@@ -349,6 +349,7 @@ class Load extends Tasks {
                                                             ->setProperty('code', '\\')
                                                             ->setProperty('line', $line)
                                                             ->setProperty('atom', 'Nsname')
+                                                            ->setProperty('absolutens', 'true')
                                                             ->setProperty('modifiedBy', 'bin/load30')
                                                             ->save();
                         $nsname = $T[$Tid];
@@ -366,7 +367,6 @@ class Load extends Tasks {
                                                             ->setProperty('fullcode', $token[1])
                                                             ->setProperty('line', $line)
                                                             ->setProperty('rank', 0)
-                                                            ->setProperty('absolutens', 'true')
                                                             ->setProperty('atom', 'Identifier')
                                                             ->setProperty('modifiedBy', 'bin/load30')
                                                             ->save();

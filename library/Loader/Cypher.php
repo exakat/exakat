@@ -49,7 +49,7 @@ class Cypher {
     const ATTRIBUTES = array('index',    'root',      'hidden',      'association', 'in_for',
                              'in_quote', 'delimiter', 'noDelimiter', 'rank',        'fullcode',
                              'block',    'bracket',   'filename',    'tag',         'atom',
-                             'isFunctionDefinition', 'absolutens');
+                             'isFunctionDefinition',  'absolutens');
     
     public function __construct() {
         $this->config = \Config::factory();
