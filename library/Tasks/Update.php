@@ -56,8 +56,28 @@ class Update extends Tasks {
                 
                 break;
 
+            // svn case
+            case file_exists($path.'/code/.svn') :
+                display('SVN update '.$config->project);
+                $res = shell_exec('cd '.$path.'/code/; svn update');
+                preg_match('/At revision (\d+)/', $res, $r);
+
+                display( "SVN updated to revision $r[1]");
+                
+                break;
+
+            // bazaar case
+            case file_exists($path.'/code/.bzr') :
+                display('Bazaar update '.$config->project);
+                $res = shell_exec('cd '.$path.'/code/; bzr update 2>&1');
+                preg_match('/revision (\d+)/', $res, $r);
+
+                display( "Bazaar updated to revision $r[1]");
+                
+                break;
+
             default :
-                display('No VCS found to update (Only git is supported. Ask exakat to add more).');
+                display('No VCS found to update (Only git, svn and bazaar are supported. Ask exakat to add more.');
         }
     }
 }
