@@ -114,6 +114,7 @@ INI;
         }
 
         shell_exec('chmod -R g+w '.$config->projects_root.'/projects/'.$project);
+        $repositoryDetails = parse_url($repositoryURL);
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
@@ -122,16 +123,16 @@ INI;
                     display('Empty initialization');
                     break 1;
                 
-                // Git
-                case ($config->git === true) :
-                    display('Git initialization');
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 >> /dev/null');
-                    break 1;
-
                 // SVN
-                case ($config->svn === true) :
+                case ($repositoryDetails['scheme'] == 'svn' || $config->svn === true) :
                     display('SVN initialization');
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
+                    break 1;
+
+                // Bazaar
+                case ($config->bzr === true) :
+                    display('Bazaar initialization');
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; bzr branch '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // HG
@@ -170,9 +171,16 @@ INI;
                     file_put_contents($config->projects_root.'/projects/'.$project.'/composer.json', $json);
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; composer -q install; mv vendor code');
                     break 1;
-            
+
+                // Git
+                // Git is last, as it will act as a default
+                case ($repositoryDetails['scheme'] == 'git' || $config->git === true) :
+                    display('Git initialization');
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 >> /dev/null');
+                    break 1;
+
                 default :
-                    print "No Initialization\n";
+                    display('No Initialization');
             }
         } elseif (file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             display( "Code folder is already there. Leaving it intact.\n");

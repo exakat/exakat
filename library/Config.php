@@ -59,6 +59,7 @@ class Config {
                                             
                                             'git'            => true,
                                             'svn'            => false,
+                                            'bzr'            => false,
                                             'hg'             => false,
                                             'composer'       => false,
                                             'tgz'            => false,
@@ -104,6 +105,7 @@ class Config {
 
                                  '-git'       => 'git',
                                  '-svn'       => 'svn',
+                                 '-bzr'       => 'bzr',
                                  '-hg'        => 'hg',
                                  '-composer'  => 'composer',
                                  '-tgz'       => 'tgz',
@@ -313,7 +315,7 @@ class Config {
         // git is default, so it should be unset if another is set
         $this->commandline['git'] = (boolean) (true ^ ((isset($this->commandline['svn'])       && $this->commandline['svn'])      || 
                                                        (isset($this->commandline['hg'])        && $this->commandline['hg'])       || 
-                                                       (isset($this->commandline['hg'])        && $this->commandline['hg'])       || 
+                                                       (isset($this->commandline['bzr'])       && $this->commandline['bzr'])      || 
                                                        (isset($this->commandline['composer'])  && $this->commandline['composer']) || 
                                                        (isset($this->commandline['tgz'])       && $this->commandline['tgz'])      || 
                                                        (isset($this->commandline['tbz'])       && $this->commandline['tbz'])      || 
