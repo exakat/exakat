@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array("include_once ( 'ecrire.php')");
+$expected     = array("include_once ( 'ecrire.php' )");
 
 $expected_not = array("include 'inc_version.php'",
                       "require('../inc_version.php')",

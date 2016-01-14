@@ -12,7 +12,7 @@ static::c1;
 self::c1;
 parent::c1;
 
-
+class x {
     function y () {
         static::m2();
         self::m2();
@@ -27,4 +27,5 @@ parent::c1;
         parent::c2;
 
     }
+}
 ?>

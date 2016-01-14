@@ -14,7 +14,7 @@ $expected     = array("constant('PHP_VERSION')",
                       '$c2::$$p2',
                       '${$o}::cms1( )',
                       '$c::$cms2( )',
-                      '$$dna[1]', 
+                      '$$dna', 
                       '$o3->$cm2( )'
                       );
 
