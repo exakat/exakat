@@ -51,10 +51,10 @@ class Doctor extends Tasks {
     private function checkPreRequisite($config) {
 // Compulsory
         // check for PHP
-        $stats['php']['version'] = phpversion();
-        $stats['php']['curl']    = extension_loaded('curl')        ? 'Yes' : 'No';
-        $stats['php']['sqlite3'] = extension_loaded('sqlite3')     ? 'Yes' : 'No';
-        $stats['php']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No';
+        $stats['PHP']['version'] = phpversion();
+        $stats['PHP']['curl']    = extension_loaded('curl')        ? 'Yes' : 'No';
+        $stats['PHP']['sqlite3'] = extension_loaded('sqlite3')     ? 'Yes' : 'No';
+        $stats['PHP']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No';
 
         // java
         $res = shell_exec('java -version 2>&1');
@@ -176,17 +176,6 @@ class Doctor extends Tasks {
         $res = getenv('NEO4J_HOME');
         $stats['neo4j']['$NEO4J_HOME'] = $res;
 
-        // zip
-        $res = shell_exec('zip -v  2>&1');
-        if (preg_match('/command not found/is', $res)) {
-            $stats['zip']['installed'] = 'No';
-        } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['zip']['installed'] = 'Yes';
-            $stats['zip']['version'] = $r[1];
-        } else {
-            $stats['zip']['error'] = $res;
-        }
-
         return $stats;
     }
     
@@ -201,12 +190,12 @@ class Doctor extends Tasks {
         if (!file_exists($config->projects_root.'/config/config.ini')) {
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             $ini = <<<INI
+; where and which PHP executable are available
 neo4j_host     = '127.0.0.1';
 neo4j_port     = '7474';
 neo4j_folder   = 'neo4j';
 neo4j_login    = 'admin';
 neo4j_password = 'admin';
-
 
 ; where and which PHP executable are available
 php          = {$_SERVER['_']}
@@ -217,8 +206,10 @@ php          = {$_SERVER['_']}
 ;php55        = /path/to/php55
 ;php56        = /path/to/php56
 ;php70        = /path/to/php70
+;php71        = /path/to/php71
 php$version        = {$_SERVER['_']}
 
+; Limit the size of a project to 100 k tokens (about 10 k LOC)
 token_limit = 100000
 INI;
             file_put_contents($config->projects_root.'/config/config.ini', $ini);
@@ -440,6 +431,16 @@ INI;
             $stats['svn']['optional'] = 'Yes';
         }
 
+        // bazaar
+        $res = trim(shell_exec('bzr --version 2>&1'));
+        if (preg_match('/Bazaar \(bzr\) ([0-9\.]+) /', $res, $r)) {//
+            $stats['bzr']['installed'] = 'Yes';
+            $stats['bzr']['version'] = $r[1];
+        } else {
+            $stats['bzr']['installed'] = 'No';
+            $stats['bzr']['optional'] = 'Yes';
+        }
+
         // composer
         $res = trim(shell_exec('composer about --version 2>&1'));
         // remove colors from shell syntax
@@ -458,6 +459,17 @@ INI;
             $stats['wget']['version'] = $res;
         } else {
             $stats['wget']['installed'] = 'No';
+        }
+
+        // zip
+        $res = shell_exec('zip -v  2>&1');
+        if (preg_match('/command not found/is', $res)) {
+            $stats['zip']['installed'] = 'No';
+        } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
+            $stats['zip']['installed'] = 'Yes';
+            $stats['zip']['version'] = $r[1];
+        } else {
+            $stats['zip']['error'] = $res;
         }
 
         return $stats;
