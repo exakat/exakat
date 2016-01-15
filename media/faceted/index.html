@@ -47,7 +47,7 @@
 					</tr>
 					<tr ng-repeat="item in filteredItems | filter:query">
 						<td>{{item.error}} <a href="docs.html#{{item.analyzer}}"><i class="material-icons" style="font-size: 14px">help</i></a></td>
-						<td>{{item.file}}#{{item.line}}</td>
+						<td>{{item.file}}#{{item.line}}<a href=".{{item.file}}.html#{{item.line}}"><i class="material-icons" style="font-size: 14px">description</i></a></td>
 						<td>{{item.code}}</td>
 						<td>{{item.severity}}</td>
 						<td>{{item.impact}}</td>

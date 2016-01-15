@@ -90,7 +90,14 @@ class Devoops extends Reports {
             return "Can't produce Devoops format to stdout";
         }
 
-        shell_exec('rm -rf '.$folder.'/'.$name);
+        if ($dirName.'/'.$fileName !== '/') {
+            rmdirRecursive($folder.'/'.$name);
+        }
+
+        if (file_exists($folder.'/'.$name)) {
+            display ($folder.'/'.$name." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            return;
+        }
 
         mkdir($folder.'/'.$name, Devoops::FOLDER_PRIVILEGES);
         mkdir($folder.'/'.$name.'/ajax', Devoops::FOLDER_PRIVILEGES);

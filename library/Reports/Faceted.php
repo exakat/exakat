@@ -36,9 +36,13 @@ class Faceted extends FacetedJson {
         $config = \Config::factory();
 
         if ($dirName.'/'.$fileName !== '/') {
-            shell_exec('rm -rf '.$dirName.'/'.$fileName);
+            rmdirRecursive($dirName.'/'.$fileName);
         }
 
+        if (file_exists($dirName.'/'.$fileName)) {
+            display ($dirName.'/'.$fileName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            return;
+        }
         mkdir($dirName.'/'.$fileName, Faceted::FOLDER_PRIVILEGES);
 
         $json = parent::generate($dirName);
@@ -63,8 +67,10 @@ class Faceted extends FacetedJson {
 
         $errors = json_decode($json);
         $docsList = array();
+        $filesList = array();
         foreach($errors as $error) {
             $docsList[$error->analyzer] = $error->error;
+            $filesList[$error->file] = $error->line;
         }
         asort($docsList);
 
@@ -85,5 +91,23 @@ class Faceted extends FacetedJson {
         $docs = str_replace('PROJECT_NAME', $this->config->project_name, $docs);
         file_put_contents($dirName.'/'.$fileName.'/docs.html', $docs);        
         
+        foreach($filesList as $path => $line) {
+            $dirs = explode('/', $path);
+            array_pop($dirs); // remove file name
+            array_shift($dirs); // remove root /
+            $d = '';
+            foreach($dirs as $dir) {
+                $d .= '/'.$dir;
+                if (!file_exists($dirName.'/'.$fileName.$d)) {
+                    mkdir($dirName.'/'.$fileName.$d, 0755);
+                }
+            }
+
+            $php = file_get_contents($dirName.'/code'.$path);
+            $html = highlight_string($php, true);
+            $html = preg_replace_callback('$<br />$s', function ($r) { static $line; if (!isset($line)) { $line = 2; } else { ++$line; } return "<br id=\"$line\" />$line) ";}, $html);
+            $html = '<code><a id="1" />1) '.substr($html, 6);
+            file_put_contents($dirName.'/'.$fileName.$path.'.html', $html);
+        }
     }
 }
