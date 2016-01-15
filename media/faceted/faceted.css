@@ -1,0 +1,105 @@
+		p
+		{
+			margin: 0;
+			padding: 0;
+		}
+
+		a
+		{
+			text-decoration: none;
+			color: black;
+		}
+		
+		.left
+		{
+			display: inline;
+			float: left;
+			margin-left: 10px;
+			margin-right: 10px;
+			width: 20%;
+		}
+		
+		.right
+		{
+			display: inline;
+			float: left;
+			margin-left: 10px;
+			margin-right: 10px;
+			width: 60%;
+		}
+		
+		.top
+		{
+			border-bottom: thin solid rgb(218, 218, 218);
+			padding-bottom: 10px;
+		}
+		
+		.left { margin: 5px; }
+		label { cursor: pointer; }
+		
+		.filter
+		{
+			margin: 10px;
+			border-bottom: thin solid rgb(218, 218, 218);
+		}
+		
+		.filter h4
+		{
+			margin-bottom: 5px;
+			text-transform: capitalize;
+		}
+		
+		.clearFacet
+		{
+			cursor: pointer;
+			padding-right: 10px;
+		}
+		
+		.clearFacet:before
+		{
+			color: #999;
+			content: '× ';
+		}
+		
+		.search-input
+		{
+			font-size: 16px;
+			padding-right: 20px;
+		}
+		
+		.clearQuery
+		{
+			color: #999;
+			cursor: pointer;
+			margin-left: -20px;
+		}
+		
+		[ng\:cloak],
+					[ng-cloak],
+					[data-ng-cloak],
+					[x-ng-cloak],
+					.ng-cloak,
+					.x-ng-cloak { display: none !important; }
+		
+		table, th , td
+		{
+			border: 1px solid grey;
+			border-collapse: collapse;
+			padding: 5px;
+		}
+		
+		table tr:nth-child(odd) { background-color: #f1f1f1; }
+		table tr:nth-child(even) { background-color: #ffffff; }
+		
+		dt { font-weight: bold; 
+		      font-size: 14pt;
+		   }
+
+        dd {
+            padding-top: 15px;
+            padding-bottom: 20px;
+        }
+        
+        .highlightedText {
+            background: yellow;
+        }
