@@ -213,6 +213,11 @@ function neo4j_serverInfo() {
 }
 
 function rmdirRecursive($dir) { 
+    if (!file_exists($dir)) { 
+        // Do nothing
+        return 0;
+    }
+
     if (empty($dir)) { 
         return 0;
     }
