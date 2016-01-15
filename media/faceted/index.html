@@ -5,23 +5,30 @@
 	<title>Exakat Faceted search for PROJECT_NAME</title>
 	
 	<link href="faceted.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    
 </head>
 <body ng-cloak>
     <h1><a href="http://www.exakat.io/"><img src="http://www.exakat.io/exakat.png" width="100">Exakat faceted report for PROJECT_NAME</a></h1>
 
 	<div ng-controller="MainCtrl">
 
-		<section class="left">
+		<section class="top">
 			<div ng-repeat="group in facetGroups" class="filter">
-				<h4>{{group.name}} ({{ group.facets.length}})</h4>
-                <select name="multipleSelect" id="multipleSelect" ng-model="useFacets[group.name]" multiple>
-                   <option ng-repeat="(name, count) in group.facets | orderBy : option" value="{{name}}">{{name + ' (' + count + ')'}}</option>
-                </select><br />
+			    <div class="float">
+				    <h4>{{group.name}} ({{ group.facets.length}})</h4>
+                    <select name="multipleSelect" id="multipleSelect" ng-model="useFacets[group.name]" multiple>
+                       <option ng-repeat="(name, count) in group.facets | orderBy : option" value="{{name}}">{{name + ' (' + count + ')'}}</option>
+                    </select>
+                </div>
 			</div>	
-		Search: <input name="searchQuery" type="text" class="search-input" ng-model="query"/><a ng-if="query" class="clearQuery" ng-click="clearQuery()">&times;</a>
+			<div class="float filter">
+        	    <h4>Search</h4>
+            	<input name="searchQuery" type="text" class="search-input" ng-model="query"/><a ng-if="query" class="clearQuery" ng-click="clearQuery()">&times;</a>
+           </div>
 		</section>
 
-		<section class="right">
+		<section class="bottom">
 			<div>
 				<h2>{{(filteredItems | filter:query).length}} Item{{(filteredItems | filter:query).length !== 1 ? 's' : null}}</h2>
 
@@ -39,7 +46,7 @@
 						<th>Impact</th>
 					</tr>
 					<tr ng-repeat="item in filteredItems | filter:query">
-						<td><a href="docs.html#{{item.analyzer}}">{{item.error}}</a></td>
+						<td>{{item.error}} <a href="docs.html#{{item.analyzer}}"><i class="material-icons" style="font-size: 14px">help</i></a></td>
 						<td>{{item.file}}#{{item.line}}</td>
 						<td>{{item.code}}</td>
 						<td>{{item.severity}}</td>

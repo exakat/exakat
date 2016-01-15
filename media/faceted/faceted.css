@@ -32,6 +32,12 @@
 		{
 			border-bottom: thin solid rgb(218, 218, 218);
 			padding-bottom: 10px;
+			height: 100px;
+		}
+
+		.bottom
+		{
+		    display: block;
 		}
 		
 		.left { margin: 5px; }
@@ -40,7 +46,7 @@
 		.filter
 		{
 			margin: 10px;
-			border-bottom: thin solid rgb(218, 218, 218);
+			display: inline;
 		}
 		
 		.filter h4
@@ -102,4 +108,11 @@
         
         .highlightedText {
             background: yellow;
+        }
+        
+        .float {
+            display: inline;
+            float: left;
+			padding-left: 10px;
+			padding-right: 10px;
         }
