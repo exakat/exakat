@@ -41,11 +41,11 @@ foreach($projects as $project) {
         continue;
     }
 
-    $results = $db->query("ATTACH '$path' AS toMerge;");
+    $db->query("ATTACH '$path' AS toMerge;");
 
-    $results = $db->query("INSERT INTO reports SELECT null, '$project', analyzer, value, count FROM toMerge.reports; ");
+    $db->query("INSERT INTO reports SELECT null, '$project', analyzer, value, count FROM toMerge.reports; ");
 
-    $results = $db->query("DETACH toMerge;");
+    $db->query("DETACH toMerge;");
 }
 
 $results = $db->query('CREATE TABLE stats (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, total INT, count INT)');
