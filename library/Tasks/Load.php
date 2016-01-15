@@ -1473,10 +1473,6 @@ class Load extends Tasks {
         
         if ($display === true) {
             return '';
-            print "isArray : ".$isArray ? 'True' : 'False'."\n";
-            print "isNotFunctioncall : ".$isArray ? 'True' : 'False'."\n";
-            print "parenthesisStates : ".print_r($parenthesisStates, true)."\n";
-            print "commaCount : ".print_r($commaCount, true)."\n";
         }
         
         if (in_array($tokenValue, array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED','T_VAR', 'T_CONST', 'T_GLOBAL', 'T_STATIC')) ) {

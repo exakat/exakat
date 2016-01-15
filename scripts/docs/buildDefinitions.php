@@ -128,15 +128,10 @@ function rst_escape($string) {
 
     $r = str_replace(array('*', '|', '_'), array('\\*', '\\|', '\\_'), $r);
     
-    
     return $r;
-    $r = str_replace(array('_', '&', '<'), array('\\_', '&amp;', '&lt;'), $string);;
-
-    return preg_replace('/(\$\S+)/is', '`$1`', $r);
 }
 
 function rst_link($title) {
-//    return ':ref:`'.rst_escape($title).' <'.rst_anchor($title).'>`';
     if (strpos($title, ' ') !== false) {
         $escapeTitle = rst_anchor($title);
         return ':ref:`'.rst_escape($title).' <'.$escapeTitle.'>`';

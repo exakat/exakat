@@ -85,7 +85,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
 
              ->back('first');
         $this->prepareQuery();
-return true;
+
         // namespaces are implicit
         $this->atomIs('File')
              ->outIs('FILE')

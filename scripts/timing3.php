@@ -33,8 +33,6 @@ foreach($rows as $row) {
     $csv = file_get_contents($row.'/log/project.timing.csv');
     if (!preg_match('/Final\t([\d\.]+)\t([\d\.]+)/is' , $csv, $r)) {
         continue;
-        print "$row\n";
-        die();
     }
     $final[] = $r[2];
         
