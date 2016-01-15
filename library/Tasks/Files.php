@@ -283,7 +283,7 @@ class Files extends Tasks {
         // check for special files
         display('Check config files');
         $files = glob($config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
-        $files = array_map(function ($x) { return basename($x); }, $files);
+        $files = array_map('basename', $files);
         
         $services = json_decode(file_get_contents($config->dir_root.'/data/serviceConfig.json'));
 

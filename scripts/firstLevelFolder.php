@@ -25,7 +25,7 @@ print "list all first-level files in projects for stats\n";
 $res = shell_exec('find projects/*/code -mindepth 1 -maxdepth 1 -type f -ls');
 
 $files = explode("\n", $res);
-$files = array_map(function ($x) { return basename($x); }, $files);
+$files = array_map('basename', $files);
 $counts = array_count_values($files);
 
 foreach($counts as $k => $v) {
