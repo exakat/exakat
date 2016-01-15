@@ -91,6 +91,7 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
         }
         $analyzers[$ini['name']] = $desc;
     }
+    unset($a);
 
     sort($liste);
     $text .= rst_level($row['name'], 4)."\nTotal : ".count($liste)." analysis\n\n* ".join("\n* ", $liste)."\n\n";
