@@ -30,38 +30,53 @@ class ConstantStructures extends Tasks {
         $this->displayTiming('Start');
 
         // First, clean it all
-        $query = 'g.V.hasNot("constante", null).each{ it.removeProperty("constante")};';
+        $query = 'g.V.has("constante", true).each{ it.removeProperty("constante")};';
         $this->query($query);
         $this->displayTiming('Initial clean');
 
         // Case for Literals
-        $literals = array('Integer', 'Boolean', 'Float', 'Null', 'Void', 'RawString', 'Magicconstant');
+        $literals = array('Integer', 'Boolean', 'Float', 'Null', 'Void', 'RawString', 'Magicconstant', 'Staticconstant');
         foreach($literals as $literal) {
             $query = 'g.idx("atoms")[["atom":"'.$literal.'"]].each{ it.setProperty("constante", true)};';
             $this->query($query);
             $this->displayTiming($literal);
         }
 
-        // String that are concatenations are differente
+        // String that are concatenations are special
         $query = 'g.idx("atoms")[["atom":"String"]].filter{it.out("CONTAINS").any() == false}.each{ it.setProperty("constante", true)};';
         $this->query($query);
         $this->displayTiming('String/concatenations');
 
+        $constantes = array('Identifier', 'Nsname');
+        foreach($constantes as $constant) {
+            $query = 'g.idx("atoms")[["atom":"'.$constant.'"]].hasNot("atom", "Functioncall").each{ it.setProperty("constante", true)};';
+            $this->query($query);
+            $this->displayTiming($constant);
+        }
+
         for ($i =0; $i < 3; ++$i) {
         // Cases for Structures (all sub element are constante => structure is constante)
-        $structures = array('Addition'       => array('LEFT', 'RIGHT'),
-                            'Multiplication' => array('LEFT', 'RIGHT'),
-                            'Keyvalue'       => array('KEY',  'VALUE'),
-                            'Arguments'      => array('ARGUMENT'),
-                            'Sequence'       => array('ELEMENT'),
-                            'Break'          => array('BREAK'),
-                            'Continue'       => array('CONTINUE'),
-                            'Return'         => array('RETURN'),
-                            'Ternary'        => array('CONDITION', 'THEN', 'ELSE'),
-                            'Comparison'     => array('LEFT', 'RIGHT'),
-                            'Sequence'       => array('ELEMENT'),
-                            'Noscream'       => array('AT'),
-                            'Not'            => array('NOT'),
+        $structures = array('Addition'         => array('LEFT', 'RIGHT'),
+                            'Multiplication'   => array('LEFT', 'RIGHT'),
+                            'Bitshift'         => array('LEFT', 'RIGHT'),
+                            'Logical'          => array('LEFT', 'RIGHT'),
+                            'Keyvalue'         => array('KEY',  'VALUE'),
+                            'Arguments'        => array('ARGUMENT'),
+                            'Functioncall'     => array('ARGUMENTS'), // Warning : Some function are not deterministic. Needs to mark them as such (custom or internals...)
+//                            'Methodcall'       => array('METHOD'),
+//                            'Staticmethodcall' => array('METHOD'),
+
+//                            'Function'         => array('BLOCK'),  // Block but one should look for return 
+                            'Sequence'         => array('ELEMENT'),
+                            'Break'            => array('BREAK'),
+                            'Continue'         => array('CONTINUE'),
+                            'Return'           => array('RETURN'),
+                            'Ternary'          => array('CONDITION', 'THEN', 'ELSE'),
+                            'Comparison'       => array('LEFT', 'RIGHT'),
+                            'Noscream'         => array('AT'),
+                            'Not'              => array('NOT'),
+                            'Parenthesis'      => array('CODE'),
+                            'Return'           => array('RETURN'),
                             );
         
         foreach($structures as $atom => $links) {
@@ -77,6 +92,7 @@ GREMLIN;
             $this->displayTiming($atom);
         }
 
+        /*
         // case for Arguments
         $query = <<<GREMLIN
 g.idx("atoms")[["atom":"Functioncall"]]
@@ -87,6 +103,7 @@ g.idx("atoms")[["atom":"Functioncall"]]
 GREMLIN;
         $this->query($query);
         $this->displayTiming('Arguments');
+        */
 
         // case for Assignation
         $query = <<<GREMLIN
@@ -101,18 +118,17 @@ GREMLIN;
         $this->displayTiming('Assignation');
 
         // case for array
+        /*
         $query = <<<GREMLIN
 g.idx("atoms")[["atom":"Functioncall"]]
     .has('token', 'T_ARRAY')
-    .filter{ it.out("ARGUMENTS").has("constante", true).any()}
+    .filter{ it.out("ARGUMENTS").has("constante", null).any() == false}
     .each{ it.setProperty("constante", true);}
 GREMLIN;
         $this->query($query);
         $this->displayTiming('Array');
-
+*/
         }
-
-
         // Final count
         $query = <<<GREMLIN
 g.V.count();
@@ -141,7 +157,7 @@ GREMLIN;
         $res = gremlin_query($query);
         $res = $res->results;
 
-        $this->lastTiming = $begin - time();
+        $this->lastTiming = microtime(true) - $begin;
 
         return $res;
     }
