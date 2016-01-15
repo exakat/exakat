@@ -1486,7 +1486,7 @@ class Load extends Tasks {
         }
 
         if ($tokenValue === 'T_ARRAY') {
-            $isArray++;
+            ++$isArray;
             return '';
         }
 
