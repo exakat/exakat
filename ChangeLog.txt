@@ -1,4 +1,4 @@
-Version 0.4.5 ( Immortal of Tiger Power, Coming up)
+Version 0.4.6 ( Immortal of Elk Power, Coming up)
 + Architecture
     +
 + Report
@@ -8,7 +8,23 @@ Version 0.4.5 ( Immortal of Tiger Power, Coming up)
 + Tokenizer
     + 
 
-Version 0.4.4 (Crown Prince Mo'ang, Coming up)
+Version 0.4.5 ( Immortal of Tiger Power, 2016-01-18)
++ Architecture
+    + Upgraded documentation
+    + Default command is 'help'
++ Report
+    + Better version for FacetedJson report
++ Analyzer
+    + New analyzer that spots wrong type of argument in PHP internal functions
+    + Fixed Isset With Constant for PHP 7
+    + Fixed a bug that limited query size during analysis (good for bigger projects)
+    + Include variadic (...) to Variable Argument Number
++ Tokenizer
+    + Fixed a bug that blocked tokenizer when a analyzed script generated parse errors.
+    + Added support for bazar, svn.
+    + Fixed a bug in Nsnames at Loading time.
+
+Version 0.4.4 (Crown Prince Mo'ang, 2016-01-11)
 + Architecture
     + Reviewed OnePage analysis
     + Dump as now an option to select Recipes
