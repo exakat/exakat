@@ -90,7 +90,7 @@ class Devoops extends Reports {
             return "Can't produce Devoops format to stdout";
         }
 
-        if ($dirName.'/'.$fileName !== '/') {
+        if ($folder.'/'.$name !== '/') {
             rmdirRecursive($folder.'/'.$name);
         }
 
