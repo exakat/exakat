@@ -1,14 +1,5 @@
 <?php
-	function a($b = null, $c)
-	{
-		if ($d !== null)
-		{
-			$c->e($f);
-			$b->e($f);
-		}
 
-		return $g->h($c);
-		return $g->h($b);
-	}
+function foo(string &$string, int &$int, bool &$bool, chaine &$chaine) {}
 
 ?>
