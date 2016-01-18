@@ -56,7 +56,7 @@ It displays a list of configurations and information about the installation. Thi
 ::
 
    php : 
-       version              : 5.6.9
+       version              : 7.0.1
        curl                 : Yes
        sqlite3              : Yes
        tokenizer            : Yes
@@ -118,14 +118,21 @@ It displays a list of configurations and information about the installation. Thi
    PHP 5.6 : 
        configured           : /usr/bin/php56
        installed            : Yes
-       version              : 5.6.9
+       version              : 5.6.17
        short_open_tags      : Off
        timezone             : Europe/Amsterdam
        tokenizer            : Yes
    
    PHP 7.0 : 
        configured           : Yes
-       version              : 7.0.0-dev
+       version              : 7.0.1
+       short_open_tags      : Off
+       timezone             : Europe/Amsterdam
+       tokenizer            : Yes
+
+   PHP 7.1 : 
+       configured           : Yes
+       version              : 7.1.0-dev
        short_open_tags      : Off
        timezone             : Europe/Amsterdam
        tokenizer            : Yes
@@ -137,6 +144,9 @@ It displays a list of configurations and information about the installation. Thi
    svn : 
        installed            : Yes
        version              : 1.8.13
+
+   bazaar : 
+       installed            : No
    
    composer : 
        installed            : Yes
@@ -150,10 +160,25 @@ It displays a list of configurations and information about the installation. Thi
 Code update
 -----------
 
-You may update the code in the `projects/<name>/code` folder. After such an operation, you shall run the project again.
+Code may updated using exakat. After such an operation, the analysis must be run again.
+Currently, git, svn and bazaar have been tested with this operation. Others require manual update
 
 ::
 
+   # example with Git
+   php exakat.phar update -p sculpin 
+   php exakat.phar project -p sculpin 
+
+
+Code may de updated manually in the `projects/<name>/code` folder, with the adapted VCS or simple code exchange. 
+After such an operation, the analysis must be run again.
+
+::
+
+   # example with Git
+   cd projects/sculpin/code
+   git pull
+   cd -
    php exakat.phar project -p sculpin 
 
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 18 Jan 2016 09:57:20 +0000
-.. comment: Generation hash : 12c2d38b65965e568aa09774f69c87b3d39d4fde
+.. comment: Generation date : Mon, 18 Jan 2016 11:03:19 +0000
+.. comment: Generation hash : 687d83113fa41c7c5c7b55e8fa81173b4dfe1533
 
 
 .. _$http\_raw\_post\_data:
@@ -86,11 +86,22 @@ $this variable represents an object (the current object) and it is not compatibl
 
 .. _**-for-exponent:
 
-\*\* for exponent
+\*\* For Exponent
 #################
 
 
 PHP 5.6 introduced the operator \*\* to provide exponents, instead of the slower function pow().
+
+.. code-block:: php
+
+   <?php
+       $cube = pow(2, 3); // 8
+   
+       $cubeInPHP56 = 2 \*\* 3; // 8
+   ?>
+
+
+If the code needs to be backward compatible to 5.5 or less, don't use the new operator.
 
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Php/NewExponent                                                                 |
@@ -198,11 +209,27 @@ It is not allowed to access protected properties or methods from outside the cla
 
 .. _accessing-private:
 
-Accessing private
+Accessing Private
 #################
 
 
 List of calls to private properties/methods that will compile but yield some fatal error upon execution.
+
+.. code-block:: php
+
+   <?php
+   
+   class a {
+       private $a;
+   }
+   
+   class b extends a {
+       function c() {
+           $this->a;
+       }
+   }
+   
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Classes/AccessPrivate |
@@ -410,10 +437,10 @@ When possible, avoid using them, may it be as PHP functions, or hashing function
 
 
 
-.. _avoid-array\_unique:
+.. _avoid-array\_unique():
 
-Avoid array\_unique
-###################
+Avoid array\_unique()
+#####################
 
 
 The native function array\_unique is much slower than using other alternative, such as array\_count\_values(), array\_flip/array\_keys, or even a foreach() loops.
@@ -1177,13 +1204,23 @@ echo $a b $c;
 
 
 
-.. _echo-concatenation:
+.. _echo-with-concatenation:
 
-Echo concatenation
-##################
+Echo With Concatenation
+#######################
 
 
 Echo accepts an arbitrary number of argument, and will automatically concatenate all incoming arguments. It is not necessary to concatenate values when calling echo and it will save a few commands.
+
+.. code-block:: php
+
+   <?php
+     // Do
+     echo 'a', $b, $c, ' def';
+     
+     // Don't
+     echo 'a'.$b.$c def;
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/EchoArguments                                                                                                              |
@@ -1456,24 +1493,6 @@ Usage of the \*\* operator or \*\*=, to make exponents.
 +--------------+---------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
-
-
-
-.. _extension-fann:
-
-Extension fann
-##############
-
-
-ext/fann
-
-+--------------+--------------------+
-| Command Line | Extensions/Extfann |
-+--------------+--------------------+
-| clearPHP     |                    |
-+--------------+--------------------+
-| Analyzers    | :ref:`Analyze`     |
-+--------------+--------------------+
 
 
 
@@ -1815,7 +1834,7 @@ The global keyword should be out of loops. It will be evaluated each loop, slowi
 
 .. _global-usage:
 
-Global usage
+Global Usage
 ############
 
 
@@ -1949,7 +1968,7 @@ Also, note that arguments 2 and 3 are constants and string (respectively), and s
 
 .. _implement-is-for-interface:
 
-Implement is for interface
+Implement Is For Interface
 ##########################
 
 
@@ -2178,13 +2197,20 @@ It is recommended to use the symbol operators, rather than the letter ones.
 
 .. _lone-blocks:
 
-Lone blocks
+Lone Blocks
 ###########
 
 
 Blocks are compulsory when defining a structure, such as a class or a function. They are most often used with flow control instructions, like if then or switch. 
 
-Blocks are also valid syntax that group several instructions together, though it has no effect at all, except confuse the reader. Most often, it is a ruin from a previous flow control instruction, whose condition was removed or commented. They should be removed.
+Blocks are also valid syntax that group several instructions together, though they have no effect at all, except confuse the reader. Most often, it is a ruin from a previous flow control instruction, whose condition was removed or commented. They should be removed. 
+
+<?php
+
+//foreach($a as $b) 
+{
+    $b++;
+}
 
 +--------------+----------------------+
 | Command Line | Structures/LoneBlock |
@@ -2555,7 +2581,16 @@ No Direct Call To MagicMethod
 
 PHP magic methods, such as \_\_get(), \_\_set(), ... are supposed to bed used in an object environnement, and not with direct call. 
 
-For example, print $x->\_\_get('a'); should be written $x->a;. 
+For example, 
+.. code-block:: php
+
+   <?php
+     print $x->\_\_get('a'); 
+   
+   //should be written 
+     print $x->a;
+   ?>
+
 
 Accessing those methods in a static way is also discouraged.
 
@@ -3027,10 +3062,10 @@ Note that classes with methods bearing the class name, but inside a namespace ar
 
 
 
-.. _old-style-\_\_autoload:
+.. _old-style-\_\_autoload():
 
-Old style \_\_autoload
-######################
+Old Style \_\_autoload()
+########################
 
 
 Do not use the old \_\_autoload() function, but rather the new spl\_register\_autoload() function.
@@ -3247,7 +3282,7 @@ The following PHP native functions were removed in PHP 7.0.
 
 .. _php-keywords-as-names:
 
-PHP Keywords as Names
+PHP Keywords As Names
 #####################
 
 
@@ -3310,27 +3345,9 @@ With PHP 7, dirname has a second argument that represents the number of parent f
 
 
 
-.. _preg-option-e:
-
-PREG Option e
-#############
-
-
-preg\_replaced had a /e option until PHP 7.0 which allowed the use of eval'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
-
-+--------------+---------------------------------------------------------------------------------------+
-| Command Line | Structures/pregOptionE                                                                |
-+--------------+---------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                       |
-+--------------+---------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71` |
-+--------------+---------------------------------------------------------------------------------------+
-
-
-
 .. _parent,-static-or-self-outside-class:
 
-Parent, static or self outside class
+Parent, Static Or Self Outside Class
 ####################################
 
 
@@ -3427,7 +3444,7 @@ It is advised to never leave that kind of instruction in a production code.
 
 .. _pre-increment:
 
-Pre-Increment
+Pre-increment
 #############
 
 
@@ -3645,13 +3662,26 @@ Relay functions are typical of transition API, where an old API have to be prese
 
 
 
-.. _repeated-prints:
+.. _repeated-print():
 
-Repeated prints
-###############
+Repeated print()
+################
 
 
-It is recommended to use concatenation instead of multiple calls to print or echo when outputting several blob of text.
+It is recommended to use echo with multiple arguments, or a concatenation with print, instead of multiple calls to print echo, when outputting several blob of text.
+
+.. code-block:: php
+
+   <?php
+   // Do
+     echo 'a', $b, 'c';
+     print 'a' . $b . 'c';
+     
+   // Don't 
+     print 'a';
+     print $b;
+     print 'c';
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Structures/RepeatedPrint |
@@ -4344,6 +4374,24 @@ Typehint or instanceof that are relying on undefined interfaces (or classes) : t
 
 
 
+.. _undefined-properties:
+
+Undefined Properties
+####################
+
+
+List of properties that are not explicitely defined in the class, its parents or traits.
+
++--------------+---------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/UndefinedProperty                                                                                     |
++--------------+---------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-undefined-properties <https://github.com/dseguy/clearPHP/tree/master/rules/no-undefined-properties.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                |
++--------------+---------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _undefined-function:
 
 Undefined function
@@ -4382,24 +4430,6 @@ another dependency, or just not there) it will not be reported.
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
-
-
-
-.. _undefined-properties:
-
-Undefined properties
-####################
-
-
-List of properties that are not explicitely defined in the class, its parents or traits.
-
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| Command Line | Classes/UndefinedProperty                                                                                     |
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| clearPHP     | `no-undefined-properties <https://github.com/dseguy/clearPHP/tree/master/rules/no-undefined-properties.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                                |
-+--------------+---------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4462,20 +4492,30 @@ Usage of the PHP 7 Unicode Escape syntax, with the \u{xxxxx} format.
 
 
 
-.. _unpreprocessed-values:
+.. _unpreprocessed-calues:
 
-Unpreprocessed values
+Unpreprocessed Calues
 #####################
 
 
 PHP is good at manipulating data. However, it is also good to preprocess those values, and put them in the code directly as expected, rather than have PHP go the extra step and do it for you.
 
 For example : 
-$x = explode(',', 'a,b,c,d'); 
+.. code-block:: php
+
+   <?php
+     $x = explode(',', 'a,b,c,d'); 
+   ?>
+
 
 could be written 
 
-$x = array('a', 'b', 'c', 'd');
+.. code-block:: php
+
+   <?php
+     $x = array('a', 'b', 'c', 'd');
+   ?>
+
 
 and avoid preprocessing the string into an array first.
 
@@ -4549,6 +4589,24 @@ Make sure the following classes are well defined.
 
 
 
+.. _unresolved-use:
+
+Unresolved Use
+##############
+
+
+The following use instructions cannot be resolved to a class or a namespace. They should be dropped or fixed.
+
++--------------+---------------------------------------------------------------------------------------------------+
+| Command Line | Namespaces/UnresolvedUse                                                                          |
++--------------+---------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unresolved-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-use.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
+
+
+
 .. _unresolved-classes:
 
 Unresolved classes
@@ -4566,24 +4624,6 @@ Check for namespaces and aliases and make sure they are correctly configured.
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
-
-
-
-.. _unresolved-use:
-
-Unresolved use
-##############
-
-
-The following use instructions cannot be resolved to a class or a namespace. They should be dropped or fixed.
-
-+--------------+---------------------------------------------------------------------------------------------------+
-| Command Line | Namespaces/UnresolvedUse                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------+
-| clearPHP     | `no-unresolved-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-use.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                    |
-+--------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -4638,6 +4678,27 @@ Those arguments are not used in the method or function.
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
+
+
+
+.. _unused-classes:
+
+Unused Classes
+##############
+
+
+The following classes are never explicitely used in the code.
+
+Note that this may be valid in case the current code is a library or framework, since it defines classes that are used by other (unprovided) codes.
+Also, this analyzer may find classes that are, in fact, dynamically loaded.
+
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedClass                          |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -4756,24 +4817,6 @@ Those traits were not found in a class.
 +--------------+--------------------+
 | Analyzers    | :ref:`Analyze`     |
 +--------------+--------------------+
-
-
-
-.. _unused-classes:
-
-Unused classes
-##############
-
-
-The following classes are never used in the code.
-
-+--------------+----------------------------------------------+
-| Command Line | Classes/UnusedClass                          |
-+--------------+----------------------------------------------+
-| clearPHP     |                                              |
-+--------------+----------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
 
 
 
@@ -4974,7 +5017,29 @@ The const keyword may be used to define constant, just like the define() functio
 When defining a constant, it is recommended to use 'const' when the features of the constant are not dynamical (name or value are known at compile time). 
 This way, constant will be defined at compile time, and not at execution time. 
 
-define() function is useful for all other situations.
+.. code-block:: php
+
+   <?php
+     //Do
+     const A = 1;
+     // Don't 
+     define('A', 1);
+     
+   ?>
+
+
+define() function is useful when the constant is not known at compile time, or when case sensitivity is necessary.
+
+.. code-block:: php
+
+   <?php
+     // Read $a in database or config file
+     define('A', $a);
+   
+     // Read $a in database or config file
+     define('B', 1, true);
+     echo b;
+   ?>
 
 +--------------+----------------------------+
 | Command Line | Constants/ConstRecommended |
@@ -5428,13 +5493,31 @@ It is recommended to check the signature of the methods, and fix the arguments.
 
 .. _wrong-optional-parameter:
 
-Wrong Optional parameter
+Wrong Optional Parameter
 ########################
 
 
-PHP parameters are optional when they defined with a default value, like this : function x($arg = 1) {...}.
+PHP parameters are optional when they defined with a default value, like this : 
 
-When there are compulsory and optional parameters, the first ones should appear first, and the second should appear last : function x($arg, $arg2 = 2) {...}.
+.. code-block:: php
+
+   <?php
+       function x($arg = 1) {
+           // PHP code here
+       }
+   ?>
+
+
+When a function have both compulsory and optional parameters, the compulsory ones should appear first, and the optional should appear last : 
+
+.. code-block:: php
+
+   <?php
+       function x($arg, $arg2 = 2) {
+           // PHP code here
+       }
+   ?>
+
 
 PHP will solve this problem at runtime, assign values in the same other, but will miss some of the default values and emits warnings. 
 
@@ -5591,6 +5674,24 @@ Extension ext/ereg
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------+
+
+
+
+.. _ext/fann:
+
+ext/fann
+########
+
+
+Extension fann
+
++--------------+--------------------+
+| Command Line | Extensions/Extfann |
++--------------+--------------------+
+| clearPHP     |                    |
++--------------+--------------------+
+| Analyzers    | :ref:`Analyze`     |
++--------------+--------------------+
 
 
 
@@ -5766,23 +5867,56 @@ If the code doesn't have a second argument, it relies on the default value. It i
 
 
 
-.. _parse\_str-warning:
+.. _parse\_str()-warning:
 
-parse\_str Warning
-##################
+parse\_str() Warning
+####################
 
 
 The parse\_str function will parse a query string and assign the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the one existing.
 
-Always use an empty variable a second parameter to parse\_str, so as to collect the incoming values, and then, filter them in that array.
+.. code-block:: php
 
-+--------------+------------------------------------+
-| Command Line | Security/parseUrlWithoutParameters |
-+--------------+------------------------------------+
-| clearPHP     |                                    |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Security`                    |
-+--------------+------------------------------------+
+   <?php
+     function x() {
+       global $a;
+       
+       echo $a;
+     }
+   
+     parse\_str('a=1'); // No second parameter
+     x();
+     // prints 1
+   ?>
+
+
+Always use an empty variable a second parameter to parse\_str(), so as to collect the incoming values, and then, filter them in that array.
+
++--------------+-------------------------------------------------------------------------------------------------------+
+| Command Line | Security/parseUrlWithoutParameters                                                                    |
++--------------+-------------------------------------------------------------------------------------------------------+
+| clearPHP     | `know-your-variables <https://github.com/dseguy/clearPHP/tree/master/rules/know-your-variables.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Security`                                                                                       |
++--------------+-------------------------------------------------------------------------------------------------------+
+
+
+
+.. _preg\_replace-with-option-e:
+
+preg\_replace With Option e
+###########################
+
+
+preg\_replace() had a /e option until PHP 7.0 which allowed the use of eval'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
+
++--------------+---------------------------------------------------------------------------------------+
+| Command Line | Structures/pregOptionE                                                                |
++--------------+---------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                       |
++--------------+---------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------+
 
 
 

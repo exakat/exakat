@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 18 Jan 2016 09:57:20 +0000
-.. comment: Generation hash : 12c2d38b65965e568aa09774f69c87b3d39d4fde
+.. comment: Generation date : Mon, 18 Jan 2016 11:03:19 +0000
+.. comment: Generation hash : 687d83113fa41c7c5c7b55e8fa81173b4dfe1533
 
 
 .. _analyze:
@@ -71,7 +71,7 @@ Total : 221 analysis
 * :ref:`<?= usage <<?=-usage>`
 * :ref:`Abstract static methods <abstract-static-methods>`
 * :ref:`Access protected structures <access-protected-structures>`
-* :ref:`Accessing private <accessing-private>`
+* :ref:`Accessing Private <accessing-private>`
 * :ref:`Adding Zero <adding-zero>`
 * :ref:`Aliases usage <aliases-usage>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
@@ -79,7 +79,7 @@ Total : 221 analysis
 * :ref:`Argument should be typehinted <argument-should-be-typehinted>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
-* :ref:`Avoid array\_unique <avoid-array\_unique>`
+* :ref:`Avoid array\_unique() <avoid-array\_unique()>`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -120,7 +120,6 @@ Total : 221 analysis
 * :ref:`Eval Without Try <eval-without-try>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Exit() Usage <exit()-usage>`
-* :ref:`Extension fann <extension-fann>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Foreach Needs Reference Array <foreach-needs-reference-array>`
 * :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
@@ -130,11 +129,11 @@ Total : 221 analysis
 * :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions in loop calls <functions-in-loop-calls>`
-* :ref:`Global usage <global-usage>`
+* :ref:`Global Usage <global-usage>`
 * :ref:`Hardcoded passwords <hardcoded-passwords>`
 * :ref:`Hash Algorithms <hash-algorithms>`
 * :ref:`Htmlentities Calls <htmlentities-calls>`
-* :ref:`Implement is for interface <implement-is-for-interface>`
+* :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Implicit global <implicit-global>`
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
@@ -143,7 +142,7 @@ Total : 221 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical should use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
-* :ref:`Lone blocks <lone-blocks>`
+* :ref:`Lone Blocks <lone-blocks>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Malformed Octal <malformed-octal>`
@@ -177,18 +176,17 @@ Total : 221 analysis
 * :ref:`Null On New <null-on-new>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
 * :ref:`Old Style Constructor <old-style-constructor>`
-* :ref:`Old style \_\_autoload <old-style-\_\_autoload>`
+* :ref:`Old Style \_\_autoload() <old-style-\_\_autoload()>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`One variable String <one-variable-string>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
 * :ref:`Or Die <or-die>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`Overwritten Literals <overwritten-literals>`
-* :ref:`PHP Keywords as Names <php-keywords-as-names>`
-* :ref:`PREG Option e <preg-option-e>`
-* :ref:`Parent, static or self outside class <parent,-static-or-self-outside-class>`
+* :ref:`PHP Keywords As Names <php-keywords-as-names>`
+* :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
 * :ref:`Phpinfo`
-* :ref:`Pre-Increment`
+* :ref:`Pre-increment`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Preprocessable`
 * :ref:`Print And Die <print-and-die>`
@@ -197,7 +195,7 @@ Total : 221 analysis
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
 * :ref:`Redefined Property <redefined-property>`
 * :ref:`Relay Function <relay-function>`
-* :ref:`Repeated prints <repeated-prints>`
+* :ref:`Repeated print() <repeated-print()>`
 * :ref:`Sequences In For <sequences-in-for>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
 * :ref:`Short Open Tags <short-open-tags>`
@@ -224,25 +222,25 @@ Total : 221 analysis
 * :ref:`Undefined Classes <undefined-classes>`
 * :ref:`Undefined Constants <undefined-constants>`
 * :ref:`Undefined Interfaces <undefined-interfaces>`
+* :ref:`Undefined Properties <undefined-properties>`
 * :ref:`Undefined function <undefined-function>`
 * :ref:`Undefined parent <undefined-parent>`
-* :ref:`Undefined properties <undefined-properties>`
 * :ref:`Undefined static:: or self:: <undefined-static\:\:-or-self\:\:>`
-* :ref:`Unpreprocessed values <unpreprocessed-values>`
+* :ref:`Unpreprocessed Calues <unpreprocessed-calues>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
+* :ref:`Unresolved Use <unresolved-use>`
 * :ref:`Unresolved classes <unresolved-classes>`
-* :ref:`Unresolved use <unresolved-use>`
 * :ref:`Unset In Foreach <unset-in-foreach>`
 * :ref:`Unthrown Exception <unthrown-exception>`
 * :ref:`Unused Arguments <unused-arguments>`
+* :ref:`Unused Classes <unused-classes>`
 * :ref:`Unused Global <unused-global>`
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Trait <unused-trait>`
-* :ref:`Unused classes <unused-classes>`
 * :ref:`Unused constants <unused-constants>`
 * :ref:`Unused functions <unused-functions>`
 * :ref:`Unused static methods <unused-static-methods>`
@@ -271,12 +269,13 @@ Total : 221 analysis
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
-* :ref:`Wrong Optional parameter <wrong-optional-parameter>`
+* :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
 * :ref:`\_\_toString() Throws Exception <\_\_tostring()-throws-exception>`
 * :ref:`crypt without salt <crypt-without-salt>`
 * :ref:`error\_reporting() With Integers <error\_reporting()-with-integers>`
 * :ref:`ext/apc`
+* :ref:`ext/fann`
 * :ref:`ext/fdf`
 * :ref:`ext/mysql`
 * :ref:`ext/sqlite`
@@ -284,6 +283,7 @@ Total : 221 analysis
 * :ref:`include\_once() Usage <include\_once()-usage>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
 * :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`var\_dump()... Usage <var\_dump()...-usage>`
 
 .. _compatibilityphp53:
@@ -336,7 +336,7 @@ Total : 48 analysis
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
-* :ref:`\*\* for exponent <**-for-exponent>`
+* :ref:`\*\* For Exponent <**-for-exponent>`
 * :ref:`\_\_debugInfo()`
 * :ref:`ext/dba`
 * :ref:`ext/fdf`
@@ -388,7 +388,7 @@ Total : 43 analysis
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
-* :ref:`\*\* for exponent <**-for-exponent>`
+* :ref:`\*\* For Exponent <**-for-exponent>`
 * :ref:`\_\_debugInfo()`
 * :ref:`crypt without salt <crypt-without-salt>`
 * :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
@@ -436,7 +436,7 @@ Total : 42 analysis
 * :ref:`Use password\_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
-* :ref:`\*\* for exponent <**-for-exponent>`
+* :ref:`\*\* For Exponent <**-for-exponent>`
 * :ref:`\_\_debugInfo()`
 * :ref:`crypt without salt <crypt-without-salt>`
 * :ref:`ext/apc`
@@ -508,7 +508,6 @@ Total : 29 analysis
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-* :ref:`PREG Option e <preg-option-e>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
@@ -521,6 +520,7 @@ Total : 29 analysis
 * :ref:`ext/mysql`
 * :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 
 .. _compatibilityphp71:
 
@@ -550,8 +550,7 @@ Total : 35 analysis
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
 * :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-* :ref:`PHP Keywords as Names <php-keywords-as-names>`
-* :ref:`PREG Option e <preg-option-e>`
+* :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
@@ -564,6 +563,7 @@ Total : 35 analysis
 * :ref:`ext/mysql`
 * :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 
 .. _dead-code:
 
@@ -580,11 +580,11 @@ Total : 17 analysis
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Unset In Foreach <unset-in-foreach>`
 * :ref:`Unthrown Exception <unthrown-exception>`
+* :ref:`Unused Classes <unused-classes>`
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
-* :ref:`Unused classes <unused-classes>`
 * :ref:`Unused constants <unused-constants>`
 * :ref:`Unused functions <unused-functions>`
 * :ref:`Unused static methods <unused-static-methods>`
@@ -599,7 +599,7 @@ Total : 13 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
-* :ref:`Echo concatenation <echo-concatenation>`
+* :ref:`Echo With Concatenation <echo-with-concatenation>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Functions in loop calls <functions-in-loop-calls>`
@@ -607,7 +607,7 @@ Total : 13 analysis
 * :ref:`Join file() <join-file()>`
 * :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
-* :ref:`Pre-Increment`
+* :ref:`Pre-increment`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 
@@ -622,9 +622,9 @@ Total : 9 analysis
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Followed injections <followed-injections>`
-* :ref:`PREG Option e <preg-option-e>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Sleep is a security risk <sleep-is-a-security-risk>`
-* :ref:`parse\_str Warning <parse\_str-warning>`
+* :ref:`parse\_str() Warning <parse\_str()-warning>`
+* :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 
