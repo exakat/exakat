@@ -77,18 +77,46 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
     foreach($liste as &$a) {
         $name = $a;
         $ini = parse_ini_file("human/en/$a.ini");
+        $commandLine = $a;
+
         $a = rst_link($ini['name']);
 
         $desc = trim(rst_escape($ini['description']));
+
         if (!empty($ini['clearphp'])) {
-            $desc .= "\n\nclearPHP: `$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__\n";
+            $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
+        } else {
+            $clearPHP = '';
         }
+
         if (isset($a2themes[$name])) {
             $c = array_map('rst_link', $a2themes[$name]);
-            $desc .= "\n\nThis analyzer is part of the following recipes :  ". join(', ', $c)."\n";
+            $recipes = join(', ', $c);
         } else {
-//            print "$a\n";
+            $recipes = 'none';
         }
+        
+        $lineSize = max(strlen($commandLine), strlen($clearPHP), strlen($recipes));
+        $commandLine = str_pad($commandLine, $lineSize, ' ');
+        $clearPHP    = str_pad($clearPHP,    $lineSize, ' ');
+        $recipes     = str_pad($recipes,     $lineSize, ' ');
+        $separator   = '+--------------+-'.str_pad('', $lineSize, '-').'-+';
+
+        $desc .= <<<RST
+
+
+$separator
+| Command Line | $commandLine |
+$separator
+| clearPHP     | $clearPHP |
+$separator
+| Analyzers    | $recipes |
+$separator
+
+
+RST;
+
+
         $analyzers[$ini['name']] = $desc;
     }
     unset($a);
