@@ -32,29 +32,37 @@ apt-get
 
 This list of apt-get will install several needed libs for the installation. 
 
-`apt-get install php5-cli zip wkhtmltopdf maven vim python-software-properties php5-mysqlnd sqlite gcc make libxml2-dev autoconf re2c bison screen php5-curl php5-sqlite libssl-dev libcurl4-openssl-dev pkg-config libbz2-dev libjpeg-dev libpng-dev libXpm-dev libfreetype6-dev libt1-dev libgmp3-dev libldap2-dev libmcrypt-dev libmhash-dev freetds-dev libz-dev ncurses-dev libpcre3-dev unixODBC-dev libsqlite-dev libaspell-dev libreadline6-dev librecode-dev 
-apt-get update
-apt-get upgrade
-apt-get clean`
+::
+
+   apt-get install php5-cli zip wkhtmltopdf maven vim python-software-properties php5-mysqlnd sqlite gcc make libxml2-dev autoconf re2c bison screen php5-curl php5-sqlite libssl-dev libcurl4-openssl-dev pkg-config libbz2-dev libjpeg-dev libpng-dev libXpm-dev libfreetype6-dev libt1-dev libgmp3-dev libldap2-dev libmcrypt-dev libmhash-dev freetds-dev libz-dev ncurses-dev libpcre3-dev unixODBC-dev libsqlite-dev libaspell-dev libreadline6-dev librecode-dev 
+   apt-get update
+   apt-get upgrade
+   apt-get clean
 
 
-### Java install
+Java install
+############
+
 You need a Java 8. Java 7 might work.
 
-`$ su root
-# echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" > /etc/apt/sources.list.d/webupd8team-java.list
-# echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/webupd8team-java.list
-# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
-# apt-get update
-# apt-get install oracle-java8-installer
-# java -version
-# exit`
+::
+
+   ## You'll need to run this as root
+   echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" > /etc/apt/sources.list.d/webupd8team-java.list
+   echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/webupd8team-java.list
+   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+   apt-get update
+   apt-get install oracle-java8-installer
+   
+   # Check
+   java -version 
 
 Neo4j
 +++++++++++++++++++++++++++++
 Download Neo4j 2.2.* version (currently, 2.2.7).
 
 [Neo4j](http://neo4j.com/)
+
 ::
 
    wget http://dist.neo4j.org/neo4j-community-2.2.4-unix.tar.gz
@@ -66,7 +74,7 @@ Gremlin plug-in
 There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
 
 Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors.) : 
-:::
+::
 
     <repositories>
        <repository>
@@ -77,10 +85,11 @@ Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT.
        </repository>
      </repositories>
 
-  
-  Then, in command line : 
+
+Then, in command line : 
 
 ::
+
    git clone https://github.com/neo4j-contrib/gremlin-plugin.git gremlin
    cd gremlin
    mvn clean package
@@ -96,7 +105,7 @@ You need one version of PHP (at least) to run exakat. This version needs the `cu
 
 Extra PHP-CLI versions will bring your more checks on the code. 
 
-We recommend running PHP 5.6.9 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6 and 7.0-dev, as they may be used with exakat.
+We recommend running PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6 and 7.0-dev, as they may be used with exakat.
 
 To install easily various versions of PHP, use the dotdeb repository. Follow the instruction [here](https://www.dotdeb.org/instructions/).
 
@@ -146,11 +155,15 @@ homebrew
 
 Homebew is a package manager for OSX. It will speed up the installation if you install it now. You may do also without it (or using Fink or macport) : we are just confortable with brew.
 
-* `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+::
+
+   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 If brew is installed, it is a good moment to check the updates and then the doctor. 
-* `brew update; brew upgrade`
-* `brew doctor`
+:: 
+   brew update; brew upgrade
+   brew doctor
+
 
 git
 ###
@@ -192,7 +205,9 @@ Neo4j 2.3.\* or 3.0.0 won't work yet (The gremlin plug-in hasn't been tested suc
 
 Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` file. To do so, add this line:
 
-`org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp`
+::
+
+   org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp
 
 Gremlin plug-in
 +++++++++++++++
@@ -201,8 +216,10 @@ This install [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-pl
   
 First, in command line : 
 
-* `git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git gremlin-plugin`
-* `cd gremlin-plugin`
+::
+
+   git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git gremlin-plugin
+   cd gremlin-plugin
 
 
 Now, check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors section.) : 
@@ -220,19 +237,26 @@ Now, check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAP
 
 
 Then, finish the compilation : 
-* `brew install maven` // If you haven't installed maven yet
-* `mvn clean package`
+::
+
+   brew install maven // If you haven't installed maven yet
+   mvn clean package
+
 
 `$NEO4J_HOME`  is the home of the neo4j server. It was installed just before. Use the path or set the variable.
 
-* `unzip target/neo4j-gremlin-plugin-tp2-2.2.3-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin`
-* `cd $NEO4J_HOME`
-* `bin/neo4j start`
+::
+
+   unzip target/neo4j-gremlin-plugin-tp2-2.2.3-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin
+   cd $NEO4J_HOME
+   bin/neo4j start
 
 You may call check that the server has GremlinPlugin available with 
 `$ curl -s -G http://localhost:7474/tp/gremlin/execute`
 
-Result should be : ::
+Result should be : 
+
+::
 
    {
        "success": true
@@ -243,32 +267,37 @@ You may now removed the git repository for gremlin-plugin.
 Various versions of PHP
 #######################
 
-You need one version of PHP (at least) to run exakat. This version needs the `curl` and `sqlite3` extensions.  
+You need one version of PHP (at least) to run exakat. This version require the `curl`, `sqlite3` and `tokenizer` extensions.
 
-Extra PHP-CLI versions will bring your more checks on the code. 
+Extra PHP-CLI versions will bring your more checks on the code. Those versions require only the `tokenizer` extension. You may reduce the load of those binaries by disabling all other extensions.
 
-We recommend running PHP 5.6.9 (or latest version).
+::
 
-* `brew install php56 php56-curl php56-sqlite3`
+   brew install php70 php70-curl php70-sqlite3
 
 PHP versions 5.3 to 5.6
 #######################
 
-* `brew tap homebrew/dupes`
-* `brew tap homebrew/versions`
-* `brew tap homebrew/homebrew-php`
-* `brew install php53`
-* `brew install php54`
-* `brew install php55`
-* `brew install php56`
+::
+
+   brew tap homebrew/dupes
+   brew tap homebrew/versions
+   brew tap homebrew/homebrew-php
+   brew install php53
+   brew install php54
+   brew install php55
+   brew install php56
+   brew install php70
 
 
 Zip
 ###
 Install the zip utility
 
-* `brew install libzip`
-* `zip -help`
+::
+
+   brew install libzip
+   zip -help
 
 Exakat 
 ######
@@ -279,9 +308,13 @@ Optional installation
 #####################
 
 By default, exakat works with Git repository for downloading code. You may also use 
-* `composer`
-* `svn`
-* `hg`
+
+::
+
+   composer
+   svn
+   hg
+
 if you have installed those binary.
 
 Test
@@ -334,7 +367,7 @@ You need one version of PHP (at least) to run exakat. This version needs the `cu
 
 Extra PHP-CLI versions will bring your more checks on the code. 
 
-We recommend running PHP 5.6.9 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6 and 7.0-dev, as they may be used with exakat.
+We recommend running PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.0 and 7.1-dev, as they may be used with exakat.
 
 Zip
 +++

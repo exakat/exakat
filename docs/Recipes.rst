@@ -12,6 +12,12 @@ Recipes runs all its analysis and any needed dependency.
 
 Recipes are configured with the -T option, when running exakat in command line.
 
+::
+
+   php exakat.phar analyze -p <project> -T <Security/DirectInjection>
+
+
+
 List of recipes
 ###############
 
@@ -47,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 11 Jan 2016 10:04:32 +0000
-.. comment: Generation hash : 9b2d01ea8c07794971a11285ad5b6223b4e8cead
+.. comment: Generation date : Mon, 18 Jan 2016 09:57:20 +0000
+.. comment: Generation hash : 12c2d38b65965e568aa09774f69c87b3d39d4fde
 
 
 .. _analyze:
@@ -56,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 220 analysis
+Total : 221 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -82,7 +88,7 @@ Total : 220 analysis
 * :ref:`Case After Default <case-after-default>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
-* :ref:`Class, Interface or Ttrait With Identical Names <class,-interface-or-ttrait-with-identical-names>`
+* :ref:`Class, Interface or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Close Tags <close-tags>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
@@ -150,7 +156,7 @@ Total : 220 analysis
 * :ref:`Must Return Methods <must-return-methods>`
 * :ref:`Namespace with fully qualified name <namespace-with-fully-qualified-name>`
 * :ref:`Nested Ternary <nested-ternary>`
-* :ref:`Never used properties <never-used-properties>`
+* :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Direct Call To MagicMethod <no-direct-call-to-magicmethod>`
 * :ref:`No Direct Usage <no-direct-usage>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
@@ -171,6 +177,7 @@ Total : 220 analysis
 * :ref:`Null On New <null-on-new>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
 * :ref:`Old Style Constructor <old-style-constructor>`
+* :ref:`Old style \_\_autoload <old-style-\_\_autoload>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`One variable String <one-variable-string>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
@@ -259,12 +266,13 @@ Total : 220 analysis
 * :ref:`Useless constructor <useless-constructor>`
 * :ref:`Useless instructions <useless-instructions>`
 * :ref:`Useless return <useless-return>`
-* :ref:`Uses default values <uses-default-values>`
+* :ref:`Uses Default Values <uses-default-values>`
 * :ref:`Var`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
 * :ref:`Wrong Optional parameter <wrong-optional-parameter>`
+* :ref:`Wrong Parameter Type <wrong-parameter-type>`
 * :ref:`\_\_toString() Throws Exception <\_\_tostring()-throws-exception>`
 * :ref:`crypt without salt <crypt-without-salt>`
 * :ref:`error\_reporting() With Integers <error\_reporting()-with-integers>`
@@ -272,11 +280,10 @@ Total : 220 analysis
 * :ref:`ext/fdf`
 * :ref:`ext/mysql`
 * :ref:`ext/sqlite`
-* :ref:`func\_get\_arg Modified <func\_get\_arg-modified>`
+* :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`include\_once() Usage <include\_once()-usage>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
 * :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
-* :ref:`old \_\_autoload <old-\_\_autoload>`
 * :ref:`var\_dump()... Usage <var\_dump()...-usage>`
 
 .. _compatibilityphp53:
@@ -503,7 +510,7 @@ Total : 29 analysis
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`PREG Option e <preg-option-e>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
-* :ref:`Reserved Keywords in PHP 7 <reserved-keywords-in-php-7>`
+* :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Use password\_hash() <use-password\_hash()>`
@@ -512,7 +519,7 @@ Total : 29 analysis
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
 * :ref:`ext/mysql`
-* :ref:`func\_get\_arg Modified <func\_get\_arg-modified>`
+* :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
 
 .. _compatibilityphp71:
@@ -546,7 +553,7 @@ Total : 35 analysis
 * :ref:`PHP Keywords as Names <php-keywords-as-names>`
 * :ref:`PREG Option e <preg-option-e>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
-* :ref:`Reserved Keywords in PHP 7 <reserved-keywords-in-php-7>`
+* :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Use password\_hash() <use-password\_hash()>`
@@ -555,7 +562,7 @@ Total : 35 analysis
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
 * :ref:`ext/mysql`
-* :ref:`func\_get\_arg Modified <func\_get\_arg-modified>`
+* :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
 
 .. _dead-code:
@@ -619,5 +626,5 @@ Total : 9 analysis
 * :ref:`Register Globals <register-globals>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Sleep is a security risk <sleep-is-a-security-risk>`
-* :ref:`parse\_str warning <parse\_str-warning>`
+* :ref:`parse\_str Warning <parse\_str-warning>`
 

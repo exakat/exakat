@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 11 Jan 2016 10:04:32 +0000
-.. comment: Generation hash : 9b2d01ea8c07794971a11285ad5b6223b4e8cead
+.. comment: Generation date : Mon, 18 Jan 2016 09:57:20 +0000
+.. comment: Generation hash : 12c2d38b65965e568aa09774f69c87b3d39d4fde
 
 
 .. _$http\_raw\_post\_data:
@@ -20,7 +20,14 @@ $HTTP\_RAW\_POST\_DATA
 
 Starting at PHP 5.6, $HTTP\_RAW\_POST\_DATA will be deprecated, and should be replaced by php://input. You may get ready by setting always\_populate\_raw\_post\_data to -1.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP56`, :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+-------------------------------------------------------------------------------------------------+
+| Command Line | Php/RawPostDataUsage                                                                            |
++--------------+-------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                 |
++--------------+-------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP56`, :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------+
+
 
 
 .. _$this-belongs-to-classes:
@@ -31,7 +38,14 @@ $this Belongs To Classes
 
 $this variable represents an object (the current object) and it should be used within class's methods (except for static) and not outside.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Classes/ThisIsForClasses |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _$this-is-not-an-array:
@@ -42,7 +56,14 @@ $this is not an array
 
 $this variable represents an object (the current object) and it is not an array, unless the class (or its parents) has the ArrayAccess interface.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Classes/ThisIsNotAnArray |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _$this-is-not-for-static-methods:
@@ -53,10 +74,14 @@ $this is not for static methods
 
 $this variable represents an object (the current object) and it is not compatible with a static method, which may operate without any object.
 
-clearPHP: `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__
++--------------+---------------------------------------------------------------------------------------------+
+| Command Line | Classes/ThisIsNotForStatic                                                                  |
++--------------+---------------------------------------------------------------------------------------------+
+| clearPHP     | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
++--------------+---------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                              |
++--------------+---------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _**-for-exponent:
@@ -67,7 +92,14 @@ This analyzer is part of the following recipes :  :ref:`Analyze`
 
 PHP 5.6 introduced the operator \*\* to provide exponents, instead of the slower function pow().
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/NewExponent                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
+
 
 
 .. _...-usage:
@@ -78,7 +110,14 @@ This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :re
 
 Usage of the ... keyword, either in function definitions, either in functioncalls.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/EllipsisUsage                                                               |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
+
 
 
 .. _\:\:class:
@@ -91,7 +130,14 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
 
 ClassName::class; // return Namespace\ClassName
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`
++--------------+------------------------------------------------------+
+| Command Line | Php/StaticclassUsage                                 |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
+
 
 
 .. _<?=-usage:
@@ -102,7 +148,14 @@ This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :re
 
 Usage of the <?= tag, that echo's directly the following content.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------+
+| Command Line | Php/EchoTagUsage |
++--------------+------------------+
+| clearPHP     |                  |
++--------------+------------------+
+| Analyzers    | :ref:`Analyze`   |
++--------------+------------------+
+
 
 
 .. _abstract-static-methods:
@@ -115,7 +168,14 @@ Methods cannot be both abstract and static. Static methods belong to a class, an
 
 A child class is able to declare a method with the same name than a static method in the parent, but those two methods will stay independant.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------+
+| Command Line | Classes/AbstractStatic |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
 
 
 .. _access-protected-structures:
@@ -126,7 +186,14 @@ Access protected structures
 
 It is not allowed to access protected properties or methods from outside the class or its relatives.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Classes/AccessProtected |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _accessing-private:
@@ -137,7 +204,14 @@ Accessing private
 
 List of calls to private properties/methods that will compile but yield some fatal error upon execution.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------+
+| Command Line | Classes/AccessPrivate |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
 
 
 .. _adding-zero:
@@ -152,10 +226,14 @@ If it is used to type cast a value to integer, then casting (integer) is clearer
 
 In (0 - $x) structures, 0 may be omitted.
 
-clearPHP: `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__
++--------------+-----------------------------------------------------------------------------------------------+
+| Command Line | Structures/AddZero                                                                            |
++--------------+-----------------------------------------------------------------------------------------------+
+| clearPHP     | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                |
++--------------+-----------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _aliases-usage:
@@ -166,10 +244,14 @@ Aliases usage
 
 Some functions have several names, and both may be used the same way. However, one of the names is the main name, and the others are aliases. Aliases may be removed or change or dropped in the future. Even if this is not forecast, it is good practice to use the main name, instead of the aliases.
 
-clearPHP: `no-aliases <https://github.com/dseguy/clearPHP/tree/master/rules/no-aliases.md>`__
++--------------+-------------------------------------------------------------------------------------+
+| Command Line | Functions/AliasesUsage                                                              |
++--------------+-------------------------------------------------------------------------------------+
+| clearPHP     | `no-aliases <https://github.com/dseguy/clearPHP/tree/master/rules/no-aliases.md>`__ |
++--------------+-------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                      |
++--------------+-------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _altering-foreach-without-reference:
@@ -190,10 +272,14 @@ Using references is then must faster, and easier to read.
    }
    ?>
 
-clearPHP: `use-reference-to-alter-in-foreach <https://github.com/dseguy/clearPHP/tree/master/rules/use-reference-to-alter-in-foreach.md>`__
++--------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/AlteringForeachWithoutReference                                                                                        |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `use-reference-to-alter-in-foreach <https://github.com/dseguy/clearPHP/tree/master/rules/use-reference-to-alter-in-foreach.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                                    |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _ambiguous-index:
@@ -208,7 +294,14 @@ Example : $x[1] = 1; $x['1'] = 2;
 
 They are indeed distinct, but may lead to confusion.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------+
+| Command Line | Arrays/AmbiguousKeys |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
+
 
 
 .. _anonymous-classes:
@@ -219,7 +312,14 @@ Anonymous Classes
 
 Mark anonymous classes.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/Anonymous                                                                                          |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _argument-should-be-typehinted:
@@ -234,10 +334,14 @@ The analyzer will detect situations where a class, or the keywords 'array' or 'c
 
 Closure arguments are omitted.
 
-clearPHP: `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__
++--------------+-----------------------------------------------------------------------------------------------+
+| Command Line | Functions/ShouldBeTypehinted                                                                  |
++--------------+-----------------------------------------------------------------------------------------------+
+| clearPHP     | `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                |
++--------------+-----------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _assign-default-to-properties:
@@ -250,10 +354,14 @@ Properties may be assigned default values at declaration time. Such values may b
 
 Default values will save some instructions in the constructor, and makes the value obvious in the code.
 
-clearPHP: `use-properties-default-values <https://github.com/dseguy/clearPHP/tree/master/rules/use-properties-default-values.md>`__
++--------------+---------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/MakeDefault                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `use-properties-default-values <https://github.com/dseguy/clearPHP/tree/master/rules/use-properties-default-values.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                            |
++--------------+---------------------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _avoid-parenthesis:
@@ -270,7 +378,14 @@ The usage of parenthesis actually give some feeling of confort, it won't prevent
 
 Even if most of the time, usage of parenthesis is legit, it is recommended to avoid them.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------------+
+| Command Line | Structures/PrintWithoutParenthesis |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
 
 
 .. _avoid-those-crypto:
@@ -285,7 +400,14 @@ MD2, MD4, MD5, SHA0, SHA1, CRC, DES, 3DES, RC2, RC4.
 
 When possible, avoid using them, may it be as PHP functions, or hashing function configurations (mcrypt, hash...).
 
-This analyzer is part of the following recipes :  :ref:`Security`
++--------------+---------------------------+
+| Command Line | Security/AvoidThoseCrypto |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Security`           |
++--------------+---------------------------+
+
 
 
 .. _avoid-array\_unique:
@@ -296,7 +418,14 @@ Avoid array\_unique
 
 The native function array\_unique is much slower than using other alternative, such as array\_count\_values(), array\_flip/array\_keys, or even a foreach() loops.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/NoArrayUnique |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _binary-glossary:
@@ -307,7 +436,14 @@ Binary Glossary
 
 List of all the integer values using the binary format, such as 0b10 or 0B0101.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`
++--------------+---------------------------+
+| Command Line | Type/Binary               |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53` |
++--------------+---------------------------+
+
 
 
 .. _break-outside-loop:
@@ -318,7 +454,14 @@ Break Outside Loop
 
 Starting with PHP 7, breaks or continue that are outside a loop (for, foreach, do...while, while) or a switch() statement won't compile anymore.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+----------------------------------------------------------------------+
+| Command Line | Structures/BreakOutsideLoop                                          |
++--------------+----------------------------------------------------------------------+
+| clearPHP     |                                                                      |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------+
+
 
 
 .. _break-with-0:
@@ -329,7 +472,14 @@ Break With 0
 
 Cannot break 0, as this makes no sense. Break 1 is the minimum, and is the default value.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP53`
++--------------+-------------------------------------------+
+| Command Line | Structures/Break0                         |
++--------------+-------------------------------------------+
+| clearPHP     |                                           |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53` |
++--------------+-------------------------------------------+
+
 
 
 .. _break-with-non-integer:
@@ -340,7 +490,14 @@ Break With Non Integer
 
 When using a break, the argument of the operator should be a positive non-null integer, and nothing else.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/BreakNonInteger                                                                                                                            |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                       |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _buried-assignation:
@@ -351,7 +508,14 @@ Buried Assignation
 
 Those assignations are buried in the code, and placed in unexpected situations. They will be difficult to spot, and may be confusing. It is advised to place them in a more visible place.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Structures/BuriedAssignation |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _calltime-pass-by-reference:
@@ -362,7 +526,14 @@ Calltime Pass By Reference
 
 PHP doesn't like anymore when the value is turned into a reference at the moment of function call. Either the function use a reference in its signature, either the reference won't pass.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/CalltimePassByReference                                                                                                                    |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                       |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _case-after-default:
@@ -373,7 +544,14 @@ Case After Default
 
 Default must be the last case in the switch. Any case after 'default' will be unreachable.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------------+
+| Command Line | Structures/CaseAfterDefault |
++--------------+-----------------------------+
+| clearPHP     |                             |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
+
 
 
 .. _case-for-parent,-static-and-self:
@@ -386,7 +564,14 @@ Until PHP 5.5, the special Parent, Static and Self keywords needed to be lowerca
 
 Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53`
++--------------+----------------------------------------------------------------------+
+| Command Line | Php/CaseForPSS                                                       |
++--------------+----------------------------------------------------------------------+
+| clearPHP     |                                                                      |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
++--------------+----------------------------------------------------------------------+
+
 
 
 .. _catch-overwrite-variable:
@@ -399,10 +584,14 @@ The try...catch structure uses some variables that also in use in this scope. In
 
 It is recommended to use another name for these catch variables.
 
-clearPHP: `no-catch-overwrite <https://github.com/dseguy/clearPHP/tree/master/rules/no-catch-overwrite.md>`__
++--------------+-----------------------------------------------------------------------------------------------------+
+| Command Line | Structures/CatchShadowsVariable                                                                     |
++--------------+-----------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-catch-overwrite <https://github.com/dseguy/clearPHP/tree/master/rules/no-catch-overwrite.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                      |
++--------------+-----------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _class-const-with-array:
@@ -413,13 +602,20 @@ Class Const With Array
 
 Constant defined with const keyword may be arrays but only stating with PHP 5.6. Define never accept arrays : it only accepts scalar values.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/ClassConstWithArray                                                         |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
-.. _class,-interface-or-ttrait-with-identical-names:
 
-Class, Interface or Ttrait With Identical Names
-###############################################
+.. _class,-interface-or-trait-with-identical-names:
+
+Class, Interface or Trait With Identical Names
+##############################################
 
 
 The following names are used at the same time for classes, interfaces or traits. For example, 
@@ -430,7 +626,14 @@ trait a {}
 
 Even if they are in different namespaces, this makes them easy to confuse. Besides, it is recommended to have markers to differentiate classes from interfaces from traits.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------+
+| Command Line | Classes/CitSameName |
++--------------+---------------------+
+| clearPHP     |                     |
++--------------+---------------------+
+| Analyzers    | :ref:`Analyze`      |
++--------------+---------------------+
+
 
 
 .. _classes-mutually-extending-each-other:
@@ -441,7 +644,14 @@ Classes Mutually Extending Each Other
 
 Those classes are extending each other, creating an extension loop. PHP will yield a fatal error at running time, even if it is compiling the code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Classes/MutualExtension |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _close-tags:
@@ -452,10 +662,14 @@ Close Tags
 
 PHP manual recommends that script should be left open, without the final closing ?>. This way, one will avoid the infamous bug 'Header already sent', associated with left-over spaces, that are lying after this closing tag.
 
-clearPHP: `leave-last-closing-out <https://github.com/dseguy/clearPHP/tree/master/rules/leave-last-closing-out.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/CloseTags                                                                                               |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `leave-last-closing-out <https://github.com/dseguy/clearPHP/tree/master/rules/leave-last-closing-out.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _closure-may-use-$this:
@@ -468,7 +682,14 @@ When closure were introduced in PHP, they couldn't use the $this variable, makin
 
 This is not the case anymore since PHP 5.4.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP53`
++--------------+-------------------------------------------+
+| Command Line | Php/ClosureThisSupport                    |
++--------------+-------------------------------------------+
+| clearPHP     |                                           |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53` |
++--------------+-------------------------------------------+
+
 
 
 .. _compare-hash:
@@ -496,10 +717,14 @@ Here is an example
 
 You may also use password\_hash and password\_verify.
 
-clearPHP: `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__
++--------------+-----------------------------------------------------------------------------------------------------+
+| Command Line | Security/CompareHash                                                                                |
++--------------+-----------------------------------------------------------------------------------------------------+
+| clearPHP     | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Security`                                                                                     |
++--------------+-----------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Security`
 
 
 .. _compared-comparison:
@@ -510,7 +735,14 @@ Compared comparison
 
 Usually, comparison are sufficient, and it is rare to have to compare the result of comparison. Check if this two-stage comparison is really needed.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------------+
+| Command Line | Structures/ComparedComparison |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
 
 
 .. _concrete-visibility:
@@ -521,7 +753,14 @@ Concrete Visibility
 
 Methods that implements an interface in a class must be public.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------------+
+| Command Line | Interfaces/ConcreteVisibility |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
 
 
 .. _const-with-array:
@@ -532,7 +771,14 @@ Const With Array
 
 The const keyword supports array since PHP 5.6.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/ConstWithArray                                                              |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
+
 
 
 .. _constant-class:
@@ -545,7 +791,14 @@ A class or an interface only made up of constants. Constants usually have to be 
 
 As such, they should be PHP constants (build with define or const), or included in a class with other methods and properties.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------+
+| Command Line | Classes/ConstantClass |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
 
 
 .. _constant-scalar-expression:
@@ -555,6 +808,16 @@ Constant Scalar Expression
 
 
 Since PHP 5.6, it is possible to use expression with Constants and simple operators in places where one define default values.
+
++--------------+------------------------------+
+| Command Line | Php/ConstantScalarExpression |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | none                         |
++--------------+------------------------------+
+
+
 
 .. _constant-scalar-expressions:
 
@@ -568,7 +831,14 @@ Those expressions (using simple operators) may only manipulate other constants, 
 
 This is not compatible with previous versions.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/ConstantScalarExpression                                                                                                                              |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                                  |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _constants-created-outside-its-namespace:
@@ -581,7 +851,14 @@ Using the define() function, it is possible to create constant outside their nam
 
 However, this makes the code confusing and difficult to debug. It is recommended to move the constant definition to its namespace.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------------+
+| Command Line | Constants/CreatedOutsideItsNamespace |
++--------------+--------------------------------------+
+| clearPHP     |                                      |
++--------------+--------------------------------------+
+| Analyzers    | :ref:`Analyze`                       |
++--------------+--------------------------------------+
+
 
 
 .. _constants-with-strange-names:
@@ -594,7 +871,14 @@ List of constants being defined with names that are incompatible with PHP standa
 
 For example, define('ABC!', 1); The constant ABC! will not be accessible via the PHP syntax, such as $x = ABC!; but only with the function constant('ABC!');. It may also be tested with defined('ABC!');.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------+
+| Command Line | Constants/ConstantStrangeNames |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
 
 
 .. _could-be-class-constant:
@@ -607,7 +891,14 @@ The following property is defined and used, but never modified. This may be tran
 
 Starting with PHP 5.6, even array() may be defined as constants.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Classes/CouldBeClassConstant |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _could-be-static:
@@ -627,7 +918,14 @@ This global is only used in one function or method. It may be called 'static', i
    }
    ?>
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/CouldBeStatic |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _could-use-short-assignation:
@@ -644,10 +942,14 @@ This approach is good for readability, and saves some memory in the process.
 
 List of those operators : +=, -=, \*=, /=, %=, \*\*=, .=, &=, \|=, ^=, >>=, <<=
 
-clearPHP: `use-short-assignations <https://github.com/dseguy/clearPHP/tree/master/rules/use-short-assignations.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/CouldUseShortAssignation                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `use-short-assignations <https://github.com/dseguy/clearPHP/tree/master/rules/use-short-assignations.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Performances`
 
 
 .. _could-use-self:
@@ -658,7 +960,14 @@ Could use self
 
 Self keywords refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------+
+| Command Line | Classes/ShouldUseSelf |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
 
 
 .. _dangling-array-references:
@@ -673,10 +982,14 @@ When omitting this step, the next loop that will also require this variable will
 
 Add unset( $as\_variable) after the loop.
 
-clearPHP: `no-dangling-reference <https://github.com/dseguy/clearPHP/tree/master/rules/no-dangling-reference.md>`__
++--------------+-----------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/DanglingArrayReferences                                                                        |
++--------------+-----------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-dangling-reference <https://github.com/dseguy/clearPHP/tree/master/rules/no-dangling-reference.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                            |
++--------------+-----------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _deep-definitions:
@@ -693,7 +1006,14 @@ Functions are excluded from autoload, but shall be gathered in libraries, and no
 
 Constants definitions are tolerated inside functions : they may be used for avoiding repeat, or noting the usage of such function.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Functions/DeepDefinitions |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _define-with-array:
@@ -704,7 +1024,14 @@ Define With Array
 
 PHP 7.0 has the ability to define an array as a constant, using the define() native call. This was not possible until that version, only with the const keyword.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/DefineWithArray                                                                                        |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _deprecated-code:
@@ -715,10 +1042,14 @@ Deprecated code
 
 The following functions have been deprecated in PHP. Whatever the version you are using, it is recommended to stop using them and replace them with a durable equivalent.
 
-clearPHP: `no-deprecated <https://github.com/dseguy/clearPHP/tree/master/rules/no-deprecated.md>`__
++--------------+-------------------------------------------------------------------------------------------+
+| Command Line | Php/Deprecated                                                                            |
++--------------+-------------------------------------------------------------------------------------------+
+| clearPHP     | `no-deprecated <https://github.com/dseguy/clearPHP/tree/master/rules/no-deprecated.md>`__ |
++--------------+-------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                            |
++--------------+-------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _dereferencing-string-and-arrays:
@@ -736,7 +1067,14 @@ May be replaced by
 $y = array(4,5,6)[2];
 $y = [4,5,6][2];
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`
++--------------+------------------------------------------------------+
+| Command Line | Structures/DereferencingAS                           |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
+
 
 
 .. _direct-injection:
@@ -747,7 +1085,14 @@ Direct Injection
 
 The following code act directly upon PHP incoming variables like $\_GET and $\_POST. This make those snippet very unsafe.
 
-This analyzer is part of the following recipes :  :ref:`Security`
++--------------+--------------------------+
+| Command Line | Security/DirectInjection |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Security`          |
++--------------+--------------------------+
+
 
 
 .. _don't-change-incomings:
@@ -760,7 +1105,14 @@ PHP hands over a lot of information using special variables like $\_GET, $\_POST
 
 It is recommended to put the modified values in another variable, and keep the original one intact.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------------+
+| Command Line | Structures/NoChangeIncomingVariables |
++--------------+--------------------------------------+
+| clearPHP     |                                      |
++--------------+--------------------------------------+
+| Analyzers    | :ref:`Analyze`                       |
++--------------+--------------------------------------+
+
 
 
 .. _double-assignation:
@@ -771,7 +1123,14 @@ Double Assignation
 
 This is when a same container (variable, property, array index) are assigned with values twice in a row. One of them is probably a debug instruction, that was forgotten.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Structures/DoubleAssignation |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _double-instruction:
@@ -782,7 +1141,14 @@ Double Instruction
 
 Twice the same call in a row. This is worth a check.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Structures/DoubleInstruction |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _echo-with-concat:
@@ -801,10 +1167,14 @@ instead of
 echo  $a . ' b ' . $c;
 echo $a b $c;
 
-clearPHP: `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/EchoWithConcat                                                                                                             |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Performances`, :ref:`Analyze`                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Performances`, :ref:`Analyze`
 
 
 .. _echo-concatenation:
@@ -815,10 +1185,14 @@ Echo concatenation
 
 Echo accepts an arbitrary number of argument, and will automatically concatenate all incoming arguments. It is not necessary to concatenate values when calling echo and it will save a few commands.
 
-clearPHP: `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/EchoArguments                                                                                                              |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Performances`                                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Performances`
 
 
 .. _else-if-versus-elseif:
@@ -829,7 +1203,14 @@ Else If Versus Elseif
 
 The keyword elseif SHOULD be used instead of else if so that all control keywords look like single words. (Directly quoted from the PHP-FIG documentation).
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Structures/ElseIfElseif |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _empty-classes:
@@ -840,7 +1221,14 @@ Empty Classes
 
 List of empty classes. Classes that are directly derived from an exception are not considered here.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------+
+| Command Line | Classes/EmptyClass |
++--------------+--------------------+
+| clearPHP     |                    |
++--------------+--------------------+
+| Analyzers    | :ref:`Analyze`     |
++--------------+--------------------+
+
 
 
 .. _empty-function:
@@ -851,7 +1239,14 @@ Empty Function
 
 Function or method whose body is empty. Such functions or methods are rarely useful. As a bare minimum, the function should return some useful value, even if constant.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Functions/EmptyFunction |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _empty-instructions:
@@ -865,7 +1260,14 @@ Empty instructions are part of the code that have no instructions. This may be t
 $condition = 3;;;;
 if ($condition) { }
 
-This analyzer is part of the following recipes :  :ref:`Dead code <dead-code>`, :ref:`Analyze`
++--------------+----------------------------------------------+
+| Command Line | Structures/EmptyLines                        |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++--------------+----------------------------------------------+
+
 
 
 .. _empty-interfaces:
@@ -876,7 +1278,14 @@ Empty Interfaces
 
 Empty interfaces. Interfaces should have some function defined, and not be totally empty.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Interfaces/EmptyInterface |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _empty-list:
@@ -887,7 +1296,14 @@ Empty List
 
 Empty list() are not allowed anymore in PHP 7. There must be at least one variable in the list call.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+----------------------------------------------------------------------+
+| Command Line | Php/EmptyList                                                        |
++--------------+----------------------------------------------------------------------+
+| clearPHP     |                                                                      |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------+
+
 
 
 .. _empty-namespace:
@@ -898,10 +1314,14 @@ Empty Namespace
 
 Declaring a namespace in the code and not using it for structure declarations (classes, interfaces, etc...) or global instructions is useless.
 
-clearPHP: `no-empty-namespace <https://github.com/dseguy/clearPHP/tree/master/rules/no-empty-namespace.md>`__
++--------------+-----------------------------------------------------------------------------------------------------+
+| Command Line | Namespaces/EmptyNamespace                                                                           |
++--------------+-----------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-empty-namespace <https://github.com/dseguy/clearPHP/tree/master/rules/no-empty-namespace.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                        |
++--------------+-----------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
 
 
 .. _empty-try-catch:
@@ -916,7 +1336,14 @@ At worse, the error should be logged somewhere, so as to measure the actual usag
 
 catch( Exception $e) should be banned, as they will simply ignore any error.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/EmptyTryCatch |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _empty-with-expression:
@@ -927,7 +1354,14 @@ Empty With Expression
 
 The function 'empty()' doesn't accept expressions until PHP 5.5. Until then, it is necessary to store the result of the expression in a variable and then, test it with empty().
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/EmptyWithExpression                                                                             |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _empty-traits:
@@ -938,7 +1372,14 @@ Empty traits
 
 List of all empty trait defined in the code. May be they are RFU.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------+
+| Command Line | Traits/EmptyTrait |
++--------------+-------------------+
+| clearPHP     |                   |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
+
 
 
 .. _eval-without-try:
@@ -949,7 +1390,14 @@ Eval Without Try
 
 Eval() emits a ParseError Exception with PHP 7 and later. Catching this exception is the recommended way to handle errors while using the eval function.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/EvalWithoutTry                                                                                                  |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                            |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _eval()-usage:
@@ -963,10 +1411,14 @@ Using eval is bad for performances (compilation time), for caches (it won't be c
 Most of the time, it is possible to replace the code by some standard PHP, like variable variable for accessing a variable for which you have the name.
 At worse, including a pre-generated file will be faster.
 
-clearPHP: `no-eval <https://github.com/dseguy/clearPHP/tree/master/rules/no-eval.md>`__
++--------------+-------------------------------------------------------------------------------+
+| Command Line | Structures/EvalUsage                                                          |
++--------------+-------------------------------------------------------------------------------+
+| clearPHP     | `no-eval <https://github.com/dseguy/clearPHP/tree/master/rules/no-eval.md>`__ |
++--------------+-------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`                                           |
++--------------+-------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Performances`
 
 
 .. _exit()-usage:
@@ -979,10 +1431,14 @@ Using exit or die() in the code makes the code untestable (it will break unit te
 
 Try exiting the function/class, or throw exception that may be caught later in the code.
 
-clearPHP: `no-exit <https://github.com/dseguy/clearPHP/tree/master/rules/no-exit.md>`__
++--------------+-------------------------------------------------------------------------------+
+| Command Line | Structures/ExitUsage                                                          |
++--------------+-------------------------------------------------------------------------------+
+| clearPHP     | `no-exit <https://github.com/dseguy/clearPHP/tree/master/rules/no-exit.md>`__ |
++--------------+-------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                |
++--------------+-------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _exponent-usage:
@@ -993,7 +1449,14 @@ Exponent usage
 
 Usage of the \*\* operator or \*\*=, to make exponents.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/ExponentUsage                                                               |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
+
 
 
 .. _extension-fann:
@@ -1004,7 +1467,14 @@ Extension fann
 
 ext/fann
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------+
+| Command Line | Extensions/Extfann |
++--------------+--------------------+
+| clearPHP     |                    |
++--------------+--------------------+
+| Analyzers    | :ref:`Analyze`     |
++--------------+--------------------+
+
 
 
 .. _followed-injections:
@@ -1015,7 +1485,14 @@ Followed injections
 
 There is a link between those function and some of the sensitive PHP functions. This may lead to Injections of various kind.
 
-This analyzer is part of the following recipes :  :ref:`Security`
++--------------+--------------------------+
+| Command Line | Security/RemoteInjection |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Security`          |
++--------------+--------------------------+
+
 
 
 .. _for-using-functioncall:
@@ -1026,10 +1503,14 @@ For Using Functioncall
 
 It is advised to avoid functioncall in the for() statement. For example, $nb = count($array); for($i = 0; $i < $nb; $i++) {} is faster than for($i = 0; $i < count($array); $i++) {}.
 
-clearPHP: `no-functioncall-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-functioncall-in-loop.md>`__
++--------------+---------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/ForWithFunctioncall                                                                                |
++--------------+---------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-functioncall-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-functioncall-in-loop.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                           |
++--------------+---------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Performances`
 
 
 .. _foreach-dont-change-pointer:
@@ -1040,7 +1521,14 @@ Foreach Dont Change Pointer
 
 In PHP 7.0, the foreach loop won't change the internal pointer of the array, but will work on a copy. So, applying array pointer's functions such as current or next to the source array won't have the same behavior than in PHP 5.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Php/ForeachDontChangePointer                         |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _foreach-needs-reference-array:
@@ -1074,7 +1562,14 @@ This will have an actual effect
        }
    ?>
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------------------+
+| Command Line | Structures/ForeachNeedReferencedSource |
++--------------+----------------------------------------+
+| clearPHP     |                                        |
++--------------+----------------------------------------+
+| Analyzers    | :ref:`Analyze`                         |
++--------------+----------------------------------------+
+
 
 
 .. _foreach-reference-is-not-modified:
@@ -1085,7 +1580,14 @@ Foreach Reference Is Not Modified
 
 Foreach statement may loop using a reference, especially when the loop has to change values of the array it is looping on. In the spotted loop, reference are used but never modified. They may be removed.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------------------+
+| Command Line | Structures/ForeachReferenceIsNotModified |
++--------------+------------------------------------------+
+| clearPHP     |                                          |
++--------------+------------------------------------------+
+| Analyzers    | :ref:`Analyze`                           |
++--------------+------------------------------------------+
+
 
 
 .. _foreach-with-list():
@@ -1116,7 +1618,14 @@ Previously, it was compulsory to extract the data from the blind array :
        }
    ?>
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`
++--------------+------------------------------------------------------+
+| Command Line | Structures/ForeachWithList                           |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
+
 
 
 .. _forgotten-visibility:
@@ -1129,10 +1638,14 @@ Some classes elements (constant, property, method) are missing their explicit vi
 
 It should at least be mentioned as public, or may be reviewed as protected or private.
 
-clearPHP: `always-have-visibility <https://github.com/dseguy/clearPHP/tree/master/rules/always-have-visibility.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/NonPpp                                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `always-have-visibility <https://github.com/dseguy/clearPHP/tree/master/rules/always-have-visibility.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _forgotten-whitespace:
@@ -1145,7 +1658,14 @@ Those are white space that are at either end of a script : at the beginning or t
 
 Usually, such white space are forgotten, and may end up summoning the infamous 'headers already sent' error. It is better to remove them.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------+
+| Command Line | Structures/ForgottenWhiteSpace |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
 
 
 .. _fully-qualified-constants:
@@ -1162,7 +1682,14 @@ However, the name should be fully qualified without the initial \. Here, \a\b\c 
 
 Also, the namespace will be absolute, and not a relative namespace of the current one.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------------------+
+| Command Line | Namespaces/ConstantFullyQualified |
++--------------+-----------------------------------+
+| clearPHP     |                                   |
++--------------+-----------------------------------+
+| Analyzers    | :ref:`Analyze`                    |
++--------------+-----------------------------------+
+
 
 
 .. _function-subscripting,-old-style:
@@ -1180,7 +1707,14 @@ instead of spreading this on two lines :
 $tmp = f();
 $x = $tmp[1];
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------------+
+| Command Line | Structures/FunctionPreSubscripting |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
 
 
 .. _function-subscripting:
@@ -1193,7 +1727,14 @@ This is a new PHP 5.4 feature, where one may use the result of a method directly
 
 This was not possible until PHP 5.4. Is used to be necessary to put the result in a variable, and then access the desired index.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`
++--------------+---------------------------------+
+| Command Line | Structures/FunctionSubscripting |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`       |
++--------------+---------------------------------+
+
 
 
 .. _functions-removed-in-php-5.4:
@@ -1204,7 +1745,14 @@ Functions Removed In PHP 5.4
 
 Those functions were removed in PHP 5.4.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php54RemovedFunctions                                                                                                                             |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                       |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _functions-removed-in-php-5.5:
@@ -1215,7 +1763,14 @@ Functions Removed In PHP 5.5
 
 Those functions were removed in PHP 5.5.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php55RemovedFunctions                                                                                  |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _functions-in-loop-calls:
@@ -1230,7 +1785,14 @@ When those functions have no other interaction, the code is useless and should b
 
 Loops of size 2, 3 and 4 are supported.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Performances`
++--------------+-------------------------------------+
+| Command Line | Functions/LoopCalling               |
++--------------+-------------------------------------+
+| clearPHP     |                                     |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
+
 
 
 .. _global-inside-loop:
@@ -1241,7 +1803,14 @@ Global Inside Loop
 
 The global keyword should be out of loops. It will be evaluated each loop, slowing the whole process.
 
-This analyzer is part of the following recipes :  :ref:`Performances`
++--------------+------------------------------+
+| Command Line | Structures/GlobalOutsideLoop |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Performances`          |
++--------------+------------------------------+
+
 
 
 .. _global-usage:
@@ -1254,10 +1823,14 @@ List usage of globals variables, with global keywords or direct access to $GLOBA
 
 It is recommended to avoid using global variables, at it makes it very difficult to track changes in values across the whole application.
 
-clearPHP: `no-global <https://github.com/dseguy/clearPHP/tree/master/rules/no-global.md>`__
++--------------+-----------------------------------------------------------------------------------+
+| Command Line | Structures/GlobalUsage                                                            |
++--------------+-----------------------------------------------------------------------------------+
+| clearPHP     | `no-global <https://github.com/dseguy/clearPHP/tree/master/rules/no-global.md>`__ |
++--------------+-----------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                    |
++--------------+-----------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _hardcoded-passwords:
@@ -1268,10 +1841,14 @@ Hardcoded passwords
 
 Hardcoding passwords is a bad idea. Not only it make the code difficult to change, but it is an information leak. It is better to hide this kind of information out of the code.
 
-clearPHP: `no-hardcoded-credential <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-credential.md>`__
++--------------+---------------------------------------------------------------------------------------------------------------+
+| Command Line | Functions/HardcodedPasswords                                                                                  |
++--------------+---------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-hardcoded-credential <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-credential.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                |
++--------------+---------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _hash-algorithms:
@@ -1282,7 +1859,14 @@ Hash Algorithms
 
 There is a long but limited list of hashing algorithm available to PHP. The one found below doesn't seem to be existing.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------+
+| Command Line | Php/HashAlgos  |
++--------------+----------------+
+| clearPHP     |                |
++--------------+----------------+
+| Analyzers    | :ref:`Analyze` |
++--------------+----------------+
+
 
 
 .. _hash-algorithms-incompatible-with-php-5.3:
@@ -1293,7 +1877,14 @@ Hash Algorithms incompatible with PHP 5.3
 
 List of hash algorithms incompatible with PHP 5.3. They were introduced in newer version, and, as such, are not available with older versions.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`
++--------------+---------------------------+
+| Command Line | Php/HashAlgos53           |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53` |
++--------------+---------------------------+
+
 
 
 .. _hash-algorithms-incompatible-with-php-5.4/5:
@@ -1304,7 +1895,14 @@ Hash Algorithms incompatible with PHP 5.4/5
 
 List of hash algorithms incompatible with PHP 5.4 and 5.5. They were introduced in newer version, or removed in PHP 5.4. As such, they are not available with older versions.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/HashAlgos54                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _hexadecimal-in-string:
@@ -1315,7 +1913,14 @@ Hexadecimal In String
 
 Mark strings that may be confused with hexadecimal.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Type/HexadecimalString                                                                                                                                           |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                                  |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _htmlentities-calls:
@@ -1332,7 +1937,14 @@ The third argument of the functions is the encoding of the string. In PHP 5.3, i
 
 Also, note that arguments 2 and 3 are constants and string (respectively), and should be issued from the list of values available in the manual. Other values than those will make PHP use the default values.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------------+
+| Command Line | Structures/Htmlentitiescall |
++--------------+-----------------------------+
+| clearPHP     |                             |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
+
 
 
 .. _implement-is-for-interface:
@@ -1343,7 +1955,14 @@ Implement is for interface
 
 When deriving classes, implements should be used for interfaces, and extends with classes.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------------+
+| Command Line | Classes/ImplementIsForInterface |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
 
 
 .. _implicit-global:
@@ -1354,7 +1973,14 @@ Implicit global
 
 Global variables, that are used in local scope with global Keyword, but are not declared as Global in the global scope. They may be mistaken with distinct values, while, in PHP, variables in the global scope are truely global.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Structures/ImplicitGlobal |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _incompilable-files:
@@ -1369,10 +1995,14 @@ This is usually undesirable, as all code must compile before being executed. It 
 
 Code that is incompilable with older PHP versions means that the code is breaking backward compatibility : good or bad is project decision.
 
-clearPHP: `no-incompilable <https://github.com/dseguy/clearPHP/tree/master/rules/no-incompilable.md>`__
++--------------+-----------------------------------------------------------------------------------------------+
+| Command Line | Php/Incompilable                                                                              |
++--------------+-----------------------------------------------------------------------------------------------+
+| clearPHP     | `no-incompilable <https://github.com/dseguy/clearPHP/tree/master/rules/no-incompilable.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                |
++--------------+-----------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _indices-are-int-or-string:
@@ -1387,7 +2017,14 @@ Even integers inside strings will be converted, though not all of them : $array[
 
 As a general rule of thumb, only use integers or strings that don\'t look like integers.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------------+
+| Command Line | Structures/IndicesAreIntOrString |
++--------------+----------------------------------+
+| clearPHP     |                                  |
++--------------+----------------------------------+
+| Analyzers    | :ref:`Analyze`                   |
++--------------+----------------------------------+
+
 
 
 .. _instantiating-abstract-class:
@@ -1398,7 +2035,14 @@ Instantiating Abstract Class
 
 Those code will raise a PHP fatal error at execution time : 'Cannot instantiate abstract class'. The classes are actually abstract classes, and should be derived into a concrete class to be instantiated.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------------+
+| Command Line | Classes/InstantiatingAbstractClass |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
 
 
 .. _invalid-constant-name:
@@ -1411,7 +2055,14 @@ According to PHP's manual, constant names, ' A valid constant name starts with a
 
 Constant, when defined using 'define()' function, must follow this regex : /[a-zA-Z\_\x7f-\xff][a-zA-Z0-9\_\x7f-\xff]\*/
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------+
+| Command Line | Constants/InvalidName |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
 
 
 .. _isset-with-constant:
@@ -1437,7 +2088,14 @@ Fatal error: Cannot use isset() on the result of an expression (you can use "nul
 
 This is a backward incompatibility.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/IssetWithConstant                                                                               |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _join-file():
@@ -1450,7 +2108,14 @@ Applying join (or implode) to the result of file will provide the same results t
 
 Always use file\_get\_contents() to get the content of a file as a string.
 
-This analyzer is part of the following recipes :  :ref:`Performances`
++--------------+-----------------------+
+| Command Line | Performances/JoinFile |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Performances`   |
++--------------+-----------------------+
+
 
 
 .. _list-with-appends:
@@ -1461,7 +2126,14 @@ List With Appends
 
 List() behavior has changed in PHP 7.0 and it has impact on the indexing when list is used with the [] operator.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ListWithAppends                                                                                                                                                              |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                                                  |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _locally-unused-property:
@@ -1474,7 +2146,14 @@ Those properties are defined in a class, and this class doesn't have any method 
 
 While this is syntacticly correct, it is unusual that defined ressources are used in a child class. It may be worth moving the definition to another class, or to move accessing methods to the class.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
++--------------+----------------------------------------------+
+| Command Line | Classes/LocallyUnusedProperty                |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
 
 
 .. _logical-should-use-&&,-||,-^:
@@ -1487,10 +2166,14 @@ Logical operators come in two flavors :  and / &&, \|\| / or, ^ / xor. However, 
 
 It is recommended to use the symbol operators, rather than the letter ones.
 
-clearPHP: `no-letter-logical <https://github.com/dseguy/clearPHP/tree/master/rules/no-letter-logical.md>`__
++--------------+---------------------------------------------------------------------------------------------------+
+| Command Line | Php/LogicalInLetters                                                                              |
++--------------+---------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-letter-logical <https://github.com/dseguy/clearPHP/tree/master/rules/no-letter-logical.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _lone-blocks:
@@ -1503,7 +2186,14 @@ Blocks are compulsory when defining a structure, such as a class or a function. 
 
 Blocks are also valid syntax that group several instructions together, though it has no effect at all, except confuse the reader. Most often, it is a ruin from a previous flow control instruction, whose condition was removed or commented. They should be removed.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------+
+| Command Line | Structures/LoneBlock |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
+
 
 
 .. _lost-references:
@@ -1516,7 +2206,14 @@ When assigning a referenced variable with another reference, the initial referen
 
 Do not reassign a reference with another reference. Assign new content to the reference to change its value.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Variables/LostReferences |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _magic-visibility:
@@ -1527,7 +2224,14 @@ Magic Visibility
 
 The magic methods must have public visibility and cannot be static
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/toStringPss                                                                                                        |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                            |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _malformed-octal:
@@ -1540,7 +2244,14 @@ Those numbers starts with a 0, so they are using the PHP octal convention. There
 
 Also, note that very large octal, usually with more than 21 figures, will be turned into a real number and undergo a reduction in precision.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------+
+| Command Line | Type/MalformedOctal |
++--------------+---------------------+
+| clearPHP     |                     |
++--------------+---------------------+
+| Analyzers    | :ref:`Analyze`      |
++--------------+---------------------+
+
 
 
 .. _methodcall-on-new:
@@ -1551,7 +2262,14 @@ Methodcall On New
 
 This was added in PHP 5.4+
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`
++--------------+---------------------------+
+| Command Line | Php/MethodCallOnNew       |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53` |
++--------------+---------------------------+
+
 
 
 .. _mixed-keys:
@@ -1564,7 +2282,14 @@ When defining default values in arrays, it is recommended to avoid mixing consta
 
 Either switch to a newer version of PHP (5.5 or newer), or make sure the resulting array is the one you expect. If not, reorder the definitions.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`
++--------------+------------------------------------------------------+
+| Command Line | Arrays/MixedKeys                                     |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
+
 
 
 .. _multiple-class-declarations:
@@ -1577,7 +2302,14 @@ It is possible to declare several times the same class in the code. PHP will not
 
 It is recommended to avoid declaring several times the same class in the code. At least, separate them with namespaces, they are for here for that purpose.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Classes/MultipleDeclarations |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _multiple-constant-definition:
@@ -1588,7 +2320,14 @@ Multiple Constant Definition
 
 Some constants are defined several times in your code. This will lead to a fatal error, if they are defined during the same execution.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------------+
+| Command Line | Constants/MultipleConstantDefinition |
++--------------+--------------------------------------+
+| clearPHP     |                                      |
++--------------+--------------------------------------+
+| Analyzers    | :ref:`Analyze`                       |
++--------------+--------------------------------------+
+
 
 
 .. _multiple-definition-of-the-same-argument:
@@ -1606,10 +2345,14 @@ x(1,2); => will display 2
 
 However, this is not common programming practise : all arguments should be named differently.
 
-clearPHP: `all-unique-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/all-unique-arguments.md>`__
++--------------+---------------------------------------------------------------------------------------------------------+
+| Command Line | Functions/MultipleSameArguments                                                                         |
++--------------+---------------------------------------------------------------------------------------------------------+
+| clearPHP     | `all-unique-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/all-unique-arguments.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`                                    |
++--------------+---------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
 
 
 .. _multiple-index-definition:
@@ -1624,7 +2367,14 @@ Example : $x = array(1 => 2, 2 => 3,  1 => 3);
 
 They are indeed overwriting each other. This is most probably a typo.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Arrays/MultipleIdenticalKeys |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _multiples-identical-case:
@@ -1635,10 +2385,14 @@ Multiples Identical Case
 
 Some cases are defined multiple times, but only one will be processed. Check the list of cases, and remove the extra one.
 
-clearPHP: `no-duplicate-case <https://github.com/dseguy/clearPHP/tree/master/rules/no-duplicate-case.md>`__
++--------------+---------------------------------------------------------------------------------------------------+
+| Command Line | Structures/MultipleDefinedCase                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-duplicate-case <https://github.com/dseguy/clearPHP/tree/master/rules/no-duplicate-case.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _multiply-by-one:
@@ -1651,10 +2405,14 @@ Multiplying by 1 is useless.
 
 If it is used to type cast a value to number, then casting (integer) or (real) is clearer.
 
-clearPHP: `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__
++--------------+-----------------------------------------------------------------------------------------------+
+| Command Line | Structures/MultiplyByOne                                                                      |
++--------------+-----------------------------------------------------------------------------------------------+
+| clearPHP     | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                |
++--------------+-----------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _must-return-methods:
@@ -1665,7 +2423,14 @@ Must Return Methods
 
 Those methods are expected to return a value that will be used later. Without return, they are useless.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------+
+| Command Line | Functions/MustReturn |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
+
 
 
 .. _namespace-with-fully-qualified-name:
@@ -1680,7 +2445,14 @@ It may also mean 'current namespace' : for example, namespace\A\B\C represents t
 
 The PHP compiler makes no difference between 'namespace \A\B\C', and 'namespace\A\B\C'. In each case, it will try to locate the constant C in the namespace \A\B, and will generate a fatal error if it can't find it.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------------+
+| Command Line | Namespaces/NamespaceFullyQualified |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
 
 
 .. _nested-ternary:
@@ -1693,21 +2465,32 @@ Ternary operators ($a == 1 ? $b : $c) are a convenient instruction to apply some
 
 However, ternary operators tends to make the syntax very difficult to read when they are nested. It is then recommended to use an if() structure, and make the whole code readable.
 
-clearPHP: `no-nested-ternary <https://github.com/dseguy/clearPHP/tree/master/rules/no-nested-ternary.md>`__
++--------------+---------------------------------------------------------------------------------------------------+
+| Command Line | Structures/NestedTernary                                                                          |
++--------------+---------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-nested-ternary <https://github.com/dseguy/clearPHP/tree/master/rules/no-nested-ternary.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _never-used-properties:
 
-Never used properties
+Never Used Properties
 #####################
 
 
 Properties that are never used. They are defined, but never actually used.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Classes/PropertyNeverUsed |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _new-functions-in-php-5.4:
@@ -1718,7 +2501,14 @@ New functions in PHP 5.4
 
 PHP introduced new functions in PHP 5.4. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Php/Php54NewFunctions                                |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _new-functions-in-php-5.5:
@@ -1729,7 +2519,14 @@ New functions in PHP 5.5
 
 PHP introduced new functions in PHP 5.5. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP71`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/Php55NewFunctions                                                           |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------+
+
 
 
 .. _new-functions-in-php-5.6:
@@ -1740,7 +2537,14 @@ New functions in PHP 5.6
 
 PHP introduced new functions in PHP 5.6. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/Php56NewFunctions                                                           |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
+
 
 
 .. _no-direct-call-to-magicmethod:
@@ -1755,7 +2559,14 @@ For example, print $x->\_\_get('a'); should be written $x->a;.
 
 Accessing those methods in a static way is also discouraged.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------------+
+| Command Line | Classes/DirectCallToMagicMethod |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
 
 
 .. _no-direct-usage:
@@ -1781,7 +2592,14 @@ For example, glob() returns an array, unless some error happens, in which case i
        }
    ?>
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/NoDirectUsage |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _no-hardcoded-ip:
@@ -1792,7 +2610,14 @@ No Hardcoded Ip
 
 Do not leave hard coded IP in your code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/NoHardcodedIp |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _no-hardcoded-path:
@@ -1803,10 +2628,14 @@ No Hardcoded Path
 
 It is not recommended to have literals when reaching for files. Either use \_\_FILE\_\_ and \_\_DIR\_\_ to make the path relative to the current file, or add some DOC\_ROOT as a configuration constant that will allow you to move your script later.
 
-clearPHP: `no-hardcoded-path <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-path.md>`__
++--------------+---------------------------------------------------------------------------------------------------+
+| Command Line | Structures/NoHardcodedPath                                                                        |
++--------------+---------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-hardcoded-path <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-path.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _no-hardcoded-port:
@@ -1817,7 +2646,14 @@ No Hardcoded Port
 
 When connecting to a remove serve, port is an important information. It is recommended to make this configurable (with constant or configuration), to as to be able to change this value without changing the code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------+
+| Command Line | Structures/NoHardcodedPort |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
 
 
 .. _no-implied-if:
@@ -1834,10 +2670,14 @@ However, such structures are confusing. It is easy to misread them as conditions
 
 It is recommended to use a real 'if then' structures, to make the condition readable.
 
-clearPHP: `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__
++--------------+-------------------------------------------------------------------------------------------+
+| Command Line | Structures/ImpliedIf                                                                      |
++--------------+-------------------------------------------------------------------------------------------+
+| clearPHP     | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
++--------------+-------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                            |
++--------------+-------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _no-list-with-string:
@@ -1848,7 +2688,14 @@ No List With String
 
 list() can't be used anymore to access particular offset in a string. This should be done with substr() or $string[$offset] syntax.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/NoListWithString                                                                                       |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _no-parenthesis-for-language-construct:
@@ -1861,10 +2708,14 @@ Some PHP language constructs, such are include, print, echo don't need parenthes
 
 It it better to avoid using parenthesis with echo, print, return, throw, include and require (and \_once).
 
-clearPHP: `no-parenthesis-for-language-construct <https://github.com/dseguy/clearPHP/tree/master/rules/no-parenthesis-for-language-construct.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/NoParenthesisForLanguageConstruct                                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-parenthesis-for-language-construct <https://github.com/dseguy/clearPHP/tree/master/rules/no-parenthesis-for-language-construct.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                                            |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _no-public-access:
@@ -1875,7 +2726,14 @@ No Public Access
 
 Properties are declared with public access, but are never used publicly. May be they can be made protected or private.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------+
+| Command Line | Classes/NoPublicAccess |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
 
 
 .. _no-real-comparison:
@@ -1888,10 +2746,14 @@ Avoid comparing decimal numbers with ==, ===, !==, != : those numbers have an er
 
 Use formulas like 'abs($value - 1.2) < 0.0001' to approximate values with a given precision.
 
-clearPHP: `no-real-comparison <https://github.com/dseguy/clearPHP/tree/master/rules/no-real-comparison.md>`__
++--------------+-----------------------------------------------------------------------------------------------------+
+| Command Line | Type/NoRealComparison                                                                               |
++--------------+-----------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-real-comparison <https://github.com/dseguy/clearPHP/tree/master/rules/no-real-comparison.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                      |
++--------------+-----------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _no-self-referencing-constant:
@@ -1924,7 +2786,14 @@ The code needs to reference the full class's name to do so, without using the cu
        }
    ?>
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------------------+
+| Command Line | Classes/NoSelfReferencingConstant |
++--------------+-----------------------------------+
+| clearPHP     |                                   |
++--------------+-----------------------------------+
+| Analyzers    | :ref:`Analyze`                    |
++--------------+-----------------------------------+
+
 
 
 .. _no-array\_merge-in-loops:
@@ -1940,10 +2809,14 @@ Since arrays way be quite big, it is recommended to avoid using merge in a loop.
 This may be achieved easily with the variadic operator : array\_merge(...array\_collecting\_the\_arrays), or 
 with call\_user\_func\_array('array\_merge', array\_collecting\_the\_arrays()). The Variadic is slightly faster than call\_user\_func\_array.
 
-clearPHP: `no-array_merge-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-array_merge-in-loop.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Performances/ArrayMergeInLoops                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-array_merge-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-array_merge-in-loop.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Performances`
 
 
 .. _non-ascii-variables:
@@ -1954,7 +2827,14 @@ Non Ascii variables
 
 PHP supports variables with '[a-zA-Z\_\x7f-\xff][a-zA-Z0-9\_\x7f-\xff]\*'. In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more care when éditing the code or passing it from OS to OS.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------+
+| Command Line | Variables/VariableNonascii |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
 
 
 .. _non-static-methods-called-in-a-static:
@@ -1988,7 +2868,14 @@ nor at running time.
 It is recommended to fix this situation : make the method actually static, or use it only 
 in object context.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+-------------------------------------------------------------------------------------------------+
+| Command Line | Classes/NonStaticMethodsCalledStatic                                                            |
++--------------+-------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                 |
++--------------+-------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------+
+
 
 
 .. _non-constant-index-in-array:
@@ -2007,7 +2894,14 @@ $array[index] = 1; // now 1 to the element 2 in $array
 
 It is recommended to make index a real string (with ' or "), or to define the corresponding constant to avoid any future surprise.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Arrays/NonConstantArray |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _not-definitions-only:
@@ -2020,7 +2914,14 @@ Files should only include definitions (class, functions, traits, interfaces, con
 
 Within this context, globals, use, and namespaces instructions are not considered a warning.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Files/NotDefinitionsOnly |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _not-not:
@@ -2031,10 +2932,14 @@ Not Not
 
 This is a wrongly done type casting to boolean : !!($x) is (boolean) $x.
 
-clearPHP: `no-implied-cast <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-cast.md>`__
++--------------+-----------------------------------------------------------------------------------------------+
+| Command Line | Structures/NotNot                                                                             |
++--------------+-----------------------------------------------------------------------------------------------+
+| clearPHP     | `no-implied-cast <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-cast.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                |
++--------------+-----------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _not-substr-one:
@@ -2050,7 +2955,14 @@ It is recommended to use it.
 
 Beware that substr and $v[$pos] are similar, while mb\_substr() is not.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Performances`
++--------------+-------------------------------------+
+| Command Line | Structures/NoSubstrOne              |
++--------------+-------------------------------------+
+| clearPHP     |                                     |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
+
 
 
 .. _null-on-new:
@@ -2065,7 +2977,14 @@ After issuing a 'new' with those classes, it was important to check if the retur
 
 This inconsistency has been cleaned in PHP 7 : see https://wiki.php.net/rfc/internal\_constructor\_behaviour.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/NullOnNew                                                                                                          |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                            |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _objects-don't-need-references:
@@ -2076,10 +2995,14 @@ Objects Don't Need References
 
 There is no need to create references for objects, as those are always passed by reference when used as arguments.
 
-clearPHP: `no-references-on-objects <https://github.com/dseguy/clearPHP/tree/master/rules/no-references-on-objects.md>`__
++--------------+-----------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/ObjectReferences                                                                                     |
++--------------+-----------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-references-on-objects <https://github.com/dseguy/clearPHP/tree/master/rules/no-references-on-objects.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                  |
++--------------+-----------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _old-style-constructor:
@@ -2094,10 +3017,32 @@ This is no more the case in PHP 5, which relies on \_\_construct() to do so. Hav
 
 Note that classes with methods bearing the class name, but inside a namespace are not following this convention, as this is not breaking backward compatibility. Those are excluded from the analyze.
 
-clearPHP: `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__
++--------------+---------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/OldStyleConstructor                                                                             |
++--------------+---------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                          |
++--------------+---------------------------------------------------------------------------------------------------------+
 
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
+
+.. _old-style-\_\_autoload:
+
+Old style \_\_autoload
+######################
+
+
+Do not use the old \_\_autoload() function, but rather the new spl\_register\_autoload() function.
+
++--------------+-----------------------------------------------------------------------------------------------------+
+| Command Line | Php/oldAutoloadUsage                                                                                |
++--------------+-----------------------------------------------------------------------------------------------------+
+| clearPHP     | `use-smart-autoload <https://github.com/dseguy/clearPHP/tree/master/rules/use-smart-autoload.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                      |
++--------------+-----------------------------------------------------------------------------------------------------+
+
 
 
 .. _one-letter-functions:
@@ -2108,7 +3053,14 @@ One Letter Functions
 
 One letter functions seems to be really short for a meaningful name. This may happens for very high usage functions, so as to keep code short, but such functions should be rare.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Functions/OneLetterFunctions |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _one-variable-string:
@@ -2121,7 +3073,14 @@ These strings only contains one variable (or function call, or methodcall, or ar
 
 If the goal is to convert it to a string, use the type casting (string) operator : it is then clearer to understand the conversion. It is also marginally faster, though very little.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Type/OneVariableStrings |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _only-variable-returned-by-reference:
@@ -2132,7 +3091,14 @@ Only Variable Returned By Reference
 
 When a function returns a reference, one may only return variables, properties or static properties. Anything else will yield a warning.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------------------+
+| Command Line | Structures/OnlyVariableReturnedByReference |
++--------------+--------------------------------------------+
+| clearPHP     |                                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`Analyze`                             |
++--------------+--------------------------------------------+
+
 
 
 .. _or-die:
@@ -2143,10 +3109,14 @@ Or Die
 
 Interrupting a script will leave the application with a blank page, will make your life miserable for testing. Just don't do that.
 
-clearPHP: `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__
++--------------+-------------------------------------------------------------------------------------------+
+| Command Line | Structures/OrDie                                                                          |
++--------------+-------------------------------------------------------------------------------------------+
+| clearPHP     | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
++--------------+-------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                            |
++--------------+-------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _overwritten-exceptions:
@@ -2157,7 +3127,14 @@ Overwritten Exceptions
 
 In catch blocks, it is good practice not to overwrite the incoming exception, as information about the exception will be lost.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------------+
+| Command Line | Exceptions/OverwriteException |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
 
 
 .. _overwritten-literals:
@@ -2168,7 +3145,14 @@ Overwritten Literals
 
 In those methods, the same variable is assigned a literal twice. One of them is too much.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------------+
+| Command Line | Variables/OverwrittenLiterals |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
 
 
 .. _php-7.0-new-classes:
@@ -2179,7 +3163,14 @@ PHP 7.0 New Classes
 
 Those classes are now declared natively in PHP 7.0 and should not be declared in custom code.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php70NewClasses                                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _php-7.0-new-functions:
@@ -2190,7 +3181,14 @@ PHP 7.0 New Functions
 
 The following functions are now native functions in PHP 7.0. It is advised to change them before moving to this new version.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php70NewFunctions                                                                                                                 |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _php-7.0-new-interfaces:
@@ -2201,7 +3199,14 @@ PHP 7.0 New Interfaces
 
 The following interfaces are introduced in PHP 7.0. They shouldn't be defined in custom code.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php70NewInterfaces                                                                                                                |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _php-70-removed-directive:
@@ -2212,7 +3217,14 @@ PHP 70 Removed Directive
 
 List of directives that are removed in PHP 7.0.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Php/Php70RemovedDirective                            |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _php-70-removed-functions:
@@ -2223,7 +3235,14 @@ PHP 70 Removed Functions
 
 The following PHP native functions were removed in PHP 7.0.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Php/Php70RemovedFunctions                            |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _php-keywords-as-names:
@@ -2236,7 +3255,14 @@ PHP has a set of reserved keywords. It is recommended not to use those keywords 
 
 PHP does check that a number of structures, such as classes, methods, interfaces... can't be named or called using one of the keywords. However, in a few other situations, no check are enforced. Using keywords in such situation is confusing.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP71`
++--------------+-------------------------------------------+
+| Command Line | Php/ReservedNames                         |
++--------------+-------------------------------------------+
+| clearPHP     |                                           |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------+
+
 
 
 .. _php5-indirect-variable-expression:
@@ -2256,7 +3282,14 @@ See also <a href="http://php.net/manual/en/migration70.incompatible.php">http://
 <tr><td>Foo::$bar['baz']()</td><td>Foo::{$bar['baz']}()</td><td>(Foo::$bar)['baz']()</td></tr>
 </table>
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/Php5IndirectExpression                                                                           |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _php7-dirname:
@@ -2267,7 +3300,14 @@ PHP7 Dirname
 
 With PHP 7, dirname has a second argument that represents the number of parent folder to follow. This prevent us from using nested dirname() calls to reach an grand-parent direct.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/PHP7Dirname                                                                                     |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _preg-option-e:
@@ -2278,7 +3318,14 @@ PREG Option e
 
 preg\_replaced had a /e option until PHP 7.0 which allowed the use of eval'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`
++--------------+---------------------------------------------------------------------------------------+
+| Command Line | Structures/pregOptionE                                                                |
++--------------+---------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                       |
++--------------+---------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------+
+
 
 
 .. _parent,-static-or-self-outside-class:
@@ -2291,7 +3338,14 @@ Parent, static and self keywords must be used within a class or a trait. They ma
 
 Static may be used in a function or a closure, but not globally.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Classes/PssWithoutClass |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _parenthesis-as-parameter:
@@ -2302,7 +3356,14 @@ Parenthesis As Parameter
 
 Using parenthesis around parameters used to silent some internal check. This is not the case anymore in PHP 7, and should be fixed by removing the parenthesis and making the value a real reference.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Php/ParenthesisAsParameter                           |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _php-7-indirect-expression:
@@ -2313,7 +3374,14 @@ Php 7 Indirect Expression
 
 Those are variable indirect expressions that are interpreted differently between PHP 5 and PHP 7. You should check them so they don't behave strangely.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/Php7IndirectExpression                                                                           |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _php7-relaxed-keyword:
@@ -2326,7 +3394,14 @@ PHP Keywords may be used as classes, trait or interfaces elements (such as prope
 
 This was not the case in PHP 5, and will yield parse errors.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php7RelaxedKeyword                                                                                     |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _phpinfo:
@@ -2340,7 +3415,14 @@ Phpinfo is a great function to learn about the current configuration of the serv
 If left in the production code, it may lead to a critical leak, as any attacker gaining access to this data will know a lot about the server configuration.
 It is advised to never leave that kind of instruction in a production code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Structures/PhpinfoUsage |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _pre-increment:
@@ -2353,7 +3435,14 @@ When possible, use the pre-increment operator (++$i or --$i) instead of the post
 
 The latter needs an extra memory allocation that costs about 10% of performances.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Performances`
++--------------+-------------------------------------+
+| Command Line | Performances/PrePostIncrement       |
++--------------+-------------------------------------+
+| clearPHP     |                                     |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
+
 
 
 .. _preprocess-arrays:
@@ -2366,6 +3455,16 @@ Using long list of '$array[$key] = $value; for initializing arrays is significan
 
 If the array has to be completed rather than created, it is also faster to use += when there are more than ten elements to add.
 
++--------------+-------------------------+
+| Command Line | Arrays/ShouldPreprocess |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | none                    |
++--------------+-------------------------+
+
+
+
 .. _preprocessable:
 
 Preprocessable
@@ -2376,7 +3475,14 @@ The following expression are made of literals or already known values : they may
 
 By doing so, this will reduce the amount of work of PHP.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Analyze`
++--------------+--------------------------------+
+| Command Line | Structures/ShouldPreprocess    |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
++--------------+--------------------------------+
+
 
 
 .. _print-and-die:
@@ -2387,7 +3493,14 @@ Print And Die
 
 When stopping a script with die() and echo(), it is possible to provide a message as first argument, that will be displayed at execution. There is no need to make a specific call to print or echo.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------+
+| Command Line | Structures/PrintAndDie |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
 
 
 .. _property/variable-confusion:
@@ -2413,9 +3526,16 @@ Within a class, there is both a property and some variables bearing the same nam
 
 the property and the variable may easily be confused one for another and lead to a bug. 
 
-Sometimes, if the property will be changed, and its value replaced by some incoming argument, or data based on such argument, this naming schema is made on purpose, indicating that the current argument will eventually end up in the property. When the argument has the same name as the property, no warning is reported.
+Sometimes, when the property is going to be replaced by the incoming argument, or data based on that argument, this naming schema is made on purpose, indicating that the current argument will eventually end up in the property. When the argument has the same name as the property, no warning is reported.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------------+
+| Command Line | Structures/PropertyVariableConfusion |
++--------------+--------------------------------------+
+| clearPHP     |                                      |
++--------------+--------------------------------------+
+| Analyzers    | :ref:`Analyze`                       |
++--------------+--------------------------------------+
+
 
 
 .. _queries-in-loops:
@@ -2429,7 +3549,14 @@ Querying an external database in a loop usually leads to performances problems.
 It is recommended to reduce the number of queries by making one query, and dispatching the results afterwards. 
 This is not always possible.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/QueriesInLoop |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _redeclared-php-functions:
@@ -2440,7 +3567,14 @@ Redeclared PHP Functions
 
 Function that bear the same name as a PHP function, and that are declared. This is possible when managing some backward compatibility (emulating some old function), or preparing for newer PHP version (emulating new upcoming function).
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------------+
+| Command Line | Functions/RedeclaredPhpFunction |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
 
 
 .. _redefined-property:
@@ -2457,7 +3591,14 @@ In the case of a private property, the different instances will stay distinct. I
 
 It is recommended to avoid redefining the same property in a hierarchy.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Classes/RedefinedProperty |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _register-globals:
@@ -2474,7 +3615,14 @@ Backward compatible pieces of code that mimic the register\_globals features usu
 
 Mimicking register\_globals is achieved with variables variables, extract(), parse\_str() and import\_request\_variables() (Up to PHP 5.4).
 
-This analyzer is part of the following recipes :  :ref:`Security`
++--------------+--------------------------+
+| Command Line | Security/RegisterGlobals |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Security`          |
++--------------+--------------------------+
+
 
 
 .. _relay-function:
@@ -2487,7 +3635,14 @@ Relay functions (or method) are delegating the actual work to another function o
 
 Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and unclutter the API.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Functions/RelayFunction |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _repeated-prints:
@@ -2498,18 +3653,32 @@ Repeated prints
 
 It is recommended to use concatenation instead of multiple calls to print or echo when outputting several blob of text.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/RepeatedPrint |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _reserved-keywords-in-php-7:
 
-Reserved Keywords in PHP 7
+Reserved Keywords In PHP 7
 ##########################
 
 
 Php reserved names for class/trait/interface. They won't be available anymore in user space starting with PHP 7.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Php/ReservedKeywords7                                |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _scalar-typehint-usage:
@@ -2520,7 +3689,14 @@ Scalar Typehint Usage
 
 Spot usage of scalar type hint : int, float, boolean and string.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ScalarTypehintUsage                                                                                    |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _sequences-in-for:
@@ -2538,7 +3714,14 @@ This loop will simultaneously increment $a and $b. It will stop only when the la
 This structure is often unknown, and makes the for instruction quite difficult to read. It is also easy to oversee the multiples instructions, and omit one of them.
 It is recommended not to use it.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/SequenceInFor |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _setlocale-needs-constants:
@@ -2551,7 +3734,14 @@ The first argument of setlocale must be one of the valid constants, LC\_ALL, LC\
 
 The PHP 5 usage of strings (same name as above, enclosed in ' or ") is not legit anymore in PHP 7 and later.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Structures/SetlocaleNeedsConstants                   |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _several-instructions-on-the-same-line:
@@ -2562,7 +3752,14 @@ Several Instructions On The Same Line
 
 Usually, instructions do not share their line : one instruction, one line. This is good for readability, and help at understanding the code. This is especially important when fast-reading the code to find some special situation, where such double-meaning line way have an impact.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------------------+
+| Command Line | Structures/OneLineTwoInstructions |
++--------------+-----------------------------------+
+| clearPHP     |                                   |
++--------------+-----------------------------------+
+| Analyzers    | :ref:`Analyze`                    |
++--------------+-----------------------------------+
+
 
 
 .. _short-open-tags:
@@ -2573,7 +3770,14 @@ Short Open Tags
 
 Usage of short open tags is discouraged. The following files were found to be impacted by the short open tag directive at compilation time. They must be reviewed to ensure no &lt;? tags are found in the code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Php/ShortOpenTagRequired |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _short-syntax-for-arrays:
@@ -2584,7 +3788,14 @@ Short syntax for arrays
 
 List of all arrays written the new PHP 5.4 short syntax. They mean that it won't be possible to downgrade to PHP 5.3.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`
++--------------+---------------------------+
+| Command Line | Arrays/ArrayNSUsage       |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53` |
++--------------+---------------------------+
+
 
 
 .. _should-be-single-quote:
@@ -2598,10 +3809,14 @@ Static content inside a string, that has no single quotes nor escape sequence (s
 
 If you have too many of them, don't loose your time switching them all. If you have a few of them, it may be good for consistence.
 
-clearPHP: `no-double-quote <https://github.com/dseguy/clearPHP/tree/master/rules/no-double-quote.md>`__
++--------------+-----------------------------------------------------------------------------------------------+
+| Command Line | Type/ShouldBeSingleQuote                                                                      |
++--------------+-----------------------------------------------------------------------------------------------+
+| clearPHP     | `no-double-quote <https://github.com/dseguy/clearPHP/tree/master/rules/no-double-quote.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                |
++--------------+-----------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _should-chain-exception:
@@ -2627,7 +3842,14 @@ Note : Chaining requires PHP > 5.3.0.
        }
    ?>
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------------+
+| Command Line | Structures/ShouldChainException |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
 
 
 .. _should-typecast:
@@ -2638,7 +3860,14 @@ Should Typecast
 
 When typecasting, it is better to use the casting operator, such as (int) or (bool), instead of the slower functions such as intval or settype.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------+
+| Command Line | Type/ShouldTypecast |
++--------------+---------------------+
+| clearPHP     |                     |
++--------------+---------------------+
+| Analyzers    | :ref:`Analyze`      |
++--------------+---------------------+
+
 
 
 .. _should-use-$this:
@@ -2651,10 +3880,14 @@ Classes' methods should use $this, or a static method or property (when they are
 
 Otherwise, the method doesn't belong to the object. It may be a function.
 
-clearPHP: `not-a-method <https://github.com/dseguy/clearPHP/tree/master/rules/not-a-method.md>`__
++--------------+-----------------------------------------------------------------------------------------+
+| Command Line | Classes/ShouldUseThis                                                                   |
++--------------+-----------------------------------------------------------------------------------------+
+| clearPHP     | `not-a-method <https://github.com/dseguy/clearPHP/tree/master/rules/not-a-method.md>`__ |
++--------------+-----------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                          |
++--------------+-----------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _should-use-constants:
@@ -2667,7 +3900,14 @@ The following functions have related constants that should be used as arguments,
 
 For example, $lines = file('file.txt', 2); is less readable than $lines = file('file.txt', FILE\_IGNORE\_NEW\_LINES)
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Functions/ShouldUseConstants |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _should-use-prepared-statement:
@@ -2680,7 +3920,14 @@ Modern databases provides support for prepared statement : it separates the quer
 
 Building queries with concatenations is not recommended, though not always avoidable. When possible, use prepared statements.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Security`
++--------------+-------------------------------------+
+| Command Line | Security/ShouldUsePreparedStatement |
++--------------+-------------------------------------+
+| clearPHP     |                                     |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security`     |
++--------------+-------------------------------------+
+
 
 
 .. _silently-cast-integer:
@@ -2694,7 +3941,14 @@ Those are integer literals that are cast to a float when running PHP. They are s
 Compare your literals to PHP\_MAX\_INT (typically 9223372036854775807) and PHP\_MIN\_INT (typically -9223372036854775808).
 This applies to binary (0b10101...), octals (0123123...) and hexadecimals (0xfffff...) too.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Type/SilentlyCastInteger |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _simple-global-variable:
@@ -2705,7 +3959,14 @@ Simple Global Variable
 
 global keyword should only be used with simple variables (global $var), and not with complex or dynamic structures.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Php/GlobalWithoutSimpleVariable                      |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _sleep-is-a-security-risk:
@@ -2716,7 +3977,14 @@ Sleep is a security risk
 
 Pausing the script for a specific amount of time means that the Web server is also making all related ressources sleep, such as database, sockets, session, etc. This may used to set up a DOS on the server.
 
-This analyzer is part of the following recipes :  :ref:`Security`
++--------------+------------------+
+| Command Line | Security/NoSleep |
++--------------+------------------+
+| clearPHP     |                  |
++--------------+------------------+
+| Analyzers    | :ref:`Security`  |
++--------------+------------------+
+
 
 
 .. _slow-functions:
@@ -2727,10 +3995,14 @@ Slow Functions
 
 Avoid using those slow native PHP functions, and replace them with alternatives.
 
-clearPHP: `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__
++--------------+---------------------------------------------------------------------------------------------------------------------+
+| Command Line | Performances/SlowFunctions                                                                                          |
++--------------+---------------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Performances`                                                                                                 |
++--------------+---------------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Performances`
 
 
 .. _static-loop:
@@ -2743,7 +4015,14 @@ It looks like the following loops are static : the same code is executed each ti
 
 It is possible to create loops that don't use any blind variables, and this is fairly rare.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------------+
+| Command Line | Structures/StaticLoop |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
 
 
 .. _static-methods-called-from-object:
@@ -2775,7 +4054,14 @@ way, rather than within object context.
        x::y();  // Readability : here we know
    ?>
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------------------+
+| Command Line | Classes/StaticMethodsCalledFromObject |
++--------------+---------------------------------------+
+| clearPHP     |                                       |
++--------------+---------------------------------------+
+| Analyzers    | :ref:`Analyze`                        |
++--------------+---------------------------------------+
+
 
 
 .. _static-methods-can't-contain-$this:
@@ -2788,10 +4074,14 @@ Static methods are also called 'class methods' : they may be called even if the 
 
 Either, this is not a static method (simply remove the static keyword), or replace all $this mention by static properties Class::$property.
 
-clearPHP: `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__
++--------------+---------------------------------------------------------------------------------------------+
+| Command Line | Classes/StaticContainsThis                                                                  |
++--------------+---------------------------------------------------------------------------------------------+
+| clearPHP     | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
++--------------+---------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                              |
++--------------+---------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _strict-comparison-with-booleans:
@@ -2804,7 +4094,14 @@ Booleans may be easily mistaken with other values, especially when the function 
 
 It is encouraged to use strict comparison === or !== when booleans are involved in a comparison.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------------+
+| Command Line | Structures/BooleanStrictComparison |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
 
 
 .. _string-may-hold-a-variable:
@@ -2817,7 +4114,14 @@ This is a list of string using single quotes and Nowdoc syntax : as such, they a
 
 However, there are some potential variables in those strings, making it possible for an error : the variable was forgotten and will be published as such. It is worth checking the content and make sure those strings are not variables.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Type/StringHoldAVariable |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _strpos-comparison:
@@ -2831,10 +4135,14 @@ Strpos() returns a string position, starting at 0, or false, in case of failure.
 It is recommended to check the result of strpos with === or !==, so as to avoid confusing 0 and false. 
 This analyzer list all the strpos function that are directly compared with == or !=.
 
-clearPHP: `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__
++--------------+-----------------------------------------------------------------------------------------------------+
+| Command Line | Structures/StrposCompare                                                                            |
++--------------+-----------------------------------------------------------------------------------------------------+
+| clearPHP     | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                      |
++--------------+-----------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _switch-to-switch:
@@ -2845,7 +4153,14 @@ Switch To Switch
 
 The following structures are based on if / elseif / else. Since they have more than three conditions (not withstanding the final else), it is recommended to use the switch structure, so as to make this more readable.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Structures/SwitchToSwitch |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _switch-with-too-many-default:
@@ -2856,7 +4171,14 @@ Switch With Too Many Default
 
 Switch statements should only hold one default, not more. Check the code and remove the extra default.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------------+
+| Command Line | Structures/SwitchWithMultipleDefault |
++--------------+--------------------------------------+
+| clearPHP     |                                      |
++--------------+--------------------------------------+
+| Analyzers    | :ref:`Analyze`                       |
++--------------+--------------------------------------+
+
 
 
 .. _switch-without-default:
@@ -2869,10 +4191,14 @@ Switch statements hold a number of 'case' that cover all known situations, and a
 
 Most of the time, Switch do need a default case, so as to catch the odd situation where the 'value is not what it was expected'. This is a good place to catch unexpected values, to set a default behavior.
 
-clearPHP: `no-switch-without-default <https://github.com/dseguy/clearPHP/tree/master/rules/no-switch-without-default.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/SwitchWithoutDefault                                                                                   |
++--------------+-------------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-switch-without-default <https://github.com/dseguy/clearPHP/tree/master/rules/no-switch-without-default.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                    |
++--------------+-------------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _throws-an-assignement:
@@ -2887,7 +4213,14 @@ However, $e will never be used, as the exception is thrown, and any following co
 
 The assignement should be removed.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------+
+| Command Line | Structures/ThrowsAndAssign |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
 
 
 .. _timestamp-difference:
@@ -2904,7 +4237,14 @@ When the difference may be rounded to a larger time unit (rounding the differnce
 
 If the difference may be very small, it requires a better way to mesure time difference, such as ticks, ext/hrtime, or including a check on the actual time zone (ini\_get(date.timezone)).
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------+
+| Command Line | Structures/TimestampDifference |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
 
 
 .. _unchecked-resources:
@@ -2915,10 +4255,14 @@ Unchecked Resources
 
 Resources are created, but never checked before being used. This is not safe.
 
-clearPHP: `no-unchecked-resources <https://github.com/dseguy/clearPHP/tree/master/rules/no-unchecked-resources.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/UncheckedResources                                                                               |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unchecked-resources <https://github.com/dseguy/clearPHP/tree/master/rules/no-unchecked-resources.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _undefined-class-constants:
@@ -2929,7 +4273,14 @@ Undefined Class Constants
 
 Class constants that are used, but never defined. This should yield a fatal error upon execution, but no feedback at compile level.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Analyze`
++--------------+--------------------------------+
+| Command Line | Classes/UndefinedConstants     |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
++--------------+--------------------------------+
+
 
 
 .. _undefined-classes:
@@ -2945,7 +4296,14 @@ or if some external libraries, such as PEAR, are not provided during the analysi
 
 Otherwise, this should be checked.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Classes/UndefinedClasses |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _undefined-constants:
@@ -2958,6 +4316,16 @@ Those constants are not defined in the code, and will raise errors, or use the f
 
 It is recommended to define them all, or to avoid using them.
 
++--------------+------------------------------+
+| Command Line | Constants/UndefinedConstants |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | none                         |
++--------------+------------------------------+
+
+
+
 .. _undefined-interfaces:
 
 Undefined Interfaces
@@ -2966,7 +4334,14 @@ Undefined Interfaces
 
 Typehint or instanceof that are relying on undefined interfaces (or classes) : they will always return false. Any condition based upon them are dead code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------+
+| Command Line | Interfaces/UndefinedInterfaces |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
 
 
 .. _undefined-function:
@@ -2977,7 +4352,14 @@ Undefined function
 
 This function is not defined in the code. This means that the function is probably defined in a missing library, or in an extension. If not, this will yield a Fatal error at execution.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------+
+| Command Line | Functions/UndefinedFunctions |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
 
 
 .. _undefined-parent:
@@ -2993,7 +4375,14 @@ This will be compilable but will yield a fatal error during execution.
 Note that if the parent is defined (extends someClass) but someClass is not available in the tested code (it may be in composer,
 another dependency, or just not there) it will not be reported.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Classes/UndefinedParentMP |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _undefined-properties:
@@ -3004,10 +4393,14 @@ Undefined properties
 
 List of properties that are not explicitely defined in the class, its parents or traits.
 
-clearPHP: `no-undefined-properties <https://github.com/dseguy/clearPHP/tree/master/rules/no-undefined-properties.md>`__
++--------------+---------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/UndefinedProperty                                                                                     |
++--------------+---------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-undefined-properties <https://github.com/dseguy/clearPHP/tree/master/rules/no-undefined-properties.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                |
++--------------+---------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _undefined-static\:\:-or-self\:\::
@@ -3018,7 +4411,14 @@ Undefined static:: or self::
 
 List of all undefined static and self properties and methods.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Classes/UndefinedStaticMP |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _unicode-escape-partial:
@@ -3034,7 +4434,14 @@ PHP 7 will chocke on partial Unicode Sequences, as it tries to understand them, 
 
 Is is recommended to check all those strings, and make sure they will behave correctly in PHP 7.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/UnicodeEscapePartial                                                                                   |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _unicode-escape-syntax:
@@ -3045,7 +4452,14 @@ Unicode Escape Syntax
 
 Usage of the PHP 7 Unicode Escape syntax, with the \u{xxxxx} format.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/UnicodeEscapeSyntax                                                                                    |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _unpreprocessed-values:
@@ -3065,10 +4479,14 @@ $x = array('a', 'b', 'c', 'd');
 
 and avoid preprocessing the string into an array first.
 
-clearPHP: `always-preprocess <https://github.com/dseguy/clearPHP/tree/master/rules/always-preprocess.md>`__
++--------------+---------------------------------------------------------------------------------------------------+
+| Command Line | Structures/Unpreprocessed                                                                         |
++--------------+---------------------------------------------------------------------------------------------------+
+| clearPHP     | `always-preprocess <https://github.com/dseguy/clearPHP/tree/master/rules/always-preprocess.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _unreachable-code:
@@ -3081,10 +4499,14 @@ Code located after throw, return, exit(), die(), break or continue cannot be rea
 
 This is dead code, that may be removed.
 
-clearPHP: `no-dead-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-dead-code.md>`__
++--------------+-----------------------------------------------------------------------------------------+
+| Command Line | Structures/UnreachableCode                                                              |
++--------------+-----------------------------------------------------------------------------------------+
+| clearPHP     | `no-dead-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-dead-code.md>`__ |
++--------------+-----------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                            |
++--------------+-----------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
 
 
 .. _unresolved-catch:
@@ -3097,10 +4519,14 @@ Classes in Catch expression may turn useless because the code was namespaced and
 
 Or, the expected class is not even an Exception : that is not needed for catching, but for throwing. Catching will only match the class, if it reaches it.
 
-clearPHP: `no-unresolved-catch <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-catch.md>`__
++--------------+-------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/UnresolvedCatch                                                                               |
++--------------+-------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unresolved-catch <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-catch.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`                                                                          |
++--------------+-------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Dead code <dead-code>`
 
 
 .. _unresolved-instanceof:
@@ -3113,10 +4539,14 @@ Instanceof checks if an variable is of a specific class. However, if the referen
 
 Make sure the following classes are well defined.
 
-clearPHP: `no-unresolved-instanceof <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-instanceof.md>`__
++--------------+-----------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/UnresolvedInstanceof                                                                                    |
++--------------+-----------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unresolved-instanceof <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-instanceof.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                    |
++--------------+-----------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
 
 
 .. _unresolved-classes:
@@ -3129,7 +4559,14 @@ The following classes are instantiated in the code, but their definition couldn'
 
 Check for namespaces and aliases and make sure they are correctly configured.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Classes/UnresolvedClasses |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _unresolved-use:
@@ -3140,10 +4577,14 @@ Unresolved use
 
 The following use instructions cannot be resolved to a class or a namespace. They should be dropped or fixed.
 
-clearPHP: `no-unresolved-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-use.md>`__
++--------------+---------------------------------------------------------------------------------------------------+
+| Command Line | Namespaces/UnresolvedUse                                                                          |
++--------------+---------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unresolved-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-use.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _unset-in-foreach:
@@ -3154,7 +4595,14 @@ Unset In Foreach
 
 Unset applied to the variables of a foreach loop are useless, as they are mere copies and not the actual value. Even if the value is a reference, unsetting it will not have effect on the original array.
 
-This analyzer is part of the following recipes :  :ref:`Dead code <dead-code>`, :ref:`Analyze`
++--------------+----------------------------------------------+
+| Command Line | Structures/UnsetInForeach                    |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++--------------+----------------------------------------------+
+
 
 
 .. _unthrown-exception:
@@ -3165,10 +4613,14 @@ Unthrown Exception
 
 These are exceptions that are defined in the code but never thrown.
 
-clearPHP: `no-unthrown-exceptions <https://github.com/dseguy/clearPHP/tree/master/rules/no-unthrown-exceptions.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Exceptions/Unthrown                                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unthrown-exceptions <https://github.com/dseguy/clearPHP/tree/master/rules/no-unthrown-exceptions.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
 
 
 .. _unused-arguments:
@@ -3179,7 +4631,14 @@ Unused Arguments
 
 Those arguments are not used in the method or function.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+---------------------------+
+| Command Line | Functions/UnusedArguments |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _unused-global:
@@ -3200,7 +4659,14 @@ List of global keyword, used in various functions but not actually used in the c
        }
    ?>
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Structures/UnusedGlobal |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _unused-interfaces:
@@ -3211,7 +4677,14 @@ Unused Interfaces
 
 Those interfaces are defined but not used. They should be removed.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
++--------------+----------------------------------------------+
+| Command Line | Interfaces/UnusedInterfaces                  |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
 
 
 .. _unused-label:
@@ -3222,7 +4695,14 @@ Unused Label
 
 The following labels have been defined in the code, but they are not used. They may be removed.
 
-This analyzer is part of the following recipes :  :ref:`Dead code <dead-code>`, :ref:`Analyze`
++--------------+----------------------------------------------+
+| Command Line | Structures/UnusedLabel                       |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++--------------+----------------------------------------------+
+
 
 
 .. _unused-methods:
@@ -3233,7 +4713,14 @@ Unused Methods
 
 The following methods are never called as methods. They are probably dead code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedMethods                        |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
 
 
 .. _unused-static-properties:
@@ -3244,7 +4731,14 @@ Unused Static Properties
 
 List of all static properties that are not used. This looks like dead code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedPrivateProperty                |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
 
 
 .. _unused-trait:
@@ -3255,7 +4749,14 @@ Unused Trait
 
 Those traits were not found in a class.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------+
+| Command Line | Traits/UnusedTrait |
++--------------+--------------------+
+| clearPHP     |                    |
++--------------+--------------------+
+| Analyzers    | :ref:`Analyze`     |
++--------------+--------------------+
+
 
 
 .. _unused-classes:
@@ -3266,7 +4767,14 @@ Unused classes
 
 The following classes are never used in the code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedClass                          |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
 
 
 .. _unused-constants:
@@ -3279,7 +4787,14 @@ Those constants are defined in the code but never used. Defining unused constant
 
 It is recommended to comment them out, and only define them when it is necessary.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
++--------------+----------------------------------------------+
+| Command Line | Constants/UnusedConstants                    |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
 
 
 .. _unused-functions:
@@ -3290,7 +4805,14 @@ Unused functions
 
 The functions below are unused. They look like deadcode.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
++--------------+----------------------------------------------+
+| Command Line | Functions/UnusedFunctions                    |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
 
 
 .. _unused-static-methods:
@@ -3301,7 +4823,14 @@ Unused static methods
 
 List of all static methods that are not used. This looks like dead code.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedPrivateMethod                  |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
 
 
 .. _unused-use:
@@ -3312,10 +4841,14 @@ Unused use
 
 List of use statement that are not used in the following code : they may be removed, as they clutter the code and slows PHP by forcing it to search in this list for nothing.
 
-clearPHP: `no-useless-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-use.md>`__
++--------------+---------------------------------------------------------------------------------------------+
+| Command Line | Namespaces/UnusedUse                                                                        |
++--------------+---------------------------------------------------------------------------------------------+
+| clearPHP     | `no-useless-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-use.md>`__ |
++--------------+---------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                |
++--------------+---------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Dead code <dead-code>`
 
 
 .. _use-===-null:
@@ -3326,10 +4859,14 @@ Use === null
 
 It is faster to use === null instead of is\_null().
 
-clearPHP: `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__
++--------------+---------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/IsnullVsEqualNull                                                                                               |
++--------------+---------------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                                      |
++--------------+---------------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _use-const-and-functions:
@@ -3340,7 +4877,14 @@ Use Const And Functions
 
 Since PHP 5.6 it is possible to import specific functions or constants from other namespaces.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Namespaces/UseFunctionsConstants                                                |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
+
 
 
 .. _use-constant-as-arguments:
@@ -3351,7 +4895,14 @@ Use Constant As Arguments
 
 Some methods and functions are defined to be used with constants as arguments. Those constants are made to be meaningful and readable, keeping the code maintenable. It is recommended to use such constants as soon as they are documented.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------------+
+| Command Line | Functions/UseConstantAsArguments |
++--------------+----------------------------------+
+| clearPHP     |                                  |
++--------------+----------------------------------+
+| Analyzers    | :ref:`Analyze`                   |
++--------------+----------------------------------+
+
 
 
 .. _use-instanceof:
@@ -3362,7 +4913,14 @@ Use Instanceof
 
 get\_class() should be replaced with the 'instanceof' operator to check the class of an object.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/UseInstanceof |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _use-object-api:
@@ -3375,10 +4933,14 @@ When PHP offers the alternative between procedural and OOP api for the same feat
 
 Often, this least to more compact code, as methods are shorter, and there is no need to bring the resource around. Lots of new extensions are directly written in OOP form too.
 
-clearPHP: `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__
++--------------+---------------------------------------------------------------------------------------------+
+| Command Line | Php/UseObjectApi                                                                            |
++--------------+---------------------------------------------------------------------------------------------+
+| clearPHP     | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__ |
++--------------+---------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                              |
++--------------+---------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _use-pathinfo:
@@ -3391,7 +4953,14 @@ Is is recommended to use pathinfo() function instead of string manipulation func
 
 If you're using path with UTF-8 characters, pathinfo will strip them. There, you might have to use string functions.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-----------------+
+| Command Line | Php/UsePathinfo |
++--------------+-----------------+
+| clearPHP     |                 |
++--------------+-----------------+
+| Analyzers    | :ref:`Analyze`  |
++--------------+-----------------+
+
 
 
 .. _use-const:
@@ -3407,7 +4976,14 @@ This way, constant will be defined at compile time, and not at execution time.
 
 define() function is useful for all other situations.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------+
+| Command Line | Constants/ConstRecommended |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
 
 
 .. _use-password\_hash():
@@ -3418,7 +4994,14 @@ Use password\_hash()
 
 PHP 5.5 introduced password\_hash() and password\_check() to replace the use of crypt() to check password.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Password55                                                                                             |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _use-with-fully-qualified-name:
@@ -3429,7 +5012,14 @@ Use with fully qualified name
 
 PHP manual recommends not to use fully qualified name (starting with \) when using the 'use' statement : they are "the leading backslash is unnecessary and not recommended, as import names must be fully qualified, and are not processed relative to the current namespace".
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------------+
+| Command Line | Namespaces/UseWithFullyQualifiedNS |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
 
 
 .. _used-once-variables:
@@ -3451,7 +5041,14 @@ In special situations, variables may be used once :
 
 The current analyzer count variables at the application level, and not at a method scope level.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------+
+| Command Line | Variables/VariableUsedOnce |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
 
 
 .. _used-once-variables-(in-scope):
@@ -3462,10 +5059,14 @@ Used once variables (in scope)
 
 This is the list of used once variables, broken down by scope. Those variable are used once in a function, a method, a class or a namespace. In any case, this means the variable is used only once, while it should be used at least twice.
 
-clearPHP: `no-unused-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-arguments.md>`__
++--------------+-------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/VariableUsedOnceByContext                                                                   |
++--------------+-------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unused-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-arguments.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                        |
++--------------+-------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _useless-abstract-class:
@@ -3478,7 +5079,14 @@ Those classes are marked 'abstract' and they are never extended. This way, they 
 
 Abstract classes that have only static methods are omitted here : one usage of such classes are Utilities classes, which only offer static methods.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Classes/UselessAbstract |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _useless-brackets:
@@ -3489,7 +5097,14 @@ Useless Brackets
 
 You may remove those brackets, they have no use here. It may be a left over of an old instruction, or a misunderstanding of the alternative syntax.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------+
+| Command Line | Structures/UselessBrackets |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
 
 
 .. _useless-final:
@@ -3500,10 +5115,14 @@ Useless Final
 
 When a class is declared final, all of its methods are also final by default. There is no need to declare them individually final.
 
-clearPHP: `no-useless-final <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-final.md>`__
++--------------+-------------------------------------------------------------------------------------------------+
+| Command Line | Classes/UselessFinal                                                                            |
++--------------+-------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-useless-final <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-final.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                  |
++--------------+-------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _useless-global:
@@ -3518,7 +5137,14 @@ Also, PHP has superglobals, a special team of variables that are always availabl
 They are : $GLOBALS, $\_SERVER, $\_GET, $\_POST, $\_FILES, $\_COOKIE, $\_SESSION, $\_REQUEST and $\_ENV. 
 Simply avoid using 'global $\_POST'.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------+
+| Command Line | Structures/UselessGlobal |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _useless-interfaces:
@@ -3528,19 +5154,44 @@ Useless Interfaces
 
 
 The interfaces below are defined and are implemented by some classes. 
-However, they are never used to enforce objects in the code, using instanceof or a typehint. 
+However, they are never used to enforce objects's class in the code, using instanceof or a typehint. 
 As they are currently used, those interfaces may be removed without change in behavior.
 
-// only defined interface but never enforced
-interface i {};
-class c implements i {} 
+.. code-block:: php
 
-interfaces should be used in Typehint or with the instanceof operator.
+   <?php
+       // only defined interface but never enforced
+       interface i {};
+       class c implements i {} 
+   ?>
 
-clearPHP: `no-useless-interfaces <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-interfaces.md>`__
 
+Interfaces should be used in Typehint or with the instanceof operator. 
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
+.. code-block:: php
+
+   <?php
+       interface i {};
+       
+       function foo(i $arg) { 
+           // Now, $arg is always an 'i'
+       }
+       
+       function bar($arg) { 
+           if (!($arg instanceof i)) {
+               // Now, $arg is always an 'i'
+           }
+       }
+   ?>
+
++--------------+-----------------------------------------------------------------------------------------------------------+
+| Command Line | Interfaces/UselessInterfaces                                                                              |
++--------------+-----------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-useless-interfaces <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-interfaces.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                            |
++--------------+-----------------------------------------------------------------------------------------------------------+
+
 
 
 .. _useless-parenthesis:
@@ -3551,7 +5202,14 @@ Useless Parenthesis
 
 Situations where parenthesis are not necessary, and may be removed.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------------+
+| Command Line | Structures/UselessParenthesis |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
 
 
 .. _useless-unset:
@@ -3562,10 +5220,14 @@ Useless Unset
 
 Unsetting variables may not be applicable with a certain type of variables. This is the list of such cases.
 
-clearPHP: `no-useless-unset <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-unset.md>`__
++--------------+-------------------------------------------------------------------------------------------------+
+| Command Line | Structures/UselessUnset                                                                         |
++--------------+-------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-useless-unset <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-unset.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                  |
++--------------+-------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _useless-constructor:
@@ -3576,7 +5238,14 @@ Useless constructor
 
 Class constructor that have empty bodies are useless. They may be removed.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------+
+| Command Line | Classes/UselessConstructor |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
 
 
 .. _useless-instructions:
@@ -3589,10 +5258,14 @@ The instructions below are useless. For example, running '&lt;?php 1 + 1; ?&gt;'
 
 The first level of the spotted instructions may be removed safely. For example, the analyzer will spot : '1 + $a++'; as a useless instruction. The addition is useless, but the plusplus is not.
 
-clearPHP: `no-useless-instruction <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-instruction.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/UselessInstruction                                                                               |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-useless-instruction <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-instruction.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _useless-return:
@@ -3603,12 +5276,19 @@ Useless return
 
 The spotted functions or methods have a return statement, but this statement is useless. This is the case for constructor and destructors, whose return value are ignored or inaccessible.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+-------------------------+
+| Command Line | Functions/UselessReturn |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
 
 
 .. _uses-default-values:
 
-Uses default values
+Uses Default Values
 ###################
 
 
@@ -3616,7 +5296,14 @@ Default values are provided to methods so as to make it convenient to use. Howev
 
 As much as possible, it is recommended to use explicit values in those methods, so as to prevent from being surprise at a future PHP evolution.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------+
+| Command Line | Functions/UsesDefaultArguments |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
 
 
 .. _usort-sorting-in-php-7.0:
@@ -3629,7 +5316,14 @@ Usort (and co) sorting has changed in PHP 7. Values that are equals (based on us
 
 If this sorting is important, it is advised to add extra comparison in the user-function and avoid returning 0 (thus, depending on default implementation).
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/UsortSorting                                                                                                                                                 |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                                  |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _var:
@@ -3640,10 +5334,14 @@ Var
 
 Var was used in PHP 4 to mark properties as public. Nowadays, new keywords are available : public, protected, private. Var is equivalent to public.
 
-clearPHP: `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__
++--------------+---------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/OldStyleVar                                                                                     |
++--------------+---------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                          |
++--------------+---------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _variable-global:
@@ -3654,7 +5352,14 @@ Variable Global
 
 Variable global such as global $$foo->bar are valid in PHP 5.6, but no in PHP 7.0. They should be replaced with ${$foo->bar}.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/VariableGlobal                                                                                  |
++--------------+------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                            |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _while(list()-=-each()):
@@ -3673,7 +5378,14 @@ This code structure is quite old : it should be replace by the more modern and e
        }
    ?>
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`Performances`
++--------------+-------------------------------------+
+| Command Line | Structures/WhileListEach            |
++--------------+-------------------------------------+
+| clearPHP     |                                     |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
+
 
 
 .. _written-only-variables:
@@ -3684,10 +5396,14 @@ Written Only Variables
 
 Those variables are being written, but never read. This way, they are useless and should be removed, or read at some point.
 
-clearPHP: `no-unused-variable <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-variable.md>`__
++--------------+-----------------------------------------------------------------------------------------------------+
+| Command Line | Variables/WrittenOnlyVariable                                                                       |
++--------------+-----------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unused-variable <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-variable.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                      |
++--------------+-----------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _wrong-number-of-arguments:
@@ -3700,10 +5416,14 @@ Those functioncalls are made with too many or too few arguments. Some of them wi
 
 It is recommended to check the signature of the methods, and fix the arguments.
 
-clearPHP: `no-missing-argument.md <https://github.com/dseguy/clearPHP/tree/master/rules/no-missing-argument.md.md>`__
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Functions/WrongNumberOfArguments                                                                            |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-missing-argument.md <https://github.com/dseguy/clearPHP/tree/master/rules/no-missing-argument.md.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _wrong-optional-parameter:
@@ -3720,7 +5440,32 @@ PHP will solve this problem at runtime, assign values in the same other, but wil
 
 It is better to put all the optional parameters at the end of the method's signature.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------------------+
+| Command Line | Functions/WrongOptionalParameter |
++--------------+----------------------------------+
+| clearPHP     |                                  |
++--------------+----------------------------------+
+| Analyzers    | :ref:`Analyze`                   |
++--------------+----------------------------------+
+
+
+
+.. _wrong-parameter-type:
+
+Wrong Parameter Type
+####################
+
+
+The expected parameter is not the correct type. Check PHP documentation to know which is the right format to be used.
+
++--------------+---------------------------+
+| Command Line | Php/InternalParameterType |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
 
 
 .. _\_\_debuginfo():
@@ -3731,7 +5476,14 @@ This analyzer is part of the following recipes :  :ref:`Analyze`
 
 The magic function \_\_debugInfo() has been introduced in PHP 5.6. In the previous versions of PHP, this method is ignored and won't be called when debugging.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/debugInfoUsage                                                              |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
+
 
 
 .. _\_\_tostring()-throws-exception:
@@ -3742,7 +5494,14 @@ This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`, :re
 
 Magical method \_\_toString() can't throw exceptions, according to the world.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+------------------------------------+
+| Command Line | Structures/toStringThrowsException |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
 
 
 .. _crypt-without-salt:
@@ -3753,7 +5512,14 @@ crypt without salt
 
 PHP 5.6 and later require a salt, while previous versions didn't require it. Salt is a simple string, that is usually only known by the application.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/CryptWithoutSalt                                                                                                                           |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                       |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _error\_reporting()-with-integers:
@@ -3764,7 +5530,14 @@ error\_reporting() With Integers
 
 Using named constants with error\_reporting is strongly encouraged to ensure compatibility for future versions. As error levels are added, the range of integers increases, so older integer-based error levels will not always behave as expected. (Adapted from the documentation)
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+--------------------------------------+
+| Command Line | Structures/ErrorReportingWithInteger |
++--------------+--------------------------------------+
+| clearPHP     |                                      |
++--------------+--------------------------------------+
+| Analyzers    | :ref:`Analyze`                       |
++--------------+--------------------------------------+
+
 
 
 .. _ext/apc:
@@ -3775,7 +5548,14 @@ ext/apc
 
 Extension APC
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Extensions/Extapc                                                                                                          |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                            |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _ext/dba:
@@ -3786,7 +5566,14 @@ ext/dba
 
 Extension ext/dba
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`
++--------------+---------------------------+
+| Command Line | Extensions/Extdba         |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53` |
++--------------+---------------------------+
+
 
 
 .. _ext/ereg:
@@ -3797,7 +5584,14 @@ ext/ereg
 
 Extension ext/ereg
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+------------------------------------------------------+
+| Command Line | Extensions/Extereg                                   |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
 
 
 .. _ext/fdf:
@@ -3808,7 +5602,14 @@ ext/fdf
 
 Extension ext/fdf
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP53`
++--------------+-------------------------------------------+
+| Command Line | Extensions/Extfdf                         |
++--------------+-------------------------------------------+
+| clearPHP     |                                           |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53` |
++--------------+-------------------------------------------+
+
 
 
 .. _ext/ming:
@@ -3819,7 +5620,14 @@ ext/ming
 
 Extension ext/ming, to create swf files with PHP.
 
-This analyzer is part of the following recipes :  :ref:`CompatibilityPHP53`
++--------------+---------------------------+
+| Command Line | Extensions/Extming        |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53` |
++--------------+---------------------------+
+
 
 
 .. _ext/mysql:
@@ -3830,7 +5638,14 @@ ext/mysql
 
 Extension ext/mysql
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Extensions/Extmysql                                                                                                        |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                            |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+
 
 
 .. _ext/sqlite:
@@ -3841,13 +5656,20 @@ ext/sqlite
 
 Extension ext/sqlite3
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------+
+| Command Line | Extensions/Extsqlite |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
 
 
-.. _func\_get\_arg-modified:
 
-func\_get\_arg Modified
-#######################
+.. _func\_get\_arg()-modified:
+
+func\_get\_arg() Modified
+#########################
 
 
 func\_get\_arg() and func\_get\_args() used to report the calling value of the argument until PHP 7. Since PHP 7, it is reporting the value of the argument at calling time, which may have been modified by a previous instruction. 
@@ -3867,7 +5689,14 @@ func\_get\_arg() and func\_get\_args() used to report the calling value of the a
 
 This code will display 1 in PHP 7, and 0 in PHP 5.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`
++--------------+----------------------------------------------------------------------+
+| Command Line | Functions/funcGetArgModified                                         |
++--------------+----------------------------------------------------------------------+
+| clearPHP     |                                                                      |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------+
+
 
 
 .. _include\_once()-usage:
@@ -3880,7 +5709,14 @@ All the \_once inclusion functions should be avoided for performances reasons.
 
 Try using auto\_load() for loading classes, or using include() and make it possible to include several times the same file without errors.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
++--------------+----------------------+
+| Command Line | Structures/OnceUsage |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
+
 
 
 .. _list()-may-omit-variables:
@@ -3889,15 +5725,25 @@ list() May Omit Variables
 #########################
 
 
-list() is the only PHP function that accepts to have omitted arguments. If the code is not going to use a listed variable, just don't name it. 
+list() is the only PHP function that accepts to have omitted arguments. If the following code makes no usage of a listed variable, just omit it. 
 
-list ($a, , $b) = array(1, 2, 3);
+.. code-block:: php
 
-$b will be 3, and the 2 value will be omitted. 
+   <?php
+       list ($a, , $b) = array(1, 2, 3);
+   ?>
 
-This is cleaner, and save some memory.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`
+$b will be 3, and the 2 value will be omitted. This is cleaner, and save some memory.
+
++--------------+--------------------------+
+| Command Line | Structures/ListOmissions |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
 
 
 .. _mcrypt\_create\_iv-with-default-values:
@@ -3910,26 +5756,19 @@ mcrypt\_create\_iv used to have MCRYPT\_DEV\_RANDOM as default values, and in PH
 
 If the code doesn't have a second argument, it relies on the default value. It is recommended to set explicitely the value, so has to avoid problems while migrating.
 
-This analyzer is part of the following recipes :  :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/McryptcreateivWithoutOption                                                                                                                |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                       |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-
-.. _old-\_\_autoload:
-
-old \_\_autoload
-################
-
-
-Do not use the old \_\_autoload() function, but rather the new spl\_register\_autoload() function.
-
-clearPHP: `use-smart-autoload <https://github.com/dseguy/clearPHP/tree/master/rules/use-smart-autoload.md>`__
-
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
 .. _parse\_str-warning:
 
-parse\_str warning
+parse\_str Warning
 ##################
 
 
@@ -3937,7 +5776,14 @@ The parse\_str function will parse a query string and assign the resulting varia
 
 Always use an empty variable a second parameter to parse\_str, so as to collect the incoming values, and then, filter them in that array.
 
-This analyzer is part of the following recipes :  :ref:`Security`
++--------------+------------------------------------+
+| Command Line | Security/parseUrlWithoutParameters |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Security`                    |
++--------------+------------------------------------+
+
 
 
 .. _var\_dump()...-usage:
@@ -3950,9 +5796,13 @@ var\_dump(), print\_r() or var\_export() are debugging functions, that should no
 
 They may be tolerated during development time, but must be removed so as not to have any chance to be run in production.
 
-clearPHP: `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__
++--------------+-------------------------------------------------------------------------------------------+
+| Command Line | Structures/VardumpUsage                                                                   |
++--------------+-------------------------------------------------------------------------------------------+
+| clearPHP     | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
++--------------+-------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                            |
++--------------+-------------------------------------------------------------------------------------------+
 
-
-This analyzer is part of the following recipes :  :ref:`Analyze`
 
 
