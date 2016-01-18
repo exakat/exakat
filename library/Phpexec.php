@@ -218,6 +218,10 @@ class Phpexec {
             unlink($tmpFile);
         }
         
+        // In case the inclusion failed at parsing time
+        if (!isset($tokens)) {
+            $tokens = array();
+        }
         return $tokens;
     }
 
