@@ -334,8 +334,15 @@ JOIN categories
 
                 if (!isset($ini['name'])) {
                     echo 'human/en/'.$row['name'].'.ini', " is not set\n";
-                } elseif (str_replace('PHP', '', $ini['name']) !== ucwords(strtolower(str_replace('PHP', '', $ini['name'])))) {
-                    if (!preg_match('$^ext/$', $ini['name'])) { 
+                } else {
+                    $title = str_replace(array('PHP', 'autoload', 'const'), '', $ini['name']);  
+                    $title = preg_replace('#__\S+#', '', $title);
+                    $title = preg_replace('#\S+::#', '', $title);
+                    $title = preg_replace('#\*_\S+#', '', $title);
+                    $title = preg_replace('#\S+\(\)#', '', $title);
+
+                    if ($title !== ucwords(strtolower($title)) && 
+                        !preg_match('$^ext/$', $ini['name'])) { 
                         echo 'human/en/'.$row['name'].'.ini', " name is not Capital Worded ($ini[name])\n";
                     }
                 } 
