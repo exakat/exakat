@@ -25,7 +25,7 @@ namespace Tokenizer;
 
 class ArgumentsNoParenthesis extends Arguments {
     static public $operators = array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE',
-                                     'T_REQUIRE', 'T_EXIT', 'T_STATIC');
+                                     'T_REQUIRE', 'T_EXIT', 'T_DIE', 'T_STATIC');
     static public $atom = 'Arguments';
 
     public function _check() {
@@ -65,8 +65,8 @@ class ArgumentsNoParenthesis extends Arguments {
         // @note exit; no parenthesis, no argument.
         $this->conditions = array( -1 => array('notToken' => 'T_INSTANCEOF'),
                                     0 => array('atom'     => 'none',
-                                               'token'    => array('T_EXIT', 'T_STATIC')),
-                                    1 => array('token'    => array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET'))
+                                               'token'    => array('T_EXIT', 'T_STATIC', 'T_DIE')),
+                                    1 => array('token'    => array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_COLON', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET'))
                                   );
         
         $this->actions = array('addEdge'     => array(0 => array('Arguments' => 'ARGUMENT')),

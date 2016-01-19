@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      ->
+      Label : OBJECT
+        $this
+      Label : METHOD
+        B
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+    Label : THEN
+      die
+      Label : ARGUMENTS
+        void
+    Label : ELSE
+      null
