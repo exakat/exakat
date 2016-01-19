@@ -49,9 +49,12 @@ function gremlin_query($query, $params = [], $load = []) {
     }
 
     if (isset($params) && !empty($params)) {
+        // Avoid changing arg10 to 'string'0 if query has more than 10 arguments.
+        krsort($params);
+
         foreach($params as $name => $value) {
             if (is_string($value) && strlen($value) > 2000) {
-                $gremlin = '{ "'.addslashes($value).'" }';
+                $gremlin = "{ '".str_replace('$', '\\$', $value)."' }";
 
                 // what about factorise this below? 
                 $defName = 'a'.crc32($gremlin);
@@ -72,8 +75,8 @@ function gremlin_query($query, $params = [], $load = []) {
                     unset($params[$name]);
                 }
             } elseif (is_array($value)) {
-                $value = array_map('addslashes', $value);
-                $gremlin = '{ ["'.join('","', $value).'"] }';
+                $value = array_map(function ($x) { return addslashes(str_replace('$', '\\$', $x)); }, $value);
+                $gremlin = "{ ['".join("','", $value)."'] }";
                 $defName = 'a'.crc32($gremlin);
                 $defFileName = 'neo4j/scripts/'.$defName.'.gremlin';
 
@@ -92,7 +95,7 @@ function gremlin_query($query, $params = [], $load = []) {
                     unset($params[$name]);
                 }
             } else { // a short string (less than 2000) : hardcoded
-                $query = str_replace($name, '"'.addslashes($value).'"', $query);
+                $query = str_replace($name, "'".addslashes($value)."'", $query);
                 unset($params[$name]);
             }
         }
