@@ -1541,11 +1541,14 @@ TEXT
         $css->titles = array('Version', 'Count', 'Fraction', 'Files', 'Errors');
         $css->readOrder = $css->titles;
         
-        
-
         $total = $this->datastore->querySingle('SELECT value FROM hash WHERE key = "files"');
         $info = array();
         foreach($this->config->other_php_versions as $suffix) {
+            $res = $this->datastore->querySingle('SELECT name FROM sqlite_master WHERE type="table" AND name="compilation'.$suffix.'"');
+            if (!$res) {
+                continue; // Table was not created
+            }
+
             $res = $this->datastore->query('SELECT file FROM compilation'.$suffix);
             $files = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
