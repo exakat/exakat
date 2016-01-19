@@ -1609,8 +1609,9 @@ GREMLIN
     }
 
     public function isLiteral() {
+        // Closures are literal if not using a variable from the context
         $this->addMethod(<<<GREMLIN
-filter{ it.atom in ["Integer", "Boolean", "Magicconstant", "Float", "String", "Heredoc", "Function"] ||
+filter{ (it.atom in ["Integer", "Boolean", "Magicconstant", "Float", "String", "Heredoc", "Function"]) ||
         (it.atom == 'Functioncall' && it.constante == true && it.token in ['T_ARRAY', 'T_OPEN_BRACKET'])
 }
 
