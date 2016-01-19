@@ -117,16 +117,19 @@ class Jobqueue extends Tasks {
         }
 
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job]));
-        shell_exec('php '.$this->config->executable.' onepage -f '.$this->config->projects_root.'/in/'.$job.'.php -p onepage');
+        shell_exec($this->config->php.' '.$this->config->executable.' onepage -f '.$this->config->projects_root.'/in/'.$job.'.php');
 
         // cleaning
         rename($this->config->projects_root.'/projects/onepage/onepage.json', $this->config->projects_root.'/out/'.$job.'.json');
+        
+        // final progress
         $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
         $progress->end = time();
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
 
         $this->log->log('Finished : ' . $job.' '.time()."\n");
 
+        // Clean after self
         shell_exec('php '.$this->config->executable.' cleandb');
 
         return true;
