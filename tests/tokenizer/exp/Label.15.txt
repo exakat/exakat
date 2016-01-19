@@ -1,0 +1,56 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    :
+    Label : LABEL
+      F
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      strlen
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $i
+    Label : LEFT
+      $h
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      3
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      [
+      Label : VARIABLE
+        ->
+        Label : OBJECT
+          $b
+        Label : PROPERTY
+          c
+      Label : INDEX
+        $d
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    --
+    Label : PREPLUSPLUS
+      $g
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $j
+      Label : METHOD
+        k
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $l
+    Label : LEFT
+      $m

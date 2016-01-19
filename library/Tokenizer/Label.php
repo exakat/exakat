@@ -35,7 +35,7 @@ class Label extends TokenAuto {
         $this->actions = array('transform'    => array(-1 => 'LABEL'),
                                'atom'         => 'Label',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
+                               'addAlwaysSemicolon' => 'it');
         $this->checkAuto();
 
         return false;
