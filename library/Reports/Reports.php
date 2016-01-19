@@ -26,11 +26,11 @@ abstract class Reports {
     private $count = 0;
 
     CONST FILE_EXTENSION = 'undefined';
-    CONST FORMATS        = ['Devoops', 'Faceted', 'FacetedJson', 'Json', 'Text', 'Xml'];
+    CONST FORMATS        = ['Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 'Text', 'Xml'];
 
     protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE
-    protected $config = null;
+    protected $config     = null;
     
     public function __construct() {
         $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),

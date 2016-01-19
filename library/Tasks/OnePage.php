@@ -27,7 +27,7 @@ class OnePage extends Tasks {
     private $project_dir = '.';
     private $config = null;
     
-    const TOTAL_STEPS = 11;
+    const TOTAL_STEPS = 10;
     
     public function run(\Config $config) {
         $this->config = $config;
@@ -40,10 +40,11 @@ class OnePage extends Tasks {
 
         // checking for installation
         if (!file_exists($this->project_dir)) {
-            shell_exec('php '.$config->executable.' init -p onepage ');
+            shell_exec($this->config->php . ' ' . $config->executable . ' init -p onepage ');
             mkdir($this->project_dir.'/code', 0755);
-            shell_exec('php '.$config->executable.' phploc -p onepage ');
+            shell_exec($this->config->php . ' ' . $config->executable . ' phploc -p onepage ');
         }
+        $this->updateProgress($progress++);
 
         // todo : check that there is indeed this project or create it.
         if (!file_exists($config->filename)) {
@@ -59,6 +60,7 @@ class OnePage extends Tasks {
 
         copy($config->filename, $config->projects_root.'/projects/onepage/code/onepage.php');
 
+        $this->updateProgress($progress++);
         $this->logTime('Start');
 
         $datastorePath = $config->projects_root.'/projects/onepage/datastore.sqlite';
@@ -79,12 +81,14 @@ class OnePage extends Tasks {
         $task = new CleanDb();
         $task->run($config);
 
+        $this->updateProgress($progress++);
         $this->logTime('CleanDb');
 
         display("Running files\n");
         $task = new Files();
         $task->run($config);
 
+        $this->updateProgress($progress++);
         $this->logTime('Files');
 
         display("Running project 'onepage'\n");
@@ -93,17 +97,20 @@ class OnePage extends Tasks {
         $task->run($config);
 
         display("Project loaded\n");
+        $this->updateProgress($progress++);
         $this->logTime('Loading');
 
         $task = new Build_root();
         $task->run($config);
 
         display("Build root\n");
+        $this->updateProgress($progress++);
         $this->logTime('Build_root');
 
         $task = new Tokenizer();
         $task->run($config);
 
+        $this->updateProgress($progress++);
         $this->logTime('Tokenizer');
         display("Project tokenized\n");
 
@@ -111,7 +118,8 @@ class OnePage extends Tasks {
             $task = new Analyze();
             $task->run($config);
             
-            rename($config->projects_root.'/projects/onepage/log/analyze.log', $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
+            rename($config->projects_root.'/projects/onepage/log/analyze.log', 
+                   $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
         } catch (\Exception $e) {
             display( "Error while running the Analyze $theme \n".
                  $e->getMessage());
@@ -120,6 +128,7 @@ class OnePage extends Tasks {
         }
 
         display("Project analyzed\n");
+        $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
         $b1 = microtime(true);
@@ -127,26 +136,17 @@ class OnePage extends Tasks {
         $task->run($config);
         display("Project dumped\n");
         $e1 = microtime(true);
-        print "Dump + Report : ".number_format(($e1 - $b1) * 1000, 2)." ms\n";
 
-        $b1 = microtime(true);
         $task = new Report2();
         $task->run($config);
         display("Project reported\n");
         $this->logTime('Report');
-        $e1 = microtime(true);
-        print "Dump + Report : ".number_format(($e1 - $b1) * 1000, 2)." ms\n";
-
-        $b1 = microtime(true);
-        $task = new EmptyTask();
-        $task->run($config);
-        display("Empty task\n");
-        $this->logTime('Report');
-        $e1 = microtime(true);
-        print "Dump + Report : ".number_format(($e1 - $b1) * 1000, 2)." ms\n";
+        $this->updateProgress($progress++);
 
         display("Project reported\n");
+        $this->updateProgress($progress++);
 
+        // Clean code
         unlink($config->projects_root.'/projects/onepage/code/onepage.php');
 
         $audit_end = time();
@@ -156,9 +156,18 @@ class OnePage extends Tasks {
         $this->logTime('Final');
         display("End 2\n");
         $end = microtime(true);
-        print('Total time : '.number_format($end - $begin, 2)."s\n");
+        $this->updateProgress($progress++);
         
         $this->logTime('Files');
+        
+        // Back to 0
+        $this->updateProgress(0);
+    }
+
+    private function updateProgress($status) {
+        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
+        $progress->progress = number_format(100 * $status / self::TOTAL_STEPS, 0);
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
     }
 
     private function logTime($step) {

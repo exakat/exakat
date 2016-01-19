@@ -379,10 +379,9 @@ class Config {
         if ($this->commandline['command'] == 'onepage') {
             $this->commandline['project']   = 'onepage';
             $this->commandline['thema']     = 'OneFile';
-            $this->commandline['format']    = 'Json';
+            $this->commandline['format']    = 'OnepageJson';
             $this->commandline['file']      = 'onepage';
             $this->commandline['norefresh'] = true;
-            
         }
     }
 }
