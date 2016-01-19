@@ -41,9 +41,13 @@ function display_r($object) {
     }
 }
 
-function gremlin_query($query, $params = [], $load = '') {
+function gremlin_query($query, $params = [], $load = []) {
     $getString = 'script='.urlencode($query);
     
+    if (!is_array($load)) {
+        $load = [$load];
+    }
+
     if (isset($params) && !empty($params)) {
         foreach($params as $name => $value) {
             if (is_string($value) && strlen($value) > 2000) {
@@ -56,7 +60,7 @@ function gremlin_query($query, $params = [], $load = '') {
                 if (file_exists($defFileName)) {
                     $query = str_replace($name, $defName.'()', $query);
 
-                    $getString = 'script='.urlencode($query).'&load='.$defName;
+                    $load[] = $defName;
                     unset($params[$name]);
                 } else {
                     $gremlin = 'def '.$defName.'() '.$gremlin;
@@ -64,10 +68,10 @@ function gremlin_query($query, $params = [], $load = '') {
 
                     $query = str_replace($name, $defName.'()', $query);
 
-                    $getString = 'script='.urlencode($query).'&load='.$defName;
+                    $load[] = $defName;
                     unset($params[$name]);
                 }
-            } elseif (is_array($value) && strlen(join('', $value)) > 2000) {
+            } elseif (is_array($value)) {
                 $value = array_map('addslashes', $value);
                 $gremlin = '{ ["'.join('","', $value).'"] }';
                 $defName = 'a'.crc32($gremlin);
@@ -76,7 +80,7 @@ function gremlin_query($query, $params = [], $load = '') {
                 if (file_exists($defFileName)) {
                     $query = str_replace($name, $defName.'()', $query);
 
-                    $getString = 'script='.urlencode($query).'&load='.$defName;
+                    $load[] = $defName;
                     unset($params[$name]);
                 } else {
                     $gremlin = 'def '.$defName.'() '.$gremlin;
@@ -84,25 +88,13 @@ function gremlin_query($query, $params = [], $load = '') {
 
                     $query = str_replace($name, $defName.'()', $query);
 
-                    $getString = 'script='.urlencode($query).'&load='.$defName;
+                    $load[] = $defName;
                     unset($params[$name]);
                 }
-            } elseif (is_array($value)) { 
-            // all the other arrays, we hardcode them
-
-                // needed double encoding for protecting \
-                foreach($value as &$v) {
-                    $v = str_replace(array('\\', '"', "'", '$'), array('\\\\\\\\', '\\"', "\\'", '\\\\$'), $v); // double encoding for Gremlin, plus a third for PHP string.
-                }
-                unset($v);
-
-                $gremlinArray = '["'.join('", "', $value).'"]';
-                $query = preg_replace('/'.$name.'/is', $gremlinArray, $query);
-                (unset) $params[$name];
-
-                $getString = 'script='.urlencode($query);
-
-            } // else is not an array
+            } else { // a short string (less than 2000) : hardcoded
+                $query = str_replace($name, '"'.addslashes($value).'"', $query);
+                unset($params[$name]);
+            }
         }
 
         if (!empty($params)) {
@@ -110,9 +102,13 @@ function gremlin_query($query, $params = [], $load = '') {
         }
     }
 
-    if (isset($load) && !empty($load)) {
-        $getString .= '&load='.urlencode($load);
-    }
+    $getString = 'script='.urlencode($query);
+
+    if (count($load) == 1) {
+        $getString .= '&load='.urlencode(array_pop($load));
+    } elseif (count($load) > 1) {
+        $getString .= '&load='.implode(',', array_map('urlencode', $load));
+    } // else (aka 0) is ignored (nothing to do)
     
     if (strlen($getString) > 20000) {
         echo 'Query string too big for GET (', strlen($getString), ")\n",

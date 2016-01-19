@@ -32,20 +32,19 @@ class InternalParameterType extends Analyzer\Analyzer {
         $data = new \Data\Methods();
         $args = $data->getInternalParameterType();
 
-        $typeConversion = array('string'   => 'String', //array('String', 'Heredoc', 'Magicconstant'),
+        $typeConversion = array('string'   => array('Magicconstant', 'Heredoc', 'String'),
                                 'float'    => 'Float',
                                 'int'      => 'Integer',
                                 'numeric'  => array('Float', 'Integer'),
                                 'resource' => '',
                                 'bool'     => 'Boolean',
                                 'array'    => '',
-                                'void'     => 'Void');
+                                'void'     => 'Void',
+                                'mixed'    => '' //explicitely here to avoid it
+                                );
+
         foreach($args as $position => $types) {
-//            if ($position != 1) { continue; }
-
             foreach($types as $type => $functions) {
-//                if ($type != 'string') { continue; }
-
                 if (strpos($type, ',') !== false) {
                     continue; // No support for multiple type yet
                 }
@@ -61,9 +60,8 @@ class InternalParameterType extends Analyzer\Analyzer {
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
 
-                     // only include literals
+                     // only include literals (and closures and literal array)
                      ->isLiteral()
-                    // Closure ? Array ? 
 
                     // Constant (Identifier), logical, concatenation, addition ? 
                     // Those will have to be replaced after more research
