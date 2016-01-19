@@ -37,28 +37,22 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
         $functions = $data->getFunctionsArgsInterval();
         $argsMins = array();
         $argsMaxs = array();
-        
+
         foreach($functions as $function) {
             if ($function['args_min'] > 0) {
                 $argsMins[$function['args_min']][] = '\\'.$function['name'];
             }
             $argsMaxs[$function['args_max']][] = '\\'.$function['name'];
         }
-        
+
         foreach($argsMins as $nb => $f) {
-            $this->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspath($f)
+            $this->atomFunctionIs($f)
                  ->isLess('args_count', $nb);
             $this->prepareQuery();
         }
 
         foreach($argsMaxs as $nb => $f) {
-            $this->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspath($f)
+            $this->atomFunctionIs($f)
                  ->isMore('args_count', $nb);
             $this->prepareQuery();
         }

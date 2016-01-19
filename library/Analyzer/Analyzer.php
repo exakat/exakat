@@ -618,9 +618,9 @@ GREMLIN;
         return $this;
     }
 
-    public function isMore($property, $value = '0') {
+    public function isMore($property, $value = 0) {
         if (is_int($value)) {
-            $this->addMethod("filter{ it.$property > ***;}", $value);
+            $this->addMethod("filter{ it.$property > $value}");
         } else {
             // this is a variable name
             $this->addMethod("filter{ it.$property > $value;}", $value);
@@ -629,9 +629,9 @@ GREMLIN;
         return $this;
     }
 
-    public function isLess($property, $value= '0') {
+    public function isLess($property, $value = 0) {
         if (is_int($value)) {
-            $this->addMethod("filter{ it.$property < ***;}", $value);
+            $this->addMethod("filter{ it.$property < $value}");
         } else {
             // this is a variable name
             $this->addMethod("filter{ it.$property < $value;}", $value);
