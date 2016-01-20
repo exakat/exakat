@@ -32,7 +32,7 @@ class FindExternalLibraries extends Tasks {
     private $classic = array('adoconnection'    => self::WHOLE_DIR,
                              'bbq'              => self::WHOLE_DIR,
                              'cpdf'             => self::WHOLE_DIR, // ezpdf
-                             'dispatcher'       => self::WHOLE_DIR, // cakephp
+                             'cakeplugin'       => self::PARENT_DIR, // cakephp
                              'dompdf'           => self::PARENT_DIR,
                              'fpdf'             => self::FILE_ONLY,
                              'graph'            => self::PARENT_DIR, // Jpgraph
