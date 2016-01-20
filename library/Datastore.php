@@ -59,6 +59,7 @@ class Datastore {
         if ($create === self::CREATE) {
             $this->cleanTable('hash');
             $this->cleanTable('analyzed');
+            $this->cleanTable('tokenCounts');
             $this->cleanTable('externallibraries');
             $this->cleanTable('ignoredFiles');
             $this->cleanTable('files');
@@ -347,6 +348,16 @@ CREATE TABLE analyzed (
   id INTEGER PRIMARY KEY,
   analyzer TEXT UNIQUE,
   counts TEXT
+);
+SQLITE;
+                break;
+
+            case 'tokenCounts' : 
+                $createTable = <<<SQLITE
+CREATE TABLE tokenCounts (
+  id INTEGER PRIMARY KEY,
+  token TEXT UNIQUE,
+  counts INTEGER
 );
 SQLITE;
                 break;

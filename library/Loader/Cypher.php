@@ -37,10 +37,11 @@ class Cypher {
     private static $count = -1; // id must start at 0 in batch-import
     private $id = 0;
     
-    private static $fp_rels = null;
-    private static $fp_nodes = null;
+    private static $fp_rels       = null;
+    private static $fp_nodes      = null;
     private static $fp_nodes_attr = array();
-    private static $indexedId = array();
+    private static $indexedId     = array();
+    private static $tokenCounts   = array();
 
     private $config = null;
     
@@ -63,6 +64,8 @@ class Cypher {
     }
 
     public function finalize() {
+        self::saveTokenCounts();
+        
         if (!file_exists($this->config->projects_root.'/nodes.cypher.csv')) {
             return false;
         }
@@ -167,6 +170,13 @@ CYPHER;
         unlink($this->config->projects_root.'/rels.cypher.indexed.csv');
         unlink($this->config->projects_root.'/rels.cypher.subname.csv');
     }
+
+    public function saveTokenCounts() {
+        $config = \Config::factory();
+        $datastore = new \Datastore($config);
+        
+        $datastore->addRow('tokenCounts', static::$tokenCounts);
+    }
     
     public function save_chunk() {
         if (static::$fp_nodes === null) {
@@ -187,7 +197,15 @@ CYPHER;
             }
         }
 
-        foreach(static::$nodes as $id => $node) {
+        foreach(static::$nodes as $id => $node) { 
+            if (substr($node['token'], 0, 2) === 'T_' ) {
+                if (isset(static::$tokenCounts[$node['token']])) {
+                    ++static::$tokenCounts[$node['token']];
+                } else {
+                    static::$tokenCounts[$node['token']] = 1;
+                }
+            }
+            
             $row = array();
             foreach($les_cols as $col) {
                 if (isset($node[$col])) {
