@@ -141,7 +141,7 @@ class Files extends Tasks {
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
             
-            $shell = 'cat '.$tmpFileName.'  | tr "\n" "\0" |  xargs -n1 -P5 -0I {} sh -c "'.$config->{'php'.$version}.' -l {} 2>&1" || true';
+            $shell = 'cat '.$tmpFileName.'  | tr "\n" "\0" | tail -n +1 |  xargs -n1 -P5 -0I {} sh -c "'.$config->{'php'.$version}.' -l {} 2>&1" || true';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
