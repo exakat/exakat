@@ -244,22 +244,6 @@ class Token {
         return $res;
     }
 
-    public function checkRemaining() {
-        $class = str_replace("Tokenizer\\", '', get_class($this));
-        if (in_array($class, array('Staticconstant','Staticmethodcall','Staticproperty'))) {
-            $query = "g.idx('racines')[['token':'Staticproperty']].out('INDEXED').any()";
-            return gremlin_queryOne($query);
-        } elseif (in_array($class, array('Property','Methodcall'))) {
-            $query = "g.idx('racines')[['token':'Property']].out('INDEXED').any()";
-            return gremlin_queryOne($query);
-        } elseif (in_array($class, Token::$types)) {
-            $query = "g.idx('racines')[['token':'$class']].out('INDEXED').any()";
-            return gremlin_queryOne($query);
-        } else {
-            return true;
-        }
-    }
-
     static public function leftInIndex($class) {
         return gremlin_queryOne("g.idx('racines')[['token':'$class']].out('INDEXED').count()");
     }

@@ -45,6 +45,9 @@ class Tokenizer extends Tasks {
         $classes = \Tokenizer\Token::getTokenizers($config->phpversion);
 
         $this->log->log( 'Starting time : '.date('r'));
+        
+        $datastore = new \Datastore($config);
+        $tokenCounts = $datastore->getCol('tokenCounts', 'token');
 
         $regex = array();
         $regex2 = array();
@@ -52,13 +55,13 @@ class Tokenizer extends Tasks {
             $new = "Tokenizer\\$class";
     
             $r = \Tokenizer\Token::getInstance($new, $config->phpversion);
-            if ($r === null) {
-                // ignore but should throw an exception ?
-            } elseif ($new == 'Tokenizer\\FunctioncallArray') {
+            $d = array_intersect($new::$operators, $tokenCounts);
+            
+            if ($new == 'Tokenizer\\FunctioncallArray') {
                 $regex[$class] = $r;
             } elseif ($new == 'Tokenizer\\Sequence') {
                 $regex[$class] = $r;
-            } elseif ($r->checkRemaining()) {
+            } elseif (!empty($d)) {
                 if (in_array($new, array('Tokenizer\\Phpcodemiddle', 'Tokenizer\\Phpcode', ))) {
                     $regex[$class] = $r;
                 } else {
