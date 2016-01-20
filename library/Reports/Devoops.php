@@ -128,7 +128,9 @@ class Devoops extends Reports {
             $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
             $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';
         }
-        ksort($analyze);
+        uksort($analyze, function ($a, $b) { 
+            return strtolower($a) > strtolower($b) ;
+        });
         $analyze = array_merge(array('Results Counts' => 'AnalyzersResultsCounts'), $analyze);
 
         // Files
