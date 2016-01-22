@@ -126,6 +126,7 @@ class Config {
                                          'findextlib'    => 1,
                                          'help'          => 1, 
                                          'init'          => 1, 
+                                         'remove'        => 1, 
                                          'jobqueue'      => 1, 
                                          'queue'         => 1, 
                                          'load'          => 1, 
