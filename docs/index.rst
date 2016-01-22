@@ -13,10 +13,11 @@ Contents:
 
    Introduction
    Installation
-   Configuration
-   Usage
+   Example
+   Commands
    Recipes
    Rules
+   Configuration
 
 
 Indices and tables

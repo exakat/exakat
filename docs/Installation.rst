@@ -6,21 +6,60 @@ Installation
 Summary
 -------
 
+* `Installation guide with Vagrant and Ansible`_
 * `Installation guide for Debian`_
 * `Installation guide for Osx`_
 * `Generic installation guide`_
+* `Optional installation`_
+
+Installation guide with Vagrant and Ansible
+-------------------------------------------
+
+Installation list
+#################
+
+The exakat-vagrant repository contains an automated install for exakat with the last version. It installs : 
+
+* PHP 5.4, 5.5, 5.6, 7.0 and 7.1 (dev)
+* Neo4j 2.2.7
+* Gremlin 2.0
+* Java 8
+* Exakat last version
+
+Pre-requisites
+##############
+
+You need 3 elements installed : 
+
+* [git](https://git-scm.com/)
+* [ansible](http://docs.ansible.com/ansible/intro_installation.html)
+* [vagrant](https://www.vagrantup.com/docs/installation/)
+
+Most may easily be installed with the local package manager, or with a direct download from the editor's website. 
+
+Install with Vagrant and Ansible
+################################
+
+* git clone https://github.com/exakat/exakat-vagrant
+* cd exakat-vagrant
+* Review the Vagrant file to check the size of the virtualbox
+* vagrant up --provision
+* vagrant ssh 
+
+You are now ready to run a project. 
+
 
 Installation guide for Debian
 -----------------------------
 
-This is a specific installation guide for a debian server.
+This is a specific installation guide for a Debian server.
 
 pre-requisite
 #############
 
 * Java 1.8
 * Neo4j 2.2.*
-* Gremlin plugin
+* Gremlin 2.0 plugin
 * PHP (at least one version)
 * exakat.phar
 
@@ -34,46 +73,50 @@ This list of apt-get will install several needed libs for the installation.
 
 ::
 
-   apt-get install php5-cli zip wkhtmltopdf maven vim python-software-properties php5-mysqlnd sqlite gcc make libxml2-dev autoconf re2c bison screen php5-curl php5-sqlite libssl-dev libcurl4-openssl-dev pkg-config libbz2-dev libjpeg-dev libpng-dev libXpm-dev libfreetype6-dev libt1-dev libgmp3-dev libldap2-dev libmcrypt-dev libmhash-dev freetds-dev libz-dev ncurses-dev libpcre3-dev unixODBC-dev libsqlite-dev libaspell-dev libreadline6-dev librecode-dev 
-   apt-get update
-   apt-get upgrade
-   apt-get clean
+	apt-get install gcc make libc-dev libtool re2c autoconf automake git curl  libcurl3 libcurl3-dev  php5-curl
+	apt-get update
+	apt-get upgrade
+	apt-get clean
 
 
 Java install
 ############
 
-You need a Java 8. Java 7 might work.
+Java 8 is needed. Java 7 might work but is not recommended. 
+
+The following shell code install Java 8. Root privileges are needed.
 
 ::
 
-   ## You'll need to run this as root
-   echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" > /etc/apt/sources.list.d/webupd8team-java.list
-   echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/webupd8team-java.list
-   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
-   apt-get update
-   apt-get install oracle-java8-installer
-   
-   # Check
-   java -version 
+	## You'll need to run this as root
+	echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" > /etc/apt/sources.list.d/webupd8team-java.list
+	echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/webupd8team-java.list
+	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+	apt-get update
+	apt-get install oracle-java8-installer
+	
+	# Check
+	java -version 
 
 Neo4j
 +++++++++++++++++++++++++++++
-Download Neo4j 2.2.* version (currently, 2.2.7).
+Download Neo4j 2.2.* version (currently, 2.2.7). Neo4j 2.3 or later have no support for Gremlin 2.0. 
 
 [Neo4j](http://neo4j.com/)
 
 ::
 
-   wget http://dist.neo4j.org/neo4j-community-2.2.4-unix.tar.gz
-   tar -xvf neo4j-community-2.2.4-unix.tar.gz 
-   mv neo4j-community-2.2.4 neo4j
+    wget http://dist.neo4j.org/neo4j-community-2.2.4-unix.tar.gz
+    tar -xvf neo4j-community-2.2.4-unix.tar.gz 
+    mv neo4j-community-2.2.4 neo4j
 
 Gremlin plug-in
-+++++++++++++++++++++++++++++
++++++++++++++++
+
 There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
 
 Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors.) : 
+
 ::
 
     <repositories>
@@ -90,12 +133,12 @@ Then, in command line :
 
 ::
 
-   git clone https://github.com/neo4j-contrib/gremlin-plugin.git gremlin
-   cd gremlin
-   mvn clean package
-   unzip target/neo4j-gremlin-plugin-2.1-SNAPSHOT-server-plugin.zip -d ../neo4j/plugins/gremlin-plugin
-   cd ../neo4j
-   bin/neo4j restart
+    git clone https://github.com/neo4j-contrib/gremlin-plugin.git gremlin
+    cd gremlin
+    mvn clean package
+    unzip target/neo4j-gremlin-plugin-2.1-SNAPSHOT-server-plugin.zip -d ../neo4j/plugins/gremlin-plugin
+    cd ../neo4j
+    bin/neo4j restart
 
 
 Various versions of PHP
@@ -103,15 +146,11 @@ Various versions of PHP
 
 You need one version of PHP (at least) to run exakat. This version needs the `curl` and `sqlite3` extensions.  
 
-Extra PHP-CLI versions will bring your more checks on the code. 
+Extra PHP-CLI versions allow more checks on the code. They only need to have the tokenizer extension available.  
 
-We recommend running PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6 and 7.0-dev, as they may be used with exakat.
+Exakat recommends PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6 and 7.1-dev.
 
-To install easily various versions of PHP, use the dotdeb repository. Follow the instruction [here](https://www.dotdeb.org/instructions/).
-
-Zip
-###
-Install the command zip utility.
+To install easily various versions of PHP, use the dotdeb repository. Follow the [dotdeb instruction](https://www.dotdeb.org/instructions/).
 
 Exakat 
 ######
@@ -133,13 +172,12 @@ pre-requisite
 * Xcode
 * homebrew
 * git
-* Java 1.8 (needed for Neo4j)
+* Java 1.8
 * Neo4j 2.2.*
 * Gremlin plugin
 * zip
-* PHP version (at least one)
+* PHP version
 * exakat
-* composer (Optional)
 
 OSX install
 ############
@@ -153,22 +191,22 @@ Create a folder for exakat. It will contain four elements : `neo4j` folder, the 
 homebrew
 ########
 
-Homebew is a package manager for OSX. It will speed up the installation if you install it now. You may do also without it (or using Fink or macport) : we are just confortable with brew.
+[Homebrew](http://brew.sh/) is a package manager for OSX. It will speed up the installation if you install it now. You may do also without it, or using [Fink](http://www.finkproject.org/) or [macport](https://www.macports.org/).
 
 ::
 
-   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 If brew is installed, it is a good moment to check the updates and then the doctor. 
 :: 
-   brew update; brew upgrade
-   brew doctor
 
+    brew update; brew upgrade
+    brew doctor
 
 git
 ###
 
-Git should be available as soon as you have installed Homebrew.
+Git should be available as soon as Homebrew is installed.
 
 Java install
 ############
@@ -190,24 +228,23 @@ Neo4j 2.3.\* or 3.0.0 won't work yet (The gremlin plug-in hasn't been tested suc
 
 ::
 
-   curl -O http://neo4j.com/artifact.php?name=neo4j-community-2.2.6-unix.tar.gz 
-   tar -xf artifact.php\?name=neo4j-community-2.2.6-unix.tar.gz
-   mv neo4j-community-2.2.6 neo4j
-   cd neo4j
-   ./bin/neo4j start
-   ./bin/neo4j stop
-   cd ..
+    curl -O http://neo4j.com/artifact.php?name=neo4j-community-2.2.6-unix.tar.gz 
+    tar -xf artifact.php\?name=neo4j-community-2.2.6-unix.tar.gz
+    mv neo4j-community-2.2.6 neo4j
+    cd neo4j
+    ./bin/neo4j start
+    ./bin/neo4j stop
+    cd ..
     
-   //This will set the environnement variable
+    //This will set the environnement variable
     
-   export NEO4J_HOME=\`pwd\`
+    export NEO4J_HOME=\`pwd\`
 
 
 Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` file. To do so, add this line:
 
 ::
-
-   org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp
+    org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp
 
 Gremlin plug-in
 +++++++++++++++
@@ -218,8 +255,8 @@ First, in command line :
 
 ::
 
-   git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git gremlin-plugin
-   cd gremlin-plugin
+    git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git gremlin-plugin
+    cd gremlin-plugin
 
 
 Now, check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors section.) : 
@@ -239,28 +276,31 @@ Now, check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAP
 Then, finish the compilation : 
 ::
 
-   brew install maven // If you haven't installed maven yet
-   mvn clean package
+    brew install maven // If you haven't installed maven yet
+    mvn clean package
 
 
 `$NEO4J_HOME`  is the home of the neo4j server. It was installed just before. Use the path or set the variable.
 
 ::
 
-   unzip target/neo4j-gremlin-plugin-tp2-2.2.3-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin
-   cd $NEO4J_HOME
-   bin/neo4j start
+    unzip target/neo4j-gremlin-plugin-tp2-2.2.3-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin
+    cd $NEO4J_HOME
+    bin/neo4j start
 
 You may call check that the server has GremlinPlugin available with 
-`$ curl -s -G http://localhost:7474/tp/gremlin/execute`
+
+::
+
+    curl -s -G http://localhost:7474/tp/gremlin/execute
 
 Result should be : 
 
 ::
 
-   {
+    {
        "success": true
-   }
+    }
 
 You may now removed the git repository for gremlin-plugin.
 
@@ -273,56 +313,31 @@ Extra PHP-CLI versions will bring your more checks on the code. Those versions r
 
 ::
 
-   brew install php70 php70-curl php70-sqlite3
+    brew install php70 php70-curl php70-sqlite3
 
 PHP versions 5.3 to 5.6
 #######################
 
 ::
 
-   brew tap homebrew/dupes
-   brew tap homebrew/versions
-   brew tap homebrew/homebrew-php
-   brew install php53
-   brew install php54
-   brew install php55
-   brew install php56
-   brew install php70
-
-
-Zip
-###
-Install the zip utility
+    brew tap homebrew/dupes
+    brew tap homebrew/versions
+    brew tap homebrew/homebrew-php
+    brew install php53
+    brew install php54
+    brew install php55
+    brew install php56
+    brew install php70
 
 ::
 
-   brew install libzip
-   zip -help
+    brew install libzip
+    zip -help
 
 Exakat 
 ######
 
 Download the `exakat.phar` archive and place it in the `exakat` folder.
-
-Optional installation
-#####################
-
-By default, exakat works with Git repository for downloading code. You may also use 
-
-::
-
-   composer
-   svn
-   hg
-
-if you have installed those binary.
-
-Test
-####
-
-From the commandline, run `php exakat.phar doctor`.
-This will check if all of the above has be correctly run and will report some diagnostic. 
-
 
 Generic installation guide
 --------------------------
@@ -369,10 +384,6 @@ Extra PHP-CLI versions will bring your more checks on the code.
 
 We recommend running PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.0 and 7.1-dev, as they may be used with exakat.
 
-Zip
-+++
-Install the command zip utility.
-
 Exakat 
 ++++++
 Download the `exakat.phar` archive from [exakat.io](http://www.exakat.io/) and place it in the `exakat` folder.
@@ -383,3 +394,17 @@ Test
 From the commandline, run `php exakat.phar doctor`.
 This will check if all of the above has be correctly run and will report some diagnostic. 
 
+Optional installation
+---------------------
+
+
+
+By default, exakat works with Git repository for downloading code. You may also use 
+
+* [composer](https://getcomposer.org/)
+* [svn](https://subversion.apache.org/)
+* [hg](https://www.mercurial-scm.org/)
+* [bazaar](http://bazaar.canonical.com/en/)
+* zip
+
+The binary above are used with the `init` and `update` commands, to get the source code. They are optional.

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 18 Jan 2016 11:03:19 +0000
-.. comment: Generation hash : 687d83113fa41c7c5c7b55e8fa81173b4dfe1533
+.. comment: Generation date : Fri, 22 Jan 2016 14:01:41 +0000
+.. comment: Generation hash : 5cfa3124ece5ab8f50411125529a1e84c7123b99
 
 
 .. _$http\_raw\_post\_data:
@@ -3520,6 +3520,27 @@ When stopping a script with die() and echo(), it is possible to provide a messag
 
 
 
+.. _property-could-be-private:
+
+Property Could Be Private
+#########################
+
+
+The following properties are never used outside their class of definition or their children (for the protected). 
+Given the analyzed code, they could be set as private. 
+
+Note that dynamic properties (such as $x->$y) are not taken into account.
+
++--------------+------------------------+
+| Command Line | Classes/CouldBePrivate |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
+
 .. _property/variable-confusion:
 
 Property/Variable Confusion
@@ -3594,27 +3615,43 @@ Function that bear the same name as a PHP function, and that are declared. This 
 
 
 
-.. _redefined-property:
+.. _redefined-constants:
 
-Redefined Property
-##################
+Redefined Constants
+###################
 
 
-Using heritage, it is possible to define several times the same property, at different levels of the hierarchy.
+Class constants may be redefined, though it is prone to errors when using them, as it is now crucial to use the right class name to access the right value.
 
-When this is the case, it is difficult to understand which class will actually handle the property. 
+.. code-block:: php
 
-In the case of a private property, the different instances will stay distinct. In the case of protected or public properties, they will all share the same value. 
+   <?php
+   
+   class a {
+       const A = 1;
+   }
+   
+   class b extends a {
+       const A = 2;
+   }
+   
+   class c extends c { }
+   
+   echo a::A, ' ', b::A, ' ', c::A;
+   // 1 2 2
+   
+   ?>
 
-It is recommended to avoid redefining the same property in a hierarchy.
 
-+--------------+---------------------------+
-| Command Line | Classes/RedefinedProperty |
-+--------------+---------------------------+
-| clearPHP     |                           |
-+--------------+---------------------------+
-| Analyzers    | :ref:`Analyze`            |
-+--------------+---------------------------+
+It is recommended to use distinct names.
+
++--------------+----------------------------+
+| Command Line | Classes/RedefinedConstants |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
 
 
 

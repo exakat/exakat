@@ -3,6 +3,14 @@
 Configuration
 *************
 
+Summary
+-------
+
+* `Common Behavior`_
+* `Engine configuration`_
+* `Project Configuration`_
+
+
 Common Behavior
 ---------------
 
@@ -27,23 +35,30 @@ The precedence of the directives is the same as the list above : command line op
 
 Some of the directives are only available in the config.ini files.
 
-### Common Options
+Common Options
+###############
+ 
 All options are the same, whatever the command provided to exakat. -f always means files, and -q always means quick. 
 
 Any option that a command doesn't understand is ignored. 
 
 Any option that is not recognized is ignored and reported (with visibility).
 
-##Engine configuration
+Engine configuration
+--------------------
 
-## Configuration File
+Engine configuration is were the exakat engine general configuration are stored. For example, the php binaries or the neo4j folder are there. Engine configurations affect all projects.
+
+Configuration File
+##################
+
 The Exakat engine is configured in the 'config/config.ini' file. 
 
 This file is created manually, or, with the 'doctor' command.
 
-```shell
-php exakat.phar doctor
-```
+::
+
+   php exakat.phar doctor
 
 When the doctor can't find the 'config/config.ini' file, it attempts to create one, with reasonable values. It is recommended to use this to create the config.ini skeleton, and later, modify it.
 
@@ -112,6 +127,8 @@ Here are the currently available options in Exakat's configuration file : config
 
 Project Configuration
 ---------------------
+
+Project configuration are were the project specific configuration are stored. For example, the project name, the ignored directories or its external libraries are kept. Configurations only affect one project and not the others.
 
 Project configuration file are called 'config.ini'. They are located, one per project, in the 'projects/&lt;project name&gt;/config.ini' file. 
 

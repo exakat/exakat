@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 18 Jan 2016 11:03:19 +0000
-.. comment: Generation hash : 687d83113fa41c7c5c7b55e8fa81173b4dfe1533
+.. comment: Generation date : Fri, 22 Jan 2016 14:01:41 +0000
+.. comment: Generation hash : 5cfa3124ece5ab8f50411125529a1e84c7123b99
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 221 analysis
+Total : 222 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -190,10 +190,11 @@ Total : 221 analysis
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Preprocessable`
 * :ref:`Print And Die <print-and-die>`
+* :ref:`Property Could Be Private <property-could-be-private>`
 * :ref:`Property/Variable Confusion <property/variable-confusion>`
 * :ref:`Queries in loops <queries-in-loops>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
-* :ref:`Redefined Property <redefined-property>`
+* :ref:`Redefined Constants <redefined-constants>`
 * :ref:`Relay Function <relay-function>`
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Sequences In For <sequences-in-for>`
