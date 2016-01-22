@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 22 Jan 2016 14:01:41 +0000
-.. comment: Generation hash : 5cfa3124ece5ab8f50411125529a1e84c7123b99
+.. comment: Generation date : Fri, 22 Jan 2016 15:54:40 +0000
+.. comment: Generation hash : 67a4726e1da5ebfd2794339217de9c192c3911b6
 
 
 .. _$http\_raw\_post\_data:
@@ -2205,12 +2205,15 @@ Blocks are compulsory when defining a structure, such as a class or a function. 
 
 Blocks are also valid syntax that group several instructions together, though they have no effect at all, except confuse the reader. Most often, it is a ruin from a previous flow control instruction, whose condition was removed or commented. They should be removed. 
 
-<?php
+.. code-block:: php
 
-//foreach($a as $b) 
-{
-    $b++;
-}
+   <?php
+   
+       //foreach($a as $b) 
+       {
+           $b++;
+       }
+   ?>
 
 +--------------+----------------------+
 | Command Line | Structures/LoneBlock |
@@ -2579,9 +2582,10 @@ No Direct Call To MagicMethod
 #############################
 
 
-PHP magic methods, such as \_\_get(), \_\_set(), ... are supposed to bed used in an object environnement, and not with direct call. 
+PHP magic methods, such as \_\_get(), \_\_set(), ... are supposed to be used in an object environnement, and not with direct call. 
 
 For example, 
+
 .. code-block:: php
 
    <?php
@@ -4529,15 +4533,16 @@ Usage of the PHP 7 Unicode Escape syntax, with the \u{xxxxx} format.
 
 
 
-.. _unpreprocessed-calues:
+.. _unpreprocessed-values:
 
-Unpreprocessed Calues
+Unpreprocessed Values
 #####################
 
 
 PHP is good at manipulating data. However, it is also good to preprocess those values, and put them in the code directly as expected, rather than have PHP go the extra step and do it for you.
 
 For example : 
+
 .. code-block:: php
 
    <?php

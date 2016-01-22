@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Fri, 22 Jan 2016 14:01:41 +0000
-.. comment: Generation hash : 5cfa3124ece5ab8f50411125529a1e84c7123b99
+.. comment: Generation date : Fri, 22 Jan 2016 15:54:40 +0000
+.. comment: Generation hash : 67a4726e1da5ebfd2794339217de9c192c3911b6
 
 
 .. _analyze:
@@ -227,7 +227,7 @@ Total : 222 analysis
 * :ref:`Undefined function <undefined-function>`
 * :ref:`Undefined parent <undefined-parent>`
 * :ref:`Undefined static:: or self:: <undefined-static\:\:-or-self\:\:>`
-* :ref:`Unpreprocessed Calues <unpreprocessed-calues>`
+* :ref:`Unpreprocessed Values <unpreprocessed-values>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Unresolved Use <unresolved-use>`
