@@ -105,7 +105,7 @@ class Doctor extends Tasks {
             }
 
             if (preg_match('/dbms.security.auth_enabled\s*=\s*false/is', $file, $r)) {
-                $stats['neo4j']['authentication'] = 'Not enabled (Please, enable it)';
+                $stats['neo4j']['authentication'] = 'Not enabled';
             } else {
                 $stats['neo4j']['authentication'] = 'Enabled.';
                 if (empty($config->neo4j_login)) {
@@ -209,8 +209,8 @@ php          = {$_SERVER['_']}
 ;php71        = /path/to/php71
 php$version        = {$_SERVER['_']}
 
-; Limit the size of a project to 100 k tokens (about 10 k LOC)
-token_limit = 100000
+; Limit the size of a project to 1000 k tokens (about 100 k LOC)
+token_limit = 1000000
 INI;
             file_put_contents($config->projects_root.'/config/config.ini', $ini);
         }
