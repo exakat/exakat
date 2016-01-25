@@ -46,7 +46,7 @@ class _Function extends TokenAuto {
                                   1 => array('notToken' => 'T_OPEN_CURLY'),
 // Function name may be anything, indeed. 
                                   2 => array('token'    => 'T_OPEN_PARENTHESIS',
-//                                             'property' => array('association' => 'Function')
+                                             'property' => array('association' => 'Function')
                                              ),
                                   3 => array('atom'     => 'Arguments'),
                                   4 => array('token'    => 'T_CLOSE_PARENTHESIS')
@@ -79,7 +79,7 @@ class _Function extends TokenAuto {
         $this->conditions = array(0 => array('token'    =>  _Function::$operators,
                                              'atom'     => 'none'),
                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
-//                                             'property' => array('association' => 'Function')
+                                             'property' => array('association' => 'Function')
                                              ),
                                   2 => array('atom'     => 'Arguments'),
                                   3 => array('token'    => 'T_CLOSE_PARENTHESIS')

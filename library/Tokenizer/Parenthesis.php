@@ -31,6 +31,7 @@ class Parenthesis extends TokenAuto {
         $operands    = 'yes';
         
         $prerequisite = array_merge(Functioncall::$operators, _Include::$operators,
+                                    Ifthen::$operators,
                                     array('T_STRING',   'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
                                           'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
                                           'T_CLOSE_BRACKET', 'T_STATIC', 'T_CLOSE_PARENTHESIS',

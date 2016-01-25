@@ -941,6 +941,10 @@ class Load extends Tasks {
                     $this->processComma($token_value);
                     if ($type = $this->processParenthesis($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
+                        if ($type === 'Function') {
+                            $regexIndex['ArgumentsNoComma']->relateTo($T[$Tid], 'INDEXED')->save();
+                            $regexIndex['Typehint']->relateTo($T[$Tid], 'INDEXED')->save();
+                        }
                     } else {
                         $regexIndex['Parenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
                         $regexIndex['ArgumentsNoComma']->relateTo($T[$Tid], 'INDEXED')->save();
@@ -1226,6 +1230,10 @@ class Load extends Tasks {
 
             if ($type = $this->processParenthesis($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
+                if ($type === 'Function') {
+                    $regexIndex['ArgumentsNoComma']->relateTo($T[$Tid], 'INDEXED')->save();
+                    $regexIndex['Typehint']->relateTo($T[$Tid], 'INDEXED')->save();
+                }
             }
 
             if ($this->processFunctionDefinition($token_value)) {
@@ -1405,78 +1413,97 @@ class Load extends Tasks {
     }
 
     private function processParenthesis($tokenValue) {
-        static $states = array();
-        static $statesId = 0;
-        static $previous = '';
+        static $states                   = array();
+        static $statesId                 = 0;
+        static $previous                 = '';
+        static $previousPrevious         = '';
+        static $previousPreviousPrevious = '';
         
         if ($tokenValue == 'T_FOR' ) {
-            $states[] = 'For';
+            $states[] = ($previous === 'T_FUNCTION' ? 'Function' : 'For');
             ++$statesId;
-            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previousPreviousPrevious = $previousPrevious;
+            $previousPrevious = $previous;
             $previous = $tokenValue;
-            return $r;
+            return '';
         }
 
         if ($tokenValue == 'T_FOREACH' ) {
-            $states[] = 'Foreach';
+            $states[] = ($previous === 'T_FUNCTION' ? 'Function' : 'Foreach');
             ++$statesId;
-            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previousPreviousPrevious = $previousPrevious;
+            $previousPrevious = $previous;
             $previous = $tokenValue;
-            return $r;
+            return '';
         }
         
         if ($tokenValue == 'T_WHILE' ) {
-            $states[] = 'While';
+            $states[] = ($previous === 'T_FUNCTION' ? 'Function' : 'While');
             ++$statesId;
-            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previousPreviousPrevious = $previousPrevious;
+            $previousPrevious = $previous;
             $previous = $tokenValue;
-            return $r;
+            return '';
         }
 
         if ($tokenValue == 'T_SWITCH' ) {
-            $states[] = 'Switch';
+            $states[] = ($previous === 'T_FUNCTION' ? 'Function' : 'Switch');
             ++$statesId;
-            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previousPreviousPrevious = $previousPrevious;
+            $previousPrevious = $previous;
             $previous = $tokenValue;
-            return $r;
+            return '';
         }
 
         if ($tokenValue == 'T_DECLARE' ) {
-            $states[] = 'Declare';
+            $states[] = ($previous === 'T_FUNCTION' ? 'Function' : 'Declare');
             ++$statesId;
-            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previousPreviousPrevious = $previousPrevious;
+            $previousPrevious = $previous;
             $previous = $tokenValue;
-            return $r;
+            return '';
         }
 
         if ($tokenValue == 'T_CATCH' ) {
-            $states[] = 'Catch';
+            $states[] = ($previous === 'T_FUNCTION' ? 'Function' : 'Catch');
             ++$statesId;
-            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previousPreviousPrevious = $previousPrevious;
+            $previousPrevious = $previous;
             $previous = $tokenValue;
-            return $r;
+            return '';
         }
 
         if ($tokenValue == 'T_IF' || $tokenValue == 'T_ELSEIF') {
-            $states[] = 'If';
+            $states[] = ($previous === 'T_FUNCTION' ? 'Function' : 'If');
             ++$statesId;
-            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previousPreviousPrevious = $previousPrevious;
+            $previousPrevious = $previous;
             $previous = $tokenValue;
-            return $r;
+            return '';
         }
 
-        if ($tokenValue == 'T_OPEN_PARENTHESIS' )    {
-            if (count($states) > 0) {
-                $state = array_pop($states);
-                $r = ( $previous === 'T_FUNCTION' ? $state : '');
+        if ($tokenValue == 'T_OPEN_PARENTHESIS' ) {
+            if ($previousPreviousPrevious === 'T_FUNCTION' || $previousPrevious === 'T_FUNCTION' || $previous === 'T_FUNCTION') {
+                $previousPreviousPrevious = $previousPrevious;
+                $previousPrevious = $previous;
                 $previous = $tokenValue;
-                return $r;
+                return 'Function';
+            } elseif (count($states) > 0) {
+                $state = array_pop($states);
+                $previousPreviousPrevious = $previousPrevious;
+                $previousPrevious = $previous;
+                $previous = $tokenValue;
+                return $state;
             } else {
+                $previousPreviousPrevious = $previousPrevious;
+                $previousPrevious = $previous;
                 $previous = $tokenValue;
                 return '';
             }
         }
 
+        $previousPreviousPrevious = $previousPrevious;
+        $previousPrevious = $previous;
         $previous = $tokenValue;
         return '';
     }
