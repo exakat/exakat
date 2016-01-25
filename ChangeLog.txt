@@ -1,4 +1,4 @@
-Version 0.4.6 ( Immortal of Elk Power, Coming up)
+Version 0.5.0 (Immortal of Antelope Power, Coming up)
 + Architecture
     +
 + Report
@@ -8,7 +8,26 @@ Version 0.4.6 ( Immortal of Elk Power, Coming up)
 + Tokenizer
     + 
 
-Version 0.4.5 ( Immortal of Tiger Power, 2016-01-18)
+Version 0.4.6 (Immortal of Elk Power, Coming up)
++ Architecture
+    + New installation script with Vagrant and Ansible (Thanks Alexis!)
+    + Updated documentation
+    + Added a command to remove a project
++ Report
+    + Devoops reports has case-insensitive menu sort
++ Analyzer
+    + Spot redefined properties, classes and methods. 
+    + Spot properties that may be turned private
+    + Fixed special case in Wrong Number Of Arguments
+    + Fixed 'OnePage' analysis
++ Tokenizer
+    + Finished support for relaxed keywords in classes
+    + Sped up tokenizer by keeping counts of tokens in datastore
+    + Fixed detection of CakePHP
+    + Fixed special case with Labels
+    + Fixed rare case with die() within ternary operator
+
+Version 0.4.5 (Immortal of Tiger Power, 2016-01-18)
 + Architecture
     + Upgraded documentation
     + Default command is 'help'

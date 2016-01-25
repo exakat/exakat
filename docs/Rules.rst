@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 22 Jan 2016 15:54:40 +0000
-.. comment: Generation hash : 67a4726e1da5ebfd2794339217de9c192c3911b6
+.. comment: Generation date : Mon, 25 Jan 2016 13:26:26 +0000
+.. comment: Generation hash : 83f0f193d9b8abbdd855bbc2bcec5027f0a7e2a5
 
 
 .. _$http\_raw\_post\_data:
@@ -3454,7 +3454,21 @@ Pre-increment
 
 When possible, use the pre-increment operator (++$i or --$i) instead of the post-increment operator ($i++ or $i--).
 
-The latter needs an extra memory allocation that costs about 10% of performances.
+The latter needs an extra memory allocation that costs about 10% of performances. 
+
+.. code-block:: php
+
+   <?php
+   
+   // ++$i should be preferred over $i++, as current value is not important
+   for($i = 0; $i <10; ++$i) {
+       // do Something
+   }
+   
+   // ++$b and $b++ have different impact here, since $a will collect $b + 1 or $b, respectively.
+   $a = $b++;
+   
+   ?>
 
 +--------------+-------------------------------------+
 | Command Line | Performances/PrePostIncrement       |
