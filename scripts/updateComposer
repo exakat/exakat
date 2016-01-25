@@ -9,7 +9,7 @@ $res = $sqlite->query('SELECT vendor, component, GROUP_CONCAT(versions.version) 
                                                 JOIN versions
                                                     ON versions.component_id = components.id
                                                 GROUP BY components.id
-                            LIMIT 10,100');
+                            LIMIT 0,1000');
 
 while($row = $res->fetchArray()) {
     $json = file_get_contents('https://packagist.org/packages/'.$row['vendor'].'/'.$row['component'].'.json');
