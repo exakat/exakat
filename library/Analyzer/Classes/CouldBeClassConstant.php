@@ -62,7 +62,7 @@ class CouldBeClassConstant extends Analyzer\Analyzer {
                                                                                    .any() == false}')
              ->back('first');
              
-             // Exclude situations where property is used asan object or a resource (can'tbe class constant)
+             // Exclude situations where property is used as an object or a resource (can't be class constant)
         $this->prepareQuery();
     }
 }

@@ -29,16 +29,17 @@ class _Declare extends TokenAuto {
 
     public function _check() {
         // declare(ticks = 2) : block enddeclare;
-        $this->conditions = array(0 => array('token' => _Declare::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                             'property' => array('association' => 'Declare')),
-                                  2 => array('atom'  => array('Assignation', 'Arguments')),
-                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('token' => 'T_COLON',
+        $this->conditions = array(-1 => array('notToken' => 'T_FUNCTION'),
+                                   0 => array('token'    => _Declare::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
                                               'property' => array('association' => 'Declare')),
-                                  5 => array('atom'  => 'yes'),
-                                  6 => array('token' => 'T_ENDDECLARE'),
+                                   2 => array('atom'     => array('Assignation', 'Arguments')),
+                                   3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                   4 => array('token'    => 'T_COLON',
+                                              'property' => array('association' => 'Declare')),
+                                   5 => array('atom'     => 'yes'),
+                                   6 => array('token'    => 'T_ENDDECLARE'),
         );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',

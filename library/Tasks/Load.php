@@ -1407,58 +1407,77 @@ class Load extends Tasks {
     private function processParenthesis($tokenValue) {
         static $states = array();
         static $statesId = 0;
+        static $previous = '';
         
         if ($tokenValue == 'T_FOR' ) {
             $states[] = 'For';
             ++$statesId;
-            return '';
+            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previous = $tokenValue;
+            return $r;
         }
 
         if ($tokenValue == 'T_FOREACH' ) {
             $states[] = 'Foreach';
             ++$statesId;
-            return '';
+            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previous = $tokenValue;
+            return $r;
         }
         
         if ($tokenValue == 'T_WHILE' ) {
             $states[] = 'While';
             ++$statesId;
-            return '';
+            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previous = $tokenValue;
+            return $r;
         }
 
         if ($tokenValue == 'T_SWITCH' ) {
             $states[] = 'Switch';
             ++$statesId;
-            return '';
+            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previous = $tokenValue;
+            return $r;
         }
 
         if ($tokenValue == 'T_DECLARE' ) {
             $states[] = 'Declare';
             ++$statesId;
-            return '';
+            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previous = $tokenValue;
+            return $r;
         }
 
         if ($tokenValue == 'T_CATCH' ) {
             $states[] = 'Catch';
             ++$statesId;
-            return '';
+            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previous = $tokenValue;
+            return $r;
         }
 
         if ($tokenValue == 'T_IF' || $tokenValue == 'T_ELSEIF') {
             $states[] = 'If';
             ++$statesId;
-            return '';
+            $r = ( $previous === 'T_FUNCTION' ? true : '');
+            $previous = $tokenValue;
+            return $r;
         }
 
         if ($tokenValue == 'T_OPEN_PARENTHESIS' )    {
             if (count($states) > 0) {
                 $state = array_pop($states);
-                return $state;
+                $r = ( $previous === 'T_FUNCTION' ? $state : '');
+                $previous = $tokenValue;
+                return $r;
             } else {
+                $previous = $tokenValue;
                 return '';
             }
         }
 
+        $previous = $tokenValue;
         return '';
     }
 

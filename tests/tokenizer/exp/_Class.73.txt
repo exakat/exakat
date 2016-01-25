@@ -1,0 +1,792 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          global
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          instanceof
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          endwhile
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          continue
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          exit
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          eval
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          finally
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        class
+        Label : NAME
+          
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          endforeach
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          var
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          while
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          clone
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          unset
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          yield
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          try
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          trait
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          implements
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          insteadof
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          extends
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          private
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          and
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          case
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          break
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          catch
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          array
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          as
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          abstract
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          switch
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          empty
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          public
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          or
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          list
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          print
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          endfor
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          require_once
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          require
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          static
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          use
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          new
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          interface
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          include_once
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          final
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          do
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          namespace
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          isset
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          protected
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          if
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          const
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          declare
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          throw
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          return
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          include
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          elseif
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          xor
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          for
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          die
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          foreach
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          goto
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          default
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          else
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          enddeclare
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          endif
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : PUBLIC
+          public
+        Label : NAME
+          endswitch
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void

@@ -3124,6 +3124,8 @@ GREMLIN;
         if (isset($conditions['token'])) {
             if ( is_array($conditions['token']) && !empty($conditions['token'])) {
                 $queryConditions[] = "filter{it.token in ['".implode("', '", $conditions['token'])."']}";
+            } elseif($conditions['token'] == 'yes') {
+                $queryConditions[] = "hasNot('token', null)";
             } else {
                 $queryConditions[] = "has('token', '".$conditions['token']."')";
             }

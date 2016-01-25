@@ -29,17 +29,18 @@ class _Catch extends TokenAuto {
 
     public function _check() {
         // non-empty catch
-        $this->conditions = array(0 => array('token'    => _Catch::$operators,
-                                             'atom'     => 'none'),
-                                  1 => array('token'    => 'T_OPEN_PARENTHESIS',
-                                             'property' => array('association' => 'Catch')),
-                                  2 => array('atom'     => array('Identifier', 'Nsname')),
-                                  3 => array('atom'     => 'Variable'),
-                                  4 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('token'    => 'T_OPEN_CURLY',
-                                             'property' => array('association' => 'Catch')),
-                                  6 => array('atom'     => array('Sequence', 'Void')),
-                                  7 => array('token'    => 'T_CLOSE_CURLY'),
+        $this->conditions = array(-1 => array('notToken' => 'T_FUNCTION'),
+                                   0 => array('token'    => _Catch::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'Catch')),
+                                   2 => array('atom'     => array('Identifier', 'Nsname')),
+                                   3 => array('atom'     => 'Variable'),
+                                   4 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                   5 => array('token'    => 'T_OPEN_CURLY',
+                                              'property' => array('association' => 'Catch')),
+                                   6 => array('atom'     => array('Sequence', 'Void')),
+                                   7 => array('token'    => 'T_CLOSE_CURLY'),
                                   );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
