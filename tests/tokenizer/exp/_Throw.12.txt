@@ -1,0 +1,62 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        B
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'C'
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      G
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          'F'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        throw
+        Label : THROW
+          Concatenation
+          Label : CONCAT
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'F'
+          Label : CONCAT
+            new
+            Label : NEW
+              B
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'C'
+  Label : ELEMENT
+    throw
+    Label : THROW
+      Concatenation
+      Label : CONCAT
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'F'
+      Label : CONCAT
+        new
+        Label : NEW
+          B
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              'C'
