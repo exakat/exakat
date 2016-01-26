@@ -3062,22 +3062,32 @@ GREMLIN;
 
             unset($conditions['checkForArguments']);
         }
-
-        if (isset($conditions['checkForNamelist'])) {
-            if (is_array($conditions['checkForNamelist'])) {
-                $classes = "'".implode("', '", $conditions['checkForNamelist'])."'";
+        
+        if (isset($conditions['checkForTypehint'])) {
+            if (is_array($conditions['checkForTypehint'])) {
+                $classes = "'".implode("', '", $conditions['checkForTypehint'])."'";
             } else {
-                $classes = "'".$conditions['checkForNamelist']."'";
+                $classes = "'".$conditions['checkForTypehint']."'";
             }
 
-            $finalTokens = array_merge( Token::$alternativeEnding,
-                            array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY', 'T_CLOSE_BRACKET'));
-            $finalTokens = "'".implode("', '", $finalTokens)."'";
+            $finalTokens = "'T_CLOSE_PARENTHESIS'";
             $queryConditions[] = <<<GREMLIN
-filter{ it.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }
-.loop(2){!(it.object.token in [$finalTokens])}.any() }
+filter{ it.out('NEXT').transform{
+    if (it.token in ['T_VARIABLE', 'T_EQUAL']) {
+        it;
+    } else if (it.token in ['T_STRING', 'T_ARRAY', 'T_CALLABLE', 'T_NS_SEPARATOR'] && 
+               it.out('NEXT').next().token in ['T_VARIABLE', 'T_EQUAL']) {
+        it.out('NEXT').next();
+    } else {
+        // This has to be stopped, so we stay here, and the loop will fail next loop
+        it;
+    }
+}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
+.loop(4){!(it.object.token in [$finalTokens])}{ it.object.token in [$finalTokens]}.any() 
+}
 GREMLIN;
-            unset($conditions['checkForNamelist']);
+
+            unset($conditions['checkForTypehint']);
         }
 
         if (isset($conditions['checkForConcatenation'])) {

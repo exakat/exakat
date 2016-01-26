@@ -28,11 +28,16 @@ class Typehint extends TokenAuto {
     static public $atom = 'Typehint';
     
     public function _check() {
+
+        $allowedTokens = array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
+                               'T_CALLABLE', 'T_ARRAY', 'T_EQUAL');
+        $allowedAtoms = array('Variable', 'Assignation');
+        
         // normal case for classes
-        $this->conditions = array( 0 => array('token'    => Typehint::$operators),
-                                   1 => array('token'    => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
-                                                                  'T_CALLABLE', 'T_ARRAY', 'T_EQUAL')),
-                                   2 => array('token'    => array('T_COMMA', 'T_CLOSE_PARENTHESIS'))
+        $this->conditions = array( 0 => array('token'             => Typehint::$operators,
+                                               'checkForTypehint' => $allowedAtoms),
+                                   1 => array('token'             => $allowedTokens),
+                                   2 => array('token'             => array('T_COMMA', 'T_CLOSE_PARENTHESIS'))
         );
         
         $this->actions = array('toTypehint'  => true,
@@ -41,11 +46,11 @@ class Typehint extends TokenAuto {
         $this->checkAuto();
 
         // normal case for classes
-        $this->conditions = array( 0 => array('token'    => Typehint::$operators),
-                                   1 => array('token'    => array('T_TYPEHINT', 'T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
-                                                                  'T_CALLABLE', 'T_ARRAY', 'T_EQUAL')),
-                                   2 => array('token'    => array('T_EQUAL', 'T_VARIABLE'),
-                                              'atom'     => 'yes')
+        $this->conditions = array( 0 => array('token'             => Typehint::$operators,
+                                              'checkForTypehint'  => $allowedAtoms),
+                                   1 => array('token'             => $allowedTokens),
+                                   2 => array('token'             => array('T_EQUAL', 'T_VARIABLE'),
+                                              'atom'              => 'yes')
         );
         
         $this->actions = array('toTypehint'  => true,
