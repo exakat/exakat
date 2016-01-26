@@ -1,0 +1,142 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ===
+      Label : RIGHT
+        1
+      Label : LEFT
+        $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        (
+        Label : CODE
+          ++
+          Label : POSTPLUSPLUS
+            $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      &&
+      Label : RIGHT
+        &&
+        Label : RIGHT
+          <=
+          Label : RIGHT
+            I
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $c
+                Label : METHOD
+                  M
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      'N'
+          Label : LEFT
+            I
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $b
+                Label : METHOD
+                  B
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      'K'
+        Label : LEFT
+          !
+          Label : NOT
+            ->
+            Label : OBJECT
+              $b
+            Label : METHOD
+              B
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'H'
+      Label : LEFT
+        ==
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              D
+          Label : METHOD
+            B
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                'F'
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            B
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                'C'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        (
+        Label : CODE
+          ?
+          Label : CONDITION
+            >
+            Label : RIGHT
+              1
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $b
+              Label : METHOD
+                B
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    'P'
+          Label : THEN
+            ++
+            Label : POSTPLUSPLUS
+              $d
+          Label : ELSE
+            (
+            Label : CODE
+              ?
+              Label : CONDITION
+                ==
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : METHOD
+                    B
+                    Label : ARGUMENTS
+                      
+                      Label : ARGUMENT
+                        'P'
+              Label : THEN
+                ++
+                Label : POSTPLUSPLUS
+                  $e
+              Label : ELSE
+                null
