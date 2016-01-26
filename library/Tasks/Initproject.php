@@ -122,7 +122,20 @@ INI;
                 case ($repositoryURL === '' || $repositoryURL === false) :
                     display('Empty initialization');
                     break 1;
-                
+
+                // composer archive (early in the list, as this won't have 'scheme'
+                case ($config->composer === true) :
+                    display('Initialization with composer');
+
+                    // composer install
+                    $composer = new \stdClass();
+                    $composer->require = new \stdClass();
+                    $composer->require->$repositoryURL = 'dev-master';
+                    $json = json_encode($composer);
+                    file_put_contents($config->projects_root.'/projects/'.$project.'/composer.json', $json);
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; composer -q install; mv vendor code');
+                    break 1;
+
                 // SVN
                 case ($repositoryDetails['scheme'] == 'svn' || $config->svn === true) :
                     display('SVN initialization');
@@ -157,19 +170,6 @@ INI;
                 case ($config->zip === true) :
                     display('Initialization from zip archive');
                     shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.zip '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; unzip archive.zip -d code');
-                    break 1;
-
-                // composer archive
-                case ($config->composer === true) :
-                    display('Initialization with composer');
-
-                    // composer install
-                    $composer = new \stdClass();
-                    $composer->require = new \stdClass();
-                    $composer->require->$repositoryURL = 'dev-master';
-                    $json = json_encode($composer);
-                    file_put_contents($config->projects_root.'/projects/'.$project.'/composer.json', $json);
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; composer -q install; mv vendor code');
                     break 1;
 
                 // Git
