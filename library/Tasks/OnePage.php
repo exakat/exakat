@@ -118,7 +118,7 @@ class OnePage extends Tasks {
             $task = new Analyze();
             $task->run($config);
             
-            rename($config->projects_root.'/projects/onepage/log/analyze.log', 
+            rename($config->projects_root.'/projects/onepage/log/analyze.log',
                    $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
         } catch (\Exception $e) {
             display( "Error while running the Analyze $theme \n".

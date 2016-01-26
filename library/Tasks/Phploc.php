@@ -129,7 +129,6 @@ class Phploc extends Tasks {
         return $return;
     }
 
-    
     private function countLocInFile($filename) {
         $return = array('comments' => 0,
                         'tokens'   => 0,
