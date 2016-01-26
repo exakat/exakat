@@ -24,6 +24,8 @@
 namespace Tasks;
 
 class Files extends Tasks {
+    private $config = null;
+    
       static public $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  ),
                                   'images'   => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot', 'dhp', 'JPG',),
                                   'media'    => array('ttf', 'swf', 'woff', 'eot', 'otf', ),
@@ -45,6 +47,7 @@ class Files extends Tasks {
 
     public function run(\Config $config) {
         $dir = $config->project;
+        $this->config = $config;
 
         $stats = array('notCompilable52' => 'N/C',
                        'notCompilable53' => 'N/C',
@@ -96,6 +99,8 @@ class Files extends Tasks {
         }
 
         $this->datastore->addRow('ignoredFiles', $files);
+        
+        $this->checkComposer($dir);
 
         // Actually finding the files
         $files = trim(shell_exec($shellBase));
@@ -260,26 +265,6 @@ class Files extends Tasks {
 
         $this->datastore->addRow('hash', $stats);
         
-        // composer.json
-        display('Check composer');
-        $composerInfo = array();
-        if ($composerInfo['composer.json'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.json')) {
-            $composerInfo['composer.lock'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.lock');
-            
-            $composer = json_decode(file_get_contents($config->projects_root.'/projects/'.$dir.'/code/composer.json'));
-            
-            if (isset($composer->autoload)) {
-                $composerInfo['autoload'] = isset($composer->autoload->{'psr-0'}) ? 'psr-0' : 'psr-4';
-            } else {
-                $composerInfo['autoload'] = false;
-            }
-            
-            if (isset($composer->require)) {
-                $this->datastore->addRow('composer', (array) $composer->require);
-            }
-        }
-        $this->datastore->addRow('hash', $composerInfo);
-        
         // check for special files
         display('Check config files');
         $files = glob($config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
@@ -315,6 +300,28 @@ class Files extends Tasks {
                 display_r($unknown);
             }
         }
+    }
+    
+    private function checkComposer($dir) {
+        // composer.json
+        display('Check composer');
+        $composerInfo = array();
+        if ($composerInfo['composer.json'] = file_exists($this->config->projects_root.'/projects/'.$dir.'/code/composer.json')) {
+            $composerInfo['composer.lock'] = file_exists($this->config->projects_root.'/projects/'.$dir.'/code/composer.lock');
+            
+            $composer = json_decode(file_get_contents($this->config->projects_root.'/projects/'.$dir.'/code/composer.json'));
+            
+            if (isset($composer->autoload)) {
+                $composerInfo['autoload'] = isset($composer->autoload->{'psr-0'}) ? 'psr-0' : 'psr-4';
+            } else {
+                $composerInfo['autoload'] = false;
+            }
+            
+            if (isset($composer->require)) {
+                $this->datastore->addRow('composer', (array) $composer->require);
+            }
+        }
+        $this->datastore->addRow('hash', $composerInfo);
     }
 }
 
