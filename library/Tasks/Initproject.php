@@ -156,20 +156,41 @@ INI;
 
                 // Tbz archive
                 case ($config->tbz === true) :
-                    display('Initialization from tar.bz2 archive');
-                    print shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tbz2 '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xjf archive.tbz2 -C code; rm -rf archive.tbz2');
+                    display('Download the tar.bz2');
+                    $binary = file_get_contents($repositoryURL);
+                    display('Saving');
+                    $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tgz';
+                    file_put_contents($archiveFile, $binary);
+                    display('Unarchive');
+                    shell_exec('tar -jxf '.$archiveFile.' --directory '.$config->projects_root.'/projects/'.$project.'/code/');
+                    display('Cleanup');
+                    unlink($archiveFile);
                     break 1;
 
                 // tgz archive
                 case ($config->tgz === true) :
-                    display('Initialization from tar.gz archive');
-                    shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.tgz '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; tar -xzf archive.tgz -C code; rm -rf archive.tgz');
+                    display('Download the tar.gz');
+                    $binary = file_get_contents($repositoryURL);
+                    display('Saving');
+                    $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tgz';
+                    file_put_contents($archiveFile, $binary);
+                    display('Unarchive');
+                    shell_exec('tar -zxf '.$archiveFile.' --directory '.$config->projects_root.'/projects/'.$project.'/code/');
+                    display('Cleanup');
+                    unlink($archiveFile);
                     break 1;
 
-                // tgz archive
+                // zip archive
                 case ($config->zip === true) :
-                    display('Initialization from zip archive');
-                    shell_exec('wget -q -O '.$config->projects_root.'/projects/'.$project.'/archive.zip '.escapeshellarg($repositoryURL).';cd '.$config->projects_root.'/projects/'.$project.'; mkdir code; unzip archive.zip -d code');
+                    display('Download the zip');
+                    $binary = file_get_contents($repositoryURL);
+                    display('Saving');
+                    $archiveFile = tempnam(sys_get_temp_dir(), 'archiveZip').'.zip';
+                    file_put_contents($archiveFile, $binary);
+                    display('Unzip');
+                    shell_exec('unzip '.$archiveFile.' -d '.$config->projects_root.'/projects/'.$project.'/code/');
+                    display('Cleanup');
+                    unlink($archiveFile);
                     break 1;
 
                 // Git
