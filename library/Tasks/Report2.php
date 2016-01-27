@@ -69,8 +69,10 @@ class Report2 extends Tasks {
 
             $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
 
-            $res = $dump->query($ProjectDumpSql);
-            $row = $res->fetchArray(\SQLITE3_NUM);
+            $res = @$dump->query($ProjectDumpSql);
+            if ($res) {
+                $row = $res->fetchArray(\SQLITE3_NUM);
+            }
             
             --$max;
             if ($max == 0) {
