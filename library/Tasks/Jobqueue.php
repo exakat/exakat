@@ -92,9 +92,11 @@ class Jobqueue extends Tasks {
                         if (file_exists($this->config->projects_root.'/in/'.$job.'.php')) {
                             display( 'processing onepage job ' . $job . PHP_EOL);
                             $this->process($job);
+                        } elseif (file_exists($this->config->projects_root.'/project/'.$job)) {
+                            display( 'processing onepage job ' . $job . PHP_EOL);
+                            $this->process($job);
                         } else {
-                            display( 'processing project ' . $job . PHP_EOL);
-                            $this->processProject($job);
+                            display( 'No such project or page as ' . $job . PHP_EOL);
                         }
                 }
         
