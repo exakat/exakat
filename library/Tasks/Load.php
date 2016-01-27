@@ -36,6 +36,7 @@ class Load extends Tasks {
         $this->checkTokenLimit();
 
         $this->php = new \Phpexec($this->config->phpversion);
+        $this->php->getTokens();
 
         // formerly -q option. Currently, only one loader, via csv-batchimport;
         $this->client = new \Loader\Cypher();
@@ -125,8 +126,11 @@ class Load extends Tasks {
             return false;
         }
 
-        $delimitedStrings = array('T_QUOTE' => 0, 'T_QUOTE_2' => 0, 'T_SHELL_QUOTE' => 0);
+        $delimitedStrings = array('T_QUOTE'       => 0,
+                                  'T_QUOTE_2'     => 0,
+                                  'T_SHELL_QUOTE' => 0);
         $whiteCode = $this->php->getWhiteCode();
+
         $tokensNewlines = array();
         $merge = 0;
         $deleted = 0;
