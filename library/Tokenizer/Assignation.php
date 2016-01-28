@@ -66,7 +66,7 @@ class Assignation extends TokenAuto {
         $this->conditions = array(-2 => array('notToken' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR',
                                                                               'T_AT', 'T_AND'),
                                                                          Preplusplus::$operators )),
-                                  -1 => array('notToken' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
+                                  -1 => array('notToken' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY', 'T_CLOSE_PARENTHESIS')),
                                    0 => array('token'    => Assignation::$operators),
                                    1 => array('atom'     => $operands),
                                    2 => array('notToken' => $forbiddenTokens),
