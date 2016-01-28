@@ -102,6 +102,7 @@ class Config {
                                  '-table'     => 'table',
                                  '-text'      => 'text',
                                  '-o'         => 'output',
+                                 '-stop'      => 'stop',
 
                                  '-git'       => 'git',
                                  '-svn'       => 'svn',
@@ -127,6 +128,7 @@ class Config {
                                          'help'          => 1, 
                                          'init'          => 1, 
                                          'remove'        => 1, 
+                                         'server'        => 1, 
                                          'jobqueue'      => 1, 
                                          'queue'         => 1, 
                                          'load'          => 1, 
@@ -270,9 +272,9 @@ class Config {
         $other_php_versions = array();
         foreach(array('52', '53', '54', '55', '56', '70', '71') as $version) {
             $php = new \Phpexec($version[0].'.'.$version[1]);
-            if ($php->isValid()) {
+//            if ($php->isValid()) {
                 $other_php_versions[] = $version;
-            }
+//            }
         }
         
         // check and default values

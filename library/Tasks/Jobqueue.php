@@ -24,13 +24,13 @@
 namespace Tasks;
 
 class Jobqueue extends Tasks {
-    private $config = null;
+    private $config   = null;
+    private $pipefile = '/tmp/onepageQueue';
     
     public function __destruct() {
-        if (!feof($this->log)) {
-            fwrite($this->log, 'Closed jobQueue : '.time()."\n");
-            fclose($this->log);
-        }
+        $this->log->log('Closed jobQueue : '.time()."\n");
+        
+        unlink($this->pipefile);
     }
     
     public function run(\Config $config) {
@@ -53,19 +53,18 @@ class Jobqueue extends Tasks {
 
         //////// setup our named pipe ////////
         // @todo put this in config
-        $pipefile = '/tmp/onepageQueue';
-        if(file_exists($pipefile)) {
-            if(!unlink($pipefile)) {
-                die('unable to remove existing PipeFile "'.$pipefile.'". Aborting.'."\n");
+        if(file_exists($this->pipefile)) {
+            if(!unlink($this->pipefile)) {
+                die('unable to remove existing PipeFile "'.$this->pipefile.'". Aborting.'."\n");
             }
         }
         
         umask(0);
-        if(!posix_mkfifo($pipefile,0666)) {
+        if(!posix_mkfifo($this->pipefile,0666)) {
             die('unable to create named pipe');
         }
 
-        $pipe = fopen($pipefile,'r+');
+        $pipe = fopen($this->pipefile,'r+');
         if(!$pipe) {
             die('unable to open the named pipe');
         }
@@ -92,17 +91,16 @@ class Jobqueue extends Tasks {
                         if (file_exists($this->config->projects_root.'/in/'.$job.'.php')) {
                             display( 'processing onepage job ' . $job . PHP_EOL);
                             $this->process($job);
-                        } elseif (file_exists($this->config->projects_root.'/project/'.$job)) {
-                            display( 'processing onepage job ' . $job . PHP_EOL);
-                            $this->process($job);
-                        } else {
-                            display( 'No such project or page as ' . $job . PHP_EOL);
+                        } elseif (file_exists($this->config->projects_root.'/projects/'.$job)) {
+                            display( 'processing project job ' . $job . microtime(true). PHP_EOL);
+                            
+                            shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
                         }
-                }
-        
-                next($queue);
-                unset($job,$queue[$jobkey]);
-            } else {
+                    } 
+                    
+                    next($queue);
+                    unset($job, $queue[$jobkey]);
+                } else {
                 display( 'no jobs to do - waiting...'. PHP_EOL);
                 stream_set_blocking($pipe, 1);
             }
@@ -118,7 +116,7 @@ class Jobqueue extends Tasks {
             return;
         }
 
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job]));
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job, 'progress' => 0]));
         shell_exec($this->config->php.' '.$this->config->executable.' onepage -f '.$this->config->projects_root.'/in/'.$job.'.php');
 
         // cleaning
@@ -146,7 +144,7 @@ class Jobqueue extends Tasks {
             return;
         }
 
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job]));
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job, 'progress' => 0]));
         shell_exec('php '.$this->config->executable.' project -p '.$job);
 
         // cleaning

@@ -24,7 +24,17 @@
 namespace Tasks;
 
 class Queue extends Tasks {
+    private $pipefile = '/tmp/onepageQueue';
+    
     public function run(\Config $config) {
+        if ($config->stop === true) {
+            display('Stopping queue');
+            $queuePipe = fopen($this->pipefile, 'w');
+            fwrite($queuePipe, "quit\n");
+            fclose($queuePipe);
+
+            exit();
+        }
         if ($config->project != 'default') {
             if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
                 display('Cleaning the project first');
@@ -33,7 +43,7 @@ class Queue extends Tasks {
             }
 
             display('Adding project '.$config->project.' to the queue');
-            $queuePipe = fopen('/tmp/onepageQueue', 'w');
+            $queuePipe = fopen($this->pipefile, 'w');
             fwrite($queuePipe, $config->project."\n");
             fclose($queuePipe);
         } elseif (!empty($config->filename)) {
@@ -48,7 +58,7 @@ class Queue extends Tasks {
             }
 
             display('Adding file '.$config->project.' to the queue');
-            $queuePipe = fopen('/tmp/onepageQueue', 'w');
+            $queuePipe = fopen($this->pipefile, 'w');
             fwrite($queuePipe, $config->filename."\n");
             fclose($queuePipe);
         }
