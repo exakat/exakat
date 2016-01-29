@@ -40,10 +40,12 @@ class Server extends Tasks {
 
         display('Copy router server');
         $php = file_get_contents($config->dir_root.'/server/index.php');
+        $php = str_replace('PHP', $config->php, $php);
+        $php = str_replace('EXAKAT', $config->executable, $php);
         file_put_contents($config->projects_root.'/projects/index.php', $php);
 
         display('Start server');
-        exec($config->php . ' -S localhost:7447 -t '.$config->projects_root.'/projects/ '.$config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
+        exec($config->php . ' -S 0.0.0.0:7447 -t '.$config->projects_root.'/projects/ '.$config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
     }
 }
 
