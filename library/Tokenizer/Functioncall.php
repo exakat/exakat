@@ -32,7 +32,7 @@ class Functioncall extends TokenAuto {
                                                 'T_DOUBLE_COLON');
     static public $operatorsWithoutEcho = array('T_VARIABLE', 'T_DOLLAR', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY',
                                                 'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL',
-                                                'T_EXIT', 'T_DIE', 'T_STATIC', 'T_PRINT', 'T_OPEN_PARENTHESIS',
+                                                'T_EXIT', 'T_DIE', 'T_STATIC', 'T_OPEN_PARENTHESIS',
                                                 'T_WHILE', 'T_FOREACH', 'T_DO');
     static public $atom = 'Functioncall';
 
