@@ -59,9 +59,9 @@ function onepage($path) {
         } else {
             $json = json_decode(file_get_contents('./progress/jobqueue.exakat'));
             if ($json->job == $_REQUEST['id']) {
-                echo json_encode(['status' => $json->progress.' %']);
+                echo json_encode(['status' => $json->progress]);
             } else {
-                echo json_encode(['status' => 'Not ready']);
+                echo json_encode(['status' => 0]);
             }
         }
     } elseif (isset($_REQUEST['script'])) {
@@ -117,9 +117,9 @@ function project($path) {
             exit;
         }
 
-        shell_exec('php exakat init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']).'');
+        shell_exec('PHP EXAKAT init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']).'');
         
-        $this->pushToQueue($project);
+        pushToQueue($project);
         echo json_encode(['project' => $project]);
     } else {
         // Nothing
