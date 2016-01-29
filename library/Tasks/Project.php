@@ -46,7 +46,7 @@ class Project extends Tasks {
         $this->project_dir = $config->projects_root.'/projects/'.$project;
 
         if ($config->project === 'default') {
-            die("Usage : php {$config->executable} project -p [Project name]\n");
+            die("Usage : {$config->php} {$config->executable} project -p [Project name]\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project)) {
@@ -86,18 +86,18 @@ class Project extends Tasks {
         display("Running project '$project'\n");
 
         display("Cleaning DB\n");
-        shell_exec('php '.$config->executable.' cleandb -v');
+        shell_exec($config->php . ' '.$config->executable.' cleandb -v');
         $this->logTime('Files');
         $this->updateProgress($progress++);
 
         display("Search for external libraries\n");
-        shell_exec('php '.$config->executable.' findextlib -p '.$project.' -v -u > '.$config->projects_root.'/projects/'.$project.'/log/findExtlib.log');
+        shell_exec($config->php . ' '.$config->executable.' findextlib -p '.$project.' -v -u > '.$config->projects_root.'/projects/'.$project.'/log/findExtlib.log');
         $this->logTime('Find External Libraries');
         $thread->waitForAll();
         $this->updateProgress($progress++);
 
         display("Running files\n");
-        shell_exec('php '.$config->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
+        shell_exec($config->php . ' '.$config->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
         $this->logTime('Files');
         $thread->waitForAll();
         $this->updateProgress($progress++);
@@ -105,37 +105,37 @@ class Project extends Tasks {
         display("waited For All\n");
         $this->checkTokenLimit();
 
-        shell_exec('php '.$config->executable.' load -v -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
+        shell_exec($config->php . ' '.$config->executable.' load -v -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
         display("Project loaded\n");
         $this->logTime('Loading');
         $this->updateProgress($progress++);
 
-        $res = shell_exec('php '.$config->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
+        $res = shell_exec($config->php . ' '.$config->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
         display("Build root\n");
         $this->logTime('Build_root');
         $this->updateProgress($progress++);
 
-        $res = shell_exec('php '.$config->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
+        $res = shell_exec($config->php . ' '.$config->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         $this->logTime('Tokenizer');
         display("Project tokenized\n");
         $this->updateProgress($progress++);
 
-        $thread->run('php '.$config->executable.' magicnumber -p '.$project);
+        $thread->run($config->php . ' '.$config->executable.' magicnumber -p '.$project);
         $this->updateProgress($progress++);
 
-        $thread->run('php '.$config->executable.' errors > '.$config->projects_root.'/projects/'.$project.'/log/errors.log');
+        $thread->run($config->php . ' '.$config->executable.' errors > '.$config->projects_root.'/projects/'.$project.'/log/errors.log');
         display("Got the errors (if any)\n");
         $this->updateProgress($progress++);
 
-        $thread->run('php '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
+        $thread->run($config->php . ' '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         display("Stats\n");
         $this->updateProgress($progress++);
 
-        $thread->run('php '.$config->executable.' log2csv -p '.$project);
+        $thread->run($config->php . ' '.$config->executable.' log2csv -p '.$project);
 
         $this->logTime('Stats');
 
-        exec('php '.$config->executable.' dump -p '.$config->project.'   > /dev/null &');
+        exec($config->php . ' '.$config->executable.' dump -p '.$config->project.'   > /dev/null &');
         display('Started dump process');
 
         foreach($this->themes as $theme) {
@@ -211,7 +211,7 @@ class Project extends Tasks {
 
         display("Reported project\n");
 
-        shell_exec('php '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
+        shell_exec($config->php . ' '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         display("Stats 2\n");
         
         $audit_end = time();
