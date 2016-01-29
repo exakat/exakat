@@ -67,7 +67,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
 
 source/$file.php
 exp/$file.php
-phpunit --filter=$number Tests/$analyzer.php
+phpunit --filter=$number Test/$analyzer.php
 
 ");
             // also add a phpunit --filter to rerun it easily
