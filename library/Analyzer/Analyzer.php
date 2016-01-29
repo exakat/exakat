@@ -611,6 +611,8 @@ GREMLIN;
             $this->addMethod("hasNot('$property', true)");
         } elseif ($value === false) {
             $this->addMethod("hasNot('$property', false)");
+        } elseif (is_int($value)) {
+            $this->addMethod("hasNot('$property', $value)");
         } else {
             $this->addMethod("filter{ it.$property != ***;}", $value);
         }
