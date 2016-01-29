@@ -215,7 +215,7 @@ abstract class Analyzer {
     private function addMethod($method, $arguments = null) {
         if ($arguments === null) { // empty
             $this->methods[] = $method;
-        } elseif (func_num_args() > 2) {
+        } elseif (func_num_args() >= 2) {
             $arguments = func_get_args();
             array_shift($arguments);
             $argnames = array(str_replace('***', '%s', $method));
@@ -649,7 +649,7 @@ GREMLIN;
         } elseif ($value === '2last') {
             $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 2}");
         } else {
-            $this->addMethod('filter{it.rank == ***}', abs(intval($value)));
+            $this->addMethod('filter{it.rank == '.abs(intval($value)).'}');
         }
 
         return $this;
@@ -657,13 +657,13 @@ GREMLIN;
 
     public function noChildWithRank($edgeName, $rank = '0') {
         if ($rank === 'first') {
-            $this->addMethod("filter{ it.out(***).has('rank','0').any() == false }", $edgeName);
+            $this->addMethod("filter{ it.out(***).has('rank',0).any() == false }", $edgeName);
         } elseif ($rank === 'last') {
             $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 1).any() == false }", $edgeName, $edgeName);
         } elseif ($rank === '2last') {
             $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 2).any() == false }", $edgeName, $edgeName);
         } else {
-            $this->addMethod("filter{ it.out(***).has('rank', ***).any() == false}", $edgeName, abs(intval($rank)));
+            $this->addMethod("filter{ it.out(***).has('rank', ".abs(intval($rank)).").any() == false}", $edgeName);
         }
 
         return $this;
@@ -1060,7 +1060,7 @@ GREMLIN
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
         } else {
             $rank = abs(intval($rank));
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edgeName, $rank);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == $rank}", $edgeName);
         }
         
         return $this;

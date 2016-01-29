@@ -38,6 +38,7 @@ class ShouldChainException extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // Throw again, but not the caught variable
         $this->atomIs('Catch')
              ->outIs('VARIABLE')
              ->savePropertyAs('code', 'caught')
