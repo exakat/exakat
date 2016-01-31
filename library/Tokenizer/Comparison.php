@@ -35,16 +35,41 @@ class Comparison extends TokenAuto {
                           'Bitshift', 'Concatenation', 'Cast', 'New', 'Include' , 'Identifier', 'Instanceof',
                           'Staticclass', 'Comparison', 'Shell', 'Yield', 'Yieldfrom');
         
+        // Normal Comparison
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
                                                                          Addition::$operators, Bitshift::$operators,
                                                                          Multiplication::$operators, Preplusplus::$operators,
                                                                          Concatenation::$operators, _New::$operators,
-                                                                         Comparison::$operators, VariableDollar::$operators)),
-                                  -1 => array('atom' => $operands ),
-                                   0 => array('token' => Comparison::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('atom' => array_merge($operands, array('Assignation'))),
-                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
+                                                                         Comparison::$operators, VariableDollar::$operators,
+                                                                         Reference::$operators)),
+                                  -1 => array('atom'      => $operands ),
+                                   0 => array('token'     => Comparison::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => array_merge($operands, array('Assignation'))),
+                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY',
+                                                                               'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
+                                                                         Addition::$operators, Multiplication::$operators,
+                                                                         Assignation::$operators, Concatenation::$operators,
+                                                                         Postplusplus::$operators )),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'RIGHT',
+                                                       -1 => 'LEFT'),
+                               'atom'         => 'Comparison',
+                               'cleanIndex'   => true,
+                               'addSemicolon' => 'it'
+                               );
+        $this->checkAuto();
+
+        // Comparison with a previous & 
+        $this->conditions = array(-3 => array('atom'      => 'yes'),
+                                  -2 => array('token'     => 'T_AND' ),
+                                  -1 => array('atom'      => $operands ),
+                                   0 => array('token'     => Comparison::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => array_merge($operands, array('Assignation'))),
+                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 
+                                                                               'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
                                                                          Addition::$operators, Multiplication::$operators,
                                                                          Assignation::$operators, Concatenation::$operators,
                                                                          Postplusplus::$operators )),
