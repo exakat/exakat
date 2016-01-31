@@ -28,7 +28,7 @@ class _Instanceof extends TokenAuto {
     static public $atom = 'Instanceof';
 
     public function _check() {
-        $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NEW')),
+        $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NEW', 'T_DOT')),
                                   -1 => array('atom'      => 'yes',
                                               'notAtom'   => 'Sequence'),
                                    0 => array('token'     => _Instanceof::$operators,

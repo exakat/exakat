@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    B
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        ?
+        Label : CONDITION
+          instanceof
+          Label : CLASS
+            G
+          Label : VARIABLE
+            Concatenation
+            Label : CONCAT
+              'F'
+            Label : CONCAT
+              $b
+        Label : THEN
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            H
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                void
+        Label : ELSE
+          'I'
