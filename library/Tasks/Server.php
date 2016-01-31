@@ -28,8 +28,8 @@ class Server extends Tasks {
     
     public function run(\Config $config) {
         if ($config->stop === true) {
-            $display = file_get_contents('http://localhost:7447/stop/');
-            display('Shut down server');
+            $display = @file_get_contents('http://localhost:7447/stop/');
+            display('Shut down server ('.$display.')');
             die();
         }
         
@@ -40,8 +40,8 @@ class Server extends Tasks {
 
         display('Copy router server');
         $php = file_get_contents($config->dir_root.'/server/index.php');
-        $php = str_replace('PHP', $config->php, $php);
-        $php = str_replace('EXAKAT', $config->executable, $php);
+        $php = str_replace('__PHP__', $config->php, $php);
+        $php = str_replace('__EXAKAT__', $config->executable, $php);
         file_put_contents($config->projects_root.'/projects/index.php', $php);
 
         display('Start server');
