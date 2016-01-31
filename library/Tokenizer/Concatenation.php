@@ -53,7 +53,7 @@ class Concatenation extends TokenAuto {
                                    2 => array('token' => array_merge(Comparison::$operators,    Logical::$operators,
                                                                      Power::$operators,         Addition::$operators, 
                                                                      Token::$alternativeEnding, Sign::$operators,
-                                                                     Multiplication::$operators,
+                                                                     Multiplication::$operators,_Instanceof::$operators,
                                                                      array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 
                                                                            'T_CLOSE_TAG', 'T_QUESTION', 'T_INLINE_HTML', 
                                                                            'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 
