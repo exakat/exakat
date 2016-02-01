@@ -2265,15 +2265,6 @@ a.outE('NEXT').each{ g.removeEdge(it) ; }
 g.addEdge(a, x, 'NEXT');
 g.addEdge(x, b, 'NEXT');
 
-// remove the next, if this is a ;
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-    semicolon = it;
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
-
             ";
             unset($actions['createVoidForCase']);
         }
@@ -2312,15 +2303,6 @@ b = a.out('NEXT').next();
 a.outE('NEXT').each{ g.removeEdge(it) ; }
 g.addEdge(a, x, 'NEXT');
 g.addEdge(x, b, 'NEXT');
-
-// remove the next, if this is a ;
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-    semicolon = it;
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
 
             ";
             unset($actions['createVoidForDefault']);
