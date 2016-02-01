@@ -1,4 +1,4 @@
-Version 0.5.0 (Immortal of Antelope Power, Coming up)
+Version 0.5.1 (King of Spiritual Touch, Coming up)
 + Architecture
     +
 + Report
@@ -8,7 +8,22 @@ Version 0.5.0 (Immortal of Antelope Power, Coming up)
 + Tokenizer
     + 
 
-Version 0.4.6 (Immortal of Elk Power, Coming up)
+Version 0.5.0 (Immortal of Antelope Power, 2016-02-01)
++ Architecture
+    + Added support for HTTP API, through 'server' command. 
++ Analyzer
+    + Fopen modes checked
+    + Redefined default, in class's properties
++ Tokenizer
+    + Fixed situation where echo and print used parenthesis (they don't)
+    + Fixed rare but with instanceof and concatenation
+    + Fixed support of integers in Gremlin
+    + Fixed bug in addslashes and and $ protection order
+    + Made Assignations more robust (no un-processed tokens)
+    + Reduced the number of shell_exec usage => speed up
+    + Finished support for relaxed keyword support in classes (PHP 7)
+
+Version 0.4.6 (Immortal of Elk Power, 2016-01-25)
 + Architecture
     + New installation script with Vagrant and Ansible (Thanks Alexis!)
     + Updated documentation
