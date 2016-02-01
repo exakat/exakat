@@ -1,0 +1,36 @@
+[
+  {
+    "name": "apc.enabled",
+    "suggested": "true",
+    "documentation": "Enable apc or not. "
+  },
+  {
+    "name": "apc.shm_segments=1\n=32",
+    "suggested": "&nbsp;",
+    "documentation": "<a href=\"http://php.net/manual/en/apache.configuration.php\">Apache runtime configuration</a>"
+  },
+  {
+    "name": "apc.shm_size",
+    "suggested": "&nbsp;",
+    "documentation": "<a href=\"http://php.net/manual/en/apache.configuration.php\">Apache runtime configuration</a>"
+  },
+  {
+    "name": "apc.cache_by_default=1",
+    "suggested": "true",
+    "documentation": "Configure APC to cache every PHP script. This is appropriate for most situations."
+  },
+  {
+    "name": "apc.stat",
+    "suggested": "0",
+    "documentation": "This prevents APC to check the file modification date each time it is serving the cache. This speeds up operation quite a lot, as checking on the disk a modification date on a high volume server is quite costly. On the other hand, beware that any modification of the aforementionned PHP script won't be taken into account until the next cache refresh. "
+  },
+  {
+    "name": "apc.ttl",
+    "suggested": "7200",
+    "documentation": "This is the lifespan of a PHP script in the APC cache. The longer the script is left in the cache, the less work the server does. But, the script may fall behind, and be obsolet on the cache. Make this high if the PHP scripts are rarely updated."
+  },
+  {
+    "name": "APC runtime configuration",
+    "suggested": "&nbsp;",
+    "documentation": "<a href=\"http://php.net/manual/en/apc.configuration.php\">APC runtime configuration</a>"
+  },]

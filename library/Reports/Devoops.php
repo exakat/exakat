@@ -1686,7 +1686,7 @@ TEXT
         $directives = array('standard', 'bcmath', 'date', 'file', 
                             'fileupload', 'mail', 'ob', 'env',
                             // standard extensions
-                            'amqp', 'apache', 'assertion', 'curl', 'dba',
+                            'apc', 'amqp', 'apache', 'assertion', 'curl', 'dba',
                             'filter', 'image', 'intl', 'ldap',
                             'mbstring', 
                             'opcache', 'pcre', 'pdo', 'pgsql',
