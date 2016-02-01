@@ -113,11 +113,11 @@ function project($path) {
         $project = 'a'.substr(md5($_REQUEST['vcs']), 0, 8);
         
         if (file_exists('./projects/'.$project)) {
-            echo json_encode(['id' => $project]);
+            echo json_encode(['project' => $project]);
             exit;
         }
 
-        shell_exec('PHP EXAKAT init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']).'');
+        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']).'');
         
         pushToQueue($project);
         echo json_encode(['project' => $project]);
