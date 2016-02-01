@@ -142,7 +142,7 @@ class UnsetInForeach extends Analyzer\Analyzer {
         $this->prepareQuery();
 
 ////////////////////////////////////////////////////////////
-// same but with (unset) instead of (unset)
+// same but with (unset) instead of unset()
 ////////////////////////////////////////////////////////////
         // foreach($a as $v) { (unset) $v; }
         $this->atomIs('Foreach')
