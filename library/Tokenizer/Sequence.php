@@ -65,7 +65,7 @@ class Sequence extends TokenAuto {
                                'keepIndexed' => true);
         $this->checkAuto();
 
-        // reenter a sequence in building
+        // reenter a sequence being built
         $this->conditions = array( 0 => array('token'    => Sequence::$operators,
                                               'atom'     => 'yes'),
                                    1 => array('atom'     => $operands,
@@ -75,7 +75,6 @@ class Sequence extends TokenAuto {
         $this->actions = array('toSequence'  => true,
                                'keepIndexed' => true);
         $this->checkAuto();
-
 
         // @note : $x; endif
         $this->conditions = array(-2 => array('token'    => 'T_COLON',

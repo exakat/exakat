@@ -39,8 +39,8 @@ class _Case extends TokenAuto {
                                   3 => array('token' => $finalToken),
         );
         
-        $this->actions = array('createVoidForCase' => true,
-                               'keepIndexed'       => true);
+        $this->actions = array('insertVoid'  => 2,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         // Case is empty (case 'a':; )
@@ -53,8 +53,8 @@ class _Case extends TokenAuto {
                                              'atom'  => 'none')
         );
         
-        $this->actions = array('createVoidForCase' => true,
-                               'keepIndexed'       => true);
+        $this->actions = array('insertVoid'  => 2,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         // Case has only one instruction empty (case 'a': ;)
@@ -103,26 +103,6 @@ class _Case extends TokenAuto {
                                 'atom'                => 'Case',
                                 'cleanIndex'          => true ,
                                 'caseDefaultSequence' => true);
-        $this->checkAuto();
-
-        // @note instructions after a case, but not separated by ;
-        $this->conditions = array( 0 => array('token' => 'T_CASE',
-                                              'atom'  => 'none',),
-                                   1 => array('atom'  => 'yes'),
-                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON'),
-                                              'atom'  => 'none', ),
-                                   3 => array('atom'  => 'yes'),
-                                   4 => array('atom'  => 'yes'),
-                                   5 => array('notToken' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
-                                                                        Assignation::$operators, Property::$operators,
-                                                                        _Array::$operators, Bitshift::$operators,
-                                                                        Comparison::$operators, Logical::$operators,
-                                                                        Staticproperty::$operators, Label::$operators,
-                                                                        Spaceship::$operators)),
-        );
-        
-        $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
-                               'keepIndexed'                           => true);
         $this->checkAuto();
 
         return false;

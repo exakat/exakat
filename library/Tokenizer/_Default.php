@@ -37,8 +37,8 @@ class _Default extends TokenAuto {
                                   2 => array('token' => $finalToken),
         );
         
-        $this->actions = array('createVoidForDefault' => true,
-                               'keepIndexed'          => true);
+        $this->actions = array('insertVoid'  => 1,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         // default : ; // rest of the code
@@ -107,24 +107,6 @@ class _Default extends TokenAuto {
                                 'caseDefaultSequence'              => true );
         $this->checkAuto();
 
-        // @note instructions after a default, but not separated by ;
-        $this->conditions = array( 0 => array('token' => 'T_DEFAULT',
-                                              'atom'  => 'none',),
-                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
-                                              'atom'  => 'none', ),
-                                   2 => array('atom'  => 'yes'),
-                                   3 => array('atom'  => 'yes'),
-                                   4 => array('notToken' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
-                                                                        Assignation::$operators,    Property::$operators,
-                                                                        _Array::$operators,         Bitshift::$operators,
-                                                                        Comparison::$operators,     Logical::$operators,
-                                                                        Staticproperty::$operators, Spaceship::$operators)),
-        );
-        
-        $this->actions = array('createSequenceForDefaultWithoutSemicolon' => true,
-                               'keepIndexed'                              => true);
-        $this->checkAuto();
-        
         return false;
     }
 
