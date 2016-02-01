@@ -96,7 +96,7 @@ class Jobqueue extends Tasks {
                             
                             shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
                         }
-                    } 
+                    }
                     
                     next($queue);
                     unset($job, $queue[$jobkey]);
