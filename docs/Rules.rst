@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 25 Jan 2016 13:26:26 +0000
-.. comment: Generation hash : 83f0f193d9b8abbdd855bbc2bcec5027f0a7e2a5
+.. comment: Generation date : Mon, 01 Feb 2016 09:49:55 +0000
+.. comment: Generation hash : fde2f46c5a3d4e2cb893721d8bde6783c6d70ae4
 
 
 .. _$http\_raw\_post\_data:
@@ -3673,6 +3673,38 @@ It is recommended to use distinct names.
 
 
 
+.. _redefined-default:
+
+Redefined Default
+#################
+
+
+Classes allows properties to be set with a default value. When those properties get, unconditionally, another value at constructor time, then one of the default value are useless. One of those definition should go : it is better to define properties outside the constructor.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public $redefined = 1;
+   
+       public function \_\_construct() {
+           $this->redefined = 2;
+       }
+   }
+   
+   ?>
+
++--------------+--------------------------+
+| Command Line | Classes/RedefinedDefault |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
+
 .. _register-globals:
 
 Register Globals
@@ -5820,6 +5852,27 @@ Extension ext/sqlite3
 +--------------+----------------------+
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
+
+
+
+.. _fopen()-mode:
+
+fopen() Mode
+############
+
+
+fopen has a few modes, as described in the documentation : 'r', 'r+', for reading;  'w', 'w+' for writing; 'a', 'a+' for appending; 'x', 'x+' for modifying; 'c', 'c+' for writing and locking, 't' for text files and windows only.
+An optional 'b' may be used to make the fopen() call more portable and binary safe. 
+
+Any other values are not understood by PHP.
+
++--------------+----------------+
+| Command Line | Php/FopenMode  |
++--------------+----------------+
+| clearPHP     |                |
++--------------+----------------+
+| Analyzers    | :ref:`Analyze` |
++--------------+----------------+
 
 
 

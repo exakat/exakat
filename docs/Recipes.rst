@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 25 Jan 2016 13:26:26 +0000
-.. comment: Generation hash : 83f0f193d9b8abbdd855bbc2bcec5027f0a7e2a5
+.. comment: Generation date : Mon, 01 Feb 2016 09:49:55 +0000
+.. comment: Generation hash : fde2f46c5a3d4e2cb893721d8bde6783c6d70ae4
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 222 analysis
+Total : 224 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -195,6 +195,7 @@ Total : 222 analysis
 * :ref:`Queries in loops <queries-in-loops>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
 * :ref:`Redefined Constants <redefined-constants>`
+* :ref:`Redefined Default <redefined-default>`
 * :ref:`Relay Function <relay-function>`
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Sequences In For <sequences-in-for>`
@@ -280,6 +281,7 @@ Total : 222 analysis
 * :ref:`ext/fdf`
 * :ref:`ext/mysql`
 * :ref:`ext/sqlite`
+* :ref:`fopen() Mode <fopen()-mode>`
 * :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`include\_once() Usage <include\_once()-usage>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
