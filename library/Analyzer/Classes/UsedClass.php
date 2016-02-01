@@ -48,6 +48,7 @@ GREMLIN
 g.idx("atoms")[["atom":"Class"]].out("EXTENDS").fullnspath.unique()
 GREMLIN
 );
+
         $this->atomIs('Class')
              ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'classdns')

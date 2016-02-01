@@ -32,7 +32,7 @@ class UnusedClass extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        // class used in a New
+        // used classes
         $this->atomIs('Class')
              ->analyzerIsNot('Classes/UsedClass')
              ->analyzerIsNot('Classes/TestClass');
