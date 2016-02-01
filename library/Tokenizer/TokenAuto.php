@@ -2172,12 +2172,9 @@ it.bothE('NEXT').each{ g.removeEdge(it) ; }
 
             $qactions[] = "
 /* createBlockWithSequenceForCase */
-x = g.addVertex(null, [code:'Block with Sequence For Case', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
-fullcode = x;
-$fullcode
+a = a3;
 
-a = it.out('NEXT').out('NEXT').out('NEXT').next();
-
+// if the expression is followed by a ;, remove it.
 a.out('NEXT').has('token', 'T_SEMICOLON').each{
     g.addEdge(a, it.out('NEXT').next(), 'NEXT');
     it.bothE('NEXT').each{ g.removeEdge(it); }
@@ -2185,17 +2182,23 @@ a.out('NEXT').has('token', 'T_SEMICOLON').each{
     g.removeVertex(it);
 }
 
-g.addEdge(a.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('rank', 0);
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+if (a.atom != 'Sequence') {
+    x = g.addVertex(null, [code:'Block with Sequence For Case', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
+    fullcode = x;
+    $fullcode
 
-a.bothE('NEXT').each{ g.removeEdge(it) ; }
+    g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+    g.addEdge(x, a, 'ELEMENT');
+    a.setProperty('rank', 0);
+    g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+    
+    a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
-/* Clean index */
-x.out('ELEMENT').each{
-    it.inE('INDEXED').each{
-        g.removeEdge(it);
+    /* Clean index */
+    x.out('ELEMENT').each{
+        it.inE('INDEXED').each{
+            g.removeEdge(it);
+        }
     }
 }
 
@@ -2209,11 +2212,7 @@ x.out('ELEMENT').each{
 
             $qactions[] = "
 /* createBlockWithSequenceForDefault */
-x = g.addVertex(null, [code:'Block with Sequence For Default', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
-fullcode = x;
-$fullcode
-
-a = it.out('NEXT').out('NEXT').next();
+a = a2;
 
 a.out('NEXT').has('token', 'T_SEMICOLON').each{
     g.addEdge(a, it.out('NEXT').next(), 'NEXT');
@@ -2222,29 +2221,34 @@ a.out('NEXT').has('token', 'T_SEMICOLON').each{
     g.removeVertex(it);
 }
 
-g.addEdge(a.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('rank', 0);
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+if (a.atom != 'Sequence') {
+    x = g.addVertex(null, [code:'Block with Sequence For Default', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
+    fullcode = x;
+    $fullcode
 
-a.bothE('NEXT').each{ g.removeEdge(it) ; }
+    g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+    g.addEdge(x, a, 'ELEMENT');
+    a.setProperty('rank', 0);
+    g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 
-/* Clean index */
-x.out('ELEMENT').each{
-    it.inE('INDEXED').each{
-        g.removeEdge(it);
+    a.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+    /* Clean index */
+    x.out('ELEMENT').each{
+        it.inE('INDEXED').each{
+            g.removeEdge(it);
+        }
+    }
+
+    // remove the next, if this is a ;
+    x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+        g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+        semicolon = it;
+        semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+        semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
+        g.removeVertex(semicolon);
     }
 }
-
-// remove the next, if this is a ;
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-    semicolon = it;
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
-
             ";
             unset($actions['createBlockWithSequenceForDefault']);
         }

@@ -99,7 +99,7 @@ class _Case extends TokenAuto {
         
         $this->actions = array('transform'            => array( 1 => 'CASE',
                                                                 2 => 'DROP',
-                                                                3 => 'CODE',),
+                                                                3 => 'CODE'),
                                 'atom'                => 'Case',
                                 'cleanIndex'          => true ,
                                 'caseDefaultSequence' => true);
