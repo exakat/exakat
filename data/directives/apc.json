@@ -5,19 +5,19 @@
     "documentation": "Enable apc or not. "
   },
   {
-    "name": "apc.shm_segments=1\n=32",
+    "name": "apc.shm_segments",
     "suggested": "&nbsp;",
-    "documentation": "<a href=\"http://php.net/manual/en/apache.configuration.php\">Apache runtime configuration</a>"
+    "documentation": "The number of shared memory segments to allocate for the compiler cache."
   },
   {
     "name": "apc.shm_size",
     "suggested": "&nbsp;",
-    "documentation": "<a href=\"http://php.net/manual/en/apache.configuration.php\">Apache runtime configuration</a>"
+    "documentation": "The size of each shared memory segment in Mb."
   },
   {
-    "name": "apc.cache_by_default=1",
+    "name": "apc.cache_by_default",
     "suggested": "true",
-    "documentation": "Configure APC to cache every PHP script. This is appropriate for most situations."
+    "documentation": "On by default, but can be set to off and used in conjunction with positive apc.filters so that files are only cached if matched by a positive filter."
   },
   {
     "name": "apc.stat",
@@ -33,4 +33,4 @@
     "name": "APC runtime configuration",
     "suggested": "&nbsp;",
     "documentation": "<a href=\"http://php.net/manual/en/apc.configuration.php\">APC runtime configuration</a>"
-  },]
+  }]
