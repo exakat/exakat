@@ -1,0 +1,10 @@
+[  {
+    "name": "openssl.cafile",
+    "suggested": "&nbsp;",
+    "documentation": "Location of Certificate Authority file on local filesystem which should be used with the verify_peer context option to authenticate the identity of the remote peer."
+  },
+  {
+    "name": "openssl.capath",
+    "suggested": "&nbsp;",
+    "documentation": "If cafile is not specified or if the certificate is not found there, the directory pointed to by capath is searched for a suitable certificate. capath must be a correctly hashed certificate directory."
+  }]

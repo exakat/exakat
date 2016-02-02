@@ -1689,7 +1689,7 @@ TEXT
                             'apc', 'amqp', 'apache', 'assertion', 'curl', 'dba',
                             'filter', 'image', 'intl', 'ldap',
                             'mbstring', 
-                            'opcache', 'pcre', 'pdo', 'pgsql',
+                            'opcache', 'openssl', 'pcre', 'pdo', 'pgsql',
                             'session', 'sqlite', 'sqlite3', 
                             // pecl extensions
                             'com',
