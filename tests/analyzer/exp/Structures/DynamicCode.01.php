@@ -1,7 +1,6 @@
 <?php
 
 $expected     = array('$$a',
-                      '$x[\'a\' . \'b\']',
                       '$object->$methodcall( )',
                       '$classname::methodcall( )',
                       '$classname::$methodcall( )',
@@ -10,6 +9,8 @@ $expected     = array('$$a',
                       '$classname( )'
                       );
 
-$expected_not = array('range($argument . 2, $arguments2 + 3)');
+$expected_not = array('range($argument . 2, $arguments2 + 3)',
+                      '$x[\'a\' . \'b\']',
+);
 
 ?>

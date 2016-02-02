@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_DynamicCode extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testStructures_DynamicCode01()  { $this->generic_test('Structures_DynamicCode.01'); }
     public function testStructures_DynamicCode02()  { $this->generic_test('Structures/DynamicCode.02'); }
+    public function testStructures_DynamicCode03()  { $this->generic_test('Structures/DynamicCode.03'); }
 }
 ?>
