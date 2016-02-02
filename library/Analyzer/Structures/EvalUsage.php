@@ -31,15 +31,12 @@ class EvalUsage extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_EVAL'))
-             ->fullnspath(array('\\eval', '\\create_function'))
+        $this->atomFunctionIs(array('\\eval', '\\create_function'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
-             ->tokenIsNot('T_CONSTANT_ENCAPSED_STRING')
-             ->analyzerIsNot('Constants/ConstantUsage');
+             ->analyzerIsNot('Constants/ConstantUsage')
+             ->back('first');
         $this->prepareQuery();
     }
 }
