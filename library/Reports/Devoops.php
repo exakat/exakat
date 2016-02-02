@@ -1692,7 +1692,7 @@ TEXT
                             'opcache', 'openssl', 'pcre', 'pdo', 'pgsql',
                             'session', 'sqlite', 'sqlite3', 
                             // pecl extensions
-                            'com',
+                            'com', 'eaccelerator',
                             'geoip', 'ibase', 
                             'imagick', 'mailparse', 'mongo', 
                             'trader', 'wincache', 'xcache'

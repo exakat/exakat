@@ -1,0 +1,26 @@
+[
+  {
+    "name": "eaccelerator.enabled",
+    "suggested": "true",
+    "documentation": "Enables or disables eAccelerator. Should be 1 for enabling  or  0  for disabling. Default value is 1."
+  },
+  {
+    "name": "eaccelerator.shm_size",
+    "suggested": "0",
+    "documentation": "The amount of shared memory (in megabytes) that eAccelerator will use. 0 means OS default. Default value is 0."
+  },
+  {
+    "name": "eaccelerator.optimizer",
+    "suggested": "1",
+    "documentation": "Enables or disables internal peephole optimizer which may speed up code execution. Should be 1 for enabling or 0 for disabling."
+  },
+  {
+    "name": "eaccelerator.shm_ttl",
+    "suggested": "1",
+    "documentation": "When eaccelerator fails to get shared memory for new script it removes all scripts which were not accessed at last shm_ttl seconds from shared memory. Default value is 0 that means - don't remove any files from shared memory."
+  },
+  {
+    "name": "Eaccelerator runtime configuration",
+    "suggested": "&nbsp;",
+    "documentation": "<a href=\"https://github.com/eaccelerator/eaccelerator\">Eaccelerator runtime configuration</a>"
+  }]
