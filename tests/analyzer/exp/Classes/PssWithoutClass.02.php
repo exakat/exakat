@@ -9,7 +9,9 @@ $expected     = array('static::c1',
                       'static::$p1',
                       'self::$p1',
                       'parent::$p1',
-                      'static::c2',
+);
+
+$expected_not = array('static::c2',
                       'self::c2',
                       'parent::c2',
                       'static::m2( )',
@@ -19,7 +21,5 @@ $expected     = array('static::c1',
                       'self::$p2',
                       'parent::$p2',
 );
-
-$expected_not = array();
 
 ?>
