@@ -7,10 +7,9 @@ $expected     = array('$$a',
                       '$classname::$methodcall( )',
                       'classname::$methodcall( )',
                       '$functioncall(2, 3, 3)',
-                      '$classname( )',
-                      'range($argument . 2, $arguments2 + 3)'
+                      '$classname( )'
                       );
 
-$expected_not = array();
+$expected_not = array('range($argument . 2, $arguments2 + 3)');
 
 ?>

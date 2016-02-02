@@ -61,7 +61,7 @@ class DynamicCode extends Analyzer\Analyzer {
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
              ->back('first');
         $this->prepareQuery();
-        
+
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -72,24 +72,12 @@ class DynamicCode extends Analyzer\Analyzer {
         //new $classname(); (also done here)
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_ISSET', 'T_ARRAY', 'T_EMPTY', 'T_LIST', 'T_UNSET'))
+             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_ISSET', 'T_ARRAY', 'T_EMPTY', 'T_LIST', 'T_UNSET', 'T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
 
-        // functioncall(2 + 2);
-        $this->atomIs('Functioncall')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_VOID', 'T_INTEGER', 'T_CONSTANT_ENCAPSED_STRING', 'T_VARIABLE', 'T_LNUMBER'))
-             ->back('first');
-        $this->prepareQuery();
-        
-        // class_alias, extract
-        // functioncall(2 + 2);
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\class_alias', '\\extract', '\\parse_str'));
+        // class_alias, extract and parse_url
+        $this->atomFunctionIs(array('\\class_alias', '\\extract', '\\parse_str'));
         $this->prepareQuery();
     }
 }
