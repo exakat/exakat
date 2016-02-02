@@ -2113,7 +2113,7 @@ TEXT
                     $res = $this->dump->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"'); 
                     $d = (int) $res->fetchArray(\SQLITE3_ASSOC)['count'];
                 }
-                $data[$section][$name] = $d;
+                $data[$section][$name] = $d === -2 ? 'N/A' : $d;
             }
         }
         
