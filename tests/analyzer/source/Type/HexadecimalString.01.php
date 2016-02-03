@@ -1,20 +1,20 @@
 <?php
 
 $hs1 = '0x123';
-$hs2 = ' 0x123';
-$hs3 = " 0x123";
+$hs2 = ' 0x124';
+$hs3 = " 0x125";
 $hs4 = <<<HEREDOC
- 0x123
+ 0x126
 HEREDOC;
 $hs5 = <<<'NOWDOC'
-     0x123f34
+     0x127f34
 NOWDOC;
 
 // $x is too late 
 $hs6 = <<<HEREDOC
- 0x123$x
+ 0x128$x
 HEREDOC;
-$hs7 = " 0x123$x";
+$hs7 = " 0x129$x";
 
 
 $nhs1 = 'n0x223';
