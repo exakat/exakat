@@ -76,7 +76,6 @@ class ConstantStructures extends Tasks {
                             'Noscream'         => array('AT'),
                             'Not'              => array('NOT'),
                             'Parenthesis'      => array('CODE'),
-                            'Return'           => array('RETURN'),
                             );
         
         foreach($structures as $atom => $links) {
