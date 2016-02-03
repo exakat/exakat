@@ -181,7 +181,7 @@ abstract class Analyzer {
         if ($analyzer = static::getClass($name)) {
             return new $analyzer();
         } else {
-            display( "No such class as '", $name, "'\n");
+            display( "No such class as '" . $name . "'\n");
             return null;
         }
     }
@@ -202,7 +202,7 @@ abstract class Analyzer {
 
     public function getAppinfoHeader($lang = 'en') {
         if ($this->appinfo === null) {
-            $this->getDescription($lang);
+            $this->getDescription();
         }
 
         return $this->appinfo;
