@@ -50,7 +50,7 @@ class Variablenames extends Analyzer\Analyzer {
         // $object->$x or $object->{$x}
         $this->atomIs('Property')
              ->outIs('PROPERTY')
-             ->tokenIs('token', 'T_VARIABLE');
+             ->tokenIs('T_VARIABLE');
         $this->prepareQuery();
 
         // ${'x'}

@@ -43,7 +43,7 @@ class IsExtInterface extends Analyzer\Analyzer {
         $interfaces = $this->makeFullNsPath($interfaces);
         
         $this->atomIs('Class')
-             ->outIs('IMPLEMENTS', 'EXTENDS')
+             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
              ->fullnspath($interfaces);
         $this->prepareQuery();
 

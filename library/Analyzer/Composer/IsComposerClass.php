@@ -33,7 +33,7 @@ class IsComposerClass extends Analyzer\Analyzer {
         $classesFullNP = $this->makeFullNsPath($classes);
         
         $this->atomIs('Class')
-             ->outIs('IMPLEMENTS', 'EXTENDS')
+             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
              ->fullnspath($classesFullNP);
         $this->prepareQuery();
 
