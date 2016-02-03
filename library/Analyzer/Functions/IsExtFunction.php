@@ -45,10 +45,7 @@ class IsExtFunction extends Analyzer\Analyzer {
         $functions = array_keys(array_count_values($functions));
         $functions = $this->makeFullNsPath($functions);
         
-        $this->atomIs('Functioncall')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
-             ->hasNoIn('METHOD')
-             ->fullnspath($functions);
+        $this->atomFunctionIs($functions);
         $this->prepareQuery();
     }
 }

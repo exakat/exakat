@@ -16,4 +16,7 @@ namespace X {
     die($g);
 
 }
+
+// Can't test for a function that is in an extension AND has a namespace
+
 ?>
