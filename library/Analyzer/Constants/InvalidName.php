@@ -28,12 +28,10 @@ use Analyzer;
 class InvalidName extends Analyzer\Analyzer {
     public function analyze() {
         // case-sensitive constants
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath("\\define")
+        $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
-             ->rankIs('ARGUMENT', 'first')
+             ->outIs('ARGUMENT')
+             ->hasRank(0)
              ->atomIs('String')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
              ->regexNot('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$');
@@ -42,14 +40,12 @@ class InvalidName extends Analyzer\Analyzer {
         $invalidNames = $this->loadIni('php_keywords.ini', 'keyword');
         $invalidNames = "'".join("', '", $invalidNames)."'";
         
-        // case-sensitive constants
-        $this->atomIs('Functioncall')
+        // case-insensitive constants
+        $this->atomFunctionIs('\\define')
              ->analyzerIsNot('self')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath("\\define")
              ->outIs('ARGUMENTS')
-             ->rankIs('ARGUMENT', 'first')
+             ->outIs('ARGUMENT')
+             ->hasRank(0)
              ->atomIs('String')
              ->regex('noDelimiter', '\\\\\\\\')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
