@@ -30,7 +30,7 @@ class PrintAndDie extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_PRINT', 'T_ECHO'))
              ->nextSiblings()
-             ->tokenIs(array('T_DIE', 'T_EXIT'))
+             ->tokenIs('T_EXIT')
              ->back('first');
         $this->prepareQuery();
     }

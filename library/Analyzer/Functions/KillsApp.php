@@ -32,7 +32,7 @@ class KillsApp extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
              ->outIs('ELEMENT')
-             ->tokenIs(array('T_DIE', 'T_EXIT'))
+             ->tokenIs('T_EXIT')
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();

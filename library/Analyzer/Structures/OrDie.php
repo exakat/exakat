@@ -37,7 +37,7 @@ class OrDie extends Analyzer\Analyzer {
              ->outIs('RIGHT')
              ->atomIs('Functioncall')
              ->hasNoIn('METHOD')
-             ->tokenIs(array('T_DIE', 'T_EXIT'))
+             ->tokenIs('T_EXIT')
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();

@@ -36,7 +36,7 @@ class ErrorMessages extends Analyzer\Analyzer {
         // die('true')
         // exit ('30');
         $this->atomIs('Functioncall')
-             ->tokenIs(array('T_DIE', 'T_EXIT'))
+             ->tokenIs('T_EXIT')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)

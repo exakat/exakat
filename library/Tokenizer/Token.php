@@ -559,7 +559,7 @@ g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
 
 // special case for isset, unset, array, etc. Except for static.
 g.idx('atoms')[['atom':'Functioncall']]
-    .filter{ it.token in ['T_ARRAY', 'T_LIST', 'T_UNSET', 'T_EXIT', 'T_DIE', 'T_ISSET', 'T_ECHO', 'T_PRINT', 'T_EMPTY', 'T_EVAL']}
+    .filter{ it.token in ['T_ARRAY', 'T_LIST', 'T_UNSET', 'T_EXIT', 'T_ISSET', 'T_ECHO', 'T_PRINT', 'T_EMPTY', 'T_EVAL']}
     .each{
         it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
     };

@@ -36,7 +36,7 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->back('first')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->tokenIs(array('T_EXIT', 'T_DIE'))
+             ->tokenIs('T_EXIT')
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
@@ -53,7 +53,7 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->outIs('THEN')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->tokenIs(array('T_EXIT', 'T_DIE'))
+             ->tokenIs('T_EXIT')
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
@@ -67,7 +67,7 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->outIs('THEN')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->tokenIs(array('T_EXIT', 'T_DIE'))
+             ->tokenIs('T_EXIT')
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();

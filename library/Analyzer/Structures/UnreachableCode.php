@@ -58,10 +58,7 @@ class UnreachableCode extends Analyzer\Analyzer {
              ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_EXIT', 'T_DIE'))
-             ->fullnspath(array('\\exit', '\\die'))
+        $this->atomIs(array('\\exit', '\\die'))
              ->nextSiblings()
              ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
