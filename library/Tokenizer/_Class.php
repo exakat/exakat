@@ -119,7 +119,13 @@ if (fullcode.out("NAME").any() == false) {
     x = g.addVertex(null, [code:'', fullcode: '', atom:'Void', token:'T_VOID', virtual:true, line:fullcode.line]);
     g.addEdge(fullcode, x, 'NAME');
 }
-fullcode.out("NAME").each{ fullcode.fullcode = fullcode.fullcode + ' ' + it.code;}
+fullcode.out("NAME").each{ 
+    if (it.token == 'T_VOID') {
+        fullcode.fullcode = fullcode.fullcode + it.code;
+    } else {
+        fullcode.fullcode = fullcode.fullcode + ' ' + it.code;
+    }
+}
 
 // class arguments
 fullcode.out("ARGUMENTS").each{

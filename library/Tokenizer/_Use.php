@@ -156,13 +156,14 @@ if (fullcode.out('FUNCTION').any()) {
     fullcode.setProperty('fullcode', fullcode.getProperty('code') + " const ");
     fullcode.setProperty('fullcode', fullcode.getProperty('code').toLowerCase());
 } else {
+    // Normal use
     fullcode.setProperty('fullcode', fullcode.getProperty('code') + " ");
 }
 
 if (fullcode.groupedUse == true) {
     fullcode.fullcode = fullcode.fullcode + ' ' + fullcode.groupPath + "{ " + s.join(", ") + " }";
 } else {
-    fullcode.fullcode = fullcode.fullcode + ' ' + s.join(", ");
+    fullcode.fullcode = fullcode.fullcode + s.join(", ");
 }
 
 
