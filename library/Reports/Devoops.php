@@ -847,7 +847,7 @@ HTML;
         foreach($data as $v) {
             $row = '<tr>';
             foreach($readOrder as $V) {
-                $row .= "<td>$v[$V]</td>\n";
+                $row .= "<td>".$this->makeHtml($v[$V])."</td>\n";
             }
             $row .= '</tr>';
 
