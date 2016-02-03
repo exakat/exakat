@@ -28,17 +28,18 @@ use Analyzer;
 class Constantnames extends Analyzer\Analyzer {
     public function analyze() {
         // with define
-        $this->atomIs('Functioncall')
-             ->code('define', false)
-             ->inIsnot('METHOD')
+        $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
-             ->rankIs('ARGUMENT', 0);
+             ->outIs('ARGUMENT')
+             ->hasRank(0)
+             ->atomIs('String')
+             ->hasNoOut('CONTAINS');
         $this->prepareQuery();
 
         // with const
         $this->atomIs('Const')
-             ->hasNoParent('Class', array('ELEMENT', 'BLOCK'))
-             ->hasNoParent('Interface', array('ELEMENT', 'BLOCK'))
+             ->notInClass()
+             ->notInInterface()
              ->outIs('CONST')
              ->outIs('LEFT');
         $this->prepareQuery();
