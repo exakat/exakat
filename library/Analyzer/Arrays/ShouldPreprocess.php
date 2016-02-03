@@ -68,13 +68,13 @@ class ShouldPreprocess extends Analyzer\Analyzer {
              ->atomIs('Assignation')
              ->code('=')
              ->outIs('LEFT')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
              ->atomIs(array('Property', 'Staticproperty'))
              ->outIs(array('OBJECT', 'CLASS'))
              ->samePropertyAs('fullcode', 'tableauClass')
              ->inIs(array('OBJECT', 'CLASS'))
              ->outIs('PROPERTY')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
              ->samePropertyAs('code', 'tableauProperty')
              ->back('first');
         $this->prepareQuery();
