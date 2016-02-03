@@ -34,7 +34,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Typehint')
              ->outIs('CLASS')
-             ->tokenIsNot('T_ARRAY') // also accepts callable
+             ->codeIsNot(array('callable', 'array', 'string', 'int', 'float', 'bool'))
              ->inIs('CLASS')
              ->outIs('VARIABLE')
              ->atomIs('Variable')
@@ -47,7 +47,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Typehint')
              ->outIs('CLASS')
-             ->tokenIsNot('T_ARRAY') // also accepts callable
+             ->codeIsNot(array('callable', 'array', 'string', 'int', 'float', 'bool'))
              ->inIs('CLASS')
              ->outIs('VARIABLE')
              ->atomIs('Assignation')
