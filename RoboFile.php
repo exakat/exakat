@@ -28,8 +28,8 @@ class RoboFile extends \Robo\Tasks
         $build = \Exakat::BUILD + 1;
 
         $this->taskReplaceInFile(__DIR__.'/library/Exakat.php')
-            ->from("BUILD = '".\Exakat::BUILD."'")
-            ->to("BUILD = '".$build."'")
+            ->from("BUILD = ".\Exakat::BUILD)
+            ->to("BUILD = ".$build)
             ->run();
     }
 
