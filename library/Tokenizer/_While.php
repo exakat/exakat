@@ -72,16 +72,17 @@ class _While extends TokenAuto {
                                   6 => array('token'     => 'T_CLOSE_CURLY'),
         );
         
-        $this->actions = array('transform'    => array(  1 => 'DROP',
-                                                         2 => 'CONDITION',
-                                                         3 => 'DROP',
-                                                         4 => 'DROP',
-                                                         5 => 'BLOCK',
-                                                         6 => 'DROP'),
+        $this->actions = array('transform'          => array(  1 => 'DROP',
+                                                               2 => 'CONDITION',
+                                                               3 => 'DROP',
+                                                               4 => 'DROP',
+                                                               5 => 'BLOCK',
+                                                               6 => 'DROP'),
                                'addAlwaysSemicolon' => 'it',
-                               'atom'         => 'While',
-                               'cleanIndex'   => true,
-                               'makeBlock'    => 'BLOCK');
+                               'atom'               => 'While',
+                               'cleanIndex'         => true,
+                               'makeBlock'          => 'BLOCK',
+                               );
         $this->checkAuto();
         
         // alternative syntax While( ) : endwhile
@@ -115,10 +116,15 @@ class _While extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (it.alternative == true) {
+if (fullcode.alternative == true) {
     fullcode.setProperty('fullcode', "while (" + fullcode.out("CONDITION").next().getProperty('fullcode') + ") : " + fullcode.out("BLOCK").next().getProperty('fullcode') + ' endwhile');
 } else {
     fullcode.setProperty('fullcode', "while (" + fullcode.out("CONDITION").next().getProperty('fullcode') + ") " + fullcode.out("BLOCK").next().getProperty('fullcode'));
+}
+
+// bracket is set to false if needed. Here, we set it to true in the other cases.
+fullcode.out('BLOCK').has('bracket', null).each{ 
+    it.setProperty('bracket', true);
 }
 
 GREMLIN;

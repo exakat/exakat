@@ -60,6 +60,13 @@ class Bracketless extends Analyzer\Analyzer {
         $this->atomIs('While')
              ->isNot('alternative', true)
              ->outIs('BLOCK')
+             ->isNot('bracket', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Dowhile')
+             ->isNot('alternative', true)
+             ->outIs('BLOCK')
              ->is('bracket', false)
              ->back('first');
         $this->prepareQuery();

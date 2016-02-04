@@ -28,7 +28,7 @@ class _Dowhile extends TokenAuto {
     static public $atom = 'Dowhile';
 
     public function _check() {
-        // do ; while() (no block...)
+        // do $a++; while() (no block...)
         $this->conditions = array( 0 => array('token'   => _Dowhile::$operators),
                                    1 => array('atom'    => 'yes'),
                                    2 => array('token'   => 'T_SEMICOLON',
@@ -41,16 +41,8 @@ class _Dowhile extends TokenAuto {
                                    6 => array('token'   => 'T_CLOSE_PARENTHESIS')
         );
         
-        $this->actions = array('transform'    => array(   1 => 'BLOCK',
-                                                          2 => 'DROP',
-                                                          3 => 'DROP',
-                                                          4 => 'DROP',
-                                                          5 => 'CONDITION',
-                                                          6 => 'DROP'
-                                                        ),
-                               'atom'         => 'Dowhile',
-                               'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
+        $this->actions = array('toDowhileBlock' => true,
+                               'keepIndexed'    => true);
         $this->checkAuto();
 
         // do if() {} while() (no block...)
@@ -97,6 +89,7 @@ class _Dowhile extends TokenAuto {
                                                           7 => 'DROP'
                                                         ),
                                'atom'         => 'Dowhile',
+                               'makeBlock'    => 'BLOCK',
                                'cleanIndex'   => true,
                                'addSemicolon' => 'it');
         $this->checkAuto();

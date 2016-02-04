@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('do  /**/  while (7)');
 
 $expected_not = array();
 
