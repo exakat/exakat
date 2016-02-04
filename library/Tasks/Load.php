@@ -40,6 +40,8 @@ class Load extends Tasks {
 
         // formerly -q option. Currently, only one loader, via csv-batchimport;
         $this->client = new \Loader\Cypher();
+        
+        $this->datastore->cleanTable('tokenCounts');
 
         if ($filename = $this->config->filename) {
             $this->processFile($filename);
@@ -305,12 +307,12 @@ class Load extends Tasks {
                 
                     ++$Tid;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                  ->setProperty('code', 'void')
-                                                  ->setProperty('fullcode', ' ')
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load13')
-                                                  ->setProperty('atom', 'Void')
-                                                  ->save();
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load13')
+                                                        ->setProperty('atom', 'Void')
+                                                        ->save();
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
 
@@ -323,6 +325,25 @@ class Load extends Tasks {
                     $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
                     $to_index = false;
+                } elseif ($token[3] == 'T_DO' && is_string($tokens[$id + 1]) &&
+                          $tokens[$id + 1] === ';') {
+                    $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
+                                                        ->setProperty('code', $token[1])
+                                                        ->setProperty('line', $token[2])
+                                                        ->save();
+
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    $previous = $T[$Tid];
+                    $regexIndex['_Dowhile']->relateTo($T[$Tid], 'INDEXED')->save();
+                
+                    ++$Tid;
+                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                                        ->setProperty('code', 'void')
+                                                        ->setProperty('fullcode', ' ')
+                                                        ->setProperty('line', $line)
+                                                        ->setProperty('modifiedBy', 'bin/load13')
+                                                        ->setProperty('atom', 'Void')
+                                                        ->save();
                 } elseif ($token[3] == 'T_STATIC' && is_string($tokens[$id + 1]) &&
                           $tokens[$id + 1] != '(' && $this->php->getTokenname($tokens[$id - 1][0]) == 'T_NEW') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
@@ -438,8 +459,6 @@ class Load extends Tasks {
                             $previous->relateTo($T[$Tid], 'NEXT')->save();
                             $previous = $T[$Tid];
                             ++$Tid;
-                        } else {
-//                            die('YEPS    ');
                         }
                     }
 
