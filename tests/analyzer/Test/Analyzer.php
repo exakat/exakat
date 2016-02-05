@@ -10,6 +10,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         list($analyzer, $number) = explode('.', $file);
         $analyzer = str_replace('_', '/', $analyzer);
         
+        // Test are run with test project.
         $ini = parse_ini_file('../../projects/test/config.ini');
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
         $test_config = str_replace('_', '/', substr(get_class($this), 5));
@@ -20,7 +21,12 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         }
 
         // initialize Config (needed by phpexec)
-        \Config::factory(array('foo', '-p', 'test'));
+        $config = \Config::factory(array('foo', '-p', 'test'));
+        
+        $res = shell_exec($config->php.' -l ./source/'.str_replace('_', '/', $file).'.php 2>/dev/null');
+        if (strpos($res, 'No syntax errors detected') === false) {
+            $this->markTestSkipped('Compilation problem : "'.$res.'".');
+        }
         
         $Php = new \Phpexec($phpversion);
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
