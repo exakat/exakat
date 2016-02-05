@@ -3,105 +3,29 @@
 Label : CODE
   ;
   Label : ELEMENT
-    return
-    Label : RETURN
-      P
-  Label : ELEMENT
     if
     Label : CONDITION
       ==
-      Label : RIGHT
-        $b
       Label : LEFT
         ->
         Label : OBJECT
           $this
         Label : PROPERTY
           B
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          &
-          Label : RIGHT
-            ~
-            Label : NOT
-              ::
-              Label : CLASS
-                E
-              Label : CONSTANT
-                F
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              C
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            C
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            G
+      Label : RIGHT
+        $b
     Label : ELSE
       elseif
       Label : CONDITION
         ==
-        Label : RIGHT
-          $b
         Label : LEFT
           ->
           Label : OBJECT
             $this
           Label : PROPERTY
             H
-      Label : THEN
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            &
-            Label : RIGHT
-              ~
-              Label : NOT
-                ::
-                Label : CLASS
-                  E
-                Label : CONSTANT
-                  L
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                C
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              C
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              M
+        Label : RIGHT
+          $b
       Label : ELSE
         Block with else
         Label : ELEMENT
@@ -111,6 +35,82 @@ Label : CODE
             Label : NEW
               N
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   'O'
+      Label : THEN
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              C
+          Label : RIGHT
+            &
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                C
+            Label : RIGHT
+              ~
+              Label : NOT
+                ::
+                Label : CLASS
+                  E
+                Label : CONSTANT
+                  L
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              M
+          Label : RIGHT
+            1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            C
+        Label : RIGHT
+          &
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              C
+          Label : RIGHT
+            ~
+            Label : NOT
+              ::
+              Label : CLASS
+                E
+              Label : CONSTANT
+                F
+      Label : ELEMENT
+        =
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            G
+        Label : RIGHT
+          1
+  Label : ELEMENT
+    return
+    Label : RETURN
+      P

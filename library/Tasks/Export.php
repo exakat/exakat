@@ -92,6 +92,9 @@ class Export extends Tasks {
             $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
         }
         if (isset($E[$root])) {
+            asort($E[$root]);
+            uksort($E[$root], function ($a, $b) use ($V) { if (!isset($V[$a]['rank'])) { return 0; } return $V[$a]['rank'] > $V[$b]['rank']; });
+
             foreach($E[$root] as $id => $label) {
                 $r .= str_repeat('  ', $level).'Label : '.$label."\n".$this->display_text($V, $E, $id, $level + 1);
             }

@@ -5,26 +5,6 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      @
-      Label : AT
-        +
-        Label : SIGN
-          $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $c
-  Label : ELEMENT
-    if
-    Label : CONDITION
       !
       Label : NOT
         +
@@ -39,6 +19,26 @@ Label : CODE
         Label : RIGHT
           B
           Label : ARGUMENTS
-            void
+            
+            Label : ARGUMENT
+              $c
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      @
+      Label : AT
+        +
+        Label : SIGN
+          $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $b
+        Label : RIGHT
+          B
+          Label : ARGUMENTS
+            
             Label : ARGUMENT
               $c

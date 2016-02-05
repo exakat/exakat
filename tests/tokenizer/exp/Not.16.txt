@@ -8,8 +8,6 @@ Label : CODE
       ++
       Label : POSTPLUSPLUS
         [
-        Label : VARIABLE
-          $a
         Label : INDEX
           "
           Label : CONTAINS
@@ -18,3 +16,5 @@ Label : CODE
               $bB
             Label : CONCAT
               $c
+        Label : VARIABLE
+          $a
