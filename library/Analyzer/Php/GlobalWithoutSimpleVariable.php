@@ -26,6 +26,8 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class GlobalWithoutSimpleVariable extends Analyzer\Analyzer {
+    protected $phpVersion = '7.0-';
+     
     public function analyze() {
         $this->atomIs('Global')
              ->outIs('GLOBAL')
