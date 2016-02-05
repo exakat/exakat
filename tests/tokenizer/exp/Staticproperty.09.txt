@@ -4,16 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
-        function
+        static
+        Label : DEFINE
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            'C'
         Label : STATIC
           static
-        Label : NAME
-          D
+      Label : ELEMENT
+        function
         Label : ARGUMENTS
           
           Label : ARGUMENT
@@ -22,78 +26,68 @@ Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              'F'
             Label : LEFT
-              $c
-          Label : ELEMENT
-            ::
-            Label : CLASS
-              B
-            Label : METHOD
               $b
-              Label : NAME
-                $b
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  $c
-          Label : ELEMENT
-            =
             Label : RIGHT
               'E'
+          Label : ELEMENT
+            =
             Label : LEFT
-              $b
+              $c
+            Label : RIGHT
+              'F'
           Label : ELEMENT
             ::
             Label : CLASS
               static
             Label : METHOD
               $b
-              Label : NAME
-                $b
               Label : ARGUMENTS
                 
                 Label : ARGUMENT
                   $c
-      Label : ELEMENT
-        static
+              Label : NAME
+                $b
+          Label : ELEMENT
+            ::
+            Label : CLASS
+              B
+            Label : METHOD
+              $b
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $c
+              Label : NAME
+                $b
+        Label : NAME
+          D
         Label : STATIC
           static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            'C'
-          Label : LEFT
-            $b
       Label : ELEMENT
         function
-        Label : STATIC
-          static
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $d
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  __METHOD__
+                Label : CONCAT
+                  'I'
         Label : NAME
           H
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $d
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  __METHOD__
-                Label : CONCAT
-                  'I'
-      Label : ELEMENT
-        function
         Label : STATIC
           static
-        Label : NAME
-          J
+      Label : ELEMENT
+        function
         Label : ARGUMENTS
           
           Label : ARGUMENT
@@ -110,6 +104,12 @@ Label : CODE
                   __METHOD__
                 Label : CONCAT
                   'I'
+        Label : NAME
+          J
+        Label : STATIC
+          static
+    Label : NAME
+      B
   Label : ELEMENT
     ::
     Label : CLASS

@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      $C
     Label : LEFT
       ::
       Label : CLASS
@@ -14,3 +12,5 @@ Label : CODE
         [
         Label : VARIABLE
           $V
+    Label : RIGHT
+      $C

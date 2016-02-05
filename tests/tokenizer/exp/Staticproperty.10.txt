@@ -33,24 +33,6 @@ Label : CODE
               Label : OBJECT
                 $this
       Label : ARGUMENT
-        D
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $d
-          Label : ARGUMENT
-            'H'
-          Label : ARGUMENT
-            ->
-            Label : METHOD
-              F
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $this
-      Label : ARGUMENT
         array
         Label : ARGUMENTS
           
@@ -70,6 +52,24 @@ Label : CODE
                       void
                 Label : OBJECT
                   $this
+      Label : ARGUMENT
+        D
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'H'
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              F
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+            Label : OBJECT
+              $this
+          Label : ARGUMENT
+            $d
     Label : NAME
       ::
       Label : CLASS

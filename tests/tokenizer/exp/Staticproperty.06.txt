@@ -7,15 +7,15 @@ Label : CODE
     Label : LEFT
       ->
       Label : OBJECT
-        ::
-        Label : PROPERTY
-          [
-          Label : VARIABLE
+        [
+        Label : INDEX
+          $b
+        Label : VARIABLE
+          ::
+          Label : CLASS
+            self
+          Label : PROPERTY
             $a
-          Label : INDEX
-            $b
-        Label : CLASS
-          self
       Label : PROPERTY
         d
     Label : RIGHT
@@ -23,7 +23,7 @@ Label : CODE
       Label : NEW
         $e
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
         Label : NAME
