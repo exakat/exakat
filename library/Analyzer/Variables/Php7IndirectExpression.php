@@ -31,11 +31,11 @@ class Php7IndirectExpression extends Analyzer\Analyzer {
     public function analyze() {
 //$$foo['bar']['baz']	${$foo['bar']['baz']}	($$foo)['bar']['baz']
         $this->atomIs('Array')
+             ->hasNoIn('VARIABLE')
              ->outIsIE('VARIABLE')
              ->atomIs('Variable')
              ->tokenIs('T_DOLLAR')
-             ->back('first')
-             ->hasNoIn('VARIABLE');
+             ->back('first');
         $this->prepareQuery();
 
 //$foo->$bar['baz']	$foo->{$bar['baz']}	($foo->$bar)['baz']
