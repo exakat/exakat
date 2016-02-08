@@ -795,12 +795,12 @@ GREMLIN;
     }
 
     public function isPropertyIn($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
+        if ($caseSensitive === true || $property === 'line' || $property === 'rank') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
         }
-
+        
         if (is_array($name)) {
             $this->addMethod('filter{ it.'.$property.$caseSensitive.' in *** }', $name);
         } else {
@@ -987,12 +987,6 @@ m.findAll{ it.value.size() $comp $times}.values().flatten().each{ n.add(it); }
 GREMLIN
 );
 
-        return $this;
-    }
-
-    public function countIs($comparison) {
-        $this->addMethod('aggregate().filter{ it.size '.$comparison.'}', null);
-        
         return $this;
     }
 
@@ -1523,6 +1517,12 @@ GREMLIN
 
     public function hasClassTrait() {
         $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Class", "Trait"])}{it.object.atom in ["Class", "Trait"]}.any()}');
+        
+        return $this;
+    }
+
+    public function hasNoClassTrait() {
+        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Class", "Trait"])}{it.object.atom in ["Class", "Trait"]}.any() == false}');
         
         return $this;
     }

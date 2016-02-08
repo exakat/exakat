@@ -14,8 +14,15 @@ $expected     = array(  "'g'",
                         '"E"', 
                         "'e'", 
                         "'D'", 
-                        "'d'", );
+                        "'d'",
+                        "'D2'", 
+                        "'d2'",
+                        "'D3'", 
+                        "'d3'",
+                         );
 
-$expected_not = array("'c'", "'C'");
+$expected_not = array("'c'", 
+                      "'C'",
+                      );
 
 ?>
