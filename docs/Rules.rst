@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 01 Feb 2016 09:49:55 +0000
-.. comment: Generation hash : fde2f46c5a3d4e2cb893721d8bde6783c6d70ae4
+.. comment: Generation date : Mon, 08 Feb 2016 14:59:42 +0000
+.. comment: Generation hash : 28c5f0800c75839207bf165cbd39d6ff2477599c
 
 
 .. _$http\_raw\_post\_data:
@@ -1119,6 +1119,24 @@ The following code act directly upon PHP incoming variables like $\_GET and $\_P
 +--------------+--------------------------+
 | Analyzers    | :ref:`Security`          |
 +--------------+--------------------------+
+
+
+
+.. _directive-name:
+
+Directive Name
+##############
+
+
+List the directives names that are used in the code, but are not actual PHP directives.
+
++--------------+-------------------+
+| Command Line | Php/DirectiveName |
++--------------+-------------------+
+| clearPHP     |                   |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
 
 
 

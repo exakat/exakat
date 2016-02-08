@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 01 Feb 2016 09:49:55 +0000
-.. comment: Generation hash : fde2f46c5a3d4e2cb893721d8bde6783c6d70ae4
+.. comment: Generation date : Mon, 08 Feb 2016 14:59:42 +0000
+.. comment: Generation hash : 28c5f0800c75839207bf165cbd39d6ff2477599c
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 224 analysis
+Total : 225 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -104,6 +104,7 @@ Total : 224 analysis
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
 * :ref:`Deprecated code <deprecated-code>`
+* :ref:`Directive Name <directive-name>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instruction <double-instruction>`
