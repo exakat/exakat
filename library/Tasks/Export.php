@@ -93,9 +93,9 @@ class Export extends Tasks {
         }
         if (isset($E[$root])) {
             asort($E[$root]);
-            uksort($E[$root], function ($a, $b) use ($V) { 
-    if (!isset($V[$a]['rank'])) { return 0; } 
-    if (!isset($V[$b]['rank'])) { return 0; } 
+            uksort($E[$root], function ($a, $b) use ($V) {
+    if (!isset($V[$a]['rank'])) { return 0; }
+    if (!isset($V[$b]['rank'])) { return 0; }
     return $V[$a]['rank'] > $V[$b]['rank']; });
 
             foreach($E[$root] as $id => $label) {
