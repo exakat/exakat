@@ -1,4 +1,4 @@
-Version 0.5.1 (King of Spiritual Touch, Coming up)
+Version 0.5.2 (Single Horned Rhinoceros King, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,36 @@ Version 0.5.1 (King of Spiritual Touch, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.5.1 (King of Spiritual Touch, Coming up)
++ Architecture
+    + Added test in UT to skip incompilable sources
+    + Stabilized tokenizer's UT (partial)
++ Report
+    + HTML protection in Devoops format
+    + No display of negative stats
+    + Added support for directives : wincache, xcache, apc, opcache
+    + Added support for eaccelerator and openssl
++ Analyzer
+    + New analyzer : Spot unknown PHP directive names
+    + Fixed Constants/MultipleDefinedConstants
+    + Better detection of functioncalls (with List)
+    + Better spotting of ini_set arguments
+    + Unreachable code now finds die and exit
+    + ObjectReference won't report references on scalar types
+    + Revamped 'pregOptionE' analyzer
+    + Cleaned code with too many arguments
+    + Removed useless print
+    + Better report of eval() usage
+    + Revamped 'Dynamic code' report
+    + Fixed bug in Case/Default that are empty
+    + Avoided sequences of sequences in Case/Default
+    + Fixed Detection of classes' usage with extension
++ Tokenizer
+    + Fixed bracket detection on While and DoWhile
+    + Detect void in DoWhile
+    + Removed useless T_DIE token
+    + Fixed fullcode processing for anonymous classes
 
 Version 0.5.0 (Immortal of Antelope Power, 2016-02-01)
 + Architecture
