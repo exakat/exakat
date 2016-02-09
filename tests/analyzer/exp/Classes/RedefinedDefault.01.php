@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$redefined2 = 1',
+$expected     = array('$redefined2 = 2',
                       '$redefined = 1',
 );
 

@@ -24,12 +24,6 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class RedefinedDefault extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $this->atomIs('Class')
              ->outIs('BLOCK')
