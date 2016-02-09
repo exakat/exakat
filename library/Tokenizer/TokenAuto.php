@@ -2445,6 +2445,38 @@ element2.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['makeForeachSequence']);
         }
 
+        if (isset($actions['toDowhileBlock'])) {
+            $qactions[] = "
+/* toDowhileBlock */
+
+oc = g.addVertex(null, [code:'{', token:'T_OPEN_CURLY', virtual:true, line:it.line]);
+cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.line]);
+
+sequence = g.addVertex(null, [code:';', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:true, bracket:false, line:it.line, fullcode:' /**/ ']);
+g.addEdge(sequence, a1, 'ELEMENT');
+a1.rank = 0;
+
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.addEdge(it, oc, 'NEXT');
+g.addEdge(oc, sequence, 'NEXT');
+
+if (a2.token == 'T_SEMICOLON') {
+    a2.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(a2);
+    
+    g.addEdge(sequence, cc, 'NEXT');
+    g.addEdge(cc, a3, 'NEXT');
+} else {
+    g.addEdge(sequence, cc, 'NEXT');
+    g.addEdge(cc, a2, 'NEXT');
+}
+
+
+";
+            unset($actions['toDowhileBlock']);
+        }
+        
         if (isset($actions['toWhileBlock'])) {
             $qactions[] = "
 /* toWhileBlock */

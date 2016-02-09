@@ -4,47 +4,49 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          1
+        Label : ELSE
+          ;
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ->
+            Label : METHOD
+              f
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  4
+                Label : ARGUMENT
+                  5
+                Label : ARGUMENT
+                  6
+            Label : OBJECT
+              [
+              Label : INDEX
+                +
+                Label : LEFT
+                  1
+                Label : RIGHT
+                  *
+                  Label : LEFT
+                    2
+                  Label : RIGHT
+                    4
+              Label : VARIABLE
+                $x
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
     Label : CONDITION
       FALSE
-    Label : BLOCK
-      if
-      Label : CONDITION
-        1
-      Label : THEN
-        ;
-        Label : ELEMENT
-          break
-          Label : LEVEL
-            void
-        Label : ELEMENT
-          ->
-          Label : OBJECT
-            [
-            Label : VARIABLE
-              $x
-            Label : INDEX
-              +
-              Label : RIGHT
-                *
-                Label : RIGHT
-                  4
-                Label : LEFT
-                  2
-              Label : LEFT
-                1
-          Label : METHOD
-            f
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                6
-              Label : ARGUMENT
-                5
-              Label : ARGUMENT
-                4
-      Label : ELSE
-        ;
-        Label : ELEMENT
-          break
-          Label : LEVEL
-            void

@@ -8,31 +8,31 @@ Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $a
         Label : RIGHT
           ->
-          Label : OBJECT
-            $b
           Label : METHOD
             c
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                $e
-              Label : ARGUMENT
                 $d
-        Label : LEFT
-          $a
+              Label : ARGUMENT
+                $e
+          Label : OBJECT
+            $b
     Label : CONDITION
       !
       Label : NOT
         ->
-        Label : OBJECT
-          $f
         Label : METHOD
           g
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               ++
               Label : PREPLUSPLUS
                 $h
+        Label : OBJECT
+          $f

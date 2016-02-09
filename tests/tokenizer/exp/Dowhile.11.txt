@@ -1,22 +1,26 @@
 <?php
 
 Label : CODE
-  do
-  Label : CONDITION
-    FALSE
-  Label : BLOCK
-    if
+  ;
+  Label : ELEMENT
+    do
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          1
+        Label : ELSE
+          ;
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+        Label : THEN
+          ;
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
     Label : CONDITION
-      1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        break
-        Label : LEVEL
-          void
-    Label : ELSE
-      ;
-      Label : ELEMENT
-        break
-        Label : LEVEL
-          void
+      FALSE

@@ -4,15 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $x
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $y
     Label : CONDITION
       $z
-    Label : BLOCK
-      if
-      Label : CONDITION
-        $x
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $y

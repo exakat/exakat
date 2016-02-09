@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Dowhile extends Tokenizer {
-    /* 16 methods */
+    /* 17 methods */
 
     public function testDowhile01()  { $this->generic_test('Dowhile.01'); }
     public function testDowhile02()  { $this->generic_test('Dowhile.02'); }
@@ -25,5 +25,6 @@ class Dowhile extends Tokenizer {
     public function testDowhile14()  { $this->generic_test('Dowhile.14'); }
     public function testDowhile15()  { $this->generic_test('Dowhile.15'); }
     public function testDowhile16()  { $this->generic_test('Dowhile.16'); }
+    public function testDowhile17()  { $this->generic_test('Dowhile.17'); }
 }
 ?>
