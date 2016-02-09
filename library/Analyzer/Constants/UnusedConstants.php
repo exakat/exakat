@@ -31,15 +31,27 @@ class UnusedConstants extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        // Const from a define
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\define')
+        $thirdArgIsTrue  = 'it.out("ARGUMENT").filter{it.rank == 2}.any() && it.out("ARGUMENT").filter{it.rank == 2}.filter{it.code.toLowerCase() == "true"}.any()';
+        $thirdArgIsFalse = 'it.out("ARGUMENT").filter{it.rank == 2}.any() == false || it.out("ARGUMENT").filter{it.rank == 2}.filter{it.code.toLowerCase() == "false"}.any()';
+
+        // Const from a define (case insensitive)
+        $this->atomFunctionIs('\define')
              ->outIs('ARGUMENTS')
-             ->rankIs('ARGUMENT', 'first')
+             ->filter($thirdArgIsFalse)
+             ->outIs('ARGUMENT')
+             ->hasRank(0)
              ->atomIs('String')
-             ->raw('filter{ name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").filter{it.code.toLowerCase() == name}.any() == false }');
+             ->filter('name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").filter{it.code == name}.any() == false ');
+        $this->prepareQuery();
+
+        // Const from a define (case sensitive)
+        $this->atomFunctionIs('\define')
+             ->outIs('ARGUMENTS')
+             ->filter($thirdArgIsTrue)
+             ->outIs('ARGUMENT')
+             ->hasRank(0)
+             ->atomIs('String')
+             ->filter('name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").filter{it.code.toLowerCase() == name.toLowerCase()}.any() == false ');
         $this->prepareQuery();
 
         // Const from a const
