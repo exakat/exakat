@@ -101,6 +101,9 @@ class _Dowhile extends TokenAuto {
         return <<<GREMLIN
 
 fullcode.setProperty('fullcode', "do " + fullcode.out("BLOCK").next().getProperty('fullcode') + " while (" + fullcode.out("CONDITION").next().getProperty('fullcode') + ")");
+if ( it.out('BLOCK').next().bracket != false) {
+    it.out('BLOCK').next().bracket = true;
+}
 
 GREMLIN;
 
