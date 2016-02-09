@@ -387,7 +387,7 @@ class Load extends Tasks {
                     } else {
                         // Starting with a a\b\c
                         $rank = 0;
-                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_STRING')
+                        $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                             ->setProperty('code', $token[1])
                                                             ->setProperty('fullcode', $token[1])
                                                             ->setProperty('line', $line)
@@ -422,7 +422,7 @@ class Load extends Tasks {
                             break 1;
                         }
 
-                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_STRING')
+                        $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                             ->setProperty('code', $tokens[$id + $f][1])
                                                             ->setProperty('fullcode', $tokens[$id + $f][1])
                                                             ->setProperty('line', $line)

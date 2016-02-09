@@ -2,6 +2,6 @@
 
 $expected     = array();
 
-$expected_not = array("A\\B\\C\\D\\E\\F");
+$expected_not = array('A\\B\\C\\D\\E\\F');
 
 ?>
