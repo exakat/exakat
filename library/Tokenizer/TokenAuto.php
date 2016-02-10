@@ -726,8 +726,6 @@ g.addEdge(it, a2, 'NEXT');
         }
 
         if (isset($actions['makeNextFromList'])) {
-            $link = $actions['makeNextFromList'];
-            
             // must be after transform
             $qactions[] = "
 /* Move arguments under the keyword (FUNCTION, CONST) */
@@ -735,6 +733,7 @@ g.addEdge(it, a2, 'NEXT');
 global = it;
 rank = 0;
 
+link = a1.code.toUpperCase();
 toDelete.push(a1);
 
 a1 = a2;
@@ -746,7 +745,7 @@ while(a2.token == 'T_COMMA') {
     a1.bothE('INDEXED').each{ g.removeEdge(it); }
     a1.rank = rank;
     ++rank;
-    g.addEdge(global, a1, '$link');
+    g.addEdge(global, a1, link);
     
     toDelete.push(a2); // drop ,
     a1 = a2.out('NEXT').next();
@@ -757,7 +756,7 @@ a1.bothE('NEXT').each{ g.removeEdge(it); }
 a1.bothE('INDEXED').each{ g.removeEdge(it); }
 a1.rank = rank;
 ++rank;
-g.addEdge(global, a1, '$link');
+g.addEdge(global, a1, link);
 
 g.addEdge(it, a2, 'NEXT');
 
@@ -1049,6 +1048,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 it.groupedUse = true;
 
 if (a1.token in ['T_FUNCTION', 'T_CONST']) {
+    it.groupedPrefix = a1.code.toLowerCase();
     link = a1.code.toUpperCase();
 
     toDelete.push(a1);
