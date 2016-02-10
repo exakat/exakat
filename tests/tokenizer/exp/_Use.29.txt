@@ -6,19 +6,17 @@ Label : CODE
     Label : FUNCTION
       \
       Label : SUBNAME
-        ClassNonAbsNonGroupedNonAs
+        FooLibrary
       Label : SUBNAME
         Bar
       Label : SUBNAME
         Baz
       Label : SUBNAME
-        FooLibrary
+        ClassNonAbsNonGroupedNonAs
   Label : ELEMENT
     use
     Label : FUNCTION
       \
-      Label : AS
-        A2
       Label : SUBNAME
         FooLibrary
       Label : SUBNAME
@@ -26,7 +24,39 @@ Label : CODE
       Label : SUBNAME
         Baz
       Label : SUBNAME
-        ClassAbsNonGroupedAs
+        ClassAbsNonGroupedNonAs
+  Label : ELEMENT
+    use
+    Label : FUNCTION
+      as
+      Label : AS
+        A1
+      Label : NAME
+        \
+        Label : SUBNAME
+          FooLibrary
+        Label : SUBNAME
+          Bar
+        Label : SUBNAME
+          Baz
+        Label : SUBNAME
+          ClassNonAbsNonGroupedAs
+  Label : ELEMENT
+    use
+    Label : FUNCTION
+      as
+      Label : AS
+        A2
+      Label : NAME
+        \
+        Label : SUBNAME
+          FooLibrary
+        Label : SUBNAME
+          Bar
+        Label : SUBNAME
+          Baz
+        Label : SUBNAME
+          ClassAbsNonGroupedAs
   Label : ELEMENT
     use
     Label : FUNCTION
@@ -35,31 +65,5 @@ Label : CODE
       as
       Label : AS
         A3
-      Label : SUBNAME
+      Label : NAME
         ClassNonAbsGroupedAs
-  Label : ELEMENT
-    use
-    Label : FUNCTION
-      \
-      Label : AS
-        A1
-      Label : SUBNAME
-        ClassNonAbsNonGroupedAs
-      Label : SUBNAME
-        Baz
-      Label : SUBNAME
-        Bar
-      Label : SUBNAME
-        FooLibrary
-  Label : ELEMENT
-    use
-    Label : FUNCTION
-      \
-      Label : SUBNAME
-        ClassAbsNonGroupedNonAs
-      Label : SUBNAME
-        Baz
-      Label : SUBNAME
-        Bar
-      Label : SUBNAME
-        FooLibrary

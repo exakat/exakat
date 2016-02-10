@@ -7,14 +7,14 @@ Label : CODE
     Label : USE
       \
       Label : SUBNAME
-        E
-      Label : SUBNAME
-        D
-    Label : USE
-      \
-      Label : SUBNAME
-        C
+        A
       Label : SUBNAME
         B
       Label : SUBNAME
-        A
+        C
+    Label : USE
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        E

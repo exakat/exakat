@@ -7,6 +7,6 @@ Label : CODE
     Label : USE
       \
       Label : SUBNAME
-        B
-      Label : SUBNAME
         A
+      Label : SUBNAME
+        B

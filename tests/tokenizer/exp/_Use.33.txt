@@ -2,28 +2,26 @@
 
 Label : CODE
   namespace
-  Label : NAMESPACE
-    X
   Label : BLOCK
     ;
     Label : ELEMENT
       use
       Label : USE
         A
+      Label : FUNCTION
+        fa
       Label : USE
         \
         Label : SUBNAME
-          D
-        Label : SUBNAME
           B
-      Label : FUNCTION
-        fc
-      Label : FUNCTION
-        fa
+        Label : SUBNAME
+          D
       Label : FUNCTION
         fb
       Label : CONST
         ca
+      Label : FUNCTION
+        fc
       Label : CONST
         cd
     Label : ELEMENT
@@ -32,3 +30,5 @@ Label : CODE
         
         Label : ARGUMENT
           $a
+  Label : NAMESPACE
+    X

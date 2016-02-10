@@ -8,11 +8,11 @@ Label : CODE
       \
       Label : SUBNAME
         A
-    Label : USE
-      \
-      Label : SUBNAME
-        C
       Label : SUBNAME
         B
+      Label : SUBNAME
+        C
+    Label : USE
+      \
       Label : SUBNAME
         A

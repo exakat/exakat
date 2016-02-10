@@ -4,26 +4,26 @@ Label : CODE
   Label : ELEMENT
     ;
     Label : ELEMENT
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
-    Label : ELEMENT
       class
       Label : BLOCK
         ;
         Label : ELEMENT
           use
-          Label : USE
-            C
           Label : BLOCK
             ;
             Label : ELEMENT
               as
-              Label : SUBNAME
-                D
               Label : AS
                 E
+              Label : NAME
+                D
+          Label : USE
+            C
       Label : NAME
         B
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a

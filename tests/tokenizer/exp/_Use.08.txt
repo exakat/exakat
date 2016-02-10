@@ -5,28 +5,32 @@ Label : CODE
   Label : ELEMENT
     use
     Label : USE
-      \
-      Label : SUBNAME
-        A
+      as
       Label : AS
-        F
+        D
+      Label : NAME
+        \
+        Label : SUBNAME
+          A
+        Label : SUBNAME
+          B
+        Label : SUBNAME
+          C
   Label : ELEMENT
     use
     Label : USE
       as
-      Label : SUBNAME
-        A
       Label : AS
         E
+      Label : NAME
+        A
   Label : ELEMENT
     use
     Label : USE
-      \
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        A
+      as
       Label : AS
-        D
+        F
+      Label : NAME
+        \
+        Label : SUBNAME
+          A

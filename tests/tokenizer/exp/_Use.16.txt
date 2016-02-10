@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      complex
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,166 +12,110 @@ Label : CODE
           ;
           Label : ELEMENT
             const
-            Label : NAME
-              a
-            Label : VALUE
-              2
+            Label : CONST
+              =
+              Label : LEFT
+                a
+              Label : RIGHT
+                2
         Label : NAME
-          path
+          one_identifier
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : CONST
+              =
+              Label : LEFT
+                a
+              Label : RIGHT
+                2
+        Label : NAME
+          absolute_path
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : CONST
+              =
+              Label : LEFT
+                a
+              Label : RIGHT
+                2
+        Label : NAME
+          one_identifier3
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : CONST
+              =
+              Label : LEFT
+                a
+              Label : RIGHT
+                2
+        Label : NAME
+          a1
+    Label : NAMESPACE
+      Global
   Label : ELEMENT
     namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : CONST
+              =
+              Label : LEFT
+                a
+              Label : RIGHT
+                2
+        Label : NAME
+          path
+    Label : NAMESPACE
+      complex
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            const
+            Label : CONST
+              =
+              Label : LEFT
+                a
+              Label : RIGHT
+                2
+        Label : NAME
+          path2
     Label : NAMESPACE
       \
       Label : SUBNAME
-        complex
-      Label : SUBNAME
         absolute
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-        Label : NAME
-          path2
+      Label : SUBNAME
+        complex
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
-        function
-        Label : BLOCK
-          void
-        Label : NAME
-          y
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              a4
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              a3
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              a2
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              one_identifier3
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              \
-              Label : SUBNAME
-                a1
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              a1
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              path2
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              path
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              absolute_path
-            Label : VARIABLE
-              $a
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              one_identifier
-            Label : VARIABLE
-              $a
-      Label : ELEMENT
         use
         Label : USE
-          \
-          Label : SUBNAME
-            path32
-          Label : SUBNAME
-            complex
-          Label : SUBNAME
-            absolute
-          Label : AS
-            a4
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path3
-          Label : SUBNAME
-            complex
-          Label : AS
-            a3
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            absolute_path3
-          Label : AS
-            a2
-      Label : ELEMENT
-        use
-        Label : USE
-          as
-          Label : SUBNAME
-            one_identifier3
-          Label : AS
-            a1
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path2
-          Label : SUBNAME
-            complex
-          Label : SUBNAME
-            absolute
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path
-          Label : SUBNAME
-            complex
+          one_identifier
       Label : ELEMENT
         use
         Label : USE
@@ -183,58 +125,134 @@ Label : CODE
       Label : ELEMENT
         use
         Label : USE
-          one_identifier
-  Label : ELEMENT
-    namespace
+          \
+          Label : SUBNAME
+            complex
+          Label : SUBNAME
+            path
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            absolute
+          Label : SUBNAME
+            complex
+          Label : SUBNAME
+            path2
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : AS
+            a1
+          Label : NAME
+            one_identifier3
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : AS
+            a2
+          Label : NAME
+            \
+            Label : SUBNAME
+              absolute_path3
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : AS
+            a3
+          Label : NAME
+            \
+            Label : SUBNAME
+              complex
+            Label : SUBNAME
+              path3
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : AS
+            a4
+          Label : NAME
+            \
+            Label : SUBNAME
+              absolute
+            Label : SUBNAME
+              complex
+            Label : SUBNAME
+              path32
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              one_identifier
+            Label : VARIABLE
+              $a
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              absolute_path
+            Label : VARIABLE
+              $ab
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              path
+            Label : VARIABLE
+              $ac
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              path2
+            Label : VARIABLE
+              $ad
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              a1
+            Label : VARIABLE
+              $ae
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              \
+              Label : SUBNAME
+                a1
+            Label : VARIABLE
+              $af
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              one_identifier3
+            Label : VARIABLE
+              $ag
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              a2
+            Label : VARIABLE
+              $ah
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              a3
+            Label : VARIABLE
+              $ai
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              a4
+            Label : VARIABLE
+              $aj
+        Label : BLOCK
+          void
+        Label : NAME
+          y
     Label : NAMESPACE
-      Global
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-        Label : NAME
-          a1
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-        Label : NAME
-          one_identifier3
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-        Label : NAME
-          absolute_path
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
-        Label : NAME
-          one_identifier
+      x
