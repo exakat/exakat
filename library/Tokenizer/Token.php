@@ -306,7 +306,7 @@ g.V.has('root', true)[0].inE('INDEXED').each{
 };
 
 // clean indexed (if no more index...)
-g.V.has('index', true).filter{it.out().count() == 0}.each{
+g.V.has('index', true).filter{it.out().any() == false}.each{
     g.removeVertex(it);
 };
 
@@ -548,13 +548,13 @@ g.idx('atoms')[['atom':'Functioncall']]
 
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', '\\\\' + s);
+    } else if ( aliases[fullcode.code.toLowerCase()] != null ) {
+        // This function is an alias
+        fullcode.setProperty('fullnspath', aliases[fullcode.code.toLowerCase()]);
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + s);
     } else if ( g.idx('functions')[['path':npath]].any() ) {
         fullcode.setProperty('fullnspath', npath);
-    } else if ( aliases[fullcode.code.toLowerCase()] != null ) {
-        // This function is an alias
-        fullcode.setProperty('fullnspath', aliases[fullcode.code.toLowerCase()]);
     } else {
         // if we don't find it defined, we rely on the global namespace
         fullcode.setProperty('fullnspath', '\\\\' + s);
@@ -670,13 +670,22 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
 
 ", "
 // Constant usage (simple resolution of the namespaces)
-g.idx('atoms')[['atom':'Identifier']].filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').count() == 0}
+g.idx('atoms')[['atom':'Identifier']]
+    .filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
     .filter{it.out('ARGUMENTS').any() == false}
     .filter{it.in('LEFT').in('CONST').any() == false}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
 
+    aliases = [:];
+    it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('CONST').each{
+        aliases[it.alias] = it.fullnspath;
+    }
+
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
+    } else if ( aliases[fullcode.code.toLowerCase()] != null ) {
+        // This function is an alias
+        fullcode.setProperty('fullnspath', aliases[fullcode.code.toLowerCase()]);
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
     } else {
@@ -687,8 +696,9 @@ g.idx('atoms')[['atom':'Identifier']].filter{it.in('USE', 'SUBNAME', 'METHOD', '
 // Constant usage (2)
 g.idx('atoms')[['atom':'Nsname']]
     .filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
-    .filter{it.out('ARGUMENTS').count() == 0}
+    .filter{it.out('ARGUMENTS').any() == false}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
+
         if (fullcode.absolutens == true) {
             if (fullcode.atom == 'Functioncall') {
             // bizarre...  fullcode but with code length ?
