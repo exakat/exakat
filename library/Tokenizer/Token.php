@@ -519,15 +519,11 @@ g.idx('atoms')[['atom':'Interface']].sideEffect{fullcode = it;}.in.loop(1){!(it.
 // also add interfaces and Traits and their respective extensions
 ", "
 
-// case for [1,2,3] : all are \array
-g.idx('atoms')[['atom':'Functioncall']].has('token', 'T_OPEN_BRACKET').each{
-    it.setProperty('fullnspath', '\\\\array');
-};
-
-g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
-                                       .filter{it.in('NEW').any() == false}
-                                       .filter{it.token in ['T_STRING', 'T_NS_SEPARATOR']}
-                                       .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}
+g.idx('atoms')[['atom':'Functioncall']]
+    .filter{it.in('METHOD').any() == false}
+    .filter{it.in('NEW').any() == false}
+    .filter{it.token in ['T_STRING', 'T_NS_SEPARATOR']}
+    .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}
 .each{
     if (fullcode.token == 'T_NS_SEPARATOR') {
         s = [];
@@ -544,18 +540,33 @@ g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
     } else {
         npath = '\\\\' + s;
     }
+    
+    aliases = [:];
+    it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('FUNCTION').each{
+        aliases[it.alias] = it.fullnspath;
+    }
+
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', '\\\\' + s);
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + s);
     } else if ( g.idx('functions')[['path':npath]].any() ) {
         fullcode.setProperty('fullnspath', npath);
+    } else if ( aliases[fullcode.code.toLowerCase()] != null ) {
+        // This function is an alias
+        fullcode.setProperty('fullnspath', aliases[fullcode.code.toLowerCase()]);
     } else {
         // if we don't find it defined, we rely on the global namespace
         fullcode.setProperty('fullnspath', '\\\\' + s);
     }
 };
+
 ", "
+
+// case for [1,2,3] : all are \array
+g.idx('atoms')[['atom':'Functioncall']].has('token', 'T_OPEN_BRACKET').each{
+    it.setProperty('fullnspath', '\\\\array');
+};
 
 // special case for isset, unset, array, etc. Except for static.
 g.idx('atoms')[['atom':'Functioncall']]
@@ -674,7 +685,8 @@ g.idx('atoms')[['atom':'Identifier']].filter{it.in('USE', 'SUBNAME', 'METHOD', '
 };
 ", "
 // Constant usage (2)
-g.idx('atoms')[['atom':'Nsname']].filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
+g.idx('atoms')[['atom':'Nsname']]
+    .filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
     .filter{it.out('ARGUMENTS').count() == 0}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
         if (fullcode.absolutens == true) {
