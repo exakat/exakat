@@ -103,30 +103,15 @@ class _Use extends TokenAuto {
                                );
         $this->checkAuto();
 
-    // use const \a\b;
+    // use const|function \a\b;
         $this->conditions = array(  0 => array('token'        => _Use::$operators,
                                                'checkNextFor' => array('Identifier', 'Nsname', 'As')),
-                                    1 => array('token'        => _Const::$operators),
+                                    1 => array('token'        => array('T_FUNCTION', 'T_CONST')),
                                     2 => array('atom'         => array('Identifier', 'Nsname', 'As')),
                                     3 => array('token'        => array('T_COMMA', 'T_OPEN_CURLY', 'T_SEMICOLON'))
                                  );
         
-        $this->actions = array('makeNextFromList' => 'CONST',
-                               'atom'             => 'Use',
-                               'keepIndexed'      => true,
-                               'cleanIndex'       => true,
-                               );
-        $this->checkAuto();
-
-    // use function \a\b;
-        $this->conditions = array(  0 => array('token'        => _Use::$operators,
-                                               'checkNextFor' => array('Identifier', 'Nsname', 'As')),
-                                    1 => array('token'        => _Function::$operators),
-                                    2 => array('atom'         => array('Identifier', 'Nsname', 'As')),
-                                    3 => array('token'        => array('T_COMMA', 'T_OPEN_CURLY', 'T_SEMICOLON'))
-                                 );
-        
-        $this->actions = array('makeNextFromList' => 'FUNCTION',
+        $this->actions = array('makeNextFromList' => true,
                                'atom'             => 'Use',
                                'keepIndexed'      => true,
                                'cleanIndex'       => true,
@@ -139,27 +124,43 @@ class _Use extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-s = [];
-fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{
-    a = it.getProperty('fullcode');
-    link = it.inE().next().label.toLowerCase();
-    s.add(a);
-};
-
-if (fullcode.out('FUNCTION').any()) {
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " function ");
-    fullcode.setProperty('originpath', fullcode.getProperty('code').toLowerCase());
-} else if (it.out('CONST').any()) {
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " const ");
-    fullcode.setProperty('originpath', fullcode.getProperty('code').toLowerCase());
-} else {
-    // Normal use
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " ");
-}
-
 if (fullcode.groupedUse == true) {
-    fullcode.fullcode = fullcode.fullcode + ' ' + fullcode.groupPath + "{ " + s.join(", ") + " }";
+    if (fullcode.groupedPrefix == null) {
+        s = [];
+        fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{
+            a = it.getProperty('fullcode');
+            link = it.inE().next().label.toLowerCase() + ' ';
+            if (link == 'use ') { link = ''; }
+
+            s.add(link + a);
+        };
+
+        fullcode.fullcode = fullcode.getProperty('code') + ' ' + fullcode.groupPath + "{ " + s.join(", ") + " }";
+    } else {
+        s = [];
+        fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{
+            s.add(it.getProperty('fullcode'));
+        };
+        
+        fullcode.fullcode = fullcode.getProperty('code') + ' ' + fullcode.getProperty('groupedPrefix') + ' ' + fullcode.groupPath + "{ " + s.join(", ") + " }";
+    }
 } else {
+    s = [];
+    fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{
+        s.add(it.getProperty('fullcode'));
+    };
+
+    if (fullcode.out('FUNCTION').any()) {
+        fullcode.setProperty('fullcode', fullcode.getProperty('code') + " function ");
+        fullcode.setProperty('originpath', fullcode.getProperty('code').toLowerCase());
+    } else if (it.out('CONST').any()) {
+        fullcode.setProperty('fullcode', fullcode.getProperty('code') + " const ");
+        fullcode.setProperty('originpath', fullcode.getProperty('code').toLowerCase());
+    } else {
+        // Normal use
+        fullcode.setProperty('fullcode', fullcode.getProperty('code') + " ");
+    }
+
     fullcode.fullcode = fullcode.fullcode + s.join(", ");
 }
 
