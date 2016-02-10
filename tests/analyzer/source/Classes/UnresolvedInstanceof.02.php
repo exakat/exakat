@@ -4,11 +4,11 @@ interface A {}
 class C {}
 interface D {}
 class D {}
-trait E {}
+trait TE {}
 
 $b instanceof A;
 $b instanceof C;
 $b instanceof D;
-$b instanceof E;
+$b instanceof TE;
 
 ?>

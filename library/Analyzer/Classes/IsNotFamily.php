@@ -30,12 +30,12 @@ class IsNotFamily extends Analyzer\Analyzer {
         // Staticmethodcall
         // Inside the class
         $this->atomIs('Class')
-             ->savePropertyAs('classTree', 'classtree')
+             ->savePropertyAs('classTree', 'classTree')
              ->outIs('BLOCK')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->isPropertyNotIn('fullnspath','classtree');
+             ->isPropertyNotIn('fullnspath','classTree');
         $this->prepareQuery();
 
         // All non-in-class calls are OK

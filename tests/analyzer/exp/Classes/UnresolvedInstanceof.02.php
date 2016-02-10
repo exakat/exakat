@@ -1,11 +1,10 @@
 <?php
 
-$expected     = array('$b instanceof E');
+$expected     = array('$b instanceof TE');
 
 $expected_not = array('$b instanceof A',
                       '$b instanceof B',
                       '$b instanceof C',
-                      '$b instanceof D',
-                      '$b instanceof E');
+                      '$b instanceof D');
 
 ?>

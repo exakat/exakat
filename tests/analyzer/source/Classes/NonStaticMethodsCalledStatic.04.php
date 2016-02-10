@@ -25,10 +25,10 @@ class c extends b {
         a::normala();
         z\a::normala();
         z\a::statica();
-        d::normald();
-        d::normala();
+        d::normald();    // d is not in the above class tree
+        d::normala();    // d is not in the above class tree, normala doesn't exist in d
         d::statica();
-        e::normale();
+        e::normale();    // e is not in the current class tree,
         c::normale();
     }
 }

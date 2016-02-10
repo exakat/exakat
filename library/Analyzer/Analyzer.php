@@ -817,10 +817,12 @@ GREMLIN;
             $caseSensitive = '.toLowerCase()';
         }
 
+        // Array, is a list of literal
         if (is_array($name)) {
             $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' in *** )}', $name);
         } else {
-            $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' != *** )}', $name);
+        // String, is a variable name
+            $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' in '.$name.' )}');
         }
     
         return $this;
