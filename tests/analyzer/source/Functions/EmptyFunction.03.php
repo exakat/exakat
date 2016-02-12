@@ -12,7 +12,13 @@ class d extends b {
     public function methodSubSubHeritedFromComposer(){} 
 }
 
-class e extends f {
+class e extends notAComposerClass {
+    public function methodHeritedFromNotComposerClass(){} 
+}
+
+class notAComposerClass {}
+
+class f extends notAnExistingClass {
     public function methodHeritedFromUnknownClass(){} 
 }
 
