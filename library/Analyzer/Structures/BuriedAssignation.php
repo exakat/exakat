@@ -29,6 +29,8 @@ class BuriedAssignation extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Assignation')
              ->hasNoIn('ELEMENT')
+             ->code('=')
+
              // in a While
              ->raw('filter{ it.in("CONDITION", "INIT").any() == false}')
                 // in an assignation
@@ -46,7 +48,7 @@ class BuriedAssignation extends Analyzer\Analyzer {
 
              // in a for
              ->raw('filter{ it.in("INCREMENT", "INIT").any() == false}')
-
+             ->raw('filter{ it.in("ARGUMENT").in("INCREMENT", "INIT", "FINAL").has("atom", "For").any() == false}')
 
              // in an argument (with or without typehint)
              ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
