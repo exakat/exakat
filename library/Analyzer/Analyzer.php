@@ -872,13 +872,17 @@ GREMLIN
     }
 
     public function isGrandParent() {
-        $this->addMethod("filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes')[['path':it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() }");
+        $this->addMethod('filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("EXTENDS")
+                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() }');
 
         return $this;
     }
 
     public function isNotGrandParent() {
-        $this->addMethod("filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes')[['path':it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() == false}");
+        $this->addMethod('filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("EXTENDS")
+                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() == false}');
 
         return $this;
     }
@@ -1284,7 +1288,9 @@ GREMLIN
     }
 
     public function functionDefinition() {
-        $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('functions')[['path':it.fullnspath]].next(); }");
+        $this->addMethod('hasNot("fullnspath", null)
+                         .filter{ g.idx("functions").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("functions")[["path":it.fullnspath]].next(); }');
     
         return $this;
     }
@@ -1326,7 +1332,9 @@ GREMLIN
     }
 
     public function classDefinition() {
-        $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('classes')[['path':it.fullnspath]].next(); }");
+        $this->addMethod('hasNot("fullnspath", null)
+                          .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                          .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }');
     
         return $this;
     }
@@ -1350,7 +1358,9 @@ GREMLIN
     }
 
     public function interfaceDefinition() {
-        $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('interfaces')[['path':it.fullnspath]].next(); }");
+        $this->addMethod('hasNot("fullnspath", null)
+                         .filter{ g.idx("interfaces").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("interfaces")[["path":it.fullnspath]].next(); }');
     
         return $this;
     }
@@ -1374,7 +1384,9 @@ GREMLIN
     }
 
     public function traitDefinition() {
-        $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('traits')[['path':it.fullnspath]].next(); }");
+        $this->addMethod('hasNot("fullnspath", null)
+                         .filter{ g.idx("traits").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("traits")[["path":it.fullnspath]].next(); }');
     
         return $this;
     }
@@ -1470,19 +1482,25 @@ GREMLIN
     }
     
     public function goToExtends() {
-        $this->addMethod('out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
+        $this->addMethod('out("EXTENDS")
+                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
         
         return $this;
     }
 
     public function goToImplements() {
-        $this->addMethod('out("IMPLEMENTS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
+        $this->addMethod('out("IMPLEMENTS")
+                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(3){true}{it.object.atom == "Class"}');
         
         return $this;
     }
 
     public function goToAllParents() {
-        $this->addMethod('out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
+        $this->addMethod('out("EXTENDS")
+                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(3){true}{it.object.atom == "Class"}');
         
         return $this;
     }
@@ -1494,7 +1512,9 @@ GREMLIN
     }
 
     public function goToTraits() {
-        $this->addMethod('as("toTraits").out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE").transform{ g.idx("traits")[["path":it.fullnspath]].next(); }.loop("toTraits"){true}{it.object.atom == "Trait"}');
+        $this->addMethod('as("toTraits").out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE")
+                         .filter{ g.idx("traits").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("traits")[["path":it.fullnspath]].next(); }.loop("toTraits"){true}{it.object.atom == "Trait"}');
         
         return $this;
     }
@@ -1580,7 +1600,9 @@ GREMLIN
                     } else if (it.code.toLowerCase() == "static") {
                         init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next();
                     } else  if (it.code.toLowerCase() == "parent") {
-                        init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next().out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.next();
+                        init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next().out("EXTENDS")
+                                 .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                                 .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.next();
                     } else {
                         init = g.idx("classes")[["path":it.fullnspath]].next();
                     };
@@ -1591,7 +1613,9 @@ GREMLIN
                     } else if (init.out("EXTENDS").any() == false) {
                         found = it;
                     } else {
-                        found = init.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
+                        found = init.out("EXTENDS")
+                            .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                            .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                             .loop(2){ it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any() == false}
                                     { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any()}
                         .next();
