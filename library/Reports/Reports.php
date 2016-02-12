@@ -59,4 +59,21 @@ abstract class Reports {
     public function getCount() {
         return $this->count;
     }
+
+    protected function copyDir($src, $dst) { 
+        $dir = opendir($src); 
+        if (!$dir) { return true; }
+        
+        mkdir($dst, Devoops::FOLDER_PRIVILEGES); 
+        while(false !==  $file = readdir($dir) ) { 
+            if (( $file != '.' ) && ( $file != '..' )) { 
+                if ( is_dir($src . '/' . $file) ) { 
+                    $this->copyDir($src . '/' . $file,$dst . '/' . $file); 
+                } else { 
+                    copy($src . '/' . $file, $dst . '/' . $file); 
+                } 
+            } 
+        } 
+        closedir($dir); 
+    } 
 }

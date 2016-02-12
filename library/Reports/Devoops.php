@@ -286,21 +286,6 @@ HTML;
                                $title).'.html';
     }
 
-    private function copyDir($src, $dst) { 
-        $dir = opendir($src); 
-        mkdir($dst, Devoops::FOLDER_PRIVILEGES); 
-        while(false !==  $file = readdir($dir) ) { 
-            if (( $file != '.' ) && ( $file != '..' )) { 
-                if ( is_dir($src . '/' . $file) ) { 
-                    $this->copyDir($src . '/' . $file,$dst . '/' . $file); 
-                } else { 
-                    copy($src . '/' . $file, $dst . '/' . $file); 
-                } 
-            } 
-        } 
-        closedir($dir); 
-    } 
-    
     protected function loadJson($file) {
         $fullpath = $this->config->dir_root.'/data/'.$file;
 
