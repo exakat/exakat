@@ -40,11 +40,13 @@ Most may easily be installed with the local package manager, or with a direct do
 Install with Vagrant and Ansible
 ################################
 
-* git clone https://github.com/exakat/exakat-vagrant
-* cd exakat-vagrant
-* Review the Vagrant file to check the size of the virtualbox
-* vagrant up --provision
-* vagrant ssh 
+:: 
+
+    git clone https://github.com/exakat/exakat-vagrant
+    cd exakat-vagrant
+    // Review the Vagrant file to check the size of the virtualbox
+    vagrant up --provision
+    vagrant ssh 
 
 You are now ready to run a project. 
 
@@ -244,6 +246,7 @@ Neo4j 2.3.\* or 3.0.0 won't work yet (The gremlin plug-in hasn't been tested suc
 Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` file. To do so, add this line:
 
 ::
+
     org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp
 
 Gremlin plug-in

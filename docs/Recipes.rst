@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 08 Feb 2016 14:59:42 +0000
-.. comment: Generation hash : 28c5f0800c75839207bf165cbd39d6ff2477599c
+.. comment: Generation date : Mon, 15 Feb 2016 13:03:15 +0000
+.. comment: Generation hash : b773761542608cee07c9fc652e3e706d7da01f61
 
 
 .. _analyze:
@@ -62,18 +62,18 @@ Recipes details
 Analyze
 +++++++
 
-Total : 225 analysis
+Total : 226 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
-* :ref:`$this is not an array <$this-is-not-an-array>`
+* :ref:`$this Is Not An Array <$this-is-not-an-array>`
 * :ref:`$this is not for static methods <$this-is-not-for-static-methods>`
 * :ref:`<?= usage <<?=-usage>`
-* :ref:`Abstract static methods <abstract-static-methods>`
-* :ref:`Access protected structures <access-protected-structures>`
+* :ref:`Abstract Static Methods <abstract-static-methods>`
+* :ref:`Access Protected Structures <access-protected-structures>`
 * :ref:`Accessing Private <accessing-private>`
 * :ref:`Adding Zero <adding-zero>`
-* :ref:`Aliases usage <aliases-usage>`
+* :ref:`Aliases Usage <aliases-usage>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
 * :ref:`Ambiguous Index <ambiguous-index>`
 * :ref:`Argument should be typehinted <argument-should-be-typehinted>`
@@ -88,12 +88,13 @@ Total : 225 analysis
 * :ref:`Case After Default <case-after-default>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
-* :ref:`Class, Interface or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
+* :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Close Tags <close-tags>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
 * :ref:`Compared comparison <compared-comparison>`
 * :ref:`Concrete Visibility <concrete-visibility>`
+* :ref:`Confusing Names <confusing-names>`
 * :ref:`Constant Class <constant-class>`
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
@@ -103,7 +104,7 @@ Total : 225 analysis
 * :ref:`Could use self <could-use-self>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
-* :ref:`Deprecated code <deprecated-code>`
+* :ref:`Deprecated Code <deprecated-code>`
 * :ref:`Directive Name <directive-name>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Double Assignation <double-assignation>`
@@ -128,10 +129,10 @@ Total : 225 analysis
 * :ref:`Forgotten Whitespace <forgotten-whitespace>`
 * :ref:`Fully Qualified Constants <fully-qualified-constants>`
 * :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
+* :ref:`Functions In Loop Calls <functions-in-loop-calls>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
-* :ref:`Functions in loop calls <functions-in-loop-calls>`
 * :ref:`Global Usage <global-usage>`
-* :ref:`Hardcoded passwords <hardcoded-passwords>`
+* :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Hash Algorithms <hash-algorithms>`
 * :ref:`Htmlentities Calls <htmlentities-calls>`
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
@@ -139,7 +140,7 @@ Total : 225 analysis
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
-* :ref:`Invalid constant name <invalid-constant-name>`
+* :ref:`Invalid Constant Name <invalid-constant-name>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical should use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
@@ -149,12 +150,12 @@ Total : 225 analysis
 * :ref:`Malformed Octal <malformed-octal>`
 * :ref:`Multiple Class Declarations <multiple-class-declarations>`
 * :ref:`Multiple Constant Definition <multiple-constant-definition>`
-* :ref:`Multiple Definition of the same argument <multiple-definition-of-the-same-argument>`
+* :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`Multiple Index Definition <multiple-index-definition>`
 * :ref:`Multiples Identical Case <multiples-identical-case>`
 * :ref:`Multiply By One <multiply-by-one>`
 * :ref:`Must Return Methods <must-return-methods>`
-* :ref:`Namespace with fully qualified name <namespace-with-fully-qualified-name>`
+* :ref:`Namespace With Fully Qualified Name <namespace-with-fully-qualified-name>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Direct Call To MagicMethod <no-direct-call-to-magicmethod>`
@@ -179,7 +180,7 @@ Total : 225 analysis
 * :ref:`Old Style Constructor <old-style-constructor>`
 * :ref:`Old Style \_\_autoload() <old-style-\_\_autoload()>`
 * :ref:`One Letter Functions <one-letter-functions>`
-* :ref:`One variable String <one-variable-string>`
+* :ref:`One Variable String <one-variable-string>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
 * :ref:`Or Die <or-die>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
@@ -193,7 +194,7 @@ Total : 225 analysis
 * :ref:`Print And Die <print-and-die>`
 * :ref:`Property Could Be Private <property-could-be-private>`
 * :ref:`Property/Variable Confusion <property/variable-confusion>`
-* :ref:`Queries in loops <queries-in-loops>`
+* :ref:`Queries In Loops <queries-in-loops>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
 * :ref:`Redefined Constants <redefined-constants>`
 * :ref:`Redefined Default <redefined-default>`
@@ -224,48 +225,48 @@ Total : 225 analysis
 * :ref:`Undefined Class Constants <undefined-class-constants>`
 * :ref:`Undefined Classes <undefined-classes>`
 * :ref:`Undefined Constants <undefined-constants>`
+* :ref:`Undefined Functions <undefined-functions>`
 * :ref:`Undefined Interfaces <undefined-interfaces>`
+* :ref:`Undefined Parent <undefined-parent>`
 * :ref:`Undefined Properties <undefined-properties>`
-* :ref:`Undefined function <undefined-function>`
-* :ref:`Undefined parent <undefined-parent>`
-* :ref:`Undefined static:: or self:: <undefined-static\:\:-or-self\:\:>`
+* :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
 * :ref:`Unpreprocessed Values <unpreprocessed-values>`
 * :ref:`Unreachable Code <unreachable-code>`
+* :ref:`Unresolved Classes <unresolved-classes>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Unresolved Use <unresolved-use>`
-* :ref:`Unresolved classes <unresolved-classes>`
 * :ref:`Unset In Foreach <unset-in-foreach>`
 * :ref:`Unthrown Exception <unthrown-exception>`
 * :ref:`Unused Arguments <unused-arguments>`
 * :ref:`Unused Classes <unused-classes>`
+* :ref:`Unused Constants <unused-constants>`
+* :ref:`Unused Functions <unused-functions>`
 * :ref:`Unused Global <unused-global>`
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Static Methods <unused-static-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Trait <unused-trait>`
-* :ref:`Unused constants <unused-constants>`
-* :ref:`Unused functions <unused-functions>`
-* :ref:`Unused static methods <unused-static-methods>`
-* :ref:`Unused use <unused-use>`
+* :ref:`Unused Use <unused-use>`
 * :ref:`Use === null <use-===-null>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
+* :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
-* :ref:`Use with fully qualified name <use-with-fully-qualified-name>`
-* :ref:`Used once variables (in scope) <used-once-variables-(in-scope)>`
+* :ref:`Used Once Variables (In Scope) <used-once-variables-(in-scope)>`
 * :ref:`Used once variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
 * :ref:`Useless Brackets <useless-brackets>`
+* :ref:`Useless Constructor <useless-constructor>`
 * :ref:`Useless Final <useless-final>`
 * :ref:`Useless Global <useless-global>`
+* :ref:`Useless Instructions <useless-instructions>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Useless Parenthesis <useless-parenthesis>`
 * :ref:`Useless Unset <useless-unset>`
-* :ref:`Useless constructor <useless-constructor>`
-* :ref:`Useless instructions <useless-instructions>`
 * :ref:`Useless return <useless-return>`
 * :ref:`Uses Default Values <uses-default-values>`
 * :ref:`Var`
@@ -275,7 +276,7 @@ Total : 225 analysis
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
 * :ref:`\_\_toString() Throws Exception <\_\_tostring()-throws-exception>`
-* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`error\_reporting() With Integers <error\_reporting()-with-integers>`
 * :ref:`ext/apc`
 * :ref:`ext/fann`
@@ -286,7 +287,7 @@ Total : 225 analysis
 * :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`include\_once() Usage <include\_once()-usage>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
-* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`var\_dump()... Usage <var\_dump()...-usage>`
 
@@ -297,7 +298,7 @@ CompatibilityPHP53
 
 Total : 48 analysis
 
-* :ref:`... usage <...-usage>`
+* :ref:`... Usage <...-usage>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -311,9 +312,9 @@ Total : 48 analysis
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
 * :ref:`Eval Without Try <eval-without-try>`
-* :ref:`Exponent usage <exponent-usage>`
+* :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
-* :ref:`Function subscripting <function-subscripting>`
+* :ref:`Function Subscripting <function-subscripting>`
 * :ref:`Hash Algorithms incompatible with PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Isset With Constant <isset-with-constant>`
@@ -321,9 +322,9 @@ Total : 48 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Methodcall On New <methodcall-on-new>`
 * :ref:`Mixed Keys <mixed-keys>`
-* :ref:`New functions in PHP 5.4 <new-functions-in-php-5.4>`
-* :ref:`New functions in PHP 5.5 <new-functions-in-php-5.5>`
-* :ref:`New functions in PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`New Functions In PHP 5.4 <new-functions-in-php-5.4>`
+* :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
+* :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
@@ -353,7 +354,7 @@ CompatibilityPHP54
 
 Total : 43 analysis
 
-* :ref:`... usage <...-usage>`
+* :ref:`... Usage <...-usage>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -366,7 +367,7 @@ Total : 43 analysis
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
 * :ref:`Eval Without Try <eval-without-try>`
-* :ref:`Exponent usage <exponent-usage>`
+* :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
@@ -375,8 +376,8 @@ Total : 43 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Mixed Keys <mixed-keys>`
-* :ref:`New functions in PHP 5.5 <new-functions-in-php-5.5>`
-* :ref:`New functions in PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
+* :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
@@ -394,8 +395,8 @@ Total : 43 analysis
 * :ref:`Variable Global <variable-global>`
 * :ref:`\*\* For Exponent <**-for-exponent>`
 * :ref:`\_\_debugInfo()`
-* :ref:`crypt without salt <crypt-without-salt>`
-* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`crypt() Without Salt <crypt()-without-salt>`
+* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
 .. _compatibilityphp55:
 
@@ -404,7 +405,7 @@ CompatibilityPHP55
 
 Total : 42 analysis
 
-* :ref:`... usage <...-usage>`
+* :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -415,7 +416,7 @@ Total : 42 analysis
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Eval Without Try <eval-without-try>`
-* :ref:`Exponent usage <exponent-usage>`
+* :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
@@ -423,7 +424,7 @@ Total : 42 analysis
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Magic Visibility <magic-visibility>`
-* :ref:`New functions in PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
@@ -442,10 +443,10 @@ Total : 42 analysis
 * :ref:`Variable Global <variable-global>`
 * :ref:`\*\* For Exponent <**-for-exponent>`
 * :ref:`\_\_debugInfo()`
-* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/apc`
 * :ref:`ext/mysql`
-* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
 .. _compatibilityphp56:
 
@@ -484,10 +485,10 @@ Total : 34 analysis
 * :ref:`Use password\_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
-* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/apc`
 * :ref:`ext/mysql`
-* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
 .. _compatibilityphp70:
 
@@ -508,7 +509,7 @@ Total : 29 analysis
 * :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`List With Appends <list-with-appends>`
-* :ref:`Multiple Definition of the same argument <multiple-definition-of-the-same-argument>`
+* :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
@@ -518,12 +519,12 @@ Total : 29 analysis
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Use password\_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
-* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
 * :ref:`ext/mysql`
 * :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
-* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 
 .. _compatibilityphp71:
@@ -545,9 +546,9 @@ Total : 35 analysis
 * :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`List With Appends <list-with-appends>`
-* :ref:`Multiple Definition of the same argument <multiple-definition-of-the-same-argument>`
-* :ref:`New functions in PHP 5.4 <new-functions-in-php-5.4>`
-* :ref:`New functions in PHP 5.5 <new-functions-in-php-5.5>`
+* :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
+* :ref:`New Functions In PHP 5.4 <new-functions-in-php-5.4>`
+* :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
@@ -561,12 +562,12 @@ Total : 35 analysis
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Use password\_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
-* :ref:`crypt without salt <crypt-without-salt>`
+* :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
 * :ref:`ext/mysql`
 * :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
-* :ref:`mcrypt\_create\_iv with default values <mcrypt\_create\_iv-with-default-values>`
+* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 
 .. _dead-code:
@@ -585,14 +586,14 @@ Total : 17 analysis
 * :ref:`Unset In Foreach <unset-in-foreach>`
 * :ref:`Unthrown Exception <unthrown-exception>`
 * :ref:`Unused Classes <unused-classes>`
+* :ref:`Unused Constants <unused-constants>`
+* :ref:`Unused Functions <unused-functions>`
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Static Methods <unused-static-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
-* :ref:`Unused constants <unused-constants>`
-* :ref:`Unused functions <unused-functions>`
-* :ref:`Unused static methods <unused-static-methods>`
-* :ref:`Unused use <unused-use>`
+* :ref:`Unused Use <unused-use>`
 
 .. _performances:
 
@@ -606,7 +607,7 @@ Total : 13 analysis
 * :ref:`Echo With Concatenation <echo-with-concatenation>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
-* :ref:`Functions in loop calls <functions-in-loop-calls>`
+* :ref:`Functions In Loop Calls <functions-in-loop-calls>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
 * :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`

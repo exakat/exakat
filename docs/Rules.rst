@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 08 Feb 2016 14:59:42 +0000
-.. comment: Generation hash : 28c5f0800c75839207bf165cbd39d6ff2477599c
+.. comment: Generation date : Mon, 15 Feb 2016 13:03:15 +0000
+.. comment: Generation hash : b773761542608cee07c9fc652e3e706d7da01f61
 
 
 .. _$http\_raw\_post\_data:
@@ -50,7 +50,7 @@ $this variable represents an object (the current object) and it should be used w
 
 .. _$this-is-not-an-array:
 
-$this is not an array
+$this Is Not An Array
 #####################
 
 
@@ -115,7 +115,7 @@ If the code needs to be backward compatible to 5.5 or less, don't use the new op
 
 .. _...-usage:
 
-... usage
+... Usage
 #########
 
 
@@ -171,7 +171,7 @@ Usage of the <?= tag, that echo's directly the following content.
 
 .. _abstract-static-methods:
 
-Abstract static methods
+Abstract Static Methods
 #######################
 
 
@@ -191,7 +191,7 @@ A child class is able to declare a method with the same name than a static metho
 
 .. _access-protected-structures:
 
-Access protected structures
+Access Protected Structures
 ###########################
 
 
@@ -265,7 +265,7 @@ In (0 - $x) structures, 0 may be omitted.
 
 .. _aliases-usage:
 
-Aliases usage
+Aliases Usage
 #############
 
 
@@ -641,7 +641,7 @@ Constant defined with const keyword may be arrays but only stating with PHP 5.6.
 
 .. _class,-interface-or-trait-with-identical-names:
 
-Class, Interface or Trait With Identical Names
+Class, Interface Or Trait With Identical Names
 ##############################################
 
 
@@ -787,6 +787,26 @@ Methods that implements an interface in a class must be public.
 +--------------+-------------------------------+
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
+
+
+
+.. _confusing-names:
+
+Confusing Names
+###############
+
+
+The following variables's name are very close and may lead to confusion.  
+
+Variables are 3 letters long (at least). Variables names build with an extra 's' are omitted.
+
++--------------+-----------------------+
+| Command Line | Variables/CloseNaming |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
 
 
 
@@ -1063,7 +1083,7 @@ PHP 7.0 has the ability to define an array as a constant, using the define() nat
 
 .. _deprecated-code:
 
-Deprecated code
+Deprecated Code
 ###############
 
 
@@ -1498,7 +1518,7 @@ Try exiting the function/class, or throw exception that may be caught later in t
 
 .. _exponent-usage:
 
-Exponent usage
+Exponent Usage
 ##############
 
 
@@ -1729,6 +1749,26 @@ Also, the namespace will be absolute, and not a relative namespace of the curren
 
 
 
+.. _function-subscripting:
+
+Function Subscripting
+#####################
+
+
+This is a new PHP 5.4 feature, where one may use the result of a method directly as an array, given that the method actually returns an array. 
+
+This was not possible until PHP 5.4. Is used to be necessary to put the result in a variable, and then access the desired index.
+
++--------------+---------------------------------+
+| Command Line | Structures/FunctionSubscripting |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`       |
++--------------+---------------------------------+
+
+
+
 .. _function-subscripting,-old-style:
 
 Function Subscripting, Old Style
@@ -1754,23 +1794,25 @@ $x = $tmp[1];
 
 
 
-.. _function-subscripting:
+.. _functions-in-loop-calls:
 
-Function subscripting
-#####################
+Functions In Loop Calls
+#######################
 
 
-This is a new PHP 5.4 feature, where one may use the result of a method directly as an array, given that the method actually returns an array. 
+The following functions call each-other in a loop fashion : A -> B -> A.
 
-This was not possible until PHP 5.4. Is used to be necessary to put the result in a variable, and then access the desired index.
+When those functions have no other interaction, the code is useless and should be dropped.
 
-+--------------+---------------------------------+
-| Command Line | Structures/FunctionSubscripting |
-+--------------+---------------------------------+
-| clearPHP     |                                 |
-+--------------+---------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`       |
-+--------------+---------------------------------+
+Loops of size 2, 3 and 4 are supported.
+
++--------------+-------------------------------------+
+| Command Line | Functions/LoopCalling               |
++--------------+-------------------------------------+
+| clearPHP     |                                     |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
 
 
 
@@ -1807,28 +1849,6 @@ Those functions were removed in PHP 5.5.
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------------------------------------------------------------+
-
-
-
-.. _functions-in-loop-calls:
-
-Functions in loop calls
-#######################
-
-
-The following functions call each-other in a loop fashion : A -> B -> A.
-
-When those functions have no other interaction, the code is useless and should be dropped.
-
-Loops of size 2, 3 and 4 are supported.
-
-+--------------+-------------------------------------+
-| Command Line | Functions/LoopCalling               |
-+--------------+-------------------------------------+
-| clearPHP     |                                     |
-+--------------+-------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
-+--------------+-------------------------------------+
 
 
 
@@ -1872,7 +1892,7 @@ It is recommended to avoid using global variables, at it makes it very difficult
 
 .. _hardcoded-passwords:
 
-Hardcoded passwords
+Hardcoded Passwords
 ###################
 
 
@@ -2084,7 +2104,7 @@ Those code will raise a PHP fatal error at execution time : 'Cannot instantiate 
 
 .. _invalid-constant-name:
 
-Invalid constant name
+Invalid Constant Name
 #####################
 
 
@@ -2379,7 +2399,7 @@ Some constants are defined several times in your code. This will lead to a fatal
 
 .. _multiple-definition-of-the-same-argument:
 
-Multiple Definition of the same argument
+Multiple Definition Of The Same Argument
 ########################################
 
 
@@ -2482,7 +2502,7 @@ Those methods are expected to return a value that will be used later. Without re
 
 .. _namespace-with-fully-qualified-name:
 
-Namespace with fully qualified name
+Namespace With Fully Qualified Name
 ###################################
 
 
@@ -2542,7 +2562,7 @@ Properties that are never used. They are defined, but never actually used.
 
 .. _new-functions-in-php-5.4:
 
-New functions in PHP 5.4
+New Functions In PHP 5.4
 ########################
 
 
@@ -2560,7 +2580,7 @@ PHP introduced new functions in PHP 5.4. If you have already defined functions w
 
 .. _new-functions-in-php-5.5:
 
-New functions in PHP 5.5
+New Functions In PHP 5.5
 ########################
 
 
@@ -2578,7 +2598,7 @@ PHP introduced new functions in PHP 5.5. If you have already defined functions w
 
 .. _new-functions-in-php-5.6:
 
-New functions in PHP 5.6
+New Functions In PHP 5.6
 ########################
 
 
@@ -3122,7 +3142,7 @@ One letter functions seems to be really short for a meaningful name. This may ha
 
 .. _one-variable-string:
 
-One variable String
+One Variable String
 ###################
 
 
@@ -3614,7 +3634,7 @@ Sometimes, when the property is going to be replaced by the incoming argument, o
 
 .. _queries-in-loops:
 
-Queries in loops
+Queries In Loops
 ################
 
 
@@ -4461,6 +4481,24 @@ It is recommended to define them all, or to avoid using them.
 
 
 
+.. _undefined-functions:
+
+Undefined Functions
+###################
+
+
+Those functions rae not defined in the code. This means that the functions are probably defined in a missing library, or in an extension. If not, this will yield a Fatal error at execution.
+
++--------------+------------------------------+
+| Command Line | Functions/UndefinedFunctions |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
+
 .. _undefined-interfaces:
 
 Undefined Interfaces
@@ -4476,6 +4514,29 @@ Typehint or instanceof that are relying on undefined interfaces (or classes) : t
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
+
+
+
+.. _undefined-parent:
+
+Undefined Parent
+################
+
+
+List of properties and methods that are accessed using 'parent' keyword but are not defined in the parent class. 
+
+This will be compilable but will yield a fatal error during execution.
+
+Note that if the parent is defined (extends someClass) but someClass is not available in the tested code (it may be in composer,
+another dependency, or just not there) it will not be reported.
+
++--------------+---------------------------+
+| Command Line | Classes/UndefinedParentMP |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
 
 
 
@@ -4497,50 +4558,9 @@ List of properties that are not explicitely defined in the class, its parents or
 
 
 
-.. _undefined-function:
-
-Undefined function
-##################
-
-
-This function is not defined in the code. This means that the function is probably defined in a missing library, or in an extension. If not, this will yield a Fatal error at execution.
-
-+--------------+------------------------------+
-| Command Line | Functions/UndefinedFunctions |
-+--------------+------------------------------+
-| clearPHP     |                              |
-+--------------+------------------------------+
-| Analyzers    | :ref:`Analyze`               |
-+--------------+------------------------------+
-
-
-
-.. _undefined-parent:
-
-Undefined parent
-################
-
-
-List of properties and methods that are accessed using 'parent' keyword but are not defined in the parent class. 
-
-This will be compilable but will yield a fatal error during execution.
-
-Note that if the parent is defined (extends someClass) but someClass is not available in the tested code (it may be in composer,
-another dependency, or just not there) it will not be reported.
-
-+--------------+---------------------------+
-| Command Line | Classes/UndefinedParentMP |
-+--------------+---------------------------+
-| clearPHP     |                           |
-+--------------+---------------------------+
-| Analyzers    | :ref:`Analyze`            |
-+--------------+---------------------------+
-
-
-
 .. _undefined-static\:\:-or-self\:\::
 
-Undefined static:: or self::
+Undefined static:: Or self::
 ############################
 
 
@@ -4675,6 +4695,26 @@ Or, the expected class is not even an Exception : that is not needed for catchin
 
 
 
+.. _unresolved-classes:
+
+Unresolved Classes
+##################
+
+
+The following classes are instantiated in the code, but their definition couldn't be found. 
+
+Check for namespaces and aliases and make sure they are correctly configured.
+
++--------------+---------------------------+
+| Command Line | Classes/UnresolvedClasses |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
+
+
 .. _unresolved-instanceof:
 
 Unresolved Instanceof
@@ -4710,26 +4750,6 @@ The following use instructions cannot be resolved to a class or a namespace. The
 +--------------+---------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
-
-
-
-.. _unresolved-classes:
-
-Unresolved classes
-##################
-
-
-The following classes are instantiated in the code, but their definition couldn't be found. 
-
-Check for namespaces and aliases and make sure they are correctly configured.
-
-+--------------+---------------------------+
-| Command Line | Classes/UnresolvedClasses |
-+--------------+---------------------------+
-| clearPHP     |                           |
-+--------------+---------------------------+
-| Analyzers    | :ref:`Analyze`            |
-+--------------+---------------------------+
 
 
 
@@ -4800,6 +4820,44 @@ Also, this analyzer may find classes that are, in fact, dynamically loaded.
 
 +--------------+----------------------------------------------+
 | Command Line | Classes/UnusedClass                          |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
+
+
+.. _unused-constants:
+
+Unused Constants
+################
+
+
+Those constants are defined in the code but never used. Defining unused constants will slow down the application, has they are executed and stored in PHP hashtables. 
+
+It is recommended to comment them out, and only define them when it is necessary.
+
++--------------+----------------------------------------------+
+| Command Line | Constants/UnusedConstants                    |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
+
+
+.. _unused-functions:
+
+Unused Functions
+################
+
+
+The functions below are unused. They look like deadcode.
+
++--------------+----------------------------------------------+
+| Command Line | Functions/UnusedFunctions                    |
 +--------------+----------------------------------------------+
 | clearPHP     |                                              |
 +--------------+----------------------------------------------+
@@ -4890,6 +4948,24 @@ The following methods are never called as methods. They are probably dead code.
 
 
 
+.. _unused-static-methods:
+
+Unused Static Methods
+#####################
+
+
+List of all static methods that are not used. This looks like dead code.
+
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedPrivateMethod                  |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
+
+
 .. _unused-static-properties:
 
 Unused Static Properties
@@ -4926,65 +5002,9 @@ Those traits were not found in a class.
 
 
 
-.. _unused-constants:
-
-Unused constants
-################
-
-
-Those constants are defined in the code but never used. Defining unused constants will slow down the application, has they are executed and stored in PHP hashtables. 
-
-It is recommended to comment them out, and only define them when it is necessary.
-
-+--------------+----------------------------------------------+
-| Command Line | Constants/UnusedConstants                    |
-+--------------+----------------------------------------------+
-| clearPHP     |                                              |
-+--------------+----------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
-
-
-
-.. _unused-functions:
-
-Unused functions
-################
-
-
-The functions below are unused. They look like deadcode.
-
-+--------------+----------------------------------------------+
-| Command Line | Functions/UnusedFunctions                    |
-+--------------+----------------------------------------------+
-| clearPHP     |                                              |
-+--------------+----------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
-
-
-
-.. _unused-static-methods:
-
-Unused static methods
-#####################
-
-
-List of all static methods that are not used. This looks like dead code.
-
-+--------------+----------------------------------------------+
-| Command Line | Classes/UnusedPrivateMethod                  |
-+--------------+----------------------------------------------+
-| clearPHP     |                                              |
-+--------------+----------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
-
-
-
 .. _unused-use:
 
-Unused use
+Unused Use
 ##########
 
 
@@ -5112,6 +5132,24 @@ If you're using path with UTF-8 characters, pathinfo will strip them. There, you
 
 
 
+.. _use-with-fully-qualified-name:
+
+Use With Fully Qualified Name
+#############################
+
+
+PHP manual recommends not to use fully qualified name (starting with \) when using the 'use' statement : they are "the leading backslash is unnecessary and not recommended, as import names must be fully qualified, and are not processed relative to the current namespace".
+
++--------------+------------------------------------+
+| Command Line | Namespaces/UseWithFullyQualifiedNS |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
+
+
 .. _use-const:
 
 Use const
@@ -5175,21 +5213,21 @@ PHP 5.5 introduced password\_hash() and password\_check() to replace the use of 
 
 
 
-.. _use-with-fully-qualified-name:
+.. _used-once-variables-(in-scope):
 
-Use with fully qualified name
-#############################
+Used Once Variables (In Scope)
+##############################
 
 
-PHP manual recommends not to use fully qualified name (starting with \) when using the 'use' statement : they are "the leading backslash is unnecessary and not recommended, as import names must be fully qualified, and are not processed relative to the current namespace".
+This is the list of used once variables, broken down by scope. Those variables are used once in a function, a method, a class or a namespace. In any case, this means the variable is read or written, while it should be used at least twice.
 
-+--------------+------------------------------------+
-| Command Line | Namespaces/UseWithFullyQualifiedNS |
-+--------------+------------------------------------+
-| clearPHP     |                                    |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/VariableUsedOnceByContext                                                                   |
++--------------+-------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unused-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-arguments.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                        |
++--------------+-------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5219,24 +5257,6 @@ The current analyzer count variables at the application level, and not at a meth
 +--------------+----------------------------+
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
-
-
-
-.. _used-once-variables-(in-scope):
-
-Used once variables (in scope)
-##############################
-
-
-This is the list of used once variables, broken down by scope. Those variable are used once in a function, a method, a class or a namespace. In any case, this means the variable is used only once, while it should be used at least twice.
-
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Command Line | Variables/VariableUsedOnceByContext                                                                   |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| clearPHP     | `no-unused-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-arguments.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                        |
-+--------------+-------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5270,6 +5290,24 @@ You may remove those brackets, they have no use here. It may be a left over of a
 
 +--------------+----------------------------+
 | Command Line | Structures/UselessBrackets |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
+
+
+.. _useless-constructor:
+
+Useless Constructor
+###################
+
+
+Class constructor that have empty bodies are useless. They may be removed.
+
++--------------+----------------------------+
+| Command Line | Classes/UselessConstructor |
 +--------------+----------------------------+
 | clearPHP     |                            |
 +--------------+----------------------------+
@@ -5315,6 +5353,26 @@ Simply avoid using 'global $\_POST'.
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
+
+
+
+.. _useless-instructions:
+
+Useless Instructions
+####################
+
+
+The instructions below are useless. For example, running '&lt;?php 1 + 1; ?&gt;' will do nothing, as the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
+
+The first level of the spotted instructions may be removed safely. For example, the analyzer will spot : '1 + $a++'; as a useless instruction. The addition is useless, but the plusplus is not.
+
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/UselessInstruction                                                                               |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-useless-instruction <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-instruction.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                              |
++--------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5398,44 +5456,6 @@ Unsetting variables may not be applicable with a certain type of variables. This
 +--------------+-------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                  |
 +--------------+-------------------------------------------------------------------------------------------------+
-
-
-
-.. _useless-constructor:
-
-Useless constructor
-###################
-
-
-Class constructor that have empty bodies are useless. They may be removed.
-
-+--------------+----------------------------+
-| Command Line | Classes/UselessConstructor |
-+--------------+----------------------------+
-| clearPHP     |                            |
-+--------------+----------------------------+
-| Analyzers    | :ref:`Analyze`             |
-+--------------+----------------------------+
-
-
-
-.. _useless-instructions:
-
-Useless instructions
-####################
-
-
-The instructions below are useless. For example, running '&lt;?php 1 + 1; ?&gt;' will do nothing, as the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
-
-The first level of the spotted instructions may be removed safely. For example, the analyzer will spot : '1 + $a++'; as a useless instruction. The addition is useless, but the plusplus is not.
-
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/UselessInstruction                                                                               |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| clearPHP     | `no-useless-instruction <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-instruction.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5693,10 +5713,10 @@ Magical method \_\_toString() can't throw exceptions, according to the world.
 
 
 
-.. _crypt-without-salt:
+.. _crypt()-without-salt:
 
-crypt without salt
-##################
+crypt() Without Salt
+####################
 
 
 PHP 5.6 and later require a salt, while previous versions didn't require it. Salt is a simple string, that is usually only known by the application.
@@ -5974,10 +5994,10 @@ $b will be 3, and the 2 value will be omitted. This is cleaner, and save some me
 
 
 
-.. _mcrypt\_create\_iv-with-default-values:
+.. _mcrypt\_create\_iv()-with-default-values:
 
-mcrypt\_create\_iv with default values
-######################################
+mcrypt\_create\_iv() With Default Values
+########################################
 
 
 mcrypt\_create\_iv used to have MCRYPT\_DEV\_RANDOM as default values, and in PHP 5.6, it now uses MCRYPT\_DEV\_URANDOM.
