@@ -180,7 +180,7 @@ fullcode.out('USE').has('atom', 'As').each{
     it.setProperty('originalias', it.out('AS').next().code);
 
     it.setProperty('originpath', it.out('NAME').next().fullcode.toLowerCase());
-    it.setProperty('originclass', it.out('AS').next().fullcode.toLowerCase());
+    it.setProperty('originclass', it.sideEffect{last = it.out('NAME').count() - 1}.out('NAME').filter{ it.rank == last}.next().fullcode);
 }
 
 // use b\c\a; (aka a)
