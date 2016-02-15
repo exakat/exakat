@@ -45,7 +45,7 @@ class Doctor extends Tasks {
             $doctor .= "\n";
         }
         
-        return $doctor;
+        print $doctor;
     }
 
     private function checkPreRequisite($config) {
