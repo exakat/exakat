@@ -82,7 +82,7 @@ class Files extends Tasks {
         }
 
         // Finding files
-        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
+        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code -not -path \'*/\.*\' \\( ! -name "*.*" -o -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -exec grep -l \'<?\' {} \;  ';
 
         display('Finding ignored files');
         // Ignored files
