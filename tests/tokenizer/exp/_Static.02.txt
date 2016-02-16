@@ -4,27 +4,27 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT
         static
         Label : DEFINE
-          $h
-        Label : DEFINE
-          $i
+          $b
         Label : DEFINE
           $c
         Label : DEFINE
-          $b
-        Label : DEFINE
-          $g
-        Label : DEFINE
-          $f
+          $d
         Label : DEFINE
           $e
         Label : DEFINE
-          $d
+          $f
+        Label : DEFINE
+          $g
+        Label : DEFINE
+          $h
+        Label : DEFINE
+          $i
         Label : STATIC
           static
+    Label : NAME
+      a

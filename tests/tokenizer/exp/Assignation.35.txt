@@ -12,22 +12,46 @@ Label : CODE
           
           Label : ARGUMENT
             [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $b
-                Label : INDEX
-                  'B'
-              Label : INDEX
-                'C'
             Label : INDEX
               'D'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'C'
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  'B'
+                Label : VARIABLE
+                  $b
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          list
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'F'
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  E
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'H'
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  E
         Label : RIGHT
           I
           Label : ARGUMENTS
@@ -36,39 +60,15 @@ Label : CODE
               'J'
             Label : ARGUMENT
               [
-              Label : VARIABLE
-                [
-                Label : VARIABLE
-                  [
-                  Label : VARIABLE
-                    $b
-                  Label : INDEX
-                    'B'
-                Label : INDEX
-                  'C'
               Label : INDEX
                 'D'
-        Label : LEFT
-          list
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              [
               Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  E
-              Label : INDEX
-                'H'
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  E
-              Label : INDEX
-                'F'
+                [
+                Label : INDEX
+                  'C'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'B'
+                  Label : VARIABLE
+                    $b

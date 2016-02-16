@@ -4,14 +4,60 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $a
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           ;
+          Label : ELEMENT
+            switch
+            Label : CASES
+              Sequence Case Default
+              Label : ELEMENT
+                case
+                Label : CASE
+                  'd'
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    =
+                    Label : LEFT
+                      $e
+                    Label : RIGHT
+                      ""
+                  Label : ELEMENT
+                    break
+                    Label : LEVEL
+                      void
+              Label : ELEMENT
+                default
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    =
+                    Label : LEFT
+                      $f
+                    Label : RIGHT
+                      ::
+                      Label : CLASS
+                        G
+                      Label : METHOD
+                        h
+                        Label : ARGUMENTS
+                          Arguments
+                          Label : ARGUMENT
+                            $i
+                          Label : ARGUMENT
+                            $j
+                  Label : ELEMENT
+                    break
+                    Label : LEVEL
+                      void
+            Label : NAME
+              $c
           Label : ELEMENT
             ++
             Label : PREPLUSPLUS
@@ -20,51 +66,5 @@ Label : CODE
             break
             Label : LEVEL
               void
-          Label : ELEMENT
-            switch
-            Label : NAME
-              $c
-            Label : CASES
-              Sequence Case Default
-              Label : ELEMENT
-                default
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    break
-                    Label : LEVEL
-                      void
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      ::
-                      Label : METHOD
-                        h
-                        Label : ARGUMENTS
-                          Arguments
-                          Label : ARGUMENT
-                            $j
-                          Label : ARGUMENT
-                            $i
-                      Label : CLASS
-                        G
-                    Label : LEFT
-                      $f
-              Label : ELEMENT
-                case
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    break
-                    Label : LEVEL
-                      void
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      ""
-                    Label : LEFT
-                      $e
-                Label : CASE
-                  'd'
-        Label : CASE
-          'b'
+    Label : NAME
+      $a

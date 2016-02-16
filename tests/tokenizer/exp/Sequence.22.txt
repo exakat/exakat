@@ -3,16 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    require_once
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        b
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'c'
-  Label : ELEMENT
     if
     Label : CONDITION
       1
@@ -22,3 +12,13 @@ Label : CODE
         return
         Label : RETURN
           true
+  Label : ELEMENT
+    require_once
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        b
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'c'

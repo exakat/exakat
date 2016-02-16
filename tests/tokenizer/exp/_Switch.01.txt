@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $x
     Label : CASES
       void
+    Label : NAME
+      $x

@@ -1,90 +1,92 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    !
-    Label : NOT
-      $index
-  Label : THEN
-    ;
-    Label : ELEMENT
-      while
-      Label : CONDITION
-        =
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $this
-          Label : METHOD
-            fetch
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $fetchMode
-        Label : LEFT
-          $row
-      Label : BLOCK
-        ;
-        Label : ELEMENT
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      !
+      Label : NOT
+        $index
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        while
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              !
+              Label : NOT
+                isset
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      $index
+                    Label : VARIABLE
+                      $row
+            Label : THEN
+              ;
+              Label : ELEMENT
+                continue
+                Label : LEVEL
+                  void
+          Label : ELEMENT
+            =
+            Label : LEFT
+              [
+              Label : INDEX
+                [
+                Label : INDEX
+                  $index
+                Label : VARIABLE
+                  $row
+              Label : VARIABLE
+                $result
+            Label : RIGHT
+              $row
+        Label : CONDITION
           =
-          Label : RIGHT
-            $row
           Label : LEFT
-            [
-            Label : VARIABLE
-              $result
-  Label : ELSE
-    Block with else
-    Label : ELEMENT
-      while
-      Label : CONDITION
-        =
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $this
-          Label : METHOD
-            fetch
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $fetchMode
-        Label : LEFT
-          $row
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
             $row
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $result
-            Label : INDEX
+          Label : RIGHT
+            ->
+            Label : METHOD
+              fetch
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $fetchMode
+            Label : OBJECT
+              $this
+    Label : THEN
+      ;
+      Label : ELEMENT
+        while
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
               [
               Label : VARIABLE
-                $row
-              Label : INDEX
-                $index
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            !
-            Label : NOT
-              isset
+                $result
+            Label : RIGHT
+              $row
+        Label : CONDITION
+          =
+          Label : LEFT
+            $row
+          Label : RIGHT
+            ->
+            Label : METHOD
+              fetch
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $row
-                  Label : INDEX
-                    $index
-          Label : THEN
-            ;
-            Label : ELEMENT
-              continue
-              Label : LEVEL
-                void
+                  $fetchMode
+            Label : OBJECT
+              $this

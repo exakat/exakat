@@ -4,14 +4,52 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $b
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'a'
         Label : CODE
           ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $count
+            Label : RIGHT
+              0
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $indexed
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $associative
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+          Label : ELEMENT
+            foreach
+            Label : BLOCK
+              void
+            Label : SOURCE
+              $data
+            Label : VALUE
+              =>
+              Label : KEY
+                $key
+              Label : VALUE
+                $value
           Label : ELEMENT
             if
             Label : CONDITION
@@ -22,46 +60,6 @@ Label : CODE
                 ++
                 Label : POSTPLUSPLUS
                   $d
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-            Label : LEFT
-              $indexed
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-            Label : LEFT
-              $associative
-          Label : ELEMENT
-            foreach
-            Label : VALUE
-              =>
-              Label : KEY
-                $key
-              Label : VALUE
-                $value
-            Label : BLOCK
-              void
-            Label : SOURCE
-              $data
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              0
-            Label : LEFT
-              $count
-        Label : CASE
-          'a'
       Label : ELEMENT
         default
         Label : CODE
@@ -70,3 +68,5 @@ Label : CODE
             return
             Label : RETURN
               'e'
+    Label : NAME
+      $b

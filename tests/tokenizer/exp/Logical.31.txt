@@ -4,29 +4,29 @@ Label : CODE
   ;
   Label : ELEMENT
     &&
-    Label : RIGHT
-      d
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $e
-          Label : INDEX
-            'f'
     Label : LEFT
       ::
-      Label : METHOD
-        a
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              'c'
       Label : CLASS
         $
         Label : NAME
           x
+      Label : METHOD
+        a
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'c'
+            Label : VARIABLE
+              $b
+    Label : RIGHT
+      d
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          [
+          Label : INDEX
+            'f'
+          Label : VARIABLE
+            $e

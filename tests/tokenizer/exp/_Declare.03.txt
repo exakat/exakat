@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  declare
-  Label : TICKS
-    =
-    Label : RIGHT
-      'ISO-8859-1'
-    Label : LEFT
-      encoding
+  ;
+  Label : ELEMENT
+    declare
+    Label : TICKS
+      =
+      Label : LEFT
+        encoding
+      Label : RIGHT
+        'ISO-8859-1'

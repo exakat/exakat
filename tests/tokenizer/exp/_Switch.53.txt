@@ -3,10 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    return
-    Label : RETURN
-      AU
-  Label : ELEMENT
     if
     Label : CONDITION
       !
@@ -16,18 +12,20 @@ Label : CODE
           
           Label : ARGUMENT
             [
-            Label : VARIABLE
-              ::
-              Label : PROPERTY
-                $b
-              Label : CLASS
-                B
             Label : INDEX
               'C'
+            Label : VARIABLE
+              ::
+              Label : CLASS
+                B
+              Label : PROPERTY
+                $b
     Label : THEN
       ;
       Label : ELEMENT
         &&
+        Label : LEFT
+          D
         Label : RIGHT
           ::
           Label : CLASS
@@ -37,43 +35,47 @@ Label : CODE
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                'K'
-              Label : ARGUMENT
                 Concatenation
+                Label : CONCAT
+                  'G'
                 Label : CONCAT
                   H
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
                       ::
-                      Label : PROPERTY
-                        $b
                       Label : CLASS
                         B
+                      Label : PROPERTY
+                        $b
                     Label : ARGUMENT
                       J
-                Label : CONCAT
-                  'G'
-        Label : LEFT
-          D
+              Label : ARGUMENT
+                'K'
       Label : ELEMENT
         switch
-        Label : NAME
-          [
-          Label : VARIABLE
-            ::
-            Label : PROPERTY
-              $b
-            Label : CLASS
-              B
-          Label : INDEX
-            'C'
         Label : CASES
           Sequence Case Default
           Label : ELEMENT
             case
+            Label : CASE
+              'N'
             Label : CODE
-              Block with Sequence For Case Without Semicolon
+              ;
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $c
+                Label : RIGHT
+                  O
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'P'
+                    Label : ARGUMENT
+                      $d
+                    Label : ARGUMENT
+                      1
               Label : ELEMENT
                 if
                 Label : CONDITION
@@ -84,10 +86,10 @@ Label : CODE
                       
                       Label : ARGUMENT
                         [
-                        Label : VARIABLE
-                          $c
                         Label : INDEX
                           2
+                        Label : VARIABLE
+                          $c
                 Label : THEN
                   ;
                   Label : ELEMENT
@@ -100,10 +102,10 @@ Label : CODE
                         
                         Label : ARGUMENT
                           [
-                          Label : VARIABLE
-                            $c
                           Label : INDEX
                             2
+                          Label : VARIABLE
+                            $c
               Label : ELEMENT
                 return
                 Label : RETURN
@@ -126,24 +128,22 @@ Label : CODE
                           Arguments
                           Label : ARGUMENT
                             [
-                            Label : VARIABLE
-                              ::
-                              Label : PROPERTY
-                                $b
-                              Label : CLASS
-                                B
                             Label : INDEX
                               'N'
+                            Label : VARIABLE
+                              ::
+                              Label : CLASS
+                                B
+                              Label : PROPERTY
+                                $b
                           Label : ARGUMENT
                             ?
                             Label : CONDITION
                               [
-                              Label : VARIABLE
-                                $c
                               Label : INDEX
                                 3
-                            Label : THEN
-                              :
+                              Label : VARIABLE
+                                $c
                             Label : ELSE
                               ::
                               Label : CLASS
@@ -154,6 +154,8 @@ Label : CODE
                                   
                                   Label : ARGUMENT
                                     'Z'
+                            Label : THEN
+                              :
                     Label : ARGUMENT
                       =>
                       Label : KEY
@@ -164,62 +166,14 @@ Label : CODE
                           ,
                           Label : ARGUMENT
                             void
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  O
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      'P'
-                    Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      1
-                Label : LEFT
-                  $c
-            Label : CASE
-              'N'
           Label : ELEMENT
             default
             Label : CODE
-              Block with Sequence For Default Without Semicolon
+              ;
               Label : ELEMENT
                 =
-                Label : RIGHT
-                  ?
-                  Label : CONDITION
-                    !
-                    Label : NOT
-                      empty
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          [
-                          Label : VARIABLE
-                            $c
-                          Label : INDEX
-                            2
-                  Label : THEN
-                    [
-                    Label : VARIABLE
-                      $c
-                    Label : INDEX
-                      2
-                  Label : ELSE
-                    ::
-                    Label : CLASS
-                      X
-                    Label : METHOD
-                      Y
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          'Z'
                 Label : LEFT
-                  $f
-              Label : ELEMENT
-                =
+                  $c
                 Label : RIGHT
                   O
                   Label : ARGUMENTS
@@ -230,10 +184,10 @@ Label : CODE
                       $d
                     Label : ARGUMENT
                       4
-                Label : LEFT
-                  $c
               Label : ELEMENT
                 =
+                Label : LEFT
+                  $e
                 Label : RIGHT
                   ?
                   Label : CONDITION
@@ -244,16 +198,10 @@ Label : CODE
                         
                         Label : ARGUMENT
                           [
-                          Label : VARIABLE
-                            $c
                           Label : INDEX
                             3
-                  Label : THEN
-                    [
-                    Label : VARIABLE
-                      $c
-                    Label : INDEX
-                      3
+                          Label : VARIABLE
+                            $c
                   Label : ELSE
                     ::
                     Label : CLASS
@@ -264,8 +212,76 @@ Label : CODE
                         
                         Label : ARGUMENT
                           'AG'
+                  Label : THEN
+                    [
+                    Label : INDEX
+                      3
+                    Label : VARIABLE
+                      $c
+              Label : ELEMENT
+                =
                 Label : LEFT
-                  $e
+                  $f
+                Label : RIGHT
+                  ?
+                  Label : CONDITION
+                    !
+                    Label : NOT
+                      empty
+                      Label : ARGUMENTS
+                        
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            2
+                          Label : VARIABLE
+                            $c
+                  Label : ELSE
+                    ::
+                    Label : CLASS
+                      X
+                    Label : METHOD
+                      Y
+                      Label : ARGUMENTS
+                        
+                        Label : ARGUMENT
+                          'Z'
+                  Label : THEN
+                    [
+                    Label : INDEX
+                      2
+                    Label : VARIABLE
+                      $c
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  !
+                  Label : NOT
+                    empty
+                    Label : ARGUMENTS
+                      
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          1
+                        Label : VARIABLE
+                          $c
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    ::
+                    Label : CLASS
+                      B
+                    Label : METHOD
+                      R
+                      Label : ARGUMENTS
+                        
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            1
+                          Label : VARIABLE
+                            $c
               Label : ELEMENT
                 return
                 Label : RETURN
@@ -287,23 +303,23 @@ Label : CODE
                         Label : ARGUMENTS
                           Arguments
                           Label : ARGUMENT
-                            $f
-                          Label : ARGUMENT
                             Concatenation
                             Label : CONCAT
                               [
-                              Label : VARIABLE
-                                ::
-                                Label : PROPERTY
-                                  $b
-                                Label : CLASS
-                                  B
                               Label : INDEX
                                 'AB'
-                            Label : CONCAT
-                              $e
+                              Label : VARIABLE
+                                ::
+                                Label : CLASS
+                                  B
+                                Label : PROPERTY
+                                  $b
                             Label : CONCAT
                               'AR'
+                            Label : CONCAT
+                              $e
+                          Label : ARGUMENT
+                            $f
                     Label : ARGUMENT
                       =>
                       Label : KEY
@@ -314,33 +330,17 @@ Label : CODE
                           ,
                           Label : ARGUMENT
                             void
-              Label : ELEMENT
-                if
-                Label : CONDITION
-                  !
-                  Label : NOT
-                    empty
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        [
-                        Label : VARIABLE
-                          $c
-                        Label : INDEX
-                          1
-                Label : THEN
-                  ;
-                  Label : ELEMENT
-                    ::
-                    Label : CLASS
-                      B
-                    Label : METHOD
-                      R
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          [
-                          Label : VARIABLE
-                            $c
-                          Label : INDEX
-                            1
+        Label : NAME
+          [
+          Label : INDEX
+            'C'
+          Label : VARIABLE
+            ::
+            Label : CLASS
+              B
+            Label : PROPERTY
+              $b
+  Label : ELEMENT
+    return
+    Label : RETURN
+      AU

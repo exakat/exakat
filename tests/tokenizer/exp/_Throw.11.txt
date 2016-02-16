@@ -4,10 +4,10 @@ Label : CODE
   Label : ELEMENT
     throw
     Label : THROW
-      (
-      Label : CODE
-        $xb
+      $x
   Label : ELEMENT
     throw
     Label : THROW
-      $x
+      (
+      Label : CODE
+        $xb

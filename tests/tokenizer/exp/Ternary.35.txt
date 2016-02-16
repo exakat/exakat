@@ -1,93 +1,93 @@
 ;
 Label : ELEMENT
+  A
+Label : ELEMENT
   <?php 
   Label : CODE
     ;
     Label : ELEMENT
       foreach
-      Label : VALUE
-        $b
-      Label : SOURCE
-        $a
       Label : BLOCK
         ;
         Label : ELEMENT
+          B
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               ?
               Label : CONDITION
-                void
+                
                 Label : ARGUMENT
                   (
                   Label : CODE
                     and
-                    Label : RIGHT
-                      [
-                      Label : VARIABLE
-                        $d
-                      Label : INDEX
-                        'E'
                     Label : LEFT
                       [
-                      Label : VARIABLE
-                        $c
                       Label : INDEX
                         'D'
+                      Label : VARIABLE
+                        $c
+                    Label : RIGHT
+                      [
+                      Label : INDEX
+                        'E'
+                      Label : VARIABLE
+                        $d
+              Label : ELSE
+                [
+                Label : INDEX
+                  'J'
+                Label : VARIABLE
+                  $g
               Label : THEN
                 F
                 Label : ARGUMENTS
                   Arguments
                   Label : ARGUMENT
-                    [
-                    Label : VARIABLE
-                      $f
-                    Label : INDEX
-                      'I'
-                  Label : ARGUMENT
                     Concatenation
                     Label : CONCAT
+                      'G'
+                    Label : CONCAT
                       [
-                      Label : VARIABLE
-                        $e
                       Label : INDEX
                         'H'
-                    Label : CONCAT
-                      'G'
-              Label : ELSE
-                [
-                Label : VARIABLE
-                  $g
-                Label : INDEX
-                  'J'
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $i
-              Label : INDEX
-                'N'
-        Label : ELEMENT
-          N
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $h
-              Label : INDEX
-                'L'
-        Label : ELEMENT
-          L
+                      Label : VARIABLE
+                        $e
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'I'
+                    Label : VARIABLE
+                      $f
         Label : ELEMENT
           J
         Label : ELEMENT
-          B
-Label : ELEMENT
-  A
+          echo
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'L'
+              Label : VARIABLE
+                $h
+        Label : ELEMENT
+          L
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'N'
+              Label : VARIABLE
+                $i
+        Label : ELEMENT
+          N
+      Label : SOURCE
+        $a
+      Label : VALUE
+        $b

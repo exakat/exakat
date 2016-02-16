@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      $x
     Label : LEFT
       $y
+    Label : RIGHT
+      $x

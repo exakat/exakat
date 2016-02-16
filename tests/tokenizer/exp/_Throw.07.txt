@@ -11,6 +11,6 @@ Label : CODE
         Label : NEW
           C
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               1

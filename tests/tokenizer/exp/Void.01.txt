@@ -6,48 +6,22 @@ Label : CODE
     if
     Label : CONDITION
       =
+      Label : LEFT
+        $a
       Label : RIGHT
         B
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            'C'
-          Label : ARGUMENT
             $b
-      Label : LEFT
-        $a
+          Label : ARGUMENT
+            'C'
     Label : THEN
       ;
-      Label : ELEMENT
-        void
       Label : ELEMENT
         if
         Label : CONDITION
           &&
-          Label : RIGHT
-            !
-            Label : NOT
-              F
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  $h
-                Label : ARGUMENT
-                  G
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      H
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          'I'
-                        Label : ARGUMENT
-                          $g
-                    Label : ARGUMENT
-                      1
-                    Label : ARGUMENT
-                      $f
           Label : LEFT
             !
             Label : NOT
@@ -55,26 +29,52 @@ Label : CODE
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
-                  $e
-                Label : ARGUMENT
                   E
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      $d
+                      $c
                     Label : ARGUMENT
                       0
                     Label : ARGUMENT
-                      $c
+                      $d
+                Label : ARGUMENT
+                  $e
+          Label : RIGHT
+            !
+            Label : NOT
+              F
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  G
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      $f
+                    Label : ARGUMENT
+                      1
+                    Label : ARGUMENT
+                      H
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          $g
+                        Label : ARGUMENT
+                          'I'
+                Label : ARGUMENT
+                  $h
         Label : THEN
           ;
           Label : ELEMENT
             unset
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $i
                 Label : INDEX
                   $j
+                Label : VARIABLE
+                  $i
+      Label : ELEMENT
+        void

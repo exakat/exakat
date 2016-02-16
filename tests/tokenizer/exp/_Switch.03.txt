@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $x
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
@@ -13,4 +11,6 @@ Label : CODE
         Label : CODE
           Block with Sequence For Default
           Label : ELEMENT
-            Void
+            void
+    Label : NAME
+      $x

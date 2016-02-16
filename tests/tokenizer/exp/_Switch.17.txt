@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $a
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
@@ -13,64 +11,66 @@ Label : CODE
         Label : CODE
           ;
           Label : ELEMENT
+            =
+            Label : LEFT
+              $g
+            Label : RIGHT
+              1
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $h
+            Label : RIGHT
+              2
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $i
+            Label : RIGHT
+              3
+          Label : ELEMENT
             if
             Label : CONDITION
               $a
             Label : THEN
               ;
               Label : ELEMENT
+                =
+                Label : LEFT
+                  $j
+                Label : RIGHT
+                  2
+              Label : ELEMENT
                 foreach
-                Label : VALUE
-                  =>
-                  Label : KEY
-                    $b
-                  Label : VALUE
-                    $c
-                Label : SOURCE
-                  $a
                 Label : BLOCK
                   ;
                   Label : ELEMENT
                     if
                     Label : CONDITION
                       =
-                      Label : RIGHT
-                        $e
                       Label : LEFT
                         $d
+                      Label : RIGHT
+                        $e
                     Label : THEN
                       ;
                       Label : ELEMENT
                         =
-                        Label : RIGHT
-                          4
                         Label : LEFT
                           $f
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  2
-                Label : LEFT
-                  $j
+                        Label : RIGHT
+                          4
+                Label : SOURCE
+                  $a
+                Label : VALUE
+                  =>
+                  Label : KEY
+                    $b
+                  Label : VALUE
+                    $c
           Label : ELEMENT
             break
             Label : LEVEL
               void
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $h
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              3
-            Label : LEFT
-              $i
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $g
+    Label : NAME
+      $a

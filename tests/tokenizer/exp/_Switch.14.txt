@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $a
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             require
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 (
                 Label : CODE
                   'c.php'
-        Label : CASE
-          'b'
+    Label : NAME
+      $a

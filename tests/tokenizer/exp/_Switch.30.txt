@@ -4,46 +4,90 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $a
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'c'
+      Label : ELEMENT
+        case
+        Label : CASE
+          'd'
         Label : CODE
           ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $e
+            Label : RIGHT
+              'f'
           Label : ELEMENT
             if
             Label : CONDITION
               ::
-              Label : METHOD
-                q
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'r'
               Label : CLASS
-                P
+                G
+              Label : METHOD
+                h
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    'i'
             Label : THEN
               ;
               Label : ELEMENT
                 .=
+                Label : LEFT
+                  $j
                 Label : RIGHT
-                  "t"
+                  "k"
+          Label : ELEMENT
+            return
+            Label : RETURN
+              $l
+      Label : ELEMENT
+        case
+        Label : CASE
+          'm'
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $n
+            Label : RIGHT
+              'o'
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              ::
+              Label : CLASS
+                P
+              Label : METHOD
+                q
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    'r'
+            Label : THEN
+              ;
+              Label : ELEMENT
+                .=
                 Label : LEFT
                   $s
+                Label : RIGHT
+                  "t"
           Label : ELEMENT
             return
             Label : RETURN
               $u
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'o'
-            Label : LEFT
-              $n
-        Label : CASE
-          'm'
       Label : ELEMENT
         default
         Label : CODE
@@ -52,49 +96,5 @@ Label : CODE
             return
             Label : RETURN
               'v'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              ::
-              Label : METHOD
-                h
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'i'
-              Label : CLASS
-                G
-            Label : THEN
-              ;
-              Label : ELEMENT
-                .=
-                Label : RIGHT
-                  "k"
-                Label : LEFT
-                  $j
-          Label : ELEMENT
-            return
-            Label : RETURN
-              $l
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'f'
-            Label : LEFT
-              $e
-        Label : CASE
-          'd'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'c'
-        Label : CASE
-          'b'
+    Label : NAME
+      $a

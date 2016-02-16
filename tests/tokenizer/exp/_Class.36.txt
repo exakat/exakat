@@ -4,17 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
         const
-        Label : NAME
-          a
-        Label : VALUE
-          ::
-          Label : CLASS
-            b
-          Label : CONSTANT
-            c
+        Label : CONST
+          =
+          Label : LEFT
+            a
+          Label : RIGHT
+            ::
+            Label : CLASS
+              b
+            Label : CONSTANT
+              c
+    Label : NAME
+      x

@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       [
       Label : ARGUMENTS
-        void
-        Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
           ++
           Label : POSTPLUSPLUS
             $b
-    Label : LEFT
-      $a

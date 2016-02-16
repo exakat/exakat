@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         1
-      Label : THEN
-        2
       Label : ELSE
         ->
-        Label : OBJECT
-          $b
         Label : METHOD
           c
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               'd'
-    Label : LEFT
-      $a
+        Label : OBJECT
+          $b
+      Label : THEN
+        2

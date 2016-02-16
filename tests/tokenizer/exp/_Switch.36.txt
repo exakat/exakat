@@ -4,14 +4,26 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      true
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         default
         Label : CODE
-          Block with Sequence For Default Without Semicolon
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              ==
+              Label : LEFT
+                $x
+              Label : RIGHT
+                1
+            Label : THEN
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $x
           Label : ELEMENT
             ::
             Label : CLASS
@@ -21,52 +33,40 @@ Label : CODE
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
-                  F
-                Label : ARGUMENT
-                  0
+                  $a
                 Label : ARGUMENT
                   +
+                  Label : LEFT
+                    strlen
+                    Label : ARGUMENTS
+                      
+                      Label : ARGUMENT
+                        $b
                   Label : RIGHT
                     %
-                    Label : RIGHT
-                      W
                     Label : LEFT
                       (
                       Label : CODE
                         *
-                        Label : RIGHT
-                          strlen
-                          Label : ARGUMENTS
-                            void
-                            Label : ARGUMENT
-                              $d
                         Label : LEFT
                           (
                           Label : CODE
                             -
-                            Label : RIGHT
-                              1
                             Label : LEFT
                               C
-                  Label : LEFT
-                    strlen
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        $b
+                            Label : RIGHT
+                              1
+                        Label : RIGHT
+                          strlen
+                          Label : ARGUMENTS
+                            
+                            Label : ARGUMENT
+                              $d
+                    Label : RIGHT
+                      W
                 Label : ARGUMENT
-                  $a
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              ==
-              Label : RIGHT
-                1
-              Label : LEFT
-                $x
-            Label : THEN
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $x
+                  0
+                Label : ARGUMENT
+                  F
+    Label : NAME
+      true

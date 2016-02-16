@@ -3,21 +3,39 @@
 Label : CODE
   ;
   Label : ELEMENT
-    foreach
-    Label : VALUE
-      list
+    =
+    Label : LEFT
+      $array
+    Label : RIGHT
+      [
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          $b2
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              10
+            Label : ARGUMENT
+              20
         Label : ARGUMENT
-          $a1
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              30
+            Label : ARGUMENT
+              40
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    foreach
     Label : BLOCK
       ;
       Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             "
             Label : CONTAINS
@@ -34,26 +52,22 @@ Label : CODE
                 \n
     Label : SOURCE
       $array
+    Label : VALUE
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $a1
+        Label : ARGUMENT
+          $b2
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $id
-      Label : VALUE
-        list
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $b4
-          Label : ARGUMENT
-            $a3
     Label : BLOCK
       ;
       Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             "
             Label : CONTAINS
@@ -70,29 +84,15 @@ Label : CODE
                 \n
     Label : SOURCE
       $array
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          [
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              40
-            Label : ARGUMENT
-              30
-        Label : ARGUMENT
-          [
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              20
-            Label : ARGUMENT
-              10
-    Label : LEFT
-      $array
+    Label : VALUE
+      =>
+      Label : KEY
+        $id
+      Label : VALUE
+        list
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $a3
+          Label : ARGUMENT
+            $b4

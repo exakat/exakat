@@ -1,145 +1,41 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    B
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $b
-  Label : THEN
-    ;
-    Label : ELEMENT
-      switch
-      Label : NAME
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-      Label : CASES
-        Sequence Case Default
-        Label : ELEMENT
-          case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                NULL
-              Label : LEFT
-                $b
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-          Label : CASE
-            1
-        Label : ELEMENT
-          case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                D
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $b
-              Label : LEFT
-                $b
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-          Label : CASE
-            2
-        Label : ELEMENT
-          default
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                'E'
-              Label : LEFT
-                $c
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-  Label : ELSE
-    elseif
+  ;
+  Label : ELEMENT
+    if
     Label : CONDITION
-      instanceOf
-      Label : VARIABLE
-        $b
-      Label : CLASS
-        F
-    Label : THEN
-      ;
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $e
-        Label : VALUE
-          $e
-        Label : SOURCE
-          $d
-    Label : THEN
-      ;
-      Label : ELEMENT
+      B
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $b
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        instanceOf
+        Label : CLASS
+          F
+        Label : VARIABLE
+          $b
+      Label : ELSE
         elseif
         Label : CONDITION
           instanceOf
-          Label : VARIABLE
-            $b
           Label : CLASS
             F
-        Label : THEN
-          ;
-          Label : ELEMENT
-            for
-            Label : INIT
-              =
-              Label : RIGHT
-                1
-              Label : LEFT
-                $d
-            Label : FINAL
-              <
-              Label : RIGHT
-                3
-              Label : LEFT
-                $d
-            Label : INCREMENT
-              ++
-              Label : POSTPLUSPLUS
-                $d
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $e
+          Label : VARIABLE
+            $b
         Label : ELSE
           elseif
           Label : CONDITION
             instanceOf
-            Label : VARIABLE
-              $b
             Label : CLASS
               F
+            Label : VARIABLE
+              $b
           Label : THEN
             ;
-            Label : ELEMENT
-              
             Label : ELEMENT
               while
               Label : BLOCK
@@ -150,3 +46,107 @@ Label : CODE
                     $e
               Label : CONDITION
                 $d
+            Label : ELEMENT
+              
+        Label : THEN
+          ;
+          Label : ELEMENT
+            for
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $e
+            Label : FINAL
+              <
+              Label : LEFT
+                $d
+              Label : RIGHT
+                3
+            Label : INCREMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d
+            Label : INIT
+              =
+              Label : LEFT
+                $d
+              Label : RIGHT
+                1
+      Label : THEN
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $e
+          Label : SOURCE
+            $d
+          Label : VALUE
+            $e
+    Label : THEN
+      ;
+      Label : ELEMENT
+        switch
+        Label : CASES
+          Sequence Case Default
+          Label : ELEMENT
+            case
+            Label : CASE
+              1
+            Label : CODE
+              ;
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  NULL
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+          Label : ELEMENT
+            case
+            Label : CASE
+              2
+            Label : CODE
+              ;
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  D
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      $b
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+          Label : ELEMENT
+            default
+            Label : CODE
+              ;
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $c
+                Label : RIGHT
+                  'E'
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+        Label : NAME
+          C
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $b

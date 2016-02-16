@@ -4,203 +4,203 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                'd'
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          'i'
-        Label : CONCAT
-          $g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'h'
-          Label : NAME
-            $g
-        Label : CONCAT
-          'f'
-      Label : ELSE
-        'j'
     Label : LEFT
-      $a
+      $b
+    Label : RIGHT
+      'c'
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
-      ?
-      Label : CONDITION
+      Concatenation
+      Label : CONCAT
         !
         Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                'd'
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          $g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'h'
-          Label : NAME
-            $g
-        Label : CONCAT
-          'f'
-      Label : ELSE
-        'j'
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    .=
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        >
-        Label : RIGHT
-          127
-        Label : LEFT
-          ord
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                $i
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $d
-          Label : INDEX
-            ++
-            Label : PREPLUSPLUS
-              $l
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            $e
-      Label : ELSE
-        [
-        Label : VARIABLE
-          $e
-        Label : INDEX
-          $k
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        Concatenation
-        Label : CONCAT
           $b
-        Label : CONCAT
-          $c
+      Label : CONCAT
+        'a'
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        $a
+  Label : ELEMENT
+    die
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'd'
+              Label : VARIABLE
+                $b
+      Label : ELSE
+        'j'
       Label : THEN
         Concatenation
         Label : CONCAT
-          'i'
+          'f'
         Label : CONCAT
           $g
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               'h'
           Label : NAME
             $g
         Label : CONCAT
-          'f'
-      Label : ELSE
-        'j'
-    Label : LEFT
-      $a
+          'i'
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'd'
+              Label : VARIABLE
+                $b
+      Label : ELSE
+        'j'
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          'f'
+        Label : CONCAT
+          $g
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              'h'
+          Label : NAME
+            $g
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         Concatenation
-        Label : CONCAT
-          'a'
         Label : CONCAT
           !
           Label : NOT
             empty
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $b
                 Label : INDEX
                   'd'
+                Label : VARIABLE
+                  $b
+        Label : CONCAT
+          'a'
+      Label : ELSE
+        'j'
       Label : THEN
         Concatenation
         Label : CONCAT
+          'f'
+        Label : CONCAT
           $g
           Label : ARGUMENTS
-            void
+            
+            Label : ARGUMENT
+              'h'
+          Label : NAME
+            $g
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        Concatenation
+        Label : CONCAT
+          $c
+        Label : CONCAT
+          $b
+      Label : ELSE
+        'j'
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          'f'
+        Label : CONCAT
+          $g
+          Label : ARGUMENTS
+            
             Label : ARGUMENT
               'h'
           Label : NAME
             $g
         Label : CONCAT
-          'f'
+          'i'
+  Label : ELEMENT
+    .=
+    Label : LEFT
+      $a
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        >
+        Label : LEFT
+          ord
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                $i
+              Label : VARIABLE
+                $b
+        Label : RIGHT
+          127
       Label : ELSE
-        'j'
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    die
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        'a'
-      Label : CONCAT
-        !
-        Label : NOT
-          $b
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      'c'
-    Label : LEFT
-      $b
+        [
+        Label : INDEX
+          $k
+        Label : VARIABLE
+          $e
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          [
+          Label : INDEX
+            $e
+          Label : VARIABLE
+            $c
+        Label : CONCAT
+          [
+          Label : INDEX
+            ++
+            Label : PREPLUSPLUS
+              $l
+          Label : VARIABLE
+            $d

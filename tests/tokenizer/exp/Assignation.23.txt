@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  >>=
-  Label : RIGHT
-    @
-    Label : AT
-      $y
-  Label : LEFT
-    $x
+  ;
+  Label : ELEMENT
+    >>=
+    Label : LEFT
+      $x
+    Label : RIGHT
+      @
+      Label : AT
+        $y

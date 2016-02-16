@@ -1,26 +1,28 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    Sequence Case Default
-    Label : ELEMENT
-      case
-      Label : CASE
-        'b'
-      Label : CODE
-        Block with Sequence For Case
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            $c
-          Label : THEN
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                1
-              Label : LEFT
-                $d
+  ;
+  Label : ELEMENT
+    switch
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          'b'
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              $c
+            Label : THEN
+              ;
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  1
+    Label : NAME
+      $a

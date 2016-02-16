@@ -5,14 +5,14 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         Concatenation
         Label : CONCAT
           -
           Label : SIGN
-            'b'
+            'a'
         Label : CONCAT
           -
           Label : SIGN
-            'a'
+            'b'

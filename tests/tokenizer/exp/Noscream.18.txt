@@ -3,7 +3,31 @@
 Label : CODE
   ;
   Label : ELEMENT
+    ->
+    Label : METHOD
+      C
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          'D'
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        B
+  Label : ELEMENT
     OR
+    Label : LEFT
+      E
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            F
+          Label : CONCAT
+            'G'
     Label : RIGHT
       @
       Label : AT
@@ -11,50 +35,26 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            0
-          Label : ARGUMENT
             Concatenation
             Label : CONCAT
-              'J'
-            Label : CONCAT
               I
-    Label : LEFT
-      E
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'G'
-          Label : CONCAT
-            F
+            Label : CONCAT
+              'J'
+          Label : ARGUMENT
+            0
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $c
-      Label : VALUE
-        $d
-    Label : SOURCE
-      $b
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $e
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        B
-    Label : METHOD
-      C
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'D'
+    Label : SOURCE
+      $b
+    Label : VALUE
+      =>
+      Label : KEY
+        $c
+      Label : VALUE
+        $d

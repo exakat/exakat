@@ -3,22 +3,20 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
+    if
+    Label : CONDITION
+      [
+      Label : INDEX
+        'b'
+      Label : VARIABLE
+        $a
+    Label : THEN
+      void
   Label : ELEMENT
     while
-    Label : CONDITION
-      $x
     Label : BLOCK
       ;
       Label : ELEMENT
         void
-  Label : ELEMENT
-    if
     Label : CONDITION
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'b'
-    Label : THEN
-      void
+      $x

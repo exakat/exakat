@@ -4,14 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : INDEX
+        'c'
+      Label : VARIABLE
+        ::
+        Label : CLASS
+          a
+        Label : PROPERTY
+          $b
     Label : RIGHT
       Concatenation
-      Label : CONCAT
-        (
-        Label : CODE
-          ++
-          Label : PREPLUSPLUS
-            $h
       Label : CONCAT
         "
         Label : CONTAINS
@@ -20,19 +24,15 @@ Label : CODE
             d
           Label : CONCAT
             [
-            Label : VARIABLE
-              $e
             Label : INDEX
               f
+            Label : VARIABLE
+              $e
           Label : CONCAT
             g
-    Label : LEFT
-      [
-      Label : VARIABLE
-        ::
-        Label : CLASS
-          a
-        Label : PROPERTY
-          $b
-      Label : INDEX
-        'c'
+      Label : CONCAT
+        (
+        Label : CODE
+          ++
+          Label : PREPLUSPLUS
+            $h

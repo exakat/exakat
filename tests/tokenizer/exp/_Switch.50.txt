@@ -1,30 +1,16 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    >>
-    Label : RIGHT
-      0
-    Label : LEFT
-      B
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            $b
-  Label : CASES
-    Sequence Case Default
-    Label : ELEMENT
-      default
-      Label : CODE
-        ;
-        Label : ELEMENT
-          
-        Label : ELEMENT
+  ;
+  Label : ELEMENT
+    switch
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          1
+        Label : CODE
           ;
           Label : ELEMENT
             ;
@@ -35,18 +21,14 @@ Label : CODE
                 Label : NEW
                   \
                   Label : ARGUMENTS
-                    void
+                    
                     Label : ARGUMENT
                       'D'
                   Label : SUBNAME
                     C
-    Label : ELEMENT
-      case
-      Label : CODE
-        ;
-        Label : ELEMENT
-          
-        Label : ELEMENT
+      Label : ELEMENT
+        default
+        Label : CODE
           ;
           Label : ELEMENT
             ;
@@ -57,10 +39,22 @@ Label : CODE
                 Label : NEW
                   \
                   Label : ARGUMENTS
-                    void
+                    
                     Label : ARGUMENT
                       'D'
                   Label : SUBNAME
                     C
-      Label : CASE
-        1
+    Label : NAME
+      >>
+      Label : LEFT
+        B
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              $b
+            Label : VARIABLE
+              $a
+      Label : RIGHT
+        0
