@@ -256,6 +256,9 @@ LICENCE;
         echo "Check Reports' format\n";
         $this->checkReportFormat();
 
+        echo "Check Data/*.ini consistency\n";
+        $this->checkData();
+        
 
         echo "Check Classname' case\n";
         $this->checkClassnames();
@@ -810,6 +813,26 @@ SQL
         }
     }
 
+    public function checkData() {
+        $functions = json_decode(file_get_contents('data/php_constant_arguments.json'));
+        $php_constants = parse_ini_file('data/php_constants.ini');
+        $php_constants = $php_constants['constants'];
+
+        $total = 0;
+        foreach($functions as $style) { // combinaison or alternative
+            foreach($style as $methods) { // method name
+                foreach($methods as $method) {
+                    $diff = array_diff((array) $method, $php_constants);
+                    if (!empty($diff)) {
+                        print 'constants[] = \''.implode("';\nconstants[] = '", $diff)."'\n";
+                    }
+                    $total += count($diff);
+                }
+            }
+        }
+        
+        print "\n $total missing constants\n";
+    }
 }
 
 function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $errcontext = array()) {
