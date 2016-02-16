@@ -8,8 +8,6 @@ Label : CODE
       
       Label : ARGUMENT
         void
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -24,14 +22,14 @@ Label : CODE
                 __CLASS__
               Label : ARGUMENT
                 'D'
+    Label : NAME
+      B
   Label : ELEMENT
     function
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
-    Label : NAME
-      B1
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -48,14 +46,14 @@ Label : CODE
                   __CLASS__
                 Label : ARGUMENT
                   'D'
+    Label : NAME
+      B1
   Label : ELEMENT
     function
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
-    Label : NAME
-      B2
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -70,3 +68,5 @@ Label : CODE
                 __CLASS__
               Label : ARGUMENT
                 'D'
+    Label : NAME
+      B2

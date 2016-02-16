@@ -4,12 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     try
-    Label : CODE
-      void
     Label : CATCH
       catch
-      Label : VARIABLE
-        $e
       Label : CLASS
         Exception
       Label : CODE
@@ -17,7 +13,7 @@ Label : CODE
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $c
+            $a
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
@@ -25,4 +21,8 @@ Label : CODE
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $a
+            $c
+      Label : VARIABLE
+        $e
+    Label : CODE
+      void

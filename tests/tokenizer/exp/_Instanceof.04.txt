@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  instanceof
-  Label : VARIABLE
-    $x
-  Label : CLASS
-    \
-    Label : SUBNAME
-      D
-    Label : SUBNAME
-      C
-    Label : SUBNAME
-      B
-    Label : SUBNAME
-      A
+  ;
+  Label : ELEMENT
+    instanceof
+    Label : CLASS
+      \
+      Label : SUBNAME
+        A
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        D
+    Label : VARIABLE
+      $x

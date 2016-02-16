@@ -4,37 +4,37 @@ Label : CODE
   ;
   Label : ELEMENT
     try
-    Label : CODE
-      void
     Label : CATCH
       catch
-      Label : VARIABLE
-        $e
-      Label : CLASS
-        Exception4
-      Label : CODE
-        void
-    Label : CATCH
-      catch
-      Label : VARIABLE
-        $e
-      Label : CLASS
-        Exception3
-      Label : CODE
-        void
-    Label : CATCH
-      catch
-      Label : VARIABLE
-        $e
-      Label : CLASS
-        Exception2
-      Label : CODE
-        void
-    Label : CATCH
-      catch
-      Label : VARIABLE
-        $e
       Label : CLASS
         Exception
       Label : CODE
         void
+      Label : VARIABLE
+        $e
+    Label : CODE
+      void
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception2
+      Label : CODE
+        void
+      Label : VARIABLE
+        $e
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception3
+      Label : CODE
+        void
+      Label : VARIABLE
+        $e
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception4
+      Label : CODE
+        void
+      Label : VARIABLE
+        $e

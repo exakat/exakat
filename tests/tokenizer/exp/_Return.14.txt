@@ -6,21 +6,21 @@ Label : CODE
     return
     Label : RETURN
       +
-      Label : RIGHT
-        $d
       Label : LEFT
         %
+        Label : LEFT
+          abs
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $a
         Label : RIGHT
           (
           Label : CODE
             -
-            Label : RIGHT
-              $c
             Label : LEFT
               $b
-        Label : LEFT
-          abs
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
+            Label : RIGHT
+              $c
+      Label : RIGHT
+        $d

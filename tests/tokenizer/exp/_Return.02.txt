@@ -7,7 +7,7 @@ Label : CODE
     Label : CONDITION
       empty
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           $a
     Label : THEN

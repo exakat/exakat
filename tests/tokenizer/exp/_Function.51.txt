@@ -9,9 +9,9 @@ Label : CODE
       Label : USE
         \
         Label : SUBNAME
-          E
-        Label : SUBNAME
           B
+        Label : SUBNAME
+          E
     Label : ELEMENT
       use
       Label : USE
@@ -22,8 +22,6 @@ Label : CODE
         
         Label : ARGUMENT
           $a
-      Label : NAME
-        G
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -36,9 +34,11 @@ Label : CODE
                 'I'
               Label : ARGUMENT
                 $a
+      Label : NAME
+        G
   Label : NAMESPACE
     \
     Label : SUBNAME
-      C
-    Label : SUBNAME
       B
+    Label : SUBNAME
+      C

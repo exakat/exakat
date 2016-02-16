@@ -5,93 +5,77 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      ===
-      Label : RIGHT
-        1
-      Label : LEFT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        (
-        Label : CODE
-          ++
-          Label : POSTPLUSPLUS
-            $a
-  Label : ELEMENT
-    if
-    Label : CONDITION
       &&
-      Label : RIGHT
-        &&
-        Label : RIGHT
-          <=
-          Label : RIGHT
-            I
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $c
-                Label : METHOD
-                  M
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      'N'
-          Label : LEFT
-            I
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $b
-                Label : METHOD
-                  B
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      'K'
-        Label : LEFT
-          !
-          Label : NOT
-            ->
-            Label : OBJECT
-              $b
-            Label : METHOD
-              B
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  'H'
       Label : LEFT
         ==
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              D
-          Label : METHOD
-            B
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                'F'
         Label : LEFT
           ->
-          Label : OBJECT
-            $b
           Label : METHOD
             B
             Label : ARGUMENTS
               
               Label : ARGUMENT
                 'C'
+          Label : OBJECT
+            $b
+        Label : RIGHT
+          ->
+          Label : METHOD
+            B
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                'F'
+          Label : OBJECT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              D
+      Label : RIGHT
+        &&
+        Label : LEFT
+          !
+          Label : NOT
+            ->
+            Label : METHOD
+              B
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'H'
+            Label : OBJECT
+              $b
+        Label : RIGHT
+          <=
+          Label : LEFT
+            I
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  B
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      'K'
+                Label : OBJECT
+                  $b
+          Label : RIGHT
+            I
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  M
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      'N'
+                Label : OBJECT
+                  $c
     Label : THEN
       ;
       Label : ELEMENT
@@ -100,43 +84,59 @@ Label : CODE
           ?
           Label : CONDITION
             >
-            Label : RIGHT
-              1
             Label : LEFT
               ->
-              Label : OBJECT
-                $b
               Label : METHOD
                 B
                 Label : ARGUMENTS
                   
                   Label : ARGUMENT
                     'P'
-          Label : THEN
-            ++
-            Label : POSTPLUSPLUS
-              $d
+              Label : OBJECT
+                $b
+            Label : RIGHT
+              1
           Label : ELSE
             (
             Label : CODE
               ?
               Label : CONDITION
                 ==
-                Label : RIGHT
-                  1
                 Label : LEFT
                   ->
-                  Label : OBJECT
-                    $b
                   Label : METHOD
                     B
                     Label : ARGUMENTS
                       
                       Label : ARGUMENT
                         'P'
+                  Label : OBJECT
+                    $b
+                Label : RIGHT
+                  1
+              Label : ELSE
+                null
               Label : THEN
                 ++
                 Label : POSTPLUSPLUS
                   $e
-              Label : ELSE
-                null
+          Label : THEN
+            ++
+            Label : POSTPLUSPLUS
+              $d
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ===
+      Label : LEFT
+        $a
+      Label : RIGHT
+        1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        (
+        Label : CODE
+          ++
+          Label : POSTPLUSPLUS
+            $a

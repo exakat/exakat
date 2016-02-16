@@ -13,31 +13,31 @@ Label : CODE
         Label : CLASS
           \
           Label : SUBNAME
-            D
-          Label : SUBNAME
-            C
+            A
         Label : VARIABLE
-          $d
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            null
       Label : ARGUMENT
         Typehint
         Label : CLASS
           \
           Label : SUBNAME
-            A
+            C
+          Label : SUBNAME
+            D
         Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $c
-    Label : NAME
-      a
+          $d
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $x
+    Label : NAME
+      a
   Label : ELEMENT
     function
     Label : ARGUMENTS
@@ -47,6 +47,16 @@ Label : CODE
       Label : ARGUMENT
         Typehint
         Label : CLASS
+          A
+        Label : VARIABLE
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            null
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
           \
           Label : SUBNAME
             C
@@ -54,21 +64,11 @@ Label : CODE
             D
         Label : VARIABLE
           $d
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          A
-        Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $c
-    Label : NAME
-      a2
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $x
+    Label : NAME
+      a2

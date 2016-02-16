@@ -8,12 +8,14 @@ Label : CODE
       
       Label : ARGUMENT
         void
-    Label : NAME
-      B
-    Label : RETURN
-      Generator
     Label : BLOCK
       ;
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          yield
+          Label : YIELD
+            void
       Label : ELEMENT
         while
         Label : BLOCK
@@ -22,28 +24,18 @@ Label : CODE
             void
         Label : CONDITION
           !==
-          Label : RIGHT
-            null
           Label : LEFT
             yield
             Label : YIELD
               void
-      Label : ELEMENT
-        yield
-        Label : YIELD
-          yield
-          Label : YIELD
-            void
+          Label : RIGHT
+            null
+    Label : NAME
+      B
+    Label : RETURN
+      Generator
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      B
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          void
-    Label : VALUE
-      $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -52,3 +44,11 @@ Label : CODE
           
           Label : ARGUMENT
             $c
+    Label : SOURCE
+      B
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : VALUE
+      $c

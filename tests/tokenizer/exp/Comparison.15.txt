@@ -6,16 +6,6 @@ Label : CODE
     if
     Label : CONDITION
       =
-      Label : RIGHT
-        b
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $e
-          Label : ARGUMENT
-            $d
-          Label : ARGUMENT
-            $c
       Label : LEFT
         !
         Label : NOT
@@ -24,6 +14,16 @@ Label : CODE
             $this
           Label : PROPERTY
             a
+      Label : RIGHT
+        b
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $d
+          Label : ARGUMENT
+            $e
     Label : THEN
       ;
       Label : ELEMENT

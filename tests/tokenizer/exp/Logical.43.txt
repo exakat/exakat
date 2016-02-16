@@ -1,37 +1,37 @@
 ;
 Label : ELEMENT
+  or
+  Label : LEFT
+    $a
+  Label : RIGHT
+    print
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        (
+        Label : CODE
+          'B'
+Label : ELEMENT
+  C
+Label : ELEMENT
   echo
   Label : ARGUMENTS
-    void
+    
     Label : ARGUMENT
       D
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
+          E
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              'F'
+        Label : ARGUMENT
           Concatenation
           Label : CONCAT
-            'H'
+            'G'
           Label : CONCAT
             $a
           Label : CONCAT
-            'G'
-        Label : ARGUMENT
-          E
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'F'
-Label : ELEMENT
-  C
-Label : ELEMENT
-  or
-  Label : RIGHT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          'B'
-  Label : LEFT
-    $a
+            'H'

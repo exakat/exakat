@@ -2,40 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      (
-      Label : CODE
-        $a
-    Label : THEN
-      b
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $e
-        Label : ARGUMENT
-          ->
-          Label : OBJECT
-            $c
-          Label : PROPERTY
-            d
-    Label : ELSE
-      f
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          ->
-          Label : OBJECT
-            $i
-          Label : PROPERTY
-            j
-        Label : ARGUMENT
-          ->
-          Label : OBJECT
-            $g
-          Label : PROPERTY
-            h
-  Label : ELEMENT
     if
     Label : CONDITION
       !
@@ -47,3 +13,37 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $b
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : ELSE
+      f
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $g
+          Label : PROPERTY
+            h
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $i
+          Label : PROPERTY
+            j
+    Label : THEN
+      b
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $c
+          Label : PROPERTY
+            d
+        Label : ARGUMENT
+          $e

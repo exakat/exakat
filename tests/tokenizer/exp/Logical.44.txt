@@ -23,16 +23,6 @@ Label : CODE
       Label : RIGHT
         $b2
   Label : ELEMENT
-    =
-    Label : LEFT
-      $a5
-    Label : RIGHT
-      ||
-      Label : LEFT
-        5
-      Label : RIGHT
-        $b5
-  Label : ELEMENT
     and
     Label : LEFT
       =
@@ -52,3 +42,13 @@ Label : CODE
         4
     Label : RIGHT
       $b4
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a5
+    Label : RIGHT
+      ||
+      Label : LEFT
+        5
+      Label : RIGHT
+        $b5

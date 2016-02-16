@@ -5,17 +5,17 @@ Label : CODE
     
     Label : ARGUMENT
       $a
-  Label : NAME
-    
   Label : BLOCK
     ;
     Label : ELEMENT
       static
       Label : DEFINE
         =
-        Label : RIGHT
-          NULL
         Label : LEFT
           $b
+        Label : RIGHT
+          NULL
       Label : STATIC
         static
+  Label : NAME
+    

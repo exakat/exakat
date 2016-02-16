@@ -5,20 +5,20 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         (
         Label : CODE
           ?
           Label : CONDITION
             true
-          Label : THEN
-            'true'
           Label : ELSE
             ?
             Label : CONDITION
               false
-            Label : THEN
-              't'
             Label : ELSE
               'f'
+            Label : THEN
+              't'
+          Label : THEN
+            'true'

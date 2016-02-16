@@ -8,41 +8,41 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         =
-        Label : RIGHT
-          null
         Label : LEFT
           $a
-      Label : ARGUMENT
-        =
         Label : RIGHT
           null
+      Label : ARGUMENT
+        =
         Label : LEFT
           $b
-      Label : ARGUMENT
-        =
         Label : RIGHT
           null
-        Label : LEFT
-          $d
       Label : ARGUMENT
         =
-        Label : RIGHT
-          null
         Label : LEFT
           $c
-      Label : ARGUMENT
-        =
         Label : RIGHT
           null
+      Label : ARGUMENT
+        =
         Label : LEFT
-          $f
-      Label : ARGUMENT
-        =
+          $d
         Label : RIGHT
           null
+      Label : ARGUMENT
+        =
         Label : LEFT
           $e
-    Label : NAME
-      z
+        Label : RIGHT
+          null
+      Label : ARGUMENT
+        =
+        Label : LEFT
+          $f
+        Label : RIGHT
+          null
     Label : BLOCK
       void
+    Label : NAME
+      z

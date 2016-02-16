@@ -7,35 +7,33 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        $b
-      Label : ARGUMENT
         $a
-    Label : NAME
-      B
+      Label : ARGUMENT
+        $b
     Label : BLOCK
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           C
           Label : ARGUMENTS
             
             Label : ARGUMENT
               $d
-        Label : LEFT
-          $c
       Label : ELEMENT
         =
+        Label : LEFT
+          $e
         Label : RIGHT
           array
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              'E'
-            Label : ARGUMENT
               'D'
-        Label : LEFT
-          $e
+            Label : ARGUMENT
+              'E'
       Label : ELEMENT
         if
         Label : CONDITION
@@ -45,17 +43,33 @@ Label : CODE
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                $g
-              Label : ARGUMENT
                 $f
+              Label : ARGUMENT
+                $g
         Label : THEN
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              'G'
             Label : LEFT
               $h
+            Label : RIGHT
+              'G'
+          Label : ELEMENT
+            H
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $i
+              Label : ARGUMENT
+                $j
+              Label : ARGUMENT
+                I
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'J'
+                  Label : ARGUMENT
+                    $k
           Label : ELEMENT
             throw
             Label : THROW
@@ -68,63 +82,49 @@ Label : CODE
                     void
                 Label : SUBNAME
                   K
-          Label : ELEMENT
-            H
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                I
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    $k
-                  Label : ARGUMENT
-                    'J'
-              Label : ARGUMENT
-                $i
-              Label : ARGUMENT
-                $j
       Label : ELEMENT
         =
-        Label : RIGHT
-          null
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $q
-          Label : PROPERTY
-            O
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          $m
         Label : LEFT
           ->
           Label : OBJECT
             $l
           Label : PROPERTY
             L
+        Label : RIGHT
+          $m
       Label : ELEMENT
         =
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $p
-          Label : PROPERTY
-            N
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          $o
         Label : LEFT
           ->
           Label : OBJECT
             $n
           Label : PROPERTY
             M
+        Label : RIGHT
+          $o
+      Label : ELEMENT
+        =
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $p
+          Label : PROPERTY
+            N
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        =
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $q
+          Label : PROPERTY
+            O
+        Label : RIGHT
+          null
+    Label : NAME
+      B

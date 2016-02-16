@@ -7,23 +7,23 @@ Label : CODE
     Label : ARGUMENT
       $a
     Label : ARGUMENT
-      $c
-    Label : ARGUMENT
       $b
-  Label : NAME
-    
+    Label : ARGUMENT
+      $c
   Label : BLOCK
     ;
     Label : ELEMENT
       ->
-      Label : OBJECT
-        $e
       Label : METHOD
         f
         Label : ARGUMENTS
           
           Label : ARGUMENT
             $g
+      Label : OBJECT
+        $e
+  Label : NAME
+    
   Label : USE
     
     Label : ARGUMENT

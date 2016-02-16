@@ -5,33 +5,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      &
-      Label : RIGHT
-        ===
-        Label : RIGHT
-          NULL
-        Label : LEFT
-          B
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              'C'
-      Label : LEFT
-        $b
-    Label : THEN
-      ;
-      Label : ELEMENT
-        2
-  Label : ELEMENT
-    if
-    Label : CONDITION
       =
+      Label : LEFT
+        $b
       Label : RIGHT
         ===
-        Label : RIGHT
-          NULL
         Label : LEFT
           B
           Label : ARGUMENTS
@@ -40,9 +18,31 @@ Label : CODE
               'C'
             Label : ARGUMENT
               $c
-      Label : LEFT
-        $b
+        Label : RIGHT
+          NULL
     Label : THEN
       ;
       Label : ELEMENT
         1
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      &
+      Label : LEFT
+        $b
+      Label : RIGHT
+        ===
+        Label : LEFT
+          B
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'C'
+            Label : ARGUMENT
+              $c
+        Label : RIGHT
+          NULL
+    Label : THEN
+      ;
+      Label : ELEMENT
+        2

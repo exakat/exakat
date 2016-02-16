@@ -3,8 +3,38 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : BLOCK
+      void
     Label : NAME
-      s3
+      s0
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        $a
+    Label : BLOCK
+      void
+    Label : NAME
+      s1
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $a
+      Label : ARGUMENT
+        $b
+    Label : BLOCK
+      void
+    Label : NAME
+      s2
+  Label : ELEMENT
+    function
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -15,276 +45,64 @@ Label : CODE
         $c
     Label : BLOCK
       void
+    Label : NAME
+      s3
   Label : ELEMENT
     function
-    Label : NAME
-      s0
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
     Label : BLOCK
       void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          1
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          1
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $a
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          3
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          1
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          $a
-  Label : ELEMENT
-    function
     Label : NAME
       
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        $a2
+    Label : BLOCK
+      void
+    Label : NAME
+      
+  Label : ELEMENT
+    function
     Label : ARGUMENTS
       Arguments
+      Label : ARGUMENT
+        $a2
       Label : ARGUMENT
         $b2
-      Label : ARGUMENT
-        $a2
     Label : BLOCK
       void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          1
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    function
     Label : NAME
       
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $a2
-    Label : BLOCK
-      void
   Label : ELEMENT
     function
-    Label : NAME
-      s1
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $a
-    Label : BLOCK
-      void
-  Label : ELEMENT
-    function
-    Label : NAME
-      s2
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        $a
+        $a2
       Label : ARGUMENT
-        $b
-    Label : BLOCK
-      void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          void
-        Label : ARGUMENT
-          $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          1
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          $a
-  Label : ELEMENT
-    function
-    Label : NAME
-      
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        void
-    Label : BLOCK
-      void
-  Label : ELEMENT
-    function
-    Label : NAME
-      
-    Label : ARGUMENTS
-      Arguments
+        $b2
       Label : ARGUMENT
         $c2
-      Label : ARGUMENT
-        $a2
-      Label : ARGUMENT
-        $b2
     Label : BLOCK
       void
+    Label : NAME
+      
   Label : ELEMENT
     =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          $a
     Label : RIGHT
       [
       Label : ARGUMENTS
@@ -293,6 +111,88 @@ Label : CODE
           1
         Label : ARGUMENT
           2
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $a
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          void
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $a
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $c
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $a
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          void
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    =
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -301,3 +201,103 @@ Label : CODE
           $a
         Label : ARGUMENT
           void
+        Label : ARGUMENT
+          $c
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $a
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          void
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $c
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          void
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          $c
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3

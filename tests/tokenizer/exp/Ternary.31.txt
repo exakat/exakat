@@ -11,14 +11,14 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            $b
-          Label : ARGUMENT
             ->
             Label : OBJECT
               $a
             Label : PROPERTY
               C
-      Label : THEN
-        :
+          Label : ARGUMENT
+            $b
       Label : ELSE
         D
+      Label : THEN
+        :

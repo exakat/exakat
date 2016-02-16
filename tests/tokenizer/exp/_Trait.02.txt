@@ -4,93 +4,93 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                'D'
+        Label : NAME
+          C
+        Label : PUBLIC
+          public
     Label : NAME
-      J
-    Label : EXTENDS
-      K
+      B
+  Label : ELEMENT
+    trait
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            ::
+            Label : CLASS
+              G
+            Label : METHOD
+              H
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                'I'
+        Label : NAME
+          F
+        Label : PUBLIC
+          public
+    Label : NAME
+      E
+  Label : ELEMENT
+    class
     Label : BLOCK
       ;
       Label : ELEMENT
         use
         Label : USE
           L
+    Label : EXTENDS
+      K
+    Label : NAME
+      J
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       new
       Label : NEW
         M
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
-    Label : LEFT
-      $a
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $b
     Label : METHOD
       N
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           void
-  Label : ELEMENT
-    trait
-    Label : NAME
-      E
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : PUBLIC
-          public
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          F
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'I'
-          Label : ELEMENT
-            ::
-            Label : METHOD
-              H
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-            Label : CLASS
-              G
-  Label : ELEMENT
-    class
-    Label : NAME
-      B
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : PUBLIC
-          public
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          C
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'D'
+    Label : OBJECT
+      $b

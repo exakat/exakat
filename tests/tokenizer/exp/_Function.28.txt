@@ -11,14 +11,14 @@ Label : CODE
         Label : CLASS
           StdClass
         Label : VARIABLE
-          $b
+          $x
       Label : ARGUMENT
         Typehint
         Label : CLASS
           StdClass
         Label : VARIABLE
-          $x
-    Label : NAME
-      a
+          $b
     Label : BLOCK
       void
+    Label : NAME
+      a

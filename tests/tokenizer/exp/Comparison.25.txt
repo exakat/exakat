@@ -6,40 +6,40 @@ Label : CODE
     if
     Label : CONDITION
       &&
+      Label : LEFT
+        [
+        Label : INDEX
+          'b'
+        Label : VARIABLE
+          $a
       Label : RIGHT
         (
         Label : CODE
           <
-          Label : RIGHT
-            0
           Label : LEFT
             *
-            Label : RIGHT
-              $h
             Label : LEFT
               c
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   [
-                  Label : VARIABLE
-                    [
-                    Label : VARIABLE
-                      $d
-                    Label : INDEX
-                      'e'
                   Label : INDEX
                     Concatenation
                     Label : CONCAT
-                      $g
-                    Label : CONCAT
                       'f'
-      Label : LEFT
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
+                    Label : CONCAT
+                      $g
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'e'
+                    Label : VARIABLE
+                      $d
+            Label : RIGHT
+              $h
+          Label : RIGHT
+            0
     Label : THEN
       ;
       Label : ELEMENT
@@ -47,6 +47,6 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            'k'
-          Label : ARGUMENT
             'j'
+          Label : ARGUMENT
+            'k'

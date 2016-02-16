@@ -4,8 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      ::
+      Label : CLASS
+        B
+      Label : PROPERTY
+        $a
     Label : RIGHT
       ::
+      Label : CLASS
+        C
       Label : METHOD
         D
         Label : ARGUMENTS
@@ -13,32 +21,24 @@ Label : CODE
           Label : ARGUMENT
             include
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 Concatenation
                 Label : CONCAT
-                  'I'
+                  E
                 Label : CONCAT
-                  $b
-                Label : CONCAT
-                  'H'
-                Label : CONCAT
-                  G
+                  'F'
           Label : ARGUMENT
             include
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 Concatenation
                 Label : CONCAT
-                  'F'
+                  G
                 Label : CONCAT
-                  E
-      Label : CLASS
-        C
-    Label : LEFT
-      ::
-      Label : CLASS
-        B
-      Label : PROPERTY
-        $a
+                  'H'
+                Label : CONCAT
+                  $b
+                Label : CONCAT
+                  'I'

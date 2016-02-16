@@ -15,17 +15,15 @@ Label : CODE
       Label : ARGUMENT
         Typehint
         Label : CLASS
-          callable
-        Label : VARIABLE
-          $c
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
           D
         Label : VARIABLE
           $b
-    Label : NAME
-      B
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          callable
+        Label : VARIABLE
+          $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -37,16 +35,18 @@ Label : CODE
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              $e
-            Label : ARGUMENT
               $d
+            Label : ARGUMENT
+              $e
       Label : ELEMENT
         =
-        Label : RIGHT
-          $g
         Label : LEFT
           ->
           Label : OBJECT
             $f
           Label : PROPERTY
             G
+        Label : RIGHT
+          $g
+    Label : NAME
+      B

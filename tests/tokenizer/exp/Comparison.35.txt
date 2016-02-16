@@ -5,33 +5,33 @@ Label : CODE
     if
     Label : CONDITION
       &&
+      Label : LEFT
+        >
+        Label : LEFT
+          [
+          Label : INDEX
+            'b'
+          Label : VARIABLE
+            $a
+        Label : RIGHT
+          0
       Label : RIGHT
         <=
-        Label : RIGHT
-          new
-          Label : NEW
-            F
         Label : LEFT
           new
           Label : NEW
             C
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $d
                 Label : INDEX
                   'e'
-      Label : LEFT
-        >
+                Label : VARIABLE
+                  $d
         Label : RIGHT
-          0
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            'b'
+          new
+          Label : NEW
+            F
     Label : THEN
       void

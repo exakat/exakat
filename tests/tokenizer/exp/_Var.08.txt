@@ -4,103 +4,103 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      B
     Label : BLOCK
-      Sequence
+      ;
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $a
+        Label : DEFINE
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                void
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            'C'
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          =
+          Label : LEFT
+            $d
+          Label : RIGHT
+            D
+        Label : VAR
+          var
       Label : ELEMENT
         function
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $e
-        Label : NAME
-          E
         Label : BLOCK
           ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              $j
           Label : ELEMENT
             for
             Label : BLOCK
               ;
               Label : ELEMENT
                 =
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'G'
+                  Label : VARIABLE
+                    $h
                 Label : RIGHT
                   H
                   Label : ARGUMENTS
-                    void
+                    
                     Label : ARGUMENT
                       I
                       Label : ARGUMENTS
-                        void
+                        
                         Label : ARGUMENT
                           [
-                          Label : VARIABLE
-                            $i
                           Label : INDEX
                             'G'
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $h
-                  Label : INDEX
-                    'G'
-            Label : INIT
-              =
-              Label : RIGHT
-                0
-              Label : LEFT
-                $f
+                          Label : VARIABLE
+                            $i
             Label : FINAL
               <
-              Label : RIGHT
-                [
-                Label : VARIABLE
-                  $g
-                Label : INDEX
-                  'F'
               Label : LEFT
                 $f
+              Label : RIGHT
+                [
+                Label : INDEX
+                  'F'
+                Label : VARIABLE
+                  $g
             Label : INCREMENT
               ++
               Label : POSTPLUSPLUS
                 $f
-      Label : ELEMENT
-        var
-        Label : VALUE
-          'C'
-        Label : DEFINE
-          $c
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          D
-        Label : DEFINE
-          $d
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-        Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
+            Label : INIT
+              =
+              Label : LEFT
+                $f
+              Label : RIGHT
+                0
+          Label : ELEMENT
+            return
+            Label : RETURN
+              $j
+        Label : NAME
+          E
+    Label : NAME
+      B

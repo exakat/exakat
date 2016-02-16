@@ -5,23 +5,11 @@ Label : CODE
   Label : ELEMENT
     return
     Label : RETURN
-      f
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $z
-        Label : ARGUMENT
-          $y
-        Label : ARGUMENT
-          $x
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ::
+      ->
+      Label : OBJECT
+        $this
       Label : PROPERTY
-        $y
-      Label : CLASS
-        b
+        x
   Label : ELEMENT
     return
     Label : RETURN
@@ -33,8 +21,20 @@ Label : CODE
   Label : ELEMENT
     return
     Label : RETURN
-      ->
-      Label : OBJECT
-        $this
+      ::
+      Label : CLASS
+        b
       Label : PROPERTY
-        x
+        $y
+  Label : ELEMENT
+    return
+    Label : RETURN
+      f
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $x
+        Label : ARGUMENT
+          $y
+        Label : ARGUMENT
+          $z

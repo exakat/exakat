@@ -4,33 +4,33 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         $b
-      Label : THEN
-        d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $e
       Label : ELSE
         ::
         Label : CLASS
           {
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $x
-            Label : INDEX
-              "y"
           Label : INDEX
             2
+          Label : VARIABLE
+            [
+            Label : INDEX
+              "y"
+            Label : VARIABLE
+              $x
         Label : METHOD
           h
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               $i
-    Label : LEFT
-      $a
+      Label : THEN
+        d
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $e

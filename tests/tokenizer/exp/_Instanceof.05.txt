@@ -3,18 +3,18 @@ Label : CODE
   ;
   Label : ELEMENT
     instanceof
-    Label : VARIABLE
-      $a
     Label : CLASS
       static
+    Label : VARIABLE
+      $a
   Label : ELEMENT
     if
     Label : CONDITION
       instanceof
-      Label : VARIABLE
-        $a
       Label : CLASS
         static
+      Label : VARIABLE
+        $a
     Label : THEN
       ;
       Label : ELEMENT

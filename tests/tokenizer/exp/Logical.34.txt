@@ -6,55 +6,55 @@ Label : CODE
     if
     Label : CONDITION
       &&
-      Label : RIGHT
-        >
-        Label : RIGHT
-          *
-          Label : RIGHT
-            1
-          Label : LEFT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $j
-              Label : INDEX
-                'k'
-            Label : INDEX
-              'l'
-        Label : LEFT
-          >>
-          Label : RIGHT
-            [
-            Label : VARIABLE
-              $h
-            Label : INDEX
-              'i'
-          Label : LEFT
-            G
       Label : LEFT
-        &&
-        Label : RIGHT
+        !
+        Label : NOT
           [
+          Label : INDEX
+            'c'
           Label : VARIABLE
             [
-            Label : VARIABLE
-              $d
             Label : INDEX
-              'e'
+              'b'
+            Label : VARIABLE
+              $a
+      Label : RIGHT
+        &&
+        Label : LEFT
+          [
           Label : INDEX
             'f'
-        Label : LEFT
-          !
-          Label : NOT
+          Label : VARIABLE
             [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                'b'
             Label : INDEX
-              'c'
+              'e'
+            Label : VARIABLE
+              $d
+        Label : RIGHT
+          >
+          Label : LEFT
+            >>
+            Label : LEFT
+              G
+            Label : RIGHT
+              [
+              Label : INDEX
+                'i'
+              Label : VARIABLE
+                $h
+          Label : RIGHT
+            *
+            Label : LEFT
+              [
+              Label : INDEX
+                'l'
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  'k'
+                Label : VARIABLE
+                  $j
+            Label : RIGHT
+              1
     Label : THEN
       void

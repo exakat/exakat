@@ -8,11 +8,11 @@ Label : CODE
       Label : METHOD
         b
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             get_class
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 ->
                 Label : OBJECT

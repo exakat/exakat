@@ -8,30 +8,6 @@ Label : CODE
       
       Label : ARGUMENT
         void
-    Label : NAME
-      B1
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            array
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'D'
-              Label : ARGUMENT
-                __CLASS__
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        void
-    Label : NAME
-      B2
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -43,29 +19,41 @@ Label : CODE
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                'D'
-              Label : ARGUMENT
                 __CLASS__
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            array
-            Label : ARGUMENTS
-              Arguments
               Label : ARGUMENT
                 'D'
-              Label : ARGUMENT
-                __CLASS__
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        void
     Label : NAME
       B
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            (
+            Label : CODE
+              array
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  __CLASS__
+                Label : ARGUMENT
+                  'D'
+    Label : NAME
+      B1
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -77,6 +65,20 @@ Label : CODE
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
+                __CLASS__
+              Label : ARGUMENT
                 'D'
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              Arguments
               Label : ARGUMENT
                 __CLASS__
+              Label : ARGUMENT
+                'D'
+    Label : NAME
+      B2

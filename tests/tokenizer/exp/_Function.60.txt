@@ -6,8 +6,6 @@ Label : CODE
     Sequence
     Label : ELEMENT
       class
-      Label : NAME
-        b
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -16,8 +14,6 @@ Label : CODE
             
             Label : ARGUMENT
               void
-          Label : NAME
-            exit
           Label : BLOCK
             ;
             Label : ELEMENT
@@ -30,7 +26,11 @@ Label : CODE
                     $this
                   Label : PROPERTY
                     d
+          Label : NAME
+            exit
           Label : PROTECTED
             protected
+      Label : NAME
+        b
   Label : NAMESPACE
     a

@@ -3,6 +3,42 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : LEFT
+      [
+      Label : INDEX
+        'B'
+      Label : VARIABLE
+        $a
+    Label : RIGHT
+      ::
+      Label : CLASS
+        C
+      Label : METHOD
+        D
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'E'
+  Label : ELEMENT
+    =
+    Label : LEFT
+      [
+      Label : INDEX
+        'F'
+      Label : VARIABLE
+        $b
+    Label : RIGHT
+      ::
+      Label : CLASS
+        G
+      Label : METHOD
+        H
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'I'
+  Label : ELEMENT
     if
     Label : CONDITION
       ::
@@ -11,7 +47,7 @@ Label : CODE
       Label : METHOD
         K
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             'L'
     Label : THEN
@@ -20,10 +56,10 @@ Label : CODE
         =
         Label : LEFT
           [
-          Label : VARIABLE
-            $c
           Label : INDEX
             'M'
+          Label : VARIABLE
+            $c
         Label : RIGHT
           ::
           Label : CLASS
@@ -31,7 +67,7 @@ Label : CODE
           Label : METHOD
             O
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 'P'
   Label : ELEMENT
@@ -41,7 +77,7 @@ Label : CODE
       Label : NOT
         empty
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             ->
             Label : OBJECT
@@ -54,10 +90,10 @@ Label : CODE
         =
         Label : LEFT
           [
-          Label : VARIABLE
-            $e
           Label : INDEX
             'R'
+          Label : VARIABLE
+            $e
         Label : RIGHT
           ->
           Label : OBJECT
@@ -71,58 +107,22 @@ Label : CODE
     Label : METHOD
       U
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           ->
-          Label : OBJECT
-            ->
-            Label : OBJECT
-              $g
-            Label : METHOD
-              V
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
           Label : METHOD
             W
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 $h
-  Label : ELEMENT
-    =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $b
-      Label : INDEX
-        'F'
-    Label : RIGHT
-      ::
-      Label : CLASS
-        G
-      Label : METHOD
-        H
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'I'
-  Label : ELEMENT
-    =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'B'
-    Label : RIGHT
-      ::
-      Label : CLASS
-        C
-      Label : METHOD
-        D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'E'
+          Label : OBJECT
+            ->
+            Label : METHOD
+              V
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+            Label : OBJECT
+              $g

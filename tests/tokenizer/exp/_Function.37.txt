@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       function
       Label : ARGUMENTS
@@ -12,13 +14,11 @@ Label : CODE
           $b
         Label : ARGUMENT
           $c
-      Label : NAME
-        
       Label : BLOCK
         ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $a
-    Label : LEFT
-      $x
+      Label : NAME
+        

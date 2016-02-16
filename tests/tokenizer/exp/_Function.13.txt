@@ -7,14 +7,14 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
+        $y
+      Label : ARGUMENT
         $x
       Label : ARGUMENT
         $a
       Label : ARGUMENT
-        $y
-      Label : ARGUMENT
         $z
-    Label : NAME
-      x
     Label : BLOCK
       void
+    Label : NAME
+      x

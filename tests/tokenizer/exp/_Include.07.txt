@@ -5,10 +5,10 @@ Label : CODE
   Label : ELEMENT
     require_once
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         Concatenation
         Label : CONCAT
-          "autre"
-        Label : CONCAT
           "literal"
+        Label : CONCAT
+          "autre"

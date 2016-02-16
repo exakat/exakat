@@ -4,66 +4,34 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT
         static
         Label : DEFINE
           =
+          Label : LEFT
+            $s1
           Label : RIGHT
             1
-          Label : LEFT
-            $ps1
         Label : STATIC
           static
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        private
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $sp1
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $y1
-        Label : DEFINE
-          $x1
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $ps2
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        private
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $pr1
-        Label : PRIVATE
-          private
       Label : ELEMENT
         static
         Label : DEFINE
           $s2
         Label : STATIC
           static
+      Label : ELEMENT
+        private
+        Label : DEFINE
+          =
+          Label : LEFT
+            $pr1
+          Label : RIGHT
+            1
+        Label : PRIVATE
+          private
       Label : ELEMENT
         private
         Label : DEFINE
@@ -74,66 +42,170 @@ Label : CODE
         private
         Label : DEFINE
           $sp2
-        Label : STATIC
-          static
         Label : PRIVATE
           private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        private
+        Label : DEFINE
+          =
+          Label : LEFT
+            $sp1
+          Label : RIGHT
+            1
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : LEFT
+            $ps1
+          Label : RIGHT
+            1
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $ps2
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : STATIC
+          static
+        Label : DEFINE
+          $x1
+        Label : DEFINE
+          $y1
+      Label : ELEMENT
+        static
+        Label : STATIC
+          static
+        Label : DEFINE
+          =
+          Label : LEFT
+            $x2
+          Label : RIGHT
+            1
+        Label : DEFINE
+          =
+          Label : LEFT
+            $y2
+          Label : RIGHT
+            1
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : LEFT
+            $x3
+          Label : RIGHT
+            1
+        Label : DEFINE
+          $y3
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : STATIC
+          static
+        Label : DEFINE
+          $x4
+        Label : DEFINE
+          =
+          Label : LEFT
+            $y4
+          Label : RIGHT
+            1
       Label : ELEMENT
         static
         Label : DEFINE
           $x5
         Label : DEFINE
-          $a5
-        Label : DEFINE
           $y5
         Label : DEFINE
           $z5
+        Label : DEFINE
+          $a5
         Label : STATIC
           static
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $p5
-        Label : VAR
-          var
       Label : ELEMENT
         static
         Label : DEFINE
           =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $a6
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $z6
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $y6
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
           Label : LEFT
             $x6
+          Label : RIGHT
+            1
+        Label : DEFINE
+          =
+          Label : LEFT
+            $y6
+          Label : RIGHT
+            1
+        Label : DEFINE
+          =
+          Label : LEFT
+            $z6
+          Label : RIGHT
+            1
+        Label : DEFINE
+          =
+          Label : LEFT
+            $a6
+          Label : RIGHT
+            1
         Label : STATIC
           static
       Label : ELEMENT
         static
         Label : DEFINE
           =
+          Label : LEFT
+            $x7
           Label : RIGHT
             1
-          Label : LEFT
-            $x3
         Label : DEFINE
-          $y3
+          $y7
+        Label : DEFINE
+          =
+          Label : LEFT
+            $z7
+          Label : RIGHT
+            1
+        Label : DEFINE
+          $a7
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $x8
+        Label : DEFINE
+          =
+          Label : LEFT
+            $y8
+          Label : RIGHT
+            1
+        Label : DEFINE
+          $z8
+        Label : DEFINE
+          =
+          Label : LEFT
+            $a8
+          Label : RIGHT
+            1
+        Label : PRIVATE
+          private
         Label : STATIC
           static
       Label : ELEMENT
@@ -144,52 +216,24 @@ Label : CODE
           $y9
         Label : DEFINE
           $z9
-        Label : STATIC
-          static
         Label : PRIVATE
           private
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $y2
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $x2
         Label : STATIC
           static
       Label : ELEMENT
         static
         Label : DEFINE
-          $p4
+          $x11
+        Label : DEFINE
+          $y11
+        Label : DEFINE
+          $z11
         Label : STATIC
           static
-      Label : ELEMENT
-        protected
-        Label : DEFINE
-          $p3
-        Label : PROTECTED
-          protected
       Label : ELEMENT
         public
         Label : DEFINE
           $p1
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $p6
         Label : PUBLIC
           public
       Label : ELEMENT
@@ -199,88 +243,44 @@ Label : CODE
         Label : PRIVATE
           private
       Label : ELEMENT
-        static
+        protected
         Label : DEFINE
-          $x11
-        Label : DEFINE
-          $z11
-        Label : DEFINE
-          $y11
-        Label : STATIC
-          static
+          $p3
+        Label : PROTECTED
+          protected
       Label : ELEMENT
         static
         Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $a8
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $y8
-        Label : DEFINE
-          $z8
-        Label : DEFINE
-          $x8
+          $p4
         Label : STATIC
           static
-        Label : PRIVATE
-          private
       Label : ELEMENT
-        static
+        var
+        Label : DEFINE
+          $p5
+        Label : VAR
+          var
+      Label : ELEMENT
+        public
         Label : DEFINE
           =
+          Label : LEFT
+            $p6
           Label : RIGHT
             2
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
           Label : LEFT
             $p7
+          Label : RIGHT
+            2
         Label : PUBLIC
           public
         Label : STATIC
           static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $y7
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $z7
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $x7
-        Label : DEFINE
-          $a7
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $y4
-        Label : DEFINE
-          $x4
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $s1
-        Label : STATIC
-          static
+    Label : NAME
+      a

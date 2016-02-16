@@ -4,47 +4,47 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      a
     Label : BLOCK
       ;
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            1
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
       Label : ELEMENT
         private
         Label : DEFINE
           =
-          Label : RIGHT
-            '2'
           Label : LEFT
             $d
-        Label : STATIC
-          static
+          Label : RIGHT
+            '2'
         Label : PRIVATE
           private
+        Label : STATIC
+          static
       Label : ELEMENT
         protected
         Label : DEFINE
           =
+          Label : LEFT
+            $c
           Label : RIGHT
             array
             Label : ARGUMENTS
               
               Label : ARGUMENT
                 void
-          Label : LEFT
-            $c
-        Label : STATIC
-          static
         Label : PROTECTED
           protected
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $b
-        Label : PUBLIC
-          public
         Label : STATIC
           static
+    Label : NAME
+      a

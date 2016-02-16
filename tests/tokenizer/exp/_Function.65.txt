@@ -3,8 +3,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -23,24 +21,12 @@ Label : CODE
               D
             Label : VARIABLE
               =
-              Label : RIGHT
-                null
               Label : LEFT
                 $c
-        Label : NAME
-          print
+              Label : RIGHT
+                null
         Label : BLOCK
           ;
-          Label : ELEMENT
-            print
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  'G'
-                Label : CONCAT
-                  $b
           Label : ELEMENT
             print
             Label : ARGUMENTS
@@ -50,6 +36,20 @@ Label : CODE
                 Label : ARGUMENTS
                   Arguments
                   Label : ARGUMENT
-                    $c
-                  Label : ARGUMENT
                     'F'
+                  Label : ARGUMENT
+                    $c
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  $b
+                Label : CONCAT
+                  'G'
+        Label : NAME
+          print
+    Label : NAME
+      B

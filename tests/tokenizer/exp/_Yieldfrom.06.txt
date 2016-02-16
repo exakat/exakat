@@ -3,53 +3,13 @@
 Label : CODE
   ;
   Label : ELEMENT
-    foreach
-    Label : SOURCE
-      B
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          void
-    Label : VALUE
-      $c
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        var_dump
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $c
-  Label : ELEMENT
     function
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
-    Label : NAME
-      B
-    Label : RETURN
-      Generator
     Label : BLOCK
       ;
-      Label : ELEMENT
-        while
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            void
-        Label : CONDITION
-          yield from
-          Label : YIELD
-            !==
-            Label : RIGHT
-              null
-            Label : LEFT
-              foo
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
       Label : ELEMENT
         yield from
         Label : YIELD
@@ -60,3 +20,43 @@ Label : CODE
               
               Label : ARGUMENT
                 void
+      Label : ELEMENT
+        while
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            void
+        Label : CONDITION
+          yield from
+          Label : YIELD
+            !==
+            Label : LEFT
+              foo
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+            Label : RIGHT
+              null
+    Label : NAME
+      B
+    Label : RETURN
+      Generator
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        var_dump
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $c
+    Label : SOURCE
+      B
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : VALUE
+      $c

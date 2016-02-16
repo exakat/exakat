@@ -1,6 +1,8 @@
 <?php
 
 Label : CODE
-  throw
-  Label : THROW
-    $e
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      $e

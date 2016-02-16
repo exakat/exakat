@@ -8,8 +8,6 @@ Label : CODE
       
       Label : ARGUMENT
         void
-    Label : NAME
-      count_to_ten
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -31,22 +29,6 @@ Label : CODE
             Label : ARGUMENT
               4
       Label : ELEMENT
-        yield
-        Label : YIELD
-          9
-      Label : ELEMENT
-        yield from
-        Label : YIELD
-          seven_eight
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
-        yield
-        Label : YIELD
-          10
-      Label : ELEMENT
         yield from
         Label : YIELD
           new
@@ -62,30 +44,36 @@ Label : CODE
                     5
                   Label : ARGUMENT
                     6
+      Label : ELEMENT
+        yield from
+        Label : YIELD
+          seven_eight
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          9
+      Label : ELEMENT
+        yield
+        Label : YIELD
+          10
+    Label : NAME
+      count_to_ten
   Label : ELEMENT
     function
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
-    Label : NAME
-      eight
     Label : BLOCK
       ;
       Label : ELEMENT
         yield
         Label : YIELD
-          8
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        void
-    Label : NAME
-      seven_eight
-    Label : BLOCK
-      ;
+          7
       Label : ELEMENT
         yield from
         Label : YIELD
@@ -94,10 +82,22 @@ Label : CODE
             
             Label : ARGUMENT
               void
+    Label : NAME
+      seven_eight
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : BLOCK
+      ;
       Label : ELEMENT
         yield
         Label : YIELD
-          7
+          8
+    Label : NAME
+      eight
   Label : ELEMENT
     foreach
     Label : BLOCK

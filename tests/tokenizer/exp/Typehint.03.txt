@@ -17,18 +17,18 @@ Label : CODE
         Label : CLASS
           Stdclass
         Label : VARIABLE
-          $c
+          $b
       Label : ARGUMENT
         Typehint
         Label : CLASS
           Stdclass
         Label : VARIABLE
-          $b
-    Label : NAME
-      x
+          $c
     Label : BLOCK
       ;
       Label : ELEMENT
         return
         Label : RETURN
           1
+    Label : NAME
+      x

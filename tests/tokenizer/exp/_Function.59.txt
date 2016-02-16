@@ -8,8 +8,6 @@ Label : CODE
       ;
       Label : ELEMENT
         class
-        Label : NAME
-          C
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -21,15 +19,13 @@ Label : CODE
                 Label : CLASS
                   E
                 Label : VARIABLE
-                  $c
+                  $b
               Label : ARGUMENT
                 Typehint
                 Label : CLASS
                   E
                 Label : VARIABLE
-                  $b
-            Label : NAME
-              D
+                  $c
             Label : BLOCK
               ;
               Label : ELEMENT
@@ -39,9 +35,11 @@ Label : CODE
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
                       $b
+                    Label : ARGUMENT
+                      $c
+            Label : NAME
+              D
             Label : RETURN
               array
             Label : STATIC
@@ -53,17 +51,15 @@ Label : CODE
               Label : ARGUMENT
                 Typehint
                 Label : CLASS
-                  array
-                Label : VARIABLE
-                  $d
-              Label : ARGUMENT
-                Typehint
-                Label : CLASS
                   E
                 Label : VARIABLE
                   $b
-            Label : NAME
-              H
+              Label : ARGUMENT
+                Typehint
+                Label : CLASS
+                  array
+                Label : VARIABLE
+                  $d
             Label : BLOCK
               ;
               Label : ELEMENT
@@ -72,38 +68,12 @@ Label : CODE
                   K
                   Label : ARGUMENTS
                     Arguments
-                    Label : ARGUMENT
-                      $d
                     Label : ARGUMENT
                       $b
-            Label : RETURN
-              E
-            Label : STATIC
-              static
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Typehint
-                Label : CLASS
-                  array
-                Label : VARIABLE
-                  $d
-            Label : NAME
-              Z
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  K
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      'AC'
                     Label : ARGUMENT
                       $d
+            Label : NAME
+              H
             Label : RETURN
               E
             Label : STATIC
@@ -118,206 +88,20 @@ Label : CODE
                   E
                 Label : VARIABLE
                   $c
-            Label : NAME
-              AQ
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  AU
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      $c
-            Label : RETURN
-              E
-            Label : STATIC
-              static
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Typehint
-                Label : CLASS
-                  array
-                Label : VARIABLE
-                  $d
-            Label : NAME
-              Q
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  K
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      T
-            Label : RETURN
-              E
-            Label : STATIC
-              static
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Typehint
-                Label : CLASS
-                  E
-                Label : VARIABLE
-                  $c
-            Label : NAME
-              empty
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  ===
-                  Label : RIGHT
-                    'AJ'
-                  Label : LEFT
-                    $c
-            Label : RETURN
-              E
-            Label : STATIC
-              static
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Typehint
-                Label : CLASS
-                  array
-                Label : VARIABLE
-                  $d
-            Label : NAME
-              AG
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  K
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      'AJ'
-                    Label : ARGUMENT
-                      $d
-            Label : RETURN
-              E
-            Label : STATIC
-              static
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Typehint
-                Label : CLASS
-                  E
-                Label : VARIABLE
-                  $c
-            Label : NAME
-              U
             Label : BLOCK
               ;
               Label : ELEMENT
                 if
                 Label : CONDITION
                   ===
-                  Label : RIGHT
-                    1
                   Label : LEFT
                     N
                     Label : ARGUMENTS
                       
                       Label : ARGUMENT
                         $c
-                Label : THEN
-                  ;
-                  Label : ELEMENT
-                    return
-                    Label : RETURN
-                      [
-                      Label : ARGUMENTS
-                        ,
-                        Label : ARGUMENT
-                          void
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  X
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      'Y'
-                    Label : ARGUMENT
-                      $c
-            Label : RETURN
-              array
-            Label : STATIC
-              static
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Typehint
-                Label : CLASS
-                  E
-                Label : VARIABLE
-                  $c
-            Label : NAME
-              AD
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  AF
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      $c
-            Label : RETURN
-              array
-            Label : STATIC
-              static
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Typehint
-                Label : CLASS
-                  E
-                Label : VARIABLE
-                  $c
-            Label : NAME
-              L
-            Label : BLOCK
-              ;
-              Label : ELEMENT
-                if
-                Label : CONDITION
-                  ===
                   Label : RIGHT
                     1
-                  Label : LEFT
-                    N
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        $c
                 Label : THEN
                   ;
                   Label : ELEMENT
@@ -338,8 +122,170 @@ Label : CODE
                       'P'
                     Label : ARGUMENT
                       $c
+            Label : NAME
+              L
             Label : RETURN
               array
+            Label : STATIC
+              static
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Typehint
+                Label : CLASS
+                  array
+                Label : VARIABLE
+                  $d
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  K
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      T
+                    Label : ARGUMENT
+                      $d
+            Label : NAME
+              Q
+            Label : RETURN
+              E
+            Label : STATIC
+              static
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Typehint
+                Label : CLASS
+                  E
+                Label : VARIABLE
+                  $c
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  ===
+                  Label : LEFT
+                    N
+                    Label : ARGUMENTS
+                      
+                      Label : ARGUMENT
+                        $c
+                  Label : RIGHT
+                    1
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      [
+                      Label : ARGUMENTS
+                        ,
+                        Label : ARGUMENT
+                          void
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  X
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'Y'
+                    Label : ARGUMENT
+                      $c
+            Label : NAME
+              U
+            Label : RETURN
+              array
+            Label : STATIC
+              static
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Typehint
+                Label : CLASS
+                  array
+                Label : VARIABLE
+                  $d
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  K
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'AC'
+                    Label : ARGUMENT
+                      $d
+            Label : NAME
+              Z
+            Label : RETURN
+              E
+            Label : STATIC
+              static
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Typehint
+                Label : CLASS
+                  E
+                Label : VARIABLE
+                  $c
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  AF
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      $c
+            Label : NAME
+              AD
+            Label : RETURN
+              array
+            Label : STATIC
+              static
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Typehint
+                Label : CLASS
+                  array
+                Label : VARIABLE
+                  $d
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  K
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'AJ'
+                    Label : ARGUMENT
+                      $d
+            Label : NAME
+              AG
+            Label : RETURN
+              E
             Label : STATIC
               static
           Label : ELEMENT
@@ -358,58 +304,58 @@ Label : CODE
                   E
                 Label : VARIABLE
                   $c
-            Label : NAME
-              AK
             Label : BLOCK
               ;
               Label : ELEMENT
-                return
-                Label : RETURN
+                =
+                Label : LEFT
                   $f
+                Label : RIGHT
+                  'AJ'
               Label : ELEMENT
                 for
                 Label : BLOCK
                   ;
                   Label : ELEMENT
                     .=
-                    Label : RIGHT
-                      $c
                     Label : LEFT
                       $f
+                    Label : RIGHT
+                      $c
+                Label : FINAL
+                  <
+                  Label : LEFT
+                    $g
+                  Label : RIGHT
+                    $e
+                Label : INCREMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $g
                 Label : INIT
                   Arguments
                   Label : ARGUMENT
                     =
-                    Label : RIGHT
-                      1
                     Label : LEFT
                       $g
+                    Label : RIGHT
+                      1
                   Label : ARGUMENT
                     =
+                    Label : LEFT
+                      $h
                     Label : RIGHT
                       N
                       Label : ARGUMENTS
                         
                         Label : ARGUMENT
                           $c
-                    Label : LEFT
-                      $h
-                Label : FINAL
-                  <
-                  Label : RIGHT
-                    $e
-                  Label : LEFT
-                    $g
-                Label : INCREMENT
-                  ++
-                  Label : POSTPLUSPLUS
-                    $g
               Label : ELEMENT
-                =
-                Label : RIGHT
-                  'AJ'
-                Label : LEFT
+                return
+                Label : RETURN
                   $f
+            Label : NAME
+              AK
             Label : RETURN
               E
             Label : STATIC
@@ -424,10 +370,36 @@ Label : CODE
                   E
                 Label : VARIABLE
                   $c
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  AU
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      $c
+            Label : NAME
+              AQ
+            Label : RETURN
+              E
+            Label : STATIC
+              static
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Typehint
+                Label : CLASS
+                  E
+                Label : VARIABLE
+                  $c
+            Label : BLOCK
+              void
             Label : NAME
               AV
-            Label : BLOCK
-              void
             Label : RETURN
               E
             Label : STATIC
@@ -442,13 +414,41 @@ Label : CODE
                   E
                 Label : VARIABLE
                   $c
-            Label : NAME
-              list
             Label : BLOCK
               void
+            Label : NAME
+              list
             Label : RETURN
               E
             Label : STATIC
               static
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Typehint
+                Label : CLASS
+                  E
+                Label : VARIABLE
+                  $c
+            Label : BLOCK
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  ===
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    'AJ'
+            Label : NAME
+              empty
+            Label : RETURN
+              E
+            Label : STATIC
+              static
+        Label : NAME
+          C
     Label : NAMESPACE
       B

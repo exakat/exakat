@@ -4,8 +4,30 @@ Label : CODE
   ;
   Label : ELEMENT
     +
+    Label : LEFT
+      function
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $f
+        Label : ARGUMENT
+          $g
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a
+      Label : NAME
+        
     Label : RIGHT
       ->
+      Label : METHOD
+        d
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'e'
       Label : OBJECT
         (
         Label : CODE
@@ -15,35 +37,35 @@ Label : CODE
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                $c
-              Label : ARGUMENT
                 $b
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'e'
-    Label : LEFT
-      function
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $f
-        Label : ARGUMENT
-          $g
-      Label : NAME
-        
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
+              Label : ARGUMENT
+                $c
   Label : ELEMENT
     -
+    Label : LEFT
+      function
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $f
+        Label : ARGUMENT
+          $g
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a
+      Label : NAME
+        
     Label : RIGHT
       ->
+      Label : METHOD
+        d
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'e'
       Label : OBJECT
         (
         Label : CODE
@@ -56,25 +78,3 @@ Label : CODE
                 $b
               Label : ARGUMENT
                 $c
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'e'
-    Label : LEFT
-      function
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $f
-        Label : ARGUMENT
-          $g
-      Label : NAME
-        
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a

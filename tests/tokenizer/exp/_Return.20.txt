@@ -8,14 +8,14 @@ Label : CODE
       Label : CONDITION
         a
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $b
+      Label : ELSE
+        $d
       Label : THEN
         (
         Label : CODE
           clone
           Label : CLONE
             $c
-      Label : ELSE
-        $d

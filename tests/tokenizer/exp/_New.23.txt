@@ -4,30 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      C
     Label : BLOCK
       ;
       Label : ELEMENT
         static
         Label : DEFINE
           =
-          Label : RIGHT
-            'f'
-          Label : LEFT
-            $y3
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : RIGHT
-            'f'
           Label : LEFT
             $y
+          Label : RIGHT
+            'f'
         Label : PUBLIC
           public
         Label : STATIC
@@ -36,11 +22,25 @@ Label : CODE
         static
         Label : DEFINE
           =
+          Label : LEFT
+            $y3
           Label : RIGHT
             'f'
-          Label : LEFT
-            $y4
+        Label : PRIVATE
+          private
         Label : STATIC
           static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          =
+          Label : LEFT
+            $y4
+          Label : RIGHT
+            'f'
         Label : PROTECTED
           protected
+        Label : STATIC
+          static
+    Label : NAME
+      C

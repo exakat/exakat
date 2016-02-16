@@ -5,10 +5,10 @@ Label : CODE
   Label : ELEMENT
     \
     Label : SUBNAME
-      C
-    Label : SUBNAME
-      B
+      namespace
     Label : SUBNAME
       A
     Label : SUBNAME
-      namespace
+      B
+    Label : SUBNAME
+      C

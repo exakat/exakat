@@ -3,12 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
-    return
-    Label : RETURN
-      $x
-  Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       1
-    Label : LEFT
+  Label : ELEMENT
+    return
+    Label : RETURN
       $x

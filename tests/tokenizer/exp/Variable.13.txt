@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $result
     Label : RIGHT
       <<<EOF
 
@@ -24,17 +26,15 @@ Label : CODE
 
         Label : CONCAT
           ->
-          Label : OBJECT
-            $object
           Label : METHOD
             method
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 void
+          Label : OBJECT
+            $object
         Label : CONCAT
           ;
 
 
-    Label : LEFT
-      $result

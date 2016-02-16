@@ -7,6 +7,8 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
+        $start
+      Label : ARGUMENT
         $end
       Label : ARGUMENT
         =
@@ -14,10 +16,6 @@ Label : CODE
           $step
         Label : RIGHT
           1
-      Label : ARGUMENT
-        $start
-    Label : NAME
-      generateRange
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -28,12 +26,6 @@ Label : CODE
             yield
             Label : YIELD
               $i
-        Label : INIT
-          =
-          Label : LEFT
-            $i
-          Label : RIGHT
-            $start
         Label : FINAL
           <
           Label : LEFT
@@ -46,6 +38,14 @@ Label : CODE
             $i
           Label : RIGHT
             $step
+        Label : INIT
+          =
+          Label : LEFT
+            $i
+          Label : RIGHT
+            $start
+    Label : NAME
+      generateRange
   Label : ELEMENT
     function
     Label : ARGUMENTS
@@ -60,14 +60,20 @@ Label : CODE
           $step
         Label : RIGHT
           1
-    Label : NAME
-      generateRange2
     Label : BLOCK
       ;
       Label : ELEMENT
         for
         Label : BLOCK
           ;
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $i
           Label : ELEMENT
             yield
             Label : YIELD
@@ -78,28 +84,14 @@ Label : CODE
                   $i
                 Label : PROPERTY
                   y
-              Label : THEN
-                'd'
               Label : ELSE
                 +
                 Label : LEFT
                   2
                 Label : RIGHT
                   2
-          Label : ELEMENT
-            yield
-            Label : YIELD
-              [
-              Label : VARIABLE
-                $i
-              Label : INDEX
-                1
-        Label : INIT
-          =
-          Label : LEFT
-            $i
-          Label : RIGHT
-            $start
+              Label : THEN
+                'd'
         Label : FINAL
           <
           Label : LEFT
@@ -112,23 +104,31 @@ Label : CODE
             $i
           Label : RIGHT
             $step
+        Label : INIT
+          =
+          Label : LEFT
+            $i
+          Label : RIGHT
+            $start
+    Label : NAME
+      generateRange2
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      generateRange
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1000000
-        Label : ARGUMENT
-          0
-    Label : VALUE
-      $number
     Label : BLOCK
       ;
       Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $number
+    Label : SOURCE
+      generateRange
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          0
+        Label : ARGUMENT
+          1000000
+    Label : VALUE
+      $number

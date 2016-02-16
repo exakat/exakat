@@ -4,20 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     or
-    Label : RIGHT
-      ::
-      Label : METHOD
-        K
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'L'
-      Label : CLASS
-        \
-        Label : SUBNAME
-          J
     Label : LEFT
       =
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B
       Label : RIGHT
         new
         Label : NEW
@@ -26,39 +20,45 @@ Label : CODE
             Arguments
             Label : ARGUMENT
               [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  H
               Label : INDEX
-                'I'
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  F
-              Label : INDEX
-                'G'
-            Label : ARGUMENT
-              [
+                'E'
               Label : VARIABLE
                 ->
                 Label : OBJECT
                   $b
                 Label : PROPERTY
                   D
+            Label : ARGUMENT
+              [
               Label : INDEX
-                'E'
+                'G'
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  F
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'I'
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  H
           Label : SUBNAME
             C
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          B
+    Label : RIGHT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          J
+      Label : METHOD
+        K
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'L'

@@ -7,8 +7,8 @@ Label : CODE
     Label : NAMESPACE
       \
       Label : SUBNAME
-        C
+        A
       Label : SUBNAME
         B
       Label : SUBNAME
-        A
+        C

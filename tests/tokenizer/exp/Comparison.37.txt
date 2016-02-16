@@ -6,37 +6,37 @@ Label : CODE
     if
     Label : CONDITION
       &&
-      Label : RIGHT
+      Label : LEFT
         ==
-        Label : RIGHT
-          G
         Label : LEFT
           instanceof
-          Label : VARIABLE
-            $c
           Label : CLASS
-            F
-      Label : LEFT
-        &&
+            B
+          Label : VARIABLE
+            $a
         Label : RIGHT
-          ==
-          Label : RIGHT
-            E
-          Label : LEFT
-            instanceof
-            Label : VARIABLE
-              $b
-            Label : CLASS
-              D
+          C
+      Label : RIGHT
+        &&
         Label : LEFT
           ==
-          Label : RIGHT
-            C
           Label : LEFT
             instanceof
-            Label : VARIABLE
-              $a
             Label : CLASS
-              B
+              D
+            Label : VARIABLE
+              $b
+          Label : RIGHT
+            E
+        Label : RIGHT
+          ==
+          Label : LEFT
+            instanceof
+            Label : CLASS
+              F
+            Label : VARIABLE
+              $c
+          Label : RIGHT
+            G
     Label : THEN
       void

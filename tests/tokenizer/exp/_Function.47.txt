@@ -8,18 +8,16 @@ Label : CODE
       
       Label : ARGUMENT
         void
-    Label : NAME
-      DefinedWithAReference
     Label : BLOCK
       ;
       Label : ELEMENT
         return
         Label : RETURN
           $x
+    Label : NAME
+      DefinedWithAReference
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -28,11 +26,13 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          MethodDefinedWithAReference
         Label : BLOCK
           ;
           Label : ELEMENT
             return
             Label : RETURN
               $x
+        Label : NAME
+          MethodDefinedWithAReference
+    Label : NAME
+      x

@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
+    Label : CLASS
+      static
     Label : METHOD
       B
       Label : ARGUMENTS
         
         Label : ARGUMENT
           void
-    Label : CLASS
-      static

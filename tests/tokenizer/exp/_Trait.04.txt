@@ -3,122 +3,122 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ->
-    Label : OBJECT
-      $o
-    Label : METHOD
-      sayExclamationMark
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $o
-    Label : METHOD
-      sayWorld
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    class
-    Label : NAME
-      MyHelloWorld
+    trait
     Label : BLOCK
       ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
-        Label : NAME
-          sayExclamationMark
         Label : BLOCK
           ;
           Label : ELEMENT
             echo
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
-                '!'
+                'Hello '
+        Label : NAME
+          sayHello
         Label : PUBLIC
           public
+    Label : NAME
+      Hello
+  Label : ELEMENT
+    trait
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                'World'
+        Label : NAME
+          sayWorld
+        Label : PUBLIC
+          public
+    Label : NAME
+      World
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
       Label : ELEMENT
         use
         Label : USE
-          World
-        Label : USE
           Hello
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $o
-    Label : METHOD
-      sayHello
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    trait
-    Label : NAME
-      World
-    Label : BLOCK
-      ;
+        Label : USE
+          World
       Label : ELEMENT
         function
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
-        Label : NAME
-          sayWorld
         Label : BLOCK
           ;
           Label : ELEMENT
             echo
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
-                'World'
+                '!'
+        Label : NAME
+          sayExclamationMark
         Label : PUBLIC
           public
+    Label : NAME
+      MyHelloWorld
   Label : ELEMENT
     =
+    Label : LEFT
+      $o
     Label : RIGHT
       new
       Label : NEW
         MyHelloWorld
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
-    Label : LEFT
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      sayHello
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : OBJECT
       $o
   Label : ELEMENT
-    trait
-    Label : NAME
-      Hello
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
+    ->
+    Label : METHOD
+      sayWorld
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
           void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          sayHello
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'Hello '
-        Label : PUBLIC
-          public
+    Label : OBJECT
+      $o
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      sayExclamationMark
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : OBJECT
+      $o

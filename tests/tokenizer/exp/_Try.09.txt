@@ -4,24 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     try
-    Label : CODE
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $b
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
     Label : CATCH
       catch
-      Label : VARIABLE
-        $e
       Label : CLASS
         Exception
       Label : CODE
@@ -29,7 +13,7 @@ Label : CODE
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $h
+            $f
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
@@ -37,4 +21,20 @@ Label : CODE
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $f
+            $h
+      Label : VARIABLE
+        $e
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c

@@ -5,11 +5,9 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -18,31 +16,33 @@ Label : CODE
           ?
           Label : CONDITION
             instanceof
-            Label : VARIABLE
-              $b
             Label : CLASS
               \
               Label : SUBNAME
-                D
-              Label : SUBNAME
                 C
-          Label : THEN
-            ->
-            Label : OBJECT
-              $c
-            Label : METHOD
-              E
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $d
+              Label : SUBNAME
+                D
+            Label : VARIABLE
+              $b
           Label : ELSE
             ->
-            Label : OBJECT
-              $e
             Label : METHOD
               F
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   $f
+            Label : OBJECT
+              $e
+          Label : THEN
+            ->
+            Label : METHOD
+              E
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $d
+            Label : OBJECT
+              $c
+    Label : NAME
+      B

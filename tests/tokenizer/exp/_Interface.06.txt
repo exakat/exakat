@@ -8,91 +8,87 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          D
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             Typehint
             Label : CLASS
               E
             Label : VARIABLE
               $f
-    Label : NAME
-      A
-    Label : EXTENDS
-      Arguments
-      Label : EXTENDS
-        \
-        Label : SUBNAME
-          J
-        Label : SUBNAME
-          I
-      Label : EXTENDS
-        \
-        Label : SUBNAME
-          H
-        Label : SUBNAME
-          G
-      Label : EXTENDS
-        \
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          B
-  Label : ELEMENT
-    interface
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
         Label : NAME
           D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              E
-            Label : VARIABLE
-              $f
-    Label : NAME
-      A
-    Label : EXTENDS
-      Arguments
-      Label : EXTENDS
-        \
-        Label : SUBNAME
-          H
-        Label : SUBNAME
-          G
-      Label : EXTENDS
-        \
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          B
-  Label : ELEMENT
-    interface
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : NAME
-          D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              E
-            Label : VARIABLE
-              $f
-    Label : NAME
-      A
     Label : EXTENDS
       \
       Label : SUBNAME
+        B
+      Label : SUBNAME
         C
+    Label : NAME
+      A
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f
+        Label : NAME
+          D
+    Label : EXTENDS
+      \
       Label : SUBNAME
         B
+      Label : SUBNAME
+        C
+    Label : EXTENDS
+      \
+      Label : SUBNAME
+        G
+      Label : SUBNAME
+        H
+    Label : NAME
+      A
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f
+        Label : NAME
+          D
+    Label : EXTENDS
+      \
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        C
+    Label : EXTENDS
+      \
+      Label : SUBNAME
+        G
+      Label : SUBNAME
+        H
+    Label : EXTENDS
+      \
+      Label : SUBNAME
+        I
+      Label : SUBNAME
+        J
+    Label : NAME
+      A

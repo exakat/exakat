@@ -6,8 +6,6 @@ Label : CODE
     Sequence
     Label : ELEMENT
       interface
-      Label : NAME
-        C
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -36,5 +34,7 @@ Label : CODE
             foreach
           Label : PUBLIC
             public
+      Label : NAME
+        C
   Label : NAMESPACE
     B

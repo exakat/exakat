@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,14 +12,18 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          B
         Label : BLOCK
           ;
           Label : ELEMENT
             void
           Label : ELEMENT
             =
+            Label : LEFT
+              ::
+              Label : CLASS
+                static
+              Label : PROPERTY
+                $a
             Label : RIGHT
               new
               Label : NEW
@@ -30,23 +32,21 @@ Label : CODE
                   
                   Label : ARGUMENT
                     void
-            Label : LEFT
-              ::
-              Label : CLASS
-                static
-              Label : PROPERTY
-                $a
           Label : ELEMENT
             ->
-            Label : OBJECT
-              ::
-              Label : CLASS
-                static
-              Label : PROPERTY
-                $a
             Label : METHOD
               D
               Label : ARGUMENTS
                 
                 Label : ARGUMENT
                   void
+            Label : OBJECT
+              ::
+              Label : CLASS
+                static
+              Label : PROPERTY
+                $a
+        Label : NAME
+          B
+    Label : NAME
+      x

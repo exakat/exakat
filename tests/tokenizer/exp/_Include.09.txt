@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     require
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         (
         Label : CODE
@@ -13,6 +13,6 @@ Label : CODE
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              "abs"
-            Label : ARGUMENT
               "fonctions/sysout_agent.php"
+            Label : ARGUMENT
+              "abs"

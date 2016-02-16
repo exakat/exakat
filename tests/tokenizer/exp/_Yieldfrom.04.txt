@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     assert
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         &&
         Label : LEFT
@@ -19,39 +19,89 @@ Label : CODE
             Label : RIGHT
               function
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   void
-              Label : NAME
-                
               Label : BLOCK
                 ;
+                Label : ELEMENT
+                  global
+                  Label : GLOBAL
+                    $a
+                  Label : GLOBAL
+                    $
+                    Label : NAME
+                      $b
                 Label : ELEMENT
                   static
                   Label : STATIC
                     static
+                  Label : DEFINE
+                    $c
                   Label : DEFINE
                     =
                     Label : LEFT
                       $d
                     Label : RIGHT
                       0
-                  Label : DEFINE
-                    $c
-                Label : ELEMENT
-                  global
-                  Label : GLOBAL
-                    $
-                    Label : NAME
-                      $b
-                  Label : GLOBAL
-                    $a
                 Label : ELEMENT
                   unset
                   Label : ARGUMENTS
-                    void
+                    
                     Label : ARGUMENT
                       $e
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    &&
+                    Label : LEFT
+                      isset
+                      Label : ARGUMENTS
+                        
+                        Label : ARGUMENT
+                          $a
+                    Label : RIGHT
+                      ||
+                      Label : LEFT
+                        !
+                        Label : NOT
+                          empty
+                          Label : ARGUMENTS
+                            
+                            Label : ARGUMENT
+                              $b
+                      Label : RIGHT
+                        eval
+                        Label : ARGUMENTS
+                          
+                          Label : ARGUMENT
+                            $c
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      $a
+                    Label : ELSE
+                      $c
+                    Label : THEN
+                      $b
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      $a
+                    Label : ELSE
+                      $c
+                    Label : THEN
+                      :
                 Label : ELEMENT
                   =
                   Label : LEFT
@@ -65,39 +115,15 @@ Label : CODE
                 Label : ELEMENT
                   =
                   Label : LEFT
-                    $x
-                  Label : RIGHT
-                    ?
-                    Label : CONDITION
-                      $a
-                    Label : THEN
-                      :
-                    Label : ELSE
-                      $c
-                Label : ELEMENT
-                  yield
-                  Label : YIELD
-                    =>
-                    Label : VALUE
-                      2
-                    Label : KEY
-                      1
-                Label : ELEMENT
-                  yield from
-                  Label : YIELD
-                    $x
-                Label : ELEMENT
-                  =
-                  Label : LEFT
                     list
                     Label : ARGUMENTS
                       Arguments
                       Label : ARGUMENT
-                        $c
-                      Label : ARGUMENT
                         $a
                       Label : ARGUMENT
                         $b
+                      Label : ARGUMENT
+                        $c
                   Label : RIGHT
                     [
                     Label : ARGUMENTS
@@ -106,22 +132,22 @@ Label : CODE
                         1
                       Label : ARGUMENT
                         =>
-                        Label : VALUE
-                          'x'
                         Label : KEY
                           2
+                        Label : VALUE
+                          'x'
                       Label : ARGUMENT
                         =>
-                        Label : VALUE
-                          'c'
                         Label : KEY
                           'z'
+                        Label : VALUE
+                          'c'
                 Label : ELEMENT
                   @
                   Label : AT
                     foo
                     Label : ARGUMENTS
-                      void
+                      
                       Label : ARGUMENT
                         void
                 Label : ELEMENT
@@ -133,42 +159,16 @@ Label : CODE
                     Label : CLONE
                       $x
                 Label : ELEMENT
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    ?
-                    Label : CONDITION
-                      $a
-                    Label : THEN
-                      $b
-                    Label : ELSE
-                      $c
+                  yield
+                  Label : YIELD
+                    =>
+                    Label : KEY
+                      1
+                    Label : VALUE
+                      2
                 Label : ELEMENT
-                  =
-                  Label : LEFT
+                  yield from
+                  Label : YIELD
                     $x
-                  Label : RIGHT
-                    &&
-                    Label : LEFT
-                      isset
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          $a
-                    Label : RIGHT
-                      ||
-                      Label : LEFT
-                        !
-                        Label : NOT
-                          empty
-                          Label : ARGUMENTS
-                            void
-                            Label : ARGUMENT
-                              $b
-                      Label : RIGHT
-                        eval
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            $c
+              Label : NAME
+                

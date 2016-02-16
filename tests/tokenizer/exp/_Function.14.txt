@@ -3,19 +3,7 @@
 Label : CODE
   ;
   Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        void
-    Label : NAME
-      z
-    Label : BLOCK
-      void
-  Label : ELEMENT
     class
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -24,7 +12,19 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          x
         Label : BLOCK
           void
+        Label : NAME
+          x
+    Label : NAME
+      a
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : BLOCK
+      void
+    Label : NAME
+      z

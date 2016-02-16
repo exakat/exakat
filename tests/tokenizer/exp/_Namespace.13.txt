@@ -1,8 +1,6 @@
 <?php 
 Label : CODE
   namespace
-  Label : NAMESPACE
-    A
   Label : BLOCK
     Sequence
     Label : ELEMENT
@@ -11,3 +9,5 @@ Label : CODE
         void
       Label : NAME
         C
+  Label : NAMESPACE
+    A

@@ -7,6 +7,6 @@ Label : CODE
     Label : NEW
       stdclass
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           1

@@ -5,25 +5,13 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $n
-    Label : NAME
-      a2
     Label : BLOCK
       ;
       Label : ELEMENT
-        
-      Label : ELEMENT
-        
-      Label : ELEMENT
         while
-        Label : CONDITION
-          >=
-          Label : RIGHT
-            1
-          Label : LEFT
-            $b
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -32,19 +20,27 @@ Label : CODE
               ;
               Label : ELEMENT
                 void
-            Label : INIT
-              =
-              Label : RIGHT
-                1
-              Label : LEFT
-                $i
             Label : FINAL
               <
-              Label : RIGHT
-                2
               Label : LEFT
                 $i
+              Label : RIGHT
+                2
             Label : INCREMENT
               ++
               Label : POSTPLUSPLUS
                 $i
+            Label : INIT
+              =
+              Label : LEFT
+                $i
+              Label : RIGHT
+                1
+        Label : CONDITION
+          >=
+          Label : LEFT
+            $b
+          Label : RIGHT
+            1
+    Label : NAME
+      a2

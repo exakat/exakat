@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  and
-  Label : RIGHT
-    5
-  Label : LEFT
-    xor
-    Label : RIGHT
-      4
+  ;
+  Label : ELEMENT
+    and
     Label : LEFT
+      1
+    Label : RIGHT
       or
-      Label : RIGHT
-        3
       Label : LEFT
-        and
-        Label : RIGHT
-          2
+        2
+      Label : RIGHT
+        xor
         Label : LEFT
-          1
+          3
+        Label : RIGHT
+          and
+          Label : LEFT
+            4
+          Label : RIGHT
+            5

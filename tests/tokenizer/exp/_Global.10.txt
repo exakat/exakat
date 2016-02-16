@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  global
-  Label : GLOBAL
-    $f
-  Label : GLOBAL
-    $e
-  Label : GLOBAL
-    $d
-  Label : GLOBAL
-    $c
-  Label : GLOBAL
-    $b
-  Label : GLOBAL
-    $a
+  ;
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $a
+    Label : GLOBAL
+      $b
+    Label : GLOBAL
+      $c
+    Label : GLOBAL
+      $d
+    Label : GLOBAL
+      $e
+    Label : GLOBAL
+      $f

@@ -1,54 +1,56 @@
 <?php
 
 Label : CODE
-  function
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      void
-  Label : NAME
-    B
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        =
-        Label : RIGHT
-          yield from
-          Label : YIELD
-            ->
-            Label : OBJECT
-              $this
-            Label : METHOD
-              C
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  $c
-        Label : LEFT
-          $b
-      Label : THEN
-        ;
-        Label : ELEMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
           =
-          Label : RIGHT
-            $b
           Label : LEFT
-            list
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  D
-      Label : ELSE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            $d
+            $b
+          Label : RIGHT
+            yield from
+            Label : YIELD
+              ->
+              Label : METHOD
+                C
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    $c
+              Label : OBJECT
+                $this
+        Label : ELSE
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              $d
+        Label : THEN
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              list
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    D
+                Label : ARGUMENT
+                  $e
+            Label : RIGHT
+              $b
+    Label : NAME
+      B

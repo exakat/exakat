@@ -4,32 +4,30 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              ''
+        Label : NAME
+          null
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
     Label : NAME
       C
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : NAME
-          null
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              ''
-        Label : PUBLIC
-          public
-        Label : STATIC
-          static
   Label : ELEMENT
     class
-    Label : NAME
-      D
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -38,15 +36,17 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          null
         Label : BLOCK
           ;
           Label : ELEMENT
             return
             Label : RETURN
               ''
+        Label : NAME
+          null
         Label : PUBLIC
           public
         Label : STATIC
           static
+    Label : NAME
+      D

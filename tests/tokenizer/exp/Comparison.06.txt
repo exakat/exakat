@@ -6,18 +6,18 @@ Label : CODE
     if
     Label : CONDITION
       ==
-      Label : RIGHT
-        false
       Label : LEFT
         ->
-        Label : OBJECT
-          $this
         Label : METHOD
           methode
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               void
+        Label : OBJECT
+          $this
+      Label : RIGHT
+        false
     Label : THEN
       ;
       Label : ELEMENT

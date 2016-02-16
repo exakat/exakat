@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,7 +12,9 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          __construct
         Label : BLOCK
           void
+        Label : NAME
+          __construct
+    Label : NAME
+      x

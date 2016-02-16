@@ -18,15 +18,15 @@ Label : CODE
           callable
         Label : VARIABLE
           =
-          Label : RIGHT
-            null
           Label : LEFT
             $b
-    Label : NAME
-      B
+          Label : RIGHT
+            null
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $c
+    Label : NAME
+      B

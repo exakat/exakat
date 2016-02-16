@@ -2,36 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    A
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          void
-    Label : LEFT
-      $d
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $e
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          g
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $h
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $f
-  Label : ELEMENT
     print
     Label : ARGUMENTS
       
@@ -40,6 +10,36 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            $c
-          Label : ARGUMENT
             $b
+          Label : ARGUMENT
+            $c
+  Label : ELEMENT
+    A
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $d
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $e
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $f
+        Label : RIGHT
+          g
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $h

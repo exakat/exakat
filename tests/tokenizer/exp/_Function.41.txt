@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       function
       Label : ARGUMENTS
@@ -11,22 +13,20 @@ Label : CODE
         Label : ARGUMENT
           $b
         Label : ARGUMENT
+          $c
+        Label : ARGUMENT
+          $d
+        Label : ARGUMENT
           Typehint
           Label : CLASS
             Stdclass
           Label : VARIABLE
             $e
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          $d
-      Label : NAME
-        
       Label : BLOCK
         ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $a
-    Label : LEFT
-      $x
+      Label : NAME
+        

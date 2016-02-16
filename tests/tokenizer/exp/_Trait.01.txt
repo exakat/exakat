@@ -3,9 +3,33 @@
 Label : CODE
   ;
   Label : ELEMENT
-    class
+    trait
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+        Label : NAME
+          C
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+        Label : NAME
+          D
     Label : NAME
-      E
+      B
+  Label : ELEMENT
+    class
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,10 +38,10 @@ Label : CODE
           G
     Label : EXTENDS
       F
+    Label : NAME
+      E
   Label : ELEMENT
     class
-    Label : NAME
-      H
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -26,29 +50,5 @@ Label : CODE
           J
     Label : EXTENDS
       I
-  Label : ELEMENT
-    trait
     Label : NAME
-      B
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          D
-        Label : BLOCK
-          void
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          C
-        Label : BLOCK
-          void
+      H

@@ -1,82 +1,84 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    a
-  Label : ARGUMENTS
-    Arguments
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $d
-      Label : CLASS
-        array
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        =
-        Label : RIGHT
-          [
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              2
-            Label : ARGUMENT
-              (
-              Label : CODE
-                &
-                Label : RIGHT
-                  4
-                Label : LEFT
-                  3
-            Label : ARGUMENT
-              1
-        Label : LEFT
-          $e
-      Label : CLASS
-        array
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $c
-      Label : CLASS
-        b
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      for
-      Label : BLOCK
-        ;
-        Label : ELEMENT
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          b
+        Label : VARIABLE
+          $c
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          array
+        Label : VARIABLE
+          $d
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          array
+        Label : VARIABLE
           =
+          Label : LEFT
+            $e
           Label : RIGHT
-            &
-            Label : RIGHT
-              $g
+            [
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  &
+                  Label : LEFT
+                    3
+                  Label : RIGHT
+                    4
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        for
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            =
             Label : LEFT
-              f
+              $i
+            Label : RIGHT
+              &
+              Label : LEFT
+                f
+              Label : RIGHT
+                $g
+        Label : FINAL
+          <
           Label : LEFT
             $i
-      Label : INIT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $i
-      Label : FINAL
-        <
-        Label : RIGHT
-          10
-        Label : LEFT
-          $i
-      Label : INCREMENT
-        <
-        Label : RIGHT
-          count
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
-        Label : LEFT
-          $i
+          Label : RIGHT
+            10
+        Label : INCREMENT
+          <
+          Label : LEFT
+            $i
+          Label : RIGHT
+            count
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                $a
+        Label : INIT
+          =
+          Label : LEFT
+            $i
+          Label : RIGHT
+            1
+    Label : NAME
+      a

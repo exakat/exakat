@@ -6,20 +6,20 @@ Label : CODE
     
     Label : ARGUMENT
       $a
-  Label : NAME
-    
   Label : BLOCK
     ;
     Label : ELEMENT
       ->
-      Label : OBJECT
-        $e
       Label : METHOD
         f
         Label : ARGUMENTS
           
           Label : ARGUMENT
             $g
+      Label : OBJECT
+        $e
+  Label : NAME
+    
   Label : USE
     
     Label : ARGUMENT

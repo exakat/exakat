@@ -3,61 +3,49 @@
 Label : CODE
   ;
   Label : ELEMENT
-    $h
+    $a
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $i
-        Label : METHOD
-          E
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
+        __FILE__
     Label : NAME
-      $h
+      $a
   Label : ELEMENT
-    $j
+    $b
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        ::
-        Label : PROPERTY
-          $k
-        Label : CLASS
-          F
+        0
     Label : NAME
-      $j
+      $b
   Label : ELEMENT
-    $m
+    $c
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        ::
-        Label : CLASS
-          I
-        Label : CONSTANT
-          J
+        B
     Label : NAME
-      $m
+      $c
   Label : ELEMENT
-    $l
+    $d
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        ::
-        Label : CLASS
-          G
-        Label : CONSTANT
-          H
+        null
     Label : NAME
-      $l
+      $d
+  Label : ELEMENT
+    $e
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        C
+    Label : NAME
+      $e
   Label : ELEMENT
     $f
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         ->
         Label : OBJECT
@@ -67,42 +55,54 @@ Label : CODE
     Label : NAME
       $f
   Label : ELEMENT
-    $e
+    $h
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        C
+        ->
+        Label : METHOD
+          E
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+        Label : OBJECT
+          $i
     Label : NAME
-      $e
+      $h
   Label : ELEMENT
-    $d
+    $j
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        null
+        ::
+        Label : CLASS
+          F
+        Label : PROPERTY
+          $k
     Label : NAME
-      $d
+      $j
   Label : ELEMENT
-    $c
+    $l
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        B
+        ::
+        Label : CLASS
+          G
+        Label : CONSTANT
+          H
     Label : NAME
-      $c
+      $l
   Label : ELEMENT
-    $b
+    $m
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        0
+        ::
+        Label : CLASS
+          I
+        Label : CONSTANT
+          J
     Label : NAME
-      $b
-  Label : ELEMENT
-    $a
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        __FILE__
-    Label : NAME
-      $a
+      $m

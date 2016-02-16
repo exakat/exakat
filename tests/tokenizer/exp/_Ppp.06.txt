@@ -5,52 +5,48 @@ Label : CODE
   Label : BLOCK
     ;
     Label : ELEMENT
+      use
+      Label : USE
+        \
+        Label : SUBNAME
+          B
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          D
+        Label : SUBNAME
+          H
+    Label : ELEMENT
       trait
       Label : BLOCK
         ;
-        Label : ELEMENT
-          protected
-          Label : VALUE
-            Void
-          Label : PROTECTED
-            protected
-          Label : DEFINE
-            $a
         Label : ELEMENT
           use
           Label : BLOCK
             ;
             Label : ELEMENT
               as
-              Label : SUBNAME
-                K
               Label : AS
+                L
+              Label : NAME
+                K
+              Label : VISIBILITY
                 private
-                Label : DEFINE
-                  L
-                Label : PRIVATE
-                  private
           Label : USE
             H
+        Label : ELEMENT
+          protected
+          Label : DEFINE
+            $a
+          Label : PROTECTED
+            protected
       Label : NAME
         I
-    Label : ELEMENT
-      use
-      Label : USE
-        \
-        Label : SUBNAME
-          H
-        Label : SUBNAME
-          D
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          B
   Label : NAMESPACE
     \
     Label : SUBNAME
-      D
+      B
     Label : SUBNAME
       C
     Label : SUBNAME
-      B
+      D

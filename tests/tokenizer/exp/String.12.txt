@@ -2,17 +2,9 @@
 Label : CODE
   ;
   Label : ELEMENT
-    "
-    Label : CONTAINS
-      Concatenation
-      Label : CONCAT
-        H: 
-      Label : CONCAT
-        $g
-  Label : ELEMENT
     c
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         "
         Label : CONTAINS
@@ -25,3 +17,11 @@ Label : CODE
               $e
             Label : PROPERTY
               f
+  Label : ELEMENT
+    "
+    Label : CONTAINS
+      Concatenation
+      Label : CONCAT
+        H: 
+      Label : CONCAT
+        $g

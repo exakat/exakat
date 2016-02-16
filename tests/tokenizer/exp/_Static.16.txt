@@ -4,20 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
         public
         Label : DEFINE
-          $c
+          $b
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
-          $e
+          $c
         Label : PUBLIC
           public
       Label : ELEMENT
@@ -29,15 +27,15 @@ Label : CODE
       Label : ELEMENT
         public
         Label : DEFINE
-          $b
+          $e
         Label : PUBLIC
           public
       Label : ELEMENT
         static
         Label : DEFINE
-          $g
-        Label : DEFINE
           $f
+        Label : DEFINE
+          $g
         Label : DEFINE
           $h
         Label : PUBLIC
@@ -50,14 +48,18 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          x
         Label : BLOCK
           ;
           Label : ELEMENT
             return
             Label : RETURN
               +
+              Label : LEFT
+                new
+                Label : NEW
+                  static
+                  Label : ARGUMENTS
+                    void
               Label : RIGHT
                 new
                 Label : NEW
@@ -70,9 +72,7 @@ Label : CODE
                       3
                     Label : ARGUMENT
                       4
-              Label : LEFT
-                new
-                Label : NEW
-                  static
-                  Label : ARGUMENTS
-                    void
+        Label : NAME
+          x
+    Label : NAME
+      B

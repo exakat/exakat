@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  return
-  Label : RETURN
-    {
-    Label : VARIABLE
-      ->
-      Label : OBJECT
-        $this
-      Label : PROPERTY
-        B
-    Label : INDEX
-      ++
-      Label : POSTPLUSPLUS
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      {
+      Label : INDEX
+        ++
+        Label : POSTPLUSPLUS
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            C
+      Label : VARIABLE
         ->
         Label : OBJECT
           $this
         Label : PROPERTY
-          C
+          B

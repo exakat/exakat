@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,14 +12,14 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          FALSE
         Label : BLOCK
           ;
           Label : ELEMENT
             return
             Label : RETURN
-              FALSE
+              TRUE
+        Label : NAME
+          TRUE
         Label : PUBLIC
           public
         Label : STATIC
@@ -32,15 +30,17 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          TRUE
         Label : BLOCK
           ;
           Label : ELEMENT
             return
             Label : RETURN
-              TRUE
+              FALSE
+        Label : NAME
+          FALSE
         Label : PUBLIC
           public
         Label : STATIC
           static
+    Label : NAME
+      x

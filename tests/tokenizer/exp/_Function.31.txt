@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     interface
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -18,3 +16,5 @@ Label : CODE
           b
         Label : PUBLIC
           public
+    Label : NAME
+      a

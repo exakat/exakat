@@ -1,24 +1,24 @@
 <?php
 
 Label : CODE
-  interface
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      function
-      Label : PUBLIC
-        public
-      Label : NAME
-        E
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
-  Label : NAME
-    B
-  Label : EXTENDS
-    Arguments
-    Label : EXTENDS
-      D
+  ;
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : NAME
+          E
+        Label : PUBLIC
+          public
     Label : EXTENDS
       C
+    Label : EXTENDS
+      D
+    Label : NAME
+      B

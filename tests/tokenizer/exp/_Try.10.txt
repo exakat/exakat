@@ -9,7 +9,7 @@ Label : CODE
       Label : NEW
         a
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             "
             Label : CONTAINS

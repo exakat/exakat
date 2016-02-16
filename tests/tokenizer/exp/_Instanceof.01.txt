@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     instanceof
-    Label : VARIABLE
-      $x
     Label : CLASS
       $y
+    Label : VARIABLE
+      $x

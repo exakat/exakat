@@ -3,6 +3,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a6
     Label : RIGHT
       "
       Label : CONTAINS
@@ -17,9 +19,7 @@ Label : CODE
           C
         Label : CONCAT
           [
-          Label : VARIABLE
-            $d
           Label : INDEX
             3
-    Label : LEFT
-      $a6
+          Label : VARIABLE
+            $d

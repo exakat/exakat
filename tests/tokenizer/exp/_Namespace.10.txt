@@ -4,31 +4,31 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      Global
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        +
-        Label : RIGHT
-          2
-        Label : LEFT
-          1
-  Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      A
     Label : BLOCK
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $obj
         Label : RIGHT
           new
           Label : NEW
             \
             Label : SUBNAME
-              Another
-            Label : SUBNAME
               namespace
+            Label : SUBNAME
+              Another
+    Label : NAMESPACE
+      A
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        +
         Label : LEFT
-          $obj
+          1
+        Label : RIGHT
+          2
+    Label : NAMESPACE
+      Global

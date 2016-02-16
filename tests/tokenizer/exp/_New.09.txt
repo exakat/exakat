@@ -7,7 +7,7 @@ Label : CODE
     Label : NEW
       $x
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           1
       Label : NAME

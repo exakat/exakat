@@ -9,13 +9,13 @@ Label : CODE
       Label : NEW
         \
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             b
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                $f
+                'C'
               Label : ARGUMENT
                 ->
                 Label : OBJECT
@@ -23,6 +23,6 @@ Label : CODE
                 Label : PROPERTY
                   e
               Label : ARGUMENT
-                'C'
+                $f
         Label : SUBNAME
           A

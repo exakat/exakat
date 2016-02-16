@@ -18,15 +18,15 @@ Label : CODE
               'F'
             Label : CONCAT
               $b
+        Label : ELSE
+          'I'
         Label : THEN
           ->
-          Label : OBJECT
-            $b
           Label : METHOD
             H
             Label : ARGUMENTS
               
               Label : ARGUMENT
                 void
-        Label : ELSE
-          'I'
+          Label : OBJECT
+            $b

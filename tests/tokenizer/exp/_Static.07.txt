@@ -14,8 +14,6 @@ Label : CODE
       
       Label : ARGUMENT
         void
-    Label : NAME
-      y
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -24,3 +22,5 @@ Label : CODE
           $z
         Label : STATIC
           static
+    Label : NAME
+      y

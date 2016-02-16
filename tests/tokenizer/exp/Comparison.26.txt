@@ -1,50 +1,52 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    &&
-    Label : RIGHT
-      (
-      Label : CODE
-        ||
-        Label : RIGHT
-          <
-          Label : RIGHT
-            0
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      &&
+      Label : LEFT
+        [
+        Label : INDEX
+          'b'
+        Label : VARIABLE
+          $a
+      Label : RIGHT
+        (
+        Label : CODE
+          ||
           Label : LEFT
-            $h
-        Label : LEFT
-          c
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
+            c
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $d
                 Label : INDEX
-                  'e'
-              Label : INDEX
-                Concatenation
-                Label : CONCAT
-                  $g
-                Label : CONCAT
-                  'f'
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'b'
-  Label : THEN
-    ;
-    Label : ELEMENT
-      i
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'k'
-        Label : ARGUMENT
-          'j'
+                  Concatenation
+                  Label : CONCAT
+                    'f'
+                  Label : CONCAT
+                    $g
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'e'
+                  Label : VARIABLE
+                    $d
+          Label : RIGHT
+            <
+            Label : LEFT
+              $h
+            Label : RIGHT
+              0
+    Label : THEN
+      ;
+      Label : ELEMENT
+        i
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'j'
+          Label : ARGUMENT
+            'k'

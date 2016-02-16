@@ -9,14 +9,14 @@ Label : CODE
     Label : RIGHT
       Concatenation
       Label : CONCAT
-        'd'
-      Label : CONCAT
         ::
         Label : CLASS
           b
         Label : METHOD
           c
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               void
+      Label : CONCAT
+        'd'

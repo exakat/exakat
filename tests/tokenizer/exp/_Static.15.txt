@@ -14,14 +14,14 @@ Label : CODE
             
             Label : ARGUMENT
               $fulfill
-          Label : NAME
-            
           Label : BLOCK
             ;
             Label : ELEMENT
               ++
               Label : POSTPLUSPLUS
                 $self
+          Label : NAME
+            
           Label : USE
             
             Label : ARGUMENT
@@ -38,11 +38,11 @@ Label : CODE
             
             Label : ARGUMENT
               $fulfill
-          Label : NAME
-            
           Label : BLOCK
             ;
             Label : ELEMENT
               ++
               Label : POSTPLUSPLUS
                 $self
+          Label : NAME
+            

@@ -1,28 +1,30 @@
 <?php
 
 Label : CODE
-  while
-  Label : CONDITION
-    =
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $this
-      Label : METHOD
-        fetch
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $fetchMode
-    Label : LEFT
-      $row
-  Label : BLOCK
-    ;
-    Label : ELEMENT
+  ;
+  Label : ELEMENT
+    while
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $result
+        Label : RIGHT
+          $row
+    Label : CONDITION
       =
-      Label : RIGHT
-        $row
       Label : LEFT
-        [
-        Label : VARIABLE
-          $result
+        $row
+      Label : RIGHT
+        ->
+        Label : METHOD
+          fetch
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $fetchMode
+        Label : OBJECT
+          $this

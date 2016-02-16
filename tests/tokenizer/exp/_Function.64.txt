@@ -7,7 +7,29 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
+        function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            $g
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $a
+        Label : NAME
+          
+      Label : ARGUMENT
         ->
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              'e'
         Label : OBJECT
           (
           Label : CODE
@@ -17,28 +39,6 @@ Label : CODE
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
-                  $c
-                Label : ARGUMENT
                   $b
-        Label : METHOD
-          d
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'e'
-      Label : ARGUMENT
-        function
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $g
-          Label : ARGUMENT
-            $f
-        Label : NAME
-          
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $a
+                Label : ARGUMENT
+                  $c

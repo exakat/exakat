@@ -12,21 +12,21 @@ Label : CODE
           StdClass
         Label : VARIABLE
           =
-          Label : RIGHT
-            null
           Label : LEFT
             $x
+          Label : RIGHT
+            null
       Label : ARGUMENT
         Typehint
         Label : CLASS
           StdClass
         Label : VARIABLE
           =
-          Label : RIGHT
-            null
           Label : LEFT
             $b
-    Label : NAME
-      a
+          Label : RIGHT
+            null
     Label : BLOCK
       void
+    Label : NAME
+      a

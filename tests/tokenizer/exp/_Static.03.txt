@@ -4,26 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      a
     Label : BLOCK
       ;
-      Label : ELEMENT
-        protected
-        Label : DEFINE
-          $c
-        Label : STATIC
-          static
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
-        private
-        Label : DEFINE
-          $d
-        Label : STATIC
-          static
-        Label : PRIVATE
-          private
       Label : ELEMENT
         public
         Label : DEFINE
@@ -32,3 +14,21 @@ Label : CODE
           public
         Label : STATIC
           static
+      Label : ELEMENT
+        private
+        Label : DEFINE
+          $d
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        protected
+        Label : DEFINE
+          $c
+        Label : PROTECTED
+          protected
+        Label : STATIC
+          static
+    Label : NAME
+      a

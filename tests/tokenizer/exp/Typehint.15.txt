@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       new
       Label : NEW
@@ -12,33 +14,31 @@ Label : CODE
           
           Label : ARGUMENT
             =
-            Label : RIGHT
-              3
             Label : LEFT
               $b
-    Label : LEFT
-      $a
+            Label : RIGHT
+              3
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       sadf
       Label : ARGUMENTS
         
         Label : ARGUMENT
           >
-          Label : RIGHT
-            3
           Label : LEFT
             $b
-    Label : LEFT
-      $a
+          Label : RIGHT
+            3
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       sadf
       Label : ARGUMENTS
         
         Label : ARGUMENT
           $c
-    Label : LEFT
-      $a

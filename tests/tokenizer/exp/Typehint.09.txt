@@ -11,11 +11,7 @@ Label : CODE
         Label : CLASS
           Stdclass
         Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $c
+          $a
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -27,12 +23,16 @@ Label : CODE
         Label : CLASS
           Stdclass
         Label : VARIABLE
-          $a
-    Label : NAME
-      x
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            null
     Label : BLOCK
       ;
       Label : ELEMENT
         return
         Label : RETURN
           1
+    Label : NAME
+      x

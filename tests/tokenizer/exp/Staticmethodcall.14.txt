@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  return
-  Label : RETURN
-    ::
-    Label : CLASS
-      a
-    Label : METHOD
-      'B'
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $c
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : CLASS
+        a
+      Label : METHOD
+        'B'
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $c

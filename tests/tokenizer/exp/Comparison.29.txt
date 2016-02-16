@@ -5,85 +5,85 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      ||
-      Label : RIGHT
-        &&
-        Label : RIGHT
-          !=
-          Label : RIGHT
-            substr
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                +
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  strrpos
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      'n'
-                    Label : ARGUMENT
-                      [
-                      Label : VARIABLE
-                        $m
-                      Label : INDEX
-                        'n'
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $k
-                Label : INDEX
-                  'l'
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $i
-            Label : INDEX
-              'j'
-        Label : LEFT
-          !
-          Label : NOT
-            defined
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'H'
+      &&
       Label : LEFT
-        &&
-        Label : RIGHT
+        defined
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'a'
+      Label : RIGHT
+        ||
+        Label : LEFT
           !=
-          Label : RIGHT
-            [
-            Label : VARIABLE
-              $f
-            Label : INDEX
-              'g'
           Label : LEFT
             Concatenation
+            Label : CONCAT
+              [
+              Label : INDEX
+                'c'
+              Label : VARIABLE
+                $b
             Label : CONCAT
               d
               Label : ARGUMENTS
                 Arguments
                 Label : ARGUMENT
-                  1
-                Label : ARGUMENT
                   E
-            Label : CONCAT
+                Label : ARGUMENT
+                  1
+          Label : RIGHT
+            [
+            Label : INDEX
+              'g'
+            Label : VARIABLE
+              $f
+        Label : RIGHT
+          &&
+          Label : LEFT
+            !
+            Label : NOT
+              defined
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'H'
+          Label : RIGHT
+            !=
+            Label : LEFT
               [
-              Label : VARIABLE
-                $b
               Label : INDEX
-                'c'
-        Label : LEFT
-          defined
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'a'
+                'j'
+              Label : VARIABLE
+                $i
+            Label : RIGHT
+              substr
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'l'
+                  Label : VARIABLE
+                    $k
+                Label : ARGUMENT
+                  0
+                Label : ARGUMENT
+                  +
+                  Label : LEFT
+                    strrpos
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'n'
+                        Label : VARIABLE
+                          $m
+                      Label : ARGUMENT
+                        'n'
+                  Label : RIGHT
+                    1
     Label : THEN
       ;
       Label : ELEMENT

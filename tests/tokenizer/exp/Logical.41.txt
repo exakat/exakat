@@ -3,10 +3,102 @@ Label : CODE
   ;
   Label : ELEMENT
     ||
+    Label : LEFT
+      ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a1
+        Label : PROPERTY
+          B
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              D
     Label : RIGHT
       ==
+      Label : LEFT
+        {
+        Label : INDEX
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            F
+        Label : VARIABLE
+          ::
+          Label : CLASS
+            c
+          Label : PROPERTY
+            $E1
       Label : RIGHT
-        'G3'
+        'G1'
+  Label : ELEMENT
+    ||
+    Label : LEFT
+      ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a2
+        Label : PROPERTY
+          B
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              D
+    Label : RIGHT
+      ==
+      Label : LEFT
+        [
+        Label : INDEX
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            F
+        Label : VARIABLE
+          ::
+          Label : CLASS
+            c
+          Label : PROPERTY
+            $E2
+      Label : RIGHT
+        'G2'
+  Label : ELEMENT
+    ||
+    Label : LEFT
+      ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a3
+        Label : PROPERTY
+          B
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              D
+    Label : RIGHT
+      ==
       Label : LEFT
         ::
         Label : CLASS
@@ -21,97 +113,5 @@ Label : CODE
                 $d
               Label : PROPERTY
                 F
-    Label : LEFT
-      ==
       Label : RIGHT
-        C
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              D
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a3
-        Label : PROPERTY
-          B
-  Label : ELEMENT
-    ||
-    Label : RIGHT
-      ==
-      Label : RIGHT
-        'G1'
-      Label : LEFT
-        {
-        Label : VARIABLE
-          ::
-          Label : PROPERTY
-            $E1
-          Label : CLASS
-            c
-        Label : INDEX
-          ->
-          Label : OBJECT
-            $d
-          Label : PROPERTY
-            F
-    Label : LEFT
-      ==
-      Label : RIGHT
-        C
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              D
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a1
-        Label : PROPERTY
-          B
-  Label : ELEMENT
-    ||
-    Label : RIGHT
-      ==
-      Label : RIGHT
-        'G2'
-      Label : LEFT
-        [
-        Label : VARIABLE
-          ::
-          Label : PROPERTY
-            $E2
-          Label : CLASS
-            c
-        Label : INDEX
-          ->
-          Label : OBJECT
-            $d
-          Label : PROPERTY
-            F
-    Label : LEFT
-      ==
-      Label : RIGHT
-        C
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              D
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a2
-        Label : PROPERTY
-          B
+        'G3'

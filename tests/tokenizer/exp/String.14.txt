@@ -2,47 +2,9 @@
 Label : CODE
   ;
   Label : ELEMENT
-    I
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        (
-        Label : CODE
-          ?
-          Label : CONDITION
-            ===
-            Label : RIGHT
-              'L'
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'K'
-          Label : THEN
-            $d
-          Label : ELSE
-            'M'
-      Label : ARGUMENT
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'J'
-  Label : ELEMENT
-    F
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        H
-      Label : ARGUMENT
-        'G'
-  Label : ELEMENT
     B
     Label : ARGUMENTS
       Arguments
-      Label : ARGUMENT
-        E
       Label : ARGUMENT
         "
         Label : CONTAINS
@@ -51,3 +13,41 @@ Label : CODE
             C
           Label : CONCAT
             $aD
+      Label : ARGUMENT
+        E
+  Label : ELEMENT
+    F
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        'G'
+      Label : ARGUMENT
+        H
+  Label : ELEMENT
+    I
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        [
+        Label : INDEX
+          'J'
+        Label : VARIABLE
+          $b
+      Label : ARGUMENT
+        (
+        Label : CODE
+          ?
+          Label : CONDITION
+            ===
+            Label : LEFT
+              [
+              Label : INDEX
+                'K'
+              Label : VARIABLE
+                $c
+            Label : RIGHT
+              'L'
+          Label : ELSE
+            'M'
+          Label : THEN
+            $d

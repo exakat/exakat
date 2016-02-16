@@ -4,18 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         $b
-      Label : THEN
-        d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $e
       Label : ELSE
         ->
+        Label : METHOD
+          h
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $i
         Label : OBJECT
           ::
           Label : CLASS
@@ -23,14 +25,12 @@ Label : CODE
           Label : METHOD
             f
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 'g'
-        Label : METHOD
-          h
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $i
-    Label : LEFT
-      $a
+      Label : THEN
+        d
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $e

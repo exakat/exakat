@@ -8,10 +8,10 @@ Label : CODE
       
       Label : ARGUMENT
         $a
-    Label : NAME
-      
     Label : BLOCK
       void
+    Label : NAME
+      
     Label : USE
       
       Label : ARGUMENT
@@ -22,28 +22,24 @@ Label : CODE
       
       Label : ARGUMENT
         $a
-    Label : NAME
-      
     Label : BLOCK
       void
+    Label : NAME
+      
     Label : USE
-      Arguments
+      
       Label : ARGUMENT
-        $e
-      Label : ARGUMENT
-        $f
-      Label : ARGUMENT
-        $g
+        $bq
   Label : ELEMENT
     function
     Label : ARGUMENTS
       
       Label : ARGUMENT
         $a
-    Label : NAME
-      
     Label : BLOCK
       void
+    Label : NAME
+      
     Label : USE
       Arguments
       Label : ARGUMENT
@@ -56,11 +52,15 @@ Label : CODE
       
       Label : ARGUMENT
         $a
-    Label : NAME
-      
     Label : BLOCK
       void
-    Label : USE
+    Label : NAME
       
+    Label : USE
+      Arguments
       Label : ARGUMENT
-        $bq
+        $e
+      Label : ARGUMENT
+        $f
+      Label : ARGUMENT
+        $g

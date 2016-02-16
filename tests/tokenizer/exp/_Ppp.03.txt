@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,39 +12,41 @@ Label : CODE
           
           Label : ARGUMENT
             void
-        Label : NAME
-          c
-        Label : STATIC
-          static
         Label : BLOCK
           void
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
-        function
-        Label : PUBLIC
-          public
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
         Label : NAME
           a
+        Label : PUBLIC
+          public
         Label : STATIC
           static
-        Label : BLOCK
-          void
       Label : ELEMENT
         function
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
-        Label : NAME
-          b
-        Label : STATIC
-          static
         Label : BLOCK
           void
+        Label : NAME
+          b
         Label : PRIVATE
           private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+        Label : NAME
+          c
+        Label : PROTECTED
+          protected
+        Label : STATIC
+          static
+    Label : NAME
+      x

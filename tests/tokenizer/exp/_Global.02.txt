@@ -5,11 +5,7 @@ Label : CODE
   Label : ELEMENT
     global
     Label : GLOBAL
-      $d
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $c
+      $a
   Label : ELEMENT
     global
     Label : GLOBAL
@@ -17,4 +13,8 @@ Label : CODE
   Label : ELEMENT
     global
     Label : GLOBAL
-      $a
+      $c
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $d

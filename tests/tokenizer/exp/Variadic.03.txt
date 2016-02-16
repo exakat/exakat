@@ -3,9 +3,71 @@
 Label : CODE
   ;
   Label : ELEMENT
+    a
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        __FILE__
+  Label : ELEMENT
+    \
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        0
+    Label : SUBNAME
+      b
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      c1
+    Label : METHOD
+      c
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          B
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      d
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          null
+    Label : OBJECT
+      $d2
+  Label : ELEMENT
+    \
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
+      Label : ARGUMENT
+        C
+    Label : SUBNAME
+      e
+    Label : SUBNAME
+      ee
+  Label : ELEMENT
     $f
-    Label : NAME
-      $f
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -18,12 +80,10 @@ Label : CODE
           $g
         Label : PROPERTY
           D
+    Label : NAME
+      $f
   Label : ELEMENT
-    \
-    Label : SUBNAME
-      ee
-    Label : SUBNAME
-      e
+    $h
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -31,25 +91,19 @@ Label : CODE
       Label : ARGUMENT
         3
       Label : ARGUMENT
-        C
+        ->
+        Label : METHOD
+          E
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+        Label : OBJECT
+          $i
+    Label : NAME
+      $h
   Label : ELEMENT
-    ->
-    Label : OBJECT
-      $d2
-    Label : METHOD
-      d
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          null
-        Label : ARGUMENT
-          3
-  Label : ELEMENT
-    \
-    Label : SUBNAME
-      b
+    $j
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -57,51 +111,31 @@ Label : CODE
       Label : ARGUMENT
         3
       Label : ARGUMENT
-        0
-  Label : ELEMENT
-    ::
-    Label : METHOD
-      c
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          B
-        Label : ARGUMENT
-          2
-    Label : CLASS
-      c1
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        3
-      Label : ARGUMENT
-        __FILE__
+        ::
+        Label : CLASS
+          F
+        Label : PROPERTY
+          $k
+    Label : NAME
+      $j
   Label : ELEMENT
     $l
-    Label : NAME
-      $l
     Label : ARGUMENTS
       Arguments
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
       Label : ARGUMENT
         ::
         Label : CLASS
           G
         Label : CONSTANT
           H
-      Label : ARGUMENT
-        3
-      Label : ARGUMENT
-        2
+    Label : NAME
+      $l
   Label : ELEMENT
     $m
-    Label : NAME
-      $m
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -114,39 +148,5 @@ Label : CODE
           I
         Label : CONSTANT
           J
-  Label : ELEMENT
-    $h
     Label : NAME
-      $h
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $i
-        Label : METHOD
-          E
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : ARGUMENT
-        3
-  Label : ELEMENT
-    $j
-    Label : NAME
-      $j
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        3
-      Label : ARGUMENT
-        ::
-        Label : PROPERTY
-          $k
-        Label : CLASS
-          F
+      $m

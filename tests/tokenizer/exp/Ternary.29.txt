@@ -3,47 +3,47 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : INDEX
+        'b'
+      Label : VARIABLE
+        $a
     Label : RIGHT
       ?
       Label : CONDITION
         Concatenation
         Label : CONCAT
-          'g'
-        Label : CONCAT
           c
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               Concatenation
+              Label : CONCAT
+                d
               Label : CONCAT
                 (int)
                 Label : CAST
                   [
-                  Label : VARIABLE
-                    $e
                   Label : INDEX
                     'f'
-              Label : CONCAT
-                d
+                  Label : VARIABLE
+                    $e
+        Label : CONCAT
+          'g'
+      Label : ELSE
+        'L'
       Label : THEN
         Concatenation
         Label : CONCAT
-          'k'
+          H
         Label : CONCAT
           (int)
           Label : CAST
             [
-            Label : VARIABLE
-              $i
             Label : INDEX
               'j'
+            Label : VARIABLE
+              $i
         Label : CONCAT
-          H
-      Label : ELSE
-        'L'
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'b'
+          'k'

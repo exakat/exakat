@@ -8,13 +8,13 @@ Label : CODE
       
       Label : ARGUMENT
         void
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          1
         Label : LEFT
           $x
+        Label : RIGHT
+          1
+    Label : NAME
+      x

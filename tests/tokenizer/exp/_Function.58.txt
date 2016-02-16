@@ -8,8 +8,6 @@ Label : CODE
       
       Label : ARGUMENT
         $a
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -22,11 +20,13 @@ Label : CODE
               
               Label : ARGUMENT
                 'D'
-        Label : THEN
-          'D'
         Label : ELSE
           die
           Label : ARGUMENTS
             
             Label : ARGUMENT
               'F'
+        Label : THEN
+          'D'
+    Label : NAME
+      B

@@ -11,7 +11,7 @@ Label : CODE
         Label : CLASS
           CLASSE
         Label : VARIABLE
-          $c
+          $a
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -23,8 +23,8 @@ Label : CODE
         Label : CLASS
           CLASSE
         Label : VARIABLE
-          $a
-    Label : NAME
-      b
+          $c
     Label : BLOCK
       void
+    Label : NAME
+      b

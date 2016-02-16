@@ -5,31 +5,31 @@ Label : CODE
     if
     Label : CONDITION
       &&
-      Label : RIGHT
-        $d
       Label : LEFT
         instanceof
-        Label : VARIABLE
-          $a
         Label : CLASS
           \
           Label : SUBNAME
-            C
-          Label : SUBNAME
             B
+          Label : SUBNAME
+            C
+        Label : VARIABLE
+          $a
+      Label : RIGHT
+        $d
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $e
         Label : RIGHT
           ->
-          Label : OBJECT
-            $f
           Label : METHOD
             g
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 void
-        Label : LEFT
-          $e
+          Label : OBJECT
+            $f
