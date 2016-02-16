@@ -5,83 +5,25 @@ Label : CODE
   Label : ELEMENT
     =
     Label : LEFT
-      $a
+      $b
     Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'b'
-          Label : VALUE
-            array
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'B'
-                Label : VALUE
-                  'o'
+      'b'
   Label : ELEMENT
-    if
-    Label : CONDITION
-      ==
+    =
+    Label : LEFT
+      $o
+    Label : RIGHT
+      new
+      Label : NEW
+        stdclass
+  Label : ELEMENT
+    const
+    Label : CONST
+      =
       Label : LEFT
-        $
-        Label : NAME
-          ->
-          Label : OBJECT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                $b
-            Label : INDEX
-              'B'
-          Label : PROPERTY
-            C
-      Label : RIGHT
         D
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              $b
-          Label : INDEX
-            'E'
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $
-        Label : NAME
-          ->
-          Label : OBJECT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                $b
-            Label : INDEX
-              'B'
-          Label : PROPERTY
-            C
+      Label : RIGHT
+        1
   Label : ELEMENT
     =
     Label : LEFT
@@ -93,22 +35,82 @@ Label : CODE
     Label : RIGHT
       D
   Label : ELEMENT
-    const
-    Label : VALUE
-      1
-    Label : NAME
-      D
-  Label : ELEMENT
     =
     Label : LEFT
-      $o
+      $a
     Label : RIGHT
-      new
-      Label : NEW
-        stdclass
+      array
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'b'
+          Label : VALUE
+            array
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'B'
+                Label : VALUE
+                  'o'
   Label : ELEMENT
-    =
-    Label : LEFT
-      $b
-    Label : RIGHT
-      'b'
+    var_dump
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          [
+          Label : INDEX
+            'B'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              $b
+            Label : VARIABLE
+              $
+              Label : NAME
+                $a
+        Label : PROPERTY
+          C
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          [
+          Label : INDEX
+            'B'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              $b
+            Label : VARIABLE
+              $
+              Label : NAME
+                $a
+        Label : PROPERTY
+          C
+      Label : RIGHT
+        D
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $c
+        Label : RIGHT
+          [
+          Label : INDEX
+            'E'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              $b
+            Label : VARIABLE
+              $a

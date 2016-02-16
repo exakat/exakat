@@ -4,10 +4,10 @@ Label : CODE
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
-      $y
+      $x
   Label : ELEMENT
     void
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
-      $x
+      $y

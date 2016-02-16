@@ -2,13 +2,13 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       0
     Label : THEN
       ;
+      Label : ELEMENT
+        A
       Label : ELEMENT
         ::
         Label : CLASS
@@ -16,7 +16,7 @@ Label : CODE
         Label : METHOD
           D
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               'E'
       Label : ELEMENT
@@ -28,10 +28,8 @@ Label : CODE
         Label : METHOD
           H
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               'I'
       Label : ELEMENT
         void
-      Label : ELEMENT
-        A

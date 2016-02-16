@@ -4,67 +4,67 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            ::
-            Label : CLASS
-              F
-            Label : CONSTANT
-              G
-          Label : LEFT
-            E
       Label : ELEMENT
         private
         Label : DEFINE
           =
-          Label : RIGHT
-            'b'
           Label : LEFT
             $a
+          Label : RIGHT
+            'b'
         Label : PRIVATE
           private
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            1
           Label : LEFT
             C
+          Label : RIGHT
+            1
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            '2'
           Label : LEFT
             D
+          Label : RIGHT
+            '2'
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            E
+          Label : RIGHT
+            ::
+            Label : CLASS
+              F
+            Label : CONSTANT
+              G
       Label : ELEMENT
         static
         Label : DEFINE
           $E
-        Label : STATIC
-          static
         Label : PROTECTED
           protected
+        Label : STATIC
+          static
       Label : ELEMENT
         function
-        Label : PUBLIC
-          public
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
-        Label : NAME
-          f
-        Label : STATIC
-          static
         Label : BLOCK
           void
+        Label : NAME
+          f
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
+    Label : NAME
+      x

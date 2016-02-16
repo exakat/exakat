@@ -7,6 +7,20 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
+        =
+        Label : LEFT
+          $d
+        Label : RIGHT
+          Concatenation
+          Label : CONCAT
+            'e'
+          Label : CONCAT
+            ->
+            Label : OBJECT
+              $f
+            Label : PROPERTY
+              g
+      Label : ELEMENT
         if
         Label : CONDITION
           $h
@@ -14,10 +28,10 @@ Label : CODE
           ;
           Label : ELEMENT
             .=
-            Label : RIGHT
-              'j'
             Label : LEFT
               $i
+            Label : RIGHT
+              'j'
       Label : ELEMENT
         if
         Label : CONDITION
@@ -26,25 +40,11 @@ Label : CODE
           ;
           Label : ELEMENT
             .=
-            Label : RIGHT
-              'm'
             Label : LEFT
               $l
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          Concatenation
-          Label : CONCAT
-            ->
-            Label : OBJECT
-              $f
-            Label : PROPERTY
-              g
-          Label : CONCAT
-            'e'
-        Label : LEFT
-          $d
-    Label : VALUE
-      $b
+            Label : RIGHT
+              'm'
     Label : SOURCE
       $a
+    Label : VALUE
+      $b

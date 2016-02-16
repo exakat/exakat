@@ -4,29 +4,29 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       1
+  Label : ELEMENT
+    =
     Label : LEFT
       [
-      Label : VARIABLE
-        $a
       Label : INDEX
         Concatenation
         Label : CONCAT
-          $c
+          $b
         Label : CONCAT
           'd'
         Label : CONCAT
-          $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $y
-  Label : ELEMENT
-    =
+          $c
+      Label : VARIABLE
+        $a
     Label : RIGHT
       1
+  Label : ELEMENT
+    =
     Label : LEFT
-      $x
+      $y
+    Label : RIGHT
+      2

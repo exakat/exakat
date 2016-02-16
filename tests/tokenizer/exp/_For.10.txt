@@ -4,8 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     for
-    Label : INIT
-      void
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $j
     Label : FINAL
       void
     Label : INCREMENT
@@ -13,14 +17,10 @@ Label : CODE
       Label : ARGUMENT
         ++
         Label : POSTPLUSPLUS
-          $j
+          $i
       Label : ARGUMENT
         ++
         Label : POSTPLUSPLUS
-          $i
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
           $j
+    Label : INIT
+      void

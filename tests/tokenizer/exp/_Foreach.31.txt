@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $y
     Label : BLOCK
       void
     Label : SOURCE
       clone
       Label : CLONE
         $x
+    Label : VALUE
+      $y

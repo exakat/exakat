@@ -3,39 +3,17 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       !
       Label : NOT
         B
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             'C'
     Label : THEN
       ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            =
-            Label : RIGHT
-              'G'
-            Label : LEFT
-              $h
-          Label : ARGUMENT
-            $g
-          Label : ARGUMENT
-            $f
-          Label : ARGUMENT
-            $e
-        Label : NAME
-          F
-        Label : BLOCK
-          void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -49,22 +27,42 @@ Label : CODE
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                =
-                Label : RIGHT
-                  E
-                Label : LEFT
-                  $d
-              Label : ARGUMENT
-                =
-                Label : RIGHT
-                  0
-                Label : LEFT
-                  $c
+                $a
               Label : ARGUMENT
                 $b
               Label : ARGUMENT
-                $a
-            Label : NAME
-              D
+                =
+                Label : LEFT
+                  $c
+                Label : RIGHT
+                  0
+              Label : ARGUMENT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  E
             Label : BLOCK
               void
+            Label : NAME
+              D
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $e
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            $g
+          Label : ARGUMENT
+            =
+            Label : LEFT
+              $h
+            Label : RIGHT
+              'G'
+        Label : BLOCK
+          void
+        Label : NAME
+          F

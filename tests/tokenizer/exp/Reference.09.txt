@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       ::
       Label : CLASS
@@ -11,8 +13,6 @@ Label : CODE
       Label : METHOD
         c
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             'd'
-    Label : LEFT
-      $x

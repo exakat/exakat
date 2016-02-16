@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -12,72 +14,72 @@ Label : CODE
           ?
           Label : CONDITION
             ===
-            Label : RIGHT
-              '1'
             Label : LEFT
               $semicolon
-          Label : THEN
-            '3'
+            Label : RIGHT
+              '1'
           Label : ELSE
             '4'
+          Label : THEN
+            '3'
       Label : CONCAT
         -1
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       [
       Label : ARGUMENTS
-        void
-        Label : ARGUMENTS
-          Concatenation
-          Label : CONCAT
-            (
-            Label : CODE
-              ?
-              Label : CONDITION
-                ===
-                Label : RIGHT
-                  '1'
-                Label : LEFT
-                  $bracket
-              Label : THEN
-                '3'
-              Label : ELSE
-                '4'
-          Label : CONCAT
-            -1
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      strtolower
-      Label : ARGUMENTS
-        void
+        ,
         Label : ARGUMENT
           Concatenation
           Label : CONCAT
+            (
+            Label : CODE
+              ?
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  $bracket
+                Label : RIGHT
+                  '1'
+              Label : ELSE
+                '4'
+              Label : THEN
+                '3'
+          Label : CONCAT
             -1
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a
+    Label : RIGHT
+      strtolower
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          Concatenation
           Label : CONCAT
             (
             Label : CODE
               ?
               Label : CONDITION
                 ===
-                Label : RIGHT
-                  '1'
                 Label : LEFT
                   $closingParenthesis
-              Label : THEN
-                '3'
+                Label : RIGHT
+                  '1'
               Label : ELSE
                 '4'
-    Label : LEFT
-      $a
+              Label : THEN
+                '3'
+          Label : CONCAT
+            -1
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       f
       Label : ARGUMENTS
@@ -90,17 +92,15 @@ Label : CODE
               ?
               Label : CONDITION
                 ===
-                Label : RIGHT
-                  '1'
                 Label : LEFT
                   $comma
-              Label : THEN
-                '3'
+                Label : RIGHT
+                  '1'
               Label : ELSE
                 '4'
+              Label : THEN
+                '3'
           Label : CONCAT
             -1
         Label : ARGUMENT
           2
-    Label : LEFT
-      $a

@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -17,50 +15,52 @@ Label : CODE
       Label : ELEMENT
         protected
         Label : DEFINE
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            1
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        protected
+        Label : PROTECTED
+          protected
+        Label : DEFINE
           $c
         Label : DEFINE
           $d
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
-        protected
-        Label : DEFINE
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $f
-        Label : DEFINE
-          $e
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
-        protected
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $g
-        Label : DEFINE
-          $h
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
-        protected
-        Label : DEFINE
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $b
-        Label : PROTECTED
-          protected
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
           Label : LEFT
             b
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        protected
+        Label : DEFINE
+          $e
+        Label : DEFINE
+          =
+          Label : LEFT
+            $f
+          Label : RIGHT
+            2
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        protected
+        Label : DEFINE
+          =
+          Label : LEFT
+            $g
+          Label : RIGHT
+            3
+        Label : DEFINE
+          $h
+        Label : PROTECTED
+          protected
+    Label : NAME
+      x

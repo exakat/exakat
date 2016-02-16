@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       str_replace
       Label : ARGUMENTS
         Arguments
+        Label : ARGUMENT
+          "b"
+        Label : ARGUMENT
+          "c"
         Label : ARGUMENT
           `
           Label : CONTAINS
             Concatenation
             Label : CONCAT
               /bin/cat d
-        Label : ARGUMENT
-          "c"
-        Label : ARGUMENT
-          "b"
-    Label : LEFT
-      $a

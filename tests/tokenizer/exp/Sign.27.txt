@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  -
-  Label : SIGN
-    (
-    Label : CODE
-      $x
+  ;
+  Label : ELEMENT
+    -
+    Label : SIGN
+      (
+      Label : CODE
+        $x

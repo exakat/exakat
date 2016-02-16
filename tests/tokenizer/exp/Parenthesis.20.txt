@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $b
     Label : RIGHT
       (
       Label : CODE
@@ -12,12 +14,10 @@ Label : CODE
           (
           Label : CODE
             +
-            Label : RIGHT
-              3
             Label : LEFT
               2
-    Label : LEFT
-      $b
+            Label : RIGHT
+              3
   Label : ELEMENT
     if
     Label : CONDITION
@@ -30,27 +30,27 @@ Label : CODE
       ;
       Label : ELEMENT
         (
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $b
         Label : CODE
           ->
           Label : OBJECT
             $b
           Label : PROPERTY
             B
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $b
   Label : ELEMENT
     (
-    Label : CODE
-      ->
-      Label : OBJECT
-        $c
-      Label : PROPERTY
-        C
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         $c
       Label : ARGUMENT
         $d
+    Label : CODE
+      ->
+      Label : OBJECT
+        $c
+      Label : PROPERTY
+        C

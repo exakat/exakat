@@ -2,38 +2,38 @@
 Label : ELEMENT
   echo
   Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      ?
-      Label : CONDITION
-        (
-        Label : CODE
-          &&
-          Label : RIGHT
-            !
-            Label : NOT
-              $f
-          Label : LEFT
-            d
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'e'
-      Label : THEN
-        "g"
-      Label : ELSE
-        'h'
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    void
+    
     Label : ARGUMENT
       (
       Label : CODE
         ?
         Label : CONDITION
           $a
-        Label : THEN
-          'b'
         Label : ELSE
           'c'
+        Label : THEN
+          'b'
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    
+    Label : ARGUMENT
+      ?
+      Label : CONDITION
+        (
+        Label : CODE
+          &&
+          Label : LEFT
+            d
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                'e'
+          Label : RIGHT
+            !
+            Label : NOT
+              $f
+      Label : ELSE
+        'h'
+      Label : THEN
+        "g"

@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       $b
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          $e
+          $c
         Label : ARGUMENT
           $d
         Label : ARGUMENT
-          $c
+          $e
       Label : NAME
         $b
-    Label : LEFT
-      $a

@@ -1,36 +1,38 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    B
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'C'
-  Label : THEN
-    ;
-    Label : ELEMENT
-      D
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      B
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
-          void
-  Label : ELSE
-    ;
-    Label : ELEMENT
-      declare
-      Label : TICKS
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          E
-      Label : BLOCK
-        ;
-        Label : ELEMENT
+          'C'
+    Label : ELSE
+      ;
+      Label : ELEMENT
+        declare
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              $b
+        Label : TICKS
           =
-          Label : RIGHT
-            $b
           Label : LEFT
-            $b
+            E
+          Label : RIGHT
+            1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        D
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void

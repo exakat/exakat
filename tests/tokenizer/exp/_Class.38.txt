@@ -4,38 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
         private
         Label : DEFINE
           =
-          Label : RIGHT
-            1
           Label : LEFT
             $b
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
           Label : RIGHT
-            3
-          Label : LEFT
-            b
-      Label : ELEMENT
-        private
-        Label : DEFINE
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $f
-        Label : DEFINE
-          $e
+            1
         Label : PRIVATE
           private
       Label : ELEMENT
@@ -47,14 +25,36 @@ Label : CODE
         Label : PRIVATE
           private
       Label : ELEMENT
-        private
-        Label : DEFINE
+        const
+        Label : CONST
           =
+          Label : LEFT
+            b
           Label : RIGHT
             3
-          Label : LEFT
-            $g
+      Label : ELEMENT
+        private
         Label : DEFINE
-          $h
+          $e
+        Label : DEFINE
+          =
+          Label : LEFT
+            $f
+          Label : RIGHT
+            2
         Label : PRIVATE
           private
+      Label : ELEMENT
+        private
+        Label : PRIVATE
+          private
+        Label : DEFINE
+          =
+          Label : LEFT
+            $g
+          Label : RIGHT
+            3
+        Label : DEFINE
+          $h
+    Label : NAME
+      x

@@ -3,70 +3,70 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : VARIABLE
-        $m
-      Label : INDEX
-        'n'
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $k
-      Label : INDEX
-        'l'
-  Label : ELEMENT
     if
     Label : CONDITION
       &&
-      Label : RIGHT
-        is_array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              'd'
       Label : LEFT
         isset
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             [
-            Label : VARIABLE
-              $a
             Label : INDEX
               'b'
+            Label : VARIABLE
+              $a
+      Label : RIGHT
+        is_array
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              $c
     Label : THEN
       ;
       Label : ELEMENT
         foreach
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $i
+            Label : RIGHT
+              1
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $j
+            Label : RIGHT
+              2
+        Label : SOURCE
+          [
+          Label : INDEX
+            'f'
+          Label : VARIABLE
+            $e
         Label : VALUE
           =>
           Label : KEY
             $g
           Label : VALUE
             $h
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $j
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $i
-        Label : SOURCE
-          [
-          Label : VARIABLE
-            $e
-          Label : INDEX
-            'f'
+  Label : ELEMENT
+    =
+    Label : LEFT
+      [
+      Label : INDEX
+        'l'
+      Label : VARIABLE
+        $k
+    Label : RIGHT
+      [
+      Label : INDEX
+        'n'
+      Label : VARIABLE
+        $m

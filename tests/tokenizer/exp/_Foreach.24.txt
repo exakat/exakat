@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -13,14 +11,16 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
+            $c
+          Label : ARGUMENT
             array
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                $e
-              Label : ARGUMENT
                 $d
-          Label : ARGUMENT
-            $c
+              Label : ARGUMENT
+                $e
     Label : SOURCE
       $a
+    Label : VALUE
+      $b

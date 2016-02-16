@@ -7,13 +7,15 @@ Label : CODE
     Label : CONDITION
       F
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           $a
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $b
         Label : RIGHT
           (array)
           Label : CAST
@@ -22,5 +24,3 @@ Label : CODE
               (object)
               Label : CAST
                 $a
-        Label : LEFT
-          $b

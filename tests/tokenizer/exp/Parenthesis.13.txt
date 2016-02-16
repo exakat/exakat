@@ -7,7 +7,7 @@ Label : CODE
     Label : CONDITION
       include_once
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           (
           Label : CODE

@@ -5,15 +5,15 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        $c
+        $a
   Label : ELEMENT
     b
 
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
-        $a
+        $c

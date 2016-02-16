@@ -8,66 +8,12 @@ Label : CODE
       ;
       Label : ELEMENT
         class
-        Label : NAME
-          ParentClass
         Label : BLOCK
           void
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          'ClassName'
-        Label : LEFT
-          $x
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              \
-              Label : SUBNAME
-                ClassName
-              Label : SUBNAME
-                NS
-            Label : CONSTANT
-              class
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              \
-              Label : SUBNAME
-                ClassName
-              Label : SUBNAME
-                B
-              Label : SUBNAME
-                X
-            Label : CONSTANT
-              class
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            ::
-            Label : METHOD
-              x
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : CLASS
-              ClassName
+        Label : NAME
+          ParentClass
       Label : ELEMENT
         class
-        Label : NAME
-          ClassName
-        Label : EXTENDS
-          ParentClass
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -76,10 +22,6 @@ Label : CODE
               
               Label : ARGUMENT
                 void
-            Label : NAME
-              x
-            Label : STATIC
-              static
             Label : BLOCK
               ;
               Label : ELEMENT
@@ -112,6 +54,14 @@ Label : CODE
                       parent
                     Label : CONSTANT
                       class
+            Label : NAME
+              x
+            Label : STATIC
+              static
+        Label : EXTENDS
+          ParentClass
+        Label : NAME
+          ClassName
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -122,5 +72,55 @@ Label : CODE
               ClassName
             Label : CONSTANT
               class
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $x
+        Label : RIGHT
+          'ClassName'
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              \
+              Label : SUBNAME
+                NS
+              Label : SUBNAME
+                ClassName
+            Label : CONSTANT
+              class
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              \
+              Label : SUBNAME
+                X
+              Label : SUBNAME
+                B
+              Label : SUBNAME
+                ClassName
+            Label : CONSTANT
+              class
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              ClassName
+            Label : METHOD
+              x
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
     Label : NAMESPACE
       NS

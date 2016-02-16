@@ -7,27 +7,11 @@ Label : CODE
     Label : CONDITION
       class_exists
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           $d
     Label : THEN
       ;
-      Label : ELEMENT
-        new
-        Label : NEW
-          $a
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              (array)
-              Label : CAST
-                (
-                Label : CODE
-                  $c
-            Label : ARGUMENT
-              $b
-          Label : NAME
-            $a
       Label : ELEMENT
         if
         Label : CONDITION
@@ -35,7 +19,7 @@ Label : CODE
           Label : NOT
             isset
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 ->
                 Label : OBJECT
@@ -48,3 +32,19 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $c
+      Label : ELEMENT
+        new
+        Label : NEW
+          $a
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              (array)
+              Label : CAST
+                (
+                Label : CODE
+                  $c
+          Label : NAME
+            $a

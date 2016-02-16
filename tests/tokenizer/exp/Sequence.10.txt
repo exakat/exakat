@@ -3,46 +3,46 @@
 Label : CODE
   ;
   Label : ELEMENT
-    switch
-    Label : NAME
+    =
+    Label : LEFT
       $a
+    Label : RIGHT
+      1
+  Label : ELEMENT
+    switch
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          1
         Label : CODE
           ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              2
           Label : ELEMENT
             break
             Label : LEVEL
               void
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $b
-        Label : CASE
-          1
       Label : ELEMENT
         default
         Label : CODE
           Block with Sequence For Default
           Label : ELEMENT
             =
-            Label : RIGHT
-              3
             Label : LEFT
               $b
+            Label : RIGHT
+              3
+    Label : NAME
+      $a
   Label : ELEMENT
     =
-    Label : RIGHT
-      2
     Label : LEFT
       $c
-  Label : ELEMENT
-    =
     Label : RIGHT
-      1
-    Label : LEFT
-      $a
+      2

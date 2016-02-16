@@ -5,43 +5,11 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $b
-    Label : NAME
-      a
     Label : BLOCK
       ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          ->
-          Label : OBJECT
-            ->
-            Label : OBJECT
-              $d
-            Label : PROPERTY
-              e
-          Label : METHOD
-            f
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  "
-                  Label : CONTAINS
-                    Concatenation
-                    Label : CONCAT
-                      c
-                    Label : CONCAT
-                      $d
-                    Label : CONCAT
-                      '
-                Label : CONCAT
-                  b
-                Label : CONCAT
-                  "a"
       Label : ELEMENT
         if
         Label : CONDITION
@@ -54,3 +22,35 @@ Label : CODE
             return
             Label : RETURN
               false
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ->
+          Label : METHOD
+            f
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  "a"
+                Label : CONCAT
+                  b
+                Label : CONCAT
+                  "
+                  Label : CONTAINS
+                    Concatenation
+                    Label : CONCAT
+                      c
+                    Label : CONCAT
+                      $d
+                    Label : CONCAT
+                      '
+          Label : OBJECT
+            ->
+            Label : OBJECT
+              $d
+            Label : PROPERTY
+              e
+    Label : NAME
+      a

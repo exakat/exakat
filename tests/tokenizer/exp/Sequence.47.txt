@@ -4,26 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          $b
-      Label : INDEX
-        'c'
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'D'
         Label : CODE
           ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
           Label : ELEMENT
             if
             Label : CONDITION
@@ -34,15 +22,27 @@ Label : CODE
                 ++
                 Label : POSTPLUSPLUS
                   $f
-        Label : CASE
-          'D'
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
       Label : ELEMENT
         case
+        Label : CASE
+          'G'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $h
-        Label : CASE
-          'G'
+    Label : NAME
+      [
+      Label : INDEX
+        'c'
+      Label : VARIABLE
+        [
+        Label : INDEX
+          $b
+        Label : VARIABLE
+          $a

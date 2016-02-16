@@ -4,519 +4,519 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x3
     Label : BLOCK
       ;
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            and
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            array
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             abstract
+          Label : RIGHT
+            3
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            for
+            and
+          Label : RIGHT
+            3
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            protected
+            array
+          Label : RIGHT
+            3
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            function
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            endforeach
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            exit
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            foreach
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            final
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            isset
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            static
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            trait
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            interface
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            goto
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            private
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            enddeclare
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            instanceof
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            include_once
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            or
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            throw
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            switch
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            unset
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            var
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            namespace
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            break
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             as
+          Label : RIGHT
+            3
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            global
+            break
+          Label : RIGHT
+            3
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            include
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            try
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            public
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            endif
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            require
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            print
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            yield
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            while
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            use
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            if
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            endswitch
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            endfor
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            list
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            insteadof
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            return
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            new
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            xor
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            require_once
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            implements
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            endwhile
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            else
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            echo
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            eval
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            do
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            empty
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            elseif
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            extends
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            default
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            die
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            continue
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            declare
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            clone
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            const
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             case
+          Label : RIGHT
+            3
       Label : ELEMENT
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
           Label : LEFT
             catch
+          Label : RIGHT
+            3
       Label : ELEMENT
         const
         Label : CONST
           =
+          Label : LEFT
+            clone
           Label : RIGHT
             3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            const
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            continue
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            declare
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            default
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            die
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            do
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            echo
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            else
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            elseif
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            empty
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            enddeclare
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            endfor
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            endforeach
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            endif
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            endswitch
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            endwhile
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            eval
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            exit
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            extends
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            final
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
           Label : LEFT
             finally
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            for
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            foreach
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            function
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            global
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            goto
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            if
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            implements
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            include
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            include_once
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            instanceof
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            insteadof
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            interface
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            isset
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            list
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            namespace
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            new
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            or
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            print
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            private
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            protected
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            public
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            require
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            require_once
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            return
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            static
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            switch
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            throw
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            trait
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            try
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            unset
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            use
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            var
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            while
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            xor
+          Label : RIGHT
+            3
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            yield
+          Label : RIGHT
+            3
+    Label : NAME
+      x3

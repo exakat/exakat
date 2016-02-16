@@ -1,47 +1,53 @@
 ;
 Label : ELEMENT
-  ->
-  Label : OBJECT
-    ::
-    Label : CLASS
-      C
-    Label : METHOD
-      D
+  <?php 
+  Label : CODE
+    ;
+    Label : ELEMENT
+      echo
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           __
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
-              'F'
-  Label : METHOD
-    g
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      I
+              'B'
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      ->
+      Label : METHOD
+        g
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+      Label : OBJECT
+        ::
+        Label : CLASS
+          C
+        Label : METHOD
+          D
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              __
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'F'
+    Label : ELEMENT
+      H
+    Label : ELEMENT
+      echo
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
-          'J'
+          I
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              'J'
 Label : ELEMENT
-  H
-Label : ELEMENT
-  A
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      __
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'B'
+  K

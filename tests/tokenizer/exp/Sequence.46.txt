@@ -9,32 +9,32 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        ->
-        Label : OBJECT
-          $e
-        Label : METHOD
-          f
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $g
-      Label : ELEMENT
         if
         Label : CONDITION
           !
           Label : NOT
             empty
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  [
-                  Label : VARIABLE
-                    $b
-                  Label : INDEX
-                    'c'
                 Label : INDEX
                   'd'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'c'
+                  Label : VARIABLE
+                    $b
         Label : THEN
           void
+      Label : ELEMENT
+        ->
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $g
+        Label : OBJECT
+          $e

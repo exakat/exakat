@@ -6,44 +6,26 @@ Label : CODE
     if
     Label : CONDITION
       ===
-      Label : RIGHT
-        'c'
       Label : LEFT
         ->
         Label : METHOD
           b
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               void
         Label : OBJECT
           $a
-    Label : THEN
+      Label : RIGHT
+        'c'
+    Label : ELSE
       ;
       Label : ELEMENT
-        ->
-        Label : METHOD
-          d
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                "
-                Label : CONTAINS
-                  Concatenation
-                  Label : CONCAT
-                     
-                  Label : CONCAT
-                    $d
-              Label : CONCAT
-                ::
-                Label : CLASS
-                  self
-                Label : CONSTANT
-                  E
-        Label : OBJECT
-          $c
+        ++
+        Label : POSTPLUSPLUS
+          $h
+    Label : THEN
+      ;
       Label : ELEMENT
         `
         Label : CONTAINS
@@ -52,9 +34,27 @@ Label : CODE
             ls -1 
           Label : CONCAT
             $g
-    Label : ELSE
-      ;
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $h
+        ->
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                ::
+                Label : CLASS
+                  self
+                Label : CONSTANT
+                  E
+              Label : CONCAT
+                "
+                Label : CONTAINS
+                  Concatenation
+                  Label : CONCAT
+                     
+                  Label : CONCAT
+                    $d
+        Label : OBJECT
+          $c

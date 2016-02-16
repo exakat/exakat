@@ -7,6 +7,42 @@ Label : CODE
     Label : LEFT
       ->
       Label : OBJECT
+        ::
+        Label : CLASS
+          A
+        Label : METHOD
+          b
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+      Label : PROPERTY
+        c
+    Label : RIGHT
+      1
+  Label : ELEMENT
+    =
+    Label : LEFT
+      ->
+      Label : OBJECT
+        ::
+        Label : CLASS
+          A
+        Label : METHOD
+          b
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+      Label : PROPERTY
+        c
+    Label : RIGHT
+      1
+  Label : ELEMENT
+    =
+    Label : LEFT
+      ->
+      Label : OBJECT
         ->
         Label : OBJECT
           ->
@@ -17,7 +53,7 @@ Label : CODE
             Label : METHOD
               b
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   void
           Label : PROPERTY
@@ -36,32 +72,14 @@ Label : CODE
         ->
         Label : OBJECT
           ->
-          Label : OBJECT
-            $A
-          Label : PROPERTY
-            b
-        Label : PROPERTY
-          c
-      Label : PROPERTY
-        d
-    Label : RIGHT
-      3
-  Label : ELEMENT
-    =
-    Label : LEFT
-      ->
-      Label : OBJECT
-        ->
-        Label : OBJECT
-          ->
-          Label : OBJECT
-            $A
           Label : METHOD
             b
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 void
+          Label : OBJECT
+            $A
         Label : PROPERTY
           c
       Label : PROPERTY
@@ -73,34 +91,16 @@ Label : CODE
     Label : LEFT
       ->
       Label : OBJECT
-        ::
-        Label : CLASS
-          A
-        Label : METHOD
-          b
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
+        ->
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            $A
+          Label : PROPERTY
+            b
+        Label : PROPERTY
+          c
       Label : PROPERTY
-        c
+        d
     Label : RIGHT
-      1
-  Label : ELEMENT
-    =
-    Label : LEFT
-      ->
-      Label : OBJECT
-        ::
-        Label : CLASS
-          A
-        Label : METHOD
-          b
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : PROPERTY
-        c
-    Label : RIGHT
-      1
+      3

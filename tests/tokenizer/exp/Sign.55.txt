@@ -3,110 +3,110 @@
 Label : CODE
   ;
   Label : ELEMENT
-    *
-    Label : RIGHT
-      2
+    +
     Label : LEFT
       Concatenation
-      Label : CONCAT
-        ::
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $d
-        Label : CLASS
-          b
-      Label : CONCAT
-        'a2'
-  Label : ELEMENT
-    *
-    Label : RIGHT
-      1
-    Label : LEFT
-      Concatenation
-      Label : CONCAT
-        ->
-        Label : OBJECT
-          $b
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $d
       Label : CONCAT
         'a'
-  Label : ELEMENT
-    +
-    Label : RIGHT
-      2
-    Label : LEFT
-      Concatenation
-      Label : CONCAT
-        ::
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $d
-        Label : CLASS
-          b
-      Label : CONCAT
-        'a2'
-  Label : ELEMENT
-    +
-    Label : RIGHT
-      1
-    Label : LEFT
-      Concatenation
       Label : CONCAT
         ->
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $d
         Label : OBJECT
           $b
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $d
-      Label : CONCAT
-        'a'
-  Label : ELEMENT
-    +
-    Label : RIGHT
-      'e2'
-    Label : LEFT
-      Concatenation
-      Label : CONCAT
-        ::
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $d
-        Label : CLASS
-          b
-      Label : CONCAT
-        'a2'
-  Label : ELEMENT
-    +
     Label : RIGHT
       'e'
+  Label : ELEMENT
+    +
     Label : LEFT
       Concatenation
       Label : CONCAT
-        ->
-        Label : OBJECT
-          $b
+        'a2'
+      Label : CONCAT
+        ::
+        Label : CLASS
+          b
         Label : METHOD
           c
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               $d
+    Label : RIGHT
+      'e2'
+  Label : ELEMENT
+    +
+    Label : LEFT
+      Concatenation
       Label : CONCAT
         'a'
+      Label : CONCAT
+        ->
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $d
+        Label : OBJECT
+          $b
+    Label : RIGHT
+      1
+  Label : ELEMENT
+    +
+    Label : LEFT
+      Concatenation
+      Label : CONCAT
+        'a2'
+      Label : CONCAT
+        ::
+        Label : CLASS
+          b
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $d
+    Label : RIGHT
+      2
+  Label : ELEMENT
+    *
+    Label : LEFT
+      Concatenation
+      Label : CONCAT
+        'a'
+      Label : CONCAT
+        ->
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $d
+        Label : OBJECT
+          $b
+    Label : RIGHT
+      1
+  Label : ELEMENT
+    *
+    Label : LEFT
+      Concatenation
+      Label : CONCAT
+        'a2'
+      Label : CONCAT
+        ::
+        Label : CLASS
+          b
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              $d
+    Label : RIGHT
+      2

@@ -2,7 +2,7 @@
 Label : ELEMENT
   echo
   Label : ARGUMENTS
-    void
+    
     Label : ARGUMENT
       -
       Label : SIGN

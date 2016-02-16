@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       (
       Label : CODE
         chr
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             |
-            Label : RIGHT
-              >>
-              Label : RIGHT
-                12
-              Label : LEFT
-                $char
             Label : LEFT
               0xC0
-    Label : LEFT
-      $x
+            Label : RIGHT
+              >>
+              Label : LEFT
+                $char
+              Label : RIGHT
+                12

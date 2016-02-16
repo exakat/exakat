@@ -2,8 +2,6 @@
 Label : ELEMENT
   A
 Label : ELEMENT
-  C
-Label : ELEMENT
   <?php 
   Label : CODE
     ;
@@ -21,3 +19,5 @@ Label : ELEMENT
         
         Label : ARGUMENT
           $b
+Label : ELEMENT
+  C

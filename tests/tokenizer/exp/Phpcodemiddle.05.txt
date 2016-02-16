@@ -8,20 +8,20 @@ Label : ELEMENT
       Label : CONDITION
         B
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $a
+      Label : ELSE
+        ;
+        Label : ELEMENT
+          void
+        Label : ELEMENT
+          void
       Label : THEN
         ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $b
-      Label : THEN
-        ;
-        Label : ELEMENT
-          void
-        Label : ELEMENT
-          void
 Label : ELEMENT
   I

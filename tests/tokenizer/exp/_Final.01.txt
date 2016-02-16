@@ -4,49 +4,49 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
+    Label : ABSTRACT
+      abstract
     Label : BLOCK
       ;
       Label : ELEMENT
         function
-        Label : FINAL
-          final
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
+        Label : BLOCK
+          void
+        Label : FINAL
+          final
+        Label : NAME
+          a
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+        Label : FINAL
+          final
+        Label : NAME
+          b
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+        Label : FINAL
+          final
         Label : NAME
           c
         Label : STATIC
           static
-        Label : BLOCK
-          void
-      Label : ELEMENT
-        function
-        Label : FINAL
-          final
-        Label : PUBLIC
-          public
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : NAME
-          b
-        Label : BLOCK
-          void
-      Label : ELEMENT
-        function
-        Label : FINAL
-          final
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : NAME
-          a
-        Label : BLOCK
-          void
-    Label : ABSTRACT
-      abstract
+    Label : NAME
+      x

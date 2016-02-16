@@ -1,21 +1,23 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    $x
-  Label : THEN
-    ;
-    Label : ELEMENT
-      foreach
-      Label : VALUE
-        $b
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            true
-          Label : LEFT
-            $a
-      Label : SOURCE
-        $a
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $x
+    Label : THEN
+      ;
+      Label : ELEMENT
+        foreach
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $a
+            Label : RIGHT
+              true
+        Label : SOURCE
+          $a
+        Label : VALUE
+          $b

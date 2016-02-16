@@ -4,57 +4,57 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        +
-        Label : RIGHT
-          in_array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $l
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $j
-              Label : INDEX
-                'k'
-        Label : LEFT
-          i
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'i'
-      Label : THEN
-        [
-        Label : VARIABLE
-          $m
-        Label : INDEX
-          'n'
-      Label : ELSE
-        'o'
     Label : LEFT
-      [
-      Label : VARIABLE
-        $g
-      Label : INDEX
-        'h'
-  Label : ELEMENT
-    =
+      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          'f'
-        Label : ARGUMENT
-          'e'
-        Label : ARGUMENT
-          'd'
+          'b'
         Label : ARGUMENT
           'c'
         Label : ARGUMENT
-          'b'
+          'd'
+        Label : ARGUMENT
+          'e'
+        Label : ARGUMENT
+          'f'
+  Label : ELEMENT
+    =
     Label : LEFT
-      $a
+      [
+      Label : INDEX
+        'h'
+      Label : VARIABLE
+        $g
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        +
+        Label : LEFT
+          i
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              'i'
+        Label : RIGHT
+          in_array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'k'
+              Label : VARIABLE
+                $j
+            Label : ARGUMENT
+              $l
+      Label : ELSE
+        'o'
+      Label : THEN
+        [
+        Label : INDEX
+          'n'
+        Label : VARIABLE
+          $m

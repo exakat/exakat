@@ -3,40 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ->
-    Label : OBJECT
-      ::
-      Label : CLASS
-        M
-      Label : METHOD
-        l
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'e'
-    Label : METHOD
-      k
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              =>
-              Label : VALUE
-                Concatenation
-                Label : CONCAT
-                  $j
-                Label : CONCAT
-                  "i"
-                Label : CONCAT
-                  H
-              Label : KEY
-                'g'
-        Label : ARGUMENT
-          $f
-  Label : ELEMENT
     if
     Label : CONDITION
       $a
@@ -44,13 +10,47 @@ Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $b
         Label : RIGHT
           c
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              $e
-            Label : ARGUMENT
               'd'
-        Label : LEFT
-          $b
+            Label : ARGUMENT
+              $e
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      k
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $f
+        Label : ARGUMENT
+          array
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                'g'
+              Label : VALUE
+                Concatenation
+                Label : CONCAT
+                  H
+                Label : CONCAT
+                  "i"
+                Label : CONCAT
+                  $j
+    Label : OBJECT
+      ::
+      Label : CLASS
+        M
+      Label : METHOD
+        l
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'e'

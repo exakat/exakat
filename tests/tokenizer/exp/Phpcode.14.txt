@@ -4,20 +4,20 @@ Label : CODE
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
-      $c
-  Label : ELEMENT
-    void
+      $a
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         [
-        Label : VARIABLE
-          $b
         Label : INDEX
           'B'
+        Label : VARIABLE
+          $b
+  Label : ELEMENT
+    void
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
-      $a
+      $c

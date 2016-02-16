@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -18,10 +16,10 @@ Label : CODE
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            1
           Label : LEFT
             $b
+          Label : RIGHT
+            1
         Label : PUBLIC
           public
       Label : ELEMENT
@@ -36,31 +34,33 @@ Label : CODE
         const
         Label : CONST
           =
-          Label : RIGHT
-            3
           Label : LEFT
             b
+          Label : RIGHT
+            3
       Label : ELEMENT
         public
         Label : DEFINE
           $e
         Label : DEFINE
           =
-          Label : RIGHT
-            2
           Label : LEFT
             $f
+          Label : RIGHT
+            2
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
             $g
+          Label : RIGHT
+            3
         Label : DEFINE
           $h
         Label : PUBLIC
           public
+    Label : NAME
+      x

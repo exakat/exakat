@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -18,18 +18,18 @@ Label : CODE
         if
         Label : CONDITION
           ==
+          Label : LEFT
+            false
           Label : RIGHT
             ::
+            Label : CLASS
+              d
             Label : METHOD
               e
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   $f
-            Label : CLASS
-              d
-          Label : LEFT
-            false
         Label : THEN
           ;
           Label : ELEMENT

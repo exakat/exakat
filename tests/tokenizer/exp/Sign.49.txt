@@ -3,6 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
+    \
+    Label : SUBNAME
+      A
+    Label : SUBNAME
+      B
+    Label : SUBNAME
+      C
+  Label : ELEMENT
+    -
+    Label : SIGN
+      (
+      Label : CODE
+        +
+        Label : LEFT
+          4
+        Label : RIGHT
+          3
+  Label : ELEMENT
+    MY_CONSTANT
+  Label : ELEMENT
     "String"
   Label : ELEMENT
     <<<HEREDOC
@@ -14,23 +34,3 @@ Label : CODE
 silly string
 
 
-  Label : ELEMENT
-    -
-    Label : SIGN
-      (
-      Label : CODE
-        +
-        Label : RIGHT
-          3
-        Label : LEFT
-          4
-  Label : ELEMENT
-    MY_CONSTANT
-  Label : ELEMENT
-    \
-    Label : SUBNAME
-      C
-    Label : SUBNAME
-      B
-    Label : SUBNAME
-      A

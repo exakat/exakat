@@ -4,21 +4,23 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      foo
     Label : BLOCK
       ;
       Label : ELEMENT
         public
-        Label : VALUE
-          <<<'EOT'
-
-          Label : CONTAINS
-            Concatenation
-            Label : CONCAT
-              bar
-
         Label : DEFINE
-          $bar
+          =
+          Label : LEFT
+            $bar
+          Label : RIGHT
+            <<<'EOT'
+
+            Label : CONTAINS
+              Concatenation
+              Label : CONCAT
+                bar
+
         Label : PUBLIC
           public
+    Label : NAME
+      foo

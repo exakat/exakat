@@ -4,63 +4,63 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $c
-      Label : VALUE
-        $d
-    Label : SOURCE
-      ?
-      Label : CONDITION
-        [
-        Label : VARIABLE
-          $e
-        Label : INDEX
-          'C'
-      Label : THEN
-        [
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            1
-      Label : ELSE
-        [
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            void
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $b
-  Label : ELEMENT
-    foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $c
-      Label : VALUE
-        $d
     Label : SOURCE
       ??
       Label : LEFT
         [
-        Label : VARIABLE
-          $b
         Label : INDEX
           'B'
+        Label : VARIABLE
+          $b
       Label : RIGHT
         [
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
             void
+    Label : VALUE
+      =>
+      Label : KEY
+        $c
+      Label : VALUE
+        $d
+  Label : ELEMENT
+    foreach
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $b
+    Label : SOURCE
+      ?
+      Label : CONDITION
+        [
+        Label : INDEX
+          'C'
+        Label : VARIABLE
+          $e
+      Label : ELSE
+        [
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            void
+      Label : THEN
+        [
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            1
+    Label : VALUE
+      =>
+      Label : KEY
+        $c
+      Label : VALUE
+        $d

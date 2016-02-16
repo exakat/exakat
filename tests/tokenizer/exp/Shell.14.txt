@@ -3,6 +3,16 @@
 Label : CODE
   ;
   Label : ELEMENT
+    @
+    Label : AT
+      a
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          '/tmp/b.init'
+        Label : ARGUMENT
+          $c
+  Label : ELEMENT
     `
     Label : CONTAINS
       Concatenation
@@ -14,13 +24,3 @@ Label : CODE
     ++
     Label : POSTPLUSPLUS
       $f
-  Label : ELEMENT
-    @
-    Label : AT
-      a
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          '/tmp/b.init'

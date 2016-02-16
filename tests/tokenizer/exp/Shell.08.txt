@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       `
       Label : CONTAINS
@@ -26,35 +28,33 @@ Label : CODE
            
         Label : CONCAT
           ->
-          Label : OBJECT
-            $g
           Label : METHOD
             h
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 void
+          Label : OBJECT
+            $g
         Label : CONCAT
            i j 
         Label : CONCAT
           [
-          Label : VARIABLE
-            $k
           Label : INDEX
             'l'
+          Label : VARIABLE
+            $k
         Label : CONCAT
            
         Label : CONCAT
           [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $m
-            Label : INDEX
-              'n'
           Label : INDEX
             'o'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              'n'
+            Label : VARIABLE
+              $m
         Label : CONCAT
            
-    Label : LEFT
-      $x

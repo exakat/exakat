@@ -3,21 +3,7 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      new
-      Label : NEW
-        m
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $o
-    Label : LEFT
-      $m
-  Label : ELEMENT
     foreach
-    Label : VALUE
-      $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -25,7 +11,7 @@ Label : CODE
         Label : CONDITION
           is_array
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               ->
               Label : OBJECT
@@ -40,10 +26,14 @@ Label : CODE
           ;
           Label : ELEMENT
             =
+            Label : LEFT
+              $g
             Label : RIGHT
               h
               Label : ARGUMENTS
                 Arguments
+                Label : ARGUMENT
+                  $i
                 Label : ARGUMENT
                   ->
                   Label : OBJECT
@@ -54,13 +44,23 @@ Label : CODE
                       k
                   Label : PROPERTY
                     l
-                Label : ARGUMENT
-                  $i
-            Label : LEFT
-              $g
     Label : SOURCE
       ->
       Label : OBJECT
         $a
       Label : PROPERTY
         b
+    Label : VALUE
+      $c
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $m
+    Label : RIGHT
+      new
+      Label : NEW
+        m
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $o

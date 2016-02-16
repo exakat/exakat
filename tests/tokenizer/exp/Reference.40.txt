@@ -3,71 +3,33 @@
 Label : CODE
   ;
   Label : ELEMENT
-    switch
-    Label : NAME
-      &
-      Label : RIGHT
-        $a
-      Label : LEFT
-        B
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            return
-            Label : RETURN
-              C
-        Label : CASE
-          1
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       &
-      Label : RIGHT
-        $a
       Label : LEFT
         ~
         Label : NOT
           B
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               void
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          C
+      Label : RIGHT
+        $a
     Label : ELSE
       elseif
       Label : CONDITION
         &
-        Label : RIGHT
-          $a
         Label : LEFT
           !
           Label : NOT
             B
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 void
-      Label : THEN
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            C
+        Label : RIGHT
+          $a
       Label : ELSE
         Block with else
         Label : ELEMENT
@@ -78,25 +40,61 @@ Label : CODE
               return
               Label : RETURN
                 C
+          Label : FINAL
+            <
+            Label : LEFT
+              $i
+            Label : RIGHT
+              10
+          Label : INCREMENT
+            ++
+            Label : POSTPLUSPLUS
+              $i
           Label : INIT
             &
-            Label : RIGHT
-              $a
             Label : LEFT
               @
               Label : AT
                 B
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     void
-          Label : FINAL
-            <
             Label : RIGHT
-              10
-            Label : LEFT
-              $i
-          Label : INCREMENT
-            ++
-            Label : POSTPLUSPLUS
-              $i
+              $a
+      Label : THEN
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            C
+    Label : THEN
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          C
+  Label : ELEMENT
+    switch
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          1
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              C
+    Label : NAME
+      &
+      Label : LEFT
+        B
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+      Label : RIGHT
+        $a

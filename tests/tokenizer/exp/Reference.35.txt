@@ -6,38 +6,38 @@ Label : CODE
     if
     Label : CONDITION
       =
+      Label : LEFT
+        $g
       Label : RIGHT
         &&
-        Label : RIGHT
-          =
-          Label : RIGHT
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-          Label : LEFT
-            $d
         Label : LEFT
           ->
-          Label : OBJECT
-            $a
           Label : METHOD
             b
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                false
-              Label : ARGUMENT
-                false
-              Label : ARGUMENT
                 $c
-      Label : LEFT
-        $g
+              Label : ARGUMENT
+                false
+              Label : ARGUMENT
+                false
+          Label : OBJECT
+            $a
+        Label : RIGHT
+          =
+          Label : LEFT
+            $d
+          Label : RIGHT
+            ->
+            Label : METHOD
+              f
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+            Label : OBJECT
+              $e
     Label : THEN
       ;
       Label : ELEMENT

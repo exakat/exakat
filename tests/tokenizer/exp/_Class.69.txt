@@ -3,27 +3,89 @@
 Label : CODE
   ;
   Label : ELEMENT
+    ->
+    Label : METHOD
+      bootstrap
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : OBJECT
+      (
+      Label : CODE
+        new
+        Label : NEW
+          class
+          Label : ARGUMENTS
+            
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              function
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+              Label : BLOCK
+                void
+              Label : NAME
+                main
+              Label : PUBLIC
+                public
+          Label : EXTENDS
+            ConsoleProgram
+          Label : NAME
+            
+  Label : ELEMENT
+    return
+    Label : RETURN
+      new
+      Label : NEW
+        class
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $controller
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                $controller
+            Label : BLOCK
+              void
+            Label : NAME
+              __construct
+            Label : PUBLIC
+              public
+        Label : IMPLEMENTS
+          Page
+        Label : NAME
+          
+  Label : ELEMENT
+    
+  Label : ELEMENT
     class
-    Label : NAME
-      MyPage
-    Label : IMPLEMENTS
-      Page
     Label : BLOCK
       ;
       Label : ELEMENT
         function
-        Label : PUBLIC
-          public
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $controller
-        Label : NAME
-          __construct
         Label : BLOCK
           void
-  Label : ELEMENT
-    
+        Label : NAME
+          __construct
+        Label : PUBLIC
+          public
+    Label : IMPLEMENTS
+      Page
+    Label : NAME
+      MyPage
   Label : ELEMENT
     return
     Label : RETURN
@@ -31,41 +93,9 @@ Label : CODE
       Label : NEW
         MyPage
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $controller
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      (
-      Label : CODE
-        new
-        Label : NEW
-          class
-          Label : EXTENDS
-            ConsoleProgram
-          Label : BLOCK
-            ;
-            Label : ELEMENT
-              function
-              Label : PUBLIC
-                public
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-              Label : NAME
-                main
-              Label : BLOCK
-                void
-    Label : METHOD
-      bootstrap
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
   Label : ELEMENT
     return
     Label : RETURN
@@ -73,36 +103,14 @@ Label : CODE
       Label : NEW
         class
         Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $controller
-        Label : IMPLEMENTS
-          Page
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            function
-            Label : PUBLIC
-              public
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $controller
-            Label : NAME
-              __construct
-            Label : BLOCK
-              void
-  Label : ELEMENT
-    return
-    Label : RETURN
-      new
-      Label : NEW
-        class
-        Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $path
-        Label : EXTENDS
-          DirectoryIterator
         Label : BLOCK
           void
+        Label : EXTENDS
+          DirectoryIterator
+        Label : NAME
+          
+  Label : ELEMENT
+    

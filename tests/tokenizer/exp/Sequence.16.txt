@@ -3,40 +3,40 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
+    if
+    Label : CONDITION
       1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $b
+        Label : RIGHT
+          2
+  Label : ELEMENT
+    =
     Label : LEFT
       $a
+    Label : RIGHT
+      1
   Label : ELEMENT
     if
     Label : CONDITION
       3
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          3
-        Label : LEFT
-          $c
     Label : ELSE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          4
         Label : LEFT
           $d
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      1
+        Label : RIGHT
+          4
     Label : THEN
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          2
         Label : LEFT
-          $b
+          $c
+        Label : RIGHT
+          3

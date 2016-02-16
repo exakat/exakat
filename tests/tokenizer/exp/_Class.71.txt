@@ -1,32 +1,36 @@
 <?php
 
 Label : CODE
-  ->
-  Label : OBJECT
-    (
-    Label : CODE
-      new
-      Label : NEW
-        class
-        Label : ARGUMENTS
-          
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            function
-            Label : PUBLIC
-              public
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
+  ;
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      bootstrap
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : OBJECT
+      (
+      Label : CODE
+        new
+        Label : NEW
+          class
+          Label : ARGUMENTS
+            
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              function
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+              Label : BLOCK
                 void
-            Label : NAME
-              main
-            Label : BLOCK
-              void
-  Label : METHOD
-    bootstrap
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
+              Label : NAME
+                main
+              Label : PUBLIC
+                public
+          Label : NAME
+            

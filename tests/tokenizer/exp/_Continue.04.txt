@@ -1,57 +1,59 @@
 <?php 
 Label : CODE
-  foreach
-  Label : VALUE
-    $b
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          ::
-          Label : CLASS
-            D
-          Label : METHOD
-            E
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $b
-                Label : PROPERTY
-                  H
-              Label : ARGUMENT
-                ->
-                Label : METHOD
-                  F
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'G'
-                Label : OBJECT
-                  $b
-    Label : ELEMENT
-      I
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        ==
-        Label : RIGHT
-          $c
-        Label : LEFT
-          $b
-      Label : THEN
-        ;
-        Label : ELEMENT
-          continue
-          Label : LEVEL
-            void
-    Label : ELEMENT
-      C
-    Label : ELEMENT
-      B
-  Label : SOURCE
-    $a
+  ;
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          ==
+          Label : LEFT
+            $b
+          Label : RIGHT
+            $c
+        Label : THEN
+          ;
+          Label : ELEMENT
+            continue
+            Label : LEVEL
+              void
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              D
+            Label : METHOD
+              E
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    F
+                    Label : ARGUMENTS
+                      
+                      Label : ARGUMENT
+                        'G'
+                  Label : OBJECT
+                    $b
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : PROPERTY
+                    H
+      Label : ELEMENT
+        I
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b

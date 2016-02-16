@@ -4,12 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $this
     Label : METHOD
       a
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           ->
           Label : OBJECT
@@ -20,3 +18,5 @@ Label : CODE
               c
           Label : PROPERTY
             False
+    Label : OBJECT
+      $this

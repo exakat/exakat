@@ -3,14 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
-    +=
-    Label : RIGHT
-      2
-    Label : LEFT
-      $b
-  Label : ELEMENT
     =
-    Label : RIGHT
-      -3
     Label : LEFT
       $x
+    Label : RIGHT
+      -3
+  Label : ELEMENT
+    +=
+    Label : LEFT
+      $b
+    Label : RIGHT
+      2

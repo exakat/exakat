@@ -3,6 +3,24 @@
 Label : CODE
   ;
   Label : ELEMENT
+    switch
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          1
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $x
+            Label : RIGHT
+              1
+    Label : NAME
+      $x
+  Label : ELEMENT
     if
     Label : CONDITION
       $x
@@ -10,25 +28,7 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          2
         Label : LEFT
           $y
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $x
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $x
-        Label : CASE
-          1
+        Label : RIGHT
+          2

@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
         function
-        Label : NAME
-          a
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
         Label : BLOCK
           void
+        Label : NAME
+          a
     Label : EXTENDS
       y
     Label : IMPLEMENTS
       z
+    Label : NAME
+      x

@@ -3,41 +3,47 @@
 Label : CODE
   ;
   Label : ELEMENT
-    &&
+    =
+    Label : LEFT
+      $a
     Label : RIGHT
-      =
-      Label : RIGHT
-        E
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            +
-            Label : RIGHT
-              0
-            Label : LEFT
-              $g
-          Label : ARGUMENT
-            $f
-      Label : LEFT
-        $e
+      $b
+  Label : ELEMENT
+    &&
     Label : LEFT
       !==
+      Label : LEFT
+        B
       Label : RIGHT
         (
         Label : CODE
           =
+          Label : LEFT
+            $c
           Label : RIGHT
             C
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                'D'
-              Label : ARGUMENT
                 $d
-          Label : LEFT
-            $c
+              Label : ARGUMENT
+                'D'
+    Label : RIGHT
+      =
       Label : LEFT
-        B
+        $e
+      Label : RIGHT
+        E
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            +
+            Label : LEFT
+              $g
+            Label : RIGHT
+              0
   Label : ELEMENT
     return
     Label : RETURN
@@ -45,12 +51,6 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          'G'
-        Label : ARGUMENT
           $h
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      $b
-    Label : LEFT
-      $a
+        Label : ARGUMENT
+          'G'

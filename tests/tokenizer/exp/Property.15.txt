@@ -12,19 +12,19 @@ Label : CODE
           Arguments
           Label : ARGUMENT
             [
+            Label : INDEX
+              $c
             Label : VARIABLE
-              $d
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                $b
+          Label : ARGUMENT
+            [
             Label : INDEX
               $e
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                $c
+            Label : VARIABLE
+              $d
     Label : THEN
       void

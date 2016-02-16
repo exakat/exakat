@@ -5,23 +5,23 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      =
+      ==
       Label : LEFT
-        $
-        Label : NAME
-          ->
-          Label : OBJECT
+        ->
+        Label : OBJECT
+          [
+          Label : INDEX
+            'B'
+          Label : VARIABLE
             [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                $b
             Label : INDEX
-              'B'
-          Label : PROPERTY
-            C
+              $b
+            Label : VARIABLE
+              $
+              Label : NAME
+                $a
+        Label : PROPERTY
+          C
       Label : RIGHT
         D
     Label : THEN
@@ -32,34 +32,34 @@ Label : CODE
           $c
         Label : RIGHT
           [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              $b
           Label : INDEX
             'E'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              $b
+            Label : VARIABLE
+              $a
   Label : ELEMENT
     if
     Label : CONDITION
-      ==
+      =
       Label : LEFT
-        $
-        Label : NAME
-          ->
-          Label : OBJECT
+        ->
+        Label : OBJECT
+          [
+          Label : INDEX
+            'B'
+          Label : VARIABLE
             [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                $b
             Label : INDEX
-              'B'
-          Label : PROPERTY
-            C
+              $b
+            Label : VARIABLE
+              $
+              Label : NAME
+                $a
+        Label : PROPERTY
+          C
       Label : RIGHT
         D
     Label : THEN
@@ -70,11 +70,11 @@ Label : CODE
           $c
         Label : RIGHT
           [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              $b
           Label : INDEX
             'E'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              $b
+            Label : VARIABLE
+              $a

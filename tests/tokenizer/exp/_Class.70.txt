@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     var_dump
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         new
         Label : NEW
@@ -15,30 +15,32 @@ Label : CODE
             Label : ARGUMENT
               $i
             Label : ARGUMENT
-              $k
-            Label : ARGUMENT
               $j
+            Label : ARGUMENT
+              $k
           Label : BLOCK
             ;
             Label : ELEMENT
               function
-              Label : PUBLIC
-                public
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   $i
-              Label : NAME
-                __construct
               Label : BLOCK
                 ;
                 Label : ELEMENT
                   =
-                  Label : RIGHT
-                    $i
                   Label : LEFT
                     ->
                     Label : OBJECT
                       $this
                     Label : PROPERTY
                       i
+                  Label : RIGHT
+                    $i
+              Label : NAME
+                __construct
+              Label : PUBLIC
+                public
+          Label : NAME
+            

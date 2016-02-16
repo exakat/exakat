@@ -4,45 +4,45 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
+    Label : ABSTRACT
+      abstract
     Label : BLOCK
       ;
       Label : ELEMENT
         function
-        Label : FINAL
-          final
-        Label : PUBLIC
-          public
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
-        Label : NAME
-          a
-        Label : STATIC
-          static
         Label : BLOCK
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              1
             Label : LEFT
               $x
+            Label : RIGHT
+              1
+        Label : FINAL
+          final
+        Label : NAME
+          a
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
       Label : ELEMENT
         function
+        Label : ABSTRACT
+          abstract
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
         Label : NAME
           b
-        Label : STATIC
-          static
         Label : PROTECTED
           protected
-        Label : ABSTRACT
-          abstract
-    Label : ABSTRACT
-      abstract
+        Label : STATIC
+          static
+    Label : NAME
+      x

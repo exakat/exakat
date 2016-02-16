@@ -1,60 +1,62 @@
 <?php
 
 Label : CODE
-  foreach
-  Label : VALUE
-    $b
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      or
-      Label : RIGHT
-        H
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $c
-            Label : METHOD
-              H
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-          Label : ARGUMENT
-            __LINE__
-          Label : ARGUMENT
-            __FILE__
-          Label : ARGUMENT
-            'I'
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $c
-        Label : METHOD
-          B
+  ;
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        or
+        Label : LEFT
+          ->
+          Label : METHOD
+            B
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  'C'
+                Label : CONCAT
+                  ->
+                  Label : OBJECT
+                    $c
+                  Label : PROPERTY
+                    D
+                Label : CONCAT
+                  'E'
+                Label : CONCAT
+                  $d
+                Label : CONCAT
+                  'F'
+                Label : CONCAT
+                  $b
+                Label : CONCAT
+                  'G'
+          Label : OBJECT
+            $c
+        Label : RIGHT
+          H
           Label : ARGUMENTS
-            void
+            Arguments
             Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                'G'
-              Label : CONCAT
-                $b
-              Label : CONCAT
-                'F'
-              Label : CONCAT
-                $d
-              Label : CONCAT
-                'E'
-              Label : CONCAT
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  D
-              Label : CONCAT
-                'C'
-  Label : SOURCE
-    $a
+              'I'
+            Label : ARGUMENT
+              __FILE__
+            Label : ARGUMENT
+              __LINE__
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                H
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    void
+              Label : OBJECT
+                $c
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b

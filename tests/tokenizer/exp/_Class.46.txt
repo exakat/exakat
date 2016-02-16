@@ -4,41 +4,41 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : NAME
-          c
-        Label : BLOCK
-          void
-        Label : PROTECTED
-          protected
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : NAME
-          b
-        Label : STATIC
-          static
-        Label : BLOCK
-          void
-        Label : PROTECTED
-          protected
       Label : ELEMENT
         static
         Label : DEFINE
           $a
-        Label : STATIC
-          static
         Label : PROTECTED
           protected
+        Label : STATIC
+          static
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+        Label : NAME
+          b
+        Label : PROTECTED
+          protected
+        Label : STATIC
+          static
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+        Label : NAME
+          c
+        Label : PROTECTED
+          protected
+    Label : NAME
+      x

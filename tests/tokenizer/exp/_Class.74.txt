@@ -4,657 +4,657 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x2
     Label : BLOCK
       ;
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $global
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $or
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $instanceof
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $else
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $function
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $elseif
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $require_once
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $echo
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $throw
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $while
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $static
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $include
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $protected
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $var
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $private
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $default
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $switch
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $use
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $namespace
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $print
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $enddeclare
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $empty
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             $abstract
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $case
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $break
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $clone
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             $and
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $as
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             $array
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $continue
+            $as
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $endswitch
+            $break
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $die
+            $case
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $declare
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             $catch
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $const
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $implements
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             $class
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $if
+            $clone
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $interface
+            $const
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $public
+            $continue
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $endforeach
+            $declare
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $xor
+            $default
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $endif
+            $die
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $try
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $for
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             $do
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $list
+            $echo
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $finally
+            $else
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $exit
+            $elseif
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $isset
+            $empty
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $include_once
+            $enddeclare
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $new
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $foreach
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $unset
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $trait
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $final
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $endwhile
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $yield
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $extends
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $eval
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          =
-          Label : RIGHT
-            3
           Label : LEFT
             $endfor
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
+          Label : LEFT
+            $endforeach
           Label : RIGHT
             3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $endif
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $endswitch
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $endwhile
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $eval
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $exit
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $extends
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $final
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $finally
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $for
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $foreach
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $function
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $global
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
           Label : LEFT
             $goto
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
-          Label : RIGHT
-            3
           Label : LEFT
-            $require
+            $if
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
+          Label : LEFT
+            $implements
           Label : RIGHT
             3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $include
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $include_once
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $instanceof
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
           Label : LEFT
             $insteadof
+          Label : RIGHT
+            3
         Label : PUBLIC
           public
       Label : ELEMENT
         public
         Label : DEFINE
           =
+          Label : LEFT
+            $interface
           Label : RIGHT
             3
-          Label : LEFT
-            $return
         Label : PUBLIC
           public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $isset
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $list
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $namespace
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $new
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $or
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $print
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $private
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $protected
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $public
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $require
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $require_once
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $return
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $static
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $switch
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $throw
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $trait
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $try
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $unset
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $use
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $var
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $while
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $xor
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        public
+        Label : DEFINE
+          =
+          Label : LEFT
+            $yield
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+    Label : NAME
+      x2

@@ -4,6 +4,6 @@ Label : ELEMENT
   Label : SIGN
     f
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         1

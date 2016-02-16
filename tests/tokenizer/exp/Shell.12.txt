@@ -4,57 +4,55 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      +
-      Label : RIGHT
-        `
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            $g
-      Label : LEFT
-        4
     Label : LEFT
-      $f
-  Label : ELEMENT
-    =
+      $a
     Label : RIGHT
       +
-      Label : RIGHT
-        3
-      Label : LEFT
-        `
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            $e
-    Label : LEFT
-      $d
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      +
-      Label : RIGHT
-        "
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            $d
-      Label : LEFT
-        2
-    Label : LEFT
-      $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      +
-      Label : RIGHT
-        1
       Label : LEFT
         "
         Label : CONTAINS
           Concatenation
           Label : CONCAT
             $b
+      Label : RIGHT
+        1
+  Label : ELEMENT
+    =
     Label : LEFT
-      $a
+      $c
+    Label : RIGHT
+      +
+      Label : LEFT
+        2
+      Label : RIGHT
+        "
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            $d
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $d
+    Label : RIGHT
+      `
+      Label : CONTAINS
+        Concatenation
+        Label : CONCAT
+          $e
+  Label : ELEMENT
+    3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $f
+    Label : RIGHT
+      +
+      Label : LEFT
+        4
+      Label : RIGHT
+        `
+        Label : CONTAINS
+          Concatenation
+          Label : CONCAT
+            $g

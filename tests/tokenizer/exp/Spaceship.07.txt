@@ -3,28 +3,28 @@
 Label : CODE
   ;
   Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        <=>
+        Label : LEFT
+          $a
+        Label : RIGHT
+          $b
+  Label : ELEMENT
     array_merge
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         <=>
-        Label : RIGHT
-          $f
-        Label : LEFT
-          $e
-      Label : ARGUMENT
-        <=>
-        Label : RIGHT
-          $d
         Label : LEFT
           $c
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
+        Label : RIGHT
+          $d
       Label : ARGUMENT
         <=>
-        Label : RIGHT
-          $b
         Label : LEFT
-          $a
+          $e
+        Label : RIGHT
+          $f

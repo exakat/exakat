@@ -1,15 +1,15 @@
 ;
 Label : ELEMENT
+  a
+Label : ELEMENT
   <?php 
   Label : CODE
     ;
     Label : ELEMENT
       =
-      Label : RIGHT
-        3
       Label : LEFT
         $x
+      Label : RIGHT
+        3
 Label : ELEMENT
   b
-Label : ELEMENT
-  a

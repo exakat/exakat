@@ -10,7 +10,7 @@ Label : ELEMENT
       Label : ARGUMENTS
         
         Label : ARGUMENT
-          $b
+          $a
     Label : ELEMENT
       B
     Label : ELEMENT
@@ -18,6 +18,6 @@ Label : ELEMENT
       Label : ARGUMENTS
         
         Label : ARGUMENT
-          $a
+          $b
 Label : ELEMENT
   C

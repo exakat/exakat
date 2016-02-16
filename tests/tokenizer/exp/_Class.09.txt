@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       void
     Label : IMPLEMENTS
-      d
-    Label : IMPLEMENTS
-      c
+      a
     Label : IMPLEMENTS
       b
     Label : IMPLEMENTS
-      a
+      c
+    Label : IMPLEMENTS
+      d
+    Label : NAME
+      x

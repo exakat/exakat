@@ -2,69 +2,47 @@
 Label : ELEMENT
   void
 Label : ELEMENT
-  C
-Label : ELEMENT
   =
-  Label : RIGHT
-    ->
-    Label : OBJECT
-      $this
-    Label : PROPERTY
-      [
-      Label : VARIABLE
-        B
-      Label : INDEX
-        $d
   Label : LEFT
     $c
-Label : ELEMENT
-  H
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
+  Label : RIGHT
+    [
+    Label : INDEX
+      $d
+    Label : VARIABLE
       ->
       Label : OBJECT
-        $c
-      Label : METHOD
-        I
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
+        $this
+      Label : PROPERTY
+        B
 Label : ELEMENT
-  ++
-  Label : PREPLUSPLUS
-    $d
-Label : ELEMENT
-  D
-Label : ELEMENT
-  J
+  C
 Label : ELEMENT
   echo
   Label : ARGUMENTS
-    void
+    
     Label : ARGUMENT
       +
-      Label : RIGHT
-        0
       Label : LEFT
         $d
+      Label : RIGHT
+        0
+Label : ELEMENT
+  D
 Label : ELEMENT
   if
   Label : CONDITION
     ->
     Label : OBJECT
       ->
-      Label : OBJECT
-        $this
       Label : METHOD
         E
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
+      Label : OBJECT
+        $this
     Label : PROPERTY
       F
   Label : THEN
@@ -72,6 +50,28 @@ Label : ELEMENT
     Label : ELEMENT
       echo
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           'G'
+Label : ELEMENT
+  H
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    
+    Label : ARGUMENT
+      ->
+      Label : METHOD
+        I
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+      Label : OBJECT
+        $c
+Label : ELEMENT
+  J
+Label : ELEMENT
+  ++
+  Label : PREPLUSPLUS
+    $d

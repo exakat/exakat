@@ -3,9 +3,31 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : LEFT
+      $x
+    Label : RIGHT
+      range
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $y
+    Label : RIGHT
+      range
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          4
+        Label : ARGUMENT
+          5
+  Label : ELEMENT
     foreach
-    Label : VALUE
-      $z
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,31 +36,9 @@ Label : CODE
           $a
     Label : SOURCE
       +
-      Label : RIGHT
-        $y
       Label : LEFT
         $x
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      range
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          5
-        Label : ARGUMENT
-          4
-    Label : LEFT
-      $y
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      range
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          1
-    Label : LEFT
-      $x
+      Label : RIGHT
+        $y
+    Label : VALUE
+      $z

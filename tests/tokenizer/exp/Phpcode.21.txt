@@ -2,20 +2,20 @@
 Label : ELEMENT
   I
 Label : ELEMENT
-  J
-Label : ELEMENT
-  void
-Label : ELEMENT
-  <?php /* empty, no closing tag */ 
-Label : ELEMENT
   <?php 
   Label : CODE
     ;
     Label : ELEMENT
       echo
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           $b
+    Label : ELEMENT
+      J
+    Label : ELEMENT
+      void
 Label : ELEMENT
   K
+Label : ELEMENT
+  <?php /* empty, no closing tag */ 
