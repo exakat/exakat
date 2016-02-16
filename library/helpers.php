@@ -165,8 +165,8 @@ function gremlin_query($query, $params = [], $load = []) {
 }
 
 
-function gremlin_queryOne($query, $params = [], $load = '') {
-    $res = gremlin_query($query, $params, $load );
+function gremlin_queryOne($query, $params = [], $load = []) {
+    $res = gremlin_query($query, $params, $load);
     $res = $res->results[0];
     
     if (is_bool($res) || is_int($res)) {
@@ -179,8 +179,8 @@ function gremlin_queryOne($query, $params = [], $load = '') {
     }
 }
 
-function gremlin_queryColumn($query, $params = [], $load = '') {
-    $res = gremlin_query($query, $params, $load );
+function gremlin_queryColumn($query, $params = [], $load = []) {
+    $res = gremlin_query($query, $params, $load);
     $res = $res->results;
     
     $return = array();
