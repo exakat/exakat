@@ -29,8 +29,9 @@ class DoubleAssignation extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIsNot('Arrayappend')
+             ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
              ->savePropertyAs('fullcode', 'name')
+             ->savePropertyAs('atom', 'nameAtom')
              ->inIs('LEFT')
              ->nextSibling()
              ->atomIs('Assignation')
@@ -39,7 +40,7 @@ class DoubleAssignation extends Analyzer\Analyzer {
              ->samePropertyAs('fullcode', 'name')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->filter(' it.out.loop(1){true}{ it.object.atom == "Variable"}.has("fullcode", name).any() == false ')
+             ->filter(' it.out.loop(1){true}{ it.object.atom == nameAtom}.has("fullcode", name).any() == false ')
              ->back('first');
         $this->prepareQuery();
     }
