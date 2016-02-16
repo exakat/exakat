@@ -25,7 +25,7 @@ class Log {
     private $name  = null;
     private $log   = null;
     private $begin = 0;
-    private $first = '';
+    private $first = null;
     
     public function __construct($name = null, $dir = '.') {
         $this->name = $name;

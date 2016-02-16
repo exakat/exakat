@@ -67,14 +67,12 @@ class Tokenizer extends Tasks {
                 } else {
                     $regex[$class] = $r;
                 }
-            } else {
-//                display("Ignore $new (No token to process)\n");
-            }
+            } 
         }
 
         $this->log->log( "Finished loading classes");
 
-        $server_stat = new \Stats(null);
+        $server_stat = new \Stats();
         $total = \Tokenizer\Token::countTotalToken();
         $count = $total + 1;
 

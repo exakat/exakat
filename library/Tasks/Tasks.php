@@ -26,6 +26,7 @@ namespace Tasks;
 abstract class Tasks {
     protected $log        = null;
     protected $enabledLog = true;
+    protected $datastore  = null;
     
     public function __construct() {
         // Config is the general one.

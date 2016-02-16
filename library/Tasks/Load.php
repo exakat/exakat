@@ -24,6 +24,8 @@ namespace Tasks;
 
 class Load extends Tasks {
     private $php    = null;
+    private $client = null;
+    private $config = null;
     
     public function run(\Config $config) {
         $this->config = $config;
@@ -250,14 +252,15 @@ class Load extends Tasks {
                                'T_RETURN'   => '_Return');
             
     
-        $nb = count($tokens);
-        $T = array();
-        $Tid = -1;
-        $inQuote = 0;
-        $in_for = 0;
-        $dowhiles = array();
+        $nb          = count($tokens);
+        $T           = array();
+        $Tid         = -1;
+        $inQuote     = 0;
+        $in_for      = 0;
+        $dowhiles    = array();
         $block_level = 0;
-        $regex = \Tokenizer\Token::getTokenizers();
+        $regex       = \Tokenizer\Token::getTokenizers();
+        $previous    = null;
     
         for($id = 0; $id < $nb; ++$id) {
             if (empty($tokens[$id])) { continue; }
@@ -1336,10 +1339,10 @@ class Load extends Tasks {
         $previous->relateTo($last, 'NEXT')->setProperty('file', $file)->save();
     
         $last2     = $this->client->makeNode()->setProperty('token', 'T_END')
-                                        ->setProperty('code', '/* * */')
-                                        ->setProperty('line', $line)
-                                        ->setProperty('hidden', true)
-                                        ->save();
+                                              ->setProperty('code', '/* * */')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('hidden', true)
+                                              ->save();
 
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
