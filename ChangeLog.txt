@@ -1,4 +1,4 @@
-Version 0.5.2 (Single Horned Rhinoceros King, Coming up)
+Version 0.5.3 ( Li Jing, Coming up)
 + Architecture
     +
 + Report
@@ -8,7 +8,21 @@ Version 0.5.2 (Single Horned Rhinoceros King, Coming up)
 + Tokenizer
     + 
 
-Version 0.5.1 (King of Spiritual Touch, Coming up)
+Version 0.5.2 (Single Horned Rhinoceros King, 2016-02-15)
++ Analyzer
+    + Fixed functioncall detection with 'empty'
+    + Refined 'Buried assignation' analysis
+    + Fixed a bug when using definitions (class, trait, interface, functions...)
+    + Better support for case-insensitive constants
+    + 
++ Tokenizer
+    + Fixed bug in use statement
+    + Now spots PHP code in files without extension
+    + Upgraded support for grouped Use statement
+    + namespace may be a valid nsname part
+    + Fixed bracket reports in do...while
+
+Version 0.5.1 (King of Spiritual Touch, 2016-02-08)
 + Architecture
     + Added test in UT to skip incompilable sources
     + Stabilized tokenizer's UT (partial)
