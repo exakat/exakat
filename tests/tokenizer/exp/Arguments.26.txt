@@ -1,49 +1,21 @@
-<?php
+;
+Label : ELEMENT
+  <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
+  Label : CODE
     namespace
     Label : BLOCK
       ;
       Label : ELEMENT
-        D
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            ?
-            Label : CONDITION
-              >
-              Label : RIGHT
-                0
-              Label : LEFT
-                $d
-            Label : THEN
-              'H'
-            Label : ELSE
-              'I'
-          Label : ARGUMENT
-            =
-            Label : RIGHT
-              F
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $c
-                  Label : PROPERTY
-                    G
-            Label : LEFT
-              $b
+        use
+        Label : USE
+          C
       Label : ELEMENT
         if
         Label : CONDITION
           empty
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               ->
               Label : OBJECT
@@ -57,8 +29,38 @@ Label : CODE
             Label : RETURN
               void
       Label : ELEMENT
-        use
-        Label : USE
-          C
+        D
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              F
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $c
+                  Label : PROPERTY
+                    G
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              >
+              Label : LEFT
+                $d
+              Label : RIGHT
+                0
+            Label : ELSE
+              'I'
+            Label : THEN
+              'H'
     Label : NAMESPACE
       B
+Label : ELEMENT
+  I

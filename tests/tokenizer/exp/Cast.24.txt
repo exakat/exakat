@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       (int)
       Label : CAST
@@ -11,18 +13,16 @@ Label : CODE
         Label : CLASS
           \
           Label : SUBNAME
-            C
-          Label : SUBNAME
             B
+          Label : SUBNAME
+            C
         Label : METHOD
           D
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               Concatenation
               Label : CONCAT
-                'E'
-              Label : CONCAT
                 $b
-    Label : LEFT
-      $a
+              Label : CONCAT
+                'E'

@@ -5,117 +5,85 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
+      void
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        A
+      Label : SUBNAME
+        B
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      void
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        A
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        C
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      void
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        A
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        D
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      void
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        A
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        E
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
       ;
       Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C3
-        Label : METHOD
-          l
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C3
-        Label : METHOD
-          l
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C2
-        Label : PROPERTY
-          $k
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C2
-        Label : PROPERTY
-          $k
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C
-        Label : CONSTANT
-          K
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C
-        Label : CONSTANT
-          K
-      Label : ELEMENT
         \
         Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : SUBNAME
-          F
-        Label : SUBNAME
-          E
-        Label : SUBNAME
-          D
-        Label : SUBNAME
-          Z
-      Label : ELEMENT
-        \
-        Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
         Label : SUBNAME
           C
         Label : SUBNAME
-          B
+          D
         Label : SUBNAME
-          Y
+          E
       Label : ELEMENT
         \
         Label : ARGUMENTS
-          void
+          
+          Label : ARGUMENT
+            void
+        Label : SUBNAME
+          X
+        Label : SUBNAME
+          A
+      Label : ELEMENT
+        \
+        Label : ARGUMENTS
+          
           Label : ARGUMENT
             void
         Label : SUBNAME
@@ -123,76 +91,108 @@ Label : CODE
       Label : ELEMENT
         \
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
         Label : SUBNAME
-          A
+          Y
         Label : SUBNAME
-          X
+          B
+        Label : SUBNAME
+          C
       Label : ELEMENT
         \
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
         Label : SUBNAME
-          E
+          Z
         Label : SUBNAME
           D
         Label : SUBNAME
-          C
+          E
+        Label : SUBNAME
+          F
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            E
+        Label : CONSTANT
+          K
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            E
+        Label : CONSTANT
+          K
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C2
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            E
+        Label : PROPERTY
+          $k
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C2
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            E
+        Label : PROPERTY
+          $k
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C3
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            E
+        Label : METHOD
+          l
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C3
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            E
+        Label : METHOD
+          l
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
     Label : NAMESPACE
       Global
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      void
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        E
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        A
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      void
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        A
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      void
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        A
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      void
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        A

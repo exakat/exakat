@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       (
       Label : CODE
@@ -11,14 +13,12 @@ Label : CODE
         Label : CONDITION
           defined
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               'b'
+        Label : ELSE
+          1
         Label : THEN
           !
           Label : NOT
             c
-        Label : ELSE
-          1
-    Label : LEFT
-      $a

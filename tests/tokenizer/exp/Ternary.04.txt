@@ -6,7 +6,7 @@ Label : CODE
     ?
     Label : CONDITION
       1
-    Label : THEN
-      2
     Label : ELSE
       3
+    Label : THEN
+      2

@@ -9,31 +9,11 @@ Label : CODE
       Label : NEW
         a
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             sprintf
             Label : ARGUMENTS
               Arguments
-              Label : ARGUMENT
-                ?
-                Label : CONDITION
-                  is_object
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $d
-                Label : THEN
-                  get_class
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $e
-                Label : ELSE
-                  gettype
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $f
               Label : ARGUMENT
                 'b'
               Label : ARGUMENT
@@ -42,3 +22,23 @@ Label : CODE
                   C
                 Label : CONSTANT
                   class
+              Label : ARGUMENT
+                ?
+                Label : CONDITION
+                  is_object
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      $d
+                Label : ELSE
+                  gettype
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      $f
+                Label : THEN
+                  get_class
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      $e

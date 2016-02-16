@@ -4,14 +4,46 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $a
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
-          Block with Sequence For Case Without Semicolon
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              $c
+            Label : ELSE
+              elseif
+              Label : CONDITION
+                empty
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'h'
+                    Label : VARIABLE
+                      $g
+              Label : THEN
+                void
+            Label : THEN
+              ;
+              Label : ELEMENT
+                $e
+          Label : ELEMENT
+            require_once
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                a
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    'b'
           Label : ELEMENT
             if
             Label : CONDITION
@@ -28,42 +60,6 @@ Label : CODE
             break
             Label : LEVEL
               void
-          Label : ELEMENT
-            require_once
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                a
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'b'
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              $c
-            Label : THEN
-              ;
-              Label : ELEMENT
-                $e
-            Label : ELSE
-              elseif
-              Label : CONDITION
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    [
-                    Label : VARIABLE
-                      $g
-                    Label : INDEX
-                      'h'
-              Label : THEN
-                void
-          Label : ELEMENT
-            
-        Label : CASE
-          'b'
       Label : ELEMENT
         default
         Label : CODE
@@ -72,3 +68,5 @@ Label : CODE
             return
             Label : RETURN
               false
+    Label : NAME
+      $a

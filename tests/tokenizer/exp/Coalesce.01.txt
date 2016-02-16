@@ -5,6 +5,20 @@ Label : CODE
   Label : ELEMENT
     =
     Label : LEFT
+      $a
+    Label : RIGHT
+      ??
+      Label : LEFT
+        [
+        Label : INDEX
+          'b'
+        Label : VARIABLE
+          $_GET
+      Label : RIGHT
+        'c'
+  Label : ELEMENT
+    =
+    Label : LEFT
       $d
     Label : RIGHT
       ??
@@ -15,7 +29,7 @@ Label : CODE
         Label : METHOD
           f
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               $g
       Label : RIGHT
@@ -29,22 +43,8 @@ Label : CODE
       Label : LEFT
         j
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             'l'
       Label : RIGHT
         l
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ??
-      Label : LEFT
-        [
-        Label : VARIABLE
-          $_GET
-        Label : INDEX
-          'b'
-      Label : RIGHT
-        'c'

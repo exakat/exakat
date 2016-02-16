@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      $c
     Label : LEFT
       [
       Label : VARIABLE
         [
-        Label : VARIABLE
-          $a
         Label : INDEX
           /
-          Label : RIGHT
-            1
           Label : LEFT
             (int)
             Label : CAST
               ++
               Label : POSTPLUSPLUS
                 $b
+          Label : RIGHT
+            1
+        Label : VARIABLE
+          $a
+    Label : RIGHT
+      $c

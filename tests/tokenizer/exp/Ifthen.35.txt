@@ -3,9 +3,31 @@
 Label : CODE
   ;
   Label : ELEMENT
+    if
+    Label : CONDITION
+      $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        foreach
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $e
+        Label : SOURCE
+          $b
+        Label : VALUE
+          =>
+          Label : KEY
+            $c
+          Label : VALUE
+            $d
+  Label : ELEMENT
     f
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         void
   Label : ELEMENT
@@ -14,8 +36,6 @@ Label : CODE
       $g
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $i
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -30,25 +50,5 @@ Label : CODE
               void
     Label : SOURCE
       $h
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        foreach
-        Label : VALUE
-          =>
-          Label : KEY
-            $c
-          Label : VALUE
-            $d
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $e
-        Label : SOURCE
-          $b
+    Label : VALUE
+      $i

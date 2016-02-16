@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       str_replace
       Label : ARGUMENTS
@@ -13,16 +15,14 @@ Label : CODE
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              'B'
+              'D'
             Label : ARGUMENT
               'C'
             Label : ARGUMENT
-              'D'
+              'B'
+        Label : ARGUMENT
+          'A'
         Label : ARGUMENT
           (string)
           Label : CAST
             $c
-        Label : ARGUMENT
-          'A'
-    Label : LEFT
-      $a

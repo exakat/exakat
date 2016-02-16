@@ -8,11 +8,11 @@ Label : CODE
       ?
       Label : CONDITION
         $x
+      Label : ELSE
+        'c'
       Label : THEN
         Concatenation
         Label : CONCAT
-          B
-        Label : CONCAT
           'a'
-      Label : ELSE
-        'c'
+        Label : CONCAT
+          B

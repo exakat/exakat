@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     .=
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $x
     Label : RIGHT
       ::
       Label : CLASS
@@ -15,22 +19,18 @@ Label : CODE
           Label : ARGUMENT
             [
             Label : ARGUMENTS
-              void
-              Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
                 void
           Label : ARGUMENT
             [
             Label : ARGUMENTS
-              void
-              Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
                 void
           Label : ARGUMENT
             [
             Label : ARGUMENTS
-              void
-              Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
                 void
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $x

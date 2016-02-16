@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      __NAMESPACE__
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        __NAMESPACE__

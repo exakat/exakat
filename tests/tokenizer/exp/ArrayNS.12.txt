@@ -4,51 +4,51 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      +
-      Label : RIGHT
-        1
-      Label : LEFT
-        $j
     Label : LEFT
       [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $f
-        Label : INDEX
-          $g
       Label : INDEX
         [
-        Label : VARIABLE
-          $h
         Label : INDEX
-          $i
-  Label : ELEMENT
-    =
+          $d
+        Label : VARIABLE
+          $c
+      Label : VARIABLE
+        [
+        Label : INDEX
+          $b
+        Label : VARIABLE
+          $a
     Label : RIGHT
       chop
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           substr
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              1
-            Label : ARGUMENT
               $e
+            Label : ARGUMENT
+              1
+  Label : ELEMENT
+    =
     Label : LEFT
       [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          $b
       Label : INDEX
         [
-        Label : VARIABLE
-          $c
         Label : INDEX
-          $d
+          $i
+        Label : VARIABLE
+          $h
+      Label : VARIABLE
+        [
+        Label : INDEX
+          $g
+        Label : VARIABLE
+          $f
+    Label : RIGHT
+      +
+      Label : LEFT
+        $j
+      Label : RIGHT
+        1

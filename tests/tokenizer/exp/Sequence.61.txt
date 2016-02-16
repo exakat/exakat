@@ -6,33 +6,33 @@ Label : CODE
     for
     Label : BLOCK
       void
+    Label : FINAL
+      <
+      Label : LEFT
+        $e
+      Label : RIGHT
+        $f
+    Label : INCREMENT
+      ++
+      Label : PREPLUSPLUS
+        $g
     Label : INIT
       =
+      Label : LEFT
+        $a
       Label : RIGHT
         ?
         Label : CONDITION
           (
           Label : CODE
             $c
+        Label : ELSE
+          0
         Label : THEN
           (
           Label : CODE
             +
-            Label : RIGHT
-              1
             Label : LEFT
               $d
-        Label : ELSE
-          0
-      Label : LEFT
-        $a
-    Label : FINAL
-      <
-      Label : RIGHT
-        $f
-      Label : LEFT
-        $e
-    Label : INCREMENT
-      ++
-      Label : PREPLUSPLUS
-        $g
+            Label : RIGHT
+              1

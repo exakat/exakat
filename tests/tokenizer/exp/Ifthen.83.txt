@@ -5,44 +5,44 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      $x2
+      $x
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        void
     Label : THEN
       ;
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
-    Label : ELSE
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $b
+        void
   Label : ELEMENT
     if
     Label : CONDITION
       $x2
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $d
     Label : ELSE
       Block with else
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $c
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $x
     Label : THEN
       ;
       Label : ELEMENT
-        void
+        ++
+        Label : POSTPLUSPLUS
+          $d
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $x2
     Label : ELSE
-      Block with else
+      ;
       Label : ELEMENT
-        void
+        ++
+        Label : POSTPLUSPLUS
+          $b
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a

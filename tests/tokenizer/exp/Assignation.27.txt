@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      ++
-      Label : PREPLUSPLUS
-        ::
-        Label : PROPERTY
-          $b
-        Label : CLASS
-          self
     Label : LEFT
       ->
       Label : OBJECT
         $this
       Label : PROPERTY
         a
+    Label : RIGHT
+      ++
+      Label : PREPLUSPLUS
+        ::
+        Label : CLASS
+          self
+        Label : PROPERTY
+          $b

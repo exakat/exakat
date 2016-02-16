@@ -3,15 +3,11 @@
 Label : CODE
   ;
   Label : ELEMENT
-    return
-    Label : RETURN
-      1
-  Label : ELEMENT
     if
     Label : CONDITION
       is_null
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           $y
     Label : THEN
@@ -20,11 +16,15 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           [
-          Label : VARIABLE
-            $x
           Label : INDEX
             +
-            Label : RIGHT
-              2
             Label : LEFT
               1
+            Label : RIGHT
+              2
+          Label : VARIABLE
+            $x
+  Label : ELEMENT
+    return
+    Label : RETURN
+      1

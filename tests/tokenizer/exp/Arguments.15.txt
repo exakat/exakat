@@ -8,49 +8,49 @@ Label : CODE
       (
       Label : CODE
         ||
-        Label : RIGHT
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              (
-              Label : CODE
-                ||
-                Label : RIGHT
-                  [
-                  Label : VARIABLE
-                    $h
-                  Label : INDEX
-                    'i'
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $f
-                  Label : INDEX
-                    'g'
-            Label : LEFT
-              [
-              Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $C
-                Label : INDEX
-                  'd'
-              Label : INDEX
-                'e'
         Label : LEFT
           (
           Label : CODE
             [
-            Label : VARIABLE
-              $a
             Label : INDEX
               'b'
+            Label : VARIABLE
+              $a
+        Label : RIGHT
+          (
+          Label : CODE
+            &&
+            Label : LEFT
+              [
+              Label : INDEX
+                'e'
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  $C
+            Label : RIGHT
+              (
+              Label : CODE
+                ||
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'g'
+                  Label : VARIABLE
+                    $f
+                Label : RIGHT
+                  [
+                  Label : INDEX
+                    'i'
+                  Label : VARIABLE
+                    $h
     Label : THEN
       ;
       Label : ELEMENT
         a
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             'b'

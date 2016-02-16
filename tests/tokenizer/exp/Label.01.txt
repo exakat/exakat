@@ -6,49 +6,49 @@ Label : CODE
     if
     Label : CONDITION
       =
-      Label : RIGHT
-        $b
       Label : LEFT
         $a
+      Label : RIGHT
+        $b
     Label : THEN
       ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              'l'
-            Label : CONCAT
-              $k
-            Label : CONCAT
-              'j'
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $i
       Label : ELEMENT
         ?
         Label : CONDITION
           (
           Label : CODE
             ==
-            Label : RIGHT
-              'd'
             Label : LEFT
               $c
-        Label : THEN
-          =
-          Label : RIGHT
-            'f'
-          Label : LEFT
-            $e
+            Label : RIGHT
+              'd'
         Label : ELSE
           =
-          Label : RIGHT
-            'h'
           Label : LEFT
             $g
+          Label : RIGHT
+            'h'
+        Label : THEN
+          =
+          Label : LEFT
+            $e
+          Label : RIGHT
+            'f'
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $i
+        Label : RIGHT
+          1
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'j'
+            Label : CONCAT
+              $k
+            Label : CONCAT
+              'l'

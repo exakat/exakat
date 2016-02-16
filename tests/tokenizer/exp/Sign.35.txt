@@ -6,25 +6,25 @@ Label : CODE
     if
     Label : CONDITION
       -
-      Label : RIGHT
-        $f
       Label : LEFT
         -
-        Label : RIGHT
-          [
-          Label : VARIABLE
-            $d
-          Label : INDEX
-            'E'
         Label : LEFT
           [
+          Label : INDEX
+            'c'
           Label : VARIABLE
             ->
             Label : OBJECT
               $a
             Label : PROPERTY
               b
+        Label : RIGHT
+          [
           Label : INDEX
-            'c'
+            'E'
+          Label : VARIABLE
+            $d
+      Label : RIGHT
+        $f
     Label : THEN
       void

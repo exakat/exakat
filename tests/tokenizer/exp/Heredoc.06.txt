@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       <<<'NOWDOC'
 
@@ -12,5 +14,3 @@ Label : CODE
         Label : CONCAT
           abc
 
-    Label : LEFT
-      $a

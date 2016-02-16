@@ -2,6 +2,18 @@
 Label : CODE
   ;
   Label : ELEMENT
+    [
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        new
+        Label : NEW
+          static
+          Label : ARGUMENTS
+            void
+      Label : ARGUMENT
+        $method
+  Label : ELEMENT
     x
     Label : ARGUMENTS
       
@@ -23,15 +35,3 @@ Label : CODE
           static
           Label : ARGUMENTS
             void
-  Label : ELEMENT
-    [
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        new
-        Label : NEW
-          static
-          Label : ARGUMENTS
-            void
-      Label : ARGUMENT
-        $method

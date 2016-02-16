@@ -6,7 +6,7 @@ Label : CODE
     ?
     Label : CONDITION
       $x
-    Label : THEN
-      :
     Label : ELSE
       $y
+    Label : THEN
+      :

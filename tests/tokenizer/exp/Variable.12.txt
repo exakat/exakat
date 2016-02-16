@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $result
     Label : RIGHT
       <<<EOF
 
@@ -15,14 +17,14 @@ Label : CODE
           ?
           Label : CONDITION
             [
-            Label : VARIABLE
-              $b
             Label : INDEX
               'c'
-          Label : THEN
-            'true'
+            Label : VARIABLE
+              $b
           Label : ELSE
             'false'
+          Label : THEN
+            'true'
         Label : CONCAT
           
 
@@ -31,17 +33,15 @@ D
           ?
           Label : CONDITION
             [
-            Label : VARIABLE
-              $e
             Label : INDEX
               'f'
-          Label : THEN
-            'true'
+            Label : VARIABLE
+              $e
           Label : ELSE
             'false'
+          Label : THEN
+            'true'
         Label : CONCAT
           
 
 
-    Label : LEFT
-      $result

@@ -6,22 +6,22 @@ Label : CODE
     if
     Label : CONDITION
       !=
-      Label : RIGHT
-        $c
       Label : LEFT
         (
         Label : CODE
           &
-          Label : RIGHT
-            $b
           Label : LEFT
             ~
             Label : NOT
               [
-              Label : VARIABLE
-                $a
               Label : INDEX
                 0
+              Label : VARIABLE
+                $a
+          Label : RIGHT
+            $b
+      Label : RIGHT
+        $c
     Label : THEN
       ;
       Label : ELEMENT

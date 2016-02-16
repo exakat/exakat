@@ -4,24 +4,26 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
+    Label : ABSTRACT
+      abstract
     Label : BLOCK
       ;
       Label : ELEMENT
         function
+        Label : ABSTRACT
+          abstract
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
         Label : NAME
-          d
-        Label : STATIC
-          static
-        Label : ABSTRACT
-          abstract
+          a
+        Label : PUBLIC
+          public
       Label : ELEMENT
         function
+        Label : ABSTRACT
+          abstract
         Label : ARGUMENTS
           
           Label : ARGUMENT
@@ -30,19 +32,17 @@ Label : CODE
           b
         Label : PROTECTED
           protected
-        Label : ABSTRACT
-          abstract
       Label : ELEMENT
         function
-        Label : PUBLIC
-          public
+        Label : ABSTRACT
+          abstract
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
         Label : NAME
-          a
-        Label : ABSTRACT
-          abstract
-    Label : ABSTRACT
-      abstract
+          d
+        Label : STATIC
+          static
+    Label : NAME
+      x

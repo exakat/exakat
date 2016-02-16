@@ -1,70 +1,72 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    $c
-  Label : THEN
-    void
-  Label : ELSE
-    ;
-    Label : ELEMENT
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      $c
+    Label : ELSE
       ;
       Label : ELEMENT
         ;
         Label : ELEMENT
-          =
-          Label : LEFT
-            $k
-          Label : RIGHT
-            ->
-            Label : OBJECT
-              $l
-            Label : METHOD
-              m
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $h
+            Label : RIGHT
+              array
               Label : ARGUMENTS
-                void
+                Arguments
                 Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $n
-                  Label : INDEX
-                    'o'
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $i
-          Label : RIGHT
-            ->
-            Label : OBJECT
-              $this
-            Label : METHOD
-              c
-              Label : ARGUMENTS
-                void
+                  =>
+                  Label : KEY
+                    'a'
+                  Label : VALUE
+                    'b'
                 Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $d
-                  Label : PROPERTY
-                    e
-      Label : ELEMENT
-        ;
+                  void
         Label : ELEMENT
-          =
-          Label : LEFT
-            $h
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                void
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a'
-                Label : VALUE
-                  'b'
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $i
+            Label : RIGHT
+              ->
+              Label : METHOD
+                c
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $d
+                    Label : PROPERTY
+                      e
+              Label : OBJECT
+                $this
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $k
+            Label : RIGHT
+              ->
+              Label : METHOD
+                m
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'o'
+                    Label : VARIABLE
+                      $n
+              Label : OBJECT
+                $l
+    Label : THEN
+      void

@@ -5,20 +5,20 @@ Label : CODE
   Label : ELEMENT
     Concatenation
     Label : CONCAT
-      'c'
+      'a'
     Label : CONCAT
       "b"
     Label : CONCAT
-      'a'
-    Label : CONCAT
       'c'
+    Label : CONCAT
+      'a'
     Label : CONCAT
       "b"
     Label : CONCAT
-      'a'
-    Label : CONCAT
       'c'
+    Label : CONCAT
+      'a'
     Label : CONCAT
       "b"
     Label : CONCAT
-      'a'
+      'c'

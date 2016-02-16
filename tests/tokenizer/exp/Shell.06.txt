@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       `
       Label : CONTAINS
         Concatenation
         Label : CONCAT
           ls -la
-    Label : LEFT
-      $x

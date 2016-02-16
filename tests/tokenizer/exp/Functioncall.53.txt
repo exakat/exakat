@@ -3,10 +3,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           =>
           Label : KEY
@@ -15,6 +17,12 @@ Label : CODE
             array
             Label : ARGUMENTS
               Arguments
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'B'
+                Label : VALUE
+                  'C'
               Label : ARGUMENT
                 =>
                 Label : KEY
@@ -40,8 +48,6 @@ Label : CODE
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      void
-                    Label : ARGUMENT
                       =>
                       Label : KEY
                         'F'
@@ -53,12 +59,8 @@ Label : CODE
                         'H'
                       Label : VALUE
                         'I'
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'B'
-                Label : VALUE
-                  'C'
+                    Label : ARGUMENT
+                      void
               Label : ARGUMENT
                 =>
                 Label : KEY
@@ -70,19 +72,45 @@ Label : CODE
                     Label : ARGUMENT
                       =>
                       Label : KEY
+                        'K'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          Arguments
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              3
+                            Label : VALUE
+                              4
+                          Label : ARGUMENT
+                            void
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'L'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          
+                          Label : ARGUMENT
+                            void
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
                         'M'
                       Label : VALUE
                         array
                         Label : ARGUMENTS
                           Arguments
                           Label : ARGUMENT
-                            void
-                          Label : ARGUMENT
                             =>
                             Label : KEY
                               5
                             Label : VALUE
                               6
+                          Label : ARGUMENT
+                            void
                     Label : ARGUMENT
                       =>
                       Label : KEY
@@ -108,41 +136,15 @@ Label : CODE
                         Label : ARGUMENTS
                           Arguments
                           Label : ARGUMENT
-                            void
-                          Label : ARGUMENT
                             =>
                             Label : KEY
                               9
                             Label : VALUE
                               10
+                          Label : ARGUMENT
+                            void
                     Label : ARGUMENT
                       void
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'K'
-                      Label : VALUE
-                        array
-                        Label : ARGUMENTS
-                          Arguments
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              3
-                            Label : VALUE
-                              4
-                          Label : ARGUMENT
-                            void
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'L'
-                      Label : VALUE
-                        array
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            void
               Label : ARGUMENT
                 =>
                 Label : KEY
@@ -150,7 +152,7 @@ Label : CODE
                 Label : VALUE
                   array
                   Label : ARGUMENTS
-                    void
+                    
                     Label : ARGUMENT
                       =>
                       Label : KEY
@@ -167,5 +169,3 @@ Label : CODE
                               12
                           Label : ARGUMENT
                             void
-    Label : LEFT
-      $a

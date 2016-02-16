@@ -5,6 +5,6 @@ Label : CODE
   Label : ELEMENT
     die
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         '34'

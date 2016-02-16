@@ -6,16 +6,10 @@ Label : CODE
     if
     Label : CONDITION
       ==
-      Label : RIGHT
-        'b'
       Label : LEFT
         $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
+      Label : RIGHT
+        'b'
     Label : ELSE
       Block with else
       Label : ELEMENT
@@ -28,3 +22,9 @@ Label : CODE
             --
             Label : PREPLUSPLUS
               $e
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c

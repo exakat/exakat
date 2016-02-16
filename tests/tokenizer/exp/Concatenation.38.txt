@@ -4,45 +4,45 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $siteurl
     Label : RIGHT
       a
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           Concatenation
           Label : CONCAT
-            'i'
+            'b'
+          Label : CONCAT
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              $c
           Label : CONCAT
             preg_replace
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
+                "e"
+              Label : ARGUMENT
+                ''
+              Label : ARGUMENT
                 substr
                 Label : ARGUMENTS
                   Arguments
+                  Label : ARGUMENT
+                    $f
+                  Label : ARGUMENT
+                    0
                   Label : ARGUMENT
                     strrpos
                     Label : ARGUMENTS
                       Arguments
                       Label : ARGUMENT
-                        'h'
-                      Label : ARGUMENT
                         $g
-                  Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    $f
-              Label : ARGUMENT
-                ''
-              Label : ARGUMENT
-                "e"
+                      Label : ARGUMENT
+                        'h'
           Label : CONCAT
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              'd'
-          Label : CONCAT
-            'b'
-    Label : LEFT
-      $siteurl
+            'i'

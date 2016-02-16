@@ -6,9 +6,9 @@ Label : CODE
     ->
     Label : OBJECT
       [
-      Label : VARIABLE
-        $c
       Label : INDEX
         'd'
+      Label : VARIABLE
+        $c
     Label : PROPERTY
       e

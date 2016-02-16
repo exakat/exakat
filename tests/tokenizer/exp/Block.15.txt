@@ -3,13 +3,9 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $c
-    Label : THEN
-      void
     Label : ELSE
       elseif
       Label : CONDITION
@@ -23,21 +19,19 @@ Label : CODE
             Label : ELEMENT
               =
               Label : LEFT
-                $k
+                $h
               Label : RIGHT
-                ->
-                Label : OBJECT
-                  $l
-                Label : METHOD
-                  m
-                  Label : ARGUMENTS
+                array
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    =>
+                    Label : KEY
+                      'a'
+                    Label : VALUE
+                      'b'
+                  Label : ARGUMENT
                     void
-                    Label : ARGUMENT
-                      [
-                      Label : VARIABLE
-                        $n
-                      Label : INDEX
-                        'o'
           Label : ELEMENT
             ;
             Label : ELEMENT
@@ -46,33 +40,37 @@ Label : CODE
                 $i
               Label : RIGHT
                 ->
-                Label : OBJECT
-                  $this
                 Label : METHOD
                   c
                   Label : ARGUMENTS
-                    void
+                    
                     Label : ARGUMENT
                       ->
                       Label : OBJECT
                         $d
                       Label : PROPERTY
                         e
+                Label : OBJECT
+                  $this
           Label : ELEMENT
             ;
             Label : ELEMENT
               =
               Label : LEFT
-                $h
+                $k
               Label : RIGHT
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    void
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'a'
-                    Label : VALUE
-                      'b'
+                ->
+                Label : METHOD
+                  m
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'o'
+                      Label : VARIABLE
+                        $n
+                Label : OBJECT
+                  $l
+    Label : THEN
+      void

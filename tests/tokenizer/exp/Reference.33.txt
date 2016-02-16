@@ -5,13 +5,13 @@ Label : CODE
     if
     Label : CONDITION
       &
-      Label : RIGHT
-        $c
       Label : LEFT
         ::
         Label : CLASS
           A
         Label : CONSTANT
           B
+      Label : RIGHT
+        $c
     Label : THEN
       void

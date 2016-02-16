@@ -4,43 +4,43 @@ Label : CODE
   ;
   Label : ELEMENT
     .=
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         >
-        Label : RIGHT
-          127
         Label : LEFT
           ord
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               [
-              Label : VARIABLE
-                $b
               Label : INDEX
                 $i
+              Label : VARIABLE
+                $b
+        Label : RIGHT
+          127
+      Label : ELSE
+        [
+        Label : INDEX
+          $k
+        Label : VARIABLE
+          $e
       Label : THEN
         Concatenation
         Label : CONCAT
           [
+          Label : INDEX
+            $e
           Label : VARIABLE
-            $d
+            $c
+        Label : CONCAT
+          [
           Label : INDEX
             ++
             Label : PREPLUSPLUS
               $l
-        Label : CONCAT
-          [
           Label : VARIABLE
-            $c
-          Label : INDEX
-            $e
-      Label : ELSE
-        [
-        Label : VARIABLE
-          $e
-        Label : INDEX
-          $k
-    Label : LEFT
-      $a
+            $d

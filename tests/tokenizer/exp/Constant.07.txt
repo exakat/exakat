@@ -5,6 +5,6 @@ Label : CODE
   Label : ELEMENT
     print
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         __LINE__

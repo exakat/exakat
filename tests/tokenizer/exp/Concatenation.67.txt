@@ -4,62 +4,64 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      5
     Label : LEFT
-      $b3
-  Label : ELEMENT
-    =
+      $b
     Label : RIGHT
       array
       Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'c2'
-          Label : VALUE
-            4
-    Label : LEFT
-      $b2
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      'D2'
-    Label : LEFT
-      $d2
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      'D'
-    Label : LEFT
-      $d
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           =>
           Label : KEY
             'c'
           Label : VALUE
             3
-    Label : LEFT
-      $b
   Label : ELEMENT
     =
-    Label : RIGHT
-      'D3'
     Label : LEFT
-      $d3
-  Label : ELEMENT
-    =
+      $b2
     Label : RIGHT
       array
       Label : ARGUMENTS
-        void
+        
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'c2'
+          Label : VALUE
+            4
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $b3
+    Label : RIGHT
+      5
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $d
+    Label : RIGHT
+      'D'
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $d2
+    Label : RIGHT
+      'D2'
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $d3
+    Label : RIGHT
+      'D3'
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        
         Label : ARGUMENT
           =>
           Label : KEY
@@ -70,20 +72,20 @@ Label : CODE
               -
               Label : SIGN
                 [
-                Label : VARIABLE
-                  $b
                 Label : INDEX
                   'c'
+                Label : VARIABLE
+                  $b
             Label : CONCAT
               $d
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a2
     Label : RIGHT
       array
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           =>
           Label : KEY
@@ -92,24 +94,24 @@ Label : CODE
             Concatenation
             Label : CONCAT
               -
-              Label : RIGHT
-                [
-                Label : VARIABLE
-                  $b2
-                Label : INDEX
-                  'c2'
               Label : LEFT
                 2
+              Label : RIGHT
+                [
+                Label : INDEX
+                  'c2'
+                Label : VARIABLE
+                  $b2
             Label : CONCAT
               $d2
-    Label : LEFT
-      $a2
   Label : ELEMENT
     =
+    Label : LEFT
+      $a3
     Label : RIGHT
       array
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           =>
           Label : KEY
@@ -118,21 +120,19 @@ Label : CODE
             Concatenation
             Label : CONCAT
               -
-              Label : RIGHT
-                $b3
               Label : LEFT
                 Concatenation
                 Label : CONCAT
-                  '3'
-                Label : CONCAT
                   $d
+                Label : CONCAT
+                  '3'
+              Label : RIGHT
+                $b3
             Label : CONCAT
               $d3
-    Label : LEFT
-      $a3
   Label : ELEMENT
     print_r
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a3

@@ -1,270 +1,268 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    namespace
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ->
-        Label : OBJECT
-          $object
-        Label : METHOD
-          objectCalledMethod
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          staticallyCalledMethod
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-        Label : CLASS
-          staticallyCalling
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            \
-            Label : SUBNAME
-              CONSTANTE
-            Label : SUBNAME
-              NAMESPACED
-            Label : SUBNAME
-              FULL
-      Label : ELEMENT
-        unqualified_function
+  namespace
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          UNQUALIFIED_CONSTANT
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          \
+          Label : SUBNAME
+            SUBNAMESPACED
+          Label : SUBNAME
+            CONSTANTE
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          \
+          Label : SUBNAME
+            FULL
+          Label : SUBNAME
+            NAMESPACED
+          Label : SUBNAME
+            CONSTANTE
+    Label : ELEMENT
+      unqualified_function
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+    Label : ELEMENT
+      \
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+      Label : SUBNAME
+        subnamespaced
+      Label : SUBNAME
+        fonction
+    Label : ELEMENT
+      \
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          void
+      Label : SUBNAME
+        full
+      Label : SUBNAME
+        namespaced
+      Label : SUBNAME
+        fonction
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        staticallyCalling
+      Label : METHOD
+        staticallyCalledMethod
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
-      Label : ELEMENT
+    Label : ELEMENT
+      ->
+      Label : METHOD
+        objectCalledMethod
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+      Label : OBJECT
+        $object
+    Label : ELEMENT
+      new
+      Label : NEW
+        FOO
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+    Label : ELEMENT
+      new
+      Label : NEW
+        FOO
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        fooclassc
+      Label : CONSTANT
+        FOOCSONTANT
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          subnamespacec
+        Label : SUBNAME
+          fooclassc
+      Label : CONSTANT
+        FOOCSONTANT
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          fullc
+        Label : SUBNAME
+          namespacec
+        Label : SUBNAME
+          fooclassc
+      Label : CONSTANT
+        FOOCSONTANT
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        fooclassp
+      Label : PROPERTY
+        $property
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          subnamespacep
+        Label : SUBNAME
+          fooclassp
+      Label : PROPERTY
+        $property
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          fullp
+        Label : SUBNAME
+          namespacep
+        Label : SUBNAME
+          fooclassp
+      Label : PROPERTY
+        $property
+    Label : ELEMENT
+      new
+      Label : NEW
         \
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
         Label : SUBNAME
-          fonction
+          subnamespace
         Label : SUBNAME
-          subnamespaced
-      Label : ELEMENT
+          FOO
+    Label : ELEMENT
+      new
+      Label : NEW
+        \
+        Label : SUBNAME
+          subnamespace
+        Label : SUBNAME
+          FOO
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        fooclassm
+      Label : METHOD
+        staticMethod
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          subnamespacem
+        Label : SUBNAME
+          fooclassm
+      Label : METHOD
+        staticMethod
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+    Label : ELEMENT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          fullm
+        Label : SUBNAME
+          namespacem
+        Label : SUBNAME
+          fooclassm
+      Label : METHOD
+        staticMethod
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+    Label : ELEMENT
+      new
+      Label : NEW
         \
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
         Label : SUBNAME
-          fonction
+          Foo
         Label : SUBNAME
-          namespaced
+          Bar
+        Label : SUBNAME
+          FOO
+    Label : ELEMENT
+      new
+      Label : NEW
+        \
+        Label : SUBNAME
+          Foo
+        Label : SUBNAME
+          Bar
+        Label : SUBNAME
+          FOO
+    Label : ELEMENT
+      instanceof
+      Label : CLASS
+        fooclass
+      Label : VARIABLE
+        $x
+    Label : ELEMENT
+      instanceof
+      Label : CLASS
+        \
+        Label : SUBNAME
+          subnamespace
+        Label : SUBNAME
+          fooclass
+      Label : VARIABLE
+        $x
+    Label : ELEMENT
+      instanceof
+      Label : CLASS
+        \
         Label : SUBNAME
           full
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            \
-            Label : SUBNAME
-              CONSTANTE
-            Label : SUBNAME
-              SUBNAMESPACED
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            UNQUALIFIED_CONSTANT
-      Label : ELEMENT
-        instanceof
-        Label : VARIABLE
-          $x
-        Label : CLASS
+        Label : SUBNAME
+          namespacepath
+        Label : SUBNAME
           fooclass
-      Label : ELEMENT
-        new
-        Label : NEW
-          \
-          Label : SUBNAME
-            Bar
-          Label : SUBNAME
-            Foo
-          Label : SUBNAME
-            FOO
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          staticMethod
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fooclassm
-          Label : SUBNAME
-            subnamespacem
-      Label : ELEMENT
-        new
-        Label : NEW
-          \
-          Label : SUBNAME
-            FOO
-          Label : SUBNAME
-            subnamespace
-      Label : ELEMENT
-        new
-        Label : NEW
-          \
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-          Label : SUBNAME
-            Bar
-          Label : SUBNAME
-            Foo
-          Label : SUBNAME
-            FOO
-      Label : ELEMENT
-        new
-        Label : NEW
-          FOO
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          fooclassc
-        Label : CONSTANT
-          FOOCSONTANT
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          staticMethod
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fooclassm
-          Label : SUBNAME
-            fullm
-          Label : SUBNAME
-            namespacem
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            subnamespacec
-          Label : SUBNAME
-            fooclassc
-        Label : CONSTANT
-          FOOCSONTANT
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          staticMethod
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-        Label : CLASS
-          fooclassm
-      Label : ELEMENT
-        new
-        Label : NEW
-          \
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-          Label : SUBNAME
-            subnamespace
-          Label : SUBNAME
-            FOO
-      Label : ELEMENT
-        instanceof
-        Label : VARIABLE
-          $x
-        Label : CLASS
-          \
-          Label : SUBNAME
-            namespacepath
-          Label : SUBNAME
-            full
-          Label : SUBNAME
-            fooclass
-      Label : ELEMENT
-        new
-        Label : NEW
-          FOO
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
-        ::
-        Label : PROPERTY
-          $property
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fullp
-          Label : SUBNAME
-            namespacep
-          Label : SUBNAME
-            fooclassp
-      Label : ELEMENT
-        ::
-        Label : PROPERTY
-          $property
-        Label : CLASS
-          fooclassp
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fullc
-          Label : SUBNAME
-            namespacec
-          Label : SUBNAME
-            fooclassc
-        Label : CONSTANT
-          FOOCSONTANT
-      Label : ELEMENT
-        instanceof
-        Label : VARIABLE
-          $x
-        Label : CLASS
-          \
-          Label : SUBNAME
-            subnamespace
-          Label : SUBNAME
-            fooclass
-      Label : ELEMENT
-        ::
-        Label : PROPERTY
-          $property
-        Label : CLASS
-          \
-          Label : SUBNAME
-            subnamespacep
-          Label : SUBNAME
-            fooclassp
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        Bar
-      Label : SUBNAME
-        Foo
+      Label : VARIABLE
+        $x
+  Label : NAMESPACE
+    \
+    Label : SUBNAME
+      Foo
+    Label : SUBNAME
+      Bar

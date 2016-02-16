@@ -2,28 +2,24 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       ==
-      Label : RIGHT
-        1
       Label : LEFT
         $a
-    Label : THEN
-      void
+      Label : RIGHT
+        1
     Label : ELSE
       elseif
       Label : CONDITION
         ==
-        Label : RIGHT
-          1
         Label : LEFT
           $b
-      Label : THEN
-        void
+        Label : RIGHT
+          1
       Label : ELSE
         void
+      Label : THEN
+        void
+    Label : THEN
+      void

@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       @
       Label : AT
         1
-    Label : LEFT
-      $x

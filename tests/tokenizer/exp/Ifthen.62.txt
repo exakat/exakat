@@ -5,81 +5,79 @@ Label : CODE
     if
     Label : CONDITION
       >
-      Label : RIGHT
-        a
       Label : LEFT
         $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        void
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          >
-          Label : RIGHT
-            a
-          Label : LEFT
-            $a
-        Label : THEN
-          ;
-          Label : ELEMENT
-            void
-        Label : ELSE
-          Block with else
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      >
       Label : RIGHT
         a
-      Label : LEFT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        void
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        >
-        Label : RIGHT
-          a
-        Label : LEFT
-          $a
-      Label : THEN
-        ;
-        Label : ELEMENT
-          void
-      Label : ELSE
-        Block with else
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $b
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      >
-      Label : RIGHT
-        a
-      Label : LEFT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        void
     Label : ELSE
       Block with else
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $b
+    Label : THEN
+      ;
+      Label : ELEMENT
+        void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      >
+      Label : LEFT
+        $a
+      Label : RIGHT
+        a
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          >
+          Label : LEFT
+            $a
+          Label : RIGHT
+            a
+        Label : ELSE
+          Block with else
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      >
+      Label : LEFT
+        $a
+      Label : RIGHT
+        a
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        >
+        Label : LEFT
+          $a
+        Label : RIGHT
+          a
+      Label : ELSE
+        Block with else
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b
+      Label : THEN
+        ;
+        Label : ELEMENT
+          void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        void

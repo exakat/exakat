@@ -2,108 +2,108 @@
 Label : CODE
   ;
   Label : ELEMENT
-    M
-  Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        n
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            r
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                's'
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              ->
-              Label : OBJECT
-                $p
-              Label : PROPERTY
-                q
-            Label : CONCAT
-              'o'
-  Label : ELEMENT
-    T
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        u
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            array
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'aa'
-                Label : VALUE
-                  'ab'
-          Label : ARGUMENT
-            y
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'z'
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              ->
-              Label : OBJECT
-                $w
-              Label : PROPERTY
-                x
-            Label : CONCAT
-              'v'
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         Concatenation
-        Label : CONCAT
-          'l'
         Label : CONCAT
           a
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              'k'
-            Label : ARGUMENT
-              e
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ?
-                  Label : CONDITION
-                    ==
-                    Label : RIGHT
-                      'h'
-                    Label : LEFT
-                      ->
-                      Label : OBJECT
-                        $f
-                      Label : PROPERTY
-                        g
-                  Label : THEN
-                    'i'
-                  Label : ELSE
-                    'j'
-            Label : ARGUMENT
               Concatenation
+              Label : CONCAT
+                'b'
               Label : CONCAT
                 ->
                 Label : OBJECT
                   $c
                 Label : PROPERTY
                   d
-              Label : CONCAT
-                'b'
+            Label : ARGUMENT
+              e
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  ?
+                  Label : CONDITION
+                    ==
+                    Label : LEFT
+                      ->
+                      Label : OBJECT
+                        $f
+                      Label : PROPERTY
+                        g
+                    Label : RIGHT
+                      'h'
+                  Label : ELSE
+                    'j'
+                  Label : THEN
+                    'i'
+            Label : ARGUMENT
+              'k'
+        Label : CONCAT
+          'l'
+  Label : ELEMENT
+    M
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        n
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'o'
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $p
+              Label : PROPERTY
+                q
+          Label : ARGUMENT
+            r
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                's'
+  Label : ELEMENT
+    T
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        u
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'v'
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $w
+              Label : PROPERTY
+                x
+          Label : ARGUMENT
+            y
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                'z'
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'aa'
+                Label : VALUE
+                  'ab'

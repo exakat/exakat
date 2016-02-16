@@ -4,53 +4,53 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
+    Label : ABSTRACT
+      abstract
     Label : BLOCK
       ;
       Label : ELEMENT
         function
+        Label : ABSTRACT
+          abstract
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
         Label : NAME
           a
-        Label : ABSTRACT
-          abstract
       Label : ELEMENT
         function
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
-        Label : NAME
-          b
         Label : BLOCK
           void
+        Label : NAME
+          b
         Label : PROTECTED
           protected
       Label : ELEMENT
         function
+        Label : ABSTRACT
+          abstract
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
         Label : NAME
           c
-        Label : ABSTRACT
-          abstract
       Label : ELEMENT
         function
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
+        Label : BLOCK
+          void
         Label : NAME
           d
         Label : STATIC
           static
-        Label : BLOCK
-          void
-    Label : ABSTRACT
-      abstract
+    Label : NAME
+      x

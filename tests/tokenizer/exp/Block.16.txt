@@ -1,50 +1,52 @@
 <?php
 
 Label : CODE
-  foreach
-  Label : VALUE
-    $b
-  Label : BLOCK
-    ;
-    Label : ELEMENT
+  ;
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
       ;
       Label : ELEMENT
         ;
         Label : ELEMENT
-          =
-          Label : LEFT
-            $g
-          Label : RIGHT
-            ->
-            Label : OBJECT
-              $c
-            Label : METHOD
-              d
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $h
+            Label : RIGHT
+              array
               Label : ARGUMENTS
-                void
+                Arguments
                 Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $e
-                  Label : PROPERTY
-                    f
-      Label : ELEMENT
-        ;
+                  =>
+                  Label : KEY
+                    'a'
+                  Label : VALUE
+                    'b'
+                Label : ARGUMENT
+                  void
         Label : ELEMENT
-          =
-          Label : LEFT
-            $h
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                void
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a'
-                Label : VALUE
-                  'b'
-  Label : SOURCE
-    $a
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $g
+            Label : RIGHT
+              ->
+              Label : METHOD
+                d
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $e
+                    Label : PROPERTY
+                      f
+              Label : OBJECT
+                $c
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b

@@ -6,17 +6,17 @@ Label : CODE
     return
     Label : RETURN
       ->
+      Label : METHOD
+        d
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
       Label : OBJECT
         a
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            $c
-          Label : ARGUMENT
             $b
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          void
           Label : ARGUMENT
-            void
+            $c

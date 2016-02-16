@@ -1,16 +1,10 @@
 ;
 Label : ELEMENT
+   
+Label : ELEMENT
   <?php 
   Label : CODE
     ;
-    Label : ELEMENT
-      C
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $d
     Label : ELEMENT
       if
       Label : CONDITION
@@ -18,7 +12,7 @@ Label : ELEMENT
         Label : NOT
           isset
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               $a
       Label : THEN
@@ -26,10 +20,16 @@ Label : ELEMENT
         Label : ELEMENT
           print
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               'B'
+    Label : ELEMENT
+      C
+    Label : ELEMENT
+      print
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $d
 Label : ELEMENT
   '>
-Label : ELEMENT
-   

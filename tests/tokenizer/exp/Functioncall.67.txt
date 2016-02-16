@@ -5,18 +5,18 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         ?
         Label : CONDITION
-          void
+          
           Label : ARGUMENT
             'a'
+        Label : ELSE
+          true
         Label : THEN
           print
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               'b'
-        Label : ELSE
-          true

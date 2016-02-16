@@ -5,67 +5,21 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a
-    Label : NAME
-      B
     Label : BLOCK
       void
+    Label : NAME
+      B
   Label : ELEMENT
-    if
-    Label : CONDITION
-      O
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'S'
-          Label : CONCAT
-            ::
-            Label : CLASS
-              P
-            Label : METHOD
-              Q
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'R'
-    Label : THEN
-      void
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    H
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'I'
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    M
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'N'
-  Label : ELEMENT
-    J
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        'L'
-      Label : ARGUMENT
-        'K'
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    void
+    B
   Label : ELEMENT
     D
     Label : ARGUMENTS
       Arguments
+      Label : ARGUMENT
+        'E'
       Label : ARGUMENT
         array
         Label : ARGUMENTS
@@ -82,7 +36,53 @@ Label : CODE
               'G'
             Label : VALUE
               $c
-      Label : ARGUMENT
-        'E'
   Label : ELEMENT
-    B
+    void
+  Label : ELEMENT
+    H
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        'I'
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    J
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        'K'
+      Label : ARGUMENT
+        'L'
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    M
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        'N'
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      O
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            ::
+            Label : CLASS
+              P
+            Label : METHOD
+              Q
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'R'
+          Label : CONCAT
+            'S'
+    Label : THEN
+      void

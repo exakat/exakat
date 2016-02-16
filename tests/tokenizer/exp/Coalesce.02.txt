@@ -3,9 +3,27 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : LEFT
+      $x
+    Label : RIGHT
+      NULL
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $y
+    Label : RIGHT
+      NULL
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $z
+    Label : RIGHT
+      3
+  Label : ELEMENT
     var_dump
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         ??
         Label : LEFT
@@ -23,8 +41,8 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        void
-        Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
           =>
           Label : KEY
             "c"
@@ -33,44 +51,26 @@ Label : CODE
   Label : ELEMENT
     var_dump
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         ??
         Label : LEFT
           [
-          Label : VARIABLE
-            $x
           Label : INDEX
             "e"
+          Label : VARIABLE
+            $x
         Label : RIGHT
           ??
           Label : LEFT
             [
-            Label : VARIABLE
-              $x
             Label : INDEX
               "f"
-          Label : RIGHT
-            [
             Label : VARIABLE
               $x
+          Label : RIGHT
+            [
             Label : INDEX
               "g"
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $z
-    Label : RIGHT
-      3
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $y
-    Label : RIGHT
-      NULL
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      NULL
+            Label : VARIABLE
+              $x

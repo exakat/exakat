@@ -1,5 +1,7 @@
 ;
 Label : ELEMENT
+  A
+Label : ELEMENT
   <?php 
   Label : CODE
     ;
@@ -8,53 +10,9 @@ Label : ELEMENT
       Label : CONDITION
         empty
         Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $d
-      Label : THEN
-        ;
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              M
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'N'
-        Label : ELEMENT
-          N
-        Label : ELEMENT
-          K
-    Label : ELEMENT
-      J
-    Label : ELEMENT
-      
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        empty
-        Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $a
-      Label : THEN
-        ;
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              D
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'E'
-        Label : ELEMENT
-          E
-        Label : ELEMENT
-          B
       Label : ELSE
         elseif
         Label : CONDITION
@@ -62,20 +20,60 @@ Label : ELEMENT
         Label : THEN
           ;
           Label : ELEMENT
+            F
+          Label : ELEMENT
             echo
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 H
                 Label : ARGUMENTS
                   Arguments
                   Label : ARGUMENT
-                    'I'
-                  Label : ARGUMENT
                     $c
+                  Label : ARGUMENT
+                    'I'
           Label : ELEMENT
             I
-          Label : ELEMENT
-            F
-Label : ELEMENT
-  A
+      Label : THEN
+        ;
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              D
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'E'
+        Label : ELEMENT
+          E
+    Label : ELEMENT
+      J
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        empty
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $d
+      Label : THEN
+        ;
+        Label : ELEMENT
+          K
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              M
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'N'
+        Label : ELEMENT
+          N

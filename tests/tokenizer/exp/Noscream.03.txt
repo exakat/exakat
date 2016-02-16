@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  Concatenation
-  Label : CONCAT
-    '23'
-  Label : CONCAT
-    @
-    Label : AT
-      $y
+  ;
+  Label : ELEMENT
+    Concatenation
+    Label : CONCAT
+      @
+      Label : AT
+        $y
+    Label : CONCAT
+      '23'

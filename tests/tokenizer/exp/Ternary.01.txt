@@ -6,7 +6,7 @@ Label : CODE
     ?
     Label : CONDITION
       true
-    Label : THEN
-      'b'
     Label : ELSE
       'c'
+    Label : THEN
+      'b'

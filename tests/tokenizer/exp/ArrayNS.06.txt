@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       [
       Label : ARGUMENTS
@@ -11,21 +13,9 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            'i'
+            'a'
           Label : VALUE
-            'j'
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'g'
-          Label : VALUE
-            'h'
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'e'
-          Label : VALUE
-            'f'
+            'b'
         Label : ARGUMENT
           =>
           Label : KEY
@@ -35,8 +25,18 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            'a'
+            'e'
           Label : VALUE
-            'b'
-    Label : LEFT
-      $a
+            'f'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'g'
+          Label : VALUE
+            'h'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'i'
+          Label : VALUE
+            'j'

@@ -6,15 +6,15 @@ Label : CODE
     if
     Label : CONDITION
       [
-      Label : VARIABLE
-        $a
       Label : INDEX
         'b'
+      Label : VARIABLE
+        $a
     Label : THEN
       ;
       Label : ELEMENT
         while
-        Label : CONDITION
-          $x
         Label : BLOCK
           void
+        Label : CONDITION
+          $x

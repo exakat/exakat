@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -11,12 +13,10 @@ Label : CODE
         Label : AT
           function_exists
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               'b'
-      Label : THEN
-        'c'
       Label : ELSE
         'd'
-    Label : LEFT
-      $a
+      Label : THEN
+        'c'

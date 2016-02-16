@@ -5,12 +5,12 @@ Label : CODE
   Label : ELEMENT
     f
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         new
         Label : NEW
           Stdclass
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               void

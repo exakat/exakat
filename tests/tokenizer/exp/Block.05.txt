@@ -15,15 +15,9 @@ Label : CODE
     Label : RIGHT
       c
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           {
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $d
-            Label : PROPERTY
-              e
           Label : INDEX
             ++
             Label : POSTPLUSPLUS
@@ -32,3 +26,9 @@ Label : CODE
                 $f
               Label : PROPERTY
                 g
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $d
+            Label : PROPERTY
+              e

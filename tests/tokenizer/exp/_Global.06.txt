@@ -5,8 +5,8 @@ Label : CODE
   Label : ELEMENT
     global
     Label : GLOBAL
-      $c
+      $a
     Label : GLOBAL
       $b
     Label : GLOBAL
-      $a
+      $c

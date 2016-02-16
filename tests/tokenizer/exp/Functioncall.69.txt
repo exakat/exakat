@@ -1,27 +1,27 @@
 ;
 Label : ELEMENT
-  ++
-  Label : POSTPLUSPLUS
-    $a
-Label : ELEMENT
-  G
-Label : ELEMENT
   echo
   Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      E
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'F'
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    void
+    
     Label : ARGUMENT
       C
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           'D'
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    
+    Label : ARGUMENT
+      E
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          'F'
+Label : ELEMENT
+  G
+Label : ELEMENT
+  ++
+  Label : POSTPLUSPLUS
+    $a

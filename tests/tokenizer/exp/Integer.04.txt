@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     .=
+    Label : LEFT
+      $a
     Label : RIGHT
       "
       Label : CONTAINS
@@ -12,11 +14,9 @@ Label : CODE
           b
         Label : CONCAT
           [
-          Label : VARIABLE
-            $c
           Label : INDEX
             1
+          Label : VARIABLE
+            $c
         Label : CONCAT
           [2]e
-    Label : LEFT
-      $a

@@ -3,33 +3,33 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         (
         Label : CODE
           &&
+          Label : LEFT
+            $b
           Label : RIGHT
             !
             Label : NOT
               c
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   $d
-          Label : LEFT
-            $b
+      Label : ELSE
+        ''
       Label : THEN
         ->
-        Label : PROPERTY
-          f
         Label : OBJECT
           current
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               $e
-      Label : ELSE
-        ''
-    Label : LEFT
-      $a
+        Label : PROPERTY
+          f

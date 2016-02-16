@@ -1,32 +1,34 @@
 <?php
 
 Label : CODE
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      Concatenation
-      Label : CONCAT
-        'h'
-      Label : CONCAT
-        [
-        Label : VARIABLE
-          $f
-        Label : INDEX
-          'g'
-      Label : CONCAT
-        'e'
-      Label : CONCAT
-        ->
-        Label : OBJECT
-          $a
-        Label : METHOD
-          b
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                d
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          ->
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  d
+                Label : VARIABLE
+                  $c
+          Label : OBJECT
+            $a
+        Label : CONCAT
+          'e'
+        Label : CONCAT
+          [
+          Label : INDEX
+            'g'
+          Label : VARIABLE
+            $f
+        Label : CONCAT
+          'h'

@@ -6,7 +6,7 @@ Label : CODE
     ++
     Label : POSTPLUSPLUS
       [
-      Label : VARIABLE
-        $x
       Label : INDEX
         1
+      Label : VARIABLE
+        $x

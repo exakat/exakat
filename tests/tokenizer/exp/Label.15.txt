@@ -3,54 +3,54 @@
 Label : CODE
   ;
   Label : ELEMENT
-    :
-    Label : LABEL
-      F
-  Label : ELEMENT
     =
-    Label : RIGHT
-      strlen
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          $i
     Label : LEFT
-      $h
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      3
-    Label : LEFT
-      $e
-  Label : ELEMENT
-    =
+      $a
     Label : RIGHT
       [
+      Label : INDEX
+        $d
       Label : VARIABLE
         ->
         Label : OBJECT
           $b
         Label : PROPERTY
           c
-      Label : INDEX
-        $d
+  Label : ELEMENT
+    =
     Label : LEFT
-      $a
+      $e
+    Label : RIGHT
+      3
+  Label : ELEMENT
+    :
+    Label : LABEL
+      F
   Label : ELEMENT
     --
     Label : PREPLUSPLUS
       $g
   Label : ELEMENT
     =
+    Label : LEFT
+      $h
+    Label : RIGHT
+      strlen
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $i
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $m
     Label : RIGHT
       ->
-      Label : OBJECT
-        $j
       Label : METHOD
         k
         Label : ARGUMENTS
           
           Label : ARGUMENT
             $l
-    Label : LEFT
-      $m
+      Label : OBJECT
+        $j

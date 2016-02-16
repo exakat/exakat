@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      "1 2 en latin-1 éç"
     Label : LEFT
       $a
+    Label : RIGHT
+      "1 2 en latin-1 éç"

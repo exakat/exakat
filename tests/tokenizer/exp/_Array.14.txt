@@ -4,117 +4,117 @@ Label : CODE
   ;
   Label : ELEMENT
     {
-    Label : VARIABLE
-      [
-      Label : VARIABLE
-        $b
-      Label : INDEX
-        2
     Label : INDEX
       -
       Label : LEFT
         strlen
         Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $bb
-      Label : RIGHT
-        1
-  Label : ELEMENT
-    {
-    Label : VARIABLE
-      [
-      Label : VARIABLE
-        {
-        Label : VARIABLE
-          $f
-        Label : INDEX
-          3
-      Label : INDEX
-        4
-    Label : INDEX
-      -
-      Label : LEFT
-        strlen
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $dd
-      Label : RIGHT
-        1
-  Label : ELEMENT
-    {
-    Label : VARIABLE
-      {
-      Label : VARIABLE
-        $e
-      Label : INDEX
-        6
-    Label : INDEX
-      -
-      Label : LEFT
-        strlen
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $ee
-      Label : RIGHT
-        1
-  Label : ELEMENT
-    {
-    Label : VARIABLE
-      [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $c
-        Label : INDEX
-          3
-      Label : INDEX
-        4
-    Label : INDEX
-      -
-      Label : LEFT
-        strlen
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $cc
-      Label : RIGHT
-        1
-  Label : ELEMENT
-    {
-    Label : VARIABLE
-      {
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $d
-        Label : INDEX
-          3
-      Label : INDEX
-        4
-    Label : INDEX
-      -
-      Label : LEFT
-        strlen
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $dd
-      Label : RIGHT
-        1
-  Label : ELEMENT
-    {
-    Label : VARIABLE
-      $a
-    Label : INDEX
-      -
-      Label : LEFT
-        strlen
-        Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $aa
       Label : RIGHT
         1
+    Label : VARIABLE
+      $a
+  Label : ELEMENT
+    {
+    Label : INDEX
+      -
+      Label : LEFT
+        strlen
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $bb
+      Label : RIGHT
+        1
+    Label : VARIABLE
+      [
+      Label : INDEX
+        2
+      Label : VARIABLE
+        $b
+  Label : ELEMENT
+    {
+    Label : INDEX
+      -
+      Label : LEFT
+        strlen
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $cc
+      Label : RIGHT
+        1
+    Label : VARIABLE
+      [
+      Label : INDEX
+        4
+      Label : VARIABLE
+        [
+        Label : INDEX
+          3
+        Label : VARIABLE
+          $c
+  Label : ELEMENT
+    {
+    Label : INDEX
+      -
+      Label : LEFT
+        strlen
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $dd
+      Label : RIGHT
+        1
+    Label : VARIABLE
+      {
+      Label : INDEX
+        4
+      Label : VARIABLE
+        [
+        Label : INDEX
+          3
+        Label : VARIABLE
+          $d
+  Label : ELEMENT
+    {
+    Label : INDEX
+      -
+      Label : LEFT
+        strlen
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $ee
+      Label : RIGHT
+        1
+    Label : VARIABLE
+      {
+      Label : INDEX
+        6
+      Label : VARIABLE
+        $e
+  Label : ELEMENT
+    {
+    Label : INDEX
+      -
+      Label : LEFT
+        strlen
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            $dd
+      Label : RIGHT
+        1
+    Label : VARIABLE
+      [
+      Label : INDEX
+        4
+      Label : VARIABLE
+        {
+        Label : INDEX
+          3
+        Label : VARIABLE
+          $f

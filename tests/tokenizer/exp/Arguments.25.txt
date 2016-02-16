@@ -5,42 +5,10 @@ Label : CODE
     if
     Label : CONDITION
       [
-      Label : VARIABLE
-        $a
       Label : INDEX
         'B'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            F
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  'G'
-      Label : ELEMENT
-        G
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              'D'
-      Label : ELEMENT
-        D
-      Label : ELEMENT
-        B
+      Label : VARIABLE
+        $a
     Label : ELSE
       ;
       Label : ELEMENT
@@ -48,18 +16,48 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            'L'
+            'I'
           Label : ARGUMENT
             J
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $d
                 Label : INDEX
                   'K'
+                Label : VARIABLE
+                  $d
           Label : ARGUMENT
-            void
-            Label : ARGUMENT
-              'I'
+            'L'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'D'
+            Label : VARIABLE
+              $b
+      Label : ELEMENT
+        D
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            F
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'G'
+                Label : VARIABLE
+                  $c
+      Label : ELEMENT
+        G

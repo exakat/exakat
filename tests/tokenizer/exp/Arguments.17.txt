@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      c
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $d
     Label : LEFT
       list
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           [
           Label : VARIABLE
             [
-            Label : VARIABLE
-              $a
             Label : INDEX
               'b'
+            Label : VARIABLE
+              $a
+    Label : RIGHT
+      c
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $d

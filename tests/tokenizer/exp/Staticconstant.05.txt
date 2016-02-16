@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      ::
-      Label : CLASS
-        A
-      Label : CONSTANT
-        coNSt
     Label : LEFT
-      $b
-  Label : ELEMENT
-    =
+      $x
     Label : RIGHT
       ::
       Label : CLASS
         A
       Label : CONSTANT
         const
+  Label : ELEMENT
+    =
     Label : LEFT
-      $x
+      $b
+    Label : RIGHT
+      ::
+      Label : CLASS
+        A
+      Label : CONSTANT
+        coNSt

@@ -6,7 +6,7 @@ Label : CODE
     if
     Label : CONDITION
       1
-    Label : THEN
-      void
     Label : ELSE
+      void
+    Label : THEN
       void

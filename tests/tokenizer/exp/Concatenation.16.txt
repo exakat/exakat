@@ -5,19 +5,9 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         Concatenation
-        Label : CONCAT
-          'h'
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $f
-          Label : INDEX
-            'g'
-        Label : CONCAT
-          'e'
         Label : CONCAT
           ::
           Label : CLASS
@@ -25,10 +15,20 @@ Label : CODE
           Label : METHOD
             b
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $c
                 Label : INDEX
                   d
+                Label : VARIABLE
+                  $c
+        Label : CONCAT
+          'e'
+        Label : CONCAT
+          [
+          Label : INDEX
+            'g'
+          Label : VARIABLE
+            $f
+        Label : CONCAT
+          'h'

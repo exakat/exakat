@@ -5,13 +5,33 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         $a
-    Label : NAME
-      B
     Label : BLOCK
       ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          ||
+          Label : LEFT
+            !
+            Label : NOT
+              $b
+          Label : RIGHT
+            !
+            Label : NOT
+              C
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $c
+        Label : THEN
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              D
       Label : ELEMENT
         if
         Label : CONDITION
@@ -19,13 +39,13 @@ Label : CODE
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              $e
-            Label : ARGUMENT
               ->
               Label : OBJECT
                 $d
               Label : PROPERTY
                 F
+            Label : ARGUMENT
+              $e
         Label : THEN
           ;
           Label : ELEMENT
@@ -53,36 +73,16 @@ Label : CODE
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
-                      $h
-                    Label : ARGUMENT
                       ->
                       Label : OBJECT
                         $g
                       Label : PROPERTY
                         J
+                    Label : ARGUMENT
+                      $h
       Label : ELEMENT
         return
         Label : RETURN
           K
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          ||
-          Label : RIGHT
-            !
-            Label : NOT
-              C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $c
-          Label : LEFT
-            !
-            Label : NOT
-              $b
-        Label : THEN
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              D
+    Label : NAME
+      B

@@ -7,20 +7,20 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        =
-        Label : RIGHT
-          false
-        Label : LEFT
-          $d
+        $b
       Label : ARGUMENT
         =
-        Label : RIGHT
-          ''
         Label : LEFT
           $c
+        Label : RIGHT
+          ''
       Label : ARGUMENT
-        $b
-    Label : NAME
-      a
+        =
+        Label : LEFT
+          $d
+        Label : RIGHT
+          false
     Label : BLOCK
       void
+    Label : NAME
+      a

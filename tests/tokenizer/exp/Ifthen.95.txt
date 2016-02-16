@@ -6,6 +6,16 @@ Label : CODE
     if
     Label : CONDITION
       $a
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        $d
+      Label : THEN
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $e
     Label : THEN
       ;
       Label : ELEMENT
@@ -13,35 +23,11 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            'Q'
+            'B'
           Label : ARGUMENT
             $b
           Label : ARGUMENT
-            'P'
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'D'
-            Label : INDEX
-              'L'
-          Label : ARGUMENT
-            'M'
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'D'
-            Label : INDEX
-              'L'
-          Label : ARGUMENT
-            'J'
+            'C'
           Label : ARGUMENT
             ?
             Label : CONDITION
@@ -49,45 +35,63 @@ Label : CODE
               Label : NOT
                 empty
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     [
-                    Label : VARIABLE
-                      [
-                      Label : VARIABLE
-                        $c
-                      Label : INDEX
-                        'D'
                     Label : INDEX
                       'E'
-            Label : THEN
-              'F'
+                    Label : VARIABLE
+                      [
+                      Label : INDEX
+                        'D'
+                      Label : VARIABLE
+                        $c
             Label : ELSE
               Concatenation
               Label : CONCAT
+                'G'
+              Label : CONCAT
                 [
-                Label : VARIABLE
-                  [
-                  Label : VARIABLE
-                    $c
-                  Label : INDEX
-                    'D'
                 Label : INDEX
                   'I'
-              Label : CONCAT
-                'G'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'D'
+                  Label : VARIABLE
+                    $c
+            Label : THEN
+              'F'
           Label : ARGUMENT
-            'C'
+            'J'
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'L'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'D'
+              Label : VARIABLE
+                $c
+          Label : ARGUMENT
+            'M'
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'L'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'D'
+              Label : VARIABLE
+                $c
+          Label : ARGUMENT
+            'P'
           Label : ARGUMENT
             $b
           Label : ARGUMENT
-            void
-            Label : ARGUMENT
-              'B'
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
+            'Q'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -99,35 +103,11 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            'Q'
+            'B'
           Label : ARGUMENT
             $b
           Label : ARGUMENT
-            'P'
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'D'
-            Label : INDEX
-              'L'
-          Label : ARGUMENT
-            'M'
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'D'
-            Label : INDEX
-              'L'
-          Label : ARGUMENT
-            'J'
+            'C'
           Label : ARGUMENT
             ?
             Label : CONDITION
@@ -135,48 +115,60 @@ Label : CODE
               Label : NOT
                 empty
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     [
-                    Label : VARIABLE
-                      [
-                      Label : VARIABLE
-                        $c
-                      Label : INDEX
-                        'D'
                     Label : INDEX
                       'E'
-            Label : THEN
-              'F'
+                    Label : VARIABLE
+                      [
+                      Label : INDEX
+                        'D'
+                      Label : VARIABLE
+                        $c
             Label : ELSE
               Concatenation
               Label : CONCAT
+                'G'
+              Label : CONCAT
                 [
-                Label : VARIABLE
-                  [
-                  Label : VARIABLE
-                    $c
-                  Label : INDEX
-                    'D'
                 Label : INDEX
                   'I'
-              Label : CONCAT
-                'G'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'D'
+                  Label : VARIABLE
+                    $c
+            Label : THEN
+              'F'
           Label : ARGUMENT
-            'C'
+            'J'
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'L'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'D'
+              Label : VARIABLE
+                $c
+          Label : ARGUMENT
+            'M'
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'L'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'D'
+              Label : VARIABLE
+                $c
+          Label : ARGUMENT
+            'P'
           Label : ARGUMENT
             $b
           Label : ARGUMENT
-            void
-            Label : ARGUMENT
-              'B'
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        $d
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $e
+            'Q'

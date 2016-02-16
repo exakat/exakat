@@ -1,42 +1,49 @@
-<?php
+;
+Label : ELEMENT
+  <?php
 
-Label : CODE
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      <<<HEREDOC
+  Label : CODE
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          <<<HEREDOC
 
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          a
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $b
-          Label : INDEX
-            1
-        Label : CONCAT
-          c
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $d
-            Label : INDEX
-              2
-          Label : INDEX
-            4
-        Label : CONCAT
-          e
-        Label : CONCAT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            h
-        Label : CONCAT
-          g
+          Label : CONTAINS
+            Concatenation
+            Label : CONCAT
+              a
+            Label : CONCAT
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $b
+            Label : CONCAT
+              c
+            Label : CONCAT
+              [
+              Label : INDEX
+                4
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  2
+                Label : VARIABLE
+                  $d
+            Label : CONCAT
+              e
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $f
+              Label : PROPERTY
+                h
+            Label : CONCAT
+              g
+
+Label : ELEMENT
+  
 

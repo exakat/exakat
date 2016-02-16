@@ -4,22 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $a
     Label : METHOD
       b
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          ::
-          Label : CLASS
-            D
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $f
+          2
         Label : ARGUMENT
           <<<EOF
 
@@ -33,4 +23,14 @@ Label : CODE
                C
 
         Label : ARGUMENT
-          2
+          ::
+          Label : CLASS
+            D
+          Label : METHOD
+            e
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                $f
+    Label : OBJECT
+      $a

@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       (array)
       Label : CAST
         $b
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $c
         Label : NAME
           $b
-    Label : LEFT
-      $a

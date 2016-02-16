@@ -3,147 +3,53 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       ==
-      Label : RIGHT
-        'C'
       Label : LEFT
         ->
         Label : OBJECT
           $a
         Label : PROPERTY
           B
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ->
-        Label : OBJECT
-          $b
-        Label : METHOD
-          E
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $c
-              Label : PROPERTY
-                F
+      Label : RIGHT
+        'C'
     Label : ELSE
       elseif
       Label : CONDITION
         ==
-        Label : RIGHT
-          'H'
         Label : LEFT
           ->
           Label : OBJECT
             $d
           Label : PROPERTY
             G
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ->
-          Label : OBJECT
-            $g
-          Label : METHOD
-            N
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'P'
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $h
-                Label : PROPERTY
-                  O
-        Label : ELEMENT
-          ->
-          Label : OBJECT
-            $e
-          Label : METHOD
-            J
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'L'
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $f
-                Label : PROPERTY
-                  K
+        Label : RIGHT
+          'H'
       Label : ELSE
         elseif
         Label : CONDITION
           ==
-          Label : RIGHT
-            'S'
           Label : LEFT
             ->
             Label : OBJECT
               $i
             Label : PROPERTY
               R
-        Label : THEN
-          ;
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              $j
-            Label : METHOD
-              U
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  'W'
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $k
-                  Label : PROPERTY
-                    V
+          Label : RIGHT
+            'S'
         Label : ELSE
           elseif
           Label : CONDITION
             ==
-            Label : RIGHT
-              'Z'
             Label : LEFT
               ->
               Label : OBJECT
                 $l
               Label : PROPERTY
                 Y
-          Label : THEN
-            ;
-            Label : ELEMENT
-              ->
-              Label : OBJECT
-                $m
-              Label : METHOD
-                AB
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'AD'
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $n
-                    Label : PROPERTY
-                      AC
+            Label : RIGHT
+              'Z'
           Label : ELSE
             elseif
             Label : CONDITION
@@ -156,17 +62,103 @@ Label : CODE
               ;
               Label : ELEMENT
                 ->
-                Label : OBJECT
-                  $p
                 Label : METHOD
                   AG
                   Label : ARGUMENTS
                     Arguments
-                    Label : ARGUMENT
-                      'AI'
                     Label : ARGUMENT
                       ->
                       Label : OBJECT
                         $q
                       Label : PROPERTY
                         AH
+                    Label : ARGUMENT
+                      'AI'
+                Label : OBJECT
+                  $p
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                AB
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $n
+                    Label : PROPERTY
+                      AC
+                  Label : ARGUMENT
+                    'AD'
+              Label : OBJECT
+                $m
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ->
+            Label : METHOD
+              U
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $k
+                  Label : PROPERTY
+                    V
+                Label : ARGUMENT
+                  'W'
+            Label : OBJECT
+              $j
+      Label : THEN
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            J
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $f
+                Label : PROPERTY
+                  K
+              Label : ARGUMENT
+                'L'
+          Label : OBJECT
+            $e
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            N
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $h
+                Label : PROPERTY
+                  O
+              Label : ARGUMENT
+                'P'
+          Label : OBJECT
+            $g
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ->
+        Label : METHOD
+          E
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $c
+              Label : PROPERTY
+                F
+        Label : OBJECT
+          $b

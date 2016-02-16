@@ -8,7 +8,7 @@ Label : CODE
       !
       Label : NOT
         $x
-    Label : THEN
-      'a'
     Label : ELSE
       'b'
+    Label : THEN
+      'a'

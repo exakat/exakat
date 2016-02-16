@@ -3,54 +3,56 @@
 Label : CODE
   ;
   Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ::
-        Label : PROPERTY
-          [
-          Label : VARIABLE
-            x
-          Label : INDEX
-            1
-        Label : CLASS
-          b
+    const
+    Label : CONST
+      =
+      Label : LEFT
+        x
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            4
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          [
-          Label : VARIABLE
-            x
-          Label : INDEX
-            1
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         [
-        Label : VARIABLE
-          x
         Label : INDEX
           1
+        Label : VARIABLE
+          x
   Label : ELEMENT
-    const
-    Label : VALUE
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          4
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          2
-    Label : NAME
-      x
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        [
+        Label : INDEX
+          1
+        Label : VARIABLE
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            x
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        [
+        Label : INDEX
+          1
+        Label : VARIABLE
+          ::
+          Label : CLASS
+            b
+          Label : CONSTANT
+            x

@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      a
-    Label : IMPLEMENTS
-      \
-      Label : SUBNAME
-        B
+    Label : BLOCK
+      void
     Label : IMPLEMENTS
       \
       Label : SUBNAME
         A
-    Label : BLOCK
-      void
+    Label : IMPLEMENTS
+      \
+      Label : SUBNAME
+        B
+    Label : NAME
+      a

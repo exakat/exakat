@@ -9,7 +9,7 @@ Label : CODE
       Label : ARGUMENT
         1
       Label : ARGUMENT
-        5
+        'a'
       Label : ARGUMENT
         <<<HEREDOC
 
@@ -27,4 +27,4 @@ Label : CODE
             BadFunctionCallException
 
       Label : ARGUMENT
-        'a'
+        5

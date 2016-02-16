@@ -1,54 +1,56 @@
 <?php
 
 Label : CODE
-  while
-  Label : CONDITION
-    &&
-    Label : LEFT
-      <
+  ;
+  Label : ELEMENT
+    while
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            B
+    Label : CONDITION
+      &&
       Label : LEFT
-        ->
-        Label : OBJECT
-          $this
-        Label : PROPERTY
-          B
+        <
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            B
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            C
       Label : RIGHT
-        ->
-        Label : OBJECT
-          $this
-        Label : PROPERTY
-          C
-    Label : RIGHT
-      ===
-      Label : LEFT
-        D
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            {
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                E
-            Label : INDEX
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                B
-          Label : ARGUMENT
-            $a
-      Label : RIGHT
-        G
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        ->
-        Label : OBJECT
-          $this
-        Label : PROPERTY
-          B
+        ===
+        Label : LEFT
+          D
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              {
+              Label : INDEX
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  B
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  E
+        Label : RIGHT
+          G

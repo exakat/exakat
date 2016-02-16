@@ -1,36 +1,54 @@
 ;
 Label : ELEMENT
+  A
+Label : ELEMENT
   <?php 
   Label : CODE
     ;
     Label : ELEMENT
-      
-    Label : ELEMENT
       if
       Label : CONDITION
         $a
-      Label : THEN
+      Label : ELSE
         ;
+        Label : ELEMENT
+          AM
         Label : ELEMENT
           echo
           Label : ARGUMENTS
-            void
+            
+            Label : ARGUMENT
+              AO
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'AP'
+        Label : ELEMENT
+          AP
+      Label : THEN
+        ;
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            
             Label : ARGUMENT
               D
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   E
                   Label : ARGUMENTS
-                    void
+                    
                     Label : ARGUMENT
                       Concatenation
                       Label : CONCAT
-                        'I'
+                        'F'
                       Label : CONCAT
                         G
                         Label : ARGUMENTS
-                          void
+                          
                           Label : ARGUMENT
                             ->
                             Label : OBJECT
@@ -38,170 +56,150 @@ Label : ELEMENT
                             Label : PROPERTY
                               H
                       Label : CONCAT
-                        'F'
+                        'I'
+        Label : ELEMENT
+          I
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                'K'
+              Label : CONCAT
+                L
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'M'
+                  Label : ARGUMENT
+                    'N'
+              Label : CONCAT
+                'O'
+              Label : CONCAT
+                P
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'Q'
+                    Label : VARIABLE
+                      $c
         Label : ELEMENT
           if
           Label : CONDITION
-            &&
-            Label : RIGHT
-              ->
-              Label : OBJECT
-                $g
-              Label : METHOD
-                Z
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    void
-            Label : LEFT
-              $f
+            [
+            Label : INDEX
+              'R'
+            Label : VARIABLE
+              $d
           Label : THEN
             ;
             Label : ELEMENT
               echo
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   Concatenation
                   Label : CONCAT
-                    AF
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $h
-                        Label : METHOD
-                          AG
-                          Label : ARGUMENTS
-                            void
-                            Label : ARGUMENT
-                              void
+                    'S'
                   Label : CONCAT
-                    'AE'
+                    T
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        'U'
+                      Label : ARGUMENT
+                        'V'
+                  Label : CONCAT
+                    'W'
+                  Label : CONCAT
+                    X
+                    Label : ARGUMENTS
+                      
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'Y'
+                        Label : VARIABLE
+                          $e
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &&
+            Label : LEFT
+              $f
+            Label : RIGHT
+              ->
+              Label : METHOD
+                Z
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    void
+              Label : OBJECT
+                $g
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  Concatenation
+                  Label : CONCAT
+                    'AA'
                   Label : CONCAT
                     AB
                     Label : ARGUMENTS
                       Arguments
                       Label : ARGUMENT
-                        'AD'
-                      Label : ARGUMENT
                         'AC'
+                      Label : ARGUMENT
+                        'AD'
                   Label : CONCAT
-                    'AA'
+                    'AE'
+                  Label : CONCAT
+                    AF
+                    Label : ARGUMENTS
+                      
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          AG
+                          Label : ARGUMENTS
+                            
+                            Label : ARGUMENT
+                              void
+                        Label : OBJECT
+                          $h
         Label : ELEMENT
           AG
         Label : ELEMENT
           echo
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               ->
-              Label : OBJECT
-                $i
               Label : METHOD
                 AI
                 Label : ARGUMENTS
                   Arguments
                   Label : ARGUMENT
+                    'AJ'
+                  Label : ARGUMENT
                     array
                     Label : ARGUMENTS
-                      void
+                      
                       Label : ARGUMENT
                         =>
                         Label : KEY
                           'AK'
                         Label : VALUE
                           'AL'
-                  Label : ARGUMENT
-                    'AJ'
+              Label : OBJECT
+                $i
         Label : ELEMENT
           AL
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            [
-            Label : VARIABLE
-              $d
-            Label : INDEX
-              'R'
-          Label : THEN
-            ;
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  Concatenation
-                  Label : CONCAT
-                    X
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        [
-                        Label : VARIABLE
-                          $e
-                        Label : INDEX
-                          'Y'
-                  Label : CONCAT
-                    'W'
-                  Label : CONCAT
-                    T
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        'V'
-                      Label : ARGUMENT
-                        'U'
-                  Label : CONCAT
-                    'S'
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                P
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    [
-                    Label : VARIABLE
-                      $c
-                    Label : INDEX
-                      'Q'
-              Label : CONCAT
-                'O'
-              Label : CONCAT
-                L
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'N'
-                  Label : ARGUMENT
-                    'M'
-              Label : CONCAT
-                'K'
-        Label : ELEMENT
-          I
-        Label : ELEMENT
-          B
-      Label : ELSE
-        ;
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              AO
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'AP'
-        Label : ELEMENT
-          AP
-        Label : ELEMENT
-          AM
-Label : ELEMENT
-  A

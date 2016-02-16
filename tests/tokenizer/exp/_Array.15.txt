@@ -5,42 +5,42 @@ Label : CODE
   Label : ELEMENT
     print
     Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        [
-        Label : VARIABLE
-          {
-          Label : VARIABLE
-            $x
-          Label : INDEX
-            1
-        Label : INDEX
-          2
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         {
-        Label : VARIABLE
-          {
-          Label : VARIABLE
-            $x
-          Label : INDEX
-            1
         Label : INDEX
           2
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        {
         Label : VARIABLE
           [
-          Label : VARIABLE
-            $x
           Label : INDEX
             1
+          Label : VARIABLE
+            $x
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        {
         Label : INDEX
           2
+        Label : VARIABLE
+          {
+          Label : INDEX
+            1
+          Label : VARIABLE
+            $x
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        [
+        Label : INDEX
+          2
+        Label : VARIABLE
+          {
+          Label : INDEX
+            1
+          Label : VARIABLE
+            $x

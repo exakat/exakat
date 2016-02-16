@@ -7,16 +7,16 @@ Label : CODE
     Label : LEFT
       $a
     Label : RIGHT
-      ::
-      Label : PROPERTY
+      [
+      Label : INDEX
         [
-        Label : VARIABLE
-          $c
         Label : INDEX
-          [
-          Label : VARIABLE
-            $d
-          Label : INDEX
-            'e'
-      Label : CLASS
-        b
+          'e'
+        Label : VARIABLE
+          $d
+      Label : VARIABLE
+        ::
+        Label : CLASS
+          b
+        Label : PROPERTY
+          $c

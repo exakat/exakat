@@ -4,20 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
         private
         Label : DEFINE
+          $x
+        Label : DEFINE
           $y
         Label : DEFINE
           $z
-        Label : DEFINE
-          $x
         Label : PRIVATE
           private
+    Label : NAME
+      x
   Label : ELEMENT
     array
     Label : ARGUMENTS
@@ -31,21 +31,25 @@ Label : CODE
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              $d
-            Label : ARGUMENT
               $c
-          Label : NAME
-            
+            Label : ARGUMENT
+              $d
           Label : BLOCK
             ;
+            Label : ELEMENT
+              global
+              Label : GLOBAL
+                $e
+              Label : GLOBAL
+                $f
             Label : ELEMENT
               return
               Label : RETURN
                 [
-                Label : VARIABLE
-                  $e
                 Label : INDEX
                   Concatenation
+                  Label : CONCAT
+                    'D'
                   Label : CONCAT
                     (
                     Label : CODE
@@ -56,33 +60,29 @@ Label : CODE
                           
                           Label : ARGUMENT
                             [
-                            Label : VARIABLE
-                              $c
                             Label : INDEX
                               'E'
-                      Label : THEN
-                        'F'
+                            Label : VARIABLE
+                              $c
                       Label : ELSE
                         [
-                        Label : VARIABLE
-                          [
-                          Label : VARIABLE
-                            $f
-                          Label : INDEX
-                            'G'
                         Label : INDEX
                           [
-                          Label : VARIABLE
-                            $c
                           Label : INDEX
                             'E'
-                  Label : CONCAT
-                    'D'
-            Label : ELEMENT
-              global
-              Label : GLOBAL
-                $e
-              Label : GLOBAL
-                $f
+                          Label : VARIABLE
+                            $c
+                        Label : VARIABLE
+                          [
+                          Label : INDEX
+                            'G'
+                          Label : VARIABLE
+                            $f
+                      Label : THEN
+                        'F'
+                Label : VARIABLE
+                  $e
+          Label : NAME
+            
       Label : ARGUMENT
         1

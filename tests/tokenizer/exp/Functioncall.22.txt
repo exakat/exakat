@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $z
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -11,23 +13,13 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            'c'
+            'a'
           Label : VALUE
             [
-            Label : VARIABLE
-              $h
             Label : INDEX
-              5
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'd'
-          Label : VALUE
-            [
+              3
             Label : VARIABLE
-              $i
-            Label : INDEX
-              6
+              $f
         Label : ARGUMENT
           =>
           Label : KEY
@@ -35,22 +27,30 @@ Label : CODE
           Label : VALUE
             intval
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $g
                 Label : INDEX
                   4
+                Label : VARIABLE
+                  $g
         Label : ARGUMENT
           =>
           Label : KEY
-            'a'
+            'c'
           Label : VALUE
             [
-            Label : VARIABLE
-              $f
             Label : INDEX
-              3
-    Label : LEFT
-      $z
+              5
+            Label : VARIABLE
+              $h
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'd'
+          Label : VALUE
+            [
+            Label : INDEX
+              6
+            Label : VARIABLE
+              $i

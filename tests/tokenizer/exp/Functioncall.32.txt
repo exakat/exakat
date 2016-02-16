@@ -8,25 +8,25 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         =
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
         Label : LEFT
           $b
-      Label : ARGUMENT
-        =
         Label : RIGHT
           array
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               void
+      Label : ARGUMENT
+        =
         Label : LEFT
           $c
-    Label : NAME
-      a
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              void
     Label : BLOCK
       void
+    Label : NAME
+      a

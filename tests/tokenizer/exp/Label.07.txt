@@ -4,12 +4,24 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $a
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          ==
+          Label : LEFT
+            substr
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                1
+          Label : RIGHT
+            'c'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
@@ -17,24 +29,12 @@ Label : CODE
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                'g'
-              Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $e
                 Label : INDEX
                   'f'
-        Label : CASE
-          ==
-          Label : RIGHT
-            'c'
-          Label : LEFT
-            substr
-            Label : ARGUMENTS
-              Arguments
+                Label : VARIABLE
+                  $e
               Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                $b
+                'g'
+    Label : NAME
+      $a

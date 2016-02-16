@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
         Arguments
-        Label : ARGUMENT
-          void
         Label : ARGUMENT
           =>
           Label : KEY
@@ -20,16 +20,16 @@ Label : CODE
           =>
           Label : KEY
             [
-            Label : VARIABLE
-              $c
             Label : INDEX
               'd'
+            Label : VARIABLE
+              $c
           Label : VALUE
             [
-            Label : VARIABLE
-              $e
             Label : INDEX
               'f'
+            Label : VARIABLE
+              $e
         Label : ARGUMENT
           =>
           Label : KEY
@@ -40,29 +40,29 @@ Label : CODE
           =>
           Label : KEY
             ->
-            Label : PROPERTY
-              g
             Label : OBJECT
               $f
+            Label : PROPERTY
+              g
           Label : VALUE
             ->
-            Label : PROPERTY
-              i
             Label : OBJECT
               $h
+            Label : PROPERTY
+              i
         Label : ARGUMENT
           =>
           Label : KEY
             \
             Label : SUBNAME
-              l
-            Label : SUBNAME
               k
+            Label : SUBNAME
+              l
           Label : VALUE
             \
             Label : SUBNAME
-              n
-            Label : SUBNAME
               m
-    Label : LEFT
-      $a
+            Label : SUBNAME
+              n
+        Label : ARGUMENT
+          void

@@ -6,11 +6,11 @@ Label : CODE
     if
     Label : CONDITION
       $a
-    Label : THEN
-      void
     Label : ELSE
       Block with else
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $b
+    Label : THEN
+      void

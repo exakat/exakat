@@ -2,43 +2,17 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       &&
+      Label : LEFT
+        $type
       Label : RIGHT
         is_array
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $type
-      Label : LEFT
-        $type
-    Label : THEN
-      ;
-      Label : ELEMENT
-        .=
-        Label : RIGHT
-          Concatenation
-          Label : CONCAT
-            ')'
-          Label : CONCAT
-            implode
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                db_input
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $type
-              Label : ARGUMENT
-                ','
-          Label : CONCAT
-            ' AND thread.thread_type IN('
-        Label : LEFT
-          $sql
     Label : ELSE
       elseif
       Label : CONDITION
@@ -47,15 +21,39 @@ Label : CODE
         ;
         Label : ELEMENT
           .=
+          Label : LEFT
+            $sql
           Label : RIGHT
             Concatenation
             Label : CONCAT
+              ' AND thread.thread_type='
+            Label : CONCAT
               db_input
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   $type
-            Label : CONCAT
-              ' AND thread.thread_type='
-          Label : LEFT
-            $sql
+    Label : THEN
+      ;
+      Label : ELEMENT
+        .=
+        Label : LEFT
+          $sql
+        Label : RIGHT
+          Concatenation
+          Label : CONCAT
+            ' AND thread.thread_type IN('
+          Label : CONCAT
+            implode
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                ','
+              Label : ARGUMENT
+                db_input
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    $type
+          Label : CONCAT
+            ')'

@@ -7,23 +7,17 @@ Label : CODE
     Label : CONDITION
       isset
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            [
-            Label : VARIABLE
+          [
+          Label : INDEX
+            'C'
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
               B
-            Label : INDEX
-              'C'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
     Label : ELSE
       ;
       Label : ELEMENT
@@ -31,17 +25,11 @@ Label : CODE
         Label : ELEMENT
           ;
           Label : ELEMENT
-            +=
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $f
-              Label : INDEX
-                2
-            Label : RIGHT
-              ++
-              Label : POSTPLUSPLUS
-                $e
+            ++
+            Label : POSTPLUSPLUS
+              $b
+        Label : ELEMENT
+          ;
           Label : ELEMENT
             =
             Label : LEFT
@@ -50,9 +38,21 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $e
-        Label : ELEMENT
-          ;
           Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
+            +=
+            Label : LEFT
+              [
+              Label : INDEX
+                2
+              Label : VARIABLE
+                $f
+            Label : RIGHT
+              ++
+              Label : POSTPLUSPLUS
+                $e
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a

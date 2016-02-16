@@ -3,30 +3,30 @@
 Label : CODE
   ;
   Label : ELEMENT
-    <<
-    Label : RIGHT
-      [
-      Label : VARIABLE
-        $c
-      Label : INDEX
-        2
+    >>
     Label : LEFT
       [
+      Label : INDEX
+        1
+      Label : VARIABLE
+        $x
+    Label : RIGHT
+      [
+      Label : INDEX
+        2
+      Label : VARIABLE
+        $x
+  Label : ELEMENT
+    <<
+    Label : LEFT
+      [
+      Label : INDEX
+        1
       Label : VARIABLE
         $b
-      Label : INDEX
-        1
-  Label : ELEMENT
-    >>
     Label : RIGHT
       [
-      Label : VARIABLE
-        $x
       Label : INDEX
         2
-    Label : LEFT
-      [
       Label : VARIABLE
-        $x
-      Label : INDEX
-        1
+        $c

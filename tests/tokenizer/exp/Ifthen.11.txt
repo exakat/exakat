@@ -3,47 +3,9 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       $c
-    Label : THEN
-      ;
-      Label : ELEMENT
-        switch
-        Label : NAME
-          $c
-        Label : CASES
-          Sequence Case Default
-          Label : ELEMENT
-            case
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  $x
-            Label : CASE
-              'a'
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          3
-        Label : LEFT
-          $e
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          4
-        Label : LEFT
-          $f
     Label : ELSE
       elseif
       Label : CONDITION
@@ -52,7 +14,43 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            5
           Label : LEFT
             $f
+          Label : RIGHT
+            5
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $f
+        Label : RIGHT
+          4
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $e
+        Label : RIGHT
+          3
+      Label : ELEMENT
+        switch
+        Label : CASES
+          Sequence Case Default
+          Label : ELEMENT
+            case
+            Label : CASE
+              'a'
+            Label : CODE
+              ;
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $x
+                Label : RIGHT
+                  1
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+        Label : NAME
+          $c

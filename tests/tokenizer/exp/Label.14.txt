@@ -4,47 +4,47 @@ Label : CODE
   ;
   Label : ELEMENT
     switch
-    Label : NAME
-      $a
     Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          @
+          Label : AT
+            B
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              ->
-              Label : METHOD
-                F
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'G'
-              Label : OBJECT
-                $this
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                E
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              D
             Label : LEFT
               ->
               Label : OBJECT
                 $this
               Label : PROPERTY
                 C
-        Label : CASE
-          @
-          Label : AT
-            B
+            Label : RIGHT
+              D
+          Label : ELEMENT
+            =
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                E
+            Label : RIGHT
+              ->
+              Label : METHOD
+                F
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    'G'
+              Label : OBJECT
+                $this
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+    Label : NAME
+      $a

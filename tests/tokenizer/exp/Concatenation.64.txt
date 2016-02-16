@@ -9,21 +9,21 @@ Label : CODE
       Label : NOT
         empty
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $
             Label : NAME
               Concatenation
               Label : CONCAT
-                $a
-              Label : CONCAT
                 'E'
+              Label : CONCAT
+                $a
     Label : THEN
       ;
       Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             "
             Label : CONTAINS
@@ -33,8 +33,8 @@ Label : CODE
               Label : CONCAT
                 Concatenation
                 Label : CONCAT
-                  $a
-                Label : CONCAT
                   'E'
+                Label : CONCAT
+                  $a
               Label : CONCAT
                 H

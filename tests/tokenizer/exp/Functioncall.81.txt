@@ -4,22 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      'f'
     Label : LEFT
       $f
+    Label : RIGHT
+      'f'
   Label : ELEMENT
     =
-    Label : RIGHT
-      'r'
-    Label : LEFT
-      $r
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      'e'
     Label : LEFT
       $e
+    Label : RIGHT
+      'e'
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $r
+    Label : RIGHT
+      'r'
   Label : ELEMENT
     f
     Label : ARGUMENTS
@@ -27,29 +27,27 @@ Label : CODE
       Label : ARGUMENT
         print
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $e
       Label : ARGUMENT
+        $f
+      Label : ARGUMENT
         ltrim
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $r
-      Label : ARGUMENT
-        $f
   Label : ELEMENT
     function
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        $z
+        $x
       Label : ARGUMENT
         $y
       Label : ARGUMENT
-        $x
-    Label : NAME
-      f
+        $z
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -57,11 +55,13 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
+            $x
+          Label : ARGUMENT
             $y
           Label : ARGUMENT
             $z
-          Label : ARGUMENT
-            $x
+    Label : NAME
+      f
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -71,7 +71,7 @@ Label : CODE
       Label : ARGUMENT
         print
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $b
       Label : ARGUMENT

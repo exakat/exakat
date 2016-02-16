@@ -3,23 +3,53 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : LEFT
+      $a
+    Label : RIGHT
+      1
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $b
+    Label : RIGHT
+      0
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $c
+    Label : RIGHT
+      3
+  Label : ELEMENT
     if
     Label : CONDITION
       $a
     Label : THEN
       ;
       Label : ELEMENT
+        if
+        Label : CONDITION
+          $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            void
+      Label : ELEMENT
+        B
+      Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             C
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                $c
-              Label : ARGUMENT
                 'D'
+              Label : ARGUMENT
+                $c
+      Label : ELEMENT
+        E
       Label : ELEMENT
         if
         Label : CONDITION
@@ -31,68 +61,38 @@ Label : CODE
             Label : POSTPLUSPLUS
               $c
       Label : ELEMENT
-        E
-      Label : ELEMENT
-        F
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             C
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
-                $c
-              Label : ARGUMENT
                 'D'
+              Label : ARGUMENT
+                $c
       Label : ELEMENT
-        B
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $b
-        Label : THEN
-          ;
-          Label : ELEMENT
-            void
+        F
   Label : ELEMENT
     function
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        $b
-      Label : ARGUMENT
         $a
-    Label : NAME
-      C
+      Label : ARGUMENT
+        $b
     Label : BLOCK
       ;
       Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             Concatenation
             Label : CONCAT
-              "\n"
-            Label : CONCAT
               __METHOD__
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      0
-    Label : LEFT
-      $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      3
-    Label : LEFT
-      $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a
+            Label : CONCAT
+              "\n"
+    Label : NAME
+      C

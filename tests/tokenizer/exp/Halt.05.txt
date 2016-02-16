@@ -3,20 +3,20 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-
-?>
-  Label : ELEMENT
-    __halt_compiler
-  Label : ELEMENT
     try
-    Label : CODE
-      void
     Label : CATCH
       catch
+      Label : CLASS
+        Exception
       Label : CODE
         void
       Label : VARIABLE
         $e
-      Label : CLASS
-        Exception
+    Label : CODE
+      void
+  Label : ELEMENT
+    __halt_compiler
+  Label : ELEMENT
+    
+
+?>

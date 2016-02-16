@@ -3,6 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
+    global
+    Label : GLOBAL
+      $a
+  Label : ELEMENT
     --
     Label : POSTPLUSPLUS
       ->
@@ -10,7 +14,3 @@ Label : CODE
         $a
       Label : PROPERTY
         b
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $a

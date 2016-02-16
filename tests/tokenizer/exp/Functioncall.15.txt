@@ -5,10 +5,10 @@ Label : CODE
   Label : ELEMENT
     f
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         =
-        Label : RIGHT
-          3
         Label : LEFT
           $x
+        Label : RIGHT
+          3

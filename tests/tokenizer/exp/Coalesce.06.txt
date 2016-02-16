@@ -1,40 +1,42 @@
 <?php
 
 Label : CODE
-  =
-  Label : LEFT
-    $a
-  Label : RIGHT
-    ??
+  ;
+  Label : ELEMENT
+    =
     Label : LEFT
       $a
     Label : RIGHT
       ??
       Label : LEFT
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                $d
-              Label : CONCAT
-                $c
+        $a
       Label : RIGHT
         ??
         Label : LEFT
           [
-          Label : VARIABLE
-            $b
           Label : INDEX
             B
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
-                $d
+                Concatenation
+                Label : CONCAT
+                  $c
+                Label : CONCAT
+                  $d
+          Label : VARIABLE
+            $b
         Label : RIGHT
-          null
+          ??
+          Label : LEFT
+            [
+            Label : INDEX
+              B
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $d
+            Label : VARIABLE
+              $b
+          Label : RIGHT
+            null

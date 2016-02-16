@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       (
       Label : CODE
         /
-        Label : RIGHT
-          $d
         Label : LEFT
           (
           Label : CODE
             -
-            Label : RIGHT
-              $c
             Label : LEFT
               -
               Label : SIGN
                 $b
-    Label : LEFT
-      $a
+            Label : RIGHT
+              $c
+        Label : RIGHT
+          $d

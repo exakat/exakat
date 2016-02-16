@@ -12,12 +12,10 @@ Label : CODE
           ?
           Label : CONDITION
             $j
-          Label : THEN
-            "J"
           Label : ELSE
-            "K"
-      Label : ARGUMENT
-        'K'
+            'H'
+          Label : THEN
+            'A'
       Label : ARGUMENT
         'I'
       Label : ARGUMENT
@@ -26,7 +24,9 @@ Label : CODE
           ?
           Label : CONDITION
             $j
-          Label : THEN
-            'A'
           Label : ELSE
-            'H'
+            "K"
+          Label : THEN
+            "J"
+      Label : ARGUMENT
+        'K'

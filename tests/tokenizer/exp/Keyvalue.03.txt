@@ -4,12 +4,30 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'a'
+          Label : VALUE
+            ==
+            Label : LEFT
+              $b
+            Label : RIGHT
+              $c
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $y
     Label : RIGHT
       array
       Label : ARGUMENTS
         Arguments
-        Label : ARGUMENT
-          'g'
         Label : ARGUMENT
           =>
           Label : KEY
@@ -18,31 +36,13 @@ Label : CODE
             ?
             Label : CONDITION
               >=
-              Label : RIGHT
-                $d
               Label : LEFT
                 $c
-            Label : THEN
-              'e'
+              Label : RIGHT
+                $d
             Label : ELSE
               'f'
-    Label : LEFT
-      $y
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
+            Label : THEN
+              'e'
         Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
-            ==
-            Label : RIGHT
-              $c
-            Label : LEFT
-              $b
-    Label : LEFT
-      $x
+          'g'

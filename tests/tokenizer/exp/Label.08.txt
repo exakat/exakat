@@ -4,12 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
     Label : RIGHT
       c
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          'J'
+          $d
         Label : ARGUMENT
           (
           Label : CODE
@@ -17,22 +23,16 @@ Label : CODE
             Label : CONDITION
               e
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   'f'
-            Label : THEN
-              |
-              Label : RIGHT
-                H
-              Label : LEFT
-                G
             Label : ELSE
               I
+            Label : THEN
+              |
+              Label : LEFT
+                G
+              Label : RIGHT
+                H
         Label : ARGUMENT
-          $d
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
+          'J'

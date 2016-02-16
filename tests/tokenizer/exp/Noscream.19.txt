@@ -4,29 +4,29 @@ Label : CODE
   ;
   Label : ELEMENT
     &&
+    Label : LEFT
+      ===
+      Label : LEFT
+        {
+        Label : INDEX
+          $b
+        Label : VARIABLE
+          $a
+      Label : RIGHT
+        'B'
     Label : RIGHT
       ===
-      Label : RIGHT
-        'C'
       Label : LEFT
         @
         Label : AT
           {
-          Label : VARIABLE
-            $c
           Label : INDEX
             +
-            Label : RIGHT
-              0
             Label : LEFT
               $d
-    Label : LEFT
-      ===
+            Label : RIGHT
+              0
+          Label : VARIABLE
+            $c
       Label : RIGHT
-        'B'
-      Label : LEFT
-        {
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          $b
+        'C'

@@ -5,10 +5,10 @@ Label : CODE
   Label : ELEMENT
     f
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         [
-        Label : VARIABLE
-          $x
         Label : INDEX
           3
+        Label : VARIABLE
+          $x

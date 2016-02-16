@@ -4,25 +4,25 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        ++
-        Label : POSTPLUSPLUS
-          $c
-      Label : CONCAT
-        'b'
     Label : LEFT
-      $y
-  Label : ELEMENT
-    =
+      $x
     Label : RIGHT
       Concatenation
+      Label : CONCAT
+        'a'
       Label : CONCAT
         ++
         Label : POSTPLUSPLUS
           $b
-      Label : CONCAT
-        'a'
+  Label : ELEMENT
+    =
     Label : LEFT
-      $x
+      $y
+    Label : RIGHT
+      Concatenation
+      Label : CONCAT
+        'b'
+      Label : CONCAT
+        ++
+        Label : POSTPLUSPLUS
+          $c

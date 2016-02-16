@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     $y
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         void
     Label : NAME
@@ -13,7 +13,7 @@ Label : CODE
   Label : ELEMENT
     x1
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         void
   Label : ELEMENT
@@ -23,7 +23,7 @@ Label : CODE
     Label : NAME
       x2
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           void
   Label : ELEMENT
@@ -33,13 +33,13 @@ Label : CODE
     Label : NAME
       x3( )
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           void
       Label : NAME
         x3
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
   Label : ELEMENT
@@ -49,18 +49,18 @@ Label : CODE
     Label : NAME
       x4( )( )
       Label : ARGUMENTS
-        void
+        
         Label : ARGUMENT
           void
       Label : NAME
         x4( )
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             void
         Label : NAME
           x4
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               void

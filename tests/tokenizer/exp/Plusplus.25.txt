@@ -4,39 +4,39 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : INDEX
+        [
+        Label : INDEX
+          'c'
+        Label : VARIABLE
+          $b
+      Label : VARIABLE
+        $a
     Label : RIGHT
       ?
       Label : CONDITION
         [
-        Label : VARIABLE
-          $e
         Label : INDEX
           [
-          Label : VARIABLE
-            $f
           Label : INDEX
             'f'
+          Label : VARIABLE
+            $f
+        Label : VARIABLE
+          $e
+      Label : ELSE
+        -1
       Label : THEN
         --
         Label : POSTPLUSPLUS
           [
-          Label : VARIABLE
-            $g
           Label : INDEX
             [
-            Label : VARIABLE
-              $h
             Label : INDEX
               'i'
-      Label : ELSE
-        -1
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
+            Label : VARIABLE
+              $h
+          Label : VARIABLE
+            $g

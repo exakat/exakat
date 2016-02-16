@@ -3,15 +3,9 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        $a
     Label : ELSE
       elseif
       Label : CONDITION
@@ -20,3 +14,7 @@ Label : CODE
         ;
         Label : ELEMENT
           $b
+    Label : THEN
+      ;
+      Label : ELEMENT
+        $a

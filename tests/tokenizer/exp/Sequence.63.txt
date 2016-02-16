@@ -7,15 +7,15 @@ Label : CODE
       ?
       Label : CONDITION
         $a
+      Label : ELSE
+        true
       Label : THEN
         (int)
         Label : CAST
           (
           Label : CODE
             [
-            Label : VARIABLE
-              $b
             Label : INDEX
               'c'
-      Label : ELSE
-        true
+            Label : VARIABLE
+              $b

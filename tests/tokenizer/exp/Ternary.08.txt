@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         1
-      Label : THEN
-        2
       Label : ELSE
         [
-        Label : VARIABLE
-          $b
         Label : INDEX
           1
-    Label : LEFT
-      $a
+        Label : VARIABLE
+          $b
+      Label : THEN
+        2

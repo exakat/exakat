@@ -3,72 +3,72 @@
 Label : CODE
   ;
   Label : ELEMENT
+    if
+    Label : CONDITION
+      &&
+      Label : LEFT
+        isset
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'B'
+            Label : VARIABLE
+              $a
+      Label : RIGHT
+        ::
+        Label : CLASS
+          C
+        Label : METHOD
+          D
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'B'
+              Label : VARIABLE
+                $a
+    Label : ELSE
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $b
+        Label : RIGHT
+          'G'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $b
+        Label : RIGHT
+          F
+  Label : ELEMENT
     ?
     Label : CONDITION
       (
       Label : CODE
         ==
-        Label : RIGHT
-          'I'
         Label : LEFT
           [
-          Label : VARIABLE
-            $a
           Label : INDEX
             'H'
-    Label : THEN
-      =
-      Label : RIGHT
-        'J'
-      Label : LEFT
-        $c
+          Label : VARIABLE
+            $a
+        Label : RIGHT
+          'I'
     Label : ELSE
       =
+      Label : LEFT
+        $c
       Label : RIGHT
         'K'
+    Label : THEN
+      =
       Label : LEFT
         $c
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
       Label : RIGHT
-        ::
-        Label : METHOD
-          D
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                'B'
-        Label : CLASS
-          C
-      Label : LEFT
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'B'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          F
-        Label : LEFT
-          $b
-    Label : ELSE
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          'G'
-        Label : LEFT
-          $b
+        'J'

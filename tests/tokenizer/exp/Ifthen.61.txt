@@ -2,15 +2,9 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       true
-    Label : THEN
-      ;
-      Label : ELEMENT
-        EMPTY_TRASH_DAYS
     Label : ELSE
       elseif
       Label : CONDITION
@@ -21,3 +15,7 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $b
+    Label : THEN
+      ;
+      Label : ELEMENT
+        EMPTY_TRASH_DAYS

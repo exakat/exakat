@@ -3,68 +3,68 @@
 Label : CODE
   ;
   Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ?
-        Label : CONDITION
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              !
-              Label : NOT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $g
-            Label : LEFT
-              isset
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $f
-        Label : THEN
-          $h
-        Label : ELSE
-          'E'
-  Label : ELEMENT
-    C
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          $e
-        Label : CONCAT
-          'D'
-  Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         (
         Label : CODE
           ||
-          Label : RIGHT
-            empty
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
           Label : LEFT
             !
             Label : NOT
               isset
               Label : ARGUMENTS
-                void
+                
                 Label : ARGUMENT
                   $b
-      Label : THEN
-        'B'
+          Label : RIGHT
+            empty
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                $c
       Label : ELSE
         $d
-    Label : LEFT
-      $a
+      Label : THEN
+        'B'
+  Label : ELEMENT
+    C
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          'D'
+        Label : CONCAT
+          $e
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        ?
+        Label : CONDITION
+          (
+          Label : CODE
+            &&
+            Label : LEFT
+              isset
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  $f
+            Label : RIGHT
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    $g
+        Label : ELSE
+          'E'
+        Label : THEN
+          $h

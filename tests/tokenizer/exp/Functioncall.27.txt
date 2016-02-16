@@ -5,10 +5,10 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         dirname
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             __FILE__

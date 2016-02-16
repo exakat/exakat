@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       @
       Label : AT
@@ -11,40 +13,38 @@ Label : CODE
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
+            'b'
+          Label : ARGUMENT
             Concatenation
             Label : CONCAT
-              "i"
-            Label : CONCAT
               {
-              Label : VARIABLE
-                $g
               Label : INDEX
                 +
-                Label : RIGHT
-                  6
-                Label : LEFT
-                  $h
-            Label : CONCAT
-              {
-              Label : VARIABLE
-                $e
-              Label : INDEX
-                +
-                Label : RIGHT
-                  5
-                Label : LEFT
-                  $f
-            Label : CONCAT
-              {
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                +
-                Label : RIGHT
-                  4
                 Label : LEFT
                   $d
-          Label : ARGUMENT
-            'b'
-    Label : LEFT
-      $a
+                Label : RIGHT
+                  4
+              Label : VARIABLE
+                $c
+            Label : CONCAT
+              {
+              Label : INDEX
+                +
+                Label : LEFT
+                  $f
+                Label : RIGHT
+                  5
+              Label : VARIABLE
+                $e
+            Label : CONCAT
+              {
+              Label : INDEX
+                +
+                Label : LEFT
+                  $h
+                Label : RIGHT
+                  6
+              Label : VARIABLE
+                $g
+            Label : CONCAT
+              "i"

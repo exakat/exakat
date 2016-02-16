@@ -5,17 +5,7 @@ Label : CODE
   Label : ELEMENT
     ;
     Label : ELEMENT
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          1
-    Label : ELEMENT
       foreach
-      Label : VALUE
-        $b
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -24,3 +14,13 @@ Label : CODE
             $a
       Label : SOURCE
         $a
+      Label : VALUE
+        $b
+    Label : ELEMENT
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $b
+        Label : RIGHT
+          1

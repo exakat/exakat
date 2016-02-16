@@ -5,13 +5,15 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         ?
         Label : CONDITION
-          void
+          
           Label : ARGUMENT
             $a
+        Label : ELSE
+          $e
         Label : THEN
           Concatenation
           Label : CONCAT
@@ -21,10 +23,8 @@ Label : CODE
           Label : CONCAT
             e
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 'h'
           Label : CONCAT
             'd'
-        Label : ELSE
-          $e

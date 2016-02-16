@@ -6,17 +6,17 @@ Label : CODE
     ?
     Label : CONDITION
       ->
-      Label : OBJECT
-        $this
       Label : METHOD
         B
         Label : ARGUMENTS
           
           Label : ARGUMENT
             void
+      Label : OBJECT
+        $this
+    Label : ELSE
+      null
     Label : THEN
       die
       Label : ARGUMENTS
         void
-    Label : ELSE
-      null

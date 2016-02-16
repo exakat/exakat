@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     [
-    Label : VARIABLE
-      $a
     Label : INDEX
       -
       Label : SIGN
         [
-        Label : VARIABLE
-          [
-          Label : VARIABLE
-            $b
-          Label : INDEX
-            'c'
         Label : INDEX
           0
+        Label : VARIABLE
+          [
+          Label : INDEX
+            'c'
+          Label : VARIABLE
+            $b
+    Label : VARIABLE
+      $a

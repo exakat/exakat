@@ -9,47 +9,15 @@ Label : CODE
       Label : ARGUMENT
         (
         Label : CODE
-          $a
-  Label : ELEMENT
-    $b
-    Label : NAME
-      $b
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        0
-  Label : ELEMENT
-    empty
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
           $
-          Label : NAME
-            $a4
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'B4'
-  Label : ELEMENT
-    C
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
-          $
-          Label : NAME
-            $a
           Label : ARGUMENTS
             
             Label : ARGUMENT
               'B'
+          Label : NAME
+            $a
   Label : ELEMENT
     =
-    Label : RIGHT
-      $d
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -58,6 +26,8 @@ Label : CODE
           $
           Label : NAME
             $a2
+    Label : RIGHT
+      $d
   Label : ELEMENT
     die
     Label : ARGUMENTS
@@ -66,12 +36,40 @@ Label : CODE
         (
         Label : CODE
           $
-          Label : NAME
-            $a3
           Label : ARGUMENTS
             
             Label : ARGUMENT
               'B3'
+          Label : NAME
+            $a3
+  Label : ELEMENT
+    empty
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              'B4'
+          Label : NAME
+            $a4
+  Label : ELEMENT
+    C
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        (
+        Label : CODE
+          $
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              'B'
+          Label : NAME
+            $a
   Label : ELEMENT
     eval
     Label : ARGUMENTS
@@ -79,51 +77,17 @@ Label : CODE
       Label : ARGUMENT
         (
         Label : CODE
-          $
-          Label : NAME
-            $a
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'B'
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $g
-    Label : METHOD
-      list
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
           $a
   Label : ELEMENT
-    ->
-    Label : OBJECT
-      $h
-    Label : METHOD
+    $b
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        0
+    Label : NAME
       $b
-      Label : NAME
-        $b
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          0
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $g
-    Label : METHOD
-      eval
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          (
-          Label : CODE
-            $a
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $e
     Label : METHOD
       eval
       Label : ARGUMENTS
@@ -132,16 +96,16 @@ Label : CODE
           (
           Label : CODE
             $
-            Label : NAME
-              $a
             Label : ARGUMENTS
               
               Label : ARGUMENT
                 'B'
+            Label : NAME
+              $a
+    Label : OBJECT
+      $e
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $f
     Label : METHOD
       C
       Label : ARGUMENTS
@@ -150,9 +114,45 @@ Label : CODE
           (
           Label : CODE
             $
-            Label : NAME
-              $a
             Label : ARGUMENTS
               
               Label : ARGUMENT
                 'B'
+            Label : NAME
+              $a
+    Label : OBJECT
+      $f
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      eval
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          (
+          Label : CODE
+            $a
+    Label : OBJECT
+      $g
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      $b
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          0
+      Label : NAME
+        $b
+    Label : OBJECT
+      $h
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      list
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $a
+    Label : OBJECT
+      $g

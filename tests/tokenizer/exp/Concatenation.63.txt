@@ -2,91 +2,77 @@
 Label : CODE
   ;
   Label : ELEMENT
-    
-  Label : ELEMENT
     if
     Label : CONDITION
       !==
-      Label : RIGHT
-        'E'
       Label : LEFT
         B
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            D
-          Label : ARGUMENT
             'C'
+          Label : ARGUMENT
+            D
+      Label : RIGHT
+        'E'
+    Label : ELSE
+      ;
+      Label : ELEMENT
+        Z
     Label : THEN
       ;
       Label : ELEMENT
+        F
+      Label : ELEMENT
         Concatenation
-        Label : CONCAT
-          'N'
-        Label : CONCAT
-          K
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              B
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'M'
-        Label : CONCAT
-          'J'
         Label : CONCAT
           G
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              'I'
-            Label : ARGUMENT
               'H'
+            Label : ARGUMENT
+              'I'
+        Label : CONCAT
+          'J'
+        Label : CONCAT
+          K
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              B
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  'M'
+        Label : CONCAT
+          'N'
       Label : ELEMENT
-        T
+        O
       Label : ELEMENT
         G
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
-            'I'
-          Label : ARGUMENT
             'Q'
+          Label : ARGUMENT
+            'I'
       Label : ELEMENT
         S
       Label : ELEMENT
         echo
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             $a
       Label : ELEMENT
-        O
-      Label : ELEMENT
-        Y
-      Label : ELEMENT
-        V
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            U
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  'X'
+        T
       Label : ELEMENT
         if
         Label : CONDITION
           isset
           Label : ARGUMENTS
-            void
+            
             Label : ARGUMENT
               $b
         Label : THEN
@@ -94,16 +80,28 @@ Label : CODE
           Label : ELEMENT
             echo
             Label : ARGUMENTS
-              void
+              
               Label : ARGUMENT
                 U
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     $b
       Label : ELEMENT
-        F
-    Label : ELSE
-      ;
+        V
       Label : ELEMENT
-        Z
+        echo
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            U
+            Label : ARGUMENTS
+              
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'X'
+                Label : VARIABLE
+                  $c
+      Label : ELEMENT
+        Y

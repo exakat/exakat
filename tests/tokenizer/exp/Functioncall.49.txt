@@ -8,36 +8,36 @@ Label : CODE
       Label : ARGUMENT
         Concatenation
         Label : CONCAT
-          'J'
-        Label : CONCAT
-          'L'
-        Label : CONCAT
-          'N'
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
           (
           Label : CODE
             +
-            Label : RIGHT
-              0
             Label : LEFT
               $a
+            Label : RIGHT
+              0
+        Label : CONCAT
+          'B'
         Label : CONCAT
           D
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
+              'E'
+            Label : ARGUMENT
               ->
-              Label : OBJECT
-                $b
               Label : METHOD
                 G
                 Label : ARGUMENTS
-                  void
+                  
                   Label : ARGUMENT
                     'H'
-            Label : ARGUMENT
-              'E'
+              Label : OBJECT
+                $b
+      Label : ARGUMENT
+        Concatenation
         Label : CONCAT
-          'B'
+          'J'
+        Label : CONCAT
+          'L'
+        Label : CONCAT
+          'N'

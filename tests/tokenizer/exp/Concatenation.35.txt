@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       Concatenation
       Label : CONCAT
-        ")"
+        '&nbsp;('
       Label : CONCAT
         @
         Label : AT
           ++
           Label : PREPLUSPLUS
             [
-            Label : VARIABLE
-              $n
             Label : INDEX
               $boucle
+            Label : VARIABLE
+              $n
       Label : CONCAT
-        '&nbsp;('
-    Label : LEFT
-      $x
+        ")"

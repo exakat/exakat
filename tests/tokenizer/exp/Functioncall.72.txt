@@ -3,65 +3,13 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      E
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          include
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                __DIR__
-              Label : CONCAT
-                'G'
-        Label : ARGUMENT
-          include
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                __DIR__
-              Label : CONCAT
-                'H'
-        Label : ARGUMENT
-          include
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                __DIR__
-              Label : CONCAT
-                'F'
-        Label : ARGUMENT
-          include
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                __DIR__
-              Label : CONCAT
-                'I'
-    Label : LEFT
-      ::
-      Label : CLASS
-        C
-      Label : PROPERTY
-        $a
-  Label : ELEMENT
     if
     Label : CONDITION
       !
       Label : NOT
         B
         Label : ARGUMENTS
-          void
+          
           Label : ARGUMENT
             ::
             Label : CLASS
@@ -74,3 +22,55 @@ Label : CODE
         return
         Label : RETURN
           void
+  Label : ELEMENT
+    =
+    Label : LEFT
+      ::
+      Label : CLASS
+        C
+      Label : PROPERTY
+        $a
+    Label : RIGHT
+      E
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          include
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                __DIR__
+              Label : CONCAT
+                'F'
+        Label : ARGUMENT
+          include
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                __DIR__
+              Label : CONCAT
+                'G'
+        Label : ARGUMENT
+          include
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                __DIR__
+              Label : CONCAT
+                'H'
+        Label : ARGUMENT
+          include
+          Label : ARGUMENTS
+            
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                __DIR__
+              Label : CONCAT
+                'I'

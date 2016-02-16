@@ -5,6 +5,6 @@ Label : CODE
   Label : ELEMENT
     strtolower
     Label : ARGUMENTS
-      void
+      
       Label : ARGUMENT
         true

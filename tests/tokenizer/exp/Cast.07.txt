@@ -3,13 +3,13 @@
 Label : CODE
   ;
   Label : ELEMENT
-    (double)
+    (real)
     Label : CAST
-      ->
-      Label : OBJECT
-        $z
+      ::
+      Label : CLASS
+        x
       Label : PROPERTY
-        h
+        $y
   Label : ELEMENT
     (float)
     Label : CAST
@@ -19,10 +19,10 @@ Label : CODE
       Label : CONSTANT
         y
   Label : ELEMENT
-    (real)
+    (double)
     Label : CAST
-      ::
+      ->
+      Label : OBJECT
+        $z
       Label : PROPERTY
-        $y
-      Label : CLASS
-        x
+        h

@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  ->
-  Label : METHOD
-    a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        ?
-        Label : CONDITION
-          $b
-        Label : THEN
-          null
-        Label : ELSE
-          $c
-      Label : ARGUMENT
-        $x
-  Label : OBJECT
-    $d
+  ;
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      a
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $x
+        Label : ARGUMENT
+          ?
+          Label : CONDITION
+            $b
+          Label : ELSE
+            $c
+          Label : THEN
+            null
+    Label : OBJECT
+      $d
