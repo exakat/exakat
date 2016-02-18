@@ -28,7 +28,8 @@ use Analyzer;
 class UndefinedClasses extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Classes/IsExtClass',
-                     'Composer/IsComposerNsname');
+                     'Composer/IsComposerNsname',
+                     'Interfaces/IsExtInterface');
     }
     
     public function analyze() {
