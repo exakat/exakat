@@ -68,12 +68,12 @@ class Jobqueue extends Tasks {
         if(!$pipe) {
             die('unable to open the named pipe');
         }
-        stream_set_blocking($pipe,0);
+        stream_set_blocking($pipe, false);
 
         //////// process the queue ////////
         while(1) {
             while($input = trim(fgets($pipe))) {
-                stream_set_blocking($pipe, 0);
+                stream_set_blocking($pipe, false);
                 $queue[] = $input;
             }
 
@@ -102,7 +102,7 @@ class Jobqueue extends Tasks {
                     unset($job, $queue[$jobkey]);
                 } else {
                 display( 'no jobs to do - waiting...'. PHP_EOL);
-                stream_set_blocking($pipe, 1);
+                stream_set_blocking($pipe, true);
             }
         }
     }
