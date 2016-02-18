@@ -21,7 +21,7 @@
 */
 
 class Exakat {
-    const VERSION = '0.5.2';
+    const VERSION = '0.5.3';
     const BUILD = 304;
     
     public function execute(Config $config) {
@@ -203,6 +203,11 @@ class Exakat {
 
             case 'server' : 
                 $task = new Tasks\Server();
+                $task->run($config);
+                break;
+
+            case 'upgrade' : 
+                $task = new Tasks\Upgrade();
                 $task->run($config);
                 break;
 

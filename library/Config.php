@@ -92,9 +92,12 @@ class Config {
                                  '-l'         => 'lint',
                                  '-json'      => 'json',
                                  '-dot'       => 'dot',
+
+// Size of the projects
                                  '-ss'        => 'ss',
                                  '-sm'        => 'sm',
                                  '-sl'        => 'sl',
+
                                  '-nodep'     => 'noDependencies',
                                  '-norefresh' => 'noRefresh',
                                  '-today'     => 'today',
@@ -103,12 +106,16 @@ class Config {
                                  '-text'      => 'text',
                                  '-o'         => 'output',
                                  '-stop'      => 'stop',
+                                 '-restart'   => 'restart',
 
+// Vcs
                                  '-git'       => 'git',
                                  '-svn'       => 'svn',
                                  '-bzr'       => 'bzr',
                                  '-hg'        => 'hg',
                                  '-composer'  => 'composer',
+
+// Archive formats
                                  '-tgz'       => 'tgz',
                                  '-tbz'       => 'tbz',
                                  '-zip'       => 'zip',
@@ -151,6 +158,7 @@ class Config {
                                          'classes'       => 1,
                                          'test'          => 1,
                                          'update'        => 1,
+                                         'upgrade'       => 1,
                                          );
                                
     static private $stack = array();
