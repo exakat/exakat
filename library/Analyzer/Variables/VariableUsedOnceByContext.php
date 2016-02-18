@@ -59,6 +59,13 @@ GREMLIN
 
              //This is not an argument in an abstract method
              ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}.out("ABSTRACT").any() == false')
+
+             //This is not an argument of the method
+             ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}
+                                        .out("ARGUMENTS").out("ARGUMENT")
+                                        .transform{ a = it; while (a.out("VARIABLE", "LEFT").any()) { a = a.out("VARIABLE", "LEFT").next(); }; a;}
+                                        .any() == false')
+
              ->fetchContext(\Analyzer\Analyzer::CONTEXT_OUTSIDE_CLOSURE)
 
              ->eachCounted('context["Namespace"] + "/" + context["Class"] + "/" + context["Function"] + "/" + it.code', 1);
