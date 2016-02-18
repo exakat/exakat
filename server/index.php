@@ -32,10 +32,16 @@ function archive($path) {
         $compression = 'zip';
     }
     
-    $types = array('html'    => 'report',
-                   'faceted' => 'faceted',
-                   'text'    => 'report.txt',
-                   'json'    => 'report.json');
+    $types = array('html'     => 'report',
+                   'faceted'  => 'faceted',
+                   'faceted2' => 'faceted2',
+                   'text'     => 'report.txt',
+                   'json'     => 'report.json');
+                  
+    if (!isset($types[$type])) {
+        print "No such format as '".htmlentities($type)."'\n";
+        exit;
+    }
     
     $archive = './projects/'.$project.'/'.$types[$type].'.'.$compression;
 
@@ -43,7 +49,7 @@ function archive($path) {
         shell_exec('cd '.__DIR__.'/'.$project.'; zip -r '.$types[$type].'.zip '.$types[$type]);
     }
 
-    header("Content-Type: ".mime_content_type($archive));
+    header("Content-Type: ".getMimeContentType($archive));
     header('Content-Disposition: attachment; filename="downloaded.'.'zip'.'"');
    
     readfile($archive);
@@ -139,25 +145,24 @@ function report($path) {
 
     $r = substr($path, strlen('/report/') + strlen($project) + 1 + strlen($type) + 1);
 
-    $types = array('html'    => 'report',
-                   'faceted' => 'faceted',
-                   'text'    => 'report.txt',
-                   'json'    => 'report.json');
-    
+    $types = array('html'     => 'report',
+                   'faceted'  => 'faceted',
+                   'faceted2' => 'faceted2',
+                   'text'     => 'report.txt',
+                   'json'     => 'report.json');
+    if (!isset($types[$type])) {
+        print "No such report as '".htmlentities($type)."'\n";
+        exit;
+    }
+
     if (file_exists(__DIR__.'/'.$project.'/'.$types[$type])) {
-        if (in_array($type, array('html', 'faceted')) && empty($r)) {
+        if (in_array($type, array('html', 'faceted', 'faceted2')) && empty($r)) {
             $r = '/index.html';
         } else {
             $r = '/'.$r;
         }
 
-        if (substr($r, -4) == '.css') {
-            header("Content-Type: text/css");
-        } elseif (substr($r, -3) == '.js') {
-            header("Content-Type: text/javascript");
-        } else {
-            header("Content-Type: ".mime_content_type(__DIR__.'/'.$project.'/'.$types[$type].$r));
-        }
+        header("Content-Type: ".getMimeContentType(__DIR__.'/'.$project.'/'.$types[$type].$r));
 
         readfile(__DIR__.'/'.$project.'/'.$types[$type].$r);
         exit;
@@ -211,4 +216,24 @@ function pushToQueue($id) {
     $fp = fopen(PIPEFILE, 'a');
     fwrite($fp, "$id\n");
     fclose($fp);
+}
+
+function getMimeContentType($path) {
+    static $mimeTypes = array('css'  => 'text/css',
+                              'gif'  => 'image/gif',
+                              'png'  => 'image/png',
+                              'woff' => 'application/x-font-woff',
+                              'js'   => 'text/javascript',
+                              'html' => 'text/html',
+                              'zip'  => 'application/octet-stream',
+                              );
+    
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
+    
+    if (!isset($mimeTypes[$ext])) {
+        print "missing '$ext' ($path) mime type\n";
+        return '';
+    }
+    
+    return $mimeTypes[$ext];
 }
