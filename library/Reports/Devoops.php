@@ -61,10 +61,6 @@ class Devoops extends Reports {
                 foreach ($colErrors as $error) {
 
                     $error['type'] = strtolower($error['type']);
-//                    if (PHP_CODESNIFFER_ENCODING !== 'utf-8') {
-//                        $error['message'] = iconv(PHP_CODESNIFFER_ENCODING, 'utf-8', $error['message']);
-//                    }
-
                     $out->startElement($error['type']);
                     $out->writeAttribute('line', $line);
                     $out->writeAttribute('column', $column);
@@ -102,10 +98,10 @@ class Devoops extends Reports {
         mkdir($folder.'/'.$name, Devoops::FOLDER_PRIVILEGES);
         mkdir($folder.'/'.$name.'/ajax', Devoops::FOLDER_PRIVILEGES);
 
-        $this->copyDir($this->config->dir_root.'/media/devoops/css', $folder.'/'.$name.'/css');
-        $this->copyDir($this->config->dir_root.'/media/devoops/img', $folder.'/'.$name.'/img');
-        $this->copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
-        $this->copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
+        copyDir($this->config->dir_root.'/media/devoops/css', $folder.'/'.$name.'/css');
+        copyDir($this->config->dir_root.'/media/devoops/img', $folder.'/'.$name.'/img');
+        copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
+        copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
         $this->dump      = new \sqlite3($folder.'/dump.sqlite');
         $this->datastore = new \sqlite3($folder.'/datastore.sqlite');
