@@ -90,15 +90,16 @@ GREMLIN;
         $config = $this->config;
         
         // preserve data/dbms/auth to preserve authentication
-        if (file_exists($config->projects_root.'/neo4j/data/dbms/auth')) {
+        if (file_exists($config->neo4j_folder.'/data/dbms/auth')) {
             $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; ';
         } else {
             $sshLoad =  'rm -rf data; mkdir -p data; ';
         }
-        if (file_exists($config->projects_root.'/neo4j/data/neo4j-service.pid')) {
-            shell_exec('cd '.$config->projects_root.'/neo4j/;kill -9 $(cat data/neo4j-service.pid) 2>>/dev/null; '.$sshLoad);
+
+        if (file_exists($config->neo4j_folder.'/data/neo4j-service.pid')) {
+            shell_exec('cd '.$config->neo4j_folder.';kill -9 $(cat data/neo4j-service.pid) 2>>/dev/null; '.$sshLoad);
         } else {
-            shell_exec('cd '.$config->projects_root.'/neo4j/; '.$sshLoad);
+            shell_exec('cd '.$config->neo4j_folder.'; '.$sshLoad);
         }
         
         // checking that the server has indeed restarted
@@ -108,7 +109,7 @@ GREMLIN;
             if ($round > 0) {
                 sleep($round);
             }
-            shell_exec('cd '.$config->projects_root.'/neo4j/; ./bin/neo4j start-no-wait 2>&1');
+            shell_exec('cd '.$config->neo4j_folder.'; ./bin/neo4j start-no-wait 2>&1');
             
             // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
             // Needs to pick up this error and act

@@ -42,6 +42,16 @@ function display_r($object) {
 }
 
 function gremlin_query($query, $params = [], $load = []) {
+    static $scriptDir;
+    
+    if (!isset($scriptDir)) {
+        $config = \Config::factory();
+        $scriptDir = $config->neo4j_folder.'/scripts/';
+
+        if (!is_writable($scriptDir)) {
+            die("Can't write in file $scriptDir. Exakat needs to write in this folder.");
+        }
+    }
     $getString = 'script='.urlencode($query);
     
     if (!is_array($load)) {
@@ -58,7 +68,7 @@ function gremlin_query($query, $params = [], $load = []) {
 
                 // what about factorise this below? 
                 $defName = 'a'.crc32($gremlin);
-                $defFileName = 'neo4j/scripts/'.$defName.'.gremlin';
+                $defFileName = $scriptDir.$defName.'.gremlin';
 
                 if (file_exists($defFileName)) {
                     $query = str_replace($name, $defName.'()', $query);
@@ -78,7 +88,7 @@ function gremlin_query($query, $params = [], $load = []) {
                 $value = array_map(function ($x) { return str_replace('$', '\\$', addslashes($x)); }, $value);
                 $gremlin = "{ ['".join("','", $value)."'] }";
                 $defName = 'a'.crc32($gremlin);
-                $defFileName = 'neo4j/scripts/'.$defName.'.gremlin';
+                $defFileName = $scriptDir.$defName.'.gremlin';
 
                 if (file_exists($defFileName)) {
                     $query = str_replace($name, $defName.'()', $query);
