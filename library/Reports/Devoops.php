@@ -1163,6 +1163,7 @@ SQL
 
                     'CLI' => array(
                             '$argv, $argc'                 => 'Php/UseCli',
+                            'CLI script'                   => 'Files/IsCliScript',
                     ),
 
                     // filled later
