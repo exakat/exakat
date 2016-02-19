@@ -114,6 +114,8 @@ class Config {
                                  '-bzr'       => 'bzr',
                                  '-hg'        => 'hg',
                                  '-composer'  => 'composer',
+                                 '-copy'      => 'copy',    // Copy the local dir
+                                 '-symlink'   => 'symlink', // make a symlink 
 
 // Archive formats
                                  '-tgz'       => 'tgz',
@@ -330,7 +332,9 @@ class Config {
                                                        (isset($this->commandline['composer'])  && $this->commandline['composer']) || 
                                                        (isset($this->commandline['tgz'])       && $this->commandline['tgz'])      || 
                                                        (isset($this->commandline['tbz'])       && $this->commandline['tbz'])      || 
-                                                       (isset($this->commandline['zip'])       && $this->commandline['zip']))      );
+                                                       (isset($this->commandline['zip'])       && $this->commandline['zip'])      || 
+                                                       (isset($this->commandline['copy'])      && $this->commandline['copy'])     || 
+                                                       (isset($this->commandline['symlink'])   && $this->commandline['symlink']))    );
 
         $optionsValue   = array('-f'            => 'filename',
                                 '-d'            => 'dirname',

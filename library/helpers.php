@@ -227,6 +227,12 @@ function rmdirRecursive($dir) {
         return 0;
     }
 
+    // Remove symlink, but not their content
+    if (is_link($dir)) {
+        unlink($dir);
+        return 0;
+    }
+
     if (empty($dir)) { 
         return 0;
     }
@@ -248,4 +254,27 @@ function rmdirRecursive($dir) {
 
     return $total; 
   } 
+
+function copyDir($src, $dst) { 
+    $dir = opendir($src); 
+    if (!$dir) { return true; }
+    
+    $total = 0;
+    mkdir($dst, 0755); 
+    while(false !==  $file = readdir($dir) ) { 
+        if (( $file != '.' ) && ( $file != '..' )) { 
+            if ( is_dir($src . '/' . $file) ) { 
+                $total += copyDir($src . '/' . $file,$dst . '/' . $file); 
+            } else { 
+                copy($src . '/' . $file, $dst . '/' . $file); 
+                ++$total;
+            } 
+        } 
+    } 
+    
+    closedir($dir); 
+
+    return $total;
+} 
+
 ?>

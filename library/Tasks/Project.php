@@ -58,7 +58,7 @@ class Project extends Tasks {
         }
 
         if (!file_exists($config->codePath)) {
-            die("Project '$project' exists but has no code folder. Aborting\n");
+            die("Project '$project' exists but has no code folder ($config->codePath). Aborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/log')) {

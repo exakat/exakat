@@ -45,6 +45,21 @@ class Update extends Tasks {
         }
         
         switch(true) {
+            // symlink case
+            case $config->project_vcs === 'symlink' :
+                // Nothing to do, the symlink is here for that
+                break;
+
+            // copy case
+            case $config->project_vcs === 'copy' :
+                // Remove and copy again
+                $total = rmdirRecursive($config->projects_root.'/projects/'.$config->project.'/code/');
+                display("$total files were removed");
+                
+                $total = copyDir(realpath($config->project_url), $config->projects_root.'/projects/'.$config->project.'/code');
+                display("$total files were copied");
+                break;
+
             // Git case
             case file_exists($path.'/code/.git') :
                 display('Git pull for '.$config->project);

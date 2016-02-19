@@ -74,6 +74,23 @@ class Initproject extends Tasks {
         $this->datastore = new \Datastore(\Config::factory(), \Datastore::CREATE);
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
+            if ($config->symlink === true) {
+                $vcs = 'symlink';
+            } elseif ($config->svn === true) {
+                $vcs = 'svn';
+            } elseif ($config->git === true) {
+                $vcs = 'git';
+            } elseif ($config->copy === true) {
+                $vcs = 'copy';
+            } elseif ($config->bzr === true) {
+                $vcs = 'bzr';
+            } elseif ($config->hg === true) {
+                $vcs = 'hg';
+            } elseif ($config->composer === true) {
+                $vcs = 'composer';
+            } else {
+                $vcs = 'git';
+            }
             // default initial config. Found in test project.
             $configIni = <<<INI
 phpversion = 7.0
@@ -101,10 +118,11 @@ ignore_dirs[] = /sql
 
 file_extensions =
 
-project_name = "$project";
-project_url = "$repositoryURL";
+project_name        = "$project";
+project_url         = "$repositoryURL";
+project_vcs         = "$vcs";
 project_description = "";
-project_packagist = "";
+project_packagist   = "";
 
 INI;
 
@@ -123,11 +141,24 @@ INI;
                     display('Empty initialization');
                     break 1;
 
+                // Symlink
+                case ($config->symlink === true) :
+                    display('Symlink initialization : '.realpath($repositoryURL));
+                    symlink(realpath($repositoryURL), $config->projects_root.'/projects/'.$project.'/code');
+                    break 1;
+
+                // Empty initialization
+                case ($config->copy === true) :
+                    display('Copy initialization');
+                    $total = copyDir(realpath($repositoryURL), $config->projects_root.'/projects/'.$project.'/code');
+                    display($total . ' files were copied');
+                    break 1;
+
                 // composer archive (early in the list, as this won't have 'scheme'
                 case ($config->composer === true) :
                     display('Initialization with composer');
 
-                    // composer install
+                // composer install
                     $composer = new \stdClass();
                     $composer->require = new \stdClass();
                     $composer->require->$repositoryURL = 'dev-master';
