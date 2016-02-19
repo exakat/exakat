@@ -153,7 +153,7 @@ class Doctor extends Tasks {
                 $stats['neo4j']['pid'] = $r[1];
             }
     
-            $json = file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
+            $json = @file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
             if (empty($json)) {
                 $stats['neo4j']['running'] = 'No';
             } else {
