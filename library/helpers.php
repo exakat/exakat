@@ -177,6 +177,9 @@ function gremlin_query($query, $params = [], $load = []) {
 
 function gremlin_queryOne($query, $params = [], $load = []) {
     $res = gremlin_query($query, $params, $load);
+    if (!is_object($res)) {
+        die('Server is not responding');
+    }
     $res = $res->results[0];
     
     if (is_bool($res) || is_int($res)) {
