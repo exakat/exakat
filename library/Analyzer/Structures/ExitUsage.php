@@ -27,7 +27,8 @@ use Analyzer;
 
 class ExitUsage extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Structures/NoDirectAccess');
+        return array('Structures/NoDirectAccess',
+                     'Files/IsCliScript');
     }
     
     public function analyze() {
@@ -36,6 +37,8 @@ class ExitUsage extends Analyzer\Analyzer {
              ->hasNoIn('METHOD')
              ->tokenIs('T_EXIT')
              ->raw('filter{ it.in.loop(1){!(it.object.atom in ["Ifthen", "File"])}{it.object.atom in ["Ifthen", "File"]}.filter{it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any() == false}.any(); }')
+             ->goToFile()
+             ->analyzerIsNot('Files/IsCliScript')
              ->back('first');
         $this->prepareQuery();
     }
