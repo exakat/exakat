@@ -1,4 +1,4 @@
-Version 0.5.3 ( Li Jing, Coming up)
+Version 0.5.4 (Nezha, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,19 @@ Version 0.5.3 ( Li Jing, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.5.3 (Li Jing, 2015-02-22)
++ Architecture
+    + More UT
+    + Supports symlinks for neo4j's folder
+    + Supports symlinks for 'code' folder in projects
+    + Added upgrade command to check for exakat's available versions and upgrade
++ Analyzer
+    + Spot CLI scripts
+    + Undefined Interfaces avoids self, parent, static
+    + Fixed bug in spotting undefined Interface
+    + Variable Used Once in a method are not arguments
+    + Added support for all structures in Double Assignation
 
 Version 0.5.2 (Single Horned Rhinoceros King, 2016-02-15)
 + Analyzer
