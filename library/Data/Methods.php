@@ -148,6 +148,21 @@ SQL;
 
         return $return;
     }
+
+    public function getBugFixes() {
+        $return = array();
+
+        $query = <<<SQL
+SELECT * FROM bugfixes
+SQL;
+        $res = $this->sqlite->query($query);
+
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $return[$row['function']] = $row;
+        }
+
+        return $return;
+    }
 }
 
 ?>
