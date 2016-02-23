@@ -148,6 +148,7 @@ class Devoops extends Reports {
             'By file'             => $files,
             'Application'         => array('Appinfo()'              => 'Appinfo',
                                            'PHP Directives'         => 'Directives',
+                                           'PHP Bugfixes'           => 'Bugfixes',
                                            'Altered Directives'     => 'AlteredDirectives',
                                            'Dynamic Code'           => 'DynamicCode',
                                            'Stats'                  => 'Stats',
@@ -1517,6 +1518,41 @@ TEXT
         $info[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
         
         return $this->formatSimpleTable($info, $css);
+    }
+
+    private function Bugfixes() {
+        $css = new \Stdclass();
+        $css->displayTitles = true;
+        $css->titles = array('Title', 'Function', 'solved In', 'solved In', 'solved In', 'bugs.php.net', 'CVE');
+        $css->readOrder = $css->titles;
+
+        $data = new \Data\Methods();
+        $bugfixes = $data->getBugFixes();
+        
+        $found = $this->dump->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
+        $reported = array();
+        $info = array();
+
+        while($row = $found->fetchArray()) {
+            $function = substr($row['fullcode'], 0, strpos($row['fullcode'], '('));
+            if (isset($reported[$function])) { continue; }
+            $reported[$function] = 1;
+//            print_r($bugfixes[$function]);
+//            print_r($row);
+
+            $array = array('title'      => $bugfixes[$function]['title'],
+                           'function'   => $function,
+                           'solvedIn70' => $bugfixes[$function]['solvedIn70'] ? $bugfixes[$function]['solvedIn70'] : '-',
+                           'solvedIn56' => $bugfixes[$function]['solvedIn56'] ? $bugfixes[$function]['solvedIn56'] : '-',
+                           'solvedIn55' => $bugfixes[$function]['solvedIn55'] ? $bugfixes[$function]['solvedIn55'] : '-',
+                           'bug'        => '<a href="'.$bugfixes[$function]['bugs'].'">#'.$bugfixes[$function]['bugs'].'</a>',
+                           'cve'        => '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$bugfixes[$function]['cve'].'">'.$bugfixes[$function]['cve'].'</a>',
+                           );
+
+            $info[] = $array;
+        }
+
+        return $this->formatCompilationTable($info, $css);
     }
 
     private function Compilation() {
