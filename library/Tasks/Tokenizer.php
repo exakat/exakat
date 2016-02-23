@@ -67,7 +67,7 @@ class Tokenizer extends Tasks {
                 } else {
                     $regex[$class] = $r;
                 }
-            } 
+            }
         }
 
         $this->log->log( "Finished loading classes");
