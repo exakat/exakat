@@ -1,0 +1,176 @@
+<?php
+
+
+if (file_exists('changelog.7.html')) {
+    $changelog = file_get_contents('changelog.7.html');
+} else {
+    $changelog = file_get_contents('http://php.net/ChangeLog-7.php');
+    file_put_contents('changelog.7.html', $changelog);
+}
+
+$sqlite = new \Sqlite3('data/methods.sqlite');
+
+if (file_exists('changelog.5.html')) {
+    $changelog5 = file_get_contents('changelog.5.html');
+} else {
+    $changelog5 = file_get_contents('http://php.net/ChangeLog-5.php');
+    file_put_contents('changelog.5.html', $changelog5);
+}
+
+
+print "found ".strlen($changelog)." changelog\n";
+
+$functions = parse_ini_file('data/php_functions.ini');
+$functions = implode('|', $functions['functions']);
+
+//// Preparing PHP 5.* 
+
+$changelog56 = array();
+$changelog55 = array();
+
+preg_match_all('#<section class="version" id=".*?">(.*?)</section>#s', $changelog5, $r);
+$blocks = $r[1];
+
+foreach($blocks as $block) {
+    $total = 0;
+    $bugs = 0;
+    $withFunction = 0;
+
+    if (!preg_match('#<h3>Version (\d\.\d\.\d+)</h3>#s', $block, $r)) {
+        continue; 
+    }
+    $version = $r[1];
+    if (!preg_match('/^5\.[56]/', $version)) {
+        // probably an old version
+        continue;
+    }
+//    print "$version\n";
+
+    $total += preg_match_all('#  <li>#s', $block, $sections, PREG_SET_ORDER);
+
+    preg_match_all('#<li>(.*?):\s<ul>(.*?)</ul></li>#s', $block, $sections, PREG_SET_ORDER);
+    foreach($sections as $section) {
+        $lasection = $section[1];
+        // Process multiple bugs on one line
+        // process CVE indication
+        if ($bugs += preg_match_all('$<a href="http://bugs\.php\.net/(\d+)">#\\1</a> \((.*?)\)\.( \(.{13}(, .{13})*?\))?</li>$s', $section[2], $li, PREG_SET_ORDER)) {
+            foreach($li as $l) {
+                if (preg_match("/\\b(".$functions.")\\b/is", $l[2], $r)) {
+                    ++$withFunction;
+                    $lafunction = $r[0];
+//                    print "$version\t$lasection\t".$lafunction."\t{$l[1]}\t{$l[2]}\n";
+
+                    if (substr($version, 0, 3) === '5.6') {
+                        $changelog56[$l[1]] = $version;
+                    } elseif (substr($version, 0, 3) === '5.5') {
+                        $changelog55[$l[1]] = $version;
+                    } else {
+                        // ignore others
+                    }
+                } 
+            }
+        } else {
+//            print "No results for $lasection\n";
+        }
+    }
+    
+//    print "$version : $withFunction / $bugs / $total \n";
+}
+
+///// Processing PHP 7.*
+
+
+preg_match_all('#<section class="version" id=".*?">(.*?)</section>#s', $changelog, $r);
+$blocks = $r[1];
+$final = '';
+
+foreach($blocks as $block) {
+    $total = 0;
+    $bugs = 0;
+    $withFunction = 0;
+
+    preg_match('#<h3>Version (\d\.\d\.\d)</h3>#s', $block, $r);
+    $version = $r[1];
+    $final .= "$version\n";
+    
+    /*
+<li>SQLite3:
+<ul>
+  <li>Fixed bug <a href="http://bugs.php.net/70571">#70571</a> (Memory leak in sqlite3_do_callback).</li>
+  <li>Fixed bug <a href="http://bugs.php.net/69972">#69972</a> (Use-after-free vulnerability in sqlite3SafetyCheckSickOrOk()).</li>
+  <li>Fixed bug <a href="http://bugs.php.net/69897">#69897</a> (segfault when manually constructing SQLite3Result).</li>
+  <li>Fixed bug <a href="http://bugs.php.net/68260">#68260</a> (SQLite3Result::fetchArray declares wrong required_num_args).</li>
+</ul></li>
+    */
+    $total += preg_match_all('#  <li>#s', $block, $sections, PREG_SET_ORDER);
+
+    preg_match_all('#<li>(.*?):\s<ul>(.*?)</ul></li>#s', $block, $sections, PREG_SET_ORDER);
+    foreach($sections as $section) {
+        $lasection = $section[1];
+        // Process multiple bugs on one line
+        // process CVE indication
+        // Process extension-related bugs (see PCRE)
+        if ($bugs += preg_match_all('$<a href="http://bugs\.php\.net/(\d+)">#\\1</a> \((.*?)\)\.( \((.{13}(, .{13})*?)\))?</li>$s', $section[2], $li, PREG_SET_ORDER)) {
+            foreach($li as $l) {
+                if (preg_match("/\\b(".$functions.")\\b/is", $l[2], $r)) {
+                    if (isset($l[4])) {
+                        $cve = $l[4];
+                        print $cve."\n";
+                        print_r($l);
+                    } else {
+                        $cve = '';
+                    }
+
+                    ++$withFunction;
+                    $lafunction = $r[0];
+//                    print "$version\t$lasection\t".$lafunction."\t{$l[1]}\t{$l[2]}\n";
+                    
+                    $res = $sqlite->query('SELECT * FROM bugfixes WHERE bugs='.$l[1]);
+                    $row = $res->fetchArray();
+                    
+                    $title = $sqlite->escapeString($l[2]);
+                    $lasection = strtolower($lasection);
+                    $solvedIn56 = isset($changelog56[$l[1]]) ? $changelog56[$l[1]] : null;
+                    $solvedIn55 = isset($changelog55[$l[1]]) ? $changelog55[$l[1]] : null;
+
+                    $updates = array();
+                    if ($row === false) {
+                        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension') 
+                                             VALUES (null, '$title', 'PHP'      , '$lafunction', '$cve', $l[1], '$version', '$solvedIn56', '$solvedIn55', '$lasection');\n";
+                        continue;
+                    } 
+
+                    if ($row['solvedIn70'] != $version) {
+                        $updates[] = "solvedIn70 = '$version' ";
+                    } 
+                    if ($row['solvedIn56'] != $solvedIn56) {
+                        $updates[] = "solvedIn56 = '$solvedIn56' ";
+                    } 
+                    if ($row['solvedIn55'] != $solvedIn55) {
+                        $updates[] = "solvedIn55 = '$solvedIn55' ";
+                    } 
+                    if ($row['title'] != $l[2]) {
+                        $updates[] = "title = '$title' ";
+                    } 
+                    if ($row['function'] != $r[0]) {
+                        $updates[] = "function = '$r[0]' ";
+                    } 
+                    if ($row['cve'] != $cve) {
+                        $updates[] = "cve = '$cve' ";
+                    } 
+                    
+                    if (!empty($updates)) {
+                        print "UPDATE bugfixes SET ".join(', ', $updates)." WHERE id = {$row['id']};\n";
+                    }
+                }
+            }
+        } else {
+            $final .= "No results for $lasection\n";
+        }
+    }
+    
+    $final .= "$version : $withFunction / $bugs / $total \n";
+}
+
+print $final;
+?>
