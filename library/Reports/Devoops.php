@@ -82,17 +82,26 @@ class Devoops extends Reports {
     }//end generateFileReport()
 
     public function generate($folder, $name = 'report') {
+        $finalName = $name;
+        $name = '.'.$name;
+        
         if ($name === null) {
             return "Can't produce Devoops format to stdout";
         }
 
-        if ($folder.'/'.$name !== '/') {
-            rmdirRecursive($folder.'/'.$name);
+        // Clean final destination
+        if ($folder.'/'.$finalName !== '/') {
+            rmdirRecursive($folder.'/'.$finalName);
         }
 
-        if (file_exists($folder.'/'.$name)) {
-            display ($folder.'/'.$name." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+        if (file_exists($folder.'/'.$finalName)) {
+            display ($folder.'/'.$finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
+        }
+
+        // Clean temporary destination
+        if (file_exists($folder.'/'.$name)) {
+            rmdirRecursive($folder.'/'.$name);
         }
 
         mkdir($folder.'/'.$name, Devoops::FOLDER_PRIVILEGES);
@@ -236,6 +245,8 @@ HTML;
                                   $html);
             }
         }
+        
+        rename($folder.'/'.$name, $folder.'/'.$finalName);
 
         return '';
     }//end generate()
@@ -1537,8 +1548,6 @@ TEXT
             $function = substr($row['fullcode'], 0, strpos($row['fullcode'], '('));
             if (isset($reported[$function])) { continue; }
             $reported[$function] = 1;
-//            print_r($bugfixes[$function]);
-//            print_r($row);
 
             $array = array('title'      => $bugfixes[$function]['title'],
                            'function'   => $function,

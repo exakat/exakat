@@ -35,6 +35,7 @@ class Faceted extends FacetedJson {
         $sqlite      = new \sqlite3($dirName.'/dump.sqlite');
         $config = \Config::factory();
 
+        // Clean final destination
         if ($dirName.'/'.$fileName !== '/') {
             rmdirRecursive($dirName.'/'.$fileName);
         }
@@ -43,6 +44,14 @@ class Faceted extends FacetedJson {
             display ($dirName.'/'.$fileName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
+
+        // Clean temporary destination
+        if (file_exists($dirName.'/'.$fileName)) {
+            rmdirRecursive($dirName.'/'.$fileName);
+        }
+        
+        $finalName = $fileName;
+        $fileName = '.'.$fileName;
         mkdir($dirName.'/'.$fileName, Faceted::FOLDER_PRIVILEGES);
 
         $json = parent::generate($dirName);
@@ -109,5 +118,8 @@ class Faceted extends FacetedJson {
             $html = '<code><a id="1" />1) '.substr($html, 6);
             file_put_contents($dirName.'/'.$fileName.$path.'.html', $html);
         }
+        
+        rename($dirName.'/'.$fileName, $dirName.'/'.$finalName);
+
     }
 }
