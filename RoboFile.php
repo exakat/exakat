@@ -814,6 +814,7 @@ SQL
     }
 
     public function checkData() {
+        //php_constant_arguments.json
         $functions = json_decode(file_get_contents('data/php_constant_arguments.json'));
         $php_constants = parse_ini_file('data/php_constants.ini');
         $php_constants = $php_constants['constants'];
@@ -830,8 +831,13 @@ SQL
                 }
             }
         }
-        
-        print "\n $total missing constants\n";
+
+        //methods.json
+        $sqlite = new Sqlite3('data/methods.sqlite');
+        // function column must be lowercase
+        $sqlite->query('UPDATE bugfixes SET function=LOWER(function)');
+        unset($sqlite);
+
     }
 }
 

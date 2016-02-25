@@ -122,7 +122,7 @@ foreach($blocks as $block) {
                     }
 
                     ++$withFunction;
-                    $lafunction = $r[0];
+                    $lafunction = strtolower($r[0]);
 //                    print "$version\t$lasection\t".$lafunction."\t{$l[1]}\t{$l[2]}\n";
                     
                     $res = $sqlite->query('SELECT * FROM bugfixes WHERE bugs='.$l[1]);
