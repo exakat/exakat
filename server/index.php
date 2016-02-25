@@ -43,6 +43,18 @@ function archive($path) {
         exit;
     }
     
+    if (file_exists(__DIR__.'/../progress')) {
+        $status = json_decode(file_get_contents(__DIR__.'/../progress/jobqueue.exakat'));
+        if (substr($status->job, 0, strlen($project)) == $project && $status->progress < 100) {
+            print "No such report as '".htmlentities($type)."'\n";
+            exit;
+        }
+    }
+    $report = __DIR__.'/../projects/'.$project.'/'.$types[$type];
+    if (!file_exists($report)) {
+        exit;
+    }
+    
     $archive = './projects/'.$project.'/'.$types[$type].'.'.$compression;
 
     if (!file_exists($archive)) {
