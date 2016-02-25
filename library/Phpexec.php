@@ -187,6 +187,14 @@ class Phpexec {
         return $this->phpexec;
     }
 
+    public function isValid() {
+        if (empty($this->phpexec)) { 
+            return false;
+        }
+        $res = shell_exec($this->phpexec.' -v 2>&1');
+        return strpos($res, 'The PHP Group') !== false;
+    }
+
     public function compile($file) {
         $shell = shell_exec($this->phpexec.' -l '.escapeshellarg($file).' 2>&1');
         $shell = preg_replace('/(PHP Warning|Warning|Strict Standards|PHP Warning|PHP Strict Standards|PHP Deprecated|Deprecated): .*?\n/i', '', $shell);
