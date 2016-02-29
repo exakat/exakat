@@ -36,13 +36,13 @@ class AutoloadUsage extends Analyzer\Analyzer {
                                  'spl_classes',
                                  'spl_object_hash');
         $this->atomFunctionIs($functions);
-        $this->prepareQuery();    
+        $this->prepareQuery();
 
         $this->atomIs('Function')
              ->outIs('NAME')
              ->code('__autoload')
              ->back('first')    ;
-        $this->prepareQuery();    
+        $this->prepareQuery();
 
     }
 }
