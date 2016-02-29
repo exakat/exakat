@@ -1,4 +1,4 @@
-Version 0.5.4 (Nezha, Coming up)
+Version 0.5.5 (Immortal Ruyi, Coming up)
 + Architecture
     +
 + Report
@@ -8,7 +8,20 @@ Version 0.5.4 (Nezha, Coming up)
 + Tokenizer
     + 
 
-Version 0.5.3 (Li Jing, 2015-02-22)
+Version 0.5.4 (Nezha, 2016-02-29)
++ Architecture
+    + Removed some shell_exec() to help with portability
+    + Clean command now rebuilds an empty datastore
+    + Check the availability of php binaries before using
+    + Produce report in a hidden folder, then push it
++ Report
+    + Report the list of bug fixes that apply to code
++ Analyzer
+    + Help using preg_match_all options
++ Tokenizer
+    + Fixed a bug with reference and instanceof
+
+Version 0.5.3 (Li Jing, 2016-02-22)
 + Architecture
     + More UT
     + Supports symlinks for neo4j's folder
