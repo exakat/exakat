@@ -742,7 +742,7 @@ SQL
 
         preg_match('/const VERSION = \'(\d+.\d+.\d+)\'/is', $php, $version);
         $version = $version[1];
-        preg_match('/const BUILD = \'(\d+)\'/is', $php, $build);
+        preg_match('/const BUILD = (\d+)/is', $php, $build);
         $build = $build[1];
         
 //        $md = file_get_contents('docs/manual.md');
