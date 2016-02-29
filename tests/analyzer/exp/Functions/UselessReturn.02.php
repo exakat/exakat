@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array('function __clone( ) { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('function __construct( ) { /**/ } ', 
+                      'function __destruct( ) { /**/ } ',
+                      'function usableReturn( ) { /**/ } ');
 
 ?>

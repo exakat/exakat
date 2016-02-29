@@ -9,6 +9,10 @@ class x {
     
     function usableReturn() {
     }
+
+    function __clone() {
+        return $this;
+    }
 }
 
 
