@@ -71,7 +71,9 @@ class Clean extends Tasks {
                               'bigArrays.txt',
                               'counts.sqlite',
                               'stats.txt',
-                              'dump.sqlite'
+                              'dump.sqlite',
+                              'faceted.zip',
+                              'faceted2.zip',
                              );
         $total = 0;
         foreach($filesToErase as $file) {
@@ -82,8 +84,10 @@ class Clean extends Tasks {
                 ++$total;
             }
         }
-        
         display("Removed $total files\n");
+
+        $this->datastore = new \Datastore($config, \Datastore::CREATE);
+        display("Recreating database\n");
     }
 }
 
