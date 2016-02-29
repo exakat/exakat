@@ -50,11 +50,15 @@ class Doctor extends Tasks {
 
     private function checkPreRequisite($config) {
 // Compulsory
+        $stats['exakat']['version'] = \Exakat::VERSION;
+        $stats['exakat']['build'] = \Exakat::BUILD;
+
         // check for PHP
-        $stats['PHP']['version'] = phpversion();
-        $stats['PHP']['curl']    = extension_loaded('curl')        ? 'Yes' : 'No';
-        $stats['PHP']['sqlite3'] = extension_loaded('sqlite3')     ? 'Yes' : 'No';
-        $stats['PHP']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No';
+        $stats['PHP']['version']   = phpversion();
+        $stats['PHP']['curl']      = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it)';
+        $stats['PHP']['hash']      = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it)';
+        $stats['PHP']['sqlite3']   = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it)';
+        $stats['PHP']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it)';
 
         // java
         $res = shell_exec('java -version 2>&1');
@@ -76,7 +80,7 @@ class Doctor extends Tasks {
 
         // neo4j
         if ($config->neo4j_folder === false) {
-            $stats['neo4j']['installed'] = 'Couldn\'t find the path for neo4j in the config/config.ini. Please, check it.';
+            $stats['neo4j']['installed'] = 'Couldn\'t find the path for neo4j from the config/config.ini : read value is "'.$config->neo4j_folder.'". Please, check it.';
         } elseif (!file_exists($config->neo4j_folder)) {
             $stats['neo4j']['installed'] = 'No (folder : '.$config->neo4j_folder.')';
         } else {
@@ -141,8 +145,10 @@ class Doctor extends Tasks {
             $stats['neo4j']['scriptFolder'] = file_exists($config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
             if ($stats['neo4j']['scriptFolder'] == 'No') {
                 mkdir($config->neo4j_folder.'/scripts/', 0755);
+                file_put_contents($config->neo4j_folder.'/scripts/exakat.txt', 'This folder and this file were created by exakat.');
                 $stats['neo4j']['scriptFolder'] = file_exists($config->projects_root.'/neo4j/scripts/') ? 'Yes' : 'No';
             }
+            $stats['neo4j']['Neo4J for exakat'] = file_exists($config->projects_root.'/neo4j/scripts/exakat.txt') ? 'Yes' : 'No (Warning : make sure exakat is not trying to access an existing Neo4J database.)';
             
             $pidPath = $config->neo4j_folder.'/conf/neo4j-service.pid';
             if (file_exists($pidPath)) {
@@ -172,6 +178,9 @@ class Doctor extends Tasks {
                     $stats['neo4j']['gremlin-installation'] = 'Install gremlin plugin for neo4j';
                 }
             }
+            
+            $stats['neo4j']['$NEO4J_HOME'] = getenv('NEO4J_HOME');
+            $stats['neo4j']['$NEO4J_HOME / config'] = realpath(getenv('NEO4J_HOME')) === realpath($config->neo4j_folder) ? 'Same' : 'Different';
         }
 
         return $stats;
@@ -187,11 +196,24 @@ class Doctor extends Tasks {
 
         if (!file_exists($config->projects_root.'/config/config.ini')) {
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
+            
+            $neo4j_folder = get_env('NEO4J_HOME');
+            if (empty($neo4j_folder)) {
+                $neo4j_folder = 'neo4j'; // Local Installation
+            } elseif (!file_exists($neo4j_folder)) {
+                $neo4j_folder = 'neo4j'; // Local Installation
+            } elseif (!file_exists($neo4j_folder.'/scripts/')) {
+                // This Neo4J has no 'scripts' folder and we use it! Not our database
+                $neo4j_folder = 'neo4j'; // Local Installation
+            } elseif (!file_exists($neo4j_folder.'/scripts/exakat.txt')) {
+                // This Neo4J has no 'exakat.txt' file : Not an exakat installation! 
+                $neo4j_folder = 'neo4j'; // Local Installation
+            }
             $ini = <<<INI
 ; where and which PHP executable are available
 neo4j_host     = '127.0.0.1';
 neo4j_port     = '7474';
-neo4j_folder   = 'neo4j';
+neo4j_folder   = '$neo4j_folder';
 neo4j_login    = 'admin';
 neo4j_password = 'admin';
 
@@ -283,6 +305,8 @@ INI;
             $version = trim(shell_exec($config->php53.' -r "echo phpversion();" 2>&1'));
             if (strpos($version, 'not found') !== false) {
                 $stats['PHP 5.3']['installed'] = 'No';
+            } elseif (strpos($version, 'No such file') !== false) {
+                $stats['PHP 5.3']['installed'] = 'No';
             } else {
                 $stats['PHP 5.3']['installed'] = 'Yes';
                 $stats['PHP 5.3']['version'] = $version;
@@ -303,6 +327,8 @@ INI;
             $stats['PHP 5.4']['configured'] = 'Yes';
             $version = trim(shell_exec($config->php54.' -r "echo phpversion();" 2>&1'));
             if (strpos($version, 'not found') !== false) {
+                $stats['PHP 5.4']['installed'] = 'No';
+            } elseif (strpos($version, 'No such file') !== false) {
                 $stats['PHP 5.4']['installed'] = 'No';
             } else {
                 $stats['PHP 5.4']['installed'] = 'Yes';
@@ -325,6 +351,8 @@ INI;
             $version = trim(shell_exec($config->php55.' -r "echo phpversion();" 2>&1'));
             if (strpos($version, 'not found') !== false) {
                 $stats['PHP 5.5']['installed'] = 'No';
+            } elseif (strpos($version, 'No such file') !== false) {
+                $stats['PHP 5.5']['installed'] = 'No';
             } else {
                 $stats['PHP 5.5']['installed'] = 'Yes';
                 $stats['PHP 5.5']['version'] = $version;
@@ -345,6 +373,8 @@ INI;
             $stats['PHP 5.6']['configured'] = $config->php56;
             $version = trim(shell_exec($config->php56.' -r "echo phpversion();" 2>&1'));
             if (strpos($version, 'not found') !== false) {
+                $stats['PHP 5.6']['installed'] = 'No';
+            } elseif (strpos($version, 'No such file') !== false) {
                 $stats['PHP 5.6']['installed'] = 'No';
             } else {
                 $stats['PHP 5.6']['installed'] = 'Yes';
@@ -367,6 +397,8 @@ INI;
             $version = shell_exec($config->php70.' -r "echo phpversion();" 2>&1');
             if (strpos($version, 'not found') !== false) {
                 $stats['PHP 7.0']['installed'] = 'No';
+            } elseif (strpos($version, 'No such file') !== false) {
+                $stats['PHP 7.0']['installed'] = 'No';
             } else {
                 $stats['PHP 7.0']['version'] = $version;
                 if (substr($version, 0, 3) != '7.0') {
@@ -386,6 +418,8 @@ INI;
             $stats['PHP 7.1']['configured'] = 'Yes';
             $version = shell_exec($config->php71.' -r "echo phpversion();" 2>&1');
             if (strpos($version, 'not found') !== false) {
+                $stats['PHP 7.1']['installed'] = 'No';
+            } elseif (strpos($version, 'No such file') !== false) {
                 $stats['PHP 7.1']['installed'] = 'No';
             } else {
                 $stats['PHP 7.1']['version'] = $version;

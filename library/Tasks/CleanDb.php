@@ -34,6 +34,11 @@ class CleanDb extends Tasks {
     public function run(\Config $config) {
         $this->config = $config;
 
+        if (!file_exists($config->neo4j_folder.'/scripts/exakat.txt')) {
+            display('Warning : This Neo4j installation doesn\'t seem to be used by Exakat. Please, clean it manually and run "doctor".');
+            return false;
+        }
+        
         if ($config->quick) {
             $this->restartNeo4j();
             $this->cleanScripts();
