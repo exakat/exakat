@@ -82,90 +82,117 @@ class Project extends Tasks {
                                                'exakat_build' => \Exakat::BUILD,
                                          ));
 
-        $thread = new \Thread();
         display("Running project '$project'\n");
 
         display("Cleaning DB\n");
-        shell_exec($config->php . ' '.$config->executable.' cleandb -v');
-        $this->logTime('Files');
+        $analyze = new CleanDb();
+        $analyze->run($config);
+        unset($analyze);
+        $this->logTime('CleanDb');
         $this->updateProgress($progress++);
 
         display("Search for external libraries\n");
-        shell_exec($config->php . ' '.$config->executable.' findextlib -p '.$project.' -v -u > '.$config->projects_root.'/projects/'.$project.'/log/findExtlib.log');
-        $this->logTime('Find External Libraries');
-        $thread->waitForAll();
+        $args = array ( 1 => 'findextlib',
+                        2 => '-p',
+                        3 => $config->project,
+                        4 => '-u',
+                        );
+        
+        $configThema = \Config::push($args);
+
+        $analyze = new FindExternalLibraries();
+        $analyze->run($configThema);
+        unset($report);
+        $this->updateProgress($progress++);
+
+        \Config::pop();
+        unset($analyze);
         $this->updateProgress($progress++);
 
         display("Running files\n");
-        shell_exec($config->php . ' '.$config->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
+        $analyze = new Files();
+        $analyze->run($config);
+        unset($analyze);
         $this->logTime('Files');
-        $thread->waitForAll();
         $this->updateProgress($progress++);
 
-        display("waited For All\n");
         $this->checkTokenLimit();
 
-        shell_exec($config->php . ' '.$config->executable.' load -v -p '.$project. ' > '.$config->projects_root.'/projects/'.$project.'/log/load.final.log' );
+        $analyze = new Load();
+        $analyze->run($config);
+        unset($analyze);
         display("Project loaded\n");
         $this->logTime('Loading');
         $this->updateProgress($progress++);
 
-        $res = shell_exec($config->php . ' '.$config->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
+        $analyze = new Build_root();
+        $analyze->run($config);
+        unset($analyze);
         display("Build root\n");
         $this->logTime('Build_root');
         $this->updateProgress($progress++);
 
-        $res = shell_exec($config->php . ' '.$config->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
+        $analyze = new Tokenizer();
+        $analyze->run($config);
+        unset($analyze);
         $this->logTime('Tokenizer');
         display("Project tokenized\n");
         $this->updateProgress($progress++);
 
-        $thread->run($config->php . ' '.$config->executable.' magicnumber -p '.$project);
+        $analyze = new Magicnumber();
+        $analyze->run($config);
+        unset($analyze);
         $this->updateProgress($progress++);
 
-        $thread->run($config->php . ' '.$config->executable.' errors > '.$config->projects_root.'/projects/'.$project.'/log/errors.log');
+        $analyze = new Errors();
+        $analyze->run($config);
+        unset($analyze);
         display("Got the errors (if any)\n");
         $this->updateProgress($progress++);
 
-        $thread->run($config->php . ' '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
+        $analyze = new Stat();
+        $analyze->run($config);
+        unset($analyze);
         display("Stats\n");
         $this->updateProgress($progress++);
 
-        $thread->run($config->php . ' '.$config->executable.' log2csv -p '.$project);
-
+        $analyze = new Log2csv();
+        $analyze->run($config);
+        unset($analyze);
         $this->logTime('Stats');
 
+        // Dump is a child process
         exec($config->php . ' '.$config->executable.' dump -p '.$config->project.'   > /dev/null &');
         display('Started dump process');
 
         foreach($this->themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
 
-                $args = array ( 1 => 'analyze',
-                                2 => '-p',
-                                3 => $config->project,
-                                4 => '-T',
-                                5 => trim($theme, '"'), // No need to protect anymore, as this is internal
-                                6 => '-norefresh',
-                                );
+            $args = array ( 1 => 'analyze',
+                            2 => '-p',
+                            3 => $config->project,
+                            4 => '-T',
+                            5 => trim($theme, '"'), // No need to protect anymore, as this is internal
+                            6 => '-norefresh',
+                            );
             
-                try {
-                    $configThema = \Config::push($args);
+            try {
+                $configThema = \Config::push($args);
 
-                    $analyze = new Analyze();
-                    $analyze->run($configThema);
-                    unset($report);
-                    
-                    rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
-                    $this->updateProgress($progress++);
+                $analyze = new Analyze();
+                $analyze->run($configThema);
+                unset($report);
+                
+                rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
+                $this->updateProgress($progress++);
 
-                    \Config::pop();
-                } catch (\Exception $e) {
-                    echo "Error while running the Analyze $theme \n",
-                         $e->getMessage();
-                    file_put_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
-                    die();
-                }
+                \Config::pop();
+            } catch (\Exception $e) {
+                echo "Error while running the Analyze $theme \n",
+                     $e->getMessage();
+                file_put_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+                die();
+            }
         }
 
         display("Analyzed project\n");
@@ -175,7 +202,6 @@ class Project extends Tasks {
 /*
         check on dump ? 
 */
-//        $thread->run('php '.$config->executable.' dump -p '.$project);
 
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
@@ -211,7 +237,9 @@ class Project extends Tasks {
 
         display("Reported project\n");
 
-        shell_exec($config->php . ' '.$config->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
+        $analyze = new Stat();
+        $analyze->run($config);
+        unset($analyze);
         display("Stats 2\n");
         
         $audit_end = time();
