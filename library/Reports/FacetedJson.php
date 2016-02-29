@@ -28,7 +28,7 @@ class FacetedJson extends Reports {
     public function generateFileReport($report) {}
 
     public function generate($dirName, $fileName = null) {
-        $sqlite      = new \sqlite3($dirName.'/dump.sqlite');
+        $sqlite      = new \sqlite3($dirName.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
 
         $sqlQuery = <<<SQL
 SELECT  id AS id,

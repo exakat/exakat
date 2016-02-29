@@ -32,7 +32,7 @@ class Faceted extends FacetedJson {
             return "Can't produce report to stdout\n";
         }
 
-        $sqlite      = new \sqlite3($dirName.'/dump.sqlite');
+        $sqlite      = new \sqlite3($dirName.'/dump.sqlite', SQLITE3_OPEN_READONLY);
         $config = \Config::factory();
 
         // Clean final destination
@@ -71,8 +71,6 @@ class Faceted extends FacetedJson {
 //        $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 
         file_put_contents($dirName.'/'.$fileName.'/index.html', $html);        
-
-        $sqlite      = new \sqlite3($dirName.'/dump.sqlite');
 
         $errors = json_decode($json);
         $docsList = array();

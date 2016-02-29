@@ -43,13 +43,13 @@ class Datastore {
                 unlink($this->sqlitePath);
             }
             // force creation 
-            self::$sqliteWrite = new \sqlite3($this->sqlitePath);
+            self::$sqliteWrite = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
             self::$sqliteWrite->close();
             self::$sqliteWrite = null;
         }
         
         if (self::$sqliteWrite === null) {
-            self::$sqliteWrite = new \sqlite3($this->sqlitePath);
+            self::$sqliteWrite = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
             self::$sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
             // open the read connexion AFTER the write, to have the sqlite databse created
             self::$sqliteRead = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
@@ -406,7 +406,7 @@ SQLITE;
         self::$sqliteRead->close();
         self::$sqliteWrite->close();
         
-        self::$sqliteWrite = new \sqlite3($this->sqlitePath);
+        self::$sqliteWrite = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
         self::$sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
         // open the read connexion AFTER the write, to have the sqlite databse created
         self::$sqliteRead = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);

@@ -112,8 +112,8 @@ class Devoops extends Reports {
         copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
-        $this->dump      = new \sqlite3($folder.'/dump.sqlite');
-        $this->datastore = new \sqlite3($folder.'/datastore.sqlite');
+        $this->dump      = new \sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        $this->datastore = new \sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
         
         // Compatibility
         $compatibility = array('Compilation' => 'Compilation');
@@ -1545,7 +1545,7 @@ TEXT
         $info = array();
 
         while($row = $found->fetchArray()) {
-            $function = substr($row['fullcode'], 0, strpos($row['fullcode'], '('));
+            $function = strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')));
             if (isset($reported[$function])) { continue; }
             $reported[$function] = 1;
 
