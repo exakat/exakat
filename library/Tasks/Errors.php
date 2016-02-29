@@ -55,7 +55,8 @@ class Errors extends Tasks {
             $output = $this->text_encode($stats);
         }
         
-        echo $output;
+        file_put_contents($config->projects_root.'/projects/'.$config->project.'/log/errors.log', $output);
+        display($output);
     }
 
     private function table_encode($stats) {
