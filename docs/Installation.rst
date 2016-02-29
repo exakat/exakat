@@ -146,9 +146,9 @@ Then, in command line :
 Various versions of PHP
 +++++++++++++++++++++++++++++
 
-You need one version of PHP (at least) to run exakat. This version needs the `curl` and `sqlite3` extensions.  
+You need one version of PHP (at least) to run exakat. This version needs the [`curl`](http://www.php.net/curl), [`hash`](http://www.php.net/hash), [`tokenizer`](http://www.php.net/tokenizer) and [`sqlite3`](http://www.php.net/sqlite3) extensions. They all are part of the core. 
 
-Extra PHP-CLI versions allow more checks on the code. They only need to have the tokenizer extension available.  
+Extra PHP-CLI versions allow more checks on the code. They only need to have the [`tokenizer`](http://www.php.net/tokenizer) extension available.  
 
 Exakat recommends PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6 and 7.1-dev.
 
@@ -310,9 +310,11 @@ You may now removed the git repository for gremlin-plugin.
 Various versions of PHP
 #######################
 
-You need one version of PHP (at least) to run exakat. This version require the `curl`, `sqlite3` and `tokenizer` extensions.
+You need one version of PHP (at least) to run exakat. This version needs the [`curl`](http://www.php.net/curl), [`hash`](http://www.php.net/hash), [`tokenizer`](http://www.php.net/tokenizer) and [`sqlite3`](http://www.php.net/sqlite3) extensions. They all are part of the core. 
 
-Extra PHP-CLI versions will bring your more checks on the code. Those versions require only the `tokenizer` extension. You may reduce the load of those binaries by disabling all other extensions.
+Extra PHP-CLI versions allow more checks on the code. They only need to have the [`tokenizer`](http://www.php.net/tokenizer) extension available.  
+
+You may reduce the load of those binaries by disabling all other extensions.
 
 ::
 
@@ -381,9 +383,9 @@ There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plug
 
 Various versions of PHP
 +++++++++++++++++++++++++++++
-You need one version of PHP (at least) to run exakat. This version needs the `curl` and `sqlite3` extensions.  
+You need one version of PHP (at least) to run exakat. This version needs the [`curl`](http://www.php.net/curl), [`hash`](http://www.php.net/hash), [`tokenizer`](http://www.php.net/tokenizer) and [`sqlite3`](http://www.php.net/sqlite3) extensions. They all are part of the core. 
 
-Extra PHP-CLI versions will bring your more checks on the code. 
+Extra PHP-CLI versions allow more checks on the code. They only need to have the [`tokenizer`](http://www.php.net/tokenizer) extension available.  
 
 We recommend running PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.0 and 7.1-dev, as they may be used with exakat.
 
