@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 15 Feb 2016 13:03:15 +0000
-.. comment: Generation hash : b773761542608cee07c9fc652e3e706d7da01f61
+.. comment: Generation date : Mon, 29 Feb 2016 10:39:33 +0000
+.. comment: Generation hash : 16dadffb4283cb09a811ebb5a89276776cfbde3b
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 226 analysis
+Total : 227 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -288,6 +288,7 @@ Total : 226 analysis
 * :ref:`include\_once() Usage <include\_once()-usage>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
 * :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
+* :ref:`preg\_match\_all() Flag <preg\_match\_all()-flag>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`var\_dump()... Usage <var\_dump()...-usage>`
 

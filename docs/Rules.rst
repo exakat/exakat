@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 15 Feb 2016 13:03:15 +0000
-.. comment: Generation hash : b773761542608cee07c9fc652e3e706d7da01f61
+.. comment: Generation date : Mon, 29 Feb 2016 10:39:33 +0000
+.. comment: Generation hash : 16dadffb4283cb09a811ebb5a89276776cfbde3b
 
 
 .. _$http\_raw\_post\_data:
@@ -6046,6 +6046,50 @@ Always use an empty variable a second parameter to parse\_str(), so as to collec
 +--------------+-------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Security`                                                                                       |
 +--------------+-------------------------------------------------------------------------------------------------------+
+
+
+
+.. _preg\_match\_all()-flag:
+
+preg\_match\_all() Flag
+#######################
+
+
+preg\_match\_all() has an option to configure the structure of the results : it is either by capturing parenthesis (by default), or by result sets. 
+
+The second option is the most interesting when the following foreach() loop has to manipulate several captured strings at the same time. No need to use an index in the first array and use it in the other arrays.
+
+.. code-block:: php
+
+   <?php
+   $string = ababab;
+   
+   // default behavior
+   preg\_match\_all('/(a)(b)/', $string, $r);
+   $found = '';
+   foreach($r[1] as $id => $s) {
+       $found .= $s.$r[2][$id];
+   }
+   
+   // better behavior
+   preg\_match\_all('/(a)(b)/', $string, $r, PREG\_SET\_ORDER);
+   $found = '';
+   foreach($r as $s) {
+       $found .= $s[1].$s[2];
+   }
+   
+   ?>
+
+
+The second syntax is easier to read and may be marginally faster to execute (preg\_match\_all and foreach).
+
++--------------+----------------------+
+| Command Line | Php/PregMatchAllFlag |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
 
 
 
