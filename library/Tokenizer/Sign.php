@@ -27,7 +27,8 @@ class Sign extends TokenAuto {
     static public $operators = array('T_PLUS', 'T_MINUS');
     static public $operands = array('Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall', 'Null',
                                     'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis',
-                                    'Methodcall', 'Cast', 'Constant', 'Boolean', 'Identifier', 'Assignation', 'Staticconstant');
+                                    'Methodcall', 'Cast', 'Constant', 'Boolean', 'Identifier', 'Assignation', 'Staticconstant',
+                                    'Power');
     static public $atom = 'Sign';
 
     public function _check() {
@@ -58,16 +59,16 @@ class Sign extends TokenAuto {
         $this->conditions = array( -1 => $prerequisite,
                                     0 => array('token'      => Sign::$operators,
                                                'atom'       => 'none'),
-                                    1 => array('atom'       => 'Integer'),
-                                    2 => array('filterOut'  => Multiplication::$operators),
+                                    1 => array('atom'       => array('Integer', 'Float')),
+                                    2 => array('filterOut'  => array_merge(Multiplication::$operators, Power::$operators)),
                                  );
         
         $this->actions = array('atom'        => 'Integer',
                                'minusIntval' => true,
                                'sign'        => true,
-                               'property'    => array('scalar' => true,
+                               'property'    => array('scalar'      => true,
                                                       'instruction' => true,
-                                                      'signed' => true),
+                                                      'signed'      => true),
                                'cleanIndex'  => true
                                );
         $this->checkAuto();
