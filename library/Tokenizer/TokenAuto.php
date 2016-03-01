@@ -2663,7 +2663,7 @@ x.out('CONCAT').each{
 /* emptyHeredoc */
 
 concat = g.addVertex(null, [code:'', fullcode:'', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
-content = g.addVertex(null, [code:'', fullcode:'', atom:'String', token:'T_ENCAPSED_AND_WHITESPACE', virtual:true, line:it.line, rank:0]);
+content = g.addVertex(null, [code:'', fullcode:'', atom:'String', token:'T_ENCAPSED_AND_WHITESPACE', virtual:true, line:it.line, rank:0, noDelimiter:'']);
 
 g.addEdge(it, concat, 'CONTAINS');
 g.addEdge(concat, content, 'CONCAT');
