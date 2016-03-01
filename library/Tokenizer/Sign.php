@@ -59,11 +59,29 @@ class Sign extends TokenAuto {
         $this->conditions = array( -1 => $prerequisite,
                                     0 => array('token'      => Sign::$operators,
                                                'atom'       => 'none'),
-                                    1 => array('atom'       => array('Integer', 'Float')),
+                                    1 => array('atom'       => 'Integer'),
                                     2 => array('filterOut'  => array_merge(Multiplication::$operators, Power::$operators)),
                                  );
         
         $this->actions = array('atom'        => 'Integer',
+                               'minusIntval' => true,
+                               'sign'        => true,
+                               'property'    => array('scalar'      => true,
+                                                      'instruction' => true,
+                                                      'signed'      => true),
+                               'cleanIndex'  => true
+                               );
+        $this->checkAuto();
+
+        //  + -1.0e2  (special case for Float)
+        $this->conditions = array( -1 => $prerequisite,
+                                    0 => array('token'      => Sign::$operators,
+                                               'atom'       => 'none'),
+                                    1 => array('atom'       => 'Float'),
+                                    2 => array('filterOut'  => array_merge(Multiplication::$operators, Power::$operators)),
+                                 );
+        
+        $this->actions = array('atom'        => 'Float',
                                'minusIntval' => true,
                                'sign'        => true,
                                'property'    => array('scalar'      => true,
@@ -78,9 +96,10 @@ class Sign extends TokenAuto {
         $this->conditions = array( -1 => $prerequisite,
                                     0 => array('token'      => Sign::$operators),
                                     1 => array('atom'       => Sign::$operands),
-                                    2 => array('filterOut'  => array_merge( Methodcall::$operators, Parenthesis::$operators,
-                                                                            _Array::$operators,     Block::$operators,
-                                                                            Property::$operators,   Staticproperty::$operators)),
+                                    2 => array('filterOut'  => array_merge( Methodcall::$operators,     Parenthesis::$operators,
+                                                                            _Array::$operators,         Block::$operators,
+                                                                            Property::$operators,       Staticproperty::$operators,
+                                                                            Multiplication::$operators, Power::$operators)),
                                  );
         
         $this->actions = array('transform'    => array( 1 => 'SIGN'),
@@ -120,7 +139,7 @@ class Sign extends TokenAuto {
         
         $this->actions = array('transform'  => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
-                               'property'   => array('scalar' => true,
+                               'property'   => array('scalar'      => true,
                                                      'instruction' => true),
                                'cleanIndex' => true);
         $this->checkAuto();
@@ -130,7 +149,7 @@ class Sign extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-if (fullcode.out('SIGN').count() > 0) {
+if (fullcode.out('SIGN').any()) {
     fullcode.fullcode = fullcode.code + fullcode.out("SIGN").next().fullcode;
 } else {
     fullcode.fullcode = fullcode.code;

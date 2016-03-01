@@ -32,7 +32,6 @@ class Power extends TokenAuto {
                                                                          Staticproperty::$operators,
                                                                          Concatenation::$operators,
                                                                          Preplusplus::$operators
-//                                                                         Sign::$operators
                                                                          )),
                                   -1 => array('atom'  => Multiplication::$operands ),
                                    0 => array('token' => Power::$operators,

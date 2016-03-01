@@ -39,14 +39,18 @@ Label : CODE
     Label : RIGHT
       4
   Label : ELEMENT
-    **
-    Label : LEFT
-      1
-    Label : RIGHT
-      3
+    +
+    Label : SIGN
+      **
+      Label : LEFT
+        1
+      Label : RIGHT
+        3
   Label : ELEMENT
-    **
-    Label : LEFT
-      2
-    Label : RIGHT
-      -3
+    +
+    Label : SIGN
+      **
+      Label : LEFT
+        2
+      Label : RIGHT
+        -3

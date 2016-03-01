@@ -1,8 +1,4 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    -
-    Label : SIGN
-      1.2
+  -1.2
