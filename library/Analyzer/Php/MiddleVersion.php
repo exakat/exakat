@@ -24,13 +24,40 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class MiddleVersion extends Analyzer\Analyzer {
-    public function analyze() {
+    private $bugfixes = array();
+
+    public function dependsOn() {
         $data = new \Data\Methods();
-        $bugfixes = $data->getBugFixes();
+        $this->bugfixes = $data->getBugFixes();
         
-        $functions = array_unique(array_keys($bugfixes));
+        $depends = array();
+        foreach($this->bugfixes as $bugfix) {
+            if (!empty($bugfix['analyzer'])) {
+                $depends[] = $bugfix['analyzer'];
+            }
+        }
+        
+        return $depends;
+    }
+    
+    public function analyze() {
+        // bugfixes based on functions
+        $functions = array();
+        foreach($this->bugfixes as $bugfix) {
+            if (!empty($bugfix['function'])) {
+                $functions[] = $bugfix['function'];
+            }
+        }
         $this->atomFunctionIs($this->makeFullNsPath($functions));
         $this->prepareQuery();
+
+        // bugfixes based on analyzers
+        foreach($this->bugfixes as $bugfix) {
+            if (!empty($bugfix['analyzer'])) {
+                $this->analyzerIs($bugfix['analyzer']);
+                $this->prepareQuery();
+            }
+        }
     }
 }
 

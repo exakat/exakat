@@ -158,7 +158,7 @@ SQL;
         $res = $this->sqlite->query($query);
 
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $return[$row['function']] = $row;
+            $return[] = $row;
         }
 
         return $return;

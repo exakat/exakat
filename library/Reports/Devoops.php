@@ -1534,7 +1534,7 @@ TEXT
     private function Bugfixes() {
         $css = new \Stdclass();
         $css->displayTitles = true;
-        $css->titles = array('Title', 'Function', 'solved In', 'solved In', 'solved In', 'bugs.php.net', 'CVE');
+        $css->titles = array('Title', 'Solved In 7.0', 'Solved In 5.6', 'Solved In 5.5', 'Solved In php-src', 'bugs.php.net', 'CVE');
         $css->readOrder = $css->titles;
 
         $data = new \Data\Methods();
@@ -1544,24 +1544,67 @@ TEXT
         $reported = array();
         $info = array();
 
+        $rows = array();
         while($row = $found->fetchArray()) {
-            $function = strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')));
-            if (isset($reported[$function])) { continue; }
-            $reported[$function] = 1;
+            $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
+        }
+        
+        foreach($bugfixes as $bugfix) {
+            if (!empty($bugfix['function'])) {
+                if (!isset($rows[$bugfix['function']])) { continue; }
 
-            $array = array('title'      => $bugfixes[$function]['title'],
-                           'function'   => $function,
-                           'solvedIn70' => $bugfixes[$function]['solvedIn70'] ? $bugfixes[$function]['solvedIn70'] : '-',
-                           'solvedIn56' => $bugfixes[$function]['solvedIn56'] ? $bugfixes[$function]['solvedIn56'] : '-',
-                           'solvedIn55' => $bugfixes[$function]['solvedIn55'] ? $bugfixes[$function]['solvedIn55'] : '-',
-                           'bug'        => '<a href="'.$bugfixes[$function]['bugs'].'">#'.$bugfixes[$function]['bugs'].'</a>',
-                           'cve'        => '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$bugfixes[$function]['cve'].'">'.$bugfixes[$function]['cve'].'</a>',
-                           );
+                $cve = $this->Bugfixes_cve($bugfix['cve']);
+
+                $array = array('title'       => $bugfix['title'],
+                               'solvedIn70'  => $bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-',
+                               'solvedIn56'  => $bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-',
+                               'solvedIn55'  => $bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-',
+                               'solvedInDev' => $bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-',
+                               'bug'         => '<a href="'.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a>',
+                               'cve'         => $cve,
+                               );
+            } elseif (!empty($bugfix['analyzer'])) {
+                $subanalyze = $this->dump->querySingle('SELECT COUNT(*) FROM results WHERE analyzer = "'.$bugfix['analyzer'].'"');
+                
+                $cve = $this->Bugfixes_cve($bugfix['cve']);
+
+                if ($subanalyze > 0) {
+                    $array = array('title'       => $bugfix['title'],
+                                   'solvedIn70'  => $bugfix['solvedIn70']  ? $bugfix['solvedIn70'] : '-',
+                                   'solvedIn56'  => $bugfix['solvedIn56']  ? $bugfix['solvedIn56'] : '-',
+                                   'solvedIn55'  => $bugfix['solvedIn55']  ? $bugfix['solvedIn55'] : '-',
+                                   'solvedInDev' => $bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-',
+                                   'bug'         => 'ext/'.$bugfix['extension'],
+                                   'cve'         => $cve,
+                                   );
+                }
+            } else {
+                continue; // ignore. Possibly some mis-configuration
+            }
 
             $info[] = $array;
         }
 
         return $this->formatCompilationTable($info, $css);
+    }
+    
+    private function Bugfixes_cve($cve) {
+        if (!empty($cve)) {
+            if (strpos($cve, ', ') !== false) {
+                $cves = explode(', ', $cve);
+                $cveHtml = array();
+                foreach($cves as $cve) {
+                    $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+                }
+                $cveHtml = join(', ', $cveHtml);
+            } else {
+                $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+            }
+        } else {
+            $cveHtml = '-';
+        }
+        
+        return $cveHtml;
     }
 
     private function Compilation() {
