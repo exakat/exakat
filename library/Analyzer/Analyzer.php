@@ -178,8 +178,13 @@ abstract class Analyzer {
     }
     
     public static function getInstance($name) {
+        static $instanciated = array();
+        
         if ($analyzer = static::getClass($name)) {
-            return new $analyzer();
+            if (!isset($instanciated[$analyzer])) {
+                $instanciated[$analyzer] = new $analyzer();;
+            }
+            return $instanciated[$analyzer];
         } else {
             display( "No such class as '" . $name . "'\n");
             return null;
