@@ -25,8 +25,10 @@ namespace Tasks;
 
 class Report2 extends Tasks {
     public function run(\Config $config) {
-        $this->checkTokenLimit();
-        
+        if ($config->project == "default") {
+            die("This command requires a project (option -p).\nAborting\n");
+        }
+
         if (!class_exists('\Reports\\'.$config->format)) {
             die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', \Reports\Reports::FORMATS)."\nAborting\n");
         }
