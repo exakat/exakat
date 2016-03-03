@@ -1555,34 +1555,32 @@ TEXT
 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
-                $array = array('title'       => $bugfix['title'],
-                               'solvedIn70'  => $bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-',
-                               'solvedIn56'  => $bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-',
-                               'solvedIn55'  => $bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-',
-                               'solvedInDev' => $bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-',
-                               'bug'         => '<a href="'.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a>',
-                               'cve'         => $cve,
-                               );
+                $info[] = array('title'       => $bugfix['title'],
+                                'solvedIn70'  => $bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-',
+                                'solvedIn56'  => $bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-',
+                                'solvedIn55'  => $bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-',
+                                'solvedInDev' => $bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-',
+                                'bug'         => '<a href="'.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a>',
+                                'cve'         => $cve,
+                                );
             } elseif (!empty($bugfix['analyzer'])) {
                 $subanalyze = $this->dump->querySingle('SELECT COUNT(*) FROM results WHERE analyzer = "'.$bugfix['analyzer'].'"');
                 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
                 if ($subanalyze > 0) {
-                    $array = array('title'       => $bugfix['title'],
-                                   'solvedIn70'  => $bugfix['solvedIn70']  ? $bugfix['solvedIn70'] : '-',
-                                   'solvedIn56'  => $bugfix['solvedIn56']  ? $bugfix['solvedIn56'] : '-',
-                                   'solvedIn55'  => $bugfix['solvedIn55']  ? $bugfix['solvedIn55'] : '-',
-                                   'solvedInDev' => $bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-',
-                                   'bug'         => 'ext/'.$bugfix['extension'],
-                                   'cve'         => $cve,
-                                   );
+                    $info[] = array('title'       => $bugfix['title'],
+                                    'solvedIn70'  => $bugfix['solvedIn70']  ? $bugfix['solvedIn70'] : '-',
+                                    'solvedIn56'  => $bugfix['solvedIn56']  ? $bugfix['solvedIn56'] : '-',
+                                    'solvedIn55'  => $bugfix['solvedIn55']  ? $bugfix['solvedIn55'] : '-',
+                                    'solvedInDev' => $bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-',
+                                    'bug'         => 'ext/'.$bugfix['extension'],
+                                    'cve'         => $cve,
+                                    );
                 }
             } else {
                 continue; // ignore. Possibly some mis-configuration
             }
-
-            $info[] = $array;
         }
 
         return $this->formatCompilationTable($info, $css);
