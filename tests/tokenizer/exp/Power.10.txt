@@ -3,12 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
-    **
-    Label : LEFT
-      -
-      Label : SIGN
+    -
+    Label : SIGN
+      **
+      Label : LEFT
         $x
-    Label : RIGHT
-      +
-      Label : SIGN
+      Label : RIGHT
         1.2
