@@ -17,6 +17,14 @@ if (file_exists('changelog.5.html')) {
     file_put_contents('changelog.5.html', $changelog5);
 }
 
+if (file_exists('NEWS.txt')) {
+    $newsDev = file_get_contents('NEWS.txt');
+} else {
+    $newsDev = file_get_contents('https://raw.githubusercontent.com/php/php-src/master/NEWS');
+    file_put_contents('NEWS.txt', $changelog5);
+}
+
+
 
 print "found ".strlen($changelog)." changelog\n";
 
@@ -84,11 +92,14 @@ foreach($blocks as $block) {
 
 ///// Processing PHP 7.1
 $changelogdev = array();
-$text = file_get_contents('https://raw.githubusercontent.com/php/php-src/master/NEWS');
-if (empty($text)) {
+$newsDev = file_get_contents('https://raw.githubusercontent.com/php/php-src/master/NEWS');
+if (empty($newsDev)) {
     print "Warning, no NEWS provided\n";
 }
+$text = $newsDev;
 
+$total     = 0;
+$processed = 0;
 preg_match_all("/- ([^:]+):\s*(  \. .*?)\n\n/s", $text, $sections, PREG_SET_ORDER);
 foreach($sections as $section) {
     $lasection = $section[1];
@@ -101,8 +112,10 @@ foreach($sections as $section) {
     
     foreach($features[0] as $row) {
         $bugfix = trim(str_replace("\n   ", '', str_replace('  . ', '', $row)));
+        ++$total;
         
         if (preg_match('/(Fixed bug|Fixed buf|Implemented FR) #(\d+) \((.*?)\)\./s', $bugfix, $r)) {
+            ++$processed;
             $log = $r[0];
             $bugid = $r[2];
             $title = $r[3];
@@ -118,6 +131,8 @@ foreach($sections as $section) {
         }
     }
 }
+
+print "\nFinished with NEWS (Dev) : $processed / $total updates founds\n\n";
 
 foreach($changelogdev as $bugid => $section) {
     $res = $sqlite->query('SELECT * FROM bugfixes WHERE bugs='.$bugid);
@@ -230,4 +245,7 @@ foreach($blocks as $block) {
 }
 
 print $final;
+unlink('NEWS.txt');
+unlink('changelog.5.html');
+unlink('changelog.7.html');
 ?>
