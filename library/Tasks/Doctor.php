@@ -197,7 +197,7 @@ class Doctor extends Tasks {
         if (!file_exists($config->projects_root.'/config/config.ini')) {
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             
-            $neo4j_folder = get_env('NEO4J_HOME');
+            $neo4j_folder = getenv('NEO4J_HOME');
             if (empty($neo4j_folder)) {
                 $neo4j_folder = 'neo4j'; // Local Installation
             } elseif (!file_exists($neo4j_folder)) {
