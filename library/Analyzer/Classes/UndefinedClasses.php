@@ -125,6 +125,20 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->noTraitDefinition()
              ->back('first');
         $this->prepareQuery();
+
+        // in a typehint f(someClass $c)
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('CLASS')
+             ->analyzerIsNot('Composer/IsComposerNsname')
+             ->codeIsNot(array('self', 'parent', 'static'))
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Interfaces/IsExtInterface')
+             ->noClassDefinition()
+             ->noInterfaceDefinition()
+             ->noTraitDefinition();
+        $this->prepareQuery();    
     }
 }
 
