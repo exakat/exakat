@@ -34,6 +34,7 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+
         // Variables outside a closure
         $this->atomIs('Variable')
         
@@ -61,9 +62,11 @@ GREMLIN
              ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}.out("ABSTRACT").any() == false')
 
              //This is not an argument of the method
-             ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}
+             ->filter(' code = it.code;
+                        it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}
                                         .out("ARGUMENTS").out("ARGUMENT")
                                         .transform{ a = it; while (a.out("VARIABLE", "LEFT").any()) { a = a.out("VARIABLE", "LEFT").next(); }; a;}
+                                        .has("code", code)
                                         .any() == false')
 
              ->fetchContext(\Analyzer\Analyzer::CONTEXT_OUTSIDE_CLOSURE)
@@ -95,6 +98,15 @@ GREMLIN
 
              //This is not an argument in an abstract method
              ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}.out("ABSTRACT").any() == false')
+
+             //This is not an argument of the method
+             ->filter(' code = it.code;
+                        it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}
+                                        .out("ARGUMENTS").out("ARGUMENT")
+                                        .transform{ a = it; while (a.out("VARIABLE", "LEFT").any()) { a = a.out("VARIABLE", "LEFT").next(); }; a;}
+                                        .has("code", code)
+                                        .any() == false')
+
              ->fetchContext(\Analyzer\Analyzer::CONTEXT_IN_CLOSURE)
 
              ->eachCounted('context["Namespace"] + "/" + context["Class"] + "/" + context["Function"] + "/" + it.code', 1)
