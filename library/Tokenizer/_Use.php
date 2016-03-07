@@ -167,7 +167,7 @@ if (fullcode.groupedUse == true) {
 
 // use a (aka c);
 fullcode.out('USE').has('atom', 'Identifier').each{
-    it.setProperty('originpath', '\\\\' + it.code.toLowerCase());
+    it.setProperty('originpath', it.code.toLowerCase());
     it.setProperty('originclass', it.code);
     
     it.setProperty('alias', it.code.toLowerCase());
@@ -179,7 +179,7 @@ fullcode.out('USE').has('atom', 'As').each{
     it.setProperty('alias', it.out('AS').next().code.toLowerCase());
     it.setProperty('originalias', it.out('AS').next().code);
 
-    it.setProperty('originpath', '\\\\' + it.out('NAME').next().fullcode.toLowerCase());
+    it.setProperty('originpath', it.out('NAME').next().fullcode.toLowerCase());
     it.setProperty('originclass', it.sideEffect{last = it.out('NAME').count() - 1}.out('NAME').filter{ it.rank == last}.next().fullcode);
 }
 

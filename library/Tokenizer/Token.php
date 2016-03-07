@@ -382,7 +382,7 @@ g.idx('atoms')[['atom':'Use']].filter{ it.in('ELEMENT').in('BLOCK').filter{ it.a
     } else if (fullcode.out('NAME').any() && fullcode.out('NAME').next().absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
     } else {
-        fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.originpath.toLowerCase());
     }
 };
 
