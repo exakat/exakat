@@ -35,7 +35,7 @@ class CleanDb extends Tasks {
         $this->config = $config;
 
         if (!file_exists($config->neo4j_folder.'/scripts/exakat.txt')) {
-            display('Warning : This Neo4j installation doesn\'t seem to be used by Exakat. Please, clean it manually and run "doctor".');
+            display('Warning : This Neo4j installation doesn\'t seem to be used by Exakat. Please, stop the server, remove "data" and "scripts" folder, then run "'.$config->executable.' doctor".');
             return false;
         }
         
@@ -96,16 +96,17 @@ GREMLIN;
         
         // preserve data/dbms/auth to preserve authentication
         if (file_exists($config->neo4j_folder.'/data/dbms/auth')) {
-            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; ';
+            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; echo "" > data/scripts/exakat.txt ';
         } else {
-            $sshLoad =  'rm -rf data; mkdir -p data; ';
+            $sshLoad =  'rm -rf data; mkdir -p data; mkdir -p data/log; mkdir -p data/scripts; echo "" > data/scripts/exakat.txt ';
         }
 
+        // if neo4j-service.pid exists, we kill the process once
         if (file_exists($config->neo4j_folder.'/data/neo4j-service.pid')) {
-            shell_exec('cd '.$config->neo4j_folder.';kill -9 $(cat data/neo4j-service.pid) 2>>/dev/null; '.$sshLoad);
-        } else {
-            shell_exec('cd '.$config->neo4j_folder.'; '.$sshLoad);
+            shell_exec('kill -9 $(cat '.$config->neo4j_folder.'/data/neo4j-service.pid) 2>>/dev/null; ');
         }
+        
+        shell_exec('cd '.$config->neo4j_folder.'; '.$sshLoad);
         
         // checking that the server has indeed restarted
         $round = 0;
@@ -114,7 +115,20 @@ GREMLIN;
             if ($round > 0) {
                 sleep($round);
             }
-            shell_exec('cd '.$config->neo4j_folder.'; ./bin/neo4j start-no-wait 2>&1');
+
+            if ($round > 10) {
+                $pid = file_get_contents($config->neo4j_folder.'/data/neo4j-service.pid');
+                die('Couldn\'t restart neo4j\'s server. Please, kill it (kill -9 '.$pid.') and try again');
+            }
+            
+            $neo4j_config = file_get_contents($config->neo4j_folder.'/conf/neo4j-server.properties');
+            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/m', $neo4j_config, $r)) {
+                if ($r[1] != $config->neo4j_port) {
+                    print "Warning : Exakat's port and Neo4j's port are not the same ($r[1] / $config->neo4j_port)\n";
+                }
+            }
+
+            shell_exec('cd '.$config->neo4j_folder.'; ./bin/neo4j start 2>&1');
             
             // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
             // Needs to pick up this error and act

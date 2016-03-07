@@ -98,7 +98,7 @@ class Doctor extends Tasks {
             }
 
             $file = file_get_contents($config->neo4j_folder.'/conf/neo4j-server.properties');
-            if (preg_match('/org.neo4j.server.webserver.port=(\d+)/is', $file, $r)) {
+            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/is', $file, $r)) {
                 $stats['neo4j']['port'] = $r[1];
             } else {
                 $stats['neo4j']['port'] = '7474 (in fact, unset value. Using default : 7474)';

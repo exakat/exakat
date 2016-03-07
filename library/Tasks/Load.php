@@ -90,7 +90,9 @@ class Load extends Tasks {
         }
 
         $extPhp = array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  );
-        $files = $this->datastore->getCol('files', 'file');
+        $shell = 'find '.$dir.' \\( -name "*.'.(join('" -o -name "*.', $extPhp)).'" \\) \\( -not -path "*'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l';
+        $res = trim(shell_exec($shell));
+        $files = explode("\n", $res);
     
         $nbTokens = 0;
         foreach($files as $file) {
