@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 29 Feb 2016 10:39:33 +0000
-.. comment: Generation hash : 16dadffb4283cb09a811ebb5a89276776cfbde3b
+.. comment: Generation date : Mon, 07 Mar 2016 13:23:02 +0000
+.. comment: Generation hash : ebe02f106562a712c398609d1f05a2bc206de449
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 227 analysis
+Total : 228 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -117,8 +117,8 @@ Total : 227 analysis
 * :ref:`Empty Interfaces <empty-interfaces>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty Namespace <empty-namespace>`
+* :ref:`Empty Traits <empty-traits>`
 * :ref:`Empty Try Catch <empty-try-catch>`
-* :ref:`Empty traits <empty-traits>`
 * :ref:`Eval Without Try <eval-without-try>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Exit() Usage <exit()-usage>`
@@ -156,6 +156,7 @@ Total : 227 analysis
 * :ref:`Multiply By One <multiply-by-one>`
 * :ref:`Must Return Methods <must-return-methods>`
 * :ref:`Namespace With Fully Qualified Name <namespace-with-fully-qualified-name>`
+* :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Direct Call To MagicMethod <no-direct-call-to-magicmethod>`
@@ -169,7 +170,7 @@ Total : 227 analysis
 * :ref:`No Real Comparison <no-real-comparison>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
-* :ref:`Non Ascii variables <non-ascii-variables>`
+* :ref:`Non Ascii Variables <non-ascii-variables>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
 * :ref:`Not Definitions Only <not-definitions-only>`
@@ -257,7 +258,7 @@ Total : 227 analysis
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
 * :ref:`Used Once Variables (In Scope) <used-once-variables-(in-scope)>`
-* :ref:`Used once variables <used-once-variables>`
+* :ref:`Used Once Variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
 * :ref:`Useless Brackets <useless-brackets>`
 * :ref:`Useless Constructor <useless-constructor>`
@@ -336,7 +337,7 @@ Total : 48 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
-* :ref:`Short syntax for arrays <short-syntax-for-arrays>`
+* :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
 * :ref:`Use Const And Functions <use-const-and-functions>`

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 29 Feb 2016 10:39:33 +0000
-.. comment: Generation hash : 16dadffb4283cb09a811ebb5a89276776cfbde3b
+.. comment: Generation date : Mon, 07 Mar 2016 13:23:02 +0000
+.. comment: Generation hash : ebe02f106562a712c398609d1f05a2bc206de449
 
 
 .. _$http\_raw\_post\_data:
@@ -1399,6 +1399,24 @@ Declaring a namespace in the code and not using it for structure declarations (c
 
 
 
+.. _empty-traits:
+
+Empty Traits
+############
+
+
+List of all empty trait defined in the code. May be they are RFU.
+
++--------------+-------------------+
+| Command Line | Traits/EmptyTrait |
++--------------+-------------------+
+| clearPHP     |                   |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
+
+
+
 .. _empty-try-catch:
 
 Empty Try Catch
@@ -1436,24 +1454,6 @@ The function 'empty()' doesn't accept expressions until PHP 5.5. Until then, it 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------------------------------------------------------------+
-
-
-
-.. _empty-traits:
-
-Empty traits
-############
-
-
-List of all empty trait defined in the code. May be they are RFU.
-
-+--------------+-------------------+
-| Command Line | Traits/EmptyTrait |
-+--------------+-------------------+
-| clearPHP     |                   |
-+--------------+-------------------+
-| Analyzers    | :ref:`Analyze`    |
-+--------------+-------------------+
 
 
 
@@ -2522,6 +2522,26 @@ The PHP compiler makes no difference between 'namespace \A\B\C', and 'namespace\
 
 
 
+.. _negative-power:
+
+Negative Power
+##############
+
+
+The power operator has higher priority than the sign operator. This means that -2 \*\* 2 == -4. It is in fact, -(2 \*\* 2). 
+
+When using negative power, it is clearer to add parenthesis or to use the pow() function, which has no such ambiguity : pow(-2, 2) == 4.
+
++--------------+------------------------+
+| Command Line | Structures/NegativePow |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
+
 .. _nested-ternary:
 
 Nested Ternary
@@ -2898,7 +2918,7 @@ with call\_user\_func\_array('array\_merge', array\_collecting\_the\_arrays()). 
 
 .. _non-ascii-variables:
 
-Non Ascii variables
+Non Ascii Variables
 ###################
 
 
@@ -3937,7 +3957,7 @@ Usage of short open tags is discouraged. The following files were found to be im
 
 .. _short-syntax-for-arrays:
 
-Short syntax for arrays
+Short Syntax For Arrays
 #######################
 
 
@@ -5213,27 +5233,9 @@ PHP 5.5 introduced password\_hash() and password\_check() to replace the use of 
 
 
 
-.. _used-once-variables-(in-scope):
-
-Used Once Variables (In Scope)
-##############################
-
-
-This is the list of used once variables, broken down by scope. Those variables are used once in a function, a method, a class or a namespace. In any case, this means the variable is read or written, while it should be used at least twice.
-
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Command Line | Variables/VariableUsedOnceByContext                                                                   |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| clearPHP     | `no-unused-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-arguments.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                        |
-+--------------+-------------------------------------------------------------------------------------------------------+
-
-
-
 .. _used-once-variables:
 
-Used once variables
+Used Once Variables
 ###################
 
 
@@ -5257,6 +5259,24 @@ The current analyzer count variables at the application level, and not at a meth
 +--------------+----------------------------+
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
+
+
+
+.. _used-once-variables-(in-scope):
+
+Used Once Variables (In Scope)
+##############################
+
+
+This is the list of used once variables, broken down by scope. Those variables are used once in a function, a method, a class or a namespace. In any case, this means the variable is read or written, while it should be used at least twice.
+
++--------------+-------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/VariableUsedOnceByContext                                                                   |
++--------------+-------------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-unused-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-arguments.md>`__ |
++--------------+-------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                        |
++--------------+-------------------------------------------------------------------------------------------------------+
 
 
 
