@@ -15,7 +15,7 @@ foreach($r2[0] as $id2 => $x) {
 // Explicit case
 // Actual case
 preg_match_all('/a5/', $b, $r5);
-foreach($r6[0] as $id5 => $x) {
+foreach($r6[0] as $id5 => $x) { // foreach doesn't use the previous $r5
     $r5[1][$id5] = 2;
 }
 
