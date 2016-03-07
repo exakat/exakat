@@ -68,7 +68,7 @@ class Falsy extends Analyzer\Analyzer {
 
         // object
         // How to test?
-        
+
         // resource
         // resources are always true
     }

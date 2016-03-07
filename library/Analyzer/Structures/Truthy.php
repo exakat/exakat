@@ -38,7 +38,7 @@ class Truthy extends Analyzer\Analyzer {
         $this->atomIs('String')
              ->hasNoOut('CONTAINS')
              ->analyzerIsNot('Structures/Falsy')
-             ->hasNoIn('CONCAT'); 
+             ->hasNoIn('CONCAT');
         $this->prepareQuery();
 
         $this->atomIs('Heredoc')
@@ -56,7 +56,7 @@ class Truthy extends Analyzer\Analyzer {
 
         // object
         // How to test?
-        
+
         // resource
         // resources are never literals
     }

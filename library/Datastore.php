@@ -66,6 +66,11 @@ class Datastore {
             $this->cleanTable('shortopentag');
             $this->cleanTable('composer');
             $this->cleanTable('configFiles');
+
+            $this->addRow('hash', array('exakat_version'       => \Exakat::VERSION,
+                                        'exakat_build'         => \Exakat::BUILD,
+                                        'datastore_creation'   => date('r', time()),
+                                        ));
         }
     }
 
