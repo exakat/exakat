@@ -1,4 +1,4 @@
-Version 0.5.5 (Immortal Ruyi, Coming up)
+Version 0.5.6 (Ruler of Women's Country, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,22 @@ Version 0.5.5 (Immortal Ruyi, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.5.5 (Immortal Ruyi, Coming up)
++ Architecture
+    + Added default values for all neo4j_* configs
++ Report
+    + Added support for bugfixes in 7.0.4, 5.6.19 and 5.5.33
+    + Added support for bugfixes in 7.1.0-dev
++ Analyzer
+    + Added support for Typehint in Undeclared Classes
+    + Extended 'Multiple Classes in One File' to interfaces and traits
+    + Added analyzers for truthy and falsy
+    + Spot interfaces implemented by parents (Thanks PHP Inspect)
+    + Report usage for unsafe Curl options
++ Tokenizer
+    + Fixed emptyString inside a Heredoc
+    + Fixed bug where Sign has lower priority than Power
 
 Version 0.5.4 (Nezha, 2016-02-29)
 + Architecture
