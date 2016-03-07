@@ -60,12 +60,18 @@ class Phpexec {
     private $isCurrentVersion = false;
     private $version          = null;
     
-    public function __construct($phpversion) {
+    public function __construct($phpversion = null) {
+        $config = \Config::factory();
+        if ($phpversion === null) {
+
+            $this->phpexec = $config->php;
+            $this->isCurrentVersion = true;
+            return;
+        } 
+        
         $this->version = $phpversion;
         $phpversion3 = substr($phpversion, 0, 3);
         $this->isCurrentVersion = substr(PHP_VERSION, 0, 3) === $phpversion3;
-        
-        $config = \Config::factory();
 
         switch($phpversion3) {
             case '5.2' : 
@@ -133,7 +139,6 @@ class Phpexec {
         if ($this->isCurrentVersion) {
             if (!in_array('tokenizer', get_loaded_extensions())) {
                 $this->isValid = false;
-                print "Return no tokenizer\n";
                 return false;
             }
             $x = get_defined_constants(true);
