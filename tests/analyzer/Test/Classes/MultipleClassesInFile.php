@@ -8,10 +8,14 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_MultipleClassesInFile extends Analyzer {
-    /* 3 methods */
+    /* 7 methods */
 
     public function testClasses_MultipleClassesInFile01()  { $this->generic_test('Classes_MultipleClassesInFile.01'); }
     public function testClasses_MultipleClassesInFile02()  { $this->generic_test('Classes_MultipleClassesInFile.02'); }
     public function testClasses_MultipleClassesInFile03()  { $this->generic_test('Classes_MultipleClassesInFile.03'); }
+    public function testClasses_MultipleClassesInFile04()  { $this->generic_test('Classes/MultipleClassesInFile.04'); }
+    public function testClasses_MultipleClassesInFile05()  { $this->generic_test('Classes/MultipleClassesInFile.05'); }
+    public function testClasses_MultipleClassesInFile06()  { $this->generic_test('Classes/MultipleClassesInFile.06'); }
+    public function testClasses_MultipleClassesInFile07()  { $this->generic_test('Classes/MultipleClassesInFile.07'); }
 }
 ?>
