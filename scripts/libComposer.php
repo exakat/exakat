@@ -237,9 +237,9 @@ function recursiveReaddir($tmpdir) {
 function processFile($file) {
     $tokens = token_get_all(file_get_contents($file));
     
-    $return = array('Class' => array(),
+    $return = array('Class'     => array(),
                     'Interface' => array(),
-                    'Trait' => array());
+                    'Trait'     => array());
     $namespace = 'global';
     
     foreach($tokens as $id => $token) {
@@ -263,7 +263,7 @@ function processFile($file) {
 
                     // skip anonymous class : 
                     if (!is_array($tokens[$id + 2])) { break 1; }
-                    if ($tokens[$id + 2][0] != 'T_STRING') { break 1; }
+                    if ($tokens[$id + 2][0] != T_STRING) { break 1; }
 
                     $return['Class'][$namespace][] = $tokens[$id + 2][1];
                     break;
