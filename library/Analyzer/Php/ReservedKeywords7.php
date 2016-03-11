@@ -29,7 +29,7 @@ class ReservedKeywords7 extends Analyzer\Analyzer {
     protected $phpVersion = '7.0-';
     
     public function analyze() {
-        $keywords = array('int', 'float', 'bool', 'string', 'true', 'false', 'null', 'object', 'mixed', 'numeric');
+        $keywords = $this->loadIni('php_reserved_types.ini', 'type');
         
         $this->atomIs(array('Class', 'Trait', 'Interface'))
              ->outIs('NAME')

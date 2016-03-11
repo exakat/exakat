@@ -127,18 +127,20 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // in a typehint f(someClass $c)
+        $types = $this->loadIni('php_reserved_types.ini', 'type');
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('CLASS')
              ->analyzerIsNot('Composer/IsComposerNsname')
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->codeIsNot(array_merge(array('self', 'parent', 'static'), $types))
+             ->tokenIsNot(array('T_ARRAY', 'T_STATIC', 'T_CALLABLE'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition();
-        $this->prepareQuery();    
+        $this->prepareQuery();
     }
 }
 
