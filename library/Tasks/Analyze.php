@@ -31,6 +31,10 @@ class Analyze extends Tasks {
             die("analyze require -p <project> option. Aborting\n");
         }
 
+        if (!file_exists($config->projects_root.'/projects/'.$project)) {
+            die("Project '$project' doesn't exist in projects folder. Aborting\n");
+        }
+
         $this->checkTokenLimit();
         $begin = microtime(true);
 
