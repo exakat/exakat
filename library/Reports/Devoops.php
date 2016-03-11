@@ -1560,7 +1560,7 @@ TEXT
                                 'solvedIn56'  => $bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-',
                                 'solvedIn55'  => $bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-',
                                 'solvedInDev' => $bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-',
-                                'bug'         => '<a href="'.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a>',
+                                'bug'         => '<a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a>',
                                 'cve'         => $cve,
                                 );
             } elseif (!empty($bugfix['analyzer'])) {
