@@ -27,12 +27,14 @@ use Analyzer;
 
 class ArrayMergeInLoops extends Analyzer\Analyzer {
     public function analyze() {
+        $functions = array('\\array_merge', '\\array_merge_recursive');
+        
         $this->atomIs('For')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\array_merge')
+             ->fullnspath($functions)
              ->back('first');
         $this->prepareQuery();
 
@@ -41,7 +43,7 @@ class ArrayMergeInLoops extends Analyzer\Analyzer {
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\array_merge')
+             ->fullnspath($functions)
              ->back('first');
         $this->prepareQuery();
 
@@ -50,16 +52,16 @@ class ArrayMergeInLoops extends Analyzer\Analyzer {
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\array_merge')
+             ->fullnspath($functions)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('DoWhile')
+        $this->atomIs('Dowhile')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\array_merge')
+             ->fullnspath($functions)
              ->back('first');
         $this->prepareQuery();
     }

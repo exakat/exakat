@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Performances_ArrayMergeInLoops extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testPerformances_ArrayMergeInLoops01()  { $this->generic_test('Performances_ArrayMergeInLoops.01'); }
+    public function testPerformances_ArrayMergeInLoops02()  { $this->generic_test('Performances/ArrayMergeInLoops.02'); }
 }
 ?>
