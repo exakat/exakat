@@ -32,11 +32,11 @@ class Phploc extends Tasks {
     
     public function run(\Config $config) {
         
-        $loc = array('comments' => 0,
-                     'tokens'   => 0,
+        $loc = array('files'    => 0,
                      'total'    => 0,
-                     'code'     => 0,
-                     'files'    => 0);
+                     'tokens'   => 0,
+                     'comments' => 0,
+                     'code'     => 0);
         if ($config->project != 'default') {
             $projectPath = $config->projects_root.'/projects/'.$config->project;
 
@@ -99,7 +99,9 @@ class Phploc extends Tasks {
         if ($config->json) {
             print json_encode($loc);
         } elseif ($config->verbose) {
-            print_r($loc);
+            foreach($loc as $k => $v) {
+                print substr("$k        ", 0, 8)." : $v\n";
+            }
         }
     }
 
@@ -145,7 +147,8 @@ class Phploc extends Tasks {
         }
         
         $lines = array();
-        $tokens = @token_get_all(file_get_contents($filename));
+        $php = new \PhpExec();
+        $tokens = $php->getTokenFromFile($filename);
         
         if (empty($tokens)) {
             display( "$filename is empty\n");

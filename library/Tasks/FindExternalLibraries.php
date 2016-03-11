@@ -27,7 +27,7 @@ class FindExternalLibraries extends Tasks {
     const WHOLE_DIR   = 1;
     const FILE_ONLY   = 2;
     const PARENT_DIR  = 3; // Whole_dir and parent.
-
+    
     // classic must be in lower case form.
     private $classic = array('adoconnection'    => self::WHOLE_DIR,
                              'bbq'              => self::WHOLE_DIR,
@@ -78,6 +78,7 @@ class FindExternalLibraries extends Tasks {
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
             die("No such project as $project.\nAborting\n");
         }
+
         $dir = $config->projects_root.'/projects/'.$project.'/code';
         $configFile = $config->projects_root.'/projects/'.$project.'/config.ini';
         $ini = parse_ini_file($configFile);
@@ -145,8 +146,8 @@ class FindExternalLibraries extends Tasks {
     }
 
     private function process($filename) {
-        $code = file_get_contents($filename);
-        $tokens = @token_get_all($code);
+        $php = new \PhpExec();
+        $tokens = $php->getTokenFromFile($filename);
     
         $return = array();
 
