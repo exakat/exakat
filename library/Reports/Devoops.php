@@ -1473,8 +1473,12 @@ SQL
         $return = $this->formatText( <<<TEXT
 This is an overview of your application. 
 
-Ticked <i class="icon-ok"></i> information are features used in your application. Non-ticked are feature that are not in use in the application.
-Crossed <i class="fa fa-times-circle-o"></i> information were not tested.
+<ul>
+<li>Ticked <i class="fa fa-check"></i> information are features used in the application.</li>
+<li>Non-ticked are feature that are not in use in the application.</li>
+<li>Crossed <i class="fa fa-minus-circle"></i> features are not compatibile with the PHP version used, or its configuration. </li>
+<li>Crossed <i class="fa fa-times-circle-o"></i> information were not tested.</li>
+</ul>
 
 TEXT
 , 'textLead');
