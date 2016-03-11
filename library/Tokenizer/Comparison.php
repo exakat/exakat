@@ -41,7 +41,7 @@ class Comparison extends TokenAuto {
                                                                          Multiplication::$operators, Preplusplus::$operators,
                                                                          Concatenation::$operators, _New::$operators,
                                                                          Comparison::$operators, VariableDollar::$operators,
-                                                                         Reference::$operators)),
+                                                                         Reference::$operators, _InstanceOf::$operators)),
                                   -1 => array('atom'      => $operands ),
                                    0 => array('token'     => Comparison::$operators,
                                               'atom'      => 'none'),
