@@ -91,6 +91,22 @@ class Update extends Tasks {
                 
                 break;
 
+            // composer case
+            case $config->project_vcs === 'composer' :
+                display('Composer update '.$config->project);
+                $res = shell_exec('cd '.$path.'/code/; composer install ');
+
+                $json = file_get_contents($path.'/code/composer.lock');
+                $json = json_decode($json);
+                
+                foreach($json->packages as $package) {
+                    if ($package->name == $config->project_url) {
+                        display( "Composer updated to revision ".$package->source->reference. ' ( version : '.$package->version.' )');
+                    }
+                }
+
+                break;
+
             default :
                 display('No VCS found to update (Only git, svn and bazaar are supported. Ask exakat to add more.');
         }

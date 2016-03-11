@@ -163,8 +163,9 @@ INI;
                     $composer->require = new \stdClass();
                     $composer->require->$repositoryURL = 'dev-master';
                     $json = json_encode($composer);
-                    file_put_contents($config->projects_root.'/projects/'.$project.'/composer.json', $json);
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; composer -q install; mv vendor code');
+                    mkdir($config->projects_root.'/projects/'.$project.'/code', 0755);
+                    file_put_contents($config->projects_root.'/projects/'.$project.'/code/composer.json', $json);
+                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'/code; composer -q install');
                     break 1;
 
                 // SVN
