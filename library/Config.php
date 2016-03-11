@@ -173,8 +173,8 @@ class Config {
         
         $this->is_phar  = strpos(basename(dirname(__DIR__)), '.phar') !== false;
         if ($this->is_phar) {
-            $this->projects_root = substr(dirname(dirname(__DIR__)), 7);
             $this->executable    = $_SERVER['SCRIPT_NAME'];
+            $this->projects_root = substr(dirname(dirname(__DIR__)), 7);
             $this->dir_root      = 'phar://'.$this->executable;
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];

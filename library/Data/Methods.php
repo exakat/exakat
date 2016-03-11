@@ -28,12 +28,14 @@ class Methods {
     private $phar_tmp = null;
     
     public function __construct() {
-        if (substr(__DIR__, 0, 4) == 'phar') {
+        $config = \Config::factory();
+        
+        if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods').'.sqlite';
-            copy('phar://'.basename(dirname(dirname(__DIR__))).'/data/methods.sqlite', $this->phar_tmp);
+            copy($config->dir_root.'/data/methods.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = dirname(dirname(__DIR__)).'/data/methods.sqlite';
+            $docPath = $config->dir_root.'/data/methods.sqlite';
         }
         $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
     }

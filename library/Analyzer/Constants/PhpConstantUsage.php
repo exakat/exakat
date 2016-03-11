@@ -31,10 +31,11 @@ class PhpConstantUsage extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $ini = parse_ini_file(dirname(dirname(dirname(__DIR__))).'/data/php_constants.ini');
+        $ini = $this->loadIni('php_constants.ini', 'constants');
 
         $this->analyzerIs('Constants/ConstantUsage')
-             ->code($ini['constants'], true);
+             ->code($ini, true);
+        $this->prepareQuery();
     }
 }
 

@@ -72,7 +72,7 @@ class FindExternalLibraries extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
         if ($project == 'default') {
-            die("Magicnumber needs a -p <project>\nAborting\n");
+            die("findextlib needs a -p <project>\nAborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {

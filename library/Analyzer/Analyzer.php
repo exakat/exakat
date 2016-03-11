@@ -2025,7 +2025,9 @@ GREMLIN;
     
     public function getSeverity() {
         if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
+            $config = \Config::factory();
+            
+            Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
         
         return Analyzer::$docs->getSeverity($this->analyzer);
@@ -2046,7 +2048,9 @@ GREMLIN;
 
     public function getVendors() {
         if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
+            $config = \Config::factory();
+            
+            Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
         
         return Analyzer::$docs->getVendors();
@@ -2054,7 +2058,9 @@ GREMLIN;
 
     public function getTimeToFix() {
         if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
+            $config = \Config::factory();
+            
+            Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
         
         return Analyzer::$docs->getTimeToFix($this->analyzer);
