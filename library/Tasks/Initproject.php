@@ -168,7 +168,7 @@ INI;
                     break 1;
 
                 // SVN
-                case ($repositoryDetails['scheme'] == 'svn' || $config->svn === true) :
+                case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $config->svn === true) :
                     display('SVN initialization');
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
                     break 1;
@@ -226,7 +226,7 @@ INI;
 
                 // Git
                 // Git is last, as it will act as a default
-                case ($repositoryDetails['scheme'] == 'git' || $config->git === true) :
+                case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $config->git === true) :
                     display('Git initialization');
                     shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 >> /dev/null');
                     break 1;
