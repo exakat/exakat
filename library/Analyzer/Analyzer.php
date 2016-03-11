@@ -109,12 +109,9 @@ abstract class Analyzer {
     
     static public function initDocs() {
         if (Analyzer::$docs === null) {
-            $is_phar  = (strpos(basename(dirname(dirname(__DIR__))), '.phar') !== false);
-            if ($is_phar === true) {
-                $pathDocs = 'phar://'.basename(dirname(dirname(__DIR__))).'/data/analyzers.sqlite';
-            } else {
-                $pathDocs = dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite';
-            }
+            $config = \Config::factory();
+            
+            $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
             self::$docs = new Docs($pathDocs);
         }
     }
