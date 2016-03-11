@@ -495,7 +495,7 @@ INI;
 
         // zip
         $res = shell_exec('zip -v  2>&1');
-        if (preg_match('/command not found/is', $res)) {
+        if (preg_match('/not found/is', $res)) {
             $stats['zip']['installed'] = 'No';
         } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
             $stats['zip']['installed'] = 'Yes';
