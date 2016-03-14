@@ -49,15 +49,15 @@ class Test extends Tasks {
         }
 
         display("Cleaning DB\n");
-        shell_exec($this->config->phpexec.' '.$config->executable.' cleandb -v');
+        shell_exec($this->config->php.' '.$config->executable.' cleandb -v');
 
-        shell_exec($this->config->phpexec.' '.$config->executable.' load -v -p test -f '.$config->filename. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
+        shell_exec($this->config->php.' '.$config->executable.' load -v -p test -f '.$config->filename. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
         display("Project loaded\n");
 
-        $res = shell_exec($this->config->phpexec.' '.$config->executable.' build_root -v -p test > '.$config->projects_root.'/projects/test/log/build_root.final.log');
+        $res = shell_exec($this->config->php.' '.$config->executable.' build_root -v -p test > '.$config->projects_root.'/projects/test/log/build_root.final.log');
         display("Build root\n");
 
-        $res = shell_exec($this->config->phpexec.' '.$config->executable.' tokenizer -p test > '.$config->projects_root.'/projects/test/log/tokenizer.final.log');
+        $res = shell_exec($this->config->php.' '.$config->executable.' tokenizer -p test > '.$config->projects_root.'/projects/test/log/tokenizer.final.log');
         display("Project tokenized\n");
 
         $args = array ( 1 => 'analyze',
