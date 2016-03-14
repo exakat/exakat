@@ -90,7 +90,7 @@ SQL;
 
             $themes[] = $themaClasses;
         }
-        $themes = array_merge(...$themes);
+        $themes = call_user_func_array('array_merge', $themes);
         $themes = array_keys(array_count_values($themes));
 
         $rounds = 0;
