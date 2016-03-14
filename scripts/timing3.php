@@ -23,15 +23,19 @@
 
 $rows = glob('projects/*');
 
-$finals = [];
+$finals = [['project', 'Duree', 'Tokens', 'LoC']];
 foreach($rows as $row) {
     $final = [basename($row)];
     
+    if (!is_dir($row)) { continue; }
+    
     if (!file_exists($row.'/log/project.timing.csv')) {
+        print "$row has no log/project.timing.csv\n";
         continue;
     }
     $csv = file_get_contents($row.'/log/project.timing.csv');
     if (!preg_match('/Final\t([\d\.]+)\t([\d\.]+)/is' , $csv, $r)) {
+        print "$row has no Final in log/project.timing.csv\n";
         continue;
     }
     $final[] = $r[2];
