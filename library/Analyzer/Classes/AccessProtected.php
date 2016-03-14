@@ -36,7 +36,7 @@ class AccessProtected extends Analyzer\Analyzer {
              ->codeIsNot(array('parent', 'static', 'self'))
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).in("NAME").out("PRIVATE").any()}')
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).in("NAME").out("PROTECTED").any()}')
              ->back('first');
         $this->prepareQuery();
 
@@ -52,9 +52,11 @@ class AccessProtected extends Analyzer\Analyzer {
              ->codeIsNot(array('parent', 'static', 'self'))
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").out("DEFINE").has("code", name).in("DEFINE").out("PRIVATE").any()}')
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").filter{ it.out("PROTECTED").any() }.out("DEFINE").transform{ a = it; while (a.out("LEFT").any()) { a = a.out("LEFT").next(); };  a;}.has("code", name).any()}')
              ->back('first');
         $this->prepareQuery();
+        
+        // Non-static methods/properties : ??? Don't know how to do that yet
     }
 }
 
