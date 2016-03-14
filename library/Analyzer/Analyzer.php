@@ -541,9 +541,9 @@ GREMLIN;
 
     public function atomAboveIs($atom) {
         if (is_array($atom)) {
-            $this->addMethod('in().loop(1){true}{it.object.atom in ***}', $atom);
+            $this->addMethod('in().loop(1){!(it.object.atom in ***)}{it.object.atom in ***}', $atom, $atom);
         } else {
-            $this->addMethod('in().loop(1){true}{it.object.atom == ***}', $atom);
+            $this->addMethod('in().loop(1){it.object.atom != ***}{it.object.atom == ***}', $atom, $atom);
         }
         
         return $this;

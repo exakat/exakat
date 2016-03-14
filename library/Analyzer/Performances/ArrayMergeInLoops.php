@@ -28,41 +28,9 @@ use Analyzer;
 class ArrayMergeInLoops extends Analyzer\Analyzer {
     public function analyze() {
         $functions = array('\\array_merge', '\\array_merge_recursive');
-        
-        $this->atomIs('For')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions)
-             ->back('first');
-        $this->prepareQuery();
 
-        $this->atomIs('Foreach')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('While')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Dowhile')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions)
-             ->back('first');
+        $this->atomFunctionIs($functions)
+             ->atomAboveIs(array('For', 'Foreach', 'Dowhile', 'While'));
         $this->prepareQuery();
     }
 }
