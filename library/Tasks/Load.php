@@ -1348,11 +1348,14 @@ class Load extends Tasks {
 
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
-        if (!empty($this->processBlocks('T_OPEN_CURLY'))) {
+        $openCurly = $this->processBlocks('T_OPEN_CURLY');
+        if (!empty($openCurly)) {
             display( "Alert, all { and } were not flushed in '" . $filename . "'\n");
             $this->log->log("Alert, all { and } were not flushed in '" . $filename . "'\n");
         }
-        if (!empty($this->processBlocks('T_OPEN_PARENTHESIS'))) {
+
+        $openParenthesis = $this->processBlocks('T_OPEN_PARENTHESIS');
+        if (!empty($openParenthesis)) {
             display( "Alert, all parenthesis were not flushed in '" . $filename . "'\n");
             $this->log->log( "Alert, all parenthesis were not flushed in '" . $filename . "'\n");
         }
