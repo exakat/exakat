@@ -130,7 +130,7 @@ class Jobqueue extends Tasks {
         $this->log->log('Finished : ' . $job.' '.time()."\n");
 
         // Clean after self
-        shell_exec('php '.$this->config->executable.' cleandb');
+        shell_exec($this->config->phpexec.' '.$this->config->executable.' cleandb');
 
         return true;
     }
@@ -145,7 +145,7 @@ class Jobqueue extends Tasks {
         }
 
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job, 'progress' => 0]));
-        shell_exec('php '.$this->config->executable.' project -p '.$job);
+        shell_exec($this->config->phpexec.' '.$this->config->executable.' project -p '.$job);
 
         // cleaning
         $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
@@ -154,7 +154,7 @@ class Jobqueue extends Tasks {
 
         $this->log->log('Finished Project : ' . $job.' '.time()."\n");
 
-        shell_exec('php '.$this->config->executable.' cleandb');
+        shell_exec($this->config->phpexec.' '.$this->config->executable.' cleandb');
 
         return true;
     }
