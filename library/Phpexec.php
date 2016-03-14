@@ -144,7 +144,7 @@ class Phpexec {
             $x = get_defined_constants(true);
             $tokens = array_flip($x['tokenizer']);
         } else {
-            $tmpFile = tempnam('/tmp', 'Phpexec');
+            $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
             shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; \\$x = get_defined_constants(true); if (!isset(\\$x[\'tokenizer\'])) { \\$x[\'tokenizer\'] = array(); }; var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
             include $tmpFile;
             unlink($tmpFile);
@@ -162,11 +162,13 @@ class Phpexec {
     }
     
     public function getTokenFromFile($file) {
+        $file = str_replace('$', '\\\$', $file);
+        
         if ($this->isCurrentVersion) {
-            $tokens = @token_get_all(file_get_contents(str_replace('$', '\\\$', $file)));
+            $tokens = @token_get_all(file_get_contents($file));
         } else {
-            $tmpFile = tempnam('/tmp', 'Phpexec');
-            shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; var_export(@token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); print \'; ?>\';" > '.$tmpFile);
+            $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
+            shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; var_export(@token_get_all(file_get_contents(\''.$file.'\'))); print \'; ?>\';" > '.$tmpFile);
             include $tmpFile;
             unlink($tmpFile);
         }
