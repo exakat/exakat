@@ -241,7 +241,7 @@ INI;
             $stats['folders']['config-folder'] = 'Yes';
             $stats['folders']['config.ini'] = 'Yes';
 
-            $ini = parse_ini_file('config/config.ini');
+            $ini = parse_ini_file($config->projects_root.'/config/config.ini');
         } else {
             $stats['folders']['config-folder'] = 'Yes';
             $stats['folders']['config.ini'] = 'No';
