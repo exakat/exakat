@@ -27,7 +27,7 @@ class FindExternalLibraries extends Tasks {
     const WHOLE_DIR   = 1;
     const FILE_ONLY   = 2;
     const PARENT_DIR  = 3; // Whole_dir and parent.
-    
+
     // classic must be in lower case form.
     private $classic = array('adoconnection'    => self::WHOLE_DIR,
                              'bbq'              => self::WHOLE_DIR,

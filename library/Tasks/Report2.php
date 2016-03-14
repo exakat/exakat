@@ -127,6 +127,7 @@ class Report2 extends Tasks {
         $end = microtime(true);
 
         display( "Processing time : ".number_format($end - $begin, 2)." s\n");
+        $this->datastore->addRow('hash', array($config->format => $config->file));
         display( "Done\n");
     }
 }
