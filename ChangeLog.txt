@@ -1,4 +1,4 @@
-Version 0.5.6 (Ruler of Women's Country, Coming up)
+Version 0.5.7 (Scorpion Demon, Coming up)
 + Architecture
     +
 + Report
@@ -8,7 +8,22 @@ Version 0.5.6 (Ruler of Women's Country, Coming up)
 + Tokenizer
     + 
 
-Version 0.5.5 (Immortal Ruyi, Coming up)
+Version 0.5.6 (Ruler of Women's Country, 2016-03-14)
++ Architecture
+    + Fixed some backward compatibility with PHP 5.4
+    + Started revamping 'Status' command 
+    + Centralized all tokenizations to PhpExec class
+    + Removed usage of __DIR__ and __FILE__ 
++ Analyzer
+    + Spot usage of empty() that can't work on PHP 5.4
+    + Suggest using random_int instead of rand
+    + Upgraded 'No Array_merge in loops' with array_merge_recursive
+    + Added support for scalar type hint in Undefined Classes
+    + New analyzer : Better rand()
++ Tokenizer
+    + Instanceof has lower precedence than comparison
+
+Version 0.5.5 (Immortal Ruyi, 2016-03-07)
 + Architecture
     + Added default values for all neo4j_* configs
 + Report
