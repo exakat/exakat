@@ -33,65 +33,75 @@ class Status extends Tasks {
             die("Project '$project' does not exists. Aborting\n");
         }
 
-        if (filesize($path.'/log/tokenizer.final.log') == 0) {
-            echo "tokenizer.final.log is OK\n";
-        } else {
-            echo "tokenizer.final.log is KO : \n",
-                 file_get_contents($path.'/log/tokenizer.final.log');
+        $status = array('project' => $project);
+        $status['loc'] = $this->datastore->getHash('loc');
+        $status['tokens'] = $this->datastore->getHash('tokens');
+
+        // Check the logs
+        $errors = array();
+        // Error log
+        if (!file_exists($path.'/log/errors.log')) {
+            $errors['errors.log'] = 'errors.log is missing';
+        } elseif (filesize($path.'/log/errors.log') != 191) {
+            $log = file_get_contents($path.'/log/errors.log');
+            preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r);
+            $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
+        } // Else no report
+
+        // Tokenizer log
+        if (!file_exists($path.'/log/tokenizer.log')) {
+            $errors['errors.log'] = 'errors.log is missing';
+        } elseif (filesize($path.'/log/errors.log') != 191) {
+            $log = file_get_contents($path.'/log/errors.log');
+            preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r);
+            $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
+        } // Else no report        
+        if (!empty($errors)) {
+            $status['errors'] = $errors;
         }
-        $tokenizerLogTime = filemtime($path.'/log/tokenizer.log');
+        
+        // Status of progress
+        // errors? 
 
-        $res = shell_exec('tail '.$path.'/log/tokenizer.log | grep "Remaining token to process :"');
-        if (preg_match('/Remaining token to process : 1/s', $res)) {
-            echo "Tokenizing was OK\n";
-        } else {
-            echo "Tokenizing failed : \n", $res;
-        }
-
-        if (filesize($path.'/log/errors.log') == 191) {
-            echo "Error.log is OK\n";
-        } else {
-            echo "Error.log signal some problems : \n",
-                 file_get_contents($path.'/log/errors.log');
-
-        }
-
-        $res = shell_exec('tail -n 1 '.$path.'/log/analyze.*.final.log| grep Done');
-        $logs = array('analyze', 'appinfo', 'Coding_Conventions', 'Dead_code', 'Custom');
-        if ($res == "Done\nDone\nDone\nDone\nDone\nDone\n") {
-            foreach($logs as $log) {
-                if (filemtime($path.'/log/analyze.'.$log.'.final.log') < $tokenizerLogTime) {
-                    echo 'analyze.', $log, ".final.log is too old\n";
-                }
+        $formats = array();
+        foreach(\Reports\Reports::FORMATS as $format) {
+            $a = $this->datastore->getHash($format);
+            if (!empty($a)) {
+                $formats[$format] = $a;
             }
-            echo "All analyzes were OK\n";
+        }
+        if (!empty($formats)) {
+            $status['formats'] = $formats;
+        }
+        
+
+        if ($config->json == true) {
+            print json_encode($status);
         } else {
-            foreach($logs as $log) {
-                if (!file_exists($path.'/log/analyze.'.$log.'.final.log')) {
-                    echo 'analyze.', $log, '.final.log not yet here', "\n";
-                    continue 1;
-                }
-                $log_content = file_get_contents($path.'/log/analyze.'.$log.'.final.log');
-                if (trim(substr($log_content, -5)) != "Done") {
-                    echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is wrong', "\n";
-                    if (preg_match('#\[\[\'analyzer\':\'Analyzer\\\\\\\\(.+?)\\\\\\\\(.+?)\'\]\]#s', $log_content, $r) !== false) {
-                        echo '   php bin/analyze -P ', $r[1], '/', $r[2], " \n";
+            $text = '';
+            $size = 0;
+            foreach($status as $k => $v) {
+                $size = max($size, strlen($k));
+            }
+
+            foreach($status as $field => $value) {
+                if (is_array($value)) {
+                    $sub = substr($field.str_repeat(' ', $size), 0, $size)." : \n";
+
+                    $sizea = 0;
+                    foreach($value as $k => $v) {
+                        $sizea = max($sizea, strlen($k));
                     }
+                    foreach($value as $k => $v) {
+                        $sub .= "    ".substr($k.str_repeat(' ', $sizea), 0, $sizea)." : $v\n";
+                    }
+                    $text .= "\n".$sub."\n";
                 } else {
-                    echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is OK', "\n";
+                    $text .= substr($field.str_repeat(' ', $size), 0, $size) . ' : '.$value."\n";
                 }
             }
-            echo "Some analyzes are KO\n";
-        }
-
-        if (file_exists($path.'/report')) {
-            if (filemtime($path.'/report') < $tokenizerLogTime) {
-                echo " Report is too old\n";
-            } else {
-               echo " Report OK\n";
-            }
-        } else {
-           echo " Report KO\n";
+            
+            print $text;
         }
     }
 }
