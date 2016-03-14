@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 07 Mar 2016 13:23:02 +0000
-.. comment: Generation hash : ebe02f106562a712c398609d1f05a2bc206de449
+.. comment: Generation date : Mon, 14 Mar 2016 12:13:30 +0000
+.. comment: Generation hash : 7d8c5bee37f8f01f0a8b8bdcb62f1d03689c4c09
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 228 analysis
+Total : 230 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -74,6 +74,7 @@ Total : 228 analysis
 * :ref:`Accessing Private <accessing-private>`
 * :ref:`Adding Zero <adding-zero>`
 * :ref:`Aliases Usage <aliases-usage>`
+* :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
 * :ref:`Ambiguous Index <ambiguous-index>`
 * :ref:`Argument should be typehinted <argument-should-be-typehinted>`
@@ -257,6 +258,7 @@ Total : 228 analysis
 * :ref:`Use Pathinfo <use-pathinfo>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
+* :ref:`Use random\_int() <use-random\_int()>`
 * :ref:`Used Once Variables (In Scope) <used-once-variables-(in-scope)>`
 * :ref:`Used Once Variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
@@ -298,13 +300,14 @@ Total : 228 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 48 analysis
+Total : 49 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
 * :ref:`Break With 0 <break-with-0>`
+* :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
@@ -354,13 +357,14 @@ Total : 48 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 43 analysis
+Total : 44 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
+* :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
@@ -623,15 +627,17 @@ Total : 13 analysis
 Security
 ++++++++
 
-Total : 9 analysis
+Total : 11 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Followed injections <followed-injections>`
 * :ref:`Register Globals <register-globals>`
+* :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Sleep is a security risk <sleep-is-a-security-risk>`
+* :ref:`Use random\_int() <use-random\_int()>`
 * :ref:`parse\_str() Warning <parse\_str()-warning>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 07 Mar 2016 13:23:02 +0000
-.. comment: Generation hash : ebe02f106562a712c398609d1f05a2bc206de449
+.. comment: Generation date : Mon, 14 Mar 2016 12:13:30 +0000
+.. comment: Generation hash : 7d8c5bee37f8f01f0a8b8bdcb62f1d03689c4c09
 
 
 .. _$http\_raw\_post\_data:
@@ -278,6 +278,24 @@ Some functions have several names, and both may be used the same way. However, o
 +--------------+-------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                      |
 +--------------+-------------------------------------------------------------------------------------+
+
+
+
+.. _already-parents-interface:
+
+Already Parents Interface
+#########################
+
+
+The same interface is implemented by a class and one of its children. That way, the child doesn't need to implement the interface, as the parent is already doing so, even if it is overwriting the interface's methods.
+
++--------------+------------------------------------+
+| Command Line | Interfaces/AlreadyParentsInterface |
++--------------+------------------------------------+
+| clearPHP     |                                    |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
 
 
 
@@ -560,6 +578,26 @@ PHP doesn't like anymore when the value is turned into a reference at the moment
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _cant-use-return-value-in-write-context:
+
+Cant Use Return Value In Write Context
+######################################
+
+
+Until PHP 5.5, it was not possible to use directly function calls inside an empty() function call : they were met with a 'Can't use function return value in write context' fatal error. 
+
+This also applies to methodcalls, static or not.
+
++--------------+------------------------------------------------------+
+| Command Line | Php/CantUseReturnValueInWriteContext                 |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
 
 
 
@@ -2906,6 +2944,8 @@ Since arrays way be quite big, it is recommended to avoid using merge in a loop.
 This may be achieved easily with the variadic operator : array\_merge(...array\_collecting\_the\_arrays), or 
 with call\_user\_func\_array('array\_merge', array\_collecting\_the\_arrays()). The Variadic is slightly faster than call\_user\_func\_array.
 
+Note that array\_merge\_recursive() is also affected.
+
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Performances/ArrayMergeInLoops                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
@@ -3853,6 +3893,26 @@ Php reserved names for class/trait/interface. They won't be available anymore in
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------+
+
+
+
+.. _safe-curloptions:
+
+Safe CurlOptions
+################
+
+
+It is advised to avoid disabling CURLOPT\_SSL\_VERIFYPEER and CURLOPT\_SSL\_VERIFYHOST when requesting a SSL connexion. 
+
+With those tests (by default), the certificate is verified, and if it isn't valided, the connexion fails : this is a safe behavior.
+
++--------------+----------------------+
+| Command Line | Security/CurlOptions |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Security`      |
++--------------+----------------------+
 
 
 
@@ -5230,6 +5290,27 @@ PHP 5.5 introduced password\_hash() and password\_check() to replace the use of 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _use-random\_int():
+
+Use random\_int()
+#################
+
+
+rand() provides random number. A better and more varied version is mt\_rand(), which is a drop-in replacement. 
+
+Since PHP 7, random\_int() (and its cousin random\_byte()), provides cryptographically secure pseudo-random bytes, which are good to be used
+when security is involved. openssl\_random\_pseudo\_bytes() may be used when the OpenSSL extension is available.
+
++--------------+---------------------------------+
+| Command Line | Php/BetterRand                  |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
