@@ -134,6 +134,7 @@ INI;
         shell_exec('chmod -R g+w '.$config->projects_root.'/projects/'.$project);
         $repositoryDetails = parse_url($repositoryURL);
 
+        $skipFiles = false; 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
                 // Empty initialization
@@ -229,7 +230,11 @@ INI;
                 // Git is last, as it will act as a default
                 case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $config->git === true) :
                     display('Git initialization');
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 >> /dev/null');
+                    $res = shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 ');
+                    if (($offset = strpos($res, 'fatal: ')) !== false) {
+                        $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
+                        $skipFiles = true;
+                    }
                     break 1;
 
                 default :
@@ -240,7 +245,14 @@ INI;
         }
 
         display( "Counting files\n");
-        shell_exec('php '.$config->executable.' files -p '.$project);
+        $this->datastore->addRow('hash', array('status' => 'Initproject'));
+
+        if (!$skipFiles) {
+            display("Running files\n");
+            $analyze = new Files();
+            $analyze->run($config);
+            unset($analyze);
+        }
     }
 
     private function check_project_dir($project) {

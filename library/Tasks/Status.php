@@ -27,6 +27,10 @@ class Status extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 
+        if ($project === 'default') {
+            die("Please, provide a project name with -p option. Aborting\n");
+        }
+
         $path = $config->projects_root.'/projects/'.$project;
         
         if (!file_exists($path.'/')) {
@@ -36,30 +40,39 @@ class Status extends Tasks {
         $status = array('project' => $project);
         $status['loc'] = $this->datastore->getHash('loc');
         $status['tokens'] = $this->datastore->getHash('tokens');
+        $status['status'] = $this->datastore->getHash('status');
 
+        switch($config->project_vcs) {
+            case 'git' : 
+                $res = shell_exec('cd '.$config->project_dir.'/projects/'.$config->project.'; git remote update; git status -uno | grep \'up-to-date\'');
+                $status['updatable'] = empty($res);
+                break 1;
+
+            case 'composer' :
+                $res = shell_exec('cd '.$config->project_dir.'/projects/'.$config->project.'; git remote update; git status -uno | grep \'Nothing to install or update\'');
+                $status['updatable'] = empty($res);
+                break 1;
+
+            case 'copy' : 
+            case 'symlink' : 
+                $status['updatable'] = false;
+                break 1;
+
+            default:
+                $status['updatable'] = 'N/A';
+                break 1;
+        }
+
+        $configuration = array();
+        // 
+        
         // Check the logs
-        $errors = array();
-        // Error log
-        if (!file_exists($path.'/log/errors.log')) {
-            $errors['errors.log'] = 'errors.log is missing';
-        } elseif (filesize($path.'/log/errors.log') != 191) {
-            $log = file_get_contents($path.'/log/errors.log');
-            preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r);
-            $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
-        } // Else no report
-
-        // Tokenizer log
-        if (!file_exists($path.'/log/tokenizer.log')) {
-            $errors['errors.log'] = 'errors.log is missing';
-        } elseif (filesize($path.'/log/errors.log') != 191) {
-            $log = file_get_contents($path.'/log/errors.log');
-            preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r);
-            $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
-        } // Else no report        
+        $errors = $this->getErrors($path);
         if (!empty($errors)) {
             $status['errors'] = $errors;
         }
         
+
         // Status of progress
         // errors? 
 
@@ -73,8 +86,8 @@ class Status extends Tasks {
         if (!empty($formats)) {
             $status['formats'] = $formats;
         }
-        
 
+        // Publication : Json or Text file
         if ($config->json == true) {
             print json_encode($status);
         } else {
@@ -103,6 +116,47 @@ class Status extends Tasks {
             
             print $text;
         }
+    }
+    
+    private function getErrors($path) {
+        $errors = array();
+
+        // Init error
+        $e = $this->datastore->getHash('init error');
+        if (!empty($e)) {
+            $errors['init error'] = $e;
+            return $errors;
+        }
+        
+        // Size error
+        $e = $this->datastore->getHash('token error');
+        if (!empty($e)) {
+            $errors['init error'] = $e;
+            return $errors;
+        }
+        
+        // Error log
+        if (!file_exists($path.'/log/errors.log')) {
+            $errors['errors.log'] = 'errors.log is missing';
+        } elseif (filesize($path.'/log/errors.log') != 191) {
+            $log = file_get_contents($path.'/log/errors.log');
+            preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r);
+            $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
+        } // Else no report
+
+        // Tokenizer log
+        if (!file_exists($path.'/log/tokenizer.log')) {
+            $errors['errors.log'] = 'errors.log is missing';
+        } elseif (filesize($path.'/log/errors.log') != 191) {
+            $log = file_get_contents($path.'/log/errors.log');
+            preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r);
+            $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
+        } // Else no report        
+        if (!empty($errors)) {
+            $status['errors'] = $errors;
+        }
+        
+        return $errors;
     }
 }
 

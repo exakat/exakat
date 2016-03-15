@@ -300,6 +300,8 @@ class Files extends Tasks {
                 display_r($unknown);
             }
         }
+        $this->datastore->addRow('hash', array('status' => 'Initproject'));
+        $this->checkTokenLimit();
     }
     
     private function checkComposer($dir) {

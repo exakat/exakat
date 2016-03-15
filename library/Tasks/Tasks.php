@@ -49,6 +49,7 @@ abstract class Tasks {
 
         $config = \Config::factory();
         if ($nb_tokens > $config->token_limit) {
+            $this->datastore->addRow('hash', array('token error' => "Project too large ($nb_tokens / {$config->token_limit})"));
             die("Project too large ($nb_tokens / {$config->token_limit})\n");
         }
     }
