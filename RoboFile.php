@@ -231,6 +231,7 @@ LICENCE;
              ->exec('mv exakat.phar ../release/')
              ->exec('cp docs/*.rst ../release/docs/')
              ->exec('cp -r docs/images ../release/docs/')
+             ->exec('cd ../release/; tar -zcvf exakat-'.\Exakat::VERSION.'.tar.gz exakat.phar docs/*')
              ->run();
     }
     
