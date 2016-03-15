@@ -187,14 +187,21 @@ function report($path) {
 function status($path) {
     global $initTime;
     
-    $status = array(
-        'Status'       => 'OK',
-        'Running Time' => duration(time() - $initTime),
-        'Init Time '   => date('r', $initTime),
-        'Queue'        => file_exists(PIPEFILE) ? 'Yes' : 'No',
-    );
+    $d = explode('/', $path);
+    if (isset($d[2]) && !empty($d[2]) && file_exists(__DIR__.'/'.$d[2].'/')) {
+        $json = shell_exec('php exakat status -p '.$d[2].' -json');
+        echo $json;
+    } else {
+        $status = array(
+            'Status'       => 'OK',
+            'Running Time' => duration(time() - $initTime),
+            'Init Time '   => date('r', $initTime),
+            'Queue'        => file_exists(PIPEFILE) ? 'Yes' : 'No',
+            'path'         => __DIR__.'/'.$d[2].'/',
+        );
+        echo json_encode($status);
+    }
 
-    echo json_encode($status);
     exit;
 }
 
