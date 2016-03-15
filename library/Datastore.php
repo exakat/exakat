@@ -108,7 +108,7 @@ class Datastore {
                 unset($e);
                 
             } else {
-                $d = array($key, $row);
+                $d = array($key, Sqlite3::escapeString($row));
             }
 
             $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ('".implode("', '", $d)."')";
