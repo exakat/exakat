@@ -150,12 +150,6 @@ class Project extends Tasks {
         display("Got the errors (if any)\n");
         $this->updateProgress($progress++);
 
-        $analyze = new Stat();
-        $analyze->run($config);
-        unset($analyze);
-        display("Stats\n");
-        $this->updateProgress($progress++);
-
         $analyze = new Log2csv();
         $analyze->run($config);
         unset($analyze);
@@ -240,7 +234,7 @@ class Project extends Tasks {
         $analyze = new Stat();
         $analyze->run($config);
         unset($analyze);
-        display("Stats 2\n");
+        display("Stats\n");
         
         $audit_end = time();
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
