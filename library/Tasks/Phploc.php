@@ -147,7 +147,7 @@ class Phploc extends Tasks {
         }
         
         $lines = array();
-        $php = new \PhpExec();
+        $php = new \Phpexec();
         $tokens = $php->getTokenFromFile($filename);
         
         if (empty($tokens)) {

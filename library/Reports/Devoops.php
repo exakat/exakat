@@ -1526,7 +1526,7 @@ TEXT
 
         $info[] = array('Report production date', date('r', strtotime('now')));
         
-        $php = new \PhpExec($this->config->phpversion);
+        $php = new \Phpexec($this->config->phpversion);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
         

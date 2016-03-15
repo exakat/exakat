@@ -149,7 +149,7 @@ class FindExternalLibraries extends Tasks {
     private function process($filename) {
         $return = array();
 
-        $php = new \PhpExec();
+        $php = new \Phpexec();
         $tokens = $php->getTokenFromFile($filename);
         if (count($tokens) == 1) { 
             return $return;
