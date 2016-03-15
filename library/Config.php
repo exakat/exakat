@@ -269,10 +269,10 @@ class Config {
 
     private function readProjectConfig($project) {
         if (!file_exists($this->projects_root.'/projects/'.$project.'/config.ini')) {
-            return null;
+            $this->projectConfig = array();
+        } else {
+            $this->projectConfig = parse_ini_file($this->projects_root.'/projects/'.$project.'/config.ini');
         }
-        
-        $this->projectConfig = parse_ini_file($this->projects_root.'/projects/'.$project.'/config.ini');
         
         // removing empty values in the INI file
         foreach($this->projectConfig as &$value) {
@@ -292,9 +292,9 @@ class Config {
                 $other_php_versions[] = $version;
             }
         }
-        
+
         // check and default values
-        $defaults = array( 'ignore_dirs'        => array('tests', 'test', 'Tests'),
+        $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => PHP_VERSION
                            );
