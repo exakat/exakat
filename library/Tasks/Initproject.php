@@ -24,8 +24,10 @@
 namespace Tasks;
 
 class Initproject extends Tasks {
-
+    private $config = null;
+    
     public function run(\Config $config) {
+        $this->config = $config;
         $project = $config->project;
 
         if ($project == 'default') {
@@ -56,37 +58,35 @@ class Initproject extends Tasks {
     }
     
     private function init_project($project, $repositoryURL) {
-        $config = \Config::factory();
-        
-        if (!file_exists($config->projects_root.'/projects/'.$project)) {
-            mkdir($config->projects_root.'/projects/'.$project, 0755);
+        if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
+            mkdir($this->config->projects_root.'/projects/'.$project, 0755);
         } else {
-            display( $config->projects_root.'/projects/'.$project.' already exists. Reusing'."\n");
+            display( $this->config->projects_root.'/projects/'.$project.' already exists. Reusing'."\n");
         }
 
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/log/')) {
-            mkdir($config->projects_root.'/projects/'.$project.'/log/', 0755);
+        if (!file_exists($this->config->projects_root.'/projects/'.$project.'/log/')) {
+            mkdir($this->config->projects_root.'/projects/'.$project.'/log/', 0755);
         } else {
-            display( $config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n");
+            display( $this->config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n");
             return null;
         }
 
         $this->datastore = new \Datastore(\Config::factory(), \Datastore::CREATE);
 
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
-            if ($config->symlink === true) {
+        if (!file_exists($this->config->projects_root.'/projects/'.$project.'/config.ini')) {
+            if ($this->config->symlink === true) {
                 $vcs = 'symlink';
-            } elseif ($config->svn === true) {
+            } elseif ($this->config->svn === true) {
                 $vcs = 'svn';
-            } elseif ($config->git === true) {
+            } elseif ($this->config->git === true) {
                 $vcs = 'git';
-            } elseif ($config->copy === true) {
+            } elseif ($this->config->copy === true) {
                 $vcs = 'copy';
-            } elseif ($config->bzr === true) {
+            } elseif ($this->config->bzr === true) {
                 $vcs = 'bzr';
-            } elseif ($config->hg === true) {
+            } elseif ($this->config->hg === true) {
                 $vcs = 'hg';
-            } elseif ($config->composer === true) {
+            } elseif ($this->config->composer === true) {
                 $vcs = 'composer';
             } else {
                 $vcs = 'git';
@@ -126,16 +126,16 @@ project_packagist   = "";
 
 INI;
 
-            file_put_contents($config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
+            file_put_contents($this->config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
         } else {
-            display( $config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring'."\n");
+            display( $this->config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring'."\n");
         }
 
-        shell_exec('chmod -R g+w '.$config->projects_root.'/projects/'.$project);
+        shell_exec('chmod -R g+w '.$this->config->projects_root.'/projects/'.$project);
         $repositoryDetails = parse_url($repositoryURL);
 
         $skipFiles = false; 
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
+        if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
                 // Empty initialization
                 case ($repositoryURL === '' || $repositoryURL === false) :
@@ -143,20 +143,20 @@ INI;
                     break 1;
 
                 // Symlink
-                case ($config->symlink === true) :
+                case ($this->config->symlink === true) :
                     display('Symlink initialization : '.realpath($repositoryURL));
-                    symlink(realpath($repositoryURL), $config->projects_root.'/projects/'.$project.'/code');
+                    symlink(realpath($repositoryURL), $this->config->projects_root.'/projects/'.$project.'/code');
                     break 1;
 
                 // Empty initialization
-                case ($config->copy === true) :
+                case ($this->config->copy === true) :
                     display('Copy initialization');
-                    $total = copyDir(realpath($repositoryURL), $config->projects_root.'/projects/'.$project.'/code');
+                    $total = copyDir(realpath($repositoryURL), $this->config->projects_root.'/projects/'.$project.'/code');
                     display($total . ' files were copied');
                     break 1;
 
                 // composer archive (early in the list, as this won't have 'scheme'
-                case ($config->composer === true) :
+                case ($this->config->composer === true) :
                     display('Initialization with composer');
 
                 // composer install
@@ -164,73 +164,73 @@ INI;
                     $composer->require = new \stdClass();
                     $composer->require->$repositoryURL = 'dev-master';
                     $json = json_encode($composer);
-                    mkdir($config->projects_root.'/projects/'.$project.'/code', 0755);
-                    file_put_contents($config->projects_root.'/projects/'.$project.'/code/composer.json', $json);
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'/code; composer -q install');
+                    mkdir($this->config->projects_root.'/projects/'.$project.'/code', 0755);
+                    file_put_contents($this->config->projects_root.'/projects/'.$project.'/code/composer.json', $json);
+                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code; composer -q install');
                     break 1;
 
                 // SVN
-                case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $config->svn === true) :
+                case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $this->config->svn === true) :
                     display('SVN initialization');
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
+                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // Bazaar
-                case ($config->bzr === true) :
+                case ($this->config->bzr === true) :
                     display('Bazaar initialization');
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; bzr branch '.escapeshellarg($repositoryURL).' code');
+                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; bzr branch '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // HG
-                case ($config->hg === true) :
+                case ($this->config->hg === true) :
                     display('Mercurial initialization');
-                    shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repositoryURL).' code');
+                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // Tbz archive
-                case ($config->tbz === true) :
+                case ($this->config->tbz === true) :
                     display('Download the tar.bz2');
                     $binary = file_get_contents($repositoryURL);
                     display('Saving');
                     $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tgz';
                     file_put_contents($archiveFile, $binary);
                     display('Unarchive');
-                    shell_exec('tar -jxf '.$archiveFile.' --directory '.$config->projects_root.'/projects/'.$project.'/code/');
+                    shell_exec('tar -jxf '.$archiveFile.' --directory '.$this->config->projects_root.'/projects/'.$project.'/code/');
                     display('Cleanup');
                     unlink($archiveFile);
                     break 1;
 
                 // tgz archive
-                case ($config->tgz === true) :
+                case ($this->config->tgz === true) :
                     display('Download the tar.gz');
                     $binary = file_get_contents($repositoryURL);
                     display('Saving');
                     $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tgz';
                     file_put_contents($archiveFile, $binary);
                     display('Unarchive');
-                    shell_exec('tar -zxf '.$archiveFile.' --directory '.$config->projects_root.'/projects/'.$project.'/code/');
+                    shell_exec('tar -zxf '.$archiveFile.' --directory '.$this->config->projects_root.'/projects/'.$project.'/code/');
                     display('Cleanup');
                     unlink($archiveFile);
                     break 1;
 
                 // zip archive
-                case ($config->zip === true) :
+                case ($this->config->zip === true) :
                     display('Download the zip');
                     $binary = file_get_contents($repositoryURL);
                     display('Saving');
                     $archiveFile = tempnam(sys_get_temp_dir(), 'archiveZip').'.zip';
                     file_put_contents($archiveFile, $binary);
                     display('Unzip');
-                    shell_exec('unzip '.$archiveFile.' -d '.$config->projects_root.'/projects/'.$project.'/code/');
+                    shell_exec('unzip '.$archiveFile.' -d '.$this->config->projects_root.'/projects/'.$project.'/code/');
                     display('Cleanup');
                     unlink($archiveFile);
                     break 1;
 
                 // Git
                 // Git is last, as it will act as a default
-                case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $config->git === true) :
+                case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $this->config->git === true) :
                     display('Git initialization');
-                    $res = shell_exec('cd '.$config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 ');
+                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
                         $skipFiles = true;
@@ -240,7 +240,7 @@ INI;
                 default :
                     display('No Initialization');
             }
-        } elseif (file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
+        } elseif (file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
             display( "Code folder is already there. Leaving it intact.\n");
         }
 
@@ -250,19 +250,17 @@ INI;
         if (!$skipFiles) {
             display("Running files\n");
             $analyze = new Files();
-            $analyze->run($config);
+            $analyze->run($this->config);
             unset($analyze);
         }
     }
 
     private function check_project_dir($project) {
-        $config = \Config::factory();
-        
         if ($project === null ) {
-            die( 'Usage : php '.$config->executable.' project_init -p project_name -R repository');
+            die( 'Usage : php '.$this->config->executable.' project_init -p project_name -R repository');
         }
 
-        if (!file_exists($config->projects_root.'/projects/'.$project) ) {
+        if (!file_exists($this->config->projects_root.'/projects/'.$project) ) {
             die( "Project $project doesn't exists.\n Aborting\n");
         }
     }
