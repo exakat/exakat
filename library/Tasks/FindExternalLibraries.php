@@ -88,6 +88,7 @@ class FindExternalLibraries extends Tasks {
             return; //Cancel task
         }
     
+        display('Processing files');
         $newConfigs = $this->processDir($dir);
 
         if (count($newConfigs) == 1) {
@@ -146,10 +147,14 @@ class FindExternalLibraries extends Tasks {
     }
 
     private function process($filename) {
+        $return = array();
+
         $php = new \PhpExec();
         $tokens = $php->getTokenFromFile($filename);
-    
-        $return = array();
+        if (count($tokens) == 1) { 
+            return $return;
+        }
+        $this->log->log("$filename : ".count($tokens));
 
         foreach($tokens as $id => $token) {
             if (is_string($token)) { continue; }
