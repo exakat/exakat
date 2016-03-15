@@ -28,7 +28,7 @@ $config = Config::factory($argv);
 
 $file = $config->filename;
 
-if ($filename === null) {
+if ($file === null) {
     print "Usage : tokenlist <file>";
 }
 
@@ -40,9 +40,9 @@ if (!is_readable($file)) {
     print "Usage : tokenlist <file>\n '$file' is not readable.\n\n";
 }
 
-$Php = new Phpexec('5.6');
+$Php = new Phpexec();
 
-$res = shell_exec($Php->getExec().' -l '.$file);
+$res = shell_exec($config->phpexec.' -l '.$file);
 if (strpos($res, 'No syntax errors') !== 0) {
     print "Usage : tokenlist <file>\n '$file' is not compilable PHP script.\n\n";
 }

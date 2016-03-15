@@ -127,8 +127,9 @@ SQL
     $files = recursiveReaddir($tmpdir.'/vendor/'.$vendor.'/'.$component);
     $all = array();
     foreach($files as $file) {
-        $all = array_merge_recursive($all, processFile($file));
+        $all[] = processFile($file);
     }
+    $all = call_user_func_array('array_merge_recursive', $all);
     
     print "$vendor/$component / $version ($componentId / $versionId)\n";
 
