@@ -37,9 +37,6 @@ class RemoteInjection extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->raw('sideEffect{ first = it;}')
 
-             // Must change to list of incoming points
-             ->analyzerIs('Security/ContaminatedFunction')
-
             // Loop initialisation    .filter{ it.code == '\$a' }
              ->raw("sideEffect{ x=[]; y = it.out('ARGUMENTS').out('ARGUMENT').rank.toList(); x += [y]; x += [y] ; x += 0;}")
              ->followConnexion( 10 )
