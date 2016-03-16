@@ -23,7 +23,6 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include 'helpers.php';
 
 class Autoload {
     static public function autoload_library($name) {
@@ -31,7 +30,10 @@ class Autoload {
         
         if (file_exists($file)) {
             include $file;
-        } 
+        } else {
+            print "$name : $file\n";
+            die();
+        }
     }
 
     static public function autoload_test($name) {
@@ -57,5 +59,11 @@ class Autoload {
         }
     }
 }
+
+spl_autoload_register('Autoload::autoload_library');
+
+$config = \Config::factory($argv);
+
+include 'helpers.php';
 
 ?>

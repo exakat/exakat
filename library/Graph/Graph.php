@@ -20,15 +20,16 @@
  *
 */
 
+namespace Graph;
 
-namespace Loader;
-
-class Neo4jphp extends Client {
-    static public function save_chunk() { }
-
-    static public function finalize() {
-        shell_exec('php bin/build_root');
+abstract class Graph {
+    protected $config = null;
+    
+    public function __construct(\Config $config) {
+        $this->config = $config;
     }
+
+    abstract public function query($query, $params = [], $load = []); 
 }
 
 ?>

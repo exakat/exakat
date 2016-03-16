@@ -41,189 +41,6 @@ function display_r($object) {
     }
 }
 
-function gremlin_query($query, $params = [], $load = []) {
-    static $scriptDir;
-    
-    if (!isset($scriptDir)) {
-        $config = \Config::factory();
-        $scriptDir = $config->neo4j_folder.'/scripts/';
-
-        if (!is_writable($scriptDir)) {
-            die("Can't write in file $scriptDir. Exakat needs to write in this folder.");
-        }
-    }
-    $getString = 'script='.urlencode($query);
-    
-    if (!is_array($load)) {
-        $load = [$load];
-    }
-
-    if (isset($params) && !empty($params)) {
-        // Avoid changing arg10 to 'string'0 if query has more than 10 arguments.
-        krsort($params);
-
-        foreach($params as $name => $value) {
-            if (is_string($value) && strlen($value) > 2000) {
-                $gremlin = "{ '".str_replace('$', '\\$', $value)."' }";
-
-                // what about factorise this below? 
-                $defName = 'a'.crc32($gremlin);
-                $defFileName = $scriptDir.$defName.'.gremlin';
-
-                if (file_exists($defFileName)) {
-                    $query = str_replace($name, $defName.'()', $query);
-
-                    $load[] = $defName;
-                    unset($params[$name]);
-                } else {
-                    $gremlin = 'def '.$defName.'() '.$gremlin;
-                    file_put_contents($defFileName, $gremlin);
-
-                    $query = str_replace($name, $defName.'()', $query);
-
-                    $load[] = $defName;
-                    unset($params[$name]);
-                }
-            } elseif (is_array($value)) {
-                $value = array_map(function ($x) { return str_replace('$', '\\$', addslashes($x)); }, $value);
-                $gremlin = "{ ['".join("','", $value)."'] }";
-                $defName = 'a'.crc32($gremlin);
-                $defFileName = $scriptDir.$defName.'.gremlin';
-
-                if (file_exists($defFileName)) {
-                    $query = str_replace($name, $defName.'()', $query);
-
-                    $load[] = $defName;
-                    unset($params[$name]);
-                } else {
-                    $gremlin = 'def '.$defName.'() '.$gremlin;
-                    file_put_contents($defFileName, $gremlin);
-
-                    $query = str_replace($name, $defName.'()', $query);
-
-                    $load[] = $defName;
-                    unset($params[$name]);
-                }
-            } else { // a short string (less than 2000) : hardcoded
-                $query = str_replace($name, "'".addslashes($value)."'", $query);
-                unset($params[$name]);
-            }
-        }
-
-        if (!empty($params)) {
-            $getString .= '&params='.urlencode(json_encode($params));
-        }
-    }
-
-    $getString = 'script='.urlencode($query);
-
-    if (count($load) == 1) {
-        $getString .= '&load='.urlencode(array_pop($load));
-    } elseif (count($load) > 1) {
-        $getString .= '&load='.implode(',', array_map('urlencode', $load));
-    } // else (aka 0) is ignored (nothing to do)
-    
-    if (strlen($getString) > 20000) {
-        echo 'Query string too big for GET (', strlen($getString), ")\n",
-             'Query : ',
-             $query,
-            "\n\n",
-            print_r($params, true);
-        die();
-    }
-
-    $ch = curl_init();
-
-    static $neo4j_host, $neo4j_auth;
-    if (!isset($neo4j_host)) {
-        $config = \Config::factory();
-        $neo4j_host   = $config->neo4j_host.':'.$config->neo4j_port;
-
-        if ($config->neo4j_login !== '') {
-            $neo4j_auth   = base64_encode($config->neo4j_login.':'.$config->neo4j_password);
-        } else {
-            $neo4j_auth   = '';
-        }
-    }
-
-    //set the url, number of POST vars, POST data
-    $headers = array( 'Content-Length: '.strlen($getString),
-                      'User-Agent: exakat',
-                      'X-Stream: true');
-    if (!empty($neo4j_auth)) {
-        $headers[] = 'Authorization: Basic '.$neo4j_auth;
-    }
-    curl_setopt($ch,CURLOPT_HTTPHEADER, $headers);
-
-    curl_setopt($ch,CURLOPT_URL,            'http://'.$neo4j_host.'/tp/gremlin/execute?'.$getString);
-    curl_setopt($ch,CURLOPT_CUSTOMREQUEST,  'GET');
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch,CURLOPT_IPRESOLVE,      CURL_IPRESOLVE_V4);
-
-    //execute post
-    $result = curl_exec($ch);
-
-    //close connection
-    curl_close($ch);
-    
-    $result = json_decode($result);
-    if (isset($result->errormessage)) {
-        throw new \Exceptions\GremlinException($result->errormessage, $query);
-    }
-
-    return $result;
-}
-
-
-function gremlin_queryOne($query, $params = [], $load = []) {
-    $res = gremlin_query($query, $params, $load);
-    if (!is_object($res)) {
-        die('Server is not responding');
-    }
-    $res = $res->results[0];
-    
-    if (is_bool($res) || is_int($res)) {
-        return $res;
-    } else {
-        echo 'Help needed in ', __METHOD__, "\n",
-             "Query : '", $query, "'\n",
-             print_r($res, true);
-        die();
-    }
-}
-
-function gremlin_queryColumn($query, $params = [], $load = []) {
-    $res = gremlin_query($query, $params, $load);
-    $res = $res->results;
-    
-    $return = array();
-    if(count($res) > 0) {
-        foreach($res as $r) {
-            $return[] = $r;
-        }
-    }
-    
-    return $return;
-}
-
-function neo4j_serverInfo() {
-    static $config;
-    
-    if ($config === null) {
-        $config = \Config::factory();
-    }
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
-    curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $res = curl_exec($ch);
-    curl_close($ch);
-
-    return $res;
-}
-
 function rmdirRecursive($dir) { 
     if (!file_exists($dir)) { 
         // Do nothing
@@ -279,5 +96,37 @@ function copyDir($src, $dst) {
 
     return $total;
 } 
+
+////////////////////////////////////////////////////////////////////////
+/// Old API for gremlin (moved to \Graph\ Gremlin2 then Gremlin3)
+////////////////////////////////////////////////////////////////////////
+
+global $graphDB;
+$graphDB = new \Graph\Gremlin2($config);
+
+function gremlin_query($query, $params = [], $load = []) {
+    global $graphDB;
+    
+    return $graphDB->query($query, $params, $load);
+}
+
+
+function gremlin_queryOne($query, $params = [], $load = []) {
+    global $graphDB;
+    
+    return $graphDB->queryOne($query, $params, $load);
+}
+
+function gremlin_queryColumn($query, $params = [], $load = []) {
+    global $graphDB;
+    
+    return $graphDB->queryColumn($query, $params, $load);
+}
+
+function neo4j_serverInfo() {
+    global $graphDB;
+    
+    return $graphDB->serverInfo();
+}
 
 ?>

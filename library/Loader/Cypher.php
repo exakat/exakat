@@ -47,6 +47,8 @@ class Cypher {
     
     private $isLink = false;
     
+    private $cyhper = null;
+    
     const ATTRIBUTES = array('index',    'root',      'hidden',      'association', 'in_for',
                              'in_quote', 'delimiter', 'noDelimiter', 'rank',        'fullcode',
                              'block',    'bracket',   'filename',    'tag',         'atom',
@@ -54,6 +56,9 @@ class Cypher {
     
     public function __construct() {
         $this->config = \Config::factory();
+        
+        // Force autoload
+        $this->cypher = new \Graph\Cypher($this->config );
 
         if (file_exists($this->config->projects_root.'/nodes.cypher.csv') && static::$file_saved == 0) {
             $this->cleanCsv();
@@ -80,7 +85,7 @@ class Cypher {
 
         // Load Nodes
         $queryTemplate = 'CREATE INDEX ON :Token(eid)';
-        cypher_query($queryTemplate);
+        $this->cypher->query($queryTemplate);
         display('Created index');
 
         $queryTemplate = <<<CYPHER
@@ -94,7 +99,7 @@ line: toInt(csvLine.line)})
 
 CYPHER;
         try {
-            cypher_query($queryTemplate);
+            $this->cypher->query($queryTemplate);
         } catch (\Exception $e) {
             $this->cleanCsv(); 
             die("Couldn't load nodes in the database\n".$e->getMessage());
@@ -121,7 +126,7 @@ SET token.$attribute = $toAttribute
 
 CYPHER;
             try {
-                cypher_query($queryTemplate);
+                $this->cypher->query($queryTemplate);
             } catch (\Exception $e) {
                 die("Couldn't load nodes attributes '".$attribute."' in the database\n Exception : ".$e->getMessage()."\n");
             }
@@ -144,7 +149,7 @@ CREATE (token)-[:$relation]->(token2)
 
 CYPHER;
             try {
-                cypher_query($queryTemplate);
+                $this->cypher->query($queryTemplate);
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load relations for ".$name." in the database\n".$e->getMessage());
@@ -339,56 +344,5 @@ CYPHER;
         return str_replace("\"", "\\\"", $x);
     }
 }
-
-function cypher_query($query, $params = []) {
-    $fields = ['query' => $query];
-    if (isset($params) && !empty($params)) {
-        $fields['params'] = $params;
-    }
-
-    $fields_string = json_encode($fields);
-
-    $ch = curl_init();
-
-    static $neo4j_host, $neo4j_auth;
-    if (!isset($neo4j_host)) {  
-        $config = \Config::factory();
-        $neo4j_host = $config->neo4j_host.':'.$config->neo4j_port;
-        
-        if ($config->neo4j_login !== '') {
-            $neo4j_auth   = base64_encode($config->neo4j_login.':'.$config->neo4j_password);
-        } else {
-            $neo4j_auth   = '';
-        }
-    }
-
-    //set the url, number of POST vars, POST data
-    $headers = array( 'Accept: application/json;stream=true',
-                      'Content-type: application/json',
-                      'Content-Length: '.strlen($fields_string));
-    if (!empty($neo4j_auth)) {
-        $headers[] = 'Authorization: Basic '.$neo4j_auth;
-    }
-    curl_setopt($ch,CURLOPT_HTTPHEADER, $headers);
-
-    curl_setopt($ch,CURLOPT_URL, 'http://'.$neo4j_host.'/db/data/cypher');
-    curl_setopt($ch,CURLOPT_POST,true);
-    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch,CURLOPT_IPRESOLVE,CURL_IPRESOLVE_V4);
-
-    //execute post
-    $result = curl_exec($ch);
-
-    //close connection
-    curl_close($ch);
-
-    if (isset($result->message)) {
-        throw new \Exception($result->message);
-    }
-
-    return json_decode($result);
-}
-
 
 ?>
