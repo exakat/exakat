@@ -38,7 +38,7 @@ class CleanDb extends Tasks {
             display('Warning : This Neo4j installation doesn\'t seem to be used by Exakat. Please, stop the server, remove "data" and "scripts" folder, then run "'.$config->executable.' doctor".');
             return false;
         }
-        
+
         if ($config->quick) {
             $this->restartNeo4j();
             $this->cleanScripts();
@@ -96,7 +96,7 @@ GREMLIN;
         
         // preserve data/dbms/auth to preserve authentication
         if (file_exists($config->neo4j_folder.'/data/dbms/auth')) {
-            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; echo "" > data/scripts/exakat.txt ';
+            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; mkdir -p data/scripts; echo "" > data/scripts/exakat.txt ';
         } else {
             $sshLoad =  'rm -rf data; mkdir -p data; mkdir -p data/log; mkdir -p data/scripts; echo "" > data/scripts/exakat.txt ';
         }
