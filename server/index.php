@@ -189,15 +189,14 @@ function status($path) {
     
     $d = explode('/', $path);
     if (isset($d[2]) && !empty($d[2]) && file_exists(__DIR__.'/'.$d[2].'/')) {
-        $json = shell_exec('php exakat status -p '.$d[2].' -json');
+        $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$d[2].' -json');
         echo $json;
     } else {
         $status = array(
             'Status'       => 'OK',
             'Running Time' => duration(time() - $initTime),
             'Init Time '   => date('r', $initTime),
-            'Queue'        => file_exists(PIPEFILE) ? 'Yes' : 'No',
-            'path'         => __DIR__.'/'.$d[2].'/',
+            'Queue'        => file_exists(PIPEFILE) ? 'Yes' : 'No'
         );
         echo json_encode($status);
     }
