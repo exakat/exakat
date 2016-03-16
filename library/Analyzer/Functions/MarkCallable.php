@@ -58,6 +58,7 @@ sideEffect{
     if (i > 0) {
         it.cbClass = it.noDelimiter.substring(0, i).toLowerCase();
         if (it.cbClass.toString()[0] != "\\\\") {it.cbClass = "\\\\" + it.cbClass;};
+        it.fullnspath = it.cbClass;
         it.cbMethod = it.noDelimiter.substring(2 + i).toLowerCase();
     } else {
         it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath == "" || it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;};
@@ -244,6 +245,44 @@ GREMLIN;
              ->raw($firstArgIsAVariable)
              ->raw($secondArgIsAString)
              ->raw($apply);
+        $this->prepareQuery();
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Closures 
+
+        // callable is in # position
+        foreach($positions as $position) {
+            $this->atomIs('Functioncall')
+                 ->hasNoIn('METHOD')
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->fullnspath($ini['functions'.$position])
+                 ->outIs('ARGUMENTS')
+                 ->outIs('ARGUMENT')
+                 ->is('rank', $position)
+                 ->atomIs('Function');
+            $this->prepareQuery();
+        }
+
+        // callable is in last
+        $this->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath($ini['functions_last'])
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->hasRank('last')
+             ->atomIs('Function');
+        $this->prepareQuery();
+
+        // callable is in 2nd to last
+        $this->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath($ini['functions_2last'])
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->hasRank('2last')
+             ->atomIs('Function');
         $this->prepareQuery();
     }
 }
