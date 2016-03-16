@@ -30,10 +30,7 @@ class Autoload {
         
         if (file_exists($file)) {
             include $file;
-        } else {
-            print "$name : $file\n";
-            die();
-        }
+        } 
     }
 
     static public function autoload_test($name) {
