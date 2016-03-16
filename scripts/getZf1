@@ -20,8 +20,9 @@ foreach($revisions as $revision) {
     
     $all = array();
     foreach($dir as $file) {
-        $all = array_merge_recursive($all, processFile($file));
+        $all[] = processFile($file);
     }
+    $all = call_user_func_array('array_merge_recursive', $all);
 
     $e = microtime(true);
     
