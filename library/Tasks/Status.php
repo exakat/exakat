@@ -44,21 +44,36 @@ class Status extends Tasks {
 
         switch($config->project_vcs) {
             case 'git' : 
-                $res = shell_exec('cd '.$config->project_dir.'/projects/'.$config->project.'; git remote update; git status -uno | grep \'up-to-date\'');
-                $status['updatable'] = empty($res);
+                $status['git status'] = trim(shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git rev-parse HEAD'));
+                
+                if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
+                    $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git remote update; git status -uno | grep \'up-to-date\'');
+                    $status['updatable'] = empty($res);
+                } else {
+                    $status['updatable'] = false;
+                }
                 break 1;
 
             case 'composer' :
-                $res = shell_exec('cd '.$config->project_dir.'/projects/'.$config->project.'; git remote update; git status -uno | grep \'Nothing to install or update\'');
+                $json = @json_decode(@file_get_contents($config->projects_root.'/projects/'.$config->project.'/code/composer.lock'));
+                if (isset($json->hash)) {
+                    $status['hash'] = $json->hash;
+                } else {
+                    $status['hash'] = 'Can\'t read hash';
+                }
+                
+                $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; git remote update; git status -uno | grep \'Nothing to install or update\'');
                 $status['updatable'] = empty($res);
                 break 1;
 
             case 'copy' : 
             case 'symlink' : 
+                $status['hash'] = 'None';
                 $status['updatable'] = false;
                 break 1;
 
             default:
+                $status['hash'] = 'None';
                 $status['updatable'] = 'N/A';
                 break 1;
         }
@@ -145,12 +160,13 @@ class Status extends Tasks {
         } // Else no report
 
         // Tokenizer log
-        if (!file_exists($path.'/log/tokenizer.log')) {
+        if (!file_exists($path.'/log/errors.log')) {
             $errors['errors.log'] = 'errors.log is missing';
         } elseif (filesize($path.'/log/errors.log') != 191) {
             $log = file_get_contents($path.'/log/errors.log');
-            preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r);
-            $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
+            if (preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r)) {
+                $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
+            }
         } // Else no report        
         if (!empty($errors)) {
             $status['errors'] = $errors;
