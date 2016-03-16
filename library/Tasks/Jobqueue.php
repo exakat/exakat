@@ -92,9 +92,11 @@ class Jobqueue extends Tasks {
                             display( 'processing onepage job ' . $job . PHP_EOL);
                             $this->process($job);
                         } elseif (file_exists($this->config->projects_root.'/projects/'.$job)) {
-                            display( 'processing project job ' . $job . microtime(true). PHP_EOL);
-                            
+                            display( 'processing project job ' . $job . PHP_EOL);
+                            $b = microtime(true);
                             shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
+                            $e = microtime(true);
+                            display( 'processing project job ' . $job . ' done ('.number_format(($e -$b), 2) . ' s)'. PHP_EOL);
                         }
                     }
                     
