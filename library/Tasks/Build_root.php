@@ -50,7 +50,7 @@ class Build_root extends Tasks {
 
         // separate processing for T_STRING
         $query = <<<GREMLIN
-g.V.has("token", "T_STRING").has("atom", null).each{
+g.V().has("token", "T_STRING").has("atom", null).each{
     it.setProperty("fullcode", it.getProperty("code"));
     it.setProperty("atom", "Identifier");
     g.idx("atoms").put("atom", it.atom, it);
@@ -61,7 +61,7 @@ GREMLIN;
 
         // separate processing for T_VARIABLE
         $query = <<<GREMLIN
-g.V.has("token", "T_VARIABLE").each{
+g.V().has("token", "T_VARIABLE").each{
     it.setProperty("fullcode", it.getProperty("code"));
     it.setProperty("atom", "Variable");
     g.idx("atoms").put("atom", it.atom, it);
@@ -71,7 +71,7 @@ GREMLIN;
         $this->logTime('g.idx("atoms") : T_VARIABLE');
 
         $query = <<<GREMLIN
-g.V.has("token", "T_STRING_VARNAME").each{
+g.V().has("token", "T_STRING_VARNAME").each{
     it.setProperty("fullcode", it.getProperty("code"));
     it.setProperty("atom", "Variable");
     g.idx("atoms").put("atom", it.atom, it);
@@ -81,7 +81,7 @@ GREMLIN;
         $this->logTime('g.idx("atoms") : T_STRING_VARNAME');
 
         $query = <<<GREMLIN
-g.V.filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
+g.V().filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
                        "RawString", "Float", "Boolean", "Void", "File", "Nsname"]}.each{
     g.idx("atoms").put("atom", it.atom, it);
     if (it.atom == 'Integer') {
@@ -128,7 +128,7 @@ GREMLIN;
 
         // creating the index
         // @todo check this index
-        gremlin_query("g.V.has('root', true).each{ g.idx('racines').put('token', 'ROOT', it); };");
+        gremlin_query("g.V().has('root', true).each{ g.idx('racines').put('token', 'ROOT', it); };");
         $this->logTime('g.idx("ROOT")');
 
         // special case for the initial Rawstring.
@@ -136,7 +136,7 @@ GREMLIN;
         $this->logTime('g.idx("racines") ROOT special');
 
         // creating the neo4j Index
-        gremlin_query("g.V.has('index', true).each{ g.idx('racines').put('token', it.token, it); };");
+        gremlin_query("g.V().has('index', true).each{ g.idx('racines').put('token', it.token, it); };");
         $this->logTime('g.idx("racines")[[token:***]] indexing');
         
         gremlin_query("g.idx('racines')[['token':'Sequence']].out('INDEXED').has('in_for', true).inE('INDEXED').each{ g.removeEdge(it); }");
