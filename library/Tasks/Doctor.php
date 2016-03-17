@@ -80,8 +80,8 @@ class Doctor extends Tasks {
         $stats['java']['$JAVA_HOME'] = $res;
 
         // neo4j
-        if ($config->neo4j_folder === false) {
-            $stats['neo4j']['installed'] = 'Couldn\'t find the path for neo4j from the config/config.ini : read value is "'.$config->neo4j_folder.'". Please, check it.';
+        if (empty($config->neo4j_folder)) {
+            $stats['neo4j']['installed'] = 'Couldn\'t find the path to neo4j from the config/config.ini. Please, check it.';
         } elseif (!file_exists($config->neo4j_folder)) {
             $stats['neo4j']['installed'] = 'No (folder : '.$config->neo4j_folder.')';
         } else {
