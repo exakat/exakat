@@ -32,10 +32,12 @@ class Test extends Tasks {
         $project = 'test';
 
         // Check for requested file
-        if (!file_exists($config->filename)) {
-            die("No such file as '$config->filename'. Aborting\n");
+        if (!empty($config->filename) && !file_exists($config->filename)) {
+            die("No such file '$config->filename'. Aborting\n");
+        } elseif (!empty($config->dirname) && !file_exists($config->dirname)) {
+            die("No such directory '$config->filename'. Aborting\n");
         }
-        
+
         // Check for requested analyze
         $analyzer = $config->program;
         if (\Analyzer\Analyzer::getClass($analyzer)) {
@@ -51,7 +53,11 @@ class Test extends Tasks {
         display("Cleaning DB\n");
         shell_exec($this->config->php.' '.$config->executable.' cleandb -v');
 
-        shell_exec($this->config->php.' '.$config->executable.' load -v -p test -f '.$config->filename. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
+        if (!empty($config->dirname)) {
+            shell_exec($this->config->php.' '.$config->executable.' load -v -p test -r -d '.$config->dirname. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
+        } else {
+            shell_exec($this->config->php.' '.$config->executable.' load -v -p test -f '.$config->filename. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
+        }
         display("Project loaded\n");
 
         $res = shell_exec($this->config->php.' '.$config->executable.' build_root -v -p test > '.$config->projects_root.'/projects/test/log/build_root.final.log');

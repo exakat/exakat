@@ -3,7 +3,6 @@
 namespace Test;
 
 include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
-spl_autoload_register('Autoload::autoload_library');
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
     public function generic_test($file) {
@@ -43,7 +42,13 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         }
         
         $analyzer = escapeshellarg($test_config);
-        $shell = 'cd ../..; php exakat test -f ./tests/analyzer/source/'.str_replace('_', '/', $file).'.php -P '.$analyzer.'; php exakat results  -p test -P '.$analyzer.' -o -json';
+        $source = 'source/'.str_replace('_', '/', $file).'.php';
+
+        if (is_dir($source)) {
+            $shell = 'cd ../..; php exakat test -d ./tests/analyzer/'.$source.' -P '.$analyzer.'; php exakat results  -p test -P '.$analyzer.' -o -json';
+        } else {
+            $shell = 'cd ../..; php exakat test -f ./tests/analyzer/'.$source.' -P '.$analyzer.'; php exakat results  -p test -P '.$analyzer.' -o -json';
+        }
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);
 
