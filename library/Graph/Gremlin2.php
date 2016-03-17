@@ -30,10 +30,13 @@ class Gremlin2 extends Graph {
     public function __construct(\Config $config) {
         parent::__construct($config);
 
+        if (!file_exists($config->neo4j_folder)) {
+            die("Error in the path to the Neo4j folder. Please, check config/config.ini\n");
+        }
         $this->scriptDir = $config->neo4j_folder.'/scripts/';
 
         if (!is_writable($this->scriptDir)) {
-            die("Can't write in file $this->scriptDir. Exakat needs to write in this folder.");
+            die("Can't write in '$this->scriptDir'. Exakat needs to write in this folder.\n");
         }
 
         $this->neo4j_host   = $config->neo4j_host.':'.$config->neo4j_port;
