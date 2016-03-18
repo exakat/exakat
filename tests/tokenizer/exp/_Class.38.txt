@@ -18,12 +18,12 @@ Label : CODE
           private
       Label : ELEMENT
         private
-        Label : PRIVATE
-          private
         Label : DEFINE
           $c
         Label : DEFINE
           $d
+        Label : PRIVATE
+          private
       Label : ELEMENT
         const
         Label : CONST
@@ -34,6 +34,8 @@ Label : CODE
             3
       Label : ELEMENT
         private
+        Label : PRIVATE
+          private
         Label : DEFINE
           $e
         Label : DEFINE
@@ -42,10 +44,10 @@ Label : CODE
             $f
           Label : RIGHT
             2
-        Label : PRIVATE
-          private
       Label : ELEMENT
         private
+        Label : PRIVATE
+          private
         Label : DEFINE
           =
           Label : LEFT
@@ -54,7 +56,5 @@ Label : CODE
             3
         Label : DEFINE
           $h
-        Label : PRIVATE
-          private
     Label : NAME
       x

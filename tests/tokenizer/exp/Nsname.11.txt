@@ -82,12 +82,12 @@ Label : CODE
     \
     Label : SUBNAME
       A
-    Label : SUBNAME
-      B
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
+    Label : SUBNAME
+      B
     Label : SUBNAME
       C
     Label : SUBNAME
@@ -100,12 +100,12 @@ Label : CODE
       G
   Label : ELEMENT
     \
-    Label : SUBNAME
-      A
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
+    Label : SUBNAME
+      A
     Label : SUBNAME
       B
     Label : SUBNAME
@@ -122,14 +122,14 @@ Label : CODE
       H
   Label : ELEMENT
     \
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        void
     Label : SUBNAME
       A
     Label : SUBNAME
       B
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        void
     Label : SUBNAME
       C
     Label : SUBNAME

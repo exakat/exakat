@@ -24,12 +24,12 @@ Label : CODE
           protected
       Label : ELEMENT
         protected
-        Label : PROTECTED
-          protected
         Label : DEFINE
           $c
         Label : DEFINE
           $d
+        Label : PROTECTED
+          protected
       Label : ELEMENT
         const
         Label : CONST

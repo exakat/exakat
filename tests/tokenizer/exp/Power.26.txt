@@ -13,19 +13,19 @@ Label : CODE
         Label : CODE
           +
           Label : LEFT
-            **
-            Label : LEFT
-              -
-              Label : SIGN
+            -
+            Label : SIGN
+              **
+              Label : LEFT
                 $b
-            Label : RIGHT
-              (
-              Label : CODE
-                -
-                Label : LEFT
-                  $c
-                Label : RIGHT
-                  $d
+              Label : RIGHT
+                (
+                Label : CODE
+                  -
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    $d
           Label : RIGHT
             **
             Label : LEFT

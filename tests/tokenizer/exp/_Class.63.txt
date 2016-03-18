@@ -100,20 +100,20 @@ Label : CODE
           static
       Label : ELEMENT
         public
+        Label : PUBLIC
+          public
         Label : DEFINE
           $d3
         Label : DEFINE
           $e3
-        Label : PUBLIC
-          public
       Label : ELEMENT
         static
-        Label : STATIC
-          static
         Label : DEFINE
           $d4
         Label : DEFINE
           $e4
+        Label : STATIC
+          static
       Label : ELEMENT
         public
         Label : PUBLIC
@@ -134,8 +134,6 @@ Label : CODE
           static
       Label : ELEMENT
         static
-        Label : PROTECTED
-          protected
         Label : DEFINE
           =
           Label : LEFT
@@ -148,6 +146,8 @@ Label : CODE
             $g2
           Label : RIGHT
             3
+        Label : PROTECTED
+          protected
         Label : STATIC
           static
       Label : ELEMENT
@@ -168,8 +168,6 @@ Label : CODE
             3
       Label : ELEMENT
         static
-        Label : STATIC
-          static
         Label : DEFINE
           =
           Label : LEFT
@@ -182,5 +180,7 @@ Label : CODE
             $g4
           Label : RIGHT
             5
+        Label : STATIC
+          static
     Label : NAME
       x

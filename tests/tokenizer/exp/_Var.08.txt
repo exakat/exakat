@@ -8,6 +8,8 @@ Label : CODE
       ;
       Label : ELEMENT
         var
+        Label : VAR
+          var
         Label : DEFINE
           $a
         Label : DEFINE
@@ -20,8 +22,6 @@ Label : CODE
               
               Label : ARGUMENT
                 void
-        Label : VAR
-          var
       Label : ELEMENT
         var
         Label : DEFINE
