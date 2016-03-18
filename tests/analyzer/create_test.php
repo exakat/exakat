@@ -68,9 +68,20 @@
 
     file_put_contents('Test/'.$test.'.php', $code);
 
-    file_put_contents('./source/'.$test.'.'.$next.'.php', "<?php
+    if (in_array('-d', $argv)) {
+        print "Creating directory file\n";
+        mkdir('./source/'.$test.'.'.$next.'.php',0755);
+        file_put_contents('./source/'.$test.'.'.$next.'.php/test.01.php', "<?php
 
 ?>");
+        shell_exec('bbedit ./source/'.$test.'.'.$next.'.php/test.01.php');
+    } else {
+        print "Creating test file\n";
+        file_put_contents('./source/'.$test.'.'.$next.'.php', "<?php
+
+?>");
+        shell_exec('bbedit ./source/'.$test.'.'.$next.'.php');
+    }
     
     file_put_contents('./exp/'.$test.'.'.$next.'.php', "<?php
 
@@ -81,7 +92,6 @@
 ?>");
 
     shell_exec('bbedit ./exp/'.$test.'.'.$next.'.php');
-    shell_exec('bbedit ./source/'.$test.'.'.$next.'.php');
     
     echo "New test number : $next\n",
          "Run the tests with   phpunit Test/$test.php\n",
