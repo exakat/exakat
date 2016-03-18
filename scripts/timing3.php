@@ -23,7 +23,7 @@
 
 $rows = glob('projects/*');
 
-$finals = [['project', 'Duree', 'Tokens', 'LoC']];
+$finals = [['project', 'Duree', 'Tokens', 'LoC', 'Neo4jSize']];
 foreach($rows as $row) {
     $final = [basename($row)];
     
@@ -55,6 +55,19 @@ foreach($rows as $row) {
     $res = $sqlite->query('SELECT * FROM hash WHERE key = "loc";');
     $sqlRow = $res->fetchArray();
     $final[] = $sqlRow['value'];
+
+    $res = $sqlite->query('SELECT * FROM hash WHERE key = "neo4jSize";');
+    $sqlRow = $res->fetchArray();
+    if (is_array($sqlRow)) {
+        preg_match('/\d+[KMG]/', $sqlRow['value'], $size);
+        $size = $size[0];
+        $size = str_replace('K', '000', $size);
+        $size = str_replace('M', '000000', $size);
+        $size = str_replace('G', '000000000', $size);
+        $final[] = $size;
+    } else {
+        $final[] = '';
+    }
     
     $finals[] = $final;
 }
