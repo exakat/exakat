@@ -237,8 +237,15 @@ class Project extends Tasks {
         display("Stats\n");
         
         $audit_end = time();
+        
+        // measure Neo4j's final size
+        $res = shell_exec('du -sh '.$config->neo4j_folder);
+        $neo4jSize = trim(str_replace(basename($config->neo4j_folder), '', $res));
+
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
-                                               'audit_length' => $audit_end - $audit_start));
+                                               'audit_length' => $audit_end - $audit_start,
+                                               'neo4jSize'    => $neo4jSize));
+                                               
 
         $this->logTime('Final');
         display("End 2\n");
