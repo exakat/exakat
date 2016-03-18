@@ -62,7 +62,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->raw('filter{ it.out("ELEMENT").has("atom", "Function").out("NAME").has("atom", "String").any() == false}')
 
              // spot a non-definition
-//             ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
+             ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
 
              ->back('first');
         $this->prepareQuery();
