@@ -42,15 +42,17 @@ Label : CODE
             B
   Label : ELEMENT
     (
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $c
-      Label : ARGUMENT
-        $d
     Label : CODE
       ->
       Label : OBJECT
         $c
       Label : PROPERTY
         C
+  Label : ELEMENT
+    (
+    Label : CODE
+      Arguments
+      Label : ARGUMENT
+        $c
+      Label : ARGUMENT
+        $d
