@@ -1997,13 +1997,14 @@ SQL
     private function GlobalVariablesList() {
         $css = new \Stdclass();
         $css->displayTitles = true;
-        $css->titles = array('Variable');
+        $css->titles = array('Code', 'File', 'Line');
         $css->readOrder = $css->titles;
-        
+
         $data = array();
-        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/GlobalInGlobal"');
-        while($row = $res->fetchArray()) {
-            $data[] = array('Variable' => $row['fullcode']);
+        $sqlQuery = 'SELECT fullcode AS Code, file AS File, line AS Line  FROM results WHERE analyzer="Structures/GlobalInGlobal" ORDER BY fullcode';
+        $res = $this->dump->query($sqlQuery);
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $data[] = $row;
         }
         
         return $this->formatText( <<<TEXT
