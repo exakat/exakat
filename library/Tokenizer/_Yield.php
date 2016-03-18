@@ -57,7 +57,7 @@ class _Yield extends TokenAuto {
             $this->conditions = array(0 => array('token' => _Yield::$operators,
                                                  'atom'  => 'none'),
                                       1 => array('atom'  => 'yes'),
-                                      2 => array('token' => array_merge( array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG'),
+                                      2 => array('token' => array_merge( array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET'),
                                                                          Addition::$operators,
                                                                          Logical::$operators,
                                                                          Comparison::$operators)
@@ -68,7 +68,8 @@ class _Yield extends TokenAuto {
             $this->conditions = array(0 => array('token' => _Yield::$operators,
                                                  'atom'  => 'none'),
                                       1 => array('atom'  => 'yes'),
-                                      2 => array('token' => array_merge( array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG'),
+                                      2 => array('token' => array_merge( array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG', 
+                                                                               'T_CLOSE_BRACKET'),
                                                                          Addition::$operators)
                                                 )
                                       );
