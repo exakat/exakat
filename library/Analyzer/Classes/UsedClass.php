@@ -134,7 +134,23 @@ GREMLIN
         // class used in a String (full string only)
         $strings = $this->query(<<<GREMLIN
 g.idx("atoms")[["atom":"String"]].filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Functions\\\\MarkCallable").any()}
+                                 .filter{ (it.noDelimiter =~ "/::/" ).getCount() == 0 }
                                  .noDelimiter.unique()
+GREMLIN
+);
+        $this->atomIs('Class')
+             ->analyzerIsNot('self')
+             ->outIs('NAME')
+             ->code($strings)
+             ->back('first');
+        $this->prepareQuery();
+
+        // class used in a String, with method
+        $strings = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"String"]].filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Functions\\\\MarkCallable").any()}
+                                 .filter{ (it.noDelimiter =~ "::" ).getCount() > 0 }
+                                 .transform{ path = it.noDelimiter.split('::'); path[0];} 
+                                 .unique()
 GREMLIN
 );
         $this->atomIs('Class')
