@@ -1211,26 +1211,26 @@ oc = g.addVertex(null, [code:'{', token:'T_OPEN_CURLY', virtual:true, line:it.li
 cc = g.addVertex(null, [code:'}', token:'T_CLOSE_CURLY', virtual:true, line:it.line]);
 
 sequence = g.addVertex(null, [code:';', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:true, bracket:false, virtual:true, line:it.line]);
-g.addEdge(sequence, a8, 'ELEMENT');
-a8.rank = 0;
-a8.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(sequence, a1, 'ELEMENT');
+a1.rank = 0;
+a1.bothE('NEXT').each{ g.removeEdge(it); }
 
-// remove a7, if this is a ;
-if (a9.getProperty('token') == 'T_SEMICOLON' &&
-    a9.getProperty('atom') == null) {
-    semicolon = a9;
-    a9 = semicolon.out('NEXT').next();
+// remove a2, if this is a ;
+if (a2.getProperty('token') == 'T_SEMICOLON' &&
+    a2.getProperty('atom') == null) {
+    semicolon = a2;
+    a2 = semicolon.out('NEXT').next();
     
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
     toDelete.push(semicolon);
 }
 
-g.addEdge(a7, oc, 'NEXT');
+g.addEdge(it, oc, 'NEXT');
 g.addEdge(oc, sequence, 'NEXT');
 
 g.addEdge(sequence, cc, 'NEXT');
-g.addEdge(cc, a9, 'NEXT');
+g.addEdge(cc, a2, 'NEXT');
 
             ";
             unset($actions['toBlockFor']);
@@ -2428,8 +2428,8 @@ if (a4.token == 'T_OPEN_PARENTHESIS') {
             $qactions[] = "
 /* make Foreach Sequence */
 block = g.addVertex(null, [code:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:'{ /**/ } ']);
-element1 = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
-element2 = element1.out('NEXT').next();
+element1 = a2;
+element2 = a3;
 
 g.addEdge(block, element1, 'ELEMENT');
 element1.setProperty('rank', 0);

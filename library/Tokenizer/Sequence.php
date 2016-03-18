@@ -39,7 +39,7 @@ class Sequence extends TokenAuto {
                                'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
                                'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 'T_DEFAULT', 'T_CLONE', 'T_DECLARE',
                                'T_STRING', 'T_USE', 'T_AS', 'T_NAMESPACE', 'T_DO', 'T_INSTEADOF', 'T_CONTINUE', 'T_YIELD',
-                               'T_TILDE'
+                               'T_TILDE', 'T_FOR', 'T_FOREACH'
                                 );
                                  
         $yieldOperator = array_merge($yieldOperator, Assignation::$operators, Addition::$operators, Multiplication::$operators,

@@ -52,7 +52,7 @@ class ArgumentsNoComma extends Arguments {
         $this->conditions = array(-1 => array('token'     => array_merge($functioncalls,
                                                                  array('T_FUNCTION', 'T_DECLARE', 'T_USE', 'T_CLASS',
                                                                        'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_VARIABLE',
-                                                                       'T_CATCH', 'T_DECLARE', 'T_ELSEIF', 'T_FOR', 'T_FOREACH'))),
+                                                                       'T_CATCH', 'T_DECLARE', 'T_ELSEIF'))),
                                    0 => array('token'     => ArgumentsNoComma::$operators,
                                               'atom'      => 'none'),
                                    1 => array('atom'      => 'yes',

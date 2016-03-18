@@ -28,7 +28,7 @@ class _For extends TokenAuto {
     static public $atom = 'For';
 
     public function _check() {
-        // for (;;) ; (Empty loop)
+    // @doc for(a; b; c) 
         $this->conditions = array(  0 => array('token' => _For::$operators,
                                                'atom'  => 'none'),
                                     1 => array('token' => 'T_OPEN_PARENTHESIS',
@@ -38,11 +38,29 @@ class _For extends TokenAuto {
                                     4 => array('atom'  => 'yes'),
                                     5 => array('token' => 'T_SEMICOLON'),
                                     6 => array('atom'  => 'yes'),
-                                    7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    8 => array('token' => 'T_SEMICOLON',
+                                    7 => array('token' => 'T_CLOSE_PARENTHESIS')
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'INIT',
+                                                        3 => 'DROP',
+                                                        4 => 'FINAL',
+                                                        5 => 'DROP',
+                                                        6 => 'INCREMENT',
+                                                        7 => 'DROP'
+                                                      ),
+                               'keepIndexed'  => true,
+                               'cleanIndex'   => true,
+                               );
+        $this->checkAuto();
+
+        // for (;;) ; (Empty loop)
+        $this->conditions = array(  0 => array('token' => _For::$operators,
+                                               'atom'  => 'none'),
+                                    1 => array('token' => 'T_SEMICOLON',
                                                'atom'  => 'none'),
         );
-        $this->actions = array('addEdge'     => array(8 => array('Void' => 'LEVEL')),
+        $this->actions = array('addEdge'     => array(1 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
         $this->checkAuto();
@@ -50,17 +68,9 @@ class _For extends TokenAuto {
         // for (;;) $x++; (one line instruction, with or without )
         $this->conditions = array(  0 => array('token'     => _For::$operators,
                                                'atom'      => 'none'),
-                                    1 => array('token'     => 'T_OPEN_PARENTHESIS',
-                                               'property'  => array('association' => 'For')),
-                                    2 => array('atom'      => 'yes'),
-                                    3 => array('token'     => 'T_SEMICOLON'),
-                                    4 => array('atom'      => 'yes'),
-                                    5 => array('token'     => 'T_SEMICOLON'),
-                                    6 => array('atom'      => 'yes'),
-                                    7 => array('token'     => 'T_CLOSE_PARENTHESIS'),
-                                    8 => array('atom'      => 'yes',
+                                    1 => array('atom'      => 'yes',
                                                'notAtom'   => 'Sequence'),
-                                    9 => array('filterOut' => Token::$instructionEnding),
+                                    2 => array('filterOut' => Token::$instructionEnding),
         );
         $this->actions = array('toBlockFor'   => true,
                                'keepIndexed'  => true,
@@ -70,29 +80,14 @@ class _For extends TokenAuto {
     // @doc for(a; b; c) { code }
         $this->conditions = array(  0 => array('token' => _For::$operators,
                                                'atom'  => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                               'property' => array('association' => 'For')),
-                                    2 => array('atom'  => 'yes'),
-                                    3 => array('token' => 'T_SEMICOLON'),
-                                    4 => array('atom'  => 'yes'),
-                                    5 => array('token' => 'T_SEMICOLON'),
-                                    6 => array('atom'  => 'yes'),
-                                    7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    8 => array('token' => 'T_OPEN_CURLY'),
-                                    9 => array('atom'  => array('Sequence', 'Void')),
-                                   10 => array('token' => 'T_CLOSE_CURLY')
+                                    1 => array('token' => 'T_OPEN_CURLY'),
+                                    2 => array('atom'  => array('Sequence', 'Void')),
+                                    3 => array('token' => 'T_CLOSE_CURLY')
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'INIT',
-                                                        3 => 'DROP',
-                                                        4 => 'FINAL',
-                                                        5 => 'DROP',
-                                                        6 => 'INCREMENT',
-                                                        7 => 'DROP',
-                                                        8 => 'DROP',
-                                                        9 => 'BLOCK',
-                                                       10 => 'DROP'
+                                                        2 => 'BLOCK',
+                                                        3 => 'DROP'
                                                       ),
                                'atom'         => 'For',
                                'cleanIndex'   => true,
@@ -104,30 +99,15 @@ class _For extends TokenAuto {
     // @doc for(a; b; c) : code endfor
         $this->conditions = array(  0 => array('token' => _For::$operators,
                                                'atom' => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                    1 => array('token' => 'T_COLON',
                                                'property' => array('association' => 'For')),
                                     2 => array('atom' => 'yes'),
-                                    3 => array('token' => 'T_SEMICOLON'),
-                                    4 => array('atom' => 'yes'),
-                                    5 => array('token' => 'T_SEMICOLON'),
-                                    6 => array('atom' => 'yes'),
-                                    7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    8 => array('token' => 'T_COLON',
-                                               'property' => array('association' => 'For')),
-                                    9 => array('atom' => 'yes'),
-                                   10 => array('token' => 'T_ENDFOR'),
+                                    3 => array('token' => 'T_ENDFOR'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'INIT',
+                                                        2 => 'BLOCK',
                                                         3 => 'DROP',
-                                                        4 => 'FINAL',
-                                                        5 => 'DROP',
-                                                        6 => 'INCREMENT',
-                                                        7 => 'DROP',
-                                                        8 => 'DROP',
-                                                        9 => 'BLOCK',
-                                                       10 => 'DROP',
                                                       ),
                                'atom'         => 'For',
                                'property'     => array('alternative' => true),
@@ -139,33 +119,18 @@ class _For extends TokenAuto {
     // @doc for(a; b; c) : code ; endfor
         $this->conditions = array( 0  => array('token'  => _For::$operators,
                                                'atom'   => 'none'),
-                                   1   => array('token' => 'T_OPEN_PARENTHESIS',
-                                               'property' => array('association' => 'For')),
-                                   2   => array('atom'  => 'yes'),
-                                   3   => array('token' => 'T_SEMICOLON'),
-                                   4   => array('atom'  => 'yes'),
-                                   5   => array('token' => 'T_SEMICOLON'),
-                                   6   => array('atom'  => 'yes'),
-                                   7   => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   8   => array('token' => 'T_COLON',
+                                   1   => array('token' => 'T_COLON',
                                               'property' => array('association' => 'For')),
-                                   9   => array('atom'  => 'yes'),
-                                   10  => array('token' => 'T_SEMICOLON',
+                                   2   => array('atom'  => 'yes'),
+                                   3  => array('token' => 'T_SEMICOLON',
                                                 'atom'  => 'none'),
-                                   11  => array('token' => 'T_ENDFOR'),
+                                   4  => array('token' => 'T_ENDFOR'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'INIT',
+                                                        2 => 'BLOCK',
                                                         3 => 'DROP',
-                                                        4 => 'FINAL',
-                                                        5 => 'DROP',
-                                                        6 => 'INCREMENT',
-                                                        7 => 'DROP',
-                                                        8 => 'DROP',
-                                                        9 => 'BLOCK',
-                                                       10 => 'DROP',
-                                                       11 => 'DROP',
+                                                        4 => 'DROP',
                                                       ),
                                'atom'         => 'For',
                                'property'     => array('alternative' => true),

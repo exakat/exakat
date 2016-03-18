@@ -34,7 +34,8 @@ class Block extends TokenAuto {
                           'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',  // $x[1]{3},
                           'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT',
                           'T_STRING', 'T_COMMA', 'T_DO',
-                          'T_IF', 'T_ELSEIF', 'T_ELSE');
+                          'T_IF', 'T_ELSEIF', 'T_ELSE',
+                          'T_FOR', 'T_FOREACH');
 
     // @doc {{ Block }}
         $this->conditions = array( -1 => array('token'   => 'T_OPEN_CURLY',

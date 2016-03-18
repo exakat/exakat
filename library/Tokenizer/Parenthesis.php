@@ -31,14 +31,12 @@ class Parenthesis extends TokenAuto {
         $operands    = 'yes';
         
         $prerequisite = array_merge(Functioncall::$operators, _Include::$operators,
-                                    array('T_STRING',   'T_UNSET', 'T_EMPTY', 'T_CONTINUE',
-                                          'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
-                                          'T_CLOSE_BRACKET', 'T_STATIC', //'T_CLOSE_PARENTHESIS',
-                                          'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
-                                          'T_DOLLAR', 'T_CLASS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                    array('T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS',
+                                          'T_USE', 'T_CLOSE_CURLY', 'T_FUNCTION',
+                                          'T_CLASS', 'T_OBJECT_OPERATOR', 'T_CONTINUE',
                                     ));
         // Removing  ( from Prerequisite
-        $prerequisite = array_filter($prerequisite, function ($x) { return $x != 'T_OPEN_PARENTHESIS'; });
+        $prerequisite = array_filter($prerequisite, function ($x) { return !in_array($x, array('T_OPEN_PARENTHESIS', 'T_FOREACH', 'T_FOR')); });
 
         // ( normal parenthesis )
         $this->conditions = array(-1 => array('notToken' => $prerequisite,

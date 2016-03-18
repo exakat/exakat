@@ -34,41 +34,8 @@ class _Foreach extends TokenAuto {
                                 'Coalesce', 'Ternary');
         $blindVariables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Functioncall' );
 
-        // foreach(); (empty)
-        $this->conditions = array( 0 => array('token' => _Foreach::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'property' => array('association' => 'Foreach')),
-                                   2 => array('atom'  => $operands),
-                                   3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => $blindVariables),
-                                   5 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   6 => array('token' => 'T_SEMICOLON')
-        );
-        $this->actions = array('addEdge'      => array(6 => array('Void' => 'LEVEL')),
-                               'keepIndexed'  => true,
-                               'cleanIndex'   => true);
-        $this->checkAuto();
 
-        // foreach($x as $y) $x++; (one instruction)
-        $this->conditions = array( 0 => array('token'     => _Foreach::$operators,
-                                              'atom'      => 'none'),
-                                   1 => array('token'     => 'T_OPEN_PARENTHESIS',
-                                              'property'  => array('association' => 'Foreach')),
-                                   2 => array('atom'      => $operands),
-                                   3 => array('token'     => 'T_AS'),
-                                   4 => array('atom'      => $blindVariables),
-                                   5 => array('token'     => 'T_CLOSE_PARENTHESIS'),
-                                   6 => array('atom'      => 'yes',
-                                              'notAtom'   => 'Sequence'),
-                                   7 => array('filterOut' => Token::$instructionEnding),
-        );
-        $this->actions = array( 'toBlockForeach' => 6,
-                                'keepIndexed'    => true,
-                                'cleanIndex'     => true);
-        $this->checkAuto();
-
-    // @doc foreach($x as $y) { code }
+    // @doc foreach($x as $y) (No code yet)
         $this->conditions = array( 0 => array('token'    => _Foreach::$operators,
                                               'atom'     => 'none'),
                                    1 => array('token'    => 'T_OPEN_PARENTHESIS',
@@ -77,19 +44,53 @@ class _Foreach extends TokenAuto {
                                    3 => array('token'    => 'T_AS'),
                                    4 => array('atom'     => $blindVariables),
                                    5 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                   6 => array('token'    => 'T_OPEN_CURLY'),
-                                   7 => array('atom'     => array('Sequence', 'Void')),
-                                   8 => array('token'    => 'T_CLOSE_CURLY'),
         );
         
         $this->actions = array('transform'    => array(1 => 'DROP',
                                                        2 => 'SOURCE',
                                                        3 => 'DROP',
                                                        4 => 'VALUE',
-                                                       5 => 'DROP',
-                                                       6 => 'DROP',
-                                                       7 => 'BLOCK',
-                                                       8 => 'DROP',
+                                                       5 => 'DROP'
+                                                      ),
+                               'keepIndexed'   => true,
+                               'cleanIndex'    => true
+                              );
+        $this->checkAuto();
+
+        // foreach(); (empty)
+        $this->conditions = array( 0 => array('token' => _Foreach::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('token' => 'T_SEMICOLON',
+                                               'atom' => 'none')
+        );
+        $this->actions = array('addEdge'      => array(1 => array('Void' => 'LEVEL')),
+                               'keepIndexed'  => true,
+                               'cleanIndex'   => true);
+        $this->checkAuto();
+
+        // foreach($x as $y) $x++; (one instruction)
+        $this->conditions = array( 0 => array('token'     => _Foreach::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => 'yes',
+                                              'notAtom'   => 'Sequence'),
+                                   2 => array('filterOut' => Token::$instructionEnding),
+        );
+        $this->actions = array( 'toBlockForeach' => 1,
+                                'keepIndexed'    => true,
+                                'cleanIndex'     => true);
+        $this->checkAuto();
+
+    // @doc foreach($x as $y) { code }
+        $this->conditions = array( 0 => array('token'    => _Foreach::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => 'T_OPEN_CURLY'),
+                                   2 => array('atom'     => array('Sequence', 'Void')),
+                                   3 => array('token'    => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'BLOCK',
+                                                       3 => 'DROP',
                                                       ),
                                'atom'               => 'Foreach',
                                'cleanIndex'         => true,
@@ -100,46 +101,29 @@ class _Foreach extends TokenAuto {
     // @doc foreach($a as $b) : code endforeach
         $this->conditions = array( 0  => array('token'   => _Foreach::$operators,
                                                'atom'    => 'none'),
-                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
+                                   1 => array('token'    => 'T_COLON',
                                               'property' => array('association' => 'Foreach')),
-                                   2 => array('atom'     => $operands),
-                                   3 => array('token'    => 'T_AS'),
-                                   4 => array('atom'     => $blindVariables),
-                                   5 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                   6 => array('token'    => 'T_COLON',
-                                              'property' => array('association' => 'Foreach')),
-                                   7 => array('atom'     => 'yes'),
-                                   8 => array('atom'     => 'yes'),
-                                   9 => array('token'    => 'T_ENDFOREACH'),
+                                   2 => array('atom'     => 'yes'),
+                                   3 => array('atom'     => 'yes'),
+                                   4 => array('token'    => 'T_ENDFOREACH'),
         );
         
         $this->actions = array( 'makeForeachSequence' => true,
-                                'keepIndexed' => true);
+                                'keepIndexed'         => true);
         $this->checkAuto();
 
     // @doc foreach($a as $b) : code endforeach
         $this->conditions = array( 0  => array('token'   => _Foreach::$operators,
                                                'atom'    => 'none'),
-                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
+                                   1 => array('token'    => 'T_COLON',
                                               'property' => array('association' => 'Foreach')),
-                                   2 => array('atom'     => $operands),
-                                   3 => array('token'    => 'T_AS'),
-                                   4 => array('atom'     => $blindVariables),
-                                   5 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                   6 => array('token'    => 'T_COLON',
-                                              'property' => array('association' => 'Foreach')),
-                                   7 => array('atom'     => 'yes'),
-                                   8 => array('token'    => 'T_ENDFOREACH'),
+                                   2 => array('atom'     => 'yes'),
+                                   3 => array('token'    => 'T_ENDFOREACH'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'SOURCE',
+                                                        2 => 'BLOCK',
                                                         3 => 'DROP',
-                                                        4 => 'VALUE',
-                                                        5 => 'DROP',
-                                                        6 => 'DROP',
-                                                        7 => 'BLOCK',
-                                                        8 => 'DROP',
                                                       ),
                                'atom'         => 'Foreach',
                                'property'     => array('alternative' => true),
@@ -151,29 +135,18 @@ class _Foreach extends TokenAuto {
     // @doc foreach($a as $b) : code ; endforeach
         $this->conditions = array( 0 => array('token'    => _Foreach::$operators,
                                               'atom'     => 'none'),
-                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
+                                   1 => array('token'    => 'T_COLON',
                                               'property' => array('association' => 'Foreach')),
-                                   2 => array('atom'     => $operands),
-                                   3 => array('token'    => 'T_AS'),
-                                   4 => array('atom'     => $blindVariables),
-                                   5 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                   6 => array('token'    => 'T_COLON',
-                                              'property' => array('association' => 'Foreach')),
-                                   7 => array('atom'     => 'yes'),
-                                   8 => array('token'    => 'T_SEMICOLON',
+                                   2 => array('atom'     => 'yes'),
+                                   3 => array('token'    => 'T_SEMICOLON',
                                               'atom'     => 'none'),
-                                   9 => array('token'    => 'T_ENDFOREACH'),
+                                   4 => array('token'    => 'T_ENDFOREACH'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'SOURCE',
+                                                        2 => 'BLOCK',
                                                         3 => 'DROP',
-                                                        4 => 'VALUE',
-                                                        5 => 'DROP',
-                                                        6 => 'DROP',
-                                                        7 => 'BLOCK',
-                                                        8 => 'DROP',
-                                                        9 => 'DROP',
+                                                        4 => 'DROP',
                                                       ),
                                'atom'         => 'Foreach',
                                'property'     => array('alternative' => true),
