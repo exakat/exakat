@@ -150,6 +150,8 @@ GREMLIN;
         gremlin_query("g.idx('atoms')[['token':'Rawstring']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
         $this->logTime('Unicodes block');
 
+        // Creating Project Node
+
         gremlin_query(<<<GREMLIN
 g.idx("atoms")[["atom":"String"]].has("noDelimiter", null).each{ 
     if (it.code in ['""', "''"]) {
@@ -170,6 +172,15 @@ GREMLIN
             gremlin_query("g.createIndex('$indice', Vertex)");
         }
         $this->logTime('g.idx("last index")');
+
+        gremlin_query(<<<GREMLIN
+project = g.addVertex(null, [token:"T_PROJECT", atom:"Project", code:"Project", fullcode: "Whole", line:0, index:true]); 
+g.idx("atoms").put("atom", "Project", project);
+g.idx("racines")[["token":"ROOT"]].in("FILE").each{ g.addEdge(project, it, "PROJECT"); };
+
+GREMLIN
+);
+        $this->logTime('Project node');
     }
 
     private function logTime($step) {
