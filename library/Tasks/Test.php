@@ -85,7 +85,6 @@ class Test extends Tasks {
         } catch (\Exception $e) {
             echo "Error while running the Analyze $theme \n",
                  $e->getMessage();
-            file_put_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
             die();
         }
 
