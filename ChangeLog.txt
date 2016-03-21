@@ -1,4 +1,4 @@
-Version 0.5.7 (Scorpion Demon, Coming up)
+Version 0.5.8 (Sun Deity of Mao, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,30 @@ Version 0.5.7 (Scorpion Demon, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.5.7 (Scorpion Demon, 2016-03-21)
++ Architecture
+    + Added support for folders in UT, for tests that requires several files
+    + Improved compatibility with PHPunit
+    + Moving gremlin_query() to Gremlin2 class
+    + Doctor also reports for phar
+    + Improved adaptation to PHP and Exakt in server mode
+    + Autoload shouldn't die
+    + Fixed case when calling Phpexec
+    + Upgraded status presentation in server mode
++ Report
+    + More details for Global Variable list
++ Analyzer
+    + Now spotting class when it is inside a string
+    + Check for $this outside a trait/class
+    + Check for ternary/concatenation precedence
+    + Spot classes that attempt to extend final 
+    + Spot set_exception_handler() that may need rework
+    + Refined array_merge analysis, in case of nested loops
++ Tokenizer
+    + Yield [from] may be inside an array
+    + Refactored for/foreach tokens
+    + Added support for a 'Project' node
 
 Version 0.5.6 (Ruler of Women's Country, 2016-03-14)
 + Architecture
