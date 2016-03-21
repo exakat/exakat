@@ -37,7 +37,8 @@ class ConstantUsage extends Analyzer\Analyzer {
              ->codeIsNot(array('true', 'false', 'null'))
              ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY',
                              'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE', 'FUNCTION', 'CONST'))
-             ->hasNoParent('Const', array('LEFT', 'CONST'));
+             ->hasNoParent('Const', array('LEFT', 'CONST'))
+             ->filter(' it.in("INDEX").has("enclosing", null).in("CONCAT").in("CONTAINS").has("atom", "String").any() == false');
         $this->prepareQuery();
 
         // special case for Boolean and Null
