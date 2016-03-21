@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 14 Mar 2016 12:13:30 +0000
-.. comment: Generation hash : 7d8c5bee37f8f01f0a8b8bdcb62f1d03689c4c09
+.. comment: Generation date : Mon, 21 Mar 2016 10:19:58 +0000
+.. comment: Generation hash : 1b7fb8b0de05aa4c84bba694e13f36a8f9ea0534
 
 
 .. _$http\_raw\_post\_data:
@@ -581,6 +581,26 @@ PHP doesn't like anymore when the value is turned into a reference at the moment
 
 
 
+.. _cant-extend-final:
+
+Cant Extend Final
+#################
+
+
+It is not possible to extend final classes. 
+
+Since PHP fails with a fatal error, this means that the extending class is probably not used in the rest of the code. Check for dead code.
+
++--------------+----------------------------------------------+
+| Command Line | Classes/CantExtendFinal                      |
++--------------+----------------------------------------------+
+| clearPHP     |                                              |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
+
+
+
 .. _cant-use-return-value-in-write-context:
 
 Cant Use Return Value In Write Context
@@ -674,6 +694,26 @@ Constant defined with const keyword may be arrays but only stating with PHP 5.6.
 +--------------+---------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
+
+
+
+.. _class-name-case-difference:
+
+Class Name Case Difference
+##########################
+
+
+The spotted classes are used with a different case than their definition. While PHP will accept this, this makes the code harder to read. 
+
+Most of the time, this is also a violation of coding conventions.
+
++--------------+-------------------+
+| Command Line | Classes/WrongCase |
++--------------+-------------------+
+| clearPHP     |                   |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
 
 
 
@@ -4436,6 +4476,35 @@ Most of the time, Switch do need a default case, so as to catch the odd situatio
 
 
 
+.. _ternary-in-concat:
+
+Ternary In Concat
+#################
+
+
+Ternary operator has higher priority than dot '.' for concatenation. This means that : 
+
+.. code-block:: php
+
+   <?php
+     print 'B'.$b.'C'. $b > 1 ? 'D' : 'E';
+   ?>
+
+
+prints actually 'E', instead of the awaited 'B0CE'.
+
+To be safe, always add parenthesis when using ternary operator with concatenation.
+
++--------------+----------------------------+
+| Command Line | Structures/TernaryInConcat |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
+
+
 .. _throws-an-assignement:
 
 Throws An Assignement
@@ -4567,7 +4636,7 @@ Undefined Functions
 ###################
 
 
-Those functions rae not defined in the code. This means that the functions are probably defined in a missing library, or in an extension. If not, this will yield a Fatal error at execution.
+Those functions are not defined in the code. This means that the functions are probably defined in a missing library, or in an extension. If not, this will yield a Fatal error at execution.
 
 +--------------+------------------------------+
 | Command Line | Functions/UndefinedFunctions |
@@ -5598,6 +5667,26 @@ As much as possible, it is recommended to use explicit values in those methods, 
 
 
 
+.. _using-$this-outside-a-class:
+
+Using $this Outside A Class
+###########################
+
+
+$this is a special variable, that may only be used in a class context. 
+
+$this may be used as an argument in a function (or a method) : while this is legit, it sounds confusing enough to avoid this.
+
++--------------+--------------------------------+
+| Command Line | Classes/UsingThisOutsideAClass |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
+
+
 .. _usort-sorting-in-php-7.0:
 
 Usort Sorting In PHP 7.0
@@ -6209,6 +6298,26 @@ preg\_replace() had a /e option until PHP 7.0 which allowed the use of eval'ed e
 +--------------+---------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71` |
 +--------------+---------------------------------------------------------------------------------------+
+
+
+
+.. _set\_exception\_handler()-warning:
+
+set\_exception\_handler() Warning
+#################################
+
+
+set\_exception\_handler() callable function has to be adapted to PHP 7 : Exception is not the right typehint, it is now Throwable. 
+
+When in doubt about backward compatibility, just drop the Typehint. Otherwise, use Throwable.
+
++--------------+------------------------------------------------------+
+| Command Line | Php/SetExceptionHandlerPHP7                          |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 

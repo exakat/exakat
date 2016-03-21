@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 14 Mar 2016 12:13:30 +0000
-.. comment: Generation hash : 7d8c5bee37f8f01f0a8b8bdcb62f1d03689c4c09
+.. comment: Generation date : Mon, 21 Mar 2016 10:19:58 +0000
+.. comment: Generation hash : 1b7fb8b0de05aa4c84bba694e13f36a8f9ea0534
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 230 analysis
+Total : 234 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -86,9 +86,11 @@ Total : 230 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Buried Assignation <buried-assignation>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
+* :ref:`Cant Extend Final <cant-extend-final>`
 * :ref:`Case After Default <case-after-default>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
+* :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Close Tags <close-tags>`
@@ -221,6 +223,7 @@ Total : 230 analysis
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Switch Without Default <switch-without-default>`
+* :ref:`Ternary In Concat <ternary-in-concat>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
 * :ref:`Unchecked Resources <unchecked-resources>`
@@ -272,6 +275,7 @@ Total : 230 analysis
 * :ref:`Useless Unset <useless-unset>`
 * :ref:`Useless return <useless-return>`
 * :ref:`Uses Default Values <uses-default-values>`
+* :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`Var`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
@@ -501,7 +505,7 @@ Total : 34 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 29 analysis
+Total : 30 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -532,13 +536,14 @@ Total : 29 analysis
 * :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`set\_exception\_handler() Warning <set\_exception\_handler()-warning>`
 
 .. _compatibilityphp71:
 
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 35 analysis
+Total : 36 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -575,14 +580,16 @@ Total : 35 analysis
 * :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`set\_exception\_handler() Warning <set\_exception\_handler()-warning>`
 
 .. _dead-code:
 
 Dead code
 +++++++++
 
-Total : 17 analysis
+Total : 18 analysis
 
+* :ref:`Cant Extend Final <cant-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
 * :ref:`Empty Namespace <empty-namespace>`
 * :ref:`Locally Unused Property <locally-unused-property>`
