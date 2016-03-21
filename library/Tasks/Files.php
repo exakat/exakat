@@ -66,7 +66,10 @@ class Files extends Tasks {
         } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
             die("No code in project '$dir'\nAborting\n");
         }
+        
+        $this->checkComposer($dir);
 
+        // Actually finding the files
         $ignoreDirs = array();
         foreach($config->ignore_dirs as $ignore) {
             if ($ignore[0] == '/') {
@@ -80,55 +83,49 @@ class Files extends Tasks {
                 $ignoreDirs[] = '*'.$ignore.'*';
             }
         }
+        $regex = '#^('.join('|', $ignoreDirs).')#';
 
-        // Finding files
-        $shellBase = 'find -L '.$config->projects_root.'/projects/'.$dir.'/code -not -path \'*/\.*\' \\( ! -name "*.*" -o -name "*.'.(join('" -o -name "*.', static::$exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) -type f -exec grep -l \'<?\' {} \;  ';
+        $php = new \Phpexec();
+        $ignoredFiles = array();
 
-        display('Finding ignored files');
-        // Ignored files
-        $shellBaseIgnored = str_replace(' -not ', ' ', $shellBase);
-        $files = trim(shell_exec($shellBaseIgnored));
+        $d = getcwd();
+        chdir($config->projects_root.'/projects/'.$dir.'/code');
+        $files = $this->rglob( '.');
+        chdir($d);
+        $exts = static::$exts['php'];
 
-        $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
-        if (!empty($files)) {
-            $files = explode("\n", $files);
-            $files = array_map(function ($a) {
-                return array('file' => $a,
-                             'reason' => Phploc::IGNORED_BY_CONFIG);
-            }, $files);
-        }
-
-        $this->datastore->addRow('ignoredFiles', $files);
-        
-        $this->checkComposer($dir);
-
-        // Actually finding the files
-        $files = trim(shell_exec($shellBase));
-        $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
-        if (empty($files)) {
-            $this->log->log("Couldn't find a single file to analyze for project $config->project. Aborting\n");
-            die("Couldn't find a single file to analyze for project $config->project. Aborting\n");
-        } else {
-            $files = explode("\n", $files);
-            $filesDatastore = array_map(function ($a) {
-                return array('file'   => $a);
-            }, $files);
-        }
-        $this->datastore->addRow('files', $filesDatastore);
-        $this->datastore->reload();
-
-        $ignoreDirs = array();
-        $ignoreName = array();
-        foreach($config->ignore_dirs as $ignore) {
-            if ($ignore[0] == '/') {
-                $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
-                if (file_exists($d)) {
-                    $ignoreDirs[] = substr($ignore, 1);
+        foreach($files as $id => &$file) {
+            $file = substr($file, 1);
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+            if (empty($ext)) {
+                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code/'.$file) < 2) {
+                    unset($files[$id]);
+                    $ignoredFiles[] = $file;
                 }
+            } elseif (!in_array($ext, static::$exts['php'])) {
+                // selection of extensions
+                unset($files[$id]);
+                $ignoredFiles[] = $file;
+            } elseif (preg_match($regex, $file)) {
+                // Matching the 'ignored dir' pattern
+                unset($files[$id]);
+                $ignoredFiles[] = $file;
             } else {
-                $ignoreName[] = $ignore;
+                // Check for compilation
+                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code/'.$file) < 2) {
+                    unset($files[$id]);
+                    $ignoredFiles[] = $file;
+                }
             }
         }
+
+        $this->datastore->addRow('ignoredFiles', array_map(function ($a) {
+                return array('file'   => $a);
+            }, $ignoredFiles));
+        $this->datastore->addRow('files', array_map(function ($a) {
+                return array('file'   => $a);
+            }, $files));
+        $this->datastore->reload();
 
         display('Counting files');
         // Also refining the file list with empty, one-tokened and incompilable files.
@@ -136,7 +133,6 @@ class Files extends Tasks {
         $counting->run($config);
         display('Counted files');
         
-        $files = $this->datastore->getCol('files', 'file');
         $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
         file_put_contents($tmpFileName, $config->projects_root.'/projects/'.$dir.'/code'.join("\n$config->projects_root/projects/$dir/code", $files));
 
@@ -324,6 +320,22 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('hash', $composerInfo);
+    }
+    
+    private function rglob($pattern, $flags = 0) {
+        $files = glob($pattern.'/*', $flags); 
+        $dirs  = glob($pattern.'/*', GLOB_ONLYDIR | GLOB_NOSORT); 
+        $files = array_diff($files, $dirs);
+
+        $subdirs = array($files);
+        foreach ($dirs as $dir) {
+            $f = $this->rglob($dir, $flags);
+            if (!empty($f)) {
+                $subdirs[] = $f;
+            }
+        }
+
+        return call_user_func_array('array_merge', $subdirs);
     }
 }
 
