@@ -134,7 +134,7 @@ INI;
         shell_exec('chmod -R g+w '.$this->config->projects_root.'/projects/'.$project);
         $repositoryDetails = parse_url($repositoryURL);
 
-        $skipFiles = false; 
+        $skipFiles = false;
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
                 // Empty initialization

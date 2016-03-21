@@ -151,7 +151,7 @@ class FindExternalLibraries extends Tasks {
 
         $php = new \Phpexec();
         $tokens = $php->getTokenFromFile($filename);
-        if (count($tokens) == 1) { 
+        if (count($tokens) == 1) {
             return $return;
         }
         $this->log->log("$filename : ".count($tokens));

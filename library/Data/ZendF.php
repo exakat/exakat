@@ -32,10 +32,10 @@ class ZendF {
         
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf').'.sqlite';
-            copy($this->dir_root.'/data/zendf.sqlite', $this->phar_tmp);
+            copy($config->dir_root.'/data/zendf.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = $this->dir_root.'/data/zendf.sqlite';
+            $docPath = $config->dir_root.'/data/zendf.sqlite';
         }
         $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
     }

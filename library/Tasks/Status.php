@@ -43,7 +43,7 @@ class Status extends Tasks {
         $status['status'] = $this->datastore->getHash('status');
 
         switch($config->project_vcs) {
-            case 'git' : 
+            case 'git' :
                 $status['git status'] = trim(shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git rev-parse HEAD'));
                 
                 if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
@@ -66,8 +66,8 @@ class Status extends Tasks {
                 $status['updatable'] = empty($res);
                 break 1;
 
-            case 'copy' : 
-            case 'symlink' : 
+            case 'copy' :
+            case 'symlink' :
                 $status['hash'] = 'None';
                 $status['updatable'] = false;
                 break 1;
@@ -80,7 +80,7 @@ class Status extends Tasks {
 
         $configuration = array();
         // 
-        
+
         // Check the logs
         $errors = $this->getErrors($path);
         if (!empty($errors)) {

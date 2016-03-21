@@ -101,7 +101,7 @@ class SetExceptionHandlerPHP7 extends Analyzer\Analyzer {
                                      methode = it.out("ARGUMENTS").out("ARGUMENT").has("rank", 1).next().noDelimiter; 
                                 }
                             }')
-             ->filter('it.out("ARGUMENTS").out("ARGUMENT").has("rank", 0).has("atom", "String").any()') 
+             ->filter('it.out("ARGUMENTS").out("ARGUMENT").has("rank", 0).has("atom", "String").any()')
              ->raw('transform{ f = it.out("ARGUMENTS").out("ARGUMENT").has("rank", 0).next().noDelimiter; 
                                if (f.substring(0, 1) != "\\\\") { f = "\\\\" + f; }
                                 it.filter{ g.idx("classes").get("path", f).any(); }
