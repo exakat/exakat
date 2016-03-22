@@ -35,14 +35,14 @@ class Staticproperty extends TokenAuto {
         // Class::$property (with nothing else behind)
         if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 +
-            $this->conditions = array( -2 => array('notToken'  => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
+            $this->conditions = array( -2 => array('notToken'  => 'T_DOUBLE_COLON'),
                                        -1 => array('atom'      => Staticproperty::$operands),
                                         0 => array('token'     => Staticproperty::$operators),
                                         1 => array('atom'      => array('Variable', 'Array', 'Arrayappend', 'Property', )),
                                         2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
         } else {
             // PHP 5.6 and -
-            $this->conditions = array( -2 => array('notToken'  => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
+            $this->conditions = array( -2 => array('notToken'  => 'T_DOUBLE_COLON'),
                                        -1 => array('atom'      => Staticproperty::$operands),
                                         0 => array('token'     => Staticproperty::$operators),
                                         1 => array('atom'      => array('Variable', 'Array', 'Arrayappend', 'Property')),
@@ -59,8 +59,7 @@ class Staticproperty extends TokenAuto {
         // Class::$property (with ( or [ to continue)
         if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 +
-            $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
-                                       -1 => array('atom'      => Staticproperty::$operands),
+            $this->conditions = array( -1 => array('atom'      => Staticproperty::$operands),
                                         0 => array('token'     => Staticproperty::$operators),
                                         1 => array('atom'      => array('Variable', 'Array', 'Arrayappend', 'Property', )),
                                         2 => array('token'     => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')));

@@ -80,32 +80,32 @@ Label : CODE
           static
       Label : ELEMENT
         public
-        Label : PUBLIC
-          public
         Label : DEFINE
           $d1
         Label : DEFINE
           $e1
+        Label : PUBLIC
+          public
         Label : STATIC
           static
       Label : ELEMENT
         static
-        Label : PRIVATE
-          private
         Label : DEFINE
           $d2
         Label : DEFINE
           $e2
+        Label : PRIVATE
+          private
         Label : STATIC
           static
       Label : ELEMENT
         public
-        Label : PUBLIC
-          public
         Label : DEFINE
           $d3
         Label : DEFINE
           $e3
+        Label : PUBLIC
+          public
       Label : ELEMENT
         static
         Label : DEFINE
@@ -116,8 +116,6 @@ Label : CODE
           static
       Label : ELEMENT
         public
-        Label : PUBLIC
-          public
         Label : DEFINE
           =
           Label : LEFT
@@ -130,6 +128,8 @@ Label : CODE
             $g1
           Label : RIGHT
             2
+        Label : PUBLIC
+          public
         Label : STATIC
           static
       Label : ELEMENT

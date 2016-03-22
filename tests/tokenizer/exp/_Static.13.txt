@@ -80,14 +80,16 @@ Label : CODE
           static
       Label : ELEMENT
         static
-        Label : STATIC
-          static
         Label : DEFINE
           $x1
         Label : DEFINE
           $y1
+        Label : STATIC
+          static
       Label : ELEMENT
         static
+        Label : STATIC
+          static
         Label : DEFINE
           =
           Label : LEFT
@@ -100,8 +102,6 @@ Label : CODE
             $y2
           Label : RIGHT
             1
-        Label : STATIC
-          static
       Label : ELEMENT
         static
         Label : STATIC

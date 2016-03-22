@@ -29,8 +29,7 @@ class Staticmethodcall extends TokenAuto {
 
     public function _check() {
         // unusual call : Class::{Method}(); Only build the Functioncall
-        $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'     => Staticproperty::$operands),
+        $this->conditions = array( -1 => array('atom'     => Staticproperty::$operands),
                                     0 => array('token'    => Staticmethodcall::$operators),
                                     1 => array('token'    => 'T_OPEN_CURLY'),
                                     2 => array('atom'     => 'yes'),
@@ -47,8 +46,7 @@ class Staticmethodcall extends TokenAuto {
         $this->checkAuto();
 
         // normal call : Class::Method();
-        $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'     => Staticproperty::$operands),
+        $this->conditions = array( -1 => array('atom'     => Staticproperty::$operands),
                                     0 => array('token'    => Staticmethodcall::$operators),
                                     1 => array('atom'     => array('Functioncall', 'Methodcall', 'Include')),
                                     2 => array('notToken' => 'T_OPEN_PARENTHESIS'),
@@ -62,8 +60,7 @@ class Staticmethodcall extends TokenAuto {
         $this->checkAuto();
 
         // normal call : Class::Method()(
-        $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'     => Staticproperty::$operands),
+        $this->conditions = array( -1 => array('atom'     => Staticproperty::$operands),
                                     0 => array('token'    => Staticmethodcall::$operators),
                                     1 => array('atom'     => array('Functioncall', 'Methodcall')),
                                     2 => array('token'    => 'T_OPEN_PARENTHESIS'),

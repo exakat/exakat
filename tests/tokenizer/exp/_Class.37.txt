@@ -24,12 +24,12 @@ Label : CODE
           protected
       Label : ELEMENT
         protected
+        Label : PROTECTED
+          protected
         Label : DEFINE
           $c
         Label : DEFINE
           $d
-        Label : PROTECTED
-          protected
       Label : ELEMENT
         const
         Label : CONST
@@ -40,8 +40,6 @@ Label : CODE
             3
       Label : ELEMENT
         protected
-        Label : PROTECTED
-          protected
         Label : DEFINE
           $e
         Label : DEFINE
@@ -50,10 +48,10 @@ Label : CODE
             $f
           Label : RIGHT
             2
-      Label : ELEMENT
-        protected
         Label : PROTECTED
           protected
+      Label : ELEMENT
+        protected
         Label : DEFINE
           =
           Label : LEFT
@@ -62,5 +60,7 @@ Label : CODE
             3
         Label : DEFINE
           $h
+        Label : PROTECTED
+          protected
     Label : NAME
       x
