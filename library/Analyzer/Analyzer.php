@@ -44,6 +44,7 @@ abstract class Analyzer {
     protected $config         = null;
     
     static public $analyzers  = array();
+    private $analyzer         = '';       // Current class of the analyzer (called from below)
     
     protected $apply          = null;
 

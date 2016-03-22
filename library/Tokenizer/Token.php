@@ -23,8 +23,8 @@
 
 namespace Tokenizer;
 
-class Token {
-    protected static $reserved = array();
+abstract class Token {
+    protected $queries = array();
     
     // the numeric indices are NOT important for processing order
     // the order of this array is important for processing and optimization
@@ -213,28 +213,14 @@ class Token {
         $this->execQueries();
     }
     
-    public function reserve() {
-        return true;
-    }
-
-    public function resetReserve() {
-        Token::$reserved = array();
-    }
+    abstract protected function _check();
 
     static public function countTotalToken() {
         return gremlin_queryOne('g.V.count()');
     }
 
-    static public function countLeftToken() {
-        return gremlin_queryOne("g.idx('racines')[['token':'ROOT']].out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
-    }
-
     static public function countLeftNext() {
         return 1 + gremlin_queryOne("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
-    }
-
-    static public function countNextEdge() {
-        return gremlin_queryOne("g.E.has('label','NEXT').count()");
     }
 
     static public function query($query) {
@@ -242,10 +228,6 @@ class Token {
         $res = (array) $res->results;
         
         return $res;
-    }
-
-    static public function leftInIndex($class) {
-        return gremlin_queryOne("g.idx('racines')[['token':'$class']].out('INDEXED').count()");
     }
 
     static public function countFileToProcess() {
