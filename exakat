@@ -7,5 +7,7 @@ if(strpos(basename(__FILE__), 'phar') !== false){
     include_once(__DIR__.'/library/Autoload.php');
 }
 
-$exakat = new \Exakat();
+$graphDB = new \Graph\Gremlin2($config);
+
+$exakat = new \Exakat($graphDB);
 $exakat->execute($config);
