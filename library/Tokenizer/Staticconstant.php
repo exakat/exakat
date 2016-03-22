@@ -28,12 +28,12 @@ class Staticconstant extends TokenAuto {
     static public $atom = 'Staticconstant';
 
     public function _check() {
-        $this->conditions = array( -2 => array('notToken'  => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'      => Staticproperty::$operands),
+        $this->conditions = array( -1 => array('atom'      => Staticproperty::$operands),
                                     0 => array('token'     => Staticconstant::$operators),
                                     1 => array('token'     => array_merge(Constant::$operators, _Include::$operators,
                                                                           _Dowhile::$operators,  _While::$operators,
-                                                                          _Const::$operators)),
+                                                                          _Const::$operators,    _For::$operators,
+                                                                          _Foreach::$operators)),
                                     2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
                                  );
         
