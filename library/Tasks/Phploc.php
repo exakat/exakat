@@ -53,7 +53,7 @@ class Phploc extends Tasks {
 
             foreach($files as $file) {
                 $counts = $this->countLocInFile($config->projects_root.'/projects/'.$config->project.'/code'.$file);
-                $this->array_add($loc, $counts);
+                array_add($loc, $counts);
                 
                 if ($counts['error'] != self::OK) {
                     $datastore->deleteRow('files', array('file' => $file));
@@ -88,7 +88,7 @@ class Phploc extends Tasks {
             $files = $this->readRecursiveDir($dirPath, $ignoreName, $ignoreDirs);
             
             foreach($files as $file) {
-                $this->array_add($loc, $this->countLocInFile($file));
+                array_add($loc, $this->countLocInFile($file));
             }
         } elseif (!empty($config->filename)) {
             $loc = $this->countLocInFile($config->filename);
@@ -137,30 +137,24 @@ class Phploc extends Tasks {
                         'total'    => 0,
                         'code'     => 0,
                         'files'    => 1);
-        
-        $res = shell_exec('php -l '.escapeshellarg($filename).' 2>&1');
-        if (strpos($res, 'No syntax errors detected in ') === false) {
-            display( "$filename doesn't compile\n");
-            $return['files'] = 0;
-            $return['error'] = self::INCOMPILABLE;
-            return $return;
-        }
-        
+
         $lines = array();
         $php = new \Phpexec();
-        $tokens = $php->getTokenFromFile($filename);
         
+        $tokens = $php->getTokenFromFile($filename);
+
         if (empty($tokens)) {
             display( "$filename is empty\n");
             $return['files'] = 0;
             $return['error'] = self::EMPTYFILE;
             return $return;
         }
-
+        
+        // One token if it fails compilation but we don't know the error
         if (count($tokens) == 1) {
-            display( "$filename has only one token\n");
+            display( "$filename doesn't compile\n");
             $return['files'] = 0;
-            $return['error'] = self::ONETOKEN;
+            $return['error'] = self::INCOMPILABLE;
             return $return;
         }
 
@@ -211,12 +205,6 @@ class Phploc extends Tasks {
         $return['error']  = self::OK;
         
         return $return;
-    }
-    
-    private function array_add(&$array1, $array2) {
-        foreach($array1 as $k => &$v) {
-            $v += $array2[$k];
-        }
     }
 }
 

@@ -100,4 +100,10 @@ function copyDir($src, $dst) {
     return $total;
 } 
 
+function array_add(&$array1, $array2) {
+    foreach($array1 as $k => &$v) {
+        $v += $array2[$k];
+    }
+}
+
 ?>
