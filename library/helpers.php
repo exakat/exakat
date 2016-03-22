@@ -76,11 +76,14 @@ function rmdirRecursive($dir) {
   } 
 
 function copyDir($src, $dst) { 
+    if (!file_exists($src)) { 
+        return 0;
+    }
     $dir = opendir($src); 
     if (!$dir) { return true; }
     
     $total = 0;
-    mkdir($dst, 0755); 
+    mkdir($dst, 0755);
     while(false !==  $file = readdir($dir) ) { 
         if (( $file != '.' ) && ( $file != '..' )) { 
             if ( is_dir($src . '/' . $file) ) { 
