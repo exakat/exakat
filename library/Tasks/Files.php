@@ -77,10 +77,9 @@ class Files extends Tasks {
                 if (!file_exists($d)) {
                     continue;
                 }
-                $d .= '*';
-                $ignoreDirs[] = $d;
+                $ignoreDirs[] = $ignore.'.*';
             } else {
-                $ignoreDirs[] = '*'.$ignore.'*';
+                $ignoreDirs[] = '.*'.$ignore.'.*';
             }
         }
         if (empty($ignoreDirs)) {
@@ -109,7 +108,6 @@ class Files extends Tasks {
             } elseif (!in_array($ext, static::$exts['php'])) {
                 // selection of extensions
                 unset($files[$id]);
-                $ignoredFiles[] = $file;
             } elseif (!empty($regex) && preg_match($regex, $file)) {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
