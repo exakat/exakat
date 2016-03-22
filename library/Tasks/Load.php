@@ -60,6 +60,7 @@ class Load extends Tasks {
 
         $this->client->finalize();
         display('Final memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
+        $this->datastore->addRow('hash', array('status' => 'Load'));
     }
 
     private function processProject($project) {
@@ -121,7 +122,7 @@ class Load extends Tasks {
         }
 
         if (!$this->php->compile($filename)) {
-            display('Ignoring file '.$filename.' as it won\'t compile with the configure PHP version ('.$this->config->phpversion.')');
+            display('Ignoring file '.$filename.' as it won\'t compile with the configured PHP version ('.$this->config->phpversion.')');
             return false;
         }
     

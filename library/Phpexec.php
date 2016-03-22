@@ -59,14 +59,13 @@ class Phpexec {
     private $config           = array();
     private $isCurrentVersion = false;
     private $version          = null;
+    private $actualVersion    = '';
     
     public function __construct($phpversion = null) {
         $config = \Config::factory();
-        if ($phpversion === null) {
 
-            $this->phpexec = $config->php;
-            $this->isCurrentVersion = true;
-            return;
+        if ($phpversion === null) {
+            $phpversion = $config->phpversion;
         } 
         
         $this->version = $phpversion;
@@ -199,6 +198,8 @@ class Phpexec {
             return false;
         }
         $res = shell_exec($this->phpexec.' -v 2>&1');
+        preg_match('/PHP ([0-9\.]+) /', $res, $r);
+        $this->actualVersion = $r[1];
         return strpos($res, 'The PHP Group') !== false;
     }
 
@@ -233,12 +234,10 @@ class Phpexec {
     }
     
     public function getActualVersion() {
-        $res = shell_exec($this->phpexec.' -v 2>&1');
-        if (preg_match('#PHP (\d+\.\d+\.\d+\S*) #', $res, $r)) {
-            return $r[1];
-        } else {
-            return $this->version;
+        if ($this->actualVersion === null) {
+            $this->isValid();
         }
+        return $this->actualVersion;
     }
 }
 

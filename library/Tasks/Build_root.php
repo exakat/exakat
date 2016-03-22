@@ -181,6 +181,7 @@ g.idx("racines")[["token":"ROOT"]].in("FILE").each{ g.addEdge(project, it, "PROJ
 GREMLIN
 );
         $this->logTime('Project node');
+        $this->datastore->addRow('hash', array('status' => 'Build_Root'));
     }
 
     private function logTime($step) {

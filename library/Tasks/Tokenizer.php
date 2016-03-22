@@ -182,6 +182,8 @@ class Tokenizer extends Tasks {
 
         $end_time = microtime(true);
         display('Total time : '.number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
+
+        $this->datastore->addRow('hash', array('status' => 'Tokenizer'));
         // @todo display checks processed
     }
 

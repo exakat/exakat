@@ -83,7 +83,11 @@ class Files extends Tasks {
                 $ignoreDirs[] = '*'.$ignore.'*';
             }
         }
-        $regex = '#^('.join('|', $ignoreDirs).')#';
+        if (empty($ignoreDirs)) {
+            $regex = '';
+        } else {
+            $regex = '#^('.join('|', $ignoreDirs).')#';
+        }
 
         $php = new \Phpexec();
         $ignoredFiles = array();
@@ -98,7 +102,7 @@ class Files extends Tasks {
             $file = substr($file, 1);
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             if (empty($ext)) {
-                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code/'.$file) < 2) {
+                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
                     unset($files[$id]);
                     $ignoredFiles[] = $file;
                 }
@@ -106,13 +110,13 @@ class Files extends Tasks {
                 // selection of extensions
                 unset($files[$id]);
                 $ignoredFiles[] = $file;
-            } elseif (preg_match($regex, $file)) {
+            } elseif (!empty($regex) && preg_match($regex, $file)) {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[] = $file;
             } else {
                 // Check for compilation
-                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code/'.$file) < 2) {
+                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
                     unset($files[$id]);
                     $ignoredFiles[] = $file;
                 }
