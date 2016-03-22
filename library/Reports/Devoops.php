@@ -475,7 +475,7 @@ HTML;
 
         foreach($data as $name => $definition) {
             $id = str_replace(' ', '-', strtolower($name));
-            $description = nl2br(trim($definition['description']));
+            $description = $this->prepareText($definition['description']);
 
             if (!empty($definition['clearphp'])) {
                 $description .= "<br />\n<br />\nThis rule is named '<a href=\"https://github.com/dseguy/clearPHP/blob/master/rules/$definition[clearphp].md\">$definition[clearphp]</a>', in the clearPHP reference.";
@@ -940,7 +940,7 @@ HTML;
     }
     
     private function formatText($text, $style = '') {
-        $text = nl2br($text);
+        $text = $this->prepareText($text);
         
         if (!empty($style)) {
             $class = ' class="'.$style.'"';
@@ -952,7 +952,7 @@ HTML;
     }
 
     private function formatTextLead($text) {
-        $text = nl2br($text);
+        $text = $this->prepareText($text);
 
         return "<article><p class=\"lead\">".$text."</p></article>\n".
                "<script src=\"plugins/readmore/readmore.js\"></script>\n".
@@ -2195,6 +2195,26 @@ These are various stats of different structures in your application.
 TEXT
 , 'textLead')
                 .$this->formatSectionedHashTable($data, $css);
+    }
+    
+    private function prepareText($text) {
+        $html = nl2br(trim($text));
+        
+        $html = preg_replace('$(https?://\S+)\.?\s$', '<a href=\"\1\">\1</a>', $html);
+        
+        // link functions/features to PHP manual
+        if (preg_match_all('$[a-z_0-9]+\(\)$s', $html, $r)) {
+            $html = preg_replace('$([a-z_0-9]+)\(\)$s', '<a href="http://www.php.net/\1">\1()</a>', $html);
+            print_r( $r[0] );
+        }
+
+        // highlight PHP code
+        
+        if (preg_match('$(<\?php)$s', $html, $r)) {
+            $html = preg_replace_callback('$(<\?php.*?\?'.'>)$s', function ($r) { return substr(highlight_string(str_replace('<br />', '', $r[0]), true), 6, -8); }, $html);
+        }
+        
+        return $html;
     }
     
 }//end class
