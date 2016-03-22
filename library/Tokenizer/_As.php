@@ -30,7 +30,7 @@ class _As extends TokenAuto {
     public function _check() {
         // use A as B
         // use C::Const as string
-        $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
+        $this->conditions = array( -2 => array('notToken' => 'T_DOUBLE_COLON'),
                                    -1 => array('atom'     => array('Staticconstant', 'Identifier', 'Nsname')),
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
@@ -45,7 +45,7 @@ class _As extends TokenAuto {
         $this->checkAuto();
 
         // use A as public;
-        $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
+        $this->conditions = array( -2 => array('notToken' => 'T_DOUBLE_COLON'),
                                    -1 => array('atom'     => 'Identifier'),
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
@@ -63,7 +63,7 @@ class _As extends TokenAuto {
         $this->checkAuto();
 
         // use A as B private
-        $this->conditions = array( -2 => array('notToken' => array('T_NS_SEPARATOR', 'T_DOUBLE_COLON')),
+        $this->conditions = array( -2 => array('notToken' => 'T_DOUBLE_COLON'),
                                    -1 => array('atom'     => 'Identifier'),
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
