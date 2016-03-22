@@ -191,7 +191,7 @@ g.idx('analyzers')[['analyzer':'$analyzerName']].out
 }.transform{ m; }
 
 GREMLIN;
-        $res = gremlin_query($query);
+        $res = $this->gremlin->query($query);
         if (!isset($res->results)) {
             $this->log->log( "Couldn't run the query and get a result : \n" .
                  "Query : " . $query . " \n".
@@ -255,7 +255,7 @@ SQL;
             }
             $atom = $tokenClass::$atom;
             $query = "g.idx('atoms')[['atom':'$atom']].count()";
-            $res = gremlin_query($query);
+            $res = $this->gremlin->query($query);
             if (!is_object($res) || !isset($res->results)) {
                 $this->log->log( "Couldn't run the query and get a result : \n" .
                      "Query : " . $query . " \n".

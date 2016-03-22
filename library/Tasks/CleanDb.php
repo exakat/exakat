@@ -26,9 +26,9 @@ namespace Tasks;
 class CleanDb extends Tasks {
     private $config = null;
 
-    public function __construct() {
+    public function __construct($gremlin) {
         $this->enabledLog = false;
-        parent::__construct();
+        parent::__construct($gremlin);
     }
     
     public function run(\Config $config) {
@@ -48,7 +48,7 @@ class CleanDb extends Tasks {
         $queryTemplate = <<<GREMLIN
 g.V.count();
 GREMLIN;
-        $result = gremlin_query($queryTemplate);
+        $result = $this->gremlin->query($queryTemplate);
         if (!is_object($result) || $result->results === null) {
             // Can't connect to neo4j. Forcing restart.
             $this->restartNeo4j();
@@ -72,7 +72,7 @@ g.E.each{ g.removeEdge(it); }
 g.V.each{ g.removeVertex(it); } 
 
 GREMLIN;
-            gremlin_query($queryTemplate);
+            $this->gremlin->query($queryTemplate);
             display('Database cleaned');
         }
         $end = microtime(true);

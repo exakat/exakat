@@ -89,10 +89,29 @@ class FindExternalLibraries extends Tasks {
         }
     
         display('Processing files');
-        $newConfigs = $this->processDir($dir);
+        $files = $this->datastore->getCol('files', 'file');
+        if (empty($files)) {
+            display('No files to process. Aborting');
+            return;
+        }
+        
+        $r = array();
+        foreach($files as $file) {
+            $s = $this->process($file);
+            
+            if (!empty($s)) {
+               $r[] = $s;
+            }
+       }
+
+       if (!empty($r)) {
+           $newConfigs = call_user_func_array('array_merge', $r);
+        } else {
+            $newConfigs = array();
+        }
 
         if (count($newConfigs) == 1) {
-            display('One external libraries is going to be omitted : '.join(', ', array_keys($newConfigs)));
+            display('One external library is going to be omitted : '.join(', ', array_keys($newConfigs)));
         } elseif (count($newConfigs)) {
             display(count($newConfigs).' external libraries are going to be omitted : '.join(', ', array_keys($newConfigs)));
         }
@@ -119,33 +138,6 @@ class FindExternalLibraries extends Tasks {
         }
     }
     
-    private function processDir($dir) {
-        $return = array();
-    
-        $files = glob($dir.'/*');
-        $r = array();
-        foreach($files as $file) {
-           if (is_file($file)) {
-                $s = $this->process($file);
-            } elseif (is_dir($file)) {
-                $s = $this->processDir($file);
-            }
-            
-            if (!empty($s)) {
-               $r[] = $s;
-            }
-           // else should go to LOG
-       }
-
-       if (!empty($r)) {
-           $return = call_user_func_array('array_merge', $r);
-        } else {
-            $return = array();
-        }
-
-        return $return;
-    }
-
     private function process($filename) {
         $return = array();
 

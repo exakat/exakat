@@ -100,36 +100,4 @@ function copyDir($src, $dst) {
     return $total;
 } 
 
-////////////////////////////////////////////////////////////////////////
-/// Old API for gremlin (moved to \Graph\ Gremlin2 then Gremlin3)
-////////////////////////////////////////////////////////////////////////
-
-global $graphDB;
-$graphDB = new \Graph\Gremlin2($config);
-
-function gremlin_query($query, $params = [], $load = []) {
-    global $graphDB;
-    
-    return $graphDB->query($query, $params, $load);
-}
-
-
-function gremlin_queryOne($query, $params = [], $load = []) {
-    global $graphDB;
-    
-    return $graphDB->queryOne($query, $params, $load);
-}
-
-function gremlin_queryColumn($query, $params = [], $load = []) {
-    global $graphDB;
-    
-    return $graphDB->queryColumn($query, $params, $load);
-}
-
-function neo4j_serverInfo() {
-    global $graphDB;
-    
-    return $graphDB->serverInfo();
-}
-
 ?>

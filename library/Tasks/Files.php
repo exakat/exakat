@@ -133,7 +133,7 @@ class Files extends Tasks {
 
         display('Counting files');
         // Also refining the file list with empty, one-tokened and incompilable files.
-        $counting = new Phploc();
+        $counting = new Phploc($this->gremlin);
         $counting->run($config);
         display('Counted files');
         

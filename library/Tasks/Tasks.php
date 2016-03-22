@@ -27,8 +27,10 @@ abstract class Tasks {
     protected $log        = null;
     protected $enabledLog = true;
     protected $datastore  = null;
+    protected $gremlin    = null;
     
-    public function __construct() {
+    public function __construct($gremlin) {
+        $this->gremlin = $gremlin;
         // Config is the general one.
         $config = \Config::factory();
         

@@ -35,16 +35,16 @@ class Build_root extends Tasks {
 
         $this->logTime('Start');
 
-        $result = gremlin_query('g.idx("racines")');
+        $result = $this->gremlin->query('g.idx("racines")');
 
         if (!isset($result->results)) {
-            gremlin_query("g.createIndex('racines', Vertex)");
+            $this->gremlin->query("g.createIndex('racines', Vertex)");
         }
         $this->logTime('Created racines');
 
         $this->logTime('g.idx("racines")');
-        gremlin_query('g.dropIndex("atoms");');
-        gremlin_query('g.createIndex("atoms", Vertex)');
+        $this->gremlin->query('g.dropIndex("atoms");');
+        $this->gremlin->query('g.createIndex("atoms", Vertex)');
 
         $this->logTime('g.idx("atoms")');
 
@@ -56,7 +56,7 @@ g.V().has("token", "T_STRING").has("atom", null).each{
     g.idx("atoms").put("atom", it.atom, it);
 }
 GREMLIN;
-        gremlin_query($query);
+        $this->gremlin->query($query);
         $this->logTime('g.idx("atoms") : T_STRING');
 
         // separate processing for T_VARIABLE
@@ -67,7 +67,7 @@ g.V().has("token", "T_VARIABLE").each{
     g.idx("atoms").put("atom", it.atom, it);
 }
 GREMLIN;
-        gremlin_query($query);
+        $this->gremlin->query($query);
         $this->logTime('g.idx("atoms") : T_VARIABLE');
 
         $query = <<<GREMLIN
@@ -77,7 +77,7 @@ g.V().has("token", "T_STRING_VARNAME").each{
     g.idx("atoms").put("atom", it.atom, it);
 }
 GREMLIN;
-        gremlin_query($query);
+        $this->gremlin->query($query);
         $this->logTime('g.idx("atoms") : T_STRING_VARNAME');
 
         $query = <<<GREMLIN
@@ -123,36 +123,36 @@ g.V().filter{it.atom in ["Integer", "String",  "Magicconstant", "Null",
     }
 }
 GREMLIN;
-        gremlin_query($query);
+        $this->gremlin->query($query);
         $this->logTime('g.idx("atom")[["atom":"******"]] : filling');
 
         // creating the index
         // @todo check this index
-        gremlin_query("g.V().has('root', true).each{ g.idx('racines').put('token', 'ROOT', it); };");
+        $this->gremlin->query("g.V().has('root', true).each{ g.idx('racines').put('token', 'ROOT', it); };");
         $this->logTime('g.idx("ROOT")');
 
         // special case for the initial Rawstring.
-        gremlin_query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('atoms').put('atom', 'Sequence', it); };");
+        $this->gremlin->query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('atoms').put('atom', 'Sequence', it); };");
         $this->logTime('g.idx("racines") ROOT special');
 
         // creating the neo4j Index
-        gremlin_query("g.V().has('index', true).each{ g.idx('racines').put('token', it.token, it); };");
+        $this->gremlin->query("g.V().has('index', true).each{ g.idx('racines').put('token', it.token, it); };");
         $this->logTime('g.idx("racines")[[token:***]] indexing');
         
-        gremlin_query("g.idx('racines')[['token':'Sequence']].out('INDEXED').has('in_for', true).inE('INDEXED').each{ g.removeEdge(it); }");
+        $this->gremlin->query("g.idx('racines')[['token':'Sequence']].out('INDEXED').has('in_for', true).inE('INDEXED').each{ g.removeEdge(it); }");
         // At least one index for sequence (might be needed during processing, even if empty initially)
-        gremlin_query("sequences = g.addVertex(null, [token:'T_SEMICOLON', code:'Index for Sequence', index:true]); g.idx('racines').put('token', 'Sequence', sequences);");
+        $this->gremlin->query("sequences = g.addVertex(null, [token:'T_SEMICOLON', code:'Index for Sequence', index:true]); g.idx('racines').put('token', 'Sequence', sequences);");
 
         $this->logTime('Indexing racines done');
 
         // calculating the Unicode blocks
-        gremlin_query("g.idx('atoms')[['atom':'String']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
-        gremlin_query("g.idx('atoms')[['token':'Rawstring']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+        $this->gremlin->query("g.idx('atoms')[['atom':'String']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+        $this->gremlin->query("g.idx('atoms')[['token':'Rawstring']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
         $this->logTime('Unicodes block');
 
         // Creating Project Node
 
-        gremlin_query(<<<GREMLIN
+        $this->gremlin->query(<<<GREMLIN
 g.idx("atoms")[["atom":"String"]].has("noDelimiter", null).each{ 
     if (it.code in ['""', "''"]) {
         it.setProperty("noDelimiter", ''); 
@@ -168,12 +168,12 @@ GREMLIN
         // resolving the constants
         $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'namespaces', 'files');
         foreach($extra_indices as $indice) {
-            gremlin_query("g.dropIndex('$indice');");
-            gremlin_query("g.createIndex('$indice', Vertex)");
+            $this->gremlin->query("g.dropIndex('$indice');");
+            $this->gremlin->query("g.createIndex('$indice', Vertex)");
         }
         $this->logTime('g.idx("last index")');
 
-        gremlin_query(<<<GREMLIN
+        $this->gremlin->query(<<<GREMLIN
 project = g.addVertex(null, [token:"T_PROJECT", atom:"Project", code:"Project", fullcode: "Whole", line:0, index:true]); 
 g.idx("atoms").put("atom", "Project", project);
 g.idx("racines")[["token":"ROOT"]].in("FILE").each{ g.addEdge(project, it, "PROJECT"); };

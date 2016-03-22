@@ -24,9 +24,9 @@
 namespace Tasks;
 
 class Doctor extends Tasks {
-    public function __construct() {
+    public function __construct($gremlin) {
         $this->enabledLog = false;
-        parent::__construct();
+        parent::__construct($gremlin);
     }
 
     public function run(\Config $config) {
@@ -118,7 +118,7 @@ class Doctor extends Tasks {
                 } elseif (empty($config->neo4j_password)) {
                     $stats['neo4j']['password'] = 'Login is set, but not password. Please, set it in config/config.ini';
                 }
-                $res = gremlin_query('"Hello world"');
+                $res = $this->gremlin->query('"Hello world"');
                 if ($res === null) {
                     $stats['neo4j']['credentials'] = 'Server is not running.';
                 } elseif (isset($res->success) && $res->success === true) {

@@ -24,9 +24,9 @@
 namespace Tasks;
 
 class Update extends Tasks {
-    public function __construct() {
+    public function __construct($gremlin) {
         $this->enabledLog = false;
-        parent::__construct();
+        parent::__construct($gremlin);
     }
 
     public function run(\Config $config) {

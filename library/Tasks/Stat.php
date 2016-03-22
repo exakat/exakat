@@ -27,7 +27,7 @@ class Stat extends Tasks {
     public function run(\Config $config) {
         $project = $config->project;
 
-        $stats = new \Stats();
+        $stats = new \Stats($this->gremlin);
         if ($config->filename) {
             $stats->setFileFilter($config->filename);
         }

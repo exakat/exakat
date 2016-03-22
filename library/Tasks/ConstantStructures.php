@@ -31,26 +31,26 @@ class ConstantStructures extends Tasks {
 
         // First, clean it all
         $query = 'g.V.has("constante", true).each{ it.removeProperty("constante")};';
-        $this->query($query);
+        $this->gremlin->query($query);
         $this->displayTiming('Initial clean');
 
         // Case for Literals
         $literals = array('Integer', 'Boolean', 'Float', 'Null', 'Void', 'RawString', 'Magicconstant', 'Staticconstant');
         foreach($literals as $literal) {
             $query = 'g.idx("atoms")[["atom":"'.$literal.'"]].each{ it.setProperty("constante", true)};';
-            $this->query($query);
+            $this->gremlin->query($query);
             $this->displayTiming($literal);
         }
 
         // String that are concatenations are special
         $query = 'g.idx("atoms")[["atom":"String"]].filter{it.out("CONTAINS").any() == false}.each{ it.setProperty("constante", true)};';
-        $this->query($query);
+        $this->gremlin->query($query);
         $this->displayTiming('String/concatenations');
 
         $constantes = array('Identifier', 'Nsname');
         foreach($constantes as $constant) {
             $query = 'g.idx("atoms")[["atom":"'.$constant.'"]].hasNot("atom", "Functioncall").each{ it.setProperty("constante", true)};';
-            $this->query($query);
+            $this->gremlin->query($query);
             $this->displayTiming($constant);
         }
 
@@ -87,7 +87,7 @@ g.idx("atoms")[["atom":"$atom"]]
     .filter{ it.out($linksList).hasNot("constante", true).any() == false}
     .each{ it.setProperty("constante", true);}
 GREMLIN;
-            $this->query($query);
+            $this->gremli->query($query);
             $this->displayTiming($atom);
         }
 
@@ -113,7 +113,7 @@ g.idx("atoms")[["atom":"Assignation"]]
     .out('LEFT')
     .each{ it.setProperty("constante", true);}
 GREMLIN;
-        $this->query($query);
+        $this->gremlin->query($query);
         $this->displayTiming('Assignation');
 
         // case for array
@@ -124,7 +124,7 @@ g.idx("atoms")[["atom":"Functioncall"]]
     .filter{ it.out("ARGUMENTS").has("constante", null).any() == false}
     .each{ it.setProperty("constante", true);}
 GREMLIN;
-        $this->query($query);
+        $this->gremlin->query($query);
         $this->displayTiming('Array');
 */
         }
@@ -132,14 +132,14 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V.count();
 GREMLIN;
-        $vertices = $this->query($query);
+        $vertices = $this->gremlin->query($query);
         $total = $vertices[0];
         display( 'Total tokens : '.$total." \n");
 
         $query = <<<GREMLIN
 g.V.has('constante', true).count();
 GREMLIN;
-        $vertices = $this->query($query);
+        $vertices = $this->gremlin->query($query);
         $constantes = $vertices[0];
         display( 'Constante tokens : '.$constantes." (".number_format($constantes / $total * 100, 2)."% )\n");
 
@@ -147,18 +147,6 @@ GREMLIN;
 
     private function displayTiming($message) {
         display( $message."\nTime : ".number_format($this->lastTiming * 1000, 0)."ms\n");
-    }
-    
-    private function query($query, $retry = 1) {
-        $this->lastTiming = 0;
-        $begin = microtime(true);
-
-        $res = gremlin_query($query);
-        $res = $res->results;
-
-        $this->lastTiming = microtime(true) - $begin;
-
-        return $res;
     }
 }
 

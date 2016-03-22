@@ -48,7 +48,7 @@ class Results extends Tasks {
 g.idx('analyzers')[['analyzer':'$analyzer']].out.map;
 GREMLIN;
 
-        $vertices = $this->query($query);
+        $vertices = $this->gremlin->query($query);
         if (isset($vertices[0]->notCompatibleWithPhpVersion)) {
             die($config->program." is not compatible with the running version of PHP. No result available.\n");
         }
@@ -60,12 +60,12 @@ GREMLIN;
         $return = array();
         if ($config->style == 'BOOLEAN') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.any()';
-            $vertices = $this->query($queryTemplate);
+            $vertices = $this->gremlin->query($queryTemplate);
 
             $return[] = $vertices[0];
         } elseif ($config->style == 'COUNTED_ALL') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.count()';
-            $vertices = $this->query($queryTemplate);
+            $vertices = $this->gremlin->query($queryTemplate);
 
             $return[] = $vertices[0];
         } elseif ($config->style == 'ALL') {
@@ -74,7 +74,7 @@ g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.f
                                             .transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
 GREMLIN;
 
-            $vertices = $this->query($query);
+            $vertices = $this->gremlin->query($query);
 
             $return = array();
             foreach($vertices as $k => $v) {
@@ -88,7 +88,7 @@ GREMLIN;
             }
         } elseif ($config->style == 'DISTINCT') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.code.unique()';
-            $vertices = $this->query($queryTemplate);
+            $vertices = $this->gremlin->query($queryTemplate);
 
             $return = array();
             foreach($vertices as $k => $v) {
@@ -96,7 +96,7 @@ GREMLIN;
             }
         } elseif ($config->style == 'COUNTED') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.groupCount(m){it.code}.cap';
-            $vertices = $this->query($queryTemplate);
+            $vertices = $this->gremlin->query($queryTemplate);
 
             $return = array();
             foreach($vertices[0] as $k => $v) {
@@ -194,15 +194,6 @@ GREMLIN;
                 file_put_contents($name, $text);
             }
         }
-    }
-
-    private function query($query) {
-        $result = gremlin_query($query);
-        if (!isset($result->results)) {
-            print $query;
-            var_dump($result);
-        }
-        return (array) $result->results;
     }
 }
 

@@ -25,7 +25,7 @@ namespace Tasks;
 
 class Vector extends Tasks {
     public function run(\Config $config) {
-        $stats = gremlin_queryColumn(<<<GREMLIN
+        $stats = $this->gremlin->queryColumn(<<<GREMLIN
 g.idx('atoms')[['atom':'Foreach']]
 .sideEffect{
     ForeachControlKeyAssignement = it.out('VALUE').has('atom', 'Keyvalue').count();

@@ -27,7 +27,7 @@ class Export extends Tasks {
     public function run(\Config $config) {
         $queryTemplate = 'g.V.as("x").except([g.v(0)])';
 
-        $result = gremlin_query($queryTemplate);
+        $result = $this->gremlin->query($queryTemplate);
         $vertices = (array) $result->results;
 
         $V = array();
@@ -41,7 +41,7 @@ class Export extends Tasks {
         }
 
         $queryTemplate .= '.outE()';
-        $result = gremlin_query($queryTemplate);
+        $result = $this->gremlin->query($queryTemplate);
         $edges = (array) $result->results;
 
         $E = array();

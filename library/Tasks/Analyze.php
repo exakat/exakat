@@ -38,6 +38,8 @@ class Analyze extends Tasks {
         $this->checkTokenLimit();
         $begin = microtime(true);
 
+        \Analyzer\Analyzer::$gremlinStatic = $this->gremlin;
+        
         // Take this before we clean it up
         $rows = $this->datastore->getRow('analyzed');
         $analyzed = array();
@@ -172,7 +174,7 @@ index = g.addVertex(null, [analyzer:'$analyzerQuoted', analyzer:true, line:0, de
 g.idx('analyzers').put('analyzer', '$analyzerQuoted', index);
 g.addEdge(index, result, 'ANALYZED');
 GREMLIN;
-                gremlin_query($query);
+                $this->gremlin->query($query);
                 $this->datastore->addRow('analyzed', array($analyzer_class => -2 ) );
 
                 display("$analyzer is not compatible with PHP version {$config->phpversion}. Ignoring\n");
@@ -186,7 +188,7 @@ index = g.addVertex(null, [analyzer:'$analyzerQuoted', analyzer:true, line:0, de
 g.idx('analyzers').put('analyzer', '$analyzerQuoted', index);
 g.addEdge(index, result, 'ANALYZED');
 GREMLIN;
-                gremlin_query($query);
+                $this->gremlin->query($query);
                 $this->datastore->addRow('analyzed', array($analyzer_class => -1 ) );
 
                 display( "$analyzer is not compatible with PHP configuration of this version. Ignoring\n");

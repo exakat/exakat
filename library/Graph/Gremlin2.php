@@ -162,14 +162,13 @@ class Gremlin2 extends Graph {
         if (!is_object($res)) {
             die('Server is not responding');
         }
-        $res = $res->results[0];
     
-        if (is_bool($res) || is_int($res)) {
-            return $res;
+        if (isset($res->results) && isset($res->results[0])) {
+            return $res->results[0];
         } else {
             echo 'Help needed in ', __METHOD__, "\n",
                  "Query : '", $query, "'\n",
-                 print_r($res, true);
+                 var_dump($res, true);
             die();
         }
     }

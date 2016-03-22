@@ -25,7 +25,7 @@ namespace Tasks;
 
 class Classes extends Tasks {
     public function run(\Config $config) {
-        $stats = gremlin_queryColumn(<<<GREMLIN
+        $stats = $this->gremlin->queryColumn(<<<GREMLIN
 g.idx('atoms')[['atom':'Class']]
 .sideEffect{
     if (it.in.loop(1){true}{it.object.token == 'T_FILENAME'}.any()) {

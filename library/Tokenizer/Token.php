@@ -129,8 +129,12 @@ abstract class Token {
     protected static $phpExecVersion = PHP_VERSION;
 
     static public $instructionEnding = array();
+
+    public static $staticGremlin = null; // TODO : remove this
+    protected $gremlin = null;
     
-    public function __construct() {
+    public function __construct($gremlin) {
+        $this->gremlin = $gremlin;
         
         self::$instructionEnding = array_merge(Preplusplus::$operators,
                                                Postplusplus::$operators,
@@ -216,22 +220,22 @@ abstract class Token {
     abstract protected function _check();
 
     static public function countTotalToken() {
-        return gremlin_queryOne('g.V.count()');
+        return self::$staticGremlin->queryOne('g.V.count()');
     }
 
     static public function countLeftNext() {
-        return 1 + gremlin_queryOne("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
+        return 1 + self::$staticGremlin->queryOne("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     }
 
     static public function query($query) {
-        $res = gremlin_query($query);
+        $res = self::$staticGremlin->query($query);
         $res = (array) $res->results;
         
         return $res;
     }
 
     static public function countFileToProcess() {
-        return gremlin_queryOne("g.idx('racines')[['token':'ROOT']].out('INDEXED').count()");
+        return self::$staticGremlin->queryOne("g.idx('racines')[['token':'ROOT']].out('INDEXED').count()");
     }
 
     
@@ -879,7 +883,7 @@ g.idx('atoms')[['atom':'Class']]
         $begin = microtime(true);
         foreach($queries as $query) {
             // @todo make this //
-            $res = gremlin_query($query);
+            $res = self::$staticGremlin->query($query);
         }
         $end = microtime(true);
         display('CleanHidden : '.number_format(1000 * ($end - $begin), 0)."ms\n");
@@ -896,7 +900,7 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
 }
 
 ";
-        gremlin_query($query);
+        self::$staticGremlin->query($query);
     }
 
     public static function getClass($class) {
@@ -907,9 +911,9 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
         }
     }
     
-    public static function getInstance($name, $phpVersion = 'Any') {
+    public static function getInstance($name, $gremlin, $phpVersion = 'Any') {
         if ($analyzer = Token::getClass($name)) {
-            $analyzer = new $analyzer();
+            $analyzer = new $analyzer($gremlin);
             if ($analyzer->checkPhpVersion($phpVersion)) {
                 return $analyzer;
             } else {

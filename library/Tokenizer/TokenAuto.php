@@ -126,7 +126,7 @@ toDelete.each{ g.removeVertex(it); }
         
             do {
                 $begin = microtime(true);
-                $res = gremlin_query($query);
+                $res = $this->gremlin->query($query);
                 if (!isset($res->results)) {
                     echo $query, "\n",  print_r($res, true);
                     die();
@@ -266,7 +266,7 @@ fullcode.setProperty('$name', $value)";
         }
 
         if (isset($actions['toVarNew'])) {
-            $token = new _Ppp();
+            $token = new _Ppp($this->gremlin);
             $fullcode = $token->fullcode();
             
             $atom = $actions['toVarNew'];
@@ -355,7 +355,7 @@ g.removeVertex(arg);
         }
 
         if (isset($actions['toGlobal'])) {
-            $globalAtom = new _Global();
+            $globalAtom = new _Global($this->gremlin);
             $fullcode = $globalAtom->fullcode();
 
             $qactions[] = "
@@ -549,7 +549,7 @@ $fullcode
         if (isset($actions['toOption'])) {
             $position = str_repeat(".out('NEXT')", $actions['toOption']);
 
-            $token = new _Ppp();
+            $token = new _Ppp($this->gremlin);
             $fullcode = $token->fullcode();
             
             $qactions[] = "
@@ -567,7 +567,7 @@ it.fullcode = it.code;
         }
         
         if (isset($actions['to_ppp_assignation'])) {
-            $token = new _Ppp();
+            $token = new _Ppp($this->gremlin);
             $fullcode = $token->fullcode();
 
             $qactions[] = "
@@ -868,7 +868,7 @@ it.out('$link').each{
         }
 
         if (isset($actions['createSequenceForCaseWithoutSemicolon'])) {
-            $sequence = new Sequence();
+            $sequence = new Sequence($this->gremlin);
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
@@ -975,7 +975,7 @@ g.addEdge(nsname, p2, 'NEXT');
         }
         
         if (isset($actions['createSequenceForDefaultWithoutSemicolon'])) {
-            $sequence = new Sequence();
+            $sequence = new Sequence($this->gremlin);
             $fullcode = $sequence->fullcode();
             $qactions[] = "
 
@@ -1201,7 +1201,7 @@ toDelete.push(a2);
         }
 
         if (isset($actions['toBlockFor']) && $actions['toBlockFor']) {
-            $sequence = new Block();
+            $sequence = new Block($this->gremlin);
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
@@ -1613,10 +1613,10 @@ fullcode = x;
         }
 
         if (isset($actions['toArray']) && $actions['toArray']) {
-            $array = new _Array();
+            $array = new _Array($this->gremlin);
             $fullcodeArray = $array->fullcode();
 
-            $arrayAppend = new Arrayappend();
+            $arrayAppend = new Arrayappend($this->gremlin);
             $fullcodeArrayappend = $arrayAppend->fullcode();
 
             $qactions[] = "
@@ -1962,7 +1962,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         }
 
         if (isset($actions['toBlockElse']) && $actions['toBlockElse']) {
-            $sequence = new Sequence();
+            $sequence = new Sequence($this->gremlin);
             $fullcode = $sequence->fullcode();
             
             $offset = str_repeat(".out('NEXT')", $actions['toBlockElse']);
@@ -2167,7 +2167,7 @@ it.bothE('NEXT').each{ g.removeEdge(it) ; }
         }
         
         if (isset($actions['createBlockWithSequenceForCase']) && $actions['createBlockWithSequenceForCase']) {
-            $sequence = new Sequence();
+            $sequence = new Sequence($this->gremlin);
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
@@ -2207,7 +2207,7 @@ if (a.atom != 'Sequence') {
         }
 
         if (isset($actions['createBlockWithSequenceForDefault']) && $actions['createBlockWithSequenceForDefault']) {
-            $sequence = new Sequence();
+            $sequence = new Sequence($this->gremlin);
             $fullcode = $sequence->fullcode();
 
             $qactions[] = "
@@ -2514,7 +2514,7 @@ if (a5.token == 'T_SEMICOLON') {
         }
 
         if (isset($actions['to_methodcall'])) {
-            $string = new Methodcall();
+            $string = new Methodcall($this->gremlin);
             $fullCodeString = $string->fullcode();
 
             $qactions[] = "
@@ -2553,13 +2553,13 @@ g.addEdge(b1, x, 'NEXT');
         }
 
         if (isset($actions['checkTypehint'])) {
-            $reference = new Reference();
+            $reference = new Reference($this->gremlin);
             $fullcodeReference = $reference->fullcode();
 
-            $typehint = new Typehint();
+            $typehint = new Typehint($this->gremlin);
             $fullcodeTypehint = $typehint->fullcode();
 
-            $arguments = new Arguments();
+            $arguments = new Arguments($this->gremlin);
             $fullcodeArguments = $arguments->fullcode();
 
             $qactions[] = <<<GREMLIN
@@ -2606,7 +2606,7 @@ GREMLIN;
         if (isset($actions['makeQuotedString'])) {
             $atom = str_replace('_', '', $actions['makeQuotedString']);
             $class = "\\Tokenizer\\".$actions['makeQuotedString'];
-            $string = new $class();
+            $string = new $class($this->gremlin);
             $fullCodeString = $string->fullcode();
             
             $qactions[] = "
@@ -2656,7 +2656,7 @@ x.out('CONCAT').each{
         }
 
         if (isset($actions['emptyHeredoc'])) {
-            $heredoc = new Heredoc();
+            $heredoc = new Heredoc($this->gremlin);
             $fullcode = $heredoc->fullcode();
 
             $qactions[] = "
@@ -2682,7 +2682,7 @@ $fullcode;
         }
 
         if (isset($actions['methodToFunctioncall'])) {
-            $token = new Functioncall();
+            $token = new Functioncall($this->gremlin);
             $fullcode = $token->fullcode();
 
             $qactions[] = <<<GREMLIN
@@ -2714,7 +2714,7 @@ GREMLIN;
         }
 
         if (isset($actions['staticmethodToFunctioncall'])) {
-            $token = new Functioncall();
+            $token = new Functioncall($this->gremlin);
             $fullcode = $token->fullcode();
 
             $qactions[] = <<<GREMLIN

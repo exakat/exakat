@@ -54,7 +54,7 @@ class Tokenizer extends Tasks {
         foreach($classes as $class) {
             $new = "Tokenizer\\$class";
     
-            $r = \Tokenizer\Token::getInstance($new, $config->phpversion);
+            $r = \Tokenizer\Token::getInstance($new, $this->gremlin, $config->phpversion);
             $d = array_intersect($new::$operators, $tokenCounts);
             
             if ($new == 'Tokenizer\\FunctioncallArray') {
@@ -72,7 +72,8 @@ class Tokenizer extends Tasks {
 
         $this->log->log( "Finished loading classes");
 
-        $server_stat = new \Stats();
+        $server_stat = new \Stats($this->gremlin);
+        \Tokenizer\Token::$staticGremlin = $this->gremlin; // This initiate static::$gremlin
         $total = \Tokenizer\Token::countTotalToken();
         $count = $total + 1;
 

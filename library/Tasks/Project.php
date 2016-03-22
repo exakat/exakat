@@ -85,7 +85,7 @@ class Project extends Tasks {
         display("Running project '$project'\n");
 
         display("Cleaning DB\n");
-        $analyze = new CleanDb();
+        $analyze = new CleanDb($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         $this->logTime('CleanDb');
@@ -100,7 +100,7 @@ class Project extends Tasks {
         
         $configThema = \Config::push($args);
 
-        $analyze = new FindExternalLibraries();
+        $analyze = new FindExternalLibraries($this->gremlin);
         $analyze->run($configThema);
         unset($report);
         $this->updateProgress($progress++);
@@ -110,7 +110,7 @@ class Project extends Tasks {
         $this->updateProgress($progress++);
 
         display("Running files\n");
-        $analyze = new Files();
+        $analyze = new Files($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         $this->logTime('Files');
@@ -118,39 +118,39 @@ class Project extends Tasks {
 
         $this->checkTokenLimit();
 
-        $analyze = new Load();
+        $analyze = new Load($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         display("Project loaded\n");
         $this->logTime('Loading');
         $this->updateProgress($progress++);
 
-        $analyze = new Build_root();
+        $analyze = new Build_root($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         display("Build root\n");
         $this->logTime('Build_root');
         $this->updateProgress($progress++);
 
-        $analyze = new Tokenizer();
+        $analyze = new Tokenizer($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         $this->logTime('Tokenizer');
         display("Project tokenized\n");
         $this->updateProgress($progress++);
 
-        $analyze = new Magicnumber();
+        $analyze = new Magicnumber($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         $this->updateProgress($progress++);
 
-        $analyze = new Errors();
+        $analyze = new Errors($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         display("Got the errors (if any)\n");
         $this->updateProgress($progress++);
 
-        $analyze = new Log2csv();
+        $analyze = new Log2csv($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         $this->logTime('Stats');
@@ -173,7 +173,7 @@ class Project extends Tasks {
             try {
                 $configThema = \Config::push($args);
 
-                $analyze = new Analyze();
+                $analyze = new Analyze($this->gremlin);
                 $analyze->run($configThema);
                 unset($report);
                 
@@ -217,7 +217,7 @@ class Project extends Tasks {
                 $config = \Config::factory($args);
             
                 try {
-                    $report = new Report2();
+                    $report = new Report2($this->gremlin);
                     $report->run($config);
                     unset($report);
                 } catch (\Exception $e) {
@@ -231,7 +231,7 @@ class Project extends Tasks {
 
         display("Reported project\n");
 
-        $analyze = new Stat();
+        $analyze = new Stat($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         display("Stats\n");

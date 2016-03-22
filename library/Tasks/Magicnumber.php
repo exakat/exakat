@@ -48,7 +48,7 @@ m = [:];
 g.idx('atoms')[['atom':'$type']].groupCount(m){it.code}.iterate();
 m.findAll()
 SQL;
-            $res = gremlin_query($query);
+            $res = $this->gremlin->query($query);
             $res = $res->results;
 
             $sqlite->exec('CREATE TABLE '.$type.' (id INTEGER PRIMARY KEY, value STRING, count INTEGER)');
@@ -68,7 +68,7 @@ SQL;
         }
 
         // export big arrays (more than 10)
-        $res = gremlin_query("g.V.has('token', 'T_ARRAY').filter{ it.out('ARGUMENTS').out('ARGUMENT').count() > 10}.fullcode");
+        $res = $this->gremlin->query("g.V.has('token', 'T_ARRAY').filter{ it.out('ARGUMENTS').out('ARGUMENT').count() > 10}.fullcode");
         $res = $res->results;
         
         $outputFile = fopen($config->projects_root.'/projects/'.$config->project.'/bigArrays.txt', 'w+');
