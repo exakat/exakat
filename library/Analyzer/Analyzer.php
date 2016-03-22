@@ -78,7 +78,13 @@ abstract class Analyzer {
     
     static public $docs = null;
 
-    public function __construct() {
+    private $gremlin = null;
+    public static $gremlinStatic = null;
+
+    public function __construct($gremlin) {
+        $this->gremlin = $gremlin;
+        self::$gremlinStatic = $gremlin;
+        
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
         $this->analyzerInBase = str_replace('\\', '/', str_replace('Analyzer\\', '', $this->analyzer));
@@ -180,7 +186,7 @@ abstract class Analyzer {
         
         if ($analyzer = static::getClass($name)) {
             if (!isset($instanciated[$analyzer])) {
-                $instanciated[$analyzer] = new $analyzer();;
+                $instanciated[$analyzer] = new $analyzer(self::$gremlinStatic);
             }
             return $instanciated[$analyzer];
         } else {
@@ -345,7 +351,7 @@ GREMLIN;
 
     public function query($queryString, $arguments = null) {
         try {
-            $result = gremlin_query($queryString, $arguments);
+            $result = $this->gremlin->query($queryString, $arguments);
         } catch (\Exceptions\GremlinException $e) {
             display($e->getMessage().
                     $queryString);
