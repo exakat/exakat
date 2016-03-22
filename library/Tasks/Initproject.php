@@ -249,7 +249,7 @@ INI;
 
         if (!$skipFiles) {
             display("Running files\n");
-            $analyze = new Files();
+            $analyze = new Files($this->gremlin);
             $analyze->run($this->config);
             unset($analyze);
         }

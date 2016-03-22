@@ -44,7 +44,9 @@ class Status extends Tasks {
 
         switch($config->project_vcs) {
             case 'git' :
-                $status['git status'] = trim(shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git rev-parse HEAD'));
+                if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
+                    $status['git status'] = trim(shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git rev-parse HEAD'));
+                }
                 
                 if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
                     $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git remote update; git status -uno | grep \'up-to-date\'');

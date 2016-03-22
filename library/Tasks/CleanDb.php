@@ -134,13 +134,13 @@ GREMLIN;
             // Needs to pick up this error and act
             // also, may be we can wait for the pid to appear?
 
-            $res = neo4j_serverInfo();
+            $res = $this->gremlin->serverInfo();
         } while ( $res === false);
         
         display('Database cleaned with restart');
 
         try {
-            neo4j_serverInfo();
+            $res = $this->gremlin->serverInfo();
             display('Restarted Neo4j cleanly');
         } catch (\Exception $e) {
             display('Didn\'t restart neo4j cleanly');
