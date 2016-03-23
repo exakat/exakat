@@ -26,6 +26,10 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class CouldBeStatic extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Structures/GlobalInGlobal');
+    }
+    
     public function analyze() {
         $this->atomIs('Global')
              ->outIs('GLOBAL')
@@ -44,6 +48,8 @@ class CouldBeStatic extends Analyzer\Analyzer {
              ->filter('g.idx("atoms")[["atom":"Global"]].out("GLOBAL").has("code", theGlobal)
                         .in.loop(1){!(it.object.atom in ["Function", "File"])}{it.object.atom == "File"}
                         .any() == false')
+             // this variable is both in the current function and the global space (implicitely)
+             ->filter('g.idx("analyzers")[["analyzer":"Analyzer\\\\Structures\\\\GlobalInGlobal"]].out.has("code", theGlobal).any() == false')
 
              // this variable is both in the current function and another via $GLOBALS
              ->filter('g.idx("atoms")[["atom":"Array"]].filter{ it.out("VARIABLE").has("code", "\$GLOBALS").any()}
@@ -51,8 +57,6 @@ class CouldBeStatic extends Analyzer\Analyzer {
             // todo : add check on function to avoid itself.
              ->back('first');
         $this->prepareQuery();
-        
-        // todo : add support for the $GLOBALS
     }
 }
 
