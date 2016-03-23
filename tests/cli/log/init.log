@@ -1,0 +1,32 @@
+Begin : 1458661350.4596
+Initializing ut1 with ''
+Empty initialization
+Counting files
+Running files
+No code in project 'ut1'
+Aborting
+project   : ut1
+loc       : 
+tokens    : 
+status    : Initproject
+updatable : 
+
+errors    : 
+    errors.log : errors.log is missing
+
+Initializing ut2 with 'https://github.com/sculpin/sculpin.git'
+/Users/famille/Desktop/analyze/projects/ut2 already exists. Reusing
+/Users/famille/Desktop/analyze/projects/ut2/log/ already exists. Ignoring
+Done
+project   : ut2
+loc       : 
+tokens    : 
+status    : 
+updatable : 
+
+errors    : 
+    errors.log : errors.log is missing
+
+/Users/famille/Desktop/analyze/tests/cli
+Duration : -749.20ms 
+End : 1458661351.2088

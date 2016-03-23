@@ -1,0 +1,14 @@
+Begin : 1458661340.6658
+Cleaning with restart
+Database cleaned with restart
+Restarted Neo4j cleanly
+Cleaning scripts
+Cleaned 0 gremlin scripts
+0 nodes in the database
+No nodes in neo4j. No need to clean
+0 ms
+Cleaning scripts
+Cleaned 0 gremlin scripts
+/Users/famille/Desktop/analyze/tests/cli
+Duration : -7,086.93ms 
+End : 1458661347.7528

@@ -1,0 +1,1495 @@
+Begin : 1458661351.2453
+Initializing ut3 with 'https://github.com/sculpin/sculpin.git'
+Git initialization
+Counting files
+Running files
+Check composer
+Counting files
+files    : 150
+total    : 11419
+tokens   : 33334
+comments : 2968
+code     : 4088
+Counted files
+Check compilation for 55
+Check compilation for 56
+Check compilation for 70
+Check short tag (normal pass)
+Check short tag (with directive activated)
+Short tag OK
+Check config files
+Array
+(
+    [0] => Array
+        (
+            [file] => composer.json
+            [name] => composer
+            [homepage] => https://getcomposer.org/
+        )
+
+    [1] => Array
+        (
+            [file] => composer.lock
+            [name] => composer
+            [homepage] => https://getcomposer.org/
+        )
+
+    [2] => Array
+        (
+            [file] => .git
+            [name] => git
+            [homepage] => https://git-scm.com/
+        )
+
+    [3] => Array
+        (
+            [file] => .gitignore
+            [name] => git
+            [homepage] => https://git-scm.com/
+        )
+
+    [4] => Array
+        (
+            [file] => phpunit.xml.dist
+            [name] => phpunit
+            [homepage] => https://phpunit.de/
+        )
+
+    [5] => Array
+        (
+            [file] => .travis.yml
+            [name] => travis
+            [homepage] => https://travis-ci.org/
+        )
+
+)
+Done
+Array
+(
+    [notCompilable52] => N/C
+    [notCompilable53] => N/C
+    [notCompilable54] => N/C
+    [notCompilable55] => 0
+    [notCompilable56] => 0
+    [notCompilable70] => 0
+    [notCompilable71] => N/C
+    [php] => 150
+)
+Done
+Running project 'ut3'
+Cleaning DB
+0 nodes in the database
+No nodes in neo4j. No need to clean
+0 ms
+Cleaning scripts
+Cleaned 0 gremlin scripts
+Search for external libraries
+Running files
+Check composer
+Counting files
+files    : 150
+total    : 11419
+tokens   : 33334
+comments : 2968
+code     : 4088
+Counted files
+Check compilation for 55
+Check compilation for 56
+Check compilation for 70
+Check short tag (normal pass)
+Check short tag (with directive activated)
+Short tag OK
+Check config files
+Array
+(
+    [0] => Array
+        (
+            [file] => composer.json
+            [name] => composer
+            [homepage] => https://getcomposer.org/
+        )
+
+    [1] => Array
+        (
+            [file] => composer.lock
+            [name] => composer
+            [homepage] => https://getcomposer.org/
+        )
+
+    [2] => Array
+        (
+            [file] => .git
+            [name] => git
+            [homepage] => https://git-scm.com/
+        )
+
+    [3] => Array
+        (
+            [file] => .gitignore
+            [name] => git
+            [homepage] => https://git-scm.com/
+        )
+
+    [4] => Array
+        (
+            [file] => phpunit.xml.dist
+            [name] => phpunit
+            [homepage] => https://phpunit.de/
+        )
+
+    [5] => Array
+        (
+            [file] => .travis.yml
+            [name] => travis
+            [homepage] => https://travis-ci.org/
+        )
+
+)
+Done
+Array
+(
+    [notCompilable52] => N/C
+    [notCompilable53] => N/C
+    [notCompilable54] => N/C
+    [notCompilable55] => 0
+    [notCompilable56] => 0
+    [notCompilable70] => 0
+    [notCompilable71] => N/C
+    [php] => 150
+)
+Created index
+Loaded nodes
+Loading index
+Loading root
+Loading hidden
+Loading association
+Loading in_for
+Loading in_quote
+Loading delimiter
+Loading noDelimiter
+Loading rank
+Loading fullcode
+Loading block
+Loading bracket
+Loading filename
+Loading tag
+Loading atom
+Loading isFunctionDefinition
+Loading absolutens
+Loaded nodes attributes
+Loaded link file
+Loaded link element
+Loaded link next
+Loaded link indexed
+Loaded link subname
+Cleaning CSV
+Final memory : 3Mb
+Project loaded
+Build root
+Cycle Tokenizer\Variable 1 5 93
+Cycle Tokenizer\Sign 1 4 99
+Cycle Tokenizer\Sign 1 0 61
+Cycle Tokenizer\Sign 1 0 58
+Cycle Tokenizer\Sign 1 0 47
+Cycle Tokenizer\Sign 1 0 57
+Cycle Tokenizer\_Break 1 16 89
+Cycle Tokenizer\Label 1 0 54
+Cycle Tokenizer\_Array 1 165 801
+Cycle Tokenizer\_String 1 14 116
+Cycle Tokenizer\_Arraydollarcurly 1 0 68
+Cycle Tokenizer\Property 1 48 665
+Cycle Tokenizer\Property 1 499 932
+Cycle Tokenizer\Property 1 0 202
+Cycle Tokenizer\Phpcodemiddle 1 0 35
+Cycle Tokenizer\Postplusplus 1 4 51
+Cycle Tokenizer\Preplusplus 1 3 54
+Cycle Tokenizer\Keyvalue 1 61 101
+Cycle Tokenizer\_Abstract 1 4 38
+Cycle Tokenizer\_Abstract 1 1 34
+Cycle Tokenizer\_Abstract 1 0 29
+Cycle Tokenizer\_Static 1 0 40
+Cycle Tokenizer\_Static 1 0 50
+Cycle Tokenizer\_Static 1 17 47
+Cycle Tokenizer\_Static 1 0 29
+Cycle Tokenizer\_Static 1 0 30
+Cycle Tokenizer\_Static 1 4 28
+Cycle Tokenizer\_Static 1 0 24
+Cycle Tokenizer\_Function 1 0 38
+Cycle Tokenizer\_Function 1 0 85
+Cycle Tokenizer\_Function 1 0 36
+Cycle Tokenizer\_Function 1 0 53
+Cycle Tokenizer\_Function 1 0 50
+Cycle Tokenizer\_Function 1 0 68
+Cycle Tokenizer\_Function 1 0 60
+Cycle Tokenizer\_Ppp 1 117 213
+Cycle Tokenizer\_Ppp 1 516 315
+Cycle Tokenizer\Reference 1 0 34
+Cycle Tokenizer\Reference 1 0 24
+Cycle Tokenizer\Reference 1 0 30
+Cycle Tokenizer\Logical 1 0 46
+Cycle Tokenizer\Logical 1 0 38
+Cycle Tokenizer\Heredoc 1 0 28
+Cycle Tokenizer\Heredoc 1 8 74
+Cycle Tokenizer\Not 1 19 60
+Cycle Tokenizer\Cast 1 9 43
+Cycle Tokenizer\Arrayappend 1 41 177
+Cycle Tokenizer\_Instanceof 1 9 48
+Cycle Tokenizer\_As 1 14 53
+Cycle Tokenizer\_As 1 0 31
+Cycle Tokenizer\_As 1 0 43
+Cycle Tokenizer\_Continue 1 15 114
+Cycle Tokenizer\_Continue 1 0 27
+Cycle Tokenizer\_New 1 61 193
+Cycle Tokenizer\_Namespace 1 0 42
+Cycle Tokenizer\_Namespace 1 0 21
+Cycle Tokenizer\_Namespace 1 0 50
+Cycle Tokenizer\_Namespace 1 0 42
+Cycle Tokenizer\_Namespace 1 0 34
+Cycle Tokenizer\_Namespace 1 0 37
+Cycle Tokenizer\_Namespace 1 0 25
+Cycle Tokenizer\_Use 1 0 83
+Cycle Tokenizer\_Use 1 346 632
+Cycle Tokenizer\_Use 1 0 50
+Cycle Tokenizer\_Use 1 0 40
+Cycle Tokenizer\_Use 1 0 52
+Cycle Tokenizer\_Use 1 0 51
+Cycle Tokenizer\ArrayNS 1 0 23
+Cycle Tokenizer\ArrayNS 1 0 22
+Cycle Tokenizer\ArrayNS 1 0 26
+Cycle Tokenizer\_Include 1 0 27
+Cycle Tokenizer\Noscream 1 0 25
+Cycle Tokenizer\Typehint 1 595 566
+Cycle Tokenizer\Typehint 1 121 467
+Cycle Tokenizer\Arguments 1 381 742
+Cycle Tokenizer\ArgumentsNoParenthesis 1 3 44
+Cycle Tokenizer\ArgumentsNoParenthesis 1 0 32
+Cycle Tokenizer\ArgumentsNoParenthesis 1 0 19
+Cycle Tokenizer\ArgumentsNoComma 1 381 482
+Cycle Tokenizer\ArgumentsNoComma 1 1394 927
+Cycle Tokenizer\ArgumentsNoComma 1 0 62
+Cycle Tokenizer\ArgumentsNoComma 1 0 62
+Cycle Tokenizer\ArgumentsNoComma 1 0 57
+Cycle Tokenizer\ArgumentsNoComma 1 0 85
+Cycle Tokenizer\Parenthesis 1 3 86
+Cycle Tokenizer\Parenthesis 1 0 56
+Cycle Tokenizer\Parenthesis 1 2 81
+Cycle Tokenizer\Functioncall 1 0 279
+Cycle Tokenizer\Functioncall 1 3 74
+Cycle Tokenizer\Functioncall 1 1681 1,672
+Cycle Tokenizer\Functioncall 1 0 71
+Cycle Tokenizer\Functioncall 1 0 51
+Cycle Tokenizer\FunctioncallArray 1 0 31
+Cycle Tokenizer\FunctioncallArray 1 0 22
+Cycle Tokenizer\Methodcall 1 0 249
+Cycle Tokenizer\Methodcall 1 0 172
+Cycle Tokenizer\Methodcall 1 0 107
+Cycle Tokenizer\Methodcall 1 0 92
+Cycle Tokenizer\Methodcall 1 796 1,023
+Cycle Tokenizer\Staticproperty 1 14 2,085
+Cycle Tokenizer\Staticproperty 1 0 55
+Cycle Tokenizer\Staticmethodcall 1 0 71
+Cycle Tokenizer\Staticmethodcall 1 52 88
+Cycle Tokenizer\Staticmethodcall 1 0 43
+Cycle Tokenizer\Staticmethodcall 1 0 35
+Cycle Tokenizer\Staticmethodcall 1 0 48
+Cycle Tokenizer\Staticconstant 1 48 132
+Cycle Tokenizer\Staticclass 1 0 28
+Cycle Tokenizer\Multiplication 1 7 45
+Cycle Tokenizer\Addition 1 15 52
+Cycle Tokenizer\Concatenation 1 128 302
+Cycle Tokenizer\Assignation 1 757 624
+Cycle Tokenizer\Assignation 1 0 78
+Cycle Tokenizer\Assignation 1 0 32
+Cycle Tokenizer\Comparison 1 111 136
+Cycle Tokenizer\Comparison 1 0 28
+Cycle Tokenizer\Ternary 1 36 90
+Cycle Tokenizer\Ternary 1 28 67
+Cycle Tokenizer\_Return 1 253 137
+Cycle Tokenizer\_Const 1 11 68
+Cycle Tokenizer\Block 1 0 39
+Cycle Tokenizer\Block 1 0 45
+Cycle Tokenizer\Block 1 0 42
+Cycle Tokenizer\_Interface 1 18 35
+Cycle Tokenizer\_Interface 1 0 29
+Cycle Tokenizer\_Interface 1 0 35
+Cycle Tokenizer\_Class 1 0 33
+Cycle Tokenizer\_Class 1 129 93
+Cycle Tokenizer\_Class 1 56 64
+Cycle Tokenizer\_Class 1 65 79
+Cycle Tokenizer\_Class 1 5 128
+Cycle Tokenizer\_Throw 1 1 97
+Cycle Tokenizer\_Case 1 2 22
+Cycle Tokenizer\_Case 1 0 17
+Cycle Tokenizer\_Case 1 3 30
+Cycle Tokenizer\_Case 1 0 23
+Cycle Tokenizer\_Case 1 5 52
+Cycle Tokenizer\_Default 1 0 17
+Cycle Tokenizer\_Default 1 0 15
+Cycle Tokenizer\_Default 1 0 22
+Cycle Tokenizer\_Default 1 0 22
+Cycle Tokenizer\_Default 1 0 24
+Cycle Tokenizer\_Default 1 0 32
+Cycle Tokenizer\_Switch 1 1 64
+Cycle Tokenizer\_Switch 1 0 31
+Cycle Tokenizer\Ifthen 1 202 200
+Cycle Tokenizer\Ifthen 1 0 25
+Cycle Tokenizer\Ifthen 1 0 28
+Cycle Tokenizer\Ifthen 1 0 26
+Cycle Tokenizer\Ifthen 1 0 40
+Cycle Tokenizer\Ifthen 1 0 32
+Cycle Tokenizer\Ifthen 1 0 46
+Cycle Tokenizer\Ifthen 1 0 26
+Cycle Tokenizer\Ifthen 1 0 32
+Cycle Tokenizer\Ifthen 1 0 32
+Cycle Tokenizer\Ifthen 1 0 26
+Cycle Tokenizer\Ifthen 1 0 37
+Cycle Tokenizer\_Foreach 1 109 134
+Cycle Tokenizer\_Foreach 1 0 20
+Cycle Tokenizer\_Foreach 1 0 29
+Cycle Tokenizer\_Foreach 1 0 30
+Cycle Tokenizer\_Foreach 1 0 20
+Cycle Tokenizer\_Foreach 1 0 27
+Cycle Tokenizer\_Foreach 1 0 26
+Cycle Tokenizer\_For 1 1 47
+Cycle Tokenizer\_For 1 0 16
+Cycle Tokenizer\_For 1 0 24
+Cycle Tokenizer\_For 1 0 26
+Cycle Tokenizer\_For 1 0 21
+Cycle Tokenizer\_For 1 0 25
+Cycle Tokenizer\_While 1 0 19
+Cycle Tokenizer\_While 1 0 21
+Cycle Tokenizer\_While 1 0 32
+Cycle Tokenizer\_While 1 0 33
+Cycle Tokenizer\_Dowhile 1 0 20
+Cycle Tokenizer\_Dowhile 1 0 32
+Cycle Tokenizer\_Dowhile 1 0 31
+Cycle Tokenizer\_Catch 1 1 61
+Cycle Tokenizer\_Try 1 0 25
+Cycle Tokenizer\_Try 1 0 15
+Cycle Tokenizer\_Try 1 0 24
+Cycle Tokenizer\Sequence 1 599 777
+Cycle Tokenizer\Sequence 1 227 125
+Cycle Tokenizer\Sequence 1 0 116
+Cycle Tokenizer\Sequence 1 7 195
+Cycle Tokenizer\Sequence 1 352 204
+Cycle Tokenizer\Sequence 1 0 48
+Cycle Tokenizer\Phpcode 1 0 35
+Cycle Tokenizer\Phpcode 1 0 28
+1) Remains 13313 of 37298 tokens to process!
+Cycle Tokenizer\Variable 1 0 2
+Cycle Tokenizer\Sign 1 0 3
+Cycle Tokenizer\Sign 1 0 3
+Cycle Tokenizer\Sign 1 0 3
+Cycle Tokenizer\Sign 1 0 3
+Cycle Tokenizer\Sign 1 0 2
+Cycle Tokenizer\_Break 1 0 2
+Cycle Tokenizer\Label 1 0 2
+Cycle Tokenizer\_Array 1 49 207
+Cycle Tokenizer\_String 1 0 2
+Cycle Tokenizer\Property 1 0 35
+Cycle Tokenizer\Property 1 1 104
+Cycle Tokenizer\Property 1 0 39
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\Postplusplus 1 0 2
+Cycle Tokenizer\Preplusplus 1 0 2
+Cycle Tokenizer\Keyvalue 1 14 31
+Cycle Tokenizer\_Static 1 0 2
+Cycle Tokenizer\_Static 1 4 74
+Cycle Tokenizer\_Static 1 0 2
+Cycle Tokenizer\_Static 1 0 2
+Cycle Tokenizer\_Static 1 0 2
+Cycle Tokenizer\_Static 1 0 2
+Cycle Tokenizer\_Static 1 0 2
+Cycle Tokenizer\_Function 1 0 10
+Cycle Tokenizer\_Function 1 448 527
+Cycle Tokenizer\_Function 1 0 12
+Cycle Tokenizer\_Function 1 20 36
+Cycle Tokenizer\_Function 1 5 27
+Cycle Tokenizer\_Function 1 201 337
+Cycle Tokenizer\_Function 1 59 49
+Cycle Tokenizer\_Ppp 1 25 21
+Cycle Tokenizer\_Ppp 1 0 2
+Cycle Tokenizer\Reference 1 0 2
+Cycle Tokenizer\Reference 1 0 2
+Cycle Tokenizer\Reference 1 0 3
+Cycle Tokenizer\Logical 1 11 18
+Cycle Tokenizer\Logical 1 2 17
+Cycle Tokenizer\Heredoc 1 0 2
+Cycle Tokenizer\Heredoc 1 0 2
+Cycle Tokenizer\Not 1 50 23
+Cycle Tokenizer\Cast 1 1 6
+Cycle Tokenizer\Arrayappend 1 0 3
+Cycle Tokenizer\_Instanceof 1 0 3
+Cycle Tokenizer\_As 1 0 3
+Cycle Tokenizer\_As 1 0 2
+Cycle Tokenizer\_As 1 0 3
+Cycle Tokenizer\_New 1 103 47
+Cycle Tokenizer\_Namespace 1 0 11
+Cycle Tokenizer\_Namespace 1 0 6
+Cycle Tokenizer\_Namespace 1 0 10
+Cycle Tokenizer\_Namespace 1 0 11
+Cycle Tokenizer\_Namespace 1 0 12
+Cycle Tokenizer\_Namespace 1 5 33
+Cycle Tokenizer\_Namespace 1 0 7
+Cycle Tokenizer\_Use 1 0 3
+Cycle Tokenizer\_Use 1 0 3
+Cycle Tokenizer\_Use 1 0 3
+Cycle Tokenizer\_Use 1 0 2
+Cycle Tokenizer\_Use 1 0 3
+Cycle Tokenizer\_Use 1 0 3
+Cycle Tokenizer\ArrayNS 1 0 2
+Cycle Tokenizer\ArrayNS 1 0 2
+Cycle Tokenizer\ArrayNS 1 2 13
+Cycle Tokenizer\_Include 1 3 9
+Cycle Tokenizer\Noscream 1 5 11
+Cycle Tokenizer\Typehint 1 142 73
+Cycle Tokenizer\Typehint 1 28 92
+Cycle Tokenizer\Arguments 1 231 232
+Cycle Tokenizer\ArgumentsNoParenthesis 1 4 8
+Cycle Tokenizer\ArgumentsNoParenthesis 1 4 10
+Cycle Tokenizer\ArgumentsNoParenthesis 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 30 37
+Cycle Tokenizer\ArgumentsNoComma 1 211 127
+Cycle Tokenizer\ArgumentsNoComma 1 0 11
+Cycle Tokenizer\ArgumentsNoComma 1 0 12
+Cycle Tokenizer\ArgumentsNoComma 1 0 11
+Cycle Tokenizer\ArgumentsNoComma 1 0 17
+Cycle Tokenizer\Parenthesis 1 14 24
+Cycle Tokenizer\Parenthesis 1 0 11
+Cycle Tokenizer\Parenthesis 1 0 16
+Cycle Tokenizer\Functioncall 1 0 69
+Cycle Tokenizer\Functioncall 1 0 12
+Cycle Tokenizer\Functioncall 1 406 389
+Cycle Tokenizer\Functioncall 1 6 34
+Cycle Tokenizer\Functioncall 1 0 5
+Cycle Tokenizer\FunctioncallArray 1 0 4
+Cycle Tokenizer\FunctioncallArray 1 0 3
+Cycle Tokenizer\Methodcall 1 0 51
+Cycle Tokenizer\Methodcall 1 0 29
+Cycle Tokenizer\Methodcall 1 0 19
+Cycle Tokenizer\Methodcall 1 0 19
+Cycle Tokenizer\Methodcall 1 187 209
+Cycle Tokenizer\Staticproperty 1 0 4
+Cycle Tokenizer\Staticproperty 1 0 3
+Cycle Tokenizer\Staticmethodcall 1 0 5
+Cycle Tokenizer\Staticmethodcall 1 2 8
+Cycle Tokenizer\Staticmethodcall 1 0 3
+Cycle Tokenizer\Staticmethodcall 1 0 3
+Cycle Tokenizer\Staticmethodcall 1 0 3
+Cycle Tokenizer\Staticconstant 1 0 3
+Cycle Tokenizer\Multiplication 1 3 68
+Cycle Tokenizer\Addition 1 2 8
+Cycle Tokenizer\Concatenation 1 9 30
+Cycle Tokenizer\Assignation 1 163 108
+Cycle Tokenizer\Assignation 1 0 6
+Cycle Tokenizer\Assignation 1 0 4
+Cycle Tokenizer\Comparison 1 3 38
+Cycle Tokenizer\Comparison 1 0 3
+Cycle Tokenizer\Ternary 1 6 17
+Cycle Tokenizer\Ternary 1 0 3
+Cycle Tokenizer\_Return 1 48 24
+Cycle Tokenizer\_Const 1 0 2
+Cycle Tokenizer\Block 1 0 13
+Cycle Tokenizer\Block 1 0 15
+Cycle Tokenizer\Block 1 0 17
+Cycle Tokenizer\_Interface 1 0 3
+Cycle Tokenizer\_Interface 1 0 3
+Cycle Tokenizer\_Interface 1 0 3
+Cycle Tokenizer\_Class 1 0 6
+Cycle Tokenizer\_Class 1 0 6
+Cycle Tokenizer\_Class 1 0 6
+Cycle Tokenizer\_Class 1 0 11
+Cycle Tokenizer\_Class 1 2 18
+Cycle Tokenizer\_Throw 1 11 13
+Cycle Tokenizer\_Case 1 0 4
+Cycle Tokenizer\_Case 1 0 4
+Cycle Tokenizer\_Case 1 0 4
+Cycle Tokenizer\_Case 1 0 4
+Cycle Tokenizer\_Case 1 7 70
+Cycle Tokenizer\_Default 1 0 3
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 1 10
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 1 12
+Cycle Tokenizer\_Switch 1 3 80
+Cycle Tokenizer\_Switch 1 0 3
+Cycle Tokenizer\Ifthen 1 75 48
+Cycle Tokenizer\Ifthen 1 0 8
+Cycle Tokenizer\Ifthen 1 0 9
+Cycle Tokenizer\Ifthen 1 0 10
+Cycle Tokenizer\Ifthen 1 134 180
+Cycle Tokenizer\Ifthen 1 18 58
+Cycle Tokenizer\Ifthen 1 6 30
+Cycle Tokenizer\Ifthen 1 4 14
+Cycle Tokenizer\Ifthen 1 0 7
+Cycle Tokenizer\Ifthen 1 0 7
+Cycle Tokenizer\Ifthen 1 0 6
+Cycle Tokenizer\Ifthen 1 0 7
+Cycle Tokenizer\_Foreach 1 2 11
+Cycle Tokenizer\_Foreach 1 0 5
+Cycle Tokenizer\_Foreach 1 0 5
+Cycle Tokenizer\_Foreach 1 21 47
+Cycle Tokenizer\_Foreach 1 0 5
+Cycle Tokenizer\_Foreach 1 0 5
+Cycle Tokenizer\_Foreach 1 0 5
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 1
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_Dowhile 1 0 2
+Cycle Tokenizer\_Dowhile 1 0 2
+Cycle Tokenizer\_Dowhile 1 0 2
+Cycle Tokenizer\_Catch 1 0 9
+Cycle Tokenizer\_Try 1 0 2
+Cycle Tokenizer\_Try 1 0 2
+Cycle Tokenizer\_Try 1 0 2
+Cycle Tokenizer\Sequence 1 339 364
+Cycle Tokenizer\Sequence 1 234 169
+Cycle Tokenizer\Sequence 1 0 25
+Cycle Tokenizer\Sequence 1 2 39
+Cycle Tokenizer\Sequence 1 155 101
+Cycle Tokenizer\Sequence 1 0 25
+Cycle Tokenizer\Phpcode 1 0 7
+Cycle Tokenizer\Phpcode 1 5 17
+2) Remains 5432 of 37298 tokens to process!
+Cycle Tokenizer\Sign 1 0 2
+Cycle Tokenizer\Sign 1 0 2
+Cycle Tokenizer\Sign 1 0 2
+Cycle Tokenizer\Sign 1 0 2
+Cycle Tokenizer\Sign 1 0 2
+Cycle Tokenizer\Label 1 0 2
+Cycle Tokenizer\_Array 1 0 24
+Cycle Tokenizer\Property 1 0 12
+Cycle Tokenizer\Property 1 0 12
+Cycle Tokenizer\Property 1 0 10
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\Keyvalue 1 6 7
+Cycle Tokenizer\_Function 1 0 6
+Cycle Tokenizer\_Function 1 66 132
+Cycle Tokenizer\_Function 1 0 9
+Cycle Tokenizer\_Function 1 0 9
+Cycle Tokenizer\_Function 1 0 9
+Cycle Tokenizer\_Function 1 131 225
+Cycle Tokenizer\_Function 1 4 12
+Cycle Tokenizer\Reference 1 0 2
+Cycle Tokenizer\Reference 1 0 2
+Cycle Tokenizer\Reference 1 0 2
+Cycle Tokenizer\Logical 1 15 15
+Cycle Tokenizer\Logical 1 1 12
+Cycle Tokenizer\Not 1 8 8
+Cycle Tokenizer\Cast 1 0 2
+Cycle Tokenizer\Arrayappend 1 0 2
+Cycle Tokenizer\_As 1 0 2
+Cycle Tokenizer\_As 1 0 2
+Cycle Tokenizer\_As 1 0 2
+Cycle Tokenizer\_New 1 58 63
+Cycle Tokenizer\_Namespace 1 0 10
+Cycle Tokenizer\_Namespace 1 0 6
+Cycle Tokenizer\_Namespace 1 0 10
+Cycle Tokenizer\_Namespace 1 0 11
+Cycle Tokenizer\_Namespace 1 0 14
+Cycle Tokenizer\_Namespace 1 2 41
+Cycle Tokenizer\_Namespace 1 0 7
+Cycle Tokenizer\ArrayNS 1 0 2
+Cycle Tokenizer\ArrayNS 1 0 2
+Cycle Tokenizer\ArrayNS 1 0 2
+Cycle Tokenizer\_Include 1 2 6
+Cycle Tokenizer\Noscream 1 0 2
+Cycle Tokenizer\Typehint 1 49 20
+Cycle Tokenizer\Typehint 1 0 16
+Cycle Tokenizer\Arguments 1 57 68
+Cycle Tokenizer\ArgumentsNoParenthesis 1 0 2
+Cycle Tokenizer\ArgumentsNoParenthesis 1 0 2
+Cycle Tokenizer\ArgumentsNoParenthesis 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 0 6
+Cycle Tokenizer\ArgumentsNoComma 1 36 27
+Cycle Tokenizer\ArgumentsNoComma 1 0 5
+Cycle Tokenizer\ArgumentsNoComma 1 0 5
+Cycle Tokenizer\ArgumentsNoComma 1 0 5
+Cycle Tokenizer\ArgumentsNoComma 1 0 6
+Cycle Tokenizer\Parenthesis 1 2 12
+Cycle Tokenizer\Parenthesis 1 0 8
+Cycle Tokenizer\Parenthesis 1 0 5
+Cycle Tokenizer\Functioncall 1 0 14
+Cycle Tokenizer\Functioncall 1 0 7
+Cycle Tokenizer\Functioncall 1 93 94
+Cycle Tokenizer\Functioncall 1 0 6
+Cycle Tokenizer\Functioncall 1 0 4
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 3
+Cycle Tokenizer\Methodcall 1 0 14
+Cycle Tokenizer\Methodcall 1 0 9
+Cycle Tokenizer\Methodcall 1 0 7
+Cycle Tokenizer\Methodcall 1 0 7
+Cycle Tokenizer\Methodcall 1 45 49
+Cycle Tokenizer\Staticproperty 1 0 3
+Cycle Tokenizer\Staticproperty 1 0 3
+Cycle Tokenizer\Staticmethodcall 1 0 3
+Cycle Tokenizer\Staticmethodcall 1 2 7
+Cycle Tokenizer\Staticmethodcall 1 0 2
+Cycle Tokenizer\Staticmethodcall 1 0 2
+Cycle Tokenizer\Staticmethodcall 1 0 2
+Cycle Tokenizer\Staticconstant 1 0 2
+Cycle Tokenizer\Multiplication 1 0 2
+Cycle Tokenizer\Addition 1 0 2
+Cycle Tokenizer\Concatenation 1 2 12
+Cycle Tokenizer\Assignation 1 34 81
+Cycle Tokenizer\Assignation 1 0 5
+Cycle Tokenizer\Assignation 1 0 3
+Cycle Tokenizer\_Return 1 14 10
+Cycle Tokenizer\Block 1 0 9
+Cycle Tokenizer\Block 1 0 10
+Cycle Tokenizer\Block 1 0 11
+Cycle Tokenizer\_Interface 1 0 3
+Cycle Tokenizer\_Interface 1 0 3
+Cycle Tokenizer\_Interface 1 16 42
+Cycle Tokenizer\_Class 1 0 7
+Cycle Tokenizer\_Class 1 0 6
+Cycle Tokenizer\_Class 1 0 6
+Cycle Tokenizer\_Class 1 0 11
+Cycle Tokenizer\_Class 1 25 46
+Cycle Tokenizer\_Throw 1 8 12
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 1 10
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Switch 1 0 2
+Cycle Tokenizer\_Switch 1 0 2
+Cycle Tokenizer\Ifthen 1 24 19
+Cycle Tokenizer\Ifthen 1 0 5
+Cycle Tokenizer\Ifthen 1 0 5
+Cycle Tokenizer\Ifthen 1 0 6
+Cycle Tokenizer\Ifthen 1 72 157
+Cycle Tokenizer\Ifthen 1 18 20
+Cycle Tokenizer\Ifthen 1 16 35
+Cycle Tokenizer\Ifthen 1 3 10
+Cycle Tokenizer\Ifthen 1 0 4
+Cycle Tokenizer\Ifthen 1 0 4
+Cycle Tokenizer\Ifthen 1 0 4
+Cycle Tokenizer\Ifthen 1 0 5
+Cycle Tokenizer\_Foreach 1 0 5
+Cycle Tokenizer\_Foreach 1 0 4
+Cycle Tokenizer\_Foreach 1 0 5
+Cycle Tokenizer\_Foreach 1 28 61
+Cycle Tokenizer\_Foreach 1 0 4
+Cycle Tokenizer\_Foreach 1 0 4
+Cycle Tokenizer\_Foreach 1 0 4
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 4
+Cycle Tokenizer\_For 1 0 3
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 3
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_While 1 0 3
+Cycle Tokenizer\_While 1 0 3
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_Dowhile 1 0 2
+Cycle Tokenizer\_Dowhile 1 0 2
+Cycle Tokenizer\_Dowhile 1 1 33
+Cycle Tokenizer\_Catch 1 3 16
+Cycle Tokenizer\_Try 1 3 16
+Cycle Tokenizer\_Try 1 0 2
+Cycle Tokenizer\_Try 1 3 9
+Cycle Tokenizer\Sequence 1 183 261
+Cycle Tokenizer\Sequence 1 208 103
+Cycle Tokenizer\Sequence 1 0 17
+Cycle Tokenizer\Sequence 1 0 23
+Cycle Tokenizer\Sequence 1 64 81
+Cycle Tokenizer\Sequence 1 0 17
+Cycle Tokenizer\Phpcode 1 0 6
+Cycle Tokenizer\Phpcode 1 2 77
+3) Remains 2782 of 37298 tokens to process!
+Cycle Tokenizer\Label 1 0 2
+Cycle Tokenizer\_Array 1 0 14
+Cycle Tokenizer\Property 1 0 4
+Cycle Tokenizer\Property 1 0 5
+Cycle Tokenizer\Property 1 0 4
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\Keyvalue 1 0 2
+Cycle Tokenizer\_Function 1 0 4
+Cycle Tokenizer\_Function 1 0 6
+Cycle Tokenizer\_Function 1 0 5
+Cycle Tokenizer\_Function 1 0 5
+Cycle Tokenizer\_Function 1 0 6
+Cycle Tokenizer\_Function 1 69 254
+Cycle Tokenizer\_Function 1 0 5
+Cycle Tokenizer\Reference 1 0 2
+Cycle Tokenizer\Reference 1 0 1
+Cycle Tokenizer\Reference 1 0 2
+Cycle Tokenizer\Logical 1 4 61
+Cycle Tokenizer\Logical 1 0 3
+Cycle Tokenizer\Not 1 1 82
+Cycle Tokenizer\_New 1 12 77
+Cycle Tokenizer\_Namespace 1 0 14
+Cycle Tokenizer\_Namespace 1 0 7
+Cycle Tokenizer\_Namespace 1 0 13
+Cycle Tokenizer\_Namespace 1 0 15
+Cycle Tokenizer\_Namespace 1 16 102
+Cycle Tokenizer\_Namespace 1 41 98
+Cycle Tokenizer\_Namespace 1 0 5
+Cycle Tokenizer\_Include 1 0 2
+Cycle Tokenizer\Typehint 1 9 6
+Cycle Tokenizer\Typehint 1 0 5
+Cycle Tokenizer\Arguments 1 9 20
+Cycle Tokenizer\ArgumentsNoComma 1 0 5
+Cycle Tokenizer\ArgumentsNoComma 1 3 69
+Cycle Tokenizer\ArgumentsNoComma 1 0 4
+Cycle Tokenizer\ArgumentsNoComma 1 0 3
+Cycle Tokenizer\ArgumentsNoComma 1 0 3
+Cycle Tokenizer\ArgumentsNoComma 1 0 3
+Cycle Tokenizer\Parenthesis 1 0 3
+Cycle Tokenizer\Parenthesis 1 0 3
+Cycle Tokenizer\Parenthesis 1 0 3
+Cycle Tokenizer\Functioncall 1 0 7
+Cycle Tokenizer\Functioncall 1 0 4
+Cycle Tokenizer\Functioncall 1 12 59
+Cycle Tokenizer\Functioncall 1 0 5
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\Methodcall 1 0 4
+Cycle Tokenizer\Methodcall 1 0 3
+Cycle Tokenizer\Methodcall 1 0 3
+Cycle Tokenizer\Methodcall 1 0 3
+Cycle Tokenizer\Methodcall 1 7 56
+Cycle Tokenizer\Staticproperty 1 0 2
+Cycle Tokenizer\Staticproperty 1 0 2
+Cycle Tokenizer\Concatenation 1 0 3
+Cycle Tokenizer\Assignation 1 13 17
+Cycle Tokenizer\Assignation 1 0 3
+Cycle Tokenizer\Assignation 1 0 3
+Cycle Tokenizer\_Return 1 2 68
+Cycle Tokenizer\Block 1 0 7
+Cycle Tokenizer\Block 1 0 7
+Cycle Tokenizer\Block 1 0 6
+Cycle Tokenizer\_Interface 1 0 2
+Cycle Tokenizer\_Interface 1 0 2
+Cycle Tokenizer\_Interface 1 2 52
+Cycle Tokenizer\_Class 1 0 7
+Cycle Tokenizer\_Class 1 0 5
+Cycle Tokenizer\_Class 1 0 5
+Cycle Tokenizer\_Class 1 0 10
+Cycle Tokenizer\_Class 1 21 62
+Cycle Tokenizer\_Throw 1 0 3
+Cycle Tokenizer\_Case 1 0 3
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 0 3
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 1 57
+Cycle Tokenizer\_Switch 1 0 3
+Cycle Tokenizer\_Switch 1 0 2
+Cycle Tokenizer\Ifthen 1 3 11
+Cycle Tokenizer\Ifthen 1 0 4
+Cycle Tokenizer\Ifthen 1 0 9
+Cycle Tokenizer\Ifthen 1 0 4
+Cycle Tokenizer\Ifthen 1 29 72
+Cycle Tokenizer\Ifthen 1 4 14
+Cycle Tokenizer\Ifthen 1 9 96
+Cycle Tokenizer\Ifthen 1 0 4
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\_Foreach 1 0 4
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 29 210
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 5
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 1 21
+Cycle Tokenizer\_For 1 0 2
+Cycle Tokenizer\_For 1 0 3
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_While 1 0 3
+Cycle Tokenizer\_While 1 0 2
+Cycle Tokenizer\_Dowhile 1 0 2
+Cycle Tokenizer\_Dowhile 1 0 2
+Cycle Tokenizer\_Dowhile 1 0 2
+Cycle Tokenizer\_Catch 1 1 11
+Cycle Tokenizer\_Try 1 2 12
+Cycle Tokenizer\_Try 1 0 3
+Cycle Tokenizer\_Try 1 2 7
+Cycle Tokenizer\Sequence 1 103 117
+Cycle Tokenizer\Sequence 1 143 65
+Cycle Tokenizer\Sequence 1 0 10
+Cycle Tokenizer\Sequence 1 1 21
+Cycle Tokenizer\Sequence 1 23 19
+Cycle Tokenizer\Sequence 1 0 11
+Cycle Tokenizer\Phpcode 1 0 15
+Cycle Tokenizer\Phpcode 1 43 28
+4) Remains 1581 of 37298 tokens to process!
+Cycle Tokenizer\Label 1 0 2
+Cycle Tokenizer\_Array 1 0 9
+Cycle Tokenizer\Property 1 0 5
+Cycle Tokenizer\Property 1 0 3
+Cycle Tokenizer\Property 1 0 3
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 4
+Cycle Tokenizer\_Function 1 0 4
+Cycle Tokenizer\_Function 1 0 5
+Cycle Tokenizer\_Function 1 0 4
+Cycle Tokenizer\_Function 1 35 74
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\Not 1 0 2
+Cycle Tokenizer\_New 1 0 2
+Cycle Tokenizer\_Namespace 1 0 7
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 0 7
+Cycle Tokenizer\_Namespace 1 0 7
+Cycle Tokenizer\_Namespace 1 5 13
+Cycle Tokenizer\_Namespace 1 23 27
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\Typehint 1 3 3
+Cycle Tokenizer\Typehint 1 0 3
+Cycle Tokenizer\Arguments 1 1 10
+Cycle Tokenizer\ArgumentsNoComma 1 0 4
+Cycle Tokenizer\ArgumentsNoComma 1 3 8
+Cycle Tokenizer\ArgumentsNoComma 1 0 3
+Cycle Tokenizer\ArgumentsNoComma 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 0 3
+Cycle Tokenizer\ArgumentsNoComma 1 0 2
+Cycle Tokenizer\Parenthesis 1 0 2
+Cycle Tokenizer\Parenthesis 1 0 2
+Cycle Tokenizer\Parenthesis 1 0 2
+Cycle Tokenizer\Functioncall 1 0 5
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 4 20
+Cycle Tokenizer\Functioncall 1 0 5
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\Methodcall 1 0 3
+Cycle Tokenizer\Methodcall 1 0 3
+Cycle Tokenizer\Methodcall 1 0 3
+Cycle Tokenizer\Methodcall 1 0 2
+Cycle Tokenizer\Methodcall 1 4 9
+Cycle Tokenizer\_Return 1 0 2
+Cycle Tokenizer\Block 1 0 4
+Cycle Tokenizer\Block 1 0 5
+Cycle Tokenizer\Block 1 0 14
+Cycle Tokenizer\_Interface 1 0 3
+Cycle Tokenizer\_Interface 1 0 3
+Cycle Tokenizer\_Interface 1 0 4
+Cycle Tokenizer\_Class 1 0 6
+Cycle Tokenizer\_Class 1 0 9
+Cycle Tokenizer\_Class 1 0 5
+Cycle Tokenizer\_Class 1 0 8
+Cycle Tokenizer\_Class 1 20 40
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\_Case 1 1 13
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 1
+Cycle Tokenizer\_Default 1 0 1
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Default 1 0 2
+Cycle Tokenizer\_Switch 1 1 9
+Cycle Tokenizer\_Switch 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 14 24
+Cycle Tokenizer\Ifthen 1 5 9
+Cycle Tokenizer\Ifthen 1 6 17
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 18 40
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Catch 1 0 2
+Cycle Tokenizer\_Try 1 0 2
+Cycle Tokenizer\_Try 1 0 2
+Cycle Tokenizer\_Try 1 0 2
+Cycle Tokenizer\Sequence 1 40 60
+Cycle Tokenizer\Sequence 1 119 55
+Cycle Tokenizer\Sequence 1 0 7
+Cycle Tokenizer\Sequence 1 0 10
+Cycle Tokenizer\Sequence 1 17 16
+Cycle Tokenizer\Sequence 1 0 8
+Cycle Tokenizer\Phpcode 1 0 6
+Cycle Tokenizer\Phpcode 1 24 18
+5) Remains 970 of 37298 tokens to process!
+Cycle Tokenizer\Label 1 0 2
+Cycle Tokenizer\_Array 1 0 5
+Cycle Tokenizer\Property 1 0 2
+Cycle Tokenizer\Property 1 0 2
+Cycle Tokenizer\Property 1 0 2
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 4
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 23 45
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Namespace 1 0 6
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 0 6
+Cycle Tokenizer\_Namespace 1 0 8
+Cycle Tokenizer\_Namespace 1 3 12
+Cycle Tokenizer\_Namespace 1 20 26
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\Typehint 1 0 2
+Cycle Tokenizer\Typehint 1 0 2
+Cycle Tokenizer\Arguments 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 0 2
+Cycle Tokenizer\ArgumentsNoComma 1 0 2
+Cycle Tokenizer\Parenthesis 1 0 2
+Cycle Tokenizer\Parenthesis 1 0 2
+Cycle Tokenizer\Parenthesis 1 0 2
+Cycle Tokenizer\Functioncall 1 0 4
+Cycle Tokenizer\Functioncall 1 0 2
+Cycle Tokenizer\Functioncall 1 0 5
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 3
+Cycle Tokenizer\Methodcall 1 0 2
+Cycle Tokenizer\Methodcall 1 0 2
+Cycle Tokenizer\Methodcall 1 0 2
+Cycle Tokenizer\Methodcall 1 0 2
+Cycle Tokenizer\Methodcall 1 0 2
+Cycle Tokenizer\Block 1 0 3
+Cycle Tokenizer\Block 1 0 3
+Cycle Tokenizer\Block 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 5
+Cycle Tokenizer\_Class 1 25 48
+Cycle Tokenizer\_Case 1 0 3
+Cycle Tokenizer\_Case 1 0 3
+Cycle Tokenizer\_Case 1 0 3
+Cycle Tokenizer\_Case 1 0 3
+Cycle Tokenizer\_Case 1 0 2
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 6
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 5 15
+Cycle Tokenizer\Ifthen 1 3 9
+Cycle Tokenizer\Ifthen 1 2 12
+Cycle Tokenizer\Ifthen 1 1 10
+Cycle Tokenizer\Ifthen 1 0 5
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 8 19
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\Sequence 1 21 36
+Cycle Tokenizer\Sequence 1 75 36
+Cycle Tokenizer\Sequence 1 0 6
+Cycle Tokenizer\Sequence 1 0 6
+Cycle Tokenizer\Sequence 1 9 14
+Cycle Tokenizer\Sequence 1 0 6
+Cycle Tokenizer\Phpcode 1 0 4
+Cycle Tokenizer\Phpcode 1 20 15
+6) Remains 565 of 37298 tokens to process!
+Cycle Tokenizer\_Array 1 0 4
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\_Function 1 0 2
+Cycle Tokenizer\_Function 1 0 6
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 4
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 6 18
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Namespace 1 0 5
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 0 5
+Cycle Tokenizer\_Namespace 1 0 5
+Cycle Tokenizer\_Namespace 1 0 6
+Cycle Tokenizer\_Namespace 1 25 25
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 9
+Cycle Tokenizer\Functioncall 1 0 4
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\Block 1 0 2
+Cycle Tokenizer\Block 1 0 2
+Cycle Tokenizer\Block 1 0 2
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 4
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 4
+Cycle Tokenizer\_Class 1 22 36
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 1 11
+Cycle Tokenizer\Ifthen 1 0 4
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\_Foreach 1 0 6
+Cycle Tokenizer\_Foreach 1 6 17
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\Sequence 1 7 18
+Cycle Tokenizer\Sequence 1 38 24
+Cycle Tokenizer\Sequence 1 0 4
+Cycle Tokenizer\Sequence 1 0 4
+Cycle Tokenizer\Sequence 1 2 7
+Cycle Tokenizer\Sequence 1 0 4
+Cycle Tokenizer\Phpcode 1 0 4
+Cycle Tokenizer\Phpcode 1 25 15
+7) Remains 270 of 37298 tokens to process!
+Cycle Tokenizer\_Array 1 0 4
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\_Function 1 0 2
+Cycle Tokenizer\_Function 1 0 2
+Cycle Tokenizer\_Function 1 0 2
+Cycle Tokenizer\_Function 1 0 2
+Cycle Tokenizer\_Function 1 0 2
+Cycle Tokenizer\_Function 1 4 15
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 22 22
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\Functioncall 1 0 4
+Cycle Tokenizer\Functioncall 1 0 2
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 2
+Cycle Tokenizer\Functioncall 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\Block 1 0 2
+Cycle Tokenizer\Block 1 0 13
+Cycle Tokenizer\Block 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 4
+Cycle Tokenizer\_Class 1 0 4
+Cycle Tokenizer\_Class 1 4 17
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 4
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 1 7
+Cycle Tokenizer\Ifthen 1 1 11
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\_Foreach 1 0 2
+Cycle Tokenizer\_Foreach 1 1 11
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\_Foreach 1 0 3
+Cycle Tokenizer\Sequence 1 4 17
+Cycle Tokenizer\Sequence 1 11 9
+Cycle Tokenizer\Sequence 1 0 4
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 2 7
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Phpcode 1 0 4
+Cycle Tokenizer\Phpcode 1 22 15
+8) Remains 92 of 37298 tokens to process!
+Cycle Tokenizer\_Array 1 0 3
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\_Function 1 0 2
+Cycle Tokenizer\_Function 1 0 9
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 1 13
+Cycle Tokenizer\_Function 1 0 5
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 4 13
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\Block 1 0 2
+Cycle Tokenizer\Block 1 0 3
+Cycle Tokenizer\Block 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\_Class 1 3 14
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 1 7
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 1 7
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Ifthen 1 0 2
+Cycle Tokenizer\Ifthen 1 0 3
+Cycle Tokenizer\Sequence 1 1 8
+Cycle Tokenizer\Sequence 1 7 6
+Cycle Tokenizer\Sequence 1 0 4
+Cycle Tokenizer\Sequence 1 0 5
+Cycle Tokenizer\Sequence 1 0 4
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Phpcode 1 0 3
+Cycle Tokenizer\Phpcode 1 4 12
+9) Remains 44 of 37298 tokens to process!
+Cycle Tokenizer\_Array 1 0 12
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 0 3
+Cycle Tokenizer\_Function 1 1 15
+Cycle Tokenizer\_Function 1 0 4
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 0 4
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 3 11
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\Block 1 0 2
+Cycle Tokenizer\Block 1 0 2
+Cycle Tokenizer\Block 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 1 10
+Cycle Tokenizer\Sequence 1 1 8
+Cycle Tokenizer\Sequence 1 3 5
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 0 4
+Cycle Tokenizer\Sequence 1 0 2
+Cycle Tokenizer\Sequence 1 0 2
+Cycle Tokenizer\Phpcode 1 0 2
+Cycle Tokenizer\Phpcode 1 3 6
+10) Remains 17 of 37298 tokens to process!
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\_Namespace 1 1 10
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 2
+Cycle Tokenizer\Functioncall 1 0 4
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\FunctioncallArray 1 0 3
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 14
+Cycle Tokenizer\_Class 1 1 12
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 1 4
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 0 2
+Cycle Tokenizer\Sequence 1 0 2
+Cycle Tokenizer\Phpcode 1 0 2
+Cycle Tokenizer\Phpcode 1 1 5
+11) Remains 7 of 37298 tokens to process!
+Cycle Tokenizer\Phpcodemiddle 1 0 2
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 0 2
+Cycle Tokenizer\_Namespace 1 1 10
+Cycle Tokenizer\_Namespace 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\Functioncall 1 0 3
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\FunctioncallArray 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 2
+Cycle Tokenizer\_Class 1 0 3
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 0 3
+Cycle Tokenizer\Sequence 1 0 2
+Cycle Tokenizer\Sequence 1 0 2
+Cycle Tokenizer\Phpcode 1 0 2
+Cycle Tokenizer\Phpcode 1 1 8
+12) All 37298 tokens have been processed!
+CleanHidden : 2,542ms
+Total time : 38 745.96ms
+Project tokenized
+Integer : 21
+String : 646
+Float : 0
+Statistics for the whole server
+
+files with next : 
+Function with next : 
+Switch : 
+Addition : 
+New : 
+Property : 
+Not : 
+Keyvalue : 
+Ternary : 
+String : 
+Arguments : 
+PPP : 
+no_fullcode :
+Got the errors (if any)
+Started dump process
+[===                                                                                                                                            ] 1.75% (ETA: 1s)[=====                                                                                                                                         ] 3.51% (ETA: 11s)[========                                                                                                                                       ] 5.26% (ETA: 9s)[===========                                                                                                                                    ] 7.02% (ETA: 9s)[=============                                                                                                                                  ] 8.77% (ETA: 9s)[===============                                                                                                                               ] 10.53% (ETA: 9s)[==================                                                                                                                            ] 12.28% (ETA: 9s)[====================                                                                                                                          ] 14.04% (ETA: 9s)[=======================                                                                                                                       ] 15.79% (ETA: 9s)[=========================                                                                                                                    ] 17.54% (ETA: 10s)[============================                                                                                                                 ] 19.30% (ETA: 10s)[==============================                                                                                                                ] 21.05% (ETA: 9s)[=================================                                                                                                             ] 22.81% (ETA: 8s)[===================================                                                                                                           ] 24.56% (ETA: 8s)[======================================                                                                                                        ] 26.32% (ETA: 7s)[========================================                                                                                                      ] 28.07% (ETA: 7s)[===========================================                                                                                                   ] 29.82% (ETA: 7s)[=============================================                                                                                                 ] 31.58% (ETA: 6s)[================================================                                                                                              ] 33.33% (ETA: 6s)[==================================================                                                                                            ] 35.09% (ETA: 6s)[=====================================================                                                                                         ] 36.84% (ETA: 5s)[=======================================================                                                                                       ] 38.60% (ETA: 6s)[==========================================================                                                                                    ] 40.35% (ETA: 5s)[============================================================                                                                                  ] 42.11% (ETA: 5s)[===============================================================                                                                               ] 43.86% (ETA: 5s)[=================================================================                                                                             ] 45.61% (ETA: 4s)[====================================================================                                                                          ] 47.37% (ETA: 4s)[======================================================================                                                                        ] 49.12% (ETA: 4s)[=========================================================================                                                                     ] 50.88% (ETA: 4s)[===========================================================================                                                                   ] 52.63% (ETA: 4s)[==============================================================================                                                                ] 54.39% (ETA: 4s)[================================================================================                                                              ] 56.14% (ETA: 4s)[===================================================================================                                                           ] 57.89% (ETA: 3s)[=====================================================================================                                                         ] 59.65% (ETA: 3s)[========================================================================================                                                      ] 61.40% (ETA: 3s)[==========================================================================================                                                    ] 63.16% (ETA: 3s)[=============================================================================================                                                 ] 64.91% (ETA: 3s)[===============================================================================================                                               ] 66.67% (ETA: 3s)[==================================================================================================                                            ] 68.42% (ETA: 3s)[====================================================================================================                                          ] 70.18% (ETA: 3s)[=======================================================================================================                                       ] 71.93% (ETA: 3s)[=========================================================================================================                                     ] 73.68% (ETA: 3s)[============================================================================================================                                  ] 75.44% (ETA: 2s)[==============================================================================================================                                ] 77.19% (ETA: 2s)[=================================================================================================================                             ] 78.95% (ETA: 2s)[===================================================================================================================                           ] 80.70% (ETA: 2s)[======================================================================================================================                        ] 82.46% (ETA: 2s)[========================================================================================================================                      ] 84.21% (ETA: 2s)[===========================================================================================================================                   ] 85.96% (ETA: 2s)[=============================================================================================================================                 ] 87.72% (ETA: 2s)[================================================================================================================================              ] 89.47% (ETA: 1s)[==================================================================================================================================            ] 91.23% (ETA: 1s)[=====================================================================================================================================         ] 92.98% (ETA: 1s)[=======================================================================================================================================       ] 94.74% (ETA: 1s)[==========================================================================================================================================    ] 96.49% (ETA: 1s)[============================================================================================================================================  ] 98.25% (ETA: 1s)[======================================================================================================================================================] 100.00% [====                                                                                                                                           ] 2.13% (ETA: 1s)[=======                                                                                                                                        ] 4.26% (ETA: 1s)[==========                                                                                                                                     ] 6.38% (ETA: 1s)[=============                                                                                                                                  ] 8.51% (ETA: 1s)[================                                                                                                                              ] 10.64% (ETA: 1s)[===================                                                                                                                           ] 12.77% (ETA: 1s)[======================                                                                                                                        ] 14.89% (ETA: 2s)[=========================                                                                                                                     ] 17.02% (ETA: 1s)[============================                                                                                                                  ] 19.15% (ETA: 1s)[===============================                                                                                                               ] 21.28% (ETA: 1s)[==================================                                                                                                            ] 23.40% (ETA: 1s)[=====================================                                                                                                         ] 25.53% (ETA: 1s)[========================================                                                                                                      ] 27.66% (ETA: 1s)[===========================================                                                                                                   ] 29.79% (ETA: 1s)[==============================================                                                                                                ] 31.91% (ETA: 1s)[=================================================                                                                                             ] 34.04% (ETA: 1s)[====================================================                                                                                          ] 36.17% (ETA: 1s)[=======================================================                                                                                       ] 38.30% (ETA: 1s)[==========================================================                                                                                    ] 40.43% (ETA: 1s)[=============================================================                                                                                 ] 42.55% (ETA: 1s)[================================================================                                                                              ] 44.68% (ETA: 1s)[===================================================================                                                                           ] 46.81% (ETA: 1s)[======================================================================                                                                        ] 48.94% (ETA: 1s)[=========================================================================                                                                     ] 51.06% (ETA: 1s)[============================================================================                                                                  ] 53.19% (ETA: 1s)[===============================================================================                                                               ] 55.32% (ETA: 1s)[==================================================================================                                                            ] 57.45% (ETA: 1s)[=====================================================================================                                                         ] 59.57% (ETA: 1s)[========================================================================================                                                      ] 61.70% (ETA: 1s)[===========================================================================================                                                   ] 63.83% (ETA: 1s)[==============================================================================================                                                ] 65.96% (ETA: 1s)[=================================================================================================                                             ] 68.09% (ETA: 1s)[====================================================================================================                                          ] 70.21% (ETA: 1s)[=======================================================================================================                                       ] 72.34% (ETA: 1s)[==========================================================================================================                                    ] 74.47% (ETA: 1s)[=============================================================================================================                                 ] 76.60% (ETA: 1s)[================================================================================================================                              ] 78.72% (ETA: 1s)[===================================================================================================================                           ] 80.85% (ETA: 1s)[======================================================================================================================                        ] 82.98% (ETA: 1s)[=========================================================================================================================                     ] 85.11% (ETA: 1s)[============================================================================================================================                  ] 87.23% (ETA: 1s)[===============================================================================================================================               ] 89.36% (ETA: 1s)[==================================================================================================================================            ] 91.49% (ETA: 1s)[=====================================================================================================================================         ] 93.62% (ETA: 1s)[========================================================================================================================================      ] 95.74% (ETA: 1s)[===========================================================================================================================================   ] 97.87% (ETA: 1s)[======================================================================================================================================================] 100.00% [===                                                                                                                                            ] 2.00% (ETA: 1s)[======                                                                                                                                         ] 4.00% (ETA: 1s)[=========                                                                                                                                      ] 6.00% (ETA: 1s)[============                                                                                                                                   ] 8.00% (ETA: 1s)[===============                                                                                                                               ] 10.00% (ETA: 1s)[==================                                                                                                                            ] 12.00% (ETA: 1s)[====================                                                                                                                          ] 14.00% (ETA: 1s)[=======================                                                                                                                       ] 16.00% (ETA: 1s)[==========================                                                                                                                    ] 18.00% (ETA: 1s)[=============================                                                                                                                 ] 20.00% (ETA: 1s)[================================                                                                                                              ] 22.00% (ETA: 1s)[===================================                                                                                                           ] 24.00% (ETA: 1s)[=====================================                                                                                                         ] 26.00% (ETA: 3s)[========================================                                                                                                      ] 28.00% (ETA: 2s)[===========================================                                                                                                   ] 30.00% (ETA: 2s)[==============================================                                                                                                ] 32.00% (ETA: 2s)[=================================================                                                                                             ] 34.00% (ETA: 2s)[====================================================                                                                                          ] 36.00% (ETA: 2s)[======================================================                                                                                        ] 38.00% (ETA: 2s)[=========================================================                                                                                     ] 40.00% (ETA: 2s)[============================================================                                                                                  ] 42.00% (ETA: 2s)[===============================================================                                                                               ] 44.00% (ETA: 1s)[==================================================================                                                                            ] 46.00% (ETA: 1s)[=====================================================================                                                                         ] 48.00% (ETA: 1s)[=======================================================================                                                                       ] 50.00% (ETA: 1s)[==========================================================================                                                                    ] 52.00% (ETA: 1s)[=============================================================================                                                                 ] 54.00% (ETA: 1s)[================================================================================                                                              ] 56.00% (ETA: 1s)[===================================================================================                                                           ] 58.00% (ETA: 1s)[======================================================================================                                                        ] 60.00% (ETA: 1s)[=========================================================================================                                                     ] 62.00% (ETA: 1s)[===========================================================================================                                                   ] 64.00% (ETA: 1s)[==============================================================================================                                                ] 66.00% (ETA: 1s)[=================================================================================================                                             ] 68.00% (ETA: 1s)[====================================================================================================                                          ] 70.00% (ETA: 1s)[=======================================================================================================                                       ] 72.00% (ETA: 1s)[==========================================================================================================                                    ] 74.00% (ETA: 1s)[============================================================================================================                                  ] 76.00% (ETA: 1s)[===============================================================================================================                               ] 78.00% (ETA: 1s)[==================================================================================================================                            ] 80.00% (ETA: 1s)[=====================================================================================================================                         ] 82.00% (ETA: 1s)[========================================================================================================================                      ] 84.00% (ETA: 1s)[===========================================================================================================================                   ] 86.00% (ETA: 1s)[=============================================================================================================================                 ] 88.00% (ETA: 1s)[================================================================================================================================              ] 90.00% (ETA: 1s)[===================================================================================================================================           ] 92.00% (ETA: 1s)[======================================================================================================================================        ] 94.00% (ETA: 1s)[=========================================================================================================================================     ] 96.00% (ETA: 1s)[============================================================================================================================================  ] 98.00% (ETA: 1s)[======================================================================================================================================================] 100.00% [====                                                                                                                                           ] 2.13% (ETA: 1s)[=======                                                                                                                                        ] 4.26% (ETA: 1s)[==========                                                                                                                                     ] 6.38% (ETA: 1s)[=============                                                                                                                                  ] 8.51% (ETA: 1s)[================                                                                                                                              ] 10.64% (ETA: 1s)[===================                                                                                                                           ] 12.77% (ETA: 2s)[======================                                                                                                                        ] 14.89% (ETA: 2s)[=========================                                                                                                                     ] 17.02% (ETA: 2s)[============================                                                                                                                  ] 19.15% (ETA: 2s)[===============================                                                                                                               ] 21.28% (ETA: 2s)[==================================                                                                                                            ] 23.40% (ETA: 2s)[=====================================                                                                                                         ] 25.53% (ETA: 1s)[========================================                                                                                                      ] 27.66% (ETA: 1s)[===========================================                                                                                                   ] 29.79% (ETA: 1s)[==============================================                                                                                                ] 31.91% (ETA: 1s)[=================================================                                                                                             ] 34.04% (ETA: 1s)[====================================================                                                                                          ] 36.17% (ETA: 1s)[=======================================================                                                                                       ] 38.30% (ETA: 1s)[==========================================================                                                                                    ] 40.43% (ETA: 1s)[=============================================================                                                                                 ] 42.55% (ETA: 1s)[================================================================                                                                              ] 44.68% (ETA: 1s)[===================================================================                                                                           ] 46.81% (ETA: 1s)[======================================================================                                                                        ] 48.94% (ETA: 1s)[=========================================================================                                                                     ] 51.06% (ETA: 1s)[============================================================================                                                                  ] 53.19% (ETA: 1s)[===============================================================================                                                               ] 55.32% (ETA: 1s)[==================================================================================                                                            ] 57.45% (ETA: 1s)[=====================================================================================                                                         ] 59.57% (ETA: 1s)[========================================================================================                                                      ] 61.70% (ETA: 1s)[===========================================================================================                                                   ] 63.83% (ETA: 1s)[==============================================================================================                                                ] 65.96% (ETA: 1s)[=================================================================================================                                             ] 68.09% (ETA: 1s)[====================================================================================================                                          ] 70.21% (ETA: 1s)[=======================================================================================================                                       ] 72.34% (ETA: 1s)[==========================================================================================================                                    ] 74.47% (ETA: 1s)[=============================================================================================================                                 ] 76.60% (ETA: 1s)[================================================================================================================                              ] 78.72% (ETA: 1s)[===================================================================================================================                           ] 80.85% (ETA: 1s)[======================================================================================================================                        ] 82.98% (ETA: 1s)[=========================================================================================================================                     ] 85.11% (ETA: 1s)[============================================================================================================================                  ] 87.23% (ETA: 1s)[===============================================================================================================================               ] 89.36% (ETA: 1s)[==================================================================================================================================            ] 91.49% (ETA: 1s)[=====================================================================================================================================         ] 93.62% (ETA: 1s)[========================================================================================================================================      ] 95.74% (ETA: 1s)[===========================================================================================================================================   ] 97.87% (ETA: 1s)[======================================================================================================================================================] 100.00% [====                                                                                                                                           ] 2.27% (ETA: 1s)[=======                                                                                                                                        ] 4.55% (ETA: 1s)[==========                                                                                                                                     ] 6.82% (ETA: 1s)[=============                                                                                                                                  ] 9.09% (ETA: 1s)[=================                                                                                                                             ] 11.36% (ETA: 1s)[====================                                                                                                                          ] 13.64% (ETA: 1s)[=======================                                                                                                                       ] 15.91% (ETA: 1s)[==========================                                                                                                                    ] 18.18% (ETA: 1s)[==============================                                                                                                                ] 20.45% (ETA: 1s)[=================================                                                                                                             ] 22.73% (ETA: 1s)[====================================                                                                                                          ] 25.00% (ETA: 1s)[=======================================                                                                                                       ] 27.27% (ETA: 1s)[==========================================                                                                                                    ] 29.55% (ETA: 1s)[==============================================                                                                                                ] 31.82% (ETA: 1s)[=================================================                                                                                             ] 34.09% (ETA: 1s)[====================================================                                                                                          ] 36.36% (ETA: 1s)[=======================================================                                                                                       ] 38.64% (ETA: 1s)[===========================================================                                                                                   ] 40.91% (ETA: 1s)[==============================================================                                                                                ] 43.18% (ETA: 1s)[=================================================================                                                                             ] 45.45% (ETA: 1s)[====================================================================                                                                          ] 47.73% (ETA: 1s)[=======================================================================                                                                       ] 50.00% (ETA: 1s)[===========================================================================                                                                   ] 52.27% (ETA: 2s)[==============================================================================                                                                ] 54.55% (ETA: 1s)[=================================================================================                                                             ] 56.82% (ETA: 1s)[====================================================================================                                                          ] 59.09% (ETA: 1s)[========================================================================================                                                      ] 61.36% (ETA: 1s)[===========================================================================================                                                   ] 63.64% (ETA: 1s)[==============================================================================================                                                ] 65.91% (ETA: 1s)[=================================================================================================                                             ] 68.18% (ETA: 1s)[=====================================================================================================                                         ] 70.45% (ETA: 1s)[========================================================================================================                                      ] 72.73% (ETA: 1s)[===========================================================================================================                                   ] 75.00% (ETA: 1s)[==============================================================================================================                                ] 77.27% (ETA: 1s)[=================================================================================================================                             ] 79.55% (ETA: 2s)[=====================================================================================================================                         ] 81.82% (ETA: 2s)[========================================================================================================================                      ] 84.09% (ETA: 2s)[===========================================================================================================================                   ] 86.36% (ETA: 1s)[==============================================================================================================================                ] 88.64% (ETA: 1s)[==================================================================================================================================            ] 90.91% (ETA: 1s)[=====================================================================================================================================         ] 93.18% (ETA: 1s)[========================================================================================================================================      ] 95.45% (ETA: 1s)[===========================================================================================================================================   ] 97.73% (ETA: 1s)[======================================================================================================================================================] 100.00% [=                                                                                                                                              ] 0.41% (ETA: 1s)[==                                                                                                                                             ] 0.82% (ETA: 8s)[==                                                                                                                                             ] 1.23% (ETA: 9s)[===                                                                                                                                            ] 1.65% (ETA: 9s)[===                                                                                                                                           ] 2.06% (ETA: 10s)[====                                                                                                                                          ] 2.47% (ETA: 10s)[=====                                                                                                                                         ] 2.88% (ETA: 17s)[=====                                                                                                                                         ] 3.29% (ETA: 22s)[======                                                                                                                                        ] 3.70% (ETA: 21s)[======                                                                                                                                        ] 4.12% (ETA: 20s)[=======                                                                                                                                       ] 4.53% (ETA: 19s)[========                                                                                                                                      ] 4.94% (ETA: 17s)[========                                                                                                                                      ] 5.35% (ETA: 17s)[=========                                                                                                                                     ] 5.76% (ETA: 17s)[=========                                                                                                                                     ] 6.17% (ETA: 18s)[==========                                                                                                                                    ] 6.58% (ETA: 17s)[==========                                                                                                                                    ] 7.00% (ETA: 17s)[===========                                                                                                                                   ] 7.41% (ETA: 17s)[============                                                                                                                                  ] 7.82% (ETA: 17s)[============                                                                                                                                  ] 8.23% (ETA: 17s)[=============                                                                                                                                 ] 8.64% (ETA: 17s)[=============                                                                                                                                 ] 9.05% (ETA: 16s)[==============                                                                                                                                ] 9.47% (ETA: 16s)[===============                                                                                                                               ] 9.88% (ETA: 16s)[===============                                                                                                                              ] 10.29% (ETA: 17s)[================                                                                                                                             ] 10.70% (ETA: 17s)[================                                                                                                                             ] 11.11% (ETA: 16s)[=================                                                                                                                            ] 11.52% (ETA: 16s)[=================                                                                                                                            ] 11.93% (ETA: 15s)[==================                                                                                                                           ] 12.35% (ETA: 15s)[==================                                                                                                                           ] 12.76% (ETA: 16s)[===================                                                                                                                          ] 13.17% (ETA: 15s)[====================                                                                                                                         ] 13.58% (ETA: 16s)[====================                                                                                                                         ] 13.99% (ETA: 16s)[=====================                                                                                                                        ] 14.40% (ETA: 16s)[=====================                                                                                                                        ] 14.81% (ETA: 16s)[======================                                                                                                                       ] 15.23% (ETA: 15s)[=======================                                                                                                                      ] 15.64% (ETA: 15s)[=======================                                                                                                                      ] 16.05% (ETA: 15s)[========================                                                                                                                     ] 16.46% (ETA: 15s)[========================                                                                                                                     ] 16.87% (ETA: 14s)[=========================                                                                                                                    ] 17.28% (ETA: 14s)[=========================                                                                                                                    ] 17.70% (ETA: 14s)[==========================                                                                                                                   ] 18.11% (ETA: 14s)[===========================                                                                                                                  ] 18.52% (ETA: 14s)[===========================                                                                                                                  ] 18.93% (ETA: 15s)[============================                                                                                                                 ] 19.34% (ETA: 14s)[============================                                                                                                                 ] 19.75% (ETA: 15s)[=============================                                                                                                                ] 20.16% (ETA: 16s)[==============================                                                                                                               ] 20.58% (ETA: 16s)[==============================                                                                                                               ] 20.99% (ETA: 16s)[===============================                                                                                                              ] 21.40% (ETA: 16s)[===============================                                                                                                              ] 21.81% (ETA: 16s)[================================                                                                                                             ] 22.22% (ETA: 16s)[================================                                                                                                             ] 22.63% (ETA: 16s)[=================================                                                                                                            ] 23.05% (ETA: 16s)[==================================                                                                                                           ] 23.46% (ETA: 16s)[==================================                                                                                                           ] 23.87% (ETA: 16s)[===================================                                                                                                          ] 24.28% (ETA: 16s)[===================================                                                                                                          ] 24.69% (ETA: 16s)[====================================                                                                                                         ] 25.10% (ETA: 16s)[====================================                                                                                                         ] 25.51% (ETA: 16s)[=====================================                                                                                                        ] 25.93% (ETA: 16s)[======================================                                                                                                       ] 26.34% (ETA: 15s)[======================================                                                                                                       ] 26.75% (ETA: 16s)[=======================================                                                                                                      ] 27.16% (ETA: 17s)[=======================================                                                                                                      ] 27.57% (ETA: 17s)[========================================                                                                                                     ] 27.98% (ETA: 17s)[=========================================                                                                                                    ] 28.40% (ETA: 16s)[=========================================                                                                                                    ] 28.81% (ETA: 17s)[==========================================                                                                                                   ] 29.22% (ETA: 17s)[==========================================                                                                                                   ] 29.63% (ETA: 17s)[===========================================                                                                                                  ] 30.04% (ETA: 16s)[===========================================                                                                                                  ] 30.45% (ETA: 16s)[============================================                                                                                                 ] 30.86% (ETA: 16s)[=============================================                                                                                                ] 31.28% (ETA: 16s)[=============================================                                                                                                ] 31.69% (ETA: 16s)[==============================================                                                                                               ] 32.10% (ETA: 16s)[==============================================                                                                                               ] 32.51% (ETA: 16s)[===============================================                                                                                              ] 32.92% (ETA: 16s)[===============================================                                                                                              ] 33.33% (ETA: 16s)[================================================                                                                                             ] 33.74% (ETA: 16s)[=================================================                                                                                            ] 34.16% (ETA: 17s)[=================================================                                                                                            ] 34.57% (ETA: 17s)[==================================================                                                                                           ] 34.98% (ETA: 18s)[==================================================                                                                                           ] 35.39% (ETA: 18s)[===================================================                                                                                          ] 35.80% (ETA: 18s)[====================================================                                                                                         ] 36.21% (ETA: 18s)[====================================================                                                                                         ] 36.63% (ETA: 18s)[=====================================================                                                                                        ] 37.04% (ETA: 18s)[=====================================================                                                                                        ] 37.45% (ETA: 18s)[======================================================                                                                                       ] 37.86% (ETA: 18s)[======================================================                                                                                       ] 38.27% (ETA: 18s)[=======================================================                                                                                      ] 38.68% (ETA: 19s)[========================================================                                                                                     ] 39.09% (ETA: 18s)[========================================================                                                                                     ] 39.51% (ETA: 18s)[=========================================================                                                                                    ] 39.92% (ETA: 18s)[=========================================================                                                                                    ] 40.33% (ETA: 18s)[==========================================================                                                                                   ] 40.74% (ETA: 17s)[===========================================================                                                                                  ] 41.15% (ETA: 17s)[===========================================================                                                                                  ] 41.56% (ETA: 17s)[============================================================                                                                                 ] 41.98% (ETA: 17s)[============================================================                                                                                 ] 42.39% (ETA: 16s)[=============================================================                                                                                ] 42.80% (ETA: 16s)[=============================================================                                                                                ] 43.21% (ETA: 16s)[==============================================================                                                                               ] 43.62% (ETA: 17s)[===============================================================                                                                              ] 44.03% (ETA: 17s)[===============================================================                                                                              ] 44.44% (ETA: 17s)[================================================================                                                                             ] 44.86% (ETA: 17s)[================================================================                                                                             ] 45.27% (ETA: 17s)[=================================================================                                                                            ] 45.68% (ETA: 17s)[=================================================================                                                                            ] 46.09% (ETA: 17s)[==================================================================                                                                           ] 46.50% (ETA: 17s)[===================================================================                                                                          ] 46.91% (ETA: 17s)[===================================================================                                                                          ] 47.33% (ETA: 16s)[====================================================================                                                                         ] 47.74% (ETA: 16s)[====================================================================                                                                         ] 48.15% (ETA: 16s)[=====================================================================                                                                        ] 48.56% (ETA: 16s)[======================================================================                                                                       ] 48.97% (ETA: 16s)[======================================================================                                                                       ] 49.38% (ETA: 16s)[=======================================================================                                                                      ] 49.79% (ETA: 17s)[=======================================================================                                                                      ] 50.21% (ETA: 16s)[========================================================================                                                                     ] 50.62% (ETA: 17s)[========================================================================                                                                     ] 51.03% (ETA: 17s)[=========================================================================                                                                    ] 51.44% (ETA: 16s)[==========================================================================                                                                   ] 51.85% (ETA: 16s)[==========================================================================                                                                   ] 52.26% (ETA: 16s)[===========================================================================                                                                  ] 52.67% (ETA: 16s)[===========================================================================                                                                  ] 53.09% (ETA: 16s)[============================================================================                                                                 ] 53.50% (ETA: 16s)[=============================================================================                                                                ] 53.91% (ETA: 16s)[=============================================================================                                                                ] 54.32% (ETA: 16s)[==============================================================================                                                               ] 54.73% (ETA: 16s)[==============================================================================                                                               ] 55.14% (ETA: 16s)[===============================================================================                                                              ] 55.56% (ETA: 17s)[===============================================================================                                                              ] 55.97% (ETA: 17s)[================================================================================                                                             ] 56.38% (ETA: 17s)[=================================================================================                                                            ] 56.79% (ETA: 17s)[=================================================================================                                                            ] 57.20% (ETA: 17s)[==================================================================================                                                           ] 57.61% (ETA: 17s)[==================================================================================                                                           ] 58.02% (ETA: 16s)[===================================================================================                                                          ] 58.44% (ETA: 17s)[===================================================================================                                                          ] 58.85% (ETA: 16s)[====================================================================================                                                         ] 59.26% (ETA: 16s)[=====================================================================================                                                        ] 59.67% (ETA: 16s)[=====================================================================================                                                        ] 60.08% (ETA: 16s)[======================================================================================                                                       ] 60.49% (ETA: 16s)[======================================================================================                                                       ] 60.91% (ETA: 16s)[=======================================================================================                                                      ] 61.32% (ETA: 16s)[========================================================================================                                                     ] 61.73% (ETA: 16s)[========================================================================================                                                     ] 62.14% (ETA: 15s)[=========================================================================================                                                    ] 62.55% (ETA: 15s)[=========================================================================================                                                    ] 62.96% (ETA: 15s)[==========================================================================================                                                   ] 63.37% (ETA: 15s)[==========================================================================================                                                   ] 63.79% (ETA: 15s)[===========================================================================================                                                  ] 64.20% (ETA: 15s)[============================================================================================                                                 ] 64.61% (ETA: 15s)[============================================================================================                                                 ] 65.02% (ETA: 15s)[=============================================================================================                                                ] 65.43% (ETA: 15s)[=============================================================================================                                                ] 65.84% (ETA: 14s)[==============================================================================================                                               ] 66.26% (ETA: 14s)[==============================================================================================                                               ] 66.67% (ETA: 14s)[===============================================================================================                                              ] 67.08% (ETA: 14s)[================================================================================================                                             ] 67.49% (ETA: 14s)[================================================================================================                                             ] 67.90% (ETA: 14s)[=================================================================================================                                            ] 68.31% (ETA: 14s)[=================================================================================================                                            ] 68.72% (ETA: 14s)[==================================================================================================                                           ] 69.14% (ETA: 14s)[===================================================================================================                                          ] 69.55% (ETA: 14s)[===================================================================================================                                          ] 69.96% (ETA: 14s)[====================================================================================================                                         ] 70.37% (ETA: 13s)[====================================================================================================                                         ] 70.78% (ETA: 13s)[=====================================================================================================                                        ] 71.19% (ETA: 13s)[=====================================================================================================                                        ] 71.60% (ETA: 13s)[======================================================================================================                                       ] 72.02% (ETA: 13s)[=======================================================================================================                                      ] 72.43% (ETA: 13s)[=======================================================================================================                                      ] 72.84% (ETA: 12s)[========================================================================================================                                     ] 73.25% (ETA: 12s)[========================================================================================================                                     ] 73.66% (ETA: 12s)[=========================================================================================================                                    ] 74.07% (ETA: 12s)[==========================================================================================================                                   ] 74.49% (ETA: 12s)[==========================================================================================================                                   ] 74.90% (ETA: 12s)[===========================================================================================================                                  ] 75.31% (ETA: 11s)[===========================================================================================================                                  ] 75.72% (ETA: 11s)[============================================================================================================                                 ] 76.13% (ETA: 11s)[============================================================================================================                                 ] 76.54% (ETA: 11s)[=============================================================================================================                                ] 76.95% (ETA: 11s)[==============================================================================================================                               ] 77.37% (ETA: 10s)[==============================================================================================================                               ] 77.78% (ETA: 10s)[===============================================================================================================                              ] 78.19% (ETA: 10s)[===============================================================================================================                              ] 78.60% (ETA: 10s)[================================================================================================================                             ] 79.01% (ETA: 10s)[================================================================================================================                             ] 79.42% (ETA: 10s)[=================================================================================================================                            ] 79.84% (ETA: 10s)[==================================================================================================================                            ] 80.25% (ETA: 9s)[===================================================================================================================                           ] 80.66% (ETA: 9s)[====================================================================================================================                          ] 81.07% (ETA: 9s)[====================================================================================================================                          ] 81.48% (ETA: 9s)[=====================================================================================================================                         ] 81.89% (ETA: 9s)[=====================================================================================================================                         ] 82.30% (ETA: 9s)[======================================================================================================================                        ] 82.72% (ETA: 8s)[=======================================================================================================================                       ] 83.13% (ETA: 8s)[=======================================================================================================================                       ] 83.54% (ETA: 8s)[========================================================================================================================                      ] 83.95% (ETA: 8s)[========================================================================================================================                      ] 84.36% (ETA: 8s)[=========================================================================================================================                     ] 84.77% (ETA: 8s)[=========================================================================================================================                     ] 85.19% (ETA: 7s)[==========================================================================================================================                    ] 85.60% (ETA: 7s)[===========================================================================================================================                   ] 86.01% (ETA: 7s)[===========================================================================================================================                   ] 86.42% (ETA: 7s)[============================================================================================================================                  ] 86.83% (ETA: 7s)[============================================================================================================================                  ] 87.24% (ETA: 6s)[=============================================================================================================================                 ] 87.65% (ETA: 6s)[==============================================================================================================================                ] 88.07% (ETA: 6s)[==============================================================================================================================                ] 88.48% (ETA: 6s)[===============================================================================================================================               ] 88.89% (ETA: 6s)[===============================================================================================================================               ] 89.30% (ETA: 6s)[================================================================================================================================              ] 89.71% (ETA: 5s)[================================================================================================================================              ] 90.12% (ETA: 5s)[=================================================================================================================================             ] 90.53% (ETA: 5s)[==================================================================================================================================            ] 90.95% (ETA: 5s)[==================================================================================================================================            ] 91.36% (ETA: 5s)[===================================================================================================================================           ] 91.77% (ETA: 4s)[===================================================================================================================================           ] 92.18% (ETA: 4s)[====================================================================================================================================          ] 92.59% (ETA: 4s)[=====================================================================================================================================         ] 93.00% (ETA: 4s)[=====================================================================================================================================         ] 93.42% (ETA: 4s)[======================================================================================================================================        ] 93.83% (ETA: 3s)[======================================================================================================================================        ] 94.24% (ETA: 3s)[=======================================================================================================================================       ] 94.65% (ETA: 3s)[=======================================================================================================================================       ] 95.06% (ETA: 3s)[========================================================================================================================================      ] 95.47% (ETA: 3s)[=========================================================================================================================================     ] 95.88% (ETA: 2s)[=========================================================================================================================================     ] 96.30% (ETA: 2s)[==========================================================================================================================================    ] 96.71% (ETA: 2s)[==========================================================================================================================================    ] 97.12% (ETA: 2s)[===========================================================================================================================================   ] 97.53% (ETA: 2s)[============================================================================================================================================  ] 97.94% (ETA: 2s)[============================================================================================================================================  ] 98.35% (ETA: 1s)[============================================================================================================================================= ] 98.77% (ETA: 1s)[============================================================================================================================================= ] 99.18% (ETA: 1s)[==============================================================================================================================================] 99.59% (ETA: 1s)[======================================================================================================================================================] 100.00% [========                                                                                                                                       ] 5.56% (ETA: 1s)[================                                                                                                                              ] 11.11% (ETA: 1s)[========================                                                                                                                      ] 16.67% (ETA: 1s)[================================                                                                                                              ] 22.22% (ETA: 1s)[========================================                                                                                                      ] 27.78% (ETA: 1s)[================================================                                                                                              ] 33.33% (ETA: 2s)[========================================================                                                                                      ] 38.89% (ETA: 2s)[================================================================                                                                              ] 44.44% (ETA: 2s)[=======================================================================                                                                       ] 50.00% (ETA: 2s)[===============================================================================                                                               ] 55.56% (ETA: 2s)[=======================================================================================                                                       ] 61.11% (ETA: 1s)[===============================================================================================                                               ] 66.67% (ETA: 1s)[=======================================================================================================                                       ] 72.22% (ETA: 1s)[===============================================================================================================                               ] 77.78% (ETA: 1s)[=======================================================================================================================                       ] 83.33% (ETA: 1s)[===============================================================================================================================               ] 88.89% (ETA: 1s)[=======================================================================================================================================       ] 94.44% (ETA: 1s)[======================================================================================================================================================] 100.00% [====                                                                                                                                           ] 2.56% (ETA: 1s)[========                                                                                                                                       ] 5.13% (ETA: 3s)[===========                                                                                                                                    ] 7.69% (ETA: 3s)[===============                                                                                                                               ] 10.26% (ETA: 9s)[===================                                                                                                                           ] 12.82% (ETA: 7s)[======================                                                                                                                        ] 15.38% (ETA: 6s)[==========================                                                                                                                   ] 17.95% (ETA: 28s)[=============================                                                                                                                ] 20.51% (ETA: 25s)[=================================                                                                                                            ] 23.08% (ETA: 23s)[=====================================                                                                                                        ] 25.64% (ETA: 20s)[========================================                                                                                                     ] 28.21% (ETA: 18s)[============================================                                                                                                 ] 30.77% (ETA: 16s)[===============================================                                                                                              ] 33.33% (ETA: 14s)[===================================================                                                                                          ] 35.90% (ETA: 13s)[=======================================================                                                                                      ] 38.46% (ETA: 12s)[==========================================================                                                                                   ] 41.03% (ETA: 10s)[==============================================================                                                                               ] 43.59% (ETA: 10s)[==================================================================                                                                            ] 46.15% (ETA: 9s)[======================================================================                                                                        ] 48.72% (ETA: 8s)[=========================================================================                                                                     ] 51.28% (ETA: 8s)[=============================================================================                                                                 ] 53.85% (ETA: 7s)[=================================================================================                                                             ] 56.41% (ETA: 7s)[====================================================================================                                                          ] 58.97% (ETA: 6s)[========================================================================================                                                      ] 61.54% (ETA: 6s)[============================================================================================                                                  ] 64.10% (ETA: 5s)[===============================================================================================                                               ] 66.67% (ETA: 5s)[===================================================================================================                                           ] 69.23% (ETA: 4s)[======================================================================================================                                        ] 71.79% (ETA: 4s)[==========================================================================================================                                    ] 74.36% (ETA: 4s)[==============================================================================================================                                ] 76.92% (ETA: 3s)[=================================================================================================================                             ] 79.49% (ETA: 3s)[=====================================================================================================================                         ] 82.05% (ETA: 3s)[=========================================================================================================================                     ] 84.62% (ETA: 2s)[============================================================================================================================                  ] 87.18% (ETA: 2s)[================================================================================================================================              ] 89.74% (ETA: 2s)[====================================================================================================================================          ] 92.31% (ETA: 1s)[=======================================================================================================================================       ] 94.87% (ETA: 1s)[===========================================================================================================================================   ] 97.44% (ETA: 1s)[======================================================================================================================================================] 100.00% [=========                                                                                                                                      ] 6.25% (ETA: 1s)[==================                                                                                                                            ] 12.50% (ETA: 2s)[===========================                                                                                                                   ] 18.75% (ETA: 2s)[====================================                                                                                                          ] 25.00% (ETA: 3s)[=============================================                                                                                                 ] 31.25% (ETA: 4s)[======================================================                                                                                        ] 37.50% (ETA: 3s)[===============================================================                                                                               ] 43.75% (ETA: 3s)[=======================================================================                                                                       ] 50.00% (ETA: 2s)[================================================================================                                                              ] 56.25% (ETA: 2s)[=========================================================================================                                                     ] 62.50% (ETA: 2s)[==================================================================================================                                            ] 68.75% (ETA: 2s)[===========================================================================================================                                   ] 75.00% (ETA: 1s)[====================================================================================================================                          ] 81.25% (ETA: 1s)[=============================================================================================================================                 ] 87.50% (ETA: 1s)[======================================================================================================================================        ] 93.75% (ETA: 1s)[======================================================================================================================================================] 100.00% [======================================================================================================================================================] 100.00% [=                                                                                                                                              ] 0.34% (ETA: 1s)[=                                                                                                                                             ] 0.69% (ETA: 16s)[==                                                                                                                                            ] 1.03% (ETA: 23s)[==                                                                                                                                            ] 1.37% (ETA: 26s)[===                                                                                                                                           ] 1.72% (ETA: 21s)[===                                                                                                                                           ] 2.06% (ETA: 19s)[====                                                                                                                                          ] 2.41% (ETA: 17s)[====                                                                                                                                          ] 2.75% (ETA: 15s)[=====                                                                                                                                         ] 3.09% (ETA: 13s)[=====                                                                                                                                         ] 3.44% (ETA: 12s)[======                                                                                                                                        ] 3.78% (ETA: 11s)[======                                                                                                                                        ] 4.12% (ETA: 10s)[=======                                                                                                                                       ] 4.47% (ETA: 18s)[=======                                                                                                                                       ] 4.81% (ETA: 18s)[========                                                                                                                                      ] 5.15% (ETA: 19s)[========                                                                                                                                      ] 5.50% (ETA: 20s)[=========                                                                                                                                     ] 5.84% (ETA: 20s)[=========                                                                                                                                     ] 6.19% (ETA: 19s)[==========                                                                                                                                    ] 6.53% (ETA: 20s)[==========                                                                                                                                    ] 6.87% (ETA: 25s)[===========                                                                                                                                   ] 7.22% (ETA: 25s)[===========                                                                                                                                   ] 7.56% (ETA: 35s)[============                                                                                                                                  ] 7.90% (ETA: 35s)[============                                                                                                                                  ] 8.25% (ETA: 35s)[=============                                                                                                                                 ] 8.59% (ETA: 36s)[=============                                                                                                                                 ] 8.93% (ETA: 34s)[==============                                                                                                                                ] 9.28% (ETA: 39s)[==============                                                                                                                                ] 9.62% (ETA: 41s)[===============                                                                                                                               ] 9.97% (ETA: 40s)[===============                                                                                                                              ] 10.31% (ETA: 42s)[================                                                                                                                             ] 10.65% (ETA: 48s)[================                                                                                                                             ] 11.00% (ETA: 48s)[================                                                                                                                             ] 11.34% (ETA: 46s)[=================                                                                                                                            ] 11.68% (ETA: 47s)[=================                                                                                                                            ] 12.03% (ETA: 47s)[==================                                                                                                                           ] 12.37% (ETA: 46s)[==================                                                                                                                           ] 12.71% (ETA: 45s)[===================                                                                                                                          ] 13.06% (ETA: 44s)[===================                                                                                                                          ] 13.40% (ETA: 43s)[====================                                                                                                                         ] 13.75% (ETA: 42s)[====================                                                                                                                         ] 14.09% (ETA: 41s)[=====================                                                                                                                        ] 14.43% (ETA: 42s)[=====================                                                                                                                        ] 14.78% (ETA: 41s)[======================                                                                                                                       ] 15.12% (ETA: 40s)[======================                                                                                                                       ] 15.46% (ETA: 39s)[=======================                                                                                                                      ] 15.81% (ETA: 39s)[=======================                                                                                                                      ] 16.15% (ETA: 40s)[========================                                                                                                                     ] 16.49% (ETA: 39s)[========================                                                                                                                     ] 16.84% (ETA: 38s)[=========================                                                                                                                    ] 17.18% (ETA: 38s)[=========================                                                                                                                    ] 17.53% (ETA: 37s)[==========================                                                                                                                   ] 17.87% (ETA: 37s)[==========================                                                                                                                   ] 18.21% (ETA: 36s)[===========================                                                                                                                  ] 18.56% (ETA: 38s)[===========================                                                                                                                  ] 18.90% (ETA: 40s)[============================                                                                                                                 ] 19.24% (ETA: 40s)[============================                                                                                                                 ] 19.59% (ETA: 39s)[=============================                                                                                                                ] 19.93% (ETA: 38s)[=============================                                                                                                                ] 20.27% (ETA: 38s)[==============================                                                                                                               ] 20.62% (ETA: 37s)[==============================                                                                                                               ] 20.96% (ETA: 37s)[===============================                                                                                                              ] 21.31% (ETA: 43s)[===============================                                                                                                              ] 21.65% (ETA: 44s)[================================                                                                                                             ] 21.99% (ETA: 46s)[================================                                                                                                             ] 22.34% (ETA: 46s)[================================                                                                                                             ] 22.68% (ETA: 45s)[=================================                                                                                                            ] 23.02% (ETA: 45s)[=================================                                                                                                            ] 23.37% (ETA: 44s)[==================================                                                                                                           ] 23.71% (ETA: 43s)[==================================                                                                                                           ] 24.05% (ETA: 44s)[===================================                                                                                                          ] 24.40% (ETA: 44s)[===================================                                                                                                          ] 24.74% (ETA: 43s)[====================================                                                                                                         ] 25.09% (ETA: 43s)[====================================                                                                                                         ] 25.43% (ETA: 42s)[=====================================                                                                                                        ] 25.77% (ETA: 42s)[=====================================                                                                                                        ] 26.12% (ETA: 41s)[======================================                                                                                                       ] 26.46% (ETA: 41s)[======================================                                                                                                       ] 26.80% (ETA: 41s)[=======================================                                                                                                      ] 27.15% (ETA: 40s)[=======================================                                                                                                      ] 27.49% (ETA: 41s)[========================================                                                                                                     ] 27.84% (ETA: 40s)[========================================                                                                                                     ] 28.18% (ETA: 40s)[=========================================                                                                                                    ] 28.52% (ETA: 39s)[=========================================                                                                                                    ] 28.87% (ETA: 39s)[==========================================                                                                                                   ] 29.21% (ETA: 39s)[==========================================                                                                                                   ] 29.55% (ETA: 38s)[===========================================                                                                                                  ] 29.90% (ETA: 39s)[===========================================                                                                                                  ] 30.24% (ETA: 39s)[============================================                                                                                                 ] 30.58% (ETA: 38s)[============================================                                                                                                 ] 30.93% (ETA: 38s)[=============================================                                                                                                ] 31.27% (ETA: 38s)[=============================================                                                                                                ] 31.62% (ETA: 38s)[==============================================                                                                                               ] 31.96% (ETA: 38s)[==============================================                                                                                               ] 32.30% (ETA: 37s)[===============================================                                                                                              ] 32.65% (ETA: 37s)[===============================================                                                                                              ] 32.99% (ETA: 37s)[===============================================                                                                                              ] 33.33% (ETA: 36s)[================================================                                                                                             ] 33.68% (ETA: 37s)[================================================                                                                                             ] 34.02% (ETA: 37s)[=================================================                                                                                            ] 34.36% (ETA: 37s)[=================================================                                                                                            ] 34.71% (ETA: 37s)[==================================================                                                                                           ] 35.05% (ETA: 36s)[==================================================                                                                                           ] 35.40% (ETA: 36s)[===================================================                                                                                          ] 35.74% (ETA: 36s)[===================================================                                                                                          ] 36.08% (ETA: 36s)[====================================================                                                                                         ] 36.43% (ETA: 36s)[====================================================                                                                                         ] 36.77% (ETA: 35s)[=====================================================                                                                                        ] 37.11% (ETA: 35s)[=====================================================                                                                                        ] 37.46% (ETA: 38s)[======================================================                                                                                       ] 37.80% (ETA: 38s)[======================================================                                                                                       ] 38.14% (ETA: 38s)[=======================================================                                                                                      ] 38.49% (ETA: 37s)[=======================================================                                                                                      ] 38.83% (ETA: 37s)[========================================================                                                                                     ] 39.18% (ETA: 39s)[========================================================                                                                                     ] 39.52% (ETA: 38s)[=========================================================                                                                                    ] 39.86% (ETA: 38s)[=========================================================                                                                                    ] 40.21% (ETA: 38s)[==========================================================                                                                                   ] 40.55% (ETA: 37s)[==========================================================                                                                                   ] 40.89% (ETA: 37s)[===========================================================                                                                                  ] 41.24% (ETA: 36s)[===========================================================                                                                                  ] 41.58% (ETA: 36s)[============================================================                                                                                 ] 41.92% (ETA: 36s)[============================================================                                                                                 ] 42.27% (ETA: 36s)[=============================================================                                                                                ] 42.61% (ETA: 45s)[=============================================================                                                                                ] 42.96% (ETA: 44s)[==============================================================                                                                               ] 43.30% (ETA: 44s)[==============================================================                                                                               ] 43.64% (ETA: 43s)[===============================================================                                                                              ] 43.99% (ETA: 43s)[===============================================================                                                                              ] 44.33% (ETA: 42s)[===============================================================                                                                              ] 44.67% (ETA: 42s)[================================================================                                                                             ] 45.02% (ETA: 41s)[================================================================                                                                             ] 45.36% (ETA: 41s)[=================================================================                                                                            ] 45.70% (ETA: 40s)[=================================================================                                                                            ] 46.05% (ETA: 40s)[==================================================================                                                                           ] 46.39% (ETA: 39s)[==================================================================                                                                           ] 46.74% (ETA: 39s)[===================================================================                                                                          ] 47.08% (ETA: 39s)[===================================================================                                                                          ] 47.42% (ETA: 38s)[====================================================================                                                                         ] 47.77% (ETA: 38s)[====================================================================                                                                         ] 48.11% (ETA: 38s)[=====================================================================                                                                        ] 48.45% (ETA: 37s)[=====================================================================                                                                        ] 48.80% (ETA: 37s)[======================================================================                                                                       ] 49.14% (ETA: 37s)[======================================================================                                                                       ] 49.48% (ETA: 36s)[=======================================================================                                                                      ] 49.83% (ETA: 36s)[=======================================================================                                                                      ] 50.17% (ETA: 35s)[========================================================================                                                                     ] 50.52% (ETA: 35s)[========================================================================                                                                     ] 50.86% (ETA: 34s)[=========================================================================                                                                    ] 51.20% (ETA: 34s)[=========================================================================                                                                    ] 51.55% (ETA: 34s)[==========================================================================                                                                   ] 51.89% (ETA: 33s)[==========================================================================                                                                   ] 52.23% (ETA: 33s)[===========================================================================                                                                  ] 52.58% (ETA: 32s)[===========================================================================                                                                  ] 52.92% (ETA: 32s)[============================================================================                                                                 ] 53.26% (ETA: 32s)[============================================================================                                                                 ] 53.61% (ETA: 31s)[=============================================================================                                                                ] 53.95% (ETA: 31s)[=============================================================================                                                                ] 54.30% (ETA: 33s)[==============================================================================                                                               ] 54.64% (ETA: 33s)[==============================================================================                                                               ] 54.98% (ETA: 32s)[===============================================================================                                                              ] 55.33% (ETA: 32s)[===============================================================================                                                              ] 55.67% (ETA: 31s)[===============================================================================                                                              ] 56.01% (ETA: 31s)[================================================================================                                                             ] 56.36% (ETA: 31s)[================================================================================                                                             ] 56.70% (ETA: 30s)[=================================================================================                                                            ] 57.04% (ETA: 30s)[=================================================================================                                                            ] 57.39% (ETA: 30s)[==================================================================================                                                           ] 57.73% (ETA: 29s)[==================================================================================                                                           ] 58.08% (ETA: 29s)[===================================================================================                                                          ] 58.42% (ETA: 28s)[===================================================================================                                                          ] 58.76% (ETA: 28s)[====================================================================================                                                         ] 59.11% (ETA: 28s)[====================================================================================                                                         ] 59.45% (ETA: 27s)[=====================================================================================                                                        ] 59.79% (ETA: 27s)[=====================================================================================                                                        ] 60.14% (ETA: 27s)[======================================================================================                                                       ] 60.48% (ETA: 26s)[======================================================================================                                                       ] 60.82% (ETA: 26s)[=======================================================================================                                                      ] 61.17% (ETA: 25s)[=======================================================================================                                                      ] 61.51% (ETA: 25s)[========================================================================================                                                     ] 61.86% (ETA: 25s)[========================================================================================                                                     ] 62.20% (ETA: 24s)[=========================================================================================                                                    ] 62.54% (ETA: 24s)[=========================================================================================                                                    ] 62.89% (ETA: 24s)[==========================================================================================                                                   ] 63.23% (ETA: 23s)[==========================================================================================                                                   ] 63.57% (ETA: 23s)[===========================================================================================                                                  ] 63.92% (ETA: 23s)[===========================================================================================                                                  ] 64.26% (ETA: 22s)[============================================================================================                                                 ] 64.60% (ETA: 22s)[============================================================================================                                                 ] 64.95% (ETA: 22s)[=============================================================================================                                                ] 65.29% (ETA: 22s)[=============================================================================================                                                ] 65.64% (ETA: 21s)[==============================================================================================                                               ] 65.98% (ETA: 21s)[==============================================================================================                                               ] 66.32% (ETA: 21s)[==============================================================================================                                               ] 66.67% (ETA: 21s)[===============================================================================================                                              ] 67.01% (ETA: 21s)[===============================================================================================                                              ] 67.35% (ETA: 21s)[================================================================================================                                             ] 67.70% (ETA: 20s)[================================================================================================                                             ] 68.04% (ETA: 20s)[=================================================================================================                                            ] 68.38% (ETA: 20s)[=================================================================================================                                            ] 68.73% (ETA: 20s)[==================================================================================================                                           ] 69.07% (ETA: 19s)[==================================================================================================                                           ] 69.42% (ETA: 19s)[===================================================================================================                                          ] 69.76% (ETA: 19s)[===================================================================================================                                          ] 70.10% (ETA: 19s)[====================================================================================================                                         ] 70.45% (ETA: 18s)[====================================================================================================                                         ] 70.79% (ETA: 18s)[=====================================================================================================                                        ] 71.13% (ETA: 18s)[=====================================================================================================                                        ] 71.48% (ETA: 19s)[======================================================================================================                                       ] 71.82% (ETA: 18s)[======================================================================================================                                       ] 72.16% (ETA: 18s)[=======================================================================================================                                      ] 72.51% (ETA: 18s)[=======================================================================================================                                      ] 72.85% (ETA: 18s)[========================================================================================================                                     ] 73.20% (ETA: 18s)[========================================================================================================                                     ] 73.54% (ETA: 18s)[=========================================================================================================                                    ] 73.88% (ETA: 17s)[=========================================================================================================                                    ] 74.23% (ETA: 17s)[==========================================================================================================                                   ] 74.57% (ETA: 17s)[==========================================================================================================                                   ] 74.91% (ETA: 17s)[===========================================================================================================                                  ] 75.26% (ETA: 17s)[===========================================================================================================                                  ] 75.60% (ETA: 17s)[============================================================================================================                                 ] 75.95% (ETA: 16s)[============================================================================================================                                 ] 76.29% (ETA: 16s)[=============================================================================================================                                ] 76.63% (ETA: 16s)[=============================================================================================================                                ] 76.98% (ETA: 16s)[==============================================================================================================                               ] 77.32% (ETA: 15s)[==============================================================================================================                               ] 77.66% (ETA: 15s)[==============================================================================================================                               ] 78.01% (ETA: 16s)[===============================================================================================================                              ] 78.35% (ETA: 16s)[===============================================================================================================                              ] 78.69% (ETA: 16s)[================================================================================================================                             ] 79.04% (ETA: 15s)[================================================================================================================                             ] 79.38% (ETA: 15s)[=================================================================================================================                            ] 79.73% (ETA: 15s)[=================================================================================================================                            ] 80.07% (ETA: 15s)[==================================================================================================================                           ] 80.41% (ETA: 15s)[==================================================================================================================                           ] 80.76% (ETA: 14s)[===================================================================================================================                          ] 81.10% (ETA: 14s)[===================================================================================================================                          ] 81.44% (ETA: 14s)[====================================================================================================================                         ] 81.79% (ETA: 14s)[====================================================================================================================                         ] 82.13% (ETA: 13s)[=====================================================================================================================                        ] 82.47% (ETA: 13s)[=====================================================================================================================                        ] 82.82% (ETA: 13s)[======================================================================================================================                       ] 83.16% (ETA: 12s)[======================================================================================================================                       ] 83.51% (ETA: 12s)[=======================================================================================================================                      ] 83.85% (ETA: 12s)[=======================================================================================================================                      ] 84.19% (ETA: 12s)[========================================================================================================================                     ] 84.54% (ETA: 11s)[========================================================================================================================                     ] 84.88% (ETA: 11s)[=========================================================================================================================                    ] 85.22% (ETA: 11s)[=========================================================================================================================                    ] 85.57% (ETA: 11s)[==========================================================================================================================                   ] 85.91% (ETA: 10s)[==========================================================================================================================                   ] 86.25% (ETA: 10s)[===========================================================================================================================                  ] 86.60% (ETA: 10s)[===========================================================================================================================                  ] 86.94% (ETA: 10s)[============================================================================================================================                 ] 87.29% (ETA: 10s)[============================================================================================================================                 ] 87.63% (ETA: 10s)[=============================================================================================================================                ] 87.97% (ETA: 10s)[=============================================================================================================================                ] 88.32% (ETA: 10s)[==============================================================================================================================                ] 88.66% (ETA: 9s)[===============================================================================================================================               ] 89.00% (ETA: 9s)[===============================================================================================================================               ] 89.35% (ETA: 9s)[================================================================================================================================              ] 89.69% (ETA: 8s)[================================================================================================================================              ] 90.03% (ETA: 8s)[=================================================================================================================================             ] 90.38% (ETA: 8s)[=================================================================================================================================             ] 90.72% (ETA: 8s)[==================================================================================================================================            ] 91.07% (ETA: 7s)[==================================================================================================================================            ] 91.41% (ETA: 7s)[===================================================================================================================================           ] 91.75% (ETA: 7s)[===================================================================================================================================           ] 92.10% (ETA: 7s)[====================================================================================================================================          ] 92.44% (ETA: 6s)[====================================================================================================================================          ] 92.78% (ETA: 6s)[=====================================================================================================================================         ] 93.13% (ETA: 6s)[=====================================================================================================================================         ] 93.47% (ETA: 5s)[======================================================================================================================================        ] 93.81% (ETA: 5s)[======================================================================================================================================        ] 94.16% (ETA: 5s)[=======================================================================================================================================       ] 94.50% (ETA: 5s)[=======================================================================================================================================       ] 94.85% (ETA: 6s)[========================================================================================================================================      ] 95.19% (ETA: 5s)[========================================================================================================================================      ] 95.53% (ETA: 5s)[=========================================================================================================================================     ] 95.88% (ETA: 5s)[=========================================================================================================================================     ] 96.22% (ETA: 4s)[==========================================================================================================================================    ] 96.56% (ETA: 4s)[==========================================================================================================================================    ] 96.91% (ETA: 3s)[===========================================================================================================================================   ] 97.25% (ETA: 3s)[===========================================================================================================================================   ] 97.59% (ETA: 3s)[============================================================================================================================================  ] 97.94% (ETA: 2s)[============================================================================================================================================  ] 98.28% (ETA: 2s)[============================================================================================================================================= ] 98.63% (ETA: 2s)[============================================================================================================================================= ] 98.97% (ETA: 1s)[==============================================================================================================================================] 99.31% (ETA: 1s)[==============================================================================================================================================] 99.66% (ETA: 1s)[======================================================================================================================================================] 100.00% Analyzed project
+Reporting Premier in Devoops
+Array
+(
+    [0] => array_count_values()
+    [1] => foreach()
+)
+Array
+(
+    [0] => echo()
+)
+Array
+(
+    [0] => empty()
+    [1] => empty()
+)
+Array
+(
+    [0] => for()
+)
+Array
+(
+    [0] => f()
+    [1] => f()
+)
+Array
+(
+    [0] => list()
+)
+Array
+(
+    [0] => array_merge()
+    [1] => array_collecting_the_arrays()
+    [2] => array_merge_recursive()
+)
+Array
+(
+    [0] => die()
+    [1] => echo()
+)
+Array
+(
+    [0] => __construct()
+)
+Array
+(
+    [0] => y()
+    [1] => x()
+    [2] => y()
+    [3] => y()
+)
+Array
+(
+    [0] => trpos()
+)
+Array
+(
+    [0] => new()
+    [1] => xception()
+)
+Array
+(
+    [0] => ime()
+    [1] => microtime()
+    [2] => ime()
+)
+Array
+(
+    [0] => exit()
+    [1] => die()
+)
+Array
+(
+    [0] => is_null()
+)
+Array
+(
+    [0] => array_count_values()
+    [1] => foreach()
+)
+Array
+(
+    [0] => echo()
+)
+Array
+(
+    [0] => empty()
+    [1] => empty()
+)
+Array
+(
+    [0] => for()
+)
+Array
+(
+    [0] => f()
+    [1] => f()
+)
+Array
+(
+    [0] => list()
+)
+Array
+(
+    [0] => array_merge()
+    [1] => array_collecting_the_arrays()
+    [2] => array_merge_recursive()
+)
+Array
+(
+    [0] => die()
+    [1] => echo()
+)
+Array
+(
+    [0] => __construct()
+)
+Array
+(
+    [0] => y()
+    [1] => x()
+    [2] => y()
+    [3] => y()
+)
+Array
+(
+    [0] => trpos()
+)
+Array
+(
+    [0] => new()
+    [1] => xception()
+)
+Array
+(
+    [0] => ime()
+    [1] => microtime()
+    [2] => ime()
+)
+Array
+(
+    [0] => exit()
+    [1] => die()
+)
+Array
+(
+    [0] => is_null()
+)
+Reported project
+Statistics for the whole server
+
+tokens_count : 25293
+relations_count : 50371
+atoms_count : 25887
+NEXT_count : 0
+INDEXED_count : 0
+file_count : 150
+no_fullcode : 0
+lone_token : 1
+isrm_variable : 0
+isrm_property : 331
+isrm_array : 217
+isrm_staticproperty : 13
+indexed : FILE
+
+Stats
+End 2
+/Users/famille/Desktop/analyze/tests/cli
+Duration : -287,646.95ms 
+End : 1458661638.8922
