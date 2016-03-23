@@ -26,20 +26,22 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class VardumpUsage extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Structures/Truthy');
+    }
+    
     public function analyze() {
         $debug_functions = array('var_dump', 'print_r', 'var_export');
         
         // print_r (but not print_r($a, 1))
-        $this->atomIs('Functioncall')
-             ->functioncallIs(array('\\print_r', '\\var_export'))
+        $this->atomFunctionIs(array('\\print_r', '\\var_export'))
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)
-             ->codeIsNot(array('true', 1))
+             ->analyzerIsNot('Structures/Truthy')
              ->back('first');
         $this->prepareQuery();
         
-        $this->atomIs('Functioncall')
-             ->functioncallIs('\\var_dump')
+        $this->atomFunctionIs('\\var_dump')
              ->back('first');
         $this->prepareQuery();
 
@@ -58,8 +60,6 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->atomInside('Functioncall')
              ->functioncallIs(array('\\var_export', '\\print_r'))
              ->outIs('ARGUMENTS')
-             ->rankIs('ARGUMENT', 1)
-             ->code(array('true', '1'))
              ->back('first');
         $this->prepareQuery();
         
