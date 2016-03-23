@@ -48,7 +48,7 @@ class Results extends Tasks {
 g.idx('analyzers')[['analyzer':'$analyzer']].out.map;
 GREMLIN;
 
-        $vertices = $this->gremlin->query($query);
+        $vertices = $this->gremlin->query($query)->results;
         if (isset($vertices[0]->notCompatibleWithPhpVersion)) {
             die($config->program." is not compatible with the running version of PHP. No result available.\n");
         }
@@ -65,7 +65,7 @@ GREMLIN;
             $return[] = $vertices[0];
         } elseif ($config->style == 'COUNTED_ALL') {
             $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.count()';
-            $vertices = $this->gremlin->query($queryTemplate);
+            $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return[] = $vertices[0];
         } elseif ($config->style == 'ALL') {
@@ -74,7 +74,7 @@ g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.f
                                             .transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
 GREMLIN;
 
-            $vertices = $this->gremlin->query($query);
+            $vertices = $this->gremlin->query($query)->results;
 
             $return = array();
             foreach($vertices as $k => $v) {
