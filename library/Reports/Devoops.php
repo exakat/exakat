@@ -2205,7 +2205,6 @@ TEXT
         // link functions/features to PHP manual
         if (preg_match_all('$[a-z_0-9]+\(\)$s', $html, $r)) {
             $html = preg_replace('$([a-z_0-9]+)\(\)$s', '<a href="http://www.php.net/\1">\1()</a>', $html);
-            print_r( $r[0] );
         }
 
         // highlight PHP code
