@@ -1,0 +1,108 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    [
+    Label : INDEX
+      $c
+    Label : VARIABLE
+      (
+      Label : CODE
+        ->
+        Label : OBJECT
+          $b
+        Label : PROPERTY
+          B
+  Label : ELEMENT
+    [
+    Label : INDEX
+      $e
+    Label : VARIABLE
+      [
+      Label : INDEX
+        $d
+      Label : VARIABLE
+        (
+        Label : CODE
+          ->
+          Label : OBJECT
+            $b
+          Label : PROPERTY
+            B
+  Label : ELEMENT
+    [
+    Label : INDEX
+      1
+    Label : VARIABLE
+      [
+      Label : INDEX
+        $c
+      Label : VARIABLE
+        (
+        Label : CODE
+          ??
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              D
+          Label : RIGHT
+            =
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                D
+            Label : RIGHT
+              ->
+              Label : METHOD
+                F
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    void
+              Label : OBJECT
+                $this
+  Label : ELEMENT
+    ??
+    Label : LEFT
+      [
+      Label : INDEX
+        1
+      Label : VARIABLE
+        [
+        Label : INDEX
+          $c
+        Label : VARIABLE
+          (
+          Label : CODE
+            ??
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                D
+            Label : RIGHT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  D
+              Label : RIGHT
+                ->
+                Label : METHOD
+                  F
+                  Label : ARGUMENTS
+                    
+                    Label : ARGUMENT
+                      void
+                Label : OBJECT
+                  $this
+    Label : RIGHT
+      null

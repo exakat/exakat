@@ -28,7 +28,7 @@ class _Array extends TokenAuto {
     static public $atom = 'Array';
     static public $allowedObject = array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend',
                                          'Functioncall', 'Methodcall', 'Staticmethodcall', 'String',
-                                         'Staticconstant', 'Identifier', 'Nsname');
+                                         'Staticconstant', 'Identifier', 'Nsname', 'Parenthesis');
     
     public function _check() {
         // $x[3] or $x[] and multidimensional
