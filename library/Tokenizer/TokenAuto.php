@@ -3124,7 +3124,7 @@ GREMLIN;
                                  'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL',
                                  'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER', 'T_CLOSE_CURLY',
                                  'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_PLUS','T_MINUS', 'T_POW', 'T_ELSEIF', 'T_INLINE_HTML',
-                                 'T_INSTANCEOF'));
+                                 'T_INSTANCEOF', 'T_COALESCE'));
             $finalTokens = "'".implode("', '", $finalTokens)."'";
 
             $queryConditions[] = <<<GREMLIN

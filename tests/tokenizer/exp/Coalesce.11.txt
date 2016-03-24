@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ??
+    Label : LEFT
+      Concatenation
+      Label : CONCAT
+        +
+        Label : LEFT
+          [
+          Label : INDEX
+            $c
+          Label : VARIABLE
+            $b
+        Label : RIGHT
+          $d
+      Label : CONCAT
+        [
+        Label : INDEX
+          $g
+        Label : VARIABLE
+          ->
+          Label : OBJECT
+            $e
+          Label : PROPERTY
+            f
+    Label : RIGHT
+      $h
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a
+    Label : RIGHT
+      ??
+      Label : LEFT
+        Concatenation
+        Label : CONCAT
+          +
+          Label : LEFT
+            [
+            Label : INDEX
+              $c
+            Label : VARIABLE
+              $b
+          Label : RIGHT
+            $d
+        Label : CONCAT
+          [
+          Label : INDEX
+            $g
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $e
+            Label : PROPERTY
+              f
+      Label : RIGHT
+        $h

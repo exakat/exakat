@@ -28,7 +28,7 @@ class Concatenation extends TokenAuto {
     static public $atom = 'Concatenation';
     
     public function _check() {
-        $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable', 'Array', 'Concatenation', 'Sign', 'Array',
+        $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable', 'Array', 'Concatenation', 'Sign',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Staticclass',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 'Power',
                           'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname', 'Boolean', 'Null', 'Shell', 'Power',
@@ -54,6 +54,7 @@ class Concatenation extends TokenAuto {
                                                                      Power::$operators,         Addition::$operators,
                                                                      Token::$alternativeEnding, Sign::$operators,
                                                                      Multiplication::$operators,_Instanceof::$operators,
+                                                                     Coalesce::$operators, 
                                                                      array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON',
                                                                            'T_CLOSE_TAG', 'T_QUESTION', 'T_INLINE_HTML',
                                                                            'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT',
