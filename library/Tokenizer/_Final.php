@@ -61,7 +61,7 @@ class _Final extends TokenAuto {
     }
 
     public function fullcode() {
-        $function = new _Function();
+        $function = new _Function($this->gremlin);
         return $function->fullcode();
     }
 }
