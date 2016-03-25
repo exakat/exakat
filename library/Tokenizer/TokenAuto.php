@@ -3118,7 +3118,7 @@ GREMLIN;
                                  'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_VOID',
                                  'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND', 'T_OR',
                                  'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
-                                 'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
+                                 'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_AS',
                                  'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL',
                                  'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER', 'T_CLOSE_CURLY',
                                  'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_PLUS','T_MINUS', 'T_POW', 'T_ELSEIF', 'T_INLINE_HTML',
