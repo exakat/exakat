@@ -1,0 +1,68 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      void
+    Label : SOURCE
+      null
+    Label : VALUE
+      $i
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      void
+    Label : SOURCE
+      true
+    Label : VALUE
+      $i
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      void
+    Label : SOURCE
+      false
+    Label : VALUE
+      $i
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      void
+    Label : SOURCE
+      constante
+    Label : VALUE
+      $i
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      void
+    Label : SOURCE
+      \
+      Label : SUBNAME
+        a
+      Label : SUBNAME
+        b
+      Label : SUBNAME
+        constante
+    Label : VALUE
+      $i
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      void
+    Label : SOURCE
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          a
+        Label : SUBNAME
+          b
+        Label : SUBNAME
+          constante
+      Label : CONSTANT
+        staticconstant
+    Label : VALUE
+      $i

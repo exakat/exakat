@@ -31,7 +31,7 @@ class _Foreach extends TokenAuto {
         $operands       = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
                                 'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 'Staticconstant',
                                 'Noscream', 'Not', 'Assignation', 'New', 'Addition', 'Clone', 'Include',
-                                'Coalesce', 'Ternary');
+                                'Coalesce', 'Ternary', 'Null', 'Boolean', 'Identifier', 'Nsname');
         $blindVariables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Functioncall' );
 
 
