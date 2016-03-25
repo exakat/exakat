@@ -1,0 +1,99 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    use
+    Label : FUNCTION
+      f1
+  Label : ELEMENT
+    use
+    Label : CONST
+      c1
+  Label : ELEMENT
+    use
+    Label : USE
+      C1
+  Label : ELEMENT
+    use
+    Label : FUNCTION
+      f2
+    Label : FUNCTION
+      f3
+  Label : ELEMENT
+    use
+    Label : CONST
+      c2
+    Label : FUNCTION
+      c3
+  Label : ELEMENT
+    use
+    Label : USE
+      C2
+    Label : USE
+      C3
+  Label : ELEMENT
+    use
+    Label : FUNCTION
+      \
+      Label : SUBNAME
+        f1
+      Label : SUBNAME
+        f4
+  Label : ELEMENT
+    use
+    Label : CONST
+      \
+      Label : SUBNAME
+        c1
+      Label : SUBNAME
+        c4
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        C1
+      Label : SUBNAME
+        C4
+  Label : ELEMENT
+    use
+    Label : FUNCTION
+      \
+      Label : SUBNAME
+        f2
+      Label : SUBNAME
+        f5
+    Label : FUNCTION
+      \
+      Label : SUBNAME
+        f3
+      Label : SUBNAME
+        f6
+  Label : ELEMENT
+    use
+    Label : CONST
+      \
+      Label : SUBNAME
+        c2
+      Label : SUBNAME
+        c5
+    Label : FUNCTION
+      \
+      Label : SUBNAME
+        c3
+      Label : SUBNAME
+        c6
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        C2
+      Label : SUBNAME
+        C5
+    Label : USE
+      \
+      Label : SUBNAME
+        C3
+      Label : SUBNAME
+        C6

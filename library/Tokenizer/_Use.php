@@ -29,13 +29,14 @@ class _Use extends TokenAuto {
 
     public function _check() {
 
-    // use \a\b {} (grouping)
-        $this->conditions = array( 0 => array('token' => static::$operators),
+    // use \a\b\{} (grouping)
+        $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => array('Identifier', 'Nsname')),
                                    2 => array('token' => 'T_NS_SEPARATOR'),
                                    3 => array('token' => 'T_OPEN_CURLY'),
-                                   4 => array('atom'  => array('Identifier', 'As', 'Nsname')),
-                                   5 => array('token' => array('T_COMMA', 'T_CLOSE_CURLY')),
+                                   4 => array('token' => array('T_STRING', 'T_AS', 'T_NS_SEPARATOR', 'T_CONST', 'T_FUNCTION')),
+//                                   4 => array('atom'  => array('Identifier', 'As', 'Nsname')),
+//                                   5 => array('token' => array('T_COMMA', 'T_CLOSE_CURLY')),
                                  );
         
         $this->actions = array('makeGroupedUse' => true,
@@ -44,7 +45,7 @@ class _Use extends TokenAuto {
         $this->checkAuto();
 
     // use \a\b; (Finished)
-        $this->conditions = array( 0 => array('token'    => static::$operators,
+        $this->conditions = array( 0 => array('token'    => self::$operators,
                                               'checkFor' => array('Identifier', 'Nsname', 'As')),
                                    1 => array('atom'     => array('Identifier', 'Nsname', 'As')),
                                    2 => array('token'    => array('T_SEMICOLON', 'T_INLINE_HTML'))
@@ -58,7 +59,7 @@ class _Use extends TokenAuto {
         $this->checkAuto();
 
     // use \a\b { 
-        $this->conditions = array( 0 => array('token'    => static::$operators,
+        $this->conditions = array( 0 => array('token'    => self::$operators,
                                               'checkFor' => array('Identifier', 'Nsname', 'As')),
                                    1 => array('atom'     => array('Identifier', 'Nsname', 'As')),
                                    2 => array('token'    => array('T_COMMA', 'T_OPEN_CURLY'))
@@ -72,7 +73,7 @@ class _Use extends TokenAuto {
         $this->checkAuto();
 
     // use \a\b {} (Not grouping, detailing imported methods/constants)
-        $this->conditions = array( 0 => array('token'     => static::$operators,
+        $this->conditions = array( 0 => array('token'     => self::$operators,
                                               'atom'      => 'yes'),
                                    1 => array('token'     => 'T_OPEN_CURLY'),
                                    2 => array('atom'      => array('Sequence', 'Void')),
@@ -89,7 +90,7 @@ class _Use extends TokenAuto {
         $this->checkAuto();
 
     // use function|const \a\b\ {}; with grouping
-        $this->conditions = array(  0 => array('token' => static::$operators),
+        $this->conditions = array(  0 => array('token' => self::$operators),
                                     1 => array('token' => array('T_FUNCTION', 'T_CONST')),
                                     2 => array('atom'  => array('Identifier', 'Nsname')),
                                     3 => array('token' => 'T_NS_SEPARATOR'),
@@ -104,7 +105,7 @@ class _Use extends TokenAuto {
         $this->checkAuto();
 
     // use const|function \a\b;
-        $this->conditions = array(  0 => array('token'        => _Use::$operators,
+        $this->conditions = array(  0 => array('token'        => self::$operators,
                                                'checkNextFor' => array('Identifier', 'Nsname', 'As')),
                                     1 => array('token'        => array('T_FUNCTION', 'T_CONST')),
                                     2 => array('atom'         => array('Identifier', 'Nsname', 'As')),
