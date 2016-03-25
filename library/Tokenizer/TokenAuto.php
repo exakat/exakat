@@ -1088,7 +1088,6 @@ while(!(a2.token == 'T_CLOSE_CURLY')) {
         a2 = a2.out('NEXT').next();
 
         toDelete.push(f);
-//        f.bothE('NEXT').each{ g.removeEdge(it); }
         
         g.addEdge(it, a2, 'FUNCTION');
     } else if (a2.token == 'T_CONST') {
@@ -1097,7 +1096,6 @@ while(!(a2.token == 'T_CLOSE_CURLY')) {
         a2 = a2.out('NEXT').next();
 
         toDelete.push(f);
-//        f.bothE('NEXT').each{ g.removeEdge(it); }
         
         g.addEdge(it, a2, 'CONST');
     } else {
