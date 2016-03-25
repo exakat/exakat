@@ -188,7 +188,7 @@ if (fullcode.out('DEFINE').any()) {
     if (fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').has('variadic', true).any()) {
         fullcode.setProperty('args_max', 100);
     } else {
-        fullcode.setProperty('args_max', fullcode.out('ARGUMENTS').out('ARGUMENT').count());
+        fullcode.setProperty('args_max', fullcode.out('ARGUMENTS').out('ARGUMENT').hasNot('token', 'T_VOID').count());
     }
     // No support for T_ELLIPSIS yet :( => 100!
     
@@ -207,6 +207,8 @@ if (fullcode.out('PRIVATE').any())   { fullcode.fullcode = 'private ' + fullcode
 
 // for tokens that are not a class structure definition
 fullcode.has('fullcode', '').each{ fullcode.setProperty('fullcode', fullcode.getProperty('code'));}
+
+fullcode.setProperty("args_count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count());
 
 GREMLIN;
     }

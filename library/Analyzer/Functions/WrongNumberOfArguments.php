@@ -31,6 +31,40 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // For Instanciation (needs constructors)
+       $this->atomIs('Functioncall')
+             ->hasIn('NEW')
+             ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
+             ->savePropertyAs('args_count', 'args_count')
+             ->classDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->outIs('NAME')
+             ->code('__construct')
+             ->inIs('NAME')
+             ->analyzerIsNot('Functions/VariableArguments')
+             ->isMore('args_min', 'args_count')
+             ->back('first');
+        $this->prepareQuery();
+        
+
+       $this->atomIs('Functioncall')
+             ->hasIn('NEW')
+             ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
+             ->savePropertyAs('args_count', 'args_count')
+             ->classDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->outIs('NAME')
+             ->code('__construct')
+             ->inIs('NAME')
+             ->analyzerIsNot('Functions/VariableArguments')
+             ->isLess('args_max', 'args_count')
+             ->back('first');
+        $this->prepareQuery();
+
         // this is for functions defined within PHP
         $data = new \Data\Methods();
         
@@ -47,12 +81,14 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
 
         foreach($argsMins as $nb => $f) {
             $this->atomFunctionIs($f)
+                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
                  ->isLess('args_count', $nb);
             $this->prepareQuery();
         }
 
         foreach($argsMaxs as $nb => $f) {
             $this->atomFunctionIs($f)
+                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
                  ->isMore('args_count', $nb);
             $this->prepareQuery();
         }
@@ -79,6 +115,8 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
              ->isLess('args_max', 'args_count')
              ->back('first');
         $this->prepareQuery();
+ 
+ 
     }
 }
 
