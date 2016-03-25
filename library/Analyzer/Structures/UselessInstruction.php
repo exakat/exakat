@@ -110,6 +110,20 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->code(array("''", '""'))
              ->back('first');
         $this->prepareQuery();
+
+        // array() on one line
+        $this->atomIs('Sequence')
+             ->outIs('ELEMENT')
+             ->atomIs('Functioncall')
+             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'));
+        $this->prepareQuery();
+
+        // $a + $b ?? $c
+        $this->atomIs('Coalesce')
+             ->outIs('LEFT')
+             ->atomIs(array('Addition', 'Multiplication', 'Bitshift', 'Power', 'Concatenation', 'Logical'))
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
