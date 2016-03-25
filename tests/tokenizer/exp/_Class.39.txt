@@ -24,12 +24,12 @@ Label : CODE
           public
       Label : ELEMENT
         public
-        Label : PUBLIC
-          public
         Label : DEFINE
           $c
         Label : DEFINE
           $d
+        Label : PUBLIC
+          public
       Label : ELEMENT
         const
         Label : CONST
@@ -40,6 +40,8 @@ Label : CODE
             3
       Label : ELEMENT
         public
+        Label : PUBLIC
+          public
         Label : DEFINE
           $e
         Label : DEFINE
@@ -48,10 +50,10 @@ Label : CODE
             $f
           Label : RIGHT
             2
-        Label : PUBLIC
-          public
       Label : ELEMENT
         public
+        Label : PUBLIC
+          public
         Label : DEFINE
           =
           Label : LEFT
@@ -60,7 +62,5 @@ Label : CODE
             3
         Label : DEFINE
           $h
-        Label : PUBLIC
-          public
     Label : NAME
       x

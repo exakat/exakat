@@ -116,6 +116,8 @@ Label : CODE
           static
       Label : ELEMENT
         public
+        Label : PUBLIC
+          public
         Label : DEFINE
           =
           Label : LEFT
@@ -128,8 +130,6 @@ Label : CODE
             $g1
           Label : RIGHT
             2
-        Label : PUBLIC
-          public
         Label : STATIC
           static
       Label : ELEMENT
@@ -152,8 +152,6 @@ Label : CODE
           static
       Label : ELEMENT
         public
-        Label : PUBLIC
-          public
         Label : DEFINE
           =
           Label : LEFT
@@ -166,6 +164,8 @@ Label : CODE
             $g3
           Label : RIGHT
             3
+        Label : PUBLIC
+          public
       Label : ELEMENT
         static
         Label : DEFINE

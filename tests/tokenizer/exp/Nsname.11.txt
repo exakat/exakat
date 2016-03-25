@@ -122,14 +122,14 @@ Label : CODE
       H
   Label : ELEMENT
     \
-    Label : SUBNAME
-      A
-    Label : SUBNAME
-      B
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
+    Label : SUBNAME
+      A
+    Label : SUBNAME
+      B
     Label : SUBNAME
       C
     Label : SUBNAME

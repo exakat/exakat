@@ -8,12 +8,12 @@ Label : CODE
       ;
       Label : ELEMENT
         protected
+        Label : PROTECTED
+          protected
         Label : DEFINE
           $a
         Label : DEFINE
           $b
-        Label : PROTECTED
-          protected
       Label : ELEMENT
         function
         Label : ARGUMENTS

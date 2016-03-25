@@ -339,9 +339,9 @@ Label : CODE
                                     Label : OBJECT
                                       $this
                                     Label : PROPERTY
-                                      $kBY
-                                    Label : PROPERTY
                                       CABY
+                                    Label : PROPERTY
+                                      $kBY
                                   Label : CONCAT
                                     $nBY
                                   Label : CONCAT

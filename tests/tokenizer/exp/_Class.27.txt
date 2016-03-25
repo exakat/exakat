@@ -40,6 +40,8 @@ Label : CODE
           var
       Label : ELEMENT
         var
+        Label : VAR
+          var
         Label : DEFINE
           =
           Label : LEFT
@@ -52,7 +54,5 @@ Label : CODE
             $f
           Label : RIGHT
             6
-        Label : VAR
-          var
     Label : NAME
       x

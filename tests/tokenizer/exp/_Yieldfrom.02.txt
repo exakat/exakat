@@ -72,6 +72,8 @@ Label : CODE
                           "aaa"
                     Label : ELEMENT
                       public
+                      Label : PUBLIC
+                        public
                       Label : DEFINE
                         =
                         Label : LEFT
@@ -80,8 +82,6 @@ Label : CODE
                           1
                       Label : DEFINE
                         $b
-                      Label : PUBLIC
-                        public
                     Label : ELEMENT
                       protected
                       Label : DEFINE

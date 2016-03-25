@@ -34,6 +34,8 @@ Label : CODE
                       $b
                 Label : ELEMENT
                   static
+                  Label : STATIC
+                    static
                   Label : DEFINE
                     $c
                   Label : DEFINE
@@ -42,8 +44,6 @@ Label : CODE
                       $d
                     Label : RIGHT
                       0
-                  Label : STATIC
-                    static
                 Label : ELEMENT
                   unset
                   Label : ARGUMENTS

@@ -64,12 +64,12 @@ Label : CODE
       E
   Label : ELEMENT
     \
+    Label : SUBNAME
+      A
     Label : ARGUMENTS
       
       Label : ARGUMENT
         void
-    Label : SUBNAME
-      A
     Label : SUBNAME
       B
     Label : SUBNAME
@@ -124,8 +124,6 @@ Label : CODE
       H
   Label : ELEMENT
     \
-    Label : SUBNAME
-      C
     Label : ARGUMENTS
       
       Label : ARGUMENT
@@ -134,6 +132,8 @@ Label : CODE
       A
     Label : SUBNAME
       B
+    Label : SUBNAME
+      C
     Label : SUBNAME
       D
     Label : SUBNAME
