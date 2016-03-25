@@ -1,0 +1,62 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        use
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            as
+            Label : AS
+              F
+            Label : NAME
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                E
+            Label : VISIBILITY
+              private
+          Label : ELEMENT
+            as
+            Label : AS
+              I2
+            Label : NAME
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                H
+            Label : VISIBILITY
+              protected
+          Label : ELEMENT
+            as
+            Label : AS
+              I3
+            Label : NAME
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                H
+            Label : VISIBILITY
+              public
+          Label : ELEMENT
+            as
+            Label : AS
+              I4
+            Label : NAME
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                H
+        Label : USE
+          C
+    Label : NAME
+      B

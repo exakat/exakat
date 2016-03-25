@@ -28,10 +28,11 @@ class _As extends TokenAuto {
     static public $atom = 'As';
 
     public function _check() {
+        $atoms = array('Staticconstant', 'Identifier', 'Nsname');
         // use A as B
         // use C::Const as string
         $this->conditions = array( -2 => array('notToken' => 'T_DOUBLE_COLON'),
-                                   -1 => array('atom'     => array('Staticconstant', 'Identifier', 'Nsname')),
+                                   -1 => array('atom'     => $atoms),
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
                                     1 => array('token'    => 'T_STRING')
@@ -46,7 +47,7 @@ class _As extends TokenAuto {
 
         // use A as public;
         $this->conditions = array( -2 => array('notToken' => 'T_DOUBLE_COLON'),
-                                   -1 => array('atom'     => 'Identifier'),
+                                   -1 => array('atom'     => $atoms),
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
                                     1 => array('token'    => array('T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE')),
@@ -64,7 +65,7 @@ class _As extends TokenAuto {
 
         // use A as B private
         $this->conditions = array( -2 => array('notToken' => 'T_DOUBLE_COLON'),
-                                   -1 => array('atom'     => 'Identifier'),
+                                   -1 => array('atom'     => $atoms),
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
                                     1 => array('token'    => array('T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE')),
