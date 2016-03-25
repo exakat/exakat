@@ -27,10 +27,15 @@ use Analyzer;
 
 class NoHardcodedIp extends Analyzer\Analyzer {
     public function analyze() {
+        // a string that fits the description of an IP
         $this->atomIs('String')
              ->noDelimiterIsNot('127.0.0.1')
-             ->regex('noDelimiter', '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:\\\\d+)?\\$')
-             ->back('first');
+             ->regex('noDelimiter', '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:\\\\d+)?\\$');
+        $this->prepareQuery();
+        
+        // a string that looks like a domain name. 
+        $this->atomIs('String')
+             ->regex('noDelimiter', '^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\\\.)+[A-Za-z]{2,6}\\$');
         $this->prepareQuery();
     }
 }
