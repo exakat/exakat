@@ -1548,6 +1548,7 @@ class Load extends Tasks {
         static $commaCount        = array();
         static $isNotFunctioncall = false;
         static $isArray           = false;
+        static $isEcho            = false;
         
         if ($display === true) {
             return '';
@@ -1616,6 +1617,13 @@ class Load extends Tasks {
             ++$parenthesisCount;
             $parenthesisId       = $parenthesisCount;
             ++$echoCount;
+            $isEcho              = true;
+            return '';
+        }
+
+        if (($isEcho === true) && $tokenValue === 'T_SEMICOLON' ) {
+            $parenthesisId = array_pop($parenthesisStates);
+            $isEcho = false;
             return '';
         }
 
