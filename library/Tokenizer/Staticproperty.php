@@ -27,7 +27,7 @@ class Staticproperty extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
     static public $atom = 'Staticproperty';
     static public $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname',
-                                    'Staticproperty', 'Staticconstant', 'Staticmethodcall' );
+                                    'Staticproperty', 'Staticconstant', 'Staticmethodcall', 'Functioncall' );
 
     public function _check() {
         $config = \Config::factory();
