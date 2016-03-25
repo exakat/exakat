@@ -38,8 +38,7 @@ class ArgumentsNoComma extends Arguments {
                                    1 => array('atom'      => 'yes',
                                               'notAtom'   => 'Arguments'),
                                    2 => array('token'     => 'T_CLOSE_PARENTHESIS',
-                                              'atom'      => 'none'),
-                                   3 => array('filterOut' => 'T_DOUBLE_COLON'),
+                                              'atom'      => 'none')
         );
 
         $this->actions = array('insertVertex' => true,
@@ -58,8 +57,7 @@ class ArgumentsNoComma extends Arguments {
                                    1 => array('atom'      => 'yes',
                                               'notAtom'   => 'Arguments'),
                                    2 => array('token'     => 'T_CLOSE_PARENTHESIS',
-                                              'atom'      => 'none'),
-                                   3 => array('filterOut' => 'T_DOUBLE_COLON'),
+                                              'atom'      => 'none')
         );
 
         $this->actions = array('insertVertex' => true,
@@ -74,8 +72,7 @@ class ArgumentsNoComma extends Arguments {
                                    1 => array('atom'      => 'yes',
                                               'notAtom'   => 'Arguments'),
                                    2 => array('token'     => 'T_CLOSE_PARENTHESIS',
-                                              'atom'      => 'none'),
-                                   3 => array('filterOut' => 'T_DOUBLE_COLON'),
+                                              'atom'      => 'none')
         );
 
         $this->actions = array('insertVertex' => true,
