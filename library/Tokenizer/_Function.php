@@ -30,7 +30,7 @@ class _Function extends TokenAuto {
     public function _check() {
 
         // function name ( arguments )
-        $this->conditions = array(0 => array('token' => _Function::$operators,
+        $this->conditions = array(0 => array('token' => self::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_AND')
         );
@@ -41,7 +41,7 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // function name ( arguments )
-        $this->conditions = array(0 => array('token'    => _Function::$operators,
+        $this->conditions = array(0 => array('token'    => self::$operators,
                                              'atom'     => 'none'),
                                   1 => array('notToken' => 'T_OPEN_CURLY'),
 // Function name may be anything, indeed. 
@@ -62,7 +62,7 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // function : returnType
-        $this->conditions = array(0 => array('token' => _Function::$operators,
+        $this->conditions = array(0 => array('token' => self::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_COLON'),
                                         // check for association?
@@ -76,7 +76,7 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // Closures (no names)
-        $this->conditions = array(0 => array('token'    =>  _Function::$operators,
+        $this->conditions = array(0 => array('token'    =>  self::$operators,
                                              'atom'     => 'none'),
                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
                                              'property' => array('association' => 'Function')
@@ -92,7 +92,7 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // function use ($y)
-        $this->conditions = array(0  => array('token' =>  _Function::$operators,
+        $this->conditions = array(0  => array('token' =>  self::$operators,
                                               'atom'  => 'none'),
                                   1  => array('token' => 'T_USE'),
                                   2  => array('token' => 'T_OPEN_PARENTHESIS'),
@@ -109,7 +109,7 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // function x(args) { normal code }
-        $this->conditions = array(0 => array('token' => _Function::$operators,
+        $this->conditions = array(0 => array('token' => self::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_CURLY',
                                              'atom'  => 'none',
@@ -130,7 +130,7 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // function ; (No Body, for interfaces or abstract)
-        $this->conditions = array(0 => array('token' => _Function::$operators,
+        $this->conditions = array(0 => array('token' => self::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_SEMICOLON'),
         );
