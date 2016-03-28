@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 21 Mar 2016 10:19:58 +0000
-.. comment: Generation hash : 1b7fb8b0de05aa4c84bba694e13f36a8f9ea0534
+.. comment: Generation date : Mon, 28 Mar 2016 15:47:02 +0000
+.. comment: Generation hash : 451b7799c51daece988ea23fc0dfc37cec8dec36
 
 
 .. _analyze:
@@ -122,7 +122,6 @@ Total : 234 analysis
 * :ref:`Empty Namespace <empty-namespace>`
 * :ref:`Empty Traits <empty-traits>`
 * :ref:`Empty Try Catch <empty-try-catch>`
-* :ref:`Eval Without Try <eval-without-try>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Exit() Usage <exit()-usage>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
@@ -285,6 +284,7 @@ Total : 234 analysis
 * :ref:`\_\_toString() Throws Exception <\_\_tostring()-throws-exception>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`error\_reporting() With Integers <error\_reporting()-with-integers>`
+* :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/apc`
 * :ref:`ext/fann`
 * :ref:`ext/fdf`
@@ -304,7 +304,7 @@ Total : 234 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 49 analysis
+Total : 48 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -316,11 +316,9 @@ Total : 49 analysis
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
 * :ref:`Const With Array <const-with-array>`
-* :ref:`Constant Scalar Expression <constant-scalar-expression>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
-* :ref:`Eval Without Try <eval-without-try>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Function Subscripting <function-subscripting>`
@@ -352,6 +350,7 @@ Total : 49 analysis
 * :ref:`Variable Global <variable-global>`
 * :ref:`\*\* For Exponent <**-for-exponent>`
 * :ref:`\_\_debugInfo()`
+* :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/dba`
 * :ref:`ext/fdf`
 * :ref:`ext/ming`
@@ -361,7 +360,7 @@ Total : 49 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 44 analysis
+Total : 43 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -372,11 +371,9 @@ Total : 44 analysis
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
-* :ref:`Constant Scalar Expression <constant-scalar-expression>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
-* :ref:`Eval Without Try <eval-without-try>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
@@ -406,6 +403,7 @@ Total : 44 analysis
 * :ref:`\*\* For Exponent <**-for-exponent>`
 * :ref:`\_\_debugInfo()`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
+* :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
 .. _compatibilityphp55:
@@ -413,7 +411,7 @@ Total : 44 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 42 analysis
+Total : 41 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -421,11 +419,9 @@ Total : 42 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
-* :ref:`Constant Scalar Expression <constant-scalar-expression>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
-* :ref:`Eval Without Try <eval-without-try>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
@@ -454,6 +450,7 @@ Total : 42 analysis
 * :ref:`\*\* For Exponent <**-for-exponent>`
 * :ref:`\_\_debugInfo()`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
+* :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/apc`
 * :ref:`ext/mysql`
 * :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
@@ -471,7 +468,6 @@ Total : 34 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
-* :ref:`Eval Without Try <eval-without-try>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
@@ -496,6 +492,7 @@ Total : 34 analysis
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
+* :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/apc`
 * :ref:`ext/mysql`
 * :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
@@ -505,7 +502,7 @@ Total : 34 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 30 analysis
+Total : 31 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -524,6 +521,7 @@ Total : 30 analysis
 * :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
+* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
@@ -613,7 +611,7 @@ Total : 18 analysis
 Performances
 ++++++++++++
 
-Total : 13 analysis
+Total : 14 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -626,6 +624,7 @@ Total : 13 analysis
 * :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`
+* :ref:`Simple Regex <simple-regex>`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 
@@ -634,12 +633,15 @@ Total : 13 analysis
 Security
 ++++++++
 
-Total : 11 analysis
+Total : 15 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Followed injections <followed-injections>`
+* :ref:`Hardcoded Passwords <hardcoded-passwords>`
+* :ref:`No Hardcoded Ip <no-hardcoded-ip>`
+* :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
@@ -647,4 +649,5 @@ Total : 11 analysis
 * :ref:`Use random\_int() <use-random\_int()>`
 * :ref:`parse\_str() Warning <parse\_str()-warning>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`var\_dump()... Usage <var\_dump()...-usage>`
 

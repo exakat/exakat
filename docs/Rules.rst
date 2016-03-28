@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 21 Mar 2016 10:19:58 +0000
-.. comment: Generation hash : 1b7fb8b0de05aa4c84bba694e13f36a8f9ea0534
+.. comment: Generation date : Mon, 28 Mar 2016 15:47:02 +0000
+.. comment: Generation hash : 451b7799c51daece988ea23fc0dfc37cec8dec36
 
 
 .. _$http\_raw\_post\_data:
@@ -139,7 +139,20 @@ Usage of the ... keyword, either in function definitions, either in functioncall
 
 PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It will solve the classname that is used in the left part of the operator.
 
-ClassName::class; // return Namespace\ClassName
+.. code-block:: php
+
+   <?php
+   class foo {
+       public function bar( ) {
+           echo ClassName::class; 
+       }
+   }
+   
+   $f = new Foo( );
+   $f->bar( );
+   // return Namespace\ClassName
+   
+   ?>
 
 +--------------+------------------------------------------------------+
 | Command Line | Php/StaticclassUsage                                 |
@@ -926,24 +939,6 @@ As such, they should be PHP constants (build with define or const), or included 
 
 
 
-.. _constant-scalar-expression:
-
-Constant Scalar Expression
-##########################
-
-
-Since PHP 5.6, it is possible to use expression with Constants and simple operators in places where one define default values.
-
-+--------------+------------------------------+
-| Command Line | Php/ConstantScalarExpression |
-+--------------+------------------------------+
-| clearPHP     |                              |
-+--------------+------------------------------+
-| Analyzers    | none                         |
-+--------------+------------------------------+
-
-
-
 .. _constant-scalar-expressions:
 
 Constant Scalar Expressions
@@ -956,13 +951,13 @@ Those expressions (using simple operators) may only manipulate other constants, 
 
 This is not compatible with previous versions.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/ConstantScalarExpression                                                                                                                              |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Structures/ConstantScalarExpression                                             |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -1032,13 +1027,13 @@ Could Be Static
 ###############
 
 
-This global is only used in one function or method. It may be called 'static', instead of global. This will allow you to keep the value between call to the function, but will not be accessible outside this function.
+This global is only used in one function or method. It may be called 'static', instead of global. This allows you to keep the value between call to the function, but will not be accessible outside this function.
 
 .. code-block:: php
 
    <?php
-   function x() {
-       static $variableIsReservedForX; // only accessible within x(), even between calls.
+   function foo( ) {
+       static $variableIsReservedForX; // only accessible within foo( ), even between calls.
        global $variableIsGlobal;       //      accessible everywhere in the application
    }
    ?>
@@ -1300,15 +1295,24 @@ Echo With Concat
 ################
 
 
-Optimize your echo's by not concatenating at echo time, but serving all argument separated. This will save PHP a memory copy.
+Optimize your echo's by not concatenating at echo() time, but serving all argument separated. This will save PHP a memory copy.
 If values (literals and variables) are small enough, this won't have impact. Otherwise, this is less work and less memory waste.
 
-echo $a, ' b ', $c;
+.. code-block:: php
+
+   <?php
+     echo $a, ' b ', $c;
+   ?>
+
 
 instead of
 
-echo  $a . ' b ' . $c;
-echo $a b $c;
+.. code-block:: php
+
+   <?php
+     echo  $a . ' b ' . $c;
+     echo $a b $c;
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/EchoWithConcat                                                                                                             |
@@ -1532,24 +1536,6 @@ The function 'empty()' doesn't accept expressions until PHP 5.5. Until then, it 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------------------------------------------------------------+
-
-
-
-.. _eval-without-try:
-
-Eval Without Try
-################
-
-
-Eval() emits a ParseError Exception with PHP 7 and later. Catching this exception is the recommended way to handle errors while using the eval function.
-
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/EvalWithoutTry                                                                                                  |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                            |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -1981,7 +1967,7 @@ Hardcoding passwords is a bad idea. Not only it make the code difficult to chang
 +--------------+---------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-hardcoded-credential <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-credential.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                                |
+| Analyzers    | :ref:`Analyze`, :ref:`Security`                                                                               |
 +--------------+---------------------------------------------------------------------------------------------------------------+
 
 
@@ -2785,13 +2771,13 @@ No Hardcoded Ip
 
 Do not leave hard coded IP in your code.
 
-+--------------+--------------------------+
-| Command Line | Structures/NoHardcodedIp |
-+--------------+--------------------------+
-| clearPHP     |                          |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Analyze`           |
-+--------------+--------------------------+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedIp        |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -2821,13 +2807,13 @@ No Hardcoded Port
 
 When connecting to a remove serve, port is an important information. It is recommended to make this configurable (with constant or configuration), to as to be able to change this value without changing the code.
 
-+--------------+----------------------------+
-| Command Line | Structures/NoHardcodedPort |
-+--------------+----------------------------+
-| clearPHP     |                            |
-+--------------+----------------------------+
-| Analyzers    | :ref:`Analyze`             |
-+--------------+----------------------------+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedPort      |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -3030,11 +3016,11 @@ method statically :
 
    <?php
        class x {
-           static public function sm() { echo \_\_METHOD\_\_.\n; }
-           public sm() { echo \_\_METHOD\_\_.\n; }
+           static public function sm( ) { echo \_\_METHOD\_\_.\n; }
+           public sm( ) { echo \_\_METHOD\_\_.\n; }
        } 
        
-       x::sm(); // echo x::sm 
+       x::sm( ); // echo x::sm 
    ?>
 
 
@@ -3450,7 +3436,7 @@ PHP5 Indirect Variable Expression
 
 The following structures are evaluated differently in PHP 5 and 7. It is recommended to review them or switch to a less ambiguous syntax.
 
-See also <a href="http://php.net/manual/en/migration70.incompatible.php">http://php.net/manual/en/migration70.incompatible.php</a>
+See also http://php.net/manual/en/migration70.incompatible.php.
 <table>
 <tr><td>Expression</td><td>PHP 5 interpretation</td><td>PHP 7 interpretation</td></tr>
 <tr><td>$$foo['bar']['baz']</td><td>${$foo['bar']['baz']}</td><td>($$foo)['bar']['baz']</td></tr>
@@ -3476,6 +3462,19 @@ PHP7 Dirname
 
 
 With PHP 7, dirname has a second argument that represents the number of parent folder to follow. This prevent us from using nested dirname() calls to reach an grand-parent direct.
+
+.. code-block:: php
+
+   <?php
+   $path = '/a/b/c/d/e/f';
+   
+   // PHP 7 syntax
+   $threeFoldersUp = dirname($path, 3);
+   
+   // PHP 5 syntax
+   $threeFoldersUp = dirname(dirname(dirname($path)));
+   
+   ?>
 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/PHP7Dirname                                                                                     |
@@ -3533,13 +3532,13 @@ Php 7 Indirect Expression
 
 Those are variable indirect expressions that are interpreted differently between PHP 5 and PHP 7. You should check them so they don't behave strangely.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command Line | Variables/Php7IndirectExpression                                                                           |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                            |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/Php7IndirectExpression                                                                                                      |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -3711,7 +3710,7 @@ Within a class, there is both a property and some variables bearing the same nam
    class Object {
        private $x;
        
-       function SetData() {
+       function SetData( ) {
            $this->x = $x + 2;
        }
    }
@@ -3826,7 +3825,7 @@ Classes allows properties to be set with a default value. When those properties 
    class foo {
        public $redefined = 1;
    
-       public function \_\_construct() {
+       public function \_\_construct( ) {
            $this->redefined = 2;
        }
    }
@@ -3895,14 +3894,19 @@ Repeated print()
 
 It is recommended to use echo with multiple arguments, or a concatenation with print, instead of multiple calls to print echo, when outputting several blob of text.
 
+Write : 
 .. code-block:: php
 
    <?php
-   // Do
      echo 'a', $b, 'c';
      print 'a' . $b . 'c';
-     
-   // Don't 
+   ?>
+
+
+Don't write :  
+.. code-block:: php
+
+   <?php
      print 'a';
      print $b;
      print 'c';
@@ -3982,7 +3986,14 @@ Sequences In For
 
 For() instructions allows several instructions in each of its parameters. Then, the instruction separator is comma ',', not semi-colon, which is used for separating the 3 arguments.
 
-for ($a = 0, $b = 0; $a < 10, $b < 20; $a++, $b += 3) {}
+.. code-block:: php
+
+   <?php
+      for ($a = 0, $b = 0; $a < 10, $b < 20; $a++, $b += 3) {
+       // For loop
+      }
+   ?>
+
 
 This loop will simultaneously increment $a and $b. It will stop only when the last of the central sequence reach a value of false : here, when $b reach 20 and $a will be 6. 
 
@@ -4244,6 +4255,24 @@ global keyword should only be used with simple variables (global $var), and not 
 
 
 
+.. _simple-regex:
+
+Simple Regex
+############
+
+
+PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using strpos() or strposi() instead.
+
++--------------+-----------------------+
+| Command Line | Structures/SimplePreg |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Performances`   |
++--------------+-----------------------+
+
+
+
 .. _sleep-is-a-security-risk:
 
 Sleep is a security risk
@@ -4306,27 +4335,23 @@ Static Methods Called From Object
 #################################
 
 
-Static methods may be called without instantiating an object.
-As such, they never interact with the special variable '$this', as they do not
-depend on object existence. 
+Static methods may be called without instantiating an object. As such, they never interact with the special variable '$this', as they do not depend on object existence. 
 
-Besides this, static methods are normal methods that may be called directly from
-object context, to perform some utility task. 
+Besides this, static methods are normal methods that may be called directly from object context, to perform some utility task. 
 
-To maintain code readability, it is recommended to call static method in a static
-way, rather than within object context.
+To maintain code readability, it is recommended to call static method in a static way, rather than within object context.
 
 .. code-block:: php
 
    <?php
        class x {
-           static function y() {}
+           static function y( ) {}
        }
        
-       $z = new x();
+       $z = new x( );
        
-       $z->y(); // Readability : no one knows it is a static call
-       x::y();  // Readability : here we know
+       $z->y( ); // Readability : no one knows it is a static call
+       x::y( );  // Readability : here we know
    ?>
 
 +--------------+---------------------------------------+
@@ -4533,13 +4558,13 @@ Timestamp Difference
 ####################
 
 
-Time() and microtime() shouldn't be used to calculate duration. 
+time() and microtime() shouldn't be used to calculate duration. 
 
-Time() and microtime are subject to variation, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
+time() and microtime are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
 
-When the difference may be rounded to a larger time unit (rounding the differnce to days, or several hours), the variations may be ignored safely.
+When the difference may be rounded to a larger time unit (rounding the difference to days, or several hours), the variation may be ignored safely.
 
-If the difference may be very small, it requires a better way to mesure time difference, such as ticks, ext/hrtime, or including a check on the actual time zone (ini\_get(date.timezone)).
+If the difference may be very small, it requires a better way to mesure time difference, such as ticks, ext/hrtime, or including a check on the actual time zone (ini\_get() with 'date.timezone').
 
 +--------------+--------------------------------+
 | Command Line | Structures/TimestampDifference |
@@ -5939,6 +5964,24 @@ Using named constants with error\_reporting is strongly encouraged to ensure com
 
 
 
+.. _eval()-without-try:
+
+eval() Without Try
+##################
+
+
+eval() emits a ParseError cxception with PHP 7 and later. Catching this exception is the recommended way to handle errors when using the eval() function.
+
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/EvalWithoutTry                                                                                                  |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                            |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _ext/apc:
 
 ext/apc
@@ -6143,9 +6186,9 @@ include\_once() Usage
 #####################
 
 
-All the \_once inclusion functions should be avoided for performances reasons.
+include\_once() and require\_once() functions should be avoided for performances reasons.
 
-Try using auto\_load() for loading classes, or using include() and make it possible to include several times the same file without errors.
+Try using autoload for loading classes, or use include() or require() and make it possible to include several times the same file without errors.
 
 +--------------+----------------------+
 | Command Line | Structures/OnceUsage |
@@ -6210,20 +6253,20 @@ parse\_str() Warning
 ####################
 
 
-The parse\_str function will parse a query string and assign the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the one existing.
+The parse\_str() function parses a query string and assigns the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the existing one.
 
 .. code-block:: php
 
    <?php
-     function x() {
+     function foo( ) {
        global $a;
        
        echo $a;
      }
    
      parse\_str('a=1'); // No second parameter
-     x();
-     // prints 1
+     foo( );
+     // displays 1
    ?>
 
 
@@ -6336,7 +6379,7 @@ They may be tolerated during development time, but must be removed so as not to 
 +--------------+-------------------------------------------------------------------------------------------+
 | clearPHP     | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                            |
+| Analyzers    | :ref:`Analyze`, :ref:`Security`                                                           |
 +--------------+-------------------------------------------------------------------------------------------+
 
 
