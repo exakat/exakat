@@ -19,7 +19,7 @@ $components = array_merge((array) @$composer->suggest,
                           (array) @$composer->require);
 
 unset($components['php']);
-foreach($components as $k => $v) {
+foreach($components as $k => &$v) {
     if (substr($k, 0, 4) == 'ext-') {
         unset($components[$k]);
         continue;
@@ -31,15 +31,16 @@ foreach($components as $k => $v) {
     }
     
     if (strpos($v, ' ') !== false) {
-        $components[$k] = 'latest';
+        $v = 'latest';
         continue;
     }
 
     if ($v === '*') {
-        $components[$k] = 'latest';
+        $v = 'latest';
         continue;
     }
 }
+unset($v);
 
 print "About to check for ".count($components)." components\n";
 foreach($components as $fullName => $version) {

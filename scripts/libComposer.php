@@ -46,7 +46,7 @@ SQL
     }
     
     print "Reading $vendor/$component versions\n";
-    $res = shell_exec('composer show '.$vendor.'/'.$component);
+    $res = shell_exec('composer info --all '.$vendor.'/'.$component);
 
     // remove colors
     $res = preg_replace('/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/s', '', $res);
@@ -69,7 +69,7 @@ SQL
         $version = $v;
     }
 
-    $res = shell_exec('composer show '.$vendor.'/'.$component.' "'.$version.'" 2>&1');
+    $res = shell_exec('composer info --all '.$vendor.'/'.$component.' "'.$version.'" 2>&1');
     if (!preg_match_all("#versions : (.*?)\n#s", $res, $r)) {
         print 'composer show '.$vendor.'/'.$component.' "'.$version.'" 2>&1'."\n";
         print_r($res);
