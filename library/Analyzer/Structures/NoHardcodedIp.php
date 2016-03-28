@@ -37,6 +37,18 @@ class NoHardcodedIp extends Analyzer\Analyzer {
         $this->atomIs('String')
              ->regex('noDelimiter', '^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\\\.)+[A-Za-z]{2,6}\\$');
         $this->prepareQuery();
+        
+        $hosts = $this->loadJson('php_remote_access.json');
+        foreach($hosts as $position => $functions) {
+            $this->atomFunctionIs($functions)
+                 ->outIs('ARGUMENTS')
+                 ->outIs('ARGUMENT')
+                 ->is('rank', (int) $position)
+                 ->atomIs(array('Identifier', 'Nsname'))
+                 ->hasConstantDefinition()
+                 ->back('first');
+            $this->prepareQuery();
+        }
     }
 }
 
