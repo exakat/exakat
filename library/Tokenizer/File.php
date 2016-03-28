@@ -28,8 +28,7 @@ class File extends TokenAuto {
     static public $atom = 'File';
 
     public function _check() {
-        // dummy class to File. Shouldn't be used.
-        die(__METHOD__);
+        // dummy class to File. Shouldn't be used directly. 
     }
 
     public function fullcode() {

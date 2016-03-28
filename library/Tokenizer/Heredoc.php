@@ -38,7 +38,7 @@ class Heredoc extends TokenAuto {
                                'atom'         => 'Heredoc');
         $this->checkAuto();
 
-        $this->conditions = array(0 => array('token'          => static::$operators,
+        $this->conditions = array(0 => array('token'          => self::$operators,
                                              'atom'           => 'none'),
                                   1 => array('atom'           => _String::$allowedClasses,
                                              'checkForString' => _String::$allowedClasses)

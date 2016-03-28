@@ -216,11 +216,11 @@ class Config {
     
     static public function factory($argv = array()) {
         if (empty($argv)) {
-            if (empty(static::$singleton)) {
+            if (empty(self::$singleton)) {
                 self::$singleton = new self(array());
                 self::$stack[] = self::$singleton;
             }
-            return static::$singleton;
+            return self::$singleton;
         } else {
             if (is_object($argv) && ($argv instanceof \Config)) {
                 self::$singleton = $argv;
@@ -322,7 +322,7 @@ class Config {
             return array();
         }
         
-        foreach(static::$BOOLEAN_OPTIONS as $key => $config) {
+        foreach(self::$BOOLEAN_OPTIONS as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {
                 $this->commandline[$config] = true;
@@ -379,7 +379,7 @@ class Config {
 
         if (count($args) > 0) {
             $arg = array_shift($args);
-            if (null !== @static::$COMMANDS[$arg]) {
+            if (null !== @self::$COMMANDS[$arg]) {
                 $this->commandline['command'] = $arg;
             } else {
                 array_unshift($args, $arg);

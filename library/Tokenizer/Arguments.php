@@ -27,26 +27,26 @@ class Arguments extends TokenAuto {
     static public $operators = array('T_COMMA');
     static public $atom = 'Arguments';
 
+    static public $arguments = array('String', 'Integer', 'Boolean', 'Null', 'Addition',
+                                     'Multiplication', 'Property', 'Methodcall', 'Coalesce', 
+                                     'Staticmethodcall', 'Staticconstant', 'Staticproperty',
+                                     'New', 'Functioncall', 'Nsname', 'Identifier', 'Void',
+                                     'Variable', 'Array', 'Assignation', 'Typehint', 'Keyvalue',
+                                     'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign',
+                                     'Ternary', 'Function', 'Noscream', 'As', 'Magicconstant',
+                                     'Logical', 'Preplusplus', 'Postplusplus', 'Not', 'Comparison',
+                                     'Bitshift', 'Heredoc', 'Power', 'Shell', 'Arrayappend', 'Clone',
+                                     'Include', 'Instanceof', 'Yield', 'Staticclass', 'Spaceship');
+
     public function _check() {
-        $arguments = array('String', 'Integer', 'Boolean', 'Null', 'Addition',
-                           'Multiplication', 'Property', 'Methodcall',
-                           'Staticmethodcall', 'Staticconstant', 'Staticproperty',
-                           'New', 'Functioncall', 'Nsname', 'Identifier', 'Void',
-                           'Variable', 'Array', 'Assignation', 'Typehint', 'Keyvalue',
-                           'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign',
-                           'Ternary', 'Function', 'Noscream', 'As', 'Magicconstant',
-                           'Logical', 'Preplusplus', 'Postplusplus', 'Not', 'Comparison',
-                           'Bitshift', 'Heredoc', 'Power', 'Shell', 'Arrayappend', 'Clone',
-                           'Include', 'Instanceof', 'Yield', 'Staticclass', 'Spaceship',
-                           'Coalesce');
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO',
-                                                                 'T_SEMICOLON', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
-                                                                 'T_FUNCTION', 'T_VARIABLE')),
+        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_FUNCTION', 'T_VARIABLE',
+                                                                 'T_SEMICOLON', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_ECHO')),
                                   -1 => array('atom'    => 'yes'),
-                                   0 => array('token'   => Arguments::$operators,
+                                   0 => array('token'   => self::$operators,
                                               'atom'    => 'none',
-                                              'checkForArguments' => $arguments),
+                                              'checkForArguments' => self::$arguments
+                                              ),
                                    1 => array('atom'    => 'yes'),
                                    2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET'),
                                                                        Logical::$operators, Comparison::$operators,

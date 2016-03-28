@@ -32,7 +32,7 @@ class _Case extends TokenAuto {
 
         // @todo move to load
         // Case is empty (case 'a': )
-        $this->conditions = array(0 => array('token' => static::$operators,
+        $this->conditions = array(0 => array('token' => self::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
@@ -45,7 +45,7 @@ class _Case extends TokenAuto {
 
         // Case is empty (case 'a':; )
         // @todo move to load
-        $this->conditions = array(0 => array('token' => static::$operators,
+        $this->conditions = array(0 => array('token' => self::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
@@ -58,7 +58,7 @@ class _Case extends TokenAuto {
         $this->checkAuto();
 
         // Case has only one instruction empty (case 'a': ;)
-        $this->conditions = array( 0 => array('token'   => static::$operators,
+        $this->conditions = array( 0 => array('token'   => self::$operators,
                                               'atom'    => 'none'),
                                    1 => array('atom'    => 'yes'),
                                    2 => array('token'   => array('T_COLON', 'T_SEMICOLON')),
@@ -72,7 +72,7 @@ class _Case extends TokenAuto {
         $this->checkAuto();
 
     // create block for Case  case 'a' : $x++; (or a sequence).
-        $this->conditions = array(  0 => array('token'   => static::$operators,
+        $this->conditions = array(  0 => array('token'   => self::$operators,
                                                'atom'    => 'none'),
                                     1 => array('atom'    => 'yes'),
                                     2 => array('token'   => array('T_COLON', 'T_SEMICOLON'),
@@ -89,7 +89,7 @@ class _Case extends TokenAuto {
         $this->checkAuto();
 
         // Case is followed by a block
-        $this->conditions = array(0 => array('token' => static::$operators,
+        $this->conditions = array(0 => array('token' => self::$operators,
                                               'atom' => 'none'),
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),

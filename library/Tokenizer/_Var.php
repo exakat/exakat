@@ -32,7 +32,7 @@ class _Var extends TokenAuto {
     // class x { var $x = 2 }
     // class x { var $x, $y }
         $allowedAtoms = array('Assignation', 'Variable');
-        $this->conditions = array( 0 => array('token'    => static::$operators,
+        $this->conditions = array( 0 => array('token'    => self::$operators,
                                               'checkFor' => $allowedAtoms),
                                    1 => array('atom'     => $allowedAtoms),
                                    2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),

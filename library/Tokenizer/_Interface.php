@@ -29,7 +29,7 @@ class _Interface extends TokenAuto {
 
     public function _check() {
         // interface x {} Get the name
-        $this->conditions = array( 0 => array('token' => static::$operators),
+        $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => array('Identifier', 'Null', 'Boolean'))
                                  );
         
@@ -40,7 +40,7 @@ class _Interface extends TokenAuto {
         $this->checkAuto();
 
     // interface x implements a {} get the implements
-        $this->conditions = array( 0 => array('token'     => static::$operators),
+        $this->conditions = array( 0 => array('token'     => self::$operators),
                                    1 => array('token'     => 'T_EXTENDS',
                                               'checkForImplements' => array('Identifier', 'Nsname')),
                                    2 => array('atom'      => array('Identifier', 'Nsname')),
@@ -54,7 +54,7 @@ class _Interface extends TokenAuto {
         $this->checkAuto();
 
     // class x { // some real code} get the block
-        $this->conditions = array( 0 => array('token'    => static::$operators),
+        $this->conditions = array( 0 => array('token'    => self::$operators),
                                    1 => array('token'    => 'T_OPEN_CURLY',
                                               'property' => array('association' => 'Interface')),
                                    2 => array('atom'     => array('Sequence', 'Void')),

@@ -31,7 +31,7 @@ class _Trait extends TokenAuto {
 
     public function _check() {
         // trait t { normal code }
-        $this->conditions = array(0 => array('token'    => static::$operators,
+        $this->conditions = array(0 => array('token'    => self::$operators,
                                              'atom'     => 'none'),
                                   1 => array('atom'     => array('Identifier', 'Boolean', 'Null')),
                                   2 => array('token'    => 'T_OPEN_CURLY',

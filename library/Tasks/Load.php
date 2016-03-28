@@ -1549,6 +1549,7 @@ class Load extends Tasks {
         static $isNotFunctioncall = false;
         static $isArray           = false;
         static $isEcho            = false;
+        static $echoStates        = array();
         
         if ($display === true) {
             return '';
@@ -1588,6 +1589,8 @@ class Load extends Tasks {
 
         if ($tokenValue === 'T_OPEN_PARENTHESIS' ) {
             $parenthesisStates[] = $parenthesisId;
+            $echoStates[]        = $isEcho;
+            $isEcho              = false;
             ++$parenthesisCount;
             $parenthesisId       = $parenthesisCount;
             return '';
@@ -1595,12 +1598,15 @@ class Load extends Tasks {
 
         if ($tokenValue === 'T_CLOSE_PARENTHESIS' ) {
             $parenthesisId = array_pop($parenthesisStates);
+            $isEcho        = array_pop($echoStates);
             return '';
         }
 
         // Handle cases of arrays [1,2,3]
         if ($tokenValue === 'T_OPEN_BRACKET' ) {
             $parenthesisStates[] = $parenthesisId;
+            $echoStates[]        = $isEcho;
+            $isEcho              = false;
             ++$parenthesisCount;
             $parenthesisId       = $parenthesisCount;
             return '';
@@ -1608,6 +1614,7 @@ class Load extends Tasks {
 
         if ($tokenValue === 'T_CLOSE_BRACKET' ) {
             $parenthesisId = array_pop($parenthesisStates);
+            $isEcho        = array_pop($echoStates);
             return '';
         }
 
@@ -1617,13 +1624,14 @@ class Load extends Tasks {
             ++$parenthesisCount;
             $parenthesisId       = $parenthesisCount;
             ++$echoCount;
+            $echoStates[]        = $isEcho;
             $isEcho              = true;
             return '';
         }
 
         if (($isEcho === true) && $tokenValue === 'T_SEMICOLON' ) {
             $parenthesisId = array_pop($parenthesisStates);
-            $isEcho = false;
+            $isEcho        = array_pop($echoStates);
             return '';
         }
 

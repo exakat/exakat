@@ -158,7 +158,7 @@ if (fullcode.out('DEFINE').any()) {
     fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.out('DEFINE').next().getProperty('fullcode'));
     fullcode.out('PROTECTED', 'PRIVATE', 'PUBLIC').each{ it.setProperty('atom', 'Visibility'); }
 } else if (fullcode.token in ['T_STATIC']) {
-    // Then, this is an identifier, like static::method();
+    // Then, this is an identifier, like self::method();
     fullcode.setProperty('fullcode', fullcode.getProperty('code'));
 } else {
     // for methods

@@ -37,8 +37,8 @@ class _Array extends TokenAuto {
             // PHP 7.0 and +
             $this->conditions = array( -2 => array('notToken'      => array_merge(_Namespace::$operators, VariableDollar::$operators,
                                                                                   Property::$operators,   Staticproperty::$operators)),
-                                       -1 => array('atom'          => static::$allowedObject),
-                                        0 => array('token'         => static::$operators,
+                                       -1 => array('atom'          => self::$allowedObject),
+                                        0 => array('token'         => self::$operators,
                                                    'checkForArray' => true),
                                         1 => array('atom'          => 'yes'),
                                         2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
@@ -46,8 +46,8 @@ class _Array extends TokenAuto {
         } else {
             // PHP 5.6 and -
             $this->conditions = array( -2 => array('notToken'      => _Namespace::$operators),
-                                       -1 => array('atom'          => static::$allowedObject),
-                                        0 => array('token'         => static::$operators,
+                                       -1 => array('atom'          => self::$allowedObject),
+                                        0 => array('token'         => self::$operators,
                                                    'checkForArray' => true),
                                         1 => array('atom'          => 'yes'),
                                         2 => array('token'         => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),

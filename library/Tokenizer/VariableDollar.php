@@ -32,14 +32,14 @@ class VariableDollar extends TokenAuto {
         $config = \Config::factory();
         if (version_compare('7.0', $config->phpversion) >= 0) {
             // PHP 7.0 and +
-            $this->conditions = array( 0 => array('token'     => static::$operators,
+            $this->conditions = array( 0 => array('token'     => self::$operators,
                                                   'atom'      => 'none'),
                                        1 => array('atom'      => array('Variable', 'Array', 'Property'))
             );
         } else {
             // PHP 5.6 and -
             $this->conditions = array(-1 => array('notToken'  => 'T_GLOBAL'),
-                                       0 => array('token'     => static::$operators,
+                                       0 => array('token'     => self::$operators,
                                                   'atom'      => 'none'),
                                        1 => array('atom'      => array('Variable', 'Array', 'Property')),
                                        2 => array('filterOut' => array('T_OPEN_BRACKET', 'T_OPEN_CURLY')),
@@ -54,7 +54,7 @@ class VariableDollar extends TokenAuto {
 
         // global $$x->c
         $this->conditions = array(-1 => array('token'     => 'T_GLOBAL'),
-                                   0 => array('token'     => static::$operators,
+                                   0 => array('token'     => self::$operators,
                                               'atom'      => 'none'),
                                    1 => array('atom'      => array('Variable', 'Array', 'Property')),
                                    2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_CURLY')),
@@ -66,7 +66,7 @@ class VariableDollar extends TokenAuto {
         $this->checkAuto();
 
         // ${x}
-        $this->conditions = array(0 => array('token' => static::$operators,
+        $this->conditions = array(0 => array('token' => self::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_CURLY'),
                                   2 => array('atom'  => 'yes'),

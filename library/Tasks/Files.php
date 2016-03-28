@@ -95,7 +95,7 @@ class Files extends Tasks {
         chdir($config->projects_root.'/projects/'.$dir.'/code');
         $files = $this->rglob( '.');
         chdir($d);
-        $exts = static::$exts['php'];
+        $exts = self::$exts['php'];
 
         foreach($files as $id => &$file) {
             $file = substr($file, 1);
@@ -105,7 +105,7 @@ class Files extends Tasks {
                     unset($files[$id]);
                     $ignoredFiles[] = $file;
                 }
-            } elseif (!in_array($ext, static::$exts['php'])) {
+            } elseif (!in_array($ext, self::$exts['php'])) {
                 // selection of extensions
                 unset($files[$id]);
             } elseif (!empty($regex) && preg_match($regex, $file)) {

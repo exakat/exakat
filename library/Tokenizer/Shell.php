@@ -29,7 +29,7 @@ class Shell extends TokenAuto {
 
     public function _check() {
 // Case of string with interpolation : `a${b}c`;
-        $this->conditions = array(  0 => array('token'          => static::$operators,
+        $this->conditions = array(  0 => array('token'          => self::$operators,
                                                'atom'           => 'none'),
                                     1 => array('atom'           => _String::$allowedClasses,
                                                'checkForString' => _String::$allowedClasses),

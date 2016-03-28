@@ -105,7 +105,7 @@ class Status extends Tasks {
         }
 
         // Publication : Json or Text file
-        if ($config->json == true) {
+        if ($config->json === true) {
             print json_encode($status);
         } else {
             $text = '';

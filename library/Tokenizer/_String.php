@@ -32,10 +32,10 @@ class _String extends TokenAuto {
 
     public function _check() {
 // Case of string with interpolation : "a${b}c";
-        $this->conditions = array(  0 => array('token'          => static::$operators,
+        $this->conditions = array(  0 => array('token'          => self::$operators,
                                                'atom'           => 'none'),
-                                    1 => array('atom'           => static::$allowedClasses,
-                                               'checkForString' => static::$allowedClasses),
+                                    1 => array('atom'           => self::$allowedClasses,
+                                               'checkForString' => self::$allowedClasses),
                                  );
 
         $this->actions = array( 'makeQuotedString' => '_String');

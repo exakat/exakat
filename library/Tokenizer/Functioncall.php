@@ -74,7 +74,7 @@ class Functioncall extends TokenAuto {
         // functioncall(with arguments or void) that will be in a sequence
         // No -> or ::, but OK as atoms.
         $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR', 'T_EVAL')),
-                                     0 => array('token'     => array_merge(static::$operatorsWithoutEcho, array('T_OPEN_PARENTHESIS'))),
+                                     0 => array('token'     => array_merge(self::$operatorsWithoutEcho, array('T_OPEN_PARENTHESIS'))),
                                      1 => array('atom'      => 'none',
                                                 'token'     => 'T_OPEN_PARENTHESIS'),
                                      2 => array('atom'      =>  array('Arguments', 'Void')),

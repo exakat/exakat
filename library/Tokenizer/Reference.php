@@ -56,7 +56,7 @@ class Reference extends TokenAuto {
                                   -1 => array('token'     => 'T_STRING',
                                               //'atom'      => 'none'
                                               ),
-                                   0 => array('token'     => static::$operators,
+                                   0 => array('token'     => self::$operators,
                                               'atom'      => 'none',
                                               'property'  => array('isFunctionDefinition' => true)),
                                    1 => array('atom'      => 'Variable'),
@@ -71,7 +71,7 @@ class Reference extends TokenAuto {
         // special case for &function x()
         $this->conditions = array(-1 => array('token' => 'T_FUNCTION',
                                               'atom'  => 'none'),
-                                  0 => array('token'  => static::$operators),
+                                  0 => array('token'  => self::$operators),
                                   1 => array('atom'   => 'Identifier'),
                                   2 => array('token'  => 'T_OPEN_PARENTHESIS'),
                                   3 => array('atom'   => 'Arguments'),
