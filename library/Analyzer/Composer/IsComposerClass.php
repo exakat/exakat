@@ -30,28 +30,31 @@ class IsComposerClass extends Analyzer\Analyzer {
         $data = new \Data\Composer();
 
         $classes = $data->getComposerClasses();
-        $classesFullNP = $this->makeFullNsPath($classes);
+        $classesChunk = array_chunk($classes, 15000);
+        foreach($classesChunk as $chunk) {
+            $classesFullNP = $this->makeFullNsPath($chunk);
         
-        $this->atomIs('Class')
-             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-             ->fullnspath($classesFullNP);
-        $this->prepareQuery();
-
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->fullnspath($classesFullNP);
-        $this->prepareQuery();
-
-        $this->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->fullnspath($classesFullNP);
-        $this->prepareQuery();
-
-        $this->atomIs('New')
-             ->outIs('NEW')
-             ->tokenIs(array('T_NS_SEPARATOR', 'T_STRING'))
-             ->fullnspath($classesFullNP);
-        $this->prepareQuery();
+            $this->atomIs('Class')
+                 ->outIs(array('IMPLEMENTS', 'EXTENDS'))
+                 ->fullnspath($classesFullNP);
+            $this->prepareQuery();
+    
+            $this->atomIs('Instanceof')
+                 ->outIs('CLASS')
+                 ->fullnspath($classesFullNP);
+            $this->prepareQuery();
+    
+            $this->atomIs('Typehint')
+                 ->outIs('CLASS')
+                 ->fullnspath($classesFullNP);
+            $this->prepareQuery();
+    
+            $this->atomIs('New')
+                 ->outIs('NEW')
+                 ->tokenIs(array('T_NS_SEPARATOR', 'T_STRING'))
+                 ->fullnspath($classesFullNP);
+            $this->prepareQuery();
+        }
     }
 }
 
