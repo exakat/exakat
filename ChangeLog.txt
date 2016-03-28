@@ -1,4 +1,4 @@
-Version 0.5.8 (Sun Deity of Mao, Coming up)
+Version 0.5.9 (Six Eared Macaque, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,33 @@ Version 0.5.8 (Sun Deity of Mao, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.5.8 (Sun Deity of Mao, 2016-03-28)
++ Architecture
+    + Moved to self::, instead of static::.
+    + First UT for command line
+    + Sped up phploc. Prepare code for finite states, in Tasks.
+    + Prepare for Gremlin3 (moved gremlin calls to class)
+    + Reduced shell_exec usage
++ Report
+    + Fixed display bugs in Devoops report
+    + Removed double analysis
+    + 'Wrong number of arguments' now supports constructors
++ Analyzer
+    + Upgraded 'No Hardcoded IP' to handle constants, spot domains
+    + Added support for TokyoTyrant
+    + New analyzer : spot simple regex, and suggest strpos
+    + Excluded "$a[b]" from undefined constants
++ Tokenizer
+    + Fixed bug with nested call to echo.
+    + Fixed bug where concatenation ends on a 'AS' keyword
+    + Added support of Constants in Foreach
+    + Fixed multiple bugs in Grouped Use
+    + Support for function as 'class' in static calls
+    + Comparison accepts powers
+    + Added support for empty array short syntax in sequence
+    + Support constant with visibility
+    + Parenthesis may be the base for Arrays
 
 Version 0.5.7 (Scorpion Demon, 2016-03-21)
 + Architecture
