@@ -1,0 +1,155 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        B
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'C'
+          Label : ARGUMENT
+            D
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                function
+                Label : ARGUMENTS
+                  
+                  Label : ARGUMENT
+                    $b
+                Label : BLOCK
+                  ;
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      Concatenation
+                      Label : CONCAT
+                        'E'
+                      Label : CONCAT
+                        [
+                        Label : INDEX
+                          'F'
+                        Label : VARIABLE
+                          $b
+                      Label : CONCAT
+                        'E'
+                Label : NAME
+                  
+              Label : ARGUMENT
+                $c
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        H
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'I'
+          Label : ARGUMENT
+            [
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                B
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'C'
+                  Label : ARGUMENT
+                    D
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        function
+                        Label : ARGUMENTS
+                          
+                          Label : ARGUMENT
+                            $b
+                        Label : BLOCK
+                          ;
+                          Label : ELEMENT
+                            return
+                            Label : RETURN
+                              Concatenation
+                              Label : CONCAT
+                                'E'
+                              Label : CONCAT
+                                [
+                                Label : INDEX
+                                  'F'
+                                Label : VARIABLE
+                                  $b
+                              Label : CONCAT
+                                'E'
+                        Label : NAME
+                          
+                      Label : ARGUMENT
+                        $c
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+  Label : ELEMENT
+    void
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      
+      Label : ARGUMENT
+        H
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'I'
+          Label : ARGUMENT
+            [
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                B
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'C'
+                  Label : ARGUMENT
+                    D
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        function
+                        Label : ARGUMENTS
+                          
+                          Label : ARGUMENT
+                            $b
+                        Label : BLOCK
+                          ;
+                          Label : ELEMENT
+                            echo
+                            Label : ARGUMENTS
+                              Arguments
+                              Label : ARGUMENT
+                                'E'
+                              Label : ARGUMENT
+                                [
+                                Label : INDEX
+                                  'F'
+                                Label : VARIABLE
+                                  $b
+                              Label : ARGUMENT
+                                'E'
+                        Label : NAME
+                          
+                      Label : ARGUMENT
+                        $c
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
