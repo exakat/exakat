@@ -840,7 +840,11 @@ HTML;
         foreach($data as $v) {
             $row = '<tr>';
             foreach($readOrder as $V) {
-                $row .= "<td>".$this->makeHtml($v[$V])."</td>\n";
+                if (isset($css->noEscape[$V]) && $css->noEscape[$V] === true) { 
+                    $row .= "<td>".$v[$V]."</td>\n";
+                } else {
+                    $row .= "<td>".$this->makeHtml($v[$V])."</td>\n";
+                }
             }
             $row .= '</tr>';
 
@@ -1931,6 +1935,7 @@ TEXT
         $css->displayTitles = true;
         $css->titles = array('Service', 'File', 'Home page');
         $css->readOrder = $css->titles;
+        $css->noEscape = array('Home page' => true);
 
         $data = array();
         $res = $this->datastore->query('SELECT name AS Service, file AS File, homepage AS url FROM configFiles');
