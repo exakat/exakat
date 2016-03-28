@@ -61,8 +61,9 @@ foreach($files as $file) {
 //    die();
 }
 print "total untested class : $total\n\n";
+print shell_exec('find exp -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
+
 die();
 print shell_exec('find source -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
-print shell_exec('find exp -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
 
 ?>
