@@ -54,10 +54,10 @@ class Concatenation extends TokenAuto {
                                                                      Power::$operators,         Addition::$operators,
                                                                      Token::$alternativeEnding, Sign::$operators,
                                                                      Multiplication::$operators,_Instanceof::$operators,
-                                                                     Coalesce::$operators, 
+                                                                     Coalesce::$operators,
                                                                      array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON',
                                                                            'T_CLOSE_TAG', 'T_QUESTION', 'T_INLINE_HTML',
-                                                                           'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 'T_AS', 
+                                                                           'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 'T_AS',
                                                                            'T_COMMA', 'T_DOUBLE_ARROW', 'T_ELSEIF', 'T_VOID'))),
         );
         

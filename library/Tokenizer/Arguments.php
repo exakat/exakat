@@ -28,7 +28,7 @@ class Arguments extends TokenAuto {
     static public $atom = 'Arguments';
 
     static public $arguments = array('String', 'Integer', 'Boolean', 'Null', 'Addition',
-                                     'Multiplication', 'Property', 'Methodcall', 'Coalesce', 
+                                     'Multiplication', 'Property', 'Methodcall', 'Coalesce',
                                      'Staticmethodcall', 'Staticconstant', 'Staticproperty',
                                      'New', 'Functioncall', 'Nsname', 'Identifier', 'Void',
                                      'Variable', 'Array', 'Assignation', 'Typehint', 'Keyvalue',

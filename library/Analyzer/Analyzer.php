@@ -45,7 +45,7 @@ abstract class Analyzer {
     
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
-    
+
     protected $apply          = null;
 
     protected $phpVersion       = 'Any';
