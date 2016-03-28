@@ -31,6 +31,8 @@ class NamespaceUsage extends Analyzer\Analyzer {
         $this->atomIs('Namespace')
              ->outIs('NAMESPACE');
         $this->prepareQuery();
+        
+        // TODO : should we include global namespace, when it is implicit ? 
     }
 }
 
