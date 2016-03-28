@@ -1684,7 +1684,17 @@ TEXT
             }
         }
 
-        return $this->formatHashTableLinked($info, $css);
+        return $this->formatText( <<<TEXT
+
+<ul>
+<li><i class="fa fa-check-square-o green"></i>: This check is OK. No situations were reported, so it is good to go.</li>
+<li><i class="fa fa-exclamation red"></i>: This check reported issues : situations needs to be reviewed manually. Follow the link to read the list of issues.</li>
+<li><i class="fa fa-stethoscope"></i>: This check is disabled. It may incompatible with PHP version used to run the audit, or its configuration. For example, it is not possible to find anonymous classes when PHP 5.6 is used to audit code.</li>
+</ul>
+
+TEXT
+, 'textLead')
+                  .$this->formatHashTableLinked($info, $css);
     }
 
     private function Dashboard($title) {
@@ -1767,7 +1777,7 @@ TEXT
                             'com', 'eaccelerator',
                             'geoip', 'ibase', 
                             'imagick', 'mailparse', 'mongo', 
-                            'trader', 'wincache', 'xcache'
+                            'trader', 'tokyotyrant', 'wincache', 'xcache'
                              );
 
         $data = array();
