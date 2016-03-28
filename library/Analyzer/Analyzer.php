@@ -1272,6 +1272,14 @@ GREMLIN
         
         return $this;
     }
+
+    public function constantDefinition() {
+        $this->addMethod('hasNot("fullnspath", null)
+                          .filter{ g.idx("constants").get("path", it.fullnspath).any(); }
+                          .transform{ g.idx("constants")[["path":it.fullnspath]].next(); }');
+    
+        return $this;
+    }
     
     public function hasConstantDefinition() {
         $this->addMethod("filter{ g.idx('constants')[['path':it.fullnspath]].any()}");
