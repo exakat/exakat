@@ -31,8 +31,7 @@ class DirectInjection extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $vars = $this->loadIni('php_incoming.ini');
-        $vars = $vars['incoming'];
+        $vars = $this->loadIni('php_incoming.ini', 'incoming');
         
         $safeIndex = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
                            'SCRIPT_NAME', 'SERVER_ADMIN', '_');
