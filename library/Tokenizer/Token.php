@@ -302,22 +302,26 @@ g.V.has('index', true).filter{it.out().any() == false}.each{
 //////////////////////////////////////////////////////////////////////////////////////////
 // const without class nor namspace (aka, global)
 
-g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class'] }.any() == false}.out('CONST').out('LEFT')
-    .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
+g.idx('atoms')[['atom':'Const']]
+    .filter{it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class'] }.any() == false}
+    .out('CONST').out('LEFT')
+    .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}
+    .each{
     
     if (it.atom == 'File') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     }
-    g.idx('constants').put('path', fullcode.fullnspath, it)
+    g.idx('constants').put('path', fullcode.fullnspath, fullcode)
 };
 ", "
 // Const (out of a class) with define
 g.idx('atoms')[['atom':'Functioncall']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').filter{ it.rank == 0}.as('name')
-    .has('atom', 'String').hasNot('noDelimiter', null)
-    .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
-.each{
+    .hasNot('noDelimiter', null)
+    .in().loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }
+    .back('name')
+    .each{
     if (ns.atom == 'File') {
         it.setProperty('fullnspath', '\\\\' + it.noDelimiter.toLowerCase());
     } else {
