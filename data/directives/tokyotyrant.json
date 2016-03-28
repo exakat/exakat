@@ -1,0 +1,3 @@
+[{"name":"tokyo_tyrant.session_salt","suggested":"&nbsp;","documentation":"The secret that is used to salt session id"},
+ {"name":"tokyo_tyrant.key_prefix","suggested":"&nbsp;","documentation":"Prefix all keys with this string. The prefix is transparent to the developer but helps making sure that keys won't collide if multiple applications are using the same database."},
+]
