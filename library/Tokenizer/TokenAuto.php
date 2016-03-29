@@ -45,12 +45,13 @@ abstract class TokenAuto extends Token {
         $class = str_replace('Tokenizer\\', '', get_class($this));
 
         $moderator = '';
-        $moderatorFinal = '[0..'.self::CYCLE_SIZE.']';
+        $moderatorFinal = '.range(0, '.self::CYCLE_SIZE.')';
 
+/*
         if (in_array($class, array('FunctioncallArray'))) {
-            $query .= 'g.idx("racines")[["token":"S_ARRAY"]].out("INDEXED")'.$moderator;
+            $query .= 'g.V().has("token", "S_ARRAY").out("INDEXED")'.$moderator;
         } elseif (in_array($class, array('Staticconstant','Staticmethodcall','Staticproperty'))) {
-            $query .= 'g.idx("racines")[["token":"Staticproperty"]].out("INDEXED")'.$moderator;
+            $query .= 'g.V().has("token", "S_ARRAY"). idx("racines")[["token":"Staticproperty"]].out("INDEXED")'.$moderator;
         } elseif (in_array($class, array('Property','Methodcall'))) {
             $query .= 'g.idx("racines")[["token":"Property"]].out("INDEXED")'.$moderator;
         } elseif (in_array($class, Token::$types)) {
@@ -58,6 +59,10 @@ abstract class TokenAuto extends Token {
         } else {
             die("Should only use atoms!");
         }
+        */
+        
+        $query .= 'g.V().has("token", within("'.join('", "', static::$operators).'"))'.$moderator;
+
         $query .= '.sideEffect{ total++; }';
 
         $q = array();
@@ -74,7 +79,7 @@ abstract class TokenAuto extends Token {
                 $conditions['previous'] = abs($i);
 
                 $q[] = $this->readConditions($conditions);
-                $q[] = ['back("origin")'];
+                $q[] = ['select("origin")'];
             }
             unset($this->conditions[$i]);
         }
@@ -85,7 +90,7 @@ abstract class TokenAuto extends Token {
                 $conditions['next'] = $i;
 
                 $q[] = $this->readConditions($conditions);
-                $q[] = ['back("origin")'];
+                $q[] = ['select("origin")'];
             }
             unset($this->conditions[$i]);
         }
@@ -131,7 +136,7 @@ toDelete.each{ g.removeVertex(it); }
                     echo $query, "\n",  print_r($res, true);
                     die();
                 }
-                $res = $res->results[0];
+                $res = $res->results;
 
                 $end = microtime(true);
             
@@ -154,15 +159,15 @@ toDelete.each{ g.removeVertex(it); }
         // @doc audit trail track
         if (isset($actions['keepIndexed'])) {
             if (!$actions['keepIndexed']) { // true means All
-                $qactions[] = "
-/* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
-";
+                $qactions[] = '
+/* Remove index links */  __.inE("INDEXED").drop();
+';
             }
             unset($actions['keepIndexed']);
         } else {
-                $qactions[] = "
-/* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
-";
+                $qactions[] = '
+/* Remove index links */  __.inE("INDEXED").drop();
+';
         }
 
         if (isset($actions['atom'])) {
@@ -172,7 +177,7 @@ toDelete.each{ g.removeVertex(it); }
                 $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
             }
             
-            $qactions[] = " /* indexing */\n  g.idx('atoms').put('atom', '{$actions['atom']}', it);";
+//            $qactions[] = " /* indexing */\n  g.idx('atoms').put('atom', '{$actions['atom']}', it);";
             
             unset($actions['atom']);
             $this->setAtom = true;
@@ -283,7 +288,7 @@ token = it.token;
 root = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line, fullcode:';']);
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), root, 'INDEXED');
 
-arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
+arg.out('ARGUMENT').has('atom', 'Variable').each{
     ppp = g.addVertex(null, [code:'ppp', atom:'Visibility', token:token, virtual:true, line:it.line, fullcode:'Visibility']);
     g.idx('atoms').put('atom','Visibility', ppp);
 
@@ -2615,8 +2620,9 @@ GREMLIN;
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
 rank = 0;
-it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}
-                      {!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
+it.repeat( out('NEXT') ).until(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])
+                        .emit(!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE']))
+                        .each{
     if (it.token in ['T_CURLY_OPEN', 'T_CLOSE_CURLY']) {
         it.inE('NEXT').each{ g.removeEdge(it);}
         toDelete.push(it);
@@ -2982,15 +2988,15 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         if (isset($conditions['property'])) {
             foreach($conditions['property'] as $property => $value) {
                 if (is_array($value)) {
-                    $queryConditions[] = 'filter{it.'.$property." in ['".implode("', '", $value)."']}";
+                    $queryConditions[] = 'has("'.$property.'", within("'.implode('", "', $value).'"))';
                 } elseif ($value === true) {
-                    $queryConditions[] = "has('$property', true)";
+                    $queryConditions[] = 'has("'.$property.'", true)';
                 } elseif ($value === false) {
-                    $queryConditions[] = "has('$property', false)";
+                    $queryConditions[] = 'has("'.$property.'", false)';
                 } elseif ($value === 'none') {
-                    $queryConditions[] = "has('$property', null)";
+                    $queryConditions[] = 'has("'.$property.'", null)';
                 } else {
-                    $queryConditions[] = "has('$property', '$value')";
+                    $queryConditions[] = 'has("'.$property.'", "'.$value.'")';
                 }
             }
             unset($conditions['property']);
@@ -3002,7 +3008,12 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             } else {
                 $classes = "'".$conditions['checkForString']."'";
             }
-            $queryConditions[] = "as('cfs').out('NEXT').filter{ it.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.back('cfs')";
+            $queryConditions[] = <<<GREMLIN
+as("cfs").repeat(out("NEXT").or(has("token", within("T_QUOTE_CLOSE", "T_END_HEREDOC", "T_SHELL_QUOTE_CLOSE"), has("atom", within($classes))))
+             .until("token", within("T_QUOTE_CLOSE", "T_END_HEREDOC", "T_SHELL_QUOTE_CLOSE"))
+             .emit(true)
+             .select("cfs")
+GREMLIN;
 
             unset($conditions['checkForString']);
         }
@@ -3016,10 +3027,10 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
 
             $finalTokens = "'T_SEMICOLON', 'T_OPEN_CURLY', 'T_INLINE_HTML'";
             $queryConditions[] = <<<GREMLIN
-filter{
+where (
     it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
     .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any()
-      }
+)
 GREMLIN;
 
             unset($conditions['checkFor']);
@@ -3034,10 +3045,10 @@ GREMLIN;
 
             $finalTokens = "'T_SEMICOLON'";
             $queryConditions[] = <<<GREMLIN
-filter{
+where(
     it.out('NEXT').out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
     .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any()
-                             }
+)
 GREMLIN;
 
             unset($conditions['checkNextFor']);
@@ -3052,10 +3063,10 @@ GREMLIN;
 
             $finalTokens = "'T_OPEN_CURLY'";
             $queryConditions[] = <<<GREMLIN
-filter{
+where(
     it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
     .loop(4){it.object.token == 'T_COMMA'}.filter{ it.token in [$finalTokens]}.any()
-                             }
+)
 GREMLIN;
 
             unset($conditions['checkForImplements']);
@@ -3139,31 +3150,31 @@ GREMLIN;
         if (isset($conditions['checkForArray'])) {
 
             $queryConditions[] = <<<GREMLIN
-filter{ it.as('a').out('NEXT').transform{
-    if (it.token == 'T_CLOSE_BRACKET') {
+filter{ it.as("a").out("NEXT").transform{
+    if (it.token == "T_CLOSE_BRACKET") {
         it;
     } else {
-        it.hasNot('atom', null).out('NEXT').filter{ it.token in ['T_CLOSE_BRACKET', 'T_CLOSE_CURLY']}.next();
+        it.not(has("atom", null)).out("NEXT").filter{ it.token in ["T_CLOSE_BRACKET", "T_CLOSE_CURLY"]}.next();
     }
-}.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY'] && it.object.atom == null}.any()}
+}.out("NEXT").loop("a"){it.object.token in ["T_OPEN_BRACKET", "T_OPEN_CURLY"] && it.object.atom == null}.any()}
 GREMLIN;
             unset($conditions['checkForArray']);
         }
 
         if (isset($conditions['token'])) {
             if ( is_array($conditions['token']) && !empty($conditions['token'])) {
-                $queryConditions[] = "filter{it.token in ['".implode("', '", $conditions['token'])."']}";
+                $queryConditions[] = 'has("token", within("'.implode('", "', $conditions['token']).'"))';
             } elseif($conditions['token'] == 'yes') {
-                $queryConditions[] = "hasNot('token', null)";
+                $queryConditions[] = 'not(has("token", null))';
             } else {
-                $queryConditions[] = "has('token', '".$conditions['token']."')";
+                $queryConditions[] = 'has("token", "'.$conditions['token'].'")';
             }
             unset($conditions['token']);
         }
 
         if (isset($conditions['code'])) {
             if ( is_array($conditions['code']) && !empty($conditions['code'])) {
-                $queryConditions[] = "filter{it.code in ['".implode("', '", $conditions['code'])."']}";
+                $queryConditions[] = 'has("code", within("'.implode('", "', $conditions['code']).'"))';
             } else {
                 $queryConditions[] = "has('code', '".$conditions['code']."')";
             }
@@ -3172,31 +3183,31 @@ GREMLIN;
 
         if (isset($conditions['notToken'])) {
             if ( is_array($conditions['notToken']) && !empty($conditions['notToken'])) {
-                $queryConditions[] = "filter{!(it.token in ['".implode("', '", $conditions['notToken'])."'])}";
+                $queryConditions[] = 'has("token", without("'.implode('", "', $conditions['notToken']).'"))';
             } else {
-                $queryConditions[] = "hasNot('token', '".$conditions['notToken']."')";
+                $queryConditions[] = 'not(has("token", "'.$conditions['notToken'].'"))';
             }
             unset($conditions['notToken']);
         }
         
         if (isset($conditions['atom'])) {
             if ( is_array($conditions['atom']) && !empty($conditions['atom'])) {
-                $queryConditions[] = "filter{it.atom in ['".implode("', '", $conditions['atom'])."']}";
+                $queryConditions[] = 'has("atom", within("'.implode('", "', $conditions['atom']).'"))';
             } elseif ( is_string($conditions['atom']) && $conditions['atom'] == 'none') {
-                $queryConditions[] = "has('atom', null)";
-            } elseif ( is_string($conditions['atom']) && $conditions['atom'] == 'yes') {
-                $queryConditions[] = "hasNot('atom', null)";
+                $queryConditions[] = 'has("atom", null)';
+            } elseif (is_string($conditions['atom']) && $conditions['atom'] == 'yes') {
+                $queryConditions[] = 'not(has("atom", null))';
             } else {
-                $queryConditions[] = "has('atom', '".$conditions['atom']."')";
+                $queryConditions[] = 'has("atom", "'.$conditions['atom'].'")';
             }
             unset($conditions['atom']);
         }
 
         if (isset($conditions['notAtom'])) {
             if ( is_array($conditions['notAtom']) && !empty($conditions['notAtom'])) {
-                $queryConditions[] = "filter{!(it.atom in ['".implode("', '", $conditions['notAtom'])."'])}";
+                $queryConditions[] = 'not(has("atom", within("'.implode('", "', $conditions['notAtom']).'")))';
             } else {
-                $queryConditions[] = "hasNot('atom', '".$conditions['notAtom']."')";
+                $queryConditions[] = 'not(has("atom", "'.$conditions['notAtom'].'"))';
             }
             unset($conditions['notAtom']);
         }
@@ -3212,9 +3223,9 @@ GREMLIN;
 
         if (isset($conditions['dowhile'])) {
             if ( $conditions['dowhile'] === false ) {
-                $queryConditions[] = "hasNot('association', 'dowhile')";
+                $queryConditions[] = 'not(has("association", "dowhile"))';
             } else {
-                $queryConditions[] = "has('association', 'dowhile')";
+                $queryConditions[] = 'has("association", "dowhile")';
             }
             unset($conditions['dowhile']);
         }
@@ -3222,9 +3233,9 @@ GREMLIN;
         if (isset($conditions['filterOut'])) {
             if (is_string($conditions['filterOut'])) {
                 // no check on atom here ?
-                $queryConditions[] = "filter{it.token != '".$conditions['filterOut']."' }";
+                $queryConditions[] = 'not(has("token", "'.$conditions['filterOut'].'"))';
             } elseif (is_array($conditions['filterOut'])) {
-                $queryConditions[] = "filter{it.atom != null || !(it.token in ['".implode("', '", $conditions['filterOut'])."'])}";
+                $queryConditions[] = 'or(has("atom", neq(null)), has("token", not(within("'.implode('", "', $conditions['filterOut']).'"))) )';
             } else {
                 die("Unsupported type for filterOut\n");
             }

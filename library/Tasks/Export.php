@@ -25,38 +25,42 @@ namespace Tasks;
 
 class Export extends Tasks {
     public function run(\Config $config) {
-        $queryTemplate = 'g.V.as("x").except([g.v(0)])';
+        $queryTemplate = 'g.V().not(hasId(0))';
 
         $result = $this->gremlin->query($queryTemplate);
         $vertices = (array) $result->results;
 
         $V = array();
         foreach($vertices as $v) {
-            $x = $v->_id;
-            $V[$x] =  (array) $v;
+            $x = $v->id;
+            $vv = array();
+            foreach($v->properties as $key => $value) {
+                $vv[$key] = $value[0]->value;
+            }
+            $V[$x] =  $vv;
     
-            if (isset($V[$x]['root'])) {
+            if (isset($v->properties->root)) {
                 $root = $x;
             }
         }
 
-        $queryTemplate .= '.outE()';
+        $queryTemplate = 'g.E().not(hasId(0))';
         $result = $this->gremlin->query($queryTemplate);
         $edges = (array) $result->results;
 
         $E = array();
         foreach($edges as $e) {
-            $id = $e->_outV;
+            $id = $e->outV;
     
             if (!isset($E[$id])) {
                 $E[$id] = array();
             }
     
-            $endNodeId = $e->_inV;
+            $endNodeId = $e->inV;
             if(isset($E[$id][$endNodeId])) {
-                $E[$id][$endNodeId] .= ', '.$e->_label;
+                $E[$id][$endNodeId] .= ', '.$e->label;
             } else {
-                $E[$id][$endNodeId] = $e->_label;
+                $E[$id][$endNodeId] = $e->label;
             }
         }
 

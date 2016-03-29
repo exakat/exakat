@@ -48,6 +48,7 @@ class Tokenizer extends Tasks {
         
         $datastore = new \Datastore($config);
         $tokenCounts = $datastore->getCol('tokenCounts', 'token');
+        print_r($tokenCounts);
 
         $regex = array();
         $regex2 = array();
@@ -62,11 +63,7 @@ class Tokenizer extends Tasks {
             } elseif ($new == 'Tokenizer\\Sequence') {
                 $regex[$class] = $r;
             } elseif (!empty($d)) {
-                if (in_array($new, array('Tokenizer\\Phpcodemiddle', 'Tokenizer\\Phpcode', ))) {
-                    $regex[$class] = $r;
-                } else {
-                    $regex[$class] = $r;
-                }
+                $regex[$class] = $r;
             }
         }
 

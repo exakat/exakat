@@ -127,6 +127,7 @@ class Sequence extends TokenAuto {
         );
         
         $this->actions = array('toOneSequence'  => true);
+        $this->printQuery();
         $this->checkAuto();
 
         return false;
