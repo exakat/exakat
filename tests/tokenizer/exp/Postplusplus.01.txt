@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $a
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $
+      Label : NAME
+        'a'
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      ->
+      Label : OBJECT
+        $d
+      Label : PROPERTY
+        $D
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      ::
+      Label : CLASS
+        R
+      Label : PROPERTY
+        $E
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      [
+      Label : INDEX
+        3
+      Label : VARIABLE
+        $a

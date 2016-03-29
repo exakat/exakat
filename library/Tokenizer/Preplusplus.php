@@ -28,8 +28,8 @@ class Preplusplus extends TokenAuto {
     static public $atom = 'Preplusplus';
     
     public function _check() {
-        $this->conditions = array( 0 => array('token' => Preplusplus::$operators),
-                                   1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Staticproperty' )),
+        $this->conditions = array( 0 => array('token'     => self::$operators),
+                                   1 => array('atom'      => array('Variable', 'Array', 'Property', 'Functioncall', 'Staticproperty' )),
                                    2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS')),
         );
         

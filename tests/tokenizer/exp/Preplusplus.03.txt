@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    --
+    Label : PREPLUSPLUS
+      $a
+  Label : ELEMENT
+    --
+    Label : PREPLUSPLUS
+      $
+      Label : NAME
+        'a'
+  Label : ELEMENT
+    --
+    Label : PREPLUSPLUS
+      ->
+      Label : OBJECT
+        $d
+      Label : PROPERTY
+        $D
+  Label : ELEMENT
+    --
+    Label : PREPLUSPLUS
+      ::
+      Label : CLASS
+        R
+      Label : PROPERTY
+        $E
+  Label : ELEMENT
+    --
+    Label : PREPLUSPLUS
+      [
+      Label : INDEX
+        3
+      Label : VARIABLE
+        $a
