@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      [
+      Label : VARIABLE
+        [
+        Label : VARIABLE
+          $
+          Label : NAME
+            $a
+        Label : INDEX
+          $i
+      Label : INDEX
+        'b'
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      ->
+      Label : PROPERTY
+        c
+      Label : OBJECT
+        $
+        Label : NAME
+          $b
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      ::
+      Label : PROPERTY
+        $c
+      Label : CLASS
+        $
+        Label : NAME
+          $d
