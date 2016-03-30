@@ -213,13 +213,13 @@ class Files extends Tasks {
 
         display('Check short tag (normal pass)');
         $stats['php'] = count($files);
-        $shell = 'cat '.$tmpFileName.' | sort | tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
+        $shell = 'cat '.$tmpFileName.' | sort | tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=0 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
         
         $resultNosot = shell_exec($shell);
         $tokens = (int) array_sum(explode("\n", $resultNosot));
 
         display('Check short tag (with directive activated)');
-        $shell = 'cat '.$tmpFileName.' | sort |  tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
+        $shell = 'cat '.$tmpFileName.' | sort |  tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=1 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
         
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
