@@ -28,10 +28,20 @@ class _Global extends TokenAuto {
     static public $atom = 'Global';
 
     public function _check() {
+        $config = \Config::factory();
+
+        $atoms = array('Variable', 'Property');
+        if (version_compare('7.0', $config->phpversion) >= 0) {
+            // PHP 5.6-
+            $atoms[] = 'Array';
+            $atoms[] = 'Staticproperty';
+        }
+        print_r($atoms);
+        
     // global $x; (nothing more)
         $this->conditions = array( 0 => array('token'    => _Global::$operators,
-                                              'checkFor' => array('Variable', 'Property')),
-                                   1 => array('atom'     => array('Variable', 'Property')),
+                                              'checkFor' => $atoms),
+                                   1 => array('atom'     => $atoms),
                                    2 => array('token'    => array('T_SEMICOLON', 'T_COMMA'))
                                  );
         
