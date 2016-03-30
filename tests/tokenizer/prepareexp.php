@@ -54,7 +54,9 @@ if (empty($file)) {
 function run($test, $number) {
     print "$test.$number\n";
     
-    $shell = 'php -l ./source/'.$test.'.'.$number.'.php';
+    $ini = parse_ini_file('../../config/config.ini');
+    
+    $shell = $ini['php'].' -l ./source/'.$test.'.'.$number.'.php 2&>1';
     $res = shell_exec($shell);
     
     if (strpos('No syntax errors detected in', $res) !== false) {
@@ -62,7 +64,7 @@ function run($test, $number) {
         return;
     }
     
-    $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'.$test.'.'.$number.'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
+    $shell = 'cd ../..; '.$ini['php'].' exakat cleandb; '.$ini['php'].' exakat load -f ./tests/tokenizer/source/'.$test.'.'.$number.'.php -p test; '.$ini['php'].' exakat build_root -p test; '.$ini['php'].' exakat tokenizer -p test; '.$ini['php'].' exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
     shell_exec($shell);
     
     if (!file_exists('./exp/'."$test.$number".'.txt')) {
