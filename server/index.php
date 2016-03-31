@@ -70,10 +70,11 @@ function archive($path) {
 }
 
 function onepage($path) {
-    if (isset($_REQUEST['id'])) {
-        if (file_exists('./out/'.$_REQUEST['id'].'.json')) {
+    if (isset($_REQUEST['id']) && strlen($_REQUEST['id']) == 32 && !preg_match('/^[A-Fa-f0-9]{32}$/', $_REQUEST['id']))) {
+        $id = $_REQUEST['id'];
+        if (file_exists('./out/'.$id.'.json')) {
             header('Content-Type: application/json');
-            readfile('./out/'.$_REQUEST['id'].'.json');
+            readfile('./out/'.$id.'.json');
         } else {
             $json = json_decode(file_get_contents('./progress/jobqueue.exakat'));
             if ($json->job == $_REQUEST['id']) {
@@ -95,26 +96,31 @@ function onepage($path) {
 }
 
 function project($path) {
-    if (isset($_REQUEST['project'])) {
+    if (isset($_REQUEST['project']) && preg_match('/^[A-Fa-f0-9_\-]$/', $_REQUEST['project']))) {
         // Validation
-        if (!file_exists('./projects/'.$_REQUEST['project'])) {
-            echo json_encode(['project' => $_REQUEST['project'], 'progress' => 0, 'status' => 'Not found']); // empty array
+        $project = $_REQUEST['project'];
+        if (!file_exists('./projects/'.$project)) {
+            echo json_encode(['project'  => $project, 
+                              'progress' => 0, 
+                              'status'   => 'Not found']); // empty array
             exit;
-        } elseif (!file_exists('./projects/'.$_REQUEST['project'].'/datastore.sqlite')) {
-            echo json_encode(['project' => $_REQUEST['project'], 'progress' => 0, 'status' => 'Initialization']);
+        } elseif (!file_exists('./projects/'.$project.'/datastore.sqlite')) {
+            echo json_encode(['project'  => $project, 
+                              'progress' => 0, 
+                              'status'   => 'Initialization']);
             exit;
         } else {
-            $return = array('project' => $_REQUEST['project']);
+            $return = array('project' => $project);
 
-            $sqlite = new \Sqlite3('./projects/'.$_REQUEST['project'].'/datastore.sqlite');
+            $sqlite = new \Sqlite3('./projects/'.$project.'/datastore.sqlite');
             $res = $sqlite->query('SELECT value FROM hash WHERE key="tokens"');
             $row = $res->fetchArray();
             $return['size'] = $row[0];
             
-            if (file_exists('./projects/'.$_REQUEST['project'].'/report')) {
+            if (file_exists('./projects/'.$project.'/report')) {
                 $return['report'] = true;
-                if (!file_exists('./projects/'.escapeshellarg($_REQUEST['project']).'/report')) {
-                    shell_exec('cd ./projects/'.escapeshellarg($_REQUEST['project']).'; zip -c report.zip report > /dev/null 2>/dev/null &');
+                if (!file_exists('./projects/'.escapeshellarg($project).'/report')) {
+                    shell_exec('cd ./projects/'.escapeshellarg($project).'; zip -c report.zip report > /dev/null 2>/dev/null &');
                     $return['zip'] = false;
                     $return['status'] = 'Archiving';
                 } else {
