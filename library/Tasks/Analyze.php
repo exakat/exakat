@@ -141,13 +141,17 @@ php exakat analyze -P <One/rule> -p <project>\n");
         }
 
         $total_results = 0;
-        $Php = new \Phpexec($config->version);
+        $php = new \Phpexec($config->version);
 
-        display("Analyzing {$config->thema}\n");
-        $progressBar = new \Progressbar(count($dependencies2));
-        
+        if (!$config->verbose && !$config->quiet) {
+            print "Analyzing {$config->thema}{$config->program}\n";
+            $progressBar = new \Progressbar(count($dependencies2) + 1);
+        } else {
+            display("Analyzing {$config->thema}{$config->program}\n");
+        }
+
         foreach($dependencies2 as $analyzer_class) {
-            if (!$config->verbose && !$config->quiet) {
+            if (isset($progressBar)) {
                 echo $progressBar->drawCurrentProgress();
             }
             $begin = microtime(true);
@@ -178,7 +182,7 @@ GREMLIN;
                 $this->datastore->addRow('analyzed', array($analyzer_class => -2 ) );
 
                 display("$analyzer is not compatible with PHP version {$config->phpversion}. Ignoring\n");
-            } elseif (!$analyzer->checkPhpConfiguration($Php)) {
+            } elseif (!$analyzer->checkPhpConfiguration($php)) {
                 $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
@@ -206,6 +210,13 @@ GREMLIN;
                 // storing the number of row found in Hash table (datastore)
                 $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
             }
+        }
+        
+        // Final step
+        if (isset($progressBar)) {
+            echo $progressBar->drawCurrentProgress();
+            unset($progressBar);
+            print "\n";
         }
 
         display( "Done\n");
