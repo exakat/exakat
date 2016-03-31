@@ -183,7 +183,6 @@ class Phpexec {
         if ($this->isCurrentVersion) {
             $res = count(@token_get_all(file_get_contents(str_replace('$', '\\\$', $file))));
         } else {
-            print $file."\n";
             $res = (int) shell_exec($this->phpexec.' -r "print count(@token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" ');
         }
         
@@ -199,9 +198,12 @@ class Phpexec {
             return false;
         }
         $res = shell_exec($this->phpexec.' -v 2>&1');
-        preg_match('/PHP ([0-9\.]+) /', $res, $r);
-        $this->actualVersion = $r[1];
-        return strpos($res, 'The PHP Group') !== false;
+        if (preg_match('/PHP ([0-9\.]+)/', $res, $r)) {
+            $this->actualVersion = $r[1];
+            return strpos($res, 'The PHP Group') !== false;
+        } else {
+            return false;
+        }
     }
 
     public function compile($file) {
