@@ -37,10 +37,10 @@ foreach($rules as $rule) {
     print substr($rule.str_repeat(' ', 50), 0, 50);
     if (isset($inis[$rule])) {
         print "Set ($inis[$rule]) ";
-        $set++;
+        ++$set;
         if (isset($analyzers[$inis[$rule]])) {
             unset($usedAnalyzers[$inis[$rule]]);
-            $clearPHP++;
+            ++$clearPHP;
             print "ClearPHP";
         }
         unset($inis[$rule]);

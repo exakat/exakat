@@ -248,7 +248,7 @@ function processFile($file) {
             switch($token[0]) {
                 case T_NAMESPACE : 
                     $namespace = '';
-                    for ($i = $id + 2; ($tokens[$i] != ';') && ($tokens[$i] != '{') && ($i - $id < 20); $i++) {
+                    for ($i = $id + 2; ($tokens[$i] != ';') && ($tokens[$i] != '{') && ($i - $id < 20); ++$i) {
                         if (is_array($tokens[$i])) {
                             $namespace .= $tokens[$i][1];
                         } else {
