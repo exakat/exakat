@@ -32,10 +32,32 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
     
     public function analyze() {
         // For Instanciation (needs constructors)
+        // In the class itself
        $this->atomIs('Functioncall')
              ->hasIn('NEW')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->savePropertyAs('args_count', 'args_count')
+             ->classDefinition()
+             ->filter(' it.out("BLOCK").out("ELEMENT").out("NAME").has("code", "__construct").any() ')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->outIs('NAME')
+             ->code('__construct')
+             ->inIs('NAME')
+             ->analyzerIsNot('Functions/VariableArguments')
+             ->isMore('args_min', 'args_count')
+             ->back('first');
+        $this->prepareQuery();
+
+        // In the parent
+       $this->atomIs('Functioncall')
+             ->hasIn('NEW')
+             ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
+             ->savePropertyAs('args_count', 'args_count')
+             ->classDefinition()
+             ->filter(' it.out("BLOCK").out("ELEMENT").out("NAME").has("code", "__construct").any() == false')
+             ->outIs('EXTENDS')
              ->classDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -47,7 +69,29 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
              ->isMore('args_min', 'args_count')
              ->back('first');
         $this->prepareQuery();
-        
+
+        // In the grand-parent
+       $this->atomIs('Functioncall')
+             ->hasIn('NEW')
+             ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
+             ->savePropertyAs('args_count', 'args_count')
+             ->classDefinition()
+             ->filter(' it.out("BLOCK").out("ELEMENT").out("NAME").has("code", "__construct").any() == false')
+             ->outIs('EXTENDS')
+             ->classDefinition()
+             ->filter(' it.out("BLOCK").out("ELEMENT").out("NAME").has("code", "__construct").any() == false')
+             ->outIs('EXTENDS')
+             ->classDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->outIs('NAME')
+             ->code('__construct')
+             ->inIs('NAME')
+             ->analyzerIsNot('Functions/VariableArguments')
+             ->isMore('args_min', 'args_count')
+             ->back('first');
+        $this->prepareQuery();
 
        $this->atomIs('Functioncall')
              ->hasIn('NEW')
