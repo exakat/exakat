@@ -1161,6 +1161,9 @@ SQL
                             'Goto'                       => 'Php/Gotonames',
                             'Labels'                     => 'Php/Labelnames',
 
+                            'Yield'                      => 'Php/YieldUsage',
+                            'Yield from'                 => 'Php/YieldfromUsage',
+
                             'Coalesce'                   => 'Php/Coalesce',
                             'Null Coalesce'              => 'Php/NullCoalesce',
 
