@@ -174,7 +174,7 @@ GREMLIN
         $this->logTime('g.idx("last index")');
 
         $this->gremlin->query(<<<GREMLIN
-project = g.addVertex(null, [token:"T_PROJECT", atom:"Project", code:"Project", fullcode: "Whole", line:0, index:true]); 
+project = g.addVertex(null, [token:"T_PROJECT", atom:"Project", code:"$config->project", fullcode: "Whole", line:0, index:true]); 
 g.idx("atoms").put("atom", "Project", project);
 g.idx("racines")[["token":"ROOT"]].in("FILE").each{ g.addEdge(project, it, "PROJECT"); };
 

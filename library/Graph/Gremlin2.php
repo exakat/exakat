@@ -198,6 +198,12 @@ class Gremlin2 extends Graph {
 
         return $res;
     }
+
+    public function getProjectName() {
+        $res = $this->queryOne('g.V().has("atom", "Project").code');
+
+        return $res;
+    }
 }
 
 ?>
