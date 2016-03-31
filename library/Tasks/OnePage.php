@@ -78,14 +78,14 @@ class OnePage extends Tasks {
                                                ));
 
         display("Cleaning DB\n");
-        $task = new CleanDb();
+        $task = new CleanDb($this->gremlin);
         $task->run($config);
 
         $this->updateProgress($progress++);
         $this->logTime('CleanDb');
 
         display("Running files\n");
-        $task = new Files();
+        $task = new Files($this->gremlin);
         $task->run($config);
 
         $this->updateProgress($progress++);
@@ -93,21 +93,21 @@ class OnePage extends Tasks {
 
         display("Running project 'onepage'\n");
 
-        $task = new Load();
+        $task = new Load($this->gremlin);
         $task->run($config);
 
         display("Project loaded\n");
         $this->updateProgress($progress++);
         $this->logTime('Loading');
 
-        $task = new Build_root();
+        $task = new Build_root($this->gremlin);
         $task->run($config);
 
         display("Build root\n");
         $this->updateProgress($progress++);
         $this->logTime('Build_root');
 
-        $task = new Tokenizer();
+        $task = new Tokenizer($this->gremlin);
         $task->run($config);
 
         $this->updateProgress($progress++);
@@ -115,7 +115,7 @@ class OnePage extends Tasks {
         display("Project tokenized\n");
 
         try {
-            $task = new Analyze();
+            $task = new Analyze($this->gremlin);
             $task->run($config);
             
             rename($config->projects_root.'/projects/onepage/log/analyze.log',
@@ -132,12 +132,12 @@ class OnePage extends Tasks {
         $this->logTime('Analyze');
 
         $b1 = microtime(true);
-        $task = new Dump();
+        $task = new Dump($this->gremlin);
         $task->run($config);
         display("Project dumped\n");
         $e1 = microtime(true);
 
-        $task = new Report2();
+        $task = new Report2($this->gremlin);
         $task->run($config);
         display("Project reported\n");
         $this->logTime('Report');
