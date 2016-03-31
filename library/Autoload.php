@@ -21,9 +21,6 @@
 */
 
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 class Autoload {
     static public function autoload_library($name) {
         $file = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
