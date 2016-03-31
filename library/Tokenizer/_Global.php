@@ -36,7 +36,6 @@ class _Global extends TokenAuto {
             $atoms[] = 'Array';
             $atoms[] = 'Staticproperty';
         }
-        print_r($atoms);
         
     // global $x; (nothing more)
         $this->conditions = array( 0 => array('token'    => _Global::$operators,
