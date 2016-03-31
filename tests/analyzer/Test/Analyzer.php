@@ -21,12 +21,12 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
 
         // initialize Config (needed by phpexec)
         $config = \Config::factory(array('foo', '-p', 'test'));
-        
+
         $res = shell_exec($config->php.' -l ./source/'.str_replace('_', '/', $file).'.php 2>/dev/null');
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.$res.'".');
         }
-        
+
         $Php = new \Phpexec($phpversion);
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();
@@ -45,9 +45,9 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $source = 'source/'.str_replace('_', '/', $file).'.php';
 
         if (is_dir($source)) {
-            $shell = 'cd ../..; php exakat test -d ./tests/analyzer/'.$source.' -P '.$analyzer.'; php exakat results  -p test -P '.$analyzer.' -o -json';
+            $shell = 'cd ../..; '.$config->php.' exakat test -d ./tests/analyzer/'.$source.' -P '.$analyzer.'; '.$config->php.' exakat results  -p test -P '.$analyzer.' -o -json';
         } else {
-            $shell = 'cd ../..; php exakat test -f ./tests/analyzer/'.$source.' -P '.$analyzer.'; php exakat results  -p test -P '.$analyzer.' -o -json';
+            $shell = 'cd ../..; '.$config->php.' exakat test -f ./tests/analyzer/'.$source.' -P '.$analyzer.'; '.$config->php.' exakat results  -p test -P '.$analyzer.' -o -json';
         }
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);
