@@ -29,7 +29,7 @@ class Property extends TokenAuto {
     
     public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall',
-                          'Functioncall', 'Parenthesis');
+                          'Functioncall', 'Parenthesis', 'Arrayappend');
 
         // $object->property{1}
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOLLAR')),
