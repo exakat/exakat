@@ -1162,7 +1162,7 @@ SQL
                             'Labels'                     => 'Php/Labelnames',
 
                             'Yield'                      => 'Php/YieldUsage',
-                            'Yield from'                 => 'Php/YieldfromUsage',
+                            'Yield from'                 => 'Php/YieldFromUsage',
 
                             'Coalesce'                   => 'Php/Coalesce',
                             'Null Coalesce'              => 'Php/NullCoalesce',
@@ -1290,6 +1290,10 @@ SQL
                             'LDAP'             => 'Extensions/Extldap',
                             'mail'             => 'Structures/MailUsage',
                      ),
+
+                    'Libraries' => array(
+                            'PEAR'           => 'Php/PearUsage',
+                            ),
 
                     'Extensions' => array(
                             'ext/amqp'       => 'Extensions/Extamqp',
@@ -1724,6 +1728,9 @@ TEXT
             $severities[$row['severity']] = array('severity' => $row['severity'], 
                                                   'count'    => $row['nb']);
         }
+        print 'SELECT severity, count(*) AS nb FROM results '.$where.' GROUP BY severity ORDER BY severity';
+        var_dump($severities);
+        die();
 
         $res = $this->dump->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
         $listBySeverity = array();
