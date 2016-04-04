@@ -347,7 +347,8 @@ g.idx('atoms')[['atom':'Function']].filter{it.out('NAME').next().code != ''}.sid
 ", "
 // use  usage inside Trait or class
 g.idx('atoms')[['atom':'Use']].filter{ it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class']}.any() }
-    .sideEffect{theUse = it;}.out('USE').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
+    .sideEffect{theUse = it;}.out('USE').sideEffect{fullcode = it;}
+    .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
     if (fullcode.absolutens == true) {
         fullcode.setProperty('fullnspath', fullcode.originpath.toLowerCase());
     } else if (theUse.groupedUse == true) {
@@ -355,7 +356,7 @@ g.idx('atoms')[['atom':'Use']].filter{ it.in('ELEMENT').in('BLOCK').filter{ it.a
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.originpath.toLowerCase());
     } else {
-        fullcode.setProperty('fullnspath',  '\\\\' + it.out('NAMESPACE').next().code.toLowerCase() + '\\\\' +  fullcode.originpath.toLowerCase());
+        fullcode.setProperty('fullnspath',  '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' +  fullcode.originpath.toLowerCase());
     }
 };
 
@@ -854,6 +855,7 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
     alias = it.alias.toLowerCase();
     fullnspath = it.fullnspath.toLowerCase();
 
+    // This is not taking into account the nested aliases : use a as b; use b\c as d;
     it.in('USE').in('ELEMENT').out().loop(1){true}{ it.object.fullnspath != null && it.object.atom != 'Use'}.each{
         if (alias == it.code.toLowerCase()) {
             it.setProperty('fullnspath', fullnspath);
