@@ -307,8 +307,8 @@ GREMLIN
         $namespacesId = ['' => 1];
         $total = 0;
         foreach($res as $row) {
-            if (isset($namespacesId['\\'.$row->name])) { 
-                continue; 
+            if (isset($namespacesId['\\'.$row->name])) {
+                continue;
             }
 
             $stmt->bindValue(':namespace',   $row->name,            SQLITE3_TEXT);
