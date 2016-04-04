@@ -29,7 +29,7 @@
            "file":[".docker"]},
  "git":{"homepage":"https://git-scm.com/",
             "file":[".git", ".gitignore", ".gitattributes",".gitmodules"]},
- "hithub":{"homepage":"http://www.github.com/",
+ "github":{"homepage":"http://www.github.com/",
             "file":[".github"]},
  "gulpfile":{"homepage":"http://gulpjs.com/",
             "file":[".js"]},
