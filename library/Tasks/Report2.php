@@ -24,6 +24,8 @@
 namespace Tasks;
 
 class Report2 extends Tasks {
+    private $config = null;
+    
     public function run(\Config $config) {
         if ($config->project == "default") {
             die("This command requires a project (option -p).\nAborting\n");
@@ -41,48 +43,12 @@ class Report2 extends Tasks {
             die("Project hasn't been analyzed. Run project first.\nAborting\n");
         }
 
+        $this->config = $config;
         \Analyzer\Analyzer::$datastore = $this->datastore;
         // errors, warnings, fixable and filename
         // line number => columnnumber => type, source, severity, fixable, message
 
-        $dumpFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
-        
-        $max = 20;
-        while (!file_exists($dumpFile)) {
-            display("$config->project/dump.sqlite doesn't exist yet ($max). Waiting\n");
-            sleep(rand(1,3));
-            --$max;
-            
-            if ($max == 0) {
-                die("Waited for dump.sqlite, but it never came. Try again later\n");
-            }
-        }
-
-        $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
-        $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
-        $res = $dump->query($ProjectDumpSql);
-        $row = $res->fetchArray(\SQLITE3_NUM);
-
-        $max = 20;
-        while( $row[0] != 1) {
-            unset($dump);
-            sleep(rand(1,3));
-            display("No Dump finish signal ($max). Waiting\n");
-
-            $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
-
-            $res = @$dump->query($ProjectDumpSql);
-            if ($res) {
-                $row = $res->fetchArray(\SQLITE3_NUM);
-            }
-            
-            --$max;
-            if ($max == 0) {
-                display("Waited for Project/Dump, but it never came. Try again later\n");
-                die();
-            }
-        }
-
+        $this->waitForDump();
 /*
         That should be a configuration for the report
         if ($config->program !== null) {
@@ -129,6 +95,46 @@ class Report2 extends Tasks {
         display( "Processing time : ".number_format($end - $begin, 2)." s\n");
         $this->datastore->addRow('hash', array($config->format => $config->file));
         display( "Done\n");
+    }
+    
+    private function waitForDump() {
+        $dumpFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
+        
+        $max = 20;
+        while (!file_exists($dumpFile)) {
+            display("$this->config->project/dump.sqlite doesn't exist yet ($max). Waiting\n");
+            sleep(rand(1,3));
+            --$max;
+            
+            if ($max == 0) {
+                die("Waited for dump.sqlite, but it never came. Try again later\n");
+            }
+        }
+
+        $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
+        $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
+        $res = $dump->query($ProjectDumpSql);
+        $row = $res->fetchArray(\SQLITE3_NUM);
+
+        $max = 20;
+        while( $row[0] != 1) {
+            unset($dump);
+            sleep(rand(1,3));
+            display("No Dump finish signal ($max). Waiting\n");
+
+            $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
+
+            $res = @$dump->query($ProjectDumpSql);
+            if ($res) {
+                $row = $res->fetchArray(\SQLITE3_NUM);
+            }
+            
+            --$max;
+            if ($max == 0) {
+                display("Waited for Project/Dump, but it never came. Try again later\n");
+                die();
+            }
+        }
     }
 }
 
