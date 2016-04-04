@@ -50,6 +50,8 @@ class Dump extends Tasks {
         
         $sqlite = new \Sqlite3($sqliteFile);
         $this->getAtomCounts($sqlite);
+        
+        $this->collectStructures($sqlite);
 
         $sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 fullcode STRING,
@@ -276,7 +278,461 @@ SQL;
 
         $result = $this->stmtResultsCounts->execute();
     }
+    
+    private function collectStructures($sqlite) {
 
+        // Name spaces
+        $sqlite->query('DROP TABLE IF EXISTS namespaces');
+        $sqlite->query('CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                   namespace STRING
+                                                 )');
+        $sqlite->query('INSERT INTO namespaces VALUES ( 1, "Global")');
+
+        $sqlQuery = <<<SQL
+INSERT INTO namespaces ("id", "namespace") 
+             VALUES ( NULL, :namespace)
+SQL;
+        $stmt = $sqlite->prepare($sqlQuery);
+
+        $query = <<<GREMLIN
+g.idx("atoms")[["atom":"Namespace"]]
+    .transform{ 
+    x = ['name': it.out('NAMESPACE').next().fullcode];
+}
+GREMLIN
+;
+        $res = $this->gremlin->query($query);
+        $res = $res->results;
+        
+        $namespacesId = ['' => 1];
+        $total = 0;
+        foreach($res as $row) {
+            if (isset($namespacesId['\\'.$row->name])) { 
+                continue; 
+            }
+
+            $stmt->bindValue(':namespace',   $row->name,            SQLITE3_TEXT);
+            $stmt->execute();
+            $namespacesId['\\'.strtolower($row->name)] = $sqlite->lastInsertRowID();
+
+            ++$total;
+        }
+        display("$total namespaces\n");
+
+        // Ids for Classes, Interfaces and Traits
+        $citId = array();
+
+        // Classes
+        $sqlite->query('DROP TABLE IF EXISTS cit');
+        $sqlite->query('CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                   name STRING,
+                                                   abstract INTEGER,
+                                                   final INTEGER,
+                                                   type TEXT,
+                                                   extends TEXT DEFAULT "",
+                                                   namespaceId INTEGER DEFAULT 1
+                                                 )');
+
+        $sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                       implementing INTEGER,
+                                                       implements INTEGER,
+                                                       type    TEXT
+                                                 )');
+
+        $sqlQuery = <<<SQL
+INSERT INTO cit ("id", "name", "namespaceId", "abstract", "final", "extends", "type") 
+             VALUES ( NULL, :class, :namespaceId, :abstract, :final, :extends, "class")
+SQL;
+        $stmt = $sqlite->prepare($sqlQuery);
+
+        $query = <<<GREMLIN
+g.idx("atoms")[["atom":"Class"]].transform{ 
+    x = ['fullnspath':it.fullnspath,
+         'name': it.out('NAME').next().code,
+         'abstract':it.out("ABSTRACT").any(),
+         'final':it.out("FINAL").any(),
+         'extends':it.out("EXTENDS").fullnspath.toList(),
+         'implements':it.out("IMPLEMENTS").fullnspath.toList(),
+         'uses':it.out("BLOCK").out('ELEMENT').has('atom', 'Use').out('USE').fullnspath.toList()
+         ];
+}
+GREMLIN
+;
+        $res = $this->gremlin->query($query);
+        $res = $res->results;
+        
+        $total = 0;
+        $extendsId = array();
+        $implementsId = array();
+        $usesId = array();
+
+        foreach($res as $row) {
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
+
+            if (isset($namespacesId[$namespace])) {
+                $namespaceId = $namespacesId[$namespace];
+            } else {
+                $namespaceId = 1;
+            }
+            
+            $stmt->bindValue(':class',       $row->name,            SQLITE3_TEXT);
+            $stmt->bindValue(':namespaceId', $namespaceId,          SQLITE3_INTEGER);
+            $stmt->bindValue(':abstract',    (int) $row->abstract , SQLITE3_INTEGER);
+            $stmt->bindValue(':final',       (int) $row->final,     SQLITE3_INTEGER);
+
+            $stmt->execute();
+            $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
+
+            // Get extends
+            if (!empty($row->extends)) {
+                if (isset($extendsId[$row->extends[0]])) {
+                    $extendsId[$row->extends[0]][] = $citId[$row->fullnspath];
+                } else {
+                    $extendsId[$row->extends[0]] = array($citId[$row->fullnspath]);
+                }
+            }
+
+            // Get implements
+            if (!empty($row->implements)) {
+                $implementsId[$citId[$row->fullnspath]] = $row->implements;
+            }
+            
+            // Get use
+            if (!empty($row->uses)) {
+                $usesId[$citId[$row->fullnspath]] = $row->uses;
+            }
+            ++$total;
+        }
+        
+        display("$total classes\n");
+
+        // Interfaces
+        $sqlQuery = <<<SQL
+INSERT INTO cit ("id", "name", "namespaceId", "abstract", "final", "type") 
+             VALUES ( NULL, :name, :namespaceId, 0, 0, "interface")
+SQL;
+        $stmt = $sqlite->prepare($sqlQuery);
+
+        $query = <<<GREMLIN
+g.idx("atoms")[["atom":"Interface"]].transform{ 
+    x = ['fullnspath':it.fullnspath,
+         'name': it.out('NAME').next().code,
+         'extends':it.out("EXTENDS").fullnspath.toList(),
+         'implements':it.out("IMPLEMENTS").fullnspath.toList()
+         ];
+}
+GREMLIN
+;
+        $res = $this->gremlin->query($query);
+        $res = $res->results;
+        
+        $total = 0;
+        foreach($res as $row) {
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
+
+            if (isset($namespacesId[$namespace])) {
+                $namespaceId = $namespacesId[$namespace];
+            } else {
+                $namespaceId = 1;
+            }
+
+            $stmt->bindValue(':name',       $row->name,            SQLITE3_TEXT);
+            $stmt->bindValue(':namespaceId', $namespaceId,          SQLITE3_INTEGER);
+
+            $stmt->execute();
+            $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
+
+            // Get extends
+            if (!empty($row->extends)) {
+                if (isset($extendsId[$row->extends[0]])) {
+                    $extendsId[$row->extends[0]][] = $citId[$row->fullnspath];
+                } else {
+                    $extendsId[$row->extends[0]] = array($citId[$row->fullnspath]);
+                }
+            }
+
+            // Get implements
+            if (!empty($row->implements)) {
+                $implementsId[$citId[$row->fullnspath]] = $row->implements;
+            }
+            ++$total;
+        }
+        display("$total interfaces\n");
+
+        // Traits
+        $sqlQuery = <<<SQL
+INSERT INTO cit ("id", "name", "namespaceId", "abstract", "final", "type") 
+             VALUES ( NULL, :name, :namespaceId, 0, 0, "trait")
+SQL;
+        $stmt = $sqlite->prepare($sqlQuery);
+
+        $query = <<<GREMLIN
+g.idx("atoms")[["atom":"Trait"]].transform{ 
+    x = ['fullnspath':it.fullnspath,
+         'name': it.out('NAME').next().code,
+         ];
+}
+GREMLIN
+;
+        $res = $this->gremlin->query($query);
+        $res = $res->results;
+        
+        $total = 0;
+        foreach($res as $row) {
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
+
+            if (isset($namespacesId[$namespace])) {
+                $namespaceId = $namespacesId[$namespace];
+            } else {
+                $namespaceId = 1;
+            }
+
+            $stmt->bindValue(':name',       $row->name,            SQLITE3_TEXT);
+            $stmt->bindValue(':namespaceId', $namespaceId,          SQLITE3_INTEGER);
+
+            $stmt->execute();
+            $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
+            ++$total;
+        }
+        display("$total traits\n");
+
+        // Manage extends
+        $sqlQuery = <<<SQL
+UPDATE cit SET extends = :class WHERE id = :id
+SQL;
+        $stmt = $sqlite->prepare($sqlQuery);
+
+        $total = 0;
+        foreach($extendsId as $exId => $ids) {
+            if (isset($citId[$exId])) {
+                foreach($ids as $id) {
+                    $stmt->bindValue(':id',       $id,           SQLITE3_INTEGER);
+                    $stmt->bindValue(':class',    $citId[$exId], SQLITE3_INTEGER);
+                
+                    $stmt->execute();
+                    ++$total;
+                }
+            } // Else ignore. Not in the project
+        }
+        display("$total extends \n");
+
+        // Manage implements
+        $sqlQuery = <<<SQL
+INSERT INTO cit_implements ("id", "implementing", "implements", "type") 
+             VALUES ( NULL, :implementing, :implements, :type)
+SQL;
+        $stmtImplements = $sqlite->prepare($sqlQuery);
+
+        $total = 0;
+        $stmtImplements->bindValue(':type',   'implements',          SQLITE3_TEXT);
+        foreach($implementsId as $id => $implementsFNP) {
+            foreach($implementsFNP as $fnp) {
+                $stmtImplements->bindValue(':implementing',   $id,          SQLITE3_INTEGER);
+                if (isset($citId[$fnp])) {
+                    $stmtImplements->bindValue(':implements', $citId[$fnp], SQLITE3_INTEGER);
+                    
+                    $stmtImplements->execute();
+                    ++$total;
+                } // Else ignore. Not in the project
+            }
+        }
+        display("$total implements \n");
+
+        // Manage use (traits)
+        // Same SQL than for implements
+
+        $total = 0;
+        $stmtImplements->bindValue(':type',   'use',          SQLITE3_TEXT);
+        foreach($usesId as $id => $usesFNP) {
+            foreach($usesFNP as $fnp) {
+                $stmtImplements->bindValue(':implementing',   $id,          SQLITE3_INTEGER);
+                if (substr($fnp, 0, 2) == '\\\\') {
+                    $fnp = substr($fnp, 2);
+                }
+                if (isset($citId[$fnp])) {
+                    $stmtImplements->bindValue(':implements', $citId[$fnp], SQLITE3_INTEGER);
+                    
+                    $stmtImplements->execute();
+                    ++$total;
+                } // Else ignore. Not in the project
+            }
+        }
+        display("$total uses \n");
+
+        // Methods
+        $sqlite->query('DROP TABLE IF EXISTS methods');
+        $sqlite->query('CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                method INTEGER,
+                                                citId INTEGER,
+                                                static INTEGER,
+                                                final INTEGER,
+                                                abstract INTEGER,
+                                                visibility INTEGER
+                                                 )');
+
+        $sqlQuery = <<<SQL
+INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility") 
+             VALUES ( NULL, :method, :citId, :static, :final, :abstract, :visibility)
+SQL;
+        $stmt = $sqlite->prepare($sqlQuery);
+
+        $query = <<<GREMLIN
+g.idx("atoms")[["atom":"Function"]]
+    .filter{ it.in("ELEMENT").in("BLOCK").filter{ it.atom in ["Class", "Interface", "Trait"]}.sideEffect{ classe = it.fullnspath}.any()}
+    .transform{ 
+    x = ['name': it.out('NAME').next().fullcode + '( ' + it.out('ARGUMENTS').next().fullcode + ' )',
+         'abstract':it.out("ABSTRACT").any(),
+         'final':it.out("FINAL").any(),
+         'static':it.out("STATIC").any(),
+
+         'public':it.out("PUBLIC").any(),
+         'protected':it.out("PROTECTED").any(),
+         'private':it.out("PRIVATE").any(),
+         
+         'class': classe
+
+         ];
+}
+GREMLIN
+;
+        $res = $this->gremlin->query($query);
+        $res = $res->results;
+        
+        $total = 0;
+        foreach($res as $row) {
+            if ($row->public) {
+                $visibility = 'public';
+            } elseif ($row->protected) {
+                $visibility = 'protected';
+            } elseif ($row->private) {
+                $visibility = 'private';
+            } else {
+                $visibility = '';
+            }
+
+            $stmt->bindValue(':method',    $row->name,                   SQLITE3_TEXT);
+            $stmt->bindValue(':citId',   $citId[$row->class],          SQLITE3_INTEGER);
+            $stmt->bindValue(':static',    (int) $row->static,           SQLITE3_INTEGER);
+            $stmt->bindValue(':final',     (int) $row->final,            SQLITE3_INTEGER);
+            $stmt->bindValue(':abstract',  (int) $row->abstract,         SQLITE3_INTEGER);
+            $stmt->bindValue(':visibility',$visibility,                  SQLITE3_TEXT);
+
+            $result = $stmt->execute();
+            ++$total;
+        }
+        display("$total methods\n");
+
+        // Properties
+        $sqlite->query('DROP TABLE IF EXISTS properties');
+        $sqlite->query('CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                property INTEGER,
+                                                citId INTEGER,
+                                                visibility INTEGER,
+                                                static INTEGER,
+                                                value TEXT
+                                                 )');
+
+        $sqlQuery = <<<SQL
+INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") 
+             VALUES ( NULL, :property, :citId, :visibility, :value, :static)
+SQL;
+        $stmt = $sqlite->prepare($sqlQuery);
+
+        $query = <<<GREMLIN
+
+g.idx("atoms")[["atom":"Visibility"]]
+    .filter{ it.in("ELEMENT").in("BLOCK").filter{ it.atom in ["Class", "Trait"]}.sideEffect{ classe = it.fullnspath}.any()}
+    .transform{ 
+    if (it.out('DEFINE').has('atom', 'Assignation').any()) { 
+        value = it.out('DEFINE').out('RIGHT').next().fullcode; 
+        name = it.out('DEFINE').next().propertyname;
+    } else { 
+        value = ''; 
+        name = it.out('DEFINE').next().propertyname;
+    }
+    x = ['name': name,
+         'value': value,
+         'static':it.out("STATIC").any(),
+
+         'public':it.out("PUBLIC").any(),
+         'protected':it.out("PROTECTED").any(),
+         'private':it.out("PRIVATE").any(),
+         'var':it.out("VAR").any(),
+         
+         'class': classe
+
+         ];
+}
+
+GREMLIN
+;
+        $res = $this->gremlin->query($query);
+        $res = $res->results;
+        
+        $total = 0;
+        foreach($res as $row) {
+            if ($row->public) {
+                $visibility = 'public';
+            } elseif ($row->protected) {
+                $visibility = 'protected';
+            } elseif ($row->private) {
+                $visibility = 'private';
+            } else {
+                $visibility = '';
+            }
+
+            $stmt->bindValue(':property',  $row->name,                   SQLITE3_TEXT);
+            $stmt->bindValue(':citId',   $citId[$row->class],      SQLITE3_INTEGER);
+            $stmt->bindValue(':value',     $row->value,                  SQLITE3_TEXT);
+            $stmt->bindValue(':static',    (int) $row->static,           SQLITE3_INTEGER);
+            $stmt->bindValue(':visibility',$visibility,                  SQLITE3_TEXT);
+
+            $result = $stmt->execute();
+            ++$total;
+        }
+        display("$total properties\n");
+
+        // Constants
+        $sqlite->query('DROP TABLE IF EXISTS constants');
+        $sqlite->query('CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                constant INTEGER,
+                                                citId INTEGER,
+                                                value TEXT
+                                                 )');
+
+        $sqlQuery = <<<SQL
+INSERT INTO constants ("id", "constant", "citId", "value") 
+             VALUES ( NULL, :constant, :citId, :value)
+SQL;
+        $stmt = $sqlite->prepare($sqlQuery);
+
+        $query = <<<GREMLIN
+g.idx("atoms")[["atom":"Const"]]
+    .filter{ it.in("ELEMENT").in("BLOCK").filter{ it.atom in ["Class", "Interface"]}.sideEffect{ classe = it.fullnspath}.any()}
+    .transform{ 
+    x = ['name': it.out('CONST').out('LEFT').next().code,
+         'value': it.out('CONST').out('RIGHT').next().code,
+         
+         'class': classe
+
+         ];
+}
+GREMLIN
+;
+        $res = $this->gremlin->query($query);
+        $res = $res->results;
+        
+        $total = 0;
+        foreach($res as $row) {
+            $stmt->bindValue(':constant',  $row->name,                   SQLITE3_TEXT);
+            $stmt->bindValue(':citId',   $citId[$row->class],      SQLITE3_INTEGER);
+            $stmt->bindValue(':value',     $row->value,                  SQLITE3_TEXT);
+
+            $result = $stmt->execute();
+            ++$total;
+        }
+        display("$total constants\n");
+    }
 }
 
 ?>
