@@ -855,7 +855,6 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
     alias = it.alias.toLowerCase();
     fullnspath = it.fullnspath.toLowerCase();
 
-    // This is not taking into account the nested aliases : use a as b; use b\c as d;
     it.in('USE').in('ELEMENT').out().loop(1){true}{ it.object.fullnspath != null && it.object.atom != 'Use'}.each{
         if (alias == it.code.toLowerCase()) {
             it.setProperty('fullnspath', fullnspath);
