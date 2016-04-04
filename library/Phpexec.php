@@ -159,6 +159,10 @@ class Phpexec {
     public function getTokenName($token) {
         return self::$tokens[$token];
     }
+
+    public function getTokenValue($token) {
+        return array_search($token, self::$tokens);
+    }
     
     public function getTokenFromFile($file) {
         $file = str_replace('$', '\\\$', $file);
