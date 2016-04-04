@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 28 Mar 2016 15:47:02 +0000
-.. comment: Generation hash : 451b7799c51daece988ea23fc0dfc37cec8dec36
+.. comment: Generation date : Mon, 04 Apr 2016 17:31:24 +0000
+.. comment: Generation hash : 021cb0d8e134e70deaa810b611fbc46160fa847a
 
 
 .. _$http\_raw\_post\_data:
@@ -4729,6 +4729,24 @@ List of properties that are not explicitely defined in the class, its parents or
 +--------------+---------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                                |
 +--------------+---------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _undefined-trait:
+
+Undefined Trait
+###############
+
+
+Those traits are undefined.
+
++--------------+-----------------------+
+| Command Line | Traits/UndefinedTrait |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
 
 
 
