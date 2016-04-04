@@ -851,7 +851,9 @@ g.idx('atoms')[['atom':'Trait']].each{
 
 ","
 // apply use statement to all structures
-g.idx('atoms')[['atom':'Use']].out('USE').each{
+g.idx('atoms')[['atom':'Use']].out('USE')
+    .filter{it.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Class', 'Trait'] }.any() == false } // No use from within a class/trait
+    .each{
     alias = it.alias.toLowerCase();
     fullnspath = it.fullnspath.toLowerCase();
 
@@ -864,6 +866,7 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
 };
 ",
 "// Build the classes hierarchy
+
 
 g.idx('atoms')[['atom':'Class']]
 .sideEffect{
