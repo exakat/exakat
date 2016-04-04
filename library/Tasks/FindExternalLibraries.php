@@ -24,9 +24,10 @@
 namespace Tasks;
 
 class FindExternalLibraries extends Tasks {
-    const WHOLE_DIR   = 1;
-    const FILE_ONLY   = 2;
-    const PARENT_DIR  = 3; // Whole_dir and parent.
+    const WHOLE_DIR    = 1;
+    const FILE_ONLY    = 2;
+    const PARENT_DIR   = 3; // Whole_dir and parent.
+    const COMPOSER_DIR = 4; // whole_dir + 4 levels (ex : fzaninoto/faker/src/Faker/Factory.php)
 
     // classic must be in lower case form.
     private $classic = array('adoconnection'    => self::WHOLE_DIR,
@@ -35,9 +36,10 @@ class FindExternalLibraries extends Tasks {
                              'cakeplugin'       => self::PARENT_DIR, // cakephp
                              'dompdf'           => self::PARENT_DIR,
                              'fpdf'             => self::FILE_ONLY,
+                             'faker\\factory'   => self::COMPOSER_DIR,
                              'graph'            => self::PARENT_DIR, // Jpgraph
                              'html2pdf'         => self::WHOLE_DIR, // contains tcpdf
-                             'htmlpurifier'     => self::FILE_ONLY,
+                             'htmlpurifier'     => self::WHOLE_DIR,
                              'http_class'       => self::WHOLE_DIR,
                              'idna_convert'     => self::WHOLE_DIR,
                              'lessc'            => self::FILE_ONLY,
@@ -88,8 +90,8 @@ class FindExternalLibraries extends Tasks {
             return; //Cancel task
         }
     
-        display('Processing files');
         $files = $this->datastore->getCol('files', 'file');
+        display('Processing '.count($files).' files');
         if (empty($files)) {
             display('No files to process. Aborting');
             return;
@@ -97,10 +99,12 @@ class FindExternalLibraries extends Tasks {
         
         $r = array();
         foreach($files as $file) {
+//            $file = '/Users/famille/Desktop/analyze/projects/itoobao/code/vendor/ezyang/htmlpurifier/library/HTMLPurifier.php';
             $s = $this->process($file);
             
             if (!empty($s)) {
-               $r[] = $s;
+                print_r($s);
+                $r[] = $s;
             }
        }
 
@@ -142,20 +146,40 @@ class FindExternalLibraries extends Tasks {
         $return = array();
 
         $php = new \Phpexec();
+        static $t_class, $t_namespace, $t_whitecode;
+        if (!isset($t_class)) {
+            $php->getTokens();
+            $t_class = $php->getTokenValue('T_CLASS');
+            $t_namespace = $php->getTokenValue('T_NAMESPACE');
+            $t_whitecode = $php->getWhiteCode();
+        }
+        
         $tokens = $php->getTokenFromFile($filename);
         if (count($tokens) == 1) {
             return $return;
         }
         $this->log->log("$filename : ".count($tokens));
+        print $filename."\n";
+        $namespace = '';
 
         foreach($tokens as $id => $token) {
             if (is_string($token)) { continue; }
 
-            if ($token[0] == T_WHITESPACE)  { continue; }
-            if ($token[0] == T_DOC_COMMENT) { continue; }
-            if ($token[0] == T_COMMENT)     { continue; }
+            if (in_array($token[0], $t_whitecode))  { continue; }
+
+            if ($token[0] == $t_namespace) {
+                if (!is_array($tokens[$id + 2])) { continue; }
+
+                // This will only work with one-string namespaces. Might need to upgrade this later to full NSname
+                $namespace = strtolower($tokens[$id + 2][1]);
+                if (!is_string($namespace)) {
+                    // ignoring errors in the parsed code. Should go to log.
+                    continue;
+                }
+                continue;
+            }
         
-            if ($token[0] == T_CLASS) {
+            if ($token[0] == $t_class) {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];
                 if (!is_string($class)) {
@@ -164,6 +188,7 @@ class FindExternalLibraries extends Tasks {
                 }
 
                 $lclass = strtolower($class);
+
                 if (isset($this->classic[$lclass])) {
                     if ($this->classic[$lclass] == self::WHOLE_DIR) {
                         $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
@@ -172,9 +197,14 @@ class FindExternalLibraries extends Tasks {
                     } elseif ($this->classic[$lclass] == self::FILE_ONLY) {
                         $returnPath = preg_replace('#.*projects/.*?/code/#', '/', $filename);
                     }
-                    if ($returnPath != '/') {
-                        $return[$class] = $returnPath;
+                } elseif (isset($this->classic["$namespace\\$lclass"])) {
+                    if ($this->classic[$namespace.'\\'.$lclass] == self::COMPOSER_DIR) {
+                        $returnPath = dirname(dirname(dirname(dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)))));
                     }
+                }
+
+                if ($returnPath != '/') {
+                    $return[$class] = $returnPath;
                 }
             }
         }
