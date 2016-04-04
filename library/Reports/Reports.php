@@ -26,7 +26,7 @@ abstract class Reports {
     private $count = 0;
 
     CONST FILE_EXTENSION = 'undefined';
-    CONST FORMATS        = ['Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 'Text', 'Xml'];
+    CONST FORMATS        = ['Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 'Text', 'Xml', 'Uml'];
 
     protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE
