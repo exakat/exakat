@@ -99,7 +99,6 @@ class FindExternalLibraries extends Tasks {
         
         $r = array();
         foreach($files as $file) {
-//            $file = '/Users/famille/Desktop/analyze/projects/itoobao/code/vendor/ezyang/htmlpurifier/library/HTMLPurifier.php';
             $s = $this->process($file);
             
             if (!empty($s)) {
