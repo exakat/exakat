@@ -1,4 +1,4 @@
-Version 0.5.9 (Six Eared Macaque, Coming up)
+Version 0.6.0 (Intelligent Stone Monkey, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,32 @@ Version 0.5.9 (Six Eared Macaque, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.5.9 (Six Eared Macaque, 2016-04-04)
++ Architecture
+    + One progressbar per Recipe during project analysis
+    + report's documentation
+    + Upgraded 'External Lib' to ignore Composer folders.
+    + Fixed a bug about interpreting tokens 
+    + Dump collects classes, interfaces, traits definitions 
+    + Now storing project name in database for future use
+    + Removed PHP configuration modifications (error_reporting, display_errors)
++ Report
+    + Added 'Uml' report : hierarchy report
+    + Now reports Pear Usage
+    + Upgraded Bugfix database for 7.0.5, 5.6.20 and 5.5.34
+    + Report Yield (from) usage
+    + New external configuration files : bazar, github, docker, openshift
++ Analyzer
+    + Added detection for undefined classes in ZF (1.8 to 1.12)
+    + New : report undefined Traits
+    + Added support for parent/grandparent when checking argument numbers
+    + Added support for V8js
++ Tokenizer
+    + Fixed bug in fullnspath for use within trait or class
+    + It is possible to reach a property on an array append
+    + Fixed AST between PHP 5 and 7 for globals
+    + Simplified ++ analyzers
 
 Version 0.5.8 (Sun Deity of Mao, 2016-03-28)
 + Architecture
