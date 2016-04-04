@@ -1235,9 +1235,9 @@ GREMLIN
         }
         
         if (is_array($parentClass)) {
-            $this->addMethod('filter{ it.'.$in.'.filter{ it.atom in ***).count() != 0}', $parentClass);
+            $this->addMethod('filter{ it.'.$in.'.filter{ it.atom in ***).any()}', $parentClass);
         } else {
-            $this->addMethod('filter{ it.'.$in.'.has("atom", ***).count() != 0}', $parentClass);
+            $this->addMethod('filter{ it.'.$in.'.has("atom", ***).any()}', $parentClass);
         }
         
         return $this;
