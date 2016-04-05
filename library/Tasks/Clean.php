@@ -32,6 +32,14 @@ class Clean extends Tasks {
     public function run(\Config $config) {
         $path = $config->projects_root.'/projects/'.$config->project;
         
+        if ($config->project == 'default') {
+            die("analyze require -p <project> option. Aborting\n");
+        }
+
+        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
+            die("Project '$config->project' doesn't exist in projects folder. Aborting\n");
+        }
+        
         $dirsToErase = array('log',
                              'report',
                              'Premier-ace',
