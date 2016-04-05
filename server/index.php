@@ -70,7 +70,7 @@ function archive($path) {
 }
 
 function onepage($path) {
-    if (isset($_REQUEST['id']) && strlen($_REQUEST['id']) == 32 && !preg_match('/^[A-Fa-f0-9]{32}$/', $_REQUEST['id']))) {
+    if (isset($_REQUEST['id']) && strlen($_REQUEST['id']) == 32 && !preg_match('/^[A-Fa-f0-9]{32}$/', $_REQUEST['id'])) {
         $id = $_REQUEST['id'];
         if (file_exists('./out/'.$id.'.json')) {
             header('Content-Type: application/json');
@@ -96,7 +96,7 @@ function onepage($path) {
 }
 
 function project($path) {
-    if (isset($_REQUEST['project']) && preg_match('/^[A-Fa-f0-9_\-]$/', $_REQUEST['project']))) {
+    if (isset($_REQUEST['project']) && preg_match('/^[A-Fa-f0-9_\-]$/', $_REQUEST['project'])) {
         // Validation
         $project = $_REQUEST['project'];
         if (!file_exists('./projects/'.$project)) {
