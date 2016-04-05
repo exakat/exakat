@@ -92,6 +92,7 @@ class Initproject extends Tasks {
                 $vcs = 'git';
             }
             // default initial config. Found in test project.
+            $vendor = ($vcs == 'composer') ? '' : "ignore_dirs[] = /vendor";
             $configIni = <<<INI
 phpversion = 7.0
 
@@ -105,16 +106,15 @@ ignore_dirs[] = /docs
 ignore_dirs[] = /doc
 ignore_dirs[] = /tmp
 ignore_dirs[] = /version
-ignore_dirs[] = /vendor
 ignore_dirs[] = /js
 ignore_dirs[] = /lang
 ignore_dirs[] = /data
 ignore_dirs[] = /css
 ignore_dirs[] = /cache
-ignore_dirs[] = /vendor
 ignore_dirs[] = /assets
 ignore_dirs[] = /spec
 ignore_dirs[] = /sql
+$vendor
 
 file_extensions =
 
