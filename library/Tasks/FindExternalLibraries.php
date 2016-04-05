@@ -102,7 +102,6 @@ class FindExternalLibraries extends Tasks {
             $s = $this->process($file);
             
             if (!empty($s)) {
-                print_r($s);
                 $r[] = $s;
             }
        }
@@ -158,7 +157,6 @@ class FindExternalLibraries extends Tasks {
             return $return;
         }
         $this->log->log("$filename : ".count($tokens));
-        print $filename."\n";
         $namespace = '';
 
         foreach($tokens as $id => $token) {
