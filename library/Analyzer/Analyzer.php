@@ -1351,8 +1351,8 @@ GREMLIN
 
     public function classDefinition() {
         $this->addMethod('hasNot("fullnspath", null)
-                          .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                          .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }');
+                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
+                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }');
     
         return $this;
     }
@@ -1517,9 +1517,7 @@ GREMLIN
     }
 
     public function goToAllParents() {
-        $this->addMethod('out("EXTENDS")
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(3){true}{it.object.atom == "Class"}');
+        $this->addMethod('classTree.scatter.transform{g.idx("classes")[["path":it]].next(); }');
         
         return $this;
     }
