@@ -1505,6 +1505,7 @@ TEXT
         $css->displayTitles = false;
         $css->titles = array(0, 1);
         $css->readOrder = $css->titles;
+        $css->noEscape = array('1' => true);
         
         $info = array(array('Code name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
