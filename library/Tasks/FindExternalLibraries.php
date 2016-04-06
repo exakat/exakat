@@ -99,7 +99,7 @@ class FindExternalLibraries extends Tasks {
         
         $r = array();
         foreach($files as $file) {
-            $s = $this->process($file);
+            $s = $this->process($config->projects_root.'/projects/'.$config->project.'/code'.$file);
             
             if (!empty($s)) {
                 $r[] = $s;
@@ -157,8 +157,8 @@ class FindExternalLibraries extends Tasks {
             return $return;
         }
         $this->log->log("$filename : ".count($tokens));
-        $namespace = '';
 
+        $namespace = '';
         foreach($tokens as $id => $token) {
             if (is_string($token)) { continue; }
 
@@ -194,14 +194,16 @@ class FindExternalLibraries extends Tasks {
                     } elseif ($this->classic[$lclass] == self::FILE_ONLY) {
                         $returnPath = preg_replace('#.*projects/.*?/code/#', '/', $filename);
                     }
+                    if ($returnPath != '/') {
+                        $return[$class] = $returnPath;
+                    }
                 } elseif (isset($this->classic["$namespace\\$lclass"])) {
                     if ($this->classic[$namespace.'\\'.$lclass] == self::COMPOSER_DIR) {
                         $returnPath = dirname(dirname(dirname(dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)))));
                     }
-                }
-
-                if ($returnPath != '/') {
-                    $return[$class] = $returnPath;
+                    if ($returnPath != '/') {
+                        $return[$class] = $returnPath;
+                    }
                 }
             }
         }
