@@ -32,6 +32,8 @@ abstract class Reports {
     protected $themesList = '';      // cache for themes list in SQLITE
     protected $config     = null;
     
+    protected $sqlite = null;
+    
     public function __construct() {
         $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
                                     \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
@@ -44,8 +46,10 @@ abstract class Reports {
                                     \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
                                     );
         $this->themesList = '("'.implode('", "', $this->themes).'")';
-        
+
         $this->config = \Config::Factory();
+        $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        
     }
     
     public abstract function generateFileReport($report);

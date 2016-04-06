@@ -28,8 +28,6 @@ class FacetedJson extends Reports {
     public function generateFileReport($report) {}
 
     public function generate($dirName, $fileName = null) {
-        $sqlite      = new \sqlite3($dirName.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
-
         $sqlQuery = <<<SQL
 SELECT  id AS id,
         fullcode AS code, 
@@ -40,15 +38,13 @@ SELECT  id AS id,
     WHERE analyzer IN $this->themesList
 
 SQL;
-        $res = $sqlite->query($sqlQuery);
+        $res = $this->sqlite->query($sqlQuery);
         
-        $config = \Config::factory();
-
-        $datastore = new \Datastore($config);
+        $datastore = new \Datastore($this->config);
 
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $row['error'] = $ini['name'];
             
             $a = \Analyzer\Analyzer::getInstance($row['analyzer']);

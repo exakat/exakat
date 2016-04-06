@@ -34,13 +34,14 @@ class Uml extends Reports {
     }
 
     public function generate($folder, $name= 'uml') {
-        $sqlite = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
         
-        $res = $sqlite->query(<<<SQL
-SELECT name, id, extends, type,
+        $res = $this->sqlite->query(<<<SQL
+SELECT name, cit.id, extends, type, namespace, 
        (SELECT GROUP_CONCAT(method,   "||")   FROM methods    WHERE citId = cit.id) AS methods,
        (SELECT GROUP_CONCAT( case when value != '' then property || " = " || substr(value, 0, 40) else property end, "||") FROM properties WHERE citId = cit.id) AS properties
     FROM cit
+    JOIN namespaces
+        ON namespaces.id = cit.namespaceId
 SQL
 );
         $id = 0;
@@ -48,10 +49,10 @@ SQL
         $dot = array();
         $links = array();
         $colors = array('class' => 'darkorange', 'trait' => 'gold', 'interface' => 'skyblue');
-
+        $subgraphs = array();
+        
         while($row = $res->fetchArray()) {
             ++$id;
-            
             if (strlen($row['properties']) > 0) {
                 $row['properties'] = "+&nbsp;".str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['properties']))."<br align='left'/>"; 
             } elseif ($row['type'] == 'interface') {
@@ -79,15 +80,24 @@ SQL
             $R = $id.' [label='.$label.' shape="none"];';
             
             $ids[$row['id']] = $id;
+            $subgraphs[$row['namespace']] = $R;
 
-            $dot[] = $R;
+            $N = explode('\\', $row['namespace']);
+            $dotr = &$dot;
+            foreach($N as $n) {
+                if (!isset($dotr[$n])) {
+                    $dotr[$n] = array();
+                } 
+                $dotr = &$dotr[$n];
+            }
+            $dotr[] = $R;
             
             if (!empty($row['extends'])) {
                 $links[] = " $id -> $row[extends] [label=\"extends\"];";
             }
         }
         
-        $res = $sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<SQL
 SELECT implementing, implements, type FROM cit_implements
 SQL
 );
@@ -98,6 +108,7 @@ SQL
         $dot = " digraph graphname {\n        
         fontname = \"Bitstream Vera Sans\"
         fontsize = 8
+        colorscheme = \"bugn9\"
 
         node [
                 fontname = \"Bitstream Vera Sans\"
@@ -111,12 +122,40 @@ SQL
                 arrowhead = \"empty\"
         ]
         
-        ".join("\n", $dot)."\n\n".join("\n", $links)."\n}\n";
+        ".$this->subgraphs($dot)."\n\n".join("\n", $links)."\n}\n";
         
         file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
     }
     
     private function str2dot($str) {
         return htmlspecialchars($str);
+    }
+    
+    private function subgraphs($array, $level = 1, $nsname = '') {
+        static $id = 0;
+        $r = '';
+        
+        $colors = array('gray' => array('Gainsboro', 'LightGrey', 'Silver', 'DarkGray', 'Gray', 'DimGray', 'LightSlateGray', 'SlateGray', 'DarkSlateGray', 'Black',),
+                        'cyan' => array('Aqua', 'Cyan', 'LightCyan', 'PaleTurquoise', 'Aquamarine', 'Turquoise', 'MediumTurquoise', 'DarkTurquoise', 'LightSeaGreen', 'CadetBlue', 'DarkCyan', 'Teal',),
+                       );
+        $colors = array_merge(...array_values($colors));
+        $color = "00" . dechex(0xff * (100 - $id))."00";
+        
+        foreach($array as $key => $a) {
+            ++$id;
+            if (is_int($key)) {
+                $r .= $a;
+            } else {
+                $r .= "subgraph cluster_$id { 
+style=filled;
+label=\"$nsname$key\";
+color=\"$level\";
+";
+                $r .= $this->subgraphs($a, $level + 1, $nsname.'\\\\'.$key);
+                $r .= "}\n";
+            }
+        }
+        
+        return $r;
     }
 }

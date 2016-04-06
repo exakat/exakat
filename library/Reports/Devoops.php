@@ -112,7 +112,6 @@ class Devoops extends Reports {
         copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
-        $this->dump      = new \sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
         $this->datastore = new \sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
         
         // Compatibility
@@ -126,7 +125,7 @@ class Devoops extends Reports {
 
         // Analyze
         $analyze = array();
-        $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$this->themesList);
+        $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$this->themesList);
         while($row = $res->fetchArray()) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
             
@@ -140,7 +139,7 @@ class Devoops extends Reports {
 
         // Files
         $files = array();
-        $res = $this->dump->query('SELECT DISTINCT file FROM results ORDER BY file');
+        $res = $this->sqlite->query('SELECT DISTINCT file FROM results ORDER BY file');
         while($row = $res->fetchArray()) {
             $files[$row['file']] = 'OneFile';
         }
@@ -1069,7 +1068,7 @@ Devoops
         $css->readOrder = $css->titles;
         
         $data = array();
-        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Php/DirectivesUsage"');
+        $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray()) {
             $data[] = array('Directive' => $row['fullcode']);
         }
@@ -1113,7 +1112,7 @@ TEXT
         $css->titles = array('Label', 'Count', 'Severity');
         $css->readOrder = $css->titles;
 
-        $res = $this->dump->query(<<<SQL
+        $res = $this->sqlite->query(<<<SQL
 SELECT analyzer, count(*) AS count, severity FROM results 
         WHERE analyzer IN $this->themesList 
         GROUP BY analyzer
@@ -1423,7 +1422,7 @@ SQL
 
         // collecting information for Extensions
         $themed = \Analyzer\Analyzer::getThemeAnalyzers('Appinfo');
-        $res = $this->dump->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
@@ -1473,7 +1472,7 @@ SQL
         // collecting information for Composer
         if (isset($sources['Composer/PackagesNames'])) {
             $data['Composer Packages'] = array();
-            $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
+            $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $data['Composer Packages'][] = $row['fullcode'];
             }
@@ -1555,7 +1554,7 @@ TEXT
         $data = new \Data\Methods();
         $bugfixes = $data->getBugFixes();
         
-        $found = $this->dump->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
+        $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
         $reported = array();
         $info = array();
 
@@ -1579,7 +1578,7 @@ TEXT
                                 'cve'         => $cve,
                                 );
             } elseif (!empty($bugfix['analyzer'])) {
-                $subanalyze = $this->dump->querySingle('SELECT COUNT(*) FROM results WHERE analyzer = "'.$bugfix['analyzer'].'"');
+                $subanalyze = $this->sqlite->querySingle('SELECT COUNT(*) FROM results WHERE analyzer = "'.$bugfix['analyzer'].'"');
                 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
@@ -1685,9 +1684,8 @@ TEXT
             $counts[$row['analyzer']] = $row['counts'];
         }
         
-        $config = \Config::factory();
         foreach($list as $l) {
-            $ini = parse_ini_file($config->dir_root.'/human/en/'.$l.'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini');
             if (isset($counts[$l])) {
                 $info[ $ini['name'] ] = array('result' => (int) $counts[$l]);
             } else {
@@ -1722,19 +1720,18 @@ TEXT
         $list = \Analyzer\Analyzer::getThemeAnalyzers($titles[$title]);
         $where = 'WHERE analyzer in ("'.implode('", "', $list).'")';
 
-        $res = $this->dump->query('SELECT severity, count(*) AS nb FROM results '.$where.' GROUP BY severity ORDER BY severity');
+        $res = $this->sqlite->query('SELECT severity, count(*) AS nb FROM results '.$where.' GROUP BY severity ORDER BY severity');
         $severities = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $severities[$row['severity']] = array('severity' => $row['severity'], 
                                                   'count'    => $row['nb']);
         }
 
-        $res = $this->dump->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
+        $res = $this->sqlite->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
         $listBySeverity = array();
 
-        $config = \Config::factory();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $listBySeverity[] = array('name'  => $ini['name'],
                                       'severity' => $row['severity'], 
                                       'count' => $row['nb']);
@@ -1751,7 +1748,7 @@ TEXT
         });
         $listBySeverity = array_slice($listBySeverity, 0, 5);
 
-        $res = $this->dump->query('SELECT file, count(*) AS nb FROM results '.$where.' GROUP BY file ORDER BY count(*) DESC LIMIT 5');
+        $res = $this->sqlite->query('SELECT file, count(*) AS nb FROM results '.$where.' GROUP BY file ORDER BY count(*) DESC LIMIT 5');
         $listByFile = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $listByFile[] = array('name'  => $row['file'],
@@ -1792,7 +1789,7 @@ TEXT
                              );
 
         $data = array();
-        $res = $this->dump->query(<<<SQL
+        $res = $this->sqlite->query(<<<SQL
 SELECT analyzer FROM resultsCounts 
     WHERE ( analyzer LIKE "Extensions/Ext%" OR 
             analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
@@ -1849,7 +1846,7 @@ TEXT
         $css->readOrder = $css->titles;
         
         $data = array();
-        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/DynamicCode"');
+        $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer="Structures/DynamicCode"');
         while($row = $res->fetchArray()) {
             $data[] = array('Code' => $row['fullcode']);
         }
@@ -1921,7 +1918,7 @@ TEXT
         $css->readOrder = $css->titles;
         
         $data = array();
-        $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/ErrorMessages"');
+        $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer="Structures/ErrorMessages"');
         while($row = $res->fetchArray()) {
             $data[] = array('Message' => $row['fullcode']);
         }
@@ -2002,7 +1999,7 @@ TEXT
         $css->titles = array('File', 'Count');
         $css->readOrder = $css->titles;
 
-        $res = $this->dump->query(<<<SQL
+        $res = $this->sqlite->query(<<<SQL
 SELECT file, count(*) AS count FROM results 
         WHERE analyzer IN $this->themesList
         GROUP BY file
@@ -2024,7 +2021,7 @@ SQL
 
         $data = array();
         $sqlQuery = 'SELECT fullcode AS Code, file AS File, line AS Line  FROM results WHERE analyzer="Structures/GlobalInGlobal" ORDER BY fullcode';
-        $res = $this->dump->query($sqlQuery);
+        $res = $this->sqlite->query($sqlQuery);
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $data[] = $row;
         }
@@ -2056,8 +2053,8 @@ TEXT
 
         $return .= $this->formatThemeList($analyzer->getThemes());
         $data = array();
-        $sqlQuery = 'SELECT fullcode as Code, file AS File, line AS Line FROM results WHERE analyzer="'.$this->dump->escapeString($analyzer->getInBaseName()).'"';
-        $res = $this->dump->query($sqlQuery);
+        $sqlQuery = 'SELECT fullcode as Code, file AS File, line AS Line FROM results WHERE analyzer="'.$this->sqlite->escapeString($analyzer->getInBaseName()).'"';
+        $res = $this->sqlite->query($sqlQuery);
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $data[] = $row;
         }
@@ -2075,14 +2072,14 @@ TEXT
         $return = $this->formatText('All results for the file : '.$title, 'textLead');
 
         $data = array();
-        $sqliteTitle = $this->dump->escapeString($title);
+        $sqliteTitle = $this->sqlite->escapeString($title);
         $sqlQuery = <<<SQL
 SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results 
     WHERE file="$sqliteTitle" AND
           analyzer IN $this->themesList
 
 SQL;
-        $res = $this->dump->query($sqlQuery);
+        $res = $this->sqlite->query($sqlQuery);
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['Analyzer']);
             $row['File'] = $analyzer->getDescription()->getName();
@@ -2202,10 +2199,10 @@ TEXT
             $data[$section] = array();
             foreach($hash as $name => $ext) {
                 if (strpos($ext, '/') === false) {
-                    $res = $this->dump->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"'); 
+                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"'); 
                     $d = (int) $res->fetchArray(\SQLITE3_ASSOC)['count'];
                 } else {
-                    $res = $this->dump->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"'); 
+                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"'); 
                     $d = (int) $res->fetchArray(\SQLITE3_ASSOC)['count'];
                 }
                 $data[$section][$name] = $d === -2 ? 'N/A' : $d;

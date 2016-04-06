@@ -32,9 +32,6 @@ class Faceted extends FacetedJson {
             return "Can't produce report to stdout\n";
         }
 
-        $sqlite      = new \sqlite3($dirName.'/dump.sqlite', SQLITE3_OPEN_READONLY);
-        $config = \Config::factory();
-
         // Clean final destination
         if ($dirName.'/'.$fileName !== '/') {
             rmdirRecursive($dirName.'/'.$fileName);
@@ -55,14 +52,14 @@ class Faceted extends FacetedJson {
         mkdir($dirName.'/'.$fileName, Faceted::FOLDER_PRIVILEGES);
 
         $json = parent::generate($dirName);
-        $js = file_get_contents($config->dir_root.'/media/faceted/app.js');
+        $js = file_get_contents($this->config->dir_root.'/media/faceted/app.js');
         $js = str_replace('DUMP_JSON', $json, $js);
         file_put_contents($dirName.'/'.$fileName.'/app.js', $js);        
 
-        $css = file_get_contents($config->dir_root.'/media/faceted/faceted.css');
+        $css = file_get_contents($this->config->dir_root.'/media/faceted/faceted.css');
         file_put_contents($dirName.'/'.$fileName.'/faceted.css', $css);        
 
-        $html = file_get_contents($config->dir_root.'/media/faceted/index.html');
+        $html = file_get_contents($this->config->dir_root.'/media/faceted/index.html');
 
         $html = str_replace('PROJECT_NAME', $this->config->project_name, $html);
 
@@ -83,7 +80,7 @@ class Faceted extends FacetedJson {
 
         $docsHtml = '<dl>';
         foreach($docsList as $id => $dl) {
-            $ini = parse_ini_file($config->dir_root.'/human/en/'.$id.'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$id.'.ini');
             $description = htmlentities($ini['description'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
             $description = preg_replace_callback('/\s*(&lt;\?php.*?\?&gt;)\s*/si', function ($r) { return '<br />'.highlight_string(html_entity_decode($r[1]), true);}, $description);
             $description = nl2br($description);
@@ -93,7 +90,7 @@ class Faceted extends FacetedJson {
         }
         $docsHtml .= '</dl>';
 
-        $docs = file_get_contents($config->dir_root.'/media/faceted/docs.html');
+        $docs = file_get_contents($this->config->dir_root.'/media/faceted/docs.html');
         $docs = str_replace('DOCS_LIST', $docsHtml, $docs);
         $docs = str_replace('PROJECT_NAME', $this->config->project_name, $docs);
         file_put_contents($dirName.'/'.$fileName.'/docs.html', $docs);        
