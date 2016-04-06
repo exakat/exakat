@@ -332,7 +332,7 @@ SQLITE;
 CREATE TABLE ignoredFiles (
   id INTEGER PRIMARY KEY,
   file TEXT,
-  reason INTEGER DEFAULT 1
+  reason TEXT
 );
 SQLITE;
                 break;

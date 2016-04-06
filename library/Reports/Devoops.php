@@ -146,11 +146,15 @@ class Devoops extends Reports {
         $files = array_merge(array('Files Counts' => 'FilesResultsCounts'), $files);
         
         $summary = array(
-            'Report presentation' => array('Audit configuration' => 'AuditConfiguration'),
-            'Analysis'            => array('Code Smells'         => 'Dashboard',
-                                           'Dead Code'           => 'Dashboard',
-                                           'Security'            => 'Dashboard',
-                                           'Performances'        => 'Dashboard'),
+            'Report presentation' => array('Audit configuration'    => 'AuditConfiguration',
+                                           'Processed Files'        => 'ProcessedFiles',
+                                           'Non-processed Files'    => 'NonProcessedFiles',
+            
+            ),
+            'Analysis'            => array('Code Smells'            => 'Dashboard',
+                                           'Dead Code'              => 'Dashboard',
+                                           'Security'               => 'Dashboard',
+                                           'Performances'           => 'Dashboard'),
             'Compatibility'       => $compatibility,
             'By analyze'          => $analyze,
             'By file'             => $files,
@@ -164,8 +168,6 @@ class Devoops extends Reports {
                                            'External Config Files'  => 'ExternalConfigFiles',
                                            'Error Messages'         => 'ErrorMessages'),
             'Annexes'             => array('Documentation'          => 'Documentation',
-                                           'Processed Files'        => 'ProcessedFiles',
-                                           'Non-processed Files'    => 'NonProcessedFiles',
                                            'External Libraries'     => 'ExternalLibraries',
                                            'Analyzers'              => 'Analyzers',
                                            'About This Report'      => 'AboutThisReport'),
@@ -2093,15 +2095,13 @@ SQL;
     private function NonProcessedFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
-        $css->titles = array('File');
+        $css->titles = array('File', 'Reason');
         $css->readOrder = $css->titles;
         
         $data = array();
-        $res = $this->datastore->query('SELECT file FROM ignoredFiles');
+        $res = $this->datastore->query('SELECT file AS File, reason As Reason FROM ignoredFiles ORDER BY file');
         while($row = $res->fetchArray()) {
-            if (empty($row['file'])) { continue; }
-
-            $data[] = array('File' => $row['file']);
+            $data[] = $row;
         }
         
         $return = $this->formatText( <<<TEXT

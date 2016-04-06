@@ -103,27 +103,26 @@ class Files extends Tasks {
             if (empty($ext)) {
                 if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
                     unset($files[$id]);
-                    $ignoredFiles[] = $file;
+                    $ignoredFiles[] = array('file' => $file, 'reason' => 'Not PHP file');
                 }
             } elseif (!in_array($ext, self::$exts['php'])) {
                 // selection of extensions
                 unset($files[$id]);
+                $ignoredFiles[] = array('file' => $file, 'reason' => 'Bad extension');
             } elseif (!empty($regex) && preg_match($regex, $file)) {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
-                $ignoredFiles[] = $file;
+                $ignoredFiles[] = array('file' => $file, 'reason' => 'Ignored dir');
             } else {
                 // Check for compilation
                 if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
                     unset($files[$id]);
-                    $ignoredFiles[] = $file;
+                    $ignoredFiles[] = array('file' => $file, 'reason' => 'Not compilable with '.$php->getActualVersion());
                 }
             }
         }
 
-        $this->datastore->addRow('ignoredFiles', array_map(function ($a) {
-                return array('file'   => $a);
-            }, $ignoredFiles));
+        $this->datastore->addRow('ignoredFiles', $ignoredFiles);
         $this->datastore->addRow('files', array_map(function ($a) {
                 return array('file'   => $a);
             }, $files));
