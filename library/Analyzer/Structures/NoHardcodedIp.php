@@ -34,8 +34,12 @@ class NoHardcodedIp extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         // a string that looks like a domain name. 
+        $tld = $this->loadIni('tld.ini', 'tld');
+        $regexTld = join('|', $tld);
+
         $this->atomIs('String')
-             ->regex('noDelimiter', '^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\\\.)+[A-Za-z]{2,6}\\$');
+             ->noDelimiterIsNot('localhost')
+             ->regex('noDelimiter', '^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\\\.)+('.$regexTld.')\\$');
         $this->prepareQuery();
         
         $hosts = $this->loadJson('php_remote_access.json');

@@ -1,5 +1,5 @@
 {
-	"0": ["ftp_connect", "cubrid_connect", "cubrid_pconnect", "cyrus_connect", "fsockopen", "ftp_ssl_connect","ldap_connect","maxdb_connect","maxdb_real_connect","pfsockopen","ssh2_connect","ssh2_connect","mysqli_connect","mysqli_real_connect","snmpget","snmpgetnext"],
+	"0": ["ftp_connect", "cubrid_connect", "cubrid_pconnect", "cyrus_connect", "fsockopen", "ftp_ssl_connect","ldap_connect","maxdb_connect","maxdb_real_connect","pfsockopen","ssh2_connect","ssh2_connect","mysqli_connect","mysqli_real_connect","snmpget","snmpgetnext","gethostbyname","gethostbynamel","getmxrr","gethostbyaddr","checkdnsrr","ip2long","long2ip"],
 	"1": ["ssh2_tunnel"],
 	"2": ["ssh2_auth_hostbased_file"]
 }
