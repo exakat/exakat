@@ -136,7 +136,7 @@ class Files extends Tasks {
         display('Counted files');
         
         $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
-        file_put_contents($tmpFileName, $config->projects_root.'/projects/'.$dir.'/code'.join("\n$config->projects_root/projects/$dir/code", $files));
+        file_put_contents($tmpFileName, '"'.$config->projects_root.'/projects/'.$dir.'/code'.join("\"\n\"$config->projects_root/projects/$dir/code", $files).'"');
 
         $versions = $config->other_php_versions;
 
