@@ -961,6 +961,12 @@ GREMLIN
         return $this;
     }
 
+    public function isNotMixedcase($property = 'fullcode') {
+        $this->addMethod("filter{it.$property == it.$property.toLowerCase() || it.$property == it.$property.toUpperCase()}");
+
+        return $this;
+    }
+
     public function cleanAnalyzerName($gremlin) {
         $dependencies = $this->dependsOn();
         $fullNames = array_map('\Analyzer\Analyzer::makeBaseName', $dependencies);
