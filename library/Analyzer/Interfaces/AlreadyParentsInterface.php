@@ -27,10 +27,19 @@ class AlreadyParentsInterface extends Analyzer\Analyzer {
     public function analyze() {
         // Find classes which are implementing several times the same interface
         $this->atomIs('Class')
+             ->savePropertyAs('fullnspath', 'fnp')
+             
+             // Anonymous classes can't have this problem
+             ->outIs('NAME')
+             ->atomIsNot('Void')
+             ->inIs('NAME')
+             
              ->outIs('IMPLEMENTS')
              ->savePropertyAs('fullnspath', 'i')
              ->inIs('IMPLEMENTS')
+             
              ->goToAllParents()
+             ->notSamePropertyAs('fullnspath', 'fnp')
              ->outIs('IMPLEMENTS')
              ->samePropertyAs('fullnspath', 'i')
              ->back('first');
