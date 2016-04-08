@@ -36,7 +36,7 @@ class IdenticalConditions extends Analyzer\Analyzer {
              ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->atomIsNot('Logical')
-             ->samePropertyAs('fullcode', 'left')
+             ->samePropertyAs('fullcode', 'left', true)
              ->back('first');
         $this->prepareQuery();
 
