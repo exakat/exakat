@@ -31,11 +31,11 @@ class ListWithAppends extends Analyzer\Analyzer {
              ->hasNoIn('METHOD')
              ->tokenIs('T_LIST')
 
-             // more than one Arrayappend, for initial filtering
+             // more than one Arrayappend, (initial filtering)
              ->filter('it.out("ARGUMENTS").out("ARGUMENT").has("atom", "Arrayappend").count() > 1')
 
              // several appends to the same array
-             ->filter('it.out("ARGUMENTS").out("ARGUMENT").has("atom", "Arrayappend").groupCount{it.out("VARIABLE").next().code}{it.b + 1}.cap.next().findAll{it.value > 1}.any()')
+             ->filter('it.out("ARGUMENTS").out("ARGUMENT").has("atom", "Arrayappend").groupCount{it.out("VARIABLE").next().fullcode}{it.b + 1}.cap.next().findAll{it.value > 1}.any()')
 
              ->back('first');
         $this->prepareQuery();
