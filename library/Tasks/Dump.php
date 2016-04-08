@@ -32,7 +32,7 @@ class Dump extends Tasks {
     private $stmtResults = null;
     private $stmtResultsCount = null;
     
-    const WAITING_LOOP = 200;
+    const WAITING_LOOP = 1000;
     
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
@@ -66,7 +66,7 @@ class Dump extends Tasks {
 
         $sqlite->query('CREATE TABLE resultsCounts (   id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                        analyzer STRING,
-                                                       count INTEGER)');
+                                                       count INTEGER DEFAULT -6)');
         display('Inited tables');
 
         $sqlQuery = <<<SQL
@@ -108,6 +108,8 @@ SQL;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $counts[$row['analyzer']] = $row['counts'];
             }
+            $this->log->log( "count analyzed : ".count($counts)."\n");
+            $this->log->log( "counts ".join(', ', $counts)."\n");
             $datastore->close();
             unset($datastore);
         
@@ -148,6 +150,7 @@ SQL;
 
         $result = $this->stmtResultsCounts->execute();
         
+        $this->log->log( "$class : $count\n");
         // No need to go further
         if ($count <= 0) {
             return;
@@ -276,7 +279,7 @@ SQL;
         $this->stmtResultsCounts->bindValue(':class', 'Project/Dump', SQLITE3_TEXT);
         $this->stmtResultsCounts->bindValue(':count', 1, SQLITE3_INTEGER);
 
-        $result = $this->stmtResultsCounts->execute();
+        $this->stmtResultsCounts->execute();
     }
     
     private function collectStructures($sqlite) {
