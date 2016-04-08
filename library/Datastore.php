@@ -227,7 +227,7 @@ class Datastore {
     }
 
     private function checkTable($table) {
-        $res = self::$sqliteWrite->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
+        $res = self::$sqliteRead->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
         
         if ($res == 1) { return true; }
 
@@ -352,7 +352,7 @@ SQLITE;
 CREATE TABLE analyzed (
   id INTEGER PRIMARY KEY,
   analyzer TEXT UNIQUE,
-  counts TEXT
+  counts INTEGER DEFAULT -5
 );
 SQLITE;
                 break;
