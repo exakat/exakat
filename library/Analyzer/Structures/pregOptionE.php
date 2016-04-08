@@ -29,6 +29,9 @@ class pregOptionE extends Analyzer\Analyzer {
     public function analyze() {
         // delimiters
         $delimiters = '=~/|`%#\\$!,@\\\\{\\\\(\\\\[';
+        
+        // Options list : eimsuxADJSUX (we use all letters, as unknown options are ignored or yield an error)
+        $optionsWithE = '[a-zA-Z]*e[a-zA-Z]*';
 
         // preg_match with a string
         $this->atomFunctionIs('\preg_replace')
@@ -43,7 +46,7 @@ class pregOptionE extends Analyzer\Analyzer {
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
     else { delimiterFinal = delimiter; } 
 }')
-             ->regex('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*)\\$')
+             ->regex('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")('.$optionsWithE.')\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -61,7 +64,7 @@ class pregOptionE extends Analyzer\Analyzer {
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
     else { delimiterFinal = delimiter; } 
 }')
-             ->regex('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
+             ->regex('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")('.$optionsWithE.').\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -78,10 +81,9 @@ class pregOptionE extends Analyzer\Analyzer {
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
     else { delimiterFinal = delimiter; } 
 }')
-             ->regex('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
+             ->regex('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")('.$optionsWithE.').\\$')
              ->back('first');
         $this->prepareQuery();
-// Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
     }
 }
 
