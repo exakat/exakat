@@ -34,7 +34,8 @@ class Unthrown extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->analyzerIs('Exceptions/DefinedExceptions')
              ->savePropertyAs('fullnspath', 'path')
-             ->raw('filter{ g.idx("atoms")[["atom":"Throw"]].out("THROW").out("NEW").has("fullnspath", path).any() == false}');
+             ->raw('filter{ g.idx("atoms")[["atom":"Throw"]].out("THROW").out("NEW").has("fullnspath", path).any() == false}')
+             ->raw('filter{ g.idx("atoms")[["atom":"New"]].filter{ it.in("THROW").any() == false}.out("NEW").has("fullnspath", path).any() == false}');
         $this->prepareQuery();
     }
 }
