@@ -253,23 +253,16 @@ abstract class Analyzer {
         $res = $this->query($query);
         
         if (isset($res[0]) && count($res[0]) == 1) {
+            // Remove the current results
             $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].outE('ANALYZED').each{
     g.removeEdge(it);
 }
+// Remove the index too. 
 
 GREMLIN;
             $this->query($query);
-        } else {
-            $this->code = addslashes($this->code);
-            $query = <<<GREMLIN
-x = g.addVertex(null, [analyzer:'{$this->analyzerQuoted}', analyzer:true, line:0, description:'Analyzer index for {$this->analyzerQuoted}', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
-
-g.idx('analyzers').put('analyzer', '{$this->analyzerQuoted}', x);
-
-GREMLIN;
-            $this->query($query);
-        }
+        } 
     }
 
     public function isDone() {
@@ -1841,6 +1834,7 @@ GREMLIN
 processed = 0; total = 0;
 m = [:]; gf = [:];
 n = [];
+results = [];
 {$query}
 GREMLIN;
         
