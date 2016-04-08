@@ -21,14 +21,20 @@
 */
 
 
-namespace Analyzer\Structures;
+namespace Analyzer\Common;
 
 use Analyzer;
 
-class EvalWithoutTry extends Analyzer\Common\WithoutTry {
+class WithoutTry extends Analyzer\Analyzer {
+    protected $functions = array();
+    
     public function analyze() {
-        $this->functions = array('\\eval');
-        parent::analyze();
+        if (!empty($this->functions)) {
+            $this->atomFunctionIs($this->functions)
+                 ->notInInstruction('Try')
+                 ->back('first');
+            $this->prepareQuery();
+        }
     }
 }
 

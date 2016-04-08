@@ -25,9 +25,11 @@ namespace Analyzer\Structures;
 
 use Analyzer;
 
-class EvalWithoutTry extends Analyzer\Common\WithoutTry {
+class RandomWithoutTry extends Analyzer\Common\WithoutTry {
+    protected $phpVersion = '7.0+';
+    
     public function analyze() {
-        $this->functions = array('\\eval');
+        $this->functions = array('\\random_bytes', '\\random_int');
         parent::analyze();
     }
 }
