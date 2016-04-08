@@ -42,7 +42,9 @@ class IdenticalConditions extends Analyzer\Analyzer {
 
         // $a || $a || $a
         // ($a) && ($a)
+        // two levels
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
@@ -53,6 +55,78 @@ class IdenticalConditions extends Analyzer\Analyzer {
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
+             ->samePropertyAs('fullcode', 'left')
+             ->back('first');
+        $this->prepareQuery();
+
+        // $a || $a || $a
+        // ($a) && ($a)
+        // three levels
+        $this->atomIs('Logical')
+             ->analyzerIsNot('self')
+             ->outIs('LEFT')
+             ->outIsIE('CODE')
+             ->savePropertyAs('fullcode', 'left')
+             ->inIsIE('CODE')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->samePropertyAs('fullcode', 'left')
+             ->back('first');
+        $this->prepareQuery();
+
+        // $a || $a || $a
+        // ($a) && ($a)
+        // four levels
+        $this->atomIs('Logical')
+             ->analyzerIsNot('self')
+             ->outIs('LEFT')
+             ->outIsIE('CODE')
+             ->savePropertyAs('fullcode', 'left')
+             ->inIsIE('CODE')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->samePropertyAs('fullcode', 'left')
+             ->back('first');
+        $this->prepareQuery();
+
+        // $a || $a || $a
+        // ($a) && ($a)
+        // four levels
+        $this->atomIs('Logical')
+             ->analyzerIsNot('self')
+             ->outIs('LEFT')
+             ->outIsIE('CODE')
+             ->savePropertyAs('fullcode', 'left')
+             ->inIsIE('CODE')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
              ->samePropertyAs('fullcode', 'left')
              ->back('first');
         $this->prepareQuery();
