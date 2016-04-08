@@ -27,6 +27,7 @@ use Analyzer;
 
 class ReturnWithParenthesis extends Analyzer\Analyzer {
     public function analyze() {
+        // return(1);
         $this->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Parenthesis')
