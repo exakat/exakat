@@ -28,7 +28,7 @@ use Analyzer;
 class Blind extends Analyzer\Analyzer {
     
     public function analyze() {
-        $blinds = array('Variable', 'Staticproperty', 'Property', 'Array');
+        $blinds = self::CONTAINERS; 
         
 // foreach($source as $blind)
         $this->atomIs($blinds)

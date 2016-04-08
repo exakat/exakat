@@ -80,6 +80,8 @@ abstract class Analyzer {
 
     private $gremlin = null;
     public static $gremlinStatic = null;
+    
+    const CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
 
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
