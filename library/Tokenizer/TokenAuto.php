@@ -33,8 +33,8 @@ abstract class TokenAuto extends Token {
               public    $cycles     = null ;
               protected $queries    = array();
     
-    const CYCLE_COUNT = 20;
-    const CYCLE_SIZE  = 2000;
+    const CYCLE_COUNT = 30;
+    const CYCLE_SIZE  = 3000;
 
     public function _check() {
         return false;
