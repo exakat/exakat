@@ -46,7 +46,7 @@ class AnalyzerApply {
 x = it;
 // use code instead of fullcode (case of references!)
 applyBelowRoot.out.loop(1){true}{it.object.code == x.code}.each{
-    g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED');
+    results.add(it);
     it.setProperty('appliedBelow', true);
     total++;
 }
@@ -56,15 +56,22 @@ GREMLIN;
             $applyBelow = '';
         }
 
+        $analyzerShort = str_replace('Analyzer\\\\', '', $analyzer);
+
         return <<<GREMLIN
 .each{
-    g.addEdge(g.idx('analyzers')[['analyzer':'{$analyzer}']].next(), it, 'ANALYZED');
+    results.add(it);
     
     // Apply below
     {$applyBelow}
     
     total++;
 }
+
+x = g.addVertex(null, [analyzer:'{$analyzer}', analyzer:true, line:0, description:'Analyzer index for {$analyzer}', code:'{$analyzer}', fullcode:'{$analyzerShort}',  atom:'Index', token:'T_INDEX']);
+results.each{ g.addEdge(x, it, 'ANALYZED'); }
+g.idx('analyzers').put('analyzer', '{$analyzer}', x);
+
 ['processed':processed, 'total':total];
 
 
