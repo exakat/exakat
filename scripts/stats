@@ -1,0 +1,19 @@
+<?php
+
+// Themes, analyzers, visibiles
+// tests, methods
+
+$stats = [];
+
+// tokenizer tests : 
+$stats['tests tokenizer'] = (int) shell_exec('ls -1 tests/tokenizer/exp/ | wc -l');
+
+// tokenizer analyzer : 
+$stats['tests analyzer'] = (int) shell_exec('ls -1R tests/analyzer/exp/ | wc -l');
+
+foreach($stats as $name => $value) {
+    print substr($name . str_repeat(' ', 50), 0, 50)." : ".substr("    $value", -6)."\n";
+}
+print "date : ".date('r')."\n";
+
+?>
