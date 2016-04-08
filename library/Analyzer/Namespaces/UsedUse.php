@@ -73,7 +73,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->analyzerIsNot('self')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
-             ->savePropertyAs('code', 'used')
+             ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
