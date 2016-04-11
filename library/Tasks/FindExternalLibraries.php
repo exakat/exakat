@@ -90,7 +90,11 @@ class FindExternalLibraries extends Tasks {
             return; //Cancel task
         }
     
-        $files = $this->datastore->getCol('files', 'file');
+        $d = getcwd();
+        chdir($config->projects_root.'/projects/'.$config->project.'/code');
+        $files = $this->rglob('.');
+        chdir($d);
+        
         display('Processing '.count($files).' files');
         if (empty($files)) {
             display('No files to process. Aborting');
@@ -99,7 +103,7 @@ class FindExternalLibraries extends Tasks {
         
         $r = array();
         foreach($files as $file) {
-            $s = $this->process($config->projects_root.'/projects/'.$config->project.'/code'.$file);
+            $s = $this->process($config->projects_root.'/projects/'.$config->project.'/code'.substr($file, 1));
             
             if (!empty($s)) {
                 $r[] = $s;
@@ -197,6 +201,7 @@ class FindExternalLibraries extends Tasks {
                     if ($returnPath != '/') {
                         $return[$class] = $returnPath;
                     }
+//                    return $return;
                 } elseif (isset($this->classic["$namespace\\$lclass"])) {
                     if ($this->classic[$namespace.'\\'.$lclass] == self::COMPOSER_DIR) {
                         $returnPath = dirname(dirname(dirname(dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)))));
@@ -204,11 +209,28 @@ class FindExternalLibraries extends Tasks {
                     if ($returnPath != '/') {
                         $return[$class] = $returnPath;
                     }
+//                    return $return;
                 }
             }
         }
     
         return $return;
+    }
+
+    private function rglob($pattern, $flags = 0) {
+        $files = glob($pattern.'/*', $flags);
+        $dirs  = glob($pattern.'/*', GLOB_ONLYDIR | GLOB_NOSORT);
+        $files = array_diff($files, $dirs);
+
+        $subdirs = array($files);
+        foreach ($dirs as $dir) {
+            $f = $this->rglob($dir, $flags);
+            if (!empty($f)) {
+                $subdirs[] = $f;
+            }
+        }
+
+        return call_user_func_array('array_merge', $subdirs);
     }
 }
 
