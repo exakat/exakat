@@ -135,12 +135,7 @@ SQL
         static $id = 0;
         $r = '';
         
-        $colors = array('gray' => array('Gainsboro', 'LightGrey', 'Silver', 'DarkGray', 'Gray', 'DimGray', 'LightSlateGray', 'SlateGray', 'DarkSlateGray', 'Black',),
-                        'cyan' => array('Aqua', 'Cyan', 'LightCyan', 'PaleTurquoise', 'Aquamarine', 'Turquoise', 'MediumTurquoise', 'DarkTurquoise', 'LightSeaGreen', 'CadetBlue', 'DarkCyan', 'Teal',),
-                       );
-        $colors = array_merge(...array_values($colors));
-        $color = "00" . dechex(0xff * (100 - $id))."00";
-        
+        // Colors are managed with $level, thanks to colorscheme option.
         foreach($array as $key => $a) {
             ++$id;
             if (is_int($key)) {
