@@ -1,4 +1,4 @@
-Version 0.6.0 (Intelligent Stone Monkey, Coming up)
+Version 0.6.1 (Red Bottomed Horse Monkey, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,32 @@ Version 0.6.0 (Intelligent Stone Monkey, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.6.0 (Intelligent Stone Monkey, 2016-04-11)
++ Architecture
+    + Fixed a bug in Find external libraries
+    + Applied fixed based on new analyzers's audit
+    + Fixed a bug that prevented results to be prepared for report (Thanks Philippe G.)
++ Report
+    + Now reports reason for excluding a file from analysis
++ Analyzer
+    + New analyzers : Logical Mistake (first version),
+                      Iffectations (code restoration)
+                      Common alternatives
+                      No Choice (No alternatives)
+                      Random_* Without Try (security risk)
+                      Unknown PCRE options
+                      Identical conditions
+                      Hardcoded hashes 
+    + Upgrade List with appends with variable name
+    + Upgrade /e option detection
+    + Fixed detection of unused use, with long namespaces.
+    + Added finfo to ext/finfo
+    + Finds exceptions that are reserved for later throwing
+    + Exclude anonymous classes from Already Defined Interface
++ Tokenizer
+    + Extended cycle number to speed up tokenizer. 
+    + Better escaping of file names 
 
 Version 0.5.9 (Six Eared Macaque, 2016-04-04)
 + Architecture
