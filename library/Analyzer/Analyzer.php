@@ -421,8 +421,13 @@ GREMLIN;
     }
 
     public function atomFunctionIs($atom) {
-        $this->atomIs('Functioncall');
-        $this->functioncallIs($atom);
+        if ($atom == '\\array') {
+            $this->atomIs('Functioncall')
+                 ->hasNoIn(array('METHOD', 'NEW'))
+                 ->tokenIs(array('T_OPEN_BRACKET', 'T_ARRAY'));
+        } else {
+            $this->functioncallIs($atom);
+        }
 
         return $this;
     }

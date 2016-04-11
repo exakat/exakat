@@ -50,7 +50,7 @@ class Truthy extends Analyzer\Analyzer {
         $this->atomFunctionIs('\array')
              ->analyzerIsNot('Structures/Falsy');
         $this->prepareQuery();
-        
+
         // NULL
         // No
 
