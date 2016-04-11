@@ -3,9 +3,10 @@
 $expected     = array('trait SameNameAsFile',
                       'interface SameNameAsFile',
                       'class SameNameAsFile',
-                      'class samenameasfile',
 );
 
-$expected_not = array();
+$expected_not = array('class classnotsamenameasfile',
+                      'trait TraitReallyNotSameNameAsFile',
+                      'interface TotallyNotSameNameAsFile',);
 
 ?>

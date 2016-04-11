@@ -25,14 +25,14 @@ namespace Analyzer\Classes;
 
 use Analyzer;
 
-class SameNameAsFile extends Analyzer\Analyzer {
+class NotSameNameAsFile extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs(array('Class', 'Interface', 'Trait'))
              ->outIs('NAME')
              ->savePropertyAs('code', 'classname')
              ->goToFile()
              // Is the clasname also the filename (case sensitive)
-             ->regex('filename', '" + classname + "\\\\.php\\$')
+             ->regexNot('filename', '" + classname + "\\\\.php\\$')
              ->back('first');
         $this->prepareQuery();
     }
