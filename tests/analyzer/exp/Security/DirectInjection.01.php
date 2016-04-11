@@ -11,6 +11,7 @@ $expected     = array('foreach($_FILES["pictures"]["error"] as $key => $error) {
                       '"$_ENV[\'incoming0\']"', 
                       '"$_ENV[\'incoming1\']"',
                       '"$_ENV[\'incoming2\']"', 
+                      'move_uploaded_file($_FILES[\'name\'][\'filename\'], $_FILES[\'name\'][\'destination\'])'
 );
 
 $expected_not = array();

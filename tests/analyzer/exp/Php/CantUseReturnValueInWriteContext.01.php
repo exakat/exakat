@@ -5,7 +5,7 @@ $expected     = array( 'empty($a->foo($a))',
                        'empty(foo($a))',
                        'empty($foo($a))',
                        'empty(array( ))', 
-                       'empty([\'\'])');
+                       'empty([ \'\' ])');
 
 $expected_not = array('empty(${a})');
 
