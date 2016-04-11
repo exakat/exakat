@@ -29,11 +29,13 @@ class _Static extends TokenAuto {
 
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
+        
+        $propertyOptions = array_merge(_Ppp::$operators, _Final::$operators, _Abstract::$operators);
 
     // class x { static private $x, $y }
     // class x { static public $x = 2 }
     // class x { static private $s }
-        $this->conditions = array( 0 => array('token'    => _Static::$operators),
+        $this->conditions = array( 0 => array('token'    => self::$operators),
                                    1 => array('token'    => _Ppp::$operators),
                                    2 => array('notToken' => _Function::$operators)
                                  );
@@ -47,7 +49,7 @@ class _Static extends TokenAuto {
     // class x { static $x }
         $allowedAtoms = array('Assignation', 'Variable');
         $this->conditions = array(-1 => array('notToken' => _Ppp::$operators),
-                                   0 => array('token'    => _Static::$operators,
+                                   0 => array('token'    => self::$operators,
                                               'checkFor' => $allowedAtoms),
                                    1 => array('atom'     => $allowedAtoms),
                                    2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),
@@ -59,7 +61,7 @@ class _Static extends TokenAuto {
         $this->checkAuto();
 
     // class x { static function f() }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
+        $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('toOption' => 1,
@@ -67,18 +69,18 @@ class _Static extends TokenAuto {
         $this->checkAuto();
 
     // class x { static public function x() }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
-                                   2 => array('token' => array('T_FUNCTION')),
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => $propertyOptions),
+                                   2 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('toOption' => 2,
                                'atom'     => 'Static');
         $this->checkAuto();
 
     // class x { static private final function f() }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
-                                   2 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('token' => $propertyOptions),
+                                   2 => array('token' => $propertyOptions),
                                    3 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('toOption' => 3,
@@ -89,7 +91,7 @@ class _Static extends TokenAuto {
 
 
     // static :: ....
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
+        $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => 'T_DOUBLE_COLON'),
                                  );
 
@@ -98,7 +100,7 @@ class _Static extends TokenAuto {
 
     // static :: ....
         $this->conditions = array( -1 => array('token' => 'T_INSTANCEOF'),
-                                    0 => array('token' => _Static::$operators),
+                                    0 => array('token' => self::$operators),
                                  );
         $this->actions = array('atom'     => 'Static');
         $this->checkAuto();
