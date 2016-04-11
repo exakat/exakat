@@ -2,9 +2,9 @@
 <?php
 
 if(strpos(basename(__FILE__), 'phar') !== false){
-    require_once 'phar://exakat.phar/library/Autoload.php';
+    include 'phar://exakat.phar/library/Autoload.php';
 } else {
-    include_once(__DIR__.'/library/Autoload.php');
+    include __DIR__.'/library/Autoload.php';
 }
 
 $graphDB = new \Graph\Gremlin2($config);
