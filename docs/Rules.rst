@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 04 Apr 2016 17:31:24 +0000
-.. comment: Generation hash : 021cb0d8e134e70deaa810b611fbc46160fa847a
+.. comment: Generation date : Mon, 11 Apr 2016 12:49:14 +0000
+.. comment: Generation hash : de5fcfaa7c94d840109cdd865774e3c8d4f2f6c8
 
 
 .. _$http\_raw\_post\_data:
@@ -807,6 +807,51 @@ This is not the case anymore since PHP 5.4.
 +--------------+-------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53` |
 +--------------+-------------------------------------------+
+
+
+
+.. _common-alternatives:
+
+Common Alternatives
+###################
+
+
+In the following conditional structures, expressions were found that are common to both 'then' and 'else'. It may be interesting, though not always possible, to put them both out of the conditional, and reduce line count. 
+
+.. code-block:: php
+
+   <?php
+   if ($c == 5) {
+       $b = strtolower($b[2]); 
+       $a++;
+   } else {
+       $b = strtolower($b[2]); 
+       $b++;
+   }
+   ?>
+
+
+may be rewritten in : 
+.. code-block:: php
+
+   <?php
+   
+   $b = strtolower($b[2]); 
+   if ($c == 5) {
+       $a++;
+   } else {
+       $b++;
+   }
+   
+   ?>
+
++--------------+-------------------------------+
+| Command Line | Structures/CommonAlternatives |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
 
 
 
@@ -2068,6 +2113,44 @@ Also, note that arguments 2 and 3 are constants and string (respectively), and s
 
 
 
+.. _identical-conditions:
+
+Identical Conditions
+####################
+
+
+The following logical expressions contain members that are identical. For example, $a \|\| $a may be reduced into $a alone.
+
++--------------+--------------------------------+
+| Command Line | Structures/IdenticalConditions |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
+
+
+.. _iffectations:
+
+Iffectations
+############
+
+
+Affectations that appears in a if() conditions, such as if ($x = mysql\_connect(...)).
+
+Iffectations are a way to do both a test and an affectations. They may also be typos, such as if ($x = 3) { ... }, leading to a constant condition.
+
++--------------+------------------------+
+| Command Line | Structures/Iffectation |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
+
 .. _implement-is-for-interface:
 
 Implement Is For Interface
@@ -2274,6 +2357,45 @@ While this is syntacticly correct, it is unusual that defined ressources are use
 +--------------+----------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
+
+
+
+.. _logical-mistakes:
+
+Logical Mistakes
+################
+
+
+Spot logical mistakes within logical expressions. 
+
+.. code-block:: php
+
+   <?php 
+   
+   // Always false
+   if ($a != 1 \|\| $a != 2) { } 
+   
+   // $a == 1 is useless
+   if ($a == 1 \|\| $a != 2) {}
+   
+   // Always false
+   if ($a == 1 && $a == 2) {}
+   
+   // $a != 2 is useless
+   if ($a == 1 && $a != 2) {}
+   
+   ?>
+
+
+Based on article from Andrey Karpov : http://www.viva64.com/en/b/0390/
+
++--------------+----------------------------+
+| Command Line | Structures/LogicalMistakes |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
 
 
 
@@ -2698,6 +2820,40 @@ PHP introduced new functions in PHP 5.6. If you have already defined functions w
 
 
 
+.. _no-choice:
+
+No Choice
+#########
+
+
+A conditional structure is being used, but both alternatives are the same, leading to the illusion of choice. 
+
+Either the condition is useless, and may be removed, or the alternatives needs to be distinguished.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($condition == 2) {
+       doSomething();
+   } else {
+       doSomething();
+   }
+   
+   $condition == 2 ?     doSomething() :     doSomething();
+   
+   ?>
+
++--------------+---------------------+
+| Command Line | Structures/NoChoice |
++--------------+---------------------+
+| clearPHP     |                     |
++--------------+---------------------+
+| Analyzers    | :ref:`Analyze`      |
++--------------+---------------------+
+
+
+
 .. _no-direct-call-to-magicmethod:
 
 No Direct Call To MagicMethod
@@ -2760,6 +2916,24 @@ For example, glob() returns an array, unless some error happens, in which case i
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
+
+
+
+.. _no-hardcoded-hash:
+
+No Hardcoded Hash
+#################
+
+
+Hash (may it be MD5, SHA1, SHA512, Bcrypt or any other), should not be hard coded. Such values may have to be changed for security reasons, and the source code is not the safest place to hide it.
+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedHash      |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -3752,6 +3926,40 @@ This is not always possible.
 
 
 
+.. _random\_-without-try:
+
+Random\_ Without Try
+####################
+
+
+random\_int() and random\_bytes() emit Exceptions if they meet a problem. This way, failure can't be mistaken with returning an empty value, which leads to lower security. 
+
+.. code-block:: php
+
+   <?php
+   
+   try {
+       $salt = random\_bytes($length);
+   } catch (TypeError $e) {
+       // Error while reading the provided parameter
+   } catch (Exception $e) {
+       // Insufficient randome data generated
+   } catch (Error $e) {
+       // Error with the provided parameter : <= 0
+   }
+   
+   ?>
+
++--------------+-----------------------------+
+| Command Line | Structures/RandomWithoutTry |
++--------------+-----------------------------+
+| clearPHP     |                             |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Security`             |
++--------------+-----------------------------+
+
+
+
 .. _redeclared-php-functions:
 
 Redeclared PHP Functions
@@ -4560,7 +4768,7 @@ Timestamp Difference
 
 time() and microtime() shouldn't be used to calculate duration. 
 
-time() and microtime are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
+time() and microtime() are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announced by IERS.
 
 When the difference may be rounded to a larger time unit (rounding the difference to days, or several hours), the variation may be ignored safely.
 
@@ -4806,6 +5014,26 @@ Usage of the PHP 7 Unicode Escape syntax, with the \u{xxxxx} format.
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _unkown-pcre-options:
+
+Unkown PCRE Options
+###################
+
+
+PHP's regex support the following list of options : eimsuxADJSUX. They are detailled in the manual : http://php.net/manual/en/reference.pcre.pattern.modifiers.php. 
+
+All other options are not supported, may be ignored or raise an error.
+
++--------------+------------------------------+
+| Command Line | Structures/UnknownPregOption |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
 
 
 

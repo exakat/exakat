@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 04 Apr 2016 17:31:24 +0000
-.. comment: Generation hash : 021cb0d8e134e70deaa810b611fbc46160fa847a
+.. comment: Generation date : Mon, 11 Apr 2016 12:49:14 +0000
+.. comment: Generation hash : de5fcfaa7c94d840109cdd865774e3c8d4f2f6c8
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 235 analysis
+Total : 242 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -95,6 +95,7 @@ Total : 235 analysis
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Close Tags <close-tags>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
+* :ref:`Common Alternatives <common-alternatives>`
 * :ref:`Compared comparison <compared-comparison>`
 * :ref:`Concrete Visibility <concrete-visibility>`
 * :ref:`Confusing Names <confusing-names>`
@@ -137,6 +138,8 @@ Total : 235 analysis
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Hash Algorithms <hash-algorithms>`
 * :ref:`Htmlentities Calls <htmlentities-calls>`
+* :ref:`Identical Conditions <identical-conditions>`
+* :ref:`Iffectations`
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Implicit global <implicit-global>`
 * :ref:`Incompilable Files <incompilable-files>`
@@ -145,6 +148,7 @@ Total : 235 analysis
 * :ref:`Invalid Constant Name <invalid-constant-name>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Locally Unused Property <locally-unused-property>`
+* :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical should use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
 * :ref:`Lone Blocks <lone-blocks>`
 * :ref:`Lost References <lost-references>`
@@ -161,8 +165,10 @@ Total : 235 analysis
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`
+* :ref:`No Choice <no-choice>`
 * :ref:`No Direct Call To MagicMethod <no-direct-call-to-magicmethod>`
 * :ref:`No Direct Usage <no-direct-usage>`
+* :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Path <no-hardcoded-path>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
@@ -235,6 +241,7 @@ Total : 235 analysis
 * :ref:`Undefined Properties <undefined-properties>`
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
+* :ref:`Unkown PCRE Options <unkown-pcre-options>`
 * :ref:`Unpreprocessed Values <unpreprocessed-values>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Classes <unresolved-classes>`
@@ -634,15 +641,17 @@ Total : 14 analysis
 Security
 ++++++++
 
-Total : 15 analysis
+Total : 17 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Followed injections <followed-injections>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
+* :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
+* :ref:`Random\_ Without Try <random\_-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
