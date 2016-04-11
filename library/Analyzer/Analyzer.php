@@ -82,6 +82,7 @@ abstract class Analyzer {
     public static $gremlinStatic = null;
     
     const CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
+    const LITERALS = array('Integer', 'Float', 'Null', 'Boolean', 'String');
 
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
