@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('static function nonStaticMethod( ) { /**/ } ',
-                      'static function nonStaticMethodInTrait( ) { /**/ } ',
+$expected     = array('static function actuallyNonStaticMethod( ) { /**/ } ',
+                      'static function actuallyNonStaticMethodInTrait( ) { /**/ } ',
+                      'static function actuallyNonStaticMethod( ) { /**/ } ',
+                      'static function actuallyNonStaticMethodInTrait( ) { /**/ } ',
 );
 
 $expected_not = array('static function staticMethod( ) { /**/ } ',

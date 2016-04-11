@@ -8,7 +8,7 @@ class x {
         function () { return self::$property; };
     }
 
-    static function nonStaticMethod() {
+    static function actuallyNonStaticMethod() {
         $this->$property;
         $this->methodCall();
 
@@ -24,7 +24,7 @@ trait t {
         function () { return self::$propertyInTrait; };
     }
 
-    static function nonStaticMethodInTrait() {
+    static function actuallyNonStaticMethodInTrait() {
         $this->$propertyInTrait;
         $this->methodCallInTrait();
 

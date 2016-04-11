@@ -28,14 +28,12 @@ use Analyzer;
 class ThisIsNotForStatic extends Analyzer\Analyzer {
 
     public function analyze() {
-        // Check into Class
+        // Check for $this into static functions, inside Class and Traits
         $this->atomIs('Variable')
              ->code('$this')
              ->goToFunction()
-             ->_as('result')
              ->hasOut('STATIC')
-             ->goToClassTrait()
-             ->back('result')
+             ->hasClassTrait()
              ->analyzerIsNot('self');
         $this->prepareQuery();
     }
