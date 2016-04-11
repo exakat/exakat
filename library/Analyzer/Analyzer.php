@@ -662,7 +662,7 @@ GREMLIN;
         } elseif ($value === '2last') {
             $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 2}");
         } else {
-            $this->addMethod('filter{it.rank == '.abs(intval($value)).'}');
+            $this->addMethod('filter{it.rank == '.abs((int) $value).'}');
         }
 
         return $this;
@@ -676,7 +676,7 @@ GREMLIN;
         } elseif ($rank === '2last') {
             $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 2).any() == false }", $edgeName, $edgeName);
         } else {
-            $this->addMethod("filter{ it.out(***).has('rank', ".abs(intval($rank)).").any() == false}", $edgeName);
+            $this->addMethod("filter{ it.out(***).has('rank', ".abs((int) $rank).").any() == false}", $edgeName);
         }
 
         return $this;
@@ -1078,7 +1078,7 @@ GREMLIN
             $this->addMethod('sideEffect{ rank = it.out(***).count() - 2;}', $edgeName);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
         } else {
-            $rank = abs(intval($rank));
+            $rank = abs( (int) $rank);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == $rank}", $edgeName);
         }
         
