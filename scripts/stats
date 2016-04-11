@@ -5,6 +5,12 @@
 
 $stats = [];
 
+$analyzers = new \Sqlite3('data/analyzers.sqlite');
+
+$stats['Themas    count'] = (int) $analyzers->querySingle('SELECT COUNT(*) FROM categories');
+
+$stats['Analyzers count'] = (int) $analyzers->querySingle('SELECT COUNT(*) FROM analyzers');
+
 // tokenizer tests : 
 $stats['tests tokenizer'] = (int) shell_exec('ls -1 tests/tokenizer/exp/ | wc -l');
 
