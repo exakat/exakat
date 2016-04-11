@@ -25,6 +25,7 @@ use Analyzer;
 
 class CantExtendFinal extends Analyzer\Analyzer {
     public function analyze() {
+        // final class a {}; class aa extends a {}
         $this->atomIs('Class')
              ->goToAllParents()
              ->hasOut('FINAL')
