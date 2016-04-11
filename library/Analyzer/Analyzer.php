@@ -1522,8 +1522,14 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllParents() {
-        $this->addMethod('classTree.scatter.transform{g.idx("classes")[["path":it]].next(); }');
+    public function goToAllParents($includeSelf = false) {
+        if ($includeSelf === true) {
+            $this->addMethod('classTree.scatter.transform{g.idx("classes")[["path":it]].next(); }');
+        } else {
+            $this->savePropertyAs('fullnspath', 'gTAP');
+            $this->addMethod('classTree.scatter.transform{g.idx("classes")[["path":it]].next(); }');
+            $this->notSamePropertyAs('fullnspath', 'gTAP');
+        }
         
         return $this;
     }
