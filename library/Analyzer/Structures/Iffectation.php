@@ -28,17 +28,43 @@ use Analyzer;
 class Iffectation extends Analyzer\Analyzer {
     public function analyze() {
         // if ($a = 1) {} // straight
-        $this->atomIs('Ifthen')
+        $this->atomIs(array('Ifthen', 'Ternary'))
              ->outIs('CONDITION')
-             ->atomIs('Assignation');
+             ->_as('results')
+             ->outIsIE('CODE')
+             ->atomIs('Assignation')
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs(self::LITERALS)
+             ->back('results');
         $this->prepareQuery();
 
-        // if ( 2 == ($a = 1)) {} (deeper inside)
-        $this->atomIs('Ifthen')
+        // if (($a = 1) && $y == 2) {} // straight
+        $this->atomIs(array('Ifthen', 'Ternary'))
              ->outIs('CONDITION')
-             ->atomInside('Assignation')
-             ->hasNoIn('ARGUMENT');
+             ->atomIs('Logical')
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->outIsIE('CODE')
+             ->atomIs('Assignation')
+             ->_as('results')
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs(self::LITERALS)
+             ->back('results');
         $this->prepareQuery();
+
+        /* Those are assignations inside comparison : can't be mistaken for constants. 
+        // if ( 2 == ($a = 1)) {} (deeper inside)
+        $this->atomIs(array('Ifthen', 'Ternary'))
+             ->outIs('CONDITION')
+             ->atomIs('Comparison')
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->outIsIE('CODE') // in case of Parenthesis
+             ->atomIs('Assignation')
+             ->_as('results')
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs(self::LITERALS)
+             ->back('results');
+        $this->prepareQuery();
+        */
     }
 }
 
