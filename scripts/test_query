@@ -24,17 +24,14 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
+$graphDB = new \Graph\Gremlin2(\Config::factory());
 $query = <<<'QUERY'
 
 /// insert a query here
-//g.V.has('atom', 'Class').filter{it.out('NAME').has('code', 'FlagVisitorImplementation').any() }.map
-//g.V.has('atom', 'Class').filter{it.out('NAME').has('code', 'BinaryOperatorFlagVisitor').any() }.map
-g.V.has('atom', 'File').fullcode;
 
 QUERY;
 
-$res = gremlin_query($query);
-
+$res = $graphDB->query($query);
 
 
 foreach($res as $k => $v) {
