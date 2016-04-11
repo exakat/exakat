@@ -238,7 +238,15 @@ function pushToQueue($id) {
     }
     
     $fp = fopen(PIPEFILE, 'a');
-    fwrite($fp, "$id\n");
+    if (!is_resource($fp)) {
+        echo json_encode(['status' => 'Can\'t open pipe. Try again later']);
+        exit;
+    }
+    $length = fwrite($fp, "$id\n");
+    if ($length != strlen("$id\n")) {
+        echo json_encode(['status' => 'Can\'t write to pipe. Try again later']);
+        exit;
+    }
     fclose($fp);
 }
 
