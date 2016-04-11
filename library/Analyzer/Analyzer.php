@@ -264,7 +264,7 @@ g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].outE('ANALYZED').each
 
 GREMLIN;
             $this->query($query);
-        } 
+        }
     }
 
     public function isDone() {
