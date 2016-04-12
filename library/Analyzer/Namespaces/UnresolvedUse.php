@@ -31,7 +31,8 @@ class UnresolvedUse extends Analyzer\Analyzer {
                      'Interfaces/IsExtInterface',
                      'Traits/IsExtTrait',
                      'Composer/IsComposerNsname',
-                     'Namespaces/GlobalImport');
+                     'Namespaces/GlobalImport',
+                     'Composer/InComposerJson');
     }
 
     public function analyze() {
@@ -45,7 +46,8 @@ class UnresolvedUse extends Analyzer\Analyzer {
              ->analyzerIsNot('Interfaces/IsExtInterface')
              ->analyzerIsNot('Traits/IsExtTrait')
              ->analyzerIsNot('Composer/IsComposerNsname')
-             ->analyzerIsNot('Namespaces/GlobalImport');
+             ->analyzerIsNot('Namespaces/GlobalImport')
+             ->analyzerIsNot('Composer/InComposerJson');
         $this->prepareQuery();
     }
 }
