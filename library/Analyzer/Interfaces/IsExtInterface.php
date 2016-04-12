@@ -56,6 +56,11 @@ class IsExtInterface extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->fullnspath($interfaces);
         $this->prepareQuery();
+
+        $this->atomIs('Use')
+             ->outIs('USE')
+             ->fullnspath($interfaces);
+        $this->prepareQuery();
     }
 }
 
