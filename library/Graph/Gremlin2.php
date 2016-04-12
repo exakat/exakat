@@ -76,7 +76,7 @@ class Gremlin2 extends Graph {
 
                 } elseif (is_array($value)) {
                     $value = array_map(function ($x) { return str_replace('$', '\\$', addslashes($x)); }, $value);
-                    $gremlin = "{ ['".join("','", $value)."'] }";
+                    $gremlin = "{ ['".implode("','", $value)."'] }";
                     $defName = 'a'.crc32($gremlin);
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 

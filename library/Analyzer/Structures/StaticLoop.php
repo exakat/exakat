@@ -35,7 +35,7 @@ class StaticLoop extends Analyzer\Analyzer {
     public function analyze() {
         $nonDeterminist = $this->loadIni('php_nondeterministic.ini', 'functions');
         $nonDeterminist = $this->makeFullNsPath($nonDeterminist);
-        $nonDeterminist = "'\\" . join("', '\\", $nonDeterminist)."'";
+        $nonDeterminist = "'\\" . implode("', '\\", $nonDeterminist)."'";
         
         // foreach with only one value
         $this->atomIs('Foreach')

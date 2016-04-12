@@ -25,7 +25,8 @@ namespace Tasks;
 
 class Dump extends Tasks {
     // Beware : shared with Project
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
+    protected $themes = array(//'CompatibilityPHP53', 'CompatibilityPHP54', 
+                              'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71',
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
@@ -109,7 +110,7 @@ SQL;
                 $counts[$row['analyzer']] = $row['counts'];
             }
             $this->log->log( "count analyzed : ".count($counts)."\n");
-            $this->log->log( "counts ".join(', ', $counts)."\n");
+            $this->log->log( "counts ".implode(', ', $counts)."\n");
             $datastore->close();
             unset($datastore);
         

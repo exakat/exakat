@@ -122,7 +122,7 @@ SQL
                 arrowhead = \"empty\"
         ]
         
-        ".$this->subgraphs($dot)."\n\n".join("\n", $links)."\n}\n";
+        ".$this->subgraphs($dot)."\n\n".implode("\n", $links)."\n}\n";
         
         file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
     }

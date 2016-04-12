@@ -407,8 +407,8 @@ JOIN categories
         $oClass = new ReflectionClass('\Analyzer\Analyzer');
         $analyzerConstants = array_keys($oClass->getConstants());
 
-       $severityList = "'". join("', '", array_filter($analyzerConstants, function ($x) { return substr($x, 0, 2) === 'S_';})) . "'";
-       $timeToFixList = "'". join("', '", array_filter($analyzerConstants, function ($x) { return substr($x, 0, 2) === 'T_';})) . "'";
+       $severityList = "'". implode("', '", array_filter($analyzerConstants, function ($x) { return substr($x, 0, 2) === 'S_';})) . "'";
+       $timeToFixList = "'". implode("', '", array_filter($analyzerConstants, function ($x) { return substr($x, 0, 2) === 'T_';})) . "'";
 
         $res = $sqlite->query('SELECT DISTINCT analyzers.folder || "/" || analyzers.name as name, severity || " " || timetofix AS s FROM analyzers 
 JOIN analyzers_categories 
@@ -649,7 +649,7 @@ SQL
             if (!empty($toDelete)) {
 //                echo "To be deleted " , implode(', ', $toDelete), "\n";
                 $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', array_keys($toDelete)).')');
-                echo count($toDelete), ' rows removed in ', $table, ' : "', join('", "', array_values($toDelete)), "\"\n";
+                echo count($toDelete), ' rows removed in ', $table, ' : "', implode('", "', array_values($toDelete)), "\"\n";
             }
         }
 
@@ -788,14 +788,14 @@ SQL
         
         $missing = array_diff($files, $formats);
         if (count($missing) > 0) {
-            print count($missing).' format are missing in ./library/Reports/Reports.php : '.join(', ', $missing)."\n";
-            print "    CONST FORMATS = ['".join("', '", $files)."'];\n";
+            print count($missing).' format are missing in ./library/Reports/Reports.php : '.implode(', ', $missing)."\n";
+            print "    CONST FORMATS = ['".implode("', '", $files)."'];\n";
         }
 
         $toomany = array_diff($formats, $files);
         if (count($toomany) > 0) {
-            print count($toomany).' format are too many in ./library/Reports/Reports.php : '.join(', ', $toomany)."\n";
-            print "    CONST FORMATS        = ['".join("', '", $files)."'];\n";
+            print count($toomany).' format are too many in ./library/Reports/Reports.php : '.implode(', ', $toomany)."\n";
+            print "    CONST FORMATS        = ['".implode("', '", $files)."'];\n";
         }
     }
     

@@ -30,7 +30,7 @@ if (!preg_match('#^([A-Z][a-zA-Z0-9]*)/([A-Z][a-zA-Z0-9]*)$#is', $analyzer, $par
     $dirs = array_map(function ($dir) { 
         return str_replace('library/Analyzer/', '', $dir); 
     }, $dirs);
-    print "Dirs : ".join(', ', $dirs)."\n";
+    print "Dirs : ".implode(', ', $dirs)."\n";
     die();
 }
 
@@ -44,7 +44,7 @@ if (!file_exists('library/Analyzer/'.$category)) {
     $dirs = array_map(function ($dir) { 
         return str_replace('library/Analyzer/', '', $dir); 
     }, $dirs);
-    print "Dirs : ".join(', ', $dirs)."\n";
+    print "Dirs : ".implode(', ', $dirs)."\n";
     die();
 }
 

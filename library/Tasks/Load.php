@@ -91,7 +91,7 @@ class Load extends Tasks {
         }
 
         $extPhp = array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  );
-        $shell = 'find '.$dir.' \\( -name "*.'.(join('" -o -name "*.', $extPhp)).'" \\) \\( -not -path "*'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l';
+        $shell = 'find '.$dir.' \\( -name "*.'.(implode('" -o -name "*.', $extPhp)).'" \\) \\( -not -path "*'.(implode('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l';
         $res = trim(shell_exec($shell));
         $files = explode("\n", $res);
     
@@ -1310,7 +1310,7 @@ class Load extends Tasks {
         $end = microtime(true);
         $log['memory_usage'] = memory_get_usage(true);
         $log['memory_max_usage'] = memory_get_peak_usage(true);
-        $this->log->log($filename."\t".(($end - $begin)*1000)."\t".join("\t", $log));
+        $this->log->log($filename."\t".(($end - $begin)*1000)."\t".implode("\t", $log));
 
         if (!isset($T)) {
             display( "Empty script. Ignoring\n");

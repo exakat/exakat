@@ -63,12 +63,30 @@ class Composer {
         return $return;
     }
 
-    public function getComposerClasses() {
+    public function getComposerClasses($vendor = null, $component = null, $version = null) {
         // global namespace is stored with 'global' keyword, so we remove it.
-        $query = "SELECT DISTINCT CASE namespace WHEN 'global' THEN classname ELSE namespace || '\\' || classname END AS classname 
-        FROM namespaces 
-        JOIN classes 
-            ON classes.namespace_id = namespaces.id";
+        $query = <<<SQL
+SELECT DISTINCT CASE namespace WHEN 'global' THEN classname ELSE namespace || '\\' || classname END AS classname 
+    FROM namespaces 
+    JOIN classes 
+        ON classes.namespace_id = namespaces.id
+SQL;
+            
+        if ($vendor != null) {
+            $version = $this->getVersion($vendor, $component, $version);
+            $query .= <<<SQL
+
+    JOIN versions
+        ON versions.id = namespaces.version_id
+    JOIN components
+        ON components.id = versions.component_id
+    WHERE components.vendor = "$vendor"       AND 
+          components.component = "$component" AND
+          versions.version = "$version"
+            
+SQL;
+            print $query;
+        }
 
         $res = $this->sqlite->query($query);
         $return = array();
@@ -76,10 +94,12 @@ class Composer {
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $return[] = strtolower($row['classname']);
         }
-        
+        print_r($return);
+                    die();
+
         return $return;
     }
-
+    
     public function getComposerInterfaces($vendor = null) {
         // global namespace is stored with 'global' keyword, so we remove it.
         $query = "SELECT CASE namespace WHEN 'global' THEN interfacename ELSE namespace || '\\' || interfacename END AS interfacename FROM namespaces 
@@ -116,6 +136,33 @@ JOIN traits ON traits.namespace_id = namespaces.id";
         }
         
         return $return;
+    }
+    
+    public function getVersion($vendor, $component, $version) {
+        if (strpos($version, '~') !== false) {
+            $min = substr($version, 1);
+            $d = explode('.', $min);
+            $d[count($d) - 2]++;
+            $d[count($d) - 1] = '0';
+            $max = join('.', $d);
+            $query = <<<SQL
+SELECT version 
+    FROM versions 
+    JOIN components
+        ON components.id = versions.component_id
+    WHERE components.vendor = "$vendor"       AND 
+          components.component = "$component" AND
+          versions.name >= "$min" and versions.name < "$max"
+
+SQL;
+
+print $query;die();
+
+
+        } else {
+            // By default, no special chars, so just return the version
+            return $version;
+        }
     }
 }
 

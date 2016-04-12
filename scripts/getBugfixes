@@ -232,7 +232,7 @@ foreach($blocks as $block) {
                     } 
                     
                     if (!empty($updates)) {
-                        print "UPDATE bugfixes SET ".join(', ', $updates)." WHERE id = {$row['id']};\n";
+                        print "UPDATE bugfixes SET ".implode(', ', $updates)." WHERE id = {$row['id']};\n";
                     }
                 }
             }

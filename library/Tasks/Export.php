@@ -169,7 +169,7 @@ class Export extends Tasks {
                 $row[] = '';
             }
 
-            $row = '<td>'.join('</td><td>', $row).'</td>';
+            $row = '<td>'.implode('</td><td>', $row).'</td>';
             $r .= "<tr>$row</tr>\n";
         }
         $r .= '</table>';

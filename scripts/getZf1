@@ -60,7 +60,7 @@ function save ($sqlite, $table, $data) {
     foreach($data as $col => $value) {
         $where[] = "$col = '".$sqlite->escapeString($value)."'";
     }
-    $where = join(' AND ', $where);
+    $where = implode(' AND ', $where);
 
     $res = $sqlite->querySingle('SELECT * FROM '.$table.' WHERE '.$where);
     if (empty($res)) {
@@ -72,8 +72,8 @@ function save ($sqlite, $table, $data) {
             $values[] = "'".$sqlite->escapeString($v)."'";
         }
         
-        $cols = join(', ', $cols);
-        $values = join(', ', $values);
+        $cols = implode(', ', $cols);
+        $values = implode(', ', $values);
         $query = "INSERT INTO $table ($cols) VALUES ($values)";
         $sqlite->query($query);
         

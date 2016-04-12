@@ -85,7 +85,7 @@ class Files extends Tasks {
         if (empty($ignoreDirs)) {
             $regex = '';
         } else {
-            $regex = '#^('.join('|', $ignoreDirs).')#';
+            $regex = '#^('.implode('|', $ignoreDirs).')#';
         }
 
         $php = new \Phpexec();
@@ -135,7 +135,7 @@ class Files extends Tasks {
         display('Counted files');
         
         $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
-        file_put_contents($tmpFileName, '"'.$config->projects_root.'/projects/'.$dir.'/code'.join("\"\n\"$config->projects_root/projects/$dir/code", $files).'"');
+        file_put_contents($tmpFileName, '"'.$config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"$config->projects_root/projects/$dir/code", $files).'"');
 
         $versions = $config->other_php_versions;
 

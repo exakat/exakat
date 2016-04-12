@@ -91,7 +91,7 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
         if (isset($a2themes[$name])) {
             $c = array_map('rst_link', $a2themes[$name]);
-            $recipes = join(', ', $c);
+            $recipes = implode(', ', $c);
         } else {
             $recipes = 'none';
         }
@@ -122,7 +122,7 @@ RST;
     unset($a);
 
     sort($liste);
-    $text .= rst_level($row['name'], 4)."\nTotal : ".count($liste)." analysis\n\n* ".join("\n* ", $liste)."\n\n";
+    $text .= rst_level($row['name'], 4)."\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ", $liste)."\n\n";
 }
 
 $rules = '';

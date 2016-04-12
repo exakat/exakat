@@ -59,7 +59,7 @@ class IsGlobalConstant extends Analyzer\Analyzer {
 
                  // is the constant defined in the global
                  ->filter("g.idx('constants')[['path':'\\\\' + it.code.toLowerCase()]].any() ||
-                           '\\\\' + it.code.toLowerCase() in ['".join("', '", $chunk)."']")
+                           '\\\\' + it.code.toLowerCase() in ['".implode("', '", $chunk)."']")
                  ->back('first');
             $this->prepareQuery();
         }

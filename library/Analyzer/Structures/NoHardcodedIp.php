@@ -35,7 +35,7 @@ class NoHardcodedIp extends Analyzer\Analyzer {
         
         // a string that looks like a domain name. 
         $tld = $this->loadIni('tld.ini', 'tld');
-        $regexTld = join('|', $tld);
+        $regexTld = implode('|', $tld);
 
         $this->atomIs('String')
              ->noDelimiterIsNot('localhost')

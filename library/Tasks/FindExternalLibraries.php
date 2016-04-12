@@ -117,9 +117,9 @@ class FindExternalLibraries extends Tasks {
         }
 
         if (count($newConfigs) == 1) {
-            display('One external library is going to be omitted : '.join(', ', array_keys($newConfigs)));
+            display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
         } elseif (count($newConfigs)) {
-            display(count($newConfigs).' external libraries are going to be omitted : '.join(', ', array_keys($newConfigs)));
+            display(count($newConfigs).' external libraries are going to be omitted : '.implode(', ', array_keys($newConfigs)));
         }
 
         $store = [];
@@ -134,7 +134,7 @@ class FindExternalLibraries extends Tasks {
         if ($config->update === true && count($newConfigs) > 0) {
              display('Updating '.$project.'/config.ini');
              $ini = file_get_contents($configFile);
-             $ini = preg_replace("#(ignore_dirs\[\] = \/.*?\n)\n#is", '$1'."\n".';Ignoring external libraries'."\n".'ignore_dirs[] = '.join("\n".'ignore_dirs[] = ', $newConfigs)."\n;Ignoring external libraries\n\n", $ini);
+             $ini = preg_replace("#(ignore_dirs\[\] = \/.*?\n)\n#is", '$1'."\n".';Ignoring external libraries'."\n".'ignore_dirs[] = '.implode("\n".'ignore_dirs[] = ', $newConfigs)."\n;Ignoring external libraries\n\n", $ini);
 
              $ini .= "\nFindExternalLibraries = 1\n";
 

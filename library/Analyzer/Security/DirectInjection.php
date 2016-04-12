@@ -36,7 +36,7 @@ class DirectInjection extends Analyzer\Analyzer {
         $safeIndex = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
                            'SCRIPT_NAME', 'SERVER_ADMIN', '_');
         $safeIndex = '(it.out("VARIABLE").has("code", "\$_SERVER").any() == false) ||
-                       it.out("INDEX").has("atom", "String").filter{!(it.noDelimiter in ["' . join('", "', $safeIndex) . '"])}.any()';
+                       it.out("INDEX").has("atom", "String").filter{!(it.noDelimiter in ["' . implode('", "', $safeIndex) . '"])}.any()';
 
         // Relayed call to another function
         $this->atomIs('Variable')
