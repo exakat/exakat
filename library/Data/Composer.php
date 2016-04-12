@@ -85,7 +85,6 @@ SQL;
           versions.version = "$version"
             
 SQL;
-            print $query;
         }
 
         $res = $this->sqlite->query($query);
@@ -94,8 +93,6 @@ SQL;
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $return[] = strtolower($row['classname']);
         }
-        print_r($return);
-                    die();
 
         return $return;
     }
@@ -141,10 +138,12 @@ JOIN traits ON traits.namespace_id = namespaces.id";
     public function getVersion($vendor, $component, $version) {
         if (strpos($version, '~') !== false) {
             $min = substr($version, 1);
+            
             $d = explode('.', $min);
             $d[count($d) - 2]++;
             $d[count($d) - 1] = '0';
             $max = join('.', $d);
+            
             $query = <<<SQL
 SELECT version 
     FROM versions 
@@ -152,17 +151,15 @@ SELECT version
         ON components.id = versions.component_id
     WHERE components.vendor = "$vendor"       AND 
           components.component = "$component" AND
-          versions.name >= "$min" and versions.name < "$max"
-
+          versions.version >= "$min" and versions.version < "$max"
+    ORDER BY forOrder DESC
+    LIMIT 1
 SQL;
-
-print $query;die();
-
-
-        } else {
-            // By default, no special chars, so just return the version
-            return $version;
-        }
+            $version = $this->sqlite->querySingle($query);
+        } 
+        // By default, no special chars, so just return the version
+        
+        return $version;
     }
 }
 
