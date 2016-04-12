@@ -1,0 +1,26 @@
+<?php
+
+$sqlite = new \Sqlite3('data/composer.sqlite');
+
+
+$res = $sqlite->query('select * from versions where forOrder = -1');
+$stmt = $sqlite->prepare('update versions set forOrder = :order WHERE id= :id');
+while($row = $res->fetchArray()) {
+//    print_r($row);
+    
+    if ($row['version'] == 'dev-master') { 
+        $order = 0;
+    } else {
+        $order = preg_replace('/(\.x)?-\w+/', '', $row['version']);
+    }
+    
+    $d = explode('.', $order);
+    $order = pow(1000, 3) * $d[0] + pow(1000, 2) * @$d[1] + pow(1000, 1) * @$d[2] + pow(1000, 0) * @$d[3] ;
+
+    print $row['version']." ".$order."\n";
+    $stmt->bindValue(':id', $row['id']);
+    $stmt->bindValue(':order', $order);
+    $stmt->execute();
+}
+
+?>
