@@ -63,7 +63,7 @@ class Composer {
         return $return;
     }
 
-    public function getComposerClasses($vendor = null, $component = null, $version = null) {
+    public function getComposerClasses($vendor = null, $version = null) {
         // global namespace is stored with 'global' keyword, so we remove it.
         $query = <<<SQL
 SELECT DISTINCT CASE namespace WHEN 'global' THEN classname ELSE namespace || '\\' || classname END AS classname 
@@ -73,6 +73,8 @@ SELECT DISTINCT CASE namespace WHEN 'global' THEN classname ELSE namespace || '\
 SQL;
             
         if ($vendor != null) {
+            list($vendor, $component) = explode('/', $vendor);
+
             $version = $this->getVersion($vendor, $component, $version);
             $query .= <<<SQL
 
@@ -97,14 +99,30 @@ SQL;
         return $return;
     }
     
-    public function getComposerInterfaces($vendor = null) {
+    public function getComposerInterfaces($vendor = null, $version = null) {
         // global namespace is stored with 'global' keyword, so we remove it.
-        $query = "SELECT CASE namespace WHEN 'global' THEN interfacename ELSE namespace || '\\' || interfacename END AS interfacename FROM namespaces 
-JOIN interfaces ON interfaces.namespace_id = namespaces.id";
+        $query = <<<SQL
+SELECT CASE namespace WHEN 'global' THEN interfacename ELSE namespace || '\\' || interfacename END AS interfacename 
+    FROM namespaces 
+    JOIN interfaces 
+        ON interfaces.namespace_id = namespaces.id
+
+SQL;
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
-            $query .= " WHERE vendor = '$vendor' and component = '$component'";
-        
+
+            $version = $this->getVersion($vendor, $component, $version);
+            $query .= <<<SQL
+
+    JOIN versions
+        ON versions.id = namespaces.version_id
+    JOIN components
+        ON components.id = versions.component_id
+    WHERE components.vendor = "$vendor"       AND 
+          components.component = "$component" AND
+          versions.version = "$version"
+            
+SQL;
         }
         $res = $this->sqlite->query($query);
         $return = array();
@@ -116,15 +134,32 @@ JOIN interfaces ON interfaces.namespace_id = namespaces.id";
         return $return;
     }
 
-    public function getComposerTraits($vendor = null) {
+    public function getComposerTraits($vendor = null, $version = null) {
         // global namespace is stored with 'global' keyword, so we remove it.
-        $query = "SELECT CASE namespace WHEN 'global' THEN traitname ELSE namespace || '\\' || traitname END AS traitname FROM namespaces 
-JOIN traits ON traits.namespace_id = namespaces.id";
+        $query = <<<SQL
+SELECT CASE namespace WHEN 'global' THEN traitname ELSE namespace || '\\' || traitname END AS traitname 
+    FROM namespaces 
+    JOIN traits 
+        ON traits.namespace_id = namespaces.id
+SQL;
+
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
-            $query .= " WHERE vendor = '$vendor' and component = '$component'";
-        
+
+            $version = $this->getVersion($vendor, $component, $version);
+            $query .= <<<SQL
+
+    JOIN versions
+        ON versions.id = namespaces.version_id
+    JOIN components
+        ON components.id = versions.component_id
+    WHERE components.vendor = "$vendor"       AND 
+          components.component = "$component" AND
+          versions.version = "$version"
+            
+SQL;
         }
+
         $res = $this->sqlite->query($query);
         $return = array();
         
