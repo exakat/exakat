@@ -839,6 +839,18 @@ GREMLIN;
         return $this;
     }
 
+    public function isInProperty($property, $name, $caseSensitive = false) {
+        if ($caseSensitive === true || $property === 'line' || $property === 'rank') {
+            $caseSensitive = '';
+        } else {
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        $this->addMethod('filter{ '.$name.$caseSensitive.' in it.'.$property.' }', $name);
+    
+        return $this;
+    }
+    
     public function sameContextAs($storage = 'context', $context = array('Namespace', 'Class', 'Function')) {
         foreach($context as &$c) {
             $c = $storage.'["'.$c.'"] == '.$context.'["'.$c.'"] ';
