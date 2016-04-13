@@ -167,7 +167,7 @@ class FindExternalLibraries extends Tasks {
             if (is_string($token)) { continue; }
 
             if (in_array($token[0], $t_whitecode))  { continue; }
-
+            
             if ($token[0] == $t_namespace) {
                 if (!is_array($tokens[$id + 2])) { continue; }
 
@@ -179,8 +179,8 @@ class FindExternalLibraries extends Tasks {
                 }
                 continue;
             }
-        
-            if ($token[0] == $t_class) {
+
+            if ($token[0] == $t_class && $tokens[$id - 1][1] != '::') {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];
                 if (!is_string($class)) {
@@ -201,7 +201,7 @@ class FindExternalLibraries extends Tasks {
                     if ($returnPath != '/') {
                         $return[$class] = $returnPath;
                     }
-//                    return $return;
+                    return $return;
                 } elseif (isset($this->classic["$namespace\\$lclass"])) {
                     if ($this->classic[$namespace.'\\'.$lclass] == self::COMPOSER_DIR) {
                         $returnPath = dirname(dirname(dirname(dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)))));
@@ -209,11 +209,11 @@ class FindExternalLibraries extends Tasks {
                     if ($returnPath != '/') {
                         $return[$class] = $returnPath;
                     }
-//                    return $return;
+                    return $return;
                 }
             }
         }
-    
+
         return $return;
     }
 
