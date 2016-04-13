@@ -101,7 +101,6 @@ class Tokenizer extends Tasks {
             $rbegin = microtime(true);
             ++$round;
             $this->log->log("round $round)");
-            \Tokenizer\TokenAuto::$round = $round;
     
             array_unshift($prev, $count);
 

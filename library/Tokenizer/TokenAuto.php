@@ -24,7 +24,6 @@
 namespace Tokenizer;
 
 abstract class TokenAuto extends Token {
-    static    public    $round      = -1;
               protected $conditions = array();
               protected $actions    = array();
               protected $setAtom    = false;
@@ -56,7 +55,7 @@ abstract class TokenAuto extends Token {
         } elseif (in_array($class, Token::$types)) {
             $query .= 'g.idx("racines")[["token":"'.$class.'"]].out("INDEXED")'.$moderator;
         } else {
-            die("Should only use atoms!");
+            die('Should only use atoms!');
         }
         $query .= '.sideEffect{ total++; }';
 
