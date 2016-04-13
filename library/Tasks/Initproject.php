@@ -172,19 +172,22 @@ INI;
                 // SVN
                 case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $this->config->svn === true) :
                     display('SVN initialization');
-                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
+                    $repositoryURL = addcslashes($repositoryURL, '$()');
+                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; svn checkout "'.escapeshellarg($repositoryURL).'" code');
                     break 1;
 
                 // Bazaar
                 case ($this->config->bzr === true) :
                     display('Bazaar initialization');
-                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; bzr branch '.escapeshellarg($repositoryURL).' code');
+                    $repositoryURL = addcslashes($repositoryURL, '$()');
+                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; bzr branch "'.escapeshellarg($repositoryURL).'" code');
                     break 1;
 
                 // HG
                 case ($this->config->hg === true) :
                     display('Mercurial initialization');
-                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repositoryURL).' code');
+                    $repositoryURL = addcslashes($repositoryURL, '$()');
+                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; hg clone "'.escapeshellarg($repositoryURL).'" code');
                     break 1;
 
                 // Tbz archive
@@ -230,7 +233,8 @@ INI;
                 // Git is last, as it will act as a default
                 case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $this->config->git === true) :
                     display('Git initialization');
-                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 ');
+                    $repositoryURL = addcslashes($repositoryURL, '$()');
+                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q "'.$repositoryURL.'" code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
                         $skipFiles = true;
