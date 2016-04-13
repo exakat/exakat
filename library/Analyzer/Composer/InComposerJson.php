@@ -40,9 +40,15 @@ class InComposerJson extends Analyzer\Analyzer {
         foreach($json->require as $component => $version) {
             if (strpos($component, '/') === false) { continue; }
             $classes = $composer->getComposerClasses($component, $version);
-            $c[] = $this->makeFullNSPath($classes);
+            if (!empty($c)){
+                $c[] = $this->makeFullNSPath($classes);
+            }
         }
-        $classes = array_merge(...$c);
+        if (!empty($c)) {
+            $classes = array_merge(...$c);
+        } else {
+            $classes = array();
+        }
 
         $this->atomIs('New')
              ->outIs('NEW')
@@ -81,32 +87,37 @@ class InComposerJson extends Analyzer\Analyzer {
         $c = array();
         foreach($json->require as $component => $version) {
             if (strpos($component, '/') === false) { continue; }
-            $classes = $composer->getComposerInterfaces($component, $version);
-            $c[] = $this->makeFullNSPath($classes);
+            $interfaces = $composer->getComposerInterfaces($component, $version);
+            if (!empty($c)){
+                $c[] = $this->makeFullNSPath($interfaces);
+            }
         }
-        $classes = array_merge(...$c);
+        if (!empty($c)) {
+            $interfaces = array_merge(...$c);
+        } else {
+            $interfaces = array();
+        }
 
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
-             ->fullnspath($classes);
+             ->fullnspath($interfaces);
         $this->prepareQuery();
 
         $this->atomIs('Interface')
              ->outIs('IMPLEMENTS')
-             ->fullnspath($classes);
+             ->fullnspath($interfaces);
         $this->prepareQuery();
 
         $this->atomIs('Use')
              ->outIs('USE')
-             ->fullnspath($classes);
+             ->fullnspath($interfaces);
         $this->prepareQuery();
 
         $this->atomIs('Catch')
              ->outIs('CLASS')
-             ->fullnspath($classes)
+             ->fullnspath($interfaces)
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 
