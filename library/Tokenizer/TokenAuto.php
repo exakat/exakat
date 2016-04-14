@@ -74,7 +74,12 @@ abstract class TokenAuto extends Token {
         unset($this->conditions[0]);
 
         $positions = array_keys($this->conditions);
-        $q[] = array_pad([], abs(min($positions)), 'in("NEXT")');
+        $start = min($positions);
+        if ($start < 0) {
+            $q[] = array_pad([], -1 * $start, 'in("NEXT")');
+        } else {
+            $q[] = array_pad([], $start, 'out("NEXT")');
+        }
         foreach($positions as $position) {
             $conditions = $this->conditions[$position];
             $name = ($position < 0 ? 'b' : 'a').abs($position);
@@ -87,7 +92,7 @@ abstract class TokenAuto extends Token {
             }
             unset($this->conditions[$position]);
         }
-        $q[] = ['select("origin")'];
+        $q[] = [ 'as("a'.(1 + max($positions)).'")','select("origin")'];
 
         $queryConditions = call_user_func_array('array_merge', $q);
         unset($q);
@@ -189,11 +194,11 @@ abstract class TokenAuto extends Token {
             if (is_array($actions['property']) && !empty($actions['property'])) {
                 foreach($actions['property'] as $name => $value) {
                     if ($value === true) {
-                        $qactions[] = " /* property */   it.setProperty('$name', true)";
+                        $qactions[] = "property('$name', true)";
                     } elseif ($value === false) {
-                        $qactions[] = " /* property */   it.setProperty('$name', false)";
+                        $qactions[] = "property('$name', false)";
                     } else {
-                        $qactions[] = " /* property */   it.setProperty('$name', '$value')";
+                        $qactions[] = "property('$name', '$value')";
                     }
                 }
             }
@@ -607,14 +612,22 @@ $fullcode
                     ++$c;
                 
                     if ($label == 'DROP') {
-                        $qactions[] = "
+
+                        $b = $c - 1;
+                        $d = $c + 1;
+                        $qactions[] = <<<GREMLIN
 /* transform drop out ($c) */
+sideEffect( select("a$b").addE("$label").to("a$d"))
+.sideEffect( select("a$c").bothE("NEXT", "INDEXED").drop())
+
+GREMLIN;
+/*
 g.addEdge(a$c.in('NEXT').next(), a$c.out('NEXT').next(), 'NEXT');
 a$c.bothE('NEXT').each{ g.removeEdge(it); }
 a$c.inE('INDEXED').each{ g.removeEdge(it); }
 toDelete.push(a$c);
 
-";
+*/
                     } elseif ($label == 'PPP') {
                         $qactions[] = "
 /* Build a link with the target's code */
@@ -2994,7 +3007,7 @@ __.out("NAME", "PROPERTY", "OBJECT", "DEFINE", "CODE", "LEFT", "RIGHT", "SIGN", 
                 } elseif ($value === false) {
                     $queryConditions[] = 'has("'.$property.'", false)';
                 } elseif ($value === 'none') {
-                    $queryConditions[] = 'has("'.$property.'", null)';
+                    $queryConditions[] = 'hasNot("'.$property.'")';
                 } else {
                     $queryConditions[] = 'has("'.$property.'", "'.$value.'")';
                 }
@@ -3154,7 +3167,7 @@ filter{ it.as("a").out("NEXT").transform{
     if (it.token == "T_CLOSE_BRACKET") {
         it;
     } else {
-        it.not(has("atom", null)).out("NEXT").filter{ it.token in ["T_CLOSE_BRACKET", "T_CLOSE_CURLY"]}.next();
+        it.hasNot("atom").out("NEXT").filter{ it.token in ["T_CLOSE_BRACKET", "T_CLOSE_CURLY"]}.next();
     }
 }.out("NEXT").loop("a"){it.object.token in ["T_OPEN_BRACKET", "T_OPEN_CURLY"] && it.object.atom == null}.any()}
 GREMLIN;
@@ -3165,7 +3178,7 @@ GREMLIN;
             if ( is_array($conditions['token']) && !empty($conditions['token'])) {
                 $queryConditions[] = 'has("token", within("'.implode('", "', $conditions['token']).'"))';
             } elseif($conditions['token'] == 'yes') {
-                $queryConditions[] = 'not(has("token", null))';
+                $queryConditions[] = 'has("token")';
             } else {
                 $queryConditions[] = 'has("token", "'.$conditions['token'].'")';
             }
@@ -3194,9 +3207,9 @@ GREMLIN;
             if ( is_array($conditions['atom']) && !empty($conditions['atom'])) {
                 $queryConditions[] = 'has("atom", within("'.implode('", "', $conditions['atom']).'"))';
             } elseif ( is_string($conditions['atom']) && $conditions['atom'] == 'none') {
-                $queryConditions[] = 'has("atom", null)';
+                $queryConditions[] = 'hasNot("atom")';
             } elseif (is_string($conditions['atom']) && $conditions['atom'] == 'yes') {
-                $queryConditions[] = 'not(has("atom", null))';
+                $queryConditions[] = 'has("atom")';
             } else {
                 $queryConditions[] = 'has("atom", "'.$conditions['atom'].'")';
             }
@@ -3214,7 +3227,7 @@ GREMLIN;
 
         if (isset($conditions['in_quote'])) {
             if ( $conditions['in_quote'] == 'none' ) {
-                $queryConditions[] = "has('in_quote', null)";
+                $queryConditions[] = "hasNot('in_quote')";
             } else {
                 $queryConditions[] = "has('in_quote', true)";
             }
@@ -3223,7 +3236,7 @@ GREMLIN;
 
         if (isset($conditions['dowhile'])) {
             if ( $conditions['dowhile'] === false ) {
-                $queryConditions[] = 'not(has("association", "dowhile"))';
+                $queryConditions[] = 'hasNot("association", "dowhile"))';
             } else {
                 $queryConditions[] = 'has("association", "dowhile")';
             }

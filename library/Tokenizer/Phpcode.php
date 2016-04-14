@@ -32,7 +32,7 @@ class Phpcode extends TokenAuto {
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
-                                  2 => array('token' => 'T_CLOSE_TAG'),
+                                  2 => array('token' => 'T_CLOSE_TAG')
         );
         
         $this->actions = array('transform'     => array( 1 => 'CODE',
@@ -61,19 +61,20 @@ class Phpcode extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-if (fullcode.code == '<script language=\\"php\\">') {
-    fullcode.fullcode = "<script language=\\"php\\">" + fullcode.out("CODE").next().fullcode;
-    closing = "</script>";
-} else if (fullcode.code in ['<%', '<%=']) {
-    fullcode.fullcode = fullcode.code.trim() + " " + fullcode.out("CODE").next().fullcode;
+
+if (o.property('code').value() == '<script language=\\"php\\">') {
+    fullcode = "<script language=\\"php\\">" + g.V(o).out("CODE").next().property('fullcode').value();
+    closing  = "</script>";
+} else if (o.property('code').value() in ['<%', '<%=']) {
+    fullcode = o.property('code').value().trim() + " " + g.V(o).out("CODE").next().property('fullcode').value();
     closing = "%>";
 } else {
-    fullcode.fullcode = fullcode.code.trim() + " " + fullcode.out("CODE").next().fullcode;
+    fullcode = o.property('code').value().trim() + " " + g.V(o).out("CODE").next().property('fullcode').value();
     closing = "?>";
 }
 
-if (fullcode.closing_tag == true) {
-    fullcode.fullcode = fullcode.fullcode + closing;
+if (o.property('closing_tag').value() == true) {
+    fullcode = fullcode + closing;
 }
 
 GREMLIN;
