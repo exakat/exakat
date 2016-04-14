@@ -96,7 +96,7 @@ abstract class TokenAuto extends Token {
         
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
-        $query .= $moderatorFinal.'.sideEffect{ done++;}.'. $qactions . ($this->setAtom ? '.sideEffect{ o = it.get(); '.$this->fullcode().' o.property("fullcode", fullcode); }' : '' ).".iterate();
+        $query .= $moderatorFinal.'.sideEffect{ done++; }.'. $qactions . ($this->setAtom ? '.sideEffect{ o = it.get(); '.$this->fullcode().' o.property("fullcode", fullcode); }' : '' ).".iterate();
 [total:total, done:done];";
 ////toDelete.each{ g.removeVertex(it); }
         
@@ -627,13 +627,15 @@ target.bothE('INDEXED').each{ g.removeEdge(it); }
 
 ";
                 } else {
-                        $qactions[] = "
+                   $d = $c + 1;
+                   $qactions[] = <<<GREMLIN
 /* transform out ($c) */
 
-g.addEdge(it, a$c, '$label');
-g.addEdge(it, a$c.out('NEXT').next(), 'NEXT');
-a$c.bothE('NEXT').each{ g.removeEdge(it); }
-";
+sideEffect( select("a$c").addE("$label").from("origin"))
+.sideEffect( select("a$c").addE("NEXT").to("origin"))
+.sideEffect( select("a$c").bothE("NEXT").drop())
+
+GREMLIN;
                     }
 
                 // Destination < 0
@@ -1859,9 +1861,22 @@ current.out('ELEMENT').has('root', true).each{
         }
 
         if (isset($actions['toOneSequence']) && $actions['toOneSequence']) {
-            $qactions[] = "
 /* to toOneSequence */
+            $qactions[] = <<<GREMLIN
 
+sideEffect( __.out("NEXT").select("b2"))
+.sideEffect( select("b1").property("rank", 0) )
+.sideEffect( select("b1").bothE("NEXT", "INDEXED").drop() )
+.sideEffect( select("origin").addE("ELEMENT").to("b1") )
+.sideEffect( select("b2").addE("NEXT").to("origin") )
+
+GREMLIN;
+            unset($actions['toOneSequence']);
+
+
+
+
+/*
 b2 = b1.in('NEXT').next();
 
 b1.setProperty('rank', 0);
@@ -1875,10 +1890,7 @@ g.idx('atoms').put('atom','Sequence', it);
 it.setProperty('fullcode', ';'); // fullcode
 
 g.addEdge(b2, it, 'NEXT');
-
-";
-            unset($actions['toOneSequence']);
-        }
+*/        }
 
         if (isset($actions['toArgument']) && $actions['toArgument']) {
                 $qactions[] = "
@@ -2835,10 +2847,10 @@ $fullcode
 /* adds a semicolon  */
 
 choose(
-    and(__.out('NEXT').hasNot('atom').values('token').is(neq($avoidSemicolon)), __.hasNot('in_quote')),
+    and(__.out('NEXT').hasNot('atom').values('token').is(not(within($avoidSemicolon))), __.hasNot('in_quote')),
 
     __.sideEffect( __.as('current')
-    .addV().property('code', ';;;;').property('token', 'T_SEMICOLON').property('virtual', true).property('addSemicolon', true).as("semicolon")
+    .addV().property('code', ';').property('token', 'T_SEMICOLON').property('virtual', true).property('addSemicolon', true).as("semicolon")
     .select("current").out('NEXT').as('next')
     .sideEffect( select("current").outE("NEXT").drop())
     .sideEffect( select("current").addE("NEXT").to("semicolon") )

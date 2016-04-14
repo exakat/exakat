@@ -49,7 +49,7 @@ class Sequence extends TokenAuto {
         $forbiddenTokens = array('T_ELSEIF', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_COMMA', 'T_CATCH');
 
         // Actual rules starting now
-
+/*
         // @note instructions separated by ;
         $this->conditions = array(-2 => array('notToken'  => $yieldOperator,
                                               'filterOut' => 'T_IF',
@@ -105,7 +105,7 @@ class Sequence extends TokenAuto {
         $this->actions = array('toSequence'  => true,
                                'keepIndexed' => true);
         $this->checkAuto();
-
+*/
         // { 2; }
         $this->conditions = array( -2 => array('token'    => 'T_OPEN_CURLY'),
                                    -1 => array('atom'     => $operands,
@@ -115,7 +115,8 @@ class Sequence extends TokenAuto {
                                     1 => array('token'    => 'T_CLOSE_CURLY'),
         );
         
-        $this->actions = array('toOneSequence'  => true);
+        $this->actions = array('toOneSequence'  => true,
+                               'atom'           => 'Sequence');
         $this->checkAuto();
 
         // <?php 2 ; ? >
@@ -126,8 +127,8 @@ class Sequence extends TokenAuto {
                                     1 => array('token'    => array('T_CLOSE_TAG', 'T_END')),
         );
         
-        $this->actions = array('toOneSequence'  => true);
-        $this->printQuery();
+        $this->actions = array('toOneSequence'  => true,
+                               'atom'           => 'Sequence');
         $this->checkAuto();
 
         return false;
@@ -137,8 +138,8 @@ class Sequence extends TokenAuto {
         // fullcode is not meant to reproduce the whole code, but give a quick peek at some smaller code. Just ignoring for the moment.
         return <<<GREMLIN
 
-fullcode.setProperty("fullcode", " ");
-fullcode.setProperty("count", fullcode.out('ELEMENT').count());
+o.property("count", g.V(o).out('ELEMENT').count().next());
+fullcode = " "; 
 
 GREMLIN;
     }
