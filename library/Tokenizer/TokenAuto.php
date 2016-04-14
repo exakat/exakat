@@ -61,55 +61,44 @@ abstract class TokenAuto extends Token {
         }
         */
         
-        $query .= 'g.V().has("token", within("'.join('", "', static::$operators).'"))'.$moderator;
-
-        $query .= '.sideEffect{ total++; }';
+        $query .= 'g.V()'.$moderator;
 
         $q = array();
-        if (!empty($this->conditions[0])) {
-            $q[] = $this->readConditions($this->conditions[0]);
-            $q[] = ['as("origin")'];
-
-            unset($this->conditions[0]);
+        if (empty($this->conditions[0])) {
+            print "conditions[0] is empty\n";
+            die();
         }
+        $q[] = $this->readConditions($this->conditions[0]);
+        $q[] = ['as("origin")'];
+        $q[] = array('sideEffect{ total++; }');
+        unset($this->conditions[0]);
 
-        for($i = -8; $i < 0; ++$i) {
-            if (!empty($this->conditions[$i])) {
-                $conditions = $this->conditions[$i];
-                $conditions['previous'] = abs($i);
+        $positions = array_keys($this->conditions);
+        $q[] = array_pad([], abs(min($positions)), 'in("NEXT")');
+        foreach($positions as $position) {
+            $conditions = $this->conditions[$position];
+            $name = ($position < 0 ? 'b' : 'a').abs($position);
 
-                $q[] = $this->readConditions($conditions);
-                $q[] = ['select("origin")'];
+            $q[] = ['as("'.$name.'")'];
+            $q[] = $this->readConditions($conditions);
+            $q[] = ['out("NEXT")'];
+            if ($position == -1) {
+                $q[] = ['out("NEXT")'];
             }
-            unset($this->conditions[$i]);
+            unset($this->conditions[$position]);
         }
-
-        for($i = 1; $i < 12; ++$i) {
-            if (!empty($this->conditions[$i])) {
-                $conditions = $this->conditions[$i];
-                $conditions['next'] = $i;
-
-                $q[] = $this->readConditions($conditions);
-                $q[] = ['select("origin")'];
-            }
-            unset($this->conditions[$i]);
-        }
+        $q[] = ['select("origin")'];
 
         $queryConditions = call_user_func_array('array_merge', $q);
         unset($q);
-        
-        if (!empty($this->conditions)) {
-            throw new UnprocessedCondition();
-        }
         
         $query .= '.'.implode('.', $queryConditions);
         
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
-        $query .= $moderatorFinal.'.each{ done++; fullcode = it;
-'.implode(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n};
-toDelete.each{ g.removeVertex(it); }
+        $query .= $moderatorFinal.'.sideEffect{ done++;}.'. $qactions . ($this->setAtom ? '.sideEffect{ o = it.get(); '.$this->fullcode().' o.property("fullcode", fullcode); }' : '' ).".iterate();
 [total:total, done:done];";
+////toDelete.each{ g.removeVertex(it); }
         
         return $query;
     }
@@ -159,21 +148,18 @@ toDelete.each{ g.removeVertex(it); }
         // @doc audit trail track
         if (isset($actions['keepIndexed'])) {
             if (!$actions['keepIndexed']) { // true means All
-                $qactions[] = '
-/* Remove index links */  __.inE("INDEXED").drop();
-';
+                $qactions[] = 'sideEffect(__.inE("INDEXED").drop())';
             }
             unset($actions['keepIndexed']);
         } else {
-                $qactions[] = '
-/* Remove index links */  __.inE("INDEXED").drop();
-';
+            $qactions[] = 'sideEffect(__.inE("INDEXED").drop())';
         }
 
         if (isset($actions['atom'])) {
             if (is_string($actions['atom'])) {
-                $qactions[] = " /* atom */\n   it.setProperty('atom', '".$actions['atom']."')";
+                $qactions[] = 'property("atom", "'.$actions['atom'].'")';
             } elseif (is_int($actions['atom'])) {
+                die("Atom is Int\n");
                 $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
             }
             
@@ -664,13 +650,19 @@ toDelete.push(b$d);
 
 ";
                     } else {
-                        $qactions[] = "
-/* transform in (-$c) */
+                        $c = $d + 1;
+                        $qactions[] = <<<GREMLIN
+sideEffect( select("b$c").addE("NEXT").to("origin"))
+.sideEffect( select("b$d").addE("$label").from("origin"))
+.sideEffect( select("b$d").bothE("NEXT").drop())
+GREMLIN;
+/*
 
 g.addEdge(it, b$d, '$label');
 g.addEdge(b$d.in('NEXT').next(), it, 'NEXT');
 b$d.bothE('NEXT').each{ g.removeEdge(it); }
-";
+
+*/
                     }
 
                 // Destination == 0
@@ -2842,19 +2834,19 @@ $fullcode
             $qactions[] = <<<GREMLIN
 /* adds a semicolon  */
 
-if ($token.out('NEXT').filter{ it.token in [$avoidSemicolon]}.has('atom', null).any() == false &&
-    $token.in_quote == null) {
-    semicolon = g.addVertex(null, [code:';', token:'T_SEMICOLON',virtual:true, line:it.line, addSemicolon:true]);
+choose(
+    and(__.out('NEXT').hasNot('atom').values('token').is(neq($avoidSemicolon)), __.hasNot('in_quote')),
 
-    next = $token.out('NEXT').next();
+    __.sideEffect( __.as('current')
+    .addV().property('code', ';;;;').property('token', 'T_SEMICOLON').property('virtual', true).property('addSemicolon', true).as("semicolon")
+    .select("current").out('NEXT').as('next')
+    .sideEffect( select("current").outE("NEXT").drop())
+    .sideEffect( select("current").addE("NEXT").to("semicolon") )
+    .sideEffect( select("semicolon").addE("NEXT").to("next") )
+    ),
 
-    $token.outE('NEXT').each{ g.removeEdge(it); }
-
-    g.addEdge($token, semicolon, 'NEXT');
-    g.addEdge(semicolon, next, 'NEXT');
-
-    g.addEdge(g.idx('racines')[['token':'Sequence']].next(), semicolon, 'INDEXED');
-}
+    __.sideEffect{} // No operation
+)
 
 GREMLIN;
             unset($actions['addSemicolon']);
@@ -2945,17 +2937,11 @@ GREMLIN;
         }
 
         if (isset($actions['cleanIndex'])) {
-            $qactions[] = "
-/* Remove children's index */
-it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE',
-'INDEX', 'EXTENDS', 'SUBNAME', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'VALUE', 'CAST', 'SOURCE', 'USE', 'KEY', 'IMPLEMENTS', 'THEN', 'AS',
-'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT', 'ELEMENT','FINAL', 'FILE', 'NAMESPACE', 'LABEL',
-'YIELD', 'GLOBAL', 'BLOCK').each{
-    it.inE('INDEXED').each{
-        g.removeEdge(it);
-    }
-}
-                ";
+            $qactions[] = 'sideEffect( 
+__.out("NAME", "PROPERTY", "OBJECT", "DEFINE", "CODE", "LEFT", "RIGHT", "SIGN", "NEW", "RETURN", "CONSTANT", "CLASS", "VARIABLE",
+"INDEX", "EXTENDS", "SUBNAME", "POSTPLUSPLUS", "PREPLUSPLUS", "VALUE", "CAST", "SOURCE", "USE", "KEY", "IMPLEMENTS", "THEN", "AS",
+"ELSE", "NOT", "CONDITION", "CASE", "THROW", "METHOD", "STATIC", "CLONE", "INIT", "AT", "ELEMENT","FINAL", "FILE", "NAMESPACE", "LABEL",
+"YIELD", "GLOBAL", "BLOCK").sideEffect( __.inE("INDEXED").drop()))';
             unset($actions['cleanIndex']);
         }
 
@@ -2963,28 +2949,30 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             echo 'Warning : the following ', count($remainder), ' actions were ignored : ', implode(', ', $remainder), "\n";
         }
 
-        return $qactions;
+        return join('.', $qactions);
     }
 
     private function readConditions($conditions) {
         $queryConditions = array();
 
+        /*
         if (isset($conditions['next'])) {
             for($i = 0; $i < $conditions['next']; ++$i) {
-                $queryConditions[] = "out('NEXT')";
+                $queryConditions[] = 'out("NEXT")';
             }
-            $queryConditions[] = "sideEffect{ a{$conditions['next']} = it;}";
+            $queryConditions[] = 'as( "a'.$conditions['next'].')';
             unset($conditions['next']);
         }
 
         if (isset($conditions['previous'])) {
             for($i = 0; $i < $conditions['previous']; ++$i) {
-                $queryConditions[] = "in('NEXT')";
+                $queryConditions[] = 'in("NEXT")';
             }
-            $queryConditions[] = "sideEffect{ b{$conditions['previous']} = it;}";
+            $queryConditions[] = 'as( "b'.$conditions['previous'].')';
             unset($conditions['previous']);
         }
-
+        */
+        
         if (isset($conditions['property'])) {
             foreach($conditions['property'] as $property => $value) {
                 if (is_array($value)) {
