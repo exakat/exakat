@@ -1390,55 +1390,41 @@ $fullcode
 
 first = it;
 a0 = it;
+a1 = a0.out('NEXT').next();
 a2 = a1.out('NEXT').next();
 a3 = a2.out('NEXT').next();
 
 while (a0.token in ['T_OPEN_PARENTHESIS', 'T_COMMA']) {
-    if (a1.atom in ['Typehint', 'Variable', 'Assignation', 'Void']) {
-        if (a2.token == 'T_EQUAL') {
-            // Skip it
-            a0 = a3.out('NEXT').out('NEXT').next();
-        } else {
-            // Skip along, it's already done
-            a0 = a2;
+    if (a1.atom in ['Variable', 'Assignation', 'Void']) {
+        // All good, we skip
+        a0 = a2;
+    } else /* if (a1.token in ['T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE', 'T_ARRAY'] &&
+               a2.atom  in ['Variable', 'Assignation'])*/ {
+        x = g.addVertex(null, [code:'Typehint', atom:'Typehint', token:'T_TYPEHINT', virtual:true, line:it.line]);
+    
+        g.addEdge(x, a1, 'CLASS');
+        if (a1.token == 'T_ARRAY') {
+            a1.setProperty('atom', 'Identifier');
+            a1.setProperty('fullcode', a1.code);
         }
-    } else if (a1.token in ['T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE', 'T_ARRAY'] &&
-               a2.atom  in ['Variable', 'Assignation']) {
+        g.addEdge(x, a2, 'VARIABLE');
         
-        if (a3.token == 'T_EQUAL') {
-            a0 = a3.out('NEXT').out('NEXT').next();
-        } else if (a3.token in ['T_COMMA' ,'T_CLOSE_PARENTHESIS']) {
-            x = g.addVertex(null, [code:'Typehint', atom:'Typehint', token:'T_TYPEHINT', virtual:true, line:it.line]);
-
-            g.addEdge(x, a1, 'CLASS');
-            if (a1.token == 'T_ARRAY') {
-                a1.setProperty('atom', 'Identifier');
-                a1.setProperty('fullcode', a1.code);
-            }
-            g.addEdge(x, a2, 'VARIABLE');
-            
-            a1.bothE('NEXT').each{ g.removeEdge(it);}
-            a1.bothE('INDEXED').each{ g.removeEdge(it);}
-            a2.bothE('NEXT').each{ g.removeEdge(it);}
-            a2.bothE('INDEXED').each{ g.removeEdge(it);}
-
-            g.addEdge(a0, x, 'NEXT');
-            g.addEdge(x, a3, 'NEXT');
+        a1.bothE('NEXT').each{ g.removeEdge(it);}
+        a1.bothE('INDEXED').each{ g.removeEdge(it);}
+        a2.bothE('NEXT').each{ g.removeEdge(it);}
+        a2.bothE('INDEXED').each{ g.removeEdge(it);}
     
-            // indexing
-            g.idx('atoms').put('atom', 'Typehint', x);
-    
-            fullcode = x;
-            $fullcode;
-            
-            a0 = a3;
-        } else {
-            Dunno;
-        }
-    } else {
-        // In case we don't know, just skip it
-       a0 = a2;
-    }
+        g.addEdge(a0, x, 'NEXT');
+        g.addEdge(x, a3, 'NEXT');
+        
+        // indexing
+        g.idx('atoms').put('atom', 'Typehint', x);
+        
+        fullcode = x;
+        $fullcode;
+        
+        a0 = a3;
+    } 
 
     a1 = a0.out('NEXT').next();
     a2 = a1.out('NEXT').next();
@@ -1446,7 +1432,7 @@ while (a0.token in ['T_OPEN_PARENTHESIS', 'T_COMMA']) {
 }
 
 if (a0.token == 'T_CLOSE_PARENTHESIS') {
-//    first.inE('INDEXED').each{ g.removeEdge(it); }
+    first.inE('INDEXED').filter{ it.outV.has('token', 'Typehint').any()}each{ g.removeEdge(it); }
 }
 
 ";
@@ -3098,7 +3084,7 @@ filter{ it.out('NEXT').transform{
     if (it.token in ['T_VARIABLE', 'T_EQUAL']) {
         it;
     } else if (it.token in ['T_STRING', 'T_ARRAY', 'T_CALLABLE', 'T_NS_SEPARATOR'] && 
-               it.out('NEXT').next().token in ['T_VARIABLE', 'T_EQUAL']) {
+               it.out('NEXT').next().atom in ['Variable', 'Assignation']) {
         it.out('NEXT').next();
     } else {
         // This has to be stopped, so we stay here, and the loop will fail next loop

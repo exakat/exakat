@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            =
+            Label : LEFT
+              $msg
+            Label : RIGHT
+              ''
+          Label : ARGUMENT
+            =
+            Label : LEFT
+              $code
+            Label : RIGHT
+              0
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              Exception
+            Label : VARIABLE
+              =
+              Label : LEFT
+                $previous
+              Label : RIGHT
+                null
+        Label : BLOCK
+          void
+        Label : NAME
+          __construct
+        Label : PUBLIC
+          public
+    Label : NAME
+      y
