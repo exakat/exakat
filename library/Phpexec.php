@@ -111,7 +111,15 @@ class Phpexec {
                 $this->actualVersion = PHP_VERSION;
         }
         if ($this->phpexec === null) {
-            throw new \Exceptions\NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check for config/config.ini');
+            throw new \Exceptions\NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check config/config.ini');
+        }
+
+        if (!file_exists($this->phpexec)) {
+            throw new \Exceptions\NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/config.ini');
+        }
+
+        if (!is_executable($this->phpexec)) {
+            throw new \Exceptions\NoPhpBinary('PHP binary for version '.$phpversion.' exists but is not executable : "'.$this->phpexec.'". Please, check config/config.ini');
         }
     }
 
