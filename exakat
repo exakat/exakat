@@ -7,7 +7,19 @@ if(strpos(basename(__FILE__), 'phar') !== false){
     include __DIR__.'/library/Autoload.php';
 }
 
-$graphDB = new \Graph\Gremlin2($config);
+try {
+    if (isset($argv)) {
+        $config = \Config::factory($argv);
+    } else {
+        $config = \Config::factory($GLOBALS['argv']);
+    }
 
-$exakat = new \Exakat($graphDB);
-$exakat->execute($config);
+    $graphDB = new \Graph\Gremlin2($config);
+
+    $exakat = new \Exakat($graphDB);
+    $exakat->execute($config);
+} catch (\Exceptions\NoPhpBinary $e) {
+    print "\nExakat configuration error : ".$e->getMessage()."\n";
+    print "Aborting\n";
+}
+
