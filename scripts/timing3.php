@@ -23,7 +23,7 @@
 
 $rows = glob('projects/*');
 
-$finals = [['project', 'Duree', 'Tokens', 'LoC', 'Neo4jSize']];
+$finals = [['project', 'Duree', 'Tokens', 'LoC', 'Neo4jSize', 'Files', 'All Files', 'Exakat']];
 foreach($rows as $row) {
     $final = [basename($row)];
     
@@ -68,6 +68,16 @@ foreach($rows as $row) {
     } else {
         $final[] = '';
     }
+
+    $files = $sqlite->querySingle('SELECT count(*) FROM files');
+    $final[] = $files;
+
+    $ignored = $sqlite->querySingle('SELECT count(*) FROM ignoredFiles');
+    $final[] = $files + $ignored;
+
+    $res = $sqlite->query('SELECT * FROM hash WHERE key = "exakat_version";');
+    $sqlRow = $res->fetchArray();
+    $final[] = $sqlRow['value'];
     
     $finals[] = $final;
 }
