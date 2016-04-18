@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            CURLOPT_GET
+          Label : VALUE
+            $isGet
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            CURLOPT_POST
+          Label : VALUE
+            $isPost
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            CURLOPT_URL
+          Label : VALUE
+            $url
+    Label : RIGHT
+      $curlOptions
