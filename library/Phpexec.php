@@ -101,6 +101,10 @@ class Phpexec {
                 $this->phpexec = $config->php71;
                 break 1;
 
+            case '7.2' : 
+                $this->phpexec = $config->php72;
+                break 1;
+
             default: 
                 $this->phpexec = $config->php;
                 // PHP will be always valid if we use the one that is currently executing us

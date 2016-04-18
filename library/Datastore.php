@@ -309,6 +309,17 @@ CREATE TABLE compilation71 (
 SQLITE;
                 break;
 
+            case 'compilation72' : 
+                $createTable = <<<SQLITE
+CREATE TABLE compilation72 (
+  id INTEGER PRIMARY KEY,
+  file TEXT,
+  error TEXT,
+  line id
+);
+SQLITE;
+                break;
+
             case 'shortopentag' : 
                 $createTable = <<<SQLITE
 CREATE TABLE shortopentag (

@@ -180,7 +180,7 @@ class FindExternalLibraries extends Tasks {
                 continue;
             }
 
-            if ($token[0] == $t_class && $tokens[$id - 1][1] != '::') {
+            if ($token[0] == $t_class && is_array($tokens[$id - 1]) && $tokens[$id - 1][1] != '::') {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];
                 if (!is_string($class)) {

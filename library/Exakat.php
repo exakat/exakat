@@ -21,8 +21,8 @@
 */
 
 class Exakat {
-    const VERSION = '0.6.0';
-    const BUILD = 333;
+    const VERSION = '0.6.1';
+    const BUILD = 335;
     
     private $gremlin = null;
     
