@@ -55,7 +55,7 @@ class Phpexec {
                                            '`'       => 'T_SHELL_QUOTE',
                                            '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
                                            '~'       => 'T_TILDE');
-    private static $tokens    = null;
+    private static $tokens    = array();
     private $config           = array();
     private $isCurrentVersion = false;
     private $version          = null;
@@ -109,6 +109,9 @@ class Phpexec {
                 $this->phpexec = $config->php;
                 // PHP will be always valid if we use the one that is currently executing us
                 $this->actualVersion = PHP_VERSION;
+        }
+        if ($this->phpexec === null) {
+            throw new \Exceptions\NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check for config/config.ini');
         }
     }
 
