@@ -1,4 +1,4 @@
-Version 0.6.1 (Red Bottomed Horse Monkey, Coming up)
+Version 0.6.2 (Long Armed Ape Monkey, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,24 @@ Version 0.6.1 (Red Bottomed Horse Monkey, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.6.1 (Red Bottomed Horse Monkey, 2016-04-18)
++ Architecture
+    + Prepared to support PHP 7.1
+    + Fixed bug in user / passwords when initing the project
+    + Better support for ::class when searching for libraries
++ Analyzer
+    + UselessParenthesis : spot nested parenthesis
+    + Spot exceptions that are thrown but uncaught by the current code
+    + Support for ext/lua, 
+    + New : Check catch order in try/catch
+    + Better identification of Composer classes, based on composer.json
+    + Now spot interfaces in use declarations (less undefined interfaces)
++ Tokenizer
+    + Added support for PHP 7.1
+    + key => value in list() calls
+    + visibility for constants in Classes and Interfaces
+    + Accelerated up Typehint support
 
 Version 0.6.0 (Intelligent Stone Monkey, 2016-04-11)
 + Architecture
