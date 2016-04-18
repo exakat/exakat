@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 11 Apr 2016 12:49:14 +0000
-.. comment: Generation hash : de5fcfaa7c94d840109cdd865774e3c8d4f2f6c8
+.. comment: Generation date : Mon, 18 Apr 2016 12:13:02 +0000
+.. comment: Generation hash : 397a53d2f5b908369371b771df79433868b1e49b
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 242 analysis
+Total : 243 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -231,6 +231,7 @@ Total : 242 analysis
 * :ref:`Ternary In Concat <ternary-in-concat>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
+* :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
 * :ref:`Undefined Class Constants <undefined-class-constants>`
 * :ref:`Undefined Classes <undefined-classes>`
@@ -593,11 +594,12 @@ Total : 36 analysis
 Dead code
 +++++++++
 
-Total : 18 analysis
+Total : 19 analysis
 
 * :ref:`Cant Extend Final <cant-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
 * :ref:`Empty Namespace <empty-namespace>`
+* :ref:`Exception Order <exception-order>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Catch <unresolved-catch>`

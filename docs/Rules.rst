@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 11 Apr 2016 12:49:14 +0000
-.. comment: Generation hash : de5fcfaa7c94d840109cdd865774e3c8d4f2f6c8
+.. comment: Generation date : Mon, 18 Apr 2016 12:13:02 +0000
+.. comment: Generation hash : 397a53d2f5b908369371b771df79433868b1e49b
 
 
 .. _$http\_raw\_post\_data:
@@ -1602,6 +1602,37 @@ At worse, including a pre-generated file will be faster.
 +--------------+-------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`                                           |
 +--------------+-------------------------------------------------------------------------------+
+
+
+
+.. _exception-order:
+
+Exception Order
+###############
+
+
+When catching exception, the most specialized exceptions must be in the early catch, and the most general exceptions must be in the later catch. Otherwise, the general catches intercept the exception, and the more specialized will not be read.
+
+<?php
+
+class A extends \Exception {}
+class B extends A {}
+
+try {
+    throw new A();
+} 
+catch(A $a1) { }
+catch(B $b2 ) { 
+    // Never reached, as previous Catch is catching the early worm
+}
+
++--------------+------------------------------+
+| Command Line | Exceptions/AlreadyCaught     |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>` |
++--------------+------------------------------+
 
 
 
@@ -4781,6 +4812,26 @@ If the difference may be very small, it requires a better way to mesure time dif
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
+
+
+
+.. _uncaught-exceptions:
+
+Uncaught Exceptions
+###################
+
+
+The following exceptions are thrown in the code, but are never caught. 
+
+Either they will lead to a fatal error, or they have to be caught by a larger application.
+
++--------------+-------------------------------+
+| Command Line | Exceptions/UncaughtExceptions |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
 
 
 
