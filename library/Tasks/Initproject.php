@@ -234,7 +234,6 @@ INI;
                 case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $this->config->git === true) :
                     $repositoryURL = $this->escapeUrl($repositoryURL);
                     display('Git initialization with '.$repositoryURL);
-                    print 'cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q "'.$repositoryURL.'" code 2>&1 ';
                     $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q "'.$repositoryURL.'" code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
@@ -273,10 +272,10 @@ INI;
     private function escapeUrl($url) {
         $urlParts = parse_url($url);
         
-        if (isset($urlParts['user'])) { 
+        if (isset($urlParts['user'])) {
             $urlParts['user'] = urlencode($urlParts['user']);
         }
-        if (isset($urlParts['pass'])) { 
+        if (isset($urlParts['pass'])) {
             $urlParts['pass'] = urlencode($urlParts['pass']);
         }
         
