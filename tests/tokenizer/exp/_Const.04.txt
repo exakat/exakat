@@ -1,0 +1,142 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PUBLIC_CONST
+          Label : RIGHT
+            0
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PRIVATE_CONST
+          Label : RIGHT
+            1
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PROTECTED_CONST
+          Label : RIGHT
+            2
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PUBLIC_CONST_TWO
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            FOO
+          Label : RIGHT
+            4
+        Label : CONST
+          =
+          Label : LEFT
+            BAR
+          Label : RIGHT
+            5
+        Label : PRIVATE
+          private
+    Label : NAME
+      Token
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PUBLIC
+          Label : RIGHT
+            6
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            IMPLICIT_PUBLIC
+          Label : RIGHT
+            7
+    Label : NAME
+      ICache
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            TEST_CONST
+          Label : RIGHT
+            'test'
+    Label : NAME
+      testClass
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $obj
+    Label : RIGHT
+      new
+      Label : NEW
+        ReflectionClass
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            "testClass"
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $const
+    Label : RIGHT
+      ->
+      Label : METHOD
+        getReflectionConstant
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            "TEST_CONST"
+      Label : OBJECT
+        $obj
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $consts
+    Label : RIGHT
+      ->
+      Label : METHOD
+        getReflectionConstants
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            void
+      Label : OBJECT
+        $obj

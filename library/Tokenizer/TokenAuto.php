@@ -546,7 +546,7 @@ $fullcode
         }
 
         if (isset($actions['toOption'])) {
-            $position = str_repeat(".out('NEXT')", $actions['toOption']);
+            $position = $actions['toOption'];
 
             $token = new _Ppp($this->gremlin);
             $fullcode = $token->fullcode();
@@ -554,13 +554,14 @@ $fullcode
             $qactions[] = "
 /* turn the current token to an option of one of the next tokens (default 1)*/
 
-ppp = it{$position}.next();
+ppp = a{$position};
 
 g.addEdge(ppp, it, it.code.toUpperCase());
 g.addEdge(it.in('NEXT').next() , it.out('NEXT').next(), 'NEXT');
 
 it.bothE('NEXT').each{ g.removeEdge(it); }
-it.fullcode = it.code;
+it.setProperty('fullcode', it.getProperty('code'));
+it.setProperty('atom', 'Ppp');
 ";
             unset($actions['toOption']);
         }

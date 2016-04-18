@@ -36,7 +36,7 @@ class _Ppp extends TokenAuto {
     // class x { public $x = 2, $y = 2 }
         $allowedAtoms = array('Assignation', 'Variable');
         $this->conditions = array(-1 => array('notToken' => 'STATIC'),
-                                   0 => array('token'    => _Ppp::$operators,
+                                   0 => array('token'    => self::$operators,
                                               'checkFor' => $allowedAtoms),
                                    1 => array('atom'     => $allowedAtoms),
                                    2 => array('token'    => array('T_SEMICOLON', 'T_COMMA')),
@@ -48,12 +48,22 @@ class _Ppp extends TokenAuto {
         $this->checkAuto();
 
     // class x { private static $x, $y }
-        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
+        $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('token' => array_merge(_Static::$operators, _Function::$operators))
                                  );
         
         $this->actions = array('toOption' => 1,
                                'atom'     => 'Visibility');
+        $this->checkAuto();
+
+    // class x { private const a = 2; }
+    // Prepare const for modifier
+        $this->conditions = array(  0 => array('token' => self::$operators),
+                                    1 => array('token' => 'T_CONST',
+                                               'atom'  => 'none')
+                                 );
+        
+        $this->actions = array('toOption'    => 1);
         $this->checkAuto();
 
         return false;
@@ -64,22 +74,22 @@ class _Ppp extends TokenAuto {
 
 finalcode = '';
 
-if (fullcode.out('PUBLIC').any()) {
-    finalcode = 'public ';
-} else if (fullcode.out('PRIVATE').any()) {
-    finalcode = 'private ';
-} else if (fullcode.out('PROTECTED').any()) {
-    finalcode = 'protected ';
+if (fullcode.out('PUBLIC', 'PRIVATE', 'PROTECTED').any() ) {
+    finalcode = fullcode.out('PUBLIC', 'PRIVATE', 'PROTECTED').next().code + ' ';
 } else {
     finalcode = '';
 }
 
 if (fullcode.out('STATIC').any()) {
-    finalcode = finalcode + 'static ';
+    finalcode = finalcode + '' + fullcode.out('CONST').next().code + ' ';
+}
+
+if (fullcode.out('CONST').any()) {
+    finalcode = finalcode + '' + fullcode.out('CONST').next().code + ' ';
 }
 
 s=[];
-fullcode.out('DEFINE').sort{it.rank}._().each{ s.add(it.fullcode);}
+fullcode.out('DEFINE', 'CONST').sort{it.rank}._().each{ s.add(it.fullcode);}
 fullcode.setProperty('fullcode', finalcode + s.join(', '));
 
 fullcode.out('DEFINE').each{

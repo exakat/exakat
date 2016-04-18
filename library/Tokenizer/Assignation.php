@@ -120,6 +120,12 @@ class Assignation extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
+// Check that token is not a relaxed keyword (that has no fullcode yet)
+fullcode.out('LEFT').has('fullcode', null).each{
+    it.setProperty('fullcode', it.getProperty('code'));
+    // atom?
+};
+
 fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') + " " + fullcode.out("RIGHT").next().getProperty('fullcode'));
 
 GREMLIN;

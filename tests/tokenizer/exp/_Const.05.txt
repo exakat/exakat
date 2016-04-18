@@ -1,0 +1,112 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PUBLIC_CONST
+          Label : RIGHT
+            0
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PRIVATE_CONST
+          Label : RIGHT
+            1
+        Label : CONST
+          =
+          Label : LEFT
+            PRIVATE_CONST2
+          Label : RIGHT
+            2
+        Label : CONST
+          =
+          Label : LEFT
+            PRIVATE_CONST3
+          Label : RIGHT
+            3
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PROTECTED_CONST
+          Label : RIGHT
+            2
+        Label : CONST
+          =
+          Label : LEFT
+            PROTECTED_CONST2
+          Label : RIGHT
+            2
+        Label : CONST
+          =
+          Label : LEFT
+            PROTECTED_CONST3
+          Label : RIGHT
+            3
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PUBLIC_CONST_TWO
+          Label : RIGHT
+            3
+        Label : CONST
+          =
+          Label : LEFT
+            PUBLIC_CONST_TWO3
+          Label : RIGHT
+            3
+        Label : CONST
+          =
+          Label : LEFT
+            PUBLIC_CONST_TWO4
+          Label : RIGHT
+            3
+        Label : PUBLIC
+          public
+    Label : NAME
+      c
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        const
+        Label : CONST
+          =
+          Label : LEFT
+            PUBLIC
+          Label : RIGHT
+            6
+        Label : CONST
+          =
+          Label : LEFT
+            public2
+          Label : RIGHT
+            7
+        Label : CONST
+          =
+          Label : LEFT
+            public3
+          Label : RIGHT
+            8
+        Label : PUBLIC
+          public
+    Label : NAME
+      ICache
