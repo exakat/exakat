@@ -81,7 +81,7 @@ if (fullcode.out('PUBLIC', 'PRIVATE', 'PROTECTED').any() ) {
 }
 
 if (fullcode.out('STATIC').any()) {
-    finalcode = finalcode + '' + fullcode.out('CONST').next().code + ' ';
+    finalcode = finalcode + '' + fullcode.out('STATIC').next().code + ' ';
 }
 
 if (fullcode.out('CONST').any()) {
