@@ -1,15 +1,15 @@
 <?php
 
 namespace GuzzleHttp;
-use  GuzzleHttp\BatchResults as BR;
+use  GuzzleHttp\ClientInterface as BR;
 
-class a implements  BatchResults{}  // composer
+interface a extends  clientinterface {}  // composer
 
-class b implements  \BatchResults{} // not composer 
+interface b extends  \clientInterface {} // not composer 
 
-class c implements  BR{}            // composer
+interface c extends  BR {}            // composer
 
-class d implements  BR{}              // composer
+interface d extends  \BR {}              // not composer
 
-class e implements  NotBatchResults{} // not composer 
+interface e extends  NotBatchResults {} // not composer 
 ?>
