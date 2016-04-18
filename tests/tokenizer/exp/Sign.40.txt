@@ -15,10 +15,10 @@ Label : CODE
             Label : LEFT
               +
               Label : LEFT
-                (int)
-                Label : CAST
-                  +
-                  Label : LEFT
+                +
+                Label : LEFT
+                  (int)
+                  Label : CAST
                     +
                     Label : LEFT
                       (
@@ -34,8 +34,8 @@ Label : CODE
                           2
                     Label : RIGHT
                       $c
-                  Label : RIGHT
-                    3
+                Label : RIGHT
+                  3
               Label : RIGHT
                 (int)
                 Label : CAST

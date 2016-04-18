@@ -335,9 +335,9 @@ Label : CODE
                                   Label : CONCAT
                                     ->
                                     Label : OBJECT
-                                      $lBZ
-                                    Label : OBJECT
                                       $this
+                                    Label : OBJECT
+                                      $lBZ
                                     Label : PROPERTY
                                       CABY
                                     Label : PROPERTY

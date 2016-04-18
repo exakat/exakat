@@ -9,13 +9,17 @@ Label : CODE
     Label : METHOD
       __FILE__
       Label : ARGUMENTS
-        void
+        
+        Label : ARGUMENT
+          void
   Label : ELEMENT
     ->
     Label : METHOD
       __FILE__
       Label : ARGUMENTS
-        void
+        
+        Label : ARGUMENT
+          void
     Label : OBJECT
       $b
   Label : ELEMENT
@@ -25,7 +29,9 @@ Label : CODE
     Label : METHOD
       Concatenation
       Label : ARGUMENTS
-        void
+        
+        Label : ARGUMENT
+          void
       Label : CONCAT
         'B'
       Label : CONCAT
