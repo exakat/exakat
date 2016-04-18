@@ -535,6 +535,7 @@ JOIN categories
             
         $errors56 = [];
         $errors70 = [];
+        $errors71 = [];
         $total = count($files);
         foreach($files as $file) {
             $res = shell_exec('php56 -l '.$file);
@@ -547,6 +548,12 @@ JOIN categories
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
                 $errors70[(string) $file] = $res;
+            }
+
+            $res = shell_exec('php71 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                $errors71[(string) $file] = $res;
             }
         }
         
@@ -562,6 +569,13 @@ JOIN categories
         } else {
             echo count($errors70), ' errors out of ', $total, " compilations for PHP 7.0\n", 
                  print_r($errors70, true), "\n";
+        }
+
+        if (empty($errors71)) {
+            echo 'All ', $total, " compilations OK for PHP 7.1\n";
+        } else {
+            echo count($errors71), ' errors out of ', $total, " compilations for PHP 7.1\n", 
+                 print_r($errors71, true), "\n";
         }
     }
 
