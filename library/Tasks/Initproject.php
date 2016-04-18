@@ -172,21 +172,21 @@ INI;
                 // SVN
                 case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $this->config->svn === true) :
                     display('SVN initialization');
-                    $repositoryURL = addcslashes($repositoryURL, '$()');
+                    $repositoryURL = $this->urlParts($repositoryURL);
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; svn checkout "'.escapeshellarg($repositoryURL).'" code');
                     break 1;
 
                 // Bazaar
                 case ($this->config->bzr === true) :
                     display('Bazaar initialization');
-                    $repositoryURL = addcslashes($repositoryURL, '$()');
+                    $repositoryURL = $this->urlParts($repositoryURL);
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; bzr branch "'.escapeshellarg($repositoryURL).'" code');
                     break 1;
 
                 // HG
                 case ($this->config->hg === true) :
                     display('Mercurial initialization');
-                    $repositoryURL = addcslashes($repositoryURL, '$()');
+                    $repositoryURL = $this->urlParts($repositoryURL);
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; hg clone "'.escapeshellarg($repositoryURL).'" code');
                     break 1;
 
@@ -232,8 +232,9 @@ INI;
                 // Git
                 // Git is last, as it will act as a default
                 case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $this->config->git === true) :
-                    display('Git initialization');
-                    $repositoryURL = addcslashes($repositoryURL, '$()');
+                    $repositoryURL = $this->escapeUrl($repositoryURL);
+                    display('Git initialization with '.$repositoryURL);
+                    print 'cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q "'.$repositoryURL.'" code 2>&1 ';
                     $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q "'.$repositoryURL.'" code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
@@ -267,6 +268,42 @@ INI;
         if (!file_exists($this->config->projects_root.'/projects/'.$project) ) {
             die( "Project $project doesn't exists.\n Aborting\n");
         }
+    }
+    
+    private function escapeUrl($url) {
+        $urlParts = parse_url($url);
+        
+        if (isset($urlParts['user'])) { 
+            $urlParts['user'] = urlencode($urlParts['user']);
+        }
+        if (isset($urlParts['pass'])) { 
+            $urlParts['pass'] = urlencode($urlParts['pass']);
+        }
+        
+        $url = '';
+        if (isset($urlParts['scheme'])) {
+            $url .= $urlParts['scheme'].'://';
+        }
+        if (isset($urlParts['user'])) {
+            $url .= $urlParts['user'];
+            if (isset($urlParts['pass'])) {
+                $url .= ':'.$urlParts['pass'];
+            }
+            $url .= '@';
+        }
+        if (isset($urlParts['host'])) {
+            $url .= $urlParts['host'];
+        }
+        if (isset($urlParts['port'])) {
+            $url .= ':'.$urlParts['port'];
+        }
+        if (isset($urlParts['path'])) {
+            $url .= $urlParts['path'];
+        }
+        // Drop query
+        // Drop fragment
+
+        return $url;
     }
 
 }
