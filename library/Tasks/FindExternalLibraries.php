@@ -101,9 +101,17 @@ class FindExternalLibraries extends Tasks {
             return;
         }
         
+        $exts = Files::$exts['php'];
         $r = array();
         foreach($files as $file) {
-            $s = $this->process($config->projects_root.'/projects/'.$config->project.'/code'.substr($file, 1));
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+
+            if (!in_array($ext, $exts)) {
+                // Ignoring some file extensions for faster processing
+                continue; 
+            } else {
+                $s = $this->process($config->projects_root.'/projects/'.$config->project.'/code'.substr($file, 1));
+            }
             
             if (!empty($s)) {
                 $r[] = $s;
@@ -147,9 +155,10 @@ class FindExternalLibraries extends Tasks {
     private function process($filename) {
         $return = array();
 
-        $php = new \Phpexec();
-        static $t_class, $t_namespace, $t_whitecode;
-        if (!isset($t_class)) {
+        static $php, $t_class, $t_namespace, $t_whitecode;
+        if (!isset($php)) {
+            $php = new \Phpexec();
+
             $php->getTokens();
             $t_class = $php->getTokenValue('T_CLASS');
             $t_namespace = $php->getTokenValue('T_NAMESPACE');
@@ -213,7 +222,6 @@ class FindExternalLibraries extends Tasks {
                 }
             }
         }
-
         return $return;
     }
 
