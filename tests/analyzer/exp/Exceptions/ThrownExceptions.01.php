@@ -1,10 +1,9 @@
 <?php
 
-$expected     = array('$x = new Exception( )', 
-                      'new Exception2( )', 
-                      'new Exception( )',
-                      '$x');
+$expected     = array( 'class mySubException extends myException', 
+                       'class myException extends Exception');
 
-$expected_not = array();
+$expected_not = array('unknownException()',
+                      'runtimeException()');
 
 ?>
