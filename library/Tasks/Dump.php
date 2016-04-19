@@ -31,7 +31,7 @@ class Dump extends Tasks {
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
     private $stmtResults = null;
-    private $stmtResultsCount = null;
+    private $stmtResultsCounts = null;
     
     const WAITING_LOOP = 1000;
     
