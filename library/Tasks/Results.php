@@ -115,7 +115,7 @@ GREMLIN;
                     $text[] = array($k, $v);
                 }
             }
-        } elseif ($config->markdown === true || $config->html === true || $config->odt === true) {
+        } elseif ($config->markdown === true || $config->html === true) {
             $text = '';
             foreach($return as $k => $r) {
                 if ($config->style == 'COUNTED') {
@@ -141,7 +141,7 @@ GREMLIN;
             }
         }
 
-        if ($config->html === true || $config->odt === true) {
+        if ($config->html === true) {
             $text = Markdown::defaultTransform($text);
         }
 
@@ -152,9 +152,6 @@ GREMLIN;
         switch (1) {
             case $config->json :
                 $extension = 'json';
-                break 1;
-            case $config->odt :
-                $extension = 'odt';
                 break 1;
             case $config->markdown :
                 $extension = 'md';
@@ -177,15 +174,11 @@ GREMLIN;
                 die( "$name already exists. Aborting\n");
             }
 
-            if ($config->format == 'ODT') {
-                $name1 = FILE.'.html';
-                file_put_contents($name1, $text);
-
-                $name = FILE.'.'.$extension;
-                shell_exec('pandoc -o '.$name.' '.$name1);
-                unlink($name1);
-            } elseif ($config->format == 'CSV') {
+            if ($config->format == 'CSV') {
                 $csvFile = fopen($name, 'w');
+                if ($csvFile === false) {
+                    throw new \RuntimeException('Can\'t open CSV file "'.$name.'" for writing.');
+                }
                 foreach($text as $t) {
                     fputcsv($csvFile, $t);
                 }
