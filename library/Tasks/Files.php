@@ -95,7 +95,6 @@ class Files extends Tasks {
         chdir($config->projects_root.'/projects/'.$dir.'/code');
         $files = $this->rglob( '.');
         chdir($d);
-        $exts = self::$exts['php'];
 
         foreach($files as $id => &$file) {
             $file = substr($file, 1);
