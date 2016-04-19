@@ -29,6 +29,7 @@ class CouldUseShortAssignation extends Analyzer\Analyzer {
     public function analyze() {
         // Commutative operation
         $this->atomIs('Assignation')
+             ->code('=')
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'receiver')
              ->inIs('LEFT')
@@ -41,6 +42,7 @@ class CouldUseShortAssignation extends Analyzer\Analyzer {
 
         // Non-Commutative operation
         $this->atomIs('Assignation')
+             ->code('=')
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'receiver')
              ->inIs('LEFT')
