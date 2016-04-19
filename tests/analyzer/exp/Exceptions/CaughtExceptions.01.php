@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('Exception',
-                      'Exception2',);
+$expected     = array('Exception2',);
 
-$expected_not = array();
+$expected_not = array('Exception',
+                      'Throwable');
 
 ?>

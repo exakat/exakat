@@ -26,10 +26,15 @@ namespace Analyzer\Exceptions;
 use Analyzer;
 
 class CaughtExceptions extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Exceptions/DefinedExceptions');
+    }
+
     public function analyze() {
-        $this->atomIs('Catch')
-             ->outIs('CLASS')
-             ->classDefinition();
+        $caught = $this->query('g.idx("atoms")[["atom":"Catch"]].out("CLASS").fullnspath.unique()');
+
+        $this->atomIs('Class')
+             ->isInProperty($caught, 'classTree', false);
         $this->prepareQuery();
     }
 }

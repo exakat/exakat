@@ -840,13 +840,19 @@ GREMLIN;
     }
 
     public function isInProperty($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property === 'line' || $property === 'rank') {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
         
-        $this->addMethod('filter{ '.$name.$caseSensitive.' in it.'.$property.' }', $name);
+        // Array, is a list of literal
+        if (is_array($property)) {
+             $this->addMethod('filter{ it.'.$name.'.intersect( *** ).size() > 0}', $property);
+        } else {
+            if ($caseSensitive === true || $property === 'line' || $property === 'rank') {
+                $caseSensitive = '';
+            } else {
+                $caseSensitive = '.toLowerCase()';
+            }
+
+            $this->addMethod('filter{ '.$name.$caseSensitive.' in it.'.$property.' }', $name);
+        }
     
         return $this;
     }
