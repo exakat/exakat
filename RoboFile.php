@@ -822,8 +822,8 @@ SQL
             }
 
             if (!file_exists("./library/Analyzer/$class.php")) {
-                print "./library/Analyzer/$class.php";
-                echo 'Appinfo is missing a class : ', $class, "\n";
+                print "./library/Analyzer/$class.php" .
+                      'Appinfo is missing a class : '. $class . "\n";
             }
         }
     }
