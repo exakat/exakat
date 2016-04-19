@@ -69,7 +69,6 @@ class Clean extends Tasks {
                               'magicnumber.sqlite',
                               'report.html',
                               'report.md',
-                              'report.odt',
                               'report.pdf',
                               'report.sqlite',
                               'report.txt',
