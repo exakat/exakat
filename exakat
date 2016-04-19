@@ -21,5 +21,8 @@ try {
 } catch (\Exceptions\NoPhpBinary $e) {
     print "\nExakat configuration error : ".$e->getMessage()."\n";
     print "Aborting\n";
+} catch (\Exceptions\NoResultsFromGremlin $e) {
+    print "\nGraphDB didn't return results error : ".$e->getMessage()."\n";
+    print "Aborting\n";
 }
 

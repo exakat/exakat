@@ -127,16 +127,14 @@ toDelete.each{ g.removeVertex(it); }
                 $begin = microtime(true);
                 $res = $this->gremlin->query($query);
                 if (!isset($res->results)) {
-                    echo $query, "\n",  print_r($res, true);
-                    die();
+                    throw \Exceptions\NoResultFromGremlin('No results from Gremlin during Tokenizer : '.$query);
                 }
                 $res = $res->results[0];
 
                 $end = microtime(true);
             
                 if (!isset($res->done)) {
-                    echo __METHOD__, "\n", $query, print_r($res, true);
-                    die();
+                    throw \Exceptions\NoResultFromGremlin('No variable "done" from Gremlin during Tokenizer : '.$query."\n".print_r($res, true));
                 }
 
                 $this->total += (int) $res->total;
