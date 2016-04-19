@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('Exception2',);
+$expected     = array('class Exception2 extends \Exception',);
 
 $expected_not = array('Exception',
                       'Throwable');
