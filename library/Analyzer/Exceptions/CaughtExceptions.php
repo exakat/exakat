@@ -34,6 +34,7 @@ class CaughtExceptions extends Analyzer\Analyzer {
         $caught = $this->query('g.idx("atoms")[["atom":"Catch"]].out("CLASS").fullnspath.unique()');
 
         $this->atomIs('Class')
+             ->analyzerIs('Exceptions/DefinedExceptions')
              ->isInProperty($caught, 'classTree', false);
         $this->prepareQuery();
     }
