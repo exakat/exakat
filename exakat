@@ -24,5 +24,8 @@ try {
 } catch (\Exceptions\NoResultsFromGremlin $e) {
     print "\nGraphDB didn't return results error : ".$e->getMessage()."\n";
     print "Aborting\n";
+} catch (\RuntimeException $e) {
+    print "\nRuntime error : ".$e->getMessage()."\n";
+    print "Aborting\n";
 }
 
