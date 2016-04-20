@@ -662,7 +662,7 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
 ", "
 // Constant usage (simple resolution of the namespaces)
 g.idx('atoms')[['atom':'Identifier']]
-    .filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
+    .filter{it.in('USE', 'SUBNAME', 'PROPERTY', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
     .filter{it.out('ARGUMENTS').any() == false}
     .filter{it.in('LEFT').in('CONST').any() == false}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
@@ -686,7 +686,7 @@ g.idx('atoms')[['atom':'Identifier']]
 ", "
 // Constant usage (2)
 g.idx('atoms')[['atom':'Nsname']]
-    .filter{it.in('USE', 'SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
+    .filter{it.in('USE', 'SUBNAME', 'PROPERTY', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'CONST', 'FUNCTION', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
     .filter{it.out('ARGUMENTS').any() == false}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{
 
