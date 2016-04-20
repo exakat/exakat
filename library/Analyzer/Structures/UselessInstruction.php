@@ -63,6 +63,9 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))
              ->isLess('args_count', 2)
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->isNot('variadic', true)
              ->back('first');
         $this->prepareQuery();
 
