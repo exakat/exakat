@@ -23,20 +23,23 @@
 namespace Graph;
 
 class Gremlin2 extends Graph {
-    private $scriptDir = '';
-    private $neo4j_host = '';
-    private $neo4j_auth = '';
+    private $scriptDir   = '';
+    private $neo4j_host  = '';
+    private $neo4j_auth  = '';
+    private $neorj_error = null;
     
     public function __construct(\Config $config) {
         parent::__construct($config);
 
         if (!file_exists($config->neo4j_folder)) {
-            die("Error in the path to the Neo4j folder. Please, check config/config.ini\n");
+            $this->neo4j_error = "Error in the path to the Neo4j folder. Please, check config/config.ini\n";
+            return;
         }
         $this->scriptDir = $config->neo4j_folder.'/scripts/';
 
         if (!is_writable($this->scriptDir)) {
-            die("Can't write in '$this->scriptDir'. Exakat needs to write in this folder.\n");
+            $this->neo4j_error = "Can't write in '$this->scriptDir'. Exakat needs to write in this folder.\n";
+            return;
         }
 
         $this->neo4j_host   = $config->neo4j_host.':'.$config->neo4j_port;
@@ -47,6 +50,10 @@ class Gremlin2 extends Graph {
     }
 
     public function query($query, $params = [], $load = []) {
+        if ($this->neo4j_error !== null) {
+            throw new \RuntimeException($this->neo4j_error);
+        }
+
         $getString = 'script='.urlencode($query);
     
         if (!is_array($load)) {

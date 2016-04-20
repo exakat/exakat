@@ -171,13 +171,14 @@ class Config {
     private function __construct($argv) {
         $this->argv = $argv;
         
-        $this->is_phar  = strpos(basename(dirname(__DIR__)), '.phar') !== false;
+        $this->executable    = $_SERVER['SCRIPT_NAME'];
+
+        global $isPhar;
+        $this->is_phar  = $isPhar !== false;
         if ($this->is_phar) {
-            $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->projects_root = substr(dirname(dirname(__DIR__)), 7);
             $this->dir_root      = 'phar://'.$this->executable;
         } else {
-            $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->dir_root      = dirname(__DIR__);
             $this->projects_root = dirname(__DIR__);
         }

@@ -1,8 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-if(strpos(basename(__FILE__), 'phar') !== false){
-    include 'phar://exakat.phar/library/Autoload.php';
+try {
+    $isPhar = basename(__FILE__);
+    if (substr($isPhar, -5) == '.phar') { 
+        $isPhar = substr($isPhar, 0, -5);
+    }
+    Phar::mapPhar();
+} catch (PharException $e) {
+    $isPhar = false;
+}
+
+if($isPhar !== false){
+    include 'phar://'.$isPhar.'.phar/library/Autoload.php';
 } else {
     include __DIR__.'/library/Autoload.php';
 }
@@ -19,13 +29,11 @@ try {
     $exakat = new \Exakat($graphDB);
     $exakat->execute($config);
 } catch (\Exceptions\NoPhpBinary $e) {
-    print "\nExakat configuration error : ".$e->getMessage()."\n";
-    print "Aborting\n";
+    print "\nExakat configuration error : ".$e->getMessage()."\n  Aborting\n";
 } catch (\Exceptions\NoResultsFromGremlin $e) {
-    print "\nGraphDB didn't return results error : ".$e->getMessage()."\n";
-    print "Aborting\n";
+    print "\nGraphDB didn't return results error : ".$e->getMessage()."\n  Aborting\n";
 } catch (\RuntimeException $e) {
-    print "\nRuntime error : ".$e->getMessage()."\n";
-    print "Aborting\n";
+    print "\nRuntime error : ".$e->getMessage()."\n  Aborting\n";
 }
 
+__HALT_COMPILER();
