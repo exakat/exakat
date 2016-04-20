@@ -44,6 +44,9 @@ class Queue extends Tasks {
 
             display('Adding project '.$config->project.' to the queue');
             $queuePipe = fopen($this->pipefile, 'w');
+            if ($queuePipe == false) {
+                throw new \RuntimeException('Couldn\'t open file "'.$this->pipefile.'" for queueing. Aborting'); 
+            }
             fwrite($queuePipe, $config->project."\n");
             fclose($queuePipe);
         } elseif (!empty($config->filename)) {
@@ -59,6 +62,9 @@ class Queue extends Tasks {
 
             display('Adding file '.$config->project.' to the queue');
             $queuePipe = fopen($this->pipefile, 'w');
+            if ($queuePipe == false) {
+                throw new \RuntimeException('Couldn\'t open file "'.$this->pipefile.'" for queueing. Aborting'); 
+            }
             fwrite($queuePipe, $config->filename."\n");
             fclose($queuePipe);
         }

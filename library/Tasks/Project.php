@@ -257,6 +257,10 @@ class Project extends Tasks {
 
         if ($log === null) {
             $log = fopen($this->project_dir.'/log/project.timing.csv', 'w+');
+            // No logging if no file. Ignoring it.
+            if ($log === false) {
+                return;
+            }
         }
         $end = microtime(true);
         if ($begin === null) {
