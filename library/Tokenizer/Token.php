@@ -893,16 +893,26 @@ g.V().has('atom', 'Class')
     }
 
     static public function finishSequence() {
-        $query = '
-
+        $query = <<<GREMLIN
 // remove root token when there are no NEXT to process
-g.V().has("token", "ROOT").out("INDEXED").as("root").out("NEXT").not(has("atom",null)).out("NEXT").has("token", "T_END").each{
-    g.removeVertex(it.in("NEXT").in("NEXT").next());
-    g.removeVertex(it.out("NEXT").next());
-    g.removeVertex(it);
-}
+g.V().has("token", "ROOT").out("INDEXED").as("root").out("NEXT").has("atom")
+                          .out("NEXT").has("token", "T_END").as("end")
+                          .out("NEXT").has("token", "T_END").as("final")
+.sideEffect(select("end").addE("DELETE").from(g.V(0)))
+.sideEffect(select("root").addE("DELETE").from(g.V(0)))
+.sideEffect(select("final").addE("DELETE").from(g.V(0)));
 
-';
+GREMLIN;
+
+        self::$staticGremlin->query($query);
+
+        // split query in two, for 2 separate transactions
+        $query = <<<GREMLIN
+// remove deleted nodes
+g.V(0).out("DELETE").drop();
+
+GREMLIN;
+
         self::$staticGremlin->query($query);
     }
 

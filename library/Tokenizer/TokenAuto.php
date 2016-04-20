@@ -612,22 +612,16 @@ $fullcode
                     ++$c;
                 
                     if ($label == 'DROP') {
-
-                        $b = $c - 1;
-                        $d = $c + 1;
+                       $b = $c - 2 ? 'a'.($c - 2) : "origin";
+                       $d = $c + 1;
                         $qactions[] = <<<GREMLIN
 /* transform drop out ($c) */
-sideEffect( select("a$b").addE("$label").to("a$d"))
+sideEffect( select("$b").addE("NEXT").to("a$d"))
 .sideEffect( select("a$c").bothE("NEXT", "INDEXED").drop())
+.sideEffect( select("a$c").addE("DELETE").from(g.V(0)))
 
 GREMLIN;
-/*
-g.addEdge(a$c.in('NEXT').next(), a$c.out('NEXT').next(), 'NEXT');
-a$c.bothE('NEXT').each{ g.removeEdge(it); }
-a$c.inE('INDEXED').each{ g.removeEdge(it); }
-toDelete.push(a$c);
 
-*/
                     } elseif ($label == 'PPP') {
                         $qactions[] = "
 /* Build a link with the target's code */
@@ -640,13 +634,14 @@ target.bothE('INDEXED').each{ g.removeEdge(it); }
 
 ";
                 } else {
+                   $b = $c - 1 ? 'a'.($c - 1) : "origin";
                    $d = $c + 1;
                    $qactions[] = <<<GREMLIN
 /* transform out ($c) */
 
-sideEffect( select("a$c").addE("$label").from("origin"))
-.sideEffect( select("a$c").addE("NEXT").to("origin"))
+sideEffect( select("a$c").addE("$label").from("$b"))
 .sideEffect( select("a$c").bothE("NEXT").drop())
+.sideEffect( select("$b").addE("NEXT").to("a$d"))
 
 GREMLIN;
                     }

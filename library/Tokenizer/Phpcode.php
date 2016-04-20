@@ -36,7 +36,8 @@ class Phpcode extends TokenAuto {
         );
         
         $this->actions = array('transform'     => array( 1 => 'CODE',
-                                                         2 => 'DROP'),
+                                                         2 => 'DROP'
+                                                         ),
                                'addSemicolon'  => 'it',
                                'atom'          => 'Phpcode',
                                'property'      => array('closing_tag' => true),
