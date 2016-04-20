@@ -141,7 +141,7 @@ function project($path) {
             exit;
         }
 
-        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']).'');
+        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']));
         
         pushToQueue($project);
         echo json_encode(['project' => $project]);
