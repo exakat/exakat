@@ -28,15 +28,9 @@ class Typehint extends TokenAuto {
     static public $atom = 'Typehint';
     
     public function _check() {
-
-        //'T_TYPEHINT',  'T_EQUAL'
-        $allowedTokens = array('T_VARIABLE', 'T_STRING', 'T_NS_SEPARATOR',
-                               'T_CALLABLE', 'T_ARRAY');
-        $allowedAtoms = array('Variable', 'Assignation');
-        
         // normal case for classes ($x,  or ($x) 
         $this->conditions = array( 0 => array('token'             => self::$operators,
-                                               'checkForTypehint' => $allowedAtoms,
+                                               'checkForTypehint' => array('Variable', 'Assignation'),
                                                'property'         => array('association' => 'Function')
                                                ),
         );
