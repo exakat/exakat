@@ -103,7 +103,7 @@ SQL;
             $this->log->log( "Run round $rounds");
 
             $counts = array();
-            $datastore = new \Sqlite3($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
+            $datastore = new \Sqlite3($sqlitePath, \SQLITE3_OPEN_READONLY);
             $datastore->busyTimeout(5000);
             $res = $datastore->query('SELECT * FROM analyzed');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

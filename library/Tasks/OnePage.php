@@ -131,11 +131,9 @@ class OnePage extends Tasks {
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
-        $b1 = microtime(true);
         $task = new Dump($this->gremlin);
         $task->run($config);
         display("Project dumped\n");
-        $e1 = microtime(true);
 
         $task = new Report2($this->gremlin);
         $task->run($config);

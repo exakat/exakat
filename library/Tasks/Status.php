@@ -80,9 +80,6 @@ class Status extends Tasks {
                 break 1;
         }
 
-        $configuration = array();
-        // 
-
         // Check the logs
         $errors = $this->getErrors($path);
         if (!empty($errors)) {

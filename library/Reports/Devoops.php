@@ -1561,7 +1561,6 @@ TEXT
         $bugfixes = $data->getBugFixes();
         
         $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
-        $reported = array();
         $info = array();
 
         $rows = array();

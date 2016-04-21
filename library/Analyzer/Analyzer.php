@@ -212,7 +212,7 @@ abstract class Analyzer {
         return Analyzer::$docs->getThemeForAnalyzer($analyzer);
     }
 
-    public function getAppinfoHeader($lang = 'en') {
+    public function getAppinfoHeader() {
         if ($this->appinfo === null) {
             $this->getDescription();
         }
