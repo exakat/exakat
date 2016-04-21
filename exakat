@@ -11,10 +11,10 @@ try {
     $isPhar = false;
 }
 
-if($isPhar !== false){
-    include 'phar://'.$isPhar.'.phar/library/Autoload.php';
-} else {
+if($isPhar === false){
     include __DIR__.'/library/Autoload.php';
+} else {
+    include 'phar://'.$isPhar.'.phar/library/Autoload.php';
 }
 
 try {
