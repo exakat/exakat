@@ -72,7 +72,7 @@ class Sign extends TokenAuto {
                                'cleanIndex'  => true
                                );
         $this->checkAuto();
-
+return true;
         //  + -1.0e2  (special case for Float)
         $this->conditions = array( -1 => $prerequisite,
                                     0 => array('token'      => Sign::$operators,
@@ -149,11 +149,12 @@ class Sign extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-if (fullcode.out('SIGN').any()) {
-    fullcode.fullcode = fullcode.code + fullcode.out("SIGN").next().fullcode;
-} else {
-    fullcode.fullcode = fullcode.code;
+
+fullcode = o.property('code').value();
+if (g.V(o).out('SIGN').count().is(eq(0))) {
+    fullcode = fullcode + g.V(o).out('SIGN').next().property('fullcode').value();
 }
+
 GREMLIN;
     }
 }

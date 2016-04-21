@@ -101,7 +101,7 @@ abstract class TokenAuto extends Token {
         
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
-        $query .= $moderatorFinal.'.sideEffect{ done++; }.'. $qactions . ($this->setAtom ? '.sideEffect{ o = it.get(); '.$this->fullcode().' o.property("fullcode", fullcode); }' : '' ).".iterate();
+        $query .= $moderatorFinal.'.sideEffect{ done++; }.'. $qactions . ($this->setAtom ? '.sideEffect{ o = it.get(); fullcode = ""; '.$this->fullcode().' o.property("fullcode", fullcode); }' : '' ).".iterate();
 [total:total, done:done];";
 ////toDelete.each{ g.removeVertex(it); }
         
@@ -182,8 +182,12 @@ abstract class TokenAuto extends Token {
         }
 
         if (isset($actions['minusIntval'])) {
-            $qactions[] = " /* minusIntval */\n   if (it.intval != null) {
-    it.intval = -1 * it.intval;
+            $qactions[] = " /* minusIntval */\n   
+sideEffect{ 
+    if (g.V(it.get().id()).has('intval')) {
+        i = -1 * it.get().property('intval').value();
+        it.get().property('intval', i);
+    }
 }
 
 ";
@@ -1349,21 +1353,22 @@ if (a4.token == 'T_SEMICOLON') {
         }
         
         if (isset($actions['sign'])) {
-            $qactions[] = "
+            $qactions[] = <<<GREMLIN
 /* Sign the integer */
-if (it.code == '-') {
-    it.setProperty('code', '-' + it.out('NEXT').next().code);
-//    it.setProperty('code', - Integer.parseInt(it.out('NEXT').next().code));
-} else {
-    it.setProperty('code', it.out('NEXT').next().code);
-}
+sideEffect{
+    s = g.V(it.get()).out('NEXT').next().property('code').value();
+    if (it.get().property('code').value() == '-') {
+        s = '-' + s;
+    } 
+    it.get().property('code', s); 
+    it.get().property('fullcode', s); }
+.out('NEXT').as("next").out('NEXT').as("nextnext") 
+.sideEffect( select("next").addE('DELETE').from(g.V(0)) )
+.sideEffect( select("next").bothE('NEXT').drop() )
+.sideEffect( select("nextnext").addE('NEXT').from("origin") )
 
-nextnext = it.out('NEXT').out('NEXT').next();
-toDelete.push(it.out('NEXT').next());
-it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(it, nextnext, 'NEXT');
+GREMLIN;
 
-";
             unset($actions['sign']);
         }
 

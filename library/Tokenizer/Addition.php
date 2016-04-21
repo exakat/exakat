@@ -47,7 +47,8 @@ class Addition extends TokenAuto {
                                                        -1 => 'LEFT'),
                                'atom'         => 'Addition',
                                'cleanIndex'   => true,
-                               'addSemicolon' => 'it');
+                               'addSemicolon' => 'it'
+                               );
         $this->checkAuto();
         
         return false;
@@ -56,8 +57,11 @@ class Addition extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') + " " +
-                                 fullcode.out("RIGHT").next().getProperty('fullcode'));
+fullcode = g.V(o).out('LEFT').next().property('fullcode').value() +
+           " " +
+           o.property('code').value() + 
+           " " +
+           g.V(o).out('RIGHT').next().property('fullcode').value(); 
 
 GREMLIN;
     }

@@ -29,7 +29,7 @@ class Integer extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.getProperty('code'));
+fullcode = o.property('fullcode').value();
 
 GREMLIN;
     }
