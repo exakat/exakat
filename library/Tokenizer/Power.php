@@ -55,9 +55,9 @@ class Power extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullcode') + " ** " +
-                                  fullcode.out("RIGHT").next().getProperty('fullcode'));
-
+fullcode = g.V(o).out('LEFT').next().property('fullcode').value() +
+           " ** " +
+           g.V(o).out('RIGHT').next().property('fullcode').value(); 
 GREMLIN;
 
     }
