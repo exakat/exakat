@@ -26,7 +26,7 @@ class Gremlin2 extends Graph {
     private $scriptDir   = '';
     private $neo4j_host  = '';
     private $neo4j_auth  = '';
-    private $neorj_error = null;
+    private $neo4j_error = null; // error message. To be thrown when query only
     
     public function __construct(\Config $config) {
         parent::__construct($config);

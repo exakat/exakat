@@ -174,7 +174,8 @@ class Config {
         $this->executable    = $_SERVER['SCRIPT_NAME'];
 
         global $isPhar;
-        $this->is_phar  = $isPhar !== false;
+        $this->is_phar  = !($isPhar == false);
+
         if ($this->is_phar) {
             $this->projects_root = substr(dirname(dirname(__DIR__)), 7);
             $this->dir_root      = 'phar://'.$this->executable;
