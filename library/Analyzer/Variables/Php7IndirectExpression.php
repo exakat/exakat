@@ -42,6 +42,8 @@ class Php7IndirectExpression extends Analyzer\Analyzer {
         $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->atomIs(array('Property', 'Staticproperty'))
+             ->outIs('PROPERTY')
+             ->tokenIsNot('T_STRING')
              ->back('first');
         $this->prepareQuery();
     }

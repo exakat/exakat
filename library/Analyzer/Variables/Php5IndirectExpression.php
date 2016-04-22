@@ -30,36 +30,43 @@ class Php5IndirectExpression extends Analyzer\Analyzer {
     
     public function analyze() {
 //$$foo['bar']['baz']	${$foo['bar']['baz']}	($$foo)['bar']['baz']
-        $this->atomIs('Variable')
-             ->tokenIs('T_DOLLAR')
-             ->outIs('NAME')
+        $this->atomIs('Array')
+             ->outIs('VARIABLE')
              ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Variable')
+             ->tokenIs('T_DOLLAR')
              ->back('first');
         $this->prepareQuery();
 
 //$foo->$bar['baz']	$foo->{$bar['baz']}	($foo->$bar)['baz']
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
-             ->atomIs('Array')
+        $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs('T_VARIABLE')
+             ->atomIs('Property')
+             ->outIs('PROPERTY')
+             ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
 
-
 //$foo->$bar['baz']()	$foo->{$bar['baz']}()	($foo->$bar)['baz']()
-        $this->atomIs('Methodcall')
-             ->outIs('METHOD')
+        $this->atomIs('Functioncall')
              ->outIs('NAME')
              ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Property')
+             ->outIs('PROPERTY')
+             ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
 
 //Foo::$bar['baz']()
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
+        $this->atomIs('Functioncall')
              ->outIs('NAME')
              ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Staticproperty')
+             ->outIs('PROPERTY')
+             ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
     }
