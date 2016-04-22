@@ -65,8 +65,12 @@ class Typehint extends TokenAuto {
         return <<<GREMLIN
 
 // This may happens during the processing
-if (fullcode.atom == 'Typehint') {
-    fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty("fullcode") + " " + fullcode.out("VARIABLE").next().getProperty('fullcode'));
+if (o.property('atom') == 'Typehint') {
+    fullcode = g.V(o).out('CLASS').next().property('fullcode').value() +
+               " " +
+               g.V(o).out('VARIABLE').next().property('fullcode').value();
+} else {
+    fullcode = o.property('fullcode');
 }
 
 GREMLIN;

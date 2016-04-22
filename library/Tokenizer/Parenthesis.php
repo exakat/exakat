@@ -97,7 +97,9 @@ class Parenthesis extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode',  "( " + fullcode.out("CODE").next().getProperty('fullcode') + " )");
+fullcode = "( " +
+           g.V(o).out('CODE').next().property('fullcode').value() +
+           " )";
 
 GREMLIN;
     }

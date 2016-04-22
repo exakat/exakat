@@ -64,14 +64,8 @@ class Arguments extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-s = [];
-fullcode.out("ARGUMENT").sort{it.rank}._().each{ s.add(it.fullcode); };
-
-if (s.size() == 0) {
-    s = '';
-} else {
-    fullcode.setProperty("fullcode", s.join(", "));
-}
+fullcode = 'not done yet';
+fullcode = g.V(o).out("ARGUMENT").has('rank').order().by('rank').values('code').join(', ');
 
 // note : parenthesis are set in arguments (above), if needed.
 

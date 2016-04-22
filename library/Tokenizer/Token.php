@@ -909,6 +909,7 @@ GREMLIN;
         // split query in two, for 2 separate transactions
         $query = <<<GREMLIN
 // remove deleted nodes
+g.V(0).out("DELETE").bothE('NEXT').drop();
 g.V(0).out("DELETE").drop();
 
 GREMLIN;

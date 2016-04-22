@@ -68,8 +68,8 @@ abstract class TokenAuto extends Token {
             print "conditions[0] is empty\n";
             die();
         }
-        $q[] = $this->readConditions($this->conditions[0]);
         $q[] = ['as("origin")'];
+        $q[] = $this->readConditions($this->conditions[0]);
         $q[] = array('sideEffect{ total++; }');
         unset($this->conditions[0]);
 
@@ -80,9 +80,10 @@ abstract class TokenAuto extends Token {
         } else {
             $q[] = array_pad([], $start, 'out("NEXT")');
         }
+
         foreach($positions as $position) {
             $conditions = $this->conditions[$position];
-            $name = ($position < 0 ? 'b' : 'a').abs($position);
+            $name = $this->offset2name($position);
 
             $q[] = ['as("'.$name.'")'];
             $q[] = $this->readConditions($conditions);
@@ -101,7 +102,14 @@ abstract class TokenAuto extends Token {
         
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
-        $query .= $moderatorFinal.'.sideEffect{ done++; }.'. $qactions . ($this->setAtom ? '.sideEffect{ o = it.get(); fullcode = ""; '.$this->fullcode().' o.property("fullcode", fullcode); }' : '' ).".iterate();
+        $query .= $moderatorFinal.'.sideEffect{ done++; }.' . 
+                  $qactions . 
+                  ($this->setAtom ? '.sideEffect{ 
+o = it.get(); 
+fullcode = ""; '.
+    $this->fullcode() .
+' o.property("fullcode", fullcode); }' : '' ) . 
+                  ".iterate();
 [total:total, done:done];";
 ////toDelete.each{ g.removeVertex(it); }
         
@@ -616,36 +624,22 @@ $fullcode
                     ++$c;
                 
                     if ($label == 'DROP') {
-                       $b = $c - 2 ? 'a'.($c - 2) : "origin";
-                       $d = $c + 1;
+                       $b = $this->offset2name($c - 1);
+                       $d = $this->offset2name($c + 1);
                         $qactions[] = <<<GREMLIN
 /* transform drop out ($c) */
-sideEffect( select("$b").addE("NEXT").to("a$d"))
-.sideEffect( select("a$c").bothE("NEXT", "INDEXED").drop())
+sideEffect( select("a$c").bothE("NEXT", "INDEXED").drop())
 .sideEffect( select("a$c").addE("DELETE").from(g.V(0)))
 
 GREMLIN;
-
-                    } elseif ($label == 'PPP') {
-                        $qactions[] = "
-/* Build a link with the target's code */
-target = a$c;
-
-g.addEdge(it, target, target.code.toUpperCase());
-g.addEdge(target.in('NEXT').next(), target.out('NEXT').next(), 'NEXT');
-target.bothE('NEXT').each{ g.removeEdge(it); }
-target.bothE('INDEXED').each{ g.removeEdge(it); }
-
-";
                 } else {
-                   $b = $c - 1 ? 'a'.($c - 1) : "origin";
-                   $d = $c + 1;
+                   $b = $this->offset2name($c - 1);
+                   $d = $this->offset2name($c + 1);
                    $qactions[] = <<<GREMLIN
 /* transform out ($c) */
 
-sideEffect( select("a$c").addE("$label").from("$b"))
-.sideEffect( select("a$c").bothE("NEXT").drop())
-.sideEffect( select("$b").addE("NEXT").to("a$d"))
+sideEffect( select("a$c").addE("$label").from("origin"))
+.sideEffect( select("a$c").bothE("NEXT", "INDEXED").drop())
 
 GREMLIN;
                     }
@@ -664,19 +658,11 @@ toDelete.push(b$d);
 
 ";
                     } else {
-                        $c = $d + 1;
-                        $qactions[] = <<<GREMLIN
-sideEffect( select("b$c").addE("NEXT").to("origin"))
-.sideEffect( select("b$d").addE("$label").from("origin"))
-.sideEffect( select("b$d").bothE("NEXT").drop())
+                       $c = $this->offset2name($d + 1);
+                       $qactions[] = <<<GREMLIN
+sideEffect( select("b$d").addE("$label").from("origin"))
+.sideEffect( select("b$d").bothE("NEXT", "INDEXED").drop())
 GREMLIN;
-/*
-
-g.addEdge(it, b$d, '$label');
-g.addEdge(b$d.in('NEXT').next(), it, 'NEXT');
-b$d.bothE('NEXT').each{ g.removeEdge(it); }
-
-*/
                     }
 
                 // Destination == 0
@@ -698,6 +684,22 @@ g.addEdge(a, b, 'NEXT');
                 }
             }
 
+            $min = $this->offset2name(min(array_keys($actions['transform'])) - 1);
+            $max = $this->offset2name(max(array_keys($actions['transform'])) + 1);
+            
+            if (isset($actions['transform'][0]) || $min{0} != 'b') {
+                $qactions[] = <<<GREMLIN
+/* adding NEXT to remaining tokens */
+sideEffect( select("$min").addE("NEXT").to("$max"))
+GREMLIN;
+            } else {
+                $qactions[] = <<<GREMLIN
+/* adding NEXT to remaining tokens */
+sideEffect( select("$min").addE("NEXT").to("origin"))
+.sideEffect( select("origin").addE("NEXT").to("$max"))
+GREMLIN;
+            
+            }
             unset($actions['transform']);
         }
 
@@ -1395,7 +1397,8 @@ $fullcode
         if (isset($actions['toTypehint'])) {
             $fullcode = $this->fullcode();
             
-            $qactions[] = "
+            $qactions[] = "sideEffect{}";
+            $qactions2[] = "
 
 /* to type hint */
 
@@ -1885,73 +1888,35 @@ sideEffect( __.out("NEXT").select("b2"))
 
 GREMLIN;
             unset($actions['toOneSequence']);
-
-
-
-
-/*
-b2 = b1.in('NEXT').next();
-
-b1.setProperty('rank', 0);
-b1.bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(it, b1, 'ELEMENT');
-
-b1.inE('INDEXED').each{ g.removeEdge(it); }
-it.setProperty('atom', 'Sequence');
-it.setProperty('count', 1);
-g.idx('atoms').put('atom','Sequence', it);
-it.setProperty('fullcode', ';'); // fullcode
-
-g.addEdge(b2, it, 'NEXT');
-*/        }
+        }
 
         if (isset($actions['toArgument']) && $actions['toArgument']) {
-                $qactions[] = "
-/* to Argument */
+        //property('line',g.V(it.get())
+            $qactions[] = <<<GREMLIN
 
-x = g.addVertex(null, [code:'Arguments', atom:'Arguments', token:'T_COMMA', virtual:true, line:it.line]);
-g.idx('atoms').put('atom', 'Arguments', x)
+select('origin')/* to Argument */
+.sideEffect{line = it.get().property('line');}
+.addV('code','Arguments', 'atom','Arguments', 'token','T_COMMA', 'virtual',true, 'rank', select('origin').values('line')).as('final')
+.sideEffect{ xx = it.get(); trash = g.V(0).next(); }
 
-// initial
-rank = 0;
-g.addEdge(x, b1, 'ARGUMENT');
-b1.setProperty('rank', rank);
-b1.bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(b2, x, 'NEXT');
+.sideEffect{ rank = 0; }
+.sideEffect( select('final').addE('ARGUMENT').to('b1'))
+.sideEffect( select('b1').property('rank', 0))
+.sideEffect( select('b2').addE('NEXT').to('final'))
+.select('origin')
+.emit(has('token', 'T_CLOSE_PARENTHESIS'))
+.repeat( 
+    sideEffect{ trash.addEdge('DELETE', it.get() ) }
+    .out('NEXT')
+    .sideEffect{ xx.addEdge('ARGUMENT', it.get() ) }
+    .sideEffect{ rank = rank + 1; it.get().property('rank', rank);}
+    .out('NEXT')
+).until( __.not(has('token', 'T_COMMA')) )
+.sideEffect( addE('NEXT').from('final') )
+.sideEffect( select('final').out('ARGUMENT').bothE('NEXT').drop() )
+.select('final')
 
-while(a2.token == 'T_COMMA') {
-    g.addEdge(x, a1, 'ARGUMENT');
-    rank += 1;
-    a1.setProperty('rank', rank);
-    a2.bothE('INDEXED').each{ g.removeEdge(it); }
-
-    // prepare next round
-    a3 = a2.out('NEXT').next();
-    a4 = a3.out('NEXT').next();
-
-    a1.bothE('NEXT').each{ g.removeEdge(it); }
-    a2.bothE('NEXT').each{ g.removeEdge(it); }
-    toDelete.push(a2);
-
-    a1 = a3;
-    a2 = a4;
-}
-
-g.addEdge(x, a1, 'ARGUMENT');
-rank = rank + 1;
-a1.setProperty('rank', rank);
-a1.bothE('NEXT').each{ g.removeEdge(it); }
-
-a2.inE('NEXT').each{ g.removeEdge(it); }
-g.removeVertex(it);
-
-g.addEdge(x, a2, 'NEXT');
-
-x.out('ARGUMENT').inE('INDEXED').each{ g.removeEdge(it);}
-
-fullcode = x;
-
-";
+GREMLIN;
             unset($actions['toArgument']);
         }
         
@@ -2980,24 +2945,17 @@ __.out("NAME", "PROPERTY", "OBJECT", "DEFINE", "CODE", "LEFT", "RIGHT", "SIGN", 
     private function readConditions($conditions) {
         $queryConditions = array();
 
-        /*
-        if (isset($conditions['next'])) {
-            for($i = 0; $i < $conditions['next']; ++$i) {
-                $queryConditions[] = 'out("NEXT")';
+        if (isset($conditions['token'])) {
+            if ( is_array($conditions['token']) && !empty($conditions['token'])) {
+                $queryConditions[] = 'has("token", within("'.implode('", "', $conditions['token']).'"))';
+            } elseif($conditions['token'] == 'yes') {
+                $queryConditions[] = 'has("token")';
+            } else {
+                $queryConditions[] = 'has("token", "'.$conditions['token'].'")';
             }
-            $queryConditions[] = 'as( "a'.$conditions['next'].')';
-            unset($conditions['next']);
+            unset($conditions['token']);
         }
 
-        if (isset($conditions['previous'])) {
-            for($i = 0; $i < $conditions['previous']; ++$i) {
-                $queryConditions[] = 'in("NEXT")';
-            }
-            $queryConditions[] = 'as( "b'.$conditions['previous'].')';
-            unset($conditions['previous']);
-        }
-        */
-        
         if (isset($conditions['property'])) {
             foreach($conditions['property'] as $property => $value) {
                 if (is_array($value)) {
@@ -3096,37 +3054,43 @@ GREMLIN;
                                         array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG',
                                               'T_OPEN_CURLY', 'T_INLINE_HTML', 'T_CLOSE_BRACKET', 'T_ELSEIF'));
             $finalTokens = "'".implode("', '", $finalTokens)."'";
+
             $queryConditions[] = <<<GREMLIN
-filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
-.loop(4){!(it.object.token in [$finalTokens])}
-.filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }
+match( 
+__.as("found").emit(properties('token').value().is(within($finalTokens)))
+  .repeat(  out('NEXT') 
+           .has('atom')
+           .has('atom', within($classes))
+           .out('NEXT')
+           .has('token', within($finalTokens, 'T_COMMA'))
+         )
+    .until(properties('token').value().is(within($finalTokens)))
+    .select("found")
+).select("origin")
 GREMLIN;
 
             unset($conditions['checkForArguments']);
         }
         
         if (isset($conditions['checkForTypehint'])) {
-            if (is_array($conditions['checkForTypehint'])) {
-                $classes = "'".implode("', '", $conditions['checkForTypehint'])."'";
-            } else {
-                $classes = "'".$conditions['checkForTypehint']."'";
-            }
-
             $finalTokens = "'T_CLOSE_PARENTHESIS'";
             $queryConditions[] = <<<GREMLIN
-filter{ it.out('NEXT').transform{
-    if (it.token in ['T_VARIABLE', 'T_EQUAL']) {
-        it;
-    } else if (it.token in ['T_STRING', 'T_ARRAY', 'T_CALLABLE', 'T_NS_SEPARATOR'] && 
-               it.out('NEXT').next().token in ['T_VARIABLE', 'T_EQUAL']) {
+emit(properties('token').value().is(within($finalTokens)))
+.repeat(
+    out('NEXT')
+    .map{ 
+    if (it.get().value('token') in ['T_VARIABLE', 'T_EQUAL']) {
+        it.get();
+    } else if (it.get().value('token') in ['T_STRING', 'T_ARRAY', 'T_CALLABLE', 'T_NS_SEPARATOR'] && 
+               g.V(it.get()).out('NEXT').has('token', within('T_VARIABLE', 'T_EQUAL')).count().is(1)) {
         it.out('NEXT').next();
     } else {
         // This has to be stopped, so we stay here, and the loop will fail next loop
-        it;
+        it.get();
     }
-}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
-.loop(4){!(it.object.token in [$finalTokens])}{ it.object.token in [$finalTokens]}.any() 
-}
+    }.out('NEXT').has('token', within($finalTokens, 'T_COMMA'))
+).until(properties('token').value().is(within($finalTokens)))
+
 GREMLIN;
 
             unset($conditions['checkForTypehint']);
@@ -3172,17 +3136,6 @@ filter{ it.as("a").out("NEXT").transform{
 }.out("NEXT").loop("a"){it.object.token in ["T_OPEN_BRACKET", "T_OPEN_CURLY"] && it.object.atom == null}.any()}
 GREMLIN;
             unset($conditions['checkForArray']);
-        }
-
-        if (isset($conditions['token'])) {
-            if ( is_array($conditions['token']) && !empty($conditions['token'])) {
-                $queryConditions[] = 'has("token", within("'.implode('", "', $conditions['token']).'"))';
-            } elseif($conditions['token'] == 'yes') {
-                $queryConditions[] = 'has("token")';
-            } else {
-                $queryConditions[] = 'has("token", "'.$conditions['token'].'")';
-            }
-            unset($conditions['token']);
         }
 
         if (isset($conditions['code'])) {
@@ -3265,6 +3218,16 @@ GREMLIN;
     }
 
     abstract public function fullcode() ;
+    
+    private function offset2name($offset) {
+        if ($offset == 0) {
+            return 'origin';
+        } elseif ($offset > 0) {
+            return 'a'.$offset;
+        } else {
+            return 'b'.abs($offset);
+        }
+    }
 }
 
 ?>

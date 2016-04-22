@@ -37,6 +37,28 @@ class Functioncall extends TokenAuto {
     static public $atom = 'Functioncall';
 
     public function _check() {
+        // functioncall(with arguments or void) that will be in a sequence
+        // No -> or ::, but OK as atoms.
+        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR', 'T_EVAL')),
+                                     0 => array('token'     => array_merge(static::$operatorsWithoutEcho, array('T_OPEN_PARENTHESIS'))),
+                                     1 => array('atom'      => 'none',
+                                                'token'     => 'T_OPEN_PARENTHESIS'),
+                                     2 => array('atom'      =>  array('Arguments', 'Void')),
+                                     3 => array('atom'      => 'none',
+                                                'token'     => 'T_CLOSE_PARENTHESIS'),
+                                     4 => array('notToken'  => 'T_OPEN_PARENTHESIS')
+        );
+        
+        $this->actions = array('transform' => array( 1 => 'DROP',
+                                                     2 => 'ARGUMENTS',
+                                                     3 => 'DROP'
+                                                     ),
+                               'atom'      => 'Functioncall',
+                               'property'  => array('parenthesis' => true)
+                               );
+        $this->checkAuto();
+
+        return true;
         // functioncall(with arguments or void) with another function as name (initial name is $variable or string)
         $this->conditions = array(   0 => array('token' => array('T_STRING', 'T_VARIABLE', 'T_NS_SEPARATOR', 'T_OBJECT_OPERATOR',
                                                                  'T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS'),
@@ -68,26 +90,6 @@ class Functioncall extends TokenAuto {
         $this->actions = array('variableToFunctioncall' => 1,
                                'keepIndexed'            => true,
                                'property'               => array('parenthesis' => true),
-                               );
-        $this->checkAuto();
-
-        // functioncall(with arguments or void) that will be in a sequence
-        // No -> or ::, but OK as atoms.
-        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR', 'T_EVAL')),
-                                     0 => array('token'     => array_merge(static::$operatorsWithoutEcho, array('T_OPEN_PARENTHESIS'))),
-                                     1 => array('atom'      => 'none',
-                                                'token'     => 'T_OPEN_PARENTHESIS'),
-                                     2 => array('atom'      =>  array('Arguments', 'Void')),
-                                     3 => array('atom'      => 'none',
-                                                'token'     => 'T_CLOSE_PARENTHESIS'),
-                                     4 => array('notToken'  => 'T_OPEN_PARENTHESIS')
-        );
-        
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'ARGUMENTS',
-                                                        3 => 'DROP'),
-                               'atom'         => 'Functioncall',
-                               'property'     => array('parenthesis' => true)
                                );
         $this->checkAuto();
 
@@ -128,34 +130,34 @@ class Functioncall extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
-    s = [];
-    fullcode.out("SUBNAME").sort{it.rank}._().each{ s.add(it.fullcode); };
-
-    if (fullcode.absolutens == true) {
-        fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\"));
+if (o.property('token') == 'T_NS_SEPARATOR') {
+    s = g.V(o).out("SUBNAME").order().by('rank').values('fullcode').join('\\\\');
+    
+    if (o.property('absolutens') == true) {
+//        fullcode = "\\\\" + s;
     } else {
-        fullcode.setProperty('fullcode', s.join("\\\\"));
+//        fullcode = s;
     }
-} else if (fullcode.getProperty('token') == 'T_OBJECT_OPERATOR') {
+} else if (o.property('token').value() == 'T_OBJECT_OPERATOR') {
     // Do nothing.
-} else if (fullcode.getProperty('token') == 'T_DOUBLE_COLON') {
+} else if (o.property('token').value() == 'T_DOUBLE_COLON') {
     // Do nothing.
-} else if (fullcode.getProperty('token') == 'T_OPEN_PARENTHESIS') {
+} else if (o.property('token').value() == 'T_OPEN_PARENTHESIS') {
     // Do nothing.
-} else if (fullcode.getProperty('fullcode') != null) {
-    fullcode.setProperty('fullcode', it.getProperty('fullcode'));
+} else if (g.V(o).properties('fullcode').count().is(neq(0))) {
+    fullcode = o.property('fullcode').value();
 } else {
-    fullcode.setProperty('fullcode', it.getProperty('code'));
+    fullcode = o.property('code').value();
 }
 
-if (fullcode.getProperty('parenthesis') == true) {
-    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + "(" + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + ")");
+if (o.property('parenthesis').value() == true) {
+    fullcode = fullcode + "(" + g.V(o).out("ARGUMENTS").next().property('fullcode').value() + ")";
 } else {
-    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + " " + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + "");
+    fullcode = fullcode + " " + g.V(o).out("ARGUMENTS").next().property('fullcode').value() + "";
 }
 
-fullcode.setProperty("args_count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count());
+args_count = g.V(o).out('ARGUMENTS').out('ARGUMENT').not(has('token', 'T_VOID')).size();
+o.property("args_count", args_count);
 
 GREMLIN;
     }
