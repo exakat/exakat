@@ -48,6 +48,10 @@ class StaticLoop extends Analyzer\Analyzer {
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
+
+             // check if there are method call
+             ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
+
              ->back('first');
         $this->prepareQuery();
 
@@ -71,6 +75,10 @@ class StaticLoop extends Analyzer\Analyzer {
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
+
+             // check if there are method call
+             ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
+
              ->back('first');
         $this->prepareQuery();
         
@@ -96,6 +104,9 @@ class StaticLoop extends Analyzer\Analyzer {
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
 
+             // check if there are method call
+             ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
+
              ->back('first');
         $this->prepareQuery();
 
@@ -114,6 +125,9 @@ class StaticLoop extends Analyzer\Analyzer {
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
 
+             // check if there are method call
+             ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
+
              ->back('first');
         $this->prepareQuery();
 
@@ -131,6 +145,10 @@ class StaticLoop extends Analyzer\Analyzer {
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
+
+             // check if there are method call
+             ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
+
              ->back('first');
         $this->prepareQuery();
 
