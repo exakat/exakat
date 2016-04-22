@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      B
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          $b
+    Label : ELSE
+      Concatenation
+      Label : CONCAT
+        D
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            'E'
+      Label : CONCAT
+        require_once
+        Label : ARGUMENTS
+          
+          Label : ARGUMENT
+            (
+            Label : CODE
+              Concatenation
+              Label : CONCAT
+                F
+              Label : CONCAT
+                'G'
+    Label : THEN
+      include_once
+      Label : ARGUMENTS
+        
+        Label : ARGUMENT
+          (
+          Label : CODE
+            $b
