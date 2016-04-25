@@ -9,11 +9,11 @@ $expected     = array( 'print ( $_SERVER[\'UNKNOWN_INDEX\'] )',
                       '\'ls \' . $_SERVER[\'UNKNOWN_INDEX\']',
                       '\'ls \' . $_SERVER[\'DOCUMENT_ROOT\'][\'a1\']',
                       '\'ls \' . $_GET[\'DOCUMENT_ROOT\'][\'a3\']',
-                      '\'ls \' . $_SERVER[\'DOCUMENT_ROOT\']',
                       '"$_SERVER[\'UNKNOWN_INDEX\']"',
-                      '"$_SERVER[\'DOCUMENT_ROOT\']"',
+                      
                       );
 
-$expected_not = array();
+$expected_not = array('"$_SERVER[\'DOCUMENT_ROOT\']"',
+                      '\'ls \' . $_SERVER[\'DOCUMENT_ROOT\']',);
 
 ?>

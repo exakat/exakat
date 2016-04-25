@@ -114,6 +114,7 @@ class DirectInjection extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->code($vars, true)
              ->inIs('VARIABLE')
+             ->filter($safeIndex)
              ->inIs('CONCAT')
              ->analyzerIsNot('self');
         $this->prepareQuery();
