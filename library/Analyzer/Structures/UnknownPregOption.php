@@ -27,9 +27,6 @@ use Analyzer;
 
 class UnknownPregOption extends Analyzer\Analyzer {
     public function analyze() {
-        // delimiters
-        $delimiters = '=~/|`%#\\$!,@\\\\{\\\\(\\\\[';
-        
         // Options list : eimsuxADJSUX (we use all letters, as unknown options are ignored or yield an error)
         $options = '[a-zA-Z]*[^eimsuxADJSUX][a-zA-Z]*';
         

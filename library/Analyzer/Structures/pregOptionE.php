@@ -27,9 +27,6 @@ use Analyzer;
 
 class pregOptionE extends Analyzer\Analyzer {
     public function analyze() {
-        // delimiters
-        $delimiters = '=~/|`%#\\$!,@\\\\{\\\\(\\\\[';
-        
         // Options list : eimsuxADJSUX (we use all letters, as unknown options are ignored or yield an error)
         $optionsWithE = '[a-zA-Z]*e[a-zA-Z]*';
 
