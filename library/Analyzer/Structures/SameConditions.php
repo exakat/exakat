@@ -25,7 +25,7 @@ use Analyzer;
 
 class SameConditions extends Analyzer\Analyzer {
     public function analyze() {
-        $steps = 'out("ELSE").transform{ if (it.atom == "Sequence") { it.out("ELEMENT").next(); } else { it; } }';
+        $steps = 'out("ELSE").transform{ if (it.atom == "Sequence" && it.count == 1) { it.out("ELEMENT").has("rank", 0).next(); } else { it; } }';
 
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
