@@ -122,6 +122,22 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->code('__destruct')
              ->inIs('NAME');
         $this->prepareQuery();
+
+        // __destruct is considered automatically checked
+        $this->atomIs('Class')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->hasOut('PRIVATE')
+             ->_as('method')
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'name')
+             ->inIs('NAME')
+             ->inIs('ELEMENT')
+             ->atomInside('String')
+             ->samePropertyAs('noDelimiter', 'name')
+             ->back('method');
+        $this->prepareQuery();
     }
 }
 
