@@ -11,51 +11,61 @@ Label : CODE
       Label : ARGUMENT
         $b
       Label : ARGUMENT
-        $d
-      Label : ARGUMENT
         $c
-    Label : NAME
-      B
+      Label : ARGUMENT
+        $d
     Label : BLOCK
       ;
       Label : ELEMENT
+        if
+        Label : CONDITION
+          &
+          Label : LEFT
+            ~
+            Label : NOT
+              C
+              Label : ARGUMENTS
+                
+                Label : ARGUMENT
+                  void
+          Label : RIGHT
+            $a
+        Label : THEN
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              D
+      Label : ELEMENT
         switch
-        Label : NAME
-          $a
         Label : CASES
           Sequence Case Default
           Label : ELEMENT
             case
-            Label : CODE
-              Void
             Label : CASE
               E
-          Label : ELEMENT
-            case
             Label : CODE
-              Void
-            Label : CASE
-              L
+              void
           Label : ELEMENT
             case
-            Label : CODE
-              Void
             Label : CASE
-              K
-          Label : ELEMENT
-            case
+              F
             Label : CODE
               ;
               Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
                 ::
+                Label : CLASS
+                  static
                 Label : METHOD
                   G
                   Label : ARGUMENTS
                     Arguments
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        I
                     Label : ARGUMENT
                       "
                       Label : CONTAINS
@@ -68,64 +78,34 @@ Label : CODE
                       $c
                     Label : ARGUMENT
                       $d
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        H
-                      Label : CONSTANT
-                        I
-                Label : CLASS
-                  static
-            Label : CASE
-              F
-          Label : ELEMENT
-            case
-            Label : CODE
-              ;
               Label : ELEMENT
                 break
                 Label : LEVEL
                   void
-              Label : ELEMENT
-                ::
-                Label : METHOD
-                  G
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        H
-                      Label : CONSTANT
-                        U
-                    Label : ARGUMENT
-                      "
-                      Label : CONTAINS
-                        Concatenation
-                        Label : CONCAT
-                          V
-                        Label : CONCAT
-                          $b
-                Label : CLASS
-                  static
+          Label : ELEMENT
+            case
+            Label : CASE
+              K
+            Label : CODE
+              void
+          Label : ELEMENT
+            case
+            Label : CASE
+              L
+            Label : CODE
+              void
+          Label : ELEMENT
+            case
             Label : CASE
               @
               Label : AT
-                R
-          Label : ELEMENT
-            case
+                M
             Label : CODE
               ;
               Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
                 ::
+                Label : CLASS
+                  static
                 Label : METHOD
                   G
                   Label : ARGUMENTS
@@ -148,26 +128,66 @@ Label : CODE
                       $c
                     Label : ARGUMENT
                       $d
-                Label : CLASS
-                  static
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+          Label : ELEMENT
+            case
             Label : CASE
               @
               Label : AT
-                M
+                R
+            Label : CODE
+              ;
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  static
+                Label : METHOD
+                  G
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        U
+                    Label : ARGUMENT
+                      "
+                      Label : CONTAINS
+                        Concatenation
+                        Label : CONCAT
+                          V
+                        Label : CONCAT
+                          $b
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      $d
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
           Label : ELEMENT
             default
             Label : CODE
               ;
               Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
                 ::
+                Label : CLASS
+                  static
                 Label : METHOD
                   G
                   Label : ARGUMENTS
                     Arguments
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        Y
                     Label : ARGUMENT
                       "
                       Label : CONTAINS
@@ -180,35 +200,15 @@ Label : CODE
                       $c
                     Label : ARGUMENT
                       $d
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        H
-                      Label : CONSTANT
-                        Y
-                Label : CLASS
-                  static
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+        Label : NAME
+          $a
       Label : ELEMENT
         return
         Label : RETURN
           AA
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          &
-          Label : RIGHT
-            $a
-          Label : LEFT
-            ~
-            Label : NOT
-              C
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-        Label : THEN
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              D
+    Label : NAME
+      B

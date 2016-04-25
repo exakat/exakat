@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      false
     Label : BLOCK
       void
-  Label : ELEMENT
-    class
-    Label : NAME
-      true
-    Label : BLOCK
-      void
-  Label : ELEMENT
-    class
     Label : NAME
       Null
+  Label : ELEMENT
+    class
     Label : BLOCK
       void
+    Label : NAME
+      true
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      void
+    Label : NAME
+      false

@@ -6,33 +6,33 @@ Label : CODE
     global
     Label : GLOBAL
       [
+      Label : INDEX
+        'b'
       Label : VARIABLE
         [
+        Label : INDEX
+          $i
         Label : VARIABLE
           $
           Label : NAME
             $a
-        Label : INDEX
-          $i
-      Label : INDEX
-        'b'
   Label : ELEMENT
     global
     Label : GLOBAL
       ->
-      Label : PROPERTY
-        c
       Label : OBJECT
         $
         Label : NAME
           $b
+      Label : PROPERTY
+        c
   Label : ELEMENT
     global
     Label : GLOBAL
       ::
-      Label : PROPERTY
-        $c
       Label : CLASS
         $
         Label : NAME
           $d
+      Label : PROPERTY
+        $c

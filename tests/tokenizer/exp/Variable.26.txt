@@ -67,7 +67,9 @@ Label : CODE
     Label : METHOD
       [
       Label : ARGUMENTS
-        void
+        
+        Label : ARGUMENT
+          void
       Label : INDEX
         'baz'
       Label : VARIABLE
@@ -97,7 +99,9 @@ Label : CODE
     Label : METHOD
       [
       Label : ARGUMENTS
-        void
+        
+        Label : ARGUMENT
+          void
       Label : INDEX
         'baz'
       Label : VARIABLE

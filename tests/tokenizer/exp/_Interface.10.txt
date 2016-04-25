@@ -7,28 +7,28 @@ Label : CODE
     Label : BLOCK
       void
     Label : NAME
-      int
-    Label : EXTENDS
       i
   Label : ELEMENT
     interface
     Label : BLOCK
       void
-    Label : NAME
-      true
     Label : EXTENDS
       i
-  Label : ELEMENT
-    interface
-    Label : BLOCK
-      void
     Label : NAME
       null
-    Label : EXTENDS
-      i
   Label : ELEMENT
     interface
     Label : BLOCK
       void
-    Label : NAME
+    Label : EXTENDS
       i
+    Label : NAME
+      true
+  Label : ELEMENT
+    interface
+    Label : BLOCK
+      void
+    Label : EXTENDS
+      i
+    Label : NAME
+      int

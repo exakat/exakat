@@ -7,7 +7,9 @@ Label : CODE
     Label : METHOD
       [
       Label : ARGUMENTS
-        void
+        
+        Label : ARGUMENT
+          void
       Label : INDEX
         'c'
       Label : VARIABLE

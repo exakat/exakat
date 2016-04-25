@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $foo
     Label : RIGHT
       new
       Label : NEW
@@ -12,42 +14,40 @@ Label : CODE
           
           Label : ARGUMENT
             void
-    Label : LEFT
-      $foo
   Label : ELEMENT
     =
-    Label : RIGHT
-      "a"
     Label : LEFT
       ->
-      Label : PROPERTY
-        bar
       Label : OBJECT
         $foo
+      Label : PROPERTY
+        bar
+    Label : RIGHT
+      "a"
   Label : ELEMENT
     =
-    Label : RIGHT
-      2
     Label : LEFT
       $a
+    Label : RIGHT
+      2
   Label : ELEMENT
     ->
-    Label : PROPERTY
-      bar
     Label : OBJECT
       $
       Label : NAME
         $foo
+    Label : PROPERTY
+      bar
   Label : ELEMENT
     global
     Label : GLOBAL
       ->
-      Label : PROPERTY
-        bar
       Label : OBJECT
         $
         Label : NAME
           $foo
+      Label : PROPERTY
+        bar
   Label : ELEMENT
     $
     Label : NAME
@@ -60,79 +60,79 @@ Label : CODE
         $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $foo
     Label : RIGHT
       array
       Label : ARGUMENTS
         
         Label : ARGUMENT
           =>
-          Label : VALUE
-            'Yes'
           Label : KEY
             'bar'
-    Label : LEFT
-      $foo
+          Label : VALUE
+            'Yes'
   Label : ELEMENT
     =
-    Label : RIGHT
-      'a'
     Label : LEFT
       $Yes
+    Label : RIGHT
+      'a'
   Label : ELEMENT
     print
     Label : ARGUMENTS
       
       Label : ARGUMENT
         [
+        Label : INDEX
+          'bar'
         Label : VARIABLE
           $
           Label : NAME
             $foo
-        Label : INDEX
-          'bar'
   Label : ELEMENT
     print
     Label : ARGUMENTS
       
       Label : ARGUMENT
         {
+        Label : INDEX
+          'bar'
         Label : VARIABLE
           $
           Label : NAME
             $foo
-        Label : INDEX
-          'bar'
   Label : ELEMENT
     =
+    Label : LEFT
+      $b
     Label : RIGHT
       array
       Label : ARGUMENTS
         
         Label : ARGUMENT
           =>
-          Label : VALUE
-            'Yes'
           Label : KEY
             'c'
-    Label : LEFT
-      $b
+          Label : VALUE
+            'Yes'
   Label : ELEMENT
     global
     Label : GLOBAL
       [
+      Label : INDEX
+        'c'
       Label : VARIABLE
         $
         Label : NAME
           $b
-      Label : INDEX
-        'c'
   Label : ELEMENT
     global
     Label : GLOBAL
       {
+      Label : INDEX
+        'c'
       Label : VARIABLE
         $
         Label : NAME
           $b
-      Label : INDEX
-        'c'

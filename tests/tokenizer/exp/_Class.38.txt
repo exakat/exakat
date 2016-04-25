@@ -34,6 +34,8 @@ Label : CODE
             3
       Label : ELEMENT
         private
+        Label : PRIVATE
+          private
         Label : DEFINE
           $e
         Label : DEFINE
@@ -42,8 +44,6 @@ Label : CODE
             $f
           Label : RIGHT
             2
-        Label : PRIVATE
-          private
       Label : ELEMENT
         private
         Label : DEFINE
