@@ -62,9 +62,9 @@ class Files extends Tasks {
         if ($config->project === null) {
             die("Usage : exakat files -p project\nAborting\n");
         } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
-            die("No such project as '{$config->projects_root}/projects/$dir'\nAborting\n");
+            throw new \Exceptions\NoSuchProject($config->project);
         } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
-            die("No code in project '$dir'\nAborting\n");
+            throw new \Exceptions\NoCodeInProject($config->project);
         }
         
         $this->checkComposer($dir);

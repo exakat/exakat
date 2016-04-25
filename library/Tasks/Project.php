@@ -45,20 +45,16 @@ class Project extends Tasks {
 
         $this->project_dir = $config->projects_root.'/projects/'.$project;
 
-        if ($config->project === 'default') {
-            die("Usage : {$config->php} {$config->executable} project -p [Project name]\n");
-        }
-
-        if (!file_exists($config->projects_root.'/projects/'.$project)) {
-            die("Project '$project' doesn't exist in projects folder. Aborting\n");
+        if ($config->project === null || $config->project === 'default') {
+            die("Usage : exakat files -p project\nAborting\n");
+        } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
+            throw new \Exceptions\NoSuchProject($config->project);
+        } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
+            throw new \Exceptions\NoCodeInProject($config->project);
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             die("Project '$project' exists but has no config file. Aborting\n");
-        }
-
-        if (!file_exists($config->codePath)) {
-            die("Project '$project' exists but has no code folder ($config->codePath). Aborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/log')) {
@@ -182,10 +178,8 @@ class Project extends Tasks {
 
                 \Config::pop();
             } catch (\Exception $e) {
-                echo "Error while running the Analyze $theme \n",
-                     $e->getMessage();
                 file_put_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
-                die();
+                die("Error while running the Analyze $theme \n" . $e->getMessage());
             }
         }
 
@@ -221,9 +215,7 @@ class Project extends Tasks {
                     $report->run($config);
                     unset($report);
                 } catch (\Exception $e) {
-                    echo "Error while building $reportName in $format \n",
-                         $e->getMessage();
-                    die();
+                    die("Error while building $reportName in $format \n" . $e->getMessage());
                 }
             }
         }

@@ -30,16 +30,19 @@ class Load extends Tasks {
     public function run(\Config $config) {
         $this->config = $config;
         
-        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
-            display('No such project as "'.$this->config->project.'". Aborting');
-            die();
+        if ($config->project === null) {
+            die("Usage : exakat load -p project\nAborting\n");
+        } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
+            throw new \Exceptions\NoSuchProject($config->project);
+        } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
+            throw new \Exceptions\NoCodeInProject($config->project);
         }
 
         $this->checkTokenLimit();
 
         $this->php = new \Phpexec();
         if (!$this->php->isValid()) {
-            die("This PHP binary is not valid for running Exakat.\n");
+            die("This PHP binary is not valid for running Exakat. Run 'doctor' to get more info.");
         }
         $this->php->getTokens();
 

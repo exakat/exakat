@@ -31,13 +31,11 @@ class Clean extends Tasks {
 
     public function run(\Config $config) {
         $path = $config->projects_root.'/projects/'.$config->project;
-        
-        if ($config->project == 'default') {
-            die("analyze require -p <project> option. Aborting\n");
-        }
 
-        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
-            die("Project '$config->project' doesn't exist in projects folder. Aborting\n");
+        if ($config->project === null || $config->project === 'default') {
+            die("Usage : exakat clean -p project\nAborting\n");
+        } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
+            throw new \Exceptions\NoSuchProject($config->project);
         }
         
         $dirsToErase = array('log',

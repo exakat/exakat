@@ -83,9 +83,7 @@ class Test extends Tasks {
             
             \Config::pop();
         } catch (\Exception $e) {
-            echo "Error while running the Analyze $theme \n",
-                 $e->getMessage();
-            die();
+            die("Error while running the Analyze $theme \n" . $e->getMessage());
         }
 
         display("Analyzed project\n");

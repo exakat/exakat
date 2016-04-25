@@ -131,8 +131,7 @@ class Report2 extends Tasks {
             
             --$max;
             if ($max == 0) {
-                display("Waited for Project/Dump, but it never came. Try again later\n");
-                die();
+                die("Waited for Project/Dump, but it never finished. Try again later\n");
             }
         }
     }

@@ -29,13 +29,11 @@ class Server extends Tasks {
     public function run(\Config $config) {
         if ($config->stop === true) {
             $display = @file_get_contents('http://localhost:7447/stop/');
-            display('Shut down server ('.$display.')');
-            die();
+            die('Shut down server ('.$display.')');
         }
         
         if (file_exists($config->dir_root.'/projects/index.php')) {
-            display('A server is already running. Aborting.');
-            die();
+            die('A server is already running. Aborting.');
         }
 
         display('Copy router server');

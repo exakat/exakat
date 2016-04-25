@@ -36,18 +36,17 @@ class Upgrade extends Tasks {
         $html = file_get_contents('http://dist.exakat.io/versions/index.php', true, $context);
 
         if (empty($html)) {
-            print "Unable to check last version. Try again later.\n";
-            exit;
+            die( "Unable to check last version. Try again later.\n");
         }
         
-        preg_match('/Download exakat version (\d+\.\d+\.\d+) \(Latest\)/s', $html, $r);
+        preg_match('/Download exakat version (\d+\.\d+\.\d+) \(Latest\)/s', $html, $latest);
+        $latest = $latest[1];
         
-        if (version_compare(\Exakat::VERSION, $r[1]) < 0) {
-            print "A new version of exakat is available : current : ".\Exakat::VERSION.", latest: $r[1])\n";
+        if (version_compare(\Exakat::VERSION, $latest) < 0) {
+            print "A new version of exakat is available : current : ".\Exakat::VERSION.", latest: ".$latest.")\n";
             if ($config->update === true) {
                 if (!$config->isPhar) {
-                    print "This command can only upgrade exakat as a PHAR archive.\n  If you haved installed exakat from source, do a git pull\nAborting upgrade\n";
-                    exit;
+                    die( "This command can only upgrade exakat as a PHAR archive.\n  If you haved installed exakat from source, do a git pull\nAborting upgrade\n");
                 }
 
                 display( "  Updating to latest version.\n");
@@ -57,8 +56,7 @@ class Upgrade extends Tasks {
                 $sha256 = $r[1];
                 
                 if (hash('sha256', $phar) !== $sha256) {
-                    print "Error while checking exakat.phar's checksum. Aborting update. Please, try again\n";
-                    exit;
+                    die( "Error while checking exakat.phar's checksum. Aborting update. Please, try again\n");
                 }
 
                 if (file_exists($config->projects_root.'/exakat.latest.phar')) {
@@ -70,21 +68,17 @@ class Upgrade extends Tasks {
                 display('Setting up exakat.phar');
                 unlink($config->projects_root.'/exakat.phar');
                 if (file_exists($config->projects_root.'/exakat.phar')) {
-                    print("Can't remove the current exakat binary. Please, remove it manually, and use the exakat.latest.phar instead\nAborting upgrade\n");
-                    exit;
+                    die("Can't remove the current exakat binary. Please, remove it manually, and use the exakat.latest.phar instead\nAborting upgrade\n");
                 }
                 rename($config->projects_root.'/exakat.latest.phar', $config->projects_root.'exakat.phar');
-                exit;
+                die("Upgraded to latest exakat version ($latest)");
             } else {
-                print "  You may run this command with -u option to upgrade to the latest exakat version.\n";
-                exit;
+                die( "  You may run this command with -u option to upgrade to the latest exakat version.\n");
             }
         } elseif (version_compare(\Exakat::VERSION, $r[1]) === 0) {
-            print "This is the latest version (".\Exakat::VERSION.")\n";
-            exit;
+            die( "This is the latest version (".\Exakat::VERSION.")\n");
         } else {
-            print "This version is ahead of the latest publication (Current : ".\Exakat::VERSION.", Latest: $r[1])\n";
-            exit;
+            die("This version is ahead of the latest publication (Current : ".\Exakat::VERSION.", Latest: $r[1])\n");
         }
     }
 }

@@ -121,10 +121,8 @@ class OnePage extends Tasks {
             rename($config->projects_root.'/projects/onepage/log/analyze.log',
                    $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
         } catch (\Exception $e) {
-            display( "Error while running the Analyze $theme \n".
-                 $e->getMessage());
             file_put_contents($config->projects_root.'/projects/onepage/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
-            die();
+            die("Error while running the Analyze $theme \n" . $e->getMessage());
         }
 
         display("Project analyzed\n");

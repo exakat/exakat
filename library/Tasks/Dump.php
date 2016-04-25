@@ -37,8 +37,7 @@ class Dump extends Tasks {
     
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
-            display('No such project as "'.$config->project.'"');
-            die();
+            throw new \Exceptions\NoSuchProject($config->project);
         }
         
         $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';

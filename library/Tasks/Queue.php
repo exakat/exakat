@@ -33,7 +33,7 @@ class Queue extends Tasks {
             fwrite($queuePipe, "quit\n");
             fclose($queuePipe);
 
-            exit();
+            die('Queue stopped');
         }
         if ($config->project != 'default') {
             if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
@@ -51,13 +51,11 @@ class Queue extends Tasks {
             fclose($queuePipe);
         } elseif (!empty($config->filename)) {
             if (!file_exists($config->projects_root.'/in/'.$config->filename.'.php')) {
-                display('No such file "'.$config->filename.'" in /in/ folder');
-                die();
+                die('No such file "'.$config->filename.'" in /in/ folder');
             }
 
             if (file_exists($config->projects_root.'/out/'.$config->filename.'.json')) {
-                display('Report already exists for "'.$config->filename.'" in /out/ folder');
-                die();
+                die('Report already exists for "'.$config->filename.'" in /out/ folder');
             }
 
             display('Adding file '.$config->project.' to the queue');

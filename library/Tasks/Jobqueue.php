@@ -83,9 +83,8 @@ class Jobqueue extends Tasks {
             if($job) {
                 switch($job) {
                     case 'quit' :
-                        display( "Received quit command. Bye\n");
                         $this->log->log('Quit jobQueue : '.time()."\n");
-                        die();
+                        die("Received quit command. Bye\n");
 
                     default:
                         if (file_exists($this->config->projects_root.'/in/'.$job.'.php')) {
