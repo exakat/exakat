@@ -1,4 +1,4 @@
-Version 0.6.2 (Long Armed Ape Monkey, Coming up)
+Version 0.6.3 (Intelligent Stone Monkey, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,26 @@ Version 0.6.2 (Long Armed Ape Monkey, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.6.2 (Long Armed Ape Monkey, 2016-04-25)
++ Architecture
+    + Fixed phar detection (based on ext/phar)
+    + Cleaned code with myself
++ Report
+    + New report format : clustergrammer
++ Analyzer
+    + New analyzer : same conditions in If / Then
+    + New analyzer : spot dead code in catch expressions
+    + Static loops now exclude methods usage
+    + Indirect variable expression are stricter
+    + preg_* Option e has better support for delimiters
+    + Upgraded Direct Injection in case of concatenation
+    + Detect Ellipsis when counting arguments
+    + Could use short assignation : avoid $a += $a + 3;
++ Tokenizer
+    + Sped up Typehint detection
+    + No indexing for T_STRING in properties
+    + Reduced errors from token_get_all() 
 
 Version 0.6.1 (Red Bottomed Horse Monkey, 2016-04-18)
 + Architecture
