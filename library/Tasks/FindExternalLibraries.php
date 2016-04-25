@@ -109,7 +109,7 @@ class FindExternalLibraries extends Tasks {
 
             if (!in_array($ext, $exts)) {
                 // Ignoring some file extensions for faster processing
-                continue; 
+                continue;
             } else {
                 $s = $this->process($config->projects_root.'/projects/'.$config->project.'/code'.substr($file, 1));
             }
