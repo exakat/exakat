@@ -176,28 +176,24 @@ abstract class Token {
     
     protected function isCompatible($version) {
         // this handles Any version of PHP
-        if ($this->phpVersion == 'Any') {
+        if ($this->phpVersion === 'Any') {
             return true;
         }
 
         // version and above
-        if ((substr($this->phpVersion, -1) == '+') && version_compare($version, $this->phpVersion) >= 0) {
+        if ((substr($this->phpVersion, -1) === '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
         }
 
         // up to version
-        if ((substr($this->phpVersion, -1) == '-') && version_compare($version, $this->phpVersion) <= 0) {
+        if ((substr($this->phpVersion, -1) === '-') && version_compare($version, $this->phpVersion) <= 0) {
             return true;
         }
 
         // version range 1.2.3-4.5.6
         if (strpos($this->phpVersion, '-') !== false) {
             list($lower, $upper) = explode('-', $this->phpVersion);
-            if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0);
         }
         
         // One version only
@@ -934,32 +930,28 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
 
     public function checkPhpVersion($version) {
         // this handles Any version of PHP
-        if ($this->phpVersion == 'Any') {
+        if ($this->phpVersion === 'Any') {
             return true;
         }
 
         // version and above
-        if ((substr($this->phpVersion, -1) == '+') && version_compare($version, $this->phpVersion) >= 0) {
+        if ((substr($this->phpVersion, -1) === '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
         }
 
         // up to version
-        if ((substr($this->phpVersion, -1) == '-') && version_compare($version, $this->phpVersion) <= 0) {
+        if ((substr($this->phpVersion, -1) === '-') && version_compare($version, $this->phpVersion) <= 0) {
             return true;
         }
 
         // version range 1.2.3-4.5.6
         if (strpos($this->phpVersion, '-') !== false) {
             list($lower, $upper) = explode('-', $this->phpVersion);
-            if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0);
         }
         
         // One version only
-        if (version_compare($version, $this->phpVersion) == 0) {
+        if (version_compare($version, $this->phpVersion) === 0) {
             return true;
         }
         
