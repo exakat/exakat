@@ -32,9 +32,9 @@ class Load extends Tasks {
         
         if ($config->project === null) {
             die("Usage : exakat load -p project\nAborting\n");
-        } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
+        } elseif (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             throw new \Exceptions\NoSuchProject($config->project);
-        } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
+        } elseif (!file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
             throw new \Exceptions\NoCodeInProject($config->project);
         }
 
