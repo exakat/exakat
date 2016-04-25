@@ -47,6 +47,7 @@ class FindExternalLibraries extends Tasks {
                              'markdown_parser'  => self::FILE_ONLY,
                              'markdown'         => self::WHOLE_DIR,
                              'mpdf'             => self::WHOLE_DIR,
+                             'nusoap_base'      => self::FILE_ONLY,
                              'oauthtoken'       => self::WHOLE_DIR,
                              'passwordhash'     => self::FILE_ONLY,
                              'pchart'           => self::WHOLE_DIR,
