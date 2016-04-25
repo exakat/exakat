@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 25 Apr 2016 10:09:40 +0000
-.. comment: Generation hash : f9bfe493c261034861a143ddf9da3cb1738bb6ec
+.. comment: Generation date : Mon, 25 Apr 2016 10:49:44 +0000
+.. comment: Generation hash : cbe88a708bbc18ca8b57179160b4584a2795d047
 
 
 .. _$http\_raw\_post\_data:
@@ -294,6 +294,24 @@ Some functions have several names, and both may be used the same way. However, o
 
 
 
+.. _all-uppercase-variables:
+
+All Uppercase Variables
+#######################
+
+
+Usually, global variables are all in uppercase, so as to differentiate them easily. Try to use lowercase variables, $camelCase, $sturdyCase or $snake\_case.
+
++--------------+------------------------------------------------+
+| Command Line | Variables/VariableUppercase                    |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _already-parents-interface:
 
 Already Parents Interface
@@ -501,6 +519,24 @@ List of all the integer values using the binary format, such as 0b10 or 0B0101.
 +--------------+---------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
+
+
+
+.. _bracketless-blocks:
+
+Bracketless Blocks
+##################
+
+
+PHP allows one liners as for/foreach/while loops, or as then/else expressions. It is generally considered a bad practice, as readability is lower and there are non-négligeable risk of excluding from the loop the next instruction.
+
++--------------+------------------------------------------------+
+| Command Line | Structures/Bracketless                         |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -720,13 +756,13 @@ The spotted classes are used with a different case than their definition. While 
 
 Most of the time, this is also a violation of coding conventions.
 
-+--------------+-------------------+
-| Command Line | Classes/WrongCase |
-+--------------+-------------------+
-| clearPHP     |                   |
-+--------------+-------------------+
-| Analyzers    | :ref:`Analyze`    |
-+--------------+-------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Classes/WrongCase                                              |
++--------------+----------------------------------------------------------------+
+| clearPHP     |                                                                |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -832,6 +868,7 @@ In the following conditional structures, expressions were found that are common 
 
 
 may be rewritten in : 
+
 .. code-block:: php
 
    <?php
@@ -984,6 +1021,24 @@ As such, they should be PHP constants (build with define or const), or included 
 
 
 
+.. _constant-comparison:
+
+Constant Comparison
+###################
+
+
+The code seems to follows the convention of putting constant on one of the side of the comparison (either $x == 2 or 2 == $x). This is a list of the violations of this convention.
+
++--------------+------------------------------------------------+
+| Command Line | Structures/ConstantComparisonConsistance       |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _constant-scalar-expressions:
 
 Constant Scalar Expressions
@@ -1132,6 +1187,26 @@ Self keywords refers to the current class, or any of its parents. Using it is ju
 +--------------+-----------------------+
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
+
+
+
+.. _curly-arrays:
+
+Curly Arrays
+############
+
+
+It is possible to access individual elements in an array by using its offset between square brackets [] or curly brackets {}. 
+
+Curly brackets are seldom used, and will probably confuse or surprise the reader. It is recommended not to used them.
+
++--------------+------------------------------------------------+
+| Command Line | Arrays/CurlyArrays                             |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -1334,6 +1409,24 @@ Twice the same call in a row. This is worth a check.
 
 
 
+.. _echo-or-print:
+
+Echo Or Print
+#############
+
+
+Echo or print, this project made a clear choice, but forgot a few spots.
+
++--------------+------------------------------------------------+
+| Command Line | Structures/EchoPrintConsistance                |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _echo-with-concat:
 
 Echo With Concat
@@ -1526,6 +1619,31 @@ Declaring a namespace in the code and not using it for structure declarations (c
 
 
 
+.. _empty-slots-in-arrays:
+
+Empty Slots In Arrays
+#####################
+
+
+PHP tolerates the last element of an array to be empty.
+
+.. code-block:: php
+
+   <?php
+       $a = array( 1, 2, 3, );
+       $b =      [ 4, 5, ];
+   ?>
+
++--------------+------------------------------------------------+
+| Command Line | Arrays/EmptySlots                              |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _empty-traits:
 
 Empty Traits
@@ -1613,18 +1731,22 @@ Exception Order
 
 When catching exception, the most specialized exceptions must be in the early catch, and the most general exceptions must be in the later catch. Otherwise, the general catches intercept the exception, and the more specialized will not be read.
 
-<?php
+.. code-block:: php
 
-class A extends \Exception {}
-class B extends A {}
-
-try {
-    throw new A();
-} 
-catch(A $a1) { }
-catch(B $b2 ) { 
-    // Never reached, as previous Catch is catching the early worm
-}
+   <?php
+   
+   class A extends \Exception {}
+   class B extends A {}
+   
+   try {
+       throw new A();
+   } 
+   catch(A $a1) { }
+   catch(B $b2 ) { 
+       // Never reached, as previous Catch is catching the early worm
+   }
+   
+   ?>
 
 +--------------+------------------------------+
 | Command Line | Exceptions/AlreadyCaught     |
@@ -2240,6 +2362,44 @@ Code that is incompilable with older PHP versions means that the code is breakin
 
 
 
+.. _inconsistant-closing-tag:
+
+Inconsistant Closing Tag
+########################
+
+
+Project usually chose between always closing a PHP script with the final ?> tag, or never closing it. The second is recommended to avoid leaving some whitespaces at the end of the script, and, thus, leading to the infamous 'Headers already sent' error. 
+
+One way or another, if the project has a vast majority of either case, it will report the other here, so as to make things homogenous. If the project appears undecided about this issue, nothing will be reported.
+
++--------------+------------------------------------------------+
+| Command Line | Php/InconsistantClosingTag                     |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
+.. _incrementations:
+
+Incrementations
+###############
+
+
+Incrementing a variable should be done with ++ or -- operator. Any other way, like $x = $x + 1; or $y += 1; may be avoided.
+
++--------------+------------------------------------------------+
+| Command Line | Structures/PlusEgalOne                         |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _indices-are-int-or-string:
 
 Indices Are Int Or String
@@ -2277,6 +2437,28 @@ Those code will raise a PHP fatal error at execution time : 'Cannot instantiate 
 +--------------+------------------------------------+
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
+
+
+
+.. _interpolation:
+
+Interpolation
+#############
+
+
+The following strings contain variables that are will be replaced. However, the following characters are ambiguous, and may lead to confusion. 
+
+For example, "$x[1]->b".will be read by PHP as $x[1].\->b" and not like "{$x[1]->b}". 
+
+It is advised to add curly brackets around those structures to make them non-ambiguous.
+
++--------------+------------------------------------------------+
+| Command Line | Type/StringInterpolation                       |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -2593,6 +2775,28 @@ It is recommended to avoid declaring several times the same class in the code. A
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
+
+
+
+.. _multiple-classes-in-one-file:
+
+Multiple Classes In One File
+############################
+
+
+It is regarded as a bad practice to cram more than one class per file. This is usually done to make life of \_\_autoload() easier. 
+
+It is often difficult to find class foo in the bar.php file. This is also the case for interfaces and traits.
+
+One good reason to have multiple classes in one file is to reduce include time by providing everything into one nice include.
+
++--------------+------------------------------------------------+
+| Command Line | Classes/MultipleClassesInFile                  |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -3272,6 +3476,26 @@ It is recommended to make index a real string (with ' or "), or to define the co
 
 
 
+.. _non-lowercase-keywords:
+
+Non-lowercase Keywords
+######################
+
+
+Usual convention is to write PHP keywords (like as, foreach, switch, case, break, etc.) all in lowercase. 
+
+PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many.
+
++--------------+------------------------------------------------+
+| Command Line | Php/UpperCaseKeyword                           |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _not-definitions-only:
 
 Not Definitions Only
@@ -3307,6 +3531,24 @@ This is a wrongly done type casting to boolean : !!($x) is (boolean) $x.
 +--------------+-----------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
+
+
+
+.. _not-same-name-as-file:
+
+Not Same Name As File
+#####################
+
+
+The class, trait or interface bears a name that is not the same than the file that defines it.
+
++--------------+------------------------------------------------+
+| Command Line | Classes/NotSameNameAsFile                      |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -4143,6 +4385,7 @@ Write :
 
 
 Don't write :  
+
 .. code-block:: php
 
    <?php
@@ -4176,6 +4419,24 @@ Php reserved names for class/trait/interface. They won't be available anymore in
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------+
+
+
+
+.. _return-with-parenthesis:
+
+Return With Parenthesis
+#######################
+
+
+PHP tolerates parenthesis for the argument of a return statement, but it is recommended not to use them.
+
++--------------+------------------------------------------------+
+| Command Line | Php/ReturnWithParenthesis                      |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -4357,6 +4618,27 @@ List of all arrays written the new PHP 5.4 short syntax. They mean that it won't
 +--------------+---------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
+
+
+
+.. _should-be-single-quote:
+
+Should Be Single Quote
+######################
+
+
+Static content inside a string, that has no single quotes nor escape sequence (such as \n or \t),
+ should be using single quote delimiter, instead of double quote. 
+
+If you have too many of them, don't loose your time switching them all. If you have a few of them, it may be good for consistence.
+
++--------------+-----------------------------------------------------------------------------------------------+
+| Command Line | Type/ShouldBeSingleQuote                                                                      |
++--------------+-----------------------------------------------------------------------------------------------+
+| clearPHP     | `no-double-quote <https://github.com/dseguy/clearPHP/tree/master/rules/no-double-quote.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>`                                                |
++--------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -4828,6 +5110,26 @@ If the difference may be very small, it requires a better way to mesure time dif
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
+
+
+
+.. _true-false-inconsistant-case:
+
+True False Inconsistant Case
+############################
+
+
+Usually, PHP projects choose between ALL CAPS True/False, or all lowercase True/False. Sometimes, the project will have no recommendations. 
+
+When your project use a vast majority of one of the convention, then the analyzer will report all remaining inconsistantly cased constant.
+
++--------------+------------------------------------------------+
+| Command Line | Constants/InconsistantCase                     |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -5527,6 +5829,24 @@ List of use statement that are not used in the following code : they may be remo
 
 
 
+.. _unusual-case-for-php-functions:
+
+Unusual Case For PHP Functions
+##############################
+
+
+Usually, PHP functions are written all in lower case.
+
++--------------+------------------------------------------------+
+| Command Line | Php/UpperCaseFunction                          |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _use-===-null:
 
 Use === null
@@ -5647,13 +5967,13 @@ Use With Fully Qualified Name
 
 PHP manual recommends not to use fully qualified name (starting with \) when using the 'use' statement : they are "the leading backslash is unnecessary and not recommended, as import names must be fully qualified, and are not processed relative to the current namespace".
 
-+--------------+------------------------------------+
-| Command Line | Namespaces/UseWithFullyQualifiedNS |
-+--------------+------------------------------------+
-| clearPHP     |                                    |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Namespaces/UseWithFullyQualifiedNS                             |
++--------------+----------------------------------------------------------------+
+| clearPHP     |                                                                |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -5692,13 +6012,13 @@ define() function is useful when the constant is not known at compile time, or w
      echo b;
    ?>
 
-+--------------+----------------------------+
-| Command Line | Constants/ConstRecommended |
-+--------------+----------------------------+
-| clearPHP     |                            |
-+--------------+----------------------------+
-| Analyzers    | :ref:`Analyze`             |
-+--------------+----------------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Constants/ConstRecommended                                     |
++--------------+----------------------------------------------------------------+
+| clearPHP     |                                                                |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -6222,6 +6542,44 @@ The expected parameter is not the correct type. Check PHP documentation to know 
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
+
+
+
+.. _yoda-comparison:
+
+Yoda Comparison
+###############
+
+
+Yoda comparison is a way to write conditions which places literal values on the left side. 
+
+.. code-block:: php
+
+   <?php
+     if (1 == $a) {
+       // Then condition
+     } 
+   ?>
+
+
+The objective is to avoid mistaking a comparison to an assignation. If the comparison operateur is mistaken, but the literal is on the left, then an error will be triggered, instead of a silent bug. 
+
+.. code-block:: php
+
+   <?php
+       // error in comparison! 
+       if ($a = 1) {
+           // Then condition
+       } 
+   ?>
+
++--------------+------------------------------------------------+
+| Command Line | Structures/YodaComparison                      |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 

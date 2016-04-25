@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 25 Apr 2016 10:09:40 +0000
-.. comment: Generation hash : f9bfe493c261034861a143ddf9da3cb1738bb6ec
+.. comment: Generation date : Mon, 25 Apr 2016 10:49:44 +0000
+.. comment: Generation hash : cbe88a708bbc18ca8b57179160b4584a2795d047
 
 
 .. _analyze:
@@ -307,6 +307,34 @@ Total : 243 analysis
 * :ref:`preg\_match\_all() Flag <preg\_match\_all()-flag>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`var\_dump()... Usage <var\_dump()...-usage>`
+
+.. _coding-conventions:
+
+Coding Conventions
+++++++++++++++++++
+
+Total : 20 analysis
+
+* :ref:`All Uppercase Variables <all-uppercase-variables>`
+* :ref:`Bracketless Blocks <bracketless-blocks>`
+* :ref:`Class Name Case Difference <class-name-case-difference>`
+* :ref:`Constant Comparison <constant-comparison>`
+* :ref:`Curly Arrays <curly-arrays>`
+* :ref:`Echo Or Print <echo-or-print>`
+* :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
+* :ref:`Inconsistant Closing Tag <inconsistant-closing-tag>`
+* :ref:`Incrementations`
+* :ref:`Interpolation`
+* :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
+* :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
+* :ref:`Not Same Name As File <not-same-name-as-file>`
+* :ref:`Return With Parenthesis <return-with-parenthesis>`
+* :ref:`Should Be Single Quote <should-be-single-quote>`
+* :ref:`True False Inconsistant Case <true-false-inconsistant-case>`
+* :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
+* :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
+* :ref:`Use const <use-const>`
+* :ref:`Yoda Comparison <yoda-comparison>`
 
 .. _compatibilityphp53:
 
