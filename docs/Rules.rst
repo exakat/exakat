@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 18 Apr 2016 12:13:02 +0000
-.. comment: Generation hash : 397a53d2f5b908369371b771df79433868b1e49b
+.. comment: Generation date : Mon, 25 Apr 2016 10:09:40 +0000
+.. comment: Generation hash : f9bfe493c261034861a143ddf9da3cb1738bb6ec
 
 
 .. _$http\_raw\_post\_data:
@@ -4199,6 +4199,43 @@ With those tests (by default), the certificate is verified, and if it isn't vali
 
 
 
+.. _same-conditions:
+
+Same Conditions
+###############
+
+
+Several If then else structures are chained, and some conditions are identical. The latter will be ignored.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($a == 1) { doSomething(); }
+   elseif ($b == 1) { doSomething(); }
+   elseif ($c == 1) { doSomething(); }
+   elseif ($a == 1) { doSomething(); }
+   else {}
+   
+   // Also works on if then else if chains
+   if ($a == 1) { doSomething(); }
+   else if ($b == 1) { doSomething(); }
+   else if ($c == 1) { doSomething(); }
+   else if ($a == 1) { doSomething(); }
+   else {}
+   
+   ?>
+
++--------------+---------------------------+
+| Command Line | Structures/SameConditions |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
+
+
 .. _scalar-typehint-usage:
 
 Scalar Typehint Usage
@@ -4320,27 +4357,6 @@ List of all arrays written the new PHP 5.4 short syntax. They mean that it won't
 +--------------+---------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
-
-
-
-.. _should-be-single-quote:
-
-Should Be Single Quote
-######################
-
-
-Static content inside a string, that has no single quotes nor escape sequence (such as \n or \t),
- should be using single quote delimiter, instead of double quote. 
-
-If you have too many of them, don't loose your time switching them all. If you have a few of them, it may be good for consistence.
-
-+--------------+-----------------------------------------------------------------------------------------------+
-| Command Line | Type/ShouldBeSingleQuote                                                                      |
-+--------------+-----------------------------------------------------------------------------------------------+
-| clearPHP     | `no-double-quote <https://github.com/dseguy/clearPHP/tree/master/rules/no-double-quote.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                |
-+--------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -4850,6 +4866,26 @@ Resources are created, but never checked before being used. This is not safe.
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _undefined-caught-exceptions:
+
+Undefined Caught Exceptions
+###########################
+
+
+Those are exceptions that are caught in the code, but are not defined in the application. 
+
+They may be externally defined, such as in core PHP, extensions or libraries. Make sure those exceptions are usefull to your application : otherwise, they are dead code.
+
++--------------+-------------------------------+
+| Command Line | Exceptions/CaughtButNotThrown |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`  |
++--------------+-------------------------------+
 
 
 
@@ -5419,13 +5455,13 @@ The following methods are never called as methods. They are probably dead code.
 
 
 
-.. _unused-static-methods:
+.. _unused-private-methods:
 
-Unused Static Methods
-#####################
+Unused Private Methods
+######################
 
 
-List of all static methods that are not used. This looks like dead code.
+List of all private methods that are not used. This looks like dead code.
 
 +--------------+----------------------------------------------+
 | Command Line | Classes/UnusedPrivateMethod                  |

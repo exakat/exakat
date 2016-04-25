@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 18 Apr 2016 12:13:02 +0000
-.. comment: Generation hash : 397a53d2f5b908369371b771df79433868b1e49b
+.. comment: Generation date : Mon, 25 Apr 2016 10:09:40 +0000
+.. comment: Generation hash : f9bfe493c261034861a143ddf9da3cb1738bb6ec
 
 
 .. _analyze:
@@ -209,10 +209,10 @@ Total : 243 analysis
 * :ref:`Redefined Default <redefined-default>`
 * :ref:`Relay Function <relay-function>`
 * :ref:`Repeated print() <repeated-print()>`
+* :ref:`Same Conditions <same-conditions>`
 * :ref:`Sequences In For <sequences-in-for>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
 * :ref:`Short Open Tags <short-open-tags>`
-* :ref:`Should Be Single Quote <should-be-single-quote>`
 * :ref:`Should Chain Exception <should-chain-exception>`
 * :ref:`Should Typecast <should-typecast>`
 * :ref:`Should Use $this <should-use-$this>`
@@ -258,7 +258,7 @@ Total : 243 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
-* :ref:`Unused Static Methods <unused-static-methods>`
+* :ref:`Unused Private Methods <unused-private-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Trait <unused-trait>`
 * :ref:`Unused Use <unused-use>`
@@ -594,13 +594,14 @@ Total : 36 analysis
 Dead code
 +++++++++
 
-Total : 19 analysis
+Total : 20 analysis
 
 * :ref:`Cant Extend Final <cant-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
 * :ref:`Empty Namespace <empty-namespace>`
 * :ref:`Exception Order <exception-order>`
 * :ref:`Locally Unused Property <locally-unused-property>`
+* :ref:`Undefined Caught Exceptions <undefined-caught-exceptions>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Catch <unresolved-catch>`
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
@@ -612,7 +613,7 @@ Total : 19 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
-* :ref:`Unused Static Methods <unused-static-methods>`
+* :ref:`Unused Private Methods <unused-private-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Use <unused-use>`
 
