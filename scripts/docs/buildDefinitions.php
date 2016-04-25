@@ -20,8 +20,22 @@
  *
 */
 
+$recipes = ["Analyze",
+            "CompatibilityPHP71",
+            "CompatibilityPHP70",
+            "CompatibilityPHP56",
+            "CompatibilityPHP55",
+            "CompatibilityPHP54",
+            "CompatibilityPHP53",
+            "Analyze",
+            "Security",
+            "Performances",
+            "Dead code",
+            "Coding Conventions",
+            ];
 
 $text = '';
+$recipesList = '"'.join('", "', $recipes).'"';
 
 $sqlite = new \Sqlite3('data/analyzers.sqlite');
 
@@ -31,18 +45,7 @@ $query = 'SELECT a.folder || "/" || a.name AS analyzer, GROUP_CONCAT(c.name) ana
                     ON c.id = ac.id_categories
                 JOIN analyzers a
                     ON a.id = ac.id_analyzer
-                WHERE c.name IN ("Analyze",
-                                 "CompatibilityPHP71",
-                                 "CompatibilityPHP70",
-                                 "CompatibilityPHP56",
-                                 "CompatibilityPHP55",
-                                 "CompatibilityPHP54",
-                                 "CompatibilityPHP53",
-                                 "Analyze",
-                                 "Security",
-                                 "Performances",
-                                 "Dead code"
-                                 )
+                WHERE c.name IN ('.$recipesList.')
                 GROUP BY a.name';
 $res = $sqlite->query($query);
 $a2themes = [];
@@ -56,18 +59,7 @@ $query = 'SELECT c.name, GROUP_CONCAT(a.folder || "/" || a.name) analyzers
                     ON c.id = ac.id_categories
                 JOIN analyzers a
                     ON a.id = ac.id_analyzer
-                WHERE c.name IN ("Analyze",
-                                 "CompatibilityPHP71",
-                                 "CompatibilityPHP70",
-                                 "CompatibilityPHP56",
-                                 "CompatibilityPHP55",
-                                 "CompatibilityPHP54",
-                                 "CompatibilityPHP53",
-                                 "Analyze",
-                                 "Security",
-                                 "Performances",
-                                 "Dead code"
-                                 )
+                WHERE c.name IN ('.$recipesList.')
                 GROUP BY c.name';
 
 $res = $sqlite->query($query);
