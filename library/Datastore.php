@@ -333,7 +333,8 @@ SQLITE;
                 $createTable = <<<SQLITE
 CREATE TABLE files (
   id INTEGER PRIMARY KEY,
-  file TEXT
+  file TEXT,
+  tokens INTEGER
 );
 SQLITE;
                 break;

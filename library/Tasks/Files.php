@@ -96,6 +96,7 @@ class Files extends Tasks {
         $files = $this->rglob( '.');
         chdir($d);
 
+        $store = array();
         foreach($files as $id => &$file) {
             $file = substr($file, 1);
             $ext = pathinfo($file, PATHINFO_EXTENSION);
@@ -112,20 +113,18 @@ class Files extends Tasks {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[] = array('file' => $file, 'reason' => 'Ignored dir');
+            } elseif (($count = $php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file)) < 2) {
+                unset($files[$id]);
+                $ignoredFiles[] = array('file' => $file, 'reason' => 'Not compilable with '.$php->getActualVersion());
             } else {
-                // Check for compilation
-                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
-                    unset($files[$id]);
-                    $ignoredFiles[] = array('file' => $file, 'reason' => 'Not compilable with '.$php->getActualVersion());
-                }
+                $store[] = ['file' => $file, 'tokens' => $count];
             }
         }
 
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
-        $this->datastore->addRow('files', array_map(function ($a) {
-                return array('file'   => $a);
-            }, $files));
+        $this->datastore->addRow('files', $store);
         $this->datastore->reload();
+        unset($store);
 
         display('Counting files');
         // Also refining the file list with empty, one-tokened and incompilable files.
