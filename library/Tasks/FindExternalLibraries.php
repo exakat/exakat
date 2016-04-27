@@ -52,6 +52,7 @@ class FindExternalLibraries extends Tasks {
                              'passwordhash'     => self::FILE_ONLY,
                              'pchart'           => self::WHOLE_DIR,
                              'pclzip'           => self::FILE_ONLY,
+                             'phppowerpoint'    => self::PARENT_DIR,
                              'gacl'             => self::WHOLE_DIR,
                              'propel'           => self::PARENT_DIR,
                              'gettext_reader'   => self::WHOLE_DIR,
