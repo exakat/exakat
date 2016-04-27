@@ -34,7 +34,7 @@ class Clean extends Tasks {
 
         if ($config->project === null || $config->project === 'default') {
             die("Usage : exakat clean -p project\nAborting\n");
-        } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
+        } elseif (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             throw new \Exceptions\NoSuchProject($config->project);
         }
         
