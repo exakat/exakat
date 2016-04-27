@@ -96,7 +96,7 @@ class _Default extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Default::$operators,
                                               'atom' => 'none'),
                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  2 => array('atom' => array('Sequence')),
+                                  2 => array('atom'  => 'Sequence'),
                                   3 => array('token' => $finalToken),
         );
         
