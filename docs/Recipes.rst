@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 25 Apr 2016 10:49:44 +0000
-.. comment: Generation hash : cbe88a708bbc18ca8b57179160b4584a2795d047
+.. comment: Generation date : Fri, 29 Apr 2016 15:07:05 +0000
+.. comment: Generation hash : 738327bf1f3181d058cd0b36570cf14995be4262
 
 
 .. _analyze:
@@ -62,7 +62,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 243 analysis
+Total : 246 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -192,6 +192,7 @@ Total : 243 analysis
 * :ref:`One Variable String <one-variable-string>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
 * :ref:`Or Die <or-die>`
+* :ref:`Overwriting Variable <overwriting-variable>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`Overwritten Literals <overwritten-literals>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
@@ -209,6 +210,7 @@ Total : 243 analysis
 * :ref:`Redefined Default <redefined-default>`
 * :ref:`Relay Function <relay-function>`
 * :ref:`Repeated print() <repeated-print()>`
+* :ref:`Return True False <return-true-false>`
 * :ref:`Same Conditions <same-conditions>`
 * :ref:`Sequences In For <sequences-in-for>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
@@ -280,6 +282,7 @@ Total : 243 analysis
 * :ref:`Useless Instructions <useless-instructions>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Useless Parenthesis <useless-parenthesis>`
+* :ref:`Useless Switch <useless-switch>`
 * :ref:`Useless Unset <useless-unset>`
 * :ref:`Useless return <useless-return>`
 * :ref:`Uses Default Values <uses-default-values>`
@@ -341,7 +344,7 @@ Total : 20 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 48 analysis
+Total : 49 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -377,6 +380,7 @@ Total : 48 analysis
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
 * :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
@@ -397,7 +401,7 @@ Total : 48 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 43 analysis
+Total : 44 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -430,6 +434,7 @@ Total : 43 analysis
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
@@ -448,7 +453,7 @@ Total : 43 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 41 analysis
+Total : 42 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -476,6 +481,7 @@ Total : 41 analysis
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
@@ -497,7 +503,7 @@ Total : 41 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 34 analysis
+Total : 35 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -521,6 +527,7 @@ Total : 34 analysis
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
@@ -539,7 +546,7 @@ Total : 34 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 31 analysis
+Total : 32 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -559,6 +566,7 @@ Total : 31 analysis
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
+* :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
@@ -691,4 +699,15 @@ Total : 17 analysis
 * :ref:`parse\_str() Warning <parse\_str()-warning>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`var\_dump()... Usage <var\_dump()...-usage>`
+
+.. _wordpress:
+
+Wordpress
++++++++++
+
+Total : 3 analysis
+
+* :ref:`No Global Modification <no-global-modification>`
+* :ref:`Nonce Creation <nonce-creation>`
+* :ref:`Wordpress/WpdbBestUsage`
 

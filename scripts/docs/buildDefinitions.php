@@ -32,6 +32,7 @@ $recipes = ["Analyze",
             "Performances",
             "Dead code",
             "Coding Conventions",
+            "Wordpress",
             ];
 
 $text = '';

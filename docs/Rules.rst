@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 25 Apr 2016 10:49:44 +0000
-.. comment: Generation hash : cbe88a708bbc18ca8b57179160b4584a2795d047
+.. comment: Generation date : Fri, 29 Apr 2016 15:07:05 +0000
+.. comment: Generation hash : 738327bf1f3181d058cd0b36570cf14995be4262
 
 
 .. _$http\_raw\_post\_data:
@@ -3154,6 +3154,24 @@ For example, glob() returns an array, unless some error happens, in which case i
 
 
 
+.. _no-global-modification:
+
+No Global Modification
+######################
+
+
+It is recommended not to modify directly any Wordpress globals, but to use the function API instead.
+
++--------------+--------------------------------+
+| Command Line | Wordpress/NoGlobalModification |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+
 .. _no-hardcoded-hash:
 
 No Hardcoded Hash
@@ -3496,6 +3514,24 @@ PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing 
 
 
 
+.. _nonce-creation:
+
+Nonce Creation
+##############
+
+
+Mark the creation of nonce by Wordpress
+
++--------------+-------------------------+
+| Command Line | Wordpress/NonceCreation |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Wordpress`        |
++--------------+-------------------------+
+
+
+
 .. _not-definitions-only:
 
 Not Definitions Only
@@ -3726,6 +3762,41 @@ Interrupting a script will leave the application with a blank page, will make yo
 +--------------+-------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                            |
 +--------------+-------------------------------------------------------------------------------------------+
+
+
+
+.. _overwriting-variable:
+
+Overwriting Variable
+####################
+
+
+Replacing the content of a variable by something different is prone to errors. For example, it is not obvious if the $text variable is plain text or HTML text. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Confusing
+   $text = htmlentities($text);
+   
+   // Better
+   $textHTML = htmlentities($text);
+   
+   ?>
+
+
+Besides, it is possible that the source is needed later, for extra processing. 
+
+Note that accumulators, like += .=  or [] etc., that are meant to collect lots of values with consistent type are OK.
+
++--------------+-----------------------+
+| Command Line | Variables/Overwriting |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
 
 
 
@@ -3985,6 +4056,24 @@ Those are variable indirect expressions that are interpreted differently between
 | clearPHP     |                                                                                                                                       |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _php-71-new-classes:
+
+Php 71 New Classes
+##################
+
+
+New classes, introduced in PHP 7.1 : they have to be removed from PHP code before PHP 7.1 may be run.
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php71NewClasses                                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -4376,6 +4465,7 @@ Repeated print()
 It is recommended to use echo with multiple arguments, or a concatenation with print, instead of multiple calls to print echo, when outputting several blob of text.
 
 Write : 
+
 .. code-block:: php
 
    <?php
@@ -4384,7 +4474,7 @@ Write :
    ?>
 
 
-Don't write :  
+Don\'t write :
 
 .. code-block:: php
 
@@ -4419,6 +4509,64 @@ Php reserved names for class/trait/interface. They won't be available anymore in
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------+
+
+
+
+.. _return-true-false:
+
+Return True False
+#################
+
+
+These conditional expressions return true/false, depending on the condition. This may be simplified by dropping the control structure alltogether.
+
+.. code-block:: php
+
+   <?php
+   
+   if (version\_compare($a, $b) >= 0) {
+       return true;
+   } else {
+       return false;
+   }
+   
+   ?>
+
+
+This may be simplified with : 
+
+.. code-block:: php
+
+   <?php
+   
+   return version\_compare($a, $b) >= 0;
+   
+   ?>
+
+
+This may be applied to assignations and ternary operators too.
+
+.. code-block:: php
+
+   <?php
+   
+   if (version\_compare($a, $b) >= 0) {
+       $a = true;
+   } else {
+       $a = false;
+   }
+   
+   $a = version\_compare($a, $b) >= 0 ? false : true;
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Structures/ReturnTrueFalse |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
 
 
 
@@ -6289,6 +6437,40 @@ Situations where parenthesis are not necessary, and may be removed.
 
 
 
+.. _useless-switch:
+
+Useless Switch
+##############
+
+
+This switch has only one case. It may very well be replaced by a ifthen structure.
+
+.. code-block:: php
+
+   <?php
+   switch($a) {
+       case 1:
+           doSomething();
+           break;
+   }
+   
+   // Same as 
+   
+   if ($a == 1) {
+       doSomething();
+   }
+   ?>
+
++--------------+--------------------------+
+| Command Line | Structures/UselessSwitch |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
+
 .. _useless-unset:
 
 Useless Unset
@@ -6444,6 +6626,24 @@ This code structure is quite old : it should be replace by the more modern and e
 +--------------+-------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Performances` |
 +--------------+-------------------------------------+
+
+
+
+.. _wordpress/wpdbbestusage:
+
+Wordpress/WpdbBestUsage
+#######################
+
+
+
+
++--------------+-------------------------+
+| Command Line | Wordpress/WpdbBestUsage |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Wordpress`        |
++--------------+-------------------------+
 
 
 
