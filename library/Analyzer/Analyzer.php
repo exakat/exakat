@@ -315,20 +315,11 @@ GREMLIN;
         // version range 1.2.3-4.5.6
         if (strpos($this->phpVersion, '-') !== false) {
             list($lower, $upper) = explode('-', $this->phpVersion);
-            if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0;
         }
         
         // One version only
-        if (version_compare($version, $this->phpVersion) == 0) {
-            return true;
-        }
-        
-        // Default behavior if we don't understand :
-        return false;
+        return version_compare($version, $this->phpVersion) == 0;
     }
 
     // @doc return the list of dependences that must be prepared before the execution of an analyzer
@@ -584,18 +575,18 @@ GREMLIN;
 
     public function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
-            foreach($analyzer as &$a) {
-                $a = self::getClass($analyzer);
+            foreach($analyzer as &$classes) {
+                $classes = self::getClass($analyzer);
             }
-            unset($a);
+            unset($classes);
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any() == false}', $analyzer);
         } else {
             if ($analyzer == 'self') {
-                $analyzer = $this->analyzer;
+                $analyzerClass = $this->analyzer;
             } else {
-                $analyzer = self::getClass($analyzer);
+                $analyzerClass = self::getClass($analyzer);
             }
-            $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any() == false}', $analyzer);
+            $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any() == false}', $analyzerClass);
         }
 
         return $this;
@@ -1970,13 +1961,6 @@ GREMLIN;
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
-                if (!isset($v->file)) {
-                    echo "Error in getArray() : Couldn't find the file\n$query\n",
-                         get_class($this),
-                         "\n",
-                         print_r($v, true);
-                    die();
-                }
                 $report[] = array('code' => $v->fullcode,
                                   'file' => $v->file,
                                   'line' => $v->line,

@@ -115,12 +115,11 @@ class Gremlin2 extends Graph {
         } // else (aka 0) is ignored (nothing to do)
     
         if (strlen($getString) > 20000) {
-            echo 'Query string too big for GET (', strlen($getString), ")\n",
+            throw new \Exceptions\GremlinException('Query string too big for GET (', strlen($getString), ")\n",
                  'Query : ',
                  $query,
                 "\n\n",
-                print_r($params, true);
-            die();
+                print_r($params, true));
         }
 
         $ch = curl_init();
@@ -156,16 +155,13 @@ class Gremlin2 extends Graph {
     public function queryOne($query, $params = [], $load = []) {
         $res = $this->query($query, $params, $load);
         if (!is_object($res)) {
-            die('Server is not responding');
+            throw \RuntimeException('Gremlin 2 server is not responding');
         }
     
         if (isset($res->results) && isset($res->results[0])) {
             return $res->results[0];
         } else {
-            echo 'Help needed in ', __METHOD__, "\n",
-                 "Query : '", $query, "'\n",
-                 var_dump($res, true);
-            die();
+            throw \RuntimeException('Gremlin 2 server didn\t return any results.');
         }
     }
 

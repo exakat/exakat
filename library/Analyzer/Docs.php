@@ -160,7 +160,6 @@ SQL;
         if ($folder !== null) {
             $query .= ' WHERE folder=:folder';
             $stmt = $this->sqlite->prepare($query);
-            
             $stmt->bindValue(':folder', $folder, SQLITE3_TEXT);
         } else {
             $stmt = $this->sqlite->prepare($query);
