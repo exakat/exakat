@@ -28,48 +28,60 @@ use Analyzer;
 class UselessGlobal extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Variables/VariableUsedOnceByContext',
-                     'Structures/UnusedGlobal');
+                     'Structures/UnusedGlobal',
+                     'Structures/ImplicitGlobal');
     }
     
     public function analyze() {
         // Global are unused if used only once
-        $inGlobals = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Variable"]].has("code", "\\\$GLOBALS").in("VARIABLE").has("atom", "Array").out("INDEX").has("atom", "String").transform{ '\$' + it.noDelimiter}.unique()
+        $globalVariables = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Global"]].out("GLOBAL").code.unique()
 GREMLIN
 );
+        $inGlobals = $this->query(<<<GREMLIN
+g.idx("atoms")[["atom":"Array"]].filter{ it.out("VARIABLE").has("code", "\\\$GLOBALS").any()}.out("INDEX").transform{ '\$' + it.noDelimiter}.unique()
+GREMLIN
+);
+
+        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
+        $superglobalsAsIndex = array_map(function($x) { return substr($x, 1); }, $superglobals);
+        
+        $globalsAsVariable = array_diff($globalVariables, $inGlobals);
         $this->atomIs('Global')
              ->outIs('GLOBAL')
-             ->analyzerIsNot('Structures/UnusedGlobal')
-            // search in $GLOBALS
-             ->codeIsNot($inGlobals)
+             ->codeIsNot($superglobals)
+             ->code($globalsAsVariable)
              ->eachCounted('it.fullcode', 1);
         $this->prepareQuery();
 
-        $globals = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Global"]].out("GLOBAL").has("atom", "Variable").has("token", "T_VARIABLE").transform{ it.code.substring(1, it.code.size())}.unique()
-GREMLIN
-);
+        $globalAsIndex = array_map(function($x) { return substr($x, 1); }, array_diff( $inGlobals, $globalVariables));
         $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->code('$GLOBALS', true)
              ->inIs('VARIABLE')
              ->outIs('INDEX')
              ->atomIs('String')
-             ->noDelimiterIsNot($globals)
+             ->noDelimiter($globalAsIndex)
              ->inIs('INDEX')
              ->eachCounted('it.fullcode', 1);
         $this->prepareQuery();
 
         // $_POST and co are not needed as super globals
-        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
         $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->code($superglobals);
         $this->prepareQuery();
-        
-        // used only once
 
-        // written only
+        $this->atomIs('Variable')
+             ->code('$GLOBALS', true)
+             ->inIs('VARIABLE')
+             ->atomIs('Array')
+             ->outIs('INDEX')
+             ->atomIs('String')
+             ->noDelimiter($superglobalsAsIndex);
+        $this->prepareQuery();
+
+        // written only ? 
     }
 }
 

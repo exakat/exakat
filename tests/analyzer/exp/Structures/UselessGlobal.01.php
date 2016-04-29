@@ -2,6 +2,10 @@
 
 $expected     = array('$GLOBALS[\'usedOnce1\']',
                       '$usedOnce2',
+                      '$GLOBALS[\'usedTwicegG\']', 
+                      '$GLOBALS[\'usedTwiceGg\']',
+                      '$usedTwicegG', 
+                      '$usedTwiceGg',
 );
 
 $expected_not = array('$GLOBALS[\'unusedGlobal2\']',
@@ -9,8 +13,6 @@ $expected_not = array('$GLOBALS[\'unusedGlobal2\']',
                       '$unusedGLobal2',
                       '$unusedGlobal',
                       '$GLOBALS[\'usedTwicegG\']', 
-                      '$GLOBALS[\'usedTwicegG\']', 
-                      '$GLOBALS[\'usedTwiceGg\']',
                       '$GLOBALS[\'usedTwiceGg\']'
 );
 
