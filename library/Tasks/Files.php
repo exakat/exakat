@@ -57,7 +57,6 @@ class Files extends Tasks {
                        'notCompilable70' => 'N/C',
                        'notCompilable71' => 'N/C',
                        ) ;
-        $unknown = array();
 
         if ($config->project === null) {
             die("Usage : exakat files -p project\nAborting\n");
@@ -285,15 +284,9 @@ class Files extends Tasks {
         display('Done');
         
         if ($config->json) {
-            if ($unknown) {
-                $stats['unknown'] = $unknown;
-            }
             echo json_encode($stats);
         } else {
             display_r($stats);
-            if ($unknown) {
-                display_r($unknown);
-            }
         }
         $this->datastore->addRow('hash', array('status' => 'Initproject'));
         $this->checkTokenLimit();
