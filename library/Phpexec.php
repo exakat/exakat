@@ -230,11 +230,7 @@ class Phpexec {
         $shell = preg_replace('/(PHP Warning|Warning|Strict Standards|PHP Warning|PHP Strict Standards|PHP Deprecated|Deprecated): .*?\n/i', '', $shell);
         $shell = trim($shell);
 
-        if (trim($shell) == 'No syntax errors detected in '.$file) {
-            return true;
-        } else {
-            return false;
-        }
+        return trim($shell) == 'No syntax errors detected in '.$file;
     }
     
     public function getWhiteCode() {

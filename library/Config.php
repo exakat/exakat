@@ -222,7 +222,6 @@ class Config {
                 self::$singleton = new self(array());
                 self::$stack[] = self::$singleton;
             }
-            return self::$singleton;
         } else {
             if (is_object($argv) && ($argv instanceof \Config)) {
                 self::$singleton = $argv;
@@ -230,8 +229,8 @@ class Config {
                 self::$singleton = new self($argv);
             }
             self::$stack[] = self::$singleton;
-            return self::$singleton;
         }
+        return self::$singleton;
     }
 
     static public function factorySingle($argv = array()) {
@@ -364,15 +363,10 @@ class Config {
             $id = array_search($key, $args);
             if ( $id !== false) {
                 if (isset($args[$id + 1])) {
-                    if (isset($optionsValue[$args[$id + 1]])) {
-                        // in case this option value is actually the next option (exakat -p -T)
-                        // We just ignore it
-                        unset($args[$id]);
-                    } else {
+                    unset($args[$id]);
+                    if (!isset($optionsValue[$args[$id + 1]])) {
                         // Normal case is here
                         $this->commandline[$config] = $args[$id + 1];
-
-                        unset($args[$id]);
                         unset($args[$id + 1]);
                     }
                 }
@@ -381,7 +375,7 @@ class Config {
 
         if (count($args) > 0) {
             $arg = array_shift($args);
-            if (null !== @self::$COMMANDS[$arg]) {
+            if (isset(self::$COMMANDS[$arg])) {
                 $this->commandline['command'] = $arg;
             } else {
                 array_unshift($args, $arg);
