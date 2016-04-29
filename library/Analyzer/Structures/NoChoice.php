@@ -52,16 +52,12 @@ class NoChoice extends Analyzer\Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('THEN')
              ->atomIs('Sequence')
-             ->is('count', 1)
-             ->outIs('ELEMENT')
-             ->savePropertyAs('fullcode', 'cdt')
-             ->inIs('ELEMENT')
+             ->raw('sideEffect{ sthen = []; it.out("ELEMENT").sort{it.rank}._().each{ sthen.add(it.fullcode); }}')
              ->inIs('THEN')
              ->outIs('ELSE')
              ->atomIs('Sequence')
-             ->is('count', 1)
-             ->outIs('ELEMENT')
-             ->samePropertyAs('fullcode', 'cdt')
+             ->raw('sideEffect{ selse = []; it.out("ELEMENT").sort{it.rank}._().each{ selse.add(it.fullcode); }}')
+             ->filter('sthen.join(";") == selse.join(";")')
              ->back('first');
         $this->prepareQuery();
     }

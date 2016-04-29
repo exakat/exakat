@@ -6,10 +6,10 @@ $expected     = array( '$a == 3 ? $a->method( ) : $a->method( )',
                       'if ($a == 1)  /**/  else  /**/ ',
                       'if ($a == 2)  /**/  else  /**/ ',
                       'if ($a == 3) : ; else : ; endif',
-                      'if ($a == 4) { /**/ } else { /**/ }');
+                      'if ($a == 4) { /**/ } else { /**/ }',
+                      'if ($c == 2) { /**/ } else { /**/ }');
 
 $expected_not = array('$c == 1 ? $b[1] : $b[3]',
-                      'if ($c == 1) echo $b[1]; else echo $b[3]',
-                      'if ($c == 2) {$b = strtolower($b[2]); $a++;} else {$b = strtolower($b[2]); $a++;}');
+                      'if ($c == 1) echo $b[1]; else echo $b[3]');
 
 ?>
