@@ -985,11 +985,7 @@ HTML;
 
         foreach($data as $value) {
             // @note This is the same getId() than in Section::getId()
-            if ($value['severity'] == '') {
-                $severity = $this->makeLink($value['name']);
-            } else {
-                $severity = $this->makeLink($value['name']);
-            }
+            $severity = $this->makeLink($value['name']);
             $html .= <<<HTML
                     <tr>
 						<td>$severity</td>

@@ -53,21 +53,8 @@ class Tokenizer extends Tasks {
         $regex2 = array();
         foreach($classes as $class) {
             $new = "Tokenizer\\$class";
-    
             $r = \Tokenizer\Token::getInstance($new, $this->gremlin, $config->phpversion);
-            $d = array_intersect($new::$operators, $tokenCounts);
-            
-            if ($new == 'Tokenizer\\FunctioncallArray') {
-                $regex[$class] = $r;
-            } elseif ($new == 'Tokenizer\\Sequence') {
-                $regex[$class] = $r;
-            } elseif (!empty($d)) {
-                if (in_array($new, array('Tokenizer\\Phpcodemiddle', 'Tokenizer\\Phpcode', ))) {
-                    $regex[$class] = $r;
-                } else {
-                    $regex[$class] = $r;
-                }
-            }
+            $regex[$class] = $r;
         }
 
         $this->log->log( "Finished loading classes");
