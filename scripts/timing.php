@@ -21,7 +21,7 @@
 */
 
 
-include('/Users/famille/.composer/vendor/autoload.php');
+include '/Users/famille/.composer/vendor/autoload.php';
 
 use mcordingley\Regression\Regression;
 use mcordingley\Regression\RegressionAlgorithm\LinearLeastSquares;

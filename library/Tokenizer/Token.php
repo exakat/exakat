@@ -193,7 +193,7 @@ abstract class Token {
         // version range 1.2.3-4.5.6
         if (strpos($this->phpVersion, '-') !== false) {
             list($lower, $upper) = explode('-', $this->phpVersion);
-            return (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0);
+            return version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0;
         }
         
         // One version only
@@ -947,7 +947,7 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
         // version range 1.2.3-4.5.6
         if (strpos($this->phpVersion, '-') !== false) {
             list($lower, $upper) = explode('-', $this->phpVersion);
-            return (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0);
+            return version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0;
         }
         
         // One version only
