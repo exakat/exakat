@@ -29,6 +29,7 @@ class ImplicitGlobal extends Analyzer\Analyzer {
     public function analyze() {
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 
+        // global $x
         $this->atomIs('Global')
              ->hasFunction()
              ->outIs('GLOBAL')
@@ -41,6 +42,24 @@ class ImplicitGlobal extends Analyzer\Analyzer {
                                                              .filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}.any() == false }')
              ->back('result');
         $this->prepareQuery();
+
+        // $GLOBALS['x']
+        $superglobalsNoDollar = array_map(function($x) { return substr($x, 1); }, $superglobals);
+        $this->atomIs('Variable')
+             ->codeIsNot($superglobals)
+             ->codeIsNot(array('$argv', '$argc'))
+             ->hasNoFunction()
+             ->hasNoClassTrait()
+             ->savePropertyAs('code', 'variable')
+             ->filter(<<<GREMLIN
+g.idx("atoms")[["atom":"Variable"]].has("code", "\\\$GLOBALS").in("VARIABLE").out("INDEX")
+                                   .filter{ "\\$" + it.noDelimiter == variable }
+                                   .any()
+GREMLIN
+)
+            ;
+        $this->prepareQuery();
+//                                                             .filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}
     }
 }
 
