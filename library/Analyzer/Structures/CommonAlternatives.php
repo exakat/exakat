@@ -24,6 +24,7 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class CommonAlternatives extends Analyzer\Analyzer {
+        // some expressions are common between two then / else block
         public function analyze() {
         $this->atomIs('Ifthen')
              ->outIs('THEN')
