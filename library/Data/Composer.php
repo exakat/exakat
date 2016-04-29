@@ -175,7 +175,7 @@ SQL;
             $min = substr($version, 1);
             
             $d = explode('.', $min);
-            $d[count($d) - 2]++;
+            ++$d[count($d) - 2];
             $d[count($d) - 1] = '0';
             $max = join('.', $d);
             
