@@ -30,8 +30,8 @@ class Typehint extends TokenAuto {
     public function _check() {
         // normal case for classes ($x,  or ($x) 
         $this->conditions = array( 0 => array('token'             => self::$operators,
-                                               'checkForTypehint' => array('Variable', 'Assignation'),
-                                               'property'         => array('association' => 'Function')
+                                              'checkForTypehint' => array('Variable', 'Assignation'),
+                                              'property'         => array('association' => 'Function')
                                                ),
         );
         

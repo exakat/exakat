@@ -3086,8 +3086,8 @@ filter{ it.out('NEXT').transform{
                it.out('NEXT').next().atom in ['Variable', 'Assignation']) {
         it.out('NEXT').next();
     } else {
-        // This has to be stopped, so we stay here, and the loop will fail next loop
-        it;
+        // This has to be stopped, so we go back one, and the loop will fail next time
+        it.in('NEXT').next();
     }
 }.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
 .loop(4){!(it.object.token in [$finalTokens])}{ it.object.token in [$finalTokens]}.any() 
