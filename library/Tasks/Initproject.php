@@ -172,21 +172,21 @@ INI;
                 // SVN
                 case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $this->config->svn === true) :
                     display('SVN initialization');
-                    $repositoryURL = $this->urlParts($repositoryURL);
-                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; svn checkout "'.escapeshellarg($repositoryURL).'" code');
+                    $repositoryURL = $this->escapeUrl($repositoryURL);
+                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // Bazaar
                 case ($this->config->bzr === true) :
                     display('Bazaar initialization');
-                    $repositoryURL = $this->urlParts($repositoryURL);
+                    $repositoryURL = $this->escapeUrl($repositoryURL);
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; bzr branch "'.escapeshellarg($repositoryURL).'" code');
                     break 1;
 
                 // HG
                 case ($this->config->hg === true) :
                     display('Mercurial initialization');
-                    $repositoryURL = $this->urlParts($repositoryURL);
+                    $repositoryURL = $this->escapeUrl($repositoryURL);
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; hg clone "'.escapeshellarg($repositoryURL).'" code');
                     break 1;
 
