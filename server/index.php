@@ -119,13 +119,12 @@ function project($path) {
             
             if (file_exists('./projects/'.$project.'/report')) {
                 $return['report'] = true;
+                $return['zip'] = true;
+
                 if (!file_exists('./projects/'.escapeshellarg($project).'/report')) {
                     shell_exec('cd ./projects/'.escapeshellarg($project).'; zip -c report.zip report > /dev/null 2>/dev/null &');
                     $return['zip'] = false;
                     $return['status'] = 'Archiving';
-                } else {
-                    $return['zip'] = true;
-                    // Not status anymore
                 }
             } else {
                 $return['status'] = 'Running';
