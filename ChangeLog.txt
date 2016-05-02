@@ -1,4 +1,4 @@
-Version 0.6.3 (Intelligent Stone Monkey, Coming up)
+Version 0.6.4 (Bull Demon King, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,26 @@ Version 0.6.3 (Intelligent Stone Monkey, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.6.3 (Jade Faced Princess, 2016-05-02)
++ Architecture
+    + Removed several useless pieces of code (self analysis)
+    + Added documentation for Wordpress Recipes
+    + Lengthened Cycle for tokenizer
++ Report
+    + Added bugfixes for PHP 7.0.6, 5.6.21, 5.5.35.
+    + Now reporting token counts per files 
++ Analyzer
+    + New analyzer : Spot variable that holds $_GET, $_POST, $_REQUEST or $_COOKIE values (internal)
+    + New analyzer : Report variables that are overwritten by themselves
+    + New analyzer : Report useless switch (empty, 1 case only)
+    + Upgraded NoChoice to handle larger sequences
+    + Upgraded Useless Global to handle global $x / $GLOBALS['x'] situations
+    + New analyzer : Wordpress Recipe : Unverified Nonce, Best Usage for $wpdb
+    + New analyzer : Void for PHP 7.1   
++ Tokenizer
+    + Fixed but with Typehint
+    + Added phppowerpoint class in external libraries
 
 Version 0.6.2 (Long Armed Ape Monkey, 2016-04-25)
 + Architecture
