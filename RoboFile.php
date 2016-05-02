@@ -680,13 +680,7 @@ SQL
                 ++$missing;
             }
 
-            $res = $sqlite->query('SELECT * FROM '.$child.'s');
-            $total = 0;
-            while($row = $res->fetchArray()) {
-                ++$total;
-            }
-
-            echo 'Found ', $missing / $total, $child, 's without parent ', $parent. "s\n";
+            echo 'Found ', $missing, ' ', $child, 's without parent ', $parent. "s\n";
         }
         echo "\n";
 
