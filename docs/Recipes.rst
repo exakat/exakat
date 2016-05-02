@@ -53,8 +53,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Fri, 29 Apr 2016 15:07:05 +0000
-.. comment: Generation hash : 738327bf1f3181d058cd0b36570cf14995be4262
+.. comment: Generation date : Mon, 02 May 2016 07:36:53 +0000
+.. comment: Generation hash : 4fb1b1c20cbe63c44f0a4cc416209521ddadb166
 
 
 .. _analyze:
@@ -709,5 +709,5 @@ Total : 3 analysis
 
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
-* :ref:`Wordpress/WpdbBestUsage`
+* :ref:`Wpdb Best Usage <wpdb-best-usage>`
 

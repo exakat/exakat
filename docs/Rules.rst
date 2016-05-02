@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 29 Apr 2016 15:07:05 +0000
-.. comment: Generation hash : 738327bf1f3181d058cd0b36570cf14995be4262
+.. comment: Generation date : Mon, 02 May 2016 07:36:53 +0000
+.. comment: Generation hash : 4fb1b1c20cbe63c44f0a4cc416209521ddadb166
 
 
 .. _$http\_raw\_post\_data:
@@ -6629,13 +6629,15 @@ This code structure is quite old : it should be replace by the more modern and e
 
 
 
-.. _wordpress/wpdbbestusage:
+.. _wpdb-best-usage:
 
-Wordpress/WpdbBestUsage
-#######################
+Wpdb Best Usage
+###############
 
 
+Wordpress database API ($wpdb) offers several eponymous methods to safely handle insert, delete, replace and update. 
 
+It is recommended to use them, instead of writing queries with concatenations.
 
 +--------------+-------------------------+
 | Command Line | Wordpress/WpdbBestUsage |
