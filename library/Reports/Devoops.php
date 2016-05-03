@@ -2053,7 +2053,7 @@ TEXT
         $return = $this->formatTextLead($description);
 
         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
-            $return .= $this->formatText('clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />', 'textLead');
+            $return .= $this->formatText('clearPHP : https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md', 'textLead');
         }
 
         $return .= $this->formatThemeList($analyzer->getThemes());
@@ -2222,7 +2222,7 @@ TEXT
     private function prepareText($text) {
         $html = nl2br(trim($text));
         
-        $html = preg_replace('$(https?://\S+)\.?\s$', '<a href=\"\1\">\1</a>', $html);
+        $html = preg_replace('$(https?://\S+)\.?(\s|)$', '<a href="\1">\1</a>', $html);
         
         // link functions/features to PHP manual
         if (preg_match_all('$[a-z_0-9]+\(\)$s', $html, $r)) {
