@@ -40,7 +40,8 @@ class DoubleAssignation extends Analyzer\Analyzer {
              ->samePropertyAs('fullcode', 'name')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->filter(' it.out.loop(1){true}{ it.object.atom == nameAtom}.has("fullcode", name).any() == false ')
+             ->atomIsNot('Functioncall')
+             ->filter(' it.out.loop(1){it.loops < 100}{ it.object.atom == nameAtom}.has("fullcode", name).any() == false ')
              ->back('first');
         $this->prepareQuery();
     }
