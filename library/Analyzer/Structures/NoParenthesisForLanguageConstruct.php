@@ -49,6 +49,20 @@ class NoParenthesisForLanguageConstruct extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // Yield
+        $this->atomIs('Yield')
+             ->outIs('YIELD')
+             ->atomIs('Parenthesis')
+             ->back('first');
+        $this->prepareQuery();
+
+        // Yield from
+        $this->atomIs('Yieldfrom')
+             ->outIs('YIELD')
+             ->atomIs('Parenthesis')
+             ->back('first');
+        $this->prepareQuery();
+
         // print, echo
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_PRINT', 'T_ECHO'))

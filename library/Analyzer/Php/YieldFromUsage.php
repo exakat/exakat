@@ -24,6 +24,8 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class YieldFromUsage extends Analyzer\Analyzer {
+    protected $phpVersion = '7.0+';
+    
     public function analyze() {
         $this->atomIs('Yieldfrom');
         $this->prepareQuery();
