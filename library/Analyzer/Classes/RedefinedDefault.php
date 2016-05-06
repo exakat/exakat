@@ -31,6 +31,7 @@ class RedefinedDefault extends Analyzer\Analyzer {
              ->atomIs('Visibility')
              ->outIs('DEFINE')
              ->savePropertyAs('propertyname', 'name')
+             ->atomIs('Assignation')
              ->_as('results')
              ->inIs('DEFINE')
              ->inIs('ELEMENT')
