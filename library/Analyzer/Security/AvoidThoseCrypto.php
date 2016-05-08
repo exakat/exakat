@@ -27,7 +27,7 @@ use Analyzer;
 
 class AvoidThoseCrypto extends Analyzer\Analyzer {
     public function analyze() {
-        // in hashing functions
+        // in ext/hash() functions
         $this->atomFunctionIs(Analyzer\Php\HashAlgos::$functions)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -35,8 +35,8 @@ class AvoidThoseCrypto extends Analyzer\Analyzer {
              ->noDelimiter(array('md2', 'md4', 'md5', 'crc32', 'crc32b', 'sha0', 'sha1'));
         $this->prepareQuery();
 
-        // in hashing functions
-        $this->atomFunctionIs(array('crypt', 'md5', 'md5_file', 'sha1_file', 'sha1', 'crc32'));
+        // as core functions
+        $this->atomFunctionIs(array('crypt', 'md5', 'md5_file', 'sha1_file', 'sha1', 'crc32', 'str_rot13'));
         $this->prepareQuery();
     }
 }
