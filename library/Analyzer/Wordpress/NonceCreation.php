@@ -31,6 +31,13 @@ class NonceCreation extends Analyzer\Analyzer {
              ->is('rank', 0)
              ->atomIs('String');
         $this->prepareQuery();
+
+        $this->atomFunctionIs('\\wp_nonce_field')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->is('rank', 1)
+             ->atomIs('String');
+        $this->prepareQuery();
     }
 }
 
