@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$global',
-                      '$global2');
+$expected     = array('$GLOBALS[\'global2\']',
+                      '$GLOBALS[\'onlyInGlobals\']');
 
 $expected_not = array('$notGlobal',
                       '$onlyInGlobals');
