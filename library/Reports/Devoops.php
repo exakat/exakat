@@ -31,10 +31,10 @@ class Devoops extends Reports {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
     
-    private $dump      = null; // Dump.sqlite
-    private $datastore = null; // Datastore.sqlite
+    protected $dump      = null; // Dump.sqlite
+    protected $datastore = null; // Datastore.sqlite
     
-    private $analyzers  = array(); // cache for analyzers [Title] = object
+    protected $analyzers  = array(); // cache for analyzers [Title] = object
     
     public function __construct() {
         parent::__construct();
@@ -112,7 +112,9 @@ class Devoops extends Reports {
         copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
-        $this->datastore = new \sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
+        display("Copied media files");
+        
+        $this->datastore = new \sqlite3($folder.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
         
         // Compatibility
         $compatibility = array('Compilation' => 'Compilation');
@@ -255,7 +257,7 @@ HTML;
     ////////////////////////////////////////////////////////////////////////////////////
     // Utilities
     ////////////////////////////////////////////////////////////////////////////////////
-    private function makeSummary($summary, $level = 0) {
+    protected function makeSummary($summary, $level = 0) {
         if ($level === 0) {
             $html = '<ul class="nav main-menu">';
 
@@ -573,7 +575,7 @@ HTML;
         return $text;
     }
     
-    private function formatHorizontal($data, $css) {
+    protected function formatHorizontal($data, $css) {
         static $counter;
         
         if (!isset($counter)) {
@@ -944,7 +946,7 @@ HTML;
         return $text;
     }
     
-    private function formatText($text, $style = '') {
+    protected function formatText($text, $style = '') {
         $text = $this->prepareText($text);
         
         if (!empty($style)) {
@@ -956,7 +958,7 @@ HTML;
         return '<p'.$class.'>'.$text."</p>\n";
     }
 
-    private function formatTextLead($text) {
+    protected function formatTextLead($text) {
         $text = $this->prepareText($text);
 
         return "<article><p class=\"lead\">".$text."</p></article>\n".
@@ -1005,7 +1007,7 @@ HTML;
         return $html;
     }
 
-    private function formatThemeList($list) {
+    protected function formatThemeList($list) {
         $html = 'This analyze is part of those themes : ';
         
         foreach($list as &$title) {
@@ -1104,7 +1106,7 @@ TEXT
         return $return;
     }
 
-    private function AnalyzersResultsCounts() {
+    protected function AnalyzersResultsCounts() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Label', 'Count', 'Severity');
@@ -1499,7 +1501,7 @@ TEXT
         return $return;
     }
 
-    private function AuditConfiguration() {
+    protected function AuditConfiguration() {
         $css = new \Stdclass();
         $css->displayTitles = false;
         $css->titles = array(0, 1);
@@ -1944,7 +1946,7 @@ TEXT
 
         $data = array();
         $res = $this->datastore->query('SELECT name AS Service, file AS File, homepage AS url FROM configFiles');
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (empty($row['url'])) {
                 $row['Home page'] = '';
             } else {
@@ -1972,7 +1974,7 @@ TEXT
 
         $data = array();
         $res = $this->datastore->query('SELECT library AS Library, file AS Folder FROM externallibraries ORDER BY library');
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $url = $externallibraries->{strtolower($row['Library'])}->homepage;
             if (empty($url)) {
                 $row['Home page'] = '';
@@ -2023,7 +2025,7 @@ SQL
         $data = array();
         $sqlQuery = 'SELECT fullcode AS Code, file AS File, line AS Line  FROM results WHERE analyzer="Structures/GlobalInGlobal" ORDER BY fullcode';
         $res = $this->sqlite->query($sqlQuery);
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = $row;
         }
         
@@ -2056,7 +2058,7 @@ TEXT
         $data = array();
         $sqlQuery = 'SELECT fullcode as Code, file AS File, line AS Line FROM results WHERE analyzer="'.$this->sqlite->escapeString($analyzer->getInBaseName()).'"';
         $res = $this->sqlite->query($sqlQuery);
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = $row;
         }
         $return .= $this->formatHorizontal($data, $css);
@@ -2081,7 +2083,7 @@ SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results
 
 SQL;
         $res = $this->sqlite->query($sqlQuery);
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['Analyzer']);
             $row['File'] = $analyzer->getDescription()->getName();
             $data[] = $row;
@@ -2091,7 +2093,7 @@ SQL;
         return $return;
     }
         
-    private function NonProcessedFiles() {
+    public function NonProcessedFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File', 'Reason');
@@ -2119,7 +2121,7 @@ TEXT
         return $return;
     }
     
-    private function ProcessedFiles() {
+    public function ProcessedFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
