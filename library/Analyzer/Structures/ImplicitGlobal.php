@@ -29,37 +29,34 @@ class ImplicitGlobal extends Analyzer\Analyzer {
     public function analyze() {
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 
-        // global $x
+        $globallyDeclared = $this->query('g.idx("atoms")[["atom":"Global"]].out("GLOBAL")
+                                            .has("atom", "Variable")
+                                            .filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}
+                                            .code');
+
+        // global $x (Global that is not declared as Global in the global space)
         $this->atomIs('Global')
              ->hasFunction()
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
              ->codeIsNot($superglobals)
              ->codeIsNot(array('$argv', '$argc'))
-             ->_as('result')
-             ->savePropertyAs('code', 'theGlobal')
-             ->raw('filter{ g.idx("atoms")[["atom":"Global"]].out("GLOBAL").filter{theGlobal == it.code}
-                                                             .filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}.any() == false }')
-             ->back('result');
+             ->codeIsNot($globallyDeclared);
         $this->prepareQuery();
 
         // $GLOBALS['x']
-        $superglobalsNoDollar = array_map(function($x) { return substr($x, 1); }, $superglobals);
+        $globallyDeclaredNoDollar = array_map(function($x) { return substr($x, 1); }, $globallyDeclared);
         $this->atomIs('Variable')
-             ->codeIsNot($superglobals)
-             ->codeIsNot(array('$argv', '$argc'))
-             ->hasNoFunction()
-             ->hasNoClassTrait()
-             ->savePropertyAs('code', 'variable')
-             ->filter(<<<GREMLIN
-g.idx("atoms")[["atom":"Variable"]].has("code", "\\\$GLOBALS").in("VARIABLE").out("INDEX")
-                                   .filter{ "\\$" + it.noDelimiter == variable }
-                                   .any()
-GREMLIN
-)
-            ;
+             ->code('$GLOBALS')
+             ->hasFunction()
+             ->inIs('VARIABLE')
+             ->atomIs('Array')
+             ->_as('results')
+             ->outIs('INDEX')
+             ->atomIs('String')
+             ->noDelimiterIsNot($globallyDeclaredNoDollar)
+             ->back('results');
         $this->prepareQuery();
-//                                                             .filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}
     }
 }
 
