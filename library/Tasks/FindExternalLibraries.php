@@ -30,48 +30,11 @@ class FindExternalLibraries extends Tasks {
     const COMPOSER_DIR = 4; // whole_dir + 4 levels (ex : fzaninoto/faker/src/Faker/Factory.php)
 
     // classic must be in lower case form.
-    private $classic = array('adoconnection'    => self::WHOLE_DIR,
-                             'bbq'              => self::WHOLE_DIR,
-                             'cpdf'             => self::WHOLE_DIR, // ezpdf
-                             'cakeplugin'       => self::PARENT_DIR, // cakephp
-                             'dompdf'           => self::PARENT_DIR,
-                             'fpdf'             => self::FILE_ONLY,
-                             'faker\\factory'   => self::COMPOSER_DIR,
-                             'graph'            => self::PARENT_DIR, // Jpgraph
-                             'html2pdf'         => self::WHOLE_DIR, // contains tcpdf
-                             'htmlpurifier'     => self::WHOLE_DIR,
-                             'http_class'       => self::WHOLE_DIR,
-                             'idna_convert'     => self::WHOLE_DIR,
-                             'lessc'            => self::FILE_ONLY,
-                             'magpierss'        => self::WHOLE_DIR,
-                             'markdown_parser'  => self::FILE_ONLY,
-                             'markdown'         => self::WHOLE_DIR,
-                             'mpdf'             => self::WHOLE_DIR,
-                             'nusoap_base'      => self::FILE_ONLY,
-                             'oauthtoken'       => self::WHOLE_DIR,
-                             'passwordhash'     => self::FILE_ONLY,
-                             'pchart'           => self::WHOLE_DIR,
-                             'pclzip'           => self::FILE_ONLY,
-                             'phppowerpoint'    => self::PARENT_DIR,
-                             'gacl'             => self::WHOLE_DIR,
-                             'propel'           => self::PARENT_DIR,
-                             'gettext_reader'   => self::WHOLE_DIR,
-                             'phpexcel'         => self::WHOLE_DIR,
-                             'phpmailer'        => self::WHOLE_DIR,
-                             'qrcode'           => self::FILE_ONLY,
-                             'services_json'    => self::FILE_ONLY,
-                             'sfyaml'           => self::WHOLE_DIR,
-                             'swift'            => self::WHOLE_DIR,
-                             'smarty'           => self::WHOLE_DIR,
-                             'tcpdf'            => self::WHOLE_DIR,
-                             'text_diff'        => self::WHOLE_DIR,
-                             'text_highlighter' => self::WHOLE_DIR,
-                             'tfpdf'            => self::WHOLE_DIR,
-                             'utf8'             => self::WHOLE_DIR,
-                             'ci_xmlrpc'        => self::FILE_ONLY,
-                             'xajax'            => self::PARENT_DIR,
-                             'yii'              => self::FILE_ONLY,
-                             );
+    private $classic = array();
+
+    public function __construct($gremlin) {
+        parent::__construct($gremlin);
+    }
 
     public function run(\Config $config) {
         $project = $config->project;
@@ -90,6 +53,11 @@ class FindExternalLibraries extends Tasks {
         if ($config->update && isset($ini['FindExternalLibraries'])) {
             display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the config.ini file in the project directory, before running it again.');
             return; //Cancel task
+        }
+
+        $json = json_decode(file_get_contents($config->dir_root.'/data/externallibraries.json'));
+        foreach($json as $k => $v) {
+            $this->classic[$k] = constant('self::'.$v->ignore);
         }
     
         $d = getcwd();
