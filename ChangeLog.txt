@@ -1,4 +1,4 @@
-Version 0.6.4 (Bull Demon King, Coming up)
+Version 0.6.5 (Great Sage Who Pacifies Heaven, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,22 @@ Version 0.6.4 (Bull Demon King, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.6.4 (Bull Demon King, 2016-05-09)
++ Architecture
+    + Externalized the list of recognized libraries to Json
+    + Added 'Wordpress' and 'Coding convention' as Recipes
++ Report
+    + Initial report for Zend Framework. Still prototyping.
++ Analyzer
+    + Accelerated analysis for Implicit GLobals variables
+    + New analyze : Indirect Injections (Security)
+    + New analyze : Should Use Coalesce (code upgrade)
+    + New analyze : Suggest dirname(__FILE__) => __DIR__
+    + Added 'str_rot13' as unsafe 'crypto'
+    + Properties without default can't be redefined
+    + Added Yield and Yield From as structures without parenthesis needs
+    + Double Assignation, unless 2nd call is a functioncall (less false positives)
 
 Version 0.6.3 (Jade Faced Princess, 2016-05-02)
 + Architecture
