@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 02 May 2016 07:36:53 +0000
-.. comment: Generation hash : 4fb1b1c20cbe63c44f0a4cc416209521ddadb166
+.. comment: Generation date : Mon, 09 May 2016 11:30:18 +0000
+.. comment: Generation hash : 1d82a49ae94b69aa986160126b870c9080e4c108
 
 
 .. _$http\_raw\_post\_data:
@@ -821,7 +821,7 @@ PHP manual recommends that script should be left open, without the final closing
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `leave-last-closing-out <https://github.com/dseguy/clearPHP/tree/master/rules/leave-last-closing-out.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                              |
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>`                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -1169,6 +1169,35 @@ List of those operators : +=, -=, \*=, /=, %=, \*\*=, .=, &=, \|=, ^=, >>=, <<=
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                         |
 +--------------+-------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _could-use-\_\_dir\_\_:
+
+Could Use \_\_DIR\_\_
+#####################
+
+
+Use \_\_DIR\_\_ function to access the current file's parent directory. 
+
+.. code-block:: php
+
+   <?php
+   
+   assert(dirname(\_\_FILE\_\_) == \_\_DIR\_\_);
+   
+   ?>
+
+
+\_\_DIR\_\_ has been introduced in PHP 5.3.0.
+
++--------------+------------------------+
+| Command Line | Structures/CouldUseDir |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
 
 
 
@@ -2419,6 +2448,33 @@ As a general rule of thumb, only use integers or strings that don\'t look like i
 +--------------+----------------------------------+
 | Analyzers    | :ref:`Analyze`                   |
 +--------------+----------------------------------+
+
+
+
+.. _indirect-injection:
+
+Indirect Injection
+##################
+
+
+Look for injections through indirect usage for GPRC values ($\_GET, $\_POST, $\_REQUEST, $\_COOKIE). 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = $\_GET['a'];
+   echo $a;
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Security/IndirectInjection |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Security`            |
++--------------+----------------------------+
 
 
 
@@ -4858,6 +4914,40 @@ Otherwise, the method doesn't belong to the object. It may be a function.
 +--------------+-----------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                          |
 +--------------+-----------------------------------------------------------------------------------------+
+
+
+
+.. _should-use-coalesce:
+
+Should Use Coalesce
+###################
+
+
+PHP 7 introduced the ?? operator, that replaces longer structures to set default values when a variable is not set.
+
+.. code-block:: php
+
+   <?php
+   
+   // Extract from https://wiki.php.net/rfc/isset\_ternary
+   // Fetches the request parameter user and results in 'nobody' if it doesn't exist
+   $username = $\_GET['user'] ?? 'nobody';
+   // equivalent to: $username = isset($\_GET['user']) ? $\_GET['user'] : 'nobody';
+    
+   // Calls a hypothetical model-getting function, and uses the provided default if it fails
+   $model = Model::get($id) ?? $default\_model;
+   // equivalent to: if (($model = Model::get($id)) === NULL) { $model = $default\_model; }
+   
+   
+   ?>
+
++--------------+-----------------------+
+| Command Line | Php/ShouldUseCoalesce |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
 
 
 

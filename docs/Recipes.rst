@@ -26,13 +26,9 @@ Here is the list of the current recipes supported by Exakat Engine.
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
 |Name                                  | Description                                                                                          |
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Security`                       | Check the code for common security bad practices, especially in the Web environnement.               |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Performances`                   | Check the code for slow code.                                                                        |
+|:ref:`Analyze`                        | Check for common best practices.                                                                     |
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Dead code <dead-code>`          | Check the unused code or unreachable code.                                                           |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Analyze`                        | Check for common best practices.                                                                     |
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP70`             | List features that are incompatible with PHP 7.0. This recipe is helpful for checking compatibility. |
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -43,18 +39,28 @@ Here is the list of the current recipes supported by Exakat Engine.
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP55`             | List features that are incompatible with PHP 5.5. This recipe is helpful for backward compatibility. |
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Performances`                   | Check the code for slow code.                                                                        |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Security`                       | Check the code for common security bad practices, especially in the Web environnement.               |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Wordpress`                      | Check for code used with the Wordpress platform                                                      |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP54`             | List features that are incompatible with PHP 5.4. This recipe is helpful for backward compatibility. |
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP53`             | List features that are incompatible with PHP 5.3. This recipe is helpful for backward compatibility. |
 +--------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Coding Conventions`             | List coding conventions violations.                                                                  |
++--------------------------------------+------------------------------------------------------------------------------------------------------+
+
+Note : in command line, don't forget to add quotes to recipes's names that include white space.
 
 Recipes details
 ###############
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 02 May 2016 07:36:53 +0000
-.. comment: Generation hash : 4fb1b1c20cbe63c44f0a4cc416209521ddadb166
+.. comment: Generation date : Mon, 09 May 2016 11:30:18 +0000
+.. comment: Generation hash : 1d82a49ae94b69aa986160126b870c9080e4c108
 
 
 .. _analyze:
@@ -62,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 246 analysis
+Total : 247 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -93,7 +99,6 @@ Total : 246 analysis
 * :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
-* :ref:`Close Tags <close-tags>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
 * :ref:`Common Alternatives <common-alternatives>`
 * :ref:`Compared comparison <compared-comparison>`
@@ -105,6 +110,7 @@ Total : 246 analysis
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
+* :ref:`Could Use \_\_DIR\_\_ <could-use-\_\_dir\_\_>`
 * :ref:`Could use self <could-use-self>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
@@ -218,6 +224,7 @@ Total : 246 analysis
 * :ref:`Should Chain Exception <should-chain-exception>`
 * :ref:`Should Typecast <should-typecast>`
 * :ref:`Should Use $this <should-use-$this>`
+* :ref:`Should Use Coalesce <should-use-coalesce>`
 * :ref:`Should Use Constants <should-use-constants>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Silently Cast Integer <silently-cast-integer>`
@@ -316,11 +323,12 @@ Total : 246 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 20 analysis
+Total : 21 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
+* :ref:`Close Tags <close-tags>`
 * :ref:`Constant Comparison <constant-comparison>`
 * :ref:`Curly Arrays <curly-arrays>`
 * :ref:`Echo Or Print <echo-or-print>`
@@ -680,13 +688,14 @@ Total : 14 analysis
 Security
 ++++++++
 
-Total : 17 analysis
+Total : 18 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Followed injections <followed-injections>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
+* :ref:`Indirect Injection <indirect-injection>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
