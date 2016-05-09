@@ -33,7 +33,7 @@ class Staticproperty extends TokenAuto {
         $config = \Config::factory();
         
         // Class::$property (with nothing else behind)
-        if (version_compare('7.0', $config->phpversion) >= 0) {
+        if (version_compare('7.0', $config->phpversion) <= 0) {
             // PHP 7.0 +
             $this->conditions = array( -2 => array('notToken'  => 'T_DOUBLE_COLON'),
                                        -1 => array('atom'      => Staticproperty::$operands),
