@@ -1,7 +1,12 @@
 <?php
 
-$expected     = array();
+$expected     = array('public function myZendAuthAction( ) { /**/ } ',
+                      'protected function protectedAction( ) { /**/ } ',
+                      'private function privateAction( ) { /**/ } ',
+);
 
-$expected_not = array();
+$expected_not = array('function noVisibilityAction( ) { /**/ } ',
+                      'public function myAction( ) { /**/ } ',
+);
 
 ?>
