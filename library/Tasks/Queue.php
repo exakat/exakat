@@ -38,7 +38,7 @@ class Queue extends Tasks {
         if ($config->project != 'default') {
             if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
                 display('Cleaning the project first');
-                $clean = new Clean();
+                $clean = new Clean($config);
                 $clean->run($config);
             }
 
