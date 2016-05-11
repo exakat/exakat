@@ -27,9 +27,10 @@ use Analyzer;
 
 class DanglingArrayReferences extends Analyzer\Analyzer {
     public function analyze() {
+        // foreach($a as &$v) {}. (unset($v));
         // foreach($a as $k => &$v) {}. (unset($v));
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
+             ->outIsIE('VALUE')
              ->is('reference', true)
              ->savePropertyAs('code', 'array')
              ->back('first')
