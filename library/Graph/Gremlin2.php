@@ -115,10 +115,8 @@ class Gremlin2 extends Graph {
         } // else (aka 0) is ignored (nothing to do)
     
         if (strlen($getString) > 20000) {
-            throw new \Exceptions\GremlinException('Query string too big for GET (', strlen($getString), ")\n",
-                 'Query : ',
-                 $query,
-                "\n\n",
+            throw new \Exceptions\GremlinException('Query string too big for GET ('. strlen($getString), ")\n".
+                 'Query : ' . $query . "\n\n".
                 print_r($params, true));
         }
 
