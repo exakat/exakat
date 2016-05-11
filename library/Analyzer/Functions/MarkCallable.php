@@ -32,7 +32,9 @@ class MarkCallable extends Analyzer\Analyzer {
             foreach($lists as $id => &$function) {
                 $function = '\\' . $function;
             }
+            unset($function);
         }
+        unset($lists);
 
         $positions = array(0, 1, 2, 3, 4, 5, 6);
 

@@ -176,7 +176,7 @@ CYPHER;
         unlink($this->config->projects_root.'/rels.cypher.subname.csv');
     }
 
-    public function saveTokenCounts() {
+    public static function saveTokenCounts() {
         $config = \Config::factory();
         $datastore = new \Datastore($config);
         

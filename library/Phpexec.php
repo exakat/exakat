@@ -152,7 +152,6 @@ class Phpexec {
         // prepare the list of tokens
         if ($this->isCurrentVersion) {
             if (!in_array('tokenizer', get_loaded_extensions())) {
-                $this->isValid = false;
                 return false;
             }
             $x = get_defined_constants(true);

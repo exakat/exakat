@@ -27,6 +27,7 @@ use Analyzer;
 
 class DanglingArrayReferences extends Analyzer\Analyzer {
     public function analyze() {
+        // foreach($a as $k => &$v) {}. (unset($v));
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->is('reference', true)
