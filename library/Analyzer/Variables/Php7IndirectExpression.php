@@ -40,12 +40,26 @@ class Php7IndirectExpression extends Analyzer\Analyzer {
 
 //$foo->$bar['baz']	$foo->{$bar['baz']}	($foo->$bar)['baz']
         $this->atomIs('Array')
+             ->hasNoIn('NAME') // Avoid double finding with the $foo->$bar['baz']() case
+             ->outIs('VARIABLE')
+             ->atomIs('Property')
+             ->outIs('PROPERTY')
+             ->tokenIsNot('T_STRING')
+             ->back('first');
+        $this->prepareQuery();
+
+//$foo->$bar['baz']()	$foo->{$bar['baz']}()	($foo->$bar)['baz']()
+//Foo::$bar['baz']()	Foo::{$bar['baz']}()	(Foo::$bar)['baz']()
+        $this->atomIs('Functioncall')
+             ->outIs('NAME')
+             ->atomIs('Array')
              ->outIs('VARIABLE')
              ->atomIs(array('Property', 'Staticproperty'))
              ->outIs('PROPERTY')
              ->tokenIsNot('T_STRING')
              ->back('first');
         $this->prepareQuery();
+
     }
 }
 
