@@ -26,6 +26,8 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class EvalWithoutTry extends Analyzer\Common\WithoutTry {
+    protected $phpVersion = '7.0+';
+    
     public function analyze() {
         $this->functions = array('\\eval');
         parent::analyze();
