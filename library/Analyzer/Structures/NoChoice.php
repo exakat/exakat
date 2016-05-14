@@ -31,7 +31,7 @@ class NoChoice extends Analyzer\Analyzer {
              ->savePropertyAs('fullcode', 'cdt')
              ->inIs('THEN')
              ->outIs('ELSE')
-             ->samePropertyAs('fullcode', 'cdt')
+             ->samePropertyAs('fullcode', 'cdt', true)
              ->back('first');
         $this->prepareQuery();
 
@@ -44,7 +44,7 @@ class NoChoice extends Analyzer\Analyzer {
              ->inIs('CONDITION')
              ->outIs('ELSE')
              ->atomIs(self::CONTAINERS)
-             ->samePropertyAs('fullcode', 'cdt')
+             ->samePropertyAs('fullcode', 'cdt', true)
              ->back('first');
         $this->prepareQuery();
 
