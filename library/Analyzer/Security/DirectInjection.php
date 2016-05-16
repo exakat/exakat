@@ -47,6 +47,7 @@ class DirectInjection extends Analyzer\Analyzer {
              ->inIsIE('VARIABLE')
              ->filter($safeIndex)
              ->_as('result')
+             ->savePropertyAs('rank', 'rank')
              ->analyzerIsNot('self')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -55,6 +56,7 @@ class DirectInjection extends Analyzer\Analyzer {
 
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+
              ->samePropertyAs('rank', 'rank')
 
              ->savePropertyAs('code', 'varname')
