@@ -33,8 +33,11 @@ class DirectInjection extends Analyzer\Analyzer {
     public function analyze() {
         $vars = $this->loadIni('php_incoming.ini', 'incoming');
         
-        $safeIndex = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
-                           'SCRIPT_NAME', 'SERVER_ADMIN', '_');
+        $safeIndex = array('DOCUMENT_ROOT', 
+                           'REQUEST_TIME', 'REQUEST_TIME_FLOAT', 
+                           'SERVER_PORT', 'SERVER_NAME', 'SCRIPT_NAME', 'SERVER_ADMIN', 'SERVER_ADDR', 'SERVER_SOFTWARE', 
+                           '_', 'USERNAME', 
+                           'COMPOSER_ROOT_VERSION');
         $safeIndex = '(it.out("VARIABLE").has("code", "\$_SERVER").any() == false) ||
                        it.out("INDEX").has("atom", "String").filter{!(it.noDelimiter in ["' . implode('", "', $safeIndex) . '"])}.any()';
 
@@ -44,7 +47,7 @@ class DirectInjection extends Analyzer\Analyzer {
              ->inIsIE('VARIABLE')
              ->filter($safeIndex)
              ->_as('result')
-             ->savePropertyAs('rank', 'rank')
+             ->analyzerIsNot('self')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->functionDefinition()
@@ -75,7 +78,8 @@ class DirectInjection extends Analyzer\Analyzer {
              ->analyzerIs('Security/SensitiveArgument')
              ->inIsIE('CODE')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->inIs('ARGUMENTS')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // $_GET/_POST ['index'] (one level).. directly as argument of PHP functions
@@ -86,7 +90,8 @@ class DirectInjection extends Analyzer\Analyzer {
              ->inIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->inIs('ARGUMENTS')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // $_GET/_POST ['index']['index2'] (2 levels and more)... directly as argument of PHP functions
