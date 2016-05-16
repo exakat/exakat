@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 09 May 2016 11:30:18 +0000
-.. comment: Generation hash : 1d82a49ae94b69aa986160126b870c9080e4c108
+.. comment: Generation date : Mon, 16 May 2016 10:35:46 +0000
+.. comment: Generation hash : fe3c9f7c907e7e9e7b71c1455eff4f32176b3248
 
 
 .. _$http\_raw\_post\_data:
@@ -2756,6 +2756,57 @@ The magic methods must have public visibility and cannot be static
 
 
 
+.. _make-global-a-property:
+
+Make Global A Property
+######################
+
+
+Calling global (or $GLOBALS) in methods is slower and less testable than setting the global to a property, and using this property.
+
+Using properties is slightly faster than calling global or $GLOBALS, though the gain is not important. 
+
+Setting the property in the constructor (or in a factory), makes the class easier to test, as there is now a simple point of configuration.
+
+.. code-block:: php
+
+   <?php 
+   
+   // Wrong way
+   class fooBad {
+       function x() {
+           global $a;
+           $a->do();
+           // Or $GLOBALS['a']->do();
+       }
+   }
+   
+   class fooGood {
+       private $bar = null;
+       
+       function \_\_construct() {
+           global $bar; 
+           $this->bar = $bar;
+           // Even better, do this via arguments
+       }
+       
+       function x() {
+           $this->a->do();
+       }
+   }
+   
+   ?>
+
++--------------+-----------------------------+
+| Command Line | Classes/MakeGlobalAProperty |
++--------------+-----------------------------+
+| clearPHP     |                             |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
+
+
+
 .. _malformed-octal:
 
 Malformed Octal
@@ -2764,7 +2815,12 @@ Malformed Octal
 
 Those numbers starts with a 0, so they are using the PHP octal convention. Therefore, one can't use 8 or 9 figures in those numbers, as they don't belong to the octal base. The resulting number will be truncated at the first erroneous figure. For example, 090 is actually 0, and 02689 is actually 22. 
 
-Also, note that very large octal, usually with more than 21 figures, will be turned into a real number and undergo a reduction in precision.
+PHP 7 emit an error when it finds an invalid octal number. 
+
+Also, note that too large octal will be turned into a real number and undergo a reduction in precision.
+typically 21 figures, indeed PHP\_INT\_MAX converted in octal. 
+
+This analyzer also emits warning when octal numbers start with a large number of 0, like 000007.
 
 +--------------+---------------------+
 | Command Line | Type/MalformedOctal |

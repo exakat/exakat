@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 09 May 2016 11:30:18 +0000
-.. comment: Generation hash : 1d82a49ae94b69aa986160126b870c9080e4c108
+.. comment: Generation date : Mon, 16 May 2016 10:35:46 +0000
+.. comment: Generation hash : fe3c9f7c907e7e9e7b71c1455eff4f32176b3248
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 247 analysis
+Total : 248 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -159,6 +159,7 @@ Total : 247 analysis
 * :ref:`Lone Blocks <lone-blocks>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Magic Visibility <magic-visibility>`
+* :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Malformed Octal <malformed-octal>`
 * :ref:`Multiple Class Declarations <multiple-class-declarations>`
 * :ref:`Multiple Constant Definition <multiple-constant-definition>`
