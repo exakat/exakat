@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Coalesce extends Tokenizer {
-    /* 11 methods */
+    /* 12 methods */
 
     public function testCoalesce01()  { $this->generic_test('Coalesce.01'); }
     public function testCoalesce02()  { $this->generic_test('Coalesce.02'); }
@@ -20,5 +20,6 @@ class Coalesce extends Tokenizer {
     public function testCoalesce09()  { $this->generic_test('Coalesce.09'); }
     public function testCoalesce10()  { $this->generic_test('Coalesce.10'); }
     public function testCoalesce11()  { $this->generic_test('Coalesce.11'); }
+    public function testCoalesce12()  { $this->generic_test('Coalesce.12'); }
 }
 ?>
