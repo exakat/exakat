@@ -1,0 +1,82 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $powersOfTwo
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            1
+          Label : VALUE
+            2
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            2
+          Label : VALUE
+            4
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            3
+          Label : VALUE
+            8
+  Label : ELEMENT
+    =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            1
+          Label : VALUE
+            $oneBit
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            2
+          Label : VALUE
+            $twoBit
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            3
+          Label : VALUE
+            $threeBit
+    Label : RIGHT
+      $powersOfTwo
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $powersOfTwo
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            1
+          Label : VALUE
+            2
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            2
+          Label : VALUE
+            4
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            3
+          Label : VALUE
+            8
