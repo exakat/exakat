@@ -1163,6 +1163,8 @@ SQL
                             'Yield'                      => 'Php/YieldUsage',
                             'Yield from'                 => 'Php/YieldFromUsage',
 
+                            'List with keys'             => 'Php/ListWithKeys',
+
                             'Coalesce'                   => 'Php/Coalesce',
                             'Null Coalesce'              => 'Php/NullCoalesce',
 
