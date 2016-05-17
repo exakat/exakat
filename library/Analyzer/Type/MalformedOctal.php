@@ -47,6 +47,11 @@ class MalformedOctal extends Analyzer\Analyzer {
         $this->atomIs('Float')
              ->regex('code', '^[+-]?0[0-7]{'.$maxSize.',}\\$');
         $this->prepareQuery();
+
+        // integer that is useless : 07
+        $this->atomIs('Float')
+             ->regex('code', '^[+-]?0[0-7]\\$');
+        $this->prepareQuery();
     }
 }
 

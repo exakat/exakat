@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Type_MalformedOctal extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testType_MalformedOctal01()  { $this->generic_test('Type_MalformedOctal.01'); }
     public function testType_MalformedOctal02()  { $this->generic_test('Type_MalformedOctal.02'); }
+    public function testType_MalformedOctal03()  { $this->generic_test('Type/MalformedOctal.03'); }
 }
 ?>
