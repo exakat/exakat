@@ -27,7 +27,7 @@ class Logical extends TokenAuto {
     static public $operators = array('T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                      'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR',  'T_OROR',
                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR');
-    // and or xor
+    // and or xor, & and |
     static public $logicals = array('T_LOGICAL_AND', 'T_ANDAND',
                                     'T_LOGICAL_OR' , 'T_OROR',
                                     'T_LOGICAL_XOR', );

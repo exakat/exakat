@@ -57,12 +57,44 @@ class _Catch extends TokenAuto {
                                
         $this->checkAuto();
 
+        // non-empty catch with | (catch (A|B $e))
+        $this->conditions = array(-1 => array('notToken' => 'T_FUNCTION'),
+                                   0 => array('token'    => _Catch::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'Catch')),
+                                   2 => array('atom'     => 'Logical'),
+                                   3 => array('token'    => 'T_SEMICOLON'),
+                                   4 => array('atom'     => 'Variable'),
+                                   5 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                   6 => array('token'    => 'T_OPEN_CURLY',
+                                              'property' => array('association' => 'Catch')),
+                                   7 => array('atom'     => array('Sequence', 'Void')),
+                                   8 => array('token'    => 'T_CLOSE_CURLY'),
+                                  );
+        
+        $this->actions = array('transform'   => array( 1 => 'DROP',
+                                                       2 => 'CLASS',
+                                                       3 => 'DROP',
+                                                       4 => 'VARIABLE',
+                                                       5 => 'DROP',
+                                                       6 => 'DROP',
+                                                       7 => 'CODE',
+                                                       8 => 'DROP',
+                                                       ),
+                               'cleanIndex' => true,
+                               'atom'       => 'Catch',
+                               'makeBlock'  => 'CODE');
+        $this->checkAuto();
+        
         return false;
     }
 
     public function fullcode() {
         return <<<GREMLIN
+
 fullcode.setProperty('fullcode', "catch (" + fullcode.out("CLASS").next().getProperty('fullcode') + " " + fullcode.out("VARIABLE").next().getProperty('fullcode') + ") " + fullcode.out("CODE").next().getProperty('fullcode'));
+
 GREMLIN;
     }
 }
