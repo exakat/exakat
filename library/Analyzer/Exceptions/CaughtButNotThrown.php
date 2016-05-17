@@ -26,7 +26,7 @@ use Analyzer;
 class CaughtButNotThrown extends Analyzer\Analyzer {
     public function analyze() {
         // There is a catch() but its class is not defined
-        
+
         $phpExceptions = $this->loadIni('php_exception.ini', 'classes');
 
         $this->atomIs('Catch')
