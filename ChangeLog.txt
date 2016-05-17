@@ -1,4 +1,4 @@
-Version 0.6.5 (Great Sage Who Pacifies Heaven, Coming up)
+Version 0.6.6 (Princess Iron Fan, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,22 @@ Version 0.6.5 (Great Sage Who Pacifies Heaven, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.6.5 (Great Sage Who Pacifies Heaven, 2015-05-16)
++ Analyzer
+    + New analyzer : spot globals that may be turned into property
+    + New analyzer : check that ZF1 classes are well located
+    + Upgraded 'dangling foreach reference' to support key=>value
+    + Better support for PHP 7 indirect expression
+    + More directives for xdebug
+    + Eval Without Try is PHP 7 only
+    + No Choice analysis is now case insensitive
++ Tokenizer
+    + Added support for keys in list() (PHP 7.1)
+    + Added support for constant visibility (PHP 7.1)
+    + Added support for Multi catch : catch(A|B $e) (PHP 7.1)
+    + Fixed bug with + and instanceof
+    + Fixed precedence between :: and ??
 
 Version 0.6.4 (Bull Demon King, 2016-05-09)
 + Architecture
