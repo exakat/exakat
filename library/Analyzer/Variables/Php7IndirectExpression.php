@@ -43,6 +43,7 @@ class Php7IndirectExpression extends Analyzer\Analyzer {
              ->hasNoIn('NAME') // Avoid double finding with the $foo->$bar['baz']() case
              ->outIs('VARIABLE')
              ->atomIs('Property')
+             ->isNot('bracket', true)
              ->outIs('PROPERTY')
              ->tokenIsNot('T_STRING')
              ->back('first');
@@ -59,7 +60,6 @@ class Php7IndirectExpression extends Analyzer\Analyzer {
              ->tokenIsNot('T_STRING')
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 
