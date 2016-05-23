@@ -23,34 +23,34 @@ List of recipes
 
 Here is the list of the current recipes supported by Exakat Engine.
 
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|Name                                  | Description                                                                                          |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Analyze`                        | Check for common best practices.                                                                     |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Dead code <dead-code>`          | Check the unused code or unreachable code.                                                           |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP70`             | List features that are incompatible with PHP 7.0. This recipe is helpful for checking compatibility. |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP71`             | List features that are incompatible with PHP 7.1. This recipe is helpful for forward compatibility,  |
-|                                      | and it currently under developpement.                                                                |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP56`             | List features that are incompatible with PHP 5.6. This recipe is helpful for backward compatibility. |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP55`             | List features that are incompatible with PHP 5.5. This recipe is helpful for backward compatibility. |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Performances`                   | Check the code for slow code.                                                                        |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Security`                       | Check the code for common security bad practices, especially in the Web environnement.               |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Wordpress`                      | Check for code used with the Wordpress platform                                                      |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP54`             | List features that are incompatible with PHP 5.4. This recipe is helpful for backward compatibility. |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP53`             | List features that are incompatible with PHP 5.3. This recipe is helpful for backward compatibility. |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Coding Conventions`             | List coding conventions violations.                                                                  |
-+--------------------------------------+------------------------------------------------------------------------------------------------------+
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|Name                                           | Description                                                                                          |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Analyze`                                 | Check for common best practices.                                                                     |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Dead code <dead-code>`                   | Check the unused code or unreachable code.                                                           |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0. This recipe is helpful for checking compatibility. |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP71`                      | List features that are incompatible with PHP 7.1. This recipe is helpful for forward compatibility,  |
+|                                               | and it currently under developpement.                                                                |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP56`                      | List features that are incompatible with PHP 5.6. This recipe is helpful for backward compatibility. |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP55`                      | List features that are incompatible with PHP 5.5. This recipe is helpful for backward compatibility. |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Performances`                            | Check the code for slow code.                                                                        |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Security`                                | Check the code for common security bad practices, especially in the Web environnement.               |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Wordpress`                               | Check for code used with the Wordpress platform                                                      |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP54`                      | List features that are incompatible with PHP 5.4. This recipe is helpful for backward compatibility. |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP53`                      | List features that are incompatible with PHP 5.3. This recipe is helpful for backward compatibility. |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`Coding Conventions <coding-conventions>` | List coding conventions violations.                                                                  |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 
 Note : in command line, don't forget to add quotes to recipes's names that include white space.
 
@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 16 May 2016 10:35:46 +0000
-.. comment: Generation hash : fe3c9f7c907e7e9e7b71c1455eff4f32176b3248
+.. comment: Generation date : Mon, 23 May 2016 21:00:21 +0000
+.. comment: Generation hash : 17b0b57af0a6ac8b621ee6d39881fb28c47f802a
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 248 analysis
+Total : 250 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -145,6 +145,7 @@ Total : 248 analysis
 * :ref:`Hash Algorithms <hash-algorithms>`
 * :ref:`Htmlentities Calls <htmlentities-calls>`
 * :ref:`Identical Conditions <identical-conditions>`
+* :ref:`If With Same Conditions <if-with-same-conditions>`
 * :ref:`Iffectations`
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Implicit global <implicit-global>`
@@ -239,6 +240,7 @@ Total : 248 analysis
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Switch Without Default <switch-without-default>`
 * :ref:`Ternary In Concat <ternary-in-concat>`
+* :ref:`Throw Functioncall <throw-functioncall>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
@@ -372,9 +374,9 @@ Total : 49 analysis
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Function Subscripting <function-subscripting>`
 * :ref:`Hash Algorithms incompatible with PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
-* :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List With Appends <list-with-appends>`
+* :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Methodcall On New <methodcall-on-new>`
 * :ref:`Mixed Keys <mixed-keys>`
@@ -428,9 +430,9 @@ Total : 44 analysis
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
-* :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List With Appends <list-with-appends>`
+* :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Mixed Keys <mixed-keys>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
@@ -462,7 +464,7 @@ Total : 44 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 42 analysis
+Total : 40 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -474,12 +476,10 @@ Total : 42 analysis
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Exponent Usage <exponent-usage>`
-* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
-* :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List With Appends <list-with-appends>`
+* :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`No List With String <no-list-with-string>`
@@ -512,7 +512,7 @@ Total : 42 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 35 analysis
+Total : 32 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -520,12 +520,9 @@ Total : 35 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
-* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
-* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
-* :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List With Appends <list-with-appends>`
+* :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
@@ -555,7 +552,7 @@ Total : 35 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 32 analysis
+Total : 31 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -564,11 +561,10 @@ Total : 32 analysis
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Dont Change Pointer <foreach-dont-change-pointer>`
-* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
-* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`List With Appends <list-with-appends>`
+* :ref:`List With Keys <list-with-keys>`
+* :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
@@ -595,7 +591,7 @@ Total : 32 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 36 analysis
+Total : 34 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -604,11 +600,9 @@ Total : 36 analysis
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Dont Change Pointer <foreach-dont-change-pointer>`
-* :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
-* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`List With Appends <list-with-appends>`
+* :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`New Functions In PHP 5.4 <new-functions-in-php-5.4>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
@@ -689,7 +683,7 @@ Total : 14 analysis
 Security
 ++++++++
 
-Total : 18 analysis
+Total : 19 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Compare Hash <compare-hash>`
@@ -705,6 +699,7 @@ Total : 18 analysis
 * :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Sleep is a security risk <sleep-is-a-security-risk>`
+* :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Use random\_int() <use-random\_int()>`
 * :ref:`parse\_str() Warning <parse\_str()-warning>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`

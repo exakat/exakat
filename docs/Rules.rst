@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 16 May 2016 10:35:46 +0000
-.. comment: Generation hash : fe3c9f7c907e7e9e7b71c1455eff4f32176b3248
+.. comment: Generation date : Mon, 23 May 2016 21:00:21 +0000
+.. comment: Generation hash : 17b0b57af0a6ac8b621ee6d39881fb28c47f802a
 
 
 .. _$http\_raw\_post\_data:
@@ -2115,13 +2115,13 @@ Functions Removed In PHP 5.4
 
 Those functions were removed in PHP 5.4.
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php54RemovedFunctions                                                                                                                             |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                                       |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------+
+| Command Line | Php/Php54RemovedFunctions                 |
++--------------+-------------------------------------------+
+| clearPHP     |                                           |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54` |
++--------------+-------------------------------------------+
 
 
 
@@ -2133,13 +2133,13 @@ Functions Removed In PHP 5.5
 
 Those functions were removed in PHP 5.5.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php55RemovedFunctions                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                            |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------+
+| Command Line | Php/Php55RemovedFunctions |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP55` |
++--------------+---------------------------+
 
 
 
@@ -2243,13 +2243,13 @@ Hash Algorithms incompatible with PHP 5.4/5
 
 List of hash algorithms incompatible with PHP 5.4 and 5.5. They were introduced in newer version, or removed in PHP 5.4. As such, they are not available with older versions.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/HashAlgos54                                                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------+
+| Command Line | Php/HashAlgos54           |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP54` |
++--------------+---------------------------+
 
 
 
@@ -2261,13 +2261,13 @@ Hexadecimal In String
 
 Mark strings that may be confused with hexadecimal.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Type/HexadecimalString                                                                                                                                           |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Type/HexadecimalString                               |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -2310,6 +2310,24 @@ The following logical expressions contain members that are identical. For exampl
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
+
+
+
+.. _if-with-same-conditions:
+
+If With Same Conditions
+#######################
+
+
+Successive If / then structures that have the same condition may be either merged or have one of the condition changed.
+
++--------------+---------------------------------+
+| Command Line | Structures/IfWithSameConditions |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
 
 
 
@@ -2609,6 +2627,24 @@ List() behavior has changed in PHP 7.0 and it has impact on the indexing when li
 
 
 
+.. _list-with-keys:
+
+List With Keys
+##############
+
+
+Setting keys when using list() is a PHP 7.1 feature.
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ListWithKeys                                                                                                                      |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _locally-unused-property:
 
 Locally Unused Property
@@ -2746,13 +2782,13 @@ Magic Visibility
 
 The magic methods must have public visibility and cannot be static
 
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Classes/toStringPss                                                                                                        |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                            |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/toStringPss                                                                                                                                                              |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                                                  |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5361,6 +5397,43 @@ To be safe, always add parenthesis when using ternary operator with concatenatio
 
 
 
+.. _throw-functioncall:
+
+Throw Functioncall
+##################
+
+
+The throw keyword is excepted to use an exception. Calling a function to prepare that exception before throwing it is possible, but forgetting the new keyword is also possible. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Forgotten new
+   throw \RuntimeException('error!');
+   
+   // Code is OK, function returns an exception
+   throw getException(ERROR\_TYPE, 'error!');
+   
+   function getException(ERROR\_TYPE, $message) {
+       return new \RuntimeException($messsage);
+   }
+   
+   ?>
+
+
+When the new keyword is forgotten, then the class construtor is used as a functionname, and now exception is emited, but an 'Undefined function' fatal error is emited.
+
++--------------+------------------------------+
+| Command Line | Exceptions/ThrowFunctioncall |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
+
 .. _throws-an-assignement:
 
 Throws An Assignement
@@ -5853,6 +5926,41 @@ The following use instructions cannot be resolved to a class or a namespace. The
 +--------------+---------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
+
+
+
+.. _unserialize-second-arg:
+
+Unserialize Second Arg
+######################
+
+
+Since PHP 7, unserialize() function has a second argument that limits the classes that may be unserialized. In case of a breach, this is limiting the classes accessible from unserialize(). 
+
+On way to exploit unserialize, is to make PHP unserialized the data to an available class, may be one that may be auto-loaded.
+
+.. code-block:: php
+
+   <?php
+   
+   // expected Database object
+   $var = unserialize('O:7:dbClass:0:{}');
+   
+   // unexpected load of debugClass object
+   $var = unserialize('O:10:debugClass:0:{}');
+   
+   // Using the unserialized object
+   $var->connect();
+   
+   ?>
+
++--------------+-------------------------------+
+| Command Line | Security/UnserializeSecondArg |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Security`               |
++--------------+-------------------------------+
 
 
 
