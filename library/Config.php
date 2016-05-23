@@ -26,11 +26,11 @@ class Config {
            private $configFile     = array();
            private $commandline    = array();
            private $argv           = array();
-           public  $dir_root       = '.';
-           public  $projects_root  = '.';
-           public  $codePath       = '.';
-           public  $is_phar        = true;
-           public  $executable     = '';
+           private $dir_root       = '.';
+           private $projects_root  = '.';
+           private $codePath       = '.';
+           private $is_phar        = true;
+           private $executable     = '';
            private $projectConfig  = array();
         
            private $options = array();
@@ -257,6 +257,8 @@ class Config {
     public function __get($name) {
         if (isset($this->options[$name])) {
             $return = $this->options[$name];
+        } elseif (in_array($name, ['project', 'is_phar', 'codePath', 'projects_root', 'dir_root'])) {
+            $return = $this->$name;
         } else {
             $return = null;
         }

@@ -62,7 +62,7 @@ class Files extends Tasks {
             die("Usage : exakat files -p project\nAborting\n");
         } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
             throw new \Exceptions\NoSuchProject($config->project);
-        } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
+        } elseif (!file_exists($config->codePath)) {
             throw new \Exceptions\NoCodeInProject($config->project);
         }
         
@@ -155,42 +155,42 @@ class Files extends Tasks {
                     // do nothing. All is fine.
                 } elseif (substr($resFile, 0, 17) == 'PHP Parse error: ') {
                     preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
                     // Actually, almost a repeat of the previous. We just ignore it. (Except in PHP 5.4)
                     if ($version == '52' || $version == '71') {
                         preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                     }
                 } elseif (substr($resFile, 0, 14) == 'PHP Warning:  ') {
                     preg_match('#PHP Warning:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 13) == 'Fatal error: ') {
                     preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 18) == 'PHP Fatal error:  ') {
                     // Actually, a repeat of the previous. We just ignore it.
                 } elseif (substr($resFile, 0, 23) == 'PHP Strict standards:  ') {
                     preg_match('#PHP Strict standards:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 18) == 'Strict Standards: ') {
                     preg_match('#Strict Standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 18) == 'Strict standards: ') {
                     preg_match('#Strict standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 22) == 'PHP Strict Standards: ') {
                     preg_match('#PHP Strict Standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 17) == 'PHP Deprecated:  ') {
                     preg_match('#PHP Deprecated:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 12) == 'Deprecated: ') {
                     preg_match('#Deprecated: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 9) == 'Warning: ') {
                     preg_match('#Warning: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->codePath, '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
                     // ignore (stdout reporting)
                 } else {
@@ -247,7 +247,7 @@ class Files extends Tasks {
                 $shortOpenTag = array();
                 foreach($nosot as $file => $countNoSot) {
                     if ($sot[$file] != $countNoSot) {
-                        $shortOpenTag[] = array('file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $file));
+                        $shortOpenTag[] = array('file' => str_replace($config->codePath, '', $file));
                     }
                 }
             }

@@ -44,12 +44,12 @@ class Status extends Tasks {
 
         switch($config->project_vcs) {
             case 'git' :
-                if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
-                    $status['git status'] = trim(shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git rev-parse HEAD'));
+                if (file_exists($config->codePath)) {
+                    $status['git status'] = trim(shell_exec('cd '.$config->codePath.'; git rev-parse HEAD'));
                 }
                 
-                if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
-                    $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git remote update; git status -uno | grep \'up-to-date\'');
+                if (file_exists($config->codePath)) {
+                    $res = shell_exec('cd '.$config->codePath.'; git remote update; git status -uno | grep \'up-to-date\'');
                     $status['updatable'] = empty($res);
                 } else {
                     $status['updatable'] = false;
@@ -57,7 +57,7 @@ class Status extends Tasks {
                 break 1;
 
             case 'composer' :
-                $json = @json_decode(@file_get_contents($config->projects_root.'/projects/'.$config->project.'/code/composer.lock'));
+                $json = @json_decode(@file_get_contents($config->codePath.'/composer.lock'));
                 if (isset($json->hash)) {
                     $status['hash'] = $json->hash;
                 } else {

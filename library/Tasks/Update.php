@@ -34,13 +34,11 @@ class Update extends Tasks {
             die("php ".$config->phpexecutable." -p <project>\n");
         }
 
-        $path = $config->projects_root.'/projects/'.$config->project;
-        
-        if (!file_exists($path)) {
+        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             die("Not such project as '$config->project'. Aborting\n");
         }
 
-        if (!file_exists($path.'/code')) {
+        if (!file_exists($config->codePath)) {
             die("Project '$config->project' has no code. Aborting\n");
         }
         
@@ -61,20 +59,20 @@ class Update extends Tasks {
                 break;
 
             // Git case
-            case file_exists($path.'/code/.git') :
+            case file_exists($config->codePath.'/.git') :
                 display('Git pull for '.$config->project);
-                $res = shell_exec('cd '.$path.'/code/; git pull --quiet; git branch');
+                $res = shell_exec('cd '.$config->codePath.'; git pull --quiet; git branch');
                 $branch = substr(trim($res), 2);
 
-                $res = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+                $res = shell_exec('cd '.$config->codePath.'; git show-ref --heads '.$branch);
                 display( "Git updated to commit $res");
                 
                 break;
 
             // svn case
-            case file_exists($path.'/code/.svn') :
+            case file_exists($config->codePath.'/.svn') :
                 display('SVN update '.$config->project);
-                $res = shell_exec('cd '.$path.'/code/; svn update');
+                $res = shell_exec('cd '.$config->codePath.'/; svn update');
                 preg_match('/At revision (\d+)/', $res, $r);
 
                 display( "SVN updated to revision $r[1]");
@@ -82,9 +80,9 @@ class Update extends Tasks {
                 break;
 
             // bazaar case
-            case file_exists($path.'/code/.bzr') :
+            case file_exists($config->codePath.'/.bzr') :
                 display('Bazaar update '.$config->project);
-                $res = shell_exec('cd '.$path.'/code/; bzr update 2>&1');
+                $res = shell_exec('cd '.$config->codePath.'/; bzr update 2>&1');
                 preg_match('/revision (\d+)/', $res, $r);
 
                 display( "Bazaar updated to revision $r[1]");
@@ -94,9 +92,9 @@ class Update extends Tasks {
             // composer case
             case $config->project_vcs === 'composer' :
                 display('Composer update '.$config->project);
-                $res = shell_exec('cd '.$path.'/code/; composer install ');
+                $res = shell_exec('cd '.$config->codePath.'/; composer install ');
 
-                $json = file_get_contents($path.'/code/composer.lock');
+                $json = file_get_contents($config->codePath.'/composer.lock');
                 $json = json_decode($json);
                 
                 foreach($json->packages as $package) {
