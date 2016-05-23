@@ -163,6 +163,14 @@ class Extension extends Analyzer\Analyzer {
             
             // Can a namespace be used in a nsname (as prefix) ? 
         }
+
+        if (!empty($directives)) {
+            $this->analyzerIs('Php/DirectivesUsage')
+                 ->outIs('ARGUMENTS')
+                 ->outIs('ARGUMENT')
+                 ->noDelimiter($directives);
+            $this->prepareQuery();
+        }
     }
 }
 
