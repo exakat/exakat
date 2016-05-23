@@ -153,13 +153,13 @@ class Gremlin2 extends Graph {
     public function queryOne($query, $params = [], $load = []) {
         $res = $this->query($query, $params, $load);
         if (!is_object($res)) {
-            throw \RuntimeException('Gremlin 2 server is not responding');
+            throw new \RuntimeException('Gremlin 2 server is not responding');
         }
     
         if (isset($res->results) && isset($res->results[0])) {
             return $res->results[0];
         } else {
-            throw \RuntimeException('Gremlin 2 server didn\t return any results.');
+            throw new \RuntimeException('Gremlin 2 server didn\t return any results.');
         }
     }
 
