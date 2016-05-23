@@ -46,6 +46,7 @@ class Docs {
     
     public function getThemeAnalyzers($theme) {
         if (is_array($theme)) {
+            $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
             $where = 'c.name in ("'.join('", "', $theme).'")';
         } else {
             $where = 'c.name = "'.$theme.'"';
