@@ -102,7 +102,7 @@ class Report2 extends Tasks {
         
         $max = 20;
         while (!file_exists($dumpFile)) {
-            display("$this->config->project/dump.sqlite doesn't exist yet ($max). Waiting\n");
+            display($this->config->project."/dump.sqlite doesn't exist yet ($max). Waiting\n");
             sleep(rand(1,3));
             --$max;
             
