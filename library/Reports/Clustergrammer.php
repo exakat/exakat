@@ -34,7 +34,9 @@ class Clustergrammer extends Reports {
     }
 
     public function generate($folder, $name= 'txt') {
-        $themes = array('Analyze', 'Dead Code', 'Security', 'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71');
+        $config = \Config::factory();
+        $themes = $config->thema;
+
         $analyzers = array();
         foreach($themes as $theme) {
             $analyzers[] = \Analyzer\Analyzer::getThemeAnalyzers($theme);

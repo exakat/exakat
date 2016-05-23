@@ -36,17 +36,14 @@ abstract class Reports {
     protected $sqlite = null;
     
     public function __construct() {
-        $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('Security'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
-                                    );
-        $this->themesList = '("'.implode('", "', $this->themes).'")';
+        $config = \Config::factory();
+
+        $analyzers = array();
+        foreach($config->thema as $thema) {
+            $analyzers[] = \Analyzer\Analyzer::getThemeAnalyzers($thema);
+        }
+        $this->analyzers = array_merge('array_merge', $themes);
+        $this->themesList = '("'.implode('", "', $this->analyzers).'")';
 
         $this->config = \Config::Factory();
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);
