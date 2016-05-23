@@ -27,9 +27,7 @@ class Project extends Tasks {
     private $project_dir = '.';
     private $config = null;
     
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
-                              'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
-                              'Analyze');
+    protected $themes = null;
 
     protected $reports = array('Premier' => array('Devoops' => 'report',
                                                   'Faceted' => 'faceted'));
@@ -38,6 +36,7 @@ class Project extends Tasks {
 
     public function run(\Config $config) {
         $this->config = $config;
+        $this->themes = $config->thema;
         
         $progress = 0;
 
