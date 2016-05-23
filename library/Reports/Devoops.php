@@ -2053,7 +2053,7 @@ TEXT
         $return = $this->formatTextLead($description);
 
         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
-            $return .= $this->formatText('clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />', 'textLead');
+            $return .= 'clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />';
         }
 
         $return .= $this->formatThemeList($analyzer->getThemes());
