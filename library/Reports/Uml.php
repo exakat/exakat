@@ -105,24 +105,26 @@ SQL
             $links[] = $ids[$row['implementing']]." -> ".$ids[$row['implements']]." [label=\"$row[type]\"];";
         }
         
-        $dot = " digraph graphname {\n        
-        fontname = \"Bitstream Vera Sans\"
-        fontsize = 8
-        colorscheme = \"bugn9\"
-
-        node [
-                fontname = \"Bitstream Vera Sans\"
-                fontsize = 8
-                shape = \"record\"
-        ]
-
-        edge [
-                fontname = \"Bitstream Vera Sans\"
-                fontsize = 8
-                arrowhead = \"empty\"
-        ]
-        
-        ".$this->subgraphs($dot)."\n\n".implode("\n", $links)."\n}\n";
+        $dot = <<<DOT
+digraph graphname {        
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    colorscheme = "bugn9"
+    
+    node [
+            fontname = "Bitstream Vera Sans"
+            fontsize = 8
+            shape = "record"
+    ]
+    
+    edge [
+            fontname = "Bitstream Vera Sans"
+            fontsize = 8
+            arrowhead = "empty"
+    ]
+ 
+DOT
+.$this->subgraphs($dot)."\n\n".implode("\n", $links)."\n}\n";
         
         file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
     }
