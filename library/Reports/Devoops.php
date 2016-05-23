@@ -1816,6 +1816,25 @@ SQL
             }
         }
         
+        // special case for disable_function
+        $res = $this->sqlite->query(<<<SQL
+SELECT fullcode FROM results 
+    WHERE analyzer = "Security/CantDisableFunction"
+SQL
+);
+        $used = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $used[] = substr($row['fullcode'], 0, strcspn($row['fullcode'], '(')); 
+        }
+        $used = array_keys(array_count_values($used));
+        
+        $suggested = parse_ini_file($this->config->root_dir.'data/disable_functions.ini');
+        $suggested = array_diff($suggested['disable_functions'], $used);
+
+        $data['standard'][] = array('name' => 'disable_functions', 
+                                    'suggested' => join(', ', $suggested), 
+                                    'documentation' => 'Those functions are not used in your code. Just disable them, to prevent anyone to take advantage of them, in case of security breach');
+        
         return $this->formatText( <<<TEXT
 This is an overview of the recommended directives for your application. 
 The most important directives have been collected here, for a quick review. 
