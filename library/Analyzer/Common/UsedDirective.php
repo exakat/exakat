@@ -31,10 +31,7 @@ class UsedDirective extends Analyzer\Analyzer {
         // ini_set($var ? )
 
         // ini_set('string'
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\ini_set', '\\ini_get', '\\ini_restore', '\\ini_alter', '\\iconv_set_encoding'))
+        $this->atomFunctionIs(array('\\ini_set', '\\ini_get', '\\ini_restore', '\\ini_alter', '\\iconv_set_encoding'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
