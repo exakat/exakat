@@ -24,13 +24,7 @@
 namespace Tasks;
 
 class Dump extends Tasks {
-    // Beware : shared with Project
-    protected $themes = array(//'CompatibilityPHP53', 'CompatibilityPHP54', 
-                              'CompatibilityPHP55', 'CompatibilityPHP56',
-                              'CompatibilityPHP70', 'CompatibilityPHP71',
-                              'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
-                              'Analyze');
-    private $stmtResults = null;
+    private $stmtResults       = null;
     private $stmtResultsCounts = null;
     
     const WAITING_LOOP = 1000;
@@ -81,13 +75,13 @@ SQL;
         $this->stmtResultsCounts = $sqlite->prepare($sqlQuery);
 
         $themes = array();
-        if ($config->thema !== null) {
-            $toProcess = array($config->thema);
-        } else {
+        if ($config->thema === null) {
             $toProcess = $this->themes;
+        } else {
+            $toProcess = array($config->thema);
         }
         foreach($toProcess as $thema) {
-            display('Processing thema "'.$thema.'"');
+            display('Processing thema "'.(is_array($thema) ? join(', ', $thema) : $thema).'"');
             $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
 
             $themes[] = $themaClasses;
