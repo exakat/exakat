@@ -24,16 +24,10 @@ namespace Analyzer\Composer;
 use Analyzer;
 
 class InComposerJson extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $config = \Config::factory();
         
-        $composerFile = $config->projects_root.'/projects/'.$config->project.'/code/composer.json';
+        $composerFile = $config->codePath.'/composer.json';
         if (!file_exists($composerFile)) {
             return ;
         }
