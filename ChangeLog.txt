@@ -1,4 +1,4 @@
-Version 0.6.6 (Princess Iron Fan, Coming up)
+Version 0.6.7 (Red boy, Coming up)
 + Architecture
     +
 + Report
@@ -8,7 +8,20 @@ Version 0.6.6 (Princess Iron Fan, Coming up)
 + Tokenizer
     + 
 
-Version 0.6.5 (Great Sage Who Pacifies Heaven, 2015-05-16)
+Version 0.6.6 (Princess Iron Fan, 2016-05-23)
++ Report
+    + New report, suggest disable_functions directive value.
+    + Added support for memcached directives
++ Analyzer
+    + New analyzer : spot throw without new
+    + New analyzer : suggest adding 2nd parameter to unserialize in PHP 7.0+
+    + New analyzer : spot successive if/then with the same condition
+    + Added support for zendoptimizer and suhosin extensions
+    + PHP7 indirect expression : added support for {} in properties
++ Tokenizer
+    + Raised cycle count, to speed up building AST for large projects
+
+Version 0.6.5 (Great Sage Who Pacifies Heaven, 2016-05-16)
 + Analyzer
     + New analyzer : spot globals that may be turned into property
     + New analyzer : check that ZF1 classes are well located
