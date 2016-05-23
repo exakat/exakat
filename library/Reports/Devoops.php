@@ -134,6 +134,7 @@ class Devoops extends Reports {
             $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
             $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';
         }
+
         uksort($analyze, function ($a, $b) { 
             return strtolower($a) > strtolower($b) ;
         });
@@ -1831,8 +1832,6 @@ TEXT
     private function Documentation() {
         $css = new \Stdclass();
         $css->displayTitles = true;
-//        $css->titles = array('Library', 'Folder', 'Home page');
-//        $css->readOrder = $css->titles;
 
         $data = array();
         foreach($this->analyzers as $analyzer) {

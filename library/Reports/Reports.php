@@ -38,8 +38,8 @@ abstract class Reports {
     public function __construct() {
         $this->config = \Config::Factory();
 
-        $this->analyzers = \Analyzer\Analyzer::getThemeAnalyzers($this->config->thema);
-        $this->themesList = '("'.implode('", "', $this->analyzers).'")';
+        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($this->config->thema);
+        $this->themesList = '("'.implode('", "', $analyzers).'")';
 
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);
         
