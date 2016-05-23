@@ -24,12 +24,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class LogicalMistakes extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // Note : support for parenthesis is added.
 
