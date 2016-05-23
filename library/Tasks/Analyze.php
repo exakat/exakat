@@ -144,7 +144,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
         $php = new \Phpexec($config->version);
 
         if (!$config->verbose && !$config->quiet) {
-            print "Analyzing {$config->thema}{$config->program}\n";
+            print "Analyzing {$config->program}\n";
             $progressBar = new \Progressbar(count($dependencies2) + 1);
         } else {
             display("Analyzing {$config->program}\n");
