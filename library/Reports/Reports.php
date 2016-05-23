@@ -36,16 +36,11 @@ abstract class Reports {
     protected $sqlite = null;
     
     public function __construct() {
-        $config = \Config::factory();
+        $this->config = \Config::Factory();
 
-        $analyzers = array();
-        foreach($config->thema as $thema) {
-            $analyzers[] = \Analyzer\Analyzer::getThemeAnalyzers($thema);
-        }
-        $this->analyzers = array_merge('array_merge', $themes);
+        $this->analyzers = \Analyzer\Analyzer::getThemeAnalyzers($this->config->thema);
         $this->themesList = '("'.implode('", "', $this->analyzers).'")';
 
-        $this->config = \Config::Factory();
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);
         
     }
