@@ -1399,6 +1399,7 @@ SQL
                             'ext/sqlsrv'       => 'Extensions/Extsqlsrv',
                             'ext/ssh2'         => 'Extensions/Extssh2',
                             'ext/standard'     => 'Extensions/Extstandard',
+                            'ext/suhosin'      => 'Extensions/Extsuhosin',
                             'ext/tidy'         => 'Extensions/Exttidy',
                             'ext/tokenizer'    => 'Extensions/Exttokenizer',
                             'ext/tokyotyrant'  => 'Extensions/Exttokyotyrant',
@@ -1789,8 +1790,8 @@ TEXT
                             // pecl extensions
                             'com', 'eaccelerator',
                             'geoip', 'ibase', 
-                            'imagick', 'mailparse', 'mongo', 
-                            'trader', 'tokyotyrant', 'wincache', 'xcache'
+                            'imagick', 'mailparse', 'mongo', 'suhoshin', 
+                            'trader', 'tokyotyrant', 'wincache', 'xcache', 'zendoptimizerplus'
                              );
 
         $data = array();
