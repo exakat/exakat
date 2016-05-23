@@ -147,7 +147,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
             print "Analyzing {$config->thema}{$config->program}\n";
             $progressBar = new \Progressbar(count($dependencies2) + 1);
         } else {
-            display("Analyzing {$config->thema}{$config->program}\n");
+            display("Analyzing {$config->program}\n");
         }
 
         foreach($dependencies2 as $analyzer_class) {
