@@ -72,7 +72,10 @@ class Config {
                                             'project'        => 'default',
                                             'program'        => null,
                                             'repository'     => false,
-                                            'thema'          => null,
+                                            'thema'          => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70','CompatibilityPHP71',
+                                                                      'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
+                                                                      'Analyze'),
+
                                             'report'         => 'Premier',
                                             'format'         => 'Text',
                                             'file'           => 'stdout',
@@ -257,7 +260,7 @@ class Config {
     public function __get($name) {
         if (isset($this->options[$name])) {
             $return = $this->options[$name];
-        } elseif (in_array($name, ['project', 'is_phar', 'codePath', 'projects_root', 'dir_root'])) {
+        } elseif (in_array($name, ['project', 'executable', 'is_phar', 'codePath', 'projects_root', 'dir_root'])) {
             $return = $this->$name;
         } else {
             $return = null;
