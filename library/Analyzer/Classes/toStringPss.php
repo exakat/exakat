@@ -33,22 +33,48 @@ class toStringPss extends Analyzer\Analyzer {
             $method = strtolower($method);
         }
         unset($method);
+        $methodsWithoutCallStatic = array_filter($methods, function ($x) { return strtolower($x) !== '__callstatic'; });
         
+        // Checking for 'static'
         $this->atomIs('Function')
              ->hasClass()
              ->outIs('NAME')
-             ->code($methods)
+             ->code($methodsWithoutCallStatic)
              ->inIs('NAME')
              ->hasOut('STATIC')
              ->back('first');
             $this->prepareQuery();
 
+        // Checking for 'private' and 'protected'
         $this->atomIs('Function')
+             ->analyzerIsNot('self')
              ->hasClass()
              ->outIs('NAME')
              ->code($methods)
              ->inIs('NAME')
              ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->back('first');
+        $this->prepareQuery();
+
+        // Checking for __callstatic (must be static and public)
+        // no static
+        $this->atomIs('Function')
+             ->hasClass()
+             ->outIs('NAME')
+             ->code('__callstatic')
+             ->inIs('NAME')
+             ->hasNoOut('STATIC')
+             ->back('first');
+        $this->prepareQuery();
+
+        // no public
+        $this->atomIs('Function')
+             ->analyzerIsNot('self')
+             ->hasClass()
+             ->outIs('NAME')
+             ->code('__callstatic')
+             ->inIs('NAME')
+             ->hasOut(array('PROTECTED', 'PRIVATE'))
              ->back('first');
         $this->prepareQuery();
     }
