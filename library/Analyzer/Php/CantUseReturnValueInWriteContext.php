@@ -24,7 +24,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class CantUseReturnValueInWriteContext extends Analyzer\Analyzer {
-    protected $phpversion = '5.5+';
+    protected $phpVersion = '5.5+';
 
     public function analyze() {
         $this->atomFunctionIs('\empty')

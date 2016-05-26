@@ -26,7 +26,7 @@ namespace Analyzer\Extensions;
 use Analyzer;
 
 class Extereg extends Analyzer\Common\Extension {
-    protected $phpversion = '7.0-';
+    protected $phpVersion = '7.0-';
     
     public function analyze() {
         $this->source = 'ereg.ini';

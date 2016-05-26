@@ -25,7 +25,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class ListWithKeys extends Analyzer\Analyzer {
-    protected $phpversion = '7.1+';
+    protected $phpVersion = '7.1+';
 
     public function analyze() {
         $this->atomFunctionIs('\\list')
