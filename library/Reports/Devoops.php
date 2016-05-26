@@ -1223,11 +1223,12 @@ SQL
                             '... usage'                  => 'Php/EllipsisUsage',
                             'func_get_args'              => 'Functions/VariableArguments',
 
-                            'Dynamic functioncall' => 'Functions/Dynamiccall',
-
-                            'Recursive Functions'  => 'Functions/Recursive',
-                            'Generator Functions'  => 'Functions/IsGenerator',
-                            'Conditioned Function' => 'Functions/ConditionedFunctions',
+                            'Dynamic functioncall'       => 'Functions/Dynamiccall',
+      
+                            'Recursive Functions'        => 'Functions/Recursive',
+                            'Generator Functions'        => 'Functions/IsGenerator',
+                            'Conditioned Function'       => 'Functions/ConditionedFunctions',
+                            'Functions By Reference'     => 'Functions/FunctionsUsingReference',
                     ),
 
                     'Classes' => array(
