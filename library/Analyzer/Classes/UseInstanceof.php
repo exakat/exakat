@@ -26,8 +26,12 @@ use Analyzer;
 
 class UseInstanceof extends Analyzer\Analyzer {
     public function analyze() {
+        // is_object()
         $this->atomFunctionIs('\\is_object');
         $this->prepareQuery();
+        
+        // check for class_implements call too.
+        // relax on !is_object (or suggest is_scalar)
     }
 }
 
