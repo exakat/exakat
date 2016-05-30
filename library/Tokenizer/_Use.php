@@ -177,11 +177,17 @@ fullcode.out('USE').has('atom', 'Identifier').each{
 
 // use a\b\c as c (aka c);
 fullcode.out('USE').has('atom', 'As').each{
+    s = [];
+    it.out("NAME").out("SUBNAME").sort{it.rank}._().each{
+        last = it.getProperty('code');
+        s.add(last);
+    };
+
     it.setProperty('alias', it.out('AS').next().code.toLowerCase());
     it.setProperty('originalias', it.out('AS').next().code);
 
     it.setProperty('originpath', it.out('NAME').next().fullcode.toLowerCase());
-    it.setProperty('originclass', it.sideEffect{last = it.out('NAME').count() - 1}.out('NAME').filter{ it.rank == last}.next().fullcode);
+    it.setProperty('originclass', s[s.size() - 1]);
 }
 
 // use b\c\a; (aka a)
