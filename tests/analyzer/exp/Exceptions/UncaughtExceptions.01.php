@@ -1,11 +1,13 @@
 <?php
 
-$expected     = array('class D extends C');
+$expected     = array('class G extends \Exception',
+                      );
 
 $expected_not = array('class A extends \Exception',
                       'class B extends A',
                       'class C extends B',
-                      'class E',
-                      'class F extends C');
+                      'class D extends C',
+                      'class F extends C',
+                      'class E');
 
 ?>

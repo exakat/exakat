@@ -37,7 +37,8 @@ class UncaughtExceptions extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->classDefinition()
              ->analyzerIs('Exceptions/DefinedExceptions')
-             ->analyzerIsNot('Exceptions/CaughtExceptions');
+             ->analyzerIsNot('Exceptions/CaughtExceptions')
+             ;
         $this->prepareQuery();
     }
 }
