@@ -33,10 +33,10 @@ class DirectInjection extends Analyzer\Analyzer {
     public function analyze() {
         $vars = $this->loadIni('php_incoming.ini', 'incoming');
         
-        $safeIndex = array('DOCUMENT_ROOT', 
-                           'REQUEST_TIME', 'REQUEST_TIME_FLOAT', 
-                           'SERVER_PORT', 'SERVER_NAME', 'SCRIPT_NAME', 'SERVER_ADMIN', 'SERVER_ADDR', 'SERVER_SOFTWARE', 
-                           '_', 'USERNAME', 
+        $safeIndex = array('DOCUMENT_ROOT',
+                           'REQUEST_TIME', 'REQUEST_TIME_FLOAT',
+                           'SERVER_PORT', 'SERVER_NAME', 'SCRIPT_NAME', 'SERVER_ADMIN', 'SERVER_ADDR', 'SERVER_SOFTWARE',
+                           '_', 'USERNAME',
                            'COMPOSER_ROOT_VERSION');
         $safeIndex = '(it.out("VARIABLE").has("code", "\$_SERVER").any() == false) ||
                        it.out("INDEX").has("atom", "String").filter{!(it.noDelimiter in ["' . implode('", "', $safeIndex) . '"])}.any()';

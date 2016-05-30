@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 23 May 2016 21:00:21 +0000
-.. comment: Generation hash : 17b0b57af0a6ac8b621ee6d39881fb28c47f802a
+.. comment: Generation date : Mon, 30 May 2016 11:58:20 +0000
+.. comment: Generation hash : 805ae632f1fa38dd1f4e340d577faef011d8d367
 
 
 .. _analyze:
@@ -68,12 +68,12 @@ Recipes details
 Analyze
 +++++++
 
-Total : 250 analysis
+Total : 251 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
-* :ref:`$this is not for static methods <$this-is-not-for-static-methods>`
+* :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
 * :ref:`<?= usage <<?=-usage>`
 * :ref:`Abstract Static Methods <abstract-static-methods>`
 * :ref:`Access Protected Structures <access-protected-structures>`
@@ -83,7 +83,7 @@ Total : 250 analysis
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
 * :ref:`Ambiguous Index <ambiguous-index>`
-* :ref:`Argument should be typehinted <argument-should-be-typehinted>`
+* :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid array\_unique() <avoid-array\_unique()>`
@@ -111,7 +111,7 @@ Total : 250 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use \_\_DIR\_\_ <could-use-\_\_dir\_\_>`
-* :ref:`Could use self <could-use-self>`
+* :ref:`Could Use self <could-use-self>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
 * :ref:`Deprecated Code <deprecated-code>`
@@ -156,7 +156,7 @@ Total : 250 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical Mistakes <logical-mistakes>`
-* :ref:`Logical should use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
+* :ref:`Logical Should Use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
 * :ref:`Lone Blocks <lone-blocks>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Magic Visibility <magic-visibility>`
@@ -174,7 +174,7 @@ Total : 250 analysis
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Choice <no-choice>`
-* :ref:`No Direct Call To MagicMethod <no-direct-call-to-magicmethod>`
+* :ref:`No Direct Call To Magicmethod <no-direct-call-to-magicmethod>`
 * :ref:`No Direct Usage <no-direct-usage>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
@@ -185,7 +185,7 @@ Total : 250 analysis
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
-* :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
+* :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Non Ascii Variables <non-ascii-variables>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
@@ -233,7 +233,7 @@ Total : 250 analysis
 * :ref:`Static Loop <static-loop>`
 * :ref:`Static Methods Called From Object <static-methods-called-from-object>`
 * :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
-* :ref:`Strict comparison with booleans <strict-comparison-with-booleans>`
+* :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strpos Comparison <strpos-comparison>`
 * :ref:`Switch To Switch <switch-to-switch>`
@@ -276,6 +276,7 @@ Total : 250 analysis
 * :ref:`Unused Use <unused-use>`
 * :ref:`Use === null <use-===-null>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+* :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
@@ -671,7 +672,7 @@ Total : 14 analysis
 * :ref:`Functions In Loop Calls <functions-in-loop-calls>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
-* :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
+* :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`
 * :ref:`Simple Regex <simple-regex>`
@@ -698,7 +699,7 @@ Total : 19 analysis
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
-* :ref:`Sleep is a security risk <sleep-is-a-security-risk>`
+* :ref:`Sleep Is A Security Risk <sleep-is-a-security-risk>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Use random\_int() <use-random\_int()>`
 * :ref:`parse\_str() Warning <parse\_str()-warning>`
@@ -710,9 +711,11 @@ Total : 19 analysis
 Wordpress
 +++++++++
 
-Total : 3 analysis
+Total : 5 analysis
 
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
+* :ref:`Unverified Nonce <unverified-nonce>`
+* :ref:`Use $wpdb Api <use-$wpdb-api>`
 * :ref:`Wpdb Best Usage <wpdb-best-usage>`
 

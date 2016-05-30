@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 23 May 2016 21:00:21 +0000
-.. comment: Generation hash : 17b0b57af0a6ac8b621ee6d39881fb28c47f802a
+.. comment: Generation date : Mon, 30 May 2016 11:58:20 +0000
+.. comment: Generation hash : 805ae632f1fa38dd1f4e340d577faef011d8d367
 
 
 .. _$http\_raw\_post\_data:
@@ -68,11 +68,26 @@ $this variable represents an object (the current object) and it is not an array,
 
 .. _$this-is-not-for-static-methods:
 
-$this is not for static methods
+$this Is Not For Static Methods
 ###############################
 
 
-$this variable represents an object (the current object) and it is not compatible with a static method, which may operate without any object.
+$this variable represents an object (the current object) and it is not compatible with a static method, which may operate without any object. 
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+       private $x = 1;
+       
+       // bar() is static, but use $this variable
+       static function bar() {
+           return $this->x;
+       }
+   }
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------+
 | Command Line | Classes/ThisIsNotForStatic                                                                  |
@@ -400,7 +415,7 @@ Mark anonymous classes.
 
 .. _argument-should-be-typehinted:
 
-Argument should be typehinted
+Argument Should Be Typehinted
 #############################
 
 
@@ -408,7 +423,7 @@ When a method expects objects as argument, those arguments should be typehinted,
 
 The analyzer will detect situations where a class, or the keywords 'array' or 'callable'. 
 
-Closure arguments are omitted.
+Closure arguments are omitted in this analyzer.
 
 +--------------+-----------------------------------------------------------------------------------------------+
 | Command Line | Functions/ShouldBeTypehinted                                                                  |
@@ -1203,11 +1218,29 @@ Use \_\_DIR\_\_ function to access the current file's parent directory.
 
 .. _could-use-self:
 
-Could use self
+Could Use self
 ##############
 
 
-Self keywords refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
+Self keyword refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+       const BAR = 1;
+   
+       public function bar() {
+           // Recommended : may change if the class is renamed
+           return self::BAR;
+   
+           // Not recommended
+           return \Foo::BAR;
+       }
+   }
+   
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Classes/ShouldUseSelf |
@@ -2706,7 +2739,7 @@ Based on article from Andrey Karpov : http://www.viva64.com/en/b/0390/
 
 .. _logical-should-use-&&,-||,-^:
 
-Logical should use &&, \|\|, ^
+Logical Should Use &&, \|\|, ^
 ##############################
 
 
@@ -3239,7 +3272,7 @@ Either the condition is useless, and may be removed, or the alternatives needs t
 
 .. _no-direct-call-to-magicmethod:
 
-No Direct Call To MagicMethod
+No Direct Call To Magicmethod
 #############################
 
 
@@ -3532,18 +3565,42 @@ The code needs to reference the full class's name to do so, without using the cu
 
 
 
-.. _no-array\_merge-in-loops:
+.. _no-array\_merge()-in-loops:
 
-No array\_merge In Loops
-########################
+No array\_merge() In Loops
+##########################
 
 
 The function array\_merge() is memory intensive : every call will duplicate the arguments in memory, before merging them. 
 
-Since arrays way be quite big, it is recommended to avoid using merge in a loop. Instead, one should use array\_merge with as many arguments as possible, making the merge a on time call.
+Since arrays way be quite big, it is recommended to avoid using merge in a loop. Instead, one should use array\_merge() with as many arguments as possible, making the merge a on time call.
 
-This may be achieved easily with the variadic operator : array\_merge(...array\_collecting\_the\_arrays), or 
-with call\_user\_func\_array('array\_merge', array\_collecting\_the\_arrays()). The Variadic is slightly faster than call\_user\_func\_array.
+.. code-block:: php
+
+   <?php
+   
+   // Wrong : very memory intensive
+   $all = array();
+   foreach($source as $element) {
+       $all = array\_merge($all, $element);
+   }
+   
+   // Good : Only one array\_merge call
+   $a = array();
+   foreach($source as $element) {
+       $a[] = $element;
+   }
+   $all = call\_user\_func\_array('array\_merge',$a);
+   
+   // Also identical : 
+   $all = call\_user\_func('array\_merge', ...$a);
+   
+   // In the very concise example above, you may even avoid the foreach totally 
+   // Though, in real life, the foreach is often needed for processing elements before merging
+   $all = call\_user\_func('array\_merge', ...$source);
+   
+   ?>
+
 
 Note that array\_merge\_recursive() is also affected.
 
@@ -5142,7 +5199,7 @@ PRCE regex are a powerful way to search inside strings, but they also come at th
 
 .. _sleep-is-a-security-risk:
 
-Sleep is a security risk
+Sleep Is A Security Risk
 ########################
 
 
@@ -5253,13 +5310,29 @@ Either, this is not a static method (simply remove the static keyword), or repla
 
 .. _strict-comparison-with-booleans:
 
-Strict comparison with booleans
+Strict Comparison With Booleans
 ###############################
 
 
 Booleans may be easily mistaken with other values, especially when the function may return integer or boolean as a normal course of action. 
 
-It is encouraged to use strict comparison === or !== when booleans are involved in a comparison.
+It is recommended to use strict comparison === or !== when booleans are involved in a comparison.
+
+.. code-block:: php
+
+   <?php
+   
+   // Good
+   if ($a === true) {
+       doSomething();
+   }
+   
+   // Wrong
+   if ($a != true) {
+       doSomething();
+   }
+   
+   ?>
 
 +--------------+------------------------------------+
 | Command Line | Structures/BooleanStrictComparison |
@@ -6249,6 +6322,58 @@ Usually, PHP functions are written all in lower case.
 
 
 
+.. _unverified-nonce:
+
+Unverified Nonce
+################
+
+
+Nonces were created in the code with wp\_create\_nonce() function, but they are not verified with wp\_verify\_nonce() nor check\_ajax\_referer()
+
++--------------+---------------------------+
+| Command Line | Wordpress/UnverifiedNonce |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Wordpress`          |
++--------------+---------------------------+
+
+
+
+.. _use-$wpdb-api:
+
+Use $wpdb Api
+#############
+
+
+It is recommended to use the Wordpress Database API, instead of using query. 
+This is especially true for UPDATE, REPLACE, INSERT and DELETE queries.
+
+.. code-block:: php
+
+   <?php
+   
+   // Generic query
+   $wpdb->query('DELETE FROM ' . $table . ' WHERE id=' . $id . ' LIMIT 1');
+   
+   // Wordpress query
+   $wpdb->delete( $table, array( 'id' => $id ), array('id' => '%d')); 
+   
+   ?>
+
+
+See <a href=https://codex.wordpress.org/Class\_Reference/wpdb>Class Reference/wpdb</a>.
+
++--------------+----------------------+
+| Command Line | Wordpress/UseWpdbApi |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Wordpress`     |
++--------------+----------------------+
+
+
+
 .. _use-===-null:
 
 Use === null
@@ -6309,15 +6434,53 @@ Use Instanceof
 ##############
 
 
-get\_class() should be replaced with the 'instanceof' operator to check the class of an object.
+The instanceof operator is a better alternative to is\_object(). instanceof checks for an variable to be of a class or its parents or the interfaces it implements. 
+Once instanceof has been used, the actual attributes available (properties, constants, methods) are known, unlike with is\_object().
 
-+--------------+--------------------------+
-| Command Line | Structures/UseInstanceof |
-+--------------+--------------------------+
-| clearPHP     |                          |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Analyze`           |
-+--------------+--------------------------+
+Last, instanceof may be upgraded to Typehint, by moving it to the method signature. 
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+   
+       // Don't use is\_object
+       public function bar($o) {
+           if (!is\_object($o)) { return false; } // Classic argument check
+           return $o->method();
+       }
+   
+       // use instanceof
+       public function bar($o) {
+           if ($o instanceof myClass) {  // Now, we know which methods are available
+               return $o->method();
+           }
+           
+           return false; } // Default behavior
+       }
+   
+       // use of typehinting
+       // in case $o is not of the right type, exception is raised automatically
+       public function bar(myClass $o) {
+           return $o->method();
+       }
+   }
+   
+   ?>
+
+
+instanceof and is\_object() may not be always interchangeable. Consider using is\_string(), is\_integer() or is\_scalar(), in particular instead of !is\_object().
+
+The instanceof operator is also faster than the is\_object() functioncall.
+
++--------------+--------------------------------+
+| Command Line | Classes/UseInstanceof          |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
++--------------+--------------------------------+
 
 
 
