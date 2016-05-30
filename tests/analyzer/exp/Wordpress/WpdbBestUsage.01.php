@@ -6,7 +6,7 @@ $expected     = array('"SELECT * FROM " . $table_prefix . " ORDER BY " . $wpdb->
 );
 
 $expected_not = array('"SELECT * FROM $group_table ORDER BY name"',
-                      "'SELECT * FROM $group_table ORDER BY name'",
+                      "'SELECT * FROM \$group_table ORDER BY name'",
                       '"SELECT * FROM $wpdb->table_prefix ORDER BY name"',
                       '"DROP TABLE IF EXISTS $table_prefix"',
                       '"SHOW TABLES LIKE $like"',
