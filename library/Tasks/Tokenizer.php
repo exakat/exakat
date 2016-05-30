@@ -50,10 +50,11 @@ class Tokenizer extends Tasks {
         $tokenCounts = $datastore->getCol('tokenCounts', 'token');
 
         $regex = array();
-        $regex2 = array();
+        $secondWave = array();
         foreach($classes as $class) {
             $new = "Tokenizer\\$class";
             $r = \Tokenizer\Token::getInstance($new, $this->gremlin, $config->phpversion);
+            
             $regex[$class] = $r;
         }
 
@@ -92,11 +93,6 @@ class Tokenizer extends Tasks {
             array_unshift($prev, $count);
 
             $regex = $regex_next;
-            if ($round == 2) {
-                foreach($regex2 as $name => $r) {
-                    $regex[$name] = $r;
-                }
-            }
             $regex_next = array();
             foreach($regex as $name => $r) {
                 $begin = microtime(true);
