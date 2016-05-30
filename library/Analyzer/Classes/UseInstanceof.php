@@ -20,27 +20,13 @@
  *
 */
 
-
-namespace Analyzer\Structures;
+namespace Analyzer\Classes;
 
 use Analyzer;
 
 class UseInstanceof extends Analyzer\Analyzer {
     public function analyze() {
-        // get_class($x) == 'Function'
-        $this->atomIs('Comparison')
-             ->outIs('LEFT')
-             ->atomIs('Functioncall')
-             ->fullnspath('\\get_class')
-             ->back('first');
-        $this->prepareQuery();
-
-        // 'Function' == get_class($x)
-        $this->atomIs('Comparison')
-             ->outIs('RIGHT')
-             ->atomIs('Functioncall')
-             ->fullnspath('\\get_class')
-             ->back('first');
+        $this->atomFunctionIs('\\is_object');
         $this->prepareQuery();
     }
 }
