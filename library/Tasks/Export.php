@@ -39,22 +39,25 @@ class Export extends Tasks {
             }
             $V[$x] =  $vv;
     
-            if (isset($v->properties->root)) {
+/*            if (isset($v->properties->root)) {
                 $root = $x;
             }
+            */
         }
 
-        $queryTemplate = 'g.E().not(hasId(0))';
+        $queryTemplate = 'g.E()';
         $result = $this->gremlin->query($queryTemplate);
         $edges = (array) $result->results;
 
         $E = array();
+            var_dump($edges);
         foreach($edges as $e) {
             $id = $e->outV;
     
             if (!isset($E[$id])) {
                 $E[$id] = array();
             }
+            var_dump($e);
     
             $endNodeId = $e->inV;
             if(isset($E[$id][$endNodeId])) {
@@ -64,10 +67,15 @@ class Export extends Tasks {
             }
         }
 
+/*
         if (!isset($root)) {
             die( "No root! Check the tree in Neo4j\n Aborting\n".number_format(memory_get_usage() / 1024 / 1024, 0).' Mo'. "\n");
         }
+*/
 
+        print_r($V);
+        print_r($E);
+        $root = array_keys($V)[0];
         if ($config->format == 'Dot') {
             $text = $this->display_dot($V, $E, $root);
         } elseif ($config->format  == 'Table') {
