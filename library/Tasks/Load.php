@@ -406,7 +406,9 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing operators
     //////////////////////////////////////////////////////
-    private function processOperator($atom, $finals) {
+    private function processAddition() {
+        $atom   = 'Addition';
+        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
         $current = $this->id;
 
         $left = $this->popExpression();
@@ -419,8 +421,6 @@ class Load extends Tasks {
                 $sign = $this->tokens[$this->id][1].$sign;
                 $code *= $this->tokens[$this->id][1].'1';
             }
-
-            print "Found all : $sign\n";
 
             if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
                 $operandId = $this->processNext();
@@ -473,12 +473,34 @@ class Load extends Tasks {
         $this->pushExpression($additionId);
     }
 
-    private function processAssignation() {
-        $this->processOperator('Assignation', $this->getPrecedence($this->tokens[$this->id][0]));
+    private function processOperator($atom, $finals) {
+        $current = $this->id;
+
+        $left = $this->popExpression();
+        $additionId = $this->addAtom($atom);
+        $this->addLink($additionId, $left, 'LEFT');
+        
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
+                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
+                               T_CLOSE_BRACKET], $finals);
+        do {
+            $id = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+
+        $right = $this->popExpression();
+        
+        $this->addLink($additionId, $right, 'RIGHT');
+
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
+                            $this->tokens[$current][1] . ' ' .
+                            $this->atoms[$right]['fullcode']];
+        $this->setAtom($additionId, $x);
+        $this->pushExpression($additionId);
     }
 
-    private function processAddition() {
-        $this->processOperator('Addition', $this->getPrecedence($this->tokens[$this->id][0]));
+    private function processAssignation() {
+        $this->processOperator('Assignation', $this->getPrecedence($this->tokens[$this->id][0]));
     }
 
     private function processMultiplication() {
