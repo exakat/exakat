@@ -25,7 +25,14 @@ namespace Tasks;
 const T_SEMICOLON = ';';
 const T_PLUS = '+';
 const T_MINUS = '-';
+const T_STAR = '*';
+const T_SLASH = '/';
+const T_OPEN_BRACKET = '[';
+const T_CLOSE_BRACKET = ']';
+const T_OPEN_PARENTHESIS = '(';
+const T_CLOSE_PARENTHESIS = ')';
 const T_END = 'The End';
+
 
 
 
@@ -36,7 +43,13 @@ class Load extends Tasks {
     
     const TOKENS = [ ';' => T_SEMICOLON,
                      '+' => T_PLUS,
-                     '-' => T_MINUS
+                     '-' => T_MINUS,
+                     '/' => T_SLASH,
+                     '*' => T_STAR,
+                     '[' => T_OPEN_BRACKET,
+                     ']' => T_CLOSE_BRACKET,
+                     '(' => T_OPEN_PARENTHESIS,
+                     ')' => T_CLOSE_PARENTHESIS
                    ];
     
     public function run(\Config $config) {
@@ -205,14 +218,25 @@ class Load extends Tasks {
        ++$this->id;
        
        print $this->id.") ".$this->tokens[$this->id][1]."\n";
-       $this->processing = [T_OPEN_TAG  => 'processOpenTag',
-                            T_CLOSE_TAG => 'processNone',
-                            T_VARIABLE  => 'processVariable',
-                            T_LNUMBER   => 'processInteger',
-                            T_PLUS      => 'processOperator',
-                            T_MINUS     => 'processOperator',
-                            T_SEMICOLON => 'processSemicolon',
-                            T_END       => 'processNone'];
+       $this->processing = [T_OPEN_TAG          => 'processOpenTag',
+                            T_VARIABLE          => 'processVariable',
+                            T_LNUMBER           => 'processInteger',
+
+                            T_OPEN_PARENTHESIS  => 'processParenthesis',
+                            T_CLOSE_PARENTHESIS => 'processNone',
+    
+                            T_PLUS              => 'processOperator',
+                            T_MINUS             => 'processOperator',
+                            T_STAR              => 'processOperator',
+                            T_SLASH             => 'processOperator',
+    
+                            T_OPEN_BRACKET      => 'processBracket',
+                            T_CLOSE_BRACKET     => 'processNone',
+    
+                            T_SEMICOLON         => 'processSemicolon',
+                            T_CLOSE_TAG         => 'processClosingTag',
+                            T_END               => 'processNone',
+                            ];
                             
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
             print "Defaulting a : $this->id ";
@@ -232,25 +256,68 @@ class Load extends Tasks {
         do {
             $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], [T_END, T_CLOSE_TAG])) ;
-        
-        print "End of while\n";
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
-            $this->id++;
-        }
-        $this->endSequence();
 
-        $this->addLink($id, $this->sequence, 'CODE');
+        // always do this, T_END or T_CLOSE_TAG, to close the sequence
+        $this->processClosingTag();
+        if ($this->tokens[$this->id + 1][0] == T_CLOSE_TAG) {
+            $this->id++;
+            $closing = $this->tokens[$this->id + 1][1];
+        } else {
+            $closing = '';
+        }
+
+        $this->addLink($id, $this->popExpression(), 'CODE');
 
         $this->setAtom($id, ['code'     => $this->tokens[$id][1], 
-                             'fullcode' => '<?php /**/ ?>']);
+                             'fullcode' => '<?php /**/ '.$closing]);
         $this->pushExpression($id);
-        return $id;
+        
+        return $id;        
     }
 
     private function processNone() {
         return null;// Just ignore
     }
 
+    private function processBracket() {
+        $id = $this->addAtom('Array');
+
+        $variableId = $this->popExpression();
+        $this->addLink($id, $variableId, 'VARIABLE');
+
+        do {
+            $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_BRACKET])) ;
+
+        $indexId = $this->popExpression();
+        $this->addLink($id, $indexId, 'INDEX');
+
+        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
+                             'fullcode' => $this->atoms[$variableId]['fullcode'] . '[' .
+                                           $this->atoms[$indexId]['fullcode']    . ']' ]);
+        $this->pushExpression($id);
+
+        return $id;
+    }
+
+    private function processParenthesis() {
+        $parentheseId = $this->addAtom('Parenthesis');
+
+        do {
+            $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) ;
+
+        $indexId = $this->popExpression();
+        $this->addLink($parentheseId, $indexId, 'CODE');
+
+        $this->setAtom($parentheseId, ['code'     => $this->tokens[$this->id][1], 
+                             'fullcode' => '(' . $this->atoms[$indexId]['fullcode'] . ')' ]);
+        $this->pushExpression($parentheseId);
+        ++$this->id; // Skipping the )
+
+        return $parentheseId;
+    }
+    
     private function processVariable() {
         $id = $this->addAtom('Variable');
         $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
@@ -273,21 +340,37 @@ class Load extends Tasks {
         $this->addLink($this->sequence, $this->popExpression(), 'ELEMENT');
     }
 
+    private function processClosingTag() {
+        $pop = $this->popExpression();
+        if ($this->atoms[$pop]['atom'] != 'Void') {
+            print "Closing tag, finishing sequence ({$this->atoms[$pop]['atom']})\n";
+            $this->addLink($this->sequence, $pop, 'ELEMENT');
+        } else {
+            print "Closing tag, ignoring sequence ({$this->atoms[$pop]['atom']})\n";
+            $this->pushExpression($pop);
+        }
+
+        $this->pushExpression($this->sequence);
+        $this->endSequence();
+    }
+
     private function processOperator() {
         $this->operators = ['+' => 'Addition',
                             '-' => 'Addition',
                             '*' => 'Multiplication',
                             '/' => 'Multiplication',
                             ];
-        $additionId = $this->addAtom($this->operators[$this->tokens[$current][1]]);
         $current = $this->id;
+        $additionId = $this->addAtom($this->operators[$this->tokens[$current][1]]);
 
         $left = $this->popExpression();
         $this->addLink($additionId, $left, 'LEFT');
         
         do {
             $id = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_PLUS, T_MINUS])) ;
+        } while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_PLUS, T_MINUS, T_STAR, T_SLASH, 
+                                                             T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
+                                                             T_OPEN_BRACKET, T_CLOSE_BRACKET])) ;
 
         $right = $this->popExpression();
         
@@ -366,11 +449,16 @@ class Load extends Tasks {
     
     private function startSequence() {
         $this->sequence = $this->addAtom('Sequence');
+        $this->setAtom($this->sequence, ['code' => ';', 'fullcode' => ' /**/ ']);
+        
         $this->sequences[] = $this->sequence;
     }
 
     private function endSequence() {
-        $this->sequence = array_pop($this->sequences);
+        array_pop($this->sequences);
+        if (!empty($this->sequences)) {
+            $this->sequence = $this->sequences[count($this->sequences) - 1];
+        }
     }
 }
 

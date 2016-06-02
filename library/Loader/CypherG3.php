@@ -75,9 +75,9 @@ class CypherG3 {
 //            return false;
         }
         
-        foreach(static::$fp_rels as $fp) {
+//        foreach(static::$fp_rels as $fp) {
 //            fclose($fp);
-        }
+//        }
 //        fclose(static::$fp_nodes);
         foreach(static::$fp_nodes_attr as $fpa) {
 //            fclose($fpa);
