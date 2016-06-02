@@ -22,22 +22,25 @@
 
 namespace Tasks;
 
-const T_SEMICOLON = ';';
-const T_COMMA = ',';
-const T_PLUS = '+';
-const T_MINUS = '-';
-const T_STAR = '*';
-const T_DOT = '.';
-const T_PERCENTAGE = '%';
-const T_STARSTAR = '**';
-const T_SLASH = '/';
-const T_OPEN_BRACKET = '[';
-const T_CLOSE_BRACKET = ']';
-const T_OPEN_PARENTHESIS = '(';
-const T_CLOSE_PARENTHESIS = ')';
-const T_EQUAL = '=';
-const T_PLUS_EQUAL = '+=';
-const T_END = 'The End';
+const T_BANG                         = '!';
+const T_CLOSE_BRACKET                = ']';
+const T_CLOSE_PARENTHESIS            = ')';
+const T_COMMA                        = ',';
+const T_DOT                          = '.';
+const T_EQUAL                        = '=';
+const T_MINUS                        = '-';
+const T_NOSCREAM                     = '@';
+const T_OPEN_BRACKET                 = '[';
+const T_OPEN_PARENTHESIS             = '(';
+const T_PERCENTAGE                   = '%';
+const T_PLUS                         = '+';
+const T_PLUS_EQUAL                   = '+=';
+const T_SEMICOLON                    = ';';
+const T_SLASH                        = '/';
+const T_STAR                         = '*';
+const T_STARSTAR                     = '**';
+const T_TILDE                        = '~';
+const T_END                          = 'The End';
 
 class Load extends Tasks {
     private $php    = null;
@@ -51,6 +54,22 @@ class Load extends Tasks {
                         T_OPEN_BRACKET                => 2,
                
                         T_STARSTAR                    => 3,
+                        
+                        T_INC                         => 4,
+                        T_DEC                         => 4,
+                        T_TILDE                       => 4,
+                        T_ARRAY_CAST                  => 4,
+                        T_BOOL_CAST                   => 4,
+                        T_DOUBLE_CAST                 => 4,
+                        T_INT_CAST                    => 4,
+                        T_OBJECT_CAST                 => 4,
+                        T_STRING_CAST                 => 4,
+                        T_UNSET_CAST                  => 4,
+                        T_NOSCREAM                    => 4,
+
+                        T_INSTANCEOF                  => 5,
+                        
+                        T_BANG                        => 6,
                
                         T_SLASH                       => 7,
                         T_STAR                        => 7,
@@ -80,6 +99,8 @@ class Load extends Tasks {
                      '='  => T_EQUAL,
                      '+=' => T_PLUS_EQUAL,
                      ','  => T_COMMA,
+                     '!'  => T_BANG,
+                     '~'  => T_TILDE,
                    ];
     
     public function run(\Config $config) {
@@ -247,35 +268,48 @@ class Load extends Tasks {
        ++$this->id;
        
        print $this->id.") ".$this->tokens[$this->id][1]."\n";
-       $this->processing = [T_OPEN_TAG          => 'processOpenTag',
+       $this->processing = [T_OPEN_TAG                 => 'processOpenTag',
+       
+                            T_VARIABLE                 => 'processVariable',
+                            T_LNUMBER                  => 'processInteger',
+                            T_DNUMBER                  => 'processReal',
+       
+                            T_OPEN_PARENTHESIS         => 'processParenthesis',
+                            T_CLOSE_PARENTHESIS        => 'processNone',
+           
+                            T_PLUS                     => 'processAddition',
+                            T_MINUS                    => 'processAddition',
+                            T_STAR                     => 'processMultiplication',
+                            T_SLASH                    => 'processMultiplication',
+                            T_STARSTAR                 => 'processPower',
+                            T_INSTANCEOF               => 'processInstanceof',
+       
+                            T_DOT                      => 'processDot',
+                            T_ECHO                     => 'processEcho',
+       
+                            T_EQUAL                    => 'processAssignation',
+                            T_PLUS_EQUAL               => 'processAssignation',
+           
+                            T_OPEN_BRACKET             => 'processBracket',
+                            T_CLOSE_BRACKET            => 'processNone',
+       
+                            T_STRING                   => 'processString',
+                            T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
+   
+                            T_ARRAY_CAST               => 'processCast',
+                            T_BOOL_CAST                => 'processCast',
+                            T_DOUBLE_CAST              => 'processCast',
+                            T_INT_CAST                 => 'processCast',
+                            T_OBJECT_CAST              => 'processCast',
+                            T_STRING_CAST              => 'processCast',
+                            T_UNSET_CAST               => 'processCast',
 
-                            T_VARIABLE          => 'processVariable',
-                            T_LNUMBER           => 'processInteger',
-                            T_DNUMBER           => 'processReal',
-
-                            T_OPEN_PARENTHESIS  => 'processParenthesis',
-                            T_CLOSE_PARENTHESIS => 'processNone',
-    
-                            T_PLUS              => 'processAddition',
-                            T_MINUS             => 'processAddition',
-                            T_STAR              => 'processMultiplication',
-                            T_SLASH             => 'processMultiplication',
-                            T_STARSTAR          => 'processPower',
-
-                            T_DOT               => 'processDot',
-                            T_ECHO              => 'processEcho',
-
-                            T_EQUAL             => 'processAssignation',
-                            T_PLUS_EQUAL        => 'processAssignation',
-    
-                            T_OPEN_BRACKET      => 'processBracket',
-                            T_CLOSE_BRACKET     => 'processNone',
-
-                            T_STRING            => 'processString',
-    
-                            T_SEMICOLON         => 'processSemicolon',
-                            T_CLOSE_TAG         => 'processClosingTag',
-                            T_END               => 'processNone',
+                            T_BANG                     => 'processNot',
+                            T_TILDE                    => 'processNot',
+                             
+                            T_SEMICOLON                => 'processSemicolon',
+                            T_CLOSE_TAG                => 'processClosingTag',
+                            T_END                      => 'processNone',
                             ];
                             
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
@@ -454,9 +488,48 @@ class Load extends Tasks {
     private function processReal() {
         return $this->processSingle('Real');
     }
+    
+    private function processLiteral() {
+        return $this->processSingle('String');
+    }
 
     //////////////////////////////////////////////////////
-    /// processing operators
+    /// processing single operators
+    //////////////////////////////////////////////////////
+    private function processSingleOperator($atom, $link, $finals) {
+        $current = $this->id;
+
+        $operatorId = $this->addAtom($atom);
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
+                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
+                               T_CLOSE_BRACKET], $finals);
+        print_r($finals);
+        do {
+            $id = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+
+        $operandId = $this->popExpression();
+        
+        $this->addLink($operatorId, $operandId, $link);
+
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->tokens[$current][1] . ' ' .
+                            $this->atoms[$operandId]['fullcode']];
+
+        $this->setAtom($operatorId, $x);
+        $this->pushExpression($operatorId);
+    }
+
+    private function processCast() {
+        return $this->processSingleOperator('Cast', 'CAST', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processNot() {
+        return $this->processSingleOperator('Not', 'NOT', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    //////////////////////////////////////////////////////
+    /// processing binary operators
     //////////////////////////////////////////////////////
     private function processAddition() {
         $atom   = 'Addition';
@@ -524,12 +597,12 @@ class Load extends Tasks {
         $this->pushExpression($additionId);
     }
 
-    private function processOperator($atom, $finals) {
+    private function processOperator($atom, $finals, $links = ['LEFT', 'RIGHT']) {
         $current = $this->id;
 
         $left = $this->popExpression();
         $additionId = $this->addAtom($atom);
-        $this->addLink($additionId, $left, 'LEFT');
+        $this->addLink($additionId, $left, $links[0]);
         
         $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
@@ -540,7 +613,7 @@ class Load extends Tasks {
 
         $right = $this->popExpression();
         
-        $this->addLink($additionId, $right, 'RIGHT');
+        $this->addLink($additionId, $right, $links[1]);
 
         $x = ['code'     => $this->tokens[$current][1], 
               'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
@@ -564,6 +637,10 @@ class Load extends Tasks {
 
     private function processDot() {
         $this->processOperator('Concantenation', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processInstanceof() {
+        $this->processOperator('Instanceof', $this->getPrecedence($this->tokens[$this->id][0]), ['VARIABLE', 'CLASS']);
     }
 
     private function processEcho() {
