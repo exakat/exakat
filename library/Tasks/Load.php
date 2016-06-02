@@ -23,6 +23,7 @@
 namespace Tasks;
 
 const T_SEMICOLON = ';';
+const T_COMMA = ',';
 const T_PLUS = '+';
 const T_MINUS = '-';
 const T_STAR = '*';
@@ -37,9 +38,6 @@ const T_CLOSE_PARENTHESIS = ')';
 const T_EQUAL = '=';
 const T_PLUS_EQUAL = '+=';
 const T_END = 'The End';
-
-
-
 
 class Load extends Tasks {
     private $php    = null;
@@ -81,6 +79,7 @@ class Load extends Tasks {
                      ')'  => T_CLOSE_PARENTHESIS,
                      '='  => T_EQUAL,
                      '+=' => T_PLUS_EQUAL,
+                     ','  => T_COMMA,
                    ];
     
     public function run(\Config $config) {
@@ -271,6 +270,8 @@ class Load extends Tasks {
     
                             T_OPEN_BRACKET      => 'processBracket',
                             T_CLOSE_BRACKET     => 'processNone',
+
+                            T_STRING            => 'processString',
     
                             T_SEMICOLON         => 'processSemicolon',
                             T_CLOSE_TAG         => 'processClosingTag',
@@ -329,15 +330,66 @@ class Load extends Tasks {
     private function processClosingTag() {
         $pop = $this->popExpression();
         if ($this->atoms[$pop]['atom'] != 'Void') {
-            print "Closing tag, finishing sequence ({$this->atoms[$pop]['atom']})\n";
             $this->addLink($this->sequence, $pop, 'ELEMENT');
         } else {
-            print "Closing tag, ignoring sequence ({$this->atoms[$pop]['atom']})\n";
             $this->pushExpression($pop);
         }
 
         $this->pushExpression($this->sequence);
         $this->endSequence();
+    }
+
+    private function processString() {
+        // For functions and constants 
+        if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
+            
+            $nameId = $this->addAtom('Identifier');
+            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
+                                     'fullcode' => $this->tokens[$this->id][1] ]);
+
+            $argumentsId = $this->addAtom('Arguments');
+            ++$this->id; // Skipping the (        
+
+            $this->pushExpression(); // set Void()
+            $fullcode = array();
+            while (!in_array($this->tokens[$this->id][0], [T_CLOSE_PARENTHESIS])) {
+               $this->processNext();
+
+                if ($this->tokens[$this->id + 1][0] == T_COMMA) {
+                    $indexId = $this->popExpression();
+                    $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+                    $fullcode[] = $this->atoms[$indexId]['fullcode'];
+
+                    ++$this->id; // Skipping the comma ,
+                }
+            };
+
+            $indexId = $this->popExpression();
+            $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+            $fullcode[] = $this->atoms[$indexId]['fullcode'];
+
+            $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
+                                          'fullcode' => join(', ', $fullcode)]);
+//          // Skipping the ) is already done in the loops       
+
+            $functioncallId = $this->addAtom('Functioncall');
+            $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
+                                             'fullcode' => $this->atoms[$nameId]['code'].'('.
+                                                           $this->atoms[$argumentsId]['fullcode'].')'
+                                            ]);
+            $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
+            $this->addLink($functioncallId, $nameId, 'NAME');
+
+            $this->pushExpression($functioncallId);
+            
+            return $functioncallId;
+        } else {
+            $id = $this->addAtom('Identifier');
+            $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
+                                 'fullcode' => $this->tokens[$this->id][1] ]);
+            $this->pushExpression($id);
+        }
+        return $id;
     }
     
     private function processBracket() {
@@ -425,7 +477,6 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
                 $operandId = $this->processNext();
 
-                print "Adding '$sign' to number {$this->atoms[$operandId]['code']}\n";
                 $this->atoms[$operandId]['code']     = $code.$this->atoms[$operandId]['code'];
                 $this->atoms[$operandId]['fullcode'] = $sign.$this->atoms[$operandId]['fullcode'];
 
