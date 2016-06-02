@@ -26,11 +26,16 @@ const T_SEMICOLON = ';';
 const T_PLUS = '+';
 const T_MINUS = '-';
 const T_STAR = '*';
+const T_DOT = '.';
+const T_PERCENTAGE = '%';
+const T_STARSTAR = '**';
 const T_SLASH = '/';
 const T_OPEN_BRACKET = '[';
 const T_CLOSE_BRACKET = ']';
 const T_OPEN_PARENTHESIS = '(';
 const T_CLOSE_PARENTHESIS = ')';
+const T_EQUAL = '=';
+const T_PLUS_EQUAL = '+=';
 const T_END = 'The End';
 
 
@@ -40,16 +45,37 @@ class Load extends Tasks {
     private $php    = null;
     private $client = null;
     private $config = null;
+     
+    const PRECEDENCE = [T_OBJECT_OPERATOR             => 1,
+                        T_CLONE                       => 1,
+                        T_NEW                         => 1, 
+                        T_OPEN_BRACKET                => 2,
+               
+                        T_STARSTAR                    => 3,
+               
+                        T_SLASH                       => 7,
+                        T_STAR                        => 7,
+                        T_PERCENTAGE                  => 7,
+                 
+                        T_PLUS                        => 8,
+                        T_MINUS                       => 8,
+                        T_DOT                         => 8,
+               
+                        T_EQUAL                       => 19,
+                        T_PLUS_EQUAL                  => 19,
+    ];
     
-    const TOKENS = [ ';' => T_SEMICOLON,
-                     '+' => T_PLUS,
-                     '-' => T_MINUS,
-                     '/' => T_SLASH,
-                     '*' => T_STAR,
-                     '[' => T_OPEN_BRACKET,
-                     ']' => T_CLOSE_BRACKET,
-                     '(' => T_OPEN_PARENTHESIS,
-                     ')' => T_CLOSE_PARENTHESIS
+    const TOKENS = [ ';'  => T_SEMICOLON,
+                     '+'  => T_PLUS,
+                     '-'  => T_MINUS,
+                     '/'  => T_SLASH,
+                     '*'  => T_STAR,
+                     '['  => T_OPEN_BRACKET,
+                     ']'  => T_CLOSE_BRACKET,
+                     '('  => T_OPEN_PARENTHESIS,
+                     ')'  => T_CLOSE_PARENTHESIS,
+                     '='  => T_EQUAL,
+                     '+=' => T_PLUS_EQUAL,
                    ];
     
     public function run(\Config $config) {
@@ -225,10 +251,14 @@ class Load extends Tasks {
                             T_OPEN_PARENTHESIS  => 'processParenthesis',
                             T_CLOSE_PARENTHESIS => 'processNone',
     
-                            T_PLUS              => 'processOperator',
-                            T_MINUS             => 'processOperator',
-                            T_STAR              => 'processOperator',
-                            T_SLASH             => 'processOperator',
+                            T_PLUS              => 'processAddition',
+                            T_MINUS             => 'processAddition',
+                            T_STAR              => 'processMultiplication',
+                            T_SLASH             => 'processMultiplication',
+                            T_STARSTAR          => 'processPower',
+
+                            T_EQUAL             => 'processAssignation',
+                            T_PLUS_EQUAL        => 'processAssignation',
     
                             T_OPEN_BRACKET      => 'processBracket',
                             T_CLOSE_BRACKET     => 'processNone',
@@ -354,23 +384,35 @@ class Load extends Tasks {
         $this->endSequence();
     }
 
-    private function processOperator() {
-        $this->operators = ['+' => 'Addition',
-                            '-' => 'Addition',
-                            '*' => 'Multiplication',
-                            '/' => 'Multiplication',
-                            ];
+    private function processAssignation() {
+        $this->processOperator('Assignation', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processAddition() {
+        $this->processOperator('Addition', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processMultiplication() {
+        $this->processOperator('Multiplication', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processPower() {
+        $this->processOperator('Power', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processOperator($atom, $finals) {
         $current = $this->id;
         $additionId = $this->addAtom($this->operators[$this->tokens[$current][1]]);
 
         $left = $this->popExpression();
         $this->addLink($additionId, $left, 'LEFT');
         
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
+                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
+                               T_CLOSE_BRACKET], $finals);
         do {
             $id = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_PLUS, T_MINUS, T_STAR, T_SLASH, 
-                                                             T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
-                                                             T_OPEN_BRACKET, T_CLOSE_BRACKET])) ;
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
 
         $right = $this->popExpression();
         
@@ -460,6 +502,29 @@ class Load extends Tasks {
             $this->sequence = $this->sequences[count($this->sequences) - 1];
         }
     }
+
+    private function getPrecedence($token) {
+        static $cache;
+        
+        if ($cache === null) {
+            $cache = [];
+            foreach(self::PRECEDENCE as $k1 => $p1) {
+                $cache[$k1] = [];
+                foreach(self::PRECEDENCE as $k2 => $p2) {
+                    if ($p1 < $p2) {
+                        $cache[$k1][] = $k2;
+                    }
+                }
+            }
+        }
+        
+        if (!isset($cache[$token])) {
+            die("No precedence for $token\n");
+        }
+        
+        return $cache[$token];
+    }
+
 }
 
 ?>

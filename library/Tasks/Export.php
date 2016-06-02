@@ -50,14 +50,12 @@ class Export extends Tasks {
         $edges = (array) $result->results;
 
         $E = array();
-            var_dump($edges);
         foreach($edges as $e) {
             $id = $e->outV;
     
             if (!isset($E[$id])) {
                 $E[$id] = array();
             }
-            var_dump($e);
     
             $endNodeId = $e->inV;
             if(isset($E[$id][$endNodeId])) {
@@ -73,8 +71,6 @@ class Export extends Tasks {
         }
 */
 
-        print_r($V);
-        print_r($E);
         $root = array_keys($V)[0];
         if ($config->format == 'Dot') {
             $text = $this->display_dot($V, $E, $root);

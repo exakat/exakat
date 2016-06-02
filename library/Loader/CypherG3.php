@@ -141,7 +141,7 @@ CYPHER;
             preg_match('/rels\.g3\.(.*)\.csv$/', $file, $r);
             $edge = $r[1];
             
-            print $queryTemplate = <<<CYPHER
+            $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 200
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.g3.$edge.csv" AS csvLine
 MATCH (token:Token { eid: toInt(csvLine.start)}),(token2:Token { eid: toInt(csvLine.end)})
