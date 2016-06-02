@@ -46,7 +46,8 @@ class Load extends Tasks {
     private $client = null;
     private $config = null;
      
-    const PRECEDENCE = [T_OBJECT_OPERATOR             => 1,
+    const PRECEDENCE = [
+                        T_OBJECT_OPERATOR             => 1,
                         T_CLONE                       => 1,
                         T_NEW                         => 1, 
                         T_OPEN_BRACKET                => 2,
@@ -63,6 +64,8 @@ class Load extends Tasks {
                
                         T_EQUAL                       => 19,
                         T_PLUS_EQUAL                  => 19,
+                        
+                        T_ECHO                        => 20,
     ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -70,6 +73,8 @@ class Load extends Tasks {
                      '-'  => T_MINUS,
                      '/'  => T_SLASH,
                      '*'  => T_STAR,
+                     '.'  => T_DOT,
+                     '**' => T_STARSTAR,
                      '['  => T_OPEN_BRACKET,
                      ']'  => T_CLOSE_BRACKET,
                      '('  => T_OPEN_PARENTHESIS,
@@ -222,7 +227,6 @@ class Load extends Tasks {
                               'fullcode' => './test.php']);
         $this->addLink($id0, $id1, 'PROJECT');
         
-        print_r($this->tokens);
         $n = count($this->tokens) - 1;
         do {
             $this->processNext();
@@ -245,8 +249,10 @@ class Load extends Tasks {
        
        print $this->id.") ".$this->tokens[$this->id][1]."\n";
        $this->processing = [T_OPEN_TAG          => 'processOpenTag',
+
                             T_VARIABLE          => 'processVariable',
                             T_LNUMBER           => 'processInteger',
+                            T_DNUMBER           => 'processReal',
 
                             T_OPEN_PARENTHESIS  => 'processParenthesis',
                             T_CLOSE_PARENTHESIS => 'processNone',
@@ -256,6 +262,9 @@ class Load extends Tasks {
                             T_STAR              => 'processMultiplication',
                             T_SLASH             => 'processMultiplication',
                             T_STARSTAR          => 'processPower',
+
+                            T_DOT               => 'processDot',
+                            T_ECHO              => 'processEcho',
 
                             T_EQUAL             => 'processAssignation',
                             T_PLUS_EQUAL        => 'processAssignation',
@@ -277,7 +286,15 @@ class Load extends Tasks {
         
         return $this->$method();
     }
-    
+
+    // Dummy method
+    private function processNone() {
+        return null;// Just ignore
+    }
+
+    //////////////////////////////////////////////////////
+    /// processing complex tokens
+    //////////////////////////////////////////////////////
     private function processOpenTag() {
         $id = $this->addAtom('Php');
         
@@ -305,10 +322,24 @@ class Load extends Tasks {
         return $id;        
     }
 
-    private function processNone() {
-        return null;// Just ignore
+    private function processSemicolon() {
+        $this->addLink($this->sequence, $this->popExpression(), 'ELEMENT');
     }
 
+    private function processClosingTag() {
+        $pop = $this->popExpression();
+        if ($this->atoms[$pop]['atom'] != 'Void') {
+            print "Closing tag, finishing sequence ({$this->atoms[$pop]['atom']})\n";
+            $this->addLink($this->sequence, $pop, 'ELEMENT');
+        } else {
+            print "Closing tag, ignoring sequence ({$this->atoms[$pop]['atom']})\n";
+            $this->pushExpression($pop);
+        }
+
+        $this->pushExpression($this->sequence);
+        $this->endSequence();
+    }
+    
     private function processBracket() {
         $id = $this->addAtom('Array');
 
@@ -348,63 +379,79 @@ class Load extends Tasks {
         return $parentheseId;
     }
     
-    private function processVariable() {
-        $id = $this->addAtom('Variable');
+    //////////////////////////////////////////////////////
+    /// processing single tokens
+    //////////////////////////////////////////////////////
+    private function processSingle($atom) {
+        $id = $this->addAtom($atom);
         $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
                              'fullcode' => $this->tokens[$this->id][1] ]);
         $this->pushExpression($id);
 
         return $id;
+    }
+
+    private function processVariable() {
+        return $this->processSingle('Variable');
     }
 
     private function processInteger() {
-        $id = $this->addAtom('Integer');
-        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
-                             'fullcode' => $this->tokens[$this->id][1] ]);
-        $this->pushExpression($id);
-
-        return $id;
+        return $this->processSingle('Integer');
     }
 
-    private function processSemicolon() {
-        $this->addLink($this->sequence, $this->popExpression(), 'ELEMENT');
+    private function processReal() {
+        return $this->processSingle('Real');
     }
 
-    private function processClosingTag() {
-        $pop = $this->popExpression();
-        if ($this->atoms[$pop]['atom'] != 'Void') {
-            print "Closing tag, finishing sequence ({$this->atoms[$pop]['atom']})\n";
-            $this->addLink($this->sequence, $pop, 'ELEMENT');
-        } else {
-            print "Closing tag, ignoring sequence ({$this->atoms[$pop]['atom']})\n";
-            $this->pushExpression($pop);
-        }
-
-        $this->pushExpression($this->sequence);
-        $this->endSequence();
-    }
-
-    private function processAssignation() {
-        $this->processOperator('Assignation', $this->getPrecedence($this->tokens[$this->id][0]));
-    }
-
-    private function processAddition() {
-        $this->processOperator('Addition', $this->getPrecedence($this->tokens[$this->id][0]));
-    }
-
-    private function processMultiplication() {
-        $this->processOperator('Multiplication', $this->getPrecedence($this->tokens[$this->id][0]));
-    }
-
-    private function processPower() {
-        $this->processOperator('Power', $this->getPrecedence($this->tokens[$this->id][0]));
-    }
-
+    //////////////////////////////////////////////////////
+    /// processing operators
+    //////////////////////////////////////////////////////
     private function processOperator($atom, $finals) {
         $current = $this->id;
-        $additionId = $this->addAtom($this->operators[$this->tokens[$current][1]]);
 
         $left = $this->popExpression();
+        if ($this->atoms[$left]['atom'] == 'Void') {
+            $this->pushExpression($left);
+            $sign = $this->tokens[$current][1];
+            $code = $sign.'1';
+            while (in_array($this->tokens[$this->id + 1][0], [T_PLUS, T_MINUS])) {
+                ++$this->id;
+                $sign = $this->tokens[$this->id][1].$sign;
+                $code *= $this->tokens[$this->id][1].'1';
+            }
+
+            print "Found all : $sign\n";
+
+            if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
+                $operandId = $this->processNext();
+
+                print "Adding '$sign' to number {$this->atoms[$operandId]['code']}\n";
+                $this->atoms[$operandId]['code']     = $code.$this->atoms[$operandId]['code'];
+                $this->atoms[$operandId]['fullcode'] = $sign.$this->atoms[$operandId]['fullcode'];
+
+                return $operandId;
+            } else {
+                do {
+                    $operandId = $this->processNext();
+                } while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) ;
+
+                $this->popExpression();
+                for($i = $this->id - 1; $i >= $current; --$i) {
+                    $signId = $this->addAtom('Sign');
+
+                    $this->addLink($signId, $operandId, 'SIGN');
+                    $x = ['code'     => $this->tokens[$i][1], 
+                          'fullcode' => $this->tokens[$i][1] . 
+                                        $this->atoms[$operandId]['fullcode']];
+                    $this->setAtom($signId, $x);
+                    $operandId = $signId;
+                }
+                $this->pushExpression($signId);
+                
+                return $signId;
+            }
+        }
+        $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, 'LEFT');
         
         $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
@@ -425,7 +472,35 @@ class Load extends Tasks {
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
     }
-    
+
+    private function processAssignation() {
+        $this->processOperator('Assignation', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processAddition() {
+        $this->processOperator('Addition', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processMultiplication() {
+        $this->processOperator('Multiplication', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processPower() {
+        $this->processOperator('Power', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processDot() {
+        $this->processOperator('Concantenation', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processEcho() {
+        // TODO : upgrade this to functioncall
+        $this->processOperator('Functioncall', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    //////////////////////////////////////////////////////
+    /// generic methods
+    //////////////////////////////////////////////////////
     private function addAtom($atom) {
         $this->atomCount++;
         $this->atoms[$this->atomCount] = ['id'   => $this->atomCount, 
@@ -466,7 +541,6 @@ class Load extends Tasks {
     }
     
     private function saveFiles() {
-        print_r($this->atoms);
         $fp = fopen('./nodes.g3.csv', 'w+');
         fputcsv($fp, ['id', 'atom', 'code', 'fullcode']);
         foreach($this->atoms as $atom) {
@@ -474,7 +548,6 @@ class Load extends Tasks {
         }
         fclose($fp);
 
-        print_r($this->links);
         $files = [];
         foreach($this->links as $link) {
             if (!isset($files[$link['label']])) {
