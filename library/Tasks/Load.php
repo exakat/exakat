@@ -85,6 +85,11 @@ class Load extends Tasks {
                         T_PLUS_EQUAL                  => 19,
                         
                         T_ECHO                        => 20,
+                        T_PRINT                       => 20,
+                        T_INCLUDE                     => 20,
+                        T_INCLUDE_ONCE                => 20,
+                        T_REQUIRE                     => 20,
+                        T_REQUIRE_ONCE                => 20,
     ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -291,8 +296,14 @@ class Load extends Tasks {
                             T_OBJECT_OPERATOR          => 'processObjectOperator',
                             
                             T_DOT                      => 'processDot',
+
                             T_ECHO                     => 'processEcho',
-       
+                            T_PRINT                    => 'processPrint',
+                            T_INCLUDE                  => 'processPrint',
+                            T_INCLUDE_ONCE             => 'processPrint',
+                            T_REQUIRE                  => 'processPrint',
+                            T_REQUIRE_ONCE             => 'processPrint',
+
                             T_EQUAL                    => 'processAssignation',
                             T_PLUS_EQUAL               => 'processAssignation',
            
@@ -311,6 +322,15 @@ class Load extends Tasks {
                             T_OBJECT_CAST              => 'processCast',
                             T_STRING_CAST              => 'processCast',
                             T_UNSET_CAST               => 'processCast',
+
+                            T_FILE                     => 'processMagicConstant',
+                            T_CLASS_C                  => 'processMagicConstant',
+                            T_FUNC_C                   => 'processMagicConstant',
+                            T_LINE                     => 'processMagicConstant',
+                            T_DIR                      => 'processMagicConstant',
+                            T_METHOD_C                 => 'processMagicConstant',
+                            T_NS_C                     => 'processMagicConstant',
+                            T_TRAIT_C                  => 'processMagicConstant',
 
                             T_BANG                     => 'processNot',
                             T_TILDE                    => 'processNot',
@@ -499,6 +519,10 @@ class Load extends Tasks {
     
     private function processLiteral() {
         return $this->processSingle('String');
+    }
+
+    private function processMagicConstant() {
+        return $this->processSingle('MagicConstant');
     }
 
     //////////////////////////////////////////////////////
@@ -734,7 +758,40 @@ class Load extends Tasks {
 
     private function processEcho() {
         // TODO : upgrade this to functioncall
-        $this->processOperator('Functioncall', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processSingleOperator('Functioncall', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processPrint() {
+        $nameId = $this->addAtom('Identifier');
+        $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
+                                 'fullcode' => $this->tokens[$this->id][1] ]);
+
+        $argumentsId = $this->addAtom('Arguments');
+
+        $fullcode = array();
+        do {
+            $this->processNext();
+            print $this->tokens[$this->id][0]."\n";
+        } while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON]));
+
+        $indexId = $this->popExpression();
+        $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+        $fullcode[] = $this->atoms[$indexId]['fullcode'];
+
+        $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
+                                      'fullcode' => join(', ', $fullcode)]);
+
+        $functioncallId = $this->addAtom('Functioncall');
+        $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
+                                         'fullcode' => $this->atoms[$nameId]['code'].' '.
+                                                       $this->atoms[$argumentsId]['fullcode']
+                                        ]);
+        $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
+        $this->addLink($functioncallId, $nameId, 'NAME');
+
+        $this->pushExpression($functioncallId);
+        
+        return $functioncallId;
     }
 
     //////////////////////////////////////////////////////
