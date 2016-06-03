@@ -29,7 +29,7 @@ const T_COMMA                        = ',';
 const T_DOT                          = '.';
 const T_EQUAL                        = '=';
 const T_MINUS                        = '-';
-const T_NOSCREAM                     = '@';
+const T_AT                           = '@';
 const T_OPEN_BRACKET                 = '[';
 const T_OPEN_PARENTHESIS             = '(';
 const T_PERCENTAGE                   = '%';
@@ -101,6 +101,7 @@ class Load extends Tasks {
                      ','  => T_COMMA,
                      '!'  => T_BANG,
                      '~'  => T_TILDE,
+                     '@'  => T_AT,
                    ];
     
     public function run(\Config $config) {
@@ -292,6 +293,8 @@ class Load extends Tasks {
            
                             T_OPEN_BRACKET             => 'processBracket',
                             T_CLOSE_BRACKET            => 'processNone',
+
+                            T_AT                       => 'processNoscream',
        
                             T_STRING                   => 'processString',
                             T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
@@ -496,14 +499,13 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single operators
     //////////////////////////////////////////////////////
-    private function processSingleOperator($atom, $link, $finals) {
+    private function processSingleOperator($atom, $finals, $link) {
         $current = $this->id;
 
         $operatorId = $this->addAtom($atom);
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
-        print_r($finals);
         do {
             $id = $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
@@ -521,11 +523,15 @@ class Load extends Tasks {
     }
 
     private function processCast() {
-        return $this->processSingleOperator('Cast', 'CAST', $this->getPrecedence($this->tokens[$this->id][0]));
+        return $this->processSingleOperator('Cast', $this->getPrecedence($this->tokens[$this->id][0]), 'CAST');
     }
 
     private function processNot() {
-        return $this->processSingleOperator('Not', 'NOT', $this->getPrecedence($this->tokens[$this->id][0]));
+        return $this->processSingleOperator('Not', $this->getPrecedence($this->tokens[$this->id][0]), 'NOT');
+    }
+
+    private function processNoscream() {
+        return $this->processSingleOperator('Noscream', $this->getPrecedence($this->tokens[$this->id][0]), 'AT');
     }
 
     //////////////////////////////////////////////////////
@@ -578,7 +584,7 @@ class Load extends Tasks {
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, 'LEFT');
         
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
         do {
@@ -604,7 +610,7 @@ class Load extends Tasks {
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, $links[0]);
         
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
         do {
