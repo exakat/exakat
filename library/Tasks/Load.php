@@ -48,7 +48,9 @@ class Load extends Tasks {
     private $config = null;
      
     const PRECEDENCE = [
-                        T_OBJECT_OPERATOR             => 1,
+                        T_OBJECT_OPERATOR             => 0,
+                        T_DOUBLE_COLON                => 0,
+
                         T_CLONE                       => 1,
                         T_NEW                         => 1, 
                         T_OPEN_BRACKET                => 2,
@@ -65,7 +67,7 @@ class Load extends Tasks {
                         T_OBJECT_CAST                 => 4,
                         T_STRING_CAST                 => 4,
                         T_UNSET_CAST                  => 4,
-                        T_NOSCREAM                    => 4,
+                        T_AT                          => 4,
 
                         T_INSTANCEOF                  => 5,
                         
@@ -284,7 +286,10 @@ class Load extends Tasks {
                             T_SLASH                    => 'processMultiplication',
                             T_STARSTAR                 => 'processPower',
                             T_INSTANCEOF               => 'processInstanceof',
-       
+
+                            T_DOUBLE_COLON             => 'processDoubleColon',
+                            T_OBJECT_OPERATOR          => 'processObjectOperator',
+                            
                             T_DOT                      => 'processDot',
                             T_ECHO                     => 'processEcho',
        
@@ -318,6 +323,9 @@ class Load extends Tasks {
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
             print "Defaulting a : $this->id ";
             print_r($this->tokens[$this->id]);
+            print_r($this->atoms);
+            print_r($this->links);
+            var_dump(debug_print_backtrace());
             die("Missing the method\n");
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
@@ -391,8 +399,9 @@ class Load extends Tasks {
             $fullcode = array();
             while (!in_array($this->tokens[$this->id][0], [T_CLOSE_PARENTHESIS])) {
                $this->processNext();
-
-                if ($this->tokens[$this->id + 1][0] == T_COMMA) {
+               
+                if ($this->tokens[$this->id + 1][0] === T_COMMA ||
+                    $this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
                     $indexId = $this->popExpression();
                     $this->addLink($argumentsId, $indexId, 'ARGUMENT');
                     $fullcode[] = $this->atoms[$indexId]['fullcode'];
@@ -401,13 +410,9 @@ class Load extends Tasks {
                 }
             };
 
-            $indexId = $this->popExpression();
-            $this->addLink($argumentsId, $indexId, 'ARGUMENT');
-            $fullcode[] = $this->atoms[$indexId]['fullcode'];
-
             $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
                                           'fullcode' => join(', ', $fullcode)]);
-//          // Skipping the ) is already done in the loops       
+           // Skipping the )  is already done in the loop
 
             $functioncallId = $this->addAtom('Functioncall');
             $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
@@ -603,6 +608,46 @@ class Load extends Tasks {
         $this->pushExpression($additionId);
     }
 
+    private function processDoubleColon() {
+        $current = $this->id;
+
+        $left = $this->popExpression();
+
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
+                               T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
+
+        do {
+            $id = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+
+        $right = $this->popExpression();
+
+        if ($this->atoms[$right]['atom'] == 'Identifier') {
+            $staticId = $this->addAtom('Staticconstant');
+            $links = 'CONSTANT';
+        } elseif (in_array($this->atoms[$right]['atom'], array('Variable', 'Array'))) {
+            $staticId = $this->addAtom('Staticproperty');
+            $links = 'PROPERTY';
+        } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
+            $staticId = $this->addAtom('Staticmethodcall');
+            $links = 'METHOD';
+        } else {
+            print_r($this->atoms);
+            die("Unprocessed atom in static call (right) : ".$this->atoms[$right]['atom']."\n");
+        }
+
+        $this->addLink($staticId, $left, 'CLASS');
+        $this->addLink($staticId, $right, $links);
+
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->atoms[$left]['fullcode'] . '::' .
+                            $this->atoms[$right]['fullcode']];
+
+        $this->setAtom($staticId, $x);
+        $this->pushExpression($staticId);
+    }
+
     private function processOperator($atom, $finals, $links = ['LEFT', 'RIGHT']) {
         $current = $this->id;
 
@@ -628,6 +673,44 @@ class Load extends Tasks {
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
     }
+
+    private function processObjectOperator() {
+        $current = $this->id;
+
+        $left = $this->popExpression();
+
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
+                               T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
+        do {
+            $id = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+
+        $right = $this->popExpression();
+
+        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array'))) {
+            $staticId = $this->addAtom('Property');
+            $links = 'PROPERTY';
+        } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
+            $staticId = $this->addAtom('Methodcall');
+            $links = 'METHOD';
+        }  else {
+            die("Unprocessed atom in object call (right) : ".$this->atoms[$right]['atom']."\n");
+        }
+
+        $this->addLink($staticId, $left, 'CLASS');
+        $this->addLink($staticId, $right, $links);
+
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->atoms[$left]['fullcode'] . '->' .
+                            $this->atoms[$right]['fullcode']];
+
+        $this->setAtom($staticId, $x);
+        $this->pushExpression($staticId);
+        
+        print __METHOD__."\n";
+    }    
+    
 
     private function processAssignation() {
         $this->processOperator('Assignation', $this->getPrecedence($this->tokens[$this->id][0]));
@@ -740,7 +823,7 @@ class Load extends Tasks {
             foreach(self::PRECEDENCE as $k1 => $p1) {
                 $cache[$k1] = [];
                 foreach(self::PRECEDENCE as $k2 => $p2) {
-                    if ($p1 < $p2) {
+                    if ($p1 <= $p2) {
                         $cache[$k1][] = $k2;
                     }
                 }
@@ -753,7 +836,6 @@ class Load extends Tasks {
         
         return $cache[$token];
     }
-
 }
 
 ?>
