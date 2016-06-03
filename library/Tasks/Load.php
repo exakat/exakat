@@ -25,12 +25,14 @@ namespace Tasks;
 const T_BANG                         = '!';
 const T_CLOSE_BRACKET                = ']';
 const T_CLOSE_PARENTHESIS            = ')';
+const T_CLOSE_CURLY                  = '}';
 const T_COMMA                        = ',';
 const T_DOT                          = '.';
 const T_EQUAL                        = '=';
 const T_MINUS                        = '-';
 const T_AT                           = '@';
 const T_OPEN_BRACKET                 = '[';
+const T_OPEN_CURLY                   = '{';
 const T_OPEN_PARENTHESIS             = '(';
 const T_PERCENTAGE                   = '%';
 const T_PLUS                         = '+';
@@ -104,6 +106,8 @@ class Load extends Tasks {
                      ']'  => T_CLOSE_BRACKET,
                      '('  => T_OPEN_PARENTHESIS,
                      ')'  => T_CLOSE_PARENTHESIS,
+                     '{'  => T_OPEN_CURLY,
+                     '}'  => T_CLOSE_CURLY,
                      '='  => T_EQUAL,
                      '+=' => T_PLUS_EQUAL,
                      ','  => T_COMMA,
@@ -310,9 +314,25 @@ class Load extends Tasks {
 
                             T_EQUAL                    => 'processAssignation',
                             T_PLUS_EQUAL               => 'processAssignation',
+                            T_AND_EQUAL                => 'processAssignation',
+                            T_CONCAT_EQUAL             => 'processAssignation',
+                            T_DIV_EQUAL                => 'processAssignation',
+                            T_MINUS_EQUAL              => 'processAssignation',
+                            T_MOD_EQUAL                => 'processAssignation',
+                            T_MUL_EQUAL                => 'processAssignation',
+                            T_OR_EQUAL                 => 'processAssignation',
+                            T_PLUS_EQUAL               => 'processAssignation',
+                            T_POW_EQUAL                => 'processAssignation',
+                            T_SL_EQUAL                 => 'processAssignation',
+                            T_SR_EQUAL                 => 'processAssignation',
+                            T_XOR_EQUAL                => 'processAssignation',
+
+                            T_IF                       => 'processIfthen',
+                            
            
                             T_OPEN_BRACKET             => 'processBracket',
                             T_CLOSE_BRACKET            => 'processNone',
+                            T_ELSE                     => 'processNone',
 
                             T_AT                       => 'processNoscream',
        
@@ -341,6 +361,7 @@ class Load extends Tasks {
                              
                             T_SEMICOLON                => 'processSemicolon',
                             T_CLOSE_TAG                => 'processClosingTag',
+                            T_CLOSE_CURLY              => 'processCloseCurly',
                             T_END                      => 'processNone',
                             ];
                             
@@ -408,6 +429,20 @@ class Load extends Tasks {
         $this->endSequence();
     }
 
+    private function processCloseCurly() {
+        /*
+        $pop = $this->popExpression();
+        if ($this->atoms[$pop]['atom'] != 'Void') {
+            $this->addLink($this->sequence, $pop, 'ELEMENT');
+        } else {
+            $this->pushExpression($pop);
+        }
+
+        $this->pushExpression($this->sequence);
+        $this->endSequence();
+        */
+    }
+    
     private function processString() {
         // For functions and constants 
         if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
@@ -483,6 +518,55 @@ class Load extends Tasks {
         $this->pushExpression($id);
 
         return $id;
+    }
+    
+    private function processIfthen() {
+        $id = $this->addAtom('Ifthen');
+
+        ++$this->id; // Skip if
+        do {
+            $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) ;
+
+        $conditionId = $this->popExpression();
+        $this->addLink($id, $conditionId, 'CONDITION');
+        
+        ++$this->id; // Skip )
+
+        ++$this->id; // Skip {
+        $this->startSequence();
+        do {
+            $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) ;
+
+        $blockId = $this->sequence;
+        $this->endSequence();
+        $this->addLink($id, $blockId, 'THEN');
+        ++$this->id; // skip }
+        print "FINISHED THEN\n";
+        
+        // Managing else case
+        print_r($this->tokens[$this->id + 1]);
+        if ($this->tokens[$this->id + 1][0] == T_ELSE){
+            print "Managin else\n";
+            ++$this->id; // Skip else
+
+            ++$this->id; // Skip {
+            $this->startSequence();
+            do {
+                $this->processNext();
+            } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) ;
+
+            $blockId = $this->sequence;
+            $this->endSequence();
+            $this->addLink($id, $blockId, 'ELSE');
+        }
+
+        $this->setAtom($id, ['code'     => 'if (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }',
+                             'fullcode' => 'if (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }' ]);
+        $this->pushExpression($id);
+
+        return $id;    
     }
 
     private function processParenthesis() {
@@ -734,7 +818,7 @@ class Load extends Tasks {
 
         $right = $this->popExpression();
 
-        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array'))) {
+        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
