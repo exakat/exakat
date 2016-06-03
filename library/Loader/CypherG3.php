@@ -100,6 +100,7 @@ CYPHER;
 //line: toInt(csvLine.line)}
         try {
             $this->cypher->query($queryTemplate);
+            unlink("{$this->config->projects_root}/nodes.g3.csv");
         } catch (\Exception $e) {
             $this->cleanCsv(); 
             die("Couldn't load nodes in the database\n".$e->getMessage());
@@ -150,9 +151,7 @@ CREATE (token)-[:$edge]->(token2)
 CYPHER;
             try {
                 $res = $this->cypher->query($queryTemplate);
-//                if ($edge == 'file') { // For some reason, we need this twice...
-//                    $res = $this->cypher->query($queryTemplate);
-//                }
+                unlink("{$this->config->projects_root}/rels.g3.$edge.csv");
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load relations for ".$edge." in the database\n".$e->getMessage());
