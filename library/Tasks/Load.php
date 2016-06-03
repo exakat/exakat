@@ -90,6 +90,7 @@ class Load extends Tasks {
                         T_INCLUDE_ONCE                => 20,
                         T_REQUIRE                     => 20,
                         T_REQUIRE_ONCE                => 20,
+                        T_DOUBLE_ARROW                => 20,
     ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -294,9 +295,12 @@ class Load extends Tasks {
 
                             T_DOUBLE_COLON             => 'processDoubleColon',
                             T_OBJECT_OPERATOR          => 'processObjectOperator',
+                            T_NEW                      => 'processNew',
                             
                             T_DOT                      => 'processDot',
 
+                            T_ARRAY                    => 'processArray',
+                            T_DOUBLE_ARROW             => 'processKeyvalue',
                             T_ECHO                     => 'processEcho',
                             T_PRINT                    => 'processPrint',
                             T_INCLUDE                  => 'processPrint',
@@ -415,20 +419,26 @@ class Load extends Tasks {
             $argumentsId = $this->addAtom('Arguments');
             ++$this->id; // Skipping the (        
 
-            $this->pushExpression(); // set Void()
             $fullcode = array();
-            while (!in_array($this->tokens[$this->id][0], [T_CLOSE_PARENTHESIS])) {
-               $this->processNext();
-               
-                if ($this->tokens[$this->id + 1][0] === T_COMMA ||
-                    $this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
-                    $indexId = $this->popExpression();
-                    $this->addLink($argumentsId, $indexId, 'ARGUMENT');
-                    $fullcode[] = $this->atoms[$indexId]['fullcode'];
-
-                    ++$this->id; // Skipping the comma ,
-                }
-            };
+            if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+                $this->pushExpression(); // set Void()
+                $indexId = $this->popExpression();
+                $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+                $fullcode[] = $this->atoms[$indexId]['fullcode'];
+            } else {
+                while (!in_array($this->tokens[$this->id][0], [T_CLOSE_PARENTHESIS])) {
+                   $this->processNext();
+                   
+                    if ($this->tokens[$this->id + 1][0] === T_COMMA ||
+                        $this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+                        $indexId = $this->popExpression();
+                        $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+                        $fullcode[] = $this->atoms[$indexId]['fullcode'];
+    
+                        ++$this->id; // Skipping the comma ,
+                    }
+                };
+            }
 
             $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
                                           'fullcode' => join(', ', $fullcode)]);
@@ -493,6 +503,14 @@ class Load extends Tasks {
         return $parentheseId;
     }
     
+    private function processArray() {
+        if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
+            return $this->processString();
+        } else {
+            die (__METHOD__);
+        }
+    }
+    
     //////////////////////////////////////////////////////
     /// processing single tokens
     //////////////////////////////////////////////////////
@@ -532,7 +550,7 @@ class Load extends Tasks {
         $current = $this->id;
 
         $operatorId = $this->addAtom($atom);
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
         do {
@@ -561,6 +579,10 @@ class Load extends Tasks {
 
     private function processNoscream() {
         return $this->processSingleOperator('Noscream', $this->getPrecedence($this->tokens[$this->id][0]), 'AT');
+    }
+
+    private function processNew() {
+        return $this->processSingleOperator('New', $this->getPrecedence($this->tokens[$this->id][0]), 'NEW');
     }
 
     //////////////////////////////////////////////////////
@@ -613,7 +635,7 @@ class Load extends Tasks {
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, 'LEFT');
         
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
         do {
@@ -637,7 +659,7 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
 
@@ -679,7 +701,7 @@ class Load extends Tasks {
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, $links[0]);
         
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
         do {
@@ -703,7 +725,7 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
         do {
@@ -754,6 +776,10 @@ class Load extends Tasks {
 
     private function processInstanceof() {
         $this->processOperator('Instanceof', $this->getPrecedence($this->tokens[$this->id][0]), ['VARIABLE', 'CLASS']);
+    }
+
+    private function processKeyvalue() {
+        $this->processOperator('Keyvalue', $this->getPrecedence($this->tokens[$this->id][0]), ['KEY', 'VALUE']);
     }
 
     private function processEcho() {
