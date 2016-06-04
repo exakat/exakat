@@ -363,6 +363,7 @@ class Load extends Tasks {
                             T_XOR_EQUAL                => 'processAssignation',
 
                             T_QUESTION                 => 'processTernary',
+                            T_NS_SEPARATOR             => 'processNsname',
 
                             T_IF                       => 'processIfthen',
                             
@@ -465,6 +466,41 @@ class Load extends Tasks {
 
         $this->pushExpression($this->sequence);
         $this->endSequence();
+    }
+
+
+    private function processNsname() {
+        $current = $this->id;
+
+        $nsnameId = $this->addAtom('Nsname');
+        $fullcode = [];
+
+        $left = $this->popExpression();
+        if ($this->atoms[$left]['atom'] != 'Void') {
+            $this->addLink($nsnameId, $left, 'SUBNAME');
+            $fullcode[] = $this->atoms[$left]['code'];
+        }
+        
+        do {
+            $id = $this->processNext();
+
+            // remove from expression stack
+            $this->popExpression();
+
+            $this->addLink($nsnameId, $id, 'SUBNAME');
+            $fullcode[] = $this->atoms[$id]['code'];
+
+            ++$this->id;
+        } while ($this->tokens[$this->id][0] == T_NS_SEPARATOR) ;
+        
+        $this->id--;
+//        print_r($this->tokens[$this->id][0]);
+
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => join('\\', $fullcode)];
+        $this->setAtom($nsnameId, $x);
+
+        $this->pushExpression($nsnameId);
     }
 
     private function processCloseCurly() {
@@ -633,7 +669,6 @@ class Load extends Tasks {
     }
 
     private function processTernary() {
-        print __METHOD__."\n";
         $current = $this->id;
 
         $conditionId = $this->popExpression();
@@ -942,7 +977,7 @@ class Load extends Tasks {
 
     private function processEcho() {
         // TODO : upgrade this to functioncall
-        $this->processSingleOperator('Functioncall', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processSingleOperator('Functioncall', $this->getPrecedence($this->tokens[$this->id][0]), 'ECHO');
     }
 
     private function processPrint() {
@@ -1027,7 +1062,7 @@ class Load extends Tasks {
         $fp = fopen('./nodes.g3.csv', 'w+');
         fputcsv($fp, ['id', 'atom', 'code', 'fullcode']);
         foreach($this->atoms as $atom) {
-            fputcsv($fp, $atom);
+            fwrite($fp, $atom['id'].','.$atom['atom'].',"'.str_replace('\\', '\\\\', $atom['code']).'","'.str_replace('\\', '\\\\', $atom['fullcode']).'"'."\n");
         }
         fclose($fp);
 
@@ -1037,7 +1072,7 @@ class Load extends Tasks {
                 $files[$link['label']] = fopen('./rels.g3.'.$link['label'].'.csv', 'w+');
                 fputcsv($files[$link['label']], ['start', 'end']);
             }
-            fputcsv($files[$link['label']], [$link['origin'], $link['destination']]);
+            fputcsv($files[$link['label']], [$link['origin'], $link['destination']], ',', '"', '\\');
         }
         
         foreach($files as $fp) {
