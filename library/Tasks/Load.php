@@ -479,6 +479,8 @@ class Load extends Tasks {
         if ($this->atoms[$left]['atom'] != 'Void') {
             $this->addLink($nsnameId, $left, 'SUBNAME');
             $fullcode[] = $this->atoms[$left]['code'];
+        } else {
+            $fullcode[] = '';
         }
         
         do {
