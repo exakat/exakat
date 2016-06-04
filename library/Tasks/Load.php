@@ -37,6 +37,8 @@ const T_OPEN_PARENTHESIS             = '(';
 const T_PERCENTAGE                   = '%';
 const T_PLUS                         = '+';
 const T_PLUS_EQUAL                   = '+=';
+const T_QUESTION                     = '?';
+const T_COLON                        = ':';
 const T_SEMICOLON                    = ';';
 const T_SLASH                        = '/';
 const T_STAR                         = '*';
@@ -85,17 +87,43 @@ class Load extends Tasks {
 
                         T_SR                          => 9,
                         T_SL                          => 9,
+                        
+                        	//< <= > >= 10
+                        	
+                        	//== != === !== <> <=> 11
+                        	
+                        	// & 12
+                        	
+                        	// ^ 13
+                        	
+                        	// | 14
+                        	
+                        T_BOOLEAN_AND                 => 15,
+                        	
+                        T_BOOLEAN_OR                  => 16,
+                        	
+                        T_COALESCE                    => 17,
+                        	
+                        T_QUESTION                    => 18,
                
                         T_EQUAL                       => 19,
                         T_PLUS_EQUAL                  => 19,
                         
-                        T_ECHO                        => 20,
-                        T_PRINT                       => 20,
-                        T_INCLUDE                     => 20,
-                        T_INCLUDE_ONCE                => 20,
-                        T_REQUIRE                     => 20,
-                        T_REQUIRE_ONCE                => 20,
-                        T_DOUBLE_ARROW                => 20,
+                        T_LOGICAL_AND                 => 20,
+                        
+                        T_LOGICAL_OR                  => 21,
+                        
+                        T_LOGICAL_XOR                 => 22,
+
+                        T_ECHO                        => 30,
+                        T_PRINT                       => 30,
+                        T_INCLUDE                     => 30,
+                        T_INCLUDE_ONCE                => 30,
+                        T_REQUIRE                     => 30,
+                        T_REQUIRE_ONCE                => 30,
+                        T_DOUBLE_ARROW                => 30,
+
+                        T_COLON                       => 31,
     ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -117,6 +145,8 @@ class Load extends Tasks {
                      '!'  => T_BANG,
                      '~'  => T_TILDE,
                      '@'  => T_AT,
+                     '?'  => T_QUESTION,
+                     ':'  => T_COLON,
                    ];
     
     public function run(\Config $config) {
@@ -332,6 +362,8 @@ class Load extends Tasks {
                             T_SR_EQUAL                 => 'processAssignation',
                             T_XOR_EQUAL                => 'processAssignation',
 
+                            T_QUESTION                 => 'processTernary',
+
                             T_IF                       => 'processIfthen',
                             
            
@@ -368,6 +400,7 @@ class Load extends Tasks {
                             T_CLOSE_TAG                => 'processClosingTag',
                             T_CLOSE_CURLY              => 'processCloseCurly',
                             T_END                      => 'processNone',
+                            T_COLON                    => 'processNone',
                             ];
                             
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
@@ -451,7 +484,6 @@ class Load extends Tasks {
     private function processString() {
         // For functions and constants 
         if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
-            print __METHOD__."\n";
             $nameId = $this->addAtom('Identifier');
             $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
                                      'fullcode' => $this->tokens[$this->id][1] ]);
@@ -461,9 +493,7 @@ class Load extends Tasks {
 
             $fullcode = array();
             if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
-                print "Void arguments\n";
-                $this->pushExpression(); // set Void()
-                $indexId = $this->popExpression();
+                $indexId = $this->addAtomVoid();
                 $this->addLink($argumentsId, $indexId, 'ARGUMENT');
                 $fullcode[] = $this->atoms[$indexId]['fullcode'];
                 ++$this->id;
@@ -595,12 +625,46 @@ class Load extends Tasks {
     }
     
     private function processArray() {
-        print __METHOD__."\n";
         if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
             return $this->processString();
         } else {
             die (__METHOD__);
         }
+    }
+
+    private function processTernary() {
+        print __METHOD__."\n";
+        $current = $this->id;
+
+        $conditionId = $this->popExpression();
+        $ternaryId = $this->addAtom('Ternary');
+        
+        do {
+            $id = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], [T_COLON]) ) ;
+        $thenId = $this->popExpression();
+        ++$this->id; // Skip colon
+
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
+                               T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
+        do {
+            $id = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals) ) ;
+        $elseId = $this->popExpression();
+
+        $this->addLink($ternaryId, $conditionId, 'CONDITION');
+        $this->addLink($ternaryId, $thenId, 'THEN');
+        $this->addLink($ternaryId, $elseId, 'ELSE');
+
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->atoms[$conditionId]['fullcode'] . ' ? ' .
+                            $this->atoms[$thenId]['fullcode'] . ' : ' . 
+                            $this->atoms[$elseId]['fullcode']];
+        $this->setAtom($ternaryId, $x);
+        $this->pushExpression($ternaryId);
+        
+        return $ternaryId;
     }
     
     //////////////////////////////////////////////////////
@@ -924,6 +988,13 @@ class Load extends Tasks {
         return $this->atomCount;
     }
 
+    private function addAtomVoid() {
+        $id = $this->addAtom('Void');
+        $this->setAtom($id, ['code' => 'Void', 'fullcode' => 'Void']);
+        
+        return $id;
+    }
+
     private function setAtom($atomId, $properties) {
         foreach($properties as $k => $v) {
             $this->atoms[$atomId][$k] = $v;
@@ -938,11 +1009,7 @@ class Load extends Tasks {
         return true;
     }
 
-    private function pushExpression($id = 0) {
-        if ($id === 0) {
-            $id = $this->addAtom('Void');
-            $this->setAtom($id, ['code' => 'Void', 'fullcode' => 'Void']);
-        } 
+    private function pushExpression($id) {
         $this->expressions[] = $id;
     }
 
