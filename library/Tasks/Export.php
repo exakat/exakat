@@ -71,6 +71,9 @@ class Export extends Tasks {
         }
 */
 
+        print "Read ".count($V)." nodes\n";
+        print "Read ".count($E)." edges\n";
+
         $root = array_keys($V)[0];
         if ($config->format == 'Dot') {
             $text = $this->display_dot($V, $E, $root);
@@ -116,6 +119,10 @@ class Export extends Tasks {
 
     private function display_dot($V, $E, $root, $level = 0) {
         $r = '';
+
+        if ($level == 15) { return '123098120398 [label="Reached level 15"];
+        123098120391 [label="Reached level 15"];
+        123098120398 -> 123098120391';}
 
         foreach($V as $id => $v) {
             if (!isset($v['fullcode'])) {
