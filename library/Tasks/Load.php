@@ -82,6 +82,9 @@ class Load extends Tasks {
                         T_PLUS                        => 8,
                         T_MINUS                       => 8,
                         T_DOT                         => 8,
+
+                        T_SR                          => 9,
+                        T_SL                          => 9,
                
                         T_EQUAL                       => 19,
                         T_PLUS_EQUAL                  => 19,
@@ -296,6 +299,8 @@ class Load extends Tasks {
                             T_SLASH                    => 'processMultiplication',
                             T_STARSTAR                 => 'processPower',
                             T_INSTANCEOF               => 'processInstanceof',
+                            T_SL                       => 'processBitshift',
+                            T_SR                       => 'processBitshift',
 
                             T_DOUBLE_COLON             => 'processDoubleColon',
                             T_OBJECT_OPERATOR          => 'processObjectOperator',
@@ -446,7 +451,7 @@ class Load extends Tasks {
     private function processString() {
         // For functions and constants 
         if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
-            
+            print __METHOD__."\n";
             $nameId = $this->addAtom('Identifier');
             $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
                                      'fullcode' => $this->tokens[$this->id][1] ]);
@@ -456,10 +461,12 @@ class Load extends Tasks {
 
             $fullcode = array();
             if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+                print "Void arguments\n";
                 $this->pushExpression(); // set Void()
                 $indexId = $this->popExpression();
                 $this->addLink($argumentsId, $indexId, 'ARGUMENT');
                 $fullcode[] = $this->atoms[$indexId]['fullcode'];
+                ++$this->id;
             } else {
                 while (!in_array($this->tokens[$this->id][0], [T_CLOSE_PARENTHESIS])) {
                    $this->processNext();
@@ -588,6 +595,7 @@ class Load extends Tasks {
     }
     
     private function processArray() {
+        print __METHOD__."\n";
         if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
             return $this->processString();
         } else {
@@ -719,7 +727,7 @@ class Load extends Tasks {
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, 'LEFT');
         
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
         do {
@@ -743,7 +751,7 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
 
@@ -785,12 +793,12 @@ class Load extends Tasks {
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, $links[0]);
         
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
         do {
             $id = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals) ) ;
 
         $right = $this->popExpression();
         
@@ -809,7 +817,7 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, T_DOUBLE_ARROW,
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA,
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
         do {
@@ -837,8 +845,6 @@ class Load extends Tasks {
 
         $this->setAtom($staticId, $x);
         $this->pushExpression($staticId);
-        
-        print __METHOD__."\n";
     }    
     
 
@@ -855,7 +861,7 @@ class Load extends Tasks {
     }
 
     private function processDot() {
-        $this->processOperator('Concantenation', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processOperator('Concatenation', $this->getPrecedence($this->tokens[$this->id][0]));
     }
 
     private function processInstanceof() {
@@ -864,6 +870,10 @@ class Load extends Tasks {
 
     private function processKeyvalue() {
         $this->processOperator('Keyvalue', $this->getPrecedence($this->tokens[$this->id][0]), ['KEY', 'VALUE']);
+    }
+
+    private function processBitshift() {
+        $this->processOperator('Bitshift', $this->getPrecedence($this->tokens[$this->id][0]));
     }
 
     private function processEcho() {
