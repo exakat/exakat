@@ -365,6 +365,7 @@ class Load extends Tasks {
                             T_SMALLER                  => 'processComparison',
 
                             T_ARRAY                    => 'processArray',
+                            T_EMPTY                    => 'processArray',
                             T_DOUBLE_ARROW             => 'processKeyvalue',
                             T_ECHO                     => 'processEcho',
                             T_PRINT                    => 'processPrint',
@@ -397,7 +398,6 @@ class Load extends Tasks {
                             T_IF                       => 'processIfthen',
                             
            
-                            T_OPEN_BRACKET             => 'processBracket',
                             T_CLOSE_BRACKET            => 'processNone',
                             T_ELSE                     => 'processNone',
 
@@ -436,9 +436,6 @@ class Load extends Tasks {
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
             print "Defaulting a : $this->id ";
             print_r($this->tokens[$this->id]);
-            print_r($this->atoms);
-            print_r($this->links);
-            var_dump(debug_print_backtrace());
             die("Missing the method\n");
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
@@ -515,94 +512,86 @@ class Load extends Tasks {
         }
         
         do {
-            $id = $this->processNext();
-
-            // remove from expression stack
-            $this->popExpression();
-
-            $this->addLink($nsnameId, $id, 'SUBNAME');
-            $fullcode[] = $this->atoms[$id]['code'];
-
             ++$this->id;
-        } while ($this->tokens[$this->id][0] == T_NS_SEPARATOR) ;
+            
+            $subnameId = $this->addAtom('Identifier');
+            $x = ['code'     => $this->tokens[$this->id][1], 
+                  'fullcode' => $this->tokens[$this->id][1]];
+            $this->setAtom($subnameId, $x);
+
+            $this->addLink($nsnameId, $subnameId, 'SUBNAME');
+            $fullcode[] = $this->atoms[$subnameId]['code'];
+
+            // Go to next
+            ++$this->id;
+        } while ($this->tokens[$this->id][0] === T_NS_SEPARATOR) ;
         
         $this->id--;
-//        print_r($this->tokens[$this->id][0]);
 
         $x = ['code'     => $this->tokens[$current][1], 
               'fullcode' => join('\\', $fullcode)];
         $this->setAtom($nsnameId, $x);
+        print "Finishing Nsname : ".join('\\', $fullcode)."\n";
 
         $this->pushExpression($nsnameId);
+
+        return $this->processFCOA($nsnameId);
     }
 
     private function processCloseCurly() {
-        /*
-        $pop = $this->popExpression();
-        if ($this->atoms[$pop]['atom'] != 'Void') {
-            $this->addLink($this->sequence, $pop, 'ELEMENT');
+    }
+    
+    private function processFunctioncall() {
+        $nameId = $this->popExpression();
+        $argumentsId = $this->addAtom('Arguments');
+        ++$this->id; // Skipping the (        
+
+        $fullcode = array();
+        if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+            $indexId = $this->addAtomVoid();
+            $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+            $fullcode[] = $this->atoms[$indexId]['fullcode'];
+            ++$this->id;
         } else {
-            $this->pushExpression($pop);
+            while (!in_array($this->tokens[$this->id][0], [T_CLOSE_PARENTHESIS])) {
+               $this->processNext();
+               
+                if ($this->tokens[$this->id + 1][0] === T_COMMA ||
+                    $this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+                    $indexId = $this->popExpression();
+                    $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+                    $fullcode[] = $this->atoms[$indexId]['fullcode'];
+    
+                    ++$this->id; // Skipping the comma ,
+                }
+            };
         }
 
-        $this->pushExpression($this->sequence);
-        $this->endSequence();
-        */
+        $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
+                                      'fullcode' => join(', ', $fullcode)]);
+        // Skipping the )  is already done in the loop
+
+        $functioncallId = $this->addAtom('Functioncall');
+        $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
+                                         'fullcode' => $this->atoms[$nameId]['fullcode'].'('.
+                                                       $this->atoms[$argumentsId]['fullcode'].')'
+                                        ]);
+        $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
+        $this->addLink($functioncallId, $nameId, 'NAME');
+
+        $this->pushExpression($functioncallId);
+
+        return $this->processFCOA($functioncallId);
     }
     
     private function processString() {
+        $id = $this->addAtom('Identifier');
+        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
+                             'fullcode' => $this->tokens[$this->id][1] ]);
+        $this->pushExpression($id);
+
         // For functions and constants 
-        if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
-            $nameId = $this->addAtom('Identifier');
-            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
-                                     'fullcode' => $this->tokens[$this->id][1] ]);
-
-            $argumentsId = $this->addAtom('Arguments');
-            ++$this->id; // Skipping the (        
-
-            $fullcode = array();
-            if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
-                $indexId = $this->addAtomVoid();
-                $this->addLink($argumentsId, $indexId, 'ARGUMENT');
-                $fullcode[] = $this->atoms[$indexId]['fullcode'];
-                ++$this->id;
-            } else {
-                while (!in_array($this->tokens[$this->id][0], [T_CLOSE_PARENTHESIS])) {
-                   $this->processNext();
-                   
-                    if ($this->tokens[$this->id + 1][0] === T_COMMA ||
-                        $this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
-                        $indexId = $this->popExpression();
-                        $this->addLink($argumentsId, $indexId, 'ARGUMENT');
-                        $fullcode[] = $this->atoms[$indexId]['fullcode'];
-    
-                        ++$this->id; // Skipping the comma ,
-                    }
-                };
-            }
-
-            $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
-                                          'fullcode' => join(', ', $fullcode)]);
-           // Skipping the )  is already done in the loop
-
-            $functioncallId = $this->addAtom('Functioncall');
-            $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
-                                             'fullcode' => $this->atoms[$nameId]['code'].'('.
-                                                           $this->atoms[$argumentsId]['fullcode'].')'
-                                            ]);
-            $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
-            $this->addLink($functioncallId, $nameId, 'NAME');
-
-            $this->pushExpression($functioncallId);
-            
-            return $functioncallId;
-        } else {
-            $id = $this->addAtom('Identifier');
-            $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
-                                 'fullcode' => $this->tokens[$this->id][1] ]);
-            $this->pushExpression($id);
-        }
-        return $id;
+        return $this->processFCOA($id);
     }
 
     private function processPlusplus() {
@@ -629,14 +618,20 @@ class Load extends Tasks {
     }
 
     private function processBracket() {
+        print "processing ".__METHOD__."\n";
         $id = $this->addAtom('Array');
 
         $variableId = $this->popExpression();
         $this->addLink($id, $variableId, 'VARIABLE');
 
+        // Skip opening bracket
+        ++$this->id; 
         do {
             $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_BRACKET])) ;
+
+        // Skip closing bracket
+        ++$this->id; 
 
         $indexId = $this->popExpression();
         $this->addLink($id, $indexId, 'INDEX');
@@ -645,8 +640,8 @@ class Load extends Tasks {
                              'fullcode' => $this->atoms[$variableId]['fullcode'] . '[' .
                                            $this->atoms[$indexId]['fullcode']    . ']' ]);
         $this->pushExpression($id);
-
-        return $id;
+        
+        return $this->processFCOA($id);
     }
     
     private function processIfthen() {
@@ -709,7 +704,7 @@ class Load extends Tasks {
         $this->addLink($parentheseId, $indexId, 'CODE');
 
         $this->setAtom($parentheseId, ['code'     => $this->tokens[$this->id][1], 
-                             'fullcode' => '(' . $this->atoms[$indexId]['fullcode'] . ')' ]);
+                                       'fullcode' => '(' . $this->atoms[$indexId]['fullcode'] . ')' ]);
         $this->pushExpression($parentheseId);
         ++$this->id; // Skipping the )
 
@@ -771,7 +766,20 @@ class Load extends Tasks {
     }
 
     private function processVariable() {
-        return $this->processSingle('Variable');
+        $variableId = $this->processSingle('Variable');
+
+        return $this->processFCOA($variableId);
+    }
+    
+    private function processFCOA($id) {
+        // For functions and constants 
+        if ($this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS) {
+            return $this->processFunctioncall();
+        } elseif ($this->tokens[$this->id + 1][0] == T_OPEN_BRACKET) {
+            return $this->processBracket();
+        } else {
+            return $id;
+        }
     }
 
     private function processInteger() {
