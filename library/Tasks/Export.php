@@ -99,6 +99,8 @@ class Export extends Tasks {
     private function display_text($V, $E, $root, $level = 0) {
         $r = '';
 
+        if ($level == 7) { return '123098120398 [label="Reached level 15"]';}
+
         if (isset($V[$root])) {
             $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
         }
@@ -120,7 +122,7 @@ class Export extends Tasks {
     private function display_dot($V, $E, $root, $level = 0) {
         $r = '';
 
-        if ($level == 15) { return '123098120398 [label="Reached level 15"];
+        if ($level == 7) { return '123098120398 [label="Reached level 15"];
         123098120391 [label="Reached level 15"];
         123098120398 -> 123098120391';}
 
