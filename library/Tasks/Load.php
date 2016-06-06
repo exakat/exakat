@@ -596,7 +596,6 @@ class Load extends Tasks {
     private function processCloseCurly() {}
 
     private function processArguments() {
-        print "processArguments\n";
         $argumentsId = $this->addAtom('Arguments');
 
         $fullcode = array();
@@ -668,11 +667,9 @@ class Load extends Tasks {
         $previousId = $this->popExpression();
 
         if ($this->atoms[$previousId]['atom'] === 'Void') {
-            print "Preplusplus\n";
             // preplusplus
             $plusplusId = $this->processSingleOperator('Preplusplus', $this->getPrecedence($this->tokens[$this->id][0]), 'PREPLUSPLUS');
         } else {
-            print "Postplusplus\n";
             // postplusplus
             $plusplusId = $this->addAtom('PostPlusPlus');
             
@@ -753,7 +750,6 @@ class Load extends Tasks {
         };
 
         if ($this->tokens[$this->id + 1][0] === T_DOUBLE_ARROW) {
-            print "Double arrow\n";
             $this->processNext();
         }
         
@@ -762,7 +758,7 @@ class Load extends Tasks {
 
         ++$this->id; // Skip )
 
-        $blockId = $this->processBlock();
+        $blockId = $this->processFollowingBlock([T_ENDFOREACH]);
         $this->addLink($id, $blockId, 'BLOCK');
 
         $this->setAtom($id, ['code'     => 'foreach (' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$sourceId]['fullcode'] .') { /**/ }',
@@ -773,43 +769,87 @@ class Load extends Tasks {
         return $id;    
     }
 
+    private function processFollowingBlock($finals) {
+        if ($this->tokens[$this->id + 1][0] == T_OPEN_CURLY) {
+            $blockId = $this->processBlock();
+        } elseif ($this->tokens[$this->id + 1][0] == T_COLON) {
+            $this->startSequence();
+            $blockId = $this->sequence;
+
+            while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+                $this->processNext();
+            };
+
+            $this->endSequence();
+            
+            ++$this->id; // Skip endforeach
+        } else {
+            $this->startSequence();
+            $blockId = $this->sequence;
+            $this->endSequence();
+            
+            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) {
+                $this->processNext();
+            };
+            $expressionId = $this->popExpression();
+            $this->addLink($blockId, $expressionId, 'ELEMENT');
+            
+            ++$this->id;
+        }
+        
+        return $blockId;
+    }
+
     private function processIfthen() {
         $id = $this->addAtom('Ifthen');
-
+        $current = $this->id;
         ++$this->id; // Skip (
 
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
             $this->processNext();
-        } ;
+        };
         $conditionId = $this->popExpression();
+        $this->addLink($id, $conditionId, 'CONDITION');
 
         ++$this->id; // Skip )
-        ++$this->id; // Skip {
-
-        $blockId = $this->processBlock();
-        $this->addLink($id, $blockId, 'THEN');
+        $isColon = $this->tokens[$this->id + 1][0] === T_COLON;
+        var_dump($isColon);
         
+        $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
+        $this->addLink($id, $blockId, 'THEN');
+
         // Managing else case
-        if ($this->tokens[$this->id + 1][0] == T_ELSE){
+        if ($this->tokens[$this->id][0] == T_ELSEIF){
+            $elseifId = $this->processIfthen();
+            $this->addLink($id, $elseifId, 'ELSE');
+        } elseif ($this->tokens[$this->id + 1][0] == T_ELSEIF){
+            ++$this->id;
+            $elseifId = $this->processIfthen();
+            $this->addLink($id, $elseifId, 'ELSE');
+        } elseif ($this->tokens[$this->id + 1][0] == T_ELSE){
             ++$this->id; // Skip else
 
-            ++$this->id; // Skip {
-            $this->startSequence();
-            do {
-                $this->processNext();
-            } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) ;
-
-            $blockId = $this->sequence;
-            $this->endSequence();
-            $this->addLink($id, $blockId, 'ELSE');
+            $elseId = $this->processFollowingBlock([T_ENDIF]);
+            $this->addLink($id, $elseId, 'ELSE');
+        } elseif ($this->tokens[$this->id + 1][0] == T_COLON){
+            $elseId = $this->processFollowingBlock([T_ENDIF]);
+            $this->addLink($id, $elseId, 'ELSE');
         }
 
         $this->setAtom($id, ['code'     => 'if (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }',
                              'fullcode' => 'if (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }' ]);
-        $this->pushExpression($id);
-        $this->processSemicolon();
+        
+        if ($this->tokens[$current][0] === T_IF) {
+            $this->pushExpression($id);
+            $this->processSemicolon();
+        } 
+        
+        if ($this->tokens[$this->id][0] === T_ENDIF) {
+            //Skip final ;
+            ++$this->id;
+        }
 
-        return $id;    
+        return $id;
     }
 
     private function processParenthesis() {
@@ -818,7 +858,6 @@ class Load extends Tasks {
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
             $this->processNext();
         };
-        print "Finished parenthesis\n";
 
         $indexId = $this->popExpression();
         $this->addLink($parentheseId, $indexId, 'CODE');
@@ -827,7 +866,6 @@ class Load extends Tasks {
                                        'fullcode' => '(' . $this->atoms[$indexId]['fullcode'] . ')' ]);
         $this->pushExpression($parentheseId);
         ++$this->id; // Skipping the )
-        print_r($this->tokens[$this->id]);
 
         return $parentheseId;
     }
@@ -1166,9 +1204,7 @@ class Load extends Tasks {
     }
 
     private function processKeyvalue() {
-        $id = $this->processOperator('Keyvalue', $this->getPrecedence($this->tokens[$this->id][0]), ['KEY', 'VALUE']);
-        print __METHOD__."\n";
-        return $id;
+        return $this->processOperator('Keyvalue', $this->getPrecedence($this->tokens[$this->id][0]), ['KEY', 'VALUE']);
     }
 
     private function processBitshift() {
