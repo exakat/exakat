@@ -867,7 +867,7 @@ class Load extends Tasks {
         $this->pushExpression($parentheseId);
         ++$this->id; // Skipping the )
 
-        return $parentheseId;
+        return $this->processFCOA($parentheseId);
     }
     
     private function processArray() {
