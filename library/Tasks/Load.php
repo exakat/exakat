@@ -42,7 +42,6 @@ const T_COLON                        = ':';
 const T_SEMICOLON                    = ';';
 const T_SLASH                        = '/';
 const T_STAR                         = '*';
-const T_STARSTAR                     = '**';
 const T_SMALLER                      = '<';
 const T_GREATER                      = '>';
 
@@ -60,9 +59,10 @@ class Load extends Tasks {
 
                         T_CLONE                       => 1,
                         T_NEW                         => 1, 
+
                         T_OPEN_BRACKET                => 2,
                
-                        T_STARSTAR                    => 3,
+                        T_POW                         => 3,
                         
                         T_INC                         => 4,
                         T_DEC                         => 4,
@@ -93,7 +93,6 @@ class Load extends Tasks {
                         
                         	//< <= > >= 10
                         	
-                        	//== != === !== <> <=> 11
                         T_IS_EQUAL                    => 11,
                         T_IS_NOT_EQUAL                => 11,
                         T_IS_IDENTICAL                => 11,
@@ -144,7 +143,6 @@ class Load extends Tasks {
                      '/'  => T_SLASH,
                      '*'  => T_STAR,
                      '.'  => T_DOT,
-                     '**' => T_STARSTAR,
                      '['  => T_OPEN_BRACKET,
                      ']'  => T_CLOSE_BRACKET,
                      '('  => T_OPEN_PARENTHESIS,
@@ -345,7 +343,7 @@ class Load extends Tasks {
                             T_STAR                     => 'processMultiplication',
                             T_SLASH                    => 'processMultiplication',
                             T_PERCENTAGE               => 'processMultiplication',
-                            T_STARSTAR                 => 'processPower',
+                            T_POW                      => 'processPower',
                             T_INSTANCEOF               => 'processInstanceof',
                             T_SL                       => 'processBitshift',
                             T_SR                       => 'processBitshift',
