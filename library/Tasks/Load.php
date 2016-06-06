@@ -366,6 +366,11 @@ class Load extends Tasks {
 
                             T_ARRAY                    => 'processArray',
                             T_EMPTY                    => 'processArray',
+                            T_LIST                     => 'processArray',
+                            T_EVAL                     => 'processArray',
+                            T_UNSET                    => 'processArray',
+                            T_ISSET                    => 'processArray',
+                            T_EXIT                     => 'processArray',
                             T_DOUBLE_ARROW             => 'processKeyvalue',
                             T_ECHO                     => 'processEcho',
                             T_PRINT                    => 'processPrint',
@@ -584,7 +589,7 @@ class Load extends Tasks {
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
             $this->processNext();
            
-            if ($this->tokens[$this->id + 1][0] === T_COMMA) {
+            while ($this->tokens[$this->id + 1][0] === T_COMMA) {
                 $indexId = $this->popExpression();
                 $this->addLink($argumentsId, $indexId, 'ARGUMENT');
                 $fullcode[] = $this->atoms[$indexId]['fullcode'];
