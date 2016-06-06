@@ -161,6 +161,7 @@ class Load extends Tasks {
                      ':'  => T_COLON,
                      '<' => T_SMALLER,
                      '>' => T_GREATER,
+                     '%' => T_PERCENTAGE,
                    ];
     
     private $expressions = [];
@@ -343,6 +344,7 @@ class Load extends Tasks {
                             T_MINUS                    => 'processAddition',
                             T_STAR                     => 'processMultiplication',
                             T_SLASH                    => 'processMultiplication',
+                            T_PERCENTAGE               => 'processMultiplication',
                             T_STARSTAR                 => 'processPower',
                             T_INSTANCEOF               => 'processInstanceof',
                             T_SL                       => 'processBitshift',
@@ -605,7 +607,6 @@ class Load extends Tasks {
         return $id;
     }
 
-
     private function processPlusplus() {
         $previousId = $this->popExpression();
         
@@ -838,8 +839,12 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     private function processAddition() {
         $atom   = 'Addition';
-        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
         $current = $this->id;
+
+        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
+                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
+                               T_CLOSE_BRACKET], $finals);
 
         $left = $this->popExpression();
         if ($this->atoms[$left]['atom'] == 'Void') {
@@ -855,26 +860,31 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
                 $operandId = $this->processNext();
 
-                $this->atoms[$operandId]['code']     = $code.$this->atoms[$operandId]['code'];
-                $this->atoms[$operandId]['fullcode'] = $sign.$this->atoms[$operandId]['fullcode'];
+                $this->atoms[$operandId]['code']     = $code . $this->atoms[$operandId]['code'];
+                $this->atoms[$operandId]['fullcode'] = $sign . $this->atoms[$operandId]['fullcode'];
 
                 return $operandId;
             } else {
+                // process the actual load
                 do {
-                    $operandId = $this->processNext();
-                } while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) ;
+                    $this->processNext();
+                } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
 
-                $this->popExpression();
-                for($i = $this->id - 1; $i >= $current; --$i) {
+                $signedId = $this->popExpression();
+
+                var_dump($sign);
+                for($i = strlen($sign) - 1; $i >= 0; --$i) {
+                    var_dump($i);
                     $signId = $this->addAtom('Sign');
-
-                    $this->addLink($signId, $operandId, 'SIGN');
-                    $x = ['code'     => $this->tokens[$i][1], 
-                          'fullcode' => $this->tokens[$i][1] . 
-                                        $this->atoms[$operandId]['fullcode']];
+                    $this->addLink($signId, $signedId, 'SIGN');
+    
+                    $x = ['code'     => $sign[$i] , 
+                          'fullcode' => $sign[$i] . $this->atoms[$signedId]['fullcode']];
                     $this->setAtom($signId, $x);
-                    $operandId = $signId;
+
+                    $signedId = $signId;
                 }
+                
                 $this->pushExpression($signId);
                 
                 return $signId;
@@ -883,9 +893,6 @@ class Load extends Tasks {
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, 'LEFT');
         
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
-                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
-                               T_CLOSE_BRACKET], $finals);
         do {
             $id = $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
@@ -1123,7 +1130,7 @@ class Load extends Tasks {
         $fp = fopen('./nodes.g3.csv', 'w+');
         fputcsv($fp, ['id', 'atom', 'code', 'fullcode']);
         foreach($this->atoms as $atom) {
-            fwrite($fp, $atom['id'].','.$atom['atom'].',"'.str_replace('\\', '\\\\', $atom['code']).'","'.str_replace('\\', '\\\\', $atom['fullcode']).'"'."\n");
+            fwrite($fp, $atom['id'].','.$atom['atom'].',"'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['code']).'","'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['fullcode']).'"'."\n");
         }
         fclose($fp);
 
