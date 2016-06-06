@@ -373,6 +373,7 @@ class Load extends Tasks {
                             T_INCLUDE_ONCE             => 'processPrint',
                             T_REQUIRE                  => 'processPrint',
                             T_REQUIRE_ONCE             => 'processPrint',
+                            T_RETURN                   => 'processPrint',
 
                             T_EQUAL                    => 'processAssignation',
                             T_PLUS_EQUAL               => 'processAssignation',
@@ -696,9 +697,9 @@ class Load extends Tasks {
     private function processParenthesis() {
         $parentheseId = $this->addAtom('Parenthesis');
 
-        do {
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
             $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) ;
+        };
 
         $indexId = $this->popExpression();
         $this->addLink($parentheseId, $indexId, 'CODE');
@@ -1065,10 +1066,11 @@ class Load extends Tasks {
         $argumentsId = $this->addAtom('Arguments');
 
         $fullcode = array();
-        do {
+        while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_END, T_CLOSE_PARENTHESIS,
+                                                           T_CLOSE_BRACKET])) {
             $this->processNext();
             print $this->tokens[$this->id][0]."\n";
-        } while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON]));
+        };
 
         $indexId = $this->popExpression();
         $this->addLink($argumentsId, $indexId, 'ARGUMENT');
