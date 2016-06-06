@@ -140,6 +140,7 @@ class Load extends Tasks {
                         T_CLOSE_TAG                   => 31,
                         T_CLOSE_PARENTHESIS           => 31,
                         T_CLOSE_BRACKET               => 31,
+                        T_CLOSE_CURLY                 => 31,
                         T_AS                          => 31,
     ];
     
@@ -690,10 +691,13 @@ class Load extends Tasks {
         $this->addLink($id, $variableId, 'VARIABLE');
 
         // Skip opening bracket
+        $opening = $this->tokens[$this->id + 1][0];
+        $opening === '}' ? $closing = '{' : $closing = ']';
+         
         ++$this->id; 
         do {
             $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_BRACKET])) ;
+        } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_BRACKET, T_CLOSE_CURLY])) ;
 
         // Skip closing bracket
         ++$this->id; 
@@ -702,8 +706,8 @@ class Load extends Tasks {
         $this->addLink($id, $indexId, 'INDEX');
 
         $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
-                             'fullcode' => $this->atoms[$variableId]['fullcode'] . '[' .
-                                           $this->atoms[$indexId]['fullcode']    . ']' ]);
+                             'fullcode' => $this->atoms[$variableId]['fullcode'] . $opening .
+                                           $this->atoms[$indexId]['fullcode']    . $closing ]);
         $this->pushExpression($id);
         
         return $this->processFCOA($id);
@@ -889,7 +893,8 @@ class Load extends Tasks {
         // For functions and constants 
         if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
-        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
+        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
+                  $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             return $this->processBracket();
         } else {
             return $id;
