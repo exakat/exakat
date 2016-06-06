@@ -29,6 +29,7 @@ class CypherG3 {
     private $node = null;
     private static $nodes = array();
     private static $file_saved = 0;
+    private $unlink = array();
 
     private static $links = array();
     private static $lastLink = array();
@@ -100,7 +101,7 @@ CYPHER;
 //line: toInt(csvLine.line)}
         try {
             $this->cypher->query($queryTemplate);
-            unlink("{$this->config->projects_root}/nodes.g3.csv");
+            $this->unlink[] = "{$this->config->projects_root}/nodes.g3.csv";
         } catch (\Exception $e) {
             $this->cleanCsv(); 
             die("Couldn't load nodes in the database\n".$e->getMessage());
@@ -151,11 +152,12 @@ CREATE (token)-[:$edge]->(token2)
 CYPHER;
             try {
                 $res = $this->cypher->query($queryTemplate);
-                unlink("{$this->config->projects_root}/rels.g3.$edge.csv");
+                $this->unlink[] = "{$this->config->projects_root}/rels.g3.$edge.csv";
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load relations for ".$edge." in the database\n".$e->getMessage());
             }
+//            var_dump($res);
 
             display('Loaded link '.$edge);
         }
@@ -167,16 +169,9 @@ CYPHER;
     }
     
     private function cleanCsv() {
-        return true;
-        unlink($this->config->projects_root.'/nodes.cypher.csv');
-        foreach(self::ATTRIBUTES as $attribute) {
-            unlink($this->config->projects_root.'/nodes.cypher.'.$attribute.'.csv');
+        foreach($this->unlink as $file) {
+            unlink($file);
         }
-        unlink($this->config->projects_root.'/rels.cypher.next.csv');
-        unlink($this->config->projects_root.'/rels.cypher.element.csv');
-        unlink($this->config->projects_root.'/rels.cypher.file.csv');
-        unlink($this->config->projects_root.'/rels.cypher.indexed.csv');
-        unlink($this->config->projects_root.'/rels.cypher.subname.csv');
     }
 
     public function saveTokenCounts() {
