@@ -43,6 +43,9 @@ const T_SEMICOLON                    = ';';
 const T_SLASH                        = '/';
 const T_STAR                         = '*';
 const T_STARSTAR                     = '**';
+const T_SMALLER                      = '<';
+const T_GREATER                      = '>';
+
 const T_TILDE                        = '~';
 const T_END                          = 'The End';
 
@@ -91,7 +94,16 @@ class Load extends Tasks {
                         	//< <= > >= 10
                         	
                         	//== != === !== <> <=> 11
-                        	
+                        T_IS_EQUAL                    => 11,
+                        T_IS_NOT_EQUAL                => 11,
+                        T_IS_IDENTICAL                => 11,
+                        T_IS_NOT_IDENTICAL            => 11,
+                        T_IS_SMALLER_OR_EQUAL         => 11,
+                        T_SPACESHIP                   => 11,
+                        T_IS_GREATER_OR_EQUAL         => 11,
+                        T_GREATER                     => 11,
+                        T_SMALLER                     => 11,
+
                         	// & 12
                         	
                         	// ^ 13
@@ -147,7 +159,11 @@ class Load extends Tasks {
                      '@'  => T_AT,
                      '?'  => T_QUESTION,
                      ':'  => T_COLON,
+                     '<' => T_SMALLER,
+                     '>' => T_GREATER,
                    ];
+    
+    private $expressions = [];
     
     public function run(\Config $config) {
         $this->config = $config;
@@ -337,6 +353,16 @@ class Load extends Tasks {
                             T_NEW                      => 'processNew',
                             
                             T_DOT                      => 'processDot',
+                            
+                            T_IS_EQUAL                 => 'processComparison',
+                            T_IS_NOT_EQUAL             => 'processComparison',
+                            T_IS_IDENTICAL             => 'processComparison',
+                            T_IS_NOT_IDENTICAL         => 'processComparison',
+                            T_IS_SMALLER_OR_EQUAL      => 'processComparison',
+                            T_SPACESHIP                => 'processComparison',
+                            T_IS_GREATER_OR_EQUAL      => 'processComparison',
+                            T_GREATER                  => 'processComparison',
+                            T_SMALLER                  => 'processComparison',
 
                             T_ARRAY                    => 'processArray',
                             T_DOUBLE_ARROW             => 'processKeyvalue',
@@ -364,6 +390,9 @@ class Load extends Tasks {
 
                             T_QUESTION                 => 'processTernary',
                             T_NS_SEPARATOR             => 'processNsname',
+
+                            T_INC                      => 'processPlusplus',
+                            T_DEC                      => 'processPlusplus',
 
                             T_IF                       => 'processIfthen',
                             
@@ -413,6 +442,8 @@ class Load extends Tasks {
             die("Missing the method\n");
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
+        
+        print "$method\n";
         
         return $this->$method();
     }
@@ -573,7 +604,31 @@ class Load extends Tasks {
         }
         return $id;
     }
-    
+
+
+    private function processPlusplus() {
+        $previousId = $this->popExpression();
+        
+        print_r($this->atoms[$previousId]);
+        if ($this->atoms[$previousId]['atom'] == 'Void') {
+            print "Preplusplus\n";
+            // preplusplus
+            $plusplusId = $this->processSingleOperator('Preplusplus', $this->getPrecedence($this->tokens[$this->id][0]), 'PREPLUSPLUS');
+        } else {
+            print "Postplusplus\n";
+            // postplusplus
+            $plusplusId = $this->addAtom('PostPlusPlus');
+            
+            $this->addLink($plusplusId, $previousId, 'PREPLUSPLUS');
+
+            $fullcode = '';
+            $this->setAtom($plusplusId, ['code'     => $this->tokens[$this->id][1], 
+                                         'fullcode' => $this->atoms[$previousId]['fullcode'] . 
+                                                       $this->tokens[$this->id][1]]);
+            $this->pushExpression($plusplusId);
+        }
+    }
+
     private function processBracket() {
         $id = $this->addAtom('Array');
 
@@ -959,6 +1014,10 @@ class Load extends Tasks {
 
     private function processPower() {
         $this->processOperator('Power', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processComparison() {
+        $this->processOperator('Comparison', $this->getPrecedence($this->tokens[$this->id][0]));
     }
 
     private function processDot() {
