@@ -666,11 +666,13 @@ class Load extends Tasks {
 
     private function processPlusplus() {
         $previousId = $this->popExpression();
-        
-        if ($this->atoms[$previousId]['atom'] == 'Void') {
+
+        if ($this->atoms[$previousId]['atom'] === 'Void') {
+            print "Preplusplus\n";
             // preplusplus
             $plusplusId = $this->processSingleOperator('Preplusplus', $this->getPrecedence($this->tokens[$this->id][0]), 'PREPLUSPLUS');
         } else {
+            print "Postplusplus\n";
             // postplusplus
             $plusplusId = $this->addAtom('PostPlusPlus');
             
@@ -759,7 +761,6 @@ class Load extends Tasks {
         $this->addLink($id, $valueId, 'VALUE');
 
         ++$this->id; // Skip )
-        ++$this->id; // Skip {
 
         $blockId = $this->processBlock();
         $this->addLink($id, $blockId, 'BLOCK');
@@ -767,6 +768,7 @@ class Load extends Tasks {
         $this->setAtom($id, ['code'     => 'foreach (' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$sourceId]['fullcode'] .') { /**/ }',
                              'fullcode' => 'foreach (' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$sourceId]['fullcode'] .') { /**/ }']);
         $this->pushExpression($id);
+        $this->processSemicolon($id);
 
         return $id;    
     }
@@ -805,6 +807,7 @@ class Load extends Tasks {
         $this->setAtom($id, ['code'     => 'if (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }',
                              'fullcode' => 'if (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }' ]);
         $this->pushExpression($id);
+        $this->processSemicolon();
 
         return $id;    
     }
