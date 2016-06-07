@@ -345,7 +345,6 @@ class Load extends Tasks {
                             T_DNUMBER                  => 'processReal',
                             
                             T_OPEN_PARENTHESIS         => 'processParenthesis',
-//                            T_CLOSE_PARENTHESIS        => 'processNone',
            
                             T_PLUS                     => 'processAddition',
                             T_MINUS                    => 'processAddition',
@@ -374,6 +373,7 @@ class Load extends Tasks {
                             T_IS_NOT_IDENTICAL         => 'processComparison',
                             T_SPACESHIP                => 'processComparison',
 
+                            T_OPEN_BRACKET             => 'processArrayBracket',
                             T_ARRAY                    => 'processArray',
                             T_EMPTY                    => 'processArray',
                             T_LIST                     => 'processArray',
@@ -663,7 +663,7 @@ class Load extends Tasks {
 
     private function processCloseCurly() {}
 
-    private function processArguments() {
+    private function processArguments($finals = [T_CLOSE_PARENTHESIS]) {
         $argumentsId = $this->addAtom('Arguments');
 
         $fullcode = array();
@@ -675,7 +675,7 @@ class Load extends Tasks {
             ++$this->id; // Skipping the comma ,
         }
         
-        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
+        while (!in_array($this->tokens[$this->id + 1][0], $finals )) {
             $this->processNext();
            
             while ($this->tokens[$this->id + 1][0] === T_COMMA) {
@@ -750,7 +750,30 @@ class Load extends Tasks {
             $this->pushExpression($plusplusId);
         }
     }
+    
+    
+    private function processArrayBracket() {
+        $id = $this->addAtom('Functioncall');
 
+        $variableId = $this->addAtom('Identifier');
+        $this->addLink($id, $variableId, 'VARIABLE');
+        $this->setAtom($variableId, ['code' => '[',
+                                     'fullcode' => '[ /**/ ]']);
+
+        // No need to skip opening bracket
+        $argumentId = $this->processArguments([T_CLOSE_BRACKET]);
+        $this->addLink($id, $argumentId, 'ARGUMENTS');
+
+        // Skip closing bracket
+
+        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
+                             'fullcode' => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ]);
+        print_r($this->atoms[$id]);
+        $this->pushExpression($id);
+        
+        return $this->processFCOA($id);
+    }
+    
     private function processBracket() {
         $id = $this->addAtom('Array');
 
@@ -781,13 +804,19 @@ class Load extends Tasks {
     }
     
     private function processBlock() {
-        ++$this->id; // Skip {
+//        ++$this->id; // Skip {
         $this->startSequence();
 
+        print_r($this->tokens[$this->id + 1]);
         // Case for ; ? 
-        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
-            $this->processNext();
-        };
+        if ($this->tokens[$this->id + 1][0] === T_CLOSE_CURLY) {
+            $voidId = $this->addAtomVoid();
+            $this->addLink($this->sequence, $voidId, 'ELEMENT');
+        } else {
+            while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
+                $this->processNext();
+            };
+        }
 
         $blockId = $this->sequence;
         $this->endSequence();
