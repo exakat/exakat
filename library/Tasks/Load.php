@@ -36,7 +36,6 @@ const T_OPEN_CURLY                   = '{';
 const T_OPEN_PARENTHESIS             = '(';
 const T_PERCENTAGE                   = '%';
 const T_PLUS                         = '+';
-const T_PLUS_EQUAL                   = '+=';
 const T_QUESTION                     = '?';
 const T_COLON                        = ':';
 const T_SEMICOLON                    = ';';
@@ -44,7 +43,6 @@ const T_SLASH                        = '/';
 const T_STAR                         = '*';
 const T_SMALLER                      = '<';
 const T_GREATER                      = '>';
-
 const T_TILDE                        = '~';
 const T_END                          = 'The End';
 
@@ -103,15 +101,15 @@ class Load extends Tasks {
                         T_IS_NOT_IDENTICAL            => 11,
                         T_SPACESHIP                   => 11,
 
-                        T_LOGICAL_AND                 => 12,	
+                        T_LOGICAL_AND                 => 12,	// &
 
-                        T_LOGICAL_XOR                 => 13,	
+                        T_LOGICAL_XOR                 => 13,	// ^
 
-                        T_LOGICAL_OR                  => 14,	
+                        T_LOGICAL_OR                  => 14,	 // |
                         	
-                        T_BOOLEAN_AND                 => 15,
+                        T_BOOLEAN_OR                 => 15, // &&
                         	
-                        T_BOOLEAN_OR                  => 16,
+                        T_BOOLEAN_OR                  => 16, // ||
                         	
                         T_COALESCE                    => 17,
                         	
@@ -120,11 +118,11 @@ class Load extends Tasks {
                         T_EQUAL                       => 19,
                         T_PLUS_EQUAL                  => 19,
                         
-                        T_LOGICAL_AND                 => 20,
+                        T_LOGICAL_AND                 => 20, // and
                         
-                        T_LOGICAL_XOR                 => 21,
+                        T_LOGICAL_XOR                 => 21, // xor
 
-                        T_LOGICAL_OR                  => 22,
+                        T_LOGICAL_OR                  => 22, // or
 
                         T_ECHO                        => 30,
                         T_PRINT                       => 30,
@@ -134,6 +132,7 @@ class Load extends Tasks {
                         T_REQUIRE_ONCE                => 30,
                         T_DOUBLE_ARROW                => 30,
 
+                        T_RETURN                      => 31,
                         T_COLON                       => 31,
                         T_COMMA                       => 31,
                         T_SEMICOLON                   => 31,
@@ -157,7 +156,6 @@ class Load extends Tasks {
                      '{'  => T_OPEN_CURLY,
                      '}'  => T_CLOSE_CURLY,
                      '='  => T_EQUAL,
-                     '+=' => T_PLUS_EQUAL,
                      ','  => T_COMMA,
                      '!'  => T_BANG,
                      '~'  => T_TILDE,
@@ -386,7 +384,7 @@ class Load extends Tasks {
                             T_INCLUDE_ONCE             => 'processPrint',
                             T_REQUIRE                  => 'processPrint',
                             T_REQUIRE_ONCE             => 'processPrint',
-                            T_RETURN                   => 'processPrint',
+                            T_RETURN                   => 'processReturn',
 
                             T_EQUAL                    => 'processAssignation',
                             T_PLUS_EQUAL               => 'processAssignation',
@@ -397,7 +395,6 @@ class Load extends Tasks {
                             T_MOD_EQUAL                => 'processAssignation',
                             T_MUL_EQUAL                => 'processAssignation',
                             T_OR_EQUAL                 => 'processAssignation',
-                            T_PLUS_EQUAL               => 'processAssignation',
                             T_POW_EQUAL                => 'processAssignation',
                             T_SL_EQUAL                 => 'processAssignation',
                             T_SR_EQUAL                 => 'processAssignation',
@@ -406,6 +403,9 @@ class Load extends Tasks {
                             T_LOGICAL_AND              => 'processLogical',	
                             T_LOGICAL_XOR              => 'processLogical',		
                             T_LOGICAL_OR               => 'processLogical',		
+
+                            T_BOOLEAN_AND              => 'processLogical',	
+                            T_BOOLEAN_OR               => 'processLogical',		
 
                             T_QUESTION                 => 'processTernary',
                             T_NS_SEPARATOR             => 'processNsname',
@@ -450,8 +450,8 @@ class Load extends Tasks {
                             T_COLON                    => 'processNone',
                             
                             T_FUNCTION                 => 'processFunction',
+                            T_CLASS                    => 'processClass',
                             ];
-                            
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
             print "Defaulting a : $this->id ";
             print_r($this->tokens[$this->id]);
@@ -504,10 +504,39 @@ class Load extends Tasks {
                                                    '{ /**/ }']);
         
         $this->pushExpression($functionId);
+        $this->processSemicolon();
         
         return $functionId;
     }
-    
+
+    private function processClass() {
+        $current = $this->id;
+        $classId = $this->addAtom('Class');
+        
+        if ($this->tokens[$this->id + 1][0] === T_STRING) {
+            ++$this->id;
+
+            $nameId = $this->addAtom('Identifier');
+            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
+                                     'fullcode' => $this->tokens[$this->id][1] ]);
+        } else {
+            $nameId = $this->addAtomVoid();
+        }
+        $this->addLink($classId, $nameId, 'NAME');
+        
+        // Process block 
+        $blockId = $this->processBlock();
+        $this->addLink($classId, $blockId, 'BLOCK');
+        
+        $this->setAtom($classId, ['code'     => $this->tokens[$current][1], 
+                                  'fullcode' => 'class '.$this->atoms[$nameId]['fullcode'].' '.
+                                                '{ /**/ }']);
+        
+        $this->pushExpression($classId);
+        $this->processSemicolon();
+
+        return $classId;
+    }
     
     private function processOpenTag() {
         $id = $this->addAtom('Php');
@@ -884,18 +913,16 @@ class Load extends Tasks {
         $conditionId = $this->popExpression();
         $ternaryId = $this->addAtom('Ternary');
         
-        do {
+        while (!in_array($this->tokens[$this->id + 1][0], [T_COLON]) ) {
             $id = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], [T_COLON]) ) ;
+        } ;
         $thenId = $this->popExpression();
         ++$this->id; // Skip colon
 
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA, 
-                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
-                               T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
-        do {
+        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        while (!in_array($this->tokens[$this->id + 1][0], $finals) ) {
             $id = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], $finals) ) ;
+        } ;
         $elseId = $this->popExpression();
 
         $this->addLink($ternaryId, $conditionId, 'CONDITION');
@@ -907,6 +934,7 @@ class Load extends Tasks {
                             $this->atoms[$thenId]['fullcode'] . ' : ' . 
                             $this->atoms[$elseId]['fullcode']];
         $this->setAtom($ternaryId, $x);
+
         $this->pushExpression($ternaryId);
         
         return $ternaryId;
@@ -965,9 +993,11 @@ class Load extends Tasks {
         $current = $this->id;
 
         $operatorId = $this->addAtom($atom);
+        /*
         $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, 
                                T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
                                T_CLOSE_BRACKET], $finals);
+                               */
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $id = $this->processNext();
         };
@@ -979,6 +1009,7 @@ class Load extends Tasks {
         $x = ['code'     => $this->tokens[$current][1], 
               'fullcode' => $this->tokens[$current][1] . ' ' .
                             $this->atoms[$operandId]['fullcode']];
+
         $this->setAtom($operatorId, $x);
         $this->pushExpression($operatorId);
         
@@ -987,6 +1018,10 @@ class Load extends Tasks {
 
     private function processCast() {
         return $this->processSingleOperator('Cast', $this->getPrecedence($this->tokens[$this->id][0]), 'CAST');
+    }
+
+    private function processReturn() {
+        return $this->processSingleOperator('Return', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN');
     }
 
     private function processNot() {
@@ -1224,8 +1259,8 @@ class Load extends Tasks {
         $argumentsId = $this->addAtom('Arguments');
 
         $fullcode = array();
-        while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_END, T_CLOSE_PARENTHESIS,
-                                                           T_CLOSE_BRACKET])) {
+        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
         };
 
