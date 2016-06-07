@@ -46,6 +46,9 @@ const T_GREATER                      = '>';
 const T_TILDE                        = '~';
 const T_QUOTE                        = '"';
 const T_DOLLAR                       = '$';
+const T_LOGICAL_AND                  = '&';
+const T_LOGICAL_OR                   = '|';
+const T_LOGICAL_XOR                  = '^';
 const T_END                          = 'The End';
 
 class Load extends Tasks {
@@ -57,6 +60,7 @@ class Load extends Tasks {
                         T_OBJECT_OPERATOR             => 0,
                         T_DOUBLE_COLON                => 0,
                         T_DOLLAR                      => 0,
+                        T_STATIC                      => 0,
 
                         T_CLONE                       => 1,
                         T_NEW                         => 1, 
@@ -92,7 +96,6 @@ class Load extends Tasks {
                         T_SR                          => 9,
                         T_SL                          => 9,
                         
-                        //< <= > >= 10
                         T_IS_SMALLER_OR_EQUAL         => 10,
                         T_IS_GREATER_OR_EQUAL         => 10,
                         T_GREATER                     => 10,
@@ -175,6 +178,9 @@ class Load extends Tasks {
                      '%' => T_PERCENTAGE,
                      '"' => T_QUOTE,
                      '$' => T_DOLLAR,
+                     '&' => T_LOGICAL_AND,
+                     '|' => T_LOGICAL_OR,
+                     '^' => T_LOGICAL_XOR,
                    ];
     
     private $expressions = [];
@@ -472,6 +478,8 @@ class Load extends Tasks {
                             T_CLASS                    => 'processClass',
                             
                             T_QUOTE                    => 'processQuote',
+                            T_STATIC                   => 'processStatic',
+                            
                             ];
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
             print "Defaulting a : $this->id ";
@@ -644,8 +652,13 @@ class Load extends Tasks {
             $nameId = $this->addAtomVoid();
         }
         $this->addLink($classId, $nameId, 'NAME');
+
+        // Process extends
+        // Process implements
+        // process abstract, final...
         
         // Process block 
+        ++$this->id;
         $blockId = $this->processBlock();
         $this->addLink($classId, $blockId, 'BLOCK');
         
@@ -831,6 +844,13 @@ class Load extends Tasks {
         }
     }
     
+    private function processStatic() {
+        if ($this->tokens[$this->id + 1][0] === T_DOUBLE_COLON) {
+            $this->processSingle('Static');
+        } else {
+            die(__METHOD__);
+        }
+    }
     
     private function processArrayBracket() {
         $id = $this->addAtom('Functioncall');
