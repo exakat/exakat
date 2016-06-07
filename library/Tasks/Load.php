@@ -421,6 +421,7 @@ class Load extends Tasks {
 
                             T_IF                       => 'processIfthen',
                             T_FOREACH                  => 'processForeach',
+                            T_TRY                      => 'processTry',
 
                             T_ELSE                     => 'processNone',
 
@@ -510,6 +511,73 @@ class Load extends Tasks {
         $this->pushExpression($stringId);
         
         return $stringId;
+    }
+    
+    private function processTry() {
+        $current = $this->id;
+        $tryId = $this->addAtom('Try');
+        
+        // Skip Try
+        ++$this->id;
+        
+        $blockId = $this->processBlock();
+        $this->addLink($tryId, $blockId, 'BLOCK');
+        
+        ++$this->id; // Skip {
+        
+        while ($this->tokens[$this->id][0] == T_CATCH) {
+            ++$this->id; // Skip catch
+        
+            $catchId = $this->addAtom('Catch');
+            while ($this->tokens[$this->id + 1][0] !== T_VARIABLE) {
+                $this->processNext();
+            };
+            
+            $classId = $this->popExpression();
+            $this->addLink($catchId, $classId, 'CLASS');
+
+            // Process variable
+            $this->processNext();
+        
+            $variableId = $this->popExpression();
+            $this->addLink($catchId, $variableId, 'VARIABLE');
+
+            // Skip )
+            ++$this->id;
+
+            // Skip }
+            ++$this->id;
+            $blockCatchId = $this->processBlock();
+            $this->addLink($catchId, $blockCatchId, 'BLOCK');
+
+            $this->setAtom($catchId, ['code'     => 'catch',
+                                      'fullcode' => 'catch ('.$this->atoms[$classId]['fullcode'].' '.
+                                                     $this->atoms[$variableId]['fullcode'].']) { /**/ } ']);
+
+            $this->addLink($tryId, $catchId, 'CATCH');
+            ++$this->id;
+        }
+        
+        if ($this->tokens[$this->id][0] === T_FINALLY) {
+            $finallyId = $this->addAtom('Finally');
+
+            ++$this->id;
+            $finallyBlockId = $this->processBlock();
+            $this->addLink($tryId, $finallyBlockId, 'FINALLY');
+
+            $this->setAtom($finallyId, ['code'     => 'finally',
+                                        'fullcode' => 'finally { /**/ }']);
+        }
+
+        $this->setAtom($tryId, ['code'     => 'catch',
+                                'fullcode' => 'try { /**/ } '.
+                                               $this->atoms[$catchId]['fullcode'].''
+                                               .( isset($finallyId) ? $this->atoms[$finallyId]['fullcode'] : '')]);
+
+        $this->pushExpression($tryId);
+        $this->processSemicolon();
+        
+        return $tryId;
     }
 
     private function processFunction() {
@@ -768,7 +836,6 @@ class Load extends Tasks {
 
         $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
                              'fullcode' => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ]);
-        print_r($this->atoms[$id]);
         $this->pushExpression($id);
         
         return $this->processFCOA($id);
@@ -807,7 +874,6 @@ class Load extends Tasks {
 //        ++$this->id; // Skip {
         $this->startSequence();
 
-        print_r($this->tokens[$this->id + 1]);
         // Case for ; ? 
         if ($this->tokens[$this->id + 1][0] === T_CLOSE_CURLY) {
             $voidId = $this->addAtomVoid();
