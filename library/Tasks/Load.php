@@ -44,6 +44,7 @@ const T_STAR                         = '*';
 const T_SMALLER                      = '<';
 const T_GREATER                      = '>';
 const T_TILDE                        = '~';
+const T_QUOTE                        = '"';
 const T_END                          = 'The End';
 
 class Load extends Tasks {
@@ -107,7 +108,7 @@ class Load extends Tasks {
 
                         T_LOGICAL_OR                  => 14,	 // |
                         	
-                        T_BOOLEAN_OR                 => 15, // &&
+                        T_BOOLEAN_OR                  => 15, // &&
                         	
                         T_BOOLEAN_OR                  => 16, // ||
                         	
@@ -133,6 +134,8 @@ class Load extends Tasks {
                         T_DOUBLE_ARROW                => 30,
 
                         T_RETURN                      => 31,
+                        T_YIELD                       => 31,
+                        T_YIELD_FROM                  => 31,
                         T_COLON                       => 31,
                         T_COMMA                       => 31,
                         T_SEMICOLON                   => 31,
@@ -165,6 +168,7 @@ class Load extends Tasks {
                      '<' => T_SMALLER,
                      '>' => T_GREATER,
                      '%' => T_PERCENTAGE,
+                     '"' => T_QUOTE
                    ];
     
     private $expressions = [];
@@ -339,7 +343,7 @@ class Load extends Tasks {
                             T_VARIABLE                 => 'processVariable',
                             T_LNUMBER                  => 'processInteger',
                             T_DNUMBER                  => 'processReal',
-       
+                            
                             T_OPEN_PARENTHESIS         => 'processParenthesis',
 //                            T_CLOSE_PARENTHESIS        => 'processNone',
            
@@ -385,6 +389,8 @@ class Load extends Tasks {
                             T_REQUIRE                  => 'processPrint',
                             T_REQUIRE_ONCE             => 'processPrint',
                             T_RETURN                   => 'processReturn',
+                            T_YIELD                    => 'processReturn',
+                            T_YIELD_FROM               => 'processReturn',
 
                             T_EQUAL                    => 'processAssignation',
                             T_PLUS_EQUAL               => 'processAssignation',
@@ -422,6 +428,7 @@ class Load extends Tasks {
 
                             T_STRING                   => 'processString',
                             T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
+                            T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
    
                             T_ARRAY_CAST               => 'processCast',
                             T_BOOL_CAST                => 'processCast',
@@ -451,6 +458,8 @@ class Load extends Tasks {
                             
                             T_FUNCTION                 => 'processFunction',
                             T_CLASS                    => 'processClass',
+                            
+                            T_QUOTE                    => 'processQuote',
                             ];
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
             print "Defaulting a : $this->id ";
@@ -473,6 +482,36 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing complex tokens
     //////////////////////////////////////////////////////
+    private function processQuote() {
+        $current = $this->id;
+        $stringId = $this->addAtom('String');
+        
+        while ($this->tokens[$this->id + 1][0] !== T_QUOTE) {
+            if ($this->tokens[$this->id + 1][0] == T_CURLY_OPEN) {
+                ++$this->id; // Skip {
+                while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
+                    $this->processNext();
+                } ;
+                ++$this->id; // Skip }
+            } else {
+                $this->processNext();
+            }
+            
+            $partId = $this->popExpression();
+            $fullcode[] = $this->atoms[$partId]['fullcode'];
+            $this->addLink($stringId, $partId, 'CONCAT');
+        }
+        
+        ++$this->id;
+
+        $this->setAtom($stringId, ['code'     => $this->tokens[$current][1], 
+                                   'fullcode' => '"'.join('', $fullcode).'"']);
+
+        $this->pushExpression($stringId);
+        
+        return $stringId;
+    }
+
     private function processFunction() {
         $current = $this->id;
         $functionId = $this->addAtom('Function');
@@ -1022,6 +1061,14 @@ class Load extends Tasks {
 
     private function processReturn() {
         return $this->processSingleOperator('Return', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN');
+    }
+
+    private function processYield() {
+        return $this->processSingleOperator('Yield', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN');
+    }
+
+    private function processYieldfrom() {
+        return $this->processSingleOperator('Yieldfrom', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN');
     }
 
     private function processNot() {
