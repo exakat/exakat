@@ -59,6 +59,7 @@ class Load extends Tasks {
     
     private $optionsTokens = array('Abstract'  => 0,
                                    'Final'     => 0,
+                                   'Var'       => 0,
                                    'Public'    => 0,
                                    'Protected' => 0,
                                    'Private'   => 0,
@@ -514,6 +515,7 @@ class Load extends Tasks {
                             T_PRIVATE                  => 'processPrivate',
                             T_PROTECTED                => 'processProtected',
                             T_PUBLIC                   => 'processPublic',
+                            T_VAR                      => 'processVar',
                             
                             T_QUOTE                    => 'processQuote',
                             T_START_HEREDOC            => 'processQuote',
@@ -521,7 +523,6 @@ class Load extends Tasks {
                             T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
                             T_STATIC                   => 'processStatic',
                             T_GLOBAL                   => 'processGlobalVariable',
-                            
                             ];
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
             print "Defaulting a : $this->id ";
@@ -716,14 +717,11 @@ class Load extends Tasks {
             }
         }
         
-        if ($this->tokens[$this->id + 1][0] === T_STRING) {
-            ++$this->id;
-
-            $nameId = $this->addAtom('Identifier');
-            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
-                                     'fullcode' => $this->tokens[$this->id][1] ]);
-        } else {
+        if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
             $nameId = $this->addAtomVoid();
+        } else {
+            $nameId = $this->processNextAsIdentifier();
+            $this->popExpression();
         }
         $this->addLink($functionId, $nameId, 'NAME');
         
@@ -752,7 +750,10 @@ class Load extends Tasks {
                                                    '{ /**/ }']);
         
         $this->pushExpression($functionId);
-        $this->processSemicolon();
+        
+        if ($this->atoms[$nameId]['code'] !== 'Void') {
+            $this->processSemicolon();
+        }
         
         return $functionId;
     }
@@ -817,6 +818,13 @@ class Load extends Tasks {
                                      'fullcode' => $this->tokens[$this->id][1] ]);
         } else {
             $nameId = $this->addAtomVoid();
+            
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+                // Process arguments
+                ++$this->id; // Skip arguments
+                $argumentsId = $this->processArguments();
+                $this->addLink($classId, $argumentsId, 'ARGUMENTS');
+            }
         }
         $this->addLink($classId, $nameId, 'NAME');
 
@@ -848,7 +856,11 @@ class Load extends Tasks {
                                                 '{ /**/ }']);
         
         $this->pushExpression($classId);
-        $this->processSemicolon();
+        
+        if ($this->tokens[$current - 1][0] !== T_NEW) {
+            $this->processSemicolon();
+        }
+        ++$this->id;
 
         return $classId;
     }
@@ -987,11 +999,22 @@ class Load extends Tasks {
                                       
         return $argumentsId;
     }
+    
+    private function processNextAsIdentifier() {
+        ++$this->id;
+        $id = $this->addAtom('Identifier');
+        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
+                             'fullcode' => $this->tokens[$this->id][1]]);
+        $this->pushExpression($id);
+        
+        return $id;
+    }
 
     private function processConst() {
         $constId = $this->addAtom('Const');
         $current = $this->id;
 
+        $this->processNextAsIdentifier();
         while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) {
             $this->processNext();
             
@@ -1001,6 +1024,8 @@ class Load extends Tasks {
                 
                 $fullcode[] = $this->atoms[$defId]['fullcode'];
                 ++$this->id;
+
+                $this->processNextAsIdentifier();
             }
         } ;
 
@@ -1031,16 +1056,56 @@ class Load extends Tasks {
         return $this->processOptions('Final');
     }
 
+    private function processVar() {
+        $id = $this->processOptions('Var');
+
+        if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+            $pppId = $this->processSGVariable('Ppp');
+            $this->addLink($pppId, $id, 'VAR');
+            $this->optionsTokens['Var'] = 0;
+            return $pppId;
+        } 
+        
+        return $id;
+    }
+
     private function processPublic() {
-        return $this->processOptions('Public');
+        $id = $this->processOptions('Public');
+
+        if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+            $pppId = $this->processSGVariable('Ppp');
+            $this->addLink($pppId, $id, 'PUBLIC');
+            $this->optionsTokens['Public'] = 0;
+            return $pppId;
+        } 
+        
+        return $id;
     }
 
     private function processProtected() {
-        return $this->processOptions('Protected');
+        $id = $this->processOptions('Protected');
+
+        if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+            $pppId = $this->processSGVariable('Ppp');
+            $this->addLink($pppId, $id, 'PROTECTED');
+            $this->optionsTokens['Protected'] = 0;
+            return $pppId;
+        } 
+
+        return $id;
     }
 
     private function processPrivate() {
-        return $this->processOptions('Private');
+        $id = $this->processOptions('Private');
+
+        if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+            $pppId = $this->processSGVariable('Ppp');
+            $this->addLink($pppId, $id, 'PRIVATE');
+            $this->optionsTokens['Private'] = 0;
+            return $pppId;
+        } 
+
+        return $id;
     }
 
     private function processFunctioncall() {
@@ -1106,7 +1171,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             return $this->processStaticVariable();
         } else {
-            die(__METHOD__);
+            return $this->processOptions('Static');
         }
     }
 
@@ -1826,11 +1891,19 @@ class Load extends Tasks {
 
         $finals = $this->getPrecedence($this->tokens[$this->id][0]);
 
-        do {
-            $id = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+        if ($this->tokens[$this->id + 1][0] === T_CLASS) {
+            $right = $this->addAtom('Identifier');
+            $this->setAtom($right, ['code'     => $this->tokens[$this->id + 1][1],
+                                    'fullcode' => $this->tokens[$this->id + 1][1]]);
 
-        $right = $this->popExpression();
+            ++$this->id;
+        } else {
+            do {
+                $id = $this->processNext();
+            } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+
+            $right = $this->popExpression();
+        }
 
         if ($this->atoms[$right]['atom'] == 'Identifier') {
             $staticId = $this->addAtom('Staticconstant');
