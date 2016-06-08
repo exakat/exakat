@@ -56,6 +56,14 @@ class Load extends Tasks {
     private $php    = null;
     private $client = null;
     private $config = null;
+    
+    private $optionsTokens = array('Abstract'  => 0,
+                                   'Final'     => 0,
+                                   'Public'    => 0,
+                                   'Protected' => 0,
+                                   'Private'   => 0,
+                                   'Static'    => 0,
+                                   );
      
     const PRECEDENCE = [
                         T_OBJECT_OPERATOR             => 0,
@@ -502,6 +510,10 @@ class Load extends Tasks {
                             T_CLASS                    => 'processClass',
 
                             T_ABSTRACT                 => 'processAbstract',
+                            T_FINAL                    => 'processFinal',
+                            T_PRIVATE                  => 'processPrivate',
+                            T_PROTECTED                => 'processProtected',
+                            T_PUBLIC                   => 'processPublic',
                             
                             T_QUOTE                    => 'processQuote',
                             T_START_HEREDOC            => 'processQuote',
@@ -694,6 +706,14 @@ class Load extends Tasks {
     private function processFunction() {
         $current = $this->id;
         $functionId = $this->addAtom('Function');
+
+        $options = array('Abstract', 'Static', 'Final', 'Private', 'Protected', 'Public');
+        foreach($options as $option) {
+            if ($this->optionsTokens[$option] > 0) {
+                $this->addLink($functionId, $this->optionsTokens[$option], strtoupper($option));
+                $this->optionsTokens[$option] = 0;
+            }
+        }
         
         if ($this->tokens[$this->id + 1][0] === T_STRING) {
             ++$this->id;
@@ -778,6 +798,16 @@ class Load extends Tasks {
         $current = $this->id;
         $classId = $this->addAtom('Class');
         
+        if ($this->optionsTokens['Abstract'] > 0) {
+            $this->addLink($classId, $this->optionsTokens['Abstract'], 'ABSTRACT');
+            $this->optionsTokens['Abstract'] = 0;
+        }
+
+        if ($this->optionsTokens['Final'] > 0) {
+            $this->addLink($classId, $this->optionsTokens['Final'], 'FINAL');
+            $this->optionsTokens['Final'] = 0;
+        }
+        
         if ($this->tokens[$this->id + 1][0] === T_STRING) {
             ++$this->id;
 
@@ -807,8 +837,6 @@ class Load extends Tasks {
                 $this->addLink($classId, $extendsId, 'IMPLEMENTS');
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         }
-        
-        // process abstract, final...
         
         // Process block 
         $blockId = $this->processBlock(false);
@@ -987,17 +1015,31 @@ class Load extends Tasks {
         return $this->processFCOA($constId);
     }    
     
+    private function processOptions($atom) {
+        $this->processSingle($atom);
+        
+        $this->optionsTokens[$atom] = $this->popExpression();
+        return $this->optionsTokens[$atom];
+    }
+
     private function processAbstract() {
-        if ($this->tokens[$this->id + 1][0] === T_CLASS) {
-            $this->processSingle('Abstract');
-            
-            $abstractId = $this->popExpression();
-            $classId = $this->processNext();  // For the class
-            
-            $this->addLink($classId, $abstractId, 'ABSTRACT');
-            
-            return $classId;
-        }
+        return $this->processOptions('Abstract');
+    }
+
+    private function processFinal() {
+        return $this->processOptions('Final');
+    }
+
+    private function processPublic() {
+        return $this->processOptions('Public');
+    }
+
+    private function processProtected() {
+        return $this->processOptions('Protected');
+    }
+
+    private function processPrivate() {
+        return $this->processOptions('Private');
     }
 
     private function processFunctioncall() {
@@ -1052,11 +1094,51 @@ class Load extends Tasks {
     private function processStatic() {
         if ($this->tokens[$this->id + 1][0] === T_DOUBLE_COLON) {
             $this->processSingle('Static');
+        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+            $nameId = $this->addAtom('Identifier');
+            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1],
+                                     'fullcode' => $this->tokens[$this->id][1]]
+                                     );
+            $this->pushExpression($nameId);
+
+            $this->processFunctioncall();
+        } elseif ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+            return $this->processStaticVariable();
         } else {
             die(__METHOD__);
         }
     }
 
+    private function processStaticVariable() {
+        $current = $this->id;
+        $staticId = $this->addAtom('Static');
+        print_r($this->tokens[$this->id]);
+        
+        $fullcode = array();
+        while ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
+            $this->processNext();
+            
+            if ($this->tokens[$this->id + 1][0] === T_COMMA) {
+                $elementId = $this->popExpression();
+                $this->addLink($staticId, $elementId, 'STATIC');
+
+                $fullcode[] = $this->atoms[$elementId]['fullcode'];
+                ++$this->id;
+            }
+        } ;
+       $elementId = $this->popExpression();
+       $this->addLink($staticId, $elementId, 'STATIC');
+
+       $fullcode[] = $this->atoms[$elementId]['fullcode'];
+       ++$this->id;
+
+        $this->setAtom($staticId, ['code'     => $this->tokens[$current][1], 
+                                   'fullcode' => $this->tokens[$current][1] .' ' . join(', ', $fullcode)]);
+        $this->pushExpression($staticId);
+        
+        return $staticId;
+    }
+    
     private function processArrayBracket() {
         $id = $this->addAtom('Functioncall');
 
@@ -1068,8 +1150,6 @@ class Load extends Tasks {
         // No need to skip opening bracket
         $argumentId = $this->processArguments([T_CLOSE_BRACKET]);
         $this->addLink($id, $argumentId, 'ARGUMENTS');
-
-        // Skip closing bracket
 
         $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
                              'fullcode' => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ]);
