@@ -49,6 +49,7 @@ const T_DOLLAR                       = '$';
 const T_AND                          = '&';
 const T_PIPE                         = '|';
 const T_CARET                        = '^';
+const T_BACKTICK                     = '`';
 const T_END                          = 'The End';
 
 class Load extends Tasks {
@@ -193,6 +194,7 @@ class Load extends Tasks {
                      '&' => T_AND,
                      '|' => T_PIPE,
                      '^' => T_CARET,
+                     '`' => T_BACKTICK,
                    ];
     
     private $expressions = [];
@@ -498,6 +500,8 @@ class Load extends Tasks {
                             T_CLASS                    => 'processClass',
                             
                             T_QUOTE                    => 'processQuote',
+                            T_START_HEREDOC            => 'processQuote',
+                            T_BACKTICK                 => 'processQuote',
                             T_STATIC                   => 'processStatic',
                             
                             ];
@@ -524,9 +528,30 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     private function processQuote() {
         $current = $this->id;
-        $stringId = $this->addAtom('String');
         
-        while ($this->tokens[$this->id + 1][0] !== T_QUOTE) {
+        if ($this->tokens[$current][0] === T_QUOTE) {
+            $stringId = $this->addAtom('String');
+            $finalToken = T_QUOTE;
+            $openQuote = '"';
+            $closeQuote = '"';
+        } elseif ($this->tokens[$current][0] === T_BACKTICK) {
+            $stringId = $this->addAtom('Shell');
+            $finalToken = T_BACKTICK;
+            $openQuote = '`';
+            $closeQuote = '`';
+        } elseif ($this->tokens[$current][0] === T_START_HEREDOC) {
+            $stringId = $this->addAtom('Heredoc');
+            $finalToken = T_END_HEREDOC;
+            $openQuote = $this->tokens[$this->id][1];
+            var_dump($this->tokens[$this->id][1]);
+            if ($this->tokens[$this->id][1][3] === "'") {
+                $closeQuote = substr($this->tokens[$this->id][1], 4, -2);
+            } else {
+                $closeQuote = substr($this->tokens[$this->id][1], 3);
+            }
+        }
+        
+        while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             if ($this->tokens[$this->id + 1][0] == T_CURLY_OPEN) {
                 ++$this->id; // Skip {
                 while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
@@ -545,7 +570,7 @@ class Load extends Tasks {
         ++$this->id;
 
         $this->setAtom($stringId, ['code'     => $this->tokens[$current][1], 
-                                   'fullcode' => '"'.join('', $fullcode).'"']);
+                                   'fullcode' => $openQuote.join('', $fullcode).$closeQuote]);
 
         $this->pushExpression($stringId);
         
@@ -1050,7 +1075,6 @@ class Load extends Tasks {
         $this->addLink($id, $valueId, 'VALUE');
 
         ++$this->id; // Skip )
-        ++$this->id; // Skip )
 
         $blockId = $this->processFollowingBlock([T_ENDFOREACH]);
         $this->addLink($id, $blockId, 'BLOCK');
@@ -1098,7 +1122,7 @@ class Load extends Tasks {
             $this->startSequence();
             $blockId = $this->sequence;
             
-            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG])) {
+            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END])) {
                 $this->processNext();
             };
             $expressionId = $this->popExpression();
@@ -1106,7 +1130,8 @@ class Load extends Tasks {
 
             $this->endSequence();
         }
-
+        
+        print "return ".__METHOD__."\n";
         return $blockId;
     }
 
@@ -1131,6 +1156,9 @@ class Load extends Tasks {
         
         $this->pushExpression($whileId);
         
+        print_r($this->tokens[$this->id]);
+        print "return ".__METHOD__."\n";
+        
         return $whileId;
     }
 
@@ -1150,6 +1178,12 @@ class Load extends Tasks {
         
         $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
         $this->addLink($id, $blockId, 'THEN');
+        
+        print "Got then block\n";
+        if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+            ++$this->id;
+        }
+        print_r($this->tokens[$this->id]);
         
         // Managing else case
         if ($this->tokens[$this->id + 1][0] == T_ELSEIF){
@@ -1348,7 +1382,7 @@ class Load extends Tasks {
 
     private function processAppend() {
         $current = $this->id;
-        $appendId = $this->addAtom($atom);
+        $appendId = $this->addAtom('Arrayappend');
 
         $left = $this->popExpression();
         $this->addLink($appendId, $left, 'APPEND');
