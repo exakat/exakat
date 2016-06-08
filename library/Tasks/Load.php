@@ -452,6 +452,7 @@ class Load extends Tasks {
 
                             T_QUESTION                 => 'processTernary',
                             T_NS_SEPARATOR             => 'processNsname',
+                            T_COALESCE                 => 'processCoalesce',
 
                             T_INLINE_HTML              => 'processInlineHtml',
 
@@ -463,6 +464,7 @@ class Load extends Tasks {
                             T_FOREACH                  => 'processForeach',
                             T_FOR                      => 'processFor',
                             T_TRY                      => 'processTry',
+                            T_CONST                    => 'processConst',
 
                             T_AT                       => 'processNoscream',
 
@@ -498,6 +500,8 @@ class Load extends Tasks {
                             
                             T_FUNCTION                 => 'processFunction',
                             T_CLASS                    => 'processClass',
+
+                            T_ABSTRACT                 => 'processAbstract',
                             
                             T_QUOTE                    => 'processQuote',
                             T_START_HEREDOC            => 'processQuote',
@@ -954,7 +958,48 @@ class Load extends Tasks {
                                       
         return $argumentsId;
     }
+
+    private function processConst() {
+        $constId = $this->addAtom('Const');
+        $current = $this->id;
+
+        while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) {
+            $this->processNext();
+            
+            if ($this->tokens[$this->id + 1][0] === T_COMMA) {
+                $defId = $this->popExpression();
+                $this->addLink($constId, $defId, 'CONST');
+                
+                $fullcode[] = $this->atoms[$defId]['fullcode'];
+                ++$this->id;
+            }
+        } ;
+
+        $defId = $this->popExpression();
+        $this->addLink($constId, $defId, 'CONST');
+        $fullcode[] = $this->atoms[$defId]['fullcode'];
+
+        $this->setAtom($constId, ['code'     => $this->tokens[$current][1], 
+                                  'fullcode' => $this->tokens[$current][1].' '.join(', ', $fullcode)]);
+
+        $this->pushExpression($constId);
+
+        return $this->processFCOA($constId);
+    }    
     
+    private function processAbstract() {
+        if ($this->tokens[$this->id + 1][0] === T_CLASS) {
+            $this->processSingle('Abstract');
+            
+            $abstractId = $this->popExpression();
+            $classId = $this->processNext();  // For the class
+            
+            $this->addLink($classId, $abstractId, 'ABSTRACT');
+            
+            return $classId;
+        }
+    }
+
     private function processFunctioncall() {
         $nameId = $this->popExpression();
         ++$this->id; // Skipping the name, set on (
@@ -1791,6 +1836,10 @@ class Load extends Tasks {
 
     private function processAssignation() {
         $this->processOperator('Assignation', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processCoalesce() {
+        $this->processOperator('Coalesce', $this->getPrecedence($this->tokens[$this->id][0]));
     }
 
     private function processLogical() {
