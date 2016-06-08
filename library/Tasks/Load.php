@@ -501,6 +501,7 @@ class Load extends Tasks {
                             T_QUOTE                    => 'processQuote',
                             T_START_HEREDOC            => 'processQuote',
                             T_BACKTICK                 => 'processQuote',
+                            T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
                             T_STATIC                   => 'processStatic',
                             
                             ];
@@ -542,7 +543,6 @@ class Load extends Tasks {
             $stringId = $this->addAtom('Heredoc');
             $finalToken = T_END_HEREDOC;
             $openQuote = $this->tokens[$this->id][1];
-            var_dump($this->tokens[$this->id][1]);
             if ($this->tokens[$this->id][1][3] === "'") {
                 $closeQuote = substr($this->tokens[$this->id][1], 4, -2);
             } else {
@@ -598,6 +598,27 @@ class Load extends Tasks {
         $this->pushExpression($stringId);
         
         return $stringId;
+    }
+    
+    private function processDollarCurly() {
+        $current = $this->id;
+        $variableId = $this->addAtom('Variable');
+        
+        ++$this->id; // Skip ${
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
+            $this->processNext();
+        } ;
+        ++$this->id; // Skip }
+        
+        $nameId = $this->popExpression();
+        $this->addLink($variableId, $nameId, 'NAME');
+
+        $this->setAtom($stringId, ['code'     => $this->tokens[$current][1], 
+                                   'fullcode' => '${'.$this->atoms[$nameId]['fullcode'].'}']);
+        
+        $this->pushExpression($variableId);
+        
+        return $variableId;
     }
     
     private function processTry() {
