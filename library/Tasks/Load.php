@@ -718,7 +718,6 @@ class Load extends Tasks {
         }
         
         // Process block 
-//        ++$this->id;
         $blockId = $this->processBlock(false);
         $this->addLink($functionId, $blockId, 'BLOCK');
         
@@ -808,7 +807,6 @@ class Load extends Tasks {
         // process abstract, final...
         
         // Process block 
-        ++$this->id;
         $blockId = $this->processBlock(false);
         $this->addLink($classId, $blockId, 'BLOCK');
         
