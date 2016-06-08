@@ -723,7 +723,7 @@ class Load extends Tasks {
         }
 
         $this->addLink($id, $this->sequence, 'CODE');
-        $this->addLink($this->sequence, $this->popExpression(), 'SELEMENT');
+        $this->addLink($this->sequence, $this->popExpression(), 'ELEMENT');
         $this->endSequence();
         
         $this->setAtom($id, ['code'     => $this->tokens[$id][1], 
@@ -943,7 +943,7 @@ class Load extends Tasks {
         ++$this->id;
         
         // Case for ; ? 
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_CURLY) {
+        if ($this->tokens[$this->id][0] === T_CLOSE_CURLY) {
             $voidId = $this->addAtomVoid();
             $this->addLink($this->sequence, $voidId, 'ELEMENT');
         } else {
@@ -964,8 +964,6 @@ class Load extends Tasks {
             $this->pushExpression($blockId);
             $this->processSemicolon();
         }
-        
-        print "return ".__METHOD__."\n";
         
         return $blockId;
     }
@@ -1066,14 +1064,10 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock($finals) {
-        print __METHOD__."\n";
         print_r($this->tokens[$this->id + 1]);
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
-            print "yes with {\n";
             $blockId = $this->processBlock(false);
-            print "Fin with {\n";
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
-            print "with :\n";
             $this->startSequence();
             $blockId = $this->sequence;
 
@@ -1085,7 +1079,6 @@ class Load extends Tasks {
             
             ++$this->id; // Skip endforeach
         } elseif (in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) {
-            print "void with ;\n";
             $this->startSequence();
             $blockId = $this->sequence;
 
@@ -1093,9 +1086,7 @@ class Load extends Tasks {
             $this->addLink($blockId, $voidId, 'ELEMENT');
             $this->endSequence();
             
-//            ++$this->id;
-        } elseif (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_CLOSE_PARENTHESIS])) {
-            print "Autoclose } ? >\n";
+        } elseif (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_CLOSE_CURLY, T_CLOSE_PARENTHESIS])) {
             $this->startSequence();
             $blockId = $this->sequence;
 
@@ -1104,10 +1095,6 @@ class Load extends Tasks {
             $this->endSequence();
 
         } else {
-            print "One line block\n";
-//            --$this->id; // Back up one initial
-
-            print __METHOD__."\n";
             $this->startSequence();
             $blockId = $this->sequence;
             
@@ -1118,11 +1105,8 @@ class Load extends Tasks {
             $this->addLink($this->sequence, $expressionId, 'ELEMENT');
 
             $this->endSequence();
-            
-//            ++$this->id;
         }
-        
-        print "return ".__METHOD__."\n";
+
         return $blockId;
     }
 
@@ -1147,8 +1131,6 @@ class Load extends Tasks {
         
         $this->pushExpression($whileId);
         
-        print_r($this->tokens[$this->id + 1]);
-        print "return ".__METHOD__."\n";
         return $whileId;
     }
 
@@ -1164,22 +1146,17 @@ class Load extends Tasks {
         $this->addLink($id, $conditionId, 'CONDITION');
 
         ++$this->id; // Skip )
-        ++$this->id; // Skip {
         $isColon = $this->tokens[$this->id + 1][0] === T_COLON;
         
         $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
         $this->addLink($id, $blockId, 'THEN');
-
+        
         // Managing else case
-        if ($this->tokens[$this->id][0] == T_ELSEIF){
-            $elseifId = $this->processIfthen();
-            $this->addLink($id, $elseifId, 'ELSE');
-        } elseif ($this->tokens[$this->id + 1][0] == T_ELSEIF){
+        if ($this->tokens[$this->id + 1][0] == T_ELSEIF){
             ++$this->id;
             $elseifId = $this->processIfthen();
             $this->addLink($id, $elseifId, 'ELSE');
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSE){
-            ++$this->id; // Skip else
             ++$this->id; // Skip else
 
             $elseId = $this->processFollowingBlock([T_ENDIF]);
@@ -1357,6 +1334,9 @@ class Load extends Tasks {
         // For functions and constants 
         if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
+        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
+                  $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
+            return $this->processAppend();
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
                   ($alsoCurly &&
                   $this->tokens[$this->id + 1][0] === T_OPEN_CURLY)) {
@@ -1366,6 +1346,24 @@ class Load extends Tasks {
         }
     }
 
+    private function processAppend() {
+        $current = $this->id;
+        $appendId = $this->addAtom($atom);
+
+        $left = $this->popExpression();
+        $this->addLink($appendId, $left, 'APPEND');
+        
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->atoms[$left]['fullcode'] . '[]'];
+        $this->setAtom($appendId, $x);
+        $this->pushExpression($appendId);
+        
+        ++$this->id;
+        ++$this->id;
+        
+        return $appendId;
+    }
+    
     private function processInteger() {
         return $this->processSingle('Integer');
     }
