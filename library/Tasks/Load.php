@@ -114,7 +114,7 @@ class Load extends Tasks {
 
                         T_PIPE                        => 14,	 // |
                         	
-                        T_BOOLEAN_OR                  => 15, // &&
+                        T_BOOLEAN_AND                 => 15, // &&
                         	
                         T_BOOLEAN_OR                  => 16, // ||
                         	
@@ -124,6 +124,17 @@ class Load extends Tasks {
                
                         T_EQUAL                       => 19,
                         T_PLUS_EQUAL                  => 19,
+                        T_AND_EQUAL                   => 19,
+                        T_CONCAT_EQUAL                => 19,
+                        T_DIV_EQUAL                   => 19,
+                        T_MINUS_EQUAL                 => 19,
+                        T_MOD_EQUAL                   => 19,
+                        T_MUL_EQUAL                   => 19,
+                        T_OR_EQUAL                    => 19,
+                        T_POW_EQUAL                   => 19,
+                        T_SL_EQUAL                    => 19,
+                        T_SR_EQUAL                    => 19,
+                        T_XOR_EQUAL                   => 19,
                         
                         T_LOGICAL_AND                 => 20, // and
                         
@@ -376,6 +387,7 @@ class Load extends Tasks {
                             T_NEW                      => 'processNew',
                             
                             T_DOT                      => 'processDot',
+                            T_OPEN_CURLY               => 'processBlock',
                             
                             T_IS_SMALLER_OR_EQUAL      => 'processComparison',
                             T_IS_GREATER_OR_EQUAL      => 'processComparison',
@@ -443,12 +455,13 @@ class Load extends Tasks {
                             T_INC                      => 'processPlusplus',
                             T_DEC                      => 'processPlusplus',
 
+                            T_WHILE                    => 'processWhile',
                             T_IF                       => 'processIfthen',
                             T_FOREACH                  => 'processForeach',
                             T_FOR                      => 'processFor',
                             T_TRY                      => 'processTry',
 
-                            T_ELSE                     => 'processNone',
+//                            T_ELSE                     => 'processNone',
 
                             T_AT                       => 'processNoscream',
 
@@ -546,7 +559,7 @@ class Load extends Tasks {
         // Skip Try
         ++$this->id;
         
-        $blockId = $this->processBlock();
+        $blockId = $this->processBlock(false);
         $this->addLink($tryId, $blockId, 'BLOCK');
         
         while ($this->tokens[$this->id + 1][0] == T_CATCH) {
@@ -572,7 +585,7 @@ class Load extends Tasks {
 
             // Skip }
             ++$this->id;
-            $blockCatchId = $this->processBlock();
+            $blockCatchId = $this->processBlock(false);
             $this->addLink($catchId, $blockCatchId, 'BLOCK');
 
             $this->setAtom($catchId, ['code'     => 'catch',
@@ -586,7 +599,7 @@ class Load extends Tasks {
             $finallyId = $this->addAtom('Finally');
 
             ++$this->id;
-            $finallyBlockId = $this->processBlock();
+            $finallyBlockId = $this->processBlock(false);
             $this->addLink($tryId, $finallyBlockId, 'FINALLY');
 
             $this->setAtom($finallyId, ['code'     => 'finally',
@@ -624,9 +637,19 @@ class Load extends Tasks {
         $argumentsId = $this->processArguments();
         $this->addLink($functionId, $argumentsId, 'ARGUMENTS');
         
+        if ($this->tokens[$this->id + 1][0] === T_COLON) {
+            ++$this->id;
+            while (!in_array($this->tokens[$this->id + 1][0], [T_OPEN_CURLY])) {
+                $this->processNext();
+            }
+            
+            $returnTypeId = $this->popExpression();
+            $this->addLink($functionId, $returnTypeId, 'RETURNTYPE');
+        }
+        
         // Process block 
         ++$this->id;
-        $blockId = $this->processBlock();
+        $blockId = $this->processBlock(false);
         $this->addLink($functionId, $blockId, 'BLOCK');
         
         $this->setAtom($functionId, ['code'     => $this->tokens[$current][1], 
@@ -661,7 +684,7 @@ class Load extends Tasks {
         
         // Process block 
         ++$this->id;
-        $blockId = $this->processBlock();
+        $blockId = $this->processBlock(false);
         $this->addLink($classId, $blockId, 'BLOCK');
         
         $this->setAtom($classId, ['code'     => $this->tokens[$current][1], 
@@ -678,7 +701,7 @@ class Load extends Tasks {
         $id = $this->addAtom('Php');
 
         $this->startSequence();
-        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG])) {
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
             $this->processNext();
             
             // Skipping inline HTML
@@ -700,6 +723,7 @@ class Load extends Tasks {
         }
 
         $this->addLink($id, $this->sequence, 'CODE');
+        $this->addLink($this->sequence, $this->popExpression(), 'SELEMENT');
         $this->endSequence();
         
         $this->setAtom($id, ['code'     => $this->tokens[$id][1], 
@@ -729,7 +753,6 @@ class Load extends Tasks {
 
         return 0;
     }
-
 
     private function processNsname() {
         $current = $this->id;
@@ -824,9 +847,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
 
-        $id = $this->processFCOA($functioncallId);
-
-        return $id;
+        return $this->processFCOA($functioncallId);
     }
     
     private function processString() {
@@ -836,7 +857,7 @@ class Load extends Tasks {
         $this->pushExpression($id);
 
         // For functions and constants 
-        return $this->processFCOA($id);
+        return $this->processFCOA($id, false);
     }
 
     private function processPlusplus() {
@@ -917,10 +938,10 @@ class Load extends Tasks {
         return $this->processFCOA($id);
     }
     
-    private function processBlock() {
-//        ++$this->id; // Skip {
+    private function processBlock($standalone = true) {
         $this->startSequence();
-
+        ++$this->id;
+        
         // Case for ; ? 
         if ($this->tokens[$this->id + 1][0] === T_CLOSE_CURLY) {
             $voidId = $this->addAtomVoid();
@@ -938,6 +959,13 @@ class Load extends Tasks {
                                   'fullcode' => '{ /**/ }']);
 
         ++$this->id; // skip }    
+        
+        if ($standalone === true) {
+            $this->pushExpression($blockId);
+            $this->processSemicolon();
+        }
+        
+        print "return ".__METHOD__."\n";
         
         return $blockId;
     }
@@ -985,9 +1013,8 @@ class Load extends Tasks {
         $this->processForblock([T_CLOSE_PARENTHESIS]);
         $incrementId = $this->popExpression();
         $this->addLink($forId, $incrementId, 'INCREMENT');
-        
+
         ++$this->id;
-        
         $blockId = $this->processFollowingBlock([T_ENDFOR]);
         $this->addLink($forId, $blockId, 'BLOCK');
 
@@ -1039,9 +1066,14 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock($finals) {
-        if ($this->tokens[$this->id][0] === T_OPEN_CURLY) {
-            $blockId = $this->processBlock();
-        } elseif ($this->tokens[$this->id][0] === T_COLON) {
+        print __METHOD__."\n";
+        print_r($this->tokens[$this->id + 1]);
+        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+            print "yes with {\n";
+            $blockId = $this->processBlock(false);
+            print "Fin with {\n";
+        } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
+            print "with :\n";
             $this->startSequence();
             $blockId = $this->sequence;
 
@@ -1052,22 +1084,72 @@ class Load extends Tasks {
             $this->endSequence();
             
             ++$this->id; // Skip endforeach
-        } else {
-            --$this->id; // Skip initial
+        } elseif (in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) {
+            print "void with ;\n";
             $this->startSequence();
             $blockId = $this->sequence;
+
+            $voidId = $this->addAtomVoid();
+            $this->addLink($blockId, $voidId, 'ELEMENT');
             $this->endSequence();
             
-            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) {
+//            ++$this->id;
+        } elseif (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_CLOSE_PARENTHESIS])) {
+            print "Autoclose } ? >\n";
+            $this->startSequence();
+            $blockId = $this->sequence;
+
+            $voidId = $this->addAtomVoid();
+            $this->addLink($blockId, $voidId, 'ELEMENT');
+            $this->endSequence();
+
+        } else {
+            print "One line block\n";
+//            --$this->id; // Back up one initial
+
+            print __METHOD__."\n";
+            $this->startSequence();
+            $blockId = $this->sequence;
+            
+            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG])) {
                 $this->processNext();
             };
             $expressionId = $this->popExpression();
-            $this->addLink($blockId, $expressionId, 'ELEMENT');
+            $this->addLink($this->sequence, $expressionId, 'ELEMENT');
+
+            $this->endSequence();
             
-            ++$this->id;
+//            ++$this->id;
         }
         
+        print "return ".__METHOD__."\n";
         return $blockId;
+    }
+
+    private function processWhile() {
+        $whileId = $this->addAtom('While');
+        $current = $this->id;
+        
+        ++$this->id;
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
+            $this->processNext();
+        };
+        $conditionId = $this->popExpression();
+        $this->addLink($whileId, $conditionId, 'CONDITION');
+
+        ++$this->id; // Skip )
+        
+        $blockId = $this->processFollowingBlock([T_ENDWHILE]);
+        $this->addLink($whileId, $blockId, 'BLOCK');
+
+        $this->setAtom($whileId, ['code'     => 'while (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }',
+                                  'fullcode' => 'while (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }' ]);
+        
+        $this->pushExpression($whileId);
+        
+        print_r($this->tokens[$this->id + 1]);
+        print "return ".__METHOD__."\n";
+        return $whileId;
     }
 
     private function processIfthen() {
@@ -1097,6 +1179,7 @@ class Load extends Tasks {
             $elseifId = $this->processIfthen();
             $this->addLink($id, $elseifId, 'ELSE');
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSE){
+            ++$this->id; // Skip else
             ++$this->id; // Skip else
 
             $elseId = $this->processFollowingBlock([T_ENDIF]);
@@ -1270,12 +1353,13 @@ class Load extends Tasks {
         return $this->processFCOA($variableId);
     }
     
-    private function processFCOA($id) {
+    private function processFCOA($id, $alsoCurly = true) {
         // For functions and constants 
         if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
-                  $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+                  ($alsoCurly &&
+                  $this->tokens[$this->id + 1][0] === T_OPEN_CURLY)) {
             return $this->processBracket();
         } else {
             return $id;
