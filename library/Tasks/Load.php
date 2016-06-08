@@ -520,6 +520,7 @@ class Load extends Tasks {
                             T_BACKTICK                 => 'processQuote',
                             T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
                             T_STATIC                   => 'processStatic',
+                            T_GLOBAL                   => 'processGlobalVariable',
                             
                             ];
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
@@ -1109,9 +1110,9 @@ class Load extends Tasks {
         }
     }
 
-    private function processStaticVariable() {
+    private function processSGVariable($atom) {
         $current = $this->id;
-        $staticId = $this->addAtom('Static');
+        $staticId = $this->addAtom($atom);
         print_r($this->tokens[$this->id]);
         
         $fullcode = array();
@@ -1120,23 +1121,30 @@ class Load extends Tasks {
             
             if ($this->tokens[$this->id + 1][0] === T_COMMA) {
                 $elementId = $this->popExpression();
-                $this->addLink($staticId, $elementId, 'STATIC');
+                $this->addLink($staticId, $elementId, strtoupper($atom));
 
                 $fullcode[] = $this->atoms[$elementId]['fullcode'];
                 ++$this->id;
             }
         } ;
        $elementId = $this->popExpression();
-       $this->addLink($staticId, $elementId, 'STATIC');
+       $this->addLink($staticId, $elementId, strtoupper($atom));
 
        $fullcode[] = $this->atoms[$elementId]['fullcode'];
-       ++$this->id;
 
         $this->setAtom($staticId, ['code'     => $this->tokens[$current][1], 
                                    'fullcode' => $this->tokens[$current][1] .' ' . join(', ', $fullcode)]);
         $this->pushExpression($staticId);
         
         return $staticId;
+    }
+    
+    private function processStaticVariable() {
+        return $this->processSGVariable('Static');
+    }
+    
+    private function processGlobalVariable() {
+        return $this->processSGVariable('Global');
     }
     
     private function processArrayBracket() {
