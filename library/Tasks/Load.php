@@ -463,13 +463,12 @@ class Load extends Tasks {
                             T_FOR                      => 'processFor',
                             T_TRY                      => 'processTry',
 
-//                            T_ELSE                     => 'processNone',
-
                             T_AT                       => 'processNoscream',
 
                             T_STRING                   => 'processString',
                             T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
                             T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
+                            T_NUM_STRING               => 'processLiteral',
    
                             T_ARRAY_CAST               => 'processCast',
                             T_BOOL_CAST                => 'processCast',
@@ -558,6 +557,30 @@ class Load extends Tasks {
                     $this->processNext();
                 } ;
                 ++$this->id; // Skip }
+            } elseif ($this->tokens[$this->id + 1][0] == T_VARIABLE) {
+                $this->processNext();
+                print "Variable\n";
+                if ($this->tokens[$this->id + 1][0] == T_OBJECT_OPERATOR) {
+                    ++$this->id;
+                    ++$this->id;
+                    
+                    $objectId = $this->popExpression();
+
+                    $propertyNameId = $this->addAtom('Identifier');
+                    $this->setAtom($propertyNameId, ['code'     => $this->tokens[$this->id][1], 
+                                                     'fullcode' => $this->tokens[$this->id][1]]);
+
+                    $propertyId = $this->addAtom('Property');
+                    $this->setAtom($propertyId, ['code'     => '->', 
+                                                 'fullcode' => $this->atoms[$objectId]['fullcode']. '->' .
+                                                               $this->atoms[$propertyNameId]['fullcode'] ]);
+
+                    $this->addLink($propertyId, $objectId, 'OBJECT');
+                    $this->addLink($propertyId, $propertyNameId, 'PROPERTY');
+                    
+                    $this->pushExpression($propertyId);
+                    print "Property\n";
+                }
             } else {
                 $this->processNext();
             }
@@ -1088,7 +1111,6 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock($finals) {
-        print_r($this->tokens[$this->id + 1]);
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $blockId = $this->processBlock(false);
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
@@ -1131,7 +1153,6 @@ class Load extends Tasks {
             $this->endSequence();
         }
         
-        print "return ".__METHOD__."\n";
         return $blockId;
     }
 
@@ -1156,9 +1177,6 @@ class Load extends Tasks {
         
         $this->pushExpression($whileId);
         
-        print_r($this->tokens[$this->id]);
-        print "return ".__METHOD__."\n";
-        
         return $whileId;
     }
 
@@ -1179,11 +1197,9 @@ class Load extends Tasks {
         $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
         $this->addLink($id, $blockId, 'THEN');
         
-        print "Got then block\n";
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
             ++$this->id;
         }
-        print_r($this->tokens[$this->id]);
         
         // Managing else case
         if ($this->tokens[$this->id + 1][0] == T_ELSEIF){
@@ -1660,16 +1676,22 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_COMMA,
-                               T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS,
-                               T_CLOSE_BRACKET], $this->getPrecedence($this->tokens[$this->id][0]));
-        while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
-            $id = $this->processNext();
-        } ;
+        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+            ++$this->id;
+            while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
+                $id = $this->processNext();
+            } ;
+            ++$this->id;
+        } else {
+            $finals =$this->getPrecedence($this->tokens[$this->id][0]);
+            while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+                $id = $this->processNext();
+            } ;
+        }
 
         $right = $this->popExpression();
 
-        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier'))) {
+        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
