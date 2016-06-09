@@ -177,6 +177,7 @@ class Load extends Tasks {
                         T_BREAK                       => 31,
                         T_ELLIPSIS                    => 31,
                         T_GOTO                        => 31,
+                        T_INSTEADOF                   => 31,
     ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -525,6 +526,8 @@ class Load extends Tasks {
                             T_INTERFACE                => 'processInterface',
                             T_NAMESPACE                => 'processNamespace',
                             T_USE                      => 'processUse',
+                            T_AS                       => 'processAs',
+                            T_INSTEADOF                => 'processInsteadof',
 
                             T_ABSTRACT                 => 'processAbstract',
                             T_FINAL                    => 'processFinal',
@@ -1969,7 +1972,15 @@ class Load extends Tasks {
 
         return $namespaceId;
     }
-    
+
+    private function processAs() {
+        return $this->processOperator('As', $this->getPrecedence($this->tokens[$this->id][0]), ['NAME', 'AS']);
+    }
+
+    private function processInsteadof() {
+        return $this->processOperator('Insteadof', $this->getPrecedence($this->tokens[$this->id][0]), ['NAME', 'AS']);
+    }
+
     private function processUse() {
         $useId = $this->addAtom('Use');
         $current = $this->id;
@@ -1996,8 +2007,6 @@ class Load extends Tasks {
         --$this->id;
         do {
             ++$this->id;
-            
-            
             $namespaceId = $this->processOneNsname();
             
             if ($this->tokens[$this->id + 1][0] === T_AS) {
@@ -2023,6 +2032,11 @@ class Load extends Tasks {
             $fullcode[] = $this->atoms[$namespaceId]['fullcode'];
 
         } while ($this->tokens[$this->id + 1][0] === T_COMMA);
+        
+        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+            $useBlockId = $this->processFollowingBlock([T_CLOSE_CURLY]);
+            $this->addLink($namespaceId, $useBlockId, 'BLOCK');
+        }
 
         $x = ['code'     => $this->tokens[$current][1], 
               'fullcode' => $this->tokens[$current][1].' '.join(", ", $fullcode)];
