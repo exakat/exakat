@@ -174,6 +174,7 @@ class Load extends Tasks {
                         T_AS                          => 31,
                         T_CONTINUE                    => 31,
                         T_BREAK                       => 31,
+                        T_ELLIPSIS                    => 31,
     ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -474,6 +475,9 @@ class Load extends Tasks {
                             T_FOR                      => 'processFor',
                             T_TRY                      => 'processTry',
                             T_CONST                    => 'processConst',
+                            T_SWITCH                   => 'processSwitch',
+                            T_DEFAULT                  => 'processDefault',
+                            T_CASE                     => 'processCase',
 
                             T_AT                       => 'processNoscream',
 
@@ -501,6 +505,7 @@ class Load extends Tasks {
 
                             T_BANG                     => 'processNot',
                             T_TILDE                    => 'processNot',
+                            T_ELLIPSIS                 => 'processEllipsis',
                              
                             T_SEMICOLON                => 'processSemicolon',
                             T_CLOSE_TAG                => 'processClosingTag',
@@ -509,6 +514,7 @@ class Load extends Tasks {
                             
                             T_FUNCTION                 => 'processFunction',
                             T_CLASS                    => 'processClass',
+                            T_NAMESPACE                => 'processNamespace',
 
                             T_ABSTRACT                 => 'processAbstract',
                             T_FINAL                    => 'processFinal',
@@ -730,6 +736,16 @@ class Load extends Tasks {
         $argumentsId = $this->processArguments();
         $this->addLink($functionId, $argumentsId, 'ARGUMENTS');
         
+        // Process use
+        if ($this->tokens[$this->id + 1][0] === T_USE) {
+            ++$this->id; // Skip use
+            ++$this->id; // Skip (
+            $argumentsId = $this->processArguments();
+            $this->addLink($functionId, $argumentsId, 'USE');
+        
+        }
+        
+        // Process return type
         if ($this->tokens[$this->id + 1][0] === T_COLON) {
             ++$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], [T_OPEN_CURLY])) {
@@ -739,7 +755,7 @@ class Load extends Tasks {
             $returnTypeId = $this->popExpression();
             $this->addLink($functionId, $returnTypeId, 'RETURNTYPE');
         }
-        
+
         // Process block 
         $blockId = $this->processBlock(false);
         $this->addLink($functionId, $blockId, 'BLOCK');
@@ -914,6 +930,9 @@ class Load extends Tasks {
             ++$this->id;
             $this->processInlineHtml();
             ++$this->id;
+        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_TAG) {
+            $this->processSemicolon();
+            ++$this->id;
         } else {
             ++$this->id;
             $this->processInlineHtml();
@@ -962,41 +981,103 @@ class Load extends Tasks {
 
         return $this->processFCOA($nsnameId);
     }
+    
+    private function processTypehint() {
+        if (in_array($this->tokens[$this->id + 1][0], [T_ARRAY, T_CALLABLE])) {
+            ++$this->id;
+            $this->processSingle('Identifier');
+            
+            return $this->popExpression();
+        } elseif (in_array($this->tokens[$this->id + 1][0], [T_STRING])) {
+            $fullcode = array();
+            
+            ++$this->id; // Skip \
+            $this->processSingle('Identifier');
+            
+            if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+                return $this->popExpression();
+            }
+            
+            $nsnameId = $this->addAtom('Nsname');
+            $subnameId = $this->popExpression();
+            $this->addLink($nsnameId, $subnameId, 'SUBNAME');
+            $fullcode[] = $this->atoms[$subnameId]['code'];
+
+            while ($this->tokens[$this->id + 1][0] !== T_VARIABLE) {
+                ++$this->id; // Skip \
+
+                ++$this->id;
+                $this->processSingle('Identifier');
+                $subnameId = $this->popExpression();
+                $this->addLink($nsnameId, $subnameId, 'SUBNAME');
+                $fullcode[] = $this->atoms[$subnameId]['code'];
+            }
+            
+            $this->setAtom($nsnameId, ['code' => '\\',
+                                        'fullcode' => join('\\', $fullcode)]);
+            return $nsnameId;
+        } elseif (in_array($this->tokens[$this->id + 1][0], [T_NS_SEPARATOR])) {
+            $nsnameId = $this->addAtom('Nsname');
+            $fullcode = array('');
+
+            do {
+                ++$this->id; // Skip \
+
+                ++$this->id;
+                $this->processSingle('Identifier');
+                $subnameId = $this->popExpression();
+                $this->addLink($nsnameId, $subnameId, 'SUBNAME');
+                $fullcode[] = $this->atoms[$subnameId]['code'];
+            } while ($this->tokens[$this->id + 1][0] !== T_VARIABLE);
+            
+            $this->setAtom($nsnameId, ['code' => '\\',
+                                        'fullcode' => join('\\', $fullcode)]);
+            return $nsnameId;
+        }
+        
+        return 0;
+    }
 
     private function processArguments($finals = [T_CLOSE_PARENTHESIS]) {
         $argumentsId = $this->addAtom('Arguments');
 
         $fullcode = array();
-        while ($this->tokens[$this->id + 1][0] === T_COMMA) {
+        if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+            $voidId = $this->addAtomVoid();
+            $this->addLink($argumentsId, $voidId, 'ARGUMENT');
+
+            $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
+                                          'fullcode' => $this->tokens[$this->id][1]]);
+
+            ++$this->id;
+            
+        } else {
+            while (!in_array($this->tokens[$this->id + 1][0], $finals )) {
+               if ($typehintId = $this->processTypehint()) {
+                   $this->addLink($argumentsId, $typehintId, 'TYPEHINT');
+               }
+
+                $this->processNext();
+               
+                while ($this->tokens[$this->id + 1][0] === T_COMMA) {
+                    $indexId = $this->popExpression();
+                    
+                    $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+                    $fullcode[] = $this->atoms[$indexId]['fullcode'];
+    
+                    ++$this->id; // Skipping the comma ,
+                }
+            };
             $indexId = $this->popExpression();
             $this->addLink($argumentsId, $indexId, 'ARGUMENT');
             $fullcode[] = $this->atoms[$indexId]['fullcode'];
-    
-            ++$this->id; // Skipping the comma ,
+
+            // Skip the ) 
+            ++$this->id;
+
+            $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
+                                          'fullcode' => join(', ', $fullcode)]);
         }
-        
-        while (!in_array($this->tokens[$this->id + 1][0], $finals )) {
-            $this->processNext();
-           
-            while ($this->tokens[$this->id + 1][0] === T_COMMA) {
-                $indexId = $this->popExpression();
-                $this->addLink($argumentsId, $indexId, 'ARGUMENT');
-                $fullcode[] = $this->atoms[$indexId]['fullcode'];
-    
-                ++$this->id; // Skipping the comma ,
-            }
-        };
-        $indexId = $this->popExpression();
-        
-        $this->addLink($argumentsId, $indexId, 'ARGUMENT');
-        $fullcode[] = $this->atoms[$indexId]['fullcode'];
-
-        // Skip the ) 
-        ++$this->id;
-
-        $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
-                                      'fullcode' => join(', ', $fullcode)]);
-                                      
         return $argumentsId;
     }
     
@@ -1178,7 +1259,6 @@ class Load extends Tasks {
     private function processSGVariable($atom) {
         $current = $this->id;
         $staticId = $this->addAtom($atom);
-        print_r($this->tokens[$this->id]);
         
         $fullcode = array();
         while ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
@@ -1454,6 +1534,98 @@ class Load extends Tasks {
         return $whileId;
     }
 
+    private function processDefault() {
+        $defaultId = $this->addAtom('Default');
+        $current = $this->id;
+        ++$this->id; // Skip : 
+
+        $this->startSequence();
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY, T_CASE, T_DEFAULT])) {
+            $this->processNext();
+        };
+        $this->addLink($defaultId, $this->sequence, 'CODE');
+        $this->endSequence();
+        
+        $this->setAtom($defaultId, ['code'     => 'default',
+                                    'fullcode' => 'default : /**/']);
+        $this->pushExpression($defaultId);
+        
+        return $defaultId;
+    }
+
+    private function processCase() {
+        $caseId = $this->addAtom('Case');
+        $current = $this->id;
+
+        while (!in_array($this->tokens[$this->id + 1][0], [T_COLON])) {
+            $this->processNext();
+        };
+        
+        $itemId = $this->popExpression();
+        $this->addLink($caseId, $itemId, 'CASE');
+
+        ++$this->id; // Skip : 
+
+        $this->startSequence();
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY, T_CASE, T_DEFAULT])) {
+            $this->processNext();
+        };
+        $this->addLink($caseId, $this->sequence, 'CODE');
+        $this->endSequence();
+        
+        $this->setAtom($caseId, ['code'     => 'case '.$this->atoms[$itemId]['fullcode'].' : /**/ ',
+                                 'fullcode' => 'case '.$this->atoms[$itemId]['fullcode'].' : /**/ ']);
+        $this->pushExpression($caseId);
+        
+        return $caseId;
+    }
+    
+    private function processSwitch() {
+        $switchId = $this->addAtom('Switch');
+        $current = $this->id;
+        ++$this->id; // Skip (
+
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
+            $this->processNext();
+        };
+        $nameId = $this->popExpression();
+        $this->addLink($switchId, $nameId, 'NAME');
+
+        $this->setAtom($switchId, ['code'     => 'switch (' . $this->atoms[$nameId]['fullcode'] . ') { /**/ }',
+                                   'fullcode' => 'switch (' . $this->atoms[$nameId]['fullcode'] . ') { /**/ }' ]);
+
+        $casesId = $this->addAtom('Sequence');
+        $this->setAtom($casesId, ['code'     => ' / *cases* /',
+                                  'fullcode' => ' / *cases* /']);
+        $this->addLink($switchId, $casesId, 'CASES');
+        ++$this->id;
+        ++$this->id;
+        
+        if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+            $voidId = $this->addAtomVoid();
+            $this->addLink($casesId, $voidId, 'ELEMENT');
+            
+            ++$this->id;
+        } else {
+            print "Go into sequence $this->id\n";
+            while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
+                $this->processNext();
+            
+                $caseId = $this->popExpression();
+                $this->addLink($casesId, $caseId, 'ELEMENT');
+            };
+        }
+        ++$this->id;
+
+        $this->setAtom($switchId, ['code'    => ' switch ('.$this->atoms[$nameId]['fullcode'].') { /*cases*/ }',
+                                  'fullcode' => ' switch ('.$this->atoms[$nameId]['fullcode'].') { /*cases*/ }']);
+        
+        $this->pushExpression($switchId);
+        $this->processSemicolon();
+        
+        return $switchId;
+    }
+
     private function processIfthen() {
         $id = $this->addAtom('Ifthen');
         $current = $this->id;
@@ -1647,6 +1819,41 @@ class Load extends Tasks {
         
         return $inlineId;
     }
+
+    private function processNamespace() {
+        $namespaceId = $this->addAtom('Namespace');
+        $current = $this->id;
+        
+        while (!in_array($this->tokens[$this->id + 1][0], [T_OPEN_CURLY, T_SEMICOLON]) ) {
+            $this->processNext();
+        };
+        
+        $nameId = $this->popExpression();
+        $this->addLink($namespaceId, $nameId, 'NAME');
+
+        $this->pushExpression($namespaceId);
+
+        if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+            $x = ['code'     => $this->tokens[$current][1], 
+                  'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode']];
+            $this->setAtom($namespaceId, $x);
+
+            $this->processSemicolon();
+            ++$this->id;
+            
+            return $namespaceId;
+        }
+
+        // Process block 
+        $blockId = $this->processBlock(false);
+        $this->addLink($namespaceId, $blockId, 'BLOCK');
+        
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .' { /**/ }'];
+        $this->setAtom($namespaceId, $x);
+
+        return $namespaceId;
+    }
     
     private function processVariable() {
         $variableId = $this->processSingle('Variable');
@@ -1751,6 +1958,10 @@ class Load extends Tasks {
 
     private function processNot() {
         return $this->processSingleOperator('Not', $this->getPrecedence($this->tokens[$this->id][0]), 'NOT');
+    }
+
+    private function processEllipsis() {
+        return $this->processSingleOperator('Ellipsis', $this->getPrecedence($this->tokens[$this->id][0]), 'TRIPLEDOT');
     }
 
     private function processDollar() {
@@ -2040,7 +2251,7 @@ class Load extends Tasks {
         $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
                                  'fullcode' => $this->tokens[$this->id][1] ]);
 
-        $argumentsId = $this->processArguments([T_SEMICOLON]);
+        $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG]);
         // processArguments goes too far, up to ;
         --$this->id;
 
