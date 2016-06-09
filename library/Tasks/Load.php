@@ -153,6 +153,7 @@ class Load extends Tasks {
                         T_LOGICAL_OR                  => 22, // or
 
                         T_ECHO                        => 30,
+                        T_HALT_COMPILER               => 30,
                         T_PRINT                       => 30,
                         T_INCLUDE                     => 30,
                         T_INCLUDE_ONCE                => 30,
@@ -175,6 +176,7 @@ class Load extends Tasks {
                         T_CONTINUE                    => 31,
                         T_BREAK                       => 31,
                         T_ELLIPSIS                    => 31,
+                        T_GOTO                        => 31,
     ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -423,6 +425,8 @@ class Load extends Tasks {
                             T_EXIT                     => 'processExit',
                             T_DOUBLE_ARROW             => 'processKeyvalue',
                             T_ECHO                     => 'processEcho',
+
+                            T_HALT_COMPILER            => 'processPrint',
                             T_PRINT                    => 'processPrint',
                             T_INCLUDE                  => 'processPrint',
                             T_INCLUDE_ONCE             => 'processPrint',
@@ -481,6 +485,8 @@ class Load extends Tasks {
                             T_CASE                     => 'processCase',
 
                             T_AT                       => 'processNoscream',
+                            T_CLONE                    => 'processClone',
+                            T_GOTO                     => 'processGoto',
 
                             T_STRING                   => 'processString',
                             T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
@@ -654,10 +660,7 @@ class Load extends Tasks {
         $current = $this->id;
         $tryId = $this->addAtom('Try');
         
-        // Skip Try
-        ++$this->id;
-        
-        $blockId = $this->processBlock(false);
+        $blockId = $this->processFollowingBlock([T_CLOSE_CURLY]);
         $this->addLink($tryId, $blockId, 'BLOCK');
         
         while ($this->tokens[$this->id + 1][0] == T_CATCH) {
@@ -682,8 +685,7 @@ class Load extends Tasks {
             ++$this->id;
 
             // Skip }
-            ++$this->id;
-            $blockCatchId = $this->processBlock(false);
+            $blockCatchId = $this->processFollowingBlock([T_CLOSE_CURLY]);
             $this->addLink($catchId, $blockCatchId, 'BLOCK');
 
             $this->setAtom($catchId, ['code'     => 'catch',
@@ -1289,6 +1291,16 @@ class Load extends Tasks {
         $id = $this->addAtom('Identifier');
         $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
                              'fullcode' => $this->tokens[$this->id][1] ]);
+        
+        if ($this->tokens[$this->id + 1][0] == T_COLON) {
+            $labelId = $this->addAtom('Label');
+            $this->addLink($labelId, $id, 'LABEL');
+            $this->setAtom($labelId, ['code'     => ':', 
+                                      'fullcode' => $this->atoms[$id]['fullcode'].' :']);
+                                      
+            $this->pushExpression($labelId);
+            return $labelId;
+        }
         $this->pushExpression($id);
 
         // For functions and constants 
@@ -1924,11 +1936,14 @@ class Load extends Tasks {
         $namespaceId = $this->addAtom('Namespace');
         $current = $this->id;
         
-        while (!in_array($this->tokens[$this->id + 1][0], [T_OPEN_CURLY, T_SEMICOLON]) ) {
-            $this->processNext();
-        };
-        
-        $nameId = $this->popExpression();
+        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+            $nameId = $this->addAtomVoid();
+        } else {
+            while (!in_array($this->tokens[$this->id + 1][0], [T_OPEN_CURLY, T_SEMICOLON]) ) {
+                $this->processNext();
+            };
+            $nameId = $this->popExpression();
+        }
         $this->addLink($namespaceId, $nameId, 'NAME');
 
         $this->pushExpression($namespaceId);
@@ -1958,11 +1973,31 @@ class Load extends Tasks {
     private function processUse() {
         $useId = $this->addAtom('Use');
         $current = $this->id;
+
+        // use const
+        if ($this->tokens[$this->id + 1][0] === T_CONST) {
+            ++$this->id;
+
+            $this->processSingle('Identifier');
+            $constId = $this->popExpression();
+            $this->addLink($useId, $constId, 'CONST');
+        }
+
+        // use function
+        if ($this->tokens[$this->id + 1][0] === T_FUNCTION) {
+            ++$this->id;
+
+            $this->processSingle('Identifier');
+            $constId = $this->popExpression();
+            $this->addLink($useId, $constId, 'FUNCTION');
+        }
         
         $fullcode = array();
         --$this->id;
         do {
             ++$this->id;
+            
+            
             $namespaceId = $this->processOneNsname();
             
             if ($this->tokens[$this->id + 1][0] === T_AS) {
@@ -2133,6 +2168,14 @@ class Load extends Tasks {
         } else {
             return $this->processSingleOperator('Variable', $this->getPrecedence($this->tokens[$this->id][0]), 'VARIABLE');
         }
+    }
+
+    private function processClone() {
+        return $this->processSingleOperator('Clone', $this->getPrecedence($this->tokens[$this->id][0]), 'CLONE');
+    }
+    
+    private function processGoto() {
+        return $this->processSingleOperator('Goto', $this->getPrecedence($this->tokens[$this->id][0]), 'GOTO');
     }
 
     private function processNoscream() {
@@ -2328,7 +2371,7 @@ class Load extends Tasks {
 
         $right = $this->popExpression();
 
-        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend'))) {
+        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'PostPlusPlus'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
