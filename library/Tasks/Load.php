@@ -515,6 +515,7 @@ class Load extends Tasks {
                             T_FUNCTION                 => 'processFunction',
                             T_CLASS                    => 'processClass',
                             T_NAMESPACE                => 'processNamespace',
+                            T_USE                      => 'processUse',
 
                             T_ABSTRACT                 => 'processAbstract',
                             T_FINAL                    => 'processFinal',
@@ -733,7 +734,7 @@ class Load extends Tasks {
         
         // Process arguments
         ++$this->id; // Skip arguments
-        $argumentsId = $this->processArguments();
+        $argumentsId = $this->processArguments([T_CLOSE_PARENTHESIS], true);
         $this->addLink($functionId, $argumentsId, 'ARGUMENTS');
         
         // Process use
@@ -757,13 +758,18 @@ class Load extends Tasks {
         }
 
         // Process block 
-        $blockId = $this->processBlock(false);
-        $this->addLink($functionId, $blockId, 'BLOCK');
+        if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+            $voidId = $this->addAtomVoid();
+            $this->addLink($functionId, $voidId, 'BLOCK');
+        } else {
+            $blockId = $this->processBlock(false);
+            $this->addLink($functionId, $blockId, 'BLOCK');
+        }
         
         $this->setAtom($functionId, ['code'     => $this->tokens[$current][1], 
                                      'fullcode' => 'function '.$this->atoms[$nameId]['fullcode'].' '.
-                                                   '('.$this->atoms[$argumentsId]['fullcode'].')'.
-                                                   '{ /**/ }']);
+                                                   ' '.$this->atoms[$argumentsId]['fullcode'].' '.
+                                                   (isset($blockId) ? '{ /**/ }' : '')]);
         
         $this->pushExpression($functionId);
         
@@ -826,6 +832,7 @@ class Load extends Tasks {
             $this->optionsTokens['Final'] = 0;
         }
         
+        print_r($this->tokens[$this->id]);
         if ($this->tokens[$this->id + 1][0] === T_STRING) {
             ++$this->id;
 
@@ -876,7 +883,6 @@ class Load extends Tasks {
         if ($this->tokens[$current - 1][0] !== T_NEW) {
             $this->processSemicolon();
         }
-        ++$this->id;
 
         return $classId;
     }
@@ -983,7 +989,7 @@ class Load extends Tasks {
     }
     
     private function processTypehint() {
-        if (in_array($this->tokens[$this->id + 1][0], [T_ARRAY, T_CALLABLE])) {
+        if (in_array($this->tokens[$this->id + 1][0], [T_ARRAY, T_CALLABLE, T_STATIC])) {
             ++$this->id;
             $this->processSingle('Identifier');
             
@@ -1038,7 +1044,7 @@ class Load extends Tasks {
         return 0;
     }
 
-    private function processArguments($finals = [T_CLOSE_PARENTHESIS]) {
+    private function processArguments($finals = [T_CLOSE_PARENTHESIS], $typehint = false) {
         $argumentsId = $this->addAtom('Arguments');
 
         $fullcode = array();
@@ -1047,13 +1053,13 @@ class Load extends Tasks {
             $this->addLink($argumentsId, $voidId, 'ARGUMENT');
 
             $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
-                                          'fullcode' => $this->tokens[$this->id][1]]);
+                                          'fullcode' => 'Void']);
 
             ++$this->id;
             
         } else {
             while (!in_array($this->tokens[$this->id + 1][0], $finals )) {
-               if ($typehintId = $this->processTypehint()) {
+               if ($typehint === true && $typehintId = $this->processTypehint()) {
                    $this->addLink($argumentsId, $typehintId, 'TYPEHINT');
                }
 
@@ -1855,6 +1861,48 @@ class Load extends Tasks {
         return $namespaceId;
     }
     
+    private function processUse() {
+        $useId = $this->addAtom('Use');
+        $current = $this->id;
+        
+        $fullcode = array();
+        --$this->id;
+        do {
+            ++$this->id;
+            $namespaceId = $this->processOneNsname();
+            
+            if ($this->tokens[$this->id + 1][0] === T_AS) {
+                $currentAsId = $this->id + 1;
+                $asId = $this->addAtom('As');
+                $this->addLink($asId, $namespaceId, 'NAME');
+                
+                ++$this->id;
+                ++$this->id;
+                $this->processSingle('Identifier');
+                $theAsId = $this->popExpression();
+                $this->addLink($asId, $theAsId, 'NAME');
+                
+                $this->setAtom($asId, ['code'     => $this->tokens[$currentAsId][1],
+                                       'fullcode' => $this->atoms[$namespaceId]['fullcode']. ' ' .
+                                                     $this->tokens[$currentAsId][1] . ' ' .
+                                                     $this->atoms[$theAsId]['fullcode']]);
+                
+                $namespaceId = $asId;
+            }
+
+            $this->addLink($useId, $namespaceId, 'USE');
+            $fullcode[] = $this->atoms[$namespaceId]['fullcode'];
+
+        } while ($this->tokens[$this->id + 1][0] === T_COMMA);
+
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->tokens[$current][1].' '.join(", ", $fullcode)];
+        $this->setAtom($useId, $x);
+        $this->pushExpression($useId);
+
+        return $useId;
+    }
+    
     private function processVariable() {
         $variableId = $this->processSingle('Variable');
 
@@ -2101,6 +2149,8 @@ class Load extends Tasks {
         $left = $this->popExpression();
 
         $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        
+//        print_r($this->tokens[$this->id + 1]);die();
 
         if ($this->tokens[$this->id + 1][0] === T_CLASS) {
             $right = $this->addAtom('Identifier');
