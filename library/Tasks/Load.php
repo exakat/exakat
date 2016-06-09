@@ -470,6 +470,7 @@ class Load extends Tasks {
                             T_DEC                      => 'processPlusplus',
 
                             T_WHILE                    => 'processWhile',
+                            T_DO                       => 'processDo',
                             T_IF                       => 'processIfthen',
                             T_FOREACH                  => 'processForeach',
                             T_FOR                      => 'processFor',
@@ -845,6 +846,49 @@ class Load extends Tasks {
         return $traitId;
     }
 
+    private function processInterface() {
+        $current = $this->id;
+        $interfaceId = $this->addAtom('Trait');
+        
+        ++$this->id;
+
+        $nameId = $this->addAtom('Identifier');
+        $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
+                                 'fullcode' => $this->tokens[$this->id][1] ]);
+        $this->addLink($interfaceId, $nameId, 'NAME');
+
+        // Process extends
+        if ($this->tokens[$this->id + 1][0] == T_EXTENDS) {
+            do {
+                ++$this->id; // Skip extends
+                $extendsId = $this->processOneNsname();
+                $this->addLink($interfaceId, $extendsId, 'EXTENDS');
+            } while ($this->tokens[$this->id + 1][0] === T_COMMA);
+        }
+
+        // Process implements
+        if ($this->tokens[$this->id + 1][0] == T_IMPLEMENTS) {
+            do {
+                ++$this->id; // Skip extends
+                $extendsId = $this->processOneNsname();
+                $this->addLink($interfaceId, $extendsId, 'IMPLEMENTS');
+            } while ($this->tokens[$this->id + 1][0] === T_COMMA);
+        }
+
+        // Process block 
+        $blockId = $this->processBlock(false);
+        $this->addLink($interfaceId, $blockId, 'BLOCK');
+        
+        $this->setAtom($interfaceId, ['code'     => $this->tokens[$current][1], 
+                                      'fullcode' => 'interface '.$this->atoms[$nameId]['fullcode'].' '.
+                                                '{ /**/ }']);
+        
+        $this->pushExpression($interfaceId);
+        $this->processSemicolon();
+
+        return $interfaceId;
+    }
+    
     private function processClass() {
         $current = $this->id;
         $classId = $this->addAtom('Class');
@@ -1447,7 +1491,6 @@ class Load extends Tasks {
         $incrementId = $this->popExpression();
         $this->addLink($forId, $incrementId, 'INCREMENT');
 
-        ++$this->id;
         $blockId = $this->processFollowingBlock([T_ENDFOR]);
         $this->addLink($forId, $blockId, 'BLOCK');
 
@@ -1531,7 +1574,7 @@ class Load extends Tasks {
             $this->startSequence();
             $blockId = $this->sequence;
             
-            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END])) {
+            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END, T_WHILE])) {
                 $this->processNext();
             };
             $expressionId = $this->popExpression();
@@ -1543,11 +1586,35 @@ class Load extends Tasks {
         return $blockId;
     }
 
+    private function processDo() {
+        $dowhileId = $this->addAtom('Dowhile');
+        $current = $this->id;
+        
+        $blockId = $this->processFollowingBlock([T_WHILE]);
+        $this->addLink($dowhileId, $blockId, 'BLOCK');
+
+        ++$this->id; // Skip while
+        ++$this->id; // Skip (
+        ++$this->id; // Skip (
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
+            $this->processNext();
+        };
+        ++$this->id; // skip )
+        $conditionId = $this->popExpression();
+        $this->addLink($dowhileId, $conditionId, 'CONDITION');
+
+        $this->setAtom($dowhileId, ['code'   => 'do { /**/ } while (' . $this->atoms[$conditionId]['fullcode'] . ')',
+                                  'fullcode' => 'do { /**/ } while (' . $this->atoms[$conditionId]['fullcode'] . ')' ]);
+        $this->pushExpression($dowhileId);
+        
+        return $dowhileId;
+    }
+    
     private function processWhile() {
         $whileId = $this->addAtom('While');
         $current = $this->id;
         
-        ++$this->id;
+        ++$this->id; // Skip while
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
             $this->processNext();
         };
