@@ -50,6 +50,7 @@ const T_AND                          = '&';
 const T_PIPE                         = '|';
 const T_CARET                        = '^';
 const T_BACKTICK                     = '`';
+const T_REFERENCE                    = 'r';
 const T_END                          = 'The End';
 
 class Load extends Tasks {
@@ -95,6 +96,8 @@ class Load extends Tasks {
                         T_INSTANCEOF                  => 5,
                         
                         T_BANG                        => 6,
+
+                        T_REFERENCE                   => 6, // Special for reference's usage of &
                
                         T_SLASH                       => 7,
                         T_STAR                        => 7,
@@ -460,7 +463,7 @@ class Load extends Tasks {
                             T_LOGICAL_OR               => 'processLogical',	
                             T_PIPE                     => 'processLogical',	
                             T_CARET                    => 'processLogical',	
-                            T_AND                      => 'processLogical',	
+                            T_AND                      => 'processAnd',	
 
                             T_BOOLEAN_AND              => 'processLogical',	
                             T_BOOLEAN_OR               => 'processLogical',		
@@ -807,15 +810,17 @@ class Load extends Tasks {
             }
             
             // Next one (at least one)
-            while ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
+            while ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR &&
+                   $this->tokens[$this->id + 2][0] !== T_OPEN_CURLY ) {
                 ++$this->id; // Skip \
     
-                $this->processNext();
+                $this->processNextAsIdentifier();
                 $subnameId = $this->popExpression();
     
                 $fullcode[] = $this->atoms[$subnameId]['code'];
                 $this->addLink($extendsId, $subnameId, 'SUBNAME');
             }
+            
             
             $this->setAtom($extendsId, ['code'     => '/', 
                                         'fullcode' => join('\\', $fullcode)]);
@@ -1085,7 +1090,7 @@ class Load extends Tasks {
             $this->addLink($nsnameId, $subnameId, 'SUBNAME');
             $fullcode[] = $this->atoms[$subnameId]['code'];
 
-            while ($this->tokens[$this->id + 1][0] !== T_VARIABLE) {
+            while (!in_array($this->tokens[$this->id + 1][0], [T_VARIABLE, T_AND])) {
                 ++$this->id; // Skip \
 
                 ++$this->id;
@@ -1110,7 +1115,7 @@ class Load extends Tasks {
                 $subnameId = $this->popExpression();
                 $this->addLink($nsnameId, $subnameId, 'SUBNAME');
                 $fullcode[] = $this->atoms[$subnameId]['code'];
-            } while ($this->tokens[$this->id + 1][0] !== T_VARIABLE);
+            } while (!in_array($this->tokens[$this->id + 1][0], [T_VARIABLE, T_AND]));
             
             $this->setAtom($nsnameId, ['code' => '\\',
                                         'fullcode' => join('\\', $fullcode)]);
@@ -2010,15 +2015,17 @@ class Load extends Tasks {
             $namespaceId = $this->processOneNsname();
             
             if ($this->tokens[$this->id + 1][0] === T_AS) {
+/*
                 $currentAsId = $this->id + 1;
                 $asId = $this->addAtom('As');
                 $this->addLink($asId, $namespaceId, 'NAME');
                 
                 ++$this->id;
                 ++$this->id;
+                print_r($this->tokens[$this->id + 1]);
                 $this->processSingle('Identifier');
                 $theAsId = $this->popExpression();
-                $this->addLink($asId, $theAsId, 'NAME');
+                $this->addLink($asId, $theAsId, 'AS');
                 
                 $this->setAtom($asId, ['code'     => $this->tokens[$currentAsId][1],
                                        'fullcode' => $this->atoms[$namespaceId]['fullcode']. ' ' .
@@ -2026,7 +2033,61 @@ class Load extends Tasks {
                                                      $this->atoms[$theAsId]['fullcode']]);
                 
                 $namespaceId = $asId;
+*/
+
+                $namespaceId = $this->processAs();
+                
+            } elseif ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
+                $this->atoms[$namespaceId]['fullcode'] .= '\\';
+                
+                ++$this->id;
+                ++$this->id;
+                $subuseId = $this->addAtom('Sequence');
+                $this->addLink($namespaceId, $subuseId, 'SUBUSE');
+                $fullcode = [];
+                
+                $forcId = 0;
+                while($this->tokens[$this->id + 1][0] !== T_CLOSE_CURLY) {
+                    if (in_array($this->tokens[$this->id + 1][0], [T_FUNCTION, T_CONST])) {
+                        ++$this->id;
+                        $this->processSingle('Identifier');
+                        $forcId = $this->popExpression();
+                    }
+                    
+                    $this->processNextAsIdentifier();
+                    if ($this->tokens[$this->id + 1][0] === T_AS) {
+                        ++$this->id;
+                        $this->processAs();
+                    }
+                    
+                    if ($this->tokens[$this->id + 1][0] === T_COMMA) {
+                        $elementId = $this->popExpression();
+                        $this->addLink($subuseId, $elementId, 'ELEMENT');
+                        $fullcode[] = $this->atoms[$elementId]['fullcode'];
+
+                        if ($forcId > 0) {
+                            $this->addLink($elementId, $forcId, strtoupper($this->atoms[$forcId]['code']) );
+                            $forcId = 0;
+                        }
+                        
+                        ++$this->id;
+                    }
+                };
+                
+                $elementId = $this->popExpression();
+                $this->addLink($subuseId, $elementId, 'ELEMENT');
+                $fullcode[] = $this->atoms[$elementId]['fullcode'];
+
+                if ($forcId > 0) {
+                    $this->addLink($elementId, $forcId, strtoupper($this->atoms[$forcId]['code']) );
+                    $forcId = 0;
+                }
+                
+                $this->setAtom($subuseId, ['code' => '{ /**/ }',
+                                           'fullcode' => '{' . join(', ', $fullcode).' }']);
             }
+
+            ++$this->id;
 
             $this->addLink($useId, $namespaceId, 'USE');
             $fullcode[] = $this->atoms[$namespaceId]['fullcode'];
@@ -2413,6 +2474,39 @@ class Load extends Tasks {
 
     private function processCoalesce() {
         $this->processOperator('Coalesce', $this->getPrecedence($this->tokens[$this->id][0]));
+    }
+
+    private function processAnd() {
+        $left = $this->popExpression();
+        if ($this->atoms[$left]['atom'] !== 'Void') {
+            $this->pushExpression($left);
+            return $this->processOperator('Logical', $this->getPrecedence($this->tokens[$this->id][0]));
+        } else {
+            $current = $this->id;
+
+            $nextId = $this->addAtom('Reference');
+            print_r($this->tokens[$this->id]);
+            $finals = $this->getPrecedence(T_REFERENCE);
+//            $finals = [T_SEMICOLON];
+            while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+                $id = $this->processNext();
+            };
+
+            $operandId = $this->popExpression();
+        
+            $this->addLink($operandId, $nextId, 'REFERENCE');
+
+            $x = ['code'     => $this->tokens[$current][1], 
+                  'fullcode' => $this->tokens[$current][1] ];
+            $this->setAtom($nextId, $x);
+
+            $x = ['fullcode' => '&'.$this->atoms[$operandId]['fullcode']];
+            $this->setAtom($operandId, $x);
+            
+            $this->pushExpression($operandId);
+        
+            return $nextId;
+        }
     }
 
     private function processLogical() {
