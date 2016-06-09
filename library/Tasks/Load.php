@@ -514,6 +514,8 @@ class Load extends Tasks {
                             
                             T_FUNCTION                 => 'processFunction',
                             T_CLASS                    => 'processClass',
+                            T_TRAIT                    => 'processTrait',
+                            T_INTERFACE                => 'processInterface',
                             T_NAMESPACE                => 'processNamespace',
                             T_USE                      => 'processUse',
 
@@ -816,6 +818,31 @@ class Load extends Tasks {
         }
         
         return $extendsId;
+    }
+
+    private function processTrait() {
+        $current = $this->id;
+        $traitId = $this->addAtom('Trait');
+        
+        ++$this->id;
+
+        $nameId = $this->addAtom('Identifier');
+        $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
+                                 'fullcode' => $this->tokens[$this->id][1] ]);
+        $this->addLink($traitId, $nameId, 'NAME');
+
+        // Process block 
+        $blockId = $this->processBlock(false);
+        $this->addLink($traitId, $blockId, 'BLOCK');
+        
+        $this->setAtom($traitId, ['code'     => $this->tokens[$current][1], 
+                                  'fullcode' => 'trait '.$this->atoms[$nameId]['fullcode'].' '.
+                                                '{ /**/ }']);
+        
+        $this->pushExpression($traitId);
+        $this->processSemicolon();
+
+        return $traitId;
     }
 
     private function processClass() {
