@@ -374,8 +374,12 @@ class Load extends Tasks {
         $n = count($this->tokens) - 1;
         $this->startSequence(); // At least, one sequence available
         do {
-            $this->processNext();
+            $id = $this->processNext();
             print "$this->id / $n\n";
+            
+            if ($id > 0) {
+                $this->addLink($this->sequence, $id, 'ELEMENT');
+            }
         } while ($this->id < $n);
         
         $id = $this->sequence;
@@ -616,13 +620,10 @@ class Load extends Tasks {
 
                 if ($this->tokens[$this->id + 1][0] == T_OBJECT_OPERATOR) {
                     ++$this->id;
-                    ++$this->id;
                     
                     $objectId = $this->popExpression();
 
-                    $propertyNameId = $this->addAtom('Identifier');
-                    $this->setAtom($propertyNameId, ['code'     => $this->tokens[$this->id][1], 
-                                                     'fullcode' => $this->tokens[$this->id][1]]);
+                    $propertyNameId = $this->processNextAsIdentifier();
 
                     $propertyId = $this->addAtom('Property');
                     $this->setAtom($propertyId, ['code'     => '->', 
@@ -746,12 +747,17 @@ class Load extends Tasks {
                 $this->optionsTokens[$option] = 0;
             }
         }
-        
+
+        if ($this->tokens[$this->id + 1][0] === T_AND) {
+            $referenceId = $this->processNextAsIdentifier();
+            $this->addLink($functionId, $referenceId, 'REFERENCE');
+            $nameId = $this->addAtomVoid();
+        }
+                
         if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
             $nameId = $this->addAtomVoid();
         } else {
             $nameId = $this->processNextAsIdentifier();
-            $this->popExpression();
         }
         $this->addLink($functionId, $nameId, 'NAME');
         
@@ -787,12 +793,13 @@ class Load extends Tasks {
             ++$this->id;
         } else {
             $blockId = $this->processBlock(false);
+            $this->popExpression();
             $this->addLink($functionId, $blockId, 'BLOCK');
         }
         
         $this->setAtom($functionId, ['code'     => $this->atoms[$nameId]['fullcode'], 
-                                     'fullcode' => 'function '.$this->atoms[$nameId]['fullcode'].' '.
-                                                   ' '.$this->atoms[$argumentsId]['fullcode'].' '.
+                                     'fullcode' => 'function '.(isset($referenceId) ? '&' : '').$this->atoms[$nameId]['fullcode'].
+                                                   ' ('.$this->atoms[$argumentsId]['fullcode'].') '.
                                                    (isset($blockId) ? '{ /**/ }' : ';'),
                                       'line'    => $this->tokens[$current][2]]);
         
@@ -808,7 +815,9 @@ class Load extends Tasks {
     private function processOneNsname() {
         $fullcode = [];
         if ($this->tokens[$this->id + 1][0] === T_STRING) {
-            $this->processNextAsIdentifier();
+            $subnameId = $this->processNextAsIdentifier();
+            $this->pushExpression($subnameId);
+            
             $hasPrevious = true;
         }
         
@@ -829,8 +838,7 @@ class Load extends Tasks {
                    $this->tokens[$this->id + 2][0] !== T_OPEN_CURLY ) {
                 ++$this->id; // Skip \
     
-                $this->processNextAsIdentifier();
-                $subnameId = $this->popExpression();
+                $subnameId = $this->processNextAsIdentifier();
     
                 $fullcode[] = $this->atoms[$subnameId]['code'];
                 $this->addLink($extendsId, $subnameId, 'SUBNAME');
@@ -850,15 +858,12 @@ class Load extends Tasks {
         $current = $this->id;
         $traitId = $this->addAtom('Trait');
         
-        ++$this->id;
-
-        $nameId = $this->addAtom('Identifier');
-        $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
-                                 'fullcode' => $this->tokens[$this->id][1] ]);
+        $nameId = $this->processNextAsIdentifier();
         $this->addLink($traitId, $nameId, 'NAME');
 
         // Process block 
         $blockId = $this->processBlock(false);
+        $this->popExpression();
         $this->addLink($traitId, $blockId, 'BLOCK');
         
         $this->setAtom($traitId, ['code'     => $this->tokens[$current][1], 
@@ -873,13 +878,9 @@ class Load extends Tasks {
 
     private function processInterface() {
         $current = $this->id;
-        $interfaceId = $this->addAtom('Trait');
+        $interfaceId = $this->addAtom('Interface');
         
-        ++$this->id;
-
-        $nameId = $this->addAtom('Identifier');
-        $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
-                                 'fullcode' => $this->tokens[$this->id][1] ]);
+        $nameId = $this->processNextAsIdentifier();
         $this->addLink($interfaceId, $nameId, 'NAME');
 
         // Process extends
@@ -930,11 +931,7 @@ class Load extends Tasks {
         }
         
         if ($this->tokens[$this->id + 1][0] === T_STRING) {
-            ++$this->id;
-
-            $nameId = $this->addAtom('Identifier');
-            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
-                                     'fullcode' => $this->tokens[$this->id][1] ]);
+            $nameId = $this->processNextAsIdentifier();
         } else {
             $nameId = $this->addAtomVoid();
             
@@ -968,6 +965,7 @@ class Load extends Tasks {
         
         // Process block 
         $blockId = $this->processBlock(false);
+        $this->popExpression();
         $this->addLink($classId, $blockId, 'BLOCK');
         
         $this->setAtom($classId, ['code'     => $this->tokens[$current][1], 
@@ -976,6 +974,7 @@ class Load extends Tasks {
         
         $this->pushExpression($classId);
         
+        // Case of anonymous classes
         if ($this->tokens[$current - 1][0] !== T_NEW) {
             $this->processSemicolon();
         }
@@ -1014,8 +1013,9 @@ class Load extends Tasks {
         
         $this->setAtom($id, ['code'     => $this->tokens[$current][1], 
                              'fullcode' => '<?php /**/ '.$closing]);
-        $this->addLink($this->sequence, $id, 'ELEMENT');
         
+        ++$this->id;
+
         return $id;
     }
 
@@ -1065,18 +1065,13 @@ class Load extends Tasks {
         }
         
         while ($this->tokens[$this->id][0] === T_NS_SEPARATOR) {
-            ++$this->id;
-            
-            $subnameId = $this->addAtom('Identifier');
-            $x = ['code'     => $this->tokens[$this->id][1], 
-                  'fullcode' => $this->tokens[$this->id][1]];
-            $this->setAtom($subnameId, $x);
+            $subnameId = $this->processNextAsIdentifier();
 
             $this->addLink($nsnameId, $subnameId, 'SUBNAME');
             $fullcode[] = $this->atoms[$subnameId]['code'];
 
             // Go to next
-            ++$this->id;
+            ++$this->id; // skip \
         }  ;
         // Back up a whole cycle
         $this->id--;
@@ -1204,7 +1199,6 @@ class Load extends Tasks {
         $id = $this->addAtom('Identifier');
         $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
                              'fullcode' => $this->tokens[$this->id][1]]);
-        $this->pushExpression($id);
         
         return $id;
     }
@@ -2492,7 +2486,7 @@ class Load extends Tasks {
 
         $right = $this->popExpression();
 
-        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'PostPlusPlus'))) {
+        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'PostPlusPlus', 'Property'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
@@ -2665,6 +2659,7 @@ class Load extends Tasks {
     }
 
     private function addLink($origin, $destination, $label) {
+        print "$origin $destination $label\n";
         $o = $this->atoms[$origin]['atom'];
         $d = $this->atoms[$destination]['atom'];
         
