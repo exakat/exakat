@@ -45,7 +45,7 @@ class Results extends Tasks {
         $analyzer = str_replace('\\', '\\\\', $analyzerClass);
 
         $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out.map;
+g.V().hasLabel("Analysis").has("analyzer", "$analyzer").out().count();
 GREMLIN;
 
         $vertices = $this->gremlin->query($query)->results;
