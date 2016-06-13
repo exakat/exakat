@@ -1000,6 +1000,7 @@ class Load extends Tasks {
                     ++$this->id;
             }
         };
+        print "done with openTag loop\n";
 
         if ($this->tokens[$this->id -1][0] == T_CLOSE_TAG) {
             $closing = '?>';
@@ -1008,7 +1009,10 @@ class Load extends Tasks {
         }
 
         $this->addLink($id, $this->sequence, 'CODE');
-        $this->addLink($this->sequence, $this->popExpression(), 'ELEMENT');
+        print_r($this->tokens[$this->id]);
+        if ($this->tokens[$this->id][0] !== T_SEMICOLON) {
+            $this->addLink($this->sequence, $this->popExpression(), 'ELEMENT');
+        }
         $this->endSequence();
         
         $this->setAtom($id, ['code'     => $this->tokens[$current][1], 
@@ -1478,15 +1482,20 @@ class Load extends Tasks {
         $this->startSequence();
         ++$this->id;
         
-        // Case for ; 
-        if ($this->tokens[$this->id][0] === T_CLOSE_CURLY) {
+        // Case for {}
+        if ($this->tokens[$this->id + 1][0] === T_CLOSE_CURLY) {
             $voidId = $this->addAtomVoid();
             $this->addLink($this->sequence, $voidId, 'ELEMENT');
         } else {
             while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
                 $this->processNext();
             };
+            
+            if ($this->tokens[$this->id + 1][0] !== T_CLOSE_CURLY) {
+                $this->processSemicolon();
+            }
         }
+        
 
         $blockId = $this->sequence;
         $this->endSequence();
@@ -1494,10 +1503,12 @@ class Load extends Tasks {
         $this->setAtom($blockId, ['code'     => '{}',
                                   'fullcode' => '{ /**/ }']);
 
+        print "Final in block\n";
+        print_r($this->tokens[$this->id + 1]);
         ++$this->id; // skip }    
         
+        $this->pushExpression($blockId);
         if ($standalone === true) {
-            $this->pushExpression($blockId);
             $this->processSemicolon();
         }
         
@@ -1598,6 +1609,8 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock($finals) {
+        print __METHOD__;
+        print_r($this->tokens[$this->id + 1]);
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $blockId = $this->processBlock(false);
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
@@ -2017,24 +2030,23 @@ class Load extends Tasks {
 
         $this->pushExpression($namespaceId);
 
+        // Here, we make sure namespace is encompassing the next elements.
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
-            $x = ['code'     => $this->tokens[$current][1], 
-                  'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode']];
-            $this->setAtom($namespaceId, $x);
-
-            $this->processSemicolon();
+            // Process block 
             ++$this->id;
-            
-            return $namespaceId;
+            $blockId = $this->processFollowingBlock(false);
+            $this->addLink($namespaceId, $blockId, 'BLOCK');
+        } else {
+            // Process block 
+            $blockId = $this->processFollowingBlock(false);
+            $this->addLink($namespaceId, $blockId, 'BLOCK');
         }
-
-        // Process block 
-        $blockId = $this->processBlock(false);
-        $this->addLink($namespaceId, $blockId, 'BLOCK');
         
         $x = ['code'     => $this->tokens[$current][1], 
               'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .' { /**/ }'];
         $this->setAtom($namespaceId, $x);
+        
+        $this->pushExpression($namespaceId);
 
         return $namespaceId;
     }
