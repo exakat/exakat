@@ -2323,7 +2323,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
                 $operandId = $this->processNext();
 
-                $this->atoms[$operandId]['code']     = $code . $this->atoms[$operandId]['code'];
+                $this->atoms[$operandId]['code']     = $code * $this->atoms[$operandId]['code'];
                 $this->atoms[$operandId]['fullcode'] = $sign . $this->atoms[$operandId]['fullcode'];
 
                 return $operandId;
