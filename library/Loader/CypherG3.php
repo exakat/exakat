@@ -85,79 +85,66 @@ class CypherG3 {
         }
 
         // Load Nodes
-        $queryTemplate = 'CREATE INDEX ON :Token(eid)';
-        $this->cypher->query($queryTemplate);
-        display('Created index');
+        $files = glob($this->config->projects_root.'/nodes.g3.*.csv');
+        foreach($files as $file) {
+            preg_match('/nodes\.g3\.(.*)\.csv$/', $file, $r);
+            $atom = $r[1];
 
-        $queryTemplate = <<<CYPHER
-USING PERIODIC COMMIT 200
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.g3.csv" AS csvLine
-CREATE (token:Token { 
-eid: toInt(csvLine.id),
-code: csvLine.code,
-fullcode: csvLine.fullcode})
-
-CYPHER;
-//line: toInt(csvLine.line)}
-        try {
+            $queryTemplate = 'CREATE INDEX ON :'.$atom.'(eid)';
             $this->cypher->query($queryTemplate);
-            $this->unlink[] = "{$this->config->projects_root}/nodes.g3.csv";
-        } catch (\Exception $e) {
-            $this->cleanCsv(); 
-            die("Couldn't load nodes in the database\n".$e->getMessage());
-        }
+            display('Created nodes '.$atom);
 
-        display('Loaded nodes');
-/*
-        foreach(self::ATTRIBUTES as $attribute) {
-            display( "Loading $attribute");
-            
-            if ($attribute == 'rank') {
-                $toAttribute = 'toInt(csvLine.rank)';
-            } elseif (in_array($attribute, array('index', 'hidden', 'in_quote', 'isFunctionDefinition', 'bracket', 'absolutens', 'block', 'in_for', 'root'))) {
-                $toAttribute = '(csvLine.'.$attribute.' = "true")';
-            } else {
-                $toAttribute = "csvLine.$attribute";
-            }
-            
+            $b = microtime(true);
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 200
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.$attribute.csv" AS csvLine
-MATCH (token:Token { eid: toInt(csvLine.id)})
-SET token.$attribute = $toAttribute
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.g3.$atom.csv" AS csvLine
+CREATE (token:$atom { 
+eid: toInt(csvLine.id),
+code: csvLine.code,
+fullcode: csvLine.fullcode,
+line: toInt(csvLine.line)})
 
 CYPHER;
             try {
                 $this->cypher->query($queryTemplate);
+                $this->unlink[] = "{$this->config->projects_root}/nodes.g3.$atom.csv";
+                $e = microtime(true);
+                $wc = trim(shell_exec("wc -l {$this->config->projects_root}/nodes.g3.$atom.csv"));
+                print "$atom $wc ".number_format(($e - $b) * 1000, 2)."ms\n";
             } catch (\Exception $e) {
-                die("Couldn't load nodes attributes '".$attribute."' in the database\n Exception : ".$e->getMessage()."\n");
+                $this->cleanCsv(); 
+                die("Couldn't load nodes in the database\n".$e->getMessage());
             }
         }
 
-        display('Loaded nodes attributes');
-        */
+        display('Loaded nodes');
+
         // Load relations
         $files = glob($this->config->projects_root.'/rels.g3.*.csv');
-//        var_dump($files);die($this->config->projects_root.'/rels.g3.*.csv');
         foreach($files as $file) {
-            preg_match('/rels\.g3\.(.*)\.csv$/', $file, $r);
+            preg_match('/rels\.g3\.(.*)\.(.*)\.(.*)\.csv$/', $file, $r);
             $edge = $r[1];
+            $origin = $r[2];
+            $destination = $r[3];
             
+            $b = microtime(true);
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 200
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.g3.$edge.csv" AS csvLine
-MATCH (token:Token { eid: toInt(csvLine.start)}),(token2:Token { eid: toInt(csvLine.end)})
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv" AS csvLine
+MATCH (token:$origin { eid: toInt(csvLine.start)}),(token2:$destination { eid: toInt(csvLine.end)})
 CREATE (token)-[:$edge]->(token2)
 
 CYPHER;
             try {
                 $res = $this->cypher->query($queryTemplate);
-                $this->unlink[] = "{$this->config->projects_root}/rels.g3.$edge.csv";
+                $this->unlink[] = "{$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv";
+                $e = microtime(true);
+                $wc = trim(shell_exec("wc -l {$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv"));
+                print "$atom $wc ".number_format(($e - $b) * 1000, 2)."ms\n";
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load relations for ".$edge." in the database\n".$e->getMessage());
             }
-//            var_dump($res);
 
             display('Loaded link '.$edge);
         }
