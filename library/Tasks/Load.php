@@ -55,7 +55,7 @@ const T_END                          = 'The End';
 
 class Load extends Tasks {
     private $php    = null;
-    private $client = null;
+    private static $client = null;
     private $config = null;
     
     private $optionsTokens = array('Abstract'  => 0,
@@ -237,13 +237,15 @@ class Load extends Tasks {
         }
         $this->php->getTokens();
 
-        // formerly -q option. Currently, only one loader, via csv-batchimport;
-        $this->client = new \Loader\CypherG3();
+        if (static::$client === null) {
+            static::$client = new \Loader\CypherG3();
+        }
         
         $this->datastore->cleanTable('tokenCounts');
 
         if ($filename = $this->config->filename) {
             $this->processFile($filename);
+            $this->saveFiles();
         } elseif ($dirName = $this->config->dirname) {
             $this->processDir($dirName);
         } elseif (($project = $this->config->project) != 'default') {
@@ -252,7 +254,7 @@ class Load extends Tasks {
             die('No file to process. Aborting');
         }
 
-        $this->client->finalize();
+        static::$client->finalize();
         display('Final memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
         $this->datastore->addRow('hash', array('status' => 'Load'));
     }
@@ -265,6 +267,7 @@ class Load extends Tasks {
         foreach($files as $file) {
             $nbTokens += $this->processFile($path.$file);
         }
+        $this->saveFiles();
 
         return array('files' => count($files), 'tokens' => $nbTokens);
     }
@@ -297,6 +300,8 @@ class Load extends Tasks {
         foreach($files as $file) {
             $nbTokens += $this->processFile($file);
         }
+        $this->saveFiles();
+
         return array('files' => count($files), 'tokens' => $nbTokens);
     }
 
@@ -382,8 +387,6 @@ class Load extends Tasks {
         print count($this->atoms)." atoms\n";
         print count($this->links)." links\n";
         print "Final id : $this->id\n";
-        
-        $this->saveFiles();
     }
 
     private function processNext() {
@@ -2657,9 +2660,15 @@ class Load extends Tasks {
     }
 
     private function addLink($origin, $destination, $label) {
-        $this->links[] = ['origin'      => $origin, 
-                          'destination' => $destination, 
-                          'label'       => $label];
+        $o = $this->atoms[$origin]['atom'];
+        $d = $this->atoms[$destination]['atom'];
+        
+        if (!isset($this->links[$label]))         { $this->links[$label] = []; }
+        if (!isset($this->links[$label][$o]))     { $this->links[$label][$o] = []; }
+        if (!isset($this->links[$label][$o][$d])) { $this->links[$label][$o][$d] = []; }
+
+        $this->links[$label][$o][$d][] = ['origin'      => $origin, 
+                                          'destination' => $destination];
         return true;
     }
 
@@ -2688,18 +2697,25 @@ class Load extends Tasks {
 
             fwrite($files[$atom['atom']], $atom['id'].','.$atom['atom'].',"'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['code']).'","'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['fullcode']).'",'.($atom['line'] ?? 0).''."\n");
         }
-
-        foreach($this->links as $link) {
-            $csv = $link['label'].'.'.$this->atoms[$link['origin']]['atom'].'.'.$this->atoms[$link['destination']]['atom'];
-            if (!isset($files[$csv])) {
-                $files[$csv] = fopen('./rels.g3.'.$csv.'.csv', 'w+');
-                fputcsv($files[$csv], ['start', 'end']);
-            }
-            fputcsv($files[$csv], [$link['origin'], $link['destination']], ',', '"', '\\');
-        }
-        
         foreach($files as $fp) {
             fclose($fp);
+        }
+        
+        foreach($this->links as $label => $origins) {
+            foreach($origins as $origin => $destinations) {
+                foreach($destinations as $destination => $links) {
+                    $csv = $label.'.'.$origin.'.'.$destination;
+                    $fp = fopen('./rels.g3.'.$csv.'.csv', 'w+');
+                    if (!is_resource($fp)) { print count($files); die();}
+                    fputcsv($fp, ['start', 'end']);
+    
+                    foreach($links as $link) {
+                        fputcsv($fp, [$link['origin'], $link['destination']], ',', '"', '\\');
+                    }
+                    
+                    fclose($fp);
+                }
+            }
         }
     }
     
