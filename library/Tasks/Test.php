@@ -77,7 +77,7 @@ class Test extends Tasks {
         try {
             $configThema = \Config::push($args);
 
-            $analyze = new Analyze();
+            $analyze = new Analyze($this->gremlin);
             $analyze->run($configThema);
             unset($report);
             
