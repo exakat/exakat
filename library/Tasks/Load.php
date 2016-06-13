@@ -784,6 +784,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
             $voidId = $this->addAtomVoid();
             $this->addLink($functionId, $voidId, 'BLOCK');
+            ++$this->id;
         } else {
             $blockId = $this->processBlock(false);
             $this->addLink($functionId, $blockId, 'BLOCK');
@@ -901,6 +902,7 @@ class Load extends Tasks {
 
         // Process block 
         $blockId = $this->processBlock(false);
+        $this->popExpression();
         $this->addLink($interfaceId, $blockId, 'BLOCK');
         
         $this->setAtom($interfaceId, ['code'     => $this->tokens[$current][1], 
@@ -1000,7 +1002,6 @@ class Load extends Tasks {
                     ++$this->id;
             }
         };
-        print "done with openTag loop\n";
 
         if ($this->tokens[$this->id -1][0] == T_CLOSE_TAG) {
             $closing = '?>';
@@ -1009,10 +1010,6 @@ class Load extends Tasks {
         }
 
         $this->addLink($id, $this->sequence, 'CODE');
-        print_r($this->tokens[$this->id]);
-        if ($this->tokens[$this->id][0] !== T_SEMICOLON) {
-            $this->addLink($this->sequence, $this->popExpression(), 'ELEMENT');
-        }
         $this->endSequence();
         
         $this->setAtom($id, ['code'     => $this->tokens[$current][1], 
@@ -1503,8 +1500,6 @@ class Load extends Tasks {
         $this->setAtom($blockId, ['code'     => '{}',
                                   'fullcode' => '{ /**/ }']);
 
-        print "Final in block\n";
-        print_r($this->tokens[$this->id + 1]);
         ++$this->id; // skip }    
         
         $this->pushExpression($blockId);
@@ -1609,8 +1604,6 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock($finals) {
-        print __METHOD__;
-        print_r($this->tokens[$this->id + 1]);
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $blockId = $this->processBlock(false);
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
@@ -2033,7 +2026,7 @@ class Load extends Tasks {
         // Here, we make sure namespace is encompassing the next elements.
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
             // Process block 
-            ++$this->id;
+            ++$this->id; // Skip ; to start actual sequence
             $blockId = $this->processFollowingBlock(false);
             $this->addLink($namespaceId, $blockId, 'BLOCK');
         } else {
