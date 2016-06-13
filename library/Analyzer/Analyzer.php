@@ -88,7 +88,7 @@ abstract class Analyzer {
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
         $this->analyzerInBase = str_replace('\\', '/', str_replace('Analyzer\\', '', $this->analyzer));
-        $this->analyzerIsNot($this->analyzer);
+//        $this->analyzerIsNot($this->analyzer);
 
         $this->code = $this->analyzer;
         
@@ -244,31 +244,22 @@ abstract class Analyzer {
     }
     
     public function init() {
-        $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
-        if ($result[0] == 0) {
-            $this->query("g.createIndex('analyzers', Vertex)");
-        }
-        
-        $query = "g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']]";
+        $query = "g.V().hasLabel('Analysis').has('analyzer', '{$this->analyzerQuoted}')";
         $res = $this->query($query);
+        $res = $res[0];
         
-        if (isset($res[0]) && count($res[0]) == 1) {
-            $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].outE('ANALYZED').each{
-    g.removeEdge(it);
-}
+        if (isset($res->id)) {
+            $this->analyzerId = $res->id;
 
-GREMLIN;
-            $this->query($query);
+            // Removing all edges
+            $query = "g.V().hasLabel('Analysis').outE('ANALYZED').drop()";
+            $res = $this->query($query);
         } else {
-            $this->code = addslashes($this->code);
-            $query = <<<GREMLIN
-x = g.addVertex(null, [analyzer:'{$this->analyzerQuoted}', analyzer:true, line:0, description:'Analyzer index for {$this->analyzerQuoted}', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
-
-g.idx('analyzers').put('analyzer', '{$this->analyzerQuoted}', x);
-
-GREMLIN;
-            $this->query($query);
+            // Creating analysis vertex
+            $query = "g.addV('Analysis').property('analyzer','{$this->analyzerQuoted}')";
+            $res = $this->query($query);
+            
+            $this->analyzerId = $res[0]->id;
         }
     }
 
@@ -375,7 +366,7 @@ GREMLIN;
     }
 
     public function back($name) {
-        $this->methods[] = 'back(\''.$name.'\')';
+        $this->methods[] = 'select(\''.$name.'\')';
         
         return $this;
     }
@@ -407,9 +398,9 @@ GREMLIN;
     
     public function atomIs($atom) {
         if (is_array($atom)) {
-            $this->addMethod('filter{it.atom in ***}', $atom);
+            $this->addMethod('hasLabel(***)', "'".join("', '", $atom)."'");
         } else {
-            $this->addMethod('has("atom", ***)', $atom);
+            $this->addMethod('hasLabel(***)', $atom);
         }
         
         return $this;
@@ -681,7 +672,7 @@ GREMLIN;
         return $this;
     }
 
-    public function code($code, $caseSensitive = false) {
+    public function codeIs($code, $caseSensitive = false) {
         if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
@@ -690,9 +681,9 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            $this->addMethod('filter{it.code'.$caseSensitive.' in ***}', $code);
+            $this->addMethod('filter{ it.get().value("code")'.$caseSensitive.' in ***; }', $code);
         } else {
-            $this->addMethod('filter{it.code'.$caseSensitive.' == ***}', $code);
+            $this->addMethod('filter{it.get().value("code")'.$caseSensitive.' == ***}', $code);
         }
         
         return $this;
@@ -875,7 +866,7 @@ sideEffect{ s=[];
 GREMLIN
 );
         } else {
-            $this->addMethod("sideEffect{ $name = it.$property; }");
+            $this->addMethod("sideEffect{ $name = it.get().values('$property'); }");
         }
 
         return $this;
@@ -1799,17 +1790,19 @@ GREMLIN
 
     public function prepareQuery() {
         // @doc This is when the object is a placeholder for others.
-        if (count($this->methods) == 1) { return true; }
+        if (count($this->methods) <= 1) { return true; }
         
         array_splice($this->methods, 2, 0, array('as("first")'));
         
-        if ($this->methods[1] == 'has("atom", arg1)') {
+        if ($this->methods[0] == 'hasLabel(arg0)') {
             $query = implode('.', $this->methods);
-            $query = "g.idx('atoms')[['atom':'{$this->arguments['arg1']}']].sideEffect{processed++;}.{$query}";
-        } elseif ($this->methods[1] == 'filter{ it.in("ANALYZED").has("code", arg1).any()}') {
+            //.sideEffect{processed++;}
+            $query = 'g.V().hasLabel("'.$this->arguments['arg0'].'").groupCount("processed").by(count()).'.$query;
+            unset($this->methods[0]);
+        } elseif ($this->methods[0] == 'filter{ it.in("ANALYZED").has("code", arg1).any()}') {
             $query = implode('.', $this->methods);
             $query = "g.idx('analyzers')[['analyzer':'".str_replace('\\', '\\\\', $this->arguments['arg1'])."']].out.sideEffect{processed++;}.{$query}";
-        } elseif ($this->methods[1] == 'filter{it.atom in arg1}') {
+        } elseif ($this->methods[0] == 'filter{it.atom in arg1}') {
             $q = "z = [];\n";
             foreach($this->arguments['arg1'] as $arg) {
                 $q .= 'g.idx("atoms")[["atom":"'.$arg.'"]].fill(z);'."\n";
@@ -1826,21 +1819,19 @@ GREMLIN
         // search what ? All ?
         $query = <<<GREMLIN
 
-processed = 0; total = 0;
-m = [:]; gf = [:];
-n = [];
 {$query}
 GREMLIN;
         
-        $query .= $this->apply->getGremlin();
-
+//        $query .= $this->apply->getGremlin();
+        $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")';
+//        $query .= ";\n['processed':processed, 'total':total]";
     // initializing a new query
         $this->queries[] = $query;
         $this->queriesArguments[] = $this->arguments;
 
         $this->methods = array();
         $this->arguments = array();
-        $this->analyzerIsNot($this->analyzer);
+//        $this->analyzerIsNot($this->analyzer);
         
         return true;
     }
@@ -1852,10 +1843,10 @@ GREMLIN;
         foreach($this->queries as $id => $query) {
             $r = $this->query($query, $this->queriesArguments[$id]);
             ++$this->queryCount;
-            $r = $r[0];
-            if (isset($r->processed)) {
-                $this->processedCount += $r->processed;
-                $this->rowCount += $r->total;
+            print_r($r);
+            if (isset($r[0]->processed)) {
+                $this->processedCount += $r[0]->processed->{1};
+                $this->rowCount += $r[0]->total->{1} ?? 0;
             } else {
                 echo __METHOD__, "\n",
                      $query, "\n",
