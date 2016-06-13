@@ -513,7 +513,8 @@ class Load extends Tasks {
                             T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
                             T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
                             T_NUM_STRING               => 'processLiteral',
-   
+                            T_STRING_VARNAME           => 'processVariable',
+
                             T_ARRAY_CAST               => 'processCast',
                             T_BOOL_CAST                => 'processCast',
                             T_DOUBLE_CAST              => 'processCast',
