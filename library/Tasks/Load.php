@@ -1333,7 +1333,7 @@ class Load extends Tasks {
             ++$this->id;
             $id = $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON &&
-                  $this->tokens[$this->id - 1][0] !== T_DOUBLE_COLON) {
+                  !in_array($this->tokens[$this->id - 1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR))) {
             $labelId = $this->addAtom('Label');
             $this->addLink($labelId, $id, 'LABEL');
             $this->setAtom($labelId, ['code'     => ':', 
@@ -1909,7 +1909,7 @@ class Load extends Tasks {
     }
 
     private function processExit() {
-        if (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS, T_SEMICOLON])) {
+        if (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_TAG, T_CLOSE_BRACKET, T_COLON])) {
             $nameId = $this->addAtom('Identifier');
             $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
                                      'fullcode' => $this->tokens[$this->id][1] ]);
@@ -2258,6 +2258,24 @@ class Load extends Tasks {
         return $this->processSingleOperator('Ellipsis', $this->getPrecedence($this->tokens[$this->id][0]), 'TRIPLEDOT');
     }
 
+    private function processCurlyExpression() {
+        ++$this->id;
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
+            $id = $this->processNext();
+        } ;
+        
+        $codeId = $this->popExpression();
+        $blockId = $this->addAtom('Block');
+        $this->setAtom($blockId, ['code' => '{}',
+                                  'fullcode' => '{'.$this->atoms[$codeId]['fullcode'].'}']);
+        $this->addLink($blockId, $codeId, 'CODE');
+        $this->pushExpression($blockId);
+
+        ++$this->id; // Skip }
+        
+        return $blockId;
+    }
+
     private function processDollar() {
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $current = $this->id;
@@ -2404,12 +2422,15 @@ class Load extends Tasks {
 
         $finals = $this->getPrecedence($this->tokens[$this->id][0]);
         
-        if ($this->tokens[$this->id + 1][0] === T_CLASS) {
-            $right = $this->addAtom('Identifier');
-            $this->setAtom($right, ['code'     => $this->tokens[$this->id + 1][1],
-                                    'fullcode' => $this->tokens[$this->id + 1][1]]);
-
-            ++$this->id;
+        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+            $blockId = $this->processCurlyExpression();
+            $right = $this->processFCOA($blockId);
+        } elseif ($this->tokens[$this->id + 1][0] === T_DOLLAR) {
+            ++$this->id; // Skip $
+            $blockId = $this->processCurlyExpression();
+            $right = $this->processFCOA($blockId);
+        } elseif (!in_array($this->tokens[$this->id + 1][0], [ T_VARIABLE, T_STRING])) {
+            $right = $this->processNextAsIdentifier();
         } else {
             do {
                 $id = $this->processNext();
@@ -2421,7 +2442,7 @@ class Load extends Tasks {
         if ($this->atoms[$right]['atom'] == 'Identifier') {
             $staticId = $this->addAtom('Staticconstant');
             $links = 'CONSTANT';
-        } elseif (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Arrayappend'))) {
+        } elseif (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block'))) {
             $staticId = $this->addAtom('Staticproperty');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
@@ -2473,21 +2494,17 @@ class Load extends Tasks {
         $left = $this->popExpression();
 
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
-            ++$this->id;
-            while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
-                $id = $this->processNext();
-            } ;
-            ++$this->id;
+            $blockId = $this->processCurlyExpression();
+            $right = $this->processFCOA($blockId);
         } else {
             $finals =$this->getPrecedence($this->tokens[$this->id][0]);
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 $id = $this->processNext();
             } ;
+            $right = $this->popExpression();
         }
 
-        $right = $this->popExpression();
-
-        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'PostPlusPlus', 'Property'))) {
+        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'PostPlusPlus', 'Property', 'MagicConstant', 'Block'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
@@ -2660,7 +2677,6 @@ class Load extends Tasks {
     }
 
     private function addLink($origin, $destination, $label) {
-        print "$origin $destination $label\n";
         $o = $this->atoms[$origin]['atom'];
         $d = $this->atoms[$destination]['atom'];
         
