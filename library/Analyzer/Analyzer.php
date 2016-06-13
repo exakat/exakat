@@ -246,7 +246,9 @@ abstract class Analyzer {
     public function init() {
         $query = "g.V().hasLabel('Analysis').has('analyzer', '{$this->analyzerQuoted}')";
         $res = $this->query($query);
-        $res = $res[0];
+        if (isset($res[0])) {
+            $res = $res[0];
+        }
         
         if (isset($res->id)) {
             $this->analyzerId = $res->id;
@@ -790,7 +792,7 @@ abstract class Analyzer {
         } else {
             $caseSensitive = '.toLowerCase()';
         }
-        $this->addMethod('filter{ it.'.$property.$caseSensitive.' == '.$name.$caseSensitive.'}');
+        $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
 
         return $this;
     }
@@ -866,7 +868,7 @@ sideEffect{ s=[];
 GREMLIN
 );
         } else {
-            $this->addMethod("sideEffect{ $name = it.get().values('$property'); }");
+            $this->addMethod("sideEffect{ $name = it.get().value('$property'); }");
         }
 
         return $this;
@@ -1843,7 +1845,7 @@ GREMLIN;
         foreach($this->queries as $id => $query) {
             $r = $this->query($query, $this->queriesArguments[$id]);
             ++$this->queryCount;
-            print_r($r);
+
             if (isset($r[0]->processed)) {
                 $this->processedCount += $r[0]->processed->{1};
                 $this->rowCount += $r[0]->total->{1} ?? 0;
