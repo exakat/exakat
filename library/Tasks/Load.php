@@ -820,7 +820,7 @@ class Load extends Tasks {
     
     private function processOneNsname() {
         $fullcode = [];
-        if ($this->tokens[$this->id + 1][0] === T_STRING) {
+        if ($this->tokens[$this->id + 1][0] !== T_NS_SEPARATOR) {
             $subnameId = $this->processNextAsIdentifier();
             $this->pushExpression($subnameId);
             
