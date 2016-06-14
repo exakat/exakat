@@ -756,7 +756,7 @@ class Load extends Tasks {
             $this->addLink($functionId, $referenceId, 'REFERENCE');
             $nameId = $this->addAtomVoid();
         }
-                
+
         if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
             $nameId = $this->addAtomVoid();
         } else {
@@ -795,6 +795,7 @@ class Load extends Tasks {
             $this->addLink($functionId, $voidId, 'BLOCK');
             ++$this->id;
         } else {
+            ++$this->id;
             $blockId = $this->processBlock(false);
             $this->popExpression();
             $this->addLink($functionId, $blockId, 'BLOCK');
@@ -865,6 +866,7 @@ class Load extends Tasks {
         $this->addLink($traitId, $nameId, 'NAME');
 
         // Process block 
+        ++$this->id;
         $blockId = $this->processBlock(false);
         $this->popExpression();
         $this->addLink($traitId, $blockId, 'BLOCK');
@@ -905,6 +907,7 @@ class Load extends Tasks {
         }
 
         // Process block 
+        ++$this->id;
         $blockId = $this->processBlock(false);
         $this->popExpression();
         $this->addLink($interfaceId, $blockId, 'BLOCK');
@@ -967,6 +970,7 @@ class Load extends Tasks {
         }
         
         // Process block 
+        ++$this->id;
         $blockId = $this->processBlock(false);
         $this->popExpression();
         $this->addLink($classId, $blockId, 'BLOCK');
@@ -1214,7 +1218,8 @@ class Load extends Tasks {
         $constId = $this->addAtom('Const');
         $current = $this->id;
 
-        $this->processNextAsIdentifier();
+        $nameId = $this->processNextAsIdentifier();
+        $this->pushExpression($nameId);
         while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) {
             $this->processNext();
             
@@ -1225,7 +1230,8 @@ class Load extends Tasks {
                 $fullcode[] = $this->atoms[$defId]['fullcode'];
                 ++$this->id;
 
-                $this->processNextAsIdentifier();
+                $nameId = $this->processNextAsIdentifier();
+                $this->pushExpression($nameId);
             }
         } ;
 
@@ -1479,7 +1485,6 @@ class Load extends Tasks {
     private function processBlock($standalone = true) {
         static $loop;
         $this->startSequence();
-//        ++$this->id;
         
         // Case for {}
         if ($this->tokens[$this->id + 1][0] === T_CLOSE_CURLY) {
@@ -1499,7 +1504,6 @@ class Load extends Tasks {
                 $this->processSemicolon();
             }
         }
-        
 
         $blockId = $this->sequence;
         $this->endSequence();
@@ -2033,6 +2037,34 @@ class Load extends Tasks {
         return $inlineId;
     }
 
+    private function processNamespaceBlock() {
+        $this->startSequence();
+        static $loop;
+        
+        $loop++;
+        print "Begin NS while block $loop\n";
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_NAMESPACE, T_END])) {
+            print "Inside NS while block $loop\n";
+            $this->processNext();
+        };
+        print "Finished NS while block $loop\n";
+        $loop --;
+        
+        if ($this->tokens[$this->id + 1][0] !== T_CLOSE_CURLY) {
+//            $this->processSemicolon();
+        }
+
+        $blockId = $this->sequence;
+        $this->endSequence();
+        
+        $this->setAtom($blockId, ['code'     => '',
+                                  'fullcode' => ' /**/ ']);
+
+//        ++$this->id; // skip }    
+        
+        return $blockId;
+    }
+    
     private function processNamespace() {
         $namespaceId = $this->addAtom('Namespace');
         $current = $this->id;
@@ -2047,8 +2079,6 @@ class Load extends Tasks {
         }
         $this->addLink($namespaceId, $nameId, 'NAME');
 
-        $this->pushExpression($namespaceId);
-
         // Here, we make sure namespace is encompassing the next elements.
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
             // Process block 
@@ -2060,10 +2090,11 @@ class Load extends Tasks {
                                           'fullcode' => ' {/**/} ']);
                 $this->addLink($blockId, $voidId, 'ELEMENT');
             } else {
-                $blockId = $this->processFollowingBlock(false);
+                $blockId = $this->processNamespaceBlock();
             }
             $this->addLink($namespaceId, $blockId, 'BLOCK');
-            $this->addLink($this->sequence, $namespaceId, 'ELEMENT');
+            $this->addLink($this->sequence, $namespaceId, 'ELEMENT3');
+//            --$this->id;
         } else {
             // Process block 
             $blockId = $this->processFollowingBlock(false);
