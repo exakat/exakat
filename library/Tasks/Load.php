@@ -58,6 +58,8 @@ class Load extends Tasks {
     private static $client = null;
     private $config = null;
     
+    const FULLCODE_BLOCK = ' {/**/} ';
+    
     private $optionsTokens = array('Abstract'  => 0,
                                    'Final'     => 0,
                                    'Var'       => 0,
@@ -710,7 +712,7 @@ class Load extends Tasks {
 
             $this->setAtom($catchId, ['code'     => 'catch',
                                       'fullcode' => 'catch ('.$this->atoms[$classId]['fullcode'].' '.
-                                                     $this->atoms[$variableId]['fullcode'].']) { /**/ } ']);
+                                                     $this->atoms[$variableId]['fullcode'].']) '.static::FULLCODE_BLOCK.' ']);
 
             $this->addLink($tryId, $catchId, 'CATCH');
         }
@@ -723,11 +725,11 @@ class Load extends Tasks {
             $this->addLink($tryId, $finallyBlockId, 'FINALLY');
 
             $this->setAtom($finallyId, ['code'     => 'finally',
-                                        'fullcode' => 'finally { /**/ }']);
+                                        'fullcode' => 'finally '.static::FULLCODE_BLOCK.'']);
         }
 
         $this->setAtom($tryId, ['code'     => 'catch',
-                                'fullcode' => 'try { /**/ } '.
+                                'fullcode' => 'try '.static::FULLCODE_BLOCK.' '.
                                                $this->atoms[$catchId]['fullcode'].''
                                                .( isset($finallyId) ? $this->atoms[$finallyId]['fullcode'] : '')]);
 
@@ -801,7 +803,7 @@ class Load extends Tasks {
         $this->setAtom($functionId, ['code'     => $this->atoms[$nameId]['fullcode'], 
                                      'fullcode' => 'function '.(isset($referenceId) ? '&' : '').$this->atoms[$nameId]['fullcode'].
                                                    ' ('.$this->atoms[$argumentsId]['fullcode'].') '.
-                                                   (isset($blockId) ? '{ /**/ }' : ';'),
+                                                   (isset($blockId) ? static::FULLCODE_BLOCK : ';'),
                                       'line'    => $this->tokens[$current][2]]);
         
         $this->pushExpression($functionId);
@@ -869,7 +871,7 @@ class Load extends Tasks {
         
         $this->setAtom($traitId, ['code'     => $this->tokens[$current][1], 
                                   'fullcode' => 'trait '.$this->atoms[$nameId]['fullcode'].' '.
-                                                '{ /**/ }']);
+                                                static::FULLCODE_BLOCK]);
         
         $this->pushExpression($traitId);
         $this->processSemicolon();
@@ -909,7 +911,7 @@ class Load extends Tasks {
         
         $this->setAtom($interfaceId, ['code'     => $this->tokens[$current][1], 
                                       'fullcode' => 'interface '.$this->atoms[$nameId]['fullcode'].' '.
-                                                '{ /**/ }']);
+                                                static::FULLCODE_BLOCK]);
         
         $this->pushExpression($interfaceId);
         $this->processSemicolon();
@@ -971,7 +973,7 @@ class Load extends Tasks {
         
         $this->setAtom($classId, ['code'     => $this->tokens[$current][1], 
                                   'fullcode' => 'class '.$this->atoms[$nameId]['fullcode'].' '.
-                                                '{ /**/ }']);
+                                                static::FULLCODE_BLOCK]);
         
         $this->pushExpression($classId);
         
@@ -1503,7 +1505,7 @@ class Load extends Tasks {
         $this->endSequence();
         
         $this->setAtom($blockId, ['code'     => '{}',
-                                  'fullcode' => '{ /**/ }']);
+                                  'fullcode' => static::FULLCODE_BLOCK]);
 
         ++$this->id; // skip }    
         
@@ -1679,7 +1681,7 @@ class Load extends Tasks {
 
         ++$this->id; // Skip while
         ++$this->id; // Skip (
-        ++$this->id; // Skip (
+//        ++$this->id; // Skip (
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
             $this->processNext();
         };
@@ -2051,8 +2053,17 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
             // Process block 
             ++$this->id; // Skip ; to start actual sequence
-            $blockId = $this->processFollowingBlock(false);
+            if ($this->tokens[$this->id + 1][0] === T_END) {
+                $voidId = $this->addAtomVoid();
+                $blockId = $this->addAtom('Sequence');
+                $this->setAtom($blockId, ['code' => '{}', 
+                                          'fullcode' => ' {/**/} ']);
+                $this->addLink($blockId, $voidId, 'ELEMENT');
+            } else {
+                $blockId = $this->processFollowingBlock(false);
+            }
             $this->addLink($namespaceId, $blockId, 'BLOCK');
+            $this->addLink($this->sequence, $namespaceId, 'ELEMENT');
         } else {
             // Process block 
             $blockId = $this->processFollowingBlock(false);
