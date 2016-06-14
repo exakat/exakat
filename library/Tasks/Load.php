@@ -1046,6 +1046,9 @@ class Load extends Tasks {
             ++$this->id;
             $this->processInlineHtml();
             ++$this->id;
+        } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
+            $this->tokens[$this->id + 2][0] === T_OPEN_TAG_WITH_ECHO) {
+            die(OPEN_ECHO_TAG);
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_TAG) {
             $this->processSemicolon();
             ++$this->id;
@@ -1670,7 +1673,7 @@ class Load extends Tasks {
             $blockId = $this->sequence;
             $current = $this->id;
             
-            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END, T_WHILE])) {
+            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END, T_WHILE, T_CLOSE_CURLY])) {
                 $this->processNext();
             };
             $expressionId = $this->popExpression();
@@ -1679,7 +1682,8 @@ class Load extends Tasks {
             $this->endSequence();
             $this->popExpression(); // remove the sequence from the stack, to avoid double linking
             
-            if (!in_array($this->tokens[$current + 1][0], [T_IF, T_SWITCH, T_WHILE])) {
+            print_r($this->tokens[$current + 1]);
+            if (!in_array($this->tokens[$current + 1][0], [T_IF, T_SWITCH, T_WHILE, T_FOR, T_FOREACH])) {
                 ++$this->id;
             }
         }
@@ -1716,6 +1720,7 @@ class Load extends Tasks {
         $current = $this->id;
         
         ++$this->id; // Skip while
+
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS])) {
             $this->processNext();
         };
@@ -1723,13 +1728,21 @@ class Load extends Tasks {
         $this->addLink($whileId, $conditionId, 'CONDITION');
 
         ++$this->id; // Skip )
-        
+        $isColon = ($this->tokens[$current][0] === T_WHILE) && ($this->tokens[$this->id + 1][0] === T_COLON);
         $blockId = $this->processFollowingBlock([T_ENDWHILE]);
+
         $this->addLink($whileId, $blockId, 'BLOCK');
 
         $this->setAtom($whileId, ['code'     => 'while (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }',
                                   'fullcode' => 'while (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }' ]);
-        
+
+        if ($isColon === true) {
+            ++$this->id;
+            if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+                ++$this->id; // skip ;
+            }
+        }
+                
         $this->pushExpression($whileId);
         
         return $whileId;
@@ -1865,6 +1878,7 @@ class Load extends Tasks {
 
         ++$this->id; // Skip )
         $isColon = ($this->tokens[$current][0] === T_IF) && ($this->tokens[$this->id + 1][0] === T_COLON);
+        var_dump($isColon);
         
         $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
         $this->addLink($id, $blockId, 'THEN');
