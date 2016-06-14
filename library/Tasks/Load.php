@@ -685,6 +685,7 @@ class Load extends Tasks {
         $blockId = $this->processFollowingBlock([T_CLOSE_CURLY]);
         $this->addLink($tryId, $blockId, 'BLOCK');
         
+        $fullcodeCatch = array();
         while ($this->tokens[$this->id + 1][0] == T_CATCH) {
             ++$this->id; // Skip catch
             ++$this->id;
@@ -715,14 +716,17 @@ class Load extends Tasks {
                                                      $this->atoms[$variableId]['fullcode'].']) '.static::FULLCODE_BLOCK.' ']);
 
             $this->addLink($tryId, $catchId, 'CATCH');
+            $fullcodeCatch[] = $this->atoms[$catchId]['fullcode'];
         }
         
-        if ($this->tokens[$this->id][0] === T_FINALLY) {
+        if ($this->tokens[$this->id + 1][0] === T_FINALLY) {
             $finallyId = $this->addAtom('Finally');
 
             ++$this->id;
-            $finallyBlockId = $this->processBlock(false);
-            $this->addLink($tryId, $finallyBlockId, 'FINALLY');
+            $finallyBlockId = $this->processFollowingBlock(false);
+            $this->addLink($tryId, $finallyId, 'FINALLY');
+            $this->addLink($finallyId, $finallyBlockId, 'BLOCK');
+            
 
             $this->setAtom($finallyId, ['code'     => 'finally',
                                         'fullcode' => 'finally '.static::FULLCODE_BLOCK.'']);
@@ -730,7 +734,7 @@ class Load extends Tasks {
 
         $this->setAtom($tryId, ['code'     => 'catch',
                                 'fullcode' => 'try '.static::FULLCODE_BLOCK.' '.
-                                               $this->atoms[$catchId]['fullcode'].''
+                                               join(' ', $fullcodeCatch).''
                                                .( isset($finallyId) ? $this->atoms[$finallyId]['fullcode'] : '')]);
 
         $this->pushExpression($tryId);
@@ -781,13 +785,11 @@ class Load extends Tasks {
         // Process return type
         if ($this->tokens[$this->id + 1][0] === T_COLON) {
             ++$this->id;
-            while (!in_array($this->tokens[$this->id + 1][0], [T_OPEN_CURLY])) {
-                $this->processNext();
-            }
-            
-            $returnTypeId = $this->popExpression();
+            $returnTypeId = $this->processOneNsname();
+
             $this->addLink($functionId, $returnTypeId, 'RETURNTYPE');
         }
+        print "Finish return type\n";
 
         // Process block 
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
@@ -1565,6 +1567,7 @@ class Load extends Tasks {
         $incrementId = $this->popExpression();
         $this->addLink($forId, $incrementId, 'INCREMENT');
 
+        print_r($this->tokens[$this->id]);
         $blockId = $this->processFollowingBlock([T_ENDFOR]);
         $this->addLink($forId, $blockId, 'BLOCK');
 
@@ -1860,11 +1863,11 @@ class Load extends Tasks {
         $this->addLink($id, $blockId, 'THEN');
         
         Print "Else of elseif?\n";
-//        print_r($this->tokens[$this->id + 1]);
+        print_r($this->tokens[$this->id + 1]);
         // Managing else case
-        if ($this->tokens[$this->id][0] == T_END) {
+        if (in_array($this->tokens[$this->id][0], [T_END, T_CLOSE_TAG])) {
             --$this->id;
-            // Nothing special indeed
+            // Back up one unit to allow later processing for sequence
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSEIF){
             print "branch elseif\n";
             ++$this->id;
@@ -1877,13 +1880,14 @@ class Load extends Tasks {
             $elseId = $this->processFollowingBlock([T_ENDIF]);
             $this->addLink($id, $elseId, 'ELSE');
         } 
-        
-        if ($this->tokens[$this->id + 1][0] === T_ENDIF) {
-            ++$this->id; // skip endif
+
+        if ($isColon === true) {
+            print "Finishing on T_END, T_CLOSE_TAG, T_ENDIF\n";
+            ++$this->id;
             if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
                 ++$this->id; // skip ;
             }
-        } 
+        }
         
         if ($this->tokens[$current][0] === T_IF) {
             $this->pushExpression($id);
