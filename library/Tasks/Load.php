@@ -789,7 +789,6 @@ class Load extends Tasks {
 
             $this->addLink($functionId, $returnTypeId, 'RETURNTYPE');
         }
-        print "Finish return type\n";
 
         // Process block 
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
@@ -998,14 +997,18 @@ class Load extends Tasks {
         $this->startSequence();
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
             $this->processNext();
-            print "processNext()\n";
             
             // Keep a closing tag as a part of the sequence, unless it is the last
             if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG &&
-                $this->tokens[$this->id + 2][0] !== T_END) {
+                $this->tokens[$this->id + 2][0] === T_INLINE_HTML &&
+                in_array($this->tokens[$this->id + 3][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
                     ++$this->id;
                     $this->processClosingTag();
-            }
+            } elseif ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG &&
+                      in_array($this->tokens[$this->id + 2][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
+                    ++$this->id;
+                    $this->processClosingTag();
+            } 
         };
 
         if ($this->tokens[$this->id -1][0] == T_CLOSE_TAG) {
@@ -1030,11 +1033,12 @@ class Load extends Tasks {
     }
 
     private function processClosingTag() {
-        print __METHOD__;
         if ($this->tokens[$this->id + 1][0] === T_END) {
-            print_r($this->tokens[$this->id + 1]);
             $this->processSemicolon();
-            // Ignore;
+        } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
+                  $this->tokens[$this->id + 2][0] === T_END) {
+            $this->processInlineHtml();
+            ++$this->id;
             return 0;
         } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
                   $this->tokens[$this->id + 2][0] === T_OPEN_TAG) {
@@ -1054,15 +1058,14 @@ class Load extends Tasks {
 
             $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG]);
             // processArguments goes too far, up to ;
-//            --$this->id;
+            --$this->id;
 
             $functioncallId = $this->addAtom('Functioncall');
             $this->setAtom($functioncallId, ['code'     => $this->atoms[$echoId]['code'], 
                                              'fullcode' => 'echo ' . $this->atoms[$argumentsId]['fullcode']]);
             $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
             $this->addLink($functioncallId, $echoId, 'NAME');
-            $this->addLink($this->sequence, $functioncallId, 'ELEMENT4');
-
+            $this->addLink($this->sequence, $functioncallId, 'ELEMENT');
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_TAG) {
             $this->processSemicolon();
             ++$this->id;
@@ -1502,7 +1505,6 @@ class Load extends Tasks {
     }
     
     private function processBlock($standalone = true) {
-        static $loop;
         $this->startSequence();
         
         // Case for {}
@@ -1510,14 +1512,9 @@ class Load extends Tasks {
             $voidId = $this->addAtomVoid();
             $this->addLink($this->sequence, $voidId, 'ELEMENT');
         } else {
-            $loop++;
-            print "Begin while block $loop\n";
             while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
-                print "Inside while block $loop\n";
                 $this->processNext();
             };
-            print "Finished while block $loop\n";
-            $loop --;
             
             if ($this->tokens[$this->id + 1][0] !== T_CLOSE_CURLY) {
                 $this->processSemicolon();
@@ -1647,12 +1644,10 @@ class Load extends Tasks {
 
     private function processFollowingBlock($finals) {
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
-            print "Process block\n";
             ++$this->id;
             $blockId = $this->processBlock(false);
             
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
-            print "Process colon\n";
             $this->startSequence();
             $blockId = $this->sequence;
             ++$this->id; // skip :
@@ -1682,21 +1677,19 @@ class Load extends Tasks {
 
         } else {
             // One expression only
-            print "One expression\n";
             $this->startSequence();
             $blockId = $this->sequence;
             $current = $this->id;
             
-            while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END, T_WHILE, T_CLOSE_CURLY])) {
+            $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END, T_CLOSE_CURLY], $finals);
+            while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 $this->processNext();
             };
             $expressionId = $this->popExpression();
-            $this->addLink($blockId, $expressionId, 'ELEMENT');
             
             $this->endSequence();
             $this->popExpression(); // remove the sequence from the stack, to avoid double linking
             
-            print_r($this->tokens[$current + 1]);
             if (!in_array($this->tokens[$current + 1][0], [T_IF, T_SWITCH, T_WHILE, T_FOR, T_FOREACH])) {
                 ++$this->id;
             }
@@ -1756,9 +1749,8 @@ class Load extends Tasks {
                 ++$this->id; // skip ;
             }
         }
-                
-        $this->pushExpression($whileId);
         
+        $this->pushExpression($whileId);
         return $whileId;
     }
 
@@ -1903,20 +1895,16 @@ class Load extends Tasks {
         $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
         $this->addLink($id, $blockId, 'THEN');
         
-        Print "Else of elseif?\n";
-        print_r($this->tokens[$this->id + 1]);
         // Managing else case
         if (in_array($this->tokens[$this->id][0], [T_END, T_CLOSE_TAG])) {
             --$this->id;
             // Back up one unit to allow later processing for sequence
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSEIF){
-            print "branch elseif\n";
             ++$this->id;
 
             $elseifId = $this->processIfthen();
             $this->addLink($id, $elseifId, 'ELSE');
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSE){
-            print "branch else\n";
             ++$this->id; // Skip else
             $elseId = $this->processFollowingBlock([T_ENDIF]);
             $this->addLink($id, $elseId, 'ELSE');
@@ -1934,8 +1922,6 @@ class Load extends Tasks {
             $this->processSemicolon();
         } 
 
-        print "Finished ifthen\n";
-        print_r($this->tokens[$this->id + 1]);
         $this->setAtom($id, ['code'     => $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }',
                              'fullcode' => $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') { /**/ }' ]);
         
@@ -2074,8 +2060,6 @@ class Load extends Tasks {
 
     private function processInlineHtml() {
         $inlineId = $this->processSingle('InlineHtml');
-        
-        $this->addLink($this->sequence, $inlineId, 'ELEMENT');
         $this->popExpression();
         
         return $inlineId;
@@ -2083,44 +2067,37 @@ class Load extends Tasks {
 
     private function processNamespaceBlock() {
         $this->startSequence();
-        static $loop;
-        
-        $loop++;
-        print "Begin NS while block $loop\n";
+
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_NAMESPACE, T_END])) {
-            print "Inside NS while block $loop\n";
             $this->processNext();
         };
-        print "Finished NS while block $loop\n";
-        $loop --;
-        
-        if ($this->tokens[$this->id + 1][0] !== T_CLOSE_CURLY) {
-//            $this->processSemicolon();
-        }
-
         $blockId = $this->sequence;
         $this->endSequence();
         
         $this->setAtom($blockId, ['code'     => '',
                                   'fullcode' => ' /**/ ']);
 
-//        ++$this->id; // skip }    
-        
         return $blockId;
     }
     
     private function processNamespace() {
-        $namespaceId = $this->addAtom('Namespace');
         $current = $this->id;
         
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $nameId = $this->addAtomVoid();
+        } elseif ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
+            --$this->id;
+            $nsnameId = $this->processOneNsname();
+            $this->pushExpression($nsnameId);
+            
+            return $this->processFCOA($nsnameId);
         } else {
             while (!in_array($this->tokens[$this->id + 1][0], [T_OPEN_CURLY, T_SEMICOLON]) ) {
                 $this->processNext();
             };
             $nameId = $this->popExpression();
         }
+        $namespaceId = $this->addAtom('Namespace');
         $this->addLink($namespaceId, $nameId, 'NAME');
 
         // Here, we make sure namespace is encompassing the next elements.
@@ -2138,7 +2115,6 @@ class Load extends Tasks {
             }
             $this->addLink($namespaceId, $blockId, 'BLOCK');
             $this->addLink($this->sequence, $namespaceId, 'ELEMENT3');
-//            --$this->id;
         } else {
             // Process block 
             $blockId = $this->processFollowingBlock(false);
@@ -2818,7 +2794,45 @@ class Load extends Tasks {
         return $id;
     }
     
+    private function checkTokens() {
+        // All node has one incoming or one outgoing link (outgoing or incoming).
+        $O = $D = [];
+        foreach($this->links as $label => $origins) {
+            foreach($origins as $origin => $destinations) {
+                foreach($destinations as $destination => $links) {
+                    foreach($links as $link) {
+                        $O[] = $link['origin'];
+                        $D[] = $link['destination'];
+                    }
+                }
+            }
+        }
+        print_r($this->links);
+        $O = array_count_values($O);
+        $D = array_count_values($D);
+        print_r($O);
+        $total = 0;
+        foreach($this->atoms as $id => $atom) {
+            if ($id == 1) { continue; }
+            if (!isset($D[$id])) {
+                print "Forgotten atom $id : \n";
+                print_r($atom);
+                print "\n";
+                ++$total;
+            } elseif ($D[$id] > 1) {
+                print "Too linked atom $id : \n";
+                print_r($atom);
+                print "\n";
+                ++$total;
+            }
+        }
+        print $total." errors found\n";
+    }
+    
+
     private function saveFiles() {
+        $this->checkTokens();
+        
         $files = [];
 
         foreach($this->atoms as $atom) {
