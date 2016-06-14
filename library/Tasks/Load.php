@@ -1553,6 +1553,7 @@ class Load extends Tasks {
 
     private function processFor() {
         $forId = $this->addAtom('For');
+        $current = $this->id;
         ++$this->id; // Skip for
 
         $this->processForblock([T_SEMICOLON]);
@@ -1567,13 +1568,18 @@ class Load extends Tasks {
         $incrementId = $this->popExpression();
         $this->addLink($forId, $incrementId, 'INCREMENT');
 
-        print_r($this->tokens[$this->id]);
+        $isColon = ($this->tokens[$current][0] === T_FOR) && ($this->tokens[$this->id + 1][0] === T_COLON);
+
         $blockId = $this->processFollowingBlock([T_ENDFOR]);
         $this->addLink($forId, $blockId, 'BLOCK');
-
+        
         $this->setAtom($forId, ['code'     => 'for (' . $this->atoms[$initId]['fullcode'] .') { /**/ }',
                                 'fullcode' => 'for (' . $this->atoms[$initId]['fullcode'] .') { /**/ }']);
         $this->pushExpression($forId);
+        
+        if ($isColon === true) {
+            ++$this->id; // skip endfor
+        }
 
         $this->processSemicolon($forId);
 
@@ -1582,6 +1588,7 @@ class Load extends Tasks {
     
     private function processForeach() {
         $id = $this->addAtom('Foreach');
+        $current = $this->id;
         ++$this->id; // Skip if
 
         while (!in_array($this->tokens[$this->id + 1][0], [T_AS])) {
@@ -1605,11 +1612,12 @@ class Load extends Tasks {
         $this->addLink($id, $valueId, 'VALUE');
 
         ++$this->id; // Skip )
+        $isColon = ($this->tokens[$current][0] === T_FOREACH) && ($this->tokens[$this->id + 1][0] === T_COLON);
 
         $blockId = $this->processFollowingBlock([T_ENDFOREACH]);
         $this->addLink($id, $blockId, 'BLOCK');
-        if ($this->tokens[$this->id + 1][0] === T_ENDFOREACH) {
-            ++$this->id;
+        if ($isColon === true) {
+            ++$this->id; // skip endforeach
         }
 
         $this->setAtom($id, ['code'     => 'foreach (' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .') { /**/ }',
@@ -1856,8 +1864,7 @@ class Load extends Tasks {
         $this->addLink($id, $conditionId, 'CONDITION');
 
         ++$this->id; // Skip )
-        Print "if\n";
-        $isColon = $this->tokens[$this->id + 1][0] === T_COLON;
+        $isColon = ($this->tokens[$current][0] === T_IF) && ($this->tokens[$this->id + 1][0] === T_COLON);
         
         $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
         $this->addLink($id, $blockId, 'THEN');
