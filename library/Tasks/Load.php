@@ -998,16 +998,13 @@ class Load extends Tasks {
         $this->startSequence();
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
             $this->processNext();
+            print "processNext()\n";
             
-            // Skipping inline HTML
+            // Keep a closing tag as a part of the sequence, unless it is the last
             if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG &&
-                $this->tokens[$this->id + 2][0] === T_INLINE_HTML &&
-                $this->tokens[$this->id + 3][0] === T_OPEN_TAG
-                ) {
+                $this->tokens[$this->id + 2][0] !== T_END) {
                     ++$this->id;
-                    ++$this->id;
-                    $this->processInlineHtml();
-                    ++$this->id;
+                    $this->processClosingTag();
             }
         };
 
@@ -1033,13 +1030,14 @@ class Load extends Tasks {
     }
 
     private function processClosingTag() {
+        print __METHOD__;
         if ($this->tokens[$this->id + 1][0] === T_END) {
             print_r($this->tokens[$this->id + 1]);
             $this->processSemicolon();
             // Ignore;
             return 0;
         } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
-            $this->tokens[$this->id + 2][0] === T_OPEN_TAG) {
+                  $this->tokens[$this->id + 2][0] === T_OPEN_TAG) {
             if (!in_array($this->tokens[$this->id - 1][0], [T_SEMICOLON, T_COLON])) {
                 $this->processSemicolon();
             }
@@ -1047,8 +1045,24 @@ class Load extends Tasks {
             $this->processInlineHtml();
             ++$this->id;
         } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
-            $this->tokens[$this->id + 2][0] === T_OPEN_TAG_WITH_ECHO) {
-            die(OPEN_ECHO_TAG);
+                  $this->tokens[$this->id + 2][0] === T_OPEN_TAG_WITH_ECHO) {
+            ++$this->id;
+            $this->processInlineHtml();
+
+            // Processing ECHO
+            $echoId = $this->processNextAsIdentifier();
+
+            $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG]);
+            // processArguments goes too far, up to ;
+//            --$this->id;
+
+            $functioncallId = $this->addAtom('Functioncall');
+            $this->setAtom($functioncallId, ['code'     => $this->atoms[$echoId]['code'], 
+                                             'fullcode' => 'echo ' . $this->atoms[$argumentsId]['fullcode']]);
+            $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
+            $this->addLink($functioncallId, $echoId, 'NAME');
+            $this->addLink($this->sequence, $functioncallId, 'ELEMENT4');
+
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_TAG) {
             $this->processSemicolon();
             ++$this->id;
@@ -1755,10 +1769,17 @@ class Load extends Tasks {
         ++$this->id; // Skip declare
         $argsId = $this->processArguments();
         $this->addLink($declareId, $argsId, 'DECLARE');
+        $isColon = ($this->tokens[$current][0] === T_DECLARE) && ($this->tokens[$this->id + 1][0] === T_COLON);
 
         $blockId = $this->processFollowingBlock([T_ENDDECLARE]);
-        print "COming for block\n";
         $this->addLink($declareId, $blockId, 'BLOCK');
+
+        if ($isColon === true) {
+            ++$this->id;
+            if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+                ++$this->id; // skip ;
+            }
+        }
 
         $this->setAtom($declareId, ['code'     => 'declare (' . $this->atoms[$argsId]['fullcode'] . ') { /**/ }',
                                     'fullcode' => 'declare (' . $this->atoms[$argsId]['fullcode'] . ') { /**/ }' ]);
@@ -1878,7 +1899,6 @@ class Load extends Tasks {
 
         ++$this->id; // Skip )
         $isColon = ($this->tokens[$current][0] === T_IF) && ($this->tokens[$this->id + 1][0] === T_COLON);
-        var_dump($isColon);
         
         $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
         $this->addLink($id, $blockId, 'THEN');
@@ -1903,7 +1923,6 @@ class Load extends Tasks {
         } 
 
         if ($isColon === true) {
-            print "Finishing on T_END, T_CLOSE_TAG, T_ENDIF\n";
             ++$this->id;
             if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
                 ++$this->id; // skip ;
@@ -2711,9 +2730,7 @@ class Load extends Tasks {
         $this->addLink($functioncallId, $nameId, 'NAME');
 
         $this->pushExpression($functioncallId);
-        print "FInish echo\n";
 
-        print_r($this->tokens[$this->id + 1]);
         return $functioncallId;    
     }
 
