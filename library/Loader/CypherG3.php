@@ -54,6 +54,17 @@ class CypherG3 {
                              'in_quote', 'delimiter', 'noDelimiter', 'rank',        'fullcode',
                              'block',    'bracket',   'filename',    'tag',         'atom',
                              'isFunctionDefinition',  'absolutens');
+/*
+    const ATTRIBUTES = array('delimiter', 'noDelimiter', 'rank',        'fullcode','block',    'bracket',   'absolutens'
+variadic (not as a relation)
+
+'scalar' : useless?
+    'index',    'root',      'hidden',      'association', 'in_for',
+                             'in_quote', 
+                               'filename',    'tag',         'atom',
+                             'isFunctionDefinition',);
+*/
+
     
     public function __construct() {
         $this->config = \Config::factory();
@@ -86,7 +97,18 @@ class CypherG3 {
             $extra = [];
             foreach(\Tasks\Load::PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
-                    $extra[] = "$title: (csvLine.$title <> \"0\")";
+                    if (in_array($title, ['delimiter', 'noDelimiter'])) {                  
+                    // Raw string
+                        $extra[] = "$title: csvLine.$title";
+                    } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic'])) {
+                    // Boolean
+                        $extra[] = "$title: (csvLine.$title <> \"\")";
+                    } elseif (in_array($title, ['rank'])) {
+                    // Integer
+                        $extra[] = "$title: toInt(csvLine.$title)";
+                    } else {
+                        die('Unexpected option in '.__CLASS__.' : "'.$title.'"');
+                    }
                 }
             }
             $extra = join(', ', $extra);
