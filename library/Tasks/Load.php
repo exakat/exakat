@@ -1105,7 +1105,7 @@ class Load extends Tasks {
         $fullcode = [];
 
         $left = $this->popExpression();
-        if ($this->atoms[$left]['atom'] != 'Void') {
+        if ($this->atoms[$left]['atom'] !== 'Void') {
             $this->addLink($nsnameId, $left, 'SUBNAME');
             $fullcode[] = $this->atoms[$left]['code'];
         } else {
@@ -1409,12 +1409,8 @@ class Load extends Tasks {
     }
 
     private function processPlusplus() {
-        $previousId = $this->popExpression();
-
-        if ($this->atoms[$previousId]['atom'] === 'Void') {
-            // preplusplus
-            $plusplusId = $this->processSingleOperator('Preplusplus', $this->getPrecedence($this->tokens[$this->id][0]), 'PREPLUSPLUS');
-        } else {
+        if ($this->hasExpression()) {
+            $previousId = $this->popExpression();
             // postplusplus
             $plusplusId = $this->addAtom('PostPlusPlus');
             
@@ -1426,6 +1422,9 @@ class Load extends Tasks {
                                                        $this->tokens[$this->id][1],
                                          'line'     => $this->tokens[$this->id][2]]);
             $this->pushExpression($plusplusId);
+        } else {
+            // preplusplus
+            $plusplusId = $this->processSingleOperator('Preplusplus', $this->getPrecedence($this->tokens[$this->id][0]), 'PREPLUSPLUS');
         }
     }
     
@@ -1620,10 +1619,11 @@ class Load extends Tasks {
         $isColon = ($this->tokens[$current][0] === T_FOR) && ($this->tokens[$this->id + 1][0] === T_COLON);
 
         $blockId = $this->processFollowingBlock([T_ENDFOR]);
+        $this->popExpression();
         $this->addLink($forId, $blockId, 'BLOCK');
         
-        $this->setAtom($forId, ['code'     => 'for (' . $this->atoms[$initId]['fullcode'] .') { /**/ }',
-                                'fullcode' => 'for (' . $this->atoms[$initId]['fullcode'] .') { /**/ }',
+        $this->setAtom($forId, ['code'     => $this->tokens[$current][1].' (' . $this->atoms[$initId]['fullcode'] .') { /**/ }',
+                                'fullcode' => $this->tokens[$current][1].' (' . $this->atoms[$initId]['fullcode'] .') { /**/ }',
                                 'line'     => $this->tokens[$current][2]]);
         $this->pushExpression($forId);
         
@@ -1631,6 +1631,7 @@ class Load extends Tasks {
             ++$this->id; // skip endfor
         }
 
+        print_r($this->tokens[$this->id + 1]);
         $this->processSemicolon($forId);
 
         return $forId;
@@ -1790,6 +1791,7 @@ class Load extends Tasks {
         }
         
         $this->pushExpression($whileId);
+        $this->processSemicolon();
         return $whileId;
     }
 
@@ -2480,57 +2482,63 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing binary operators
     //////////////////////////////////////////////////////
+    private function processSign() {
+        print "Processing a sign\n";
+
+        $sign = $this->tokens[$this->id][1];
+        $code = $sign.'1';
+        while (in_array($this->tokens[$this->id + 1][0], [T_PLUS, T_MINUS])) {
+            ++$this->id;
+            $sign = $this->tokens[$this->id][1].$sign;
+            $code *= $this->tokens[$this->id][1].'1';
+        }
+
+        if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
+            $operandId = $this->processNext();
+
+            $x = ['code'     => $code * $this->atoms[$operandId]['code'],
+                  'fullcode' => $sign . $this->atoms[$operandId]['fullcode'],
+                  'line'     => $this->tokens[$this->id][2]];
+            $this->setAtom($operandId, $x);
+
+            return $operandId;
+        } else {
+            // process the actual load
+            do {
+                $this->processNext();
+            } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+
+            $signedId = $this->popExpression();
+
+            for($i = strlen($sign) - 1; $i >= 0; --$i) {
+                $signId = $this->addAtom('Sign');
+                $this->addLink($signId, $signedId, 'SIGN');
+
+                $x = ['code'     => $sign[$i] , 
+                      'fullcode' => $sign[$i] . $this->atoms[$signedId]['fullcode'],
+                      'line'     => $this->tokens[$this->id][2]];
+                $this->setAtom($signId, $x);
+
+                $signedId = $signId;
+            }
+            
+            $this->pushExpression($signId);
+            
+            return $signId;
+        }
+    }
+
     private function processAddition() {
+        if (!$this->hasExpression()) {
+            return $this->processSign();
+        }
+        $left = $this->popExpression();
+
         $atom   = 'Addition';
         $current = $this->id;
 
         $finals = $this->getPrecedence($this->tokens[$this->id][0]);
 
-        $left = $this->popExpression();
-        if ($this->atoms[$left]['atom'] == 'Void') {
-            $this->pushExpression($left);
-            $sign = $this->tokens[$current][1];
-            $code = $sign.'1';
-            while (in_array($this->tokens[$this->id + 1][0], [T_PLUS, T_MINUS])) {
-                ++$this->id;
-                $sign = $this->tokens[$this->id][1].$sign;
-                $code *= $this->tokens[$this->id][1].'1';
-            }
-
-            if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
-                $operandId = $this->processNext();
-
-                $x = ['code'     => $code * $this->atoms[$operandId]['code'],
-                      'fullcode' => $sign . $this->atoms[$operandId]['fullcode'],
-                      'line'     => $this->tokens[$this->id][2]];
-                $this->setAtom($operandId, $x);
-
-                return $operandId;
-            } else {
-                // process the actual load
-                do {
-                    $this->processNext();
-                } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
-
-                $signedId = $this->popExpression();
-
-                for($i = strlen($sign) - 1; $i >= 0; --$i) {
-                    $signId = $this->addAtom('Sign');
-                    $this->addLink($signId, $signedId, 'SIGN');
-    
-                    $x = ['code'     => $sign[$i] , 
-                          'fullcode' => $sign[$i] . $this->atoms[$signedId]['fullcode'],
-                          'line'     => $this->tokens[$this->id][2]];
-                    $this->setAtom($signId, $x);
-
-                    $signedId = $signId;
-                }
-                
-                $this->pushExpression($signId);
-                
-                return $signId;
-            }
-        }
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, 'LEFT');
         
@@ -2546,7 +2554,8 @@ class Load extends Tasks {
               'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
                             $this->tokens[$current][1] . ' ' .
                             $this->atoms[$right]['fullcode'],
-              'line'     => $this->tokens[$current][2]];
+              'line'     => $this->tokens[$current][2],
+              'token'    => $this->getToken($this->tokens[$current][0])];
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
         
@@ -2832,10 +2841,12 @@ class Load extends Tasks {
     }
 
     private function addAtomVoid() {
+        print "  Adding a new void\n";
         $id = $this->addAtom('Void');
         $this->setAtom($id, ['code'     => 'Void', 
                              'fullcode' => 'Void',
-                             'line'     => $this->tokens[$this->id][2]
+                             'line'     => $this->tokens[$this->id][2],
+                             'token'    => 'T_VOID'
                              ]);
         
         return $id;
@@ -2865,8 +2876,12 @@ class Load extends Tasks {
         $this->expressions[] = $id;
     }
 
+    private function hasExpression() {
+        return !empty($this->expressions);
+    }
+
     private function popExpression() {
-        if (count($this->expressions) === 0) {
+        if (empty($this->expressions)) {
             $id = $this->addAtomVoid('Void');
         } else {
             $id = array_pop($this->expressions);
@@ -2932,10 +2947,10 @@ class Load extends Tasks {
         foreach($this->atoms as $atom) {
             if (!isset($files[$atom['atom']])) {
                 $files[$atom['atom']] = fopen('./nodes.g3.'.$atom['atom'].'.csv', 'w+');
-                fputcsv($files[$atom['atom']], ['id', 'atom', 'code', 'fullcode', 'line']);
+                fputcsv($files[$atom['atom']], ['id', 'atom', 'code', 'fullcode', 'line', 'token']);
             }
 
-            fwrite($files[$atom['atom']], $atom['id'].','.$atom['atom'].',"'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['code']).'","'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['fullcode']).'",'.($atom['line'] ?? 0).''."\n");
+            fwrite($files[$atom['atom']], $atom['id'].','.$atom['atom'].',"'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['code']).'","'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['fullcode']).'",'.($atom['line'] ?? 0).',"'.($atom['token'] ?? '').'"'."\n");
         }
         foreach($files as $fp) {
             fclose($fp);
@@ -2974,6 +2989,14 @@ class Load extends Tasks {
             $this->sequence = $this->sequences[count($this->sequences) - 1];
         } else {
             $this->sequence = null;
+        }
+    }
+    
+    private function getToken($token) {
+        if (is_string($token)) {
+            return self::TOKENS[$token];
+        } else {
+            return token_name($token);
         }
     }
 
