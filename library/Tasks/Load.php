@@ -1815,6 +1815,7 @@ class Load extends Tasks {
         ++$this->id; // Skip )
         $isColon = ($this->tokens[$current][0] === T_WHILE) && ($this->tokens[$this->id + 1][0] === T_COLON);
         $blockId = $this->processFollowingBlock([T_ENDWHILE]);
+        $this->popExpression();
 
         $this->addLink($whileId, $blockId, 'BLOCK');
 
