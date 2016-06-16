@@ -380,7 +380,7 @@ abstract class Analyzer {
 
     public function tokenIs($atom) {
         if (is_array($atom)) {
-            $this->addMethod('filter{it.token in *** }', $atom);
+            $this->addMethod('has("token", within(***))', $atom);
         } else {
             $this->addMethod('has("token", ***)', $atom);
         }
@@ -390,9 +390,9 @@ abstract class Analyzer {
 
     public function tokenIsNot($atom) {
         if (is_array($atom)) {
-            $this->addMethod('filter{!(it.token in ***)}', $atom);
+            $this->addMethod('not(has("token", within(***)))', $atom);
         } else {
-            $this->addMethod('hasNot("token", ***)', $atom);
+            $this->addMethod('not(has("token", ***))', $atom);
         }
         
         return $this;
@@ -410,9 +410,9 @@ abstract class Analyzer {
 
     public function atomIsNot($atom) {
         if (is_array($atom)) {
-            $this->addMethod('filter{!(it.atom in ***) }', $atom);
+            $this->addMethod('not(hasLabel("'.join("', '", $atom).'"))');
         } else {
-            $this->addMethod('hasNot("atom", ***)', $atom);
+            $this->addMethod('not(hasLabel(***))', $atom);
         }
         
         return $this;
@@ -607,13 +607,16 @@ GREMLIN;
 
     public function is($property, $value = true) {
         if ($value === null) {
-            $this->addMethod("has('$property', null)");
+            $this->addMethod('has("'.$property.'", null)');
         } elseif ($value === true) {
-            $this->addMethod("has('$property', true)");
+            $this->addMethod('has("'.$property.'", true)');
         } elseif ($value === false) {
-            $this->addMethod("has('$property', false)");
+            $this->addMethod('has("'.$property.'", false)');
+        } elseif (is_int($value)) {
+            $this->addMethod('has("'.$property.'", '.$value.')');
         } else {
-            $this->addMethod("filter{ it.$property in ***;}", $value);
+            // $value is an array
+            $this->addMethod('has("'.$property.'", within(***))', $value);
         }
 
         return $this;
@@ -621,15 +624,15 @@ GREMLIN;
 
     public function isNot($property, $value = true) {
         if ($value === null) {
-            $this->addMethod("hasNot('$property', null)");
+            $this->addMethod('not(has("'.$property.'", null))');
         } elseif ($value === true) {
-            $this->addMethod("hasNot('$property', true)");
+            $this->addMethod('not(has("'.$property.'", true))');
         } elseif ($value === false) {
-            $this->addMethod("hasNot('$property', false)");
+            $this->addMethod('not(has("'.$property.'", false))');
         } elseif (is_int($value)) {
-            $this->addMethod("hasNot('$property', $value)");
+            $this->addMethod('not(has("'.$property.'", '.$value.'))');
         } else {
-            $this->addMethod("filter{ it.$property != ***;}", $value);
+            $this->addMethod('not(has("'.$property.'", within(***)))', $value);
         }
         
         return $this;
@@ -1084,25 +1087,25 @@ GREMLIN
     }
 
     public function nextSibling($link = 'ELEMENT') {
-        $this->addMethod("sideEffect{sibling = it.rank}.in('$link').out('$link').filter{sibling + 1 == it.rank}");
+        $this->addMethod('sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().values("rank").next()}');
 
         return $this;
     }
 
     public function nextSiblings($link = 'ELEMENT') {
-        $this->addMethod("sideEffect{sibling = it.rank}.in('$link').out('$link').filter{sibling + 1 <= it.rank}");
+        $this->addMethod('sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().values("rank").next() }');
 
         return $this;
     }
 
     public function previousSibling($link = 'ELEMENT') {
-        $this->addMethod("filter{it.rank > 0}.sideEffect{sibling = it.rank}.in('$link').out('$link').filter{sibling - 1 == it.rank}");
+        $this->addMethod('sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling - 1 == it.get().values("rank").next()}');
 
         return $this;
     }
 
     public function previousSiblings($link = 'ELEMENT') {
-        $this->addMethod("filter{it.rank > 0}.sideEffect{sibling = it.rank}.in('$link').out('$link').filter{sibling - 1 >= it.rank}");
+        $this->addMethod('filter{it.get().values("rank").next() > 0}.sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().values("rank").next() }');
 
         return $this;
     }
