@@ -1047,7 +1047,12 @@ class Load extends Tasks {
             $this->processNext();
             
             // Keep a closing tag as a part of the sequence, unless it is the last
-            if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG &&
+            if (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
+                // Back one element to finish the while
+                if ($this->tokens[$this->id] !== T_SEMICOLON) {
+                    $this->processSemicolon();
+                }
+            } elseif ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG &&
                 $this->tokens[$this->id + 2][0] === T_INLINE_HTML &&
                 in_array($this->tokens[$this->id + 3][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
                     ++$this->id;
@@ -1059,8 +1064,9 @@ class Load extends Tasks {
             } 
         };
 
-        if ($this->tokens[$this->id -1][0] == T_CLOSE_TAG) {
+        if ($this->tokens[$this->id + 1][0] == T_CLOSE_TAG) {
             $closing = '?>';
+            ++$this->id; // Skip closetag
         } else {
             $closing = '';
         }
@@ -1985,6 +1991,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSE){
             ++$this->id; // Skip else
             $elseId = $this->processFollowingBlock([T_ENDIF]);
+            $this->popExpression();
             $this->addLink($id, $elseId, 'ELSE');
         } 
 
@@ -2098,7 +2105,7 @@ class Load extends Tasks {
             $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
                                      'fullcode' => $this->tokens[$this->id][1],
                                      'line'     => $this->tokens[$this->id][2],
-                                     'token'    => $this->getToken($this->tokens[$current][0]) ]);
+                                     'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
                                      
             $this->pushExpression($nameId);
 
@@ -2221,7 +2228,10 @@ class Load extends Tasks {
         } else {
             // Process block 
             $blockId = $this->processFollowingBlock(false);
+            $this->popExpression();
             $this->addLink($namespaceId, $blockId, 'BLOCK');
+
+            $this->pushExpression($namespaceId);
         }
         
         $x = ['code'     => $this->tokens[$current][1], 
@@ -2229,8 +2239,6 @@ class Load extends Tasks {
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
         $this->setAtom($namespaceId, $x);
-        
-        $this->pushExpression($namespaceId);
 
         return $namespaceId;
     }
@@ -2970,6 +2978,14 @@ class Load extends Tasks {
     }
     
     private function checkTokens() {
+        if (count($this->expressions) > 0) {
+            print "Warning : expression is not empty\n";
+            print_r($this->expressions);
+            foreach($this->expressions as $atomId) {
+                print_r($this->atoms[$atomId]);
+            }
+        }
+    
         // All node has one incoming or one outgoing link (outgoing or incoming).
         $O = $D = [];
         foreach($this->links as $label => $origins) {
