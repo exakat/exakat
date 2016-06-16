@@ -411,6 +411,8 @@ class Load extends Tasks {
 
         $this->addLink($id1, $id, 'FILE');
         $this->setAtom($id, ['root' => true]);
+
+        $this->checkTokens($filename);
         
         print count($this->atoms)." atoms\n";
         print count($this->links)." links\n";
@@ -720,7 +722,9 @@ class Load extends Tasks {
         $tryId = $this->addAtom('Try');
         
         $blockId = $this->processFollowingBlock([T_CLOSE_CURLY]);
+        $this->popExpression();
         $this->addLink($tryId, $blockId, 'BLOCK');
+        
         
         $fullcodeCatch = array();
         while ($this->tokens[$this->id + 1][0] == T_CATCH) {
@@ -742,6 +746,7 @@ class Load extends Tasks {
 
             // Skip }
             $blockCatchId = $this->processFollowingBlock([T_CLOSE_CURLY]);
+            $this->popExpression();
             $this->addLink($catchId, $blockCatchId, 'BLOCK');
 
             $this->setAtom($catchId, ['code'     => $this->tokens[$current][1],
@@ -2982,7 +2987,7 @@ class Load extends Tasks {
         return $id;
     }
     
-    private function checkTokens() {
+    private function checkTokens($filename) {
         if (count($this->expressions) > 0) {
             print "Warning : expression is not empty\n";
             print_r($this->expressions);
@@ -3043,13 +3048,15 @@ class Load extends Tasks {
                 ++$total;
             }
         }
-        print $total." errors found\n";
+        if ($total > 0) {
+            print $total." errors found\n";
+            die();
+        }
+        
     }
     
 
     private function saveFiles() {
-        $this->checkTokens();
-        
         $files   = [];
         $extras  = [];
         
