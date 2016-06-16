@@ -562,7 +562,7 @@ class Load extends Tasks {
                              
                             T_SEMICOLON                => 'processSemicolon',
                             T_CLOSE_TAG                => 'processClosingTag',
-                            T_END                      => 'processNone',
+                            T_END                      => 'processEnd',
                             T_COLON                    => 'processNone',
                             
                             T_FUNCTION                 => 'processFunction',
@@ -725,14 +725,10 @@ class Load extends Tasks {
         $fullcodeCatch = array();
         while ($this->tokens[$this->id + 1][0] == T_CATCH) {
             ++$this->id; // Skip catch
-            ++$this->id;
+            ++$this->id; // Skip (
         
             $catchId = $this->addAtom('Catch');
-            while ($this->tokens[$this->id + 1][0] !== T_VARIABLE) {
-                $this->processNext();
-            };
-            
-            $classId = $this->popExpression();
+            $classId = $this->processOneNsname();
             $this->addLink($catchId, $classId, 'CLASS');
 
             // Process variable
@@ -1133,8 +1129,6 @@ class Load extends Tasks {
     }
 
     private function processNsnameAbsolute() {
-        $this->pushExpression($this->addAtomVoid());
-        
         return $this->processNsname();
     }
 
@@ -1144,10 +1138,13 @@ class Load extends Tasks {
         $nsnameId = $this->addAtom('Nsname');
         $fullcode = [];
 
-        $left = $this->popExpression();
-        if ($this->atoms[$left]['atom'] !== 'Void') {
+        $rank = 0;
+        if ($this->hasExpression()) {
+            $left = $this->popExpression();
             $this->addLink($nsnameId, $left, 'SUBNAME');
             $fullcode[] = $this->atoms[$left]['code'];
+
+            $this->setAtom($left, ['rank' => $rank]);
         } else {
             $fullcode[] = '';
         }
@@ -1155,14 +1152,16 @@ class Load extends Tasks {
         while ($this->tokens[$this->id][0] === T_NS_SEPARATOR) {
             $subnameId = $this->processNextAsIdentifier();
 
+            ++$rank;
+            $this->setAtom($subnameId, ['rank' => $rank]);
+
             $this->addLink($nsnameId, $subnameId, 'SUBNAME');
             $fullcode[] = $this->atoms[$subnameId]['code'];
 
             // Go to next
             ++$this->id; // skip \
         }  ;
-        // Back up a whole cycle
-        $this->id--;
+        // Back up a bit
         $this->id--;
 
         $x = ['code'     => $this->tokens[$current][1], 
@@ -1397,7 +1396,6 @@ class Load extends Tasks {
                              'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
         
         if ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
-            ++$this->id;
             $this->pushExpression($id);
             $this->processNsname();
             ++$this->id;
@@ -1409,7 +1407,7 @@ class Load extends Tasks {
             $this->setAtom($labelId, ['code'     => ':', 
                                       'fullcode' => $this->atoms[$id]['fullcode'].' :',
                                       'line'     => $this->tokens[$this->id][2],
-                                      'token'    => $this->getToken($this->tokens[$current][0])]);
+                                      'token'    => $this->getToken($this->tokens[$this->id][0])]);
                                       
             $this->pushExpression($labelId);
             return $labelId;
@@ -1972,6 +1970,7 @@ class Load extends Tasks {
         $isColon = ($this->tokens[$current][0] === T_IF) && ($this->tokens[$this->id + 1][0] === T_COLON);
         
         $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
+        $this->popExpression();
         $this->addLink($id, $blockId, 'THEN');
         
         // Managing else case
@@ -2197,10 +2196,7 @@ class Load extends Tasks {
             
             return $this->processFCOA($nsnameId);
         } else {
-            while (!in_array($this->tokens[$this->id + 1][0], [T_OPEN_CURLY, T_SEMICOLON]) ) {
-                $this->processNext();
-            };
-            $nameId = $this->popExpression();
+            $nameId = $this->processOneNsname();
         }
         $namespaceId = $this->addAtom('Namespace');
         $this->addLink($namespaceId, $nameId, 'NAME');
@@ -2344,7 +2340,9 @@ class Load extends Tasks {
         }
 
         $x = ['code'     => $this->tokens[$current][1], 
-              'fullcode' => $this->tokens[$current][1].' '.join(", ", $fullcode)];
+              'fullcode' => $this->tokens[$current][1].' '.join(", ", $fullcode),
+              'line'     => $this->tokens[$current][2],
+              'token'    => $this->getToken($this->tokens[$current][0])];
         $this->setAtom($useId, $x);
         $this->pushExpression($useId);
 
@@ -2906,6 +2904,10 @@ class Load extends Tasks {
         $this->pushExpression($functioncallId);
         
         return $functioncallId;
+    }
+
+    private function processEnd() {
+        die("Attempt to process T_END token\n\n");
     }
 
     //////////////////////////////////////////////////////
