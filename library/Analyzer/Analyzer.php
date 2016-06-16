@@ -521,20 +521,32 @@ abstract class Analyzer {
 
     public function atomInside($atom) {
         if (is_array($atom)) {
-            $this->addMethod('out().loop(1){true}{it.object.atom in ***}', $atom);
+            $atom = join('", "', $atom);
+            $gremlin = <<<GREMLIN
+where( repeat( out() ).times(15).emit( hasLabel("$atom") ).count().is(neq(0)) )
+GREMLIN;
         } else {
-            $this->addMethod('out().loop(1){true}{it.object.atom == ***}', $atom);
+            $gremlin = <<<GREMLIN
+where( repeat( out() ).times(15).emit( hasLabel("$atom") ).count().is(neq(0)) )
+GREMLIN;
         }
+        $this->addMethod($gremlin, $atom);
         
         return $this;
     }
 
     public function noAtomInside($atom) {
         if (is_array($atom)) {
-            $this->addMethod('filter{ it.out().loop(1){true}{it.object.atom in ***}.any() == false}', $atom);
+            $atom = join('", "', $atom);
+            $gremlin = <<<GREMLIN
+where( repeat( out() ).times(15).emit( hasLabel("$atom") ).count().is(eq(0)) )
+GREMLIN;
         } else {
-            $this->addMethod('filter{ it.out().loop(1){true}{it.object.atom == ***}.any() == false}', $atom);
+            $gremlin = <<<GREMLIN
+where( repeat( out() ).times(15).emit( hasLabel("$atom") ).count().is(eq(0)) )
+GREMLIN;
         }
+        $this->addMethod($gremlin, $atom);
         
         return $this;
     }
@@ -698,11 +710,11 @@ abstract class Analyzer {
             $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
-        
+
         if (is_array($code)) {
-            $this->addMethod('filter{!(it.code'.$caseSensitive.' in ***)}', $code);
+            $this->addMethod('filter{ !(it.get().value("code")'.$caseSensitive.' in ***); }', $code);
         } else {
-            $this->addMethod('filter{it.code'.$caseSensitive.' != ***}', $code);
+            $this->addMethod('filter{it.get().value("code")'.$caseSensitive.' != ***}', $code);
         }
         
         return $this;
@@ -1145,16 +1157,6 @@ GREMLIN
         return $this;
     }
 
-    public function hasIn($edgeName) {
-        if (is_array($edgeName)) {
-            $this->addMethod('filter{ it.inE.filter{ it.label in ***}.any()}', $edgeName);
-        } else {
-            $this->addMethod('filter{ it.in(***).any()}', $edgeName);
-        }
-        
-        return $this;
-    }
-
     public function raw($query) {
         ++$this->rawQueryCount;
         $query = $this->cleanAnalyzerName($query);
@@ -1163,12 +1165,22 @@ GREMLIN
         
         return $this;
     }
+
+    public function hasIn($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod('where( in(\''.join("', '", $edgeName).'\').count().is(neq(0)) )', $edgeName);
+        } else {
+            $this->addMethod('where( in(\''.$edgeName.'\').count().is(neq(0)) )', $edgeName);
+        }
+        
+        return $this;
+    }
     
     public function hasNoIn($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod('filter{ it.inE.filter{ it.label in ***}.any() == false}', $edgeName);
+             $this->addMethod('where( in(\''.join("', '", $edgeName).'\').count().is(eq(0)) )', $edgeName);
         } else {
-            $this->addMethod('filter{ it.in(***).any() == false}', $edgeName);
+             $this->addMethod('where( in(\''.$edgeName.'\').count().is(eq(0)) )', $edgeName);
         }
         
         return $this;
@@ -1176,9 +1188,9 @@ GREMLIN
 
     public function hasOut($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod('filter{ it.outE.filter{ it.label in ***}.inV.any()}', $edgeName);
+            $this->addMethod('where( out(\''.join("', '", $edgeName).'\').count().is(neq(0)) )', $edgeName);
         } else {
-            $this->addMethod('filter{ it.out(***).any()}', $edgeName);
+            $this->addMethod('where( out(\''.$edgeName.'\').count().is(neq(0)) )', $edgeName);
         }
         
         return $this;
@@ -1186,10 +1198,9 @@ GREMLIN
     
     public function hasNoOut($edgeName) {
         if (is_array($edgeName)) {
-            // @todo
-            $this->addMethod('filter{ it.outE.filter{ it.label in ***}.inV.any() == false}', $edgeName);
+             $this->addMethod('where( out(\''.join("', '", $edgeName).'\').count().is(eq(0)) )', $edgeName);
         } else {
-            $this->addMethod('filter{ it.out(***).any() == false}', $edgeName);
+             $this->addMethod('where( out(\''.$edgeName.'\').count().is(eq(0)) )', $edgeName);
         }
         
         return $this;
@@ -1578,7 +1589,10 @@ GREMLIN
     }
 
     public function hasNoInterface() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}.any() == false}');
+        $this->addMethod(<<<GREMLIN
+where( __.repeat(__.in()).times(10).emit( hasLabel("Interface") ).count().is(eq(0)))
+GREMLIN
+);
         
         return $this;
     }
