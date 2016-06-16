@@ -1227,7 +1227,7 @@ class Load extends Tasks {
                     $typehintId = 0;
                 }
                 
-                while (!in_array($this->tokens[$this->id + 1][0], [T_COMMA, T_CLOSE_PARENTHESIS])) {
+                while (!in_array($this->tokens[$this->id + 1][0], [T_COMMA, T_CLOSE_PARENTHESIS, T_SEMICOLON])) {
                     $this->processNext();
                 }
                 
@@ -2113,20 +2113,15 @@ class Load extends Tasks {
 
             return $functioncallId;    
         } else {
-            $nameId = $this->addAtom('Identifier');
-            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
-                                     'fullcode' => $this->tokens[$this->id][1],
-                                     'line'     => $this->tokens[$this->id][2],
-                                     'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
-                                     
+            $nameId = $this->processNextAsIdentifier();
             $this->pushExpression($nameId);
+            --$this->id;
 
-            $this->processFunctioncall();
+            return $this->processFCOA($nameId);
         }
     }
     
     private function processArray() {
-//        $this->tokens[$this->id + 1][0] == T_OPEN_PARENTHESIS)
         return $this->processString();
     }
 
@@ -2862,13 +2857,10 @@ class Load extends Tasks {
     }
 
     private function processEcho() {
-        $nameId = $this->addAtom('Identifier');
-        $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
-                                 'fullcode' => $this->tokens[$this->id][1],
-                                 'line'     => $this->tokens[$this->id][2],
-                                 'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
+        $nameId = $this->processNextAsIdentifier();
+        --$this->id;
 
-        $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG]);
+        $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG, T_END]);
         // processArguments goes too far, up to ;
         --$this->id;
 
