@@ -124,7 +124,8 @@ eid: toInt(csvLine.id),
 code: csvLine.code,
 fullcode: csvLine.fullcode,
 line: toInt(csvLine.line),
-token: csvLine.token
+token: csvLine.token,
+rank: toInt(csvLine.rank)
 $extra})
 
 CYPHER;
@@ -139,36 +140,7 @@ CYPHER;
                 die("Couldn't load nodes in the database\n".$e->getMessage());
             }
         }
-
         display('Loaded nodes');
-
-/*        
-        $b = microtime(true);
-        foreach(\Tasks\Load::PROP_OPTIONS as $title => $atoms) {
-            foreach($atoms as $atom) {
-                print "Loading $title for $atom\n";
-                print $queryTemplate = <<<CYPHER
-
-USING PERIODIC COMMIT 200
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.g3.$atom.csv" AS csvLine
-MERGE (f:$atom {eid: toInt(csvLine.id)})
-SET  )
-
-CYPHER;
-                try {
-                    $this->cypher->query($queryTemplate);
-                    $this->unlink[] = "{$this->config->projects_root}/nodes.g3.$atom.csv";
-                    $e = microtime(true);
-    //                $wc = trim(shell_exec("wc -l {$this->config->projects_root}/nodes.g3.$atom.csv"));
-    //                print "$atom $wc ".number_format(($e - $b) * 1000, 2)."ms\n";
-                } catch (\Exception $e) {
-                    $this->cleanCsv(); 
-                    die("Couldn't load option '$title' for $atoms in the database\n".$e->getMessage());
-                }
-            }
-        }
-        */
-        display('Loaded options');
         
         // Load relations
         $files = glob($this->config->projects_root.'/rels.g3.*.csv');
