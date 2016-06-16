@@ -1794,7 +1794,7 @@ GREMLIN
         // @doc This is when the object is a placeholder for others.
         if (count($this->methods) <= 1) { return true; }
         
-        array_splice($this->methods, 2, 0, array('as("first")'));
+        array_splice($this->methods, 1, 0, array('as("first")'));
         
         if ($this->methods[0] == 'hasLabel(arg0)') {
             $query = implode('.', $this->methods);
