@@ -2877,6 +2877,7 @@ class Load extends Tasks {
     }
 
     private function processEcho() {
+        $current = $this->id;
         $nameId = $this->processNextAsIdentifier();
         --$this->id;
 
@@ -2885,11 +2886,11 @@ class Load extends Tasks {
         --$this->id;
 
         $functioncallId = $this->addAtom('Functioncall');
-        $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
-                                         'fullcode' => $this->atoms[$nameId]['fullcode'] . ' ' .
+        $this->setAtom($functioncallId, ['code'     => $this->tokens[$current][1], 
+                                         'fullcode' => $this->tokens[$current][1] . ' ' .
                                                        $this->atoms[$argumentsId]['fullcode'],
-                                         'line'     => $this->tokens[$this->id][2],
-                                         'token'    => $this->getToken($this->tokens[$this->id][0])
+                                         'line'     => $this->tokens[$current][2],
+                                         'token'    => $this->getToken($this->tokens[$current][0])
                                         ]);
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
@@ -2927,8 +2928,8 @@ class Load extends Tasks {
         $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
                                          'fullcode' => $this->atoms[$nameId]['code'].' '.
                                                        $this->atoms[$argumentsId]['fullcode'],
-                                         'line'     => $this->tokens[$this->id][2],
-                                         'token'    => $this->getToken($this->tokens[$this->id][0]) 
+                                         'line'     => $this->atoms[$nameId]['line'],
+                                         'token'    => $this->atoms[$nameId]['token']
                                         ]);
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
@@ -3139,7 +3140,7 @@ class Load extends Tasks {
                                          'token'    => 'T_SEMICOLON']);
         
         $this->sequences[]    = $this->sequence;
-        $this->sequenceRank[] = -1;
+        $this->sequenceRank[] = 0;
         $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
     }
 
