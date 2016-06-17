@@ -33,7 +33,7 @@ class Constructor extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->_as('constructor')
              ->outIs('NAME')
-             ->code('__construct')
+             ->codeIs('__construct')
              ->back('constructor');
         $this->prepareQuery();
 
@@ -42,14 +42,13 @@ class Constructor extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'code')
              ->back('first')
              ->outIs('BLOCK')
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Function").out("NAME").has("code", "__construct").any() == false }')
+             ->raw('where( __.out("ELEMENT").hasLabel("Function").out("NAME").has("code", "__construct").count().is(eq(0)) )')
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->_as('constructor')
              ->outIs('NAME')
              ->samePropertyAs('code', 'code')
-             ->back('constructor')
-             ;
+             ->back('constructor');
         $this->prepareQuery();
     }
 }
