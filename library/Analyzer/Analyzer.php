@@ -400,7 +400,7 @@ abstract class Analyzer {
     
     public function atomIs($atom) {
         if (is_array($atom)) {
-            $this->addMethod('hasLabel(***)', "'".join("', '", $atom)."'");
+            $this->addMethod('hasLabel("'.join('", "', $atom).'")');
         } else {
             $this->addMethod('hasLabel(***)', $atom);
         }
@@ -523,11 +523,11 @@ abstract class Analyzer {
         if (is_array($atom)) {
             $atom = join('", "', $atom);
             $gremlin = <<<GREMLIN
-where( repeat( out() ).times(15).emit( hasLabel("$atom") ).count().is(neq(0)) )
+repeat( out() ).times(15).emit( hasLabel("$atom") )
 GREMLIN;
         } else {
             $gremlin = <<<GREMLIN
-where( repeat( out() ).times(15).emit( hasLabel("$atom") ).count().is(neq(0)) )
+repeat( out() ).times(15).emit( hasLabel("$atom") )
 GREMLIN;
         }
         $this->addMethod($gremlin, $atom);
@@ -1171,9 +1171,9 @@ GREMLIN
 
     public function hasIn($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod('where( in(\''.join("', '", $edgeName).'\').count().is(neq(0)) )', $edgeName);
+            $this->addMethod('where( __.in(\''.join("', '", $edgeName).'\').count().is(neq(0)) )', $edgeName);
         } else {
-            $this->addMethod('where( in(\''.$edgeName.'\').count().is(neq(0)) )', $edgeName);
+            $this->addMethod('where( __.in(\''.$edgeName.'\').count().is(neq(0)) )', $edgeName);
         }
         
         return $this;
@@ -1813,10 +1813,10 @@ GREMLIN
         
         array_splice($this->methods, 1, 0, array('as("first")'));
         
-        if ($this->methods[0] == 'hasLabel(arg0)') {
+        if (substr($this->methods[0], 0, 9) == 'hasLabel(') {
+            $first = array_shift($this->methods);
             $query = implode('.', $this->methods);
-            //.sideEffect{processed++;}
-            $query = 'g.V().hasLabel("'.$this->arguments['arg0'].'").groupCount("processed").by(count()).'.$query;
+            $query = 'g.V().'.$first.'.groupCount("processed").by(count()).'.$query;
             unset($this->methods[0]);
         } elseif ($this->methods[0] == 'filter{ it.in("ANALYZED").has("code", arg1).any()}') {
             $query = implode('.', $this->methods);
@@ -1832,7 +1832,7 @@ GREMLIN
 
             $query = $q.'z._().sideEffect{processed++;}.'.implode('.', $this->methods);
         } else {
-            throw new \Exception('No optimization : gremlin query in analyzer should have use g.V. Fix me!'.get_class($this));
+            throw new \Exception('No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[0]);
         }
         
         // search what ? All ?
