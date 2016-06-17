@@ -1215,6 +1215,7 @@ class Load extends Tasks {
 
             ++$this->id;
         } else {
+            $typehintId = 0;
             // In case we start with a ,
             while ($this->tokens[$this->id + 1][0] === T_COMMA) {
                 $voidId = $this->addAtomVoid();
@@ -1231,7 +1232,7 @@ class Load extends Tasks {
                     $typehintId = 0;
                 }
                 
-                while (!in_array($this->tokens[$this->id + 1][0], [T_COMMA, T_CLOSE_PARENTHESIS, T_SEMICOLON])) {
+                while (!in_array($this->tokens[$this->id + 1][0], [T_COMMA, T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_BRACKET, T_CLOSE_TAG])) {
                     $this->processNext();
                 }
                 
@@ -2108,7 +2109,7 @@ class Load extends Tasks {
             $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
                                      'fullcode' => $this->tokens[$this->id][1],
                                      'line'     => $this->tokens[$this->id][2],
-                                     'token'    => $this->getToken($this->tokens[$current][0]) ]);
+                                     'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
 
             $voidId = $this->addAtomVoid();
 
@@ -2593,6 +2594,7 @@ class Load extends Tasks {
 
             return $operandId;
         } else {
+            $finals = $this->getPrecedence($this->tokens[$this->id][0]);
             // process the actual load
             do {
                 $this->processNext();
