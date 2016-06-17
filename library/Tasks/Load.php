@@ -194,7 +194,7 @@ class Load extends Tasks {
     const PROP_DELIMITER   = ['String', 'Heredoc'];
     const PROP_NODELIMITER = ['String'];
     const PROP_HEREDOC     = ['Heredoc'];
-    const PROP_COUNT       = ['Sequence', 'Argument'];
+    const PROP_COUNT       = ['Sequence', 'Arguments'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
                           'reference'   => self::PROP_REFERENCE,
@@ -1205,14 +1205,17 @@ class Load extends Tasks {
         $argumentsId = $this->addAtom('Arguments');
 
         $fullcode = array();
+        $rank = 0;
         if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
             $voidId = $this->addAtomVoid();
+            $this->setAtom($voidId, ['rank' => 0]);
             $this->addLink($argumentsId, $voidId, 'ARGUMENT');
 
             $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
                                           'fullcode' => self::FULLCODE_VOID,
                                           'line'     => $this->tokens[$this->id][2],
-                                          'token'    => $this->getToken($this->tokens[$this->id][0])]);
+                                          'token'    => $this->getToken($this->tokens[$this->id][0]),
+                                          'count'    => 0]);
 
             ++$this->id;
         } else {
@@ -1220,6 +1223,7 @@ class Load extends Tasks {
             // In case we start with a ,
             while ($this->tokens[$this->id + 1][0] === T_COMMA) {
                 $voidId = $this->addAtomVoid();
+                $this->setAtom($voidId, ['rank' => $rank++]);
                 $this->addLink($argumentsId, $voidId, 'ARGUMENT');
                 
                 $fullcode[] = '';
@@ -1239,6 +1243,7 @@ class Load extends Tasks {
                 
                 while ($this->tokens[$this->id + 1][0] === T_COMMA) {
                     $indexId = $this->popExpression();
+                    $this->setAtom($indexId, ['rank' => $rank++]);
                     
                     if ($typehintId > 0) {
                         $this->addLink($indexId, $typehintId, 'TYPEHINT');
@@ -1250,6 +1255,8 @@ class Load extends Tasks {
                 }
             };
             $indexId = $this->popExpression();
+            $this->setAtom($indexId, ['rank' => $rank++]);
+            
             if ($typehintId > 0) {
                 $this->addLink($indexId, $typehintId, 'TYPEHINT');
             }
@@ -1262,7 +1269,8 @@ class Load extends Tasks {
             $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
                                           'fullcode' => join(', ', $fullcode),
                                           'line'     => $this->tokens[$this->id][2],
-                                          'token'    => $this->getToken($this->tokens[$this->id][0])]);
+                                          'token'    => $this->getToken($this->tokens[$this->id][0]),
+                                          'count'    => $rank]);
         }
         return $argumentsId;
     }
@@ -3153,13 +3161,10 @@ class Load extends Tasks {
     private function addToSequence($id) {
         $this->addLink($this->sequence, $id, 'ELEMENT');
         $this->setAtom($id, ['rank' => $this->sequenceRank[$this->sequenceCurrentRank]++]);
-        
-        print "Ranking $id to ".$this->sequenceRank[$this->sequenceCurrentRank]."\n";
     }
 
     private function endSequence() {
         $this->setAtom($this->sequence, ['count' => $this->sequenceRank[$this->sequenceCurrentRank]]);
-        print "   setting rank to ".($this->sequenceRank[$this->sequenceCurrentRank])."\n";
 
         $id = array_pop($this->sequences);
         array_pop($this->sequenceRank);
