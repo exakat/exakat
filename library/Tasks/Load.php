@@ -209,7 +209,7 @@ class Load extends Tasks {
     const PROP_NODELIMITER = ['String'];
     const PROP_HEREDOC     = ['Heredoc'];
     const PROP_COUNT       = ['Sequence', 'Arguments'];
-    const PROP_FNSNAME     = ['Functioncall', 'Function'];
+    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface'];
     const PROP_ABSOLUTE    = ['Nsname'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
@@ -832,8 +832,10 @@ class Load extends Tasks {
         }
 
         if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+            $isClosure = true;
             $nameId = $this->addAtomVoid();
         } else {
+            $isClosure = false;
             $nameId = $this->processNextAsIdentifier();
         }
         $this->addLink($functionId, $nameId, 'NAME');
@@ -873,7 +875,8 @@ class Load extends Tasks {
             $fullcode[] = '';
         }
         
-        if (!$this->isContext(self::CONTEXT_CLASS) && 
+        if ( $isClosure === false &&
+            !$this->isContext(self::CONTEXT_CLASS) && 
             !$this->isContext(self::CONTEXT_TRAIT) && 
             !$this->isContext(self::CONTEXT_INTERFACE)) {
             $fullnspath = $this->getFullnspath($nameId);
@@ -958,11 +961,12 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($traitId, $blockId, 'BLOCK');
         
-        $this->setAtom($traitId, ['code'     => $this->tokens[$current][1], 
-                                  'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
-                                                static::FULLCODE_BLOCK,
-                                  'line'     => $this->tokens[$current][2],
-                                  'token'    => $this->getToken($this->tokens[$current][0])]);
+        $this->setAtom($traitId, ['code'       => $this->tokens[$current][1], 
+                                  'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
+                                                  static::FULLCODE_BLOCK,
+                                  'line'       => $this->tokens[$current][2],
+                                  'token'      => $this->getToken($this->tokens[$current][0]),
+                                  'fullnspath' => $this->getFullnspath($nameId)]);
         
         $this->pushExpression($traitId);
         $this->processSemicolon();
@@ -1004,11 +1008,12 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($interfaceId, $blockId, 'BLOCK');
         
-        $this->setAtom($interfaceId, ['code'     => $this->tokens[$current][1], 
-                                      'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
-                                                    static::FULLCODE_BLOCK,
-                                      'line'     => $this->tokens[$current][2],
-                                      'token'    => $this->getToken($this->tokens[$current][0])]);
+        $this->setAtom($interfaceId, ['code'       => $this->tokens[$current][1], 
+                                      'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
+                                                      static::FULLCODE_BLOCK,
+                                      'line'       => $this->tokens[$current][2],
+                                      'token'      => $this->getToken($this->tokens[$current][0]),
+                                      'fullnspath' => $this->getFullnspath($nameId)]);
         
         $this->pushExpression($interfaceId);
         $this->processSemicolon();
@@ -1072,11 +1077,12 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($classId, $blockId, 'BLOCK');
         
-        $this->setAtom($classId, ['code'     => $this->tokens[$current][1], 
-                                  'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
-                                                static::FULLCODE_BLOCK,
-                                  'line'     => $this->tokens[$current][2],
-                                  'token'    => $this->getToken($this->tokens[$current][0])]);
+        $this->setAtom($classId, ['code'       => $this->tokens[$current][1], 
+                                  'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
+                                                  static::FULLCODE_BLOCK,
+                                  'line'       => $this->tokens[$current][2],
+                                  'token'      => $this->getToken($this->tokens[$current][0]),
+                                  'fullnspath' => $this->getFullnspath($nameId)]);
         
         $this->pushExpression($classId);
         
