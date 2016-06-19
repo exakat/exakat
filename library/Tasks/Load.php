@@ -908,6 +908,8 @@ class Load extends Tasks {
             $this->pushExpression($subnameId);
             
             $hasPrevious = true;
+        } else {
+            $hasPrevious = false;
         }
         $current = $this->id;
         
@@ -915,7 +917,7 @@ class Load extends Tasks {
             $extendsId = $this->addAtom('Nsname');
             
             // Previous one
-            if (isset($hasPrevious)) {
+            if ($hasPrevious === true) {
                 $subnameId = $this->popExpression();
                 $fullcode[] = $this->atoms[$subnameId]['code'];
                 $this->addLink($extendsId, $subnameId, 'SUBNAME');
@@ -935,11 +937,11 @@ class Load extends Tasks {
             }
             
             
-            $this->setAtom($extendsId, ['code'     => '/', 
+            $this->setAtom($extendsId, ['code'     => '\\', 
                                         'fullcode' => join('\\', $fullcode),
                                         'line'     => $this->tokens[$current][2],
                                         'token'    => $this->getToken($this->tokens[$current][0]),
-                                        'absolute' => false]);
+                                        'absolute' => !$hasPrevious]);
         } else {
             $extendsId = $this->popExpression();
         }
@@ -2352,6 +2354,7 @@ class Load extends Tasks {
     private function processUse() {
         $useId = $this->addAtom('Use');
         $current = $this->id;
+        $useType = 'class';
 
         // use const
         if ($this->tokens[$this->id + 1][0] === T_CONST) {
@@ -2360,6 +2363,7 @@ class Load extends Tasks {
             $this->processSingle('Identifier');
             $constId = $this->popExpression();
             $this->addLink($useId, $constId, 'CONST');
+            $useType = 'const';
         }
 
         // use function
@@ -2369,6 +2373,7 @@ class Load extends Tasks {
             $this->processSingle('Identifier');
             $constId = $this->popExpression();
             $this->addLink($useId, $constId, 'FUNCTION');
+            $useType = 'function';
         }
         
         $fullcode = array();
@@ -2376,12 +2381,17 @@ class Load extends Tasks {
         do {
             ++$this->id;
             $namespaceId = $this->processOneNsname();
+            $aliasId = $namespaceId;
+            $originId = $namespaceId;
 
             if ($this->tokens[$this->id + 1][0] === T_AS) {
                 ++$this->id;
+                $this->setAtom($originId, ['fullnspath' => $this->makeFullnspath($originId)]);
+                
                 $this->pushExpression($namespaceId);
                 $this->processAs();
                 $namespaceId = $this->popExpression();
+                $aliasId = $namespaceId;
             } elseif ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
                 $this->atoms[$namespaceId]['fullcode'] .= '\\';
                 
@@ -2438,6 +2448,9 @@ class Load extends Tasks {
             $this->addLink($useId, $namespaceId, 'USE');
             $fullcode[] = $this->atoms[$namespaceId]['fullcode'];
 
+            $this->setAtom($namespaceId, ['fullnspath' => $this->makeFullnspath($namespaceId)]);
+            $this->addNamespaceUse($originId, $aliasId, $useType);
+            
         } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
@@ -3264,13 +3277,16 @@ class Load extends Tasks {
         return $cache[$token];
     }
     
-    private function getFullnspath($nameid) {
-        if ($this->atoms[$nameid]['absolute'] === true) {
-            return strtolower($this->atoms[$nameid]['fullcode']);
-        } elseif (strtolower(substr($this->atoms[$nameid]['fullcode'], 0, 9)) === 'namespace') {
-            return $this->namespace.strtolower(substr($this->atoms[$nameid]['fullcode'], 9));
+    private function getFullnspath($nameId) {
+        print_r($this->atoms[$nameId]);
+        if ($this->atoms[$nameId]['absolute'] === true) {
+            return strtolower($this->atoms[$nameId]['fullcode']);
+        } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
+            return $this->namespace.strtolower(substr($this->atoms[$nameId]['fullcode'], 9));
+        } elseif (isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
+            return $this->uses['function'][strtolower($this->atoms[$nameId]['code'])];
         } else {
-            return $this->namespace.strtolower($this->atoms[$nameid]['fullcode']);
+            return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
         }
     }
     
@@ -3284,7 +3300,11 @@ class Load extends Tasks {
 //        print "    Getting $context : ".($this->contexts[$context] ? 'true' : 'false')."\n";
         return $this->contexts[$context];
     }
-
+    
+    private function makeFullnspath($namespaceAsId) {
+        return strtolower($this->atoms[$namespaceAsId]['absolute'] === true ? $this->atoms[$namespaceAsId]['fullcode'] : '\\'.$this->atoms[$namespaceAsId]['fullcode']) ;
+    }
+    
     private function setNamespace($namespaceId = 0) {
         if ($namespaceId == 0) {
             $this->namespace = '';
@@ -3301,10 +3321,23 @@ class Load extends Tasks {
         }
     }
 
-    private function addNamespaceUse($use = null) {
-        // Needs to sort function/const/class use. 
-        // send the atomId for testing. 
-        die(__METHOD__);
+    private function addNamespaceUse($originId, $aliasId, $useType) {
+        // Not handling AS case
+        print_r($this->atoms[$originId]);
+        $fullnspath = $this->atoms[$originId]['fullnspath'];
+
+        print_r($this->atoms[$aliasId]);
+        if ($originId !== $aliasId) {
+            $offset = strrpos($this->atoms[$aliasId]['fullcode'], ' ');
+            $alias = substr($this->atoms[$aliasId]['fullcode'], $offset + 1);
+        } elseif (($offset = strrpos($this->atoms[$aliasId]['fullcode'], '\\')) === false) { 
+            $alias = $this->atoms[$aliasId]['fullcode'];
+        } else {
+            $alias = substr($this->atoms[$aliasId]['fullcode'], $offset + 1);
+        }
+        
+        $this->uses[$useType][$alias] = $fullnspath;
+        print_r($this->uses);
     }
 }
 
