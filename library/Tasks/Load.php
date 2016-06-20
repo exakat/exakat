@@ -1139,7 +1139,9 @@ class Load extends Tasks {
     private function processClosingTag() {
         $current = $this->id;
         if ($this->tokens[$this->id + 1][0] === T_END) {
-//            $this->processSemicolon();
+            if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
+                $this->processSemicolon();
+            }
         } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
                   $this->tokens[$this->id + 2][0] === T_END) {
 
@@ -1435,7 +1437,6 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->addLink($pppId, $id, 'PUBLIC');
             $this->optionsTokens['Public'] = 0;
             return $pppId;
         } 
@@ -1448,7 +1449,6 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->addLink($pppId, $id, 'PROTECTED');
             $this->optionsTokens['Protected'] = 0;
             return $pppId;
         } 
@@ -1461,7 +1461,6 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->addLink($pppId, $id, 'PRIVATE');
             $this->optionsTokens['Private'] = 0;
             return $pppId;
         } 
@@ -1567,8 +1566,17 @@ class Load extends Tasks {
     private function processSGVariable($atom) {
         $current = $this->id;
         $staticId = $this->addAtom($atom);
-        
+
         $fullcode = array();
+        $options = array('Abstract', 'Static', 'Private', 'Protected', 'Public', 'Final');
+        foreach($options as $option) {
+            if ($this->optionsTokens[$option] > 0) {
+                $this->addLink($staticId, $this->optionsTokens[$option], strtoupper($option));
+                $fullcode[] = $this->atoms[$this->optionsTokens[$option]]['fullcode'];
+                $this->optionsTokens[$option] = 0;
+            }
+        }
+        
         while ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
             $this->processNext();
             
@@ -1835,16 +1843,18 @@ class Load extends Tasks {
             $voidId = $this->addAtomVoid();
             $this->addToSequence($voidId);
             $this->endSequence();
+            $this->pushExpression($blockId);
             ++$this->id;
+
         } elseif (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_CLOSE_CURLY, T_CLOSE_PARENTHESIS])) {
-            // Completely void (no ;)
+            // Completely void (not even ;)
             $this->startSequence();
             $blockId = $this->sequence;
 
             $voidId = $this->addAtomVoid();
             $this->addToSequence($voidId);
             $this->endSequence();
-
+            
         } else {
             // One expression only
             $this->startSequence();
@@ -3172,7 +3182,7 @@ class Load extends Tasks {
         foreach($this->atoms as $id => $atom) {
             if ($id == 1) { continue; }
             if (!isset($D[$id])) {
-                print "Forgotten atom $id : \n";
+                print "Forgotten atom $id in $this->filename : \n";
                 print_r($atom);
                 print "\n";
                 ++$total;
