@@ -60,7 +60,7 @@ class Load extends Tasks {
     private static $client = null;
     private $config = null;
 
-    private $namespace = '';
+    private $namespace = '\\';
     private $uses = array('function' => array(),
                           'const'    => array(),
                           'class'    => array());
@@ -2793,7 +2793,7 @@ class Load extends Tasks {
     private function processDoubleColon() {
         $current = $this->id;
 
-        $left = $this->popExpression();
+        $leftId = $this->popExpression();
 
         $finals = $this->getPrecedence($this->tokens[$this->id][0]);
         
@@ -2829,12 +2829,12 @@ class Load extends Tasks {
             die("Unprocessed atom in static call (right) : ".$this->atoms[$right]['atom']."\n");
         }
 
-        $this->addLink($staticId, $left, 'CLASS');
+        $this->addLink($staticId, $leftId, 'CLASS');
+        $this->setAtom($leftId, ['fullnspath' => $this->getFullnspath($leftId)] );
         $this->addLink($staticId, $right, $links);
 
         $x = ['code'     => $this->tokens[$current][1], 
-              'fullcode' => $this->atoms[$left]['fullcode'] . '::' .
-                            $this->atoms[$right]['fullcode'],
+              'fullcode' => $this->atoms[$leftId]['fullcode'] . '::' . $this->atoms[$right]['fullcode'],
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
 
@@ -3343,7 +3343,7 @@ class Load extends Tasks {
     
     private function setNamespace($namespaceId = 0) {
         if ($namespaceId == 0) {
-            $this->namespace = '';
+            $this->namespace = '\\';
             $this->uses = array('function' => array(),
                                 'const'    => array(),
                                 'class'    => array());
