@@ -1112,7 +1112,6 @@ class Load extends Tasks {
         while (!in_array($this->tokens[$this->id + 1][0], [T_END])) {
             $this->processNext();
         };
-        print "End of phpcode loop\n";
 
         if ($this->tokens[$this->id + 1][0] == T_CLOSE_TAG) {
             $closing = '?>';
@@ -1164,6 +1163,10 @@ class Load extends Tasks {
             ++$this->id;
         } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
                   $this->tokens[$this->id + 2][0] === T_OPEN_TAG_WITH_ECHO) {
+
+            if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
+                $this->processSemicolon();
+            }
 
             ++$this->id;
             $id = $this->processInlineHtml();
@@ -2797,10 +2800,12 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $blockId = $this->processCurlyExpression();
             $right = $this->processFCOA($blockId);
+            $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === T_DOLLAR) {
             ++$this->id; // Skip $
             $blockId = $this->processCurlyExpression();
             $right = $this->processFCOA($blockId);
+            $this->popExpression();
         } elseif (!in_array($this->tokens[$this->id + 1][0], [ T_VARIABLE, T_STRING])) {
             $right = $this->processNextAsIdentifier();
         } else {
@@ -2873,6 +2878,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $blockId = $this->processCurlyExpression();
             $right = $this->processFCOA($blockId);
+            $this->popExpression();
         } else {
             $finals =$this->getPrecedence($this->tokens[$this->id][0]);
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
@@ -3306,8 +3312,11 @@ class Load extends Tasks {
     }
     
     private function getFullnspath($nameId) {
-        if ($this->atoms[$nameId]['absolute'] === true) {
+        if (isset($this->atoms[$nameId]['absolute']) && ($this->atoms[$nameId]['absolute'] === true)) {
             return strtolower($this->atoms[$nameId]['fullcode']);
+        } elseif (!in_array($this->atoms[$nameId]['atom'], ['Nsname', 'Identifier'])) {
+            // No fullnamespace for non literal namespaces
+            return '';
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
             return $this->namespace.strtolower(substr($this->atoms[$nameId]['fullcode'], 9));
         } elseif (isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
