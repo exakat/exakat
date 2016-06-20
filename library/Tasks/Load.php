@@ -351,6 +351,8 @@ class Load extends Tasks {
 
     private function processFile($filename) {
         print "Process $filename\n";
+        $this->filename = $filename;
+        
         $this->line = 0;
         $log = array();
         $begin = microtime(true);
@@ -614,7 +616,7 @@ class Load extends Tasks {
                             T_GLOBAL                   => 'processGlobalVariable',
                             ];
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
-            print "Defaulting a : $this->id ";
+            print "Defaulting a : $this->id in $this->filename\n";
             print_r($this->tokens[$this->id]);
 //            print_r($this->atoms);
             die("Missing the method\n");
@@ -1894,6 +1896,7 @@ class Load extends Tasks {
         $current = $this->id;
         
         $blockId = $this->processFollowingBlock([T_WHILE]);
+        $this->popExpression();
         $this->addLink($dowhileId, $blockId, 'BLOCK');
 
         ++$this->id; // Skip while
@@ -2596,7 +2599,27 @@ class Load extends Tasks {
     }
 
     private function processReturn() {
-        return $this->processSingleOperator('Return', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN');
+        if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+            $current = $this->id;
+            
+            // Case of return ; 
+            $returnArgId = $this->addAtomVoid();
+            $returnId = $this->addAtom('Return');
+        
+            $this->addLink($returnId, $returnArgId, 'RETURN');
+
+            $x = ['code'     => $this->tokens[$current][1], 
+                  'fullcode' => $this->tokens[$current][1] . ' ;',
+                  'line'     => $this->tokens[$current][2],
+                  'token'    => $this->getToken($this->tokens[$current][0])];
+            $this->setAtom($returnId, $x);
+
+            $this->addToSequence($returnId);
+        
+            return $returnId;
+        } else {
+            return $this->processSingleOperator('Return', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN');
+        }
     }
     
     private function processThrow() {
