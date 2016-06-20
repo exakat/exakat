@@ -177,10 +177,10 @@ class Load extends Tasks {
                         T_ECHO                        => 30,
                         T_HALT_COMPILER               => 30,
                         T_PRINT                       => 30,
-                        T_INCLUDE                     => 30,
-                        T_INCLUDE_ONCE                => 30,
-                        T_REQUIRE                     => 30,
-                        T_REQUIRE_ONCE                => 30,
+                        T_INCLUDE                     => 2,
+                        T_INCLUDE_ONCE                => 2,
+                        T_REQUIRE                     => 2,
+                        T_REQUIRE_ONCE                => 2,
                         T_DOUBLE_ARROW                => 30,
 
                         T_RETURN                      => 31,
@@ -189,7 +189,6 @@ class Load extends Tasks {
                         T_YIELD_FROM                  => 31,
                         T_COLON                       => 31,
                         T_COMMA                       => 31,
-                        T_SEMICOLON                   => 31,
                         T_CLOSE_TAG                   => 31,
                         T_CLOSE_PARENTHESIS           => 31,
                         T_CLOSE_BRACKET               => 31,
@@ -200,6 +199,8 @@ class Load extends Tasks {
                         T_ELLIPSIS                    => 31,
                         T_GOTO                        => 31,
                         T_INSTEADOF                   => 31,
+
+                        T_SEMICOLON                   => 32,
     ];
     
     const PROP_ALTERNATIVE = ['Declare', 'Ifthen', 'For', 'Foreach', 'Switch'];
@@ -209,7 +210,7 @@ class Load extends Tasks {
     const PROP_NODELIMITER = ['String'];
     const PROP_HEREDOC     = ['Heredoc'];
     const PROP_COUNT       = ['Sequence', 'Arguments'];
-    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface'];
+    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier'];
     const PROP_ABSOLUTE    = ['Nsname'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
@@ -1103,24 +1104,15 @@ class Load extends Tasks {
         $current = $this->id;
 
         $this->startSequence();
-        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
+        if ($this->tokens[$this->id][0] === T_OPEN_TAG_WITH_ECHO) {
+            --$this->id;
+            $this->processOpenWithEcho();
+        }
+        
+        while (!in_array($this->tokens[$this->id + 1][0], [T_END])) {
             $this->processNext();
-            
-            // Keep a closing tag as a part of the sequence, unless it is the last
-            if (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
-                // Nothing to do, 
-                // Prevents the next tests
-            } elseif ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG &&
-                $this->tokens[$this->id + 2][0] === T_INLINE_HTML &&
-                in_array($this->tokens[$this->id + 3][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
-                    ++$this->id;
-                    $this->processClosingTag();
-            } elseif ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG &&
-                      in_array($this->tokens[$this->id + 2][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
-                    ++$this->id;
-                    $this->processClosingTag();
-            } 
         };
+        print "End of phpcode loop\n";
 
         if ($this->tokens[$this->id + 1][0] == T_CLOSE_TAG) {
             $closing = '?>';
@@ -1146,49 +1138,79 @@ class Load extends Tasks {
     private function processClosingTag() {
         $current = $this->id;
         if ($this->tokens[$this->id + 1][0] === T_END) {
-            $this->processSemicolon();
+//            $this->processSemicolon();
         } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
                   $this->tokens[$this->id + 2][0] === T_END) {
-            $this->processInlineHtml();
+
+            if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
+                $this->processSemicolon();
+            }
+
             ++$this->id;
-            return 0;
+            $id = $this->processInlineHtml();
+            $this->pushExpression($id);
+            $this->processSemicolon();
         } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
                   $this->tokens[$this->id + 2][0] === T_OPEN_TAG) {
-            if (!in_array($this->tokens[$this->id - 1][0], [T_SEMICOLON, T_COLON])) {
+
+            if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
                 $this->processSemicolon();
             }
             ++$this->id;
-            $this->processInlineHtml();
+            $id = $this->processInlineHtml();
+            $this->pushExpression($id);
+            $this->processSemicolon();
+
             ++$this->id;
         } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
                   $this->tokens[$this->id + 2][0] === T_OPEN_TAG_WITH_ECHO) {
+
             ++$this->id;
-            $this->processInlineHtml();
+            $id = $this->processInlineHtml();
+            $this->pushExpression($id);
+            $this->processSemicolon();
 
-            // Processing ECHO
-            $echoId = $this->processNextAsIdentifier();
+            $this->processOpenWithEcho();
 
-            $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG]);
-            // processArguments goes too far, up to ;
-            --$this->id;
-
-            $functioncallId = $this->addAtom('Functioncall');
-            $this->setAtom($functioncallId, ['code'     => $this->atoms[$echoId]['code'], 
-                                             'fullcode' => 'echo ' . $this->atoms[$argumentsId]['fullcode'],
-                                             'line'     => $this->tokens[$current][2],
-                                             'token'    => $this->getToken($this->tokens[$current][0])]);
-            $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
-            $this->addLink($functioncallId, $echoId, 'NAME');
-            $this->addToSequence($functioncallId);
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_TAG) {
             $this->processSemicolon();
             ++$this->id;
+        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
+            if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
+                $this->processSemicolon();
+            }
+
+            $this->processOpenWithEcho();
         } else {
             ++$this->id;
             $this->processInlineHtml();
+            $this->pushExpression($id);
+            $this->processSemicolon();
+            die("PROCESSING INLINE ALONE?");
         }
 
         return 0;
+    }
+    
+    private function processOpenWithEcho() {
+        $current = $this->id;
+    
+        // Processing ECHO
+        $echoId = $this->processNextAsIdentifier();
+    
+        $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG, T_END]);
+        // processArguments goes too far, up to ;
+        --$this->id;
+    
+        $functioncallId = $this->addAtom('Functioncall');
+        $this->setAtom($functioncallId, ['code'       => $this->atoms[$echoId]['code'], 
+                                         'fullcode'   => 'echo ' . $this->atoms[$argumentsId]['fullcode'],
+                                         'line'       => $this->tokens[$current][2],
+                                         'token'      => $this->getToken($this->tokens[$current][0]),
+                                         'fullnspath' => '\\echo' ]);
+        $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
+        $this->addLink($functioncallId, $echoId, 'NAME');
+        $this->pushExpression($functioncallId);
     }
 
     private function processNsnameAbsolute() {
@@ -2203,9 +2225,9 @@ class Load extends Tasks {
 
             return $functioncallId;    
         } else {
+            --$this->id;
             $nameId = $this->processNextAsIdentifier();
             $this->pushExpression($nameId);
-            --$this->id;
 
             return $this->processFCOA($nameId);
         }
@@ -2449,7 +2471,10 @@ class Load extends Tasks {
             $fullcode[] = $this->atoms[$namespaceId]['fullcode'];
 
             $this->setAtom($namespaceId, ['fullnspath' => $this->makeFullnspath($namespaceId)]);
-            $this->addNamespaceUse($originId, $aliasId, $useType);
+            if (!$this->isContext(self::CONTEXT_CLASS) && 
+                !$this->isContext(self::CONTEXT_TRAIT) ) {
+                $this->addNamespaceUse($originId, $aliasId, $useType);
+            }
             
         } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         
@@ -2543,8 +2568,9 @@ class Load extends Tasks {
 
         $operatorId = $this->addAtom($atom);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
-            $id = $this->processNext();
+            $this->processNext();
         };
+        print "Finished loop for single operators\n";
 
         $operandId = $this->popExpression();
         
@@ -2982,7 +3008,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
 
-        return $functioncallId;    
+        return $functioncallId;
     }
 
     private function processPrint() {
@@ -3010,11 +3036,12 @@ class Load extends Tasks {
                                       'token'    => $this->getToken($this->tokens[$this->id][0])]);
 
         $functioncallId = $this->addAtom('Functioncall');
-        $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
-                                         'fullcode' => $this->atoms[$nameId]['code'].' '.
-                                                       $this->atoms[$argumentsId]['fullcode'],
-                                         'line'     => $this->atoms[$nameId]['line'],
-                                         'token'    => $this->atoms[$nameId]['token']
+        $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'], 
+                                         'fullcode'   => $this->atoms[$nameId]['code'].' '.
+                                                         $this->atoms[$argumentsId]['fullcode'],
+                                         'line'       => $this->atoms[$nameId]['line'],
+                                         'token'      => $this->atoms[$nameId]['token'],
+                                         'fullnspath' => '\\'.strtolower($this->atoms[$nameId]['code'])
                                         ]);
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
@@ -3088,11 +3115,12 @@ class Load extends Tasks {
     
     private function checkTokens($filename) {
         if (count($this->expressions) > 0) {
-            print "Warning : expression is not empty\n";
+            print "Warning : expression is not empty in $filename\n";
             print_r($this->expressions);
             foreach($this->expressions as $atomId) {
                 print_r($this->atoms[$atomId]);
             }
+            die();
         }
     
         // All node has one incoming or one outgoing link (outgoing or incoming).
@@ -3278,7 +3306,6 @@ class Load extends Tasks {
     }
     
     private function getFullnspath($nameId) {
-        print_r($this->atoms[$nameId]);
         if ($this->atoms[$nameId]['absolute'] === true) {
             return strtolower($this->atoms[$nameId]['fullcode']);
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
@@ -3323,10 +3350,8 @@ class Load extends Tasks {
 
     private function addNamespaceUse($originId, $aliasId, $useType) {
         // Not handling AS case
-        print_r($this->atoms[$originId]);
         $fullnspath = $this->atoms[$originId]['fullnspath'];
 
-        print_r($this->atoms[$aliasId]);
         if ($originId !== $aliasId) {
             $offset = strrpos($this->atoms[$aliasId]['fullcode'], ' ');
             $alias = substr($this->atoms[$aliasId]['fullcode'], $offset + 1);
@@ -3337,7 +3362,6 @@ class Load extends Tasks {
         }
         
         $this->uses[$useType][$alias] = $fullnspath;
-        print_r($this->uses);
     }
 }
 
