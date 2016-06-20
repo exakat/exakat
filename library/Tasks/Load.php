@@ -2570,10 +2570,10 @@ class Load extends Tasks {
         $current = $this->id;
 
         $operatorId = $this->addAtom($atom);
-        while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+        // Do while, so that AT least one loop is done.
+        do {
             $this->processNext();
-        };
-        print "Finished loop for single operators\n";
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals));
 
         $operandId = $this->popExpression();
         
