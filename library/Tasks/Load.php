@@ -2129,6 +2129,8 @@ class Load extends Tasks {
         
         // Managing else case
         if (in_array($this->tokens[$this->id][0], [T_END, T_CLOSE_TAG])) {
+            $else = '';
+            // No else, end of a script
             --$this->id;
             // Back up one unit to allow later processing for sequence
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSEIF){
@@ -2136,13 +2138,20 @@ class Load extends Tasks {
 
             $elseifId = $this->processIfthen();
             $this->addLink($id, $elseifId, 'ELSE');
+
+            $else = $this->atoms[$elseifId]['fullcode'];
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSE){
+            $else = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip else
             
             $elseId = $this->processFollowingBlock([T_ENDIF]);
             $this->popExpression();
             $this->addLink($id, $elseId, 'ELSE');
-        } 
+
+            $else .= $this->atoms[$elseId]['fullcode'];
+        } else {
+            $else = '';
+        }
 
         if ($isColon === true) {
             ++$this->id;
@@ -2156,8 +2165,8 @@ class Load extends Tasks {
             $this->processSemicolon(); 
         }
 
-        $this->setAtom($id, ['code'        => $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') '.self::FULLCODE_BLOCK,
-                             'fullcode'    => $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') '.self::FULLCODE_BLOCK,
+        $this->setAtom($id, ['code'        => $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ')'.self::FULLCODE_BLOCK.$else,
+                             'fullcode'    => $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ')'.self::FULLCODE_BLOCK.$else,
                              'line'        => $this->tokens[$current][2],
                              'token'       => $this->getToken($this->tokens[$current][0]),
                              'alternative' => $isColon ]);
