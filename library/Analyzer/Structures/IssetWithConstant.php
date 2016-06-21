@@ -30,12 +30,11 @@ class IssetWithConstant extends Analyzer\Analyzer {
     
     public function analyze() {
         // isset(X[$a]) or isset(Y::X[$a])
-        $this->atomFunctionIs('isset')
+        $this->atomFunctionIs('\\isset')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->outIsIE('VARIABLE') // Staticconstant 
-             ->outIsIE('CONSTANT') // Staticconstant 
-             ->atomIs('Identifier')
+             ->outIsIE(['VARIABLE', 'CONSTANT', 'PROPERTY']) // Staticconstant 
+             ->atomIs(array('Identifier', 'Nsname'))
              ->back('first');
         $this->prepareQuery();
     }
