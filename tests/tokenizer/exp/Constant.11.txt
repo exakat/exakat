@@ -1,18 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    (
-    Label : CODE
-      ?
-      Label : CONDITION
-        $x
-      Label : ELSE
-        'c'
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          'a'
-        Label : CONCAT
-          B
+.
+Label : LEFT
+  'a'
+Label : RIGHT
+  Void

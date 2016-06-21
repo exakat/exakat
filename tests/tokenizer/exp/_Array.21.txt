@@ -1,58 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    const
-    Label : CONST
-      =
-      Label : LEFT
-        x
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            2
-          Label : ARGUMENT
-            3
-          Label : ARGUMENT
-            4
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        [
-        Label : INDEX
-          1
-        Label : VARIABLE
-          x
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        [
-        Label : INDEX
-          1
-        Label : VARIABLE
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            x
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        [
-        Label : INDEX
-          1
-        Label : VARIABLE
-          ::
-          Label : CLASS
-            b
-          Label : CONSTANT
-            x
+)
+Label : ARGUMENT
+  2
+Label : ARGUMENT
+  3
+Label : ARGUMENT
+  4

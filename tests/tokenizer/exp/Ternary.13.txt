@@ -1,52 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        $b
-      Label : ELSE
-        'h'
-      Label : THEN
-        (
-        Label : CODE
-          ?
-          Label : CONDITION
-            ==
-            Label : LEFT
-              $c
-            Label : RIGHT
-              'd'
-          Label : ELSE
-            substr
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                md5
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    microtime
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        void
-              Label : ARGUMENT
-                -
-                Label : SIGN
-                  $g
-          Label : THEN
-            substr
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                $f
+)
+Label : ARGUMENT
+  $e
+Label : ARGUMENT
+  0
+Label : ARGUMENT
+  $f

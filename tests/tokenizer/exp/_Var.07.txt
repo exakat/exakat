@@ -1,66 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            =
-            Label : LEFT
-              $b
-            Label : RIGHT
-              'E'
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            =
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $c
-              Label : PROPERTY
-                F
-            Label : RIGHT
-              $d
-        Label : NAME
-          D
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              Concatenation
-              Label : CONCAT
-                'H'
-              Label : CONCAT
-                ->
-                Label : OBJECT
-                  $e
-                Label : PROPERTY
-                  I
-              Label : CONCAT
-                'J'
-        Label : NAME
-          G
-    Label : EXTENDS
-      C
-    Label : NAME
-      B
+)
+Label : ARGUMENT
+  =
+  Label : LEFT
+    $b
+  Label : RIGHT
+    'E'

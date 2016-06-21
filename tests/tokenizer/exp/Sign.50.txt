@@ -1,44 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $f
-        Label : RIGHT
-          g
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $h
-    Label : FINAL
-      <=
-      Label : LEFT
-        $b
-      Label : RIGHT
-        +
-        Label : LEFT
-          $
-          Label : NAME
-            Concatenation
-            Label : CONCAT
-              'c'
-            Label : CONCAT
-              $d
-        Label : RIGHT
-          1
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $e
-    Label : INIT
-      =
-      Label : LEFT
-        $a
-      Label : RIGHT
-        1
++
+Label : LEFT
+  $
+  Label : VARIABLE
+    .
+    Label : LEFT
+      'c'
+    Label : RIGHT
+      $d
+Label : RIGHT
+  1

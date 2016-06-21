@@ -1,5 +1,12 @@
-;
-Label : ELEMENT
-  (
-  Label : CODE
-    1
+./tests/tokenizer/source/Parenthesis.01.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        1
+        Label : CODE
+          1

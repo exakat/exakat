@@ -1,0 +1,1 @@
+A<?php if (!empty ($a)) { ?>B<?php } else { ?>C<?php } ?>D

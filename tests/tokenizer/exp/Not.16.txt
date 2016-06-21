@@ -1,20 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    !
-    Label : NOT
-      ++
-      Label : POSTPLUSPLUS
-        [
-        Label : INDEX
-          "
-          Label : CONTAINS
-            Concatenation
-            Label : CONCAT
-              $bB
-            Label : CONCAT
-              $c
-        Label : VARIABLE
-          $a
+]
+Label : VARIABLE
+  $a

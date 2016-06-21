@@ -1,12 +1,16 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_New.16.php
+Label : FILE
   ;
   Label : ELEMENT
-    new
-    Label : NEW
-      ->
-      Label : OBJECT
-        $x
-      Label : PROPERTY
-        y
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        new
+        Label : NEW
+          ->
+          Label : CLASS
+            $x
+          Label : PROPERTY
+            y

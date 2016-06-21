@@ -1,14 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      `
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          {b::c} d 
+=
+Label : LEFT
+  $a
+Label : RIGHT
+  `
+  Label : CONCAT
+    {b::c} d 

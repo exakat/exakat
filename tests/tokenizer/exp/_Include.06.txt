@@ -1,12 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    require_once
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
-          "literal"
+)
+Label : ARGUMENT
+  "literal"

@@ -1,16 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      [
-      Label : INDEX
-        'd'
-      Label : VARIABLE
-        $
-        Label : NAME
-          $c
-    Label : RIGHT
-      1
+]
+Label : INDEX
+  'd'
+Label : VARIABLE
+  $c

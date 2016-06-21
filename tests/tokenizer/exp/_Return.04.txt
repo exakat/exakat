@@ -1,8 +1,12 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Return.04.php
+Label : FILE
   ;
   Label : ELEMENT
-    return
-    Label : RETURN
-      1
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          1

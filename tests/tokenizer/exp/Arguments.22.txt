@@ -1,34 +1,23 @@
-<?php
+)
+Label : ARGUMENT
+  <<<EOF
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    ->
-    Label : METHOD
-      b
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          <<<EOF
+  Label : CONCAT
+    A 
+  Label : CONCAT
+     C
 
-          Label : CONTAINS
-            Concatenation
-            Label : CONCAT
-              A 
-            Label : CONCAT
-              $b
-            Label : CONCAT
-               C
-
-        Label : ARGUMENT
-          ::
-          Label : CLASS
-            D
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                $f
-    Label : OBJECT
-      $a
+  Label : CONCAT
+    $b
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    D
+  Label : METHOD
+    e
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $f
+    Label : NAME
+      e

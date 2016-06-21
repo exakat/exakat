@@ -1,12 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    Concatenation
-    Label : CONCAT
-      @
-      Label : AT
-        $y
-    Label : CONCAT
-      '23'
+.
+Label : LEFT
+  @
+  Label : AT
+    $y
+Label : RIGHT
+  '23'

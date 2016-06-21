@@ -1,38 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      TRUE
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x2
-    Label : RIGHT
-      \
-      Label : SUBNAME
-        TRUE
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x3
-    Label : RIGHT
-      \
-      Label : SUBNAME
-        a
-      Label : SUBNAME
-        TRUE
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x4
-    Label : RIGHT
-      \
-      Label : SUBNAME
-        a
-      Label : SUBNAME
-        TRUE
+=
+Label : LEFT
+  $x
+Label : RIGHT
+  TRUE

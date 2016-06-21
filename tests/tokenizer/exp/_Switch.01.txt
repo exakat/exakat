@@ -1,10 +1,16 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Switch.01.php
+Label : FILE
   ;
   Label : ELEMENT
-    switch
-    Label : CASES
-      void
-    Label : NAME
-      $x
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        switch ($x) { /* cases */ }
+        Label : CASES
+           / * cases * /
+        Label : NAME
+          $x
+      Label : ELEMENT
+        Void

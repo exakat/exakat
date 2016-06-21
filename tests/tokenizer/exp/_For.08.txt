@@ -1,22 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $j
-    Label : FINAL
-      <
-      Label : LEFT
-        $i
-      Label : RIGHT
-        5
-    Label : INCREMENT
-      void
-    Label : INIT
-      void
+<
+Label : LEFT
+  $i
+Label : RIGHT
+  5

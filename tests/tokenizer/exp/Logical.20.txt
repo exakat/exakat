@@ -1,14 +1,18 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Logical.20.php
+Label : FILE
   ;
   Label : ELEMENT
-    ||
-    Label : LEFT
-      $x
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $y
-      Label : PROPERTY
-        z
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ||
+        Label : LEFT
+          $x
+        Label : RIGHT
+          ->
+          Label : CLASS
+            $y
+          Label : PROPERTY
+            z

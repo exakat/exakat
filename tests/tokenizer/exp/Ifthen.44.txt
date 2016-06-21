@@ -1,35 +1,3 @@
-;
-Label : ELEMENT
-   
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        !
-        Label : NOT
-          isset
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $a
-      Label : THEN
-        ;
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'B'
-    Label : ELEMENT
-      C
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          $d
-Label : ELEMENT
-  '>
+)
+Label : ARGUMENT
+  $a

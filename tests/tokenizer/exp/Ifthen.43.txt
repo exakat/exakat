@@ -1,48 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
-        ->
-        Label : METHOD
-          cc
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                ee
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    'ff'
-              Label : OBJECT
-                $dd
-        Label : OBJECT
-          $bb
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ->
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                e
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    'f'
-              Label : OBJECT
-                $d
-        Label : OBJECT
-          $b
+)
+Label : ARGUMENT
+  ->
+  Label : CLASS
+    $d
+  Label : METHOD
+    e
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        'f'
+    Label : NAME
+      e

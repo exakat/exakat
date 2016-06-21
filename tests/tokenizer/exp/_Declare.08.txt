@@ -1,12 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    declare
-    Label : TICKS
-      =
-      Label : LEFT
-        tIcks
-      Label : RIGHT
-        2
+)
+Label : ARGUMENT
+  =
+  Label : LEFT
+    tIcks
+  Label : RIGHT
+    2

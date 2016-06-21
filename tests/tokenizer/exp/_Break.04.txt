@@ -1,10 +1,1 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    break
-    Label : LEVEL
-      (
-      Label : CODE
-        2
+Whole

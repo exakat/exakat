@@ -1,9 +1,3 @@
-<?php
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $a
+;
+Label : ARGUMENT
+  $a

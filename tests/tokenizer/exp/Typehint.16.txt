@@ -1,0 +1,29 @@
+)
+Label : ARGUMENT
+  $a
+  Label : TYPEHINT
+    \
+    Label : SUBNAME
+      namespace
+    Label : SUBNAME
+      Stdclass
+Label : ARGUMENT
+  $b
+  Label : TYPEHINT
+    \
+    Label : SUBNAME
+      namespace
+    Label : SUBNAME
+      Stdclass
+Label : ARGUMENT
+  =
+  Label : LEFT
+    $c
+  Label : RIGHT
+    null
+  Label : TYPEHINT
+    \
+    Label : SUBNAME
+      namespace
+    Label : SUBNAME
+      Stdclass

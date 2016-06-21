@@ -1,95 +1,41 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      +
-      Label : LEFT
-        +
-        Label : LEFT
-          [
-          Label : INDEX
-            0
-          Label : VARIABLE
-            $b
-        Label : RIGHT
-          *
++
+Label : LEFT
+  ]
+  Label : INDEX
+    0
+  Label : VARIABLE
+    $b
+Label : RIGHT
+  *
+  Label : LEFT
+    ->
+    Label : CLASS
+      $this
+    Label : PROPERTY
+      B
+  Label : RIGHT
+    ->
+    Label : CLASS
+      $this
+    Label : METHOD
+      C
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          -
           Label : LEFT
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              B
-          Label : RIGHT
-            ->
-            Label : METHOD
-              C
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  -
-                  Label : LEFT
-                    [
-                    Label : INDEX
-                      1
-                    Label : VARIABLE
-                      $b
-                  Label : RIGHT
-                    [
-                    Label : INDEX
-                      0
-                    Label : VARIABLE
-                      $b
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $this
-                  Label : PROPERTY
-                    B
-            Label : OBJECT
-              $this
-      Label : RIGHT
-        *
-        Label : LEFT
-          E
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                B
-            Label : ARGUMENT
-              2
-        Label : RIGHT
+            ]
+            Label : INDEX
+123098120398 [label="Reached level 15"]            Label : VARIABLE
+123098120398 [label="Reached level 15"]          Label : RIGHT
+            ]
+            Label : INDEX
+123098120398 [label="Reached level 15"]            Label : VARIABLE
+123098120398 [label="Reached level 15"]        Label : ARGUMENT
           ->
-          Label : METHOD
-            C
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                -
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    2
-                  Label : VARIABLE
-                    $b
-                Label : RIGHT
-                  [
-                  Label : INDEX
-                    1
-                  Label : VARIABLE
-                    $b
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  B
-          Label : OBJECT
+          Label : CLASS
             $this
+          Label : PROPERTY
+            B
+      Label : NAME
+        C

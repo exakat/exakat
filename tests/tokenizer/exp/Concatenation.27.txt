@@ -1,28 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      <<<EOD
-
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          A 
-        Label : CONCAT
-          ::
-          Label : CLASS
-            $a
-          Label : METHOD
-            b
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                'c'
-        Label : CONCAT
-           B
-
+)
+Label : ARGUMENT
+  'c'

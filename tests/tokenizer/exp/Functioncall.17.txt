@@ -1,36 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          3
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $b
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          4
-        Label : ARGUMENT
-          void
+)
+Label : ARGUMENT
+  1
+Label : ARGUMENT
+  2
+Label : ARGUMENT
+  3

@@ -1,56 +1,17 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            B
-    Label : CONDITION
-      &&
-      Label : LEFT
-        <
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            B
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            C
-      Label : RIGHT
-        ===
-        Label : LEFT
-          D
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $a
-            Label : ARGUMENT
-              {
-              Label : INDEX
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  B
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  E
-        Label : RIGHT
-          G
+)
+Label : ARGUMENT
+  $a
+Label : ARGUMENT
+  ->
+  Label : CLASS
+    $this
+  Label : PROPERTY
+    }
+    Label : INDEX
+      ->
+      Label : CLASS
+        $this
+      Label : PROPERTY
+        B
+    Label : VARIABLE
+      E

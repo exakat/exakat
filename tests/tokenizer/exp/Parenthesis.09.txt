@@ -1,24 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          $x
-    Label : RIGHT
-      @
-      Label : AT
-        d
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            2
-          Label : ARGUMENT
-            3
-          Label : ARGUMENT
-            5
+)
+Label : ARGUMENT
+  $x

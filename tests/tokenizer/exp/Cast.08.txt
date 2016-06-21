@@ -1,14 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      (array)
-      Label : CAST
-        (boolean)
-        Label : CAST
-          $y
+=
+Label : LEFT
+  $x
+Label : RIGHT
+  (array)
+  Label : CAST
+    (boolean)
+    Label : CAST
+      $y

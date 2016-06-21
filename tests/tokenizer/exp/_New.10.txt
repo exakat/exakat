@@ -1,24 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        c
-    Label : RIGHT
-      new
-      Label : NEW
-        ->
-        Label : METHOD
-          a
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-        Label : OBJECT
-          $b
+(
+Label : ARGUMENT
+  Void

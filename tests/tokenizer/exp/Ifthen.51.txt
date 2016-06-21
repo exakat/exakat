@@ -1,48 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
-        =
-        Label : LEFT
-          [
-          Label : INDEX
-            [
-            Label : INDEX
-              $i
-            Label : VARIABLE
-              $h
-          Label : VARIABLE
-            $g
-        Label : RIGHT
-          1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          [
-          Label : INDEX
-            d
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  $f
-                Label : VARIABLE
-                  $e
-          Label : VARIABLE
-            $c
-        Label : RIGHT
-          1
+)
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    $f
+  Label : VARIABLE
+    $e

@@ -1,34 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : BLOCK
-          void
-        Label : NAME
-          a
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : BLOCK
-          void
-        Label : NAME
-          b
-    Label : EXTENDS
-      y
-    Label : IMPLEMENTS
-      z
-    Label : NAME
-      x
+(
+Label : ARGUMENT
+  Void

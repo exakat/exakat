@@ -1,52 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          C
-        Label : VARIABLE
-          $a
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          D
-        Label : VARIABLE
-          $b
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          callable
-        Label : VARIABLE
-          $c
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          E
-        Label : METHOD
-          F
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $d
-            Label : ARGUMENT
-              $e
-      Label : ELEMENT
-        =
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            G
-        Label : RIGHT
-          $g
-    Label : NAME
-      B
+)
+Label : ARGUMENT
+  $a
+  Label : TYPEHINT
+    C
+Label : ARGUMENT
+  $b
+  Label : TYPEHINT
+    D
+Label : ARGUMENT
+  $c
+  Label : TYPEHINT
+    callable

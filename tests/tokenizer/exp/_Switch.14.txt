@@ -1,24 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CASE
-          'b'
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            require
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  'c.php'
-    Label : NAME
-      $a
+)
+Label : ARGUMENT
+  'c.php'
+  Label : CODE
+    'c.php'

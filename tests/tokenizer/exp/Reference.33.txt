@@ -1,17 +1,23 @@
-<?php 
-Label : CODE
+./tests/tokenizer/source/Reference.33.php
+Label : FILE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      &
-      Label : LEFT
-        ::
-        Label : CLASS
-          A
-        Label : CONSTANT
-          B
-      Label : RIGHT
-        $c
-    Label : THEN
-      void
+    <?php 
+    Label : CODE
+      ;
+      Label : ELEMENT
+        if (A::B & $c)  { /**/ } 
+        Label : CONDITION
+          &
+          Label : LEFT
+            ::
+            Label : CLASS
+123098120398 [label="Reached level 15"]            Label : CONSTANT
+123098120398 [label="Reached level 15"]          Label : RIGHT
+            $c
+        Label : THEN
+          {}
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        Void

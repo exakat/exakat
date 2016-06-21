@@ -1,28 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    (real)
-    Label : CAST
-      ::
-      Label : CLASS
-        x
-      Label : PROPERTY
-        $y
-  Label : ELEMENT
-    (float)
-    Label : CAST
-      ::
-      Label : CLASS
-        y
-      Label : CONSTANT
-        y
-  Label : ELEMENT
-    (double)
-    Label : CAST
-      ->
-      Label : OBJECT
-        $z
-      Label : PROPERTY
-        h
+(real)
+Label : CAST
+  ::
+  Label : CLASS
+    x
+  Label : PROPERTY
+    $y

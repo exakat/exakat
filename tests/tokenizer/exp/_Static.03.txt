@@ -1,34 +1,29 @@
-<?php
-
-Label : CODE
-  ;
+class
+Label : BLOCK
+  {}
   Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        public
-        Label : DEFINE
-          $b
-        Label : PUBLIC
-          public
-        Label : STATIC
-          static
-      Label : ELEMENT
-        private
-        Label : DEFINE
-          $d
-        Label : PRIVATE
-          private
-        Label : STATIC
-          static
-      Label : ELEMENT
-        protected
-        Label : DEFINE
-          $c
-        Label : PROTECTED
-          protected
-        Label : STATIC
-          static
-    Label : NAME
-      a
+    public
+    Label : PPP
+      $b
+    Label : PUBLIC
+      public
+    Label : STATIC
+      static
+  Label : ELEMENT
+    private
+    Label : PPP
+      $d
+    Label : PRIVATE
+      private
+    Label : STATIC
+      static
+  Label : ELEMENT
+    protected
+    Label : PPP
+      $c
+    Label : PROTECTED
+      protected
+    Label : STATIC
+      static
+Label : NAME
+  a

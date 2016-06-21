@@ -1,16 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    require
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        fct_lien_page_custom
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            "fonctions/sysout_agent.php"
-          Label : ARGUMENT
-            "abs"
+)
+Label : ARGUMENT
+  fct_lien_page_custom
+  Label : ARGUMENTS
+    )
+  Label : NAME
+    fct_lien_page_custom

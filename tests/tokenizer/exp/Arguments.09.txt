@@ -1,88 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        array
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'b'
-      Label : ARGUMENT
-        'c'
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        d
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'b'
-      Label : ARGUMENT
-        'c'
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        d
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'b'
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        d
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        d
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'b'
-      Label : ARGUMENT
-        e
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'c'
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        d
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'b'
-      Label : ARGUMENT
-        e
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'c'
-      Label : ARGUMENT
-        f
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            2
-          Label : ARGUMENT
-            3
+)
+Label : ARGUMENT
+  array
+  Label : ARGUMENTS
+    )
+    Label : ARGUMENT
+      'b'
+  Label : NAME
+    array
+Label : ARGUMENT
+  'c'

@@ -1,44 +1,25 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $a
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            [
-            Label : INDEX
-              1
-            Label : VARIABLE
-              $b
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            [
-            Label : INDEX
-              3
-            Label : VARIABLE
-              [
-              Label : INDEX
-                2
-              Label : VARIABLE
-                $c
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          3
+)
+Label : ARGUMENT
+  $a
+  Label : APPEND
+    $a
+Label : ARGUMENT
+  ]
+  Label : APPEND
+    ]
+    Label : INDEX
+      1
+    Label : VARIABLE
+      $b
+Label : ARGUMENT
+  ]
+  Label : APPEND
+    ]
+    Label : INDEX
+      3
+    Label : VARIABLE
+      ]
+      Label : INDEX
+        2
+      Label : VARIABLE
+        $c

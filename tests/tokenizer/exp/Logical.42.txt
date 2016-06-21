@@ -1,64 +1,31 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    or
-    Label : LEFT
-      =
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          B
-      Label : RIGHT
-        new
-        Label : NEW
-          \
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'E'
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $b
-                Label : PROPERTY
-                  D
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'G'
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  F
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'I'
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  H
-          Label : SUBNAME
-            C
-    Label : RIGHT
-      ::
-      Label : CLASS
-        \
-        Label : SUBNAME
-          J
-      Label : METHOD
-        K
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'L'
+)
+Label : ARGUMENT
+  ->
+  Label : CLASS
+    $b
+  Label : PROPERTY
+    ]
+    Label : INDEX
+      'E'
+    Label : VARIABLE
+      D
+Label : ARGUMENT
+  ->
+  Label : CLASS
+    $c
+  Label : PROPERTY
+    ]
+    Label : INDEX
+      'G'
+    Label : VARIABLE
+      F
+Label : ARGUMENT
+  ->
+  Label : CLASS
+    $d
+  Label : PROPERTY
+    ]
+    Label : INDEX
+      'I'
+    Label : VARIABLE
+      H

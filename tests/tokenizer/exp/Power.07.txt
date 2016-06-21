@@ -1,10 +1,14 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Power.07.php
+Label : FILE
   ;
   Label : ELEMENT
-    **
-    Label : LEFT
-      $x
-    Label : RIGHT
-      $y
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        **
+        Label : LEFT
+          $x
+        Label : RIGHT
+          $y

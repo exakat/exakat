@@ -1,14 +1,11 @@
-<?php
-
-Label : CODE
-  ;
+class
+Label : BLOCK
+  {}
   Label : ELEMENT
-    class
-    Label : BLOCK
-      void
-    Label : IMPLEMENTS
-      \
-      Label : SUBNAME
-        B
-    Label : NAME
-      A
+    Void
+Label : IMPLEMENTS
+  \
+  Label : SUBNAME
+    B
+Label : NAME
+  A

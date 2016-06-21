@@ -1,22 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        a
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              B
-            Label : CONSTANT
-              class
-          Label : ARGUMENT
-            2
+)
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    B
+  Label : CONSTANT
+    class
+Label : ARGUMENT
+  2

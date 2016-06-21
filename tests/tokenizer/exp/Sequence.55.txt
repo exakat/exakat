@@ -1,38 +1,13 @@
-<?php
-
-Label : CODE
-  namespace
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      use
-      Label : USE
-        \
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          D
-        Label : SUBNAME
-          E
-    Label : ELEMENT
-      use
-      Label : USE
-        as
-        Label : AS
-          J
-        Label : NAME
-          \
-          Label : SUBNAME
-            F
-          Label : SUBNAME
-            G
-          Label : SUBNAME
-            H
-          Label : SUBNAME
-            I
-  Label : NAMESPACE
-    \
-    Label : SUBNAME
-      A
-    Label : SUBNAME
-      B
+as
+Label : AS
+  J
+Label : NAME
+  \
+  Label : SUBNAME
+    F
+  Label : SUBNAME
+    G
+  Label : SUBNAME
+    H
+  Label : SUBNAME
+    I

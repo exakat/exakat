@@ -1,20 +1,15 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    [
+]
+Label : INDEX
+  -
+  Label : SIGN
+    ]
     Label : INDEX
-      -
-      Label : SIGN
-        [
-        Label : INDEX
-          0
-        Label : VARIABLE
-          [
-          Label : INDEX
-            'c'
-          Label : VARIABLE
-            $b
+      0
     Label : VARIABLE
-      $a
+      ]
+      Label : INDEX
+        'c'
+      Label : VARIABLE
+        $b
+Label : VARIABLE
+  $a

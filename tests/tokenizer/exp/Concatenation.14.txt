@@ -1,32 +1,18 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          'a'
-        Label : CONCAT
-          date
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              "Y"
-            Label : ARGUMENT
-              strtotime
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  $b
-        Label : CONCAT
-          'c'
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
+;
+Label : ARGUMENT
+  .
+  Label : LEFT
+    .
     Label : RIGHT
-      2
+      date
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          strtotime
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            strtotime
+      Label : NAME
+        date

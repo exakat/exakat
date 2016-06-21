@@ -1,38 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        [
-        Label : INDEX
-          'c'
-        Label : VARIABLE
-          $b
-      Label : ARGUMENT
-        -1
-  Label : ELEMENT
-    ->
-    Label : METHOD
-      e
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          'f'
-    Label : OBJECT
-      $d
-  Label : ELEMENT
-    @
-    Label : AT
-      g
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          $h
-  Label : ELEMENT
-    return
-    Label : RETURN
-      false
+)
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    'c'
+  Label : VARIABLE
+    $b
+Label : ARGUMENT
+  -1

@@ -1,68 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $a
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $b
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        B
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'E'
-            Label : VARIABLE
-              [
-              Label : INDEX
-                'C'
-              Label : VARIABLE
-                $c
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          array
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $d
-    Label : RIGHT
-      G
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          [
-          Label : INDEX
-            'J'
-          Label : VARIABLE
-            [
-            Label : INDEX
-              'H'
-            Label : VARIABLE
-              $e
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $f
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          void
+)
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    'E'
+  Label : VARIABLE
+    ]
+    Label : INDEX
+      'C'
+    Label : VARIABLE
+      $c

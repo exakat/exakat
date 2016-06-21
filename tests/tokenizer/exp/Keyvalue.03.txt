@@ -1,48 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
+)
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'a'
+  Label : VALUE
+    ==
     Label : LEFT
-      $x
+      $b
     Label : RIGHT
-      array
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
-            ==
-            Label : LEFT
-              $b
-            Label : RIGHT
-              $c
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $y
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'b'
-          Label : VALUE
-            ?
-            Label : CONDITION
-              >=
-              Label : LEFT
-                $c
-              Label : RIGHT
-                $d
-            Label : ELSE
-              'f'
-            Label : THEN
-              'e'
-        Label : ARGUMENT
-          'g'
+      $c

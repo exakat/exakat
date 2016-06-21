@@ -1,9 +1,7 @@
-;
-Label : ELEMENT
-  +
-  Label : LEFT
++
+Label : LEFT
+  1
+Label : RIGHT
+  1
+  Label : CODE
     1
-  Label : RIGHT
-    (
-    Label : CODE
-      1

@@ -1,7 +1,14 @@
-;
-Label : ELEMENT
-  ::
-  Label : CLASS
-    a
-  Label : CONSTANT
-    b
+./tests/tokenizer/source/Staticconstant.01.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          a
+        Label : CONSTANT
+          b

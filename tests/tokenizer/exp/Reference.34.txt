@@ -1,50 +1,17 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &
-      Label : LEFT
-        ==
-        Label : LEFT
-          $a
-        Label : RIGHT
-          'B'
-      Label : RIGHT
-        &&
-        Label : LEFT
-          !=
-          Label : LEFT
-            $b
-          Label : RIGHT
-            null
-        Label : RIGHT
-          ->
-          Label : METHOD
-            C
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  ::
-                  Label : CLASS
-                    D
-                  Label : METHOD
-                    E
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        void
-                Label : CONCAT
-                  'F'
-          Label : OBJECT
-            $c
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $d
+)
+Label : ARGUMENT
+  .
+  Label : LEFT
+    ::
+    Label : CLASS
+      D
+    Label : METHOD
+      E
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          Void
+      Label : NAME
+        E
+  Label : RIGHT
+    'F'

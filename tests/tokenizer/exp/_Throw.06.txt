@@ -1,28 +1,17 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    throw
-    Label : THROW
-      new
-      Label : NEW
-        \
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            b
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'C'
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  e
-              Label : ARGUMENT
-                $f
-        Label : SUBNAME
-          A
+)
+Label : ARGUMENT
+  b
+  Label : ARGUMENTS
+    )
+    Label : ARGUMENT
+      'C'
+    Label : ARGUMENT
+      ->
+      Label : CLASS
+        $d
+      Label : PROPERTY
+        e
+    Label : ARGUMENT
+      $f
+  Label : NAME
+    b

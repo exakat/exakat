@@ -1,5 +1,12 @@
-;
-Label : ELEMENT
-  -
-  Label : SIGN
-    true
+./tests/tokenizer/source/Sign.15.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        -
+        Label : SIGN
+          true

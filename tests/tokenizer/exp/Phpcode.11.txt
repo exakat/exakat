@@ -1,20 +1,7 @@
 ;
-Label : ELEMENT
-  A
-Label : ELEMENT
-  <?php
-  Label : CODE
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          [
-          Label : INDEX
-            'e'
-          Label : VARIABLE
-            $d
-Label : ELEMENT
-  B
-
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    'e'
+  Label : VARIABLE
+    $d

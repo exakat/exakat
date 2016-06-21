@@ -1,24 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    goto
-    Label : LABEL
-      a1
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        'Foo'
-  Label : ELEMENT
-    :
-    Label : LABEL
-      a1
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        'Bar'
+;
+Label : ARGUMENT
+  'Foo'

@@ -1,10 +1,18 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_While.01.php
+Label : FILE
   ;
   Label : ELEMENT
-    while
-    Label : BLOCK
-      void
-    Label : CONDITION
-      1
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        while (1)  { /**/ } 
+        Label : BLOCK
+          {}
+          Label : ELEMENT
+            Void
+        Label : CONDITION
+          1
+      Label : ELEMENT
+        Void

@@ -1,21 +1,7 @@
-;
-Label : ELEMENT
-  print
+)
+Label : ARGUMENT
+  a
   Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      a
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'b'
-        Label : ARGUMENT
-          "c"
-Label : ELEMENT
-  A
-Label : ELEMENT
-  f
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      $d
+    )
+  Label : NAME
+    a

@@ -1,24 +1,17 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
-          ?
-          Label : CONDITION
-            true
-          Label : ELSE
-            ?
-            Label : CONDITION
-              false
-            Label : ELSE
-              'f'
-            Label : THEN
-              't'
-          Label : THEN
-            'true'
+;
+Label : ARGUMENT
+  'f'
+  Label : CODE
+    ?
+    Label : CONDITION
+      true
+    Label : ELSE
+      ?
+      Label : CONDITION
+        false
+      Label : ELSE
+        'f'
+      Label : THEN
+        't'
+    Label : THEN
+      'true'

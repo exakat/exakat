@@ -1,53 +1,7 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
-      Label : LEFT
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $a
-              Label : PROPERTY
-                B
-      Label : RIGHT
-        ==
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            C
-        Label : RIGHT
-          'D'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        E
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            new
-            Label : NEW
-              F
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  'G'
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $a
-                  Label : PROPERTY
-                    B
-      Label : ELEMENT
-        I
+)
+Label : ARGUMENT
+  ->
+  Label : CLASS
+    $a
+  Label : PROPERTY
+    B

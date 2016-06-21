@@ -1,27 +1,5 @@
-;
-Label : ELEMENT
-  include
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      (
-      Label : CODE
-        'a.php'
-Label : ELEMENT
-  A
-Label : ELEMENT
-  include
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      (
-      Label : CODE
-        'b.php'
-Label : ELEMENT
-  B
-Label : ELEMENT
-  b
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      'c'
+)
+Label : ARGUMENT
+  'a.php'
+  Label : CODE
+    'a.php'

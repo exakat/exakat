@@ -1,12 +1,9 @@
-<?php
-
-Label : CODE
-  ;
+class
+Label : BLOCK
+  {}
   Label : ELEMENT
-    class
-    Label : BLOCK
-      void
-    Label : FINAL
-      final
-    Label : NAME
-      y
+    Void
+Label : FINAL
+  final
+Label : NAME
+  y

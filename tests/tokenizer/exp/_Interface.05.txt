@@ -1,24 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    interface
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : NAME
-          x
-    Label : EXTENDS
-      b
-    Label : EXTENDS
-      c
-    Label : EXTENDS
-      d
-    Label : NAME
-      a
+(
+Label : ARGUMENT
+  Void

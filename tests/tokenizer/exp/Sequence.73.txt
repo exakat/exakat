@@ -1,72 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    require_once
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          B
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              __FILE__
-        Label : CONCAT
-          'C'
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        D
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'E'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            var
-            Label : DEFINE
-              =
-              Label : LEFT
-                $a
-              Label : RIGHT
-                array
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-            Label : VAR
-              var
-          Label : ELEMENT
-            var
-            Label : DEFINE
-              =
-              Label : LEFT
-                $b
-              Label : RIGHT
-                array
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-            Label : VAR
-              var
-        Label : NAME
-          F
-      Label : ELEMENT
-        class
-        Label : BLOCK
-          void
-        Label : EXTENDS
-          H
-        Label : NAME
-          G
+)
+Label : ARGUMENT
+  B
+  Label : ARGUMENTS
+    )
+    Label : ARGUMENT
+      __FILE__
+  Label : NAME
+    B

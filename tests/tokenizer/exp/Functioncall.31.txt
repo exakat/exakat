@@ -1,42 +1,37 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
+)
+Label : ARGUMENT
+  =
+  Label : LEFT
+    $b
+  Label : RIGHT
+    array
     Label : ARGUMENTS
-      Arguments
+      (
       Label : ARGUMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $d
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-    Label : BLOCK
-      void
+        Void
     Label : NAME
-      a
+      array
+Label : ARGUMENT
+  =
+  Label : LEFT
+    $c
+  Label : RIGHT
+    array
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        Void
+    Label : NAME
+      array
+Label : ARGUMENT
+  =
+  Label : LEFT
+    $d
+  Label : RIGHT
+    array
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        Void
+    Label : NAME
+      array

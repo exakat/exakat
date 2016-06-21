@@ -1,60 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          inGlobalScope
-        Label : CONSTANT
-          class
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        void
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              inFunctionScope
-            Label : CONSTANT
-              class
-    Label : NAME
-      x
-  Label : ELEMENT
-    trait
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            print
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  inTraitMethodScope
-                Label : CONSTANT
-                  class
-        Label : NAME
-          tx
-    Label : NAME
-      t
+class
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    inGlobalScope
+  Label : CONSTANT
+    class

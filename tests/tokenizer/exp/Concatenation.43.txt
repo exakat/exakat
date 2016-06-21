@@ -1,14 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    Concatenation
-    Label : CONCAT
-      'a'
-    Label : CONCAT
-      (string)
-      Label : CAST
-        $x
-    Label : CONCAT
-      'b'
+(string)
+Label : CAST
+  $x

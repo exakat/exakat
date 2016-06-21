@@ -1,22 +1,28 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Sequence.54.php
+Label : FILE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : THEN
+    <?php
+
+    Label : CODE
       ;
       Label : ELEMENT
-        $d
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
+        if (1)  { /**/ } 
+        Label : CONDITION
+          1
+        Label : THEN
+          {}
+          Label : ELEMENT
+            $d
       Label : ELEMENT
-        $c
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
+        foreach ($a as $b)  { /**/ } 
+        Label : BLOCK
+          {}
+          Label : ELEMENT
+            $c
+        Label : SOURCE
+          $a
+        Label : VALUE
+          $b
+      Label : ELEMENT
+        Void

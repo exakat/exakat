@@ -1,72 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    try
-    Label : CATCH
-      catch
-      Label : CLASS
-        Error
-      Label : CODE
-        ;
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                getMessage
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-              Label : OBJECT
-                $e
-      Label : VARIABLE
-        $e
-    Label : CODE
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $result
-        Label : RIGHT
-          @
-          Label : AT
-            (
-            Label : CODE
-              /
-              Label : LEFT
-                1.0
-              Label : RIGHT
-                0
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          in_array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $result
-            Label : ARGUMENT
-              [
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  INF
-                Label : ARGUMENT
-                  NAN
-        Label : THEN
-          ;
-          Label : ELEMENT
-            throw
-            Label : THROW
-              new
-              Label : NEW
-                DivisionByZeroError
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    'Division by zero error'
+)
+Label : ARGUMENT
+  $result
+Label : ARGUMENT
+  ]
+  Label : ARGUMENTS
+    ]
+    Label : ARGUMENT
+      INF
+    Label : ARGUMENT
+      NAN
+  Label : VARIABLE
+    [

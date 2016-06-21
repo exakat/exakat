@@ -1,67 +1,42 @@
-;
-Label : ELEMENT
-  A
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      foreach
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          B
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            !
-            Label : NOT
-              [
-              Label : INDEX
-                'D'
-              Label : VARIABLE
-                $c
-          Label : THEN
-            ;
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  E
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      Concatenation
-                      Label : CONCAT
-                        'F'
-                      Label : CONCAT
-                        [
-                        Label : INDEX
-                          'G'
-                        Label : VARIABLE
-                          $d
-                      Label : CONCAT
-                        'H'
-                    Label : ARGUMENT
-                      I
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          'J'
-                    Label : ARGUMENT
-                      array
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            'K'
-                          Label : VALUE
-                            'L'
-        Label : ELEMENT
-          L
-      Label : SOURCE
-        $a
-      Label : VALUE
-        $b
+?>
+
+Label : ARGUMENT
+  E
+  Label : ARGUMENTS
+    )
+    Label : ARGUMENT
+      .
+      Label : LEFT
+        .
+        Label : LEFT
+          'F'
+        Label : RIGHT
+          ]
+          Label : INDEX
+            'G'
+          Label : VARIABLE
+            $d
+      Label : RIGHT
+        'H'
+    Label : ARGUMENT
+      I
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          'J'
+      Label : NAME
+        I
+    Label : ARGUMENT
+      array
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'K'
+          Label : VALUE
+            'L'
+      Label : NAME
+        array
+  Label : NAME
+    E

@@ -1,14 +1,18 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Foreach.18.php
+Label : FILE
   ;
   Label : ELEMENT
-    foreach
-    Label : BLOCK
+    <?php
+
+    Label : CODE
       ;
       Label : ELEMENT
-        void
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
+        foreach ($a as $b)  { /**/ } 
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            Void
+        Label : SOURCE
+          $a
+        Label : VALUE
+          $b

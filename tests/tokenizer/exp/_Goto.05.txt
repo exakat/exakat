@@ -1,12 +1,18 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Goto.05.php
+Label : FILE
   ;
   Label : ELEMENT
-    GOTO
-    Label : LABEL
-      cleanupCookie
-  Label : ELEMENT
-    :
-    Label : LABEL
-      cleanupCookie
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        GOTO
+        Label : GOTO
+          cleanupCookie
+      Label : ELEMENT
+        :
+        Label : LABEL
+          cleanupCookie
+      Label : ELEMENT
+        Void

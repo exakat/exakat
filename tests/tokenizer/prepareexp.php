@@ -62,11 +62,17 @@ function run($test, $number) {
         return;
     }
     
-    $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'.$test.'.'.$number.'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
+    $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'.$test.'.'.$number.'.php -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
     shell_exec($shell);
     
     if (!file_exists('./exp/'."$test.$number".'.txt')) {
         print "This script has no exp file.\n";
+        return;
+    }
+
+    if (filesize('./exp/'."$test.$number".'.txt') == 0) {
+        unlink('./exp/'."$test.$number".'.txt');
+        print "This script has an empty exp file.\n";
         return;
     }
 

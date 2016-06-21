@@ -1,32 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $a
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ?
-        Label : CONDITION
-          (
-          Label : CODE
-            C
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                'D'
-        Label : ELSE
-          die
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'F'
-        Label : THEN
-          'D'
-    Label : NAME
-      B
+)
+Label : ARGUMENT
+  $a

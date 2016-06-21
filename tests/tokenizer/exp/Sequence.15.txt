@@ -1,34 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $a
-    Label : GLOBAL
-      $b
-    Label : GLOBAL
-      $c
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        protected
-        Label : DEFINE
-          $x
-        Label : DEFINE
-          $y
-        Label : DEFINE
-          =
-          Label : LEFT
-            $z
-          Label : RIGHT
-            3
-        Label : DEFINE
-          $a
-        Label : PROTECTED
-          protected
-    Label : NAME
-      x
+=
+Label : LEFT
+  $z
+Label : RIGHT
+  3

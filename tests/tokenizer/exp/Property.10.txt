@@ -1,14 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      [
-      Label : INDEX
-        'd'
-      Label : VARIABLE
-        $c
-    Label : PROPERTY
-      e
+]
+Label : INDEX
+  'd'
+Label : VARIABLE
+  $c

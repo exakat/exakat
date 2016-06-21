@@ -1,24 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      @
-      Label : AT
-        !
-        Label : NOT
-          function_exists
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'gzopen'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $x
-        Label : RIGHT
-          1
+)
+Label : ARGUMENT
+  'gzopen'

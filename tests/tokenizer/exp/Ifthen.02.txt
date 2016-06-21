@@ -1,12 +1,18 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Ifthen.02.php
+Label : FILE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : THEN
+    <?php
+
+    Label : CODE
       ;
       Label : ELEMENT
-        2
+        if (1)  { /**/ } 
+        Label : CONDITION
+          1
+        Label : THEN
+          {}
+          Label : ELEMENT
+            2
+      Label : ELEMENT
+        Void

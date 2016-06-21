@@ -1,13 +1,17 @@
-<?php 
-Label : CODE
+./tests/tokenizer/source/Phpcode.07.php
+Label : FILE
   ;
   Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $x
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $y
+    <?php 
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : PREPLUSPLUS
+          $x
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        ++
+        Label : PREPLUSPLUS
+          $y

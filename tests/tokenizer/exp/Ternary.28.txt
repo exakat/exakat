@@ -1,38 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    for
-    Label : BLOCK
-      void
-    Label : FINAL
-      <
-      Label : LEFT
-        $d
-      Label : RIGHT
-        $e
-    Label : INCREMENT
-      ++
-      Label : PREPLUSPLUS
-        $f
-    Label : INIT
-      =
-      Label : LEFT
-        $a
-      Label : RIGHT
-        ?
-        Label : CONDITION
-          (
-          Label : CODE
-            $b
-        Label : ELSE
-          0
-        Label : THEN
-          (
-          Label : CODE
-            +
-            Label : LEFT
-              $c
-            Label : RIGHT
-              1
++
+Label : LEFT
+  $c
+Label : RIGHT
+  1

@@ -1,40 +1,35 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    +
++
+Label : LEFT
+  ::
+  Label : CLASS
+    a
+  Label : PROPERTY
+    $b
+Label : RIGHT
+  *
+  Label : LEFT
+    *
     Label : LEFT
-      ::
+      ->
       Label : CLASS
-        a
+        $c
       Label : PROPERTY
-        $b
+        d
     Label : RIGHT
-      *
-      Label : LEFT
-        *
+      $e
+      Label : CODE
+        -
         Label : LEFT
-          ->
-          Label : OBJECT
-            $c
-          Label : PROPERTY
-            d
+          1
         Label : RIGHT
-          (
-          Label : CODE
-            -
-            Label : LEFT
-              1
-            Label : RIGHT
-              /
-              Label : LEFT
-                2
-              Label : RIGHT
-                $e
-      Label : RIGHT
-        ->
-        Label : OBJECT
-          $g
-        Label : PROPERTY
-          h
+          /
+          Label : LEFT
+            2
+          Label : RIGHT
+            $e
+  Label : RIGHT
+    ->
+    Label : CLASS
+      $g
+    Label : PROPERTY
+      h

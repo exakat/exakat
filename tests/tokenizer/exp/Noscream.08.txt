@@ -1,16 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    @
-    Label : AT
-      ->
-      Label : METHOD
-        t
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-      Label : OBJECT
-        $x
+(
+Label : ARGUMENT
+  Void

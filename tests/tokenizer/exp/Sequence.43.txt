@@ -1,72 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
-      Label : LEFT
-        isset
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'b'
-            Label : VARIABLE
-              $a
-      Label : RIGHT
-        is_array
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $c
-    Label : THEN
-      ;
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $i
-            Label : RIGHT
-              1
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $j
-            Label : RIGHT
-              2
-        Label : SOURCE
-          [
-          Label : INDEX
-            'f'
-          Label : VARIABLE
-            $e
-        Label : VALUE
-          =>
-          Label : KEY
-            $g
-          Label : VALUE
-            $h
-  Label : ELEMENT
-    =
-    Label : LEFT
-      [
-      Label : INDEX
-        'l'
-      Label : VARIABLE
-        $k
-    Label : RIGHT
-      [
-      Label : INDEX
-        'n'
-      Label : VARIABLE
-        $m
+)
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    'b'
+  Label : VARIABLE
+    $a

@@ -1,18 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          -
-          Label : SIGN
-            'a'
-        Label : CONCAT
-          -
-          Label : SIGN
-            'b'
+?>
+Label : ARGUMENT
+  .
+  Label : LEFT
+    -
+    Label : SIGN
+      'a'
+  Label : RIGHT
+    -
+    Label : SIGN
+      'b'

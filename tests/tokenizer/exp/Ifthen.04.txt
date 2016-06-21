@@ -1,20 +1,25 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Ifthen.04.php
+Label : FILE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        2
-      Label : THEN
-        ;
-        Label : ELEMENT
-          $b
-    Label : THEN
+    <?php
+
+    Label : CODE
       ;
       Label : ELEMENT
-        $a
+        if (1)  { /**/ } 
+        Label : CONDITION
+          1
+        Label : ELSE
+          elseif (2)  { /**/ } 
+          Label : CONDITION
+            2
+          Label : THEN
+            {}
+            Label : ELEMENT
+123098120398 [label="Reached level 15"]        Label : THEN
+          {}
+          Label : ELEMENT
+            $a
+      Label : ELEMENT
+        Void

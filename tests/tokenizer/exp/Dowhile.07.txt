@@ -1,20 +1,15 @@
-<?php
-
-Label : CODE
+do  { /**/ }  while ($z)
+Label : BLOCK
   ;
   Label : ELEMENT
-    do
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $x
-        Label : THEN
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $y
+    if ($x)  { /**/ } 
     Label : CONDITION
-      $z
+      $x
+    Label : THEN
+      {}
+      Label : ELEMENT
+        ++
+        Label : PREPLUSPLUS
+          $y
+Label : CONDITION
+  $z

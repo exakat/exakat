@@ -1,146 +1,29 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    try
-    Label : CATCH
-      catch
-      Label : CLASS
-        \
-        Label : SUBNAME
-          O
-      Label : CODE
-        void
-      Label : VARIABLE
-        $d
-    Label : CODE
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $a
-        Label : RIGHT
-          new
-          Label : NEW
-            \
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                new
-                Label : NEW
-                  \
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      $b
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        \
-                        Label : SUBNAME
-                          D
-                      Label : CONSTANT
-                        E
-                  Label : SUBNAME
-                    C
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  \
-                  Label : SUBNAME
-                    B
-                Label : CONSTANT
-                  G
-            Label : SUBNAME
-              B
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              ==
-              Label : LEFT
-                ->
-                Label : METHOD
-                  H
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      void
-                Label : OBJECT
-                  $c
-              Label : RIGHT
-                'I'
-            Label : THEN
-              ;
-              Label : ELEMENT
-                continue
-                Label : LEVEL
-                  void
-          Label : ELEMENT
-            ?
-            Label : CONDITION
-              ->
-              Label : METHOD
-                J
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-              Label : OBJECT
-                $c
-            Label : ELSE
-              @
-              Label : AT
-                M
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      L
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          void
-                    Label : OBJECT
-                      $c
-            Label : THEN
-              @
-              Label : AT
-                K
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      L
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          void
-                    Label : OBJECT
-                      $c
-        Label : SOURCE
-          $a
-        Label : VALUE
-          $c
-  Label : ELEMENT
-    
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $e
-    Label : THEN
-      ;
-      Label : ELEMENT
-        @
-        Label : AT
-          M
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $b
+)
+Label : ARGUMENT
+  new
+  Label : NEW
+    \
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            D
+        Label : CONSTANT
+          E
+    Label : NAME
+      \
+      Label : SUBNAME
+        C
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    \
+    Label : SUBNAME
+      B
+  Label : CONSTANT
+    G

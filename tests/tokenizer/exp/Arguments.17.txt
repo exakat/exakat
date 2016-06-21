@@ -1,24 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            [
-            Label : INDEX
-              'b'
-            Label : VARIABLE
-              $a
-    Label : RIGHT
-      c
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          $d
+)
+Label : ARGUMENT
+  ]
+  Label : APPEND
+    ]
+    Label : INDEX
+      'b'
+    Label : VARIABLE
+      $a

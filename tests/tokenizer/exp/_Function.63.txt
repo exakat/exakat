@@ -1,40 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $f
-      Label : ARGUMENT
-        $g
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
-    Label : NAME
-      
-  Label : ELEMENT
-    ->
-    Label : METHOD
-      d
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          'e'
-    Label : OBJECT
-      (
-      Label : CODE
-        new
-        Label : NEW
-          A
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              $c
+)
+Label : ARGUMENT
+  $f
+Label : ARGUMENT
+  $g

@@ -1,29 +1,3 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        empty
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          ++
-          Label : POSTPLUSPLUS
-            $e
-        Label : SOURCE
-          $b
-        Label : VALUE
-          =>
-          Label : KEY
-            $c
-          Label : VALUE
-            $d
+)
+Label : ARGUMENT
+  $a

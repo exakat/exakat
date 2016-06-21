@@ -1,174 +1,71 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        $d
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $e
-    Label : THEN
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'B'
-          Label : ARGUMENT
-            $b
-          Label : ARGUMENT
-            'C'
-          Label : ARGUMENT
-            ?
-            Label : CONDITION
-              !
-              Label : NOT
-                empty
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'E'
-                    Label : VARIABLE
-                      [
-                      Label : INDEX
-                        'D'
-                      Label : VARIABLE
-                        $c
-            Label : ELSE
-              Concatenation
-              Label : CONCAT
-                'G'
-              Label : CONCAT
-                [
-                Label : INDEX
-                  'I'
-                Label : VARIABLE
-                  [
-                  Label : INDEX
-                    'D'
-                  Label : VARIABLE
-                    $c
-            Label : THEN
-              'F'
-          Label : ARGUMENT
-            'J'
-          Label : ARGUMENT
-            [
+;
+Label : ARGUMENT
+  'B'
+Label : ARGUMENT
+  $b
+Label : ARGUMENT
+  'C'
+Label : ARGUMENT
+  ?
+  Label : CONDITION
+    !
+    Label : NOT
+      empty
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          ]
+          Label : INDEX
+            'E'
+          Label : VARIABLE
+            ]
             Label : INDEX
-              'L'
-            Label : VARIABLE
-              [
-              Label : INDEX
-                'D'
-              Label : VARIABLE
-                $c
-          Label : ARGUMENT
-            'M'
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'L'
-            Label : VARIABLE
-              [
-              Label : INDEX
-                'D'
-              Label : VARIABLE
-                $c
-          Label : ARGUMENT
-            'P'
-          Label : ARGUMENT
-            $b
-          Label : ARGUMENT
-            'Q'
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'B'
-          Label : ARGUMENT
-            $b
-          Label : ARGUMENT
-            'C'
-          Label : ARGUMENT
-            ?
-            Label : CONDITION
-              !
-              Label : NOT
-                empty
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'E'
-                    Label : VARIABLE
-                      [
-                      Label : INDEX
-                        'D'
-                      Label : VARIABLE
-                        $c
-            Label : ELSE
-              Concatenation
-              Label : CONCAT
-                'G'
-              Label : CONCAT
-                [
-                Label : INDEX
-                  'I'
-                Label : VARIABLE
-                  [
-                  Label : INDEX
-                    'D'
-                  Label : VARIABLE
-                    $c
-            Label : THEN
-              'F'
-          Label : ARGUMENT
-            'J'
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'L'
-            Label : VARIABLE
-              [
-              Label : INDEX
-                'D'
-              Label : VARIABLE
-                $c
-          Label : ARGUMENT
-            'M'
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'L'
-            Label : VARIABLE
-              [
-              Label : INDEX
-                'D'
-              Label : VARIABLE
-                $c
-          Label : ARGUMENT
-            'P'
-          Label : ARGUMENT
-            $b
-          Label : ARGUMENT
-            'Q'
+123098120398 [label="Reached level 15"]            Label : VARIABLE
+123098120398 [label="Reached level 15"]      Label : NAME
+        empty
+  Label : ELSE
+    .
+    Label : LEFT
+      'G'
+    Label : RIGHT
+      ]
+      Label : INDEX
+        'I'
+      Label : VARIABLE
+        ]
+        Label : INDEX
+          'D'
+        Label : VARIABLE
+          $c
+  Label : THEN
+    'F'
+Label : ARGUMENT
+  'J'
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    'L'
+  Label : VARIABLE
+    ]
+    Label : INDEX
+      'D'
+    Label : VARIABLE
+      $c
+Label : ARGUMENT
+  'M'
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    'L'
+  Label : VARIABLE
+    ]
+    Label : INDEX
+      'D'
+    Label : VARIABLE
+      $c
+Label : ARGUMENT
+  'P'
+Label : ARGUMENT
+  $b
+Label : ARGUMENT
+  'Q'

@@ -1,7 +1,14 @@
-;
-Label : ELEMENT
-  ->
-  Label : OBJECT
-    $x
-  Label : PROPERTY
-    y
+./tests/tokenizer/source/Property.03.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ->
+        Label : CLASS
+          $x
+        Label : PROPERTY
+          y

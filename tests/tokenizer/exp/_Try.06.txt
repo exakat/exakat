@@ -1,52 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    try
-    Label : CATCH
-      catch
-      Label : CLASS
-        Exception
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $c
-          Label : RIGHT
-            date
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'Y-m-d-H-i-s'
-              Label : ARGUMENT
-                strtotime
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    $d
-      Label : VARIABLE
-        $e
-    Label : CODE
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $d
-        Label : RIGHT
-          new
-          Label : NEW
-            DateTime
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                new
-                Label : NEW
-                  DateTimeZone
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      $b
+)
+Label : ARGUMENT
+  $a
+Label : ARGUMENT
+  new
+  Label : NEW
+    DateTimeZone
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      DateTimeZone

@@ -1,26 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    do
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          1
-        Label : ELSE
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-        Label : THEN
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-    Label : CONDITION
-      FALSE
+break
+Label : BREAK
+  Void

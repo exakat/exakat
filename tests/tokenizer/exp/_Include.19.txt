@@ -1,27 +1,3 @@
-;
-Label : ELEMENT
-  void
-Label : ELEMENT
-  B
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      'C'
-Label : ELEMENT
-  include
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      (
-      Label : CODE
-        'D'
-Label : ELEMENT
-  void
-Label : ELEMENT
-  include
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      (
-      Label : CODE
-        'E'
+)
+Label : ARGUMENT
+  'C'

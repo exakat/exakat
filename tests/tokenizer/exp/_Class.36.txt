@@ -1,22 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : LEFT
-            a
-          Label : RIGHT
-            ::
-            Label : CLASS
-              b
-            Label : CONSTANT
-              c
-    Label : NAME
-      x
+=
+Label : LEFT
+  a
+Label : RIGHT
+  ::
+  Label : CLASS
+    b
+  Label : CONSTANT
+    c

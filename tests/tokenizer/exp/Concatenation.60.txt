@@ -1,84 +1,15 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ==
+)
+Label : ARGUMENT
+  *
+  Label : LEFT
+    $c
+    Label : CODE
+      /
       Label : LEFT
-        $a
+        0
       Label : RIGHT
-        B
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        ==
-        Label : LEFT
-          $a
-        Label : RIGHT
-          E
-      Label : ELSE
-        Block with else
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $b
-          Label : RIGHT
-            Concatenation
-            Label : CONCAT
-              $d
-            Label : CONCAT
-              $f
-      Label : THEN
-        ;
-        Label : ELEMENT
-          Concatenation
-          Label : CONCAT
-            C
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                *
-                Label : LEFT
-                  (
-                  Label : CODE
-                    /
-                    Label : LEFT
-                      0
-                    Label : RIGHT
-                      $c
-                Label : RIGHT
-                  $d
-              Label : ARGUMENT
-                $e
-          Label : CONCAT
-            'D'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          Concatenation
-          Label : CONCAT
-            C
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                *
-                Label : LEFT
-                  (
-                  Label : CODE
-                    /
-                    Label : LEFT
-                      0
-                    Label : RIGHT
-                      $c
-                Label : RIGHT
-                  $d
-              Label : ARGUMENT
-                $e
-          Label : CONCAT
-            'D'
+        $c
+  Label : RIGHT
+    $d
+Label : ARGUMENT
+  $e

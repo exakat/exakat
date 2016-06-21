@@ -1,4 +1,5 @@
 <?php
+foreach($a as $b) {
 switch($type) {
 		case 'A': $b = &$c; break;
 		case 'B': $b = &$d; break 1;
@@ -7,4 +8,5 @@ switch($type) {
             $b = @$e;
 			break;
 	}
+}
 ?>

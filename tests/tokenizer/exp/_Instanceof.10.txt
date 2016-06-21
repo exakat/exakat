@@ -1,72 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $b
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              array
-            Label : VARIABLE
-              $c
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              ===
-              Label : LEFT
-                instanceof
-                Label : CLASS
-                  $d
-                Label : VARIABLE
-                  ->
-                  Label : OBJECT
-                    ->
-                    Label : METHOD
-                      D
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          void
-                    Label : OBJECT
-                      $this
-                  Label : PROPERTY
-                    E
-              Label : RIGHT
-                F
-            Label : THEN
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  ->
-                  Label : METHOD
-                    H
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        $e
-                      Label : ARGUMENT
-                        $f
-                  Label : OBJECT
-                    ->
-                    Label : OBJECT
-                      $this
-                    Label : PROPERTY
-                      G
-        Label : NAME
-          C
-        Label : PUBLIC
-          public
-    Label : NAME
-      B
+)
+Label : ARGUMENT
+  $b
+Label : ARGUMENT
+  $c
+  Label : TYPEHINT
+    array

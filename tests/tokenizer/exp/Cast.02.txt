@@ -1,12 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    (object)
-    Label : CAST
-      $x
-  Label : ELEMENT
-    (object)
-    Label : CAST
-      $y
+(object)
+Label : CAST
+  $x

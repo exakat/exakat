@@ -1,22 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $z
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        "a"
-      Label : CONCAT
-        @
-        Label : AT
-          y
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              1
-      Label : CONCAT
-        $c
+)
+Label : ARGUMENT
+  1

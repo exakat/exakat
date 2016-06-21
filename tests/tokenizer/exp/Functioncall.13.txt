@@ -1,10 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    isset
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $x
+)
+Label : ARGUMENT
+  $x

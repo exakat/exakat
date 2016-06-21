@@ -1,26 +1,17 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      [
-      Label : INDEX
-        [
-        Label : INDEX
-          [
-          Label : INDEX
-            1
-          Label : VARIABLE
-            $__GET
-        Label : VARIABLE
-          [
-          Label : INDEX
-            1
-          Label : VARIABLE
-            $y
-      Label : VARIABLE
-        $x
-    Label : RIGHT
-      3
+]
+Label : INDEX
+  ]
+  Label : INDEX
+    ]
+    Label : INDEX
+      1
+    Label : VARIABLE
+      $__GET
+  Label : VARIABLE
+    ]
+    Label : INDEX
+      1
+    Label : VARIABLE
+      $y
+Label : VARIABLE
+  $x

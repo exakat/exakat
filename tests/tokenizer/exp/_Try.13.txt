@@ -1,86 +1,33 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    try
-    Label : CATCH
-      catch
-      Label : CLASS
-        D
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            void
-      Label : VARIABLE
-        $c
-    Label : CODE
-      ;
-      Label : ELEMENT
-        =
+)
+Label : ARGUMENT
+  'H'
+Label : ARGUMENT
+  array
+  Label : ARGUMENTS
+    )
+    Label : ARGUMENT
+      =>
+      Label : KEY
+        'J'
+      Label : VALUE
+        .
         Label : LEFT
-          $a
-        Label : RIGHT
-          [
-          Label : INDEX
-            'B'
-          Label : VARIABLE
-            $b
-  Label : ELEMENT
-    ->
-    Label : METHOD
-      G
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'H'
-        Label : ARGUMENT
-          array
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'J'
-              Label : VALUE
-                Concatenation
-                Label : CONCAT
-                  ->
-                  Label : METHOD
-                    L
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        void
-                  Label : OBJECT
-                    $e
-                Label : CONCAT
-                  'M'
-                Label : CONCAT
-                  ->
-                  Label : METHOD
-                    O
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        'P'
-                  Label : OBJECT
-                    $f
-                Label : CONCAT
-                  ->
-                  Label : METHOD
-                    R
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        'S'
-                  Label : OBJECT
-                    $g
-    Label : OBJECT
-      [
-      Label : INDEX
-        'E'
-      Label : VARIABLE
-        $d
+          .
+          Label : LEFT
+            .
+            Label : LEFT
+123098120398 [label="Reached level 15"]            Label : RIGHT
+123098120398 [label="Reached level 15"]          Label : RIGHT
+            ->
+            Label : CLASS
+123098120398 [label="Reached level 15"]            Label : METHOD
+123098120398 [label="Reached level 15"]        Label : RIGHT
+          ->
+          Label : CLASS
+            $g
+          Label : METHOD
+            R
+            Label : ARGUMENTS
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]  Label : NAME
+    array

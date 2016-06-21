@@ -1,64 +1,22 @@
-;
-Label : ELEMENT
-  A
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      foreach
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          B
-        Label : ELEMENT
-          echo
+?>
+Label : ARGUMENT
+  ->
+  Label : CLASS
+    $tpl
+  Label : METHOD
+    escape
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        ->
+        Label : CLASS
+          $tpl
+        Label : METHOD
+          slug
           Label : ARGUMENTS
-            
+            )
             Label : ARGUMENT
-              ->
-              Label : METHOD
-                escape
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      slug
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          $label
-                    Label : OBJECT
-                      $tpl
-              Label : OBJECT
-                $tpl
-        Label : ELEMENT
-          C
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                escape
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    $label
-              Label : OBJECT
-                $tpl
-        Label : ELEMENT
-          D
-      Label : SOURCE
-        $tables
-      Label : VALUE
-        =>
-        Label : KEY
-          $label
-        Label : VALUE
-          $data
-Label : ELEMENT
-  E
-
+123098120398 [label="Reached level 15"]          Label : NAME
+            slug
+    Label : NAME
+      escape

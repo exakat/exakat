@@ -1,44 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        &
-        Label : LEFT
-          2
-        Label : RIGHT
-          &&
-          Label : LEFT
-            3
-          Label : RIGHT
-            4
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        &&
-        Label : LEFT
-          2
-        Label : RIGHT
-          &
-          Label : LEFT
-            3
-          Label : RIGHT
-            4
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "\n"
+4
+Label : ARGUMENT
+  &&
+  Label : LEFT
+    &
+    Label : LEFT
+      2
+    Label : RIGHT
+      3
+  Label : RIGHT
+    4

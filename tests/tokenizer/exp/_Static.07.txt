@@ -1,26 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    static
-    Label : DEFINE
-      $x
-    Label : STATIC
-      static
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        void
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $z
-        Label : STATIC
-          static
-    Label : NAME
-      y
+(
+Label : ARGUMENT
+  Void

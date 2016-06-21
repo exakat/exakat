@@ -1,40 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ?
-        Label : CONDITION
-          ??
-          Label : LEFT
-            2
-          Label : RIGHT
-            3
-        Label : ELSE
-          5
-        Label : THEN
-          4
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ?
-        Label : CONDITION
-          ??
-          Label : LEFT
-            ||
-            Label : LEFT
-              0
-            Label : RIGHT
-              2
-          Label : RIGHT
-            3
-        Label : ELSE
-          5
-        Label : THEN
-          4
+)
+Label : ARGUMENT
+  ?
+  Label : CONDITION
+    ??
+    Label : LEFT
+      2
+    Label : RIGHT
+      3
+  Label : ELSE
+    5
+  Label : THEN
+    4

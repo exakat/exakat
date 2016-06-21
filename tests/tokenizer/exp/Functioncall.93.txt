@@ -1,74 +1,63 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ?
-        Label : CONDITION
-          >
+'O'
+Label : ARGUMENT
+  ?
+  Label : CONDITION
+    >
+    Label : LEFT
+      .
+      Label : LEFT
+        .
+        Label : LEFT
+          .
           Label : LEFT
-            Concatenation
-            Label : CONCAT
-              'B'
-            Label : CONCAT
-              $b
-            Label : CONCAT
-              'C'
-            Label : CONCAT
-              $b
+            'B'
           Label : RIGHT
-            1
-        Label : ELSE
-          ?
-          Label : CONDITION
-            >
+            $b
+        Label : RIGHT
+          'C'
+      Label : RIGHT
+        $b
+    Label : RIGHT
+      1
+  Label : ELSE
+    ?
+    Label : CONDITION
+      >
+      Label : LEFT
+        .
+        Label : LEFT
+          .
+          Label : LEFT
+            'E'
+          Label : RIGHT
+            'F'
+        Label : RIGHT
+          $b
+      Label : RIGHT
+        1
+    Label : ELSE
+      ?
+      Label : CONDITION
+        >
+        Label : LEFT
+          .
+          Label : LEFT
+            .
             Label : LEFT
-              Concatenation
-              Label : CONCAT
-                'E'
-              Label : CONCAT
-                'F'
-              Label : CONCAT
-                $b
-            Label : RIGHT
-              1
-          Label : ELSE
-            ?
-            Label : CONDITION
-              >
-              Label : LEFT
-                Concatenation
-                Label : CONCAT
-                  'H'
-                Label : CONCAT
-                  'I'
-                Label : CONCAT
-                  J
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      'K'
-                    Label : ARGUMENT
-                      $c
-                Label : CONCAT
-                  'L'
-                Label : CONCAT
-                  $b
-              Label : RIGHT
-                1
-            Label : ELSE
-              Concatenation
-              Label : CONCAT
-                'N'
-              Label : CONCAT
-                'O'
-            Label : THEN
-              'M'
-          Label : THEN
-            'G'
-        Label : THEN
-          'D'
+123098120398 [label="Reached level 15"]            Label : RIGHT
+123098120398 [label="Reached level 15"]          Label : RIGHT
+            $b
+        Label : RIGHT
+          1
+      Label : ELSE
+        .
+        Label : LEFT
+          'N'
+        Label : RIGHT
+          'O'
+      Label : THEN
+        'M'
+    Label : THEN
+      'G'
+  Label : THEN
+    'D'

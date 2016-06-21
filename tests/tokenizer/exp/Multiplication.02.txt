@@ -1,18 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    +
++
+Label : LEFT
+  1
+Label : RIGHT
+  *
+  Label : LEFT
+    *
     Label : LEFT
-      1
+      2
     Label : RIGHT
-      *
-      Label : LEFT
-        *
-        Label : LEFT
-          2
-        Label : RIGHT
-          3
-      Label : RIGHT
-        4
+      3
+  Label : RIGHT
+    4

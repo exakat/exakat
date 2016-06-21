@@ -1,12 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
-          7
+;
+Label : ARGUMENT
+  7
+  Label : CODE
+    7

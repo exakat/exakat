@@ -1,30 +1,23 @@
-<?php
-
-Label : CODE
-  ;
+class
+Label : BLOCK
+  {}
   Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          $b
-        Label : DEFINE
-          $c
-        Label : DEFINE
-          $d
-        Label : DEFINE
-          $e
-        Label : DEFINE
-          $f
-        Label : DEFINE
-          $g
-        Label : DEFINE
-          $h
-        Label : DEFINE
-          $i
-        Label : STATIC
-          static
-    Label : NAME
-      a
+    static
+    Label : STATIC
+      $b
+    Label : STATIC
+      $c
+    Label : STATIC
+      $d
+    Label : STATIC
+      $e
+    Label : STATIC
+      $f
+    Label : STATIC
+      $g
+    Label : STATIC
+      $h
+    Label : STATIC
+      $i
+Label : NAME
+  a

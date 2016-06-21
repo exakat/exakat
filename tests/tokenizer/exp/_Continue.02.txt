@@ -1,6 +1,1 @@
-<?php
-
-Label : CODE
-  continue
-  Label : LEVEL
-    2
+Whole

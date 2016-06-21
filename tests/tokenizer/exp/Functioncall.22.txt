@@ -1,56 +1,47 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $z
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
-            [
-            Label : INDEX
-              3
-            Label : VARIABLE
-              $f
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'b'
-          Label : VALUE
-            intval
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  4
-                Label : VARIABLE
-                  $g
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'c'
-          Label : VALUE
-            [
-            Label : INDEX
-              5
-            Label : VARIABLE
-              $h
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'd'
-          Label : VALUE
-            [
-            Label : INDEX
-              6
-            Label : VARIABLE
-              $i
+)
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'a'
+  Label : VALUE
+    ]
+    Label : INDEX
+      3
+    Label : VARIABLE
+      $f
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'b'
+  Label : VALUE
+    intval
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        ]
+        Label : INDEX
+          4
+        Label : VARIABLE
+          $g
+    Label : NAME
+      intval
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'c'
+  Label : VALUE
+    ]
+    Label : INDEX
+      5
+    Label : VARIABLE
+      $h
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'd'
+  Label : VALUE
+    ]
+    Label : INDEX
+      6
+    Label : VARIABLE
+      $i

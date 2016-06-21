@@ -1,42 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    ;
-    Label : ELEMENT
-      ;
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            1
-          Label : THEN
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $a
-    Label : ELEMENT
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $d
-        Label : RIGHT
-          ++
-          Label : POSTPLUSPLUS
-            $e
-      Label : ELEMENT
-        +=
-        Label : LEFT
-          [
-          Label : INDEX
-            2
-          Label : VARIABLE
-            $f
-        Label : RIGHT
-          ++
-          Label : POSTPLUSPLUS
-            $e
+]
+Label : INDEX
+  2
+Label : VARIABLE
+  $f

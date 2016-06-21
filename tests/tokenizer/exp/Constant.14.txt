@@ -1,16 +1,22 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Constant.14.php
+Label : FILE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      $e
-    Label : THEN
+    <?php
+
+    Label : CODE
       ;
       Label : ELEMENT
-        a
-      Label : ELEMENT
-        void
-      Label : ELEMENT
-        C
+        if ($e)  { /**/ } 
+        Label : CONDITION
+          $e
+        Label : THEN
+          ;
+          Label : ELEMENT
+            Void
+          Label : ELEMENT
+            a
+          Label : ELEMENT
+            Void
+          Label : ELEMENT
+            C

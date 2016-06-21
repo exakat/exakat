@@ -1,8 +1,12 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Not.01.php
+Label : FILE
   ;
   Label : ELEMENT
-    !
-    Label : NOT
-      1
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        !
+        Label : NOT
+          1

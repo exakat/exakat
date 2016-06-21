@@ -1,14 +1,1 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    require_once
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          "literal"
-        Label : CONCAT
-          "autre"
+"literal"

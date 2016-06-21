@@ -1,43 +1,5 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          (
-          Label : CODE
-            +
-            Label : LEFT
-              $a
-            Label : RIGHT
-              0
-        Label : CONCAT
-          'B'
-        Label : CONCAT
-          D
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'E'
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                G
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    'H'
-              Label : OBJECT
-                $b
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          'J'
-        Label : CONCAT
-          'L'
-        Label : CONCAT
-          'N'
++
+Label : LEFT
+  $a
+Label : RIGHT
+  0

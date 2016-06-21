@@ -1,18 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    !==
-    Label : LEFT
-      ->
-      Label : METHOD
-        Execute
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $sql
-      Label : OBJECT
-        $conn
-    Label : RIGHT
-      false
+)
+Label : ARGUMENT
+  $sql

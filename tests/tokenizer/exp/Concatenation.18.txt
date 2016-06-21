@@ -1,30 +1,17 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
+;
+Label : ARGUMENT
+  .
+  Label : RIGHT
+    date
     Label : ARGUMENTS
-      
+      )
       Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          'a'
-        Label : CONCAT
-          date
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              "Y"
-            Label : ARGUMENT
-              strtotime
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  $b
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      2
+        strtotime
+        Label : ARGUMENTS
+          )
+          Label : ARGUMENT
+            $b
+        Label : NAME
+          strtotime
+    Label : NAME
+      date

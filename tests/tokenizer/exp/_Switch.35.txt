@@ -1,76 +1,33 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        default
++
+Label : LEFT
+  strlen
+  Label : ARGUMENTS
+    )
+    Label : ARGUMENT
+      $b
+  Label : NAME
+    strlen
+Label : RIGHT
+  %
+  Label : LEFT
+    )
+    Label : CODE
+      *
+      Label : LEFT
+        1
         Label : CODE
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              ==
-              Label : LEFT
-                $x
-              Label : RIGHT
-                1
-            Label : THEN
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $x
-          Label : ELEMENT
-            =
-            Label : LEFT
-              [
-              Label : INDEX
-                str_pad
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    $a
-                  Label : ARGUMENT
-                    +
-                    Label : LEFT
-                      strlen
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          $b
-                    Label : RIGHT
-                      %
-                      Label : LEFT
-                        (
-                        Label : CODE
-                          *
-                          Label : LEFT
-                            (
-                            Label : CODE
-                              -
-                              Label : LEFT
-                                C
-                              Label : RIGHT
-                                1
-                          Label : RIGHT
-                            strlen
-                            Label : ARGUMENTS
-                              
-                              Label : ARGUMENT
-                                $d
-                      Label : RIGHT
-                        W
-                  Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    F
-              Label : VARIABLE
-                $x
-            Label : RIGHT
-              1
-    Label : NAME
-      true
+          -
+          Label : LEFT
+            C
+          Label : RIGHT
+            1
+      Label : RIGHT
+        strlen
+        Label : ARGUMENTS
+          )
+          Label : ARGUMENT
+            $d
+        Label : NAME
+          strlen
+  Label : RIGHT
+    W

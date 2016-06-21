@@ -1,22 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    ->
-    Label : METHOD
-      a
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          require
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                __DIR__
-              Label : CONCAT
-                '/b.php'
-    Label : OBJECT
-      $c
+)
+Label : ARGUMENT
+  .
+  Label : LEFT
+    require
+    Label : ARGUMENTS
+      __DIR__
+      Label : ARGUMENT
+        __DIR__
+    Label : NAME
+      require
+  Label : RIGHT
+    '/b.php'

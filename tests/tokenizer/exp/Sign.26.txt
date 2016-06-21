@@ -1,12 +1,16 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Sign.26.php
+Label : FILE
   ;
   Label : ELEMENT
-    -
-    Label : SIGN
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        -
+        Label : SIGN
+          ->
+          Label : CLASS
+            $a
+          Label : PROPERTY
+            b

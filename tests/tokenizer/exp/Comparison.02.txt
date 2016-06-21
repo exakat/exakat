@@ -1,14 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ==
-        Label : LEFT
-          2
-        Label : RIGHT
-          3
+)
+Label : ARGUMENT
+  ==
+  Label : LEFT
+    2
+  Label : RIGHT
+    3

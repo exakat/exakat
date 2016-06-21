@@ -1,109 +1,34 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
+?>
+Label : ARGUMENT
+  .
+  Label : LEFT
+    a
     Label : ARGUMENTS
-      
+      )
       Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          a
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              Concatenation
-              Label : CONCAT
-                'b'
-              Label : CONCAT
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  d
-            Label : ARGUMENT
-              e
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  ?
-                  Label : CONDITION
-                    ==
-                    Label : LEFT
-                      ->
-                      Label : OBJECT
-                        $f
-                      Label : PROPERTY
-                        g
-                    Label : RIGHT
-                      'h'
-                  Label : ELSE
-                    'j'
-                  Label : THEN
-                    'i'
-            Label : ARGUMENT
-              'k'
-        Label : CONCAT
-          'l'
-  Label : ELEMENT
-    M
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
+        .
+        Label : LEFT
+          'b'
+        Label : RIGHT
+          ->
+          Label : CLASS
+            $c
+          Label : PROPERTY
+            d
       Label : ARGUMENT
-        n
+        e
         Label : ARGUMENTS
-          Arguments
+          )
           Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              'o'
-            Label : CONCAT
-              ->
-              Label : OBJECT
-                $p
-              Label : PROPERTY
-                q
-          Label : ARGUMENT
-            r
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                's'
-  Label : ELEMENT
-    T
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
+            ?
+            Label : CONDITION
+123098120398 [label="Reached level 15"]            Label : ELSE
+123098120398 [label="Reached level 15"]            Label : THEN
+123098120398 [label="Reached level 15"]        Label : NAME
+          e
       Label : ARGUMENT
-        u
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              'v'
-            Label : CONCAT
-              ->
-              Label : OBJECT
-                $w
-              Label : PROPERTY
-                x
-          Label : ARGUMENT
-            y
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                'z'
-          Label : ARGUMENT
-            array
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'aa'
-                Label : VALUE
-                  'ab'
+        'k'
+    Label : NAME
+      a
+  Label : RIGHT
+    'l'

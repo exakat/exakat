@@ -1,33 +1,15 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
+?>
+Label : ARGUMENT
+  ?
+  Label : CONDITION
+    empty
     Label : ARGUMENTS
-      
+      )
       Label : ARGUMENT
-        ?
-        Label : CONDITION
-          empty
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $a
-        Label : ELSE
-          'D'
-        Label : THEN
-          'B'
-  Label : ELEMENT
-    E
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      F
-    Label : SOURCE
-      $b
-    Label : VALUE
-      =>
-      Label : KEY
-        $c
-      Label : VALUE
-        $d
+        $a
+    Label : NAME
+      empty
+  Label : ELSE
+    'D'
+  Label : THEN
+    'B'

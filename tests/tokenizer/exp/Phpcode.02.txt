@@ -1,6 +1,10 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Phpcode.02.php
+Label : FILE
   ;
   Label : ELEMENT
-    3
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        3

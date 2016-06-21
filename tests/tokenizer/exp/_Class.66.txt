@@ -1,66 +1,13 @@
-<?php
-
-Label : CODE
-  ;
+class
+Label : BLOCK
+  {}
   Label : ELEMENT
-    class
-    Label : BLOCK
-      void
-    Label : EXTENDS
-      B
-    Label : IMPLEMENTS
-      C
-    Label : IMPLEMENTS
-      D
-    Label : NAME
-      A1
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      void
-    Label : EXTENDS
-      B
-    Label : IMPLEMENTS
-      C
-    Label : IMPLEMENTS
-      D
-    Label : IMPLEMENTS
-      E
-    Label : NAME
-      A2
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      void
-    Label : IMPLEMENTS
-      C
-    Label : IMPLEMENTS
-      D
-    Label : IMPLEMENTS
-      E
-    Label : IMPLEMENTS
-      F
-    Label : NAME
-      A3
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      void
-    Label : IMPLEMENTS
-      \
-      Label : SUBNAME
-        C
-    Label : IMPLEMENTS
-      \
-      Label : SUBNAME
-        D
-    Label : IMPLEMENTS
-      \
-      Label : SUBNAME
-        E
-    Label : IMPLEMENTS
-      \
-      Label : SUBNAME
-        F
-    Label : NAME
-      A4
+    Void
+Label : EXTENDS
+  B
+Label : IMPLEMENTS
+  C
+Label : IMPLEMENTS
+  D
+Label : NAME
+  A1

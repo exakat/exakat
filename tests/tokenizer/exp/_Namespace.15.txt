@@ -1,0 +1,21 @@
+./tests/tokenizer/source/_Namespace.15.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php 
+    Label : CODE
+      ;
+      Label : ELEMENT
+        namespace
+        Label : BLOCK
+          
+          Label : ELEMENT
+            trait
+            Label : BLOCK
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : NAME
+          \
+          Label : SUBNAME
+            A
+          Label : SUBNAME
+            B

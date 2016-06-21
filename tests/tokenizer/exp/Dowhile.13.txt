@@ -1,43 +1,15 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    do
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        while
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            ->
-            Label : METHOD
-              E
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  1
-            Label : OBJECT
-              $b
-        Label : CONDITION
-          ===
-          Label : LEFT
-            B
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'C'
-              Label : ARGUMENT
-                ->
-                Label : METHOD
-                  D
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      void
-                Label : OBJECT
-                  $a
-          Label : RIGHT
-            0
-    Label : CONDITION
-      $c
+)
+Label : ARGUMENT
+  'C'
+Label : ARGUMENT
+  ->
+  Label : CLASS
+    $a
+  Label : METHOD
+    D
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        Void
+    Label : NAME
+      D

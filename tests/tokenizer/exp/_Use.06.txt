@@ -1,42 +1,46 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Use.06.php
+Label : FILE
   ;
   Label : ELEMENT
-    use
-    Label : USE
-      \
-      Label : SUBNAME
-        A
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        C
-    Label : USE
-      \
-      Label : SUBNAME
-        D
-      Label : SUBNAME
-        E
-    Label : USE
-      \
-      Label : SUBNAME
-        Z
-      Label : SUBNAME
-        X
-    Label : USE
-      \
-      Label : SUBNAME
-        K
-    Label : USE
-      \
-      Label : SUBNAME
-        L
-    Label : USE
-      \
-      Label : SUBNAME
-        M
-    Label : USE
-      \
-      Label : SUBNAME
-        N
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            A
+          Label : SUBNAME
+            B
+          Label : SUBNAME
+            C
+        Label : USE
+          \
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            E
+        Label : USE
+          \
+          Label : SUBNAME
+            Z
+          Label : SUBNAME
+            X
+        Label : USE
+          \
+          Label : SUBNAME
+            K
+        Label : USE
+          \
+          Label : SUBNAME
+            L
+        Label : USE
+          \
+          Label : SUBNAME
+            M
+        Label : USE
+          \
+          Label : SUBNAME
+            N

@@ -1,20 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $j
-    Label : SOURCE
-      $a
-    Label : VALUE
-      [
-      Label : INDEX
-        3
-      Label : VARIABLE
-        $b
+]
+Label : INDEX
+  3
+Label : VARIABLE
+  $b

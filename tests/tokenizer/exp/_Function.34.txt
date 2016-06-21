@@ -1,48 +1,25 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $a
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $b
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $c
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $d
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $e
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $f
-    Label : BLOCK
-      void
-    Label : NAME
-      b
+)
+Label : ARGUMENT
+  $a
+  Label : TYPEHINT
+    CLASSE
+Label : ARGUMENT
+  $b
+  Label : TYPEHINT
+    CLASSE
+Label : ARGUMENT
+  $c
+  Label : TYPEHINT
+    CLASSE
+Label : ARGUMENT
+  $d
+  Label : TYPEHINT
+    CLASSE
+Label : ARGUMENT
+  $e
+  Label : TYPEHINT
+    CLASSE
+Label : ARGUMENT
+  $f
+  Label : TYPEHINT
+    CLASSE

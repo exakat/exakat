@@ -1,44 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        \
-        Label : SUBNAME
-          d
-        Label : SUBNAME
-          e
-        Label : SUBNAME
-          f
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      \
-      Label : SUBNAME
-        g
-      Label : SUBNAME
-        h
-      Label : SUBNAME
-        i
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      +
-      Label : LEFT
-        \
-        Label : SUBNAME
-          j
-        Label : SUBNAME
-          k
-        Label : SUBNAME
-          l
-      Label : RIGHT
-        1
++
+Label : LEFT
+  \
+  Label : SUBNAME
+    j
+    Label : SUBNAME
+      j
+  Label : SUBNAME
+    k
+  Label : SUBNAME
+    l
+Label : RIGHT
+  1

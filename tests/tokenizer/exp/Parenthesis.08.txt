@@ -1,26 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ::
-      Label : CLASS
-        x
-      Label : METHOD
-        b
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'c'
-          Label : ARGUMENT
-            3
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $a
-        Label : RIGHT
-          1
+)
+Label : ARGUMENT
+  'c'
+Label : ARGUMENT
+  3

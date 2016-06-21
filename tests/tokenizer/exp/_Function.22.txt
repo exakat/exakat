@@ -1,24 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $x
-        Label : RIGHT
-          null
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $y
-        Label : RIGHT
-          true
-    Label : BLOCK
-      void
-    Label : NAME
-      a
+)
+Label : ARGUMENT
+  =
+  Label : LEFT
+    $x
+  Label : RIGHT
+    null
+Label : ARGUMENT
+  =
+  Label : LEFT
+    $y
+  Label : RIGHT
+    true

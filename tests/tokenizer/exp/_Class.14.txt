@@ -1,24 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
-      Label : ELEMENT
-        const
-        Label : CONST
-          =
-          Label : LEFT
-            b
-          Label : RIGHT
-            2
-    Label : NAME
-      x
+=
+Label : LEFT
+  b
+Label : RIGHT
+  2

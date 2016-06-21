@@ -1,22 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      {
-      Label : INDEX
-        ++
-        Label : POSTPLUSPLUS
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            C
-      Label : VARIABLE
-        ->
-        Label : OBJECT
-          $this
-        Label : PROPERTY
-          B
+}
+Label : INDEX
+  ++
+  Label : PREPLUSPLUS
+    ->
+    Label : CLASS
+      $this
+    Label : PROPERTY
+      C
+Label : VARIABLE
+  B

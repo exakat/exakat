@@ -1,16 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      void
-    Label : SOURCE
-      =
-      Label : LEFT
-        $x
-      Label : RIGHT
-        $y
-    Label : VALUE
-      $z
+=
+Label : LEFT
+  $x
+Label : RIGHT
+  $y

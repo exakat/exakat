@@ -1,10 +1,18 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Trait.05.php
+Label : FILE
   ;
   Label : ELEMENT
-    trait
-    Label : BLOCK
-      void
-    Label : NAME
-      A
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        trait
+        Label : BLOCK
+          {}
+          Label : ELEMENT
+            Void
+        Label : NAME
+          A
+      Label : ELEMENT
+        Void

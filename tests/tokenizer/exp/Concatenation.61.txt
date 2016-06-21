@@ -1,40 +1,23 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
+)
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'B'
+  Label : VALUE
+    .
     Label : LEFT
-      $a
+      .
+      Label : LEFT
+        'C'
+      Label : RIGHT
+        new
+        Label : NEW
+          D
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            D
     Label : RIGHT
-      array
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'B'
-          Label : VALUE
-            Concatenation
-            Label : CONCAT
-              'C'
-            Label : CONCAT
-              new
-              Label : NEW
-                D
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'E'
-                  Label : ARGUMENT
-                    array
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'F'
-                        Label : VALUE
-                          $b
-            Label : CONCAT
-              'G'
+      'G'

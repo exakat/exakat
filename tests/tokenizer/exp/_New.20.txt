@@ -1,22 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    new
-    Label : NEW
-      static
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          ==
-          Label : LEFT
-            $c
-          Label : RIGHT
-            4
+)
+Label : ARGUMENT
+  1
+Label : ARGUMENT
+  2
+Label : ARGUMENT
+  3
+Label : ARGUMENT
+  ==
+  Label : LEFT
+    $c
+  Label : RIGHT
+    4

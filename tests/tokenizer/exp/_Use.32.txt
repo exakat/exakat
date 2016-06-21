@@ -1,15 +1,56 @@
-<?php 
-Label : CODE
+./tests/tokenizer/source/_Use.32.php
+Label : FILE
   ;
   Label : ELEMENT
-    use
-    Label : CONST
-      B
-  Label : ELEMENT
-    use
-    Label : FUNCTION
-      B
-  Label : ELEMENT
-    use
-    Label : USE
-      B
+    <?php 
+    Label : CODE
+      ;
+      Label : ELEMENT
+        use
+        Label : CONST
+          const
+        Label : USE
+          \
+          Label : GROUPUSE
+             { /**/ } 
+            Label : ELEMENT
+123098120398 [label="Reached level 15"]          Label : SUBNAME
+            FooLibrary
+          Label : SUBNAME
+            Bar
+          Label : SUBNAME
+            Baz
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        use
+        Label : FUNCTION
+          function
+        Label : USE
+          \
+          Label : GROUPUSE
+             { /**/ } 
+            Label : ELEMENT
+123098120398 [label="Reached level 15"]          Label : SUBNAME
+            FooLibrary
+          Label : SUBNAME
+            Bar
+          Label : SUBNAME
+            Baz
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : GROUPUSE
+             { /**/ } 
+            Label : ELEMENT
+123098120398 [label="Reached level 15"]          Label : SUBNAME
+            FooLibrary
+          Label : SUBNAME
+            Bar
+          Label : SUBNAME
+            Baz
+      Label : ELEMENT
+        Void

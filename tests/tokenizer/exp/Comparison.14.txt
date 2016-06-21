@@ -1,12 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    ==
-    Label : LEFT
-      !
-      Label : NOT
-        $x
-    Label : RIGHT
-      3
+==
+Label : LEFT
+  !
+  Label : NOT
+    $x
+Label : RIGHT
+  3

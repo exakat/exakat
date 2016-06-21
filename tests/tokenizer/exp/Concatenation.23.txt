@@ -1,34 +1,28 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          ->
-          Label : METHOD
+;
+Label : ARGUMENT
+  .
+  Label : LEFT
+    .
+    Label : LEFT
+      .
+      Label : LEFT
+        ->
+        Label : CLASS
+          $a
+        Label : METHOD
+          b
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
             b
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  d
-                Label : VARIABLE
-                  $c
-          Label : OBJECT
-            $a
-        Label : CONCAT
-          'e'
-        Label : CONCAT
-          [
-          Label : INDEX
-            'g'
-          Label : VARIABLE
-            $f
-        Label : CONCAT
-          'h'
+      Label : RIGHT
+        'e'
+    Label : RIGHT
+      ]
+      Label : INDEX
+        'g'
+      Label : VARIABLE
+        $f
+  Label : RIGHT
+    'h'

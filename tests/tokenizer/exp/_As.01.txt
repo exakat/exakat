@@ -1,33 +1,9 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        use
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            as
-            Label : AS
-              I
-            Label : NAME
-              ::
-              Label : CLASS
-                F
-              Label : CONSTANT
-                H
-        Label : USE
-          \
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            F
-    Label : EXTENDS
-      C
-    Label : NAME
-      B
+as
+Label : AS
+  I
+Label : NAME
+  ::
+  Label : CLASS
+    F
+  Label : CONSTANT
+    H

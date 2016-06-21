@@ -1,78 +1,19 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $f
-    Label : RIGHT
-      'f'
-  Label : ELEMENT
-    =
-    Label : LEFT
+)
+Label : ARGUMENT
+  print
+  Label : ARGUMENTS
+    $e
+    Label : ARGUMENT
       $e
-    Label : RIGHT
-      'e'
-  Label : ELEMENT
-    =
-    Label : LEFT
+  Label : NAME
+    print
+Label : ARGUMENT
+  $f
+Label : ARGUMENT
+  ltrim
+  Label : ARGUMENTS
+    )
+    Label : ARGUMENT
       $r
-    Label : RIGHT
-      'r'
-  Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $e
-      Label : ARGUMENT
-        $f
-      Label : ARGUMENT
-        ltrim
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $r
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $x
-      Label : ARGUMENT
-        $y
-      Label : ARGUMENT
-        $z
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $x
-          Label : ARGUMENT
-            $y
-          Label : ARGUMENT
-            $z
-    Label : NAME
-      f
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $a
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $b
-      Label : ARGUMENT
-        $c
+  Label : NAME
+    ltrim

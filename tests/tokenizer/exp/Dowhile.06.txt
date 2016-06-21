@@ -1,38 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    do
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $a
-        Label : RIGHT
-          ->
-          Label : METHOD
-            c
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $d
-              Label : ARGUMENT
-                $e
-          Label : OBJECT
-            $b
-    Label : CONDITION
-      !
-      Label : NOT
-        ->
-        Label : METHOD
-          g
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              ++
-              Label : PREPLUSPLUS
-                $h
-        Label : OBJECT
-          $f
+)
+Label : ARGUMENT
+  $d
+Label : ARGUMENT
+  $e

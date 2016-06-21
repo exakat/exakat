@@ -1,60 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CASE
-          1
-        Label : CODE
-          ;
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              throw
-              Label : THROW
-                new
-                Label : NEW
-                  \
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      'D'
-                  Label : SUBNAME
-                    C
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              throw
-              Label : THROW
-                new
-                Label : NEW
-                  \
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      'D'
-                  Label : SUBNAME
-                    C
-    Label : NAME
-      >>
-      Label : LEFT
-        B
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              $b
-            Label : VARIABLE
-              $a
-      Label : RIGHT
-        0
+)
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    $b
+  Label : VARIABLE
+    $a

@@ -1,72 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : LEFT
-            $bar
-          Label : RIGHT
-            'Nar'
-        Label : STATIC
-          static
-    Label : NAME
+;
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    ::
+    Label : CLASS
       Foo
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        static
-        Label : DEFINE
-          =
-          Label : LEFT
-            $e
-          Label : RIGHT
-            'yes'
-        Label : STATIC
-          static
-    Label : NAME
-      Nar
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          ::
-          Label : CLASS
-            Foo
-          Label : PROPERTY
-            $bar
-        Label : PROPERTY
-          $e
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          ::
-          Label : CLASS
-            ::
-            Label : CLASS
-              ::
-              Label : CLASS
-                Foo
-              Label : PROPERTY
-                $bar
-            Label : PROPERTY
-              $e
-          Label : PROPERTY
-            $f
-        Label : PROPERTY
-          $g
+    Label : PROPERTY
+      $bar
+  Label : PROPERTY
+    $e

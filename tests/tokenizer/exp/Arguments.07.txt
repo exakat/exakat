@@ -1,18 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        'x'
-      Label : ARGUMENT
-        3
-  Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        x
+)
+Label : ARGUMENT
+  'x'
+Label : ARGUMENT
+  3

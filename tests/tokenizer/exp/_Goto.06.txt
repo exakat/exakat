@@ -1,12 +1,16 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Goto.06.php
+Label : FILE
   ;
   Label : ELEMENT
-    :
-    Label : LABEL
-      cleanupCookie
-  Label : ELEMENT
-    GOTO
-    Label : LABEL
-      cleanupCookie
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        :
+        Label : LABEL
+          cleanupCookie
+      Label : ELEMENT
+        GOTO
+        Label : GOTO
+          cleanupCookie

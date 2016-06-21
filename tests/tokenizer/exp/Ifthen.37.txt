@@ -1,72 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CASE
-          'b'
-        Label : CODE
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              $c
-            Label : ELSE
-              elseif
-              Label : CONDITION
-                empty
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'h'
-                    Label : VARIABLE
-                      $g
-              Label : THEN
-                void
-            Label : THEN
-              ;
-              Label : ELEMENT
-                $e
-          Label : ELEMENT
-            require_once
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                a
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    'b'
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              $h
-            Label : THEN
-              void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              $g
-            Label : THEN
-              void
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            return
-            Label : RETURN
-              false
-    Label : NAME
-      $a
+)
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    'h'
+  Label : VARIABLE
+    $g

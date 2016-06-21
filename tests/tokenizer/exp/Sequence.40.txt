@@ -1,20 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        @
-        Label : AT
-          $b
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          3
+=
+Label : LEFT
+  $c
+Label : RIGHT
+  3

@@ -1,28 +1,21 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
+)
+Label : ARGUMENT
+  .
+  Label : LEFT
+    .
     Label : LEFT
-      $fp
+      .
+      Label : LEFT
+        'a'
+      Label : RIGHT
+        $b
     Label : RIGHT
-      fopen
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'a'
-          Label : CONCAT
-            $b
-          Label : CONCAT
-            'c'
-          Label : CONCAT
-            ->
-            Label : OBJECT
-              $d
-            Label : PROPERTY
-              e
-        Label : ARGUMENT
-          'f'
+      'c'
+  Label : RIGHT
+    ->
+    Label : CLASS
+      $d
+    Label : PROPERTY
+      e
+Label : ARGUMENT
+  'f'

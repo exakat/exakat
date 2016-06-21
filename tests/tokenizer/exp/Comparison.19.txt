@@ -1,42 +1,21 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      >
-      Label : LEFT
-        [
-        Label : INDEX
-          'b'
-        Label : VARIABLE
-          $a
-      Label : RIGHT
-        -
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $c
-          Label : PROPERTY
-            d
-        Label : RIGHT
-          *
-          Label : LEFT
-            [
-            Label : INDEX
-              'g'
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $e
-              Label : PROPERTY
-                f
-          Label : RIGHT
-            1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          I
+-
+Label : LEFT
+  ->
+  Label : CLASS
+    $c
+  Label : PROPERTY
+    d
+Label : RIGHT
+  *
+  Label : LEFT
+    ->
+    Label : CLASS
+      $e
+    Label : PROPERTY
+      ]
+      Label : INDEX
+        'g'
+      Label : VARIABLE
+        f
+  Label : RIGHT
+    1

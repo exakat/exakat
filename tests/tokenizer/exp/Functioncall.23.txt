@@ -1,18 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    unset
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $x
-  Label : ELEMENT
-    unset
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $a
-      Label : ARGUMENT
-        $b
+)
+Label : ARGUMENT
+  $x

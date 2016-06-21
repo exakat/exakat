@@ -1,16 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $a
-    Label : THEN
-      void
-  Label : ELEMENT
-    __halt_compiler
-  Label : ELEMENT
-    
-
-?>
+)
+Label : ARGUMENT
+  (
+  Label : CODE
+    Void

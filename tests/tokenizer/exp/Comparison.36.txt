@@ -1,23 +1,5 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ===
-      Label : LEFT
-        false
-      Label : RIGHT
-        include_once
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            (
-            Label : CODE
-              $b
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
+)
+Label : ARGUMENT
+  $b
+  Label : CODE
+    $b

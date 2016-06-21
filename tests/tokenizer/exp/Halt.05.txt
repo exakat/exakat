@@ -1,22 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    try
-    Label : CATCH
-      catch
-      Label : CLASS
-        Exception
-      Label : CODE
-        void
-      Label : VARIABLE
-        $e
-    Label : CODE
-      void
-  Label : ELEMENT
-    __halt_compiler
-  Label : ELEMENT
-    
-
-?>
+)
+Label : ARGUMENT
+  (
+  Label : CODE
+    Void

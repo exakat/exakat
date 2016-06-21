@@ -1,12 +1,18 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Namespace.02.php
+Label : FILE
   ;
   Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        A
-      Label : SUBNAME
-        B
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        namespace
+        Label : BLOCK
+          
+        Label : NAME
+          \
+          Label : SUBNAME
+            A
+          Label : SUBNAME
+            B

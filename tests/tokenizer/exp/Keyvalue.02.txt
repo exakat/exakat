@@ -1,100 +1,97 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      array
+)
+Label : ARGUMENT
+  =>
+  Label : KEY
+    ->
+    Label : CLASS
+      $a
+    Label : PROPERTY
+      b
+  Label : VALUE
+    ->
+    Label : CLASS
+      $c
+    Label : PROPERTY
+      d
+Label : ARGUMENT
+  =>
+  Label : KEY
+    ->
+    Label : CLASS
+      $e
+    Label : METHOD
+      f
       Label : ARGUMENTS
-        Arguments
+        (
         Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              b
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              d
+          Void
+      Label : NAME
+        f
+  Label : VALUE
+    ->
+    Label : CLASS
+      $g
+    Label : METHOD
+      h
+      Label : ARGUMENTS
+        (
         Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $e
-          Label : VALUE
-            ->
-            Label : METHOD
-              h
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $g
+          Void
+      Label : NAME
+        h
+Label : ARGUMENT
+  =>
+  Label : KEY
+    ::
+    Label : CLASS
+      I
+    Label : CONSTANT
+      J
+  Label : VALUE
+    ::
+    Label : CLASS
+      K
+    Label : CONSTANT
+      L
+Label : ARGUMENT
+  =>
+  Label : KEY
+    ::
+    Label : CLASS
+      M
+    Label : METHOD
+      N
+      Label : ARGUMENTS
+        (
         Label : ARGUMENT
-          =>
-          Label : KEY
-            ::
-            Label : CLASS
-              I
-            Label : CONSTANT
-              J
-          Label : VALUE
-            ::
-            Label : CLASS
-              K
-            Label : CONSTANT
-              L
+          Void
+      Label : NAME
+        N
+  Label : VALUE
+    ::
+    Label : CLASS
+      O
+    Label : METHOD
+      P
+      Label : ARGUMENTS
+        (
         Label : ARGUMENT
-          =>
-          Label : KEY
-            ::
-            Label : CLASS
-              M
-            Label : METHOD
-              N
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-          Label : VALUE
-            ::
-            Label : CLASS
-              O
-            Label : METHOD
-              P
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ::
-            Label : CLASS
-              Q
-            Label : PROPERTY
-              $r
-          Label : VALUE
-            ::
-            Label : CLASS
-              S
-            Label : PROPERTY
-              $t
-        Label : ARGUMENT
-          void
+          Void
+      Label : NAME
+        P
+Label : ARGUMENT
+  =>
+  Label : KEY
+    ::
+    Label : CLASS
+      Q
+    Label : PROPERTY
+      $r
+  Label : VALUE
+    ::
+    Label : CLASS
+      S
+    Label : PROPERTY
+      $t
+Label : ARGUMENT
+  Void

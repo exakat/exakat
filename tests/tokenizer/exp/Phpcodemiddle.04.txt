@@ -1,25 +1,7 @@
-;
-Label : ELEMENT
-  void
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    Arguments
-    Label : ARGUMENT
-      [
-      Label : INDEX
-        'I'
-      Label : VARIABLE
-        $d
-    Label : ARGUMENT
-      K
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          [
-          Label : INDEX
-            'L'
-          Label : VARIABLE
-            $d
-Label : ELEMENT
-  void
+)
+Label : ARGUMENT
+  ]
+  Label : INDEX
+    'I'
+  Label : VARIABLE
+    $d

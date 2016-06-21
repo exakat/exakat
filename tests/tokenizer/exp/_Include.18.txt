@@ -1,44 +1,33 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
+)
+Label : ARGUMENT
+  .
+  Label : LEFT
+    include
+    Label : ARGUMENTS
+      E
+      Label : ARGUMENT
+        E
+    Label : NAME
+      include
+  Label : RIGHT
+    'F'
+Label : ARGUMENT
+  .
+  Label : LEFT
+    .
     Label : LEFT
-      ::
-      Label : CLASS
-        B
-      Label : PROPERTY
-        $a
-    Label : RIGHT
-      ::
-      Label : CLASS
-        C
-      Label : METHOD
-        D
+      .
+      Label : LEFT
+        include
         Label : ARGUMENTS
-          Arguments
+          G
           Label : ARGUMENT
-            include
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  E
-                Label : CONCAT
-                  'F'
-          Label : ARGUMENT
-            include
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  G
-                Label : CONCAT
-                  'H'
-                Label : CONCAT
-                  $b
-                Label : CONCAT
-                  'I'
+            G
+        Label : NAME
+          include
+      Label : RIGHT
+        'H'
+    Label : RIGHT
+      $b
+  Label : RIGHT
+    'I'

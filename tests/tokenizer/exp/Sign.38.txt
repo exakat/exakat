@@ -1,73 +1,55 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
++
+Label : LEFT
+  *
+  Label : LEFT
+    sin
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      sin
+  Label : RIGHT
+    sin
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      sin
+Label : RIGHT
+  *
+  Label : LEFT
+    *
     Label : LEFT
-      $z
+      cos
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          $c
+      Label : NAME
+        cos
     Label : RIGHT
-      +
-      Label : LEFT
-        *
-        Label : LEFT
-          sin
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $a
-        Label : RIGHT
-          sin
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $b
-      Label : RIGHT
-        *
-        Label : LEFT
-          *
-          Label : LEFT
-            cos
+      cos
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          $d
+      Label : NAME
+        cos
+  Label : RIGHT
+    cos
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        deg2rad
+        Label : ARGUMENTS
+          )
+          Label : ARGUMENT
+            abs
             Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                $c
-          Label : RIGHT
-            cos
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                $d
-        Label : RIGHT
-          cos
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              deg2rad
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  abs
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      -
-                      Label : LEFT
-                        ->
-                        Label : METHOD
-                          d
-                          Label : ARGUMENTS
-                            
-                            Label : ARGUMENT
-                              void
-                        Label : OBJECT
-                          $c
-                      Label : RIGHT
-                        ->
-                        Label : METHOD
-                          getX
-                          Label : ARGUMENTS
-                            
-                            Label : ARGUMENT
-                              void
-                        Label : OBJECT
-                          $e
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : NAME
+          deg2rad
+    Label : NAME
+      cos

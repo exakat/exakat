@@ -1,54 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
+-
+Label : LEFT
+  .
+  Label : LEFT
+    '+'
+  Label : RIGHT
+    ->
+    Label : CLASS
       $d
-    Label : RIGHT
-      new
-      Label : NEW
-        stdclass
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-  Label : ELEMENT
-    =
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $d
-      Label : PROPERTY
-        e
-    Label : RIGHT
-      '8'
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        -
-        Label : LEFT
-          Concatenation
-          Label : CONCAT
-            '+'
-          Label : CONCAT
-            ->
-            Label : OBJECT
-              $d
-            Label : PROPERTY
-              e
-        Label : RIGHT
-          1
-      Label : CONCAT
-        ' r'
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $a
+    Label : PROPERTY
+      e
+Label : RIGHT
+  1

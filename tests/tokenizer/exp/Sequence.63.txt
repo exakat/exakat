@@ -1,21 +1,5 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ?
-      Label : CONDITION
-        $a
-      Label : ELSE
-        true
-      Label : THEN
-        (int)
-        Label : CAST
-          (
-          Label : CODE
-            [
-            Label : INDEX
-              'c'
-            Label : VARIABLE
-              $b
+]
+Label : INDEX
+  'c'
+Label : VARIABLE
+  $b

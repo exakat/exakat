@@ -1,52 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
+$b
+Label : ARGUMENT
+  .
+  Label : LEFT
+    ++
+    Label : PREPLUSPLUS
       $a
-    Label : RIGHT
-      1
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $b
-    Label : RIGHT
-      2
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          ++
-          Label : POSTPLUSPLUS
-            $a
-        Label : CONCAT
-          $b
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          $a
-        Label : CONCAT
-          ++
-          Label : POSTPLUSPLUS
-            $b
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "\n"
+  Label : RIGHT
+    $b

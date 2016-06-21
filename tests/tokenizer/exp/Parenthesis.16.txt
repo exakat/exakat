@@ -1,34 +1,23 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
-            require_once
+)
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'a'
+  Label : VALUE
+    require_once
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        'c'
+        Label : CODE
+          .
+          Label : LEFT
+            b
             Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  Concatenation
-                  Label : CONCAT
-                    b
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        __FILE__
-                  Label : CONCAT
-                    'c'
-        Label : ARGUMENT
-          void
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]          Label : RIGHT
+            'c'
+    Label : NAME
+      require_once
+Label : ARGUMENT
+  Void

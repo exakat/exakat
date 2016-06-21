@@ -1,24 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            '1'
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            2
+print
+Label : ARGUMENT
+  Void

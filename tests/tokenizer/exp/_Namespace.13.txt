@@ -1,13 +1,17 @@
-<?php 
-Label : CODE
-  namespace
-  Label : BLOCK
-    Sequence
-    Label : ELEMENT
-      interface
-      Label : BLOCK
-        void
-      Label : NAME
-        C
-  Label : NAMESPACE
-    A
+./tests/tokenizer/source/_Namespace.13.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php 
+    Label : CODE
+      ;
+      Label : ELEMENT
+        namespace
+        Label : BLOCK
+          
+          Label : ELEMENT
+            interface
+            Label : BLOCK
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : NAME
+          A
