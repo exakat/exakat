@@ -88,7 +88,6 @@ abstract class Analyzer {
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
         $this->analyzerInBase = str_replace('\\', '/', str_replace('Analyzer\\', '', $this->analyzer));
-//        $this->analyzerIsNot($this->analyzer);
 
         $this->code = $this->analyzer;
         
@@ -98,6 +97,8 @@ abstract class Analyzer {
         $this->apply->setAnalyzer($this->analyzer);
         
         $this->description = new \Description($this->analyzer);
+        
+        $this->_as('first');
     }
     
     public function __destruct() {
@@ -379,21 +380,13 @@ abstract class Analyzer {
     }
 
     public function tokenIs($atom) {
-        if (is_array($atom)) {
-            $this->addMethod('has("token", within(***))', $atom);
-        } else {
-            $this->addMethod('has("token", ***)', $atom);
-        }
+        $this->addMethod('has("token", within('.$this->SorA($atom).'))');
         
         return $this;
     }
 
     public function tokenIsNot($atom) {
-        if (is_array($atom)) {
-            $this->addMethod('not(has("token", within(***)))', $atom);
-        } else {
-            $this->addMethod('not(has("token", ***))', $atom);
-        }
+        $this->addMethod('not(has("token", within('.$this->SorA($atom).')))');
         
         return $this;
     }
@@ -429,8 +422,7 @@ abstract class Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))
-             ->fullnspath($this->makeFullNsPath($fullnspath));
-             //'T_OPEN_BRACKET', 'T_VARIABLE' are dynamic
+             ->fullnspathIs($this->makeFullNsPath($fullnspath));
 
         return $this;
     }
@@ -570,37 +562,31 @@ GREMLIN;
     public function analyzerIs($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = self::getClass($analyzer);
+                $a = str_replace('\\', '\\\\', self::getClass($analyzer));
             }
             unset($a);
-            $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any()}', $analyzer);
+        } elseif ($analyzer == 'self') {
+            $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         } else {
-            if ($analyzer == 'self') {
-                $analyzer = $this->analyzer;
-            } else {
-                $analyzer = self::getClass($analyzer);
-            }
-            $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any()}', $analyzer);
+            $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
         }
-        
+        $this->addMethod('where( __.in("ANALYZED").has("code", '.$this->SorA($analyzer).').count().is(neq(0)) )');
+
         return $this;
     }
 
     public function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = self::getClass($analyzer);
+                $a = str_replace('\\', '\\\\', self::getClass($analyzer));
             }
             unset($a);
-            $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any() == false}', $analyzer);
+        } elseif ($analyzer == 'self') {
+            $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         } else {
-            if ($analyzer == 'self') {
-                $analyzer = $this->analyzer;
-            } else {
-                $analyzer = self::getClass($analyzer);
-            }
-            $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any() == false}', $analyzer);
+            $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
         }
+        $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(eq(0)) )');
 
         return $this;
     }
@@ -616,7 +602,7 @@ GREMLIN;
             $this->addMethod('has("'.$property.'", '.$value.')');
         } else {
             // $value is an array
-            $this->addMethod('has("'.$property.'", within(***))', $value);
+            $this->addMethod('has("'.$property.'", within('.$this->SorA($value).'))');
         }
 
         return $this;
@@ -632,7 +618,7 @@ GREMLIN;
         } elseif (is_int($value)) {
             $this->addMethod('not(has("'.$property.'", '.$value.'))');
         } else {
-            $this->addMethod('not(has("'.$property.'", within(***)))', $value);
+            $this->addMethod('not(has("'.$property.'", within('.$this->SorA($value).')))');
         }
         
         return $this;
@@ -965,15 +951,15 @@ GREMLIN
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("transform{ a = it; while (a.out('".implode("', '", $edgeName)."').any()) { a = a.out('".implode("', '", $edgeName)."').next(); }; a;}");
+            $this->addMethod("until(__.outE('".implode("', '", $edgeName)."').count().is(eq(0))).repeat(out('".implode("', '", $edgeName)."'))");
         } else {
-            $this->addMethod("transform{ a = it; while (a.out('$edgeName').any()) { a = a.out('$edgeName').next(); };  a;}", $edgeName);
+            $this->addMethod("until(__.outE('".$edgeName."').count().is(eq(0))).repeat(out('".$edgeName."'))");
         }
         
         return $this;
     }
 
-    public function outIsnt($edgeName) {
+    public function outIsNot($edgeName) {
         if (is_array($edgeName)) {
             $this->addMethod("filter{ it.out('".implode("', '", $edgeName)."').count() == 0}");
         } else {
@@ -1061,21 +1047,16 @@ GREMLIN
     // follows a link if it is there (and do nothing otherwise)
     protected function inIsIE($edgeName) {
         if (is_array($edgeName)) {
-            $edgeNames = "'" . join("', '", $edgeName)."'";
-            $this->addMethod("transform{ a = it; while (a.in($edgeNames).any()) { a = a.in($edgeNames).next(); };  a;}", $edgeName);
+            $this->addMethod("until(__.inE('".implode("', '", $edgeName)."').count().is(eq(0))).repeat(in('".implode("', '", $edgeName)."'))");
         } else {
-            $this->addMethod("transform{ a = it; while (a.in('$edgeName').any()) { a = a.in('$edgeName').next(); };  a;}", $edgeName);
+            $this->addMethod("until(__.inE('".$edgeName."').count().is(eq(0))).repeat(inE('".$edgeName."'))");
         }
         
         return $this;
     }
 
-    public function inIsnot($edgeName) {
-        if (is_array($edgeName)) {
-            $this->addMethod('filter{ it.inE.filter{ it.label in ***}.any() == false}', $edgeName);
-        } else {
-            $this->addMethod('filter{ it.in(***).any() == false}', $edgeName);
-        }
+    public function inIsNot($edgeName) {
+        $this->addMethod('where( __.inE('.$this->SorA($edgeName).').count().is(eq(0)))');
         
         return $this;
     }
@@ -1706,7 +1687,7 @@ GREMLIN
         $this->prepareQuery();
         
         foreach($this->queries as $id => $query) {
-            echo $id, ")\n", print_r($query, true), print_r($this->queriesArguments[$id], true);
+            echo $id, ")\n", print_r($query, true), print_r($this->queriesArguments[$id], true), "\n";
 
             krsort($this->queriesArguments[$id]);
             
@@ -1731,28 +1712,13 @@ GREMLIN
         // @doc This is when the object is a placeholder for others.
         if (count($this->methods) <= 1) { return true; }
         
-        array_splice($this->methods, 1, 0, array('as("first")'));
-        
-        if (substr($this->methods[0], 0, 9) == 'hasLabel(') {
+        if (substr($this->methods[1], 0, 9) == 'hasLabel(') {
             $first = array_shift($this->methods);
             $query = implode('.', $this->methods);
             $query = 'g.V().'.$first.'.groupCount("processed").by(count()).'.$query;
-            unset($this->methods[0]);
-        } elseif ($this->methods[0] == 'filter{ it.in("ANALYZED").has("code", arg1).any()}') {
-            $query = implode('.', $this->methods);
-            $query = "g.idx('analyzers')[['analyzer':'".str_replace('\\', '\\\\', $this->arguments['arg1'])."']].out.sideEffect{processed++;}.{$query}";
-        } elseif ($this->methods[0] == 'filter{it.atom in arg1}') {
-            $q = "z = [];\n";
-            foreach($this->arguments['arg1'] as $arg) {
-                $q .= 'g.idx("atoms")[["atom":"'.$arg.'"]].fill(z);'."\n";
-            }
-
             unset($this->methods[1]);
-            unset($this->arguments['arg1']);
-
-            $query = $q.'z._().sideEffect{processed++;}.'.implode('.', $this->methods);
         } else {
-            throw new \Exception('No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[0]);
+            die('No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);
         }
         
         // search what ? All ?
@@ -1761,16 +1727,16 @@ GREMLIN
 {$query}
 GREMLIN;
         
-//        $query .= $this->apply->getGremlin();
         $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")';
-//        $query .= ";\n['processed':processed, 'total':total]";
+
     // initializing a new query
         $this->queries[] = $query;
         $this->queriesArguments[] = $this->arguments;
 
         $this->methods = array();
+        $this->addMethod('as("first")');
+
         $this->arguments = array();
-//        $this->analyzerIsNot($this->analyzer);
         
         return true;
     }
@@ -1783,14 +1749,10 @@ GREMLIN;
             $r = $this->query($query, $this->queriesArguments[$id]);
             ++$this->queryCount;
 
-            if (isset($r[0]->processed)) {
+            if (isset($r[0]->processed->{1})) {
                 $this->processedCount += $r[0]->processed->{1};
                 $this->rowCount += $r[0]->total->{1} ?? 0;
-            } else {
-                echo __METHOD__, "\n",
-                     $query, "\n",
-                     "No result from this query\n";
-            } // else means that it is not set, so it's 0. No need for an operation.
+            } 
         }
 
         // reset for the next
@@ -2078,5 +2040,14 @@ GREMLIN;
         
         return $this;
     }
+    
+    private function SorA($v) {
+        if (is_array($v)) {
+            return '"'.implode('", "', $v).'"';
+        } else {
+            return '"'.$v.'"';
+        }
+    }
+
 }
 ?>
