@@ -690,109 +690,29 @@ GREMLIN;
     }
 
     public function codeIs($code, $caseSensitive = false) {
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($code)) {
-            $this->addMethod('filter{ it.get().value("code")'.$caseSensitive.' in ***; }', $code);
-        } else {
-            $this->addMethod('filter{it.get().value("code")'.$caseSensitive.' == ***}', $code);
-        }
-        
-        return $this;
+        return $this->propertyIs('code', $code, $caseSensitive);
     }
 
     public function codeIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-
-        if (is_array($code)) {
-            $this->addMethod('filter{ !(it.get().value("code")'.$caseSensitive.' in ***); }', $code);
-        } else {
-            $this->addMethod('filter{it.get().value("code")'.$caseSensitive.' != ***}', $code);
-        }
-        
-        return $this;
+        return $this->propertyIsNot('code', $code, $caseSensitive);
     }
 
-    public function noDelimiter($code, $caseSensitive = false) {
+    public function noDelimiterIs($code, $caseSensitive = false) {
         $this->addMethod('has("atom", "String")', $code);
-
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($code)) {
-            $this->addMethod('filter{it.noDelimiter'.$caseSensitive.' in ***}', $code);
-        } else {
-            $this->addMethod('filter{it.noDelimiter'.$caseSensitive.' == ***}', $code);
-        }
-        
-        return $this;
+        return $this->propertyIs('noDelimiter', $code, $caseSensitive);
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = false) {
         $this->addMethod('has("atom", "String")', $code);
-
-        if ($caseSensitive === false) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($code)) {
-            $this->addMethod('filter{!(it.noDelimiter'.$caseSensitive.' in ***)}', $code);
-        } else {
-            $this->addMethod('filter{it.noDelimiter'.$caseSensitive.' != ***}', $code);
-        }
-        
-        return $this;
+        return $this->propertyIsNot('noDelimiter', $code, $caseSensitive);
     }
 
-    public function fullnspath($code, $caseSensitive = false) {
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($code)) {
-            $this->addMethod('filter{it.fullnspath'.$caseSensitive.' in ***}', $code);
-        } else {
-            $this->addMethod('filter{it.fullnspath'.$caseSensitive.' == ***}', $code);
-        }
-        
-        return $this;
+    public function fullnspathIs($code, $caseSensitive = false) {
+        return $this->propertyIs('fullnspath', $code, $caseSensitive);
     }
 
     public function fullnspathIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($code)) {
-            $this->addMethod('filter{!(it.fullnspath'.$caseSensitive.' in ***)}', $code);
-        } else {
-            $this->addMethod('filter{it.fullnspath'.$caseSensitive.' != ***}', $code);
-        }
-        
-        return $this;
+        return $this->propertyIsNot('fullnspath', $code, $caseSensitive);
     }
     
     public function codeIsPositiveInteger() {
@@ -2123,6 +2043,40 @@ GREMLIN;
     public static function makeBaseName($className) {
         // A/B to Analyzer\\\\A\\\\B
         return 'Analyzer\\\\'.str_replace('/', '\\\\', $className);
+    }
+
+    private function propertyIs($property, $code, $caseSensitive = false) {
+        if ($caseSensitive === true) {
+            $caseSensitive = '';
+        } else {
+            $this->tolowercase($code);
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        if (is_array($code)) {
+            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', $code);
+        } else {
+            $this->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', $code);
+        }
+        
+        return $this;
+    }
+
+    private function propertyIsNot($property, $code, $caseSensitive = false) {
+            if ($caseSensitive === true) {
+            $caseSensitive = '';
+        } else {
+            $this->tolowercase($code);
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        if (is_array($code)) {
+            $this->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in ***); }', $code);
+        } else {
+            $this->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' != ***}', $code);
+        }
+        
+        return $this;
     }
 }
 ?>
