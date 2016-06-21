@@ -27,10 +27,18 @@ use Analyzer;
 
 class DynamicCode extends Analyzer\Analyzer {
     public function analyze() {
+
         // $$v
         $this->atomIs('Variable')
              ->outIs('NAME')
              ->tokenIsNot('T_STRING')
+             ->back('first');
+        $this->prepareQuery();
+
+        // $o->$p
+        $this->atomIs('Property')
+             ->outIs('PROPERTY')
+             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
              ->back('first');
         $this->prepareQuery();
 
@@ -41,7 +49,7 @@ class DynamicCode extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        //$classname::$methodcall();
+        //$classname::methodcall();
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
@@ -49,8 +57,11 @@ class DynamicCode extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        //classname::$methodcall();
         $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self') // Avoid double take with previous one 
              ->outIs('METHOD')
+             ->outIs('NAME')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
              ->back('first');
         $this->prepareQuery();
@@ -59,6 +70,7 @@ class DynamicCode extends Analyzer\Analyzer {
         //new $classname(); (also done here)
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
+             ->outIs('NAME')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_ISSET', 'T_ARRAY', 'T_EMPTY', 'T_LIST', 'T_UNSET', 'T_ARRAY', 'T_OPEN_BRACKET', 'T_ECHO', 'T_PRINT', 'T_EXIT'))
              ->back('first');
         $this->prepareQuery();
