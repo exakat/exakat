@@ -210,7 +210,7 @@ class Load extends Tasks {
     const PROP_NODELIMITER = ['String'];
     const PROP_HEREDOC     = ['Heredoc'];
     const PROP_COUNT       = ['Sequence', 'Arguments'];
-    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier'];
+    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname'];
     const PROP_ABSOLUTE    = ['Nsname'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
@@ -1222,8 +1222,9 @@ class Load extends Tasks {
 
     private function processNsnameAbsolute() {
         $id = $this->processNsname();
-        $this->setAtom($id, ['absolute' => true]);
-        print "Absolute at $id\n";
+
+        $this->setAtom($id, ['absolute'   => true,
+                             'fullnspath' => $this->getFullnspath($id)]);
         return $id;
     }
 
@@ -1267,6 +1268,7 @@ class Load extends Tasks {
               'token'    => $this->getToken($this->tokens[$current][0]),
               'absolute' => $absolute];
         $this->setAtom($nsnameId, $x);
+        $this->setAtom($nsnameId, ['fullcode' => $this->getFullnspath($nsnameId)]);
 
         $this->pushExpression($nsnameId);
 
@@ -1360,11 +1362,12 @@ class Load extends Tasks {
     private function processNextAsIdentifier() {
         ++$this->id;
         $id = $this->addAtom('Identifier');
-        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
-                             'fullcode' => $this->tokens[$this->id][1],
-                             'line'     => $this->tokens[$this->id][2],
-                             'token'    => $this->getToken($this->tokens[$this->id][0]),
-                             'absolute' => false]);
+        $this->setAtom($id, ['code'       => $this->tokens[$this->id][1], 
+                             'fullcode'   => $this->tokens[$this->id][1],
+                             'line'       => $this->tokens[$this->id][2],
+                             'token'      => $this->getToken($this->tokens[$this->id][0]),
+                             'absolute'   => false]);
+        $this->setAtom($id, ['fullnspath' => $this->getFullnspath($id)]);
         
         return $id;
     }
@@ -1503,7 +1506,8 @@ class Load extends Tasks {
                              'fullcode' => $this->tokens[$this->id][1],
                              'line'     => $this->tokens[$this->id][2],
                              'token'    => $this->getToken($this->tokens[$this->id][0]),
-                             'absolute' => false ]);
+                             'absolute' => false]);
+        $this->setAtom($id, ['fullnspath' => $this->getFullnspath($id) ]);
         
         if ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
             $this->pushExpression($id);
