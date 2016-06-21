@@ -1101,9 +1101,9 @@ GREMLIN
     
     public function hasNoIn($edgeName) {
         if (is_array($edgeName)) {
-             $this->addMethod('where( in(\''.join("', '", $edgeName).'\').count().is(eq(0)) )', $edgeName);
+             $this->addMethod('where( __.in(\''.join("', '", $edgeName).'\').count().is(eq(0)) )', $edgeName);
         } else {
-             $this->addMethod('where( in(\''.$edgeName.'\').count().is(eq(0)) )', $edgeName);
+             $this->addMethod('where( __.in(\''.$edgeName.'\').count().is(eq(0)) )', $edgeName);
         }
         
         return $this;
