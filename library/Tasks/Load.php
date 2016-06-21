@@ -1492,7 +1492,13 @@ class Load extends Tasks {
     }
     
     private function processString() {
-        $id = $this->addAtom('Identifier');
+        if (strtolower($this->tokens[$this->id][1]) == 'null' ) {
+            $id = $this->addAtom('Null');
+        } elseif (in_array(strtolower($this->tokens[$this->id][1]), ['true', 'false'])) {
+            $id = $this->addAtom('Boolean');
+        } else {
+            $id = $this->addAtom('Identifier');
+        }
         $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
                              'fullcode' => $this->tokens[$this->id][1],
                              'line'     => $this->tokens[$this->id][2],
@@ -1520,7 +1526,7 @@ class Load extends Tasks {
         $this->pushExpression($id);
 
         // For functions and constants 
-        return $this->processFCOA($id, false);
+        return $this->processFCOA($id);
     }
 
     private function processPlusplus() {
@@ -2524,7 +2530,7 @@ class Load extends Tasks {
         return $this->processFCOA($variableId);
     }
     
-    private function processFCOA($id, $alsoCurly = true) {
+    private function processFCOA($id) {
         // For functions and constants 
         if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
@@ -2532,8 +2538,7 @@ class Load extends Tasks {
                   $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
             return $this->processAppend();
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
-                  ($alsoCurly &&
-                  $this->tokens[$this->id + 1][0] === T_OPEN_CURLY)) {
+                  $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             return $this->processBracket();
         } else {
             return $id;
@@ -2957,7 +2962,7 @@ class Load extends Tasks {
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
             $staticId = $this->addAtom('Methodcall');
             $links = 'METHOD';
-        }  else {
+        } else {
             die("Unprocessed atom in object call (right) : ".$this->atoms[$right]['atom']."\n");
         }
 
@@ -2972,6 +2977,8 @@ class Load extends Tasks {
 
         $this->setAtom($staticId, $x);
         $this->pushExpression($staticId);
+        
+        return $staticId;
     }    
     
 
@@ -3190,7 +3197,7 @@ class Load extends Tasks {
             foreach($this->expressions as $atomId) {
                 print_r($this->atoms[$atomId]);
             }
-            die();
+//            die();
         }
     
         // All node has one incoming or one outgoing link (outgoing or incoming).
@@ -3247,7 +3254,7 @@ class Load extends Tasks {
         }
         if ($total > 0) {
             print $total." errors found\n";
-            die();
+//            die();
         }
         
     }
