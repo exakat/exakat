@@ -127,7 +127,6 @@ class Config {
                                  );
 
         private static $COMMANDS = array('analyze'       => 1, 
-                                         'build_root'    => 1, 
                                          'constantes'    => 1, 
                                          'clean'         => 1, 
                                          'cleandb'       => 1, 

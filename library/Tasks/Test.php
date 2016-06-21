@@ -60,9 +60,6 @@ class Test extends Tasks {
         }
         display("Project loaded\n");
 
-        $res = shell_exec($this->config->php.' '.$config->executable.' build_root -v -p test > '.$config->projects_root.'/projects/test/log/build_root.final.log');
-        display("Build root\n");
-
         $res = shell_exec($this->config->php.' '.$config->executable.' tokenizer -p test > '.$config->projects_root.'/projects/test/log/tokenizer.final.log');
         display("Project tokenized\n");
 

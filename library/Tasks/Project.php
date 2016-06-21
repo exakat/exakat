@@ -125,13 +125,6 @@ class Project extends Tasks {
         $this->logTime('Loading');
         $this->updateProgress($progress++);
 
-        $analyze = new Build_root($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        display("Build root\n");
-        $this->logTime('Build_root');
-        $this->updateProgress($progress++);
-
         $analyze = new Tokenizer($this->gremlin);
         $analyze->run($config);
         unset($analyze);

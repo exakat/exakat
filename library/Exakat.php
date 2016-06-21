@@ -47,11 +47,6 @@ class Exakat {
                 $task->run($config);
                 break;
 
-            case 'build_root' : 
-                $task = new Tasks\Build_root($this->gremlin);
-                $task->run($config);
-                break;
-
             case 'load' : 
                 $task = new Tasks\Load($this->gremlin);
                 $task->run($config);
