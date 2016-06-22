@@ -1655,19 +1655,21 @@ class Load extends Tasks {
 
         $variableId = $this->addAtom('Identifier');
         $this->addLink($id, $variableId, 'VARIABLE');
-        $this->setAtom($variableId, ['code' => '[',
-                                     'fullcode' => '[ /**/ ]',
-                                     'line'     => $this->tokens[$this->id][2],
-                                     'token'    => $this->getToken($this->tokens[$this->id][0])]);
+        $this->setAtom($variableId, ['code'       => '[',
+                                     'fullcode'   => '[ /**/ ]',
+                                     'line'       => $this->tokens[$this->id][2],
+                                     'token'      => $this->getToken($this->tokens[$this->id][0]),
+                                     'fullnspath' => '\\array']);
 
         // No need to skip opening bracket
         $argumentId = $this->processArguments([T_CLOSE_BRACKET]);
         $this->addLink($id, $argumentId, 'ARGUMENTS');
 
-        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
-                             'fullcode' => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ,
-                             'line'     => $this->tokens[$this->id][2],
-                             'token'    => $this->getToken($this->tokens[$this->id][0])]);
+        $this->setAtom($id, ['code'       => $this->tokens[$this->id][1], 
+                             'fullcode'   => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ,
+                             'line'       => $this->tokens[$this->id][2],
+                             'token'      => $this->getToken($this->tokens[$this->id][0]),
+                             'fullnspath' => '\\array']);
         $this->pushExpression($id);
         
         return $this->processFCOA($id);
@@ -3112,19 +3114,20 @@ class Load extends Tasks {
 
     private function processEcho() {
         $current = $this->id;
-        $nameId = $this->processNextAsIdentifier();
         --$this->id;
+        $nameId = $this->processNextAsIdentifier();
 
         $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG, T_END]);
         // processArguments goes too far, up to ;
         --$this->id;
 
         $functioncallId = $this->addAtom('Functioncall');
-        $this->setAtom($functioncallId, ['code'     => $this->tokens[$current][1], 
-                                         'fullcode' => $this->tokens[$current][1] . ' ' .
-                                                       $this->atoms[$argumentsId]['fullcode'],
-                                         'line'     => $this->tokens[$current][2],
-                                         'token'    => $this->getToken($this->tokens[$current][0])
+        $this->setAtom($functioncallId, ['code'       => $this->tokens[$current][1], 
+                                         'fullcode'   => $this->tokens[$current][1] . ' ' .
+                                                         $this->atoms[$argumentsId]['fullcode'],
+                                         'line'       => $this->tokens[$current][2],
+                                         'token'      => $this->getToken($this->tokens[$current][0]),
+                                         'fullnspath' => $this->getFullnspath($nameId)
                                         ]);
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
@@ -3461,15 +3464,16 @@ class Load extends Tasks {
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
             // namespace\A\B 
             return substr($this->namespace, 0, -1).strtolower(substr($this->atoms[$nameId]['fullcode'], 9));
-        } elseif ($type === 'class' && isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
-            // namespace\A\B 
-            return $this->uses['function'][strtolower($this->atoms[$nameId]['code'])];
-        } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
-            // namespace\A\B 
-            return $this->uses['const'][strtolower($this->atoms[$nameId]['code'])];
-        } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
-            // namespace\A\B 
-            return $this->uses['class'][strtolower($this->atoms[$nameId]['code'])];
+        } elseif ($this->atoms[$nameId]['atom'] === 'Identifier') {
+            if ($type === 'class' && isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
+                return $this->uses['class'][strtolower($this->atoms[$nameId]['code'])];
+            } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
+                return $this->uses['const'][strtolower($this->atoms[$nameId]['code'])];
+            } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
+                return $this->uses['class'][strtolower($this->atoms[$nameId]['code'])];
+            } else {
+                return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
+            }
         } else {
             return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
         }
