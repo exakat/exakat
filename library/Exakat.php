@@ -57,11 +57,6 @@ class Exakat {
                 $task->run($config);
                 break;
 
-            case 'tokenizer' : 
-                $task = new Tasks\Tokenizer($this->gremlin);
-                $task->run($config);
-                break;
-
             case 'analyze' : 
                 $task = new Tasks\Analyze($this->gremlin);
                 $task->run($config);

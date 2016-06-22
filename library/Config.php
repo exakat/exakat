@@ -154,7 +154,6 @@ class Config {
                                          'results'       => 1, 
                                          'stat'          => 1, 
                                          'status'        => 1, 
-                                         'tokenizer'     => 1, 
                                          'version'       => 1,
                                          'onepage'       => 1,
                                          'onepagereport' => 1,
