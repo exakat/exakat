@@ -27,13 +27,9 @@ use Analyzer;
 
 class UsedTrait extends Analyzer\Analyzer {
     public function analyze() {
-        $uses = array_merge(
-            $this->query('g.idx("atoms")[["atom":"Class"]].out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE").fullnspath'),
-            $this->query('g.idx("atoms")[["atom":"Trait"]].out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE").fullnspath')
-            );
 
         $this->atomIs('Trait')
-             ->fullnspath($uses)
+             ->hasOut('DEFINITION')
              ->back('first');
         $this->prepareQuery();
     }
