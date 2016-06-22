@@ -125,13 +125,6 @@ class Project extends Tasks {
         $this->logTime('Loading');
         $this->updateProgress($progress++);
 
-        $analyze = new Tokenizer($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        $this->logTime('Tokenizer');
-        display("Project tokenized\n");
-        $this->updateProgress($progress++);
-
         $analyze = new Magicnumber($this->gremlin);
         $analyze->run($config);
         unset($analyze);
