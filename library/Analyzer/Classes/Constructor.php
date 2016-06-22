@@ -27,6 +27,7 @@ use Analyzer;
 
 class Constructor extends Analyzer\Analyzer {
     public function analyze() {
+        // __construct is the main constructor of the class
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -37,6 +38,7 @@ class Constructor extends Analyzer\Analyzer {
              ->back('constructor');
         $this->prepareQuery();
 
+        // if no __construct(), then default back on the method with the class name
         $this->atomIs('Class')
              ->outIs('NAME')
              ->savePropertyAs('code', 'code')
