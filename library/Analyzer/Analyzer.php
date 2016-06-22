@@ -245,7 +245,7 @@ abstract class Analyzer {
     }
     
     public function init() {
-        $query = "g.V().hasLabel('Analysis').has('analyzer', '{$this->analyzerQuoted}')";
+        $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'")';
         $res = $this->query($query);
         if (isset($res[0])) {
             $res = $res[0];
@@ -255,7 +255,7 @@ abstract class Analyzer {
             $this->analyzerId = $res->id;
 
             // Removing all edges
-            $query = "g.V().hasLabel('Analysis').outE('ANALYZED').drop()";
+            $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
             $res = $this->query($query);
         } else {
             // Creating analysis vertex
@@ -570,7 +570,7 @@ GREMLIN;
         } else {
             $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
         }
-        $this->addMethod('where( __.in("ANALYZED").has("code", '.$this->SorA($analyzer).').count().is(neq(0)) )');
+        $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(neq(0)) )');
 
         return $this;
     }
@@ -1002,7 +1002,7 @@ GREMLIN
 
     // follows a link if it is there (and do nothing otherwise)
     protected function inIsIE($edgeName) {
-        $this->addMethod("until(__.inE('".$this->SorA($edgeName)."').count().is(eq(0))).repeat(__.in('".$this->SorA($edgeName)."'))");
+        $this->addMethod('until(__.inE('.$this->SorA($edgeName).').count().is(eq(0))).repeat(__.in('.$this->SorA($edgeName).'))');
         
         return $this;
     }
@@ -1023,41 +1023,25 @@ GREMLIN
     }
 
     public function hasIn($edgeName) {
-        if (is_array($edgeName)) {
-            $this->addMethod('where( __.in(\''.join("', '", $edgeName).'\').count().is(neq(0)) )', $edgeName);
-        } else {
-            $this->addMethod('where( __.in(\''.$edgeName.'\').count().is(neq(0)) )', $edgeName);
-        }
+        $this->addMethod('where( __.in('.$this->SorA($edgeName).').count().is(neq(0)) )');
         
         return $this;
     }
     
     public function hasNoIn($edgeName) {
-        if (is_array($edgeName)) {
-             $this->addMethod('where( __.in(\''.join("', '", $edgeName).'\').count().is(eq(0)) )', $edgeName);
-        } else {
-             $this->addMethod('where( __.in(\''.$edgeName.'\').count().is(eq(0)) )', $edgeName);
-        }
+        $this->addMethod('where( __.in('.$this->SorA($edgeName).').count().is(eq(0)) )');
         
         return $this;
     }
 
     public function hasOut($edgeName) {
-        if (is_array($edgeName)) {
-            $this->addMethod('where( out(\''.join("', '", $edgeName).'\').count().is(neq(0)) )', $edgeName);
-        } else {
-            $this->addMethod('where( out(\''.$edgeName.'\').count().is(neq(0)) )', $edgeName);
-        }
+        $this->addMethod('where( out('.$this->SorA($edgeName).').count().is(neq(0)) )');
         
         return $this;
     }
     
     public function hasNoOut($edgeName) {
-        if (is_array($edgeName)) {
-             $this->addMethod('where( out(\''.join("', '", $edgeName).'\').count().is(eq(0)) )', $edgeName);
-        } else {
-             $this->addMethod('where( out(\''.$edgeName.'\').count().is(eq(0)) )', $edgeName);
-        }
+        $this->addMethod('where( out('.$this->SorA($edgeName).').count().is(eq(0)) )');
         
         return $this;
     }
@@ -1146,21 +1130,19 @@ GREMLIN
     }
 
     public function hasFunctionDefinition() {
-        $this->addMethod("filter{ g.idx('functions')[['path':it.fullnspath]].any()}");
+        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function").count().is(eq(1)))');
     
         return $this;
     }
 
     public function hasNoFunctionDefinition() {
-        $this->addMethod("filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}");
+        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function").count().is(eq(0)))');
     
         return $this;
     }
 
     public function functionDefinition() {
-        $this->addMethod('hasNot("fullnspath", null)
-                         .filter{ g.idx("functions").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("functions")[["path":it.fullnspath]].next(); }');
+        $this->addMethod('in("DEFINITION")');
     
         return $this;
     }
@@ -1202,9 +1184,7 @@ GREMLIN
     }
 
     public function classDefinition() {
-        $this->addMethod('hasNot("fullnspath", null)
-                          .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                          .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }');
+        $this->addMethod('in("DEFINITION")');
     
         return $this;
     }
