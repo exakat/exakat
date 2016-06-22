@@ -2562,7 +2562,6 @@ class Load extends Tasks {
         $this->pushExpression($useId);
 
         if ($this->tokens[$this->id][0] === T_CLOSE_CURLY) {
-            print "Extra semicolon\n";
             $this->processSemicolon();
         }
 
@@ -2572,6 +2571,7 @@ class Load extends Tasks {
     
     private function processVariable() {
         $variableId = $this->processSingle('Variable');
+        $this->setAtom($variableId, ['reference' => false]);
 
         return $this->processFCOA($variableId);
     }
@@ -2947,7 +2947,11 @@ class Load extends Tasks {
         }
 
         $this->addLink($staticId, $leftId, 'CLASS');
+        
+        $fullnspath = $this->getFullnspath($leftId);
         $this->setAtom($leftId, ['fullnspath' => $this->getFullnspath($leftId)] );
+        $this->addCall('class', $fullnspath, $leftId);
+        
         $this->addLink($staticId, $right, $links);
 
         $x = ['code'     => $this->tokens[$current][1], 
@@ -3375,14 +3379,14 @@ class Load extends Tasks {
             foreach($paths as $path) {
                 foreach($path['calls'] as $origin => $origins) {
                     foreach($path['definitions'] as $destination => $destinations) {
-                        $csv = 'DEFINITION.'.$origin.'.'.$destination;
+                        $csv = 'DEFINITION.'.$destination.'.'.$origin;
                         if (!isset($files[$csv])) {
                             $files[$csv] = fopen('./rels.g3.'.$csv.'.csv', 'w+');
                             fputcsv($files[$csv], ['start', 'end']);
                         }
                         foreach($origins as $o) {
                             foreach($destinations as $d) {
-                                fputcsv($files[$csv], [$o, $d], ',', '"', '\\');
+                                fputcsv($files[$csv], [$d, $o], ',', '"', '\\');
                             }
                         }
                     }
