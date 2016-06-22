@@ -60,6 +60,8 @@ class Load extends Tasks {
     private static $client = null;
     private $config = null;
 
+    private $calls = array();
+
     private $namespace = '\\';
     private $uses = array('function' => array(),
                           'const'    => array(),
@@ -70,12 +72,15 @@ class Load extends Tasks {
     
     const CONTEXT_CLASS     = 1;
     const CONTEXT_INTERFACE = 2;
-    const CONTEXT_TRAIT     = 4;
-    const CONTEXT_FUNCTION  = 8;
+    const CONTEXT_TRAIT     = 3;
+    const CONTEXT_FUNCTION  = 4;
+    const CONTEXT_NEW       = 5;
     private $contexts = [self::CONTEXT_CLASS     => false,
                          self::CONTEXT_INTERFACE => false,
                          self::CONTEXT_TRAIT     => false,
-                         self::CONTEXT_FUNCTION  => false];
+                         self::CONTEXT_FUNCTION  => false,
+                         self::CONTEXT_NEW       => false,
+                         ];
     
     private $optionsTokens = array('Abstract'  => 0,
                                    'Final'     => 0,
@@ -883,6 +888,7 @@ class Load extends Tasks {
             !$this->isContext(self::CONTEXT_TRAIT) && 
             !$this->isContext(self::CONTEXT_INTERFACE)) {
             $fullnspath = $this->getFullnspath($nameId);
+            $this->addDefinition('function', $fullnspath, $functionId);
         } else {
             $fullnspath = '';
         }
@@ -966,12 +972,15 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($traitId, $blockId, 'BLOCK');
         
+        $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($traitId, ['code'       => $this->tokens[$current][1], 
                                   'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
                                                   static::FULLCODE_BLOCK,
                                   'line'       => $this->tokens[$current][2],
                                   'token'      => $this->getToken($this->tokens[$current][0]),
-                                  'fullnspath' => $this->getFullnspath($nameId)]);
+                                  'fullnspath' => $fullnspath]);
+        
+        $this->addDefinition('class', $fullnspath, $traitId);
         
         $this->pushExpression($traitId);
         $this->processSemicolon();
@@ -995,6 +1004,8 @@ class Load extends Tasks {
                 ++$this->id; // Skip extends
                 $extendsId = $this->processOneNsname();
                 $this->addLink($interfaceId, $extendsId, 'EXTENDS');
+
+                $this->addCall('class', $this->getFullnspath($extendsId), $extendsId);
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         }
 
@@ -1004,6 +1015,8 @@ class Load extends Tasks {
                 ++$this->id; // Skip extends
                 $extendsId = $this->processOneNsname();
                 $this->addLink($interfaceId, $extendsId, 'IMPLEMENTS');
+
+                $this->addCall('class', $this->getFullnspath($extendsId), $extendsId);
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         }
 
@@ -1013,12 +1026,15 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($interfaceId, $blockId, 'BLOCK');
         
+        $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($interfaceId, ['code'       => $this->tokens[$current][1], 
                                       'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
                                                       static::FULLCODE_BLOCK,
                                       'line'       => $this->tokens[$current][2],
                                       'token'      => $this->getToken($this->tokens[$current][0]),
-                                      'fullnspath' => $this->getFullnspath($nameId)]);
+                                      'fullnspath' => $fullnspath]);
+
+        $this->addDefinition('class', $fullnspath, $interfaceId);
         
         $this->pushExpression($interfaceId);
         $this->processSemicolon();
@@ -1064,6 +1080,7 @@ class Load extends Tasks {
             $extendsId = $this->processOneNsname();
             
             $this->addLink($classId, $extendsId, 'EXTENDS');
+            $this->addCall('class', $this->getFullnspath($extendsId), $extendsId);
         }
 
         // Process implements
@@ -1071,8 +1088,10 @@ class Load extends Tasks {
             
             do {
                 ++$this->id; // Skip extends
-                $extendsId = $this->processOneNsname();
-                $this->addLink($classId, $extendsId, 'IMPLEMENTS');
+                $implementsId = $this->processOneNsname();
+                $this->addLink($classId, $implementsId, 'IMPLEMENTS');
+                
+                $this->addCall('class', $this->getFullnspath($implementsId), $implementsId);
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         }
         
@@ -1082,14 +1101,17 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($classId, $blockId, 'BLOCK');
         
+        $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($classId, ['code'       => $this->tokens[$current][1], 
                                   'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
                                                   static::FULLCODE_BLOCK,
                                   'line'       => $this->tokens[$current][2],
                                   'token'      => $this->getToken($this->tokens[$current][0]),
-                                  'fullnspath' => $this->getFullnspath($nameId)]);
+                                  'fullnspath' => $fullnspath]);
         
         $this->pushExpression($classId);
+        
+        $this->addDefinition('class', $fullnspath, $classId);
         
         // Case of anonymous classes
         if ($this->tokens[$current - 1][0] !== T_NEW) {
@@ -1479,15 +1501,22 @@ class Load extends Tasks {
         $argumentsId = $this->processArguments();
 
         $functioncallId = $this->addAtom('Functioncall');
+        $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'], 
                                          'fullcode'   => $this->atoms[$nameId]['fullcode'].'('.
                                                          $this->atoms[$argumentsId]['fullcode'].')',
                                          'line'       => $this->tokens[$current][2],
-                                         'token'      => $this->getToken($this->tokens[$current][0]),
-                                         'fullnspath' => $this->getFullnspath($nameId)
+                                         'token'      => $this->atoms[$nameId]['token'],
+                                         'fullnspath' => $fullnspath
                                         ]);
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
+        
+        if ($this->isContext(self::CONTEXT_NEW)) {
+            $this->addCall('class', $fullnspath, $functioncallId);
+        } else {
+            $this->addCall('function', $fullnspath, $functioncallId);
+        }
 
         $this->pushExpression($functioncallId);
 
@@ -2511,6 +2540,10 @@ class Load extends Tasks {
             // No Else. Default will be dealt with by while() condition
             
             $this->addLink($useId, $namespaceId, 'USE');
+            if ($this->isContext(self::CONTEXT_CLASS) || 
+                $this->isContext(self::CONTEXT_TRAIT)) {
+                $this->addCall('class', $this->atoms[$namespaceId]['fullnspath'], $namespaceId);
+            }
             $fullcode[] = $this->atoms[$namespaceId]['fullcode'];
 
             $this->setAtom($namespaceId, ['fullnspath' => $this->makeFullnspath($namespaceId)]);
@@ -2621,7 +2654,7 @@ class Load extends Tasks {
         $this->addLink($operatorId, $operandId, $link);
 
         $x = ['code'     => $this->tokens[$current][1], 
-              'fullcode' => $this->tokens[$current][1] . ' ' .
+              'fullcode' => $this->tokens[$current][1] . 
                             $this->atoms[$operandId]['fullcode'],
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
@@ -2731,7 +2764,7 @@ class Load extends Tasks {
             ++$this->id;
 
             $expressionId = $this->popExpression();
-            $this->addLink($variableId, $expressionId, 'VARIABLE');
+            $this->addLink($variableId, $expressionId, 'NAME');
 
             $x = ['code'     => $this->tokens[$current][1], 
                   'fullcode' => $this->tokens[$current][1] . '{' .
@@ -2743,7 +2776,7 @@ class Load extends Tasks {
 
             return $variableId;
         } else {
-            return $this->processSingleOperator('Variable', $this->getPrecedence($this->tokens[$this->id][0]), 'VARIABLE');
+            return $this->processSingleOperator('Variable', $this->getPrecedence($this->tokens[$this->id][0]), 'NAME');
         }
     }
 
@@ -2760,7 +2793,10 @@ class Load extends Tasks {
     }
 
     private function processNew() {
-        return $this->processSingleOperator('New', $this->getPrecedence($this->tokens[$this->id][0]), 'NEW');
+        $this->toggleContext(self::CONTEXT_NEW);
+        $id =  $this->processSingleOperator('New', $this->getPrecedence($this->tokens[$this->id][0]), 'NEW');
+        $this->toggleContext(self::CONTEXT_NEW);
+        return $id;
     }
 
     //////////////////////////////////////////////////////
@@ -2936,7 +2972,6 @@ class Load extends Tasks {
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
 
         $right = $this->popExpression();
-//        print_r($this->atoms[$right]);die();
         
         $this->addLink($additionId, $right, $links[1]);
 
@@ -3210,7 +3245,7 @@ class Load extends Tasks {
             foreach($this->expressions as $atomId) {
                 print_r($this->atoms[$atomId]);
             }
-//            die();
+            die();
         }
     
         // All node has one incoming or one outgoing link (outgoing or incoming).
@@ -3267,7 +3302,7 @@ class Load extends Tasks {
         }
         if ($total > 0) {
             print $total." errors found\n";
-//            die();
+            die();
         }
         
     }
@@ -3276,6 +3311,7 @@ class Load extends Tasks {
         $files   = [];
         $extras  = [];
         
+        // Saving atoms
         foreach($this->atoms as $atom) {
             if (!isset($files[$atom['atom']])) {
                 $files[$atom['atom']] = fopen('./nodes.g3.'.$atom['atom'].'.csv', 'w+');
@@ -3316,6 +3352,7 @@ class Load extends Tasks {
             fclose($fp);
         }
         
+        // Saving the links between atoms
         foreach($this->links as $label => $origins) {
             foreach($origins as $origin => $destinations) {
                 foreach($destinations as $destination => $links) {
@@ -3329,6 +3366,26 @@ class Load extends Tasks {
                     }
                     
                     fclose($fp);
+                }
+            }
+        }
+
+        // Saving the function / class definitions
+        foreach($this->calls as $type => $paths) {
+            foreach($paths as $path) {
+                foreach($path['calls'] as $origin => $origins) {
+                    foreach($path['definitions'] as $destination => $destinations) {
+                        $csv = 'DEFINITION.'.$origin.'.'.$destination;
+                        if (!isset($files[$csv])) {
+                            $files[$csv] = fopen('./rels.g3.'.$csv.'.csv', 'w+');
+                            fputcsv($files[$csv], ['start', 'end']);
+                        }
+                        foreach($origins as $o) {
+                            foreach($destinations as $d) {
+                                fputcsv($files[$csv], [$o, $d], ',', '"', '\\');
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -3401,6 +3458,9 @@ class Load extends Tasks {
         } elseif (!in_array($this->atoms[$nameId]['atom'], ['Nsname', 'Identifier'])) {
             // No fullnamespace for non literal namespaces
             return '';
+        } elseif (in_array($this->atoms[$nameId]['token'], [T_STRING, T_NS_SEPARATOR, T_ARRAY, T_EVAL, T_ISSET, T_EXIT, T_UNSET, T_ECHO, T_PRINT, T_LIST, T_EMPTY])) {
+            // For language structures, it is always in global space.
+            return '\\'.strtolower($this->atoms[$nameId]['code']);
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
             return $this->namespace.strtolower(substr($this->atoms[$nameId]['fullcode'], 9));
         } elseif (isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
@@ -3453,6 +3513,36 @@ class Load extends Tasks {
         }
         
         $this->uses[$useType][$alias] = $fullnspath;
+    }
+    
+    private function addCall($type, $fullnspath, $callId) {
+        if (empty($fullnspath)) { 
+            return; 
+        }
+        
+        if (!isset($this->calls[$type][$fullnspath])) {
+            $this->calls[$type][$fullnspath] = array('calls' => array(), 'definitions' => array());
+        }
+        $atom = $this->atoms[$callId]['atom'];
+        if (!isset($this->calls[$type][$fullnspath]['calls'][$atom])) {
+            $this->calls[$type][$fullnspath]['calls'][$atom] = array();
+        }
+       $this->calls[$type][$fullnspath]['calls'][$atom][] = $callId;
+    }
+
+    private function addDefinition($type, $fullnspath, $definitionId) {
+        if (empty($fullnspath)) { 
+            return; 
+        }
+
+        if (!isset($this->calls[$type][$fullnspath])) {
+            $this->calls[$type][$fullnspath] = array('calls' => array(), 'definitions' => array());
+        }
+        $atom = $this->atoms[$definitionId]['atom'];
+        if (!isset($this->calls[$type][$fullnspath]['definitions'][$atom])) {
+            $this->calls[$type][$fullnspath]['definitions'][$atom] = array();
+        }
+       $this->calls[$type][$fullnspath]['definitions'][$atom][] = $definitionId;
     }
 }
 
