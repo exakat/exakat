@@ -829,36 +829,14 @@ GREMLIN
         return $this;
     }
     
-    public function fullcode($code, $caseSensitive = false) {
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($code)) {
-            $this->addMethod('filter{it.fullcode'.$caseSensitive.' in ***}', $code);
-        } else {
-            $this->addMethod('filter{it.fullcode'.$caseSensitive.' == ***}', $code);
-        }
+    public function fullcodeIs($code, $caseSensitive = false) {
+        $this->propertyIs('fullcode', $code, $caseSensitive);
         
         return $this;
     }
     
     public function fullcodeIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($code)) {
-            $this->addMethod("filter{!(it.fullcode$caseSensitive in ***)}", $code);
-        } else {
-            $this->addMethod("filter{it.fullcode$caseSensitive != ***}", $code);
-        }
+        $this->propertyIsNot('fullcode', $code, $caseSensitive);
         
         return $this;
     }
@@ -939,42 +917,25 @@ GREMLIN
     }
 
     protected function outIs($edgeName) {
-        if (is_array($edgeName)) {
-            $this->addMethod("out('".implode("', '", $edgeName)."')");
-        } else {
-            $this->addMethod('out(***)', $edgeName);
-        }
-        
+        $this->addMethod('out('.$this->SorA($edgeName).')');
+
         return $this;
     }
 
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($edgeName) {
-        if (is_array($edgeName)) {
-            $this->addMethod("until(__.outE('".implode("', '", $edgeName)."').count().is(eq(0))).repeat(out('".implode("', '", $edgeName)."'))");
-        } else {
-            $this->addMethod("until(__.outE('".$edgeName."').count().is(eq(0))).repeat(out('".$edgeName."'))");
-        }
+        $this->addMethod("until(__.outE(".$this->SorA($edgeName).").count().is(eq(0))).repeat(out(".$this->SorA($edgeName)."))");
         
         return $this;
     }
 
     public function outIsNot($edgeName) {
-        if (is_array($edgeName)) {
-            $this->addMethod("filter{ it.out('".implode("', '", $edgeName)."').count() == 0}");
-        } else {
-            $this->addMethod('filter{ it.out(***).count() == 0}', $edgeName);
-        }
+        $this->addMethod('where( __.outE('.$this->SorA($edgeName).').count().is(eq(0)))');
         
         return $this;
     }
 
     public function rankIs($edgeName, $rank) {
-        if (is_array($edgeName)) {
-            // @todo
-            die(" I don't understand arrays in rankIs()");
-        }
-
         if ($rank == 'first') {
             $rank = 0;
             $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edgeName, $rank);
@@ -1034,23 +995,14 @@ GREMLIN
     }
 
     public function inIs($edgeName) {
-        if (is_array($edgeName)) {
-            // @todo
-            $this->addMethod('inE.filter{it.label in ***}.outV', $edgeName);
-        } else {
-            $this->addMethod('in(***)', $edgeName);
-        }
+        $this->addMethod('in('.$this->SorA($edgeName).')');
         
         return $this;
     }
 
     // follows a link if it is there (and do nothing otherwise)
     protected function inIsIE($edgeName) {
-        if (is_array($edgeName)) {
-            $this->addMethod("until(__.inE('".implode("', '", $edgeName)."').count().is(eq(0))).repeat(in('".implode("', '", $edgeName)."'))");
-        } else {
-            $this->addMethod("until(__.inE('".$edgeName."').count().is(eq(0))).repeat(inE('".$edgeName."'))");
-        }
+        $this->addMethod("until(__.inE('".$this->SorA($edgeName)."').count().is(eq(0))).repeat(__.in('".$this->SorA($edgeName)."'))");
         
         return $this;
     }
