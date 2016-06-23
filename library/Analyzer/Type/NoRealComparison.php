@@ -29,36 +29,37 @@ class NoRealComparison extends Analyzer\Analyzer {
     public function analyze() {
         // 1.2 == 3.4
         $this->atomIs('Comparison')
-             ->code(array('==', '!=', '===', '!=='))
+             ->codeIs(array('==', '!=', '===', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Float')
+             ->atomIs('Real')
              ->back('first');
         $this->prepareQuery();
 
         // 1.2 == 3.4 + 0
         $this->atomIs('Comparison')
-             ->code(array('==', '!=', '===', '!=='))
+             ->analyzerIsNot('self')
+             ->codeIs(array('==', '!=', '===', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomInside('Float')
+             ->atomInside('Real')
              ->hasNoIn(array('ARGUMENT', 'INDEX'))
              ->back('first');
         $this->prepareQuery();
-
+return;
         // 1.2 == ( 2 / 3)
         $this->atomIs('Comparison')
-             ->code(array('==', '!=', '===', '!=='))
+             ->codeIs(array('==', '!=', '===', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Multiplication')
-             ->code('/')
+             ->codeIs('/')
              ->back('first');
         $this->prepareQuery();
 
         // 1.2 == ( 2 / 3)
         $this->atomIs('Comparison')
-             ->code(array('==', '!=', '===', '!=='))
+             ->codeIs(array('==', '!=', '===', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomInside('Multiplication')
-             ->code('/')
+             ->codeIs('/')
              ->back('first');
         $this->prepareQuery();
     }
