@@ -9,15 +9,39 @@ Label : FILE
         use
         Label : CONST
           const
-      Label : ELEMENT
-        Void
+        Label : GROUPUSE
+          \
+          Label : SUBNAME
+            FooLibrary
+          Label : SUBNAME
+            Bar
+          Label : SUBNAME
+            Baz
+        Label : USE
+          B
       Label : ELEMENT
         use
         Label : FUNCTION
           function
-      Label : ELEMENT
-        Void
+        Label : GROUPUSE
+          \
+          Label : SUBNAME
+            FooLibrary
+          Label : SUBNAME
+            Bar
+          Label : SUBNAME
+            Baz
+        Label : USE
+          B
       Label : ELEMENT
         use
-      Label : ELEMENT
-        Void
+        Label : GROUPUSE
+          \
+          Label : SUBNAME
+            FooLibrary
+          Label : SUBNAME
+            Bar
+          Label : SUBNAME
+            Baz
+        Label : USE
+          B

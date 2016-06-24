@@ -1,3 +1,9 @@
 as
 Label : AS
   A1
+Label : NAME
+  \
+  Label : SUBNAME
+    Baz
+  Label : SUBNAME
+    ClassNonAbsNonGroupedAs
