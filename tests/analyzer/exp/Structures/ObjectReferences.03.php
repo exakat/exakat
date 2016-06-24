@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('&$chaine');
+$expected     = array('chaine &$chaine');
 
-$expected_not = array('&$string', 
-                      '&$int', 
-                      '&$bool');
+$expected_not = array('string &$string', 
+                      'int &$int', 
+                      'bool &$bool');
 
 ?>
