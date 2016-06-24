@@ -392,11 +392,7 @@ abstract class Analyzer {
     }
     
     public function atomIs($atom) {
-        if (is_array($atom)) {
-            $this->addMethod('hasLabel("'.join('", "', $atom).'")');
-        } else {
-            $this->addMethod('hasLabel(***)', $atom);
-        }
+        $this->addMethod('hasLabel('.$this->SorA($atom).')');
         
         return $this;
     }
@@ -1078,11 +1074,7 @@ GREMLIN
             $in = implode('', $in);
         }
         
-        if (is_array($parentClass)) {
-            $this->addMethod('filter{ it.'.$in.'.filter{ it.atom in ***).count() != 0}', $parentClass);
-        } else {
-            $this->addMethod('filter{ it.'.$in.'.has("atom", ***).count() != 0}', $parentClass);
-        }
+        $this->addMethod('where( __'.$in.'.has("atom", within('.$this->SorA($parentClass).'))))');
         
         return $this;
     }
@@ -1108,11 +1100,7 @@ GREMLIN
             $in = implode('', $in);
         }
         
-        if (is_array($parentClass)) {
-            $this->addMethod('filter{ it'.$in.'.filter{it.atom in ***}.count() == 0}', $parentClass);
-        } else {
-            $this->addMethod('filter{ it'.$in.'.has("atom", ***).count() == 0}', $parentClass);
-        }
+        $this->addMethod('where( __'.$in.'.has("atom", not(within('.$this->SorA($parentClass).'))))');
         
         return $this;
     }
@@ -1154,7 +1142,10 @@ GREMLIN
     }
     
     public function goToFunction() {
-        $this->addMethod('in.loop(1){it.object.atom != "Function"}{(it.object.atom == "Function") && (it.object.out("NAME").hasNot("code", "").any())}');
+//        $this->addMethod('in.loop(1){it.object.atom != "Function"}{(it.object.atom == "Function") && (it.object.out("NAME").hasNot("code", "").any())}');
+        $this->addMethod('repeat(__.in(
+"ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"
+)).until(and(hasLabel("Function"), where(__.out("NAME").not(has("atom", "Void")) )))');
         
         return $this;
     }
@@ -1166,7 +1157,10 @@ GREMLIN
     }
 
     public function notInInstruction($atom = 'Function') {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "'.$atom.'"}{it.object.atom == "'.$atom.'"}.any() == false}');
+//        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "'.$atom.'"}{it.object.atom == "'.$atom.'"}.any() == false}');
+        $this->addMethod('repeat(__.in(
+"ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"
+)).until(hasLabel("File")).count().is(eq(0))');
         
         return $this;
     }
