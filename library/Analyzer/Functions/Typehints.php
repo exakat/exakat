@@ -27,8 +27,11 @@ use Analyzer;
 
 class Typehints extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Typehint')
-             ->outIs('CLASS');
+        // List all typehints in the code
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT');
         $this->prepareQuery();
     }
 }
