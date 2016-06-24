@@ -48,8 +48,10 @@ class ClassUsage extends Analyzer\Analyzer {
              ->outIs('CLASS');
         $this->prepareQuery();
 
-        $this->atomIs('Typehint')
-             ->outIs('CLASS');
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT');
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
