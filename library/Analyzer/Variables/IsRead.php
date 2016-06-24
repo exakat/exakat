@@ -36,7 +36,7 @@ class IsRead extends Analyzer\Analyzer {
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'));
         $this->prepareQuery();
-return;
+
         // Reading inside an assignation
         $this->atomIs('Variable')
              ->inIs('LEFT')
@@ -88,14 +88,6 @@ return;
         $this->atomIs('Variable')
              ->inIs('ELEMENT')
              ->atomIs('Sequence')
-             ->back('first');
-        $this->prepareQuery();
-
-        // variable in a new
-        $this->atomIs('Variable')
-             ->inIs('NAME')
-             ->inIs('NEW')
-             ->atomIs('New')
              ->back('first');
         $this->prepareQuery();
 
