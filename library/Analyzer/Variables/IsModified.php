@@ -83,22 +83,9 @@ class IsModified extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('VARIABLE')
+             ->outIs('TYPEHINT')
              ->atomIs($atoms);
         $this->prepareQuery();
-
-        // typehint + default value
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('VARIABLE')
-             ->atomIs('Assignation')
-             ->outIs('LEFT');
-        $this->prepareQuery();
-
-        // missing default values + typehint + default values.
 
         // PHP functions that are using references
         $data = new \Data\Methods();
