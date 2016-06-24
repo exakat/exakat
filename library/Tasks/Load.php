@@ -1292,7 +1292,11 @@ class Load extends Tasks {
         if (in_array($this->tokens[$this->id + 1][0], [T_ARRAY, T_CALLABLE, T_STATIC])) {
             return $this->processNextAsIdentifier();
         } elseif (in_array($this->tokens[$this->id + 1][0], [T_NS_SEPARATOR, T_STRING, T_NAMESPACE])) {
-            return $this->processOneNsname();
+            $id = $this->processOneNsname();
+            if (in_array(strtolower($this->tokens[$this->id][1]), ['int', 'bool', 'void', 'float', 'string'])) {
+                $this->setAtom($id, ['fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ]);
+            }
+            return $id;
         } else {
             return 0;
         }
@@ -1319,16 +1323,6 @@ class Load extends Tasks {
             $typehintId = 0;
             $defaultId = 0;
             $indexId = 0;
-            /*
-            // In case we start with a ,
-            while ($this->tokens[$this->id + 1][0] === T_COMMA) {
-                $voidId = $this->addAtomVoid();
-                $this->setAtom($voidId, ['rank' => $rank++]);
-                $this->addLink($argumentsId, $voidId, 'ARGUMENT');
-                
-                $fullcode[] = '';
-                ++$this->id;
-            */
             
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 if ($typehint === true) {
@@ -1368,9 +1362,11 @@ class Load extends Tasks {
                     
                     if ($typehintId > 0) {
                         $this->addLink($indexId, $typehintId, 'TYPEHINT');
+                        $this->setAtom($indexId, ['fullcode' => $this->atoms[$typehintId]['fullcode'] . ' '. $this->atoms[$indexId]['fullcode']]);
                     }
                     if ($defaultId > 0) {
                         $this->addLink($indexId, $defaultId, 'DEFAULT');
+                        $this->setAtom($indexId, ['fullcode' => $this->atoms[$indexId]['fullcode'] . ' = '. $this->atoms[$defaultId]['fullcode']]);
                         $defaultId = 0;
                     }
                     $this->addLink($argumentsId, $indexId, 'ARGUMENT');
@@ -1390,9 +1386,11 @@ class Load extends Tasks {
             
             if ($typehintId > 0) {
                 $this->addLink($indexId, $typehintId, 'TYPEHINT');
+                $this->setAtom($indexId, ['fullcode' => $this->atoms[$typehintId]['fullcode'] . ' '. $this->atoms[$indexId]['fullcode']]);
             }
             if ($defaultId > 0) {
                 $this->addLink($indexId, $defaultId, 'DEFAULT');
+                $this->setAtom($indexId, ['fullcode' => $this->atoms[$indexId]['fullcode'] . ' = '. $this->atoms[$defaultId]['fullcode']]);
             }
             $this->addLink($argumentsId, $indexId, 'ARGUMENT');
 

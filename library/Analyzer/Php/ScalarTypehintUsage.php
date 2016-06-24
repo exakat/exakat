@@ -29,10 +29,12 @@ class ScalarTypehintUsage extends Analyzer\Analyzer {
     protected $phpVersion = '7.0+';
 
     public function analyze() {
-        $this->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->fullnspath(array('\\int', '\\float', '\\bool', '\\string'))
-             ->back('first');
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->fullnspathIs(array('\\int', '\\float', '\\bool', '\\string'))
+             ->inIs('TYPEHINT');
         $this->prepareQuery();
     }
 }
