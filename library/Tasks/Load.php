@@ -1290,7 +1290,9 @@ class Load extends Tasks {
     
     private function processTypehint() {
         if (in_array($this->tokens[$this->id + 1][0], [T_ARRAY, T_CALLABLE, T_STATIC])) {
-            return $this->processNextAsIdentifier();
+            $id = $this->processNextAsIdentifier();
+            $this->setAtom($id, ['fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ]);
+            return $id;
         } elseif (in_array($this->tokens[$this->id + 1][0], [T_NS_SEPARATOR, T_STRING, T_NAMESPACE])) {
             $id = $this->processOneNsname();
             if (in_array(strtolower($this->tokens[$this->id][1]), ['int', 'bool', 'void', 'float', 'string'])) {
@@ -3033,7 +3035,7 @@ class Load extends Tasks {
             die("Unprocessed atom in object call (right) : ".$this->atoms[$right]['atom']."\n");
         }
 
-        $this->addLink($staticId, $left, 'CLASS');
+        $this->addLink($staticId, $left, 'OBJECT');
         $this->addLink($staticId, $right, $links);
 
         $x = ['code'     => $this->tokens[$current][1], 

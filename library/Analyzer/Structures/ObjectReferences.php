@@ -32,60 +32,28 @@ class ObjectReferences extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('CLASS')
+             ->outIs('TYPEHINT')
              ->codeIsNot(array('callable', 'array', 'string', 'int', 'float', 'bool'))
-             ->inIs('CLASS')
-             ->outIs('VARIABLE')
-             ->atomIs('Variable')
-             ->is('reference', true);
-        $this->prepareQuery();
-
-        // f(stdclass &$x = null)
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->codeIsNot(array('callable', 'array', 'string', 'int', 'float', 'bool'))
-             ->inIs('CLASS')
-             ->outIs('VARIABLE')
-             ->atomIs('Assignation')
-             ->outIs('LEFT')
+             ->inIs('TYPEHINT')
              ->atomIs('Variable')
              ->is('reference', true);
         $this->prepareQuery();
 
         // f(&$x) and $x->y();
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Variable')
-             ->is('reference', true)
-             ->savePropertyAs('code', 'variable')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->outIs('BLOCK')
-             ->atomInside('Methodcall')
-             ->outIs('OBJECT')
-             ->samePropertyAs('code', 'variable');
-        $this->prepareQuery();
-
         // f(&$x) and $x->y;
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Variable')
              ->is('reference', true)
-             ->savePropertyAs('code', 'variable')
+             ->savePropertyAs('code', 'variable') // Avoid &
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
-             ->atomInside('Property')
+             ->atomInside(array('Methodcall', 'Property'))
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();
-        
+
         // foreach($a as &$b) { $b->method;}
         $this->atomIs('Foreach')
              ->outIs('VALUE')
@@ -93,19 +61,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'variable')
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Methodcall')
-             ->outIs('OBJECT')
-             ->samePropertyAs('code', 'variable');
-        $this->prepareQuery();
-
-        // foreach($a as &$b) { $b->property;}
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->is('reference', true)
-             ->savePropertyAs('code', 'variable')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Property')
+             ->atomInside(array('Methodcall', 'Property'))
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();
