@@ -7,11 +7,11 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if ($x)  { /**/ } 
+        if ($x) { /**/ } elseif ($w) { /**/ } else /**/ 
         Label : CONDITION
           $x
         Label : ELSE
-          elseif ($w)  { /**/ } 
+          elseif ($w) { /**/ } else /**/ 
           Label : CONDITION
             $w
           Label : ELSE

@@ -11,7 +11,7 @@ Label : BLOCK
       $d
     Label : PPP
       $e
-    Label : VAR
+    Label : VAR, VAR
       var
 Label : NAME
   a

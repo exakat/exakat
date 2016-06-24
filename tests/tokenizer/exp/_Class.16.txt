@@ -9,7 +9,7 @@ Label : BLOCK
       $y
     Label : PPP
       $z
-    Label : VAR
+    Label : VAR, VAR
       var
 Label : NAME
   x

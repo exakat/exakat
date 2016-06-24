@@ -1218,14 +1218,14 @@ class Load extends Tasks {
         $echoId = $this->processNextAsIdentifier();
     
         $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG, T_END]);
-        // processArguments goes too far, up to ;
+        //processArguments goes too far, up to ;
         --$this->id;
     
         $functioncallId = $this->addAtom('Functioncall');
         $this->setAtom($functioncallId, ['code'       => $this->atoms[$echoId]['code'], 
-                                         'fullcode'   => 'echo ' . $this->atoms[$argumentsId]['fullcode'],
-                                         'line'       => $this->tokens[$current][2],
-                                         'token'      => $this->getToken($this->tokens[$current][0]),
+                                         'fullcode'   => '<?php echo ' . $this->atoms[$argumentsId]['fullcode'],
+                                         'line'       => $this->tokens[$current === -1 ? 0 : $current][2],
+                                         'token'      => 'T_OPEN_TAG_WITH_ECHO',
                                          'fullnspath' => '\\echo' ]);
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $echoId, 'NAME');
@@ -1303,7 +1303,7 @@ class Load extends Tasks {
 
         $fullcode = array();
         $rank = 0;
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+        if (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS, T_CLOSE_BRACKET])) {
             $voidId = $this->addAtomVoid();
             $this->setAtom($voidId, ['rank' => 0]);
             $this->addLink($argumentsId, $voidId, 'ARGUMENT');
@@ -1317,6 +1317,9 @@ class Load extends Tasks {
             ++$this->id;
         } else {
             $typehintId = 0;
+            $defaultId = 0;
+            $indexId = 0;
+            /*
             // In case we start with a ,
             while ($this->tokens[$this->id + 1][0] === T_COMMA) {
                 $voidId = $this->addAtomVoid();
@@ -1325,40 +1328,73 @@ class Load extends Tasks {
                 
                 $fullcode[] = '';
                 ++$this->id;
-            }
+            */
             
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 if ($typehint === true) {
                     $typehintId = $this->processTypehint();
+    
+                    $this->processNext();
+                    $indexId = $this->popExpression();
+                
+                    if ($this->tokens[$this->id + 1][0] === T_EQUAL) {
+                        ++$this->id; // Skip =
+                        while (!in_array($this->tokens[$this->id + 1][0], [T_COMMA, T_CLOSE_PARENTHESIS, T_CLOSE_BRACKET])) {
+                            $this->processNext();
+                        }
+                        $defaultId = $this->popExpression();
+                    } else {
+                        $defaultId = 0;
+                    }
                 } else {
                     $typehintId = 0;
-                }
-                
-                while (!in_array($this->tokens[$this->id + 1][0], [T_COMMA, T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_BRACKET, T_CLOSE_TAG])) {
-                    $this->processNext();
-                }
-                
-                while ($this->tokens[$this->id + 1][0] === T_COMMA) {
+                    $defaultId = 0;
+
+                    while (!in_array($this->tokens[$this->id + 1][0], [T_COMMA, T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_BRACKET, T_CLOSE_TAG])) {
+                        $this->processNext();
+                    }
                     $indexId = $this->popExpression();
+                }
+                                
+                while ($this->tokens[$this->id + 1][0] === T_COMMA) {
+                    if ($indexId === 0) {
+                        $indexId = $this->addAtomVoid();
+                        $fullcode[] = '';
+                    } else {
+                        $fullcode[] = $this->atoms[$indexId]['fullcode'];
+                    }
+                    
                     $this->setAtom($indexId, ['rank' => $rank++]);
                     
                     if ($typehintId > 0) {
                         $this->addLink($indexId, $typehintId, 'TYPEHINT');
                     }
+                    if ($defaultId > 0) {
+                        $this->addLink($indexId, $defaultId, 'DEFAULT');
+                        $defaultId = 0;
+                    }
                     $this->addLink($argumentsId, $indexId, 'ARGUMENT');
-                    $fullcode[] = $this->atoms[$indexId]['fullcode'];
     
                     ++$this->id; // Skipping the comma ,
+                    $indexId = 0;
                 }
             };
-            $indexId = $this->popExpression();
+
+            if ($indexId === 0) {
+                $indexId = $this->addAtomVoid();
+                $fullcode[] = '';
+            } else {
+                $fullcode[] = $this->atoms[$indexId]['fullcode'];
+            }
             $this->setAtom($indexId, ['rank' => $rank++]);
             
             if ($typehintId > 0) {
                 $this->addLink($indexId, $typehintId, 'TYPEHINT');
             }
+            if ($defaultId > 0) {
+                $this->addLink($indexId, $defaultId, 'DEFAULT');
+            }
             $this->addLink($argumentsId, $indexId, 'ARGUMENT');
-            $fullcode[] = $this->atoms[$indexId]['fullcode'];
 
             // Skip the ) 
             ++$this->id;
@@ -1477,7 +1513,6 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->optionsTokens = array();
             return $pppId;
         } 
 
@@ -1558,7 +1593,7 @@ class Load extends Tasks {
             // postplusplus
             $plusplusId = $this->addAtom('PostPlusPlus');
             
-            $this->addLink($plusplusId, $previousId, 'PREPLUSPLUS');
+            $this->addLink($plusplusId, $previousId, 'POSTPLUSPLUS');
 
             $fullcode = '';
             $this->setAtom($plusplusId, ['code'     => $this->tokens[$this->id][1], 
@@ -1598,9 +1633,8 @@ class Load extends Tasks {
         $staticId = $this->addAtom($atom);
 
         $fullcode = array();
-        $fullcode = [];
         foreach($this->optionsTokens as $name => $optionId) {
-            $this->addLink($functionId, $optionId, strtoupper($name));
+            $this->addLink($staticId, $optionId, strtoupper($name));
             $fullcode[] = $this->atoms[$optionId]['fullcode'];
         }
         $this->optionsTokens = array();
@@ -1622,7 +1656,7 @@ class Load extends Tasks {
        $fullcode[] = $this->atoms[$elementId]['fullcode'];
 
         $this->setAtom($staticId, ['code'     => $this->tokens[$current][1], 
-                                   'fullcode' => $this->tokens[$current][1] .' ' . join(', ', $fullcode),
+                                   'fullcode' => join(' ', $fullcode),
                                    'line'     => $this->tokens[$current][2],
                                    'token'    => $this->getToken($this->tokens[$current][0])]);
         $this->pushExpression($staticId);
@@ -2919,7 +2953,7 @@ class Load extends Tasks {
         if ($this->atoms[$right]['atom'] == 'Identifier') {
             $staticId = $this->addAtom('Staticconstant');
             $links = 'CONSTANT';
-        } elseif (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block'))) {
+        } elseif (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null'))) {
             $staticId = $this->addAtom('Staticproperty');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
@@ -2991,7 +3025,7 @@ class Load extends Tasks {
             $right = $this->popExpression();
         }
 
-        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'PostPlusPlus', 'Property', 'MagicConstant', 'Block'))) {
+        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'PostPlusPlus', 'Property', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
@@ -3233,7 +3267,7 @@ class Load extends Tasks {
             foreach($this->expressions as $atomId) {
                 print_r($this->atoms[$atomId]);
             }
-            die();
+//            die();
         }
     
         // All node has one incoming or one outgoing link (outgoing or incoming).
@@ -3290,7 +3324,7 @@ class Load extends Tasks {
         }
         if ($total > 0) {
             print $total." errors found\n";
-            die();
+//            die();
         }
         
     }

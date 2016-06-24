@@ -7,6 +7,8 @@ Label : ARGUMENT
       10
     Label : ARGUMENT
       20
+  Label : VARIABLE
+    [
 Label : ARGUMENT
   ]
   Label : ARGUMENTS
@@ -15,5 +17,7 @@ Label : ARGUMENT
       30
     Label : ARGUMENT
       40
+  Label : VARIABLE
+    [
 Label : ARGUMENT
   Void

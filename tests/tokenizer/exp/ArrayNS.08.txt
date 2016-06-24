@@ -2,7 +2,7 @@
 Label : ARGUMENT
   ]
   Label : ARGUMENTS
-    ]
+    [
     Label : ARGUMENT
       Void
   Label : VARIABLE
@@ -10,7 +10,7 @@ Label : ARGUMENT
 Label : ARGUMENT
   ]
   Label : ARGUMENTS
-    ]
+    [
     Label : ARGUMENT
       Void
   Label : VARIABLE
@@ -18,7 +18,7 @@ Label : ARGUMENT
 Label : ARGUMENT
   ]
   Label : ARGUMENTS
-    ]
+    [
     Label : ARGUMENT
       Void
   Label : VARIABLE

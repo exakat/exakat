@@ -1,0 +1,11 @@
+)
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    b
+  Label : PROPERTY
+    ::
+    Label : NAME
+      $
+      Label : NAME
+        $name

@@ -2,8 +2,6 @@
 Label : ARGUMENT
   $b
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $c
-  Label : RIGHT
+  $c
+  Label : DEFAULT
     3

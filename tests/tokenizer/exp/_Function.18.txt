@@ -2,14 +2,10 @@
 Label : ARGUMENT
   $b
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $c
-  Label : RIGHT
+  $c
+  Label : DEFAULT
     3
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $d
-  Label : RIGHT
+  $d
+  Label : DEFAULT
     4

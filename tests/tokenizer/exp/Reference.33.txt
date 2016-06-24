@@ -6,7 +6,7 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if (A::B & $c)  { /**/ } 
+        if (A::B & $c) { /**/ } 
         Label : CONDITION
           &
           Label : LEFT

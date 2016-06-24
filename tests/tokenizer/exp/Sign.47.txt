@@ -1,7 +1,7 @@
 +
 Label : LEFT
   ++
-  Label : PREPLUSPLUS
+  Label : POSTPLUSPLUS
     $b
 Label : RIGHT
   4

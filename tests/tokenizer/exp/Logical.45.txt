@@ -8,10 +8,8 @@ Label : ARGUMENT
   Label : TYPEHINT
     array
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $e
-  Label : RIGHT
+  $e
+  Label : DEFAULT
     ]
     Label : ARGUMENTS
       ]

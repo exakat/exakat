@@ -1,25 +1,19 @@
 )
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $x
-  Label : RIGHT
+  $x
+  Label : DEFAULT
     null
   Label : TYPEHINT
     StdClass
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $b
-  Label : RIGHT
+  $b
+  Label : DEFAULT
     null
   Label : TYPEHINT
     StdClass
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $c
-  Label : RIGHT
+  $c
+  Label : DEFAULT
     null
   Label : TYPEHINT
     StdClass

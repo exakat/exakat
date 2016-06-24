@@ -1,7 +1,5 @@
 )
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $y
-  Label : RIGHT
+  $y
+  Label : DEFAULT
     2

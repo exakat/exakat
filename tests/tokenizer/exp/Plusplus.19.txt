@@ -7,7 +7,7 @@ Label : LEFT
     a
 Label : RIGHT
   ++
-  Label : PREPLUSPLUS
+  Label : POSTPLUSPLUS
     ::
     Label : CLASS
       self

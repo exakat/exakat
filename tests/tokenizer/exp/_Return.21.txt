@@ -1,7 +1,7 @@
 }
 Label : INDEX
   ++
-  Label : PREPLUSPLUS
+  Label : POSTPLUSPLUS
     ->
     Label : CLASS
       $this

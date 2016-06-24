@@ -19,7 +19,7 @@ Label : BLOCK
       $h
     Label : PPP
       $i
-    Label : VAR
+    Label : VAR, VAR
       var
 Label : NAME
   a

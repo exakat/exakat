@@ -12,7 +12,7 @@ Label : FILE
           $a
       Label : ELEMENT
         --
-        Label : PREPLUSPLUS
+        Label : POSTPLUSPLUS
           ->
           Label : CLASS
             $a

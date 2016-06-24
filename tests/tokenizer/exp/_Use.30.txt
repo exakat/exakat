@@ -1,13 +1,3 @@
 as
 Label : AS
   A1
-Label : NAME
-  \
-  Label : SUBNAME
-    FooLibrary
-  Label : SUBNAME
-    Bar
-  Label : SUBNAME
-    Baz
-  Label : SUBNAME
-    ClassNonAbsNonGroupedAs

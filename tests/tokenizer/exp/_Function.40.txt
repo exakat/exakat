@@ -6,8 +6,6 @@ Label : ARGUMENT
 Label : ARGUMENT
   $d
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $e
-  Label : RIGHT
+  $e
+  Label : DEFAULT
     2

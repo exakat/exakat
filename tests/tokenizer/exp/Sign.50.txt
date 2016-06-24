@@ -1,7 +1,7 @@
 +
 Label : LEFT
   $
-  Label : VARIABLE
+  Label : NAME
     .
     Label : LEFT
       'c'

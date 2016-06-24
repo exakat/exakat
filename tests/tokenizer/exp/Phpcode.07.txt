@@ -7,11 +7,11 @@ Label : FILE
       ;
       Label : ELEMENT
         ++
-        Label : PREPLUSPLUS
+        Label : POSTPLUSPLUS
           $x
       Label : ELEMENT
         Void
       Label : ELEMENT
         ++
-        Label : PREPLUSPLUS
+        Label : POSTPLUSPLUS
           $y

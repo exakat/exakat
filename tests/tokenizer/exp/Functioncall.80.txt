@@ -3,7 +3,7 @@ Label : ARGUMENT
   )
   Label : CODE
     $
-    Label : VARIABLE
+    Label : NAME
       $e
       Label : ARGUMENTS
         )

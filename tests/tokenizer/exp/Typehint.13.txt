@@ -4,10 +4,8 @@ Label : ARGUMENT
   Label : TYPEHINT
     C
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $b
-  Label : RIGHT
+  $b
+  Label : DEFAULT
     null
   Label : TYPEHINT
     callable

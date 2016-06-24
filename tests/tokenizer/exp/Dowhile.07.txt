@@ -2,14 +2,14 @@ do  { /**/ }  while ($z)
 Label : BLOCK
   ;
   Label : ELEMENT
-    if ($x)  { /**/ } 
+    if ($x) { /**/ } 
     Label : CONDITION
       $x
     Label : THEN
       {}
       Label : ELEMENT
         ++
-        Label : PREPLUSPLUS
+        Label : POSTPLUSPLUS
           $y
 Label : CONDITION
   $z

@@ -1,13 +1,9 @@
 )
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $x
-  Label : RIGHT
+  $x
+  Label : DEFAULT
     null
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $y
-  Label : RIGHT
+  $y
+  Label : DEFAULT
     true

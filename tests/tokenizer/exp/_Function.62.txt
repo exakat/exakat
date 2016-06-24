@@ -11,7 +11,7 @@ Label : LEFT
     {}
     Label : ELEMENT
       ++
-      Label : PREPLUSPLUS
+      Label : POSTPLUSPLUS
         $a
   Label : NAME
     Void

@@ -7,14 +7,14 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if ($a)  { /**/ } 
+        if ($a) { /**/ } 
         Label : CONDITION
           $a
         Label : THEN
           {}
           Label : ELEMENT
             ++
-            Label : PREPLUSPLUS
+            Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         interface
         Label : BLOCK

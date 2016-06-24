@@ -5,25 +5,25 @@ Label : BLOCK
     var
     Label : PPP
       $b
-    Label : VAR
+    Label : VAR, VAR
       var
   Label : ELEMENT
     var
     Label : PPP
       $c
-    Label : VAR
+    Label : VAR, VAR
       var
   Label : ELEMENT
     var
     Label : PPP
       $d
-    Label : VAR
+    Label : VAR, VAR
       var
   Label : ELEMENT
     var
     Label : PPP
       $e
-    Label : VAR
+    Label : VAR, VAR
       var
 Label : NAME
   a

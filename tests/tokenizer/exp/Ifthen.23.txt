@@ -7,15 +7,15 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if ($x)  { /**/ } 
+        if ($x) { /**/ } elseif ($w) { /**/ } elseif ($v) { /**/ } elseif ($u) { /**/ } elseif ($t) { /**/ } else /**/ 
         Label : CONDITION
           $x
         Label : ELSE
-          elseif ($w)  { /**/ } 
+          elseif ($w) { /**/ } elseif ($v) { /**/ } elseif ($u) { /**/ } elseif ($t) { /**/ } else /**/ 
           Label : CONDITION
             $w
           Label : ELSE
-            elseif ($v)  { /**/ } 
+            elseif ($v) { /**/ } elseif ($u) { /**/ } elseif ($t) { /**/ } else /**/ 
             Label : CONDITION
 123098120398 [label="Reached level 15"]            Label : ELSE
 123098120398 [label="Reached level 15"]            Label : THEN

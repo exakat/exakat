@@ -6,7 +6,7 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if (1)  { /**/ } 
+        if (1) { /**/ } 
         Label : CONDITION
           1
         Label : THEN
@@ -19,7 +19,7 @@ Label : FILE
       Label : ELEMENT
         Void
       Label : ELEMENT
-        if (2)  { /**/ } 
+        if (2) { /**/ } 
         Label : CONDITION
           2
         Label : THEN
@@ -31,11 +31,11 @@ Label : FILE
             Void
           Label : ELEMENT
             ++
-            Label : PREPLUSPLUS
+            Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         Void
       Label : ELEMENT
-        if (3)  { /**/ } 
+        if (3) { /**/ } 
         Label : CONDITION
           3
         Label : THEN
@@ -50,11 +50,11 @@ Label : FILE
 
           Label : ELEMENT
             ++
-            Label : PREPLUSPLUS
+            Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         Void
       Label : ELEMENT
-        if (4)  { /**/ } 
+        if (4) { /**/ } 
         Label : CONDITION
           4
         Label : THEN
@@ -69,6 +69,6 @@ Label : FILE
 
           Label : ELEMENT
             ++
-            Label : PREPLUSPLUS
+            Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         Void

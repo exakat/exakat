@@ -1,9 +1,7 @@
 )
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $b
-  Label : RIGHT
+  $b
+  Label : DEFAULT
     array
     Label : ARGUMENTS
       )
@@ -26,10 +24,8 @@ Label : ARGUMENT
     Label : NAME
       array
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $c
-  Label : RIGHT
+  $c
+  Label : DEFAULT
     1
 Label : ARGUMENT
   $d

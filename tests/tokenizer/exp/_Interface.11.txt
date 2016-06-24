@@ -20,6 +20,10 @@ Label : FILE
           {}
           Label : ELEMENT
             Void
+        Label : DEFINITION
+          i1
+        Label : DEFINITION
+          i1
         Label : EXTENDS
           i2
         Label : NAME
@@ -30,6 +34,8 @@ Label : FILE
           {}
           Label : ELEMENT
             Void
+        Label : DEFINITION
+          i3
         Label : EXTENDS
           i1
         Label : EXTENDS

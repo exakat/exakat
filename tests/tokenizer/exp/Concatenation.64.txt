@@ -1,7 +1,7 @@
 )
 Label : ARGUMENT
   $
-  Label : VARIABLE
+  Label : NAME
     .
     Label : RIGHT
       $a

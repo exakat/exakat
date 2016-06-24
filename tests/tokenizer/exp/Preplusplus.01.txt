@@ -3,7 +3,7 @@ Label : INDEX
   /
   Label : LEFT
     ++
-    Label : PREPLUSPLUS
+    Label : POSTPLUSPLUS
       (int)
       Label : CAST
         $b

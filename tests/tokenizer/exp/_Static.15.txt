@@ -9,7 +9,7 @@ Label : ARGUMENT
     {}
     Label : ELEMENT
       ++
-      Label : PREPLUSPLUS
+      Label : POSTPLUSPLUS
         $self
   Label : NAME
     Void

@@ -18,7 +18,7 @@ Label : ARGUMENT
   Label : RIGHT
     ]
     Label : ARGUMENTS
-      ]
+      [
       Label : ARGUMENT
         Void
     Label : VARIABLE

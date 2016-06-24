@@ -8,7 +8,7 @@ Label : FILE
       ;
       Label : ELEMENT
         ++
-        Label : PREPLUSPLUS
+        Label : POSTPLUSPLUS
           $
-          Label : VARIABLE
+          Label : NAME
             $x

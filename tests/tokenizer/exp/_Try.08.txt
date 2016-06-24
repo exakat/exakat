@@ -3,15 +3,15 @@ Label : BLOCK
   {}
   Label : ELEMENT
     ++
-    Label : PREPLUSPLUS
+    Label : POSTPLUSPLUS
       $a
   Label : ELEMENT
     ++
-    Label : PREPLUSPLUS
+    Label : POSTPLUSPLUS
       $b
   Label : ELEMENT
     ++
-    Label : PREPLUSPLUS
+    Label : POSTPLUSPLUS
       $c
 Label : CLASS
   Exception

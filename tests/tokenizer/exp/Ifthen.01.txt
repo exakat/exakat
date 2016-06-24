@@ -7,7 +7,7 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if (1)  { /**/ } 
+        if (1) { /**/ } else { /**/ } 
         Label : CONDITION
           1
         Label : ELSE

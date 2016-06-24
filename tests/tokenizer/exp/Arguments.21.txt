@@ -3,7 +3,7 @@ Label : BLOCK
   {}
   Label : ELEMENT
     Void
-Label : IMPLEMENTS
+Label : DEFINITION, IMPLEMENTS
   \
   Label : SUBNAME
     A

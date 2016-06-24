@@ -7,7 +7,7 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if ($x)  { /**/ } 
+        if ($x) { /**/ } Else /**/ 
         Label : CONDITION
           $x
         Label : ELSE
@@ -19,32 +19,32 @@ Label : FILE
           Label : ELEMENT
             Void
       Label : ELEMENT
-        if ($x2)  { /**/ } 
+        if ($x2) { /**/ } Else /**/ 
         Label : CONDITION
           $x2
         Label : ELSE
           ;
           Label : ELEMENT
             ++
-            Label : PREPLUSPLUS
+            Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]        Label : THEN
           ;
           Label : ELEMENT
             ++
-            Label : PREPLUSPLUS
+            Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
-        if ($x2)  { /**/ } 
+        if ($x2) { /**/ } eLse { /**/ } 
         Label : CONDITION
           $x2
         Label : ELSE
           {}
           Label : ELEMENT
             ++
-            Label : PREPLUSPLUS
+            Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]        Label : THEN
           {}
           Label : ELEMENT
             ++
-            Label : PREPLUSPLUS
+            Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         Void

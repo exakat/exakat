@@ -7,13 +7,13 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if (1)  { /**/ } 
+        if (1) { /**/ } else /**/ 
         Label : CONDITION
           1
         Label : ELSE
           ;
           Label : ELEMENT
-            if (2)  { /**/ } 
+            if (2) { /**/ } else /**/ 
             Label : CONDITION
 123098120398 [label="Reached level 15"]            Label : ELSE
 123098120398 [label="Reached level 15"]            Label : THEN

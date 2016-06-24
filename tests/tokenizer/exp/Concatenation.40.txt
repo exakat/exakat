@@ -7,5 +7,5 @@ Label : RIGHT
     'a'
   Label : RIGHT
     ++
-    Label : PREPLUSPLUS
+    Label : POSTPLUSPLUS
       $b

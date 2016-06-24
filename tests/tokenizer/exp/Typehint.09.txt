@@ -8,10 +8,8 @@ Label : ARGUMENT
   Label : TYPEHINT
     Stdclass
 Label : ARGUMENT
-  =
-  Label : LEFT
-    $c
-  Label : RIGHT
+  $c
+  Label : DEFAULT
     null
   Label : TYPEHINT
     Stdclass

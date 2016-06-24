@@ -3,7 +3,7 @@ Label : ARGUMENT
   .
   Label : LEFT
     ++
-    Label : PREPLUSPLUS
+    Label : POSTPLUSPLUS
       $a
   Label : RIGHT
     $b
