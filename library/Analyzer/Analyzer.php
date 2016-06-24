@@ -1064,17 +1064,13 @@ GREMLIN
                 $ins = array($ins);
             }
             foreach($ins as $i) {
-                if (empty($i)) {
-                    $in[] = '.in';
-                } else {
-                    $in[] = ".in('$i')";
-                }
+                $in[] = '.in('.$this->SorA($i).')';
             }
             
             $in = implode('', $in);
         }
         
-        $this->addMethod('where( __'.$in.'.has("atom", within('.$this->SorA($parentClass).'))))');
+        $this->addMethod('where( __'.$in.'.hasLabel('.$this->SorA($parentClass).'))');
         
         return $this;
     }
@@ -1100,7 +1096,7 @@ GREMLIN
             $in = implode('', $in);
         }
         
-        $this->addMethod('where( __'.$in.'.has("atom", not(within('.$this->SorA($parentClass).'))))');
+        $this->addMethod('where( __'.$in.'.not(hasLabel('.$this->SorA($parentClass).')))');
         
         return $this;
     }
