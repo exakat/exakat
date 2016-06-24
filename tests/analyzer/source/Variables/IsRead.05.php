@@ -1,6 +1,7 @@
 <?php
 
 function y() {
-    new $classname('e');
+    $notRead = new $classname('e');
+    $functionname('e');
 }
 ?>
