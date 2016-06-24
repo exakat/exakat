@@ -855,8 +855,8 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_USE) {
             ++$this->id; // Skip use
             ++$this->id; // Skip (
-            $argumentsId = $this->processArguments();
-            $this->addLink($functionId, $argumentsId, 'USE');
+            $useId = $this->processArguments();
+            $this->addLink($functionId, $useId, 'USE');
         }
         
         // Process return type
@@ -891,9 +891,13 @@ class Load extends Tasks {
             $fullnspath = '';
         }
         $this->setAtom($functionId, ['code'       => $this->atoms[$nameId]['fullcode'], 
-                                     'fullcode'   => join(' ', $fullcode).$this->tokens[$current][1].' '.($this->atoms[$functionId]['reference'] ? '&' : '').$this->atoms[$nameId]['fullcode'].
+                                     'fullcode'   => join(' ', $fullcode).$this->tokens[$current][1] . ' ' . 
+                                                     ($this->atoms[$functionId]['reference'] ? '&' : '') . 
+                                                     ($this->atoms[$nameId]['atom'] === 'Void' ? '' : $this->atoms[$nameId]['fullcode']).
                                                      '('.$this->atoms[$argumentsId]['fullcode'].')'.
-                                                     (isset($blockId) ? self::FULLCODE_BLOCK : ';'),
+                                                     (isset($useId) ? ' use ('.$this->atoms[$useId]['fullcode'].')' : ''). // No space before use
+                                                     (isset($returnTypeId) ? ' : '.$this->atoms[$returnTypeId]['fullcode'] : '').
+                                                     (isset($blockId) ? self::FULLCODE_BLOCK : ' ;'),
                                      'line'       => $this->tokens[$current][2],
                                      'token'      => $this->getToken($this->tokens[$current][0]),
                                      'fullnspath' => $fullnspath ]);
