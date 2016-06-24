@@ -623,7 +623,6 @@ class Load extends Tasks {
         if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
             print "Defaulting a : $this->id in $this->filename\n";
             print_r($this->tokens[$this->id]);
-//            print_r($this->atoms);
             die("Missing the method\n");
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
@@ -633,7 +632,6 @@ class Load extends Tasks {
         return $this->$method();
     }
 
-    // Dummy method
     private function processNone() {
         return null;// Just ignore
     }
@@ -2636,7 +2634,7 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single operators
     //////////////////////////////////////////////////////
-    private function processSingleOperator($atom, $finals, $link) {
+    private function processSingleOperator($atom, $finals, $link, $separator = '') {
         $current = $this->id;
 
         $operatorId = $this->addAtom($atom);
@@ -2650,7 +2648,7 @@ class Load extends Tasks {
         $this->addLink($operatorId, $operandId, $link);
 
         $x = ['code'     => $this->tokens[$current][1], 
-              'fullcode' => $this->tokens[$current][1] . 
+              'fullcode' => $this->tokens[$current][1] . $separator . 
                             $this->atoms[$operandId]['fullcode'],
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
@@ -2790,7 +2788,7 @@ class Load extends Tasks {
 
     private function processNew() {
         $this->toggleContext(self::CONTEXT_NEW);
-        $id =  $this->processSingleOperator('New', $this->getPrecedence($this->tokens[$this->id][0]), 'NEW');
+        $id =  $this->processSingleOperator('New', $this->getPrecedence($this->tokens[$this->id][0]), 'NEW', ' ');
         $this->toggleContext(self::CONTEXT_NEW);
         return $id;
     }
@@ -2915,8 +2913,7 @@ class Load extends Tasks {
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === T_DOLLAR) {
-            ++$this->id; // Skip $
-            $blockId = $this->processCurlyExpression();
+            $blockId = $this->processDollar();
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } elseif (!in_array($this->tokens[$this->id + 1][0], [ T_VARIABLE, T_STRING])) {
