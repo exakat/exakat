@@ -97,7 +97,7 @@ variadic (not as a relation)
             $extra = [];
             foreach(\Tasks\Load::PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
-                    if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath'])) {
+                    if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin'])) {
                     // Raw string
                         $extra[] = "$title: csvLine.$title";
                     } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic', 'absolute'])) {

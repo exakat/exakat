@@ -2553,7 +2553,7 @@ class Load extends Tasks {
                 $this->setAtom($namespaceId, ['fullnspath' => $fullnspath]);
                 if (!$this->isContext(self::CONTEXT_CLASS) && 
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
-                    $alias = $this->addNamespaceUse($aliasId, $aliasId, $useType);
+                    $alias = $this->addNamespaceUse($originId, $aliasId, $useType);
     
                     $this->setAtom($namespaceId, ['alias'  => $alias,
                                                   'origin' => $fullnspath ]);
