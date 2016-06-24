@@ -82,14 +82,7 @@ class Load extends Tasks {
                          self::CONTEXT_NEW       => false,
                          ];
     
-    private $optionsTokens = array('Abstract'  => 0,
-                                   'Final'     => 0,
-                                   'Var'       => 0,
-                                   'Public'    => 0,
-                                   'Protected' => 0,
-                                   'Private'   => 0,
-                                   'Static'    => 0,
-                                   );
+    private $optionsTokens = array();
      
     const PRECEDENCE = [
                         T_OBJECT_OPERATOR             => 0,
@@ -821,14 +814,11 @@ class Load extends Tasks {
         $this->toggleContext(self::CONTEXT_FUNCTION);
 
         $fullcode = [];
-        $options = array('Abstract', 'Static', 'Private', 'Protected', 'Public', 'Final');
-        foreach($options as $option) {
-            if ($this->optionsTokens[$option] > 0) {
-                $this->addLink($functionId, $this->optionsTokens[$option], strtoupper($option));
-                $fullcode[] = $this->atoms[$this->optionsTokens[$option]]['fullcode'];
-                $this->optionsTokens[$option] = 0;
-            }
+        foreach($this->optionsTokens as $name => $optionId) {
+            $this->addLink($functionId, $optionId, strtoupper($name));
+            $fullcode[] = $this->atoms[$optionId]['fullcode'];
         }
+        $this->optionsTokens = array();
 
         if ($this->tokens[$this->id + 1][0] === T_AND) {
             ++$this->id;
@@ -1050,16 +1040,14 @@ class Load extends Tasks {
         $current = $this->id;
         $classId = $this->addAtom('Class');
         $this->toggleContext(self::CONTEXT_CLASS);
-        
-        if ($this->optionsTokens['Abstract'] > 0) {
-            $this->addLink($classId, $this->optionsTokens['Abstract'], 'ABSTRACT');
-            $this->optionsTokens['Abstract'] = 0;
-        }
 
-        if ($this->optionsTokens['Final'] > 0) {
-            $this->addLink($classId, $this->optionsTokens['Final'], 'FINAL');
-            $this->optionsTokens['Final'] = 0;
+        // Should work on Abstract and Final only
+        $fullcode = [];
+        foreach($this->optionsTokens as $name => $optionId) {
+            $this->addLink($classId, $optionId, strtoupper($name));
+            $fullcode[] = $this->atoms[$optionId]['fullcode'];
         }
+        $this->optionsTokens = array();
         
         if ($this->tokens[$this->id + 1][0] === T_STRING) {
             $nameId = $this->processNextAsIdentifier();
@@ -1453,7 +1441,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
             $this->addLink($pppId, $id, 'VAR');
-            $this->optionsTokens['Var'] = 0;
+            $this->optionsTokens = array();
             return $pppId;
         } 
         
@@ -1465,7 +1453,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->optionsTokens['Public'] = 0;
+            $this->optionsTokens = array();
             return $pppId;
         } 
         
@@ -1477,7 +1465,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->optionsTokens['Protected'] = 0;
+            $this->optionsTokens = array();
             return $pppId;
         } 
 
@@ -1489,7 +1477,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->optionsTokens['Private'] = 0;
+            $this->optionsTokens = array();
             return $pppId;
         } 
 
@@ -1610,14 +1598,12 @@ class Load extends Tasks {
         $staticId = $this->addAtom($atom);
 
         $fullcode = array();
-        $options = array('Abstract', 'Static', 'Private', 'Protected', 'Public', 'Final');
-        foreach($options as $option) {
-            if ($this->optionsTokens[$option] > 0) {
-                $this->addLink($staticId, $this->optionsTokens[$option], strtoupper($option));
-                $fullcode[] = $this->atoms[$this->optionsTokens[$option]]['fullcode'];
-                $this->optionsTokens[$option] = 0;
-            }
+        $fullcode = [];
+        foreach($this->optionsTokens as $name => $optionId) {
+            $this->addLink($functionId, $optionId, strtoupper($name));
+            $fullcode[] = $this->atoms[$optionId]['fullcode'];
         }
+        $this->optionsTokens = array();
         
         while ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
             $this->processNext();
