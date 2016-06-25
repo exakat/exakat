@@ -94,7 +94,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->back('result');
         $this->prepareQuery();
 
-    // As first subname
+    // As nsname prefix
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
