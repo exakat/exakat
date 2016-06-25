@@ -906,7 +906,9 @@ class Load extends Tasks {
     }
     
     private function processOneNsname() {
+        $rank = 0;
         $fullcode = [];
+        
         if ($this->tokens[$this->id + 1][0] !== T_NS_SEPARATOR) {
             $subnameId = $this->processNextAsIdentifier();
             $this->pushExpression($subnameId);
@@ -923,6 +925,7 @@ class Load extends Tasks {
             // Previous one
             if ($hasPrevious === true) {
                 $subnameId = $this->popExpression();
+                $this->setAtom($subnameId, ['rank' => $rank++]);
                 $fullcode[] = $this->atoms[$subnameId]['code'];
                 $this->addLink($extendsId, $subnameId, 'SUBNAME');
             } else {
@@ -936,10 +939,10 @@ class Load extends Tasks {
     
                 $subnameId = $this->processNextAsIdentifier();
     
+                $this->setAtom($subnameId, ['rank' => $rank++]);
                 $fullcode[] = $this->atoms[$subnameId]['code'];
                 $this->addLink($extendsId, $subnameId, 'SUBNAME');
             }
-            
             
             $this->setAtom($extendsId, ['code'     => '\\', 
                                         'fullcode' => join('\\', $fullcode),
@@ -1570,8 +1573,8 @@ class Load extends Tasks {
         
         if ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
             $this->pushExpression($id);
-            $this->processNsname();
             ++$this->id;
+            $this->processNsname();
             $id = $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON &&
                   !in_array($this->tokens[$this->id - 1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR))) {

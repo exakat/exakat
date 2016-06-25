@@ -27,6 +27,7 @@ use Analyzer;
 
 class UsedUse extends Analyzer\Analyzer {
     public function analyze() {
+
     // case of simple subuse in a new with alias :  use a\b; new b\c()
         $this->atomIs('Use')
              ->hasNoClassTrait()
@@ -77,7 +78,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->back('result');
         $this->prepareQuery();
         
-    // case of simple use in a Static constant
+    // case of simple use in a Static structure or instanceof
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
@@ -89,6 +90,24 @@ class UsedUse extends Analyzer\Analyzer {
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside(array('Staticconstant', 'Staticproperty', 'Staticmethodcall', 'Instanceof'))
              ->outIs('CLASS')
+             ->samePropertyAs('code', 'used')
+             ->back('result');
+        $this->prepareQuery();
+
+    // As first subname
+        $this->atomIs('Use')
+             ->hasNoClassTrait()
+             ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->_as('result')
+             ->savePropertyAs('alias', 'used')
+             ->inIs('USE')
+             ->inIs('ELEMENT')
+             ->inIs(array('CODE', 'BLOCK'))
+             ->atomInside('Nsname')
+             ->hasNoIn(['USE', 'NAME']) // avoid namespace and use itself.
+             ->outIs('SUBNAME')
+             ->is('rank', 0)
              ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();

@@ -10,6 +10,6 @@ $expected     = array('OriginalAlwaysUsed as AlwaysUsed',
                       'OriginalInStaticProperty as InStaticProperty', 
                       'OriginalInStaticMethod as InStaticMethod');
 
-$expected_not = array();
+$expected_not = array('OriginalNeverUsed as NeverUsed');
 
 ?>
