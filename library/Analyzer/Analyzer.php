@@ -379,6 +379,26 @@ abstract class Analyzer {
         $this->methods[] = 'filter{ 1 == 0; }';
     }
 
+// Common methods
+
+    private function hasNoInstruction($atom = 'Function') {
+        $this->addMethod('where( 
+repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
+.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(eq(0)))');
+        
+        return $this;
+    }
+
+    private function hasInstruction($atom = 'Function') {
+        $this->addMethod('where( 
+repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
+.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(gte(1)))');
+        
+        return $this;
+    }
+
+
+
     public function tokenIs($atom) {
         $this->addMethod('has("token", within('.$this->SorA($atom).'))');
         
@@ -1048,8 +1068,8 @@ GREMLIN
         return $this;
     }
 
-    public function isNotInCatchBlock() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Catch"}{(it.object.atom == "Catch")}.any() == false}');
+    public function hasNoCatchBlock() {
+        $this->hasNoInstruction('Catch');
         
         return $this;
     }
@@ -1146,21 +1166,12 @@ GREMLIN
         return $this;
     }
 
-    public function notInFunction() {
-        $this->notInInstruction('Function');
+    public function hasNoFunction() {
+        $this->hasNoInstruction('Function');
         
         return $this;
     }
-
-    public function notInInstruction($atom = 'Function') {
-//        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "'.$atom.'"}{it.object.atom == "'.$atom.'"}.any() == false}');
-        $this->addMethod('repeat(__.in(
-"ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"
-)).until(hasLabel("File")).count().is(eq(0))');
-        
-        return $this;
-    }
-
+    
     public function goToFile() {
         $this->addMethod('in.loop(1){it.object.atom != "File"}{it.object.atom == "File"}');
         
@@ -1250,14 +1261,14 @@ GREMLIN
         return $this;
     }
     
-    public function notInClass() {
-        $this->notInInstruction('Class');
+    public function hasNoClass() {
+        $this->hasNoInstruction('Class');
         
         return $this;
     }
 
-    public function inClass() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any()}');
+    public function hasClass() {
+        $this->hasInstruction('Class');
         
         return $this;
     }
@@ -1268,8 +1279,8 @@ GREMLIN
         return $this;
     }
 
-    public function notInInterface() {
-        $this->notInInstruction('Interface');
+    public function hasNoInterface() {
+        $this->hasNoInstruction('Interface');
         
         return $this;
     }
@@ -1280,8 +1291,8 @@ GREMLIN
         return $this;
     }
 
-    public function notInTrait() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}.any() == false}');
+    public function hasNoTrait() {
+        $this->hasNoInstruction('Trait');
         
         return $this;
     }
@@ -1292,8 +1303,8 @@ GREMLIN
         return $this;
     }
 
-    public function notInClassTrait() {
-        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Trait","Class"])}{it.object.atom  in ["Trait","Class"}.any() == false}');
+    public function hasNoClassTrait() {
+        $this->hasNoInstruction(array('Class', 'Trait'));
         
         return $this;
     }
@@ -1304,8 +1315,8 @@ GREMLIN
         return $this;
     }
 
-    public function notInClassInterface() {
-        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Interface","Class"])}{it.object.atom  in ["Interface","Class"]}.any() == false}');
+    public function hasNoClassInterface() {
+        $this->hasNoInstruction(['Class', 'Interface']);
         
         return $this;
     }
@@ -1316,8 +1327,8 @@ GREMLIN
         return $this;
     }
 
-    public function notInClassInterfaceTrait() {
-        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Interface", "Class", "Trait"])}{it.object.atom in ["Interface", "Class", "Trait"]}.any() == false}');
+    public function hasNoClassInterfaceTrait() {
+        $this->hasNoInstruction(['Class', 'Interface', 'Trait']);
         
         return $this;
     }
@@ -1361,76 +1372,37 @@ GREMLIN
     }
 
     public function hasFunction() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any()}');
-        
-        return $this;
-    }
-
-    public function hasNoFunction() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}');
-        
-        return $this;
-    }
-
-    public function hasClass() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any()}');
+        $this->hasInstruction('Function');
         
         return $this;
     }
 
     public function hasClassTrait() {
-        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Class", "Trait"])}{it.object.atom in ["Class", "Trait"]}.any()}');
-        
-        return $this;
-    }
-
-    public function hasNoClassTrait() {
-        $this->addMethod('filter{ it.in.loop(1){!(it.object.atom in ["Class", "Trait"])}{it.object.atom in ["Class", "Trait"]}.any() == false}');
-        
-        return $this;
-    }
-
-    public function hasNoClass() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any() == false}');
+        $this->hasInstruction(['Class', 'Trait']);
         
         return $this;
     }
 
     public function hasTrait() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}.any()}');
-        
-        return $this;
-    }
-
-    public function hasNoTrait() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}.any() == false}');
+        $this->hasInstruction('Trait');
         
         return $this;
     }
 
     public function hasInterface() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}.any()}');
-        
-        return $this;
-    }
-
-    public function hasNoInterface() {
-        $this->addMethod(<<<GREMLIN
-where( __.repeat(__.in()).times(10).emit( hasLabel("Interface") ).count().is(eq(0)))
-GREMLIN
-);
+        $this->hasInstruction('Interface');
         
         return $this;
     }
 
     public function hasTryCatch() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Try"}{it.object.atom == "Try"}.any()}');
+        $this->hasInstruction('Try');
         
         return $this;
     }
 
     public function hasNotTryCatch() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Try"}{it.object.atom == "Try"}.any() == false}');
+        $this->hasNoInstruction('Try');
         
         return $this;
     }

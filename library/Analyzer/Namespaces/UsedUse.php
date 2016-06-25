@@ -26,17 +26,12 @@ namespace Analyzer\Namespaces;
 use Analyzer;
 
 class UsedUse extends Analyzer\Analyzer {
-
     public function analyze() {
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// case of use without alias nor namespacing (use A), single or multiple declaration
-//////////////////////////////////////////////////////////////////////////////////////////
     // case of simple subuse in a new with alias :  use a\b; new b\c()
         $this->atomIs('Use')
+             ->hasNoClassTrait()
              ->outIs('USE')
              ->analyzerIsNot('self')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
              ->savePropertyAs('alias', 'used')
              ->inIs('USE')
@@ -44,50 +39,33 @@ class UsedUse extends Analyzer\Analyzer {
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('New')
              ->outIs('NEW')
-             ->outIs('SUBNAME')
-             ->is('rank', 0)
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a new with alias :  use a; new a()
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->_as('result')
-             ->atomIs(array('Identifier', 'Nsname'))
-             ->savePropertyAs('alias', 'used')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->atomInside('New')
-             ->outIs('NEW')
-             ->tokenIs('T_STRING')
              ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
     // case of simple use in Typehint
         $this->atomIs('Use')
+             ->hasNoClassTrait()
              ->outIs('USE')
              ->analyzerIsNot('self')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
-             ->savePropertyAs('code', 'used')
+             ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Typehint')
-             ->outIs('CLASS')
+             ->atomInside('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
              ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
     // case of alias use in extends or implements
         $this->atomIs('Use')
+             ->hasNoClassTrait()
              ->outIs('USE')
              ->analyzerIsNot('self')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->_as('result')
              ->savePropertyAs('alias', 'alias')
              ->inIs('USE')
@@ -95,279 +73,25 @@ class UsedUse extends Analyzer\Analyzer {
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
-             ->isNot('alias', null)
-             ->samePropertyAs('alias', 'alias')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a Static constant
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->_as('result')
-             ->savePropertyAs('alias', 'used')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Staticconstant')
-             ->outIs('CLASS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a Static property
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->_as('result')
-             ->savePropertyAs('alias', 'used')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Staticproperty')
-             ->outIs('CLASS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a Static method
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->_as('result')
-             ->savePropertyAs('alias', 'used')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Staticmethodcall')
-             ->outIs('CLASS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a instanceof
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->_as('result')
-             ->savePropertyAs('fullnspath', 'used')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Instanceof')
-             ->outIs('CLASS')
-             ->samePropertyAs('fullnspath', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// case of use with alias (use A as B), single or multiple declaration
-//////////////////////////////////////////////////////////////////////////////////////////
-    // case of simple use in Typehint
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
-             ->_as('result')
-             ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'used')
-             ->inIs(array('AS', 'SUBNAME'))
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Typehint')
-             ->outIs('CLASS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a new
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
-             ->_as('result')
-             ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'used')
-             ->inIs(array('AS', 'SUBNAME'))
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('New')
-             ->outIs('NEW')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a extends
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
-             ->_as('result')
-             ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'used')
-             ->inIs(array('AS', 'SUBNAME'))
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Class')
-             ->outIs('EXTENDS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a implements
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
-             ->_as('result')
-             ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'used')
-             ->inIs(array('AS', 'SUBNAME'))
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Class')
-             ->outIs('IMPLEMENTS')
-             ->samePropertyAs('code', 'used')
+             ->samePropertyAs('code', 'alias')
              ->back('result');
         $this->prepareQuery();
         
     // case of simple use in a Static constant
         $this->atomIs('Use')
+             ->hasNoClassTrait()
              ->outIs('USE')
              ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
              ->_as('result')
-             ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'used')
-             ->inIs(array('AS', 'SUBNAME'))
+             ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Staticconstant')
+             ->atomInside(array('Staticconstant', 'Staticproperty', 'Staticmethodcall', 'Instanceof'))
              ->outIs('CLASS')
              ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
-
-    // case of simple use in a Static property
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
-             ->_as('result')
-             ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'used')
-             ->inIs(array('AS', 'SUBNAME'))
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Staticproperty')
-             ->outIs('CLASS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of simple use in a Static method
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
-             ->_as('result')
-             ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'used')
-             ->inIs(array('AS', 'SUBNAME'))
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Staticmethodcall')
-             ->outIs('CLASS')
-             ->samePropertyAs('code', 'used')
-             ->back('result');
-        $this->prepareQuery();
-
-    // case of alias use in a instanceof
-        // subcase for the original path
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
-             ->_as('result')
-             ->raw('sideEffect{ thealias = it;}')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Instanceof')
-             ->outIs('CLASS')
-             ->raw('filter{ it.fullcode.toLowerCase() == thealias.originpath.toLowerCase()}')
-             ->raw('transform{ thealias}');
-        $this->prepareQuery();
-
-        // subcase for the alias
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_AS')
-             ->_as('result')
-             ->raw('sideEffect{ result = it;}')
-             ->savePropertyAs('alias', 'thealias')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Instanceof')
-             ->outIs('CLASS')
-             ->samePropertyAs('fullcode', 'thealias')
-             ->raw('transform{ result}');
-        $this->prepareQuery();
-
-        // alias used in a class use (for traits)
-        // subcase for the original path
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->atomIs('As')
-             ->_as('result')
-
-             ->raw('sideEffect{ thealias = it;}')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE')
-             ->raw('filter{ it.fullcode.toLowerCase() == thealias.alias.toLowerCase()}')
-             ->raw('transform{ thealias}');
-        $this->prepareQuery();
-        
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->analyzerIsNot('self')
-             ->atomIsNot('As')
-             ->_as('result')
-             ->raw('sideEffect{ result = it;}')
-             ->savePropertyAs('alias', 'thealias')
-             ->inIs('USE')
-             ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
-             ->atomInside('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE')
-             ->samePropertyAs('fullcode', 'thealias')
-             ->raw('transform{ result}');
-        $this->prepareQuery();
-
     }
 }
 
