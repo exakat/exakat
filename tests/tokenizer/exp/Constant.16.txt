@@ -3,8 +3,6 @@ Label : LEFT
   \
   Label : SUBNAME
     j
-    Label : SUBNAME
-      j
   Label : SUBNAME
     k
   Label : SUBNAME

@@ -3,7 +3,7 @@ Label : ARGUMENT
   1
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     $x
   Label : PROPERTY
     }

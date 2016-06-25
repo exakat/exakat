@@ -1,7 +1,7 @@
 +
 Label : LEFT
   ->
-  Label : CLASS
+  Label : OBJECT
     $a
   Label : PROPERTY
     month

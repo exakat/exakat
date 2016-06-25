@@ -14,7 +14,7 @@ Label : FILE
         --
         Label : POSTPLUSPLUS
           ->
-          Label : CLASS
+          Label : OBJECT
             $a
           Label : PROPERTY
             b

@@ -7,8 +7,6 @@ Label : ARGUMENT
       =>
       Label : KEY
         ->
-        Label : CLASS
-          $this
         Label : METHOD
           B
           Label : ARGUMENTS
@@ -16,10 +14,10 @@ Label : ARGUMENT
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             B
+        Label : OBJECT
+          $this
       Label : VALUE
         ->
-        Label : CLASS
-          $this
         Label : METHOD
           C
           Label : ARGUMENTS
@@ -27,6 +25,8 @@ Label : ARGUMENT
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             C
+        Label : OBJECT
+          $this
   Label : NAME
     array
 Label : ARGUMENT
@@ -41,13 +41,13 @@ Label : ARGUMENT
           'E'
         Label : ARGUMENT
           ->
-          Label : CLASS
-            $this
           Label : METHOD
             F
             Label : ARGUMENTS
 123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]      Label : NAME
+123098120398 [label="Reached level 15"]          Label : OBJECT
+            $this
+      Label : NAME
         D
   Label : NAME
     array
@@ -59,8 +59,6 @@ Label : ARGUMENT
       'H'
     Label : ARGUMENT
       ->
-      Label : CLASS
-        $this
       Label : METHOD
         F
         Label : ARGUMENTS
@@ -69,6 +67,8 @@ Label : ARGUMENT
             Void
         Label : NAME
           F
+      Label : OBJECT
+        $this
     Label : ARGUMENT
       $d
   Label : NAME

@@ -1,8 +1,6 @@
 +
 Label : LEFT
   ->
-  Label : CLASS
-    $a
   Label : METHOD
     D
     Label : ARGUMENTS
@@ -11,9 +9,11 @@ Label : LEFT
         Void
     Label : NAME
       D
+  Label : OBJECT
+    $a
 Label : RIGHT
   ->
-  Label : CLASS
+  Label : OBJECT
     $this
   Label : PROPERTY
     E

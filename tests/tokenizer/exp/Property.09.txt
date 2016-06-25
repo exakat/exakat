@@ -10,7 +10,7 @@ Label : FILE
         *
         Label : LEFT
           ->
-          Label : CLASS
+          Label : OBJECT
             $x
           Label : PROPERTY
             y

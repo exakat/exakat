@@ -9,7 +9,7 @@ Label : ARGUMENT
       ++
       Label : POSTPLUSPLUS
         ->
-        Label : CLASS
+        Label : OBJECT
           $f
         Label : PROPERTY
           g

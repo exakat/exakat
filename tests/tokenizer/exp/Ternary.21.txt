@@ -1,7 +1,7 @@
 +
 Label : LEFT
   ->
-  Label : CLASS
+  Label : OBJECT
     $i
   Label : PROPERTY
     ]
@@ -17,7 +17,7 @@ Label : RIGHT
       $l
     Label : RIGHT
       ->
-      Label : CLASS
+      Label : OBJECT
         $m
       Label : PROPERTY
         ]

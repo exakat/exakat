@@ -17,7 +17,15 @@ Label : LEFT
     Void
 Label : RIGHT
   ->
-  Label : CLASS
+  Label : METHOD
+    d
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        'e'
+    Label : NAME
+      d
+  Label : OBJECT
     )
     Label : CODE
       new
@@ -31,11 +39,3 @@ Label : RIGHT
             $c
         Label : NAME
           A
-  Label : METHOD
-    d
-    Label : ARGUMENTS
-      )
-      Label : ARGUMENT
-        'e'
-    Label : NAME
-      d

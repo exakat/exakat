@@ -1,14 +1,12 @@
 )
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     $this
   Label : PROPERTY
     d
 Label : ARGUMENT
   ->
-  Label : CLASS
-    $e
   Label : METHOD
     f
     Label : ARGUMENTS
@@ -17,3 +15,5 @@ Label : ARGUMENT
         Void
     Label : NAME
       f
+  Label : OBJECT
+    $e

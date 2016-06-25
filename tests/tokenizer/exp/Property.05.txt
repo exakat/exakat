@@ -8,9 +8,9 @@ Label : FILE
       ;
       Label : ELEMENT
         ->
-        Label : CLASS
+        Label : OBJECT
           ->
-          Label : CLASS
+          Label : OBJECT
             $x
           Label : PROPERTY
             a

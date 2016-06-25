@@ -1,7 +1,7 @@
 =
 Label : LEFT
   ->
-  Label : CLASS
+  Label : OBJECT
     $a
   Label : PROPERTY
     b
@@ -9,7 +9,7 @@ Label : RIGHT
   ?
   Label : CONDITION
     ->
-    Label : CLASS
+    Label : OBJECT
       $c
     Label : PROPERTY
       d

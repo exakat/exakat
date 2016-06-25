@@ -19,15 +19,15 @@ Label : ARGUMENT
 123098120398 [label="Reached level 15"]            Label : RIGHT
 123098120398 [label="Reached level 15"]          Label : RIGHT
             ->
-            Label : CLASS
-123098120398 [label="Reached level 15"]            Label : METHOD
+            Label : METHOD
+123098120398 [label="Reached level 15"]            Label : OBJECT
 123098120398 [label="Reached level 15"]        Label : RIGHT
           ->
-          Label : CLASS
-            $g
           Label : METHOD
             R
             Label : ARGUMENTS
 123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]  Label : NAME
+123098120398 [label="Reached level 15"]          Label : OBJECT
+            $g
+  Label : NAME
     array

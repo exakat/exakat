@@ -3,7 +3,7 @@ Label : ARGUMENT
   `
   Label : CONCAT
     ->
-    Label : CLASS
+    Label : OBJECT
       $file
     Label : PROPERTY
       x

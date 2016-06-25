@@ -5,7 +5,7 @@ Label : ARGUMENT
     )
     Label : ARGUMENT
       ->
-      Label : CLASS
+      Label : OBJECT
         $this
       Label : PROPERTY
         c

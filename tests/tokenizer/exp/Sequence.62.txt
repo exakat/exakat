@@ -7,7 +7,7 @@ Label : ARGUMENT
       )
       Label : ARGUMENT
         ->
-        Label : CLASS
+        Label : OBJECT
           $a
         Label : PROPERTY
           b
@@ -21,8 +21,6 @@ Label : ARGUMENT
       )
       Label : ARGUMENT
         ->
-        Label : CLASS
-          $c
         Label : METHOD
           d
           Label : ARGUMENTS
@@ -30,6 +28,8 @@ Label : ARGUMENT
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             d
+        Label : OBJECT
+          $c
       Label : ARGUMENT
         G
       Label : ARGUMENT

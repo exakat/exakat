@@ -20,7 +20,7 @@ Label : ARGUMENT
         $d
   Label : CONCAT
     ->
-    Label : CLASS
+    Label : OBJECT
       $f
     Label : PROPERTY
       h

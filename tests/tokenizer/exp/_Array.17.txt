@@ -3,13 +3,13 @@ Label : ARGUMENT
   $a
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     $this
   Label : PROPERTY
     }
     Label : INDEX
       ->
-      Label : CLASS
+      Label : OBJECT
         $this
       Label : PROPERTY
         B

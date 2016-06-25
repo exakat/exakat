@@ -7,7 +7,7 @@ Label : ARGUMENT
       'C'
     Label : ARGUMENT
       ->
-      Label : CLASS
+      Label : OBJECT
         $d
       Label : PROPERTY
         e

@@ -1,16 +1,12 @@
 ?>
 Label : ARGUMENT
   ->
-  Label : CLASS
-    $tpl
   Label : METHOD
     escape
     Label : ARGUMENTS
       )
       Label : ARGUMENT
         ->
-        Label : CLASS
-          $tpl
         Label : METHOD
           slug
           Label : ARGUMENTS
@@ -18,5 +14,9 @@ Label : ARGUMENT
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             slug
+        Label : OBJECT
+          $tpl
     Label : NAME
       escape
+  Label : OBJECT
+    $tpl

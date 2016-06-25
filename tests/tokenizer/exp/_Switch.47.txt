@@ -1,7 +1,7 @@
 =
 Label : LEFT
   ->
-  Label : CLASS
+  Label : OBJECT
     $enc
   Label : PROPERTY
     level

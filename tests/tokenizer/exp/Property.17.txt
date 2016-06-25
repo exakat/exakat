@@ -1,9 +1,9 @@
 )
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     ->
-    Label : CLASS
+    Label : OBJECT
       $b
     Label : PROPERTY
       c

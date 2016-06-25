@@ -5,9 +5,9 @@ Label : RIGHT
   `
   Label : CONCAT
     ->
-    Label : CLASS
+    Label : OBJECT
       ->
-      Label : CLASS
+      Label : OBJECT
         $b
       Label : PROPERTY
         c

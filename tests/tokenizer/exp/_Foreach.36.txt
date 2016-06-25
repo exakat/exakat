@@ -19,7 +19,7 @@ Label : FILE
           =>
           Label : KEY
             ->
-            Label : CLASS
+            Label : OBJECT
 123098120398 [label="Reached level 15"]            Label : PROPERTY
 123098120398 [label="Reached level 15"]          Label : VALUE
             $d

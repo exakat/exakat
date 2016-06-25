@@ -17,7 +17,7 @@ Label : FILE
           $a
         Label : VALUE
           ->
-          Label : CLASS
+          Label : OBJECT
             $b
           Label : PROPERTY
             d

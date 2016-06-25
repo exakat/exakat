@@ -12,7 +12,7 @@ Label : FILE
           $x
         Label : RIGHT
           ->
-          Label : CLASS
+          Label : OBJECT
             $y
           Label : PROPERTY
             z

@@ -5,7 +5,5 @@ Label : RIGHT
   \
   Label : SUBNAME
     a
-    Label : SUBNAME
-      a
   Label : SUBNAME
     b

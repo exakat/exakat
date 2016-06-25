@@ -3,7 +3,7 @@ Label : LEFT
   $z
 Label : RIGHT
   ->
-  Label : CLASS
+  Label : OBJECT
     $x
   Label : PROPERTY
     y

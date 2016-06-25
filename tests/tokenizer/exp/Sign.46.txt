@@ -85,8 +85,6 @@ Label : LEFT
     array
 Label : RIGHT
   ->
-  Label : CLASS
-    $b
   Label : METHOD
     BR
     Label : ARGUMENTS
@@ -107,3 +105,5 @@ Label : RIGHT
           array
     Label : NAME
       BR
+  Label : OBJECT
+    $b

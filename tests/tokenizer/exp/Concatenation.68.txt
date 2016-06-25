@@ -15,8 +15,6 @@ Label : ARGUMENT
     'I'
   Label : THEN
     ->
-    Label : CLASS
-      $b
     Label : METHOD
       H
       Label : ARGUMENTS
@@ -25,3 +23,5 @@ Label : ARGUMENT
           Void
       Label : NAME
         H
+    Label : OBJECT
+      $b

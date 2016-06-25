@@ -7,7 +7,7 @@ Label : RIGHT
     1
   Label : ELSE
     ->
-    Label : CLASS
+    Label : OBJECT
       $a
     Label : PROPERTY
       b

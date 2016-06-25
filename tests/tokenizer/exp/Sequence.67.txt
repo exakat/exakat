@@ -13,8 +13,6 @@ Label : LEFT
     array
 Label : RIGHT
   ->
-  Label : CLASS
-    $q
   Label : METHOD
     M
     Label : ARGUMENTS
@@ -23,3 +21,5 @@ Label : RIGHT
         N
     Label : NAME
       M
+  Label : OBJECT
+    $q

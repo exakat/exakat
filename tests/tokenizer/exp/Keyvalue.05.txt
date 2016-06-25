@@ -13,7 +13,7 @@ Label : ARGUMENT
   =>
   Label : KEY
     ->
-    Label : CLASS
+    Label : OBJECT
       $b
     Label : PROPERTY
       c

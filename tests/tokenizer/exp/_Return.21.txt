@@ -3,7 +3,7 @@ Label : INDEX
   ++
   Label : POSTPLUSPLUS
     ->
-    Label : CLASS
+    Label : OBJECT
       $this
     Label : PROPERTY
       C

@@ -13,7 +13,7 @@ Label : ARGUMENT
       'c'
   Label : RIGHT
     ->
-    Label : CLASS
+    Label : OBJECT
       $d
     Label : PROPERTY
       e

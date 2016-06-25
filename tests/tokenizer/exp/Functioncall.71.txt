@@ -13,7 +13,7 @@ Label : ARGUMENT
         $e
       Label : ARGUMENT
         ->
-        Label : CLASS
+        Label : OBJECT
           $f
         Label : PROPERTY
           ]
@@ -25,9 +25,9 @@ Label : ARGUMENT
       J
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     ->
-    Label : CLASS
+    Label : OBJECT
       $f
     Label : PROPERTY
       L
@@ -59,7 +59,7 @@ Label : ARGUMENT
   $k
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     $f
   Label : PROPERTY
     ]
@@ -69,7 +69,7 @@ Label : ARGUMENT
       O
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     $f
   Label : PROPERTY
     ]
@@ -81,9 +81,9 @@ Label : ARGUMENT
   $l
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     ->
-    Label : CLASS
+    Label : OBJECT
       $this
     Label : PROPERTY
       Q

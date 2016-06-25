@@ -1,7 +1,7 @@
 )
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     $b
   Label : PROPERTY
     ]
@@ -11,7 +11,7 @@ Label : ARGUMENT
       D
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     $c
   Label : PROPERTY
     ]
@@ -21,7 +21,7 @@ Label : ARGUMENT
       F
 Label : ARGUMENT
   ->
-  Label : CLASS
+  Label : OBJECT
     $d
   Label : PROPERTY
     ]

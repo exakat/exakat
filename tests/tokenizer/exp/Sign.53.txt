@@ -5,7 +5,7 @@ Label : LEFT
     '+'
   Label : RIGHT
     ->
-    Label : CLASS
+    Label : OBJECT
       $d
     Label : PROPERTY
       e

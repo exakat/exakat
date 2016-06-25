@@ -10,7 +10,7 @@ Label : FILE
         throw
         Label : THROW
           ->
-          Label : CLASS
+          Label : OBJECT
             $e
           Label : PROPERTY
             g

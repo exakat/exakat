@@ -1,13 +1,13 @@
 +
 Label : LEFT
   ->
-  Label : CLASS
+  Label : OBJECT
     $b3
   Label : PROPERTY
     $c3
 Label : RIGHT
   ->
-  Label : CLASS
+  Label : OBJECT
     $d3
   Label : PROPERTY
     $e3

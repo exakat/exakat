@@ -3,13 +3,13 @@ Label : ARGUMENT
   =>
   Label : KEY
     ->
-    Label : CLASS
+    Label : OBJECT
       $a
     Label : PROPERTY
       b
   Label : VALUE
     ->
-    Label : CLASS
+    Label : OBJECT
       $c
     Label : PROPERTY
       d
@@ -17,8 +17,6 @@ Label : ARGUMENT
   =>
   Label : KEY
     ->
-    Label : CLASS
-      $e
     Label : METHOD
       f
       Label : ARGUMENTS
@@ -27,10 +25,10 @@ Label : ARGUMENT
           Void
       Label : NAME
         f
+    Label : OBJECT
+      $e
   Label : VALUE
     ->
-    Label : CLASS
-      $g
     Label : METHOD
       h
       Label : ARGUMENTS
@@ -39,6 +37,8 @@ Label : ARGUMENT
           Void
       Label : NAME
         h
+    Label : OBJECT
+      $g
 Label : ARGUMENT
   =>
   Label : KEY

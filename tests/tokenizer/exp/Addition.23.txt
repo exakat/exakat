@@ -3,7 +3,15 @@ Label : LEFT
   $b
 Label : RIGHT
   ->
-  Label : CLASS
+  Label : METHOD
+    f
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $g
+    Label : NAME
+      f
+  Label : OBJECT
     ::
     Label : CLASS
       C
@@ -15,11 +23,3 @@ Label : RIGHT
           'e'
       Label : NAME
         d
-  Label : METHOD
-    f
-    Label : ARGUMENTS
-      )
-      Label : ARGUMENT
-        $g
-    Label : NAME
-      f

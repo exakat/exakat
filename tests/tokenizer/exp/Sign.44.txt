@@ -1,7 +1,7 @@
 =
 Label : LEFT
   ->
-  Label : CLASS
+  Label : OBJECT
     $d
   Label : PROPERTY
     K

@@ -10,7 +10,7 @@ Label : FILE
         @
         Label : AT
           ->
-          Label : CLASS
+          Label : OBJECT
             $x
           Label : PROPERTY
             t

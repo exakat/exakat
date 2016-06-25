@@ -7,7 +7,7 @@ Label : RIGHT
     'e'
   Label : RIGHT
     ->
-    Label : CLASS
+    Label : OBJECT
       $f
     Label : PROPERTY
       g

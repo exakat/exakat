@@ -3,29 +3,33 @@ Label : BLOCK
   {}
   Label : ELEMENT
     use
+    Label : BLOCK
+      {}
+      Label : ELEMENT
+        insteadof
+        Label : INSTEADOF
+          F
+        Label : NAME
+          ::
+          Label : CLASS
+            G
+          Label : CONSTANT
+            I
+      Label : ELEMENT
+        insteadof
+        Label : INSTEADOF
+          G
+        Label : NAME
+          ::
+          Label : CLASS
+            F
+          Label : CONSTANT
+            L
     Label : USE
       F
     Label : USE
       G
-      Label : BLOCK
-        {}
-        Label : ELEMENT
-          insteadof
-          Label : AS
-            F
-          Label : NAME
-            ::
-            Label : CLASS
-123098120398 [label="Reached level 15"]            Label : CONSTANT
-123098120398 [label="Reached level 15"]        Label : ELEMENT
-          insteadof
-          Label : AS
-            G
-          Label : NAME
-            ::
-            Label : CLASS
-123098120398 [label="Reached level 15"]            Label : CONSTANT
-123098120398 [label="Reached level 15"]Label : EXTENDS
+Label : EXTENDS
   \
   Label : SUBNAME
     C

@@ -5,8 +5,6 @@ Label : ARGUMENT
   >
   Label : LEFT
     ->
-    Label : CLASS
-      $a
     Label : METHOD
       b
       Label : ARGUMENTS
@@ -15,6 +13,8 @@ Label : ARGUMENT
           Void
       Label : NAME
         b
+    Label : OBJECT
+      $a
   Label : RIGHT
     'c'
 Label : ARGUMENT

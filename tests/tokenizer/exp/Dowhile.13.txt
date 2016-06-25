@@ -3,8 +3,6 @@ Label : ARGUMENT
   'C'
 Label : ARGUMENT
   ->
-  Label : CLASS
-    $a
   Label : METHOD
     D
     Label : ARGUMENTS
@@ -13,3 +11,5 @@ Label : ARGUMENT
         Void
     Label : NAME
       D
+  Label : OBJECT
+    $a

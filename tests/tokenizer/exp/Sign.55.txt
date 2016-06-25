@@ -5,8 +5,6 @@ Label : LEFT
     'a'
   Label : RIGHT
     ->
-    Label : CLASS
-      $b
     Label : METHOD
       c
       Label : ARGUMENTS
@@ -15,5 +13,7 @@ Label : LEFT
           $d
       Label : NAME
         c
+    Label : OBJECT
+      $b
 Label : RIGHT
   'e'

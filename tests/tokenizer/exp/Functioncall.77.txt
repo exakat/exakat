@@ -1,12 +1,6 @@
 ;
 Label : ARGUMENT
   ->
-  Label : CLASS
-    ]
-    Label : INDEX
-      'C'
-    Label : VARIABLE
-      $b
   Label : METHOD
     D
     Label : ARGUMENTS
@@ -15,3 +9,9 @@ Label : ARGUMENT
         $a
     Label : NAME
       D
+  Label : OBJECT
+    ]
+    Label : INDEX
+      'C'
+    Label : VARIABLE
+      $b

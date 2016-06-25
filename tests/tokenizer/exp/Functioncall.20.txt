@@ -29,13 +29,13 @@ Label : ARGUMENT
   =>
   Label : KEY
     ->
-    Label : CLASS
+    Label : OBJECT
       $f
     Label : PROPERTY
       g
   Label : VALUE
     ->
-    Label : CLASS
+    Label : OBJECT
       $h
     Label : PROPERTY
       i

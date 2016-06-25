@@ -3,14 +3,14 @@ Label : BLOCK
   {}
   Label : ELEMENT
     use
+    Label : BLOCK
+      {}
+      Label : ELEMENT
+        Void
     Label : USE
       F
     Label : USE
       G
-      Label : BLOCK
-        {}
-        Label : ELEMENT
-          Void
 Label : EXTENDS
   \
   Label : SUBNAME

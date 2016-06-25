@@ -6,8 +6,6 @@ Label : ARGUMENT
     )
     Label : ARGUMENT
       ->
-      Label : CLASS
-        $a
       Label : METHOD
         J
         Label : ARGUMENTS
@@ -16,5 +14,7 @@ Label : ARGUMENT
             Void
         Label : NAME
           J
+      Label : OBJECT
+        $a
   Label : NAME
     I

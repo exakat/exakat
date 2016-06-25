@@ -11,8 +11,6 @@ Label : ARGUMENT
   >
   Label : LEFT
     ->
-    Label : CLASS
-      $d
     Label : METHOD
       e
       Label : ARGUMENTS
@@ -21,6 +19,8 @@ Label : ARGUMENT
           Void
       Label : NAME
         e
+    Label : OBJECT
+      $d
   Label : RIGHT
     'f'
 Label : ARGUMENT

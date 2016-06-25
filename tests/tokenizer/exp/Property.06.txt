@@ -8,11 +8,11 @@ Label : FILE
       ;
       Label : ELEMENT
         ->
-        Label : CLASS
+        Label : OBJECT
           ->
-          Label : CLASS
+          Label : OBJECT
             ->
-            Label : CLASS
+            Label : OBJECT
 123098120398 [label="Reached level 15"]            Label : PROPERTY
 123098120398 [label="Reached level 15"]          Label : PROPERTY
             b

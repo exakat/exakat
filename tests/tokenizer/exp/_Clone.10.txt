@@ -7,7 +7,7 @@ Label : RIGHT
     z
     Label : CODE
       ->
-      Label : CLASS
+      Label : OBJECT
         $y
       Label : PROPERTY
         z

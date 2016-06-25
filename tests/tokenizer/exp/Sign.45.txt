@@ -1,13 +1,13 @@
 -
 Label : LEFT
   ->
-  Label : CLASS
+  Label : OBJECT
     $b
   Label : PROPERTY
     {}
     Label : CODE
       ->
-      Label : CLASS
+      Label : OBJECT
         $c
       Label : PROPERTY
         B
