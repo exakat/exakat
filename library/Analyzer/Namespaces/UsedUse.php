@@ -94,6 +94,23 @@ class UsedUse extends Analyzer\Analyzer {
              ->back('result');
         $this->prepareQuery();
 
+    // case of namespace use used in a class/trait
+        $this->atomIs('Use')
+             ->hasNoClassTrait()
+             ->outIs('USE')
+             ->analyzerIsNot('self')
+             ->_as('result')
+             ->savePropertyAs('alias', 'used')
+             ->inIs('USE')
+             ->inIs('ELEMENT')
+             ->inIs(array('CODE', 'BLOCK'))
+             ->atomInside('Use')
+             ->hasClassTrait()
+             ->outIs('USE')
+             ->samePropertyAs('code', 'used')
+             ->back('result');
+        $this->prepareQuery();
+        
     // As nsname prefix
         $this->atomIs('Use')
              ->hasNoClassTrait()
