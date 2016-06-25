@@ -1096,9 +1096,8 @@ GREMLIN
     }
 
     public function hasNoParent($parentClass, $ins = array()) {
-        
         if (empty($ins)) {
-            $in = '.in';
+            $in = '.in()';
         } else {
             $in = array();
             
@@ -1107,7 +1106,7 @@ GREMLIN
             }
             foreach($ins as $i) {
                 if (empty($i)) {
-                    $in[] = '.in';
+                    $in[] = '.in()';
                 } else {
                     $in[] = ".in('$i')";
                 }
@@ -1120,7 +1119,57 @@ GREMLIN
         
         return $this;
     }
-    
+
+    public function hasChildren($childrenClass, $outs = array()) {
+        if (empty($outs)) {
+            $out = '.out()';
+        } else {
+            $out = array();
+            
+            if (!is_array($outs)) {
+                $outs = array($outs);
+            }
+            foreach($outs as $o) {
+                if (empty($o)) {
+                    $out[] = '.out()';
+                } else {
+                    $out[] = ".out('$o')";
+                }
+            }
+            
+            $out = implode('', $out);
+        }
+        
+        $this->addMethod('where( __'.$out.'.hasLabel('.$this->SorA($childrenClass).'))');
+        
+        return $this;
+    }
+        
+    public function hasNoChildren($childrenClass, $outs = array()) {
+        if (empty($outs)) {
+            $out = '.out()';
+        } else {
+            $out = array();
+            
+            if (!is_array($outs)) {
+                $outs = array($outs);
+            }
+            foreach($outs as $o) {
+                if (empty($o)) {
+                    $out[] = '.out()';
+                } else {
+                    $out[] = ".out('$o')";
+                }
+            }
+            
+            $out = implode('', $out);
+        }
+        
+        $this->addMethod('where( __'.$out.'.not(hasLabel('.$this->SorA($childrenClass).')))');
+        
+        return $this;
+    }
+        
     public function hasConstantDefinition() {
         $this->addMethod("filter{ g.idx('constants')[['path':it.fullnspath]].any()}");
     
