@@ -949,6 +949,8 @@ class Load extends Tasks {
                                         'line'     => $this->tokens[$current][2],
                                         'token'    => $this->getToken($this->tokens[$current][0]),
                                         'absolute' => !$hasPrevious]);
+            $fullnspath = $this->getFullnspath($extendsId);
+            $this->setAtom($extendsId, ['fullnspath' => $fullnspath]);
         } else {
             $extendsId = $this->popExpression();
         }
@@ -1026,7 +1028,7 @@ class Load extends Tasks {
         
         $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($interfaceId, ['code'       => $this->tokens[$current][1], 
-                                      'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
+                                      'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].
                                                       static::FULLCODE_BLOCK,
                                       'line'       => $this->tokens[$current][2],
                                       'token'      => $this->getToken($this->tokens[$current][0]),
@@ -1303,6 +1305,8 @@ class Load extends Tasks {
             $id = $this->processOneNsname();
             if (in_array(strtolower($this->tokens[$this->id][1]), ['int', 'bool', 'void', 'float', 'string'])) {
                 $this->setAtom($id, ['fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ]);
+            } else {
+                $this->addCall('class', $this->atoms[$id]['fullnspath'], $id);
             }
             return $id;
         } else {
@@ -3215,7 +3219,10 @@ class Load extends Tasks {
     }
 
     private function processInstanceof() {
-        $this->processOperator('Instanceof', $this->getPrecedence($this->tokens[$this->id][0]), ['VARIABLE', 'CLASS']);
+        $id = $this->processOperator('Instanceof', $this->getPrecedence($this->tokens[$this->id][0]), ['VARIABLE', 'CLASS']);
+        // Warning : big hack. $id + 1 is luckily the 'CLASS' for instanceof..
+        $this->addCall('class', $this->atoms[$id + 1]['fullnspath'], $id + 1);
+        return $id;
     }
 
     private function processKeyvalue() {
@@ -3444,7 +3451,7 @@ class Load extends Tasks {
 
             $extra = [];
             foreach($extras[$atom['atom']] as $e) {
-                $extra[] = isset($atom[$e]) ? "\"$atom[$e]\"" : "\"-1\"";
+                $extra[] = isset($atom[$e]) ? "\"".str_replace('"', '\\"', $atom[$e])."\"" : "\"-1\"";
             }
 
             if (count($extras[$atom['atom']]) > 0) {
