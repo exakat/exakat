@@ -34,10 +34,11 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
         // spotting objects with property
         $this->atomIs('Variable')
              ->analyzerIs('Variables/Arguments')
+             ->hasNoOut('TYPEHINT')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->isNot('lambda', true)
+             ->hasNoChildren('Void', 'NAME')
              ->outIs('BLOCK')
              ->atomInside('Property')
              ->outIs('OBJECT')
@@ -47,75 +48,85 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
 
         // spotting objects with methodcall
         $this->atomIs('Variable')
+             ->hasNoOut('TYPEHINT')
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->isNot('lambda', true)
+             ->hasNoChildren('Void', 'NAME')
              ->outIs('BLOCK')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'name')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // spotting array with array[index]
         $this->atomIs('Variable')
+             ->hasNoOut('TYPEHINT')
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->isNot('lambda', true)
+             ->hasNoChildren('Void', 'NAME')
              ->outIs('BLOCK')
              ->atomInside('Array')
-             ->raw('filter{ it.out("INDEX").next().atom != "Integer"}') // attempt to avoid strings
+             ->raw('where( __.out("INDEX").hasLabel("Integer").count().is(eq(0)))') // attempt to avoid strings
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // spotting array with arrayappend[]
         $this->atomIs('Variable')
+             ->hasNoOut('TYPEHINT')
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->isNot('lambda', true)
+             ->hasNoChildren('Void', 'NAME')
              ->outIs('BLOCK')
              ->atomInside('Arrayappend')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // spotting array in a functioncall
         $this->atomIs('Variable')
+             ->hasNoOut('TYPEHINT')
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->isNot('lambda', true)
+             ->hasNoChildren('Void', 'NAME')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->tokenIs('T_OPEN_BRACKET')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // spotting array with callable
         $this->atomIs('Variable')
+             ->hasNoOut('TYPEHINT')
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->isNot('lambda', true)
+             ->hasNoChildren('Void', 'NAME')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->tokenIs('T_VARIABLE')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
