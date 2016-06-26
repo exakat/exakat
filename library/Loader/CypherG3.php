@@ -159,7 +159,7 @@ CREATE (token)-[:$edge]->(token2)
 
 CYPHER;
             try {
-                $res = $this->cypher->query($queryTemplate);
+                $this->cypher->query($queryTemplate);
                 $this->unlink[] = "{$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv";
                 $e = microtime(true);
 //                $wc = trim(shell_exec("wc -l {$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv"));
