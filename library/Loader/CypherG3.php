@@ -130,7 +130,12 @@ $extra})
 
 CYPHER;
             try {
-                $this->cypher->query($queryTemplate);
+                $res = $this->cypher->query($queryTemplate);
+                if (isset($res->message)) {
+                    print_r($res);
+                    die();
+                }
+
                 $this->unlink[] = "{$this->config->projects_root}/nodes.g3.$atom.csv";
                 $e = microtime(true);
 //                $wc = trim(shell_exec("wc -l {$this->config->projects_root}/nodes.g3.$atom.csv"));
@@ -159,7 +164,11 @@ CREATE (token)-[:$edge]->(token2)
 
 CYPHER;
             try {
-                $this->cypher->query($queryTemplate);
+                $res = $this->cypher->query($queryTemplate);
+                if (isset($res->message)) {
+                    print_r($res);
+                    die();
+                }
                 $this->unlink[] = "{$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv";
                 $e = microtime(true);
 //                $wc = trim(shell_exec("wc -l {$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv"));
