@@ -791,19 +791,26 @@ GREMLIN;
         return $this;
     }
 
-    public function savePropertyAs($property, $name) {
-        if ($property == 'arglist') {
-            $this->addMethod(<<<GREMLIN
-sideEffect{ s=[]; 
-    it.out("ARGUMENT")
-     .transform{ if (it.atom == 'Typehint') { it.out('VARIABLE').next(); } else { it; }}
-     .transform{ if (it.atom == 'Assignation') { it.out('LEFT').next(); } else { it; }}
-     .code.store(s).iterate();
-    $name = s.join(", "); 
+    public function saveArglistAs($name) {
+        // Calculate the arglist, normalized it, then put it in a variable
+        // This needs to be in Arguments, (both Functioncall or Function)
+        $this->addMethod(<<<GREMLIN
+sideEffect{ 
+    s = [];
+    it.get().vertices(OUT, 'ARGUMENT').sort{it.value('rank')}.each{ 
+        s.push(it.value('code'));
+    };
+    $name = s.join(', ');
     true;
 }
 GREMLIN
 );
+
+        return $this;
+    }
+
+    public function savePropertyAs($property, $name) {
+        if ($property == 'arglist') {
         } else {
             $this->addMethod("sideEffect{ $name = it.get().value('$property'); }");
         }
