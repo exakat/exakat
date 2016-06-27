@@ -15,6 +15,9 @@ PHP;
 $a45 = <<<'PHP'
 dd
 PHP;
+$a45 = <<<PHP
+$sd$f
+PHP;
 
 $a10 = 0;         // bool(false)
 $a11 = -0;        // bool(false)

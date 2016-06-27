@@ -27,35 +27,32 @@ class Falsy extends Analyzer\Analyzer {
     public function analyze() {
         // Integer
         $this->atomIs('Integer')
-             ->code(array(0, '-0'));
+             ->codeIs(array(0, '-0'));
         $this->prepareQuery();
 
         // Float
-        $this->atomIs('Float')
-             ->regex('fullcode', '^[+-]?[0\\\\.]+');
+        $this->atomIs('Real')
+             ->regexIs('fullcode', '^[+-]?[0\\\\.]+');
         $this->prepareQuery();
 
         // Boolean
         $this->atomIs('Boolean')
-             ->code('false');
+             ->codeIs('false');
         $this->prepareQuery();
 
         // String
         $this->atomIs('String')
              ->hasNoOut('CONTAINS')
-             ->noDelimiter('');
+             ->codeIs(array("''", '""'));
         $this->prepareQuery();
 
         $this->atomIs('Heredoc')
-             ->OutIs('CONTAINS')
-             ->OutIs('CONCAT')
-             ->atomIs('String')
-             ->noDelimiter('')
-             ->back('first');
+             ->is('count', 0);
         $this->prepareQuery();
 
         // array
-        $this->atomFunctionIs('\array')
+        $this->atomIs('Functioncall')
+             ->fullnspathIs('\array')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Void')
