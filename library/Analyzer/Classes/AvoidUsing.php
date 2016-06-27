@@ -37,7 +37,7 @@ class AvoidUsing extends Analyzer\Analyzer {
 
         // class may be used in a class
         $this->atomIs('Class')
-             ->fullnspath($classes)
+             ->fullnspathIs($classes)
              ->back('first');
         $this->prepareQuery();
         
@@ -45,71 +45,51 @@ class AvoidUsing extends Analyzer\Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($classes)
+             ->fullnspathIs($classes)
              ->back('first');
         $this->prepareQuery();
 
         // class may be used in a Staticmethodcall
-        $this->atomIs('Staticmethodcall')
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Instanceof'))
              ->outIs('CLASS')
-             ->fullnspath($classes)
+             ->fullnspathIs($classes)
              ->back('first');
         $this->prepareQuery();
 
-        // class may be used in a Staticproperty
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->fullnspath($classes)
-             ->back('first');
-        $this->prepareQuery();
-
-        // class may be used in a Staticconstant
-        $this->atomIs('Staticconstant')
-             ->outIs('CLASS')
-             ->fullnspath($classes)
-             ->back('first');
-        $this->prepareQuery();
-
-        // class may be used in a Instanceof
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->fullnspath($classes)
-             ->back('first');
-        $this->prepareQuery();
-
-        // class may be used in a Typehint
-        $this->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->fullnspath($classes)
+        // class may be used in a typehint
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->fullnspathIs($classes)
              ->back('first');
         $this->prepareQuery();
 
         // class may be used in an extension
         $this->atomIs('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
-             ->fullnspath($classes)
+             ->fullnspathIs($classes)
              ->back('first');
         $this->prepareQuery();
 
         // class may be used in an use
         $this->atomIs('Use')
              ->outIs('USE')
-             ->fullnspath($classes)
+             ->fullnspathIs($classes)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\class_alias')
+        $this->atomFunctionIs('\\class_alias')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->is('rank', 0);
+             ->is('rank', 0)
+             ->atomIs('String')
+             ->noDelimiterIs($classes);
         $this->prepareQuery();
 
         // mentions in strings
         $this->atomIs('String')
-             ->noDelimiter($this->config);
+             ->noDelimiterIs($config->Classes_AvoidUsing);
         $this->prepareQuery();
 
     }
