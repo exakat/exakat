@@ -418,11 +418,7 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREA
     }
 
     public function atomIsNot($atom) {
-        if (is_array($atom)) {
-            $this->addMethod('not(hasLabel("'.join("', '", $atom).'"))');
-        } else {
-            $this->addMethod('not(hasLabel(***))', $atom);
-        }
+        $this->addMethod('not(hasLabel('.$this->SorA($atom).'))');
         
         return $this;
     }
