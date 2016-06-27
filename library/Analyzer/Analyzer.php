@@ -696,12 +696,12 @@ GREMLIN;
     }
 
     public function noDelimiterIs($code, $caseSensitive = false) {
-        $this->addMethod('has("atom", "String")', $code);
+        $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIs('noDelimiter', $code, $caseSensitive);
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = false) {
-        $this->addMethod('has("atom", "String")', $code);
+        $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIsNot('noDelimiter', $code, $caseSensitive);
     }
 
