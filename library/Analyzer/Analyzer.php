@@ -642,10 +642,10 @@ GREMLIN;
 
     public function isMore($property, $value = 0) {
         if (is_int($value)) {
-            $this->addMethod("filter{ it.$property > $value}");
+            $this->addMethod("filter{ it.get().value('$property').toLong() > $value}");
         } else {
             // this is a variable name
-            $this->addMethod("filter{ it.$property > $value;}", $value);
+            $this->addMethod("filter{ it.get().value('$property').toLong() > $value;}", $value);
         }
 
         return $this;
@@ -653,10 +653,10 @@ GREMLIN;
 
     public function isLess($property, $value = 0) {
         if (is_int($value)) {
-            $this->addMethod("filter{ it.$property < $value}");
+            $this->addMethod("filter{ it.get().value('$property').toLong() < $value}");
         } else {
             // this is a variable name
-            $this->addMethod("filter{ it.$property < $value;}", $value);
+            $this->addMethod("filter{ it.get().value('$property').toLong() < $value;}", $value);
         }
 
         return $this;
@@ -1166,6 +1166,18 @@ GREMLIN
         }
         
         $this->addMethod('where( __'.$out.'.not(hasLabel('.$this->SorA($childrenClass).')))');
+        
+        return $this;
+    }
+
+    public function isLambda() {
+        $this->hasChildren('Void', 'NAME');
+        
+        return $this;
+    }
+    
+    public function isNotLambda() {
+        $this->hasNoChildren('Void', 'NAME');
         
         return $this;
     }
