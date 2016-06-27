@@ -921,18 +921,18 @@ GREMLIN
         return $this;
     }
 
-    public function regex($column, $regex) {
+    public function regexIs($column, $regex) {
         $this->addMethod(<<<GREMLIN
-filter{ (it.$column =~ "$regex" ).getCount() > 0 }
+filter{ (it.get().value('$column') =~ "$regex" ).getCount() > 0 }
 GREMLIN
 );
 
         return $this;
     }
 
-    public function regexNot($column, $regex) {
+    public function regexIsNot($column, $regex) {
         $this->addMethod(<<<GREMLIN
-filter{ (it.$column =~ "$regex" ).getCount() == 0 }
+filter{ (it.get().value('$column') =~ "$regex" ).getCount() == 0 }
 GREMLIN
 );
 
