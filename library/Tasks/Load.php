@@ -1365,9 +1365,6 @@ class Load extends Tasks {
                 while ($this->tokens[$this->id + 1][0] === T_COMMA) {
                     if ($indexId === 0) {
                         $indexId = $this->addAtomVoid();
-                        $fullcode[] = '';
-                    } else {
-                        $fullcode[] = $this->atoms[$indexId]['fullcode'];
                     }
                     
                     $this->setAtom($indexId, ['rank' => $rank++]);
@@ -1382,6 +1379,7 @@ class Load extends Tasks {
                         $defaultId = 0;
                     }
                     $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+                    $fullcode[] = $this->atoms[$indexId]['fullcode'];
     
                     ++$this->id; // Skipping the comma ,
                     $indexId = 0;
@@ -1390,10 +1388,7 @@ class Load extends Tasks {
 
             if ($indexId === 0) {
                 $indexId = $this->addAtomVoid();
-                $fullcode[] = '';
-            } else {
-                $fullcode[] = $this->atoms[$indexId]['fullcode'];
-            }
+            } 
             $this->setAtom($indexId, ['rank' => $rank++]);
             
             if ($typehintId > 0) {
@@ -1405,6 +1400,8 @@ class Load extends Tasks {
                 $this->setAtom($indexId, ['fullcode' => $this->atoms[$indexId]['fullcode'] . ' = '. $this->atoms[$defaultId]['fullcode']]);
             }
             $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+
+            $fullcode[] = $this->atoms[$indexId]['fullcode'];
 
             // Skip the ) 
             ++$this->id;
@@ -1604,7 +1601,7 @@ class Load extends Tasks {
         if ($this->hasExpression()) {
             $previousId = $this->popExpression();
             // postplusplus
-            $plusplusId = $this->addAtom('PostPlusPlus');
+            $plusplusId = $this->addAtom('Postplusplus');
             
             $this->addLink($plusplusId, $previousId, 'POSTPLUSPLUS');
 
@@ -2749,7 +2746,7 @@ class Load extends Tasks {
     }
 
     private function processMagicConstant() {
-        return $this->processSingle('MagicConstant');
+        return $this->processSingle('Magicconstant');
     }
 
     //////////////////////////////////////////////////////
@@ -2804,7 +2801,7 @@ class Load extends Tasks {
         
             return $returnId;
         } else {
-            return $this->processSingleOperator('Return', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN');
+            return $this->processSingleOperator('Return', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN', ' ');
         }
     }
     
@@ -3122,7 +3119,7 @@ class Load extends Tasks {
             $right = $this->popExpression();
         }
 
-        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'PostPlusPlus', 'Property', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
+        if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'Postplusplus', 'Property', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
@@ -3215,7 +3212,44 @@ class Load extends Tasks {
     }
 
     private function processDot() {
-        $this->processOperator('Concatenation', $this->getPrecedence($this->tokens[$this->id][0]));
+        $current = $this->id;
+        $concatenationId = $this->addAtom('Concatenation');
+        $fullcode = [];
+        $rank = 0;
+
+        $containsId = $this->popExpression();
+        $this->addLink($concatenationId, $containsId, 'CONCAT');
+        $this->setAtom($containsId, ['rank' => $rank++]);
+        $fullcode[] = $this->atoms[$containsId]['fullcode'];
+
+        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+            $this->processNext();
+            
+            if ($this->tokens[$this->id + 1][0] === T_DOT) {
+                $containsId = $this->popExpression();
+                $this->addLink($concatenationId, $containsId, 'CONCAT');
+                $fullcode[] = $this->atoms[$containsId]['fullcode'];
+                $this->setAtom($containsId, ['rank' => $rank++]);
+
+                ++$this->id;
+            }
+        }
+
+        $containsId = $this->popExpression();
+        $this->addLink($concatenationId, $containsId, 'CONCAT');
+        $this->setAtom($containsId, ['rank' => $rank++]);
+        $fullcode[] = $this->atoms[$containsId]['fullcode'];
+        
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => join(' . ', $fullcode),
+              'line'     => $this->tokens[$current][2],
+              'token'    => $this->getToken($this->tokens[$current][0]),
+              'count'    => $rank];
+        $this->setAtom($concatenationId, $x);
+        $this->pushExpression($concatenationId);
+        
+        return $concatenationId;
     }
 
     private function processInstanceof() {
@@ -3465,7 +3499,7 @@ class Load extends Tasks {
                                           str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['code']).'","'.
                                           str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['fullcode']).'",'.
                                           ($atom['line'] ?? 0).',"'.
-                                          ($atom['token'] ?? '').'","'.
+                                          str_replace('"', '\\"', ($atom['token'] ?? '')).'","'.
                                           ($atom['rank'] ?? -1).'"'.
                                           $extra.
                                           "\n");
