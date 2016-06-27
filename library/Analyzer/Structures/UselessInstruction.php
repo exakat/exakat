@@ -31,7 +31,7 @@ class UselessInstruction extends Analyzer\Analyzer {
         $this->atomIs('Sequence')
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
-                            'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
+                            'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
              ->noAtomInside(array('Functioncall', 'Assignation'));
@@ -47,7 +47,7 @@ class UselessInstruction extends Analyzer\Analyzer {
         $this->atomIs('Sequence')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->is('lambda', true);
+             ->isLambda();
         $this->prepareQuery();
 
         // return $a++;
@@ -61,8 +61,9 @@ class UselessInstruction extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))
-             ->isLess('args_count', 2)
+             ->fullnspathIs(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))
+             ->outIs('ARGUMENTS')
+             ->isLess('count', 2)
              ->back('first');
         $this->prepareQuery();
 
@@ -107,7 +108,7 @@ class UselessInstruction extends Analyzer\Analyzer {
         // Empty string in a concatenation
         $this->atomIs('Concatenation')
              ->outIs('CONCAT')
-             ->code(array("''", '""'))
+             ->codeIs(array("''", '""'))
              ->back('first');
         $this->prepareQuery();
     }
