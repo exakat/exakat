@@ -53,7 +53,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->hasNoChildren('Void', 'NAME')
+             ->isNotLambda()
              ->outIs('BLOCK')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
@@ -72,7 +72,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
              ->hasNoChildren('Void', 'NAME')
              ->outIs('BLOCK')
              ->atomInside('Array')
-             ->raw('where( __.out("INDEX").hasLabel("Integer").count().is(eq(0)))') // attempt to avoid strings
+             ->hasNoChildren('Integer', 'INDEX') // attempt to avoid strings
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
              ->back('first')

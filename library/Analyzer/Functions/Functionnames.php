@@ -26,13 +26,11 @@ namespace Analyzer\Functions;
 use Analyzer;
 
 class Functionnames extends Analyzer\Analyzer {
-
+    // Function definitions, not in a CIT
     public function analyze() {
         $this->atomIs('Function')
-             ->isNot('lambda', true)
-             ->hasNoParent('Class',     array('ELEMENT', 'BLOCK'))
-             ->hasNoParent('Interface', array('ELEMENT', 'BLOCK'))
-             ->hasNoParent('Trait',     array('ELEMENT', 'BLOCK'))
+             ->isNotLambda()
+             ->hasNoClassInterfaceTrait()
              ->outIs('NAME');
         $this->prepareQuery();
     }
