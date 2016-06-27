@@ -207,7 +207,7 @@ class Load extends Tasks {
     const PROP_DELIMITER   = ['String', 'Heredoc'];
     const PROP_NODELIMITER = ['String'];
     const PROP_HEREDOC     = ['Heredoc'];
-    const PROP_COUNT       = ['Sequence', 'Arguments'];
+    const PROP_COUNT       = ['Sequence', 'Arguments', 'Heredoc', 'Shell', 'String'];
     const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As'];
     const PROP_ABSOLUTE    = ['Nsname'];
     const PROP_ALIAS       = ['Nsname', 'Identifier', 'As'];
@@ -637,6 +637,8 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     private function processQuote() {
         $current = $this->id;
+        $fullcode = [];
+        $rank = 0;
         
         if ($this->tokens[$current][0] === T_QUOTE) {
             $stringId = $this->addAtom('String');
@@ -696,6 +698,7 @@ class Load extends Tasks {
             }
             
             $partId = $this->popExpression();
+            $this->setAtom($partId, ['rank' => $rank++]);
             $fullcode[] = $this->atoms[$partId]['fullcode'];
             $this->addLink($stringId, $partId, 'CONCAT');
         }
@@ -704,7 +707,8 @@ class Load extends Tasks {
         $x = ['code'     => $this->tokens[$current][1], 
               'fullcode' => $openQuote.join('', $fullcode).$closeQuote,
               'line'     => $this->tokens[$current][2],
-              'token'    => $this->getToken($this->tokens[$current][0])];
+              'token'    => $this->getToken($this->tokens[$current][0]),
+              'count'    => $rank];
               
         if ($type === T_START_HEREDOC) {
             $x['delimiter'] = $closeQuote;
@@ -1083,11 +1087,12 @@ class Load extends Tasks {
 
         // Process implements
         if ($this->tokens[$this->id + 1][0] == T_IMPLEMENTS) {
-            
+            $fullcodeImplements = array();
             do {
                 ++$this->id; // Skip extends
                 $implementsId = $this->processOneNsname();
                 $this->addLink($classId, $implementsId, 'IMPLEMENTS');
+                $fullcodeImplements[] = $this->atoms[$implementsId]['fullcode'];
                 
                 $this->addCall('class', $this->getFullnspath($implementsId), $implementsId);
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
@@ -1101,7 +1106,9 @@ class Load extends Tasks {
         
         $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($classId, ['code'       => $this->tokens[$current][1], 
-                                  'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].' '.
+                                  'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .
+                                                  (isset($extendsId) ? ' extends ' . $this->atoms[$extendsId]['fullcode'] : '') .
+                                                  (isset($implementsId) ? ' implements ' . join(', ', $fullcodeImplements) : '') .
                                                   static::FULLCODE_BLOCK,
                                   'line'       => $this->tokens[$current][2],
                                   'token'      => $this->getToken($this->tokens[$current][0]),
@@ -1551,8 +1558,9 @@ class Load extends Tasks {
         $this->addLink($functioncallId, $nameId, 'NAME');
 
         $this->pushExpression($functioncallId);
+        $functioncallId = $this->processFCOA($functioncallId);
 
-        return $this->processFCOA($functioncallId);
+        return $functioncallId;
     }
     
     private function processString($fullnspath = true) {
@@ -1569,6 +1577,7 @@ class Load extends Tasks {
                              'line'       => $this->tokens[$this->id][2],
                              'token'      => $this->getToken($this->tokens[$this->id][0]),
                              'absolute'   => false]);
+        // when this is not already done, we prepare the fullnspath as a constant
         $fullnspath = $this->getFullnspath($id, 'const');
         $this->setAtom($id, ['fullnspath' => $fullnspath]);
         
@@ -1590,11 +1599,13 @@ class Load extends Tasks {
             $this->processSemicolon();
             return $labelId;
         }
-        $this->setAtom($id, ['fullnspath' => $a = $this->getFullnspath($id, $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const') ]);
+//        $this->setAtom($id, ['fullnspath' => $this->getFullnspath($id, $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const') ]);
         $this->pushExpression($id);
 
         // For functions and constants 
-        return $this->processFCOA($id);
+        $id = $this->processFCOA($id);;
+
+        return $id;
     }
 
     private function processPlusplus() {
