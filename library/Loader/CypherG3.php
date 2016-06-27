@@ -132,6 +132,7 @@ CYPHER;
             try {
                 $res = $this->cypher->query($queryTemplate);
                 if (isset($res->message)) {
+                    print $queryTemplate."\n";
                     print_r($res);
                     die();
                 }
@@ -166,6 +167,7 @@ CYPHER;
             try {
                 $res = $this->cypher->query($queryTemplate);
                 if (isset($res->message)) {
+                    print $queryTemplate."\n";
                     print_r($res);
                     die();
                 }
