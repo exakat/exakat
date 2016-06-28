@@ -30,7 +30,9 @@ class Anonymous extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Class')
-             ->hasOut('ARGUMENTS');
+             ->outIs('NAME')
+             ->atomIs('Void')
+             ->back('first');
         $this->prepareQuery();
     }
 }

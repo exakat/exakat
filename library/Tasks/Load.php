@@ -68,7 +68,7 @@ class Load extends Tasks {
                           'class'    => array());
     
     const FULLCODE_SEQUENCE = ' /**/ ';
-    const FULLCODE_BLOCK    = ' { ' . self::FULLCODE_SEQUENCE.' } ';
+    const FULLCODE_BLOCK    = ' {' . self::FULLCODE_SEQUENCE.'} ';
     const FULLCODE_VOID     = ' ';
     
     const CONTEXT_CLASS     = 1;
@@ -1108,7 +1108,9 @@ class Load extends Tasks {
         $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($classId, ['code'       => $this->tokens[$current][1], 
                                   'fullcode'   => (!empty($fullcode) ? join(' ', $fullcode).' ' : '') . 
-                                                  $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .
+                                                  $this->tokens[$current][1].
+                                                  ($this->atoms[$nameId]['atom'] === 'Void' ? '' : ' '.$this->atoms[$nameId]['fullcode']) .
+                                                  (isset($argumentsId) ? ' ('.$this->atoms[$argumentsId]['fullcode'].')' : '').
                                                   (isset($extendsId) ? ' extends ' . $this->atoms[$extendsId]['fullcode'] : '') .
                                                   (isset($implementsId) ? ' implements ' . join(', ', $fullcodeImplements) : '') .
                                                   static::FULLCODE_BLOCK,
