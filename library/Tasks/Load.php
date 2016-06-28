@@ -257,6 +257,35 @@ class Load extends Tasks {
                      '`' => T_BACKTICK,
                    ];
     
+    const TOKENNAMES = [ ';'  => 'T_SEMICOLON',
+                         '+'  => 'T_PLUS',
+                         '-'  => 'T_MINUS',
+                         '/'  => 'T_SLASH',
+                         '*'  => 'T_STAR',
+                         '.'  => 'T_DOT',
+                         '['  => 'T_OPEN_BRACKET',
+                         ']'  => 'T_CLOSE_BRACKET',
+                         '('  => 'T_OPEN_PARENTHESIS',
+                         ')'  => 'T_CLOSE_PARENTHESIS',
+                         '{'  => 'T_OPEN_CURLY',
+                         '}'  => 'T_CLOSE_CURLY',
+                         '='  => 'T_EQUAL',
+                         ','  => 'T_COMMA',
+                         '!'  => 'T_BANG',
+                         '~'  => 'T_TILDE',
+                         '@'  => 'T_AT',
+                         '?'  => 'T_QUESTION',
+                         ':'  => 'T_COLON',
+                         '<'  => 'T_SMALLER',
+                         '>'  => 'T_GREATER',
+                         '%'  => 'T_PERCENTAGE',
+                         '"'  => 'T_QUOTE',
+                         '$'  => 'T_DOLLAR',
+                         '&'  => 'T_AND',
+                         '|'  => 'T_PIPE',
+                         '^'  => 'T_CARET',
+                         '`'  => 'T_BACKTICK',
+                   ];
     private $expressions = [];
     private $atoms = array();
     private $atomCount = 0;
@@ -1698,6 +1727,7 @@ class Load extends Tasks {
     }
     
     private function processArrayBracket() {
+        $current = $this->id;
         $id = $this->addAtom('Functioncall');
 
         $variableId = $this->addAtom('Identifier');
@@ -1715,7 +1745,7 @@ class Load extends Tasks {
         $this->setAtom($id, ['code'       => $this->tokens[$this->id][1], 
                              'fullcode'   => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ,
                              'line'       => $this->tokens[$this->id][2],
-                             'token'      => $this->getToken($this->tokens[$this->id][0]),
+                             'token'      => $this->getToken($this->tokens[$current][0]),
                              'fullnspath' => '\\array']);
         $this->pushExpression($id);
         
@@ -3631,7 +3661,7 @@ class Load extends Tasks {
     
     private function getToken($token) {
         if (is_string($token)) {
-            return self::TOKENS[$token];
+            return self::TOKENNAMES[$token];
         } else {
             return token_name($token);
         }
