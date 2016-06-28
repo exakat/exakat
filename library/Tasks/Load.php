@@ -1138,7 +1138,7 @@ class Load extends Tasks {
             $this->processOpenWithEcho();
         }
         
-        while (!in_array($this->tokens[$this->id + 1][0], [T_END])) {
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
             $this->processNext();
         };
 
