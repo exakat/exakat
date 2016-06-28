@@ -40,8 +40,8 @@ class AutoloadUsage extends Analyzer\Analyzer {
 
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->code('__autoload')
-             ->back('first')    ;
+             ->codeIs('__autoload')
+             ->back('first');
         $this->prepareQuery();
 
     }
