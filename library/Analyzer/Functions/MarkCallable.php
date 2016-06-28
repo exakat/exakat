@@ -54,14 +54,20 @@ call_user_func(array($obj, 'myCallbackMethod'));
 
         $apply = <<<GREMLIN
 sideEffect{
-    i = it.noDelimiter.indexOf("::");
+    i = it.get().value('noDelimiter').indexOf("::");
     if (i > 0) {
-        it.cbClass = it.noDelimiter.substring(0, i).toLowerCase();
-        if (it.cbClass.toString()[0] != "\\\\") {it.cbClass = "\\\\" + it.cbClass;};
-        it.fullnspath = it.cbClass;
-        it.cbMethod = it.noDelimiter.substring(2 + i).toLowerCase();
+        cbClass = it.get().value('noDelimiter').substring(0, i).toLowerCase();
+        if (cbClass.toString()[0] != "\\\\") {
+            cbClass = "\\\\" + cbClass;
+        };
+        it.get().property('fullnspath', cbClass);
+        it.get().property('cbMethod', it.get().value('noDelimiter').substring(2 + i).toLowerCase());
     } else {
-        it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath == "" || it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;};
+        fullnspath = it.get().value('noDelimiter').toLowerCase().replaceAll( "\\\\\\\\", "\\\\" );
+        if (fullnspath == "" || fullnspath.toString()[0] != "\\\\") { 
+            fullnspath = "\\\\" + fullnspath;
+        };
+        it.get().property('fullnspath', fullnspath);
     }
 }
 GREMLIN;
@@ -71,10 +77,9 @@ GREMLIN;
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspath($ini['functions'.$position])
+                 ->fullnspathIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
+                 ->outWithRank('ARGUMENT', $position)
                  ->atomIs('String')
                  ->tokenIsNot('T_QUOTE')
                  ->raw($apply);
@@ -85,22 +90,20 @@ GREMLIN;
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini['functions_last'])
+             ->fullnspathIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank('last')
+             ->outWithRank('ARGUMENT', 'last')
              ->atomIs('String')
              ->raw($apply);
         $this->prepareQuery();
-
+        
         // callable is in 2nd to last
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini['functions_2last'])
+             ->fullnspathIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank('2last')
+             ->outWithRank('ARGUMENT', '2last')
              ->atomIs('String')
              ->raw($apply);
         $this->prepareQuery();
@@ -108,17 +111,21 @@ GREMLIN;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array('Class', 'method');
 
-        $apply = 'sideEffect{
-    theArray.cbClass = it.out("ARGUMENT").has("rank", 0).next().noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" );
-    if (theArray.cbClass.toString()[0] != "\\\\") {theArray.cbClass = "\\\\" + theArray.cbClass;};
+        $apply = <<<GREMLIN
+out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get(); }
+.in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }
+.sideEffect{
+    cbClass = cbClassNode.value('noDelimiter').toLowerCase().replaceAll( "\\\\\\\\", "\\\\" );
+    if (cbClass.toString()[0] != "\\\\") {
+        cbClass = "\\\\" + cbClass;
+    };
+    cbMethod = cbMethodNode.value('noDelimiter').toLowerCase();
 
-    theArray.cbMethod = it.out("ARGUMENT").has("rank", 1).next().noDelimiter.toLowerCase();
-    
-    // case for "parent::method";
-    i = theArray.cbMethod.indexOf("::");
-    theArray.i = i;
+    /*
+    // case for array('Class', "parent::method") 
+    i = cbMethod.indexOf("::");
     if (i > 0) {
-        theArray.cbMethod = theArray.cbMethod.substring(i + 2);
+        theArray.property('cbMethod', cbMethod.substring(i + 2));
         
         // we assume it is only parent.
         if (g.idx("classes")[["path":theArray.cbClass]].any() == false) {
@@ -126,26 +133,35 @@ GREMLIN;
         } else if (g.idx("classes")[["path":theArray.cbClass]].out("EXTENDS").any()) {
             theArray.cbClass = g.idx("classes")[["path":theArray.cbClass]].out("EXTENDS").next().fullnspath;
         } else {
-            theArray.cbParentClass = theArray.cbParentClass + "\\\\parent";
+            theArray.cbParentClass = theArray.cbParentClass + "\\parent";
         }
     }
-}';
+    */
 
-        $arrayContainsTwoStrings = 'filter{it.out("ARGUMENT").has("atom", "String").filter{ it.out("CONTAINS").any() == false}.count() >= 2}';
+    theArrayNode.property('cbClass', cbClass);
+    theArrayNode.property('cbMethod', cbMethod);
+}
+
+GREMLIN;
+
+        $arrayContainsTwoStrings = <<<GREMLIN
+where( __.out('ARGUMENTS').out('ARGUMENT').count().is(eq(2)) )
+.where( __.out('ARGUMENTS').out('ARGUMENT').hasLabel('String').where( __.out('CONCAT').count().is(eq(0))).count().is(eq(2)) )
+
+GREMLIN;
+//filter{ it.get().vertices(OUT, "ARGUMENT").has("atom", "String").filter{ it.get().out("CONTAINS").any() == false}.count() >= 2 )
 
         // callable is in # position
         foreach($positions as $position) {
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspath($ini['functions'.$position])
+                 ->fullnspathIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
+                 ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Functioncall')
                  ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
-                 ->raw('sideEffect{ theArray = it; }')
-                 ->outIs('ARGUMENTS')
+                 ->raw('sideEffect{ theArrayNode = it.get(); }')
                  ->raw($arrayContainsTwoStrings)
                  ->raw($apply);
             $this->prepareQuery();
@@ -155,14 +171,12 @@ GREMLIN;
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini['functions_last'])
+             ->fullnspathIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank('last')
+             ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Functioncall')
              ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
-             ->raw('sideEffect{ theArray = it; }')
-             ->outIs('ARGUMENTS')
+             ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($arrayContainsTwoStrings)
              ->raw($apply);
         $this->prepareQuery();
@@ -171,40 +185,43 @@ GREMLIN;
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini['functions_2last'])
+             ->fullnspathIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank('2last')
+             ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Functioncall')
              ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
-             ->raw('sideEffect{ theArray = it; }')
-             ->outIs('ARGUMENTS')
+             ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($arrayContainsTwoStrings)
              ->raw($apply);
         $this->prepareQuery();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array($object, 'method'); Also, [$object, 'method']
-        $apply = 'sideEffect{
-    theArray.cbMethod = it.out("ARGUMENT").has("rank", 1).next().noDelimiter.toLowerCase();
-}';
+        $apply = <<<GREMLIN
+out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbObjectNode = it.get(); }
+.in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }
+.sideEffect{
+    // 
+    theArrayNode.property("cbObject", cbObjectNode.value("code"));
+    theArrayNode.property("cbMethod", cbMethodNode.value("noDelimiter").noDelimiter.toLowerCase());
+}
 
-        $firstArgIsAVariable = 'filter{it.out("ARGUMENT").has("rank", 0).has("atom", "Variable").any()}';
-        $secondArgIsAString = 'filter{it.out("ARGUMENT").has("rank", 1).has("atom", "String").filter{ it.out("CONTAINS").any() == false}.any()}';
+GREMLIN;
+
+        $firstArgIsAVariable = 'where ( __.out("ARGUMENTS").out("ARGUMENT").has("rank", 0).hasLabel("Variable"))';
+        $secondArgIsAString = 'where ( __.out("ARGUMENTS").out("ARGUMENT").has("rank", 1).has("atom", "String").where( __.out("CONCAT").count().is(eq(0))) )';
         
         // callable is in # position
         foreach($positions as $position) {
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspath($ini['functions'.$position])
+                 ->fullnspathIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
+                 ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Functioncall')
-                 ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
-                 ->raw('sideEffect{ theArray = it; }')
-                 ->outIs('ARGUMENTS')
+                 ->fullnspathIs('\\array')
+                 ->raw('sideEffect{ theArrayNode = it.get(); }')
                  // 1rst array argument is a $this
                  ->raw($firstArgIsAVariable )
                  // 2nd array argument is a real string
@@ -217,14 +234,12 @@ GREMLIN;
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini['functions_last'])
+             ->fullnspathIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank('last')
+             ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Functioncall')
-             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
-             ->raw('sideEffect{ theArray = it; }')
-             ->outIs('ARGUMENTS')
+             ->fullnspathIs('\\array')
+             ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($firstArgIsAVariable)
              ->raw($secondArgIsAString)
              ->raw($apply);
@@ -234,14 +249,12 @@ GREMLIN;
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini['functions_2last'])
+             ->fullnspathIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank('2last')
+             ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Functioncall')
-             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
-             ->raw('sideEffect{ theArray = it; }')
-             ->outIs('ARGUMENTS')
+             ->fullnspathIs('\\array')
+             ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($firstArgIsAVariable)
              ->raw($secondArgIsAString)
              ->raw($apply);
@@ -255,10 +268,9 @@ GREMLIN;
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspath($ini['functions'.$position])
+                 ->fullnspathIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position)
+                 ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Function');
             $this->prepareQuery();
         }
@@ -267,10 +279,9 @@ GREMLIN;
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini['functions_last'])
+             ->fullnspathIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank('last')
+             ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Function');
         $this->prepareQuery();
 
@@ -278,10 +289,9 @@ GREMLIN;
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini['functions_2last'])
+             ->fullnspathIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank('2last')
+             ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Function');
         $this->prepareQuery();
     }

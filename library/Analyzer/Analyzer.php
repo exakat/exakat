@@ -658,16 +658,18 @@ GREMLIN;
         return $this;
     }
 
-    public function hasRank($value = '0', $link = 'ARGUMENT') {
-        if ($value === 'first') {
+    public function outWithRank($link = 'ARGUMENT', $rank = 0) {
+        if ($rank === 'first') {
             // @note : can't use has() with integer!
-            $this->addMethod('filter{it.rank == 0}');
-        } elseif ($value === 'last') {
-            $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 1}");
-        } elseif ($value === '2last') {
-            $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 2}");
+            $this->addMethod('out("'.$link.'").has("rank", eq(0))');
+        } elseif ($rank === 'last') {
+//            $this->addMethod("filter{it.get().value('rank') == it.get().vertices(IN, '$link').get().vertices(OUT, '$link').count() - 1}");
+            $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(1) )');
+        } elseif ($rank === '2last') {
+//            $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 2}");
+            $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(2) )');
         } else {
-            $this->addMethod('filter{it.rank == '.abs(intval($value)).'}');
+            $this->addMethod('out("'.$link.'").has("rank", eq('.abs(intval($rank)).'))');
         }
 
         return $this;
