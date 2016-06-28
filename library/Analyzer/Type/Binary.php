@@ -30,7 +30,7 @@ class Binary extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Integer')
-             ->regex('code', '0[bB][01]+');
+             ->regexIs('code', '0[bB][01]+');
         $this->prepareQuery();
     }
 }

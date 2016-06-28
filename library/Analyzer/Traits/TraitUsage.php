@@ -28,11 +28,10 @@ use Analyzer;
 class TraitUsage extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Class')
+        $this->atomIs(array('Class', 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE');
+             ->atomIs('Use');
         $this->prepareQuery();
     }
 }

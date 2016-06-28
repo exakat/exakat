@@ -27,8 +27,8 @@ use Analyzer;
 
 class ArrayNSUsage extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->is('short_syntax', true);
+        $this->atomFunctionIs('\\array')
+             ->tokenIs('T_OPEN_BRACKET');
         $this->prepareQuery();
     }
 }
