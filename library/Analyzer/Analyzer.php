@@ -1129,7 +1129,7 @@ GREMLIN
             $in = implode('', $in);
         }
         
-        $this->addMethod('where( __'.$in.'.not(hasLabel('.$this->SorA($parentClass).')))');
+        $this->addMethod('where( __'.$in.'.hasLabel('.$this->SorA($parentClass).').count().is(eq(0)) )');
         
         return $this;
     }
