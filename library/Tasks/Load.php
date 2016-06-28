@@ -1106,7 +1106,8 @@ class Load extends Tasks {
         
         $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($classId, ['code'       => $this->tokens[$current][1], 
-                                  'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .
+                                  'fullcode'   => (!empty($fullcode) ? join(' ', $fullcode).' ' : '') . 
+                                                  $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .
                                                   (isset($extendsId) ? ' extends ' . $this->atoms[$extendsId]['fullcode'] : '') .
                                                   (isset($implementsId) ? ' implements ' . join(', ', $fullcodeImplements) : '') .
                                                   static::FULLCODE_BLOCK,
