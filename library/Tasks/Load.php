@@ -2243,7 +2243,7 @@ class Load extends Tasks {
             $else = '';
         }
 
-        if ($isInitialIf === true) {
+        if ($isInitialIf === true && $isColon === true) {
             ++$this->id;
             if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
                 ++$this->id; // skip ;
