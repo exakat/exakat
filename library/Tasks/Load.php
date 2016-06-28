@@ -3533,7 +3533,7 @@ class Load extends Tasks {
 
             $extra = [];
             foreach($extras[$atom['atom']] as $e) {
-                $extra[] = isset($atom[$e]) ? "\"".str_replace('"', '\\"', $atom[$e])."\"" : "\"-1\"";
+                $extra[] = isset($atom[$e]) ? "\"".$this->escapeCsv($atom[$e])."\"" : "\"-1\"";
             }
 
             if (count($extras[$atom['atom']]) > 0) {
@@ -3544,10 +3544,10 @@ class Load extends Tasks {
             
             fwrite($files[$atom['atom']], $atom['id'].','.
                                           $atom['atom'].',"'.
-                                          str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['code']).'","'.
-                                          str_replace(array('\\', '"'), array('\\\\', '\\"'), $atom['fullcode']).'",'.
+                                          $this->escapeCsv( $atom['code'] ).'","'.
+                                          $this->escapeCsv( $atom['fullcode']).'",'.
                                           ($atom['line'] ?? 0).',"'.
-                                          str_replace('"', '\\"', ($atom['token'] ?? '')).'","'.
+                                          $this->escapeCsv( $atom['token'] ?? '') .'","'.
                                           ($atom['rank'] ?? -1).'"'.
                                           $extra.
                                           "\n");
@@ -3592,6 +3592,10 @@ class Load extends Tasks {
                 }
             }
         }
+    }
+
+    private function escapeCsv($string) {
+        return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
     }
     
     private function startSequence() {
