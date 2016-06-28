@@ -2521,9 +2521,7 @@ class Load extends Tasks {
             $this->addLink($namespaceId, $blockId, 'BLOCK');
 
             $this->pushExpression($namespaceId);
-            if (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
-                $this->processSemicolon();
-            }
+            $this->processSemicolon();
         }
         $this->setNamespace(0);
         
