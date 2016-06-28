@@ -379,7 +379,9 @@ abstract class Analyzer {
         $this->methods[] = 'filter{ 1 == 0; }';
     }
 
+////////////////////////////////////////////////////////////////////////////////
 // Common methods
+////////////////////////////////////////////////////////////////////////////////
 
     private function hasNoInstruction($atom = 'Function') {
         $this->addMethod('where( 
@@ -397,7 +399,11 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREA
         return $this;
     }
 
-
+    private function goToInstruction($atom = 'Namespace') {
+        $this->addMethod('repeat( __.in(
+"ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"
+        )).until(hasLabel('.$this->SorA($atom).', "File") )');
+    }
 
     public function tokenIs($atom) {
         $this->addMethod('has("token", within('.$this->SorA($atom).'))');
@@ -732,6 +738,17 @@ GREMLIN;
         return $this;
     }
 
+    public function notSamePropertyAs($property, $name, $caseSensitive = false) {
+        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
+            $caseSensitive = '';
+        } else {
+            $caseSensitive = '.toLowerCase()';
+        }
+        $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' != '.$name.$caseSensitive.'}');
+
+        return $this;
+    }
+
     public function isPropertyIn($property, $name, $caseSensitive = false) {
         if ($caseSensitive === true || $property === 'line' || $property === 'rank') {
             $caseSensitive = '';
@@ -778,17 +795,6 @@ GREMLIN;
         return $this;
     }
     
-    public function notSamePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
-        $this->addMethod('filter{ it.'.$property.$caseSensitive.' != '.$name.$caseSensitive.'}');
-
-        return $this;
-    }
-
     public function saveArglistAs($name) {
         // Calculate the arglist, normalized it, then put it in a variable
         // This needs to be in Arguments, (both Functioncall or Function)
@@ -1224,7 +1230,6 @@ GREMLIN
     }
     
     public function goToFunction() {
-//        $this->addMethod('in.loop(1){it.object.atom != "Function"}{(it.object.atom == "Function") && (it.object.out("NAME").hasNot("code", "").any())}');
         $this->addMethod('repeat(__.in(
 "ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"
 )).until(and(hasLabel("Function"), where(__.out("NAME").not(has("atom", "Void")) )))');
@@ -1239,7 +1244,7 @@ GREMLIN
     }
     
     public function goToFile() {
-        $this->addMethod('in.loop(1){it.object.atom != "File"}{it.object.atom == "File"}');
+        $this->goToInstruction('File');
         
         return $this;
     }
@@ -1322,7 +1327,7 @@ GREMLIN
     }
     
     public function goToClass() {
-        $this->addMethod('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}');
+        $this->goToInstruction('Class');
         
         return $this;
     }
@@ -1340,7 +1345,7 @@ GREMLIN
     }
 
     public function goToInterface() {
-        $this->addMethod('in.loop(1){it.object.atom != "Interface"}{it.object.atom == "Interface"}');
+        $this->goToInstruction('Interface');
         
         return $this;
     }
@@ -1352,7 +1357,7 @@ GREMLIN
     }
 
     public function goToTrait() {
-        $this->addMethod('in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}');
+        $this->goToInstruction('Trait');
         
         return $this;
     }
@@ -1364,7 +1369,7 @@ GREMLIN
     }
 
     public function goToClassTrait() {
-        $this->addMethod('in.loop(1){!(it.object.atom in ["Trait","Class"])}{it.object.atom in ["Trait", "Class"]}');
+        $this->goToInstruction(['Trait', 'Class']);
         
         return $this;
     }
@@ -1376,7 +1381,7 @@ GREMLIN
     }
 
     public function goToClassInterface() {
-        $this->addMethod('in.loop(1){!(it.object.atom in ["Interface","Class"])}{it.object.atom in ["Interface", "Class"]}');
+        $this->goToInstruction(['Interface', 'Class']);
         
         return $this;
     }
@@ -1388,7 +1393,7 @@ GREMLIN
     }
 
     public function goToClassInterfaceTrait() {
-        $this->addMethod('in.loop(1){!(it.object.atom in ["Interface","Class","Trait"])}{it.object.atom in ["Interface", "Class","Trait"]}');
+        $this->goToInstruction(['Interface', 'Class', 'Trait']);
         
         return $this;
     }
@@ -1513,7 +1518,7 @@ GREMLIN
     }
     
     public function goToNamespace() {
-        $this->addMethod('in.loop(1){!(it.object.atom in ["Namespace", "File"])}{it.object.atom in ["Namespace", "File"]}');
+        $this->goToInstruction('Namespace');
         
         return $this;
     }
