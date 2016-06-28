@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('public abstract function BmethodAbstract( )',
-                      'public abstract function BmethodAbstract2( )',
-                      'public abstract function AmethodAbstract( )', 
-                      'public abstract function AmethodAbstract2( )');
+$expected     = array('abstract public function BmethodAbstract( ) ;',
+                      'public abstract function BmethodAbstract2( ) ;',
+                      'abstract public function AmethodAbstract( ) ;', 
+                      'public abstract function AmethodAbstract2( ) ;');
 
-$expected_not = array();
+$expected_not = array('public function BmethodNonAbstract() { /**/ } ');
 
 ?>
