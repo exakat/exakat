@@ -31,10 +31,7 @@ class FunctionUsage extends Analyzer\Analyzer {
     public function analyze() {
         $functions =  $this->makeFullNsPath($this->functions);
         
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions);
+        $this->atomFunctionIs($functions);
         $this->prepareQuery();
     }
 }
