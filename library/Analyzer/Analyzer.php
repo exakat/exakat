@@ -1686,6 +1686,13 @@ GREMLIN
             $query = implode('.', $this->methods);
             $query = 'g.V().'.$first.'.groupCount("processed").by(count()).'.$query;
             unset($this->methods[1]);
+        } elseif (substr($this->methods[1], 0, 39) == 'where( __.in("ANALYZED").has("analyzer"') {
+            $first = array_shift($this->methods); // remove first 
+            $init = array_shift($this->methods); // remove first 
+            preg_match('/"(Analyzer\\\\.*?)"/', $init, $r);
+            $query = implode('.', $this->methods);
+            $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$r[1].'").out("ANALYZED").as("first").groupCount("processed").by(count()).'.$query;
+            unset($this->methods[1]);
         } else {
             die('No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);
         }
