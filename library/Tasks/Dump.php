@@ -92,6 +92,7 @@ SQL;
         }
         $themes = call_user_func_array('array_merge', $themes);
         $themes = array_keys(array_count_values($themes));
+        $themes = ['Structures/PlusEgalOne'];
 
         $rounds = 0;
         $sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
@@ -154,42 +155,29 @@ SQL;
         $this->stmtResults->bindValue(':class', $class, SQLITE3_TEXT);
         $analyzerName = 'Analyzer\\\\'.str_replace('/', '\\\\', $class);
         
+        $linksDown = \Tokenizer\Token::linksAsList();
+        
         $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzerName']].out
-.sideEffect{
-    // file
-    rnamespace = 'Global';
-    rclass = 'Global';
-    rfunction = 'Global';
-    
-    if (it.token == 'T_FILENAME') {
-        m = ['fullcode':it.fullcode, 'file':it.fullcode, 'line':0, 'namespace':'', 'class':'', 'function':'' ];
-    } else {
-        // Support for closure, traits or interfaces? 
-        it.in.loop(1){true}{it.object.token in ['T_FILENAME', 'T_NAMESPACE', 'T_CLASS', 'T_TRAIT', 'T_INTERFACE', 'T_FUNCTION']}.each{
-            if (it.token == 'T_FILENAME') {
-                file = it.fullcode;
-            } else if (it.token == 'T_NAMESPACE') {
-                rnamespace = it.out('NAMESPACE').next().code;
-            } else if (it.token in ['T_CLASS', 'T_INTERFACE', 'T_TRAIT']) {
-                if (it.out('NAME').any()) {
-                    // class, interface and trait all have names.
-                    rclass = it.fullnspath;
-                } else {
-                    rfunction = 'Anonymous class';
-                }
-            } else if (it.token == 'T_FUNCTION') {
-                if (it.out('NAME').any()) {
-                    rfunction = it.out('NAME').next().code;
-                } else {
-                    rfunction = 'Closure';
-                }
-            }
-        }
-        m = ['fullcode':it.fullcode, 'file':file, 'line':it.line, 'namespace':rnamespace, 'class':rclass, 'function':rfunction ];
-    }
-}.transform{ m; }
+g.V().hasLabel("Analysis").has("analyzer", "{$analyzerName}").out('ANALYZED')
+.sideEffect{ line = it.get().value('line');
+             fullcode = it.get().value('fullcode');
+             file='None'; 
+             theFunction = 'None'; 
+             theClass='None'; 
+             theNamespace='None'; 
+             }
+.sideEffect{ line = it.get().value('line'); }
+.repeat( 
+    __.in($linksDown)
+      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
+       ).until(hasLabel('File'))
+.map{  file = it.get().value('fullcode');}
 
+.map{
+['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace];
+
+}
 GREMLIN;
         $res = $this->gremlin->query($query);
         if (!isset($res->results)) {
@@ -247,14 +235,8 @@ SQL;
         $insert = $sqlite->prepare($sqlQuery);
 
         
-        foreach(\Tokenizer\Token::$types as $class) {
-            $tokenClass = "\\Tokenizer\\$class";
-            if (!isset($tokenClass::$atom)) {
-                // Some classes have no such property
-                continue;
-            }
-            $atom = $tokenClass::$atom;
-            $query = "g.idx('atoms')[['atom':'$atom']].count()";
+        foreach(\Tokenizer\Token::ATOMS as $atom) {
+            $query = "g.V().hasLabel('$atom').count()";
             $res = $this->gremlin->query($query);
             if (!is_object($res) || !isset($res->results)) {
                 $this->log->log( "Couldn't run the query and get a result : \n" .

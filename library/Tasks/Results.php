@@ -69,7 +69,9 @@ GREMLIN;
 
             $return[] = $vertices[0];
         } elseif ($config->style == 'ALL') {
-              $query = <<<GREMLIN
+            $linksDown = \Tokenizer\Token::linksAsList();
+
+            $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')
 .sideEffect{ line = it.get().value('line');
              fullcode = it.get().value('fullcode');
@@ -80,7 +82,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')
              }
 .sideEffect{ line = it.get().value('line'); }
 .repeat( 
-    __.in('ABSTRACT', 'APPEND', 'ARGUMENT', 'ARGUMENTS', 'AT', 'BLOCK', 'BREAK', 'CASE', 'CASES', 'CAST', 'CATCH', 'CLASS', 'CLONE', 'CODE', 'CONCAT', 'CONDITION', 'CONST', 'CONSTANT', 'CONTINUE', 'DECLARE', 'ELEMENT', 'ELSE', 'EXTENDS', 'FILE', 'FINAL', 'FINALLY', 'FUNCTION', 'GOTO', 'GROUPUSE', 'IMPLEMENTS', 'INCREMENT', 'INDEX', 'INIT', 'KEY', 'LABEL', 'LEFT', 'METHOD', 'NAME', 'NEW', 'NOT', 'OBJECT', 'PPP', 'PREPLUSPLUS', 'PRIVATE', 'PROJECT', 'PROPERTY', 'PROTECTED', 'PUBLIC', 'RETURN', 'RETURNTYPE', 'RIGHT', 'SIGN', 'SOURCE', 'STATIC', 'SUBNAME', 'THEN', 'THROW', 'TYPEHINT', 'USE', 'VALUE', 'VAR', 'VARIABLE', 'YIELD')
+    __.in($linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
        ).until(hasLabel('File'))

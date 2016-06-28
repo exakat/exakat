@@ -384,24 +384,27 @@ abstract class Analyzer {
 ////////////////////////////////////////////////////////////////////////////////
 
     private function hasNoInstruction($atom = 'Function') {
+        $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('where( 
-repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
+repeat(__.in('.$linksDown.'))
 .until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(eq(0)))');
         
         return $this;
     }
 
     private function hasInstruction($atom = 'Function') {
+        $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('where( 
-repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
+repeat(__.in('.$linksDown.'))
 .until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(gte(1)))');
         
         return $this;
     }
 
     private function goToInstruction($atom = 'Namespace') {
+        $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('repeat( __.in(
-"ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"
+'.$linksDown.'
         )).until(hasLabel('.$this->SorA($atom).', "File") )');
     }
 
@@ -1230,8 +1233,9 @@ GREMLIN
     }
     
     public function goToFunction() {
+        $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('repeat(__.in(
-"ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"
+'.$linkDown.'
 )).until(and(hasLabel("Function"), where(__.out("NAME").not(has("atom", "Void")) )))');
         
         return $this;
