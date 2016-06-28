@@ -1,5 +1,7 @@
 <?php
 
+use non\_trait\_use as a;
+
 trait G {
     function H() {  }
 }

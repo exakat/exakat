@@ -4,7 +4,7 @@
 namespace B {
 
 use const A\A, B;
-use const A\{D, E};
+use const A\B\C\{D, E};
 
 use A\{ B,
     const C,
