@@ -213,6 +213,7 @@ class Load extends Tasks {
     const PROP_ABSOLUTE    = ['Nsname'];
     const PROP_ALIAS       = ['Nsname', 'Identifier', 'As'];
     const PROP_ORIGIN      = self::PROP_ALIAS;
+    const PROP_ENCODING    = ['String'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
                           'reference'   => self::PROP_REFERENCE,
@@ -224,7 +225,8 @@ class Load extends Tasks {
                           'fullnspath'  => self::PROP_FNSNAME,
                           'absolute'    => self::PROP_ABSOLUTE,
                           'alias'       => self::PROP_ALIAS,
-                          'origin'      => self::PROP_ORIGIN
+                          'origin'      => self::PROP_ORIGIN,
+                          'encoding'    => self::PROP_ENCODING,
                           ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -2818,6 +2820,7 @@ class Load extends Tasks {
             $this->setAtom($id, ['delimiter'   => '',
                                  'noDelimiter' => '']);
         }
+        $this->setAtom($id, ['encoding' => mb_detect_encoding($this->atoms[$id]['noDelimiter'])]);
         return $id;
     }
 
