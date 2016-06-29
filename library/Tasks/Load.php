@@ -206,7 +206,7 @@ class Load extends Tasks {
     const PROP_REFERENCE   = ['Variable', 'Property', 'Staticproperty'];
     const PROP_VARIADIC    = ['Variable', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname'];
     const PROP_DELIMITER   = ['String', 'Heredoc'];
-    const PROP_NODELIMITER = ['String'];
+    const PROP_NODELIMITER = ['String', 'Variable'];
     const PROP_HEREDOC     = ['Heredoc'];
     const PROP_COUNT       = ['Sequence', 'Arguments', 'Heredoc', 'Shell', 'String'];
     const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void'];
@@ -214,6 +214,8 @@ class Load extends Tasks {
     const PROP_ALIAS       = ['Nsname', 'Identifier', 'As'];
     const PROP_ORIGIN      = self::PROP_ALIAS;
     const PROP_ENCODING    = ['String'];
+    const PROP_INTVAL      = ['Integer'];
+    const PROP_STRVAL      = ['String'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
                           'reference'   => self::PROP_REFERENCE,
@@ -227,6 +229,8 @@ class Load extends Tasks {
                           'alias'       => self::PROP_ALIAS,
                           'origin'      => self::PROP_ORIGIN,
                           'encoding'    => self::PROP_ENCODING,
+                          'intval'      => self::PROP_INTVAL,
+                          'strval'      => self::PROP_STRVAL,
                           ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -730,6 +734,13 @@ class Load extends Tasks {
             }
             
             $partId = $this->popExpression();
+            if ($this->atoms[$partId]['atom'] === 'String') {
+                $this->setAtom($partId, ['noDelimiter' => $this->atoms[$partId]['code'],
+                                         'delimiter'   => '']);
+            } else {
+                $this->setAtom($partId, ['noDelimiter' => '',
+                                         'delimiter'   => '']);
+            }
             $this->setAtom($partId, ['rank' => $rank++]);
             $fullcode[] = $this->atoms[$partId]['fullcode'];
             $this->addLink($stringId, $partId, 'CONCAT');
@@ -2803,7 +2814,22 @@ class Load extends Tasks {
     }
     
     private function processInteger() {
-        return $this->processSingle('Integer');
+        $id = $this->processSingle('Integer');
+        $value = $this->atoms[$id]['code'];
+        
+        if (strtolower(substr($value, 0, 2)) === '0b') {
+            $actual = bindec(substr($value, 2));
+        } elseif (strtolower(substr($value, 0, 2)) === '0x') {
+            $actual = hexdec(substr($value, 2));
+        } elseif (strtolower(substr($value, 0, 2)) === '0') {
+            // PHP 7 will just stop.
+            // PHP 5 will work until it fails
+            $actual = octdec(substr($value, 1));
+        } else {
+            $actual = $value;
+        }
+        $this->setAtom($id, ['intval' => $actual]);
+        return $id;
     }
 
     private function processReal() {

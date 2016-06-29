@@ -97,13 +97,13 @@ variadic (not as a relation)
             $extra = [];
             foreach(\Tasks\Load::PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
-                    if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding'])) {
+                    if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'])) {
                     // Raw string
                         $extra[] = "$title: csvLine.$title";
                     } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic', 'absolute'])) {
                     // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
-                    } elseif (in_array($title, ['count'])) {
+                    } elseif (in_array($title, ['count', 'intval'])) {
                     // Integer
                         $extra[] = "$title: toInt(csvLine.$title)";
                     } else {
