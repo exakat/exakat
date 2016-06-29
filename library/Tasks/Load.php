@@ -209,7 +209,7 @@ class Load extends Tasks {
     const PROP_NODELIMITER = ['String', 'Variable'];
     const PROP_HEREDOC     = ['Heredoc'];
     const PROP_COUNT       = ['Sequence', 'Arguments', 'Heredoc', 'Shell', 'String'];
-    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void'];
+    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static'];
     const PROP_ABSOLUTE    = ['Nsname'];
     const PROP_ALIAS       = ['Nsname', 'Identifier', 'As'];
     const PROP_ORIGIN      = self::PROP_ALIAS;
@@ -1676,17 +1676,20 @@ class Load extends Tasks {
     
     private function processStatic() {
         if ($this->tokens[$this->id + 1][0] === T_DOUBLE_COLON) {
-            $this->processSingle('Static');
+            $id = $this->processSingle('Static');
+            $this->setAtom($id, ['fullnspath' => '\\static']);
+            return $id;
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
             $nameId = $this->addAtom('Identifier');
-            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1],
-                                     'fullcode' => $this->tokens[$this->id][1],
-                                     'line'     => $this->tokens[$this->id][2],
-                                     'token'    => $this->getToken($this->tokens[$this->id][0])]
+            $this->setAtom($nameId, ['code'       => $this->tokens[$this->id][1],
+                                     'fullcode'   => $this->tokens[$this->id][1],
+                                     'line'       => $this->tokens[$this->id][2],
+                                     'token'      => $this->getToken($this->tokens[$this->id][0]),
+                                     'fullnspath' => '\\static']
                                      );
             $this->pushExpression($nameId);
 
-            $this->processFunctioncall();
+            return $this->processFunctioncall();
         } elseif ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             return $this->processStaticVariable();
         } else {
