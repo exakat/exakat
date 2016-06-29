@@ -31,11 +31,8 @@ class debugInfoUsage extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->code('__debugInfo')
-             ->inIs('NAME')
-             ->inIs('ELEMENT')
-             ->inIs('BLOCK')
-             ->atomIs('Class')
+             ->codeIs('__debugInfo')
+             ->hasClass()
              ->back('first');
         $this->prepareQuery();
     }
