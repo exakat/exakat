@@ -27,10 +27,9 @@ use Analyzer;
 
 class EvalWithoutTry extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->functioncallIs('\\eval')
-             ->notInInstruction('Try')
-             ->back('first');
+        // eval() without try / catch around
+        $this->atomFunctionIs('\\eval')
+             ->hasNotTryCatch();
         $this->prepareQuery();
     }
 }

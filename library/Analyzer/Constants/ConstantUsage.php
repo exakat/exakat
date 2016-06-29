@@ -29,16 +29,14 @@ class ConstantUsage extends Analyzer\Analyzer {
     public function analyze() {
         // Nsname that is not used somewhere else
         $this->atomIs('Nsname')
-             ->hasNoIn(array('NEW', 'USE', 'NAME', 'NAMESPACE', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'FUNCTION'));
+             ->hasNoIn(array('NEW', 'USE', 'NAME', 'NAMESPACE', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'FUNCTION', 'GROUPUSE'));
         $this->prepareQuery();
 
         // Identifier that is not used somewhere else
         $this->atomIs('Identifier')
-             ->codeIsNot(array('true', 'false', 'null'))
              ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY',
-                             'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE', 'FUNCTION', 'CONST'))
-             ->hasNoParent('Const', array('LEFT', 'CONST'))
-             ->filter(' it.in("INDEX").has("enclosing", null).in("CONCAT").in("CONTAINS").has("atom", "String").any() == false');
+                             'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE', 'FUNCTION', 'CONST', 'GROUPUSE'))
+             ->hasNoParent('String', array('INDEX', 'CONCAT'));
         $this->prepareQuery();
 
         // special case for Boolean and Null
@@ -49,10 +47,9 @@ class ConstantUsage extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\defined', '\constant'))
+             ->fullnspathIs(array('\defined', '\constant'))
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String');
         $this->prepareQuery();
         
