@@ -1458,6 +1458,12 @@ GREMLIN
         return $this;
     }
 
+    public function hasClassInterface() {
+        $this->hasInstruction(['Class', 'Interface']);
+        
+        return $this;
+    }
+
     public function hasTrait() {
         $this->hasInstruction('Trait');
         
@@ -1703,7 +1709,9 @@ GREMLIN
 {$query}
 GREMLIN;
         
-        $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")';
+        $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
+
+// Query for '.$this->analyzerQuoted;
 
     // initializing a new query
         $this->queries[] = $query;
