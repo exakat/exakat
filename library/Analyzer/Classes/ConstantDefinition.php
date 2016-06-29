@@ -28,10 +28,10 @@ use Analyzer;
 class ConstantDefinition extends Analyzer\Analyzer {
 
     public function analyze() {
+        // Const in a function or a trait 
         $this->atomIs('Const')
+             ->hasClassInterface()
              ->outIs('CONST')
-             ->classIsNot('Global')
-             ->functionIs('Global')
              ->outIs('LEFT');
         $this->prepareQuery();
     }
