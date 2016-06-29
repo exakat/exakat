@@ -209,7 +209,7 @@ class Load extends Tasks {
     const PROP_NODELIMITER = ['String'];
     const PROP_HEREDOC     = ['Heredoc'];
     const PROP_COUNT       = ['Sequence', 'Arguments', 'Heredoc', 'Shell', 'String'];
-    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As'];
+    const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void'];
     const PROP_ABSOLUTE    = ['Nsname'];
     const PROP_ALIAS       = ['Nsname', 'Identifier', 'As'];
     const PROP_ORIGIN      = self::PROP_ALIAS;
@@ -1934,9 +1934,9 @@ class Load extends Tasks {
 
         if ($isColon === true) {
             ++$this->id; // skip endforeach
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .') : '.self::FULLCODE_SEQUENCE.' endforeach';
+            $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .') : '.self::FULLCODE_SEQUENCE.' endforeach';
         } else {
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .') '.self::FULLCODE_BLOCK;
+            $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .')'.self::FULLCODE_BLOCK;
         }
 
         $this->setAtom($id, ['code'        => $this->tokens[$current][1].' (' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .') '.self::FULLCODE_BLOCK,
@@ -2526,7 +2526,7 @@ class Load extends Tasks {
         $this->setNamespace(0);
         
         $x = ['code'     => $this->tokens[$current][1], 
-              'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .' '.self::FULLCODE_BLOCK,
+              'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .self::FULLCODE_BLOCK,
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
         $this->setAtom($namespaceId, $x);
@@ -3427,7 +3427,8 @@ class Load extends Tasks {
         $this->setAtom($id, ['code'     => 'Void', 
                              'fullcode' => self::FULLCODE_VOID,
                              'line'     => $this->tokens[$this->id][2],
-                             'token'    => T_VOID
+                             'token'    => T_VOID,
+                             'fullnspath' => '\\'
                              ]);
         
         return $id;
