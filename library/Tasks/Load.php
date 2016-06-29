@@ -1645,11 +1645,10 @@ class Load extends Tasks {
             $this->processSemicolon();
             return $labelId;
         }
-//        $this->setAtom($id, ['fullnspath' => $this->getFullnspath($id, $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const') ]);
         $this->pushExpression($id);
 
         // For functions and constants 
-        $id = $this->processFCOA($id);;
+        $id = $this->processFCOA($id);
 
         return $id;
     }
@@ -3141,6 +3140,9 @@ class Load extends Tasks {
             $this->popExpression();
         } elseif (!in_array($this->tokens[$this->id + 1][0], [ T_VARIABLE, T_STRING])) {
             $right = $this->processNextAsIdentifier();
+            $this->pushExpression($right);
+            $right = $this->processFCOA($right);
+            $this->popExpression();
         } else {
             do {
                 $id = $this->processNext();
