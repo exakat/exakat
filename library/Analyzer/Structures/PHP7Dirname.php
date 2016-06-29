@@ -27,15 +27,12 @@ use Analyzer;
 
 class PHP7Dirname extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->functioncallIs('\\dirname')
-             ->filter('it.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\dirname").any() == false')
+        $this->atomFunctionIs('\\dirname')
+             ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\dirname").count().is(eq(0)) )')
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->atomIs('Functioncall')
-             ->fullnspath('\\dirname')
+             ->outWithRank('ARGUMENT', 0)
+             ->functioncallIs('\\dirname')
              ->back('first');
         $this->prepareQuery();
     }

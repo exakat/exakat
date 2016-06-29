@@ -672,10 +672,8 @@ GREMLIN;
             // @note : can't use has() with integer!
             $this->addMethod('out("'.$link.'").has("rank", eq(0))');
         } elseif ($rank === 'last') {
-//            $this->addMethod("filter{it.get().value('rank') == it.get().vertices(IN, '$link').get().vertices(OUT, '$link').count() - 1}");
             $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(1) )');
         } elseif ($rank === '2last') {
-//            $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 2}");
             $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(2) )');
         } else {
             $this->addMethod('out("'.$link.'").has("rank", eq('.abs(intval($rank)).'))');
@@ -685,15 +683,7 @@ GREMLIN;
     }
 
     public function noChildWithRank($edgeName, $rank = '0') {
-        if ($rank === 'first') {
-            $this->addMethod("filter{ it.out(***).has('rank',0).any() == false }", $edgeName);
-        } elseif ($rank === 'last') {
-            $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 1).any() == false }", $edgeName, $edgeName);
-        } elseif ($rank === '2last') {
-            $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 2).any() == false }", $edgeName, $edgeName);
-        } else {
-            $this->addMethod("filter{ it.out(***).has('rank', ".abs(intval($rank)).").any() == false}", $edgeName);
-        }
+        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs(intval($rank)).').count().is(eq(0)) )');
 
         return $this;
     }
