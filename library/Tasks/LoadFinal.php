@@ -25,12 +25,14 @@ namespace Tasks;
 
 class LoadFinal extends Tasks {
     public function run(\Config $config) {
-
+        
+        $linksIn = \Tokenizer\Token::linksAsList();
+        
         // processing '\parent' fullnspath
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() == "\\\\parent"}
-.property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in()).out("EXTENDS").values("fullnspath") )
-.addE('DEFINITION').from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in()).out("EXTENDS").in("DEFINITION") )
+.property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS").values("fullnspath") )
+.addE('DEFINITION').from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS").in("DEFINITION") )
 
 GREMLIN;
         $this->gremlin->query($query);
@@ -39,14 +41,23 @@ GREMLIN;
         // processing '\self' fullnspath
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() == "\\\\self"}
-.property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in()).out("NAME").values("fullnspath") )
-.addE('DEFINITION').from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in()).in("DEFINITION") )
+.property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("NAME").values("fullnspath") )
+.addE('DEFINITION').from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)) )
 
 GREMLIN;
         $this->gremlin->query($query);
         display('\\self to fullnspath');
         
-        // Also process Static ? 
+        // processing '\static' fullnspath
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() == "\\\\static"}
+.property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("NAME").values("fullnspath") )
+.addE('DEFINITION').from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)) )
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('\\self to fullnspath');
+
         // update fullnspath with fallback for functions 
     }
 }
