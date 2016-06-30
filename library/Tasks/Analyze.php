@@ -169,10 +169,14 @@ php exakat analyze -P <One/rule> -p <project>\n");
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
                 
                 $query = <<<GREMLIN
-result = g.addVertex(null, [code:'Not Compatible With PhpVersion', fullcode:'Not Compatible With PhpVersion', virtual:true, notCompatibleWithPhpVersion:'$config->phpversion', token:'T_INCOMPATIBLE']);
-index = g.addVertex(null, [analyzer:'$analyzerQuoted', analyzer:true, line:0, description:'Analyzer index for $analyzer', code:'', fullcode:'',  atom:'Index', token:'T_INDEX']);
-g.idx('analyzers').put('analyzer', '$analyzerQuoted', index);
-g.addEdge(index, result, 'ANALYZED');
+result = g.addV('Noresult').property('code',                        'Not Compatible With PhpVersion')
+                           .property('fullcode',                    'Not Compatible With PhpVersion')
+                           .property('virtual',                      true)
+                           .property('notCompatibleWithPhpVersion', '$config->phpversion')
+                           .property('token',                       'T_INCOMPATIBLE');
+
+g.addV('Analysis').property('analyzer', '$analyzerQuoted').addE('ANALYZED').to(result);
+
 GREMLIN;
                 $this->gremlin->query($query);
                 $this->datastore->addRow('analyzed', array($analyzer_class => -2 ) );
@@ -183,10 +187,13 @@ GREMLIN;
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
                 $query = <<<GREMLIN
-result = g.addVertex(null, [code:'Not Compatible With Php Configuration', fullcode:'Not Compatible With Php Configuration', virtual:true, notCompatibleWithPhpConfiguration:'$config->phpversion', token:'T_INCOMPATIBLE']);
-index = g.addVertex(null, [analyzer:'$analyzerQuoted', analyzer:true, line:0, description:'Analyzer index for $analyzer', code:'', fullcode:'',  atom:'Index', token:'T_INDEX']);
-g.idx('analyzers').put('analyzer', '$analyzerQuoted', index);
-g.addEdge(index, result, 'ANALYZED');
+result = g.addV('Noresult').property('code',                              'Not Compatible With Configuration')
+                           .property('fullcode',                          'Not Compatible With Configuration')
+                           .property('virtual',                            true)
+                           .property('notCompatibleWithPhpConfiguration', '$config->phpversion')
+                           .property('token',                             'T_INCOMPATIBLE');
+
+index = g.addV('Analysis').property('analyzer', '$analyzerQuoted').addE('ANALYZED').to(result);
 GREMLIN;
                 $this->gremlin->query($query);
                 $this->datastore->addRow('analyzed', array($analyzer_class => -1 ) );
