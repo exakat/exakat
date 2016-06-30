@@ -32,11 +32,11 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
     
     public function analyze() {
         // normal property
-        $this->atomIs('Visibility')
+        $this->atomIs('Ppp')
              ->hasNoOut('STATIC')
-             ->outIs('DEFINE')
+             ->outIs('PPP')
              ->_as('ppp')
-             ->isNot('propertyname', null)
+             ->outIsIE('LEFT')
              ->savePropertyAs('propertyname', 'property')
              ->goToClass()
              ->outIs('BLOCK')
@@ -48,38 +48,17 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static property in an variable static::$c
-        $this->atomIs('Visibility')
+        $this->atomIs('Ppp')
              ->hasOut('STATIC')
-             ->outIs('DEFINE')
+             ->outIs('PPP')
              ->_as('ppp')
-             ->hasNoFunction()
-             ->analyzerIsNot('Variables/StaticVariables')
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'property')
-             ->back('ppp');
-        $this->prepareQuery();
-
-        // static property in an array
-        $this->atomIs('Visibility')
-             ->hasOut('STATIC')
-             ->outIs('DEFINE')
-             ->_as('ppp')
-             ->isNot('propertyname', null)
-             // not a static variable for a function/method
-             ->hasNoFunction()
-             ->analyzerIsNot('Variables/StaticVariables')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->outIs('BLOCK')
-             ->atomInside('Staticproperty')
-             ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE')
+             ->outIsIE(array('VARIABLE', 'APPEND'))
              ->samePropertyAs('code', 'property')
              ->back('ppp');
         $this->prepareQuery();

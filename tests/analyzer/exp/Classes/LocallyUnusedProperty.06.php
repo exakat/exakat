@@ -22,4 +22,4 @@ $expected_not = array('$apustad2 = 2',
                       '$apud2 = 2', 
                       '$apu2');
 
-?>;
+?>
