@@ -338,6 +338,9 @@ class Load extends Tasks {
         static::$client->finalize();
         display('Final memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
         $this->datastore->addRow('hash', array('status' => 'Load'));
+        
+        $loadFinal = new LoadFinal($this->gremlin);
+        $loadFinal->run($config);
     }
 
     private function processProject($project) {
