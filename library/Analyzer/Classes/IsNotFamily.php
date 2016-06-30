@@ -29,13 +29,18 @@ class IsNotFamily extends Analyzer\Analyzer {
     public function analyze() {
         // Staticmethodcall
         // Inside the class
-        $this->atomIs('Class')
-             ->savePropertyAs('classTree', 'classTree')
-             ->outIs('BLOCK')
-             ->atomInside('Staticmethodcall')
+        $this->atomIs('Staticmethodcall')
+             ->hasClass()
              ->outIs('CLASS')
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->isPropertyNotIn('fullnspath','classTree');
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->goToClass()
+             ->notSamePropertyAs('fullnspath', 'fnp')
+             ->raw('where( until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()
+             .filter{ it.get().value("fullnspath") == fnp }
+             .count().is(neq(1))
+             )')
+             ->back('first');
         $this->prepareQuery();
 
         // All non-in-class calls are OK
@@ -43,7 +48,8 @@ class IsNotFamily extends Analyzer\Analyzer {
              ->hasNoClass()
              ->hasNoTrait()
              ->outIs('CLASS')
-             ->analyzerIsNot('self');
+             ->analyzerIsNot('self')
+             ->back('first');
         $this->prepareQuery();
     }
 }
