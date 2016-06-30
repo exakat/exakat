@@ -34,8 +34,12 @@ class Variablenames extends Analyzer\Analyzer {
         // $x
         $this->atomIs('Variable')
              ->hasNoParent('Functioncall', array('NAME'))
-             ->hasNoParent('Class', array('LEFT', 'DEFINE', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'BLOCK'))
+
+             ->hasNoParent('Class', array('PPP', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Class', array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Class', array('STATIC', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Class', array('LEFT', 'STATIC', 'ELEMENT', 'BLOCK'))
+             
              ->hasNoParent('Staticproperty', 'PROPERTY')
              ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
              ->hasNoParent('Staticproperty', array('VARIABLE', 'VARIABLE', 'PROPERTY'))
@@ -55,8 +59,13 @@ class Variablenames extends Analyzer\Analyzer {
 
         // ${'x'}
         $this->atomIs('Variable')
-             ->hasNoParent('Class', array('DEFINE', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent('Class', array('LEFT', 'DEFINE', 'ELEMENT', 'BLOCK'))
+             ->analyzerIsNot('self')
+
+             ->hasNoParent('Class', array('PPP', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Class', array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Class', array('STATIC', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Class', array('LEFT', 'STATIC', 'ELEMENT', 'BLOCK'))
+
              ->hasNoParent('Staticproperty', 'PROPERTY')
              ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
              ->analyzerIsNot('Variables/Blind')
