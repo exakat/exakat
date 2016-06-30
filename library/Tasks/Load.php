@@ -1694,7 +1694,15 @@ class Load extends Tasks {
 
             return $this->processFunctioncall();
         } elseif ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
-            return $this->processStaticVariable();
+            if ($this->isContext(self::CONTEXT_CLASS) && 
+                !$this->isContext(self::CONTEXT_FUNCTION)) {
+                // something like public static
+                $this->processOptions('Static');
+
+                return $this->processSGVariable('Ppp');
+            } else {
+                return $this->processStaticVariable();
+            }
         } else {
             return $this->processOptions('Static');
         }
