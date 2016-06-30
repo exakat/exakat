@@ -1,8 +1,6 @@
 <?php
 
-$expected     = array('$aprotectedButSBPrivate3',
-                      '$aprotectedButSBPrivate4',
-                      '$asprotectedReallyFull',
+$expected     = array('$asprotectedReallyFull',
                       '$asprotectedReallyStatic',
                       '$asprotectedReallyChildren',
                       '$asprotectedReallySelf',
@@ -10,6 +8,9 @@ $expected     = array('$aprotectedButSBPrivate3',
                       '$aprotectedButSBPrivate2',
 );
 
-$expected_not = array();
+$expected_not = array('$aprivate',
+                      '$aprotectedButSBPrivate3',
+                      '$aprotectedButSBPrivate4',
+                      );
 
 ?>
