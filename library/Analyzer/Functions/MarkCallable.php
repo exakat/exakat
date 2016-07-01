@@ -63,7 +63,7 @@ sideEffect{
         it.get().property('fullnspath', cbClass);
         it.get().property('cbMethod', it.get().value('noDelimiter').substring(2 + i).toLowerCase());
     } else {
-        fullnspath = it.get().value('noDelimiter').toLowerCase().replaceAll( "\\\\\\\\", "\\\\" );
+        fullnspath = it.get().value('noDelimiter').toLowerCase();//.replaceAll( "\\\\\\\\", "\\\\" );
         if (fullnspath == "" || fullnspath.toString()[0] != "\\\\") { 
             fullnspath = "\\\\" + fullnspath;
         };
@@ -74,10 +74,7 @@ GREMLIN;
 
         // callable is in # position
         foreach($positions as $position) {
-            $this->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspathIs($ini['functions'.$position])
+            $this->atomFunctionIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('String')
@@ -87,10 +84,7 @@ GREMLIN;
         }
 
         // callable is in last
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini['functions_last'])
+        $this->atomFunctionIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('String')
@@ -98,10 +92,7 @@ GREMLIN;
         $this->prepareQuery();
         
         // callable is in 2nd to last
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini['functions_2last'])
+        $this->atomFunctionIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs('String')
@@ -113,9 +104,9 @@ GREMLIN;
 
         $apply = <<<GREMLIN
 out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get(); }
-.in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }
+.in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }.in("ARGUMENT")
 .sideEffect{
-    cbClass = cbClassNode.value('noDelimiter').toLowerCase().replaceAll( "\\\\\\\\", "\\\\" );
+    cbClass = cbClassNode.value('noDelimiter').toLowerCase(); //.replaceAll( "\\\\\\\\", "\\\\" );
     if (cbClass.toString()[0] != "\\\\") {
         cbClass = "\\\\" + cbClass;
     };
@@ -153,14 +144,11 @@ GREMLIN;
 
         // callable is in # position
         foreach($positions as $position) {
-            $this->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspathIs($ini['functions'.$position])
+            $this->atomFunctionIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Functioncall')
-                 ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
+                 ->fullnspathIs('\\array')
                  ->raw('sideEffect{ theArrayNode = it.get(); }')
                  ->raw($arrayContainsTwoStrings)
                  ->raw($apply);
@@ -168,28 +156,22 @@ GREMLIN;
         }
 
         // callable is in last
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini['functions_last'])
+        $this->atomFunctionIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Functioncall')
-             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
+             ->fullnspathIs('\\array')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($arrayContainsTwoStrings)
              ->raw($apply);
         $this->prepareQuery();
 
         // callable is in 2nd to last
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini['functions_2last'])
+        $this->atomFunctionIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Functioncall')
-             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
+             ->fullnspathIs('\\array')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($arrayContainsTwoStrings)
              ->raw($apply);
@@ -199,24 +181,21 @@ GREMLIN;
         // array($object, 'method'); Also, [$object, 'method']
         $apply = <<<GREMLIN
 out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbObjectNode = it.get(); }
-.in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }
+.in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }.in("ARGUMENT")
 .sideEffect{
     // 
     theArrayNode.property("cbObject", cbObjectNode.value("code"));
-    theArrayNode.property("cbMethod", cbMethodNode.value("noDelimiter").noDelimiter.toLowerCase());
+    theArrayNode.property("cbMethod", cbMethodNode.value("noDelimiter").toLowerCase());
 }
 
 GREMLIN;
 
         $firstArgIsAVariable = 'where ( __.out("ARGUMENTS").out("ARGUMENT").has("rank", 0).hasLabel("Variable"))';
-        $secondArgIsAString = 'where ( __.out("ARGUMENTS").out("ARGUMENT").has("rank", 1).has("atom", "String").where( __.out("CONCAT").count().is(eq(0))) )';
+        $secondArgIsAString = 'where ( __.out("ARGUMENTS").out("ARGUMENT").has("rank", 1).hasLabel("String").where( __.out("CONCAT").count().is(eq(0))) )';
         
         // callable is in # position
         foreach($positions as $position) {
-            $this->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspathIs($ini['functions'.$position])
+            $this->atomFunctionIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Functioncall')
@@ -231,10 +210,7 @@ GREMLIN;
         }
 
         // callable is in last
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini['functions_last'])
+        $this->atomFunctionIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Functioncall')
@@ -246,10 +222,7 @@ GREMLIN;
         $this->prepareQuery();
 
         // callable is in 2nd to last
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini['functions_2last'])
+        $this->atomFunctionIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Functioncall')
@@ -265,10 +238,7 @@ GREMLIN;
 
         // callable is in # position
         foreach($positions as $position) {
-            $this->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspathIs($ini['functions'.$position])
+            $this->atomFunctionIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Function');
@@ -276,20 +246,14 @@ GREMLIN;
         }
 
         // callable is in last
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini['functions_last'])
+        $this->atomFunctionIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Function');
         $this->prepareQuery();
 
         // callable is in 2nd to last
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini['functions_2last'])
+        $this->atomFunctionIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Function');
