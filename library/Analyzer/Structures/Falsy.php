@@ -42,7 +42,6 @@ class Falsy extends Analyzer\Analyzer {
 
         // String
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
              ->codeIs(array("''", '""'));
         $this->prepareQuery();
 

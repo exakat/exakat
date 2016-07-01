@@ -216,6 +216,7 @@ class Load extends Tasks {
     const PROP_ENCODING    = ['String'];
     const PROP_INTVAL      = ['Integer'];
     const PROP_STRVAL      = ['String'];
+    const PROP_ENCLOSING   = ['Variable', 'Array', 'Property'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
                           'reference'   => self::PROP_REFERENCE,
@@ -231,6 +232,7 @@ class Load extends Tasks {
                           'encoding'    => self::PROP_ENCODING,
                           'intval'      => self::PROP_INTVAL,
                           'strval'      => self::PROP_STRVAL,
+                          'enclosing'   => self::PROP_ENCLOSING,
                           ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -708,8 +710,12 @@ class Load extends Tasks {
                 ++$this->id; // Skip {
                 while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
                     $this->processNext();
-                } ;
+                };
                 ++$this->id; // Skip }
+
+                $partId = $this->popExpression();
+                $this->setAtom($partId, ['enclosing' => true]);
+                $this->pushExpression($partId);
             } elseif ($this->tokens[$this->id + 1][0] == T_VARIABLE) {
                 $this->processNext();
 
@@ -722,10 +728,11 @@ class Load extends Tasks {
 
                     $propertyId = $this->addAtom('Property');
                     $this->setAtom($propertyId, ['code'     => $this->tokens[$current][1], 
-                                                 'fullcode' => $this->atoms[$objectId]['fullcode']. $this->tokens[$current][1] .
+                                                 'fullcode' => $this->atoms[$objectId]['fullcode']. '->' .
                                                                $this->atoms[$propertyNameId]['fullcode'],
                                                 'line'      => $this->tokens[$current][2],
-                                                'token'     => $this->getToken($this->tokens[$current][0]) ]);
+                                                'token'     => $this->getToken($this->tokens[$current][0]),
+                                                'enclosing' => false ]);
 
                     $this->addLink($propertyId, $objectId, 'OBJECT');
                     $this->addLink($propertyId, $propertyNameId, 'PROPERTY');
@@ -748,6 +755,7 @@ class Load extends Tasks {
             $fullcode[] = $this->atoms[$partId]['fullcode'];
             $this->addLink($stringId, $partId, 'CONCAT');
         }
+        print_r($fullcode);
         
         ++$this->id;
         $x = ['code'     => $this->tokens[$current][1], 
@@ -781,10 +789,11 @@ class Load extends Tasks {
         $nameId = $this->popExpression();
         $this->addLink($variableId, $nameId, 'NAME');
 
-        $this->setAtom($nameId, ['code'     => $this->tokens[$current][1], 
-                                 'fullcode' => '${'.$this->atoms[$nameId]['fullcode'].'}',
-                                 'line'     => $this->tokens[$current][2],
-                                 'token'    => $this->getToken($this->tokens[$current][0])]);
+        $this->setAtom($nameId, ['code'      => $this->tokens[$current][1], 
+                                 'fullcode'  => '${'.$this->atoms[$nameId]['fullcode'].'}',
+                                 'line'      => $this->tokens[$current][2],
+                                 'token'     => $this->getToken($this->tokens[$current][0]),
+                                 'enclosing' => true]);
         
         $this->pushExpression($variableId);
         
@@ -1805,11 +1814,12 @@ class Load extends Tasks {
         $indexId = $this->popExpression();
         $this->addLink($id, $indexId, 'INDEX');
 
-        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
-                             'fullcode' => $this->atoms[$variableId]['fullcode'] . $opening .
-                                           $this->atoms[$indexId]['fullcode']    . $closing ,
-                             'line'     => $this->tokens[$this->id][2],
-                             'token'    => $this->getToken($this->tokens[$this->id][0])]);
+        $this->setAtom($id, ['code'      => $this->tokens[$this->id][1], 
+                             'fullcode'  => $this->atoms[$variableId]['fullcode'] . $opening .
+                                            $this->atoms[$indexId]['fullcode']    . $closing ,
+                             'line'      => $this->tokens[$this->id][2],
+                             'token'     => $this->getToken($this->tokens[$this->id][0]),
+                             'enclosing' => false]);
         $this->pushExpression($id);
         
         return $this->processFCOA($id);
@@ -2790,7 +2800,9 @@ class Load extends Tasks {
     
     private function processVariable() {
         $variableId = $this->processSingle('Variable');
-        $this->setAtom($variableId, ['reference' => false]);
+        $this->setAtom($variableId, ['reference' => false,
+                                     'variadic'  => false,
+                                     'enclosing' => false]);
 
         return $this->processFCOA($variableId);
     }
@@ -3251,6 +3263,7 @@ class Load extends Tasks {
         if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'Postplusplus', 'Property', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
+            $this->setAtom($staticId, ['enclosing' => false ]);
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall'))) {
             $staticId = $this->addAtom('Methodcall');
             $links = 'METHOD';
@@ -3841,7 +3854,6 @@ class Load extends Tasks {
         }
         
         $this->uses[$useType][strtolower($alias)] = $fullnspath;
-        print_r($this->uses);
         
         return $alias;
     }

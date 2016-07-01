@@ -36,7 +36,6 @@ class Truthy extends Analyzer\Analyzer {
 
         // String
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
              ->analyzerIsNot('Structures/Falsy')
              ->hasNoIn('CONCAT');
         $this->prepareQuery();

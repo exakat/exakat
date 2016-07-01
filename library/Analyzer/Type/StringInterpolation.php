@@ -29,12 +29,11 @@ class StringInterpolation extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs(array('String', 'HereDoc', 'NowDoc'))
-             ->outIs('CONTAINS')
              ->outIs('CONCAT')
              ->atomIs(array('Variable', 'Array', 'Property'))
-             ->is('enclosing', null)
+             ->is('enclosing', false)
              ->nextSibling('CONCAT')
-             ->regex('code', '^(->|\\\\[|\\\\{|::)')
+             ->regexIs('code', '^(->|\\\\[|\\\\{|::)')
              ->back('first');
         $this->prepareQuery();
     }
