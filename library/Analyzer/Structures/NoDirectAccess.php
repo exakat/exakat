@@ -35,13 +35,11 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs('T_EXIT')
-             ->fullnspath(array('\\die', '\\exit'))
+             ->functioncallIs(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
 
-        //if(!defined('CMS'))die/exit
+        //if(!defined('CMS')) die/exit
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              // find !defined and defined
@@ -52,9 +50,7 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('THEN')
              ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs('T_EXIT')
-             ->fullnspath(array('\\die', '\\exit'))
+             ->functioncallIs(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
 
@@ -66,9 +62,8 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('THEN')
              ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs('T_EXIT')
-             ->fullnspath(array('\\die', '\\exit'))
+             ->atomInside('Functioncall')
+             ->functioncallIs(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
 
@@ -79,7 +74,8 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->outIs('THEN')
-             ->atomInside('Return')
+             ->outWithRank('ELEMENT', 0)
+             ->atomIs('Return')
              ->back('first');
         $this->prepareQuery();
 
@@ -91,7 +87,8 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->outIs('THEN')
-             ->atomInside('Return')
+             ->outWithRank('ELEMENT', 0)
+             ->atomIs('Return')
              ->back('first');
         $this->prepareQuery();
     }

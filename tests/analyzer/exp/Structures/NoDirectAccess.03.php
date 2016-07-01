@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('if (defined(\'A\'))  /**/ ', 
-                      'if (defined(\'B\'))  /**/ ', 
+$expected     = array('if (defined(\'A\')) { /**/ }', 
+                      'if (defined(\'B\')) { /**/ }', 
                       'if (defined(\'C\')) { /**/ }',
                       );
 

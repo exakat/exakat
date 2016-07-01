@@ -2407,11 +2407,13 @@ class Load extends Tasks {
                                          'token'    => $this->getToken($this->tokens[$this->id][0])]);
 
             $functioncallId = $this->addAtom('Functioncall');
-            $this->setAtom($functioncallId, ['code'     => $this->atoms[$nameId]['code'], 
-                                             'fullcode' => $this->atoms[$nameId]['fullcode'] . ' ' .
-                                                           ($this->atoms[$argumentsId]['atom'] === 'Void' ? self::FULLCODE_VOID :  $this->atoms[$argumentsId]['fullcode']),
-                                             'line'     => $this->tokens[$this->id][2],
-                                             'token'    => $this->getToken($this->tokens[$this->id][0])
+            $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'], 
+                                             'fullcode'   => $this->atoms[$nameId]['fullcode'] . ' ' .
+                                                             ($this->atoms[$argumentsId]['atom'] === 'Void' ? self::FULLCODE_VOID :  $this->atoms[$argumentsId]['fullcode']),
+                                             'line'       => $this->tokens[$this->id][2],
+                                             'token'      => $this->getToken($this->tokens[$this->id][0]),
+                                             'fullnspath' => '\\'.strtolower($this->atoms[$nameId]['code']), 
+                                             
                                            ]);
             $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
             $this->addLink($functioncallId, $nameId, 'NAME');
