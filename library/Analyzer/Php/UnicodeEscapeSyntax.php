@@ -30,7 +30,7 @@ class UnicodeEscapeSyntax extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '\\\\\\\\u\\\\{[a-fA-F0-9]+\\\\}')
              ->back('first');
         $this->prepareQuery();

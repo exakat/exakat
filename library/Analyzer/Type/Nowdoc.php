@@ -28,9 +28,7 @@ use Analyzer;
 class Nowdoc extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Heredoc')
-             ->tokenIs('T_START_HEREDOC')
-             ->outIs('CONTAINS')
-             ->is('nowdoc', true);
+             ->is('heredoc', false);
         $this->prepareQuery();
     }
 }
