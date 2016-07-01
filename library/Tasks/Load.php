@@ -3380,10 +3380,33 @@ class Load extends Tasks {
     }
 
     private function processInstanceof() {
-        $id = $this->processOperator('Instanceof', $this->getPrecedence($this->tokens[$this->id][0]), ['VARIABLE', 'CLASS']);
-        // Warning : big hack. $id + 1 is luckily the 'CLASS' for instanceof..
-        $this->addCall('class', $this->atoms[$id + 1]['fullnspath'], $id + 1);
-        return $id;
+        $current = $this->id;
+        $instanceId = $this->addAtom('Instanceof');
+
+        $left = $this->popExpression();
+        $this->addLink($instanceId, $left, 'VARIABLE');
+        
+        $finals = array_merge([],  $this->getPrecedence($this->tokens[$this->id][0]));
+        do {
+            $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals));
+
+        $right = $this->popExpression();
+        
+        $this->addLink($instanceId, $right, 'CLASS');
+        $this->setAtom($right, ['fullnspath' => $this->getFullnspath($right, 'class')]);
+        $this->addCall('class', $this->atoms[$right]['fullnspath'], $right);
+
+        $x = ['code'     => $this->tokens[$current][1], 
+              'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
+                            $this->tokens[$current][1] . ' ' .
+                            $this->atoms[$right]['fullcode'],
+              'line'     => $this->tokens[$current][2],
+              'token'    => $this->getToken($this->tokens[$current][0])];
+        $this->setAtom($instanceId, $x);
+        $this->pushExpression($instanceId);
+        
+        return $instanceId;
     }
 
     private function processKeyvalue() {
