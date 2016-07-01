@@ -1226,7 +1226,7 @@ GREMLIN
     public function goToFunction() {
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('repeat(__.in(
-'.$linkDown.'
+'.$linksDown.'
 )).until(and(hasLabel("Function"), where(__.out("NAME").not(has("atom", "Void")) )))');
         
         return $this;
