@@ -31,6 +31,7 @@ class LoadFinal extends Tasks {
         // processing '\parent' fullnspath
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() == "\\\\parent"}
+.where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS") )
 .property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS").values("fullnspath") )
 .addE('DEFINITION').from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS").in("DEFINITION") )
 
@@ -56,9 +57,19 @@ g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() 
 
 GREMLIN;
         $this->gremlin->query($query);
-        display('\\self to fullnspath');
+        display('\\static to fullnspath');
 
         // update fullnspath with fallback for functions 
+        //
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Ppp").out("PPP").coalesce( out("LEFT"), __.filter{ true } )
+.sideEffect{ it.get().property('propertyname', it.get().value('code').toString().substring(1, it.get().value('code').size())); }
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('set propertyname');
+        
     }
 }
 
