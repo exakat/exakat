@@ -30,11 +30,10 @@ class InvalidName extends Analyzer\Analyzer {
         // case-sensitive constants
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
-             ->regexNot('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$');
+             ->regexIsNot('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$');
         $this->prepareQuery();
 
         $invalidNames = $this->loadIni('php_keywords.ini', 'keyword');
@@ -44,12 +43,11 @@ class InvalidName extends Analyzer\Analyzer {
         $this->atomFunctionIs('\\define')
              ->analyzerIsNot('self')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->regex('noDelimiter', '\\\\\\\\')
+             ->regexIs('noDelimiter', '\\\\\\\\')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
-             ->filter('['.$invalidNames.'].intersect(it.noDelimiter.tokenize("\\\\\\\\")).size() > 0');
+             ->filter('['.$invalidNames.'].intersect(it.get().value("noDelimiter").tokenize("\\\\\\\\")).size() > 0');
         $this->prepareQuery();
 
 
