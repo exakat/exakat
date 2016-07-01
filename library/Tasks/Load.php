@@ -1679,7 +1679,7 @@ class Load extends Tasks {
     
     private function processStatic() {
         if ($this->tokens[$this->id + 1][0] === T_DOUBLE_COLON) {
-            $id = $this->processSingle('Static');
+            $id = $this->processSingle('Identifier');
             $this->setAtom($id, ['fullnspath' => '\\static']);
             return $id;
         } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
