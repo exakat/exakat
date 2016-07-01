@@ -755,7 +755,6 @@ class Load extends Tasks {
             $fullcode[] = $this->atoms[$partId]['fullcode'];
             $this->addLink($stringId, $partId, 'CONCAT');
         }
-        print_r($fullcode);
         
         ++$this->id;
         $x = ['code'     => $this->tokens[$current][1], 
