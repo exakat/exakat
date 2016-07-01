@@ -623,7 +623,7 @@ GREMLIN;
             $this->addMethod('has("'.$property.'", '.$value.')');
         } else {
             // $value is an array
-            $this->addMethod('has("'.$property.'", within('.$this->SorA($value).'))');
+            $this->addMethod('has("'.$property.'", within(***))', $value);
         }
 
         return $this;
@@ -944,6 +944,7 @@ GREMLIN
 
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($edgeName) {
+        // alternative : coalesce(out('LEFT'),  __.filter{true} )
         $this->addMethod("until(__.outE(".$this->SorA($edgeName).").count().is(eq(0))).repeat(out(".$this->SorA($edgeName)."))");
         
         return $this;
@@ -1256,8 +1257,9 @@ GREMLIN
     }
 
     public function noClassDefinition() {
-        $this->addMethod('hasNot("fullnspath", null)
-                         .filter{ g.idx("classes")[["path":it.fullnspath]].any() == false }');
+        $this->addMethod('where(__.in("DEFINITION").count().is(eq(0)))');
+//        $this->addMethod('hasNot("fullnspath", null)
+//                         .filter{ g.idx("classes")[["path":it.fullnspath]].any() == false }');
     
         return $this;
     }
@@ -1283,7 +1285,8 @@ GREMLIN
     }
 
     public function noInterfaceDefinition() {
-        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('interfaces')[['path':it.fullnspath]].any() == false }");
+        $this->addMethod('where(__.in("DEFINITION").count().is(eq(0)))');
+//        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('interfaces')[['path':it.fullnspath]].any() == false }");
     
         return $this;
     }
@@ -1309,7 +1312,8 @@ GREMLIN
     }
 
     public function noTraitDefinition() {
-        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('traits')[['path':it.fullnspath]].any() == false }");
+        $this->addMethod('where(__.in("DEFINITION").count().is(eq(0)))');
+//        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('traits')[['path':it.fullnspath]].any() == false }");
     
         return $this;
     }
@@ -1399,39 +1403,42 @@ GREMLIN
     }
     
     public function goToExtends() {
-        $this->addMethod('out("EXTENDS")
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
+        $this->addMethod('out("EXTENDS").in("DEFINITION")');
         
         return $this;
     }
 
     public function goToImplements() {
-        $this->addMethod('out("IMPLEMENTS")
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(3){true}{it.object.atom == "Class"}');
+        $this->addMethod('out("IMPLEMENTS").in("DEFINITION")');
+
+        return $this;
+    }
+
+    public function goToParent() {
+        $this->addMethod('out("EXTENDS").in("DEFINITION")');
         
         return $this;
     }
 
     public function goToAllParents() {
-        $this->addMethod('out("EXTENDS")
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(3){true}{it.object.atom == "Class"}');
+//        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
+        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).emit().times(4)');
+        
+//        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
+//        $this->addMethod('sideEffect{ allParents = []; }.until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).emit().repeat( sideEffect{allParents.push(it.get().id()); }.out("EXTENDS").in("DEFINITION").filter{ !(it.get().id() in allParents); } )');
+//        $this->addMethod('sideEffect{ allParents = []; }.until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).repeat( sideEffect{allParents.push(it.get().id()); }.out("EXTENDS").in("DEFINITION").filter{ !(it.get().id() in allParents); } ).emit()');
         
         return $this;
     }
 
     public function goToAllChildren() {
-        $this->addMethod('transform{root = it.fullnspath; g.idx("atoms")[["atom":"Class"]].filter{ it.getProperty("classTree").findAll{it == root;}.size() > 0; }.toList()}.scatter');
+        $this->addMethod('out("DEFINITION")');
         
         return $this;
     }
 
     public function goToTraits() {
-        $this->addMethod('as("toTraits").out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE")
-                         .filter{ g.idx("traits").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("traits")[["path":it.fullnspath]].next(); }.loop("toTraits"){true}{it.object.atom == "Trait"}');
+        $this->addMethod('out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE").in("DEFINITION")');
         
         return $this;
     }
@@ -1474,6 +1481,32 @@ GREMLIN
 
     public function hasNotTryCatch() {
         $this->hasNoInstruction('Try');
+        
+        return $this;
+    }
+
+    public function isLocalClass() {
+        $linksUp = \Tokenizer\Token::linksAsList();
+
+        $this->addMethod(<<<GREMLIN
+sideEffect{ inside = it.get().value("fullnspath"); }
+.where(  __.repeat( __.in($linksUp) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(1)) )
+
+GREMLIN
+);
+        
+        return $this;
+    }
+    
+    public function isNotLocalClass() {
+        $linksUp = \Tokenizer\Token::linksAsList();
+
+        $this->addMethod(<<<GREMLIN
+sideEffect{ inside = it.get().value("fullnspath"); }
+.where(  __.repeat( __.in($linksUp) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(0)) )
+
+GREMLIN
+);
         
         return $this;
     }
