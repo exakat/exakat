@@ -49,6 +49,7 @@ class IsExtInterface extends Analyzer\Analyzer {
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
