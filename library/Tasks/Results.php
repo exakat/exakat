@@ -81,11 +81,11 @@ g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')
              theNamespace='None'; 
              }
 .sideEffect{ line = it.get().value('line'); }
-.repeat( 
+.until( hasLabel('File') ).repeat( 
     __.in($linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
-       ).until(hasLabel('File'))
+       )
 .map{  file = it.get().value('fullcode');}
 
 .map{ ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
