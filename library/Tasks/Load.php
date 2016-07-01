@@ -1345,7 +1345,13 @@ class Load extends Tasks {
               'token'    => $this->getToken($this->tokens[$current][0]),
               'absolute' => $absolute];
         $this->setAtom($nsnameId, $x);
-        $this->setAtom($nsnameId, ['fullnspath' => $this->getFullnspath($nsnameId)]);
+        if ($this->isContext(self::CONTEXT_NEW)) {
+            $fullnspath = $this->getFullnspath($nsnameId);
+            $this->setAtom($nsnameId, ['fullnspath' => $this->getFullnspath($nsnameId), 'class']);
+            $this->addCall('class', $this->getFullnspath($nsnameId), $nsnameId);
+        } else {
+            $this->setAtom($nsnameId, ['fullnspath' => $this->getFullnspath($nsnameId), 'const']);
+        }
 
         $this->pushExpression($nsnameId);
 
@@ -3756,7 +3762,12 @@ class Load extends Tasks {
                 return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
             }
         } else {
-            return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
+            $prefix = substr($this->atoms[$nameId]['fullcode'], 0, strpos($this->atoms[$nameId]['fullcode'], '\\'));
+            if (isset($this->uses[$type][$prefix])) {
+                return $this->uses[$type][$prefix].substr($this->atoms[$nameId]['fullcode'], strlen($prefix));
+            } else {
+                return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
+            }
         }
     }
     
@@ -3805,6 +3816,7 @@ class Load extends Tasks {
         }
         
         $this->uses[$useType][strtolower($alias)] = $fullnspath;
+        print_r($this->uses);
         
         return $alias;
     }
