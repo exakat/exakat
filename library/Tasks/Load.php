@@ -2866,7 +2866,7 @@ class Load extends Tasks {
         } else {
             $actual = $value;
         }
-        $this->setAtom($id, ['intval' => $actual]);
+        $this->setAtom($id, ['intval' => (abs($actual) > PHP_INT_MAX ? 0 : $actual)]);
         return $id;
     }
 
@@ -3070,7 +3070,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
             $operandId = $this->processNext();
 
-            $x = ['code'     => $code * $this->atoms[$operandId]['code'],
+            $x = ['code'     => $sign . $this->atoms[$operandId]['code'],
                   'fullcode' => $sign . $this->atoms[$operandId]['fullcode'],
                   'line'     => $this->tokens[$this->id][2],
                   'token'    => $this->getToken($this->tokens[$this->id][0])];
