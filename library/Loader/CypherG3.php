@@ -117,7 +117,7 @@ variadic (not as a relation)
             }
             
             $queryTemplate = <<<CYPHER
-USING PERIODIC COMMIT 200
+USING PERIODIC COMMIT 1000
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.g3.$atom.csv" AS csvLine
 CREATE (token:$atom { 
 eid: toInt(csvLine.id),
@@ -158,7 +158,7 @@ CYPHER;
             
             $b = microtime(true);
             $queryTemplate = <<<CYPHER
-USING PERIODIC COMMIT 200
+USING PERIODIC COMMIT 1000
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv" AS csvLine
 MATCH (token:$origin { eid: toInt(csvLine.start)}),(token2:$destination { eid: toInt(csvLine.end)})
 CREATE (token)-[:$edge]->(token2)
@@ -190,6 +190,7 @@ CYPHER;
     }
 
     private function cleanCsv() {
+        return true;
         foreach($this->unlink as $file) {
             unlink($file);
         }
