@@ -27,19 +27,18 @@ use Analyzer;
 
 class FopenMode extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->code('fopen')
+        $this->atomFunctionIs('\\fopen')
              ->outIs('ARGUMENTS')
-             ->rankIs('ARGUMENT',1)
-             ->regexNot('code', 'b')
+             ->outWithRank('ARGUMENT', 1)
+             ->regexIsNot('code', 'b')
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->code('fopen')
+        $this->atomFunctionIs('\\fopen')
+             ->analyzerIsNot('self')
              ->outIs('ARGUMENTS')
-             ->rankIs('ARGUMENT', 1)
-             ->regex('code', 't')
+             ->outWithRank('ARGUMENT', 1)
+             ->regexIs('code', 't')
              ->back('first');
         $this->prepareQuery();
     }
