@@ -208,7 +208,7 @@ class Load extends Tasks {
     const PROP_DELIMITER   = ['String', 'Heredoc'];
     const PROP_NODELIMITER = ['String', 'Variable'];
     const PROP_HEREDOC     = ['Heredoc'];
-    const PROP_COUNT       = ['Sequence', 'Arguments', 'Heredoc', 'Shell', 'String'];
+    const PROP_COUNT       = ['Sequence', 'Arguments', 'Heredoc', 'Shell', 'String', 'Try'];
     const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static'];
     const PROP_ABSOLUTE    = ['Nsname'];
     const PROP_ALIAS       = ['Nsname', 'Identifier', 'As'];
@@ -808,9 +808,10 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($tryId, $blockId, 'BLOCK');
         
-        
+        $rank = 0;
         $fullcodeCatch = array();
         while ($this->tokens[$this->id + 1][0] == T_CATCH) {
+            $catch = $this->id + 1;
             ++$this->id; // Skip catch
             ++$this->id; // Skip (
         
@@ -832,11 +833,12 @@ class Load extends Tasks {
             $this->popExpression();
             $this->addLink($catchId, $blockCatchId, 'BLOCK');
 
-            $this->setAtom($catchId, ['code'     => $this->tokens[$current][1],
-                                      'fullcode' => $this->tokens[$current][1].' ('.$this->atoms[$classId]['fullcode'].' '.
-                                                     $this->atoms[$variableId]['fullcode'].']) '.static::FULLCODE_BLOCK.' ',
-                                      'line'     => $this->tokens[$current][2],
-                                      'token'    => $this->getToken($this->tokens[$current][0])]);
+            $this->setAtom($catchId, ['code'     => $this->tokens[$catch][1],
+                                      'fullcode' => $this->tokens[$catch][1].' ('.$this->atoms[$classId]['fullcode'].' '.
+                                                     $this->atoms[$variableId]['fullcode'].')'.static::FULLCODE_BLOCK,
+                                      'line'     => $this->tokens[$catch][2],
+                                      'token'    => $this->getToken($this->tokens[$current][0]),
+                                      'rank'     => $rank++]);
 
             $this->addLink($tryId, $catchId, 'CATCH');
             $fullcodeCatch[] = $this->atoms[$catchId]['fullcode'];
@@ -858,11 +860,12 @@ class Load extends Tasks {
         }
 
         $this->setAtom($tryId, ['code'     => $this->tokens[$current][1],
-                                'fullcode' => $this->tokens[$current][1].static::FULLCODE_BLOCK.' '.
-                                               join(' ', $fullcodeCatch).''
-                                               .( isset($finallyId) ? $this->atoms[$finallyId]['fullcode'] : ''),
+                                'fullcode' => $this->tokens[$current][1] . static::FULLCODE_BLOCK .
+                                              join('', $fullcodeCatch) . 
+                                              ( isset($finallyId) ? $this->atoms[$finallyId]['fullcode'] : ''),
                                 'line'     => $this->tokens[$current][2],
-                                'token'    => $this->getToken($this->tokens[$current][0])]);
+                                'token'    => $this->getToken($this->tokens[$current][0]),
+                                'count'    => $rank]);
 
         $this->pushExpression($tryId);
         $this->processSemicolon();
