@@ -33,7 +33,7 @@ class DefinedExceptions extends Analyzer\Analyzer {
         // first level
         $this->atomIs('Class')
              ->outIs('EXTENDS')
-             ->fullnspath($exceptions)
+             ->fullnspathIs($exceptions)
              ->back('first');
         $this->prepareQuery();
 

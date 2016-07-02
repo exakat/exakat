@@ -12,13 +12,12 @@ class SimplePreg extends Analyzer\Analyzer {
 
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              // Normal delimiters
-             ->regexNot('noDelimiter', '(?<!\\\\\\\\)[.?*+\\\\\$\\\\^|{}()\\\\[\\\\]|]')
+             ->regexIsNot('noDelimiter', '(?<!\\\\\\\\)[.?*+\\\\\$\\\\^|{}()\\\\[\\\\]|]')
              // Simple assertions
-             ->regexNot('noDelimiter', '\\\\\\\\[bBAZz]')
+             ->regexIsNot('noDelimiter', '\\\\\\\\[bBAZz]')
              ->back('first');
         $this->prepareQuery();
     }

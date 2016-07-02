@@ -32,14 +32,14 @@ class UnicodeEscapePartial extends Analyzer\Analyzer {
         // Normal string
         $this->atomIs('String')
              ->outIsIE('CONCAT')
-             ->regex('noDelimiter', '\\\\\\\\u\\\\{')
+             ->regexIs('noDelimiter', '\\\\\\\\u\\\\{')
              ->back('first');
         $this->prepareQuery();
 
         // Here/NowDoc string
         $this->atomIs('Heredoc')
              ->outIs('CONCAT')
-             ->regex('noDelimiter', '\\\\\\\\u\\\\{')
+             ->regexIs('noDelimiter', '\\\\\\\\u\\\\{')
              ->back('first');
         $this->prepareQuery();
     }

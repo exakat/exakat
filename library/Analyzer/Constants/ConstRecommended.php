@@ -39,7 +39,7 @@ class ConstRecommended extends Analyzer\Analyzer {
              ->atomIs('String')
              ->back('args')
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs(array('String', 'Float', 'Integer', 'Boolean', 'Null', 'Staticconstant'))
+             ->atomIs(array('String', 'Real', 'Integer', 'Boolean', 'Null', 'Staticconstant'))
              ->hasNoOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
@@ -65,7 +65,7 @@ class ConstRecommended extends Analyzer\Analyzer {
              ->atomIs('String')
              ->back('args')
              ->outWithRank('ARGUMENT', 1)
-             ->atomIsNot(array('Identifier', 'Nsname','String', 'Float', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Variable'))
+             ->atomIsNot(array('Identifier', 'Nsname','String', 'Real', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Variable'))
              ->noAtomInside(["Variable", "Functioncall"])
              ->back('first');
         $this->prepareQuery();

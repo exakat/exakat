@@ -30,7 +30,7 @@ class IndicesAreIntOrString extends Analyzer\Analyzer {
         // $x[1.2], $x[true], $x[null];
         $this->atomIs('Array')
              ->outIs('INDEX')
-             ->atomIs(array('Boolean', 'Null', 'Float'))
+             ->atomIs(array('Boolean', 'Null', 'Real'))
              ->back('first');
         $this->prepareQuery();
 
@@ -38,8 +38,8 @@ class IndicesAreIntOrString extends Analyzer\Analyzer {
         $this->atomIs('Array')
              ->outIs('INDEX')
              ->atomIs('String')
-             ->hasNoOut('CONTAIN')
-             ->regex('noDelimiter', '^[1-9][0-9]*\\$')
+             ->hasNoOut('CONCAT')
+             ->regexIs('noDelimiter', '^[1-9][0-9]*\\$')
              ->back('first');
         $this->prepareQuery();
     }

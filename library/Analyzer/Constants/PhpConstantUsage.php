@@ -34,7 +34,7 @@ class PhpConstantUsage extends Analyzer\Analyzer {
         $ini = $this->loadIni('php_constants.ini', 'constants');
 
         $this->analyzerIs('Constants/ConstantUsage')
-             ->code($ini, true);
+             ->codeIs($ini, true);
         $this->prepareQuery();
     }
 }
