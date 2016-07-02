@@ -59,9 +59,7 @@ GREMLIN;
         $this->gremlin->query($query);
         display('\\static to fullnspath');
 
-        // update fullnspath with fallback for functions 
-        //
-
+        // Create propertyname for Property Definitions
         $query = <<<GREMLIN
 g.V().hasLabel("Ppp").out("PPP").coalesce( out("LEFT"), __.filter{ true } )
 .sideEffect{ it.get().property('propertyname', it.get().value('code').toString().substring(1, it.get().value('code').size())); }
@@ -69,7 +67,19 @@ g.V().hasLabel("Ppp").out("PPP").coalesce( out("LEFT"), __.filter{ true } )
 GREMLIN;
         $this->gremlin->query($query);
         display('set propertyname');
-        
+
+        // update fullnspath with fallback for functions 
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall").has("fullnspath")
+
+.sideEffect{ f = it.get().value("fullnspath");}
+.where( g.V().hasLabel("Function").out("NAME").filter{ it.get().value("fullnspath") == f }.count().is(eq(0)) )
+
+.sideEffect{ it.get().property("fullnspath", "\\\\" + it.get().value("code").toString().toLowerCase() ); }
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('refine functioncall fullnspath');
     }
 }
 
