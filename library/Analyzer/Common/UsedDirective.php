@@ -34,13 +34,11 @@ class UsedDirective extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\ini_set', '\\ini_get', '\\ini_restore', '\\ini_alter', '\\iconv_set_encoding'))
+             ->fullnspathIs(array('\\ini_set', '\\ini_get', '\\ini_restore', '\\ini_alter', '\\iconv_set_encoding'))
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->hasNoOut('CONTAINS')
-             ->noDelimiter($this->directives)
+             ->noDelimiterIs($this->directives)
              ->back('first');
         $this->prepareQuery();
     }
