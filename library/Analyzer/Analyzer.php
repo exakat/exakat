@@ -968,24 +968,6 @@ GREMLIN
         return $this;
     }
 
-    public function rankIs($edgeName, $rank) {
-        if ($rank == 'first') {
-            $rank = 0;
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edgeName, $rank);
-        } elseif ($rank === 'last') {
-            $this->addMethod('sideEffect{ rank = it.out(***).count() - 1;}', $edgeName);
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
-        } elseif ($rank === '2last') {
-            $this->addMethod('sideEffect{ rank = it.out(***).count() - 2;}', $edgeName);
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
-        } else {
-            $rank = abs(intval($rank));
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == $rank}", $edgeName);
-        }
-        
-        return $this;
-    }
-
     public function nextSibling($link = 'ELEMENT') {
         $this->addMethod('sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().values("rank").next()}');
 
