@@ -707,6 +707,7 @@ class Load extends Tasks {
         
         while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             if (in_array($this->tokens[$this->id + 1][0], [T_CURLY_OPEN, T_DOLLAR_OPEN_CURLY_BRACES])) {
+                $openId = $this->id + 1;
                 ++$this->id; // Skip {
                 while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
                     $this->processNext();
@@ -714,7 +715,8 @@ class Load extends Tasks {
                 ++$this->id; // Skip }
 
                 $partId = $this->popExpression();
-                $this->setAtom($partId, ['enclosing' => true]);
+                $this->setAtom($partId, ['enclosing' => true,
+                                         'fullcode'  => $this->tokens[$openId][1] . $this->atoms[$partId]['fullcode'] . '}' ]);
                 $this->pushExpression($partId);
             } elseif ($this->tokens[$this->id + 1][0] == T_VARIABLE) {
                 $this->processNext();
