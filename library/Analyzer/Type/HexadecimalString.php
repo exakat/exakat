@@ -30,13 +30,13 @@ class HexadecimalString extends Analyzer\Analyzer {
         $regex = '^\\\\s*0[xX][0-9a-fA-F]+';
         // Strings
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', $regex);
         $this->prepareQuery();
 
         // Concatenation String
         $this->atomIs('String')
-             ->outWithRank('CONTAINS', 0)
+             ->outWithRank('CONCAT', 0)
              ->atomIs('String')
              ->regexIs('noDelimiter', $regex)
              ->back('first');
