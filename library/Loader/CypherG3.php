@@ -190,7 +190,6 @@ CYPHER;
     }
 
     private function cleanCsv() {
-        return true;
         foreach($this->unlink as $file) {
             unlink($file);
         }
