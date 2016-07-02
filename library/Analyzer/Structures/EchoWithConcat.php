@@ -29,84 +29,32 @@ class EchoWithConcat extends Analyzer\Analyzer {
     public function analyze() {
 
         //echo 'should'.'also'.$be.' with comma';
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_ECHO', 'T_PRINT'))
-             ->fullnspath(array('\\echo', '\\print'))
+        $this->atomFunctionIs(array('\\echo', '\\print'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
 
         //echo "should also $be with comma";
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_ECHO', 'T_PRINT'))
-             ->fullnspath(array('\\echo', '\\print'))
+        $this->atomFunctionIs(array('\\echo', '\\print'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('String')
-             ->outIs('CONTAINS')
-             ->atomIs('Concatenation')
+             ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
 
         //echo <<<NOWDOC should also $be with comma NOWDOC;
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_ECHO', 'T_PRINT'))
-             ->fullnspath(array('\\echo', '\\print'))
+        $this->atomFunctionIs(array('\\echo', '\\print'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('Heredoc')
-             ->outIs('CONTAINS')
-             ->atomIs('Concatenation')
              ->is('heredoc', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        //echo ('should'.'also'.$be.' with comma');
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_ECHO', 'T_PRINT'))
-             ->fullnspath(array('\\echo', '\\print'))
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Parenthesis')
-             ->outIs('CODE')
-             ->atomIs('Concatenation')
-             ->back('first');
-        $this->prepareQuery();
-
-        //echo ("should also $be with comma");
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_ECHO', 'T_PRINT'))
-             ->fullnspath(array('\\echo', '\\print'))
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Parenthesis')
-             ->outIs('CODE')
-             ->atomIs('String')
-             ->outIs('CONTAINS')
-             ->atomIs('Concatenation')
-             ->back('first');
-        $this->prepareQuery();
-
-        //echo (<<<NOWDOC should also $be with comma NOWDOC);
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_ECHO', 'T_PRINT'))
-             ->fullnspath(array('\\echo', '\\print'))
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Parenthesis')
-             ->outIs('CODE')
-             ->atomIs('Heredoc')
-             ->outIs('CONTAINS')
-             ->atomIs('Concatenation')
-             ->is('heredoc', true)
+             ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
     }
