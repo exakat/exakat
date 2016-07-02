@@ -1,11 +1,12 @@
 <?php
 
-$expected     = array('$curly_dollar',
-                      '$dollar_curly',
+$expected     = array('${dollar_curly}', 
+                      '{$curly_dollar}',
                       '$array[3]',
                       '$varstring',
                       '$object->property');
 
-$expected_not = array();
+$expected_not = array("no variable",
+                      "\$two \$variables");
 
 ?>

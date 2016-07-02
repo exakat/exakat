@@ -11,4 +11,7 @@ $x9 = "$object->function(1)";
 $x10 = "${dollar_curly}";
 $x11 = "{$curly_dollar}";
 
+$s12 = "no variable";
+$s13 = "$two $variables";
+
 ?>

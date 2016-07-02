@@ -1,6 +1,6 @@
 <?php
 
-$a = 'http://www.php.net/';
+$a = 'http://www.phpOK.net/';
 $b = 'http://dams:pass@www.php.net/';
 $c = 'http://dams@www.php.net/';
 $d = 'https://dams@www.php.net:83/';
@@ -14,8 +14,8 @@ $k = 'http://www.php.net';
 $j = 'http://www.法国.cn/';
  
 
-$A = 'http:/www.php.net/'; // Not URL
-$B = 'http:/www.php.net/'; // Not URL
+$A = 'http:/www.phpOneSlash.net/'; // Not URL
+$B = 'https:/www.phpHttpsOneSlash.net/'; // Not URL
 $C = 'Maybe you should try http://www.google.com.';
 $C = 'http://www.google.ca is another good idea.';
 
