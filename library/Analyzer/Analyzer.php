@@ -862,13 +862,25 @@ GREMLIN
     }
 
     public function isUppercase($property = 'fullcode') {
-        $this->addMethod("filter{it.$property == it.$property.toUpperCase()}");
+        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
+
+        return $this;
+    }
+
+    public function isLowercase($property = 'fullcode') {
+        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase()}');
 
         return $this;
     }
 
     public function isNotLowercase($property = 'fullcode') {
-        $this->addMethod("filter{it.$property != it.$property.toLowerCase()}");
+        $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
+
+        return $this;
+    }
+
+    public function isNotUppercase($property = 'fullcode') {
+        $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
     }
