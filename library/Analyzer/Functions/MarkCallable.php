@@ -140,7 +140,6 @@ where( __.out('ARGUMENTS').out('ARGUMENT').count().is(eq(2)) )
 .where( __.out('ARGUMENTS').out('ARGUMENT').hasLabel('String').where( __.out('CONCAT').count().is(eq(0))).count().is(eq(2)) )
 
 GREMLIN;
-//filter{ it.get().vertices(OUT, "ARGUMENT").has("atom", "String").filter{ it.get().out("CONTAINS").any() == false}.count() >= 2 )
 
         // callable is in # position
         foreach($positions as $position) {
