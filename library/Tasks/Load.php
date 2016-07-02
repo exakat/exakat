@@ -771,7 +771,6 @@ class Load extends Tasks {
         }
 
         $this->setAtom($stringId, $x);
-
         $this->pushExpression($stringId);
         
         return $stringId;
@@ -1204,6 +1203,7 @@ class Load extends Tasks {
         };
 
         if ($this->tokens[$this->id + 1][0] == T_CLOSE_TAG) {
+            $this->processSemicolon();
             $closing = '?>';
         } else {
             $closing = '';
