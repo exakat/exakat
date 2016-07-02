@@ -29,27 +29,27 @@ class Pcre extends Analyzer\Analyzer {
     public function analyze() {
         // regex like $....$is
         $this->atomIs('String')
-             ->regex('code', '([\'\\"])\\$[^\\$].*?\\$[imsxeADSUXJu]*[\'\\"]');
+             ->regexIs('code', '([\'\\"])\\$[^\\$].*?\\$[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like #....#is
         $this->atomIs('String')
-             ->regex('code', '([\'\\"])#[^#].*?#[imsxeADSUXJu]*[\'\\"]');
+             ->regexIs('code', '([\'\\"])#[^#].*?#[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like ~....~is
         $this->atomIs('String')
-             ->regex('code', '([\'\\"])~[^~].*?~[imsxeADSUXJu]*[\'\\"]');
+             ->regexIs('code', '([\'\\"])~[^~].*?~[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like /..../
         $this->atomIs('String')
-             ->regex('code', '([\'\\"])\\\\/[^\\\\/*][^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
+             ->regexIs('code', '([\'\\"])\\\\/[^\\\\/*][^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like {....}
         $this->atomIs('String')
-             ->regex('code', '([\'\\"])\\\\{.+?\\\\}[imsxeADSUXJu]*[\'\\"]');
+             ->regexIs('code', '([\'\\"])\\\\{.+?\\\\}[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
     }
 }
