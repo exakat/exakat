@@ -27,31 +27,37 @@ use Analyzer;
 
 class OldStyleConstructor extends Analyzer\Analyzer {
     public function analyze() {
+        $hasNo__construct = 'where( __.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"}.count().is(eq(0)) )';
+
         $this->atomIs('Class')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
-             ->back('first')
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == "__construct"}.any() == false}')
-             ->atomInside('Function')
+             ->inIs('NAME')
+             ->raw($hasNo__construct)
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
              ->atomIs('File') // no namespace => Global
              ->back('first');
         $this->prepareQuery();
+return;
 
         $this->atomIs('Class')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
-             ->back('first')
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == "__construct"}.any() == false}')
-             ->atomInside('Function')
+             ->inIs('NAME')
+             ->raw($hasNo__construct)
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
              ->atomIs('Namespace')
              ->outIs('NAMESPACE')
-             ->code('Global')
+             ->codeIs('Global')
              ->back('first');
         $this->prepareQuery();
     }
