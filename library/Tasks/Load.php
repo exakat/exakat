@@ -1131,6 +1131,7 @@ class Load extends Tasks {
 
         // Process extends
         if ($this->tokens[$this->id + 1][0] == T_EXTENDS) {
+            $extends = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip extends
             
             $extendsId = $this->processOneNsname();
@@ -1143,7 +1144,8 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] == T_IMPLEMENTS) {
             $fullcodeImplements = array();
             do {
-                ++$this->id; // Skip extends
+                $implements = $this->tokens[$this->id + 1][1];
+                ++$this->id; // Skip implements
                 $implementsId = $this->processOneNsname();
                 $this->addLink($classId, $implementsId, 'IMPLEMENTS');
                 $fullcodeImplements[] = $this->atoms[$implementsId]['fullcode'];
@@ -1161,11 +1163,11 @@ class Load extends Tasks {
         $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($classId, ['code'       => $this->tokens[$current][1], 
                                   'fullcode'   => (!empty($fullcode) ? join(' ', $fullcode).' ' : '') . 
-                                                  $this->tokens[$current][1].
+                                                  $this->tokens[$current][1] .
                                                   ($this->atoms[$nameId]['atom'] === 'Void' ? '' : ' '.$this->atoms[$nameId]['fullcode']) .
                                                   (isset($argumentsId) ? ' ('.$this->atoms[$argumentsId]['fullcode'].')' : '').
-                                                  (isset($extendsId) ? ' extends ' . $this->atoms[$extendsId]['fullcode'] : '') .
-                                                  (isset($implementsId) ? ' implements ' . join(', ', $fullcodeImplements) : '') .
+                                                  (isset($extendsId) ? ' '.$extends.' ' . $this->atoms[$extendsId]['fullcode'] : '') .
+                                                  (isset($implementsId) ? ' '.$implements.' ' . join(', ', $fullcodeImplements) : '') .
                                                   static::FULLCODE_BLOCK,
                                   'line'       => $this->tokens[$current][2],
                                   'token'      => $this->getToken($this->tokens[$current][0]),
@@ -1944,7 +1946,7 @@ class Load extends Tasks {
     private function processForeach() {
         $id = $this->addAtom('Foreach');
         $current = $this->id;
-        ++$this->id; // Skip if
+        ++$this->id; // Skip foreach
 
         while (!in_array($this->tokens[$this->id + 1][0], [T_AS])) {
             $this->processNext();
@@ -1953,6 +1955,7 @@ class Load extends Tasks {
         $sourceId = $this->popExpression();
         $this->addLink($id, $sourceId, 'SOURCE');
         
+        $as = $this->tokens[$this->id + 1][1];
         ++$this->id; // Skip as
 
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS, T_DOUBLE_ARROW])) {
@@ -1975,12 +1978,12 @@ class Load extends Tasks {
 
         if ($isColon === true) {
             ++$this->id; // skip endforeach
-            $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .') : '.self::FULLCODE_SEQUENCE.' endforeach';
+            $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$sourceId]['fullcode'] . ' '.$as.' '. $this->atoms[$valueId]['fullcode'] .') : '.self::FULLCODE_SEQUENCE.' endforeach';
         } else {
-            $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .')'.self::FULLCODE_BLOCK;
+            $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$sourceId]['fullcode'] . ' '.$as.' '. $this->atoms[$valueId]['fullcode'] .')'.self::FULLCODE_BLOCK;
         }
 
-        $this->setAtom($id, ['code'        => $this->tokens[$current][1].' (' . $this->atoms[$sourceId]['fullcode'] . ' as '. $this->atoms[$valueId]['fullcode'] .') '.self::FULLCODE_BLOCK,
+        $this->setAtom($id, ['code'        => $this->tokens[$current][1],
                              'fullcode'    => $fullcode,
                              'line'        => $this->tokens[$current][2],
                              'token'       => $this->getToken($this->tokens[$current][0]),
@@ -2065,6 +2068,7 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($dowhileId, $blockId, 'BLOCK');
 
+        $while = $this->tokens[$this->id + 1][1];
         ++$this->id; // Skip while
         ++$this->id; // Skip (
 
@@ -2075,8 +2079,8 @@ class Load extends Tasks {
         $conditionId = $this->popExpression();
         $this->addLink($dowhileId, $conditionId, 'CONDITION');
 
-        $this->setAtom($dowhileId, ['code'     => 'do '.self::FULLCODE_BLOCK.' while (' . $this->atoms[$conditionId]['fullcode'] . ')',
-                                    'fullcode' => 'do '.self::FULLCODE_BLOCK.' while (' . $this->atoms[$conditionId]['fullcode'] . ')',
+        $this->setAtom($dowhileId, ['code'     => $this->tokens[$current][1],
+                                    'fullcode' => $this->tokens[$current][1].self::FULLCODE_BLOCK.$while.' while (' . $this->atoms[$conditionId]['fullcode'] . ')',
                                     'line'     => $this->tokens[$current][2],
                                     'token'    => $this->getToken($this->tokens[$current][0]) ]);
         $this->pushExpression($dowhileId);
@@ -2109,9 +2113,9 @@ class Load extends Tasks {
                 ++$this->id; // skip ;
             }
             
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') : '.self::FULLCODE_SEQUENCE.' endwhile';
+            $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ') : ' . self::FULLCODE_SEQUENCE . ' endwhile';
         } else {
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') '.self::FULLCODE_BLOCK;
+            $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ') ' . self::FULLCODE_BLOCK;
         }
 
         $this->setAtom($whileId, ['code'        => $this->tokens[$current][1],
