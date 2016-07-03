@@ -1469,6 +1469,12 @@ GREMLIN
         return $this;
     }
 
+    public function hasIfthen() {
+        $this->hasInstruction('Ifthen');
+        
+        return $this;
+    }
+
     public function hasTryCatch() {
         $this->hasInstruction('Try');
         
