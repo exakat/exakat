@@ -36,11 +36,11 @@ class RegisterGlobals extends Analyzer\Analyzer {
         // With a foreach
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->code($superGlobals, true)
+             ->codeIs($superGlobals, true)
              ->inIs('SOURCE')
              ->outIs('VALUE')
              ->outIs('KEY')
-             ->savePropertyAs('code', 'key')
+             ->savePropertyAs('code', 'k')
              ->inIs('KEY')
              ->inIs('VALUE')
              ->outIs('BLOCK')
@@ -48,21 +48,19 @@ class RegisterGlobals extends Analyzer\Analyzer {
              ->analyzerIs('Variables/IsModified')
              ->tokenIs('T_DOLLAR')
              ->outIs('NAME')
-             ->samePropertyAs('code','key')
+             ->samePropertyAs('code','k')
              ->back('first');
         $this->prepareQuery();
 
         // With extract and overwriting option
         $this->atomFunctionIs('\\extract')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->code($superGlobals, true)
+             ->outWithRank('ARGUMENT', 0)
+             ->codeIs($superGlobals, true)
              ->inIs('ARGUMENT')
-             ->outIs('ARGUMENT')
-             ->is('rank', 1)
+             ->outWithRank('ARGUMENT', 1)
              // Lazy way to check for EXTR_IF_EXISTS, \EXTR_IF_EXISTS and | EXTR_REFS
-             ->regex('fullcode', '(EXTR_OVERWRITE|EXTR_IF_EXISTS)')
+             ->regexIs('fullcode', '(EXTR_OVERWRITE|EXTR_IF_EXISTS)')
              ->back('first');
         $this->prepareQuery();
 
@@ -70,9 +68,8 @@ class RegisterGlobals extends Analyzer\Analyzer {
         $this->atomFunctionIs('\\extract')
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->code($superGlobals, true)
+             ->outWithRank('ARGUMENT', 0)
+             ->codeIs($superGlobals, true)
              ->back('first');
         $this->prepareQuery();
 
@@ -85,7 +82,7 @@ class RegisterGlobals extends Analyzer\Analyzer {
 
         // With import_request_variables
         $this->atomIs('Functioncall')
-             ->fullnspath('\\import_request_variables');
+             ->fullnspathIs('\\import_request_variables');
         $this->prepareQuery();
         
         // Other methods?
