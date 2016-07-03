@@ -28,14 +28,10 @@ use Analyzer;
 class ConstantFullyQualified extends Analyzer\Analyzer {
     public function analyze() {
         // define('\\full\\namespace\\path', 'value');
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\define')
+        $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->regex('noDelimiter', '^(\\\\\\\\)')
+             ->outWithRank('ARGUMENT', 0)
+             ->regexIs('noDelimiter', '^(\\\\\\\\)')
              ->back('first');
         $this->prepareQuery();
     }
