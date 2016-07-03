@@ -396,7 +396,7 @@ repeat(__.in('.$linksDown.'))
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('where( 
 repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(gte(1)))');
+.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(neq(0)))');
         
         return $this;
     }
@@ -658,7 +658,7 @@ GREMLIN;
 
     public function isLess($property, $value = 0) {
         if (is_int($value)) {
-            $this->addMethod("filter{ it.get().value('$property').toLong() < $value}");
+            $this->addMethod('filter{ it.get().value("'.$property.'").toLong() < '.$value.'}');
         } else {
             // this is a variable name
             $this->addMethod("filter{ it.get().value('$property').toLong() < $value;}", $value);
@@ -921,7 +921,11 @@ GREMLIN
 
     public function eachCounted($variable, $times, $comp = '==') {
         $this->addMethod(<<<GREMLIN
-groupBy(m){{$variable}}{it}.iterate();
+//groupCount('counts').by(label).cap('a').map{ it.get().findAll{ it.value > 2}; }
+groupCount('counts').by(
+
+{{$variable}}{it}.iterate();
+
 // This is plugged into each{}
 m.findAll{ it.value.size() $comp $times}.values().flatten().each{ n.add(it); }
 GREMLIN
@@ -1252,8 +1256,6 @@ GREMLIN
 
     public function noClassDefinition() {
         $this->addMethod('where(__.in("DEFINITION").count().is(eq(0)))');
-//        $this->addMethod('hasNot("fullnspath", null)
-//                         .filter{ g.idx("classes")[["path":it.fullnspath]].any() == false }');
     
         return $this;
     }
@@ -1573,7 +1575,31 @@ GREMLIN
             $forClosure = "";
         }
         
+        $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod(<<<GREMLIN
+as("context")
+.sideEffect{ line = it.get().value('line');
+             fullcode = it.get().value('fullcode');
+             file='None'; 
+             theFunction = 'None'; 
+             theClass='None'; 
+             theNamespace='\\\\'; 
+             }
+.sideEffect{ line = it.get().value('line'); }
+.until( hasLabel('File') ).repeat( 
+    __.in($linksDown)
+      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() in ['Namespace']) { theNamespace = it.get().vertices(OUT, 'NAME').next().value('fullcode')} }
+       )
+.sideEffect{  file = it.get().value('fullcode');}
+.sideEffect{ context = ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
+.select("context")
+
+GREMLIN
+
+/*
+
 sideEffect{ 
     current = it;
     context = ["Namespace":"Global", "Function":"Global", "Class":"Global"]; 
@@ -1594,7 +1620,7 @@ sideEffect{
         }
     } 
 
-GREMLIN
+*/
 );
         
         return $this;
