@@ -33,7 +33,7 @@ class VariableNonascii extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Variable')
              ->analyzerIs('Variables/Variablenames')
-             ->regex('code', '[^a-zA-Z0-9\\$_]');
+             ->regexIs('code', '[^a-zA-Z0-9\\$_]');
         $this->prepareQuery();
     }
 }
