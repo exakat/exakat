@@ -28,11 +28,11 @@ use Analyzer;
 class InconsistentConcatenation extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Concatenation')
-             ->filter('it.out("CONCAT").filter{it.atom in ["Variable", "Array", "Functioncall", "Property", "Methodcall", "Staticmethodcall", "Staticconsant", "Staticproperty"]}.any()')
+//             ->filter('it.out("CONCAT").filter{it.atom in ["Variable", "Array", "Functioncall", "Property", "Methodcall", "Staticmethodcall", "Staticconsant", "Staticproperty"]}.any()')
+             ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Functioncall", "Property", "Methodcall", "Staticmethodcall", "Staticconsant", "Staticproperty").count().is(neq(0)) )')
              ->outIs('CONCAT')
              ->atomIs('String')
-             ->outIs('CONTAINS')
-             ->atomIs('Concatenation')
+             ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
     }
