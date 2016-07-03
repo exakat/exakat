@@ -48,8 +48,9 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
         foreach($argsMins as $nb => $f) {
             $this->atomIs(array('Methodcall', 'Staticmethodcall'))
                  ->outIs('METHOD')
-                 ->code($f)
-                 ->isLess('args_count', $nb)
+                 ->codeIs($f)
+                 ->outIs('ARGUMENTS')
+                 ->isLess('count', $nb)
                  ->back('first');
             $this->prepareQuery();
         }
@@ -57,8 +58,9 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
         foreach($argsMaxs as $nb => $f) {
             $this->atomIs(array('Methodcall', 'Staticmethodcall'))
                  ->outIs('METHOD')
-                 ->code($f)
-                 ->isMore('args_count', $nb)
+                 ->codeIs($f)
+                 ->outIs('ARGUMENTS')
+                 ->isMore('count', $nb)
                  ->back('first');
             $this->prepareQuery();
         }
