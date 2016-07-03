@@ -27,17 +27,13 @@ use Analyzer;
 
 class CreatedOutsideItsNamespace extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\define')
+        $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->regex('noDelimiter', '\\\\\\\\')
+             ->regexIs('noDelimiter', '\\\\\\\\')
              ->fetchContext()
-             ->regexNot('noDelimiter', '^" + context["Namespace"].replaceAll( "\\\\\\\\", "\\\\\\\\\\\\\\\\" ) + "')
+             ->regexIsNot('noDelimiter', '^" + context["namespace"].replaceAll( "\\\\\\\\", "\\\\\\\\\\\\\\\\" ) + "')
              ->back('first');
         $this->prepareQuery();
     }
