@@ -217,6 +217,8 @@ class Load extends Tasks {
     const PROP_INTVAL      = ['Integer'];
     const PROP_STRVAL      = ['String'];
     const PROP_ENCLOSING   = ['Variable', 'Array', 'Property'];
+    const PROP_ARGS_MAX    = ['Arguments'];
+    const PROP_ARGS_MIN    = ['Arguments'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
                           'reference'   => self::PROP_REFERENCE,
@@ -233,6 +235,8 @@ class Load extends Tasks {
                           'intval'      => self::PROP_INTVAL,
                           'strval'      => self::PROP_STRVAL,
                           'enclosing'   => self::PROP_ENCLOSING,
+                          'args_max'    => self::PROP_ARGS_MAX,
+                          'args_min'    => self::PROP_ARGS_MIN
                           ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -1405,15 +1409,20 @@ class Load extends Tasks {
                                           'fullcode' => self::FULLCODE_VOID,
                                           'line'     => $this->tokens[$this->id][2],
                                           'token'    => $this->getToken($this->tokens[$this->id][0]),
-                                          'count'    => 0]);
+                                          'count'    => 0,
+                                          'args_max' => 0,
+                                          'args_min' => 0]);
 
             ++$this->id;
         } else {
             $typehintId = 0;
             $defaultId = 0;
             $indexId = 0;
+            $args_max = 0;
+            $args_min = 0;
             
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+                ++$args_max;
                 if ($typehint === true) {
                     $typehintId = $this->processTypehint();
     
@@ -1427,6 +1436,7 @@ class Load extends Tasks {
                         }
                         $defaultId = $this->popExpression();
                     } else {
+                        ++$args_min;
                         $defaultId = 0;
                     }
                 } else {
@@ -1487,7 +1497,9 @@ class Load extends Tasks {
                                           'fullcode' => join(', ', $fullcode),
                                           'line'     => $this->tokens[$this->id][2],
                                           'token'    => $this->getToken($this->tokens[$this->id][0]),
-                                          'count'    => $rank]);
+                                          'count'    => $rank,
+                                          'args_max' => $args_max,
+                                          'args_min' => $args_min]);
         }
         return $argumentsId;
     }

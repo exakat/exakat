@@ -103,7 +103,7 @@ variadic (not as a relation)
                     } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing'])) {
                     // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
-                    } elseif (in_array($title, ['count', 'intval'])) {
+                    } elseif (in_array($title, ['count', 'intval', 'args_max', 'args_min'])) {
                     // Integer
                         $extra[] = "$title: toInt(csvLine.$title)";
                     } else {
