@@ -27,19 +27,25 @@ use Analyzer;
 
 class OverwrittenConst extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Class')
+        $this->atomIs('Const')
+             ->outIs('CONST')
+             ->_as('results')
+             ->outIs('LEFT')
+             ->savePropertyAs('code', 'constante')
+             ->goToClass()
+             ->goToAllParents()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Const')
-             ->raw('sideEffect{ result = it;}')
              ->outIs('CONST')
              ->outIs('LEFT')
-             ->savePropertyAs('code', 'constante')
-             ->back('first')
+             ->samePropertyAs('code', 'constante')
+/*             
              ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                             .loop(2){true}{true}
                             .filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").has("code", constante).any() }.any()}')
-             ->raw('transform{ result;}');
+*/
+             ->back('results');
         $this->prepareQuery();
     }
 }
