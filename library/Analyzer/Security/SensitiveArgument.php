@@ -37,8 +37,7 @@ class SensitiveArgument extends Analyzer\Analyzer {
             // $_GET/_POST ... directly as argument of PHP functions
             $this->atomFunctionIs($functions)
                  ->outIs('ARGUMENTS')
-                 ->outIs('ARGUMENT')
-                 ->is('rank', $position);
+                 ->outWithRank('ARGUMENT', $position);
             $this->prepareQuery();
         }
     }

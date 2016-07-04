@@ -36,14 +36,14 @@ class DirectInjection extends Analyzer\Analyzer {
         
         $safeIndex = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
                            'SCRIPT_NAME', 'SERVER_ADMIN', '_');
-        $safeIndex = '(it.out("VARIABLE").has("code", "\$_SERVER").any() == false) ||
-                       it.out("INDEX").has("atom", "String").filter{!(it.noDelimiter in ["' . join('", "', $safeIndex) . '"])}.any()';
+        $safeIndex = 'or( __.out("VARIABLE").has("code", "\$_SERVER").count().is(eq(0)), 
+                          __.out("INDEX").has("atom", "String").has("noDelimiter", within(["' . join('", "', $safeIndex) . '"])).count().is(eq(0)))';
 
         // Relayed call to another function
         $this->atomIs('Variable')
-             ->code($vars, true)
+             ->codeIs($vars, true)
              ->inIsIE('VARIABLE')
-             ->filter($safeIndex)
+             ->raw($safeIndex)
              ->_as('result')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
@@ -72,7 +72,7 @@ class DirectInjection extends Analyzer\Analyzer {
 
         // $_GET/_POST ... directly as argument of PHP functions
         $this->atomIs('Variable')
-             ->code($vars, true)
+             ->codeIs($vars, true)
              ->analyzerIs('Security/SensitiveArgument')
              ->inIsIE('CODE')
              ->inIs('ARGUMENT')
@@ -81,9 +81,9 @@ class DirectInjection extends Analyzer\Analyzer {
 
         // $_GET/_POST ['index'] (one level).. directly as argument of PHP functions
         $this->atomIs('Variable')
-             ->code($vars, true)
+             ->codeIs($vars, true)
              ->inIs('VARIABLE')
-             ->filter($safeIndex)
+             ->raw($safeIndex)
              ->inIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')
              ->inIs('ARGUMENT')
@@ -92,10 +92,10 @@ class DirectInjection extends Analyzer\Analyzer {
 
         // $_GET/_POST ['index']['index2'] (2 levels and more)... directly as argument of PHP functions
         $this->atomIs('Variable')
-             ->code($vars, true)
-             ->raw('in("VARIABLE").loop(1){true}{it.object.atom == "Array"}')
+             ->codeIs($vars, true)
+             ->goToArray()
              ->analyzerIs('Security/SensitiveArgument')
-             ->filter($safeIndex)
+             ->raw($safeIndex)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->analyzerIsNot('self');
@@ -104,16 +104,16 @@ class DirectInjection extends Analyzer\Analyzer {
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs('Variable')
-             ->code($vars, true)
-             ->raw('in("VARIABLE").loop(1){true}{ it.object.atom == "Array"}')
-             ->filter($safeIndex)
+             ->codeIs($vars, true)
+             ->goToArray()
+             ->raw($safeIndex)
              ->inIs('CONCAT')
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
         $this->atomIs('Variable')
-             ->code($vars, true)
+             ->codeIs($vars, true)
              ->inIs('VARIABLE')
              ->inIs('CONCAT')
              ->analyzerIsNot('self');
@@ -121,8 +121,8 @@ class DirectInjection extends Analyzer\Analyzer {
 
         // foreach (looping on incoming variables)
         $this->atomIs('Variable')
-             ->code($vars, true)
-             ->raw('in("VARIABLE").loop(1){true}{ it.object.atom == "Array"}')
+             ->codeIs($vars, true)
+             ->goToArray()
              ->inIs('SOURCE');
         $this->prepareQuery();
 
