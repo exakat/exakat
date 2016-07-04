@@ -27,39 +27,50 @@ use Analyzer;
 
 class UnusedConstants extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                     'Structures/Truthy');
     }
     
     public function analyze() {
-        $thirdArgIsTrue  = 'it.out("ARGUMENT").filter{it.rank == 2}.any() && it.out("ARGUMENT").filter{it.rank == 2}.filter{it.code.toLowerCase() == "true"}.any()';
-        $thirdArgIsFalse = 'it.out("ARGUMENT").filter{it.rank == 2}.any() == false || it.out("ARGUMENT").filter{it.rank == 2}.filter{it.code.toLowerCase() == "false"}.any()';
+        $constants = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Analyzer\\\\Constants\\\\ConstantUsage").out("ANALYZED").values("code").unique()');
 
         // Const from a define (case insensitive)
         $this->atomFunctionIs('\define')
              ->outIs('ARGUMENTS')
-             ->filter($thirdArgIsFalse)
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->noChildWithRank('ARGUMENT', 2) // default, case sensitive
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->filter('name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").filter{it.code == name}.any() == false ');
+             ->noDelimiterIsNot($constants, true);
+        $this->prepareQuery();
+
+        $this->atomFunctionIs('\define')
+             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
+             ->analyzerIsNot('Structures/Truthy')
+             ->inIs('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             ->noDelimiterIsNot($constants, true);
         $this->prepareQuery();
 
         // Const from a define (case sensitive)
+        $constantsLC = array_map(function ($x) { return strtolower($x); }, $constants);
         $this->atomFunctionIs('\define')
              ->outIs('ARGUMENTS')
-             ->filter($thirdArgIsTrue)
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
+             ->analyzerIs('Structures/Truthy')
+             ->inIs('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->filter('name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").filter{it.code.toLowerCase() == name.toLowerCase()}.any() == false ');
+             ->noDelimiterIsNot($constantsLC);
         $this->prepareQuery();
 
         // Const from a const
         $this->atomIs('Const')
-             ->hasNoClass()
+             ->hasNoClassInterface()
              ->outIs('CONST')
              ->outIs('LEFT')
-             ->raw('filter{ name = it.code.toLowerCase(); g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").filter{it.code.toLowerCase() == name}.any() == false }');
+             ->codeIsNot($constants, true);
         $this->prepareQuery();
       }
 }
