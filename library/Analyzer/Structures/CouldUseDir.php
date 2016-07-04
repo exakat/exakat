@@ -28,10 +28,9 @@ class CouldUseDir extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\dirname')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Magicconstant')
-             ->code('__FILE__')
+             ->codeIs('__FILE__')
              ->back('first');
         $this->prepareQuery();
     }

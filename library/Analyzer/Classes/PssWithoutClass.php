@@ -30,32 +30,32 @@ class PssWithoutClass extends Analyzer\Analyzer {
         // unresolved new pss()
         $this->atomIs('New')
              ->outIs('NEW')
-             ->code(array('parent', 'self', 'static'))
-             ->notInClassInterfaceTrait()
+             ->codeIs(array('parent', 'self', 'static'))
+             ->hasNoClassInterfaceTrait()
              ->back('first');
         $this->prepareQuery();
 
         // unresolved pss::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->code(array('parent', 'self', 'static'))
-             ->notInClassInterfaceTrait()
+             ->codeIs(array('parent', 'self', 'static'))
+             ->hasNoClassInterfaceTrait()
              ->back('first');
         $this->prepareQuery();
 
         // unresolved pss::method
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->code(array('parent', 'self', 'static'))
-             ->notInClassInterfaceTrait()
+             ->codeIs(array('parent', 'self', 'static'))
+             ->hasNoClassInterfaceTrait()
              ->back('first');
         $this->prepareQuery();
 
         // unresolved pss::constant
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
-             ->code(array('parent', 'self', 'static'))
-             ->notInClassInterface()
+             ->codeIs(array('parent', 'self', 'static'))
+             ->hasNoClassInterfaceTrait()
              ->back('first');
         $this->prepareQuery();
 
