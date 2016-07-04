@@ -39,7 +39,6 @@ class UnusedMethods extends Analyzer\Analyzer {
              ->analyzerIsNot('Classes/UsedMethods')
              ->outIs('NAME')
              ->analyzerIs('Classes/MethodDefinition')
-             ->notInInterface()
              ->codeIsNot($magicMethods)
              ->back('first');
         $this->prepareQuery();

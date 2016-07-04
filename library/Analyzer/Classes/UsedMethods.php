@@ -61,7 +61,9 @@ class UsedMethods extends Analyzer\Analyzer {
 
         $callables = $this->query(<<<GREMLIN
 //g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.transform{
-g.V().hasLabel("Analysis").has("analyzer", "Analyzer\\\\Functions\\\\MarkCallable").out("ANALYZED").map{
+g.V().hasLabel("Analysis").has("analyzer", "Analyzer\\\\Functions\\\\MarkCallable").out("ANALYZED")
+.not( hasLabel("Function") )
+.map{
     // Strings
     if (it.get().label() == 'String') {
         if (it.get().value("noDelimiter") =~ /::/) {
@@ -130,7 +132,6 @@ GREMLIN
              ->goToClass()
              ->outIs('DEFINITION')
              ->hasIn('NEW')
-//             ->filter(' g.idx("atoms")[["atom":"New"]].out("NEW").hasNot("fullnspath", null).has("fullnspath", fullnspath).any() ')
              ->back('used');
         $this->prepareQuery();
 
