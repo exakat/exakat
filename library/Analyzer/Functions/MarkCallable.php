@@ -67,7 +67,7 @@ sideEffect{
         if (fullnspath == "" || fullnspath.toString()[0] != "\\\\") { 
             fullnspath = "\\\\" + fullnspath;
         };
-        it.get().property('fullnspath', fullnspath);
+        it.get().property('fullnspath', fullnspath.replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ));
     }
 }
 GREMLIN;

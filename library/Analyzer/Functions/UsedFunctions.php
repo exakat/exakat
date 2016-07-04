@@ -32,33 +32,23 @@ class UsedFunctions extends Analyzer\Analyzer {
     
     public function analyze() {
         // function used
-        $functions = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Functioncall"]].hasNot("fullnspath", null).fullnspath.unique()
-GREMLIN
-);
+        $functions = $this->query('g.V().hasLabel("Functioncall").values("fullnspath").unique()');
         if (!empty($functions)) {
             $this->atomIs('Function')
-                 ->hasNoClass()
-                 ->hasNoTrait()
-                 ->hasNoInterface()
-                 ->raw('filter{it.out("NAME").next().code != ""}')
+                 ->hasNoClassInterfaceTrait()
                  ->outIs('NAME')
-                 ->fullnspath($functions);
+                 ->atomIsNot("Void")
+                 ->fullnspathIs($functions);
             $this->prepareQuery();
         }
 
-        // function name used in a string
-        $functionsInStrings = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"String"]].hasNot("fullnspath", null).fullnspath.unique()
-GREMLIN
-);
+        // function name used in a string (via MarkCallable)
+        $functionsInStrings = $this->query('g.V().hasLabel("String").values("fullnspath").unique()');
         if (!empty($functionsInStrings)) {
             $this->atomIs('Function')
-                 ->hasNoClass()
-                 ->hasNoTrait()
-                 ->hasNoInterface()
+                 ->hasNoClassInterfaceTrait()
                  ->outIs('NAME')
-                 ->fullnspath($functionsInStrings);
+                 ->fullnspathIs($functionsInStrings);
             $this->prepareQuery();
         }
     }
