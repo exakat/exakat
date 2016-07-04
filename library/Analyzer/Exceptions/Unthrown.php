@@ -31,10 +31,12 @@ class Unthrown extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+//        $thrown = $this->query('filter{ g.idx("atoms")[["atom":"Throw"]].out("THROW").out("NEW").has("fullnspath", path).any() == false}');
+        $thrown = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").values("fullnspath").unique()');
+
         $this->atomIs('Class')
              ->analyzerIs('Exceptions/DefinedExceptions')
-             ->savePropertyAs('fullnspath', 'path')
-             ->raw('filter{ g.idx("atoms")[["atom":"Throw"]].out("THROW").out("NEW").has("fullnspath", path).any() == false}');
+             ->fullnspathIsNot($thrown);
         $this->prepareQuery();
     }
 }
