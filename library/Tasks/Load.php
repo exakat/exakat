@@ -2097,7 +2097,7 @@ class Load extends Tasks {
         $this->addLink($dowhileId, $conditionId, 'CONDITION');
 
         $this->setAtom($dowhileId, ['code'     => $this->tokens[$current][1],
-                                    'fullcode' => $this->tokens[$current][1].self::FULLCODE_BLOCK.$while.' while (' . $this->atoms[$conditionId]['fullcode'] . ')',
+                                    'fullcode' => $this->tokens[$current][1].self::FULLCODE_BLOCK.$while.' (' . $this->atoms[$conditionId]['fullcode'] . ')',
                                     'line'     => $this->tokens[$current][2],
                                     'token'    => $this->getToken($this->tokens[$current][0]) ]);
         $this->pushExpression($dowhileId);
@@ -2132,7 +2132,7 @@ class Load extends Tasks {
             
             $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ') : ' . self::FULLCODE_SEQUENCE . ' endwhile';
         } else {
-            $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ') ' . self::FULLCODE_BLOCK;
+            $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ')' . self::FULLCODE_BLOCK;
         }
 
         $this->setAtom($whileId, ['code'        => $this->tokens[$current][1],
