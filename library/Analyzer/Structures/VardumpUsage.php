@@ -36,7 +36,7 @@ class VardumpUsage extends Analyzer\Analyzer {
         // print_r (but not print_r($a, 1))
         $this->atomFunctionIs(array('\\print_r', '\\var_export'))
              ->outIs('ARGUMENTS')
-             ->rankIs('ARGUMENT', 1)
+             ->outWithRank('ARGUMENT', 1)
              ->analyzerIsNot('Structures/Truthy')
              ->back('first');
         $this->prepareQuery();
@@ -73,7 +73,7 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->is('rank', 0)
              ->atomIs('String')
              ->tokenIsNot('T_QUOTE')
-             ->noDelimiter($debug_functions)
+             ->noDelimiterIs($debug_functions)
              ->back('first');
         $this->prepareQuery();
     }

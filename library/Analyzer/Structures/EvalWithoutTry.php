@@ -29,7 +29,7 @@ class EvalWithoutTry extends Analyzer\Analyzer {
     public function analyze() {
         // eval() without try / catch around
         $this->atomFunctionIs('\\eval')
-             ->hasNotTryCatch();
+             ->hasNoTryCatch();
         $this->prepareQuery();
     }
 }
