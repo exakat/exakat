@@ -856,6 +856,13 @@ GREMLIN
 
         return $this;
     }
+    
+    public function isNotMixedcase($property = 'fullcode') {
+        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase() || it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
+
+        return $this;
+    }
+
 
     public function cleanAnalyzerName($gremlin) {
         $dependencies = $this->dependsOn();
@@ -873,7 +880,7 @@ GREMLIN
 
     public function codeLength($length = ' == 1 ') {
         // @todo add some tests ? Like Operator / value ?
-        $this->addMethod("filter{it.code.length() $length}");
+        $this->addMethod('filter{it.get().value("code").length() '.$length.'}');
 
         return $this;
     }
@@ -1187,6 +1194,13 @@ GREMLIN
         return $this;
     }
 
+    public function goToArray() {
+//                     ->raw('in("VARIABLE").loop(1){true}{it.object.atom == "Array"}')
+        $this->goToInstruction('Array');
+        
+        return $this;
+    }
+    
     public function goToCurrentScope() {
         $this->addMethod('in.loop(1){!(it.object.atom in ["Function", "Phpcode"])}{(it.object.atom in ["Function", "Phpcode"])}');
         
@@ -1457,7 +1471,7 @@ GREMLIN
         return $this;
     }
 
-    public function hasNotTryCatch() {
+    public function hasNoTryCatch() {
         $this->hasNoInstruction('Try');
         
         return $this;
