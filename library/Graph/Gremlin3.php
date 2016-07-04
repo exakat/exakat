@@ -27,7 +27,7 @@ class Gremlin3 extends Graph {
     private $neo4j_host = '';
     private $neo4j_auth = '';
     
-    public function __construct(\Config $config) {
+    public function __construct($config) {
         parent::__construct($config);
 
         if (!file_exists($config->neo4j_folder)) {
