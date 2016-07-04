@@ -27,19 +27,28 @@ use Analyzer;
 
 class EmptyNamespace extends Analyzer\Analyzer {
     public function analyze() {
+        // Namespace with empty block (case of namespace A ;)
         $this->atomIs('Namespace')
-             ->raw('filter{it.out("NAMESPACE").has("code", "Global").any() == false}')
              ->outIs('BLOCK')
-             ->atomIs('Void')
-             ->raw('filter{it.out("ELEMENT").hasNot("atom", "Use").any() == false}')
+             ->is('count', 0)
              ->back('first');
         $this->prepareQuery();
 
+        // Namespace with empty block (case of namespace A {})
         $this->atomIs('Namespace')
-             ->raw('filter{it.out("NAMESPACE").has("code", "Global").any() == false}')
+             ->analyzerIsNot('self')
              ->outIs('BLOCK')
-             ->atomIs('Sequence')
-             ->raw('filter{it.out("ELEMENT").hasNot("atom", "Use").any() == false}')
+             ->is('count', 1)
+             ->outIs('ELEMENT')
+             ->atomIs('Void')
+             ->back('first');
+        $this->prepareQuery();
+
+        // Namespace with only use is empty
+        $this->atomIs('Namespace')
+             ->analyzerIsNot('self')
+             ->outIs('BLOCK')
+             ->raw('where(__.out("ELEMENT").not( hasLabel("Use") ).count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

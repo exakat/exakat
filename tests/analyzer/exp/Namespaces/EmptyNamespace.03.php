@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('namespace R', 
-                      'namespace B\\D');
+$expected     = array( 'namespace   { /**/ } ', 
+                       'namespace   { /**/ } ', 
+                       'namespace B\D { /**/ } ', 
+                       'namespace R { /**/ } ');
 
 $expected_not = array('namespace Global', );
 
