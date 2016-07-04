@@ -36,7 +36,8 @@ class ConstantUsage extends Analyzer\Analyzer {
         $this->atomIs('Identifier')
              ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY',
                              'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE', 'FUNCTION', 'CONST', 'GROUPUSE'))
-             ->hasNoParent('String', array('INDEX', 'CONCAT'));
+             ->hasNoParent('String', array('INDEX', 'CONCAT'))
+             ->hasNoParent('Const', array('LEFT', 'CONST'));
         $this->prepareQuery();
 
         // special case for Boolean and Null
