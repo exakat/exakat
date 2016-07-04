@@ -1670,7 +1670,7 @@ class Load extends Tasks {
             $this->processNsname();
             $id = $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON &&
-                  !in_array($this->tokens[$this->id - 1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR))) {
+                  !in_array($this->tokens[$this->id - 1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR, T_QUESTION))) {
             $labelId = $this->addAtom('Label');
             $this->addLink($labelId, $id, 'LABEL');
             $this->setAtom($labelId, ['code'     => ':', 
@@ -2249,9 +2249,11 @@ class Load extends Tasks {
 
         $isColon = ($this->tokens[$this->id + 1][0] === T_COLON);
         
+        $rank = 0;
         if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
             $voidId = $this->addAtomVoid();
             $this->addLink($casesId, $voidId, 'ELEMENT');
+            $this->setAtom($voidId, ['rank' => $rank]);
             
             ++$this->id;
         } else {
@@ -2267,9 +2269,12 @@ class Load extends Tasks {
             
                 $caseId = $this->popExpression();
                 $this->addLink($casesId, $caseId, 'ELEMENT');
+                $this->setAtom($caseId, ['rank' => $rank++]);
             };
         }
         ++$this->id;
+        $this->setAtom($casesId, ['count'     => $rank]);
+
         
         if ($isColon) {
             $fullcode = $this->tokens[$current][1].' ('.$this->atoms[$nameId]['fullcode'].') : /* cases */ endswitch';
