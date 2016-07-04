@@ -28,4 +28,7 @@ class x {
     const i = 10;
 }
 const i = 12;
+
+const J = 10;
+const j = 10;
 ?>
