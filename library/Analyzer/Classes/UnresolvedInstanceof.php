@@ -42,10 +42,11 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
         //general case
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'static', 'parent'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
+             ->noTraitDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
              ->analyzerIsNot('Composer/IsComposerNsname')
@@ -53,13 +54,15 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // self and static will always work 
+        
         // special case for parents
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs('T_STRING')
-             ->code('parent')
+             ->codeIs('parent')
              ->goToClass()
-             ->filter('it.out("EXTENDS").any() == false')
+             ->raw('where( __.out("EXTENDS").count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

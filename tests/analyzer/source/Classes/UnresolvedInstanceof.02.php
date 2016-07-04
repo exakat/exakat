@@ -10,5 +10,6 @@ $b instanceof A;
 $b instanceof C;
 $b instanceof D;
 $b instanceof TE;
+$b instanceof noCIT;
 
 ?>
