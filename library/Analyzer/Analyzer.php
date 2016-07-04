@@ -1253,8 +1253,7 @@ GREMLIN
     }
 
     public function noInterfaceDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").count().is(eq(0)))');
-//        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('interfaces')[['path':it.fullnspath]].any() == false }");
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface").count().is(eq(0)))');
     
         return $this;
     }
@@ -1280,8 +1279,7 @@ GREMLIN
     }
 
     public function noTraitDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").count().is(eq(0)))');
-//        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('traits')[['path':it.fullnspath]].any() == false }");
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait").count().is(eq(0)))');
     
         return $this;
     }
