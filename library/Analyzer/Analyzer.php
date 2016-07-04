@@ -546,16 +546,6 @@ repeat(__.in('.$linksDown.'))
         return $this;
     }
 
-    public function atomAboveIs($atom) {
-        if (is_array($atom)) {
-            $this->addMethod('in().loop(1){!(it.object.atom in ***)}{it.object.atom in ***}', $atom, $atom);
-        } else {
-            $this->addMethod('in().loop(1){it.object.atom != ***}{it.object.atom == ***}', $atom, $atom);
-        }
-        
-        return $this;
-    }
-    
     public function trim($property, $chars = '\'\"') {
         $this->addMethod('transform{it.'.$property.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1")}');
         
@@ -1223,6 +1213,12 @@ GREMLIN
         
         return $this;
     }
+    
+    public function goToLoop() {
+        $this->goToInstruction(array('For', 'Foreach', 'While', 'Dowhile'));
+        
+        return $this;
+    }
 
     public function noNamespaceDefinition() {
         $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('namespaces')[['path':it.fullnspath]].any() == false }");
@@ -1447,6 +1443,12 @@ GREMLIN
 
     public function hasInterface() {
         $this->hasInstruction('Interface');
+        
+        return $this;
+    }
+
+    public function hasLoop() {
+        $this->hasInstruction(array('For', 'Foreach', 'Dowhile', 'While'));
         
         return $this;
     }
