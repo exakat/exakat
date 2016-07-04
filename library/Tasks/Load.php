@@ -2488,8 +2488,8 @@ class Load extends Tasks {
         $this->addLink($ternaryId, $elseId, 'ELSE');
 
         $x = ['code'     => $this->tokens[$current][1], 
-              'fullcode' => $this->atoms[$conditionId]['fullcode'] . ' ? ' .
-                            $this->atoms[$thenId]['fullcode'] . ' : ' . 
+              'fullcode' => $this->atoms[$conditionId]['fullcode'] . ' ?' .
+                            ($this->atoms[$thenId]['atom'] == 'Void' ? '' : ' '.$this->atoms[$thenId]['fullcode'].' ' ). ': ' . 
                             $this->atoms[$elseId]['fullcode'],
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
