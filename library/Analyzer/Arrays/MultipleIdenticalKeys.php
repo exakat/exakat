@@ -28,14 +28,17 @@ use Analyzer;
 class MultipleIdenticalKeys extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->fullnspathIs('\\array')
-             ->raw(<<<GREMLIN
-out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("KEY").as("a").values("fullcode").as("b").select("a")
-.in("KEY").in("ARGUMENT").out("ARGUMENT").hasLabel("Keyvalue").out("KEY")
-.where(neq("a")).values("fullcode").where(eq("b"))
-GREMLIN
-)
+        $this->atomFunctionIs('\\array')
+             ->raw('where(
+    __.sideEffect{ counts = [:]; }
+      .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("KEY")
+      .hasLabel("String", "Integer", "Real", "Boolean", "Staticconstant").where(__.out("CONCAT").count().is(eq(0)))
+      .sideEffect{ 
+            if ("noDelimiter" in it.get().keys() ) { k = it.get().value("noDelimiter"); } else { k = it.get().value("fullcode"); }
+            if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }
+        }
+        .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
+)')
              ->back('first')
              ->analyzerIsNot('self');
         $this->prepareQuery();
