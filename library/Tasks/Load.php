@@ -2578,6 +2578,7 @@ class Load extends Tasks {
             }
             $this->addLink($namespaceId, $blockId, 'BLOCK');
             $this->addToSequence($namespaceId);
+            $block = ';';
         } else {
             // Process block 
             $blockId = $this->processFollowingBlock(false);
@@ -2586,11 +2587,12 @@ class Load extends Tasks {
 
             $this->pushExpression($namespaceId);
             $this->processSemicolon();
+            $block = self::FULLCODE_BLOCK;
         }
         $this->setNamespace(0);
         
         $x = ['code'     => $this->tokens[$current][1], 
-              'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .self::FULLCODE_BLOCK,
+              'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .$block,
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
         $this->setAtom($namespaceId, $x);
