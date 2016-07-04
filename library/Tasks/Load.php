@@ -2995,7 +2995,7 @@ class Load extends Tasks {
     }
 
     private function processYieldfrom() {
-        return $this->processSingleOperator('Yieldfrom', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN');
+        return $this->processSingleOperator('Yieldfrom', $this->getPrecedence($this->tokens[$this->id][0]), 'YIELD', ' ');
     }
 
     private function processNot() {
