@@ -1,11 +1,11 @@
 <?php
 
 namespace a\b {
-    class ab {        function __construct() { print __METHOD__."\n";} }
+    class abx {        function __construct() { print __METHOD__."\n";} }
 }
 
 namespace a2\b2 {
-    class ab {        function __construct() { print __METHOD__."\n";} }
+    class abx {        function __construct() { print __METHOD__."\n";} }
 }
 
 namespace a {
@@ -50,13 +50,13 @@ namespace d {
 
     NEW E();
     NEW E2();
-    NEW E\AB(); // MUST BE FOUND (  ALIAS, NO IMPORTED NSNAME, NO LOCAL DEFINITION)
-    NEW A\B\AB(); // MUST BE FOUND (A\AB (NO ALIAS,   IMPORTED NSNAME, NO LOCAL DEFINITION)
-    NEW A2\B2\AB(); // MUST BE FOUND (A\AB (NO ALIAS,   IMPORTED NSNAME, NO LOCAL DEFINITION)
-    NEW E2\AB(); // MUST BE FOUND (  ALIAS, NO IMPORTED NSNAME, NO LOCAL DEFINITION)
+    NEW E\ABX(); // MUST BE FOUND (  ALIAS, NO IMPORTED NSNAME, NO LOCAL DEFINITION)
+    NEW A\B\ABX(); // MUST BE FOUND (A\AB (NO ALIAS,   IMPORTED NSNAME, NO LOCAL DEFINITION)
+    NEW A2\B2\ABX(); // MUST BE FOUND (A\AB (NO ALIAS,   IMPORTED NSNAME, NO LOCAL DEFINITION)
+    NEW E2\ABX(); // MUST BE FOUND (  ALIAS, NO IMPORTED NSNAME, NO LOCAL DEFINITION)
 
-    NEW F\AB(); // MUST NOT BE FOUND (D\F\AB (NO ALIAS, NO IMPORTED NSNAME, NO LOCAL DEFINITION)
-    NEW BA(); // WON'T BE FOUND (LIES IN B)
+    NEW F\ABX(); // MUST NOT BE FOUND (D\F\AB (NO ALIAS, NO IMPORTED NSNAME, NO LOCAL DEFINITION)
+    NEW BAX();    // WON'T BE FOUND (LIES IN B)
 }
 
 

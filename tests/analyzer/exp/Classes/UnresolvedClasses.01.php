@@ -1,14 +1,14 @@
 <?php
 
-$expected     = array('ba( )',  // namespace a
+$expected     = array('bax( )',  // namespace a
 
-                      'ab( )',   // namespace b
+                      'abx( )',   // namespace b
 
-                      'ab( )',   // namespace c
-                      'ba( )', 
+                      'abx( )',   // namespace c
+                      'bax( )', 
 
-                      'f\\ab( )', // namespace d12
-                      'ba( )',
+                      'f\\abx( )', // namespace d12
+                      'bax( )',
 /*
                       'a\\ab( )', // namespace d1
                       'f\\ab( )',
