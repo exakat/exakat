@@ -38,24 +38,20 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Variable')
+             ->_as('results')
              ->codeIsNot($superglobals)
              // this variable is modified
              ->analyzerIs('Variables/IsModified')
              // this variable is not read
              ->analyzerIsNot('Variables/IsRead')
-
-            // Another instance of this variable (based on name), in the same function, is not read
-             ->filter(<<<GREMLIN
-    name = it.code;
-    itself = it;
-    it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.out("BLOCK").
-             out().loop(1){true}{it.object.atom == "Variable"}
-             .has("code", name)
-             .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsRead").any()}
-             .any() == false
-GREMLIN
-)
-;
+             ->raw('sideEffect{ name = it.get().value("code"); }')
+             
+             ->goToFunction()
+             ->raw('where( __.out("BLOCK").repeat( __.out()).emit(hasLabel("Variable")).times(15)
+                             .filter{ it.get().value("code") == name}
+                             .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\IsRead").count().is(neq(0)) )
+                             .count().is(eq(0)) )')
+             ->back('results');
 
         $this->prepareQuery();
     }

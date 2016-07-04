@@ -34,7 +34,7 @@ class ConditionalStructures extends Analyzer\Analyzer {
         // classes, interfaces, Traits
         $this->atomIs(array('Class', 'Interface', 'Trait'))
              ->analyzerIsNot('Classes/MethodDefinition')
-             ->atomAboveIs('Ifthen')
+             ->hasIfthen()
              ->back('first');
         $this->prepareQuery();
 
@@ -43,18 +43,16 @@ class ConditionalStructures extends Analyzer\Analyzer {
              ->outIs('NAME')
              ->analyzerIsNot('Classes/MethodDefinition')
              ->back('first')
-             ->atomAboveIs('Ifthen')
+             ->hasIfthen()
              ->back('first');
         $this->prepareQuery();
 
        // constants
-        $this->atomIs('Functioncall')
-             ->fullnspath('\\define')
-             ->atomAboveIs('Ifthen')
+        $this->atomFunctionIs('\\define')
+             ->hasIfthen()
              ->back('first')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0);
+             ->outWithRank('ARGUMENT', 0);
         $this->prepareQuery();
     }
 }
