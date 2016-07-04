@@ -36,22 +36,12 @@ class FileUsage extends Analyzer\Analyzer {
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(array('Variable', 'Array', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
-             ->fullnspath($fileClasses);
+             ->fullnspathIs($fileClasses);
         $this->prepareQuery();
 
-        $this->atomIs('Staticmethodcall')
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
-             ->fullnspath($fileClasses);
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->fullnspath($fileClasses);
-        $this->prepareQuery();
-
-        $this->atomIs('Staticconstant')
-             ->outIs('CLASS')
-             ->fullnspath($fileClasses);
+             ->fullnspathIs($fileClasses);
         $this->prepareQuery();
     }
 }

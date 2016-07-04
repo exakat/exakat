@@ -7,7 +7,7 @@ $expected     = Array( '$C->While(1, 2)',
                        'B::Then(1)', 
                        'C::While(1, 2)', 
                        'A::Do( )', 
-                       'D::Include');
+                       'D::Include(1, 2, 3, 4)');
 
 $expected_not = Array('Normal()',
                       'Normalstatic(1)');

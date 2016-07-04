@@ -1,8 +1,8 @@
 <?php
 
 $expected     = array('Hash( )',
-                      'Crypto');
+                      'namespace Crypto { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('Crypto');
 
 ?>
