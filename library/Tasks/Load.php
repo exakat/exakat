@@ -2990,7 +2990,7 @@ class Load extends Tasks {
         
             return $returnId;
         } else {
-            return $this->processSingleOperator('Yield', $this->getPrecedence($this->tokens[$this->id][0]), 'YIELD');
+            return $this->processSingleOperator('Yield', $this->getPrecedence($this->tokens[$this->id][0]), 'YIELD', ' ');
         }
     }
 
