@@ -29,37 +29,37 @@ class UseWeb extends Analyzer\Analyzer {
     public function analyze() {
         // GPC + R
         $this->atomIs('Variable')
-             ->code(array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE'));
+             ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE'), true);
         $this->prepareQuery();
 
         // $_SERVER + special index
         $this->atomIs('Variable')
-             ->code('$_SERVER')
+             ->codeIs('$_SERVER', true)
              ->inIs('VARIABLE')
              ->outIs('INDEX')
-             ->noDelimiter(array('SERVER_PROTOCOL',
-                                 'SERVER_NAME',
-                                 'SERVER_PORT',
-       
-                                 'HTTP_HOST',
-                                 'HTTP_ORIGIN',
-                                 'HTTP_USER_AGENT',
-                                 'HTTP_COOKIE',
-                                 'HTTP_ACCEPT',
-                                 'HTTP_ACCEPT_LANGUAGE',
-                                 'HTTP_ACCEPT_ENCODING',
-                                 'HTTP_CONNECTION',
-                                 'HTTP_REFERER',
-                                 'HTTP_IF_MODIFIED_SINCE',
-                                 'HTTP_IF_NONE_MATCH',
-       
-                                 'CONTENT_TYPE',
-       
-                                 'REQUEST_URI',
-                                 'REQUEST_METHOD',
-                                 'QUERY_STRING',
-                                 'REMOTE_ADDR',
-                                 'REMOTE_PORT',
+             ->noDelimiterIs(array('SERVER_PROTOCOL',
+                                   'SERVER_NAME',
+                                   'SERVER_PORT',
+         
+                                   'HTTP_HOST',
+                                   'HTTP_ORIGIN',
+                                   'HTTP_USER_AGENT',
+                                   'HTTP_COOKIE',
+                                   'HTTP_ACCEPT',
+                                   'HTTP_ACCEPT_LANGUAGE',
+                                   'HTTP_ACCEPT_ENCODING',
+                                   'HTTP_CONNECTION',
+                                   'HTTP_REFERER',
+                                   'HTTP_IF_MODIFIED_SINCE',
+                                   'HTTP_IF_NONE_MATCH',
+         
+                                   'CONTENT_TYPE',
+         
+                                   'REQUEST_URI',
+                                   'REQUEST_METHOD',
+                                   'QUERY_STRING',
+                                   'REMOTE_ADDR',
+                                   'REMOTE_PORT',
                                  ))
             ->back('first');
         $this->prepareQuery();

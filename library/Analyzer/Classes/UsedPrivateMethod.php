@@ -64,7 +64,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
-             ->code(array('static', 'self'))
+             ->codeIs(array('static', 'self'))
              ->inIs('CLASS')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
@@ -85,7 +85,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
-             ->code('$this')
+             ->codeIs('$this')
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
@@ -101,7 +101,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->hasOut('PRIVATE')
              ->_as('method')
              ->outIs('NAME')
-             ->code('__construct')
+             ->codeIs('__construct')
              ->inIs('NAME')
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
@@ -119,7 +119,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
-             ->code('__destruct')
+             ->codeIs('__destruct')
              ->inIs('NAME');
         $this->prepareQuery();
     }
