@@ -28,9 +28,25 @@ use Analyzer;
 class AmbiguousKeys extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->code('array')
-             ->raw("aggregate().findAll{ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Keyvalue').out('KEY').groupBy{if (it.hasNot('delimiter', null).count() > 0) { it.noDelimiter; } else { it.code ;}}{it.atom}{it.unique().toList().size()}.cap.next().findAll{it.value > 1}.size() > 0}");
+        $this->atomFunctionIs('\\array')
+             ->raw('where(
+    __.sideEffect{ counts = [:]; integers = [:]; strings = [:]; }
+      .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("KEY")
+      .hasLabel("String", "Integer").where(__.out("CONCAT").count().is(eq(0)))
+      .sideEffect{ 
+            if ("noDelimiter" in it.get().keys() ) { 
+                k = it.get().value("noDelimiter"); 
+                if (strings[k] == null) { strings[k] = 1; } else { strings[k]++; }
+                if (integers[k] != null) { integers[k] = 1; }
+            } else { 
+                k = it.get().value("code"); 
+                if (integers[k] == null) { integers[k] = 1; } else { integers[k]++; }
+                if (strings[k] != null) { counts[k] = 1; }
+            }
+        }
+        .map{ counts; }.unfold().count().is(neq(0))
+)'
+);
         $this->prepareQuery();
     }
 }
