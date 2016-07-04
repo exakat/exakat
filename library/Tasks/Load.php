@@ -822,6 +822,7 @@ class Load extends Tasks {
             $catchId = $this->addAtom('Catch');
             $classId = $this->processOneNsname();
             $this->addLink($catchId, $classId, 'CLASS');
+            $this->addCall('class', $this->getFullnspath($classId), $classId);
 
             // Process variable
             $this->processNext();

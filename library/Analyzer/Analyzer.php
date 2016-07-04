@@ -1244,12 +1244,6 @@ GREMLIN
         return $this;
     }
 
-    public function hasNoClassDefinition() {
-        $this->addMethod("filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}");
-    
-        return $this;
-    }
-
     public function interfaceDefinition() {
         $this->addMethod('hasNot("fullnspath", null)
                          .filter{ g.idx("interfaces").get("path", it.fullnspath).any(); }
