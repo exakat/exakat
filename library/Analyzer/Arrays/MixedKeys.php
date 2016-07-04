@@ -30,21 +30,24 @@ class MixedKeys extends Analyzer\Analyzer {
     
     public function analyze() {
         // build with array()
-        $this->atomIs('Visibility')
-             ->outIs('DEFINE')
+        $this->atomIs('Ppp')
+             ->outIs('PPP')
              ->atomInside('Functioncall')
-             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
-             ->fullnspath('\\array')
+             ->functioncallIs('\\array')
              ->_as('result')
-             ->outIs('ARGUMENTS')
+
              // count keys styles
-             ->raw('filter{ m=[:];
-                            it.out("ARGUMENT").groupBy(m){
-              if (it.out("KEY").any() && it.out("KEY").next().atom in ["Identifier", "Staticconstant"]) { "a" } else { "b" }
-             }{it}{it.size()}.iterate();
-m.size() > 1; }')
-              ->back('result')
-              ;
+             ->raw('where(
+   __.sideEffect{ counts = [:]; }
+      .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("KEY")
+      .hasLabel("String", "Integer", "Real", "Boolean", "Staticconstant", "Identifier").where(__.out("CONCAT").count().is(eq(0)))
+      .sideEffect{ 
+            if (it.get().label() in ["Identifier", "Staticconstant"] ) { k = "a"; } else { k = "b"; }
+            if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }
+        }
+        .map{ counts.size(); }.is(eq(2))
+)')
+              ->back('result');
         $this->prepareQuery();
     }
 }

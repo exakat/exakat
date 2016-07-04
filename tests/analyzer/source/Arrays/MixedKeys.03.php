@@ -6,7 +6,7 @@ class x { const THREE = 3;}
 
 class z {
 static public $z = [
-    2,
+    "Zero" => 2,
     ONE => 1,
     x::THREE => 3,
     4,
@@ -16,7 +16,7 @@ static public $z = [
 
 static public $z2 = [
     0 => [
-    2,
+    "Zero" => 2,
     ONE => 1,
     x::THREE => 3,
     4,
