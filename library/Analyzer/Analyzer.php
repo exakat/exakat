@@ -533,33 +533,15 @@ repeat(__.in('.$linksDown.'))
     }
 
     public function atomInside($atom) {
-        if (is_array($atom)) {
-            $atom = join('", "', $atom);
-            $gremlin = <<<GREMLIN
-repeat( out() ).times(15).emit( hasLabel("$atom") )
-GREMLIN;
-        } else {
-            $gremlin = <<<GREMLIN
-repeat( out() ).times(15).emit( hasLabel("$atom") )
-GREMLIN;
-        }
-        $this->addMethod($gremlin, $atom);
+        $gremlin = 'repeat( out() ).times(15).emit( hasLabel('.$this->SorA($atom).') )';
+        $this->addMethod($gremlin);
         
         return $this;
     }
 
     public function noAtomInside($atom) {
-        if (is_array($atom)) {
-            $atom = join('", "', $atom);
-            $gremlin = <<<GREMLIN
-where( repeat( out() ).times(15).emit( hasLabel("$atom") ).count().is(eq(0)) )
-GREMLIN;
-        } else {
-            $gremlin = <<<GREMLIN
-where( repeat( out() ).times(15).emit( hasLabel("$atom") ).count().is(eq(0)) )
-GREMLIN;
-        }
-        $this->addMethod($gremlin, $atom);
+        $gremlin = 'where( repeat( out() ).times(15).emit( hasLabel('.$this->SorA($atom).') ).count().is(eq(0)) )';
+        $this->addMethod($gremlin);
         
         return $this;
     }
