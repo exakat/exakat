@@ -66,6 +66,8 @@ class Load extends Tasks {
     private $uses = array('function' => array(),
                           'const'    => array(),
                           'class'    => array());
+
+    private $links = array();
     
     const FULLCODE_SEQUENCE = ' /**/ ';
     const FULLCODE_BLOCK    = ' {' . self::FULLCODE_SEQUENCE.'} ';
@@ -1802,7 +1804,7 @@ class Load extends Tasks {
         $argumentId = $this->processArguments([T_CLOSE_BRACKET]);
         $this->addLink($id, $argumentId, 'ARGUMENTS');
 
-        $this->setAtom($id, ['code'       => $this->tokens[$this->id][1], 
+        $this->setAtom($id, ['code'       => $this->tokens[$current][1], 
                              'fullcode'   => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ,
                              'line'       => $this->tokens[$this->id][2],
                              'token'      => $this->getToken($this->tokens[$current][0]),
@@ -1820,7 +1822,7 @@ class Load extends Tasks {
 
         // Skip opening bracket
         $opening = $this->tokens[$this->id + 1][0];
-        $opening === '}' ? $closing = '{' : $closing = ']';
+        $opening === '{' ? $closing = '}' : $closing = ']';
          
         ++$this->id; 
         do {
@@ -1833,7 +1835,7 @@ class Load extends Tasks {
         $indexId = $this->popExpression();
         $this->addLink($id, $indexId, 'INDEX');
 
-        $this->setAtom($id, ['code'      => $this->tokens[$this->id][1], 
+        $this->setAtom($id, ['code'      => $opening, 
                              'fullcode'  => $this->atoms[$variableId]['fullcode'] . $opening .
                                             $this->atoms[$indexId]['fullcode']    . $closing ,
                              'line'      => $this->tokens[$this->id][2],
