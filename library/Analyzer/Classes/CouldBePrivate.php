@@ -43,7 +43,7 @@ class CouldBePrivate extends Analyzer\Analyzer {
              ->_as('results')
 
             // Skip properties with 'null' as default : they will probably get an object, and can't be unused.
-             ->outIsIE('RIGHT')
+             ->outIsIE('LEFT')
              ->savePropertyAs('propertyname', 'name')
              
              // property is never used, outside the current class, in a children class
@@ -73,7 +73,7 @@ class CouldBePrivate extends Analyzer\Analyzer {
              ->_as('results')
 
             // Skip properties with 'null' as default : they will probably get an object, and can't be unused.
-             ->outIsIE('RIGHT')
+             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'dname')
 
              ->raw('where( g.V().hasLabel("Staticproperty").where( __.out("PROPERTY").filter{ it.get().value("code") == dname})
