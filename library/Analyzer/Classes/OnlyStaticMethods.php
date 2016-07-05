@@ -29,9 +29,8 @@ class OnlyStaticMethods extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Class')
              ->outIs('BLOCK')
-             ->filter('it.out("ELEMENT").any()') // won't count empty classes as static
-             ->filter('it.out("ELEMENT").hasNot("atom", "Function").any() == false')
-             ->filter('it.out("ELEMENT").filter{it.out("STATIC").any() == false}.any() == false')
+             ->isMore('count', 1) // Avoid empty classes
+             ->raw('where( __.out("ELEMENT").where(__.out("STATIC").count().is(eq(1)) ).count().is(neq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

@@ -15,6 +15,12 @@ class Only3StaticMethods{
     static function a3() {}
 }
 
+class onlyStaticMethods3Property {
+    private $a = 2;
+    static function a2() {}
+    static function a3() {}
+}
+
 class NotOnlyStaticMethods{
     function a() {}
     static function a2() {}
@@ -26,12 +32,5 @@ class NotOnlyStaticMethods2{
     static function a2() {}
     static function a3() {}
 }
-
-class NotOnlyStaticMethods3{
-    private $a = 2;
-    static function a2() {}
-    static function a3() {}
-}
-
 
 ?>

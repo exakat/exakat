@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('class xWithMagic');
+$expected     = array('class xWithMagic { /**/ } ',
+                      'class xWithMagic2 { /**/ } ');
 
-$expected_not = array('class xNoMagic');
+$expected_not = array('class xNoMagic { /**/ } ');
 
 ?>

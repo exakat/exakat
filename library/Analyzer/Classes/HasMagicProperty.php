@@ -32,7 +32,7 @@ class HasMagicProperty extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Function')
              ->outIs('NAME')
-             ->code(array('__get', '__set'))
+             ->codeIs(array('__get', '__set'))
              ->back('first');
         $this->prepareQuery();
     }
