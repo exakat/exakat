@@ -24,10 +24,12 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class UsingThisOutsideAClass extends Analyzer\Analyzer {
+    protected $phpVersion = '7.0-';
+    
     public function analyze() {
         // $this outside a class or a trait
         $this->atomIs('Variable')
-             ->code('$this')
+             ->codeIs('$this')
              ->hasNoClass()
              ->hasNoTrait();
         $this->prepareQuery();
