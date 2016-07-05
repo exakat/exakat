@@ -28,16 +28,17 @@ class CaughtButNotThrown extends Analyzer\Analyzer {
         // There is a catch() but its class is not defined
 
         $phpExceptions = $this->loadIni('php_exception.ini', 'classes');
+        
+        $thrown1 = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").values("fullnspath").unique()');
 
+        $thrown2 = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").in("DEFINITION")
+                                     .repeat( out("EXTENDS").in("DEFINITION") ).emit().times(15).values("fullnspath").unique()');
+        $thrown = array_merge($thrown1, $thrown2);
+        
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->fullnspathIsNot($this->makeFullNsPath($phpExceptions))
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->filter('g.idx("atoms")[["atom":"Throw"]].out("THROW").out("NEW").hasNot("fullnspath", null)
-                         .hasNot("fullnspath", null)
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                         .filter{fnp in it.classTree}.any() == false');
+             ->fullnspathIsNot($thrown);
         $this->prepareQuery();
     }
 }
