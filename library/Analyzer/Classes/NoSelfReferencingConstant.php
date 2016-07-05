@@ -29,23 +29,32 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
     public function analyze() {
         // const c = self::b
         $this->atomIs('Const')
-             ->inClass()
+             ->hasClass()
              ->outIs('CONST')
+             ->_as('results')
+             ->analyzerIsNot('self')
+
              ->outIs('RIGHT')
+             ->atomInside('Staticconstant')
              ->outIs('CLASS')
-             ->code('self')
-             ->back('first');
+             ->codeIs('self')
+
+             ->back('results');
         $this->prepareQuery();
 
         // const c = self::$b + 1
         $this->atomIs('Const')
-             ->inClass()
+             ->hasClass()
              ->outIs('CONST')
+             ->_as('results')
+             ->analyzerIsNot('self')
+             
              ->outIs('RIGHT')
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
-             ->code('self')
-             ->back('first');
+             ->codeIs('self')
+
+             ->back('results');
         $this->prepareQuery();
 
         // const c = a::b
@@ -56,6 +65,8 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->back('first')
 
              ->outIs('CONST')
+             ->_as('results')
+             ->analyzerIsNot('self')
              
              ->outIs('LEFT')
              ->savePropertyAs('code', 'constante')
@@ -70,7 +81,7 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->outIs('CONSTANT')
              ->samePropertyAs('code', 'constante')
 
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
 
         // const c = a::b + 1
@@ -81,6 +92,8 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->back('first')
 
              ->outIs('CONST')
+             ->_as('results')
+             ->analyzerIsNot('self')
 
              ->outIs('LEFT')
              ->savePropertyAs('code', 'constante')
@@ -95,7 +108,7 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->outIs('CONSTANT')
              ->samePropertyAs('code', 'constante')
 
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
     }
 }
