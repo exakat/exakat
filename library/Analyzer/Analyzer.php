@@ -819,6 +819,11 @@ GREMLIN
 
     public function eachCounted($variable, $times, $comp = '==') {
         $this->addMethod(<<<GREMLIN
+groupCount("m").by{$variable}
+GREMLIN
+);
+
+/*
 //groupCount('counts').by(label).cap('a').map{ it.get().findAll{ it.value > 2}; }
 groupCount('counts').by(
 
@@ -826,9 +831,7 @@ groupCount('counts').by(
 
 // This is plugged into each{}
 m.findAll{ it.value.size() $comp $times}.values().flatten().each{ n.add(it); }
-GREMLIN
-);
-
+*/
         return $this;
     }
 
@@ -1090,7 +1093,7 @@ GREMLIN
     }
 
     public function hasNoConstantDefinition() {
-        $this->addMethod("filter{ g.idx('constants')[['path':it.fullnspath]].any() == false}");
+        $this->addMethod('where( __.in("DEFINITION").count().is(eq(1)))');
     
         return $this;
     }
