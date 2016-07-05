@@ -28,21 +28,24 @@ use Analyzer;
 class VariableUsedOnce extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Variables/Blind',
-                     'Variables/InterfaceArguments',
+        return array('Variables/InterfaceArguments',
                      'Variables/Variablenames'
                      );
     }
     
     public function analyze() {
-        $this->atomIs(array('Variable', 'Functioncall'))
+        $usedOnce = $this->query('g.V().as("first").groupCount("processed").by(count()).hasLabel("Variable", "Functioncall").where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\Variablenames").count().is(neq(0)) ).where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\InterfaceArguments").count().is(eq(0)) ).filter{ !(it.get().value("code") in ["\\$_GET", "\\$_POST", "\\$_COOKIE", "\\$_FILES", "\\$_SESSION", "\\$_REQUEST", "\\$_ENV", "\\$_SERVER", "\\$PHP_SELF", "\\$HTTP_RAW_POST_DATA", "\\$HTTP_GET_VARS", "\\$HTTP_POST_VARS", "\\$HTTP_POST_FILES", "\\$HTTP_ENV_VARS", "\\$HTTP_SERVER_VARS", "\\$HTTP_COOKIE_VARS", "\\$GLOBALS", "\\$this", "\\$argv", "\\$argc"]); }.where( __.in("GLOBAL").count().is(eq(0)) )
+.groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet()');
+
+        $this->atomIs('Variable')
              ->analyzerIs('Variables/Variablenames')
-             ->analyzerIsNot('Variables/Blind')
              ->analyzerIsNot('Variables/InterfaceArguments')
              ->codeIsNot(VariablePhp::$variables, true)
              ->hasNoIn('GLOBAL') // ignore global $variable; This is not a use.
-             ->eachCounted('it.code', 1);
+             ->codeIs($usedOnce, true);
         $this->prepareQuery();
+        
+//         'Functioncall'
     }
 }
 
