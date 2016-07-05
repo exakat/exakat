@@ -33,41 +33,24 @@ class EmptyFunction extends Analyzer\Analyzer {
     public function analyze() {
         // standalone function
         $this->atomIs('Function')
-             ->hasNoClass()
+             ->hasNoClassTrait()
              ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
 
         // method : then, it should not overwrite a parent's methdo
         $this->atomIs('Function')
+             ->hasClassTrait()
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
              ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->goToClass()
-
-             // one of the parents' class exists
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){true}{it.object.atom == "Class"}
-                              .out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name)
-                              .any() == false}')
-
-                // checking parent is not a composer class
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
-                              .any() == false;
-                              }')
-
-                // checking grand-parents are not a composer class
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){true}{it.object.atom == "Class"}
-                              .filter{ it.out("IMPLEMENTS", "EXTENDS").in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
-                              .any() == false;
-                              }')
+             ->raw('where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times(6).out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }
