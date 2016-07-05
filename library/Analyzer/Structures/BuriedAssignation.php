@@ -29,33 +29,23 @@ class BuriedAssignation extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Assignation')
              ->hasNoIn('ELEMENT')
-             ->code('=')
-
-             // in a While
-             ->raw('filter{ it.in("CONDITION", "INIT").any() == false}')
-                // in an assignation
-             ->raw('filter{ it.in("RIGHT", "LEFT").in("CONDITION", "INIT").any() == false}')
-                // and in a parenthesis
-             ->raw('filter{ it.in("CODE").in("RIGHT", "LEFT").in("CONDITION", "INIT").any() == false}')
-
-             // in a IF
-             ->raw('filter{ it.in("CODE").in("CONDITION").any() == false}')
-             // in a if( ($a =2) !== 3) {}
-             ->raw('filter{ it.in("CODE").in("RIGHT", "LEFT").in("CONDITION").any() == false}')
+             ->codeIs('=')
 
              // in a chained assignation
-             ->raw('filter{ it.in("RIGHT").has("atom", "Assignation").any() == false}')
-
-             // in a for
-             ->raw('filter{ it.in("INCREMENT", "INIT").any() == false}')
-             ->raw('filter{ it.in("ARGUMENT").in("INCREMENT", "INIT", "FINAL").has("atom", "For").any() == false}')
-
-             // in an argument (with or without typehint)
-             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
-             ->raw('filter{ it.in("VARIABLE").in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
+             ->hasNoParent('Assignation', 'LEFT')
              
              // in a property definition
-             ->hasNoIn(array('DEFINE', 'CONST'));
+             ->inIsIE('CODE')
+             ->hasNoIn(array('DEFINE', 'CONST', 'CONDITION', 'PPP', 'STATIC'))
+             ->back('first');
+        $this->prepareQuery();
+        
+        // Special for for(;;) : only if several instructions with comma
+        $this->atomIs('For')
+             ->outIs(array('INIT', 'FINAL', 'INCREMENT'))
+             ->isMore('count', 1)
+             ->outIs('ELEMENT')
+             ->atomIs('Assignation');
         $this->prepareQuery();
     }
 }
