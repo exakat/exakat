@@ -34,7 +34,7 @@ class toStringThrowsException extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIs('MethodDefinition')
-             ->code('__toString', true)
+             ->codeIs('__toString', true)
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Throw')
