@@ -31,6 +31,7 @@ class IsGlobalConstant extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        return true;
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         
