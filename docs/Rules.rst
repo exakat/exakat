@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 21 Mar 2016 10:19:58 +0000
-.. comment: Generation hash : 1b7fb8b0de05aa4c84bba694e13f36a8f9ea0534
+.. comment: Generation date : Tue, 05 Jul 2016 19:06:41 +0000
+.. comment: Generation hash : 10e113fb69b6cbb0fdf3110d2c19a26c7ae141da
 
 
 .. _$http\_raw\_post\_data:
@@ -139,7 +139,20 @@ Usage of the ... keyword, either in function definitions, either in functioncall
 
 PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It will solve the classname that is used in the left part of the operator.
 
-ClassName::class; // return Namespace\ClassName
+.. code-block:: php
+
+   <?php
+   class foo {
+       public function bar( ) {
+           echo ClassName::class; 
+       }
+   }
+   
+   $f = new Foo( );
+   $f->bar( );
+   // return Namespace\ClassName
+   
+   ?>
 
 +--------------+------------------------------------------------------+
 | Command Line | Php/StaticclassUsage                                 |
@@ -278,6 +291,24 @@ Some functions have several names, and both may be used the same way. However, o
 +--------------+-------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                      |
 +--------------+-------------------------------------------------------------------------------------+
+
+
+
+.. _all-uppercase-variables:
+
+All Uppercase Variables
+#######################
+
+
+Usually, global variables are all in uppercase, so as to differentiate them easily. Try to use lowercase variables, $camelCase, $sturdyCase or $snake\_case.
+
++--------------+------------------------------------------------+
+| Command Line | Variables/VariableUppercase                    |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -488,6 +519,24 @@ List of all the integer values using the binary format, such as 0b10 or 0B0101.
 +--------------+---------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
+
+
+
+.. _bracketless-blocks:
+
+Bracketless Blocks
+##################
+
+
+PHP allows one liners as for/foreach/while loops, or as then/else expressions. It is generally considered a bad practice, as readability is lower and there are non-négligeable risk of excluding from the loop the next instruction.
+
++--------------+------------------------------------------------+
+| Command Line | Structures/Bracketless                         |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -707,13 +756,13 @@ The spotted classes are used with a different case than their definition. While 
 
 Most of the time, this is also a violation of coding conventions.
 
-+--------------+-------------------+
-| Command Line | Classes/WrongCase |
-+--------------+-------------------+
-| clearPHP     |                   |
-+--------------+-------------------+
-| Analyzers    | :ref:`Analyze`    |
-+--------------+-------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Classes/WrongCase                                              |
++--------------+----------------------------------------------------------------+
+| clearPHP     |                                                                |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -772,7 +821,7 @@ PHP manual recommends that script should be left open, without the final closing
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `leave-last-closing-out <https://github.com/dseguy/clearPHP/tree/master/rules/leave-last-closing-out.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                              |
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>`                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -794,6 +843,52 @@ This is not the case anymore since PHP 5.4.
 +--------------+-------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53` |
 +--------------+-------------------------------------------+
+
+
+
+.. _common-alternatives:
+
+Common Alternatives
+###################
+
+
+In the following conditional structures, expressions were found that are common to both 'then' and 'else'. It may be interesting, though not always possible, to put them both out of the conditional, and reduce line count. 
+
+.. code-block:: php
+
+   <?php
+   if ($c == 5) {
+       $b = strtolower($b[2]); 
+       $a++;
+   } else {
+       $b = strtolower($b[2]); 
+       $b++;
+   }
+   ?>
+
+
+may be rewritten in : 
+
+.. code-block:: php
+
+   <?php
+   
+   $b = strtolower($b[2]); 
+   if ($c == 5) {
+       $a++;
+   } else {
+       $b++;
+   }
+   
+   ?>
+
++--------------+-------------------------------+
+| Command Line | Structures/CommonAlternatives |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
 
 
 
@@ -926,21 +1021,21 @@ As such, they should be PHP constants (build with define or const), or included 
 
 
 
-.. _constant-scalar-expression:
+.. _constant-comparison:
 
-Constant Scalar Expression
-##########################
+Constant Comparison
+###################
 
 
-Since PHP 5.6, it is possible to use expression with Constants and simple operators in places where one define default values.
+The code seems to follows the convention of putting constant on one of the side of the comparison (either $x == 2 or 2 == $x). This is a list of the violations of this convention.
 
-+--------------+------------------------------+
-| Command Line | Php/ConstantScalarExpression |
-+--------------+------------------------------+
-| clearPHP     |                              |
-+--------------+------------------------------+
-| Analyzers    | none                         |
-+--------------+------------------------------+
++--------------+------------------------------------------------+
+| Command Line | Structures/ConstantComparisonConsistance       |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -956,13 +1051,13 @@ Those expressions (using simple operators) may only manipulate other constants, 
 
 This is not compatible with previous versions.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/ConstantScalarExpression                                                                                                                              |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Structures/ConstantScalarExpression                                             |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -1032,13 +1127,13 @@ Could Be Static
 ###############
 
 
-This global is only used in one function or method. It may be called 'static', instead of global. This will allow you to keep the value between call to the function, but will not be accessible outside this function.
+This global is only used in one function or method. It may be called 'static', instead of global. This allows you to keep the value between call to the function, but will not be accessible outside this function.
 
 .. code-block:: php
 
    <?php
-   function x() {
-       static $variableIsReservedForX; // only accessible within x(), even between calls.
+   function foo( ) {
+       static $variableIsReservedForX; // only accessible within foo( ), even between calls.
        global $variableIsGlobal;       //      accessible everywhere in the application
    }
    ?>
@@ -1077,6 +1172,35 @@ List of those operators : +=, -=, \*=, /=, %=, \*\*=, .=, &=, \|=, ^=, >>=, <<=
 
 
 
+.. _could-use-\_\_dir\_\_:
+
+Could Use \_\_DIR\_\_
+#####################
+
+
+Use \_\_DIR\_\_ function to access the current file's parent directory. 
+
+.. code-block:: php
+
+   <?php
+   
+   assert(dirname(\_\_FILE\_\_) == \_\_DIR\_\_);
+   
+   ?>
+
+
+\_\_DIR\_\_ has been introduced in PHP 5.3.0.
+
++--------------+------------------------+
+| Command Line | Structures/CouldUseDir |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
+
 .. _could-use-self:
 
 Could use self
@@ -1092,6 +1216,26 @@ Self keywords refers to the current class, or any of its parents. Using it is ju
 +--------------+-----------------------+
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
+
+
+
+.. _curly-arrays:
+
+Curly Arrays
+############
+
+
+It is possible to access individual elements in an array by using its offset between square brackets [] or curly brackets {}. 
+
+Curly brackets are seldom used, and will probably confuse or surprise the reader. It is recommended not to used them.
+
++--------------+------------------------------------------------+
+| Command Line | Arrays/CurlyArrays                             |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -1294,21 +1438,48 @@ Twice the same call in a row. This is worth a check.
 
 
 
+.. _echo-or-print:
+
+Echo Or Print
+#############
+
+
+Echo or print, this project made a clear choice, but forgot a few spots.
+
++--------------+------------------------------------------------+
+| Command Line | Structures/EchoPrintConsistance                |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _echo-with-concat:
 
 Echo With Concat
 ################
 
 
-Optimize your echo's by not concatenating at echo time, but serving all argument separated. This will save PHP a memory copy.
+Optimize your echo's by not concatenating at echo() time, but serving all argument separated. This will save PHP a memory copy.
 If values (literals and variables) are small enough, this won't have impact. Otherwise, this is less work and less memory waste.
 
-echo $a, ' b ', $c;
+.. code-block:: php
+
+   <?php
+     echo $a, ' b ', $c;
+   ?>
+
 
 instead of
 
-echo  $a . ' b ' . $c;
-echo $a b $c;
+.. code-block:: php
+
+   <?php
+     echo  $a . ' b ' . $c;
+     echo $a b $c;
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/EchoWithConcat                                                                                                             |
@@ -1477,6 +1648,31 @@ Declaring a namespace in the code and not using it for structure declarations (c
 
 
 
+.. _empty-slots-in-arrays:
+
+Empty Slots In Arrays
+#####################
+
+
+PHP tolerates the last element of an array to be empty.
+
+.. code-block:: php
+
+   <?php
+       $a = array( 1, 2, 3, );
+       $b =      [ 4, 5, ];
+   ?>
+
++--------------+------------------------------------------------+
+| Command Line | Arrays/EmptySlots                              |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _empty-traits:
 
 Empty Traits
@@ -1535,24 +1731,6 @@ The function 'empty()' doesn't accept expressions until PHP 5.5. Until then, it 
 
 
 
-.. _eval-without-try:
-
-Eval Without Try
-################
-
-
-Eval() emits a ParseError Exception with PHP 7 and later. Catching this exception is the recommended way to handle errors while using the eval function.
-
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/EvalWithoutTry                                                                                                  |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                            |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-
-
-
 .. _eval()-usage:
 
 Eval() Usage
@@ -1571,6 +1749,41 @@ At worse, including a pre-generated file will be faster.
 +--------------+-------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`                                           |
 +--------------+-------------------------------------------------------------------------------+
+
+
+
+.. _exception-order:
+
+Exception Order
+###############
+
+
+When catching exception, the most specialized exceptions must be in the early catch, and the most general exceptions must be in the later catch. Otherwise, the general catches intercept the exception, and the more specialized will not be read.
+
+.. code-block:: php
+
+   <?php
+   
+   class A extends \Exception {}
+   class B extends A {}
+   
+   try {
+       throw new A();
+   } 
+   catch(A $a1) { }
+   catch(B $b2 ) { 
+       // Never reached, as previous Catch is catching the early worm
+   }
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Exceptions/AlreadyCaught     |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>` |
++--------------+------------------------------+
 
 
 
@@ -1609,24 +1822,6 @@ Usage of the \*\* operator or \*\*=, to make exponents.
 +--------------+---------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
-
-
-
-.. _followed-injections:
-
-Followed injections
-###################
-
-
-There is a link between those function and some of the sensitive PHP functions. This may lead to Injections of various kind.
-
-+--------------+--------------------------+
-| Command Line | Security/RemoteInjection |
-+--------------+--------------------------+
-| clearPHP     |                          |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Security`          |
-+--------------+--------------------------+
 
 
 
@@ -1902,13 +2097,13 @@ Functions Removed In PHP 5.4
 
 Those functions were removed in PHP 5.4.
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php54RemovedFunctions                                                                                                                             |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                                       |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------+
+| Command Line | Php/Php54RemovedFunctions                 |
++--------------+-------------------------------------------+
+| clearPHP     |                                           |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54` |
++--------------+-------------------------------------------+
 
 
 
@@ -1920,13 +2115,13 @@ Functions Removed In PHP 5.5
 
 Those functions were removed in PHP 5.5.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php55RemovedFunctions                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                            |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------+
+| Command Line | Php/Php55RemovedFunctions |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP55` |
++--------------+---------------------------+
 
 
 
@@ -1981,7 +2176,7 @@ Hardcoding passwords is a bad idea. Not only it make the code difficult to chang
 +--------------+---------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-hardcoded-credential <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-credential.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                                |
+| Analyzers    | :ref:`Analyze`, :ref:`Security`                                                                               |
 +--------------+---------------------------------------------------------------------------------------------------------------+
 
 
@@ -2030,13 +2225,13 @@ Hash Algorithms incompatible with PHP 5.4/5
 
 List of hash algorithms incompatible with PHP 5.4 and 5.5. They were introduced in newer version, or removed in PHP 5.4. As such, they are not available with older versions.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/HashAlgos54                                                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------+
+| Command Line | Php/HashAlgos54           |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP54` |
++--------------+---------------------------+
 
 
 
@@ -2048,13 +2243,13 @@ Hexadecimal In String
 
 Mark strings that may be confused with hexadecimal.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Type/HexadecimalString                                                                                                                                           |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Type/HexadecimalString                               |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -2079,6 +2274,62 @@ Also, note that arguments 2 and 3 are constants and string (respectively), and s
 +--------------+-----------------------------+
 | Analyzers    | :ref:`Analyze`              |
 +--------------+-----------------------------+
+
+
+
+.. _identical-conditions:
+
+Identical Conditions
+####################
+
+
+The following logical expressions contain members that are identical. For example, $a \|\| $a may be reduced into $a alone.
+
++--------------+--------------------------------+
+| Command Line | Structures/IdenticalConditions |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
+
+
+.. _if-with-same-conditions:
+
+If With Same Conditions
+#######################
+
+
+Successive If / then structures that have the same condition may be either merged or have one of the condition changed.
+
++--------------+---------------------------------+
+| Command Line | Structures/IfWithSameConditions |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
+
+
+.. _iffectations:
+
+Iffectations
+############
+
+
+Affectations that appears in a if() conditions, such as if ($x = mysql\_connect(...)).
+
+Iffectations are a way to do both a test and an affectations. They may also be typos, such as if ($x = 3) { ... }, leading to a constant condition.
+
++--------------+------------------------+
+| Command Line | Structures/Iffectation |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
 
 
 
@@ -2140,6 +2391,47 @@ Code that is incompilable with older PHP versions means that the code is breakin
 
 
 
+.. _inconsistant-closing-tag:
+
+Inconsistant Closing Tag
+########################
+
+
+Project usually chose between always closing a PHP script (such as .. code-block:: php
+
+   <?php xxx(); ?>
+) or never closing it (<?php xxx(); ). The second is recommended to avoid leaving some whitespaces at the end of the script, and, thus, leading to the infamous 'Headers already sent' error. 
+
+One way or another, if the project has a vast majority of either case, it will report the other here, so as to make things homogenous. If the project appears undecided about this issue, nothing will be reported.
+
++--------------+------------------------------------------------+
+| Command Line | Php/InconsistantClosingTag                     |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
+.. _incrementations:
+
+Incrementations
+###############
+
+
+Incrementing a variable should be done with ++ or -- operator. Any other way, like $x = $x + 1; or $y += 1; may be avoided.
+
++--------------+------------------------------------------------+
+| Command Line | Structures/PlusEgalOne                         |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _indices-are-int-or-string:
 
 Indices Are Int Or String
@@ -2162,6 +2454,33 @@ As a general rule of thumb, only use integers or strings that don\'t look like i
 
 
 
+.. _indirect-injection:
+
+Indirect Injection
+##################
+
+
+Look for injections through indirect usage for GPRC values ($\_GET, $\_POST, $\_REQUEST, $\_COOKIE). 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = $\_GET['a'];
+   echo $a;
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Security/IndirectInjection |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Security`            |
++--------------+----------------------------+
+
+
+
 .. _instantiating-abstract-class:
 
 Instantiating Abstract Class
@@ -2177,6 +2496,28 @@ Those code will raise a PHP fatal error at execution time : 'Cannot instantiate 
 +--------------+------------------------------------+
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
+
+
+
+.. _interpolation:
+
+Interpolation
+#############
+
+
+The following strings contain variables that are will be replaced. However, the following characters are ambiguous, and may lead to confusion. 
+
+For example, "$x[1]->b".will be read by PHP as $x[1].\->b" and not like "{$x[1]->b}". 
+
+It is advised to add curly brackets around those structures to make them non-ambiguous.
+
++--------------+------------------------------------------------+
+| Command Line | Type/StringInterpolation                       |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -2271,6 +2612,24 @@ List() behavior has changed in PHP 7.0 and it has impact on the indexing when li
 
 
 
+.. _list-with-keys:
+
+List With Keys
+##############
+
+
+Setting keys when using list() is a PHP 7.1 feature.
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ListWithKeys                                                                                                                      |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _locally-unused-property:
 
 Locally Unused Property
@@ -2288,6 +2647,45 @@ While this is syntacticly correct, it is unusual that defined ressources are use
 +--------------+----------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
+
+
+
+.. _logical-mistakes:
+
+Logical Mistakes
+################
+
+
+Spot logical mistakes within logical expressions. 
+
+.. code-block:: php
+
+   <?php 
+   
+   // Always false
+   if ($a != 1 \|\| $a != 2) { } 
+   
+   // $a == 1 is useless
+   if ($a == 1 \|\| $a != 2) {}
+   
+   // Always false
+   if ($a == 1 && $a == 2) {}
+   
+   // $a != 2 is useless
+   if ($a == 1 && $a != 2) {}
+   
+   ?>
+
+
+Based on article from Andrey Karpov : http://www.viva64.com/en/b/0390/
+
++--------------+----------------------------+
+| Command Line | Structures/LogicalMistakes |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
 
 
 
@@ -2369,13 +2767,64 @@ Magic Visibility
 
 The magic methods must have public visibility and cannot be static
 
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Classes/toStringPss                                                                                                        |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                            |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/toStringPss                                                                                                                                                              |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                                                  |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _make-global-a-property:
+
+Make Global A Property
+######################
+
+
+Calling global (or $GLOBALS) in methods is slower and less testable than setting the global to a property, and using this property.
+
+Using properties is slightly faster than calling global or $GLOBALS, though the gain is not important. 
+
+Setting the property in the constructor (or in a factory), makes the class easier to test, as there is now a simple point of configuration.
+
+.. code-block:: php
+
+   <?php 
+   
+   // Wrong way
+   class fooBad {
+       function x() {
+           global $a;
+           $a->do();
+           // Or $GLOBALS['a']->do();
+       }
+   }
+   
+   class fooGood {
+       private $bar = null;
+       
+       function \_\_construct() {
+           global $bar; 
+           $this->bar = $bar;
+           // Even better, do this via arguments
+       }
+       
+       function x() {
+           $this->a->do();
+       }
+   }
+   
+   ?>
+
++--------------+-----------------------------+
+| Command Line | Classes/MakeGlobalAProperty |
++--------------+-----------------------------+
+| clearPHP     |                             |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
 
 
 
@@ -2454,6 +2903,28 @@ It is recommended to avoid declaring several times the same class in the code. A
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
+
+
+
+.. _multiple-classes-in-one-file:
+
+Multiple Classes In One File
+############################
+
+
+It is regarded as a bad practice to cram more than one class per file. This is usually done to make life of \_\_autoload() easier. 
+
+It is often difficult to find class foo in the bar.php file. This is also the case for interfaces and traits.
+
+One good reason to have multiple classes in one file is to reduce include time by providing everything into one nice include.
+
++--------------+------------------------------------------------+
+| Command Line | Classes/MultipleClassesInFile                  |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -2712,6 +3183,40 @@ PHP introduced new functions in PHP 5.6. If you have already defined functions w
 
 
 
+.. _no-choice:
+
+No Choice
+#########
+
+
+A conditional structure is being used, but both alternatives are the same, leading to the illusion of choice. 
+
+Either the condition is useless, and may be removed, or the alternatives needs to be distinguished.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($condition == 2) {
+       doSomething();
+   } else {
+       doSomething();
+   }
+   
+   $condition == 2 ?     doSomething() :     doSomething();
+   
+   ?>
+
++--------------+---------------------+
+| Command Line | Structures/NoChoice |
++--------------+---------------------+
+| clearPHP     |                     |
++--------------+---------------------+
+| Analyzers    | :ref:`Analyze`      |
++--------------+---------------------+
+
+
+
 .. _no-direct-call-to-magicmethod:
 
 No Direct Call To MagicMethod
@@ -2777,6 +3282,42 @@ For example, glob() returns an array, unless some error happens, in which case i
 
 
 
+.. _no-global-modification:
+
+No Global Modification
+######################
+
+
+It is recommended not to modify directly any Wordpress globals, but to use the function API instead.
+
++--------------+--------------------------------+
+| Command Line | Wordpress/NoGlobalModification |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+
+.. _no-hardcoded-hash:
+
+No Hardcoded Hash
+#################
+
+
+Hash (may it be MD5, SHA1, SHA512, Bcrypt or any other), should not be hard coded. Such values may have to be changed for security reasons, and the source code is not the safest place to hide it.
+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedHash      |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
+
+
+
 .. _no-hardcoded-ip:
 
 No Hardcoded Ip
@@ -2785,13 +3326,13 @@ No Hardcoded Ip
 
 Do not leave hard coded IP in your code.
 
-+--------------+--------------------------+
-| Command Line | Structures/NoHardcodedIp |
-+--------------+--------------------------+
-| clearPHP     |                          |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Analyze`           |
-+--------------+--------------------------+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedIp        |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -2821,13 +3362,13 @@ No Hardcoded Port
 
 When connecting to a remove serve, port is an important information. It is recommended to make this configurable (with constant or configuration), to as to be able to change this value without changing the code.
 
-+--------------+----------------------------+
-| Command Line | Structures/NoHardcodedPort |
-+--------------+----------------------------+
-| clearPHP     |                            |
-+--------------+----------------------------+
-| Analyzers    | :ref:`Analyze`             |
-+--------------+----------------------------+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedPort      |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -3030,11 +3571,11 @@ method statically :
 
    <?php
        class x {
-           static public function sm() { echo \_\_METHOD\_\_.\n; }
-           public sm() { echo \_\_METHOD\_\_.\n; }
+           static public function sm( ) { echo \_\_METHOD\_\_.\n; }
+           public sm( ) { echo \_\_METHOD\_\_.\n; }
        } 
        
-       x::sm(); // echo x::sm 
+       x::sm( ); // echo x::sm 
    ?>
 
 
@@ -3081,6 +3622,44 @@ It is recommended to make index a real string (with ' or "), or to define the co
 
 
 
+.. _non-lowercase-keywords:
+
+Non-lowercase Keywords
+######################
+
+
+Usual convention is to write PHP keywords (like as, foreach, switch, case, break, etc.) all in lowercase. 
+
+PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many.
+
++--------------+------------------------------------------------+
+| Command Line | Php/UpperCaseKeyword                           |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
+.. _nonce-creation:
+
+Nonce Creation
+##############
+
+
+Mark the creation of nonce by Wordpress
+
++--------------+-------------------------+
+| Command Line | Wordpress/NonceCreation |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Wordpress`        |
++--------------+-------------------------+
+
+
+
 .. _not-definitions-only:
 
 Not Definitions Only
@@ -3116,6 +3695,24 @@ This is a wrongly done type casting to boolean : !!($x) is (boolean) $x.
 +--------------+-----------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
+
+
+
+.. _not-same-name-as-file:
+
+Not Same Name As File
+#####################
+
+
+The class, trait or interface bears a name that is not the same than the file that defines it.
+
++--------------+------------------------------------------------+
+| Command Line | Classes/NotSameNameAsFile                      |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 
@@ -3296,6 +3893,41 @@ Interrupting a script will leave the application with a blank page, will make yo
 
 
 
+.. _overwriting-variable:
+
+Overwriting Variable
+####################
+
+
+Replacing the content of a variable by something different is prone to errors. For example, it is not obvious if the $text variable is plain text or HTML text. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Confusing
+   $text = htmlentities($text);
+   
+   // Better
+   $textHTML = htmlentities($text);
+   
+   ?>
+
+
+Besides, it is possible that the source is needed later, for extra processing. 
+
+Note that accumulators, like += .=  or [] etc., that are meant to collect lots of values with consistent type are OK.
+
++--------------+-----------------------+
+| Command Line | Variables/Overwriting |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
+
+
 .. _overwritten-exceptions:
 
 Overwritten Exceptions
@@ -3450,7 +4082,7 @@ PHP5 Indirect Variable Expression
 
 The following structures are evaluated differently in PHP 5 and 7. It is recommended to review them or switch to a less ambiguous syntax.
 
-See also <a href="http://php.net/manual/en/migration70.incompatible.php">http://php.net/manual/en/migration70.incompatible.php</a>
+See also http://php.net/manual/en/migration70.incompatible.php.
 <table>
 <tr><td>Expression</td><td>PHP 5 interpretation</td><td>PHP 7 interpretation</td></tr>
 <tr><td>$$foo['bar']['baz']</td><td>${$foo['bar']['baz']}</td><td>($$foo)['bar']['baz']</td></tr>
@@ -3476,6 +4108,19 @@ PHP7 Dirname
 
 
 With PHP 7, dirname has a second argument that represents the number of parent folder to follow. This prevent us from using nested dirname() calls to reach an grand-parent direct.
+
+.. code-block:: php
+
+   <?php
+   $path = '/a/b/c/d/e/f';
+   
+   // PHP 7 syntax
+   $threeFoldersUp = dirname($path, 3);
+   
+   // PHP 5 syntax
+   $threeFoldersUp = dirname(dirname(dirname($path)));
+   
+   ?>
 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/PHP7Dirname                                                                                     |
@@ -3533,13 +4178,31 @@ Php 7 Indirect Expression
 
 Those are variable indirect expressions that are interpreted differently between PHP 5 and PHP 7. You should check them so they don't behave strangely.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command Line | Variables/Php7IndirectExpression                                                                           |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                            |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/Php7IndirectExpression                                                                                                      |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _php-71-new-classes:
+
+Php 71 New Classes
+##################
+
+
+New classes, introduced in PHP 7.1 : they have to be removed from PHP code before PHP 7.1 may be run.
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php71NewClasses                                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -3711,7 +4374,7 @@ Within a class, there is both a property and some variables bearing the same nam
    class Object {
        private $x;
        
-       function SetData() {
+       function SetData( ) {
            $this->x = $x + 2;
        }
    }
@@ -3750,6 +4413,40 @@ This is not always possible.
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
+
+
+
+.. _random\_-without-try:
+
+Random\_ Without Try
+####################
+
+
+random\_int() and random\_bytes() emit Exceptions if they meet a problem. This way, failure can't be mistaken with returning an empty value, which leads to lower security. 
+
+.. code-block:: php
+
+   <?php
+   
+   try {
+       $salt = random\_bytes($length);
+   } catch (TypeError $e) {
+       // Error while reading the provided parameter
+   } catch (Exception $e) {
+       // Insufficient randome data generated
+   } catch (Error $e) {
+       // Error with the provided parameter : <= 0
+   }
+   
+   ?>
+
++--------------+-----------------------------+
+| Command Line | Structures/RandomWithoutTry |
++--------------+-----------------------------+
+| clearPHP     |                             |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Security`             |
++--------------+-----------------------------+
 
 
 
@@ -3826,7 +4523,7 @@ Classes allows properties to be set with a default value. When those properties 
    class foo {
        public $redefined = 1;
    
-       public function \_\_construct() {
+       public function \_\_construct( ) {
            $this->redefined = 2;
        }
    }
@@ -3895,14 +4592,19 @@ Repeated print()
 
 It is recommended to use echo with multiple arguments, or a concatenation with print, instead of multiple calls to print echo, when outputting several blob of text.
 
+Write : 
 .. code-block:: php
 
    <?php
-   // Do
      echo 'a', $b, 'c';
      print 'a' . $b . 'c';
-     
-   // Don't 
+   ?>
+
+
+Don't write :  
+.. code-block:: php
+
+   <?php
      print 'a';
      print $b;
      print 'c';
@@ -3936,6 +4638,82 @@ Php reserved names for class/trait/interface. They won't be available anymore in
 
 
 
+.. _return-true-false:
+
+Return True False
+#################
+
+
+These conditional expressions return true/false, depending on the condition. This may be simplified by dropping the control structure alltogether.
+
+.. code-block:: php
+
+   <?php
+   
+   if (version\_compare($a, $b) >= 0) {
+       return true;
+   } else {
+       return false;
+   }
+   
+   ?>
+
+
+This may be simplified with : 
+
+.. code-block:: php
+
+   <?php
+   
+   return version\_compare($a, $b) >= 0;
+   
+   ?>
+
+
+This may be applied to assignations and ternary operators too.
+
+.. code-block:: php
+
+   <?php
+   
+   if (version\_compare($a, $b) >= 0) {
+       $a = true;
+   } else {
+       $a = false;
+   }
+   
+   $a = version\_compare($a, $b) >= 0 ? false : true;
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Structures/ReturnTrueFalse |
++--------------+----------------------------+
+| clearPHP     |                            |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
+
+
+
+.. _return-with-parenthesis:
+
+Return With Parenthesis
+#######################
+
+
+PHP tolerates parenthesis for the argument of a return statement, but it is recommended not to use them.
+
++--------------+------------------------------------------------+
+| Command Line | Php/ReturnWithParenthesis                      |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _safe-curloptions:
 
 Safe CurlOptions
@@ -3953,6 +4731,43 @@ With those tests (by default), the certificate is verified, and if it isn't vali
 +--------------+----------------------+
 | Analyzers    | :ref:`Security`      |
 +--------------+----------------------+
+
+
+
+.. _same-conditions:
+
+Same Conditions
+###############
+
+
+Several If then else structures are chained, and some conditions are identical. The latter will be ignored.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($a == 1) { doSomething(); }
+   elseif ($b == 1) { doSomething(); }
+   elseif ($c == 1) { doSomething(); }
+   elseif ($a == 1) { doSomething(); }
+   else {}
+   
+   // Also works on if then else if chains
+   if ($a == 1) { doSomething(); }
+   else if ($b == 1) { doSomething(); }
+   else if ($c == 1) { doSomething(); }
+   else if ($a == 1) { doSomething(); }
+   else {}
+   
+   ?>
+
++--------------+---------------------------+
+| Command Line | Structures/SameConditions |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
 
 
 
@@ -3982,7 +4797,14 @@ Sequences In For
 
 For() instructions allows several instructions in each of its parameters. Then, the instruction separator is comma ',', not semi-colon, which is used for separating the 3 arguments.
 
-for ($a = 0, $b = 0; $a < 10, $b < 20; $a++, $b += 3) {}
+.. code-block:: php
+
+   <?php
+      for ($a = 0, $b = 0; $a < 10, $b < 20; $a++, $b += 3) {
+       // For loop
+      }
+   ?>
+
 
 This loop will simultaneously increment $a and $b. It will stop only when the last of the central sequence reach a value of false : here, when $b reach 20 and $a will be 6. 
 
@@ -4089,7 +4911,7 @@ If you have too many of them, don't loose your time switching them all. If you h
 +--------------+-----------------------------------------------------------------------------------------------+
 | clearPHP     | `no-double-quote <https://github.com/dseguy/clearPHP/tree/master/rules/no-double-quote.md>`__ |
 +--------------+-----------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                |
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>`                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -4162,6 +4984,40 @@ Otherwise, the method doesn't belong to the object. It may be a function.
 +--------------+-----------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                          |
 +--------------+-----------------------------------------------------------------------------------------+
+
+
+
+.. _should-use-coalesce:
+
+Should Use Coalesce
+###################
+
+
+PHP 7 introduced the ?? operator, that replaces longer structures to set default values when a variable is not set.
+
+.. code-block:: php
+
+   <?php
+   
+   // Extract from https://wiki.php.net/rfc/isset\_ternary
+   // Fetches the request parameter user and results in 'nobody' if it doesn't exist
+   $username = $\_GET['user'] ?? 'nobody';
+   // equivalent to: $username = isset($\_GET['user']) ? $\_GET['user'] : 'nobody';
+    
+   // Calls a hypothetical model-getting function, and uses the provided default if it fails
+   $model = Model::get($id) ?? $default\_model;
+   // equivalent to: if (($model = Model::get($id)) === NULL) { $model = $default\_model; }
+   
+   
+   ?>
+
++--------------+-----------------------+
+| Command Line | Php/ShouldUseCoalesce |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
 
 
 
@@ -4244,6 +5100,24 @@ global keyword should only be used with simple variables (global $var), and not 
 
 
 
+.. _simple-regex:
+
+Simple Regex
+############
+
+
+PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using strpos() or strposi() instead.
+
++--------------+-----------------------+
+| Command Line | Structures/SimplePreg |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Performances`   |
++--------------+-----------------------+
+
+
+
 .. _sleep-is-a-security-risk:
 
 Sleep is a security risk
@@ -4306,27 +5180,23 @@ Static Methods Called From Object
 #################################
 
 
-Static methods may be called without instantiating an object.
-As such, they never interact with the special variable '$this', as they do not
-depend on object existence. 
+Static methods may be called without instantiating an object. As such, they never interact with the special variable '$this', as they do not depend on object existence. 
 
-Besides this, static methods are normal methods that may be called directly from
-object context, to perform some utility task. 
+Besides this, static methods are normal methods that may be called directly from object context, to perform some utility task. 
 
-To maintain code readability, it is recommended to call static method in a static
-way, rather than within object context.
+To maintain code readability, it is recommended to call static method in a static way, rather than within object context.
 
 .. code-block:: php
 
    <?php
        class x {
-           static function y() {}
+           static function y( ) {}
        }
        
-       $z = new x();
+       $z = new x( );
        
-       $z->y(); // Readability : no one knows it is a static call
-       x::y();  // Readability : here we know
+       $z->y( ); // Readability : no one knows it is a static call
+       x::y( );  // Readability : here we know
    ?>
 
 +--------------+---------------------------------------+
@@ -4505,6 +5375,43 @@ To be safe, always add parenthesis when using ternary operator with concatenatio
 
 
 
+.. _throw-functioncall:
+
+Throw Functioncall
+##################
+
+
+The throw keyword is excepted to use an exception. Calling a function to prepare that exception before throwing it is possible, but forgetting the new keyword is also possible. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Forgotten new
+   throw \RuntimeException('error!');
+   
+   // Code is OK, function returns an exception
+   throw getException(ERROR\_TYPE, 'error!');
+   
+   function getException(ERROR\_TYPE, $message) {
+       return new \RuntimeException($messsage);
+   }
+   
+   ?>
+
+
+When the new keyword is forgotten, then the class construtor is used as a functionname, and now exception is emited, but an 'Undefined function' fatal error is emited.
+
++--------------+------------------------------+
+| Command Line | Exceptions/ThrowFunctioncall |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
+
 .. _throws-an-assignement:
 
 Throws An Assignement
@@ -4533,13 +5440,13 @@ Timestamp Difference
 ####################
 
 
-Time() and microtime() shouldn't be used to calculate duration. 
+time() and microtime() shouldn't be used to calculate duration. 
 
-Time() and microtime are subject to variation, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
+time() and microtime are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
 
-When the difference may be rounded to a larger time unit (rounding the differnce to days, or several hours), the variations may be ignored safely.
+When the difference may be rounded to a larger time unit (rounding the difference to days, or several hours), the variation may be ignored safely.
 
-If the difference may be very small, it requires a better way to mesure time difference, such as ticks, ext/hrtime, or including a check on the actual time zone (ini\_get(date.timezone)).
+If the difference may be very small, it requires a better way to mesure time difference, such as ticks, ext/hrtime, or including a check on the actual time zone (ini\_get() with 'date.timezone').
 
 +--------------+--------------------------------+
 | Command Line | Structures/TimestampDifference |
@@ -4548,6 +5455,46 @@ If the difference may be very small, it requires a better way to mesure time dif
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
+
+
+
+.. _true-false-inconsistant-case:
+
+True False Inconsistant Case
+############################
+
+
+Usually, PHP projects choose between ALL CAPS True/False, or all lowercase True/False. Sometimes, the project will have no recommendations. 
+
+When your project use a vast majority of one of the convention, then the analyzer will report all remaining inconsistantly cased constant.
+
++--------------+------------------------------------------------+
+| Command Line | Constants/InconsistantCase                     |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
+.. _uncaught-exceptions:
+
+Uncaught Exceptions
+###################
+
+
+The following exceptions are thrown in the code, but are never caught. 
+
+Either they will lead to a fatal error, or they have to be caught by a larger application.
+
++--------------+-------------------------------+
+| Command Line | Exceptions/UncaughtExceptions |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
 
 
 
@@ -4566,6 +5513,26 @@ Resources are created, but never checked before being used. This is not safe.
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _undefined-caught-exceptions:
+
+Undefined Caught Exceptions
+###########################
+
+
+Those are exceptions that are caught in the code, but are not defined in the application. 
+
+They may be externally defined, such as in core PHP, extensions or libraries. Make sure those exceptions are usefull to your application : otherwise, they are dead code.
+
++--------------+-------------------------------+
+| Command Line | Exceptions/CaughtButNotThrown |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`  |
++--------------+-------------------------------+
 
 
 
@@ -4707,6 +5674,24 @@ List of properties that are not explicitely defined in the class, its parents or
 
 
 
+.. _undefined-trait:
+
+Undefined Trait
+###############
+
+
+Those traits are undefined.
+
++--------------+-----------------------+
+| Command Line | Traits/UndefinedTrait |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
+
+
 .. _undefined-static\:\:-or-self\:\::
 
 Undefined static:: Or self::
@@ -4763,6 +5748,26 @@ Usage of the PHP 7 Unicode Escape syntax, with the \u{xxxxx} format.
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _unkown-pcre-options:
+
+Unkown PCRE Options
+###################
+
+
+PHP's regex support the following list of options : eimsuxADJSUX. They are detailled in the manual : http://php.net/manual/en/reference.pcre.pattern.modifiers.php. 
+
+All other options are not supported, may be ignored or raise an error.
+
++--------------+------------------------------+
+| Command Line | Structures/UnknownPregOption |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
 
 
 
@@ -4899,6 +5904,41 @@ The following use instructions cannot be resolved to a class or a namespace. The
 +--------------+---------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
+
+
+
+.. _unserialize-second-arg:
+
+Unserialize Second Arg
+######################
+
+
+Since PHP 7, unserialize() function has a second argument that limits the classes that may be unserialized. In case of a breach, this is limiting the classes accessible from unserialize(). 
+
+On way to exploit unserialize, is to make PHP unserialized the data to an available class, may be one that may be auto-loaded.
+
+.. code-block:: php
+
+   <?php
+   
+   // expected Database object
+   $var = unserialize('O:7:dbClass:0:{}');
+   
+   // unexpected load of debugClass object
+   $var = unserialize('O:10:debugClass:0:{}');
+   
+   // Using the unserialized object
+   $var->connect();
+   
+   ?>
+
++--------------+-------------------------------+
+| Command Line | Security/UnserializeSecondArg |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Security`               |
++--------------+-------------------------------+
 
 
 
@@ -5169,6 +6209,76 @@ List of use statement that are not used in the following code : they may be remo
 
 
 
+.. _unusual-case-for-php-functions:
+
+Unusual Case For PHP Functions
+##############################
+
+
+Usually, PHP functions are written all in lower case.
+
++--------------+------------------------------------------------+
+| Command Line | Php/UpperCaseFunction                          |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
+.. _unverified-nonce:
+
+Unverified Nonce
+################
+
+
+Nonces were created in the code with wp\_create\_nonce() function, but they are not verified with wp\_verify\_nonce() nor check\_ajax\_referer()
+
++--------------+---------------------------+
+| Command Line | Wordpress/UnverifiedNonce |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Wordpress`          |
++--------------+---------------------------+
+
+
+
+.. _use-$wpdb-api:
+
+Use $wpdb Api
+#############
+
+
+It is recommended to use the Wordpress Database API, instead of using query. 
+This is especially true for UPDATE, REPLACE, INSERT and DELETE queries.
+
+.. code-block:: php
+
+   <?php
+   
+   // Generic query
+   $wpdb->query('DELETE FROM ' . $table . ' WHERE id=' . $id . ' LIMIT 1');
+   
+   // Wordpress query
+   $wpdb->delete( $table, array( 'id' => $id ), array('id' => '%d')); 
+   
+   ?>
+
+
+See <a href=https://codex.wordpress.org/Class\_Reference/wpdb>Class Reference/wpdb</a>.
+
++--------------+----------------------+
+| Command Line | Wordpress/UseWpdbApi |
++--------------+----------------------+
+| clearPHP     |                      |
++--------------+----------------------+
+| Analyzers    | :ref:`Wordpress`     |
++--------------+----------------------+
+
+
+
 .. _use-===-null:
 
 Use === null
@@ -5229,15 +6339,53 @@ Use Instanceof
 ##############
 
 
-get\_class() should be replaced with the 'instanceof' operator to check the class of an object.
+The instanceof operator is a better alternative to is\_object(). instanceof checks for an variable to be of a class or its parents or the interfaces it implements. 
+Once instanceof has been used, the actual attributes available (properties, constants, methods) are known, unlike with is\_object().
 
-+--------------+--------------------------+
-| Command Line | Structures/UseInstanceof |
-+--------------+--------------------------+
-| clearPHP     |                          |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Analyze`           |
-+--------------+--------------------------+
+Last, instanceof may be upgraded to Typehint, by moving it to the method signature. 
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+   
+       // Don't use is\_object
+       public function bar($o) {
+           if (!is\_object($o)) { return false; } // Classic argument check
+           return $o->method();
+       }
+   
+       // use instanceof
+       public function bar($o) {
+           if ($o instanceof myClass) {  // Now, we know which methods are available
+               return $o->method();
+           }
+           
+           return false; } // Default behavior
+       }
+   
+       // use of typehinting
+       // in case $o is not of the right type, exception is raised automatically
+       public function bar(myClass $o) {
+           return $o->method();
+       }
+   }
+   
+   ?>
+
+
+instanceof and is\_object() may not be always interchangeable. Consider using is\_string(), is\_integer() or is\_scalar(), in particular instead of !is\_object().
+
+The instanceof operator is also faster than the is\_object() functioncall.
+
++--------------+--------------------------------+
+| Command Line | Classes/UseInstanceof          |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
++--------------+--------------------------------+
 
 
 
@@ -5289,13 +6437,13 @@ Use With Fully Qualified Name
 
 PHP manual recommends not to use fully qualified name (starting with \) when using the 'use' statement : they are "the leading backslash is unnecessary and not recommended, as import names must be fully qualified, and are not processed relative to the current namespace".
 
-+--------------+------------------------------------+
-| Command Line | Namespaces/UseWithFullyQualifiedNS |
-+--------------+------------------------------------+
-| clearPHP     |                                    |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Namespaces/UseWithFullyQualifiedNS                             |
++--------------+----------------------------------------------------------------+
+| clearPHP     |                                                                |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -5334,13 +6482,13 @@ define() function is useful when the constant is not known at compile time, or w
      echo b;
    ?>
 
-+--------------+----------------------------+
-| Command Line | Constants/ConstRecommended |
-+--------------+----------------------------+
-| clearPHP     |                            |
-+--------------+----------------------------+
-| Analyzers    | :ref:`Analyze`             |
-+--------------+----------------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Constants/ConstRecommended                                     |
++--------------+----------------------------------------------------------------+
+| clearPHP     |                                                                |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -5611,6 +6759,40 @@ Situations where parenthesis are not necessary, and may be removed.
 
 
 
+.. _useless-switch:
+
+Useless Switch
+##############
+
+
+This switch has only one case. It may very well be replaced by a ifthen structure.
+
+.. code-block:: php
+
+   <?php
+   switch($a) {
+       case 1:
+           doSomething();
+           break;
+   }
+   
+   // Same as 
+   
+   if ($a == 1) {
+       doSomething();
+   }
+   ?>
+
++--------------+--------------------------+
+| Command Line | Structures/UselessSwitch |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
+
 .. _useless-unset:
 
 Useless Unset
@@ -5769,6 +6951,26 @@ This code structure is quite old : it should be replace by the more modern and e
 
 
 
+.. _wpdb-best-usage:
+
+Wpdb Best Usage
+###############
+
+
+Wordpress database API ($wpdb) offers several eponymous methods to safely handle insert, delete, replace and update. 
+
+It is recommended to use them, instead of writing queries with concatenations.
+
++--------------+-------------------------+
+| Command Line | Wordpress/WpdbBestUsage |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Wordpress`        |
++--------------+-------------------------+
+
+
+
 .. _written-only-variables:
 
 Written Only Variables
@@ -5867,6 +7069,44 @@ The expected parameter is not the correct type. Check PHP documentation to know 
 
 
 
+.. _yoda-comparison:
+
+Yoda Comparison
+###############
+
+
+Yoda comparison is a way to write conditions which places literal values on the left side. 
+
+.. code-block:: php
+
+   <?php
+     if (1 == $a) {
+       // Then condition
+     } 
+   ?>
+
+
+The objective is to avoid mistaking a comparison to an assignation. If the comparison operateur is mistaken, but the literal is on the left, then an error will be triggered, instead of a silent bug. 
+
+.. code-block:: php
+
+   <?php
+       // error in comparison! 
+       if ($a = 1) {
+           // Then condition
+       } 
+   ?>
+
++--------------+------------------------------------------------+
+| Command Line | Structures/YodaComparison                      |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _\_\_debuginfo():
 
 \_\_debugInfo()
@@ -5936,6 +7176,24 @@ Using named constants with error\_reporting is strongly encouraged to ensure com
 +--------------+--------------------------------------+
 | Analyzers    | :ref:`Analyze`                       |
 +--------------+--------------------------------------+
+
+
+
+.. _eval()-without-try:
+
+eval() Without Try
+##################
+
+
+eval() emits a ParseError cxception with PHP 7 and later. Catching this exception is the recommended way to handle errors when using the eval() function.
+
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/EvalWithoutTry                                                                                                  |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                            |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6143,9 +7401,9 @@ include\_once() Usage
 #####################
 
 
-All the \_once inclusion functions should be avoided for performances reasons.
+include\_once() and require\_once() functions should be avoided for performances reasons.
 
-Try using auto\_load() for loading classes, or using include() and make it possible to include several times the same file without errors.
+Try using autoload for loading classes, or use include() or require() and make it possible to include several times the same file without errors.
 
 +--------------+----------------------+
 | Command Line | Structures/OnceUsage |
@@ -6210,20 +7468,20 @@ parse\_str() Warning
 ####################
 
 
-The parse\_str function will parse a query string and assign the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the one existing.
+The parse\_str() function parses a query string and assigns the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the existing one.
 
 .. code-block:: php
 
    <?php
-     function x() {
+     function foo( ) {
        global $a;
        
        echo $a;
      }
    
      parse\_str('a=1'); // No second parameter
-     x();
-     // prints 1
+     foo( );
+     // displays 1
    ?>
 
 
@@ -6336,7 +7594,7 @@ They may be tolerated during development time, but must be removed so as not to 
 +--------------+-------------------------------------------------------------------------------------------+
 | clearPHP     | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                            |
+| Analyzers    | :ref:`Analyze`, :ref:`Security`                                                           |
 +--------------+-------------------------------------------------------------------------------------------+
 
 

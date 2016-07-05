@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    Introduction
+   Features
    Installation
    Example
    Commands

@@ -3,6 +3,18 @@
 Exakat commands
 ===============
 
+List of commands :
+------------------
+
+* doctor
+* help
+* init
+* project
+* report
+* remove
+* update
+* upgrade
+
 doctor
 ------
 
@@ -252,8 +264,65 @@ Options
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
 
+report
+------
 
+Produce a report for a project. 
 
+Reports may be produced as soon as exakat has reach the phase of 'analysis'. If the analysis phase hasn't finished, then some results may be unavailable. Run report again later to get the full report. 
+For example, the 'Uml' report may be run fully as soon as exakat is in analysis phase. 
+
+It is possible to extract a report even after the graph database has been cleaned. This allows running several projects one after each other, yet have access to several reports. 
+
+Command
+#######
+::
+
+    exakat report -p <project> -format <Format> -file <file> [-v]
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -p        | Yes | Project name. Should be filesystem compatible (avoid / or \)                |
++-----------+-----+-----------------------------------------------------------------------------+
+| -v        | No  | Verbose mode                                                                |
++-----------+-----+-----------------------------------------------------------------------------+
+| -format   | No  | Which format to extract.                                                    |
+|           |     | Available formats : Devoops, Faceted, FacetedJson, Json, OnepageJson, Text, |
+|           |     |                     Uml, Xml                                                |
+|           |     | Default is 'Text'                                                           |
++-----------+-----+-----------------------------------------------------------------------------+
+| -file     | No  | File or directory name for the report. Adapted file extension is added.     |
+|           |     | Report is located in the projects/<project>/ folder                         |
+|           |     | Default is 'stdout', but varies with format.                                |
++-----------+-----+-----------------------------------------------------------------------------+
+
+Report formats
+##############
+
++-------------+-----------------------------------------------------------------------------+
+| Report      | Description                                                                 |
++-------------+-----------------------------------------------------------------------------+
+| Devoops     | HTML format, with all available reports in one compact format.              |
++-------------+-----------------------------------------------------------------------------+
+| Faceted     | HTML format, with faceted filters                                           |
++-------------+-----------------------------------------------------------------------------+
+| FacetedJson | JSON format, used by Faceted.                                               |
++-------------+-----------------------------------------------------------------------------+
+| Json        | JSON format.                                                                |
++-------------+-----------------------------------------------------------------------------+
+| Text        | Text format. One issue per line, with description, file, line.              |
++-------------+-----------------------------------------------------------------------------+
+| Text        | Text format. One issue per line, with description, file, line.              |
++-------------+-----------------------------------------------------------------------------+
+| Uml         | Dot format. All classes/interfaces/traits hierarchies, and grouped by name- |
+|             | spaces.                                                                     |
++-------------+-----------------------------------------------------------------------------+
+| Xml         | XML format.                                                                 |
++-------------+-----------------------------------------------------------------------------+
 
 update
 ------
@@ -275,4 +344,27 @@ Options
 | -p        | Yes | Project name. Should be filesystem compatible (avoid / or \)                |
 +-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode                                                                |
++-----------+-----+-----------------------------------------------------------------------------+
+
+
+upgrade
+-------
+
+Upgrade exakat itself. By default, this is a dry run : only the availability of a new version is reported. 
+
+Use -u option to actually replace the current phar archive.
+
+Command
+#######
+::
+
+    exakat upgrade 
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -u        | Yes | Actually upgrades exakat. Without it, it is a dry run.                      |
 +-----------+-----+-----------------------------------------------------------------------------+

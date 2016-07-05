@@ -8,7 +8,7 @@ Summary
 
 * `Installation guide with Vagrant and Ansible`_
 * `Installation guide for Debian`_
-* `Installation guide for Osx`_
+* `Installation guide for OSX`_
 * `Generic installation guide`_
 * `Optional installation`_
 
@@ -21,8 +21,8 @@ Installation list
 The exakat-vagrant repository contains an automated install for exakat with the last version. It installs : 
 
 * PHP 5.4, 5.5, 5.6, 7.0 and 7.1 (dev)
-* Neo4j 2.2.7
-* Gremlin 2.0
+* Neo4j 2.3.5
+* Gremlin 3.2
 * Java 8
 * Exakat last version
 
