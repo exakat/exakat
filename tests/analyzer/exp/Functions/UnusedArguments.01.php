@@ -1,18 +1,21 @@
 <?php
 
-$expected     = array('$writenOnly',
-                      '$unused',
+$expected     = array('&$unusedClosureR',
 
-                      '&$unused',
+                      '$writenOnlyClosure',
+                      '$unusedUseClosure',
 
-                      '&$unused',
+                      '&$unusedA2',
 
-                      '$writenOnly',
-                      '$unused',
+                      '$unusedA1',
+                      '$writenOnlyA1',
 
+                      '$traitArgument',
                       '$ClassArgument',
 );
 
-$expected_not = array();
+$expected_not = array('&$readOnly', 
+                      '&$writenOnly', 
+                      '&$readAndWritten',);
 
 ?>

@@ -1,12 +1,12 @@
 <?php 
 
-function a1($readOnlyA1, $writenOnlyA1, $readAndWrittenA1, $unusedA1) { 
+function a1(X $readOnlyA1 = null, X $writenOnlyA1 = null, X $readAndWrittenA1 = null, X $unusedA1 = null) { 
     $writenOnlyA1 = $readOnlyA1 + 1;
     $readAndWrittenA1 = $readAndWrittenA1 * $readOnlyA1;
     $localA1 = 1;
 };
 
-function a2(&$readOnlyA2, &$writenOnlyA2, &$readAndWrittenA2, &$unusedA2) { 
+function a2(X &$readOnlyA2 = null, X &$writenOnlyA2 = null, X &$readAndWrittenA2 = null, X &$unusedA2 = null) { 
     $writenOnlyA2 = $readOnlyA2 + 1;
     $readAndWrittenA2 = $readAndWrittenA2 * $readOnlyA2;
     $localA2 = 1;
