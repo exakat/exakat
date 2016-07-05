@@ -29,17 +29,16 @@ class ImplicitGlobal extends Analyzer\Analyzer {
     public function analyze() {
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 
+        $linksDown = \Tokenizer\Token::linksAsList();
+        $globalGlobal = $this->query('g.V().hasLabel("Global").out("GLOBAL")
+.where( repeat(__.in('.$linksDown.')).until(hasLabel("File")).emit().hasLabel("Function").count().is(eq(0)) )
+.values("code").unique()');
+
         $this->atomIs('Global')
              ->hasFunction()
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
-             ->codeIsNot($superglobals)
-             ->codeIsNot(array('$argv', '$argc'))
-             ->_as('result')
-             ->savePropertyAs('code', 'theGlobal')
-             ->raw('filter{ g.idx("atoms")[["atom":"Global"]].out("GLOBAL").filter{theGlobal == it.code}
-                                                             .filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}.any() == false }')
-             ->back('result');
+             ->codeIsNot($globalGlobal);;
         $this->prepareQuery();
     }
 }
