@@ -48,7 +48,6 @@ g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() 
 GREMLIN;
         $this->gremlin->query($query);
         display('\\self to fullnspath');
-        return;
         
         // processing '\static' fullnspath
         $query = <<<GREMLIN
