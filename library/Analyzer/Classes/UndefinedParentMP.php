@@ -34,7 +34,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
         // parent::method()
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->code('parent')
+             ->codeIs('parent')
              ->goToClass()
              ->hasNoOut('EXTENDS')
              ->back('first');
@@ -43,40 +43,21 @@ class UndefinedParentMP extends Analyzer\Analyzer {
         // parent::method()
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->code('parent')
+             ->codeIs('parent')
              ->hasClassDefinition()
              ->back('first')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             // checking one of the grand-parents is not defining this method
-
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){it.loops < 10}{it.object.atom == "Class"}
-                              .out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("PRIVATE").any() == false}.out("NAME").has("code", name)
-                              .any() == false}')
-
-                // checking parent is not a composer class
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
-                              .any() == false;
-                              }')
-
-                // checking grand-parents are not a composer class
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){it.loops < 10}{it.object.atom == "Class"}
-                              .filter{ it.out("IMPLEMENTS", "EXTENDS").in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
-                              .any() == false;
-                              }')
+             ->goToAllParents()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").where( __.out("PRIVATE").count().is(eq(0)) ).out("NAME").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
         // parent::$property without parent
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->code('parent')
+             ->codeIs('parent')
              ->goToClass()
              ->hasNoOut('EXTENDS')
              ->back('first');
@@ -85,35 +66,14 @@ class UndefinedParentMP extends Analyzer\Analyzer {
         // parent::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->code('parent')
+             ->codeIs('parent')
              ->hasClassDefinition()
              ->inIs('CLASS')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-
-             // checking one of the grand-parents is not defining this property
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){it.loops < 10}{it.object.atom == "Class"}
-                              .out("BLOCK").out("ELEMENT").has("atom", "Visibility").filter{ it.out("PRIVATE").any() == false}.out("DEFINE")
-                              .transform{ if (it.out("LEFT").any()) { it.out("LEFT").next(); } else { it; }} // Case of definition
-                              .has("code", name)
-                              .any() == false}')
-
-                // checking parent is not a composer class
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
-                              .any() == false;
-                              }')
-
-                // checking grand-parents are not a composer class
-             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
-                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                              .loop("extension"){it.loops < 10}{it.object.atom == "Class"}
-                              .filter{ it.out("IMPLEMENTS", "EXTENDS").in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
-                              .any() == false;
-                              }')
+             ->goToAllParents()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(0)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{ it.get().value("propertyname") == name}.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }
