@@ -658,10 +658,10 @@ repeat(__.in('.$linksDown.'))
 
         // Array, is a list of literal
         if (is_array($name)) {
-            $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' in *** )}', $name);
+            $this->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in *** )}', $name);
         } else {
         // String, is a variable name
-            $this->addMethod('filter{ !(it.'.$property.$caseSensitive.' in '.$name.' )}');
+            $this->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in '.$name.' )}');
         }
     
         return $this;
