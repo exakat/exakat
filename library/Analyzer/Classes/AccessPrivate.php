@@ -108,8 +108,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").count().is(eq(0)) )')
              ->goToAllParents()
              ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
-             ->back('first')
-             ;
+             ->back('first');
         $this->prepareQuery(); 
 
         // properties
