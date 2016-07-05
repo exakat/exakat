@@ -92,7 +92,6 @@ SQL;
         }
         $themes = call_user_func_array('array_merge', $themes);
         $themes = array_keys(array_count_values($themes));
-        $themes = ['Structures/PlusEgalOne'];
 
         $rounds = 0;
         $sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
