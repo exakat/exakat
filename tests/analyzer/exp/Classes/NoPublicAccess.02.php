@@ -5,8 +5,7 @@ $expected     = array( '$unused = 2',
                        '$usedInside = 3');
 
 $expected_not = array('$usedByX = 1',
-                      '$usedByXFQN = 1',
-                      
+                      '$usedByXFQN = 1'
                        );
 
 ?>

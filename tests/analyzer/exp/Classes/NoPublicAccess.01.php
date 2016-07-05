@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('$unused = 2',
-                      '$usedInside = 3');
+$expected     = array('$unused = 2');
 
 $expected_not = array('$used',
+                      '$usedInside = 3',
                       '$usedButStatic',
                       '$usedButStatic = 4'
 );
