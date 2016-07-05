@@ -37,6 +37,7 @@ class IsPhpConstant extends Analyzer\Analyzer {
         
         // Namespaced constant (\PATHINFO_BASENAME)
         $this->analyzerIs('Constants/ConstantUsage')
+             ->atomIsNot(array("Boolean", "Null"))
              ->fullnspathIs($constantsFNP);
         $this->prepareQuery();
     }
