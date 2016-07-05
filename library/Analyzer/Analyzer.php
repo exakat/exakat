@@ -1473,12 +1473,17 @@ GREMLIN
     public function isLiteral() {
         // Closures are literal if not using a variable from the context
         $this->addMethod(<<<GREMLIN
-filter{ (it.atom in ["Integer", "Boolean", "Magicconstant", "Real", "String", "Heredoc", "Function"]) ||
-        (it.atom == 'Functioncall' && it.constante == true && it.token in ['T_ARRAY', 'T_OPEN_BRACKET'])
-}
+or( __.hasLabel("Integer", "Boolean", "Magicconstant", "Real", "String", "Heredoc", "Function"), 
+    __.hasLabel("Functioncall").has("constante", true).has("fullnspath", "\\\\array")
+)
 
 GREMLIN
 );
+
+
+//filter{ (it.atom in []) ||
+//        (it.atom == 'Functioncall' && it.constante == true && it.token in ['T_ARRAY', 'T_OPEN_BRACKET'])
+//}
         
         return $this;
     }
