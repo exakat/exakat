@@ -1,10 +1,10 @@
 <?php
 
 $expected     = array('abstract class uselessAbstractClass { /**/ } ',
+                      'abstract class abstractClass { /**/ } ',
                       );
 
 $expected_not = array('class normalClasssWithoutExtends { /**/ } ',
-                      'abstract class abstractClass { /**/ } ',
                       'class abstractSubClass extends abstractClass { /**/ } ');
 
 ?>

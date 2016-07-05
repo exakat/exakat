@@ -34,7 +34,6 @@ class UselessAbstract extends Analyzer\Analyzer {
         // abstract class that are never used
         $this->atomIs('Class')
              ->analyzerIsNot('OnlyStaticMethods')
-             ->raw('where(__.out("BLOCK").has("count", 1).out("ELEMENT").hasLabel("Void").count().is(eq(1)) )')
              ->hasOut('ABSTRACT')
              ->savePropertyAs('fullnspath', 'fnp')
              ->hasNoOut("DEFINITION")
@@ -43,8 +42,10 @@ class UselessAbstract extends Analyzer\Analyzer {
 
         // abstract class without nothing in
         $this->atomIs('Class')
+             ->analyzerIsNot('self')
              ->hasOut('ABSTRACT')
              ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
