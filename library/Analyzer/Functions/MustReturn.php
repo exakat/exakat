@@ -33,10 +33,10 @@ class MustReturn extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->hasNoOut('ABSTRACT')
-             ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Interface").any() == false}')
+             ->hasNoInterface()
              ->outIs('NAME')
-             ->code(array('__call', '__callStatic', '__get', '__isset', '__sleep', '__toString', '__set_state',
-                          '__invoke', '__debugInfo'))
+             ->codeIs(array('__call', '__callStatic', '__get', '__isset', '__sleep', '__toString', '__set_state',
+                            '__invoke', '__debugInfo'))
              ->analyzerIs('Classes/MethodDefinition')
              ->back('first')
              ->noAtomInside('Return');
