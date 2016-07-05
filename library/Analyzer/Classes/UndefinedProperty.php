@@ -39,7 +39,7 @@ class UndefinedProperty extends Analyzer\Analyzer {
              ->inIs('PROPERTY')
              ->analyzerIsNot('Classes/DefinedProperty')
              ->outIs('OBJECT')
-             ->code('$this')
+             ->codeIs('$this')
              ->goToClass()
              ->analyzerIsNot('Classes/HasMagicProperty')
              ->back('first');
