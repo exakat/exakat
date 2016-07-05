@@ -28,10 +28,10 @@ use Analyzer;
 class TimestampDifference extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Addition')
-             ->code('-')
+             ->codeIs('-')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Functioncall')
-             ->fullnspath(array('\\time', '\\microtime'))
+             ->fullnspathIs(array('\\time', '\\microtime'))
              ->back('first');
         $this->prepareQuery();
     }
