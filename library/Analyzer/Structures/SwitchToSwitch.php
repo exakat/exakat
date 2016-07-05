@@ -25,14 +25,17 @@ use Analyzer;
 
 class SwitchToSwitch extends Analyzer\Analyzer {
     public function analyze() {
+        // 3 ifthen chained with elseif
         $this->atomIs('Ifthen')
-             ->hasNoIn('ELSE')
+             ->tokenIs('T_IF')
              ->outIs('ELSE')
-             ->raw('transform{ if (it.atom == "Sequence" && it.count == 1) { it.out("ELEMENT").next(); } else { it; }}')
+
              ->atomIs('Ifthen')
+             ->tokenIs('T_ELSEIF')
              ->outIs('ELSE')
-             ->raw('transform{ if (it.atom == "Sequence" && it.count == 1) { it.out("ELEMENT").next(); } else { it; }}')
+
              ->atomIs('Ifthen')
+             ->tokenIs('T_ELSEIF')
              ->back('first');
         $this->prepareQuery();
     }
