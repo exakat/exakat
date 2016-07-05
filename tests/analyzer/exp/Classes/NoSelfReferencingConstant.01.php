@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('C = self::C',
-                      'UPPERC = SELF::C',
+                      'UPPERC = SELF::UPPERC',
                       'CSE_C = SELF::C + 1',
 );
 
