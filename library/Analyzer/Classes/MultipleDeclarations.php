@@ -28,8 +28,12 @@ use Analyzer;
 class MultipleDeclarations extends Analyzer\Analyzer {
     public function analyze() {
         // case-insensitive constants
+
+        $multiples = $this->query('g.V().hasLabel("Class")groupCount("m").by("fullnspath").cap("m").next().findAll{ a,b -> b > 1}');
+        $multiples = array_keys((array) $multiples);
+
         $this->atomIs('Class')
-             ->raw('groupCount(m){it.fullnspath}.aggregate().filter{m[it.fullnspath] > 1}');
+             ->fullnspathIs($multiples);
         $this->prepareQuery();
     }
 }
