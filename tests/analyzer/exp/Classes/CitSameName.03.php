@@ -1,7 +1,9 @@
 <?php
 
 $expected     = array('interface T { /**/ } ',
+                      'interface T { /**/ } ',
                       'class T { /**/ } ',
+                      'trait T { /**/ } ',
                       'trait T { /**/ } ',
                       );
 
