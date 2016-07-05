@@ -153,7 +153,7 @@ class Load extends Tasks {
                         	
                         T_QUESTION                    => 18,
                
-                        T_EQUAL                       => 19,
+                        T_EQUAL                       => 14,
                         T_PLUS_EQUAL                  => 19,
                         T_AND_EQUAL                   => 19,
                         T_CONCAT_EQUAL                => 19,
@@ -2972,7 +2972,7 @@ class Load extends Tasks {
     }
     
     private function processThrow() {
-        return $this->processSingleOperator('Throw', $this->getPrecedence($this->tokens[$this->id][0]), 'THROW');
+        return $this->processSingleOperator('Throw', $this->getPrecedence($this->tokens[$this->id][0]), 'THROW', ' ');
     }
 
     private function processYield() {
@@ -3090,7 +3090,9 @@ class Load extends Tasks {
             $code *= $this->tokens[$this->id][1].'1';
         }
 
-        if ($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) {
+        // -3 ** 3 => -(3 ** 3)
+        if (($this->tokens[$this->id + 1][0] == T_LNUMBER || $this->tokens[$this->id + 1][0] == T_DNUMBER) &&
+            $this->tokens[$this->id + 2][0] != T_POW) {
             $operandId = $this->processNext();
 
             $x = ['code'     => $sign . $this->atoms[$operandId]['code'],
