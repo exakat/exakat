@@ -30,12 +30,12 @@ class DefinedStaticMP extends Analyzer\Analyzer {
         // static::method() 1rst level
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->code(array('static', 'self'))
+             ->codeIs(array('static', 'self'))
              ->back('first')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").out("NAME").has("code", name).any()}')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -43,20 +43,20 @@ class DefinedStaticMP extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('self')
              ->outIs('CLASS')
-             ->code(array('static', 'self'))
+             ->codeIs(array('static', 'self'))
              ->back('first')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
              ->goToAllParents()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").out("NAME").has("code", name).any()}')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
         // static::$property the current class
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->code(array('static', 'self'))
+             ->codeIs(array('static', 'self'))
              ->back('first')
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
@@ -64,8 +64,8 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->goToClass()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->outIs('DEFINE')
+             ->atomIs('Ppp')
+             ->outIs('PPP')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
              ->back('first');
@@ -75,7 +75,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
         $this->atomIs('Staticproperty')
              ->analyzerIsNot('self')
              ->outIs('CLASS')
-             ->code(array('static', 'self'))
+             ->codeIs(array('static', 'self'))
              ->back('first')
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
@@ -84,8 +84,8 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->goToAllParents()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->outIs('DEFINE')
+             ->atomIs('Ppp')
+             ->outIs('PPP')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
              ->back('first');
