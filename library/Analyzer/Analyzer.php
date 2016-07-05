@@ -67,6 +67,9 @@ abstract class Analyzer {
     const T_SLOW    = 'Slow';    //60';
     const T_LONG    = 'Long';    //360';
 
+    const CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
+    const LITERALS = array('Integer', 'Float', 'Null', 'Boolean', 'String');
+
     private $isCompatible            = self::UNKNOWN_COMPATIBILITY;
     const COMPATIBLE                 =  0;
     const UNKNOWN_COMPATIBILITY      = -1;
@@ -447,91 +450,7 @@ repeat(__.in('.$linksDown.'))
 
         return $this;
     }
-
-    public function classIs($class) {
-        if (is_array($class)) {
-            $this->addMethod('as("classIs").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token != "T_CLASS" || it.out("NAME").next().code in ***}.back("classIs")', $class);
-        } elseif ($class == 'Global') {
-            $this->addMethod('as("classIs").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token != "T_CLASS"}.back("classIs")');
-        } else {
-            $this->addMethod('as("classIs").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token != "T_CLASS" || it.out("NAME").next().code != ***}.back("classIs")', $class);
-        }
-        
-        return $this;
-    }
-
-    public function classIsNot($class) {
-        if (is_array($class)) {
-            $this->addMethod('as("classIsNot").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || !(it.out("NAME").next().code in ***)}.back("classIsNot")', $class);
-        } elseif ($class == 'Global') {
-            $this->addMethod('as("classIsNot").in.loop(1){!(it.object.token in ["T_CLASS"])}.back("classIsNot")');
-        } else {
-            $this->addMethod('as("classIsNot").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != ***}.back("classIsNot")', $class);
-        }
-        
-        return $this;
-    }
-
-    public function traitIs($trait) {
-        if (is_array($trait)) {
-            $this->addMethod('as("traitIs").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token != "T_TRAIT" || !(it.out("NAME").next().code in ***)}.back("traitIs")', $trait);
-        } elseif ($trait == 'Global') {
-            $this->addMethod('as("traitIs").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token != "T_TRAIT"}.back("traitIs")');
-        } else {
-            $this->addMethod('as("traitIs").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token != "T_TRAIT" || it.out("NAME").next().code != ***}.back("traitIs")', $trait);
-        }
-        
-        return $this;
-    }
-
-    public function traitIsNot($trait) {
-        if (is_array($trait)) {
-            $this->addMethod('as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || !(it.out("NAME").next().code in ***)}.back("traitIsNot")', $trait);
-        } elseif ($trait == 'Global') {
-            $this->addMethod('as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT"])}.back("traitIsNot")');
-        } else {
-            $this->addMethod('as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != ***}.back("traitIsNot")', $trait);
-        }
-        
-        return $this;
-    }
     
-    public function functionIs($function) {
-        if (is_array($function)) {
-            $this->addMethod('as("functionIs").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token != "T_FILENAME" || it.out("NAME").next().code in ***}.back("functionIs")', $function);
-        } elseif ($function == 'Global') {
-            $this->addMethod('as("functionIs").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token != "T_FUNCTION"}.back("functionIs")');
-        } else {
-            $this->addMethod('as("functionIs").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token != "T_FILENAME" || it.out("NAME").next().code != ***}.back("functionIs")', $function);
-        }
-        
-        return $this;
-    }
-
-    public function functionIsNot($function) {
-        if (is_array($function)) {
-                $this->addMethod('as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || !(it.out("NAME").next().code in ***)}.back("functionIsNot")', $function);
-        } elseif ($function == 'Global') {
-            $this->addMethod('as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION"])}.back("functionIsNot")');
-        } else {
-            $this->addMethod('as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != ***}.back("functionIsNot")', $function);
-        }
-        
-        return $this;
-    }
-
-    public function namespaceIs($namespace) {
-        if (is_array($namespace)) {
-            $this->addMethod('as("namespaceIs").in.loop(1){!(it.object.token in ["T_NAMESPACE", "T_FILENAME"])}.filter{ it.token == "T_NAMESPACE" && it.code in *** }.back("namespaceIs")', $namespace);
-        } elseif ($namespace == 'Global') {
-            $this->addMethod('as("namespaceIs").in.loop(1){!(it.object.token in ["T_NAMESPACE", "T_FILENAME"])}.filter{ it.token == "T_FILENAME" || it.out("NAMESPACE").next().code == "Global" }.back("namespaceIs")');
-        } else {
-            $this->addMethod('as("namespaceIs").in.loop(1){!(it.object.token in ["T_NAMESPACE", "T_FILENAME"])}.filter{ it.token == "T_NAMESPACE" && it.code == *** }.back("namespaceIs")', $namespace);
-        }
-        
-        return $this;
-    }
-
     public function atomInside($atom) {
         $gremlin = 'repeat( out() ).times(15).emit( hasLabel('.$this->SorA($atom).') )';
         $this->addMethod($gremlin);
@@ -747,7 +666,7 @@ repeat(__.in('.$linksDown.'))
     
         return $this;
     }
-
+    
     public function sameContextAs($storage = 'context', $context = array('Namespace', 'Class', 'Function')) {
         foreach($context as &$c) {
             $c = $storage.'["'.$c.'"] == '.$context.'["'.$c.'"] ';
@@ -887,7 +806,7 @@ GREMLIN
 
     public function fullcodeLength($length = ' == 1 ') {
         // @todo add some tests ? Like Operator / value ?
-        $this->addMethod("filter{it.fullcode.length() $length}");
+        $this->addMethod('filter{it.get().value("fullcode").length() '.$length.'}');
 
         return $this;
     }
@@ -1195,14 +1114,13 @@ GREMLIN
     }
 
     public function goToArray() {
-//                     ->raw('in("VARIABLE").loop(1){true}{it.object.atom == "Array"}')
         $this->goToInstruction('Array');
         
         return $this;
     }
     
     public function goToCurrentScope() {
-        $this->addMethod('in.loop(1){!(it.object.atom in ["Function", "Phpcode"])}{(it.object.atom in ["Function", "Phpcode"])}');
+        $this->goToInstruction(array('Function', 'Phpcode'));
         
         return $this;
     }
@@ -1253,15 +1171,13 @@ GREMLIN
     }
 
     public function hasClassDefinition() {
-        $this->addMethod("filter{ g.idx('classes')[['path':it.fullnspath]].any()}");
+        $this->addMethod('where(__.in("DEFINITION").count().is(eq(1)))');
     
         return $this;
     }
 
     public function interfaceDefinition() {
-        $this->addMethod('hasNot("fullnspath", null)
-                         .filter{ g.idx("interfaces").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("interfaces")[["path":it.fullnspath]].next(); }');
+        $this->addMethod('in("DEFINITION")');
     
         return $this;
     }
@@ -1473,6 +1389,12 @@ GREMLIN
 
     public function hasNoTryCatch() {
         $this->hasNoInstruction('Try');
+        
+        return $this;
+    }
+
+    public function hasNoCatch() {
+        $this->hasNoInstruction('Catch');
         
         return $this;
     }
