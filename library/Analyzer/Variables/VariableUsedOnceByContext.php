@@ -34,7 +34,25 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $this->atomIs('Function')
+             ->outIs('BLOCK')
+             ->raw('where( __
+                   .sideEffect{counts = [:]}
+                             .repeat( out() ).emit( hasLabel("Variable")).times(15)
+                             .sideEffect{ k = it.get().value("code"); 
+                                         if (counts[k] == null) {
+                                            counts[k] = 1;
+                                         } else {
+                                            counts[k]++;
+                                         }
+                              }.fold()
+                          )
+                          .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
+                          .repeat( out() ).emit( hasLabel("Variable")).times(15)
+                          .filter{ it.get().value("code") in names }');
+        $this->prepareQuery();
 
+        return;
         // Variables outside a closure
         $this->atomIs('Variable')
         
