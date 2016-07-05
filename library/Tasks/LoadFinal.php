@@ -42,12 +42,13 @@ GREMLIN;
         // processing '\self' fullnspath
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() == "\\\\self"}
-.property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("NAME").values("fullnspath") )
-.addE('DEFINITION').from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)) )
+.property('fullnspath', __.until( and( hasLabel("Class", "Interface"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("NAME").values("fullnspath") )
+.addE('DEFINITION').from( __.until( and( hasLabel("Class", "Interface"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)) )
 
 GREMLIN;
         $this->gremlin->query($query);
         display('\\self to fullnspath');
+        return;
         
         // processing '\static' fullnspath
         $query = <<<GREMLIN
