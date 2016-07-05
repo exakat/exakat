@@ -32,11 +32,14 @@ class UselessGlobal extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        return ;
         // Global are unused if used only once
         $inGlobals = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Variable"]].has("code", "\\\$GLOBALS").in("VARIABLE").has("atom", "Array").out("INDEX").has("atom", "String").transform{ '\$' + it.noDelimiter}.unique()
+g.V().hasLabel("Variable").has("code", "\\\$GLOBALS").in("VARIABLE").hasLabel("Array").out("INDEX").hasLabel("String").map{ '\$' + it.get().value("noDelimiter")}.unique()
 GREMLIN
 );
+        print_r($inGlobals);
+        
         $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->analyzerIsNot('Structures/UnusedGlobal')
@@ -46,9 +49,10 @@ GREMLIN
         $this->prepareQuery();
 
         $globals = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Global"]].out("GLOBAL").has("atom", "Variable").has("token", "T_VARIABLE").transform{ it.code.substring(1, it.code.size())}.unique()
+g.V().hasLabel("Global").out("GLOBAL").hasLabel("Variable").has("token", "T_VARIABLE").map{ it.get().value("code").substring(1, it.get().value("code").size())}.unique()
 GREMLIN
 );
+        print_r($globals);die();
         $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->code('$GLOBALS', true)
@@ -64,7 +68,7 @@ GREMLIN
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
         $this->atomIs('Global')
              ->outIs('GLOBAL')
-             ->code($superglobals);
+             ->codeIs($superglobals);
         $this->prepareQuery();
         
         // used only once
