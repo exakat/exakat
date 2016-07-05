@@ -31,7 +31,7 @@ class ShouldPreprocess extends Analyzer\Analyzer {
         
         // $a = array(); $a[1] = 2;
         $this->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->atomIs('Variable')
              ->savePropertyAs('fullcode', 'tableau')
@@ -41,7 +41,7 @@ class ShouldPreprocess extends Analyzer\Analyzer {
              ->inIs('RIGHT')
              ->nextSibling()
              ->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->atomIs('Array')
              ->outIs('VARIABLE')
@@ -51,7 +51,7 @@ class ShouldPreprocess extends Analyzer\Analyzer {
 
         // $a->b = array(); $a->b[1] = 2;
         $this->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->atomIs(array('Property', 'Staticproperty'))
              ->outIs(array('OBJECT', 'CLASS'))
@@ -66,7 +66,7 @@ class ShouldPreprocess extends Analyzer\Analyzer {
              ->inIs('RIGHT')
              ->nextSibling()
              ->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->atomIs('Array')
              ->outIs('VARIABLE')
@@ -82,7 +82,7 @@ class ShouldPreprocess extends Analyzer\Analyzer {
         // same as above with $array[]
         // in case this is the first one in the sequence
         $this->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->atomIs($variables)
              ->savePropertyAs('fullcode', 'tableau')
@@ -92,7 +92,7 @@ class ShouldPreprocess extends Analyzer\Analyzer {
              ->inIs('RIGHT')
              ->nextSibling()
              ->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->outIsIE('PROPERTY')
              ->atomIs('Arrayappend')

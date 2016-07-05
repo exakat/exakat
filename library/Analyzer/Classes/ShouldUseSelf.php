@@ -30,6 +30,7 @@ class ShouldUseSelf extends Analyzer\Analyzer {
     public function analyze() {
         // full nsname\classname instead of self
         $this->atomIs('Staticconstant')
+             ->hasClass()
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('parent', 'self'))
@@ -40,6 +41,7 @@ class ShouldUseSelf extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
+             ->hasClass()
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('parent', 'self'))
@@ -50,6 +52,7 @@ class ShouldUseSelf extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall')
+             ->hasClass()
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('parent', 'self'))
