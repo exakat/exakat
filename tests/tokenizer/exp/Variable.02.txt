@@ -8,3 +8,5 @@ Label : FILE
       ;
       Label : ELEMENT
         $C1
+      Label : ELEMENT
+        Void

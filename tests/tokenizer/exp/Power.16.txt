@@ -1,7 +1,7 @@
 .
-Label : LEFT
+Label : CONCAT
   '1'
-Label : RIGHT
+Label : CONCAT
   **
   Label : LEFT
     $s

@@ -2,9 +2,9 @@
 
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     C
-  Label : RIGHT
+  Label : CONCAT
     ::
     Label : CLASS
       D
@@ -14,9 +14,9 @@ Label : ARGUMENT
         )
         Label : ARGUMENT
           .
-          Label : LEFT
+          Label : CONCAT
             'f'
-          Label : RIGHT
+          Label : CONCAT
             $g
       Label : NAME
         e

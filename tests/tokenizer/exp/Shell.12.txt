@@ -1,3 +1,7 @@
 +
+Label : LEFT
+  "
+  Label : CONCAT
+    $b
 Label : RIGHT
   1

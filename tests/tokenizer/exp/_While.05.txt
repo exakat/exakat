@@ -7,10 +7,12 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        while (1)  { /**/ } 
+        while
         Label : BLOCK
           ;
           Label : ELEMENT
             Void
         Label : CONDITION
           1
+      Label : ELEMENT
+        Void

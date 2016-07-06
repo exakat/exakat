@@ -25,9 +25,9 @@ Label : ARGUMENT
         empty
   Label : ELSE
     .
-    Label : LEFT
+    Label : CONCAT
       'G'
-    Label : RIGHT
+    Label : CONCAT
       ]
       Label : INDEX
         'I'

@@ -30,19 +30,21 @@ Label : ARGUMENT
             Label : ARGUMENTS
 123098120398 [label="Reached level 15"]            Label : NAME
 123098120398 [label="Reached level 15"]          Label : ELEMENT
-            =
+            ||
             Label : LEFT
 123098120398 [label="Reached level 15"]            Label : RIGHT
 123098120398 [label="Reached level 15"]          Label : ELEMENT
-            =
-            Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
+            ?
+            Label : CONDITION
+123098120398 [label="Reached level 15"]            Label : ELSE
+123098120398 [label="Reached level 15"]            Label : THEN
 123098120398 [label="Reached level 15"]          Label : ELEMENT
-            =
-            Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
+            ?
+            Label : CONDITION
+123098120398 [label="Reached level 15"]            Label : ELSE
+123098120398 [label="Reached level 15"]            Label : THEN
 123098120398 [label="Reached level 15"]          Label : ELEMENT
-            =
+            ??
             Label : LEFT
 123098120398 [label="Reached level 15"]            Label : RIGHT
 123098120398 [label="Reached level 15"]          Label : ELEMENT
@@ -61,6 +63,6 @@ Label : ARGUMENT
             Label : YIELD
 123098120398 [label="Reached level 15"]          Label : ELEMENT
             yield from
-            Label : RETURN
+            Label : YIELD
 123098120398 [label="Reached level 15"]        Label : NAME
           Void

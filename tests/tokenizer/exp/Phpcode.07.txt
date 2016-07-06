@@ -11,7 +11,13 @@ Label : FILE
           $x
       Label : ELEMENT
         Void
+  Label : ELEMENT
+    <?php 
+    Label : CODE
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $y
+      Label : ELEMENT
+        Void

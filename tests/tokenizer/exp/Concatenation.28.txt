@@ -1,1 +1,25 @@
 ;
+Label : ARGUMENT
+  "
+  Label : CONCAT
+    a 
+  Label : CONCAT
+    ->
+    Label : OBJECT
+      $this
+    Label : PROPERTY
+      b
+  Label : CONCAT
+     c 
+  Label : CONCAT
+    "
+    Label : OBJECT
+      $item
+    Label : PROPERTY
+      d
+  Label : CONCAT
+     
+  Label : CONCAT
+    $e
+  Label : CONCAT
+     f 

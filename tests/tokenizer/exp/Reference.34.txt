@@ -1,7 +1,7 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     ::
     Label : CLASS
       D
@@ -13,5 +13,5 @@ Label : ARGUMENT
           Void
       Label : NAME
         E
-  Label : RIGHT
+  Label : CONCAT
     'F'

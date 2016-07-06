@@ -7,7 +7,7 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if (1) { /**/ } 
+        if
         Label : CONDITION
           1
         Label : THEN
@@ -15,7 +15,7 @@ Label : FILE
           Label : ELEMENT
             $d
       Label : ELEMENT
-        foreach ($a as $b)  { /**/ } 
+        foreach
         Label : BLOCK
           {}
           Label : ELEMENT

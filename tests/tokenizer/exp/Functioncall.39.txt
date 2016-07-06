@@ -7,21 +7,17 @@ Label : ARGUMENT
     $e
   Label : THEN
     .
-    Label : LEFT
-      .
-      Label : LEFT
-        .
-        Label : LEFT
-          $b
-        Label : RIGHT
-          $c
-      Label : RIGHT
+    Label : CONCAT
+      $b
+    Label : CONCAT
+      $c
+    Label : CONCAT
+      e
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          'h'
+      Label : NAME
         e
-        Label : ARGUMENTS
-          )
-          Label : ARGUMENT
-            'h'
-        Label : NAME
-          e
-    Label : RIGHT
+    Label : CONCAT
       'd'

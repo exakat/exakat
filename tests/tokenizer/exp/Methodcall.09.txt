@@ -1,7 +1,7 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     require
     Label : ARGUMENTS
       __DIR__
@@ -9,5 +9,5 @@ Label : ARGUMENT
         __DIR__
     Label : NAME
       require
-  Label : RIGHT
+  Label : CONCAT
     '/b.php'

@@ -8,3 +8,7 @@ Label : FILE
       ;
       Label : ELEMENT
         *
+        Label : LEFT
+          '1'
+        Label : RIGHT
+          "3"

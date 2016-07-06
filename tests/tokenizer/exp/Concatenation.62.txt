@@ -1,5 +1,23 @@
-)
-Label : ARGUMENT
-  'C'
-Label : ARGUMENT
-  'D'
++
+Label : LEFT
+  .
+  Label : CONCAT
+    'H'
+  Label : CONCAT
+    ->
+    Label : OBJECT
+      $a
+    Label : PROPERTY
+      I
+  Label : CONCAT
+    Void
+Label : RIGHT
+  '0'
+  Label : CODE
+    ?
+    Label : CONDITION
+      true
+    Label : ELSE
+      '0'
+    Label : THEN
+      '1'

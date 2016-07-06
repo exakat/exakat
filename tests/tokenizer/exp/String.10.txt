@@ -1,3 +1,15 @@
 =
 Label : LEFT
   $loc
+Label : RIGHT
+  "
+  Label : CONCAT
+    "
+    Label : OBJECT
+      $a
+    Label : PROPERTY
+      b
+  Label : CONCAT
+     c 
+  Label : CONCAT
+    $d

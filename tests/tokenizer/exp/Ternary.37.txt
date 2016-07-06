@@ -1,7 +1,7 @@
 ?>
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     'E'
     Label : CODE
       ?
@@ -20,7 +20,7 @@ Label : ARGUMENT
         'E'
       Label : THEN
         'D'
-  Label : RIGHT
+  Label : CONCAT
     ]
     Label : INDEX
       'F'

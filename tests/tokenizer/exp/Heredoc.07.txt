@@ -3,11 +3,15 @@ Label : ARGUMENT
   <<<HEREDOC
 
   Label : CONCAT
+    a
+  Label : CONCAT
     ]
     Label : INDEX
       1
     Label : VARIABLE
       $b
+  Label : CONCAT
+    c
   Label : CONCAT
     ]
     Label : INDEX
@@ -19,17 +23,13 @@ Label : ARGUMENT
       Label : VARIABLE
         $d
   Label : CONCAT
+    e
+  Label : CONCAT
     ->
     Label : OBJECT
       $f
     Label : PROPERTY
       h
-  Label : CONCAT
-    a
-  Label : CONCAT
-    c
-  Label : CONCAT
-    e
   Label : CONCAT
     g
 

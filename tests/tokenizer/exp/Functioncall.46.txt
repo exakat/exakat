@@ -5,9 +5,21 @@ Label : ARGUMENT
     ?
     Label : CONDITION
       $j
+    Label : ELSE
+      'H'
+    Label : THEN
+      'A'
+Label : ARGUMENT
+  'I'
 Label : ARGUMENT
   "K"
   Label : CODE
     ?
     Label : CONDITION
       $j
+    Label : ELSE
+      "K"
+    Label : THEN
+      "J"
+Label : ARGUMENT
+  'K'

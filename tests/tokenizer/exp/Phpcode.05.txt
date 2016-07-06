@@ -9,5 +9,5 @@ Label : FILE
       ;
       Label : ELEMENT
         Void
-      Label : ELEMENT
-        B
+  Label : ELEMENT
+    B

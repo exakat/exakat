@@ -6,7 +6,7 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        foreach ($a as $b => $c)  { /**/ } 
+        foreach
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -20,5 +20,7 @@ Label : FILE
             $b
           Label : VALUE
             $c
+      Label : ELEMENT
+        Void
       Label : ELEMENT
         Void

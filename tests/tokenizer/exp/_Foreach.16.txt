@@ -7,7 +7,7 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        foreach ($a as $x->a => &$y)  { /**/ } 
+        foreach
         Label : BLOCK
           {}
           Label : ELEMENT

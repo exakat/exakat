@@ -5,19 +5,21 @@ Label : ARGUMENT
     'B'
   Label : VALUE
     .
-    Label : LEFT
-      .
-      Label : LEFT
-        'C'
-      Label : RIGHT
-        new
-        Label : NEW
+    Label : CONCAT
+      'C'
+    Label : CONCAT
+      new
+      Label : NEW
+        D
+        Label : ARGUMENTS
+          )
+          Label : ARGUMENT
+            'E'
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : NAME
           D
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            D
-    Label : RIGHT
+    Label : CONCAT
       'G'

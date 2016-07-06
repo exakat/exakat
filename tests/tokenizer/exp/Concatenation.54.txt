@@ -3,9 +3,9 @@ Label : ARGUMENT
   =>
   Label : KEY
     .
-    Label : LEFT
+    Label : CONCAT
       'b'
-    Label : RIGHT
+    Label : CONCAT
       'c'
   Label : VALUE
     1
@@ -13,19 +13,17 @@ Label : ARGUMENT
   =>
   Label : KEY
     .
-    Label : LEFT
+    Label : CONCAT
       'd'
-    Label : RIGHT
+    Label : CONCAT
       'e'
   Label : VALUE
     .
-    Label : LEFT
-      .
-      Label : LEFT
-        'f'
-      Label : RIGHT
-        'g'
-    Label : RIGHT
+    Label : CONCAT
+      'f'
+    Label : CONCAT
+      'g'
+    Label : CONCAT
       'h'
 Label : ARGUMENT
   =>
@@ -33,7 +31,7 @@ Label : ARGUMENT
     3
   Label : VALUE
     .
-    Label : LEFT
+    Label : CONCAT
       'i'
-    Label : RIGHT
+    Label : CONCAT
       'j'

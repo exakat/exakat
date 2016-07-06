@@ -1,3 +1,17 @@
 =
 Label : LEFT
   $x
+Label : RIGHT
+  "
+  Label : CONCAT
+    a=
+  Label : CONCAT
+    $b
+  Label : CONCAT
+    &
+  Label : CONCAT
+    $c
+  Label : CONCAT
+    =
+  Label : CONCAT
+    $d

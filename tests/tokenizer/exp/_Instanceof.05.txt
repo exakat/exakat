@@ -12,7 +12,7 @@ Label : FILE
         Label : VARIABLE
           $a
       Label : ELEMENT
-        if ($a instanceof  ) { /**/ } 
+        if
         Label : CONDITION
           instanceof
           Label : CLASS
@@ -23,3 +23,5 @@ Label : FILE
           ;
           Label : ELEMENT
             Void
+      Label : ELEMENT
+        Void

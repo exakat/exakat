@@ -50,23 +50,45 @@ Label : ARGUMENT
     'T'
   Label : THEN
     .
-    Label : LEFT
-      .
-      Label : LEFT
-        .
-        Label : LEFT
-          .
-          Label : LEFT
-            .
-            Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
-123098120398 [label="Reached level 15"]          Label : RIGHT
-            ::
-            Label : CLASS
-123098120398 [label="Reached level 15"]            Label : METHOD
-123098120398 [label="Reached level 15"]        Label : RIGHT
-          'X'
-      Label : RIGHT
-        $c
-    Label : RIGHT
+    Label : CONCAT
+      'L'
+    Label : CONCAT
+      ]
+      Label : INDEX
+        'M'
+      Label : VARIABLE
+        $d
+    Label : CONCAT
+      'N'
+    Label : CONCAT
+      ]
+      Label : INDEX
+        'O'
+      Label : VARIABLE
+        $d
+    Label : CONCAT
+      'C'
+    Label : CONCAT
+      ::
+      Label : CLASS
+        D
+      Label : METHOD
+        E
+        Label : ARGUMENTS
+          )
+          Label : ARGUMENT
+            'S'
+          Label : ARGUMENT
+            'T'
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : NAME
+          E
+    Label : CONCAT
+      'X'
+    Label : CONCAT
+      $c
+    Label : CONCAT
       'K'

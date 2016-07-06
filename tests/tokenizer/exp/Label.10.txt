@@ -1,4 +1,4 @@
-case $b instanceof \C : /**/ 
+case $b instanceof \C :  /**/  
 Label : CASE
   instanceof
   Label : CLASS

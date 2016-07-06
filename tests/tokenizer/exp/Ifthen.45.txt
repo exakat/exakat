@@ -6,11 +6,11 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if (1) { /**/ } elseif (2) { /**/ } else /**/ 
+        if
         Label : CONDITION
           1
         Label : ELSE
-          elseif (2) { /**/ } else /**/ 
+          elseif
           Label : CONDITION
             2
           Label : ELSE
@@ -27,3 +27,5 @@ Label : FILE
             Void
           Label : ELEMENT
             A
+      Label : ELEMENT
+        Void

@@ -1,9 +1,9 @@
 -
 Label : LEFT
   .
-  Label : LEFT
+  Label : CONCAT
     '+'
-  Label : RIGHT
+  Label : CONCAT
     ->
     Label : OBJECT
       $d

@@ -1,9 +1,9 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     'D'
-  Label : RIGHT
+  Label : CONCAT
     $e
 Label : ARGUMENT
   f

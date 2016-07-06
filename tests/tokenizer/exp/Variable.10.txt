@@ -1,3 +1,7 @@
 =
 Label : LEFT
   $a
+Label : RIGHT
+  "
+  Label : CONCAT
+    $y

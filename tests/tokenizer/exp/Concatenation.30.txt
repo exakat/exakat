@@ -1,3 +1,11 @@
 =
 Label : LEFT
   $x
+Label : RIGHT
+  "
+  Label : CONCAT
+    (
+  Label : CONCAT
+    $derivedSelect
+  Label : CONCAT
+    )

@@ -1,9 +1,9 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     __NAMESPACE__
-  Label : RIGHT
+  Label : CONCAT
     '\C'
 Label : ARGUMENT
   array

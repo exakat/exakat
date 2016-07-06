@@ -3,13 +3,13 @@ Label : ARGUMENT
   ]
   Label : INDEX
     .
-    Label : LEFT
+    Label : CONCAT
       ]
       Label : INDEX
         1
       Label : VARIABLE
         $c
-    Label : RIGHT
+    Label : CONCAT
       '2'
   Label : VARIABLE
     $b

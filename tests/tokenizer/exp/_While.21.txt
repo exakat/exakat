@@ -7,10 +7,12 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        while ($x)  { /**/ } 
+        while
         Label : BLOCK
           ;
           Label : ELEMENT
             Void
         Label : CONDITION
           $x
+      Label : ELEMENT
+        Void

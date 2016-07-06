@@ -6,17 +6,15 @@ Label : ARGUMENT
     )
     Label : ARGUMENT
       .
-      Label : LEFT
-        .
-        Label : LEFT
-          'F'
-        Label : RIGHT
-          ]
-          Label : INDEX
-            'G'
-          Label : VARIABLE
-            $d
-      Label : RIGHT
+      Label : CONCAT
+        'F'
+      Label : CONCAT
+        ]
+        Label : INDEX
+          'G'
+        Label : VARIABLE
+          $d
+      Label : CONCAT
         'H'
     Label : ARGUMENT
       I

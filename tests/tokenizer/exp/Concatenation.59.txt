@@ -3,9 +3,9 @@ Label : LEFT
   $a
 Label : RIGHT
   .
-  Label : LEFT
+  Label : CONCAT
     'd'
-  Label : RIGHT
+  Label : CONCAT
     <<<HEREDOC
 
     Label : CONCAT

@@ -30,9 +30,9 @@ Label : ARGUMENT
       )
       Label : ARGUMENT
         .
-        Label : LEFT
+        Label : CONCAT
           'G'
-        Label : RIGHT
+        Label : CONCAT
           ]
           Label : INDEX
             'H'

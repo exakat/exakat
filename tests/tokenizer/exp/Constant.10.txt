@@ -8,4 +8,4 @@ Label : ARGUMENT
   Label : ELSE
     $c
   Label : THEN
-    Void
+    null

@@ -1,1 +1,33 @@
 ;
+Label : ARGUMENT
+  "
+  Label : CONCAT
+    a
+  Label : CONCAT
+    ]
+    Label : INDEX
+      1
+    Label : VARIABLE
+      $b
+  Label : CONCAT
+    c
+  Label : CONCAT
+    ]
+    Label : INDEX
+      4
+    Label : VARIABLE
+      ]
+      Label : INDEX
+        2
+      Label : VARIABLE
+        $d
+  Label : CONCAT
+    e
+  Label : CONCAT
+    ->
+    Label : OBJECT
+      $f
+    Label : PROPERTY
+      h
+  Label : CONCAT
+    g

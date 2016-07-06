@@ -3,9 +3,9 @@ Label : LEFT
   $x
 Label : RIGHT
   .
-  Label : LEFT
+  Label : CONCAT
     'a'
-  Label : RIGHT
+  Label : CONCAT
     ++
     Label : POSTPLUSPLUS
       $b

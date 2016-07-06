@@ -46,3 +46,5 @@ Label : FILE
             5
         Label : THEN
           1
+      Label : ELEMENT
+        Void

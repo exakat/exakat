@@ -3,5 +3,7 @@ Label : ARGUMENT
   $
   Label : NAME
     .
-    Label : RIGHT
+    Label : CONCAT
+      'E'
+    Label : CONCAT
       $a

@@ -5,21 +5,19 @@ Label : ARGUMENT
   $x
 Label : ARGUMENT
   .
-  Label : LEFT
-    .
-    Label : LEFT
+  Label : CONCAT
+    ]
+    Label : INDEX
+      2
+    Label : VARIABLE
       ]
       Label : INDEX
-        2
+        1
       Label : VARIABLE
-        ]
-        Label : INDEX
-          1
-        Label : VARIABLE
-          $y
-    Label : RIGHT
-      '2'
-  Label : RIGHT
+        $y
+  Label : CONCAT
+    '2'
+  Label : CONCAT
     ::
     Label : CLASS
       a

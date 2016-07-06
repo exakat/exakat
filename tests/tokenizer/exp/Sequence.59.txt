@@ -3,9 +3,9 @@ Label : LEFT
   $d
 Label : RIGHT
   .
-  Label : LEFT
+  Label : CONCAT
     'e'
-  Label : RIGHT
+  Label : CONCAT
     ->
     Label : OBJECT
       $f

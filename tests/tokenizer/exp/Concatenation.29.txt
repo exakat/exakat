@@ -1,3 +1,5 @@
 ]
+Label : INDEX
+  'a'
 Label : VARIABLE
   $i

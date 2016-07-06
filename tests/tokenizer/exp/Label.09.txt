@@ -6,18 +6,8 @@ Label : LEFT
   Label : PROPERTY
     b
 Label : RIGHT
-  ?
-  Label : CONDITION
-    ->
-    Label : OBJECT
-      $c
-    Label : PROPERTY
-      d
-  Label : ELSE
-    new
-    Label : NEW
-      f
-  Label : THEN
-    new
-    Label : NEW
-      Void
+  ->
+  Label : OBJECT
+    $c
+  Label : PROPERTY
+    d

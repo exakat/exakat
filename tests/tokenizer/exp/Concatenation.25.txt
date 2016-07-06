@@ -10,8 +10,8 @@ Oui
 
 
   Label : CONCAT
+    $x
+  Label : CONCAT
     
 
 
-  Label : CONCAT
-    $x

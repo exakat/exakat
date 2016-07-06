@@ -3,11 +3,15 @@ Label : ARGUMENT
   &&
   Label : LEFT
     "foo"
+    Label : CODE
+      "foo"
   Label : RIGHT
     print
     Label : ARGUMENTS
       )
       Label : ARGUMENT
         "bar"
+        Label : CODE
+          "bar"
     Label : NAME
       print

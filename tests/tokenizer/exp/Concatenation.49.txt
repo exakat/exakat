@@ -3,17 +3,13 @@ Label : LEFT
   $x
 Label : RIGHT
   .
-  Label : LEFT
-    .
-    Label : LEFT
-      .
-      Label : LEFT
-        'A'
-      Label : RIGHT
-        __DIR__
-    Label : RIGHT
-      \
-      Label : SUBNAME
-        C
-  Label : RIGHT
+  Label : CONCAT
+    'A'
+  Label : CONCAT
+    __DIR__
+  Label : CONCAT
+    \
+    Label : SUBNAME
+      C
+  Label : CONCAT
     'D'

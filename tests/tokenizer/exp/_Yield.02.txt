@@ -1,7 +1,3 @@
-=
-Label : LEFT
-  $y
-Label : RIGHT
-  array
-  Label : NAME
-    array
+(
+Label : ARGUMENT
+  Void

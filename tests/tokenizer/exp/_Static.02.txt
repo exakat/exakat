@@ -3,21 +3,23 @@ Label : BLOCK
   {}
   Label : ELEMENT
     static
-    Label : STATIC
+    Label : PPP
       $b
-    Label : STATIC
+    Label : PPP
       $c
-    Label : STATIC
+    Label : PPP
       $d
-    Label : STATIC
+    Label : PPP
       $e
-    Label : STATIC
+    Label : PPP
       $f
-    Label : STATIC
+    Label : PPP
       $g
-    Label : STATIC
+    Label : PPP
       $h
-    Label : STATIC
+    Label : PPP
       $i
+    Label : STATIC
+      static
 Label : NAME
   a

@@ -3,17 +3,17 @@ Label : ARGUMENT
   <<<EOL
 
   Label : CONCAT
+    a
+  Label : CONCAT
+    b
+  Label : CONCAT
+    "  "
+  Label : CONCAT
     ]
     Label : INDEX
       $d
     Label : VARIABLE
       c
   Label : CONCAT
-    a
-  Label : CONCAT
-    "  "
-  Label : CONCAT
     "
 
-  Label : CONCAT
-    b

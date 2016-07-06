@@ -1,8 +1,8 @@
-do  { /**/ }  while ($z)
+do
 Label : BLOCK
   ;
   Label : ELEMENT
-    foreach ($a as $b)  { /**/ } 
+    foreach
     Label : BLOCK
       {}
       Label : ELEMENT

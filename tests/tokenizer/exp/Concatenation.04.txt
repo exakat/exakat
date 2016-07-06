@@ -1,5 +1,13 @@
 .
-Label : LEFT
+Label : CONCAT
   'a'
-Label : RIGHT
+Label : CONCAT
   'b'
+Label : CONCAT
+  'c'
+Label : CONCAT
+  'd'
+Label : CONCAT
+  'e'
+Label : CONCAT
+  'f'

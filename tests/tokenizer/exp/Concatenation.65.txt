@@ -1,7 +1,7 @@
 ?>
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     $line_content
-  Label : RIGHT
+  Label : CONCAT
     PHP_EOL

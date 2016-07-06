@@ -4,6 +4,6 @@ Label : LEFT
 Label : RIGHT
   `
   Label : CONCAT
-     c 
-  Label : CONCAT
     $b
+  Label : CONCAT
+     c 

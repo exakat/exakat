@@ -1,7 +1,7 @@
 .
-Label : LEFT
+Label : CONCAT
   @
   Label : AT
     $y
-Label : RIGHT
+Label : CONCAT
   '23'

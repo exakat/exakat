@@ -1,13 +1,11 @@
 ]
 Label : INDEX
   .
-  Label : LEFT
-    .
-    Label : LEFT
-      $b
-    Label : RIGHT
-      'd'
-  Label : RIGHT
+  Label : CONCAT
+    $b
+  Label : CONCAT
+    'd'
+  Label : CONCAT
     $c
 Label : VARIABLE
   $a

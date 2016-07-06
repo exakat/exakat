@@ -1,9 +1,9 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     $host
-  Label : RIGHT
+  Label : CONCAT
     'a'
 Label : ARGUMENT
   'b'

@@ -12,3 +12,5 @@ Label : FILE
           $x
         Label : PROPERTY
           b
+      Label : ELEMENT
+        Void

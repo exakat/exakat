@@ -3,21 +3,27 @@ Label : BLOCK
   {}
   Label : ELEMENT
     static
+    Label : PPP
+      $b
     Label : PUBLIC
       public
     Label : STATIC
-      $b
+      static
   Label : ELEMENT
     static
+    Label : PPP
+      $d
     Label : PRIVATE
       private
     Label : STATIC
-      $d
+      static
   Label : ELEMENT
     static
+    Label : PPP
+      $c
     Label : PROTECTED
       protected
     Label : STATIC
-      $c
+      static
 Label : NAME
   a

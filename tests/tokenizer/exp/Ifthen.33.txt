@@ -7,7 +7,7 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if ($a) { /**/ } else /**/ 
+        if
         Label : CONDITION
           $a
         Label : ELSE
@@ -19,3 +19,5 @@ Label : FILE
           {}
           Label : ELEMENT
             Void
+      Label : ELEMENT
+        Void

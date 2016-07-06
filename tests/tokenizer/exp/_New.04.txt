@@ -10,3 +10,5 @@ Label : FILE
         new
         Label : NEW
           stdclass
+      Label : ELEMENT
+        Void

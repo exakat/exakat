@@ -1,7 +1,7 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     $c
-  Label : RIGHT
+  Label : CONCAT
     $d

@@ -7,15 +7,15 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        if ($x) { /**/ } elseif ($w) { /**/ } elseif ($v) { /**/ } elseif ($u) { /**/ } else /**/ 
+        if
         Label : CONDITION
           $x
         Label : ELSE
-          elseif ($w) { /**/ } elseif ($v) { /**/ } elseif ($u) { /**/ } else /**/ 
+          elseif
           Label : CONDITION
             $w
           Label : ELSE
-            elseif ($v) { /**/ } elseif ($u) { /**/ } else /**/ 
+            elseif
             Label : CONDITION
 123098120398 [label="Reached level 15"]            Label : ELSE
 123098120398 [label="Reached level 15"]            Label : THEN
@@ -26,3 +26,5 @@ Label : FILE
           ;
           Label : ELEMENT
             $y
+      Label : ELEMENT
+        Void

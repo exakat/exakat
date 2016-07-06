@@ -9,9 +9,9 @@ Label : LEFT
         'C'
       Label : VALUE
         .
-        Label : LEFT
+        Label : CONCAT
           D
-        Label : RIGHT
+        Label : CONCAT
           'E'
     Label : ARGUMENT
       =>
@@ -19,9 +19,9 @@ Label : LEFT
         'F'
       Label : VALUE
         .
-        Label : LEFT
+        Label : CONCAT
           G
-        Label : RIGHT
+        Label : CONCAT
           'H'
   Label : NAME
     array
@@ -33,9 +33,9 @@ Label : RIGHT
       'J'
       Label : CODE
         .
-        Label : LEFT
+        Label : CONCAT
           I
-        Label : RIGHT
+        Label : CONCAT
           'J'
   Label : NAME
     include

@@ -1,3 +1,23 @@
 =
 Label : LEFT
   $x
+Label : RIGHT
+  "
+  Label : CONCAT
+    a 
+  Label : CONCAT
+    "
+    Label : OBJECT
+      $b
+    Label : PROPERTY
+      c
+  Label : CONCAT
+     '
+  Label : CONCAT
+    $d
+  Label : CONCAT
+    -
+  Label : CONCAT
+    $e
+  Label : CONCAT
+    -01'

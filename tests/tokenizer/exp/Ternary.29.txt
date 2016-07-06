@@ -1,9 +1,9 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     d
-  Label : RIGHT
+  Label : CONCAT
     (int)
     Label : CAST
       ]

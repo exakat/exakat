@@ -1,3 +1,11 @@
 =
 Label : LEFT
   $a0
+Label : RIGHT
+  "
+  Label : CONCAT
+    D
+  Label : CONCAT
+    $b
+  Label : CONCAT
+    C

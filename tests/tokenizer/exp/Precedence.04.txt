@@ -1,9 +1,9 @@
 $b
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     ++
     Label : POSTPLUSPLUS
       $a
-  Label : RIGHT
+  Label : CONCAT
     $b

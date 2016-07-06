@@ -3,9 +3,9 @@ Label : ARGUMENT
   ?
   Label : CONDITION
     .
-    Label : LEFT
+    Label : CONCAT
       'F'
-    Label : RIGHT
+    Label : CONCAT
       instanceof
       Label : CLASS
         G

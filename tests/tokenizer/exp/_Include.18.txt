@@ -1,7 +1,7 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
+  Label : CONCAT
     include
     Label : ARGUMENTS
       E
@@ -9,25 +9,21 @@ Label : ARGUMENT
         E
     Label : NAME
       include
-  Label : RIGHT
+  Label : CONCAT
     'F'
 Label : ARGUMENT
   .
-  Label : LEFT
-    .
-    Label : LEFT
-      .
-      Label : LEFT
-        include
-        Label : ARGUMENTS
-          G
-          Label : ARGUMENT
-            G
-        Label : NAME
-          include
-      Label : RIGHT
-        'H'
-    Label : RIGHT
-      $b
-  Label : RIGHT
+  Label : CONCAT
+    include
+    Label : ARGUMENTS
+      G
+      Label : ARGUMENT
+        G
+    Label : NAME
+      include
+  Label : CONCAT
+    'H'
+  Label : CONCAT
+    $b
+  Label : CONCAT
     'I'

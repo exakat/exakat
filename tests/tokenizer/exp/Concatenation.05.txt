@@ -1,1 +1,7 @@
 .
+Label : CONCAT
+  'a'
+Label : CONCAT
+  "b"
+Label : CONCAT
+  'c'

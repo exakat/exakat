@@ -1,5 +1,7 @@
 )
 Label : ARGUMENT
   ]
+  Label : INDEX
+    'd'
   Label : VARIABLE
     $c

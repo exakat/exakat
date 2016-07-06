@@ -1,8 +1,8 @@
-do  { /**/ }  while (2)
+do
 Label : BLOCK
   {}
   Label : ELEMENT
-    do  { /**/ }  while (1)
+    do
     Label : BLOCK
       {}
       Label : ELEMENT

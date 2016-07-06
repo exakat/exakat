@@ -7,14 +7,14 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        while (1)  { /**/ } 
+        while
         Label : BLOCK
           {}
           Label : ELEMENT
             {}
             Label : ELEMENT
 123098120398 [label="Reached level 15"]          Label : ELEMENT
-            while (2)  { /**/ } 
+            while
             Label : BLOCK
 123098120398 [label="Reached level 15"]            Label : CONDITION
 123098120398 [label="Reached level 15"]        Label : CONDITION

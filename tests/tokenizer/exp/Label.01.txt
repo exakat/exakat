@@ -1,11 +1,9 @@
 ;
 Label : ARGUMENT
   .
-  Label : LEFT
-    .
-    Label : LEFT
-      'j'
-    Label : RIGHT
-      $k
-  Label : RIGHT
+  Label : CONCAT
+    'j'
+  Label : CONCAT
+    $k
+  Label : CONCAT
     'l'

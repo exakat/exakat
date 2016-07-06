@@ -1,8 +1,8 @@
-do  { /**/ }  while ($z)
+do
 Label : BLOCK
   ;
   Label : ELEMENT
-    if ($x) { /**/ } 
+    if
     Label : CONDITION
       $x
     Label : THEN

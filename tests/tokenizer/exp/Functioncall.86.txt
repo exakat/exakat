@@ -25,8 +25,8 @@ Label : ARGUMENT
           ]
           Label : INDEX
             .
-            Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
+            Label : CONCAT
+123098120398 [label="Reached level 15"]            Label : CONCAT
 123098120398 [label="Reached level 15"]          Label : VARIABLE
             $e
     Label : NAME

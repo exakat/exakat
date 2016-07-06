@@ -1,11 +1,11 @@
-?>
-Label : ARGUMENT
+-
+Label : LEFT
   .
-  Label : LEFT
+  Label : CONCAT
     -
     Label : SIGN
       'a'
-  Label : RIGHT
-    -
-    Label : SIGN
-      'b'
+  Label : CONCAT
+    Void
+Label : RIGHT
+  'b'

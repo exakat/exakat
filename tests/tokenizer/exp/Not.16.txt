@@ -1,3 +1,9 @@
 ]
+Label : INDEX
+  "
+  Label : CONCAT
+    $bB
+  Label : CONCAT
+    $c
 Label : VARIABLE
   $a

@@ -3,3 +3,7 @@ Label : LEFT
   $x
 Label : RIGHT
   .
+  Label : CONCAT
+    'a'
+  Label : CONCAT
+    "b"

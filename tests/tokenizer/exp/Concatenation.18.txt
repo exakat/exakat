@@ -1,10 +1,14 @@
 ;
 Label : ARGUMENT
   .
-  Label : RIGHT
+  Label : CONCAT
+    'a'
+  Label : CONCAT
     date
     Label : ARGUMENTS
       )
+      Label : ARGUMENT
+        "Y"
       Label : ARGUMENT
         strtotime
         Label : ARGUMENTS

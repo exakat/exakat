@@ -1,16 +1,16 @@
-do  { /**/ }  while (4)
+do
 Label : BLOCK
   {}
   Label : ELEMENT
-    do  { /**/ }  while (3)
+    do
     Label : BLOCK
       {}
       Label : ELEMENT
-        do  { /**/ }  while (2)
+        do
         Label : BLOCK
           {}
           Label : ELEMENT
-            do  { /**/ }  while (1)
+            do
             Label : BLOCK
 123098120398 [label="Reached level 15"]            Label : CONDITION
 123098120398 [label="Reached level 15"]        Label : CONDITION

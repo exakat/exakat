@@ -5,35 +5,61 @@ Label : ARGUMENT
   $b
 Label : ARGUMENT
   .
-  Label : LEFT
-    .
-    Label : LEFT
-      .
-      Label : LEFT
-        .
-        Label : LEFT
-          .
-          Label : LEFT
-            .
-            Label : RIGHT
-123098120398 [label="Reached level 15"]        Label : RIGHT
-          I
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            I
-    Label : RIGHT
+  Label : CONCAT
+    'H'
+  Label : CONCAT
+    I
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $e
+      Label : ARGUMENT
+        0
+      Label : ARGUMENT
+        $b
+    Label : NAME
       I
-      Label : ARGUMENTS
-        )
-        Label : ARGUMENT
-          $e
-        Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          $b
-      Label : NAME
-        I
+  Label : CONCAT
+    "
+    Label : CONCAT
+      J
+    Label : CONCAT
+      ]
+      Label : INDEX
+        K
+      Label : VARIABLE
+        $b
+    Label : CONCAT
+      L
+    Label : CONCAT
+      $aM
+    Label : CONCAT
+      $fN
+  Label : CONCAT
+    I
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $e
+      Label : ARGUMENT
+        1
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      I
+  Label : CONCAT
+    'P'
+  Label : CONCAT
+    I
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        $e
+      Label : ARGUMENT
+        1
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      I
+  Label : CONCAT
+    'R'

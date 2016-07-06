@@ -1,1 +1,13 @@
 )
+Label : ARGUMENT
+  "
+  Label : CODE
+    "
+    Label : CONCAT
+      B
+    Label : CONCAT
+      $aC
+    Label : CONCAT
+      $bD
+    Label : CONCAT
+      $cE

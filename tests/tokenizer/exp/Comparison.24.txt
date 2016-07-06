@@ -7,9 +7,9 @@ Label : LEFT
       ]
       Label : INDEX
         .
-        Label : LEFT
+        Label : CONCAT
           'f'
-        Label : RIGHT
+        Label : CONCAT
           $g
       Label : VARIABLE
         ]

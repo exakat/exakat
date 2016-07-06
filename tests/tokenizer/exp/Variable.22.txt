@@ -6,3 +6,21 @@ Label : FILE
 
     Label : CODE
       ;
+      Label : ELEMENT
+        "
+        Label : CONCAT
+          a
+        Label : CONCAT
+          b
+        Label : CONCAT
+          c
+        Label : CONCAT
+          d
+        Label : CONCAT
+          e
+        Label : CONCAT
+          f
+        Label : CONCAT
+          g
+      Label : ELEMENT
+        Void

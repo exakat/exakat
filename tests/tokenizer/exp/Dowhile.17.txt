@@ -1,4 +1,4 @@
-do  { /**/ }  while (17)
+do
 Label : BLOCK
   ;
   Label : ELEMENT

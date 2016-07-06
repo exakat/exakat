@@ -1,1 +1,5 @@
 .
+Label : CONCAT
+  'a'
+Label : CONCAT
+  "b"

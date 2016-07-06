@@ -1,26 +1,37 @@
 )
 Label : ARGUMENT
   .
-  Label : LEFT
-    .
-    Label : LEFT
-      .
-      Label : RIGHT
-        ]
-        Label : VARIABLE
-          $c
-    Label : RIGHT
-      preg_replace
-      Label : ARGUMENTS
-        )
-        Label : ARGUMENT
+  Label : CONCAT
+    'b'
+  Label : CONCAT
+    ]
+    Label : INDEX
+      'd'
+    Label : VARIABLE
+      $c
+  Label : CONCAT
+    preg_replace
+    Label : ARGUMENTS
+      )
+      Label : ARGUMENT
+        "e"
+      Label : ARGUMENT
+        ''
+      Label : ARGUMENT
+        substr
+        Label : ARGUMENTS
+          )
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            0
+          Label : ARGUMENT
+            strrpos
+            Label : ARGUMENTS
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : NAME
           substr
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            substr
-      Label : NAME
-        preg_replace
+    Label : NAME
+      preg_replace
+  Label : CONCAT
+    'i'

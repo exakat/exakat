@@ -1,28 +1,29 @@
 ;
 Label : ARGUMENT
   .
-  Label : LEFT
-    .
-    Label : LEFT
-      .
-      Label : LEFT
-        ::
-        Label : CLASS
-          a
-        Label : METHOD
-          b
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            b
-      Label : RIGHT
-        'e'
-    Label : RIGHT
-      ]
-      Label : INDEX
-        'g'
-      Label : VARIABLE
-        $f
-  Label : RIGHT
+  Label : CONCAT
+    ::
+    Label : CLASS
+      a
+    Label : METHOD
+      b
+      Label : ARGUMENTS
+        )
+        Label : ARGUMENT
+          ]
+          Label : INDEX
+            d
+          Label : VARIABLE
+            $c
+      Label : NAME
+        b
+  Label : CONCAT
+    'e'
+  Label : CONCAT
+    ]
+    Label : INDEX
+      'g'
+    Label : VARIABLE
+      $f
+  Label : CONCAT
     'h'

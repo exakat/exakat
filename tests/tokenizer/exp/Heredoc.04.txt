@@ -5,14 +5,14 @@ Label : RIGHT
   <<<eof
 
   Label : CONCAT
+    a
+  Label : CONCAT
     <<<eof
 
     Label : OBJECT
       $b
     Label : PROPERTY
       c
-  Label : CONCAT
-    a
   Label : CONCAT
     
 d

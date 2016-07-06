@@ -17,11 +17,11 @@ Label : ARGUMENT
       'g'
     Label : THEN
       .
-      Label : LEFT
+      Label : CONCAT
         ->
         Label : OBJECT
           $d
         Label : PROPERTY
           e
-      Label : RIGHT
+      Label : CONCAT
         Void

@@ -3,9 +3,9 @@ Label : LEFT
   $
   Label : NAME
     .
-    Label : LEFT
+    Label : CONCAT
       'c'
-    Label : RIGHT
+    Label : CONCAT
       $d
 Label : RIGHT
   1

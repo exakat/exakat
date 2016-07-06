@@ -11,11 +11,11 @@ Label : ARGUMENT
         'c'
         Label : CODE
           .
-          Label : LEFT
+          Label : CONCAT
             b
             Label : ARGUMENTS
 123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : RIGHT
+123098120398 [label="Reached level 15"]          Label : CONCAT
             'c'
     Label : NAME
       require_once

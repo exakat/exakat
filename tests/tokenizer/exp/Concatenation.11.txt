@@ -1,5 +1,5 @@
 .
-Label : LEFT
+Label : CONCAT
   'a'
-Label : RIGHT
+Label : CONCAT
   'b'

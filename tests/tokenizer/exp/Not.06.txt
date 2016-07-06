@@ -10,3 +10,5 @@ Label : FILE
         !
         Label : NOT
           $x
+      Label : ELEMENT
+        Void

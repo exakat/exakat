@@ -7,10 +7,10 @@ Label : ARGUMENT
   Label : CONCAT
     A 
   Label : CONCAT
+    $b
+  Label : CONCAT
      C
 
-  Label : CONCAT
-    $b
 Label : ARGUMENT
   ::
   Label : CLASS

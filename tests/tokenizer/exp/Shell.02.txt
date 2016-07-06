@@ -6,6 +6,6 @@ Label : RIGHT
   Label : CONCAT
     b
   Label : CONCAT
-     d
-  Label : CONCAT
     $c
+  Label : CONCAT
+     d

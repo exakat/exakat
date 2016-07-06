@@ -1,5 +1,7 @@
 )
 Label : ARGUMENT
+  "b"
+Label : ARGUMENT
   ->
   Label : OBJECT
     $this

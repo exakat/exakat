@@ -1,19 +1,21 @@
-]
-Label : ARGUMENT
+-
+Label : LEFT
   .
-  Label : LEFT
+  Label : CONCAT
     '4'
     Label : CODE
       ?
       Label : CONDITION
         ===
         Label : LEFT
-          $bracket
+          $semicolon
         Label : RIGHT
           '1'
       Label : ELSE
         '4'
       Label : THEN
         '3'
-  Label : RIGHT
-    -1
+  Label : CONCAT
+    Void
+Label : RIGHT
+  1

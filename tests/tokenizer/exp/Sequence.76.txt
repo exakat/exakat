@@ -44,7 +44,7 @@ Label : ARGUMENT
     Label : ELSE
       L
     Label : THEN
-      Void
+      K
 Label : ARGUMENT
   =>
   Label : KEY
