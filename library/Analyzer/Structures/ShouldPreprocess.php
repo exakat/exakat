@@ -30,44 +30,24 @@ class ShouldPreprocess extends Analyzer\Analyzer {
         $dynamicAtoms = array('Variable', 'Property', 'Identifier', 'Magicconstant');
         //'Functioncall' : if they also have only constants.
 
-        $functionList = $this->loadIni('inert_functions.ini');
-        $functionList = '"\\\\' . implode('", "\\\\', $functionList['functions']). '"';
+        $functionList = $this->loadIni('inert_functions.ini', 'functions');
+//        $functionList = '"\\\\' . implode('", "\\\\', $functionList['functions']). '"';
         
-        $this->atomIs('Addition')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Multiplication')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Concatenation')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Bitshift')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Logical')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Not')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Functioncall')
+        $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
+             ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\join', '\\explode', '\\implode', '\\split'))
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
+             ->fullnspathIsNot($functionList)
+             ->back('first')
+             ->noAtomInside($dynamicAtoms);
+        $this->prepareQuery();
+
+        $this->atomFunctionIs(array('\\join', '\\explode', '\\implode', '\\split'))
+             ->atomInside('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspathIsNot($functionList)
+             ->back('first')
              ->outIs('ARGUMENTS')
              ->noAtomInside($dynamicAtoms)
              ->back('first');
