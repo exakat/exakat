@@ -1384,6 +1384,12 @@ GREMLIN
         return $this;
     }
 
+    public function hasNoIfthen() {
+        $this->hasNoInstruction('Ifthen');
+        
+        return $this;
+    }
+
     public function hasTryCatch() {
         $this->hasInstruction('Try');
         
