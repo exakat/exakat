@@ -31,9 +31,9 @@ class DirectCallToMagicMethod extends Analyzer\Analyzer {
         $magicMethods = $magicMethods['magicMethod'];
 
         $this->atomIs('Functioncall')
-             ->code($magicMethods)
+             ->codeIs($magicMethods)
              ->inIs('METHOD')
-             ->raw('filter{ it.out("CLASS").filter{it.code.toLowerCase() in ["static", "parent", "self"]}.any() == false}');
+             ->raw('where( __.out("CLASS").has("code", within("static", "parent", "self")).count().is(eq(0)) )');
         $this->prepareQuery();
     }
 }
