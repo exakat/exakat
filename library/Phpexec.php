@@ -198,8 +198,9 @@ class Phpexec {
             return false;
         }
         $res = shell_exec($this->phpexec.' -v 2>&1');
-        preg_match('/PHP ([0-9\.]+) /', $res, $r);
-        $this->actualVersion = $r[1];
+        if (preg_match('/PHP ([0-9\.]+)/', $res, $r)) {
+            $this->actualVersion = $r[1];
+        }
         return strpos($res, 'The PHP Group') !== false;
     }
 
