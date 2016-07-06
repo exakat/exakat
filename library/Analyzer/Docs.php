@@ -45,14 +45,20 @@ class Docs {
     }
     
     public function getThemeAnalyzers($theme) {
+        if (is_array($theme)) {
+            $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
+            $where = 'c.name in ("'.join('", "', $theme).'")';
+        } else {
+            $where = 'c.name = "'.trim($theme, '"').'"';
+        }
+
         $query = <<<SQL
-        SELECT a.folder, a.name FROM analyzers AS a
+        SELECT DISTINCT a.folder, a.name FROM analyzers AS a
     JOIN analyzers_categories AS ac
         ON ac.id_analyzer = a.id
     JOIN categories AS c
         ON c.id = ac.id_categories
-    WHERE
-        c.name = '$theme'
+    WHERE $where
 SQL;
         
         $res = $this->sqlite->query($query);
