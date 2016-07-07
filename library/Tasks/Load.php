@@ -801,8 +801,6 @@ class Load extends Tasks {
                                  'token'     => $this->getToken($this->tokens[$current][0]),
                                  'enclosing' => true]);
         
-        $this->pushExpression($variableId);
-        
         return $variableId;
     }
     
@@ -3055,9 +3053,9 @@ class Load extends Tasks {
                   'line'     => $this->tokens[$current][2],
                   'token'    => $this->getToken($this->tokens[$current][0])];
             $this->setAtom($variableId, $x);
+            
             $this->pushExpression($variableId);
-
-            return $variableId;
+            return $this->processFCOA($variableId);
         } else {
             return $this->processSingleOperator('Variable', $this->getPrecedence($this->tokens[$this->id][0]), 'NAME');
         }
