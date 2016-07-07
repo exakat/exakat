@@ -28,27 +28,13 @@ use Analyzer;
 class NoSelfReferencingConstant extends Analyzer\Analyzer {
     public function analyze() {
         // const c = self::b
+        // const c = self::b + 1
         $this->atomIs('Const')
-             ->hasClass()
+             ->hasClassInterface()
              ->outIs('CONST')
              ->_as('results')
              ->analyzerIsNot('self')
 
-             ->outIs('RIGHT')
-             ->atomInside('Staticconstant')
-             ->outIs('CLASS')
-             ->codeIs('self')
-
-             ->back('results');
-        $this->prepareQuery();
-
-        // const c = self::$b + 1
-        $this->atomIs('Const')
-             ->hasClass()
-             ->outIs('CONST')
-             ->_as('results')
-             ->analyzerIsNot('self')
-             
              ->outIs('RIGHT')
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
@@ -58,9 +44,10 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // const c = a::b
+        // const c = a::b + 1
         $this->atomIs('Const')
-
-             ->goToClass()
+             ->hasClassInterface()
+             ->goToClassInterface()
              ->savePropertyAs('fullnspath', 'classe')
              ->back('first')
 
@@ -68,33 +55,6 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->_as('results')
              ->analyzerIsNot('self')
              
-             ->outIs('LEFT')
-             ->savePropertyAs('code', 'constante')
-             ->inIs('LEFT')
-
-             ->outIs('RIGHT')
-             ->atomIs('Staticconstant')
-             ->outIs('CLASS')
-             ->samePropertyAs('fullnspath', 'classe')
-             ->inIs('CLASS')
-
-             ->outIs('CONSTANT')
-             ->samePropertyAs('code', 'constante')
-
-             ->back('results');
-        $this->prepareQuery();
-
-        // const c = a::b + 1
-        $this->atomIs('Const')
-
-             ->goToClass()
-             ->savePropertyAs('fullnspath', 'classe')
-             ->back('first')
-
-             ->outIs('CONST')
-             ->_as('results')
-             ->analyzerIsNot('self')
-
              ->outIs('LEFT')
              ->savePropertyAs('code', 'constante')
              ->inIs('LEFT')

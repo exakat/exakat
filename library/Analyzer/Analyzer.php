@@ -452,14 +452,14 @@ repeat(__.in('.$linksDown.'))
     }
     
     public function atomInside($atom) {
-        $gremlin = 'repeat( out() ).times(15).emit( hasLabel('.$this->SorA($atom).') )';
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times(15) ';
         $this->addMethod($gremlin);
         
         return $this;
     }
 
     public function noAtomInside($atom) {
-        $gremlin = 'where( repeat( out() ).times(15).emit( hasLabel('.$this->SorA($atom).') ).count().is(eq(0)) )';
+        $gremlin = 'where( emit( hasLabel('.$this->SorA($atom).') ).repeat( out() ).times(15).count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
