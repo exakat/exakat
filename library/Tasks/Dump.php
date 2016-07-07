@@ -566,6 +566,7 @@ SQL;
 g.V().hasLabel("Function")
 .where( __.out("NAME").hasLabel("Void").count().is(eq(0)) )
 .sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface", "Trait").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.filter{ classe != '';} // Removes functions, keeps methods
 .map{ 
     x = ['name': it.get().value("fullcode"),
          'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
