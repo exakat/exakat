@@ -1575,7 +1575,6 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->addLink($pppId, $id, 'VAR');
             $this->optionsTokens = array();
             return $pppId;
         } 
