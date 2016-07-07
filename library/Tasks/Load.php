@@ -545,7 +545,7 @@ class Load extends Tasks {
                             T_DOUBLE_ARROW             => 'processKeyvalue',
                             T_ECHO                     => 'processEcho',
 
-                            T_HALT_COMPILER            => 'processPrint',
+                            T_HALT_COMPILER            => 'processHalt',
                             T_PRINT                    => 'processPrint',
                             T_INCLUDE                  => 'processPrint',
                             T_INCLUDE_ONCE             => 'processPrint',
@@ -1208,13 +1208,17 @@ class Load extends Tasks {
             $this->processOpenWithEcho();
         }
         
-        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END])) {
+        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END, T_HALT_COMPILER])) {
             $this->processNext();
         };
 
         if ($this->tokens[$this->id + 1][0] == T_CLOSE_TAG) {
             $this->processSemicolon();
             $closing = '?>';
+        } elseif ($this->tokens[$this->id + 1][0] == T_HALT_COMPILER) {
+            ++$this->id;
+            $this->processHalt();
+            $closing = '';
         } else {
             $closing = '';
         }
@@ -3488,6 +3492,24 @@ class Load extends Tasks {
         return $functioncallId;
     }
 
+    private function processHalt() {
+        $haltId = $this->addAtom('Halt');
+        $this->setAtom($haltId, ['code'     => $this->tokens[$this->id][1], 
+                                 'fullcode' => $this->tokens[$this->id][1],
+                                 'line'     => $this->tokens[$this->id][2],
+                                 'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
+
+        ++$this->id; // skip halt
+        ++$this->id; // skip (
+        // Skipping all arguments. This is not a function!
+
+        $this->pushExpression($haltId);
+        ++$this->id; // skip (
+        $this->processSemicolon();
+
+        return $haltId;
+    }
+    
     private function processPrint() {
         $nameId = $this->addAtom('Identifier');
         $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
