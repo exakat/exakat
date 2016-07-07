@@ -36,9 +36,9 @@ class LectureCookie extends Analyzer\Analyzer {
         // $_COOKIE just read
         $this->atomIs('Variable')
              ->hasNoIn('VARIABLE') // exclude arrays
-             ->code('$_COOKIE')
+             ->codeIs('$_COOKIE')
              ->analyzerIs('Variables/IsRead')
-             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "recuperer_cookies_spip").any() == false}')
+             ->hasNoNamedFunction('recuperer_cookies_spip')
              ->back('first');
         $this->prepareQuery();
 
@@ -47,8 +47,8 @@ class LectureCookie extends Analyzer\Analyzer {
              ->hasNoIn('VARIABLE') // exclude arrays
              ->analyzerIs('Arrays/IsRead')
              ->outIs('VARIABLE')
-             ->code('$_COOKIE')
-             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "recuperer_cookies_spip").any() == false}')
+             ->codeIs('$_COOKIE')
+             ->hasNoNamedFunction('recuperer_cookies_spip')
              ->back('first');
         $this->prepareQuery();
 
@@ -58,8 +58,8 @@ class LectureCookie extends Analyzer\Analyzer {
              ->analyzerIs('Arrays/IsRead')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
-             ->code('$_COOKIE')
-             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "recuperer_cookies_spip").any() == false}')
+             ->codeIs('$_COOKIE')
+             ->hasNoNamedFunction('recuperer_cookies_spip')
              ->back('first');
         $this->prepareQuery();
 
@@ -70,8 +70,8 @@ class LectureCookie extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
-             ->code('$_COOKIE')
-             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "recuperer_cookies_spip").any() == false}')
+             ->codeIs('$_COOKIE')
+             ->hasNoNamedFunction('recuperer_cookies_spip')
              ->back('first');
         $this->prepareQuery();
     }

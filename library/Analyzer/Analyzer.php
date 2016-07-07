@@ -395,6 +395,19 @@ repeat(__.in('.$linksDown.'))
         return $this;
     }
 
+    private function hasNoNamedInstruction($atom = 'Function', $name = null) {
+        if ($name === null) {
+            return $this->hasNoInstruction($atom);
+        }
+
+        $linksDown = \Tokenizer\Token::linksAsList();
+        $this->addMethod('where( 
+repeat(__.in('.$linksDown.'))
+.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').has("code", "'.$name.'").count().is(eq(0)))');
+        
+        return $this;
+    }
+
     private function hasInstruction($atom = 'Function') {
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('where( 
@@ -1139,6 +1152,12 @@ GREMLIN
 
     public function hasNoFunction() {
         $this->hasNoInstruction('Function');
+        
+        return $this;
+    }
+
+    public function hasNoNamedFunction($name) {
+        $this->hasNoNamedInstruction('Function', $name);
         
         return $this;
     }
