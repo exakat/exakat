@@ -110,7 +110,7 @@ class Faceted extends FacetedJson {
                 }
             }
 
-            $php = file_get_contents($dirName.'/code'.$path);
+            $php = file_get_contents($path);
             $html = highlight_string($php, true);
             $html = preg_replace_callback('$<br />$s', function ($r) { 
             static $line; 

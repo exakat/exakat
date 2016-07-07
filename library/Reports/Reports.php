@@ -26,26 +26,23 @@ abstract class Reports {
     private $count = 0;
 
     CONST FILE_EXTENSION = 'undefined';
-    CONST FORMATS        = ['Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 'Text', 'Xml'];
+    CONST FORMATS        = ['Clustergrammer', 'Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
+                            'Text', 'Xml', 'Uml', 'ZendFramework'];
 
     protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE
     protected $config     = null;
     
+    protected $sqlite = null;
+    
     public function __construct() {
-        $this->themes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('Security'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                                    \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP71')
-                                    );
-        $this->themesList = '("'.implode('", "', $this->themes).'")';
-        
         $this->config = \Config::Factory();
+
+        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($this->config->thema);
+        $this->themesList = '("'.implode('", "', $analyzers).'")';
+
+        $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        
     }
     
     public abstract function generateFileReport($report);
