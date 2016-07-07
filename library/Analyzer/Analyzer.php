@@ -1218,7 +1218,12 @@ GREMLIN
     }
     
     public function groupFilter($characteristic, $percentage) {
-        $this->addMethod('sideEffect{'.$characteristic.'}.groupCount(gf){x2}.aggregate().sideEffect{'.$characteristic.'}.filter{gf[x2] < '.$percentage.' * gf.values().sum()}');
+        if (substr(trim($characteristic), 0, 3) === 'it.') {
+            $by = 'by{ '.$characteristic.' }';
+        } else {
+            $by = 'by( "'.$characteristic.'" )';
+        }
+        $this->addMethod('groupCount("gf").'.$by.'.cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * '.$percentage.'; }.keySet()');
 
         return $this;
     }
