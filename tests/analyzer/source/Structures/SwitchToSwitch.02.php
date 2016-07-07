@@ -1,5 +1,13 @@
 <?php
 
+// KO (2 elseif)
+if (1) 
+$a1;
+ elseif (2) 
+$a2;
+ else 
+$a4;
+
 // OK (3 elseif)
 if (1) 
 $a1;
