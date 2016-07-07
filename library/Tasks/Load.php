@@ -3511,7 +3511,11 @@ class Load extends Tasks {
     }
     
     private function processPrint() {
-        $nameId = $this->addAtom('Identifier');
+        if (in_array($this->tokens[$this->id][0], array(T_INCLUDE, T_INCLUDE_ONCE, T_REQUIRE, T_REQUIRE_ONCE))) {
+            $nameId = $this->addAtom('Include');
+        } else {
+            $nameId = $this->addAtom('Identifier');
+        }
         $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
                                  'fullcode' => $this->tokens[$this->id][1],
                                  'line'     => $this->tokens[$this->id][2],
