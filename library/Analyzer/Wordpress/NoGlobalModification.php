@@ -37,7 +37,7 @@ class NoGlobalModification extends Analyzer\Analyzer {
         $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->atomIs('Variable')
-             ->code($globalNames)
+             ->codeIs($globalNames)
              ->savePropertyAs('code', 'name')
              ->goToFunction()
              ->outIs('BLOCK')
@@ -53,11 +53,11 @@ class NoGlobalModification extends Analyzer\Analyzer {
         // $GLOBALS['post']++;
         $this->atomIs('Array')
              ->outIs('INDEX')
-             ->noDelimiter($globalNames)
+             ->noDelimiterIs($globalNames)
              ->inIs('INDEX')
              ->outIs('VARIABLE')
              ->atomIs('Variable')
-             ->code('$GLOBALS')
+             ->codeIs('$GLOBALS')
              ->analyzerIs('Variables/IsModified')
              ->back('first');
         $this->prepareQuery();
