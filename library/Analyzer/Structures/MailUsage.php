@@ -42,6 +42,7 @@ class MailUsage extends Analyzer\Analyzer {
 
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIs($mailerClasses);
         $this->prepareQuery();
     }
