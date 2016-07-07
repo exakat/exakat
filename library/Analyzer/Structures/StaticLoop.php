@@ -36,7 +36,8 @@ class StaticLoop extends Analyzer\Analyzer {
         $nonDeterminist = $this->loadIni('php_nondeterministic.ini', 'functions');
         $nonDeterminist = $this->makeFullNsPath($nonDeterminist);
         $nonDeterminist = "'\\" . join("', '\\", $nonDeterminist)."'";
-        $whereNonDeterminist = 'where( __.repeat( __.out() ).emit( hasLabel("Functioncall") ).times(15).filter{ it.get().value("fullnspath") in ['.$nonDeterminist.']}.count().is(eq(0)) )';
+
+        $whereNonDeterminist = 'where( __.repeat( __.out() ).emit( hasLabel("Functioncall") ).times(15).where(__.in("METHOD", "NEW").count().is(eq(0))).has("token", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") in ['.$nonDeterminist.']}.count().is(eq(0)) )';
         
         // foreach with only one value
         $this->atomIs('Foreach')
