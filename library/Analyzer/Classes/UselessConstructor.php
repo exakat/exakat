@@ -31,15 +31,17 @@ class UselessConstructor extends Analyzer\Analyzer {
     }
 
     public function analyze() {
+        $checkConstructor = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Classes\\\\Constructor")).count().is(eq(0)) )';
+        
         // class a (no extends, no implements)
         $this->atomIs('Class')
-             ->hasNoOut('EXTENDS')
-             ->hasNoOut('IMPLEMENTS')
+             ->hasNoOut(array('EXTENDS', 'IMPLEMENTS'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
@@ -52,13 +54,14 @@ class UselessConstructor extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first')
              ->outIs('EXTENDS')
              ->classDefinition()
              ->hasNoOut('EXTENDS')
              ->hasNoOut('IMPLEMENTS')
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\Constructor").any()}.any() == false }')
+             ->raw($checkConstructor)
              ->back('first');
         $this->prepareQuery();
 
@@ -70,15 +73,16 @@ class UselessConstructor extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first')
              ->outIs('EXTENDS')
              ->classDefinition()
              ->hasOut('EXTENDS')
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\Constructor").any()}.any() == false }')
+             ->raw($checkConstructor)
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\Constructor").any()}.any() == false }')
+             ->raw($checkConstructor)
              ->back('first');
         $this->prepareQuery();
     }
