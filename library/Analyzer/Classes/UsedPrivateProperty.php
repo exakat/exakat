@@ -36,10 +36,10 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->outIsIE('LEFT')
              ->_as('ppp')
              ->savePropertyAs('code', 'property')
-             ->goToClass()
+             ->goToClassTrait()
+             ->raw('where( __.out("NAME").hasLabel("Void").count().is(eq(0)) )')
              ->savePropertyAs('fullnspath', 'classe')
-//             ->raw('filter{ g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").has("fullnspath", classe).any()}.filter{it.out("PROPERTY").has("code", property).any()}.any()}')
-             ->raw('where( g.V().hasLabel("Staticproperty").out("CLASS").filter{ it.get().value("fullnspath") == classe }.in("CLASS")
+             ->raw('where( g.V().hasLabel("Staticproperty").out("CLASS").hasLabel("T_STRING", "T_NS_SEPARATOR").filter{ it.get().value("fullnspath") == classe }.in("CLASS")
                                                            .out("PROPERTY").filter{ it.get().value("code") == property }.in("PROPERTY")
                                                            .count().is(neq(0)) )')
              ->back('first')
@@ -48,7 +48,8 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property used in a static property static::$b or self::$b
-        $this->atomIs('Class')
+        $this->atomIs('Class', 'Trait')
+             ->hasName()
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -73,7 +74,8 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property used in a static property static::$b[] or self::$b[]
-        $this->atomIs('Class')
+        $this->atomIs('Class', 'Trait')
+             ->hasName()
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -99,7 +101,8 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property used in a normal methodcall with $this $this->b()
-        $this->atomIs('Class')
+        $this->atomIs('Class', 'Trait')
+             ->hasName()
              ->savePropertyAs('fullnspath', 'classname')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

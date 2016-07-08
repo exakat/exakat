@@ -30,6 +30,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
     public function analyze() {
         // method used in a static methodcall \a\b::b()
         $this->atomIs('Class')
+             ->hasName()
              ->savePropertyAs('fullnspath', 'classname')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -43,6 +44,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->samePropertyAs('fullnspath', 'classname')
              ->inIs('CLASS')
              ->outIs('METHOD')
@@ -64,6 +66,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
              ->codeIs(array('static', 'self'))
              ->inIs('CLASS')
              ->outIs('METHOD')

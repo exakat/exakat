@@ -592,6 +592,12 @@ repeat(__.in('.$linksDown.'))
         return $this;
     }
 
+    public function hasName() {
+        $this->addMethod('where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )');
+
+        return $this;
+    }
+
     public function codeIs($code, $caseSensitive = false) {
         return $this->propertyIs('code', $code, $caseSensitive);
     }
@@ -1710,7 +1716,7 @@ GREMLIN;
         
         $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
-// Query for '.$this->analyzerQuoted;
+// Query (#'.(count($this->queries) + 1).')for '.$this->analyzerQuoted;
 
     // initializing a new query
         $this->queries[] = $query;

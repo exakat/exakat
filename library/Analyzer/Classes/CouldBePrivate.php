@@ -35,7 +35,8 @@ class CouldBePrivate extends Analyzer\Analyzer {
              ->hasNoOut('PRIVATE')
              ->hasNoOut('STATIC')
 
-             ->goToClass()
+             ->goToClassTrait()
+             ->hasName()
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
 
@@ -50,7 +51,7 @@ class CouldBePrivate extends Analyzer\Analyzer {
              ->raw('where( g.V().hasLabel("Property").where( __.out("PROPERTY").filter{ it.get().value("code") == name})
                                                       // Object is not inside the current and parent class
                                                      .where( __.out("OBJECT").has("code", "\$this") )
-                                                     .not(or(__.until( hasLabel("Class") ).repeat( __.in('.$linksDown.')).filter{ it.get().value("fullnspath") != fnp }.count().is(neq(0)),
+                                                     .not(or(__.until( hasLabel("Class").where(__.out("NAME").hasLabel("Void").is(eq(0))) ).repeat( __.in('.$linksDown.')).filter{ it.get().value("fullnspath") != fnp }.count().is(neq(0)),
                                                          __.out("OBJECT").has("code", "\$this").count().is(eq(0))
                                                          ))
                                                      .count().is(neq(0)) 
@@ -65,7 +66,7 @@ class CouldBePrivate extends Analyzer\Analyzer {
              ->hasNoOut('PRIVATE')
              ->hasOut('STATIC')
 
-             ->goToClass()
+             ->goToClassTrait()
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
 
@@ -77,7 +78,7 @@ class CouldBePrivate extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'dname')
 
              ->raw('where( g.V().hasLabel("Staticproperty").where( __.out("PROPERTY").filter{ it.get().value("code") == dname})
-                                                           .where( __.out("CLASS").filter{ it.get().value("fullnspath") == fnp})
+                                                           .where( __.out("CLASS").has("tokenizer", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") == fnp})
 
                                                             // Not in the defining class
                                                            .where( __.until( hasLabel("Class", "File") ).repeat( __.in('.$linksDown.')).filter{ it.get().label() == "File" || it.get().value("fullnspath") != fnp }.count().is(eq(0)) ) 

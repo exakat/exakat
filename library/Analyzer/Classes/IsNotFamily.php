@@ -32,6 +32,7 @@ class IsNotFamily extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->hasClass()
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToClass()

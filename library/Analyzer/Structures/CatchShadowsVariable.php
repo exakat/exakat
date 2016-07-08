@@ -36,7 +36,7 @@ class CatchShadowsVariable extends Analyzer\Analyzer {
              ->atomInside('Variable')
              ->samePropertyAs('code', 'catchVariable')
              ->hasNoIn('VARIABLE')
-             ->isNotInCatchBlock()
+             ->hasNoCatch()
              ->back('first');
         $this->prepareQuery();
     }

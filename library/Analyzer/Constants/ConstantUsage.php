@@ -29,12 +29,13 @@ class ConstantUsage extends Analyzer\Analyzer {
     public function analyze() {
         // Nsname that is not used somewhere else
         $this->atomIs('Nsname')
-             ->hasNoIn(array('NEW', 'USE', 'NAME', 'NAMESPACE', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'FUNCTION', 'GROUPUSE'));
+             ->hasNoIn(array('NEW', 'USE', 'NAME', 'NAMESPACE', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'TYPEHINT', 
+                             'FUNCTION', 'GROUPUSE'));
         $this->prepareQuery();
 
         // Identifier that is not used somewhere else
         $this->atomIs('Identifier')
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY',
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 'TYPEHINT', 
                              'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE', 'FUNCTION', 'CONST', 'GROUPUSE'))
              ->hasNoParent('String', array('INDEX', 'CONCAT'))
              ->hasNoParent('Const', array('LEFT', 'CONST'));

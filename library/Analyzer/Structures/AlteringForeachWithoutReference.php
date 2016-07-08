@@ -40,21 +40,21 @@ class AlteringForeachWithoutReference extends Analyzer\Analyzer {
              ->outIs('VALUE')
              ->atomIs('Keyvalue')
              ->outIs('KEY')
-             ->savePropertyAs('code', 'key')
+             ->savePropertyAs('code', 'k')
              ->inIs('KEY')
              ->inIs('VALUE')
 
              ->outIs('BLOCK')
              ->atomInside('Array')
-             ->filter('it.in("CAST").has("token", "T_UNSET_CAST").any() == false')
-             ->filter('it.in("ARGUMENT").in("ARGUMENTS").has("token", "T_UNSET").any() == false')
+             ->raw('where( __.in("CAST").has("token", "T_UNSET_CAST"))' )
+             ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").has("token", "T_UNSET"))' )
              ->outIs('VARIABLE')
              ->analyzerIs('Variables/IsModified')
              ->samePropertyAs('code', 'source')
              ->inIs('VARIABLE')
 
              ->outIs('INDEX')
-             ->samePropertyAs('code', 'key')
+             ->samePropertyAs('code', 'k')
 
              ->back('first');
         $this->prepareQuery();

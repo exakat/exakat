@@ -31,6 +31,7 @@ class ConstantFullyQualified extends Analyzer\Analyzer {
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
+             ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->regexIs('noDelimiter', '^(\\\\\\\\)')
              ->back('first');
         $this->prepareQuery();
