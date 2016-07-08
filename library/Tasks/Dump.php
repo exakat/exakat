@@ -629,6 +629,7 @@ SQL;
 
 g.V().hasLabel("Ppp")
 .sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.filter{ classe != '';} // Removes functions, keeps methods
 .out('PPP')
 .map{ 
     if (it.get().label() == 'Variable') { 
@@ -671,7 +672,7 @@ GREMLIN
             }
 
             $stmt->bindValue(':property',  $row->name,                   SQLITE3_TEXT);
-            $stmt->bindValue(':citId',   $citId[$row->class],      SQLITE3_INTEGER);
+            $stmt->bindValue(':citId',     $citId[$row->class],      SQLITE3_INTEGER);
             $stmt->bindValue(':value',     $row->value,                  SQLITE3_TEXT);
             $stmt->bindValue(':static',    (int) $row->static,           SQLITE3_INTEGER);
             $stmt->bindValue(':visibility',$visibility,                  SQLITE3_TEXT);
@@ -698,6 +699,7 @@ SQL;
         $query = <<<GREMLIN
 g.V().hasLabel("Const")
 .sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.filter{ classe != '';} // Removes functions, keeps methods
 .out('CONST')
 .map{ 
     x = ['name': it.get().vertices(OUT, 'LEFT').next().value("code"),
