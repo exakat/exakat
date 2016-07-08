@@ -33,8 +33,6 @@ class InterfaceArguments extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->outIsIE('VARIABLE')
-             ->outIsIE('LEFT')
              ->atomIs('Variable');
         $this->prepareQuery();
     }
