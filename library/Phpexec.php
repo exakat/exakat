@@ -181,7 +181,9 @@ class Phpexec {
 
     public function countTokenFromFile($file) {
         if ($this->isCurrentVersion) {
-            $res = count(token_get_all(file_get_contents(str_replace('$', '\\\$', $file))));
+            $realpath = realpath(str_replace('$', '\\\$', $file));
+            if ($realpath === false) { return 0; }
+            $res = count(token_get_all(file_get_contents($realpath)));
         } else {
             $res = (int) shell_exec($this->phpexec.' -r "print count(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" ');
         }
