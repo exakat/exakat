@@ -3065,7 +3065,7 @@ class Load extends Tasks {
     }
 
     private function processClone() {
-        return $this->processSingleOperator('Clone', $this->getPrecedence($this->tokens[$this->id][0]), 'CLONE');
+        return $this->processSingleOperator('Clone', $this->getPrecedence($this->tokens[$this->id][0]), 'CLONE', ' ' );
     }
     
     private function processGoto() {
