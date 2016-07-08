@@ -155,7 +155,7 @@ class Load extends Tasks {
                         	
                         T_QUESTION                    => 18,
                
-                        T_EQUAL                       => 14,
+                        T_EQUAL                       => 19,
                         T_PLUS_EQUAL                  => 19,
                         T_AND_EQUAL                   => 19,
                         T_CONCAT_EQUAL                => 19,
@@ -3261,6 +3261,11 @@ class Load extends Tasks {
         $finals = array_merge([], $finals);
         do {
             $this->processNext();
+            
+            if (in_array($this->tokens[$this->id + 1][0], [T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL])) {
+                ++$this->id;
+                $this->processNext();
+            }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
 
         $right = $this->popExpression();
@@ -3822,7 +3827,7 @@ class Load extends Tasks {
             foreach(self::PRECEDENCE as $k1 => $p1) {
                 $cache[$k1] = [];
                 foreach(self::PRECEDENCE as $k2 => $p2) {
-                    if ($p1 <= $p2) {
+                    if ($p1 <= $p2 && $k1 != $k2) {// && (!in_array($token, [T_COALESCE]) || $token != $k2)
                         $cache[$k1][] = $k2;
                     }
                 }
