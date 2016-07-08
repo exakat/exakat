@@ -29,8 +29,8 @@ class UselessBrackets extends Analyzer\Analyzer {
     public function analyze() {
         // $a++; {$b++; }
         $this->atomIs('Sequence')
-             ->is('block', true)
-             ->hasNoIn(array('BLOCK', 'CODE')) ;
+             ->is('bracket', true)
+             ->hasNoIn(array('THEN', 'CASES', 'ELSE', 'BLOCK')) ;
         $this->prepareQuery();
     }
 }
