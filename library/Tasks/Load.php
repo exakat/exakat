@@ -221,6 +221,7 @@ class Load extends Tasks {
     const PROP_ENCLOSING   = ['Variable', 'Array', 'Property'];
     const PROP_ARGS_MAX    = ['Arguments'];
     const PROP_ARGS_MIN    = ['Arguments'];
+    const PROP_BRACKET     = ['Sequence'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
                           'reference'   => self::PROP_REFERENCE,
@@ -238,7 +239,8 @@ class Load extends Tasks {
                           'strval'      => self::PROP_STRVAL,
                           'enclosing'   => self::PROP_ENCLOSING,
                           'args_max'    => self::PROP_ARGS_MAX,
-                          'args_min'    => self::PROP_ARGS_MIN
+                          'args_min'    => self::PROP_ARGS_MIN,
+                          'bracket'     => self::PROP_BRACKET,
                           ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -1870,7 +1872,8 @@ class Load extends Tasks {
         $this->setAtom($blockId, ['code'     => '{}',
                                   'fullcode' => static::FULLCODE_BLOCK,
                                   'line'     => $this->tokens[$this->id][2],
-                                  'token'    => $this->getToken($this->tokens[$this->id][0])]);
+                                  'token'    => $this->getToken($this->tokens[$this->id][0]),
+                                  'bracket'  => true]);
 
         ++$this->id; // skip }    
         
@@ -2019,7 +2022,6 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             ++$this->id;
             $blockId = $this->processBlock(false);
-            
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
             $this->startSequence();
             $blockId = $this->sequence;
@@ -2246,7 +2248,8 @@ class Load extends Tasks {
         $this->setAtom($casesId, ['code'     => ' / * cases * /',
                                   'fullcode' => ' / * cases * /',
                                   'line'     => $this->tokens[$current][2],
-                                  'token'    => $this->getToken($this->tokens[$current][0])]);
+                                  'token'    => $this->getToken($this->tokens[$current][0]),
+                                  'bracket'  => true]);
         $this->addLink($switchId, $casesId, 'CASES');
         ++$this->id;
 
@@ -2312,9 +2315,9 @@ class Load extends Tasks {
         $isInitialIf = $this->tokens[$current][0] === T_IF;
         $isColon =  $this->tokens[$this->id + 1][0] === T_COLON;
         
-        $blockId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
+        $thenId = $this->processFollowingBlock([T_ENDIF, T_ELSE, T_ELSEIF]);
         $this->popExpression();
-        $this->addLink($id, $blockId, 'THEN');
+        $this->addLink($id, $thenId, 'THEN');
         
         // Managing else case
         if (in_array($this->tokens[$this->id][0], [T_END, T_CLOSE_TAG])) {
@@ -2338,10 +2341,9 @@ class Load extends Tasks {
             $this->addLink($id, $elseId, 'ELSE');
 
             if ($isColon === true) {
-                $else .= ' : '.self::FULLCODE_SEQUENCE;
-            } else {
-                $else .= self::FULLCODE_BLOCK;
+                $else .= ' :';
             }
+            $else .= $this->atoms[$elseId]['fullcode'];
         } else {
             $else = '';
         }
@@ -2354,10 +2356,10 @@ class Load extends Tasks {
         }
         
         if ($isColon) {
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') : '.self::FULLCODE_SEQUENCE.$else
+            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') : '.$this->atoms[$thenId]['fullcode'].$else
                         .($isInitialIf === true ? ' endif' : '');
         } else {
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ')'.self::FULLCODE_BLOCK.$else;
+            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ')'.$this->atoms[$thenId]['fullcode'].$else;
         }
         
         if ($this->tokens[$current][0] === T_IF) {
@@ -2580,7 +2582,8 @@ class Load extends Tasks {
                 $this->setAtom($blockId, ['code' => '{}', 
                                           'fullcode' => self::FULLCODE_BLOCK,
                                           'line'     => $this->tokens[$this->id][2],
-                                          'token'    => $this->getToken($this->tokens[$this->id][0])]);
+                                          'token'    => $this->getToken($this->tokens[$this->id][0]),
+                                          'bracket'  => false]);
                 $this->addLink($blockId, $voidId, 'ELEMENT');
             } else {
                 $blockId = $this->processNamespaceBlock();
@@ -3776,7 +3779,8 @@ class Load extends Tasks {
         $this->setAtom($this->sequence, ['code'     => ';', 
                                          'fullcode' => ' '.self::FULLCODE_SEQUENCE.' ',
                                          'line'     => $this->tokens[$this->id][2],
-                                         'token'    => 'T_SEMICOLON']);
+                                         'token'    => 'T_SEMICOLON',
+                                         'bracket'  => false]);
         
         $this->sequences[]    = $this->sequence;
         $this->sequenceRank[] = 0;

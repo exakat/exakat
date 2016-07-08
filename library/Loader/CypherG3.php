@@ -100,7 +100,7 @@ variadic (not as a relation)
                     if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'])) {
                     // Raw string
                         $extra[] = "$title: csvLine.$title";
-                    } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing'])) {
+                    } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket'])) {
                     // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
                     } elseif (in_array($title, ['count', 'intval', 'args_max', 'args_min'])) {
