@@ -1151,9 +1151,9 @@ class Load extends Tasks {
 
         // Process implements
         if ($this->tokens[$this->id + 1][0] == T_IMPLEMENTS) {
+            $implements = $this->tokens[$this->id + 1][1];
             $fullcodeImplements = array();
             do {
-                $implements = $this->tokens[$this->id + 1][1];
                 ++$this->id; // Skip implements
                 $implementsId = $this->processOneNsname();
                 $this->addLink($classId, $implementsId, 'IMPLEMENTS');
