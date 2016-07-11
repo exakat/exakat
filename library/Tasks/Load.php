@@ -1810,7 +1810,7 @@ class Load extends Tasks {
                                    'fullcode' => $this->tokens[$current][1] . ' ' . join(' ', $fullcode),
                                    'line'     => $this->tokens[$current][2],
                                    'token'    => $this->getToken($this->tokens[$current][0]),
-                                   'count'    => $count]);
+                                   'count'    => $rank]);
         $this->pushExpression($staticId);
         
         return $staticId;
