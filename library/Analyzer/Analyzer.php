@@ -1112,7 +1112,7 @@ GREMLIN
     }
 
     public function hasNoConstantDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").count().is(eq(1)))');
+        $this->addMethod('where( __.in("DEFINITION").count().is(eq(0)))');
     
         return $this;
     }
