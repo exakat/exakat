@@ -18,7 +18,7 @@ class Namespaces_UsedUse extends Analyzer {
     public function testNamespaces_UsedUse06()  { $this->generic_test('Namespaces_UsedUse.06'); }
     public function testNamespaces_UsedUse07()  { $this->generic_test('Namespaces_UsedUse.07'); }
     public function testNamespaces_UsedUse08()  { $this->generic_test('Namespaces/UsedUse.08'); }
-    public function testNamespaces_Useduse09()  { $this->generic_test('Namespaces/Useduse.09'); }
+    public function testNamespaces_UsedUse09()  { $this->generic_test('Namespaces/Useduse.09'); }
     public function testNamespaces_UsedUse10()  { $this->generic_test('Namespaces/UsedUse.10'); }
     public function testNamespaces_UsedUse11()  { $this->generic_test('Namespaces/UsedUse.11'); }
 }

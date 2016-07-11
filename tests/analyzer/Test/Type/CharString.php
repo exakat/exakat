@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Type_CharString extends Analyzer {
     /* 1 methods */
 
-    public function testType_String01()  { $this->generic_test('Type_CharString.01'); }
+    public function testType_CharString01()  { $this->generic_test('Type_CharString.01'); }
 }
 ?>
