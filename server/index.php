@@ -114,7 +114,7 @@ function project($path) {
             if (file_exists('./projects/'.$_REQUEST['project'].'/report')) {
                 $return['report'] = true;
                 if (!file_exists('./projects/'.escapeshellarg($_REQUEST['project']).'/report')) {
-                    shell_exec('cd ./projects/'.escapeshellarg($_REQUEST['project']).'; zip -c report.zip report > /dev/null 2>/dev/null &');
+                    shell_exec('cd ./projects/'.escapeshellarg($_REQUEST['project']).'; zip -r report.zip report > /dev/null 2>/dev/null &');
                     $return['zip'] = false;
                     $return['status'] = 'Archiving';
                 } else {
