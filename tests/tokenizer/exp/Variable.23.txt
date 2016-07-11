@@ -1,4 +1,4 @@
-}
+{
 Label : INDEX
   "c"
 Label : VARIABLE

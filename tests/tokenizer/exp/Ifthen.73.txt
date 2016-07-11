@@ -1,12 +1,12 @@
-;
+echo
 Label : ARGUMENT
   D
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       E
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           .
           Label : CONCAT

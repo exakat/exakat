@@ -1,26 +1,26 @@
-)
+(
 Label : ARGUMENT
   'b'
 Label : ARGUMENT
-  ]
+  [
   Label : INDEX
     'e'
   Label : VARIABLE
-    ]
+    [
     Label : INDEX
       'd'
     Label : VARIABLE
       $c
 Label : ARGUMENT
-  ]
+  [
   Label : INDEX
     'i'
   Label : VARIABLE
-    ]
+    [
     Label : INDEX
       'h'
     Label : VARIABLE
-      ]
+      [
       Label : INDEX
         'g'
       Label : VARIABLE

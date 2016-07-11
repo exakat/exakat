@@ -4,7 +4,7 @@ Label : LEFT
   Label : LEFT
     sin
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $a
     Label : NAME
@@ -12,7 +12,7 @@ Label : LEFT
   Label : RIGHT
     sin
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $b
     Label : NAME
@@ -20,36 +20,33 @@ Label : LEFT
 Label : RIGHT
   *
   Label : LEFT
+    cos
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        $c
+    Label : NAME
+      cos
+  Label : RIGHT
     *
     Label : LEFT
       cos
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
-          $c
+          $d
       Label : NAME
         cos
     Label : RIGHT
       cos
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
-          $d
+          deg2rad
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            deg2rad
       Label : NAME
         cos
-  Label : RIGHT
-    cos
-    Label : ARGUMENTS
-      )
-      Label : ARGUMENT
-        deg2rad
-        Label : ARGUMENTS
-          )
-          Label : ARGUMENT
-            abs
-            Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]        Label : NAME
-          deg2rad
-    Label : NAME
-      cos

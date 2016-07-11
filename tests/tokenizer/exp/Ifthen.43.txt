@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   ->
   Label : METHOD
     e
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         'f'
     Label : NAME

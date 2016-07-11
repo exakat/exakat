@@ -1,8 +1,8 @@
-]
+[
 Label : ARGUMENT
-  ]
+  [
   Label : ARGUMENTS
-    ]
+    [
     Label : ARGUMENT
       10
     Label : ARGUMENT
@@ -10,9 +10,9 @@ Label : ARGUMENT
   Label : VARIABLE
     [
 Label : ARGUMENT
-  ]
+  [
   Label : ARGUMENTS
-    ]
+    [
     Label : ARGUMENT
       30
     Label : ARGUMENT

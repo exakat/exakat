@@ -4,7 +4,7 @@ Label : LEFT
   Label : OBJECT
     $i
   Label : PROPERTY
-    ]
+    [
     Label : INDEX
       'k'
     Label : VARIABLE
@@ -20,7 +20,7 @@ Label : RIGHT
       Label : OBJECT
         $m
       Label : PROPERTY
-        ]
+        [
         Label : INDEX
           'o'
         Label : VARIABLE

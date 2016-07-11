@@ -1,6 +1,6 @@
-)
+(
 Label : ARGUMENT
-  ]
+  [
   Label : INDEX
     $b
   Label : VARIABLE

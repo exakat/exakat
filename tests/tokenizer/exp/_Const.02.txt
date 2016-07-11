@@ -1,5 +1,1 @@
-=
-Label : LEFT
-  A1
-Label : RIGHT
-  1
+true

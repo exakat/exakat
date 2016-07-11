@@ -1,11 +1,7 @@
 2
 Label : ARGUMENT
-  =
+  *
   Label : LEFT
-    *
-    Label : LEFT
-      1
-    Label : RIGHT
-      $a
+    1
   Label : RIGHT
     2

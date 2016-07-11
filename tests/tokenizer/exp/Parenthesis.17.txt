@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   =>
   Label : KEY
@@ -6,13 +6,13 @@ Label : ARGUMENT
   Label : VALUE
     d
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         .
         Label : CONCAT
           b
           Label : ARGUMENTS
-            )
+            (
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             b

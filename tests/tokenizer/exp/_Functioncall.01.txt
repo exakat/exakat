@@ -1,10 +1,10 @@
-?>
+echo
 Label : ARGUMENT
   ?
   Label : CONDITION
     empty
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $a
     Label : NAME

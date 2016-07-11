@@ -1,5 +1,19 @@
-=
-Label : LEFT
-  b
-Label : RIGHT
-  2
+class
+Label : BLOCK
+  {}
+  Label : ELEMENT
+    const
+    Label : CONST
+      const
+      Label : NAME
+        b
+      Label : VALUE
+        2
+  Label : ELEMENT
+    var
+    Label : PPP
+      $a
+    Label : VAR
+      var
+Label : NAME
+  x

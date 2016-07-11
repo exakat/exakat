@@ -6,7 +6,7 @@ Label : RIGHT
   Label : METHOD
     f
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $g
     Label : NAME
@@ -18,7 +18,7 @@ Label : RIGHT
     Label : METHOD
       d
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           'e'
       Label : NAME

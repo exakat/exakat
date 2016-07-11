@@ -1,8 +1,8 @@
-)
+(
 Label : ARGUMENT
   sprintf
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       'b'
     Label : ARGUMENT
@@ -16,7 +16,7 @@ Label : ARGUMENT
       Label : CONDITION
         is_object
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             $d
         Label : NAME
@@ -24,7 +24,7 @@ Label : ARGUMENT
       Label : ELSE
         gettype
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             $f
         Label : NAME
@@ -32,7 +32,7 @@ Label : ARGUMENT
       Label : THEN
         get_class
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             $e
         Label : NAME

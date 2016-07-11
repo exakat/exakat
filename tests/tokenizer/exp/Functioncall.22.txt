@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   =>
   Label : KEY
     'a'
   Label : VALUE
-    ]
+    [
     Label : INDEX
       3
     Label : VARIABLE
@@ -16,9 +16,9 @@ Label : ARGUMENT
   Label : VALUE
     intval
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
-        ]
+        [
         Label : INDEX
           4
         Label : VARIABLE
@@ -30,7 +30,7 @@ Label : ARGUMENT
   Label : KEY
     'c'
   Label : VALUE
-    ]
+    [
     Label : INDEX
       5
     Label : VARIABLE
@@ -40,7 +40,7 @@ Label : ARGUMENT
   Label : KEY
     'd'
   Label : VALUE
-    ]
+    [
     Label : INDEX
       6
     Label : VARIABLE

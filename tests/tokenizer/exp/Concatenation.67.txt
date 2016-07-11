@@ -2,7 +2,7 @@
 Label : LEFT
   2
 Label : RIGHT
-  ]
+  [
   Label : INDEX
     'c2'
   Label : VARIABLE

@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   =>
   Label : KEY
@@ -10,7 +10,7 @@ Label : ARGUMENT
     Label : METHOD
       D
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           'E'
         Label : ARGUMENT
@@ -32,9 +32,9 @@ Label : ARGUMENT
     Label : CONDITION
       isset
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
-          ]
+          [
           Label : INDEX
             'J'
           Label : VARIABLE
@@ -56,7 +56,7 @@ Label : ARGUMENT
     Label : METHOD
       O
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           'P'
         Label : ARGUMENT
@@ -74,7 +74,7 @@ Label : ARGUMENT
   Label : VALUE
     T
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         ::
         Label : CLASS
@@ -82,7 +82,7 @@ Label : ARGUMENT
         Label : METHOD
           V
           Label : ARGUMENTS
-            )
+            (
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]            Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
@@ -98,9 +98,9 @@ Label : ARGUMENT
     Label : CONDITION
       AA
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
-          ]
+          [
           Label : INDEX
             'AB'
           Label : VARIABLE
@@ -108,7 +108,7 @@ Label : ARGUMENT
       Label : NAME
         AA
     Label : ELSE
-      ]
+      [
       Label : INDEX
         'AF'
       Label : VARIABLE
@@ -116,13 +116,13 @@ Label : ARGUMENT
     Label : THEN
       AC
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           0
         Label : ARGUMENT
           AD
           Label : ARGUMENTS
-            )
+            (
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             AD

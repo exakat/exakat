@@ -1,4 +1,4 @@
-]
+[
 Label : INDEX
   'shell'
 Label : VARIABLE

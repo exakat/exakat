@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   $result
 Label : ARGUMENT
-  ]
+  [
   Label : ARGUMENTS
-    ]
+    [
     Label : ARGUMENT
       INF
     Label : ARGUMENT

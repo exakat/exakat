@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   =>
   Label : KEY
@@ -6,7 +6,7 @@ Label : ARGUMENT
   Label : VALUE
      
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $c
       Label : ARGUMENT
@@ -16,13 +16,13 @@ Label : ARGUMENT
       Label : ELEMENT
         global
         Label : GLOBAL
-          $e
-        Label : GLOBAL
           $f
+        Label : GLOBAL
+          $e
       Label : ELEMENT
         return
         Label : RETURN
-          ]
+          [
           Label : INDEX
             .
             Label : CONCAT

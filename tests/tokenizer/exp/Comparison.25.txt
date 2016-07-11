@@ -1,6 +1,6 @@
-)
+(
 Label : ARGUMENT
-  ]
+  [
   Label : INDEX
     .
     Label : CONCAT
@@ -8,7 +8,7 @@ Label : ARGUMENT
     Label : CONCAT
       $g
   Label : VARIABLE
-    ]
+    [
     Label : INDEX
       'e'
     Label : VARIABLE

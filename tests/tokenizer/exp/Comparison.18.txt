@@ -2,7 +2,7 @@
 Label : LEFT
   substr
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       $b
     Label : ARGUMENT

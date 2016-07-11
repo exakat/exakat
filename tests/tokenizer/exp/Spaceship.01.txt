@@ -1,4 +1,4 @@
-;
+echo
 Label : ARGUMENT
   <=>
   Label : LEFT

@@ -2,9 +2,9 @@
 Label : LEFT
   c
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
-      ]
+      [
       Label : INDEX
         .
         Label : CONCAT
@@ -12,7 +12,7 @@ Label : LEFT
         Label : CONCAT
           $g
       Label : VARIABLE
-        ]
+        [
         Label : INDEX
           'e'
         Label : VARIABLE

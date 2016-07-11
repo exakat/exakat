@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   $d
 Label : ARGUMENT
@@ -10,7 +10,7 @@ Label : ARGUMENT
   Label : CONCAT
     I
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $e
       Label : ARGUMENT
@@ -24,7 +24,7 @@ Label : ARGUMENT
     Label : CONCAT
       J
     Label : CONCAT
-      ]
+      [
       Label : INDEX
         K
       Label : VARIABLE
@@ -38,7 +38,7 @@ Label : ARGUMENT
   Label : CONCAT
     I
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $e
       Label : ARGUMENT
@@ -52,7 +52,7 @@ Label : ARGUMENT
   Label : CONCAT
     I
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $e
       Label : ARGUMENT

@@ -1,3 +1,9 @@
-print
+'1'
 Label : ARGUMENT
-  Void
+  print
+  Label : ARGUMENTS
+    '1'
+    Label : ARGUMENT
+      '1'
+  Label : NAME
+    print

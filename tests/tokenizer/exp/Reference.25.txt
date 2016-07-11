@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   $c
   Label : TYPEHINT

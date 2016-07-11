@@ -1,8 +1,8 @@
-)
+(
 Label : ARGUMENT
    
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       $f
     Label : ARGUMENT
@@ -20,7 +20,7 @@ Label : ARGUMENT
   Label : METHOD
     d
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         'e'
     Label : NAME
@@ -32,7 +32,7 @@ Label : ARGUMENT
       Label : NEW
         A
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             $b
           Label : ARGUMENT

@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   ->
   Label : OBJECT
     $d
   Label : PROPERTY
-    }
+    {
     Label : INDEX
       ++
       Label : POSTPLUSPLUS

@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
-  ]
+  [
   Label : INDEX
     .
     Label : CONCAT
-      ]
+      [
       Label : INDEX
         1
       Label : VARIABLE

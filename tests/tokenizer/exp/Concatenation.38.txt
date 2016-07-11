@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   .
   Label : CONCAT
     'b'
   Label : CONCAT
-    ]
+    [
     Label : INDEX
       'd'
     Label : VARIABLE
@@ -12,7 +12,7 @@ Label : ARGUMENT
   Label : CONCAT
     preg_replace
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         "e"
       Label : ARGUMENT
@@ -20,7 +20,7 @@ Label : ARGUMENT
       Label : ARGUMENT
         substr
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             $f
           Label : ARGUMENT

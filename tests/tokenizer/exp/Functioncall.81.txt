@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   print
   Label : ARGUMENTS
@@ -12,7 +12,7 @@ Label : ARGUMENT
 Label : ARGUMENT
   ltrim
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       $r
   Label : NAME

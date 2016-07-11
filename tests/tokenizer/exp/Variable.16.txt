@@ -1,14 +1,14 @@
-]
+[
 Label : INDEX
-  ]
+  [
   Label : INDEX
-    ]
+    [
     Label : INDEX
       1
     Label : VARIABLE
       $__GET
   Label : VARIABLE
-    ]
+    [
     Label : INDEX
       1
     Label : VARIABLE

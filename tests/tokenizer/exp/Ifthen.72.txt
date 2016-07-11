@@ -1,15 +1,14 @@
-?>
-
+echo
 Label : ARGUMENT
   E
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       .
       Label : CONCAT
         'F'
       Label : CONCAT
-        ]
+        [
         Label : INDEX
           'G'
         Label : VARIABLE
@@ -19,7 +18,7 @@ Label : ARGUMENT
     Label : ARGUMENT
       I
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           'J'
       Label : NAME
@@ -27,7 +26,7 @@ Label : ARGUMENT
     Label : ARGUMENT
       array
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           =>
           Label : KEY

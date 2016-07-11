@@ -1,5 +1,4 @@
-?>
-
+<?=
 Label : ARGUMENT
   .
   Label : CONCAT
@@ -11,7 +10,7 @@ Label : ARGUMENT
     Label : METHOD
       e
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           .
           Label : CONCAT

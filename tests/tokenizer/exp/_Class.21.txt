@@ -1,5 +1,45 @@
-=
-Label : LEFT
-  a
-Label : RIGHT
-  1
+class
+Label : BLOCK
+  {}
+  Label : ELEMENT
+    const
+    Label : CONST
+      const
+      Label : NAME
+        a
+      Label : VALUE
+        1
+    Label : CONST
+      ,
+      Label : NAME
+        b
+      Label : VALUE
+        2
+    Label : CONST
+      ,
+      Label : NAME
+        c
+      Label : VALUE
+        3
+  Label : ELEMENT
+    var
+    Label : PPP
+      $x
+    Label : VAR
+      var
+  Label : ELEMENT
+    const
+    Label : CONST
+      const
+      Label : NAME
+        d
+      Label : VALUE
+        4
+    Label : CONST
+      ,
+      Label : NAME
+        e
+      Label : VALUE
+        5
+Label : NAME
+  x

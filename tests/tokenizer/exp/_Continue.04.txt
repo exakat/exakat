@@ -1,4 +1,4 @@
-?>
+echo
 Label : ARGUMENT
   ::
   Label : CLASS
@@ -6,13 +6,13 @@ Label : ARGUMENT
   Label : METHOD
     E
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         ->
         Label : METHOD
           F
           Label : ARGUMENTS
-            )
+            (
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             F

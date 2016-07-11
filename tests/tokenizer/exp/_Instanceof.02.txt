@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   ->
   Label : OBJECT
@@ -6,7 +6,7 @@ Label : ARGUMENT
     Label : OBJECT
       $a
     Label : PROPERTY
-      ]
+      [
       Label : INDEX
         $c
       Label : VARIABLE

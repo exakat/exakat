@@ -1,10 +1,10 @@
-;
+echo
 Label : ARGUMENT
   ?
   Label : CONDITION
     isset
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         ->
         Label : OBJECT
@@ -18,13 +18,13 @@ Label : ARGUMENT
   Label : THEN
     htmlspecialchars
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         ->
         Label : METHOD
           d
           Label : ARGUMENTS
-            )
+            (
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             d

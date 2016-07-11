@@ -2,9 +2,9 @@
 Label : LEFT
   strrpos
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
-      ]
+      [
       Label : INDEX
         'n'
       Label : VARIABLE

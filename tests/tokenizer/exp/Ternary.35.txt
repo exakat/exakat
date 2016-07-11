@@ -1,5 +1,4 @@
-?>
-
+echo
 Label : ARGUMENT
   ?
   Label : CONDITION
@@ -7,19 +6,19 @@ Label : ARGUMENT
     Label : CODE
       and
       Label : LEFT
-        ]
+        [
         Label : INDEX
           'D'
         Label : VARIABLE
           $c
       Label : RIGHT
-        ]
+        [
         Label : INDEX
           'E'
         Label : VARIABLE
           $d
   Label : ELSE
-    ]
+    [
     Label : INDEX
       'J'
     Label : VARIABLE
@@ -27,19 +26,19 @@ Label : ARGUMENT
   Label : THEN
     F
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         .
         Label : CONCAT
           'G'
         Label : CONCAT
-          ]
+          [
           Label : INDEX
             'H'
           Label : VARIABLE
             $e
       Label : ARGUMENT
-        ]
+        [
         Label : INDEX
           'I'
         Label : VARIABLE

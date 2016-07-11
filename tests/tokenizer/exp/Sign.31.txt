@@ -1,7 +1,5 @@
 -
 Label : LEFT
-  -
-  Label : SIGN
-    $b
+  $b
 Label : RIGHT
   $c

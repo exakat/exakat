@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   ->
   Label : OBJECT
     $b
   Label : PROPERTY
-    ]
+    [
     Label : INDEX
       'E'
     Label : VARIABLE
@@ -14,7 +14,7 @@ Label : ARGUMENT
   Label : OBJECT
     $c
   Label : PROPERTY
-    ]
+    [
     Label : INDEX
       'G'
     Label : VARIABLE
@@ -24,7 +24,7 @@ Label : ARGUMENT
   Label : OBJECT
     $d
   Label : PROPERTY
-    ]
+    [
     Label : INDEX
       'I'
     Label : VARIABLE

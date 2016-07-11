@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   $c
   Label : TYPEHINT
@@ -10,9 +10,9 @@ Label : ARGUMENT
 Label : ARGUMENT
   $e
   Label : DEFAULT
-    ]
+    [
     Label : ARGUMENTS
-      ]
+      [
       Label : ARGUMENT
         1
       Label : ARGUMENT

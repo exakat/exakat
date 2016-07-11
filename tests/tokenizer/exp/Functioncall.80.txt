@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   )
   Label : CODE
@@ -6,7 +6,7 @@ Label : ARGUMENT
     Label : NAME
       $e
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           'E'
       Label : NAME

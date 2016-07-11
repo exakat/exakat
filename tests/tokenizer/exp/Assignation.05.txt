@@ -1,4 +1,4 @@
-]
+[
 Label : INDEX
   3
 Label : VARIABLE

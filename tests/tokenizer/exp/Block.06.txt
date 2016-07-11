@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   ::
   Label : CLASS
     C
   Label : PROPERTY
-    }
+    {
     Label : INDEX
       ++
       Label : POSTPLUSPLUS

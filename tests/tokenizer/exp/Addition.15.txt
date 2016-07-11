@@ -4,11 +4,11 @@ Label : LEFT
 Label : RIGHT
   b
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       substr
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           $c
         Label : ARGUMENT

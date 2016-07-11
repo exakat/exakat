@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   *
   Label : LEFT
@@ -6,13 +6,13 @@ Label : ARGUMENT
     Label : LEFT
       (int)
       Label : CAST
-        ]
+        [
         Label : INDEX
           'e'
         Label : VARIABLE
           $d
     Label : RIGHT
-      ]
+      [
       Label : INDEX
         'g'
       Label : VARIABLE

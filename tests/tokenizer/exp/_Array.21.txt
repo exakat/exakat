@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   2
 Label : ARGUMENT

@@ -1,5 +1,5 @@
-)
-Label : ARGUMENT
-  (
-  Label : CODE
-    Void
+=
+Label : LEFT
+  $x
+Label : RIGHT
+  1

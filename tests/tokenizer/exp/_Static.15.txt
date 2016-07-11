@@ -1,8 +1,8 @@
-)
+(
 Label : ARGUMENT
    
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       $fulfill
   Label : BLOCK
@@ -14,6 +14,6 @@ Label : ARGUMENT
   Label : NAME
     Void
   Label : USE
-    )
+    (
     Label : ARGUMENT
       $self

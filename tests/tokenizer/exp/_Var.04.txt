@@ -3,6 +3,10 @@ Label : BLOCK
   {}
   Label : ELEMENT
     var
+    Label : VAR
+      var
+    Label : PPP
+      $i
     Label : PPP
       $b
     Label : PPP
@@ -17,9 +21,5 @@ Label : BLOCK
       $g
     Label : PPP
       $h
-    Label : PPP
-      $i
-    Label : VAR, VAR
-      var
 Label : NAME
   a

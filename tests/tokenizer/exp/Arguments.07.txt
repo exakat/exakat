@@ -1,4 +1,6 @@
-)
+(
+Label : DEFINITION
+  x
 Label : ARGUMENT
   'x'
 Label : ARGUMENT

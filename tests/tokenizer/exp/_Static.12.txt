@@ -6,8 +6,22 @@ Label : LEFT
   Label : PROPERTY
     $B
 Label : RIGHT
-  ::
-  Label : CLASS
-    static
-  Label : CONSTANT
-    C
+  +
+  Label : LEFT
+    ::
+    Label : CLASS
+      static
+    Label : CONSTANT
+      C
+  Label : RIGHT
+    ::
+    Label : CLASS
+      static
+    Label : METHOD
+      d
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          Void
+      Label : NAME
+        d

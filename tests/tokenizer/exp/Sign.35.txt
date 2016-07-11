@@ -4,14 +4,18 @@ Label : LEFT
   Label : OBJECT
     $a
   Label : PROPERTY
-    ]
+    [
     Label : INDEX
       'c'
     Label : VARIABLE
       b
 Label : RIGHT
-  ]
-  Label : INDEX
-    'E'
-  Label : VARIABLE
-    $d
+  -
+  Label : LEFT
+    [
+    Label : INDEX
+      'E'
+    Label : VARIABLE
+      $d
+  Label : RIGHT
+    $f

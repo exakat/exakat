@@ -2,7 +2,7 @@
 Label : LEFT
   array
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       =>
       Label : KEY
@@ -10,7 +10,7 @@ Label : LEFT
       Label : VALUE
         array
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             =>
             Label : KEY
@@ -38,7 +38,7 @@ Label : LEFT
       Label : VALUE
         array
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             =>
             Label : KEY
@@ -62,7 +62,7 @@ Label : LEFT
       Label : VALUE
         array
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             =>
             Label : KEY
@@ -84,26 +84,61 @@ Label : LEFT
   Label : NAME
     array
 Label : RIGHT
-  ->
-  Label : METHOD
-    BR
-    Label : ARGUMENTS
-      )
-      Label : ARGUMENT
-        BS
-      Label : ARGUMENT
-        BT
-      Label : ARGUMENT
-        BU
-      Label : ARGUMENT
-        array
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            Void
-        Label : NAME
-          array
-    Label : NAME
+  +
+  Label : LEFT
+    ->
+    Label : METHOD
       BR
-  Label : OBJECT
-    $b
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          BS
+        Label : ARGUMENT
+          BT
+        Label : ARGUMENT
+          BU
+        Label : ARGUMENT
+          array
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            array
+      Label : NAME
+        BR
+    Label : OBJECT
+      $b
+  Label : RIGHT
+    +
+    Label : LEFT
+      array
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'BV'
+          Label : VALUE
+            array
+            Label : ARGUMENTS
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : ARGUMENT
+          Void
+      Label : NAME
+        array
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'CX'
+          Label : VALUE
+            array
+            Label : ARGUMENTS
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : ARGUMENT
+          Void
+      Label : NAME
+        array

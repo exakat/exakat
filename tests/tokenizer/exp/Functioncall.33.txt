@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   $b
   Label : DEFAULT
     array
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         1
       Label : ARGUMENT

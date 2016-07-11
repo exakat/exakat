@@ -1,5 +1,13 @@
-=
-Label : LEFT
+class
+Label : BLOCK
+  {}
+  Label : ELEMENT
+    const
+    Label : CONST
+      const
+      Label : NAME
+        x
+      Label : VALUE
+        -2
+Label : NAME
   x
-Label : RIGHT
-  -2

@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   ->
   Label : OBJECT
     $this
   Label : PROPERTY
-    ]
+    [
     Label : INDEX
       'C'
     Label : VARIABLE

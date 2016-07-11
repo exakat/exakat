@@ -4,14 +4,14 @@ Label : BLOCK
   Label : ELEMENT
     var
     Label : PPP
+      $a
+    Label : VAR
+      var
+    Label : PPP
       $x
     Label : PPP
       $y
     Label : PPP
       $z
-    Label : PPP
-      $a
-    Label : VAR, VAR
-      var
 Label : NAME
   x

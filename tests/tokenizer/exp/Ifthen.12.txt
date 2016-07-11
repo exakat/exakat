@@ -2,9 +2,9 @@
 Label : LEFT
   i
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
-      ]
+      [
       Label : INDEX
         'k'
       Label : VARIABLE

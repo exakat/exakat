@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   .
   Label : CONCAT
@@ -6,13 +6,13 @@ Label : ARGUMENT
   Label : CONCAT
     date
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         "Y"
       Label : ARGUMENT
         strtotime
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             $b
         Label : NAME

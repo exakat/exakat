@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   $b
 Label : ARGUMENT
   str_replace
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       C
     Label : ARGUMENT

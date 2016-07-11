@@ -1,4 +1,4 @@
-;
+echo
 Label : ARGUMENT
   ?
   Label : CONDITION
@@ -14,7 +14,7 @@ Label : ARGUMENT
     Label : CONCAT
       e
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           'h'
       Label : NAME

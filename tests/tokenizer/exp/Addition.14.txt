@@ -2,7 +2,7 @@
 Label : LEFT
   b
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       *
       Label : LEFT

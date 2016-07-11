@@ -1,14 +1,14 @@
-)
+(
 Label : ARGUMENT
   N
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       'O'
     Label : ARGUMENT
       P
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           $f
       Label : NAME

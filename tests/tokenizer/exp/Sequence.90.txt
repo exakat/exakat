@@ -1,9 +1,8 @@
-?>
-
+echo
 Label : ARGUMENT
   I
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       ->
       Label : METHOD

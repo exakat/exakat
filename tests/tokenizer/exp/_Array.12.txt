@@ -1,6 +1,6 @@
 +
 Label : LEFT
-  ]
+  [
   Label : INDEX
     $h
   Label : VARIABLE

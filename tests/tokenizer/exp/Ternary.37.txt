@@ -1,4 +1,4 @@
-?>
+<?=
 Label : ARGUMENT
   .
   Label : CONCAT
@@ -10,7 +10,7 @@ Label : ARGUMENT
         Label : LEFT
           B
           Label : ARGUMENTS
-            )
+            (
             Label : ARGUMENT
 123098120398 [label="Reached level 15"]          Label : NAME
             B
@@ -21,7 +21,7 @@ Label : ARGUMENT
       Label : THEN
         'D'
   Label : CONCAT
-    ]
+    [
     Label : INDEX
       'F'
     Label : VARIABLE

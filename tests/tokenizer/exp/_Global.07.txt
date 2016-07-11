@@ -9,10 +9,10 @@ Label : FILE
       Label : ELEMENT
         global
         Label : GLOBAL
+          $c
+        Label : GLOBAL
           $a
         Label : GLOBAL
           $b
-        Label : GLOBAL
-          $c
       Label : ELEMENT
         Void

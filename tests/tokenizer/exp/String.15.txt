@@ -2,14 +2,22 @@
 Label : LEFT
   1
 Label : RIGHT
-   
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
+  +
+  Label : LEFT
+     
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        Void
+    Label : BLOCK
+      {}
+      Label : ELEMENT
+        Void
+    Label : NAME
       Void
-  Label : BLOCK
-    {}
-    Label : ELEMENT
-      Void
-  Label : NAME
-    Void
+  Label : RIGHT
+    "
+    Label : CONCAT
+      B
+    Label : CONCAT
+      $c

@@ -1,10 +1,10 @@
-)
+(
 Label : ARGUMENT
   'H'
 Label : ARGUMENT
   array
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       =>
       Label : KEY

@@ -2,7 +2,7 @@
 Label : LEFT
   i
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       'i'
   Label : NAME
@@ -10,9 +10,9 @@ Label : LEFT
 Label : RIGHT
   in_array
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
-      ]
+      [
       Label : INDEX
         'k'
       Label : VARIABLE

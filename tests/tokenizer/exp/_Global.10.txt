@@ -9,6 +9,8 @@ Label : FILE
       Label : ELEMENT
         global
         Label : GLOBAL
+          $f
+        Label : GLOBAL
           $a
         Label : GLOBAL
           $b
@@ -18,7 +20,5 @@ Label : FILE
           $d
         Label : GLOBAL
           $e
-        Label : GLOBAL
-          $f
       Label : ELEMENT
         Void

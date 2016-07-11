@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   $b
 Label : ARGUMENT
@@ -6,17 +6,17 @@ Label : ARGUMENT
 Label : ARGUMENT
   ??
   Label : LEFT
-    ]
+    [
     Label : INDEX
       $e
     Label : VARIABLE
-      ]
+      [
       Label : INDEX
         C
       Label : VARIABLE
         $d
   Label : RIGHT
-    ]
+    [
     Label : ARGUMENTS
       [
       Label : ARGUMENT

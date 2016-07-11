@@ -2,7 +2,7 @@
 Label : ARGUMENT
   b
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       'c'
   Label : NAME

@@ -8,7 +8,7 @@ Label : LEFT
       Label : CODE
         %
         Label : LEFT
-          ]
+          [
           Label : INDEX
             0
           Label : VARIABLE
@@ -18,20 +18,32 @@ Label : LEFT
     Label : RIGHT
       4096
 Label : RIGHT
-  64
-  Label : CODE
-    *
-    Label : LEFT
-      64
-      Label : CODE
-        %
-        Label : LEFT
-          ]
-          Label : INDEX
-            1
-          Label : VARIABLE
-            $temp
-        Label : RIGHT
-          64
-    Label : RIGHT
-      64
+  +
+  Label : LEFT
+    64
+    Label : CODE
+      *
+      Label : LEFT
+        64
+        Label : CODE
+          %
+          Label : LEFT
+            [
+            Label : INDEX
+123098120398 [label="Reached level 15"]            Label : VARIABLE
+123098120398 [label="Reached level 15"]          Label : RIGHT
+            64
+      Label : RIGHT
+        64
+  Label : RIGHT
+    64
+    Label : CODE
+      %
+      Label : LEFT
+        [
+        Label : INDEX
+          2
+        Label : VARIABLE
+          $temp
+      Label : RIGHT
+        64

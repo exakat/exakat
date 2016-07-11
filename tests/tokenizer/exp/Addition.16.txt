@@ -2,7 +2,7 @@
 Label : LEFT
   (int)
   Label : CAST
-    ]
+    [
     Label : INDEX
       'e'
     Label : VARIABLE
@@ -10,7 +10,7 @@ Label : LEFT
 Label : RIGHT
   *
   Label : LEFT
-    ]
+    [
     Label : INDEX
       'g'
     Label : VARIABLE

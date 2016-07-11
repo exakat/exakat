@@ -1,4 +1,4 @@
-;
+echo
 Label : ARGUMENT
   7
   Label : CODE

@@ -1,6 +1,6 @@
 +
 Label : LEFT
-  ]
+  [
   Label : INDEX
     'c'
   Label : VARIABLE

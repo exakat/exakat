@@ -1,6 +1,6 @@
 +
 Label : LEFT
-  ]
+  [
   Label : INDEX
     1
   Label : VARIABLE

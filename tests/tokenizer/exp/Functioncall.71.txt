@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   $c
 Label : ARGUMENT
@@ -6,7 +6,7 @@ Label : ARGUMENT
   Label : NEW
     J
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         $d
       Label : ARGUMENT
@@ -16,7 +16,7 @@ Label : ARGUMENT
         Label : OBJECT
           $f
         Label : PROPERTY
-          ]
+          [
           Label : INDEX
             $e
           Label : VARIABLE
@@ -62,7 +62,7 @@ Label : ARGUMENT
   Label : OBJECT
     $f
   Label : PROPERTY
-    ]
+    [
     Label : INDEX
       $e
     Label : VARIABLE
@@ -72,7 +72,7 @@ Label : ARGUMENT
   Label : OBJECT
     $f
   Label : PROPERTY
-    ]
+    [
     Label : INDEX
       $e
     Label : VARIABLE

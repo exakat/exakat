@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   *
   Label : LEFT
@@ -10,7 +10,7 @@ Label : ARGUMENT
       Label : PROPERTY
         $e
     Label : RIGHT
-      ]
+      [
       Label : INDEX
         'g'
       Label : VARIABLE

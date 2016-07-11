@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   .
   Label : CONCAT
@@ -6,7 +6,7 @@ Label : ARGUMENT
   Label : CONCAT
     (int)
     Label : CAST
-      ]
+      [
       Label : INDEX
         'f'
       Label : VARIABLE

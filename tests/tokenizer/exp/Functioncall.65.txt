@@ -8,7 +8,7 @@ Label : LEFT
     Label : RIGHT
       strlen
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           $d
       Label : NAME

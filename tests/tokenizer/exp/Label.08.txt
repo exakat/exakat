@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   $d
 Label : ARGUMENT
@@ -8,7 +8,7 @@ Label : ARGUMENT
     Label : CONDITION
       e
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           'f'
       Label : NAME

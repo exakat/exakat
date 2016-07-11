@@ -1,5 +1,9 @@
-)
-Label : ARGUMENT
-  (
-  Label : CODE
+catch
+Label : BLOCK
+  {}
+  Label : ELEMENT
     Void
+Label : CLASS
+  Exception
+Label : VARIABLE
+  $e

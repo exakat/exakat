@@ -2,4 +2,8 @@
 Label : LEFT
   $b
 Label : RIGHT
-  'd'
+  +
+  Label : LEFT
+    'd'
+  Label : RIGHT
+    $c

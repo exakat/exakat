@@ -1,12 +1,12 @@
-]
+[
 Label : INDEX
   -
   Label : SIGN
-    ]
+    [
     Label : INDEX
       0
     Label : VARIABLE
-      ]
+      [
       Label : INDEX
         'c'
       Label : VARIABLE

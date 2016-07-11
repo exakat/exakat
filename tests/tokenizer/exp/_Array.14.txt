@@ -2,7 +2,7 @@
 Label : LEFT
   strlen
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       $aa
   Label : NAME

@@ -2,7 +2,7 @@
 Label : ARGUMENT
   fct_lien_page_custom
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       "fonctions/sysout_agent.php"
     Label : ARGUMENT

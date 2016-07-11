@@ -1,10 +1,10 @@
-?>
+echo
 Label : ARGUMENT
   .
   Label : CONCAT
     a
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         .
         Label : CONCAT
@@ -18,7 +18,7 @@ Label : ARGUMENT
       Label : ARGUMENT
         e
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             ?
             Label : CONDITION

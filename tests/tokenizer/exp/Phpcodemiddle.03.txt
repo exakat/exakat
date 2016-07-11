@@ -1,11 +1,10 @@
-?>
-
+echo
 Label : ARGUMENT
   ?
   Label : CONDITION
     ==
     Label : LEFT
-      ]
+      [
       Label : INDEX
         'B'
       Label : VARIABLE
@@ -19,7 +18,7 @@ Label : ARGUMENT
       Label : CONDITION
         ==
         Label : LEFT
-          ]
+          [
           Label : INDEX
             'B'
           Label : VARIABLE

@@ -8,7 +8,7 @@ Label : RIGHT
     Label : CODE
       -
       Label : LEFT
-        ]
+        [
         Label : INDEX
           'f'
         Label : VARIABLE

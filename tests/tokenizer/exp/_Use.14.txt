@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   instanceof
   Label : CLASS

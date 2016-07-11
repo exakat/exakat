@@ -4,10 +4,10 @@ Label : LEFT
 Label : RIGHT
   *
   Label : LEFT
+    2
+  Label : RIGHT
     *
     Label : LEFT
-      2
-    Label : RIGHT
       3
-  Label : RIGHT
-    4
+    Label : RIGHT
+      4

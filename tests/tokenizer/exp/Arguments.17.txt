@@ -1,8 +1,8 @@
-)
+(
 Label : ARGUMENT
   ]
   Label : APPEND
-    ]
+    [
     Label : INDEX
       'b'
     Label : VARIABLE

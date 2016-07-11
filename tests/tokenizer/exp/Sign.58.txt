@@ -1,15 +1,13 @@
 -
 Label : LEFT
-  -
-  Label : SIGN
+  \
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      $c
+  Label : NAME
     \
-    Label : ARGUMENTS
-      )
-      Label : ARGUMENT
-        $c
-    Label : NAME
-      \
-      Label : SUBNAME
-        B
+    Label : SUBNAME
+      B
 Label : RIGHT
   2

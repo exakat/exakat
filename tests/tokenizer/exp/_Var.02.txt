@@ -5,7 +5,7 @@ Label : BLOCK
     var
     Label : PPP
       $b
-    Label : VAR, VAR
+    Label : VAR
       var
 Label : NAME
   a

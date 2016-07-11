@@ -1,11 +1,11 @@
-)
+(
 Label : ARGUMENT
   ??
   Label : LEFT
+    $x
+  Label : RIGHT
     ??
     Label : LEFT
-      $x
-    Label : RIGHT
       $y
-  Label : RIGHT
-    $z
+    Label : RIGHT
+      $z

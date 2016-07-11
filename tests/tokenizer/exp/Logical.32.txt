@@ -2,7 +2,7 @@
 Label : LEFT
   G
 Label : RIGHT
-  ]
+  [
   Label : INDEX
     'i'
   Label : VARIABLE

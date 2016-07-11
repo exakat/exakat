@@ -1,4 +1,4 @@
-]
+[
 Label : INDEX
   $b
 Label : VARIABLE

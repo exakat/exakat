@@ -14,4 +14,20 @@ Label : LEFT
       Label : RIGHT
         2
 Label : RIGHT
-  $c
+  +
+  Label : LEFT
+    $c
+  Label : RIGHT
+    +
+    Label : LEFT
+      3
+    Label : RIGHT
+      (int)
+      Label : CAST
+        4
+        Label : CODE
+          /
+          Label : LEFT
+            $d
+          Label : RIGHT
+            4

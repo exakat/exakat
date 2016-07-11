@@ -12,7 +12,7 @@ Label : RIGHT
     Label : OBJECT
       $e
     Label : PROPERTY
-      ]
+      [
       Label : INDEX
         'g'
       Label : VARIABLE

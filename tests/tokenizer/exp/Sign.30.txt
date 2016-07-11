@@ -14,14 +14,14 @@ Label : LEFT
 Label : RIGHT
   *
   Label : LEFT
+    ->
+    Label : OBJECT
+      $c
+    Label : PROPERTY
+      d
+  Label : RIGHT
     *
     Label : LEFT
-      ->
-      Label : OBJECT
-        $c
-      Label : PROPERTY
-        d
-    Label : RIGHT
       $e
       Label : CODE
         -
@@ -33,9 +33,9 @@ Label : RIGHT
             2
           Label : RIGHT
             $e
-  Label : RIGHT
-    ->
-    Label : OBJECT
-      $g
-    Label : PROPERTY
-      h
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $g
+      Label : PROPERTY
+        h

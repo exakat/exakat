@@ -1,8 +1,8 @@
-)
+(
 Label : ARGUMENT
   array
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       =>
       Label : KEY
@@ -32,11 +32,11 @@ Label : ARGUMENT
 Label : ARGUMENT
   array
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       D
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           'E'
         Label : ARGUMENT
@@ -54,7 +54,7 @@ Label : ARGUMENT
 Label : ARGUMENT
   D
   Label : ARGUMENTS
-    )
+    (
     Label : ARGUMENT
       'H'
     Label : ARGUMENT

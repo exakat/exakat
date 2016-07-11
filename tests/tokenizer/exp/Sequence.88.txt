@@ -1,7 +1,6 @@
-?>
-
+echo
 Label : ARGUMENT
-  ]
+  [
   Label : INDEX
     'B'
   Label : VARIABLE
@@ -15,7 +14,7 @@ Label : ARGUMENT
   Label : METHOD
     E
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         'F'
       Label : ARGUMENT
@@ -23,7 +22,7 @@ Label : ARGUMENT
       Label : ARGUMENT
         array
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             =>
             Label : KEY
@@ -53,7 +52,7 @@ Label : ARGUMENT
     Label : CONCAT
       'L'
     Label : CONCAT
-      ]
+      [
       Label : INDEX
         'M'
       Label : VARIABLE
@@ -61,7 +60,7 @@ Label : ARGUMENT
     Label : CONCAT
       'N'
     Label : CONCAT
-      ]
+      [
       Label : INDEX
         'O'
       Label : VARIABLE
@@ -75,7 +74,7 @@ Label : ARGUMENT
       Label : METHOD
         E
         Label : ARGUMENTS
-          )
+          (
           Label : ARGUMENT
             'S'
           Label : ARGUMENT

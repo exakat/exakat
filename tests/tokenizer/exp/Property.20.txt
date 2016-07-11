@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   =>
   Label : KEY
@@ -6,7 +6,7 @@ Label : ARGUMENT
   Label : VALUE
     array
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         =>
         Label : KEY

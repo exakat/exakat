@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   /
   Label : LEFT
@@ -6,7 +6,7 @@ Label : ARGUMENT
   Label : RIGHT
     **
     Label : LEFT
-      ]
+      [
       Label : INDEX
         'g'
       Label : VARIABLE

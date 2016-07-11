@@ -1,4 +1,4 @@
-;
+echo
 Label : ARGUMENT
   1
 Label : ARGUMENT

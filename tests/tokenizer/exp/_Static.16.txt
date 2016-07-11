@@ -8,7 +8,7 @@ Label : RIGHT
   Label : NEW
     static
     Label : ARGUMENTS
-      )
+      (
       Label : ARGUMENT
         2
       Label : ARGUMENT

@@ -1,6 +1,6 @@
-)
+(
 Label : ARGUMENT
-  ]
+  [
   Label : ARGUMENTS
     [
     Label : ARGUMENT
@@ -8,7 +8,7 @@ Label : ARGUMENT
   Label : VARIABLE
     [
 Label : ARGUMENT
-  ]
+  [
   Label : ARGUMENTS
     [
     Label : ARGUMENT
@@ -16,7 +16,7 @@ Label : ARGUMENT
   Label : VARIABLE
     [
 Label : ARGUMENT
-  ]
+  [
   Label : ARGUMENTS
     [
     Label : ARGUMENT

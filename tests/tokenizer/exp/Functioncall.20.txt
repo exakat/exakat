@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   =>
   Label : KEY
@@ -8,13 +8,13 @@ Label : ARGUMENT
 Label : ARGUMENT
   =>
   Label : KEY
-    ]
+    [
     Label : INDEX
       'd'
     Label : VARIABLE
       $c
   Label : VALUE
-    ]
+    [
     Label : INDEX
       'f'
     Label : VARIABLE

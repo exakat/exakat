@@ -9,7 +9,7 @@ Label : ARGUMENT
   Label : CONCAT
     "  "
   Label : CONCAT
-    ]
+    [
     Label : INDEX
       $d
     Label : VARIABLE

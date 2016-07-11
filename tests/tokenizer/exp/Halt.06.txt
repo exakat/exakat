@@ -1,5 +1,18 @@
-)
-Label : ARGUMENT
-  (
-  Label : CODE
-    Void
+./tests/tokenizer/source/Halt.06.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          $a
+        Label : THEN
+          {}
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        __halt_compiler

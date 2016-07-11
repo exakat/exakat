@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   instanceof
   Label : CLASS
@@ -8,7 +8,7 @@ Label : ARGUMENT
     Label : NEW
       c
       Label : ARGUMENTS
-        )
+        (
         Label : ARGUMENT
           $d
       Label : NAME

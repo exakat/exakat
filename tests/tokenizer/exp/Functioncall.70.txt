@@ -1,4 +1,4 @@
-)
+(
 Label : ARGUMENT
   $a
   Label : APPEND
@@ -6,7 +6,7 @@ Label : ARGUMENT
 Label : ARGUMENT
   ]
   Label : APPEND
-    ]
+    [
     Label : INDEX
       1
     Label : VARIABLE
@@ -14,11 +14,11 @@ Label : ARGUMENT
 Label : ARGUMENT
   ]
   Label : APPEND
-    ]
+    [
     Label : INDEX
       3
     Label : VARIABLE
-      ]
+      [
       Label : INDEX
         2
       Label : VARIABLE
