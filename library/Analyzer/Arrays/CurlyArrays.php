@@ -30,7 +30,7 @@ class CurlyArrays extends Analyzer\Analyzer {
         // $x[3]{3}
         $this->atomIs('Array')
              ->codeIs('{')
-             ->hasNoIn('VARIABLE');
+             ->hasNoIn(array('VARIABLE', 'APPEND'));
         $this->prepareQuery();
     }
 }
