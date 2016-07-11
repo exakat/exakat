@@ -128,7 +128,6 @@ class IsRead extends Analyzer\Analyzer {
         // Array in a functioncall
         $this->atomIs('Array')
              ->hasIn(array('ARGUMENT'))
-//             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
              ->hasNoParent('Function', array('ARGUMENTS', 'ARGUMENT'))
              ->analyzerIsNot('self');
         $this->prepareQuery();
