@@ -1408,6 +1408,7 @@ class Load extends Tasks {
 
     private function processArguments($finals = [T_CLOSE_PARENTHESIS], $typehint = false) {
         $argumentsId = $this->addAtom('Arguments');
+        $current = $this->id;
 
         $fullcode = array();
         $rank = 0;
@@ -1416,10 +1417,10 @@ class Load extends Tasks {
             $this->setAtom($voidId, ['rank' => 0]);
             $this->addLink($argumentsId, $voidId, 'ARGUMENT');
 
-            $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
+            $this->setAtom($argumentsId, ['code'     => $this->tokens[$current][1], 
                                           'fullcode' => self::FULLCODE_VOID,
-                                          'line'     => $this->tokens[$this->id][2],
-                                          'token'    => $this->getToken($this->tokens[$this->id][0]),
+                                          'line'     => $this->tokens[$current][2],
+                                          'token'    => $this->getToken($this->tokens[$current][0]),
                                           'count'    => 0,
                                           'args_max' => 0,
                                           'args_min' => 0]);
@@ -1504,10 +1505,10 @@ class Load extends Tasks {
             // Skip the ) 
             ++$this->id;
 
-            $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
+            $this->setAtom($argumentsId, ['code'     => $this->tokens[$current][1], 
                                           'fullcode' => join(', ', $fullcode),
-                                          'line'     => $this->tokens[$this->id][2],
-                                          'token'    => $this->getToken($this->tokens[$this->id][0]),
+                                          'line'     => $this->tokens[$current][2],
+                                          'token'    => $this->getToken($this->tokens[$current][0]),
                                           'count'    => $rank,
                                           'args_max' => $args_max,
                                           'args_min' => $args_min]);
@@ -1649,6 +1650,10 @@ class Load extends Tasks {
             $this->addCall('class', $fullnspath, $functioncallId);
         } else {
             $fullnspath = $this->getFullnspath($nameId, 'function');
+            // Probably weak check, since we haven't built fullnspath for functions yet... 
+            if($fullnspath === '\\define') {
+                $this->processDefineAsConstants($argumentsId);
+            }
             $this->addCall('function', $fullnspath, $functioncallId);
         }
         $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'], 
@@ -3711,6 +3716,11 @@ class Load extends Tasks {
 //            die();
         }
         
+    }
+
+    private function processDefineAsConstants($argumentsId) {
+        print_r($this->atoms[$argumentsId]);
+        die();
     }
 
     private function saveFiles() {
