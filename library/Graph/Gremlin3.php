@@ -170,7 +170,7 @@ class Gremlin3 extends Graph {
             die('Server is not responding');
         }
     
-        if (isset($res->results) && isset($res->results[0])) {
+        if (isset($res->results)) {
             if (is_array($res->results)) {
                 return $res->results[0];
             } else {
