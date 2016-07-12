@@ -134,11 +134,11 @@ class Doctor extends Tasks {
                 $stats['neo4j']['gremlinPlugin'] = 'Not found. Make sure that "org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp" is in the conf/neo4j-server.property.';
             }
 
-            $gremlinPlugin = glob($config->neo4j_folder.'/plugins/*/gremlin-java-2.7.0-*.jar');
+            $gremlinPlugin = glob($config->neo4j_folder.'/plugins/*/neo4j-gremlin-3.*.jar');
             if (empty($gremlinPlugin)) {
-                $stats['neo4j']['gremlinJar'] = 'gremlin-java-2.7.0-*.jar coudln\'t be found in the '.$config->neo4j_folder.'/plugins/* folders. Make sure it was installed. ';
+                $stats['neo4j']['gremlinJar'] = 'neo4j-gremlin-3.*.jar coudln\'t be found in the '.$config->neo4j_folder.'/plugins/* folders. Make sure gremlin is installed, and running gremlin version 3.* (3.2 is recommended).';
             } elseif (count($gremlinPlugin) > 1) {
-                $stats['neo4j']['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin. There should only be one gremlin-java-2.7.0-*.jar. ';
+                $stats['neo4j']['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin. Only one neo4j-gremlin-3.*.jar is sufficient. ';
             } else {
                 $stats['neo4j']['gremlinJar'] = basename(trim(array_pop($gremlinPlugin)));
             }
@@ -147,9 +147,9 @@ class Doctor extends Tasks {
             if ($stats['neo4j']['scriptFolder'] == 'No') {
                 mkdir($config->neo4j_folder.'/scripts/', 0755);
                 file_put_contents($config->neo4j_folder.'/scripts/exakat.txt', 'This folder and this file were created by exakat.');
-                $stats['neo4j']['scriptFolder'] = file_exists($config->projects_root.'/neo4j/scripts/') ? 'Yes' : 'No';
+                $stats['neo4j']['scriptFolder'] = file_exists($config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
             }
-            $stats['neo4j']['Neo4J for exakat'] = file_exists($config->projects_root.'/neo4j/scripts/exakat.txt') ? 'Yes' : 'No (Warning : make sure exakat is not trying to access an existing Neo4J database.)';
+            $stats['neo4j']['Neo4J for exakat'] = file_exists($config->neo4j_folder.'/scripts/exakat.txt') ? 'Yes' : 'No (Warning : make sure exakat is not trying to access an existing Neo4J database.)';
             
             $pidPath = $config->neo4j_folder.'/conf/neo4j-service.pid';
             if (file_exists($pidPath)) {
