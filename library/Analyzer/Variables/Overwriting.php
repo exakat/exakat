@@ -27,7 +27,7 @@ use Analyzer;
 class Overwriting extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'destination')
