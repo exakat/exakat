@@ -83,12 +83,9 @@ class Gremlin3 extends Graph {
                         unset($params[$name]);
                     }
                 } elseif (is_array($value)) {
-                    $value = array_map(function ($x) { return str_replace(array('$', "\n", "\r"), array('\\$', "\\\n", "\\\r"), addslashes($x)); }, $value);
-                    $gremlin = "{ ['".join("','", $value)."'] }";
+                    $valueList = array_map(function ($x) { return str_replace(array('$', "\n", "\r"), array('\\$', "\\\n", "\\\r"), addslashes($x)); }, $value);
+                    $gremlin = "{ ['".join("','", $valueList)."'] }";
                     $defName = 'a'.crc32($gremlin);
-                    if (count($value) > 65535) { 
-                        print " script $defName has too many element in the array : ".count($value)."\n";
-                    }
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
                     if (file_exists($defFileName)) {
@@ -98,7 +95,19 @@ class Gremlin3 extends Graph {
                         unset($params[$name]);
                     } else {
                         $gremlin = 'def '.$defName.'() '.$gremlin;
-                        file_put_contents($defFileName, $gremlin);
+                        if (count($value) > 40000) {
+                            $gremlin = <<<GREMLIN
+def $defName() { 
+    x = [];
+    new File("$this->scriptDir/$defName.txt").each({ line -> x.push(line)});
+    x; 
+}
+GREMLIN;
+                            file_put_contents($defFileName, $gremlin);
+                            file_put_contents($this->scriptDir.$defName.'.txt', join("\n", $value) );
+                        } else {
+                            file_put_contents($defFileName, $gremlin);
+                        }
 
                         $query = str_replace($name, $defName.'()', $query);
 
