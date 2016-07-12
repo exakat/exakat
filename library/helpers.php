@@ -106,4 +106,21 @@ function array_add(&$array1, $array2) {
     }
 }
 
+function rglob($pattern, $flags = 0) {
+    $files = glob($pattern.'/*', $flags);
+    $dirs  = glob($pattern.'/*', GLOB_ONLYDIR | GLOB_NOSORT);
+    $files = array_diff($files, $dirs);
+
+    $subdirs = array($files);
+    foreach ($dirs as $dir) {
+        $f = rglob($dir, $flags);
+        if (!empty($f)) {
+            $subdirs[] = $f;
+        }
+    }
+
+    return call_user_func_array('array_merge', $subdirs);
+}
+
+
 ?>

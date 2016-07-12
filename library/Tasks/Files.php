@@ -93,7 +93,7 @@ class Files extends Tasks {
 
         $d = getcwd();
         chdir($config->projects_root.'/projects/'.$dir.'/code');
-        $files = $this->rglob( '.');
+        $files = rglob( '.');
         chdir($d);
         $exts = static::$exts['php'];
 
@@ -322,22 +322,6 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('hash', $composerInfo);
-    }
-    
-    private function rglob($pattern, $flags = 0) {
-        $files = glob($pattern.'/*', $flags); 
-        $dirs  = glob($pattern.'/*', GLOB_ONLYDIR | GLOB_NOSORT); 
-        $files = array_diff($files, $dirs);
-
-        $subdirs = array($files);
-        foreach ($dirs as $dir) {
-            $f = $this->rglob($dir, $flags);
-            if (!empty($f)) {
-                $subdirs[] = $f;
-            }
-        }
-
-        return call_user_func_array('array_merge', $subdirs);
     }
 }
 
