@@ -48,23 +48,11 @@ class Stats {
     }
 
     public function collect() {
-        $this->stats['tokens_count']        = $this->gremlin->queryOne('g.V().has(id, neq(0))'.$this->file_filter.'.has("atom",not(within("Index"))).count()');
-        $this->stats['relations_count']     = $this->countRelations();
-        $this->stats['atoms_count']         = $this->gremlin->queryOne('g.V().has(id, neq(0)).has("atom", neq("null"))'.$this->file_filter.'.count()');
-        $this->stats['NEXT_count']          = $this->gremlin->queryOne('g.E().has(label, "NEXT").inV()'.$this->file_filter.'.count()');
-        $this->stats['INDEXED_count']       = $this->gremlin->queryOne('g.E().has("label", "INDEXED").outV().has("index", neq(true)).count()');
+        $this->stats['tokens_count']        = $this->gremlin->queryOne('g.V().has(id, neq(0))'.$this->file_filter.'.count()');//'.has("atom",not(within("Index")))
+        $this->stats['relations_count']     = $this->gremlin->queryOne('g.E().has(id, neq(0))'.$this->file_filter.'.count()');
+        $this->stats['atoms_count']         = $this->gremlin->queryOne('g.V().label().unique()'.$this->file_filter.'.size()');
+        $this->stats['LINK_count']          = $this->gremlin->queryOne('g.E().label().unique()'.$this->file_filter.'.size()');
         $this->stats['file_count']          = $this->gremlin->queryOne('g.V().inE("FILE").count(); ');
-        $this->stats['no_fullcode']         = $this->gremlin->queryOne('g.V().has(id, neq(0)).has("fullcode", null).has("index", neq(true)).has("token", not(within("E_FILE", "E_NAMESPACE", "E_CLASS", "E_FUNCTION"))).count();');
-        $this->stats['lone_token']          = $this->gremlin->queryOne('g.V().has("atom", not(within(null, "File"))).has("token", neq("T_INDEX")).filter( eq(__.in().count()) ).count()');
-        $this->stats['isrm_variable']       = $this->gremlin->queryOne('g.V().has("atom", "Variable").where( __.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsRead").count().is(neq(0)) ).where( __.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").count().is(neq(0))).count()');
-        $this->stats['isrm_property']       = $this->gremlin->queryOne('g.V().has("atom", "Property").where( __.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsRead").count().is(neq(0)) ).where( __.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").count().is(neq(0))).count()');
-        $this->stats['isrm_array']          = $this->gremlin->queryOne('g.V().has("atom", "Array").where( __.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsRead").count().is(neq(0)) ).where( __.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").count().is(neq(0))).count()');
-        $this->stats['isrm_staticproperty'] = $this->gremlin->queryOne('g.V().has("atom", "Staticproperty").where( __.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\IsRead").count().is(neq(0))).where( __.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\IsModified").count().is(neq(0))).count()');
-        $this->stats['indexed']             = $this->gremlin->queryOne('g.E().has(label, "INDEXED").outV().out().inE().has(label, not(within("ANALYZED", "INDEXED"))).as("a").range(0,100).select("a").by(label).unique().join(", ")');
-    }
-    
-    public function countRelations() {
-        return $this->gremlin->queryOne('g.E().has(id, neq(0))'.$this->file_filter.'.count()');
     }
 }
 
