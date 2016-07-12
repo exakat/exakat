@@ -3250,6 +3250,7 @@ class Load extends Tasks {
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === T_DOLLAR) {
+            ++$this->id; // Skip ::
             $blockId = $this->processDollar();
             $right = $this->processFCOA($blockId);
             $this->popExpression();
@@ -3820,6 +3821,7 @@ class Load extends Tasks {
     }
 
     private function saveDefinitions() {
+
         // Saving the function / class definitions
         foreach($this->calls as $type => $paths) {
             foreach($paths as $path) {
@@ -3827,8 +3829,13 @@ class Load extends Tasks {
                     foreach($path['definitions'] as $destination => $destinations) {
                         $csv = 'DEFINITION.'.$destination.'.'.$origin;
 
-                        $fp = fopen('./rels.g3.'.$csv.'.csv', 'w+');
-                        fputcsv($fp, ['start', 'end']);
+                        $filePath = './rels.g3.'.$csv.'.csv';
+                        if (file_exists($filePath)) {
+                            $fp = fopen('./rels.g3.'.$csv.'.csv', 'a');
+                        } else {
+                            $fp = fopen('./rels.g3.'.$csv.'.csv', 'w+');
+                            fputcsv($fp, ['start', 'end']);
+                        }
 
                         foreach($origins as $o) {
                             foreach($destinations as $d) {
