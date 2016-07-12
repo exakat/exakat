@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('class emptyClass');
+$expected     = array('class emptyClass { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('class nonEmptyClass { /**/ } ');
 
 ?>
