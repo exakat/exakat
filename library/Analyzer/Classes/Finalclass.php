@@ -29,8 +29,7 @@ class Finalclass extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('FINAL')
-             ->back('first');
+             ->hasOut('FINAL');
         $this->prepareQuery();
     }
 }
