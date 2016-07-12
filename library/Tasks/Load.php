@@ -2859,7 +2859,7 @@ class Load extends Tasks {
         $this->setAtom($useId, $x);
         $this->pushExpression($useId);
 
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_CURLY) {
+        if ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
             $this->processSemicolon();
         }
 
@@ -3186,6 +3186,10 @@ class Load extends Tasks {
         
         do {
             $id = $this->processNext();
+
+            if (in_array($this->tokens[$this->id + 1][0], [T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL])) {
+                $this->processNext();
+            }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
 
         $right = $this->popExpression();
@@ -3298,7 +3302,6 @@ class Load extends Tasks {
             $this->processNext();
             
             if (in_array($this->tokens[$this->id + 1][0], [T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL])) {
-                ++$this->id;
                 $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
@@ -3365,7 +3368,9 @@ class Load extends Tasks {
     
 
     private function processAssignation() {
-        $this->processOperator('Assignation', $this->getPrecedence($this->tokens[$this->id][0]));
+        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals = array_merge($finals, [T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL]);
+        $this->processOperator('Assignation', $finals);
     }
 
     private function processCoalesce() {
@@ -3382,7 +3387,7 @@ class Load extends Tasks {
         };
     
         $operandId = $this->popExpression();
-        $x = ['fullcode'  => '....'.$this->atoms[$operandId]['fullcode'],
+        $x = ['fullcode'  => '...'.$this->atoms[$operandId]['fullcode'],
               'variadic'  => true];
         $this->setAtom($operandId, $x);
     
@@ -3866,7 +3871,7 @@ class Load extends Tasks {
         }
     }
 
-    private function getPrecedence($token) {
+    private function getPrecedence($token, $itself = false) {
         static $cache;
         
         if ($cache === null) {
@@ -3874,7 +3879,7 @@ class Load extends Tasks {
             foreach(self::PRECEDENCE as $k1 => $p1) {
                 $cache[$k1] = [];
                 foreach(self::PRECEDENCE as $k2 => $p2) {
-                    if ($p1 <= $p2 && $k1 != $k2) {// && (!in_array($token, [T_COALESCE]) || $token != $k2)
+                    if ($p1 <= $p2 && ($itself === true || $k1 != $k2) ) {// && (!in_array($token, [T_COALESCE]) || $token != $k2)
                         $cache[$k1][] = $k2;
                     }
                 }
