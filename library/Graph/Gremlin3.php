@@ -80,10 +80,12 @@ class Gremlin3 extends Graph {
                         unset($params[$name]);
                     }
                 } elseif (is_array($value)) {
-
                     $value = array_map(function ($x) { return str_replace(array('$', "\n", "\r"), array('\\$', "\\\n", "\\\r"), addslashes($x)); }, $value);
                     $gremlin = "{ ['".join("','", $value)."'] }";
                     $defName = 'a'.crc32($gremlin);
+                    if (count($value) > 65535) { 
+                        print " script $defName has too many element in the array : ".count($value)."\n";
+                    }
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
                     if (file_exists($defFileName)) {
