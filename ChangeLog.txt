@@ -1,4 +1,4 @@
-Version 0.5.8 (Sun Deity of Mao, Coming up)
+Version 0.7.5 (Jade Faced Princess, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,210 @@ Version 0.5.8 (Sun Deity of Mao, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.7.4 (Great Sage Who Pacifies Heaven, 2016-07-12)
++ Architecture
+    + Entirely rewrote the 'Tokenizer' part
+    + Upgraded database schema 
++ Analyzer
+    + Upgraded analysis : 1027 / 1461 test pass. 
++ Tokenizer
+    + Entirely rewrote the 'Tokenizer' part
+    + 1851 UT pass correctly (extra 51)
+
+Version 0.6.7 (Red boy, 2016-05-30)
++ Report
+    + Added List With Keys in Appinfo()
+    + Added by-reference functions mention
+    + Now reporting good visibility/static for __callstatic
+    + Added bug info for PHP 7.0.7, 5.5.36, 5.6.21
++ Analyzer
+    + New : recommend instanceof over is_object()
+    + Fixed several ignored limitations, due to case : $phpversion
++ Tokenizer
+    + Fixed 'originclass' in namespaced use
+
+Version 0.6.6 (Princess Iron Fan, 2016-05-23)
++ Report
+    + New report, suggest disable_functions directive value.
+    + Added support for memcached directives
++ Analyzer
+    + New analyzer : spot throw without new
+    + New analyzer : suggest adding 2nd parameter to unserialize in PHP 7.0+
+    + New analyzer : spot successive if/then with the same condition
+    + Added support for zendoptimizer and suhosin extensions
+    + PHP7 indirect expression : added support for {} in properties
++ Tokenizer
+    + Raised cycle count, to speed up building AST for large projects
+
+Version 0.6.5 (Great Sage Who Pacifies Heaven, 2016-05-16)
++ Analyzer
+    + New analyzer : spot globals that may be turned into property
+    + New analyzer : check that ZF1 classes are well located
+    + Upgraded 'dangling foreach reference' to support key=>value
+    + Better support for PHP 7 indirect expression
+    + More directives for xdebug
+    + Eval Without Try is PHP 7 only
+    + No Choice analysis is now case insensitive
++ Tokenizer
+    + Added support for keys in list() (PHP 7.1)
+    + Added support for constant visibility (PHP 7.1)
+    + Added support for Multi catch : catch(A|B $e) (PHP 7.1)
+    + Fixed bug with + and instanceof
+    + Fixed precedence between :: and ??
+
+Version 0.6.4 (Bull Demon King, 2016-05-09)
++ Architecture
+    + Externalized the list of recognized libraries to Json
+    + Added 'Wordpress' and 'Coding convention' as Recipes
++ Report
+    + Initial report for Zend Framework. Still prototyping.
++ Analyzer
+    + Accelerated analysis for Implicit GLobals variables
+    + New analyze : Indirect Injections (Security)
+    + New analyze : Should Use Coalesce (code upgrade)
+    + New analyze : Suggest dirname(__FILE__) => __DIR__
+    + Added 'str_rot13' as unsafe 'crypto'
+    + Properties without default can't be redefined
+    + Added Yield and Yield From as structures without parenthesis needs
+    + Double Assignation, unless 2nd call is a functioncall (less false positives)
+
+Version 0.6.3 (Jade Faced Princess, 2016-05-02)
++ Architecture
+    + Removed several useless pieces of code (self analysis)
+    + Added documentation for Wordpress Recipes
+    + Lengthened Cycle for tokenizer
++ Report
+    + Added bugfixes for PHP 7.0.6, 5.6.21, 5.5.35.
+    + Now reporting token counts per files 
++ Analyzer
+    + New analyzer : Spot variable that holds $_GET, $_POST, $_REQUEST or $_COOKIE values (internal)
+    + New analyzer : Report variables that are overwritten by themselves
+    + New analyzer : Report useless switch (empty, 1 case only)
+    + Upgraded NoChoice to handle larger sequences
+    + Upgraded Useless Global to handle global $x / $GLOBALS['x'] situations
+    + New analyzer : Wordpress Recipe : Unverified Nonce, Best Usage for $wpdb
+    + New analyzer : Void for PHP 7.1   
++ Tokenizer
+    + Fixed but with Typehint
+    + Added phppowerpoint class in external libraries
+
+Version 0.6.2 (Long Armed Ape Monkey, 2016-04-25)
++ Architecture
+    + Fixed phar detection (based on ext/phar)
+    + Cleaned code with myself
++ Report
+    + New report format : clustergrammer
++ Analyzer
+    + New analyzer : same conditions in If / Then
+    + New analyzer : spot dead code in catch expressions
+    + Static loops now exclude methods usage
+    + Indirect variable expression are stricter
+    + preg_* Option e has better support for delimiters
+    + Upgraded Direct Injection in case of concatenation
+    + Detect Ellipsis when counting arguments
+    + Could use short assignation : avoid $a += $a + 3;
++ Tokenizer
+    + Sped up Typehint detection
+    + No indexing for T_STRING in properties
+    + Reduced errors from token_get_all() 
+
+Version 0.6.1 (Red Bottomed Horse Monkey, 2016-04-18)
++ Architecture
+    + Prepared to support PHP 7.1
+    + Fixed bug in user / passwords when initing the project
+    + Better support for ::class when searching for libraries
++ Analyzer
+    + UselessParenthesis : spot nested parenthesis
+    + Spot exceptions that are thrown but uncaught by the current code
+    + Support for ext/lua, 
+    + New : Check catch order in try/catch
+    + Better identification of Composer classes, based on composer.json
+    + Now spot interfaces in use declarations (less undefined interfaces)
++ Tokenizer
+    + Added support for PHP 7.1
+    + key => value in list() calls
+    + visibility for constants in Classes and Interfaces
+    + Accelerated up Typehint support
+
+Version 0.6.0 (Intelligent Stone Monkey, 2016-04-11)
++ Architecture
+    + Fixed a bug in Find external libraries
+    + Applied fixed based on new analyzers's audit
+    + Fixed a bug that prevented results to be prepared for report (Thanks Philippe G.)
++ Report
+    + Now reports reason for excluding a file from analysis
++ Analyzer
+    + New analyzers : Logical Mistake (first version),
+                      Iffectations (code restoration)
+                      Common alternatives
+                      No Choice (No alternatives)
+                      Random_* Without Try (security risk)
+                      Unknown PCRE options
+                      Identical conditions
+                      Hardcoded hashes 
+    + Upgrade List with appends with variable name
+    + Upgrade /e option detection
+    + Fixed detection of unused use, with long namespaces.
+    + Added finfo to ext/finfo
+    + Finds exceptions that are reserved for later throwing
+    + Exclude anonymous classes from Already Defined Interface
++ Tokenizer
+    + Extended cycle number to speed up tokenizer. 
+    + Better escaping of file names 
+
+Version 0.5.9 (Six Eared Macaque, 2016-04-04)
++ Architecture
+    + One progressbar per Recipe during project analysis
+    + report's documentation
+    + Upgraded 'External Lib' to ignore Composer folders.
+    + Fixed a bug about interpreting tokens 
+    + Dump collects classes, interfaces, traits definitions 
+    + Now storing project name in database for future use
+    + Removed PHP configuration modifications (error_reporting, display_errors)
++ Report
+    + Added 'Uml' report : hierarchy report
+    + Now reports Pear Usage
+    + Upgraded Bugfix database for 7.0.5, 5.6.20 and 5.5.34
+    + Report Yield (from) usage
+    + New external configuration files : bazar, github, docker, openshift
++ Analyzer
+    + Added detection for undefined classes in ZF (1.8 to 1.12)
+    + New : report undefined Traits
+    + Added support for parent/grandparent when checking argument numbers
+    + Added support for V8js
++ Tokenizer
+    + Fixed bug in fullnspath for use within trait or class
+    + It is possible to reach a property on an array append
+    + Fixed AST between PHP 5 and 7 for globals
+    + Simplified ++ analyzers
+
+Version 0.5.8 (Sun Deity of Mao, 2016-03-28)
++ Architecture
+    + Moved to self::, instead of static::.
+    + First UT for command line
+    + Sped up phploc. Prepare code for finite states, in Tasks.
+    + Prepare for Gremlin3 (moved gremlin calls to class)
+    + Reduced shell_exec usage
++ Report
+    + Fixed display bugs in Devoops report
+    + Removed double analysis
+    + 'Wrong number of arguments' now supports constructors
++ Analyzer
+    + Upgraded 'No Hardcoded IP' to handle constants, spot domains
+    + Added support for TokyoTyrant
+    + New analyzer : spot simple regex, and suggest strpos
+    + Excluded "$a[b]" from undefined constants
++ Tokenizer
+    + Fixed bug with nested call to echo.
+    + Fixed bug where concatenation ends on a 'AS' keyword
+    + Added support of Constants in Foreach
+    + Fixed multiple bugs in Grouped Use
+    + Support for function as 'class' in static calls
+    + Comparison accepts powers
+    + Added support for empty array short syntax in sequence
+    + Support constant with visibility
+    + Parenthesis may be the base for Arrays
 
 Version 0.5.7 (Scorpion Demon, 2016-03-21)
 + Architecture
