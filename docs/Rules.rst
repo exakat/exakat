@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 05 Jul 2016 19:06:41 +0000
-.. comment: Generation hash : 10e113fb69b6cbb0fdf3110d2c19a26c7ae141da
+.. comment: Generation date : Tue, 12 Jul 2016 10:12:11 +0000
+.. comment: Generation hash : c2b96839955a22aa7e66921bd7c3b5b447511012
 
 
 .. _$http\_raw\_post\_data:
@@ -2397,10 +2397,7 @@ Inconsistant Closing Tag
 ########################
 
 
-Project usually chose between always closing a PHP script (such as .. code-block:: php
-
-   <?php xxx(); ?>
-) or never closing it (<?php xxx(); ). The second is recommended to avoid leaving some whitespaces at the end of the script, and, thus, leading to the infamous 'Headers already sent' error. 
+Project usually chose between always closing a PHP script (such as &gt;?php xxx(); ?&lt;) or never closing it (&gt;?php xxx(); ). The second is recommended to avoid leaving some whitespaces at the end of the script, and, thus, leading to the infamous 'Headers already sent' error. 
 
 One way or another, if the project has a vast majority of either case, it will report the other here, so as to make things homogenous. If the project appears undecided about this issue, nothing will be reported.
 
@@ -3046,28 +3043,6 @@ Those methods are expected to return a value that will be used later. Without re
 +--------------+----------------------+
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
-
-
-
-.. _namespace-with-fully-qualified-name:
-
-Namespace With Fully Qualified Name
-###################################
-
-
-The 'namespace' keyword has actually 2 usages : one is for declaring namespace, such as namespace A\B\C, use as first instruction in the script.
-
-It may also mean 'current namespace' : for example, namespace\A\B\C represents the constant C, in the sub-namespace A\B of the current namespace (which is whatever you want).
-
-The PHP compiler makes no difference between 'namespace \A\B\C', and 'namespace\A\B\C'. In each case, it will try to locate the constant C in the namespace \A\B, and will generate a fatal error if it can't find it.
-
-+--------------+------------------------------------+
-| Command Line | Namespaces/NamespaceFullyQualified |
-+--------------+------------------------------------+
-| clearPHP     |                                    |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`                     |
-+--------------+------------------------------------+
 
 
 
@@ -4593,6 +4568,7 @@ Repeated print()
 It is recommended to use echo with multiple arguments, or a concatenation with print, instead of multiple calls to print echo, when outputting several blob of text.
 
 Write : 
+
 .. code-block:: php
 
    <?php
@@ -4602,6 +4578,7 @@ Write :
 
 
 Don't write :  
+
 .. code-block:: php
 
    <?php

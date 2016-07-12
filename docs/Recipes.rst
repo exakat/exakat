@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 05 Jul 2016 19:06:41 +0000
-.. comment: Generation hash : 10e113fb69b6cbb0fdf3110d2c19a26c7ae141da
+.. comment: Generation date : Tue, 12 Jul 2016 10:12:11 +0000
+.. comment: Generation hash : c2b96839955a22aa7e66921bd7c3b5b447511012
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 251 analysis
+Total : 250 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -169,7 +169,6 @@ Total : 251 analysis
 * :ref:`Multiples Identical Case <multiples-identical-case>`
 * :ref:`Multiply By One <multiply-by-one>`
 * :ref:`Must Return Methods <must-return-methods>`
-* :ref:`Namespace With Fully Qualified Name <namespace-with-fully-qualified-name>`
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`

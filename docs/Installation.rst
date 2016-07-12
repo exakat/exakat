@@ -20,16 +20,16 @@ Installation list
 
 The exakat-vagrant repository contains an automated install for exakat with the last version. It installs : 
 
-* PHP 5.4, 5.5, 5.6, 7.0 and 7.1 (dev)
+* PHP 5.4, 5.5, 5.6, 7.0, 7.1 and 7.2 (a.k.a, dev)
 * Neo4j 2.3.5
-* Gremlin 3.2
+* Gremlin 3.2 
 * Java 8
-* Exakat last version
+* Exakat > 0.7.4
 
 Pre-requisites
 ##############
 
-You need 3 elements installed : 
+You need the following tools : 
 
 * [git](https://git-scm.com/)
 * [ansible](http://docs.ansible.com/ansible/intro_installation.html)
@@ -60,8 +60,8 @@ pre-requisite
 #############
 
 * Java 1.8
-* Neo4j 2.2.*
-* Gremlin 2.0 plugin
+* Neo4j 2.3.*
+* Gremlin 3.0 plugin
 * PHP (at least one version)
 * exakat.phar
 
@@ -102,43 +102,37 @@ The following shell code install Java 8. Root privileges are needed.
 
 Neo4j
 +++++++++++++++++++++++++++++
-Download Neo4j 2.2.* version (currently, 2.2.7). Neo4j 2.3 or later have no support for Gremlin 2.0. 
+Download Neo4j 2.3.* version (currently, 2.3.5). Neo4j 2.2 are not supported. Neo4j 3.0 has no support for Gremlin at the moment (2016-07-01)
 
 [Neo4j](http://neo4j.com/)
 
 ::
 
-    wget http://dist.neo4j.org/neo4j-community-2.2.4-unix.tar.gz
-    tar -xvf neo4j-community-2.2.4-unix.tar.gz 
-    mv neo4j-community-2.2.4 neo4j
+    wget http://dist.neo4j.org/neo4j-community-2.3.5-unix.tar.gz
+    tar -xvf neo4j-community-2.3.5-unix.tar.gz 
+    mv neo4j-community-2.3.5 neo4j
 
 Gremlin plug-in
 +++++++++++++++
 
-There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
+Exakat uses [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
 
-Check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors.) : 
+Make the following changes in the following files : 
 
-::
-
-    <repositories>
-       <repository>
-         <id>snapshots-repo</id>
-         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-         <releases><enabled>false</enabled></releases>
-         <snapshots><enabled>true</enabled></snapshots>
-       </repository>
-     </repositories>
-
+* pom.xml : change the version tag from 2.3.1 to 2.3.5
+* tinkerpop2/pom.xml : change the version tag from 2.3.1 to 2.3.5
+* tinkerpop3/pom.xml
+    + change the version tag from 2.3.1 to 2.3.5
+    + change the tinkerpop-version tag from 3.1.0-incubating to 3.2.0-incubating
 
 Then, in command line : 
 
 ::
 
-    git clone https://github.com/neo4j-contrib/gremlin-plugin.git gremlin
+    git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin gremlin
     cd gremlin
-    mvn clean package
-    unzip target/neo4j-gremlin-plugin-2.1-SNAPSHOT-server-plugin.zip -d ../neo4j/plugins/gremlin-plugin
+    mvn clean package -Dtp.version=3
+    unzip target/neo4j-gremlin-plugin-tp3-2.3.1-server-plugin.zip -d ../neo4j/plugins/gremlin-plugin
     cd ../neo4j
     bin/neo4j restart
 
@@ -150,7 +144,7 @@ You need one version of PHP (at least) to run exakat. This version needs the [`c
 
 Extra PHP-CLI versions allow more checks on the code. They only need to have the [`tokenizer`](http://www.php.net/tokenizer) extension available.  
 
-Exakat recommends PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6 and 7.1-dev.
+Exakat recommends PHP 7.0.8 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.1-alpha and 7.2-dev.
 
 To install easily various versions of PHP, use the dotdeb repository. Follow the [dotdeb instruction](https://www.dotdeb.org/instructions/).
 
@@ -175,7 +169,7 @@ pre-requisite
 * homebrew
 * git
 * Java 1.8
-* Neo4j 2.2.*
+* Neo4j 2.3.*
 * Gremlin plugin
 * zip
 * PHP version
@@ -218,21 +212,21 @@ Install Java(TM) JDK 1.8. Neo4j recommends using Java 1.7, but is currently repo
 * Go to [Java Se Download] (http://www.oracle.com/technetwork/java/javase/downloads/index.html) and follow the instructions
 * Check with `java -version`
 * `echo $JAVA_HOME` (Should be set to the path of Java 1.8)
-* `export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home'` (Note that 1.8.0_60 may differ on your installation. Check the path)
+* `export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home'` (Note that 1.8.0_92 may differ on your installation. Check the path)
 
 Neo4j
 #####
 
 Go to [Neo4j Releases](http://neo4j.com/download/other-releases/) and download the Community edition for Linux/Mac.
-As of today (december 2015), version 2.2.7 have been tested successfully. 
-Versions 2.1.\* might work, though they are not supported. 
-Neo4j 2.3.\* or 3.0.0 won't work yet (The gremlin plug-in hasn't been tested successfully). 
+As of today (july 2016), version 2.3.5 have been tested successfully. 
+
+Neo4j 3.0.0 won't work yet (The gremlin plug-in hasn't been tested successfully). 
 
 ::
 
-    curl -O http://neo4j.com/artifact.php?name=neo4j-community-2.2.6-unix.tar.gz 
-    tar -xf artifact.php\?name=neo4j-community-2.2.6-unix.tar.gz
-    mv neo4j-community-2.2.6 neo4j
+    curl -O http://neo4j.com/artifact.php?name=neo4j-community-2.3.5-unix.tar.gz 
+    tar -xf artifact.php\?name=neo4j-community-2.3.5-unix.tar.gz
+    mv neo4j-community-2.3.5 neo4j
     cd neo4j
     ./bin/neo4j start
     ./bin/neo4j stop
@@ -261,33 +255,33 @@ First, in command line :
     git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git gremlin-plugin
     cd gremlin-plugin
 
+Make the following changes in the following files : 
 
-Now, check the pom.xml file, and make sure that Maven finds the Gremlin-2.7-SNAPSHOT. Until Gremlin 2.7 hits the repositories, you can use this (add it in the pom.xml, below contributors section.) : 
+* pom.xml : change the version tag from 2.3.1 to 2.3.5
+* tinkerpop2/pom.xml : change the version tag from 2.3.1 to 2.3.5
+* tinkerpop3/pom.xml
+    + change the version tag from 2.3.1 to 2.3.5
+    + change the tinkerpop-version tag from 3.1.0-incubating to 3.2.0-incubating
 
-:: 
+::
 
-    <repositories>
-       <repository>
-         <id>snapshots-repo</id>
-         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-         <releases><enabled>false</enabled></releases>
-         <snapshots><enabled>true</enabled></snapshots>
-       </repository>
-     </repositories>
+    git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git gremlin-plugin
+    cd gremlin-plugin
 
 
 Then, finish the compilation : 
 ::
 
     brew install maven // If you haven't installed maven yet
-    mvn clean package
+    mvn clean package  -Dtp.version=3
 
 
 `$NEO4J_HOME`  is the home of the neo4j server. It was installed just before. Use the path or set the variable.
 
 ::
 
-    unzip target/neo4j-gremlin-plugin-tp2-2.2.3-SNAPSHOT-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin
+    mkdir $NEO4J_HOME/plugins/gremlin-plugin
+    unzip target/neo4j-gremlin-plugin-tp3-2.3.5-server-plugin.zip -d $NEO4J_HOME/plugins/gremlin-plugin
     cd $NEO4J_HOME
     bin/neo4j start
 
@@ -353,7 +347,7 @@ If you have succeeded in installing exakat on another system, please report any 
 pre-requisite
 #############
 * Java 1.8 (needed for Neo4j)
-* Neo4j 2.2.*
+* Neo4j 2.3.*
 * Gremlin plugin
 * PHP (at least one version)
 * exakat.phar
@@ -367,8 +361,7 @@ You need a recent version of Java : the recommended version is Java 8.
 Neo4j
 #####
 
-Download Neo4j 2.2.* version (currently, 2.2.4). 
-Version 2.1.\* should work, but they are not supported. Version 2.3.\* and up are not working yet (Gremlin plug-in is missing).
+Download Neo4j 2.3.* version (currently, 2.3.5). 
 
 [Neo4j](http://neo4j.com/)
 
@@ -379,7 +372,14 @@ Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` fi
 Gremlin plug-in
 +++++++++++++++++++++++++++++
 
-There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
+There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there, but also before running the maven compile, update the pom.xml files : 
+
+* pom.xml : change the version tag from 2.3.1 to 2.3.5
+* tinkerpop2/pom.xml : change the version tag from 2.3.1 to 2.3.5
+* tinkerpop3/pom.xml
+    + change the version tag from 2.3.1 to 2.3.5
+    + change the tinkerpop-version tag from 3.1.0-incubating to 3.2.0-incubating
+
 
 Various versions of PHP
 +++++++++++++++++++++++++++++
@@ -387,7 +387,7 @@ You need one version of PHP (at least) to run exakat. This version needs the [`c
 
 Extra PHP-CLI versions allow more checks on the code. They only need to have the [`tokenizer`](http://www.php.net/tokenizer) extension available.  
 
-We recommend running PHP 7.0.1 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.0 and 7.1-dev, as they may be used with exakat.
+We recommend running PHP 7.0.8 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.0, 7.1-alpha and 7.2-dev, as they may be used with exakat.
 
 Exakat 
 ++++++
@@ -402,8 +402,6 @@ This will check if all of the above has be correctly run and will report some di
 Optional installation
 ---------------------
 
-
-
 By default, exakat works with Git repository for downloading code. You may also use 
 
 * [composer](https://getcomposer.org/)
@@ -411,5 +409,7 @@ By default, exakat works with Git repository for downloading code. You may also 
 * [hg](https://www.mercurial-scm.org/)
 * [bazaar](http://bazaar.canonical.com/en/)
 * zip
+* local copy of a code folder
+* local symlink of a code folder (only used for reading, no writing)
 
 The binary above are used with the `init` and `update` commands, to get the source code. They are optional.
