@@ -95,7 +95,7 @@ class Load extends Tasks {
                         T_EXIT                        => 0,
 
                         T_CLONE                       => 1,
-                        T_NEW                         => 1, 
+                        T_NEW                         => 1,
 
                         T_OPEN_BRACKET                => 2,
                
@@ -118,7 +118,7 @@ class Load extends Tasks {
                         T_BANG                        => 6,
 
                         T_REFERENCE                   => 6, // Special for reference's usage of &
-               
+
                         T_SLASH                       => 7,
                         T_STAR                        => 7,
                         T_PERCENTAGE                  => 7,
@@ -134,25 +134,25 @@ class Load extends Tasks {
                         T_IS_GREATER_OR_EQUAL         => 10,
                         T_GREATER                     => 10,
                         T_SMALLER                     => 10,
-                        	
+                            
                         T_IS_EQUAL                    => 11,
                         T_IS_NOT_EQUAL                => 11, // Double operator
                         T_IS_IDENTICAL                => 11,
                         T_IS_NOT_IDENTICAL            => 11,
                         T_SPACESHIP                   => 11,
 
-                        T_AND                         => 12,	// &
+                        T_AND                         => 12,    // &
 
-                        T_CARET                       => 13,	// ^
+                        T_CARET                       => 13,    // ^
 
-                        T_PIPE                        => 14,	 // |
-                        	
+                        T_PIPE                        => 14,     // |
+
                         T_BOOLEAN_AND                 => 15, // &&
-                        	
+
                         T_BOOLEAN_OR                  => 16, // ||
-                        	
+
                         T_COALESCE                    => 17,
-                        	
+                            
                         T_QUESTION                    => 18,
                
                         T_EQUAL                       => 19,
@@ -170,7 +170,7 @@ class Load extends Tasks {
                         T_XOR_EQUAL                   => 19,
                         
                         T_LOGICAL_AND                 => 20, // and
-                        
+
                         T_LOGICAL_XOR                 => 21, // xor
 
                         T_LOGICAL_OR                  => 22, // or
@@ -318,7 +318,7 @@ class Load extends Tasks {
         $this->checkTokenLimit();
 
         $this->id0 = $this->addAtom('Project');
-        $this->setAtom($this->id0, ['code'     => 'Whole', 
+        $this->setAtom($this->id0, ['code'     => 'Whole',
                                     'fullcode' => 'Whole',
                                     'line'     => -1,
                                     'token'    => 'T_WHOLE']);
@@ -338,6 +338,7 @@ class Load extends Tasks {
         if ($filename = $this->config->filename) {
             $this->processFile($filename);
             $this->saveFiles();
+            $this->saveDefinitions();
         } elseif ($dirName = $this->config->dirname) {
             $this->processDir($dirName);
         } elseif (($project = $this->config->project) != 'default') {
@@ -366,7 +367,7 @@ class Load extends Tasks {
             $nbTokens += $this->processFile($path.$file);
             $this->saveFiles();
         }
-        $this->saveFiles();
+        $this->saveDefinitions();
 
         return array('files' => count($files), 'tokens' => $nbTokens);
     }
@@ -398,8 +399,9 @@ class Load extends Tasks {
         $nbTokens = 0;
         foreach($files as $file) {
             $nbTokens += $this->processFile($file);
+            $this->saveFiles();
         }
-        $this->saveFiles();
+        $this->saveDefinitions();
 
         return array('files' => count($files), 'tokens' => $nbTokens);
     }
@@ -443,11 +445,11 @@ class Load extends Tasks {
         $this->tokens = [];
         foreach($tokens as $t) {
             if (is_array($t)) {
-                if ($t[0] == T_COMMENT || 
+                if ($t[0] == T_COMMENT ||
                     $t[0] == T_WHITESPACE ||
-                    $t[0] == T_DOC_COMMENT) { 
+                    $t[0] == T_DOC_COMMENT) {
                     $line += substr_count($t[1], "\n");
-                    continue; 
+                    continue;
                 } else {
                     $line = $t[2];
                     $this->tokens[] = $t;
@@ -467,7 +469,7 @@ class Load extends Tasks {
         
         
         $id1 = $this->addAtom('File');
-        $this->setAtom($id1, ['code'     => $filename, 
+        $this->setAtom($id1, ['code'     => $filename,
                               'fullcode' => $filename,
                               'line'     => -1,
                               'token'    => 'T_FILENAME']);
@@ -577,18 +579,18 @@ class Load extends Tasks {
                             T_SR_EQUAL                 => 'processAssignation',
                             T_XOR_EQUAL                => 'processAssignation',
 
-                            T_CONTINUE                 => 'processBreak',	
-                            T_BREAK                    => 'processBreak',		
+                            T_CONTINUE                 => 'processBreak',
+                            T_BREAK                    => 'processBreak',
 
-                            T_LOGICAL_AND              => 'processLogical',	
-                            T_LOGICAL_XOR              => 'processLogical',		
-                            T_LOGICAL_OR               => 'processLogical',	
-                            T_PIPE                     => 'processLogical',	
-                            T_CARET                    => 'processLogical',	
-                            T_AND                      => 'processAnd',	
+                            T_LOGICAL_AND              => 'processLogical',
+                            T_LOGICAL_XOR              => 'processLogical',
+                            T_LOGICAL_OR               => 'processLogical',
+                            T_PIPE                     => 'processLogical',
+                            T_CARET                    => 'processLogical',
+                            T_AND                      => 'processAnd',
 
-                            T_BOOLEAN_AND              => 'processLogical',	
-                            T_BOOLEAN_OR               => 'processLogical',		
+                            T_BOOLEAN_AND              => 'processLogical',
+                            T_BOOLEAN_OR               => 'processLogical',
 
                             T_QUESTION                 => 'processTernary',
                             T_NS_SEPARATOR             => 'processNsnameAbsolute',
@@ -744,7 +746,7 @@ class Load extends Tasks {
                     $propertyNameId = $this->processNextAsIdentifier();
 
                     $propertyId = $this->addAtom('Property');
-                    $this->setAtom($propertyId, ['code'     => $this->tokens[$current][1], 
+                    $this->setAtom($propertyId, ['code'     => $this->tokens[$current][1],
                                                  'fullcode' => $this->atoms[$objectId]['fullcode']. '->' .
                                                                $this->atoms[$propertyNameId]['fullcode'],
                                                 'line'      => $this->tokens[$current][2],
@@ -774,7 +776,7 @@ class Load extends Tasks {
         }
         
         ++$this->id;
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $openQuote.join('', $fullcode).$closeQuote,
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0]),
@@ -800,11 +802,11 @@ class Load extends Tasks {
             $this->processNext();
         } ;
         ++$this->id; // Skip }
-        
+
         $nameId = $this->popExpression();
         $this->addLink($variableId, $nameId, 'NAME');
 
-        $this->setAtom($nameId, ['code'      => $this->tokens[$current][1], 
+        $this->setAtom($nameId, ['code'      => $this->tokens[$current][1],
                                  'fullcode'  => '${'.$this->atoms[$nameId]['fullcode'].'}',
                                  'line'      => $this->tokens[$current][2],
                                  'token'     => $this->getToken($this->tokens[$current][0]),
@@ -827,7 +829,7 @@ class Load extends Tasks {
             $catch = $this->id + 1;
             ++$this->id; // Skip catch
             ++$this->id; // Skip (
-        
+
             $catchId = $this->addAtom('Catch');
             $classId = $this->processOneNsname();
             $this->addLink($catchId, $classId, 'CLASS');
@@ -875,7 +877,7 @@ class Load extends Tasks {
 
         $this->setAtom($tryId, ['code'     => $this->tokens[$current][1],
                                 'fullcode' => $this->tokens[$current][1] . static::FULLCODE_BLOCK .
-                                              join('', $fullcodeCatch) . 
+                                              join('', $fullcodeCatch) .
                                               ( isset($finallyId) ? $this->atoms[$finallyId]['fullcode'] : ''),
                                 'line'     => $this->tokens[$current][2],
                                 'token'    => $this->getToken($this->tokens[$current][0]),
@@ -951,17 +953,17 @@ class Load extends Tasks {
         }
         
         if ( $isClosure === false &&
-            !$this->isContext(self::CONTEXT_CLASS) && 
-            !$this->isContext(self::CONTEXT_TRAIT) && 
+            !$this->isContext(self::CONTEXT_CLASS) &&
+            !$this->isContext(self::CONTEXT_TRAIT) &&
             !$this->isContext(self::CONTEXT_INTERFACE)) {
             $fullnspath = $this->getFullnspath($nameId);
             $this->addDefinition('function', $fullnspath, $functionId);
         } else {
             $fullnspath = '';
         }
-        $this->setAtom($functionId, ['code'       => $this->atoms[$nameId]['fullcode'], 
-                                     'fullcode'   => join(' ', $fullcode).$this->tokens[$current][1] . ' ' . 
-                                                     ($this->atoms[$functionId]['reference'] ? '&' : '') . 
+        $this->setAtom($functionId, ['code'       => $this->atoms[$nameId]['fullcode'],
+                                     'fullcode'   => join(' ', $fullcode).$this->tokens[$current][1] . ' ' .
+                                                     ($this->atoms[$functionId]['reference'] ? '&' : '') .
                                                      ($this->atoms[$nameId]['atom'] === 'Void' ? '' : $this->atoms[$nameId]['fullcode']).
                                                      '('.$this->atoms[$argumentsId]['fullcode'].')'.
                                                      (isset($useId) ? ' use ('.$this->atoms[$useId]['fullcode'].')' : ''). // No space before use
@@ -1012,7 +1014,7 @@ class Load extends Tasks {
             while ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR &&
                    $this->tokens[$this->id + 2][0] !== T_OPEN_CURLY ) {
                 ++$this->id; // Skip \
-    
+
                 $subnameId = $this->processNextAsIdentifier();
     
                 $this->setAtom($subnameId, ['rank' => $rank++]);
@@ -1020,7 +1022,7 @@ class Load extends Tasks {
                 $this->addLink($extendsId, $subnameId, 'SUBNAME');
             }
             
-            $this->setAtom($extendsId, ['code'     => '\\', 
+            $this->setAtom($extendsId, ['code'     => '\\',
                                         'fullcode' => join('\\', $fullcode),
                                         'line'     => $this->tokens[$current][2],
                                         'token'    => $this->getToken($this->tokens[$current][0]),
@@ -1049,7 +1051,7 @@ class Load extends Tasks {
         $this->addLink($traitId, $blockId, 'BLOCK');
         
         $fullnspath = $this->getFullnspath($nameId);
-        $this->setAtom($traitId, ['code'       => $this->tokens[$current][1], 
+        $this->setAtom($traitId, ['code'       => $this->tokens[$current][1],
                                   'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].
                                                   static::FULLCODE_BLOCK,
                                   'line'       => $this->tokens[$current][2],
@@ -1103,7 +1105,7 @@ class Load extends Tasks {
         $this->addLink($interfaceId, $blockId, 'BLOCK');
         
         $fullnspath = $this->getFullnspath($nameId);
-        $this->setAtom($interfaceId, ['code'       => $this->tokens[$current][1], 
+        $this->setAtom($interfaceId, ['code'       => $this->tokens[$current][1],
                                       'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].
                                                       static::FULLCODE_BLOCK,
                                       'line'       => $this->tokens[$current][2],
@@ -1151,7 +1153,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] == T_EXTENDS) {
             $extends = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip extends
-            
+
             $extendsId = $this->processOneNsname();
             
             $this->addLink($classId, $extendsId, 'EXTENDS');
@@ -1179,8 +1181,8 @@ class Load extends Tasks {
         $this->addLink($classId, $blockId, 'BLOCK');
         
         $fullnspath = $this->getFullnspath($nameId);
-        $this->setAtom($classId, ['code'       => $this->tokens[$current][1], 
-                                  'fullcode'   => (!empty($fullcode) ? join(' ', $fullcode).' ' : '') . 
+        $this->setAtom($classId, ['code'       => $this->tokens[$current][1],
+                                  'fullcode'   => (!empty($fullcode) ? join(' ', $fullcode).' ' : '') .
                                                   $this->tokens[$current][1] .
                                                   ($this->atoms[$nameId]['atom'] === 'Void' ? '' : ' '.$this->atoms[$nameId]['fullcode']) .
                                                   (isset($argumentsId) ? ' ('.$this->atoms[$argumentsId]['fullcode'].')' : '').
@@ -1233,7 +1235,7 @@ class Load extends Tasks {
         $this->addLink($id, $this->sequence, 'CODE');
         $this->endSequence();
         
-        $this->setAtom($id, ['code'     => $this->tokens[$current][1], 
+        $this->setAtom($id, ['code'     => $this->tokens[$current][1],
                              'fullcode' => '<?php '.self::FULLCODE_SEQUENCE.' '.$closing,
                              'line'     => $this->tokens[$current][2],
                              'token'    => $this->getToken($this->tokens[$current][0])]);
@@ -1319,7 +1321,7 @@ class Load extends Tasks {
         --$this->id;
     
         $functioncallId = $this->addAtom('Functioncall');
-        $this->setAtom($functioncallId, ['code'       => $this->atoms[$echoId]['code'], 
+        $this->setAtom($functioncallId, ['code'       => $this->atoms[$echoId]['code'],
                                          'fullcode'   => '<?php echo ' . $this->atoms[$argumentsId]['fullcode'],
                                          'line'       => $this->tokens[$current === -1 ? 0 : $current][2],
                                          'token'      => 'T_OPEN_TAG_WITH_ECHO',
@@ -1334,7 +1336,7 @@ class Load extends Tasks {
 
         $this->setAtom($id, ['absolute'   => true]);
         // No need for fullnspath here 
-        
+
         return $id;
     }
 
@@ -1372,7 +1374,7 @@ class Load extends Tasks {
         // Back up a bit
         $this->id--;
 
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => join('\\', $fullcode),
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0]),
@@ -1423,7 +1425,7 @@ class Load extends Tasks {
             $this->setAtom($voidId, ['rank' => 0]);
             $this->addLink($argumentsId, $voidId, 'ARGUMENT');
 
-            $this->setAtom($argumentsId, ['code'     => $this->tokens[$current][1], 
+            $this->setAtom($argumentsId, ['code'     => $this->tokens[$current][1],
                                           'fullcode' => self::FULLCODE_VOID,
                                           'line'     => $this->tokens[$current][2],
                                           'token'    => $this->getToken($this->tokens[$current][0]),
@@ -1495,7 +1497,7 @@ class Load extends Tasks {
 
             if ($indexId === 0) {
                 $indexId = $this->addAtomVoid();
-            } 
+            }
             $this->setAtom($indexId, ['rank' => $rank++]);
             $this->argumentsId[] = $indexId;
             
@@ -1514,7 +1516,7 @@ class Load extends Tasks {
             // Skip the ) 
             ++$this->id;
 
-            $this->setAtom($argumentsId, ['code'     => $this->tokens[$current][1], 
+            $this->setAtom($argumentsId, ['code'     => $this->tokens[$current][1],
                                           'fullcode' => join(', ', $fullcode),
                                           'line'     => $this->tokens[$current][2],
                                           'token'    => $this->getToken($this->tokens[$current][0]),
@@ -1528,7 +1530,7 @@ class Load extends Tasks {
     private function processNextAsIdentifier() {
         ++$this->id;
         $id = $this->addAtom('Identifier');
-        $this->setAtom($id, ['code'       => $this->tokens[$this->id][1], 
+        $this->setAtom($id, ['code'       => $this->tokens[$this->id][1],
                              'fullcode'   => $this->tokens[$this->id][1],
                              'line'       => $this->tokens[$this->id][2],
                              'token'      => $this->getToken($this->tokens[$this->id][0]),
@@ -1559,7 +1561,7 @@ class Load extends Tasks {
             $this->addLink($defId, $nameId, 'NAME');
             $this->addLink($defId, $valueId, 'VALUE');
 
-            $this->setAtom($defId, ['code'     => $this->tokens[$const][1], 
+            $this->setAtom($defId, ['code'     => $this->tokens[$const][1],
                                     'fullcode' => $this->atoms[$nameId]['fullcode'].' = '.$this->atoms[$valueId]['fullcode'],
                                     'line'     => $this->tokens[$const][2],
                                     'token'    => $this->getToken($this->tokens[$const][0]),
@@ -1573,7 +1575,7 @@ class Load extends Tasks {
             $this->addLink($constId, $defId, 'CONST');
         } while (!in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON]));
 
-        $this->setAtom($constId, ['code'     => $this->tokens[$current][1], 
+        $this->setAtom($constId, ['code'     => $this->tokens[$current][1],
                                   'fullcode' => $this->tokens[$current][1].' '.join(', ', $fullcode),
                                   'line'     => $this->tokens[$current][2],
                                   'token'    => $this->getToken($this->tokens[$current][0]),
@@ -1582,7 +1584,7 @@ class Load extends Tasks {
         $this->pushExpression($constId);
 
         return $this->processFCOA($constId);
-    }    
+    }
     
     private function processOptions($atom) {
         $this->processSingle($atom);
@@ -1606,7 +1608,7 @@ class Load extends Tasks {
             $pppId = $this->processSGVariable('Ppp');
             $this->optionsTokens = array();
             return $pppId;
-        } 
+        }
         
         return $id;
     }
@@ -1618,7 +1620,7 @@ class Load extends Tasks {
             $pppId = $this->processSGVariable('Ppp');
             $this->optionsTokens = array();
             return $pppId;
-        } 
+        }
         
         return $id;
     }
@@ -1630,7 +1632,7 @@ class Load extends Tasks {
             $pppId = $this->processSGVariable('Ppp');
             $this->optionsTokens = array();
             return $pppId;
-        } 
+        }
 
         return $id;
     }
@@ -1641,7 +1643,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
             return $pppId;
-        } 
+        }
 
         return $id;
     }
@@ -1665,7 +1667,7 @@ class Load extends Tasks {
             }
             $this->addCall('function', $fullnspath, $functioncallId);
         }
-        $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'], 
+        $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'],
                                          'fullcode'   => $this->atoms[$nameId]['fullcode'].'('.$this->atoms[$argumentsId]['fullcode'].')',
                                          'line'       => $this->tokens[$current][2],
                                          'token'      => $this->atoms[$nameId]['token'],
@@ -1689,7 +1691,7 @@ class Load extends Tasks {
             $id = $this->addAtom('Identifier');
         }
 
-        $this->setAtom($id, ['code'       => $this->tokens[$this->id][1], 
+        $this->setAtom($id, ['code'       => $this->tokens[$this->id][1],
                              'fullcode'   => $this->tokens[$this->id][1],
                              'line'       => $this->tokens[$this->id][2],
                              'token'      => $this->getToken($this->tokens[$this->id][0]),
@@ -1708,7 +1710,7 @@ class Load extends Tasks {
                   !in_array($this->tokens[$this->id - 1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR, T_QUESTION))) {
             $labelId = $this->addAtom('Label');
             $this->addLink($labelId, $id, 'LABEL');
-            $this->setAtom($labelId, ['code'     => ':', 
+            $this->setAtom($labelId, ['code'     => ':',
                                       'fullcode' => $this->atoms[$id]['fullcode'].' :',
                                       'line'     => $this->tokens[$this->id][2],
                                       'token'    => $this->getToken($this->tokens[$this->id][0])]);
@@ -1734,8 +1736,8 @@ class Load extends Tasks {
             $this->addLink($plusplusId, $previousId, 'POSTPLUSPLUS');
 
             $fullcode = '';
-            $this->setAtom($plusplusId, ['code'     => $this->tokens[$this->id][1], 
-                                         'fullcode' => $this->atoms[$previousId]['fullcode'] . 
+            $this->setAtom($plusplusId, ['code'     => $this->tokens[$this->id][1],
+                                         'fullcode' => $this->atoms[$previousId]['fullcode'] .
                                                        $this->tokens[$this->id][1],
                                          'line'     => $this->tokens[$this->id][2],
                                          'token'    => $this->getToken($this->tokens[$this->id][0])]);
@@ -1763,7 +1765,7 @@ class Load extends Tasks {
 
             return $this->processFunctioncall();
         } elseif ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
-            if ($this->isContext(self::CONTEXT_CLASS) && 
+            if ($this->isContext(self::CONTEXT_CLASS) &&
                 !$this->isContext(self::CONTEXT_FUNCTION)) {
                 // something like public static
                 $this->processOptions('Static');
@@ -1806,7 +1808,7 @@ class Load extends Tasks {
 
        $fullcode[] = $this->atoms[$elementId]['fullcode'];
 
-        $this->setAtom($staticId, ['code'     => $this->tokens[$current][1], 
+        $this->setAtom($staticId, ['code'     => $this->tokens[$current][1],
                                    'fullcode' => $this->tokens[$current][1] . ' ' . join(' ', $fullcode),
                                    'line'     => $this->tokens[$current][2],
                                    'token'    => $this->getToken($this->tokens[$current][0]),
@@ -1840,7 +1842,7 @@ class Load extends Tasks {
         $argumentId = $this->processArguments([T_CLOSE_BRACKET]);
         $this->addLink($id, $argumentId, 'ARGUMENTS');
 
-        $this->setAtom($id, ['code'       => $this->tokens[$current][1], 
+        $this->setAtom($id, ['code'       => $this->tokens[$current][1],
                              'fullcode'   => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ,
                              'line'       => $this->tokens[$this->id][2],
                              'token'      => $this->getToken($this->tokens[$current][0]),
@@ -1861,18 +1863,18 @@ class Load extends Tasks {
         $opening = $this->tokens[$this->id + 1][0];
         $opening === '{' ? $closing = '}' : $closing = ']';
          
-        ++$this->id; 
+        ++$this->id;
         do {
             $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_BRACKET, T_CLOSE_CURLY])) ;
 
         // Skip closing bracket
-        ++$this->id; 
+        ++$this->id;
 
         $indexId = $this->popExpression();
         $this->addLink($id, $indexId, 'INDEX');
 
-        $this->setAtom($id, ['code'      => $opening, 
+        $this->setAtom($id, ['code'      => $opening,
                              'fullcode'  => $this->atoms[$variableId]['fullcode'] . $opening .
                                             $this->atoms[$indexId]['fullcode']    . $closing ,
                              'line'      => $this->tokens[$current][2],
@@ -1910,7 +1912,7 @@ class Load extends Tasks {
                                   'bracket'  => true]);
 
         ++$this->id; // skip }    
-        
+
         $this->pushExpression($blockId);
         if ($standalone === true) {
             $this->processSemicolon();
@@ -1944,7 +1946,7 @@ class Load extends Tasks {
               'line'     => $this->tokens[$this->id][2],
               'token'    => $this->getToken($this->tokens[$this->id][0])];
 
-        if ($this->atoms[$current]['count'] === 1) { 
+        if ($this->atoms[$current]['count'] === 1) {
             $x['fullcode'] = $this->atoms[$elementId]['fullcode'];
         }
         $this->setAtom($blockId, $x);
@@ -2049,7 +2051,7 @@ class Load extends Tasks {
         $this->pushExpression($id);
         $this->processSemicolon();
 
-        return $id;    
+        return $id;
     }
 
     private function processFollowingBlock($finals) {
@@ -2369,7 +2371,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] == T_ELSE){
             $else = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip else
-            
+
             $elseId = $this->processFollowingBlock([T_ENDIF]);
             $this->popExpression();
             $this->addLink($id, $elseId, 'ELSE');
@@ -2398,7 +2400,7 @@ class Load extends Tasks {
         
         if ($this->tokens[$current][0] === T_IF) {
             $this->pushExpression($id);
-            $this->processSemicolon(); 
+            $this->processSemicolon();
         }
 
         $this->setAtom($id, ['code'        => $this->tokens[$current][1],
@@ -2420,7 +2422,7 @@ class Load extends Tasks {
         $indexId = $this->popExpression();
         $this->addLink($parentheseId, $indexId, 'CODE');
 
-        $this->setAtom($parentheseId, ['code'     => $this->tokens[$this->id][1], 
+        $this->setAtom($parentheseId, ['code'     => $this->tokens[$this->id][1],
                                        'fullcode' => '(' . $this->atoms[$indexId]['fullcode'] . ')',
                                        'line'     => $this->tokens[$this->id][2],
                                        'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
@@ -2467,7 +2469,7 @@ class Load extends Tasks {
     private function processExit() {
         if (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_TAG, T_CLOSE_BRACKET, T_COLON])) {
             $nameId = $this->addAtom('Identifier');
-            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
+            $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1],
                                      'fullcode' => $this->tokens[$this->id][1],
                                      'line'     => $this->tokens[$this->id][2],
                                      'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
@@ -2482,12 +2484,12 @@ class Load extends Tasks {
                                          'token'    => $this->getToken($this->tokens[$this->id][0])]);
 
             $functioncallId = $this->addAtom('Functioncall');
-            $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'], 
+            $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'],
                                              'fullcode'   => $this->atoms[$nameId]['fullcode'] . ' ' .
                                                              ($this->atoms[$argumentsId]['atom'] === 'Void' ? self::FULLCODE_VOID :  $this->atoms[$argumentsId]['fullcode']),
                                              'line'       => $this->tokens[$this->id][2],
                                              'token'      => $this->getToken($this->tokens[$this->id][0]),
-                                             'fullnspath' => '\\'.strtolower($this->atoms[$nameId]['code']), 
+                                             'fullnspath' => '\\'.strtolower($this->atoms[$nameId]['code']),
                                              
                                            ]);
             $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
@@ -2495,7 +2497,7 @@ class Load extends Tasks {
 
             $this->pushExpression($functioncallId);
 
-            return $functioncallId;    
+            return $functioncallId;
         } else {
             --$this->id;
             $nameId = $this->processNextAsIdentifier();
@@ -2510,6 +2512,9 @@ class Load extends Tasks {
     }
 
     private function processTernary() {
+        static $r = 0;
+        $r++;
+
         $current = $this->id;
 
         $conditionId = $this->popExpression();
@@ -2517,11 +2522,12 @@ class Load extends Tasks {
         
         while (!in_array($this->tokens[$this->id + 1][0], [T_COLON]) ) {
             $id = $this->processNext();
-        } ;
+        };
         $thenId = $this->popExpression();
         ++$this->id; // Skip colon
 
         $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals[] = T_COLON; // Added from nested Ternary
         while (!in_array($this->tokens[$this->id + 1][0], $finals) ) {
             $id = $this->processNext();
         } ;
@@ -2531,16 +2537,16 @@ class Load extends Tasks {
         $this->addLink($ternaryId, $thenId, 'THEN');
         $this->addLink($ternaryId, $elseId, 'ELSE');
 
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->atoms[$conditionId]['fullcode'] . ' ?' .
-                            ($this->atoms[$thenId]['atom'] == 'Void' ? '' : ' '.$this->atoms[$thenId]['fullcode'].' ' ). ': ' . 
+                            ($this->atoms[$thenId]['atom'] == 'Void' ? '' : ' '.$this->atoms[$thenId]['fullcode'].' ' ). ': ' .
                             $this->atoms[$elseId]['fullcode'],
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
         $this->setAtom($ternaryId, $x);
 
         $this->pushExpression($ternaryId);
-        
+
         return $ternaryId;
     }
     
@@ -2549,7 +2555,7 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     private function processSingle($atom) {
         $id = $this->addAtom($atom);
-        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1], 
+        $this->setAtom($id, ['code'     => $this->tokens[$this->id][1],
                              'fullcode' => $this->tokens[$this->id][1],
                              'line'     => $this->tokens[$this->id][2],
                              'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
@@ -2571,7 +2577,7 @@ class Load extends Tasks {
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_NAMESPACE, T_END])) {
             $this->processNext();
             
-            if ($this->tokens[$this->id + 1][0] === T_NAMESPACE && 
+            if ($this->tokens[$this->id + 1][0] === T_NAMESPACE &&
                 $this->tokens[$this->id + 2][0] === T_NS_SEPARATOR) {
                 $this->processNext();
             }
@@ -2613,7 +2619,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === T_END) {
                 $voidId = $this->addAtomVoid();
                 $blockId = $this->addAtom('Sequence');
-                $this->setAtom($blockId, ['code' => '{}', 
+                $this->setAtom($blockId, ['code' => '{}',
                                           'fullcode' => self::FULLCODE_BLOCK,
                                           'line'     => $this->tokens[$this->id][2],
                                           'token'    => $this->getToken($this->tokens[$this->id][0]),
@@ -2637,7 +2643,7 @@ class Load extends Tasks {
         }
         $this->setNamespace(0);
         
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'] .$block,
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
@@ -2667,7 +2673,7 @@ class Load extends Tasks {
                 $this->addLink($asId, $aliasId, 'AS');
             }
 
-            $x = ['code'     => $this->tokens[$current][1], 
+            $x = ['code'     => $this->tokens[$current][1],
                   'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
                                 $this->tokens[$current][1] . ' ' .
                                 (isset($visibilityId) ? $this->atoms[$visibilityId]['fullcode']. ' ' : ''),
@@ -2735,7 +2741,7 @@ class Load extends Tasks {
 
                 $this->addLink($useId, $namespaceId, 'USE');
 
-                if ($this->isContext(self::CONTEXT_CLASS) || 
+                if ($this->isContext(self::CONTEXT_CLASS) ||
                     $this->isContext(self::CONTEXT_TRAIT)) {
                     $this->addCall('class', $fullnspath, $namespaceId);
                 }
@@ -2743,7 +2749,7 @@ class Load extends Tasks {
                 $fullcode[] = $this->atoms[$namespaceId]['fullcode'];
 
                 $this->setAtom($namespaceId, ['fullnspath' => $fullnspath]);
-                if (!$this->isContext(self::CONTEXT_CLASS) && 
+                if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
                     $alias = $this->addNamespaceUse($originId, $aliasId, $useType);
     
@@ -2765,7 +2771,7 @@ class Load extends Tasks {
                 //use A\B\ {} // Prefixes, within a Class/Trait 
                 $this->addLink($useId, $namespaceId, 'GROUPUSE');
                 $prefix = $this->makeFullnspath($namespaceId);
-                if ($prefix[0] != '\\') { 
+                if ($prefix[0] != '\\') {
                     $prefix = '\\'.$prefix;
                 }
                 $prefix .= '\\';
@@ -2832,7 +2838,7 @@ class Load extends Tasks {
             } else {
                 $this->addLink($useId, $namespaceId, 'USE');
 
-                if ($this->isContext(self::CONTEXT_CLASS) || 
+                if ($this->isContext(self::CONTEXT_CLASS) ||
                     $this->isContext(self::CONTEXT_TRAIT)) {
                     $this->addCall('class', $fullnspath, $namespaceId);
                 }
@@ -2840,7 +2846,7 @@ class Load extends Tasks {
                 $fullcode[] = $this->atoms[$namespaceId]['fullcode'];
 
                 $this->setAtom($namespaceId, ['fullnspath' => $fullnspath]);
-                if (!$this->isContext(self::CONTEXT_CLASS) && 
+                if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
                     $alias = $this->addNamespaceUse($aliasId, $aliasId, $useType);
     
@@ -2849,10 +2855,10 @@ class Load extends Tasks {
                 }
             }
             // No Else. Default will be dealt with by while() condition
-            
+
         } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->tokens[$current][1].' '.join(", ", $fullcode),
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
@@ -2900,7 +2906,7 @@ class Load extends Tasks {
         $left = $this->popExpression();
         $this->addLink($appendId, $left, 'APPEND');
         
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->atoms[$left]['fullcode'] . '[]',
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
@@ -2971,8 +2977,8 @@ class Load extends Tasks {
         
         $this->addLink($operatorId, $operandId, $link);
 
-        $x = ['code'     => $this->tokens[$current][1], 
-              'fullcode' => $this->tokens[$current][1] . $separator . 
+        $x = ['code'     => $this->tokens[$current][1],
+              'fullcode' => $this->tokens[$current][1] . $separator .
                             $this->atoms[$operandId]['fullcode'],
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
@@ -2997,7 +3003,7 @@ class Load extends Tasks {
         
             $this->addLink($returnId, $returnArgId, 'RETURN');
 
-            $x = ['code'     => $this->tokens[$current][1], 
+            $x = ['code'     => $this->tokens[$current][1],
                   'fullcode' => $this->tokens[$current][1] . ' ;',
                   'line'     => $this->tokens[$current][2],
                   'token'    => $this->getToken($this->tokens[$current][0])];
@@ -3025,7 +3031,7 @@ class Load extends Tasks {
         
             $this->addLink($returnId, $returnArgId, 'YIELD');
 
-            $x = ['code'     => $this->tokens[$current][1], 
+            $x = ['code'     => $this->tokens[$current][1],
                   'fullcode' => $this->tokens[$current][1] . ' ;',
                   'line'     => $this->tokens[$current][2],
                   'token'    => $this->getToken($this->tokens[$current][0])];
@@ -3063,7 +3069,7 @@ class Load extends Tasks {
         $this->pushExpression($blockId);
 
         ++$this->id; // Skip }
-        
+
         return $blockId;
     }
 
@@ -3084,7 +3090,7 @@ class Load extends Tasks {
             $expressionId = $this->popExpression();
             $this->addLink($variableId, $expressionId, 'NAME');
 
-            $x = ['code'     => $this->tokens[$current][1], 
+            $x = ['code'     => $this->tokens[$current][1],
                   'fullcode' => $this->tokens[$current][1] . '{' .
                                 $this->atoms[$expressionId]['fullcode'].'}',
                   'line'     => $this->tokens[$current][2],
@@ -3155,7 +3161,7 @@ class Load extends Tasks {
                 $signId = $this->addAtom('Sign');
                 $this->addLink($signId, $signedId, 'SIGN');
 
-                $x = ['code'     => $sign[$i] , 
+                $x = ['code'     => $sign[$i] ,
                       'fullcode' => $sign[$i] . $this->atoms[$signedId]['fullcode'],
                       'line'     => $this->tokens[$this->id][2],
                       'token'    => $this->getToken($this->tokens[$this->id][0])];
@@ -3196,7 +3202,7 @@ class Load extends Tasks {
         
         $this->addLink($additionId, $right, 'RIGHT');
 
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
                             $this->tokens[$current][1] . ' ' .
                             $this->atoms[$right]['fullcode'],
@@ -3221,7 +3227,7 @@ class Load extends Tasks {
         }
         
         $this->addLink($breakId, $breakLevel, $this->tokens[$current][0] === T_BREAK ? 'BREAK' : 'CONTINUE');
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->tokens[$current][1] . ( $this->atoms[$breakLevel]['atom'] !== 'Void' ?  ' '. $this->atoms[$breakLevel]['fullcode'] : ''),
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0]) ];
@@ -3281,7 +3287,7 @@ class Load extends Tasks {
         
         $this->addLink($staticId, $right, $links);
 
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->atoms[$leftId]['fullcode'] . '::' . $this->atoms[$right]['fullcode'],
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
@@ -3310,7 +3316,7 @@ class Load extends Tasks {
         
         $this->addLink($additionId, $right, $links[1]);
 
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
                             $this->tokens[$current][1] . ' ' .
                             $this->atoms[$right]['fullcode'],
@@ -3354,7 +3360,7 @@ class Load extends Tasks {
         $this->addLink($staticId, $left, 'OBJECT');
         $this->addLink($staticId, $right, $links);
 
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->atoms[$left]['fullcode'] . '->' .
                             $this->atoms[$right]['fullcode'],
               'line'     => $this->tokens[$current][2],
@@ -3364,7 +3370,7 @@ class Load extends Tasks {
         $this->pushExpression($staticId);
         
         return $staticId;
-    }    
+    }
     
 
     private function processAssignation() {
@@ -3465,7 +3471,7 @@ class Load extends Tasks {
         $this->setAtom($containsId, ['rank' => $rank++]);
         $fullcode[] = $this->atoms[$containsId]['fullcode'];
         
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => join(' . ', $fullcode),
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0]),
@@ -3494,7 +3500,7 @@ class Load extends Tasks {
         $this->setAtom($right, ['fullnspath' => $this->getFullnspath($right, 'class')]);
         $this->addCall('class', $this->atoms[$right]['fullnspath'], $right);
 
-        $x = ['code'     => $this->tokens[$current][1], 
+        $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
                             $this->tokens[$current][1] . ' ' .
                             $this->atoms[$right]['fullcode'],
@@ -3524,7 +3530,7 @@ class Load extends Tasks {
         --$this->id;
 
         $functioncallId = $this->addAtom('Functioncall');
-        $this->setAtom($functioncallId, ['code'       => $this->tokens[$current][1], 
+        $this->setAtom($functioncallId, ['code'       => $this->tokens[$current][1],
                                          'fullcode'   => $this->tokens[$current][1] . ' ' .
                                                          $this->atoms[$argumentsId]['fullcode'],
                                          'line'       => $this->tokens[$current][2],
@@ -3541,7 +3547,7 @@ class Load extends Tasks {
 
     private function processHalt() {
         $haltId = $this->addAtom('Halt');
-        $this->setAtom($haltId, ['code'     => $this->tokens[$this->id][1], 
+        $this->setAtom($haltId, ['code'     => $this->tokens[$this->id][1],
                                  'fullcode' => $this->tokens[$this->id][1],
                                  'line'     => $this->tokens[$this->id][2],
                                  'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
@@ -3563,7 +3569,7 @@ class Load extends Tasks {
         } else {
             $nameId = $this->addAtom('Identifier');
         }
-        $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1], 
+        $this->setAtom($nameId, ['code'     => $this->tokens[$this->id][1],
                                  'fullcode' => $this->tokens[$this->id][1],
                                  'line'     => $this->tokens[$this->id][2],
                                  'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
@@ -3580,13 +3586,13 @@ class Load extends Tasks {
         $this->addLink($argumentsId, $indexId, 'ARGUMENT');
         $fullcode[] = $this->atoms[$indexId]['fullcode'];
 
-        $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1], 
+        $this->setAtom($argumentsId, ['code'     => $this->tokens[$this->id][1],
                                       'fullcode' => join(', ', $fullcode),
                                       'line'     => $this->tokens[$this->id][2],
                                       'token'    => $this->getToken($this->tokens[$this->id][0])]);
 
         $functioncallId = $this->addAtom('Functioncall');
-        $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'], 
+        $this->setAtom($functioncallId, ['code'       => $this->atoms[$nameId]['code'],
                                          'fullcode'   => $this->atoms[$nameId]['code'].' '.
                                                          $this->atoms[$argumentsId]['fullcode'],
                                          'line'       => $this->atoms[$nameId]['line'],
@@ -3610,14 +3616,14 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     private function addAtom($atom) {
         $this->atomCount++;
-        $this->atoms[$this->atomCount] = ['id'   => $this->atomCount, 
+        $this->atoms[$this->atomCount] = ['id'   => $this->atomCount,
                                           'atom' => $atom];
         return $this->atomCount;
     }
 
     private function addAtomVoid() {
         $id = $this->addAtom('Void');
-        $this->setAtom($id, ['code'     => 'Void', 
+        $this->setAtom($id, ['code'     => 'Void',
                              'fullcode' => self::FULLCODE_VOID,
                              'line'     => $this->tokens[$this->id][2],
                              'token'    => T_VOID,
@@ -3642,7 +3648,7 @@ class Load extends Tasks {
         if (!isset($this->links[$label][$o]))     { $this->links[$label][$o] = []; }
         if (!isset($this->links[$label][$o][$d])) { $this->links[$label][$o][$d] = []; }
 
-        $this->links[$label][$o][$d][] = ['origin'      => $origin, 
+        $this->links[$label][$o][$d][] = ['origin'      => $origin,
                                           'destination' => $destination];
         return true;
     }
@@ -3740,23 +3746,25 @@ class Load extends Tasks {
     }
 
     private function saveFiles() {
-        static $files   = [];
         static $extras  = [];
         
         // Saving atoms
         foreach($this->atoms as $atom) {
-            if (!isset($files[$atom['atom']])) {
-                $files[$atom['atom']] = fopen('./nodes.g3.'.$atom['atom'].'.csv', 'w+');
+            $fileName = './nodes.g3.'.$atom['atom'].'.csv';
+            if (isset($extras[$atom['atom']])) {
+                $fp = fopen($fileName, 'a');
+            } else {
+                $fp = fopen($fileName, 'w+');
                 $headers = ['id', 'atom', 'code', 'fullcode', 'line', 'token', 'rank'];
 
                 $extras[$atom['atom']] = [];
                 foreach(self::PROP_OPTIONS as $title => $atoms) {
-                    if (in_array($atom['atom'], $atoms)) { 
+                    if (in_array($atom['atom'], $atoms)) {
                         $headers[] = $title;
                         $extras[$atom['atom']][] = $title;
                     }
                 }
-                fputcsv($files[$atom['atom']], $headers);
+                fputcsv($fp, $headers);
             }
 
             $extra = [];
@@ -3770,30 +3778,34 @@ class Load extends Tasks {
                 $extra = '';
             }
             
-            fwrite($files[$atom['atom']], $atom['id'].','.
-                                          $atom['atom'].',"'.
-                                          $this->escapeCsv( $atom['code'] ).'","'.
-                                          $this->escapeCsv( $atom['fullcode']).'",'.
-                                          ($atom['line'] ?? 0).',"'.
-                                          $this->escapeCsv( $atom['token'] ?? '') .'","'.
-                                          ($atom['rank'] ?? -1).'"'.
-                                          $extra.
-                                          "\n");
+            fwrite($fp, $atom['id'].','.
+                        $atom['atom'].',"'.
+                        $this->escapeCsv( $atom['code'] ).'","'.
+                        $this->escapeCsv( $atom['fullcode']).'",'.
+                        ($atom['line'] ?? 0).',"'.
+                        $this->escapeCsv( $atom['token'] ?? '') .'","'.
+                        ($atom['rank'] ?? -1).'"'.
+                        $extra.
+                        "\n");
+
+            fclose($fp);
         }
         
         $this->atoms = array(1 => $this->atoms[1]);
-        foreach($files as $fp) {
-//            fclose($fp);
-        }
-        
-//        print_r($this->links);die();
+
         // Saving the links between atoms
         foreach($this->links as $label => $origins) {
             foreach($origins as $origin => $destinations) {
                 foreach($destinations as $destination => $links) {
                     $csv = $label.'.'.$origin.'.'.$destination;
-                    $fp = fopen('./rels.g3.'.$csv.'.csv', 'w+');
-                    fputcsv($fp, ['start', 'end']);
+                    $fileName = './rels.g3.'.$csv.'.csv';
+                    if (isset($extras[$csv])) {
+                        $fp = fopen($fileName, 'a');
+                    } else {
+                        $fp = fopen($fileName, 'w+');
+                        fputcsv($fp, ['start', 'end']);
+                        $extras[$csv] = 1;
+                    }
     
                     foreach($links as $link) {
                         fputcsv($fp, [$link['origin'], $link['destination']], ',', '"', '\\');
@@ -3804,21 +3816,23 @@ class Load extends Tasks {
             }
         }
         $this->links = array();
+        
+    }
 
-//        print_r($this->calls);die();
+    private function saveDefinitions() {
         // Saving the function / class definitions
         foreach($this->calls as $type => $paths) {
             foreach($paths as $path) {
                 foreach($path['calls'] as $origin => $origins) {
                     foreach($path['definitions'] as $destination => $destinations) {
                         $csv = 'DEFINITION.'.$destination.'.'.$origin;
-                        if (!isset($files[$csv])) {
-                            $files[$csv] = fopen('./rels.g3.'.$csv.'.csv', 'w+');
-                            fputcsv($files[$csv], ['start', 'end']);
-                        }
+
+                        $fp = fopen('./rels.g3.'.$csv.'.csv', 'w+');
+                        fputcsv($fp, ['start', 'end']);
+
                         foreach($origins as $o) {
                             foreach($destinations as $d) {
-                                fputcsv($files[$csv], [$d, $o], ',', '"', '\\');
+                                fputcsv($fp, [$d, $o], ',', '"', '\\');
                             }
                         }
                     }
@@ -3833,7 +3847,7 @@ class Load extends Tasks {
     
     private function startSequence() {
         $this->sequence = $this->addAtom('Sequence');
-        $this->setAtom($this->sequence, ['code'     => ';', 
+        $this->setAtom($this->sequence, ['code'     => ';',
                                          'fullcode' => ' '.self::FULLCODE_SEQUENCE.' ',
                                          'line'     => $this->tokens[$this->id][2],
                                          'token'    => 'T_SEMICOLON',
@@ -3969,7 +3983,7 @@ class Load extends Tasks {
             // Alias is the 'As' expression. 
             $offset = strrpos($this->atoms[$aliasId]['fullcode'], ' ');
             $alias = strtolower(substr($this->atoms[$aliasId]['fullcode'], $offset + 1));
-        } elseif (($offset = strrpos($this->atoms[$aliasId]['fullnspath'], '\\')) === false) { 
+        } elseif (($offset = strrpos($this->atoms[$aliasId]['fullnspath'], '\\')) === false) {
             // namespace without \
             $alias = strtolower($this->atoms[$aliasId]['fullnspath']);
         } else {
@@ -3983,8 +3997,8 @@ class Load extends Tasks {
     }
     
     private function addCall($type, $fullnspath, $callId) {
-        if (empty($fullnspath)) { 
-            return; 
+        if (empty($fullnspath)) {
+            return;
         }
         
         if (!isset($this->calls[$type][$fullnspath])) {
@@ -3998,8 +4012,8 @@ class Load extends Tasks {
     }
 
     private function addDefinition($type, $fullnspath, $definitionId) {
-        if (empty($fullnspath)) { 
-            return; 
+        if (empty($fullnspath)) {
+            return;
         }
 
         if (!isset($this->calls[$type][$fullnspath])) {
