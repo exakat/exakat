@@ -31,11 +31,18 @@ class UnsetOnArguments extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->code('unset')
-             ->back('first')
+        // unset($argument);
+        $this->atomFunctionIs('\unset')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->analyzerIs('Variables/Arguments')
+             ->back('first');
+        $this->prepareQuery();
+
+        // (unset) $argument
+        $this->atomIs('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->outIs('CAST')
              ->analyzerIs('Variables/Arguments')
              ->back('first');
         $this->prepareQuery();
