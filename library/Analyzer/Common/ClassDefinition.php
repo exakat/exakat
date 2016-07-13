@@ -32,7 +32,7 @@ class ClassDefinition extends Analyzer\Analyzer {
         $classes =  $this->makeFullNsPath($this->classes);
         
         $this->atomIs('Class')
-             ->fullnspath($classes);
+             ->fullnspathIs($classes);
         $this->prepareQuery();
     }
 }

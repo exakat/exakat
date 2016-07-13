@@ -53,8 +53,9 @@ class UseThis extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->savePropertyAs('fullnspath', 'classe')
-             ->goToClass()
+             ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
              ->back('first');
         $this->prepareQuery();
@@ -68,8 +69,9 @@ class UseThis extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->savePropertyAs('fullnspath', 'classe')
-             ->goToClass()
+             ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
              ->back('first');
         $this->prepareQuery();

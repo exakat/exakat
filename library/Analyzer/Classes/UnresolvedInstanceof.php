@@ -55,7 +55,7 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // self and static will always work 
-        
+
         // special case for parents
         $this->atomIs('Instanceof')
              ->outIs('CLASS')

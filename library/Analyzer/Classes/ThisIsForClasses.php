@@ -29,9 +29,9 @@ class ThisIsForClasses extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Variable')
-             ->code('$this')
-             ->classIs('Global')
-             ->traitIs('Global')
+             ->codeIs('$this')
+             ->hasNoClass()
+             ->hasNoTrait()
              ->back('first');
         $this->prepareQuery();
     }
