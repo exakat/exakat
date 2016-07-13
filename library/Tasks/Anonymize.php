@@ -35,9 +35,6 @@ class Anonymize extends Tasks {
 
     public function run(\Config $config) {
         
-        var_dump($config->file);
-        var_dump($config->project);
-        var_dump($config->dirname);
         if (($file = $config->file) !== 'stdout') {
             display("Anonymizing file $file\n");
 
@@ -99,7 +96,7 @@ class Anonymize extends Tasks {
             }
             display("Anonymized $total files\n");        
         } else {
-            die("Usage : php exakat anonymize -f <filename>
+            die("Usage : php exakat anonymize -file <filename>
                              -d <dirname>
                              -p <project>\n");
         }
