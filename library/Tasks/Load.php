@@ -2279,8 +2279,8 @@ class Load extends Tasks {
         $this->addLink($switchId, $nameId, 'NAME');
 
         $casesId = $this->addAtom('Sequence');
-        $this->setAtom($casesId, ['code'     => ' / * cases * /',
-                                  'fullcode' => ' / * cases * /',
+        $this->setAtom($casesId, ['code'     => self::FULLCODE_SEQUENCE,
+                                  'fullcode' => self::FULLCODE_SEQUENCE,
                                   'line'     => $this->tokens[$current][2],
                                   'token'    => $this->getToken($this->tokens[$current][0]),
                                   'bracket'  => true]);
@@ -2317,9 +2317,9 @@ class Load extends Tasks {
 
         
         if ($isColon) {
-            $fullcode = $this->tokens[$current][1].' ('.$this->atoms[$nameId]['fullcode'].') : /* cases */ endswitch';
+            $fullcode = $this->tokens[$current][1].' ('.$this->atoms[$nameId]['fullcode'].') :'.self::FULLCODE_SEQUENCE.' endswitch';
         } else {
-            $fullcode = $this->tokens[$current][1].' ('.$this->atoms[$nameId]['fullcode'].') { /* cases */ }';
+            $fullcode = $this->tokens[$current][1].' ('.$this->atoms[$nameId]['fullcode'].')'.self::FULLCODE_BLOCK;
         }
 
         $this->setAtom($switchId, ['code'        => $this->tokens[$current][1],

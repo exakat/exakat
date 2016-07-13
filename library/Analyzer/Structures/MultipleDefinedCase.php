@@ -34,7 +34,16 @@ class MultipleDefinedCase extends Analyzer\Analyzer {
                              .sideEffect{ k = it.get().value("fullcode"); if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }}
                              .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
                               )');
-//             ->raw('aggregate().findAll{ m = [:]; it.out("CASES").out("ELEMENT").has("atom", "Case").out("CASE").groupCount(m){it.fullcode}.cap.next().findAll{it.value > 1}.size() > 0}');
+        $this->prepareQuery();
+
+        // Special case for strings (avoiding ' and ")
+        $this->atomIs('Switch')
+             ->analyzerIsNot('self')
+             ->raw('where( __.sideEffect{ counts = [:]; }
+                             .out("CASES").out("ELEMENT").hasLabel("Case").out("CASE").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)) )
+                             .sideEffect{ k = it.get().value("noDelimiter"); if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }}
+                             .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
+                              )');
         $this->prepareQuery();
     }
 }
