@@ -2838,6 +2838,9 @@ class Load extends Tasks {
 
                 if ($this->isContext(self::CONTEXT_CLASS) ||
                     $this->isContext(self::CONTEXT_TRAIT)) {
+                    
+                    $fullnspath = $this->getFullnspath($namespaceId);
+                    $this->setAtom($namespaceId, ['fullnspath' => $fullnspath]);
                     $this->addCall('class', $fullnspath, $namespaceId);
                 }
 
