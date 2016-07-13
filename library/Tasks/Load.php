@@ -1077,12 +1077,16 @@ class Load extends Tasks {
         $this->addLink($interfaceId, $nameId, 'NAME');
 
         // Process extends
+        $rank = 0;
+        $fullcode = [];
+        $extends = $this->id + 1;
         if ($this->tokens[$this->id + 1][0] == T_EXTENDS) {
             do {
-                ++$this->id; // Skip extends
-                $extends = $this->id;
+                ++$this->id; // Skip extends or ,
                 $extendsId = $this->processOneNsname();
+                $this->setAtom($extendsId, ['rank' => $rank]);
                 $this->addLink($interfaceId, $extendsId, 'EXTENDS');
+                $fullcode[] = $this->atoms[$extendsId]['fullcode'];
 
                 $this->addCall('class', $this->getFullnspath($extendsId), $extendsId);
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
@@ -1097,7 +1101,7 @@ class Load extends Tasks {
         $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($interfaceId, ['code'       => $this->tokens[$current][1],
                                       'fullcode'   => $this->tokens[$current][1] . ' ' . $this->atoms[$nameId]['fullcode'] .
-                                                      (isset($extendsId) ? ' ' . $this->tokens[$extends][1] . ' ' . $this->atoms[$extendsId]['fullcode'] : '') . 
+                                                      (isset($extendsId) ? ' ' . $this->tokens[$extends][1] . ' ' . join(', ', $fullcode) : '') . 
                                                       static::FULLCODE_BLOCK,
                                       'line'       => $this->tokens[$current][2],
                                       'token'      => $this->getToken($this->tokens[$current][0]),
