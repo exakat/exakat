@@ -30,7 +30,7 @@ class OverwrittenConst extends Analyzer\Analyzer {
         $this->atomIs('Const')
              ->outIs('CONST')
              ->_as('results')
-             ->outIs('LEFT')
+             ->outIs('NAME')
              ->savePropertyAs('code', 'constante')
              ->goToClass()
              ->goToAllParents()
@@ -38,13 +38,8 @@ class OverwrittenConst extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Const')
              ->outIs('CONST')
-             ->outIs('LEFT')
+             ->outIs('NAME')
              ->samePropertyAs('code', 'constante')
-/*             
-             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                            .loop(2){true}{true}
-                            .filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Const").out("CONST").out("LEFT").has("code", constante).any() }.any()}')
-*/
              ->back('results');
         $this->prepareQuery();
     }
