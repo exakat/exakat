@@ -8,4 +8,5 @@ class TestPHPUnit extends PHPUnit_Framework_Assert {}
 
 class TestSimpleTest extends UnitTestCase {}
 
+class mySimpleTest extends myOwnTest {}
 }
