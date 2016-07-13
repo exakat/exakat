@@ -861,17 +861,19 @@ class Load extends Tasks {
         }
         
         if ($this->tokens[$this->id + 1][0] === T_FINALLY) {
+            $finally = $this->id + 1;
             $finallyId = $this->addAtom('Finally');
 
             ++$this->id;
             $finallyBlockId = $this->processFollowingBlock(false);
+            $this->popExpression();
             $this->addLink($tryId, $finallyId, 'FINALLY');
             $this->addLink($finallyId, $finallyBlockId, 'BLOCK');
             
 
-            $this->setAtom($finallyId, ['code'     => $this->tokens[$current][1],
-                                        'fullcode' => $this->tokens[$current][1].' '.static::FULLCODE_BLOCK,
-                                        'line'     => $this->tokens[$current][2],
+            $this->setAtom($finallyId, ['code'     => $this->tokens[$finally][1],
+                                        'fullcode' => $this->tokens[$finally][1] . static::FULLCODE_BLOCK,
+                                        'line'     => $this->tokens[$finally][2],
                                         'token'    => $this->getToken($this->tokens[$current][0])]);
         }
 
