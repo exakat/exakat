@@ -1603,11 +1603,10 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->optionsTokens = array();
             return $pppId;
+        } else {
+            return $id;
         }
-        
-        return $id;
     }
 
     private function processPublic() {
@@ -1615,11 +1614,10 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->optionsTokens = array();
             return $pppId;
+        } else {
+            return $id;
         }
-        
-        return $id;
     }
 
     private function processProtected() {
@@ -1627,11 +1625,10 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
-            $this->optionsTokens = array();
             return $pppId;
+        } else {
+            return $id;
         }
-
-        return $id;
     }
 
     private function processPrivate() {
@@ -1640,9 +1637,9 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
             return $pppId;
+        } else {
+            return $id;
         }
-
-        return $id;
     }
 
     private function processFunctioncall() {
@@ -1781,13 +1778,17 @@ class Load extends Tasks {
         $staticId = $this->addAtom($atom);
         $rank = 0;
 
-        $fullcode = array();
         foreach($this->optionsTokens as $name => $optionId) {
             $this->addLink($staticId, $optionId, strtoupper($name));
-            $fullcode[] = $this->atoms[$optionId]['fullcode'];
+            $fullcodePrefix = $this->atoms[$optionId]['fullcode'];
         }
         $this->optionsTokens = array();
         
+        if (!isset($fullcodePrefix)) {
+            $fullcodePrefix = $this->tokens[$current][1];
+        }
+        
+        $fullcode = array();
         while ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
             $this->processNext();
             
@@ -1800,13 +1801,13 @@ class Load extends Tasks {
                 ++$this->id;
             }
         } ;
-       $elementId = $this->popExpression();
-       $this->addLink($staticId, $elementId, strtoupper($atom));
+        $elementId = $this->popExpression();
+        $this->addLink($staticId, $elementId, strtoupper($atom));
 
-       $fullcode[] = $this->atoms[$elementId]['fullcode'];
+        $fullcode[] = $this->atoms[$elementId]['fullcode'];
 
         $this->setAtom($staticId, ['code'     => $this->tokens[$current][1],
-                                   'fullcode' => $this->tokens[$current][1] . ' ' . join(' ', $fullcode),
+                                   'fullcode' => $fullcodePrefix . ' ' . join(', ', $fullcode),
                                    'line'     => $this->tokens[$current][2],
                                    'token'    => $this->getToken($this->tokens[$current][0]),
                                    'count'    => $rank]);

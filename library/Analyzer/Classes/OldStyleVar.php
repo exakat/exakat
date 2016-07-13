@@ -27,9 +27,7 @@ use Analyzer;
 
 class OldStyleVar extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+        $this->atomIs('Ppp')
              ->hasOut('VAR');
         $this->prepareQuery();
     }
