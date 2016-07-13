@@ -88,27 +88,27 @@ class IsInterfaceMethod extends Analyzer\Analyzer {
             // interface locally implemented
             $this->atomIs('Function')
                  ->outIs('NAME')
-                 ->code($methods)
+                 ->codeIs($methods)
                  ->inIs('NAME')
                  ->inIs('ELEMENT')
                  ->inIs('BLOCK')
                  ->atomIs('Class')
                  ->outIs('IMPLEMENTS')
-                 ->fullnspath('\\'.$interface)
+                 ->fullnspathIs('\\'.$interface)
                  ->back('first');
             $this->prepareQuery();
 
             // interface implemented by parents
             $this->atomIs('Function')
                  ->outIs('NAME')
-                 ->code($methods)
+                 ->codeIs($methods)
                  ->inIs('NAME')
                  ->inIs('ELEMENT')
                  ->inIs('BLOCK')
                  ->atomIs('Class')
                  ->goToAllParents()
                  ->outIs('IMPLEMENTS')
-                 ->fullnspath('\\'.$interface)
+                 ->fullnspathIs('\\'.$interface)
                  ->back('first');
             $this->prepareQuery();
         }
