@@ -1080,19 +1080,9 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] == T_EXTENDS) {
             do {
                 ++$this->id; // Skip extends
+                $extends = $this->id;
                 $extendsId = $this->processOneNsname();
                 $this->addLink($interfaceId, $extendsId, 'EXTENDS');
-
-                $this->addCall('class', $this->getFullnspath($extendsId), $extendsId);
-            } while ($this->tokens[$this->id + 1][0] === T_COMMA);
-        }
-
-        // Process implements
-        if ($this->tokens[$this->id + 1][0] == T_IMPLEMENTS) {
-            do {
-                ++$this->id; // Skip extends
-                $extendsId = $this->processOneNsname();
-                $this->addLink($interfaceId, $extendsId, 'IMPLEMENTS');
 
                 $this->addCall('class', $this->getFullnspath($extendsId), $extendsId);
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
@@ -1106,7 +1096,8 @@ class Load extends Tasks {
         
         $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($interfaceId, ['code'       => $this->tokens[$current][1],
-                                      'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].
+                                      'fullcode'   => $this->tokens[$current][1] . ' ' . $this->atoms[$nameId]['fullcode'] .
+                                                      (isset($extendsId) ? ' ' . $this->tokens[$extends][1] . ' ' . $this->atoms[$extendsId]['fullcode'] : '') . 
                                                       static::FULLCODE_BLOCK,
                                       'line'       => $this->tokens[$current][2],
                                       'token'      => $this->getToken($this->tokens[$current][0]),
@@ -2990,7 +2981,7 @@ class Load extends Tasks {
     }
 
     private function processCast() {
-        return $this->processSingleOperator('Cast', $this->getPrecedence($this->tokens[$this->id][0]), 'CAST');
+        return $this->processSingleOperator('Cast', $this->getPrecedence($this->tokens[$this->id][0]), 'CAST', ' ');
     }
 
     private function processReturn() {
