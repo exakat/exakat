@@ -3255,18 +3255,18 @@ class Load extends Tasks {
             $blockId = $this->processDollar();
             $right = $this->processFCOA($blockId);
             $this->popExpression();
-        } elseif (!in_array($this->tokens[$this->id + 1][0], [ T_VARIABLE, T_STRING])) {
-            $right = $this->processNextAsIdentifier();
-            $this->pushExpression($right);
-            $right = $this->processFCOA($right);
-            $this->popExpression();
         } else {
-            do {
-                $id = $this->processNext();
-            } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+            $right = $this->processNextAsIdentifier();
 
-            $right = $this->popExpression();
-        }
+            if ($this->atoms[$right]['token'] === 'T_VARIABLE') {
+                $this->setAtom($right, ['atom' => 'Variable']);
+            }
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+                $this->pushExpression($right);
+                $right = $this->processFCOA($right);
+                $this->popExpression();
+            }
+        } 
 
         if ($this->atoms[$right]['atom'] == 'Identifier') {
             $staticId = $this->addAtom('Staticconstant');
@@ -3296,6 +3296,8 @@ class Load extends Tasks {
 
         $this->setAtom($staticId, $x);
         $this->pushExpression($staticId);
+
+        return $this->processFCOA($staticId);
     }
 
     private function processOperator($atom, $finals, $links = ['LEFT', 'RIGHT']) {
@@ -3340,12 +3342,12 @@ class Load extends Tasks {
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } else {
-            $finals = $this->getPrecedence($this->tokens[$this->id][0]);
-            $finals[] = T_OBJECT_OPERATOR;
-            while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
-                $id = $this->processNext();
-            } ;
-            $right = $this->popExpression();
+            $right = $this->processNextAsIdentifier();
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+                $this->pushExpression($right);
+                $right = $this->processFCOA($right);
+                $this->popExpression();
+            }
         }
 
         if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'Property', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
@@ -3370,8 +3372,8 @@ class Load extends Tasks {
 
         $this->setAtom($staticId, $x);
         $this->pushExpression($staticId);
-        
-        return $staticId;
+
+        return $this->processFCOA($staticId);
     }
     
 
@@ -3918,6 +3920,7 @@ class Load extends Tasks {
     private function getFullnspath($nameId, $type = 'class') {
         // Handle static, self, parent and PHP natives function
         if (isset($this->atoms[$nameId]['absolute']) && ($this->atoms[$nameId]['absolute'] === true)) {
+            print_r($this->atoms[$nameId]);
             return strtolower($this->atoms[$nameId]['fullcode']);
         } elseif (!in_array($this->atoms[$nameId]['atom'], ['Nsname', 'Identifier', 'String'])) {
             // No fullnamespace for non literal namespaces
@@ -3938,7 +3941,7 @@ class Load extends Tasks {
             } else {
                 return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
             }
-        } elseif ($this->atoms[$nameId]['atom'] === 'String') {
+        } elseif ($this->atoms[$nameId]['atom'] === 'String' && isset($this->atoms[$nameId]['noDelimiter'])) {
             $prefix =  ($this->atoms[$nameId]['noDelimiter'][0] === '\\' ? '' : '\\') .
                         strtolower($this->atoms[$nameId]['noDelimiter']);
 
