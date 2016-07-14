@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('trait BJ');
+$expected     = array('trait BJ { /**/ } ');
 
-$expected_not = array('trait BG',
-                      'trait BH, BI');
+$expected_not = array('trait BG { /**/ } ',
+                      'trait BH, BI { /**/ } ');
 
 ?>
