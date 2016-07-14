@@ -2,4 +2,8 @@
 Label : INDEX
   'b'
 Label : VARIABLE
-  $a
+  ::
+  Label : CLASS
+    self
+  Label : PROPERTY
+    $a

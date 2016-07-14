@@ -1,6 +1,6 @@
 <?php
 
-ABSTRACT class finalAbstractClass { 
+ABSTRACT class abstractClass { 
     public function normalMethod() {}
     abstract function abstractMethod() ;
 }

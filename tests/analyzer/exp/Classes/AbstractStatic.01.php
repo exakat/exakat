@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('public static abstract function aspmc( )', 
-                      'public static abstract function spamc( )');
+$expected     = array( 'abstract static public function aspmc( ) ;', 
+                       'static public abstract function spamc( ) ;');
 
-$expected_not = array();
+$expected_not = array('static public function spmc() { /**/ } ');
 
 ?>

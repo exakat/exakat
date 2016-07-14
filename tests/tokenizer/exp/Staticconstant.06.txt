@@ -2,4 +2,10 @@
 Label : INDEX
   1
 Label : VARIABLE
-  B
+  ::
+  Label : CLASS
+    \
+    Label : SUBNAME
+      A
+  Label : CONSTANT
+    B
