@@ -1,5 +1,5 @@
-===
+=
 Label : LEFT
-  $x
+  $y
 Label : RIGHT
   3

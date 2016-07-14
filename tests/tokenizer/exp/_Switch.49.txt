@@ -9,6 +9,6 @@ Label : FILE
       Label : ELEMENT
         switch
         Label : CASES
-           / * cases * /
+           /**/ 
         Label : NAME
           $foo

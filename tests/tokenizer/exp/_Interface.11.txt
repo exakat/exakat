@@ -20,39 +20,39 @@ Label : FILE
           {}
           Label : ELEMENT
             Void
+        Label : NAME
+          i1
         Label : DEFINITION
           i1
         Label : DEFINITION
           i1
         Label : EXTENDS
           i2
-        Label : NAME
-          i1
       Label : ELEMENT
         interface
         Label : BLOCK
           {}
           Label : ELEMENT
             Void
+        Label : NAME
+          i3
         Label : DEFINITION
           i3
         Label : EXTENDS
           i1
         Label : EXTENDS
           i2
-        Label : NAME
-          i3
       Label : ELEMENT
         interface
         Label : BLOCK
           {}
           Label : ELEMENT
             Void
-        Label : EXTENDS
-          i1
-        Label : EXTENDS
-          i2
-        Label : EXTENDS
-          i3
         Label : NAME
           i4
+        Label : EXTENDS
+          i1
+        Label : EXTENDS
+          i2
+        Label : EXTENDS
+          i3
