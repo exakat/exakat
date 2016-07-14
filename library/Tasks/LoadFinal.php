@@ -73,16 +73,21 @@ GREMLIN;
 
         // update fullnspath with fallback for functions 
         $query = <<<GREMLIN
-g.V().hasLabel("Functioncall").has("fullnspath").has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-.where( __.in("NEW", "METHOD").count().is(eq(0)))
-.sideEffect{ f = it.get().value("fullnspath");}
-.where( g.V().hasLabel("Function").out("NAME").filter{ it.get().value("fullnspath") == f }.count().is(eq(0)) )
+g.V().hasLabel("Functioncall").has("fullnspath")
+                              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+                              .where( __.in("NEW", "METHOD", "DEFINITION").count().is(eq(0)))
 
-.sideEffect{ it.get().property("fullnspath", "\\\\" + it.get().value("code").toString().toLowerCase() ); }
+.sideEffect{ 
+    fullnspath = it.get().vertices(OUT, 'NAME').next().value("fullnspath").toString().toLowerCase();
+    it.get().property("fullnspath", fullnspath ); 
+}
 
 GREMLIN;
         $this->gremlin->query($query);
         display('refine functioncall fullnspath');
+        
+        // fallback for PHP and ext, class, function, constant
+
     }
 }
 
