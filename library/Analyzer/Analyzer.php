@@ -45,7 +45,7 @@ abstract class Analyzer {
     
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
-    
+
     protected $apply          = null;
 
     protected $phpVersion       = 'Any';
@@ -1356,7 +1356,7 @@ GREMLIN
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
 //        $this->addMethod('sideEffect{ allParents = []; }.until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).emit().repeat( sideEffect{allParents.push(it.get().id()); }.out("EXTENDS").in("DEFINITION").filter{ !(it.get().id() in allParents); } )');
 //        $this->addMethod('sideEffect{ allParents = []; }.until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).repeat( sideEffect{allParents.push(it.get().id()); }.out("EXTENDS").in("DEFINITION").filter{ !(it.get().id() in allParents); } ).emit()');
-        
+
         return $this;
     }
 
@@ -1523,7 +1523,7 @@ GREMLIN
 //filter{ (it.atom in []) ||
 //        (it.atom == 'Functioncall' && it.constante == true && it.token in ['T_ARRAY', 'T_OPEN_BRACKET'])
 //}
-        
+
         return $this;
     }
     
@@ -1741,7 +1741,7 @@ GREMLIN;
             if (isset($r[0]->processed->{1})) {
                 $this->processedCount += $r[0]->processed->{1};
                 $this->rowCount += $r[0]->total->{1} ?? 0;
-            } 
+            }
         }
 
         // reset for the next
@@ -1963,19 +1963,17 @@ GREMLIN;
     }
     
     public function makeFullNsPath($functions) {
-        if (is_string($functions)) {
-            $r = strtolower($functions);
-            if (isset($r[0]) && $r[0] != "\\") {
-                $r = "\\". $r;
+        $cb = function ($x) {
+            $r = strtolower($x);
+            if (isset($r[0]) && $r[0] != '\\') {
+                $r = '\\' . $r;
             }
+            return $r;
+        };
+        if (is_string($functions)) {
+            return $cb($functions);
         } else {
-            $r = array_map(function ($x) {
-                $r = strtolower($x);
-                if (isset($r[0]) && $r[0] != "\\") {
-                    $r = "\\". $r;
-                }
-                return $r;
-            },  $functions);
+            $r = array_map($cb, $functions);
         }
         return $r;
     }
