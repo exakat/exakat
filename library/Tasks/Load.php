@@ -1223,15 +1223,14 @@ class Load extends Tasks {
             $this->processNext();
             
             while ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
-                print "While in $this->id\n";
                 ++$this->id;
                 
-                if ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
-                    in_array($this->tokens[$this->id + 2][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
-
                     if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
                         $this->processSemicolon();
                     }
+
+                if ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
+                    in_array($this->tokens[$this->id + 2][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
 
                     ++$this->id;
                     $inlineId = $this->processInlineHtml();
@@ -1243,9 +1242,6 @@ class Load extends Tasks {
                         ++$this->id; // set to opening tag
                     }
                 } elseif (in_array($this->tokens[$this->id + 1][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
-                    if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
-                        $this->processSemicolon();
-                    }
                     if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
                         $this->processOpenWithEcho();
                     } else {
