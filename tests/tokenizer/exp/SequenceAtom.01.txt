@@ -6,14 +6,16 @@ Label : ARGUMENT
     Label : LEFT
       @
       Label : AT
-        ::
-        Label : CLASS
-          a
-        Label : PROPERTY
+        [
+        Label : INDEX
+          'f'
+        Label : VARIABLE
           [
           Label : INDEX
-            'f'
-          Label : VARIABLE
+            [
+            Label : INDEX
+123098120398 [label="Reached level 15"]            Label : VARIABLE
+123098120398 [label="Reached level 15"]          Label : VARIABLE
             [
             Label : INDEX
 123098120398 [label="Reached level 15"]            Label : VARIABLE

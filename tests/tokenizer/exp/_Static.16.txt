@@ -2,7 +2,7 @@
 Label : LEFT
   new
   Label : NEW
-    Void
+    static
 Label : RIGHT
   new
   Label : NEW

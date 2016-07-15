@@ -6,4 +6,8 @@ Label : INDEX
   Label : VARIABLE
     $d
 Label : VARIABLE
-  $c
+  ::
+  Label : CLASS
+    b
+  Label : PROPERTY
+    $c

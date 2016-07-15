@@ -18,10 +18,8 @@ Label : FILE
             Void
       Label : ELEMENT
         Void
-  Label : ELEMENT
-    <?php 
-    Label : CODE
-      ;
+      Label : ELEMENT
+        Void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -38,10 +36,8 @@ Label : FILE
             Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         Void
-  Label : ELEMENT
-    <?php 
-    Label : CODE
-      ;
+      Label : ELEMENT
+        Void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -61,10 +57,8 @@ Label : FILE
             Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         Void
-  Label : ELEMENT
-    <?php 
-    Label : CODE
-      ;
+      Label : ELEMENT
+        Void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -83,4 +77,6 @@ Label : FILE
             ++
             Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
+        Void
+      Label : ELEMENT
         Void

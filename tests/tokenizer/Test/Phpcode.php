@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Phpcode extends Tokenizer {
-    /* 23 methods */
+    /* 39 methods */
 
     public function testPhpcode01()  { $this->generic_test('Phpcode.01'); }
     public function testPhpcode02()  { $this->generic_test('Phpcode.02'); }
@@ -32,5 +32,21 @@ class Phpcode extends Tokenizer {
     public function testPhpcode21()  { $this->generic_test('Phpcode.21'); }
     public function testPhpcode22()  { $this->generic_test('Phpcode.22'); }
     public function testPhpcode23()  { $this->generic_test('Phpcode.23'); }
+    public function testPhpcode24()  { $this->generic_test('Phpcode.24'); }
+    public function testPhpcode25()  { $this->generic_test('Phpcode.25'); }
+    public function testPhpcode26()  { $this->generic_test('Phpcode.26'); }
+    public function testPhpcode27()  { $this->generic_test('Phpcode.27'); }
+    public function testPhpcode28()  { $this->generic_test('Phpcode.28'); }
+    public function testPhpcode29()  { $this->generic_test('Phpcode.29'); }
+    public function testPhpcode30()  { $this->generic_test('Phpcode.30'); }
+    public function testPhpcode31()  { $this->generic_test('Phpcode.31'); }
+    public function testPhpcode32()  { $this->generic_test('Phpcode.32'); }
+    public function testPhpcode33()  { $this->generic_test('Phpcode.33'); }
+    public function testPhpcode34()  { $this->generic_test('Phpcode.34'); }
+    public function testPhpcode35()  { $this->generic_test('Phpcode.35'); }
+    public function testPhpcode36()  { $this->generic_test('Phpcode.36'); }
+    public function testPhpcode37()  { $this->generic_test('Phpcode.37'); }
+    public function testPhpcode38()  { $this->generic_test('Phpcode.38'); }
+    public function testPhpcode39()  { $this->generic_test('Phpcode.39'); }
 }
 ?>

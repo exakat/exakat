@@ -12,3 +12,5 @@ Label : FILE
           $a
         Label : RIGHT
           1
+      Label : ELEMENT
+        Void

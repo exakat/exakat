@@ -1,0 +1,5 @@
+(
+Label : ARGUMENT
+  $a
+  Label : TYPEHINT
+    array

@@ -8,14 +8,14 @@ Label : LEFT
 Label : RIGHT
   *
   Label : LEFT
-    ->
-    Label : OBJECT
-      $e
-    Label : PROPERTY
-      [
-      Label : INDEX
-        'g'
-      Label : VARIABLE
+    [
+    Label : INDEX
+      'g'
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        $e
+      Label : PROPERTY
         f
   Label : RIGHT
     1

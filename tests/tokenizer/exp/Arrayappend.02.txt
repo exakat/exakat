@@ -1,3 +1,7 @@
 b
 Label : APPEND
-  b
+  ->
+  Label : OBJECT
+    $a
+  Label : PROPERTY
+    b

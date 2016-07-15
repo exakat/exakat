@@ -490,8 +490,6 @@ class Load extends Tasks {
             }
         } while ($this->id < $n);
         
-        print "Final cycle\n";
-        
         $id = $this->sequence;
         $this->endSequence();
 
@@ -1229,7 +1227,6 @@ class Load extends Tasks {
                 $this->tokens[$this->id + 1][0] === T_INLINE_HTML) {
                 --$this->id;
             }
-                
             
             while ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
                 ++$this->id;
@@ -1767,7 +1764,8 @@ class Load extends Tasks {
     }
     
     private function processStatic() {
-        if ($this->tokens[$this->id + 1][0] === T_DOUBLE_COLON) {
+        if ($this->tokens[$this->id + 1][0] === T_DOUBLE_COLON ||
+            $this->tokens[$this->id - 1][0] === T_INSTANCEOF    ) {
             $id = $this->processSingle('Identifier');
             $this->setAtom($id, ['fullnspath' => '\\static']);
             return $id;
@@ -1792,6 +1790,12 @@ class Load extends Tasks {
             } else {
                 return $this->processStaticVariable();
             }
+        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+            // new static; (no parenthesis, as tested above)
+            
+            $nameId = $this->processExit();
+
+            return $nameId;
         } else {
             return $this->processOptions('Static');
         }
@@ -2055,6 +2059,7 @@ class Load extends Tasks {
         $isColon = ($this->tokens[$current][0] === T_FOREACH) && ($this->tokens[$this->id + 1][0] === T_COLON);
 
         $blockId = $this->processFollowingBlock([T_ENDFOREACH]);
+        
         $this->popExpression();
         $this->addLink($id, $blockId, 'BLOCK');
 
@@ -2406,23 +2411,21 @@ class Load extends Tasks {
                 ++$this->id;
             }
             $else .= $this->atoms[$elseId]['fullcode'];
-
         } else {
             $else = '';
         }
 
         if ($isInitialIf === true && $isColon === true) {
-            ++$this->id;
             if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
                 ++$this->id; // skip ;
             }
         }
         
         if ($isColon) {
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ') : '.$this->atoms[$thenId]['fullcode'].$else
-                        .($isInitialIf === true ? ' endif' : '');
+            $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ') : ' . $this->atoms[$thenId]['fullcode'] . $else
+                        . ($isInitialIf === true ? ' endif' : '');
         } else {
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$conditionId]['fullcode'] . ')'.$this->atoms[$thenId]['fullcode'].$else;
+            $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ')' . $this->atoms[$thenId]['fullcode'] . $else;
         }
         
         if ($this->tokens[$current][0] === T_IF) {
@@ -3435,15 +3438,15 @@ class Load extends Tasks {
     }
     
     private function processAnd() {
-        if (!$this->hasExpression()) {
+        if ($this->hasExpression()) {
+            return $this->processOperator('Logical', $this->getPrecedence($this->tokens[$this->id][0]));
+        } else {
             $current = $this->id;
 
             // Simply skipping the &
             $finals = $this->getPrecedence(T_REFERENCE);
-            while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
-                $id = $this->processNext();
-            };
-
+            $this->processNext();
+            
             $operandId = $this->popExpression();
             $x = ['fullcode'  => '&'.$this->atoms[$operandId]['fullcode'],
                   'reference' => true];
@@ -3452,8 +3455,6 @@ class Load extends Tasks {
             $this->pushExpression($operandId);
         
             return $operandId;
-        } else {
-            return $this->processOperator('Logical', $this->getPrecedence($this->tokens[$this->id][0]));
         }
     }
 

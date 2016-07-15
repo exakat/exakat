@@ -1,3 +1,7 @@
 $b
 Label : APPEND
-  $b
+  ::
+  Label : CLASS
+    a
+  Label : PROPERTY
+    $b

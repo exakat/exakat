@@ -16,3 +16,7 @@ Label : FILE
             Void
       Label : ELEMENT
         __halt_compiler
+  Label : ELEMENT
+    
+
+?>

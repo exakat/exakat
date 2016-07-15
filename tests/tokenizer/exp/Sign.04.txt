@@ -8,3 +8,5 @@ Label : FILE
       ;
       Label : ELEMENT
         -+1
+      Label : ELEMENT
+        Void

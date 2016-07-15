@@ -11,7 +11,7 @@ class Tokenizer extends \PHPUnit_Framework_TestCase {
         $res = shell_exec($shell);
         
         if (!file_exists('exp/'.$file.'.txt') == 0) {
-            $this->assertNotContains("No exp file ", $exp);
+            $this->assertNotContains('No exp file ', '');
         }
         
         $exp = file_get_contents('exp/'.$file.'.txt');

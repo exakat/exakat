@@ -1,14 +1,3 @@
-./tests/tokenizer/source/_New.22.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
-
-    Label : CODE
-      ;
-      Label : ELEMENT
-        new
-        Label : NEW
-          Void
-      Label : ELEMENT
-        Void
+Void
+Label : ARGUMENT
+  Void

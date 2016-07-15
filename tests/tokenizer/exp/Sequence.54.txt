@@ -26,3 +26,5 @@ Label : FILE
           $b
       Label : ELEMENT
         Void
+      Label : ELEMENT
+        Void

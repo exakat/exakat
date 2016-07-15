@@ -7,7 +7,5 @@ Label : FILE
     <?php 
     Label : CODE
       ;
-      Label : ELEMENT
-        Void
   Label : ELEMENT
     B

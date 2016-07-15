@@ -1,17 +1,17 @@
 (
 Label : ARGUMENT
-  ::
-  Label : CLASS
-    C
-  Label : PROPERTY
-    {
-    Label : INDEX
-      ++
-      Label : POSTPLUSPLUS
-        ->
-        Label : OBJECT
-          $f
-        Label : PROPERTY
-          g
-    Label : VARIABLE
+  {
+  Label : INDEX
+    ++
+    Label : POSTPLUSPLUS
+      ->
+      Label : OBJECT
+        $f
+      Label : PROPERTY
+        g
+  Label : VARIABLE
+    ::
+    Label : CLASS
+      C
+    Label : PROPERTY
       $e

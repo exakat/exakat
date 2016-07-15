@@ -2,6 +2,6 @@
 Label : ARGUMENT
   new
   Label : NEW
-    Void
+    static
 Label : ARGUMENT
   $method
