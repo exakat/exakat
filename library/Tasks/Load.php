@@ -1251,9 +1251,12 @@ class Load extends Tasks {
                     } else {
                         ++$this->id; // set to opening tag
                     }
-                } 
+                } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
+                          in_array($this->tokens[$this->id + 2][0], [T_END])) {
+                    --$this->id;
+                    break 1;
+                }
             } 
-            --$this->id;
         };
 
         if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
@@ -3552,8 +3555,8 @@ class Load extends Tasks {
         $this->pushExpression($functioncallId);
 
         // processArguments goes too far, up to ;
+        --$this->id;
         if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
-            --$this->id;
             $this->processSemicolon();
         }
 
