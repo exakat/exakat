@@ -1213,24 +1213,35 @@ class Load extends Tasks {
         $current = $this->id;
 
         $this->startSequence();
-        if ($this->tokens[$this->id][0] === T_OPEN_TAG_WITH_ECHO) {
-            --$this->id;
-            $this->processOpenWithEcho();
-            /// processing the first expression as an echo
-        }
-        
-        while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END, T_HALT_COMPILER])) {
+
+        while ( !in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END, T_HALT_COMPILER]) || $this->id === 0) {
+
+            if ($this->tokens[$this->id][0] === T_OPEN_TAG_WITH_ECHO) {
+                --$this->id;
+                $this->processOpenWithEcho();
+                /// processing the first expression as an echo
+                $this->processSemicolon();
+            }
+
             $this->processNext();
+            
+            if ($this->tokens[$this->id][0] === T_CLOSE_TAG && 
+                $this->tokens[$this->id + 1][0] === T_INLINE_HTML) {
+                --$this->id;
+            }
+                
             
             while ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
                 ++$this->id;
                 
-                    if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
-                        $this->processSemicolon();
-                    }
+                if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
+                    $this->processSemicolon();
+                }
 
                 if ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
                     in_array($this->tokens[$this->id + 2][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
+
+                    $this->processSemicolon();
 
                     ++$this->id;
                     $inlineId = $this->processInlineHtml();
@@ -1242,6 +1253,7 @@ class Load extends Tasks {
                         ++$this->id; // set to opening tag
                     }
                 } elseif (in_array($this->tokens[$this->id + 1][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
+                    $this->processSemicolon();
                     if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
                         $this->processOpenWithEcho();
                     } else {
@@ -1249,6 +1261,12 @@ class Load extends Tasks {
                     }
                 } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
                           in_array($this->tokens[$this->id + 2][0], [T_END])) {
+                    $this->processSemicolon();
+
+                    --$this->id;
+                    break 1;
+                } elseif ($this->tokens[$this->id + 1][0] === T_END) {
+                    $this->processSemicolon();
                     --$this->id;
                     break 1;
                 }
@@ -1902,7 +1920,6 @@ class Load extends Tasks {
             };
             
             if ($this->tokens[$this->id + 1][0] !== T_CLOSE_CURLY) {
-                print "processSemicolon\n";
                 $this->processSemicolon();
             }
         }
@@ -2093,7 +2110,9 @@ class Load extends Tasks {
             $voidId = $this->addAtomVoid();
             $this->addToSequence($voidId);
             $this->endSequence();
-            
+
+            $this->pushExpression($blockId);
+
         } else {
             // One expression only
             $this->startSequence();
@@ -2373,6 +2392,7 @@ class Load extends Tasks {
             $this->addLink($id, $elseifId, 'ELSE');
 
             $else = $this->atoms[$elseifId]['fullcode'];
+
         } elseif ($this->tokens[$this->id + 1][0] === T_ELSE){
             $else = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip else
@@ -2383,8 +2403,10 @@ class Load extends Tasks {
 
             if ($isColon === true) {
                 $else .= ' :';
+                ++$this->id;
             }
             $else .= $this->atoms[$elseId]['fullcode'];
+
         } else {
             $else = '';
         }
