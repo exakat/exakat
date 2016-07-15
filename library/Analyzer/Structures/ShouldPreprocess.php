@@ -27,28 +27,28 @@ use Analyzer;
 
 class ShouldPreprocess extends Analyzer\Analyzer {
     public function analyze() {
-        $dynamicAtoms = array('Variable', 'Property', 'Identifier', 'Magicconstant');
+        $dynamicAtoms = array('Variable', 'Property', 'Magicconstant', 'Staticmethodcall', 'Staticproperty');
         //'Functioncall' : if they also have only constants.
 
+//'Identifier', 
         $functionList = $this->loadIni('inert_functions.ini', 'functions');
-//        $functionList = '"\\\\' . implode('", "\\\\', $functionList['functions']). '"';
-        
+        $functionList = $this->makeFullnspath($functionList);
+
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
-             ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIsNot($functionList)
-             ->back('first')
+            // Functioncall, that are not authorized
+             ->raw('where( __.repeat( out() ).emit( hasLabel("Functioncall") ).times(15).hasLabel("Functioncall").filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) }.count().is(eq(0)) )')
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
 
         $this->atomFunctionIs(array('\\join', '\\explode', '\\implode', '\\split'))
-             ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIsNot($functionList)
-             ->back('first')
-             ->outIs('ARGUMENTS')
+//where( __.repeat( out() ).emit( hasLabel('.$this->SorA($atom).') ).times(15).hasLabel('.$this->SorA($atom).').count().is(eq(0)) )
+//             ->outIs('ARGUMENTS')
+//             ->atomInside('Functioncall')
+//             ->hasNoIn('METHOD')
+//             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+//             ->fullnspathIs($functionList)
+//             ->back('first')
+//             ->outIs('ARGUMENTS')
              ->noAtomInside($dynamicAtoms)
              ->back('first');
         $this->prepareQuery();
