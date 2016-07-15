@@ -65,15 +65,6 @@ class Export extends Tasks {
             }
         }
 
-/*
-        if (!isset($root)) {
-            die( "No root! Check the tree in Neo4j\n Aborting\n".number_format(memory_get_usage() / 1024 / 1024, 0).' Mo'. "\n");
-        }
-*/
-
-        print "Read ".count($V)." nodes\n";
-        print "Read ".count($E)." edges\n";
-
         $root = array_keys($V)[0];
         if ($config->format == 'Dot') {
             $text = $this->display_dot($V, $E, $root);
