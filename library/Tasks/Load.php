@@ -498,9 +498,9 @@ class Load extends Tasks {
 
         $this->checkTokens($filename);
         
-        print count($this->atoms)." atoms\n";
-        print count($this->links)." links\n";
-        print "Final id : $this->id\n";
+        display( count($this->atoms)." atoms\n");
+        display( count($this->links)." links\n");
+        display( "Final id : $this->id\n");
     }
 
     private function processNext() {
@@ -681,7 +681,7 @@ class Load extends Tasks {
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
         
-        print "$method\n";
+        display( "$method\n" );
         
         return $this->$method();
     }
@@ -1309,6 +1309,9 @@ class Load extends Tasks {
         
             if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
+                if ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
+                    $this->processSemicolon();
+                }
             } else {
                 ++$this->id; // set to opening tag
             }
@@ -1317,8 +1320,12 @@ class Load extends Tasks {
             if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
                 $this->processSemicolon();
             }
+            
             if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
+                if ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
+                    $this->processSemicolon();
+                }
             } else {
                 ++$this->id; // set to opening tag
             }
@@ -2408,7 +2415,7 @@ class Load extends Tasks {
 
             if ($isColon === true) {
                 $else .= ' :';
-                ++$this->id;
+//                ++$this->id;
             }
             $else .= $this->atoms[$elseId]['fullcode'];
         } else {
@@ -2419,6 +2426,9 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
                 ++$this->id; // skip ;
             }
+//            if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+                ++$this->id; // skip ;
+//            }
         }
         
         if ($isColon) {
@@ -2985,7 +2995,14 @@ class Load extends Tasks {
             $this->setAtom($id, ['delimiter'   => '',
                                  'noDelimiter' => '']);
         }
+
         $this->setAtom($id, ['encoding' => mb_detect_encoding($this->atoms[$id]['noDelimiter'])]);
+        if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
+//            $this->pushExpression($id);
+            $id = $this->processBracket();
+//            $id = $this->popExpression();
+        }
+
         return $id;
     }
 
@@ -3787,6 +3804,7 @@ class Load extends Tasks {
         
         // Saving atoms
         foreach($this->atoms as $atom) {
+            if ($atom['atom'] === '') { print_r($atom); die(); }
             $fileName = './nodes.g3.'.$atom['atom'].'.csv';
             if (isset($extras[$atom['atom']])) {
                 $fp = fopen($fileName, 'a');
