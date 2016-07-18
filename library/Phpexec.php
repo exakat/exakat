@@ -55,7 +55,7 @@ class Phpexec {
                                            '`'       => 'T_SHELL_QUOTE',
                                            '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
                                            '~'       => 'T_TILDE');
-    private static $tokens    = null;
+    private static $tokens    = array();
     private $config           = array();
     private $isCurrentVersion = false;
     private $version          = null;
@@ -101,10 +101,25 @@ class Phpexec {
                 $this->phpexec = $config->php71;
                 break 1;
 
+            case '7.2' : 
+                $this->phpexec = $config->php72;
+                break 1;
+
             default: 
                 $this->phpexec = $config->php;
                 // PHP will be always valid if we use the one that is currently executing us
                 $this->actualVersion = PHP_VERSION;
+        }
+        if ($this->phpexec === null) {
+            throw new \Exceptions\NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check config/config.ini');
+        }
+
+        if (!file_exists($this->phpexec)) {
+            throw new \Exceptions\NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/config.ini');
+        }
+
+        if (!is_executable($this->phpexec)) {
+            throw new \Exceptions\NoPhpBinary('PHP binary for version '.$phpversion.' exists but is not executable : "'.$this->phpexec.'". Please, check config/config.ini');
         }
     }
 
@@ -137,7 +152,6 @@ class Phpexec {
         // prepare the list of tokens
         if ($this->isCurrentVersion) {
             if (!in_array('tokenizer', get_loaded_extensions())) {
-                $this->isValid = false;
                 return false;
             }
             $x = get_defined_constants(true);
@@ -158,6 +172,10 @@ class Phpexec {
     
     public function getTokenName($token) {
         return self::$tokens[$token];
+    }
+
+    public function getTokenValue($token) {
+        return array_search($token, self::$tokens);
     }
     
     public function getTokenFromFile($file) {
@@ -181,11 +199,9 @@ class Phpexec {
 
     public function countTokenFromFile($file) {
         if ($this->isCurrentVersion) {
-            $realpath = realpath(str_replace('$', '\\\$', $file));
-            if ($realpath === false) { return 0; }
-            $res = count(token_get_all(file_get_contents($realpath)));
+            $res = count(@token_get_all(file_get_contents(str_replace('$', '\\\$', $file))));
         } else {
-            $res = (int) shell_exec($this->phpexec.' -r "print count(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" ');
+            $res = (int) shell_exec($this->phpexec.' -r "print count(@token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" ');
         }
         
         return $res;
@@ -202,8 +218,10 @@ class Phpexec {
         $res = shell_exec($this->phpexec.' -v 2>&1');
         if (preg_match('/PHP ([0-9\.]+)/', $res, $r)) {
             $this->actualVersion = $r[1];
+            return strpos($res, 'The PHP Group') !== false;
+        } else {
+            return false;
         }
-        return strpos($res, 'The PHP Group') !== false;
     }
 
     public function compile($file) {
@@ -211,11 +229,7 @@ class Phpexec {
         $shell = preg_replace('/(PHP Warning|Warning|Strict Standards|PHP Warning|PHP Strict Standards|PHP Deprecated|Deprecated): .*?\n/i', '', $shell);
         $shell = trim($shell);
 
-        if (trim($shell) == 'No syntax errors detected in '.$file) {
-            return true;
-        } else {
-            return false;
-        }
+        return trim($shell) == 'No syntax errors detected in '.$file;
     }
     
     public function getWhiteCode() {
