@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('$a = function ( ) { /**/ } ');
 
 $expected_not = array('function x() { /**/ }',
                       'interface i { /**/ } ',

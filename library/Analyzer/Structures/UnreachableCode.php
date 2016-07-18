@@ -67,7 +67,6 @@ class UnreachableCode extends Analyzer\Analyzer {
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
-             ->inIs('NAME')
              ->analyzerIs('Functions/KillsApp')
              ->back('first')
              ->nextSibling()

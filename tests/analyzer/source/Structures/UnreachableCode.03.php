@@ -9,4 +9,6 @@ interface i {}
 trait t {}
 class c {}
 
+$a = function () { return 2; };
+
 ?>
