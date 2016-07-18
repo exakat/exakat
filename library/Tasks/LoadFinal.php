@@ -73,7 +73,7 @@ GREMLIN;
 
         // update fullnspath with fallback for functions 
         $query = <<<GREMLIN
-g.V().hasLabel("Functioncall").has("fullnspath")
+g.V().hasLabel("Functioncall").has("fullnspath", without(''))
                               .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
                               .where( __.in("NEW", "METHOD", "DEFINITION").count().is(eq(0)))
 
