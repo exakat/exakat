@@ -38,11 +38,6 @@ class Export extends Tasks {
                 $vv[$key] = $value[0]->value;
             }
             $V[$x] =  $vv;
-    
-/*            if (isset($v->properties->root)) {
-                $root = $x;
-            }
-            */
         }
 
         $queryTemplate = 'g.E()';
