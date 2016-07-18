@@ -40,7 +40,7 @@ class Magicnumber extends Tasks {
         }
         $sqlite = new \SQLite3($sqliteFile);
 
-        $types = array('Integer', 'String', 'Float');
+        $types = array('Integer', 'String', 'Real');
 
         foreach( $types as $type) {
             $query = 'g.V().hasLabel("'.$type.'").groupCount("a").by("code").cap("a");';
