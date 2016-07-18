@@ -339,9 +339,10 @@ class Load extends Tasks {
         $this->datastore->cleanTable('tokenCounts');
 
         if ($filename = $this->config->filename) {
-            $this->processFile($filename);
-            $this->saveFiles();
-            $this->saveDefinitions();
+            if ($this->processFile($filename)) {
+                $this->saveFiles();
+                $this->saveDefinitions();
+            }
         } elseif ($dirName = $this->config->dirname) {
             $this->processDir($dirName);
         } elseif (($project = $this->config->project) !== 'default') {
@@ -367,8 +368,10 @@ class Load extends Tasks {
         $nbTokens = 0;
         $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
         foreach($files as $file) {
-            $nbTokens += $this->processFile($path.$file);
-            $this->saveFiles();
+            if ($r = $this->processFile($path.$file)) {
+                $nbTokens += $r;
+                $this->saveFiles();
+            }
         }
         $this->saveDefinitions();
 
@@ -401,8 +404,10 @@ class Load extends Tasks {
 
         $nbTokens = 0;
         foreach($files as $file) {
-            $nbTokens += $this->processFile($file);
-            $this->saveFiles();
+            if ($r = $this->processFile($file)) {
+                $nbTokens += $r;
+                $this->saveFiles();
+            }
         }
         $this->saveDefinitions();
 
@@ -411,6 +416,7 @@ class Load extends Tasks {
 
     private function processFile($filename) {
         display( "Process $filename\n");
+        $this->log->log("$filename");
         $this->filename = $filename;
         
         $this->line = 0;
@@ -484,7 +490,7 @@ class Load extends Tasks {
         do {
             $id = $this->processNext();
             display( "$this->id / $n\n");
-            
+
             if ($id > 0) {
                 $this->addToSequence($id);
             }
@@ -501,6 +507,8 @@ class Load extends Tasks {
         display( count($this->atoms)." atoms\n");
         display( count($this->links)." links\n");
         display( "Final id : $this->id\n");
+        
+        return true;
     }
 
     private function processNext() {
@@ -1211,9 +1219,30 @@ class Load extends Tasks {
         $current = $this->id;
 
         $this->startSequence();
+        
+        // Special case for pretty much empty script (<?php .... END)
+        if ($this->tokens[$this->id + 1][0] === T_END) {
+            $voidId = $this->addAtomVoid();
+            $this->addToSequence($voidId);
+            
+            $this->addLink($id, $this->sequence, 'CODE');
+            $this->endSequence();
+            $closing = '';
 
-        while ( !in_array($this->tokens[$this->id + 1][0], [T_CLOSE_TAG, T_END, T_HALT_COMPILER]) || $this->id === 0) {
+            $this->setAtom($id, ['code'     => $this->tokens[$current][1],
+                                 'fullcode' => '<?php '.self::FULLCODE_SEQUENCE.' '.$closing,
+                                 'line'     => $this->tokens[$current][2],
+                                 'token'    => $this->getToken($this->tokens[$current][0])]);
+        
+            return $id;
+        } 
 
+        $n = count($this->tokens) - 2;
+        if ($this->tokens[$n][0] === T_INLINE_HTML) {
+            --$n;
+        }
+
+        while ( ($this->id < $n) ) {
             if ($this->tokens[$this->id][0] === T_OPEN_TAG_WITH_ECHO) {
                 --$this->id;
                 $this->processOpenWithEcho();
@@ -1222,69 +1251,31 @@ class Load extends Tasks {
             }
 
             $this->processNext();
-            
-            if ($this->tokens[$this->id][0] === T_CLOSE_TAG && 
-                $this->tokens[$this->id + 1][0] === T_INLINE_HTML) {
-                --$this->id;
-            }
-            
-            while ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
-                ++$this->id;
-                
-                if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
-                    $this->processSemicolon();
-                }
-
-                if ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
-                    in_array($this->tokens[$this->id + 2][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
-
-                    $this->processSemicolon();
-
-                    ++$this->id;
-                    $inlineId = $this->processInlineHtml();
-                    $this->addToSequence($inlineId);
-                
-                    if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
-                        $this->processOpenWithEcho();
-                    } else {
-                        ++$this->id; // set to opening tag
-                    }
-                } elseif (in_array($this->tokens[$this->id + 1][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
-                    $this->processSemicolon();
-                    if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
-                        $this->processOpenWithEcho();
-                    } else {
-                        ++$this->id; // set to opening tag
-                    }
-                } elseif ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
-                          in_array($this->tokens[$this->id + 2][0], [T_END])) {
-                    $this->processSemicolon();
-
-                    --$this->id;
-                    break 1;
-                } elseif ($this->tokens[$this->id + 1][0] === T_END) {
-                    $this->processSemicolon();
-                    --$this->id;
-                    break 1;
-                }
-            } 
         };
 
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id][0] === T_INLINE_HTML) {  
+            --$this->id;
+        }
+
+        if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
             $closing = '?>';
-        } elseif ($this->tokens[$this->id + 1][0] === T_HALT_COMPILER) {
-            ++$this->id;
+        } elseif ($this->tokens[$this->id][0] === T_HALT_COMPILER) {
+            ++$this->id; // Go to HaltCompiler
             $this->processHalt();
             $closing = '';
         } else {
             $closing = '';
         }
         
+        if ($this->tokens[$this->id - 1][0] === T_OPEN_TAG) {
+            $voidId = $this->addAtomVoid();
+            $this->addToSequence($voidId);
+        }
         $this->addLink($id, $this->sequence, 'CODE');
         $this->endSequence();
 
         $this->setAtom($id, ['code'     => $this->tokens[$current][1],
-                             'fullcode' => '<?php '.self::FULLCODE_SEQUENCE.' '.$closing,
+                             'fullcode' => '<?php ' . self::FULLCODE_SEQUENCE  .' ' . $closing,
                              'line'     => $this->tokens[$current][2],
                              'token'    => $this->getToken($this->tokens[$current][0])]);
         
@@ -1296,13 +1287,14 @@ class Load extends Tasks {
     }
 
     private function processClosingTag() {
+
+        if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
+            $this->processSemicolon();
+        }
+
         if ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
             in_array($this->tokens[$this->id + 2][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
     
-            if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
-                $this->processSemicolon();
-            }
-
             ++$this->id;
             $inlineId = $this->processInlineHtml();
             $this->addToSequence($inlineId);
@@ -1317,10 +1309,6 @@ class Load extends Tasks {
             }
         } elseif (in_array($this->tokens[$this->id + 1][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
 
-            if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
-                $this->processSemicolon();
-            }
-            
             if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
                 if ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
@@ -1329,6 +1317,12 @@ class Load extends Tasks {
             } else {
                 ++$this->id; // set to opening tag
             }
+        } else {
+            if ($this->tokens[$this->id - 1][0] === T_OPEN_TAG) {
+                $voidId = $this->addAtomVoid();
+                $this->addToSequence($voidId);
+            } 
+            ++$this->id;
         }
     }
     
@@ -2415,7 +2409,6 @@ class Load extends Tasks {
 
             if ($isColon === true) {
                 $else .= ' :';
-//                ++$this->id;
             }
             $else .= $this->atoms[$elseId]['fullcode'];
         } else {
@@ -2426,9 +2419,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
                 ++$this->id; // skip ;
             }
-//            if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
-                ++$this->id; // skip ;
-//            }
+            ++$this->id; // skip ;
         }
         
         if ($isColon) {
@@ -2441,6 +2432,10 @@ class Load extends Tasks {
         if ($this->tokens[$current][0] === T_IF) {
             $this->pushExpression($id);
             $this->processSemicolon();
+        }
+        
+        if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+            --$this->id;
         }
 
         $this->setAtom($id, ['code'        => $this->tokens[$current][1],
@@ -2998,9 +2993,7 @@ class Load extends Tasks {
 
         $this->setAtom($id, ['encoding' => mb_detect_encoding($this->atoms[$id]['noDelimiter'])]);
         if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
-//            $this->pushExpression($id);
             $id = $this->processBracket();
-//            $id = $this->popExpression();
         }
 
         return $id;
@@ -3269,6 +3262,12 @@ class Load extends Tasks {
         
         if ($this->tokens[$this->id + 1][0] === T_LNUMBER) {
             $this->processNext();
+            
+            $breakLevel = $this->popExpression();
+        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+            ++$this->id; // skip (
+            $this->processNext();
+            ++$this->id; // skip )
             
             $breakLevel = $this->popExpression();
         } else {
@@ -3846,7 +3845,7 @@ class Load extends Tasks {
             fclose($fp);
         }
         
-        $this->atoms = array(1 => $this->atoms[1]);
+        $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
 
         // Saving the links between atoms
         foreach($this->links as $label => $origins) {
