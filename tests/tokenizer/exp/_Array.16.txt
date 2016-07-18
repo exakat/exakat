@@ -1,9 +1,7 @@
 ]
 Label : ARGUMENT
   [
-  Label : ARGUMENTS
-    [
-    Label : ARGUMENT
-      1
+  Label : INDEX
+    1
   Label : VARIABLE
-    [
+    '123'

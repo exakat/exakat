@@ -14,12 +14,8 @@ Label : FILE
       Label : ELEMENT
         Void
       Label : ELEMENT
-        Void
-      Label : ELEMENT
         
 
-      Label : ELEMENT
-        Void
       Label : ELEMENT
         Void
       Label : ELEMENT

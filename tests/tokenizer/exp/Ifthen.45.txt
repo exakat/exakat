@@ -29,3 +29,5 @@ Label : FILE
             A
       Label : ELEMENT
         Void
+      Label : ELEMENT
+        Void

@@ -1,4 +1,4 @@
-./tests/tokenizer/source/Halt.01.php
+./tests/tokenizer/source/Phpcode.46.php
 Label : FILE
   ;
   Label : ELEMENT
@@ -7,8 +7,4 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        __HALT_COMPILER
-  Label : ELEMENT
-     
-
-?>
+        Void

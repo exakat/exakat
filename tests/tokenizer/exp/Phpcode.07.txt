@@ -10,10 +10,6 @@ Label : FILE
         Label : POSTPLUSPLUS
           $x
       Label : ELEMENT
-        Void
-      Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $y
-      Label : ELEMENT
-        Void

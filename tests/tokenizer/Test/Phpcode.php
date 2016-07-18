@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Phpcode extends Tokenizer {
-    /* 39 methods */
+    /* 46 methods */
 
     public function testPhpcode01()  { $this->generic_test('Phpcode.01'); }
     public function testPhpcode02()  { $this->generic_test('Phpcode.02'); }
@@ -48,5 +48,12 @@ class Phpcode extends Tokenizer {
     public function testPhpcode37()  { $this->generic_test('Phpcode.37'); }
     public function testPhpcode38()  { $this->generic_test('Phpcode.38'); }
     public function testPhpcode39()  { $this->generic_test('Phpcode.39'); }
+    public function testPhpcode40()  { $this->generic_test('Phpcode.40'); }
+    public function testPhpcode41()  { $this->generic_test('Phpcode.41'); }
+    public function testPhpcode42()  { $this->generic_test('Phpcode.42'); }
+    public function testPhpcode43()  { $this->generic_test('Phpcode.43'); }
+    public function testPhpcode44()  { $this->generic_test('Phpcode.44'); }
+    public function testPhpcode45()  { $this->generic_test('Phpcode.45'); }
+    public function testPhpcode46()  { $this->generic_test('Phpcode.46'); }
 }
 ?>

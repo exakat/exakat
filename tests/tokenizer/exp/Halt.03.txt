@@ -8,3 +8,10 @@ Label : FILE
       ;
       Label : ELEMENT
         __HALT_COMPILER
+  Label : ELEMENT
+     
+
+$x = 1;
+$y = 2;
+
+?>
