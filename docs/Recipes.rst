@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 12 Jul 2016 10:12:11 +0000
-.. comment: Generation hash : c2b96839955a22aa7e66921bd7c3b5b447511012
+.. comment: Generation date : Tue, 19 Jul 2016 10:30:49 +0000
+.. comment: Generation hash : 7c8e610c038cc0f063938da825d0f1f9b177d202
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 250 analysis
+Total : 249 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -93,7 +93,6 @@ Total : 250 analysis
 * :ref:`Buried Assignation <buried-assignation>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Extend Final <cant-extend-final>`
-* :ref:`Case After Default <case-after-default>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
@@ -661,7 +660,7 @@ Total : 20 analysis
 Performances
 ++++++++++++
 
-Total : 14 analysis
+Total : 15 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -671,6 +670,7 @@ Total : 14 analysis
 * :ref:`Functions In Loop Calls <functions-in-loop-calls>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
+* :ref:`Make One Call <make-one-call>`
 * :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 12 Jul 2016 10:12:11 +0000
-.. comment: Generation hash : c2b96839955a22aa7e66921bd7c3b5b447511012
+.. comment: Generation date : Tue, 19 Jul 2016 10:30:49 +0000
+.. comment: Generation hash : 7c8e610c038cc0f063938da825d0f1f9b177d202
 
 
 .. _$http\_raw\_post\_data:
@@ -667,24 +667,6 @@ This also applies to methodcalls, static or not.
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
-
-
-
-.. _case-after-default:
-
-Case After Default
-##################
-
-
-Default must be the last case in the switch. Any case after 'default' will be unreachable.
-
-+--------------+-----------------------------+
-| Command Line | Structures/CaseAfterDefault |
-+--------------+-----------------------------+
-| clearPHP     |                             |
-+--------------+-----------------------------+
-| Analyzers    | :ref:`Analyze`              |
-+--------------+-----------------------------+
 
 
 
@@ -2822,6 +2804,60 @@ Setting the property in the constructor (or in a factory), makes the class easie
 +--------------+-----------------------------+
 | Analyzers    | :ref:`Analyze`              |
 +--------------+-----------------------------+
+
+
+
+.. _make-one-call:
+
+Make One Call
+#############
+
+
+When preg\_replace\_callback() is called several times in a row on the same string, it is faster to merge all those using preg\_replace\_callback\_array(), which takes several patterns and callbacks in the the same arguments.
+
+.. code-block:: php
+
+   <?php
+   $subject = 'Aaaaaa Bbb';
+   
+   $result = preg\_replace\_callback\_array('~[a]+~i', function ($match) {
+               echo strlen($match[0]), ' matches for a found', PHP\_EOL;
+           }, $subject);
+   
+   $result = preg\_replace\_callback\_array('~[b]+~i', function ($match) {
+               echo strlen($match[0]), ' matches for b found', PHP\_EOL;
+           }, $subject);
+   
+   ?>
+
+
+This may be rewritten as : 
+
+.. code-block:: php
+
+   <?php
+   $subject = 'Aaaaaa Bbb';
+   
+   preg\_replace\_callback\_array(
+       [
+           '~[a]+~i' => function ($match) {
+               echo strlen($match[0]), ' matches for a found', PHP\_EOL;
+           },
+           '~[b]+~i' => function ($match) {
+               echo strlen($match[0]), ' matches for b found', PHP\_EOL;
+           }
+       ],
+       $subject
+   );
+   ?>
+
++--------------+--------------------------+
+| Command Line | Performances/MakeOneCall |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Performances`      |
++--------------+--------------------------+
 
 
 
