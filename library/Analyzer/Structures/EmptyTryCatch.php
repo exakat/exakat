@@ -30,9 +30,11 @@ class EmptyTryCatch extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Try')
              ->outIs('CATCH')
-             ->outIs('CODE')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
