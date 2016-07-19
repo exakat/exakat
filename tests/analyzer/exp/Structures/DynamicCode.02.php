@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$x([ 1, 3, 6 ])');
+$expected     = array('$x([1, 3, 6])');
 
 $expected_not = array('strtolower(strtoupper($a))',
                       'strlen(\'a\'. \'3\')',
