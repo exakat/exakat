@@ -14,8 +14,10 @@ $expected     = array("constant('PHP_VERSION')",
                       '$c2::$$p2',
                       '${$o}::cms1( )',
                       '$c::$cms2( )',
-                      '$$dna', 
-                      '$o3->$cm2( )'
+                      '$o3->$cm2( )',
+                      '$c::$cms2( )', 
+                      '$c2::$$p2', 
+                      '$$dna[1]'
                       );
 
 $expected_not = array(
