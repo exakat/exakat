@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('[   ]',
-                      '[   ]',
+$expected     = array('[ ]',
+                      '[ ]',
                       'array( )',
                       'array( )',
                       '""',
@@ -17,10 +17,11 @@ $expected     = array('[   ]',
                       '-0.0e15',
                       '0',
                       '-0',
-                      '<<<PHP
-', 
                       '<<<\'PHP\'
-',
+PHP', 
+                      '<<<PHP
+PHP
+'
                       );
 
 $expected_not = array('[ [   ] ]',

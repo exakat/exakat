@@ -1,14 +1,16 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Variable.18.php
+Label : FILE
   ;
   Label : ELEMENT
-    "
-    Label : CONTAINS
-      Concatenation
-      Label : CONCAT
-        a
-      Label : CONCAT
-        $b
-      Label : CONCAT
-        c
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        "
+        Label : CONCAT
+          a
+        Label : CONCAT
+          b
+        Label : CONCAT
+          c

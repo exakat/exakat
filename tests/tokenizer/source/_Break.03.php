@@ -1,3 +1,11 @@
 <?php
-break 33;
-?>
+
+foreach($a as $b) {
+    foreach($a as $b) {
+        foreach($a as $b) {
+            foreach($a as $b) {
+                break 3;
+            }
+        }
+    }
+}?>

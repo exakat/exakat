@@ -1,60 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        isset
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'w'
-            Label : VARIABLE
-              $v
-    Label : THEN
-      ;
-      Label : ELEMENT
-        continue
-        Label : LEVEL
-          void
-  Label : ELEMENT
-    try
-    Label : CATCH
-      catch
-      Label : CLASS
-        Exception
-      Label : CODE
-        ;
-        Label : ELEMENT
-          continue
-          Label : LEVEL
-            void
-      Label : VARIABLE
-        $e
-    Label : CODE
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $d
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $a
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $b
-    Label : RIGHT
-      2
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $c
-    Label : RIGHT
-      3
+(
+Label : ARGUMENT
+  [
+  Label : INDEX
+    'w'
+  Label : VARIABLE
+    $v

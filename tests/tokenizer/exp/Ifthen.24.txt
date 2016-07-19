@@ -1,34 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      [
-      Label : INDEX
-        'b'
-      Label : VARIABLE
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        for
-        Label : BLOCK
-          void
-        Label : FINAL
-          <=
-          Label : LEFT
-            $d
-          Label : RIGHT
-            8
-        Label : INCREMENT
-          ++
-          Label : POSTPLUSPLUS
-            $e
-        Label : INIT
-          =
-          Label : LEFT
-            $c
-          Label : RIGHT
-            1
+[
+Label : INDEX
+  'b'
+Label : VARIABLE
+  $a

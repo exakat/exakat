@@ -1,18 +1,1 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      instanceof
-      Label : CLASS
-        Exception
-      Label : VARIABLE
-        $x
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          false
+false

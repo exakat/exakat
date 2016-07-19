@@ -1,16 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    f
+(
+Label : ARGUMENT
+  new
+  Label : NEW
+    Stdclass
     Label : ARGUMENTS
-      
+      (
       Label : ARGUMENT
-        new
-        Label : NEW
-          Stdclass
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
+        Void
+    Label : NAME
+      Stdclass

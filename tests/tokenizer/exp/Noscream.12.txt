@@ -1,28 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $this
-      Label : PROPERTY
-        a
-    Label : RIGHT
-      @
-      Label : AT
-        $b
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            Concatenation
-            Label : CONCAT
-              $host
-            Label : CONCAT
-              'a'
-          Label : ARGUMENT
-            'b'
-        Label : NAME
-          $b
+(
+Label : ARGUMENT
+  .
+  Label : CONCAT
+    $host
+  Label : CONCAT
+    'a'
+Label : ARGUMENT
+  'b'

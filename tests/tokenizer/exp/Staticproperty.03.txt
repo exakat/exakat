@@ -1,11 +1,9 @@
-;
-Label : ELEMENT
-  [
-  Label : INDEX
-    'b'
-  Label : VARIABLE
-    ::
-    Label : CLASS
-      self
-    Label : PROPERTY
-      $a
+[
+Label : INDEX
+  'b'
+Label : VARIABLE
+  ::
+  Label : CLASS
+    self
+  Label : PROPERTY
+    $a

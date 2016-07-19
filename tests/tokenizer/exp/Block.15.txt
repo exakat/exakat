@@ -1,76 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $c
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        $p
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              =
-              Label : LEFT
-                $h
-              Label : RIGHT
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'a'
-                    Label : VALUE
-                      'b'
-                  Label : ARGUMENT
-                    void
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              =
-              Label : LEFT
-                $i
-              Label : RIGHT
-                ->
-                Label : METHOD
-                  c
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      ->
-                      Label : OBJECT
-                        $d
-                      Label : PROPERTY
-                        e
-                Label : OBJECT
-                  $this
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              =
-              Label : LEFT
-                $k
-              Label : RIGHT
-                ->
-                Label : METHOD
-                  m
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'o'
-                      Label : VARIABLE
-                        $n
-                Label : OBJECT
-                  $l
-    Label : THEN
-      void
+(
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'a'
+  Label : VALUE
+    'b'
+Label : ARGUMENT
+  Void

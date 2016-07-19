@@ -1,21 +1,3 @@
-;
-Label : ELEMENT
-  I
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          $b
-    Label : ELEMENT
-      J
-    Label : ELEMENT
-      void
-Label : ELEMENT
-  K
-Label : ELEMENT
-  <?php /* empty, no closing tag */ 
+echo
+Label : ARGUMENT
+  $b

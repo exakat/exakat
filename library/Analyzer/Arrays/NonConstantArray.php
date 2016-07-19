@@ -26,49 +26,23 @@ namespace Analyzer\Arrays;
 use Analyzer;
 
 class NonConstantArray extends Analyzer\Analyzer {
-
-    public function dependsOn() {
-        return array('Constants/Constantnames');
-    }
-    
     public function analyze() {
-        // Normal array, outside a string
+        // Array, outside a string
         $this->atomIs('Array')
-             ->isNot('in_quote', true)
+             ->hasNoParent('String', 'CONCAT')
              ->outIs('INDEX')
-             ->atomIs('Identifier')
-             ->analyzerIsNot('Constants/Constantnames')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->hasNoConstantDefinition();
         $this->prepareQuery();
 
+        // Array, inside a string
         $this->atomIs('Array')
-             ->isNot('in_quote', true)
-             ->isNot('enclosing', null)
+             ->hasParent(array('String', 'Heredoc'), 'CONCAT')
+             ->tokenIs(array('T_DOLLAR_OPEN_CURLY_BRACES', 'T_CURLY_OPEN'))
              ->outIs('INDEX')
-             ->atomIs('Identifier')
-             ->analyzerIsNot('Constants/Constantnames')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->hasNoConstantDefinition();
         $this->prepareQuery();
-
-        // Normal array, inside a string and {}
-        $this->atomIs('Array')
-             ->is('in_quote', true)
-             ->is('inBracket', true)
-             ->outIs('INDEX')
-             ->atomIs('Identifier')
-             ->analyzerIsNot('Constants/Constantnames')
-             ->hasNoConstantDefinition();
-        $this->prepareQuery();
-
-        $this->atomIs('Array')
-             ->is('in_quote', true)
-             ->is('inBracketDollar', true)
-             ->outIs('INDEX')
-             ->atomIs('Identifier')
-             ->analyzerIsNot('Constants/Constantnames')
-             ->hasNoConstantDefinition();
-        $this->prepareQuery();
-
     }
 }
 

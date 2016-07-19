@@ -1,10 +1,10 @@
 <?php
 
 $expected     = array('public final function BmethodFinal2( ) { /**/ } ',
-                      'public final function BmethodFinal( ) { /**/ } ',
-                      'public final function AmethodFinal2( ) { /**/ } ', 
-                      'public final function AmethodFinal( ) { /**/ } ');
+                      'final public function BmethodFinal( ) { /**/ } ', 
+                      'final public function AmethodFinal( ) { /**/ } ',
+                      'public final function AmethodFinal2( ) { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('public function AmethodNonFinal() { /**/ } ');
 
 ?>

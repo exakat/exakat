@@ -30,7 +30,7 @@ class ThisIsNotForStatic extends Analyzer\Analyzer {
     public function analyze() {
         // Check for $this into static functions, inside Class and Traits
         $this->atomIs('Variable')
-             ->code('$this')
+             ->codeIs('$this')
              ->goToFunction()
              ->hasOut('STATIC')
              ->hasClassTrait()

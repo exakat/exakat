@@ -30,7 +30,7 @@ class oldAutoloadUsage extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->hasNoClass()
              ->outIs('NAME')
-             ->code('__autoload')
+             ->codeIs('__autoload')
              ->back('first');
         $this->prepareQuery();
     }

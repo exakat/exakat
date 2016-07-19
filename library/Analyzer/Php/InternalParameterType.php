@@ -55,7 +55,7 @@ class InternalParameterType extends Analyzer\Analyzer {
                 
                 $this->atomIs('Functioncall')
                      ->analyzerIs('Functions/IsExtFunction')
-                     ->fullnspath($functions)
+                     ->fullnspathIs($functions)
                      ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)

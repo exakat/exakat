@@ -1,34 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $i
-    Label : RIGHT
-      1
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ?
-        Label : CONDITION
-          $a
-        Label : ELSE
-          $c
-        Label : THEN
-          $b
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
-    Label : CONDITION
-      <=
-      Label : LEFT
-        $i
-      Label : RIGHT
-        10
-  Label : ELEMENT
-    
+=
+Label : LEFT
+  $i
+Label : RIGHT
+  1

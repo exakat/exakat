@@ -1,6 +1,6 @@
 <?php
 
-use A1 as B;
+//use A1 as B;
 
 class A1 {
     function f() {

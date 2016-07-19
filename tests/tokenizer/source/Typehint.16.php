@@ -1,5 +1,7 @@
 <?php
 
-class y {
-    public function __construct($msg = '', $code = 0, Exception $previous = null) {}
+function x(namespace\Stdclass $a, namespace\Stdclass $b, namespace\Stdclass $c = null) {
+    return 1;
 }
+
+?>

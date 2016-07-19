@@ -1,4 +1,4 @@
-Version 0.6.7 (Red boy, Coming up)
+Version 0.7.5 (Jade Faced Princess, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,28 @@ Version 0.6.7 (Red boy, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.7.4 (Great Sage Who Pacifies Heaven, 2016-07-12)
++ Architecture
+    + Entirely rewrote the 'Tokenizer' part
+    + Upgraded database schema 
++ Analyzer
+    + Upgraded analysis : 1027 / 1461 test pass. 
++ Tokenizer
+    + Entirely rewrote the 'Tokenizer' part
+    + 1851 UT pass correctly (extra 51)
+
+Version 0.6.7 (Red boy, 2016-05-30)
++ Report
+    + Added List With Keys in Appinfo()
+    + Added by-reference functions mention
+    + Now reporting good visibility/static for __callstatic
+    + Added bug info for PHP 7.0.7, 5.5.36, 5.6.21
++ Analyzer
+    + New : recommend instanceof over is_object()
+    + Fixed several ignored limitations, due to case : $phpversion
++ Tokenizer
+    + Fixed 'originclass' in namespaced use
 
 Version 0.6.6 (Princess Iron Fan, 2016-05-23)
 + Report

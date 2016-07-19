@@ -1,63 +1,7 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      [
-      Label : INDEX
-        'B'
-      Label : VARIABLE
-        $a
-    Label : ELSE
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'I'
-          Label : ARGUMENT
-            J
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'K'
-                Label : VARIABLE
-                  $d
-          Label : ARGUMENT
-            'L'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        B
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'D'
-            Label : VARIABLE
-              $b
-      Label : ELEMENT
-        D
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            F
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'G'
-                Label : VARIABLE
-                  $c
-      Label : ELEMENT
-        G
+echo
+Label : ARGUMENT
+  [
+  Label : INDEX
+    'D'
+  Label : VARIABLE
+    $b

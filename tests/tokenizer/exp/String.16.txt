@@ -1,18 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            $a
-          Label : CONCAT
-             b 
-          Label : CONCAT
-            $c
+echo
+Label : ARGUMENT
+  "
+  Label : CONCAT
+    $a
+  Label : CONCAT
+     b 
+  Label : CONCAT
+    $c

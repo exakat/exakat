@@ -1,9 +1,8 @@
 <?php
 
-$expected     = array('G', 
-                      'G', 
-                      'B');
+$expected     = array( 'use G', 
+                       'use B, G');
 
-$expected_not = array();
+$expected_not = array('use non\_trait\_use as a');
 
 ?>

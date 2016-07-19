@@ -30,24 +30,28 @@ class Truthy extends Analyzer\Analyzer {
     
     public function analyze() {
         // Just not a falsy
-        $this->atomIs(array('Integer', 'Float', 'Boolean'))
+        $this->atomIs(array('Integer', 'Real', 'Boolean'))
              ->analyzerIsNot('Structures/Falsy');
         $this->prepareQuery();
 
         // String
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
              ->analyzerIsNot('Structures/Falsy')
              ->hasNoIn('CONCAT');
         $this->prepareQuery();
 
+        // Note : heredoc always includes a final \n
         $this->atomIs('Heredoc')
              ->analyzerIsNot('Structures/Falsy')
-             ->filter('it.out("CONTAINS").out("CONCAT").hasNot("atom", "String").any() == false');
+             ->outIs('CONCAT')
+             ->atomIs('String')
+             ->codeIsNot('')
+             ->back('first');
         $this->prepareQuery();
 
         // array
-        $this->atomFunctionIs('\array')
+        $this->atomIs('Functioncall')
+             ->fullnspathIs('\array')
              ->analyzerIsNot('Structures/Falsy');
         $this->prepareQuery();
 

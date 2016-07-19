@@ -32,6 +32,7 @@ class IsRead extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Array')
+             ->hasNoIn('VARIABLE')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS'));
@@ -40,6 +41,7 @@ class IsRead extends Analyzer\Analyzer {
 
         // right or left, same
         $this->atomIs('Array')
+             ->hasNoIn('VARIABLE')
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
              ->back('first');
@@ -118,7 +120,7 @@ class IsRead extends Analyzer\Analyzer {
                  ->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspath($functions)
+                 ->fullnspathIs($functions)
                  ->back('first');
             $this->prepareQuery();
         }
@@ -126,7 +128,7 @@ class IsRead extends Analyzer\Analyzer {
         // Array in a functioncall
         $this->atomIs('Array')
              ->hasIn(array('ARGUMENT'))
-             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
+             ->hasNoParent('Function', array('ARGUMENTS', 'ARGUMENT'))
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
@@ -156,7 +158,7 @@ class IsRead extends Analyzer\Analyzer {
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Functioncall')
-             ->code('self')
+             ->codeIs('self')
              ->hasIn('NEW')
              ->classDefinition()
              ->outIs('BLOCK')

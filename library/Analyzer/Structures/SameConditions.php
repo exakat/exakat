@@ -25,14 +25,13 @@ use Analyzer;
 
 class SameConditions extends Analyzer\Analyzer {
     public function analyze() {
-        $steps = 'out("ELSE").transform{ if (it.atom == "Sequence" && it.count == 1) { it.out("ELEMENT").has("rank", 0).next(); } else { it; } }';
-
+        // if ($a) {} elseif ($a1) {} else {}
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->savePropertyAs('fullcode', 'condition')
              ->_as('results')
              ->inIs('CONDITION')
-             ->filter(' it.as("x").'.$steps.'.loop("x"){ it.object.'.$steps.'.any() }{it.object.out("CONDITION").any()}.out("CONDITION").has("fullcode", condition).any()')
+             ->raw('where( __.repeat( __.out("ELSE").coalesce(hasLabel("Sequence").has("count", 1).out("ELEMENT").hasLabel("Ifthen"),  __.filter{true} )).emit().times(15).out("CONDITION").filter{ it.get().value("fullcode") == condition; } )')
              ->back('first');
         $this->prepareQuery();
     }

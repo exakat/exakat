@@ -1,22 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      function
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          $b
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
-      Label : NAME
-        
+(
+Label : ARGUMENT
+  $b

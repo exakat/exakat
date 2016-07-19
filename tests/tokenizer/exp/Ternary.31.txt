@@ -1,24 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ?
-      Label : CONDITION
-        B
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              C
-          Label : ARGUMENT
-            $b
-      Label : ELSE
-        D
-      Label : THEN
-        :
+(
+Label : ARGUMENT
+  ->
+  Label : OBJECT
+    $a
+  Label : PROPERTY
+    C
+Label : ARGUMENT
+  $b

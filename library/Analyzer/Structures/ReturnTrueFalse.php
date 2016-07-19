@@ -34,8 +34,8 @@ class ReturnTrueFalse extends Analyzer\Analyzer {
              ->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Boolean')
-             ->code(array('true', 'false'))
-             ->savePropertyAs('code', 'first')
+             ->codeIs(array('true', 'false'))
+             ->savePropertyAs('code', 'a')
              ->inIs('RETURN')
              ->inIs('ELEMENT')
              ->inIs('THEN')
@@ -45,8 +45,8 @@ class ReturnTrueFalse extends Analyzer\Analyzer {
              ->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Boolean')
-             ->code(array('true', 'false'))
-             ->notSamePropertyAs('code', 'first')
+             ->codeIs(array('true', 'false'))
+             ->notSamePropertyAs('code', 'a')
 
              ->back('first');
         $this->prepareQuery();
@@ -64,8 +64,8 @@ class ReturnTrueFalse extends Analyzer\Analyzer {
              ->outIs('RIGHT')
              ->atomIs('Boolean')
 
-             ->code(array('true', 'false'))
-             ->savePropertyAs('code', 'first')
+             ->codeIs(array('true', 'false'))
+             ->savePropertyAs('code', 'a')
              ->inIs('RIGHT')
              ->inIs('ELEMENT')
              ->inIs('THEN')
@@ -78,8 +78,8 @@ class ReturnTrueFalse extends Analyzer\Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIs('Boolean')
-             ->code(array('true', 'false'))
-             ->notSamePropertyAs('code', 'first')
+             ->codeIs(array('true', 'false'))
+             ->notSamePropertyAs('code', 'a')
 
              ->back('first');
         $this->prepareQuery();
@@ -92,14 +92,14 @@ class ReturnTrueFalse extends Analyzer\Analyzer {
 
              ->outIs('THEN')
              ->atomIs('Boolean')
-             ->code(array('true', 'false'))
-             ->savePropertyAs('code', 'first')
+             ->codeIs(array('true', 'false'))
+             ->savePropertyAs('code', 'a')
              ->inIs('THEN')
 
              ->outIs('ELSE')
              ->atomIs('Boolean')
-             ->code(array('true', 'false'))
-             ->notSamePropertyAs('code', 'first')
+             ->codeIs(array('true', 'false'))
+             ->notSamePropertyAs('code', 'a')
 
              ->back('first');
         $this->prepareQuery();

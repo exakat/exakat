@@ -1,76 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      NULL
-  Label : ELEMENT
-    =
+(
+Label : ARGUMENT
+  ??
+  Label : LEFT
+    $x
+  Label : RIGHT
+    ??
     Label : LEFT
       $y
     Label : RIGHT
-      NULL
-  Label : ELEMENT
-    =
-    Label : LEFT
       $z
-    Label : RIGHT
-      3
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ??
-        Label : LEFT
-          $x
-        Label : RIGHT
-          ??
-          Label : LEFT
-            $y
-          Label : RIGHT
-            $z
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            "c"
-          Label : VALUE
-            "d"
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ??
-        Label : LEFT
-          [
-          Label : INDEX
-            "e"
-          Label : VARIABLE
-            $x
-        Label : RIGHT
-          ??
-          Label : LEFT
-            [
-            Label : INDEX
-              "f"
-            Label : VARIABLE
-              $x
-          Label : RIGHT
-            [
-            Label : INDEX
-              "g"
-            Label : VARIABLE
-              $x

@@ -1,52 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CASE
-          '1'
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $b
-            Label : RIGHT
-              *
-              Label : LEFT
-                $c
-              Label : RIGHT
-                $d
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              ==
-              Label : LEFT
-                $e
-              Label : RIGHT
-                0
-            Label : THEN
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  $f
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-    Label : NAME
-      $a
+=
+Label : LEFT
+  $b
+Label : RIGHT
+  *
+  Label : LEFT
+    $c
+  Label : RIGHT
+    $d

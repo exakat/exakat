@@ -33,16 +33,15 @@ class StaticMethodsCalledFromObject extends Analyzer\Analyzer {
 
     public function analyze() {
         $methods = $this->query(<<<GREMLIN
-g.idx("atoms")[["atom":"Function"]].out("NAME")
-                                   .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\MethodDefinition").any()}
-                                   .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\StaticMethods").any()}
-                                   .transform{it.code.toLowerCase()}
-                                   .unique()
+g.V().hasLabel("Function").where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Trait"))
+                          .where(__.out("STATIC").count().is(eq(1)) )
+                          .out("NAME").values("code").unique()
 GREMLIN
 );
+
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->code($methods)
+             ->codeIs($methods, true)
              ->inIs('METHOD');
         $this->prepareQuery();
     }

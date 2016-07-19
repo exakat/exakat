@@ -31,15 +31,15 @@ class UnicodeEscapePartial extends Analyzer\Analyzer {
     public function analyze() {
         // Normal string
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
-             ->regex('noDelimiter', '\\\\\\\\u\\\\{')
+             ->outIsIE('CONCAT')
+             ->regexIs('noDelimiter', '\\\\\\\\u\\\\{')
              ->back('first');
         $this->prepareQuery();
 
         // Here/NowDoc string
         $this->atomIs('Heredoc')
-             ->outIs('CONTAINS')
-             ->regex('noDelimiter', '\\\\\\\\u\\\\{')
+             ->outIs('CONCAT')
+             ->regexIs('noDelimiter', '\\\\\\\\u\\\\{')
              ->back('first');
         $this->prepareQuery();
     }

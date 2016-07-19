@@ -12,4 +12,7 @@ echo implode('',$lines);
 $lines2 = file($file6);
 echo implode('',$lines3);
 
+$lines4 = \file($file7);
+echo implode('sb',$lines4);
+
 ?>

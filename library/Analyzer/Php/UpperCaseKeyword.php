@@ -29,7 +29,7 @@ class UpperCaseKeyword extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs(array('Class', 'Foreach', 'Switch', 'For', 'Namespace', 'Use', 'Function',
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',
-                            'Clone', 'DoWhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
+                            'Clone', 'Dowhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
                             'Throw', 'Trait', 'Interface', 'Var', 'Logical' ))
              ->codeIsNot(array('&&', '||', '^', '&', '|'))
              ->isUpperCase('code');

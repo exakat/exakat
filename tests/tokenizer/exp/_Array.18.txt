@@ -1,42 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      "
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          a
-        Label : CONCAT
-          [
-          Label : INDEX
-            1
-          Label : VARIABLE
-            $b
-        Label : CONCAT
-          [
-          Label : INDEX
-            2
-          Label : VARIABLE
-            $c
-        Label : CONCAT
-          d
-        Label : CONCAT
-          [
-          Label : INDEX
-            3
-          Label : VARIABLE
-            $e
-        Label : CONCAT
-          F
-        Label : CONCAT
-          [
-          Label : INDEX
-            4
-          Label : VARIABLE
-            $g
-        Label : CONCAT
-          h
+[
+Label : INDEX
+  1
+Label : VARIABLE
+  $b

@@ -1,4 +1,6 @@
 <?php
 
-break 1;
+foreach($a as $b) {
+    break 1;
+}
 ?>

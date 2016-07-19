@@ -28,7 +28,8 @@ use Analyzer;
 class Url extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('String')
-             ->regex('code', '^.?([a-z]+)://[-\\\\p{L}0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|].?\\$');
+             ->hasNoOut('CONCAT')
+             ->regexIs('noDelimiter', '^.?([a-z]+)://[-\\\\p{L}0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|].?\\$');
         $this->prepareQuery();
     }
 }

@@ -27,48 +27,28 @@ use Analyzer;
 
 class ShouldPreprocess extends Analyzer\Analyzer {
     public function analyze() {
-        $dynamicAtoms = array('Variable', 'Property', 'Identifier', 'Magicconstant');
+        $dynamicAtoms = array('Variable', 'Property', 'Magicconstant', 'Staticmethodcall', 'Staticproperty');
         //'Functioncall' : if they also have only constants.
 
-        $functionList = $this->loadIni('inert_functions.ini');
-        $functionList = '"\\\\' . implode('", "\\\\', $functionList['functions']). '"';
-        
-        $this->atomIs('Addition')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
+//'Identifier', 
+        $functionList = $this->loadIni('inert_functions.ini', 'functions');
+        $functionList = $this->makeFullnspath($functionList);
+
+        $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
+            // Functioncall, that are not authorized
+             ->raw('where( __.repeat( out() ).emit( hasLabel("Functioncall") ).times(15).hasLabel("Functioncall").filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) }.count().is(eq(0)) )')
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
 
-        $this->atomIs('Multiplication')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Concatenation')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Bitshift')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Logical')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Not')
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->noAtomInside($dynamicAtoms);
-        $this->prepareQuery();
-
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\join', '\\explode', '\\implode', '\\split'))
-             ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')
-             ->outIs('ARGUMENTS')
+        $this->atomFunctionIs(array('\\join', '\\explode', '\\implode', '\\split'))
+//where( __.repeat( out() ).emit( hasLabel('.$this->SorA($atom).') ).times(15).hasLabel('.$this->SorA($atom).').count().is(eq(0)) )
+//             ->outIs('ARGUMENTS')
+//             ->atomInside('Functioncall')
+//             ->hasNoIn('METHOD')
+//             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+//             ->fullnspathIs($functionList)
+//             ->back('first')
+//             ->outIs('ARGUMENTS')
              ->noAtomInside($dynamicAtoms)
              ->back('first');
         $this->prepareQuery();

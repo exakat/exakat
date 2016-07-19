@@ -1,51 +1,13 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    eval
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
+(
+Label : ARGUMENT
+  )
+  Label : CODE
+    $
+    Label : NAME
+      $e
+      Label : ARGUMENTS
         (
-        Label : CODE
-          $
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'E'
-          Label : NAME
-            $e
-  Label : ELEMENT
-    strtolower
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        (
-        Label : CODE
-          $
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'E'
-          Label : NAME
-            $e
-      Label : ARGUMENT
-        (
-        Label : CODE
-          $
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'F'
-          Label : NAME
-            $e
-      Label : ARGUMENT
-        (
-        Label : CODE
-          $
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'G'
-          Label : NAME
-            $e
+        Label : ARGUMENT
+          'E'
+      Label : NAME
+        $e

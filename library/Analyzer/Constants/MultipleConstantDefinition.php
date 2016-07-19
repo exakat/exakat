@@ -26,121 +26,118 @@ namespace Analyzer\Constants;
 use Analyzer;
 
 class MultipleConstantDefinition extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Structures/Truthy');
+    }
+
     public function analyze() {
-
-        $thirdArgIsTrue  = 'it.out("ARGUMENT").filter{it.rank == 2}.any() && it.out("ARGUMENT").filter{it.rank == 2}.filter{it.code.toLowerCase() == "true"}.any()';
-        $thirdArgIsFalse = 'it.out("ARGUMENT").filter{it.rank == 2}.any() == false || it.out("ARGUMENT").filter{it.rank == 2}.filter{it.code.toLowerCase() == "false"}.any()';
-
         // case-insensitive constants with Define
         // Search for definitions and count them
         $csDefinitions = $this->query(<<<GREMLIN
-m = [:];
+g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
+                              .has("token", within('T_STRING', 'T_NS_SEPARATOR') )
+                              .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
+                              .out("ARGUMENTS")
+                              .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
+                                   __.out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Structures\\\\Truthy").count().is(eq(0)) ),
+                                  )
+                              .out("ARGUMENT").has("rank", 0).hasLabel("String").where(__.out("CONCAT").count().is(eq(0)) )
+                              .values("noDelimiter")
+GREMLIN
+);
 
-g.idx('atoms')[['atom':'Functioncall']].has("atom", 'Functioncall').as("first").has("atom", 'Functioncall').filter{ it.inE.filter{ it.label in ['METHOD', 'NEW']}.any() == false}.filter{it.token in ['T_STRING', 'T_NS_SEPARATOR', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST'] }.filter{it.fullnspath.toLowerCase() == '\\\\define'}.out('ARGUMENTS')
-             .filter{ $thirdArgIsFalse }
-             .out('ARGUMENT').filter{it.rank == 0}.noDelimiter;
+        $constDefinitions = $this->query(<<<GREMLIN
+g.V().hasLabel("Const").where( __.in("ELEMENT").in("BLOCK").hasLabel("Class", "Trait").count().is(eq(0)) )
+                       .out("CONST")
+                       .out("LEFT").values("code")
 GREMLIN
 );
 
         $cisDefinitions = $this->query(<<<GREMLIN
-m = [:];
-
-g.idx('atoms')[['atom':'Functioncall']].has("atom", 'Functioncall').as("first").has("atom", 'Functioncall').filter{ it.inE.filter{ it.label in ['METHOD', 'NEW']}.any() == false}.filter{it.token in ['T_STRING', 'T_NS_SEPARATOR', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST'] }.filter{it.fullnspath.toLowerCase() == '\\\\define'}.out('ARGUMENTS')
-             .filter{ $thirdArgIsTrue }
-             .out('ARGUMENT').filter{it.rank == 0}.transform{ it.noDelimiter.toLowerCase()};
-             
+g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
+                              .has("token", within('T_STRING', 'T_NS_SEPARATOR') )
+                              .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
+                              .out("ARGUMENTS")
+                              .out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Structures\\\\Truthy").count().is(eq(1)) ).in("ARGUMENT")
+                              .out("ARGUMENT").has("rank", 0)
+                              .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN
 );
 
+        if ($a = $this->selfCollisions($cisDefinitions)) {
+            $this->applyToCisDefine($a);
+        }
+
+        if ($a = $this->selfCollisions(array_merge($constDefinitions, $csDefinitions))) {
+            $this->applyToConst(array_intersect($a, $constDefinitions));
+            $this->applyToCsDefine(array_intersect($a, $csDefinitions));
+        }
+        
+        if ($a = $this->CsCisCollisions($csDefinitions, $cisDefinitions)) {
+            $this->applyToCisDefine($a);
+            $this->applyToCsDefine($a);
+        }
+
+        if ($a = $this->CsCisCollisions($constDefinitions, $cisDefinitions)) {
+            $this->applyToCisDefine($a);
+            $this->applyToConst($a);
+        }
+    }
+    
+    private function selfCollisions($array) {
         // two definitions are case sensitive
+        return array_keys(array_filter(array_count_values($array), function ($x) { return $x > 1; }));
+    }
+    
+    private function CsCisCollisions($csDefinitions, $cisDefinitions) {
+        return array_merge( array_intersect($csDefinitions, $cisDefinitions),
+                            array_intersect($csDefinitions, array_map(function ($x) { return strtoupper($x); }, $cisDefinitions) ) );
+    }
+    
+    private function applyToCisDefine($array) {
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
-             ->filter($thirdArgIsFalse)
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 2)
+             ->analyzerIs('Structures/Truthy')
+             ->inIs('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->hasNoOut('CONTAINS')
-             ->isPropertyIn('noDelimiter', $csDefinitions)
-             ->eachCounted('it.noDelimiter', 2, '>=');
+             ->hasNoOut('CONCAT')
+             ->noDelimiterIs($array);
         $this->prepareQuery();
+    }
 
-        // one definition is case insensitive
+    private function applyToCsDefine($array) {
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 2)
+             ->analyzerIsNot('Structures/Truthy')
+             ->inIs('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->hasNoOut('CONTAINS')
-             ->isPropertyIn('noDelimiter', $cisDefinitions, false)
-             ->eachCounted('it.noDelimiter.toLowerCase()', 2, '>=');
+             ->hasNoOut('CONCAT')
+             ->noDelimiterIs($array);
         $this->prepareQuery();
 
-        // case-sensitive constants with other const
+        $this->atomFunctionIs('\\define')
+             ->outIs('ARGUMENTS')
+             ->noChildWithRank('ARGUMENT', 2)
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
+             ->noDelimiterIs($array);
+        $this->prepareQuery();
+    }
+
+    private function applyToConst($array) {
         $this->atomIs('Const')
              ->hasNoClassTrait()
              ->outIs('CONST')
              ->outIs('LEFT')
-             ->raw('groupCount(m){it.code}.aggregate().filter{m[it.code] > 1}');
+             ->codeIs($array);
         $this->prepareQuery();
-
-
-        // Const and defined constants
-        // constants with const with define(,,[false])
-        $this->atomIs('Const')
-             ->hasNoClass()
-             ->outIs('CONST')
-             ->outIs('LEFT')
-             ->savePropertyAs('code', 'constant')
-             // Find in define() calls (exact match)
-             ->filter('g.idx("atoms")[["atom":"Functioncall"]].filter{it.token in ["T_STRING", "T_NS_SEPARATOR", " T_EVAL", "T_ISSET", "T_EXIT", "T_UNSET", "T_ECHO", "T_PRINT", "T_LIST"] }.filter{ it.inE.filter{ it.label in ["METHOD", "NEW"]}.any() == false}.filter{it.fullnspath.toLowerCase() == "\\\\define"}.out("ARGUMENTS")
-                        .filter{'.$thirdArgIsFalse.'}
-                        .out("ARGUMENT").filter{it.rank == 0}.has("atom", "String").filter{ it.out("CONTAINS").any() == false}.has("noDelimiter", constant).any()');
-        $this->prepareQuery();
-
-        // constants with const with define(,,true)
-        $this->atomIs('Const')
-             ->hasNoClass()
-             ->outIs('CONST')
-             ->outIs('LEFT')
-             ->savePropertyAs('code', 'constant')
-             // Find in define() calls (case insensitive match)
-             ->filter('g.idx("atoms")[["atom":"Functioncall"]].filter{it.token in ["T_STRING", "T_NS_SEPARATOR", "T_EVAL", "T_ISSET", "T_EXIT", "T_UNSET", "T_ECHO", "T_PRINT", "T_LIST"] }.filter{ it.inE.filter{ it.label in ["METHOD", "NEW"]}.any() == false}.filter{it.fullnspath.toLowerCase() == "\\\\define"}.out("ARGUMENTS")
-                        .filter{'.$thirdArgIsTrue.'}
-                        .out("ARGUMENT").filter{it.rank == 0}.filter{it.noDelimiter.toLowerCase() == constant.toLowerCase()}.any()');
-        $this->prepareQuery();
-
-        // define(,,true) with const
-        $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
-             ->filter($thirdArgIsTrue)
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
-             ->atomIs('String')
-             ->hasNoOut('CONTAINS')
-             ->savePropertyAs('noDelimiter', 'constant')
-             // Find in define() calls (case insensitive match)
-             ->filter('g.idx("atoms")[["atom":"Const"]]
-                        .filter{ it.in.loop(1){!(it.object.atom in ["Class", "Trait"])}{it.object.atom in ["Class", "Trait"]}.any() == false}
-                        .out("CONST").out("LEFT").filter{it.code.toLowerCase() == constant.toLowerCase()}.any()');
-        $this->prepareQuery();
-
-        // define(,,[false]) with const
-        $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
-             ->filter($thirdArgIsFalse)
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
-             ->atomIs('String')
-             ->hasNoOut('CONTAINS')
-             ->savePropertyAs('noDelimiter', 'constant')
-             // Find in define() calls (case insensitive match)
-             ->filter('g.idx("atoms")[["atom":"Const"]]
-                        .filter{ it.in.loop(1){!(it.object.atom in ["Class", "Trait"])}{it.object.atom in ["Class", "Trait"]}.any() == false}
-                        .out("CONST").out("LEFT").has("code", constant).any()')
-                        ;
-        $this->prepareQuery();
-
     }
+
 }
 
 ?>

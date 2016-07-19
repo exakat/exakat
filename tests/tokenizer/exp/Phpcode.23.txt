@@ -1,0 +1,7 @@
+echo
+Label : ARGUMENT
+  [
+  Label : INDEX
+    0
+  Label : VARIABLE
+    $like_locale

@@ -1,19 +1,13 @@
-<?php 
-Label : CODE
-  ;
+do
+Label : BLOCK
+  {}
   Label : ELEMENT
     do
     Label : BLOCK
-      ;
+      {}
       Label : ELEMENT
-        do
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            {
-            Label : ELEMENT
-              void
-        Label : CONDITION
-          1
+        Void
     Label : CONDITION
-      2
+      1
+Label : CONDITION
+  2

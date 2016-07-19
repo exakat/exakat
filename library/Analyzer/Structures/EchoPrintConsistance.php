@@ -29,10 +29,19 @@ class EchoPrintConsistance extends Analyzer\Analyzer {
 
     public function analyze() {
         
-        $this->atomIs('Functioncall')
-             ->code(array('echo', 'print'))
-             ->groupFilter('x2 = it.code', 10 / 100);
-        $this->prepareQuery();
+        $inconsistent = $this->query(<<<GREMLIN
+g.V().as("first").hasLabel("Functioncall")
+                 .where( __.in("METHOD", "NEW").count().is(eq(0)) )
+                 .has("token", within("T_ECHO", "T_PRINT"))
+                 .groupCount("gf").by{it.value("fullnspath");}.cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s / 10;}.keySet()
+GREMLIN
+);
+
+        if (!empty($inconsistent)) {
+            $this->atomFunctionIs(array('\echo', '\print'))
+                 ->fullnspathIs($inconsistent);
+            $this->prepareQuery();
+        }
     }
 }
 

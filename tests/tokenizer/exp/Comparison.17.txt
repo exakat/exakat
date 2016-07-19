@@ -1,32 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !=
-      Label : LEFT
-        @
-        Label : AT
-          [
-          Label : INDEX
-            'b'
-          Label : VARIABLE
-            $a
-      Label : RIGHT
-        'c'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          @
-          Label : AT
-            ->
-            Label : OBJECT
-              $d
-            Label : PROPERTY
-              e
-        Label : RIGHT
-          'f'
+[
+Label : INDEX
+  'b'
+Label : VARIABLE
+  $a

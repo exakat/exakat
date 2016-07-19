@@ -46,7 +46,7 @@ class CleanDb extends Tasks {
         }
 
         $queryTemplate = <<<GREMLIN
-g.V.count();
+g.V().count();
 GREMLIN;
         $result = $this->gremlin->query($queryTemplate);
         if (!is_object($result) || $result->results === null) {
@@ -68,8 +68,8 @@ GREMLIN;
         
             $queryTemplate = <<<GREMLIN
 
-g.E.each{ g.removeEdge(it); }
-g.V.each{ g.removeVertex(it); } 
+g.E().drop();
+g.V().drop();
 
 GREMLIN;
             $this->gremlin->query($queryTemplate);
@@ -145,7 +145,8 @@ GREMLIN;
         } catch (\Exception $e) {
             display('Didn\'t restart neo4j cleanly');
         }
-        
+
+        $this->gremlin->query("g.addV('delete', true)");
     }
 }
 

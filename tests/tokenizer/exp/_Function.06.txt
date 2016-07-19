@@ -1,24 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $a
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          2
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          1
-    Label : NAME
-      x
+(
+Label : ARGUMENT
+  $a
+Label : ARGUMENT
+  $b
+  Label : DEFAULT
+    2

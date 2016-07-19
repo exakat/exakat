@@ -1,32 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      function
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          $d
-        Label : ARGUMENT
-          =
-          Label : LEFT
-            $e
-          Label : RIGHT
-            2
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
-      Label : NAME
-        
+(
+Label : ARGUMENT
+  $b
+Label : ARGUMENT
+  $c
+Label : ARGUMENT
+  $d
+Label : ARGUMENT
+  $e
+  Label : DEFAULT
+    2

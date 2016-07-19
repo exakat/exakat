@@ -1,32 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    &&
-    Label : LEFT
-      ::
-      Label : CLASS
-        $
-        Label : NAME
-          x
-      Label : METHOD
-        a
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'c'
-            Label : VARIABLE
-              $b
-    Label : RIGHT
-      d
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          [
-          Label : INDEX
-            'f'
-          Label : VARIABLE
-            $e
+(
+Label : ARGUMENT
+  [
+  Label : INDEX
+    'c'
+  Label : VARIABLE
+    $b

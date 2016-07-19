@@ -1,5 +1,1 @@
-;
-Label : ELEMENT
-  -
-  Label : SIGN
-    true
+true

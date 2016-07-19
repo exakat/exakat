@@ -1,20 +1,15 @@
-<?php
-
-Label : CODE
+do
+Label : BLOCK
   ;
   Label : ELEMENT
-    do
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $x
-        Label : THEN
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $y
+    if
     Label : CONDITION
-      $z
+      $x
+    Label : THEN
+      {}
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $y
+Label : CONDITION
+  $z

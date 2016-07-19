@@ -1,20 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    &&
-    Label : LEFT
-      !
-      Label : NOT
-        a
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            'b'
-    Label : RIGHT
-      c
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          'd'
+(
+Label : ARGUMENT
+  'b'

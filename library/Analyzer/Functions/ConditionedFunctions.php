@@ -28,8 +28,9 @@ use Analyzer;
 class ConditionedFunctions extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
-             ->raw('in.loop(1){true}{it.object.atom == "Ifthen"}')
-             ->back('first');
+             ->hasNoChildren('Void', 'NAME') // Not a closure
+             ->hasNoParent(array('Class', 'Trait'), array('ELEMENT', 'BLOCK')) // Not a method definition
+             ->hasIfthen();
         $this->prepareQuery();
     }
 }

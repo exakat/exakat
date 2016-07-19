@@ -1,24 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      if
-      Label : CONDITION
-        >>
-        Label : LEFT
-          $d
-        Label : RIGHT
-          1
-      Label : THEN
-        void
-    Label : SOURCE
-      $a
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
+>>
+Label : LEFT
+  $d
+Label : RIGHT
+  1

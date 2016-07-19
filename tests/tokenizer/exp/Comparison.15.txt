@@ -1,32 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      =
-      Label : LEFT
-        !
-        Label : NOT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            a
-      Label : RIGHT
-        b
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $c
-          Label : ARGUMENT
-            $d
-          Label : ARGUMENT
-            $e
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          f
+(
+Label : ARGUMENT
+  $c
+Label : ARGUMENT
+  $d
+Label : ARGUMENT
+  $e

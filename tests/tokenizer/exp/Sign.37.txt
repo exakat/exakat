@@ -1,48 +1,43 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
+(
+Label : ARGUMENT
+  -
+  Label : SIGN
     ->
     Label : METHOD
-      b
+      d
       Label : ARGUMENTS
-        Arguments
+        (
         Label : ARGUMENT
-          -
-          Label : SIGN
-            ->
-            Label : METHOD
-              d
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $c
-        Label : ARGUMENT
-          -
-          Label : SIGN
-            ->
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $e
-        Label : ARGUMENT
-          -
-          Label : SIGN
-            ->
-            Label : METHOD
-              h
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $g
+          Void
+      Label : NAME
+        d
     Label : OBJECT
-      $a
+      $c
+Label : ARGUMENT
+  -
+  Label : SIGN
+    ->
+    Label : METHOD
+      f
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          Void
+      Label : NAME
+        f
+    Label : OBJECT
+      $e
+Label : ARGUMENT
+  -
+  Label : SIGN
+    ->
+    Label : METHOD
+      h
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          Void
+      Label : NAME
+        h
+    Label : OBJECT
+      $g

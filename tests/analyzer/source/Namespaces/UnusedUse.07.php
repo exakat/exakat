@@ -18,7 +18,7 @@ use j\SingleWithoutAliasUsed2,
     n\OriginalAliasBothUsedo2 as OriginalAliasBothUseda2,
     o\OriginalAliasBothUnusedo2 as OriginalAliasBothUnused2;
 
-$x instanceof \a\SingleWithoutAliasUsed;
+$x instanceof SingleWithoutAliasUsed;
 $x1 instanceof \c\OriginalUsedAliasUnusedo;
 $x2 instanceof OriginalUnusedAliasUseda;
 $x3 instanceof e\OriginalAliasBothUsedo;

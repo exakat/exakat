@@ -1,28 +1,19 @@
-<?php
+EOL
+Label : ARGUMENT
+  <<<EOL
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        <<<EOL
-
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            a
-          Label : CONCAT
-            $b
-          Label : CONCAT
-            "  "
-          Label : CONCAT
-            [
-            Label : INDEX
-              $d
-            Label : VARIABLE
-              $c
-          Label : CONCAT
-            "
+  Label : CONCAT
+    a
+  Label : CONCAT
+    b
+  Label : CONCAT
+    "  "
+  Label : CONCAT
+    [
+    Label : INDEX
+      $d
+    Label : VARIABLE
+      c
+  Label : CONCAT
+    "
 

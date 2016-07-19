@@ -30,16 +30,14 @@ class Constantnames extends Analyzer\Analyzer {
         // with define
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->hasNoOut('CONTAINS');
+             ->hasNoOut('CONCAT');
         $this->prepareQuery();
 
         // with const
         $this->atomIs('Const')
-             ->notInClass()
-             ->notInInterface()
+             ->hasNoClassInterface()
              ->outIs('CONST')
              ->outIs('LEFT');
         $this->prepareQuery();

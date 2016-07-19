@@ -29,33 +29,16 @@ class ImplicitGlobal extends Analyzer\Analyzer {
     public function analyze() {
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 
-        $globallyDeclared = $this->query('g.idx("atoms")[["atom":"Global"]].out("GLOBAL")
-                                            .has("atom", "Variable")
-                                            .filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}
-                                            .code');
+        $linksDown = \Tokenizer\Token::linksAsList();
+        $globalGlobal = $this->query('g.V().hasLabel("Global").out("GLOBAL")
+.where( repeat(__.in('.$linksDown.')).until(hasLabel("File")).emit().hasLabel("Function").count().is(eq(0)) )
+.values("code").unique()');
 
-        // global $x (Global that is not declared as Global in the global space)
         $this->atomIs('Global')
              ->hasFunction()
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
-             ->codeIsNot($superglobals)
-             ->codeIsNot(array('$argv', '$argc'))
-             ->codeIsNot($globallyDeclared);
-        $this->prepareQuery();
-
-        // $GLOBALS['x']
-        $globallyDeclaredNoDollar = array_map(function($x) { return substr($x, 1); }, $globallyDeclared);
-        $this->atomIs('Variable')
-             ->code('$GLOBALS')
-             ->hasFunction()
-             ->inIs('VARIABLE')
-             ->atomIs('Array')
-             ->_as('results')
-             ->outIs('INDEX')
-             ->atomIs('String')
-             ->noDelimiterIsNot($globallyDeclaredNoDollar)
-             ->back('results');
+             ->codeIsNot($globalGlobal);;
         $this->prepareQuery();
     }
 }

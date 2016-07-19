@@ -29,7 +29,7 @@ class LoneBlock extends Analyzer\Analyzer {
     public function analyze() {
         // if (1) {{ $b++; }}
         $this->atomIs('Sequence')
-             ->is('block', true)
+             ->is('bracket', true)
              ->hasIn('ELEMENT');
         $this->prepareQuery();
     }

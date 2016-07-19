@@ -1,3 +1,5 @@
-;
-Label : ELEMENT
-  void
+==
+Label : LEFT
+  $target
+Label : RIGHT
+  1

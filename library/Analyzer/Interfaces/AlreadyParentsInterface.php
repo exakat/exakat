@@ -42,7 +42,8 @@ class AlreadyParentsInterface extends Analyzer\Analyzer {
              ->notSamePropertyAs('fullnspath', 'fnp')
              ->outIs('IMPLEMENTS')
              ->samePropertyAs('fullnspath', 'i')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

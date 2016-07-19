@@ -1,56 +1,25 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Ifthen.09.php
+Label : FILE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : ELSE
-      Block with else
+    <?php
+
+    Label : CODE
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
-          2
+          1
         Label : ELSE
-          Block with else
+          ;
           Label : ELEMENT
             if
             Label : CONDITION
-              3
-            Label : ELSE
-              Block with else
-              Label : ELEMENT
-                if
-                Label : CONDITION
-                  4
-                Label : ELSE
-                  Block with else
-                  Label : ELEMENT
-                    if
-                    Label : CONDITION
-                      5
-                    Label : ELSE
-                      ;
-                      Label : ELEMENT
-                        $f
-                    Label : THEN
-                      ;
-                      Label : ELEMENT
-                        $e
-                Label : THEN
-                  ;
-                  Label : ELEMENT
-                    $d
-            Label : THEN
-              ;
-              Label : ELEMENT
-                $c
-        Label : THEN
-          ;
+123098120398 [label="Reached level 15"]            Label : ELSE
+123098120398 [label="Reached level 15"]            Label : THEN
+123098120398 [label="Reached level 15"]        Label : THEN
+          {}
           Label : ELEMENT
-            $b
-    Label : THEN
-      ;
+            $a
       Label : ELEMENT
-        $a
+        Void

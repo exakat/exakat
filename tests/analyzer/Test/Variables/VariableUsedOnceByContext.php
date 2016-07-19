@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Variables_VariableUsedOnceByContext extends Analyzer {
-    /* 9 methods */
+    /* 10 methods */
 
     public function testVariables_VariableUsedOnceByContext01()  { $this->generic_test('Variables_VariableUsedOnceByContext.01'); }
     public function testVariables_VariableUsedOnceByContext02()  { $this->generic_test('Variables_VariableUsedOnceByContext.02'); }
@@ -19,5 +19,6 @@ class Variables_VariableUsedOnceByContext extends Analyzer {
     public function testVariables_VariableUsedOnceByContext07()  { $this->generic_test('Variables/VariableUsedOnceByContext.07'); }
     public function testVariables_VariableUsedOnceByContext08()  { $this->generic_test('Variables/VariableUsedOnceByContext.08'); }
     public function testVariables_VariableUsedOnceByContext09()  { $this->generic_test('Variables/VariableUsedOnceByContext.09'); }
+    public function testVariables_VariableUsedOnceByContext10()  { $this->generic_test('Variables/VariableUsedOnceByContext.10'); }
 }
 ?>

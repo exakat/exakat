@@ -1,14 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        dirname
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            __FILE__
+echo
+Label : ARGUMENT
+  dirname
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      __FILE__
+  Label : NAME
+    dirname

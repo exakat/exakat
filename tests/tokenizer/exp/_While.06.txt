@@ -1,22 +1,23 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_While.06.php
+Label : FILE
   ;
   Label : ELEMENT
-    while
-    Label : BLOCK
+    <?php
+
+    Label : CODE
       ;
-      Label : ELEMENT
-        {
-        Label : ELEMENT
-          void
       Label : ELEMENT
         while
         Label : BLOCK
-          ;
+          {}
           Label : ELEMENT
-            void
-        Label : CONDITION
+            {}
+            Label : ELEMENT
+123098120398 [label="Reached level 15"]          Label : ELEMENT
+            while
+            Label : BLOCK
+123098120398 [label="Reached level 15"]            Label : CONDITION
+123098120398 [label="Reached level 15"]        Label : CONDITION
           1
-    Label : CONDITION
-      1
+      Label : ELEMENT
+        Void

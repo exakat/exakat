@@ -1,8 +1,12 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Sequence.04.php
+Label : FILE
   ;
   Label : ELEMENT
-    1
-  Label : ELEMENT
-    2
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        1
+      Label : ELEMENT
+        2

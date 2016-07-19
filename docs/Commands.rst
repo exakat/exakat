@@ -198,15 +198,19 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -R        | No  | URL to the VCS repository. Anything compatible with the expected VCS.       |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -git      | No  | Force VCS to be git (also, default value if no clue is given in the VCS URL)|
+| -git      | No  | Use git client      (also, default value if no clue is given in the VCS URL)|
 +-----------+-----+-----------------------------------------------------------------------------+
-| -svn      | No  | Force VCS to be SVN                                                         |
+| -svn      | No  | Use SVN client                                                              |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -bzr      | No  | Force VCS to be Baazar                                                      |
+| -bzr      | No  | Use Bazar client                                                            |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -hg       | No  | Force VCS to be Mercurial                                                   |
+| -hg       | No  | Use Mercurial (hg) client                                                   |
 +-----------+-----+-----------------------------------------------------------------------------+
-| -composer | No  | Force VCS to be Composer                                                    |
+| -composer | No  | Use Composer client                                                         |
++-----------+-----+-----------------------------------------------------------------------------+
+| -symlink  | No  | -R path will be symlinked. Directory is never accessed for writing.         |
++-----------+-----+-----------------------------------------------------------------------------+
+| -copy     | No  | -R path will be recursively copied.                                         |
 +-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
@@ -214,7 +218,7 @@ Options
 Tips
 ####
 
-* `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the way you want.
+* `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
 
 
 project
@@ -292,7 +296,7 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -format   | No  | Which format to extract.                                                    |
 |           |     | Available formats : Devoops, Faceted, FacetedJson, Json, OnepageJson, Text, |
-|           |     |                     Uml, Xml                                                |
+|           |     | Uml, Xml                                                                    |
 |           |     | Default is 'Text'                                                           |
 +-----------+-----+-----------------------------------------------------------------------------+
 | -file     | No  | File or directory name for the report. Adapted file extension is added.     |

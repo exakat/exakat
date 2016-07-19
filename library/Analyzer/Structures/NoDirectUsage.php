@@ -33,26 +33,17 @@ class NoDirectUsage extends Analyzer\Analyzer {
         // foreach(glob() as $x) {}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functionsFullNsPath)
+             ->functioncallIs($functionsFullNsPath)
              ->back('first');
         $this->prepareQuery();
 
         // Direct call with a function without check
-        $this->atomIs('Functioncall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->hasNoIn('METHOD')
-             ->fullnspath($functionsFullNsPath)
+        $this->atomFunctionIs($functionsFullNsPath)
              ->hasIn('ARGUMENT');
         $this->prepareQuery();
 
         // Direct usage in an operation +, *, **
-        $this->atomIs('Functioncall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->hasNoIn('METHOD')
-             ->fullnspath($functionsFullNsPath)
+        $this->atomFunctionIs($functionsFullNsPath)
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs(array('Addition', 'Multiplication', 'Power'));
         $this->prepareQuery();

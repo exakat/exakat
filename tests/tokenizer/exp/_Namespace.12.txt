@@ -1,17 +1,7 @@
-<?php 
-Label : CODE
-  namespace
-  Label : BLOCK
-    Sequence
-    Label : ELEMENT
-      class
-      Label : BLOCK
-        void
-      Label : NAME
-        C
-  Label : NAMESPACE
-    \
-    Label : SUBNAME
-      A
-    Label : SUBNAME
-      B
+class
+Label : BLOCK
+  {}
+  Label : ELEMENT
+    Void
+Label : NAME
+  C

@@ -100,20 +100,6 @@ class OnePage extends Tasks {
         $this->updateProgress($progress++);
         $this->logTime('Loading');
 
-        $task = new Build_root($this->gremlin);
-        $task->run($config);
-
-        display("Build root\n");
-        $this->updateProgress($progress++);
-        $this->logTime('Build_root');
-
-        $task = new Tokenizer($this->gremlin);
-        $task->run($config);
-
-        $this->updateProgress($progress++);
-        $this->logTime('Tokenizer');
-        display("Project tokenized\n");
-
         try {
             $task = new Analyze($this->gremlin);
             $task->run($config);

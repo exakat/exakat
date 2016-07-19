@@ -1,68 +1,57 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            $a
-          Label : VALUE
-            $b
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $c
-          Label : VALUE
-            [
-            Label : INDEX
-              'f'
-            Label : VARIABLE
-              $e
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            -4
-          Label : VALUE
-            -5
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $f
-            Label : PROPERTY
-              g
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $h
-            Label : PROPERTY
-              i
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            \
-            Label : SUBNAME
-              k
-            Label : SUBNAME
-              l
-          Label : VALUE
-            \
-            Label : SUBNAME
-              m
-            Label : SUBNAME
-              n
-        Label : ARGUMENT
-          void
+(
+Label : ARGUMENT
+  =>
+  Label : KEY
+    $a
+  Label : VALUE
+    $b
+Label : ARGUMENT
+  =>
+  Label : KEY
+    [
+    Label : INDEX
+      'd'
+    Label : VARIABLE
+      $c
+  Label : VALUE
+    [
+    Label : INDEX
+      'f'
+    Label : VARIABLE
+      $e
+Label : ARGUMENT
+  =>
+  Label : KEY
+    -4
+  Label : VALUE
+    -5
+Label : ARGUMENT
+  =>
+  Label : KEY
+    ->
+    Label : OBJECT
+      $f
+    Label : PROPERTY
+      g
+  Label : VALUE
+    ->
+    Label : OBJECT
+      $h
+    Label : PROPERTY
+      i
+Label : ARGUMENT
+  =>
+  Label : KEY
+    \
+    Label : SUBNAME
+      k
+    Label : SUBNAME
+      l
+  Label : VALUE
+    \
+    Label : SUBNAME
+      m
+    Label : SUBNAME
+      n
+Label : ARGUMENT
+  Void

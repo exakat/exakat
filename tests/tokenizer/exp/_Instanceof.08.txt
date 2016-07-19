@@ -1,69 +1,13 @@
-;
-Label : ELEMENT
-  void
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      ::
-      Label : CLASS
-        D
-      Label : METHOD
-        E
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            ->
-            Label : METHOD
-              F
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $b
-          Label : ARGUMENT
-            ->
-            Label : METHOD
-              G
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $c
-          Label : ARGUMENT
-            0
-          Label : ARGUMENT
-            ?
-            Label : CONDITION
-              &&
-              Label : LEFT
-                instanceof
-                Label : CLASS
-                  \
-                  Label : SUBNAME
-                    H
-                Label : VARIABLE
-                  $d
-              Label : RIGHT
-                isset
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $e
-                    Label : PROPERTY
-                      I
-            Label : ELSE
-              NULL
-            Label : THEN
-              ->
-              Label : OBJECT
-                $f
-              Label : PROPERTY
-                J
-Label : ELEMENT
-  void
+(
+Label : ARGUMENT
+  ->
+  Label : METHOD
+    C
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        Void
+    Label : NAME
+      C
+  Label : OBJECT
+    $a

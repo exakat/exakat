@@ -31,131 +31,141 @@ class AccessPrivate extends Analyzer\Analyzer {
         // classname::method() direct class
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->inIs('METHOD')
-             ->outIs('CLASS')
-             ->codeIsNot(array('parent', 'static', 'self'))
-             ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
-             ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}')
-             ->back('first');
-        $this->prepareQuery();
-
-        // classname::method() parent class through extension (not the first one)
-        $this->atomIs('Staticmethodcall')
-             ->raw('sideEffect{ first = it; }')
-             ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->inIs('METHOD')
-             ->outIs('CLASS')
-             ->codeIsNot(array('parent', 'static', 'self'))
-             ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
-             ->classDefinition()
-             ->hasOut('EXTENDS')
-             ->raw('filter{ it.transform{ s = []; it.classTree.each{ s.add(g.idx("classes")[["path":it]].next())}; s;}
-                              .scatter
-                              .filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}
-                              .any()
-                          }')
-             ->raw('transform{ first; }');
-        $this->prepareQuery();
-
-        // parent::method() (immediate parent)
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->inIs('METHOD')
-             ->outIs('CLASS')
-             ->code('parent')
-             ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
-             ->classDefinition()
-             ->hasOut('EXTENDS')
-             ->classDefinition()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
-             ->inIs('NAME')
-             ->outIs('PRIVATE')
+             ->tokenIs('T_STRING')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->codeIsNot(array('parent', 'static', 'self'))
+             ->isNotLocalClass()
+             ->classDefinition()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
              ->back('first');
         $this->prepareQuery();
 
-        // parent::method() parent class through extension (not the first one)
+        // classname::method() parent class through extension (not the direct class)
         $this->atomIs('Staticmethodcall')
-             ->raw('sideEffect{ first = it; }')
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->inIs('METHOD')
              ->outIs('CLASS')
-             ->code('parent')
-             ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
+             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->codeIsNot(array('parent', 'static', 'self'))
+             ->isNotLocalClass()
              ->classDefinition()
-             ->hasOut('EXTENDS')
-             ->raw('filter{ it.transform{ s = []; it.classTree.each{ s.add(g.idx("classes")[["path":it]].next())}; s;}
-                              .scatter
-                              .filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}
-                              .any()
-                          }')
-             ->raw('transform{ first; }');
+             ->goToAllParents()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
+             ->back('first');
         $this->prepareQuery();
+
+        // Case of parent::
+        $this->atomIs('Staticmethodcall')
+             ->outIs('METHOD')
+             ->outIs('NAME')
+             ->tokenIs('T_STRING')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->codeIs('parent')
+             ->isNotLocalClass()
+             ->goToClass()
+             ->goToExtends()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
+             ->outIs('METHOD')
+             ->outIs('NAME')
+             ->tokenIs('T_STRING')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->codeIs('parent')
+             ->isNotLocalClass()
+             ->goToClass()
+             ->goToExtends()
+             ->goToAllParents()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
+             ->back('first');
+        $this->prepareQuery(); 
 
         // self / static::method() in parent class
         // static : the class which is called
         // self   : the class where the definition is
         $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
+             ->outIs('NAME')
+             ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('CLASS')
-             ->code(array('static', 'self'))
-             ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any() == false}')
-             ->classDefinition()
-             ->hasOut('EXTENDS')
-             ->raw('filter{ it.transform{ s = []; it.classTree.each{ s.add(g.idx("classes")[["path":it]].next())}; s;}
-                              .scatter
-                              .filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}
-                              .any()
-                          }')
+             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->codeIs(array('self', 'static'))
+             ->goToClass()
+             // no local method
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").count().is(eq(0)) )')
+             ->goToAllParents()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
              ->back('first');
-        $this->prepareQuery();
+        $this->prepareQuery(); 
 
         // properties
-        // class::$property
+        // className::$property direct call
         $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->inIs('PROPERTY')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_STATIC'))
              ->codeIsNot(array('parent', 'static', 'self'))
-             ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
-             ->classDefinition()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->hasOut('PRIVATE')
-             ->outIs('DEFINE')
-             ->outIsIE('LEFT')
-             ->samePropertyAs('code', 'name')
+             ->isNotLocalClass()
+
+             ->goToClass()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(1)) )')
+
              ->back('first');
         $this->prepareQuery();
         
-        // parent::$property
+        // class::$property
         $this->atomIs('Staticproperty')
+             ->analyzerIsNot('self')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->inIs('PROPERTY')
              ->outIs('CLASS')
-             ->code('parent')
+             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->codeIs('parent')
+             ->isNotLocalClass()
+
              ->goToClass()
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(1)) )')
+
+             ->back('first');
+        $this->prepareQuery();
+
+        // parent::$property
+        $this->atomIs('Staticproperty')
+             ->analyzerIsNot('self')
+             ->outIs('PROPERTY')
+             ->savePropertyAs('code', 'name')
+             ->inIs('PROPERTY')
+             ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->codeIs('parent')
+             ->isNotLocalClass()
+
+             ->goToClass()
+             ->goToExtends()
              ->goToAllParents()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->hasOut('PRIVATE')
-             ->outIs('DEFINE')
-             ->outIsIE('LEFT')
-             ->samePropertyAs('code', 'name')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(1)) )')
+
              ->back('first');
         $this->prepareQuery();
 

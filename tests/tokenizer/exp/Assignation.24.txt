@@ -1,18 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ==
-      Label : LEFT
-        [
-        Label : INDEX
-          'c'
-        Label : VARIABLE
-          $b
-      Label : RIGHT
-        'd'
+[
+Label : INDEX
+  'c'
+Label : VARIABLE
+  $b

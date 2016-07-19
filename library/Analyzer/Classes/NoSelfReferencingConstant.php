@@ -28,65 +28,38 @@ use Analyzer;
 class NoSelfReferencingConstant extends Analyzer\Analyzer {
     public function analyze() {
         // const c = self::b
+        // const c = self::b + 1
         $this->atomIs('Const')
-             ->inClass()
+             ->hasClassInterface()
              ->outIs('CONST')
-             ->outIs('RIGHT')
-             ->outIs('CLASS')
-             ->code('self')
-             ->back('first');
-        $this->prepareQuery();
+             ->_as('results')
+             ->analyzerIsNot('self')
 
-        // const c = self::$b + 1
-        $this->atomIs('Const')
-             ->inClass()
-             ->outIs('CONST')
              ->outIs('RIGHT')
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
-             ->code('self')
-             ->back('first');
+             ->codeIs('self')
+
+             ->back('results');
         $this->prepareQuery();
 
         // const c = a::b
+        // const c = a::b + 1
         $this->atomIs('Const')
-
-             ->goToClass()
+             ->hasClassInterface()
+             ->goToClassInterface()
              ->savePropertyAs('fullnspath', 'classe')
              ->back('first')
 
              ->outIs('CONST')
+             ->_as('results')
+             ->analyzerIsNot('self')
              
              ->outIs('LEFT')
              ->savePropertyAs('code', 'constante')
              ->inIs('LEFT')
 
              ->outIs('RIGHT')
-             ->atomIs('Staticconstant')
-             ->outIs('CLASS')
-             ->samePropertyAs('fullnspath', 'classe')
-             ->inIs('CLASS')
-
-             ->outIs('CONSTANT')
-             ->samePropertyAs('code', 'constante')
-
-             ->back('first');
-        $this->prepareQuery();
-
-        // const c = a::b + 1
-        $this->atomIs('Const')
-
-             ->goToClass()
-             ->savePropertyAs('fullnspath', 'classe')
-             ->back('first')
-
-             ->outIs('CONST')
-
-             ->outIs('LEFT')
-             ->savePropertyAs('code', 'constante')
-             ->inIs('LEFT')
-
-             ->outIs('RIGHT')
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
              ->samePropertyAs('fullnspath', 'classe')
@@ -95,7 +68,7 @@ class NoSelfReferencingConstant extends Analyzer\Analyzer {
              ->outIs('CONSTANT')
              ->samePropertyAs('code', 'constante')
 
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
     }
 }

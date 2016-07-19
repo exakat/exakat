@@ -1,24 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          =
-          Label : LEFT
-            $x
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                void
-        Label : VAR
-          var
-    Label : NAME
-      x
+(
+Label : ARGUMENT
+  Void

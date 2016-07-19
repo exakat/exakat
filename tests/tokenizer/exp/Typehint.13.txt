@@ -1,32 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          C
-        Label : VARIABLE
-          $a
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          callable
-        Label : VARIABLE
-          =
-          Label : LEFT
-            $b
-          Label : RIGHT
-            null
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
-    Label : NAME
-      B
+(
+Label : ARGUMENT
+  $a
+  Label : TYPEHINT
+    C
+Label : ARGUMENT
+  $b
+  Label : DEFAULT
+    null
+  Label : TYPEHINT
+    callable

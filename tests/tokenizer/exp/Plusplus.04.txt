@@ -1,8 +1,12 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Plusplus.04.php
+Label : FILE
   ;
   Label : ELEMENT
-    --
-    Label : PREPLUSPLUS
-      $x
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        --
+        Label : PREPLUSPLUS
+          $x

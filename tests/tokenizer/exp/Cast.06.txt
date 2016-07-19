@@ -1,12 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    (bool)
-    Label : CAST
-      $x
-  Label : ELEMENT
-    (boolean)
-    Label : CAST
-      $y
+(bool)
+Label : CAST
+  $x

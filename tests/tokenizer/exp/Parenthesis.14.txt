@@ -1,42 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      (
-      Label : CODE
-        new
-        Label : NEW
-          Date
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              mktime
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  0
-                Label : ARGUMENT
-                  0
-                Label : ARGUMENT
-                  0
-                Label : ARGUMENT
-                  +
-                  Label : LEFT
-                    ->
-                    Label : OBJECT
-                      $a
-                    Label : PROPERTY
-                      month
-                  Label : RIGHT
-                    1
-                Label : ARGUMENT
-                  0
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $b
-                  Label : PROPERTY
-                    year
++
+Label : LEFT
+  ->
+  Label : OBJECT
+    $a
+  Label : PROPERTY
+    month
+Label : RIGHT
+  1

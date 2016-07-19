@@ -1,20 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $a
-      Label : ARGUMENT
-        $b
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          1
-    Label : NAME
-      x
+(
+Label : ARGUMENT
+  $a
+Label : ARGUMENT
+  $b

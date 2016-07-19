@@ -1,60 +1,7 @@
-<?php
-
-Label : CODE
-  namespace
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      use
-      Label : USE
-        \
-        Label : SUBNAME
-          D
-        Label : SUBNAME
-          E
-    Label : ELEMENT
-      class
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          use
-          Label : BLOCK
-            ;
-            Label : ELEMENT
-              as
-              Label : NAME
-                L
-              Label : VISIBILITY
-                public
-            Label : ELEMENT
-              as
-              Label : NAME
-                M
-              Label : VISIBILITY
-                private
-            Label : ELEMENT
-              as
-              Label : NAME
-                N
-              Label : VISIBILITY
-                protected
-          Label : USE
-            \
-            Label : SUBNAME
-              H
-            Label : SUBNAME
-              I
-            Label : SUBNAME
-              J
-            Label : SUBNAME
-              K
-      Label : EXTENDS
-        G
-      Label : NAME
-        F
-  Label : NAMESPACE
-    \
-    Label : SUBNAME
-      B
-    Label : SUBNAME
-      C
+as
+Label : AS
+  Void
+Label : NAME
+  L
+Label : PUBLIC
+  public

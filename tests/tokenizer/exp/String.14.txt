@@ -1,53 +1,9 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    B
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        "
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            C
-          Label : CONCAT
-            $aD
-      Label : ARGUMENT
-        E
-  Label : ELEMENT
-    F
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        'G'
-      Label : ARGUMENT
-        H
-  Label : ELEMENT
-    I
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        [
-        Label : INDEX
-          'J'
-        Label : VARIABLE
-          $b
-      Label : ARGUMENT
-        (
-        Label : CODE
-          ?
-          Label : CONDITION
-            ===
-            Label : LEFT
-              [
-              Label : INDEX
-                'K'
-              Label : VARIABLE
-                $c
-            Label : RIGHT
-              'L'
-          Label : ELSE
-            'M'
-          Label : THEN
-            $d
+(
+Label : ARGUMENT
+  "
+  Label : CONCAT
+    C
+  Label : CONCAT
+    $aD
+Label : ARGUMENT
+  E

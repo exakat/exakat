@@ -27,23 +27,25 @@ use Analyzer;
 
 class SilentlyCastInteger extends Analyzer\Analyzer {
     public function analyze() {
-        // Binary or hexadecimal, cast to Float
-        $this->atomIs('Float')
-             ->regex('code', '0[xXbB]')
+        // Binary or hexadecimal, cast to Real
+        $this->atomIs('Real')
+             ->regexIs('code', '0[xXbB]')
              ->back('first');
         $this->prepareQuery();
 
-        // Octal cast to Float
-        $this->atomIs('Float')
-             ->regex('code', '^0')
-             ->regexNot('code', '\\\\.')
+        // Octal cast to Real
+        $this->atomIs('Real')
+             ->analyzerIsNot('self')
+             ->regexIs('code', '^0')
+             ->regexIsNot('code', '\\\\.')
              ->back('first');
         $this->prepareQuery();
 
         // Too long integer
-        $this->atomIs('Float')
-             ->regex('code', '^[0-9]+\\$')
-             ->regexNot('code', '\\\\.')
+        $this->atomIs('Real')
+             ->analyzerIsNot('self')
+             ->regexIs('code', '^[0-9]+\\$')
+             ->regexIsNot('code', '\\\\.')
              ->back('first');
         $this->prepareQuery();
     }

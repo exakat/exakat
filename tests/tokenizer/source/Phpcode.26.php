@@ -1,0 +1,1 @@
+<?php if (!isset($counter)) echo '0'; else echo $counter;

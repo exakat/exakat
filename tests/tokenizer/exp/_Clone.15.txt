@@ -1,18 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          clone
-          Label : CLONE
-            (
-            Label : CODE
-              $a
+(
+Label : ARGUMENT
+  clone
+  Label : CLONE
+    $a
+    Label : CODE
+      $a

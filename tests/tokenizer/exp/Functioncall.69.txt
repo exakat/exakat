@@ -1,27 +1,9 @@
-;
-Label : ELEMENT
-  echo
+<?=
+Label : ARGUMENT
+  C
   Label : ARGUMENTS
-    
+    (
     Label : ARGUMENT
-      C
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          'D'
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      E
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          'F'
-Label : ELEMENT
-  G
-Label : ELEMENT
-  ++
-  Label : POSTPLUSPLUS
-    $a
+      'D'
+  Label : NAME
+    C

@@ -1,4 +1,10 @@
-<?php
+./tests/tokenizer/source/String.01.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
 
-Label : CODE
-  '1'
+    Label : CODE
+      ;
+      Label : ELEMENT
+        '1'

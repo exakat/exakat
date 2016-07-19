@@ -1,14 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        'x'
-      Label : ARGUMENT
-        1
-  Label : ELEMENT
-    x
+(
+Label : ARGUMENT
+  'x'
+Label : ARGUMENT
+  1
+Label : DEFINITION
+  x

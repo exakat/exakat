@@ -1,28 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    declare
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $x
-        Label : RIGHT
-          1
-    Label : TICKS
-      Arguments
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          ticks
-        Label : RIGHT
-          2
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          encoding
-        Label : RIGHT
-          'ISO-8859-1'
+(
+Label : ARGUMENT
+  =
+  Label : LEFT
+    ticks
+  Label : RIGHT
+    2
+Label : ARGUMENT
+  =
+  Label : LEFT
+    encoding
+  Label : RIGHT
+    'ISO-8859-1'

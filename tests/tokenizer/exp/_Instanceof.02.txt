@@ -1,54 +1,15 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        (
-        Label : CODE
-          ||
-          Label : LEFT
-            is_array
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  [
-                  Label : INDEX
-                    $c
-                  Label : VARIABLE
-                    ->
-                    Label : OBJECT
-                      $a
-                    Label : PROPERTY
-                      b
-                Label : PROPERTY
-                  d
-          Label : RIGHT
-            instanceof
-            Label : CLASS
-              ArrayAccess
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                [
-                Label : INDEX
-                  $g
-                Label : VARIABLE
-                  ->
-                  Label : OBJECT
-                    $e
-                  Label : PROPERTY
-                    f
-              Label : PROPERTY
-                h
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
+(
+Label : ARGUMENT
+  ->
+  Label : OBJECT
+    [
+    Label : INDEX
+      $c
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
+  Label : PROPERTY
+    d

@@ -1,22 +1,15 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
++
+Label : LEFT
+  1
+Label : RIGHT
+  [
+  Label : INDEX
+    b
     Label : ARGUMENTS
-      
+      (
       Label : ARGUMENT
-        +
-        Label : LEFT
-          1
-        Label : RIGHT
-          [
-          Label : INDEX
-            b
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                'c'
-          Label : VARIABLE
-            $y
+        'c'
+    Label : NAME
+      b
+  Label : VARIABLE
+    $y

@@ -1,34 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $b
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          !
-          Label : NOT
-            $c
-        Label : THEN
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              false
-      Label : ELEMENT
-        ?
-        Label : CONDITION
-          $a
-        Label : ELSE
-          $c
-        Label : THEN
-          $b
-    Label : NAME
-      a
+(
+Label : ARGUMENT
+  $b

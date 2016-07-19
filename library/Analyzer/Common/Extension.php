@@ -82,14 +82,14 @@ class Extension extends Analyzer\Analyzer {
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspath($functions);
+                 ->fullnspathIs($functions);
             $this->prepareQuery();
         }
         
         if (!empty($constants)) {
             $this->atomIs('Identifier')
                  ->analyzerIs('Constants/ConstantUsage')
-                 ->fullnspath($this->makeFullNsPath($constants));
+                 ->fullnspathIs($this->makeFullNsPath($constants));
             $this->prepareQuery();
         }
 
@@ -100,54 +100,56 @@ class Extension extends Analyzer\Analyzer {
                  ->outIs('NEW')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->atomIsNot(array('Variable', 'Array', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
-                 ->fullnspath($classes);
+                 ->fullnspathIs($classes);
             $this->prepareQuery();
 
             $this->atomIs('Staticconstant')
                  ->outIs('CLASS')
-                 ->fullnspath($classes);
+                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->fullnspathIs($classes);
             $this->prepareQuery();
 
             $this->atomIs('Staticmethodcall')
                  ->outIs('CLASS')
-                 ->fullnspath($classes);
+                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->fullnspathIs($classes);
             $this->prepareQuery();
 
             $this->atomIs('Staticproperty')
                  ->outIs('CLASS')
-                 ->fullnspath($classes);
+                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->fullnspathIs($classes);
             $this->prepareQuery();
 
-            $this->atomIs('Typehint')
-                 ->outIs('CLASS')
-                 ->fullnspath($classes);
+            $this->atomIs('Function')
+                 ->outIs('ARGUMENTS')
+                 ->outIs('ARGUMENT')
+                 ->outIs('TYPEHINT')
+                 ->fullnspathIs($classes);
             $this->prepareQuery();
 
             $this->atomIs('Catch')
                  ->outIs('CLASS')
-                 ->fullnspath($classes);
+                 ->fullnspathIs($classes);
             $this->prepareQuery();
 
             $this->atomIs('Instanceof')
                  ->outIs('CLASS')
-                 ->fullnspath($classes);
+                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->fullnspathIs($classes);
             $this->prepareQuery();
         }
 
         if (!empty($interfaces)) {
-            $this->analyzerIs('Interfaces/InterfaceUsage')
-                 ->code($interfaces);
-            $this->prepareQuery();
-
             $interfaces = $this->makeFullNsPath($interfaces);
             $this->analyzerIs('Interfaces/InterfaceUsage')
-                 ->fullcode($interfaces);
+                 ->fullnspathIs($interfaces);
             $this->prepareQuery();
         }
 
         if (!empty($traits)) {
             $this->analyzerIs('Traits/TraitUsage')
-                 ->code($traits);
+                 ->codeIs($traits);
             $this->prepareQuery();
 
             $traits = $this->makeFullNsPath($traits);
@@ -157,8 +159,11 @@ class Extension extends Analyzer\Analyzer {
         }
 
         if (!empty($namespaces)) {
+            $namespaces = $this->makeFullNsPath($namespaces);
             $this->analyzerIs('Namespaces/NamespaceUsage')
-                 ->code($namespaces);
+                 ->outIs('NAME')
+                 ->fullnspathIs($namespaces)
+                 ->back('first');
             $this->prepareQuery();
             
             // Can a namespace be used in a nsname (as prefix) ? 

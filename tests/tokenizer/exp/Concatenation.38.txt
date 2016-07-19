@@ -1,48 +1,37 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $siteurl
-    Label : RIGHT
-      a
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          Concatenation
-          Label : CONCAT
-            'b'
-          Label : CONCAT
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $c
-          Label : CONCAT
-            preg_replace
+(
+Label : ARGUMENT
+  .
+  Label : CONCAT
+    'b'
+  Label : CONCAT
+    [
+    Label : INDEX
+      'd'
+    Label : VARIABLE
+      $c
+  Label : CONCAT
+    preg_replace
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        "e"
+      Label : ARGUMENT
+        ''
+      Label : ARGUMENT
+        substr
+        Label : ARGUMENTS
+          (
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            0
+          Label : ARGUMENT
+            strrpos
             Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                "e"
-              Label : ARGUMENT
-                ''
-              Label : ARGUMENT
-                substr
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    $f
-                  Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    strrpos
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        $g
-                      Label : ARGUMENT
-                        'h'
-          Label : CONCAT
-            'i'
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : NAME
+          substr
+    Label : NAME
+      preg_replace
+  Label : CONCAT
+    'i'

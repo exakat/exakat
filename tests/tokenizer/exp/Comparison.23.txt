@@ -1,32 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
-      Label : LEFT
-        ==
-        Label : LEFT
-          $a
-        Label : RIGHT
-          1
-      Label : RIGHT
-        >
-        Label : LEFT
-          --
-          Label : PREPLUSPLUS
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              c
-        Label : RIGHT
-          0
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
+==
+Label : LEFT
+  $a
+Label : RIGHT
+  1

@@ -8,6 +8,6 @@ $expected     = array('preg_replace(\'/^\//a\', \'\', $url)',
                       'preg_replace("/^" . $a2 . "\//a", \'\', $url)',
 );
 
-$expected_not = array();
+$expected_not = array('preg_match("|.+/$|", $dir)');
 
 ?>

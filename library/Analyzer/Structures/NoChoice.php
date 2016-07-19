@@ -35,11 +35,11 @@ class NoChoice extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $a == 2 ? doThis() : doThis();
+        // $a == 2 ?: doThis();
         $this->atomIs('Ternary')
-             ->filter('it.out("THEN").has("code", ":").any()') // This is a ?:
+             ->raw('where( __.out("THEN").hasLabel("Void").count().is(eq(1)) )') 
              ->outIs('CONDITION')
-             ->atomIs(array('Variable', 'Property', 'Staticproperty', 'Array'))
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'cdt')
              ->inIs('CONDITION')
              ->outIs('ELSE')
@@ -48,6 +48,7 @@ class NoChoice extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+/*
         // if ($a == 2) Then doThis(); else doThis();
         $this->atomIs('Ifthen')
              ->outIs('THEN')
@@ -60,6 +61,7 @@ class NoChoice extends Analyzer\Analyzer {
              ->filter('sthen.join(";") == selse.join(";")')
              ->back('first');
         $this->prepareQuery();
+*/
     }
 }
 

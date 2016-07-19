@@ -37,7 +37,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->analyzerIsNot('Composer/IsComposerNsname')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
@@ -48,7 +48,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
@@ -61,9 +61,9 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
-             ->code('parent')
-             ->fullnspath('parent')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->codeIs('parent')
+             ->fullnspathIs('\\parent')
              ->back('first');
         $this->prepareQuery();
 
@@ -71,7 +71,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->atomIs('Staticproperty')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
@@ -83,9 +83,9 @@ class UndefinedClasses extends Analyzer\Analyzer {
         // in a parent::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
-             ->code('parent')
-             ->fullnspath('parent')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->codeIs('parent')
+             ->fullnspathIs('\\parent')
              ->back('first');
         $this->prepareQuery();
 
@@ -93,7 +93,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->atomIs('Staticconstant')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
@@ -106,9 +106,9 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->atomIs('Staticconstant')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
-             ->code('parent')
-             ->fullnspath('parent')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->codeIs('parent')
+             ->fullnspathIs('\\parent')
              ->back('first');
         $this->prepareQuery();
 
@@ -116,7 +116,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->atomIs('Instanceof')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
@@ -131,7 +131,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->outIs('CLASS')
+             ->outIs('TYPEHINT')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->codeIsNot(array_merge(array('self', 'parent', 'static'), $types))
              ->tokenIsNot(array('T_ARRAY', 'T_STATIC', 'T_CALLABLE'))

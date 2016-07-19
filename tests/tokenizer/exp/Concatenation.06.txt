@@ -1,14 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    Concatenation
-    Label : CONCAT
-      'a'
-    Label : CONCAT
-      "b"
-    Label : CONCAT
-      'c'
-    Label : CONCAT
-      'a'
+.
+Label : CONCAT
+  'a'
+Label : CONCAT
+  "b"
+Label : CONCAT
+  'c'
+Label : CONCAT
+  'a'

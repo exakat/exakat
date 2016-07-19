@@ -1,45 +1,33 @@
-;
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
+echo
+Label : ARGUMENT
+  ?
+  Label : CONDITION
+    ==
+    Label : LEFT
+      [
+      Label : INDEX
+        'B'
+      Label : VARIABLE
+        $a
+    Label : RIGHT
+      'C'
+  Label : ELSE
+    'C'
+    Label : CODE
       ?
       Label : CONDITION
-        
-        Label : ARGUMENT
-          ==
-          Label : LEFT
-            [
-            Label : INDEX
-              'B'
-            Label : VARIABLE
-              $a
-          Label : RIGHT
-            'C'
+        ==
+        Label : LEFT
+          [
+          Label : INDEX
+            'B'
+          Label : VARIABLE
+            $a
+        Label : RIGHT
+          'F'
       Label : ELSE
-        (
-        Label : CODE
-          ?
-          Label : CONDITION
-            ==
-            Label : LEFT
-              [
-              Label : INDEX
-                'B'
-              Label : VARIABLE
-                $a
-            Label : RIGHT
-              'F'
-          Label : ELSE
-            'C'
-          Label : THEN
-            'G'
+        'C'
       Label : THEN
-        'D'
-Label : ELEMENT
-  I
-Label : ELEMENT
-  ++
-  Label : POSTPLUSPLUS
-    $b
+        'G'
+  Label : THEN
+    'D'

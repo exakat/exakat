@@ -1,10 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    eval
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "echo 1;"
+(
+Label : ARGUMENT
+  "echo 1;"

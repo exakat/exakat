@@ -1,38 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          b
-        Label : VARIABLE
-          $c
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          ==
-          Label : LEFT
-            false
-          Label : RIGHT
-            ::
-            Label : CLASS
-              d
-            Label : METHOD
-              e
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  $f
-        Label : THEN
-          ;
-          Label : ELEMENT
-            false
-    Label : NAME
-      a
+(
+Label : ARGUMENT
+  $c
+  Label : TYPEHINT
+    b

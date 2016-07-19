@@ -1,95 +1,69 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
++
+Label : LEFT
+  [
+  Label : INDEX
+    0
+  Label : VARIABLE
+    $b
+Label : RIGHT
+  +
+  Label : LEFT
+    *
     Label : LEFT
-      $a
+      ->
+      Label : OBJECT
+        $this
+      Label : PROPERTY
+        B
     Label : RIGHT
-      +
-      Label : LEFT
-        +
-        Label : LEFT
-          [
-          Label : INDEX
-            0
-          Label : VARIABLE
-            $b
-        Label : RIGHT
-          *
-          Label : LEFT
+      ->
+      Label : METHOD
+        C
+        Label : ARGUMENTS
+          (
+          Label : ARGUMENT
+            -
+            Label : LEFT
+123098120398 [label="Reached level 15"]            Label : RIGHT
+123098120398 [label="Reached level 15"]          Label : ARGUMENT
             ->
             Label : OBJECT
-              $this
-            Label : PROPERTY
-              B
-          Label : RIGHT
-            ->
-            Label : METHOD
-              C
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  -
-                  Label : LEFT
-                    [
-                    Label : INDEX
-                      1
-                    Label : VARIABLE
-                      $b
-                  Label : RIGHT
-                    [
-                    Label : INDEX
-                      0
-                    Label : VARIABLE
-                      $b
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $this
-                  Label : PROPERTY
-                    B
-            Label : OBJECT
-              $this
-      Label : RIGHT
-        *
-        Label : LEFT
-          E
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                B
-            Label : ARGUMENT
-              2
-        Label : RIGHT
+123098120398 [label="Reached level 15"]            Label : PROPERTY
+123098120398 [label="Reached level 15"]        Label : NAME
+          C
+      Label : OBJECT
+        $this
+  Label : RIGHT
+    *
+    Label : LEFT
+      E
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
           ->
-          Label : METHOD
-            C
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                -
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    2
-                  Label : VARIABLE
-                    $b
-                Label : RIGHT
-                  [
-                  Label : INDEX
-                    1
-                  Label : VARIABLE
-                    $b
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  B
           Label : OBJECT
             $this
+          Label : PROPERTY
+            B
+        Label : ARGUMENT
+          2
+      Label : NAME
+        E
+    Label : RIGHT
+      ->
+      Label : METHOD
+        C
+        Label : ARGUMENTS
+          (
+          Label : ARGUMENT
+            -
+            Label : LEFT
+123098120398 [label="Reached level 15"]            Label : RIGHT
+123098120398 [label="Reached level 15"]          Label : ARGUMENT
+            ->
+            Label : OBJECT
+123098120398 [label="Reached level 15"]            Label : PROPERTY
+123098120398 [label="Reached level 15"]        Label : NAME
+          C
+      Label : OBJECT
+        $this

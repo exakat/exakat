@@ -1,54 +1,15 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        isset
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              Concatenation
-              Label : CONCAT
-                [
-                Label : INDEX
-                  1
-                Label : VARIABLE
-                  $c
-              Label : CONCAT
-                '2'
-            Label : VARIABLE
-              $b
-      Label : ELSE
-        '5'
-      Label : THEN
-        [
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              Concatenation
-              Label : CONCAT
-                [
-                Label : INDEX
-                  3
-                Label : VARIABLE
-                  $f
-              Label : CONCAT
-                '4'
-            Label : VARIABLE
-              $e
-        Label : NAME
-          [
-          Label : INDEX
-            0
-          Label : VARIABLE
-            $d
+(
+Label : ARGUMENT
+  [
+  Label : INDEX
+    .
+    Label : CONCAT
+      [
+      Label : INDEX
+        1
+      Label : VARIABLE
+        $c
+    Label : CONCAT
+      '2'
+  Label : VARIABLE
+    $b

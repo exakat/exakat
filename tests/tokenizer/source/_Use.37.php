@@ -1,17 +1,18 @@
-<?php 
+<?php
+trait HelloWorld {
+    public function sayHello() {
+        echo 'Hello World!';
+    }
+}
 
-use \B\A\{ function f1 };
-use \B\A\{ const c1 };
-use \B\A\{ C1 };
+// Change visibility of sayHello
+class MyClass1 {
+    use HelloWorld { sayHello as protected; }
+}
 
-use \B\A\{ function f2, function f3 };
-use \B\A\{ const c2, function c3 };
-use \B\A\{ C2, C3 };
-
-use \B\A\{ function f1\f4 };
-use \B\A\{ const c1\c4 };
-use \B\A\{ C1\C4 };
-
-use \B\A\{ function f2\f5, function f3\f6 };
-use \B\A\{ const c2\c5, function c3\c6 };
-use \B\A\{ C2\C5, C3\C6 };
+// Alias method with changed visibility
+// sayHello visibility not changed
+class MyClass2 {
+    use HelloWorld { sayHello as private myPrivateHello; }
+}
+?>

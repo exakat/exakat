@@ -1,8 +1,15 @@
 <?php
 
-$expected     = array('$source1', '$source2', '$source3', '$source4' );
+$expected     = array('$source1', 
+                      '$source2', 
+                      '$source3', 
+                      '$source4',
+                      '$blindKeyButUsed', 
+                      '$blindButUsed', 
+                      '$blindValueButUsed' );
 
-$expected_not = array('$blindButUsed', '$blindKeyButUsed', '$blindValueButUsed', 
-                      '$blind', '$blindKey', '$blindValue', );
+$expected_not = array('$blind', 
+                      '$blindKey', 
+                      '$blindValue', );
 
 ?>

@@ -32,7 +32,7 @@ class UsesEnv extends Analyzer\Analyzer {
 
         // Using $_ENV variable
         $this->atomIs('Variable')
-             ->code('$_ENV')
+             ->codeIs('$_ENV', true)
              ->inIsIE('VARIABLE')
              ->back('first');
         $this->prepareQuery();

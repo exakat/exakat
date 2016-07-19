@@ -30,7 +30,7 @@ class Ports extends Analyzer\Analyzer {
         $ports = $this->loadIni('ports.ini', 'port');
         
         $this->atomIs('Integer')
-             ->code(array_keys($ports));
+             ->codeIs(array_keys($ports));
         $this->prepareQuery();
     }
 }

@@ -26,80 +26,66 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class CouldBePrivate extends Analyzer\Analyzer {
-    public function dependsOn() {
-        return array('Classes/LocallyUnusedProperty');
-    }
-    
     public function analyze() {
+        $linksDown = \Tokenizer\Token::linksAsList();
+        // Searching for properties that are never used outside the definition class or its children
 
-        // Searching for properties that are never used outside the definition class
-        $this->atomIs('Visibility')
-             ->hasOut('PUBLIC')
+        // Non-static properties
+        $this->atomIs('Ppp')
+             ->hasNoOut('PRIVATE')
+             ->hasNoOut('STATIC')
 
-             ->goToClass()
+             ->goToClassTrait()
+             ->hasName()
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
 
-             ->outIs('DEFINE')
+             ->outIs('PPP')
              ->_as('results')
-             ->analyzerIsNot('Classes/LocallyUnusedProperty')
 
-             ->filter('it.out("RIGHT").filter{it.atom in ["Null", "Staticconstant"]}.any() == false')
+            // Skip properties with 'null' as default : they will probably get an object, and can't be unused.
+             ->outIsIE('LEFT')
              ->savePropertyAs('propertyname', 'name')
-             ->outIsIE('RIGHT')
-
-                // property is never used, outside with $this 
-             ->filter('g.idx("atoms")[["atom":"Property"]].filter{ it.out("PROPERTY").filter{ it.code.toLowerCase() == name.toLowerCase()}.any() }
-                                                          .filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class" && it.object.fullnspath == fnp}.any() == false || 
-                                                                   it.out("OBJECT").has("atom", "Variable").has("code", "\$this").any() == false}
-                                                          .any() == false')
-
-                // property is never statically used, except with 'self', 'static'
-             ->filter('g.idx("atoms")[["atom":"Staticproperty"]].filter{  it.out("CLASS").has("fullnspath", fnp).any() }
-                                                                .filter{ it.out("PROPERTY").has("atom", "Variable").filter{ it.code.toLowerCase() == "\$" + name.toLowerCase()}.any()}
-                                                                .filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class" && it.object.fullnspath == fnp}.any() == false }
-                                                                .any() == false')
-             ->back('results');
              
-             // Exclude situations where property is used as an object or a resource (can't be class constant)
+             // property is never used, outside the current class, in a children class
+             ->raw('where( g.V().hasLabel("Property").where( __.out("PROPERTY").filter{ it.get().value("code") == name})
+                                                      // Object is not inside the current and parent class
+                                                     .where( __.out("OBJECT").has("code", "\$this") )
+                                                     .not(or(__.until( hasLabel("Class").where(__.out("NAME").hasLabel("Void").is(eq(0))) ).repeat( __.in('.$linksDown.')).filter{ it.get().value("fullnspath") != fnp }.count().is(neq(0)),
+                                                         __.out("OBJECT").has("code", "\$this").count().is(eq(0))
+                                                         ))
+                                                     .count().is(neq(0)) 
+                          )')
+             ->back('results');
         $this->prepareQuery();
 
+//                                                     .where( __.until( hasLabel("Class") ).repeat( __.in('.$linksDown.')).as("a").until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).emit().repeat( out("EXTENDS").in("DEFINITION") ).filter{ it.get().value("fullnspath") == fnp }.count().is(eq(0)) ) 
 
-        // Searching for properties that are never used outside the definition class or its children
-        $this->atomIs('Visibility')
-             ->hasOut('PROTECTED')
+        // Static properties
+        $this->atomIs('Ppp')
+             ->hasNoOut('PRIVATE')
+             ->hasOut('STATIC')
 
-             ->goToClass()
+             ->goToClassTrait()
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
 
-             ->outIs('DEFINE')
+             ->outIs('PPP')
              ->_as('results')
-             ->analyzerIsNot('Classes/LocallyUnusedProperty')
 
-             ->filter('it.out("RIGHT").filter{it.atom in ["Null", "Staticconstant"]}.any() == false')
-             ->savePropertyAs('propertyname', 'name')
-             ->outIsIE('RIGHT')
+            // Skip properties with 'null' as default : they will probably get an object, and can't be unused.
+             ->outIsIE('LEFT')
+             ->savePropertyAs('code', 'dname')
 
-                // property is never used, outside the current class, in a children class
-             ->filter('g.idx("atoms")[["atom":"Property"]].filter{ it.out("PROPERTY").filter{ it.code.toLowerCase() == name.toLowerCase()}.any() }
-                                                          .filter{ it.in.loop(1){it.object.atom != "Class"}{(it.object.atom == "Class") && 
-                                                                                                            (it.object.fullnspath != fnp) &&
-                                                                                                            (fnp in it.object.classTree)
-                                                                                                            }.any()}
-                                                          .any() == false')
+             ->raw('where( g.V().hasLabel("Staticproperty").where( __.out("PROPERTY").filter{ it.get().value("code") == dname})
+                                                           .where( __.out("CLASS").has("tokenizer", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") == fnp})
 
-                // property is never statically used, except with 'self', 'static'
-             ->filter('g.idx("atoms")[["atom":"Staticproperty"]].filter{ it.out("PROPERTY").filter{ it.code.toLowerCase() == "\\$" + name.toLowerCase()}.any() }
-                                                                .filter{ it.in.loop(1){it.object.atom != "Class"}{(it.object.atom == "Class") && 
-                                                                                                                  (it.object.fullnspath != fnp) &&
-                                                                                                                  (fnp in it.object.classTree)
-                                                                                                                  }.any()}
-                                                          .any() == false')
+                                                            // Not in the defining class
+                                                           .where( __.until( hasLabel("Class", "File") ).repeat( __.in('.$linksDown.')).filter{ it.get().label() == "File" || it.get().value("fullnspath") != fnp }.count().is(eq(0)) ) 
 
+                                                           .count().is(neq(0))
+                          )')
              ->back('results');
-             
-             // Exclude situations where property is used as an object or a resource (can't be class constant)
         $this->prepareQuery();
     }
 }

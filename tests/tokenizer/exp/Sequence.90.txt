@@ -1,61 +1,19 @@
-;
-Label : ELEMENT
-  echo
+echo
+Label : ARGUMENT
+  I
   Label : ARGUMENTS
-    
+    (
     Label : ARGUMENT
-      I
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          ->
-          Label : METHOD
-            J
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                void
-          Label : OBJECT
-            $a
-Label : ELEMENT
-  Q
-Label : ELEMENT
-  R
-  Label : ARGUMENTS
-    Arguments
-    Label : ARGUMENT
-      ::
-      Label : CLASS
-        S
+      ->
       Label : METHOD
-        T
+        J
         Label : ARGUMENTS
-          
+          (
           Label : ARGUMENT
-            'U'
-    Label : ARGUMENT
-      'V'
-Label : ELEMENT
-  void
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      W
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'X'
-        Label : ARGUMENT
-          'Y'
-        Label : ARGUMENT
-          ->
-          Label : METHOD
-            Z
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                void
-          Label : OBJECT
-            $b
+            Void
+        Label : NAME
+          J
+      Label : OBJECT
+        $a
+  Label : NAME
+    I

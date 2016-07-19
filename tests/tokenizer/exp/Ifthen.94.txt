@@ -1,3 +1,5 @@
-;
-Label : ELEMENT
-  void
+!=
+Label : LEFT
+  $a
+Label : RIGHT
+  'B'

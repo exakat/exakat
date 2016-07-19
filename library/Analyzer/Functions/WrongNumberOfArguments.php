@@ -125,15 +125,17 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
 
         foreach($argsMins as $nb => $f) {
             $this->atomFunctionIs($f)
-                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->isLess('args_count', $nb);
+                 ->outIs('ARGUMENTS')
+                 ->isLess('count', $nb)
+                 ->back('first');
             $this->prepareQuery();
         }
 
         foreach($argsMaxs as $nb => $f) {
             $this->atomFunctionIs($f)
-                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->isMore('args_count', $nb);
+                 ->outIs('ARGUMENTS')
+                 ->isMore('count', $nb)
+                 ->back('first');
             $this->prepareQuery();
         }
 
@@ -141,10 +143,12 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-             ->savePropertyAs('args_count', 'args_count')
+             ->outIs('ARGUMENTS')
+             ->savePropertyAs('count', 'args_count')
+             ->inIs('ARGUMENTS')
              ->functionDefinition()
-             ->inIs('NAME')
              ->analyzerIsNot('Functions/VariableArguments')
+             ->outIs('ARGUMENTS')
              ->isMore('args_min', 'args_count')
              ->back('first');
         $this->prepareQuery();
@@ -152,10 +156,12 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-             ->savePropertyAs('args_count', 'args_count')
+             ->outIs('ARGUMENTS')
+             ->savePropertyAs('count', 'args_count')
+             ->inIs('ARGUMENTS')
              ->functionDefinition()
-             ->inIs('NAME')
              ->analyzerIsNot('Functions/VariableArguments')
+             ->outIs('ARGUMENTS')
              ->isLess('args_max', 'args_count')
              ->back('first');
         $this->prepareQuery();

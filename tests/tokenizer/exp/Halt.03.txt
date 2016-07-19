@@ -1,9 +1,13 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Halt.03.php
+Label : FILE
   ;
   Label : ELEMENT
-    __HALT_COMPILER
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        __HALT_COMPILER
   Label : ELEMENT
      
 

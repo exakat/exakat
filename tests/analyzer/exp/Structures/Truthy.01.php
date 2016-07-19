@@ -1,15 +1,28 @@
 <?php
 
 $expected     = array('array(12)', 
-                      '[ 12 ]', 
-                      '[ [   ] ]', 
+                      '[12]', 
+                      '[[ ]]', 
                       'array(array( ))', 
                       '<<<\'PHP\'
 dd
-PHP', 
+PHP',
+                       '<<<PHP
+$sd$f
+PHP
+', 
+                      '<<<PHP
+sd$f
+PHP
+', 
+                      '<<<PHP
+sd$f
+PHP
+', 
                       '"false"', 
                       '"foo"', 
-                      '"true"', 
+                      '"f$oo"',
+                       '"true"', 
                       '-2', 
                       '2.3e5', 
                       '1', 

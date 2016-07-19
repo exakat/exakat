@@ -7,6 +7,7 @@ $expected     = array('function conditionedByY( ) { /**/ } ',
                       );
 
 $expected_not = array('function unconditionalFunction( ) { /**/ } ',
-                      'function enveloppe( ) { /**/ } ');
+                      'function enveloppe( ) { /**/ } ',
+                      'function ($closure) { /**/ };');
 
 ?>

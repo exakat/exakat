@@ -1,26 +1,20 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        g
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            h
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                i
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    j
-                    Label : ARGUMENTS
-                      
-                      Label : ARGUMENT
-                        'y'
+(
+Label : ARGUMENT
+  g
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      h
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          i
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            i
+      Label : NAME
+        h
+  Label : NAME
+    g

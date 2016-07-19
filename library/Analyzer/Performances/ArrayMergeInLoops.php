@@ -30,7 +30,8 @@ class ArrayMergeInLoops extends Analyzer\Analyzer {
         $functions = array('\\array_merge', '\\array_merge_recursive');
 
         $this->atomFunctionIs($functions)
-             ->atomAboveIs(array('For', 'Foreach', 'Dowhile', 'While'));
+             ->hasLoop()
+             ->goToLoop();
         $this->prepareQuery();
     }
 }

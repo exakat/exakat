@@ -1,40 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &
-      Label : LEFT
-        +
-        Label : LEFT
-          $d
-        Label : RIGHT
-          "0"
-      Label : RIGHT
-        ==
-        Label : LEFT
-          ->
-          Label : METHOD
-            b
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                void
-          Label : OBJECT
-            $a
-        Label : RIGHT
-          $c
-    Label : ELSE
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          false
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          true
++
+Label : LEFT
+  $d
+Label : RIGHT
+  "0"

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('switch ($b) { /**/ } ');
 
 $expected_not = array('switch ($a) { /**/ } ');
 

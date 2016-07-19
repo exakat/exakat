@@ -2,7 +2,7 @@
 
 namespace A;
 
-use OriginalUsed as AliasUnused, OriginalUnused as AliasUsed, OriginalUsed, OriginalUnused, OriginalBothUsed as AliasBothUsed, OriginalBothUnused as AliasBothUnused;
+use OriginalUsed as AliasUnused, OriginalUnused as AliasUsed, OriginalUsed2, OriginalUnused, OriginalBothUsed as AliasBothUsed, OriginalBothUnused as AliasBothUnused;
 use OriginalUsedSingleAlias as SingleAliasUnused;
 use OriginalUnusedSingleAlias as SingleAliasUsed;
 use OriginalBothUsedSingleAlias as SingleAliasBothUsed;
@@ -12,6 +12,7 @@ use SingleWithoutAliasUnused;
 
 
 $x = new OriginalUsed;
+$x = new OriginalUsed2;
 $x1 = new AliasUsed;
 $x2 = new OriginalUsed;
 $x3 = new OriginalBothUsed;

@@ -1,16 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      include
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          (
-          Label : CODE
-            'y.php'
+)
+Label : ARGUMENT
+  'y.php'
+  Label : CODE
+    'y.php'

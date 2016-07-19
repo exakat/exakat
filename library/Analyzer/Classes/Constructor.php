@@ -27,29 +27,30 @@ use Analyzer;
 
 class Constructor extends Analyzer\Analyzer {
     public function analyze() {
+        // __construct is the main constructor of the class
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->_as('constructor')
              ->outIs('NAME')
-             ->code('__construct')
+             ->codeIs('__construct')
              ->back('constructor');
         $this->prepareQuery();
 
+        // if no __construct(), then default back on the method with the class name
         $this->atomIs('Class')
              ->outIs('NAME')
              ->savePropertyAs('code', 'code')
              ->back('first')
              ->outIs('BLOCK')
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Function").out("NAME").has("code", "__construct").any() == false }')
+             ->raw('where( __.out("ELEMENT").hasLabel("Function").out("NAME").has("code", "__construct").count().is(eq(0)) )')
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->_as('constructor')
              ->outIs('NAME')
              ->samePropertyAs('code', 'code')
-             ->back('constructor')
-             ;
+             ->back('constructor');
         $this->prepareQuery();
     }
 }

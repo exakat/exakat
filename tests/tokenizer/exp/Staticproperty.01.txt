@@ -1,10 +1,14 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Staticproperty.01.php
+Label : FILE
   ;
   Label : ELEMENT
-    ::
-    Label : CLASS
-      T
-    Label : PROPERTY
-      $x
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          T
+        Label : PROPERTY
+          $x

@@ -1,5 +1,12 @@
-;
-Label : ELEMENT
-  new
-  Label : NEW
-    stdclass
+./tests/tokenizer/source/_New.03.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        new
+        Label : NEW
+          stdclass

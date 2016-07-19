@@ -28,12 +28,13 @@ class IdenticalConditions extends Analyzer\Analyzer {
         // $a || $a 
         // ($a) && ($a)
         $this->atomIs('Logical')
-             ->outIs('LEFT')
+             ->outIs('RIGHT')
              ->outIsIE('CODE')
+             ->atomIsNot('Logical')
              ->savePropertyAs('fullcode', 'left')
              ->inIsIE('CODE')
-             ->inIs('LEFT')
-             ->outIs('RIGHT')
+             ->inIs('RIGHT')
+             ->outIs('LEFT')
              ->outIsIE('CODE')
              ->atomIsNot('Logical')
              ->samePropertyAs('fullcode', 'left', true)
@@ -45,6 +46,22 @@ class IdenticalConditions extends Analyzer\Analyzer {
         // two levels
         $this->atomIs('Logical')
              ->analyzerIsNot('self')
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->savePropertyAs('fullcode', 'right')
+             ->inIsIE('CODE')
+             ->inIs('RIGHT')
+             ->outIs('LEFT')
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->outIsIE('CODE')
+             ->samePropertyAs('fullcode', 'right', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
@@ -55,13 +72,34 @@ class IdenticalConditions extends Analyzer\Analyzer {
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->samePropertyAs('fullcode', 'left')
+             ->samePropertyAs('fullcode', 'left', true)
              ->back('first');
         $this->prepareQuery();
 
         // $a || $a || $a
         // ($a) && ($a)
         // three levels
+        // straight structure
+        $this->atomIs('Logical')
+             ->analyzerIsNot('self')
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->savePropertyAs('fullcode', 'left')
+             ->inIsIE('CODE')
+             ->inIs('RIGHT')
+             ->outIs('LEFT')
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->analyzerIsNot('self')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->samePropertyAs('fullcode', 'left', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // reverse structure
         $this->atomIs('Logical')
              ->analyzerIsNot('self')
              ->outIs('LEFT')
@@ -72,11 +110,12 @@ class IdenticalConditions extends Analyzer\Analyzer {
              ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
-             ->samePropertyAs('fullcode', 'left')
+             ->samePropertyAs('fullcode', 'left', true)
              ->back('first');
         $this->prepareQuery();
 
@@ -85,12 +124,12 @@ class IdenticalConditions extends Analyzer\Analyzer {
         // four levels
         $this->atomIs('Logical')
              ->analyzerIsNot('self')
-             ->outIs('LEFT')
+             ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
              ->inIsIE('CODE')
-             ->inIs('LEFT')
-             ->outIs('RIGHT')
+             ->inIs('RIGHT')
+             ->outIs('LEFT')
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
@@ -100,7 +139,7 @@ class IdenticalConditions extends Analyzer\Analyzer {
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
-             ->samePropertyAs('fullcode', 'left')
+             ->samePropertyAs('fullcode', 'left', true)
              ->back('first');
         $this->prepareQuery();
 
@@ -109,12 +148,12 @@ class IdenticalConditions extends Analyzer\Analyzer {
         // four levels
         $this->atomIs('Logical')
              ->analyzerIsNot('self')
-             ->outIs('LEFT')
+             ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
              ->inIsIE('CODE')
-             ->inIs('LEFT')
-             ->outIs('RIGHT')
+             ->inIs('RIGHT')
+             ->outIs('LEFT')
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
@@ -127,7 +166,7 @@ class IdenticalConditions extends Analyzer\Analyzer {
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
-             ->samePropertyAs('fullcode', 'left')
+             ->samePropertyAs('fullcode', 'left', true)
              ->back('first');
         $this->prepareQuery();
         

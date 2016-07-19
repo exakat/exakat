@@ -1,30 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          [
-          Label : INDEX
-            $f
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $d
-            Label : PROPERTY
-              e
-        Label : RIGHT
-          $g
-    Label : SOURCE
-      $a
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
+[
+Label : INDEX
+  $f
+Label : VARIABLE
+  ->
+  Label : OBJECT
+    $d
+  Label : PROPERTY
+    e

@@ -38,7 +38,7 @@ class UnresolvedCatch extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIsNot($exceptions)
-             ->hasNoClassDefinition()
+             ->noClassDefinition()
              ->back('first');
         $this->prepareQuery();
 

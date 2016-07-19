@@ -1,5 +1,5 @@
-        <?php if (empty($swimlane['columns'])): 
+        <?php foreach($a as $b) : if (empty($swimlane['columns'])): 
          break ?>
         <?php else: ?>
             <?= $this ?>
-        <?php endif ?>
+        <?php endif; endforeach; ?>

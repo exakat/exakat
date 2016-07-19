@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('$c::{$d}', 
-                      'H::{$d}');
+$expected     = array( 'H::{$d}( )', 
+                       '$c::{$d}( )', 
+                       '$c::{$d}( )');
 
 $expected_not = array();
 

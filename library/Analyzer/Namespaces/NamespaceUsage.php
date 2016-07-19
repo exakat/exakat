@@ -28,8 +28,7 @@ use Analyzer;
 class NamespaceUsage extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Namespace')
-             ->outIs('NAMESPACE');
+        $this->atomIs('Namespace');
         $this->prepareQuery();
         
         // TODO : should we include global namespace, when it is implicit ? 

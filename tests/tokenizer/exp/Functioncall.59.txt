@@ -1,28 +1,19 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      str_replace
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'D'
-            Label : ARGUMENT
-              'C'
-            Label : ARGUMENT
-              'B'
-        Label : ARGUMENT
-          'A'
-        Label : ARGUMENT
-          (string)
-          Label : CAST
-            $c
+(
+Label : ARGUMENT
+  array
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      'D'
+    Label : ARGUMENT
+      'C'
+    Label : ARGUMENT
+      'B'
+  Label : NAME
+    array
+Label : ARGUMENT
+  'A'
+Label : ARGUMENT
+  (string)
+  Label : CAST
+    $c

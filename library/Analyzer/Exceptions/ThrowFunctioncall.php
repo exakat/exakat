@@ -35,15 +35,16 @@ class ThrowFunctioncall extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Functioncall')
              ->hasNoFunctionDefinition()
-             ->hasClassDefinition()
+//             ->hasClassDefinition()
              ->back('first');
         $this->prepareQuery();
 
         // throw RuntimeException()
         $this->atomIs('Throw')
+             ->analyzerIsNot('self')
              ->outIs('THROW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($phpClassesFnp)
+             ->fullnspathIs($phpClassesFnp)
              ->back('first');
         $this->prepareQuery();
     }

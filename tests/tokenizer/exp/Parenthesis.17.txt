@@ -1,48 +1,24 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
-            d
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  b
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      __FILE__
-                Label : CONCAT
-                  'c'
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    unset
+(
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'a'
+  Label : VALUE
+    d
     Label : ARGUMENTS
-      
+      (
       Label : ARGUMENT
-        $
-        Label : NAME
-          Concatenation
-          Label : CONCAT
+        .
+        Label : CONCAT
+          b
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
             b
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                __FILE__
-          Label : CONCAT
-            'c'
+        Label : CONCAT
+          'c'
+    Label : NAME
+      d
+Label : ARGUMENT
+  Void

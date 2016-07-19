@@ -1,28 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    include_once
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        'path'
-  Label : ELEMENT
-    include
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        'path'
-  Label : ELEMENT
-    require_once
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        'path'
-  Label : ELEMENT
-    require
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        'path'
+'path'
+Label : ARGUMENT
+  'path'

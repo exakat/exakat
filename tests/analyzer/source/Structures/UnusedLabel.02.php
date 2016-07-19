@@ -1,19 +1,19 @@
 <?php
 
 function x() {
+    unusedLabel: 
 
-unusedLabel: 
-
-usedInYLabel : 
+    usedInYLabel : 
 }
 
 function y() {
-usedInYLabel : 
+    usedInYLabel : 
+    
+    usedLabel2 : 
 
-usedLabel2 : 
-goto usedInYLabel;
-goto usedLabel2;
-goto usedLabel2;
+    goto usedInYLabel;
+    goto usedLabel2;
+    goto usedLabel2;
 }
 
 

@@ -44,7 +44,7 @@ class RedeclaredPhpFunction extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIs('Functions/Functionnames')
-             ->code($extensionFunctions, true);
+             ->codeIs($extensionFunctions, true);
         $this->prepareQuery();
     }
 }

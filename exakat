@@ -17,23 +17,6 @@ if($isPhar === false){
     include 'phar://'.$isPhar.'.phar/library/Autoload.php';
 }
 
-try {
-    if (isset($argv)) {
-        $config = \Config::factory($argv);
-    } else {
-        $config = \Config::factory($GLOBALS['argv']);
-    }
-
-    $graphDB = new \Graph\Gremlin2($config);
-
-    $exakat = new \Exakat($graphDB);
-    $exakat->execute($config);
-} catch (\Exceptions\NoPhpBinary $e) {
-    print "\nExakat configuration error : ".$e->getMessage()."\n  Aborting\n";
-} catch (\Exceptions\NoResultsFromGremlin $e) {
-    print "\nGraphDB didn't return results error : ".$e->getMessage()."\n  Aborting\n";
-} catch (\RuntimeException $e) {
-    print "\nRuntime error : ".$e->getMessage()."\n  Aborting\n";
-}
+$graphDB = new \Graph\Gremlin3($config);
 
 __HALT_COMPILER();

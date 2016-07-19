@@ -29,10 +29,10 @@ class CompareHash extends Analyzer\Analyzer {
     public function analyze() {
         // md5() == something
         $this->atomIs('Comparison')
-             ->code(array('==', '!='))
+             ->codeIs(array('==', '!='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Functioncall')
-             ->code(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32','crypt'))
+             ->codeIs(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32','crypt'))
              ->back('first');
         $this->prepareQuery();
 
@@ -40,7 +40,7 @@ class CompareHash extends Analyzer\Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomIs('Functioncall')
-             ->code(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32','crypt'))
+             ->codeIs(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32','crypt'))
              ->back('first');
         $this->prepareQuery();
     }

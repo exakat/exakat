@@ -28,7 +28,6 @@ use Analyzer;
 class OneVariableStrings extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('String')
-             ->outIs('CONTAINS')
              ->is('count', 1)
              ->outIs('CONCAT')
              ->atomIs(array('Variable', 'Array', 'Property'));

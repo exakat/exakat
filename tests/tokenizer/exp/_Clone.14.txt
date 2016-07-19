@@ -1,54 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        isset
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $b
-              Label : PROPERTY
-                c
-      Label : ELSE
-        ->
-        Label : METHOD
-          h
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'i'
-        Label : OBJECT
-          ->
-          Label : METHOD
-            g
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                void
-          Label : OBJECT
-            $f
-      Label : THEN
-        clone
-        Label : CLONE
-          [
-          Label : INDEX
-            'e'
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              d
+(
+Label : ARGUMENT
+  [
+  Label : INDEX
+    'd'
+  Label : VARIABLE
+    ->
+    Label : OBJECT
+      $b
+    Label : PROPERTY
+      c

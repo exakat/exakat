@@ -1,35 +1,3 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      0
-    Label : THEN
-      ;
-      Label : ELEMENT
-        A
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          C
-        Label : METHOD
-          D
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'E'
-      Label : ELEMENT
-        E
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          G
-        Label : METHOD
-          H
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'I'
-      Label : ELEMENT
-        void
+(
+Label : ARGUMENT
+  'E'

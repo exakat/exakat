@@ -32,8 +32,7 @@ class KillsApp extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
              ->outIs('ELEMENT')
-             ->tokenIs('T_EXIT')
-             ->fullnspath(array('\\die', '\\exit'))
+             ->functioncallIs(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
 
@@ -44,7 +43,6 @@ class KillsApp extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
-             ->inIs('NAME')
              ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();

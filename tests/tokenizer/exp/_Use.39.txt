@@ -1,0 +1,9 @@
+as
+Label : AS
+  d
+Label : NAME
+  ::
+  Label : CLASS
+    c
+  Label : CONSTANT
+    reset

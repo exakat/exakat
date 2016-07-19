@@ -29,13 +29,11 @@ class NoSubstrOne extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\substr')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 1)
-             ->code(0)
+             ->outWithRank('ARGUMENT', 1)
+             ->codeIs(0)
              ->inIs('ARGUMENT')
-             ->outIs('ARGUMENT')
-             ->is('rank', 2)
-             ->code(array('1', '-1'))
+             ->outWithRank('ARGUMENT', 2)
+             ->codeIs(array('1', '-1'))
              ->back('first');
         $this->prepareQuery();
     }

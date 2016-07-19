@@ -1,27 +1,13 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    throw
-    Label : THROW
+(
+Label : ARGUMENT
+  get_class
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
       ->
-      Label : METHOD
-        b
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            get_class
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  c
       Label : OBJECT
-        (
-        Label : CODE
-          new
-          Label : NEW
-            A
+        $this
+      Label : PROPERTY
+        c
+  Label : NAME
+    get_class

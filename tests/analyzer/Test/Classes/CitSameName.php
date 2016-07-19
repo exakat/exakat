@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_CitSameName extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testClasses_CitSameName01()  { $this->generic_test('Classes_CitSameName.01'); }
     public function testClasses_CitSameName02()  { $this->generic_test('Classes_CitSameName.02'); }
+    public function testClasses_CitSameName03()  { $this->generic_test('Classes/CitSameName.03'); }
 }
 ?>

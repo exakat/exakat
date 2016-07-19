@@ -27,26 +27,29 @@ use Analyzer;
 
 class CitSameName extends Analyzer\Analyzer {
     public function analyze() {
-        // Classes - Interfaces
+
+        $interfaces = $this->query('g.V().hasLabel("Interface").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
+        $classes = $this->query('g.V().hasLabel("Trait").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
+        $traits = $this->query('g.V().hasLabel("Class").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
+
+        // Classes
         $this->atomIs('Class')
              ->outIs('NAME')
-             ->raw('filter{ g.idx("atoms")[["atom":"Interface"]].out("NAME").next().code == it.code}')
+             ->codeIs(array_merge($interfaces, $traits))
              ->back('first');
         $this->prepareQuery();
 
-        // Classes - Traits
-        $this->atomIs('Class')
-             ->analyzerIsNot('self')
+        // Trait
+        $this->atomIs('Trait')
              ->outIs('NAME')
-             ->raw('filter{ g.idx("atoms")[["atom":"Trait"]].out("NAME").next().code == it.code}')
+             ->codeIs(array_merge($classes, $traits))
              ->back('first');
         $this->prepareQuery();
 
-        // Interfaces - Traits
+        // Interfaces
         $this->atomIs('Interface')
-             ->analyzerIsNot('self')
              ->outIs('NAME')
-             ->raw('filter{ g.idx("atoms")[["atom":"Trait"]].out("NAME").next().code == it.code}')
+             ->codeIs(array_merge($classes, $interfaces))
              ->back('first');
         $this->prepareQuery();
     }

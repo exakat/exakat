@@ -28,8 +28,6 @@ use Analyzer;
 class Heredoc extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Heredoc')
-             ->tokenIs('T_START_HEREDOC')
-             ->outIs('CONTAINS')
              ->is('heredoc', true);
         $this->prepareQuery();
     }

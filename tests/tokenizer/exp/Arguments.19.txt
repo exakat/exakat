@@ -1,14 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        instanceof
-        Label : CLASS
-          c
-        Label : VARIABLE
-          $b
+(
+Label : ARGUMENT
+  instanceof
+  Label : CLASS
+    c
+  Label : VARIABLE
+    $b

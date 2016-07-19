@@ -1,8 +1,12 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Sign.11.php
+Label : FILE
   ;
   Label : ELEMENT
-    -
-    Label : SIGN
-      'b'
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        -
+        Label : SIGN
+          'b'

@@ -26,19 +26,10 @@ namespace Analyzer\Variables;
 use Analyzer;
 
 class StaticVariables extends Analyzer\Analyzer {
-    
-    public function dependsOn() {
-        return array('Variables/Variablenames');
-    }
-    
     public function analyze() {
         $this->atomIs('Variable')
-             ->analyzerIs('Variables/Variablenames')
              ->inIsIE('LEFT')
-             ->inIs('DEFINE')
-             ->atomIs('Visibility')
-             ->outIs('STATIC')
-             ->hasFunction()
+             ->inIs('STATIC')
              ->back('first');
         $this->prepareQuery();
     }

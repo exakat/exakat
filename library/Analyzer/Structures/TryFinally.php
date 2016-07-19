@@ -30,9 +30,7 @@ class TryFinally extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Try')
-             ->outIs('CATCH')
-             ->atomIs('Finally')
-             ->back('first');
+             ->hasOut('FINALLY');
         $this->prepareQuery();
     }
 }

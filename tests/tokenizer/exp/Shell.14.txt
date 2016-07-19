@@ -1,26 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    @
-    Label : AT
-      a
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          '/tmp/b.init'
-        Label : ARGUMENT
-          $c
-  Label : ELEMENT
-    `
-    Label : CONTAINS
-      Concatenation
-      Label : CONCAT
-        cat /tmp/d.init > 
-      Label : CONCAT
-        $e
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $f
+(
+Label : ARGUMENT
+  '/tmp/b.init'
+Label : ARGUMENT
+  $c

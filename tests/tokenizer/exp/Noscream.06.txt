@@ -1,12 +1,16 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Noscream.06.php
+Label : FILE
   ;
   Label : ELEMENT
-    @
-    Label : AT
-      ->
-      Label : OBJECT
-        $x
-      Label : PROPERTY
-        t
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        @
+        Label : AT
+          ->
+          Label : OBJECT
+            $x
+          Label : PROPERTY
+            t

@@ -1,8 +1,6 @@
 <?php
 
-$expected     = array('interface i', 
-                      'class c',
-                      'trait t');
+$expected     = array('./tests/analyzer/source/Classes/MultipleClassesInFile.07.php');
 
 $expected_not = array();
 

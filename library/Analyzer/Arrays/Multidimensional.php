@@ -28,11 +28,12 @@ use Analyzer;
 class Multidimensional extends Analyzer\Analyzer {
 
     public function analyze() {
+        // $x[1][2], $x[1][2][3], $x[1][2][3][4]
         $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->atomIs('Array')
              ->back('first')
-             ->inIsnot('VARIABLE')
+             ->inIsNot('VARIABLE')
              ->back('first');
         $this->prepareQuery();
     }

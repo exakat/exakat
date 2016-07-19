@@ -1,18 +1,27 @@
-;
-Label : ELEMENT
-  void
-Label : ELEMENT
-  
+./tests/tokenizer/source/Phpcode.19.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
 
-Label : ELEMENT
-  void
-Label : ELEMENT
-  
+    Label : CODE
+      ;
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        
 
-Label : ELEMENT
-  void
-Label : ELEMENT
-  
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        
 
-Label : ELEMENT
-  void
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        
+
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        Void

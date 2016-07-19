@@ -1,7 +1,3 @@
-;
-Label : ELEMENT
-  f
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      1
+(
+Label : ARGUMENT
+  1

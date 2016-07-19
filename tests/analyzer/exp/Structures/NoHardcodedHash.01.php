@@ -5,6 +5,6 @@ $expected     = array('\'abcdef12\'',
 
 $expected_not = array('\'ABCdef12\'',
                       '\'ABCdef123\'',
-                      '\'ABCdef12\'');
+                      '\'ABCdef1234\'');
 
 ?>

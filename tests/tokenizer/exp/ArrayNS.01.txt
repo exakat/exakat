@@ -1,18 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      [
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
-            'b'
+[
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'a'
+  Label : VALUE
+    'b'

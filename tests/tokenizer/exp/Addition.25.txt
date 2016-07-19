@@ -1,30 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      sprintf
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          str_replace
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              C
-            Label : ARGUMENT
-              'd'
-            Label : ARGUMENT
-              __FILE__
-        Label : ARGUMENT
-          -
-          Label : LEFT
-            __LINE__
-          Label : RIGHT
-            1
+-
+Label : LEFT
+  __LINE__
+Label : RIGHT
+  1

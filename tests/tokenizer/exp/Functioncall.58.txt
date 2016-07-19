@@ -1,52 +1,17 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
+)
+Label : ARGUMENT
+  &&
+  Label : LEFT
+    "foo"
+    Label : CODE
+      "foo"
+  Label : RIGHT
     print
     Label : ARGUMENTS
-      
+      )
       Label : ARGUMENT
-        &&
-        Label : LEFT
-          (
-          Label : CODE
-            "foo"
-        Label : RIGHT
-          print
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              (
-              Label : CODE
-                "bar"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        and
-        Label : LEFT
-          (
-          Label : CODE
-            "foo"
-        Label : RIGHT
-          print
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              (
-              Label : CODE
-                "bar"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "\n"
+        "bar"
+        Label : CODE
+          "bar"
+    Label : NAME
+      print

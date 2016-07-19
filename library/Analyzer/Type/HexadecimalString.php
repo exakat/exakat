@@ -30,33 +30,22 @@ class HexadecimalString extends Analyzer\Analyzer {
         $regex = '^\\\\s*0[xX][0-9a-fA-F]+';
         // Strings
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
-             ->regex('noDelimiter', $regex);
+             ->hasNoOut('CONCAT')
+             ->regexIs('noDelimiter', $regex);
         $this->prepareQuery();
 
         // Concatenation String
         $this->atomIs('String')
-             ->outIs('CONTAINS')
-             ->is('rank', 0)
+             ->outWithRank('CONCAT', 0)
              ->atomIs('String')
-             ->regex('noDelimiter', $regex)
+             ->regexIs('noDelimiter', $regex)
              ->back('first');
         $this->prepareQuery();
 
         // Simple Heredoc and nowdoc
         $this->atomIs('Heredoc')
-             ->outIs('CONTAINS')
-             ->hasNoOut('CONTAINS')
-             ->regex('noDelimiter', $regex);
-        $this->prepareQuery();
-
-        // Concatenation Heredoc
-        $this->atomIs('Heredoc')
-             ->outIs('CONTAINS')
-             ->outIs('CONTAINS')
-             ->is('rank', 0)
-             ->atomIs('String')
-             ->regex('noDelimiter', $regex)
+             ->outWithRank('CONCAT', 0)
+             ->regexIs('noDelimiter', $regex)
              ->back('first');
         $this->prepareQuery();
     }

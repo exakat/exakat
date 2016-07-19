@@ -1,22 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    .=
-    Label : LEFT
-      $a
-    Label : RIGHT
-      "
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          b
-        Label : CONCAT
-          [
-          Label : INDEX
-            1
-          Label : VARIABLE
-            $c
-        Label : CONCAT
-          [2]e
+[
+Label : INDEX
+  1
+Label : VARIABLE
+  $c

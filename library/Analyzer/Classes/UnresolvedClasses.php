@@ -43,10 +43,6 @@ class UnresolvedClasses extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->noClassDefinition()
-             ->analyzerIsNot('Classes/IsExtClass')
-             ->analyzerIsNot('Composer/IsComposerNsname')
-             ->analyzerIsNot('Composer/IsComposerInterface')
-             ->analyzerIsNot('Composer/IsComposerClass')
              ->fullnspathIsNot($classes);
         $this->prepareQuery();
 

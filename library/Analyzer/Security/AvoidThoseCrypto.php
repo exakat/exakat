@@ -30,9 +30,8 @@ class AvoidThoseCrypto extends Analyzer\Analyzer {
         // in ext/hash() functions
         $this->atomFunctionIs(Analyzer\Php\HashAlgos::$functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->noDelimiter(array('md2', 'md4', 'md5', 'crc32', 'crc32b', 'sha0', 'sha1'));
+             ->outWithRank('ARGUMENT', 0)
+             ->noDelimiterIs(array('md2', 'md4', 'md5', 'crc32', 'crc32b', 'sha0', 'sha1'));
         $this->prepareQuery();
 
         // as core functions

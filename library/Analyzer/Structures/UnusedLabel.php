@@ -27,12 +27,14 @@ use Analyzer;
 
 class UnusedLabel extends Analyzer\Analyzer {
     public function analyze() {
+        $linksDown = \Tokenizer\Token::linksAsList();
+
         // inside functions
         $this->atomIs('Label')
              ->outIs('LABEL')
              ->savePropertyAs('code', 'name')
              ->goToFunction()
-             ->raw('filter{ it.out("BLOCK").out.loop(1){ true }{ it.object.atom == "Goto"}.out("LABEL").has("code", name).any() == false }')
+             ->raw('where( __.out("BLOCK").repeat( __.out()).emit( hasLabel("Goto") ).times(15).out("GOTO").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -43,11 +45,11 @@ class UnusedLabel extends Analyzer\Analyzer {
              ->outIs('LABEL')
              ->savePropertyAs('code', 'name')
              ->hasNoFunction()
-             ->raw('filter{ g.idx("atoms")[["atom":"Goto"]].out("LABEL").has("code", name).
-
-             // Goto also needs to have no function
-             filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}
-             .any() == false }')
+             ->raw('where( g.V().hasLabel("Goto").out("GOTO").filter{ it.get().value("code") == name}
+                            .where( repeat(__.in('.$linksDown.'))
+                                    .until(hasLabel("File")).emit()
+                                    .hasLabel("Function").count().is(eq(0)) 
+                            ).count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 

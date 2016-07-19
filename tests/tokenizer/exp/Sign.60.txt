@@ -1,64 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    -
-    Label : SIGN
-      **
-      Label : LEFT
-        3
-      Label : RIGHT
-        3
-  Label : ELEMENT
+echo
+Label : ARGUMENT
+  -
+  Label : SIGN
     **
-    Label : LEFT
-      4
-    Label : RIGHT
-      2
-  Label : ELEMENT
-    **
-    Label : LEFT
-      0.2e10
-    Label : RIGHT
-      10
-  Label : ELEMENT
-    **
-    Label : LEFT
-      $x
-    Label : RIGHT
-      $y
-  Label : ELEMENT
-    -
-    Label : SIGN
-      **
-      Label : LEFT
-        0.3e10
-      Label : RIGHT
-        3
-  Label : ELEMENT
-    +
-    Label : SIGN
-      **
-      Label : LEFT
-        0.2e10
-      Label : RIGHT
-        3
-  Label : ELEMENT
-    =
     Label : LEFT
       $s
     Label : RIGHT
-      3
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        -
-        Label : SIGN
-          **
-          Label : LEFT
-            $s
-          Label : RIGHT
-            2
+      2

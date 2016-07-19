@@ -30,19 +30,21 @@ class MultipleSameArguments extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Function')
-             ->raw("filter{ it.out('ARGUMENTS').out('ARGUMENT').aggregate().groupCount(){
-    if (it.atom == 'Typehint') {
-        if (it.out('VARIABLE').next().atom == 'Assignation') {
-            it.out('VARIABLE').out('LEFT').next().code;
+             ->outIs('ARGUMENTS')
+             ->raw(<<<'GREMLIN'
+filter{ 
+    s = [:];
+    it.get().vertices(OUT, "ARGUMENT").each{ 
+        if (s[it.value("code")] == null) {
+            s[it.value("code")] = 1;
         } else {
-            it.out('VARIABLE').next().code;
-        }
-    } else if (it.atom == 'Assignation') {
-        it.out('LEFT').next().code;
-    } else {
-        it.code;
-    }
-}.cap.next().findAll{it.value > 1}.any() }");
+            s[it.value("code")]++;
+        } 
+    };
+    s.findAll{it.value > 1}.size() > 0;
+}
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

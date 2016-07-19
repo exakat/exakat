@@ -35,7 +35,9 @@ class StaticLoop extends Analyzer\Analyzer {
     public function analyze() {
         $nonDeterminist = $this->loadIni('php_nondeterministic.ini', 'functions');
         $nonDeterminist = $this->makeFullNsPath($nonDeterminist);
-        $nonDeterminist = "'\\" . implode("', '\\", $nonDeterminist)."'";
+        $nonDeterminist = "'\\" . join("', '\\", $nonDeterminist)."'";
+
+        $whereNonDeterminist = 'where( __.repeat( __.out() ).emit( hasLabel("Functioncall") ).times(15).hasLabel("Functioncall").where(__.in("METHOD", "NEW").count().is(eq(0))).has("token", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") in ['.$nonDeterminist.']}.count().is(eq(0)) )';
         
         // foreach with only one value
         $this->atomIs('Foreach')
@@ -44,14 +46,12 @@ class StaticLoop extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'blind')
              ->back('first')
              ->outIs('BLOCK')
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode == blind}.any() == false')
+
+             // Check that blind variable are not mentionned 
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times(15).filter{ it.get().value("fullcode") == blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
-
-             // check if there are method call
-             ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
-
+             ->raw($whereNonDeterminist)
              ->back('first');
         $this->prepareQuery();
 
@@ -61,27 +61,23 @@ class StaticLoop extends Analyzer\Analyzer {
              ->atomIs('Keyvalue')
 
              ->outIs('KEY')
-             ->savePropertyAs('fullcode', 'key')
+             ->savePropertyAs('fullcode', 'k')
              ->inIs('KEY')
 
              ->outIs('VALUE')
-             ->savePropertyAs('code', 'value')
+             ->savePropertyAs('code', 'v')
              ->inIs('VALUE')
 
              ->back('first')
              ->outIs('BLOCK')
              
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && (it.object.fullcode == key || it.object.fullcode == value)}.any() == false')
+             // Check that blind variables are not mentionned 
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times(15).filter{ it.get().value("fullcode") in [v, k]}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
-
-             // check if there are method call
-             ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
-
+             ->raw($whereNonDeterminist)
              ->back('first');
         $this->prepareQuery();
-        
         // foreach with complex structures (property, static property, arrays, references... ?)
 
         // for
@@ -92,17 +88,15 @@ class StaticLoop extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('For')
-             ->outIs('INCREMENT')
-             // collect all variables
-             ->raw('sideEffect{ blind = []; it.out().loop(1){true}{it.object.atom == "Variable"}.aggregate(blind){it.fullcode}.iterate(); }')
-             ->inIs('INCREMENT')
-
+             // collect all variables in INCREMENT and INIT (ignore FINAL)
+             ->raw('where( __.sideEffect{ blind = []}.out("INCREMENT", "INIT").repeat( out() ).emit( hasLabel("Variable")).times(15).sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+             
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode in blind}.any() == false')
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times(15).filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
+             ->raw($whereNonDeterminist)
 
              // check if there are method call
              ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
@@ -114,16 +108,15 @@ class StaticLoop extends Analyzer\Analyzer {
 
         // do...while
         $this->atomIs('Dowhile')
-             ->outIs('CONDITION')
              // collect all variables
-             ->raw('sideEffect{ blind = []; it.out().loop(1){true}{it.object.atom == "Variable"}.aggregate(blind){it.fullcode}.iterate(); }')
-             ->inIs('CONDITION')
+             ->raw('where( __.sideEffect{ blind = []}.out("CONDITION").repeat( out() ).emit( hasLabel("Variable")).times(15).sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode in blind}.any() == false')
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times(15).filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
+             ->raw($whereNonDeterminist)
 
              // check if there are method call
              ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
@@ -135,20 +128,16 @@ class StaticLoop extends Analyzer\Analyzer {
 
         // while
         $this->atomIs('While')
-             ->outIs('CONDITION')
+
              // collect all variables
-             ->raw('sideEffect{ blind = []; it.out().loop(1){true}{it.object.atom == "Variable"}.aggregate(blind){it.fullcode}.iterate(); }')
-             ->inIs('CONDITION')
+             ->raw('where( __.sideEffect{ blind = []}.out("CONDITION").repeat( out() ).emit( hasLabel("Variable")).times(15).sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Variable" && it.object.fullcode in blind}.any() == false')
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times(15).filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->filter(' it.out().loop(1){true}{it.object.atom == "Functioncall" && it.object.fullnspath in ['.$nonDeterminist.']}.any() == false')
-
-             // check if there are method call
-             ->filter(' it.out().loop(1){true}{it.object.atom in ["Methodcall", "Staticmethodcall"]}.any() == false')
-
+             ->raw($whereNonDeterminist)
              ->back('first');
         $this->prepareQuery();
 

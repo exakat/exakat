@@ -92,7 +92,7 @@ class Files extends Tasks {
 
         $d = getcwd();
         chdir($config->projects_root.'/projects/'.$dir.'/code');
-        $files = $this->rglob( '.');
+        $files = rglob( '.');
         chdir($d);
 
         $store = array();
@@ -216,7 +216,6 @@ class Files extends Tasks {
 
         display('Check short tag (with directive activated)');
         $shell = 'cat '.$tmpFileName.' | sort |  tr "\n" "\0" |  xargs -n1 -P5 -0I '.$config->php.' -d short_open_tag=1 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
-        
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
 
@@ -312,22 +311,6 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('hash', $composerInfo);
-    }
-    
-    private function rglob($pattern, $flags = 0) {
-        $files = glob($pattern.'/*', $flags);
-        $dirs  = glob($pattern.'/*', GLOB_ONLYDIR | GLOB_NOSORT);
-        $files = array_diff($files, $dirs);
-
-        $subdirs = array($files);
-        foreach ($dirs as $dir) {
-            $f = $this->rglob($dir, $flags);
-            if (!empty($f)) {
-                $subdirs[] = $f;
-            }
-        }
-
-        return call_user_func_array('array_merge', $subdirs);
     }
 }
 

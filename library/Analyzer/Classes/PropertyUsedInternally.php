@@ -29,151 +29,49 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
 
     public function analyze() {
         // property + $this->property
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Visibility')
+        $this->atomIs('Ppp')
              ->hasNoOut('STATIC')
-             ->outIs('DEFINE')
-             ->analyzerIsNot('self')
+             ->outIs('PPP')
              ->_as('ppp')
-             ->savePropertyAs('propertyname', 'propertyname')
-             ->inIs('DEFINE')
-             ->inIs('ELEMENT')
-             ->atomInside('Property')
-             ->outIs('OBJECT')
-             ->code('$this')
-             ->inIs('OBJECT')
-             ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE') // for arrays
-             ->samePropertyAs('code','propertyname')
-             ->back('ppp');
-        $this->prepareQuery();
-
-        // property + $this->property in parents
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->hasNoOut('STATIC')
-             ->outIs('DEFINE')
+             ->outIsIE('LEFT')
              ->analyzerIsNot('self')
-             ->_as('ppp')
              ->savePropertyAs('propertyname', 'propertyname')
              ->goToClass()
-             ->goToAllParents()
              ->outIs('BLOCK')
              ->atomInside('Property')
              ->outIs('OBJECT')
-             ->code('$this')
+             ->codeIs('$this')
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE') // for arrays
              ->samePropertyAs('code','propertyname')
              ->back('ppp');
         $this->prepareQuery();
-
-        // property + $this->property in parents
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->hasNoOut('STATIC')
-             ->outIs('DEFINE')
-             ->analyzerIsNot('self')
-             ->_as('ppp')
-             ->savePropertyAs('propertyname', 'propertyname')
-             ->goToClass()
-             ->goToAllChildren()
-             ->outIs('BLOCK')
-             ->atomInside('Property')
-             ->outIs('OBJECT')
-             ->code('$this')
-             ->inIs('OBJECT')
-             ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE') // for arrays
-             ->samePropertyAs('code','propertyname')
-             ->back('ppp');
-        $this->prepareQuery();
-
 
         //////////////////////////////////////////////////////////////////
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
-        $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'fns')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->analyzerIsNot('self')
+        $this->atomIs('Ppp')
              ->hasOut('STATIC')
-             ->outIs('DEFINE')
+             ->outIs('PPP')
              ->_as('ppp')
              ->outIsIE('LEFT')
-             ->savePropertyAs('code', 'propertyname')
-             ->inIsIE('LEFT')
-             ->inIs('DEFINE')
-             ->inIs('ELEMENT')
+             ->analyzerIsNot('self')
+             ->savePropertyAs('code', 'property')
+             ->goToClass()
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
-             ->samePropertyAs('fullnspath', 'fns')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
+             ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE') // for arrays
-             ->samePropertyAs('code','propertyname')
+             ->samePropertyAs('code','property')
              ->back('ppp');
         $this->prepareQuery();
 
-        // static and used in a class above
-        $this->atomIs('Class')
-             ->savePropertyAs('classTree', 'classtree')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->hasOut('STATIC')
-             ->outIs('DEFINE')
-             ->analyzerIsNot('self')
-             ->_as('ppp')
-             ->outIsIE('LEFT')
-             ->savePropertyAs('code', 'propertyname')
-             ->goToClass()
-             ->goToAllParents()
-             ->outIs('BLOCK')
-             ->atomInside('Staticproperty')
-             ->outIs('CLASS')
-             ->isPropertyIn('fullnspath','classtree')
-             ->inIs('CLASS')
-             ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE') // for arrays
-             ->samePropertyAs('code','propertyname')
-             ->back('ppp');
-        $this->prepareQuery();
-        
-        // static and used in a class below
-        $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'fns')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->hasOut('STATIC')
-             ->outIs('DEFINE')
-             ->analyzerIsNot('self')
-             ->_as('ppp')
-             ->outIsIE('LEFT')
-             ->savePropertyAs('code', 'propertyname')
-             ->goToClass()
-             ->goToAllChildren()
-             ->savePropertyAs('classTree', 'classtree')
-             ->outIs('BLOCK')
-             ->atomInside('Staticproperty')
-             ->outIs('CLASS')
-             ->isPropertyIn('fullnspath','classtree')
-             ->inIs('CLASS')
-             ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE') // for arrays
-             ->samePropertyAs('code','propertyname')
-             ->back('ppp');
-        $this->prepareQuery();
+// Test for arrays ? 
+
     }
 }
 

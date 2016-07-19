@@ -28,9 +28,19 @@ use Analyzer;
 class MultipleIdenticalKeys extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->code('array')
-             ->raw("aggregate().findAll{ m = [:]; it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Keyvalue').out('KEY').groupCount(m){it.fullcode}.cap.next().findAll{it.value > 1}.size() > 0}");
+        $this->atomFunctionIs('\\array')
+             ->raw('where(
+    __.sideEffect{ counts = [:]; }
+      .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("KEY")
+      .hasLabel("String", "Integer", "Real", "Boolean", "Staticconstant").where(__.out("CONCAT").count().is(eq(0)))
+      .sideEffect{ 
+            if ("noDelimiter" in it.get().keys() ) { k = it.get().value("noDelimiter"); } else { k = it.get().value("fullcode"); }
+            if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }
+        }
+        .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
+)')
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

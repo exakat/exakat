@@ -1,30 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
+(
+Label : ARGUMENT
+  *
+  Label : LEFT
+    /
     Label : LEFT
-      $a
+      $c
     Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        /
-        Label : LEFT
-          b
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              *
-              Label : LEFT
-                /
-                Label : LEFT
-                  $c
-                Label : RIGHT
-                  1
-              Label : RIGHT
-                2
-        Label : RIGHT
-          4
-      Label : CONCAT
-        'g'
+      1
+  Label : RIGHT
+    2

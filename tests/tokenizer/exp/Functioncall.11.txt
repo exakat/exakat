@@ -1,22 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    $x
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        1
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        $y
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $z
-        Label : NAME
-          $y
-    Label : NAME
-      $x
+(
+Label : ARGUMENT
+  1
+Label : ARGUMENT
+  2
+Label : ARGUMENT
+  $y
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      $z
+  Label : NAME
+    $y

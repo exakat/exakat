@@ -38,12 +38,14 @@ class UseThis extends Analyzer\Analyzer {
              ->hasNoOut('STATIC')
              ->outIs('BLOCK')
              ->atomInside('Variable')
-             ->code('$this', true)
-             ->back('first');
+             ->codeIs('$this', true)
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // Case for statics
         $this->atomIs('Function')
+             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
@@ -51,13 +53,15 @@ class UseThis extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->savePropertyAs('fullnspath', 'classe')
-             ->goToClass()
+             ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Function')
+             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
@@ -65,8 +69,9 @@ class UseThis extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->savePropertyAs('fullnspath', 'classe')
-             ->goToClass()
+             ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
              ->back('first');
         $this->prepareQuery();

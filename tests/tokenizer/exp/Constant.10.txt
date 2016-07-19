@@ -1,22 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    ->
-    Label : METHOD
-      a
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $x
-        Label : ARGUMENT
-          ?
-          Label : CONDITION
-            $b
-          Label : ELSE
-            $c
-          Label : THEN
-            null
-    Label : OBJECT
-      $d
+(
+Label : ARGUMENT
+  $x
+Label : ARGUMENT
+  ?
+  Label : CONDITION
+    $b
+  Label : ELSE
+    $c
+  Label : THEN
+    null

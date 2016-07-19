@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array("'http://www.php.net/'",
+$expected     = array("'http://www.phpOK.net/'",
                       "'http://dams:pass@www.php.net/'",
                       "'http://dams@www.php.net/'",
                       "'https://dams@www.php.net:83/'",
@@ -14,6 +14,7 @@ $expected     = array("'http://www.php.net/'",
                       "'http://www.法国.cn/'",
 );
 
-$expected_not = array();
+$expected_not = array("'http:/www.php.net/'",
+                      "'https:/www.php.net/'",);
 
 ?>

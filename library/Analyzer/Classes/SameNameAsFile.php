@@ -27,12 +27,24 @@ use Analyzer;
 
 class SameNameAsFile extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs(array('Class', 'Interface', 'Trait'))
+        $this->atomIs(array('Interface','Class', 'Trait'))
              ->outIs('NAME')
              ->savePropertyAs('code', 'classname')
              ->goToFile()
+             // Is the clasname different from the filename (case insensitive)
+             ->regexIsNot('code', '(?i)" + classname + "\\\\.php\\$')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Interface','Class', 'Trait'))
+             ->analyzerIsNot('self')
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'classname')
+             ->goToFile()
+             // Is the clasname also the filename (case insensitive)
+             ->regexIs('code', '(?i)" + classname + "\\\\.php\\$')
              // Is the clasname also the filename (case sensitive)
-             ->regex('filename', '" + classname + "\\\\.php\\$')
+             ->regexIsNot('code', '" + classname + "\\\\.php\\$')
              ->back('first');
         $this->prepareQuery();
     }

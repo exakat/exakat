@@ -32,31 +32,31 @@ class StrposCompare extends Analyzer\Analyzer {
         // if (.. == strpos(..)) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code($operator)
+             ->codeIs($operator)
              ->inIs('RIGHT')
              ->atomIs('Comparison')
-             ->code(array('==', '!='))
+             ->codeIs(array('==', '!='))
              ->outIs('LEFT')
-             ->code(array('0', "''", '""', 'null', 'false'))
+             ->codeIs(array('0', "''", '""', 'null', 'false'))
              ->back('result');
         $this->prepareQuery();
 
         // if (strpos(..) == ..) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code($operator)
+             ->codeIs($operator)
              ->inIs('LEFT')
              ->atomIs('Comparison')
-             ->code(array('==', '!='))
+             ->codeIs(array('==', '!='))
              ->outIs('RIGHT')
-             ->code(array('0', "''", '""', 'null', 'false'))
+             ->codeIs(array('0', "''", '""', 'null', 'false'))
              ->back('result');
         $this->prepareQuery();
 
         // if (strpos(..)) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code($operator)
+             ->codeIs($operator)
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('result');
@@ -64,7 +64,7 @@ class StrposCompare extends Analyzer\Analyzer {
 
         // if ($x = strpos(..)) {}
         $this->atomIs('Functioncall')
-             ->code($operator)
+             ->codeIs($operator)
              ->inIs('RIGHT')
              ->_as('result')
              ->atomIs('Assignation')

@@ -1,26 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      >=
-      Label : RIGHT
-        {
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'd'
-      Label : LEFT
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        break
-        Label : LEVEL
-          void
+{
+Label : INDEX
+  [
+  Label : INDEX
+    'd'
+  Label : VARIABLE
+    $c
+Label : VARIABLE
+  $b

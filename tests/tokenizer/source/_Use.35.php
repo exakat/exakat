@@ -1,17 +1,31 @@
-<?php 
+<?php
 
-use A\{ function f1 };
-use A\{ const c1 };
-use A\{ C1 };
+// Change visibility of sayHello
+class MyClass1 {
+    use HelloWorld { sayHello as protected; 
+                     B::smallTalk insteadof A;}
+}
 
-use A\{ function f2, function f3 };
-use A\{ const c2, function c3 };
-use A\{ C2, C3 };
+// Alias method with changed visibility
+// sayHello visibility not changed
+class MyClass2 {
+    use HelloWorld { sayHello as private myPrivateHello; }
+}
 
-use A\{ function f1\f4 };
-use A\{ const c1\c4 };
-use A\{ C1\C4 };
+trait Hello {
+    public function sayHelloWorld() {
+        echo 'Hello'.$this->getWorld();
+    }
+    abstract public function getWorld();
+}
 
-use A\{ function f2\f5, function f3\f6 };
-use A\{ const c2\c5, function c3\c6 };
-use A\{ C2\C5, C3\C6 };
+class MyHelloWorld {
+    private $world;
+    use Hello;
+    public function getWorld() {
+        return $this->world;
+    }
+    public function setWorld($val) {
+        $this->world = $val;
+    }
+}

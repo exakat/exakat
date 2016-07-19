@@ -1,31 +1,21 @@
-<?php 
-Label : CODE
-  ;
+do
+Label : BLOCK
+  {}
   Label : ELEMENT
     do
     Label : BLOCK
-      ;
+      {}
       Label : ELEMENT
         do
         Label : BLOCK
-          ;
+          {}
           Label : ELEMENT
             do
             Label : BLOCK
-              ;
-              Label : ELEMENT
-                do
-                Label : BLOCK
-                  ;
-                  Label : ELEMENT
-                    ++
-                    Label : POSTPLUSPLUS
-                      $x
-                Label : CONDITION
-                  1
-            Label : CONDITION
-              2
-        Label : CONDITION
-          3
+123098120398 [label="Reached level 15"]            Label : CONDITION
+123098120398 [label="Reached level 15"]        Label : CONDITION
+          2
     Label : CONDITION
-      4
+      3
+Label : CONDITION
+  4

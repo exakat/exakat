@@ -1,52 +1,41 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      new
-      Label : NEW
-        B
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            +
-            Label : LEFT
-              array
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'C'
-                  Label : VALUE
-                    Concatenation
-                    Label : CONCAT
-                      D
-                    Label : CONCAT
-                      'E'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'F'
-                  Label : VALUE
-                    Concatenation
-                    Label : CONCAT
-                      G
-                    Label : CONCAT
-                      'H'
-            Label : RIGHT
-              include
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    Concatenation
-                    Label : CONCAT
-                      I
-                    Label : CONCAT
-                      'J'
++
+Label : LEFT
+  array
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      =>
+      Label : KEY
+        'C'
+      Label : VALUE
+        .
+        Label : CONCAT
+          D
+        Label : CONCAT
+          'E'
+    Label : ARGUMENT
+      =>
+      Label : KEY
+        'F'
+      Label : VALUE
+        .
+        Label : CONCAT
+          G
+        Label : CONCAT
+          'H'
+  Label : NAME
+    array
+Label : RIGHT
+  include
+  Label : ARGUMENTS
+    )
+    Label : ARGUMENT
+      'J'
+      Label : CODE
+        .
+        Label : CONCAT
+          I
+        Label : CONCAT
+          'J'
+  Label : NAME
+    include

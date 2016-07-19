@@ -45,8 +45,8 @@ GREMLIN
 );
 
         $this->atomIs('Function')
+             ->raw('where( __.sideEffect{ variables = []}.out("BLOCK").repeat( out() ).emit( hasLabel("Variable")).times(15).filter{ it.get().value("code").length() > 3}.sideEffect{ variables.push(it.get().value("code")); }.fold() )')
              ->raw('sideEffect{ 
-    variables = []; it.out.loop(1){ it.loops < 10}{it.object.atom == "Variable"}.filter{ it.code.length() > 3}.code.fill(variables); 
     variables = variables.unique().sort();
     found = []; 
     variables.each{ i -> 
@@ -56,7 +56,7 @@ GREMLIN
     }
 }')
             ->atomInside('Variable')
-            ->filter('it.code in found');
+            ->raw('filter{ it.get().value("code") in found}');
         $this->prepareQuery();
     }
 }

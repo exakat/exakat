@@ -1,45 +1,11 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        a
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $b
-          Label : ARGUMENT
-            $c
-  Label : ELEMENT
-    A
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $d
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          void
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $e
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $f
-        Label : RIGHT
-          g
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $h
+)
+Label : ARGUMENT
+  a
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      $b
+    Label : ARGUMENT
+      $c
+  Label : NAME
+    a

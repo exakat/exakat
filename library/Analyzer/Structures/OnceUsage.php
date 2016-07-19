@@ -27,8 +27,10 @@ use Analyzer;
 
 class OnceUsage extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Include')
-             ->tokenIs(array('T_REQUIRE_ONCE', 'T_INCLUDE_ONCE'));
+        $this->atomIs('Functioncall')
+             ->outIs('NAME')
+             ->tokenIs(array('T_REQUIRE_ONCE', 'T_INCLUDE_ONCE'))
+             ->back('first');
         $this->prepareQuery();
     }
 }

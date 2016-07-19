@@ -1,80 +1,41 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    +
-    Label : LEFT
-      function
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $f
-        Label : ARGUMENT
-          $g
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
-      Label : NAME
-        
-    Label : RIGHT
-      ->
-      Label : METHOD
-        d
++
+Label : LEFT
+   
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      $f
+    Label : ARGUMENT
+      $g
+  Label : BLOCK
+    {}
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $a
+  Label : NAME
+    Void
+Label : RIGHT
+  ->
+  Label : METHOD
+    d
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        'e'
+    Label : NAME
+      d
+  Label : OBJECT
+    )
+    Label : CODE
+      new
+      Label : NEW
+        A
         Label : ARGUMENTS
-          
+          (
           Label : ARGUMENT
-            'e'
-      Label : OBJECT
-        (
-        Label : CODE
-          new
-          Label : NEW
-            A
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                $c
-  Label : ELEMENT
-    -
-    Label : LEFT
-      function
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $f
-        Label : ARGUMENT
-          $g
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
-      Label : NAME
-        
-    Label : RIGHT
-      ->
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          
+            $b
           Label : ARGUMENT
-            'e'
-      Label : OBJECT
-        (
-        Label : CODE
-          new
-          Label : NEW
-            A
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                $c
+            $c
+        Label : NAME
+          A

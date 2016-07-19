@@ -1,44 +1,9 @@
-<?php
-
+case 'b' :  /**/  
+Label : CASE
+  'b'
 Label : CODE
   ;
   Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CASE
-          'b'
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
-      Label : ELEMENT
-        case
-        Label : CASE
-          'c'
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $c
-      Label : ELEMENT
-        case
-        Label : CASE
-          'left'
-        Label : CODE
-          void
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $e
-    Label : NAME
-      $a
+    ++
+    Label : POSTPLUSPLUS
+      $b

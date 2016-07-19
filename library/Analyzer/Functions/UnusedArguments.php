@@ -34,22 +34,27 @@ class UnusedArguments extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $isNotRead = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times(15)
+                                          .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\IsRead").count().is(eq(1)) )
+                                          .count().is(eq(0)) )';
+    
+        $isNotUsed = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times(15).count().is(eq(0)) )';
+        //                                          .where( __.in("ANALYZED").has("analyzer", within("Analyzer\\\\Variables\\\\IsRead", "Analyzer\\\\Variables\\\\IsModified")).count().is(eq(1)) )
+    
         // Arguments, not reference
         $this->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'varname')
              ->isNot('reference', true)
-             ->inIsIE('LEFT')     // for default value
-             ->inIsIE('VARIABLE') // for typehint
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
-             ->hasNoOut('ABSTRACT')
-             ->notInTrait()
-             ->notInInterface()
-             
-             // this argument must be read at least once
-             ->filter('it.out("BLOCK").out.loop(1){true}{ it.object.atom == "Variable" }.filter{it.code == varname}.filter{ it.in("ANALYZED").has("code", "Variables/IsRead").any()}.any() == false')
 
+             ->hasNoOut('ABSTRACT')
+             ->hasNoInterface()
+
+             ->outIs('BLOCK')
+             // this argument must be read at least once
+             ->raw($isNotRead)
              ->back('first');
         $this->prepareQuery();
 
@@ -57,52 +62,51 @@ class UnusedArguments extends Analyzer\Analyzer {
         $this->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'varname')
              ->is('reference', true)
-             ->inIsIE('LEFT')     // for default value
-             ->inIsIE('VARIABLE') // for typehint
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
+             ->hasNoInterface()
              ->hasNoOut('ABSTRACT')
-             ->notInTrait()
-             ->notInInterface()
-             
-             // this argument must be read or written at least once
-             ->filter('it.out("BLOCK").out.loop(1){true}{ it.object.atom == "Variable" }.has("code", varname)
-                                          .filter{ it.in("ANALYZED").filter{ it.code in ["Variables/IsModified", "Variables/IsRead"]}.any()}.any() == false')
+
+             ->outIs('BLOCK')
+             // this argument must be read or written at least once (in fact, used)
+             ->raw($isNotUsed)
              ->back('first');
         $this->prepareQuery();
 
         // Arguments in a USE, not a reference
         $this->atomIs('Function')
-             ->is('lambda', true)
+             ->hasChildren('Void', 'NAME')
              ->outIs('USE')
              ->outIs('ARGUMENT')
-             ->isNot('reference', true)
+             ->is('reference', false)
              ->savePropertyAs('code', 'varname')
-             ->_as('first')
-             ->inIs('ARGUMENT')
-             ->inIs('USE')
-             
+             ->_as('results')
+             ->back('first')
+
+             ->outIs('BLOCK')
              // this argument must be read or written at least once
-             ->filter('it.out("BLOCK").out.loop(1){true}{ it.object.atom == "Variable" }.has("code", varname).filter{ it.in("ANALYZED").has("code", "Variables/IsRead").any()}.any() == false')
-             ->back('first');
+             ->raw($isNotRead)
+
+             ->back('results');
         $this->prepareQuery();
 
         // Arguments in a USE, reference
+        // Arguments in a USE, not a reference
         $this->atomIs('Function')
-             ->is('lambda', true)
+             ->hasChildren('Void', 'NAME')
              ->outIs('USE')
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->savePropertyAs('code', 'varname')
-             ->_as('result')
-             ->inIs('ARGUMENT')
-             ->inIs('USE')
-             
+             ->_as('results')
+             ->back('first')
+
+             ->outIs('BLOCK')
              // this argument must be read or written at least once
-             ->filter('it.out("BLOCK").out.loop(1){true}{ it.object.atom == "Variable" }.has("code", varname)
-                                          .filter{ it.in("ANALYZED").filter{ it.code in ["Variables/IsModified", "Variables/IsRead"]}.any()}.any() == false')
-             ->back('result');
+             ->raw($isNotUsed)
+
+             ->back('results');
         $this->prepareQuery();
     }
 }

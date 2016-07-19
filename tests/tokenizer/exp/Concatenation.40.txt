@@ -1,28 +1,11 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        'a'
-      Label : CONCAT
-        ++
-        Label : POSTPLUSPLUS
-          $b
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $y
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        'b'
-      Label : CONCAT
-        ++
-        Label : POSTPLUSPLUS
-          $c
+=
+Label : LEFT
+  $x
+Label : RIGHT
+  .
+  Label : CONCAT
+    'a'
+  Label : CONCAT
+    ++
+    Label : POSTPLUSPLUS
+      $b

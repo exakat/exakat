@@ -9,6 +9,8 @@ $expected     = array('$node->{$this->_rightindex}',
                       '$$a'
 );
 
-$expected_not = array('$a1');
+$expected_not = array('$a1',
+                      'isset($this)',
+                      '$this->parent[\'id\'];');
 
 ?>

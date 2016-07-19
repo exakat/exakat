@@ -31,22 +31,20 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
         
         $this->atomFunctionIs('\\error_reporting')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Integer')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs(array('Integer', 'Addition'))
              ->codeIsNot($allowedIntegers)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\ini_set')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIsNot('T_QUOTE')
-             ->noDelimiter('error_reporting')
+             ->noDelimiterIs('error_reporting')
              ->inIs('ARGUMENT')
-             ->outIs('ARGUMENT')
-             ->hasRank(1)
+             ->outWithRank('ARGUMENT', 1)
              ->atomIs('Integer')
              ->codeIsNot(0)
              ->codeIsNot($allowedIntegers)

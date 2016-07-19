@@ -51,10 +51,9 @@ class HardcodedPasswords extends Analyzer\Analyzer {
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspath($function)
+                 ->fullnspathIs($function)
                  ->outIs('ARGUMENTS')
-                 ->outIs('ARGUMENT')
-                 ->hasRank($position)
+                 ->outWithRank('ARGUMENT', $position)
                  ->atomIs('String')
                  ->back('first');
             $this->prepareQuery();

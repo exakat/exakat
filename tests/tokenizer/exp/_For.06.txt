@@ -1,20 +1,30 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_For.06.php
+Label : FILE
   ;
   Label : ELEMENT
-    for
-    Label : BLOCK
+    <?php
+
+    Label : CODE
       ;
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $j
-    Label : FINAL
-      void
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $i
-    Label : INIT
-      void
+        for
+        Label : BLOCK
+          {}
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+123098120398 [label="Reached level 15"]        Label : FINAL
+          ;
+          Label : ELEMENT
+            Void
+        Label : INCREMENT
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+123098120398 [label="Reached level 15"]        Label : INIT
+          ;
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        Void

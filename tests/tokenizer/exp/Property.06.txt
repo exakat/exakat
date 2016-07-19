@@ -1,15 +1,20 @@
-;
-Label : ELEMENT
-  ->
-  Label : OBJECT
-    ->
-    Label : OBJECT
-      ->
-      Label : OBJECT
-        $x
-      Label : PROPERTY
-        a
-    Label : PROPERTY
-      b
-  Label : PROPERTY
-    c
+./tests/tokenizer/source/Property.06.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            ->
+            Label : OBJECT
+123098120398 [label="Reached level 15"]            Label : PROPERTY
+123098120398 [label="Reached level 15"]          Label : PROPERTY
+            b
+        Label : PROPERTY
+          c

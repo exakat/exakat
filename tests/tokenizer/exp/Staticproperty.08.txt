@@ -1,16 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      ::
-      Label : CLASS
-        A
-      Label : PROPERTY
-        [
-        Label : VARIABLE
-          $V
-    Label : RIGHT
-      $C
+$V
+Label : APPEND
+  ::
+  Label : CLASS
+    A
+  Label : PROPERTY
+    $V

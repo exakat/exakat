@@ -21,8 +21,8 @@
 */
 
 class Exakat {
-    const VERSION = '0.6.6';
-    const BUILD = 369;
+    const VERSION = '0.7.5';
+    const BUILD = 385;
     
     private $gremlin = null;
     
@@ -42,13 +42,13 @@ class Exakat {
                 $task->run($config);
                 break;
 
-            case 'files' : 
-                $task = new Tasks\Files($this->gremlin);
+            case 'anonymize' : 
+                $task = new Tasks\Anonymize($this->gremlin);
                 $task->run($config);
                 break;
 
-            case 'build_root' : 
-                $task = new Tasks\Build_root($this->gremlin);
+            case 'files' : 
+                $task = new Tasks\Files($this->gremlin);
                 $task->run($config);
                 break;
 
@@ -59,11 +59,6 @@ class Exakat {
 
             case 'stat' : 
                 $task = new Tasks\Stat($this->gremlin);
-                $task->run($config);
-                break;
-
-            case 'tokenizer' : 
-                $task = new Tasks\Tokenizer($this->gremlin);
                 $task->run($config);
                 break;
 
@@ -82,17 +77,7 @@ class Exakat {
                 $task->run($config);
                 break;
 
-            case 'errors' : 
-                $task = new Tasks\Errors($this->gremlin);
-                $task->run($config);
-                break;
-
             case 'report' : 
-                $task = new Tasks\Report2($this->gremlin);
-                $task->run($config);
-                break;
-
-            case 'report2' : 
                 $task = new Tasks\Report2($this->gremlin);
                 $task->run($config);
                 break;
@@ -109,11 +94,6 @@ class Exakat {
 
             case 'projectspip' : 
                 $task = new Tasks\ProjectSpip($this->gremlin);
-                $task->run($config);
-                break;
-
-            case 'log2csv' : 
-                $task = new Tasks\Log2csv($this->gremlin);
                 $task->run($config);
                 break;
 

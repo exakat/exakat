@@ -64,11 +64,22 @@ function run($test, $number) {
         return;
     }
     
-    $shell = 'cd ../..; '.$ini['php'].' exakat cleandb; '.$ini['php'].' exakat load -f ./tests/tokenizer/source/'.$test.'.'.$number.'.php -p test; '.$ini['php'].' exakat build_root -p test; '.$ini['php'].' exakat tokenizer -p test; '.$ini['php'].' exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
-    shell_exec($shell);
+    $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'.$test.'.'.$number.'.php -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
+    $res = shell_exec($shell);
+    
+    if (preg_match("/Warning : (.*?)\n/is", $res, $r) !== 0) {
+        print "$test $number has some warning : $r[1]\n";
+        return;
+    }
     
     if (!file_exists('./exp/'."$test.$number".'.txt')) {
         print "This script has no exp file.\n";
+        return;
+    }
+
+    if (filesize('./exp/'."$test.$number".'.txt') == 0) {
+        unlink('./exp/'."$test.$number".'.txt');
+        print "This script has an empty exp file.\n";
         return;
     }
 

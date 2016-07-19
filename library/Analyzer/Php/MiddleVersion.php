@@ -54,7 +54,8 @@ class MiddleVersion extends Analyzer\Analyzer {
         // bugfixes based on analyzers
         foreach($this->bugfixes as $bugfix) {
             if (!empty($bugfix['analyzer'])) {
-                $this->analyzerIs($bugfix['analyzer']);
+                $this->analyzerIs($bugfix['analyzer'])
+                     ->ignore();
                 $this->prepareQuery();
             }
         }

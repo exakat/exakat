@@ -1,62 +1,21 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        or
-        Label : LEFT
-          ->
-          Label : METHOD
-            B
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                Concatenation
-                Label : CONCAT
-                  'C'
-                Label : CONCAT
-                  ->
-                  Label : OBJECT
-                    $c
-                  Label : PROPERTY
-                    D
-                Label : CONCAT
-                  'E'
-                Label : CONCAT
-                  $d
-                Label : CONCAT
-                  'F'
-                Label : CONCAT
-                  $b
-                Label : CONCAT
-                  'G'
-          Label : OBJECT
-            $c
-        Label : RIGHT
-          H
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'I'
-            Label : ARGUMENT
-              __FILE__
-            Label : ARGUMENT
-              __LINE__
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                H
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-              Label : OBJECT
-                $c
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
+(
+Label : ARGUMENT
+  .
+  Label : CONCAT
+    'C'
+  Label : CONCAT
+    ->
+    Label : OBJECT
+      $c
+    Label : PROPERTY
+      D
+  Label : CONCAT
+    'E'
+  Label : CONCAT
+    $d
+  Label : CONCAT
+    'F'
+  Label : CONCAT
+    $b
+  Label : CONCAT
+    'G'

@@ -1,14 +1,16 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Shell.05.php
+Label : FILE
   ;
   Label : ELEMENT
-    @
-    Label : AT
-      `
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          mkdir -p 
-        Label : CONCAT
-          $dir
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        @
+        Label : AT
+          `
+          Label : CONCAT
+            mkdir -p 
+          Label : CONCAT
+            $dir

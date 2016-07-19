@@ -1,48 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      2
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          [
-          Label : INDEX
-            ->
-            Label : OBJECT
-              ->
-              Label : METHOD
-                m
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-              Label : OBJECT
-                $c
-            Label : PROPERTY
-              p
-          Label : VARIABLE
-            $x
-        Label : RIGHT
-          +
-          Label : LEFT
-            3
-          Label : RIGHT
-            4
-  Label : ELEMENT
-    *
-    Label : LEFT
-      $a
-    Label : RIGHT
-      'b'
-  Label : ELEMENT
-    Concatenation
-    Label : CONCAT
-      $c
-    Label : CONCAT
-      'd'
++
+Label : LEFT
+  3
+Label : RIGHT
+  4

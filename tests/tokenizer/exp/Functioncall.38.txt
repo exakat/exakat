@@ -1,7 +1,3 @@
-;
-Label : ELEMENT
-  die
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      true
+(
+Label : ARGUMENT
+  true

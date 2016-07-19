@@ -1,23 +1,7 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $a
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        [
-        Label : INDEX
-          'B'
-        Label : VARIABLE
-          $b
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $c
+<?=
+Label : ARGUMENT
+  [
+  Label : INDEX
+    'B'
+  Label : VARIABLE
+    $b

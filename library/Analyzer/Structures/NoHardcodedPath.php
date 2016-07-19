@@ -37,12 +37,11 @@ class NoHardcodedPath extends Analyzer\Analyzer {
         // may need some regex to exclude http...
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->regexNot('noDelimiter', $regexPhpProtocol)
-             ->regexNot('noDelimiter', $regexAllowedProtocol)
+             ->regexIsNot('noDelimiter', $regexPhpProtocol)
+             ->regexIsNot('noDelimiter', $regexAllowedProtocol)
              ->back('first');
         $this->prepareQuery();
 
@@ -50,16 +49,13 @@ class NoHardcodedPath extends Analyzer\Analyzer {
         // may need some regex to exclude http...
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_QUOTE')
-             ->outIs('CONTAINS')
-             ->outIs('CONCAT')
-             ->is('rank', 0)
+             ->outWithRank('CONCAT', 0)
              ->tokenIs('T_ENCAPSED_AND_WHITESPACE')
-             ->regexNot('noDelimiter', $regexPhpProtocol)
-             ->regexNot('noDelimiter', $regexAllowedProtocol)
+             ->regexIsNot('noDelimiter', $regexPhpProtocol)
+             ->regexIsNot('noDelimiter', $regexAllowedProtocol)
              ->back('first');
         $this->prepareQuery();
 
@@ -67,14 +63,12 @@ class NoHardcodedPath extends Analyzer\Analyzer {
         // may need some regex to exclude http...
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
-             ->outIs('CONCAT')
-             ->is('rank', 0)
+             ->outWithRank('CONCAT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->regexNot('noDelimiter', $regexPhpProtocol)
-             ->regexNot('noDelimiter', $regexAllowedProtocol)
+             ->regexIsNot('noDelimiter', $regexPhpProtocol)
+             ->regexIsNot('noDelimiter', $regexAllowedProtocol)
              ->back('first');
         $this->prepareQuery();
     }

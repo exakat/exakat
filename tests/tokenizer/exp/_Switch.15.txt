@@ -1,60 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CASE
-          'b'
-        Label : CODE
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $c
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $d
-          Label : ELEMENT
-            require_once
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                e
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    'f'
-          Label : ELEMENT
-            g
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                'h'
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        case
-        Label : CASE
-          'i'
-        Label : CODE
-          void
-      Label : ELEMENT
-        case
-        Label : CASE
-          'j'
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              1
-    Label : NAME
-      $a
+)
+Label : ARGUMENT
+  e
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      'f'
+  Label : NAME
+    e

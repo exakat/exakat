@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('SingleWithoutAliasUsed', 
-                      'OriginalUsed', 
+                      'OriginalUsed2', 
                       'OriginalBothUsedSingleAlias as SingleAliasBothUsed', 
                       'OriginalUnusedSingleAlias as SingleAliasUsed', 
                       'OriginalBothUsed as AliasBothUsed', 
@@ -9,6 +9,7 @@ $expected     = array('SingleWithoutAliasUsed',
 
 $expected_not = array('OriginalUsed as AliasUnused',
                       'OriginalUsedSingleAlias as SingleAliasUnused', 
+                      'OriginalUsed', 
                       );
 
 ?>

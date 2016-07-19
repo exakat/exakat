@@ -1,50 +1,31 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
+(
+Label : ARGUMENT
+  $b
+  Label : DEFAULT
+    array
     Label : ARGUMENTS
-      Arguments
+      (
       Label : ARGUMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
+        1
+      Label : ARGUMENT
+        =>
+        Label : KEY
+          2
+        Label : VALUE
           array
           Label : ARGUMENTS
-            Arguments
+            (
             Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                2
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    3
-                  Label : ARGUMENT
-                    2
-            Label : ARGUMENT
-              3
+123098120398 [label="Reached level 15"]            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            array
       Label : ARGUMENT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          1
-      Label : ARGUMENT
-        $d
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        print_r
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $b
+        3
     Label : NAME
-      a
+      array
+Label : ARGUMENT
+  $c
+  Label : DEFAULT
+    1
+Label : ARGUMENT
+  $d

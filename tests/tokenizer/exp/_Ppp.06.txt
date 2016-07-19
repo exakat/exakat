@@ -1,52 +1,7 @@
-<?php
-
-Label : CODE
-  namespace
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      use
-      Label : USE
-        \
-        Label : SUBNAME
-          B
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          D
-        Label : SUBNAME
-          H
-    Label : ELEMENT
-      trait
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          use
-          Label : BLOCK
-            ;
-            Label : ELEMENT
-              as
-              Label : AS
-                L
-              Label : NAME
-                K
-              Label : VISIBILITY
-                private
-          Label : USE
-            H
-        Label : ELEMENT
-          protected
-          Label : DEFINE
-            $a
-          Label : PROTECTED
-            protected
-      Label : NAME
-        I
-  Label : NAMESPACE
-    \
-    Label : SUBNAME
-      B
-    Label : SUBNAME
-      C
-    Label : SUBNAME
-      D
+as
+Label : AS
+  L
+Label : NAME
+  K
+Label : PRIVATE
+  private

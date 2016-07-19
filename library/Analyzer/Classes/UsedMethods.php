@@ -34,7 +34,7 @@ class UsedMethods extends Analyzer\Analyzer {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         // Normal Methodcall
-        $methods = $this->query('g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").has("token", "T_STRING").transform{ it.code.toLowerCase(); }.unique()');
+        $methods = $this->query('g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -42,12 +42,12 @@ class UsedMethods extends Analyzer\Analyzer {
              ->_as('used')
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
-             ->code($methods)
+             ->codeIs($methods)
              ->back('used');
         $this->prepareQuery();
 
         // Staticmethodcall
-        $staticmethods = $this->query('g.idx("atoms")[["atom":"Staticmethodcall"]].out("METHOD").has("token", "T_STRING").transform{ it.code.toLowerCase(); }.unique()');
+        $staticmethods = $this->query('g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -55,29 +55,38 @@ class UsedMethods extends Analyzer\Analyzer {
              ->_as('used')
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
-             ->code($staticmethods)
+             ->codeIs($staticmethods)
              ->back('used');
         $this->prepareQuery();
 
         $callables = $this->query(<<<GREMLIN
-g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.transform{
+//g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.transform{
+g.V().hasLabel("Analysis").has("analyzer", "Analyzer\\\\Functions\\\\MarkCallable").out("ANALYZED")
+.not( hasLabel("Function") )
+.map{
     // Strings
-    if (it.atom == 'String') {
-        if (it.noDelimiter =~ /::/) {
-            s = it.noDelimiter.split('::');
+    if (it.get().label() == 'String') {
+        if (it.get().value("noDelimiter") =~ /::/) {
+            s = it.get().value("noDelimiter").split('::');
             s[1].toLowerCase();
         } else {
-            it.noDelimiter.toLowerCase();
+            it.get().value("noDelimiter").toLowerCase();
         }
-    } else if (it.atom == 'Arguments') {
-        it.out('ARGUMENT').has('rank', 1).next().noDelimiter.toLowerCase();
+    } else if (it.get().label() == 'Arguments') {
+        it.get().vertices(OUT, "ARGUMENT").each{
+            if (it.value("rank") == 1) {
+                s = it.value("noDelimiter").toLowerCase();
+            }
+        }
+        s;
     } else {
-        it.fullcode;
+        it.get().value("noDelimiter").toLowerCase();
     }
 }
 
 GREMLIN
 );
+
         // method used statically in a callback with an array
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
@@ -87,7 +96,7 @@ GREMLIN
              ->_as('used')
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
-             ->code($callables)
+             ->codeIs($callables)
              ->back('used');
         $this->prepareQuery();
 
@@ -100,7 +109,7 @@ GREMLIN
              ->hasOut('PRIVATE')
              ->_as('used')
              ->outIs('NAME')
-             ->code('__construct')
+             ->codeIs('__construct')
              ->inIs('NAME')
              ->inIs('ELEMENT')
              ->atomInside('New')
@@ -119,8 +128,10 @@ GREMLIN
              ->hasNoOut('PRIVATE')
              ->_as('used')
              ->outIs('NAME')
-             ->code('__construct')
-             ->filter(' g.idx("atoms")[["atom":"New"]].out("NEW").hasNot("fullnspath", null).has("fullnspath", fullnspath).any() ')
+             ->codeIs('__construct')
+             ->goToClass()
+             ->outIs('DEFINITION')
+             ->hasIn('NEW')
              ->back('used');
         $this->prepareQuery();
 

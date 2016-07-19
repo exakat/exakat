@@ -1,52 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $h
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'a'
-                  Label : VALUE
-                    'b'
-                Label : ARGUMENT
-                  void
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $g
-            Label : RIGHT
-              ->
-              Label : METHOD
-                d
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $e
-                    Label : PROPERTY
-                      f
-              Label : OBJECT
-                $c
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
+(
+Label : ARGUMENT
+  =>
+  Label : KEY
+    'a'
+  Label : VALUE
+    'b'
+Label : ARGUMENT
+  Void

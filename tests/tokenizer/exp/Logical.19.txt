@@ -1,32 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
-      Label : LEFT
-        isset
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'opt'
-            Label : VARIABLE
-              $_REQUEST
-      Label : RIGHT
-        ==
-        Label : LEFT
-          [
-          Label : INDEX
-            'opt'
-          Label : VARIABLE
-            $_REQUEST
-        Label : RIGHT
-          1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        '1'
+(
+Label : ARGUMENT
+  [
+  Label : INDEX
+    'opt'
+  Label : VARIABLE
+    $_REQUEST

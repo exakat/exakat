@@ -1,28 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        $x
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            1
-          Label : ARGUMENT
-            2
-          Label : ARGUMENT
-            3
-        Label : NAME
-          $x
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $x
-        Label : RIGHT
-          1
+(
+Label : ARGUMENT
+  1
+Label : ARGUMENT
+  2
+Label : ARGUMENT
+  3

@@ -29,10 +29,10 @@ class BooleanStrictComparison extends Analyzer\Analyzer {
     public function analyze() {
         // while (list($a, $b) = each($c)) {}
         $this->atomIs('Comparison')
+             ->codeIsNot(array('===', '!=='))
              ->outIs(array('RIGHT', 'LEFT'))
              ->atomIs('Boolean')
-             ->back('first')
-             ->codeIsNot(array('===', '!=='));
+             ->back('first');
         $this->prepareQuery();
     }
 }

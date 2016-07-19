@@ -1,45 +1,21 @@
-;
-Label : ELEMENT
-  A
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          *
-          Label : LEFT
-            (
-            Label : CODE
-              /
-              Label : LEFT
-                C
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    D
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          [
-                          Label : INDEX
-                            'E'
-                          Label : VARIABLE
-                            $a
-                        Label : PROPERTY
-                          F
-                      Label : ARGUMENT
-                        'G'
-                      Label : ARGUMENT
-                        H
-              Label : RIGHT
-                0
-          Label : RIGHT
-            1
-Label : ELEMENT
-  H
+echo
+Label : ARGUMENT
+  *
+  Label : LEFT
+    0
+    Label : CODE
+      /
+      Label : LEFT
+        C
+        Label : ARGUMENTS
+          (
+          Label : ARGUMENT
+            D
+            Label : ARGUMENTS
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]        Label : NAME
+          C
+      Label : RIGHT
+        0
+  Label : RIGHT
+    1

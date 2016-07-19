@@ -21,5 +21,6 @@ for(7;;) : $fornoblock++; endfor;
 while (7) : $whilenoblock++; endwhile;
 
 do $a++; while (7);
+do { $a++;} while (8);
 
 ?>

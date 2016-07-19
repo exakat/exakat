@@ -1,20 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $y
-      Label : ARGUMENT
-        $x
-      Label : ARGUMENT
-        $a
-      Label : ARGUMENT
-        $z
-    Label : BLOCK
-      void
-    Label : NAME
-      x
+(
+Label : ARGUMENT
+  $y
+Label : ARGUMENT
+  $x
+Label : ARGUMENT
+  $a
+Label : ARGUMENT
+  $z

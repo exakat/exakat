@@ -45,7 +45,7 @@ class Results extends Tasks {
         $analyzer = str_replace('\\', '\\\\', $analyzerClass);
 
         $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out.map;
+g.V().hasLabel("Analysis").has("analyzer", "$analyzer").out().count();
 GREMLIN;
 
         $vertices = $this->gremlin->query($query)->results;
@@ -59,31 +59,48 @@ GREMLIN;
 
         $return = array();
         if ($config->style == 'BOOLEAN') {
-            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.any()';
+            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count().is(gt(0))';
             $vertices = $this->gremlin->query($queryTemplate);
 
             $return[] = $vertices[0];
         } elseif ($config->style == 'COUNTED_ALL') {
-            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.count()';
+            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count()';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return[] = $vertices[0];
         } elseif ($config->style == 'ALL') {
-              $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Line':it.line, 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x')
-                                            .transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
+            $linksDown = \Tokenizer\Token::linksAsList();
+
+            $query = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')
+.sideEffect{ line = it.get().value('line');
+             fullcode = it.get().value('fullcode');
+             file='None'; 
+             theFunction = 'None'; 
+             theClass='None'; 
+             theNamespace='None'; 
+             }
+.sideEffect{ line = it.get().value('line'); }
+.until( hasLabel('File') ).repeat( 
+    __.in($linksDown)
+      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
+       )
+.map{  file = it.get().value('fullcode');}
+
+.map{ ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
 GREMLIN;
 
             $vertices = $this->gremlin->query($query)->results;
 
             $return = array();
             foreach($vertices as $k => $v) {
-                $row = array($v->Fullcode,
-                             $v->File,
-                             $v->Line,
-                             $v->Namespace,
-                             $v->Class,
-                             $v->Function);
+                $row = array($v->fullcode,
+                             $v->file,
+                             $v->line,
+                             $v->namespace,
+                             $v->class,
+                             $v->function);
                 $return[] = $row;
             }
         } elseif ($config->style == 'DISTINCT') {

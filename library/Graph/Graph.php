@@ -25,7 +25,7 @@ namespace Graph;
 abstract class Graph {
     protected $config = null;
     
-    public function __construct(\Config $config) {
+    public function __construct($config) {
         $this->config = $config;
     }
 

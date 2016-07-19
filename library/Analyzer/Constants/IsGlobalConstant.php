@@ -31,6 +31,7 @@ class IsGlobalConstant extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        return true;
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         
@@ -48,12 +49,13 @@ class IsGlobalConstant extends Analyzer\Analyzer {
         $constantsFullNs = $this->makeFullNsPath($constants);
         $constantsFullNsChunks = array_chunk($constantsFullNs, 500);
 
+        /*
         foreach($constantsFullNsChunks as $chunk) {
             $chunk = array_map(function ($x) { return str_replace('\\', '\\\\', $x);}, $chunk);
             $this->analyzerIs('Constants/ConstantUsage')
                  ->analyzerIsNot('self')
                  ->tokenIs('T_STRING')  // No namespace
-                 ->regex('fullnspath', '\\\\\\\\.+\\\\\\\\.+')
+                 ->regexIs('fullnspath', '\\\\\\\\.+\\\\\\\\.+')
                  // is the constant defined where it should ?
                  ->filter("g.idx('constants')[['path':it.fullnspath]].any() == false")
 
@@ -63,11 +65,12 @@ class IsGlobalConstant extends Analyzer\Analyzer {
                  ->back('first');
             $this->prepareQuery();
         }
+        */
 
         $this->analyzerIs('Constants/ConstantUsage')
              ->analyzerIsNot('self')
              ->tokenIs('T_STRING')  // No namespace
-             ->regex('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$')
+             ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$')
              ->back('first');
         $this->prepareQuery();
         
@@ -75,7 +78,6 @@ class IsGlobalConstant extends Analyzer\Analyzer {
         $this->analyzerIs('Constants/ConstantUsage')
              ->analyzerIsNot('self')
              ->tokenIs('T_STRING')  // No namespace
-             ->isNot('fullnspath', null)
              ->hasNoConstantDefinition()
              ->filter(' g.idx("constants")[["path":"\\\\global\\\\" + it.code.toLowerCase()]].any()')
              ->back('first');

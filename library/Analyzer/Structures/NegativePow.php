@@ -27,7 +27,7 @@ class NegativePow extends Analyzer\Analyzer {
     public function analyze() {
         // -3 * 2 == -(3 ** 2) == 9 (not -9)
         $this->atomIs('Sign')
-             ->code('-')
+             ->codeIs('-')
              ->outIs('SIGN')
              ->atomIs('Power')
              ->back('first');

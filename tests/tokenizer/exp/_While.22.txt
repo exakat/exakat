@@ -1,16 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      void
-    Label : CONDITION
-      <=
-      Label : LEFT
-        $i
-      Label : RIGHT
-        10
-  Label : ELEMENT
-    
+<=
+Label : LEFT
+  $i
+Label : RIGHT
+  10

@@ -1,1 +1,1 @@
- <?php if (!isset($a)) print 'B' ?>C<?php print $d ?>'>
+A<?php if (!isset($a)) print 'B' ?>C<?php print $d ?>B

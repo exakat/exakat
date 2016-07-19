@@ -1,15 +1,17 @@
 <?php
 
-if(a($b)) {
+foreach($a as $b) {
 	continue;
 }
 
-if(a($b)) {
+foreach($a2 as $b) {
 	continue 1;
 }
 
-if(a($b)) {
-	continue 23;
+foreach($a3 as $b) {
+    foreach($a as $b) {
+	    continue 2;
+	}
 }
 
 ?>

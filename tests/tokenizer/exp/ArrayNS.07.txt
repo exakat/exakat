@@ -1,18 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      b
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          [
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              void
+(
+Label : ARGUMENT
+  [
+  Label : ARGUMENTS
+    [
+    Label : ARGUMENT
+      Void
+  Label : VARIABLE
+    [

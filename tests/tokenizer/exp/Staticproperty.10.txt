@@ -1,78 +1,75 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    $b::$c
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        array
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            =>
-            Label : KEY
-              ->
-              Label : METHOD
-                B
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-              Label : OBJECT
-                $this
-            Label : VALUE
-              ->
-              Label : METHOD
-                C
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-              Label : OBJECT
-                $this
-      Label : ARGUMENT
-        array
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            D
+(
+Label : ARGUMENT
+  array
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      =>
+      Label : KEY
+        ->
+        Label : METHOD
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            B
+        Label : OBJECT
+          $this
+      Label : VALUE
+        ->
+        Label : METHOD
+          C
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            C
+        Label : OBJECT
+          $this
+  Label : NAME
+    array
+Label : ARGUMENT
+  array
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      D
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          'E'
+        Label : ARGUMENT
+          ->
+          Label : METHOD
+            F
             Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'E'
-              Label : ARGUMENT
-                ->
-                Label : METHOD
-                  F
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      void
-                Label : OBJECT
-                  $this
-      Label : ARGUMENT
+123098120398 [label="Reached level 15"]            Label : NAME
+123098120398 [label="Reached level 15"]          Label : OBJECT
+            $this
+      Label : NAME
         D
+  Label : NAME
+    array
+Label : ARGUMENT
+  D
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      'H'
+    Label : ARGUMENT
+      ->
+      Label : METHOD
+        F
         Label : ARGUMENTS
-          Arguments
+          (
           Label : ARGUMENT
-            'H'
-          Label : ARGUMENT
-            ->
-            Label : METHOD
-              F
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  void
-            Label : OBJECT
-              $this
-          Label : ARGUMENT
-            $d
-    Label : NAME
-      ::
-      Label : CLASS
-        $b
-      Label : PROPERTY
-        $c
+            Void
+        Label : NAME
+          F
+      Label : OBJECT
+        $this
+    Label : ARGUMENT
+      $d
+  Label : NAME
+    D

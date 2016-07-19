@@ -34,10 +34,9 @@ class HashAlgos53 extends Analyzer\Analyzer {
         
         $this->atomFunctionIs(self::$functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->noDelimiter($algos);
+             ->noDelimiterIs($algos);
         $this->prepareQuery();
     }
 }

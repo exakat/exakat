@@ -1,40 +1,5 @@
-<?php
-
-Label : CODE
-  namespace
-  Label : BLOCK
-    Sequence
-    Label : ELEMENT
-      interface
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          function
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              Typehint
-              Label : CLASS
-                D
-              Label : VARIABLE
-                $b
-          Label : NAME
-            do
-          Label : PUBLIC
-            public
-        Label : ELEMENT
-          function
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              $d
-          Label : NAME
-            foreach
-          Label : PUBLIC
-            public
-      Label : NAME
-        C
-  Label : NAMESPACE
-    B
+(
+Label : ARGUMENT
+  $b
+  Label : TYPEHINT
+    D

@@ -1,27 +1,3 @@
-;
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        B
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $a
-      Label : ELSE
-        ;
-        Label : ELEMENT
-          void
-        Label : ELEMENT
-          void
-      Label : THEN
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $b
-Label : ELEMENT
-  I
+(
+Label : ARGUMENT
+  $a

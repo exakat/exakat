@@ -1,95 +1,17 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
+-
+Label : LEFT
+  )
+  Label : CODE
     =
     Label : LEFT
-      $a
+      $c
     Label : RIGHT
-      ord
+      strlen
       Label : ARGUMENTS
-        
+        (
         Label : ARGUMENT
-          [
-          Label : INDEX
-            -
-            Label : LEFT
-              (
-              Label : CODE
-                =
-                Label : LEFT
-                  $c
-                Label : RIGHT
-                  strlen
-                  Label : ARGUMENTS
-                    
-                    Label : ARGUMENT
-                      $d
-            Label : RIGHT
-              1
-          Label : VARIABLE
-            $b
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
-          1
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        (
-        Label : CODE
-          1
-      Label : ARGUMENT
-        (
-        Label : CODE
-          3
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
           $d
-  Label : ELEMENT
-    include
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        +
-        Label : LEFT
-          (
-          Label : CODE
-            'a'
-        Label : RIGHT
-          3
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        print
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            '1'
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        function
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $x
-        Label : BLOCK
-          void
-        Label : NAME
-          
+      Label : NAME
+        strlen
+Label : RIGHT
+  1

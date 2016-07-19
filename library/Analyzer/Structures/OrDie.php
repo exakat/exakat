@@ -33,12 +33,9 @@ class OrDie extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Logical')
              ->analyzerIsNot('Structures/NoDirectAccess')
-             ->code(array('or', '||'))
+             ->codeIs(array('or', '||'))
              ->outIs('RIGHT')
-             ->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs('T_EXIT')
-             ->fullnspath(array('\\die', '\\exit'))
+             ->functioncallIs(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
     }

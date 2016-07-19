@@ -1,17 +1,7 @@
-;
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      Concatenation
-      Label : CONCAT
-        $line_content
-      Label : CONCAT
-        PHP_EOL
-Label : ELEMENT
-  A
-Label : ELEMENT
-  ++
-  Label : POSTPLUSPLUS
-    $a
+<?=
+Label : ARGUMENT
+  .
+  Label : CONCAT
+    $line_content
+  Label : CONCAT
+    PHP_EOL

@@ -44,7 +44,8 @@ class ShouldUseConstants extends Analyzer\Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Logical')
-                 ->raw('filter{ it.out.loop(1){!(it.object.atom in ["Identifier", "Nsname"])}{!(it.object.atom in ["Identifier", "Nsname", "Parenthesis", "Logical"])}.any()}')
+//                 ->raw('filter{ it.out.loop(1){!(it.object.atom in ["Identifier", "Nsname"])}{!(it.object.atom in ["Identifier", "Nsname", "Parenthesis", "Logical"])}.any()}')
+                 ->raw('where( __.repeat( __.out() ).emit( label().is(without("Identifier", "Nsname", "Parenthesis", "Logical")) ).times(15) )')
                  ->back('first');
             $this->prepareQuery();
         }

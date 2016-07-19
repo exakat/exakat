@@ -1,48 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ?
-      Label : CONDITION
-        &
-        Label : LEFT
-          $a
-        Label : RIGHT
-          (
-          Label : CODE
-            |
-            Label : LEFT
-              ::
-              Label : CLASS
-                static
-              Label : CONSTANT
-                B
-            Label : RIGHT
-              ::
-              Label : CLASS
-                static
-              Label : CONSTANT
-                C
-      Label : ELSE
-        G
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'H'
-          Label : ARGUMENT
-            'F'
-          Label : ARGUMENT
-            $b
-      Label : THEN
-        D
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            'E'
-          Label : ARGUMENT
-            'F'
-          Label : ARGUMENT
-            $b
+(
+Label : ARGUMENT
+  'E'
+Label : ARGUMENT
+  'F'
+Label : ARGUMENT
+  $b

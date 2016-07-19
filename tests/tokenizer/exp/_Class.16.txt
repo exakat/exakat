@@ -1,20 +1,15 @@
-<?php
-
-Label : CODE
-  ;
+class
+Label : BLOCK
+  {}
   Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $x
-        Label : DEFINE
-          $y
-        Label : DEFINE
-          $z
-        Label : VAR
-          var
-    Label : NAME
-      x
+    var
+    Label : PPP
+      $z
+    Label : VAR
+      var
+    Label : PPP
+      $x
+    Label : PPP
+      $y
+Label : NAME
+  x

@@ -1,47 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $result
-    Label : RIGHT
-      <<<EOF
-
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          A
-        Label : CONCAT
-          ?
-          Label : CONDITION
-            [
-            Label : INDEX
-              'c'
-            Label : VARIABLE
-              $b
-          Label : ELSE
-            'false'
-          Label : THEN
-            'true'
-        Label : CONCAT
-          
-
-D
-        Label : CONCAT
-          ?
-          Label : CONDITION
-            [
-            Label : INDEX
-              'f'
-            Label : VARIABLE
-              $e
-          Label : ELSE
-            'false'
-          Label : THEN
-            'true'
-        Label : CONCAT
-          
-
-
+[
+Label : INDEX
+  'c'
+Label : VARIABLE
+  $b

@@ -34,25 +34,24 @@ class IsRead extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
-                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL'));
-            // note : NAME is for Switch!!
+                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'));
         $this->prepareQuery();
 
         // Reading inside an assignation
         $this->atomIs('Variable')
              ->inIs('LEFT')
              ->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
-                           'CASE', 'CLONE', 'FINAL', 'CLASS'))
+                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'PPP'))
              ->back('first');
             // note : NAME is for Switch!!
         $this->prepareQuery();
 
         // $this is always read
         $this->atomIs('Variable')
-             ->code('$this');
+             ->codeIs('$this');
         $this->prepareQuery();
              
 
@@ -92,14 +91,6 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // variable in a new
-        $this->atomIs('Variable')
-             ->inIs('NAME')
-             ->inIs('NEW')
-             ->atomIs('New')
-             ->back('first');
-        $this->prepareQuery();
-
         // array only
         $this->atomIs('Variable')
              ->inIs('VARIABLE')
@@ -107,19 +98,17 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // arguments : Typehint
-        $this->atomIs('Variable')
-             ->inIs('VARIABLE')
-             ->atomIs(array('Typehint', 'Instanceof'))
-             ->back('first');
+        // arguments
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('VARIABLE');
         $this->prepareQuery();
 
-        // arguments in a method : all of them are at least read
-        // we need to find a way to link to the definition 
-        $this->atomIs('Variable')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->hasIn('METHOD')
+        // arguments : instanceof
+        $this->atomIs('Instanceof')
+             ->outIs('LEFT')
+             ->atomIs('VARIABLE')
              ->back('first');
         $this->prepareQuery();
 
@@ -160,7 +149,7 @@ class IsRead extends Analyzer\Analyzer {
                  ->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspath($functions)
+                 ->fullnspathIs($functions)
                  ->back('first');
             $this->prepareQuery();
         }
@@ -168,51 +157,10 @@ class IsRead extends Analyzer\Analyzer {
         // Variable that are not a reference in a functioncall
         $this->atomIs('Variable')
              ->hasIn('ARGUMENT')
-             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
+             ->hasNoParent('Function', array('ARGUMENT', 'ARGUMENTS'))
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
-        // Class constructors (__construct)
-        $this->atomIs('Variable')
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->atomIs('Functioncall')
-             ->hasIn('NEW')
-             ->classDefinition()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->_as('method')
-             ->analyzerIs('Classes/Constructor')
-             ->back('method')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Class constructors with self
-        $this->atomIs('Variable')
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->atomIs('Functioncall')
-             ->code('self')
-             ->hasIn('NEW')
-             ->classDefinition()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->_as('method')
-             ->outIs('NAME')
-             ->analyzerIs('Classes/Constructor')
-             ->back('method')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', true)
-             ->back('first');
-        $this->prepareQuery();
     }
 }
 

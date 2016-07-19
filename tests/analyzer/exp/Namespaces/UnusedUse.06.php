@@ -2,11 +2,11 @@
 
 $expected     = array('OriginalAliasBothUnusedo as OriginalAliasBothUnused',
                       'OriginalAliasBothUnusedo2 as OriginalAliasBothUnused2',
-);
-
-$expected_not = array('OriginalUsedAliasUnusedo as OriginalUsedAliasUnuseda',
-                      'OriginalAliasBothUsedo as OriginalAliasBothUseda',
+                      'OriginalUsedAliasUnusedo as OriginalUsedAliasUnuseda',
                       'OriginalUsedAliasUnusedo2 as OriginalUsedAliasUnuseda2',
+                      );
+
+$expected_not = array('OriginalAliasBothUsedo as OriginalAliasBothUseda',
                       'OriginalAliasBothUsedo2 as OriginalAliasBothUseda2',
                       
                       'OriginalUnusedAliasUsedo as OriginalUnusedAliasUseda',

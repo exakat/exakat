@@ -1,54 +1,51 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    a
+(
+Label : ARGUMENT
+  "b"
+Label : ARGUMENT
+  ->
+  Label : OBJECT
+    $this
+  Label : PROPERTY
+    c
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    Stdclass
+  Label : CONSTANT
+    d
+Label : ARGUMENT
+  \
+  Label : SUBNAME
+    e
+  Label : SUBNAME
+    f
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    Stdclass
+  Label : PROPERTY
+    $g
+Label : ARGUMENT
+  ->
+  Label : METHOD
+    h
     Label : ARGUMENTS
-      Arguments
+      (
       Label : ARGUMENT
-        "b"
+        Void
+    Label : NAME
+      h
+  Label : OBJECT
+    $this
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    Stdclass
+  Label : METHOD
+    i
+    Label : ARGUMENTS
+      (
       Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $this
-        Label : PROPERTY
-          c
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          Stdclass
-        Label : CONSTANT
-          d
-      Label : ARGUMENT
-        \
-        Label : SUBNAME
-          e
-        Label : SUBNAME
-          f
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          Stdclass
-        Label : PROPERTY
-          $g
-      Label : ARGUMENT
-        ->
-        Label : METHOD
-          h
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
-        Label : OBJECT
-          $this
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          Stdclass
-        Label : METHOD
-          i
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              void
+        Void
+    Label : NAME
+      i

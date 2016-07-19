@@ -48,8 +48,10 @@ class ClassUsage extends Analyzer\Analyzer {
              ->outIs('CLASS');
         $this->prepareQuery();
 
-        $this->atomIs('Typehint')
-             ->outIs('CLASS');
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT');
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
@@ -67,7 +69,7 @@ class ClassUsage extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\class_alias')
+             ->fullnspathIs('\\class_alias')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)

@@ -1,26 +1,15 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
+(
+Label : ARGUMENT
+  $b
+  Label : DEFAULT
+    array
     Label : ARGUMENTS
-      
+      (
       Label : ARGUMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              2
-            Label : ARGUMENT
-              3
-    Label : BLOCK
-      void
+        1
+      Label : ARGUMENT
+        2
+      Label : ARGUMENT
+        3
     Label : NAME
-      a
+      array

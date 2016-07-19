@@ -1,22 +1,15 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
+echo
+Label : ARGUMENT
+  ?
+  Label : CONDITION
+    'a'
+  Label : ELSE
+    true
+  Label : THEN
+    print
     Label : ARGUMENTS
-      
+      'b'
       Label : ARGUMENT
-        ?
-        Label : CONDITION
-          
-          Label : ARGUMENT
-            'a'
-        Label : ELSE
-          true
-        Label : THEN
-          print
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'b'
+        'b'
+    Label : NAME
+      print

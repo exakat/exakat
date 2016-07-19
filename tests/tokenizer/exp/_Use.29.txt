@@ -1,69 +1,13 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    use
-    Label : FUNCTION
-      \
-      Label : SUBNAME
-        FooLibrary
-      Label : SUBNAME
-        Bar
-      Label : SUBNAME
-        Baz
-      Label : SUBNAME
-        ClassNonAbsNonGroupedNonAs
-  Label : ELEMENT
-    use
-    Label : FUNCTION
-      \
-      Label : SUBNAME
-        FooLibrary
-      Label : SUBNAME
-        Bar
-      Label : SUBNAME
-        Baz
-      Label : SUBNAME
-        ClassAbsNonGroupedNonAs
-  Label : ELEMENT
-    use
-    Label : FUNCTION
-      as
-      Label : AS
-        A1
-      Label : NAME
-        \
-        Label : SUBNAME
-          FooLibrary
-        Label : SUBNAME
-          Bar
-        Label : SUBNAME
-          Baz
-        Label : SUBNAME
-          ClassNonAbsNonGroupedAs
-  Label : ELEMENT
-    use
-    Label : FUNCTION
-      as
-      Label : AS
-        A2
-      Label : NAME
-        \
-        Label : SUBNAME
-          FooLibrary
-        Label : SUBNAME
-          Bar
-        Label : SUBNAME
-          Baz
-        Label : SUBNAME
-          ClassAbsNonGroupedAs
-  Label : ELEMENT
-    use
-    Label : FUNCTION
-      ClassNonAbsGroupedNonAs
-    Label : FUNCTION
-      as
-      Label : AS
-        A3
-      Label : NAME
-        ClassNonAbsGroupedAs
+as
+Label : AS
+  A1
+Label : NAME
+  \
+  Label : SUBNAME
+    FooLibrary
+  Label : SUBNAME
+    Bar
+  Label : SUBNAME
+    Baz
+  Label : SUBNAME
+    ClassNonAbsNonGroupedAs

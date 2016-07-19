@@ -1,14 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    include
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          a
-        Label : CONSTANT
-          b
+b
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    a
+  Label : CONSTANT
+    b

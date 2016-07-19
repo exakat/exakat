@@ -1,7 +1,6 @@
 <?php
 
-$expected     = array('class c', 
-                      'trait t');
+$expected     = array('./tests/analyzer/source/Classes/MultipleClassesInFile.05.php');
 
 $expected_not = array();
 

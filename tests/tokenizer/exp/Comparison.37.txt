@@ -1,42 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &&
-      Label : LEFT
-        ==
-        Label : LEFT
-          instanceof
-          Label : CLASS
-            B
-          Label : VARIABLE
-            $a
-        Label : RIGHT
-          C
-      Label : RIGHT
-        &&
-        Label : LEFT
-          ==
-          Label : LEFT
-            instanceof
-            Label : CLASS
-              D
-            Label : VARIABLE
-              $b
-          Label : RIGHT
-            E
-        Label : RIGHT
-          ==
-          Label : LEFT
-            instanceof
-            Label : CLASS
-              F
-            Label : VARIABLE
-              $c
-          Label : RIGHT
-            G
-    Label : THEN
-      void
+==
+Label : LEFT
+  instanceof
+  Label : CLASS
+    B
+  Label : VARIABLE
+    $a
+Label : RIGHT
+  C

@@ -25,16 +25,10 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class UselessSwitch extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $this->atomIs('Switch')
              ->outIs('CASES')
-             ->filter('it.out("ELEMENT").count() < 2')
+             ->isLess('count', 2)
              ->back('first');
         $this->prepareQuery();
     }

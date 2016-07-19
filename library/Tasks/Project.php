@@ -120,35 +120,10 @@ class Project extends Tasks {
         $this->logTime('Loading');
         $this->updateProgress($progress++);
 
-        $analyze = new Build_root($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        display("Build root\n");
-        $this->logTime('Build_root');
-        $this->updateProgress($progress++);
-
-        $analyze = new Tokenizer($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        $this->logTime('Tokenizer');
-        display("Project tokenized\n");
-        $this->updateProgress($progress++);
-
         $analyze = new Magicnumber($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         $this->updateProgress($progress++);
-
-        $analyze = new Errors($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        display("Got the errors (if any)\n");
-        $this->updateProgress($progress++);
-
-        $analyze = new Log2csv($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        $this->logTime('Stats');
 
         // Dump is a child process
         exec($config->php . ' '.$config->executable.' dump -p '.$config->project.'   > /dev/null &');
@@ -230,7 +205,7 @@ class Project extends Tasks {
         $audit_end = time();
         
         // measure Neo4j's final size
-        $res = shell_exec('du -sh '.$config->neo4j_folder);
+        $res = shell_exec('du -sh '.$config->neo4j_folder.' 2>/dev/null');
         $neo4jSize = trim(str_replace(basename($config->neo4j_folder), '', $res));
 
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,

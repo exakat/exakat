@@ -1,40 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ==
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $this
-        Label : PROPERTY
-          B
-      Label : RIGHT
-        'C'
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $d
-    Label : THEN
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $a
-        Label : ELSE
-          Block with else
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $d
-        Label : THEN
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $e
+==
+Label : LEFT
+  ->
+  Label : OBJECT
+    $this
+  Label : PROPERTY
+    B
+Label : RIGHT
+  'C'

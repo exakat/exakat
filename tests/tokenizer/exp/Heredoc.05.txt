@@ -1,42 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          true
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            <<< C
-
-            Label : CONTAINS
-              Concatenation
-              Label : CONCAT
-                D
-
-      Label : ELEMENT
-        ob_flush
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-      Label : ELEMENT
-        exit
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-    Label : NAME
-      a
+(
+Label : ARGUMENT
+  $b
+  Label : DEFAULT
+    true

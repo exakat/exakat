@@ -30,6 +30,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
     public function analyze() {
         // method used in a static methodcall \a\b::b()
         $this->atomIs('Class')
+             ->hasName()
              ->savePropertyAs('fullnspath', 'classname')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -43,6 +44,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->samePropertyAs('fullnspath', 'classname')
              ->inIs('CLASS')
              ->outIs('METHOD')
@@ -64,7 +66,8 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
-             ->code(array('static', 'self'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
+             ->codeIs(array('static', 'self'))
              ->inIs('CLASS')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
@@ -85,7 +88,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
-             ->code('$this')
+             ->codeIs('$this')
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
@@ -101,7 +104,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->hasOut('PRIVATE')
              ->_as('method')
              ->outIs('NAME')
-             ->code('__construct')
+             ->codeIs('__construct')
              ->inIs('NAME')
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
@@ -119,7 +122,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
-             ->code('__destruct')
+             ->codeIs('__destruct')
              ->inIs('NAME');
         $this->prepareQuery();
 

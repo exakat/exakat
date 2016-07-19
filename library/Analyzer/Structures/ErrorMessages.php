@@ -31,15 +31,13 @@ class ErrorMessages extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $messages = array('String', 'Concatenation', 'Integer', 'Functioncall');
+        $messages = array('String', 'Concatenation', 'Integer', 'Functioncall', 'Heredoc', 'Magicconstant');
 
         // die('true')
         // exit ('30');
-        $this->atomIs('Functioncall')
-             ->tokenIs('T_EXIT')
+        $this->atomFunctionIs(array('\\die', '\\exit'))
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
         $this->prepareQuery();
 
@@ -48,10 +46,9 @@ class ErrorMessages extends Analyzer\Analyzer {
              ->outIs('NEW')
              ->atomIs('Functioncall')
              ->isNot('fullnspath', null)
-             ->fullnspath('\\exception')
+             ->fullnspathIs('\\exception')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
         $this->prepareQuery();
 
@@ -62,8 +59,7 @@ class ErrorMessages extends Analyzer\Analyzer {
              ->outIs('NEW')
              ->atomIsNot('Functioncall')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
         $this->prepareQuery();
 
@@ -72,7 +68,10 @@ class ErrorMessages extends Analyzer\Analyzer {
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->isNot('fullnspath', null)
-             ->filter(' g.idx("classes")[["path":it.fullnspath]].in("ANALYZED").has("code","Analyzer\\\\Exceptions\\\\DefinedExceptions").any()')
+             ->_as('new')
+             ->classDefinition()
+             ->analyzerIs('Exceptions/DefinedExceptions')
+             ->back('new')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs($messages);

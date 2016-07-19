@@ -1,6 +1,10 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Variable.01.php
+Label : FILE
   ;
   Label : ELEMENT
-    $x
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        $x

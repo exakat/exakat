@@ -1,4 +1,14 @@
 <?php
+        switch($b[0]) {
+            case B: 
+                $b[1] = $c++;
+                break;
+
+            case B: 
+                $b[1] = $c++;
+                break;
+        }
+
         switch($a[0]) {
             case B: 
                 $b[1] = $c++;

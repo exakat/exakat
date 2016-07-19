@@ -149,7 +149,10 @@ CREATE (token)-[:$relation]->(token2)
 
 CYPHER;
             try {
-                $this->cypher->query($queryTemplate);
+                $res = $this->cypher->query($queryTemplate);
+                if ($name == 'file') { // For some reason, we need this twice...
+                    $res = $this->cypher->query($queryTemplate);
+                }
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load relations for ".$name." in the database\n".$e->getMessage());

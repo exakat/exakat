@@ -80,7 +80,7 @@ class HttpHeader extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('String')
-             ->regex('code', '[\'\"]('.implode('|', $this->HttpHeadersList).'): .*[\'\"]');
+             ->regexIs('code', '[\'\"]('.implode('|', $this->HttpHeadersList).'): .*[\'\"]');
         $this->prepareQuery();
     }
 }

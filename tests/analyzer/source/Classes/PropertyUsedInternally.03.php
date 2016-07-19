@@ -1,4 +1,5 @@
 <?php
+
 class A extends B {
 	protected $usedProtected;
 	protected $notUsedProtected;

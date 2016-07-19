@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 30 May 2016 11:58:20 +0000
-.. comment: Generation hash : 805ae632f1fa38dd1f4e340d577faef011d8d367
+.. comment: Generation date : Tue, 19 Jul 2016 10:30:49 +0000
+.. comment: Generation hash : 7c8e610c038cc0f063938da825d0f1f9b177d202
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 251 analysis
+Total : 249 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -93,7 +93,6 @@ Total : 251 analysis
 * :ref:`Buried Assignation <buried-assignation>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Extend Final <cant-extend-final>`
-* :ref:`Case After Default <case-after-default>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
@@ -111,7 +110,7 @@ Total : 251 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use \_\_DIR\_\_ <could-use-\_\_dir\_\_>`
-* :ref:`Could Use self <could-use-self>`
+* :ref:`Could use self <could-use-self>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
 * :ref:`Deprecated Code <deprecated-code>`
@@ -156,7 +155,7 @@ Total : 251 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical Mistakes <logical-mistakes>`
-* :ref:`Logical Should Use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
+* :ref:`Logical should use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
 * :ref:`Lone Blocks <lone-blocks>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Magic Visibility <magic-visibility>`
@@ -169,12 +168,11 @@ Total : 251 analysis
 * :ref:`Multiples Identical Case <multiples-identical-case>`
 * :ref:`Multiply By One <multiply-by-one>`
 * :ref:`Must Return Methods <must-return-methods>`
-* :ref:`Namespace With Fully Qualified Name <namespace-with-fully-qualified-name>`
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Choice <no-choice>`
-* :ref:`No Direct Call To Magicmethod <no-direct-call-to-magicmethod>`
+* :ref:`No Direct Call To MagicMethod <no-direct-call-to-magicmethod>`
 * :ref:`No Direct Usage <no-direct-usage>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
@@ -662,7 +660,7 @@ Total : 20 analysis
 Performances
 ++++++++++++
 
-Total : 14 analysis
+Total : 15 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -672,7 +670,8 @@ Total : 14 analysis
 * :ref:`Functions In Loop Calls <functions-in-loop-calls>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
-* :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
+* :ref:`Make One Call <make-one-call>`
+* :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`
 * :ref:`Simple Regex <simple-regex>`
@@ -684,12 +683,11 @@ Total : 14 analysis
 Security
 ++++++++
 
-Total : 19 analysis
+Total : 18 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
-* :ref:`Followed injections <followed-injections>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Indirect Injection <indirect-injection>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
@@ -699,7 +697,7 @@ Total : 19 analysis
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
-* :ref:`Sleep Is A Security Risk <sleep-is-a-security-risk>`
+* :ref:`Sleep is a security risk <sleep-is-a-security-risk>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Use random\_int() <use-random\_int()>`
 * :ref:`parse\_str() Warning <parse\_str()-warning>`

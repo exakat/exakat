@@ -34,7 +34,7 @@ class CouldUseShortAssignation extends Analyzer\Analyzer {
              ->savePropertyAs('fullcode', 'receiver')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->code(array('+', '*'))
+             ->codeIs(array('+', '*'))
              ->outIs(array('LEFT', 'RIGHT'))
              ->samePropertyAs('fullcode', 'receiver')
              ->back('first');
@@ -47,7 +47,7 @@ class CouldUseShortAssignation extends Analyzer\Analyzer {
              ->savePropertyAs('fullcode', 'receiver')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->code(array('-', '/', '%', '<<=', '>>=', '**', '&', '^', '|'))
+             ->codeIs(array('-', '/', '%', '<<=', '>>=', '**', '&', '^', '|'))
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'receiver')
              ->back('first');
@@ -60,8 +60,7 @@ class CouldUseShortAssignation extends Analyzer\Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIs('Concatenation')
-             ->outIs('CONCAT')
-             ->is('rank', 0)
+             ->outWithRank('CONCAT', 0)
              ->samePropertyAs('fullcode', 'receiver')
              ->back('first');
         $this->prepareQuery();

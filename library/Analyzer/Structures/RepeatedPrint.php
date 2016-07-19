@@ -29,7 +29,7 @@ class RepeatedPrint extends Analyzer\Analyzer {
     public function analyze() {
         // first one in sequence
         $this->atomIs('Functioncall')
-            // echo and print are processed as identical
+            // echo and print are considered identical
              ->tokenIs(array('T_PRINT', 'T_ECHO'))
              ->is('rank', 0)
              ->nextSibling()

@@ -27,40 +27,28 @@ use Analyzer;
 
 class JoinFile extends Analyzer\Analyzer {
     public function analyze() {
-        //implode( '', file($file) );
-        $this->atomIs('Functioncall')
-             ->hasNoIn(array('METHOD', 'NEW'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\join', '\\implode'))
+        $this->atomFunctionIs(array('\\join', '\\implode'))
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 1)
-             ->atomIs('Functioncall')
-             ->fullnspath('\\file')
+             ->outWithRank('ARGUMENT', 1)
+             ->functioncallIs('\\file')
              ->back('first');
         $this->prepareQuery();
 
         //$lines = file($file);
         //echo implode('',$lines);
-        $this->atomIs('Functioncall')
-             ->hasNoIn(array('METHOD', 'NEW'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\file')
+        $this->atomFunctionIs('\\file')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'variable')
              ->inIs('LEFT')
-             ->NextSibling()
+             ->nextSibling()
              ->atomInside('Functioncall')
-             ->hasNoIn(array('METHOD', 'NEW'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\join', '\\implode'))
+             ->functioncallIs(array('\\join', '\\implode'))
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 1)
-             ->savePropertyAs('fullcode', 'variable')
+             ->outWithRank('ARGUMENT', 1)
+             ->samePropertyAs('fullcode', 'variable')
              ->back('first');
         $this->prepareQuery();
 

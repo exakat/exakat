@@ -1,8 +1,6 @@
 <?php
-function B(C $b){
-		 [];
-		$c = $b->D();
-		$this->E = [];
-	}
-	
-array(1);
+
+return [];
+return [1];
+return [2, 3,4];
+return [[],[],[]];

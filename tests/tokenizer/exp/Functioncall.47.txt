@@ -1,35 +1,3 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        (
-        Label : CODE
-          &&
-          Label : LEFT
-            $b
-          Label : RIGHT
-            !
-            Label : NOT
-              c
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  $d
-      Label : ELSE
-        ''
-      Label : THEN
-        ->
-        Label : OBJECT
-          current
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $e
-        Label : PROPERTY
-          f
+(
+Label : ARGUMENT
+  $d

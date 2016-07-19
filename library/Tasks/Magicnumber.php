@@ -40,14 +40,10 @@ class Magicnumber extends Tasks {
         }
         $sqlite = new \SQLite3($sqliteFile);
 
-        $types = array('Integer', 'String', 'Float');
+        $types = array('Integer', 'String', 'Real');
 
         foreach( $types as $type) {
-            $query = <<<SQL
-m = [:];
-g.idx('atoms')[['atom':'$type']].groupCount(m){it.code}.iterate();
-m.findAll()
-SQL;
+            $query = 'g.V().hasLabel("'.$type.'").groupCount("a").by("code").cap("a");';
             $res = $this->gremlin->query($query);
             $res = $res->results;
 
@@ -55,10 +51,7 @@ SQL;
             $stmt = $sqlite->prepare('INSERT INTO '.$type.' (value, count) VALUES(:value, :count)');
 
             $total = 0;
-            foreach($res as $v) {
-                preg_match('/^(.*)=(\d+)/is', $v, $r);
-                $value = $r[1];
-                $count = $r[2];
+            foreach($res[0] as $value => $count) {
                 $stmt->bindValue(':value', $value, SQLITE3_TEXT);
                 $stmt->bindValue(':count', $count, SQLITE3_INTEGER);
                 $stmt->execute();
@@ -68,7 +61,7 @@ SQL;
         }
 
         // export big arrays (more than 10)
-        $res = $this->gremlin->query("g.V.has('token', 'T_ARRAY').filter{ it.out('ARGUMENTS').out('ARGUMENT').count() > 10}.fullcode");
+        $res = $this->gremlin->query('g.V().hasLabel("Functioncall").has("token", "T_ARRAY").where( __.out("ARGUMENTS").has( "count", is(gte(10))) ).values("fullcode")');
         $res = $res->results;
         
         $outputFile = fopen($config->projects_root.'/projects/'.$config->project.'/bigArrays.txt', 'w+');
@@ -76,6 +69,7 @@ SQL;
             fwrite($outputFile, $v."\n");
         }
         fclose($outputFile);
+        display( "array : ".count($res)."\n");
     }
 }
 

@@ -30,14 +30,21 @@ class DynamicPropertyCall extends Analyzer\Analyzer {
         $this->atomIs('Property')
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
-             ->atomIs(array('Variable', 'Array'))
+             ->atomIs(array('Variable', 'Array', 'Block'))
              ->back('first');
         $this->prepareQuery();
 
+        // Classe::$$a
         $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE')
-             ->atomIs(array('Variable', 'Array'))
+             ->tokenIs('T_DOLLAR')
+             ->back('first');
+        $this->prepareQuery();
+
+        // Classe::{$a}
+        $this->atomIs('Staticproperty')
+             ->outIs('PROPERTY')
+             ->atomIs('Block')
              ->back('first');
         $this->prepareQuery();
     }

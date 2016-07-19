@@ -1,12 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    include_once
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
-          "literal"
+)
+Label : ARGUMENT
+  "literal"
+  Label : CODE
+    "literal"

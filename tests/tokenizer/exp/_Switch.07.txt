@@ -1,28 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CASE
-          1
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $x
-            Label : RIGHT
-              1
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $y
-            Label : RIGHT
-              3
-    Label : NAME
-      $x
+=
+Label : LEFT
+  $x
+Label : RIGHT
+  1

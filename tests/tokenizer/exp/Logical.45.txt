@@ -1,84 +1,31 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
+(
+Label : ARGUMENT
+  $c
+  Label : TYPEHINT
+    b
+Label : ARGUMENT
+  $d
+  Label : TYPEHINT
+    array
+Label : ARGUMENT
+  $e
+  Label : DEFAULT
+    [
     Label : ARGUMENTS
-      Arguments
+      [
       Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          b
-        Label : VARIABLE
-          $c
+        1
       Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          array
-        Label : VARIABLE
-          $d
+        2
       Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          array
-        Label : VARIABLE
-          =
+        4
+        Label : CODE
+          &
           Label : LEFT
-            $e
+            3
           Label : RIGHT
-            [
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                2
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  &
-                  Label : LEFT
-                    3
-                  Label : RIGHT
-                    4
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        for
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $i
-            Label : RIGHT
-              &
-              Label : LEFT
-                f
-              Label : RIGHT
-                $g
-        Label : FINAL
-          <
-          Label : LEFT
-            $i
-          Label : RIGHT
-            10
-        Label : INCREMENT
-          <
-          Label : LEFT
-            $i
-          Label : RIGHT
-            count
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                $a
-        Label : INIT
-          =
-          Label : LEFT
-            $i
-          Label : RIGHT
-            1
-    Label : NAME
-      a
+            4
+    Label : VARIABLE
+      [
+  Label : TYPEHINT
+    array

@@ -28,7 +28,8 @@ use Analyzer;
 class Email extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('String')
-             ->regex('code', '[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})');
+             ->hasNoOut('CONCAT')
+             ->regexIs('code', '[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})');
         $this->prepareQuery();
     }
 }

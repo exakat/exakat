@@ -1,29 +1,5 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    ;
-    Label : ELEMENT
-      class
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          use
-          Label : BLOCK
-            ;
-            Label : ELEMENT
-              as
-              Label : AS
-                E
-              Label : NAME
-                D
-          Label : USE
-            C
-      Label : NAME
-        B
-    Label : ELEMENT
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
+as
+Label : AS
+  E
+Label : NAME
+  D

@@ -1,63 +1,7 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ->
-        Label : METHOD
-          f
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $g
-        Label : OBJECT
-          $e
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            ->
-            Label : METHOD
-              i
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  'j'
-            Label : OBJECT
-              $h
-    Label : FINAL
-      <
-      Label : LEFT
-        $i
-      Label : RIGHT
-        $n
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $i
-    Label : INIT
-      Arguments
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $i
-        Label : RIGHT
-          0
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $n
-        Label : RIGHT
-          count
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $c
-              Label : PROPERTY
-                d
+(
+Label : ARGUMENT
+  ->
+  Label : OBJECT
+    $c
+  Label : PROPERTY
+    d

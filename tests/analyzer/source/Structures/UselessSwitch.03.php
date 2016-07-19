@@ -2,13 +2,13 @@
 switch ($a0->d) {
 }
 
-switch ($a1) {
+switch ($a2) {
     case 1:
     default: 
         break;
 }
 
-switch ($a2) {
+switch ($a3) {
     case 3:
     default: 
         break;
@@ -16,7 +16,7 @@ switch ($a2) {
         break;
 }
 
-switch ($a3) {
+switch ($a4) {
     case 1: 
         break;
     default: 

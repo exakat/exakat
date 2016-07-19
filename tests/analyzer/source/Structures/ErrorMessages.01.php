@@ -20,11 +20,11 @@ new a();
 
 throw new myException('Exception myException');
 
-throw new \A\Exception('Exception myException');
+throw new \A\Exception('Exception A myException');
 
 
 
 
 new Stdclass();
 
-throw new $myVariableException('Exception myException');
+throw new $myVariableException('Exception myException via variable');

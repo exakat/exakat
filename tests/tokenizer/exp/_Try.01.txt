@@ -1,16 +1,9 @@
-<?php
-
-Label : CODE
-  ;
+catch
+Label : BLOCK
+  {}
   Label : ELEMENT
-    try
-    Label : CATCH
-      catch
-      Label : CLASS
-        Exception
-      Label : CODE
-        void
-      Label : VARIABLE
-        $e
-    Label : CODE
-      void
+    Void
+Label : CLASS
+  Exception
+Label : VARIABLE
+  $e

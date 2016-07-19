@@ -21,11 +21,15 @@ if (!defined('x1')) {
 }
 
 class z {
-function envelope() {
-    if (!defined('Y')) { 
-        function conditionedByY() {}
+    function envelope() {
+        if (!defined('Y')) { 
+            function conditionedByY() {}
+        }
+
+        if (!defined('YClosure')) { 
+            function ($closure) {};
+        }
     }
-}
 }
 
 ?>

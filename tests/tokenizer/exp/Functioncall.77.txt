@@ -1,81 +1,17 @@
-;
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      if
-      Label : CONDITION
+echo
+Label : ARGUMENT
+  ->
+  Label : METHOD
+    D
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
         $a
-      Label : THEN
-        ;
-        Label : ELEMENT
-          B
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                D
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    $a
-              Label : OBJECT
-                [
-                Label : INDEX
-                  'C'
-                Label : VARIABLE
-                  $b
-        Label : ELEMENT
-          E
-    Label : ELEMENT
-      F
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          ->
-          Label : METHOD
-            G
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                ->
-                Label : METHOD
-                  D
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
-                      array
-                      Label : ARGUMENTS
-                        
-                        Label : ARGUMENT
-                          void
-                    Label : ARGUMENT
-                      $d
-                Label : OBJECT
-                  [
-                  Label : INDEX
-                    'C'
-                  Label : VARIABLE
-                    $b
-          Label : OBJECT
-            $b
-    Label : ELEMENT
-      void
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        $a
-      Label : THEN
-        ;
-        Label : ELEMENT
-          J
-Label : ELEMENT
-  K
+    Label : NAME
+      D
+  Label : OBJECT
+    [
+    Label : INDEX
+      'C'
+    Label : VARIABLE
+      $b

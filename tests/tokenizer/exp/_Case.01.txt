@@ -1,24 +1,13 @@
-<?php
-
+case '1' :  /**/  
+Label : CASE
+  '1'
 Label : CODE
   ;
   Label : ELEMENT
-    switch
-    Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CASE
-          '1'
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            ?
-            Label : CONDITION
-              $x
-            Label : ELSE
-              'b'
-            Label : THEN
-              'a'
-    Label : NAME
+    ?
+    Label : CONDITION
       $x
+    Label : ELSE
+      'b'
+    Label : THEN
+      'a'

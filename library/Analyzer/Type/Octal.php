@@ -28,7 +28,7 @@ use Analyzer;
 class Octal extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Integer')
-             ->regex('code', '^-?0[0-9]+\\$');
+             ->regexIs('code', '^[-+]*0[0-9]+\\$');
         $this->prepareQuery();
     }
 }

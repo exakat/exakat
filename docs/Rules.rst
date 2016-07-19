@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 30 May 2016 11:58:20 +0000
-.. comment: Generation hash : 805ae632f1fa38dd1f4e340d577faef011d8d367
+.. comment: Generation date : Tue, 19 Jul 2016 10:30:49 +0000
+.. comment: Generation hash : 7c8e610c038cc0f063938da825d0f1f9b177d202
 
 
 .. _$http\_raw\_post\_data:
@@ -682,24 +682,6 @@ This also applies to methodcalls, static or not.
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
-
-
-
-.. _case-after-default:
-
-Case After Default
-##################
-
-
-Default must be the last case in the switch. Any case after 'default' will be unreachable.
-
-+--------------+-----------------------------+
-| Command Line | Structures/CaseAfterDefault |
-+--------------+-----------------------------+
-| clearPHP     |                             |
-+--------------+-----------------------------+
-| Analyzers    | :ref:`Analyze`              |
-+--------------+-----------------------------+
 
 
 
@@ -1858,24 +1840,6 @@ Usage of the \*\* operator or \*\*=, to make exponents.
 
 
 
-.. _followed-injections:
-
-Followed injections
-###################
-
-
-There is a link between those function and some of the sensitive PHP functions. This may lead to Injections of various kind.
-
-+--------------+--------------------------+
-| Command Line | Security/RemoteInjection |
-+--------------+--------------------------+
-| clearPHP     |                          |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Security`          |
-+--------------+--------------------------+
-
-
-
 .. _for-using-functioncall:
 
 For Using Functioncall
@@ -2386,6 +2350,62 @@ Iffectations are a way to do both a test and an affectations. They may also be t
 
 .. _implement-is-for-interface:
 
+Identical Conditions
+####################
+
+
+The following logical expressions contain members that are identical. For example, $a \|\| $a may be reduced into $a alone.
+
++--------------+--------------------------------+
+| Command Line | Structures/IdenticalConditions |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
+
+
+.. _if-with-same-conditions:
+
+If With Same Conditions
+#######################
+
+
+Successive If / then structures that have the same condition may be either merged or have one of the condition changed.
+
++--------------+---------------------------------+
+| Command Line | Structures/IfWithSameConditions |
++--------------+---------------------------------+
+| clearPHP     |                                 |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
+
+
+.. _iffectations:
+
+Iffectations
+############
+
+
+Affectations that appears in a if() conditions, such as if ($x = mysql\_connect(...)).
+
+Iffectations are a way to do both a test and an affectations. They may also be typos, such as if ($x = 3) { ... }, leading to a constant condition.
+
++--------------+------------------------+
+| Command Line | Structures/Iffectation |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
+
+.. _implement-is-for-interface:
+
 Implement Is For Interface
 ##########################
 
@@ -2448,7 +2468,7 @@ Inconsistant Closing Tag
 ########################
 
 
-Project usually chose between always closing a PHP script with the final ?> tag, or never closing it. The second is recommended to avoid leaving some whitespaces at the end of the script, and, thus, leading to the infamous 'Headers already sent' error. 
+Project usually chose between always closing a PHP script (such as &gt;?php xxx(); ?&lt;) or never closing it (&gt;?php xxx(); ). The second is recommended to avoid leaving some whitespaces at the end of the script, and, thus, leading to the infamous 'Headers already sent' error. 
 
 One way or another, if the project has a vast majority of either case, it will report the other here, so as to make things homogenous. If the project appears undecided about this issue, nothing will be reported.
 
@@ -2876,6 +2896,60 @@ Setting the property in the constructor (or in a factory), makes the class easie
 
 
 
+.. _make-one-call:
+
+Make One Call
+#############
+
+
+When preg\_replace\_callback() is called several times in a row on the same string, it is faster to merge all those using preg\_replace\_callback\_array(), which takes several patterns and callbacks in the the same arguments.
+
+.. code-block:: php
+
+   <?php
+   $subject = 'Aaaaaa Bbb';
+   
+   $result = preg\_replace\_callback\_array('~[a]+~i', function ($match) {
+               echo strlen($match[0]), ' matches for a found', PHP\_EOL;
+           }, $subject);
+   
+   $result = preg\_replace\_callback\_array('~[b]+~i', function ($match) {
+               echo strlen($match[0]), ' matches for b found', PHP\_EOL;
+           }, $subject);
+   
+   ?>
+
+
+This may be rewritten as : 
+
+.. code-block:: php
+
+   <?php
+   $subject = 'Aaaaaa Bbb';
+   
+   preg\_replace\_callback\_array(
+       [
+           '~[a]+~i' => function ($match) {
+               echo strlen($match[0]), ' matches for a found', PHP\_EOL;
+           },
+           '~[b]+~i' => function ($match) {
+               echo strlen($match[0]), ' matches for b found', PHP\_EOL;
+           }
+       ],
+       $subject
+   );
+   ?>
+
++--------------+--------------------------+
+| Command Line | Performances/MakeOneCall |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Performances`      |
++--------------+--------------------------+
+
+
+
 .. _malformed-octal:
 
 Malformed Octal
@@ -3099,28 +3173,6 @@ Those methods are expected to return a value that will be used later. Without re
 +--------------+----------------------+
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
-
-
-
-.. _namespace-with-fully-qualified-name:
-
-Namespace With Fully Qualified Name
-###################################
-
-
-The 'namespace' keyword has actually 2 usages : one is for declaring namespace, such as namespace A\B\C, use as first instruction in the script.
-
-It may also mean 'current namespace' : for example, namespace\A\B\C represents the constant C, in the sub-namespace A\B of the current namespace (which is whatever you want).
-
-The PHP compiler makes no difference between 'namespace \A\B\C', and 'namespace\A\B\C'. In each case, it will try to locate the constant C in the namespace \A\B, and will generate a fatal error if it can't find it.
-
-+--------------+------------------------------------+
-| Command Line | Namespaces/NamespaceFullyQualified |
-+--------------+------------------------------------+
-| clearPHP     |                                    |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`                     |
-+--------------+------------------------------------+
 
 
 
@@ -3695,6 +3747,44 @@ It is recommended to make index a real string (with ' or "), or to define the co
 | clearPHP     |                         |
 +--------------+-------------------------+
 | Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
+
+.. _non-lowercase-keywords:
+
+Non-lowercase Keywords
+######################
+
+
+Usual convention is to write PHP keywords (like as, foreach, switch, case, break, etc.) all in lowercase. 
+
+PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many.
+
++--------------+------------------------------------------------+
+| Command Line | Php/UpperCaseKeyword                           |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
+.. _nonce-creation:
+
+Nonce Creation
+##############
+
+
+Mark the creation of nonce by Wordpress
+
++--------------+-------------------------+
+| Command Line | Wordpress/NonceCreation |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Wordpress`        |
 +--------------+-------------------------+
 
 
@@ -4679,7 +4769,7 @@ Write :
    ?>
 
 
-Don\'t write :
+Don't write :  
 
 .. code-block:: php
 
@@ -5537,7 +5627,7 @@ Timestamp Difference
 
 time() and microtime() shouldn't be used to calculate duration. 
 
-time() and microtime() are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announced by IERS.
+time() and microtime are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
 
 When the difference may be rounded to a larger time unit (rounding the difference to days, or several hours), the variation may be ignored safely.
 

@@ -40,7 +40,7 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->outIs('NAME')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->inIs('NAME');
         $this->prepareQuery();
 
@@ -51,7 +51,7 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
              ->atomIs('Const')
              ->outIs('CONST')
              ->outIs('NAME')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->inIs('NAME');
         $this->prepareQuery();
 
@@ -62,7 +62,7 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
              ->atomIs('Visibility')
              ->outIs('CONST')
              ->outIs('NAME')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->inIs('NAME');
         $this->prepareQuery();
 
@@ -72,14 +72,14 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
         // Static Constant
         $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->back('first');
         $this->prepareQuery();
 
         // Static Methodcall
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->back('first');
         $this->prepareQuery();
 
@@ -87,7 +87,7 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
         $keywordsVariables = array_map(function ($x) { return '$'.$x; }, $keywords);
         $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
-             ->code($keywordsVariables)
+             ->codeIs($keywordsVariables)
              ->back('first');
         $this->prepareQuery();
 
@@ -97,17 +97,16 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
         // Methodcall 
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->back('first');
         $this->prepareQuery();
 
         // Property
         $this->atomIs('Property')
              ->outIs('PROPERTY')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 

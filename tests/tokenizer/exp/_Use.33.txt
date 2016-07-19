@@ -1,34 +1,3 @@
-<?php
-
-Label : CODE
-  namespace
-  Label : BLOCK
-    ;
-    Label : ELEMENT
-      use
-      Label : USE
-        A
-      Label : FUNCTION
-        fa
-      Label : USE
-        \
-        Label : SUBNAME
-          B
-        Label : SUBNAME
-          D
-      Label : FUNCTION
-        fb
-      Label : CONST
-        ca
-      Label : FUNCTION
-        fc
-      Label : CONST
-        cd
-    Label : ELEMENT
-      foo
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          $a
-  Label : NAMESPACE
-    X
+(
+Label : ARGUMENT
+  $a

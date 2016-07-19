@@ -29,10 +29,12 @@ class NoParenthesisForLanguageConstruct extends Analyzer\Analyzer {
     public function analyze() {
         // inclusions
         $this->atomIs('Include')
+             ->inIs('NAME')
+             ->_as('results')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
 
         // throw

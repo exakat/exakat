@@ -1,10 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    Concatenation
-    Label : CONCAT
-      '1'
-    Label : CONCAT
-      $x
+.
+Label : CONCAT
+  '1'
+Label : CONCAT
+  $x

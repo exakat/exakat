@@ -1,24 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      ::
-      Label : CLASS
-        $
-        Label : NAME
-          Concatenation
-          Label : CONCAT
-            $a
-          Label : CONCAT
-            "_1"
-      Label : METHOD
-        foo
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
+(
+Label : ARGUMENT
+  Void

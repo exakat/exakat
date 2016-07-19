@@ -45,37 +45,40 @@ class UnknownPregOption extends Analyzer\Analyzer {
         // preg_match with a string
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->raw(' sideEffect{ delimiter = it.noDelimiter[0]; }')
+             ->raw('sideEffect{ delimiter = it.get().value("noDelimiter").substring(0, 1); }')
              ->raw($prepareDelimiters)
-             ->regex('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.')\\$')
+             ->regexIs('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.')\\$')
              ->back('first');
         $this->prepareQuery();
 
         // With an interpolated string "a $x b"
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_QUOTE')
-             ->hasOut('CONTAINS')
-             ->raw(' sideEffect{ delimiter = it.out("CONTAINS").out("CONCAT").has("rank", 0).next().noDelimiter[0]; }')
+             ->hasOut('CONCAT')
+             ->outWithRank('CONCAT', 0)
+             ->atomIs('String')
+             ->raw('sideEffect{ delimiter = it.get().value("noDelimiter").substring(0, 1); }')
+             ->inIs('CONCAT')
              ->raw($prepareDelimiters)
-             ->regex('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
              ->back('first');
         $this->prepareQuery();
 
         // with a concatenation
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
-             ->raw(' sideEffect{ delimiter = it.out("CONCAT").has("rank", 0).next().noDelimiter[0]; }')
+             ->outWithRank('CONCAT', 0)
+             ->atomIs('String')
+             ->raw('sideEffect{ delimiter = it.get().value("noDelimiter").substring(0, 1); }')
+             ->inIs('CONCAT')
              ->raw($prepareDelimiters)
-             ->regex('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
              ->back('first');
         $this->prepareQuery();
     }

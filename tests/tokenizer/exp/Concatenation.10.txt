@@ -1,14 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    header
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        Concatenation
-        Label : CONCAT
-          'a'
-        Label : CONCAT
-          'b'
+(
+Label : ARGUMENT
+  .
+  Label : CONCAT
+    'a'
+  Label : CONCAT
+    'b'

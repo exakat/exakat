@@ -1,20 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      [
-      Label : INDEX
-        'b'
-      Label : VARIABLE
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        while
-        Label : BLOCK
-          void
-        Label : CONDITION
-          $x
+[
+Label : INDEX
+  'b'
+Label : VARIABLE
+  $a

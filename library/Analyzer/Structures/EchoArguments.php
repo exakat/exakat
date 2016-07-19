@@ -27,24 +27,18 @@ use Analyzer;
 
 class EchoArguments extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_ECHO', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\echo')
+        $this->atomFunctionIs('\\echo')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_ECHO', 'T_NS_SEPARATOR'))
-             ->fullnspath('\\echo')
+        $this->atomFunctionIs('\\echo')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('String')
-             ->hasOut('CONTAINS')
+             ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
     }

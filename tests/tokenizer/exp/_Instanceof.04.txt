@@ -1,18 +1,22 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/_Instanceof.04.php
+Label : FILE
   ;
   Label : ELEMENT
-    instanceof
-    Label : CLASS
-      \
-      Label : SUBNAME
-        A
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        D
-    Label : VARIABLE
-      $x
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        instanceof
+        Label : CLASS
+          \
+          Label : SUBNAME
+            A
+          Label : SUBNAME
+            B
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            D
+        Label : VARIABLE
+          $x

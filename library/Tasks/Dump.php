@@ -77,11 +77,12 @@ SQL;
         $themes = array();
         if ($config->thema === null) {
             $toProcess = $this->themes;
+            // ???? 
         } else {
-            $toProcess = array($config->thema);
+            $toProcess = $config->thema;
         }
         foreach($toProcess as $thema) {
-            display('Processing thema "'.(is_array($thema) ? join(', ', $thema) : $thema).'"');
+            display('Processing thema : '.(is_array($thema) ? join(', ', $thema) : $thema));
             $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
 
             $themes[] = $themaClasses;
@@ -153,41 +154,26 @@ SQL;
         $this->stmtResults->bindValue(':class', $class, SQLITE3_TEXT);
         $analyzerName = 'Analyzer\\\\'.str_replace('/', '\\\\', $class);
         
+        $linksDown = \Tokenizer\Token::linksAsList();
+        
         $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzerName']].out
-.sideEffect{
-    // file
-    rnamespace = 'Global';
-    rclass = 'Global';
-    rfunction = 'Global';
-    
-    if (it.token == 'T_FILENAME') {
-        m = ['fullcode':it.fullcode, 'file':it.fullcode, 'line':0, 'namespace':'', 'class':'', 'function':'' ];
-    } else {
-        // Support for closure, traits or interfaces? 
-        it.in.loop(1){true}{it.object.token in ['T_FILENAME', 'T_NAMESPACE', 'T_CLASS', 'T_TRAIT', 'T_INTERFACE', 'T_FUNCTION']}.each{
-            if (it.token == 'T_FILENAME') {
-                file = it.fullcode;
-            } else if (it.token == 'T_NAMESPACE') {
-                rnamespace = it.out('NAMESPACE').next().code;
-            } else if (it.token in ['T_CLASS', 'T_INTERFACE', 'T_TRAIT']) {
-                if (it.out('NAME').any()) {
-                    // class, interface and trait all have names.
-                    rclass = it.fullnspath;
-                } else {
-                    rfunction = 'Anonymous class';
-                }
-            } else if (it.token == 'T_FUNCTION') {
-                if (it.out('NAME').any()) {
-                    rfunction = it.out('NAME').next().code;
-                } else {
-                    rfunction = 'Closure';
-                }
-            }
-        }
-        m = ['fullcode':it.fullcode, 'file':file, 'line':it.line, 'namespace':rnamespace, 'class':rclass, 'function':rfunction ];
-    }
-}.transform{ m; }
+g.V().hasLabel("Analysis").has("analyzer", "{$analyzerName}").out('ANALYZED')
+.sideEffect{ line = it.get().value('line');
+             fullcode = it.get().value('fullcode');
+             file='None'; 
+             theFunction = 'None'; 
+             theClass='None'; 
+             theNamespace='None'; 
+             }
+.sideEffect{ line = it.get().value('line'); }
+.until( hasLabel('File') ).repeat( 
+    __.in($linksDown)
+      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
+       )
+.sideEffect{  file = it.get().value('fullcode');}
+
+.map{ ['fullcode':fullcode, 'file':file, 'line':line, 'namespace':theNamespace, 'class':theClass, 'function':theFunction ];}
 
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -246,14 +232,8 @@ SQL;
         $insert = $sqlite->prepare($sqlQuery);
 
         
-        foreach(\Tokenizer\Token::$types as $class) {
-            $tokenClass = "\\Tokenizer\\$class";
-            if (!isset($tokenClass::$atom)) {
-                // Some classes have no such property
-                continue;
-            }
-            $atom = $tokenClass::$atom;
-            $query = "g.idx('atoms')[['atom':'$atom']].count()";
+        foreach(\Tokenizer\Token::ATOMS as $atom) {
+            $query = 'g.V().hasLabel("'.$atom.'").count()';
             $res = $this->gremlin->query($query);
             if (!is_object($res) || !isset($res->results)) {
                 $this->log->log( "Couldn't run the query and get a result : \n" .
@@ -292,10 +272,7 @@ SQL;
         $stmt = $sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
-g.idx("atoms")[["atom":"Namespace"]]
-    .transform{ 
-    x = ['name': it.out('NAMESPACE').next().fullcode];
-}
+g.V().hasLabel("Namespace").out("NAME").map{ ['name' : it.get().value("fullcode")] };
 GREMLIN
 ;
         $res = $this->gremlin->query($query);
@@ -343,16 +320,21 @@ SQL;
         $stmt = $sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
-g.idx("atoms")[["atom":"Class"]].transform{ 
-    x = ['fullnspath':it.fullnspath,
-         'name': it.out('NAME').next().code,
-         'abstract':it.out("ABSTRACT").any(),
-         'final':it.out("FINAL").any(),
-         'extends':it.out("EXTENDS").fullnspath.toList(),
-         'implements':it.out("IMPLEMENTS").fullnspath.toList(),
-         'uses':it.out("BLOCK").out('ELEMENT').has('atom', 'Use').out('USE').fullnspath.toList()
+g.V().hasLabel("Class")
+.sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ useList = []; }.where(__.out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.map{ 
+        ['fullnspath':it.get().value("fullnspath"),
+         'name': it.get().vertices(OUT, "NAME").next().value("code"),
+         'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
+         'final':it.get().vertices(OUT, "FINAL").any(),
+         'extends':extendList,
+         'implements':implementList,
+         'uses':useList
          ];
 }
+
 GREMLIN
 ;
         $res = $this->gremlin->query($query);
@@ -411,11 +393,14 @@ SQL;
         $stmt = $sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
-g.idx("atoms")[["atom":"Interface"]].transform{ 
-    x = ['fullnspath':it.fullnspath,
-         'name': it.out('NAME').next().code,
-         'extends':it.out("EXTENDS").fullnspath.toList(),
-         'implements':it.out("IMPLEMENTS").fullnspath.toList()
+g.V().hasLabel("Interface")
+.sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
+.map{ 
+        ['fullnspath':it.get().value("fullnspath"),
+         'name': it.get().vertices(OUT, "NAME").next().value("code"),
+         'extends':extendList,
+         'implements':implementList
          ];
 }
 GREMLIN
@@ -464,11 +449,15 @@ SQL;
         $stmt = $sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
-g.idx("atoms")[["atom":"Trait"]].transform{ 
-    x = ['fullnspath':it.fullnspath,
-         'name': it.out('NAME').next().code,
+g.V().hasLabel("Trait")
+.sideEffect{ useList = []; }.where(__.out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.map{ 
+        ['fullnspath':it.get().value("fullnspath"),
+         'name': it.get().vertices(OUT, "NAME").next().value("code"),
+         'uses':useList
          ];
 }
+
 GREMLIN
 ;
         $res = $this->gremlin->query($query);
@@ -574,22 +563,23 @@ SQL;
         $stmt = $sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
-g.idx("atoms")[["atom":"Function"]]
-    .filter{ it.in("ELEMENT").in("BLOCK").filter{ it.atom in ["Class", "Interface", "Trait"]}.sideEffect{ classe = it.fullnspath}.any()}
-    .transform{ 
-    x = ['name': it.out('NAME').next().fullcode + '( ' + it.out('ARGUMENTS').next().fullcode + ' )',
-         'abstract':it.out("ABSTRACT").any(),
-         'final':it.out("FINAL").any(),
-         'static':it.out("STATIC").any(),
+g.V().hasLabel("Function")
+.where( __.out("NAME").hasLabel("Void").count().is(eq(0)) )
+.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface", "Trait").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.filter{ classe != '';} // Removes functions, keeps methods
+.map{ 
+    x = ['name': it.get().value("fullcode"),
+         'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
+         'final':it.get().vertices(OUT, "FINAL").any(),
+         'static':it.get().vertices(OUT, "STATIC").any(),
 
-         'public':it.out("PUBLIC").any(),
-         'protected':it.out("PROTECTED").any(),
-         'private':it.out("PRIVATE").any(),
-         
+         'public':it.get().vertices(OUT, "PUBLIC").any(),
+         'protected':it.get().vertices(OUT, "PROTECTED").any(),
+         'private':it.get().vertices(OUT, "PRIVATE").any(),         
          'class': classe
-
          ];
 }
+
 GREMLIN
 ;
         $res = $this->gremlin->query($query);
@@ -608,7 +598,7 @@ GREMLIN
             }
 
             $stmt->bindValue(':method',    $row->name,                   SQLITE3_TEXT);
-            $stmt->bindValue(':citId',   $citId[$row->class],          SQLITE3_INTEGER);
+            $stmt->bindValue(':citId',     $citId[$row->class],          SQLITE3_INTEGER);
             $stmt->bindValue(':static',    (int) $row->static,           SQLITE3_INTEGER);
             $stmt->bindValue(':final',     (int) $row->final,            SQLITE3_INTEGER);
             $stmt->bindValue(':abstract',  (int) $row->abstract,         SQLITE3_INTEGER);
@@ -637,24 +627,30 @@ SQL;
 
         $query = <<<GREMLIN
 
-g.idx("atoms")[["atom":"Visibility"]]
-    .filter{ it.in("ELEMENT").in("BLOCK").filter{ it.atom in ["Class", "Trait"]}.sideEffect{ classe = it.fullnspath}.any()}
-    .transform{ 
-    if (it.out('DEFINE').has('atom', 'Assignation').any()) { 
-        value = it.out('DEFINE').out('RIGHT').next().fullcode; 
-        name = it.out('DEFINE').next().propertyname;
+g.V().hasLabel("Ppp")
+.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.filter{ classe != '';} // Removes functions, keeps methods
+.out('PPP')
+.map{ 
+    if (it.get().label() == 'Variable') { 
+        name = it.get().value("code");
+        v = ''; 
     } else { 
-        value = ''; 
-        name = it.out('DEFINE').next().propertyname;
+        name = it.get().vertices(OUT, 'LEFT').next().value("code");
+        v = it.get().vertices(OUT, 'RIGHT').next().value("code");
     }
     x = ['name': name,
          'value': value,
          'static':it.out("STATIC").any(),
 
-         'public':it.out("PUBLIC").any(),
-         'protected':it.out("PROTECTED").any(),
-         'private':it.out("PRIVATE").any(),
-         'var':it.out("VAR").any(),
+    x = ['name': name,
+         'value': v,
+         'static':it.get().vertices(OUT, "STATIC").any(),
+
+         'public':it.get().vertices(OUT, "PUBLIC").any(),
+         'protected':it.get().vertices(OUT, "PROTECTED").any(),
+         'private':it.get().vertices(OUT, "PRIVATE").any(),
+         'var':it.get().vertices(OUT, "VAR").any(),
          
          'class': classe
 
@@ -679,7 +675,7 @@ GREMLIN
             }
 
             $stmt->bindValue(':property',  $row->name,                   SQLITE3_TEXT);
-            $stmt->bindValue(':citId',   $citId[$row->class],      SQLITE3_INTEGER);
+            $stmt->bindValue(':citId',     $citId[$row->class],      SQLITE3_INTEGER);
             $stmt->bindValue(':value',     $row->value,                  SQLITE3_TEXT);
             $stmt->bindValue(':static',    (int) $row->static,           SQLITE3_INTEGER);
             $stmt->bindValue(':visibility',$visibility,                  SQLITE3_TEXT);
@@ -704,16 +700,18 @@ SQL;
         $stmt = $sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
-g.idx("atoms")[["atom":"Const"]]
-    .filter{ it.in("ELEMENT").in("BLOCK").filter{ it.atom in ["Class", "Interface"]}.sideEffect{ classe = it.fullnspath}.any()}
-    .transform{ 
-    x = ['name': it.out('CONST').out('LEFT').next().code,
-         'value': it.out('CONST').out('RIGHT').next().code,
+g.V().hasLabel("Const")
+.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.filter{ classe != '';} // Removes functions, keeps methods
+.out('CONST')
+.map{ 
+    x = ['name': it.get().vertices(OUT, 'LEFT').next().value("code"),
+         'value': it.get().vertices(OUT, 'RIGHT').next().value("code"),
          
          'class': classe
-
          ];
 }
+
 GREMLIN
 ;
         $res = $this->gremlin->query($query);

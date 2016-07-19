@@ -1,28 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            A
-          Label : SUBNAME
-            B
-        Label : METHOD
-          C
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $D
-    Label : THEN
-      ;
-      Label : ELEMENT
-        throw
-        Label : THROW
-          R
+(
+Label : ARGUMENT
+  $D

@@ -1,5 +1,10 @@
 <?php
 
-namespace A\B\A {};
+namespace A ;
+
+
+namespace B ;
+
+namespace C\D\R ;
 
 ?>

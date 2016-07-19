@@ -1,17 +1,17 @@
 <?php
 
 $expected     = array('public function interfaceimethod( ) { /**/ } ', 
-                      'public function INTERFACEIMETHOD( ) { /**/ } ', 
+                      'PUBLIC FUNCTION INTERFACEIMETHOD( ) { /**/ } ', 
 
                       'public function offsetset($offset, $value) { /**/ } ', 
                       'public function offsetget($offset) { /**/ } ', 
                       'public function offsetunset($offset) { /**/ } ', 
                       'public function offsetexists($offset) { /**/ } ', 
 
-                      'public function OFFSETSET($OFFSETXX, $VALUE) { /**/ } ', 
-                      'public function OFFSETGET($OFFSETXX) { /**/ } ', 
-                      'public function OFFSETEXISTS($OFFSETXX) { /**/ } ', 
-                      'public function OFFSETUNSET($OFFSETXX) { /**/ } ' );
+                      'PUBLIC FUNCTION OFFSETSET($OFFSETXX, $VALUE) { /**/ } ', 
+                      'PUBLIC FUNCTION OFFSETGET($OFFSETXX) { /**/ } ', 
+                      'PUBLIC FUNCTION OFFSETEXISTS($OFFSETXX) { /**/ } ', 
+                      'PUBLIC FUNCTION OFFSETUNSET($OFFSETXX) { /**/ } ' );
 
 $expected_not = array('public function unusedMethody( ) { /**/ } ',
                       'public function UNUSEDMETHOD( ) { /**/ } ',

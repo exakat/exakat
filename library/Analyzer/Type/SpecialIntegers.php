@@ -30,7 +30,7 @@ class SpecialIntegers extends Analyzer\Analyzer {
         $codes = $this->loadIni('SpecialIntegers.ini', 'code');
         
         $this->atomIs('Integer')
-             ->code(array_keys($codes));
+             ->codeIs(array_keys($codes));
         $this->prepareQuery();
     }
 }

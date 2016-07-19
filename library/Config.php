@@ -75,7 +75,6 @@ class Config {
                                             'thema'          => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70','CompatibilityPHP71',
                                                                       'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                                                                       'Analyze'),
-
                                             'report'         => 'Premier',
                                             'format'         => 'Text',
                                             'file'           => 'stdout',
@@ -130,7 +129,7 @@ class Config {
                                  );
 
         private static $COMMANDS = array('analyze'       => 1, 
-                                         'build_root'    => 1, 
+                                         'anonymize'     => 1, 
                                          'constantes'    => 1, 
                                          'clean'         => 1, 
                                          'cleandb'       => 1, 
@@ -147,7 +146,6 @@ class Config {
                                          'jobqueue'      => 1, 
                                          'queue'         => 1, 
                                          'load'          => 1, 
-                                         'log2csv'       => 1, 
                                          'magicnumber'   => 1, 
                                          'project'       => 1, 
                                          'projectspip'   => 1, 
@@ -158,7 +156,6 @@ class Config {
                                          'results'       => 1, 
                                          'stat'          => 1, 
                                          'status'        => 1, 
-                                         'tokenizer'     => 1, 
                                          'version'       => 1,
                                          'onepage'       => 1,
                                          'onepagereport' => 1,

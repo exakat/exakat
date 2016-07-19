@@ -1,42 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      1
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          2
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      1
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      3
-    Label : ELSE
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $d
-        Label : RIGHT
-          4
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          3
+=
+Label : LEFT
+  $b
+Label : RIGHT
+  2

@@ -1,12 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    (int)
-    Label : CAST
-      $x
-  Label : ELEMENT
-    (integer)
-    Label : CAST
-      $y
+(int)
+Label : CAST
+  $x

@@ -1,64 +1,19 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
-          |
-          Label : LEFT
-            $a
-          Label : RIGHT
-            (
-            Label : CODE
-              &
-              Label : LEFT
-                (
-                Label : CODE
-                  >>
-                  Label : LEFT
-                    $c
-                  Label : RIGHT
-                    1
-              Label : RIGHT
-                $d
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        (
-        Label : CODE
-          &
-          Label : LEFT
-            (
-            Label : CODE
-              |
-              Label : LEFT
-                $a
-              Label : RIGHT
-                (
-                Label : CODE
-                  >>
-                  Label : LEFT
-                    $c
-                  Label : RIGHT
-                    1
-          Label : RIGHT
-            $d
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "\n"
+)
+Label : ARGUMENT
+  )
+  Label : CODE
+    |
+    Label : LEFT
+      $a
+    Label : RIGHT
+      $d
+      Label : CODE
+        &
+        Label : LEFT
+          1
+          Label : CODE
+            >>
+            Label : LEFT
+123098120398 [label="Reached level 15"]            Label : RIGHT
+123098120398 [label="Reached level 15"]        Label : RIGHT
+          $d

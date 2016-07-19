@@ -1,38 +1,7 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'd'
-              Label : VARIABLE
-                $b
-      Label : ELSE
-        'j'
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          'f'
-        Label : CONCAT
-          $g
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'h'
-          Label : NAME
-            $g
-        Label : CONCAT
-          'i'
+(
+Label : ARGUMENT
+  [
+  Label : INDEX
+    'd'
+  Label : VARIABLE
+    $b

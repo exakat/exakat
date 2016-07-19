@@ -1,40 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      >
-      Label : LEFT
-        [
-        Label : INDEX
-          'b'
-        Label : VARIABLE
-          ::
-          Label : CLASS
-            self
-          Label : PROPERTY
-            $a
-      Label : RIGHT
-        0
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          [
-          Label : INDEX
-            'd'
-          Label : VARIABLE
-            $c
-        Label : RIGHT
-          [
-          Label : INDEX
-            'g'
-          Label : VARIABLE
-            ::
-            Label : CLASS
-              e
-            Label : PROPERTY
-              $f
+[
+Label : INDEX
+  'b'
+Label : VARIABLE
+  ::
+  Label : CLASS
+    self
+  Label : PROPERTY
+    $a

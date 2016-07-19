@@ -31,8 +31,6 @@ class Arguments extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->outIsIE('VARIABLE')
-             ->outIsIE('LEFT')
              ->atomIs('Variable');
         $this->prepareQuery();
         

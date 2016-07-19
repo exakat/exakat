@@ -1,4 +1,10 @@
-<?php
+./tests/tokenizer/source/Integer.02.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
 
-Label : CODE
-  1231203
+    Label : CODE
+      ;
+      Label : ELEMENT
+        1231203

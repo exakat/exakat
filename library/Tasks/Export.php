@@ -25,45 +25,42 @@ namespace Tasks;
 
 class Export extends Tasks {
     public function run(\Config $config) {
-        $queryTemplate = 'g.V.as("x").except([g.v(0)])';
+        $queryTemplate = 'g.V().not(hasId(0))';
 
         $result = $this->gremlin->query($queryTemplate);
         $vertices = (array) $result->results;
 
         $V = array();
         foreach($vertices as $v) {
-            $x = $v->_id;
-            $V[$x] =  (array) $v;
-    
-            if (isset($V[$x]['root'])) {
-                $root = $x;
+            $x = $v->id;
+            $vv = array();
+            foreach($v->properties as $key => $value) {
+                $vv[$key] = $value[0]->value;
             }
+            $V[$x] =  $vv;
         }
 
-        $queryTemplate .= '.outE()';
+        $queryTemplate = 'g.E()';
         $result = $this->gremlin->query($queryTemplate);
         $edges = (array) $result->results;
 
         $E = array();
         foreach($edges as $e) {
-            $id = $e->_outV;
+            $id = $e->outV;
     
             if (!isset($E[$id])) {
                 $E[$id] = array();
             }
     
-            $endNodeId = $e->_inV;
+            $endNodeId = $e->inV;
             if(isset($E[$id][$endNodeId])) {
-                $E[$id][$endNodeId] .= ', '.$e->_label;
+                $E[$id][$endNodeId] .= ', '.$e->label;
             } else {
-                $E[$id][$endNodeId] = $e->_label;
+                $E[$id][$endNodeId] = $e->label;
             }
         }
 
-        if (!isset($root)) {
-            die( "No root! Check the tree in Neo4j\n Aborting\n".number_format(memory_get_usage() / 1024 / 1024, 0).' Mo'. "\n");
-        }
-
+        $root = array_keys($V)[0];
         if ($config->format == 'Dot') {
             $text = $this->display_dot($V, $E, $root);
         } elseif ($config->format  == 'Table') {
@@ -88,6 +85,8 @@ class Export extends Tasks {
     private function display_text($V, $E, $root, $level = 0) {
         $r = '';
 
+        if ($level == 7) { return '123098120398 [label="Reached level 15"]';}
+
         if (isset($V[$root])) {
             $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
         }
@@ -108,6 +107,10 @@ class Export extends Tasks {
 
     private function display_dot($V, $E, $root, $level = 0) {
         $r = '';
+
+        if ($level == 7) { return '123098120398 [label="Reached level 15"];
+        123098120391 [label="Reached level 15"];
+        123098120398 -> 123098120391';}
 
         foreach($V as $id => $v) {
             if (!isset($v['fullcode'])) {

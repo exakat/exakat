@@ -1,14 +1,14 @@
 <?php
 
-$expected     = array('A1', 
-                      '\A2', 
-                      'B', 
-                      '\A1', 
-                      'A1', 
-                      'A1', 
-                      '\A2', 
-                      'C', 
-                      'A2');
+$expected     = array( 'A1::f( )', 
+                       '\A2::f( )', 
+                       'A1::f( )', 
+                       'A1::f( )', 
+                       'A2::f( )', 
+                       '\A1::f( )', 
+                       '\A2::f( )', 
+                       'B::f( )', 
+                       'C::f( )');
 
 $expected_not = array();
 

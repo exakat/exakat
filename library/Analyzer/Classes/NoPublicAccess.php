@@ -29,43 +29,42 @@ class NoPublicAccess extends Analyzer\Analyzer {
     public function analyze() {
 
         $gremlin = <<<GREMLIN
-g.idx("atoms")[["atom":"Property"]].out("OBJECT").has("atom", "Variable").hasNot("code", '\$this')
-        .in("OBJECT")
-        .out("PROPERTY")
-        .has('token', 'T_STRING')
-        .transform{ it.code.toLowerCase(); }
-        .unique()
+g.V().hasLabel("Property").out("OBJECT").not(has("code", "\$this")).in("OBJECT")
+     .out("PROPERTY").hasLabel("Identifier").map{ it.get().value("code").toLowerCase(); }.unique();
 GREMLIN;
         $properties = $this->query($gremlin);
-        $this->atomIs('Visibility')
+        
+        $this->atomIs('Ppp')
              ->hasOut('PUBLIC')
              ->hasNoOut('STATIC')
-             ->outIs('DEFINE')
+             ->outIs('PPP')
              ->_as('ppp')
+             ->outIsIE('LEFT')
              ->isPropertyNotIn('propertyname', $properties)
              ->back('ppp');
         $this->prepareQuery();
 
         $gremlin = <<<GREMLIN
-g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").filter{it.code in ["self", "static"]}.any() == false}
-        .transform{ 
-            z = it.out("PROPERTY").has("token", "T_VARIABLE").next().code; 
-            it.out("CLASS").next().fullnspath + "::" + z.substring(1, z.size() ).toLowerCase() 
-        }
-        .unique()
+g.V().hasLabel("Staticproperty").out("CLASS").not(has("code", within(["self", "static"]))).sideEffect{fnp = it.get().value("fullnspath");}.in("CLASS")
+     .out("PROPERTY").hasLabel("Variable").map{ fnp + '::' + it.get().value("code"); }.unique();
 GREMLIN;
         $staticproperties = $this->query($gremlin);
         
-        $this->atomIs('Visibility')
-             ->hasOut('PUBLIC')
-             ->hasOut('STATIC')
-             ->outIs('DEFINE')
-             ->_as('ppp')
-             ->goToClass()
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->back('ppp')
-             ->filter('!(fnp + "::" + it.propertyname in *** )', $staticproperties);
-        $this->prepareQuery();
+        if (count($staticproperties) > 0) {
+            $this->atomIs('Ppp')
+                 ->hasOut('PUBLIC')
+                 ->hasOut('STATIC')
+                 ->outIs('PPP')
+                 ->_as('results')
+                 ->outIsIE('LEFT')
+                 ->_as('ppp')
+                 ->goToClass()
+                 ->savePropertyAs('fullnspath', 'fnp')
+                 ->back('ppp')
+                 ->raw('filter{ !(fnp + "::" + it.get().value("code") in ["'.str_replace('$', '\\$', str_replace("\\", "\\\\", implode('", "', $staticproperties))).'"] )}')
+                 ->back('results');
+            $this->prepareQuery();
+        }
     }
 }
 

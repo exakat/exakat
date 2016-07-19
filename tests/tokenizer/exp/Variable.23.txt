@@ -1,10 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    {
-    Label : INDEX
-      "c"
-    Label : VARIABLE
-      $b
+{
+Label : INDEX
+  "c"
+Label : VARIABLE
+  $b

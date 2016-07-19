@@ -29,8 +29,7 @@ class PregMatchAllFlag extends Analyzer\Analyzer {
         $this->atomFunctionIs('\preg_match_all')
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 3)
-             ->outIs('ARGUMENT')
-             ->hasRank(2)
+             ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('code', 'r')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -45,7 +44,7 @@ class PregMatchAllFlag extends Analyzer\Analyzer {
              ->outIs('VALUE')
              ->atomIs('Keyvalue')
              ->outIs('KEY')
-             ->savePropertyAs('code', 'key')
+             ->savePropertyAs('code', 'k')
              ->inIs('KEY')
              ->inIs('VALUE')
              ->outIs('BLOCK')
@@ -56,19 +55,18 @@ class PregMatchAllFlag extends Analyzer\Analyzer {
              ->inIs('VARIABLE')
              ->inIs('VARIABLE')
              ->outIs('INDEX')
-             ->samePropertyAs('code', 'key')
+             ->samePropertyAs('code', 'k')
              ->back('first');
         $this->prepareQuery();
 
         // Using explicit configuration
         $this->atomFunctionIs('\preg_match_all')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(3)
-             ->fullnspath('\PREG_PATTERN_ORDER')
+             ->outWithRank('ARGUMENT', 3)
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->fullnspathIs('\preg_pattern_order')
              ->inIs('ARGUMENT')
-             ->outIs('ARGUMENT')
-             ->hasRank(2)
+             ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('code', 'r')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -83,7 +81,7 @@ class PregMatchAllFlag extends Analyzer\Analyzer {
              ->outIs('VALUE')
              ->atomIs('Keyvalue')
              ->outIs('KEY')
-             ->savePropertyAs('code', 'key')
+             ->savePropertyAs('code', 'k')
              ->inIs('KEY')
              ->inIs('VALUE')
              ->outIs('BLOCK')
@@ -94,7 +92,7 @@ class PregMatchAllFlag extends Analyzer\Analyzer {
              ->inIs('VARIABLE')
              ->inIs('VARIABLE')
              ->outIs('INDEX')
-             ->samePropertyAs('code', 'key')
+             ->samePropertyAs('code', 'k')
              ->back('first');
         $this->prepareQuery();
     }

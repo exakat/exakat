@@ -28,10 +28,9 @@ class FopenMode extends Analyzer\Analyzer {
         // fopen('path/to/file', 'bbc')
         $this->atomFunctionIs('\\fopen')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(1)
+             ->outWithRank('ARGUMENT', 1)
              ->atomIs('String') // No checks on variable or properties.
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              ->noDelimiterIsNot(array('r', 'r+', 'w', 'w+', 'a', 'a+', 'x', 'x+', 'c', 'c+', 't', 't+',  // Normal
                                       'rb', 'rb+', 'wb', 'wb+', 'ab', 'ab+', 'xb', 'xb+', 'cb', 'cb+',   // binary post
                                       'br', 'br+', 'bw', 'bw+', 'ba', 'ba+', 'bx', 'bx+', 'bc', 'bc+'))  // binary pre 

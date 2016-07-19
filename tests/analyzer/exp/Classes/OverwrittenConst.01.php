@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('const overwrite1 = 2',
-                      'const overwrite2 = 3',
-                      'const overwrite3 = 4',
-                      'const overwrite4 = 5',
-                      'const overwrite5 = 6'
+$expected     = array('overwrite1 = 2',
+                      'overwrite2 = 3',
+                      'overwrite3 = 4',
+                      'overwrite4 = 5',
+                      'overwrite5 = 6'
                       );
 
-$expected_not = array('const noOverwrite = 0');
+$expected_not = array('noOverwrite = 0');
 
 ?>

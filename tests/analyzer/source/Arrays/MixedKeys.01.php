@@ -6,7 +6,7 @@ class x { const THREE = 3;}
 
 class z {
 static public $z = array(
-    2,
+    "Zero" => 2,
     ONE => 1,
     x::THREE => 3,
     4,
@@ -17,7 +17,7 @@ static public $z = array(
 // the array is an inside array, not the first one
 static public $z2 = array(
     0 => array(
-    2,
+    "Zero" => 2,
     ONE => 1,
     x::THREE => 3,
     4,

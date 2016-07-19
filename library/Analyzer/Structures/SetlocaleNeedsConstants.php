@@ -38,7 +38,7 @@ class SetlocaleNeedsConstants extends Analyzer\Analyzer {
         // something else than a constant
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
-             ->fullnspath('\\setlocale')
+             ->fullnspathIs('\\setlocale')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
@@ -48,14 +48,15 @@ class SetlocaleNeedsConstants extends Analyzer\Analyzer {
 
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
-             ->fullnspath('\\setlocale')
+             ->fullnspathIs('\\setlocale')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIsNot($allowedConstants)
              ->back('first');
-        $this->prepareQuery();    }
+        $this->prepareQuery();    
+    }
 }
 
 ?>

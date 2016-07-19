@@ -12,7 +12,6 @@ $expected_not = array('SingleWithoutAliasUnused',
                       'OriginalAliasBothUnusedo as OriginalAliasBothUnused',
                       'SingleWithoutAliasUnused2', 
                       'OriginalAliasBothUnusedo as OriginalAliasBothUnused2',
-                      // Original is used, the alias is unused
                       'OriginalUsedAliasUnusedo as OriginalUsedAliasUnuseda',
                       'OriginalUsedAliasUnusedo2 as OriginalUsedAliasUnuseda2',
                       );

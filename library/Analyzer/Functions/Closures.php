@@ -26,9 +26,10 @@ namespace Analyzer\Functions;
 use Analyzer;
 
 class Closures extends Analyzer\Analyzer {
+    // function ($x) {}
     public function analyze() {
         $this->atomIs('Function')
-             ->is('lambda', true);
+             ->isLambda();
         $this->prepareQuery();
     }
 }

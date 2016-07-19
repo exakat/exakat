@@ -34,9 +34,13 @@ class AccessProtected extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('CLASS')
              ->codeIsNot(array('parent', 'static', 'self'))
-             ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).in("NAME").out("PROTECTED").any()}')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->hasOut('PROTECTED')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
 
@@ -50,9 +54,14 @@ class AccessProtected extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('CLASS')
              ->codeIsNot(array('parent', 'static', 'self'))
-             ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Visibility").filter{ it.out("PROTECTED").any() }.out("DEFINE").transform{ a = it; while (a.out("LEFT").any()) { a = a.out("LEFT").next(); };  a;}.has("code", name).any()}')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Ppp')
+             ->hasOut('PROTECTED')
+             ->outIs('PPP')
+             ->outIsIE('LEFT')
+             ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
         

@@ -33,42 +33,42 @@ class ReservedNames extends Analyzer\Analyzer {
         // functions/methods names
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->code($reservedNames)
+             ->codeIs($reservedNames)
              ->back('first');
         $this->prepareQuery();
 
         // classes
         $this->atomIs('Class')
              ->outIs('NAME')
-             ->code($reservedNames)
+             ->codeIs($reservedNames)
              ->back('first');
         $this->prepareQuery();
 
         // trait
         $this->atomIs('Trait')
              ->outIs('NAME')
-             ->code($reservedNames)
+             ->codeIs($reservedNames)
              ->back('first');
         $this->prepareQuery();
 
         // interface
         $this->atomIs('Interface')
              ->outIs('NAME')
-             ->code($reservedNames)
+             ->codeIs($reservedNames)
              ->back('first');
         $this->prepareQuery();
 
         // methodcall
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->code($reservedNames)
+             ->codeIs($reservedNames)
              ->back('first');
         $this->prepareQuery();
 
         // property
         $this->atomIs('Property')
              ->outIs('METHOD')
-             ->code($reservedNames)
+             ->codeIs($reservedNames)
              ->back('first');
         $this->prepareQuery();
 
@@ -78,7 +78,7 @@ class ReservedNames extends Analyzer\Analyzer {
         }
         unset($variable);
         $this->atomIs('Variable')
-             ->code($reservedNames);
+             ->codeIs($reservedNames);
         $this->prepareQuery();
     }
 }

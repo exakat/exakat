@@ -1,41 +1,11 @@
-;
-Label : ELEMENT
-  void
-Label : ELEMENT
-  echo
+echo
+Label : ARGUMENT
+  E
   Label : ARGUMENTS
-    
+    (
     Label : ARGUMENT
-      E
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'F'
-        Label : ARGUMENT
-          G
-Label : ELEMENT
-  void
-Label : ELEMENT
-  if
-  Label : CONDITION
-    isset
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        $b
-  Label : THEN
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          H
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'I'
-            Label : ARGUMENT
-              $b
-Label : ELEMENT
-  void
+      'F'
+    Label : ARGUMENT
+      G
+  Label : NAME
+    E

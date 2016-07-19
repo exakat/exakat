@@ -1,61 +1,28 @@
-;
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      Concatenation
-      Label : CONCAT
-        (
-        Label : CODE
-          ?
-          Label : CONDITION
-            <
-            Label : LEFT
-              B
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'C'
-                  Label : VARIABLE
-                    $a
-            Label : RIGHT
-              $b
-          Label : ELSE
-            'E'
-          Label : THEN
-            'D'
-      Label : CONCAT
-        [
-        Label : INDEX
-          'F'
-        Label : VARIABLE
-          $c
-Label : ELEMENT
-  F
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      ::
-      Label : CLASS
-        H
-      Label : METHOD
-        I
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'J'
-            Label : VARIABLE
-              $d
-          Label : ARGUMENT
-            K
-          Label : ARGUMENT
-            L
-          Label : ARGUMENT
-            M
+<?=
+Label : ARGUMENT
+  .
+  Label : CONCAT
+    'E'
+    Label : CODE
+      ?
+      Label : CONDITION
+        <
+        Label : LEFT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+123098120398 [label="Reached level 15"]          Label : NAME
+            B
+        Label : RIGHT
+          $b
+      Label : ELSE
+        'E'
+      Label : THEN
+        'D'
+  Label : CONCAT
+    [
+    Label : INDEX
+      'F'
+    Label : VARIABLE
+      $c

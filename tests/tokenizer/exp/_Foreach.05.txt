@@ -1,18 +1,3 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $i
-    Label : SOURCE
-      (array)
-      Label : CAST
-        $x
-    Label : VALUE
-      $y
+(array)
+Label : CAST
+  $x

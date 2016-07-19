@@ -32,7 +32,7 @@ class TestClass extends Analyzer\Analyzer {
     
         $this->atomIs('Class')
              ->outIs('EXTENDS')
-             ->fullnspath($testClasses)
+             ->fullnspathIs($testClasses)
              ->back('first');
         $this->prepareQuery();
 

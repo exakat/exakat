@@ -38,28 +38,29 @@ class IsComposerInterface extends Analyzer\Analyzer {
         $interfacesFullNP = $this->makeFullNsPath($interfaces);
         
         $this->atomIs('Class')
-             ->outIs('IMPLEMENTS')
-             ->fullnspath($interfacesFullNP);
-        $this->prepareQuery();
-
-        $this->atomIs('Interface')
-             ->outIs('EXTENDS')
-             ->fullnspath($interfacesFullNP);
+             ->outIs('IMPLEMENTS', 'EXTENDS')
+             ->isNot('aliased', true)
+             ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->fullnspath($interfacesFullNP);
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->isNot('aliased', true)
+             ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
 
-        $this->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->fullnspath($interfacesFullNP);
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->isNot('aliased', true)
+             ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
 
         $this->atomIs('Use')
              ->outIs('USE')
-             ->fullnspath($interfacesFullNP);
+             ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
     }
 }

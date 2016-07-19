@@ -29,15 +29,15 @@ class UseCli extends Analyzer\Analyzer {
     public function analyze() {
         // GPC + R
         $this->atomIs('Variable')
-             ->code(array('$argv', '$argc'));
+             ->codeIs(array('$argv', '$argc'), true);
         $this->prepareQuery();
 
         // $_SERVER + special index
         $this->atomIs('Variable')
-             ->code('$_SERVER')
+             ->codeIs('$_SERVER', true)
              ->inIs('VARIABLE')
              ->outIs('INDEX')
-             ->noDelimiter(array('argc', 'argv' ))
+             ->noDelimiterIs(array('argc', 'argv' ))
             ->back('first');
         $this->prepareQuery();
 

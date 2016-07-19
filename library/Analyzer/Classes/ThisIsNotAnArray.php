@@ -30,15 +30,15 @@ class ThisIsNotAnArray extends Analyzer\Analyzer {
     public function analyze() {
         // direct class
         $this->atomIs('Variable')
-             ->code('$this')
+             ->codeIs('$this')
              ->inIs('VARIABLE')
+             ->_as('results')
              ->atomIs(array('Array', 'Arrayappend'))
              // class may be \ArrayAccess
-             ->raw('filter{ (it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("EXTENDS", "IMPLEMENTS").has("fullnspath", "\\\\arrayaccess").any() == false) &&
-                            (it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("EXTENDS", "IMPLEMENTS")
-             .as("parent").transform{ g.idx("classes")[["path":it.fullnspath]].next()}.out("EXTENDS", "IMPLEMENTS").loop("parent"){it.loops < 5}{true}
-             .has("fullnspath", "\\\\arrayaccess").any() == false)
-             }');
+             ->goToClass()
+             ->outIs('EXTENDS')
+             ->fullnspathIsNot('\\\\arrayaccess')
+             ->back('results');
         $this->prepareQuery();
     }
 }

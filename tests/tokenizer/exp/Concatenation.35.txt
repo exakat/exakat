@@ -1,24 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      Concatenation
-      Label : CONCAT
-        '&nbsp;('
-      Label : CONCAT
-        @
-        Label : AT
-          ++
-          Label : PREPLUSPLUS
-            [
-            Label : INDEX
-              $boucle
-            Label : VARIABLE
-              $n
-      Label : CONCAT
-        ")"
+[
+Label : INDEX
+  $boucle
+Label : VARIABLE
+  $n

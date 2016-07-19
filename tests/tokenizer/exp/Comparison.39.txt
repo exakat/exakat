@@ -1,48 +1,5 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      =
-      Label : LEFT
-        $b
-      Label : RIGHT
-        ===
-        Label : LEFT
-          B
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'C'
-            Label : ARGUMENT
-              $c
-        Label : RIGHT
-          NULL
-    Label : THEN
-      ;
-      Label : ELEMENT
-        1
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      &
-      Label : LEFT
-        $b
-      Label : RIGHT
-        ===
-        Label : LEFT
-          B
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              'C'
-            Label : ARGUMENT
-              $c
-        Label : RIGHT
-          NULL
-    Label : THEN
-      ;
-      Label : ELEMENT
-        2
+(
+Label : ARGUMENT
+  'C'
+Label : ARGUMENT
+  $c

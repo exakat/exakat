@@ -39,8 +39,10 @@ class AlreadyCaught extends Analyzer\Analyzer {
              ->isMore('rank', 'rank')
              ->outIs('CLASS')
              ->classDefinition()
-             ->isInProperty('classTree', 'fnp')
-             ->back('first');
+             ->goToAllParents()
+             ->samePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

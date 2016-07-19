@@ -31,20 +31,19 @@ class UseConstant extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomFunctionIs('fopen')
+        $this->atomFunctionIs('\\fopen')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->noDelimiter(array('php://stdin', 'php://stdout', 'php://stderr'))
+             ->outWithRank('ARGUMENT', 0)
+             ->noDelimiterIs(array('php://stdin', 'php://stdout', 'php://stderr'))
              ->back('first');
         $this->prepareQuery();
         
         // dirname(__FILE__) => __DIR__
-        $this->atomFunctionIs('dirname')
+        $this->atomFunctionIs('\\dirname')
              ->outIs('ARGUMENTS')
-             ->outIS('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Magicconstant')
-             ->code('__FILE__')
+             ->codeIs('__FILE__')
              ->back('first');
         $this->prepareQuery();
     }

@@ -31,7 +31,7 @@ class WithoutTry extends Analyzer\Analyzer {
     public function analyze() {
         if (!empty($this->functions)) {
             $this->atomFunctionIs($this->functions)
-                 ->notInInstruction('Try')
+                 ->hasNoTryCatch()
                  ->back('first');
             $this->prepareQuery();
         }

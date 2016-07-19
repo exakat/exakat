@@ -99,44 +99,23 @@ class IsRead extends Analyzer\Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs($atoms)
-                 ->is('rank', $position)
-                 ->inIs('ARGUMENT')
-                 ->inIs('ARGUMENTS')
-                 ->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspath($functions)
-                 ->back('first');
+            $this->atomFunctionIs($functions)
+                 ->outIs('ARGUMENTS')
+                 ->outWithRank('ARGUMENT', $position)
+                 ->atomIs($atoms);
             $this->prepareQuery();
         }
 
         // Variable that are not a reference in a functioncall
         $this->atomIs($atoms)
-             ->hasIn(array('ARGUMENT'))
-             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
+             ->analyzerIsNot('self')
+             ->hasIn('ARGUMENT')
+             ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").hasLabel("Function").count().is(eq(0)) )')
              ->analyzerIsNot('Variables/IsRead');
         $this->prepareQuery();
 
         // Class constructors (__construct)
-        $this->atomIs($atoms)
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->atomIs('Functioncall')
-             ->hasIn('NEW')
-             ->classDefinition()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->_as('method')
-             ->analyzerIs('Classes/Constructor')
-             ->back('method')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', true)
-             ->back('first');
-        $this->prepareQuery();
+        // Those are done in the functioncall test
 
         // Class constructors with self
         $this->atomIs($atoms)
@@ -144,7 +123,7 @@ class IsRead extends Analyzer\Analyzer {
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Functioncall')
-             ->code('self')
+             ->codeIs('self')
              ->hasIn('NEW')
              ->classDefinition()
              ->outIs('BLOCK')
@@ -166,7 +145,7 @@ class IsRead extends Analyzer\Analyzer {
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Functioncall')
-             ->code('self')
+             ->codeIs('self')
              ->hasIn('NEW')
              ->classDefinition()
              ->outIs('BLOCK')

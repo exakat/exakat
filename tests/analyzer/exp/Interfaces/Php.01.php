@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('ArrayAccess');
+$expected     = array('ArrayAccess', 
+                      'C', 
+                      '\\ArrayAccess');
 
-$expected_not = array();
+$expected_not = array('D');
 
 ?>

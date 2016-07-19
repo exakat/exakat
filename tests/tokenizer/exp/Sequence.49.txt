@@ -1,53 +1,9 @@
-;
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          __
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'B'
-    Label : ELEMENT
-      A
-    Label : ELEMENT
-      ->
-      Label : METHOD
-        g
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            void
-      Label : OBJECT
-        ::
-        Label : CLASS
-          C
-        Label : METHOD
-          D
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              __
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  'F'
-    Label : ELEMENT
-      H
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          I
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'J'
-Label : ELEMENT
-  K
+echo
+Label : ARGUMENT
+  __
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      'B'
+  Label : NAME
+    __

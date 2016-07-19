@@ -31,19 +31,21 @@ class UselessAbstract extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // abstract class that are never used
         $this->atomIs('Class')
              ->analyzerIsNot('OnlyStaticMethods')
-             ->filter('it.out("BLOCK").out("ELEMENT").any()')
              ->hasOut('ABSTRACT')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->filter('g.idx("atoms")[["atom":"Class"]].out("EXTENDS").has("fullnspath", fnp).any() == false')
+             ->hasNoOut("DEFINITION")
              ->back('first');
         $this->prepareQuery();
 
         // abstract class without nothing in
         $this->atomIs('Class')
+             ->analyzerIsNot('self')
              ->hasOut('ABSTRACT')
              ->outIs('BLOCK')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();

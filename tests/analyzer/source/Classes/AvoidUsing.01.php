@@ -9,6 +9,10 @@ if ($a instanceof AjxpRole) {
     AjxpRole::$yes = AjxpRole::methodCall();
 }
 
+class_alias('AjxpRole', $b);
+class_alias('\\NS\\AjxpROLE', $b);
+
+
 }
 
 namespace NS {
@@ -23,9 +27,6 @@ if ($a instanceof AjxpRole) {
 function x (AjxpRole $a) {}
 
 class y extends AjxpRole implements AjxpRole {}
-
-class_alias('AjxpRole', $b);
-class_alias('\\NS\\AjxpROLE', $b);
 
 }
 

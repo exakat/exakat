@@ -1,40 +1,13 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
+-
+Label : LEFT
+  0
+Label : RIGHT
+  )
+  Label : CODE
+    +
     Label : LEFT
-      $a
+      $c
     Label : RIGHT
-      -
-      Label : LEFT
-        >>
-        Label : LEFT
-          $b
-        Label : RIGHT
-          0
-      Label : RIGHT
-        (
-        Label : CODE
-          +
-          Label : LEFT
-            $c
-          Label : RIGHT
-            (
-            Label : CODE
-              $d
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      <<
-      Label : LEFT
-        >>
-        Label : LEFT
-          $b
-        Label : RIGHT
-          0
-      Label : RIGHT
-        $c
+      $d
+      Label : CODE
+        $d

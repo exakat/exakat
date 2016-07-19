@@ -1,52 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      \
-      Label : SUBNAME
-        a
-      Label : SUBNAME
-        b
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x2
-    Label : RIGHT
-      \
-      Label : SUBNAME
-        a
-      Label : SUBNAME
-        b
-      Label : SUBNAME
-        c
-      Label : SUBNAME
-        d
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $y
-    Label : RIGHT
-      a
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      ==
-      Label : LEFT
-        $x
-      Label : RIGHT
-        \
-        Label : SUBNAME
-          a
-        Label : SUBNAME
-          b
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $y
+=
+Label : LEFT
+  $x
+Label : RIGHT
+  \
+  Label : SUBNAME
+    a
+  Label : SUBNAME
+    b

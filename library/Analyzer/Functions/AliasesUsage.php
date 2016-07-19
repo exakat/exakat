@@ -35,7 +35,7 @@ class AliasesUsage extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($ini);
+             ->fullnspathIs($ini);
         $this->prepareQuery();
     }
 }

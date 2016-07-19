@@ -40,7 +40,7 @@ class IsModified extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs($atoms)
-             ->inIsIE('VARIABLE')
+             ->inIsIE(array('VARIABLE', 'APPEND'))
              ->inIs(array('LEFT', 'VARIABLE'))
              ->atomIs(array('Assignation', 'Arrayappend'))
              ->hasNoIn('VARIABLE')
@@ -50,7 +50,7 @@ class IsModified extends Analyzer\Analyzer {
         // catch
         $this->atomIs($atoms)
              ->inIs('VARIABLE')
-             ->atomIs(array('Catch'))
+             ->atomIs('Catch')
              ->back('first');
         $this->prepareQuery();
 
@@ -62,10 +62,9 @@ class IsModified extends Analyzer\Analyzer {
              ->hasNoIn('METHOD') // possibly new too
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
+             ->samePropertyAs('rank', 'rank')
              ->is('reference', true)
              ->back('first');
         $this->prepareQuery();
@@ -84,24 +83,11 @@ class IsModified extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('VARIABLE')
+             ->outIs('TYPEHINT')
              ->atomIs($atoms);
         $this->prepareQuery();
 
-        // typehint + default value
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('VARIABLE')
-             ->atomIs('Assignation')
-             ->outIs('LEFT');
-        $this->prepareQuery();
-
-        // missing default values + typehint + default values.
-
-        // PHP functions that are references
+        // PHP functions that are using references
         $data = new \Data\Methods();
         
         $functions = $data->getFunctionsReferenceArgs();
@@ -124,7 +110,7 @@ class IsModified extends Analyzer\Analyzer {
                  ->hasNoIn('METHOD') // possibly new too
                  ->atomIs('Functioncall')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_UNSET'))
-                 ->fullnspath($functions)
+                 ->fullnspathIs($functions)
                  ->back('first');
             $this->prepareQuery();
         }

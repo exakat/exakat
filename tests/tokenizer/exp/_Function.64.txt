@@ -1,44 +1,41 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    h
+(
+Label : ARGUMENT
+   
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      $f
+    Label : ARGUMENT
+      $g
+  Label : BLOCK
+    {}
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $a
+  Label : NAME
+    Void
+Label : ARGUMENT
+  ->
+  Label : METHOD
+    d
     Label : ARGUMENTS
-      Arguments
+      (
       Label : ARGUMENT
-        function
+        'e'
+    Label : NAME
+      d
+  Label : OBJECT
+    )
+    Label : CODE
+      new
+      Label : NEW
+        A
         Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $f
-          Label : ARGUMENT
-            $g
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $a
-        Label : NAME
-          
-      Label : ARGUMENT
-        ->
-        Label : METHOD
-          d
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              'e'
-        Label : OBJECT
           (
-          Label : CODE
-            new
-            Label : NEW
-              A
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  $c
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            $c
+        Label : NAME
+          A

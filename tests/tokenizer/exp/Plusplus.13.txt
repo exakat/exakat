@@ -1,12 +1,16 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Plusplus.13.php
+Label : FILE
   ;
   Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      ::
-      Label : CLASS
-        a
-      Label : PROPERTY
-        $b
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          ::
+          Label : CLASS
+            a
+          Label : PROPERTY
+            $b

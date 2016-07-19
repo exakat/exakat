@@ -1,11 +1,9 @@
-;
-Label : ELEMENT
-  f
+(
+Label : ARGUMENT
+  g
   Label : ARGUMENTS
-    
+    (
     Label : ARGUMENT
-      g
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          1
+      1
+  Label : NAME
+    g

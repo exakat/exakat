@@ -1,12 +1,13 @@
 <?php
 
-$expected     = array('$Argument1',
-                      '$Argument2',
-                      '$Argument21', 
-                      '$Argument22',
-                      '$argument_definition'
-);
+$expected     = array('t $Argument22 = null', 
+                      'x $Argument21', 
+                      '$Argument2 = 2',
+                      '$Argument1',
+                      '$argument_definition');
 
-$expected_not = array();
+$expected_not = array('$condition',
+                      '$calling_argument',
+                      '$variable');
 
 ?>

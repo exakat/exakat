@@ -1,13 +1,17 @@
-<?php 
-Label : CODE
+./tests/tokenizer/source/_Throw.11.php
+Label : FILE
   ;
   Label : ELEMENT
-    throw
-    Label : THROW
-      $x
-  Label : ELEMENT
-    throw
-    Label : THROW
-      (
-      Label : CODE
-        $xb
+    <?php 
+    Label : CODE
+      ;
+      Label : ELEMENT
+        throw
+        Label : THROW
+          $x
+      Label : ELEMENT
+        throw
+        Label : THROW
+          $xb
+          Label : CODE
+            $xb

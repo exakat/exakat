@@ -29,7 +29,7 @@ class RelayFunction extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
-             ->savePropertyAs('arglist', 'args')
+             ->saveArglistAs('args')
              ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
              ->is('count', 1)

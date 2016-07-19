@@ -1,3 +1,17 @@
-;
-Label : ELEMENT
-  void
+./tests/tokenizer/source/Phpcode.05.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    A
+  Label : ELEMENT
+    <?php 
+    Label : CODE
+      ;
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        Void
+      Label : ELEMENT
+        Void
+  Label : ELEMENT
+    B

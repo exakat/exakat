@@ -31,17 +31,17 @@ class DoubleAssignation extends Analyzer\Analyzer {
              ->outIs('LEFT')
              ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
              ->savePropertyAs('fullcode', 'name')
-             ->savePropertyAs('atom', 'nameAtom')
              ->inIs('LEFT')
              ->nextSibling()
              ->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'name')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->atomIsNot('Functioncall')
-             ->filter(' it.out.loop(1){it.loops < 100}{ it.object.atom == nameAtom}.has("fullcode", name).any() == false ')
+             // No self assignation (after operation)
+             ->raw('where( __.repeat( out() ).emit(hasLabel("Variable", "Array", "Property", "Staticproperty")).times(15).filter{ it.get().value("fullcode") == name}.count().is(eq(0)) )')
+//             ->filter(' it.out.loop(1){true}{ it.object.atom == nameAtom}.has("fullcode", name).any() == false ')
              ->back('first');
         $this->prepareQuery();
     }

@@ -1,22 +1,17 @@
 <?php
 
-namespace A {
+namespace {
+use A\B as C;
+use C\D as E;
+use E\F as G;
 
-use A\B\C;
+(new G())->go();
+}
 
-class X {
-    use \A\T;
-    
-    function w() {
-        new T();
-        new C();
+//namespace A\B\D\F {
+namespace E {
+    class F{
+        function go() { echo __CLASS__; }
     }
 }
-
-trait T {
-
-}
-
-}
-
 ?>

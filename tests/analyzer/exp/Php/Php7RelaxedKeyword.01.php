@@ -3,7 +3,7 @@
 $expected     = array( 'B::then(1)', 
                        'C::while(1, 2)', 
                        'A::do( )', 
-                       'D::include',
+                       'D::include(1, 2, 3, 4)',
                        '$b->foreach(1)', 
                        '$d->include(1, 2, 3, 4)', 
                        '$a->do( )', 

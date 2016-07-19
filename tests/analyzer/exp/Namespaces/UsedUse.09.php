@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('A\B\C');
+$expected     = array('E\F as G');
 
-$expected_not = array('\A\T');
+$expected_not = array('use A\B as C',
+                      'use C\D as E',
+);
 
 ?>

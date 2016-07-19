@@ -27,8 +27,15 @@ use Analyzer;
 
 class pregOptionE extends Analyzer\Analyzer {
     public function analyze() {
-        // Options list : eimsuxADJSUX (we use all letters, as unknown options are ignored or yield an error)
-        $optionsWithE = '[a-zA-Z]*e[a-zA-Z]*';
+        // delimiters
+        $delimiters = '=~/|`%#\\$!,@\\\\{\\\\(\\\\[';
+        
+        $makeDelimiters = ' sideEffect{ 
+    if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
+    else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
+    else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
+    else { delimiterFinal = delimiter; } 
+}';
 
         $prepareDelimiters = ' sideEffect{ 
          if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
@@ -42,37 +49,37 @@ class pregOptionE extends Analyzer\Analyzer {
         // preg_match with a string
         $this->atomFunctionIs('\preg_replace')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->raw(' sideEffect{ delimiter = it.noDelimiter[0]; }')
-             ->raw($prepareDelimiters)
-             ->regex('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$optionsWithE.')\\$')
+             ->raw(' sideEffect{ delimiter = it.get().value("noDelimiter")[0]; }')
+             ->raw($makeDelimiters)
+             ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*)\\$')
              ->back('first');
         $this->prepareQuery();
 
         // With an interpolated string "a $x b"
         $this->atomFunctionIs('\preg_replace')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_QUOTE')
-             ->hasOut('CONTAINS')
-             ->raw(' sideEffect{ delimiter = it.out("CONTAINS").out("CONCAT").has("rank", 0).next().noDelimiter[0]; }')
-             ->raw($prepareDelimiters)
-             ->regex('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$optionsWithE.').\\$')
+             ->outWithRank('CONCAT', 0)
+             ->raw('sideEffect{delimiter = it.get().value("noDelimiter")[0]; }')
+             ->inIs('CONCAT')
+             ->raw($makeDelimiters)
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();
 
         // with a concatenation
         $this->atomFunctionIs('\preg_replace')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->hasRank(0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
-             ->raw(' sideEffect{ delimiter = it.out("CONCAT").has("rank", 0).next().noDelimiter[0];  }')
-             ->raw($prepareDelimiters)
-             ->regex('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$optionsWithE.').\\$')
+             ->outWithRank('CONCAT', 0)
+             ->raw('sideEffect{delimiter = it.get().value("noDelimiter")[0]; }')
+             ->inIs('CONCAT')
+             ->raw($makeDelimiters)
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();
     }

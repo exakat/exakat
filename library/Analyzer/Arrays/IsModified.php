@@ -90,7 +90,7 @@ class IsModified extends Analyzer\Analyzer {
                  ->hasNoIn('METHOD') // possibly new too
                  ->atomIs('Functioncall')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_UNSET'))
-                 ->fullnspath($functions)
+                 ->fullnspathIs($functions)
                  ->back('first');
             $this->prepareQuery();
         }

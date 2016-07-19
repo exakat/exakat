@@ -31,25 +31,20 @@ class ForeachReferenceIsNotModified extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        // case of a variable
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->is('reference', true)
-             ->savePropertyAs('code', 'value')
-             ->inIs('VALUE')
-             ->outIs('BLOCK')
-             ->raw('filter{ it.out.loop(1){true}{it.object.atom == "Variable"}.has("code",value).filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any()}.any() == false}')
-             ->back('first');
-        $this->prepareQuery();
+        $modifiedVar = 'where( __.repeat( out() ).emit( hasLabel("Variable") ).times(15).hasLabel("Variable")
+                                 .filter{ it.get().value("code") == name}
+                                 .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\IsModified").count().is(eq(1)) )
+                                 .count().is(eq(0)) )';
 
         // case of a variable
         $this->atomIs('Foreach')
              ->outIs('VALUE')
+             ->outIsIE('RIGHT')
              ->is('reference', true)
-             ->savePropertyAs('code', 'value')
+             ->savePropertyAs('code', 'name')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->raw('filter{ it.out.loop(1){true}{it.object.atom == "Variable"}.has("code",value).filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any()}.any() == false}')
+             ->raw($modifiedVar)
              ->back('first');
         $this->prepareQuery();
     }

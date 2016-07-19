@@ -29,15 +29,13 @@ class ConstantClass extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Class')
              ->outIs('BLOCK')
-             ->raw('filter{ it.out("ELEMENT").count() > 0}')
-             ->raw('filter{ it.out("ELEMENT").filter{ it.atom != "Const" }.any() == false}')
+             ->raw('where( __.out("ELEMENT").not(hasLabel("Const")).count().is(eq(0)))')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Interface')
              ->outIs('BLOCK')
-             ->raw('filter{ it.out("ELEMENT").count() > 0}')
-             ->raw('filter{ it.out("ELEMENT").filter{ it.atom != "Const" }.any() == false}')
+             ->raw('where( __.out("ELEMENT").not(hasLabel("Const")).count().is(eq(0)))')
              ->back('first');
         $this->prepareQuery();
     }

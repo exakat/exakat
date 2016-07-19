@@ -1,14 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $b
-    Label : RIGHT
-      @
-      Label : AT
-        @
-        Label : AT
-          $x
+=
+Label : LEFT
+  $b
+Label : RIGHT
+  @
+  Label : AT
+    @
+    Label : AT
+      $x

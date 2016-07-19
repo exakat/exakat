@@ -31,23 +31,22 @@ class QueriesInLoop extends Analyzer\Analyzer {
         $this->atomIs(array('Foreach', 'For', 'While'))
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->code(array('mssql_query',
-                          'mysqli_query',
-                          'mysqli_unbuffered_query',
-                          'mysqli_db_query',
-                          
-                          'mysql_query',
-                          'mysql_unbuffered_query',
-                          'mysql_db_query',
-                          
-                          'pg_query',
-                          
-                          'sqlite_array_query',
-                          'sqlite_single_query',
-                          'sqlite_unbuffered_query',
-                          ))
-             ->back('first')
-             ;
+             ->codeIs(array('mssql_query',
+                            'mysqli_query',
+                            'mysqli_unbuffered_query',
+                            'mysqli_db_query',
+                            
+                            'mysql_query',
+                            'mysql_unbuffered_query',
+                            'mysql_db_query',
+                            
+                            'pg_query',
+                            
+                            'sqlite_array_query',
+                            'sqlite_single_query',
+                            'sqlite_unbuffered_query',
+                            ))
+             ->back('first');
         $this->prepareQuery();
 
         // for() { $pdo->query(); }
@@ -55,7 +54,7 @@ class QueriesInLoop extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasIn('METHOD')
-             ->code('query') // PDO, cyrus
+             ->codeIs('query') // PDO, cyrus
              ->back('first');
         $this->prepareQuery();
 

@@ -30,8 +30,8 @@ class MultipleClassesInFile extends Analyzer\Analyzer {
         $this->atomIs('File')
              ->savePropertyAs('code', 'filename')
              ->outIs('FILE')
-             ->atomInside(array('Class', 'Interface', 'Trait'))
-             ->eachCounted('filename', 2, '>=');
+             ->raw('where( __.repeat( out() ).times(15).emit( hasLabel("Class", "Interface", "Trait") ).where(__.out("NAME").hasLabel("Void").count().is(eq(0)) ).count().is(gt(1)) )')
+             ->back('first');
         $this->prepareQuery();
     }
 }

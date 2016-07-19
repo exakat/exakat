@@ -1,16 +1,9 @@
-<?php
+=
+Label : LEFT
+  $q
+Label : RIGHT
+  <<<EOF
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $q
-    Label : RIGHT
-      <<<EOF
-
-      Label : CONTAINS
-        Concatenation
-        Label : CONCAT
-          a
+  Label : CONCAT
+    a
 

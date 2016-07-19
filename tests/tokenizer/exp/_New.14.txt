@@ -1,46 +1,9 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    new
-    Label : NEW
-      {
-      Label : INDEX
-        1
-      Label : VARIABLE
-        [
-        Label : INDEX
-          d
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                3
-              Label : VARIABLE
-                $x
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $y
-              Label : PROPERTY
-                d
-        Label : VARIABLE
-          [
-          Label : INDEX
-            +
-            Label : LEFT
-              3
-            Label : RIGHT
-              *
-              Label : LEFT
-                4
-              Label : RIGHT
-                5
-          Label : VARIABLE
-            [
-            Label : INDEX
-              3
-            Label : VARIABLE
-              $x
++
+Label : LEFT
+  3
+Label : RIGHT
+  *
+  Label : LEFT
+    4
+  Label : RIGHT
+    5

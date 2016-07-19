@@ -1,38 +1,33 @@
-<?php
-
-Label : CODE
-  ;
+class
+Label : BLOCK
+  {}
   Label : ELEMENT
-    class
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $c
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $d
-        Label : VAR
-          var
-    Label : EXTENDS
-      y
-    Label : IMPLEMENTS
-      z
-    Label : NAME
-      x
+    var
+    Label : PPP
+      $a
+    Label : VAR
+      var
+  Label : ELEMENT
+    var
+    Label : PPP
+      $b
+    Label : VAR
+      var
+  Label : ELEMENT
+    var
+    Label : PPP
+      $c
+    Label : VAR
+      var
+  Label : ELEMENT
+    var
+    Label : PPP
+      $d
+    Label : VAR
+      var
+Label : EXTENDS
+  y
+Label : IMPLEMENTS
+  z
+Label : NAME
+  x

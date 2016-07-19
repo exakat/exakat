@@ -31,8 +31,7 @@ class ForeachWithList extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->atomIs('Functioncall')
-             ->code('list')
+             ->functioncallIs('\\list')
              ->back('first');
         $this->prepareQuery();
 
@@ -40,8 +39,7 @@ class ForeachWithList extends Analyzer\Analyzer {
              ->outIs('VALUE')
              ->atomIs('Keyvalue')
              ->outIs('VALUE')
-             ->atomIs('Functioncall')
-             ->code('list')
+             ->functioncallIs('\\list')
              ->back('first');
         $this->prepareQuery();
     }

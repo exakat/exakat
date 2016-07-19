@@ -1,34 +1,38 @@
-<?php
-
-Label : CODE
+./tests/tokenizer/source/Staticconstant.04.php
+Label : FILE
   ;
   Label : ELEMENT
-    ::
-    Label : CLASS
-      \
-      Label : SUBNAME
-        A
-    Label : CONSTANT
-      B
-  Label : ELEMENT
-    ::
-    Label : CLASS
-      \
-      Label : SUBNAME
-        A
-      Label : SUBNAME
-        C
-    Label : CONSTANT
-      B
-  Label : ELEMENT
-    ::
-    Label : CLASS
-      \
-      Label : SUBNAME
-        A
-      Label : SUBNAME
-        C
-      Label : SUBNAME
-        D
-    Label : CONSTANT
-      B
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            A
+        Label : CONSTANT
+          B
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            A
+          Label : SUBNAME
+            C
+        Label : CONSTANT
+          B
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            A
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            D
+        Label : CONSTANT
+          B

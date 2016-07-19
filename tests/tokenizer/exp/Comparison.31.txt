@@ -1,48 +1,17 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        +=
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $i
-          Label : PROPERTY
-            j
-        Label : RIGHT
-          1
-    Label : CONDITION
-      <
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          b
-      Label : RIGHT
-        ->
-        Label : METHOD
-          d
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                f
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-              Label : OBJECT
-                $e
-            Label : ARGUMENT
-              $g
-            Label : ARGUMENT
-              $h
-        Label : OBJECT
-          $c
+(
+Label : ARGUMENT
+  ->
+  Label : METHOD
+    f
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        Void
+    Label : NAME
+      f
+  Label : OBJECT
+    $e
+Label : ARGUMENT
+  $g
+Label : ARGUMENT
+  $h

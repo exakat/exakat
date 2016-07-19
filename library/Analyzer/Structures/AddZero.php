@@ -29,9 +29,9 @@ class AddZero extends Analyzer\Analyzer {
     public function analyze() {
         // $x += 0
         $this->atomIs('Assignation')
-             ->code(array('+=', '-='))
+             ->codeIs(array('+=', '-='))
              ->outIs('RIGHT')
-             ->code('0')
+             ->codeIs('0')
              ->back('first');
         $this->prepareQuery();
 
@@ -39,14 +39,14 @@ class AddZero extends Analyzer\Analyzer {
         $this->atomIs('Addition')
              ->tokenIs('T_PLUS')
              ->outIs('LEFT')
-             ->code('0')
+             ->codeIs('0')
              ->back('first');
         $this->prepareQuery();
 
         // $x +- 2
         $this->atomIs('Addition')
              ->outIs('RIGHT')
-             ->code('0')
+             ->codeIs('0')
              ->back('first');
         $this->prepareQuery();
     }

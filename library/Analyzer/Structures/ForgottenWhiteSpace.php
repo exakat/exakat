@@ -29,19 +29,17 @@ class ForgottenWhiteSpace extends Analyzer\Analyzer {
     public function analyze() {
 
         // spot the first element
-        $this->atomIs('Sequence')
-             ->is('root', true)
-             ->outIs('ELEMENT')
-             ->hasRank('first', 'ELEMENT')
-             ->regex('code', '^\\\\s+\\$');
+        $this->atomIs('File')
+             ->outIs('FILE')
+             ->outWithRank('ELEMENT', 'first')
+             ->regexIs('code', '^\\\\s+\\$');
         $this->prepareQuery();
 
         // Spot the last element
-        $this->atomIs('Sequence')
-             ->is('root', true)
-             ->outIs('ELEMENT')
-             ->hasRank('last', 'ELEMENT')
-             ->regex('code', '^\\\\s+\\$');
+        $this->atomIs('File')
+             ->outIs('FILE')
+             ->outWithRank('ELEMENT', 'last')
+             ->regexIs('code', '^\\\\s+\\$');
         $this->prepareQuery();
     }
 }

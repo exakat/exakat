@@ -31,7 +31,7 @@ class UseInstanceof extends Analyzer\Analyzer {
         $this->atomIs('Comparison')
              ->outIs('LEFT')
              ->atomIs('Functioncall')
-             ->fullnspath('\\get_class')
+             ->fullnspathIs('\\get_class')
              ->back('first');
         $this->prepareQuery();
 
@@ -39,7 +39,7 @@ class UseInstanceof extends Analyzer\Analyzer {
         $this->atomIs('Comparison')
              ->outIs('RIGHT')
              ->atomIs('Functioncall')
-             ->fullnspath('\\get_class')
+             ->fullnspathIs('\\get_class')
              ->back('first');
         $this->prepareQuery();
     }

@@ -48,51 +48,38 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
                             '\\sqlite_single_query');
         
         // dynamic type in the code : mysql_query($res, "select ".$a." from table");
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions)
+        $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 1)
+             ->outWithRank('ARGUMENT', 1)
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
 
         // dynamic type in the code : mysql_query($res, "select $a from table");
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions)
+        $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 1)
+             ->outWithRank('ARGUMENT', 1)
              ->atomIs('String')
-             ->outIs('CONTAINS')
+             ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
 
         // dynamic type in the code : mysql_query($res, <<<HEREDOC select $a from table HEREDOC);
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($functions)
+        $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 1)
+             ->outWithRank('ARGUMENT', 1)
              ->atomIs('Heredoc')
-             ->outIs('CONTAINS')
              ->is('heredoc', true)
+             ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
 
         // method call $someObject->query('select '. 'b') (probably too wide...)
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->code('query')
+             ->codeIs('query')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
@@ -100,12 +87,23 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
         // method call $someObject->query("select $b") (probably too wide...)
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->code('query')
+             ->codeIs('query')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->outIs('CONTAINS')
+             ->hasOut('CONCAT')
+             ->back('first');
+        $this->prepareQuery();
+
+        // dynamic type in the code : mysql_query($res, <<<HEREDOC select $a from table HEREDOC);
+        $this->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->codeIs('query')
+             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', 1)
+             ->atomIs('Heredoc')
+             ->is('heredoc', true)
+             ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
     }

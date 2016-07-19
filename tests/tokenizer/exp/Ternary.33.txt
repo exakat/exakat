@@ -1,57 +1,7 @@
-;
-Label : ELEMENT
-  A
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      .=
-      Label : LEFT
-        $a
-      Label : RIGHT
-        ?
-        Label : CONDITION
-          ::
-          Label : CLASS
-            \
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-          Label : METHOD
-            E
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'F'
-                Label : VARIABLE
-                  $b
-        Label : ELSE
-          1
-        Label : THEN
-          0
-    Label : ELEMENT
-      F
-    Label : ELEMENT
-      H
-      Label : ARGUMENTS
-        
-        Label : ARGUMENT
-          ::
-          Label : CLASS
-            \
-            Label : SUBNAME
-              I
-            Label : SUBNAME
-              J
-          Label : METHOD
-            K
-            Label : ARGUMENTS
-              
-              Label : ARGUMENT
-                void
-Label : ELEMENT
-  R
+(
+Label : ARGUMENT
+  [
+  Label : INDEX
+    'F'
+  Label : VARIABLE
+    $b

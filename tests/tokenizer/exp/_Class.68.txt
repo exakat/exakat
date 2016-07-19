@@ -1,42 +1,29 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    var_dump
+(
+Label : ARGUMENT
+  new
+  Label : NEW
+    class
     Label : ARGUMENTS
-      
+      (
       Label : ARGUMENT
-        new
-        Label : NEW
-          class
-          Label : ARGUMENTS
-            
-            Label : ARGUMENT
-              $i
-          Label : BLOCK
-            ;
-            Label : ELEMENT
-              function
-              Label : ARGUMENTS
-                
-                Label : ARGUMENT
-                  $i
-              Label : BLOCK
-                ;
-                Label : ELEMENT
-                  =
-                  Label : LEFT
-                    ->
-                    Label : OBJECT
-                      $this
-                    Label : PROPERTY
-                      i
-                  Label : RIGHT
-                    $i
-              Label : NAME
-                __construct
-              Label : PUBLIC
-                public
-          Label : NAME
-            
+        $i
+    Label : BLOCK
+      {}
+      Label : ELEMENT
+        __construct
+        Label : ARGUMENTS
+          (
+          Label : ARGUMENT
+            $i
+        Label : BLOCK
+          {}
+          Label : ELEMENT
+            =
+            Label : LEFT
+123098120398 [label="Reached level 15"]            Label : RIGHT
+123098120398 [label="Reached level 15"]        Label : NAME
+          __construct
+        Label : PUBLIC
+          public
+    Label : NAME
+      Void

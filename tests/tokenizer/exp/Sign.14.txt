@@ -1,9 +1,5 @@
-;
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    
-    Label : ARGUMENT
-      -
-      Label : SIGN
-        true
+echo
+Label : ARGUMENT
+  -
+  Label : SIGN
+    true

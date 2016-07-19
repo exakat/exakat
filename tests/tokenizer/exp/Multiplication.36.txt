@@ -1,64 +1,25 @@
-<?php
-
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      !
-      Label : NOT
-        empty
-        Label : ARGUMENTS
-          
-          Label : ARGUMENT
-            $b
-    Label : THEN
-      ;
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            B
-          Label : SUBNAME
-            C
-        Label : METHOD
-          D
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              +
-              Label : LEFT
-                \
-                Label : ARGUMENTS
-                  
-                  Label : ARGUMENT
-                    void
-                Label : SUBNAME
-                  E
-              Label : RIGHT
-                *
-                Label : LEFT
-                  *
-                  Label : LEFT
-                    *
-                    Label : LEFT
-                      1
-                    Label : RIGHT
-                      1
-                  Label : RIGHT
-                    2
-                Label : RIGHT
-                  3
-            Label : ARGUMENT
-              'F'
-            Label : ARGUMENT
-              null
-            Label : ARGUMENT
-              null
-            Label : ARGUMENT
-              G
++
+Label : LEFT
+  \
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      Void
+  Label : NAME
+    \
+    Label : SUBNAME
+      E
+Label : RIGHT
+  *
+  Label : LEFT
+    1
+  Label : RIGHT
+    *
+    Label : LEFT
+      1
+    Label : RIGHT
+      *
+      Label : LEFT
+        2
+      Label : RIGHT
+        3

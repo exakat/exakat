@@ -1,27 +1,11 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    c
-    Label : ARGUMENTS
-      
-      Label : ARGUMENT
-        "
-        Label : CONTAINS
-          Concatenation
-          Label : CONCAT
-            D: 
-          Label : CONCAT
-            ->
-            Label : OBJECT
-              $e
-            Label : PROPERTY
-              f
-  Label : ELEMENT
+(
+Label : ARGUMENT
+  "
+  Label : CONCAT
+    D: 
+  Label : CONCAT
     "
-    Label : CONTAINS
-      Concatenation
-      Label : CONCAT
-        H: 
-      Label : CONCAT
-        $g
+    Label : OBJECT
+      $e
+    Label : PROPERTY
+      f

@@ -30,7 +30,7 @@ class ReturnTypehintUsage extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Function')
-             ->hasOut('RETURN');
+             ->hasOut('RETURNTYPE');
         $this->prepareQuery();
     }
 }

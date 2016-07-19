@@ -32,7 +32,7 @@ class ShouldTypecast extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($typeCasting)
+             ->fullnspathIs($typeCasting)
              ->back('first');
         $this->prepareQuery();
     }
