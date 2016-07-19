@@ -6,6 +6,7 @@ Exakat commands
 List of commands :
 ------------------
 
+* anonymize
 * doctor
 * help
 * init
@@ -14,6 +15,49 @@ List of commands :
 * remove
 * update
 * upgrade
+
+anonymize
+---------
+
+Read files, directory or projects, and produce a anonymized version of the code. 
+Consistence between variables and names is preserved ($a will always be replaced by the same name). 
+PHP language structures, such as eval, isset or unset are preserved, though other native functions are not.
+
+File structure is not preserved : all files are renamed, and the hiearchy is flattented in one folder.
+As such, code is probably un-runnable if it relies on inclusions. 
+
+Non-PHP files, non-lintable or files that produces one PHP token are ignored.
+
+Command
+#######
+::
+
+    exakat init -p <project> 
+    exakat init -d <directory> 
+    exakat init -file <filename> 
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -p        | No  | Project name. Should be filesystem compatible (avoid / or \).               |
+|           |     | This takes into account <project> configuration                             |
++-----------+-----+-----------------------------------------------------------------------------+
+| -d        | No  | Directory to anonymize. Results will be in <directory>.anon                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -file     | No  | File to anonymize. Result will be <file>.anon                               |
++-----------+-----+-----------------------------------------------------------------------------+
+| -v        | No  | Verbose mode                                                                |
++-----------+-----+-----------------------------------------------------------------------------+
+
+Tips
+####
+
+* `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
+
+
 
 doctor
 ------
