@@ -94,7 +94,7 @@ class Anonymize extends Tasks {
                     $total += (int) $this->processFile($file, $dir.'.anon/'.$this->strings.'.php');
                 }
             }
-            display("Anonymized $total files\n");        
+            display("Anonymized $total files\n");
         } else {
             die("Usage : php exakat anonymize -file <filename>
                              -d <dirname>

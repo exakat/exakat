@@ -1113,7 +1113,7 @@ class Load extends Tasks {
         $fullnspath = $this->getFullnspath($nameId);
         $this->setAtom($interfaceId, ['code'       => $this->tokens[$current][1],
                                       'fullcode'   => $this->tokens[$current][1] . ' ' . $this->atoms[$nameId]['fullcode'] .
-                                                      (isset($extendsId) ? ' ' . $this->tokens[$extends][1] . ' ' . join(', ', $fullcode) : '') . 
+                                                      (isset($extendsId) ? ' ' . $this->tokens[$extends][1] . ' ' . join(', ', $fullcode) : '') .
                                                       static::FULLCODE_BLOCK,
                                       'line'       => $this->tokens[$current][2],
                                       'token'      => $this->getToken($this->tokens[$current][0]),
@@ -1235,7 +1235,7 @@ class Load extends Tasks {
                                  'token'    => $this->getToken($this->tokens[$current][0])]);
         
             return $id;
-        } 
+        }
 
         $n = count($this->tokens) - 2;
         if ($this->tokens[$n][0] === T_INLINE_HTML) {
@@ -1253,7 +1253,7 @@ class Load extends Tasks {
             $this->processNext();
         };
 
-        if ($this->tokens[$this->id][0] === T_INLINE_HTML) {  
+        if ($this->tokens[$this->id][0] === T_INLINE_HTML) {
             --$this->id;
         }
 
@@ -1321,7 +1321,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id - 1][0] === T_OPEN_TAG) {
                 $voidId = $this->addAtomVoid();
                 $this->addToSequence($voidId);
-            } 
+            }
             ++$this->id;
         }
     }
@@ -1793,7 +1793,7 @@ class Load extends Tasks {
             }
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
             // new static; (no parenthesis, as tested above)
-            
+
             $nameId = $this->processExit();
 
             return $nameId;
@@ -2171,8 +2171,8 @@ class Load extends Tasks {
         $this->addLink($dowhileId, $conditionId, 'CONDITION');
 
         $this->setAtom($dowhileId, ['code'     => $this->tokens[$current][1],
-                                    'fullcode' => $this->tokens[$current][1] . 
-                                                  ( $this->atoms[$blockId]['bracket'] === true ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE) . 
+                                    'fullcode' => $this->tokens[$current][1] .
+                                                  ( $this->atoms[$blockId]['bracket'] === true ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE) .
                                                    $while.'(' . $this->atoms[$conditionId]['fullcode'] . ')',
                                     'line'     => $this->tokens[$current][2],
                                     'token'    => $this->getToken($this->tokens[$current][0]) ]);
@@ -3273,7 +3273,7 @@ class Load extends Tasks {
             ++$this->id; // skip (
             $this->processNext();
             ++$this->id; // skip )
-            
+
             $breakLevel = $this->popExpression();
         } else {
             $breakLevel = $this->addAtomVoid();
@@ -3318,7 +3318,7 @@ class Load extends Tasks {
                 $right = $this->processFCOA($right);
                 $this->popExpression();
             }
-        } 
+        }
 
         if ($this->atoms[$right]['atom'] === 'Identifier') {
             $staticId = $this->addAtom('Staticconstant');
