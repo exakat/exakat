@@ -2061,7 +2061,6 @@ class Load extends Tasks {
         $isColon = ($this->tokens[$current][0] === T_FOREACH) && ($this->tokens[$this->id + 1][0] === T_COLON);
 
         $blockId = $this->processFollowingBlock([T_ENDFOREACH]);
-        print_r($this->atoms[$blockId]);
         
         $this->popExpression();
         $this->addLink($id, $blockId, 'BLOCK');
@@ -3642,6 +3641,7 @@ class Load extends Tasks {
         };
 
         $indexId = $this->popExpression();
+        $this->setAtom($indexId, ['rank' => 0]);
         $this->addLink($argumentsId, $indexId, 'ARGUMENT');
         $fullcode[] = $this->atoms[$indexId]['fullcode'];
 
