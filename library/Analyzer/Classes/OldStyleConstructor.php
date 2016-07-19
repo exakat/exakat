@@ -27,7 +27,7 @@ use Analyzer;
 
 class OldStyleConstructor extends Analyzer\Analyzer {
     public function analyze() {
-        $hasNo__construct = 'where( __.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"}.count().is(eq(0)) )';
+        $hasNo__construct = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"}.count().is(eq(0)) )';
 
         $this->atomIs('Class')
              ->outIs('NAME')
@@ -36,13 +36,13 @@ class OldStyleConstructor extends Analyzer\Analyzer {
              ->raw($hasNo__construct)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
+             ->atomIs('Function')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
              ->atomIs('File') // no namespace => Global
              ->back('first');
         $this->prepareQuery();
-return;
 
         $this->atomIs('Class')
              ->outIs('NAME')
@@ -56,8 +56,8 @@ return;
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
              ->atomIs('Namespace')
-             ->outIs('NAMESPACE')
-             ->codeIs('Global')
+             ->outIs('NAME')
+             ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
     }
