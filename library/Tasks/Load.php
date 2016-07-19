@@ -3842,9 +3842,9 @@ class Load extends Tasks {
                         $atom['atom'].',"'.
                         $this->escapeCsv( $atom['code'] ).'","'.
                         $this->escapeCsv( $atom['fullcode']).'",'.
-                        ($atom['line'] ?? 0).',"'.
-                        $this->escapeCsv( $atom['token'] ?? '') .'","'.
-                        ($atom['rank'] ?? -1).'"'.
+                        (isset($atom['line']) ? $atom['line'] : 0).',"'.
+                        $this->escapeCsv( isset($atom['token']) ? $atom['token'] : '') .'","'.
+                        (isset($atom['rank']) ? $atom['rank'] : -1).'"'.
                         $extra.
                         "\n");
 

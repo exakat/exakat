@@ -1740,7 +1740,7 @@ GREMLIN;
 
             if (isset($r[0]->processed->{1})) {
                 $this->processedCount += $r[0]->processed->{1};
-                $this->rowCount += $r[0]->total->{1} ?? 0;
+                $this->rowCount += (isset($r[0]->total->{1}) ? $r[0]->total->{1} : 0);
             }
         }
 
