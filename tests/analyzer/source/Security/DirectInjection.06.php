@@ -1,6 +1,6 @@
 <?php
 
-// OK, as 
+// OK, (server_ are tainted) 
 "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] . SOME_URL;
 "http://{$_SERVER['SERVER_NAME']}:{$_SERVER['SERVER_PORT']}". SOME_URL;
 

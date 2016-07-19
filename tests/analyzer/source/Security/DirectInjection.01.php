@@ -26,4 +26,6 @@ echo "{$_ENV['incoming0']}","{$_ENV['incoming1']}","{$_ENV['incoming2']}";
 
 echo '{$_ENV["incoming0"]}';
 
+$s = strtolower($_GET['variable']);
+
 ?>
