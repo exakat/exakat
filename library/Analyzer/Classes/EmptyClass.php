@@ -36,6 +36,7 @@ class EmptyClass extends Analyzer\Analyzer {
              ->analyzerIsNot('Exceptions/DefinedExceptions')
              ->hasOut('EXTENDS')
              ->outIs('BLOCK')
+             ->is('count', 1)
              ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
@@ -44,6 +45,7 @@ class EmptyClass extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->hasNoOut('EXTENDS')
              ->outIs('BLOCK')
+             ->is('count', 1)
              ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
