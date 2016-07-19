@@ -780,7 +780,7 @@ class Load extends Tasks {
                 $this->setAtom($partId, ['noDelimiter' => '',
                                          'delimiter'   => '']);
             }
-            $this->setAtom($partId, ['rank' => $rank++]);
+            $this->setAtom($partId, ['rank' => ++$rank]);
             $fullcode[] = $this->atoms[$partId]['fullcode'];
             $this->addLink($stringId, $partId, 'CONCAT');
         }
@@ -864,7 +864,7 @@ class Load extends Tasks {
                                                      $this->atoms[$variableId]['fullcode'].')'.static::FULLCODE_BLOCK,
                                       'line'     => $this->tokens[$catch][2],
                                       'token'    => $this->getToken($this->tokens[$current][0]),
-                                      'rank'     => $rank++]);
+                                      'rank'     => ++$rank]);
 
             $this->addLink($tryId, $catchId, 'CATCH');
             $fullcodeCatch[] = $this->atoms[$catchId]['fullcode'];
@@ -1015,7 +1015,7 @@ class Load extends Tasks {
             // Previous one
             if ($hasPrevious === true) {
                 $subnameId = $this->popExpression();
-                $this->setAtom($subnameId, ['rank' => $rank++]);
+                $this->setAtom($subnameId, ['rank' => ++$rank]);
                 $fullcode[] = $this->atoms[$subnameId]['code'];
                 $this->addLink($extendsId, $subnameId, 'SUBNAME');
             } else {
@@ -1029,7 +1029,7 @@ class Load extends Tasks {
 
                 $subnameId = $this->processNextAsIdentifier();
     
-                $this->setAtom($subnameId, ['rank' => $rank++]);
+                $this->setAtom($subnameId, ['rank' => ++$rank]);
                 $fullcode[] = $this->atoms[$subnameId]['code'];
                 $this->addLink($extendsId, $subnameId, 'SUBNAME');
             }
@@ -1391,7 +1391,7 @@ class Load extends Tasks {
             ++$this->id; // skip \
         }  ;
         // Back up a bit
-        $this->id--;
+        --$this->id;
 
         $x = ['code'     => $this->tokens[$current][1],
               'fullcode' => join('\\', $fullcode),
@@ -1494,7 +1494,7 @@ class Load extends Tasks {
                         $indexId = $this->addAtomVoid();
                     }
                     
-                    $this->setAtom($indexId, ['rank' => $rank++]);
+                    $this->setAtom($indexId, ['rank' => ++$rank]);
                     $this->argumentsId[] = $indexId;
                     
                     if ($typehintId > 0) {
@@ -1517,7 +1517,7 @@ class Load extends Tasks {
             if ($indexId === 0) {
                 $indexId = $this->addAtomVoid();
             }
-            $this->setAtom($indexId, ['rank' => $rank++]);
+            $this->setAtom($indexId, ['rank' => ++$rank]);
             $this->argumentsId[] = $indexId;
             
             if ($typehintId > 0) {
@@ -1584,7 +1584,7 @@ class Load extends Tasks {
                                     'fullcode' => $this->atoms[$nameId]['fullcode'].' = '.$this->atoms[$valueId]['fullcode'],
                                     'line'     => $this->tokens[$const][2],
                                     'token'    => $this->getToken($this->tokens[$const][0]),
-                                    'rank'     => $rank++]);
+                                    'rank'     => ++$rank]);
             $fullcode[] = $this->atoms[$defId]['fullcode'];
 
             $fullnspath = $this->getFullnspath($nameId, 'const');
@@ -1823,7 +1823,7 @@ class Load extends Tasks {
             
             if ($this->tokens[$this->id + 1][0] === T_COMMA) {
                 $elementId = $this->popExpression();
-                $this->setAtom($elementId, ['rank' => $rank++]);
+                $this->setAtom($elementId, ['rank' => ++$rank]);
                 $this->addLink($staticId, $elementId, strtoupper($atom));
 
                 $fullcode[] = $this->atoms[$elementId]['fullcode'];
@@ -2346,7 +2346,7 @@ class Load extends Tasks {
             
                 $caseId = $this->popExpression();
                 $this->addLink($casesId, $caseId, 'ELEMENT');
-                $this->setAtom($caseId, ['rank' => $rank++]);
+                $this->setAtom($caseId, ['rank' => ++$rank]);
             };
         }
         ++$this->id;
@@ -2553,7 +2553,7 @@ class Load extends Tasks {
 
     private function processTernary() {
         static $r = 0;
-        $r++;
+        ++$r;
 
         $current = $this->id;
 
@@ -3503,7 +3503,7 @@ class Load extends Tasks {
 
         $containsId = $this->popExpression();
         $this->addLink($concatenationId, $containsId, 'CONCAT');
-        $this->setAtom($containsId, ['rank' => $rank++]);
+        $this->setAtom($containsId, ['rank' => ++$rank]);
         $fullcode[] = $this->atoms[$containsId]['fullcode'];
 
         $finals = $this->getPrecedence($this->tokens[$this->id][0]);
@@ -3514,7 +3514,7 @@ class Load extends Tasks {
                 $containsId = $this->popExpression();
                 $this->addLink($concatenationId, $containsId, 'CONCAT');
                 $fullcode[] = $this->atoms[$containsId]['fullcode'];
-                $this->setAtom($containsId, ['rank' => $rank++]);
+                $this->setAtom($containsId, ['rank' => ++$rank]);
 
                 ++$this->id;
             }
@@ -3522,7 +3522,7 @@ class Load extends Tasks {
 
         $containsId = $this->popExpression();
         $this->addLink($concatenationId, $containsId, 'CONCAT');
-        $this->setAtom($containsId, ['rank' => $rank++]);
+        $this->setAtom($containsId, ['rank' => ++$rank]);
         $fullcode[] = $this->atoms[$containsId]['fullcode'];
         
         $x = ['code'     => $this->tokens[$current][1],
@@ -3674,7 +3674,7 @@ class Load extends Tasks {
     /// generic methods
     //////////////////////////////////////////////////////
     private function addAtom($atom) {
-        $this->atomCount++;
+        ++$this->atomCount;
         $this->atoms[$this->atomCount] = ['id'   => $this->atomCount,
                                           'atom' => $atom];
         return $this->atomCount;
@@ -3925,7 +3925,7 @@ class Load extends Tasks {
 
     private function addToSequence($id) {
         $this->addLink($this->sequence, $id, 'ELEMENT');
-        $this->setAtom($id, ['rank' => $this->sequenceRank[$this->sequenceCurrentRank]++]);
+        $this->setAtom($id, ['rank' => ++$this->sequenceRank[$this->sequenceCurrentRank]]);
     }
 
     private function endSequence() {
