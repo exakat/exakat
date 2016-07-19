@@ -8,5 +8,3 @@ Label : FILE
       ;
       Label : ELEMENT
         1231203
-      Label : ELEMENT
-        Void

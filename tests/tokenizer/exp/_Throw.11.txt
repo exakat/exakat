@@ -15,5 +15,3 @@ Label : FILE
           $xb
           Label : CODE
             $xb
-      Label : ELEMENT
-        Void

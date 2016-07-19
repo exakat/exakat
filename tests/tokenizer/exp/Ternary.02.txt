@@ -16,5 +16,3 @@ Label : FILE
           'b'
         Label : THEN
           'a'
-      Label : ELEMENT
-        Void

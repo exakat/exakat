@@ -10,5 +10,3 @@ Label : FILE
         ++
         Label : PREPLUSPLUS
           $x
-      Label : ELEMENT
-        Void

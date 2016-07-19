@@ -1,1 +1,9 @@
-Whole
+[
+Label : INDEX
+  [
+  Label : INDEX
+    'd'
+  Label : VARIABLE
+    $c
+Label : VARIABLE
+  $b

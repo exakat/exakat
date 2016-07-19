@@ -22,5 +22,3 @@ Label : FILE
             $c
       Label : ELEMENT
         Void
-      Label : ELEMENT
-        Void

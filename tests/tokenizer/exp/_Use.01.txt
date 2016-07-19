@@ -12,5 +12,3 @@ Label : FILE
           \
           Label : SUBNAME
             A
-      Label : ELEMENT
-        Void

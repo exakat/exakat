@@ -12,5 +12,3 @@ Label : FILE
           T
         Label : PROPERTY
           $x
-      Label : ELEMENT
-        Void

@@ -14,5 +14,3 @@ Label : FILE
             C
           Label : PROPERTY
             $y
-      Label : ELEMENT
-        Void

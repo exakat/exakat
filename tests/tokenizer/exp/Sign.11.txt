@@ -10,5 +10,3 @@ Label : FILE
         -
         Label : SIGN
           'b'
-      Label : ELEMENT
-        Void

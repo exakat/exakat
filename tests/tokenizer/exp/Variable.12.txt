@@ -1,1 +1,5 @@
-abstract
+[
+Label : INDEX
+  'c'
+Label : VARIABLE
+  $b

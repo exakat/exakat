@@ -14,5 +14,3 @@ Label : FILE
             $x
           Label : RIGHT
             +1.2
-      Label : ELEMENT
-        Void

@@ -12,5 +12,3 @@ Label : FILE
           static
         Label : PROPERTY
           $B
-      Label : ELEMENT
-        Void

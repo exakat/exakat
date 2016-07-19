@@ -12,5 +12,3 @@ Label : FILE
         !
         Label : NOT
           $y
-      Label : ELEMENT
-        Void

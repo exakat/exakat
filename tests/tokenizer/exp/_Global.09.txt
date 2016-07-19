@@ -14,5 +14,3 @@ Label : FILE
           $a
         Label : GLOBAL
           $b
-      Label : ELEMENT
-        Void

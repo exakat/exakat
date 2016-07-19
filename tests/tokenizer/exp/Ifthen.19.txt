@@ -20,5 +20,3 @@ Label : FILE
             $y
       Label : ELEMENT
         Void
-      Label : ELEMENT
-        Void

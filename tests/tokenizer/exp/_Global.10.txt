@@ -20,5 +20,3 @@ Label : FILE
           $d
         Label : GLOBAL
           $e
-      Label : ELEMENT
-        Void

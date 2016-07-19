@@ -29,5 +29,3 @@ Label : FILE
             Label : ELEMENT
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         Void
-      Label : ELEMENT
-        Void

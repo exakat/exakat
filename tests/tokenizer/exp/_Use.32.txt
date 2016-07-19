@@ -45,5 +45,3 @@ Label : FILE
             Baz
         Label : USE
           B
-      Label : ELEMENT
-        Void

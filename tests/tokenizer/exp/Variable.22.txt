@@ -22,5 +22,3 @@ Label : FILE
           f
         Label : CONCAT
           g
-      Label : ELEMENT
-        Void

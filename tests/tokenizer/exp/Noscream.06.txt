@@ -14,5 +14,3 @@ Label : FILE
             $x
           Label : PROPERTY
             t
-      Label : ELEMENT
-        Void

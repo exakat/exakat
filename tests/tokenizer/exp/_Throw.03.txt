@@ -14,5 +14,3 @@ Label : FILE
             $e
           Label : PROPERTY
             g
-      Label : ELEMENT
-        Void

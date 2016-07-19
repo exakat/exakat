@@ -19,8 +19,6 @@ Label : FILE
       Label : ELEMENT
         Void
       Label : ELEMENT
-        Void
-      Label : ELEMENT
         if
         Label : CONDITION
           2
@@ -35,8 +33,6 @@ Label : FILE
             ++
             Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
-        Void
-      Label : ELEMENT
         Void
       Label : ELEMENT
         if
@@ -58,8 +54,6 @@ Label : FILE
 123098120398 [label="Reached level 15"]      Label : ELEMENT
         Void
       Label : ELEMENT
-        Void
-      Label : ELEMENT
         if
         Label : CONDITION
           4
@@ -77,6 +71,4 @@ Label : FILE
             ++
             Label : POSTPLUSPLUS
 123098120398 [label="Reached level 15"]      Label : ELEMENT
-        Void
-      Label : ELEMENT
         Void

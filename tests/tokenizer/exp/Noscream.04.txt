@@ -10,5 +10,3 @@ Label : FILE
         @
         Label : AT
           $x
-      Label : ELEMENT
-        Void

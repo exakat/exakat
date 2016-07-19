@@ -12,5 +12,3 @@ Label : FILE
           '1'
         Label : RIGHT
           "3"
-      Label : ELEMENT
-        Void

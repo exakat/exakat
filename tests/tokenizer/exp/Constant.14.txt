@@ -22,5 +22,3 @@ Label : FILE
             C
       Label : ELEMENT
         Void
-      Label : ELEMENT
-        Void

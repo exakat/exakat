@@ -10,5 +10,3 @@ Label : FILE
         -
         Label : SIGN
           $x
-      Label : ELEMENT
-        Void

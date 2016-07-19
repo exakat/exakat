@@ -10,5 +10,3 @@ Label : FILE
         !
         Label : NOT
           1
-      Label : ELEMENT
-        Void

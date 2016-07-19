@@ -1,7 +1,8 @@
 <?php
-
-if (0) {
-    $a++;
-    continue; 
+foreach($a as $b) {
+    if (0) {
+        $a++;
+        continue; 
+    }
 }
 ?>

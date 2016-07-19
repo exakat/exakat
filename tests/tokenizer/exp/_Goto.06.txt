@@ -14,5 +14,3 @@ Label : FILE
         GOTO
         Label : GOTO
           cleanupCookie
-      Label : ELEMENT
-        Void

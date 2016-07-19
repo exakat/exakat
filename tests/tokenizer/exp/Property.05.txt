@@ -16,5 +16,3 @@ Label : FILE
             a
         Label : PROPERTY
           b
-      Label : ELEMENT
-        Void

@@ -12,5 +12,3 @@ Label : FILE
           a
         Label : CONSTANT
           b
-      Label : ELEMENT
-        Void

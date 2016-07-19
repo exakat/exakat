@@ -16,5 +16,3 @@ Label : FILE
             y
         Label : RIGHT
           1
-      Label : ELEMENT
-        Void

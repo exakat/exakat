@@ -16,5 +16,3 @@ Label : FILE
             $y
           Label : PROPERTY
             z
-      Label : ELEMENT
-        Void

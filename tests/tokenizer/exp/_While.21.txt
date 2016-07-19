@@ -14,5 +14,3 @@ Label : FILE
             Void
         Label : CONDITION
           $x
-      Label : ELEMENT
-        Void

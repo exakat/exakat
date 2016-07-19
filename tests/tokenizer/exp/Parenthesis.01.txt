@@ -10,5 +10,3 @@ Label : FILE
         1
         Label : CODE
           1
-      Label : ELEMENT
-        Void

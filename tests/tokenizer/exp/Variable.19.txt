@@ -16,5 +16,3 @@ Label : FILE
           c
         Label : CONCAT
           d
-      Label : ELEMENT
-        Void

@@ -1,4 +1,5 @@
 <?php
+foreach($a as $b) {
 
 if (!isset($v['w'])) continue;
 try {
@@ -9,4 +10,5 @@ try {
 $a++;
 $b =2;
 $c =3;
+}
 ?>

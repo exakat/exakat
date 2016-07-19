@@ -10,5 +10,3 @@ Label : FILE
         new
         Label : NEW
           $x
-      Label : ELEMENT
-        Void

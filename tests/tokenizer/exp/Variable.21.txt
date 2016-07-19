@@ -20,5 +20,3 @@ Label : FILE
           e
         Label : CONCAT
           f
-      Label : ELEMENT
-        Void

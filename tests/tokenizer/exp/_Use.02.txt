@@ -14,5 +14,3 @@ Label : FILE
             A
           Label : SUBNAME
             B
-      Label : ELEMENT
-        Void

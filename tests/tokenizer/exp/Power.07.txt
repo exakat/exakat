@@ -12,5 +12,3 @@ Label : FILE
           $x
         Label : RIGHT
           $y
-      Label : ELEMENT
-        Void

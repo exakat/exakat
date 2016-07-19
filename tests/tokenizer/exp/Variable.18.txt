@@ -14,5 +14,3 @@ Label : FILE
           b
         Label : CONCAT
           c
-      Label : ELEMENT
-        Void

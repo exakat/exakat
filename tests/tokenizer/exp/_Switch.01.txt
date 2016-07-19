@@ -14,5 +14,3 @@ Label : FILE
           $x
       Label : ELEMENT
         Void
-      Label : ELEMENT
-        Void
