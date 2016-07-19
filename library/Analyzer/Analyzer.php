@@ -472,7 +472,7 @@ repeat(__.in('.$linksDown.'))
     }
 
     public function noAtomInside($atom) {
-        $gremlin = 'where( emit( hasLabel('.$this->SorA($atom).') ).repeat( out() ).times(15).count().is(eq(0)) )';
+        $gremlin = 'where( __.repeat( out() ).emit( hasLabel('.$this->SorA($atom).') ).times(15).hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
@@ -1136,7 +1136,7 @@ GREMLIN
     }
 
     public function goToArray() {
-        $this->goToInstruction('Array');
+        $this->addMethod('repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
         
         return $this;
     }
@@ -1151,7 +1151,7 @@ GREMLIN
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('repeat(__.in(
 '.$linksDown.'
-)).until(and(hasLabel("Function"), where(__.out("NAME").not(has("atom", "Void")) )))');
+)).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
         
         return $this;
     }
@@ -1367,7 +1367,7 @@ GREMLIN
     }
 
     public function goToTraits() {
-        $this->addMethod('out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE").in("DEFINITION")');
+        $this->addMethod('out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION")');
         
         return $this;
     }
@@ -2028,7 +2028,7 @@ GREMLIN;
         return $this;
     }
     
-    private function SorA($v) {
+    protected function SorA($v) {
         if (is_array($v)) {
             return '"'.implode('", "', $v).'"';
         } else {
