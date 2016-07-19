@@ -34,10 +34,13 @@ class DirectInjection extends Analyzer\Analyzer {
         $vars = $this->loadIni('php_incoming.ini');
         $vars = $vars['incoming'];
         
-        $safeIndex = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
-                           'SCRIPT_NAME', 'SERVER_ADMIN', '_');
-        $safeIndex = 'or( __.out("VARIABLE").has("code", "\$_SERVER").count().is(eq(0)), 
-                          __.out("INDEX").has("atom", "String").has("noDelimiter", within(["' . join('", "', $safeIndex) . '"])).count().is(eq(0)))';
+        $safe = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
+                      'SCRIPT_NAME', 'SERVER_ADMIN', '_');
+        $safeIndex = 'or( __.out("VARIABLE").has("code", "\\$_SERVER").count().is(eq(0)), 
+                          __.out("INDEX").hasLabel("String")
+                            .where(__.out("ELEMENT").count().is(eq(0)) )
+                            .has("noDelimiter", within(["' . join('", "', $safe) . '"]))
+                            .count().is(eq(0)))';
 
         // Relayed call to another function
         $this->atomIs('Variable')
@@ -49,7 +52,6 @@ class DirectInjection extends Analyzer\Analyzer {
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->functionDefinition()
-             ->inIs('NAME')
 
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -101,8 +103,7 @@ class DirectInjection extends Analyzer\Analyzer {
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
-        // $_GET/_POST array... inside a string is useless and safe (will print Array)
-        // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
+        // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
         $this->atomIs('Variable')
              ->codeIs($vars, true)
              ->goToArray()
@@ -111,10 +112,12 @@ class DirectInjection extends Analyzer\Analyzer {
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
-        // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
+        // $_GET/_POST array... inside a string is useless and safe (will print Array)
+        // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs('Variable')
              ->codeIs($vars, true)
-             ->inIs('VARIABLE')
+             ->goToArray()
+             ->raw($safeIndex)
              ->inIs('CONCAT')
              ->analyzerIsNot('self');
         $this->prepareQuery();
