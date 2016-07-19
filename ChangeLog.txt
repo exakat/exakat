@@ -1,4 +1,4 @@
-Version 0.7.5 (Jade Faced Princess, Coming up)
+Version 0.7.5 (Water Repelling Golden Crystal Beast, Coming up)
 + Architecture
     +
 + Report
@@ -7,6 +7,15 @@ Version 0.7.5 (Jade Faced Princess, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.7.5 (Jade Faced Princess, 2016-07-19)
++ Architecture
+    + Added 'anonymize' command, that anonymize files and projects
++ Analyzer
+    + new analyzer : recommend preg_replace_callback_array() when there are several call to preg_replace_callback_array()
+    + Upgraded analysis : 1103 / 1464 test pass. 
++ Tokenizer
+    + Lots of fixes for stability : tested on 28M tokens 
 
 Version 0.7.4 (Great Sage Who Pacifies Heaven, 2016-07-12)
 + Architecture
