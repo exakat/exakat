@@ -45,6 +45,7 @@ class HexadecimalString extends Analyzer\Analyzer {
         // Simple Heredoc and nowdoc
         $this->atomIs('Heredoc')
              ->outWithRank('CONCAT', 0)
+             ->atomIs('String')
              ->regexIs('noDelimiter', $regex)
              ->back('first');
         $this->prepareQuery();
