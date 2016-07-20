@@ -31,6 +31,7 @@ class HexadecimalString extends Analyzer\Analyzer {
         // Strings
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
+             ->hasNoParent('Heredoc', 'CONCAT')
              ->regexIs('noDelimiter', $regex);
         $this->prepareQuery();
 

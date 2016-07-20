@@ -15,13 +15,14 @@ $hs6 = <<<HEREDOC
  0x128$x
 HEREDOC;
 $hs7 = " 0x129$x";
+$hs8 = " 0x12G9$x";
+$hs9 = " 0x2$n23";
 
 
 $nhs1 = 'n0x223';
 $nhs2 = '0xf23';
 $nhs3 = 'abcd';
 $nhs4 = '0s755';
-$nhs5 = " 0x2$n23";
 
 // $x is early late 
 $hs6 = <<<HEREDOC
