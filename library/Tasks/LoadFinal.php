@@ -87,7 +87,39 @@ GREMLIN;
         display('refine functioncall fullnspath');
         
         // fallback for PHP and ext, class, function, constant
+        // update fullnspath with fallback for functions 
+        $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
+        $docs = new \Analyzer\Docs($pathDocs);
 
+        $exts = $docs->listAllAnalyzer('Extensions');
+        $exts[] = 'php_constants';
+        
+        $c = array();
+        foreach($exts as $ext) {
+            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
+            $fullpath = $config->dir_root.'/data/'.$inifile;
+
+            $iniFile = parse_ini_file($fullpath);
+            
+            if (!empty($iniFile['constants'][0])) {
+                $c[] = $iniFile['constants'];
+            }
+        }
+        $constants = call_user_func_array('array_merge', $c);
+        $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
+        $constants = array_map('strtolower', $constants);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "NAMESPACE", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "TYPEHINT", "FUNCTION", "GROUPUSE").count().is(eq(0)) )  
+                            .filter{ it.get().value("code").toLowerCase() in arg1 }
+.sideEffect{ 
+    fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+    it.get().property("fullnspath", fullnspath); 
+}
+
+GREMLIN;
+        $this->gremlin->query($query, ['arg1' => $constants]);
+        display('spot PHP / ext constants');
     }
 }
 

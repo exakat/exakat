@@ -51,15 +51,13 @@ class IsExtConstant extends Analyzer\Analyzer {
         // based on full ns path
         $this->analyzerIs('Constants/ConstantUsage')
              ->atomIsNot(array('Boolean', 'Null', 'String'))
-             ->fullnspath($constantsFullNs);
+             ->fullnspathIs($constantsFullNs);
         $this->prepareQuery();
 
         $this->analyzerIs('Constants/ConstantUsage')
              ->analyzerIs('Constants/IsGlobalConstant')
-             ->code($constants);
+             ->codeIs($constants);
         $this->prepareQuery();
-
-        
     }
 }
 
