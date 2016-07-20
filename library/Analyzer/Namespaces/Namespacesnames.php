@@ -29,7 +29,7 @@ class Namespacesnames extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Namespace')
-             ->outIs('NAMESPACE');
+             ->outIs('NAME');
         $this->prepareQuery();
     }
 }
