@@ -1438,7 +1438,6 @@ class Load extends Tasks {
         $this->argumentsId = array();
 
         $fullcode = array();
-        $rank = 0;
         if (in_array($this->tokens[$this->id + 1][0], [T_CLOSE_PARENTHESIS, T_CLOSE_BRACKET])) {
             $voidId = $this->addAtomVoid();
             $this->setAtom($voidId, ['rank' => 0]);
@@ -1460,6 +1459,7 @@ class Load extends Tasks {
             $indexId = 0;
             $args_max = 0;
             $args_min = 0;
+            $rank = -1;
             
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 ++$args_max;
@@ -3405,7 +3405,7 @@ class Load extends Tasks {
         if (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'Property', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
             $staticId = $this->addAtom('Property');
             $links = 'PROPERTY';
-            $this->setAtom($staticId, ['enclosing' => false ]);
+            $this->setAtom($staticId, ['enclosing' => false]);
         } elseif (in_array($this->atoms[$right]['atom'], array('Functioncall', 'Methodcall'))) {
             $staticId = $this->addAtom('Methodcall');
             $links = 'METHOD';
@@ -3420,7 +3420,8 @@ class Load extends Tasks {
               'fullcode' => $this->atoms[$left]['fullcode'] . '->' .
                             $this->atoms[$right]['fullcode'],
               'line'     => $this->tokens[$current][2],
-              'token'    => $this->getToken($this->tokens[$current][0])];
+              'token'    => $this->getToken($this->tokens[$current][0])
+              ];
 
         $this->setAtom($staticId, $x);
         $this->pushExpression($staticId);
