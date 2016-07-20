@@ -43,7 +43,7 @@ class UncheckedResources extends Analyzer\Analyzer {
                      ->inIs('ARGUMENT')
                      ->inIs('ARGUMENTS')
                      ->hasNoIn('METHOD')
-                     ->fullnspath($functions);
+                     ->fullnspathIs($functions);
                 $this->prepareQuery();
 
                 // deferred usage of the resource
@@ -52,16 +52,22 @@ class UncheckedResources extends Analyzer\Analyzer {
                      ->inIs('RIGHT')
                      ->atomIs('Assignation')
                      // checked with a if ($resource) or while($resource)
-                     ->raw('filter{ it.in("CONDITION").any() == false }')
+                     ->hasNoIn('CONDITION')
                      ->_as('result')
                      ->outIs('LEFT')
-                     ->nextVariable('resource')
+                     ->savePropertyAs('fullcode', 'tmpvar')
+                     ->inIs('LEFT')
+                     ->nextSibling()
+                     ->atomInside('Variable')
+                     ->samePropertyAs('code', 'tmpvar')
+
                      // checked with a is_resource
-                     ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\is_resource").any() == false }')
+                     ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\is_resource").count().is(eq(0)) )')
                      // checked with a !$variable
-                     ->raw('filter{ it.in("NOT").any() == false }')
+                     ->hasNoIn('NOT')
                      // checked with a if ($resource == false) or while($resource == false)
-                     ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").any() == false }')
+                     ->hasNoComparison()
+                    // ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").count().is(eq(0)) )')
                      ->back('result');
                 $this->prepareQuery();
             }
