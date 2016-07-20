@@ -79,6 +79,8 @@ abstract class Analyzer {
     const CONTEXT_IN_CLOSURE = 1;
     const CONTEXT_OUTSIDE_CLOSURE = 2;
     
+    const MAX_LOOPING = 15;
+    
     static public $docs = null;
 
     private $gremlin = null;
@@ -465,14 +467,14 @@ repeat(__.in('.$linksDown.'))
     }
     
     public function atomInside($atom) {
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times(15) ';
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times('.self::MAX_LOOPING.') ';
         $this->addMethod($gremlin);
         
         return $this;
     }
 
     public function noAtomInside($atom) {
-        $gremlin = 'where( __.repeat( out() ).emit( hasLabel('.$this->SorA($atom).') ).times(15).hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
+        $gremlin = 'where( __.repeat( out() ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
@@ -1351,7 +1353,7 @@ GREMLIN
 
     public function goToAllParents() {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
-        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).emit().times(6)');
+        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.')');
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
 //        $this->addMethod('sideEffect{ allParents = []; }.until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).emit().repeat( sideEffect{allParents.push(it.get().id()); }.out("EXTENDS").in("DEFINITION").filter{ !(it.get().id() in allParents); } )');
