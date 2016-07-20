@@ -59,7 +59,7 @@ class Gremlin3 extends Graph {
         if (isset($params) && !empty($params)) {
             // Avoid changing arg10 to 'string'0 if query has more than 10 arguments.
             krsort($params);
-
+            
             foreach($params as $name => $value) {
                 if (is_string($value) && strlen($value) > 2000) {
                     $gremlin = "{ '".str_replace('$', '\\$', $value)."' }";
@@ -95,7 +95,7 @@ class Gremlin3 extends Graph {
                         unset($params[$name]);
                     } else {
                         $gremlin = 'def '.$defName.'() '.$gremlin;
-                        if (count($value) > 40000) {
+                        if (strlen($gremlin) > 65535 ) {
                             $gremlin = <<<GREMLIN
 def $defName() { 
     x = [];
