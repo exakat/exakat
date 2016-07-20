@@ -29,43 +29,44 @@ class Bracketless extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Ifthen')
-             ->isNot('alternative', true)
+             ->analyzerIsNot('self')
+             ->is('alternative', false)
+             ->outIs('ELSE')
+             ->is('bracket', false)
+             ->raw('where( __.not( and(has("count", 1), __.out("ELEMENT").hasLabel("Ifthen") ) ) )')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Ifthen')
+             ->analyzerIsNot('self')
+             ->is('alternative', false)
              ->outIs('THEN')
              ->is('bracket', false)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Ifthen')
-             ->isNot('alternative', true)
-             ->outIs('ELSE')
-             ->is('bracket', false)
-             ->raw("filter{ (it.out('ELEMENT').count() != 1) || (it.out('ELEMENT').has('atom', 'Ifthen').any() == false)}")
-             ->back('first');
-        $this->prepareQuery();
-
         $this->atomIs('For')
-             ->isNot('alternative', true)
+             ->is('alternative', false)
              ->outIs('BLOCK')
              ->is('bracket', false)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Foreach')
-             ->isNot('alternative', true)
+             ->is('alternative', false)
              ->outIs('BLOCK')
              ->is('bracket', false)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('While')
-             ->isNot('alternative', true)
+             ->is('alternative', false)
              ->outIs('BLOCK')
              ->isNot('bracket', true)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Dowhile')
-             ->isNot('alternative', true)
              ->outIs('BLOCK')
              ->is('bracket', false)
              ->back('first');
