@@ -91,7 +91,7 @@ class IsComposerNsname extends Analyzer\Analyzer {
         foreach($packagistClassesFullNSChunks as $id => $p) {
             $this->atomIs('Instanceof')
                  ->outIs('CLASS')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->atomIs(array('Nsname', 'Identifier'))
                  ->analyzerIsNot('self')
                  ->fullnspathIs($p);
             $this->prepareQuery();
@@ -99,7 +99,7 @@ class IsComposerNsname extends Analyzer\Analyzer {
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->atomIs(array('Nsname', 'Identifier'))
              ->fullnspathIs($packagistInterfacesFullNs);
         $this->prepareQuery();
     }
