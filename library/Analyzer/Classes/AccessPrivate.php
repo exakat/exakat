@@ -27,6 +27,16 @@ use Analyzer;
 
 class AccessPrivate extends Analyzer\Analyzer {
     public function analyze() {
+        $hasPrivateMethodDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function")
+                                                                            .out("NAME").filter{it.get().value("code") == name}.in("NAME")
+                                                                            .out("PRIVATE").count().is(eq(1)) )';
+        $notHasPrivateMethodDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function")
+                                                                               .out("NAME").filter{it.get().value("code") == name}.in("NAME")
+                                                                               .out("PRIVATE").count().is(eq(0)) )';
+
+        $hasPrivateProperty = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(1)) )';
+        $hasNotPrivateProperty = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(0)) )';
+        
         // methods
         // classname::method() direct class
         $this->atomIs('Staticmethodcall')
@@ -40,7 +50,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->codeIsNot(array('parent', 'static', 'self'))
              ->isNotLocalClass()
              ->classDefinition()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
+             ->raw($hasPrivateMethodDefinition)
              ->back('first');
         $this->prepareQuery();
 
@@ -56,27 +66,31 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->isNotLocalClass()
              ->classDefinition()
              ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
-             ->back('first');
+             ->raw($hasPrivateMethodDefinition)
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // Case of parent::
         $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->tokenIs('T_STRING')
              ->codeIs('parent')
              ->isNotLocalClass()
              ->goToClass()
              ->goToExtends()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
-             ->back('first');
+             ->raw($hasPrivateMethodDefinition)
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
+        // In the grand-parents
         $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('self')
              ->outIs('METHOD')
@@ -89,11 +103,11 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->codeIs('parent')
              ->isNotLocalClass()
              ->goToClass()
-             ->goToExtends()
-             ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
-             ->back('first');
-        $this->prepareQuery(); 
+             // Go to All parent is in the next raw
+             ->raw('where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times(6).'.$hasPrivateMethodDefinition.'.count().is(neq(0)) )')
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
 
         // self / static::method() in parent class
         // static : the class which is called
@@ -110,11 +124,12 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->codeIs(array('self', 'static'))
              ->goToClass()
              // no local method
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").count().is(eq(0)) )')
+             ->raw($notHasPrivateMethodDefinition)
              ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code") == name}.in("NAME").out("PRIVATE").count().is(eq(1)) )')
-             ->back('first');
-        $this->prepareQuery(); 
+             ->raw($hasPrivateMethodDefinition)
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
 
         // properties
         // className::$property direct call
@@ -128,7 +143,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->isNotLocalClass()
 
              ->goToClass()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(1)) )')
+             ->raw($hasPrivateProperty)
 
              ->back('first');
         $this->prepareQuery();
@@ -145,7 +160,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->isNotLocalClass()
 
              ->goToClass()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(1)) )')
+             ->raw($hasPrivateProperty)
 
              ->back('first');
         $this->prepareQuery();
@@ -164,7 +179,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->goToClass()
              ->goToExtends()
              ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(1)) )')
+             ->raw($hasPrivateProperty)
 
              ->back('first');
         $this->prepareQuery();
