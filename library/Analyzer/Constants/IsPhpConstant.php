@@ -26,18 +26,13 @@ namespace Analyzer\Constants;
 use Analyzer;
 
 class IsPhpConstant extends Analyzer\Analyzer {
-
-    public function dependsOn() {
-        return array('Constants/ConstantUsage');
-    }
-    
     public function analyze() {
         $constants = $this->loadIni('php_constants.ini', 'constants');
         $constantsFNP = $this->makeFullNsPath($constants);
         
         // Namespaced constant (\PATHINFO_BASENAME)
-        $this->analyzerIs('Constants/ConstantUsage')
-             ->atomIsNot(array("Boolean", "Null"))
+        $this->atomIs('Identifier')
+             ->hasNoIn(array('DEFINITION', 'NEW', 'USE', 'NAME', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'TYPEHINT', 'FUNCTION', 'GROUPUSE'))
              ->fullnspathIs($constantsFNP);
         $this->prepareQuery();
     }

@@ -1562,29 +1562,6 @@ as("context")
 
 GREMLIN
 
-/*
-
-sideEffect{ 
-    current = it;
-    context = ["Namespace":"Global", "Function":"Global", "Class":"Global"]; 
-    it.in.loop(1){true}{it.object.atom in ["Namespace", "Function", "Class"]}
-         .each{ 
-            if (it.atom == "Namespace") { 
-                context[it.atom] = it.out("NAMESPACE").next().fullcode; 
-            } else if (context[it.atom] == "Global") { 
-                context[it.atom] = it.out("NAME").next().code; 
-
-                // In case of closure, we use the id number to differentiate them 
-                if (context[it.atom] == '') {
-                    context[it.atom] = it.out("NAME").next().id; 
-                    
-                    $forClosure
-                }
-            } 
-        }
-    } 
-
-*/
 );
         
         return $this;
