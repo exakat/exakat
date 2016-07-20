@@ -28,7 +28,7 @@ use Analyzer;
 class IncludeUsage extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Include')
-             ->tokenIs(array('T_REQUIRE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_INCLUDE_ONCE'));
+             ->inIs('NAME');
         $this->prepareQuery();
     }
 }
