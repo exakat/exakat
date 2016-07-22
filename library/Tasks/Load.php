@@ -331,7 +331,8 @@ class Load extends Tasks {
             die("This PHP binary is not valid for running Exakat.\n");
         }
         $this->php->getTokens();
-
+        $this->php->setPHPConstants();
+        
         if (static::$client === null) {
             static::$client = new \Loader\CypherG3();
         }
@@ -704,7 +705,7 @@ class Load extends Tasks {
     private function processQuote() {
         $current = $this->id;
         $fullcode = [];
-        $rank = 0;
+        $rank = -1;
         
         if ($this->tokens[$current][0] === T_QUOTE) {
             $stringId = $this->addAtom('String');
@@ -3920,7 +3921,7 @@ class Load extends Tasks {
                                          'bracket'  => false]);
         
         $this->sequences[]    = $this->sequence;
-        $this->sequenceRank[] = 0;
+        $this->sequenceRank[] = -1;
         $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
     }
 
@@ -3947,7 +3948,7 @@ class Load extends Tasks {
         if (is_string($token)) {
             return self::TOKENNAMES[$token];
         } else {
-            return token_name($token);
+            $x = $this->php->getTokenName($token);
         }
     }
 
