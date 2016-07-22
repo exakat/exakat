@@ -1,4 +1,4 @@
-Version 0.7.5 (Water Repelling Golden Crystal Beast, Coming up)
+Version 0.7.6 (Water Repelling Golden Crystal Beast, Coming up)
 + Architecture
     +
 + Report
