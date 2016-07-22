@@ -72,7 +72,7 @@ class Anonymize extends Tasks {
             display("Anonymized $total files\n");
         } elseif (($project = $config->project) !== 'default') {
             display("Anonymizing project $project\n");
-            $dir = $config->projects_root.'/projects/'.$project.'/code';
+            $dir = $config->projects_root.'/projects/'.$project.'/'.$project;
 
             if (!file_exists($config->projects_root.'/projects/'.$project)) {
                 die('Can\'t anonymize project '.$project.' as it doesn\'t exist'."\n");
@@ -82,16 +82,19 @@ class Anonymize extends Tasks {
                 die('Can\'t anonymize project '.$project.' as it doesn\'t have code'."\n");
             }
 
-            $files = rglob($dir);
+            $files = $this->datastore->getCol('files', 'file');
+    
+            $path = $config->projects_root.'/projects/'.$config->project.'/code';
+
             $total = 0;
             if (file_exists($dir.'.anon')) {
                 rmdirRecursive($dir.'.anon');
             }
             mkdir($dir.'.anon', 0755);
             foreach($files as $file) {
-                if ($this->checkCompilation($file)) {
+                if ($this->checkCompilation($path.$file)) {
                     ++$this->strings;
-                    $total += (int) $this->processFile($file, $dir.'.anon/'.$this->strings.'.php');
+                    $total += (int) $this->processFile($path.$file, $dir.'.anon/'.$this->strings.'.php');
                 }
             }
             display("Anonymized $total files\n");
@@ -101,9 +104,6 @@ class Anonymize extends Tasks {
                              -p <project>\n");
         }
 
-        if (!file_exists($file)) {
-            die('Usage : php script/anonymize.php <filename> ('.$file.' doesn\'t exist)');
-        }
         display( 'Processing file ', $file,' into ', $file, ".anon\n");
 
     }
