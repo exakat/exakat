@@ -110,7 +110,7 @@ GREMLIN;
         $constants = array_map('strtolower', $constants);
 
         $query = <<<GREMLIN
-g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "NAMESPACE", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "TYPEHINT", "FUNCTION", "GROUPUSE").count().is(eq(0)) )  
+g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "TYPEHINT", "FUNCTION", "GROUPUSE").count().is(eq(0)) )  
                             .filter{ it.get().value("code").toLowerCase() in arg1 }
 .sideEffect{ 
     fullnspath = "\\\\" + it.get().value("code").toLowerCase();
