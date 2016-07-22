@@ -388,7 +388,7 @@ abstract class Analyzer {
 // Common methods
 ////////////////////////////////////////////////////////////////////////////////
 
-    private function hasNoInstruction($atom = 'Function') {
+    protected function hasNoInstruction($atom = 'Function') {
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('where( 
 repeat(__.in('.$linksDown.'))
@@ -410,7 +410,7 @@ repeat(__.in('.$linksDown.'))
         return $this;
     }
 
-    private function hasInstruction($atom = 'Function') {
+    protected function hasInstruction($atom = 'Function') {
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('where( 
 repeat(__.in('.$linksDown.'))
@@ -419,11 +419,13 @@ repeat(__.in('.$linksDown.'))
         return $this;
     }
 
-    private function goToInstruction($atom = 'Namespace') {
+    protected function goToInstruction($atom = 'Namespace') {
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('repeat( __.in(
 '.$linksDown.'
         )).until(hasLabel('.$this->SorA($atom).', "File") )');
+        
+        return $this;
     }
 
     public function tokenIs($atom) {
