@@ -29,7 +29,7 @@ class UnusedDist extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('NAME')
-             ->regex('code', '_dist\\$')
+             ->regexIs('code', '_dist\\$')
              ->savePropertyAs('code', 'name')
              ->raw(<<<GREMLIN
 filter{ g.idx("atoms")[["atom":"Functioncall"]].has("fullnspath", "\\\\charger_fonction")

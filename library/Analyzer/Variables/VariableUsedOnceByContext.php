@@ -38,7 +38,7 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->raw('where( __
                    .sideEffect{counts = [:]}
-                             .repeat( out() ).emit( hasLabel("Variable")).times(15)
+                             .repeat( out() ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.')
                              .sideEffect{ k = it.get().value("code"); 
                                          if (counts[k] == null) {
                                             counts[k] = 1;
@@ -48,7 +48,7 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
                               }.fold()
                           )
                           .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
-                          .repeat( out() ).emit( hasLabel("Variable")).times(15)
+                          .repeat( out() ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.')
                           .filter{ it.get().value("code") in names }');
         $this->prepareQuery();
 

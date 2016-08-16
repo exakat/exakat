@@ -55,7 +55,7 @@ class SetlocaleNeedsConstants extends Analyzer\Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIsNot($allowedConstants)
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
     }
 }
 

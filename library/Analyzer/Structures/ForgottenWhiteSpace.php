@@ -31,7 +31,7 @@ class ForgottenWhiteSpace extends Analyzer\Analyzer {
         // spot the first element
         $this->atomIs('File')
              ->outIs('FILE')
-             ->outWithRank('ELEMENT', 'first')
+             ->outWithRank('ELEMENT', 0)
              ->regexIs('code', '^\\\\s+\\$');
         $this->prepareQuery();
 

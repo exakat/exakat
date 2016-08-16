@@ -40,7 +40,7 @@ class UnusedArguments extends Analyzer\Analyzer {
     
         $isNotUsed = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times(15).count().is(eq(0)) )';
         //                                          .where( __.in("ANALYZED").has("analyzer", within("Analyzer\\\\Variables\\\\IsRead", "Analyzer\\\\Variables\\\\IsModified")).count().is(eq(1)) )
-    
+
         // Arguments, not reference
         $this->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'varname')
