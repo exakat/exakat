@@ -3945,11 +3945,7 @@ class Load extends Tasks {
     }
     
     private function getToken($token) {
-        if (is_string($token)) {
-            return self::TOKENNAMES[$token];
-        } else {
-            $x = $this->php->getTokenName($token);
-        }
+        return $this->php->getTokenName($token);
     }
 
     private function getPrecedence($token, $itself = false) {
