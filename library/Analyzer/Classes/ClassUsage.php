@@ -29,11 +29,14 @@ class ClassUsage extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('New')
-             ->outIs('NEW');
+             ->outIs('NEW')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array');
         $this->prepareQuery();
         
         $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS');
+             ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'));
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
@@ -66,10 +69,7 @@ class ClassUsage extends Analyzer\Analyzer {
              ->outIs('USE');
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs('\\class_alias')
+        $this->atomFunctionIs('\\class_alias')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
