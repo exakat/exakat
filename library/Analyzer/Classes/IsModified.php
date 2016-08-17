@@ -39,10 +39,8 @@ class IsModified extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs($atoms)
-             ->inIsIE('VARIABLE')
-             ->inIs(array('LEFT', 'VARIABLE'))
+             ->inIs(array('LEFT', 'APPEND'))
              ->atomIs(array('Assignation', 'Arrayappend'))
-             ->hasNoIn('VARIABLE')
              ->back('first');
         $this->prepareQuery();
 

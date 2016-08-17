@@ -2,7 +2,7 @@
 
 $expected     = array('$b->b', 
                       '$h->h', 
-                      '$f->f[]', 
+                      '$f->f', 
                       '$d2->d2', 
                       '$d2->d2', 
                       '$d2->d2', 
@@ -13,6 +13,7 @@ $expected     = array('$b->b',
                       '$d3->d3', 
                       '$d3->d3');
 
-$expected_not = array();
+$expected_not = array('$f->f2',
+                      '$d->d4');
 
 ?>

@@ -21,7 +21,7 @@ foreach($c3 as &$d4) {
 }
 
 foreach($e as &$f) {
-    $f->f[] = 1;
+    $f->f[] = $f->f2;
 }
 
 foreach($g as &$h) {
