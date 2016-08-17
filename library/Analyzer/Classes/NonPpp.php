@@ -31,19 +31,11 @@ class NonPpp extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs('Identifier')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
+        $this->atomIs(array('Class', 'Interface', 'Trait'))
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs(array('Function', 'Ppp', 'Static', 'Var'))
              ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'));
-        $this->prepareQuery();
-
-        $this->atomIs('Visibility')
-             ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'))
-             ->hasOut('DEFINE')
-             ->inIs('ELEMENT')
-             ->inIs('BLOCK')
-             ->atomIs(array('Class', 'Trait'))
-             ->back('first');
         $this->prepareQuery();
     }
 }
