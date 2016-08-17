@@ -32,34 +32,42 @@ class CouldBeClassConstant extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs('Visibility')
+        $this->atomIs('Ppp')
+             ->hasClass()
 
              ->hasNoOut(array('PRIVATE', 'PROTECTED'))
 
-             ->outIs('DEFINE')
+             ->outIs('PPP')
              ->analyzerIsNot('Classes/LocallyUnusedProperty')
 
              ->hasOut('RIGHT')
-             ->filter('it.out("RIGHT").filter{it.atom in ["Null", "Staticconstant"]}.any() == false')
+             
+             // Ignore null or static expressions in definitions.
+             ->raw('where( __.out("RIGHT").hasLabel("Null", "Staticconstant").count().is(eq(0)) )')
 
+             ->outIs('LEFT')
              ->savePropertyAs('propertyname', 'name')
-             ->outIsIE('LEFT')
+
              ->savePropertyAs('code', 'staticName')
              ->goToClass()
+
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('BLOCK')
 
                 // usage as property with $this
-             ->raw('filter{it.out.loop(1){true}{it.object.atom == "Property"}.filter{ it.out("OBJECT").has("code", "\$this").any()}
-                                                                             .filter{ it.out("PROPERTY").filter{ it.code.toLowerCase() == name}.any()}
-                                                                             .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\IsModified").any()}
-                                                                             .any() == false}')
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Property") ).times(15)
+                                                .where( __.out("OBJECT").has("code", "\$this") )
+                                                .where( __.out("PROPERTY").filter{ it.get().value("code").toLowerCase() == name.toLowerCase() } )
+                                                .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Classes\\\\IsModified") )
+                             .count().is(eq(0)) )')
 
                 // usage as static property with (namespace, self or static)
-             ->raw('filter{it.out.loop(1){true}{it.object.atom == "Staticproperty"}.filter{ it.out("CLASS").filter{ it.fullnspath == fnp}.any()}
-                                                                                   .filter{ it.out("PROPERTY").filter{ it.code.toLowerCase() == staticName.toLowerCase()}.any() || it.out("PROPERTY").out("VARIABLE").filter{ it.code.toLowerCase() == staticName.toLowerCase()}.any()}
-                                                                                   .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Classes\\\\IsModified").any()}
-                                                                                   .any() == false}')
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Staticproperty") ).times(15)
+                                                .where( __.out("CLASS").filter{ it.get().value("fullnspath") == fnp } )
+                                                .where( __.out("PROPERTY").filter{ it.get().value("code").toLowerCase() == staticName.toLowerCase() } )
+                                                .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Classes\\\\IsModified") )
+                             .count().is(eq(0)) )')
+
              ->back('first');
              
              // Exclude situations where property is used as an object or a resource (can't be class constant)
