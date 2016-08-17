@@ -28,11 +28,11 @@ use Analyzer;
 class ConstantDefinition extends Analyzer\Analyzer {
 
     public function analyze() {
-        // Const in a function or a trait 
+        // Const in a function or an interface (but not a trait )
         $this->atomIs('Const')
              ->hasClassInterface()
              ->outIs('CONST')
-             ->outIs('LEFT');
+             ->outIs('NAME');
         $this->prepareQuery();
     }
 }
