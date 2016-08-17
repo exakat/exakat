@@ -10,8 +10,8 @@ if ($a instanceof AjxpRole) {
 }
 
 class_alias('AjxpRole', $b);
-class_alias('\\NS\\AjxpROLE', $b);
-
+class_alias('\NS\AjxpROLE', $b);
+class_alias('NS\AjxpROLE', $b);
 
 }
 

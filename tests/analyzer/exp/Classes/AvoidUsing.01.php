@@ -1,7 +1,11 @@
 <?php
 
 $expected     = array("'AjxpRole'",
-                      "'\\\\NS\\\\AjxpROLE'",
+                      "'\\NS\\AjxpROLE'",
+                      "'NS\\AjxpROLE'",
+
+//\'AjxpRole\', \'NS\AjxpROLE\'
+
                       "use NS\AjxpRole as b",
                       'class y extends AjxpRole implements AjxpRole { /**/ } ',
                       'class y extends AjxpRole implements AjxpRole { /**/ } ',

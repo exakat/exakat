@@ -84,14 +84,15 @@ class AvoidUsing extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs('String')
-             ->noDelimiterIs($classes);
+             ->noDelimiterIs(array_merge($config->Classes_AvoidUsing, $classes))
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // mentions in strings
         $this->atomIs('String')
+             ->analyzerIsNot('self')
              ->noDelimiterIs($config->Classes_AvoidUsing);
         $this->prepareQuery();
-
     }
 }
 
