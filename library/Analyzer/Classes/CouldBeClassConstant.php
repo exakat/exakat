@@ -45,8 +45,8 @@ class CouldBeClassConstant extends Analyzer\Analyzer {
              // Ignore null or static expressions in definitions.
              ->raw('where( __.out("RIGHT").hasLabel("Null", "Staticconstant").count().is(eq(0)) )')
 
-             ->outIs('LEFT')
              ->savePropertyAs('propertyname', 'name')
+             ->outIs('LEFT')
 
              ->savePropertyAs('code', 'staticName')
              ->goToClass()

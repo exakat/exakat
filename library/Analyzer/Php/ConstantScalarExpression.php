@@ -34,7 +34,7 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
         // const x = 1 + 2;
         $this->atomIs('Const')
              ->outIs('CONST')
-             ->outIs('RIGHT')
+             ->outIs('VALUE')
              ->atomIsNot($validAtoms)
              ->tokenIsNot(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');
@@ -44,8 +44,7 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Assignation')
-             ->outIs('RIGHT')
+             ->outIs('DEFAULT')
              ->atomIsNot($validAtoms)
              ->tokenIsNot(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');
