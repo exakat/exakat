@@ -1186,7 +1186,7 @@ GREMLIN
     }
 
     public function hasClassDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").count().is(eq(1)))');
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Class").count().is(eq(1)))');
     
         return $this;
     }
@@ -1204,26 +1204,24 @@ GREMLIN
     }
 
     public function hasInterfaceDefinition() {
-        $this->addMethod("filter{ g.idx('interfaces')[['path':it.fullnspath]].any()}");
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface").count().is(eq(1)))');
     
         return $this;
     }
 
     public function hasNoInterfaceDefinition() {
-        $this->addMethod("filter{ g.idx('interfaces')[['path':it.fullnspath]].any() == false}");
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface").count().is(eq(0)))');
     
         return $this;
     }
 
-    public function traitDefinition() {
-        $this->addMethod('hasNot("fullnspath", null)
-                         .filter{ g.idx("traits").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("traits")[["path":it.fullnspath]].next(); }');
-    
+    public function hasTraitDefinition() {
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait").count().is(eq(1)))');
+
         return $this;
     }
 
-    public function noTraitDefinition() {
+    public function hasNoTraitDefinition() {
         $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait").count().is(eq(0)))');
     
         return $this;
