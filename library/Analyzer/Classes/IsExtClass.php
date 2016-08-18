@@ -47,6 +47,7 @@ class IsExtClass extends Analyzer\Analyzer {
 
         $classes = call_user_func_array('array_merge', $c);
         $classes = $this->makeFullNsPath($classes);
+        $classes = array_keys(array_count_values($classes));
         
         $this->analyzerIs('Classes/ClassUsage')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR', 'T_AS'))
