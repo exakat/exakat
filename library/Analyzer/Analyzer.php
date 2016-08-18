@@ -1209,19 +1209,13 @@ GREMLIN
         return $this;
     }
 
-    public function hasNoInterfaceDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface").count().is(eq(0)))');
-    
-        return $this;
-    }
-
     public function hasTraitDefinition() {
         $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait").count().is(eq(1)))');
 
         return $this;
     }
 
-    public function hasNoTraitDefinition() {
+    public function noTraitDefinition() {
         $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait").count().is(eq(0)))');
     
         return $this;
