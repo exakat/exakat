@@ -44,7 +44,6 @@ class CouldBePrivate extends Analyzer\Analyzer {
              ->_as('results')
 
             // Skip properties with 'null' as default : they will probably get an object, and can't be unused.
-             ->outIsIE('LEFT')
              ->savePropertyAs('propertyname', 'name')
              
              // property is never used, outside the current class, in a children class
@@ -58,8 +57,6 @@ class CouldBePrivate extends Analyzer\Analyzer {
                           )')
              ->back('results');
         $this->prepareQuery();
-
-//                                                     .where( __.until( hasLabel("Class") ).repeat( __.in('.$linksDown.')).as("a").until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).emit().repeat( out("EXTENDS").in("DEFINITION") ).filter{ it.get().value("fullnspath") == fnp }.count().is(eq(0)) ) 
 
         // Static properties
         $this->atomIs('Ppp')
