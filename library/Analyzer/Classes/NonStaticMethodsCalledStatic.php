@@ -34,6 +34,7 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
     public function analyze() {
         // check outside the class : the first found class has the method, and it is not static
         $this->atomIs('Staticmethodcall')
+             ->analyzerIs('Classes/IsNotFamily')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->codeIsNot('__construct')
@@ -42,7 +43,6 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
 
              ->outIs('CLASS')
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->analyzerIs('Classes/IsNotFamily')
              ->classDefinition()
 
              ->outIs('BLOCK')
@@ -64,6 +64,7 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
         // check outside the class : the first found class has not method
         // Here, we find methods that are in the grand parents, and not static.
         $this->atomIs('Staticmethodcall')
+             ->analyzerIs('Classes/IsNotFamily')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->codeIsNot('__construct')
@@ -72,7 +73,6 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
 
              ->outIs('CLASS')
              ->codeIsNot(array('parent', 'self', 'static'))
-             ->analyzerIs('Classes/IsNotFamily')
              ->classDefinition()
              ->goToAllParents()
 
