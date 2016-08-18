@@ -33,7 +33,6 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
              ->hasNoOut('STATIC')
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->analyzerIsNot('self')
              ->savePropertyAs('propertyname', 'propertyname')
              ->goToClass()

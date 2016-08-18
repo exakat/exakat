@@ -27,7 +27,9 @@ use Analyzer;
 
 class PropertyNeverUsed extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Classes/PropertyUsedInternally');
+        return array('Classes/PropertyUsedInternally',
+                     'Classes/PropertyUsedAbove',
+                     'Classes/PropertyUsedBelow');
     }
 
     public function analyze() {
@@ -36,7 +38,10 @@ class PropertyNeverUsed extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->analyzerIsNot('Classes/PropertyUsedInternally');
+             ->analyzerIsNot('Classes/PropertyUsedInternally')
+             ->analyzerIsNot('Classes/PropertyUsedAbove')
+             ->analyzerIsNot('Classes/PropertyUsedBelow')
+             ;
         $this->prepareQuery();
     }
 }
