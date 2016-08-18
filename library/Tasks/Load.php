@@ -3921,7 +3921,7 @@ class Load extends Tasks {
                                          'bracket'  => false]);
         
         $this->sequences[]    = $this->sequence;
-        $this->sequenceRank[] = -1;
+        $this->sequenceRank[] = 0;
         $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
     }
 
