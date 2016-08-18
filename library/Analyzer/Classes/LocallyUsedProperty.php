@@ -36,7 +36,6 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
              ->hasNoOut('STATIC')
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->savePropertyAs('propertyname', 'property')
              ->goToClass()
              ->outIs('BLOCK')
