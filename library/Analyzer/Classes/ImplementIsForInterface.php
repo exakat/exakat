@@ -36,7 +36,8 @@ class ImplementIsForInterface extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
              ->hasClassDefinition()
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // class a implements a PHP class
@@ -50,6 +51,13 @@ class ImplementIsForInterface extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
              ->analyzerIs('Composer/IsComposerClass')
+             ->back('first');
+        $this->prepareQuery();
+
+        // trait t with implements
+        $this->atomIs('Class')
+             ->outIs('IMPLEMENTS')
+             ->hasTraitDefinition()
              ->back('first');
         $this->prepareQuery();
     }

@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_ImplementIsForInterface extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testClasses_ImplementIsForInterface01()  { $this->generic_test('Classes_ImplementIsForInterface.01'); }
     public function testClasses_ImplementIsForInterface02()  { $this->generic_test('Classes_ImplementIsForInterface.02'); }
     public function testClasses_ImplementIsForInterface03()  { $this->generic_test('Classes_ImplementIsForInterface.03'); }
+    public function testClasses_ImplementIsForInterface04()  { $this->generic_test('Classes/ImplementIsForInterface.04'); }
 }
 ?>
