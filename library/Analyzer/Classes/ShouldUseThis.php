@@ -34,23 +34,23 @@ class ShouldUseThis extends Analyzer\Analyzer {
     public function analyze() {
         // Non-Static Methods must use $this
         $this->atomIs('Function')
+             ->hasNoOut('STATIC')
+             ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
              ->outIs('NAME')
              ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
-             ->analyzerIsNot('Classes/UseThis')
-             ->hasNoOut('STATIC')
-             ->hasNoOut('ABSTRACT');
+             ->analyzerIsNot('Classes/UseThis');
         $this->prepareQuery();
 
         // Static Methods must use a static call to property or variable (not constant though)
         $this->atomIs('Function')
+             ->hasOut('STATIC')
              ->hasClassTrait()
              ->outIs('NAME')
              ->analyzerIs('Classes/MethodDefinition')
              ->inIs('NAME')
-             ->hasOut('STATIC')
-             ->analyzerIsNot('Classes/UseThis')
+             ->noAtomInside(array('Staticproperty', 'Staticmethodcall'))
              ->back('first');
         $this->prepareQuery();
     }

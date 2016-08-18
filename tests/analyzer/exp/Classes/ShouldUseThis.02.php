@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('public static function selfButEmpty( ) { /**/ } ', 
+$expected     = array('static public function selfButEmpty( ) { /**/ } ', 
                       'static function selfConstant( ) { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('static function selfProperty() { /**/ } ');
 
 ?>

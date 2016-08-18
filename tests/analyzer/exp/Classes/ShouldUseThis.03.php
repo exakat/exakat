@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('public static function staticButEmpty( ) { /**/ } ', 
+$expected     = array('static public function staticButEmpty( ) { /**/ } ', 
                       'static function staticConstant( ) { /**/ } ');
 
 $expected_not = array();
