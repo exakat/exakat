@@ -1038,7 +1038,7 @@ class Load extends Tasks {
             $this->setAtom($extendsId, ['code'     => '\\',
                                         'fullcode' => join('\\', $fullcode),
                                         'line'     => $this->tokens[$current][2],
-                                        'token'    => $this->getToken($this->tokens[$current][0]),
+                                        'token'    => $this->getToken($this->tokens[$current + 1][0]),
                                         'absolute' => !$hasPrevious]);
             $fullnspath = $this->getFullnspath($extendsId);
             $this->setAtom($extendsId, ['fullnspath' => $fullnspath]);
