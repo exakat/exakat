@@ -39,13 +39,12 @@ GREMLIN;
              ->hasNoOut('STATIC')
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->isPropertyNotIn('propertyname', $properties)
              ->back('ppp');
         $this->prepareQuery();
 
         $gremlin = <<<GREMLIN
-g.V().hasLabel("Staticproperty").out("CLASS").not(has("code", within(["self", "static"]))).sideEffect{fnp = it.get().value("fullnspath");}.in("CLASS")
+g.V().hasLabel("Staticproperty").out("CLASS").has("token", within("T_STRING", "T_NS_SEPARATOR")).not(has("code", within(["self", "static"]))).sideEffect{fnp = it.get().value("fullnspath");}.in("CLASS")
      .out("PROPERTY").hasLabel("Variable").map{ fnp + '::' + it.get().value("code"); }.unique();
 GREMLIN;
         $staticproperties = $this->query($gremlin);
