@@ -1,10 +1,10 @@
 <?php
 
 $expected     = array(  'static $sp = 1', 
-                        'private static $spp = 3', 
-                        'static $psp = 2'
+                        'static private $spp = 3',
+                        'private static $psp = 2'
 );
 
-$expected_not = array();
+$expected_not = array('static $sv = 4');
 
 ?>

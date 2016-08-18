@@ -1783,7 +1783,8 @@ class Load extends Tasks {
 
             return $this->processFunctioncall();
         } elseif ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
-            if ($this->isContext(self::CONTEXT_CLASS) &&
+            if (($this->isContext(self::CONTEXT_CLASS) ||
+                 $this->isContext(self::CONTEXT_TRAIT)   ) &&
                 !$this->isContext(self::CONTEXT_FUNCTION)) {
                 // something like public static
                 $this->processOptions('Static');
@@ -1808,10 +1809,13 @@ class Load extends Tasks {
         $staticId = $this->addAtom($atom);
         $rank = 0;
 
+        $fullcodePrefix = [];
         foreach($this->optionsTokens as $name => $optionId) {
             $this->addLink($staticId, $optionId, strtoupper($name));
-            $fullcodePrefix = $this->atoms[$optionId]['fullcode'];
+            $fullcodePrefix[] = $this->atoms[$optionId]['fullcode'];
         }
+        $fullcodePrefix = join(' ', $fullcodePrefix);
+
         $this->optionsTokens = array();
         
         if (!isset($fullcodePrefix)) {
