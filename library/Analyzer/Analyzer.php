@@ -104,6 +104,8 @@ abstract class Analyzer {
         $this->description = new \Description($this->analyzer);
         
         $this->_as('first');
+        
+        $this->config = \Config::factory();
     }
     
     public function __destruct() {
@@ -112,10 +114,6 @@ abstract class Analyzer {
         }
     }
     
-    public function setConfig($config) {
-        $this->config = $config;
-    }
-
     public function getInBaseName() {
         return $this->analyzerInBase;
     }
@@ -1678,7 +1676,8 @@ GREMLIN;
         
         $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
-// Query (#'.(count($this->queries) + 1).')for '.$this->analyzerQuoted;
+// Query (#'.(count($this->queries) + 1).') for '.substr($this->analyzerQuoted, 10).'
+// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.str_replace('\\\\', '/', substr($this->analyzerQuoted, 10))." -v\n";
 
     // initializing a new query
         $this->queries[] = $query;
