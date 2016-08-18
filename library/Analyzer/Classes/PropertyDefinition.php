@@ -28,8 +28,8 @@ use Analyzer;
 class PropertyDefinition extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Visibility')
-             ->outIs('DEFINE')
+        $this->atomIs('Ppp')
+             ->outIs('PPP')
              ->outIsIE('LEFT')
              ->atomIs('Variable');
         $this->prepareQuery();

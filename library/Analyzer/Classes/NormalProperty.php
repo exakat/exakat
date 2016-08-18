@@ -30,9 +30,9 @@ class NormalProperty extends Analyzer\Analyzer {
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Visibility')
+             ->atomIs('Ppp')
              ->hasNoOut('STATIC')
-             ->outIs('DEFINE')
+             ->outIs('PPP')
              ->outIsIE('LEFT');
         $this->prepareQuery();
     }
