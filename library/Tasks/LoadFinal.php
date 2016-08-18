@@ -64,8 +64,11 @@ GREMLIN;
 
         // Create propertyname for Property Definitions
         $query = <<<GREMLIN
-g.V().hasLabel("Ppp").out("PPP").coalesce( out("LEFT"), __.filter{ true } )
-.sideEffect{ it.get().property('propertyname', it.get().value('code').toString().substring(1, it.get().value('code').size())); }
+g.V().hasLabel("Ppp", "Var").out("PPP").as("ppp")
+.coalesce( out("LEFT"), __.filter{ true } )
+.sideEffect{ propertyname = it.get().value('code').toString().substring(1, it.get().value('code').size()); }
+.select("ppp")
+.sideEffect{ it.get().property('propertyname', propertyname); }
 
 GREMLIN;
         $this->gremlin->query($query);
