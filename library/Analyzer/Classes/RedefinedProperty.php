@@ -27,18 +27,21 @@ use Analyzer;
 
 class RedefinedProperty extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Visibility')
-             ->outIs('DEFINE')
+        $this->atomIs('Ppp')
+             ->outIs('PPP')
+             ->_as('ppp')
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToAllParents()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->outIs('DEFINE')
+             ->atomIs('Ppp')
+             ->outIs('PPP')
              ->outIsIE('LEFT')
-             ->samePropertyAs('code', 'property');
+             ->samePropertyAs('code', 'property')
+             ->back('ppp')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

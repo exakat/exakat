@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('$a0',
-                      '$a1',
-                      '$a2',
-                      '$a3',
-                      '$a4',
-                      '$a5');
+$expected     = array( '$a1 = 11', 
+                       '$a2 = 12', 
+                       '$a0 = 10', 
+                       '$a5 = 15', 
+                       '$a3 = 13', 
+                       '$a4 = 14');
 
-$expected_not = array('$a6');
+$expected_not = array('$a6 = 16');
 
 ?>

@@ -8,8 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_RedefinedProperty extends Analyzer {
-    /* 1 methods */
+    /* 4 methods */
 
     public function testClasses_RedefinedProperty01()  { $this->generic_test('Classes_RedefinedProperty.01'); }
+    public function testClasses_RedefinedProperty02()  { $this->generic_test('Classes/RedefinedProperty.02'); }
+    public function testClasses_RedefinedProperty03()  { $this->generic_test('Classes/RedefinedProperty.03'); }
+    public function testClasses_RedefinedProperty04()  { $this->generic_test('Classes/RedefinedProperty.04'); }
 }
 ?>
