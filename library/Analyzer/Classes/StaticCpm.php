@@ -36,9 +36,9 @@ class StaticCpm extends Analyzer\Analyzer {
 
         $this->atomIs('Class')
              ->outIs('BLOCK')
-             ->atomInside('Visibility')
+             ->atomInside('Ppp')
              ->hasOut('STATIC')
-             ->outIs('DEFINE');
+             ->outIs('PPP');
         $this->prepareQuery();
     }
 }
