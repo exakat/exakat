@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('static $property = 1',
-                      'static $property3');
+$expected     = array('protected static $property = 1',
+                      'protected static $property3');
 
-$expected_not = array('static $property2 = 2',
-                      'static $property4');
+$expected_not = array('protected static $property2 = 2',
+                      'protected static $property4');
 
 ?>

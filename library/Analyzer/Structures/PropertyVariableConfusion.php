@@ -32,18 +32,20 @@ class PropertyVariableConfusion extends Analyzer\Analyzer {
     
     public function analyze() {
         // public $x = 3; static or not
-        $this->atomIs('Visibility')
-             ->outIs('DEFINE')
+        $this->atomIs('Ppp')
+             ->outIs('PPP')
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'name')
              ->inIsIE('LEFT')
-             ->inIs('DEFINE')
+             ->inIs('PPP')
              ->inIs('ELEMENT')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->outIs('BLOCK')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'name')
-             ->hasFunction()
-             ->analyzerIsNot('Variables/Arguments')
-             ->back('first');
+             ->hasNoIn('PROPERTY')
+             ->analyzerIsNot('Variables/Arguments');
         $this->prepareQuery();
     }
 }
