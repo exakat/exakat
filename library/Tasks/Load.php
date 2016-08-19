@@ -1851,10 +1851,12 @@ class Load extends Tasks {
     }
     
     private function processStaticVariable() {
+        $this->processOptions('Static');
         return $this->processSGVariable('Static');
     }
     
     private function processGlobalVariable() {
+        $this->processOptions('Global');
         return $this->processSGVariable('Global');
     }
     
