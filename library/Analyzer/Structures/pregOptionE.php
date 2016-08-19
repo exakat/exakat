@@ -52,7 +52,7 @@ class pregOptionE extends Analyzer\Analyzer {
         $this->atomFunctionIs('\preg_replace')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
-             ->tokenIs('T_QUOTE')
+             ->atomIs('String')
              ->outWithRank('CONCAT', 0)
              ->raw('sideEffect{delimiter = it.get().value("noDelimiter")[0]; }')
              ->inIs('CONCAT')
