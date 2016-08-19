@@ -32,9 +32,7 @@ class UselessUnset extends Analyzer\Analyzer {
     
     public function analyze() {
         // unset on arguments, reference or value
-        $this->atomIs('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->fullnspathIs('\\unset')
+        $this->atomFunctionIs('\\unset')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
@@ -43,9 +41,7 @@ class UselessUnset extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // unset on global
-        $this->atomIs('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->fullnspathIs('\\unset')
+        $this->atomFunctionIs('\\unset')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
@@ -59,17 +55,15 @@ class UselessUnset extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // unset on static
-        $this->atomIs('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->fullnspathIs('\\unset')
+        $this->atomFunctionIs('\\unset')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'varname')
              ->goToFunction()
              ->outIs('BLOCK')
-             ->atomInside('Visibility')
-             ->outIs('DEFINE')
+             ->atomInside('Static')
+             ->outIs('STATIC')
              ->samePropertyAs('code', 'varname')
              ->back('first');
         $this->prepareQuery();
@@ -83,12 +77,14 @@ class UselessUnset extends Analyzer\Analyzer {
              ->inIs('VALUE')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->fullnspathIs('\\unset')
+             ->functioncallIs('\\unset')
              ->_as('result')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->outIsIE('OBJECT')
              ->samePropertyAs('code', 'varname')
+             ->inIsIE('OBJECT')
+             ->raw('where( out("OBJECT").hasLabel("Property").count().is(eq(0)) )')
              ->back('result');
         $this->prepareQuery();
 
@@ -104,12 +100,14 @@ class UselessUnset extends Analyzer\Analyzer {
              ->inIs('VALUE')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->fullnspathIs('\\unset')
+             ->functioncallIs('\\unset')
              ->_as('result')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->outIsIE('OBJECT')
              ->samePropertyAs('code', 'varname')
+             ->inIsIE('OBJECT')
+             ->raw('where( out("OBJECT").hasLabel("Property").count().is(eq(0)) )')
              ->back('result');
         $this->prepareQuery();
 
@@ -121,9 +119,7 @@ class UselessUnset extends Analyzer\Analyzer {
              ->savePropertyAs('fullcode', 'varname')
              ->inIsIE('VALUE')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->fullnspathIs('\\unset')
+             ->atomFunctionIs('\\unset')
              ->_as('result')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -163,13 +159,13 @@ class UselessUnset extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'varname')
              ->goToFunction()
              ->outIs('BLOCK')
-             ->atomInside('Visibility')
-             ->outIs('DEFINE')
+             ->atomInside('Static')
+             ->outIs('STATIC')
              ->samePropertyAs('code', 'varname')
              ->back('first');
         $this->prepareQuery();
 
-        // unset on foreach  (variable)
+        // unset on foreach (variable)
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->atomIs('Variable')
