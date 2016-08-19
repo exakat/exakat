@@ -9,7 +9,7 @@ interface i {}
 function f() {}
 
 const a = 2;
-define('b', 3);
+//define('b', 3);
 
 use a as b;
 

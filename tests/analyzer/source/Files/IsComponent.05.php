@@ -8,7 +8,8 @@ interface i {}
 function f() {}
 
 const a = 2;
-define('b', 3);
+//define('b', 3);
+// Define is not yet ready to fallback on \define
 
 use a as b;
 

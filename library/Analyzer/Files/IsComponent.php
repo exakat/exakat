@@ -24,31 +24,27 @@ namespace Analyzer\Files;
 use Analyzer;
 
 class IsComponent extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
+        $inert = '.not(hasLabel("Use", "Class", "Const", "Interface", "Trait", "Include", "Global", "Static", "Void"))
+                  .where( __.hasLabel("Functioncall").has("fullnspath", "\\\\define").count().is(eq(0)) )
+                  .where( __.hasLabel("Functioncall").filter{ it.get().value("token") in ["T_INCLUDE", "T_INCLUDE_ONCE", "T_REQUIRE_ONCE", "T_REQUIRE"] }.count().is(eq(0)) )
+                  .where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )
+                             ';
+        
+        $inertWithIfthen = $inert.'
+                  .where( __.hasLabel("Ifthen").where( __.out("THEN", "ELSE").out("ELEMENT")'.$inert.'.count().is(eq(0)) ).count().is(eq(0)) )';
+        
         $this->atomIs('File')
              ->outIs('FILE')
+             ->outIs('ELEMENT')
              ->outIs('CODE')
-             ->raw('transform{ if( it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").any()) {it.out("ELEMENT").out("BLOCK").next();} else {it;}}')
-             ->filter(' it.out("ELEMENT")
-                .filter{!(it.atom in ["Use", "Class", "Interface", "Trait", "Include", "Global", "Const", "Visibility"])}
-                .filter{ it.atom != "Function"     || it.out("NAME").hasNot("code", "").any() == false } // Function but not closure
-                .filter{ it.atom != "Functioncall" || it.has("fullnspath", "\\\\define").any() == false} // Functioncall but define
-
-                .filter{ it.atom != "Ifthen"       || it.out("THEN")
-                                                        .out("ELEMENT").filter{!(it.atom in ["Use", "Class", "Interface", "Trait", "Include", "Global", "Visibility"])} // No Const
-                                                                       .filter{ it.atom != "Function"     || it.out("NAME").hasNot("code", "").any() == false} // Function but not closure
-                                                                       .filter{ it.atom != "Functioncall" || it.has("fullnspath", "\\\\define").any() == false} // Functioncall but define
-                                                                       .any()} // Functioncall but define
-
-                .any() == false')
-             ->back('first');
+             ->raw('coalesce(__.out("ELEMENT").hasLabel("Namespace").out("BLOCK"),  __.filter{true} )')
+             ->raw('where( __.out("ELEMENT")'.$inertWithIfthen.'.count().is(eq(0)) )
+             ')
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
+        //
     }
 }
 
