@@ -55,11 +55,11 @@ class Php7RelaxedKeyword extends Analyzer\Analyzer {
              ->inIs('NAME');
         $this->prepareQuery();
 
-        // Property names
+        // Constant names
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Visibility')
+             ->atomIs('Const')
              ->outIs('CONST')
              ->outIs('NAME')
              ->codeIs($keywords)
