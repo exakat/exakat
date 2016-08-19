@@ -34,6 +34,7 @@ class PropertyVariableConfusion extends Analyzer\Analyzer {
         // public $x = 3; static or not
         $this->atomIs('Ppp')
              ->outIs('PPP')
+             ->_as('ppp')
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'name')
              ->inIsIE('LEFT')
@@ -45,7 +46,8 @@ class PropertyVariableConfusion extends Analyzer\Analyzer {
              ->atomInside('Variable')
              ->samePropertyAs('code', 'name')
              ->hasNoIn('PROPERTY')
-             ->analyzerIsNot('Variables/Arguments');
+             ->analyzerIsNot('Variables/Arguments')
+             ->back('ppp');
         $this->prepareQuery();
     }
 }
