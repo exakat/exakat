@@ -31,10 +31,9 @@ class UnusedPrivateProperty extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        $this->atomIs('Visibility')
+        $this->atomIs('Ppp')
              ->hasOut('PRIVATE')
-             ->outIs('DEFINE')
-             ->outIsIE('LEFT')
+             ->outIs('PPP')
              ->analyzerIsNot('Classes/UsedPrivateProperty');
         $this->prepareQuery();
     }
