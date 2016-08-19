@@ -705,7 +705,7 @@ class Load extends Tasks {
     private function processQuote() {
         $current = $this->id;
         $fullcode = [];
-        $rank = 0;
+        $rank = -1;
         
         if ($this->tokens[$current][0] === T_QUOTE) {
             $stringId = $this->addAtom('String');
@@ -791,7 +791,7 @@ class Load extends Tasks {
               'fullcode' => $openQuote.join('', $fullcode).$closeQuote,
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0]),
-              'count'    => $rank];
+              'count'    => $rank + 1];
               
         if ($type === T_START_HEREDOC) {
             $x['delimiter'] = $closeQuote;
@@ -3507,7 +3507,7 @@ class Load extends Tasks {
         $current = $this->id;
         $concatenationId = $this->addAtom('Concatenation');
         $fullcode = [];
-        $rank = 0;
+        $rank = -1;
 
         $containsId = $this->popExpression();
         $this->addLink($concatenationId, $containsId, 'CONCAT');
