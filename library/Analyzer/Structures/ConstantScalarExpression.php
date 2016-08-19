@@ -29,12 +29,12 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
     protected $phpVersion = '5.6+';
     
     public function analyze() {
-        $authorizedAtoms = array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null', 'Identifier');
+        $authorizedAtoms = array('Integer', 'String', 'Real', 'Boolean', 'Void', 'Staticconstant', 'Null', 'Identifier');
         
         // in constants
         $this->atomIs('Const')
              ->outIs('CONST')
-             ->outIs('RIGHT')
+             ->outIs('VALUE')
              ->atomIsNot($authorizedAtoms)
              ->back('first');
         $this->prepareQuery();
@@ -43,17 +43,17 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->outIs('RIGHT')
+             ->outIs('DEFAULT')
              ->atomIsNot($authorizedAtoms)
              ->back('first');
         $this->prepareQuery();
 
         // in property's default value
-        $this->atomIs('Class')
+        $this->atomIs(array('Class', 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Visibility')
-             ->outIs('DEFINE')
+             ->atomIs('Ppp')
+             ->outIs('PPP')
              ->outIs('RIGHT')
              ->atomIsNot($authorizedAtoms)
              ->inIs('RIGHT');
