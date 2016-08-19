@@ -28,7 +28,7 @@ use Analyzer;
 class UsedPrivateProperty extends Analyzer\Analyzer {
 
     public function analyze() {
-        // property used in a staticmethodcall \a\b::$b
+        // property used in a staticproperty \a\b::$b
         $this->atomIs('Ppp')
              ->hasOut('PRIVATE')
 
@@ -37,14 +37,14 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->_as('ppp')
              ->savePropertyAs('code', 'property')
              ->goToClassTrait()
-             ->raw('where( __.out("NAME").hasLabel("Void").count().is(eq(0)) )')
+             ->hasName()
              ->savePropertyAs('fullnspath', 'classe')
-             ->raw('where( g.V().hasLabel("Staticproperty").out("CLASS").hasLabel("T_STRING", "T_NS_SEPARATOR").filter{ it.get().value("fullnspath") == classe }.in("CLASS")
-                                                           .out("PROPERTY").filter{ it.get().value("code") == property }.in("PROPERTY")
+             ->outIs('BLOCK')
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Staticproperty") ).times('.self::MAX_LOOPING.')
+                                                           .out("CLASS").filter{ it.get().value("token") in ["T_STRING", "T_NS_SEPARATOR", "T_STATIC" ] }.filter{ it.get().value("fullnspath") == classe }.in("CLASS")
+                                                           .out("PROPERTY").filter{ it.get().value("code") == property }
                                                            .count().is(neq(0)) )')
-             ->back('first')
-             ->outIs('PPP')
-             ->outIsIE('LEFT');
+             ->back('ppp');
         $this->prepareQuery();
 
         // property used in a static property static::$b or self::$b
@@ -65,6 +65,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('PROPERTY')
@@ -91,6 +92,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIs('fnp')
              ->inIs('CLASS')
              ->outIs('PROPERTY')
@@ -110,10 +112,8 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->analyzerIsNot('self')
              ->hasOut('PRIVATE')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->savePropertyAs('propertyname', 'x')
              ->_as('ppp')
-             ->inIsIE('LEFT')
              ->inIs('PPP')
              ->inIs('ELEMENT')
              ->atomInside('Property')
