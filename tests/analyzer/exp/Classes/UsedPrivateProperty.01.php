@@ -1,8 +1,8 @@
 <?php
 
 $expected     = array('$privatepa = array( )', 
-                      '$privatepsstatic', 
-                      '$privatepsself',
+                      '$privatepsstatic = 1', 
+                      '$privatepsself = 1',
                       '$privatep', 
 );
 

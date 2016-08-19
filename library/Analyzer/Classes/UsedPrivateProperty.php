@@ -33,8 +33,8 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->hasOut('PRIVATE')
 
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->_as('ppp')
+             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClassTrait()
              ->hasName()
@@ -47,35 +47,8 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->back('ppp');
         $this->prepareQuery();
 
-        // property used in a static property static::$b or self::$b
-        $this->atomIs('Class', 'Trait')
-             ->hasName()
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Ppp')
-             ->hasOut('PRIVATE')
-             ->outIs('PPP')
-             ->outIsIE('LEFT')
-             ->analyzerIsNot('self')
-             ->_as('ppp')
-             ->savePropertyAs('code', 'x')
-             ->inIsIE('LEFT')
-             ->inIs('PPP')
-             ->inIs('ELEMENT')
-             ->atomInside('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->samePropertyAs('fullnspath', 'fnp')
-             ->inIs('CLASS')
-             ->outIs('PROPERTY')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'x')
-             ->back('ppp');
-        $this->prepareQuery();
-
         // property used in a static property static::$b[] or self::$b[]
-        $this->atomIs('Class', 'Trait')
+        $this->atomIs(array('Class', 'Trait'))
              ->hasName()
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('BLOCK')
@@ -92,7 +65,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
              ->fullnspathIs('fnp')
              ->inIs('CLASS')
              ->outIs('PROPERTY')
@@ -103,14 +76,14 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property used in a normal methodcall with $this $this->b()
-        $this->atomIs('Class', 'Trait')
+        $this->atomIs(array('Class', 'Trait'))
              ->hasName()
              ->savePropertyAs('fullnspath', 'classname')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
-             ->analyzerIsNot('self')
              ->hasOut('PRIVATE')
+             ->analyzerIsNot('self')
              ->outIs('PPP')
              ->savePropertyAs('propertyname', 'x')
              ->_as('ppp')
