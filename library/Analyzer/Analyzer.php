@@ -753,9 +753,9 @@ GREMLIN
         
         $trim = addslashes($trim);
         if (is_array($code)) {
-            $this->addMethod("filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") in ***}", $code);
+            $this->addMethod('filter{it.get().value("fullcode")'.$caseSensitive.'.replaceFirst("^['.$trim.']?(.*?)['.$trim.']?\\$", "\\$1") in ***}', $code);
         } else {
-            $this->addMethod("filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") == ***}", $code);
+            $this->addMethod('filter{it.get().value("fullcode")'.$caseSensitive.'.replaceFirst("^['.$trim.']?(.*?)['.$trim.']?\\\$", "\\$1") == ***}', $code);
         }
         
         return $this;
