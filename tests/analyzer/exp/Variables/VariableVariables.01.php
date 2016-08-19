@@ -1,7 +1,12 @@
 <?php
 
-$expected     = array('$$variable');
+$expected     = array('$$variable',
+                      '${normal_variable}');
 
-$expected_not = array('a', '$variablevariable', '$variable', '$x', '$normal_variable');
+$expected_not = array('a', 
+                      '$variablevariable', 
+                      '$variable', 
+                      '$x', 
+                      '$normal_variable');
 
 ?>
