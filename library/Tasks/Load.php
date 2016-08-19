@@ -705,7 +705,7 @@ class Load extends Tasks {
     private function processQuote() {
         $current = $this->id;
         $fullcode = [];
-        $rank = -1;
+        $rank = 0;
         
         if ($this->tokens[$current][0] === T_QUOTE) {
             $stringId = $this->addAtom('String');
