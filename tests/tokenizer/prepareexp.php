@@ -54,7 +54,16 @@ if (empty($file)) {
 function run($test, $number) {
     print "$test.$number\n";
     
-    $shell = 'php -l ./source/'.$test.'.'.$number.'.php';
+    $ini = parse_ini_file('../../projects/test/config.ini');
+    $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
+
+    include_once('../../library/Phpexec.php');
+    include_once('../../library/Config.php');
+    $config = \Config::factory(array('foo', '-p', 'test'));
+        
+    $versionPHP = 'php'.str_replace('.', '', $phpversion);
+
+    $shell = $config->$versionPHP.' -l ./source/'.$test.'.'.$number.'.php';
     $res = shell_exec($shell);
     
     if (strpos('No syntax errors detected in', $res) !== false) {
