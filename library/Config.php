@@ -182,8 +182,8 @@ class Config {
             $this->projects_root = dirname(__DIR__);
         }
         
-        $configFile = $this->projects_root.'/config/config.ini'; 
-        if (file_exists($this->projects_root.'/config/config.ini')) {
+        $configFile = $this->projects_root.'/config/exakat.ini'; 
+        if (file_exists($this->projects_root.'/config/exakat.ini')) {
             $this->configFile = parse_ini_file($configFile);
         } else {
             $configFile = $this->projects_root.'/config/config-default.ini'; 

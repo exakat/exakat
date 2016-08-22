@@ -81,7 +81,7 @@ class Doctor extends Tasks {
 
         // neo4j
         if (empty($config->neo4j_folder)) {
-            $stats['neo4j']['installed'] = 'Couldn\'t find the path to neo4j from the config/config.ini. Please, check it.';
+            $stats['neo4j']['installed'] = 'Couldn\'t find the path to neo4j from the config/exakat.ini. Please, check it.';
         } elseif (!file_exists($config->neo4j_folder)) {
             $stats['neo4j']['installed'] = 'No (folder : '.$config->neo4j_folder.')';
         } else {
@@ -106,7 +106,7 @@ class Doctor extends Tasks {
             }
 
             if ($stats['neo4j']['port'] != $config->neo4j_port) {
-                $stats['neo4j']['port_alert'] = $config->neo4j_port.' : configured port in config/config.ini is not the one in the neo4j installation. Please, sync them.';
+                $stats['neo4j']['port_alert'] = $config->neo4j_port.' : configured port in config/exakat.ini is not the one in the neo4j installation. Please, sync them.';
             }
 
             if (preg_match('/dbms.security.auth_enabled\s*=\s*false/is', $file, $r)) {
@@ -114,9 +114,9 @@ class Doctor extends Tasks {
             } else {
                 $stats['neo4j']['authentication'] = 'Enabled.';
                 if (empty($config->neo4j_login)) {
-                    $stats['neo4j']['login'] = 'Login is not set, but authentication is. Please, set login in config/config.ini';
+                    $stats['neo4j']['login'] = 'Login is not set, but authentication is. Please, set login in config/exakat.ini';
                 } elseif (empty($config->neo4j_password)) {
-                    $stats['neo4j']['password'] = 'Login is set, but not password. Please, set it in config/config.ini';
+                    $stats['neo4j']['password'] = 'Login is set, but not password. Please, set it in config/exakat.ini';
                 }
                 $res = $this->gremlin->query('"Hello world"');
                 if ($res === null) {
@@ -195,7 +195,7 @@ class Doctor extends Tasks {
             mkdir($config->projects_root.'/config', 0755);
         }
 
-        if (!file_exists($config->projects_root.'/config/config.ini')) {
+        if (!file_exists($config->projects_root.'/config/exakat.ini')) {
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             
             $neo4j_folder = getenv('NEO4J_HOME');
@@ -234,16 +234,16 @@ php$version        = {$_SERVER['_']}
 ; Limit the size of a project to 1000 k tokens (about 100 k LOC)
 token_limit = 1000000
 INI;
-            file_put_contents($config->projects_root.'/config/config.ini', $ini);
+            file_put_contents($config->projects_root.'/config/exakat.ini', $ini);
         }
         
         if (!file_exists($config->projects_root.'/config/')) {
             $stats['folders']['config-folder'] = 'No';
-        } elseif (file_exists($config->projects_root.'/config/config.ini')) {
+        } elseif (file_exists($config->projects_root.'/config/exakat.ini')) {
             $stats['folders']['config-folder'] = 'Yes';
             $stats['folders']['config.ini'] = 'Yes';
 
-            $ini = parse_ini_file($config->projects_root.'/config/config.ini');
+            $ini = parse_ini_file($config->projects_root.'/config/exakat.ini');
         } else {
             $stats['folders']['config-folder'] = 'Yes';
             $stats['folders']['config.ini'] = 'No';
