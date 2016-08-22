@@ -1191,6 +1191,7 @@ SQL
                             'Array'                   => 'Arrays/Arrayindex',
                             'Multidimensional arrays' => 'Arrays/Multidimensional',
                             'Array short syntax'      => 'Arrays/ArrayNSUsage',
+                            'List short syntax'       => 'Structures/ListShortSyntax',
                             'Variable variables'      => 'Variables/VariableVariables',
 
                             'PHP arrays'              => 'Arrays/Phparrayindex',
