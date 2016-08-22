@@ -72,7 +72,7 @@ class Config {
                                             'project'        => 'default',
                                             'program'        => null,
                                             'repository'     => false,
-                                            'thema'          => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70','CompatibilityPHP71',
+                                            'thema'          => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
                                                                       'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                                                                       'Analyze'),
                                             'report'         => 'Premier',
@@ -283,7 +283,7 @@ class Config {
         unset($value);
         
         $other_php_versions = array();
-        foreach(array('52', '53', '54', '55', '56', '70', '71') as $version) {
+        foreach(array('52', '53', '54', '55', '56', '70', '71', '72') as $version) {
             if (empty($this->configFile['php'.$version])) {
                 continue;
             }

@@ -228,6 +228,7 @@ php          = {$_SERVER['_']}
 ;php56        = /path/to/php56
 ;php70        = /path/to/php70
 ;php71        = /path/to/php71
+;php72        = /path/to/php72
 php$version        = {$_SERVER['_']}
 
 ; Limit the size of a project to 1000 k tokens (about 100 k LOC)
@@ -431,6 +432,28 @@ INI;
                 $stats['PHP 7.1']['timezone'] = shell_exec($config->php71.' -r "echo ini_get(\'date.timezone\');" 2>&1');
                 $stats['PHP 7.1']['tokenizer'] = shell_exec($config->php71.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
                 $stats['PHP 7.1']['memory_limit'] = shell_exec($config->php71.' -r "echo ini_get(\'memory_limit\');" 2>&1');
+            }
+        }
+
+        // check PHP 7.2
+        if (!$config->php72) {
+            $stats['PHP 7.2']['configured'] = 'No';
+        } else {
+            $stats['PHP 7.2']['configured'] = 'Yes';
+            $version = shell_exec($config->php72.' -r "echo phpversion();" 2>&1');
+            if (strpos($version, 'not found') !== false) {
+                $stats['PHP 7.2']['installed'] = 'No';
+            } elseif (strpos($version, 'No such file') !== false) {
+                $stats['PHP 7.2']['installed'] = 'No';
+            } else {
+                $stats['PHP 7.2']['version'] = $version;
+                if (substr($version, 0, 3) != '7.2') {
+                    $stats['PHP 7.2']['version'] = $version.' (This doesn\'t seem to be version 7.2)';
+                }
+                $stats['PHP 7.2']['short_open_tags'] = shell_exec($config->php71.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+                $stats['PHP 7.2']['timezone'] = shell_exec($config->php71.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+                $stats['PHP 7.2']['tokenizer'] = shell_exec($config->php71.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+                $stats['PHP 7.2']['memory_limit'] = shell_exec($config->php71.' -r "echo ini_get(\'memory_limit\');" 2>&1');
             }
         }
 
