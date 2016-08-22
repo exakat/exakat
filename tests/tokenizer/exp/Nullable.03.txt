@@ -1,0 +1,15 @@
+(
+Label : ARGUMENT
+  $x
+  Label : TYPEHINT
+    int
+Label : ARGUMENT
+  $y
+  Label : DEFAULT
+    "3"
+  Label : TYPEHINT
+    string
+Label : ARGUMENT
+  $z
+  Label : TYPEHINT
+    callable

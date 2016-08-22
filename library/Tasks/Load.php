@@ -946,8 +946,12 @@ class Load extends Tasks {
         // Process return type
         if ($this->tokens[$this->id + 1][0] === T_COLON) {
             ++$this->id;
-            $returnTypeId = $this->processOneNsname();
+            if ($this->tokens[$this->id + 1][0] === T_QUESTION) {
+                $nullableId = $this->processNextAsIdentifier();
+                $this->addLink($functionId, $nullableId, 'NULLABLE');
+            }
 
+            $returnTypeId = $this->processOneNsname();
             $this->addLink($functionId, $returnTypeId, 'RETURNTYPE');
         }
 
@@ -980,7 +984,7 @@ class Load extends Tasks {
                                                      ($this->atoms[$nameId]['atom'] === 'Void' ? '' : $this->atoms[$nameId]['fullcode']).
                                                      '('.$this->atoms[$argumentsId]['fullcode'].')'.
                                                      (isset($useId) ? ' use ('.$this->atoms[$useId]['fullcode'].')' : ''). // No space before use
-                                                     (isset($returnTypeId) ? ' : '.$this->atoms[$returnTypeId]['fullcode'] : '').
+                                                     (isset($returnTypeId) ? ' : '.(isset($nullableId) ? '?' : '').$this->atoms[$returnTypeId]['fullcode'] : '').
                                                      (isset($blockId) ? self::FULLCODE_BLOCK : ' ;'),
                                      'line'       => $this->tokens[$current][2],
                                      'token'      => $this->getToken($this->tokens[$current][0]),
@@ -1465,6 +1469,11 @@ class Load extends Tasks {
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 ++$args_max;
                 if ($typehint === true) {
+                    if ($this->tokens[$this->id + 1][0] === T_QUESTION) {
+                        $nullableId = $this->processNextAsIdentifier();
+                    } else {
+                        $nullableId = 0;
+                    }
                     $typehintId = $this->processTypehint();
     
                     $this->processNext();
@@ -1482,7 +1491,8 @@ class Load extends Tasks {
                     }
                 } else {
                     $typehintId = 0;
-                    $defaultId = 0;
+                    $defaultId  = 0;
+                    $nullableId = 0;
 
                     while (!in_array($this->tokens[$this->id + 1][0], [T_COMMA, T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_BRACKET, T_CLOSE_TAG])) {
                         $this->processNext();
@@ -1498,10 +1508,15 @@ class Load extends Tasks {
                     $this->setAtom($indexId, ['rank' => ++$rank]);
                     $this->argumentsId[] = $indexId;
                     
-                    if ($typehintId > 0) {
+                    if ($nullableId > 0) {
+                        $this->addLink($indexId, $nullableId, 'NULLABLE');
+                        $this->addLink($indexId, $typehintId, 'TYPEHINT');
+                        $this->setAtom($indexId, ['fullcode' => '?'.$this->atoms[$typehintId]['fullcode'] . ' '. $this->atoms[$indexId]['fullcode']]);
+                    } elseif ($typehintId > 0) {
                         $this->addLink($indexId, $typehintId, 'TYPEHINT');
                         $this->setAtom($indexId, ['fullcode' => $this->atoms[$typehintId]['fullcode'] . ' '. $this->atoms[$indexId]['fullcode']]);
                     }
+
                     if ($defaultId > 0) {
                         $this->addLink($indexId, $defaultId, 'DEFAULT');
                         $this->setAtom($indexId, ['fullcode' => $this->atoms[$indexId]['fullcode'] . ' = '. $this->atoms[$defaultId]['fullcode']]);
@@ -1521,10 +1536,15 @@ class Load extends Tasks {
             $this->setAtom($indexId, ['rank' => ++$rank]);
             $this->argumentsId[] = $indexId;
             
-            if ($typehintId > 0) {
-                $this->addLink($indexId, $typehintId, 'TYPEHINT');
-                $this->setAtom($indexId, ['fullcode' => $this->atoms[$typehintId]['fullcode'] . ' '. $this->atoms[$indexId]['fullcode']]);
-            }
+             if ($nullableId > 0) {
+                 $this->addLink($indexId, $nullableId, 'NULLABLE');
+                 $this->addLink($indexId, $typehintId, 'TYPEHINT');
+                 $this->setAtom($indexId, ['fullcode' => '?'.$this->atoms[$typehintId]['fullcode'] . ' '. $this->atoms[$indexId]['fullcode']]);
+             } elseif ($typehintId > 0) {
+                 $this->addLink($indexId, $typehintId, 'TYPEHINT');
+                 $this->setAtom($indexId, ['fullcode' => $this->atoms[$typehintId]['fullcode'] . ' '. $this->atoms[$indexId]['fullcode']]);
+             }
+
             if ($defaultId > 0) {
                 $this->addLink($indexId, $defaultId, 'DEFAULT');
                 $this->setAtom($indexId, ['fullcode' => $this->atoms[$indexId]['fullcode'] . ' = '. $this->atoms[$defaultId]['fullcode']]);

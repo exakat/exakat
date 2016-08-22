@@ -1,0 +1,27 @@
+(
+Label : ARGUMENT
+  $x
+  Label : NULLABLE
+    ?
+  Label : TYPEHINT
+    b
+Label : ARGUMENT
+  $y
+  Label : DEFAULT
+    null
+  Label : NULLABLE
+    ?
+  Label : TYPEHINT
+    \
+    Label : SUBNAME
+      a
+    Label : SUBNAME
+      b
+Label : ARGUMENT
+  $z
+  Label : NULLABLE
+    ?
+  Label : TYPEHINT
+    \
+    Label : SUBNAME
+      a
