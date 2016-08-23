@@ -1208,6 +1208,7 @@ SQL
                             'Typehint'             => 'Functions/Typehints',
                             'Scalar Typehint'      => 'Php/ScalarTypehintUsage',
                             'Return Typehint'      => 'Php/ReturnTypehintUsage',
+                            'Nullable Typehint'    => 'Php/UseNullableType',
                             'Static variables'     => 'Variables/StaticVariables',
 
                             'Function dereferencing'     => 'Structures/FunctionSubscripting',
