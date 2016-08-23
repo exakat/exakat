@@ -3363,7 +3363,7 @@ class Load extends Tasks {
         $this->addLink($staticId, $leftId, 'CLASS');
         
         $fullnspath = $this->getFullnspath($leftId);
-        $this->setAtom($leftId, ['fullnspath' => $this->getFullnspath($leftId)] );
+        $this->setAtom($leftId, ['fullnspath' => $this->getFullnspath($leftId, 'class')] );
         $this->addCall('class', $fullnspath, $leftId);
         
         $this->addLink($staticId, $right, $links);
@@ -4010,6 +4010,7 @@ class Load extends Tasks {
             // namespace\A\B 
             return substr($this->namespace, 0, -1).strtolower(substr($this->atoms[$nameId]['fullcode'], 9));
         } elseif ($this->atoms[$nameId]['atom'] === 'Identifier') {
+            // This is an identifier
             if ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
                 return $this->uses['class'][strtolower($this->atoms[$nameId]['code'])];
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
@@ -4026,10 +4027,11 @@ class Load extends Tasks {
             // define doesn't care about use...
             return $prefix;
         } else {
-            $prefix = substr($this->atoms[$nameId]['fullcode'], 0, strpos($this->atoms[$nameId]['fullcode'], '\\'));
+            // Finally, the case for a nsname
+            $prefix = strtolower( substr($this->atoms[$nameId]['fullcode'], 0, strpos($this->atoms[$nameId]['fullcode'], '\\')) );
 
             if (isset($this->uses[$type][$prefix])) {
-                return $this->uses[$type][$prefix].substr($this->atoms[$nameId]['fullcode'], strlen($prefix));
+                return $this->uses[$type][$prefix] . strtolower( substr($this->atoms[$nameId]['fullcode'], strlen($prefix)) ) ;
             } else {
                 return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
             }
