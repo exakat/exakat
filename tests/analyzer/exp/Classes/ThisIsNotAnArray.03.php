@@ -5,6 +5,9 @@ $expected     = array('$this[]',
                       '$this[]', 
                       '$this[2]');
 
-$expected_not = array();
+$expected_not = array('$this[]', 
+                      '$this[3]', 
+                      '$this[]', 
+                      '$this[4]');
 
 ?>

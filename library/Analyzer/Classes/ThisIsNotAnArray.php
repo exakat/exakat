@@ -31,13 +31,14 @@ class ThisIsNotAnArray extends Analyzer\Analyzer {
         // direct class
         $this->atomIs('Variable')
              ->codeIs('$this')
-             ->inIs('VARIABLE')
+             ->inIs(array('VARIABLE', 'APPEND'))
              ->_as('results')
              ->atomIs(array('Array', 'Arrayappend'))
              // class may be \ArrayAccess
              ->goToClass()
-             ->outIs('EXTENDS')
-             ->fullnspathIsNot('\\\\arrayaccess')
+             ->raw('where( __.out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess").count().is(eq(0)) )')
+             ->raw('where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION")).emit().times('.self::MAX_LOOPING.')
+                        .out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess").count().is(eq(0)) )')
              ->back('results');
         $this->prepareQuery();
     }

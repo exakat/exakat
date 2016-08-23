@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$this[$n]',
+$expected     = array('$this[$n]', 
                       '$this[]');
 
 $expected_not = array();
