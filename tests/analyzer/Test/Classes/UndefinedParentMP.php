@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_UndefinedParentMP extends Analyzer {
-    /* 10 methods */
+    /* 11 methods */
 
     public function testClasses_UndefinedParentMP01()  { $this->generic_test('Classes_UndefinedParentMP.01'); }
     public function testClasses_UndefinedParentMP02()  { $this->generic_test('Classes_UndefinedParentMP.02'); }
@@ -20,5 +20,6 @@ class Classes_UndefinedParentMP extends Analyzer {
     public function testClasses_UndefinedParentMP08()  { $this->generic_test('Classes_UndefinedParentMP.08'); }
     public function testClasses_UndefinedParentMP09()  { $this->generic_test('Classes_UndefinedParentMP.09'); }
     public function testClasses_UndefinedParentMP10()  { $this->generic_test('Classes_UndefinedParentMP.10'); }
+    public function testClasses_UndefinedParentMP11()  { $this->generic_test('Classes/UndefinedParentMP.11'); }
 }
 ?>

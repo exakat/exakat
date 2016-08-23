@@ -27,7 +27,7 @@ use Analyzer;
 
 class UndefinedParentMP extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Composer/IsComposerNsname');
+        return array('Classes/DefinedParentMP');
     }
     
     public function analyze() {
@@ -35,46 +35,15 @@ class UndefinedParentMP extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->codeIs('parent')
-             ->goToClass()
-             ->hasNoOut('EXTENDS')
-             ->back('first');
-        $this->prepareQuery();
-
-        // parent::method()
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->hasClassDefinition()
-             ->back('first')
-             ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->goToClass()
-             ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").where( __.out("PRIVATE").count().is(eq(0)) ).out("NAME").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
-             ->back('first');
-        $this->prepareQuery();
-
-        // parent::$property without parent
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->hasNoOut('EXTENDS')
-             ->back('first');
-        $this->prepareQuery();
-
-        // parent::$property
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->hasClassDefinition()
              ->inIs('CLASS')
-             ->outIs('PROPERTY')
-             ->savePropertyAs('code', 'name')
-             ->goToClass()
-             ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(0)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{ it.get().value("propertyname") == name}.count().is(eq(0)) )')
-             ->back('first');
+             ->analyzerIsNot('Classes/DefinedParentMP');
+        $this->prepareQuery();
+
+        $this->atomIs('Staticproperty')
+             ->outIs('CLASS')
+             ->codeIs('parent')
+             ->inIs('CLASS')
+             ->analyzerIsNot('Classes/DefinedParentMP');
         $this->prepareQuery();
     }
 }
