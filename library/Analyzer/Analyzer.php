@@ -1590,12 +1590,6 @@ GREMLIN
         return $this;
     }
     
-    public function makeVariable($variable) {
-        $this->addMethod('sideEffect{ '.$variable.' = "\$" + '.$variable.' }');
-        
-        return $this;
-    }
-    
     public function run() {
         $this->analyze();
         $this->prepareQuery();
