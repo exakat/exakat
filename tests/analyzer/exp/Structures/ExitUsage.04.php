@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('exit( )');
+$expected     = array('die( )');
 
 $expected_not = array();
 
