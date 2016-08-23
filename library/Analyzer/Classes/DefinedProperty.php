@@ -35,14 +35,12 @@ class DefinedProperty extends Analyzer\Analyzer {
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'property')
-             ->makeVariable('property')
              ->goToClass()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('propertyname', 'property')
              ->back('first');
         $this->prepareQuery();
 
@@ -54,16 +52,15 @@ class DefinedProperty extends Analyzer\Analyzer {
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'property')
-             ->makeVariable('property')
              ->goToClass()
              ->goToAllParents()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
-             ->samePropertyAs('code', 'property')
-             ->back('first');
+             ->samePropertyAs('propertyname', 'property')
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // defined in parents implemented
@@ -74,15 +71,13 @@ class DefinedProperty extends Analyzer\Analyzer {
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'property')
-             ->makeVariable('property')
              ->goToClass()
              ->goToImplements()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('propertyname', 'property')
              ->back('first');
         $this->prepareQuery();
 
@@ -94,15 +89,13 @@ class DefinedProperty extends Analyzer\Analyzer {
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'property')
-             ->makeVariable('property')
              ->goToClass()
              ->goToTraits()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('propertyname', 'property')
              ->back('first');
         $this->prepareQuery();
 
