@@ -1,7 +1,6 @@
 <?php
 
-$expected     = array('gnupg( )', 
-                      'gnupg' ,);
+$expected     = array('gnupg( )');
 
 $expected_not = array();
 
