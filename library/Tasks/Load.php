@@ -1871,12 +1871,10 @@ class Load extends Tasks {
     }
     
     private function processStaticVariable() {
-        $this->processOptions('Static');
         return $this->processSGVariable('Static');
     }
     
     private function processGlobalVariable() {
-        $this->processOptions('Global');
         return $this->processSGVariable('Global');
     }
     
@@ -3422,7 +3420,8 @@ class Load extends Tasks {
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } else {
-            $right = $this->processNextAsIdentifier();
+            $this->processNext();
+            $right =  $this->popExpression();
             if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
                 $this->pushExpression($right);
                 $right = $this->processFCOA($right);
