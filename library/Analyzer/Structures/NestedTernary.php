@@ -28,7 +28,8 @@ use Analyzer;
 class NestedTernary extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Ternary')
-             ->atomInside('Ternary')
+             ->outIs(array('THEN', 'ELSE'))
+             ->atomIs('Ternary')
              ->back('first');
         $this->prepareQuery();
     }
