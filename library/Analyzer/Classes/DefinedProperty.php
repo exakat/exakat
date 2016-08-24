@@ -98,7 +98,6 @@ class DefinedProperty extends Analyzer\Analyzer {
              ->samePropertyAs('propertyname', 'property')
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 
