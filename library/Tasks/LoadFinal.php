@@ -98,6 +98,7 @@ GREMLIN;
         $exts[] = 'php_constants';
         
         $c = array();
+        $f = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $fullpath = $config->dir_root.'/data/'.$inifile;
@@ -106,6 +107,10 @@ GREMLIN;
             
             if (!empty($iniFile['constants'][0])) {
                 $c[] = $iniFile['constants'];
+            }
+
+            if (!empty($iniFile['functions'][0])) {
+                $f[] = $iniFile['functions'];
             }
         }
         $constants = call_user_func_array('array_merge', $c);
@@ -123,6 +128,21 @@ g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "E
 GREMLIN;
         $this->gremlin->query($query, ['arg1' => $constants]);
         display('spot PHP / ext constants');
+
+        $functions = call_user_func_array('array_merge', $f);
+        $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
+        $functions = array_map('strtolower', $functions);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall").filter{ it.get().value("code").toLowerCase() in arg1 }
+                              .where( __.in("DEFINITION").count().is(eq(0)) )
+.sideEffect{
+    fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+    it.get().property("fullnspath", fullnspath); 
+}
+
+GREMLIN;
+        $this->gremlin->query($query, ['arg1' => $functions]);
     }
 }
 
