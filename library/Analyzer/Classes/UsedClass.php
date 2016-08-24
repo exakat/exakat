@@ -97,7 +97,11 @@ GREMLIN
         
         // class used in a String (full string only)
         $strings = $this->query(<<<GREMLIN
-g.V().hasLabel('String').has('token', 'T_CONSTANT_ENCAPSED_STRING').filter{ it.get().value("noDelimiter").length() < 100}.filter{ it.get().value("noDelimiter").length() > 0}.filter{ !(it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\x7f-\xff]/)}.map{ it.get().value("noDelimiter").toLowerCase(); }.unique()
+g.V().hasLabel('String').has('token', 'T_CONSTANT_ENCAPSED_STRING')
+     .where( __.in('ARGUMENT').in("ARGUMENTS").has("fullnspath", "\\\\array").count().is(eq(0)) )
+     .filter{ it.get().value("noDelimiter").length() < 100}.filter{ it.get().value("noDelimiter").length() > 0}
+     .filter{ !(it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\x7f-\xff]/)}
+     .map{ it.get().value("noDelimiter").toLowerCase(); }.unique()
 GREMLIN
 );
         $this->atomIs('Class')
@@ -109,28 +113,33 @@ GREMLIN
 
         // class used in a String (string with ::)
         $strings = $this->query(<<<GREMLIN
-g.V().hasLabel('String').filter{ (it.get().value('noDelimiter') =~ "::" ).getCount() > 0 }.map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
+g.V().hasLabel('String').filter{ (it.get().value('noDelimiter') =~ "::" ).getCount() > 0 }
+                        .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
 GREMLIN
 );
+        $strings = $this->makeFullnspath($strings);
         if (count($strings) > 0) {
             $this->atomIs('Class')
                  ->analyzerIsNot('self')
-                 ->outIs('NAME')
-                 ->codeIs($strings)
+                 ->fullnspathIs($strings)
                  ->back('first');
             $this->prepareQuery();
         }
-        
+
         // class used in an array
         $arrays = $this->query(<<<GREMLIN
-g.V().hasLabel('Functioncall').has("fullnspath", "\\\\array").out("ARGUMENTS").has("count", 2).out("ARGUMENT").has("rank", 0).values('noDelimiter').unique()
+g.V().hasLabel('Functioncall').out("ARGUMENTS").out("ARGUMENT")
+        .hasLabel("Functioncall").has("fullnspath", "\\\\array")
+        .out("ARGUMENTS").where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Functions\\\\MarkCallable").count().is(eq(1)) )
+        .has("count", 2).out("ARGUMENT").has("rank", 0).values('noDelimiter').unique()
 GREMLIN
 );
+        $arrays = $this->makeFullnspath($arrays);
+        
         if (count($arrays) > 0) {
             $this->atomIs('Class')
                  ->analyzerIsNot('self')
-                 ->outIs('NAME')
-                 ->codeIs($arrays)
+                 ->fullnspathIs($arrays)
                  ->back('first');
             $this->prepareQuery();
         }
