@@ -1560,7 +1560,7 @@ class Load extends Tasks {
                                           'fullcode' => join(', ', $fullcode),
                                           'line'     => $this->tokens[$current][2],
                                           'token'    => $this->getToken($this->tokens[$current][0]),
-                                          'count'    => $rank,
+                                          'count'    => $rank + 1,
                                           'args_max' => $args_max,
                                           'args_min' => $args_min]);
         }
@@ -3018,6 +3018,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id][0] === T_CONSTANT_ENCAPSED_STRING) {
             $this->setAtom($id, ['delimiter'   => $this->atoms[$id]['code'][0],
                                  'noDelimiter' => substr($this->atoms[$id]['code'], 1, -1)]);
+            $this->addNoDelimiterCall($id);
         } else {
             $this->setAtom($id, ['delimiter'   => '',
                                  'noDelimiter' => '']);
@@ -4100,6 +4101,36 @@ class Load extends Tasks {
             $this->calls[$type][$fullnspath]['calls'][$atom] = array();
         }
         $this->calls[$type][$fullnspath]['calls'][$atom][] = $callId;
+    }
+
+    private function addNoDelimiterCall($callId) {
+        if (strpos($this->atoms[$callId]['noDelimiter'], '::') !== false) {
+            $fullnspath = strtolower(substr($this->atoms[$callId]['noDelimiter'], 0, strpos($this->atoms[$callId]['noDelimiter'], '::')) );
+            
+            if ($fullnspath[0] !== '\\') {
+                $fullnspath = '\\'.$fullnspath;
+            }
+            $types = ['class'];
+        } else {
+            $types = ['function', 'class'];
+
+            $fullnspath = strtolower($this->atoms[$callId]['noDelimiter']);
+            if ($fullnspath[0] !== '\\') {
+                $fullnspath = '\\'.$fullnspath;
+            }
+        }
+
+        $atom = 'String';
+        foreach($types  as $type) {
+            if (!isset($this->calls[$type][$fullnspath])) {
+                $this->calls[$type][$fullnspath] = array('calls' => array(), 'definitions' => array());
+            }
+
+            if (!isset($this->calls[$type][$fullnspath]['calls'][$atom])) {
+                $this->calls[$type][$fullnspath]['calls'][$atom] = array();
+            }
+            $this->calls[$type][$fullnspath]['calls'][$atom][] = $callId;
+        }
     }
 
     private function addDefinition($type, $fullnspath, $definitionId) {
