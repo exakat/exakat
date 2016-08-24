@@ -32,29 +32,25 @@ class SetExceptionHandlerPHP7 extends Analyzer\Analyzer {
         // With function name in a string
         $this->atomFunctionIs('\set_exception_handler')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->regexNot('noDelimiter', '::')
+             ->regexIsNot('noDelimiter', '::')
              ->analyzerIs('Functions/MarkCallable')
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->fullnspathIsNot('\\Throwable')
+             ->outIs('TYPEHINT')
+             ->fullnspathIsNot('\\throwable')
              ->back('first');
         $this->prepareQuery();
 
-        // With class:method name in a string
+        // With class::method name in a string
         $this->atomFunctionIs('\set_exception_handler')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->regex('noDelimiter', '::')
-             ->raw('sideEffect{ methode = it.cbMethod }')
+             ->regexIs('noDelimiter', '::')
+             ->raw('sideEffect{ methode = it.get().value("cbMethod") }')
              ->analyzerIs('Functions/MarkCallable')
              ->classDefinition()
              ->outIs('BLOCK')
@@ -65,9 +61,8 @@ class SetExceptionHandlerPHP7 extends Analyzer\Analyzer {
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->fullnspathIsNot('\\Throwable')
+             ->outIs('TYPEHINT')
+             ->fullnspathIsNot('\\throwable')
              ->back('first');
         $this->prepareQuery();
 
@@ -76,50 +71,38 @@ class SetExceptionHandlerPHP7 extends Analyzer\Analyzer {
         // With closure
         $this->atomFunctionIs('\set_exception_handler')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->fullnspathIsNot('\\Throwable')
+             ->outIs('TYPEHINT')
+             ->fullnspathIsNot('\\throwable')
              ->back('first');
         $this->prepareQuery();
 
         // With array (class + method)
         $this->atomFunctionIs('\set_exception_handler')
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Functioncall')
-             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
+             ->fullnspathIs('\\array')
              ->outIs('ARGUMENTS')
-             ->analyzerIs('Functions/MarkCallable')
-             ->inIs('ARGUMENTS')
-             ->raw('sideEffect{ if (it.out("ARGUMENTS").out("ARGUMENT").has("rank", 1).has("atom", "String").any()) {
-                                     methode = it.out("ARGUMENTS").out("ARGUMENT").has("rank", 1).next().noDelimiter; 
-                                }
-                            }')
-             ->filter('it.out("ARGUMENTS").out("ARGUMENT").has("rank", 0).has("atom", "String").any()')
-             ->raw('transform{ f = it.out("ARGUMENTS").out("ARGUMENT").has("rank", 0).next().noDelimiter; 
-                               if (f.substring(0, 1) != "\\\\") { f = "\\\\" + f; }
-                                it.filter{ g.idx("classes").get("path", f).any(); }
-                                 .transform{ g.idx("classes")[["path": f]].next(); }
-                                 .next();
-                              }')
-              ->outIs('BLOCK')
-              ->outIs('ELEMENT')
-              ->atomIs('Function')
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'methode')
-              ->inIs('NAME')
-              ->outIs('ARGUMENTS')
-              ->outIs('ARGUMENT')
-              ->atomIs('Typehint')
-              ->outIs('CLASS')
-              ->fullnspathIsNot('\\Throwable')
-              ->back('first');
+             ->outWithRank('ARGUMENT', 1)
+             ->raw('sideEffect{ methode = it.get().value("noDelimiter") }')
+             ->inIs('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
+             ->classDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'methode')
+             ->inIs('NAME')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->fullnspathIsNot('\\throwable')
+             ->back('first');
         $this->prepareQuery();
 
         // With array (object + method)
