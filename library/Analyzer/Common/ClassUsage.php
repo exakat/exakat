@@ -41,36 +41,42 @@ class ClassUsage extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
         $this->atomIs('Typehint')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
