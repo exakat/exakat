@@ -20,7 +20,7 @@ A<?php
         global $usedGlobaly2;
         global $usedGlobal1y2, $usedGlobal2y2;
         
-        $usedGlobaly2->a = $usedGlobal1y2[1][2] + $this->$usedGlobal2y2;
+        $usedGlobaly2->a = $usedGlobal1y2[1][2] + $a->$usedGlobal2y2;
     }
 
         global $unusedGlobalglb;

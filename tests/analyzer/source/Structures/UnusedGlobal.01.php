@@ -19,12 +19,12 @@
         $usedGlobaly2->a = $usedGlobal1y2[1][2] + $this->$usedGlobal2y2;
     }
 
-        global $unusedGlobalglb;
-        global $unusedGlobal1glb, $unusedGlobal2glb;
-        
-        global $usedGlobalglb;
-        global $usedGlobal1glb, $usedGlobal2glb;
-        
-        $usedGlobalglb::$a = "$usedGlobal1glb" + $$usedGlobal2glb;
+    global $unusedGlobalglb;
+    global $unusedGlobal1glb, $unusedGlobal2glb;
+    
+    global $usedGlobalglb;
+    global $usedGlobal1glb, $usedGlobal2glb;
+    
+    $usedGlobalglb::$a = "$usedGlobal1glb" + $$usedGlobal2glb;
 
 ?>

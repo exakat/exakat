@@ -14,9 +14,9 @@ A<?php
         global $unusedGlobal1y2, $unusedGlobal2y2;
         
         global $usedGlobaly2;
-        global $usedGlobal1y2, $usedGlobal2y2;
+        global $usedGlobal1y2, $usedGlobal2y2, $usedGlobal2y3;
         
-        $usedGlobaly2->a = $usedGlobal1y2[1][2] + $this->$usedGlobal2y2;
+        $usedGlobaly2->a = $usedGlobal1y2[1][2] + $usedGlobal2y2 + $usedGlobal2y3;
     }
 
         global $unusedGlobalglb;
