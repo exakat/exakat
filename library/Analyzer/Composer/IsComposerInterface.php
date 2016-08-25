@@ -46,6 +46,7 @@ class IsComposerInterface extends Analyzer\Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array')
              ->isNot('aliased', true)
              ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
