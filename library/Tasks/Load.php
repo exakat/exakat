@@ -2839,16 +2839,20 @@ class Load extends Tasks {
                     $prefix = '\\'.$prefix;
                 }
                 $prefix .= '\\';
+                var_dump($prefix);
 
                 ++$this->id; // Skip \
 
                 $fullcode2 = [];
+                $useTypeGeneric = $useType;
+                $useTypeId = 0;
                 do {
                     ++$this->id; // Skip {
 
-                    $useType = 'class';
-                    // use const
+                    $useType = $useTypeGeneric;
+                    $useTypeId = 0;
                     if ($this->tokens[$this->id + 1][0] === T_CONST) {
+                    // use const
                         ++$this->id;
 
                         $this->processSingle('Identifier');
@@ -2856,8 +2860,8 @@ class Load extends Tasks {
                         $useType = 'const';
                     }
 
-                    // use function
                     if ($this->tokens[$this->id + 1][0] === T_FUNCTION) {
+                        // use function
                         ++$this->id;
 
                         $this->processSingle('Identifier');
@@ -2866,7 +2870,7 @@ class Load extends Tasks {
                     }
 
                     $id = $this->processOneNsname();
-                    if ($useType !== 'class') {
+                    if ($useTypeId !== 0) {
                         $this->addLink($id, $useTypeId, strtoupper($useType));
                     }
 
@@ -2886,6 +2890,7 @@ class Load extends Tasks {
                         $this->setAtom($aliasId, ['alias'      => $alias]);
                         $this->addLink($useId, $aliasId, 'USE');
                     } else {
+                        print '       '.$useType.'::'.$prefix.'  '.strtolower($this->atoms[$id]['fullcode'])."\n";
                         $this->addLink($useId, $id, 'USE');
                         $this->setAtom($id, ['fullnspath' => $prefix.strtolower($this->atoms[$id]['fullcode']),
                                              'origin'     => $prefix.strtolower($this->atoms[$id]['fullcode'])]);
@@ -4069,6 +4074,7 @@ class Load extends Tasks {
 
     private function addNamespaceUse($originId, $aliasId, $useType) {
         $fullnspath = $this->atoms[$originId]['fullnspath'];
+        var_dump($fullnspath);
 
         if ($originId !== $aliasId) { // Case of A as B
             // Alias is the 'As' expression. 
@@ -4083,6 +4089,7 @@ class Load extends Tasks {
         }
         
         $this->uses[$useType][strtolower($alias)] = $fullnspath;
+        print_r($this->uses);
         
         return $alias;
     }
@@ -4114,7 +4121,7 @@ class Load extends Tasks {
             $types = ['function', 'class'];
 
             $fullnspath = strtolower($this->atoms[$callId]['noDelimiter']);
-            if ($fullnspath[0] !== '\\') {
+            if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }
         }
