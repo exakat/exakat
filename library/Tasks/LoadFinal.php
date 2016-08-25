@@ -143,6 +143,36 @@ g.V().hasLabel("Functioncall").filter{ it.get().value("code").toLowerCase() in a
 
 GREMLIN;
         $this->gremlin->query($query, ['arg1' => $functions]);
+        display('mark PHP native functions call');
+
+        // Define-style constant definitions
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define").out("ARGUMENTS")
+     .out("ARGUMENT").has("rank", 0)
+     .hasLabel("String").has("noDelimiter").map{ s = it.get().value("noDelimiter").toString().toLowerCase();
+                                                 s = '\\\\a\\\\' + s;
+                                                 it.get().property("fullnspath", s);
+                                                 s; }
+
+GREMLIN;
+//
+
+        $constants = $this->gremlin->query($query);
+        $constants = $constants->results;
+        print_r($constants);
+        
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier", "Nsname").filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }.addE('DEFINITION')
+    .from( 
+        g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define").as("a")
+             .out("ARGUMENTS").out("ARGUMENT").has("rank", 0).hasLabel("String")
+             .filter{ it.get().value("fullnspath") == name}.select('a')
+         )
+
+GREMLIN;
+        $this->gremlin->query($query, ['arg1' => $constants]);
+        display('Link constant definitions');
+
     }
 }
 
