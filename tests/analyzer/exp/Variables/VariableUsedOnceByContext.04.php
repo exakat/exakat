@@ -2,7 +2,8 @@
 
 $expected     = array('$e', 
                       '$g', 
-                      '$b');
+                      '$b',
+                      '$c');
 
 $expected_not = array('&$a', 
                       '$a',
