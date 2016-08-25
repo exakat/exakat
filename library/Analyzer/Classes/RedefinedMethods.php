@@ -46,7 +46,7 @@ class RedefinedMethods extends Analyzer\Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'method')
              ->back('results')
-             ;
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
