@@ -159,7 +159,6 @@ GREMLIN;
 
         $constants = $this->gremlin->query($query);
         $constants = $constants->results;
-        print_r($constants);
         
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname").filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }.addE('DEFINITION')
