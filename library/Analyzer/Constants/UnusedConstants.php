@@ -69,7 +69,7 @@ class UnusedConstants extends Analyzer\Analyzer {
         $this->atomIs('Const')
              ->hasNoClassInterface()
              ->outIs('CONST')
-             ->outIs('LEFT')
+             ->outIs('NAME')
              ->codeIsNot($constants, true);
         $this->prepareQuery();
       }
