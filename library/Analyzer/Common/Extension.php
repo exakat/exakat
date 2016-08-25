@@ -33,9 +33,11 @@ class Extension extends Analyzer\Analyzer {
                      'Interfaces/InterfaceUsage',
                      'Traits/TraitUsage',
                      'Constants/ConstantUsage',
-                     'Namespaces/NamespaceUsage'
+                     'Namespaces/NamespaceUsage',
+                     'Php/DirectivesUsage',
                      );
     }
+    
     
     public function analyze() {
         $functions  = array();
@@ -44,6 +46,7 @@ class Extension extends Analyzer\Analyzer {
         $interfaces = array();
         $traits     = array();
         $namespaces = array();
+        $directives = array();
 
         if (substr($this->source, -4) == '.ini') {
             $ini = $this->loadIni($this->source);
@@ -71,6 +74,10 @@ class Extension extends Analyzer\Analyzer {
 
             if (count($namespaces) == 1 && empty($namespaces[0])) {
                 $namespaces = array();
+            }
+
+            if (count($directives) == 1 && empty($directives[0])) {
+                $directives = array();
             }
         } else {
             echo "Cannot process the '", $this->source, "' file. It has to be .ini format.\n";
@@ -164,6 +171,17 @@ class Extension extends Analyzer\Analyzer {
                  ->outIs('NAME')
                  ->fullnspathIs($namespaces)
                  ->back('first');
+            $this->prepareQuery();
+            
+            // Can a namespace be used in a nsname (as prefix) ? 
+        }
+
+        if (!empty($directives)) {
+            $namespaces = $this->makeFullNsPath($namespaces);
+            $this->analyzerIs('Php/DirectivesUsage')
+                 ->outIs('ARGUMENTS')
+                 ->outWithRank("ARGUMENT", 0)
+                 ->noDelimiterIs($directives);
             $this->prepareQuery();
             
             // Can a namespace be used in a nsname (as prefix) ? 
