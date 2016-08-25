@@ -7,6 +7,9 @@ $expected     = array('X::definedconstant',
                       'X::parentClassDefinedConstant',
                       'X::parentInterfaceDefinedConstant',);
 
-$expected_not = array();
+$expected_not = array('x::undefinedConstant',
+                      'X::undefinedConstant',
+                      'x::undefinedconstant',
+                      'X::undefinedconstant');
 
 ?>

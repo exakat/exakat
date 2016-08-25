@@ -33,6 +33,8 @@ class DefinedConstants extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $containsConstantDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code").toLowerCase() == constante.toLowerCase(); }.count().is(neq(0)) )';
+
         // constants defined at the class level
         $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
@@ -40,11 +42,12 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->inIs('CONSTANT')
              ->outIs('CLASS')
              ->classDefinition()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").out("LEFT").filter{ it.get().value("code").toLowerCase() == constante.toLowerCase(); }.count().is(eq(1)) )')
+             ->raw($containsConstantDefinition)
              ->back('first');
         $this->prepareQuery();
 
         // constants defined at the parents level
+        // This includes interfaces
         $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->savePropertyAs('code', 'constante')
@@ -52,20 +55,9 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->classDefinition()
              ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").out("LEFT").filter{ it.get().value("code").toLowerCase() == constante.toLowerCase(); }.count().is(eq(1)) )')
-             ->back('first');
-        $this->prepareQuery();
-
-        // constants defined at the interface level
-        $this->atomIs('Staticconstant')
-             ->outIs('CONSTANT')
-             ->savePropertyAs('code', 'constante')
-             ->inIs('CONSTANT')
-             ->outIs('CLASS')
-             ->classDefinition()
-             ->goToImplements()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").out("LEFT").filter{ it.get().value("code").toLowerCase() == constante.toLowerCase(); }.count().is(eq(1)) )')
-             ->back('first');
+             ->raw($containsConstantDefinition)
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // constants defined in a class of an extension
