@@ -2,6 +2,8 @@
 
 $expected     = array('curl_exec($ch)',
                       'curl_close($ch)',
+                      'CURLOPT_FILE',
+                      'CURLOPT_HEADER'
                       );
 
 $expected_not = array('curl_init("http://www.example.com/")', 
