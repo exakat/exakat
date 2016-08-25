@@ -105,19 +105,19 @@ class Extension extends Analyzer\Analyzer {
 
             $this->atomIs('Staticconstant')
                  ->outIs('CLASS')
-                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspathIs($classes);
             $this->prepareQuery();
 
             $this->atomIs('Staticmethodcall')
                  ->outIs('CLASS')
-                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspathIs($classes);
             $this->prepareQuery();
 
             $this->atomIs('Staticproperty')
                  ->outIs('CLASS')
-                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspathIs($classes);
             $this->prepareQuery();
 
@@ -135,7 +135,7 @@ class Extension extends Analyzer\Analyzer {
 
             $this->atomIs('Instanceof')
                  ->outIs('CLASS')
-                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspathIs($classes);
             $this->prepareQuery();
         }
