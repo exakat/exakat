@@ -25,10 +25,6 @@ namespace Analyzer\Extensions;
 use Analyzer;
 
 class Extsuhosin extends Analyzer\Common\Extension {
-    public function dependsOn() {
-        return array('Php/DirectivesUsage');
-    }
-    
     public function analyze() {
         $this->source = 'suhosin.ini';
         
