@@ -26,73 +26,42 @@ namespace Analyzer\Files;
 use Analyzer;
 
 class DefinitionsOnly extends Analyzer\Analyzer {
-    public static $definitions        = array('Interface', 'Trait', 'Function', 'Const', 'Class');
-    public static $definitionsHelpers = array('Use', 'Global', 'Include');
+    public static $definitions        = array("Trait", "Class", "Interface", "Const", "Use", "Global", "Declare", "Void", "Include");
     //'Namespace',  is excluded
 
-    public static $definitionsFunctions = array('define', 'set_session_handler', 'set_error_handler', 'ini_set',
-                                                'register_shutdown_function');
+    public static $definitionsFunctions = array('define', 'ini_set',
+                                                'register_shutdown_function', 'set_session_handler', 'set_error_handler', 
+                                                'require_once', 'require', 'include', 'include_once');
     
     public function dependsOn() {
         return array('Structures/NoDirectAccess');
     }
     
     public function analyze() {
-        $definitionsList = '"'.implode('", "', self::$definitions).'"';
-        $nonDefinitionsList = '"'.implode('", "', array_merge(self::$definitions, self::$definitionsHelpers)).'"';
-
-        $definitionsFunctionsList = '"\\\\'.implode('", "\\\\', self::$definitionsFunctions).'"';
-        
-        $definitions = 'it.atom in ['.$definitionsList.', "Namespace"]  || (it.atom == "Functioncall" && it.fullnspath in ['.$definitionsFunctionsList.']) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
-        $nonDefinitions = 'it.atom in ['.$definitionsList.', '.$nonDefinitionsList.', "Namespace"]  || (it.atom == "Functioncall" && it.fullnspath in ['.$definitionsFunctionsList.']) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
-
-        // all cases without extra string before/after the script
+        $definitionsFunctionsList = "\"\\\\".join("\", \"\\\\", self::$definitionsFunctions)."\"";
+        $definitionsList = "\"".join("\", \"", self::$definitions)."\"";
 
         // one or several namespaces
         $this->atomIs('File')
              ->outIs('FILE')
-             ->atomIs('Phpcode')
+             ->outIs('ELEMENT')
+//             ->atomIs('Php')
              ->outIs('CODE')
-             ->atomIs('Namespace')
-             ->outIs('BLOCK')
+             ->raw('coalesce( __.out("ELEMENT").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
+             ->raw(<<<GREMLIN
+where(
+    __
+      .out("ELEMENT")
+      .where( __.hasLabel($definitionsList).count().is(eq(0)) )
+      .where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )
+      .where( __.in("ANALYZED").not(has("analyzer", "Analyzer\\\\\\\\Structures\\\\\\\\NoDirectAccess") ).count().is(eq(0)) )
+      .where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in [$definitionsFunctionsList] }.count().is(eq(0)) )
+      .count().is(eq(0))
+)
 
-             // spot a definition
-             ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
-             // Not closure
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Function").out("NAME").has("atom", "String").any() == false}')
 
-             // spot a non-definition
-             ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
-
-             ->back('first');
-        $this->prepareQuery();
-
-        // namespaces are implicit
-        $this->atomIs('File')
-             ->outIs('FILE')
-             ->atomIs('Phpcode')
-             ->outIs('CODE')
-             // check that there are no namespaces
-             ->atomIs('Sequence')
-
-             // spot a definition
-             ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
-             // Not closure
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Function").out("NAME").has("atom", "String").any() == false}')
-
-             // spot a non-definition
-             ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
-
-             ->back('first');
-        $this->prepareQuery();
-
-        // namespaces are implicit
-        $this->atomIs('File')
-             ->outIs('FILE')
-             ->atomIs('Phpcode')
-             ->outIs('CODE')
-             // check that there are no namespaces
-             ->atomIs(array_merge(self::$definitions, self::$definitionsHelpers))
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
     }
