@@ -28,6 +28,7 @@ class ShouldUseCoalesce extends Analyzer\Analyzer {
     protected $phpVersion = '7.0+';
     
     public function analyze() {
+
         //isset($a) ? $a : 'b';
         $this->atomIs('Ternary')
              ->outIs('CONDITION')
@@ -69,9 +70,9 @@ class ShouldUseCoalesce extends Analyzer\Analyzer {
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Null')
              ->inIs(array('LEFT', 'RIGHT'))
-             ->outIs(array("LEFT", "RIGHT")) // Out to the other one, in fact
+             ->outIs(array('LEFT', 'RIGHT')) // Out to the other one, in fact
              ->savePropertyAs('fullcode', 'variable')
-             ->inIs(array("LEFT", "RIGHT"))
+             ->inIs(array('LEFT', 'RIGHT'))
              ->inIs('CONDITION')
              ->outIs('THEN')
              ->samePropertyAs('fullcode', 'variable')
@@ -86,10 +87,10 @@ class ShouldUseCoalesce extends Analyzer\Analyzer {
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Null')
              ->inIs(array('LEFT', 'RIGHT'))
-             ->outIs(array("LEFT", "RIGHT"))
+             ->outIs(array('LEFT', 'RIGHT'))
              ->tokenIsNot('T_STRING')
              ->savePropertyAs('fullcode', 'variable')
-             ->inIs(array("LEFT", "RIGHT"))
+             ->inIs(array('LEFT', 'RIGHT'))
              ->inIs('CONDITION')
              ->outIs('ELSE')
              ->samePropertyAs('fullcode', 'variable')
@@ -104,7 +105,7 @@ class ShouldUseCoalesce extends Analyzer\Analyzer {
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Null')
              ->inIs(array('LEFT', 'RIGHT'))
-             ->outIs(array("LEFT", "RIGHT"))
+             ->outIs(array('LEFT', 'RIGHT'))
              ->outIsIE('CODE')
              ->atomIs('Assignation')
              ->codeIs('=')
@@ -112,7 +113,7 @@ class ShouldUseCoalesce extends Analyzer\Analyzer {
              ->savePropertyAs('fullcode', 'variable')
              ->inIs('LEFT')
              ->inIsIE('CODE')
-             ->inIs(array("LEFT", "RIGHT"))
+             ->inIs(array('LEFT', 'RIGHT'))
              ->inIs('CONDITION')
              ->outIs('THEN')
              ->outWithRank('ELEMENT', 0)
