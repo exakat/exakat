@@ -28,7 +28,17 @@ class ListWithKeys extends Analyzer\Analyzer {
     protected $phpVersion = '7.1+';
 
     public function analyze() {
+        // list( 3 => $a);
         $this->atomFunctionIs('\\list')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Keyvalue')
+             ->back('first');
+        $this->prepareQuery();
+
+        // list( 3 => $a);
+        $this->atomFunctionIs('\\array')
+             ->hasIn('LEFT')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
