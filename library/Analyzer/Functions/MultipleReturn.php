@@ -28,7 +28,8 @@ use Analyzer;
 class MultipleReturn extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
-             ->raw("filter{ it.out('BLOCK').out.loop(1){it.object.atom != 'Function'}{it.object.atom == 'Return'}.count() > 1}");
+             ->hasName()
+             ->raw('where( __.repeat( __.out().not( hasLabel("Function", "Class")) ).emit( hasLabel("Return") ).times('.self::MAX_LOOPING.').count().is(gt(1)))');
         $this->prepareQuery();
     }
 }
