@@ -37,7 +37,7 @@ class OverwriteException extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->savePropertyAs('code', 'exception')
              ->inIs('VARIABLE')
-             ->outIs('CODE')
+             ->outIs('BLOCK')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'exception')
              ->analyzerIs('Variables/IsModified')
