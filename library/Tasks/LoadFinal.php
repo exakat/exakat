@@ -118,7 +118,7 @@ GREMLIN;
         $constants = array_map('strtolower', $constants);
 
         $query = <<<GREMLIN
-g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "TYPEHINT", "FUNCTION", "GROUPUSE").count().is(eq(0)) )  
+g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
                             .filter{ it.get().value("code").toLowerCase() in arg1 }
 .sideEffect{ 
     fullnspath = "\\\\" + it.get().value("code").toLowerCase();
@@ -128,6 +128,28 @@ g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "E
 GREMLIN;
         $this->gremlin->query($query, ['arg1' => $constants]);
         display('spot PHP / ext constants');
+
+        $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() > 0 }.values("code")';
+        $constants = $this->gremlin->query($query);
+        $constantsGlobal = $constants->results;
+
+        $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() == 0 }.values("fullnspath")';
+        $constants = $this->gremlin->query($query);
+        $constantsDefinitions = $constants->results;
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+                            .filter{ it.get().value("code") in arg1 }
+                            .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
+                            .sideEffect{ name = it.get().value("code"); }
+.sideEffect{ 
+    fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+    it.get().property("fullnspath", fullnspath); 
+}.addE("DEFINITION").from( g.V().hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code") == name} )
+
+GREMLIN;
+        $this->gremlin->query($query, ['arg1' => $constantsGlobal, 'arg2' => $constantsDefinitions]);
+        display('spot constants that falls back on global constants');
 
         $functions = call_user_func_array('array_merge', $f);
         $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
@@ -171,7 +193,78 @@ g.V().hasLabel("Identifier", "Nsname").filter{ it.get().value("fullnspath") in a
 GREMLIN;
         $this->gremlin->query($query, ['arg1' => $constants]);
         display('Link constant definitions');
+        
+        //display('Mark constants expressions');
+        $query = <<<GREMLIN
+g.V().hasLabel("Integer", "Boolean", "Float", "Null", "Void", "RawString", "Magicconstant", "Staticconstant", "Void")
+     .sideEffect{ it.get().property("constant", true); }
 
+GREMLIN;
+        $this->gremlin->query($query);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("String").where( __.out("CONCAT").count().is(eq(0)))
+     .sideEffect{ it.get().property("constant", true); }
+
+GREMLIN;
+        $this->gremlin->query($query);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier",  "Nsname").not(hasLabel("Functioncall"))
+     .sideEffect{ it.get().property("constant", true); }
+
+GREMLIN;
+        $this->gremlin->query($query);
+
+        $data = new \Data\Methods();
+        $deterministFunctions = $data->getDeterministFunctions();
+        $deterministFunctions = array_map(function ($x) { return '\\'.$x['name'];}, $deterministFunctions);
+
+        for ($i =0; $i < 3; ++$i) {
+        // Cases for Structures (all sub element are constante => structure is constante)
+        $structures = array('Addition'         => array('LEFT', 'RIGHT'),
+                            'Multiplication'   => array('LEFT', 'RIGHT'),
+                            'Bitshift'         => array('LEFT', 'RIGHT'),
+                            'Logical'          => array('LEFT', 'RIGHT'),
+                            'Power'            => array('LEFT', 'RIGHT'),
+                            'Keyvalue'         => array('KEY',  'VALUE'),
+                            'Arguments'        => array('ARGUMENT'),
+//                            'Functioncall'     => array('ARGUMENTS'), // Warning : Some function are not deterministic. Needs to mark them as such (custom or internals...)
+//                            'Methodcall'       => array('METHOD'),
+//                            'Staticmethodcall' => array('METHOD'),
+
+//                            'Function'         => array('BLOCK'),  // Block but one should look for return 
+                            'Sequence'         => array('ELEMENT'),
+                            'Break'            => array('BREAK'),
+                            'Continue'         => array('CONTINUE'),
+                            'Return'           => array('RETURN'),
+                            'Ternary'          => array('CONDITION', 'THEN', 'ELSE'),
+                            'Comparison'       => array('LEFT', 'RIGHT'),
+                            'Noscream'         => array('AT'),
+                            'Not'              => array('NOT'),
+                            'Parenthesis'      => array('CODE'),
+                            'Concatenation'    => array('CONCAT'),
+                            'String'           => array('CONCAT')
+                            );
+        
+            foreach($structures as $atom => $links) {
+                $linksList = "'".implode("', '", $links)."'";
+
+                $query = <<<GREMLIN
+g.V().hasLabel("$atom").where( __.out($linksList).not(has("constant", true)).count().is(eq(0)) )
+    .sideEffect{ it.get().property("constant", true);}
+GREMLIN;
+                $this->gremlin->query($query);
+            }
+        
+            $query = <<<GREMLIN
+g.V().hasLabel("Functioncall").filter{ it.get().value("fullnspath") in arg1}
+     .where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant", true)).count().is(eq(0)) )
+    .sideEffect{ it.get().property("constant", true);}
+GREMLIN;
+            $this->gremlin->query($query, ['arg1' => $deterministFunctions]);
+        }
+        display('Mark constants expressions');
     }
 }
 
