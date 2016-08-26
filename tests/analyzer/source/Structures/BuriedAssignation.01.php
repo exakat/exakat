@@ -11,6 +11,7 @@ $b = 1 + ($deep1 = 3);
 f($deep3 = $t->strlen($de));
 
 if ($x = $y > 2 && $deep4 = 4) {}
+if ($x2 = $y2 > 22 and $deep42 = 42) {}
 
 $a = $b = $c = $d = 4;
 

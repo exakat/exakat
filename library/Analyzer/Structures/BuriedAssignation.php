@@ -31,8 +31,8 @@ class BuriedAssignation extends Analyzer\Analyzer {
              ->hasNoIn('ELEMENT')
              ->codeIs('=')
 
-             // in a chained assignation
-             ->hasNoParent('Assignation', 'LEFT')
+             // avoid chained assignation
+             ->hasNoParent('Assignation', 'RIGHT')
              
              // in a property definition
              ->inIsIE('CODE')
