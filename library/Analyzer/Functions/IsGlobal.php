@@ -31,7 +31,8 @@ class IsGlobal extends Analyzer\Analyzer {
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
-             ->raw('filter{it.in.loop(1){ it.object.atom != "File"}{ it.object.atom in ["Class", "Trait", "Function"] }.any() == false}');
+             ->hasNoClassInterfaceTrait()
+             ->hasNoFunction();
         $this->prepareQuery();
     }
 }
