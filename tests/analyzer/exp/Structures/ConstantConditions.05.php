@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array('if(!defined(\'B\')) { /**/ } ', 
+                      'if(ini_get_all( )) { /**/ } ', 
+                      'if(mt_rand(\'C\')) { /**/ } ');
 
-$expected_not = array('if ( !function_exists(\'a\')) { /**/ } ',
-                      'if ( !defined(\'B\')) { $b++; } '
-                      );
+$expected_not = array("mt_rand('C')");
 
 ?>
