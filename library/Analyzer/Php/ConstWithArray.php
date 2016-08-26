@@ -26,14 +26,15 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class ConstWithArray extends Analyzer\Analyzer {
-    protected $phpVersion = '5.5-';
+    protected $phpVersion = '5.5+';
 
     public function analyze() {
         // method used in a static methodcall \a\b::b()
         $this->atomIs('Const')
+             ->outIs('CONST')
              ->outIs('VALUE')
              ->atomIs('Functioncall')
-             ->fullnspath('\\array')
+             ->fullnspathIs('\\array')
              ->back('first');
         $this->prepareQuery();
     }
