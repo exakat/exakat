@@ -31,11 +31,12 @@ class OverwrittenLiterals extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        return true;
         $this->atomIs('Assignation')
-             ->code('=')
+             ->codeIs('=')
              ->hasNoIn('INIT')
              ->outIs('RIGHT')
-             ->atomIs(array('Integer', 'String', 'Float'))
+             ->atomIs(array('Integer', 'String', 'Real'))
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->atomIs('Variable')
@@ -43,7 +44,7 @@ class OverwrittenLiterals extends Analyzer\Analyzer {
              ->_as('result')
              ->analyzerIs('Variables/IsModified')
              ->fetchContext()
-             ->eachCounted('it.code + "/" + context.Function + "/" + context.Class + "/" + context.Namespace', 1, '>');
+             ->eachCounted('it.get().value("code") + "/" + context.Function + "/" + context.Class + "/" + context.Namespace', 1, '>');
         $this->prepareQuery();
     }
 }
