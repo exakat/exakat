@@ -1,6 +1,11 @@
 <?php
 
-namespace X;
+namespace {
+
+const Y = 1;
+}
+
+namespace Y\X{
 
 echo E_ALL;
 
@@ -10,4 +15,6 @@ echo true;
 
 ANOTHER_CONSTANT;
 
+echo Y;
+}
 ?>
