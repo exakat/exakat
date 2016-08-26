@@ -107,7 +107,7 @@ class Methods {
     }
 
     public function getDeterministFunctions() {
-        $query = 'SELECT name FROM methods WHERE determinist = "true"';
+        $query = 'SELECT name FROM methods WHERE determinist = 1';
         $res = $this->sqlite->query($query);
         $return = array();
         
