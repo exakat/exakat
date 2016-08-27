@@ -6,10 +6,10 @@ $expected     = array('function deepDefinedLevel2( ) { /**/ } ',
                       'function deepDefinedFunction( ) { /**/ } ', 
                       'function deepDefinedFunction( ) { /**/ } ', 
                       'function deepDefinedFunction( ) { /**/ } ', 
-                      'class deepDefinedClass', 
-                      'interface deepDefinedInterface', 
-                      'interface deepDefinedTrait');
+                      'class deepDefinedClass { /**/ } ', 
+                      'interface deepDefinedInterface { /**/ } ', 
+                      'interface deepDefinedTrait { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('function classLevel( ) { /**/ } ');
 
 ?>
