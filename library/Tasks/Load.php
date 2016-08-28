@@ -181,10 +181,10 @@ class Load extends Tasks {
                         T_ECHO                        => 30,
                         T_HALT_COMPILER               => 30,
                         T_PRINT                       => 30,
-                        T_INCLUDE                     => 2,
-                        T_INCLUDE_ONCE                => 2,
-                        T_REQUIRE                     => 2,
-                        T_REQUIRE_ONCE                => 2,
+                        T_INCLUDE                     => 30,
+                        T_INCLUDE_ONCE                => 30,
+                        T_REQUIRE                     => 30,
+                        T_REQUIRE_ONCE                => 30,
                         T_DOUBLE_ARROW                => 30,
 
                         T_RETURN                      => 31,
@@ -3952,7 +3952,7 @@ class Load extends Tasks {
                                          'bracket'  => false]);
         
         $this->sequences[]    = $this->sequence;
-        $this->sequenceRank[] = 0;
+        $this->sequenceRank[] = -1;
         $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
     }
 
@@ -3962,7 +3962,7 @@ class Load extends Tasks {
     }
 
     private function endSequence() {
-        $this->setAtom($this->sequence, ['count' => $this->sequenceRank[$this->sequenceCurrentRank]]);
+        $this->setAtom($this->sequence, ['count' => $this->sequenceRank[$this->sequenceCurrentRank] + 1]);
 
         $id = array_pop($this->sequences);
         array_pop($this->sequenceRank);
@@ -4089,7 +4089,6 @@ class Load extends Tasks {
         }
         
         $this->uses[$useType][strtolower($alias)] = $fullnspath;
-        print_r($this->uses);
         
         return $alias;
     }
@@ -4113,7 +4112,9 @@ class Load extends Tasks {
         if (strpos($this->atoms[$callId]['noDelimiter'], '::') !== false) {
             $fullnspath = strtolower(substr($this->atoms[$callId]['noDelimiter'], 0, strpos($this->atoms[$callId]['noDelimiter'], '::')) );
             
-            if ($fullnspath[0] !== '\\') {
+            if (strlen($fullnspath) === 0) {
+                $fullnspath = '\\';
+            } elseif ($fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }
             $types = ['class'];
