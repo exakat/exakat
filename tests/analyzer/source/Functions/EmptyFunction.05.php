@@ -1,15 +1,15 @@
-<?php
+<?PHP
 
-class za  {
-    public function grandParentExists(){}        // yes
-    public function grandParentNotDerived(){}    // yes
+CLASS ZA  {
+    PUBLIC FUNCTION GRANDPARENTEXISTS(){}        // YES
+    PUBLIC FUNCTION GRANDPARENTNOTDERIVED(){}    // YES
 
 }
 
-abstract class aa extends za {
-    public abstract function parentIsAbstract(); // no (abstract)
-    private function parentIsConcrete(){}        // yes
-    protected function parentNotDerived(){}      // yes
+ABSTRACT CLASS AA EXTENDS ZA {
+    PUBLIC ABSTRACT FUNCTION PARENTISABSTRACT(); // NO (ABSTRACT)
+    PRIVATE FUNCTION PARENTISCONCRETE(){}        // YES
+    PROTECTED FUNCTION PARENTNOTDERIVED(){}      // YES
 }
 
 class ba extends aa {

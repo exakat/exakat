@@ -1,14 +1,14 @@
 <?php
 
-$expected     = array('protected function parentNotDerived( ) { /**/ } ', 
-                      'public function grandParentNotDerived( ) { /**/ } ', 
+$expected     = array('PROTECTED FUNCTION PARENTNOTDERIVED( ) { /**/ } ', 
+                      'PUBLIC FUNCTION GRANDPARENTNOTDERIVED( ) { /**/ } ', 
                       'public function noParentMethod( ) { /**/ } ', 
                       
-                      'private function parentIsConcrete( ) { /**/ } ', 
+                      'PRIVATE FUNCTION PARENTISCONCRETE( ) { /**/ } ', 
                       'public function parentIsConcrete( ) { /**/ } ',
                       
                       'public function parentIsAbstract( ) { /**/ } ',
-                      'public function grandParentExists( ) { /**/ } ');
+                      'PUBLIC FUNCTION GRANDPARENTEXISTS( ) { /**/ } ');
 
 $expected_not = array('public function grandParentExists( ) { /**/ } ');
 
