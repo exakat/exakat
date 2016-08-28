@@ -265,6 +265,18 @@ GREMLIN;
             $this->gremlin->query($query, ['arg1' => $deterministFunctions]);
         }
         display('Mark constants expressions');
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Variable").has("code", "\\\$GLOBALS").in("VARIABLE").hasLabel("Array").as("var")
+     .out("INDEX").hasLabel("String")
+     .sideEffect{ varname = '\$' + it.get().value('noDelimiter');
+                  it.get().property("globalvar", varname);}
+
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('Mark constants expressions');
+
     }
 }
 
