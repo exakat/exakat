@@ -28,12 +28,13 @@ use Analyzer;
 class pregOptionE extends Analyzer\Analyzer {
     public function analyze() {
         // delimiters
-        $delimiters = '=~/|`%#\\$!,@\\\\{\\\\(\\\\[';
+        $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[';
         
         $makeDelimiters = ' sideEffect{ 
     if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
     else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
+    else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
     else { delimiterFinal = delimiter; } 
 }';
 
