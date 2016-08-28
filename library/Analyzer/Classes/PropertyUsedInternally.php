@@ -50,6 +50,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
         $this->atomIs('Ppp')
+             ->hasClass()
              ->hasOut('STATIC')
              ->outIs('PPP')
              ->_as('ppp')
