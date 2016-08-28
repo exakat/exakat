@@ -29,6 +29,7 @@ class OneLetterFunctions extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('NAME')
+             ->atomIsNot('Void')
              ->fullcodeLength(' == 1 ');
         $this->prepareQuery();
     }
