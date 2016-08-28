@@ -31,7 +31,6 @@ class IsGlobalConstant extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        return true;
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         
@@ -45,44 +44,20 @@ class IsGlobalConstant extends Analyzer\Analyzer {
             }
         }
         $constants = call_user_func_array('array_merge', $c);
-        
         $constantsFullNs = $this->makeFullNsPath($constants);
-        $constantsFullNsChunks = array_chunk($constantsFullNs, 500);
-
-        /*
-        foreach($constantsFullNsChunks as $chunk) {
-            $chunk = array_map(function ($x) { return str_replace('\\', '\\\\', $x);}, $chunk);
-            $this->analyzerIs('Constants/ConstantUsage')
-                 ->analyzerIsNot('self')
-                 ->tokenIs('T_STRING')  // No namespace
-                 ->regexIs('fullnspath', '\\\\\\\\.+\\\\\\\\.+')
-                 // is the constant defined where it should ?
-                 ->filter("g.idx('constants')[['path':it.fullnspath]].any() == false")
-
-                 // is the constant defined in the global
-                 ->filter("g.idx('constants')[['path':'\\\\' + it.code.toLowerCase()]].any() ||
-                           '\\\\' + it.code.toLowerCase() in ['".join("', '", $chunk)."']")
-                 ->back('first');
-            $this->prepareQuery();
-        }
-        */
 
         $this->analyzerIs('Constants/ConstantUsage')
+             ->atomIsNot(array('Boolean', 'Null'))
+             ->tokenIs('T_STRING')
              ->analyzerIsNot('self')
-             ->tokenIs('T_STRING')  // No namespace
-             ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$')
+
+             // Exclude PHP constants
+             ->fullnspathIsNot($constantsFullNs)
+
+            // Check that the final fullnspath is actually \something (no multiple \)
+             ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]*\\$')
              ->back('first');
         $this->prepareQuery();
-        
-        // constants that fallback to global constants
-        $this->analyzerIs('Constants/ConstantUsage')
-             ->analyzerIsNot('self')
-             ->tokenIs('T_STRING')  // No namespace
-             ->hasNoConstantDefinition()
-             ->filter(' g.idx("constants")[["path":"\\\\global\\\\" + it.code.toLowerCase()]].any()')
-             ->back('first');
-        $this->prepareQuery();
-        
     }
 }
 
