@@ -1,7 +1,9 @@
-"autre"
+L
 Label : ARGUMENT
   .
   Label : CONCAT
-    "literal"
+    J
   Label : CONCAT
-    "autre"
+    'K'
+  Label : CONCAT
+    L

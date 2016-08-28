@@ -1,29 +1,29 @@
 (
 Label : ARGUMENT
-  .
-  Label : CONCAT
-    include
-    Label : ARGUMENTS
-      E
-      Label : ARGUMENT
-        E
-    Label : NAME
-      include
-  Label : CONCAT
+  include
+  Label : ARGUMENTS
     'F'
-Label : ARGUMENT
-  .
-  Label : CONCAT
+    Label : ARGUMENT
+      .
+      Label : CONCAT
+        E
+      Label : CONCAT
+        'F'
+  Label : NAME
     include
-    Label : ARGUMENTS
-      G
-      Label : ARGUMENT
-        G
-    Label : NAME
-      include
-  Label : CONCAT
-    'H'
-  Label : CONCAT
-    $b
-  Label : CONCAT
+Label : ARGUMENT
+  include
+  Label : ARGUMENTS
     'I'
+    Label : ARGUMENT
+      .
+      Label : CONCAT
+        G
+      Label : CONCAT
+        'H'
+      Label : CONCAT
+        $b
+      Label : CONCAT
+        'I'
+  Label : NAME
+    include
