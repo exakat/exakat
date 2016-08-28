@@ -1253,6 +1253,9 @@ class Load extends Tasks {
                 $this->processOpenWithEcho();
                 /// processing the first expression as an echo
                 $this->processSemicolon();
+                if ($this->tokens[$this->id + 1][0] == T_END) {
+                    $this->id--;
+                }
             }
 
             $this->processNext();
