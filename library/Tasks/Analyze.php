@@ -81,9 +81,6 @@ php exakat analyze -P <One/rule> -p <project>\n");
             foreach($analyzers_class as $a) {
                 $d = \Analyzer\Analyzer::getInstance($a);
                 $configName = str_replace('/', '_', $a);
-                if (null !== ($analyzerConfig = $config->$configName)) {
-                    $d->setConfig($analyzerConfig);
-                }
                 $d = $d->dependsOn();
                 if (empty($d)) {
                     $dependencies2[] = $a;
@@ -152,9 +149,6 @@ php exakat analyze -P <One/rule> -p <project>\n");
             $begin = microtime(true);
             $analyzer = \Analyzer\Analyzer::getInstance($analyzer_class);
             $configName = str_replace(array('/', '\\'), '_', str_replace('Analyzer\\', '', $analyzer_class));
-            if (null !== ($analyzerConfig = $config->$configName)) {
-                $analyzer->setConfig($analyzerConfig);
-            }
     
             if ($config->noRefresh && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");
