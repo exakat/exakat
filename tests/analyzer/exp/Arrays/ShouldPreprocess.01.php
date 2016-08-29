@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('$d = array( )', 
-                      '$a = array( )', 
+$expected     = array('$a = array( )', 
+                      '$b = array( )',
+                      '$d = array( )', 
                       '$e = array( )', 
                       '$x->y = array( )', 
-                      '$b = array( )'
 );
 
 $expected_not = array('$e[45]',
