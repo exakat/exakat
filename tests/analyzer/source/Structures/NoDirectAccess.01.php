@@ -18,4 +18,6 @@ if (!defined("H")) { die("h"); }
 if (!defined('I')) die;
 defined('J') or die('i');
 
+defined('K') or define('K', 1);
+
 ?>
