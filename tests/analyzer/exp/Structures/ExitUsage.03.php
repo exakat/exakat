@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('exit( )');
+$expected     = array();
 
-$expected_not = array();
+$expected_not = array('exit( )');
 
 ?>
