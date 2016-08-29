@@ -25,9 +25,11 @@ use Analyzer;
 
 class IdenticalConditions extends Analyzer\Analyzer {
     public function analyze() {
+
         // $a || $a 
         // ($a) && ($a)
         $this->atomIs('Logical')
+             ->hasNoIn(array('LEFT', 'RIGHT'))
              ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->atomIsNot('Logical')
@@ -73,6 +75,26 @@ class IdenticalConditions extends Analyzer\Analyzer {
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
              ->samePropertyAs('fullcode', 'left', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // case for $a || $b || $b
+        $this->atomIs('Logical')
+             ->analyzerIsNot('self')
+             // Ignore LEFT
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->atomIs('Logical')
+
+             ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->savePropertyAs('fullcode', 'right')
+             ->inIsIE('CODE')
+             ->inIs('RIGHT')
+
+             ->outIs('LEFT')
+             ->outIsIE('CODE')
+             ->samePropertyAs('fullcode', 'right', true)
              ->back('first');
         $this->prepareQuery();
 
@@ -124,12 +146,12 @@ class IdenticalConditions extends Analyzer\Analyzer {
         // four levels
         $this->atomIs('Logical')
              ->analyzerIsNot('self')
-             ->outIs('RIGHT')
+             ->outIs('LEFT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
              ->inIsIE('CODE')
-             ->inIs('RIGHT')
-             ->outIs('LEFT')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
@@ -148,12 +170,12 @@ class IdenticalConditions extends Analyzer\Analyzer {
         // four levels
         $this->atomIs('Logical')
              ->analyzerIsNot('self')
-             ->outIs('RIGHT')
+             ->outIs('LEFT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
              ->inIsIE('CODE')
-             ->inIs('RIGHT')
-             ->outIs('LEFT')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))

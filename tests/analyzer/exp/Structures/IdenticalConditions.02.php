@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a || $a',
+$expected     = array('$a || $a || $c',
                       '$a || $c || $a',
                       '$c || $a || $a',
                       '$a || ($c || $a)'
