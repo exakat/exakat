@@ -63,7 +63,8 @@ class Htmlentitiescall extends Analyzer\Analyzer {
              ->atomInside(array('Identifier', 'Nsname'))
              ->outIsIE('SUBNAME')
              ->codeIsNot(array('ENT_COMPAT', 'ENT_QUOTES', 'ENT_NOQUOTES', 'ENT_IGNORE', 'ENT_SUBSTITUTE', 'ENT_DISALLOWED', 'ENT_HTML401', 'ENT_XML1', 'ENT_XHTML', 'ENT_HTML5'), true)
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // Case 3rd argument is one of the following value

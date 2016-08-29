@@ -16,7 +16,7 @@ htmlentities($miss_15, ENT_QUOTES | \ENT_COMPAT, 'UTF-8');
 htmlentities($miss_16, ENT_QUOTES | \ENT_COMPAT, 'UTF-8');
 
 // Wrong Constants
-htmlentities($miss_15, ENT_QUOTES | \ENT_COMPAT | E_ALL, 'UTF-8');
-htmlentities($miss_16, ENT_QUOTES | \ENT_COMPAT | \E_ALL, 'UTF-8');
+htmlentities($miss_17, ENT_QUOTES | \ENT_COMPAT | E_ALL, 'UTF-8');
+htmlentities($miss_18, ENT_QUOTES | \ENT_COMPAT | \E_ALL, 'UTF-8');
 
 ?>

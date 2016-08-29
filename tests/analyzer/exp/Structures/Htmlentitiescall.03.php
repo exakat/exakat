@@ -2,8 +2,8 @@
 
 $expected     = array('htmlentities($miss_2)',
                       'htmlentities($miss_11, ENT_QUOTES)', 
-                      'htmlentities($miss_16, ENT_QUOTES | \ENT_COMPAT | \E_ALL, \'UTF-8\')', 
-                      'htmlentities($miss_15, ENT_QUOTES | \ENT_COMPAT | E_ALL, \'UTF-8\')'
+                      'htmlentities($miss_17, ENT_QUOTES | \ENT_COMPAT | E_ALL, \'UTF-8\')',
+                      'htmlentities($miss_18, ENT_QUOTES | \ENT_COMPAT | \E_ALL, \'UTF-8\')', 
 
 );
 
