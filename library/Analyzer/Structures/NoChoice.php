@@ -48,20 +48,19 @@ class NoChoice extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-/*
         // if ($a == 2) Then doThis(); else doThis();
         $this->atomIs('Ifthen')
              ->outIs('THEN')
              ->atomIs('Sequence')
-             ->raw('sideEffect{ sthen = []; it.out("ELEMENT").sort{it.rank}._().each{ sthen.add(it.fullcode); }}')
+             ->raw('sideEffect{ sthen = []; it.get().vertices(OUT, "ELEMENT").sort{it.value("rank")}.each{ sthen.add(it.value("fullcode"));} }')
              ->inIs('THEN')
              ->outIs('ELSE')
              ->atomIs('Sequence')
-             ->raw('sideEffect{ selse = []; it.out("ELEMENT").sort{it.rank}._().each{ selse.add(it.fullcode); }}')
+             ->raw('sideEffect{ selse = []; it.get().vertices(OUT, "ELEMENT").sort{it.value("rank")}.each{ selse.add(it.value("fullcode"));} }')
              ->filter('sthen.join(";") == selse.join(";")')
              ->back('first');
         $this->prepareQuery();
-*/
+
     }
 }
 
