@@ -31,9 +31,9 @@ Pre-requisites
 
 You need the following tools : 
 
-* [git](https://git-scm.com/)
-* [ansible](http://docs.ansible.com/ansible/intro_installation.html)
-* [vagrant](https://www.vagrantup.com/docs/installation/)
+* `git <https://git-scm.com/>`_
+* `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
+* `vagrant <https://www.vagrantup.com/docs/installation/>`_
 
 Most may easily be installed with the local package manager, or with a direct download from the editor's website. 
 
@@ -104,7 +104,7 @@ Neo4j
 +++++++++++++++++++++++++++++
 Download Neo4j 2.3.* version (currently, 2.3.5). Neo4j 2.2 are not supported. Neo4j 3.0 has no support for Gremlin at the moment (2016-07-01)
 
-[Neo4j](http://neo4j.com/)
+`Neo4j <http://neo4j.com/>`_
 
 ::
 
@@ -115,7 +115,7 @@ Download Neo4j 2.3.* version (currently, 2.3.5). Neo4j 2.2 are not supported. Ne
 Gremlin plug-in
 +++++++++++++++
 
-Exakat uses [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there. 
+Exakat uses `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_ for Neo4j. Follow the install instructions there. 
 
 Make the following changes in the following files : 
 
@@ -140,17 +140,17 @@ Then, in command line :
 Various versions of PHP
 +++++++++++++++++++++++++++++
 
-You need one version of PHP (at least) to run exakat. This version needs the [`curl`](http://www.php.net/curl), [`hash`](http://www.php.net/hash), [`tokenizer`](http://www.php.net/tokenizer) and [`sqlite3`](http://www.php.net/sqlite3) extensions. They all are part of the core. 
+You need one version of PHP (at least) to run exakat. This version needs the `curl <http://www.php.net/curl>`_, `hash <http://www.php.net/hash>`_, `tokenizer <http://www.php.net/tokenizer>`_ and `sqlite3 <http://www.php.net/sqlite3>`_ extensions. They all are part of the core. 
 
-Extra PHP-CLI versions allow more checks on the code. They only need to have the [`tokenizer`](http://www.php.net/tokenizer) extension available.  
+Extra PHP-CLI versions allow more checks on the code. They only need to have the `tokenizer <http://www.php.net/tokenizer>`_ extension available.  
 
 Exakat recommends PHP 7.0.8 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.1-alpha and 7.2-dev.
 
-To install easily various versions of PHP, use the dotdeb repository. Follow the [dotdeb instruction](https://www.dotdeb.org/instructions/).
+To install easily various versions of PHP, use the dotdeb repository. Follow the `dotdeb instruction <https://www.dotdeb.org/instructions/>`_.
 
 Exakat 
 ######
-Download the `exakat.phar` archive from [exakat.io](http://www.exakat.io/) and place it in the `exakat` folder.
+Download the `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_ and place it in the `exakat` folder.
 
 Test
 ####
@@ -180,14 +180,14 @@ OSX install
 
 You need to use the Terminal, which is always installed with OSX.
 
-You need [xcode](https://developer.apple.com/xcode/) installed, with the command line tools. Xcode is available for free in the App store. 
+You need `xcode <https://developer.apple.com/xcode/>`_ installed, with the command line tools. Xcode is available for free in the App store. 
 
 Create a folder for exakat. It will contain four elements : `neo4j` folder, the `exakat.phar` and the projects folder `projects`. Other folders will be created along the way.
 
 homebrew
 ########
 
-[Homebrew](http://brew.sh/) is a package manager for OSX. It will speed up the installation if you install it now. You may do also without it, or using [Fink](http://www.finkproject.org/) or [macport](https://www.macports.org/).
+`Homebrew <http://brew.sh/>`_ is a package manager for OSX. It will speed up the installation if you install it now. You may do also without it, or using `Fink <http://www.finkproject.org/>`_ or `macport <https://www.macports.org/>`_.
 
 ::
 
@@ -217,7 +217,7 @@ Install Java(TM) JDK 1.8. Neo4j recommends using Java 1.7, but is currently repo
 Neo4j
 #####
 
-Go to [Neo4j Releases](http://neo4j.com/download/other-releases/) and download the Community edition for Linux/Mac.
+Go to `Neo4j Releases <http://neo4j.com/download/other-releases/>`_ and download the Community edition for Linux/Mac.
 As of today (july 2016), version 2.3.5 have been tested successfully. 
 
 Neo4j 3.0.0 won't work yet (The gremlin plug-in hasn't been tested successfully). 
@@ -246,7 +246,7 @@ Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` fi
 Gremlin plug-in
 +++++++++++++++
 
-This install [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j.
+This install `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_ for Neo4j.
   
 First, in command line : 
 
@@ -304,9 +304,9 @@ You may now removed the git repository for gremlin-plugin.
 Various versions of PHP
 #######################
 
-You need one version of PHP (at least) to run exakat. This version needs the [`curl`](http://www.php.net/curl), [`hash`](http://www.php.net/hash), [`tokenizer`](http://www.php.net/tokenizer) and [`sqlite3`](http://www.php.net/sqlite3) extensions. They all are part of the core. 
+You need one version of PHP (at least) to run exakat. This version needs the `curl <http://www.php.net/curl>`_, `hash <http://www.php.net/hash>`_, `tokenizer <http://www.php.net/tokenizer>`_ and `sqlite3 <http://www.php.net/sqlite3>`_ extensions. They all are part of the core. 
 
-Extra PHP-CLI versions allow more checks on the code. They only need to have the [`tokenizer`](http://www.php.net/tokenizer) extension available.  
+Extra PHP-CLI versions allow more checks on the code. They only need to have the `tokenizer <http://www.php.net/tokenizer>`_ extension available.  
 
 You may reduce the load of those binaries by disabling all other extensions.
 
@@ -363,7 +363,7 @@ Neo4j
 
 Download Neo4j 2.3.* version (currently, 2.3.5). 
 
-[Neo4j](http://neo4j.com/)
+`Neo4j <http://neo4j.com/>`_
 
 Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` file. To do so, add this line:
 
@@ -372,7 +372,7 @@ Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` fi
 Gremlin plug-in
 +++++++++++++++++++++++++++++
 
-There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plugin) for Neo4j. Follow the install instructions there, but also before running the maven compile, update the pom.xml files : 
+There is a `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_ for Neo4j. Follow the install instructions there, but also before running the maven compile, update the pom.xml files : 
 
 * pom.xml : change the version tag from 2.3.1 to 2.3.5
 * tinkerpop2/pom.xml : change the version tag from 2.3.1 to 2.3.5
@@ -383,15 +383,15 @@ There is a [gremlin plug-in](https://github.com/thinkaurelius/neo4j-gremlin-plug
 
 Various versions of PHP
 +++++++++++++++++++++++++++++
-You need one version of PHP (at least) to run exakat. This version needs the [`curl`](http://www.php.net/curl), [`hash`](http://www.php.net/hash), [`tokenizer`](http://www.php.net/tokenizer) and [`sqlite3`](http://www.php.net/sqlite3) extensions. They all are part of the core. 
+You need one version of PHP (at least) to run exakat. This version needs the `curl <http://www.php.net/curl>`_, `hash <http://www.php.net/hash>`_, `tokenizer <http://www.php.net/tokenizer>`_ and `sqlite3 <http://www.php.net/sqlite3>`_ extensions. They all are part of the core. 
 
-Extra PHP-CLI versions allow more checks on the code. They only need to have the [`tokenizer`](http://www.php.net/tokenizer) extension available.  
+Extra PHP-CLI versions allow more checks on the code. They only need to have the `tokenizer <http://www.php.net/tokenizer>`_ extension available.
 
 We recommend running PHP 7.0.8 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.0, 7.1-alpha and 7.2-dev, as they may be used with exakat.
 
 Exakat 
 ++++++
-Download the `exakat.phar` archive from [exakat.io](http://www.exakat.io/) and place it in the `exakat` folder.
+Download the `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_ and place it in the `exakat` folder.
 
 Test
 ####
@@ -404,10 +404,10 @@ Optional installation
 
 By default, exakat works with Git repository for downloading code. You may also use 
 
-* [composer](https://getcomposer.org/)
-* [svn](https://subversion.apache.org/)
-* [hg](https://www.mercurial-scm.org/)
-* [bazaar](http://bazaar.canonical.com/en/)
+* `composer <https://getcomposer.org/>`_
+* `svn <https://subversion.apache.org/>`_
+* `hg <https://www.mercurial-scm.org/>`_
+* `bazaar <http://bazaar.canonical.com/en/>`_
 * zip
 * local copy of a code folder
 * local symlink of a code folder (only used for reading, no writing)

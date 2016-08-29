@@ -33,7 +33,7 @@ Here is the list of the current recipes supported by Exakat Engine.
 |:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0. This recipe is helpful for checking compatibility. |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP71`                      | List features that are incompatible with PHP 7.1. This recipe is helpful for forward compatibility,  |
-|                                               | and it currently under developpement.                                                                |
+|                                               | and it currently beta 3.                                                                             |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`CompatibilityPHP56`                      | List features that are incompatible with PHP 5.6. This recipe is helpful for backward compatibility. |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 19 Jul 2016 10:30:49 +0000
-.. comment: Generation hash : 7c8e610c038cc0f063938da825d0f1f9b177d202
+.. comment: Generation date : Mon, 29 Aug 2016 09:54:35 +0000
+.. comment: Generation hash : 04a6925cc2f4587a3bdb39f44312b105a0a20b83
 
 
 .. _analyze:
@@ -68,12 +68,12 @@ Recipes details
 Analyze
 +++++++
 
-Total : 249 analysis
+Total : 251 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
-* :ref:`$this is not for static methods <$this-is-not-for-static-methods>`
+* :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
 * :ref:`<?= usage <<?=-usage>`
 * :ref:`Abstract Static Methods <abstract-static-methods>`
 * :ref:`Access Protected Structures <access-protected-structures>`
@@ -83,7 +83,7 @@ Total : 249 analysis
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
 * :ref:`Ambiguous Index <ambiguous-index>`
-* :ref:`Argument should be typehinted <argument-should-be-typehinted>`
+* :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid array\_unique() <avoid-array\_unique()>`
@@ -100,7 +100,7 @@ Total : 249 analysis
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
 * :ref:`Common Alternatives <common-alternatives>`
-* :ref:`Compared comparison <compared-comparison>`
+* :ref:`Compared Comparison <compared-comparison>`
 * :ref:`Concrete Visibility <concrete-visibility>`
 * :ref:`Confusing Names <confusing-names>`
 * :ref:`Constant Class <constant-class>`
@@ -110,7 +110,7 @@ Total : 249 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use \_\_DIR\_\_ <could-use-\_\_dir\_\_>`
-* :ref:`Could use self <could-use-self>`
+* :ref:`Could Use self <could-use-self>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
 * :ref:`Deprecated Code <deprecated-code>`
@@ -147,7 +147,7 @@ Total : 249 analysis
 * :ref:`If With Same Conditions <if-with-same-conditions>`
 * :ref:`Iffectations`
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
-* :ref:`Implicit global <implicit-global>`
+* :ref:`Implicit Global <implicit-global>`
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
@@ -155,7 +155,7 @@ Total : 249 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical Mistakes <logical-mistakes>`
-* :ref:`Logical should use &&, \|\|, ^ <logical-should-use-&&,-||,-^>`
+* :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Lone Blocks <lone-blocks>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Magic Visibility <magic-visibility>`
@@ -170,9 +170,10 @@ Total : 249 analysis
 * :ref:`Must Return Methods <must-return-methods>`
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ternary <nested-ternary>`
+* :ref:`Never Negative <never-negative>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Choice <no-choice>`
-* :ref:`No Direct Call To MagicMethod <no-direct-call-to-magicmethod>`
+* :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
@@ -183,7 +184,7 @@ Total : 249 analysis
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
-* :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
+* :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Non Ascii Variables <non-ascii-variables>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
@@ -216,6 +217,7 @@ Total : 249 analysis
 * :ref:`Redefined Default <redefined-default>`
 * :ref:`Relay Function <relay-function>`
 * :ref:`Repeated print() <repeated-print()>`
+* :ref:`Results May Be Missing <results-may-be-missing>`
 * :ref:`Return True False <return-true-false>`
 * :ref:`Same Conditions <same-conditions>`
 * :ref:`Sequences In For <sequences-in-for>`
@@ -231,7 +233,7 @@ Total : 249 analysis
 * :ref:`Static Loop <static-loop>`
 * :ref:`Static Methods Called From Object <static-methods-called-from-object>`
 * :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
-* :ref:`Strict comparison with booleans <strict-comparison-with-booleans>`
+* :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strpos Comparison <strpos-comparison>`
 * :ref:`Switch To Switch <switch-to-switch>`
@@ -291,9 +293,9 @@ Total : 249 analysis
 * :ref:`Useless Instructions <useless-instructions>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Useless Parenthesis <useless-parenthesis>`
+* :ref:`Useless Return <useless-return>`
 * :ref:`Useless Switch <useless-switch>`
 * :ref:`Useless Unset <useless-unset>`
-* :ref:`Useless return <useless-return>`
 * :ref:`Uses Default Values <uses-default-values>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`Var`
@@ -354,7 +356,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 49 analysis
+Total : 50 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -372,8 +374,9 @@ Total : 49 analysis
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Function Subscripting <function-subscripting>`
-* :ref:`Hash Algorithms incompatible with PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
+* :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Isset With Constant <isset-with-constant>`
+* :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
@@ -411,7 +414,7 @@ Total : 49 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 44 analysis
+Total : 45 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -428,8 +431,9 @@ Total : 44 analysis
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
-* :ref:`Hash Algorithms incompatible with PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
+* :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Isset With Constant <isset-with-constant>`
+* :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
@@ -463,7 +467,7 @@ Total : 44 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 40 analysis
+Total : 41 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -477,6 +481,7 @@ Total : 40 analysis
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Isset With Constant <isset-with-constant>`
+* :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
@@ -511,7 +516,7 @@ Total : 40 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 32 analysis
+Total : 33 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -520,6 +525,7 @@ Total : 32 analysis
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Isset With Constant <isset-with-constant>`
+* :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
@@ -551,7 +557,7 @@ Total : 32 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 31 analysis
+Total : 32 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -561,12 +567,13 @@ Total : 31 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Dont Change Pointer <foreach-dont-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
-* :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
+* :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
@@ -590,7 +597,7 @@ Total : 31 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 34 analysis
+Total : 37 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -609,13 +616,16 @@ Total : 34 analysis
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
-* :ref:`PHP 70 Removed Directive <php-70-removed-directive>`
+* :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
+* :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+* :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
+* :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Use password\_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
@@ -626,6 +636,19 @@ Total : 34 analysis
 * :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 * :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`set\_exception\_handler() Warning <set\_exception\_handler()-warning>`
+
+.. _compatibilityphp72:
+
+CompatibilityPHP72
+++++++++++++++++++
+
+Total : 5 analysis
+
+* :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`Magic Visibility <magic-visibility>`
+* :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+* :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
+* :ref:`Use Nullable Type <use-nullable-type>`
 
 .. _dead-code:
 
@@ -671,7 +694,7 @@ Total : 15 analysis
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call <make-one-call>`
-* :ref:`No array\_merge In Loops <no-array\_merge-in-loops>`
+* :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`
 * :ref:`Simple Regex <simple-regex>`
@@ -686,6 +709,7 @@ Security
 Total : 18 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
+* :ref:`Avoir Sleep()/Usleep() <avoir-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
@@ -697,7 +721,6 @@ Total : 18 analysis
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
-* :ref:`Sleep is a security risk <sleep-is-a-security-risk>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Use random\_int() <use-random\_int()>`
 * :ref:`parse\_str() Warning <parse\_str()-warning>`

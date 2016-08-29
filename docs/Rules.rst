@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 19 Jul 2016 10:30:49 +0000
-.. comment: Generation hash : 7c8e610c038cc0f063938da825d0f1f9b177d202
+.. comment: Generation date : Mon, 29 Aug 2016 09:54:35 +0000
+.. comment: Generation hash : 04a6925cc2f4587a3bdb39f44312b105a0a20b83
 
 
 .. _$http\_raw\_post\_data:
@@ -68,11 +68,23 @@ $this variable represents an object (the current object) and it is not an array,
 
 .. _$this-is-not-for-static-methods:
 
-$this is not for static methods
+$this Is Not For Static Methods
 ###############################
 
 
-$this variable represents an object (the current object) and it is not compatible with a static method, which may operate without any object.
+$this variable represents an object (the current object) and it is not compatible with a static method, which may operate without any object. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       static public function bar() {
+           return $this->a;   // No $this usage in a static method
+       }
+   }
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------+
 | Command Line | Classes/ThisIsNotForStatic                                                                  |
@@ -400,13 +412,25 @@ Mark anonymous classes.
 
 .. _argument-should-be-typehinted:
 
-Argument should be typehinted
+Argument Should Be Typehinted
 #############################
 
 
 When a method expects objects as argument, those arguments should be typehinted, so as to provide early warning that a wrong object is being sent to the method.
 
 The analyzer will detect situations where a class, or the keywords 'array' or 'callable'. 
+
+.. code-block:: php
+
+   <?php
+   
+   // What are the possible classes that have a 'foo' method? 
+   function foo($bar) {
+       return $bar->foo();
+   }
+   
+   ?>
+
 
 Closure arguments are omitted.
 
@@ -501,6 +525,26 @@ The native function array\_unique is much slower than using other alternative, s
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
+
+
+
+.. _avoir-sleep()/usleep():
+
+Avoir Sleep()/Usleep()
+######################
+
+
+Pausing the script for a specific amount of time means that the Web server is also making all related ressources sleep, such as database, sockets, session, etc. This may used to set up a DOS on the server.  
+
+As much as possible, avoid delaying the end of the script.
+
++--------------+------------------+
+| Command Line | Security/NoSleep |
++--------------+------------------+
+| clearPHP     |                  |
++--------------+------------------+
+| Analyzers    | :ref:`Security`  |
++--------------+------------------+
 
 
 
@@ -911,7 +955,7 @@ You may also use password\_hash and password\_verify.
 
 .. _compared-comparison:
 
-Compared comparison
+Compared Comparison
 ###################
 
 
@@ -1185,11 +1229,28 @@ Use \_\_DIR\_\_ function to access the current file's parent directory.
 
 .. _could-use-self:
 
-Could use self
+Could Use self
 ##############
 
 
-Self keywords refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
+'self' keyword refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
+
+It is also routinely used in traits : there, 'self' represents the class in which the trait is used, or the trait itself. 
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       const FOO = 1;
+       
+       public function bar() {
+           return self::FOO;
+   // same as return x::FOO;
+       }
+   }
+   
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Classes/ShouldUseSelf |
@@ -1946,7 +2007,7 @@ Forgotten Visibility
 ####################
 
 
-Some classes elements (constant, property, method) are missing their explicit visibility. By default, it is public.
+Some classes elements (property, method, and constant in PHP 7.1) are missing their explicit visibility. By default, it is public.
 
 It should at least be mentioned as public, or may be reviewed as protected or private.
 
@@ -2183,7 +2244,7 @@ There is a long but limited list of hashing algorithm available to PHP. The one 
 
 .. _hash-algorithms-incompatible-with-php-5.3:
 
-Hash Algorithms incompatible with PHP 5.3
+Hash Algorithms Incompatible With PHP 5.3
 #########################################
 
 
@@ -2201,7 +2262,7 @@ List of hash algorithms incompatible with PHP 5.3. They were introduced in newer
 
 .. _hash-algorithms-incompatible-with-php-5.4/5:
 
-Hash Algorithms incompatible with PHP 5.4/5
+Hash Algorithms Incompatible With PHP 5.4/5
 ###########################################
 
 
@@ -2225,13 +2286,13 @@ Hexadecimal In String
 
 Mark strings that may be confused with hexadecimal.
 
-+--------------+------------------------------------------------------+
-| Command Line | Type/HexadecimalString                               |
-+--------------+------------------------------------------------------+
-| clearPHP     |                                                      |
-+--------------+------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Type/HexadecimalString                                                          |
++--------------+---------------------------------------------------------------------------------+
+| clearPHP     |                                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -2335,11 +2396,11 @@ When deriving classes, implements should be used for interfaces, and extends wit
 
 .. _implicit-global:
 
-Implicit global
+Implicit Global
 ###############
 
 
-Global variables, that are used in local scope with global Keyword, but are not declared as Global in the global scope. They may be mistaken with distinct values, while, in PHP, variables in the global scope are truely global.
+Global variables, that are used in local scope with global keyword, but are not declared as global in the global scope. They may be mistaken with distinct values, while, in PHP, variables in the global scope are truly global.
 
 +--------------+---------------------------+
 | Command Line | Structures/ImplicitGlobal |
@@ -2573,6 +2634,24 @@ Always use file\_get\_contents() to get the content of a file as a string.
 
 
 
+.. _list-short-syntax:
+
+List Short Syntax
+#################
+
+
+Usage of short syntax version of list().
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ListShortSyntax                                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _list-with-appends:
 
 List With Appends
@@ -2668,10 +2747,10 @@ Based on article from Andrey Karpov : http://www.viva64.com/en/b/0390/
 
 
 
-.. _logical-should-use-&&,-||,-^:
+.. _logical-should-use-symbolic-operators:
 
-Logical should use &&, \|\|, ^
-##############################
+Logical Should Use Symbolic Operators
+#####################################
 
 
 Logical operators come in two flavors :  and / &&, \|\| / or, ^ / xor. However, they are not exchangeable, as && and and have different precedence. 
@@ -2746,13 +2825,13 @@ Magic Visibility
 
 The magic methods must have public visibility and cannot be static
 
-+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Classes/toStringPss                                                                                                                                                              |
-+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     |                                                                                                                                                                                  |
-+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
-+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/toStringPss                                                                                                                                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                                                                                             |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -3122,6 +3201,37 @@ However, ternary operators tends to make the syntax very difficult to read when 
 
 
 
+.. _never-negative:
+
+Never Negative
+##############
+
+
+Some PHP native functions, such as count(), strlen(), or abs() only returns positive or null values. 
+
+When comparing them to 0, the following expression are always true and should be avoided. 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = [1, 2, 3];
+   
+   var\_dump(count($a) >= 0);
+   var\_dump(count($a) < 0); 
+   
+   ?>
+
++--------------+--------------------------+
+| Command Line | Structures/NeverNegative |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
+
 .. _never-used-properties:
 
 Never Used Properties
@@ -3228,10 +3338,10 @@ Either the condition is useless, and may be removed, or the alternatives needs t
 
 
 
-.. _no-direct-call-to-magicmethod:
+.. _no-direct-call-to-magic-method:
 
-No Direct Call To MagicMethod
-#############################
+No Direct Call To Magic Method
+##############################
 
 
 PHP magic methods, such as \_\_get(), \_\_set(), ... are supposed to be used in an object environnement, and not with direct call. 
@@ -3523,15 +3633,15 @@ The code needs to reference the full class's name to do so, without using the cu
 
 
 
-.. _no-array\_merge-in-loops:
+.. _no-array\_merge()-in-loops:
 
-No array\_merge In Loops
-########################
+No array\_merge() In Loops
+##########################
 
 
 The function array\_merge() is memory intensive : every call will duplicate the arguments in memory, before merging them. 
 
-Since arrays way be quite big, it is recommended to avoid using merge in a loop. Instead, one should use array\_merge with as many arguments as possible, making the merge a on time call.
+Since arrays may be quite big, it is recommended to avoid using array\_merge() in a loop. Instead, one should use array\_merge() with as many arguments as possible, making the merge a on time call.
 
 This may be achieved easily with the variadic operator : array\_merge(...array\_collecting\_the\_arrays), or 
 with call\_user\_func\_array('array\_merge', array\_collecting\_the\_arrays()). The Variadic is slightly faster than call\_user\_func\_array.
@@ -4029,10 +4139,10 @@ The following interfaces are introduced in PHP 7.0. They shouldn't be defined in
 
 
 
-.. _php-70-removed-directive:
+.. _php-7.0-removed-directives:
 
-PHP 70 Removed Directive
-########################
+PHP 7.0 Removed Directives
+##########################
 
 
 List of directives that are removed in PHP 7.0.
@@ -4043,6 +4153,50 @@ List of directives that are removed in PHP 7.0.
 | clearPHP     |                                                      |
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
+
+
+
+.. _php-7.1-new-functions:
+
+PHP 7.1 New Functions
+#####################
+
+
+The following functions are now native functions in PHP 7.1. It is advised to change them before moving to this new version.
+
+\* curl\_share\_strerror()
+\* curl\_multi\_errno()
+\* curl\_share\_errno()
+\* mb\_ord()
+\* mb\_chr()
+\* mb\_scrub()
+\* is\_iterable()
+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php71NewFunctions                                |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------+
+
+
+
+.. _php-7.1-removed-directives:
+
+PHP 7.1 Removed Directives
+##########################
+
+
+List of directives that are removed in PHP 7.1.
+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php71RemovedDirective                            |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
 +--------------+------------------------------------------------------+
 
 
@@ -4651,6 +4805,34 @@ Php reserved names for class/trait/interface. They won't be available anymore in
 
 
 
+.. _results-may-be-missing:
+
+Results May Be Missing
+######################
+
+
+preg\_match() may return empty values, if the search fails. It is important to check for the existence of results before assigning them to another variable, or using it.
+
+.. code-block:: php
+
+   <?php
+   
+           preg\_match('/PHP ([0-9\.]+) /', $res, $r);
+           $s = $r[1];
+           // $s may end up null if preg\_match fails.
+   
+   ?>
+
++--------------+-------------------------------+
+| Command Line | Structures/ResultMayBeMissing |
++--------------+-------------------------------+
+| clearPHP     |                               |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
+
+
 .. _return-true-false:
 
 Return True False
@@ -5131,24 +5313,6 @@ PRCE regex are a powerful way to search inside strings, but they also come at th
 
 
 
-.. _sleep-is-a-security-risk:
-
-Sleep is a security risk
-########################
-
-
-Pausing the script for a specific amount of time means that the Web server is also making all related ressources sleep, such as database, sockets, session, etc. This may used to set up a DOS on the server.
-
-+--------------+------------------+
-| Command Line | Security/NoSleep |
-+--------------+------------------+
-| clearPHP     |                  |
-+--------------+------------------+
-| Analyzers    | :ref:`Security`  |
-+--------------+------------------+
-
-
-
 .. _slow-functions:
 
 Slow Functions
@@ -5244,7 +5408,7 @@ Either, this is not a static method (simply remove the static keyword), or repla
 
 .. _strict-comparison-with-booleans:
 
-Strict comparison with booleans
+Strict Comparison With Booleans
 ###############################
 
 
@@ -6402,6 +6566,24 @@ The instanceof operator is also faster than the is\_object() functioncall.
 
 
 
+.. _use-nullable-type:
+
+Use Nullable Type
+#################
+
+
+The project is using nullable type (PHP 7.1).
+
++--------------+------------------------------------------------------+
+| Command Line | Php/UseNullableType                                  |
++--------------+------------------------------------------------------+
+| clearPHP     |                                                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------+
+
+
+
 .. _use-object-api:
 
 Use Object Api
@@ -6772,6 +6954,24 @@ Situations where parenthesis are not necessary, and may be removed.
 
 
 
+.. _useless-return:
+
+Useless Return
+##############
+
+
+The spotted functions or methods have a return statement, but this statement is useless. This is the case for constructor and destructors, whose return value are ignored or inaccessible.
+
++--------------+-------------------------+
+| Command Line | Functions/UselessReturn |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
+
 .. _useless-switch:
 
 Useless Switch
@@ -6821,24 +7021,6 @@ Unsetting variables may not be applicable with a certain type of variables. This
 +--------------+-------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                  |
 +--------------+-------------------------------------------------------------------------------------------------+
-
-
-
-.. _useless-return:
-
-Useless return
-##############
-
-
-The spotted functions or methods have a return statement, but this statement is useless. This is the case for constructor and destructors, whose return value are ignored or inaccessible.
-
-+--------------+-------------------------+
-| Command Line | Functions/UselessReturn |
-+--------------+-------------------------+
-| clearPHP     |                         |
-+--------------+-------------------------+
-| Analyzers    | :ref:`Analyze`          |
-+--------------+-------------------------+
 
 
 
