@@ -1,4 +1,4 @@
-Version 0.7.9 (Wansheng Princess, Coming up)
+Version 0.7.10 (Nine Headed Bug, Coming up)
 + Architecture
     +
 + Report
@@ -8,7 +8,20 @@ Version 0.7.9 (Wansheng Princess, Coming up)
 + Tokenizer
     + 
 
-Version 0.7.8 (Wansheng Dragon King, Coming up)
+Version 0.7.9 (Wansheng Princess, 2016-08-29)
++ Architecture
+    + Added several features at Loading time : mark global variables in $GLOBALS,
+      fallback FQN in functions, link constant to definitions.
++ Analyzer
+    + Added analysis for impossible comparisons (count($a) < or >= 0)
+    + Added analysis for PHP 7.1 : removed directives, added functions
+    + Upgraded analysis : 1377 / 1510 test pass (91% pass). 
++ Tokenizer
+    + Fixed edge case with <?= $v;
+    + Fixed priorities between include and .
+    + Better support of trait in classes
+
+Version 0.7.8 (Wansheng Dragon King, 2016-08-22)
 + Architecture
     + Prepared databases for PHP 7.2
 + Analyzer
