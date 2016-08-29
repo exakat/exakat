@@ -177,12 +177,12 @@ g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define").out("ARGUMENTS")
                                                  s; }
 
 GREMLIN;
-//
 
         $constants = $this->gremlin->query($query);
         $constants = $constants->results;
         
-        $query = <<<GREMLIN
+        if (!empty($constants)) {
+            $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname").filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }.addE('DEFINITION')
     .from( 
         g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define").as("a")
@@ -191,8 +191,11 @@ g.V().hasLabel("Identifier", "Nsname").filter{ it.get().value("fullnspath") in a
          )
 
 GREMLIN;
-        $this->gremlin->query($query, ['arg1' => $constants]);
-        display('Link constant definitions');
+            $this->gremlin->query($query, ['arg1' => $constants]);
+            display('Link constant definitions');
+        } else {
+            display('Link constant definitions : skipping.');
+        }
         
         //display('Mark constants expressions');
         $query = <<<GREMLIN
