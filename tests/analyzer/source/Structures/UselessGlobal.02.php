@@ -2,7 +2,7 @@
 
 function x() {
     global $_ENV;
-    global $ENV;
+    global $ENV, $GLOBAL;
     
 }
 

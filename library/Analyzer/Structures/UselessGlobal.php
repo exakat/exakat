@@ -32,45 +32,37 @@ class UselessGlobal extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        return ;
+
         // Global are unused if used only once
-        $inGlobals = $this->query(<<<GREMLIN
-g.V().hasLabel("Variable").has("code", "\\\$GLOBALS").in("VARIABLE").hasLabel("Array").out("INDEX").hasLabel("String").map{ '\$' + it.get().value("noDelimiter")}.unique()
+        $inglobal = $this->query(<<<GREMLIN
+g.V().hasLabel("Global").out("GLOBAL").values("code")
 GREMLIN
 );
-        print_r($inGlobals);
-        
+
+        $inGLobals = $this->query(<<<'GREMLIN'
+g.V().hasLabel("Variable").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").out("INDEX").values("globalvar")
+GREMLIN
+);
+        $counts = array_count_values(array_merge($inGLobals, $inglobal));
+        $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });
+        $loneGlobal = array_keys($loneGlobal);
+
         $this->atomIs('Global')
              ->outIs('GLOBAL')
-             ->analyzerIsNot('Structures/UnusedGlobal')
-            // search in $GLOBALS
-             ->codeIsNot($inGlobals)
-             ->eachCounted('it.fullcode', 1);
+             ->codeIs($loneGlobal);
         $this->prepareQuery();
 
-        $globals = $this->query(<<<GREMLIN
-g.V().hasLabel("Global").out("GLOBAL").hasLabel("Variable").has("token", "T_VARIABLE").map{ it.get().value("code").substring(1, it.get().value("code").size())}.unique()
-GREMLIN
-);
-        print_r($globals);die();
-        $this->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->code('$GLOBALS', true)
+        $this->atomIs('Variable')
+             ->codeIs('$GLOBALS')
              ->inIs('VARIABLE')
+             ->atomIs('Array')
+             ->_as('results')
              ->outIs('INDEX')
              ->atomIs('String')
-             ->noDelimiterIsNot($globals)
-             ->inIs('INDEX')
-             ->eachCounted('it.fullcode', 1);
+             ->is('globalvar', $loneGlobal)
+             ->back('results');
         $this->prepareQuery();
 
-        // $_POST and co are not needed as super globals
-        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
-             ->codeIs($superglobals);
-        $this->prepareQuery();
-        
         // used only once
 
         // written only
