@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('Unused');
+$expected     = array('class Unused { /**/ } ');
 
-$expected_not = array('Used',
-                      'UsedButUndefined');
+$expected_not = array('class Used { /**/ } ',
+                      'class UsedButUndefined { /**/ } ');
 
 ?>

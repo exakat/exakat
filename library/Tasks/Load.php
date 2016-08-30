@@ -3360,7 +3360,10 @@ class Load extends Tasks {
             }
         }
 
-        if ($this->atoms[$right]['atom'] === 'Identifier') {
+        if ($this->atoms[$right]['token'] === 'T_CLASS') {
+            $staticId = $this->addAtom('Staticclass');
+            $links = 'CLASS';
+        } elseif ($this->atoms[$right]['atom'] === 'Identifier') {
             $staticId = $this->addAtom('Staticconstant');
             $links = 'CONSTANT';
         } elseif (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null'))) {
