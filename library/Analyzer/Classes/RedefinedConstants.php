@@ -33,9 +33,9 @@ class RedefinedConstants extends Analyzer\Analyzer {
              ->atomIs('Const')
              ->outIs('CONST')
              ->_as('results')
-             ->outIs('LEFT')
+             ->outIs('NAME')
              ->savePropertyAs('code', 'constante')
-             ->inIs('LEFT')
+             ->inIs('NAME')
              ->inIs('CONST')
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
@@ -44,7 +44,7 @@ class RedefinedConstants extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Const')
              ->outIs('CONST')
-             ->outIs('LEFT')
+             ->outIs('NAME')
              ->samePropertyAs('code', 'constante')
              ->back('results');
         $this->prepareQuery();
