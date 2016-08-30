@@ -31,7 +31,7 @@ class Coalesce extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Ternary')
              ->outIs('THEN')
-             ->atomIs('TernaryElse')
+             ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
     }

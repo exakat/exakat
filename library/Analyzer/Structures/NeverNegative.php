@@ -33,7 +33,7 @@ class NeverNegative extends Analyzer\Analyzer {
              ->codeIs('0')
              ->inIs('RIGHT')
              ->outIs('LEFT')
-             ->functioncallIs(array('\\count', '\\sizeof', '\\strlen', '\\abs')) 
+             ->functioncallIs(array('\\count', '\\sizeof', '\\strlen', '\\abs'))
              ->back('first');
         $this->prepareQuery();
     }
