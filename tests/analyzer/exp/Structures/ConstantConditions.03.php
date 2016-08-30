@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array(  'for( /**/  ;  /**/  ;  /**/ ) { /**/ } ', 
-                        'for( /**/  ;  /**/  ;  /**/ ) { /**/ } ', 
-                        'for( /**/  ;  /**/  ;  /**/ ) { /**/ } ',
+$expected     = array( 'for($i = 0 ; \'a\' . PHP_VERSION ; $i++) { /**/ } ', 
+                       'for($i = 0 ; \'a\' . PHP_VERSION ;  ) { /**/ } ', 
+                       'for($i = 0 ;   ; $i++) { /**/ } ',
                        //'for($i = 0 ; \'a\' . PHP_VERSION ;  ) { /**/ } ', 
                        //'for($i = 0 ; \'a\' . PHP_VERSION ; $i++) { /**/ } ',
                        //'for($i = 0 ;   ; $i++) { /**/ } '
