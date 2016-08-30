@@ -25,7 +25,7 @@ namespace Analyzer\Php;
 
 use Analyzer;
 
-class Php70NewFunctions extends Analyzer\Common\FunctionDefinition {
+class Php71NewFunctions extends Analyzer\Common\FunctionDefinition {
     protected $phpVersion = '7.1-';
     
     public function analyze() {
