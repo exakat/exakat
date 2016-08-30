@@ -30,6 +30,7 @@ class Labelnames extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Label')
              ->outIs('LABEL');
+        $this->prepareQuery();
     }
 }
 

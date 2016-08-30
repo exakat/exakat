@@ -1753,7 +1753,7 @@ class Load extends Tasks {
             $this->processNsname();
             $id = $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON &&
-                  !in_array($this->tokens[$this->id - 1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR, T_QUESTION))) {
+                  !in_array($this->tokens[$this->id - 1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR, T_QUESTION, T_CASE))) {
             $labelId = $this->addAtom('Label');
             $this->addLink($labelId, $id, 'LABEL');
             $this->setAtom($labelId, ['code'     => ':',
