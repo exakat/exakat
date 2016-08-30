@@ -1592,7 +1592,7 @@ class Load extends Tasks {
     private function processConst() {
         $constId = $this->addAtom('Const');
         $current = $this->id;
-        $rank = 0;
+        $rank = -1;
         --$this->id; // back one step for the init in the next loop
 
         do {
@@ -1628,7 +1628,7 @@ class Load extends Tasks {
                                   'fullcode' => $this->tokens[$current][1].' '.join(', ', $fullcode),
                                   'line'     => $this->tokens[$current][2],
                                   'token'    => $this->getToken($this->tokens[$current][0]),
-                                  'count'    => $rank]);
+                                  'count'    => $rank + 1]);
 
         $this->pushExpression($constId);
 
