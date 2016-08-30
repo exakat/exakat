@@ -35,7 +35,7 @@ class ResultMayBeMissing extends Analyzer\Analyzer {
              ->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('Array')
-             ->outIs('VARIABLE')
+             ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'results')
              ->back('first');
         $this->prepareQuery();

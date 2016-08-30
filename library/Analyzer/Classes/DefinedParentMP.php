@@ -138,7 +138,7 @@ class DefinedParentMP extends Analyzer\Analyzer {
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
     }
 }
 
