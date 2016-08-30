@@ -225,6 +225,7 @@ class Load extends Tasks {
     const PROP_ARGS_MAX    = ['Arguments'];
     const PROP_ARGS_MIN    = ['Arguments'];
     const PROP_BRACKET     = ['Sequence'];
+    const PROP_CLOSETAG    = ['Php'];
 
     const PROP_OPTIONS = ['alternative' => self::PROP_ALTERNATIVE,
                           'reference'   => self::PROP_REFERENCE,
@@ -244,6 +245,7 @@ class Load extends Tasks {
                           'args_max'    => self::PROP_ARGS_MAX,
                           'args_min'    => self::PROP_ARGS_MIN,
                           'bracket'     => self::PROP_BRACKET,
+                          'close_tag'   => self::PROP_CLOSETAG,
                           ];
     
     const TOKENS = [ ';'  => T_SEMICOLON,
@@ -1265,13 +1267,16 @@ class Load extends Tasks {
             --$this->id;
         }
 
-        if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id - 1][0] === T_CLOSE_TAG) {
+            $close_tag = true;
             $closing = '?>';
         } elseif ($this->tokens[$this->id][0] === T_HALT_COMPILER) {
+            $close_tag = false;
             ++$this->id; // Go to HaltCompiler
             $this->processHalt();
             $closing = '';
         } else {
+            $close_tag = false;
             $closing = '';
         }
         
@@ -1282,10 +1287,11 @@ class Load extends Tasks {
         $this->addLink($id, $this->sequence, 'CODE');
         $this->endSequence();
 
-        $this->setAtom($id, ['code'     => $this->tokens[$current][1],
-                             'fullcode' => '<?php ' . self::FULLCODE_SEQUENCE  .' ' . $closing,
-                             'line'     => $this->tokens[$current][2],
-                             'token'    => $this->getToken($this->tokens[$current][0])]);
+        $this->setAtom($id, ['code'        => $this->tokens[$current][1],
+                             'fullcode'    => '<?php ' . self::FULLCODE_SEQUENCE  .' ' . $closing,
+                             'line'        => $this->tokens[$current][2],
+                             'token'       => $this->getToken($this->tokens[$current][0]),
+                             'close_tag'   => $close_tag]);
         
         return $id;
     }

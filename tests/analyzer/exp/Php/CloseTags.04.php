@@ -2,7 +2,7 @@
 
 $expected     = array();
 
-$expected_not = array('<?php ;?>',
-                      '<?php ;');
+$expected_not = array('<?php  /**/  ?>',
+                      '<?php  /**/ ');
 
 ?>

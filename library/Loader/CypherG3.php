@@ -50,22 +50,6 @@ class CypherG3 {
     
     private $cyhper = null;
     
-    const ATTRIBUTES = array('index',    'root',      'hidden',      'association', 'in_for',
-                             'in_quote', 'delimiter', 'noDelimiter', 'rank',        'fullcode',
-                             'block',    'bracket',   'filename',    'tag',         'atom',
-                             'isFunctionDefinition',  'absolutens');
-/*
-    const ATTRIBUTES = array('delimiter', 'noDelimiter', 'rank',        'fullcode','block',    'bracket',   'absolutens'
-variadic (not as a relation)
-
-'scalar' : useless?
-    'index',    'root',      'hidden',      'association', 'in_for',
-                             'in_quote', 
-                               'filename',    'tag',         'atom',
-                             'isFunctionDefinition',);
-*/
-
-    
     public function __construct() {
         $this->config = \Config::factory();
         
@@ -100,7 +84,7 @@ variadic (not as a relation)
                     if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'])) {
                     // Raw string
                         $extra[] = "$title: csvLine.$title";
-                    } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket'])) {
+                    } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag'])) {
                     // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
                     } elseif (in_array($title, ['count', 'intval', 'args_max', 'args_min'])) {
@@ -200,98 +184,6 @@ CYPHER;
         $datastore = new \Datastore($config);
         
         $datastore->addRow('tokenCounts', static::$tokenCounts);
-    }
-    
-    public function save_chunk() {
-        if (static::$fp_nodes === null) {
-            static::$fp_nodes = fopen($this->config->projects_root.'/nodes.cypher.csv', 'a');
-            foreach(self::ATTRIBUTES as $attribute) {
-                static::$fp_nodes_attr[$attribute] = fopen($this->config->projects_root.'/nodes.cypher.'.$attribute.'.csv', 'a');
-            }
-        }
-
-        $fp = static::$fp_nodes;
-        // adding in_quote here, as it may not appear on the first token.
-        $les_cols = array('id', 'token', 'code', 'line');
-        //'modifiedBy',
-        if (static::$file_saved == 0) {
-            fputcsv($fp, $les_cols, self::CSV_SEPARATOR);
-            foreach(static::$fp_nodes_attr as $attribute => $fpa) {
-                fputcsv($fpa, array('id', $attribute), self::CSV_SEPARATOR);
-            }
-        }
-
-        foreach(static::$nodes as $id => $node) { 
-            if (substr($node['token'], 0, 2) === 'T_' ) {
-                if (isset(static::$tokenCounts[$node['token']])) {
-                    ++static::$tokenCounts[$node['token']];
-                } else {
-                    static::$tokenCounts[$node['token']] = 1;
-                }
-            }
-            
-            $row = array();
-            foreach($les_cols as $col) {
-                if (isset($node[$col])) {
-                    $row[$col] = $node[$col];
-                } elseif ($col == 'line') {
-                    $row['line'] = 0;
-                } else {
-                    $row[$col] = '';
-                }
-                if ($diff = array_diff(array_keys($row), $les_cols, array('id'))) {
-                    display('Some columns were not processed : '.join(', ', $diff).".\n");
-                }
-            }
-            $row['id'] = $id;
-            if (isset($node['index']) && ($row['code'] != 'Index for S_ARRAY') && !isset(static::$indexedId[$row['id']])) {
-                continue;
-            }
-            $row['code'] = $this->escapeString($row['code']);
-            fputcsv($fp, $row, self::CSV_SEPARATOR);
-
-        // processing the attributes
-            foreach(self::ATTRIBUTES as $col) {
-                $rowa = array('id' => $id);
-                if (isset($node[$col])) {
-                    $rowa[$col] = $node[$col];
-                    if (in_array($col, array('fullcode', 'delimiter', 'noDelimiter'))) {
-                        $rowa[$col] = $this->escapeString($rowa[$col]);
-                    }
-                    fputcsv(static::$fp_nodes_attr[$col], $rowa, self::CSV_SEPARATOR);
-                } 
-            }
-        }
-        static::$nodes = array();
-        
-        if (static::$fp_rels === null) {
-            static::$fp_rels = array('NEXT'    => fopen($this->config->projects_root.'/rels.cypher.next.csv',    'a'),
-                                     'FILE'    => fopen($this->config->projects_root.'/rels.cypher.file.csv',    'a'),
-                                     'INDEXED' => fopen($this->config->projects_root.'/rels.cypher.indexed.csv', 'a'),
-                                     'ELEMENT' => fopen($this->config->projects_root.'/rels.cypher.element.csv', 'a'),
-                                     'SUBNAME' => fopen($this->config->projects_root.'/rels.cypher.subname.csv', 'a'),
-                                     );
-        }
-        if (static::$file_saved == 0) {
-            foreach(static::$fp_rels as $key => $fp) {
-                fputcsv($fp, array('start', 'end', 'type'), self::CSV_SEPARATOR);
-            }
-        }
-        foreach(static::$links as $label => $links) {
-            if (!isset(static::$fp_rels[$label])) {
-                die(print_r(array_keys(static::$fp_rels), true)."\nNO ".$label."\n");
-            }
-            $fp = static::$fp_rels[$label];
-            foreach($links as $id => $link) {
-                if (isset($link['namespace'])) {
-                    $link['namespace'] = $this->escapeString($link['namespace']);
-                }
-            
-                fputcsv($fp, $link, self::CSV_SEPARATOR);
-            }
-        }
-        static::$links = array();
-        ++static::$file_saved;
     }
     
     public function makeNode() {

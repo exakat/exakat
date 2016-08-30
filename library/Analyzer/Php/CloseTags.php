@@ -27,8 +27,8 @@ use Analyzer;
 
 class CloseTags extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs('Phpcode')
-             ->is('closing_tag', true);
+        $this->atomIs('Php')
+             ->is('close_tag', true);
         $this->prepareQuery();
     }
 }

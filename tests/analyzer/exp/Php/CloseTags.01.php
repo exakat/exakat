@@ -2,6 +2,6 @@
 
 $expected     = array();
 
-$expected_not = array('<?php ;');
+$expected_not = array('<?php  /**/ ');
 
 ?>
