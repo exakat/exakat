@@ -2,16 +2,16 @@
 Label : ARGUMENT
   $a
 Label : ARGUMENT
-  {
-  Label : INDEX
-    ->
-    Label : OBJECT
-      $this
-    Label : PROPERTY
-      B
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $this
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $this
+  Label : PROPERTY
+    {
+    Label : INDEX
+      ->
+      Label : OBJECT
+        $this
+      Label : PROPERTY
+        B
+    Label : VARIABLE
       E

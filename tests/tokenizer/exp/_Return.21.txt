@@ -8,8 +8,4 @@ Label : INDEX
     Label : PROPERTY
       C
 Label : VARIABLE
-  ->
-  Label : OBJECT
-    $this
-  Label : PROPERTY
-    B
+  B

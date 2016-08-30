@@ -2,8 +2,4 @@
 Label : INDEX
   $d
 Label : VARIABLE
-  ->
-  Label : OBJECT
-    $b
-  Label : PROPERTY
-    c
+  c

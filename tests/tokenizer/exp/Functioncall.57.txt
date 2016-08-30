@@ -1,21 +1,3 @@
-<?=
+(
 Label : ARGUMENT
-  .
-  Label : CONCAT
-    C
-  Label : CONCAT
-    ::
-    Label : CLASS
-      D
-    Label : METHOD
-      e
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          .
-          Label : CONCAT
-            'f'
-          Label : CONCAT
-            $g
-      Label : NAME
-        e
+  'b'

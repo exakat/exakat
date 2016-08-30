@@ -1,21 +1,21 @@
 -
 Label : LEFT
-  [
-  Label : INDEX
-    'd'
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $b
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $b
+  Label : PROPERTY
+    [
+    Label : INDEX
+      'd'
+    Label : VARIABLE
       c
 Label : RIGHT
-  [
-  Label : INDEX
-    'g'
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $e
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $e
+  Label : PROPERTY
+    [
+    Label : INDEX
+      'g'
+    Label : VARIABLE
       f

@@ -1,9 +1,13 @@
-)
+'C'
 Label : ARGUMENT
-  B
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      __FILE__
-  Label : NAME
+  .
+  Label : CONCAT
     B
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        __FILE__
+    Label : NAME
+      B
+  Label : CONCAT
+    'C'

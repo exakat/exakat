@@ -2,16 +2,16 @@
 Label : ARGUMENT
   1
 Label : ARGUMENT
-  {
-  Label : INDEX
-    4
-  Label : VARIABLE
-    [
+  ->
+  Label : OBJECT
+    $x
+  Label : PROPERTY
+    {
     Label : INDEX
-      3
+      4
     Label : VARIABLE
-      ->
-      Label : OBJECT
-        $x
-      Label : PROPERTY
+      [
+      Label : INDEX
+        3
+      Label : VARIABLE
         var

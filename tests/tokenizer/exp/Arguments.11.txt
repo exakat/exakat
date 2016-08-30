@@ -1,13 +1,13 @@
 (
 Label : ARGUMENT
-  [
-  Label : INDEX
-    'd'
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $b
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $b
+  Label : PROPERTY
+    [
+    Label : INDEX
+      'd'
+    Label : VARIABLE
       c
 Label : ARGUMENT
   $e

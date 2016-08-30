@@ -1,31 +1,31 @@
 (
 Label : ARGUMENT
-  [
-  Label : INDEX
-    'E'
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $b
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $b
+  Label : PROPERTY
+    [
+    Label : INDEX
+      'E'
+    Label : VARIABLE
       D
 Label : ARGUMENT
-  [
-  Label : INDEX
-    'G'
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $c
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $c
+  Label : PROPERTY
+    [
+    Label : INDEX
+      'G'
+    Label : VARIABLE
       F
 Label : ARGUMENT
-  [
-  Label : INDEX
-    'I'
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $d
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $d
+  Label : PROPERTY
+    [
+    Label : INDEX
+      'I'
+    Label : VARIABLE
       H

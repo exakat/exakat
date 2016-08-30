@@ -12,14 +12,14 @@ Label : ARGUMENT
       Label : ARGUMENT
         $e
       Label : ARGUMENT
-        [
-        Label : INDEX
-          $e
-        Label : VARIABLE
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
+        ->
+        Label : OBJECT
+          $f
+        Label : PROPERTY
+          [
+          Label : INDEX
+            $e
+          Label : VARIABLE
             K
     Label : NAME
       J
@@ -58,24 +58,24 @@ Label : ARGUMENT
 Label : ARGUMENT
   $k
 Label : ARGUMENT
-  [
-  Label : INDEX
-    $e
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $f
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $f
+  Label : PROPERTY
+    [
+    Label : INDEX
+      $e
+    Label : VARIABLE
       O
 Label : ARGUMENT
-  [
-  Label : INDEX
-    $e
-  Label : VARIABLE
-    ->
-    Label : OBJECT
-      $f
-    Label : PROPERTY
+  ->
+  Label : OBJECT
+    $f
+  Label : PROPERTY
+    [
+    Label : INDEX
+      $e
+    Label : VARIABLE
       L
 Label : ARGUMENT
   $l

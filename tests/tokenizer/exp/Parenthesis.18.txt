@@ -1,27 +1,31 @@
-)
+$h
 Label : ARGUMENT
-  'g'
-  Label : CODE
-    ?
-    Label : CONDITION
-      !==
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          b
-      Label : RIGHT
-        'c'
-    Label : ELSE
-      'g'
-    Label : THEN
-      .
-      Label : CONCAT
-        ->
-        Label : OBJECT
-          $d
-        Label : PROPERTY
-          e
-      Label : CONCAT
-        Void
+  .
+  Label : CONCAT
+    'g'
+    Label : CODE
+      ?
+      Label : CONDITION
+        !==
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
+        Label : RIGHT
+          'c'
+      Label : ELSE
+        'g'
+      Label : THEN
+        .
+        Label : CONCAT
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            e
+        Label : CONCAT
+          Void
+  Label : CONCAT
+    $h

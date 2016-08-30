@@ -2,8 +2,4 @@
 Label : INDEX
   'prefix'
 Label : VARIABLE
-  ->
-  Label : OBJECT
-    $this
-  Label : PROPERTY
-    properties
+  properties
