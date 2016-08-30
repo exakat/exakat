@@ -296,11 +296,12 @@ class Config {
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
                            'other_php_versions' => $other_php_versions,
-                           'phpversion'         => PHP_VERSION
+                           'phpversion'         => PHP_VERSION,
+                           'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp')
                            );
         
         foreach($defaults as $name => $value) {
-            if (!isset($this->projectConfig[$name])) {
+            if (!isset($this->projectConfig[$name]) || empty($this->projectConfig[$name])) {
                 $this->projectConfig[$name] = $value;
             }
         }
@@ -311,6 +312,14 @@ class Config {
                 $version = str_replace('.', '', trim($version));
             }
             unset($version);
+        }
+
+        if (is_string($this->projectConfig['file_extensions'])) {
+            $this->projectConfig['file_extensions'] = explode(',', $this->projectConfig['file_extensions']);
+            foreach($this->projectConfig['file_extensions'] as &$ext) {
+                $ext = trim($ext, '. ');
+            }
+            unset($ext);
         }
     }
 
