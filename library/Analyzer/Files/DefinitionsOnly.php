@@ -30,8 +30,9 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     //'Namespace',  is excluded
 
     public static $definitionsFunctions = array('define', 'ini_set',
-                                                'register_shutdown_function', 'set_session_handler', 'set_error_handler', 
-                                                'require_once', 'require', 'include', 'include_once');
+                                                'register_shutdown_function', 'set_session_handler', 'set_error_handler',
+                                                'require_once', 'require', 'include', 'include_once',
+                                                'spl_autoload_register');
     
     public function dependsOn() {
         return array('Structures/NoDirectAccess');
