@@ -108,6 +108,7 @@ class UselessInstruction extends Analyzer\Analyzer {
         // Empty string in a concatenation
         $this->atomIs('Concatenation')
              ->outIs('CONCAT')
+             ->outIsIE('CODE') // skip parenthesis
              ->codeIs(array("''", '""'))
              ->back('first');
         $this->prepareQuery();
