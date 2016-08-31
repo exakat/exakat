@@ -1,5 +1,14 @@
 <?php
 
+// KO (2 else if)
+if (111) {
+
+} else if (222) {
+
+} else {
+
+}
+
 // OK (3 else if)
 if (1) {
 
