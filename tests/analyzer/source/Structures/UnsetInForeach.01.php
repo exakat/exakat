@@ -40,8 +40,6 @@ foreach($a as $b => $c) {
     unset($other);
 }
 
-
-
 foreach($a as $unsetC) {
     unset($unsetC);
 }
