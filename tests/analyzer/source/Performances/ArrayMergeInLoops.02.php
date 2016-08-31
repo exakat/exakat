@@ -18,4 +18,8 @@ do {
 
 $a = array_merge_recursive($a, $b);
 
+do {
+    $a[1] = $b;
+} while($xxx > 0);
+
 ?>

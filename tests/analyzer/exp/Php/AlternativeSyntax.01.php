@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array( 'while ($alternative) :  /**/  endwhile', 
-                       'foreach ($a as $b) :  /**/  endforeach', 
-                       'for($i = 0 ; $i < 10 ; $i++) :  /**/  endfor', 
-                       'switch ($alternative) : /* cases */ endswitch', 
-                       'if ($alternative) :  /**/  endif');
+$expected     = array(  'foreach($a as $b) :  /**/  endforeach', 
+                        'switch ($alternative) : /**/  endswitch', 
+                        'if($alternative) :   /**/   endif',
+                        'while ($alternative) :  /**/  endwhile', 
+                        'for($i = 0 ; $i < 10 ; $i++) :  /**/  endfor', );
 
-$expected_not = array('if ($nonalternative) { /**/ }');
+$expected_not = array(  'if ($nonalternative) { /**/ }');
 
 ?>

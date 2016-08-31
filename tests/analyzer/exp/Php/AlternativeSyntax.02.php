@@ -1,12 +1,10 @@
 <?php
 
-$expected     = array( 'elseif ($b) :  /**/ elseif ($c) :  /**/ else :  /**/ ', 
-                       'elseif ($c) :  /**/ else :  /**/ ', 
-                       'if ($a) :  /**/ elseif ($b) :  /**/ elseif ($c) :  /**/ else :  /**/  endif'
-
-
+$expected     = array( 'if($a) :   /**/  elseif($b) :   /**/  elseif($c) :   /**/  else :  /**/   endif', 
+                       'elseif($b) :   /**/  elseif($c) :   /**/  else :  /**/  ', 
+                       'elseif($c) :   /**/  else :  /**/  '
 );
 
-$expected_not = array();
+$expected_not = array('if ($a) { /**/ } elseif ($b) { /**/ } elseif ($c) { /**/ } else { /**/ } ');
 
 ?>
