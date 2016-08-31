@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('trait emptyTrait');
+$expected     = array('trait emptyTrait { /**/ } ');
 
-$expected_not = array('trait nonEmptyTrait');
+$expected_not = array('trait nonEmptyTrait { /**/ } ',
+                      'trait nonEmptyTrait2 { /**/ } ',
+                      );
 
 ?>
