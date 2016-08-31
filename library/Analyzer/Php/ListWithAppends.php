@@ -27,17 +27,18 @@ use Analyzer;
 
 class ListWithAppends extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('\\list')
+        $this->atomFunctionIs(array('\\list', '\\array'))
+             ->hasIn('LEFT')
 
              // more than one Arrayappend, for initial filtering
              ->raw('where( __.out("ARGUMENTS").out("ARGUMENT").hasLabel("Arrayappend") )')
 
              // several appends to the same array
              ->raw('where( __.sideEffect{ counters = [:]; }
-                             .out("ARGUMENTS").out("ARGUMENT").hasLabel("Arrayappend").out("VARIABLE")
+                             .out("ARGUMENTS").out("ARGUMENT").hasLabel("Arrayappend").out("APPEND")
                              .sideEffect{ if (counters[it.get().value("code")] == null) { counters[it.get().value("code")] = 1; } else { counters[it.get().value("code")]++; } }
                              .fold() )
-                    .filter{ counters.findAll{ it.value > 1}.count() > 0}')
+                    .filter{ counters.findAll{ it.value > 1}.size() > 0}')
              ->back('first');
         $this->prepareQuery();
     }
