@@ -29,7 +29,7 @@ class Gotonames extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Goto')
-             ->outIs('LABEL');
+             ->outIs('GOTO');
         $this->prepareQuery();
     }
 }
