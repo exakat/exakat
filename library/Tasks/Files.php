@@ -102,7 +102,6 @@ class Files extends Tasks {
                 }
             }
         }
-        print_r($files);die();
 
         $this->datastore->addRow('ignoredFiles', array_map(function ($a) {
                 return array('file'   => $a);
