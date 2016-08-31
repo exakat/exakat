@@ -208,7 +208,7 @@ class Load extends Tasks {
     ];
     
     const PROP_ALTERNATIVE = ['Declare', 'Ifthen', 'For', 'Foreach', 'Switch', 'While'];
-    const PROP_REFERENCE   = ['Variable', 'Property', 'Staticproperty'];
+    const PROP_REFERENCE   = ['Variable', 'Property', 'Staticproperty', 'Array'];
     const PROP_VARIADIC    = ['Variable', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname'];
     const PROP_DELIMITER   = ['String', 'Heredoc'];
     const PROP_NODELIMITER = ['String', 'Variable'];
