@@ -28,10 +28,11 @@ use Analyzer;
 class RealVariables extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Variable')
-             ->hasNoIn(array('DEFINE', 'PROPERTY', 'GLOBAL', 'STATIC'))
-             ->hasNoParent('Ppp', array('LEFT', 'PPP'))
-             ->hasNoParent('Function', array('ARGUMENT', 'ARGUMENTS'))
-             ->back('first');
+             ->hasNoIn(array('GLOBAL'))
+             ->hasNoParent('Staticproperty', 'PROPERTY')
+             ->hasNoParent(array('Class', 'Trait'), array('PPP', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent(array('Class', 'Trait'), array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent('Ppp', 'PPP');
         $this->prepareQuery();
     }
 }

@@ -22,5 +22,5 @@ trait t {
 }
 
 Stdclass::$staticproperty = 0;
-$o->$normalproperty = 0;
+$o->$dynamicProperty = 0;
 
