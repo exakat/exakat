@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('switch ($a0) { /* cases */ }', 
-                      'switch ($a1) { /* cases */ }');
+$expected     = array('switch ($a0) { /**/ } ', 
+                      'switch ($a1) { /**/ } ');
 
-$expected_not = array('switch ($a2) { /* cases */ }', 
-                      'switch ($a3) { /* cases */ }', );
+$expected_not = array('switch ($a2) { /**/ } ', 
+                      'switch ($a3) { /**/ } ', );
 
 ?>
