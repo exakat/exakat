@@ -1,9 +1,16 @@
 <?php
 
-mb_scrub();
-is_iterable();
+function mb_scrub(){}
+function is_iterable(){}
 
-$x->mb_ord();
-Y::mb_chr();
+class foo {
+    function mb_ord(){}
+    function gmp_root(){}
+}
+
+interface bar {
+    function mb_chr();
+    function gmp_root();
+}
 
 ?>

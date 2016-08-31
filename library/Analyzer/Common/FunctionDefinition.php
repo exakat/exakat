@@ -35,12 +35,14 @@ class FunctionDefinition extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $fullnspath = $this->makeFullnspath($this->functions);
+        
         $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIsNot('Classes/MethodDefinition')
              ->analyzerIsNot('Interfaces/InterfaceMethod')
              ->analyzerIsNot('Traits/TraitMethod')
-             ->code($this->functions, false);
+             ->fullnspathIs($fullnspath);
         $this->prepareQuery();
     }
 }
