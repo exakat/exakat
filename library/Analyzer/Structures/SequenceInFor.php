@@ -28,21 +28,10 @@ use Analyzer;
 class SequenceInFor extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('For')
-             ->outIs('INIT')
-             ->atomIs('Arguments')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('For')
-             ->outIs('INCREMENT')
-             ->atomIs('Arguments')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('For')
-             ->outIs('FINAL')
-             ->atomIs('Arguments')
-             ->back('first');
+             ->outIs(array('INIT', 'INCREMENT', 'FINAL'))
+             ->isNot('count', 1)
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
