@@ -1838,7 +1838,11 @@ class Load extends Tasks {
         $staticId = $this->addAtom($atom);
         $rank = 0;
 
-        $fullcodePrefix = [];
+        if ($atom === 'Global' || $atom === 'Static') {
+            $fullcodePrefix = [$this->tokens[$this->id][1]];
+        } else {
+            $fullcodePrefix = [];
+        }
         foreach($this->optionsTokens as $name => $optionId) {
             $this->addLink($staticId, $optionId, strtoupper($name));
             $fullcodePrefix[] = $this->atoms[$optionId]['fullcode'];
