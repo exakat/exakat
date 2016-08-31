@@ -30,14 +30,12 @@ class ClassConstWithArray extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Const')
+             ->hasClassInterface()
              ->outIs('CONST')
-             ->outIs('RIGHT')
+             ->_as('results')
+             ->outIs('VALUE')
              ->tokenIs(array('T_OPEN_BRACKET', 'T_ARRAY'))
-             ->back('first')
-             ->inIs('ELEMENT')
-             ->inIs('BLOCK')
-             ->atomIs(array('Class', 'Interface'))
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
     }
 }
