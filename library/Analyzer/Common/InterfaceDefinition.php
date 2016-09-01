@@ -32,7 +32,7 @@ class InterfaceDefinition extends Analyzer\Analyzer {
         $interfaces =  $this->makeFullNsPath($this->interfaces);
         
         $this->atomIs('Interface')
-             ->fullnspath($interfaces);
+             ->fullnspathIs($interfaces);
         $this->prepareQuery();
     }
 }

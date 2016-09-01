@@ -33,13 +33,13 @@ class ReservedKeywords7 extends Analyzer\Analyzer {
         
         $this->atomIs(array('Class', 'Trait', 'Interface'))
              ->outIs('NAME')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Nsname')
              ->outIs('SUBNAME')
-             ->code($keywords)
+             ->codeIs($keywords)
              ->back('first');
         $this->prepareQuery();
     }
