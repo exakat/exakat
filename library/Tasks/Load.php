@@ -2947,9 +2947,11 @@ class Load extends Tasks {
                                  'noDelimiter' => '']);
         }
 
-        $this->setAtom($id, ['encoding' => mb_detect_encoding($this->atoms[$id]['noDelimiter'])]);
-        if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
-            $id = $this->processBracket();
+        if (function_exists('mb_detect_encoding')) {
+            $this->setAtom($id, ['encoding' => mb_detect_encoding($this->atoms[$id]['noDelimiter'])]);
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
+                $id = $this->processBracket();
+            }
         }
 
         return $id;

@@ -60,6 +60,7 @@ class Doctor extends Tasks {
         $stats['PHP']['sqlite3']   = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it)';
         $stats['PHP']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it)';
         $stats['PHP']['phar']      = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar)';
+        $stats['PHP']['mbstring']  = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional)';
 
         // java
         $res = shell_exec('java -version 2>&1');
