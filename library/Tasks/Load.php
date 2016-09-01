@@ -844,9 +844,21 @@ class Load extends Tasks {
             ++$this->id; // Skip (
 
             $catchId = $this->addAtom('Catch');
-            $classId = $this->processOneNsname();
-            $this->addLink($catchId, $classId, 'CLASS');
-            $this->addCall('class', $this->getFullnspath($classId), $classId);
+            $catchFullcode = [];
+            $rank = -1;
+            while ($this->tokens[$this->id + 1][0] !== T_VARIABLE) {
+                $classId = $this->processOneNsname();
+                $this->setAtom($catchId, ['rank' => ++$rank]);
+                $this->addLink($catchId, $classId, 'CLASS');
+                $this->addCall('class', $this->getFullnspath($classId), $classId);
+                $catchFullcode[] = $this->atoms[$classId]['fullcode'];
+                
+                if ($this->tokens[$this->id + 1][0] === T_PIPE) {
+                    $this->id++; // Skip |
+                }
+            }
+            $this->setAtom($catchId, ['count' => $rank + 1]);
+            $catchFullcode = join(' | ', $catchFullcode);
 
             // Process variable
             $this->processNext();
@@ -863,8 +875,8 @@ class Load extends Tasks {
             $this->addLink($catchId, $blockCatchId, 'BLOCK');
 
             $this->setAtom($catchId, ['code'     => $this->tokens[$catch][1],
-                                      'fullcode' => $this->tokens[$catch][1].' ('.$this->atoms[$classId]['fullcode'].' '.
-                                                     $this->atoms[$variableId]['fullcode'].')'.static::FULLCODE_BLOCK,
+                                      'fullcode' => $this->tokens[$catch][1] . ' (' . $catchFullcode . ' ' .
+                                                     $this->atoms[$variableId]['fullcode'].')' . static::FULLCODE_BLOCK,
                                       'line'     => $this->tokens[$catch][2],
                                       'token'    => $this->getToken($this->tokens[$current][0]),
                                       'rank'     => ++$rank]);

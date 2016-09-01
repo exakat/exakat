@@ -30,15 +30,15 @@ class UncaughtExceptions extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $caught = $this->query('g.V().hasLabel("Catch").out("CLASS").values("fullnspath").unique()');
+        
         $this->atomIs('Throw')
              ->outIs('THROW')
              ->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->classDefinition()
-             ->analyzerIs('Exceptions/DefinedExceptions')
-             ->analyzerIsNot('Exceptions/CaughtExceptions')
-             ;
+             ->fullnspathIsNot($caught)
+             ->back('first');
         $this->prepareQuery();
     }
 }
