@@ -2776,6 +2776,8 @@ class Load extends Tasks {
         $current = $this->id;
         $useType = 'class';
 
+        $fullcode = array();
+
         // use const
         if ($this->tokens[$this->id + 1][0] === T_CONST) {
             ++$this->id;
@@ -2796,7 +2798,6 @@ class Load extends Tasks {
             $useType = 'function';
         }
         
-        $fullcode = array();
         --$this->id;
         do {
             ++$this->id;
@@ -2903,7 +2904,6 @@ class Load extends Tasks {
                         $this->setAtom($aliasId, ['alias'      => $alias]);
                         $this->addLink($useId, $aliasId, 'USE');
                     } else {
-                        print '       '.$useType.'::'.$prefix.'  '.strtolower($this->atoms[$id]['fullcode'])."\n";
                         $this->addLink($useId, $id, 'USE');
                         $this->setAtom($id, ['fullnspath' => $prefix.strtolower($this->atoms[$id]['fullcode']),
                                              'origin'     => $prefix.strtolower($this->atoms[$id]['fullcode'])]);
@@ -2944,7 +2944,9 @@ class Load extends Tasks {
         } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         
         $x = ['code'     => $this->tokens[$current][1],
-              'fullcode' => $this->tokens[$current][1].' '.join(", ", $fullcode),
+              'fullcode' => $this->tokens[$current][1] . 
+                            (isset($constId) ? ' ' . $this->atoms[$constId]['code'] : '') .
+                            ' ' . join(", ", $fullcode),
               'line'     => $this->tokens[$current][2],
               'token'    => $this->getToken($this->tokens[$current][0])];
         $this->setAtom($useId, $x);
