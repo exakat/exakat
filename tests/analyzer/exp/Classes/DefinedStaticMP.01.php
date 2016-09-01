@@ -7,8 +7,8 @@ $expected     = array('static::definedinStatic( )',
                       'static::$pdefinedInParent',
                       'static::$pdefinedInParentParent',);
 
-$expected_not = array('static::definedinStatic( )',
-                      'static::$definedinStatic',
+$expected_not = array('static::$definedinStatic',
+                      'static::undefined()',
                       );
 
 ?>
