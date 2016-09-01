@@ -203,7 +203,7 @@ abstract class Analyzer {
         return $this->description;
     }
 
-    static public function getThemeAnalyzers($theme) {
+    static public function getThemeAnalyzers($theme = null) {
         self::initDocs();
         return Analyzer::$docs->getThemeAnalyzers($theme);
     }
