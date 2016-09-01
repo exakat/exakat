@@ -49,7 +49,7 @@ GREMLIN
         $constDefinitions = $this->query(<<<GREMLIN
 g.V().hasLabel("Const").where( __.in("ELEMENT").in("BLOCK").hasLabel("Class", "Trait").count().is(eq(0)) )
                        .out("CONST")
-                       .out("LEFT").values("code")
+                       .out("NAME").values("code")
 GREMLIN
 );
 
@@ -133,7 +133,7 @@ GREMLIN
         $this->atomIs('Const')
              ->hasNoClassTrait()
              ->outIs('CONST')
-             ->outIs('LEFT')
+             ->outIs('NAME')
              ->codeIs($array);
         $this->prepareQuery();
     }
