@@ -38,7 +38,8 @@ class ImplicitGlobal extends Analyzer\Analyzer {
              ->hasFunction()
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
-             ->codeIsNot($globalGlobal);;
+             ->codeIsNot($globalGlobal)
+             ->codeIsNot($superglobals);
         $this->prepareQuery();
     }
 }
