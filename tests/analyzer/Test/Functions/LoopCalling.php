@@ -8,8 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_LoopCalling extends Analyzer {
-    /* 1 methods */
+    /* 3 methods */
 
     public function testFunctions_LoopCalling01()  { $this->generic_test('Functions/LoopCalling.01'); }
+    public function testFunctions_LoopCalling02()  { $this->generic_test('Functions/LoopCalling.02'); }
+    public function testFunctions_LoopCalling03()  { $this->generic_test('Functions/LoopCalling.03'); }
 }
 ?>
