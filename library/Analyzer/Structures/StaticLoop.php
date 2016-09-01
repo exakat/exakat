@@ -26,12 +26,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class StaticLoop extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $nonDeterminist = $this->loadIni('php_nondeterministic.ini', 'functions');
         $nonDeterminist = $this->makeFullNsPath($nonDeterminist);

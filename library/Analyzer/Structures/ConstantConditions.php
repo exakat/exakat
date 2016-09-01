@@ -32,59 +32,30 @@ class ConstantConditions extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-
-        $data = new \Data\Methods();
-        $nonDeterministFunctions = $data->getNonDeterministFunctions();
-        
         $this->atomIs('While')
              ->outIs('CONDITION')
-             ->atomIsNot(array('Variable', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
-             ->noAtomInside(array('Variable', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->is('constant', true)
              ->back('first');
-        $this->prepareQuery();
-        
-        $this->atomIs('While')
-             ->outIs('CONDITION')
-             ->atomIs('Functioncall')
-             ->code($nonDeterministFunctions)
-             ->savePropertyAs('code', 'condition')
-             ->back('first')
-             // variables are only read
-             ->raw('filter{ it.out("BLOCK").out().loop(1){true}{it.object.atom == "Variable"}.has("code", condition).filter{it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any() }.any() == false }');
-        $this->prepareQuery();
-
-        $this->atomIs('While')
-             ->outIs('CONDITION')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'condition')
-             ->back('first')
-             // variables are only read
-             ->raw('filter{ it.out("BLOCK").out().loop(1){true}{it.object.atom == "Variable"}.has("code", condition).filter{it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any() }.any() == false }');
         $this->prepareQuery();
 
         $this->atomIs('Ifthen')
              // constant shouldn't be PHP's
-             ->raw('filter{it.out("CONDITION").out().loop(1){true}{it.object.atom in ["Identifier", "Nsname"]}.filter{it.in("ANALYZED").has("code", "Analyzer\\\\Constants\\\\IsPhpConstant").any() }.any() == false }')
              ->outIs('CONDITION')
-             ->atomIsNot(array('Variable', 'Functioncall'))
-             ->noAtomInside(array('Variable', 'Functioncall'))
+             ->is('constant', true)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Ternary')
-             // constant shouldn't be PHP's
-             ->raw('filter{it.out("CONDITION").out().loop(1){true}{it.object.atom in ["Identifier", "Nsname"]}.filter{it.in("ANALYZED").has("code", "Analyzer\\\\Constants\\\\IsPhpConstant").any() }.any() == false }')
              ->outIs('CONDITION')
-             ->atomIsNot(array('Variable', 'Functioncall'))
-             ->noAtomInside(array('Variable', 'Functioncall'))
+             ->is('constant', true)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('For')
              ->outIs(array('FINAL', 'INCREMENT'))
-             ->atomIsNot(array('Variable', 'Functioncall'))
-             ->noAtomInside(array('Variable', 'Functioncall'))
-             ->back('first');
+             ->is('constant', true)
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
         
 /*
