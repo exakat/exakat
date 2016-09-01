@@ -22,7 +22,7 @@
 
 class Exakat {
     const VERSION = '0.7.9';
-    const BUILD = 392;
+    const BUILD = 396;
     
     private $gremlin = null;
     
@@ -89,11 +89,6 @@ class Exakat {
 
             case 'project' : 
                 $task = new Tasks\Project($this->gremlin);
-                $task->run($config);
-                break;
-
-            case 'projectspip' : 
-                $task = new Tasks\ProjectSpip($this->gremlin);
                 $task->run($config);
                 break;
 
