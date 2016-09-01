@@ -35,6 +35,6 @@ function d3() {    d4(); }
 function d4() {    a(); }
 
 function e() {    $o->e(); }
-function ef() {    {'e' . 'f'}(); }
+function ef() {    $e(); }
 
 ?>
