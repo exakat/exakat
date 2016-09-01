@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_UselessFinal extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testClasses_UselessFinal01()  { $this->generic_test('Classes_UselessFinal.01'); }
+    public function testClasses_UselessFinal02()  { $this->generic_test('Classes/UselessFinal.02'); }
 }
 ?>
