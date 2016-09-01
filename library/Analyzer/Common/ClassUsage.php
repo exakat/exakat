@@ -66,10 +66,9 @@ class ClassUsage extends Analyzer\Analyzer {
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
-        $this->atomIs('Typehint')
-             ->outIs('CLASS')
+        $this->atomIs(array('Nsname', 'Identifier'))
+             ->hasIn('TYPEHINT')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
@@ -89,6 +88,7 @@ class ClassUsage extends Analyzer\Analyzer {
 // Check that... Const/function and aliases
         $this->atomIs('Use')
              ->outIs('USE')
+             ->outIsIE('NAME')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
