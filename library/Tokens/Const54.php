@@ -150,4 +150,8 @@ const T_DIR = 383;
 const T_NS_SEPARATOR = 384;
 const T_DOUBLE_COLON = 380;
 
+const T_COALESCE = -1;
+const T_YIELD_FROM = -1;
+const T_SPACESHIP = -1;
+
 ?>

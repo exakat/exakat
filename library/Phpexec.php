@@ -256,11 +256,6 @@ class Phpexec {
         }
         return $this->actualVersion;
     }
-    
-    public function setPHPConstants() {
-        $filename = __DIR__.'/Tokens/Const' . substr($this->version, 0, 1) . substr($this->version, 2, 1) . ".php";
-        include($filename);
-    }
 }
 
 ?>

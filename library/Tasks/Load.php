@@ -59,6 +59,8 @@ class Load extends Tasks {
     private $php    = null;
     private static $client = null;
     private $config = null;
+    
+    private $precedence;
 
     private $calls = array();
 
@@ -90,130 +92,13 @@ class Load extends Tasks {
     
     private $optionsTokens = array();
      
-    const PRECEDENCE = [
-                        T_OBJECT_OPERATOR             => 0,
-                        T_DOUBLE_COLON                => 0,
-                        T_DOLLAR                      => 0,
-                        T_STATIC                      => 0,
-                        T_EXIT                        => 0,
-
-                        T_CLONE                       => 1,
-                        T_NEW                         => 1,
-
-                        T_OPEN_BRACKET                => 2,
-               
-                        T_POW                         => 3,
-                        
-                        T_INC                         => 4,
-                        T_DEC                         => 4,
-                        T_TILDE                       => 4,
-                        T_ARRAY_CAST                  => 4,
-                        T_BOOL_CAST                   => 4,
-                        T_DOUBLE_CAST                 => 4,
-                        T_INT_CAST                    => 4,
-                        T_OBJECT_CAST                 => 4,
-                        T_STRING_CAST                 => 4,
-                        T_UNSET_CAST                  => 4,
-                        T_AT                          => 4,
-
-                        T_INSTANCEOF                  => 5,
-                        
-                        T_BANG                        => 6,
-
-                        T_REFERENCE                   => 6, // Special for reference's usage of &
-
-                        T_SLASH                       => 7,
-                        T_STAR                        => 7,
-                        T_PERCENTAGE                  => 7,
-                 
-                        T_PLUS                        => 8,
-                        T_MINUS                       => 8,
-                        T_DOT                         => 8,
-
-                        T_SR                          => 9,
-                        T_SL                          => 9,
-                        
-                        T_IS_SMALLER_OR_EQUAL         => 10,
-                        T_IS_GREATER_OR_EQUAL         => 10,
-                        T_GREATER                     => 10,
-                        T_SMALLER                     => 10,
-                            
-                        T_IS_EQUAL                    => 11,
-                        T_IS_NOT_EQUAL                => 11, // Double operator
-                        T_IS_IDENTICAL                => 11,
-                        T_IS_NOT_IDENTICAL            => 11,
-                        T_SPACESHIP                   => 11,
-
-                        T_AND                         => 12,    // &
-
-                        T_CARET                       => 13,    // ^
-
-                        T_PIPE                        => 14,     // |
-
-                        T_BOOLEAN_AND                 => 15, // &&
-
-                        T_BOOLEAN_OR                  => 16, // ||
-
-                        T_COALESCE                    => 17,
-                            
-                        T_QUESTION                    => 18,
-               
-                        T_EQUAL                       => 19,
-                        T_PLUS_EQUAL                  => 19,
-                        T_AND_EQUAL                   => 19,
-                        T_CONCAT_EQUAL                => 19,
-                        T_DIV_EQUAL                   => 19,
-                        T_MINUS_EQUAL                 => 19,
-                        T_MOD_EQUAL                   => 19,
-                        T_MUL_EQUAL                   => 19,
-                        T_OR_EQUAL                    => 19,
-                        T_POW_EQUAL                   => 19,
-                        T_SL_EQUAL                    => 19,
-                        T_SR_EQUAL                    => 19,
-                        T_XOR_EQUAL                   => 19,
-                        
-                        T_LOGICAL_AND                 => 20, // and
-
-                        T_LOGICAL_XOR                 => 21, // xor
-
-                        T_LOGICAL_OR                  => 22, // or
-
-                        T_ECHO                        => 30,
-                        T_HALT_COMPILER               => 30,
-                        T_PRINT                       => 30,
-                        T_INCLUDE                     => 30,
-                        T_INCLUDE_ONCE                => 30,
-                        T_REQUIRE                     => 30,
-                        T_REQUIRE_ONCE                => 30,
-                        T_DOUBLE_ARROW                => 30,
-
-                        T_RETURN                      => 31,
-                        T_THROW                       => 31,
-                        T_YIELD                       => 31,
-                        T_YIELD_FROM                  => 31,
-                        T_COLON                       => 31,
-                        T_COMMA                       => 31,
-                        T_CLOSE_TAG                   => 31,
-                        T_CLOSE_PARENTHESIS           => 31,
-                        T_CLOSE_BRACKET               => 31,
-                        T_CLOSE_CURLY                 => 31,
-                        T_AS                          => 31,
-                        T_CONTINUE                    => 31,
-                        T_BREAK                       => 31,
-                        T_ELLIPSIS                    => 31,
-                        T_GOTO                        => 31,
-                        T_INSTEADOF                   => 31,
-
-                        T_SEMICOLON                   => 32,
-    ];
-    
     const PROP_ALTERNATIVE = ['Declare', 'Ifthen', 'For', 'Foreach', 'Switch', 'While'];
     const PROP_REFERENCE   = ['Variable', 'Property', 'Staticproperty', 'Array'];
     const PROP_VARIADIC    = ['Variable', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname'];
     const PROP_DELIMITER   = ['String', 'Heredoc'];
     const PROP_NODELIMITER = ['String', 'Variable'];
     const PROP_HEREDOC     = ['Heredoc'];
-    const PROP_COUNT       = ['Sequence', 'Arguments', 'Heredoc', 'Shell', 'String', 'Try', 'Const', 'Ppp', 'Global', 'Static'];
+    const PROP_COUNT       = ['Sequence', 'Arguments', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static'];
     const PROP_FNSNAME     = ['Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static'];
     const PROP_ABSOLUTE    = ['Nsname'];
     const PROP_ALIAS       = ['Nsname', 'Identifier', 'As'];
@@ -311,6 +196,20 @@ class Load extends Tasks {
     private $atoms = array();
     private $atomCount = 0;
     private $argumentsId = array();
+    
+    public function __construct($gremlin) {
+        parent::__construct($gremlin);
+
+        $this->php = new \Phpexec();
+        if (!$this->php->isValid()) {
+            die("This PHP binary is not valid for running Exakat.\n");
+        }
+
+        $this->php->getTokens();
+
+        \Tasks\Precedence::preloadConstants($this->php->getActualVersion());
+        $this->precedence = new \Tasks\Precedence();
+    }
 
     public function run(\Config $config) {
         $this->config = $config;
@@ -328,12 +227,6 @@ class Load extends Tasks {
                                     'line'     => -1,
                                     'token'    => 'T_WHOLE']);
 
-        $this->php = new \Phpexec();
-        if (!$this->php->isValid()) {
-            die("This PHP binary is not valid for running Exakat.\n");
-        }
-        $this->php->getTokens();
-        $this->php->setPHPConstants();
         
         if (static::$client === null) {
             static::$client = new \Loader\CypherG3();
@@ -845,10 +738,10 @@ class Load extends Tasks {
 
             $catchId = $this->addAtom('Catch');
             $catchFullcode = [];
-            $rank = -1;
+            $rankCatch = -1;
             while ($this->tokens[$this->id + 1][0] !== T_VARIABLE) {
                 $classId = $this->processOneNsname();
-                $this->setAtom($catchId, ['rank' => ++$rank]);
+                $this->setAtom($catchId, ['rank' => ++$rankCatch]);
                 $this->addLink($catchId, $classId, 'CLASS');
                 $this->addCall('class', $this->getFullnspath($classId), $classId);
                 $catchFullcode[] = $this->atoms[$classId]['fullcode'];
@@ -857,7 +750,7 @@ class Load extends Tasks {
                     $this->id++; // Skip |
                 }
             }
-            $this->setAtom($catchId, ['count' => $rank + 1]);
+            $this->setAtom($catchId, ['count' => $rankCatch + 1]);
             $catchFullcode = join(' | ', $catchFullcode);
 
             // Process variable
@@ -1802,7 +1695,7 @@ class Load extends Tasks {
             $this->pushExpression($plusplusId);
         } else {
             // preplusplus
-            $plusplusId = $this->processSingleOperator('Preplusplus', $this->getPrecedence($this->tokens[$this->id][0]), 'PREPLUSPLUS');
+            $plusplusId = $this->processSingleOperator('Preplusplus', $this->precedence->get($this->tokens[$this->id][0]), 'PREPLUSPLUS');
         }
     }
     
@@ -2616,7 +2509,7 @@ class Load extends Tasks {
         $thenId = $this->popExpression();
         ++$this->id; // Skip colon
 
-        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals[] = T_COLON; // Added from nested Ternary
         while (!in_array($this->tokens[$this->id + 1][0], $finals) ) {
             $id = $this->processNext();
@@ -2775,12 +2668,12 @@ class Load extends Tasks {
             return $asId;
         return $additionId;
         } else {
-            return $this->processOperator('As', $this->getPrecedence($this->tokens[$this->id][0]), ['NAME', 'AS']);
+            return $this->processOperator('As', $this->precedence->get($this->tokens[$this->id][0]), ['NAME', 'AS']);
         }
     }
 
     private function processInsteadof() {
-        return $this->processOperator('Insteadof', $this->getPrecedence($this->tokens[$this->id][0]), ['NAME', 'INSTEADOF']);
+        return $this->processOperator('Insteadof', $this->precedence->get($this->tokens[$this->id][0]), ['NAME', 'INSTEADOF']);
     }
 
     private function processUse() {
@@ -3095,7 +2988,7 @@ class Load extends Tasks {
     }
 
     private function processCast() {
-        return $this->processSingleOperator('Cast', $this->getPrecedence($this->tokens[$this->id][0]), 'CAST', ' ');
+        return $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
     }
 
     private function processReturn() {
@@ -3118,12 +3011,12 @@ class Load extends Tasks {
         
             return $returnId;
         } else {
-            return $this->processSingleOperator('Return', $this->getPrecedence($this->tokens[$this->id][0]), 'RETURN', ' ');
+            return $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
         }
     }
     
     private function processThrow() {
-        return $this->processSingleOperator('Throw', $this->getPrecedence($this->tokens[$this->id][0]), 'THROW', ' ');
+        return $this->processSingleOperator('Throw', $this->precedence->get($this->tokens[$this->id][0]), 'THROW', ' ');
     }
 
     private function processYield() {
@@ -3146,16 +3039,16 @@ class Load extends Tasks {
         
             return $returnId;
         } else {
-            return $this->processSingleOperator('Yield', $this->getPrecedence($this->tokens[$this->id][0]), 'YIELD', ' ');
+            return $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
         }
     }
 
     private function processYieldfrom() {
-        return $this->processSingleOperator('Yieldfrom', $this->getPrecedence($this->tokens[$this->id][0]), 'YIELD', ' ');
+        return $this->processSingleOperator('Yieldfrom', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
     }
 
     private function processNot() {
-        return $this->processSingleOperator('Not', $this->getPrecedence($this->tokens[$this->id][0]), 'NOT');
+        return $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
     }
 
     private function processCurlyExpression() {
@@ -3205,25 +3098,25 @@ class Load extends Tasks {
             $this->pushExpression($variableId);
             return $this->processFCOA($variableId);
         } else {
-            return $this->processSingleOperator('Variable', $this->getPrecedence($this->tokens[$this->id][0]), 'NAME');
+            return $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
         }
     }
 
     private function processClone() {
-        return $this->processSingleOperator('Clone', $this->getPrecedence($this->tokens[$this->id][0]), 'CLONE', ' ' );
+        return $this->processSingleOperator('Clone', $this->precedence->get($this->tokens[$this->id][0]), 'CLONE', ' ' );
     }
     
     private function processGoto() {
-        return $this->processSingleOperator('Goto', $this->getPrecedence($this->tokens[$this->id][0]), 'GOTO');
+        return $this->processSingleOperator('Goto', $this->precedence->get($this->tokens[$this->id][0]), 'GOTO');
     }
 
     private function processNoscream() {
-        return $this->processSingleOperator('Noscream', $this->getPrecedence($this->tokens[$this->id][0]), 'AT');
+        return $this->processSingleOperator('Noscream', $this->precedence->get($this->tokens[$this->id][0]), 'AT');
     }
 
     private function processNew() {
         $this->toggleContext(self::CONTEXT_NEW);
-        $id =  $this->processSingleOperator('New', $this->getPrecedence($this->tokens[$this->id][0]), 'NEW', ' ');
+        $id =  $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
         $this->toggleContext(self::CONTEXT_NEW);
         return $id;
     }
@@ -3254,7 +3147,7 @@ class Load extends Tasks {
 
             return $operandId;
         } else {
-            $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+            $finals = $this->precedence->get($this->tokens[$this->id][0]);
             // process the actual load
             do {
                 $this->processNext();
@@ -3290,7 +3183,7 @@ class Load extends Tasks {
         $atom   = 'Addition';
         $current = $this->id;
 
-        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
 
         $additionId = $this->addAtom($atom);
         $this->addLink($additionId, $left, 'LEFT');
@@ -3353,7 +3246,7 @@ class Load extends Tasks {
 
         $leftId = $this->popExpression();
 
-        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals[] = T_DOUBLE_COLON;
         
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
@@ -3493,20 +3386,20 @@ class Load extends Tasks {
     
 
     private function processAssignation() {
-        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals = array_merge($finals, [T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL]);
         $this->processOperator('Assignation', $finals);
     }
 
     private function processCoalesce() {
-        $this->processOperator('Coalesce', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processOperator('Coalesce', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processEllipsis() {
         $current = $this->id;
     
         // Simply skipping the ...
-        $finals = $this->getPrecedence(T_ELLIPSIS);
+        $finals = $this->precedence->get(T_ELLIPSIS);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $id = $this->processNext();
         };
@@ -3523,12 +3416,12 @@ class Load extends Tasks {
     
     private function processAnd() {
         if ($this->hasExpression()) {
-            return $this->processOperator('Logical', $this->getPrecedence($this->tokens[$this->id][0]));
+            return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
         } else {
             $current = $this->id;
 
             // Simply skipping the &
-            $finals = $this->getPrecedence(T_REFERENCE);
+            $finals = $this->precedence->get(T_REFERENCE);
             $this->processNext();
             
             $operandId = $this->popExpression();
@@ -3543,19 +3436,19 @@ class Load extends Tasks {
     }
 
     private function processLogical() {
-        $this->processOperator('Logical', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processMultiplication() {
-        $this->processOperator('Multiplication', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processOperator('Multiplication', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processPower() {
-        $this->processOperator('Power', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processOperator('Power', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processComparison() {
-        $this->processOperator('Comparison', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processOperator('Comparison', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processDot() {
@@ -3569,7 +3462,7 @@ class Load extends Tasks {
         $this->setAtom($containsId, ['rank' => ++$rank]);
         $fullcode[] = $this->atoms[$containsId]['fullcode'];
 
-        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
             
@@ -3606,7 +3499,7 @@ class Load extends Tasks {
         $left = $this->popExpression();
         $this->addLink($instanceId, $left, 'VARIABLE');
         
-        $finals = array_merge([],  $this->getPrecedence($this->tokens[$this->id][0]));
+        $finals = array_merge([],  $this->precedence->get($this->tokens[$this->id][0]));
         do {
             $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], $finals));
@@ -3630,11 +3523,11 @@ class Load extends Tasks {
     }
 
     private function processKeyvalue() {
-        return $this->processOperator('Keyvalue', $this->getPrecedence($this->tokens[$this->id][0]), ['KEY', 'VALUE']);
+        return $this->processOperator('Keyvalue', $this->precedence->get($this->tokens[$this->id][0]), ['KEY', 'VALUE']);
     }
 
     private function processBitshift() {
-        $this->processOperator('Bitshift', $this->getPrecedence($this->tokens[$this->id][0]));
+        $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processEcho() {
@@ -3698,7 +3591,7 @@ class Load extends Tasks {
         $argumentsId = $this->addAtom('Arguments');
 
         $fullcode = array();
-        $finals = $this->getPrecedence($this->tokens[$this->id][0]);
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
         };
@@ -4009,28 +3902,6 @@ class Load extends Tasks {
         return $this->php->getTokenName($token);
     }
 
-    private function getPrecedence($token, $itself = false) {
-        static $cache;
-        
-        if ($cache === null) {
-            $cache = [];
-            foreach(self::PRECEDENCE as $k1 => $p1) {
-                $cache[$k1] = [];
-                foreach(self::PRECEDENCE as $k2 => $p2) {
-                    if ($p1 <= $p2 && ($itself === true || $k1 !== $k2) ) {// && (!in_array($token, [T_COALESCE]) || $token !== $k2)
-                        $cache[$k1][] = $k2;
-                    }
-                }
-            }
-        }
-        
-        if (!isset($cache[$token])) {
-            die("No precedence for $token\n");
-        }
-        
-        return $cache[$token];
-    }
-    
     private function getFullnspath($nameId, $type = 'class') {
         // Handle static, self, parent and PHP natives function
         if (isset($this->atoms[$nameId]['absolute']) && ($this->atoms[$nameId]['absolute'] === true)) {

@@ -155,4 +155,7 @@ const T_NS_SEPARATOR = 388;
 const T_ELLIPSIS = 389;
 const T_DOUBLE_COLON = 384;
 
+const T_COALESCE = -1;
+const T_YIELD_FROM = -1;
+const T_SPACESHIP = -1;
 ?>
