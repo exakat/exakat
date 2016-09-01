@@ -1,10 +1,14 @@
 <?php
 
-$expected     = array('undefinedInterfacei', 
-                      '\undefinedInterfacei', 
-                      '\undefinedInterfacet', 
-                      'undefinedInterfacet');
+$expected     = array('undefinedInterfacet',
+                      '\undefinedInterfacet',
+                      '\undefinedInterfacei',
+                      'undefinedInterfacei',);
 
-$expected_not = array();
+
+$expected_not = array('definedInterfacet',
+                      '\definedInterfacet',
+                      '\definedInterfacei',
+                      'definedInterfacei',);
 
 ?>

@@ -46,12 +46,12 @@ class UndefinedInterfaces extends Analyzer\Analyzer {
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
              ->analyzerIsNot('Composer/IsComposerClass')
-             ->analyzerIsNot('Composer/IsComposerInterface');
+             ->analyzerIsNot('Composer/IsComposerInterface')
+             ->codeIsNot('iterable');
         $this->prepareQuery();
 
-        $this->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->isNot('aliased', true)
+        $this->atomIs(array('Nsname', 'Identifier'))
+             ->hasIn('TYPEHINT')
              ->codeIsNot(array('self', 'parent', 'static'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
@@ -59,7 +59,8 @@ class UndefinedInterfaces extends Analyzer\Analyzer {
              ->analyzerIsNot('Interfaces/IsExtInterface')
              ->analyzerIsNot('Composer/IsComposerClass')
              ->analyzerIsNot('Composer/IsComposerInterface')
-             ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'));
+             ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'))
+             ->codeIsNot('iterable');
         $this->prepareQuery();
     }
 }

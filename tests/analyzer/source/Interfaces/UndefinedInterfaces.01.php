@@ -1,6 +1,7 @@
 <?php
 
 interface MyInterface{}
+interface MyInterfacet{}
 
 $a instanceof Stdclass;
 $b instanceof MyInterface;
@@ -8,11 +9,9 @@ $c instanceof \MyInterface;
 $d instanceof undefinedInterfacei;
 $e instanceof \undefinedInterfacei;
 
-interface MyInterface{}
-
 function x(Stdclass $a, 
-           MyInterface $b,
-           \MyInterface $c,
+           MyInterfacet $b,
+           \MyInterfacet $c,
            undefinedInterfacet $d,
            \undefinedInterfacet $e) {}
 
