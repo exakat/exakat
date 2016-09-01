@@ -7,4 +7,6 @@ namespace B ;
 
 namespace C\D\R ;
 
+$a = namespace\D;
+
 ?>
