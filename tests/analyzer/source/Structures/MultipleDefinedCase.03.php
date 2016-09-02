@@ -69,6 +69,7 @@
             case BD : 
             case BE : 
             case BF:
+            case AE:
             case BG : 
             case BH : 
             case BI : 
@@ -156,6 +157,7 @@
             case EC:
                                 break;
             default: 
+            case EA : 
                 print ED($v[8]).'EE';
                 EF($w);
         }
