@@ -26,76 +26,26 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class NoChangeIncomingVariables extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Variables/IsModified',
+                     'Arrays/IsModified');
+    }
+    
     public function analyze() {
         $incomingVariables = array('$_GET','$_POST','$_REQUEST','$_FILES',
-                                    '$_ENV', '$_SERVER',
-                                    '$PHP_SELF','$HTTP_RAW_POST_DATA');
+                                   '$_ENV', '$_SERVER',
+                                   '$PHP_SELF','$HTTP_RAW_POST_DATA');
         //'$_COOKIE', '$_SESSION' : those are OK
 
-        // full array unset($_GET);
-        $this->atomFunctionIs('\\unset')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Variable')
+        $this->atomIs('Variable')
+             ->hasNoIn('VARIABLE') // avoid double counting Arrays
              ->codeIs($incomingVariables)
-             ->back('first');
+             ->analyzerIs('Variables/IsModified');
         $this->prepareQuery();
 
-        // array unset($_GET['level1']);
-        $this->atomFunctionIs('\\unset')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->codeIs($incomingVariables)
-             ->back('first');
-        $this->prepareQuery();
-
-        // array unset($_GET['level1']['level2']);
-        $this->atomFunctionIs('\\unset')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->outIs('VARIABLE')
-             ->codeIs($incomingVariables)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Assignation full array $_COOKIE = 22;
-        $this->atomIs('Assignation')
-             ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->codeIs($incomingVariables)
-             ->back('first');
-        $this->prepareQuery();
-
-        // assignation index $_FILES['level1']
-        $this->atomIs('Assignation')
-             ->outIs('LEFT')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->codeIs($incomingVariables)
-             ->back('first');
-        $this->prepareQuery();
-
-        // assignation index $_FILES['level1'][]
-        $this->atomIs('Assignation')
-             ->outIs('LEFT')
-             ->atomIs('Arrayappend')
-             ->outIs('VARIABLE')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->codeIs($incomingVariables)
-             ->back('first');
-        $this->prepareQuery();
-
-        // assignation index $_FILES['level1']['level2']
-        $this->atomIs('Assignation')
-             ->outIs('LEFT')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->outIs('VARIABLE')
+        $this->atomIs('Array')
+             ->analyzerIs('Arrays/IsModified')
+             ->outIsIE('VARIABLE')
              ->codeIs($incomingVariables)
              ->back('first');
         $this->prepareQuery();

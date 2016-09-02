@@ -1,5 +1,6 @@
 <?php
 
+$a = $_REQUEST;
 unset($_GET);
 unset($_POST['s']);
 unset($_REQUEST['a']['b']);
