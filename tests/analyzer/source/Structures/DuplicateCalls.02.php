@@ -8,7 +8,10 @@ function foo() {
     $g->substr($a, 1, 2);
 
     duplicateInTwoFunctions(1,2,3);
-
+    singleCall();
+    multipleCallVariousArg(1);
+    multipleCallVariousArg(2);
+    multipleCallVariousArg(3);
 }
 
 function bar() {
