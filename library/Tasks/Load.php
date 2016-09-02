@@ -93,7 +93,7 @@ class Load extends Tasks {
     private $optionsTokens = array();
      
     const PROP_ALTERNATIVE = ['Declare', 'Ifthen', 'For', 'Foreach', 'Switch', 'While'];
-    const PROP_REFERENCE   = ['Variable', 'Property', 'Staticproperty', 'Array'];
+    const PROP_REFERENCE   = ['Variable', 'Property', 'Staticproperty', 'Array', 'Function'];
     const PROP_VARIADIC    = ['Variable', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname'];
     const PROP_DELIMITER   = ['String', 'Heredoc'];
     const PROP_NODELIMITER = ['String', 'Variable'];
@@ -3119,6 +3119,9 @@ class Load extends Tasks {
     private function processNew() {
         $this->toggleContext(self::CONTEXT_NEW);
         $id =  $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
+        if ($this->atoms[$id + 1]['atom'] === 'Identifier') {
+            $this->addCall('class', $this->atoms[$id + 1]['fullnspath'], $id + 1);
+        }
         $this->toggleContext(self::CONTEXT_NEW);
         return $id;
     }
