@@ -44,7 +44,8 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->tokenIs('T_NS_SEPARATOR')
-//             ->rankIs('SUBNAME', 'last')
+             ->outIsIE('NAME')
+             ->outWithRank('SUBNAME', 'last')
              ->savePropertyAs('code', 'classe')
              ->inIs('SUBNAME')
              ->classDefinition()
@@ -57,11 +58,11 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->tokenIs('T_STRING')
-             ->isNot('aliased', true)
              ->codeIsNot(array('static', 'parent', 'self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -69,11 +70,12 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->tokenIs('T_NS_SEPARATOR')
-//             ->rankIs('SUBNAME', 'last')
+             ->outWithRank('SUBNAME', 'last')
              ->savePropertyAs('code', 'classe')
              ->inIs('SUBNAME')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -82,11 +84,11 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->tokenIs('T_STRING')
-             ->isNot('aliased', true)
              ->codeIsNot(array('static', 'parent', 'self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -94,11 +96,12 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->tokenIs('T_NS_SEPARATOR')
-//             ->rankIs('SUBNAME', 'last')
+             ->outWithRank('SUBNAME', 'last')
              ->savePropertyAs('code', 'classe')
              ->inIs('SUBNAME')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -106,12 +109,12 @@ class WrongCase extends Analyzer\Analyzer {
 // Staticconstant
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
-             ->isNot('aliased', true)
              ->tokenIs('T_STRING')
              ->codeIsNot(array('static', 'parent', 'self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -119,11 +122,12 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->tokenIs('T_NS_SEPARATOR')
-//             ->rankIs('SUBNAME', 'last')
+             ->outWithRank('SUBNAME', 'last')
              ->savePropertyAs('code', 'classe')
              ->inIs('SUBNAME')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -132,11 +136,11 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->tokenIs('T_STRING')
-             ->isNot('aliased', true)
              ->codeIsNot(array('static', 'parent', 'self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -144,11 +148,12 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->tokenIs('T_NS_SEPARATOR')
-//             ->rankIs('SUBNAME', 'last')
+             ->outWithRank('SUBNAME', 'last')
              ->savePropertyAs('code', 'classe')
              ->inIs('SUBNAME')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -159,15 +164,15 @@ class WrongCase extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->tokenIs('T_STRING')
-             ->isNot('aliased', true)
              ->codeIsNot(array('static', 'parent', 'self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT');
         $this->prepareQuery();
 
         $this->atomIs('Function')
@@ -175,26 +180,27 @@ class WrongCase extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->tokenIs('T_NS_SEPARATOR')
-//             ->rankIs('SUBNAME', 'last')
+             ->outWithRank('SUBNAME', 'last')
              ->savePropertyAs('code', 'classe')
              ->inIs('SUBNAME')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT');
         $this->prepareQuery();
 
 // instance of
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs('T_STRING')
-             ->isNot('aliased', true)
              ->codeIsNot(array('static', 'parent', 'self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
@@ -202,122 +208,13 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs('T_NS_SEPARATOR')
+             ->outWithRank('SUBNAME', 'last')
              ->savePropertyAs('code', 'classe')
              ->inIs('SUBNAME')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-// use
-    /*
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->savePropertyAs('originclass', 'classe')
-             ->classDefinition()
-             ->outIs('NAME')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-        */
-
-// aliased instanceof
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->is('aliased', true)
-             ->savePropertyAs('code', 'classe')
-             ->goToNamespace()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE')
-             ->samePropertyAs('originalias', 'classe')
-             ->notSamePropertyAs('originalias', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-return true;
-
-// aliased static constant call
-        $this->atomIs('Staticconstant')
-             ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->is('aliased', true)
-             ->savePropertyAs('code', 'classe')
-             ->goToNamespace()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE')
-             ->samePropertyAs('originalias', 'classe')
-             ->notSamePropertyAs('originalias', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-// aliased static property
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->is('aliased', true)
-             ->savePropertyAs('code', 'classe')
-             ->goToNamespace()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE')
-             ->samePropertyAs('originalias', 'classe')
-             ->notSamePropertyAs('originalias', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-// aliased static method
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->is('aliased', true)
-             ->savePropertyAs('code', 'classe')
-             ->goToNamespace()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE')
-             ->samePropertyAs('originalias', 'classe')
-             ->notSamePropertyAs('originalias', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-// aliased typehint
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT')
-             ->tokenIs('T_STRING')
-             ->is('aliased', true)
-             ->savePropertyAs('code', 'classe')
-             ->goToNamespace()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE')
-             ->samePropertyAs('originalias', 'classe')
-             ->notSamePropertyAs('originalias', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-// aliased catch
-        $this->atomIs('Catch')
-             ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->is('aliased', true)
-             ->savePropertyAs('code', 'classe')
-             ->goToNamespace()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Use')
-             ->outIs('USE')
-             ->samePropertyAs('originalias', 'classe')
-             ->notSamePropertyAs('originalias', 'classe', true)
              ->back('first');
         $this->prepareQuery();
     }
