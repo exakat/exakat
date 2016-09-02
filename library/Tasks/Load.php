@@ -3977,7 +3977,6 @@ class Load extends Tasks {
 
     private function addNamespaceUse($originId, $aliasId, $useType) {
         $fullnspath = $this->atoms[$originId]['fullnspath'];
-        var_dump($fullnspath);
 
         if ($originId !== $aliasId) { // Case of A as B
             // Alias is the 'As' expression. 
