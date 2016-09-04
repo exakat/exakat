@@ -467,7 +467,7 @@ repeat(__.in('.$linksDown.'))
     }
     
     public function atomInside($atom) {
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times('.self::MAX_LOOPING.') ';
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
