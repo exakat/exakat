@@ -866,6 +866,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
             $voidId = $this->addAtomVoid();
             $this->addLink($functionId, $voidId, 'BLOCK');
+            ++$this->id; // skip the next ;
         } else {
             $blockId = $this->processFollowingBlock([T_CLOSE_CURLY]);
             $this->popExpression();
@@ -1206,11 +1207,6 @@ class Load extends Tasks {
     }
 
     private function processClosingTag() {
-
-        if ($this->tokens[$this->id - 1][0] !== T_SEMICOLON) {
-            $this->processSemicolon();
-        }
-
         if ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
             in_array($this->tokens[$this->id + 2][0], [T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO])) {
     
@@ -2042,6 +2038,7 @@ class Load extends Tasks {
 
             $this->pushExpression($this->sequence);
             $this->endSequence();
+
         } elseif (in_array($this->tokens[$this->id + 1][0], [T_SEMICOLON])) {
             // void; One epxression block, with ;
             $this->startSequence();
@@ -3340,6 +3337,10 @@ class Load extends Tasks {
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
         
+        if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+        
         return $additionId;
     }
 
@@ -3557,7 +3558,8 @@ class Load extends Tasks {
 
         // processArguments goes too far, up to ;
         --$this->id;
-        if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            print "   PROCESS CLOSE TAG\n";
             $this->processSemicolon();
         }
 
