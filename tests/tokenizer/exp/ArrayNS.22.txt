@@ -18,16 +18,20 @@ Label : ARGUMENT
           Label : ARGUMENTS
             [
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : VARIABLE
+              3
+            Label : ARGUMENT
+              4
+            Label : ARGUMENT
+              5
+          Label : VARIABLE
             [
         Label : ARGUMENT
           [
           Label : ARGUMENTS
             [
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : VARIABLE
+              6
+          Label : VARIABLE
             [
       Label : VARIABLE
         [

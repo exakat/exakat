@@ -1,7 +1,9 @@
-+
-Label : LEFT
-  $
-  Label : NAME
-    $name
-Label : RIGHT
-  0
+(
+Label : ARGUMENT
+  ::
+  Label : CLASS
+    b
+  Label : PROPERTY
+    $
+    Label : NAME
+      $name

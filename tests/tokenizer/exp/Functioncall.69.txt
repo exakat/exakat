@@ -1,9 +1,3 @@
 <?=
 Label : ARGUMENT
-  C
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'D'
-  Label : NAME
-    C
+  Void

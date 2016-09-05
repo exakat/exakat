@@ -1,3 +1,19 @@
 echo
 Label : ARGUMENT
-  Void
+  I
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      ->
+      Label : METHOD
+        J
+        Label : ARGUMENTS
+          (
+          Label : ARGUMENT
+            Void
+        Label : NAME
+          J
+      Label : OBJECT
+        $a
+  Label : NAME
+    I
