@@ -1,5 +1,9 @@
 +
 Label : LEFT
-  'd'
+  $b
 Label : RIGHT
-  Void
+  +
+  Label : LEFT
+    'd'
+  Label : RIGHT
+    $c

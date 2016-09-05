@@ -26,7 +26,12 @@ Label : ARGUMENT
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
+              ->
+              Label : OBJECT
+                $e
+              Label : PROPERTY
+                f
+          Label : NAME
             d
         Label : OBJECT
           $c

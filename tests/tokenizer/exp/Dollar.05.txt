@@ -9,8 +9,6 @@ Label : FILE
       Label : ELEMENT
         $
         Label : NAME
-          $a
-      Label : ELEMENT
-        $
-        Label : NAME
-          Void
+          $
+          Label : NAME
+            $a

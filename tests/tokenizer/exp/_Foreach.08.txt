@@ -13,7 +13,8 @@ Label : FILE
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]        Label : SOURCE
+              $j
+        Label : SOURCE
           $a
         Label : VALUE
           ->

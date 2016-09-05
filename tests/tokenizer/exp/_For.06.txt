@@ -13,7 +13,8 @@ Label : FILE
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]        Label : FINAL
+              $j
+        Label : FINAL
           ;
           Label : ELEMENT
             Void
@@ -22,7 +23,8 @@ Label : FILE
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]        Label : INIT
+              $i
+        Label : INIT
           ;
           Label : ELEMENT
             Void

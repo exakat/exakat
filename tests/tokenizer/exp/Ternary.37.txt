@@ -1,3 +1,33 @@
 <?=
 Label : ARGUMENT
-  Void
+  .
+  Label : CONCAT
+    'E'
+    Label : CODE
+      ?
+      Label : CONDITION
+        <
+        Label : LEFT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'C'
+              Label : VARIABLE
+                $a
+          Label : NAME
+            B
+        Label : RIGHT
+          $b
+      Label : ELSE
+        'E'
+      Label : THEN
+        'D'
+  Label : CONCAT
+    [
+    Label : INDEX
+      'F'
+    Label : VARIABLE
+      $c

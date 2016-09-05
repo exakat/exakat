@@ -7,12 +7,10 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        ->
-        Label : OBJECT
-          $x
-        Label : PROPERTY
-          y
-      Label : ELEMENT
         !
         Label : NOT
-          Void
+          ->
+          Label : OBJECT
+            $x
+          Label : PROPERTY
+            y

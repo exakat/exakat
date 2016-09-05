@@ -27,8 +27,10 @@ Label : FILE
           Label : CONDITION
             **
             Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
-123098120398 [label="Reached level 15"]          Label : ELSE
+              4
+            Label : RIGHT
+              $x
+          Label : ELSE
             3
           Label : THEN
             2

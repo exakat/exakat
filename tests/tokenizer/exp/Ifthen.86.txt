@@ -18,9 +18,24 @@ Label : ARGUMENT
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
+              [
+              Label : INDEX
+                'K'
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  'J'
+                Label : VARIABLE
+                  ::
+                  Label : CLASS
+                    I
+                  Label : PROPERTY
+                    $b
+            Label : ARGUMENT
+              'L'
+            Label : ARGUMENT
+              M
+          Label : NAME
             H
       Label : ARGUMENT
         array
@@ -29,16 +44,22 @@ Label : ARGUMENT
           Label : ARGUMENT
             =>
             Label : KEY
-123098120398 [label="Reached level 15"]            Label : VALUE
-123098120398 [label="Reached level 15"]          Label : ARGUMENT
+              'N'
+            Label : VALUE
+              'O'
+          Label : ARGUMENT
             =>
             Label : KEY
-123098120398 [label="Reached level 15"]            Label : VALUE
-123098120398 [label="Reached level 15"]          Label : ARGUMENT
+              'P'
+            Label : VALUE
+              'Q'
+          Label : ARGUMENT
             =>
             Label : KEY
-123098120398 [label="Reached level 15"]            Label : VALUE
-123098120398 [label="Reached level 15"]        Label : NAME
+              'R'
+            Label : VALUE
+              'S'
+        Label : NAME
           array
     Label : NAME
       E

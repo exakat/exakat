@@ -1,3 +1,11 @@
 echo
 Label : ARGUMENT
-  Void
+  C
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      'D'
+    Label : ARGUMENT
+      $c
+  Label : NAME
+    C

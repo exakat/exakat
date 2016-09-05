@@ -2,4 +2,12 @@
 Label : LEFT
   1
 Label : RIGHT
-  Void
+  *
+  Label : LEFT
+    2
+  Label : RIGHT
+    *
+    Label : LEFT
+      3
+    Label : RIGHT
+      4

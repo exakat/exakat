@@ -1,3 +1,9 @@
 echo
 Label : ARGUMENT
-  Void
+  __
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      'B'
+  Label : NAME
+    __

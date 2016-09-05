@@ -84,8 +84,14 @@ Label : ARGUMENT
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
+              'W'
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                X
+              Label : CONSTANT
+                Y
+          Label : NAME
             V
     Label : NAME
       T
@@ -124,7 +130,12 @@ Label : ARGUMENT
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
+              [
+              Label : INDEX
+                'AE'
+              Label : VARIABLE
+                $d
+          Label : NAME
             AD
       Label : NAME
         AC

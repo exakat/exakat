@@ -12,8 +12,24 @@ Label : ARGUMENT
           Label : ARGUMENT
             D
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]        Label : NAME
+              (
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  [
+                  Label : INDEX
+                    'E'
+                  Label : VARIABLE
+                    $a
+                Label : PROPERTY
+                  F
+              Label : ARGUMENT
+                'G'
+              Label : ARGUMENT
+                H
+            Label : NAME
+              D
+        Label : NAME
           C
       Label : RIGHT
         0

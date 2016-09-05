@@ -1,3 +1,45 @@
 echo
 Label : ARGUMENT
-  Void
+  .
+  Label : CONCAT
+    a
+    Label : ARGUMENTS
+      (
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          'b'
+        Label : CONCAT
+          ->
+          Label : OBJECT
+            $c
+          Label : PROPERTY
+            d
+      Label : ARGUMENT
+        e
+        Label : ARGUMENTS
+          (
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              ==
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $f
+                Label : PROPERTY
+                  g
+              Label : RIGHT
+                'h'
+            Label : ELSE
+              'j'
+            Label : THEN
+              'i'
+        Label : NAME
+          e
+      Label : ARGUMENT
+        'k'
+    Label : NAME
+      a
+  Label : CONCAT
+    'l'

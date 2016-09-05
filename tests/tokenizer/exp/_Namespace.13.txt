@@ -12,6 +12,10 @@ Label : FILE
           Label : ELEMENT
             interface
             Label : BLOCK
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]        Label : NAME
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
+              C
+        Label : NAME
           A

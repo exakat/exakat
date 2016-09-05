@@ -13,5 +13,6 @@ Label : FILE
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]        Label : CONDITION
+              $c
+        Label : CONDITION
           $a

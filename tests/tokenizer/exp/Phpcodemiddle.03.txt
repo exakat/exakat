@@ -12,6 +12,22 @@ Label : ARGUMENT
     Label : RIGHT
       'C'
   Label : ELSE
-    Void
+    'C'
+    Label : CODE
+      ?
+      Label : CONDITION
+        ==
+        Label : LEFT
+          [
+          Label : INDEX
+            'B'
+          Label : VARIABLE
+            $a
+        Label : RIGHT
+          'F'
+      Label : ELSE
+        'C'
+      Label : THEN
+        'G'
   Label : THEN
     'D'

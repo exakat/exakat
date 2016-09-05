@@ -7,8 +7,6 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
-        stdclass
-      Label : ELEMENT
         new
         Label : NEW
-          Void
+          stdclass

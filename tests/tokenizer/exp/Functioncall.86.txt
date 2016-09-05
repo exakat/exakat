@@ -26,8 +26,40 @@ Label : ARGUMENT
           Label : INDEX
             .
             Label : CONCAT
-123098120398 [label="Reached level 15"]            Label : CONCAT
-123098120398 [label="Reached level 15"]          Label : VARIABLE
+              'D'
+            Label : CONCAT
+              ]
+              Label : CODE
+                ?
+                Label : CONDITION
+                  empty
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'E'
+                      Label : VARIABLE
+                        $c
+                  Label : NAME
+                    empty
+                Label : ELSE
+                  [
+                  Label : INDEX
+                    [
+                    Label : INDEX
+                      'E'
+                    Label : VARIABLE
+                      $c
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'G'
+                    Label : VARIABLE
+                      $f
+                Label : THEN
+                  'F'
+          Label : VARIABLE
             $e
     Label : NAME
       Void

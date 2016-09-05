@@ -13,5 +13,6 @@ Label : FILE
           Label : ELEMENT
             use
             Label : USE
-123098120398 [label="Reached level 15"]        Label : NAME
+              A
+        Label : NAME
           B

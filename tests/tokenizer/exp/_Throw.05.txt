@@ -13,6 +13,8 @@ Label : FILE
           Label : NEW
             \
             Label : SUBNAME
-123098120398 [label="Reached level 15"]            Label : SUBNAME
-123098120398 [label="Reached level 15"]            Label : SUBNAME
-123098120398 [label="Reached level 15"]
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C

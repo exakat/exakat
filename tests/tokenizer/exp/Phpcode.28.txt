@@ -1,3 +1,9 @@
 <?=
 Label : ARGUMENT
-  Void
+  S
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      'UX1'
+  Label : NAME
+    S

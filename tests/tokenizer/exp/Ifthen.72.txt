@@ -1,3 +1,39 @@
 echo
 Label : ARGUMENT
-  Void
+  E
+  Label : ARGUMENTS
+    (
+    Label : ARGUMENT
+      .
+      Label : CONCAT
+        'F'
+      Label : CONCAT
+        [
+        Label : INDEX
+          'G'
+        Label : VARIABLE
+          $d
+      Label : CONCAT
+        'H'
+    Label : ARGUMENT
+      I
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          'J'
+      Label : NAME
+        I
+    Label : ARGUMENT
+      array
+      Label : ARGUMENTS
+        (
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'K'
+          Label : VALUE
+            'L'
+      Label : NAME
+        array
+  Label : NAME
+    E

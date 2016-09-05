@@ -1,5 +1,5 @@
 [
 Label : INDEX
-  'a'
+  2
 Label : VARIABLE
-  $_array
+  $a

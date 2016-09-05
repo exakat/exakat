@@ -14,12 +14,20 @@ Label : ARGUMENT
           Label : INDEX
             [
             Label : INDEX
-123098120398 [label="Reached level 15"]            Label : VARIABLE
-123098120398 [label="Reached level 15"]          Label : VARIABLE
+              'e'
+            Label : VARIABLE
+              $d
+          Label : VARIABLE
             [
             Label : INDEX
-123098120398 [label="Reached level 15"]            Label : VARIABLE
-123098120398 [label="Reached level 15"]    Label : RIGHT
+              $c
+            Label : VARIABLE
+              ::
+              Label : CLASS
+                a
+              Label : PROPERTY
+                $b
+    Label : RIGHT
       'g'
   Label : ELSE
     'i'

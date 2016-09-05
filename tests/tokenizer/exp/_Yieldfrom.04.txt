@@ -20,47 +20,160 @@ Label : ARGUMENT
           Label : ELEMENT
             global
             Label : GLOBAL
-123098120398 [label="Reached level 15"]            Label : GLOBAL
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              $
+              Label : NAME
+                $b
+            Label : GLOBAL
+              $a
+          Label : ELEMENT
             static
             Label : STATIC
-123098120398 [label="Reached level 15"]            Label : STATIC
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              =
+              Label : LEFT
+                $d
+              Label : RIGHT
+                0
+            Label : STATIC
+              $c
+          Label : ELEMENT
             unset
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              (
+              Label : ARGUMENT
+                $e
+            Label : NAME
+              unset
+          Label : ELEMENT
             =
             Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              $x
+            Label : RIGHT
+              ||
+              Label : LEFT
+                &&
+                Label : LEFT
+                  isset
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $a
+                  Label : NAME
+                    isset
+                Label : RIGHT
+                  !
+                  Label : NOT
+                    empty
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $b
+                    Label : NAME
+                      empty
+              Label : RIGHT
+                eval
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  eval
+          Label : ELEMENT
             =
             Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              $x
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                $a
+              Label : ELSE
+                $c
+              Label : THEN
+                $b
+          Label : ELEMENT
             =
             Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              $x
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                $a
+              Label : ELSE
+                $c
+              Label : THEN
+                Void
+          Label : ELEMENT
             =
             Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              $x
+            Label : RIGHT
+              ??
+              Label : LEFT
+                $a
+              Label : RIGHT
+                $b
+          Label : ELEMENT
             =
             Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              list
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+                Label : ARGUMENT
+                  $b
+                Label : ARGUMENT
+                  $c
+              Label : NAME
+                list
+            Label : RIGHT
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    2
+                  Label : VALUE
+                    'x'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    'z'
+                  Label : VALUE
+                    'c'
+              Label : VARIABLE
+                [
+          Label : ELEMENT
             @
             Label : AT
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                foo
+          Label : ELEMENT
             =
             Label : LEFT
-123098120398 [label="Reached level 15"]            Label : RIGHT
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              $y
+            Label : RIGHT
+              clone
+              Label : CLONE
+                $x
+          Label : ELEMENT
             yield
             Label : YIELD
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              =>
+              Label : KEY
+                1
+              Label : VALUE
+                2
+          Label : ELEMENT
             yield from
             Label : YIELD
-123098120398 [label="Reached level 15"]        Label : NAME
+              $x
+        Label : NAME
           Void

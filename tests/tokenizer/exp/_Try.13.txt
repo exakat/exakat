@@ -16,8 +16,12 @@ Label : ARGUMENT
           Label : METHOD
             L
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : OBJECT
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              L
+          Label : OBJECT
             $e
         Label : CONCAT
           'M'
@@ -26,16 +30,24 @@ Label : ARGUMENT
           Label : METHOD
             O
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : OBJECT
+              (
+              Label : ARGUMENT
+                'P'
+            Label : NAME
+              O
+          Label : OBJECT
             $f
         Label : CONCAT
           ->
           Label : METHOD
             R
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : OBJECT
+              (
+              Label : ARGUMENT
+                'S'
+            Label : NAME
+              R
+          Label : OBJECT
             $g
   Label : NAME
     array

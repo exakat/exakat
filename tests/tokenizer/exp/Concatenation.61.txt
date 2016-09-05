@@ -18,8 +18,16 @@ Label : ARGUMENT
           Label : ARGUMENT
             array
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]        Label : NAME
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'F'
+                Label : VALUE
+                  $b
+            Label : NAME
+              array
+        Label : NAME
           D
     Label : CONCAT
       'G'

@@ -14,7 +14,8 @@ Label : FILE
           Label : ELEMENT
             return
             Label : RETURN
-123098120398 [label="Reached level 15"]      Label : ELEMENT
+              Void
+      Label : ELEMENT
         if
         Label : CONDITION
           2
@@ -23,10 +24,12 @@ Label : FILE
           Label : ELEMENT
             return
             Label : RETURN
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              Void
+          Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]      Label : ELEMENT
+              $a
+      Label : ELEMENT
         if
         Label : CONDITION
           3
@@ -35,13 +38,15 @@ Label : FILE
           Label : ELEMENT
             return
             Label : RETURN
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              Void
+          Label : ELEMENT
             A
 
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]      Label : ELEMENT
+              $b
+      Label : ELEMENT
         if
         Label : CONDITION
           4
@@ -50,10 +55,11 @@ Label : FILE
           Label : ELEMENT
             return
             Label : RETURN
-123098120398 [label="Reached level 15"]          Label : ELEMENT
+              Void
+          Label : ELEMENT
             A
 
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]
+              $c

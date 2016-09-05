@@ -27,12 +27,14 @@ Label : FILE
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]        Label : THEN
+              $c
+        Label : THEN
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]      Label : ELEMENT
+              $d
+      Label : ELEMENT
         if
         Label : CONDITION
           $x2
@@ -41,9 +43,10 @@ Label : FILE
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]        Label : THEN
+              $b
+        Label : THEN
           {}
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]
+              $a

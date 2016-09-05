@@ -46,7 +46,38 @@ Label : RIGHT
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
+              abs
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  -
+                  Label : LEFT
+                    ->
+                    Label : METHOD
+                      d
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        d
+                    Label : OBJECT
+                      $c
+                  Label : RIGHT
+                    ->
+                    Label : METHOD
+                      getX
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        getX
+                    Label : OBJECT
+                      $e
+              Label : NAME
+                abs
+          Label : NAME
             deg2rad
       Label : NAME
         cos

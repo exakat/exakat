@@ -26,16 +26,22 @@ Label : ARGUMENT
           Label : ARGUMENT
             =>
             Label : KEY
-123098120398 [label="Reached level 15"]            Label : VALUE
-123098120398 [label="Reached level 15"]          Label : ARGUMENT
+              'G'
+            Label : VALUE
+              'H'
+          Label : ARGUMENT
             =>
             Label : KEY
-123098120398 [label="Reached level 15"]            Label : VALUE
-123098120398 [label="Reached level 15"]          Label : ARGUMENT
+              'I'
+            Label : VALUE
+              0
+          Label : ARGUMENT
             =>
             Label : KEY
-123098120398 [label="Reached level 15"]            Label : VALUE
-123098120398 [label="Reached level 15"]        Label : NAME
+              'J'
+            Label : VALUE
+              1
+        Label : NAME
           array
     Label : NAME
       E
@@ -82,8 +88,22 @@ Label : ARGUMENT
           Label : ARGUMENT
             array
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]        Label : NAME
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'J'
+                Label : VALUE
+                  2
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'V'
+                Label : VALUE
+                  'W'
+            Label : NAME
+              array
+        Label : NAME
           E
     Label : CONCAT
       'X'

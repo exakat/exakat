@@ -17,12 +17,36 @@ Label : FILE
           Label : ELSE
             elseif
             Label : CONDITION
-123098120398 [label="Reached level 15"]            Label : ELSE
-123098120398 [label="Reached level 15"]            Label : THEN
-123098120398 [label="Reached level 15"]          Label : THEN
+              3
+            Label : ELSE
+              elseif
+              Label : CONDITION
+                4
+              Label : ELSE
+                elseif
+                Label : CONDITION
+                  5
+                Label : ELSE
+                  {}
+                  Label : ELEMENT
+                    $f
+                Label : THEN
+                  {}
+                  Label : ELEMENT
+                    $e
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  $d
+            Label : THEN
+              {}
+              Label : ELEMENT
+                $c
+          Label : THEN
             {}
             Label : ELEMENT
-123098120398 [label="Reached level 15"]        Label : THEN
+              $b
+        Label : THEN
           {}
           Label : ELEMENT
             $a

@@ -28,8 +28,14 @@ Label : ARGUMENT
           Label : ARGUMENT
             strrpos
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]        Label : NAME
+              (
+              Label : ARGUMENT
+                $g
+              Label : ARGUMENT
+                'h'
+            Label : NAME
+              strrpos
+        Label : NAME
           substr
     Label : NAME
       preg_replace

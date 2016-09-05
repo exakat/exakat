@@ -1,3 +1,7 @@
 <?=
 Label : ARGUMENT
-  Void
+  .
+  Label : CONCAT
+    $line_content
+  Label : CONCAT
+    PHP_EOL

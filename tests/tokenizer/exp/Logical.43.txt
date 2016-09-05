@@ -1,3 +1,5 @@
 )
 Label : ARGUMENT
-  Void
+  'B'
+  Label : CODE
+    'B'

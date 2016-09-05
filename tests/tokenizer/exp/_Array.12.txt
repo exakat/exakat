@@ -1,11 +1,9 @@
 +
 Label : LEFT
   [
-  Label : ARGUMENTS
-    [
-    Label : ARGUMENT
-      Void
+  Label : INDEX
+    $h
   Label : VARIABLE
-    [
+    $g
 Label : RIGHT
   1

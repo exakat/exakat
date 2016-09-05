@@ -13,13 +13,16 @@ Label : FILE
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]        Label : SOURCE
+              $z
+        Label : SOURCE
           $a
         Label : VALUE
           =>
           Label : KEY
             ->
             Label : OBJECT
-123098120398 [label="Reached level 15"]            Label : PROPERTY
-123098120398 [label="Reached level 15"]          Label : VALUE
+              $x
+            Label : PROPERTY
+              a
+          Label : VALUE
             $y

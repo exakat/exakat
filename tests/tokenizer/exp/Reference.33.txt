@@ -12,8 +12,10 @@ Label : FILE
           Label : LEFT
             ::
             Label : CLASS
-123098120398 [label="Reached level 15"]            Label : CONSTANT
-123098120398 [label="Reached level 15"]          Label : RIGHT
+              A
+            Label : CONSTANT
+              B
+          Label : RIGHT
             $c
         Label : THEN
           {}
