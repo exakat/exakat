@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 29 Aug 2016 09:54:35 +0000
-.. comment: Generation hash : 04a6925cc2f4587a3bdb39f44312b105a0a20b83
+.. comment: Generation date : Mon, 05 Sep 2016 17:13:53 +0000
+.. comment: Generation hash : 2c60073554df183f05928821f43b80094992c440
 
 
 .. _$http\_raw\_post\_data:
@@ -590,7 +590,29 @@ Break Outside Loop
 ##################
 
 
-Starting with PHP 7, breaks or continue that are outside a loop (for, foreach, do...while, while) or a switch() statement won't compile anymore.
+Starting with PHP 7, breaks or continue that are outside a loop (for(), foreach(), do...while(), while()) or a switch() statement won't compile anymore.
+
+It is not possible anymore to include a piece of code inside a loop that will then `break`.
+
+.. code-block:: php
+
+   <?php
+   
+       // outside a loop : This won't compile
+       break 1; 
+       
+       foreach($array as $a) {
+           break 1; // Compile OK
+   
+           break 2; // This won't compile, as this break is in one loop, and not 2
+       }
+   
+       foreach($array as $a) {
+           foreach($array2 as $a2) {
+               break 2; // OK in PHP 5 and 7
+           }
+       }
+   ?>
 
 +--------------+----------------------------------------------------------------------+
 | Command Line | Structures/BreakOutsideLoop                                          |
@@ -3083,6 +3105,57 @@ However, this is not common programming practise : all arguments should be named
 
 
 
+.. _multiple-exceptions-catch():
+
+Multiple Exceptions Catch()
+###########################
+
+
+Starting with PHP 7.1, it is possible to have several distinct exceptions class caught by the same catch, preventing code repetition. 
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7.1 and more recent
+   try {  
+       throw new someException(); 
+   } catch (Single $s) {
+       doSomething();
+   } catch (oneType \| anotherType $s) {
+       processIdentically();
+   } finally {
+   
+   }
+   
+   // PHP 7.0 and older
+   try {  
+       throw new someException(); 
+   } catch (Single $s) {
+       doSomething();
+   } catch (oneType $s) {
+       processIdentically();
+   } catch (anotherType $s) {
+       processIdentically();
+   } finally {
+   
+   }
+   
+   ?>
+
+
+This is a backward incompabitible feature of PHP 7.1.
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Exceptions/MultipleCatch                                                                                                              |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _multiple-index-definition:
 
 Multiple Index Definition
@@ -3167,9 +3240,23 @@ Negative Power
 ##############
 
 
-The power operator has higher priority than the sign operator. This means that -2 \*\* 2 == -4. It is in fact, -(2 \*\* 2). 
+The power operator `\*\*` has higher priority than the sign operators `+` and `-`. This means that -2 \*\* 2 == -4. It is in fact, -(2 \*\* 2). 
 
-When using negative power, it is clearer to add parenthesis or to use the pow() function, which has no such ambiguity : pow(-2, 2) == 4.
+When using negative power, it is clearer to add parenthesis or to use the pow() function, which has no such ambiguity : 
+
+.. code-block:: php
+
+   <?php
+   
+   // -2 to the power of 2 (a square)
+   pow(-2, 2) == 4;
+   
+   // minus 2 to the power of 2 (a negative square)
+   -2 \*\* 2 == -(2 \*\* 2) == 4;
+   
+   ?>
+
+.
 
 +--------------+------------------------+
 | Command Line | Structures/NegativePow |
@@ -3187,9 +3274,59 @@ Nested Ternary
 ##############
 
 
-Ternary operators ($a == 1 ? $b : $c) are a convenient instruction to apply some condition, and avoid a if() structure when it is simple (like in a one liner). 
+Ternary operators `?...:` are a convenient instruction to apply some condition, and avoid a if() structure. It works best when it is simple, like in a one liner. 
 
 However, ternary operators tends to make the syntax very difficult to read when they are nested. It is then recommended to use an if() structure, and make the whole code readable.
+
+.. code-block:: php
+
+   <?php
+   
+   // Simple ternary expression
+   echo ($a == 1 ? $b : $c) ;
+   
+   // Nested ternary expressions
+   echo ($a === 1 ? $d === 2 ? $b : $d : $d === 3 ? $e : $c) ;
+   echo ($a === 1 ? $d === 2 ? $f ===4 ? $g : $h : $d : $d === 3 ? $e : $i === 5 ? $j : $k) ;
+   
+   //Previous expressions, written as a if / Then expression
+   if ($a === 1) {
+       if ($d === 2) {
+           echo $b;
+       } else {
+           echo $d;
+       }
+   } else {
+       if ($d === 3) {
+           echo $e;
+       } else {
+           echo $c;
+       }
+   }
+   
+   if ($a === 1) {
+       if ($d === 2) {
+           if ($f === 4) {
+               echo $g;
+           } else {
+               echo $h;
+           }
+       } else {
+           echo $d;
+       }
+   } else {
+       if ($d === 3) {
+           echo $e;
+       } else {
+           if ($i === 5) {
+               echo $j;
+           } else {
+               echo $k;
+           }
+       }
+   }
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------+
 | Command Line | Structures/NestedTernary                                                                          |
@@ -3693,7 +3830,7 @@ method statically :
    <?php
        class x {
            static public function sm( ) { echo \_\_METHOD\_\_.\n; }
-           public sm( ) { echo \_\_METHOD\_\_.\n; }
+           public public sm( ) { echo \_\_METHOD\_\_.\n; }
        } 
        
        x::sm( ); // echo x::sm 
@@ -3704,8 +3841,21 @@ It is a bad idea to call non-static method statically. Such method may make use 
 variable $this, which will be undefined. PHP will not check those calls at compile time,
 nor at running time. 
 
-It is recommended to fix this situation : make the method actually static, or use it only 
+It is recommended to update this situation : make the method actually static, or use it only 
 in object context.
+
+Note that this analysis reports all static method call made on a non-static method,
+even within the same class or class hierarchy. PHP silently accepts static call to any
+in-family method.
+
+.. code-block:: php
+
+   <?php
+       class x {
+           public function foo( ) { self::bar() }
+           public function bar( ) { echo \_\_METHOD\_\_.\n; }
+       } 
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------+
 | Command Line | Classes/NonStaticMethodsCalledStatic                                                            |
@@ -5096,8 +5246,9 @@ Should Be Single Quote
 ######################
 
 
-Static content inside a string, that has no single quotes nor escape sequence (such as \n or \t),
- should be using single quote delimiter, instead of double quote. 
+Static content inside a string, that has no single quotes nor escape sequence (such as \n or \t), should be using single quote delimiter, instead of double quote. 
+
+
 
 If you have too many of them, don't loose your time switching them all. If you have a few of them, it may be good for consistence.
 
@@ -6125,7 +6276,35 @@ Unset In Foreach
 ################
 
 
-Unset applied to the variables of a foreach loop are useless, as they are mere copies and not the actual value. Even if the value is a reference, unsetting it will not have effect on the original array.
+Unset applied to the variables of a foreach loop are useless, as they are copies and not the actual value. Even if the value is a reference, unsetting it will not have effect on the original array : the only effect may be on values inside an array, or on properties inside an object.
+
+.. code-block:: php
+
+   <?php
+   
+   // When unset is useless
+   $array = [1, 2, 3];
+   foreach($array as $a) {
+       unset($a);
+   }
+   
+   print\_r($array); // still [1, 2, 3]
+   
+   foreach($array as $b => &$a) {
+       unset($a);
+   }
+   
+   print\_r($array); // still [1, 2, 3]
+   
+   // When unset is useful
+   $array = [ [ 'c' => 1] ]; // Array in array
+   foreach($array as &$a) {
+       unset(&$a['c']);
+   }
+   
+   print\_r($array); // now [ ['c' => null] ]
+   
+   ?>
 
 +--------------+----------------------------------------------+
 | Command Line | Structures/UnsetInForeach                    |
@@ -6875,9 +7054,15 @@ Useless Instructions
 ####################
 
 
-The instructions below are useless. For example, running '&lt;?php 1 + 1; ?&gt;' will do nothing, as the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
+The instructions below are useless, or contains useless parts. For example, running '&lt;?php 1 + 1; ?&gt;' does nothing : the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
 
-The first level of the spotted instructions may be removed safely. For example, the analyzer will spot : '1 + $a++'; as a useless instruction. The addition is useless, but the plusplus is not.
+Here the useless instructions that are spotted : 
+
+\* Empty string in a concatenation
+\* Returning expression, whose result is not used (additions, comparisons, properties, closures, new without =, ...)
+\* Returning $a++;
+\* array\_merge() with only one argument
+\* @ operator on source array, in foreach, or when assigning literals
 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/UselessInstruction                                                                               |
@@ -7050,9 +7235,9 @@ Using $this Outside A Class
 ###########################
 
 
-$this is a special variable, that may only be used in a class context. 
+`$this` is a special variable, that should only be used in a class context. 
 
-$this may be used as an argument in a function (or a method) : while this is legit, it sounds confusing enough to avoid this.
+`$this` may be used as an argument in a function (or a method) : while this is legit, it sounds confusing enough to avoid it.
 
 +--------------+--------------------------------+
 | Command Line | Classes/UsingThisOutsideAClass |

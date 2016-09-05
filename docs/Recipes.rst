@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 29 Aug 2016 09:54:35 +0000
-.. comment: Generation hash : 04a6925cc2f4587a3bdb39f44312b105a0a20b83
+.. comment: Generation date : Mon, 05 Sep 2016 17:13:53 +0000
+.. comment: Generation hash : 2c60073554df183f05928821f43b80094992c440
 
 
 .. _analyze:
@@ -356,7 +356,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 50 analysis
+Total : 51 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -382,6 +382,7 @@ Total : 50 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Methodcall On New <methodcall-on-new>`
 * :ref:`Mixed Keys <mixed-keys>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.4 <new-functions-in-php-5.4>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
@@ -414,7 +415,7 @@ Total : 50 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 45 analysis
+Total : 46 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -438,6 +439,7 @@ Total : 45 analysis
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Mixed Keys <mixed-keys>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`No List With String <no-list-with-string>`
@@ -467,7 +469,7 @@ Total : 45 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 41 analysis
+Total : 42 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -485,6 +487,7 @@ Total : 41 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Null On New <null-on-new>`
@@ -516,7 +519,7 @@ Total : 41 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 33 analysis
+Total : 34 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -529,6 +532,7 @@ Total : 33 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Null On New <null-on-new>`
@@ -557,7 +561,7 @@ Total : 33 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 32 analysis
+Total : 33 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -572,6 +576,7 @@ Total : 32 analysis
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
