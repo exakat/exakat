@@ -1,4 +1,4 @@
-Version 0.7.10 (Nine Headed Bug, Coming up)
+Version 0.8.0 (Benbo'erba, Coming up)
 + Architecture
     +
 + Report
@@ -8,6 +8,21 @@ Version 0.7.10 (Nine Headed Bug, Coming up)
 + Tokenizer
     + 
 
+Version 0.7.10 (Nine Headed Bug, Coming up)
++ Architecture
+    + Added optional dependency to mbstring in Doctor
+    + 
++ Analyzer
+    + Added analysers for PHP 7.1 features
+    + Upgraded analysis : 1377 / 1510 test pass (91% pass). 
++ Tokenizer
+    + Removed parasit 'void' added in sequences.
+    + Raised export max depth to 15. 
+    + Fixed FQN for new without parenthesis
+    + Fixed support for PHP 5.5/5.6. 
+    + Added support for iterable
+    + Checked support for extensions and ignore dirs 
+
 Version 0.7.9 (Wansheng Princess, 2016-08-29)
 + Architecture
     + Added several features at Loading time : mark global variables in $GLOBALS,
@@ -15,7 +30,7 @@ Version 0.7.9 (Wansheng Princess, 2016-08-29)
 + Analyzer
     + Added analysis for impossible comparisons (count($a) < or >= 0)
     + Added analysis for PHP 7.1 : removed directives, added functions
-    + Upgraded analysis : 1377 / 1510 test pass (91% pass). 
+    + Upgraded analysis : 1485 / 1522 test pass (97.5% pass). 
 + Tokenizer
     + Fixed edge case with <?= $v;
     + Fixed priorities between include and .
