@@ -1,13 +1,3 @@
 [
-Label : INDEX
-  [
-  Label : INDEX
-    'e'
-  Label : VARIABLE
-    $d
-Label : VARIABLE
-  ::
-  Label : CLASS
-    b
-  Label : PROPERTY
-    $c
+Label : ARGUMENT
+  'e'

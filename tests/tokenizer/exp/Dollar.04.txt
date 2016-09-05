@@ -1,0 +1,16 @@
+./tests/tokenizer/source/Dollar.04.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        $
+        Label : NAME
+          $a
+      Label : ELEMENT
+        $
+        Label : NAME
+          Void

@@ -1,16 +1,16 @@
 (
 Label : ARGUMENT
-  $a
+  Void
 Label : ARGUMENT
   ->
   Label : OBJECT
-    $this
+    Void
   Label : PROPERTY
     {
     Label : INDEX
       ->
       Label : OBJECT
-        $this
+        Void
       Label : PROPERTY
         B
     Label : VARIABLE

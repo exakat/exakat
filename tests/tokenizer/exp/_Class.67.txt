@@ -3,7 +3,7 @@ Label : ARGUMENT
   ::
   Label : CLASS
     B
-  Label : CONSTANT
+  Label : CLASS
     class
 Label : ARGUMENT
   2

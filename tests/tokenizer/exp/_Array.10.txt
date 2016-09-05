@@ -1,5 +1,5 @@
-+
-Label : LEFT
-  $b
-Label : RIGHT
+[
+Label : ARGUMENT
   1
+  Label : CODE
+    +1

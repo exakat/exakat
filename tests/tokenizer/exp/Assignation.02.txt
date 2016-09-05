@@ -2,8 +2,4 @@
 Label : LEFT
   $x
 Label : RIGHT
-  .
-  Label : CONCAT
-    '1'
-  Label : CONCAT
-    "2"
+  Void

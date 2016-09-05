@@ -20,27 +20,7 @@ Label : ARGUMENT
     Label : NAME
       F
   Label : ELSE
-    H
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        'I'
-      Label : ARGUMENT
-        'J'
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          K
-        Label : METHOD
-          L
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            L
-    Label : NAME
-      H
+    Void
   Label : THEN
     G
     Label : ARGUMENTS

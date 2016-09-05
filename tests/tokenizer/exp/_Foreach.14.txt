@@ -17,5 +17,3 @@ Label : FILE
           $a
         Label : VALUE
           $y
-      Label : ELEMENT
-        Void

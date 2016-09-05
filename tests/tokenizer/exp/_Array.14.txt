@@ -4,7 +4,7 @@ Label : LEFT
   Label : ARGUMENTS
     (
     Label : ARGUMENT
-      $aa
+      Void
   Label : NAME
     strlen
 Label : RIGHT

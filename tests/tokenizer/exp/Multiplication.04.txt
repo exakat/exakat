@@ -6,8 +6,4 @@ Label : LEFT
   Label : RIGHT
     2
 Label : RIGHT
-  *
-  Label : LEFT
-    3
-  Label : RIGHT
-    4
+  Void

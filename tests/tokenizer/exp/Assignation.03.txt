@@ -2,6 +2,4 @@
 Label : LEFT
   $x
 Label : RIGHT
-  !
-  Label : NOT
-    2
+  Void

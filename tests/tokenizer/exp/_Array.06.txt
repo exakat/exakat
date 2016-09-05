@@ -1,5 +1,3 @@
 [
-Label : INDEX
+Label : ARGUMENT
   2
-Label : VARIABLE
-  $y

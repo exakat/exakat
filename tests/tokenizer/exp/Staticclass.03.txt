@@ -3,5 +3,5 @@ Label : ARGUMENT
   ::
   Label : CLASS
     inGlobalScope
-  Label : CONSTANT
+  Label : CLASS
     class

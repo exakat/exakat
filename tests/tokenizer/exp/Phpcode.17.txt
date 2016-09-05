@@ -1,11 +1,3 @@
 <?=
 Label : ARGUMENT
-  'c'
-  Label : CODE
-    ?
-    Label : CONDITION
-      $a
-    Label : ELSE
-      'c'
-    Label : THEN
-      'b'
+  Void

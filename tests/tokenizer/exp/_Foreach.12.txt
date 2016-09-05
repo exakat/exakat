@@ -18,5 +18,3 @@ Label : FILE
             $array
         Label : VALUE
           $e
-      Label : ELEMENT
-        Void

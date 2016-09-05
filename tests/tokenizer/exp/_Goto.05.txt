@@ -14,5 +14,3 @@ Label : FILE
         :
         Label : LABEL
           cleanupCookie
-      Label : ELEMENT
-        Void

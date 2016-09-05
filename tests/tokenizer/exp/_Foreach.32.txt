@@ -1,22 +1,3 @@
 echo
 Label : ARGUMENT
-  ->
-  Label : METHOD
-    escape
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        ->
-        Label : METHOD
-          slug
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            slug
-        Label : OBJECT
-          $tpl
-    Label : NAME
-      escape
-  Label : OBJECT
-    $tpl
+  Void

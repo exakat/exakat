@@ -13,11 +13,7 @@ Label : FILE
         Label : THEN
           ;
           Label : ELEMENT
-            Void
-          Label : ELEMENT
             a
-          Label : ELEMENT
-            Void
           Label : ELEMENT
             C
       Label : ELEMENT

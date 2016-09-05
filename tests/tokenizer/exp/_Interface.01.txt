@@ -14,5 +14,3 @@ Label : FILE
             Void
         Label : NAME
           a
-      Label : ELEMENT
-        Void

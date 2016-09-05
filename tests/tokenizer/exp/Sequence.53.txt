@@ -24,5 +24,3 @@ Label : FILE
           {}
           Label : ELEMENT
             $d
-      Label : ELEMENT
-        Void

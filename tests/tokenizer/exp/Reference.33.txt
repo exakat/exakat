@@ -19,5 +19,3 @@ Label : FILE
           {}
           Label : ELEMENT
             Void
-      Label : ELEMENT
-        Void

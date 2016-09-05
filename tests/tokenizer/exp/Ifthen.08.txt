@@ -26,5 +26,3 @@ Label : FILE
           {}
           Label : ELEMENT
             $a
-      Label : ELEMENT
-        Void

@@ -2,6 +2,4 @@
 Label : LEFT
   1
 Label : RIGHT
-  1
-  Label : CODE
-    1
+  Void

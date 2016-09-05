@@ -16,15 +16,11 @@ Label : FILE
           Label : ELSE
             ;
             Label : ELEMENT
-123098120398 [label="Reached level 15"]            Label : ELEMENT
 123098120398 [label="Reached level 15"]          Label : THEN
             ;
             Label : ELEMENT
-123098120398 [label="Reached level 15"]            Label : ELEMENT
 123098120398 [label="Reached level 15"]        Label : THEN
           ;
-          Label : ELEMENT
-            Void
           Label : ELEMENT
             A
       Label : ELEMENT

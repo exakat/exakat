@@ -7,10 +7,12 @@ Label : FILE
     Label : CODE
       ;
       Label : ELEMENT
+        !
+        Label : NOT
+          2
+      Label : ELEMENT
         **
         Label : LEFT
           1
         Label : RIGHT
-          !
-          Label : NOT
-            2
+          Void

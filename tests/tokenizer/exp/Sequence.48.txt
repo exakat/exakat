@@ -1,11 +1,3 @@
 )
 Label : ARGUMENT
-  a
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'b'
-    Label : ARGUMENT
-      "c"
-  Label : NAME
-    a
+  Void

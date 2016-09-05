@@ -9,10 +9,12 @@ Label : FILE
       Label : ELEMENT
         *
         Label : LEFT
+          2
+        Label : RIGHT
+          3
+      Label : ELEMENT
+        *
+        Label : LEFT
           1
         Label : RIGHT
-          *
-          Label : LEFT
-            2
-          Label : RIGHT
-            3
+          Void

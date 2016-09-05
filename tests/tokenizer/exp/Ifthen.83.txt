@@ -46,5 +46,4 @@ Label : FILE
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]      Label : ELEMENT
-        Void
+123098120398 [label="Reached level 15"]

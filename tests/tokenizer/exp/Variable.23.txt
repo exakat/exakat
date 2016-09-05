@@ -1,5 +1,12 @@
-{
-Label : INDEX
-  "c"
-Label : VARIABLE
-  $b
+./tests/tokenizer/source/Variable.23.php
+Label : FILE
+  ;
+  Label : ELEMENT
+    <?php
+
+    Label : CODE
+      ;
+      Label : ELEMENT
+        $b
+      Label : ELEMENT
+        {}

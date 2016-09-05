@@ -1,5 +1,3 @@
 echo
 Label : ARGUMENT
-  -
-  Label : SIGN
-    true
+  Void

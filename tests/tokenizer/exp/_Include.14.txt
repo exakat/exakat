@@ -1,5 +1,3 @@
 )
 Label : ARGUMENT
-  'a.php'
-  Label : CODE
-    'a.php'
+  Void

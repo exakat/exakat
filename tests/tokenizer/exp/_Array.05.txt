@@ -1,5 +1,3 @@
 [
-Label : INDEX
+Label : ARGUMENT
   'a'
-Label : VARIABLE
-  $_array
