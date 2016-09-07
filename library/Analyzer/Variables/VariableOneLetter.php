@@ -31,17 +31,29 @@ class VariableOneLetter extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // Normal variables
         $this->atomIs('Variable')
+             ->tokenIs('T_VARIABLE')
              ->analyzerIs('Variables/Variablenames')
              ->fullcodeLength(' == 2 ');
         $this->prepareQuery();
+
+        // ${variables}
+        $this->atomIs('Variable')
+             ->tokenIs(array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES'))
+             ->analyzerIs('Variables/Variablenames')
+             ->fullcodeLength(' == 4 ')
+             ;
+        $this->prepareQuery();
         
+        // {$variables}
         $this->atomIs('Variable')
              ->tokenIs('T_DOLLAR')
              ->analyzerIs('Variables/Variablenames')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
-             ->fullcodeLength(' == 1 ');
+             ->fullcodeLength(' == 1 ')
+             ;
         $this->prepareQuery();
     }
 }
