@@ -3382,14 +3382,16 @@ class Load extends Tasks {
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } else {
-            $right = $this->processNextAsIdentifier();
-
-            if ($this->atoms[$right]['token'] === 'T_VARIABLE') {
-                $this->setAtom($right, ['atom' => 'Variable']);
+            if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+                ++$this->id;
+                $this->processSingle('Variable');
+                $right = $this->popExpression();
+            } else {
+                $right = $this->processNextAsIdentifier();
             }
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
                 $this->pushExpression($right);
-                $right = $this->processFCOA($right);
+                $right = $this->processBracket(false);
                 $this->popExpression();
             }
         }
@@ -3485,7 +3487,13 @@ class Load extends Tasks {
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } else {
-            $right = $this->processNextAsIdentifier();
+            if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+                ++$this->id;
+                $this->processSingle('Variable');
+                $right = $this->popExpression();
+            } else {
+                $right = $this->processNextAsIdentifier();
+            }
             if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
                 $this->pushExpression($right);
                 $right = $this->processBracket(false);
