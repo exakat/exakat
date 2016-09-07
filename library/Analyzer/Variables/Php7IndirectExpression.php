@@ -30,18 +30,33 @@ class Php7IndirectExpression extends Analyzer\Analyzer {
     
     public function analyze() {
 //$$foo['bar']['baz']	${$foo['bar']['baz']}	($$foo)['bar']['baz']
-        $this->atomIs('Array')
-             ->hasNoIn('VARIABLE')
-             ->outIsIE('VARIABLE')
-             ->atomIs('Variable')
+        $this->atomIs('Variable')
              ->tokenIs('T_DOLLAR')
+             ->outIs('NAME')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Array')
              ->back('first');
         $this->prepareQuery();
 
 //$foo->$bar['baz']	$foo->{$bar['baz']}	($foo->$bar)['baz']
-        $this->atomIs('Array')
+        $this->atomIs('Property')
+             ->hasNoIn('NAME')
+             ->outIs('PROPERTY')
+             ->atomIs('Array')
              ->outIs('VARIABLE')
+             ->atomIs('Variable')
+             ->back('first');
+        $this->prepareQuery();
+
+//Foo::$bar['baz'](); 
+        $this->atomIs('Functioncall')
+             ->outIs('NAME')
              ->atomIs(array('Property', 'Staticproperty'))
+             ->outIs('PROPERTY')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
     }
