@@ -94,12 +94,9 @@ class Files extends Tasks {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[] = $file;
-            } else {
-                // Check for compilation
-                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
-                    unset($files[$id]);
-                    $ignoredFiles[] = $file;
-                }
+            } elseif ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
+                unset($files[$id]);
+                $ignoredFiles[] = $file;
             }
         }
 

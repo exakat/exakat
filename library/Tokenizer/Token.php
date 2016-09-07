@@ -28,7 +28,7 @@ abstract class Token {
     
     const LINKS = array('ABSTRACT', 'APPEND', 'ARGUMENT', 'ARGUMENTS', 'AS', 'AT', 'BLOCK', 'BREAK', 'CASE', 'CASES', 'CAST', 'CATCH', 'CLASS', 'CLONE', 'CODE', 'CONCAT', 'CONDITION', 'CONST', 'CONSTANT', 'CONTINUE', 'DECLARE', 'DEFAULT', 'ELEMENT', 'ELSE', 'EXTENDS', 'FILE', 'FINAL', 'FINALLY', 'FUNCTION', 'GLOBAL', 'GOTO', 'GROUPUSE', 'IMPLEMENTS', 'INCREMENT', 'INDEX', 'INIT', 'KEY', 'LABEL', 'LEFT', 'METHOD', 'NAME', 'NEW', 'NOT', 'OBJECT', 'PPP', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'PRIVATE', 'PROJECT', 'PROPERTY', 'PROTECTED', 'PUBLIC', 'RETURN', 'RETURNTYPE', 'RIGHT', 'SIGN', 'SOURCE', 'STATIC', 'SUBNAME', 'THEN', 'THROW', 'TYPEHINT', 'USE', 'VALUE', 'VAR', 'VARIABLE', 'YIELD');
     
-    static function linksAsList() {
+    static public function linksAsList() {
         return '"'.join('", "', \Tokenizer\Token::LINKS).'"';
     }
 }
