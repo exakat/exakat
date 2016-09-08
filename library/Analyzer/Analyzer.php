@@ -489,15 +489,19 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIs($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = str_replace('\\', '\\\\', self::getClass($analyzer));
+                $a = str_replace('\\', '\\\\', self::getClass($a));
             }
             unset($a);
-        } elseif ($analyzer == 'self') {
-            $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within('.$this->SorA($analyzer).')).count().is(neq(0)) )');
         } else {
-            $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
+            if ($analyzer == 'self') {
+                $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+            } else {
+                $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
+            }
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(neq(0)) )');
         }
-        $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(neq(0)) )');
 
         return $this;
     }
@@ -505,16 +509,20 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = str_replace('\\', '\\\\', self::getClass($analyzer));
+                $a = str_replace('\\', '\\\\', self::getClass($a));
             }
             unset($a);
-        } elseif ($analyzer == 'self') {
-            $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        } else {
-            $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
-        }
-        $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(eq(0)) )');
 
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within('.$this->SorA($analyzer).')).count().is(eq(0)) )');
+        } else{ 
+            if ($analyzer == 'self') {
+                $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+            } else {
+                $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
+            }
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(eq(0)) )');
+        }
+        
         return $this;
     }
 
@@ -654,52 +662,6 @@ repeat(__.in('.$linksDown.'))
         return $this;
     }
 
-    public function isPropertyIn($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property === 'line' || $property === 'rank') {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($name)) {
-            $this->addMethod('filter{ it.'.$property.$caseSensitive.' in *** }', $name);
-        } else {
-            $this->addMethod('filter{ it.'.$property.$caseSensitive.' != *** }', $name);
-        }
-    
-        return $this;
-    }
-
-    public function isPropertyNotIn($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
-
-        // Array, is a list of literal
-        if (is_array($name)) {
-            $this->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in *** )}', $name);
-        } else {
-        // String, is a variable name
-            $this->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in '.$name.' )}');
-        }
-    
-        return $this;
-    }
-    
-    public function sameContextAs($storage = 'context', $context = array('Namespace', 'Class', 'Function')) {
-        foreach($context as &$c) {
-            $c = $storage.'["'.$c.'"] == '.$context.'["'.$c.'"] ';
-        }
-        unset($c);
-        $context = join(' && ', $context);
-        
-        $this->addMethod('filter{ '.$context.' }');
-
-        return $this;
-    }
-    
     public function saveArglistAs($name) {
         // Calculate the arglist, normalized it, then put it in a variable
         // This needs to be in Arguments, (both Functioncall or Function)
@@ -727,40 +689,6 @@ GREMLIN
         return $this;
     }
 
-    public function isGrandParent() {
-        $this->addMethod('filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("EXTENDS")
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() }');
-
-        return $this;
-    }
-
-    public function isNotGrandParent() {
-        $this->addMethod('filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("EXTENDS")
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() == false}');
-
-        return $this;
-    }
-
-    public function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        $trim = addslashes($trim);
-        if (is_array($code)) {
-            $this->addMethod('filter{it.get().value("fullcode")'.$caseSensitive.'.replaceFirst("^['.$trim.']?(.*?)['.$trim.']?\\$", "\\$1") in ***}', $code);
-        } else {
-            $this->addMethod('filter{it.get().value("fullcode")'.$caseSensitive.'.replaceFirst("^['.$trim.']?(.*?)['.$trim.']?\\\$", "\\$1") == ***}', $code);
-        }
-        
-        return $this;
-    }
-    
     public function fullcodeIs($code, $caseSensitive = false) {
         $this->propertyIs('fullcode', $code, $caseSensitive);
         
