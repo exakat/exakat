@@ -39,7 +39,7 @@ class Constantnames extends Analyzer\Analyzer {
         $this->atomIs('Const')
              ->hasNoClassInterface()
              ->outIs('CONST')
-             ->outIs('LEFT');
+             ->outIs('NAME');
         $this->prepareQuery();
     }
 }
