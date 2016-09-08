@@ -27,9 +27,21 @@ use Analyzer;
 
 class GlobalCodeOnly extends Analyzer\Analyzer {
     public function analyze() {
+        $definitionsFunctionsList = "\"\\\\".join("\", \"\\\\", DefinitionsOnly::$definitionsFunctions)."\"";
+        $definitionsList = "\"".join("\", \"", DefinitionsOnly::$definitions)."\"";
+
+        // one or several namespaces
         $this->atomIs('File')
-             ->noAtomInside(DefinitionsOnly::$definitions)
-             ->back('first');
+             ->outIs('FILE')
+             ->outIs('ELEMENT')
+             ->outIs('CODE')
+             ->raw('coalesce( __.out("ELEMENT").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
+             ->raw('where(__.out("ELEMENT").hasLabel('.$definitionsList.').count().is(eq(0)) )')
+             ->raw('where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )')
+             ->raw('where( __.in("ANALYZED").not(has("analyzer", "Analyzer\\\\\\\\Structures\\\\\\\\NoDirectAccess") ).count().is(eq(0)) )')
+             ->raw('where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in [$definitionsFunctionsList] }.count().is(eq(0)) )')
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
