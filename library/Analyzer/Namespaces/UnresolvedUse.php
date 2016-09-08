@@ -36,16 +36,14 @@ class UnresolvedUse extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Use')
+             ->hasNoClassTrait()
              ->outIs('USE')
-             ->noClassDefinition()
-//             ->noNamespaceDefinition()
-             ->noInterfaceDefinition()
-             ->noTraitDefinition()
-             ->analyzerIsNot('Classes/IsExtClass')
-             ->analyzerIsNot('Interfaces/IsExtInterface')
-             ->analyzerIsNot('Traits/IsExtTrait')
-             ->analyzerIsNot('Composer/IsComposerNsname')
-             ->analyzerIsNot('Namespaces/GlobalImport');
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->analyzerIsNot(array('Classes/IsExtClass'))
+             ->raw('where( g.V().hasLabel("Class").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
+             ->raw('where( g.V().hasLabel("Interface").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
+             ->raw('where( g.V().hasLabel("Trait").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
+             ->raw('where( g.V().hasLabel("Namespace").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )');
         $this->prepareQuery();
     }
 }
