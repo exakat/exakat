@@ -81,7 +81,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')
              theNamespace='None'; 
              }
 .sideEffect{ line = it.get().value('line'); }
-.until( hasLabel('File') ).emit().repeat( 
+.until( hasLabel('Project') ).repeat( 
     __.in($linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
