@@ -28,9 +28,28 @@ use Analyzer;
 class ConstantComparisonConsistance extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Comparison')
-             ->groupFilter('if (it.out("LEFT").next().atom in ["Integer", "Float", "String", "Boolean", "Null"]) { x2 = "left"; } else { x2 = "right"; }',
-                            10 / 100);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Comparison").out("LEFT").map{ if (it.get().label() in ["Integer", "Float", "String", "Boolean", "Null"]) { 
+                x2 = "left"; 
+            } else { 
+                x2 = "right"; 
+            }; }.groupCount("gf").cap("gf")
+            .sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * 0.1; }.keySet()
+GREMLIN;
+        
+       $types = $this->query($query);
+       $types = $types[0];
+
+       $this->atomIs('Comparison')
+            ->outIs('LEFT')
+            ->raw('sideEffect{ if (it.get().label() in ["Integer", "Float", "String", "Boolean", "Null"]) { 
+                x2 = "left"; 
+            } else { 
+                x2 = "right"; 
+            } }')
+             ->raw('filter{ x2 == "'.$types.'"}')
+             ->back('first');
         $this->prepareQuery();
     }
 }
