@@ -31,30 +31,31 @@ class CouldBeStatic extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+
         $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->savePropertyAs('code', 'theGlobal')
              ->goToFunction()
              ->outIs('NAME')
              ->savePropertyAs('code', 'theFunction')
+             
+             // This global is only in the current function
+             ->raw('where( g.V().hasLabel("Global").out("GLOBAL").filter{ it.get().value("code") == theGlobal }
+                             .repeat(__.in()).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))
+                             .out("NAME").filter{ it.get().value("code") != theFunction }.count().is(eq(0)) 
+                             )')
 
-             // this variable is both in the current function and another
-             ->filter('g.idx("atoms")[["atom":"Global"]].out("GLOBAL").has("code", theGlobal)
-                        .in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}
-                           .filter{ it.out("NAME").has("code", theFunction).any() == false}
-                        .any() == false')
+             // This global is only in the current function
+             ->raw('where( g.V().hasLabel("Variable").has("code", "\\$GLOBALS").in("VARIABLE").hasLabel("Array")
+                                .out("INDEX").hasLabel("String").filter{ it.get().value("globalvar") == theGlobal }
+                                .count().is(eq(0)) 
+                             )')
 
-             // this variable is both in the current function and the global space
-             ->filter('g.idx("atoms")[["atom":"Global"]].out("GLOBAL").has("code", theGlobal)
-                        .in.loop(1){!(it.object.atom in ["Function", "File"])}{it.object.atom == "File"}
-                        .any() == false')
-             // this variable is both in the current function and the global space (implicitely)
-             ->filter('g.idx("analyzers")[["analyzer":"Analyzer\\\\Structures\\\\GlobalInGlobal"]].out.has("code", theGlobal).any() == false')
-
-             // this variable is both in the current function and another via $GLOBALS
-             ->filter('g.idx("atoms")[["atom":"Array"]].filter{ it.out("VARIABLE").has("code", "\$GLOBALS").any()}
-                         .out("INDEX").filter{ "\$" + it.noDelimiter == theGlobal}.any() == false')
-            // todo : add check on function to avoid itself.
+             // This global is only in the current function
+             ->raw('where( g.V().hasLabel("Variable").filter{ it.get().value("code") == theGlobal }
+                             .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Structures\\\\GlobalInGlobal").count().is(neq(0)) )
+                             .count().is(eq(0)) 
+                             )')
              ->back('first');
         $this->prepareQuery();
     }
