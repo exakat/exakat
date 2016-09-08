@@ -3392,7 +3392,11 @@ class Load extends Tasks {
                 $right = $this->processNextAsIdentifier();
             }
 
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+                $this->pushExpression($right);
+                $right = $this->processFunctioncall();
+                $this->popExpression();
+            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
                 $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
                 $this->pushExpression($right);
                 $right = $this->processAppend(false);
@@ -3505,7 +3509,11 @@ class Load extends Tasks {
                 $right = $this->processNextAsIdentifier();
             }
 
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+                $this->pushExpression($right);
+                $right = $this->processFunctioncall();
+                $this->popExpression();
+            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
                 $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
                 $this->pushExpression($right);
                 $right = $this->processAppend(false);

@@ -2,7 +2,7 @@
 
 $expected     = array('A::nonStaticMethod( )',
                       'self::nonStaticMethod( )',
-                      'self::nonStaticMethod( )');
+                      'static::nonStaticMethod( )');
 
 $expected_not = array('parent::nonStaticMethod( )',
                       'parent::staticMethod( )',
