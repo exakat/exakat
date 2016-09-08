@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('function a_ko(X $a) { /**/ } ',
-                      'function a_ko2(\X $a) { /**/ } ');
+$expected     = array('\X $a', 
+                      'X $a');
 
-$expected_not = array('function a_ko(x $a) { /**/ } ',
-                      'function a_ko2(\x $a) { /**/ } ');
+$expected_not = array('x $a',
+                      '\x $a');
 
 ?>
