@@ -27,10 +27,10 @@ use Analyzer;
 
 class Continents extends Analyzer\Analyzer {
     public function analyze() {
-        $ini = $this->loadIni('Continents_en.ini');
+        $ini = $this->loadIni('Continents_en.ini', 'continents_en');
         
         $this->atomIs('String')
-             ->fullcodeTrimmed(array_values($ini['continents_en']));
+             ->noDelimiterIs($ini);
         $this->prepareQuery();
     }
 }
