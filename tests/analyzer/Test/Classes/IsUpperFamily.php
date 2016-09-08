@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_IsUpperFamily extends Analyzer {
-    /* 6 methods */
+    /* 8 methods */
 
     public function testClasses_IsUpperFamily01()  { $this->generic_test('Classes/IsUpperFamily.01'); }
     public function testClasses_IsUpperFamily02()  { $this->generic_test('Classes/IsUpperFamily.02'); }
@@ -16,5 +16,7 @@ class Classes_IsUpperFamily extends Analyzer {
     public function testClasses_IsUpperFamily04()  { $this->generic_test('Classes/IsUpperFamily.04'); }
     public function testClasses_IsUpperFamily05()  { $this->generic_test('Classes/IsUpperFamily.05'); }
     public function testClasses_IsUpperFamily06()  { $this->generic_test('Classes/IsUpperFamily.06'); }
+    public function testClasses_IsUpperFamily07()  { $this->generic_test('Classes/IsUpperFamily.07'); }
+    public function testClasses_IsUpperFamily08()  { $this->generic_test('Classes/IsUpperFamily.08'); }
 }
 ?>
