@@ -228,7 +228,6 @@ class Load extends Tasks {
                                     'fullcode' => 'Whole',
                                     'line'     => -1,
                                     'token'    => 'T_WHOLE']);
-
         
         if (static::$client === null) {
             static::$client = new \Loader\CypherG3();
@@ -296,8 +295,7 @@ class Load extends Tasks {
         $res = trim(shell_exec($shell));
         $files = explode("\n", $res);
 
-        $this->atoms = array();
-        $this->atomCount = 0;
+        $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
         $this->links = array();
 
         $nbTokens = 0;
@@ -1856,7 +1854,11 @@ class Load extends Tasks {
 
         // Skip opening bracket
         $opening = $this->tokens[$this->id + 1][0];
-        $opening === '{' ? $closing = '}' : $closing = ']';
+        if ($opening === '{') {
+            $closing = '}';
+        } else {
+            $closing = ']';
+        }
          
         ++$this->id;
         do {
@@ -3389,11 +3391,19 @@ class Load extends Tasks {
             } else {
                 $right = $this->processNextAsIdentifier();
             }
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
+
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
+                $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
                 $this->pushExpression($right);
-                $right = $this->processBracket(false);
+                $right = $this->processAppend(false);
                 $this->popExpression();
-            }
+            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
+                      $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+                 $this->pushExpression($right);
+                 $right = $this->processBracket(false);
+                 $this->popExpression();
+            }        
+
         }
         $this->exitContext();
 
@@ -3494,10 +3504,17 @@ class Load extends Tasks {
             } else {
                 $right = $this->processNextAsIdentifier();
             }
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
+
+            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
+                $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
                 $this->pushExpression($right);
-                $right = $this->processBracket(false);
+                $right = $this->processAppend(false);
                 $this->popExpression();
+            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
+                      $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+                 $this->pushExpression($right);
+                 $right = $this->processBracket(false);
+                 $this->popExpression();
             }
         }
         $this->exitContext();
@@ -3916,7 +3933,6 @@ class Load extends Tasks {
         }
         if ($total > 0) {
             print $total." errors found\n";
-//            die();
         }
         
     }
@@ -3936,7 +3952,12 @@ class Load extends Tasks {
                 print_r($atom);
                 die();
             }
+
             $fileName = './nodes.g3.'.$atom['atom'].'.csv';
+            if ($atom['atom'] === 'Project' && file_exists($fileName)) {
+                // Project is saved only once
+                continue; 
+            }
             if (isset($extras[$atom['atom']])) {
                 $fp = fopen($fileName, 'a');
             } else {
