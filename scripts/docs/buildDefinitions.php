@@ -21,6 +21,7 @@
 */
 
 $recipes = ["Analyze",
+            "CompatibilityPHP72",
             "CompatibilityPHP71",
             "CompatibilityPHP70",
             "CompatibilityPHP56",
@@ -37,6 +38,40 @@ $recipes = ["Analyze",
 
 $text = '';
 $recipesList = '"'.join('", "', $recipes).'"';
+$glossary = array();
+$entries = array('preg\\\_replace'             => 'http://www.php.net/preg_match',
+                 'pow'                         => 'http://www.php.net/pow',
+                 'array\\\_unique'             => 'http://www.php.net/array_unique',
+                 'array\\\_count\\\_values'      => 'http://www.php.net/array_count_values',
+                 'array\\\_flip'               => 'http://www.php.net/array_flip',
+                 'array\\\_keys'               => 'http://www.php.net/array_keys',
+                 'strpos'                      => 'http://www.php.net/strpos',
+                 'stripos'                     => 'http://www.php.net/stripos',
+                 'throw'                       => 'http://www.php.net/throw',
+                 'curl\\\_share\\\_strerror'   => 'http://www.php.net/curl_share_strerror',
+                 'curl\\\_multi\\\_errno'      => 'http://www.php.net/curl_multi_errno',
+                 'curl\\\_share\\\_errno'      => 'http://www.php.net/curl_share_errno',
+
+                 'mb\\\_substr'                => 'http://www.php.net/mb_substr',
+                 'mb\\\_ord'                   => 'http://www.php.net/mb_ord',
+                 'mb\\\_chr'                   => 'http://www.php.net/mb_chr',
+                 'mb\\\_scrub'                 => 'http://www.php.net/mb_scrub',
+                 'is\\\_iterable'              => 'http://www.php.net/is_iterable',
+
+                 'switch()'                    => 'http://php.net/manual/en/control-structures.switch.php',
+                 'for()'                       => 'http://php.net/manual/en/control-structures.for.php',
+                 'foreach()'                   => 'http://php.net/manual/en/control-structures.foreach.php',
+                 'while()'                     => 'http://php.net/manual/en/control-structures.while.php',
+                 'do..while()'                 => 'http://php.net/manual/en/control-structures.do.while.php',
+
+                 '`break`'                     => 'http://php.net/manual/en/control-structures.break.php',
+                 '`continue`'                  => 'http://php.net/manual/en/control-structures.continue.php',
+                 
+                 '`**`'                        => 'http://php.net/manual/en/language.operators.arithmetic.php',
+                 '$_GET'                       => 'http://php.net/manual/en/reserved.variables.get.php',
+                 '$_POST'                      => 'http://php.net/manual/en/reserved.variables.post.php',
+
+                 );
 
 $sqlite = new \Sqlite3('data/analyzers.sqlite');
 
@@ -75,6 +110,9 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
         $a = rst_link($ini['name']);
 
         $desc = trim(rst_escape($ini['description']));
+        $ini['description'] = rst_link($ini['description']);
+        
+        $ini['description'] = glossary($ini['name'], $ini['description']);
 
         if (!empty($ini['clearphp'])) {
             $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
@@ -134,6 +172,27 @@ $rst = file_get_contents('docs/Rules.rst');
 $rst = preg_replace('/.. comment: Rules details(.*)$/is', ".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$rules", $rst);
 print file_put_contents('docs/Rules.rst', $rst)." octets written for Rules\n";
 
+$glossaryRst = <<<GLOSSARY
+.. Glossary:
+
+Glossary
+============
+
+GLOSSARY;
+ksort($glossary);
+foreach($glossary as $letter => $items) {
+    $glossaryRst .= "+ $letter\n";
+    ksort($items);
+    foreach($items as $key => $urls) {
+        ksort($urls);
+        $glossaryRst .= "    + $key\n\n";
+        $glossaryRst .= "      + ".join("\n      + ", array_keys($urls))."\n\n";
+    }
+    $glossaryRst .= "\n";
+}
+$glossaryRst .= "\n";
+print file_put_contents('docs/Glossary.rst', $glossaryRst)." octets written for Rules\n";
+
 function rst_anchor($name) {
     return str_replace(array(' ', '_', ':'), array('-', '\\_', '\\:'), strtolower($name));
 }
@@ -166,6 +225,24 @@ function rst_level($title, $level = 1) {
     $levels = array(1 => '=', 2 => '-', 3 => '#', 4 => '+');
     $escapeTitle = rst_escape($title);
     return rst_anchor_def($title).$escapeTitle."\n".str_repeat($levels[$level], strlen($escapeTitle))."\n";
+}
+
+function glossary($title, &$description) {
+    global $glossary, $entries;
+    
+    foreach($entries as $keyword => $url) {
+        $letter = strtoupper($keyword[0]);
+        if ($letter === '`') {
+            $letter = strtoupper($keyword[1]);
+        }
+        $regex = preg_quote($keyword);
+        if (preg_match('!'.$regex.'!is', $description, $r)) {
+            $glossary[$letter][$keyword][":ref:`$title <".rst_anchor($title).">`"] = 1;
+            $description = preg_replace('!'.$regex.'!is', "`$keyword <$url>`_", $description);
+        }
+    }
+
+    return $description;
 }
 
 ?>
