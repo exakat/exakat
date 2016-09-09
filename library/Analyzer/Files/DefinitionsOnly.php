@@ -29,7 +29,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     public static $definitions        = array("Trait", "Class", "Interface", "Const", "Use", "Global", "Declare", "Void", "Include");
     //'Namespace',  is excluded
 
-    public static $definitionsFunctions = array('define', 'ini_set',
+    public static $definitionsFunctions = array('define', 'ini_set', 'error_reporting', 
                                                 'register_shutdown_function', 'set_session_handler', 'set_error_handler',
                                                 'require_once', 'require', 'include', 'include_once',
                                                 'spl_autoload_register');
@@ -39,8 +39,8 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $definitionsFunctionsList = "\"\\\\".join("\", \"\\\\", self::$definitionsFunctions)."\"";
-        $definitionsList = "\"".join("\", \"", self::$definitions)."\"";
+        $definitionsFunctionsList = "\"\\\\".implode("\", \"\\\\", self::$definitionsFunctions)."\"";
+        $definitionsList = "\"".implode("\", \"", self::$definitions)."\"";
 
         // one or several namespaces
         $this->atomIs('File')
@@ -59,7 +59,6 @@ where(
       .where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in [$definitionsFunctionsList] }.count().is(eq(0)) )
       .count().is(eq(0))
 )
-
 
 GREMLIN
 )
