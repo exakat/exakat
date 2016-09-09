@@ -30,16 +30,17 @@ class EmptyList extends Analyzer\Analyzer {
     
     public function analyze() {
         // list()
-        $this->atomIs('Functioncall')
-             ->tokenIs('T_LIST')
+        $this->atomFunctionIs('\\list')
+             ->outIs('ARGUMENTS')
+             ->is('count', 1)
+             ->outIs('ARGUMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
 
         // list( , )
-        $this->atomIs('Functioncall')
-             ->tokenIs('T_LIST')
-             ->filter(' it.out("ARGUMENTS").out("ARGUMENT").hasNot("atom", "Void").any() == false');
+        $this->atomFunctionIs('\\list')
+             ->raw('where( __.out("ARGUMENTS").out("ARGUMENT").not(hasLabel("Void")).count().is(eq(0)) )');
         $this->prepareQuery();
     }
 }
