@@ -30,8 +30,7 @@ class UnresolvedUse extends Analyzer\Analyzer {
         return array('Classes/IsExtClass',
                      'Interfaces/IsExtInterface',
                      'Traits/IsExtTrait',
-                     'Composer/IsComposerNsname',
-                     'Namespaces/GlobalImport');
+                     'Composer/IsComposerNsname');
     }
 
     public function analyze() {
@@ -39,7 +38,7 @@ class UnresolvedUse extends Analyzer\Analyzer {
              ->hasNoClassTrait()
              ->outIs('USE')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->analyzerIsNot(array('Classes/IsExtClass'))
+             ->analyzerIsNot(array('Classes/IsExtClass', 'Interfaces/IsExtInterface', 'Traits/IsExtTrait', 'Composer/IsComposerNsname'))
              ->raw('where( g.V().hasLabel("Class").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
              ->raw('where( g.V().hasLabel("Interface").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
              ->raw('where( g.V().hasLabel("Trait").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
