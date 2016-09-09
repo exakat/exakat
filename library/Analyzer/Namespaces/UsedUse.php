@@ -123,8 +123,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Nsname')
              ->hasNoIn(['USE', 'NAME']) // avoid namespace and use itself.
-             ->outIs('SUBNAME')
-             ->is('rank', 0)
+             ->outWithRank('SUBNAME', 0)
              ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
