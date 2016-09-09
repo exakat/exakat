@@ -207,7 +207,7 @@ SQL
         }
         foreach($installed->packages as $package) {
             list($subVendor, $subComponent) = explode('/', $package->name);
-            if (substr($package->version, 0, 1) == 'v') {
+            if ($package->version[0] == 'v') {
                 $package->version = substr($package->version, 1);
             }
             print " + $subVendor / $subComponent ".$package->version."\n";
