@@ -43,7 +43,7 @@ GREMLIN;
             $types = $this->query(str_replace('<atom>', $atom, $query) );
 
             if (count($types) > 0) {
-                $typesList = '"'.join('", "', $types).'"';
+                $typesList = '"'.implode('", "', $types).'"';
                 $this->atomIs($atom)
                      ->raw('sideEffect{ if (it.get().value("code") == it.get().value("code").toLowerCase()) { 
                                 x2 = "lower"; 
