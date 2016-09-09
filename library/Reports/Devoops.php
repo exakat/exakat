@@ -1597,7 +1597,7 @@ TEXT
                 foreach($cves as $cve) {
                     $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
                 }
-                $cveHtml = join(', ', $cveHtml);
+                $cveHtml = implode(', ', $cveHtml);
             } else {
                 $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
             }

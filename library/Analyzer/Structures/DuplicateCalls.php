@@ -35,7 +35,7 @@ class DuplicateCalls extends Analyzer\Analyzer {
                                       .groupCount("m").by("fullcode").cap("m").next().findAll{ it.value >= 2; }');
             $calls = array_keys((array) $calls);
             
-            if (!empty($calls)) { 
+            if (!empty($calls)) {
                 $this->atomIs($atom)
                      ->hasNoIn('METHOD')
                      ->is('fullcode', $calls);

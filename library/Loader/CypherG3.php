@@ -95,7 +95,7 @@ class CypherG3 {
                     }
                 }
             }
-            $extra = join(', ', $extra);
+            $extra = implode(', ', $extra);
             if(!empty($extra)) {
                 $extra = ','. $extra;
             }

@@ -83,34 +83,6 @@ class Report2 extends Tasks {
             }
         }
 
-/*
-        That should be a configuration for the report
-        if ($config->program !== null) {
-            $analyzer = $config->program;
-            if (\Analyzer\Analyzer::getClass($analyzer)) {
-                $sqlQuery .= " WHERE analyzer='$analyzer'";
-                display( "Reporting results in analyze '$analyzer'\n");
-            } else {
-                $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
-                if (count($r) > 0) {
-                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
-                }
-                die("No such class as '$analyzer'. Aborting\n");
-            }
-        } elseif ($config->thema !== null) {
-            $thema = $config->thema;
-
-            if (!$analyzersClass = \Analyzer\Analyzer::getThemeAnalyzers($thema)) {
-                die("No such thema as '$thema'. Aborting\n");
-            }
-
-            display( "Reporting results in thema '$thema'\n");
-            $sqlQuery .= " WHERE analyzer IN ('".join("', '", $analyzersClass)."')";
-        } else {
-            display( "Reporting ALL results\n");
-        }
-        */
-
         display( 'Building report for project '.$config->project.' in file "'.$config->file.'", with format '.$config->format."\n");
         $begin = microtime(true);
         

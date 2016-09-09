@@ -67,7 +67,7 @@ class Files extends Tasks {
         if (empty($ignoreDirs)) {
             $regex = '';
         } else {
-            $regex = '#^('.join('|', $ignoreDirs).')#';
+            $regex = '#^('.implode('|', $ignoreDirs).')#';
         }
 
         $php = new \Phpexec();

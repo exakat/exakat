@@ -47,7 +47,7 @@ class Docs {
     public function getThemeAnalyzers($theme = null) {
         if (is_array($theme)) {
             $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
-            $where = 'WHERE c.name in ("'.join('", "', $theme).'")';
+            $where = 'WHERE c.name in ("'.implode('", "', $theme).'")';
         } elseif ($theme === null) {
             // Default is ALL of them
             $where = '';

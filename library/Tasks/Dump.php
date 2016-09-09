@@ -82,7 +82,7 @@ SQL;
             $toProcess = $config->thema;
         }
         foreach($toProcess as $thema) {
-            display('Processing thema : '.(is_array($thema) ? join(', ', $thema) : $thema));
+            display('Processing thema : '.(is_array($thema) ? implode(', ', $thema) : $thema));
             $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
 
             $themes[] = $themaClasses;

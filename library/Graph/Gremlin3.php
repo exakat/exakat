@@ -84,7 +84,7 @@ class Gremlin3 extends Graph {
                     }
                 } elseif (is_array($value)) {
                     $valueList = array_map(function ($x) { return str_replace(array('$', "\n", "\r"), array('\\$', "\\\n", "\\\r"), addslashes($x)); }, $value);
-                    $gremlin = "{ ['".join("','", $valueList)."'] }";
+                    $gremlin = "{ ['".implode("','", $valueList)."'] }";
                     $defName = 'a'.crc32($gremlin);
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
@@ -104,7 +104,7 @@ def $defName() {
 }
 GREMLIN;
                             file_put_contents($defFileName, $gremlin);
-                            file_put_contents($this->scriptDir.$defName.'.txt', join("\n", $value) );
+                            file_put_contents($this->scriptDir.$defName.'.txt', implode("\n", $value) );
                         } else {
                             file_put_contents($defFileName, $gremlin);
                         }
