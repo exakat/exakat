@@ -16,13 +16,13 @@ if (!file_exists('human/en/'.$analyzer.'.ini')) {
     shell_exec("git rm human/en/$analyzer.ini");
 }
 
-if (!file_exists('tests/analyzer/Test/'.str_replace('/', '_', $analyzer).'.php')) {
+if (!file_exists('tests/analyzer/Test/'.str_replace('_', '/', $analyzer).'.php')) {
     print "'$analyzer' doesn't exists in Test\n";
 } else {
-    shell_exec("git rm tests/analyzer/Test/".str_replace('/', '_', $analyzer).".php");
+    shell_exec("git rm tests/analyzer/Test/".str_replace('_', '/', $analyzer).".php");
 }
 
-$files = glob('tests/analyzer/source/'.str_replace('/', '_', $analyzer).'.*.php');
+$files = glob('tests/analyzer/source/'.str_replace('_', '/', $analyzer).'.*.php');
 if (count($files) == 0) {
     print "'$analyzer' doesn't exists in Test/source\n";
 } else {
@@ -32,7 +32,7 @@ if (count($files) == 0) {
     }
 }
 
-$files = glob('tests/analyzer/exp/'.str_replace('/', '_', $analyzer).'.*.php');
+$files = glob('tests/analyzer/exp/'.str_replace('_', '/', $analyzer).'.*.php');
 if (count($files) == 0) {
     print "'$analyzer' doesn't exists in Test/exp\n";
 } else {
@@ -53,6 +53,7 @@ if (!empty($analyzerId)) {
 
     $sqlite->query('DELETE FROM analyzers WHERE id = '.$analyzerId);
     $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer = '.$analyzerId);
+    shell_exec('git stage data/analyzers.sqlite');
 } else {
     print "Couldn't find $analyzer in analyzers table\n";
 }
