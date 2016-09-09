@@ -29,11 +29,10 @@ class UnusedUse extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Namespaces/UsedUse');
     }
-
+    
     public function analyze() {
         $this->atomIs('Use')
              ->outIs('USE')
-             ->hasNoClass()
              ->analyzerIsNot('Namespaces/UsedUse');
         $this->prepareQuery();
     }
