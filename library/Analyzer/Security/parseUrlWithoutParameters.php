@@ -29,7 +29,7 @@ class parseUrlWithoutParameters extends Analyzer\Analyzer {
     
     public function analyze() {
         // parse_str($v, $x);
-        $this->atomFunctionIs('\\parse_str')
+        $this->atomFunctionIs(array('\\parse_str', '\\mb_parse_str'))
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
