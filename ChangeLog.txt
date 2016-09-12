@@ -1,6 +1,6 @@
-Version 0.8.0 (Benbo'erba, Coming up)
+Version 0.8.1 (Babo'erben, Coming up)
 + Architecture
-    +
+    + 
 + Report
     + 
 + Analyzer
@@ -8,7 +8,21 @@ Version 0.8.0 (Benbo'erba, Coming up)
 + Tokenizer
     + 
 
-Version 0.7.10 (Nine Headed Bug, Coming up)
+Version 0.8.0 (Benbo'erba, 2016-09-12)
++ Architecture
+    + More examples in the docs
+    + Better find root in export
++ Report
+    + Prepared code for new report style
++ Analyzer
+    + New analysis : no throw in __destruct
+    + New analysis : spot empty blocks in control structures
+    + Update : Check parse_str and mb_parse_str()
+    + Upgraded analysis : 1524 / 1540 test pass (99% pass). 
++ Tokenizer
+    + Fixed representation of [] and [index] with static properties
+
+Version 0.7.10 (Nine Headed Bug, 2016-09-05)
 + Architecture
     + Added optional dependency to mbstring in Doctor
     + 
