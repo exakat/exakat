@@ -340,8 +340,10 @@ JOIN categories
 
                 if (!isset($ini['name'])) {
                     echo 'human/en/'.$row['name'].'.ini', " is not set\n";
+                } elseif (strpos($ini['description'], '<?php') === false) {
+                    echo 'human/en/'.$row['name'].'.ini', " has no example in the docs\n";
                 } else {
-                    $title = str_replace(array('PHP', 'autoload', 'const'), '', $ini['name']);  
+                    $title = str_replace(array('PHP', 'autoload', 'const', 'HTTP'), '', $ini['name']);  
                     $title = preg_replace('#__\S+#', '', $title);
                     $title = preg_replace('#\S+::#', '', $title);
                     $title = preg_replace('#\*_\S+#', '', $title);
