@@ -29,8 +29,7 @@ class DynamicPropertyCall extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Property')
              ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE')
-             ->atomIs(array('Variable', 'Array', 'Block'))
+             ->tokenIsNot('T_STRING')
              ->back('first');
         $this->prepareQuery();
 

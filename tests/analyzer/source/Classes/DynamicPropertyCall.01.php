@@ -1,7 +1,7 @@
 <?php
 
 $object->$propertyname;
-Classe::$propertyname;
+Classe::$propertyname;  // OK
 
 
 ?>
