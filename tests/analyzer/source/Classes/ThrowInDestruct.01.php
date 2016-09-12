@@ -10,6 +10,7 @@ class Bar {
     function __construct() {
         throw new Exception('__construct');
     }
+    
     function __destruct() {
         $a++;
     }
