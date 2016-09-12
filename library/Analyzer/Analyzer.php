@@ -427,13 +427,13 @@ repeat(__.in('.$linksDown.'))
     }
 
     public function tokenIs($atom) {
-        $this->addMethod('has("token", within('.$this->SorA($atom).'))');
+        $this->addMethod('has("token", within(***))', $atom);
         
         return $this;
     }
 
     public function tokenIsNot($atom) {
-        $this->addMethod('not(has("token", within('.$this->SorA($atom).')))');
+        $this->addMethod('not(has("token", within(***)))', $atom);
         
         return $this;
     }
@@ -493,7 +493,7 @@ repeat(__.in('.$linksDown.'))
             }
             unset($a);
 
-            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within('.$this->SorA($analyzer).')).count().is(neq(0)) )');
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(neq(0)) )', $analyzer);
         } else {
             if ($analyzer == 'self') {
                 $analyzer = str_replace('\\', '\\\\', $this->analyzer);
@@ -513,7 +513,7 @@ repeat(__.in('.$linksDown.'))
             }
             unset($a);
 
-            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within('.$this->SorA($analyzer).')).count().is(eq(0)) )');
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(eq(0)) )', $analyzer);
         } else{ 
             if ($analyzer == 'self') {
                 $analyzer = str_replace('\\', '\\\\', $this->analyzer);
@@ -553,7 +553,7 @@ repeat(__.in('.$linksDown.'))
         } elseif (is_int($value)) {
             $this->addMethod('not(has("'.$property.'", '.$value.'))');
         } else {
-            $this->addMethod('not(has("'.$property.'", within('.$this->SorA($value).')))');
+            $this->addMethod('not(has("'.$property.'", within(***)))', $value);
         }
         
         return $this;
