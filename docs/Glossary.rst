@@ -46,18 +46,22 @@ Glossary
     + switch()
 
       + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`Switch Without Default <switch-without-default>`
 
 
 + T
     + throw
 
+      + :ref:`Empty Try Catch <empty-try-catch>`
       + :ref:`Exception Order <exception-order>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
       + :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
       + :ref:`Null On New <null-on-new>`
       + :ref:`Should Chain Exception <should-chain-exception>`
+      + :ref:`Switch Without Default <switch-without-default>`
       + :ref:`Throw Functioncall <throw-functioncall>`
+      + :ref:`Throw In Destruct <throw-in-destruct>`
       + :ref:`Throws An Assignement <throws-an-assignement>`
       + :ref:`Uncaught Exceptions <uncaught-exceptions>`
       + :ref:`Unreachable Code <unreachable-code>`

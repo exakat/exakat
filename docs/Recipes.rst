@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 05 Sep 2016 17:13:53 +0000
-.. comment: Generation hash : 2c60073554df183f05928821f43b80094992c440
+.. comment: Generation date : Mon, 12 Sep 2016 12:07:15 +0000
+.. comment: Generation hash : 21bd67afeaf2f6947bc46ba0f77bd7cb6b3dfef5
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 251 analysis
+Total : 253 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -120,6 +120,7 @@ Total : 251 analysis
 * :ref:`Double Instruction <double-instruction>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Else If Versus Elseif <else-if-versus-elseif>`
+* :ref:`Empty Blocks <empty-blocks>`
 * :ref:`Empty Classes <empty-classes>`
 * :ref:`Empty Function <empty-function>`
 * :ref:`Empty Instructions <empty-instructions>`
@@ -241,6 +242,7 @@ Total : 251 analysis
 * :ref:`Switch Without Default <switch-without-default>`
 * :ref:`Ternary In Concat <ternary-in-concat>`
 * :ref:`Throw Functioncall <throw-functioncall>`
+* :ref:`Throw In Destruct <throw-in-destruct>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
@@ -338,9 +340,9 @@ Total : 21 analysis
 * :ref:`Echo Or Print <echo-or-print>`
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
 * :ref:`Inconsistant Closing Tag <inconsistant-closing-tag>`
-* :ref:`Incrementations`
 * :ref:`Interpolation`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
+* :ref:`No Plus One <no-plus-one>`
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
 * :ref:`Not Same Name As File <not-same-name-as-file>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`

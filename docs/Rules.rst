@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 05 Sep 2016 17:13:53 +0000
-.. comment: Generation hash : 2c60073554df183f05928821f43b80094992c440
+.. comment: Generation date : Mon, 12 Sep 2016 12:07:15 +0000
+.. comment: Generation hash : 21bd67afeaf2f6947bc46ba0f77bd7cb6b3dfef5
 
 
 .. _$http\_raw\_post\_data:
@@ -272,11 +272,23 @@ Adding Zero
 ###########
 
 
-Adding 0 is useless. 
+Adding 0 is useless, as 0 is the neutral element for addition. It may trigger a cast (to integer), though behavior changes from PHP 7.0 to PHP 7.1. 
 
-If it is used to type cast a value to integer, then casting (integer) is clearer. 
+.. code-block:: php
 
-In (0 - $x) structures, 0 may be omitted.
+   <?php
+   
+   $a = 123 + 0;
+   $a = 0 + 123;
+   
+   // Also works with minus
+   $b = 0 - $c; // drop the 0, but keep the minus
+   $b = $c - 0; // drop the 0 and the minus
+   
+   ?>
+
+
+If it is used to type cast a value to integer, then casting (integer) is clearer.
 
 +--------------+-----------------------------------------------------------------------------------------------+
 | Command Line | Structures/AddZero                                                                            |
@@ -378,7 +390,20 @@ Ambiguous Index
 
 List of all indexes that are defined in the same array, with different types. 
 
-Example : $x[1] = 1; $x['1'] = 2; 
+.. code-block:: php
+
+   <?php
+   
+   $x = [];
+   $x[1]    = 1; 
+   $x['1']  = 2; 
+   $x[1.0]  = 3; 
+   $x[true] = 4; 
+   
+   // $x only contains one element : 1 => 4
+   
+   ?>
+
 
 They are indeed distinct, but may lead to confusion.
 
@@ -845,6 +870,21 @@ Classes Mutually Extending Each Other
 
 
 Those classes are extending each other, creating an extension loop. PHP will yield a fatal error at running time, even if it is compiling the code.
+
+.. code-block:: php
+
+   <?php
+   
+   // This code is lintable but won't run
+   class Foo extends Bar { }
+   class Bar extends Foo { }
+   
+   // The loop may be quite large
+   class Foo extends Bar { }
+   class Bar extends Bar2 { }
+   class Bar2 extends Foo { }
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Classes/MutualExtension |
@@ -1602,6 +1642,48 @@ The keyword elseif SHOULD be used instead of else if so that all control keyword
 
 
 
+.. _empty-blocks:
+
+Empty Blocks
+############
+
+
+The listed control structures are empty, or have one of the commanded block empty. It is recommended to remove those blocks, so as to reduce confusion in the code. 
+
+.. code-block:: php
+
+   <?php
+   
+   foreach($foo as $bar) ; // This block seems erroneous
+       $foobar++;
+   
+   if ($a === $b) {
+       doSomething();
+   } else {
+       // Empty block. Remove this
+   }
+   
+   // Blocks containing only empty expressions are also detected
+   for($i = 0; $i < 10; $i++) {
+       ;
+   }
+   
+   // Although namespaces are not control structures, they are reported here
+   namespace A;
+   namespace B;
+   
+   ?>
+
++--------------+------------------------+
+| Command Line | Structures/EmptyBlocks |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
+
 .. _empty-classes:
 
 Empty Classes
@@ -1764,9 +1846,22 @@ Empty Try Catch
 
 The code does try, then catch errors but do no act upon the error. 
 
-At worse, the error should be logged somewhere, so as to measure the actual usage of the log.
+.. code-block:: php
 
-catch( Exception $e) should be banned, as they will simply ignore any error.
+   <?php
+   
+   try { 
+       doSomething();
+   } catch (Throwable $e) {
+       // simply ignore this
+   }
+   
+   ?>
+
+
+At worst, the error should be logged, so as to measure the actual usage of the catch expression.
+
+catch( Exception $e) (PHP 5) or catch(Throwable $e) with empty catch block should be banned, as they will simply ignore any error.
 
 +--------------+--------------------------+
 | Command Line | Structures/EmptyTryCatch |
@@ -2468,24 +2563,6 @@ One way or another, if the project has a vast majority of either case, it will r
 
 +--------------+------------------------------------------------+
 | Command Line | Php/InconsistantClosingTag                     |
-+--------------+------------------------------------------------+
-| clearPHP     |                                                |
-+--------------+------------------------------------------------+
-| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
-
-
-
-.. _incrementations:
-
-Incrementations
-###############
-
-
-Incrementing a variable should be done with ++ or -- operator. Any other way, like $x = $x + 1; or $y += 1; may be avoided.
-
-+--------------+------------------------------------------------+
-| Command Line | Structures/PlusEgalOne                         |
 +--------------+------------------------------------------------+
 | clearPHP     |                                                |
 +--------------+------------------------------------------------+
@@ -3692,13 +3769,73 @@ It it better to avoid using parenthesis with echo, print, return, throw, include
 
 
 
+.. _no-plus-one:
+
+No Plus One
+###########
+
+
+Incrementing a variable should be done with the ++ or -- operators. Any other way, may be avoided.
+
+.. code-block:: php
+
+   <?php
+   
+   // Best way to increment
+   ++$x; --$y;
+   
+   // Second best way to increment, if the current value is needed :
+   echo $x++, $y--;
+   
+   // Good but slow 
+   $x += 1; 
+   $x -= -1; 
+   
+   $y += -1;
+   $y -= 1;
+   
+   // even slower
+   $x = $x + 1; 
+   $y = $y - 1; 
+   
+   ?>
+
++--------------+------------------------------------------------+
+| Command Line | Structures/PlusEgalOne                         |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _no-public-access:
 
 No Public Access
 ################
 
 
-Properties are declared with public access, but are never used publicly. May be they can be made protected or private.
+The properties below are declared with public access, but are never used publicly. They can be made protected or private.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public $bar = 1;            // Public, and used in public space
+       public $neverInPublic = 3;  // Public, but never used in outside the class
+       
+       function bar() {
+           $neverInPublic++;
+       }
+   }
+   
+   $x = new foo();
+   $x->bar = 3;
+   $x->bar();
+   
+   ?>
 
 +--------------+------------------------+
 | Command Line | Classes/NoPublicAccess |
@@ -4057,6 +4194,37 @@ Old Style Constructor
 
 
 A long time ago, PHP classes used to have the method bearing the same name as the class acts as the constructor.
+
+.. code-block:: php
+
+   <?php
+   
+   namespace {
+       // Global namespace is important
+       class foo {
+           function foo() {
+               // This acts as the old-style constructor, and is reported by PHP
+           }
+       }
+   
+       class bar {
+           function \_\_construct() { }
+           function bar() {
+               // This doesn't act as constructor, as bar has a \_\_construct() method
+           }
+       }
+   }
+   
+   namespace Foo\Bar{
+       class foo {
+           function foo() {
+               // This doesn't act as constructor, as bar is not in the global namespace
+           }
+       }
+   }
+   
+   ?>
+
 
 This is no more the case in PHP 5, which relies on \_\_construct() to do so. Having this old style constructor may bring in confusion, unless you are also supporting old time PHP 4.
 
@@ -5662,7 +5830,48 @@ Switch Without Default
 
 Switch statements hold a number of 'case' that cover all known situations, and a 'default' one which is executed when all other options are exhausted. 
 
-Most of the time, Switch do need a default case, so as to catch the odd situation where the 'value is not what it was expected'. This is a good place to catch unexpected values, to set a default behavior.
+.. code-block:: php
+
+   <?php
+   
+   // Missing default
+   switch($format) {
+       case 'gif' : 
+           processGif();
+           break 1;
+       
+       case 'jpeg' : 
+           processJpeg();
+           break 1;
+           
+       case 'bmp' :
+           throw new UnsupportedFormat($format);
+   }
+   // In case $format is not known, then switch is ignored and no processing happens, leading to preparation errors
+   
+   
+   // switch with default
+   switch($format) {
+       case 'text' : 
+           processText();
+           break 1;
+       
+       case 'jpeg' : 
+           processJpeg();
+           break 1;
+           
+       case 'rtf' :
+           throw new UnsupportedFormat($format);
+           
+       default :
+           throw new UnknownFileFormat($format);
+   }
+   // In case $format is not known, an exception is thrown for processing 
+   
+   ?>
+
+
+Most of the time, switch() do need a default case, so as to catch the odd situation where the 'value is not what it was expected'. This is a good place to catch unexpected values, to set a default behavior.
 
 +--------------+-------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/SwitchWithoutDefault                                                                                   |
@@ -5737,6 +5946,51 @@ When the new keyword is forgotten, then the class construtor is used as a functi
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
+
+
+
+.. _throw-in-destruct:
+
+Throw In Destruct
+#################
+
+
+According to the manual, 'Attempting to throw an exception from a destructor (called in the time of script termination) causes a fatal error.'
+
+The destructor may be called during the lifespan of the script, but it is not certain. If the exception is thrown later, the script may end up with a fatal error. 
+Thus, it is recommended to avoid throwing exceptions within the \_\_destruct method of a class.
+
+.. code-block:: php
+
+   <?php
+   
+   // No exception thrown
+   class Bar { 
+       function \_\_construct() {
+           throw new Exception('\_\_construct');
+       }
+   
+       function \_\_destruct() {
+           $this->cleanObject();
+       }
+   }
+   
+   // Potential crash
+   class Foo { 
+       function \_\_destruct() {
+           throw new Exception('\_\_destruct');
+       }
+   }
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Classes/ThrowInDestruct |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
 
 
 
