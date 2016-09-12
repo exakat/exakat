@@ -1982,7 +1982,7 @@ class Load extends Tasks {
         
         $code = $this->tokens[$current][1];
         if ($isColon) {
-            $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$initId]['fullcode'] . ' ; ' . $this->atoms[$finalId]['fullcode'] . ' ; ' . $this->atoms[$incrementId]['fullcode'] . ') : '.self::FULLCODE_SEQUENCE.' endfor';
+            $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$initId]['fullcode'] . ' ; ' . $this->atoms[$finalId]['fullcode'] . ' ; ' . $this->atoms[$incrementId]['fullcode'] . ') : ' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id + 1][1];
         } else {
             $fullcode = $this->tokens[$current][1].'(' . $this->atoms[$initId]['fullcode'] . ' ; ' . $this->atoms[$finalId]['fullcode'] . ' ; ' . $this->atoms[$incrementId]['fullcode'] . ')' .
                         ($this->atoms[$blockId]['bracket'] === true ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
@@ -2102,7 +2102,7 @@ class Load extends Tasks {
             $this->startSequence();
             $blockId = $this->sequence;
             $current = $this->id;
-            
+
             // This may include WHILE in the list of finals for do....while
             $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END, T_CLOSE_CURLY], $finals);
             if (in_array($this->tokens[$this->id + 1][0], [T_IF, T_FOREACH, T_SWITCH, T_FOR])) {
@@ -2186,7 +2186,7 @@ class Load extends Tasks {
                 ++$this->id; // skip ;
             }
             
-            $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ') : ' . self::FULLCODE_SEQUENCE . ' endwhile';
+            $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ') : ' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id - 1][1];
         } else {
             $fullcode = $this->tokens[$current][1] . ' (' . $this->atoms[$conditionId]['fullcode'] . ')' .
                         ($this->atoms[$blockId]['bracket'] === true ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
@@ -2217,9 +2217,9 @@ class Load extends Tasks {
         $this->addLink($declareId, $blockId, 'BLOCK');
 
         if ($isColon === true) {
+            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$argsId]['fullcode'] . ') : '.self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id + 1][1];
             ++$this->id; // skip enddeclare
             ++$this->id; // skip ;
-            $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$argsId]['fullcode'] . ') : '.self::FULLCODE_SEQUENCE.' enddeclare';
         } else {
             $fullcode = $this->tokens[$current][1].' (' . $this->atoms[$argsId]['fullcode'] . ') '.self::FULLCODE_BLOCK;
         }
@@ -2332,9 +2332,8 @@ class Load extends Tasks {
         ++$this->id;
         $this->setAtom($casesId, ['count'     => $rank]);
 
-        
         if ($isColon) {
-            $fullcode = $this->tokens[$current][1].' ('.$this->atoms[$nameId]['fullcode'].') :'.self::FULLCODE_SEQUENCE.' endswitch';
+            $fullcode = $this->tokens[$current][1].' ('.$this->atoms[$nameId]['fullcode'].') :'.self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id][1];
         } else {
             $fullcode = $this->tokens[$current][1].' ('.$this->atoms[$nameId]['fullcode'].')'.self::FULLCODE_BLOCK;
         }
@@ -3396,18 +3395,7 @@ class Load extends Tasks {
                 $this->pushExpression($right);
                 $right = $this->processFunctioncall();
                 $this->popExpression();
-            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
-                $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
-                $this->pushExpression($right);
-                $right = $this->processAppend(false);
-                $this->popExpression();
-            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
-                      $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
-                 $this->pushExpression($right);
-                 $right = $this->processBracket(false);
-                 $this->popExpression();
-            }        
-
+            } 
         }
         $this->exitContext();
 
@@ -3513,16 +3501,6 @@ class Load extends Tasks {
                 $this->pushExpression($right);
                 $right = $this->processFunctioncall();
                 $this->popExpression();
-            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
-                $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
-                $this->pushExpression($right);
-                $right = $this->processAppend(false);
-                $this->popExpression();
-            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
-                      $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
-                 $this->pushExpression($right);
-                 $right = $this->processBracket(false);
-                 $this->popExpression();
             }
         }
         $this->exitContext();
