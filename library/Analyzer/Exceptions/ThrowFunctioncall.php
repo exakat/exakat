@@ -44,6 +44,7 @@ class ThrowFunctioncall extends Analyzer\Analyzer {
              ->analyzerIsNot('self')
              ->outIs('THROW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot('Array')
              ->fullnspathIs($phpClassesFnp)
              ->back('first');
         $this->prepareQuery();
