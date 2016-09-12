@@ -70,6 +70,23 @@ $entries = array('preg\\\_replace'             => 'http://www.php.net/preg_match
                  '`**`'                        => 'http://php.net/manual/en/language.operators.arithmetic.php',
                  '$_GET'                       => 'http://php.net/manual/en/reserved.variables.get.php',
                  '$_POST'                      => 'http://php.net/manual/en/reserved.variables.post.php',
+                 
+                 '__construct'                 => 'http://php.net/manual/en/language.oop5.decon.php',
+                 '__destruct'                  => 'http://php.net/manual/en/language.oop5.decon.php',
+                 
+                 '__call'                      => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__callStatic'                => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__get'                       => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__set'                       => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__isset'                     => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__unset'                     => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__sleep'                     => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__wakeup'                    => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__toString'                  => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__invoke'                    => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__set_state'                 => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__clone'                     => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__debugInfo'                 => 'http://php.net/manual/en/language.oop5.magic.php',
 
                  );
 
