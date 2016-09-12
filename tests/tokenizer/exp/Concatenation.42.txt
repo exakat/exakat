@@ -1,3 +1,107 @@
-echo
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.42.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              A
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                echo
+            Label : ELEMENT
+              B
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $c
+              Label : NAME
+                echo
+            Label : ELEMENT
+              C
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $d
+              Label : NAME
+                echo
+            Label : ELEMENT
+              D
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $e
+              Label : NAME
+                echo
+            Label : ELEMENT
+              E
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $f
+              Label : NAME
+                echo
+            Label : ELEMENT
+              F
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $g
+              Label : NAME
+                echo
+            Label : ELEMENT
+              G
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $h
+              Label : NAME
+                echo
+            Label : ELEMENT
+              H
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $i
+              Label : NAME
+                echo
+            Label : ELEMENT
+              I
+

@@ -1,21 +1,23 @@
-./tests/tokenizer/source/_Namespace.13.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        namespace
-        Label : BLOCK
-          
-          Label : ELEMENT
-            interface
-            Label : BLOCK
-              {}
-              Label : ELEMENT
-                Void
-            Label : NAME
-              C
-        Label : NAME
-          A
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Namespace.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              interface
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                C
+          Label : NAME
+            A

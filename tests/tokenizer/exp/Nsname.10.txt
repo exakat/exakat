@@ -1,3 +1,200 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Nsname.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E
+            Label : SUBNAME
+              F
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E
+            Label : SUBNAME
+              F
+            Label : SUBNAME
+              G
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E
+            Label : SUBNAME
+              F
+            Label : SUBNAME
+              G
+            Label : SUBNAME
+              H
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E
+            Label : SUBNAME
+              F
+            Label : SUBNAME
+              G
+            Label : SUBNAME
+              H
+            Label : SUBNAME
+              I
+        Label : ELEMENT
+          \
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E
+            Label : SUBNAME
+              F
+            Label : SUBNAME
+              G
+            Label : SUBNAME
+              H
+            Label : SUBNAME
+              I
+            Label : SUBNAME
+              K

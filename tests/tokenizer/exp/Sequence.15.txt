@@ -1,5 +1,40 @@
-=
-Label : LEFT
-  $z
-Label : RIGHT
-  3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          global
+          Label : GLOBAL
+            $c
+          Label : GLOBAL
+            $a
+          Label : GLOBAL
+            $b
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              protected
+              Label : PPP
+                $a
+              Label : PROTECTED
+                protected
+              Label : PPP
+                $x
+              Label : PPP
+                $y
+              Label : PPP
+                =
+                Label : LEFT
+                  $z
+                Label : RIGHT
+                  3
+          Label : NAME
+            x

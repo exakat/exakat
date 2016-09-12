@@ -1,3 +1,22 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Throw.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              Exception
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                Exception

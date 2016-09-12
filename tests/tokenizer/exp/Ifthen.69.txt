@@ -1,7 +1,190 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $b
-  Label : PROPERTY
-    E
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.69.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                B
+            Label : RIGHT
+              'C'
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              ==
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $e
+                Label : PROPERTY
+                  K
+              Label : RIGHT
+                'L'
+            Label : ELSE
+              ;
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  T
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $i
+                      Label : PROPERTY
+                        U
+                  Label : NAME
+                    T
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    if
+                    Label : CONDITION
+                      V
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'X'
+                          Label : VARIABLE
+                            [
+                            Label : INDEX
+                              'W'
+                            Label : VARIABLE
+                              $j
+                        Label : ARGUMENT
+                          ->
+                          Label : OBJECT
+                            $k
+                          Label : PROPERTY
+                            Y
+                      Label : NAME
+                        V
+                    Label : THEN
+                      ;
+                      Label : ELEMENT
+                        return
+                        Label : RETURN
+                          Z
+              Label : ELEMENT
+                Void
+            Label : THEN
+              ;
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  M
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $f
+                      Label : PROPERTY
+                        N
+                  Label : NAME
+                    M
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    if
+                    Label : CONDITION
+                      !
+                      Label : NOT
+                        O
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            [
+                            Label : INDEX
+                              'Q'
+                            Label : VARIABLE
+                              [
+                              Label : INDEX
+                                'P'
+                              Label : VARIABLE
+                                $g
+                          Label : ARGUMENT
+                            ->
+                            Label : OBJECT
+                              $h
+                            Label : PROPERTY
+                              R
+                        Label : NAME
+                          O
+                    Label : THEN
+                      ;
+                      Label : ELEMENT
+                        return
+                        Label : RETURN
+                          S
+              Label : ELEMENT
+                Void
+          Label : THEN
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                D
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $b
+                    Label : PROPERTY
+                      E
+                Label : NAME
+                  D
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    !
+                    Label : NOT
+                      F
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'H'
+                          Label : VARIABLE
+                            [
+                            Label : INDEX
+                              'G'
+                            Label : VARIABLE
+                              $c
+                        Label : ARGUMENT
+                          ->
+                          Label : OBJECT
+                            $d
+                          Label : PROPERTY
+                            I
+                      Label : NAME
+                        F
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      return
+                      Label : RETURN
+                        J
+            Label : ELEMENT
+              Void
+        Label : ELEMENT
+          Void

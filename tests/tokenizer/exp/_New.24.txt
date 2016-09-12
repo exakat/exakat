@@ -1,7 +1,65 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $a
-  Label : PROPERTY
-    B
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_New.24.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &&
+            Label : LEFT
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $a
+                    Label : PROPERTY
+                      B
+                Label : NAME
+                  empty
+            Label : RIGHT
+              ==
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  C
+              Label : RIGHT
+                'D'
+          Label : THEN
+            ;
+            Label : ELEMENT
+              E
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  new
+                  Label : NEW
+                    F
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'G'
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $a
+                        Label : PROPERTY
+                          B
+                    Label : NAME
+                      F
+              Label : NAME
+                echo
+            Label : ELEMENT
+              I

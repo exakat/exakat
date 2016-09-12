@@ -1,3 +1,95 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_For.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          for
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $c
+              Label : ELSE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $e
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $d
+          Label : FINAL
+            ;
+            Label : ELEMENT
+              <
+              Label : LEFT
+                $i
+              Label : RIGHT
+                $b
+          Label : INCREMENT
+            ;
+            Label : ELEMENT
+              ++
+              Label : PREPLUSPLUS
+                $i
+          Label : INIT
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $i
+              Label : RIGHT
+                0
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $f
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              array
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $k
+              Label : RIGHT
+                /
+                Label : LEFT
+                  $l
+                  Label : CODE
+                    $l
+                Label : RIGHT
+                  (int)
+                  Label : CAST
+                    $m
+                    Label : CODE
+                      $m
+          Label : SOURCE
+            $g
+          Label : VALUE
+            =>
+            Label : KEY
+              $h
+            Label : VALUE
+              $i
+        Label : ELEMENT
+          return
+          Label : RETURN
+            $n

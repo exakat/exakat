@@ -1,9 +1,30 @@
-=
-Label : LEFT
-  $bar
-Label : RIGHT
-  <<<'EOT'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    bar
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              public
+              Label : PPP
+                =
+                Label : LEFT
+                  $bar
+                Label : RIGHT
+                  <<<'EOT'
 
+                  Label : CONCAT
+                    bar
+
+              Label : PUBLIC
+                public
+          Label : NAME
+            foo

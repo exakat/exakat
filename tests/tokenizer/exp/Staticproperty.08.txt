@@ -1,7 +1,22 @@
-$V
-Label : APPEND
-  ::
-  Label : CLASS
-    A
-  Label : PROPERTY
-    $V
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticproperty.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $V
+            Label : APPEND
+              ::
+              Label : CLASS
+                A
+              Label : PROPERTY
+                $V
+          Label : RIGHT
+            $C

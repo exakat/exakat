@@ -1,5 +1,34 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +
+          Label : LEFT
+            1
+          Label : RIGHT
+            2
+        Label : ELEMENT
+          +
+          Label : LEFT
+            3
+          Label : RIGHT
+            4
+        Label : ELEMENT
+          +
+          Label : LEFT
+            5
+          Label : RIGHT
+            6
+        Label : ELEMENT
+          +
+          Label : LEFT
+            7
+          Label : RIGHT
+            8

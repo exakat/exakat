@@ -1,3 +1,108 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcodemiddle.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            [
+            Label : INDEX
+              0
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'B'
+              Label : VARIABLE
+                $b
+        Label : ELEMENT
+          XC
+
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              ->
+              Label : METHOD
+                D
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  D
+              Label : OBJECT
+                [
+                Label : INDEX
+                  'C'
+                Label : VARIABLE
+                  $b
+            Label : RIGHT
+              1
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                1
+            Label : ELEMENT
+              df
+
+          Label : THEN
+            ;
+            Label : ELEMENT
+              E
+
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    F
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'G'
+                      Label : ARGUMENT
+                        array
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'H'
+                            Label : VALUE
+                              $a
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'I'
+                            Label : VALUE
+                              ->
+                              Label : OBJECT
+                                $this
+                              Label : PROPERTY
+                                J
+                        Label : NAME
+                          array
+                    Label : NAME
+                      F
+                  Label : OBJECT
+                    $this
+              Label : NAME
+                echo
+        Label : ELEMENT
+          Void

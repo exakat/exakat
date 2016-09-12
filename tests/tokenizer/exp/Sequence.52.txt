@@ -1,3 +1,110 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.52.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+              Label : NAME
+                empty
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  empty
+            Label : THEN
+              ;
+              Label : ELEMENT
+                F
+    
+              Label : ELEMENT
+                print
+                Label : ARGUMENTS
+                  $d
+                  Label : ARGUMENT
+                    $d
+                Label : NAME
+                  print
+              Label : ELEMENT
+                G
+
+          Label : THEN
+            ;
+            Label : ELEMENT
+              D
+    
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                $b
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                print
+            Label : ELEMENT
+              E
+
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          H
+
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $e
+              Label : NAME
+                empty
+          Label : THEN
+            ;
+            Label : ELEMENT
+              J
+    
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                $h
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'g'
+                    Label : NAME
+                      f
+                  Label : CONCAT
+                    $h
+              Label : NAME
+                print
+            Label : ELEMENT
+              K
+
+        Label : ELEMENT
+          Void

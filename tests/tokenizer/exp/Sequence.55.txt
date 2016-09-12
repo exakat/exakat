@@ -1,13 +1,46 @@
-as
-Label : AS
-  J
-Label : NAME
-  \
-  Label : SUBNAME
-    F
-  Label : SUBNAME
-    G
-  Label : SUBNAME
-    H
-  Label : SUBNAME
-    I
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.55.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              use
+              Label : USE
+                \
+                Label : SUBNAME
+                  C
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+            Label : ELEMENT
+              use
+              Label : USE
+                as
+                Label : AS
+                  J
+                Label : NAME
+                  \
+                  Label : SUBNAME
+                    F
+                  Label : SUBNAME
+                    G
+                  Label : SUBNAME
+                    H
+                  Label : SUBNAME
+                    I
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B

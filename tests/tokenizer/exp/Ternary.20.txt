@@ -1,17 +1,32 @@
-echo
-Label : ARGUMENT
-  'f'
-  Label : CODE
-    ?
-    Label : CONDITION
-      true
-    Label : ELSE
-      ?
-      Label : CONDITION
-        false
-      Label : ELSE
-        'f'
-      Label : THEN
-        't'
-    Label : THEN
-      'true'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              'f'
+              Label : CODE
+                ?
+                Label : CONDITION
+                  true
+                Label : ELSE
+                  ?
+                  Label : CONDITION
+                    false
+                  Label : ELSE
+                    'f'
+                  Label : THEN
+                    't'
+                Label : THEN
+                  'true'
+          Label : NAME
+            echo

@@ -1,3 +1,20 @@
-default
-Label : CODE
-  ;
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+          Label : NAME
+            $x

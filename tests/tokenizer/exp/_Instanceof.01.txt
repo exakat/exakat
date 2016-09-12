@@ -1,14 +1,16 @@
-./tests/tokenizer/source/_Instanceof.01.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Instanceof.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        instanceof
-        Label : CLASS
-          $y
-        Label : VARIABLE
-          $x
+      Label : CODE
+        ;
+        Label : ELEMENT
+          instanceof
+          Label : CLASS
+            $y
+          Label : VARIABLE
+            $x

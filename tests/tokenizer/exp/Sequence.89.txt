@@ -1,27 +1,74 @@
-(
-Label : ARGUMENT
-  new
-  Label : NEW
-    F
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        array
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            =>
-            Label : KEY
-              'G'
-            Label : VALUE
-              'H'
-          Label : ARGUMENT
-            =>
-            Label : KEY
-              'I'
-            Label : VALUE
-              'J'
-        Label : NAME
-          array
-    Label : NAME
-      F
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.89.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      B
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          <<<C
+
+          Label : CONCAT
+            D
+
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            new
+            Label : NEW
+              E
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  new
+                  Label : NEW
+                    F
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        array
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'G'
+                            Label : VALUE
+                              'H'
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'I'
+                            Label : VALUE
+                              'J'
+                        Label : NAME
+                          array
+                    Label : NAME
+                      F
+              Label : NAME
+                E
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                K
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'G'
+                Label : NAME
+                  K
+              Label : OBJECT
+                $a
+          Label : NAME
+            echo

@@ -1,5 +1,20 @@
-[
-Label : INDEX
-  'd'
-Label : VARIABLE
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              $c
+          Label : PROPERTY
+            e

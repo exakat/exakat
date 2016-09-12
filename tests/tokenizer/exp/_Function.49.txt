@@ -1,5 +1,152 @@
-(
-Label : ARGUMENT
-  $a
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.49.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              $b
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                C
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $d
+                Label : NAME
+                  C
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'D'
+                  Label : ARGUMENT
+                    'E'
+                Label : NAME
+                  array
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                !
+                Label : NOT
+                  F
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $f
+                    Label : ARGUMENT
+                      $g
+                  Label : NAME
+                    F
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $h
+                  Label : RIGHT
+                    'G'
+                Label : ELEMENT
+                  H
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $i
+                    Label : ARGUMENT
+                      $j
+                    Label : ARGUMENT
+                      I
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'J'
+                        Label : ARGUMENT
+                          $k
+                      Label : NAME
+                        I
+                  Label : NAME
+                    H
+                Label : ELEMENT
+                  throw
+                  Label : THROW
+                    new
+                    Label : NEW
+                      \
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        \
+                        Label : SUBNAME
+                          K
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $l
+                Label : PROPERTY
+                  L
+              Label : RIGHT
+                $m
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $n
+                Label : PROPERTY
+                  M
+              Label : RIGHT
+                $o
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $p
+                Label : PROPERTY
+                  N
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  array
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $q
+                Label : PROPERTY
+                  O
+              Label : RIGHT
+                null
+          Label : NAME
+            B
+        Label : ELEMENT
+          Void

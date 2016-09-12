@@ -1,3 +1,180 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Coalesce.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foo
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                ??
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    names
+                Label : RIGHT
+                  =
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      names
+                  Label : RIGHT
+                    array_keys
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $this
+                        Label : PROPERTY
+                          fields
+                    Label : NAME
+                      array_keys
+            Label : ELEMENT
+              static
+              Label : STATIC
+                $a
+            Label : ELEMENT
+              print_r
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+              Label : NAME
+                print_r
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                new
+                Label : NEW
+                  stdclass
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    stdclass
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  fields
+              Label : RIGHT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    3
+                Label : VARIABLE
+                  [
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  names
+              Label : RIGHT
+                null
+            Label : ELEMENT
+              return
+              Label : RETURN
+                ??
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $a
+                  Label : PROPERTY
+                    names
+                Label : RIGHT
+                  =
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $a
+                    Label : PROPERTY
+                      names
+                  Label : RIGHT
+                    count
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $a
+                        Label : PROPERTY
+                          fields
+                    Label : NAME
+                      count
+          Label : NAME
+            foo
+          Label : DEFINITION
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              foo
+          Label : DEFINITION
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              foo
+        Label : ELEMENT
+          var_dump
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                foo
+          Label : NAME
+            var_dump
+        Label : ELEMENT
+          var_dump
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                foo
+          Label : NAME
+            var_dump

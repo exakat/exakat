@@ -1,7 +1,22 @@
-$b
-Label : APPEND
-  ::
-  Label : CLASS
-    a
-  Label : PROPERTY
-    $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arrayappend.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+            Label : APPEND
+              ::
+              Label : CLASS
+                a
+              Label : PROPERTY
+                $b
+          Label : RIGHT
+            2

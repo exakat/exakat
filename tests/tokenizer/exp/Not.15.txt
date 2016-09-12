@@ -1,9 +1,20 @@
-=
-Label : LEFT
-  $a
-Label : RIGHT
-  !
-  Label : NOT
-    !
-    Label : NOT
-      $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            !
+            Label : NOT
+              !
+              Label : NOT
+                $e

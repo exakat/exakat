@@ -1,3 +1,86 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.82.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $y
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            $y
+        Label : ELEMENT
+          x1
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            x1
+        Label : ELEMENT
+          x2
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            x2
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              x2
+        Label : ELEMENT
+          x3
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            x3
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              x3
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                x3
+        Label : ELEMENT
+          x4
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            x4
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              x4
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                x4
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  x4

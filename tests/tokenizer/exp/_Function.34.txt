@@ -1,25 +1,46 @@
-(
-Label : ARGUMENT
-  $a
-  Label : TYPEHINT
-    CLASSE
-Label : ARGUMENT
-  $b
-  Label : TYPEHINT
-    CLASSE
-Label : ARGUMENT
-  $c
-  Label : TYPEHINT
-    CLASSE
-Label : ARGUMENT
-  $d
-  Label : TYPEHINT
-    CLASSE
-Label : ARGUMENT
-  $e
-  Label : TYPEHINT
-    CLASSE
-Label : ARGUMENT
-  $f
-  Label : TYPEHINT
-    CLASSE
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.34.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          b
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+              Label : TYPEHINT
+                CLASSE
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                CLASSE
+            Label : ARGUMENT
+              $c
+              Label : TYPEHINT
+                CLASSE
+            Label : ARGUMENT
+              $d
+              Label : TYPEHINT
+                CLASSE
+            Label : ARGUMENT
+              $e
+              Label : TYPEHINT
+                CLASSE
+            Label : ARGUMENT
+              $f
+              Label : TYPEHINT
+                CLASSE
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            b
+        Label : ELEMENT
+          Void

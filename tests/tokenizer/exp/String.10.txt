@@ -1,15 +1,60 @@
-=
-Label : LEFT
-  $loc
-Label : RIGHT
-  "
-  Label : CONCAT
-    "
-    Label : OBJECT
-      $a
-    Label : PROPERTY
-      b
-  Label : CONCAT
-     c 
-  Label : CONCAT
-    $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/String.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $loc
+          Label : RIGHT
+            "
+            Label : CONCAT
+              "
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                b
+            Label : CONCAT
+               c 
+            Label : CONCAT
+              $d
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $loc
+          Label : RIGHT
+            "
+            Label : CONCAT
+              $d
+            Label : CONCAT
+               c 
+            Label : CONCAT
+              "
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                b
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $loc
+          Label : RIGHT
+            "
+            Label : CONCAT
+              $d
+            Label : CONCAT
+               
+            Label : CONCAT
+              "
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                b
+            Label : CONCAT
+               c

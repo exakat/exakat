@@ -1,39 +1,81 @@
-echo
-Label : ARGUMENT
-  E
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      .
-      Label : CONCAT
-        'F'
-      Label : CONCAT
-        [
-        Label : INDEX
-          'G'
-        Label : VARIABLE
-          $d
-      Label : CONCAT
-        'H'
-    Label : ARGUMENT
-      I
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          'J'
-      Label : NAME
-        I
-    Label : ARGUMENT
-      array
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'K'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.72.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                !
+                Label : NOT
+                  [
+                  Label : INDEX
+                    'D'
+                  Label : VARIABLE
+                    $c
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      E
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          .
+                          Label : CONCAT
+                            'F'
+                          Label : CONCAT
+                            [
+                            Label : INDEX
+                              'G'
+                            Label : VARIABLE
+                              $d
+                          Label : CONCAT
+                            'H'
+                        Label : ARGUMENT
+                          I
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'J'
+                          Label : NAME
+                            I
+                        Label : ARGUMENT
+                          array
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              =>
+                              Label : KEY
+                                'K'
+                              Label : VALUE
+                                'L'
+                          Label : NAME
+                            array
+                      Label : NAME
+                        E
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  Void
+            Label : ELEMENT
+              L
+          Label : SOURCE
+            $a
           Label : VALUE
-            'L'
-      Label : NAME
-        array
-  Label : NAME
-    E
+            $b

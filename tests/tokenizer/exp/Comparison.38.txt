@@ -1,11 +1,26 @@
-(
-Label : ARGUMENT
-  !=
-  Label : LEFT
-    <
-    Label : LEFT
-      $b
-    Label : RIGHT
-      1
-  Label : RIGHT
-    'B'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.38.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          var_dump
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              !=
+              Label : LEFT
+                <
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  1
+              Label : RIGHT
+                'B'
+          Label : NAME
+            var_dump

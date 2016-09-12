@@ -1,3 +1,202 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.38.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              smallTalk
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'a'
+                  Label : NAME
+                    echo
+              Label : NAME
+                smallTalk
+              Label : PUBLIC
+                public
+            Label : ELEMENT
+              bigTalk
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'A'
+                  Label : NAME
+                    echo
+              Label : NAME
+                bigTalk
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            A
+          Label : DEFINITION
+            A
+          Label : DEFINITION
+            A
+          Label : DEFINITION
+            A
+          Label : NAME
+            A
+          Label : DEFINITION
+            'a'
+          Label : DEFINITION
+            'A'
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              smallTalk
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'b'
+                  Label : NAME
+                    echo
+              Label : NAME
+                smallTalk
+              Label : PUBLIC
+                public
+            Label : ELEMENT
+              bigTalk
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'B'
+                  Label : NAME
+                    echo
+              Label : NAME
+                bigTalk
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            B
+          Label : DEFINITION
+            B
+          Label : DEFINITION
+            B
+          Label : NAME
+            B
+          Label : DEFINITION
+            'b'
+          Label : DEFINITION
+            'B'
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  insteadof
+                  Label : INSTEADOF
+                    A
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      B
+                    Label : CONSTANT
+                      smallTalk
+                Label : ELEMENT
+                  insteadof
+                  Label : INSTEADOF
+                    B
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      A
+                    Label : CONSTANT
+                      bigTalk
+              Label : USE
+                A
+              Label : USE
+                B
+          Label : NAME
+            Talker
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  insteadof
+                  Label : INSTEADOF
+                    A
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      B
+                    Label : CONSTANT
+                      smallTalk
+                Label : ELEMENT
+                  insteadof
+                  Label : INSTEADOF
+                    B
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      A
+                    Label : CONSTANT
+                      bigTalk
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    talk
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      B
+                    Label : CONSTANT
+                      bigTalk
+              Label : USE
+                A
+              Label : USE
+                B
+          Label : NAME
+            Aliased_Talker

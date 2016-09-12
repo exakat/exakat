@@ -1,3 +1,150 @@
-(
-Label : ARGUMENT
-  'E'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticmethodcall.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              'B'
+            Label : VARIABLE
+              $a
+          Label : RIGHT
+            ::
+            Label : CLASS
+              C
+            Label : METHOD
+              D
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'E'
+              Label : NAME
+                D
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              'F'
+            Label : VARIABLE
+              $b
+          Label : RIGHT
+            ::
+            Label : CLASS
+              G
+            Label : METHOD
+              H
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'I'
+              Label : NAME
+                H
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ::
+            Label : CLASS
+              J
+            Label : METHOD
+              K
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'L'
+              Label : NAME
+                K
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  'M'
+                Label : VARIABLE
+                  $c
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  N
+                Label : METHOD
+                  O
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'P'
+                  Label : NAME
+                    O
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    Q
+              Label : NAME
+                empty
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  'R'
+                Label : VARIABLE
+                  $e
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $f
+                Label : PROPERTY
+                  S
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            T
+          Label : METHOD
+            U
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  W
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $h
+                  Label : NAME
+                    W
+                Label : OBJECT
+                  ->
+                  Label : METHOD
+                    V
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      V
+                  Label : OBJECT
+                    $g
+            Label : NAME
+              U

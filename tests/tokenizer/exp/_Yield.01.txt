@@ -1,5 +1,162 @@
-+
-Label : LEFT
-  2
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yield.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          generateRange
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $start
+            Label : ARGUMENT
+              $end
+            Label : ARGUMENT
+              $step
+              Label : DEFAULT
+                1
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  yield
+                  Label : YIELD
+                    $i
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  <
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    $end
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  +=
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    $step
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    $start
+          Label : DEFINITION
+            generateRange
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                1000000
+            Label : NAME
+              generateRange
+          Label : NAME
+            generateRange
+        Label : ELEMENT
+          generateRange2
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $start
+            Label : ARGUMENT
+              $end
+            Label : ARGUMENT
+              $step
+              Label : DEFAULT
+                1
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  yield
+                  Label : YIELD
+                    [
+                    Label : INDEX
+                      1
+                    Label : VARIABLE
+                      $i
+                Label : ELEMENT
+                  yield
+                  Label : YIELD
+                    ?
+                    Label : CONDITION
+                      ->
+                      Label : OBJECT
+                        $i
+                      Label : PROPERTY
+                        y
+                    Label : ELSE
+                      +
+                      Label : LEFT
+                        2
+                      Label : RIGHT
+                        2
+                    Label : THEN
+                      'd'
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  <
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    $end
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  +=
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    $step
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    $start
+          Label : NAME
+            generateRange2
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $number
+              Label : NAME
+                echo
+          Label : SOURCE
+            generateRange
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                1000000
+            Label : NAME
+              generateRange
+          Label : VALUE
+            $number

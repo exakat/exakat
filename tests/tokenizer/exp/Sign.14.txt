@@ -1,5 +1,20 @@
-echo
-Label : ARGUMENT
-  -
-  Label : SIGN
-    true
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              -
+              Label : SIGN
+                true
+          Label : NAME
+            echo

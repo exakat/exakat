@@ -1,20 +1,22 @@
-./tests/tokenizer/source/Plusplus.11.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Plusplus.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        global
-        Label : GLOBAL
-          $a
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          ->
-          Label : OBJECT
+      Label : CODE
+        ;
+        Label : ELEMENT
+          global
+          Label : GLOBAL
             $a
-          Label : PROPERTY
-            b
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              b

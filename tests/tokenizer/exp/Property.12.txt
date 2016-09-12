@@ -1,5 +1,22 @@
-[
-Label : INDEX
-  'method'
-Label : VARIABLE
-  $extend
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            $obj
+          Label : PROPERTY
+            {}
+            Label : CODE
+              [
+              Label : INDEX
+                'method'
+              Label : VARIABLE
+                $extend

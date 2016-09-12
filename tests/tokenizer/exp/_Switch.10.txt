@@ -1,5 +1,34 @@
-=
-Label : LEFT
-  $d
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'b' :  /**/  
+              Label : CASE
+                'b'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    $c
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $d
+                      Label : RIGHT
+                        1
+          Label : NAME
+            $a

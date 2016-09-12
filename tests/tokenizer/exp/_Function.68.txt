@@ -1,11 +1,137 @@
-(
-Label : ARGUMENT
-  $b
-  Label : TYPEHINT
-    C
-Label : ARGUMENT
-  $c
-  Label : DEFAULT
-    null
-  Label : TYPEHINT
-    D
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.68.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              require
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+                  Label : TYPEHINT
+                    C
+                Label : ARGUMENT
+                  $c
+                  Label : DEFAULT
+                    null
+                  Label : TYPEHINT
+                    D
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    )
+                    Label : ARGUMENT
+                      E
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'F'
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        E
+                  Label : NAME
+                    print
+              Label : NAME
+                require
+            Label : ELEMENT
+              require_once
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+                  Label : TYPEHINT
+                    C
+                Label : ARGUMENT
+                  $c
+                  Label : DEFAULT
+                    null
+                  Label : TYPEHINT
+                    D
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    'G'
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        $b
+                      Label : CONCAT
+                        'G'
+                  Label : NAME
+                    print
+              Label : NAME
+                require_once
+            Label : ELEMENT
+              include
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+                  Label : TYPEHINT
+                    C
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    )
+                    Label : ARGUMENT
+                      E
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'F'
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        E
+                  Label : NAME
+                    print
+              Label : NAME
+                include
+            Label : ELEMENT
+              include_once
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+                  Label : TYPEHINT
+                    C
+                Label : ARGUMENT
+                  $c
+                  Label : DEFAULT
+                    null
+                  Label : TYPEHINT
+                    D
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    'G'
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        $b
+                      Label : CONCAT
+                        'G'
+                  Label : NAME
+                    print
+              Label : NAME
+                include_once
+          Label : NAME
+            B

@@ -1,15 +1,45 @@
-echo
-Label : ARGUMENT
-  ?
-  Label : CONDITION
-    empty
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $a
-    Label : NAME
-      empty
-  Label : ELSE
-    'D'
-  Label : THEN
-    'B'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Functioncall.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ?
+              Label : CONDITION
+                empty
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $a
+                Label : NAME
+                  empty
+              Label : ELSE
+                'D'
+              Label : THEN
+                'B'
+          Label : NAME
+            echo
+        Label : ELEMENT
+          E
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              F
+          Label : SOURCE
+            $b
+          Label : VALUE
+            =>
+            Label : KEY
+              $c
+            Label : VALUE
+              $d

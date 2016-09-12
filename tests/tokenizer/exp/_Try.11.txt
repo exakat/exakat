@@ -1,3 +1,40 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Try.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          try
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                1
+          Label : CATCH
+            catch
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    array
+            Label : CLASS
+              \
+              Label : SUBNAME
+                Exception
+            Label : VARIABLE
+              $e

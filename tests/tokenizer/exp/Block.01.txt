@@ -1,5 +1,30 @@
-=
-Label : LEFT
-  $b
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Block.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b
+        Label : ELEMENT
+          {}
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              1

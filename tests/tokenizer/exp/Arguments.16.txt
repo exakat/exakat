@@ -1,11 +1,26 @@
-(
-Label : ARGUMENT
-  new
-  Label : NEW
-    Stdclass
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        Void
-    Label : NAME
-      Stdclass
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              new
+              Label : NEW
+                Stdclass
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  Stdclass
+          Label : NAME
+            f

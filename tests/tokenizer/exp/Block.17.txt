@@ -1,3 +1,270 @@
-(
-Label : ARGUMENT
-  'C'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Block.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          or
+          Label : LEFT
+            B
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'C'
+            Label : NAME
+              B
+          Label : RIGHT
+            die
+            Label : ARGUMENTS
+              Void
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              die
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            D
+          Label : METHOD
+            E
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'F'
+            Label : NAME
+              E
+        Label : ELEMENT
+          G
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                H
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      L
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        L
+                    Label : OBJECT
+                      ::
+                      Label : CLASS
+                        J
+                      Label : METHOD
+                        K
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          K
+                  Label : ARGUMENT
+                    M
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      N
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'O'
+                      Label : NAME
+                        N
+                    Label : OBJECT
+                      $b
+                Label : NAME
+                  E
+          Label : NAME
+            echo
+        Label : ELEMENT
+          P
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ->
+            Label : METHOD
+              N
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'R'
+              Label : NAME
+                N
+            Label : OBJECT
+              $b
+          Label : THEN
+            ;
+            Label : ELEMENT
+              S
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  ->
+                  Label : METHOD
+                    N
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'U'
+                    Label : NAME
+                      N
+                  Label : OBJECT
+                    $b
+                Label : RIGHT
+                  1
+              Label : ELSE
+                ;
+                Label : ELEMENT
+                  {}
+                  Label : ELEMENT
+                    echo
+                    Label : ARGUMENTS
+                      echo
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          V
+                        Label : METHOD
+                          W
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'X'
+                            Label : ARGUMENT
+                              Y
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  ->
+                                  Label : METHOD
+                                    N
+                                    Label : ARGUMENTS
+                                      (
+                                      Label : ARGUMENT
+                                        'AG'
+                                    Label : NAME
+                                      N
+                                  Label : OBJECT
+                                    $c
+                              Label : NAME
+                                Y
+                          Label : NAME
+                            W
+                    Label : NAME
+                      echo
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  {}
+                  Label : ELEMENT
+                    echo
+                    Label : ARGUMENTS
+                      echo
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          V
+                        Label : METHOD
+                          W
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'X'
+                            Label : ARGUMENT
+                              Y
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  ->
+                                  Label : METHOD
+                                    N
+                                    Label : ARGUMENTS
+                                      (
+                                      Label : ARGUMENT
+                                        'U'
+                                    Label : NAME
+                                      N
+                                  Label : OBJECT
+                                    $c
+                              Label : NAME
+                                Y
+                          Label : NAME
+                            W
+                    Label : NAME
+                      echo
+            Label : ELEMENT
+              Void
+            Label : ELEMENT
+              AH
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          AI
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                V
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'AL'
+                Label : NAME
+                  E
+          Label : NAME
+            echo
+        Label : ELEMENT
+          AM
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              $d
+          Label : NAME
+            echo
+        Label : ELEMENT
+          AN
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                D
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'AQ'
+                Label : NAME
+                  E
+          Label : NAME
+            echo
+    Label : ELEMENT
+      AR

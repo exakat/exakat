@@ -1,3 +1,22 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Multiplication.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          *
+          Label : LEFT
+            x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              x
+          Label : RIGHT
+            1

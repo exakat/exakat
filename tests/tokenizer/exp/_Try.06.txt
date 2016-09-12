@@ -1,13 +1,66 @@
-(
-Label : ARGUMENT
-  $a
-Label : ARGUMENT
-  new
-  Label : NEW
-    DateTimeZone
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $b
-    Label : NAME
-      DateTimeZone
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Try.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          try
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $d
+              Label : RIGHT
+                new
+                Label : NEW
+                  DateTime
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $a
+                    Label : ARGUMENT
+                      new
+                      Label : NEW
+                        DateTimeZone
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            $b
+                        Label : NAME
+                          DateTimeZone
+                  Label : NAME
+                    DateTime
+          Label : CATCH
+            catch
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $c
+                Label : RIGHT
+                  date
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'Y-m-d-H-i-s'
+                    Label : ARGUMENT
+                      strtotime
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $d
+                      Label : NAME
+                        strtotime
+                  Label : NAME
+                    date
+            Label : CLASS
+              Exception
+            Label : VARIABLE
+              $e

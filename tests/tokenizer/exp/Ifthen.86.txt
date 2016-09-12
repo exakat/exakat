@@ -1,65 +1,97 @@
-echo
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    D
-  Label : METHOD
-    E
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        F
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          G
-        Label : METHOD
-          H
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.86.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ->
+            Label : OBJECT
               [
               Label : INDEX
-                'K'
+                'B'
               Label : VARIABLE
-                [
-                Label : INDEX
-                  'J'
-                Label : VARIABLE
+                $a
+            Label : PROPERTY
+              C
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
                   ::
                   Label : CLASS
-                    I
-                  Label : PROPERTY
-                    $b
-            Label : ARGUMENT
-              'L'
-            Label : ARGUMENT
-              M
-          Label : NAME
-            H
-      Label : ARGUMENT
-        array
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            =>
-            Label : KEY
-              'N'
-            Label : VALUE
-              'O'
-          Label : ARGUMENT
-            =>
-            Label : KEY
-              'P'
-            Label : VALUE
-              'Q'
-          Label : ARGUMENT
-            =>
-            Label : KEY
-              'R'
-            Label : VALUE
-              'S'
-        Label : NAME
-          array
-    Label : NAME
-      E
+                    D
+                  Label : METHOD
+                    E
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        F
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          G
+                        Label : METHOD
+                          H
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              [
+                              Label : INDEX
+                                'K'
+                              Label : VARIABLE
+                                [
+                                Label : INDEX
+                                  'J'
+                                Label : VARIABLE
+                                  ::
+                                  Label : CLASS
+                                    I
+                                  Label : PROPERTY
+                                    $b
+                            Label : ARGUMENT
+                              'L'
+                            Label : ARGUMENT
+                              M
+                          Label : NAME
+                            H
+                      Label : ARGUMENT
+                        array
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'N'
+                            Label : VALUE
+                              'O'
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'P'
+                            Label : VALUE
+                              'Q'
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'R'
+                            Label : VALUE
+                              'S'
+                        Label : NAME
+                          array
+                    Label : NAME
+                      E
+              Label : NAME
+                echo
+            Label : ELEMENT
+              S
+    Label : ELEMENT
+      T

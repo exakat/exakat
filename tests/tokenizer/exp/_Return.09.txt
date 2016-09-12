@@ -1,5 +1,20 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            1
+        Label : ELEMENT
+          return
+          Label : RETURN
+            $x

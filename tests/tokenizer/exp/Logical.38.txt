@@ -1,3 +1,43 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.38.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &&
+            Label : LEFT
+              instanceof
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  B
+                Label : SUBNAME
+                  C
+              Label : VARIABLE
+                $a
+            Label : RIGHT
+              $d
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                ->
+                Label : METHOD
+                  g
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    g
+                Label : OBJECT
+                  $f

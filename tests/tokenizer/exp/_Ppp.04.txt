@@ -1,3 +1,75 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Ppp.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              __clone
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : FINAL
+                final
+              Label : NAME
+                __clone
+              Label : PRIVATE
+                private
+          Label : NAME
+            x
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              __clone
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : FINAL
+                final
+              Label : NAME
+                __clone
+              Label : PUBLIC
+                public
+          Label : NAME
+            x2
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              __clone
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : FINAL
+                final
+              Label : NAME
+                __clone
+              Label : PROTECTED
+                protected
+          Label : NAME
+            x3

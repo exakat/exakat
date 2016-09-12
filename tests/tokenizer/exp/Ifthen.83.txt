@@ -1,52 +1,54 @@
-./tests/tokenizer/source/Ifthen.83.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.83.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $x
-        Label : ELSE
-          ;
-          Label : ELEMENT
-            Void
-        Label : THEN
-          ;
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $x2
-        Label : ELSE
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $c
-        Label : THEN
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $d
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $x2
-        Label : ELSE
-          {}
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
-        Label : THEN
-          {}
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $a
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $x
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              Void
+          Label : THEN
+            ;
+            Label : ELEMENT
+              Void
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $x2
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $c
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $x2
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a

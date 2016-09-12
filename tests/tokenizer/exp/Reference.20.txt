@@ -1,17 +1,28 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  "
-  Label : CONCAT
-    a=
-  Label : CONCAT
-    $b
-  Label : CONCAT
-    &
-  Label : CONCAT
-    $c
-  Label : CONCAT
-    =
-  Label : CONCAT
-    $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            "
+            Label : CONCAT
+              a=
+            Label : CONCAT
+              $b
+            Label : CONCAT
+              &
+            Label : CONCAT
+              $c
+            Label : CONCAT
+              =
+            Label : CONCAT
+              $d

@@ -1,3 +1,78 @@
-(
-Label : ARGUMENT
-  $h
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ->
+            Label : OBJECT
+              ->
+              Label : METHOD
+                i
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  i
+              Label : OBJECT
+                ->
+                Label : METHOD
+                  g
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $h
+                  Label : NAME
+                    g
+                Label : OBJECT
+                  $f
+            Label : PROPERTY
+              {}
+              Label : CODE
+                ->
+                Label : OBJECT
+                  $j
+                Label : PROPERTY
+                  k
+          Label : RIGHT
+            $l
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ->
+            Label : OBJECT
+              ->
+              Label : METHOD
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  c
+              Label : OBJECT
+                ->
+                Label : METHOD
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    b
+                Label : OBJECT
+                  $a
+            Label : PROPERTY
+              d
+          Label : RIGHT
+            $e

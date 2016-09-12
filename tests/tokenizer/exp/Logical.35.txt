@@ -1,5 +1,30 @@
-[
-Label : INDEX
-  'b'
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.35.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !=
+            Label : LEFT
+              (bool)
+              Label : CAST
+                [
+                Label : INDEX
+                  'b'
+                Label : VARIABLE
+                  $a
+            Label : RIGHT
+              (bool)
+              Label : CAST
+                $c
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void

@@ -1,7 +1,26 @@
-[
-Label : INDEX
-  --
-  Label : POSTPLUSPLUS
-    $x
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Plusplus.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : INDEX
+            --
+            Label : POSTPLUSPLUS
+              $x
+          Label : VARIABLE
+            $a
+        Label : ELEMENT
+          [
+          Label : INDEX
+            --
+            Label : PREPLUSPLUS
+              $y
+          Label : VARIABLE
+            $b

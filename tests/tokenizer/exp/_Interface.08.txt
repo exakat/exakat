@@ -1,3 +1,32 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Interface.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              E
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                Void
+              Label : NAME
+                E
+              Label : PUBLIC
+                public
+          Label : NAME
+            B
+          Label : EXTENDS
+            C
+          Label : EXTENDS
+            D

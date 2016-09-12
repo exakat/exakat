@@ -1,3 +1,100 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yield.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  yield
+                  Label : YIELD
+                    =>
+                    Label : KEY
+                      .
+                      Label : CONCAT
+                        "g"
+                      Label : CONCAT
+                        ->
+                        Label : METHOD
+                          i
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            i
+                        Label : OBJECT
+                          $h
+                    Label : VALUE
+                      ->
+                      Label : METHOD
+                        k
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          k
+                      Label : OBJECT
+                        $j
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    d
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      d
+                  Label : OBJECT
+                    $c
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      f
+                  Label : OBJECT
+                    $e
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    b
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      b
+                  Label : OBJECT
+                    $a
+          Label : NAME
+            x
+        Label : ELEMENT
+          Void

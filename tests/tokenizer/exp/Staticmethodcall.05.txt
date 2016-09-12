@@ -1,3 +1,58 @@
-(
-Label : ARGUMENT
-  'A'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticmethodcall.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              defined
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'A'
+              Label : NAME
+                defined
+          Label : THEN
+            {}
+            Label : ELEMENT
+              exit
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'B'
+              Label : NAME
+                exit
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            C
+          Label : METHOD
+            d
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'e'
+            Label : NAME
+              d
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              static
+              Label : PPP
+                $g
+              Label : PROTECTED
+                protected
+              Label : STATIC
+                static
+          Label : NAME
+            f

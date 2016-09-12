@@ -1,17 +1,60 @@
-(
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    ::
-    Label : CLASS
-      D
-    Label : METHOD
-      E
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          Void
-      Label : NAME
-        E
-  Label : CONCAT
-    'F'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.34.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &&
+            Label : LEFT
+              &
+              Label : LEFT
+                ==
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  'B'
+              Label : RIGHT
+                !=
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  null
+            Label : RIGHT
+              ->
+              Label : METHOD
+                C
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      ::
+                      Label : CLASS
+                        D
+                      Label : METHOD
+                        E
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          E
+                    Label : CONCAT
+                      'F'
+                Label : NAME
+                  C
+              Label : OBJECT
+                $c
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d

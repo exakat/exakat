@@ -1,9 +1,26 @@
-[
-Label : INDEX
-  2
-Label : VARIABLE
-  ::
-  Label : CLASS
-    $a
-  Label : PROPERTY
-    $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arrayappend.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ]
+            Label : APPEND
+              [
+              Label : INDEX
+                2
+              Label : VARIABLE
+                ::
+                Label : CLASS
+                  $a
+                Label : PROPERTY
+                  $b
+          Label : RIGHT
+            2

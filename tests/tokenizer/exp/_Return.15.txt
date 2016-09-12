@@ -1,7 +1,44 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $c
-  Label : PROPERTY
-    d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              ->
+              Label : METHOD
+                b
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $c
+                    Label : PROPERTY
+                      d
+                Label : NAME
+                  b
+              Label : OBJECT
+                $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                =
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : PROPERTY
+                    f
+                Label : RIGHT
+                  'g'

@@ -1,5 +1,54 @@
-[
-Label : INDEX
-  $b
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.47.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'D' :  /**/  
+              Label : CASE
+                'D'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    $e
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $f
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+            Label : ELEMENT
+              case 'G' :  /**/  
+              Label : CASE
+                'G'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $h
+          Label : NAME
+            [
+            Label : INDEX
+              'c'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                $b
+              Label : VARIABLE
+                $a

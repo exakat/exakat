@@ -1,38 +1,40 @@
-./tests/tokenizer/source/Staticproperty.07.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticproperty.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            A
-        Label : PROPERTY
-          $B
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            A
-          Label : SUBNAME
-            C
-        Label : PROPERTY
-          $B
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            A
-          Label : SUBNAME
-            C
-          Label : SUBNAME
-            D
-        Label : PROPERTY
-          $B
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            \
+            Label : SUBNAME
+              A
+          Label : PROPERTY
+            $B
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              C
+          Label : PROPERTY
+            $B
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+          Label : PROPERTY
+            $B

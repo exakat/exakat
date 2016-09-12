@@ -1,3 +1,23 @@
-echo
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      I
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              $b
+          Label : NAME
+            echo
+        Label : ELEMENT
+          J
+        Label : ELEMENT
+          K

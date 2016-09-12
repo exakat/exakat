@@ -1,13 +1,92 @@
-'C'
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    B
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        __FILE__
-    Label : NAME
-      B
-  Label : CONCAT
-    'C'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.73.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          require_once
+          Label : ARGUMENTS
+            'C'
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    __FILE__
+                Label : NAME
+                  B
+              Label : CONCAT
+                'C'
+          Label : NAME
+            require_once
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              D
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'E'
+              Label : NAME
+                D
+          Label : THEN
+            ;
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  var
+                  Label : PPP
+                    =
+                    Label : LEFT
+                      $a
+                    Label : RIGHT
+                      array
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        array
+                  Label : VAR
+                    var
+                Label : ELEMENT
+                  var
+                  Label : PPP
+                    =
+                    Label : LEFT
+                      $b
+                    Label : RIGHT
+                      array
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        array
+                  Label : VAR
+                    var
+              Label : NAME
+                F
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : EXTENDS
+                H
+              Label : NAME
+                G
+        Label : ELEMENT
+          Void

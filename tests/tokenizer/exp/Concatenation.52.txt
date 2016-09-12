@@ -1,5 +1,150 @@
-(
-Label : ARGUMENT
-  $d
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.52.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  C
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $d
+                    Label : ARGUMENT
+                      $b
+                  Label : NAME
+                    C
+                Label : RIGHT
+                  0
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $e
+                  Label : RIGHT
+                    .
+                    Label : CONCAT
+                      D
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'E'
+                        Label : ARGUMENT
+                          F
+                        Label : ARGUMENT
+                          $d
+                      Label : NAME
+                        D
+                    Label : CONCAT
+                      'G'
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    ===
+                    Label : LEFT
+                      $c
+                    Label : RIGHT
+                      null
+                  Label : ELSE
+                    {}
+                    Label : ELEMENT
+                      foreach
+                      Label : BLOCK
+                        {}
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            J
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                .
+                                Label : CONCAT
+                                  $g
+                                Label : CONCAT
+                                  F
+                                Label : CONCAT
+                                  $e
+                            Label : NAME
+                              J
+                          Label : THEN
+                            {}
+                            Label : ELEMENT
+                              require
+                              Label : ARGUMENTS
+                                $e
+                                Label : ARGUMENT
+                                  .
+                                  Label : CONCAT
+                                    $g
+                                  Label : CONCAT
+                                    F
+                                  Label : CONCAT
+                                    $e
+                              Label : NAME
+                                require
+                            Label : ELEMENT
+                              return
+                              Label : RETURN
+                                I
+                      Label : SOURCE
+                        (array)
+                        Label : CAST
+                          $c
+                      Label : VALUE
+                        $g
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      if
+                      Label : CONDITION
+                        =
+                        Label : LEFT
+                          $f
+                        Label : RIGHT
+                          H
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              $e
+                          Label : NAME
+                            H
+                      Label : THEN
+                        {}
+                        Label : ELEMENT
+                          require
+                          Label : ARGUMENTS
+                            $f
+                            Label : ARGUMENT
+                              $f
+                          Label : NAME
+                            require
+                        Label : ELEMENT
+                          return
+                          Label : RETURN
+                            I
+          Label : SOURCE
+            ::
+            Label : CLASS
+              B
+            Label : PROPERTY
+              $a
+          Label : VALUE
+            =>
+            Label : KEY
+              $b
+            Label : VALUE
+              $c

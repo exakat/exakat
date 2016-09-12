@@ -1,3 +1,32 @@
-continue
-Label : CONTINUE
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.77.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                0
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a
+                Label : ELEMENT
+                  continue
+                  Label : CONTINUE
+                    Void
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

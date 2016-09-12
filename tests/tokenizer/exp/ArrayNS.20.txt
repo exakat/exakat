@@ -1,3 +1,50 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/ArrayNS.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                new
+                Label : NEW
+                  \
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : ARGUMENTS
+                        [
+                        Label : ARGUMENT
+                          =>
+                          Label : KEY
+                            'F'
+                          Label : VALUE
+                            'G'
+                      Label : VARIABLE
+                        [
+                  Label : NAME
+                    \
+                    Label : SUBNAME
+                      C
+                    Label : SUBNAME
+                      D
+                    Label : SUBNAME
+                      E
+          Label : NAME
+            B
+        Label : ELEMENT
+          Void

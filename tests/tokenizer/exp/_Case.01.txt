@@ -1,13 +1,30 @@
-case '1' :  /**/  
-Label : CASE
-  '1'
-Label : CODE
-  ;
-  Label : ELEMENT
-    ?
-    Label : CONDITION
-      $x
-    Label : ELSE
-      'b'
-    Label : THEN
-      'a'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Case.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case '1' :  /**/  
+              Label : CASE
+                '1'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ?
+                  Label : CONDITION
+                    $x
+                  Label : ELSE
+                    'b'
+                  Label : THEN
+                    'a'
+          Label : NAME
+            $x

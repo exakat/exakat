@@ -1,13 +1,28 @@
-[
-Label : INDEX
-  [
-  Label : INDEX
-    'e'
-  Label : VARIABLE
-    $d
-Label : VARIABLE
-  ::
-  Label : CLASS
-    b
-  Label : PROPERTY
-    $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Array.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            [
+            Label : INDEX
+              [
+              Label : INDEX
+                'e'
+              Label : VARIABLE
+                $d
+            Label : VARIABLE
+              ::
+              Label : CLASS
+                b
+              Label : PROPERTY
+                $c

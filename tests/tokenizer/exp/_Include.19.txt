@@ -1,3 +1,41 @@
-(
-Label : ARGUMENT
-  'C'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'C'
+          Label : NAME
+            B
+        Label : ELEMENT
+          'D'
+          Label : CODE
+            'D'
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            include
+        Label : ELEMENT
+          'E'
+          Label : CODE
+            'E'
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            include

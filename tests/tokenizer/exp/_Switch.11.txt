@@ -1,5 +1,44 @@
-[
-Label : INDEX
-  'c'
-Label : VARIABLE
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'a' :  /**/  
+              Label : CASE
+                'a'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  &&
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      'd'
+                    Label : VARIABLE
+                      [
+                      Label : INDEX
+                        'c'
+                      Label : VARIABLE
+                        $b
+                  Label : RIGHT
+                    =
+                    Label : LEFT
+                      $e
+                    Label : RIGHT
+                      'f'
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+          Label : NAME
+            $a

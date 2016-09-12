@@ -1,12 +1,14 @@
-./tests/tokenizer/source/Parenthesis.01.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        1
-        Label : CODE
+      Label : CODE
+        ;
+        Label : ELEMENT
           1
+          Label : CODE
+            1

@@ -1,7 +1,22 @@
-]
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'b'
-  Label : VARIABLE
-    $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            ]
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'b'
+              Label : VARIABLE
+                $a
+          Label : NAME
+            include

@@ -1,3 +1,180 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                )
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    b
+                    Label : CODE
+                      ->
+                      Label : OBJECT
+                        $a
+                      Label : PROPERTY
+                        b
+                  Label : ELSE
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      f
+                  Label : THEN
+                    c
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $d
+                        Label : PROPERTY
+                          e
+                    Label : NAME
+                      c
+          Label : NAME
+            a
+        Label : ELEMENT
+          b
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                )
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    b
+                    Label : CODE
+                      ::
+                      Label : CLASS
+                        a
+                      Label : CONSTANT
+                        b
+                  Label : ELSE
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      f
+                  Label : THEN
+                    c
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $d
+                        Label : PROPERTY
+                          e
+                    Label : NAME
+                      c
+          Label : NAME
+            b
+        Label : ELEMENT
+          c
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                )
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    $b
+                    Label : CODE
+                      ::
+                      Label : CLASS
+                        a
+                      Label : PROPERTY
+                        $b
+                  Label : ELSE
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      f
+                  Label : THEN
+                    c
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $d
+                        Label : PROPERTY
+                          e
+                    Label : NAME
+                      c
+          Label : DEFINITION
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  e
+            Label : NAME
+              c
+          Label : DEFINITION
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  e
+            Label : NAME
+              c
+          Label : DEFINITION
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  e
+            Label : NAME
+              c
+          Label : NAME
+            c
+        Label : ELEMENT
+          Void

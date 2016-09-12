@@ -1,11 +1,26 @@
-[
-Label : INDEX
-  &
-  Label : LEFT
-    ++
-    Label : PREPLUSPLUS
-      $b
-  Label : RIGHT
-    1
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.36.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              &
+              Label : LEFT
+                ++
+                Label : PREPLUSPLUS
+                  $b
+              Label : RIGHT
+                1
+            Label : VARIABLE
+              $a
+          Label : RIGHT
+            $c

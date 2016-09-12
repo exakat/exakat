@@ -1,5 +1,58 @@
-(
-Label : ARGUMENT
-  'C'
-Label : ARGUMENT
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.39.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              ===
+              Label : LEFT
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'C'
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  B
+              Label : RIGHT
+                NULL
+          Label : THEN
+            ;
+            Label : ELEMENT
+              1
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &
+            Label : LEFT
+              $b
+            Label : RIGHT
+              ===
+              Label : LEFT
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'C'
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  B
+              Label : RIGHT
+                NULL
+          Label : THEN
+            ;
+            Label : ELEMENT
+              2

@@ -1,7 +1,18 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  @
-  Label : AT
-    1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Noscream.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            @
+            Label : AT
+              1

@@ -1,5 +1,38 @@
-[
-Label : INDEX
-  'b'
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !=
+            Label : LEFT
+              @
+              Label : AT
+                [
+                Label : INDEX
+                  'b'
+                Label : VARIABLE
+                  $a
+            Label : RIGHT
+              'c'
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                @
+                Label : AT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    e
+              Label : RIGHT
+                'f'

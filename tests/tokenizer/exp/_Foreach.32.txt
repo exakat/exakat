@@ -1,23 +1,78 @@
-echo
-Label : ARGUMENT
-  ->
-  Label : METHOD
-    escape
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        ->
-        Label : METHOD
-          slug
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.32.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    escape
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          slug
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              $label
+                          Label : NAME
+                            slug
+                        Label : OBJECT
+                          $tpl
+                    Label : NAME
+                      escape
+                  Label : OBJECT
+                    $tpl
+              Label : NAME
+                echo
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    escape
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $label
+                    Label : NAME
+                      escape
+                  Label : OBJECT
+                    $tpl
+              Label : NAME
+                echo
+            Label : ELEMENT
+              D
+          Label : SOURCE
+            $tables
+          Label : VALUE
+            =>
+            Label : KEY
               $label
-          Label : NAME
-            slug
-        Label : OBJECT
-          $tpl
-    Label : NAME
-      escape
-  Label : OBJECT
-    $tpl
+            Label : VALUE
+              $data
+    Label : ELEMENT
+      E
+

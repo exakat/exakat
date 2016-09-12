@@ -1,5 +1,20 @@
-{
-Label : INDEX
-  $b
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            (string)
+            Label : CAST
+              {
+              Label : INDEX
+                $b
+              Label : VARIABLE
+                $a
