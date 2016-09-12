@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('\D', 
+                      'A22\CD');
 
 $expected_not = array('A',
                       'B\C',
