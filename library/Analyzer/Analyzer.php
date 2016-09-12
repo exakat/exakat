@@ -514,7 +514,7 @@ repeat(__.in('.$linksDown.'))
             unset($a);
 
             $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(eq(0)) )', $analyzer);
-        } else{ 
+        } else {
             if ($analyzer == 'self') {
                 $analyzer = str_replace('\\', '\\\\', $this->analyzer);
             } else {
