@@ -290,17 +290,17 @@ class Load extends Tasks {
             }
         }
 
-        $extPhp = array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  );
-        $shell = 'find '.$dir.' \\( -name "*.'.(implode('" -o -name "*.', $extPhp)).'" \\) \\( -not -path "*'.(implode('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l ! -type d';
-        $res = trim(shell_exec($shell));
-        $files = explode("\n", $res);
+        $files = [];
+        $ignoredFiles = [];
+        Files::findFiles($files, $ignoredFiles);
 
         $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
         $this->links = array();
 
         $nbTokens = 0;
+        $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
         foreach($files as $file) {
-            if ($r = $this->processFile($file)) {
+            if ($r = $this->processFile($path.$file)) {
                 $nbTokens += $r;
                 $this->saveFiles();
             }
@@ -311,7 +311,7 @@ class Load extends Tasks {
     }
 
     private function processFile($filename) {
-        display( "Process $filename\n");
+        display( "Process '$filename'\n");
         $this->log->log("$filename");
         $this->filename = $filename;
         

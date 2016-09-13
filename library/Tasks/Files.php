@@ -51,55 +51,10 @@ class Files extends Tasks {
         
         $this->checkComposer($dir);
 
-        // Actually finding the files
-        $ignoreDirs = array();
-        foreach($config->ignore_dirs as $ignore) {
-            if ($ignore[0] == '/') {
-                $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
-                if (!file_exists($d)) {
-                    continue;
-                }
-                $ignoreDirs[] = $ignore.'.*';
-            } else {
-                $ignoreDirs[] = '.*'.$ignore.'.*';
-            }
-        }
-        if (empty($ignoreDirs)) {
-            $regex = '';
-        } else {
-            $regex = '#^('.implode('|', $ignoreDirs).')#';
-        }
-
-        $php = new \Phpexec();
-        $ignoredFiles = array();
-
-        $d = getcwd();
-        chdir($config->projects_root.'/projects/'.$dir.'/code');
-        $files = rglob( '.');
-        chdir($d);
-        $exts = $config->file_extensions;
-
-        foreach($files as $id => &$file) {
-            $file = substr($file, 1);
-            $ext = pathinfo($file, PATHINFO_EXTENSION);
-            if (empty($ext)) {
-                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
-                    unset($files[$id]);
-                    $ignoredFiles[] = $file;
-                }
-            } elseif (!in_array($ext, $exts)) {
-                // selection of extensions
-                unset($files[$id]);
-            } elseif (!empty($regex) && preg_match($regex, $file)) {
-                // Matching the 'ignored dir' pattern
-                unset($files[$id]);
-                $ignoredFiles[] = $file;
-            } elseif ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
-                unset($files[$id]);
-                $ignoredFiles[] = $file;
-            }
-        }
-
+        $ignoredFiles = [];
+        $files = [];
+        self::findFiles($files, $ignoredFiles);
+        
         $this->datastore->addRow('ignoredFiles', array_map(function ($a) {
                 return array('file'   => $a);
             }, $ignoredFiles));
@@ -300,6 +255,62 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('hash', $composerInfo);
+    }
+    
+    static public function findFiles(&$files, &$ignoredFiles) {
+        $config = \Config::factory();
+        $ignore_dirs = $config->ignore_dirs;
+        $dir = $config->project;
+
+        // Actually finding the files
+        $ignoreDirs = array();
+        foreach($ignore_dirs as $ignore) {
+            if ($ignore[0] == '/') {
+                $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
+                if (!file_exists($d)) {
+                    continue;
+                }
+                $ignoreDirs[] = $ignore.'.*';
+            } else {
+                $ignoreDirs[] = '.*'.$ignore.'.*';
+            }
+        }
+        if (empty($ignoreDirs)) {
+            $regex = '';
+        } else {
+            $regex = '#^('.implode('|', $ignoreDirs).')#';
+        }
+
+        $php = new \Phpexec();
+        $ignoredFiles = array();
+
+        $d = getcwd();
+        chdir($config->projects_root.'/projects/'.$dir.'/code');
+        $files = rglob( '.');
+        chdir($d);
+        $exts = $config->file_extensions;
+
+        foreach($files as $id => &$file) {
+            $file = substr($file, 1);
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+            if (empty($ext)) {
+                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
+                    unset($files[$id]);
+                    $ignoredFiles[] = $file;
+                }
+            } elseif (!in_array($ext, $exts)) {
+                // selection of extensions
+                unset($files[$id]);
+            } elseif (!empty($regex) && preg_match($regex, $file)) {
+                // Matching the 'ignored dir' pattern
+                unset($files[$id]);
+                $ignoredFiles[] = $file;
+            } elseif ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
+                unset($files[$id]);
+                $ignoredFiles[] = $file;
+            }
+        }
+
     }
 }
 
