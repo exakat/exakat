@@ -9,5 +9,9 @@ if(strpos(basename(__FILE__), 'phar') !== false){
 
 $graphDB = new \Graph\Gremlin3($config);
 
-$exakat = new \Exakat($graphDB);
-$exakat->execute($config);
+try {
+    $exakat = new \Exakat($graphDB);
+    $exakat->execute($config);
+} catch (Throwable $e) {
+    print "\nError : ".$e->getMessage()."\nStopping execution\n\n";
+} 

@@ -157,7 +157,7 @@ class Precedence {
         }
         
         if (!isset($cache[$token])) {
-            die("No precedence for $token\n");
+            throw new \Exceptions\NoPrecedence($token);
         }
         
         return $cache[$token];
@@ -165,7 +165,9 @@ class Precedence {
     
     public static function preloadConstants($version) {
         $filename = dirname(__DIR__).'/Tokens/Const' . substr($version, 0, 1) . substr($version, 2, 1) . ".php";
-        print_r($filename);
+        if (!file_exists($filename)) {
+            throw new \Exceptions\NoConstFile($version);
+        }
         include($filename);
     }
 }
