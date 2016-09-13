@@ -55,8 +55,21 @@ namespace Tasks;
 
 PHP;
 
+$consts = glob('library/Tokens/Const*.php');
+
+foreach($consts as $id => $f) {
+    $constFile[$id] = file_get_contents($f);
+}
+
 $total = 0;
+$missing = [];
 foreach($x['tokenizer'] as $name => $value) {
+    foreach($constFile as $id => $c) {
+        if (strpos($c, $name)  === false) {
+            $missing[$consts[$id]][] = "const $name = -1;";
+        }
+    }
+
     if (substr($name, 0, 2) != 'T_') { 
         continue; 
     }
@@ -64,6 +77,8 @@ foreach($x['tokenizer'] as $name => $value) {
 
     $php .= "const $name = $value;\n";
 }
+
+print_r($missing);
 
 $php .= "\n".'?>';
 

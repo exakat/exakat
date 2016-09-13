@@ -156,4 +156,8 @@ const T_COALESCE = -1;
 const T_YIELD_FROM = -1;
 const T_SPACESHIP = -1;
 
+const T_POW_EQUAL = -1;
+const T_POW = -1;
+const T_ELLIPSIS = -1;
+const TOKEN_PARSE = -1;
 ?>

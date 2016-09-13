@@ -146,4 +146,18 @@ const T_DIR = 379;
 const T_NS_SEPARATOR = 380;
 const T_DOUBLE_COLON = 376;
 
+const T_YIELD = -1;
+const T_YIELD_FROM = -1;
+const T_POW_EQUAL = -1;
+const T_COALESCE = -1;
+const T_SPACESHIP = -1;
+const T_POW = -1;
+const T_FINALLY = -1;
+const T_INSTEADOF = -1;
+const T_TRAIT = -1;
+const T_CALLABLE = -1;
+ const T_TRAIT_C = -1;
+ const T_ELLIPSIS = -1;
+ const TOKEN_PARSE = -1;
+
 ?>
