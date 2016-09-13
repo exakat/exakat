@@ -21,12 +21,12 @@
 */
 
 
-namespace Exceptions;
+namespace Exakat\Exceptions;
 
-class TooManyLevelInsideAStringException extends \Exception {
+class WrongNumberOfColsForAHash extends \RuntimeException {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
         
-        parent::__construct("Too many levels inside the string : won't load.\n", $code, $previous);
+        parent::__construct("When storing a hash in datastore, table '$message' must have 2 columns (plus id).\n", $code, $previous);
     }
 }
 

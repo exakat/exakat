@@ -21,7 +21,7 @@
 */
 
 
-namespace Exceptions;
+namespace Exakat\Exceptions;
 
 class NoSuchDir extends \RuntimeException {
     public function __construct($filename = '', $code = 0, \Exception $previous = null) {

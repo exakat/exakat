@@ -21,11 +21,12 @@
 */
 
 
-namespace Exceptions;
+namespace Exakat\Exceptions;
 
-class NoCodeInProject extends \RuntimeException {
-    public function __construct($project = '', $code = 0, \Exception $previous = null) {
-        parent::__construct("No code in project '$project'", $code, $previous);
+class NoSuchAnalyzer extends \RuntimeException {
+    public function __construct($message = '', $code = 0, \Exception $previous = null) {
+        
+        parent::__construct("No such Analyzer as '$message'.\n", $code, $previous);
     }
 }
 

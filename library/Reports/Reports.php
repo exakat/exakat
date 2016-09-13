@@ -27,7 +27,7 @@ abstract class Reports {
 
     CONST FILE_EXTENSION = 'undefined';
     CONST FORMATS        = ['Clustergrammer', 'Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
-                            'Text', 'Xml', 'Uml', 'ZendFramework'];
+                            'Text', 'Xml', 'Uml', 'ZendFramework', 'Ambassador'];
 
     protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE

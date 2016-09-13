@@ -21,12 +21,12 @@
 */
 
 
-namespace Exceptions;
+namespace Exakat\Exceptions;
 
-class NoSuchAnalyzer extends \Exception {
+class NoPrecedence extends \Exception {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
-        
-        parent::__construct("No such Analyzer as '$message'.\n", $code, $previous);
+
+        parent::__construct("No precedence for $message\n", $code, $previous);
     }
 }
 

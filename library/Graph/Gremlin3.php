@@ -166,11 +166,7 @@ GREMLIN;
     
         $result = json_decode($result);
         if (isset($result->errormessage)) {
-            print "Gremlin error : ";//javax.script.ScriptException: groovy.lang.MissingMethodException: 
-            print $result->errormessage."\n";
-            print "Query : $query\n";//javax.script.ScriptException: groovy.lang.MissingMethodException: 
-            die();
-//            throw new \Exceptions\GremlinException($result->errormessage, $query);
+            throw new Exakat\Exceptions\GremlinException($result->errormessage, $query);
         }
 
         return $result;

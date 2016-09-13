@@ -21,7 +21,7 @@
 */
 
 
-namespace Exceptions;
+namespace Exakat\Exceptions;
 
 class NoSuchProject extends \RuntimeException {
     public function __construct($project = '', $code = 0, \Exception $previous = null) {

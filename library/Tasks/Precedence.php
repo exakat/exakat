@@ -157,16 +157,17 @@ class Precedence {
         }
         
         if (!isset($cache[$token])) {
-            throw new \Exceptions\NoPrecedence($token);
+            throw new Exakat\Exceptions\NoPrecedence($token);
         }
         
         return $cache[$token];
     }
     
     public static function preloadConstants($version) {
-        $filename = dirname(__DIR__).'/Tokens/Const' . substr($version, 0, 1) . substr($version, 2, 1) . ".php";
+        $filename = dirname(__DIR__).'/Tokens/Const' . $version[0] . $version[2] . ".php";
+        var_dump($filename);
         if (!file_exists($filename)) {
-            throw new \Exceptions\NoConstFile($version);
+            throw new Exakat\Exceptions\NoConstFile($version);
         }
         include($filename);
     }

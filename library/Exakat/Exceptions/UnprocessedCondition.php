@@ -21,9 +21,9 @@
 */
 
 
-namespace Exceptions;
+namespace Exakat\Exceptions;
 
-class UnprocessedCondition extends \Exception {
+class UnprocessedCondition extends \RuntimeException {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
         
         parent::__construct( "Some condition were not used in TokenAuto!", $code, $previous);

@@ -34,7 +34,7 @@ class Status extends Tasks {
         $path = $config->projects_root.'/projects/'.$project;
         
         if (!file_exists($path.'/')) {
-            throw new \Exceptions\NoSuchProject($project);
+            throw new Exakat\Exceptions\NoSuchProject($project);
         }
 
         $status = array('project' => $project);

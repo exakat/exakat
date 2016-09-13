@@ -217,7 +217,7 @@ class Load extends Tasks {
         $this->config = $config;
         
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
-            throw new \Exceptions\NoSuchProject($this->config->project);
+            throw new Exakat\Exceptions\NoSuchProject($this->config->project);
         }
 
         $this->checkTokenLimit();
@@ -320,7 +320,7 @@ class Load extends Tasks {
     
         if (is_link($filename)) { return true; }
         if (!file_exists($filename)) {
-            throw new \Exceptions\NoSuchFile( $filename );
+            throw new Exakat\Exceptions\NoSuchFile( $filename );
         }
 
         $file = realpath($filename);

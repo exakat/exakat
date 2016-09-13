@@ -21,11 +21,11 @@
 */
 
 
-namespace Exceptions;
+namespace Exakat\Exceptions;
 
-class NoSuchFile extends \RuntimeException {
-    public function __construct($filename = '', $code = 0, \Exception $previous = null) {
-        parent::__construct('No such file as "'.$filename.'"', $code, $previous);
+class NoCodeInProject extends \RuntimeException {
+    public function __construct($project = '', $code = 0, \Exception $previous = null) {
+        parent::__construct("No code in project '$project'", $code, $previous);
     }
 }
 

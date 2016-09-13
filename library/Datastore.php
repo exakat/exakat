@@ -95,7 +95,7 @@ class Datastore {
             }
             
             if (count($cols) != 2) {
-                throw new Exceptions\WrongNumberOfColsForAHash();
+                throw new Exakat\Exceptions\WrongNumberOfColsForAHash();
             }
         }
         
@@ -410,7 +410,7 @@ SQLITE;
                 break;
 
             default : 
-                throw new Exceptions\NoStructureForTable($table);
+                throw new Exakat\Exceptions\NoStructureForTable($table);
         }
 
         self::$sqliteWrite->query($createTable);

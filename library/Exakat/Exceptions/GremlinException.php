@@ -21,12 +21,12 @@
 */
 
 
-namespace Exceptions;
+namespace Exakat\Exceptions;
 
-class NoStructureForTable extends \Exception {
-    public function __construct($message = '', $code = 0, \Exception $previous = null) {
+class GremlinException extends \Exception {
+    public function __construct($message = '', $query = '', \Exception $previous = null) {
         
-        parent::__construct("No structure for table '$message'.\n", $code, $previous);
+        parent::__construct("Error during Gremlin query : '$message'.\nQuery : $query\n", 1, $previous);
     }
 }
 
