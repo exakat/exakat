@@ -217,8 +217,7 @@ class Load extends Tasks {
         $this->config = $config;
         
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
-            display('No such project as "'.$this->config->project.'". Aborting');
-            die();
+            throw new \Exceptions\NoSuchProject($this->config->project);
         }
 
         $this->checkTokenLimit();
@@ -321,7 +320,7 @@ class Load extends Tasks {
     
         if (is_link($filename)) { return true; }
         if (!file_exists($filename)) {
-            die( '"'.$filename.'" doesn\'t exists. Aborting');
+            throw new \Exceptions\NoSuchFile( $filename );
         }
 
         $file = realpath($filename);
