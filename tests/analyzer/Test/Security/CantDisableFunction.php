@@ -8,8 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Security_CantDisableFunction extends Analyzer {
-    /* 1 methods */
+    /* 3 methods */
 
     public function testSecurity_CantDisableFunction01()  { $this->generic_test('Security/CantDisableFunction.01'); }
+    public function testSecurity_CantDisableFunction02()  { $this->generic_test('Security/CantDisableFunction.02'); }
+    public function testSecurity_CantDisableFunction03()  { $this->generic_test('Security/CantDisableFunction.03'); }
 }
 ?>
