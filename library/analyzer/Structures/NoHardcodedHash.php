@@ -26,20 +26,27 @@ use Analyzer;
 class NoHardcodedHash extends Analyzer\Analyzer {
     public function analyze() {
         $algos = $this->loadJson('hash_length.json');
+        $stopwords = $this->loadIni('NotHash.ini', 'ignore');
+        
+        $regexDate = '^\\\\d{4}(0?[1-9]|1[012])(0?[1-9]|[12][0-9]|3[01])\$';
         
         // Find common hashes, based on hexadecimal and length
         foreach($algos as $size => $algo) {
             $this->atomIs('String')
                  ->hasNoOut('T_CONCAT')
                  ->regexIs('noDelimiter', '^[a-fA-Z0-9]{'.$size.'}\\$')
-                 ->isNotMixedcase('noDelimiter');
+                 ->isNotMixedcase('noDelimiter')
+                 ->noDelimiterIsNot($stopwords)
+                 ->regexIsNot('noDelimiter', $regexDate);
             $this->prepareQuery();
         }
         // Crypt (some salts are missing)
         $this->atomIs('String')
              ->analyzerIsNot('self')
              ->tokenIsNot('T_QUOTE')
-             ->regexIs('noDelimiter', '^\\\\\\$(1|2a|2x|2y|5|6)\\\\\\$.+');
+             ->regexIs('noDelimiter', '^\\\\\\$(1|2a|2x|2y|5|6)\\\\\\$.+')
+             ->noDelimiterIsNot($stopwords)
+             ->regexIsNot('noDelimiter', $regexDate);
         $this->prepareQuery();
 
         // Base64 encode

@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_NoHardcodedHash extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testStructures_NoHardcodedHash01()  { $this->generic_test('Structures/NoHardcodedHash.01'); }
     public function testStructures_NoHardcodedHash02()  { $this->generic_test('Structures/NoHardcodedHash.02'); }
     public function testStructures_NoHardcodedHash03()  { $this->generic_test('Structures/NoHardcodedHash.03'); }
+    public function testStructures_NoHardcodedHash04()  { $this->generic_test('Structures/NoHardcodedHash.04'); }
 }
 ?>
