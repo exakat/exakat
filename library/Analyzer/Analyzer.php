@@ -69,6 +69,9 @@ abstract class Analyzer {
 
     const CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
     const LITERALS = array('Integer', 'Float', 'Null', 'Boolean', 'String');
+    
+    const INCLUDE_SELF = false;
+    const EXCLUDE_SELF = true;
 
     private $isCompatible            = self::UNKNOWN_COMPATIBILITY;
     const COMPATIBLE                 =  0;
@@ -1254,12 +1257,12 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllParents($self = false) {
+    public function goToAllParents($self = self::INCLUDE_SELF) {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
-        if ($self === true) {
-            $this->addMethod('filter{true}.emit().repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
-        } else {
+        if ($self === self::INCLUDE_SELF) {
             $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('filter{true}.emit().repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
         }
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
@@ -1269,11 +1272,11 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllChildren($self = false) {
-        if ($self === true) {
-            $this->addMethod('filter{true}.emit().repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
-        } else {
+    public function goToAllChildren($self = self::INCLUDE_SELF) {
+        if ($self === self::INCLUDE_SELF) {
             $this->addMethod('repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit().times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('filter{true}.emit().repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
         }
         
         return $this;
