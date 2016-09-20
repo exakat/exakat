@@ -166,7 +166,7 @@ GREMLIN;
     
         $result = json_decode($result);
         if (isset($result->errormessage)) {
-            throw new Exakat\Exceptions\GremlinException($result->errormessage, $query);
+            throw new \Exakat\Exceptions\GremlinException($result->errormessage, $query);
         }
 
         return $result;
