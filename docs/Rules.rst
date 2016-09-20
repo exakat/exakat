@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 12 Sep 2016 12:07:15 +0000
-.. comment: Generation hash : 21bd67afeaf2f6947bc46ba0f77bd7cb6b3dfef5
+.. comment: Generation date : Tue, 20 Sep 2016 10:36:59 +0000
+.. comment: Generation hash : 5aba63627c27edf726fa5b368fa0e9b572a8c7b9
 
 
 .. _$http\_raw\_post\_data:
@@ -54,7 +54,27 @@ $this Is Not An Array
 #####################
 
 
-$this variable represents an object (the current object) and it is not an array, unless the class (or its parents) has the ArrayAccess interface.
+`$this` variable represents the current object and it is not an array, unless the class (or its parents) has the ArrayAccess interface.
+
+.. code-block:: php
+
+   <?php
+   
+   // $this is an array
+   class Foo extends ArrayAccess {
+       function bar() {
+           ++$this[3];
+       }
+   }
+   
+   // $this is not an array
+   class Foo2 {
+       function bar() {
+           ++$this[3];
+       }
+   }
+   
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Classes/ThisIsNotAnArray |
@@ -553,6 +573,42 @@ The native function array\_unique is much slower than using other alternative, s
 
 
 
+.. _avoid-get\_class():
+
+Avoid get\_class()
+##################
+
+
+get\_class() should be replaced with the 'instanceof' operator to check the class of an object. 
+
+get\_class() will only compare the full namespace name of the object's class, while instanceof actually resolve the name, using the local namespace and aliases.
+
+.. code-block:: php
+
+   <?php
+       function foo($arg) {
+           if (get\_class($arg) === 'Stdclass') {
+               // doSomething()
+           }
+       }
+   
+       function bar($arg) {
+           if ($arg instanceof Stdclass) {
+               // doSomething()
+           }
+       }
+   ?>
+
++--------------+--------------------------+
+| Command Line | Structures/UseInstanceof |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | none                     |
++--------------+--------------------------+
+
+
+
 .. _avoir-sleep()/usleep():
 
 Avoir Sleep()/Usleep()
@@ -730,6 +786,28 @@ Cant Extend Final
 It is not possible to extend final classes. 
 
 Since PHP fails with a fatal error, this means that the extending class is probably not used in the rest of the code. Check for dead code.
+
+.. code-block:: php
+
+   <?php
+       // File Foo
+       final class foo {
+           public final function bar() {
+               // doSomething
+           }
+       }
+   ?>
+
+
+In a separate file : 
+.. code-block:: php
+
+   <?php
+       // File Bar
+       class bar extends foo {
+       
+       }
+   ?>
 
 +--------------+----------------------------------------------+
 | Command Line | Classes/CantExtendFinal                      |
@@ -1057,9 +1135,38 @@ Confusing Names
 ###############
 
 
-The following variables's name are very close and may lead to confusion.  
+The following variables's name are very close and may lead to confusion.
 
 Variables are 3 letters long (at least). Variables names build with an extra 's' are omitted.
+Variables may be scattered across the code, or close to each other. 
+
+.. code-block:: php
+
+   <?php
+   
+       // Variable names with one letter difference
+       $fWScale = 1;
+       $fHScale = 1;
+       $fScale = 2;
+       
+       $oFrame = 3;
+       $iFrame = new Foo();
+       
+       $v2\_norm = array();
+       $v1\_norm = 'string';
+       
+       $exept11 = 1;
+       $exept10 = 2;
+       $exept8 = 3;
+       
+       // This even looks like a typo
+       $privileges  = 1;
+       $privilieges = true;
+       
+       // This is not reported : Adding extra s is tolerated.
+       $rows[] = $row;
+       
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Variables/CloseNaming |
@@ -1690,7 +1797,24 @@ Empty Classes
 #############
 
 
-List of empty classes. Classes that are directly derived from an exception are not considered here.
+List of empty classes. Classes that are directly derived from an exception are omited.
+
+.. code-block:: php
+
+   <?php
+   
+   //Empty class
+   class foo extends bar {}
+   
+   //Not an empty class
+   class foo2 extends bar {
+       const FOO = 2;
+   }
+   
+   //Not an empty class, as derived from Exception
+   class barException extends \Exception {}
+   
+   ?>
 
 +--------------+--------------------+
 | Command Line | Classes/EmptyClass |
@@ -2741,6 +2865,19 @@ List Short Syntax
 
 Usage of short syntax version of list().
 
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7.1 short list syntax
+   // PHP 7.1 may also use key => value structures with list
+   [$a, $b, $c] = ['2', 3, '4'];
+   
+   // PHP 7.0 list syntax
+   list($a, $b, $c) = ['2', 3, '4'];
+   
+   ?>
+
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/ListShortSyntax                                                                                                                   |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -3677,7 +3814,30 @@ No Hardcoded Path
 #################
 
 
-It is not recommended to have literals when reaching for files. Either use \_\_FILE\_\_ and \_\_DIR\_\_ to make the path relative to the current file, or add some DOC\_ROOT as a configuration constant that will allow you to move your script later.
+It is not recommended to have literals when accessing files. 
+
+Either use \_\_FILE\_\_ and \_\_DIR\_\_ to make the path relative to the current file; use a DOC\_ROOT as a configuration constant that will allow you to move your script later or rely on functions likes sys\_get\_temp\_dir(), to reach special folders.
+
+.. code-block:: php
+
+   <?php
+   
+       // This depends on the current executed script
+       file\_get\_contents('token.txt');
+   
+       // Exotic protocols are ignored
+       file\_get\_contents('jackalope://file.txt');
+   
+       // Some protocols are ignored : http, https, ftp, ssh2, php (with memory)
+       file\_get\_contents('http://www.php.net/');
+       file\_get\_contents('php://memory/');
+       
+       // glob() with special chars \* and ? are not reported
+       glob('./\*/foo/bar?.txt');
+       // glob() without special chars \* and ? are reported
+       glob('/foo/bar/');
+       
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------+
 | Command Line | Structures/NoHardcodedPath                                                                        |
@@ -5055,6 +5215,17 @@ Relay Function
 
 Relay functions (or method) are delegating the actual work to another function or method. They do not have any impact on the results, besides exposing another name for the same feature.
 
+.. code-block:: php
+
+   <?php
+   
+   function myStrtolower($string) {
+       return \strtolower($string);
+   }
+   
+   ?>
+
+
 Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and unclutter the API.
 
 +--------------+-------------------------+
@@ -5658,7 +5829,26 @@ Static Loop
 
 It looks like the following loops are static : the same code is executed each time, without taking into account loop variables.
 
-It is possible to create loops that don't use any blind variables, and this is fairly rare.
+.. code-block:: php
+
+   <?php
+   
+   // Static loop
+   $total = 0;
+   for($i = 0; $i < 10; $i++) {
+       $total += $i;
+   }
+   
+   // Non-Static loop (the loop depends on the size of the array)
+   $n = count($array);
+   for($i = 0; $i < $n; $i++) {
+       $total += $i;
+   }
+   
+   ?>
+
+
+It is possible to create loops that don't use any blind variables, though this is fairly rare.
 
 +--------------+-----------------------+
 | Command Line | Structures/StaticLoop |
@@ -6747,6 +6937,26 @@ The following methods are never called as methods. They are probably dead code.
 
 
 
+.. _unused-protected-methods:
+
+Unused Protected Methods
+########################
+
+
+The following methods are protected, and may be used in the current class or any of its children. 
+
+No usage of those methods were found.
+
++--------------+--------------------------------+
+| Command Line | Classes/UnusedProtectedMethods |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`   |
++--------------+--------------------------------+
+
+
+
 .. _unused-static-methods:
 
 Unused Static Methods
@@ -7057,6 +7267,41 @@ If you're using path with UTF-8 characters, pathinfo will strip them. There, you
 
 
 
+.. _use-system-tmp:
+
+Use System Tmp
+##############
+
+
+It is recommended to avoid hardcoding the tmp file. It is better to rely on the system's tmp folder, which is accessible with sys\_get\_temp\_dir().
+
+.. code-block:: php
+
+   <?php
+   
+   // Where the tmp is : 
+   file\_put\_contents(sys\_get\_temp\_dir().'/tempFile.txt', $content);
+   
+   
+   // Avoid hard-coding tmp folder : 
+   // On Linux-like systems
+   file\_put\_contents('/tmp/tempFile.txt', $content);
+   
+   // On Windows systems
+   file\_put\_contents('C:\WINDOWS\TEMP\tempFile.txt', $content);
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Structures/UseSystemTmp |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
+
 .. _use-with-fully-qualified-name:
 
 Use With Fully Qualified Name
@@ -7146,7 +7391,29 @@ Use random\_int()
 
 rand() provides random number. A better and more varied version is mt\_rand(), which is a drop-in replacement. 
 
-Since PHP 7, random\_int() (and its cousin random\_byte()), provides cryptographically secure pseudo-random bytes, which are good to be used
+.. code-block:: php
+
+   <?php
+   
+   // Avoid using this
+   $random = rand(0, 10);
+   
+   // Drop-in replacement
+   $random = mt\_rand(0, 10);
+   
+   // Even better but different : 
+   try {
+       $random = random\_int(0, 10);
+   } catch (\Exception $e) {
+       // process case of not enoug random values
+   }
+   
+   // PHP 7.1 
+   
+   ?>
+
+
+Since PHP 7, random\_int() (and its cousin random\_bytes()), provides cryptographically secure pseudo-random bytes, which are good to be used
 when security is involved. openssl\_random\_pseudo\_bytes() may be used when the OpenSSL extension is available.
 
 +--------------+---------------------------------+
@@ -7203,6 +7470,24 @@ This is the list of used once variables, broken down by scope. Those variables a
 +--------------+-------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                        |
 +--------------+-------------------------------------------------------------------------------------------------------+
+
+
+
+.. _used-protected-method:
+
+Used Protected Method
+#####################
+
+
+Marks methods being used in the current class or its children classes.
+
++--------------+------------------------------+
+| Command Line | Classes/UsedProtectedMethod  |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>` |
++--------------+------------------------------+
 
 
 

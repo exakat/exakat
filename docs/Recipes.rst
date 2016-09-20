@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 12 Sep 2016 12:07:15 +0000
-.. comment: Generation hash : 21bd67afeaf2f6947bc46ba0f77bd7cb6b3dfef5
+.. comment: Generation date : Tue, 20 Sep 2016 10:36:59 +0000
+.. comment: Generation hash : 5aba63627c27edf726fa5b368fa0e9b572a8c7b9
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 253 analysis
+Total : 254 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -87,6 +87,7 @@ Total : 253 analysis
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid array\_unique() <avoid-array\_unique()>`
+* :ref:`Avoid get\_class() <avoid-get\_class()>`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -279,9 +280,9 @@ Total : 253 analysis
 * :ref:`Use === null <use-===-null>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
-* :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
+* :ref:`Use System Tmp <use-system-tmp>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
 * :ref:`Use random\_int() <use-random\_int()>`
@@ -662,7 +663,7 @@ Total : 5 analysis
 Dead code
 +++++++++
 
-Total : 20 analysis
+Total : 22 analysis
 
 * :ref:`Cant Extend Final <cant-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
@@ -681,9 +682,11 @@ Total : 20 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Protected Methods <unused-protected-methods>`
 * :ref:`Unused Static Methods <unused-static-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Use <unused-use>`
+* :ref:`Used Protected Method <used-protected-method>`
 
 .. _performances:
 
