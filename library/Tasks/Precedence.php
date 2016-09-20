@@ -164,8 +164,7 @@ class Precedence {
     }
     
     public static function preloadConstants($version) {
-        $filename = dirname(__DIR__).'/Tokens/Const' . $version[0] . $version[2] . ".php";
-        var_dump($filename);
+        $filename = dirname(__DIR__) . '/Tokens/Const' . $version[0] . $version[2] . ".php";
         if (!file_exists($filename)) {
             throw new Exakat\Exceptions\NoConstFile($version);
         }
