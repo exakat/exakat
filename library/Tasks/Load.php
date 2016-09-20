@@ -3394,7 +3394,7 @@ class Load extends Tasks {
                 $this->pushExpression($right);
                 $right = $this->processFunctioncall();
                 $this->popExpression();
-            } 
+            }
         }
         $this->exitContext();
 
@@ -3941,7 +3941,7 @@ class Load extends Tasks {
             $fileName = './nodes.g3.'.$atom['atom'].'.csv';
             if ($atom['atom'] === 'Project' && file_exists($fileName)) {
                 // Project is saved only once
-                continue; 
+                continue;
             }
             if (isset($extras[$atom['atom']])) {
                 $fp = fopen($fileName, 'a');
