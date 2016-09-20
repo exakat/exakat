@@ -285,6 +285,12 @@ class Files extends Tasks {
         $ignoredFiles = array();
 
         $d = getcwd();
+        if (!file_exists($config->projects_root.'/projects/'.$dir.'/code')) {
+            display( "No such file as ".$config->projects_root.'/projects/'.$dir.'/code'." when looking for files\n");
+            $files = [];
+            $ignoredFiles = [];
+            return ;
+        }
         chdir($config->projects_root.'/projects/'.$dir.'/code');
         $files = rglob( '.');
         chdir($d);
