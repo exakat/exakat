@@ -40,7 +40,7 @@ class DoubleAssignation extends Analyzer\Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              // No self assignation (after operation)
-             ->raw('where( __.repeat( out() ).emit(hasLabel("Variable", "Array", "Property", "Staticproperty")).times(15).filter{ it.get().value("fullcode") == name}.count().is(eq(0)) )')
+             ->raw('where( __.repeat( out() ).emit(hasLabel("Variable", "Array", "Property", "Staticproperty")).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == name}.count().is(eq(0)) )')
 //             ->filter(' it.out.loop(1){true}{ it.object.atom == nameAtom}.has("fullcode", name).any() == false ')
              ->back('first');
         $this->prepareQuery();

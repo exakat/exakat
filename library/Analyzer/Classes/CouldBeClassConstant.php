@@ -55,14 +55,14 @@ class CouldBeClassConstant extends Analyzer\Analyzer {
              ->outIs('BLOCK')
 
                 // usage as property with $this
-             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Property") ).times(15)
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Property") ).times('.self::MAX_LOOPING.')
                                                 .where( __.out("OBJECT").has("code", "\$this") )
                                                 .where( __.out("PROPERTY").filter{ it.get().value("code").toLowerCase() == name.toLowerCase() } )
                                                 .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Classes\\\\IsModified") )
                              .count().is(eq(0)) )')
 
                 // usage as static property with (namespace, self or static)
-             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Staticproperty") ).times(15)
+             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Staticproperty") ).times('.self::MAX_LOOPING.')
                                                 .where( __.out("CLASS").filter{ it.get().value("fullnspath") == fnp } )
                                                 .where( __.out("PROPERTY").filter{ it.get().value("code").toLowerCase() == staticName.toLowerCase() } )
                                                 .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Classes\\\\IsModified") )

@@ -34,11 +34,24 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $variables = $this->query('g.V().hasLabel("Variable").where( __.in("PROPERTY").count().is(eq(0)) ).where( 
+repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GLOBAL", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PPP", "POSTPLUSPLUS", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
+.until(hasLabel("File")).emit().hasLabel("Function").count().is(eq(0))).groupCount("m").by("code").cap("m")
+.toList().get(0).findAll{ a,b -> b == 1}.keySet()');
+
+        $this->atomIs('Variable')
+             ->hasNoIn(array('PROPERTY'))
+             ->hasNoFunction()
+             ->codeIs($variables);
+        $this->prepareQuery();
+
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->raw('where( __
                    .sideEffect{counts = [:]}
-                             .repeat( out() ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.')
+                             .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) ) )
+                             .emit( hasLabel("Variable")).times('.self::MAX_LOOPING.')
+                             .where( __.in("PROPERTY").count().is(eq(0)) )
                              .sideEffect{ k = it.get().value("code"); 
                                          if (counts[k] == null) {
                                             counts[k] = 1;
@@ -48,87 +61,9 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
                               }.fold()
                           )
                           .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
-                          .repeat( out() ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.')
+                          .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) )  )
+                          .emit( hasLabel("Variable")).times('.self::MAX_LOOPING.')
                           .filter{ it.get().value("code") in names }');
-        $this->prepareQuery();
-
-        return;
-        // Variables outside a closure
-        $this->atomIs('Variable')
-        
-             // Excluding closures 
-             ->filter(<<<GREMLIN
-    x = it; 
-    it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}
-         .filter{it.out("USE").out("ARGUMENT").retain([x]).any() == false} // Variables in a USE clause from a closure are OK
-         .out("NAME") // Variable in a closure are not OK
-         .has("atom", "String")
-         .any() == false
-GREMLIN
-)
-            // Not a static property
-             ->hasNoIn('PROPERTY')
-
-             ->analyzerIs('Variables/Variablenames')
-             ->analyzerIsNot('Variables/Blind')
-             ->analyzerIsNot('Variables/InterfaceArguments')
-             ->codeIsNot(VariablePhp::$variables, true)
-             ->hasNoIn('GLOBAL')
-             ->analyzerIsNot('Variables/VariableUsedOnceByContext')
-
-             //This is not an argument in an abstract method
-             ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}.out("ABSTRACT").any() == false')
-
-             //This is not an argument of the method
-             ->filter(' code = it.code;
-                        it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}
-                                        .out("ARGUMENTS").out("ARGUMENT")
-                                        .transform{ a = it; while (a.out("VARIABLE", "LEFT").any()) { a = a.out("VARIABLE", "LEFT").next(); }; a;}
-                                        .has("code", code)
-                                        .any() == false')
-
-             ->fetchContext(\Analyzer\Analyzer::CONTEXT_OUTSIDE_CLOSURE)
-
-             ->eachCounted('context["Namespace"] + "/" + context["Class"] + "/" + context["Function"] + "/" + it.code', 1);
-        $this->prepareQuery();
-
-        // Variables inside a closure
-        $this->atomIs('Variable')
-        
-             // Including closures variables
-             ->filter(<<<GREMLIN
-    x = it; 
-    it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}
-         .out("NAME") // Variable in a closure are not OK
-         .has("atom", "String")
-         .any()
-GREMLIN
-)
-            // Not a static property
-             ->hasNoIn('PROPERTY')
-
-             ->analyzerIs('Variables/Variablenames')
-             ->analyzerIsNot('Variables/Blind')
-             ->analyzerIsNot('Variables/InterfaceArguments')
-             ->codeIsNot(VariablePhp::$variables, true)
-             ->hasNoIn('GLOBAL')
-             ->analyzerIsNot('Variables/VariableUsedOnceByContext')
-
-             //This is not an argument in an abstract method
-             ->filter(' it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}.out("ABSTRACT").any() == false')
-
-             //This is not an argument of the method
-             ->filter(' code = it.code;
-                        it.in().loop(1){it.object.atom != "Function"}{ it.object.atom == "Function"}
-                                        .out("ARGUMENTS").out("ARGUMENT")
-                                        .transform{ a = it; while (a.out("VARIABLE", "LEFT").any()) { a = a.out("VARIABLE", "LEFT").next(); }; a;}
-                                        .has("code", code)
-                                        .any() == false')
-
-             ->fetchContext(\Analyzer\Analyzer::CONTEXT_IN_CLOSURE)
-
-             ->eachCounted('context["Namespace"] + "/" + context["Class"] + "/" + context["Function"] + "/" + it.code', 1)
-             ;
         $this->prepareQuery();
     }
 }

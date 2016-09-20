@@ -43,7 +43,7 @@ class IsModified extends Analyzer\Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->back('first')
-             ->raw('where( __.repeat( __.out("VARIABLE")).emit(hasLabel("Arrayappend")).times(15).count().is(eq(0)) )')
+             ->raw('where( __.repeat( __.out("VARIABLE")).emit(hasLabel("Arrayappend")).times('.self::MAX_LOOPING.').count().is(eq(0)) )')
              ;
         $this->prepareQuery();
 

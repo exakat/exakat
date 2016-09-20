@@ -34,11 +34,11 @@ class UnusedArguments extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $isNotRead = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times(15)
+        $isNotRead = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
                                           .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\IsRead").count().is(eq(1)) )
                                           .count().is(eq(0)) )';
     
-        $isNotUsed = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times(15).count().is(eq(0)) )';
+        $isNotUsed = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times('.self::MAX_LOOPING.').count().is(eq(0)) )';
         //                                          .where( __.in("ANALYZED").has("analyzer", within("Analyzer\\\\Variables\\\\IsRead", "Analyzer\\\\Variables\\\\IsModified")).count().is(eq(1)) )
 
         // Arguments, not reference

@@ -403,7 +403,7 @@ repeat(__.in('.$linksDown.'))
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('where( 
 repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').has("code", "'.$name.'").count().is(eq(0)))');
+.until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'").count().is(eq(0)))');
         
         return $this;
     }
@@ -1254,9 +1254,13 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllParents() {
+    public function goToAllParents($self = false) {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
-        $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.')');
+        if ($self === true) {
+            $this->addMethod('filter{true}.emit().repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.')');
+        }
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
 //        $this->addMethod('sideEffect{ allParents = []; }.until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).emit().repeat( sideEffect{allParents.push(it.get().id()); }.out("EXTENDS").in("DEFINITION").filter{ !(it.get().id() in allParents); } )');
@@ -1265,8 +1269,12 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllChildren() {
-        $this->addMethod('out("DEFINITION")');
+    public function goToAllChildren($self = false) {
+        if ($self === true) {
+            $this->addMethod('filter{true}.emit().repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit().times('.self::MAX_LOOPING.')');
+        }
         
         return $this;
     }
