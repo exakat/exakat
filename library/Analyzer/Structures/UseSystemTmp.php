@@ -27,7 +27,7 @@ use Analyzer;
 
 class UseSystemTmp extends Analyzer\Analyzer {
     public function analyze() {
-        $functions = array('globl', 'fopen', 'file', 'file_get_contents', 'file_put_contents', 'unlink',
+        $functions = array('glob', 'fopen', 'file', 'file_get_contents', 'file_put_contents', 'unlink',
                            'opendir', 'rmdir', 'mkdir');
         $regexStartWithTmp = '^(/tmp/|C:\\\\\\\\WINDOWS\\\\\\\\TEMP|C:\\\\\\\\WINDOWS)';
 
