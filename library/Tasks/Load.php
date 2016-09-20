@@ -279,27 +279,19 @@ class Load extends Tasks {
             return array('files' => -1, 'tokens' => -1);
         }
 
-        $ignoreDirs = array();
-        $dir = rtrim($dir, '/');
-        foreach($this->config->ignore_dirs as $ignore) {
-            if ($ignore[0] === '/') {
-                $ignoreDirs[] = $dir.$ignore.'*';
-            } else {
-                $ignoreDirs[] = '*'.$ignore.'*';
-            }
-        }
-
         $files = [];
         $ignoredFiles = [];
-        Files::findFiles($files, $ignoredFiles);
+        if (substr($dir, -1) !== '/') {
+            $dir .= '/';
+        }
+        Files::findFiles($dir, $files, $ignoredFiles);
 
         $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
         $this->links = array();
 
         $nbTokens = 0;
-        $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
         foreach($files as $file) {
-            if ($r = $this->processFile($path.$file)) {
+            if ($r = $this->processFile($dir . $file)) {
                 $nbTokens += $r;
                 $this->saveFiles();
             }

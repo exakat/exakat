@@ -53,7 +53,7 @@ class Files extends Tasks {
 
         $ignoredFiles = [];
         $files = [];
-        self::findFiles($files, $ignoredFiles);
+        self::findFiles($config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
         
         $this->datastore->addRow('ignoredFiles', array_map(function ($a) {
                 return array('file'   => $a);
@@ -257,7 +257,7 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', $composerInfo);
     }
     
-    static public function findFiles(&$files, &$ignoredFiles) {
+    static public function findFiles($path, &$files, &$ignoredFiles) {
         $config = \Config::factory();
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
@@ -266,13 +266,13 @@ class Files extends Tasks {
         $ignoreDirs = array();
         foreach($ignore_dirs as $ignore) {
             if ($ignore[0] == '/') {
-                $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
+                $d = $config->projects_root . '/projects/' . $dir . '/code' . $ignore;
                 if (!file_exists($d)) {
                     continue;
                 }
-                $ignoreDirs[] = $ignore.'.*';
+                $ignoreDirs[] = $ignore . '.*';
             } else {
-                $ignoreDirs[] = '.*'.$ignore.'.*';
+                $ignoreDirs[] = '.*' . $ignore . '.*';
             }
         }
         if (empty($ignoreDirs)) {
@@ -285,13 +285,13 @@ class Files extends Tasks {
         $ignoredFiles = array();
 
         $d = getcwd();
-        if (!file_exists($config->projects_root.'/projects/'.$dir.'/code')) {
-            display( "No such file as ".$config->projects_root.'/projects/'.$dir.'/code'." when looking for files\n");
+        if (!file_exists($path)) {
+            display( "No such file as " . $path . " when looking for files\n");
             $files = [];
             $ignoredFiles = [];
             return ;
         }
-        chdir($config->projects_root.'/projects/'.$dir.'/code');
+        chdir($path);
         $files = rglob( '.');
         chdir($d);
         $exts = $config->file_extensions;
@@ -300,7 +300,7 @@ class Files extends Tasks {
             $file = substr($file, 1);
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             if (empty($ext)) {
-                if ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
+                if ($php->countTokenFromFile($path . $file) < 2) {
                     unset($files[$id]);
                     $ignoredFiles[] = $file;
                 }
@@ -311,7 +311,7 @@ class Files extends Tasks {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[] = $file;
-            } elseif ($php->countTokenFromFile($config->projects_root.'/projects/'.$dir.'/code'.$file) < 2) {
+            } elseif ($php->countTokenFromFile($path . $file) < 2) {
                 unset($files[$id]);
                 $ignoredFiles[] = $file;
             }
