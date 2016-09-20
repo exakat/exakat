@@ -1,4 +1,4 @@
-Version 0.8.1 (Babo'erben, Coming up)
+Version 0.8.2 (Jinjie Shiba Gong, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,26 @@ Version 0.8.1 (Babo'erben, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.8.1 (Babo'erben, 2016-09-19)
++ Architecture
+    + Added main Try/Catch
++ Report
+    + Added 'Ambassador' report. 
++ Analyzer
+    + Upgraded analysis : 1540 / 1561 test pass (99% pass). 
+    + More documentations
+    + Added a list of stopwords for No Hardcoded Hash
+    + Upgraded analyzer 'No Hardcoded Path' with protocols and glob with wildcards
+    + Upgraded analyzer 'No Hardcoded Hash' with stopwords
+    + Added new Analyzer for portability : spot common Linux files
+    + Added new Analyzer : use system temp dir, not hardcoded one 
+    + Added Time-to-fix and severity to all analyzers
+    + New analyzer that spot unused protected methods
++ Tokenizer
+    + Fixed edge case with if/then and try/catch 
+    + Synchronized constants in Tokens/Consts*.php
+    + Added support for PHP 7.2
 
 Version 0.8.0 (Benbo'erba, 2016-09-12)
 + Architecture
