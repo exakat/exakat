@@ -2104,7 +2104,7 @@ class Load extends Tasks {
 
             // This may include WHILE in the list of finals for do....while
             $finals = array_merge([T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END, T_CLOSE_CURLY], $finals);
-            if (in_array($this->tokens[$this->id + 1][0], [T_IF, T_FOREACH, T_SWITCH, T_FOR])) {
+            if (in_array($this->tokens[$this->id + 1][0], [T_IF, T_FOREACH, T_SWITCH, T_FOR, T_TRY])) {
                 $this->processNext();
             } else {
                 while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
@@ -2116,7 +2116,7 @@ class Load extends Tasks {
             
             $this->endSequence();
             
-            if (!in_array($this->tokens[$current + 1][0], [T_IF, T_SWITCH, T_WHILE, T_FOR, T_FOREACH])) {
+            if (!in_array($this->tokens[$current + 1][0], [T_IF, T_SWITCH, T_WHILE, T_FOR, T_FOREACH, T_TRY])) {
                 ++$this->id;
             }
             
