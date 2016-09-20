@@ -1,0 +1,92 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Try.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  try
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      ->
+                      Label : METHOD
+                        D
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          D
+                      Label : OBJECT
+                        ->
+                        Label : OBJECT
+                          $d
+                        Label : PROPERTY
+                          C
+                    Label : ELEMENT
+                      ->
+                      Label : METHOD
+                        F
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          F
+                      Label : OBJECT
+                        ->
+                        Label : OBJECT
+                          $d
+                        Label : PROPERTY
+                          C
+                  Label : CATCH
+                    catch
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        Void
+                    Label : CLASS
+                      G
+                    Label : VARIABLE
+                      $e
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  <
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    10
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $c
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    0
+          Label : NAME
+            B
