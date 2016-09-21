@@ -4004,6 +4004,14 @@ class Load extends Tasks {
     }
 
     private function saveDefinitions() {
+        // Fallback to global if local namespace function doesn't exists
+        if (isset($this->calls['function'])) {
+            $this->fallbackToGlobal('function');
+        }
+        if (isset($this->calls['constant'])) {
+            $this->fallbackToGlobal('constant');
+        }
+
         // Saving the function / class definitions
         foreach($this->calls as $type => $paths) {
             foreach($paths as $path) {
@@ -4027,6 +4035,27 @@ class Load extends Tasks {
                     }
                 }
             }
+        }
+    }
+    
+    private function fallbackToGlobal($type) {
+        foreach($this->calls[$type] as $fnp => &$usage) {
+            if (substr_count($fnp, '\\') < 2) {
+                continue;
+            }
+            if (!empty($usage['definitions'])) {
+                continue;
+            }
+            $foo = explode('\\', $fnp);
+            $globalFnp = '\\' . array_pop($foo);
+            if (!isset($this->calls[$type][$globalFnp])) {
+                continue;
+            }
+            if (empty($this->calls[$type][$globalFnp]['definitions'])) {
+                continue;
+            }
+            
+            $usage['definitions'] = $this->calls[$type][$globalFnp]['definitions'];
         }
     }
 
@@ -4175,12 +4204,14 @@ class Load extends Tasks {
         }
         
         if (!isset($this->calls[$type][$fullnspath])) {
-            $this->calls[$type][$fullnspath] = array('calls' => array(), 'definitions' => array());
+            $this->calls[$type][$fullnspath] = array('calls'       => array(), 
+                                                     'definitions' => array());
         }
         $atom = $this->atoms[$callId]['atom'];
         if (!isset($this->calls[$type][$fullnspath]['calls'][$atom])) {
             $this->calls[$type][$fullnspath]['calls'][$atom] = array();
         }
+        
         $this->calls[$type][$fullnspath]['calls'][$atom][] = $callId;
     }
 
@@ -4222,7 +4253,8 @@ class Load extends Tasks {
         }
 
         if (!isset($this->calls[$type][$fullnspath])) {
-            $this->calls[$type][$fullnspath] = array('calls' => array(), 'definitions' => array());
+            $this->calls[$type][$fullnspath] = array('calls'       => array(), 
+                                                     'definitions' => array());
         }
         $atom = $this->atoms[$definitionId]['atom'];
         if (!isset($this->calls[$type][$fullnspath]['definitions'][$atom])) {
