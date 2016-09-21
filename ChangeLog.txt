@@ -15,14 +15,14 @@ Version 0.8.1 (Babo'erben, 2016-09-19)
     + Added 'Ambassador' report. 
 + Analyzer
     + Upgraded analysis : 1540 / 1561 test pass (99% pass). 
-    + More documentations
+    + More documentation (examples, glossary) 
     + Added a list of stopwords for No Hardcoded Hash
     + Upgraded analyzer 'No Hardcoded Path' with protocols and glob with wildcards
     + Upgraded analyzer 'No Hardcoded Hash' with stopwords
     + Added new Analyzer for portability : spot common Linux files
     + Added new Analyzer : use system temp dir, not hardcoded one 
-    + Added Time-to-fix and severity to all analyzers
     + New analyzer that spot unused protected methods
+    + Added Time-to-fix and severity to all analyzers
 + Tokenizer
     + Fixed edge case with if/then and try/catch 
     + Synchronized constants in Tokens/Consts*.php
