@@ -61,10 +61,11 @@ function rmdirRecursive($dir) {
     $files = array_diff(scandir($dir), array('.','..')); 
     
     foreach ($files as $file) { 
-        if (is_dir("$dir/$file")) {
-            $total += rmdirRecursive("$dir/$file");
+        $path = $dir . '/' . $file;
+        if (is_dir($path)) {
+            $total += rmdirRecursive($path);
         } else {
-            unlink("$dir/$file"); 
+            unlink($path); 
             ++$total;
         }
     } 
@@ -77,10 +78,12 @@ function rmdirRecursive($dir) {
 
 function copyDir($src, $dst) { 
     if (!file_exists($src)) { 
-        return 0;
+        throw new \Exakat\Exceptions\NoSuchDir('Can\'t find dir : "' . $src . '"');
     }
     $dir = opendir($src); 
-    if (!$dir) { return true; }
+    if (!$dir) { 
+        throw new \Exakat\Exceptions\NoSuchDir('Can\'t open dir : "' . $src . '"');
+    }
     
     $total = 0;
     mkdir($dst, 0755);
