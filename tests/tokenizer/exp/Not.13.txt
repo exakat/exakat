@@ -1,7 +1,44 @@
-(
-Label : ARGUMENT
-  {
-  Label : INDEX
-    0
-  Label : VARIABLE
-    $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ||
+            Label : LEFT
+              !
+              Label : NOT
+                isset
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    {
+                    Label : INDEX
+                      0
+                    Label : VARIABLE
+                      $a
+                Label : NAME
+                  isset
+            Label : RIGHT
+              !
+              Label : NOT
+                {
+                Label : INDEX
+                  0
+                Label : VARIABLE
+                  $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                false

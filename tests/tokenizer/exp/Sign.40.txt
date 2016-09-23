@@ -1,33 +1,76 @@
-+
-Label : LEFT
-  (int)
-  Label : CAST
-    2
-    Label : CODE
-      /
-      Label : LEFT
-        *
-        Label : LEFT
-          $a
-        Label : RIGHT
-          $b
-      Label : RIGHT
-        2
-Label : RIGHT
-  +
-  Label : LEFT
-    $c
-  Label : RIGHT
-    +
-    Label : LEFT
-      3
-    Label : RIGHT
-      (int)
-      Label : CAST
-        4
-        Label : CODE
-          /
-          Label : LEFT
-            $d
-          Label : RIGHT
-            4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.40.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            %
+            Label : LEFT
+              )
+              Label : CODE
+                +
+                Label : LEFT
+                  -
+                  Label : LEFT
+                    +
+                    Label : LEFT
+                      (int)
+                      Label : CAST
+                        2
+                        Label : CODE
+                          /
+                          Label : LEFT
+                            *
+                            Label : LEFT
+                              $a
+                            Label : RIGHT
+                              $b
+                          Label : RIGHT
+                            2
+                    Label : RIGHT
+                      +
+                      Label : LEFT
+                        $c
+                      Label : RIGHT
+                        +
+                        Label : LEFT
+                          3
+                        Label : RIGHT
+                          (int)
+                          Label : CAST
+                            4
+                            Label : CODE
+                              /
+                              Label : LEFT
+                                $d
+                              Label : RIGHT
+                                4
+                  Label : RIGHT
+                    (int)
+                    Label : CAST
+                      5
+                      Label : CODE
+                        /
+                        Label : LEFT
+                          $e
+                        Label : RIGHT
+                          5
+                Label : RIGHT
+                  (int)
+                  Label : CAST
+                    6
+                    Label : CODE
+                      /
+                      Label : LEFT
+                        $f
+                      Label : RIGHT
+                        6
+            Label : RIGHT
+              7

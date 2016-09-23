@@ -1,39 +1,54 @@
-(
-Label : ARGUMENT
-  new
-  Label : NEW
-    class
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $i
-      Label : ARGUMENT
-        $j
-      Label : ARGUMENT
-        $k
-    Label : BLOCK
-      {}
-      Label : ELEMENT
-        __construct
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            $i
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            =
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                i
-            Label : RIGHT
-              $i
-        Label : NAME
-          __construct
-        Label : PUBLIC
-          public
-    Label : NAME
-      Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.70.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          var_dump
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              new
+              Label : NEW
+                class
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $i
+                  Label : ARGUMENT
+                    $j
+                  Label : ARGUMENT
+                    $k
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    __construct
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $i
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          ->
+                          Label : OBJECT
+                            $this
+                          Label : PROPERTY
+                            i
+                        Label : RIGHT
+                          $i
+                    Label : NAME
+                      __construct
+                    Label : PUBLIC
+                      public
+                Label : NAME
+                  Void
+          Label : NAME
+            var_dump

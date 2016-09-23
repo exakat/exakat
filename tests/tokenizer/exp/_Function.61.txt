@@ -1,5 +1,50 @@
-(
-Label : ARGUMENT
-  $b
-  Label : TYPEHINT
-    D
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.61.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              interface
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  do
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $b
+                      Label : TYPEHINT
+                        D
+                  Label : BLOCK
+                    Void
+                  Label : NAME
+                    do
+                  Label : PUBLIC
+                    public
+                Label : ELEMENT
+                  foreach
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      $d
+                  Label : BLOCK
+                    Void
+                  Label : NAME
+                    foreach
+                  Label : PUBLIC
+                    public
+              Label : NAME
+                C
+          Label : NAME
+            B

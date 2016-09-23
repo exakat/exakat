@@ -1,7 +1,30 @@
-case "b" :  /**/  
-Label : CASE
-  "b"
-Label : CODE
-  ;
-  Label : ELEMENT
-    Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case "b" :  /**/  
+              Label : CASE
+                "b"
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  Void
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  Void
+          Label : NAME
+            $a

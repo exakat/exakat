@@ -1,9 +1,60 @@
-=
-Label : LEFT
-  $a1
-Label : RIGHT
-  &
-  Label : LEFT
-    1
-  Label : RIGHT
-    $b1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.44.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a1
+          Label : RIGHT
+            &
+            Label : LEFT
+              1
+            Label : RIGHT
+              $b1
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a2
+          Label : RIGHT
+            &&
+            Label : LEFT
+              2
+            Label : RIGHT
+              $b2
+        Label : ELEMENT
+          and
+          Label : LEFT
+            =
+            Label : LEFT
+              $a3
+            Label : RIGHT
+              3
+          Label : RIGHT
+            $b3
+        Label : ELEMENT
+          or
+          Label : LEFT
+            =
+            Label : LEFT
+              $a4
+            Label : RIGHT
+              4
+          Label : RIGHT
+            $b4
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a5
+          Label : RIGHT
+            ||
+            Label : LEFT
+              5
+            Label : RIGHT
+              $b5

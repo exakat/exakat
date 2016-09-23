@@ -1,57 +1,76 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    $a
-  Label : VALUE
-    $b
-Label : ARGUMENT
-  =>
-  Label : KEY
-    [
-    Label : INDEX
-      'd'
-    Label : VARIABLE
-      $c
-  Label : VALUE
-    [
-    Label : INDEX
-      'f'
-    Label : VARIABLE
-      $e
-Label : ARGUMENT
-  =>
-  Label : KEY
-    -4
-  Label : VALUE
-    -5
-Label : ARGUMENT
-  =>
-  Label : KEY
-    ->
-    Label : OBJECT
-      $f
-    Label : PROPERTY
-      g
-  Label : VALUE
-    ->
-    Label : OBJECT
-      $h
-    Label : PROPERTY
-      i
-Label : ARGUMENT
-  =>
-  Label : KEY
-    \
-    Label : SUBNAME
-      k
-    Label : SUBNAME
-      l
-  Label : VALUE
-    \
-    Label : SUBNAME
-      m
-    Label : SUBNAME
-      n
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  $a
+                Label : VALUE
+                  $b
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  [
+                  Label : INDEX
+                    'd'
+                  Label : VARIABLE
+                    $c
+                Label : VALUE
+                  [
+                  Label : INDEX
+                    'f'
+                  Label : VARIABLE
+                    $e
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  -4
+                Label : VALUE
+                  -5
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  ->
+                  Label : OBJECT
+                    $f
+                  Label : PROPERTY
+                    g
+                Label : VALUE
+                  ->
+                  Label : OBJECT
+                    $h
+                  Label : PROPERTY
+                    i
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  \
+                  Label : SUBNAME
+                    k
+                  Label : SUBNAME
+                    l
+                Label : VALUE
+                  \
+                  Label : SUBNAME
+                    m
+                  Label : SUBNAME
+                    n
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              array

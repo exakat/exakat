@@ -1,5 +1,32 @@
-[
-Label : INDEX
-  'prefix'
-Label : VARIABLE
-  properties
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.34.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            "
+            Label : CONCAT
+              [
+              Label : INDEX
+                'prefix'
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  properties
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $node
+              Label : PROPERTY
+                id

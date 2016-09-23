@@ -1,25 +1,36 @@
-class
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    var
-    Label : VAR
-      var
-    Label : PPP
-      $i
-    Label : PPP
-      $b
-    Label : PPP
-      $c
-    Label : PPP
-      $d
-    Label : PPP
-      $e
-    Label : PPP
-      $f
-    Label : PPP
-      $g
-    Label : PPP
-      $h
-Label : NAME
-  a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Var.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              var
+              Label : VAR
+                var
+              Label : PPP
+                $i
+              Label : PPP
+                $b
+              Label : PPP
+                $c
+              Label : PPP
+                $d
+              Label : PPP
+                $e
+              Label : PPP
+                $f
+              Label : PPP
+                $g
+              Label : PPP
+                $h
+          Label : NAME
+            a

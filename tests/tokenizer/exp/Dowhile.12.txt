@@ -1,9 +1,60 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  *
-  Label : LEFT
-    2
-  Label : RIGHT
-    4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dowhile.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                1
+              Label : ELSE
+                {}
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        4
+                      Label : ARGUMENT
+                        5
+                      Label : ARGUMENT
+                        6
+                    Label : NAME
+                      f
+                  Label : OBJECT
+                    [
+                    Label : INDEX
+                      +
+                      Label : LEFT
+                        1
+                      Label : RIGHT
+                        *
+                        Label : LEFT
+                          2
+                        Label : RIGHT
+                          4
+                    Label : VARIABLE
+                      $x
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+          Label : CONDITION
+            FALSE

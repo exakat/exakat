@@ -1,46 +1,48 @@
-./tests/tokenizer/source/Ifthen.17.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $x
-        Label : ELSE
-          elseif
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
           Label : CONDITION
-            $w
+            $x
           Label : ELSE
             elseif
             Label : CONDITION
-              $v
+              $w
             Label : ELSE
               elseif
               Label : CONDITION
-                $u
+                $v
               Label : ELSE
-                ;
-                Label : ELEMENT
-                  $z
+                elseif
+                Label : CONDITION
+                  $u
+                Label : ELSE
+                  ;
+                  Label : ELEMENT
+                    $z
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    $uu
               Label : THEN
                 ;
                 Label : ELEMENT
-                  $uu
+                  $vv
             Label : THEN
               ;
               Label : ELEMENT
-                $vv
+                $ww
           Label : THEN
             ;
             Label : ELEMENT
-              $ww
-        Label : THEN
-          ;
-          Label : ELEMENT
-            $y
-      Label : ELEMENT
-        Void
+              $y
+        Label : ELEMENT
+          Void

@@ -1,3 +1,106 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.57.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      __CLASS__
+                    Label : ARGUMENT
+                      'D'
+                  Label : NAME
+                    array
+              Label : NAME
+                C
+          Label : NAME
+            B
+        Label : ELEMENT
+          B1
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                )
+                Label : ARGUMENT
+                  )
+                  Label : CODE
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        __CLASS__
+                      Label : ARGUMENT
+                        'D'
+                    Label : NAME
+                      array
+              Label : NAME
+                print
+          Label : NAME
+            B1
+        Label : ELEMENT
+          B2
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      __CLASS__
+                    Label : ARGUMENT
+                      'D'
+                  Label : NAME
+                    array
+              Label : NAME
+                C
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                )
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      __CLASS__
+                    Label : ARGUMENT
+                      'D'
+                  Label : NAME
+                    array
+              Label : NAME
+                print
+          Label : NAME
+            B2

@@ -1,3 +1,50 @@
-(
-Label : ARGUMENT
-  $line
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dowhile.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                !
+                Label : NOT
+                  empty
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $line
+                  Label : NAME
+                    empty
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  .=
+                  Label : LEFT
+                    $output
+                  Label : RIGHT
+                    '='
+            Label : ELEMENT
+              .=
+              Label : LEFT
+                $output
+              Label : RIGHT
+                $lineEnd
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $line
+              Label : NAME
+                empty

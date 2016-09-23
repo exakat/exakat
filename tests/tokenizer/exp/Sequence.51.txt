@@ -1,3 +1,30 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.51.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              Stdclass
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                Stdclass

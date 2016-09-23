@@ -1,3 +1,106 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.52.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            B
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          D
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'E'
+            Label : ARGUMENT
+              array
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    'F'
+                  Label : VALUE
+                    $b
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    'G'
+                  Label : VALUE
+                    $c
+              Label : NAME
+                array
+          Label : NAME
+            D
+        Label : ELEMENT
+          H
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'I'
+          Label : NAME
+            H
+        Label : ELEMENT
+          J
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'K'
+            Label : ARGUMENT
+              'L'
+          Label : NAME
+            J
+        Label : ELEMENT
+          M
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'N'
+          Label : NAME
+            M
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            O
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  ::
+                  Label : CLASS
+                    P
+                  Label : METHOD
+                    Q
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'R'
+                    Label : NAME
+                      Q
+                Label : CONCAT
+                  'S'
+            Label : NAME
+              O
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void

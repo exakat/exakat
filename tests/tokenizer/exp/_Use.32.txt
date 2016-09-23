@@ -1,47 +1,49 @@
-./tests/tokenizer/source/_Use.32.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        use
-        Label : CONST
-          const
-        Label : GROUPUSE
-          \
-          Label : SUBNAME
-            FooLibrary
-          Label : SUBNAME
-            Bar
-          Label : SUBNAME
-            Baz
-        Label : USE
-          B
-      Label : ELEMENT
-        use
-        Label : FUNCTION
-          function
-        Label : GROUPUSE
-          \
-          Label : SUBNAME
-            FooLibrary
-          Label : SUBNAME
-            Bar
-          Label : SUBNAME
-            Baz
-        Label : USE
-          B
-      Label : ELEMENT
-        use
-        Label : GROUPUSE
-          \
-          Label : SUBNAME
-            FooLibrary
-          Label : SUBNAME
-            Bar
-          Label : SUBNAME
-            Baz
-        Label : USE
-          B
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.32.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          use
+          Label : CONST
+            const
+          Label : GROUPUSE
+            \
+            Label : SUBNAME
+              FooLibrary
+            Label : SUBNAME
+              Bar
+            Label : SUBNAME
+              Baz
+          Label : USE
+            B
+        Label : ELEMENT
+          use
+          Label : FUNCTION
+            function
+          Label : GROUPUSE
+            \
+            Label : SUBNAME
+              FooLibrary
+            Label : SUBNAME
+              Bar
+            Label : SUBNAME
+              Baz
+          Label : USE
+            B
+        Label : ELEMENT
+          use
+          Label : GROUPUSE
+            \
+            Label : SUBNAME
+              FooLibrary
+            Label : SUBNAME
+              Bar
+            Label : SUBNAME
+              Baz
+          Label : USE
+            B

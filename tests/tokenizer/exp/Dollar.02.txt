@@ -1,3 +1,96 @@
-echo
-Label : ARGUMENT
-  $C
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dollar.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            [
+            Label : INDEX
+              ::
+              Label : CLASS
+                E
+              Label : CONSTANT
+                BR
+            Label : VARIABLE
+              $s
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $C
+              Label : NAME
+                echo
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            [
+            Label : INDEX
+              ::
+              Label : CLASS
+                E
+              Label : CONSTANT
+                BR
+            Label : VARIABLE
+              $
+              Label : NAME
+                ::
+                Label : CLASS
+                  C
+                Label : CONSTANT
+                  D
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $C
+              Label : NAME
+                echo
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            [
+            Label : INDEX
+              ::
+              Label : CLASS
+                E
+              Label : CONSTANT
+                BR
+            Label : VARIABLE
+              $
+              Label : NAME
+                ::
+                Label : CLASS
+                  C
+                Label : CONSTANT
+                  D
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $C
+              Label : NAME
+                echo
+        Label : ELEMENT
+          Void
+    Label : ELEMENT
+      
+

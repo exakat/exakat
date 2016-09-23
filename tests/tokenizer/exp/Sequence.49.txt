@@ -1,9 +1,71 @@
-echo
-Label : ARGUMENT
-  __
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'B'
-  Label : NAME
-    __
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.49.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              __
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'B'
+              Label : NAME
+                __
+          Label : NAME
+            echo
+        Label : ELEMENT
+          A
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            g
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              g
+          Label : OBJECT
+            ::
+            Label : CLASS
+              C
+            Label : METHOD
+              D
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  __
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'F'
+                  Label : NAME
+                    __
+              Label : NAME
+                D
+        Label : ELEMENT
+          H
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              I
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'J'
+              Label : NAME
+                I
+          Label : NAME
+            echo
+    Label : ELEMENT
+      K

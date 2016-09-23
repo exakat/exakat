@@ -1,3 +1,226 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Nsname.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              \
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                \
+                Label : SUBNAME
+                  C
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+            Label : ELEMENT
+              \
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                \
+                Label : SUBNAME
+                  X
+                Label : SUBNAME
+                  A
+            Label : ELEMENT
+              \
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                \
+                Label : SUBNAME
+                  G
+            Label : ELEMENT
+              \
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                \
+                Label : SUBNAME
+                  Y
+                Label : SUBNAME
+                  B
+                Label : SUBNAME
+                  C
+            Label : ELEMENT
+              \
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                \
+                Label : SUBNAME
+                  Z
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+                Label : SUBNAME
+                  F
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  C
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+              Label : CONSTANT
+                K
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  C
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+              Label : CONSTANT
+                K
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  C2
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+              Label : PROPERTY
+                $k
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  C2
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+              Label : PROPERTY
+                $k
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  C3
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+              Label : METHOD
+                l
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  l
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  C3
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+              Label : METHOD
+                l
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  l
+          Label : NAME
+            Void

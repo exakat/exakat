@@ -1,5 +1,76 @@
--
-Label : LEFT
-  $d
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    (int)
+                    Label : CAST
+                      )
+                      Label : CODE
+                        ?
+                        Label : CONDITION
+                          E
+                          Label : CODE
+                            ===
+                            Label : LEFT
+                              $b
+                            Label : RIGHT
+                              ::
+                              Label : CLASS
+                                D
+                              Label : CONSTANT
+                                E
+                        Label : ELSE
+                          F
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              $c
+                          Label : NAME
+                            F
+                        Label : THEN
+                          F
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              *
+                              Label : LEFT
+                                $c
+                              Label : RIGHT
+                                G
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    -
+                                    Label : LEFT
+                                      $d
+                                    Label : RIGHT
+                                      1
+                                Label : NAME
+                                  G
+                          Label : NAME
+                            F
+              Label : NAME
+                C
+          Label : NAME
+            B

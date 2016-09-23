@@ -1,3 +1,90 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.56.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      __CLASS__
+                    Label : ARGUMENT
+                      'D'
+                  Label : NAME
+                    array
+              Label : NAME
+                C
+          Label : NAME
+            B
+        Label : ELEMENT
+          B1
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  )
+                  Label : CODE
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        __CLASS__
+                      Label : ARGUMENT
+                        'D'
+                    Label : NAME
+                      array
+              Label : NAME
+                echo
+          Label : NAME
+            B1
+        Label : ELEMENT
+          B2
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      __CLASS__
+                    Label : ARGUMENT
+                      'D'
+                  Label : NAME
+                    array
+              Label : NAME
+                echo
+          Label : NAME
+            B2

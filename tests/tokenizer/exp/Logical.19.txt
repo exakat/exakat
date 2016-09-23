@@ -1,7 +1,40 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'opt'
-  Label : VARIABLE
-    $_REQUEST
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &&
+            Label : LEFT
+              isset
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'opt'
+                  Label : VARIABLE
+                    $_REQUEST
+              Label : NAME
+                isset
+            Label : RIGHT
+              ==
+              Label : LEFT
+                [
+                Label : INDEX
+                  'opt'
+                Label : VARIABLE
+                  $_REQUEST
+              Label : RIGHT
+                1
+          Label : THEN
+            {}
+            Label : ELEMENT
+              '1'

@@ -1,5 +1,30 @@
-[
-Label : INDEX
-  $boucle
-Label : VARIABLE
-  $n
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.35.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            .
+            Label : CONCAT
+              '&nbsp;('
+            Label : CONCAT
+              @
+              Label : AT
+                ++
+                Label : PREPLUSPLUS
+                  [
+                  Label : INDEX
+                    $boucle
+                  Label : VARIABLE
+                    $n
+            Label : CONCAT
+              ")"

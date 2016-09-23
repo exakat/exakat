@@ -1,25 +1,36 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  "
-  Label : CONCAT
-    $a
-  Label : CONCAT
-    A
-  Label : CONCAT
-    ->
-    Label : OBJECT
-      $b
-    Label : PROPERTY
-      c
-  Label : CONCAT
-    $d
-  Label : CONCAT
-    B
-  Label : CONCAT
-    ->
-    Label : OBJECT
-      $e
-    Label : PROPERTY
-      f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            "
+            Label : CONCAT
+              $a
+            Label : CONCAT
+              A
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                c
+            Label : CONCAT
+              $d
+            Label : CONCAT
+              B
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $e
+              Label : PROPERTY
+                f

@@ -1,27 +1,42 @@
-+
-Label : LEFT
-  1
-  Label : CODE
-    <<
-    Label : LEFT
-      (int)
-      Label : CAST
-        $c
-        Label : CODE
-          /
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
           Label : LEFT
-            $b
+            $a
           Label : RIGHT
-            $c
-    Label : RIGHT
-      1
-Label : RIGHT
-  (int)
-  Label : CAST
-    $e
-    Label : CODE
-      /
-      Label : LEFT
-        $d
-      Label : RIGHT
-        $e
+            +
+            Label : LEFT
+              1
+              Label : CODE
+                <<
+                Label : LEFT
+                  (int)
+                  Label : CAST
+                    $c
+                    Label : CODE
+                      /
+                      Label : LEFT
+                        $b
+                      Label : RIGHT
+                        $c
+                Label : RIGHT
+                  1
+            Label : RIGHT
+              (int)
+              Label : CAST
+                $e
+                Label : CODE
+                  /
+                  Label : LEFT
+                    $d
+                  Label : RIGHT
+                    $e

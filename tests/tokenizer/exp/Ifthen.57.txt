@@ -1,3 +1,47 @@
-echo
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.57.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              A
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                echo
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $c
+              Label : NAME
+                echo
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $d
+              Label : NAME
+                echo
+            Label : ELEMENT
+              D

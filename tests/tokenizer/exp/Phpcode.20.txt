@@ -1,22 +1,24 @@
-./tests/tokenizer/source/Phpcode.20.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        
+      Label : CODE
+        ;
+        Label : ELEMENT
+          
 
-      Label : ELEMENT
-        
+        Label : ELEMENT
+          
 
-      Label : ELEMENT
-        
+        Label : ELEMENT
+          
 
-      Label : ELEMENT
-        
+        Label : ELEMENT
+          
 
-      Label : ELEMENT
-        Void
+        Label : ELEMENT
+          Void

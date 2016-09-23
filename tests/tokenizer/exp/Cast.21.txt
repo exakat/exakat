@@ -1,11 +1,22 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  (string)
-  Label : CAST
-    ::
-    Label : CLASS
-      $a
-    Label : PROPERTY
-      $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            (string)
+            Label : CAST
+              ::
+              Label : CLASS
+                $a
+              Label : PROPERTY
+                $b

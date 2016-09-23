@@ -1,3 +1,62 @@
-echo
-Label : ARGUMENT
-  $j
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            [
+            Label : INDEX
+              'c'
+            Label : VARIABLE
+              $b
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $d
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                1
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $f
+          Label : RIGHT
+            <<<EOF
+
+            Label : CONCAT
+              |
+            Label : CONCAT
+              $g
+            Label : CONCAT
+              |
+            Label : CONCAT
+              $h
+            Label : CONCAT
+              |
+            Label : CONCAT
+              $i
+            Label : CONCAT
+              
+
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              $j
+          Label : NAME
+            echo

@@ -1,5 +1,152 @@
-(
-Label : ARGUMENT
-  $a
-  Label : DEFAULT
-    null
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.92.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+              Label : DEFAULT
+                null
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                C
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  D
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'E'
+                    Label : ARGUMENT
+                      __METHOD__
+                  Label : NAME
+                    D
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                F
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $a
+                Label : NAME
+                  F
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  switch
+                  Label : CASES
+                     /**/ 
+                    Label : ELEMENT
+                      case 'H' :  /**/  
+                      Label : CASE
+                        'H'
+                      Label : CODE
+                        ;
+                        Label : ELEMENT
+                          =
+                          Label : LEFT
+                            $a
+                          Label : RIGHT
+                            I
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                'J'
+                            Label : NAME
+                              I
+                        Label : ELEMENT
+                          break
+                          Label : BREAK
+                            Void
+                    Label : ELEMENT
+                      case 'K' :  /**/  
+                      Label : CASE
+                        'K'
+                      Label : CODE
+                        ;
+                        Label : ELEMENT
+                          =
+                          Label : LEFT
+                            $a
+                          Label : RIGHT
+                            L
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                M
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    ->
+                                    Label : OBJECT
+                                      $this
+                                    Label : PROPERTY
+                                      N
+                                Label : NAME
+                                  M
+                            Label : NAME
+                              L
+                        Label : ELEMENT
+                          break
+                          Label : BREAK
+                            Void
+                    Label : ELEMENT
+                      default
+                      Label : CODE
+                        ;
+                        Label : ELEMENT
+                          =
+                          Label : LEFT
+                            $a
+                          Label : RIGHT
+                            'O'
+                  Label : NAME
+                    ->
+                    Label : METHOD
+                      G
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        G
+                    Label : OBJECT
+                      $this
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                P
+              Label : METHOD
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $a
+                Label : NAME
+                  B
+          Label : DEFINITION
+            B
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $a
+            Label : NAME
+              B
+          Label : NAME
+            B
+        Label : ELEMENT
+          Void

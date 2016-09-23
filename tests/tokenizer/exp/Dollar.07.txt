@@ -1,3 +1,22 @@
-(
-Label : ARGUMENT
-  4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dollar.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $
+          Label : NAME
+            $
+            Label : NAME
+              $a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  4
+              Label : NAME
+                $a

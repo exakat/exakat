@@ -1,3 +1,35 @@
-(
-Label : ARGUMENT
-  'e'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Assignation.29.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            .
+            Label : CONCAT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  A
+                Label : SUBNAME
+                  B
+                Label : SUBNAME
+                  C
+              Label : METHOD
+                d
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'e'
+                Label : NAME
+                  d
+            Label : CONCAT
+              'f'

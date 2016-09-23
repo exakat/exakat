@@ -1,3 +1,96 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.39.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &
+            Label : LEFT
+              ~
+              Label : NOT
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  B
+            Label : RIGHT
+              $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                C
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &
+            Label : LEFT
+              !
+              Label : NOT
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  B
+            Label : RIGHT
+              $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                C
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &
+            Label : LEFT
+              @
+              Label : AT
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  B
+            Label : RIGHT
+              $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                C
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &
+            Label : LEFT
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                B
+            Label : RIGHT
+              $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                C

@@ -1,27 +1,42 @@
-+
-Label : LEFT
-  /
-  Label : LEFT
-    )
-    Label : CODE
-      /
-      Label : LEFT
-        log
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            PHP_INT_MAX
-        Label : NAME
-          log
-      Label : RIGHT
-        log
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            2
-        Label : NAME
-          log
-  Label : RIGHT
-    3
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Addition.29.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $maxSize
+          Label : RIGHT
+            +
+            Label : LEFT
+              /
+              Label : LEFT
+                )
+                Label : CODE
+                  /
+                  Label : LEFT
+                    log
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        PHP_INT_MAX
+                    Label : NAME
+                      log
+                  Label : RIGHT
+                    log
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        2
+                    Label : NAME
+                      log
+              Label : RIGHT
+                3
+            Label : RIGHT
+              1

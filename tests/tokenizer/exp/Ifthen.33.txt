@@ -1,22 +1,24 @@
-./tests/tokenizer/source/Ifthen.33.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.33.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $a
-        Label : ELSE
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
-        Label : THEN
-          {}
-          Label : ELEMENT
-            Void
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void

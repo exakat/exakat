@@ -1,9 +1,30 @@
-(
-Label : ARGUMENT
-  $c
-  Label : TYPEHINT
-    b
-Label : ARGUMENT
-  $d
-  Label : TYPEHINT
-    C
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.25.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $c
+              Label : TYPEHINT
+                b
+            Label : ARGUMENT
+              $d
+              Label : TYPEHINT
+                C
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            a
+        Label : ELEMENT
+          Void

@@ -1,14 +1,16 @@
-./tests/tokenizer/source/Logical.12.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        xor
-        Label : LEFT
-          5
-        Label : RIGHT
-          6
+      Label : CODE
+        ;
+        Label : ELEMENT
+          xor
+          Label : LEFT
+            5
+          Label : RIGHT
+            6

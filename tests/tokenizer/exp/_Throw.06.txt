@@ -1,17 +1,38 @@
-(
-Label : ARGUMENT
-  b
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'C'
-    Label : ARGUMENT
-      ->
-      Label : OBJECT
-        $d
-      Label : PROPERTY
-        e
-    Label : ARGUMENT
-      $f
-  Label : NAME
-    b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Throw.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              \
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'C'
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $d
+                      Label : PROPERTY
+                        e
+                    Label : ARGUMENT
+                      $f
+                  Label : NAME
+                    b
+              Label : NAME
+                \
+                Label : SUBNAME
+                  A

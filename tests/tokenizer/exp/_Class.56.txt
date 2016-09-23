@@ -1,1 +1,56 @@
-abstract
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.56.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : ABSTRACT
+            abstract
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    1
+              Label : FINAL
+                final
+              Label : NAME
+                a
+              Label : PUBLIC
+                public
+              Label : STATIC
+                static
+            Label : ELEMENT
+              b
+              Label : ABSTRACT
+                abstract
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                Void
+              Label : NAME
+                b
+              Label : PROTECTED
+                protected
+              Label : STATIC
+                static
+          Label : NAME
+            x

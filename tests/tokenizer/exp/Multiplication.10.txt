@@ -1,14 +1,16 @@
-./tests/tokenizer/source/Multiplication.10.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Multiplication.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        /
-        Label : LEFT
-          '2'
-        Label : RIGHT
-          34
+      Label : CODE
+        ;
+        Label : ELEMENT
+          /
+          Label : LEFT
+            '2'
+          Label : RIGHT
+            34

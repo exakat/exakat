@@ -1,1 +1,176 @@
-abstract
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.35.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    Void
+                  Label : NAME
+                    sayHello
+                  Label : PROTECTED
+                    protected
+                Label : ELEMENT
+                  insteadof
+                  Label : INSTEADOF
+                    A
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      B
+                    Label : CONSTANT
+                      smallTalk
+              Label : USE
+                HelloWorld
+          Label : NAME
+            MyClass1
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    myPrivateHello
+                  Label : NAME
+                    sayHello
+                  Label : PRIVATE
+                    private
+              Label : USE
+                HelloWorld
+          Label : NAME
+            MyClass2
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              sayHelloWorld
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        'Hello'
+                      Label : CONCAT
+                        ->
+                        Label : METHOD
+                          getWorld
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            getWorld
+                        Label : OBJECT
+                          $this
+                  Label : NAME
+                    echo
+              Label : NAME
+                sayHelloWorld
+              Label : PUBLIC
+                public
+            Label : ELEMENT
+              getWorld
+              Label : ABSTRACT
+                abstract
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                Void
+              Label : NAME
+                getWorld
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            Hello
+          Label : NAME
+            Hello
+          Label : DEFINITION
+            'Hello'
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              private
+              Label : PPP
+                $world
+              Label : PRIVATE
+                private
+            Label : ELEMENT
+              use
+              Label : USE
+                Hello
+            Label : ELEMENT
+              getWorld
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      world
+              Label : NAME
+                getWorld
+              Label : PUBLIC
+                public
+            Label : ELEMENT
+              setWorld
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $val
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      world
+                  Label : RIGHT
+                    $val
+              Label : NAME
+                setWorld
+              Label : PUBLIC
+                public
+          Label : NAME
+            MyHelloWorld

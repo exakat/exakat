@@ -1,5 +1,30 @@
-case 1 :  /**/  
-Label : CASE
-  1
-Label : CODE
-  ;
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Goto.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          :
+          Label : LABEL
+            cleanupCookie
+        Label : ELEMENT
+          GOTO
+          Label : GOTO
+            cleanupCookie
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 1 :  /**/  
+              Label : CASE
+                1
+              Label : CODE
+                ;
+          Label : NAME
+            $x

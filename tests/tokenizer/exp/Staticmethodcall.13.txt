@@ -1,3 +1,60 @@
-(
-Label : ARGUMENT
-  'M'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticmethodcall.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              use
+              Label : USE
+                \
+                Label : SUBNAME
+                  B
+                Label : SUBNAME
+                  F
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : EXTENDS
+                \
+                Label : SUBNAME
+                  F
+                Label : SUBNAME
+                  D
+              Label : NAME
+                D
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  F
+                Label : SUBNAME
+                  K
+              Label : METHOD
+                L
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'M'
+                Label : NAME
+                  L
+          Label : NAME
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D

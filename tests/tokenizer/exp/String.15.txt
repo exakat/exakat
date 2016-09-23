@@ -1,23 +1,216 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  +
-  Label : LEFT
-     
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        Void
-    Label : BLOCK
-      {}
-      Label : ELEMENT
-        Void
-    Label : NAME
-      Void
-  Label : RIGHT
-    "
-    Label : CONCAT
-      B
-    Label : CONCAT
-      $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/String.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            1
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              'B1'
+            Label : VARIABLE
+              $b
+          Label : RIGHT
+            2
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $y
+          Label : RIGHT
+            "
+            Label : CONCAT
+              [
+              Label : INDEX
+                B
+              Label : VARIABLE
+                $b
+            Label : CONCAT
+              zC
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $z
+          Label : RIGHT
+            "
+            Label : CONCAT
+              [
+              Label : INDEX
+                B
+              Label : VARIABLE
+                $b
+            Label : CONCAT
+              C
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            "
+            Label : CONCAT
+              [
+              Label : INDEX
+                +
+                Label : LEFT
+                  1
+                Label : RIGHT
+                  +
+                  Label : LEFT
+                     
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        Void
+                    Label : NAME
+                      Void
+                  Label : RIGHT
+                    "
+                    Label : CONCAT
+                      B
+                    Label : CONCAT
+                      $c
+              Label : VARIABLE
+                $b
+            Label : CONCAT
+              C
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a2
+          Label : RIGHT
+            "
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B
+                Label : CONCAT
+                  $c
+              Label : VARIABLE
+                $b
+            Label : CONCAT
+              C
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a2
+          Label : RIGHT
+            "
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B
+                Label : CONCAT
+                  $c
+              Label : VARIABLE
+                $b
+            Label : CONCAT
+              C
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B1
+                Label : CONCAT
+                  $c1
+              Label : VARIABLE
+                $b1
+            Label : CONCAT
+              C1
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a2
+          Label : RIGHT
+            "
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B
+                Label : CONCAT
+                  $c
+              Label : VARIABLE
+                $b
+            Label : CONCAT
+              C
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B1
+                Label : CONCAT
+                  $c1
+              Label : VARIABLE
+                $b1
+            Label : CONCAT
+              C1
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B2
+                Label : CONCAT
+                  $c2
+              Label : VARIABLE
+                $b2
+            Label : CONCAT
+              C2
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B3
+                Label : CONCAT
+                  $c3
+              Label : VARIABLE
+                $b3
+            Label : CONCAT
+              C3
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B4
+                Label : CONCAT
+                  $c4
+              Label : VARIABLE
+                $b4
+            Label : CONCAT
+              C4
+            Label : CONCAT
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  B5
+                Label : CONCAT
+                  $c5
+              Label : VARIABLE
+                $b5
+            Label : CONCAT
+              C5

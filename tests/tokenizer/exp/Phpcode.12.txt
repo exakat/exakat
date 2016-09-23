@@ -1,3 +1,43 @@
-(
-Label : ARGUMENT
-  'D'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              B
+          Label : THEN
+            ;
+            Label : ELEMENT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'D'
+              Label : NAME
+                C
+            Label : ELEMENT
+              D
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                F
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  F
+              Label : OBJECT
+                $b
+        Label : ELEMENT
+          Void

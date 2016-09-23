@@ -1,10 +1,12 @@
-./tests/tokenizer/source/Variable.01.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variable.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        $x
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $x

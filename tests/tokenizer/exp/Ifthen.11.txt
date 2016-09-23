@@ -1,5 +1,62 @@
-=
-Label : LEFT
-  $f
-Label : RIGHT
-  4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $c
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              $d
+            Label : THEN
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $f
+                Label : RIGHT
+                  5
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $f
+              Label : RIGHT
+                4
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                3
+            Label : ELEMENT
+              switch
+              Label : CASES
+                 /**/ 
+                Label : ELEMENT
+                  case 'a' :  /**/  
+                  Label : CASE
+                    'a'
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $x
+                      Label : RIGHT
+                        1
+                    Label : ELEMENT
+                      break
+                      Label : BREAK
+                        Void
+              Label : NAME
+                $c

@@ -1,9 +1,28 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  +
-  Label : LEFT
-    3
-  Label : RIGHT
-    4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Clone.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          clone
+          Label : CLONE
+            $x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                +
+                Label : LEFT
+                  1
+                Label : RIGHT
+                  +
+                  Label : LEFT
+                    3
+                  Label : RIGHT
+                    4
+            Label : NAME
+              $x

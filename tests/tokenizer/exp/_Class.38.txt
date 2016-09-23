@@ -1,5 +1,66 @@
-=
-Label : LEFT
-  $b
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.38.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              private
+              Label : PPP
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  1
+              Label : PRIVATE
+                private
+            Label : ELEMENT
+              private
+              Label : PRIVATE
+                private
+              Label : PPP
+                $d
+              Label : PPP
+                $c
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  b
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              private
+              Label : PPP
+                =
+                Label : LEFT
+                  $f
+                Label : RIGHT
+                  2
+              Label : PRIVATE
+                private
+              Label : PPP
+                $e
+            Label : ELEMENT
+              private
+              Label : PRIVATE
+                private
+              Label : PPP
+                $h
+              Label : PPP
+                =
+                Label : LEFT
+                  $g
+                Label : RIGHT
+                  3
+          Label : NAME
+            x

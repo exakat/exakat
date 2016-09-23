@@ -1,3 +1,58 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Array.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                range
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    4
+                Label : NAME
+                  range
+          Label : DEFINITION
+            x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              x
+          Label : NAME
+            x
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            ]
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                x
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  x
+          Label : NAME
+            print

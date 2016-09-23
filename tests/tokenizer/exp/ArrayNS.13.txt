@@ -1,11 +1,22 @@
-[
-Label : INDEX
-  $c
-Label : VARIABLE
-  $
-  Label : NAME
-    .
-    Label : CONCAT
-      'a'
-    Label : CONCAT
-      $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/ArrayNS.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : INDEX
+            $c
+          Label : VARIABLE
+            $
+            Label : NAME
+              .
+              Label : CONCAT
+                'a'
+              Label : CONCAT
+                $b

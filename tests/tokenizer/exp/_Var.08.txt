@@ -1,3 +1,124 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Var.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              var
+              Label : PPP
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    array
+              Label : VAR
+                var
+              Label : PPP
+                $a
+            Label : ELEMENT
+              var
+              Label : PPP
+                =
+                Label : LEFT
+                  $c
+                Label : RIGHT
+                  'C'
+              Label : VAR
+                var
+            Label : ELEMENT
+              var
+              Label : PPP
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  D
+              Label : VAR
+                var
+            Label : ELEMENT
+              E
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $e
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  for
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        [
+                        Label : INDEX
+                          'G'
+                        Label : VARIABLE
+                          $h
+                      Label : RIGHT
+                        H
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            I
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                [
+                                Label : INDEX
+                                  'G'
+                                Label : VARIABLE
+                                  $i
+                            Label : NAME
+                              I
+                        Label : NAME
+                          H
+                  Label : FINAL
+                    ;
+                    Label : ELEMENT
+                      <
+                      Label : LEFT
+                        $f
+                      Label : RIGHT
+                        [
+                        Label : INDEX
+                          'F'
+                        Label : VARIABLE
+                          $g
+                  Label : INCREMENT
+                    ;
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $f
+                  Label : INIT
+                    ;
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $f
+                      Label : RIGHT
+                        0
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    $j
+              Label : NAME
+                E
+          Label : NAME
+            B

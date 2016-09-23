@@ -1,179 +1,194 @@
-(
-Label : ARGUMENT
-  &&
-  Label : LEFT
-    0
-  Label : RIGHT
-    }
-    Label : CODE
-      =
-      Label : LEFT
-        $a
-      Label : RIGHT
-         
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            Void
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            global
-            Label : GLOBAL
-              $
-              Label : NAME
-                $b
-            Label : GLOBAL
-              $a
-          Label : ELEMENT
-            static
-            Label : STATIC
-              =
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yieldfrom.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          assert
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              &&
               Label : LEFT
-                $d
-              Label : RIGHT
                 0
-            Label : STATIC
-              $c
-          Label : ELEMENT
-            unset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $e
-            Label : NAME
-              unset
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $x
-            Label : RIGHT
-              ||
-              Label : LEFT
-                &&
-                Label : LEFT
-                  isset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $a
-                  Label : NAME
-                    isset
-                Label : RIGHT
-                  !
-                  Label : NOT
-                    empty
+              Label : RIGHT
+                }
+                Label : CODE
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                     
                     Label : ARGUMENTS
                       (
                       Label : ARGUMENT
-                        $b
+                        Void
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        global
+                        Label : GLOBAL
+                          $
+                          Label : NAME
+                            $b
+                        Label : GLOBAL
+                          $a
+                      Label : ELEMENT
+                        static
+                        Label : STATIC
+                          =
+                          Label : LEFT
+                            $d
+                          Label : RIGHT
+                            0
+                        Label : STATIC
+                          $c
+                      Label : ELEMENT
+                        unset
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            $e
+                        Label : NAME
+                          unset
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          ||
+                          Label : LEFT
+                            &&
+                            Label : LEFT
+                              isset
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  $a
+                              Label : NAME
+                                isset
+                            Label : RIGHT
+                              !
+                              Label : NOT
+                                empty
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    $b
+                                Label : NAME
+                                  empty
+                          Label : RIGHT
+                            eval
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                $c
+                            Label : NAME
+                              eval
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          ?
+                          Label : CONDITION
+                            $a
+                          Label : ELSE
+                            $c
+                          Label : THEN
+                            $b
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          ?
+                          Label : CONDITION
+                            $a
+                          Label : ELSE
+                            $c
+                          Label : THEN
+                            Void
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          ??
+                          Label : LEFT
+                            $a
+                          Label : RIGHT
+                            $b
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          list
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              $a
+                            Label : ARGUMENT
+                              $b
+                            Label : ARGUMENT
+                              $c
+                          Label : NAME
+                            list
+                        Label : RIGHT
+                          [
+                          Label : ARGUMENTS
+                            [
+                            Label : ARGUMENT
+                              1
+                            Label : ARGUMENT
+                              =>
+                              Label : KEY
+                                2
+                              Label : VALUE
+                                'x'
+                            Label : ARGUMENT
+                              =>
+                              Label : KEY
+                                'z'
+                              Label : VALUE
+                                'c'
+                          Label : VARIABLE
+                            [
+                      Label : ELEMENT
+                        @
+                        Label : AT
+                          foo
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            foo
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $y
+                        Label : RIGHT
+                          clone
+                          Label : CLONE
+                            $x
+                      Label : ELEMENT
+                        yield
+                        Label : YIELD
+                          =>
+                          Label : KEY
+                            1
+                          Label : VALUE
+                            2
+                      Label : ELEMENT
+                        yield from
+                        Label : YIELD
+                          $x
                     Label : NAME
-                      empty
-              Label : RIGHT
-                eval
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                Label : NAME
-                  eval
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $x
-            Label : RIGHT
-              ?
-              Label : CONDITION
-                $a
-              Label : ELSE
-                $c
-              Label : THEN
-                $b
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $x
-            Label : RIGHT
-              ?
-              Label : CONDITION
-                $a
-              Label : ELSE
-                $c
-              Label : THEN
-                Void
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $x
-            Label : RIGHT
-              ??
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
-          Label : ELEMENT
-            =
-            Label : LEFT
-              list
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  $c
-              Label : NAME
-                list
-            Label : RIGHT
-              [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  1
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    2
-                  Label : VALUE
-                    'x'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'z'
-                  Label : VALUE
-                    'c'
-              Label : VARIABLE
-                [
-          Label : ELEMENT
-            @
-            Label : AT
-              foo
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : NAME
-                foo
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $y
-            Label : RIGHT
-              clone
-              Label : CLONE
-                $x
-          Label : ELEMENT
-            yield
-            Label : YIELD
-              =>
-              Label : KEY
-                1
-              Label : VALUE
-                2
-          Label : ELEMENT
-            yield from
-            Label : YIELD
-              $x
-        Label : NAME
-          Void
+                      Void
+          Label : NAME
+            assert

@@ -1,3 +1,54 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Throw.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          try
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  B
+              Label : OBJECT
+                $a
+          Label : CATCH
+            catch
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                throw
+                Label : THROW
+                  ?
+                  Label : CONDITION
+                    $c
+                  Label : ELSE
+                    ->
+                    Label : METHOD
+                      D
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        D
+                    Label : OBJECT
+                      $e
+                  Label : THEN
+                    $d
+            Label : CLASS
+              C
+            Label : VARIABLE
+              $b

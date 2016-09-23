@@ -1,15 +1,62 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    .
-    Label : CONCAT
-      'f'
-    Label : CONCAT
-      $g
-  Label : VARIABLE
-    [
-    Label : INDEX
-      'e'
-    Label : VARIABLE
-      $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.28.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &&
+            Label : LEFT
+              [
+              Label : INDEX
+                'b'
+              Label : VARIABLE
+                $a
+            Label : RIGHT
+              0
+              Label : CODE
+                <
+                Label : LEFT
+                  *
+                  Label : LEFT
+                    c
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          .
+                          Label : CONCAT
+                            'f'
+                          Label : CONCAT
+                            $g
+                        Label : VARIABLE
+                          [
+                          Label : INDEX
+                            'e'
+                          Label : VARIABLE
+                            $d
+                    Label : NAME
+                      c
+                  Label : RIGHT
+                    $h
+                Label : RIGHT
+                  0
+          Label : THEN
+            {}
+            Label : ELEMENT
+              i
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'j'
+                Label : ARGUMENT
+                  'k'
+              Label : NAME
+                i

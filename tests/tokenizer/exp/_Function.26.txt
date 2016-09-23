@@ -1,5 +1,28 @@
-(
-Label : ARGUMENT
-  $x
-  Label : TYPEHINT
-    array
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          test
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $x
+              Label : TYPEHINT
+                array
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                $x
+          Label : NAME
+            test
+        Label : ELEMENT
+          Void

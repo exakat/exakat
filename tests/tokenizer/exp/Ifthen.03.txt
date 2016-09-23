@@ -1,20 +1,22 @@
-./tests/tokenizer/source/Ifthen.03.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          1
-        Label : ELSE
-          {}
-          Label : ELEMENT
-            Void
-        Label : THEN
-          {}
-          Label : ELEMENT
-            Void
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            1
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              Void
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void

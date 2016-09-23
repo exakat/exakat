@@ -1,9 +1,59 @@
-<?=
-Label : ARGUMENT
-  S
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'UX1'
-  Label : NAME
-    S
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.31.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      UV
+    Label : ELEMENT
+      <?=
+      Label : CODE
+        ;
+        Label : ELEMENT
+          <?=
+          Label : ARGUMENTS
+            <?=
+            Label : ARGUMENT
+              S
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'UX1'
+              Label : NAME
+                S
+          Label : NAME
+            <?=
+        Label : ELEMENT
+          UW
+        Label : ELEMENT
+          <?=
+          Label : ARGUMENTS
+            <?=
+            Label : ARGUMENT
+              S
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'UX2'
+              Label : NAME
+                S
+          Label : NAME
+            <?=
+        Label : ELEMENT
+          UX
+        Label : ELEMENT
+          <?=
+          Label : ARGUMENTS
+            <?=
+            Label : ARGUMENT
+              S
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'UX3'
+              Label : NAME
+                S
+          Label : NAME
+            <?=
+    Label : ELEMENT
+      UY

@@ -1,9 +1,40 @@
-{
-Label : INDEX
-  [
-  Label : INDEX
-    'd'
-  Label : VARIABLE
-    $c
-Label : VARIABLE
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                >=
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  {
+                  Label : INDEX
+                    [
+                    Label : INDEX
+                      'd'
+                    Label : VARIABLE
+                      $c
+                  Label : VARIABLE
+                    $b
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

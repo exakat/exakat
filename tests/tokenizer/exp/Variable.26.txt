@@ -1,3 +1,124 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variable.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $
+          Label : NAME
+            [
+            Label : INDEX
+              'baz'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'bar'
+              Label : VARIABLE
+                $foo
+        Label : ELEMENT
+          $
+          Label : NAME
+            [
+            Label : INDEX
+              'baz'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'bar'
+              Label : VARIABLE
+                $foo
+        Label : ELEMENT
+          [
+          Label : INDEX
+            'baz'
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $foo
+            Label : PROPERTY
+              $bar
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            $foo
+          Label : PROPERTY
+            {}
+            Label : CODE
+              [
+              Label : INDEX
+                'baz'
+              Label : VARIABLE
+                $bar
+        Label : ELEMENT
+          [
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            [
+            Label : INDEX
+              'baz'
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                $foo
+              Label : PROPERTY
+                $bar
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            {}
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              {}
+              Label : CODE
+                [
+                Label : INDEX
+                  'baz'
+                Label : VARIABLE
+                  $bar
+          Label : OBJECT
+            $foo
+        Label : ELEMENT
+          [
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            [
+            Label : INDEX
+              'baz'
+            Label : VARIABLE
+              ::
+              Label : CLASS
+                Foo
+              Label : PROPERTY
+                $bar
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            Foo
+          Label : METHOD
+            {}
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              {}
+              Label : CODE
+                [
+                Label : INDEX
+                  'baz'
+                Label : VARIABLE
+                  $bar

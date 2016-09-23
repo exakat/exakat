@@ -1,3 +1,40 @@
-$a
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Power.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            2
+        Label : ELEMENT
+          **=
+          Label : LEFT
+            $a
+          Label : RIGHT
+            3
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            **
+            Label : LEFT
+              $a
+            Label : RIGHT
+              3
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            $a
+            Label : ARGUMENT
+              $a
+          Label : NAME
+            print

@@ -1,19 +1,34 @@
-(
-Label : ARGUMENT
-  1
-Label : ARGUMENT
-  'a'
-Label : ARGUMENT
-  <<<HEREDOC
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.63.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    a
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              'a'
+            Label : ARGUMENT
+              <<<HEREDOC
 
-Label : ARGUMENT
-  <<<'NOWDOC'
+              Label : CONCAT
+                a
 
-  Label : CONCAT
-    BadFunctionCallException
+            Label : ARGUMENT
+              <<<'NOWDOC'
 
-Label : ARGUMENT
-  5
+              Label : CONCAT
+                BadFunctionCallException
+
+            Label : ARGUMENT
+              5
+          Label : NAME
+            f

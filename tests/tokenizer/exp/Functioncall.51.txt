@@ -1,37 +1,55 @@
-echo
-Label : ARGUMENT
-  *
-  Label : LEFT
-    0
-    Label : CODE
-      /
-      Label : LEFT
-        C
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  [
-                  Label : INDEX
-                    'E'
-                  Label : VARIABLE
-                    $a
-                Label : PROPERTY
-                  F
-              Label : ARGUMENT
-                'G'
-              Label : ARGUMENT
-                H
-            Label : NAME
-              D
-        Label : NAME
-          C
-      Label : RIGHT
-        0
-  Label : RIGHT
-    1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.51.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              *
+              Label : LEFT
+                0
+                Label : CODE
+                  /
+                  Label : LEFT
+                    C
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        D
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            ->
+                            Label : OBJECT
+                              [
+                              Label : INDEX
+                                'E'
+                              Label : VARIABLE
+                                $a
+                            Label : PROPERTY
+                              F
+                          Label : ARGUMENT
+                            'G'
+                          Label : ARGUMENT
+                            H
+                        Label : NAME
+                          D
+                    Label : NAME
+                      C
+                  Label : RIGHT
+                    0
+              Label : RIGHT
+                1
+          Label : NAME
+            echo
+    Label : ELEMENT
+      H

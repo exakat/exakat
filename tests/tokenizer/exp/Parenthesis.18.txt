@@ -1,31 +1,50 @@
-$h
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    'g'
-    Label : CODE
-      ?
-      Label : CONDITION
-        !==
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            b
-        Label : RIGHT
-          'c'
-      Label : ELSE
-        'g'
-      Label : THEN
-        .
-        Label : CONCAT
-          ->
-          Label : OBJECT
-            $d
-          Label : PROPERTY
-            e
-        Label : CONCAT
-          Void
-  Label : CONCAT
-    $h
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          :
+          Label : LABEL
+            F
+        Label : ELEMENT
+          require
+          Label : ARGUMENTS
+            $h
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'g'
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    !==
+                    Label : LEFT
+                      ->
+                      Label : OBJECT
+                        $a
+                      Label : PROPERTY
+                        b
+                    Label : RIGHT
+                      'c'
+                  Label : ELSE
+                    'g'
+                  Label : THEN
+                    .
+                    Label : CONCAT
+                      ->
+                      Label : OBJECT
+                        $d
+                      Label : PROPERTY
+                        e
+                    Label : CONCAT
+                      Void
+              Label : CONCAT
+                $h
+          Label : NAME
+            require

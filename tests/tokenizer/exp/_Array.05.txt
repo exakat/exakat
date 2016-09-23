@@ -1,5 +1,20 @@
-[
-Label : INDEX
-  'a'
-Label : VARIABLE
-  $_array
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Array.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : INDEX
+            $x
+          Label : VARIABLE
+            [
+            Label : INDEX
+              'a'
+            Label : VARIABLE
+              $_array

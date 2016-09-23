@@ -1,7 +1,18 @@
-.
-Label : CONCAT
-  @
-  Label : AT
-    $y
-Label : CONCAT
-  '23'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Noscream.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .
+          Label : CONCAT
+            @
+            Label : AT
+              $y
+          Label : CONCAT
+            '23'

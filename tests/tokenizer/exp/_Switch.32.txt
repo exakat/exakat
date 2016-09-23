@@ -1,3 +1,140 @@
-(
-Label : ARGUMENT
-  $f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.32.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case "b" :  /**/  
+              Label : CASE
+                "b"
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    ->
+                    Label : METHOD
+                      e
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $f
+                      Label : NAME
+                        e
+                    Label : OBJECT
+                      $d
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    $g
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      return
+                      Label : RETURN
+                        $h
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    list
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                      Label : ARGUMENT
+                        $i
+                      Label : ARGUMENT
+                        $j
+                    Label : NAME
+                      list
+                  Label : RIGHT
+                    $k
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    ==
+                    Label : LEFT
+                      $l
+                    Label : RIGHT
+                      "%"
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $m
+                      Label : RIGHT
+                        "n"
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $o
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      isset
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            $r
+                          Label : VARIABLE
+                            ->
+                            Label : OBJECT
+                              $p
+                            Label : PROPERTY
+                              q
+                      Label : NAME
+                        isset
+                    Label : ELSE
+                      array
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $v
+                        Label : ARGUMENT
+                          .
+                          Label : CONCAT
+                            'w'
+                          Label : CONCAT
+                            $x
+                      Label : NAME
+                        array
+                    Label : THEN
+                      [
+                      Label : INDEX
+                        $u
+                      Label : VARIABLE
+                        ->
+                        Label : OBJECT
+                          $s
+                        Label : PROPERTY
+                          t
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    is_callable
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $y
+                    Label : NAME
+                      is_callable
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      Void
+          Label : NAME
+            $a

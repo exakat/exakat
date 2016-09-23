@@ -1,7 +1,26 @@
-[
-Label : INDEX
-  ++
-  Label : PREPLUSPLUS
-    $c
-Label : VARIABLE
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Assignation.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .=
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ^
+            Label : LEFT
+              [
+              Label : INDEX
+                ++
+                Label : PREPLUSPLUS
+                  $c
+              Label : VARIABLE
+                $b
+            Label : RIGHT
+              $d

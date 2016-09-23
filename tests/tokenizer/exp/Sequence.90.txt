@@ -1,19 +1,87 @@
-echo
-Label : ARGUMENT
-  I
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      ->
-      Label : METHOD
-        J
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            Void
-        Label : NAME
-          J
-      Label : OBJECT
-        $a
-  Label : NAME
-    I
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.90.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      N
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              I
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    J
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      J
+                  Label : OBJECT
+                    $a
+              Label : NAME
+                I
+          Label : NAME
+            echo
+        Label : ELEMENT
+          Q
+        Label : ELEMENT
+          R
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                S
+              Label : METHOD
+                T
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'U'
+                Label : NAME
+                  T
+            Label : ARGUMENT
+              'V'
+          Label : NAME
+            R
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              W
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'X'
+                Label : ARGUMENT
+                  'Y'
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    Z
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      Z
+                  Label : OBJECT
+                    $b
+              Label : NAME
+                W
+          Label : NAME
+            echo
+    Label : ELEMENT
+      AA

@@ -1,5 +1,18 @@
-[
-Label : INDEX
-  'd'
-Label : VARIABLE
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          -
+          Label : SIGN
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              $c

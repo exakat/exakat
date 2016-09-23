@@ -1,33 +1,84 @@
-+
-Label : LEFT
-  strlen
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      $b
-  Label : NAME
-    strlen
-Label : RIGHT
-  %
-  Label : LEFT
-    )
-    Label : CODE
-      *
-      Label : LEFT
-        1
-        Label : CODE
-          -
-          Label : LEFT
-            C
-          Label : RIGHT
-            1
-      Label : RIGHT
-        strlen
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            $d
-        Label : NAME
-          strlen
-  Label : RIGHT
-    W
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.38.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    ==
+                    Label : LEFT
+                      $x
+                    Label : RIGHT
+                      1
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $x
+                Label : ELEMENT
+                  .=
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    str_pad
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $a
+                      Label : ARGUMENT
+                        +
+                        Label : LEFT
+                          strlen
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              $b
+                          Label : NAME
+                            strlen
+                        Label : RIGHT
+                          %
+                          Label : LEFT
+                            )
+                            Label : CODE
+                              *
+                              Label : LEFT
+                                1
+                                Label : CODE
+                                  -
+                                  Label : LEFT
+                                    C
+                                  Label : RIGHT
+                                    1
+                              Label : RIGHT
+                                strlen
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    $d
+                                Label : NAME
+                                  strlen
+                          Label : RIGHT
+                            W
+                      Label : ARGUMENT
+                        0
+                      Label : ARGUMENT
+                        F
+                    Label : NAME
+                      str_pad
+          Label : NAME
+            true

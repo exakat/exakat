@@ -1,9 +1,48 @@
-case 'b' :  /**/  
-Label : CASE
-  'b'
-Label : CODE
-  ;
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'b' :  /**/  
+              Label : CASE
+                'b'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $b
+            Label : ELEMENT
+              case 'c' :  /**/  
+              Label : CASE
+                'c'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $c
+            Label : ELEMENT
+              case 'left' :  /**/  
+              Label : CASE
+                'left'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $e
+          Label : NAME
+            $a
+        Label : ELEMENT
+          Void

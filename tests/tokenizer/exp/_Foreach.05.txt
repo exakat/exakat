@@ -1,3 +1,24 @@
-(array)
-Label : CAST
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $i
+          Label : SOURCE
+            (array)
+            Label : CAST
+              $x
+          Label : VALUE
+            $y

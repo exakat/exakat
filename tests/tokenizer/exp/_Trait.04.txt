@@ -1,3 +1,160 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Trait.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              sayHello
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'Hello '
+                  Label : NAME
+                    echo
+              Label : NAME
+                sayHello
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            Hello
+          Label : NAME
+            Hello
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              sayWorld
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'World'
+                  Label : NAME
+                    echo
+              Label : NAME
+                sayWorld
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            World
+          Label : NAME
+            World
+          Label : DEFINITION
+            'World'
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : USE
+                Hello
+              Label : USE
+                World
+            Label : ELEMENT
+              sayExclamationMark
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      '!'
+                  Label : NAME
+                    echo
+              Label : NAME
+                sayExclamationMark
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            MyHelloWorld
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              MyHelloWorld
+          Label : DEFINITION
+            MyHelloWorld
+          Label : NAME
+            MyHelloWorld
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $o
+          Label : RIGHT
+            new
+            Label : NEW
+              MyHelloWorld
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                MyHelloWorld
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            sayHello
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              sayHello
+          Label : OBJECT
+            $o
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            sayWorld
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              sayWorld
+          Label : OBJECT
+            $o
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            sayExclamationMark
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              sayExclamationMark
+          Label : OBJECT
+            $o

@@ -1,5 +1,18 @@
-[
-Label : INDEX
-  1
-Label : VARIABLE
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Noscream.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          @
+          Label : AT
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              $x

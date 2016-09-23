@@ -1,11 +1,52 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'd'
-  Label : VARIABLE
-    [
-    Label : INDEX
-      'c'
-    Label : VARIABLE
-      $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.46.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $z
+          Label : THEN
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                !
+                Label : NOT
+                  empty
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'd'
+                      Label : VARIABLE
+                        [
+                        Label : INDEX
+                          'c'
+                        Label : VARIABLE
+                          $b
+                  Label : NAME
+                    empty
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  Void
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                f
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $g
+                Label : NAME
+                  f
+              Label : OBJECT
+                $e

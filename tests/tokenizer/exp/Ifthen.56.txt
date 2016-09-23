@@ -1,7 +1,67 @@
-(
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    self
-  Label : PROPERTY
-    $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.56.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              isset
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    self
+                  Label : PROPERTY
+                    $a
+              Label : NAME
+                isset
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  E
+              Label : OBJECT
+                ::
+                Label : CLASS
+                  self
+                Label : PROPERTY
+                  $d
+          Label : THEN
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ::
+                Label : CLASS
+                  self
+                Label : PROPERTY
+                  $b
+              Label : RIGHT
+                new
+                Label : NEW
+                  C
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          return
+          Label : RETURN
+            ::
+            Label : CLASS
+              self
+            Label : PROPERTY
+              $f

@@ -1,5 +1,77 @@
-(
-Label : ARGUMENT
-  $c
-Label : ARGUMENT
-  'E'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.78.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                B
+            Label : RIGHT
+              'C'
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              ==
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $h
+                Label : PROPERTY
+                  F
+              Label : RIGHT
+                'G'
+            Label : THEN
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $i
+          Label : THEN
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                D
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                  Label : ARGUMENT
+                    'E'
+                Label : NAME
+                  D
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $d
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  foreach
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      Void
+                  Label : SOURCE
+                    $e
+                  Label : VALUE
+                    $f
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $g
+        Label : ELEMENT
+          Void

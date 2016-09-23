@@ -1,11 +1,28 @@
--
-Label : LEFT
-  .
-  Label : CONCAT
-    -
-    Label : SIGN
-      'a'
-  Label : CONCAT
-    Void
-Label : RIGHT
-  'b'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              -
+              Label : LEFT
+                .
+                Label : CONCAT
+                  -
+                  Label : SIGN
+                    'a'
+                Label : CONCAT
+                  Void
+              Label : RIGHT
+                'b'
+          Label : NAME
+            echo

@@ -1,3 +1,41 @@
-(
-Label : ARGUMENT
-  $counter
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              isset
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $counter
+              Label : NAME
+                isset
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $counter
+              Label : NAME
+                echo
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  '0'
+              Label : NAME
+                echo

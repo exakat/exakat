@@ -1,9 +1,60 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    'a'
-  Label : VALUE
-    'b'
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Block.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $h
+                Label : RIGHT
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'a'
+                      Label : VALUE
+                        'b'
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    array
+            Label : ELEMENT
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $g
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    d
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $e
+                        Label : PROPERTY
+                          f
+                    Label : NAME
+                      d
+                  Label : OBJECT
+                    $c
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

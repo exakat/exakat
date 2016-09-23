@@ -1,23 +1,25 @@
-./tests/tokenizer/source/Reference.33.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          &
-          Label : LEFT
-            ::
-            Label : CLASS
-              A
-            Label : CONSTANT
-              B
-          Label : RIGHT
-            $c
-        Label : THEN
-          {}
-          Label : ELEMENT
-            Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.33.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &
+            Label : LEFT
+              ::
+              Label : CLASS
+                A
+              Label : CONSTANT
+                B
+            Label : RIGHT
+              $c
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void

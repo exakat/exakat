@@ -1,3 +1,46 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variable.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $result
+          Label : RIGHT
+            <<<EOF
+
+            Label : CONCAT
+              
+
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $object
+              Label : PROPERTY
+                property
+            Label : CONCAT
+              ;
+
+
+            Label : CONCAT
+              ->
+              Label : METHOD
+                method
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  method
+              Label : OBJECT
+                $object
+            Label : CONCAT
+              ;
+
+

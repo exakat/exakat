@@ -1,3 +1,78 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticclass.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              y
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        ::
+                        Label : CLASS
+                          parent
+                        Label : CLASS
+                          class
+                      Label : CONCAT
+                        "\n"
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        ::
+                        Label : CLASS
+                          self
+                        Label : CLASS
+                          class
+                      Label : CONCAT
+                        "\n"
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        ::
+                        Label : CLASS
+                          static
+                        Label : CLASS
+                          class
+                      Label : CONCAT
+                        "\n"
+                  Label : NAME
+                    echo
+              Label : NAME
+                y
+          Label : DEFINITION
+            self
+          Label : DEFINITION
+            static
+          Label : NAME
+            x

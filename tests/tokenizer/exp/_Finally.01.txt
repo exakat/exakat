@@ -1,3 +1,216 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Finally.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          doSomething
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $resource
+              Label : RIGHT
+                createResource
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  createResource
+            Label : ELEMENT
+              try
+              Label : FINALLY
+                finally
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    releaseResource
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $resource
+                    Label : NAME
+                      releaseResource
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $result
+                  Label : RIGHT
+                    useResource
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $resource
+                    Label : NAME
+                      useResource
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    $result
+              Label : CATCH
+                catch
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    log
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          getMessage
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            getMessage
+                        Label : OBJECT
+                          $e
+                    Label : NAME
+                      log
+                  Label : ELEMENT
+                    throw
+                    Label : THROW
+                      $e
+                Label : CLASS
+                  Exception
+                Label : VARIABLE
+                  $e
+              Label : CATCH
+                catch
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    log
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          getMessage
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            getMessage
+                        Label : OBJECT
+                          $e
+                    Label : NAME
+                      log
+                  Label : ELEMENT
+                    throw
+                    Label : THROW
+                      $e
+                Label : CLASS
+                  Exception2
+                Label : VARIABLE
+                  $e
+              Label : CATCH
+                catch
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    log
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          getMessage
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            getMessage
+                        Label : OBJECT
+                          $e
+                    Label : NAME
+                      log
+                  Label : ELEMENT
+                    throw
+                    Label : THROW
+                      $e
+                Label : CLASS
+                  Exception3
+                Label : VARIABLE
+                  $e
+              Label : CATCH
+                catch
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    log
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          getMessage
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            getMessage
+                        Label : OBJECT
+                          $e
+                    Label : NAME
+                      log
+                  Label : ELEMENT
+                    throw
+                    Label : THROW
+                      $e
+                Label : CLASS
+                  Exception4
+                Label : VARIABLE
+                  $e
+              Label : CATCH
+                catch
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    log
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          getMessage
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            getMessage
+                        Label : OBJECT
+                          $e
+                    Label : NAME
+                      log
+                  Label : ELEMENT
+                    throw
+                    Label : THROW
+                      $e
+                Label : CLASS
+                  Exception5
+                Label : VARIABLE
+                  $e
+          Label : NAME
+            doSomething
+        Label : ELEMENT
+          Void

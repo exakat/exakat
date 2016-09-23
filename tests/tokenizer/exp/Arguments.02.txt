@@ -1,5 +1,20 @@
-(
-Label : ARGUMENT
-  1
-  Label : CODE
-    1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              1
+              Label : CODE
+                1
+          Label : NAME
+            f

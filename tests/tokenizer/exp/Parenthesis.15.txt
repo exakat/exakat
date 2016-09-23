@@ -1,27 +1,46 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    'a'
-  Label : VALUE
-    require
-    Label : ARGUMENTS
-      )
-      Label : ARGUMENT
-        'c'
-        Label : CODE
-          .
-          Label : CONCAT
-            b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            array
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                __FILE__
+                =>
+                Label : KEY
+                  'a'
+                Label : VALUE
+                  require
+                  Label : ARGUMENTS
+                    )
+                    Label : ARGUMENT
+                      'c'
+                      Label : CODE
+                        .
+                        Label : CONCAT
+                          b
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              __FILE__
+                          Label : NAME
+                            b
+                        Label : CONCAT
+                          'c'
+                  Label : NAME
+                    require
+              Label : ARGUMENT
+                Void
             Label : NAME
-              b
-          Label : CONCAT
-            'c'
-    Label : NAME
-      require
-Label : ARGUMENT
-  Void
+              array

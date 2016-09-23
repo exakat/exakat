@@ -1,14 +1,25 @@
-=
-Label : LEFT
-  $a
-Label : RIGHT
-  .
-  Label : CONCAT
-    'd'
-  Label : CONCAT
-    <<<HEREDOC
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.59.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CONCAT
-      bc
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            .
+            Label : CONCAT
+              'd'
+            Label : CONCAT
+              <<<HEREDOC
+
+              Label : CONCAT
+                bc
 
 

@@ -1,3 +1,28 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Nsname.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          new
+          Label : NEW
+            \
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              \
+              Label : SUBNAME
+                a
+              Label : SUBNAME
+                b
+              Label : SUBNAME
+                c
+              Label : SUBNAME
+                d

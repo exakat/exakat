@@ -1,5 +1,29 @@
-[
-Label : INDEX
-  3
-Label : VARIABLE
-  $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/String.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a6
+          Label : RIGHT
+            "
+            Label : CONCAT
+              D
+            Label : CONCAT
+              $b6
+            Label : CONCAT
+              c6
+            Label : CONCAT
+              C
+            Label : CONCAT
+              [
+              Label : INDEX
+                3
+              Label : VARIABLE
+                $d

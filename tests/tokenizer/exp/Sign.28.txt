@@ -1,35 +1,46 @@
-+
-Label : LEFT
-  ->
-  Label : OBJECT
-    $a
-  Label : PROPERTY
-    b
-Label : RIGHT
-  *
-  Label : LEFT
-    ->
-    Label : OBJECT
-      $c
-    Label : PROPERTY
-      d
-  Label : RIGHT
-    *
-    Label : LEFT
-      $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.28.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
       Label : CODE
-        -
-        Label : LEFT
-          1
-        Label : RIGHT
-          /
+        ;
+        Label : ELEMENT
+          +
           Label : LEFT
-            2
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              b
           Label : RIGHT
-            $e
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $g
-      Label : PROPERTY
-        h
+            *
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $c
+              Label : PROPERTY
+                d
+            Label : RIGHT
+              *
+              Label : LEFT
+                $e
+                Label : CODE
+                  -
+                  Label : LEFT
+                    1
+                  Label : RIGHT
+                    /
+                    Label : LEFT
+                      2
+                    Label : RIGHT
+                      $e
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $g
+                Label : PROPERTY
+                  h

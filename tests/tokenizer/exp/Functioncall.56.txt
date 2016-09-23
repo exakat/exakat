@@ -1,9 +1,144 @@
--
-Label : LEFT
-  $a
-Label : RIGHT
-  -
-  Label : LEFT
-    4
-  Label : RIGHT
-    $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.56.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              *
+              Label : LEFT
+                $b
+                Label : CODE
+                  -
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    -
+                    Label : LEFT
+                      4
+                    Label : RIGHT
+                      $b
+              Label : RIGHT
+                $c
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              -
+              Label : LEFT
+                $b
+                Label : CODE
+                  -
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    -
+                    Label : LEFT
+                      4
+                    Label : RIGHT
+                      $b
+              Label : RIGHT
+                $c
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              **
+              Label : LEFT
+                $b
+                Label : CODE
+                  -
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    -
+                    Label : LEFT
+                      4
+                    Label : RIGHT
+                      $b
+              Label : RIGHT
+                $c
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <<
+              Label : LEFT
+                $b
+                Label : CODE
+                  -
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    -
+                    Label : LEFT
+                      4
+                    Label : RIGHT
+                      $b
+              Label : RIGHT
+                $c
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              &&
+              Label : LEFT
+                $b
+                Label : CODE
+                  -
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    -
+                    Label : LEFT
+                      4
+                    Label : RIGHT
+                      $b
+              Label : RIGHT
+                $c
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ?
+              Label : CONDITION
+                $b
+                Label : CODE
+                  -
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    -
+                    Label : LEFT
+                      4
+                    Label : RIGHT
+                      $b
+              Label : ELSE
+                2
+              Label : THEN
+                1
+          Label : NAME
+            echo

@@ -1,3 +1,88 @@
-(
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.54.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              )
+              Label : CODE
+                ||
+                Label : LEFT
+                  !
+                  Label : NOT
+                    isset
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $b
+                    Label : NAME
+                      isset
+                Label : RIGHT
+                  empty
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    empty
+            Label : ELSE
+              $d
+            Label : THEN
+              'B'
+        Label : ELEMENT
+          C
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'D'
+              Label : CONCAT
+                $e
+          Label : NAME
+            C
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            'E'
+            Label : ARGUMENT
+              ?
+              Label : CONDITION
+                )
+                Label : CODE
+                  &&
+                  Label : LEFT
+                    isset
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $f
+                    Label : NAME
+                      isset
+                  Label : RIGHT
+                    !
+                    Label : NOT
+                      empty
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $g
+                      Label : NAME
+                        empty
+              Label : ELSE
+                'E'
+              Label : THEN
+                $h
+          Label : NAME
+            print

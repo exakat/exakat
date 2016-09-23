@@ -1,3 +1,33 @@
-echo
-Label : ARGUMENT
-  $location
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Rawstring.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              A
+            Label : ELEMENT
+              BC
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              D
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $location
+              Label : NAME
+                echo
+        Label : ELEMENT
+          Void

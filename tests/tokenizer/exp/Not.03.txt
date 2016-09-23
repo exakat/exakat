@@ -1,3 +1,34 @@
-(
-Label : ARGUMENT
-  'd'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          !
+          Label : NOT
+            ->
+            Label : METHOD
+              e
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'f'
+              Label : NAME
+                e
+            Label : OBJECT
+              ::
+              Label : CLASS
+                C
+              Label : METHOD
+                D
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'd'
+                Label : NAME
+                  D

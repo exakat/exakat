@@ -1,9 +1,48 @@
-(
-Label : ARGUMENT
-  $
-  Label : NAME
-    .
-    Label : CONCAT
-      'E'
-    Label : CONCAT
-      $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.64.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $
+                  Label : NAME
+                    .
+                    Label : CONCAT
+                      'E'
+                    Label : CONCAT
+                      $a
+              Label : NAME
+                empty
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  "
+                  Label : CONCAT
+                    F
+                  Label : CONCAT
+                    .
+                    Label : CONCAT
+                      'E'
+                    Label : CONCAT
+                      $a
+                  Label : CONCAT
+                    H
+              Label : NAME
+                echo

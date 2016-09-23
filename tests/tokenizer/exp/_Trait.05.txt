@@ -1,16 +1,18 @@
-./tests/tokenizer/source/_Trait.05.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Trait.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        trait
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            Void
-        Label : NAME
-          A
+      Label : CODE
+        ;
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            A

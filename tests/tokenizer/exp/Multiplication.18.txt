@@ -1,9 +1,20 @@
-.
-Label : CONCAT
-  '1'
-Label : CONCAT
-  *
-  Label : LEFT
-    $s
-  Label : RIGHT
-    1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Multiplication.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .
+          Label : CONCAT
+            '1'
+          Label : CONCAT
+            *
+            Label : LEFT
+              $s
+            Label : RIGHT
+              1

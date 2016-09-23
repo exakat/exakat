@@ -1,5 +1,36 @@
-(
-Label : ARGUMENT
-  $a
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Noscream.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            @
+            Label : AT
+              list
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                list
+          Label : RIGHT
+            ->
+            Label : METHOD
+              d
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $e
+              Label : NAME
+                d
+            Label : OBJECT
+              $c

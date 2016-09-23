@@ -1,7 +1,18 @@
-==
-Label : LEFT
-  !
-  Label : NOT
-    $x
-Label : RIGHT
-  3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ==
+          Label : LEFT
+            !
+            Label : NOT
+              $x
+          Label : RIGHT
+            3

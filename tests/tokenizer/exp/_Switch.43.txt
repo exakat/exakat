@@ -1,3 +1,78 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.43.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'C' :  /**/  
+              Label : CASE
+                'C'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  switch
+                  Label : CASES
+                     /**/ 
+                  Label : NAME
+                    ->
+                    Label : METHOD
+                      D
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        D
+                    Label : OBJECT
+                      $b
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    =
+                    Label : LEFT
+                      $c
+                    Label : RIGHT
+                      ->
+                      Label : METHOD
+                        E
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            $e
+                        Label : NAME
+                          E
+                      Label : OBJECT
+                        $d
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      Void
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+          Label : NAME
+            ->
+            Label : METHOD
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                B
+            Label : OBJECT
+              $a

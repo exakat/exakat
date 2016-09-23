@@ -1,11 +1,59 @@
-)
-Label : ARGUMENT
-  a
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      $b
-    Label : ARGUMENT
-      $c
-  Label : NAME
-    a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Typehint.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+                Label : ARGUMENT
+                  $c
+              Label : NAME
+                a
+          Label : NAME
+            print
+        Label : ELEMENT
+          A
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $d
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              array
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $e
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $f
+                Label : APPEND
+                  $f
+              Label : RIGHT
+                g
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $h
+                Label : NAME
+                  g

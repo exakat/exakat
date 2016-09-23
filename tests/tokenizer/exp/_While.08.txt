@@ -1,7 +1,106 @@
-(
-Label : ARGUMENT
-  $a
-Label : ARGUMENT
-  0
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_While.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &&
+            Label : LEFT
+              !=
+              Label : LEFT
+                substr
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $a
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    1
+                Label : NAME
+                  substr
+              Label : RIGHT
+                2
+            Label : RIGHT
+              !=
+              Label : LEFT
+                substr
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    3
+                  Label : ARGUMENT
+                    4
+                Label : NAME
+                  substr
+              Label : RIGHT
+                5
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                false
+        Label : ELEMENT
+          while
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ||
+                Label : LEFT
+                  !=
+                  Label : LEFT
+                    substr
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $c
+                      Label : ARGUMENT
+                        6
+                      Label : ARGUMENT
+                        7
+                    Label : NAME
+                      substr
+                  Label : RIGHT
+                    'd'
+                Label : RIGHT
+                  empty
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $e
+                  Label : NAME
+                    empty
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $f
+              Label : RIGHT
+                h
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $g
+                  Label : ARGUMENT
+                    8
+                Label : NAME
+                  h
+          Label : CONDITION
+            1

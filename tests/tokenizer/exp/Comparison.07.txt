@@ -1,1 +1,24 @@
-false
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            instanceof
+            Label : CLASS
+              Exception
+            Label : VARIABLE
+              $x
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                false

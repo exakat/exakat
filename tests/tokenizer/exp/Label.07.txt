@@ -1,7 +1,50 @@
-(
-Label : ARGUMENT
-  $b
-Label : ARGUMENT
-  0
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Label.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case substr($b, 0, 1) == 'c' :  /**/  
+              Label : CASE
+                ==
+                Label : LEFT
+                  substr
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $b
+                    Label : ARGUMENT
+                      0
+                    Label : ARGUMENT
+                      1
+                  Label : NAME
+                    substr
+                Label : RIGHT
+                  'c'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  d
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'f'
+                      Label : VARIABLE
+                        $e
+                    Label : ARGUMENT
+                      'g'
+                  Label : NAME
+                    d
+          Label : NAME
+            $a

@@ -1,3 +1,138 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.69.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            bootstrap
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              bootstrap
+          Label : OBJECT
+            }
+            Label : CODE
+              new
+              Label : NEW
+                class
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    main
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        Void
+                    Label : NAME
+                      main
+                    Label : PUBLIC
+                      public
+                Label : EXTENDS
+                  ConsoleProgram
+                Label : NAME
+                  Void
+        Label : ELEMENT
+          return
+          Label : RETURN
+            new
+            Label : NEW
+              class
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $controller
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  __construct
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $controller
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      Void
+                  Label : NAME
+                    __construct
+                  Label : PUBLIC
+                    public
+              Label : IMPLEMENTS
+                Page
+              Label : NAME
+                Void
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              __construct
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $controller
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                __construct
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            MyPage
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $controller
+            Label : NAME
+              MyPage
+          Label : DEFINITION
+            MyPage
+          Label : IMPLEMENTS
+            Page
+          Label : NAME
+            MyPage
+        Label : ELEMENT
+          return
+          Label : RETURN
+            new
+            Label : NEW
+              MyPage
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $controller
+              Label : NAME
+                MyPage
+        Label : ELEMENT
+          return
+          Label : RETURN
+            new
+            Label : NEW
+              class
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $path
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : EXTENDS
+                DirectoryIterator
+              Label : NAME
+                Void

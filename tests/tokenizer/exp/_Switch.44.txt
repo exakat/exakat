@@ -1,5 +1,58 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.44.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 1 :  /**/  
+              Label : CASE
+                1
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    FALSE
+                Label : ELEMENT
+                  Void
+          Label : NAME
+            $a
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    FALSE
+                Label : ELEMENT
+                  Void
+          Label : NAME
+            $a
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $y
+          Label : RIGHT
+            +
+            Label : LEFT
+              1
+            Label : RIGHT
+              2
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          Void

@@ -1,28 +1,30 @@
-./tests/tokenizer/source/_Foreach.36.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.36.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $d
-        Label : SOURCE
-          $a
-        Label : VALUE
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              c
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d
+          Label : SOURCE
+            $a
           Label : VALUE
-            $d
+            =>
+            Label : KEY
+              ->
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                c
+            Label : VALUE
+              $d

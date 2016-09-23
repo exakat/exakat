@@ -1,3 +1,38 @@
-(
-Label : ARGUMENT
-  $fetchMode
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_While.30.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          while
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $result
+                Label : APPEND
+                  $result
+              Label : RIGHT
+                $row
+          Label : CONDITION
+            =
+            Label : LEFT
+              $row
+            Label : RIGHT
+              ->
+              Label : METHOD
+                fetch
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $fetchMode
+                Label : NAME
+                  fetch
+              Label : OBJECT
+                $this

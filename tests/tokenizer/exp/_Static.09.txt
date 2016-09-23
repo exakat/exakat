@@ -1,7 +1,22 @@
-(
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    static
-  Label : CONSTANT
-    B
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Static.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                static
+              Label : CONSTANT
+                B
+          Label : NAME
+            x

@@ -1,3 +1,33 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Methodcall.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : SOURCE
+            ->
+            Label : METHOD
+              c
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                c
+            Label : OBJECT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                b
+          Label : VALUE
+            $d

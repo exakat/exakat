@@ -1,11 +1,86 @@
-(
-Label : ARGUMENT
-  $a
-Label : ARGUMENT
-  $b
-Label : ARGUMENT
-  {
-  Label : INDEX
-    $i
-  Label : VARIABLE
-    $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.73.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          k
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              {
+              Label : INDEX
+                $i
+              Label : VARIABLE
+                $c
+          Label : NAME
+            k
+        Label : ELEMENT
+          l
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              {
+              Label : INDEX
+                $i
+              Label : VARIABLE
+                $e
+          Label : NAME
+            l
+        Label : ELEMENT
+          m
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              {
+              Label : INDEX
+                $i
+              Label : VARIABLE
+                $f
+            Label : ARGUMENT
+              $g
+          Label : NAME
+            m
+        Label : ELEMENT
+          n
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              {
+              Label : INDEX
+                $i
+              Label : VARIABLE
+                $h
+            Label : ARGUMENT
+              $j
+          Label : NAME
+            n
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              {
+              Label : INDEX
+                $i
+              Label : VARIABLE
+                $c
+          Label : NAME
+            echo

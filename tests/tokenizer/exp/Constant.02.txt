@@ -1,5 +1,20 @@
-(
-Label : ARGUMENT
-  'x'
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          define
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'x'
+            Label : ARGUMENT
+              1
+          Label : NAME
+            define

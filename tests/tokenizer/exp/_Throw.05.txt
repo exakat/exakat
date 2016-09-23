@@ -1,20 +1,22 @@
-./tests/tokenizer/source/_Throw.05.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Throw.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        throw
-        Label : THROW
-          new
-          Label : NEW
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              \
+              Label : SUBNAME
+                A
+              Label : SUBNAME
+                B
+              Label : SUBNAME
+                C

@@ -1,17 +1,128 @@
-(
-Label : ARGUMENT
-  N
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'O'
-    Label : ARGUMENT
-      P
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          $f
-      Label : NAME
-        P
-  Label : NAME
-    N
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.42.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case $a instanceof \C :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    C
+                Label : VARIABLE
+                  $a
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    'D'
+            Label : ELEMENT
+              case $b instanceof \E :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    E
+                Label : VARIABLE
+                  $b
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    'F'
+            Label : ELEMENT
+              case $c instanceof \G :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    G
+                Label : VARIABLE
+                  $c
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    'H'
+            Label : ELEMENT
+              case $d instanceof \I :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    I
+                Label : VARIABLE
+                  $d
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    'J'
+            Label : ELEMENT
+              case $e instanceof \K :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    K
+                Label : VARIABLE
+                  $e
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    'L'
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  throw
+                  Label : THROW
+                    new
+                    Label : NEW
+                      \
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          N
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'O'
+                            Label : ARGUMENT
+                              P
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  $f
+                              Label : NAME
+                                P
+                          Label : NAME
+                            N
+                      Label : NAME
+                        \
+                        Label : SUBNAME
+                          M
+          Label : NAME
+            B

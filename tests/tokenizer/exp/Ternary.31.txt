@@ -1,9 +1,32 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $a
-  Label : PROPERTY
-    C
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.31.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            ?
+            Label : CONDITION
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $a
+                  Label : PROPERTY
+                    C
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                B
+            Label : ELSE
+              D
+            Label : THEN
+              Void

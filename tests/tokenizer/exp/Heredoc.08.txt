@@ -1,3 +1,96 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Heredoc.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $c22
+              Label : ELSE
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $b2
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a2
+          Label : NAME
+            a
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $room
+          Label : RIGHT
+            <<<'HEREDOCE'
+
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $room
+          Label : RIGHT
+            <<<HEREDOCF
+
+            Label : CONCAT
+              D
+
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $room
+          Label : RIGHT
+            <<<'HEREDOCF'
+
+            Label : CONCAT
+              F
+
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $room
+          Label : RIGHT
+            <<<HEREDOCE
+
+        Label : ELEMENT
+          b
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $c2
+              Label : ELSE
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $b
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a
+          Label : NAME
+            b

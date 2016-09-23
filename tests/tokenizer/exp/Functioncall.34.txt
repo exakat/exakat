@@ -1,19 +1,40 @@
-(
-Label : ARGUMENT
-  $b
-  Label : DEFAULT
-    array
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        Void
-    Label : NAME
-      array
-Label : ARGUMENT
-  $c
-  Label : DEFAULT
-    '2'
-Label : ARGUMENT
-  $d
-  Label : DEFAULT
-    2.3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.34.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $b
+              Label : DEFAULT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  array
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                '2'
+            Label : ARGUMENT
+              $d
+              Label : DEFAULT
+                2.3
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            a
+        Label : ELEMENT
+          Void

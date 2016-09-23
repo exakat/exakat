@@ -1,41 +1,56 @@
-(
-Label : ARGUMENT
-   
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      $f
-    Label : ARGUMENT
-      $g
-  Label : BLOCK
-    {}
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.64.php
+  Label : FILE
+    ;
     Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        $a
-  Label : NAME
-    Void
-Label : ARGUMENT
-  ->
-  Label : METHOD
-    d
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        'e'
-    Label : NAME
-      d
-  Label : OBJECT
-    )
-    Label : CODE
-      new
-      Label : NEW
-        A
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            $b
-          Label : ARGUMENT
-            $c
-        Label : NAME
-          A
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          h
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+               
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $f
+                Label : ARGUMENT
+                  $g
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a
+              Label : NAME
+                Void
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                d
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'e'
+                Label : NAME
+                  d
+              Label : OBJECT
+                )
+                Label : CODE
+                  new
+                  Label : NEW
+                    A
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        $c
+                    Label : NAME
+                      A
+          Label : NAME
+            h

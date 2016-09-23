@@ -1,3 +1,76 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.37.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              sayHello
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'Hello World!'
+                  Label : NAME
+                    echo
+              Label : NAME
+                sayHello
+              Label : PUBLIC
+                public
+          Label : NAME
+            HelloWorld
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    Void
+                  Label : NAME
+                    sayHello
+                  Label : PROTECTED
+                    protected
+              Label : USE
+                HelloWorld
+          Label : NAME
+            MyClass1
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    myPrivateHello
+                  Label : NAME
+                    sayHello
+                  Label : PRIVATE
+                    private
+              Label : USE
+                HelloWorld
+          Label : NAME
+            MyClass2

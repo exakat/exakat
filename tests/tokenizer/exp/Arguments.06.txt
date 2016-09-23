@@ -1,3 +1,18 @@
-(
-Label : ARGUMENT
-  true
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              true
+          Label : NAME
+            f

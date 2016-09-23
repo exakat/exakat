@@ -1,3 +1,26 @@
-(
-Label : ARGUMENT
-  $sql
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          !==
+          Label : LEFT
+            ->
+            Label : METHOD
+              Execute
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $sql
+              Label : NAME
+                Execute
+            Label : OBJECT
+              $conn
+          Label : RIGHT
+            false

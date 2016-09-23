@@ -1,3 +1,21 @@
-(
-Label : ARGUMENT
-  $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            require
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $d
+            Label : NAME
+              require
+          Label : OBJECT
+            $a

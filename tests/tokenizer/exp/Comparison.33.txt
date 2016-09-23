@@ -1,11 +1,46 @@
-(
-Label : ARGUMENT
-  array
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      Void
-  Label : NAME
-    array
-Label : ARGUMENT
-  $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.33.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            =
+            Label : LEFT
+              $a
+            Label : RIGHT
+              !==
+              Label : LEFT
+                ->
+                Label : METHOD
+                  c
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      array
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        array
+                    Label : ARGUMENT
+                      $d
+                  Label : NAME
+                    c
+                Label : OBJECT
+                  $b
+              Label : RIGHT
+                true
+          Label : THEN
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                $e

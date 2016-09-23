@@ -1,66 +1,68 @@
-./tests/tokenizer/source/Ifthen.98.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.98.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $x
-        Label : ELSE
-          elseif
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
           Label : CONDITION
-            $x2
+            $x
           Label : ELSE
             elseif
             Label : CONDITION
-              $x3
+              $x2
             Label : ELSE
               elseif
               Label : CONDITION
-                $x4
+                $x3
               Label : ELSE
                 elseif
                 Label : CONDITION
-                  $x5
+                  $x4
                 Label : ELSE
-                  ;
-                  Label : ELEMENT
-                    {}
+                  elseif
+                  Label : CONDITION
+                    $x5
+                  Label : ELSE
+                    ;
                     Label : ELEMENT
-                      $z
+                      {}
+                      Label : ELEMENT
+                        $z
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      {}
+                      Label : ELEMENT
+                        $y5
                 Label : THEN
                   ;
                   Label : ELEMENT
                     {}
                     Label : ELEMENT
-                      $y5
+                      $y4
               Label : THEN
                 ;
                 Label : ELEMENT
                   {}
                   Label : ELEMENT
-                    $y4
+                    $y3
             Label : THEN
               ;
               Label : ELEMENT
                 {}
                 Label : ELEMENT
-                  $y3
+                  $y2
           Label : THEN
             ;
             Label : ELEMENT
               {}
               Label : ELEMENT
-                $y2
-        Label : THEN
-          ;
-          Label : ELEMENT
-            {}
-            Label : ELEMENT
-              $y
-      Label : ELEMENT
-        Void
+                $y
+        Label : ELEMENT
+          Void

@@ -1,11 +1,82 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'E'
-  Label : VARIABLE
-    [
-    Label : INDEX
-      'C'
-    Label : VARIABLE
-      $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.65.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          global
+          Label : GLOBAL
+            $a
+        Label : ELEMENT
+          global
+          Label : GLOBAL
+            $b
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'E'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'C'
+                    Label : VARIABLE
+                      $c
+              Label : NAME
+                B
+          Label : THEN
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  array
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $d
+          Label : RIGHT
+            G
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'J'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'H'
+                  Label : VARIABLE
+                    $e
+            Label : NAME
+              G
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $f
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              array

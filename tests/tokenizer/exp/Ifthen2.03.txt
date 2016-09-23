@@ -1,7 +1,156 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'B'
-  Label : VARIABLE
-    $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen2.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            0
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              W
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'X'
+              Label : NAME
+                W
+            Label : ELEMENT
+              W
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'Z'
+                Label : ARGUMENT
+                  'AA'
+              Label : NAME
+                W
+          Label : THEN
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                &&
+                Label : LEFT
+                  !
+                  Label : NOT
+                    empty
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'B'
+                        Label : VARIABLE
+                          $a
+                    Label : NAME
+                      empty
+                Label : RIGHT
+                  ===
+                  Label : LEFT
+                    'C'
+                  Label : RIGHT
+                    [
+                    Label : INDEX
+                      'B'
+                    Label : VARIABLE
+                      $a
+              Label : ELSE
+                elseif
+                Label : CONDITION
+                  &&
+                  Label : LEFT
+                    !
+                    Label : NOT
+                      empty
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'B'
+                          Label : VARIABLE
+                            $a
+                      Label : NAME
+                        empty
+                  Label : RIGHT
+                    ===
+                    Label : LEFT
+                      'K'
+                    Label : RIGHT
+                      [
+                      Label : INDEX
+                        'B'
+                      Label : VARIABLE
+                        $a
+                Label : ELSE
+                  ;
+                  Label : ELEMENT
+                    R
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'S'
+                    Label : NAME
+                      R
+                  Label : ELEMENT
+                    T
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'H'
+                      Label : ARGUMENT
+                        'V'
+                    Label : NAME
+                      T
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    M
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'N'
+                    Label : NAME
+                      M
+                  Label : ELEMENT
+                    M
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'H'
+                      Label : ARGUMENT
+                        'Q'
+                    Label : NAME
+                      M
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  E
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'F'
+                  Label : NAME
+                    E
+                Label : ELEMENT
+                  E
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'H'
+                    Label : ARGUMENT
+                      'I'
+                  Label : NAME
+                    E
+            Label : ELEMENT
+              Void
+        Label : ELEMENT
+          Void

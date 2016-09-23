@@ -1,3 +1,61 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Continue.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                !==
+                Label : LEFT
+                  0
+                Label : RIGHT
+                  C
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        D
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          D
+                      Label : OBJECT
+                        $c
+                    Label : ARGUMENT
+                      'E'
+                  Label : NAME
+                    C
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  continue
+                  Label : CONTINUE
+                    Void
+            Label : ELEMENT
+              Void
+          Label : SOURCE
+            ->
+            Label : METHOD
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                B
+            Label : OBJECT
+              $a
+          Label : VALUE
+            $b

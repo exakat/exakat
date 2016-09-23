@@ -1,3 +1,104 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yield.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $y
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    =>
+                    Label : KEY
+                      1
+                    Label : VALUE
+                      2
+                  Label : ARGUMENT
+                    =>
+                    Label : KEY
+                      3
+                    Label : VALUE
+                      4
+                Label : NAME
+                  array
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  yield
+                  Label : YIELD
+                    =>
+                    Label : KEY
+                      $k
+                    Label : VALUE
+                      $v
+              Label : SOURCE
+                $y
+              Label : VALUE
+                =>
+                Label : KEY
+                  $k
+                Label : VALUE
+                  $v
+          Label : DEFINITION
+            x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              x
+          Label : NAME
+            x
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                "
+                Label : ARGUMENT
+                  "
+                  Label : CONCAT
+                    $k
+                  Label : CONCAT
+                     => 
+                  Label : CONCAT
+                    $v
+                  Label : CONCAT
+                    \n
+              Label : NAME
+                print
+          Label : SOURCE
+            x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              x
+          Label : VALUE
+            =>
+            Label : KEY
+              $k
+            Label : VALUE
+              $v

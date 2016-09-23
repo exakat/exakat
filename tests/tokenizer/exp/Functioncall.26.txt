@@ -1,51 +1,66 @@
-(
-Label : ARGUMENT
-  "b"
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $this
-  Label : PROPERTY
-    c
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    Stdclass
-  Label : CONSTANT
-    d
-Label : ARGUMENT
-  \
-  Label : SUBNAME
-    e
-  Label : SUBNAME
-    f
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    Stdclass
-  Label : PROPERTY
-    $g
-Label : ARGUMENT
-  ->
-  Label : METHOD
-    h
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        Void
-    Label : NAME
-      h
-  Label : OBJECT
-    $this
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    Stdclass
-  Label : METHOD
-    i
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        Void
-    Label : NAME
-      i
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              "b"
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                c
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                Stdclass
+              Label : CONSTANT
+                d
+            Label : ARGUMENT
+              \
+              Label : SUBNAME
+                e
+              Label : SUBNAME
+                f
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                Stdclass
+              Label : PROPERTY
+                $g
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                h
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  h
+              Label : OBJECT
+                $this
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                Stdclass
+              Label : METHOD
+                i
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  i
+          Label : NAME
+            a

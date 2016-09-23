@@ -1,3 +1,58 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.29.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $b
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    1
+            Label : ELEMENT
+              array_pop
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    stack
+              Label : NAME
+                array_pop
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $d
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $e
+                  Label : RIGHT
+                    2
+          Label : NAME
+            a
+        Label : ELEMENT
+          Void

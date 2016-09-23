@@ -1,7 +1,60 @@
-as
-Label : AS
-  L
-Label : NAME
-  K
-Label : PRIVATE
-  private
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Ppp.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              use
+              Label : USE
+                \
+                Label : SUBNAME
+                  B
+                Label : SUBNAME
+                  C
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  H
+            Label : ELEMENT
+              trait
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  use
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      as
+                      Label : AS
+                        L
+                      Label : NAME
+                        K
+                      Label : PRIVATE
+                        private
+                  Label : USE
+                    H
+                Label : ELEMENT
+                  protected
+                  Label : PPP
+                    $a
+                  Label : PROTECTED
+                    protected
+              Label : NAME
+                I
+          Label : NAME
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D

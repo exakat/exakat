@@ -1,33 +1,77 @@
-<?=
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    'E'
-    Label : CODE
-      ?
-      Label : CONDITION
-        <
-        Label : LEFT
-          B
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.37.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?=
+      Label : CODE
+        ;
+        Label : ELEMENT
+          <?=
           Label : ARGUMENTS
-            (
+            <?=
             Label : ARGUMENT
-              [
-              Label : INDEX
-                'C'
-              Label : VARIABLE
-                $a
+              .
+              Label : CONCAT
+                'E'
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    <
+                    Label : LEFT
+                      B
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'C'
+                          Label : VARIABLE
+                            $a
+                      Label : NAME
+                        B
+                    Label : RIGHT
+                      $b
+                  Label : ELSE
+                    'E'
+                  Label : THEN
+                    'D'
+              Label : CONCAT
+                [
+                Label : INDEX
+                  'F'
+                Label : VARIABLE
+                  $c
           Label : NAME
-            B
-        Label : RIGHT
-          $b
-      Label : ELSE
-        'E'
-      Label : THEN
-        'D'
-  Label : CONCAT
-    [
-    Label : INDEX
-      'F'
-    Label : VARIABLE
-      $c
+            <?=
+        Label : ELEMENT
+          F
+        Label : ELEMENT
+          <?=
+          Label : ARGUMENTS
+            <?=
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                H
+              Label : METHOD
+                I
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'J'
+                    Label : VARIABLE
+                      $d
+                  Label : ARGUMENT
+                    K
+                  Label : ARGUMENT
+                    L
+                  Label : ARGUMENT
+                    M
+                Label : NAME
+                  I
+          Label : NAME
+            <?=

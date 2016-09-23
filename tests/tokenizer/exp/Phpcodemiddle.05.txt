@@ -1,3 +1,31 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcodemiddle.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            B
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $a
+            Label : NAME
+              B
+          Label : ELSE
+            ;
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+        Label : ELEMENT
+          Void
+    Label : ELEMENT
+      I

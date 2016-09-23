@@ -1,5 +1,78 @@
-(
-Label : ARGUMENT
-  $i
-Label : ARGUMENT
-  $j
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.29.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'b' :  /**/  
+              Label : CASE
+                'b'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  switch
+                  Label : CASES
+                     /**/ 
+                    Label : ELEMENT
+                      case 'd' :  /**/  
+                      Label : CASE
+                        'd'
+                      Label : CODE
+                        ;
+                        Label : ELEMENT
+                          =
+                          Label : LEFT
+                            $e
+                          Label : RIGHT
+                            ""
+                        Label : ELEMENT
+                          break
+                          Label : BREAK
+                            Void
+                    Label : ELEMENT
+                      default
+                      Label : CODE
+                        ;
+                        Label : ELEMENT
+                          =
+                          Label : LEFT
+                            $f
+                          Label : RIGHT
+                            ::
+                            Label : CLASS
+                              G
+                            Label : METHOD
+                              h
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  $i
+                                Label : ARGUMENT
+                                  $j
+                              Label : NAME
+                                h
+                        Label : ELEMENT
+                          break
+                          Label : BREAK
+                            Void
+                  Label : NAME
+                    $c
+                Label : ELEMENT
+                  ++
+                  Label : PREPLUSPLUS
+                    $k
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+          Label : NAME
+            $a

@@ -1,3 +1,60 @@
-(
-Label : ARGUMENT
-  $n
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_While.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a2
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $n
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              while
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  for
+                  Label : BLOCK
+                    ;
+                    Label : ELEMENT
+                      Void
+                  Label : FINAL
+                    ;
+                    Label : ELEMENT
+                      <
+                      Label : LEFT
+                        $i
+                      Label : RIGHT
+                        2
+                  Label : INCREMENT
+                    ;
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $i
+                  Label : INIT
+                    ;
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $i
+                      Label : RIGHT
+                        1
+              Label : CONDITION
+                >=
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  1
+          Label : NAME
+            a2
+        Label : ELEMENT
+          Void

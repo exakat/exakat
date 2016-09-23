@@ -1,3 +1,18 @@
-(unset)
-Label : CAST
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          (unset)
+          Label : CAST
+            $x
+        Label : ELEMENT
+          (unset)
+          Label : CAST
+            $y

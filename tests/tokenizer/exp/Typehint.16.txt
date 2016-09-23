@@ -1,27 +1,50 @@
-(
-Label : ARGUMENT
-  $a
-  Label : TYPEHINT
-    \
-    Label : SUBNAME
-      namespace
-    Label : SUBNAME
-      Stdclass
-Label : ARGUMENT
-  $b
-  Label : TYPEHINT
-    \
-    Label : SUBNAME
-      namespace
-    Label : SUBNAME
-      Stdclass
-Label : ARGUMENT
-  $c
-  Label : DEFAULT
-    null
-  Label : TYPEHINT
-    \
-    Label : SUBNAME
-      namespace
-    Label : SUBNAME
-      Stdclass
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Typehint.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+              Label : TYPEHINT
+                \
+                Label : SUBNAME
+                  namespace
+                Label : SUBNAME
+                  Stdclass
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                \
+                Label : SUBNAME
+                  namespace
+                Label : SUBNAME
+                  Stdclass
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                \
+                Label : SUBNAME
+                  namespace
+                Label : SUBNAME
+                  Stdclass
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                1
+          Label : NAME
+            x
+        Label : ELEMENT
+          Void

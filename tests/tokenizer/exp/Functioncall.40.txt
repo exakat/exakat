@@ -1,15 +1,32 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  [
-  Label : INDEX
-    b
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        'c'
-    Label : NAME
-      b
-  Label : VARIABLE
-    $y
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.40.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                1
+              Label : RIGHT
+                [
+                Label : INDEX
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'c'
+                  Label : NAME
+                    b
+                Label : VARIABLE
+                  $y
+          Label : NAME
+            echo

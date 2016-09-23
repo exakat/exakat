@@ -1,3 +1,74 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_While.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ->
+                Label : METHOD
+                  C
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    C
+                Label : OBJECT
+                  $a
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    Void
+                Label : ELEMENT
+                  Void
+            Label : ELEMENT
+              while
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  E
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $c
+                      Label : PROPERTY
+                        F
+                  Label : NAME
+                    E
+              Label : CONDITION
+                !
+                Label : NOT
+                  ->
+                  Label : METHOD
+                    D
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      D
+                  Label : OBJECT
+                    $b
+          Label : NAME
+            B
+        Label : ELEMENT
+          Void

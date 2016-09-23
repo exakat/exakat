@@ -1,13 +1,140 @@
-=
-Label : LEFT
-  ->
-  Label : OBJECT
-    $g
-  Label : PROPERTY
-    T
-Label : RIGHT
-  ::
-  Label : CLASS
-    U
-  Label : CONSTANT
-    V
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.48.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ||
+            Label : LEFT
+              ===
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  B
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  C
+                Label : CONSTANT
+                  D
+            Label : RIGHT
+              ||
+              Label : LEFT
+                ===
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : PROPERTY
+                    E
+                Label : RIGHT
+                  ::
+                  Label : CLASS
+                    F
+                  Label : CONSTANT
+                    G
+              Label : RIGHT
+                ||
+                Label : LEFT
+                  ===
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $c
+                    Label : PROPERTY
+                      H
+                  Label : RIGHT
+                    ::
+                    Label : CLASS
+                      I
+                    Label : CONSTANT
+                      J
+                Label : RIGHT
+                  ||
+                  Label : LEFT
+                    ==
+                    Label : LEFT
+                      ->
+                      Label : OBJECT
+                        $d
+                      Label : PROPERTY
+                        K
+                    Label : RIGHT
+                      +
+                      Label : SIGN
+                        ::
+                        Label : CLASS
+                          L
+                        Label : CONSTANT
+                          M
+                  Label : RIGHT
+                    ||
+                    Label : LEFT
+                      ===
+                      Label : LEFT
+                        ->
+                        Label : OBJECT
+                          $e
+                        Label : PROPERTY
+                          N
+                      Label : RIGHT
+                        ::
+                        Label : CLASS
+                          O
+                        Label : CONSTANT
+                          P
+                    Label : RIGHT
+                      ===
+                      Label : LEFT
+                        ->
+                        Label : OBJECT
+                          $f
+                        Label : PROPERTY
+                          Q
+                      Label : RIGHT
+                        ::
+                        Label : CLASS
+                          R
+                        Label : CONSTANT
+                          S
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $h
+                Label : PROPERTY
+                  W
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  X
+                Label : CONSTANT
+                  Y
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $g
+                Label : PROPERTY
+                  T
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  U
+                Label : CONSTANT
+                  V

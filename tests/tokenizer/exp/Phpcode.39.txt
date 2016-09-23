@@ -1,3 +1,73 @@
-(
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.39.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      B
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              isset
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                isset
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                echo
+            Label : ELEMENT
+              Void
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  'C'
+              Label : NAME
+                echo
+        Label : ELEMENT
+          D
+        Label : ELEMENT
+          <?=
+          Label : ARGUMENTS
+            <?=
+            Label : ARGUMENT
+              E
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'F'
+              Label : NAME
+                E
+          Label : NAME
+            <?=
+        Label : ELEMENT
+          G
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              'H'
+              Label : CODE
+                'H'
+          Label : NAME
+            include

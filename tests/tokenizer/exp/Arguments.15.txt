@@ -1,3 +1,64 @@
-(
-Label : ARGUMENT
-  'b'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            )
+            Label : CODE
+              ||
+              Label : LEFT
+                ]
+                Label : CODE
+                  [
+                  Label : INDEX
+                    'b'
+                  Label : VARIABLE
+                    $a
+              Label : RIGHT
+                )
+                Label : CODE
+                  &&
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      'e'
+                    Label : VARIABLE
+                      [
+                      Label : INDEX
+                        'd'
+                      Label : VARIABLE
+                        $C
+                  Label : RIGHT
+                    ]
+                    Label : CODE
+                      ||
+                      Label : LEFT
+                        [
+                        Label : INDEX
+                          'g'
+                        Label : VARIABLE
+                          $f
+                      Label : RIGHT
+                        [
+                        Label : INDEX
+                          'i'
+                        Label : VARIABLE
+                          $h
+          Label : THEN
+            {}
+            Label : ELEMENT
+              a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'b'
+              Label : NAME
+                a

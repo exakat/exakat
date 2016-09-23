@@ -1,20 +1,22 @@
-./tests/tokenizer/source/Constant.14.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $e
-        Label : THEN
-          ;
-          Label : ELEMENT
-            a
-          Label : ELEMENT
-            C
-      Label : ELEMENT
-        Void
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $e
+          Label : THEN
+            ;
+            Label : ELEMENT
+              a
+            Label : ELEMENT
+              C
+        Label : ELEMENT
+          Void

@@ -1,5 +1,16 @@
-clone
-Label : CLONE
-  @
-  Label : AT
-    $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Clone.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          clone
+          Label : CLONE
+            @
+            Label : AT
+              $x

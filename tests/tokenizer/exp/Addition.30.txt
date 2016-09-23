@@ -1,21 +1,76 @@
-+
-Label : LEFT
-  $a
-Label : RIGHT
-  =
-  Label : LEFT
-    $b
-  Label : RIGHT
-    +
-    Label : LEFT
-      $c
-    Label : RIGHT
-      =
-      Label : LEFT
-        $d
-      Label : RIGHT
-        *
-        Label : LEFT
-          $e
-        Label : RIGHT
-          $f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Addition.30.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  =
+                  Label : LEFT
+                    $e
+                  Label : RIGHT
+                    $f
+        Label : ELEMENT
+          +
+          Label : LEFT
+            $a
+          Label : RIGHT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              +
+              Label : LEFT
+                $c
+              Label : RIGHT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  *
+                  Label : LEFT
+                    $e
+                  Label : RIGHT
+                    $f
+        Label : ELEMENT
+          *
+          Label : LEFT
+            $a
+          Label : RIGHT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              *
+              Label : LEFT
+                $c
+              Label : RIGHT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  /
+                  Label : LEFT
+                    $e
+                  Label : RIGHT
+                    $f

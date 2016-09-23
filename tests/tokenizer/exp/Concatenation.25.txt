@@ -1,17 +1,28 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  <<<EOD
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.25.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            <<<EOD
+
+            Label : CONCAT
+              
 Oui
 
 
-  Label : CONCAT
-    $x
-  Label : CONCAT
-    
+            Label : CONCAT
+              $x
+            Label : CONCAT
+              
 
 

@@ -1,5 +1,22 @@
-[
-Label : INDEX
-  1
-Label : VARIABLE
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Noscream.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          @
+          Label : AT
+            ->
+            Label : OBJECT
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $x
+            Label : PROPERTY
+              d

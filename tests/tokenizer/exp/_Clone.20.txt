@@ -1,3 +1,24 @@
-clone
-Label : CLONE
-  "a"
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Clone.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .
+          Label : CONCAT
+            clone
+            Label : CLONE
+              "a"
+          Label : CONCAT
+            "
+            Label : CONCAT
+              $b
+            Label : CONCAT
+               c 
+            Label : CONCAT
+              $d

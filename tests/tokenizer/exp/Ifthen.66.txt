@@ -1,7 +1,182 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $c
-  Label : PROPERTY
-    F
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.66.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                B
+            Label : RIGHT
+              'C'
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              ==
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  G
+              Label : RIGHT
+                'H'
+            Label : ELSE
+              elseif
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $i
+                  Label : PROPERTY
+                    R
+                Label : RIGHT
+                  'S'
+              Label : ELSE
+                elseif
+                Label : CONDITION
+                  ==
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $l
+                    Label : PROPERTY
+                      Y
+                  Label : RIGHT
+                    'Z'
+                Label : ELSE
+                  elseif
+                  Label : CONDITION
+                    ->
+                    Label : OBJECT
+                      $o
+                    Label : PROPERTY
+                      AF
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      ->
+                      Label : METHOD
+                        AG
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            ->
+                            Label : OBJECT
+                              $q
+                            Label : PROPERTY
+                              AH
+                          Label : ARGUMENT
+                            'AI'
+                        Label : NAME
+                          AG
+                      Label : OBJECT
+                        $p
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    ->
+                    Label : METHOD
+                      AB
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          ->
+                          Label : OBJECT
+                            $n
+                          Label : PROPERTY
+                            AC
+                        Label : ARGUMENT
+                          'AD'
+                      Label : NAME
+                        AB
+                    Label : OBJECT
+                      $m
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    U
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $k
+                        Label : PROPERTY
+                          V
+                      Label : ARGUMENT
+                        'W'
+                    Label : NAME
+                      U
+                  Label : OBJECT
+                    $j
+            Label : THEN
+              {}
+              Label : ELEMENT
+                ->
+                Label : METHOD
+                  J
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $f
+                      Label : PROPERTY
+                        K
+                    Label : ARGUMENT
+                      'L'
+                  Label : NAME
+                    J
+                Label : OBJECT
+                  $e
+              Label : ELEMENT
+                ->
+                Label : METHOD
+                  N
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $h
+                      Label : PROPERTY
+                        O
+                    Label : ARGUMENT
+                      'P'
+                  Label : NAME
+                    N
+                Label : OBJECT
+                  $g
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $c
+                    Label : PROPERTY
+                      F
+                Label : NAME
+                  E
+              Label : OBJECT
+                $b

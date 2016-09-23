@@ -1,3 +1,66 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yieldfrom.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  yield from
+                  Label : YIELD
+                    ->
+                    Label : METHOD
+                      C
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        C
+                    Label : OBJECT
+                      $this
+              Label : ELSE
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    $d
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    list
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $d
+                        Label : PROPERTY
+                          D
+                      Label : ARGUMENT
+                        $e
+                    Label : NAME
+                      list
+                  Label : RIGHT
+                    $b
+          Label : NAME
+            B

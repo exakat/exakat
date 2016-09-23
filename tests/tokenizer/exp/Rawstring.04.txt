@@ -1,13 +1,157 @@
-(
-Label : ARGUMENT
-  array
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      =>
-      Label : KEY
-        'D'
-      Label : VALUE
-        $f
-  Label : NAME
-    array
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Rawstring.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $d
+              Label : RIGHT
+                ->
+                Label : METHOD
+                  C
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      array
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          =>
+                          Label : KEY
+                            'D'
+                          Label : VALUE
+                            $f
+                      Label : NAME
+                        array
+                  Label : NAME
+                    C
+                Label : OBJECT
+                  $e
+            Label : ELEMENT
+              Void
+            Label : ELEMENT
+              D
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    F
+                  Label : METHOD
+                    G
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'H'
+                      Label : ARGUMENT
+                        'I'
+                    Label : NAME
+                      G
+              Label : NAME
+                echo
+            Label : ELEMENT
+              I
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    K
+                  Label : METHOD
+                    L
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $g
+                      Label : ARGUMENT
+                        $h
+                      Label : ARGUMENT
+                        NULL
+                      Label : ARGUMENT
+                        NULL
+                      Label : ARGUMENT
+                        M
+                    Label : NAME
+                      L
+              Label : NAME
+                echo
+            Label : ELEMENT
+              M
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  N
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        P
+                      Label : METHOD
+                        Q
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            "
+                            Label : CONCAT
+                              $k
+                            Label : CONCAT
+                              R
+                            Label : CONCAT
+                              $l
+                          Label : ARGUMENT
+                            "
+                            Label : CONCAT
+                              $m
+                            Label : CONCAT
+                              S
+                            Label : CONCAT
+                              $n
+                          Label : ARGUMENT
+                            NULL
+                          Label : ARGUMENT
+                            NULL
+                          Label : ARGUMENT
+                            T
+                        Label : NAME
+                          Q
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  T
+              Label : SOURCE
+                $i
+              Label : VALUE
+                $j
+            Label : ELEMENT
+              U
+          Label : SOURCE
+            $a
+          Label : VALUE
+            =>
+            Label : KEY
+              $b
+            Label : VALUE
+              $c
+    Label : ELEMENT
+      V

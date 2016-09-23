@@ -1,17 +1,70 @@
-)
-Label : ARGUMENT
-  &&
-  Label : LEFT
-    "foo"
-    Label : CODE
-      "foo"
-  Label : RIGHT
-    print
-    Label : ARGUMENTS
-      )
-      Label : ARGUMENT
-        "bar"
-        Label : CODE
-          "bar"
-    Label : NAME
-      print
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.58.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              &&
+              Label : LEFT
+                "foo"
+                Label : CODE
+                  "foo"
+              Label : RIGHT
+                print
+                Label : ARGUMENTS
+                  )
+                  Label : ARGUMENT
+                    "bar"
+                    Label : CODE
+                      "bar"
+                Label : NAME
+                  print
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            "\n"
+            Label : ARGUMENT
+              "\n"
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              and
+              Label : LEFT
+                "foo"
+                Label : CODE
+                  "foo"
+              Label : RIGHT
+                print
+                Label : ARGUMENTS
+                  )
+                  Label : ARGUMENT
+                    "bar"
+                    Label : CODE
+                      "bar"
+                Label : NAME
+                  print
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            "\n"
+            Label : ARGUMENT
+              "\n"
+          Label : NAME
+            print

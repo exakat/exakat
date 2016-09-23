@@ -1,7 +1,78 @@
-(
-Label : ARGUMENT
-  2
-Label : ARGUMENT
-  3
-Label : ARGUMENT
-  4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Array.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          const
+          Label : CONST
+            const
+            Label : DEFINITION
+              x
+            Label : NAME
+              x
+              Label : DEFINITION
+                x
+              Label : DEFINITION
+                x
+            Label : VALUE
+              array
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  2
+                Label : ARGUMENT
+                  3
+                Label : ARGUMENT
+                  4
+              Label : NAME
+                array
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                x
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  x
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                ::
+                Label : CLASS
+                  b
+                Label : CONSTANT
+                  x
+          Label : NAME
+            echo

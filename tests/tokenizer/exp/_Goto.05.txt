@@ -1,16 +1,18 @@
-./tests/tokenizer/source/_Goto.05.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Goto.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        GOTO
-        Label : GOTO
-          cleanupCookie
-      Label : ELEMENT
-        :
-        Label : LABEL
-          cleanupCookie
+      Label : CODE
+        ;
+        Label : ELEMENT
+          GOTO
+          Label : GOTO
+            cleanupCookie
+        Label : ELEMENT
+          :
+          Label : LABEL
+            cleanupCookie

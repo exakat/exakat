@@ -1,3 +1,56 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticmethodcall.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            $a
+          Label : METHOD
+            {}
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              {}
+              Label : CODE
+                __FILE__
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            {}
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              {}
+              Label : CODE
+                __FILE__
+          Label : OBJECT
+            $b
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            $c
+          Label : METHOD
+            {}
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              {}
+              Label : CODE
+                .
+                Label : CONCAT
+                  'B'
+                Label : CONCAT
+                  'C'

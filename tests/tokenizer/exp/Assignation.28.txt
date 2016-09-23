@@ -1,3 +1,24 @@
-(
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Assignation.28.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            (int)
+            Label : CAST
+              $a
+          Label : RIGHT
+            array_pop
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $b
+            Label : NAME
+              array_pop

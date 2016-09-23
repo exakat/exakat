@@ -1,3 +1,38 @@
-(
-Label : ARGUMENT
-  $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.28.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          while
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $f
+          Label : CONDITION
+            &&
+            Label : LEFT
+              $a
+            Label : RIGHT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  C
+                Label : METHOD
+                  d
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $e
+                  Label : NAME
+                    d

@@ -1,5 +1,31 @@
-)
-Label : ARGUMENT
-  $b
-  Label : CODE
-    $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.36.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ===
+            Label : LEFT
+              false
+            Label : RIGHT
+              include_once
+              Label : ARGUMENTS
+                )
+                Label : ARGUMENT
+                  $b
+                  Label : CODE
+                    $b
+              Label : NAME
+                include_once
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a

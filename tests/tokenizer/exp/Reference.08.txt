@@ -1,3 +1,22 @@
-(
-Label : ARGUMENT
-  'c'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            y
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'c'
+            Label : NAME
+              y

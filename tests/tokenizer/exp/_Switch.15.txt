@@ -1,9 +1,72 @@
-)
-Label : ARGUMENT
-  e
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'f'
-  Label : NAME
-    e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'b' :  /**/  
+              Label : CASE
+                'b'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $c
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $d
+                Label : ELEMENT
+                  require_once
+                  Label : ARGUMENTS
+                    )
+                    Label : ARGUMENT
+                      e
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'f'
+                      Label : NAME
+                        e
+                  Label : NAME
+                    require_once
+                Label : ELEMENT
+                  g
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'h'
+                  Label : NAME
+                    g
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+            Label : ELEMENT
+              case 'i' :  /**/  
+              Label : CASE
+                'i'
+              Label : CODE
+                ;
+            Label : ELEMENT
+              case 'j' :  /**/  
+              Label : CASE
+                'j'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    1
+          Label : NAME
+            $a

@@ -1,11 +1,31 @@
-(
-Label : ARGUMENT
-  "
-  Label : CONCAT
-    D: 
-  Label : CONCAT
-    "
-    Label : OBJECT
-      $e
-    Label : PROPERTY
-      f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/String.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          c
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              "
+              Label : CONCAT
+                D: 
+              Label : CONCAT
+                "
+                Label : OBJECT
+                  $e
+                Label : PROPERTY
+                  f
+          Label : NAME
+            c
+        Label : ELEMENT
+          "
+          Label : CONCAT
+            H: 
+          Label : CONCAT
+            $g

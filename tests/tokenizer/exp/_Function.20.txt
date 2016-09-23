@@ -1,27 +1,54 @@
-(
-Label : ARGUMENT
-  $b
-  Label : DEFAULT
-    array
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        1
-      Label : ARGUMENT
-        =>
-        Label : KEY
-          2
-        Label : VALUE
-          array
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              2
+              $b
+              Label : DEFAULT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    =>
+                    Label : KEY
+                      2
+                    Label : VALUE
+                      array
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          3
+                        Label : ARGUMENT
+                          2
+                      Label : NAME
+                        array
+                  Label : ARGUMENT
+                    3
+                Label : NAME
+                  array
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              print_r
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                print_r
           Label : NAME
-            array
-      Label : ARGUMENT
-        3
-    Label : NAME
-      array
+            a
+        Label : ELEMENT
+          Void

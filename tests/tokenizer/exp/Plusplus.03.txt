@@ -1,12 +1,14 @@
-./tests/tokenizer/source/Plusplus.03.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Plusplus.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        --
-        Label : POSTPLUSPLUS
-          $x
+      Label : CODE
+        ;
+        Label : ELEMENT
+          --
+          Label : POSTPLUSPLUS
+            $x

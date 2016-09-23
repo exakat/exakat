@@ -1,15 +1,90 @@
-+
-Label : LEFT
-  ::
-  Label : CLASS
-    b
-  Label : METHOD
-    c
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        Void
-    Label : NAME
-      c
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticmethodcall.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            *
+            Label : LEFT
+              ::
+              Label : CLASS
+                b
+              Label : METHOD
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  c
+            Label : RIGHT
+              2
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            +
+            Label : LEFT
+              ::
+              Label : CLASS
+                b
+              Label : METHOD
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  c
+            Label : RIGHT
+              2
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            /
+            Label : LEFT
+              ::
+              Label : CLASS
+                b
+              Label : METHOD
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  c
+            Label : RIGHT
+              2
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            %
+            Label : LEFT
+              ::
+              Label : CLASS
+                b
+              Label : METHOD
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  c
+            Label : RIGHT
+              2

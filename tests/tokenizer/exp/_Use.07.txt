@@ -1,18 +1,20 @@
-./tests/tokenizer/source/_Use.07.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        namespace
-        Label : BLOCK
-          
-          Label : ELEMENT
-            use
-            Label : USE
-              A
-        Label : NAME
-          B
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              use
+              Label : USE
+                A
+          Label : NAME
+            B

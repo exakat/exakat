@@ -1,18 +1,20 @@
-./tests/tokenizer/source/Logical.20.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        ||
-        Label : LEFT
-          $x
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $y
-          Label : PROPERTY
-            z
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ||
+          Label : LEFT
+            $x
+          Label : RIGHT
+            ->
+            Label : OBJECT
+              $y
+            Label : PROPERTY
+              z

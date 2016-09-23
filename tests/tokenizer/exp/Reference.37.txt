@@ -1,3 +1,124 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.37.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  B
+                  Label : DEFINITION
+                    B
+                Label : VALUE
+                  1
+            Label : ELEMENT
+              d
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    1
+              Label : NAME
+                d
+            Label : ELEMENT
+              e
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    1
+              Label : NAME
+                e
+              Label : STATIC
+                static
+          Label : DEFINITION
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              a
+          Label : DEFINITION
+            a
+          Label : DEFINITION
+            a
+          Label : NAME
+            a
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            new
+            Label : NEW
+              a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                a
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            B
+            Label : ARGUMENT
+              &
+              Label : LEFT
+                ->
+                Label : METHOD
+                  d
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    d
+                Label : OBJECT
+                  $c
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  a
+                Label : CONSTANT
+                  B
+          Label : NAME
+            print
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $e
+          Label : RIGHT
+            ::
+            Label : CLASS
+              a
+            Label : METHOD
+              e
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                e

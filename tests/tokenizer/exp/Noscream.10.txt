@@ -1,3 +1,32 @@
-(
-Label : ARGUMENT
-  'gzopen'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Noscream.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            @
+            Label : AT
+              !
+              Label : NOT
+                function_exists
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'gzopen'
+                Label : NAME
+                  function_exists
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $x
+              Label : RIGHT
+                1

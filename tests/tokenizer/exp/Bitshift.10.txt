@@ -1,13 +1,46 @@
--
-Label : LEFT
-  0
-Label : RIGHT
-  )
-  Label : CODE
-    +
-    Label : LEFT
-      $c
-    Label : RIGHT
-      $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Bitshift.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
       Label : CODE
-        $d
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            >>
+            Label : LEFT
+              $b
+            Label : RIGHT
+              -
+              Label : LEFT
+                0
+              Label : RIGHT
+                )
+                Label : CODE
+                  +
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    $d
+                    Label : CODE
+                      $d
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            <<
+            Label : LEFT
+              >>
+              Label : LEFT
+                $b
+              Label : RIGHT
+                0
+            Label : RIGHT
+              $c

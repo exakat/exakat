@@ -1,7 +1,84 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $this
-  Label : PROPERTY
-    key
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.46.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case self::ALGORITHM_NONE :  /**/  
+              Label : CASE
+                ::
+                Label : CLASS
+                  self
+                Label : CONSTANT
+                  ALGORITHM_NONE
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  Void
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+            Label : ELEMENT
+              case self::ALGORITHM_DSA :  /**/  
+              Label : CASE
+                ::
+                Label : CLASS
+                  self
+                Label : CONSTANT
+                  ALGORITHM_DSA
+              Label : CODE
+                ;
+            Label : ELEMENT
+              case self::ALGORITHM_RSA :  /**/  
+              Label : CASE
+                ::
+                Label : CLASS
+                  self
+                Label : CONSTANT
+                  ALGORITHM_RSA
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  .=
+                  Label : LEFT
+                    $data
+                  Label : RIGHT
+                    base64_decode
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $this
+                        Label : PROPERTY
+                          key
+                    Label : NAME
+                      base64_decode
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    null
+          Label : NAME
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              algorithm

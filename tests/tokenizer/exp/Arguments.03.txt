@@ -1,7 +1,22 @@
-(
-Label : ARGUMENT
-  *
-  Label : LEFT
-    2
-  Label : RIGHT
-    3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              *
+              Label : LEFT
+                2
+              Label : RIGHT
+                3
+          Label : NAME
+            f

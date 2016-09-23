@@ -1,3 +1,26 @@
-(
-Label : ARGUMENT
-  'a'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : SOURCE
+            $x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'a'
+            Label : NAME
+              $x
+          Label : VALUE
+            $y

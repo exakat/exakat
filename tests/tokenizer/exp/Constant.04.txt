@@ -1,3 +1,18 @@
-__CLASS__
-Label : ARGUMENT
-  __CLASS__
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            __CLASS__
+            Label : ARGUMENT
+              __CLASS__
+          Label : NAME
+            print

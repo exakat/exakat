@@ -1,7 +1,146 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    1
-  Label : VARIABLE
-    $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.40.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ?
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    1
+                  Label : VARIABLE
+                    $b
+              Label : NAME
+                empty
+          Label : ELSE
+            'G'
+          Label : THEN
+            ?
+            Label : CONDITION
+              !==
+              Label : LEFT
+                'B'
+              Label : RIGHT
+                [
+                Label : INDEX
+                  2
+                Label : VARIABLE
+                  $b
+            Label : ELSE
+              .
+              Label : CONCAT
+                @
+                Label : AT
+                  [
+                  Label : INDEX
+                    3
+                  Label : VARIABLE
+                    $b
+              Label : CONCAT
+                'F'
+            Label : THEN
+              .
+              Label : CONCAT
+                @
+                Label : AT
+                  [
+                  Label : INDEX
+                    3
+                  Label : VARIABLE
+                    $b
+              Label : CONCAT
+                C
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'D'
+                  Label : ARGUMENT
+                    'B'
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      2
+                    Label : VARIABLE
+                      $b
+                Label : NAME
+                  C
+        Label : ELEMENT
+          ?
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    1
+                  Label : VARIABLE
+                    $b
+              Label : NAME
+                empty
+          Label : ELSE
+            ?
+            Label : CONDITION
+              !==
+              Label : LEFT
+                'B'
+              Label : RIGHT
+                [
+                Label : INDEX
+                  2
+                Label : VARIABLE
+                  $b
+            Label : ELSE
+              .
+              Label : CONCAT
+                @
+                Label : AT
+                  [
+                  Label : INDEX
+                    3
+                  Label : VARIABLE
+                    $b
+              Label : CONCAT
+                'F'
+            Label : THEN
+              .
+              Label : CONCAT
+                @
+                Label : AT
+                  [
+                  Label : INDEX
+                    3
+                  Label : VARIABLE
+                    $b
+              Label : CONCAT
+                C
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'D'
+                  Label : ARGUMENT
+                    'B'
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      2
+                    Label : VARIABLE
+                      $b
+                Label : NAME
+                  C
+          Label : THEN
+            'F'

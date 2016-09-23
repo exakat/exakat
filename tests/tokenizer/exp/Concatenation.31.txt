@@ -1,5 +1,28 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.31.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            .
+            Label : CONCAT
+              "a"
+            Label : CONCAT
+              1
+              Label : CODE
+                +
+                Label : LEFT
+                  1
+                Label : RIGHT
+                  1
+            Label : CONCAT
+              " b"

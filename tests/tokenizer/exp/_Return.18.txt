@@ -1,7 +1,63 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    0
-  Label : VARIABLE
-    $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              isset
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    0
+                  Label : VARIABLE
+                    $a
+              Label : NAME
+                isset
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                &&
+                Label : LEFT
+                  isset
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'c'
+                      Label : VARIABLE
+                        [
+                        Label : INDEX
+                          0
+                        Label : VARIABLE
+                          $b
+                  Label : NAME
+                    isset
+                Label : RIGHT
+                  [
+                  Label : INDEX
+                    'e'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      0
+                    Label : VARIABLE
+                      $d
+          Label : THEN
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                null

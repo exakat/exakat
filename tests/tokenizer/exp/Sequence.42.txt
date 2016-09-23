@@ -1,3 +1,72 @@
-(
-Label : ARGUMENT
-  $f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.42.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              $a
+            Label : RIGHT
+              'b'
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $c
+        Label : ELEMENT
+          &&
+          Label : LEFT
+            !
+            Label : NOT
+              e
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $f
+              Label : NAME
+                e
+          Label : RIGHT
+            g
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $h
+              Label : ARGUMENT
+                $i
+              Label : ARGUMENT
+                $j
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                'k'
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  $o
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'n'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'm'
+                    Label : VARIABLE
+                      $l
+            Label : NAME
+              g

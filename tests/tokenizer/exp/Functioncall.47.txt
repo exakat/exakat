@@ -1,3 +1,45 @@
-(
-Label : ARGUMENT
-  $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.47.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              )
+              Label : CODE
+                &&
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  !
+                  Label : NOT
+                    c
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $d
+                    Label : NAME
+                      c
+            Label : ELSE
+              ''
+            Label : THEN
+              ->
+              Label : OBJECT
+                current
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $e
+                Label : NAME
+                  current
+              Label : PROPERTY
+                f

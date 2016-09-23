@@ -1,3 +1,52 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Power.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          **
+          Label : LEFT
+            x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              x
+          Label : RIGHT
+            1
+        Label : ELEMENT
+          **
+          Label : LEFT
+            x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              x
+          Label : RIGHT
+            y
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                2
+            Label : NAME
+              y
+        Label : ELEMENT
+          **
+          Label : LEFT
+            1
+          Label : RIGHT
+            y
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                2
+            Label : NAME
+              y

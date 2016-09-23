@@ -1,3 +1,171 @@
-echo
-Label : ARGUMENT
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.88.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $c
+              Label : NAME
+                echo
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    >
+                    Label : LEFT
+                      [
+                      Label : INDEX
+                        ->
+                        Label : OBJECT
+                          $e
+                        Label : PROPERTY
+                          E
+                      Label : VARIABLE
+                        [
+                        Label : INDEX
+                          'D'
+                        Label : VARIABLE
+                          $f
+                    Label : RIGHT
+                      0
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      echo
+                      Label : ARGUMENTS
+                        echo
+                        Label : ARGUMENT
+                          .
+                          Label : CONCAT
+                            'F'
+                          Label : CONCAT
+                            ->
+                            Label : OBJECT
+                              $e
+                            Label : PROPERTY
+                              G
+                          Label : CONCAT
+                            'H'
+                      Label : NAME
+                        echo
+              Label : SOURCE
+                [
+                Label : INDEX
+                  $b
+                Label : VARIABLE
+                  $d
+              Label : VALUE
+                $e
+            Label : ELEMENT
+              Void
+            Label : ELEMENT
+              I
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  J
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    J
+              Label : NAME
+                echo
+            Label : ELEMENT
+              K
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  L
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'M'
+                      Label : VARIABLE
+                        [
+                        Label : INDEX
+                          $b
+                        Label : VARIABLE
+                          $f
+                  Label : NAME
+                    L
+              Label : NAME
+                echo
+            Label : ELEMENT
+              N
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  J
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    J
+              Label : NAME
+                echo
+            Label : ELEMENT
+              K
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  L
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'R'
+                      Label : VARIABLE
+                        [
+                        Label : INDEX
+                          $b
+                        Label : VARIABLE
+                          $f
+                  Label : NAME
+                    L
+              Label : NAME
+                echo
+            Label : ELEMENT
+              S
+          Label : SOURCE
+            $a
+          Label : VALUE
+            =>
+            Label : KEY
+              $b
+            Label : VALUE
+              $c
+        Label : ELEMENT
+          Void

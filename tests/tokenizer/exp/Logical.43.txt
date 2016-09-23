@@ -1,5 +1,55 @@
-)
-Label : ARGUMENT
-  'B'
-  Label : CODE
-    'B'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.43.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              'B'
+              Label : CODE
+                'B'
+          Label : NAME
+            print
+        Label : ELEMENT
+          or
+          Label : LEFT
+            $a
+          Label : RIGHT
+            Void
+        Label : ELEMENT
+          C
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              D
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  E
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'F'
+                  Label : NAME
+                    E
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    'G'
+                  Label : CONCAT
+                    $a
+                  Label : CONCAT
+                    'H'
+              Label : NAME
+                D
+          Label : NAME
+            echo

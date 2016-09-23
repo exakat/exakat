@@ -1,5 +1,66 @@
-+
-Label : LEFT
-  $e
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.34.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              2
+              Label : CODE
+                %
+                Label : LEFT
+                  1
+                  Label : CODE
+                    +
+                    Label : LEFT
+                      $e
+                    Label : RIGHT
+                      1
+                Label : RIGHT
+                  2
+            Label : RIGHT
+              3
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $g
+              Label : RIGHT
+                )
+                Label : CODE
+                  -
+                  Label : LEFT
+                    $i
+                    Label : CODE
+                      *
+                      Label : LEFT
+                        $h
+                      Label : RIGHT
+                        $i
+                  Label : RIGHT
+                    -
+                    Label : LEFT
+                      $k
+                      Label : CODE
+                        *
+                        Label : LEFT
+                          $j
+                        Label : RIGHT
+                          $k
+                    Label : RIGHT
+                      $m
+                      Label : CODE
+                        *
+                        Label : LEFT
+                          $l
+                        Label : RIGHT
+                          $m

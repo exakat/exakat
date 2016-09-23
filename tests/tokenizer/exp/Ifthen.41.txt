@@ -1,3 +1,77 @@
-$c
-Label : ARGUMENT
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.41.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              A
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $b
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  B
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    $c
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    print
+                Label : ELEMENT
+                  C
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    )
+                    Label : ARGUMENT
+                      t
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'd'
+                      Label : NAME
+                        t
+                  Label : NAME
+                    print
+                Label : ELEMENT
+                  D
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    $f
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        t
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            'e'
+                        Label : NAME
+                          t
+                      Label : CONCAT
+                        $f
+                  Label : NAME
+                    print
+                Label : ELEMENT
+                  F
+            Label : ELEMENT
+              Void
+            Label : ELEMENT
+              G
+        Label : ELEMENT
+          Void

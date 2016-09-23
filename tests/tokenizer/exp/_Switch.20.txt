@@ -1,13 +1,114 @@
-(
-Label : ARGUMENT
-  ->
-  Label : METHOD
-    k
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        Void
-    Label : NAME
-      k
-  Label : OBJECT
-    $j
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case "b" :  /**/  
+              Label : CASE
+                "b"
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    'a'
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    .
+                    Label : CONCAT
+                      'h'
+                    Label : CONCAT
+                      i
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          ->
+                          Label : METHOD
+                            k
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                Void
+                            Label : NAME
+                              k
+                          Label : OBJECT
+                            $j
+                      Label : NAME
+                        i
+                    Label : CONCAT
+                      'l'
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $m
+                  Label : RIGHT
+                    'n'
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    'a'
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    .
+                    Label : CONCAT
+                      'h'
+                    Label : CONCAT
+                      i
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          ->
+                          Label : METHOD
+                            k
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                Void
+                            Label : NAME
+                              k
+                          Label : OBJECT
+                            $j
+                      Label : NAME
+                        i
+                    Label : CONCAT
+                      'l'
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $m
+                  Label : RIGHT
+                    'n'
+            Label : ELEMENT
+              case 'b' :  /**/  
+              Label : CASE
+                'b'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  Void
+          Label : NAME
+            $a

@@ -1,5 +1,88 @@
-as
-Label : AS
-  I
-Label : NAME
-  G
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              use
+              Label : USE
+                as
+                Label : AS
+                  I
+                Label : NAME
+                  G
+            Label : ELEMENT
+              use
+              Label : USE
+                as
+                Label : AS
+                  F
+                Label : NAME
+                  \
+                  Label : SUBNAME
+                    E
+            Label : ELEMENT
+              use
+              Label : USE
+                as
+                Label : AS
+                  D
+                Label : NAME
+                  \
+                  Label : SUBNAME
+                    A
+                  Label : SUBNAME
+                    B
+                  Label : SUBNAME
+                    C
+              Label : USE
+                A
+              Label : USE
+                B
+            Label : ELEMENT
+              use
+              Label : USE
+                as
+                Label : AS
+                  M
+                Label : NAME
+                  L
+              Label : USE
+                as
+                Label : AS
+                  P
+                Label : NAME
+                  O
+              Label : USE
+                as
+                Label : AS
+                  Q
+                Label : NAME
+                  O
+              Label : USE
+                as
+                Label : AS
+                  T
+                Label : NAME
+                  S
+              Label : USE
+                K
+              Label : USE
+                N
+              Label : USE
+                R
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B

@@ -1,23 +1,72 @@
-+
-Label : LEFT
-  i
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'i'
-  Label : NAME
-    i
-Label : RIGHT
-  in_array
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      [
-      Label : INDEX
-        'k'
-      Label : VARIABLE
-        $j
-    Label : ARGUMENT
-      $l
-  Label : NAME
-    in_array
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.36.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'b'
+              Label : ARGUMENT
+                'c'
+              Label : ARGUMENT
+                'd'
+              Label : ARGUMENT
+                'e'
+              Label : ARGUMENT
+                'f'
+            Label : NAME
+              array
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              'h'
+            Label : VARIABLE
+              $g
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              +
+              Label : LEFT
+                i
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'i'
+                Label : NAME
+                  i
+              Label : RIGHT
+                in_array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'k'
+                    Label : VARIABLE
+                      $j
+                  Label : ARGUMENT
+                    $l
+                Label : NAME
+                  in_array
+            Label : ELSE
+              'o'
+            Label : THEN
+              [
+              Label : INDEX
+                'n'
+              Label : VARIABLE
+                $m

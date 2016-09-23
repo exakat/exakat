@@ -1,31 +1,92 @@
-(
-Label : ARGUMENT
-  $c
-  Label : TYPEHINT
-    b
-Label : ARGUMENT
-  $d
-  Label : TYPEHINT
-    array
-Label : ARGUMENT
-  $e
-  Label : DEFAULT
-    [
-    Label : ARGUMENTS
-      [
-      Label : ARGUMENT
-        1
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        4
-        Label : CODE
-          &
-          Label : LEFT
-            3
-          Label : RIGHT
-            4
-    Label : VARIABLE
-      [
-  Label : TYPEHINT
-    array
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.45.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $c
+              Label : TYPEHINT
+                b
+            Label : ARGUMENT
+              $d
+              Label : TYPEHINT
+                array
+            Label : ARGUMENT
+              $e
+              Label : DEFAULT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    4
+                    Label : CODE
+                      &
+                      Label : LEFT
+                        3
+                      Label : RIGHT
+                        4
+                Label : VARIABLE
+                  [
+              Label : TYPEHINT
+                array
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    &
+                    Label : LEFT
+                      f
+                    Label : RIGHT
+                      $g
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  <
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    10
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  <
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    count
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $a
+                    Label : NAME
+                      count
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $i
+                  Label : RIGHT
+                    1
+          Label : NAME
+            a

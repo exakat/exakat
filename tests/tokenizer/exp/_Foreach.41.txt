@@ -1,21 +1,74 @@
-(
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    'C'
-  Label : CONCAT
-    ->
-    Label : OBJECT
-      $c
-    Label : PROPERTY
-      D
-  Label : CONCAT
-    'E'
-  Label : CONCAT
-    $d
-  Label : CONCAT
-    'F'
-  Label : CONCAT
-    $b
-  Label : CONCAT
-    'G'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.41.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              or
+              Label : LEFT
+                ->
+                Label : METHOD
+                  B
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        'C'
+                      Label : CONCAT
+                        ->
+                        Label : OBJECT
+                          $c
+                        Label : PROPERTY
+                          D
+                      Label : CONCAT
+                        'E'
+                      Label : CONCAT
+                        $d
+                      Label : CONCAT
+                        'F'
+                      Label : CONCAT
+                        $b
+                      Label : CONCAT
+                        'G'
+                  Label : NAME
+                    B
+                Label : OBJECT
+                  $c
+              Label : RIGHT
+                H
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'I'
+                  Label : ARGUMENT
+                    __FILE__
+                  Label : ARGUMENT
+                    __LINE__
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      H
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        H
+                    Label : OBJECT
+                      $c
+                Label : NAME
+                  H
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

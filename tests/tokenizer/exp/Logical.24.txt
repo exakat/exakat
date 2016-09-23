@@ -1,5 +1,28 @@
-==
-Label : LEFT
-  $a
-Label : RIGHT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.24.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ||
+            Label : LEFT
+              ==
+              Label : LEFT
+                $a
+              Label : RIGHT
+                $b
+            Label : RIGHT
+              $c
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                $d

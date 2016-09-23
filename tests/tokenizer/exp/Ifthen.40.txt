@@ -1,5 +1,90 @@
-=
-Label : LEFT
-  $b
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.40.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              $l
+            Label : RIGHT
+              3
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d
+          Label : THEN
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  1
+              Label : ELSE
+                elseif
+                Label : CONDITION
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    2
+                Label : THEN
+                  {}
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $a
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $b
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              $l
+            Label : RIGHT
+              1
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              $l
+            Label : RIGHT
+              2
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void

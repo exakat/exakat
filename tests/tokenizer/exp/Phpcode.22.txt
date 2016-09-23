@@ -1,3 +1,92 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                C
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                D
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  D
+              Label : OBJECT
+                $this
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                E
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  E
+            Label : ELEMENT
+              F
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                F
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                G
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'H'
+                  Label : ARGUMENT
+                    'I'
+                  Label : ARGUMENT
+                    $b
+                Label : NAME
+                  G
+            Label : ELEMENT
+              J
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                echo
+            Label : ELEMENT
+              K
+            Label : ELEMENT
+              L
+          Label : NAME
+            B
+        Label : ELEMENT
+          Void

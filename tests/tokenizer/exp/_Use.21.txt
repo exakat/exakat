@@ -1,41 +1,52 @@
-class
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    use
-    Label : BLOCK
-      {}
-      Label : ELEMENT
-        insteadof
-        Label : INSTEADOF
-          F
-        Label : NAME
-          ::
-          Label : CLASS
-            G
-          Label : CONSTANT
-            I
-      Label : ELEMENT
-        insteadof
-        Label : INSTEADOF
-          G
-        Label : NAME
-          ::
-          Label : CLASS
-            F
-          Label : CONSTANT
-            L
-    Label : USE
-      F
-    Label : USE
-      G
-Label : EXTENDS
-  \
-  Label : SUBNAME
-    C
-  Label : SUBNAME
-    D
-  Label : SUBNAME
-    E
-Label : NAME
-  B
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  insteadof
+                  Label : INSTEADOF
+                    F
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      G
+                    Label : CONSTANT
+                      I
+                Label : ELEMENT
+                  insteadof
+                  Label : INSTEADOF
+                    G
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      F
+                    Label : CONSTANT
+                      L
+              Label : USE
+                F
+              Label : USE
+                G
+          Label : EXTENDS
+            \
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E
+          Label : NAME
+            B

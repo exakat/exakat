@@ -1,9 +1,20 @@
-=
-Label : LEFT
-  $a
-Label : RIGHT
-  <<<'EOF'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Heredoc.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    b
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            <<<'EOF'
+
+            Label : CONCAT
+              b
 

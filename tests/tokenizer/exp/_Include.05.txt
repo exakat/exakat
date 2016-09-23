@@ -1,3 +1,18 @@
-"literal"
-Label : ARGUMENT
-  "literal"
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          require_once
+          Label : ARGUMENTS
+            "literal"
+            Label : ARGUMENT
+              "literal"
+          Label : NAME
+            require_once

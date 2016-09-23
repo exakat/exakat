@@ -1,17 +1,32 @@
-)
-Label : ARGUMENT
-  =
-  Label : LEFT
-    $a
-  Label : RIGHT
-    ->
-    Label : METHOD
-      c
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          $d
-      Label : NAME
-        c
-    Label : OBJECT
-      $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                ->
+                Label : METHOD
+                  c
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $d
+                  Label : NAME
+                    c
+                Label : OBJECT
+                  $b
+          Label : NAME
+            include

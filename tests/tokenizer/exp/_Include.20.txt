@@ -1,5 +1,45 @@
-)
-Label : ARGUMENT
-  '../scripts/'
-  Label : CODE
-    '../scripts/'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          !
+          Label : NOT
+            @
+            Label : AT
+              include
+              Label : ARGUMENTS
+                )
+                Label : ARGUMENT
+                  '../scripts/'
+                  Label : CODE
+                    '../scripts/'
+              Label : NAME
+                include
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              or
+              Label : LEFT
+                'd'
+              Label : RIGHT
+                die
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  die
+          Label : NAME
+            include
+    Label : ELEMENT
+      
+

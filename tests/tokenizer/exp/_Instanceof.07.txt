@@ -1,3 +1,148 @@
-(
-Label : ARGUMENT
-  $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Instanceof.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          :
+          Label : LABEL
+            D
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case $a instanceof \C :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    C
+                Label : VARIABLE
+                  $a
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $b
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    Void
+                Label : ELEMENT
+                  Void
+            Label : ELEMENT
+              case $c instanceof   :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  Void
+                Label : VARIABLE
+                  $c
+              Label : CODE
+                ;
+            Label : ELEMENT
+              case E::F($d) :  /**/  
+              Label : CASE
+                ::
+                Label : CLASS
+                  E
+                Label : METHOD
+                  F
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $d
+                  Label : NAME
+                    F
+              Label : CODE
+                ;
+            Label : ELEMENT
+              case $e instanceof \G\H\I :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    G
+                  Label : SUBNAME
+                    H
+                  Label : SUBNAME
+                    I
+                Label : VARIABLE
+                  $e
+              Label : CODE
+                ;
+            Label : ELEMENT
+              case $f instanceof \J\K\L\M :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    J
+                  Label : SUBNAME
+                    K
+                  Label : SUBNAME
+                    L
+                  Label : SUBNAME
+                    M
+                Label : VARIABLE
+                  $f
+              Label : CODE
+                ;
+            Label : ELEMENT
+              case $g instanceof \N\O\P\Q\R :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    N
+                  Label : SUBNAME
+                    O
+                  Label : SUBNAME
+                    P
+                  Label : SUBNAME
+                    Q
+                  Label : SUBNAME
+                    R
+                Label : VARIABLE
+                  $g
+              Label : CODE
+                ;
+            Label : ELEMENT
+              case $h instanceof S\T\U\V\W :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    S
+                  Label : SUBNAME
+                    T
+                  Label : SUBNAME
+                    U
+                  Label : SUBNAME
+                    V
+                  Label : SUBNAME
+                    W
+                Label : VARIABLE
+                  $h
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    Void
+                Label : ELEMENT
+                  Void
+          Label : NAME
+            B

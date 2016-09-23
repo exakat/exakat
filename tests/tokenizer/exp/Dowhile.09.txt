@@ -1,5 +1,46 @@
-=
-Label : LEFT
-  $a
-Label : RIGHT
-  0
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dowhile.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $c
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  <
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    10
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    0
+          Label : CONDITION
+            $z

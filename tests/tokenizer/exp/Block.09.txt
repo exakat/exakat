@@ -1,11 +1,78 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $this
-  Label : PROPERTY
-    [
-    Label : INDEX
-      'C'
-    Label : VARIABLE
-      B
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Block.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            isset
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'C'
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    B
+            Label : NAME
+              isset
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  array
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'Q'
+                      Label : VALUE
+                        'R'
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    array
+            Label : ELEMENT
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    AW
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $c
+                        Label : PROPERTY
+                          AX
+                    Label : NAME
+                      AW
+                  Label : OBJECT
+                    $this
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a

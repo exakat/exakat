@@ -1,3 +1,20 @@
-(string)
-Label : CAST
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.43.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .
+          Label : CONCAT
+            'a'
+          Label : CONCAT
+            (string)
+            Label : CAST
+              $x
+          Label : CONCAT
+            'b'

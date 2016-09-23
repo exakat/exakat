@@ -1,7 +1,159 @@
-(
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    B
-  Label : CONSTANT
-    D
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Try.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  B
+                Label : CONSTANT
+                  D
+            Label : NAME
+              a
+          Label : OBJECT
+            $this
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              $b
+          Label : THEN
+            {}
+            Label : ELEMENT
+              throw
+              Label : THROW
+                new
+                Label : NEW
+                  A
+        Label : ELEMENT
+          try
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'r'
+                  Label : VARIABLE
+                    $e
+                Label : RIGHT
+                  't'
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    g
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        t
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            'h'
+                        Label : NAME
+                          t
+                    Label : NAME
+                      g
+                  Label : OBJECT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      f
+          Label : CATCH
+            catch
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : CLASS
+              Router_ArgNoExist
+            Label : VARIABLE
+              $e
+          Label : CATCH
+            catch
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : CLASS
+              Ugmanager_GroupNoExist
+            Label : VARIABLE
+              $e
+          Label : CATCH
+            catch
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                ->
+                Label : METHOD
+                  e
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      f
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          t
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'g'
+                          Label : NAME
+                            t
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'i'
+                          Label : VARIABLE
+                            $h
+                      Label : NAME
+                        f
+                  Label : NAME
+                    e
+                Label : OBJECT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    a
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  $x
+                Label : THEN
+                  {}
+                  Label : ELEMENT
+                    ->
+                    Label : METHOD
+                      d
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        d
+                    Label : OBJECT
+                      $x
+            Label : CLASS
+              ACL_RoleNoExist
+            Label : VARIABLE
+              $e

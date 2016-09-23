@@ -1,91 +1,110 @@
-(
-Label : ARGUMENT
-  $c
-Label : ARGUMENT
-  new
-  Label : NEW
-    J
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $d
-      Label : ARGUMENT
-        $e
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $f
-        Label : PROPERTY
-          [
-          Label : INDEX
-            $e
-          Label : VARIABLE
-            K
-    Label : NAME
-      J
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    ->
-    Label : OBJECT
-      $f
-    Label : PROPERTY
-      L
-  Label : PROPERTY
-    M
-Label : ARGUMENT
-  clone
-  Label : CLONE
-    $g
-Label : ARGUMENT
-  $h
-  Label : CODE
-    ?
-    Label : CONDITION
-      ===
-      Label : LEFT
-        $h
-      Label : RIGHT
-        N
-    Label : ELSE
-      $h
-    Label : THEN
-      $i
-Label : ARGUMENT
-  $i
-Label : ARGUMENT
-  $j
-Label : ARGUMENT
-  $k
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $f
-  Label : PROPERTY
-    [
-    Label : INDEX
-      $e
-    Label : VARIABLE
-      O
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $f
-  Label : PROPERTY
-    [
-    Label : INDEX
-      $e
-    Label : VARIABLE
-      L
-Label : ARGUMENT
-  $l
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    ->
-    Label : OBJECT
-      $this
-    Label : PROPERTY
-      Q
-  Label : PROPERTY
-    R
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.71.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            I
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                new
+                Label : NEW
+                  J
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $d
+                    Label : ARGUMENT
+                      $e
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        $e
+                      Label : VARIABLE
+                        ->
+                        Label : OBJECT
+                          $f
+                        Label : PROPERTY
+                          K
+                  Label : NAME
+                    J
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  ->
+                  Label : OBJECT
+                    $f
+                  Label : PROPERTY
+                    L
+                Label : PROPERTY
+                  M
+              Label : ARGUMENT
+                clone
+                Label : CLONE
+                  $g
+              Label : ARGUMENT
+                $h
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    ===
+                    Label : LEFT
+                      $h
+                    Label : RIGHT
+                      N
+                  Label : ELSE
+                    $h
+                  Label : THEN
+                    $i
+              Label : ARGUMENT
+                $i
+              Label : ARGUMENT
+                $j
+              Label : ARGUMENT
+                $k
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  $e
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $f
+                  Label : PROPERTY
+                    O
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  $e
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $f
+                  Label : PROPERTY
+                    L
+              Label : ARGUMENT
+                $l
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    Q
+                Label : PROPERTY
+                  R
+            Label : NAME
+              I
+          Label : OBJECT
+            $b
