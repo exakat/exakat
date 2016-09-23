@@ -84,9 +84,9 @@ g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')
 .until( hasLabel('Project') ).repeat( 
     __.in($linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() == 'Class') { theClass = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
        )
-.map{  file = it.get().value('fullcode');}
 
 .map{ ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
 GREMLIN;
