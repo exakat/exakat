@@ -59,6 +59,12 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  'mt\_rand'                       => 'http://www.php.net/mt_rand',
                  'mt\_srand'                      => 'http://www.php.net/mt_srand',
 
+                 'strlen'                         => 'http://www.php.net/strlen',
+                 'mb_strlen'                      => 'http://www.php.net/mb_strlen',
+                 'grapheme_strlen'                => 'http://www.php.net/grapheme_strlen',
+                 'iconv_strlen'                   => 'http://www.php.net/iconv_strlen',
+                 'empty'                          => 'http://www.php.net/empty',
+
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',
 
