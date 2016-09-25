@@ -193,7 +193,8 @@ GREMLIN;
         $functions = array_map('strtolower', $functions);
 
         $query = <<<GREMLIN
-g.V().hasLabel("Functioncall").filter{ it.get().value("code").toLowerCase() in arg1 }
+g.V().hasLabel("Functioncall").not(has("token", "T_OPEN_TAG_WITH_ECHO"))
+                              .filter{ it.get().value("code").toLowerCase() in arg1 }
                               .where( __.in("DEFINITION").count().is(eq(0)) )
 .sideEffect{
     fullnspath = "\\\\" + it.get().value("code").toLowerCase();
