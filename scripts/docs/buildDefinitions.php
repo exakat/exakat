@@ -65,6 +65,11 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  'iconv_strlen'                   => 'http://www.php.net/iconv_strlen',
                  'empty'                          => 'http://www.php.net/empty',
 
+                 'usort'                          => 'http://www.php.net/usort',
+                 'uksort'                         => 'http://www.php.net/uksort',
+                 'uasort'                         => 'http://www.php.net/uasort',
+                 'sort'                           => 'http://www.php.net/sort',
+
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',
 
@@ -258,6 +263,11 @@ function rst_escape($string) {
         $rst = ".. code-block:: php\n\n   ".str_replace("\n", "\n   ", $r[0])."\n";
         return $rst;
     }, $string);
+
+    $r = preg_replace_callback('/\s*<\?literal(.*?)\?>/is', function ($r) {
+        $rst = "::\n\n   ".str_replace("\n", "\n   ", $r[1])."\n";
+        return $rst;
+    }, $r);
 
     $r = str_replace(array('*', '|', '_'), array('\\*', '\\|', '\\_'), $r);
     
