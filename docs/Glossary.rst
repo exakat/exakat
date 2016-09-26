@@ -11,6 +11,7 @@ Glossary
       + :ref:`Accessing Private <accessing-private>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
       + :ref:`Make Global A Property <make-global-a-property>`
+      + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
       + :ref:`Property/Variable Confusion <property/variable-confusion>`
       + :ref:`Redefined Default <redefined-default>`
@@ -195,6 +196,7 @@ Glossary
     + `switch()`
 
       + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch Without Default <switch-without-default>`
 
     + `sys_get_temp_dir`
@@ -219,6 +221,20 @@ Glossary
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
 
++ `U`
+    + `uasort`
+
+      + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+
+    + `uksort`
+
+      + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+
+    + `usort`
+
+      + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+
+
 + `W`
     + `while()`
 
@@ -226,15 +242,21 @@ Glossary
 
 
 + `_`
+    + `__call`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+
     + `__construct`
 
       + :ref:`Make Global A Property <make-global-a-property>`
+      + :ref:`Non Ascii Variables <non-ascii-variables>`
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
 
     + `__debugInfo`
 
+      + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`__debugInfo() <\_\_debuginfo()>`
 
     + `__destruct`
@@ -243,14 +265,29 @@ Glossary
 
     + `__get`
 
+      + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+
+    + `__invoke`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+
+    + `__isset`
+
+      + :ref:`Must Return Methods <must-return-methods>`
 
     + `__set`
 
+      + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+
+    + `__sleep`
+
+      + :ref:`Must Return Methods <must-return-methods>`
 
     + `__toString`
 
+      + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
 

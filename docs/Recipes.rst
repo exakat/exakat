@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Sun, 25 Sep 2016 19:07:58 +0000
-.. comment: Generation hash : d4f704b93300ecfefc5e7f35a065f9e9658524dc
+.. comment: Generation date : Mon, 26 Sep 2016 08:08:23 +0000
+.. comment: Generation hash : 68baddda7a2dd06d1b552991cc4e214f63cdf2f0
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 254 analysis
+Total : 255 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -212,6 +212,7 @@ Total : 254 analysis
 * :ref:`Preprocessable`
 * :ref:`Print And Die <print-and-die>`
 * :ref:`Property Could Be Private <property-could-be-private>`
+* :ref:`Property Used Below <property-used-below>`
 * :ref:`Property/Variable Confusion <property/variable-confusion>`
 * :ref:`Queries In Loops <queries-in-loops>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
@@ -743,10 +744,11 @@ Total : 18 analysis
 Wordpress
 +++++++++
 
-Total : 5 analysis
+Total : 6 analysis
 
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
+* :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
 * :ref:`Unverified Nonce <unverified-nonce>`
 * :ref:`Use $wpdb Api <use-$wpdb-api>`
 * :ref:`Wpdb Best Usage <wpdb-best-usage>`

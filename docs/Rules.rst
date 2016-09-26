@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Sun, 25 Sep 2016 19:07:58 +0000
-.. comment: Generation hash : d4f704b93300ecfefc5e7f35a065f9e9658524dc
+.. comment: Generation date : Mon, 26 Sep 2016 08:08:23 +0000
+.. comment: Generation hash : 68baddda7a2dd06d1b552991cc4e214f63cdf2f0
 
 
 .. _$http\_raw\_post\_data:
@@ -561,7 +561,28 @@ Avoid array\_unique()
 #####################
 
 
-The native function array\_unique is much slower than using other alternative, such as array\_count\_values(), array\_flip/array\_keys, or even a foreach() loops.
+The native function array\_unique() is much slower than using other alternative, such as array\_count\_values(), array\_flip()/array\_keys(), or even a foreach() loops. 
+
+.. code-block:: php
+
+   <?php
+   
+   // using array\_unique()
+   $uniques = array\_unique($someValues);
+   
+   // When values are strings or integers
+   $uniques = array\_keys(array\_count\_values($someValues));
+   $uniques = array\_flip(array\_flip($someValues))
+   
+   //even some loops are faster.
+   $uniques = [];
+   foreach($someValues as $s) {
+       if (!in\_array($uniques, $s)) {
+           $uniques[] $s;
+       }
+   }
+   
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Structures/NoArrayUnique |
@@ -1908,6 +1929,40 @@ Empty Namespace
 
 
 Declaring a namespace in the code and not using it for structure declarations (classes, interfaces, etc...) or global instructions is useless.
+
+Using simple style : 
+
+.. code-block:: php
+
+   <?php
+   
+   namespace X;
+   // This is useless
+   
+   namespace Y;
+   
+   class foo {}
+   
+   ?>
+
+
+Using bracket-style syntax : 
+
+.. code-block:: php
+
+   <?php
+   
+   namespace X {
+       // This is useless
+   }
+   
+   namespace Y {
+   
+       class foo {}
+   
+   }
+   
+   ?>
 
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Command Line | Namespaces/EmptyNamespace                                                                           |
@@ -3436,7 +3491,23 @@ Must Return Methods
 ###################
 
 
-Those methods are expected to return a value that will be used later. Without return, they are useless.
+The following methods are expected to return a value that will be used later. Without return, they are useless.
+
+Methods that must return are : \_\_get(), \_\_isset(), \_\_sleep(), \_\_toString(), \_\_set\_state(), \_\_invoke(), \_\_debugInfo().
+Methods that may not return, but are often expected to : \_\_call(), \_\_callStatic().
+
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public function \_get($a) {
+           $this->$a++;
+           // not returning... 
+       }
+   }
+   ?>
 
 +--------------+----------------------+
 | Command Line | Functions/MustReturn |
@@ -4166,7 +4237,22 @@ Non Ascii Variables
 ###################
 
 
-PHP supports variables with '[a-zA-Z\_\x7f-\xff][a-zA-Z0-9\_\x7f-\xff]\*'. In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more care when éditing the code or passing it from OS to OS.
+PHP supports variables with '[a-zA-Z\_\x7f-\xff][a-zA-Z0-9\_\x7f-\xff]\*'. In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more care when editing the code or passing it from OS to OS. 
+
+.. code-block:: php
+
+   <?php
+   
+   class 人 {
+       // An actual working class in PHP.
+       public function \_\_construct() {
+           echo \_\_CLASS\_\_;
+       }
+   }
+   
+   $people = new 人();
+   
+   ?>
 
 +--------------+----------------------------+
 | Command Line | Variables/VariableNonascii |
@@ -4916,7 +5002,20 @@ Php 71 New Classes
 ##################
 
 
-New classes, introduced in PHP 7.1 : they have to be removed from PHP code before PHP 7.1 may be run.
+New classes, introduced in PHP 7.1. If classes where created with the same name, in current code, they have to be moved in a namespace, or removed from code to migrate safely to PHP 7.1.
+
+The new class is : ReflectionClassConstant. The other class is 'Void' : this is forbidden as a classname, as Void is used for return type hint.
+
+.. code-block:: php
+
+   <?php
+   
+   class ReflectionClassConstant {
+       // Move to a namespace, do not leave in global
+       // or, remove this class
+   }
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/Php71NewClasses                                                                                                                   |
@@ -5079,6 +5178,26 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +--------------+------------------------+
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
+
+
+
+.. _property-used-below:
+
+Property Used Below
+###################
+
+
+Mark properties that are used in children classes.
+
+This doesn't mark the current class, nor the parent ones.
+
++--------------+---------------------------+
+| Command Line | Classes/PropertyUsedBelow |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
 
 
 
@@ -6063,6 +6182,51 @@ Switch To Switch
 
 The following structures are based on if / elseif / else. Since they have more than three conditions (not withstanding the final else), it is recommended to use the switch structure, so as to make this more readable.
 
+On the other hand, switch() structures will less than 3 elements should be expressed as a if / else structure.
+
+Note that if condition that uses strict typing (=== or !==) can't be converted to switch() as the latter only performs == or != comparisons.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($a == 1) {
+   
+   } elseif ($a == 2) {
+   
+   } elseif ($a == 3) {
+   
+   } elseif ($a == 4) {
+   
+   } else {
+   
+   }
+   
+   // Better way to write long if/else lists
+   switch ($a) {
+       case 1 : 
+           doSomething(1);
+           break 1;
+       
+       case 2 : 
+           doSomething(2);
+           break 1;
+   
+       case 3 : 
+           doSomething(3);
+           break 1;
+   
+       case 4 : 
+           doSomething(4);
+           break 1;
+       
+       default :
+           doSomething();
+           break 1;
+   }
+   
+   ?>
+
 +--------------+---------------------------+
 | Command Line | Structures/SwitchToSwitch |
 +--------------+---------------------------+
@@ -6558,6 +6722,35 @@ List of all undefined static and self properties and methods.
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
+
+
+
+.. _unescaped-variables-in-templates:
+
+Unescaped Variables In Templates
+################################
+
+
+Whenever variables are emitted, they are reported as long as they are not escaped. 
+
+While this is quite a strict rule, it is good to know when variables are not protected at echo time. 
+
+.. code-block:: php
+
+   <?php
+       echo $unescapedVariable;
+       
+       echo esc\_html($escapedVariable);
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Wordpress/UnescapedVariables |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Wordpress`             |
++--------------+------------------------------+
 
 
 
@@ -7588,7 +7781,28 @@ Useless Abstract Class
 
 Those classes are marked 'abstract' and they are never extended. This way, they won't be instantiated nor used. 
 
-Abstract classes that have only static methods are omitted here : one usage of such classes are Utilities classes, which only offer static methods.
+Abstract classes that have only static methods are omitted here : one usage of such classes are Utilities classes, which only offer static methods. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Never extended class : this is useless
+   abstract class foo {}
+   
+   // Extended class
+   abstract class bar {
+       public function barbar() {}
+   }
+   
+   class bar2 extends bar {}
+   
+   // Utility class : omitted here
+   abstract class bar {
+       public static function barbar() {}
+   }
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Classes/UselessAbstract |
@@ -7883,9 +8097,47 @@ Usort Sorting In PHP 7.0
 ########################
 
 
-Usort (and co) sorting has changed in PHP 7. Values that are equals (based on user-provided method) may be sorted differently than in PHP 5. 
+Usort(), uksort() and uasort() behavior has changed in PHP 7. Values that are equals (based on the user-provided method) may be sorted differently than in PHP 5. 
 
-If this sorting is important, it is advised to add extra comparison in the user-function and avoid returning 0 (thus, depending on default implementation).
+If this sorting is important, it is advised to add extra comparison in the user-function and avoid returning 0 (thus, depending on default implementation). 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = [ 2, 4, 3, 6];
+   
+   function noSort($a) { return $a > 5; }
+   
+   usort($a, 'noSort');
+   print\_r($a);
+   
+   ?>
+
+
+In PHP 5, the results is :::
+
+   
+   Array
+   (
+       [0] => 3
+       [1] => 4
+       [2] => 2
+       [3] => 6
+   )
+   
+
+
+in PHP 7, the result is :::
+
+   
+   Array
+   (
+       [0] => 2
+       [1] => 4
+       [2] => 3
+       [3] => 6
+   )
 
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/UsortSorting                                                                                                                                                 |
