@@ -4204,7 +4204,7 @@ class Load extends Tasks {
         }
         
         if (!isset($this->calls[$type][$fullnspath])) {
-            $this->calls[$type][$fullnspath] = array('calls'       => array(), 
+            $this->calls[$type][$fullnspath] = array('calls'       => array(),
                                                      'definitions' => array());
         }
         $atom = $this->atoms[$callId]['atom'];
@@ -4253,7 +4253,7 @@ class Load extends Tasks {
         }
 
         if (!isset($this->calls[$type][$fullnspath])) {
-            $this->calls[$type][$fullnspath] = array('calls'       => array(), 
+            $this->calls[$type][$fullnspath] = array('calls'       => array(),
                                                      'definitions' => array());
         }
         $atom = $this->atoms[$definitionId]['atom'];

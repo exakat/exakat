@@ -90,12 +90,12 @@ class Devoops extends Reports {
         }
 
         // Clean final destination
-        if ($folder.'/'.$finalName !== '/') {
-            rmdirRecursive($folder.'/'.$finalName);
+        if ($folder . '/' . $finalName !== '/') {
+            rmdirRecursive($folder . '/' . $finalName);
         }
 
-        if (file_exists($folder.'/'.$finalName)) {
-            display ($folder.'/'.$finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+        if (file_exists($folder . '/' . $finalName)) {
+            display ($folder . '/' . $finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 

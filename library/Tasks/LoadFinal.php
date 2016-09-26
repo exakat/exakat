@@ -255,7 +255,7 @@ GREMLIN;
             $res = $this->gremlin->query($query, ['arg1' => $constants]);
             
             // TODO : handle case-insensitive
-            
+
             display('Link constant definitions');
         } else {
             display('Link constant definitions : skipping.');
