@@ -7,8 +7,8 @@ fopen('jackalope://asd.txt', 'rwb+');
 
 // This is not accepted, even with protocol
 fopen('file://tmp/temp.file.txt', 'rwb+');
-fopen('ogg://'.$some.'/file.ogg', 'rwb+');
-fopen("phar://$some/archive.phar", 'rwb+');
+fopen('ogg://some/file.ogg', 'rwb+');
+fopen("phar://some/archive.phar", 'rwb+');
 
 fopen('http/host2.com', 'rwb+');
 fopen('/http/host3.com', 'rwb+');
