@@ -1,4 +1,4 @@
-Version 0.8.2 (Jinjie Shiba Gong, Coming up)
+Version 0.8.3 (Guzhi Gong, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,20 @@ Version 0.8.2 (Jinjie Shiba Gong, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.8.2 (Jinjie Shiba Gong, 2016-09-26)
++ Architecture
+    + More examples in docs
+    + Fixed 'file' in results
++ Report
+    + Added more media for Ambassador
++ Analyzer
+    + New analyzer for count/strlen compared to 0
+    + Upgraded analysis : 1563 / 1579 test pass (99% pass). 
+    + Backported all 4 Wordpress analysis (wpdb, nonce usage)
+    + Added new Wordpress Analysis : variable escaping in templates
++ Tokenizer
+    + Fixed <?= so it is handled like echo
 
 Version 0.8.1 (Babo'erben, 2016-09-19)
 + Architecture
