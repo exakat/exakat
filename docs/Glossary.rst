@@ -67,6 +67,26 @@ Glossary
 
 
 + `E`
+    + `empty`
+
+      + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
+      + :ref:`Empty Blocks <empty-blocks>`
+      + :ref:`Empty Classes <empty-classes>`
+      + :ref:`Empty Function <empty-function>`
+      + :ref:`Empty Instructions <empty-instructions>`
+      + :ref:`Empty Interfaces <empty-interfaces>`
+      + :ref:`Empty List <empty-list>`
+      + :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
+      + :ref:`Empty Traits <empty-traits>`
+      + :ref:`Empty Try Catch <empty-try-catch>`
+      + :ref:`Empty With Expression <empty-with-expression>`
+      + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`Random_ Without Try <random\_-without-try>`
+      + :ref:`Results May Be Missing <results-may-be-missing>`
+      + :ref:`Useless Constructor <useless-constructor>`
+      + :ref:`Useless Instructions <useless-instructions>`
+      + :ref:`parse_str() Warning <parse\_str()-warning>`
+
     + `eval`
 
       + :ref:`Eval() Usage <eval()-usage>`
@@ -161,6 +181,12 @@ Glossary
 
 
 + `S`
+    + `strlen`
+
+      + :ref:`Make One Call <make-one-call>`
+      + :ref:`Never Negative <never-negative>`
+      + :ref:`No Count With 0 <no-count-with-0>`
+
     + `strpos`
 
       + :ref:`Simple Regex <simple-regex>`

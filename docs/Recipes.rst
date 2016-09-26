@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 20 Sep 2016 10:36:59 +0000
-.. comment: Generation hash : 5aba63627c27edf726fa5b368fa0e9b572a8c7b9
+.. comment: Generation date : Sun, 25 Sep 2016 19:07:58 +0000
+.. comment: Generation hash : d4f704b93300ecfefc5e7f35a065f9e9658524dc
 
 
 .. _analyze:
@@ -693,7 +693,7 @@ Total : 22 analysis
 Performances
 ++++++++++++
 
-Total : 15 analysis
+Total : 16 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -704,6 +704,7 @@ Total : 15 analysis
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call <make-one-call>`
+* :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`

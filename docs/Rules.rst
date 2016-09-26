@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 20 Sep 2016 10:36:59 +0000
-.. comment: Generation hash : 5aba63627c27edf726fa5b368fa0e9b572a8c7b9
+.. comment: Generation date : Sun, 25 Sep 2016 19:07:58 +0000
+.. comment: Generation hash : d4f704b93300ecfefc5e7f35a065f9e9658524dc
 
 
 .. _$http\_raw\_post\_data:
@@ -3689,6 +3689,74 @@ Either the condition is useless, and may be removed, or the alternatives needs t
 
 
 
+.. _no-count-with-0:
+
+No Count With 0
+###############
+
+
+Comparing count() and strlen() to 0 is a waste of resources. There are three distinct situations situations.
+
+When comparing count() with 0, with ===, ==, !==, !=, it is more efficient to use empty(). Empty() is a language constructs that checks if a value is present, while count() actually load the number of element.
+
+.. code-block:: php
+
+   <?php
+   
+   // Checking if an array is empty
+   if (count($array) == 0) {
+       // doSomething();
+   }
+   // This may be replaced with 
+   if (empty($array)) {
+       // doSomething();
+   }
+   
+   ?>
+
+
+When comparing count() strictly with 0 (>) it is more efficient to use !(empty())
+
+.. code-block:: php
+
+   <?php
+   
+   // Checking if an array is empty
+   if (count($array) > 0) {
+       // doSomething();
+   }
+   // This may be replaced with 
+   if (!empty($array)) {
+       // doSomething();
+   }
+   
+   Of course comparing count() with negative values, or with >= is useless.
+   
+   <?php
+   
+   // Checking if an array is empty
+   if (count($array) < 0) {
+       // This never happens
+       // doSomething();
+   }
+   
+   ?>
+
+
+Comparing count() and strlen() with other values than 0 cannot be replaced with a comparison with empty().
+
+Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops.
+
++--------------+---------------------------+
+| Command Line | Performances/NotCountNull |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Performances`       |
++--------------+---------------------------+
+
+
+
 .. _no-direct-call-to-magic-method:
 
 No Direct Call To Magic Method
@@ -4216,7 +4284,18 @@ Nonce Creation
 ##############
 
 
-Mark the creation of nonce by Wordpress
+Mark the creation of nonce by Wordpress. Nonce may be created with the Wordpress functions wp\_nonce\_field(), wp\_nonce\_url() and wp\_nonce\_create().
+
+.. code-block:: php
+
+   <?php
+   
+   // Create an nonce for a link.
+   $nonce = wp\_create\_nonce( 'my-nonce' );
+   
+   echo '<a href="myplugin.php?do\_something=some\_action&\_wpnonce='.$nonce.'">Do some action</a>';
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Wordpress/NonceCreation |
@@ -7053,7 +7132,17 @@ Unverified Nonce
 ################
 
 
-Nonces were created in the code with wp\_create\_nonce() function, but they are not verified with wp\_verify\_nonce() nor check\_ajax\_referer()
+Nonces were created in the code with  wp\_nonce\_field(), wp\_nonce\_url() and wp\_nonce\_create() functions, but they are not verified with wp\_verify\_nonce() nor check\_ajax\_referer()
+
+.. code-block:: php
+
+   <?php
+   
+   $nonce = wp\_create\_nonce( 'my-nonce' );
+   
+   if ( ! wp\_verify\_nonce( $nonce, 'my-other-nonce' ) ) { } else { }
+   
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Wordpress/UnverifiedNonce |
@@ -7879,6 +7968,17 @@ Wpdb Best Usage
 Wordpress database API ($wpdb) offers several eponymous methods to safely handle insert, delete, replace and update. 
 
 It is recommended to use them, instead of writing queries with concatenations.
+
+.. code-block:: php
+
+   <?php
+   // Example from Wordpress Manual
+   $user\_count = $wpdb->get\_var( "SELECT COUNT(\*) FROM $wpdb->users" );
+   echo <p>User count is {$user\_count}</p>;
+   ?>
+
+
+See <a href=https://codex.wordpress.org/Class\_Reference/wpdb>Class Reference/wpdb</a>.
 
 +--------------+-------------------------+
 | Command Line | Wordpress/WpdbBestUsage |
