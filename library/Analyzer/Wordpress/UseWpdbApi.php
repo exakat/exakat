@@ -28,6 +28,23 @@ class UseWpdbApi extends Analyzer\Analyzer {
     public function analyze() {
         $crud = array('INSERT', 'UPDATE', 'DELETE', 'REPLACE');
         $crudAlternative = join('|', $crud);
+
+        // $wpdb->query('delete from sometable') 
+        $this->atomIs('Variable')
+             ->codeIs('$wpdb')
+             ->inIs('OBJECT')
+             ->atomIs('Methodcall')
+             ->_as('results')
+             ->outIs('METHOD')
+             ->codeIs(array('query', 'prepare'))
+             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             // If it's a property, we accept $wpdb
+             ->hasNoOut('CONCAT')
+             ->regexIs('noDelimiter', '^(?i)('.$crudAlternative.')')
+             ->back('results');
+        $this->prepareQuery();
         
         // $wpdb->query("delete from ".$wpdb->prefix."table") 
         $this->atomIs('Variable')
@@ -38,18 +55,16 @@ class UseWpdbApi extends Analyzer\Analyzer {
              ->outIs('METHOD')
              ->codeIs(array('query', 'prepare'))
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              // If it's a property, we accept $wpdb
              ->outWithRank('CONCAT', 0)
              ->atomIs('String')
              ->regexIs('noDelimiter', '^(?i)('.$crudAlternative.')')
-//             ->filter('it.out("CONCAT").has("atom", "String").has("rank", 0).filter{ (it.noDelimiter =~ ).getCount() > 0}.any()')
              ->back('results');
         $this->prepareQuery();
 
-        // $wpdb->query("delete from $wpdb->prefixtable") 
+        // $wpdb->query("delete from $wpdb->prefix") 
         $this->atomIs('Variable')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
@@ -58,11 +73,9 @@ class UseWpdbApi extends Analyzer\Analyzer {
              ->outIs('METHOD')
              ->codeIs(array('query', 'prepare'))
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_QUOTE')
-             ->outIs('CONTAINS')
              ->outWithRank('CONCAT', 0)
              ->atomIs('String')
              // If it's a property, we accept $wpdb
