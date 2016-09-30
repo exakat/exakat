@@ -3091,6 +3091,7 @@ class Load extends Tasks {
             $this->setAtom($returnId, $x);
 
             $this->addToSequence($returnId);
+            ++$this->id;
         
             return $returnId;
         } else {
@@ -4004,6 +4005,7 @@ class Load extends Tasks {
     }
 
     private function saveDefinitions() {
+        $begin = microtime(true);
         // Fallback to global if local namespace function doesn't exists
         if (isset($this->calls['function'])) {
             $this->fallbackToGlobal('function');
@@ -4036,6 +4038,10 @@ class Load extends Tasks {
                 }
             }
         }
+        
+        $end = microtime(true);
+        $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls)."\n");
+
     }
     
     private function fallbackToGlobal($type) {
